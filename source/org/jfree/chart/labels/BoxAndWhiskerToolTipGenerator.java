@@ -101,11 +101,11 @@ public class BoxAndWhiskerToolTipGenerator
      * Creates the array of items that can be passed to the
      * {@link MessageFormat} class for creating labels.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
      * @param series  the series (zero-based index).
      * @param item  the item (zero-based index).
      *
-     * @return The items (never <code>null</code>).
+     * @return The items (never {@code null}).
      */
     @Override
     protected Object[] createItemArray(CategoryDataset dataset, int series,

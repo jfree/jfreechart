@@ -75,7 +75,7 @@ public class VectorSeriesCollection extends AbstractXYDataset
      * Adds a series to the collection and sends a {@link DatasetChangeEvent}
      * to all registered listeners.
      *
-     * @param series  the series (<code>null</code> not permitted).
+     * @param series  the series ({@code null} not permitted).
      */
     public void addSeries(VectorSeries series) {
         ParamChecks.nullNotPermitted(series, "series");
@@ -88,7 +88,7 @@ public class VectorSeriesCollection extends AbstractXYDataset
      * Removes the specified series from the collection and sends a
      * {@link DatasetChangeEvent} to all registered listeners.
      *
-     * @param series  the series (<code>null</code> not permitted).
+     * @param series  the series ({@code null} not permitted).
      *
      * @return A boolean indicating whether the series has actually been
      *         removed.
@@ -170,7 +170,7 @@ public class VectorSeriesCollection extends AbstractXYDataset
      * Returns the index of the specified series, or -1 if that series is not
      * present in the dataset.
      *
-     * @param series  the series (<code>null</code> not permitted).
+     * @param series  the series ({@code null} not permitted).
      *
      * @return The series index.
      */
@@ -261,7 +261,7 @@ public class VectorSeriesCollection extends AbstractXYDataset
      * @param series  the series index.
      * @param item  the item index.
      *
-     * @return The vector (possibly <code>null</code>).
+     * @return The vector (possibly {@code null}).
      */
     @Override
     public Vector getVector(int series, int item) {
@@ -303,7 +303,7 @@ public class VectorSeriesCollection extends AbstractXYDataset
     /**
      * Tests this instance for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

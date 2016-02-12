@@ -65,7 +65,7 @@ public interface Values2D {
      * @param row  the row index (zero-based).
      * @param column  the column index (zero-based).
      *
-     * @return The value (possibly <code>null</code>).
+     * @return The value (possibly {@code null}).
      *
      * @throws IndexOutOfBoundsException if the <code>row</code>
      *         or <code>column</code> is out of bounds.

@@ -68,7 +68,7 @@ public class ScrollHandlerFX extends AbstractMouseHandlerFX
     /**
      * Creates a new instance with the specified ID.
      * 
-     * @param id  the handler ID (<code>null</code> not permitted).
+     * @param id  the handler ID ({@code null} not permitted).
      */
     public ScrollHandlerFX(String id) {
         super(id, false, false, false, false);

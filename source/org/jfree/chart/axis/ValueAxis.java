@@ -287,9 +287,9 @@ public abstract class ValueAxis extends Axis
     /**
      * Constructs a value axis.
      *
-     * @param label  the axis label (<code>null</code> permitted).
+     * @param label  the axis label ({@code null} permitted).
      * @param standardTickUnits  the source for standard tick units
-     *                           (<code>null</code> permitted).
+     *                           ({@code null} permitted).
      */
     protected ValueAxis(String label, TickUnitSource standardTickUnits) {
 
@@ -431,7 +431,7 @@ public abstract class ValueAxis extends Axis
      * Returns a shape that can be displayed as an arrow pointing upwards at
      * the end of an axis line.
      *
-     * @return A shape (never <code>null</code>).
+     * @return A shape (never {@code null}).
      *
      * @see #setUpArrow(Shape)
      */
@@ -444,7 +444,7 @@ public abstract class ValueAxis extends Axis
      * the end of an axis line and sends an {@link AxisChangeEvent} to all
      * registered listeners.
      *
-     * @param arrow  the arrow shape (<code>null</code> not permitted).
+     * @param arrow  the arrow shape ({@code null} not permitted).
      *
      * @see #getUpArrow()
      */
@@ -458,7 +458,7 @@ public abstract class ValueAxis extends Axis
      * Returns a shape that can be displayed as an arrow pointing downwards at
      * the end of an axis line.
      *
-     * @return A shape (never <code>null</code>).
+     * @return A shape (never {@code null}).
      *
      * @see #setDownArrow(Shape)
      */
@@ -471,7 +471,7 @@ public abstract class ValueAxis extends Axis
      * the end of an axis line and sends an {@link AxisChangeEvent} to all
      * registered listeners.
      *
-     * @param arrow  the arrow shape (<code>null</code> not permitted).
+     * @param arrow  the arrow shape ({@code null} not permitted).
      *
      * @see #getDownArrow()
      */
@@ -485,7 +485,7 @@ public abstract class ValueAxis extends Axis
      * Returns a shape that can be displayed as an arrow pointing left at the
      * end of an axis line.
      *
-     * @return A shape (never <code>null</code>).
+     * @return A shape (never {@code null}).
      *
      * @see #setLeftArrow(Shape)
      */
@@ -498,7 +498,7 @@ public abstract class ValueAxis extends Axis
      * end of an axis line and sends an {@link AxisChangeEvent} to all
      * registered listeners.
      *
-     * @param arrow  the arrow shape (<code>null</code> not permitted).
+     * @param arrow  the arrow shape ({@code null} not permitted).
      *
      * @see #getLeftArrow()
      */
@@ -512,7 +512,7 @@ public abstract class ValueAxis extends Axis
      * Returns a shape that can be displayed as an arrow pointing right at the
      * end of an axis line.
      *
-     * @return A shape (never <code>null</code>).
+     * @return A shape (never {@code null}).
      *
      * @see #setRightArrow(Shape)
      */
@@ -525,7 +525,7 @@ public abstract class ValueAxis extends Axis
      * the end of an axis line and sends an {@link AxisChangeEvent} to all
      * registered listeners.
      *
-     * @param arrow  the arrow shape (<code>null</code> not permitted).
+     * @param arrow  the arrow shape ({@code null} not permitted).
      *
      * @see #getRightArrow()
      */
@@ -671,11 +671,11 @@ public abstract class ValueAxis extends Axis
     /**
      * Draws the axis line, tick marks and tick mark labels.
      *
-     * @param g2  the graphics device (<code>null</code> not permitted).
+     * @param g2  the graphics device ({@code null} not permitted).
      * @param cursor  the cursor.
-     * @param plotArea  the plot area (<code>null</code> not permitted).
-     * @param dataArea  the data area (<code>null</code> not permitted).
-     * @param edge  the edge that the axis is aligned with (<code>null</code> 
+     * @param plotArea  the plot area ({@code null} not permitted).
+     * @param dataArea  the data area ({@code null} not permitted).
+     * @param edge  the edge that the axis is aligned with ({@code null} 
      *     not permitted).
      *
      * @return The width or height used to draw the axis.
@@ -1075,7 +1075,7 @@ public abstract class ValueAxis extends Axis
     /**
      * Returns the default auto range.
      *
-     * @return The default auto range (never <code>null</code>).
+     * @return The default auto range (never {@code null}).
      *
      * @see #setDefaultAutoRange(Range)
      *
@@ -1089,7 +1089,7 @@ public abstract class ValueAxis extends Axis
      * Sets the default auto range and sends an {@link AxisChangeEvent} to all
      * registered listeners.
      *
-     * @param range  the range (<code>null</code> not permitted).
+     * @param range  the range ({@code null} not permitted).
      *
      * @see #getDefaultAutoRange()
      *
@@ -1252,7 +1252,7 @@ public abstract class ValueAxis extends Axis
     /**
      * Returns the range for the axis.
      *
-     * @return The axis range (never <code>null</code>).
+     * @return The axis range (never {@code null}).
      *
      * @see #setRange(Range)
      */
@@ -1265,7 +1265,7 @@ public abstract class ValueAxis extends Axis
      * listeners.  As a side-effect, the auto-range flag is set to
      * <code>false</code>.
      *
-     * @param range  the range (<code>null</code> not permitted).
+     * @param range  the range ({@code null} not permitted).
      *
      * @see #getRange()
      */
@@ -1281,7 +1281,7 @@ public abstract class ValueAxis extends Axis
      * (normally when setting the axis range manually the caller expects that
      * range to remain in force).
      *
-     * @param range  the range (<code>null</code> not permitted).
+     * @param range  the range ({@code null} not permitted).
      * @param turnOffAutoRange  a flag that controls whether or not the auto
      *                          range is turned off.
      * @param notify  a flag that controls whether or not listeners are
@@ -1325,7 +1325,7 @@ public abstract class ValueAxis extends Axis
      * the specified range) and sends an {@link AxisChangeEvent} to all
      * registered listeners.
      *
-     * @param range  the range (<code>null</code> not permitted).
+     * @param range  the range ({@code null} not permitted).
      */
     public void setRangeWithMargins(Range range) {
         setRangeWithMargins(range, true, true);
@@ -1337,7 +1337,7 @@ public abstract class ValueAxis extends Axis
      * registered listeners.  As a side-effect, the auto-range flag is set to
      * <code>false</code> (optional).
      *
-     * @param range  the range (excluding margins, <code>null</code> not
+     * @param range  the range (excluding margins, {@code null} not
      *               permitted).
      * @param turnOffAutoRange  a flag that controls whether or not the auto
      *                          range is turned off.
@@ -1422,7 +1422,7 @@ public abstract class ValueAxis extends Axis
     /**
      * Returns the source for obtaining standard tick units for the axis.
      *
-     * @return The source (possibly <code>null</code>).
+     * @return The source (possibly {@code null}).
      *
      * @see #setStandardTickUnits(TickUnitSource)
      */
@@ -1437,7 +1437,7 @@ public abstract class ValueAxis extends Axis
      * the tick labels to overlap (see also the
      * {@link #setAutoTickUnitSelection(boolean)} method.
      *
-     * @param source  the source for standard tick units (<code>null</code>
+     * @param source  the source for standard tick units ({@code null}
      *                permitted).
      *
      * @see #getStandardTickUnits()
@@ -1678,7 +1678,7 @@ public abstract class ValueAxis extends Axis
     /**
      * Tests the axis for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return <code>true</code> or <code>false</code>.
      */

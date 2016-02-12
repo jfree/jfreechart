@@ -98,7 +98,7 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
      * Adds a crosshair against the domain axis and sends an
      * {@link OverlayChangeEvent} to all registered listeners.
      *
-     * @param crosshair  the crosshair (<code>null</code> not permitted).
+     * @param crosshair  the crosshair ({@code null} not permitted).
      *
      * @see #removeDomainCrosshair(org.jfree.chart.plot.Crosshair)
      * @see #addRangeCrosshair(org.jfree.chart.plot.Crosshair)
@@ -114,7 +114,7 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
      * Removes a domain axis crosshair and sends an {@link OverlayChangeEvent}
      * to all registered listeners.
      *
-     * @param crosshair  the crosshair (<code>null</code> not permitted).
+     * @param crosshair  the crosshair ({@code null} not permitted).
      *
      * @see #addDomainCrosshair(org.jfree.chart.plot.Crosshair)
      */
@@ -156,7 +156,7 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
      * Adds a crosshair against the range axis and sends an
      * {@link OverlayChangeEvent} to all registered listeners.
      *
-     * @param crosshair  the crosshair (<code>null</code> not permitted).
+     * @param crosshair  the crosshair ({@code null} not permitted).
      */
     public void addRangeCrosshair(Crosshair crosshair) {
         ParamChecks.nullNotPermitted(crosshair, "crosshair");
@@ -169,7 +169,7 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
      * Removes a range axis crosshair and sends an {@link OverlayChangeEvent}
      * to all registered listeners.
      *
-     * @param crosshair  the crosshair (<code>null</code> not permitted).
+     * @param crosshair  the crosshair ({@code null} not permitted).
      *
      * @see #addRangeCrosshair(org.jfree.chart.plot.Crosshair)
      */
@@ -551,7 +551,7 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
     /**
      * Tests this overlay for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

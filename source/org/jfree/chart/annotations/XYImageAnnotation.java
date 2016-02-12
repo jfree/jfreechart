@@ -104,7 +104,7 @@ public class XYImageAnnotation extends AbstractXYAnnotation
      *
      * @param x  the x-coordinate (in data space).
      * @param y  the y-coordinate (in data space).
-     * @param image  the image (<code>null</code> not permitted).
+     * @param image  the image ({@code null} not permitted).
      */
     public XYImageAnnotation(double x, double y, Image image) {
         this(x, y, image, RectangleAnchor.CENTER);
@@ -116,8 +116,8 @@ public class XYImageAnnotation extends AbstractXYAnnotation
      *
      * @param x  the x-coordinate (in data space).
      * @param y  the y-coordinate (in data space).
-     * @param image  the image (<code>null</code> not permitted).
-     * @param anchor  the image anchor (<code>null</code> not permitted).
+     * @param image  the image ({@code null} not permitted).
+     * @param anchor  the image anchor ({@code null} not permitted).
      *
      * @since 1.0.4
      */
@@ -238,7 +238,7 @@ public class XYImageAnnotation extends AbstractXYAnnotation
     /**
      * Tests this object for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

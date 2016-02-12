@@ -99,7 +99,7 @@ public class DialTextAnnotation extends AbstractDialLayer implements DialLayer,
     /**
      * Creates a new instance of <code>DialTextAnnotation</code>.
      *
-     * @param label  the label (<code>null</code> not permitted).
+     * @param label  the label ({@code null} not permitted).
      */
     public DialTextAnnotation(String label) {
         ParamChecks.nullNotPermitted(label, "label");
@@ -126,7 +126,7 @@ public class DialTextAnnotation extends AbstractDialLayer implements DialLayer,
      * Sets the label and sends a {@link DialLayerChangeEvent} to all
      * registered listeners.
      *
-     * @param label  the label (<code>null</code> not permitted).
+     * @param label  the label ({@code null} not permitted).
      *
      * @see #getLabel()
      */
@@ -139,7 +139,7 @@ public class DialTextAnnotation extends AbstractDialLayer implements DialLayer,
     /**
      * Returns the font used to display the label.
      *
-     * @return The font (never <code>null</code>).
+     * @return The font (never {@code null}).
      *
      * @see #setFont(Font)
      */
@@ -151,7 +151,7 @@ public class DialTextAnnotation extends AbstractDialLayer implements DialLayer,
      * Sets the font used to display the label and sends a
      * {@link DialLayerChangeEvent} to all registered listeners.
      *
-     * @param font  the font (<code>null</code> not permitted).
+     * @param font  the font ({@code null} not permitted).
      *
      * @see #getFont()
      */
@@ -164,7 +164,7 @@ public class DialTextAnnotation extends AbstractDialLayer implements DialLayer,
     /**
      * Returns the paint used to display the label.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @see #setPaint(Paint)
      */
@@ -176,7 +176,7 @@ public class DialTextAnnotation extends AbstractDialLayer implements DialLayer,
      * Sets the paint used to display the label and sends a
      * {@link DialLayerChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getPaint()
      */
@@ -260,7 +260,7 @@ public class DialTextAnnotation extends AbstractDialLayer implements DialLayer,
      * Sets the text anchor point and sends a {@link DialLayerChangeEvent} to
      * all registered listeners.
      *
-     * @param anchor  the anchor point (<code>null</code> not permitted).
+     * @param anchor  the anchor point ({@code null} not permitted).
      *
      * @see #getAnchor()
      */
@@ -286,10 +286,10 @@ public class DialTextAnnotation extends AbstractDialLayer implements DialLayer,
      * frame specifies a window, the clipping region will already have been
      * set to this window before this method is called.
      *
-     * @param g2  the graphics device (<code>null</code> not permitted).
+     * @param g2  the graphics device ({@code null} not permitted).
      * @param plot  the plot (ignored here).
      * @param frame  the dial frame (ignored here).
-     * @param view  the view rectangle (<code>null</code> not permitted).
+     * @param view  the view rectangle ({@code null} not permitted).
      */
     @Override
     public void draw(Graphics2D g2, DialPlot plot, Rectangle2D frame,
@@ -310,7 +310,7 @@ public class DialTextAnnotation extends AbstractDialLayer implements DialLayer,
     /**
      * Tests this instance for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

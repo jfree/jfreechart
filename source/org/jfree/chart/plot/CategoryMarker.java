@@ -85,8 +85,8 @@ public class CategoryMarker extends Marker implements Cloneable, Serializable {
      * Creates a new category marker.
      *
      * @param key  the key.
-     * @param paint  the paint (<code>null</code> not permitted).
-     * @param stroke  the stroke (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
+     * @param stroke  the stroke ({@code null} not permitted).
      */
     public CategoryMarker(Comparable key, Paint paint, Stroke stroke) {
         this(key, paint, stroke, paint, stroke, 1.0f);
@@ -96,10 +96,10 @@ public class CategoryMarker extends Marker implements Cloneable, Serializable {
      * Creates a new category marker.
      *
      * @param key  the key.
-     * @param paint  the paint (<code>null</code> not permitted).
-     * @param stroke  the stroke (<code>null</code> not permitted).
-     * @param outlinePaint  the outline paint (<code>null</code> permitted).
-     * @param outlineStroke  the outline stroke (<code>null</code> permitted).
+     * @param paint  the paint ({@code null} not permitted).
+     * @param stroke  the stroke ({@code null} not permitted).
+     * @param outlinePaint  the outline paint ({@code null} permitted).
+     * @param outlineStroke  the outline stroke ({@code null} permitted).
      * @param alpha  the alpha transparency.
      */
     public CategoryMarker(Comparable key, Paint paint, Stroke stroke,
@@ -123,7 +123,7 @@ public class CategoryMarker extends Marker implements Cloneable, Serializable {
      * Sets the key and sends a {@link MarkerChangeEvent} to all registered
      * listeners.
      *
-     * @param key  the key (<code>null</code> not permitted).
+     * @param key  the key ({@code null} not permitted).
      *
      * @since 1.0.3
      */
@@ -158,7 +158,7 @@ public class CategoryMarker extends Marker implements Cloneable, Serializable {
     /**
      * Tests the marker for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

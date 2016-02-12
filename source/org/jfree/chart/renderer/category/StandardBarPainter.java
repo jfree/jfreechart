@@ -196,7 +196,7 @@ public class StandardBarPainter implements BarPainter, Serializable {
     /**
      * Tests this instance for equality with an arbitrary object.
      *
-     * @param obj  the obj (<code>null</code> permitted).
+     * @param obj  the obj ({@code null} permitted).
      *
      * @return A boolean.
      */

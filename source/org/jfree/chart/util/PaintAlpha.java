@@ -177,7 +177,7 @@ public class PaintAlpha {
     /**
      * Create a new <code>GradientPaint</code> with its colors darkened.
      *
-     * @param paint  the gradient paint (<code>null</code> not permitted).
+     * @param paint  the gradient paint ({@code null} not permitted).
      *
      * @return a darker version of the <code>GradientPaint</code>
      */

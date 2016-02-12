@@ -108,7 +108,7 @@ public class Vector implements Serializable {
     /**
      * Tests this vector for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> not permitted).
+     * @param obj  the object ({@code null} not permitted).
      *
      * @return A boolean.
      */

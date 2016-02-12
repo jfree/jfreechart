@@ -57,7 +57,7 @@ public interface CategorySeriesLabelGenerator {
     /**
      * Generates a label for the specified series.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
      * @param series  the series index.
      *
      * @return A series label.

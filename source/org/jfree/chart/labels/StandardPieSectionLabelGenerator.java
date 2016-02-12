@@ -99,7 +99,7 @@ public class StandardPieSectionLabelGenerator
     /**
      * Creates a new instance for the specified locale.
      *
-     * @param locale  the local (<code>null</code> not permitted).
+     * @param locale  the local ({@code null} not permitted).
      *
      * @since 1.0.7
      */
@@ -111,7 +111,7 @@ public class StandardPieSectionLabelGenerator
      * Creates a new section label generator using the specified label format
      * string, and platform default number and percentage formatters.
      *
-     * @param labelFormat  the label format (<code>null</code> not permitted).
+     * @param labelFormat  the label format ({@code null} not permitted).
      */
     public StandardPieSectionLabelGenerator(String labelFormat) {
         this(labelFormat, NumberFormat.getNumberInstance(),
@@ -121,8 +121,8 @@ public class StandardPieSectionLabelGenerator
     /**
      * Creates a new instance for the specified locale.
      *
-     * @param labelFormat  the label format (<code>null</code> not permitted).
-     * @param locale  the local (<code>null</code> not permitted).
+     * @param labelFormat  the label format ({@code null} not permitted).
+     * @param locale  the local ({@code null} not permitted).
      *
      * @since 1.0.7
      */
@@ -134,12 +134,12 @@ public class StandardPieSectionLabelGenerator
     /**
      * Creates an item label generator using the specified number formatters.
      *
-     * @param labelFormat  the label format string (<code>null</code> not
+     * @param labelFormat  the label format string ({@code null} not
      *                     permitted).
-     * @param numberFormat  the format object for the values (<code>null</code>
+     * @param numberFormat  the format object for the values ({@code null}
      *                      not permitted).
      * @param percentFormat  the format object for the percentages
-     *                       (<code>null</code> not permitted).
+     *                       ({@code null} not permitted).
      */
     public StandardPieSectionLabelGenerator(String labelFormat,
             NumberFormat numberFormat, NumberFormat percentFormat) {
@@ -148,7 +148,7 @@ public class StandardPieSectionLabelGenerator
     }
 
     /**
-     * Returns the attributed label for a section, or <code>null</code> if none
+     * Returns the attributed label for a section, or {@code null} if none
      * is defined.
      *
      * @param section  the section index.
@@ -163,7 +163,7 @@ public class StandardPieSectionLabelGenerator
      * Sets the attributed label for a section.
      *
      * @param section  the section index.
-     * @param label  the label (<code>null</code> permitted).
+     * @param label  the label ({@code null} permitted).
      */
     public void setAttributedLabel(int section, AttributedString label) {
         this.attributedLabels.put(section, label);
@@ -172,10 +172,10 @@ public class StandardPieSectionLabelGenerator
     /**
      * Generates a label for a pie section.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
-     * @param key  the section key (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
+     * @param key  the section key ({@code null} not permitted).
      *
-     * @return The label (possibly <code>null</code>).
+     * @return The label (possibly {@code null}).
      */
     @Override
     public String generateSectionLabel(PieDataset dataset, Comparable key) {
@@ -184,7 +184,7 @@ public class StandardPieSectionLabelGenerator
 
     /**
      * Generates an attributed label for the specified series, or
-     * <code>null</code> if no attributed label is available (in which case,
+     * {@code null} if no attributed label is available (in which case,
      * the string returned by
      * {@link #generateSectionLabel(PieDataset, Comparable)} will
      * provide the fallback).  Only certain attributes are recognised by the
@@ -204,10 +204,10 @@ public class StandardPieSectionLabelGenerator
      *     {@link TextAttribute#SUPERSCRIPT_SUPER} are recognised.</li>
      * </ul>
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
      * @param key  the key.
      *
-     * @return An attributed label (possibly <code>null</code>).
+     * @return An attributed label (possibly {@code null}).
      */
     @Override
     public AttributedString generateAttributedSectionLabel(PieDataset dataset,
@@ -218,7 +218,7 @@ public class StandardPieSectionLabelGenerator
     /**
      * Tests the generator for equality with an arbitrary object.
      *
-     * @param obj  the object to test against (<code>null</code> permitted).
+     * @param obj  the object to test against ({@code null} permitted).
      *
      * @return A boolean.
      */

@@ -88,7 +88,7 @@ public class BlockBorder implements BlockFrame, Serializable {
     /**
      * Creates a new border with the specified color.
      *
-     * @param paint  the color (<code>null</code> not permitted).
+     * @param paint  the color ({@code null} not permitted).
      */
     public BlockBorder(Paint paint) {
         this(new RectangleInsets(1, 1, 1, 1), paint);
@@ -113,7 +113,7 @@ public class BlockBorder implements BlockFrame, Serializable {
      * @param left  the width of the left border.
      * @param bottom  the width of the bottom border.
      * @param right  the width of the right border.
-     * @param paint  the border paint (<code>null</code> not permitted).
+     * @param paint  the border paint ({@code null} not permitted).
      */
     public BlockBorder(double top, double left, double bottom, double right,
                        Paint paint) {
@@ -123,8 +123,8 @@ public class BlockBorder implements BlockFrame, Serializable {
     /**
      * Creates a new border.
      *
-     * @param insets  the border insets (<code>null</code> not permitted).
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param insets  the border insets ({@code null} not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      */
     public BlockBorder(RectangleInsets insets, Paint paint) {
         ParamChecks.nullNotPermitted(insets, "insets");
@@ -136,7 +136,7 @@ public class BlockBorder implements BlockFrame, Serializable {
     /**
      * Returns the space reserved for the border.
      *
-     * @return The space (never <code>null</code>).
+     * @return The space (never {@code null}).
      */
     @Override
     public RectangleInsets getInsets() {
@@ -146,7 +146,7 @@ public class BlockBorder implements BlockFrame, Serializable {
     /**
      * Returns the paint used to draw the border.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      */
     public Paint getPaint() {
         return this.paint;
@@ -193,7 +193,7 @@ public class BlockBorder implements BlockFrame, Serializable {
     /**
      * Tests this border for equality with an arbitrary instance.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

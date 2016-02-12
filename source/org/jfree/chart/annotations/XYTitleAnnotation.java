@@ -113,7 +113,7 @@ public class XYTitleAnnotation extends AbstractXYAnnotation
      *
      * @param x  the x-coordinate (in data space).
      * @param y  the y-coordinate (in data space).
-     * @param title  the title (<code>null</code> not permitted).
+     * @param title  the title ({@code null} not permitted).
      */
     public XYTitleAnnotation(double x, double y, Title title) {
         this(x, y, title, RectangleAnchor.CENTER);
@@ -125,8 +125,8 @@ public class XYTitleAnnotation extends AbstractXYAnnotation
      *
      * @param x  the x-coordinate (in data space).
      * @param y  the y-coordinate (in data space).
-     * @param title  the title (<code>null</code> not permitted).
-     * @param anchor  the title anchor (<code>null</code> not permitted).
+     * @param title  the title ({@code null} not permitted).
+     * @param anchor  the title anchor ({@code null} not permitted).
      */
     public XYTitleAnnotation(double x, double y, Title title,
             RectangleAnchor anchor) {
@@ -145,7 +145,7 @@ public class XYTitleAnnotation extends AbstractXYAnnotation
     /**
      * Returns the coordinate type (set in the constructor).
      *
-     * @return The coordinate type (never <code>null</code>).
+     * @return The coordinate type (never {@code null}).
      */
     public XYCoordinateType getCoordinateType() {
         return this.coordinateType;
@@ -331,7 +331,7 @@ public class XYTitleAnnotation extends AbstractXYAnnotation
     /**
      * Tests this object for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

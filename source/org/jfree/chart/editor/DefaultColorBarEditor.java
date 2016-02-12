@@ -214,7 +214,7 @@ class DefaultColorBarEditor extends DefaultNumberAxisEditor {
      *
      * @param colorBar  the color bar.
      *
-     * @return A panel or <code>null</code< if axis is <code>null</code>.
+     * @return A panel or <code>null</code< if axis is {@code null}.
      */
     public static DefaultColorBarEditor getInstance(ColorBar colorBar) {
 

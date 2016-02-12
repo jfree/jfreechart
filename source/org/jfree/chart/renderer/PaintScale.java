@@ -81,7 +81,7 @@ public interface PaintScale {
      *
      * @param value  the value.
      *
-     * @return A <code>Paint</code> instance (never <code>null</code>).
+     * @return A <code>Paint</code> instance (never {@code null}).
      */
     public Paint getPaint(double value);
 

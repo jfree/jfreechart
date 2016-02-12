@@ -82,14 +82,14 @@ public class StrokeMap implements Cloneable, Serializable {
 
     /**
      * Returns the stroke associated with the specified key, or
-     * <code>null</code>.
+     * {@code null}.
      *
-     * @param key  the key (<code>null</code> not permitted).
+     * @param key  the key ({@code null} not permitted).
      *
-     * @return The stroke, or <code>null</code>.
+     * @return The stroke, or {@code null}.
      *
      * @throws IllegalArgumentException if <code>key</code> is
-     *     <code>null</code>.
+     *     {@code null}.
      */
     public Stroke getStroke(Comparable key) {
         ParamChecks.nullNotPermitted(key, "key");
@@ -113,7 +113,7 @@ public class StrokeMap implements Cloneable, Serializable {
      * Adds a mapping between the specified <code>key</code> and
      * <code>stroke</code> values.
      *
-     * @param key  the key (<code>null</code> not permitted).
+     * @param key  the key ({@code null} not permitted).
      * @param stroke  the stroke.
      */
     public void put(Comparable key, Stroke stroke) {
@@ -131,7 +131,7 @@ public class StrokeMap implements Cloneable, Serializable {
     /**
      * Tests this map for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

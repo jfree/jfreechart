@@ -59,14 +59,14 @@ public interface ChartMouseListenerFX {
     /**
      * Receives notification of a mouse click on a chart.
      * 
-     * @param event  event information (never <code>null</code>). 
+     * @param event  event information (never {@code null}). 
      */
     void chartMouseClicked(ChartMouseEventFX event);
 
     /**
      * Receives notification of a mouse move event on a chart.
      *
-     * @param event  event information (never <code>null</code>). 
+     * @param event  event information (never {@code null}). 
      */
     void chartMouseMoved(ChartMouseEventFX event);
 

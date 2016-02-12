@@ -110,10 +110,10 @@ public class IntervalBarRenderer extends BarRenderer {
      * renderer, this is equivalent to calling
      * <code>findRangeBounds(dataset, true)</code>.
      *
-     * @param dataset  the dataset (<code>null</code> permitted).
+     * @param dataset  the dataset ({@code null} permitted).
      *
-     * @return The range (or <code>null</code> if the dataset is
-     *         <code>null</code> or empty).
+     * @return The range (or {@code null} if the dataset is
+     *         {@code null} or empty).
      */
     @Override
     public Range findRangeBounds(CategoryDataset dataset) {
@@ -257,7 +257,7 @@ public class IntervalBarRenderer extends BarRenderer {
     /**
      * Tests this renderer for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

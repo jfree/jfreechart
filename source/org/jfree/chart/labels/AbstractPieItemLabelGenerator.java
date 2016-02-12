@@ -74,12 +74,12 @@ public class AbstractPieItemLabelGenerator implements Serializable {
     /**
      * Creates an item label generator using the specified number formatters.
      *
-     * @param labelFormat  the label format string (<code>null</code> not
+     * @param labelFormat  the label format string ({@code null} not
      *                     permitted).
-     * @param numberFormat  the format object for the values (<code>null</code>
+     * @param numberFormat  the format object for the values ({@code null}
      *                      not permitted).
      * @param percentFormat  the format object for the percentages
-     *                       (<code>null</code> not permitted).
+     *                       ({@code null} not permitted).
      */
     protected AbstractPieItemLabelGenerator(String labelFormat, 
             NumberFormat numberFormat, NumberFormat percentFormat) {
@@ -94,7 +94,7 @@ public class AbstractPieItemLabelGenerator implements Serializable {
     /**
      * Returns the label format string.
      *
-     * @return The label format string (never <code>null</code>).
+     * @return The label format string (never {@code null}).
      */
     public String getLabelFormat() {
         return this.labelFormat;
@@ -103,7 +103,7 @@ public class AbstractPieItemLabelGenerator implements Serializable {
     /**
      * Returns the number formatter.
      *
-     * @return The formatter (never <code>null</code>).
+     * @return The formatter (never {@code null}).
      */
     public NumberFormat getNumberFormat() {
         return this.numberFormat;
@@ -112,7 +112,7 @@ public class AbstractPieItemLabelGenerator implements Serializable {
     /**
      * Returns the percent formatter.
      *
-     * @return The formatter (never <code>null</code>).
+     * @return The formatter (never {@code null}).
      */
     public NumberFormat getPercentFormat() {
         return this.percentFormat;
@@ -129,10 +129,10 @@ public class AbstractPieItemLabelGenerator implements Serializable {
      * <li>result[3] = the formatted total value.</li>
      * </ul>
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
-     * @param key  the key (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
+     * @param key  the key ({@code null} not permitted).
      *
-     * @return The items (never <code>null</code>).
+     * @return The items (never {@code null}).
      */
     protected Object[] createItemArray(PieDataset dataset, Comparable key) {
         Object[] result = new Object[4];
@@ -160,10 +160,10 @@ public class AbstractPieItemLabelGenerator implements Serializable {
     /**
      * Generates a label for a pie section.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
-     * @param key  the section key (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
+     * @param key  the section key ({@code null} not permitted).
      *
-     * @return The label (possibly <code>null</code>).
+     * @return The label (possibly {@code null}).
      */
     protected String generateSectionLabel(PieDataset dataset, Comparable key) {
         String result = null;
@@ -177,7 +177,7 @@ public class AbstractPieItemLabelGenerator implements Serializable {
     /**
      * Tests the generator for equality with an arbitrary object.
      *
-     * @param obj  the object to test against (<code>null</code> permitted).
+     * @param obj  the object to test against ({@code null} permitted).
      *
      * @return A boolean.
      */

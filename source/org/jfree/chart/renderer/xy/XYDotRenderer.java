@@ -179,7 +179,7 @@ public class XYDotRenderer extends AbstractXYItemRenderer
     /**
      * Returns the shape used to represent an item in the legend.
      *
-     * @return The legend shape (never <code>null</code>).
+     * @return The legend shape (never {@code null}).
      *
      * @see #setLegendShape(Shape)
      *
@@ -193,7 +193,7 @@ public class XYDotRenderer extends AbstractXYItemRenderer
      * Sets the shape used as a line in each legend item and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param shape  the shape (<code>null</code> not permitted).
+     * @param shape  the shape ({@code null} not permitted).
      *
      * @see #getLegendShape()
      *
@@ -220,7 +220,7 @@ public class XYDotRenderer extends AbstractXYItemRenderer
      * @param series  the series index (zero-based).
      * @param item  the item index (zero-based).
      * @param crosshairState  crosshair information for the plot
-     *                        (<code>null</code> permitted).
+     *                        ({@code null} permitted).
      * @param pass  the pass index.
      */
     @Override
@@ -272,7 +272,7 @@ public class XYDotRenderer extends AbstractXYItemRenderer
      * @param datasetIndex  the dataset index (zero-based).
      * @param series  the series index (zero-based).
      *
-     * @return A legend item for the series (possibly <code>null</code>).
+     * @return A legend item for the series (possibly {@code null}).
      */
     @Override
     public LegendItem getLegendItem(int datasetIndex, int series) {
@@ -327,12 +327,12 @@ public class XYDotRenderer extends AbstractXYItemRenderer
      * returns <code>true</code> if and only if:
      *
      * <ul>
-     * <li><code>obj</code> is not <code>null</code>;</li>
+     * <li><code>obj</code> is not {@code null};</li>
      * <li><code>obj</code> is an instance of <code>XYDotRenderer</code>;</li>
      * <li>both renderers have the same attribute values.
      * </ul>
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

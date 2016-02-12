@@ -75,7 +75,7 @@ public class SymbolicXYItemLabelGenerator implements XYItemLabelGenerator,
      * @param series  the series number (zero-based index).
      * @param item  the item number (zero-based index).
      *
-     * @return The tool tip text (possibly <code>null</code>).
+     * @return The tool tip text (possibly {@code null}).
      */
     @Override
     public String generateToolTip(XYDataset data, int series, int item) {
@@ -108,11 +108,11 @@ public class SymbolicXYItemLabelGenerator implements XYItemLabelGenerator,
      * Generates a label for the specified item. The label is typically a
      * formatted version of the data value, but any text can be used.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
      * @param series  the series index (zero-based).
      * @param category  the category index (zero-based).
      *
-     * @return The label (possibly <code>null</code>).
+     * @return The label (possibly {@code null}).
      */
     @Override
     public String generateLabel(XYDataset dataset, int series, int category) {

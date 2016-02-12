@@ -70,7 +70,7 @@ public class DefaultKeyedValueDataset extends AbstractDataset
      * Creates a new dataset with the specified initial value.
      *
      * @param key  the key.
-     * @param value  the value (<code>null</code> permitted).
+     * @param value  the value ({@code null} permitted).
      */
     public DefaultKeyedValueDataset(Comparable key, Number value) {
         this(new DefaultKeyedValue(key, value));
@@ -80,14 +80,14 @@ public class DefaultKeyedValueDataset extends AbstractDataset
      * Creates a new dataset that uses the data from a {@link KeyedValue}
      * instance.
      *
-     * @param data  the data (<code>null</code> permitted).
+     * @param data  the data ({@code null} permitted).
      */
     public DefaultKeyedValueDataset(KeyedValue data) {
         this.data = data;
     }
 
     /**
-     * Returns the key associated with the value, or <code>null</code> if the
+     * Returns the key associated with the value, or {@code null} if the
      * dataset has no data item.
      *
      * @return The key.
@@ -104,7 +104,7 @@ public class DefaultKeyedValueDataset extends AbstractDataset
     /**
      * Returns the value.
      *
-     * @return The value (possibly <code>null</code>).
+     * @return The value (possibly {@code null}).
      */
     @Override
     public Number getValue() {
@@ -118,7 +118,7 @@ public class DefaultKeyedValueDataset extends AbstractDataset
     /**
      * Updates the value.
      *
-     * @param value  the new value (<code>null</code> permitted).
+     * @param value  the new value ({@code null} permitted).
      */
     public void updateValue(Number value) {
         if (this.data == null) {
@@ -132,7 +132,7 @@ public class DefaultKeyedValueDataset extends AbstractDataset
      * all registered listeners.
      *
      * @param key  the key.
-     * @param value  the value (<code>null</code> permitted).
+     * @param value  the value ({@code null} permitted).
      */
     public void setValue(Comparable key, Number value) {
         this.data = new DefaultKeyedValue(key, value);
@@ -142,7 +142,7 @@ public class DefaultKeyedValueDataset extends AbstractDataset
     /**
      * Tests this dataset for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

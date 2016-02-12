@@ -86,7 +86,7 @@ public class KeyToGroupMap implements Cloneable, PublicCloneable, Serializable {
     /**
      * Creates a new map with the specified default group.
      *
-     * @param defaultGroup  the default group (<code>null</code> not permitted).
+     * @param defaultGroup  the default group ({@code null} not permitted).
      */
     public KeyToGroupMap(Comparable defaultGroup) {
         ParamChecks.nullNotPermitted(defaultGroup, "defaultGroup");
@@ -109,7 +109,7 @@ public class KeyToGroupMap implements Cloneable, PublicCloneable, Serializable {
      * map.  The returned list is independent of the map, so altering the list
      * will have no effect.
      *
-     * @return The groups (never <code>null</code>).
+     * @return The groups (never {@code null}).
      */
     public List getGroups() {
         List result = new ArrayList();
@@ -148,9 +148,9 @@ public class KeyToGroupMap implements Cloneable, PublicCloneable, Serializable {
     /**
      * Returns the group that a key is mapped to.
      *
-     * @param key  the key (<code>null</code> not permitted).
+     * @param key  the key ({@code null} not permitted).
      *
-     * @return The group (never <code>null</code>, returns the default group if
+     * @return The group (never {@code null}, returns the default group if
      *         there is no mapping for the specified key).
      */
     public Comparable getGroup(Comparable key) {
@@ -166,8 +166,8 @@ public class KeyToGroupMap implements Cloneable, PublicCloneable, Serializable {
     /**
      * Maps a key to a group.
      *
-     * @param key  the key (<code>null</code> not permitted).
-     * @param group  the group (<code>null</code> permitted, clears any
+     * @param key  the key ({@code null} not permitted).
+     * @param group  the group ({@code null} permitted, clears any
      *               existing mapping).
      */
     public void mapKeyToGroup(Comparable key, Comparable group) {
@@ -199,7 +199,7 @@ public class KeyToGroupMap implements Cloneable, PublicCloneable, Serializable {
      * won't always return an accurate result for the default group, since
      * explicit mappings are not required for this group.
      *
-     * @param group  the group (<code>null</code> not permitted).
+     * @param group  the group ({@code null} not permitted).
      *
      * @return The key count.
      */
@@ -219,7 +219,7 @@ public class KeyToGroupMap implements Cloneable, PublicCloneable, Serializable {
     /**
      * Tests the map for equality against an arbitrary object.
      *
-     * @param obj  the object to test against (<code>null</code> permitted).
+     * @param obj  the object to test against ({@code null} permitted).
      *
      * @return A boolean.
      */
@@ -262,7 +262,7 @@ public class KeyToGroupMap implements Cloneable, PublicCloneable, Serializable {
     /**
      * Attempts to clone the specified object using reflection.
      *
-     * @param object  the object (<code>null</code> permitted).
+     * @param object  the object ({@code null} permitted).
      *
      * @return The cloned object, or the original object if cloning failed.
      */

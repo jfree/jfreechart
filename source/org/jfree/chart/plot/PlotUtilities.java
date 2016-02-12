@@ -53,9 +53,9 @@ public class PlotUtilities {
 
     /**
      * Returns <code>true</code> if all the datasets belonging to the specified
-     * plot are empty or <code>null</code>, and <code>false</code> otherwise.
+     * plot are empty or {@code null}, and <code>false</code> otherwise.
      *
-     * @param plot  the plot (<code>null</code> permitted).
+     * @param plot  the plot ({@code null} permitted).
      *
      * @return A boolean.
      *

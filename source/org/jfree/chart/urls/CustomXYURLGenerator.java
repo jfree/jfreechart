@@ -104,7 +104,7 @@ public class CustomXYURLGenerator implements XYURLGenerator, Cloneable,
      * @param series  the series index.
      * @param item  the item index.
      *
-     * @return The URL (possibly <code>null</code>).
+     * @return The URL (possibly {@code null}).
      */
     public String getURL(int series, int item) {
         String result = null;
@@ -126,7 +126,7 @@ public class CustomXYURLGenerator implements XYURLGenerator, Cloneable,
      * @param series  the series (zero-based index).
      * @param item  the item (zero-based index).
      *
-     * @return A string containing the URL (possibly <code>null</code>).
+     * @return A string containing the URL (possibly {@code null}).
      */
     @Override
     public String generateURL(XYDataset dataset, int series, int item) {
@@ -136,7 +136,7 @@ public class CustomXYURLGenerator implements XYURLGenerator, Cloneable,
     /**
      * Adds a list of URLs.
      *
-     * @param urls  the list of URLs (<code>null</code> permitted, the list
+     * @param urls  the list of URLs ({@code null} permitted, the list
      *     is copied).
      */
     public void addURLSeries(List urls) {
@@ -150,7 +150,7 @@ public class CustomXYURLGenerator implements XYURLGenerator, Cloneable,
     /**
      * Tests this generator for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

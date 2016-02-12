@@ -106,7 +106,7 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      * @param row  the row index (in the range 0 to getRowCount() - 1).
      * @param column  the column index (in the range 0 to getColumnCount() - 1).
      *
-     * @return The object (possibly <code>null</code>).
+     * @return The object (possibly {@code null}).
      *
      * @see #getObject(Comparable, Comparable)
      */
@@ -142,7 +142,7 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      * Returns the row index for a given key, or <code>-1</code> if the key
      * is not recognised.
      *
-     * @param key  the key (<code>null</code> not permitted).
+     * @param key  the key ({@code null} not permitted).
      *
      * @return The row index.
      *
@@ -156,7 +156,7 @@ public class KeyedObjects2D implements Cloneable, Serializable {
     /**
      * Returns the row keys.
      *
-     * @return The row keys (never <code>null</code>).
+     * @return The row keys (never {@code null}).
      *
      * @see #getRowKeys()
      */
@@ -181,7 +181,7 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      * Returns the column index for a given key, or <code>-1</code> if the key
      * is not recognised.
      *
-     * @param key  the key (<code>null</code> not permitted).
+     * @param key  the key ({@code null} not permitted).
      *
      * @return The column index.
      *
@@ -195,7 +195,7 @@ public class KeyedObjects2D implements Cloneable, Serializable {
     /**
      * Returns the column keys.
      *
-     * @return The column keys (never <code>null</code>).
+     * @return The column keys (never {@code null}).
      *
      * @see #getRowKeys()
      */
@@ -206,13 +206,13 @@ public class KeyedObjects2D implements Cloneable, Serializable {
     /**
      * Returns the object for the given row and column keys.
      *
-     * @param rowKey  the row key (<code>null</code> not permitted).
-     * @param columnKey  the column key (<code>null</code> not permitted).
+     * @param rowKey  the row key ({@code null} not permitted).
+     * @param columnKey  the column key ({@code null} not permitted).
      *
-     * @return The object (possibly <code>null</code>).
+     * @return The object (possibly {@code null}).
      *
      * @throws IllegalArgumentException if <code>rowKey</code> or
-     *         <code>columnKey</code> is <code>null</code>.
+     *         <code>columnKey</code> is {@code null}.
      * @throws UnknownKeyException if <code>rowKey</code> or
      *         <code>columnKey</code> is not recognised.
      */
@@ -243,8 +243,8 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      * Adds an object to the table.  Performs the same function as setObject().
      *
      * @param object  the object.
-     * @param rowKey  the row key (<code>null</code> not permitted).
-     * @param columnKey  the column key (<code>null</code> not permitted).
+     * @param rowKey  the row key ({@code null} not permitted).
+     * @param columnKey  the column key ({@code null} not permitted).
      */
     public void addObject(Object object, Comparable rowKey,
             Comparable columnKey) {
@@ -255,8 +255,8 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      * Adds or updates an object.
      *
      * @param object  the object.
-     * @param rowKey  the row key (<code>null</code> not permitted).
-     * @param columnKey  the column key (<code>null</code> not permitted).
+     * @param rowKey  the row key ({@code null} not permitted).
+     * @param columnKey  the column key ({@code null} not permitted).
      */
     public void setObject(Object object, Comparable rowKey,
             Comparable columnKey) {
@@ -280,12 +280,12 @@ public class KeyedObjects2D implements Cloneable, Serializable {
     }
 
     /**
-     * Removes an object from the table by setting it to <code>null</code>.  If
+     * Removes an object from the table by setting it to {@code null}.  If
      * all the objects in the specified row and/or column are now
-     * <code>null</code>, the row and/or column is removed from the table.
+     * {@code null}, the row and/or column is removed from the table.
      *
-     * @param rowKey  the row key (<code>null</code> not permitted).
-     * @param columnKey  the column key (<code>null</code> not permitted).
+     * @param rowKey  the row key ({@code null} not permitted).
+     * @param columnKey  the column key ({@code null} not permitted).
      *
      * @see #addObject(Object, Comparable, Comparable)
      */
@@ -360,7 +360,7 @@ public class KeyedObjects2D implements Cloneable, Serializable {
     /**
      * Removes an entire row from the table.
      *
-     * @param rowKey  the row key (<code>null</code> not permitted).
+     * @param rowKey  the row key ({@code null} not permitted).
      *
      * @throws UnknownKeyException if <code>rowKey</code> is not recognised.
      *
@@ -390,7 +390,7 @@ public class KeyedObjects2D implements Cloneable, Serializable {
     /**
      * Removes an entire column from the table.
      *
-     * @param columnKey  the column key (<code>null</code> not permitted).
+     * @param columnKey  the column key ({@code null} not permitted).
      *
      * @throws UnknownKeyException if <code>rowKey</code> is not recognised.
      *
@@ -427,7 +427,7 @@ public class KeyedObjects2D implements Cloneable, Serializable {
     /**
      * Tests this object for equality with an arbitrary object.
      *
-     * @param obj  the object to test (<code>null</code> permitted).
+     * @param obj  the object to test ({@code null} permitted).
      *
      * @return A boolean.
      */

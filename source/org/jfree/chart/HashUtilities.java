@@ -62,9 +62,9 @@ public class HashUtilities {
     
     /**
      * Returns a hash code for a <code>Paint</code> instance.  If 
-     * <code>p</code> is <code>null</code>, this method returns zero.
+     * <code>p</code> is {@code null}, this method returns zero.
      * 
-     * @param p  the paint (<code>null</code> permitted).
+     * @param p  the paint ({@code null} permitted).
      * 
      * @return The hash code.
      */
@@ -93,9 +93,9 @@ public class HashUtilities {
     
     /**
      * Returns a hash code for a <code>double[]</code> instance.  If the array
-     * is <code>null</code>, this method returns zero.
+     * is {@code null}, this method returns zero.
      * 
-     * @param a  the array (<code>null</code> permitted).
+     * @param a  the array ({@code null} permitted).
      * 
      * @return The hash code.
      */
@@ -162,7 +162,7 @@ public class HashUtilities {
      * Returns a hash value based on a seed value and a paint instance.
      * 
      * @param pre  the seed value.
-     * @param p  the paint (<code>null</code> permitted).
+     * @param p  the paint ({@code null} permitted).
      * 
      * @return A hash value.
      * 
@@ -176,7 +176,7 @@ public class HashUtilities {
      * Returns a hash value based on a seed value and a stroke instance.
      * 
      * @param pre  the seed value.
-     * @param s  the stroke (<code>null</code> permitted).
+     * @param s  the stroke ({@code null} permitted).
      * 
      * @return A hash value.
      * 
@@ -191,7 +191,7 @@ public class HashUtilities {
      * Returns a hash value based on a seed value and a string instance.
      * 
      * @param pre  the seed value.
-     * @param s  the string (<code>null</code> permitted).
+     * @param s  the string ({@code null} permitted).
      * 
      * @return A hash value.
      * 
@@ -207,7 +207,7 @@ public class HashUtilities {
      * instance.
      * 
      * @param pre  the seed value.
-     * @param c  the comparable (<code>null</code> permitted).
+     * @param c  the comparable ({@code null} permitted).
      * 
      * @return A hash value.
      * 
@@ -223,7 +223,7 @@ public class HashUtilities {
      * instance.
      * 
      * @param pre  the seed value.
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      * 
      * @return A hash value.
      * 
@@ -241,7 +241,7 @@ public class HashUtilities {
      * older versions of JCommon (back to 1.0.0).
      * 
      * @param pre  the seed value.
-     * @param list  the list (<code>null</code> permitted).
+     * @param list  the list ({@code null} permitted).
      * 
      * @return The hash code.
      * 
@@ -278,7 +278,7 @@ public class HashUtilities {
      * older versions of JCommon (back to 1.0.0).
      * 
      * @param pre  the seed value.
-     * @param list  the list (<code>null</code> permitted).
+     * @param list  the list ({@code null} permitted).
      * 
      * @return The hash code.
      * 
@@ -315,7 +315,7 @@ public class HashUtilities {
      * older versions of JCommon (back to 1.0.0).
      * 
      * @param pre  the seed value.
-     * @param list  the list (<code>null</code> permitted).
+     * @param list  the list ({@code null} permitted).
      * 
      * @return The hash code.
      * 

@@ -149,7 +149,7 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
      * @param row  the row index (zero-based).
      * @param column  the column index (zero-based).
      *
-     * @return The mean value (possibly <code>null</code>).
+     * @return The mean value (possibly {@code null}).
      */
     @Override
     public Number getMeanValue(int row, int column) {
@@ -169,7 +169,7 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
      * @param row  the row index.
      * @param column  the column index.
      *
-     * @return The value (possibly <code>null</code>).
+     * @return The value (possibly {@code null}).
      */
     @Override
     public Number getValue(int row, int column) {
@@ -183,7 +183,7 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
      * @param rowKey  the row key.
      * @param columnKey  the columnKey.
      *
-     * @return The value (possibly <code>null</code>).
+     * @return The value (possibly {@code null}).
      */
     @Override
     public Number getValue(Comparable rowKey, Comparable columnKey) {
@@ -196,7 +196,7 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
      * @param rowKey  the row key.
      * @param columnKey  the columnKey.
      *
-     * @return The mean value (possibly <code>null</code>).
+     * @return The mean value (possibly {@code null}).
      */
     @Override
     public Number getMeanValue(Comparable rowKey, Comparable columnKey) {
@@ -215,7 +215,7 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
      * @param row  the row index (zero-based).
      * @param column  the column index (zero-based).
      *
-     * @return The standard deviation (possibly <code>null</code>).
+     * @return The standard deviation (possibly {@code null}).
      */
     @Override
     public Number getStdDevValue(int row, int column) {
@@ -234,7 +234,7 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
      * @param rowKey  the row key.
      * @param columnKey  the columnKey.
      *
-     * @return The standard deviation (possibly <code>null</code>).
+     * @return The standard deviation (possibly {@code null}).
      */
     @Override
     public Number getStdDevValue(Comparable rowKey, Comparable columnKey) {
@@ -250,7 +250,7 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
     /**
      * Returns the column index for a given key.
      *
-     * @param key  the column key (<code>null</code> not permitted).
+     * @param key  the column key ({@code null} not permitted).
      *
      * @return The column index.
      */
@@ -285,7 +285,7 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
     /**
      * Returns the row index for a given key.
      *
-     * @param key  the row key (<code>null</code> not permitted).
+     * @param key  the row key ({@code null} not permitted).
      *
      * @return The row index.
      */
@@ -436,8 +436,8 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
      * Removes an item from the dataset and sends a {@link DatasetChangeEvent}
      * to all registered listeners.
      *
-     * @param rowKey  the row key (<code>null</code> not permitted).
-     * @param columnKey  the column key (<code>null</code> not permitted).
+     * @param rowKey  the row key ({@code null} not permitted).
+     * @param columnKey  the column key ({@code null} not permitted).
      *
      * @see #add(double, double, Comparable, Comparable)
      *
@@ -488,7 +488,7 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
      * Removes a row from the dataset and sends a {@link DatasetChangeEvent}
      * to all registered listeners.
      *
-     * @param rowKey  the row key (<code>null</code> not permitted).
+     * @param rowKey  the row key ({@code null} not permitted).
      *
      * @see #removeColumn(Comparable)
      *
@@ -520,7 +520,7 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
      * Removes a column from the dataset and sends a {@link DatasetChangeEvent}
      * to all registered listeners.
      *
-     * @param columnKey  the column key (<code>null</code> not permitted).
+     * @param columnKey  the column key ({@code null} not permitted).
      *
      * @see #removeRow(Comparable)
      *
@@ -698,7 +698,7 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
     /**
      * Tests this instance for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

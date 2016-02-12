@@ -68,8 +68,8 @@ public interface PieURLGenerator {
      * Generates a URL for one item in a {@link PieDataset}. As a guideline,
      * the URL should be valid within the context of an XHTML 1.0 document.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
-     * @param key  the item key (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
+     * @param key  the item key ({@code null} not permitted).
      * @param pieIndex  the pie index (differentiates between pies in a
      *                  'multi' pie chart).
      *

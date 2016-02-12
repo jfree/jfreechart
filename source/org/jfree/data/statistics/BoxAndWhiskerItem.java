@@ -89,17 +89,17 @@ public class BoxAndWhiskerItem implements Serializable {
     /**
      * Creates a new box-and-whisker item.
      *
-     * @param mean  the mean (<code>null</code> permitted).
-     * @param median  the median (<code>null</code> permitted).
-     * @param q1  the first quartile (<code>null</code> permitted).
-     * @param q3  the third quartile (<code>null</code> permitted).
-     * @param minRegularValue  the minimum regular value (<code>null</code>
+     * @param mean  the mean ({@code null} permitted).
+     * @param median  the median ({@code null} permitted).
+     * @param q1  the first quartile ({@code null} permitted).
+     * @param q3  the third quartile ({@code null} permitted).
+     * @param minRegularValue  the minimum regular value ({@code null}
      *                         permitted).
-     * @param maxRegularValue  the maximum regular value (<code>null</code>
+     * @param maxRegularValue  the maximum regular value ({@code null}
      *                         permitted).
-     * @param minOutlier  the minimum outlier (<code>null</code> permitted).
-     * @param maxOutlier  the maximum outlier (<code>null</code> permitted).
-     * @param outliers  the outliers (<code>null</code> permitted).
+     * @param minOutlier  the minimum outlier ({@code null} permitted).
+     * @param maxOutlier  the maximum outlier ({@code null} permitted).
+     * @param outliers  the outliers ({@code null} permitted).
      */
     public BoxAndWhiskerItem(Number mean,
                              Number median,
@@ -153,7 +153,7 @@ public class BoxAndWhiskerItem implements Serializable {
     /**
      * Returns the mean.
      *
-     * @return The mean (possibly <code>null</code>).
+     * @return The mean (possibly {@code null}).
      */
     public Number getMean() {
         return this.mean;
@@ -162,7 +162,7 @@ public class BoxAndWhiskerItem implements Serializable {
     /**
      * Returns the median.
      *
-     * @return The median (possibly <code>null</code>).
+     * @return The median (possibly {@code null}).
      */
     public Number getMedian() {
         return this.median;
@@ -171,7 +171,7 @@ public class BoxAndWhiskerItem implements Serializable {
     /**
      * Returns the first quartile.
      *
-     * @return The first quartile (possibly <code>null</code>).
+     * @return The first quartile (possibly {@code null}).
      */
     public Number getQ1() {
         return this.q1;
@@ -180,7 +180,7 @@ public class BoxAndWhiskerItem implements Serializable {
     /**
      * Returns the third quartile.
      *
-     * @return The third quartile (possibly <code>null</code>).
+     * @return The third quartile (possibly {@code null}).
      */
     public Number getQ3() {
         return this.q3;
@@ -189,7 +189,7 @@ public class BoxAndWhiskerItem implements Serializable {
     /**
      * Returns the minimum regular value.
      *
-     * @return The minimum regular value (possibly <code>null</code>).
+     * @return The minimum regular value (possibly {@code null}).
      */
     public Number getMinRegularValue() {
         return this.minRegularValue;
@@ -198,7 +198,7 @@ public class BoxAndWhiskerItem implements Serializable {
     /**
      * Returns the maximum regular value.
      *
-     * @return The maximum regular value (possibly <code>null</code>).
+     * @return The maximum regular value (possibly {@code null}).
      */
     public Number getMaxRegularValue() {
         return this.maxRegularValue;
@@ -207,7 +207,7 @@ public class BoxAndWhiskerItem implements Serializable {
     /**
      * Returns the minimum outlier.
      *
-     * @return The minimum outlier (possibly <code>null</code>).
+     * @return The minimum outlier (possibly {@code null}).
      */
     public Number getMinOutlier() {
         return this.minOutlier;
@@ -216,7 +216,7 @@ public class BoxAndWhiskerItem implements Serializable {
     /**
      * Returns the maximum outlier.
      *
-     * @return The maximum outlier (possibly <code>null</code>).
+     * @return The maximum outlier (possibly {@code null}).
      */
     public Number getMaxOutlier() {
         return this.maxOutlier;
@@ -225,7 +225,7 @@ public class BoxAndWhiskerItem implements Serializable {
     /**
      * Returns a list of outliers.
      *
-     * @return A list of outliers (possibly <code>null</code>).
+     * @return A list of outliers (possibly {@code null}).
      */
     public List getOutliers() {
         if (this.outliers == null) {
@@ -249,7 +249,7 @@ public class BoxAndWhiskerItem implements Serializable {
     /**
      * Tests this object for equality with an arbitrary object.
      *
-     * @param obj  the object to test against (<code>null</code> permitted).
+     * @param obj  the object to test against ({@code null} permitted).
      *
      * @return A boolean.
      */

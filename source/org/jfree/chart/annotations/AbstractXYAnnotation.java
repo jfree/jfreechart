@@ -81,7 +81,7 @@ public abstract class AbstractXYAnnotation extends AbstractAnnotation
      * a {@link org.jfree.chart.ChartPanel} when the mouse pointer hovers over
      * the annotation.
      *
-     * @return The tool tip text (possibly <code>null</code>).
+     * @return The tool tip text (possibly {@code null}).
      *
      * @see #setToolTipText(String)
      */
@@ -92,7 +92,7 @@ public abstract class AbstractXYAnnotation extends AbstractAnnotation
     /**
      * Sets the tool tip text for the annotation.
      *
-     * @param text  the tool tip text (<code>null</code> permitted).
+     * @param text  the tool tip text ({@code null} permitted).
      *
      * @see #getToolTipText()
      */
@@ -104,7 +104,7 @@ public abstract class AbstractXYAnnotation extends AbstractAnnotation
      * Returns the URL for the annotation.  This URL will be used to provide
      * hyperlinks when an HTML image map is created for the chart.
      *
-     * @return The URL (possibly <code>null</code>).
+     * @return The URL (possibly {@code null}).
      *
      * @see #setURL(String)
      */
@@ -115,7 +115,7 @@ public abstract class AbstractXYAnnotation extends AbstractAnnotation
     /**
      * Sets the URL for the annotation.
      *
-     * @param url  the URL (<code>null</code> permitted).
+     * @param url  the URL ({@code null} permitted).
      *
      * @see #getURL()
      */
@@ -145,7 +145,7 @@ public abstract class AbstractXYAnnotation extends AbstractAnnotation
      * A utility method for adding an {@link XYAnnotationEntity} to
      * a {@link PlotRenderingInfo} instance.
      *
-     * @param info  the plot rendering info (<code>null</code> permitted).
+     * @param info  the plot rendering info ({@code null} permitted).
      * @param hotspot  the hotspot area.
      * @param rendererIndex  the renderer index.
      * @param toolTipText  the tool tip text.
@@ -169,7 +169,7 @@ public abstract class AbstractXYAnnotation extends AbstractAnnotation
     /**
      * Tests this annotation for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

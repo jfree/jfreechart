@@ -113,7 +113,7 @@ public abstract class ChartUtilities {
      * provided for convenience, the theme itself is stored in the
      * {@link ChartFactory} class.
      *
-     * @param chart  the chart (<code>null</code> not permitted).
+     * @param chart  the chart ({@code null} not permitted).
      *
      * @since 1.0.11
      */
@@ -124,8 +124,8 @@ public abstract class ChartUtilities {
     /**
      * Writes a chart to an output stream in PNG format.
      *
-     * @param out  the output stream (<code>null</code> not permitted).
-     * @param chart  the chart (<code>null</code> not permitted).
+     * @param out  the output stream ({@code null} not permitted).
+     * @param chart  the chart ({@code null} not permitted).
      * @param width  the image width.
      * @param height  the image height.
      *
@@ -142,8 +142,8 @@ public abstract class ChartUtilities {
     /**
      * Writes a chart to an output stream in PNG format.
      *
-     * @param out  the output stream (<code>null</code> not permitted).
-     * @param chart  the chart (<code>null</code> not permitted).
+     * @param out  the output stream ({@code null} not permitted).
+     * @param chart  the chart ({@code null} not permitted).
      * @param width  the image width.
      * @param height  the image height.
      * @param encodeAlpha  encode alpha?
@@ -167,11 +167,11 @@ public abstract class ChartUtilities {
      * information about the chart dimensions/entities.  You will need this
      * info if you want to create an HTML image map.
      *
-     * @param out  the output stream (<code>null</code> not permitted).
-     * @param chart  the chart (<code>null</code> not permitted).
+     * @param out  the output stream ({@code null} not permitted).
+     * @param chart  the chart ({@code null} not permitted).
      * @param width  the image width.
      * @param height  the image height.
-     * @param info  the chart rendering info (<code>null</code> permitted).
+     * @param info  the chart rendering info ({@code null} permitted).
      *
      * @throws IOException if there are any I/O errors.
      */
@@ -191,11 +191,11 @@ public abstract class ChartUtilities {
      * information about the chart dimensions/entities.  You will need this
      * info if you want to create an HTML image map.
      *
-     * @param out  the output stream (<code>null</code> not permitted).
-     * @param chart  the chart (<code>null</code> not permitted).
+     * @param out  the output stream ({@code null} not permitted).
+     * @param chart  the chart ({@code null} not permitted).
      * @param width  the image width.
      * @param height  the image height.
-     * @param info  carries back chart rendering info (<code>null</code>
+     * @param info  carries back chart rendering info ({@code null}
      *              permitted).
      * @param encodeAlpha  encode alpha?
      * @param compression  the PNG compression level (0-9).
@@ -218,8 +218,8 @@ public abstract class ChartUtilities {
     /**
      * Writes a scaled version of a chart to an output stream in PNG format.
      *
-     * @param out  the output stream (<code>null</code> not permitted).
-     * @param chart  the chart (<code>null</code> not permitted).
+     * @param out  the output stream ({@code null} not permitted).
+     * @param chart  the chart ({@code null} not permitted).
      * @param width  the unscaled chart width.
      * @param height  the unscaled chart height.
      * @param widthScaleFactor  the horizontal scale factor.
@@ -271,8 +271,8 @@ public abstract class ChartUtilities {
     /**
      * Saves a chart to the specified file in PNG format.
      *
-     * @param file  the file name (<code>null</code> not permitted).
-     * @param chart  the chart (<code>null</code> not permitted).
+     * @param file  the file name ({@code null} not permitted).
+     * @param chart  the chart ({@code null} not permitted).
      * @param width  the image width.
      * @param height  the image height.
      *
@@ -292,11 +292,11 @@ public abstract class ChartUtilities {
      * chart dimensions/entities.  You will need this info if you want to
      * create an HTML image map.
      *
-     * @param file  the file (<code>null</code> not permitted).
-     * @param chart  the chart (<code>null</code> not permitted).
+     * @param file  the file ({@code null} not permitted).
+     * @param chart  the chart ({@code null} not permitted).
      * @param width  the image width.
      * @param height  the image height.
-     * @param info  the chart rendering info (<code>null</code> permitted).
+     * @param info  the chart rendering info ({@code null} permitted).
      *
      * @throws IOException if there are any I/O errors.
      */
@@ -320,11 +320,11 @@ public abstract class ChartUtilities {
      * chart dimensions/entities.  You will need this info if you want to
      * create an HTML image map.
      *
-     * @param file  the file (<code>null</code> not permitted).
-     * @param chart  the chart (<code>null</code> not permitted).
+     * @param file  the file ({@code null} not permitted).
+     * @param chart  the chart ({@code null} not permitted).
      * @param width  the image width.
      * @param height  the image height.
-     * @param info  the chart rendering info (<code>null</code> permitted).
+     * @param info  the chart rendering info ({@code null} permitted).
      * @param encodeAlpha  encode alpha?
      * @param compression  the PNG compression level (0-9).
      *
@@ -351,8 +351,8 @@ public abstract class ChartUtilities {
      * Writes a chart to an output stream in JPEG format.  Please note that
      * JPEG is a poor format for chart images, use PNG if possible.
      *
-     * @param out  the output stream (<code>null</code> not permitted).
-     * @param chart  the chart (<code>null</code> not permitted).
+     * @param out  the output stream ({@code null} not permitted).
+     * @param chart  the chart ({@code null} not permitted).
      * @param width  the image width.
      * @param height  the image height.
      *
@@ -370,9 +370,9 @@ public abstract class ChartUtilities {
      * Writes a chart to an output stream in JPEG format.  Please note that
      * JPEG is a poor format for chart images, use PNG if possible.
      *
-     * @param out  the output stream (<code>null</code> not permitted).
+     * @param out  the output stream ({@code null} not permitted).
      * @param quality  the quality setting.
-     * @param chart  the chart (<code>null</code> not permitted).
+     * @param chart  the chart ({@code null} not permitted).
      * @param width  the image width.
      * @param height  the image height.
      *
@@ -393,11 +393,11 @@ public abstract class ChartUtilities {
      * information about the chart dimensions/entities.  You will need this
      * info if you want to create an HTML image map.
      *
-     * @param out  the output stream (<code>null</code> not permitted).
-     * @param chart  the chart (<code>null</code> not permitted).
+     * @param out  the output stream ({@code null} not permitted).
+     * @param chart  the chart ({@code null} not permitted).
      * @param width  the image width.
      * @param height  the image height.
-     * @param info  the chart rendering info (<code>null</code> permitted).
+     * @param info  the chart rendering info ({@code null} permitted).
      *
      * @throws IOException if there are any I/O errors.
      */
@@ -419,12 +419,12 @@ public abstract class ChartUtilities {
      * information about the chart dimensions/entities.  You will need this
      * info if you want to create an HTML image map.
      *
-     * @param out  the output stream (<code>null</code> not permitted).
+     * @param out  the output stream ({@code null} not permitted).
      * @param quality  the output quality (0.0f to 1.0f).
-     * @param chart  the chart (<code>null</code> not permitted).
+     * @param chart  the chart ({@code null} not permitted).
      * @param width  the image width.
      * @param height  the image height.
-     * @param info  the chart rendering info (<code>null</code> permitted).
+     * @param info  the chart rendering info ({@code null} permitted).
      *
      * @throws IOException if there are any I/O errors.
      */
@@ -443,8 +443,8 @@ public abstract class ChartUtilities {
     /**
      * Saves a chart to a file in JPEG format.
      *
-     * @param file  the file (<code>null</code> not permitted).
-     * @param chart  the chart (<code>null</code> not permitted).
+     * @param file  the file ({@code null} not permitted).
+     * @param chart  the chart ({@code null} not permitted).
      * @param width  the image width.
      * @param height  the image height.
      *
@@ -461,9 +461,9 @@ public abstract class ChartUtilities {
     /**
      * Saves a chart to a file in JPEG format.
      *
-     * @param file  the file (<code>null</code> not permitted).
+     * @param file  the file ({@code null} not permitted).
      * @param quality  the JPEG quality setting.
-     * @param chart  the chart (<code>null</code> not permitted).
+     * @param chart  the chart ({@code null} not permitted).
      * @param width  the image width.
      * @param height  the image height.
      *
@@ -483,11 +483,11 @@ public abstract class ChartUtilities {
      * chart dimensions/entities.  You will need this info if you want to
      * create an HTML image map.
      *
-     * @param file  the file name (<code>null</code> not permitted).
-     * @param chart  the chart (<code>null</code> not permitted).
+     * @param file  the file name ({@code null} not permitted).
+     * @param chart  the chart ({@code null} not permitted).
      * @param width  the image width.
      * @param height  the image height.
-     * @param info  the chart rendering info (<code>null</code> permitted).
+     * @param info  the chart rendering info ({@code null} permitted).
      *
      * @throws IOException if there are any I/O errors.
      */
@@ -512,12 +512,12 @@ public abstract class ChartUtilities {
      * chart dimensions/entities.  You will need this info if you want to
      * create an HTML image map.
      *
-     * @param file  the file name (<code>null</code> not permitted).
+     * @param file  the file name ({@code null} not permitted).
      * @param quality  the quality setting.
-     * @param chart  the chart (<code>null</code> not permitted).
+     * @param chart  the chart ({@code null} not permitted).
      * @param width  the image width.
      * @param height  the image height.
-     * @param info  the chart rendering info (<code>null</code> permitted).
+     * @param info  the chart rendering info ({@code null} permitted).
      *
      * @throws IOException if there are any I/O errors.
      */
@@ -541,8 +541,8 @@ public abstract class ChartUtilities {
     /**
      * Writes a {@link BufferedImage} to an output stream in JPEG format.
      *
-     * @param out  the output stream (<code>null</code> not permitted).
-     * @param image  the image (<code>null</code> not permitted).
+     * @param out  the output stream ({@code null} not permitted).
+     * @param image  the image ({@code null} not permitted).
      *
      * @throws IOException if there are any I/O errors.
      */
@@ -557,9 +557,9 @@ public abstract class ChartUtilities {
     /**
      * Writes a {@link BufferedImage} to an output stream in JPEG format.
      *
-     * @param out  the output stream (<code>null</code> not permitted).
+     * @param out  the output stream ({@code null} not permitted).
      * @param quality  the image quality (0.0f to 1.0f).
-     * @param image  the image (<code>null</code> not permitted).
+     * @param image  the image ({@code null} not permitted).
      *
      * @throws IOException if there are any I/O errors.
      */
@@ -573,8 +573,8 @@ public abstract class ChartUtilities {
     /**
      * Writes a {@link BufferedImage} to an output stream in PNG format.
      *
-     * @param out  the output stream (<code>null</code> not permitted).
-     * @param image  the image (<code>null</code> not permitted).
+     * @param out  the output stream ({@code null} not permitted).
+     * @param image  the image ({@code null} not permitted).
      *
      * @throws IOException if there are any I/O errors.
      */
@@ -588,8 +588,8 @@ public abstract class ChartUtilities {
     /**
      * Writes a {@link BufferedImage} to an output stream in PNG format.
      *
-     * @param out  the output stream (<code>null</code> not permitted).
-     * @param image  the image (<code>null</code> not permitted).
+     * @param out  the output stream ({@code null} not permitted).
+     * @param image  the image ({@code null} not permitted).
      * @param encodeAlpha  encode alpha?
      * @param compression  the compression level (0-9).
      *
@@ -606,7 +606,7 @@ public abstract class ChartUtilities {
     /**
      * Encodes a {@link BufferedImage} to PNG format.
      *
-     * @param image  the image (<code>null</code> not permitted).
+     * @param image  the image ({@code null} not permitted).
      *
      * @return A byte array in PNG format.
      *
@@ -619,7 +619,7 @@ public abstract class ChartUtilities {
     /**
      * Encodes a {@link BufferedImage} to PNG format.
      *
-     * @param image  the image (<code>null</code> not permitted).
+     * @param image  the image ({@code null} not permitted).
      * @param encodeAlpha  encode alpha?
      * @param compression  the PNG compression level (0-9).
      *
@@ -636,9 +636,9 @@ public abstract class ChartUtilities {
     /**
      * Writes an image map to an output stream.
      *
-     * @param writer  the writer (<code>null</code> not permitted).
-     * @param name  the map name (<code>null</code> not permitted).
-     * @param info  the chart rendering info (<code>null</code> not permitted).
+     * @param writer  the writer ({@code null} not permitted).
+     * @param name  the map name ({@code null} not permitted).
+     * @param info  the chart rendering info ({@code null} not permitted).
      * @param useOverLibForToolTips  whether to use OverLIB for tooltips
      *                               (http://www.bosrup.com/web/overlib/).
      *
@@ -666,14 +666,14 @@ public abstract class ChartUtilities {
     /**
      * Writes an image map to the specified writer.
      *
-     * @param writer  the writer (<code>null</code> not permitted).
-     * @param name  the map name (<code>null</code> not permitted).
-     * @param info  the chart rendering info (<code>null</code> not permitted).
+     * @param writer  the writer ({@code null} not permitted).
+     * @param name  the map name ({@code null} not permitted).
+     * @param info  the chart rendering info ({@code null} not permitted).
      * @param toolTipTagFragmentGenerator  a generator for the HTML fragment
-     *     that will contain the tooltip text (<code>null</code> not permitted
+     *     that will contain the tooltip text ({@code null} not permitted
      *     if <code>info</code> contains tooltip information).
      * @param urlTagFragmentGenerator  a generator for the HTML fragment that
-     *     will contain the URL reference (<code>null</code> not permitted if
+     *     will contain the URL reference ({@code null} not permitted if
      *     <code>info</code> contains URLs).
      *
      * @throws IOException if there are any I/O errors.
@@ -694,8 +694,8 @@ public abstract class ChartUtilities {
      * ToolTipTagFragmentGenerator, URLTagFragmentGenerator)}, using default
      * generators.
      *
-     * @param name  the map name (<code>null</code> not permitted).
-     * @param info  the chart rendering info (<code>null</code> not permitted).
+     * @param name  the map name ({@code null} not permitted).
+     * @param info  the chart rendering info ({@code null} not permitted).
      *
      * @return The map tag.
      */
@@ -710,13 +710,13 @@ public abstract class ChartUtilities {
      * {@link ImageMapUtilities#getImageMap(String, ChartRenderingInfo,
      * ToolTipTagFragmentGenerator, URLTagFragmentGenerator)}.
      *
-     * @param name  the map name (<code>null</code> not permitted).
-     * @param info  the chart rendering info (<code>null</code> not permitted).
+     * @param name  the map name ({@code null} not permitted).
+     * @param info  the chart rendering info ({@code null} not permitted).
      * @param toolTipTagFragmentGenerator  a generator for the HTML fragment
-     *     that will contain the tooltip text (<code>null</code> not permitted
+     *     that will contain the tooltip text ({@code null} not permitted
      *     if <code>info</code> contains tooltip information).
      * @param urlTagFragmentGenerator  a generator for the HTML fragment that
-     *     will contain the URL reference (<code>null</code> not permitted if
+     *     will contain the URL reference ({@code null} not permitted if
      *     <code>info</code> contains URLs).
      *
      * @return The map tag.

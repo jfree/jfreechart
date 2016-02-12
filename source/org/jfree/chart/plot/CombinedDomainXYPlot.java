@@ -234,7 +234,7 @@ public class CombinedDomainXYPlot extends XYPlot
      * Sets the orientation for the plot (also changes the orientation for all
      * the subplots to match).
      *
-     * @param orientation  the orientation (<code>null</code> not allowed).
+     * @param orientation  the orientation ({@code null} not allowed).
      */
     @Override
     public void setOrientation(PlotOrientation orientation) {
@@ -248,7 +248,7 @@ public class CombinedDomainXYPlot extends XYPlot
      * Sets the shadow generator for the plot (and all subplots) and sends
      * a {@link PlotChangeEvent} to all registered listeners.
      * 
-     * @param generator  the new generator (<code>null</code> permitted).
+     * @param generator  the new generator ({@code null} permitted).
      */
     @Override
     public void setShadowGenerator(ShadowGenerator generator) {
@@ -271,7 +271,7 @@ public class CombinedDomainXYPlot extends XYPlot
      *
      * @param axis  the axis.
      *
-     * @return The range (possibly <code>null</code>).
+     * @return The range (possibly {@code null}).
      */
     @Override
     public Range getDataRange(ValueAxis axis) {
@@ -289,10 +289,10 @@ public class CombinedDomainXYPlot extends XYPlot
      * Adds a subplot (with a default 'weight' of 1) and sends a
      * {@link PlotChangeEvent} to all registered listeners.
      * <P>
-     * The domain axis for the subplot will be set to <code>null</code>.  You
+     * The domain axis for the subplot will be set to {@code null}.  You
      * must ensure that the subplot has a non-null range axis.
      *
-     * @param subplot  the subplot (<code>null</code> not permitted).
+     * @param subplot  the subplot ({@code null} not permitted).
      */
     public void add(XYPlot subplot) {
         // defer argument checking
@@ -305,10 +305,10 @@ public class CombinedDomainXYPlot extends XYPlot
      * determines how much space is allocated to the subplot relative to all
      * the other subplots.
      * <P>
-     * The domain axis for the subplot will be set to <code>null</code>.  You
+     * The domain axis for the subplot will be set to {@code null}.  You
      * must ensure that the subplot has a non-null range axis.
      *
-     * @param subplot  the subplot (<code>null</code> not permitted).
+     * @param subplot  the subplot ({@code null} not permitted).
      * @param weight  the weight (must be &gt;= 1).
      */
     public void add(XYPlot subplot, int weight) {
@@ -336,7 +336,7 @@ public class CombinedDomainXYPlot extends XYPlot
      * Removes a subplot from the combined chart and sends a
      * {@link PlotChangeEvent} to all registered listeners.
      *
-     * @param subplot  the subplot (<code>null</code> not permitted).
+     * @param subplot  the subplot ({@code null} not permitted).
      */
     public void remove(XYPlot subplot) {
         ParamChecks.nullNotPermitted(subplot, "subplot");
@@ -458,11 +458,11 @@ public class CombinedDomainXYPlot extends XYPlot
      *
      * @param g2  the graphics device.
      * @param area  the plot area (in Java2D space).
-     * @param anchor  an anchor point in Java2D space (<code>null</code>
+     * @param anchor  an anchor point in Java2D space ({@code null}
      *                permitted).
      * @param parentState  the state from the parent plot, if there is one
-     *                     (<code>null</code> permitted).
-     * @param info  collects chart drawing information (<code>null</code>
+     *                     ({@code null} permitted).
+     * @param info  collects chart drawing information ({@code null}
      *              permitted).
      */
     @Override
@@ -539,8 +539,8 @@ public class CombinedDomainXYPlot extends XYPlot
      * Multiplies the range on the range axis/axes by the specified factor.
      *
      * @param factor  the zoom factor.
-     * @param info  the plot rendering info (<code>null</code> not permitted).
-     * @param source  the source point (<code>null</code> not permitted).
+     * @param info  the plot rendering info ({@code null} not permitted).
+     * @param source  the source point ({@code null} not permitted).
      */
     @Override
     public void zoomRangeAxes(double factor, PlotRenderingInfo info,
@@ -577,8 +577,8 @@ public class CombinedDomainXYPlot extends XYPlot
      *
      * @param lowerPercent  the lower bound.
      * @param upperPercent  the upper bound.
-     * @param info  the plot rendering info (<code>null</code> not permitted).
-     * @param source  the source point (<code>null</code> not permitted).
+     * @param info  the plot rendering info ({@code null} not permitted).
+     * @param source  the source point ({@code null} not permitted).
      */
     @Override
     public void zoomRangeAxes(double lowerPercent, double upperPercent,
@@ -632,10 +632,10 @@ public class CombinedDomainXYPlot extends XYPlot
      * Returns the subplot (if any) that contains the (x, y) point (specified
      * in Java2D space).
      *
-     * @param info  the chart rendering info (<code>null</code> not permitted).
-     * @param source  the source point (<code>null</code> not permitted).
+     * @param info  the chart rendering info ({@code null} not permitted).
+     * @param source  the source point ({@code null} not permitted).
      *
-     * @return A subplot (possibly <code>null</code>).
+     * @return A subplot (possibly {@code null}).
      */
     public XYPlot findSubplot(PlotRenderingInfo info, Point2D source) {
         ParamChecks.nullNotPermitted(info, "info");
@@ -671,7 +671,7 @@ public class CombinedDomainXYPlot extends XYPlot
      * Sets the fixed range axis space and sends a {@link PlotChangeEvent} to
      * all registered listeners.
      *
-     * @param space  the space (<code>null</code> permitted).
+     * @param space  the space ({@code null} permitted).
      */
     @Override
     public void setFixedRangeAxisSpace(AxisSpace space) {

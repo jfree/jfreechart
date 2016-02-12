@@ -69,9 +69,9 @@ public class StandardCrosshairLabelGenerator implements CrosshairLabelGenerator,
     /**
      * Creates a new instance with the specified attributes.
      *
-     * @param labelTemplate  the label template (<code>null</code> not
+     * @param labelTemplate  the label template ({@code null} not
      *     permitted).
-     * @param numberFormat  the number formatter (<code>null</code> not
+     * @param numberFormat  the number formatter ({@code null} not
      *     permitted).
      */
     public StandardCrosshairLabelGenerator(String labelTemplate,
@@ -92,7 +92,7 @@ public class StandardCrosshairLabelGenerator implements CrosshairLabelGenerator,
     /**
      * Returns the label template string.
      *
-     * @return The label template string (never <code>null</code>).
+     * @return The label template string (never {@code null}).
      */
     public String getLabelTemplate() {
         return this.labelTemplate;
@@ -101,7 +101,7 @@ public class StandardCrosshairLabelGenerator implements CrosshairLabelGenerator,
     /**
      * Returns the number formatter.
      *
-     * @return The formatter (never <code>null</code>).
+     * @return The formatter (never {@code null}).
      */
     public NumberFormat getNumberFormat() {
         return this.numberFormat;
@@ -110,9 +110,9 @@ public class StandardCrosshairLabelGenerator implements CrosshairLabelGenerator,
     /**
      * Returns a string that can be used as the label for a crosshair.
      *
-     * @param crosshair  the crosshair (<code>null</code> not permitted).
+     * @param crosshair  the crosshair ({@code null} not permitted).
      *
-     * @return The label (possibly <code>null</code>).
+     * @return The label (possibly {@code null}).
      */
     @Override
     public String generateLabel(Crosshair crosshair) {
@@ -125,7 +125,7 @@ public class StandardCrosshairLabelGenerator implements CrosshairLabelGenerator,
     /**
      * Tests this generator for equality with an arbitrary object.
      * 
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      * 
      * @return A boolean.
      */

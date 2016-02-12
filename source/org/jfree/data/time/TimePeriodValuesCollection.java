@@ -102,7 +102,7 @@ public class TimePeriodValuesCollection extends AbstractIntervalXYDataset
      * Constructs a dataset containing a single series.  Additional series can
      * be added.
      *
-     * @param series  the series (<code>null</code> ignored).
+     * @param series  the series ({@code null} ignored).
      */
     public TimePeriodValuesCollection(TimePeriodValues series) {
         this.data = new java.util.ArrayList();
@@ -117,7 +117,7 @@ public class TimePeriodValuesCollection extends AbstractIntervalXYDataset
     /**
      * Returns the position of the X value within each time period.
      *
-     * @return The position (never <code>null</code>).
+     * @return The position (never {@code null}).
      *
      * @see #setXPosition(TimePeriodAnchor)
      */
@@ -128,7 +128,7 @@ public class TimePeriodValuesCollection extends AbstractIntervalXYDataset
     /**
      * Sets the position of the x axis within each time period.
      *
-     * @param position  the position (<code>null</code> not permitted).
+     * @param position  the position ({@code null} not permitted).
      *
      * @see #getXPosition()
      */
@@ -191,7 +191,7 @@ public class TimePeriodValuesCollection extends AbstractIntervalXYDataset
     /**
      * Removes the specified series from the collection.
      *
-     * @param series  the series to remove (<code>null</code> not permitted).
+     * @param series  the series to remove ({@code null} not permitted).
      */
     public void removeSeries(TimePeriodValues series) {
         ParamChecks.nullNotPermitted(series, "series");
@@ -435,7 +435,7 @@ public class TimePeriodValuesCollection extends AbstractIntervalXYDataset
     /**
      * Tests this instance for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

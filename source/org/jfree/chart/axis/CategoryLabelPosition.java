@@ -95,9 +95,9 @@ public class CategoryLabelPosition implements Serializable {
     /**
      * Creates a new category label position record.
      *
-     * @param categoryAnchor  the category anchor (<code>null</code> not
+     * @param categoryAnchor  the category anchor ({@code null} not
      *                        permitted).
-     * @param labelAnchor  the label anchor (<code>null</code> not permitted).
+     * @param labelAnchor  the label anchor ({@code null} not permitted).
      */
     public CategoryLabelPosition(RectangleAnchor categoryAnchor,
                                  TextBlockAnchor labelAnchor) {
@@ -109,10 +109,10 @@ public class CategoryLabelPosition implements Serializable {
     /**
      * Creates a new category label position record.
      *
-     * @param categoryAnchor  the category anchor (<code>null</code> not
+     * @param categoryAnchor  the category anchor ({@code null} not
      *                        permitted).
-     * @param labelAnchor  the label anchor (<code>null</code> not permitted).
-     * @param widthType  the width type (<code>null</code> not permitted).
+     * @param labelAnchor  the label anchor ({@code null} not permitted).
+     * @param widthType  the width type ({@code null} not permitted).
      * @param widthRatio  the maximum label width as a percentage (of the
      *                    category space or the range space).
      */
@@ -130,13 +130,13 @@ public class CategoryLabelPosition implements Serializable {
      * The item label is aligned by aligning the text anchor with the item
      * label anchor.
      *
-     * @param categoryAnchor  the category anchor (<code>null</code> not
+     * @param categoryAnchor  the category anchor ({@code null} not
      *                        permitted).
-     * @param labelAnchor  the label anchor (<code>null</code> not permitted).
-     * @param rotationAnchor  the rotation anchor (<code>null</code> not
+     * @param labelAnchor  the label anchor ({@code null} not permitted).
+     * @param rotationAnchor  the rotation anchor ({@code null} not
      *                        permitted).
-     * @param angle  the rotation angle (<code>null</code> not permitted).
-     * @param widthType  the width type (<code>null</code> not permitted).
+     * @param angle  the rotation angle ({@code null} not permitted).
+     * @param widthType  the width type ({@code null} not permitted).
      * @param widthRatio  the maximum label width as a percentage (of the
      *                    category space or the range space).
      */
@@ -161,7 +161,7 @@ public class CategoryLabelPosition implements Serializable {
     /**
      * Returns the item label anchor.
      *
-     * @return The item label anchor (never <code>null</code>).
+     * @return The item label anchor (never {@code null}).
      */
     public RectangleAnchor getCategoryAnchor() {
         return this.categoryAnchor;
@@ -170,7 +170,7 @@ public class CategoryLabelPosition implements Serializable {
     /**
      * Returns the text block anchor.
      *
-     * @return The text block anchor (never <code>null</code>).
+     * @return The text block anchor (never {@code null}).
      */
     public TextBlockAnchor getLabelAnchor() {
         return this.labelAnchor;
@@ -179,7 +179,7 @@ public class CategoryLabelPosition implements Serializable {
     /**
      * Returns the rotation anchor point.
      *
-     * @return The rotation anchor point (never <code>null</code>).
+     * @return The rotation anchor point (never {@code null}).
      */
     public TextAnchor getRotationAnchor() {
         return this.rotationAnchor;
@@ -197,7 +197,7 @@ public class CategoryLabelPosition implements Serializable {
     /**
      * Returns the width calculation type.
      *
-     * @return The width calculation type (never <code>null</code>).
+     * @return The width calculation type (never {@code null}).
      */
     public CategoryLabelWidthType getWidthType() {
         return this.widthType;
@@ -215,7 +215,7 @@ public class CategoryLabelPosition implements Serializable {
     /**
      * Tests this instance for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

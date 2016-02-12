@@ -127,8 +127,8 @@ public class XYLineAnnotation extends AbstractXYAnnotation
      * @param y1  the y-coordinate for the start of the line.
      * @param x2  the x-coordinate for the end of the line.
      * @param y2  the y-coordinate for the end of the line.
-     * @param stroke  the line stroke (<code>null</code> not permitted).
-     * @param paint  the line color (<code>null</code> not permitted).
+     * @param stroke  the line stroke ({@code null} not permitted).
+     * @param paint  the line color ({@code null} not permitted).
      */
     public XYLineAnnotation(double x1, double y1, double x2, double y2,
                             Stroke stroke, Paint paint) {
@@ -214,7 +214,7 @@ public class XYLineAnnotation extends AbstractXYAnnotation
     /**
      * Tests this object for equality with an arbitrary object.
      *
-     * @param obj  the object to test against (<code>null</code> permitted).
+     * @param obj  the object to test against ({@code null} permitted).
      *
      * @return <code>true</code> or <code>false</code>.
      */

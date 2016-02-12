@@ -93,7 +93,7 @@ public class LogFormat extends NumberFormat {
      * Creates a new instance.
      *
      * @param base  the base.
-     * @param baseLabel  the base label (<code>null</code> not permitted).
+     * @param baseLabel  the base label ({@code null} not permitted).
      * @param showBase  a flag that controls whether or not the base value is
      *                  shown.
      */
@@ -105,8 +105,8 @@ public class LogFormat extends NumberFormat {
      * Creates a new instance.
      *
      * @param base  the base.
-     * @param baseLabel  the base label (<code>null</code> not permitted).
-     * @param powerLabel  the power label (<code>null</code> not permitted).
+     * @param baseLabel  the base label ({@code null} not permitted).
+     * @param powerLabel  the power label ({@code null} not permitted).
      * @param showBase  a flag that controls whether or not the base value is
      *                  shown.
      *
@@ -126,7 +126,7 @@ public class LogFormat extends NumberFormat {
     /**
      * Returns the number format used for the exponent.
      *
-     * @return The number format (never <code>null</code>).
+     * @return The number format (never {@code null}).
      *
      * @since 1.0.13.
      */
@@ -137,7 +137,7 @@ public class LogFormat extends NumberFormat {
     /**
      * Sets the number format used for the exponent.
      *
-     * @param format  the formatter (<code>null</code> not permitted).
+     * @param format  the formatter ({@code null} not permitted).
      *
      * @since 1.0.13
      */
@@ -202,12 +202,12 @@ public class LogFormat extends NumberFormat {
 
     /**
      * Parsing is not implemented, so this method always returns
-     * <code>null</code>.
+     * {@code null}.
      *
      * @param source  ignored.
      * @param parsePosition  ignored.
      *
-     * @return Always <code>null</code>.
+     * @return Always {@code null}.
      */
     @Override
     public Number parse (String source, ParsePosition parsePosition) {
@@ -217,7 +217,7 @@ public class LogFormat extends NumberFormat {
     /**
      * Tests this formatter for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

@@ -270,7 +270,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
     /**
      * Get the composite that is used for filling.
      *
-     * @return The composite (never <code>null</code>).
+     * @return The composite (never {@code null}).
      *
      * @since 1.0.14
      */
@@ -282,7 +282,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * Sets the composite which will be used for filling polygons and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param composite  the composite to use (<code>null</code> not
+     * @param composite  the composite to use ({@code null} not
      *         permitted).
      *
      * @since 1.0.14
@@ -419,7 +419,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
     /**
      * Returns the shape used to represent a line in the legend.
      *
-     * @return The legend line (never <code>null</code>).
+     * @return The legend line (never {@code null}).
      *
      * @see #setLegendLine(Shape)
      */
@@ -431,7 +431,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * Sets the shape used as a line in each legend item and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param line  the line (<code>null</code> not permitted).
+     * @param line  the line ({@code null} not permitted).
      *
      * @see #getLegendLine()
      */
@@ -445,15 +445,15 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * Adds an entity to the collection.
      *
      * @param entities  the entity collection being populated.
-     * @param area  the entity area (if <code>null</code> a default will be
+     * @param area  the entity area (if {@code null} a default will be
      *              used).
      * @param dataset  the dataset.
      * @param series  the series.
      * @param item  the item.
      * @param entityX  the entity's center x-coordinate in user space (only
-     *                 used if <code>area</code> is <code>null</code>).
+     *                 used if <code>area</code> is {@code null}).
      * @param entityY  the entity's center y-coordinate in user space (only
-     *                 used if <code>area</code> is <code>null</code>).
+     *                 used if <code>area</code> is {@code null}).
      */
     protected void addEntity(EntityCollection entities, Shape area,
                              XYDataset dataset, int series, int item,
@@ -594,8 +594,8 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * Draw the angular gridlines - the spokes.
      *
      * @param g2  the drawing surface.
-     * @param plot  the plot (<code>null</code> not permitted).
-     * @param ticks  the ticks (<code>null</code> not permitted).
+     * @param plot  the plot ({@code null} not permitted).
+     * @param ticks  the ticks ({@code null} not permitted).
      * @param dataArea  the data area.
      */
     @Override
@@ -637,10 +637,10 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
     /**
      * Draw the radial gridlines - the rings.
      *
-     * @param g2  the drawing surface (<code>null</code> not permitted).
-     * @param plot  the plot (<code>null</code> not permitted).
-     * @param radialAxis  the radial axis (<code>null</code> not permitted).
-     * @param ticks  the ticks (<code>null</code> not permitted).
+     * @param g2  the drawing surface ({@code null} not permitted).
+     * @param plot  the plot ({@code null} not permitted).
+     * @param radialAxis  the radial axis ({@code null} not permitted).
+     * @param ticks  the ticks ({@code null} not permitted).
      * @param dataArea  the data area.
      */
     @Override
@@ -742,7 +742,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * @param series  the series index.
      * @param item  the item index.
      * 
-     * @return The tooltip generator (possibly <code>null</code>).
+     * @return The tooltip generator (possibly {@code null}).
      * 
      * @since 1.0.14
      */
@@ -759,7 +759,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
     /**
      * Returns the tool tip generator for the specified series.
      * 
-     * @return The tooltip generator (possibly <code>null</code>).
+     * @return The tooltip generator (possibly {@code null}).
      *
      * @since 1.0.14
      */
@@ -772,7 +772,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * Sets the tooltip generator for the specified series.
      * 
      * @param series  the series index.
-     * @param generator  the tool tip generator (<code>null</code> permitted).
+     * @param generator  the tool tip generator ({@code null} permitted).
      * 
      * @since 1.0.14
      */
@@ -786,7 +786,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
     /**
      * Returns the default tool tip generator.
      * 
-     * @return The default tool tip generator (possibly <code>null</code>).
+     * @return The default tool tip generator (possibly {@code null}).
      * 
      * @since 1.0.14
      */
@@ -799,7 +799,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * Sets the default tool tip generator and sends a 
      * {@link RendererChangeEvent} to all registered listeners.
      * 
-     * @param generator  the generator (<code>null</code> permitted).
+     * @param generator  the generator ({@code null} permitted).
      * 
      * @since 1.0.14
      */
@@ -812,7 +812,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
     /**
      * Returns the URL generator.
      * 
-     * @return The URL generator (possibly <code>null</code>).
+     * @return The URL generator (possibly {@code null}).
      * 
      * @since 1.0.14
      */
@@ -824,7 +824,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
     /**
      * Sets the URL generator.
      * 
-     * @param urlGenerator  the generator (<code>null</code> permitted)
+     * @param urlGenerator  the generator ({@code null} permitted)
      * 
      * @since 1.0.14
      */
@@ -837,7 +837,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
     /**
      * Returns the legend item tool tip generator.
      *
-     * @return The tool tip generator (possibly <code>null</code>).
+     * @return The tool tip generator (possibly {@code null}).
      *
      * @see #setLegendItemToolTipGenerator(XYSeriesLabelGenerator)
      * @since 1.0.14
@@ -850,7 +850,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * Sets the legend item tool tip generator and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param generator  the generator (<code>null</code> permitted).
+     * @param generator  the generator ({@code null} permitted).
      *
      * @see #getLegendItemToolTipGenerator()
      * @since 1.0.14
@@ -864,7 +864,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
     /**
      * Returns the legend item URL generator.
      *
-     * @return The URL generator (possibly <code>null</code>).
+     * @return The URL generator (possibly {@code null}).
      *
      * @see #setLegendItemURLGenerator(XYSeriesLabelGenerator)
      * @since 1.0.14
@@ -877,7 +877,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * Sets the legend item URL generator and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param generator  the generator (<code>null</code> permitted).
+     * @param generator  the generator ({@code null} permitted).
      *
      * @see #getLegendItemURLGenerator()
      * @since 1.0.14
@@ -890,7 +890,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
     /**
      * Tests this renderer for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> not permitted).
+     * @param obj  the object ({@code null} not permitted).
      *
      * @return <code>true</code> if this renderer is equal to <code>obj</code>,
      *     and <code>false</code> otherwise.

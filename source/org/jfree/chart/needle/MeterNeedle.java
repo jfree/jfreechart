@@ -110,9 +110,9 @@ public abstract class MeterNeedle implements Serializable {
     /**
      * Creates a new needle.
      *
-     * @param outline  the outline paint (<code>null</code> permitted).
-     * @param fill  the fill paint (<code>null</code> permitted).
-     * @param highlight  the highlight paint (<code>null</code> permitted).
+     * @param outline  the outline paint ({@code null} permitted).
+     * @param fill  the fill paint ({@code null} permitted).
+     * @param highlight  the highlight paint ({@code null} permitted).
      */
     public MeterNeedle(Paint outline, Paint fill, Paint highlight) {
         this.fillPaint = fill;
@@ -348,7 +348,7 @@ public abstract class MeterNeedle implements Serializable {
     /**
      * Tests another object for equality with this object.
      *
-     * @param obj the object to test (<code>null</code> permitted).
+     * @param obj the object to test ({@code null} permitted).
      *
      * @return A boolean.
      */

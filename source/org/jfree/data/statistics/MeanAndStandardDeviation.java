@@ -76,8 +76,8 @@ public class MeanAndStandardDeviation implements Serializable {
     /**
      * Creates a new mean and standard deviation record.
      *
-     * @param mean  the mean (<code>null</code> permitted).
-     * @param standardDeviation  the standard deviation (<code>null</code>
+     * @param mean  the mean ({@code null} permitted).
+     * @param standardDeviation  the standard deviation ({@code null}
      *                           permitted.
      */
     public MeanAndStandardDeviation(Number mean, Number standardDeviation) {
@@ -96,7 +96,7 @@ public class MeanAndStandardDeviation implements Serializable {
 
     /**
      * Returns the mean as a double primitive.  If the underlying mean is
-     * <code>null</code>, this method will return <code>Double.NaN</code>.
+     * {@code null}, this method will return <code>Double.NaN</code>.
      *
      * @return The mean.
      *
@@ -123,7 +123,7 @@ public class MeanAndStandardDeviation implements Serializable {
 
     /**
      * Returns the standard deviation as a double primitive.  If the underlying
-     * standard deviation is <code>null</code>, this method will return
+     * standard deviation is {@code null}, this method will return
      * <code>Double.NaN</code>.
      *
      * @return The standard deviation.
@@ -141,7 +141,7 @@ public class MeanAndStandardDeviation implements Serializable {
     /**
      * Tests this instance for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

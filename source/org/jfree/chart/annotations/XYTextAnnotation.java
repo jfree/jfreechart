@@ -166,7 +166,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * coordinates are specified in data space (they will be converted to
      * Java2D space for display).
      *
-     * @param text  the text (<code>null</code> not permitted).
+     * @param text  the text ({@code null} not permitted).
      * @param x  the x-coordinate (in data space).
      * @param y  the y-coordinate (in data space).
      */
@@ -192,7 +192,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
     /**
      * Returns the text for the annotation.
      *
-     * @return The text (never <code>null</code>).
+     * @return The text (never {@code null}).
      *
      * @see #setText(String)
      */
@@ -203,7 +203,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
     /**
      * Sets the text for the annotation.
      *
-     * @param text  the text (<code>null</code> not permitted).
+     * @param text  the text ({@code null} not permitted).
      *
      * @see #getText()
      */
@@ -216,7 +216,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
     /**
      * Returns the font for the annotation.
      *
-     * @return The font (never <code>null</code>).
+     * @return The font (never {@code null}).
      *
      * @see #setFont(Font)
      */
@@ -228,7 +228,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * Sets the font for the annotation and sends an
      * {@link AnnotationChangeEvent} to all registered listeners.
      *
-     * @param font  the font (<code>null</code> not permitted).
+     * @param font  the font ({@code null} not permitted).
      *
      * @see #getFont()
      */
@@ -241,7 +241,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
     /**
      * Returns the paint for the annotation.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @see #setPaint(Paint)
      */
@@ -253,7 +253,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * Sets the paint for the annotation and sends an
      * {@link AnnotationChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getPaint()
      */
@@ -266,7 +266,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
     /**
      * Returns the text anchor.
      *
-     * @return The text anchor (never <code>null</code>).
+     * @return The text anchor (never {@code null}).
      *
      * @see #setTextAnchor(TextAnchor)
      */
@@ -279,7 +279,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * aligned to the (x, y) coordinate of the annotation) and sends an
      * {@link AnnotationChangeEvent} to all registered listeners.
      *
-     * @param anchor  the anchor point (<code>null</code> not permitted).
+     * @param anchor  the anchor point ({@code null} not permitted).
      *
      * @see #getTextAnchor()
      */
@@ -292,7 +292,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
     /**
      * Returns the rotation anchor.
      *
-     * @return The rotation anchor point (never <code>null</code>).
+     * @return The rotation anchor point (never {@code null}).
      *
      * @see #setRotationAnchor(TextAnchor)
      */
@@ -304,7 +304,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * Sets the rotation anchor point and sends an
      * {@link AnnotationChangeEvent} to all registered listeners.
      *
-     * @param anchor  the anchor (<code>null</code> not permitted).
+     * @param anchor  the anchor ({@code null} not permitted).
      *
      * @see #getRotationAnchor()
      */
@@ -393,7 +393,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
     /**
      * Returns the background paint for the annotation.
      *
-     * @return The background paint (possibly <code>null</code>).
+     * @return The background paint (possibly {@code null}).
      *
      * @see #setBackgroundPaint(Paint)
      *
@@ -407,7 +407,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * Sets the background paint for the annotation and sends an
      * {@link AnnotationChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> permitted).
+     * @param paint  the paint ({@code null} permitted).
      *
      * @see #getBackgroundPaint()
      *
@@ -421,7 +421,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
     /**
      * Returns the outline paint for the annotation.
      *
-     * @return The outline paint (never <code>null</code>).
+     * @return The outline paint (never {@code null}).
      *
      * @see #setOutlinePaint(Paint)
      *
@@ -435,7 +435,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * Sets the outline paint for the annotation and sends an
      * {@link AnnotationChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getOutlinePaint()
      *
@@ -450,7 +450,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
     /**
      * Returns the outline stroke for the annotation.
      *
-     * @return The outline stroke (never <code>null</code>).
+     * @return The outline stroke (never {@code null}).
      *
      * @see #setOutlineStroke(Stroke)
      *
@@ -464,7 +464,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * Sets the outline stroke for the annotation and sends an
      * {@link AnnotationChangeEvent} to all registered listeners.
      *
-     * @param stroke  the stroke (<code>null</code> not permitted).
+     * @param stroke  the stroke ({@code null} not permitted).
      *
      * @see #getOutlineStroke()
      *
@@ -562,7 +562,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
     /**
      * Tests this annotation for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

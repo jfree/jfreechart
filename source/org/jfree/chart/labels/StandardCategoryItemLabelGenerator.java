@@ -75,9 +75,9 @@ public class StandardCategoryItemLabelGenerator
     /**
      * Creates a new generator with the specified number formatter.
      *
-     * @param labelFormat  the label format string (<code>null</code> not
+     * @param labelFormat  the label format string ({@code null} not
      *                     permitted).
-     * @param formatter  the number formatter (<code>null</code> not permitted).
+     * @param formatter  the number formatter ({@code null} not permitted).
      */
     public StandardCategoryItemLabelGenerator(String labelFormat,
                                               NumberFormat formatter) {
@@ -87,10 +87,10 @@ public class StandardCategoryItemLabelGenerator
     /**
      * Creates a new generator with the specified number formatter.
      *
-     * @param labelFormat  the label format string (<code>null</code> not
+     * @param labelFormat  the label format string ({@code null} not
      *                     permitted).
-     * @param formatter  the number formatter (<code>null</code> not permitted).
-     * @param percentFormatter  the percent formatter (<code>null</code> not
+     * @param formatter  the number formatter ({@code null} not permitted).
+     * @param percentFormatter  the percent formatter ({@code null} not
      *     permitted).
      *
      * @since 1.0.2
@@ -103,9 +103,9 @@ public class StandardCategoryItemLabelGenerator
     /**
      * Creates a new generator with the specified date formatter.
      *
-     * @param labelFormat  the label format string (<code>null</code> not
+     * @param labelFormat  the label format string ({@code null} not
      *                     permitted).
-     * @param formatter  the date formatter (<code>null</code> not permitted).
+     * @param formatter  the date formatter ({@code null} not permitted).
      */
     public StandardCategoryItemLabelGenerator(String labelFormat,
                                               DateFormat formatter) {
@@ -117,11 +117,11 @@ public class StandardCategoryItemLabelGenerator
      * dataset implementation, each row is a series, and each column contains
      * values for a particular category.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
      * @param row  the row index (zero-based).
      * @param column  the column index (zero-based).
      *
-     * @return The label (possibly <code>null</code>).
+     * @return The label (possibly {@code null}).
      */
     @Override
     public String generateLabel(CategoryDataset dataset, int row, int column) {
@@ -131,7 +131,7 @@ public class StandardCategoryItemLabelGenerator
     /**
      * Tests this generator for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return <code>true</code> if this generator is equal to
      *     <code>obj</code>, and <code>false</code> otherwise.

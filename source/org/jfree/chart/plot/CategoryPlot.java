@@ -523,7 +523,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     /**
      * A (possibly empty) list of annotations for the plot.  The list should
      * be initialised in the constructor and never allowed to be
-     * <code>null</code>.
+     * {@code null}.
      */
     private List annotations;
 
@@ -554,7 +554,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     private boolean rangePannable;
 
     /**
-     * The shadow generator for the plot (<code>null</code> permitted).
+     * The shadow generator for the plot ({@code null} permitted).
      *
      * @since 1.0.14
      */
@@ -570,10 +570,10 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     /**
      * Creates a new plot.
      *
-     * @param dataset  the dataset (<code>null</code> permitted).
-     * @param domainAxis  the domain axis (<code>null</code> permitted).
-     * @param rangeAxis  the range axis (<code>null</code> permitted).
-     * @param renderer  the item renderer (<code>null</code> permitted).
+     * @param dataset  the dataset ({@code null} permitted).
+     * @param domainAxis  the domain axis ({@code null} permitted).
+     * @param rangeAxis  the range axis ({@code null} permitted).
+     * @param renderer  the item renderer ({@code null} permitted).
      *
      */
     public CategoryPlot(CategoryDataset dataset, CategoryAxis domainAxis,
@@ -680,7 +680,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     /**
      * Returns the orientation of the plot.
      *
-     * @return The orientation of the plot (never <code>null</code>).
+     * @return The orientation of the plot (never {@code null}).
      *
      * @see #setOrientation(PlotOrientation)
      */
@@ -693,7 +693,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * Sets the orientation for the plot and sends a {@link PlotChangeEvent} to
      * all registered listeners.
      *
-     * @param orientation  the orientation (<code>null</code> not permitted).
+     * @param orientation  the orientation ({@code null} not permitted).
      *
      * @see #getOrientation()
      */
@@ -706,7 +706,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     /**
      * Returns the axis offset.
      *
-     * @return The axis offset (never <code>null</code>).
+     * @return The axis offset (never {@code null}).
      *
      * @see #setAxisOffset(RectangleInsets)
      */
@@ -718,7 +718,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * Sets the axis offsets (gap between the data area and the axes) and
      * sends a {@link PlotChangeEvent} to all registered listeners.
      *
-     * @param offset  the offset (<code>null</code> not permitted).
+     * @param offset  the offset ({@code null} not permitted).
      *
      * @see #getAxisOffset()
      */
@@ -730,10 +730,10 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
 
     /**
      * Returns the domain axis for the plot.  If the domain axis for this plot
-     * is <code>null</code>, then the method will return the parent plot's
+     * is {@code null}, then the method will return the parent plot's
      * domain axis (if there is a parent plot).
      *
-     * @return The domain axis (<code>null</code> permitted).
+     * @return The domain axis ({@code null} permitted).
      *
      * @see #setDomainAxis(CategoryAxis)
      */
@@ -746,7 +746,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @param index  the axis index.
      *
-     * @return The axis (<code>null</code> possible).
+     * @return The axis ({@code null} possible).
      *
      * @see #setDomainAxis(int, CategoryAxis)
      */
@@ -766,7 +766,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * Sets the domain axis for the plot and sends a {@link PlotChangeEvent} to
      * all registered listeners.
      *
-     * @param axis  the axis (<code>null</code> permitted).
+     * @param axis  the axis ({@code null} permitted).
      *
      * @see #getDomainAxis()
      */
@@ -779,7 +779,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * registered listeners.
      *
      * @param index  the axis index.
-     * @param axis  the axis (<code>null</code> permitted).
+     * @param axis  the axis ({@code null} permitted).
      *
      * @see #getDomainAxis(int)
      */
@@ -792,7 +792,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * all registered listeners.
      *
      * @param index  the axis index.
-     * @param axis  the axis (<code>null</code> permitted).
+     * @param axis  the axis ({@code null} permitted).
      * @param notify  notify listeners?
      */
     public void setDomainAxis(int index, CategoryAxis axis, boolean notify) {
@@ -817,7 +817,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * Sets the domain axes for this plot and sends a {@link PlotChangeEvent}
      * to all registered listeners.
      *
-     * @param axes  the axes (<code>null</code> not permitted).
+     * @param axes  the axes ({@code null} not permitted).
      *
      * @see #setRangeAxes(ValueAxis[])
      */
@@ -832,7 +832,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * Returns the index of the specified axis, or <code>-1</code> if the axis
      * is not assigned to the plot.
      *
-     * @param axis  the axis (<code>null</code> not permitted).
+     * @param axis  the axis ({@code null} not permitted).
      *
      * @return The axis index.
      *
@@ -854,7 +854,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     /**
      * Returns the domain axis location for the primary domain axis.
      *
-     * @return The location (never <code>null</code>).
+     * @return The location (never {@code null}).
      *
      * @see #getRangeAxisLocation()
      */
@@ -883,7 +883,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * Sets the location of the domain axis and sends a {@link PlotChangeEvent}
      * to all registered listeners.
      *
-     * @param location  the axis location (<code>null</code> not permitted).
+     * @param location  the axis location ({@code null} not permitted).
      *
      * @see #getDomainAxisLocation()
      * @see #setDomainAxisLocation(int, AxisLocation)
@@ -897,7 +897,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * Sets the location of the domain axis and, if requested, sends a
      * {@link PlotChangeEvent} to all registered listeners.
      *
-     * @param location  the axis location (<code>null</code> not permitted).
+     * @param location  the axis location ({@code null} not permitted).
      * @param notify  a flag that controls whether listeners are notified.
      */
     public void setDomainAxisLocation(AxisLocation location, boolean notify) {
@@ -949,7 +949,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * Returns the domain axis edge.  This is derived from the axis location
      * and the plot orientation.
      *
-     * @return The edge (never <code>null</code>).
+     * @return The edge (never {@code null}).
      */
     public RectangleEdge getDomainAxisEdge() {
         return getDomainAxisEdge(0);
@@ -960,7 +960,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @param index  the axis index.
      *
-     * @return The edge (never <code>null</code>).
+     * @return The edge (never {@code null}).
      */
     public RectangleEdge getDomainAxisEdge(int index) {
         RectangleEdge result;
@@ -1012,7 +1012,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * null, then the method will return the parent plot's range axis (if there
      * is a parent plot).
      *
-     * @return The range axis (possibly <code>null</code>).
+     * @return The range axis (possibly {@code null}).
      */
     public ValueAxis getRangeAxis() {
         return getRangeAxis(0);
@@ -1023,7 +1023,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @param index  the axis index.
      *
-     * @return The axis (<code>null</code> possible).
+     * @return The axis ({@code null} possible).
      */
     public ValueAxis getRangeAxis(int index) {
         ValueAxis result = this.rangeAxes.get(index);
@@ -1041,7 +1041,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * Sets the range axis for the plot and sends a {@link PlotChangeEvent} to
      * all registered listeners.
      *
-     * @param axis  the axis (<code>null</code> permitted).
+     * @param axis  the axis ({@code null} permitted).
      */
     public void setRangeAxis(ValueAxis axis) {
         setRangeAxis(0, axis);
@@ -1088,7 +1088,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * Sets the range axes for this plot and sends a {@link PlotChangeEvent}
      * to all registered listeners.
      *
-     * @param axes  the axes (<code>null</code> not permitted).
+     * @param axes  the axes ({@code null} not permitted).
      *
      * @see #setDomainAxes(CategoryAxis[])
      */
@@ -1103,7 +1103,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * Returns the index of the specified axis, or <code>-1</code> if the axis
      * is not assigned to the plot.
      *
-     * @param axis  the axis (<code>null</code> not permitted).
+     * @param axis  the axis ({@code null} not permitted).
      *
      * @return The axis index.
      *
@@ -1137,7 +1137,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     /**
      * Returns the range axis location.
      *
-     * @return The location (never <code>null</code>).
+     * @return The location (never {@code null}).
      */
     public AxisLocation getRangeAxisLocation() {
         return getRangeAxisLocation(0);
@@ -1164,7 +1164,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * Sets the location of the range axis and sends a {@link PlotChangeEvent}
      * to all registered listeners.
      *
-     * @param location  the location (<code>null</code> not permitted).
+     * @param location  the location ({@code null} not permitted).
      *
      * @see #setRangeAxisLocation(AxisLocation, boolean)
      * @see #setDomainAxisLocation(AxisLocation)
@@ -1178,7 +1178,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * Sets the location of the range axis and, if requested, sends a
      * {@link PlotChangeEvent} to all registered listeners.
      *
-     * @param location  the location (<code>null</code> not permitted).
+     * @param location  the location ({@code null} not permitted).
      * @param notify  notify listeners?
      *
      * @see #setDomainAxisLocation(AxisLocation, boolean)
@@ -1227,7 +1227,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     /**
      * Returns the edge where the primary range axis is located.
      *
-     * @return The edge (never <code>null</code>).
+     * @return The edge (never {@code null}).
      */
     public RectangleEdge getRangeAxisEdge() {
         return getRangeAxisEdge(0);
@@ -1282,7 +1282,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     /**
      * Returns the primary dataset for the plot.
      *
-     * @return The primary dataset (possibly <code>null</code>).
+     * @return The primary dataset (possibly {@code null}).
      *
      * @see #setDataset(CategoryDataset)
      */
@@ -1311,7 +1311,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * axis ranges if necessary and sends a {@link PlotChangeEvent} to all
      * registered listeners.
      *
-     * @param dataset  the dataset (<code>null</code> permitted).
+     * @param dataset  the dataset ({@code null} permitted).
      *
      * @see #getDataset()
      */
@@ -1392,7 +1392,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * the first axis in the list.
      *
      * @param index  the dataset index (zero-based).
-     * @param axisIndices  the axis indices (<code>null</code> permitted).
+     * @param axisIndices  the axis indices ({@code null} permitted).
      *
      * @since 1.0.12
      */
@@ -1409,7 +1409,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * axis indices passed to mapDatasetToDomainAxes() and
      * mapDatasetToRangeAxes().
      *
-     * @param indices  the list of indices (<code>null</code> permitted).
+     * @param indices  the list of indices ({@code null} permitted).
      */
     private void checkAxisIndices(List indices) {
         // axisIndices can be:
@@ -1481,7 +1481,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * the first axis in the list.
      *
      * @param index  the dataset index (zero-based).
-     * @param axisIndices  the axis indices (<code>null</code> permitted).
+     * @param axisIndices  the axis indices ({@code null} permitted).
      *
      * @since 1.0.12
      */
@@ -1561,7 +1561,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * Sets the renderer at index 0 (sometimes referred to as the "primary"
      * renderer) and sends a change event to all registered listeners.
      *
-     * @param renderer  the renderer (<code>null</code> permitted.
+     * @param renderer  the renderer ({@code null} permitted.
      *
      * @see #getRenderer()
      */
@@ -1574,14 +1574,14 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * renderer) and, if requested, sends a change event to all registered 
      * listeners.
      * <p>
-     * You can set the renderer to <code>null</code>, but this is not
+     * You can set the renderer to {@code null}, but this is not
      * recommended because:
      * <ul>
      *   <li>no data will be displayed;</li>
      *   <li>the plot background will not be painted;</li>
      * </ul>
      *
-     * @param renderer  the renderer (<code>null</code> permitted).
+     * @param renderer  the renderer ({@code null} permitted).
      * @param notify  notify listeners?
      *
      * @see #getRenderer()
@@ -1597,7 +1597,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * for multiple datasets.
      *
      * @param index  the index.
-     * @param renderer  the renderer (<code>null</code> permitted).
+     * @param renderer  the renderer ({@code null} permitted).
      *
      * @see #getRenderer(int)
      * @see #setRenderer(int, CategoryItemRenderer, boolean)
@@ -1613,7 +1613,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * renderer for multiple datasets.
      *
      * @param index  the index.
-     * @param renderer  the renderer (<code>null</code> permitted).
+     * @param renderer  the renderer ({@code null} permitted).
      * @param notify  notify listeners?
      *
      * @see #getRenderer(int)
@@ -1651,11 +1651,11 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
 
     /**
      * Returns the renderer for the specified dataset.  If the dataset doesn't
-     * belong to the plot, this method will return <code>null</code>.
+     * belong to the plot, this method will return {@code null}.
      *
-     * @param dataset  the dataset (<code>null</code> permitted).
+     * @param dataset  the dataset ({@code null} permitted).
      *
-     * @return The renderer (possibly <code>null</code>).
+     * @return The renderer (possibly {@code null}).
      */
     public CategoryItemRenderer getRendererForDataset(CategoryDataset dataset) {
         int datasetIndex = indexOf(dataset);
@@ -1673,7 +1673,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * Returns the index of the specified renderer, or <code>-1</code> if the
      * renderer is not assigned to this plot.
      *
-     * @param renderer  the renderer (<code>null</code> permitted).
+     * @param renderer  the renderer ({@code null} permitted).
      *
      * @return The renderer index.
      */
@@ -1690,7 +1690,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     /**
      * Returns the dataset rendering order.
      *
-     * @return The order (never <code>null</code>).
+     * @return The order (never {@code null}).
      *
      * @see #setDatasetRenderingOrder(DatasetRenderingOrder)
      */
@@ -1704,7 +1704,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * last (so that the primary dataset overlays the secondary datasets).  You
      * can reverse this if you want to.
      *
-     * @param order  the rendering order (<code>null</code> not permitted).
+     * @param order  the rendering order ({@code null} not permitted).
      *
      * @see #getDatasetRenderingOrder()
      */
@@ -1718,7 +1718,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * Returns the order in which the columns are rendered.  The default value
      * is <code>SortOrder.ASCENDING</code>.
      *
-     * @return The column rendering order (never <code>null</code>).
+     * @return The column rendering order (never {@code null}).
      *
      * @see #setColumnRenderingOrder(SortOrder)
      */
@@ -1732,7 +1732,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * listeners.  Note that this affects the order in which items are drawn,
      * NOT their position in the chart.
      *
-     * @param order  the order (<code>null</code> not permitted).
+     * @param order  the order ({@code null} not permitted).
      *
      * @see #getColumnRenderingOrder()
      * @see #setRowRenderingOrder(SortOrder)
@@ -1747,7 +1747,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * Returns the order in which the rows should be rendered.  The default
      * value is <code>SortOrder.ASCENDING</code>.
      *
-     * @return The order (never <code>null</code>).
+     * @return The order (never {@code null}).
      *
      * @see #setRowRenderingOrder(SortOrder)
      */
@@ -1761,7 +1761,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * listeners.  Note that this affects the order in which items are drawn,
      * NOT their position in the chart.
      *
-     * @param order  the order (<code>null</code> not permitted).
+     * @param order  the order ({@code null} not permitted).
      *
      * @see #getRowRenderingOrder()
      * @see #setColumnRenderingOrder(SortOrder)
@@ -1804,7 +1804,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     /**
      * Returns the position used for the domain gridlines.
      *
-     * @return The gridline position (never <code>null</code>).
+     * @return The gridline position (never {@code null}).
      *
      * @see #setDomainGridlinePosition(CategoryAnchor)
      */
@@ -1816,7 +1816,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * Sets the position used for the domain gridlines and sends a
      * {@link PlotChangeEvent} to all registered listeners.
      *
-     * @param position  the position (<code>null</code> not permitted).
+     * @param position  the position ({@code null} not permitted).
      *
      * @see #getDomainGridlinePosition()
      */
@@ -1829,7 +1829,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     /**
      * Returns the stroke used to draw grid-lines against the domain axis.
      *
-     * @return The stroke (never <code>null</code>).
+     * @return The stroke (never {@code null}).
      *
      * @see #setDomainGridlineStroke(Stroke)
      */
@@ -1841,7 +1841,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * Sets the stroke used to draw grid-lines against the domain axis and
      * sends a {@link PlotChangeEvent} to all registered listeners.
      *
-     * @param stroke  the stroke (<code>null</code> not permitted).
+     * @param stroke  the stroke ({@code null} not permitted).
      *
      * @see #getDomainGridlineStroke()
      */
@@ -1854,7 +1854,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     /**
      * Returns the paint used to draw grid-lines against the domain axis.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @see #setDomainGridlinePaint(Paint)
      */
@@ -1866,7 +1866,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * Sets the paint used to draw the grid-lines (if any) against the domain
      * axis and sends a {@link PlotChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getDomainGridlinePaint()
      */
@@ -1909,7 +1909,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     /**
      * Returns the stroke used for the zero baseline against the range axis.
      *
-     * @return The stroke (never <code>null</code>).
+     * @return The stroke (never {@code null}).
      *
      * @see #setRangeZeroBaselineStroke(Stroke)
      *
@@ -1923,7 +1923,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * Sets the stroke for the zero baseline for the range axis,
      * and sends a {@link PlotChangeEvent} to all registered listeners.
      *
-     * @param stroke  the stroke (<code>null</code> not permitted).
+     * @param stroke  the stroke ({@code null} not permitted).
      *
      * @see #getRangeZeroBaselineStroke()
      *
@@ -1939,7 +1939,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * Returns the paint for the zero baseline (if any) plotted against the
      * range axis.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @see #setRangeZeroBaselinePaint(Paint)
      *
@@ -1953,7 +1953,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * Sets the paint for the zero baseline plotted against the range axis and
      * sends a {@link PlotChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getRangeZeroBaselinePaint()
      *
@@ -1995,7 +1995,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     /**
      * Returns the stroke used to draw the grid-lines against the range axis.
      *
-     * @return The stroke (never <code>null</code>).
+     * @return The stroke (never {@code null}).
      *
      * @see #setRangeGridlineStroke(Stroke)
      */
@@ -2007,7 +2007,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * Sets the stroke used to draw the grid-lines against the range axis and
      * sends a {@link PlotChangeEvent} to all registered listeners.
      *
-     * @param stroke  the stroke (<code>null</code> not permitted).
+     * @param stroke  the stroke ({@code null} not permitted).
      *
      * @see #getRangeGridlineStroke()
      */
@@ -2020,7 +2020,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     /**
      * Returns the paint used to draw the grid-lines against the range axis.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @see #setRangeGridlinePaint(Paint)
      */
@@ -2032,7 +2032,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * Sets the paint used to draw the grid lines against the range axis and
      * sends a {@link PlotChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getRangeGridlinePaint()
      */
@@ -2080,7 +2080,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * Returns the stroke for the minor grid lines (if any) plotted against the
      * range axis.
      *
-     * @return The stroke (never <code>null</code>).
+     * @return The stroke (never {@code null}).
      *
      * @see #setRangeMinorGridlineStroke(Stroke)
      *
@@ -2094,7 +2094,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * Sets the stroke for the minor grid lines plotted against the range axis,
      * and sends a {@link PlotChangeEvent} to all registered listeners.
      *
-     * @param stroke  the stroke (<code>null</code> not permitted).
+     * @param stroke  the stroke ({@code null} not permitted).
      *
      * @see #getRangeMinorGridlineStroke()
      *
@@ -2110,7 +2110,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * Returns the paint for the minor grid lines (if any) plotted against the
      * range axis.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @see #setRangeMinorGridlinePaint(Paint)
      *
@@ -2124,7 +2124,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * Sets the paint for the minor grid lines plotted against the range axis
      * and sends a {@link PlotChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getRangeMinorGridlinePaint()
      *
@@ -2139,7 +2139,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     /**
      * Returns the fixed legend items, if any.
      *
-     * @return The legend items (possibly <code>null</code>).
+     * @return The legend items (possibly {@code null}).
      *
      * @see #setFixedLegendItems(LegendItemCollection)
      */
@@ -2149,10 +2149,10 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
 
     /**
      * Sets the fixed legend items for the plot.  Leave this set to
-     * <code>null</code> if you prefer the legend items to be created
+     * {@code null} if you prefer the legend items to be created
      * automatically.
      *
-     * @param items  the legend items (<code>null</code> permitted).
+     * @param items  the legend items ({@code null} permitted).
      *
      * @see #getFixedLegendItems()
      */
@@ -2312,7 +2312,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * marker will be drawn by the renderer as a line perpendicular to the
      * domain axis, however this is entirely up to the renderer.
      *
-     * @param marker  the marker (<code>null</code> not permitted).
+     * @param marker  the marker ({@code null} not permitted).
      *
      * @see #removeDomainMarker(Marker)
      */
@@ -2326,8 +2326,8 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * will be drawn by the renderer as a line perpendicular to the domain
      * axis, however this is entirely up to the renderer.
      *
-     * @param marker  the marker (<code>null</code> not permitted).
-     * @param layer  the layer (foreground or background) (<code>null</code>
+     * @param marker  the marker ({@code null} not permitted).
+     * @param layer  the layer (foreground or background) ({@code null}
      *               not permitted).
      *
      * @see #removeDomainMarker(Marker, Layer)
@@ -2344,8 +2344,8 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * to a domain axis, however this is entirely up to the renderer.
      *
      * @param index  the renderer index.
-     * @param marker  the marker (<code>null</code> not permitted).
-     * @param layer  the layer (<code>null</code> not permitted).
+     * @param marker  the marker ({@code null} not permitted).
+     * @param layer  the layer ({@code null} not permitted).
      *
      * @see #removeDomainMarker(int, Marker, Layer)
      */
@@ -2361,8 +2361,8 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * to a domain axis, however this is entirely up to the renderer.
      *
      * @param index  the renderer index.
-     * @param marker  the marker (<code>null</code> not permitted).
-     * @param layer  the layer (<code>null</code> not permitted).
+     * @param marker  the marker ({@code null} not permitted).
+     * @param layer  the layer ({@code null} not permitted).
      * @param notify  notify listeners?
      *
      * @since 1.0.10
@@ -2443,7 +2443,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @param index  the renderer index.
      * @param layer  the layer.
      *
-     * @return A collection of markers (possibly <code>null</code>).
+     * @return A collection of markers (possibly {@code null}).
      */
     public Collection getDomainMarkers(int index, Layer layer) {
         Collection result = null;
@@ -2515,7 +2515,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * Removes a marker for the domain axis in the specified layer and sends a
      * {@link PlotChangeEvent} to all registered listeners.
      *
-     * @param marker the marker (<code>null</code> not permitted).
+     * @param marker the marker ({@code null} not permitted).
      * @param layer the layer (foreground or background).
      *
      * @return A boolean indicating whether or not the marker was actually
@@ -2584,7 +2584,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * marker will be drawn by the renderer as a line perpendicular to the
      * range axis, however this is entirely up to the renderer.
      *
-     * @param marker  the marker (<code>null</code> not permitted).
+     * @param marker  the marker ({@code null} not permitted).
      *
      * @see #removeRangeMarker(Marker)
      */
@@ -2598,8 +2598,8 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * will be drawn by the renderer as a line perpendicular to the range axis,
      * however this is entirely up to the renderer.
      *
-     * @param marker  the marker (<code>null</code> not permitted).
-     * @param layer  the layer (foreground or background) (<code>null</code>
+     * @param marker  the marker ({@code null} not permitted).
+     * @param layer  the layer (foreground or background) ({@code null}
      *               not permitted).
      *
      * @see #removeRangeMarker(Marker, Layer)
@@ -2715,7 +2715,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @param index  the renderer index.
      * @param layer  the layer.
      *
-     * @return A collection of markers (possibly <code>null</code>).
+     * @return A collection of markers (possibly {@code null}).
      */
     public Collection getRangeMarkers(int index, Layer layer) {
         Collection result = null;
@@ -2789,7 +2789,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * Removes a marker for the range axis in the specified layer and sends a
      * {@link PlotChangeEvent} to all registered listeners.
      *
-     * @param marker the marker (<code>null</code> not permitted).
+     * @param marker the marker ({@code null} not permitted).
      * @param layer the layer (foreground or background).
      *
      * @return A boolean indicating whether or not the marker was actually
@@ -3012,7 +3012,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     /**
      * Returns the paint used to draw the domain crosshair.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @since 1.0.11
      *
@@ -3026,7 +3026,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     /**
      * Sets the paint used to draw the domain crosshair.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @since 1.0.11
      *
@@ -3041,7 +3041,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     /**
      * Returns the stroke used to draw the domain crosshair.
      *
-     * @return The stroke (never <code>null</code>).
+     * @return The stroke (never {@code null}).
      *
      * @since 1.0.11
      *
@@ -3056,7 +3056,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * Sets the stroke used to draw the domain crosshair, and sends a
      * {@link PlotChangeEvent} to all registered listeners.
      *
-     * @param stroke  the stroke (<code>null</code> not permitted).
+     * @param stroke  the stroke ({@code null} not permitted).
      *
      * @since 1.0.11
      *
@@ -3165,7 +3165,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * Returns the pen-style (<code>Stroke</code>) used to draw the crosshair
      * (if visible).
      *
-     * @return The crosshair stroke (never <code>null</code>).
+     * @return The crosshair stroke (never {@code null}).
      *
      * @see #setRangeCrosshairStroke(Stroke)
      * @see #isRangeCrosshairVisible()
@@ -3180,7 +3180,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * crosshair (if visible), and sends a {@link PlotChangeEvent} to all
      * registered listeners.
      *
-     * @param stroke  the new crosshair stroke (<code>null</code> not
+     * @param stroke  the new crosshair stroke ({@code null} not
      *         permitted).
      *
      * @see #getRangeCrosshairStroke()
@@ -3194,7 +3194,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     /**
      * Returns the paint used to draw the range crosshair.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @see #setRangeCrosshairPaint(Paint)
      * @see #isRangeCrosshairVisible()
@@ -3208,7 +3208,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * Sets the paint used to draw the range crosshair (if visible) and
      * sends a {@link PlotChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getRangeCrosshairPaint()
      */
@@ -3221,7 +3221,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     /**
      * Returns the list of annotations.
      *
-     * @return The list of annotations (never <code>null</code>).
+     * @return The list of annotations (never {@code null}).
      *
      * @see #addAnnotation(CategoryAnnotation)
      * @see #clearAnnotations()
@@ -3234,7 +3234,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * Adds an annotation to the plot and sends a {@link PlotChangeEvent} to all
      * registered listeners.
      *
-     * @param annotation  the annotation (<code>null</code> not permitted).
+     * @param annotation  the annotation ({@code null} not permitted).
      *
      * @see #removeAnnotation(CategoryAnnotation)
      */
@@ -3246,7 +3246,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * Adds an annotation to the plot and, if requested, sends a
      * {@link PlotChangeEvent} to all registered listeners.
      *
-     * @param annotation  the annotation (<code>null</code> not permitted).
+     * @param annotation  the annotation ({@code null} not permitted).
      * @param notify  notify listeners?
      *
      * @since 1.0.10
@@ -3264,7 +3264,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * Removes an annotation from the plot and sends a {@link PlotChangeEvent}
      * to all registered listeners.
      *
-     * @param annotation  the annotation (<code>null</code> not permitted).
+     * @param annotation  the annotation ({@code null} not permitted).
      *
      * @return A boolean (indicates whether or not the annotation was removed).
      *
@@ -3278,7 +3278,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * Removes an annotation from the plot and, if requested, sends a
      * {@link PlotChangeEvent} to all registered listeners.
      *
-     * @param annotation  the annotation (<code>null</code> not permitted).
+     * @param annotation  the annotation ({@code null} not permitted).
      * @param notify  notify listeners?
      *
      * @return A boolean (indicates whether or not the annotation was removed).
@@ -3313,7 +3313,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     /**
      * Returns the shadow generator for the plot, if any.
      *
-     * @return The shadow generator (possibly <code>null</code>).
+     * @return The shadow generator (possibly {@code null}).
      *
      * @since 1.0.14
      */
@@ -3325,7 +3325,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * Sets the shadow generator for the plot and sends a
      * {@link PlotChangeEvent} to all registered listeners.
      *
-     * @param generator  the generator (<code>null</code> permitted).
+     * @param generator  the generator ({@code null} permitted).
      *
      * @since 1.0.14
      */
@@ -3339,7 +3339,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @param g2  the graphics device.
      * @param plotArea  the plot area.
-     * @param space  a carrier for the result (<code>null</code> permitted).
+     * @param space  a carrier for the result ({@code null} permitted).
      *
      * @return The required space.
      */
@@ -3392,7 +3392,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @param g2  the graphics device.
      * @param plotArea  the plot area.
-     * @param space  a carrier for the result (<code>null</code> permitted).
+     * @param space  a carrier for the result ({@code null} permitted).
      *
      * @return The required space.
      */
@@ -3472,10 +3472,10 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @param g2  the graphics device.
      * @param area  the area within which the plot (including axes) should
      *              be drawn.
-     * @param anchor  the anchor point (<code>null</code> permitted).
+     * @param anchor  the anchor point ({@code null} permitted).
      * @param parentState  the state from the parent plot, if there is one.
      * @param state  collects info as the chart is drawn (possibly
-     *               <code>null</code>).
+     *               {@code null}).
      */
     @Override
     public void draw(Graphics2D g2, Rectangle2D area, Point2D anchor,
@@ -3757,7 +3757,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @param g2  the graphics device.
      * @param plotArea  the plot area.
      * @param dataArea  the data area.
-     * @param plotState  collects information about the plot (<code>null</code>
+     * @param plotState  collects information about the plot ({@code null}
      *                   permitted).
      *
      * @return A map containing the axis states.
@@ -3854,7 +3854,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @param index  the dataset and renderer index.
      * @param info  an optional object for collection dimension information.
      * @param crosshairState  a state object for tracking crosshair info
-     *        (<code>null</code> permitted).
+     *        ({@code null} permitted).
      *
      * @return A boolean that indicates whether or not real data was found.
      *
@@ -4133,8 +4133,8 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @param g2  the graphics device.
      * @param dataArea  the area defined by the axes.
      * @param value  the data value.
-     * @param stroke  the line stroke (<code>null</code> not permitted).
-     * @param paint  the line paint (<code>null</code> not permitted).
+     * @param stroke  the line stroke ({@code null} not permitted).
+     * @param paint  the line paint ({@code null} not permitted).
      */
     protected void drawRangeLine(Graphics2D g2, Rectangle2D dataArea,
             double value, Stroke stroke, Paint paint) {
@@ -4244,8 +4244,8 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
 
     /**
      * Returns the range of data values that will be plotted against the range
-     * axis.  If the dataset is <code>null</code>, this method returns
-     * <code>null</code>.
+     * axis.  If the dataset is {@code null}, this method returns
+     * {@code null}.
      *
      * @param axis  the axis.
      *
@@ -4280,7 +4280,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @param axisIndex  the axis index.
      *
-     * @return The list (possibly empty, but never <code>null</code>).
+     * @return The list (possibly empty, but never {@code null}).
      *
      * @since 1.0.3
      */
@@ -4363,7 +4363,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     /**
      * Returns the fixed domain axis space.
      *
-     * @return The fixed domain axis space (possibly <code>null</code>).
+     * @return The fixed domain axis space (possibly {@code null}).
      *
      * @see #setFixedDomainAxisSpace(AxisSpace)
      */
@@ -4375,7 +4375,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * Sets the fixed domain axis space and sends a {@link PlotChangeEvent} to
      * all registered listeners.
      *
-     * @param space  the space (<code>null</code> permitted).
+     * @param space  the space ({@code null} permitted).
      *
      * @see #getFixedDomainAxisSpace()
      */
@@ -4387,7 +4387,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * Sets the fixed domain axis space and sends a {@link PlotChangeEvent} to
      * all registered listeners.
      *
-     * @param space  the space (<code>null</code> permitted).
+     * @param space  the space ({@code null} permitted).
      * @param notify  notify listeners?
      *
      * @see #getFixedDomainAxisSpace()
@@ -4404,7 +4404,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     /**
      * Returns the fixed range axis space.
      *
-     * @return The fixed range axis space (possibly <code>null</code>).
+     * @return The fixed range axis space (possibly {@code null}).
      *
      * @see #setFixedRangeAxisSpace(AxisSpace)
      */
@@ -4416,7 +4416,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * Sets the fixed range axis space and sends a {@link PlotChangeEvent} to
      * all registered listeners.
      *
-     * @param space  the space (<code>null</code> permitted).
+     * @param space  the space ({@code null} permitted).
      *
      * @see #getFixedRangeAxisSpace()
      */
@@ -4428,7 +4428,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * Sets the fixed range axis space and sends a {@link PlotChangeEvent} to
      * all registered listeners.
      *
-     * @param space  the space (<code>null</code> permitted).
+     * @param space  the space ({@code null} permitted).
      * @param notify  notify listeners?
      *
      * @see #getFixedRangeAxisSpace()
@@ -4461,7 +4461,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * Returns a list of the categories that should be displayed for the
      * specified axis.
      *
-     * @param axis  the axis (<code>null</code> not permitted)
+     * @param axis  the axis ({@code null} not permitted)
      *
      * @return The categories.
      *
@@ -4780,7 +4780,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     /**
      * Tests the plot for equality with an arbitrary object.
      *
-     * @param obj  the object to test against (<code>null</code> permitted).
+     * @param obj  the object to test against ({@code null} permitted).
      *
      * @return A boolean.
      */

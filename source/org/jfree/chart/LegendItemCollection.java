@@ -81,7 +81,7 @@ public class LegendItemCollection implements Cloneable, Serializable {
     /**
      * Adds the legend items from another collection to this collection.
      *
-     * @param collection  the other collection (<code>null</code> not
+     * @param collection  the other collection ({@code null} not
      *     permitted).
      */
     public void addAll(LegendItemCollection collection) {
@@ -120,7 +120,7 @@ public class LegendItemCollection implements Cloneable, Serializable {
     /**
      * Tests this collection for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

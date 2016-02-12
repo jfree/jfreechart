@@ -100,9 +100,9 @@ public abstract class AbstractCategoryItemLabelGenerator
     /**
      * Creates a label generator with the specified number formatter.
      *
-     * @param labelFormat  the label format string (<code>null</code> not
+     * @param labelFormat  the label format string ({@code null} not
      *                     permitted).
-     * @param formatter  the number formatter (<code>null</code> not permitted).
+     * @param formatter  the number formatter ({@code null} not permitted).
      */
     protected AbstractCategoryItemLabelGenerator(String labelFormat,
                                                  NumberFormat formatter) {
@@ -112,10 +112,10 @@ public abstract class AbstractCategoryItemLabelGenerator
     /**
      * Creates a label generator with the specified number formatter.
      *
-     * @param labelFormat  the label format string (<code>null</code> not
+     * @param labelFormat  the label format string ({@code null} not
      *                     permitted).
-     * @param formatter  the number formatter (<code>null</code> not permitted).
-     * @param percentFormatter  the percent formatter (<code>null</code> not
+     * @param formatter  the number formatter ({@code null} not permitted).
+     * @param percentFormatter  the percent formatter ({@code null} not
      *     permitted).
      *
      * @since 1.0.2
@@ -135,9 +135,9 @@ public abstract class AbstractCategoryItemLabelGenerator
     /**
      * Creates a label generator with the specified date formatter.
      *
-     * @param labelFormat  the label format string (<code>null</code> not
+     * @param labelFormat  the label format string ({@code null} not
      *                     permitted).
-     * @param formatter  the date formatter (<code>null</code> not permitted).
+     * @param formatter  the date formatter ({@code null} not permitted).
      */
     protected AbstractCategoryItemLabelGenerator(String labelFormat,
             DateFormat formatter) {
@@ -153,7 +153,7 @@ public abstract class AbstractCategoryItemLabelGenerator
     /**
      * Generates a label for the specified row.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
      * @param row  the row index (zero-based).
      *
      * @return The label.
@@ -165,7 +165,7 @@ public abstract class AbstractCategoryItemLabelGenerator
     /**
      * Generates a label for the specified row.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
      * @param column  the column index (zero-based).
      *
      * @return The label.
@@ -177,7 +177,7 @@ public abstract class AbstractCategoryItemLabelGenerator
     /**
      * Returns the label format string.
      *
-     * @return The label format string (never <code>null</code>).
+     * @return The label format string (never {@code null}).
      */
     public String getLabelFormat() {
         return this.labelFormat;
@@ -186,7 +186,7 @@ public abstract class AbstractCategoryItemLabelGenerator
     /**
      * Returns the number formatter.
      *
-     * @return The number formatter (possibly <code>null</code>).
+     * @return The number formatter (possibly {@code null}).
      */
     public NumberFormat getNumberFormat() {
         return this.numberFormat;
@@ -195,7 +195,7 @@ public abstract class AbstractCategoryItemLabelGenerator
     /**
      * Returns the date formatter.
      *
-     * @return The date formatter (possibly <code>null</code>).
+     * @return The date formatter (possibly {@code null}).
      */
     public DateFormat getDateFormat() {
         return this.dateFormat;
@@ -204,11 +204,11 @@ public abstract class AbstractCategoryItemLabelGenerator
     /**
      * Generates a for the specified item.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
      * @param row  the row index (zero-based).
      * @param column  the column index (zero-based).
      *
-     * @return The label (possibly <code>null</code>).
+     * @return The label (possibly {@code null}).
      */
     protected String generateLabelString(CategoryDataset dataset,
                                          int row, int column) {
@@ -224,11 +224,11 @@ public abstract class AbstractCategoryItemLabelGenerator
      * Creates the array of items that can be passed to the
      * {@link MessageFormat} class for creating labels.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
      * @param row  the row index (zero-based).
      * @param column  the column index (zero-based).
      *
-     * @return The items (never <code>null</code>).
+     * @return The items (never {@code null}).
      */
     protected Object[] createItemArray(CategoryDataset dataset,
                                        int row, int column) {
@@ -259,7 +259,7 @@ public abstract class AbstractCategoryItemLabelGenerator
     /**
      * Tests this object for equality with an arbitrary object.
      *
-     * @param obj  the other object (<code>null</code> permitted).
+     * @param obj  the other object ({@code null} permitted).
      *
      * @return A boolean.
      */

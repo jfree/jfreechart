@@ -82,7 +82,7 @@ public class GridArrangement implements Arrangement, Serializable {
      * an opportunity to record the details if they are required.
      *
      * @param block  the block.
-     * @param key  the key (<code>null</code> permitted).
+     * @param key  the key ({@code null} permitted).
      */
     @Override
     public void add(Block block, Object key) {
@@ -93,7 +93,7 @@ public class GridArrangement implements Arrangement, Serializable {
      * Arranges the blocks within the specified container, subject to the given
      * constraint.
      *
-     * @param container  the container (<code>null</code> not permitted).
+     * @param container  the container ({@code null} not permitted).
      * @param constraint  the constraint.
      * @param g2  the graphics device.
      *
@@ -149,7 +149,7 @@ public class GridArrangement implements Arrangement, Serializable {
     /**
      * Arranges the container with no constraint on the width or height.
      *
-     * @param container  the container (<code>null</code> not permitted).
+     * @param container  the container ({@code null} not permitted).
      * @param g2  the graphics device.
      *
      * @return The size.
@@ -176,9 +176,9 @@ public class GridArrangement implements Arrangement, Serializable {
     /**
      * Arranges the container with a fixed overall width and height.
      *
-     * @param container  the container (<code>null</code> not permitted).
+     * @param container  the container ({@code null} not permitted).
      * @param g2  the graphics device.
-     * @param constraint  the constraint (<code>null</code> not permitted).
+     * @param constraint  the constraint ({@code null} not permitted).
      *
      * @return The size following the arrangement.
      */

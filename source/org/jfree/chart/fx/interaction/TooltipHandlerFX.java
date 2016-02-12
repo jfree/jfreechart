@@ -61,7 +61,7 @@ public class TooltipHandlerFX extends AbstractMouseHandlerFX
     /**
      * Creates a new instance with the specified ID.
      * 
-     * @param id  the handler id (<code>null</code> not permitted).
+     * @param id  the handler id ({@code null} not permitted).
      */
     public TooltipHandlerFX(String id) {
         super(id, false, false, false, false);
@@ -70,7 +70,7 @@ public class TooltipHandlerFX extends AbstractMouseHandlerFX
     /**
      * Handles a mouse moved event by updating the tooltip.
      * 
-     * @param canvas  the chart canvas (<code>null</code> not permitted).
+     * @param canvas  the chart canvas ({@code null} not permitted).
      * @param e  the mouse event.
      */
     @Override
@@ -89,7 +89,7 @@ public class TooltipHandlerFX extends AbstractMouseHandlerFX
      * @param x  the x-coordinate of the mouse pointer.
      * @param y  the y-coordinate of the mouse pointer.
      * 
-     * @return String The tooltip text (possibly <code>null</code>).
+     * @return String The tooltip text (possibly {@code null}).
       */
     private String getTooltipText(ChartCanvas canvas, double x, double y) {
         ChartRenderingInfo info = canvas.getRenderingInfo();

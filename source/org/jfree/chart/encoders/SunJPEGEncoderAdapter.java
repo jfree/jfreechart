@@ -132,14 +132,14 @@ public class SunJPEGEncoderAdapter implements ImageEncoder {
     /**
      * Encodes an image in JPEG format.
      *
-     * @param bufferedImage  the image to be encoded (<code>null</code> not
+     * @param bufferedImage  the image to be encoded ({@code null} not
      *     permitted).
      *
      * @return The byte[] that is the encoded image.
      *
      * @throws IOException if there is an I/O problem.
      * @throws NullPointerException if <code>bufferedImage</code> is
-     *     <code>null</code>.
+     *     {@code null}.
      */
     @Override
     public byte[] encode(BufferedImage bufferedImage) throws IOException {
@@ -151,14 +151,14 @@ public class SunJPEGEncoderAdapter implements ImageEncoder {
     /**
      * Encodes an image in JPEG format and writes it to an output stream.
      *
-     * @param bufferedImage  the image to be encoded (<code>null</code> not
+     * @param bufferedImage  the image to be encoded ({@code null} not
      *     permitted).
      * @param outputStream  the OutputStream to write the encoded image to
-     *     (<code>null</code> not permitted).
+     *     ({@code null} not permitted).
      *
      * @throws IOException if there is an I/O problem.
      * @throws NullPointerException if <code>bufferedImage</code> is
-     *     <code>null</code>.
+     *     {@code null}.
      */
     @Override
     public void encode(BufferedImage bufferedImage, OutputStream outputStream)

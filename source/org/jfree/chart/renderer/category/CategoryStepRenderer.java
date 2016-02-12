@@ -96,7 +96,7 @@ public class CategoryStepRenderer extends AbstractCategoryItemRenderer
         /**
          * Creates a new state instance.
          *
-         * @param info  collects plot rendering information (<code>null</code>
+         * @param info  collects plot rendering information ({@code null}
          *              permitted).
          */
         public State(PlotRenderingInfo info) {
@@ -215,7 +215,7 @@ public class CategoryStepRenderer extends AbstractCategoryItemRenderer
      * PlotRenderingInfo)}, and we override it to ensure that the state
      * contains a working Line2D instance.
      *
-     * @param info  the plot rendering info (<code>null</code> is permitted).
+     * @param info  the plot rendering info ({@code null} is permitted).
      *
      * @return A new state instance.
      */
@@ -351,7 +351,7 @@ public class CategoryStepRenderer extends AbstractCategoryItemRenderer
     /**
      * Tests this renderer for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

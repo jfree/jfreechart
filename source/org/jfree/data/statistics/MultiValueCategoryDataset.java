@@ -66,8 +66,8 @@ public interface MultiValueCategoryDataset extends CategoryDataset {
      * Returns a list (possibly empty) of the values for the specified item.
      * The returned list should be unmodifiable.
      *
-     * @param rowKey  the row key (<code>null</code> not permitted).
-     * @param columnKey  the column key (<code>null</code> not permitted).
+     * @param rowKey  the row key ({@code null} not permitted).
+     * @param columnKey  the column key ({@code null} not permitted).
      *
      * @return The list of values.
      */

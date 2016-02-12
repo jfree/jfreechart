@@ -89,7 +89,7 @@ public class ChartRenderingInfo implements Cloneable, Serializable {
     /**
      * Storage for the chart entities.  Since retaining entity information for
      * charts with a large number of data points consumes a lot of memory, it
-     * is intended that you can set this to <code>null</code> to prevent the
+     * is intended that you can set this to {@code null} to prevent the
      * information being collected.
      */
     private EntityCollection entities;
@@ -105,10 +105,10 @@ public class ChartRenderingInfo implements Cloneable, Serializable {
     /**
      * Constructs a new instance. If an entity collection is supplied, it will
      * be populated with information about the entities in a chart.  If it is
-     * <code>null</code>, no entity information (including tool tips) will
+     * {@code null}, no entity information (including tool tips) will
      * be collected.
      *
-     * @param entities  an entity collection (<code>null</code> permitted).
+     * @param entities  an entity collection ({@code null} permitted).
      */
     public ChartRenderingInfo(EntityCollection entities) {
         this.chartArea = new Rectangle2D.Double();
@@ -141,7 +141,7 @@ public class ChartRenderingInfo implements Cloneable, Serializable {
     /**
      * Returns the collection of entities maintained by this instance.
      *
-     * @return The entity collection (possibly <code>null</code>).
+     * @return The entity collection (possibly {@code null}).
      *
      * @see #setEntityCollection(EntityCollection)
      */
@@ -152,7 +152,7 @@ public class ChartRenderingInfo implements Cloneable, Serializable {
     /**
      * Sets the entity collection.
      *
-     * @param entities  the entity collection (<code>null</code> permitted).
+     * @param entities  the entity collection ({@code null} permitted).
      *
      * @see #getEntityCollection()
      */
@@ -183,7 +183,7 @@ public class ChartRenderingInfo implements Cloneable, Serializable {
     /**
      * Tests this object for equality with an arbitrary object.
      *
-     * @param obj  the object to test against (<code>null</code> permitted).
+     * @param obj  the object to test against ({@code null} permitted).
      *
      * @return A boolean.
      */

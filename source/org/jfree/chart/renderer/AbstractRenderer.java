@@ -330,7 +330,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     private ShapeList legendShapeList;
 
     /**
-     * The base shape for legend items.  If this is <code>null</code>, the
+     * The base shape for legend items.  If this is {@code null}, the
      * series shape will be used.
      *
      * @since 1.0.11
@@ -368,7 +368,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
 
     /**
      * The default paint for the legend text items (if this is
-     * <code>null</code>, the {@link LegendTitle} class will determine the
+     * {@code null}, the {@link LegendTitle} class will determine the
      * text paint to use.
      *
      * @since 1.0.11
@@ -559,7 +559,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      *
      * @param series  the series index (zero-based).
      *
-     * @return The flag (possibly <code>null</code>).
+     * @return The flag (possibly {@code null}).
      *
      * @see #setSeriesVisible(int, Boolean)
      */
@@ -572,7 +572,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param series  the series index (zero-based).
-     * @param visible  the flag (<code>null</code> permitted).
+     * @param visible  the flag ({@code null} permitted).
      *
      * @see #getSeriesVisible(int)
      */
@@ -586,7 +586,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * listeners.
      *
      * @param series  the series index.
-     * @param visible  the flag (<code>null</code> permitted).
+     * @param visible  the flag ({@code null} permitted).
      * @param notify  notify listeners?
      *
      * @see #getSeriesVisible(int)
@@ -680,7 +680,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      *
      * @param series  the series index (zero-based).
      *
-     * @return The flag (possibly <code>null</code>).
+     * @return The flag (possibly {@code null}).
      *
      * @see #setSeriesVisibleInLegend(int, Boolean)
      */
@@ -693,7 +693,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * and sends a {@link RendererChangeEvent} to all registered listeners.
      *
      * @param series  the series index (zero-based).
-     * @param visible  the flag (<code>null</code> permitted).
+     * @param visible  the flag ({@code null} permitted).
      *
      * @see #getSeriesVisibleInLegend(int)
      */
@@ -707,7 +707,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * listeners.
      *
      * @param series  the series index.
-     * @param visible  the flag (<code>null</code> permitted).
+     * @param visible  the flag ({@code null} permitted).
      * @param notify  notify listeners?
      *
      * @see #getSeriesVisibleInLegend(int)
@@ -772,7 +772,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @param row  the row (or series) index (zero-based).
      * @param column  the column (or category) index (zero-based).
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      */
     public Paint getItemPaint(int row, int column) {
         return lookupSeriesPaint(row);
@@ -783,7 +783,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      *
      * @param series  the series index (zero-based).
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @since 1.0.6
      */
@@ -815,7 +815,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      *
      * @param series  the series index (zero-based).
      *
-     * @return The paint (possibly <code>null</code>).
+     * @return The paint (possibly {@code null}).
      *
      * @see #setSeriesPaint(int, Paint)
      */
@@ -828,7 +828,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * to all registered listeners.
      *
      * @param series  the series index (zero-based).
-     * @param paint  the paint (<code>null</code> permitted).
+     * @param paint  the paint ({@code null} permitted).
      *
      * @see #getSeriesPaint(int)
      */
@@ -841,7 +841,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param series  the series index.
-     * @param paint  the paint (<code>null</code> permitted).
+     * @param paint  the paint ({@code null} permitted).
      * @param notify  notify listeners?
      *
      * @see #getSeriesPaint(int)
@@ -871,7 +871,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     /**
      * Returns the base paint.
      *
-     * @return The base paint (never <code>null</code>).
+     * @return The base paint (never {@code null}).
      *
      * @see #setBasePaint(Paint)
      */
@@ -883,7 +883,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * Sets the base paint and sends a {@link RendererChangeEvent} to all
      * registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getBasePaint()
      */
@@ -896,7 +896,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * Sets the base paint and, if requested, sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      * @param notify  notify listeners?
      *
      * @see #getBasePaint()
@@ -947,7 +947,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @param row  the row (or series) index (zero-based).
      * @param column  the column (or category) index (zero-based).
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      */
     public Paint getItemFillPaint(int row, int column) {
         return lookupSeriesFillPaint(row);
@@ -958,7 +958,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      *
      * @param series  the series (zero-based index).
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @since 1.0.6
      */
@@ -990,7 +990,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      *
      * @param series  the series (zero-based index).
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @see #setSeriesFillPaint(int, Paint)
      */
@@ -1003,7 +1003,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param series  the series index (zero-based).
-     * @param paint  the paint (<code>null</code> permitted).
+     * @param paint  the paint ({@code null} permitted).
      *
      * @see #getSeriesFillPaint(int)
      */
@@ -1016,7 +1016,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * sends a {@link RendererChangeEvent} to all registered listeners.
      *
      * @param series  the series index (zero-based).
-     * @param paint  the paint (<code>null</code> permitted).
+     * @param paint  the paint ({@code null} permitted).
      * @param notify  notify listeners?
      *
      * @see #getSeriesFillPaint(int)
@@ -1031,7 +1031,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     /**
      * Returns the base (or default) fill paint.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @see #setBaseFillPaint(Paint)
      */
@@ -1043,7 +1043,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * Sets the base fill paint and sends a {@link RendererChangeEvent} to
      * all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getBaseFillPaint()
      */
@@ -1056,7 +1056,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * Sets the base fill paint and, if requested, sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      * @param notify  notify listeners?
      *
      * @see #getBaseFillPaint()
@@ -1111,7 +1111,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @param row  the row (or series) index (zero-based).
      * @param column  the column (or category) index (zero-based).
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      */
     public Paint getItemOutlinePaint(int row, int column) {
         return lookupSeriesOutlinePaint(row);
@@ -1122,7 +1122,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      *
      * @param series  the series (zero-based index).
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @since 1.0.6
      */
@@ -1154,7 +1154,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      *
      * @param series  the series (zero-based index).
      *
-     * @return The paint (possibly <code>null</code>).
+     * @return The paint (possibly {@code null}).
      *
      * @see #setSeriesOutlinePaint(int, Paint)
      */
@@ -1167,7 +1167,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param series  the series index (zero-based).
-     * @param paint  the paint (<code>null</code> permitted).
+     * @param paint  the paint ({@code null} permitted).
      *
      * @see #getSeriesOutlinePaint(int)
      */
@@ -1180,7 +1180,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * sends a {@link RendererChangeEvent} to all registered listeners.
      *
      * @param series  the series index (zero-based).
-     * @param paint  the paint (<code>null</code> permitted).
+     * @param paint  the paint ({@code null} permitted).
      * @param notify  notify listeners?
      *
      * @see #getSeriesOutlinePaint(int)
@@ -1195,7 +1195,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     /**
      * Returns the base (or default) outline paint.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @see #setBaseOutlinePaint(Paint)
      */
@@ -1207,7 +1207,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * Sets the base outline paint and sends a {@link RendererChangeEvent} to
      * all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getBaseOutlinePaint()
      */
@@ -1220,7 +1220,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * Sets the base outline paint and, if requested, sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      * @param notify  notify listeners?
      *
      * @see #getBaseOutlinePaint()
@@ -1274,7 +1274,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @param row  the row (or series) index (zero-based).
      * @param column  the column (or category) index (zero-based).
      *
-     * @return The stroke (never <code>null</code>).
+     * @return The stroke (never {@code null}).
      */
     public Stroke getItemStroke(int row, int column) {
         return lookupSeriesStroke(row);
@@ -1285,7 +1285,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      *
      * @param series  the series (zero-based index).
      *
-     * @return The stroke (never <code>null</code>).
+     * @return The stroke (never {@code null}).
      *
      * @since 1.0.6
      */
@@ -1317,7 +1317,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      *
      * @param series  the series (zero-based index).
      *
-     * @return The stroke (possibly <code>null</code>).
+     * @return The stroke (possibly {@code null}).
      *
      * @see #setSeriesStroke(int, Stroke)
      */
@@ -1330,7 +1330,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * to all registered listeners.
      *
      * @param series  the series index (zero-based).
-     * @param stroke  the stroke (<code>null</code> permitted).
+     * @param stroke  the stroke ({@code null} permitted).
      *
      * @see #getSeriesStroke(int)
      */
@@ -1343,7 +1343,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param series  the series index (zero-based).
-     * @param stroke  the stroke (<code>null</code> permitted).
+     * @param stroke  the stroke ({@code null} permitted).
      * @param notify  notify listeners?
      *
      * @see #getSeriesStroke(int)
@@ -1373,7 +1373,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     /**
      * Returns the base (or default) stroke.
      *
-     * @return The base stroke (never <code>null</code>).
+     * @return The base stroke (never {@code null}).
      *
      * @see #setBaseStroke(Stroke)
      */
@@ -1385,7 +1385,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * Sets the base stroke and sends a {@link RendererChangeEvent} to all
      * registered listeners.
      *
-     * @param stroke  the stroke (<code>null</code> not permitted).
+     * @param stroke  the stroke ({@code null} not permitted).
      *
      * @see #getBaseStroke()
      */
@@ -1398,7 +1398,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * Sets the base stroke and, if requested, sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param stroke  the stroke (<code>null</code> not permitted).
+     * @param stroke  the stroke ({@code null} not permitted).
      * @param notify  notify listeners?
      *
      * @see #getBaseStroke()
@@ -1450,7 +1450,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @param row  the row (or series) index (zero-based).
      * @param column  the column (or category) index (zero-based).
      *
-     * @return The stroke (never <code>null</code>).
+     * @return The stroke (never {@code null}).
      */
     public Stroke getItemOutlineStroke(int row, int column) {
         return lookupSeriesOutlineStroke(row);
@@ -1461,7 +1461,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      *
      * @param series  the series (zero-based index).
      *
-     * @return The stroke (never <code>null</code>).
+     * @return The stroke (never {@code null}).
      *
      * @since 1.0.6
      */
@@ -1493,7 +1493,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      *
      * @param series  the series (zero-based index).
      *
-     * @return The stroke (possibly <code>null</code>).
+     * @return The stroke (possibly {@code null}).
      *
      * @see #setSeriesOutlineStroke(int, Stroke)
      */
@@ -1506,7 +1506,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param series  the series index (zero-based).
-     * @param stroke  the stroke (<code>null</code> permitted).
+     * @param stroke  the stroke ({@code null} permitted).
      *
      * @see #getSeriesOutlineStroke(int)
      */
@@ -1519,7 +1519,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param series  the series index.
-     * @param stroke  the stroke (<code>null</code> permitted).
+     * @param stroke  the stroke ({@code null} permitted).
      * @param notify  notify listeners?
      *
      * @see #getSeriesOutlineStroke(int)
@@ -1535,7 +1535,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     /**
      * Returns the base (or default) outline stroke.
      *
-     * @return The stroke (never <code>null</code>).
+     * @return The stroke (never {@code null}).
      *
      * @see #setBaseOutlineStroke(Stroke)
      */
@@ -1547,7 +1547,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * Sets the base outline stroke and sends a {@link RendererChangeEvent} to
      * all registered listeners.
      *
-     * @param stroke  the stroke (<code>null</code> not permitted).
+     * @param stroke  the stroke ({@code null} not permitted).
      *
      * @see #getBaseOutlineStroke()
      */
@@ -1559,7 +1559,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * Sets the base outline stroke and, if requested, sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param stroke  the stroke (<code>null</code> not permitted).
+     * @param stroke  the stroke ({@code null} not permitted).
      * @param notify  a flag that controls whether or not listeners are
      *                notified.
      *
@@ -1615,7 +1615,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @param row  the row (or series) index (zero-based).
      * @param column  the column (or category) index (zero-based).
      *
-     * @return The shape (never <code>null</code>).
+     * @return The shape (never {@code null}).
      */
     public Shape getItemShape(int row, int column) {
         return lookupSeriesShape(row);
@@ -1626,7 +1626,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      *
      * @param series  the series (zero-based index).
      *
-     * @return The shape (never <code>null</code>).
+     * @return The shape (never {@code null}).
      *
      * @since 1.0.6
      */
@@ -1658,7 +1658,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      *
      * @param series  the series (zero-based index).
      *
-     * @return The shape (possibly <code>null</code>).
+     * @return The shape (possibly {@code null}).
      *
      * @see #setSeriesShape(int, Shape)
      */
@@ -1671,7 +1671,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * to all registered listeners.
      *
      * @param series  the series index (zero-based).
-     * @param shape  the shape (<code>null</code> permitted).
+     * @param shape  the shape ({@code null} permitted).
      *
      * @see #getSeriesShape(int)
      */
@@ -1684,7 +1684,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param series  the series index (zero based).
-     * @param shape  the shape (<code>null</code> permitted).
+     * @param shape  the shape ({@code null} permitted).
      * @param notify  notify listeners?
      *
      * @see #getSeriesShape(int)
@@ -1699,7 +1699,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     /**
      * Returns the base (or default) shape.
      *
-     * @return The shape (never <code>null</code>).
+     * @return The shape (never {@code null}).
      *
      * @see #setBaseShape(Shape)
      */
@@ -1711,7 +1711,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * Sets the base shape and sends a {@link RendererChangeEvent} to all
      * registered listeners.
      *
-     * @param shape  the shape (<code>null</code> not permitted).
+     * @param shape  the shape ({@code null} not permitted).
      *
      * @see #getBaseShape()
      */
@@ -1724,7 +1724,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * Sets the base shape and, if requested, sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param shape  the shape (<code>null</code> not permitted).
+     * @param shape  the shape ({@code null} not permitted).
      * @param notify  notify listeners?
      *
      * @see #getBaseShape()
@@ -1823,7 +1823,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param series  the series index (zero-based).
-     * @param visible  the flag (<code>null</code> permitted).
+     * @param visible  the flag ({@code null} permitted).
      */
     public void setSeriesItemLabelsVisible(int series, Boolean visible) {
         setSeriesItemLabelsVisible(series, visible, true);
@@ -1847,10 +1847,10 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     }
 
     /**
-     * Returns the base setting for item label visibility.  A <code>null</code>
+     * Returns the base setting for item label visibility.  A {@code null}
      * result should be interpreted as equivalent to <code>Boolean.FALSE</code>.
      *
-     * @return A flag (possibly <code>null</code>).
+     * @return A flag (possibly {@code null}).
      *
      * @see #setBaseItemLabelsVisible(boolean)
      */
@@ -1877,7 +1877,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * Sets the base setting for item label visibility and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param visible  the flag (<code>null</code> is permitted, and viewed
+     * @param visible  the flag ({@code null} is permitted, and viewed
      *     as equivalent to <code>Boolean.FALSE</code>).
      */
     public void setBaseItemLabelsVisible(Boolean visible) {
@@ -1888,7 +1888,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * Sets the base visibility for item labels and, if requested, sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param visible  the flag (<code>null</code> is permitted, and viewed
+     * @param visible  the flag ({@code null} is permitted, and viewed
      *     as equivalent to <code>Boolean.FALSE</code>).
      * @param notify  a flag that controls whether or not listeners are
      *                notified.
@@ -1910,7 +1910,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @param row  the row index (zero-based).
      * @param column  the column index (zero-based).
      *
-     * @return The font (never <code>null</code>).
+     * @return The font (never {@code null}).
      */
     public Font getItemLabelFont(int row, int column) {
         Font result = this.itemLabelFont;
@@ -1928,7 +1928,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      *
      * @param series  the series index (zero-based).
      *
-     * @return The font (possibly <code>null</code>).
+     * @return The font (possibly {@code null}).
      *
      * @see #setSeriesItemLabelFont(int, Font)
      */
@@ -1941,7 +1941,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param series  the series index (zero-based).
-     * @param font  the font (<code>null</code> permitted).
+     * @param font  the font ({@code null} permitted).
      *
      * @see #getSeriesItemLabelFont(int)
      */
@@ -1954,7 +1954,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param series  the series index (zero based).
-     * @param font  the font (<code>null</code> permitted).
+     * @param font  the font ({@code null} permitted).
      * @param notify  a flag that controls whether or not listeners are
      *                notified.
      *
@@ -1983,7 +1983,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * Sets the base item label font and sends a {@link RendererChangeEvent} to
      * all registered listeners.
      *
-     * @param font  the font (<code>null</code> not permitted).
+     * @param font  the font ({@code null} not permitted).
      *
      * @see #getBaseItemLabelFont()
      */
@@ -1996,7 +1996,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * Sets the base item label font and, if requested, sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param font  the font (<code>null</code> not permitted).
+     * @param font  the font ({@code null} not permitted).
      * @param notify  a flag that controls whether or not listeners are
      *                notified.
      *
@@ -2017,7 +2017,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @param row  the row index (zero based).
      * @param column  the column index (zero based).
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      */
     public Paint getItemLabelPaint(int row, int column) {
         Paint result = this.itemLabelPaint;
@@ -2035,7 +2035,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      *
      * @param series  the series index (zero based).
      *
-     * @return The paint (possibly <code>null</code>).
+     * @return The paint (possibly {@code null}).
      *
      * @see #setSeriesItemLabelPaint(int, Paint)
      */
@@ -2048,7 +2048,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param series  the series (zero based index).
-     * @param paint  the paint (<code>null</code> permitted).
+     * @param paint  the paint ({@code null} permitted).
      *
      * @see #getSeriesItemLabelPaint(int)
      */
@@ -2061,7 +2061,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param series  the series index (zero based).
-     * @param paint  the paint (<code>null</code> permitted).
+     * @param paint  the paint ({@code null} permitted).
      * @param notify  a flag that controls whether or not listeners are
      *                notified.
      *
@@ -2078,7 +2078,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     /**
      * Returns the base item label paint.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @see #setBaseItemLabelPaint(Paint)
      */
@@ -2090,7 +2090,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * Sets the base item label paint and sends a {@link RendererChangeEvent}
      * to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getBaseItemLabelPaint()
      */
@@ -2103,7 +2103,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * Sets the base item label paint and, if requested, sends a
      * {@link RendererChangeEvent} to all registered listeners..
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      * @param notify  a flag that controls whether or not listeners are
      *                notified.
      *
@@ -2125,7 +2125,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @param row  the row index (zero-based).
      * @param column  the column index (zero-based).
      *
-     * @return The item label position (never <code>null</code>).
+     * @return The item label position (never {@code null}).
      *
      * @see #getNegativeItemLabelPosition(int, int)
      */
@@ -2138,7 +2138,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      *
      * @param series  the series index (zero-based).
      *
-     * @return The item label position (never <code>null</code>).
+     * @return The item label position (never {@code null}).
      *
      * @see #setSeriesPositiveItemLabelPosition(int, ItemLabelPosition)
      */
@@ -2161,7 +2161,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * sends a {@link RendererChangeEvent} to all registered listeners.
      *
      * @param series  the series index (zero-based).
-     * @param position  the position (<code>null</code> permitted).
+     * @param position  the position ({@code null} permitted).
      *
      * @see #getSeriesPositiveItemLabelPosition(int)
      */
@@ -2176,7 +2176,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * listeners.
      *
      * @param series  the series index (zero-based).
-     * @param position  the position (<code>null</code> permitted).
+     * @param position  the position ({@code null} permitted).
      * @param notify  notify registered listeners?
      *
      * @see #getSeriesPositiveItemLabelPosition(int)
@@ -2192,7 +2192,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     /**
      * Returns the base positive item label position.
      *
-     * @return The position (never <code>null</code>).
+     * @return The position (never {@code null}).
      *
      * @see #setBasePositiveItemLabelPosition(ItemLabelPosition)
      */
@@ -2203,7 +2203,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     /**
      * Sets the base positive item label position.
      *
-     * @param position  the position (<code>null</code> not permitted).
+     * @param position  the position ({@code null} not permitted).
      *
      * @see #getBasePositiveItemLabelPosition()
      */
@@ -2216,7 +2216,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * Sets the base positive item label position and, if requested, sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param position  the position (<code>null</code> not permitted).
+     * @param position  the position ({@code null} not permitted).
      * @param notify  notify registered listeners?
      *
      * @see #getBasePositiveItemLabelPosition()
@@ -2240,7 +2240,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @param row  the row index (zero-based).
      * @param column  the column (zero-based).
      *
-     * @return The item label position (never <code>null</code>).
+     * @return The item label position (never {@code null}).
      *
      * @see #getPositiveItemLabelPosition(int, int)
      */
@@ -2253,7 +2253,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      *
      * @param series  the series index (zero-based).
      *
-     * @return The item label position (never <code>null</code>).
+     * @return The item label position (never {@code null}).
      *
      * @see #setSeriesNegativeItemLabelPosition(int, ItemLabelPosition)
      */
@@ -2276,7 +2276,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param series  the series index (zero-based).
-     * @param position  the position (<code>null</code> permitted).
+     * @param position  the position ({@code null} permitted).
      *
      * @see #getSeriesNegativeItemLabelPosition(int)
      */
@@ -2291,7 +2291,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * listeners.
      *
      * @param series  the series index (zero-based).
-     * @param position  the position (<code>null</code> permitted).
+     * @param position  the position ({@code null} permitted).
      * @param notify  notify registered listeners?
      *
      * @see #getSeriesNegativeItemLabelPosition(int)
@@ -2307,7 +2307,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     /**
      * Returns the base item label position for negative values.
      *
-     * @return The position (never <code>null</code>).
+     * @return The position (never {@code null}).
      *
      * @see #setBaseNegativeItemLabelPosition(ItemLabelPosition)
      */
@@ -2319,7 +2319,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * Sets the base item label position for negative values and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param position  the position (<code>null</code> not permitted).
+     * @param position  the position ({@code null} not permitted).
      *
      * @see #getBaseNegativeItemLabelPosition()
      */
@@ -2331,7 +2331,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * Sets the base negative item label position and, if requested, sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param position  the position (<code>null</code> not permitted).
+     * @param position  the position ({@code null} not permitted).
      * @param notify  notify registered listeners?
      *
      * @see #getBaseNegativeItemLabelPosition()
@@ -2398,7 +2398,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      *
      * @param series  the series index (zero-based).
      *
-     * @return The flag (possibly <code>null</code>).
+     * @return The flag (possibly {@code null}).
      *
      * @see #setSeriesCreateEntities(int, Boolean)
      */
@@ -2411,7 +2411,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * and sends a {@link RendererChangeEvent} to all registered listeners.
      *
      * @param series  the series index (zero-based).
-     * @param create  the flag (<code>null</code> permitted).
+     * @param create  the flag ({@code null} permitted).
      *
      * @see #getSeriesCreateEntities(int)
      */
@@ -2425,7 +2425,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * listeners.
      *
      * @param series  the series index.
-     * @param create  the flag (<code>null</code> permitted).
+     * @param create  the flag ({@code null} permitted).
      * @param notify  notify listeners?
      *
      * @see #getSeriesCreateEntities(int)
@@ -2509,7 +2509,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      *
      * @param series  the series index.
      *
-     * @return The shape (possibly <code>null</code>).
+     * @return The shape (possibly {@code null}).
      *
      * @since 1.0.11
      */
@@ -2526,11 +2526,11 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
 
     /**
      * Returns the legend shape defined for the specified series (possibly
-     * <code>null</code>).
+     * {@code null}).
      *
      * @param series  the series index.
      *
-     * @return The shape (possibly <code>null</code>).
+     * @return The shape (possibly {@code null}).
      *
      * @see #lookupLegendShape(int)
      *
@@ -2545,7 +2545,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * sends a {@link RendererChangeEvent} to all registered listeners.
      *
      * @param series  the series index.
-     * @param shape  the shape (<code>null</code> permitted).
+     * @param shape  the shape ({@code null} permitted).
      *
      * @since 1.0.11
      */
@@ -2555,7 +2555,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     }
 
     /**
-     * Returns the default legend shape, which may be <code>null</code>.
+     * Returns the default legend shape, which may be {@code null}.
      *
      * @return The default legend shape.
      *
@@ -2569,7 +2569,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * Sets the default legend shape and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param shape  the shape (<code>null</code> permitted).
+     * @param shape  the shape ({@code null} permitted).
      *
      * @since 1.0.11
      */
@@ -2610,7 +2610,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      *
      * @param series  the series index.
      *
-     * @return The font (possibly <code>null</code>).
+     * @return The font (possibly {@code null}).
      *
      * @since 1.0.11
      */
@@ -2624,11 +2624,11 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
 
     /**
      * Returns the legend text font defined for the specified series (possibly
-     * <code>null</code>).
+     * {@code null}).
      *
      * @param series  the series index.
      *
-     * @return The font (possibly <code>null</code>).
+     * @return The font (possibly {@code null}).
      *
      * @see #lookupLegendTextFont(int)
      *
@@ -2643,7 +2643,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * sends a {@link RendererChangeEvent} to all registered listeners.
      *
      * @param series  the series index.
-     * @param font  the font (<code>null</code> permitted).
+     * @param font  the font ({@code null} permitted).
      *
      * @since 1.0.11
      */
@@ -2653,7 +2653,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     }
 
     /**
-     * Returns the default legend text font, which may be <code>null</code>.
+     * Returns the default legend text font, which may be {@code null}.
      *
      * @return The default legend text font.
      *
@@ -2667,7 +2667,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * Sets the default legend text font and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param font  the font (<code>null</code> permitted).
+     * @param font  the font ({@code null} permitted).
      *
      * @since 1.0.11
      */
@@ -2681,7 +2681,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      *
      * @param series  the series index.
      *
-     * @return The paint (possibly <code>null</code>).
+     * @return The paint (possibly {@code null}).
      *
      * @since 1.0.11
      */
@@ -2695,11 +2695,11 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
 
     /**
      * Returns the legend text paint defined for the specified series (possibly
-     * <code>null</code>).
+     * {@code null}).
      *
      * @param series  the series index.
      *
-     * @return The paint (possibly <code>null</code>).
+     * @return The paint (possibly {@code null}).
      *
      * @see #lookupLegendTextPaint(int)
      *
@@ -2714,7 +2714,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * sends a {@link RendererChangeEvent} to all registered listeners.
      *
      * @param series  the series index.
-     * @param paint  the paint (<code>null</code> permitted).
+     * @param paint  the paint ({@code null} permitted).
      *
      * @since 1.0.11
      */
@@ -2724,7 +2724,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     }
 
     /**
-     * Returns the default legend text paint, which may be <code>null</code>.
+     * Returns the default legend text paint, which may be {@code null}.
      *
      * @return The default legend text paint.
      *
@@ -2738,7 +2738,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * Sets the default legend text paint and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> permitted).
+     * @param paint  the paint ({@code null} permitted).
      *
      * @since 1.0.11
      */
@@ -2787,7 +2787,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @param y  the y coordinate.
      * @param orientation  the plot orientation.
      *
-     * @return The anchor point (never <code>null</code>).
+     * @return The anchor point (never {@code null}).
      */
     protected Point2D calculateLabelAnchorPoint(ItemLabelAnchor anchor,
             double x, double y, PlotOrientation orientation) {
@@ -2901,7 +2901,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     /**
      * Registers an object to receive notification of changes to the renderer.
      *
-     * @param listener  the listener (<code>null</code> not permitted).
+     * @param listener  the listener ({@code null} not permitted).
      *
      * @see #removeChangeListener(RendererChangeListener)
      */
@@ -2914,7 +2914,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * Deregisters an object so that it no longer receives
      * notification of changes to the renderer.
      *
-     * @param listener  the object (<code>null</code> not permitted).
+     * @param listener  the object ({@code null} not permitted).
      *
      * @see #addChangeListener(RendererChangeListener)
      */
@@ -2973,7 +2973,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     /**
      * Tests this renderer for equality with another object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return <code>true</code> or <code>false</code>.
      */
@@ -3518,9 +3518,9 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     /**
      * Returns the flag that controls the visibility of ALL series.  This flag
      * overrides the per series and default settings - you must set it to
-     * <code>null</code> if you want the other settings to apply.
+     * {@code null} if you want the other settings to apply.
      *
-     * @return The flag (possibly <code>null</code>).
+     * @return The flag (possibly {@code null}).
      *
      * @see #setSeriesVisible(Boolean)
      *
@@ -3536,9 +3536,9 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * Sets the flag that controls the visibility of ALL series and sends a
      * {@link RendererChangeEvent} to all registered listeners.  This flag
      * overrides the per series and default settings - you must set it to
-     * <code>null</code> if you want the other settings to apply.
+     * {@code null} if you want the other settings to apply.
      *
-     * @param visible  the flag (<code>null</code> permitted).
+     * @param visible  the flag ({@code null} permitted).
      *
      * @see #getSeriesVisible()
      *
@@ -3554,9 +3554,9 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * Sets the flag that controls the visibility of ALL series and sends a
      * {@link RendererChangeEvent} to all registered listeners.  This flag
      * overrides the per series and default settings - you must set it to
-     * <code>null</code> if you want the other settings to apply.
+     * {@code null} if you want the other settings to apply.
      *
-     * @param visible  the flag (<code>null</code> permitted).
+     * @param visible  the flag ({@code null} permitted).
      * @param notify  notify listeners?
      *
      * @see #getSeriesVisible()
@@ -3580,10 +3580,10 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     /**
      * Returns the flag that controls the visibility of ALL series in the
      * legend.  This flag overrides the per series and default settings - you
-     * must set it to <code>null</code> if you want the other settings to
+     * must set it to {@code null} if you want the other settings to
      * apply.
      *
-     * @return The flag (possibly <code>null</code>).
+     * @return The flag (possibly {@code null}).
      *
      * @see #setSeriesVisibleInLegend(Boolean)
      *
@@ -3599,9 +3599,9 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * Sets the flag that controls the visibility of ALL series in the legend
      * and sends a {@link RendererChangeEvent} to all registered listeners.
      * This flag overrides the per series and default settings - you must set
-     * it to <code>null</code> if you want the other settings to apply.
+     * it to {@code null} if you want the other settings to apply.
      *
-     * @param visible  the flag (<code>null</code> permitted).
+     * @param visible  the flag ({@code null} permitted).
      *
      * @see #getSeriesVisibleInLegend()
      *
@@ -3617,9 +3617,9 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * Sets the flag that controls the visibility of ALL series in the legend
      * and sends a {@link RendererChangeEvent} to all registered listeners.
      * This flag overrides the per series and default settings - you must set
-     * it to <code>null</code> if you want the other settings to apply.
+     * it to {@code null} if you want the other settings to apply.
      *
-     * @param visible  the flag (<code>null</code> permitted).
+     * @param visible  the flag ({@code null} permitted).
      * @param notify  notify listeners?
      *
      * @see #getSeriesVisibleInLegend()
@@ -3639,9 +3639,9 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     /**
      * Sets the paint to be used for ALL series, and sends a
      * {@link RendererChangeEvent} to all registered listeners.  If this is
-     * <code>null</code>, the renderer will use the paint for the series.
+     * {@code null}, the renderer will use the paint for the series.
      *
-     * @param paint  the paint (<code>null</code> permitted).
+     * @param paint  the paint ({@code null} permitted).
      *
      * @deprecated This method should no longer be used (as of version 1.0.6).
      *     It is sufficient to rely on {@link #setSeriesPaint(int, Paint)} and
@@ -3655,7 +3655,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * Sets the paint to be used for all series and, if requested, sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> permitted).
+     * @param paint  the paint ({@code null} permitted).
      * @param notify  notify listeners?
      *
      * @deprecated This method should no longer be used (as of version 1.0.6).
@@ -3672,7 +3672,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     /**
      * Sets the fill paint for ALL series (optional).
      *
-     * @param paint  the paint (<code>null</code> permitted).
+     * @param paint  the paint ({@code null} permitted).
      *
      * @deprecated This method should no longer be used (as of version 1.0.6).
      *     It is sufficient to rely on {@link #setSeriesFillPaint(int, Paint)}
@@ -3686,7 +3686,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * Sets the fill paint for ALL series and, if requested, sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> permitted).
+     * @param paint  the paint ({@code null} permitted).
      * @param notify  notify listeners?
      *
      * @deprecated This method should no longer be used (as of version 1.0.6).
@@ -3704,7 +3704,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * Sets the outline paint for ALL series (optional) and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> permitted).
+     * @param paint  the paint ({@code null} permitted).
      *
      * @deprecated This method should no longer be used (as of version 1.0.6).
      *     It is sufficient to rely on {@link #setSeriesOutlinePaint(int,
@@ -3718,7 +3718,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * Sets the outline paint for ALL series and, if requested, sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> permitted).
+     * @param paint  the paint ({@code null} permitted).
      * @param notify  notify listeners?
      *
      * @deprecated This method should no longer be used (as of version 1.0.6).
@@ -3736,7 +3736,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * Sets the stroke for ALL series and sends a {@link RendererChangeEvent}
      * to all registered listeners.
      *
-     * @param stroke  the stroke (<code>null</code> permitted).
+     * @param stroke  the stroke ({@code null} permitted).
      *
      * @deprecated This method should no longer be used (as of version 1.0.6).
      *     It is sufficient to rely on {@link #setSeriesStroke(int, Stroke)}
@@ -3750,7 +3750,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * Sets the stroke for ALL series and, if requested, sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param stroke  the stroke (<code>null</code> permitted).
+     * @param stroke  the stroke ({@code null} permitted).
      * @param notify  notify listeners?
      *
      * @deprecated This method should no longer be used (as of version 1.0.6).
@@ -3768,7 +3768,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * Sets the outline stroke for ALL series and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param stroke  the stroke (<code>null</code> permitted).
+     * @param stroke  the stroke ({@code null} permitted).
      *
      * @deprecated This method should no longer be used (as of version 1.0.6).
      *     It is sufficient to rely on {@link #setSeriesOutlineStroke(int,
@@ -3782,7 +3782,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * Sets the outline stroke for ALL series and, if requested, sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param stroke  the stroke (<code>null</code> permitted).
+     * @param stroke  the stroke ({@code null} permitted).
      * @param notify  notify listeners?
      *
      * @deprecated This method should no longer be used (as of version 1.0.6).
@@ -3800,7 +3800,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * Sets the shape for ALL series (optional) and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param shape  the shape (<code>null</code> permitted).
+     * @param shape  the shape ({@code null} permitted).
      *
      * @deprecated This method should no longer be used (as of version 1.0.6).
      *     It is sufficient to rely on {@link #setSeriesShape(int, Shape)}
@@ -3814,7 +3814,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * Sets the shape for ALL series and, if requested, sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param shape  the shape (<code>null</code> permitted).
+     * @param shape  the shape ({@code null} permitted).
      * @param notify  notify listeners?
      *
      * @deprecated This method should no longer be used (as of version 1.0.6).
@@ -3847,7 +3847,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     /**
      * Sets the visibility of the item labels for ALL series (optional).
      *
-     * @param visible  the flag (<code>null</code> permitted).
+     * @param visible  the flag ({@code null} permitted).
      *
      * @deprecated This method should no longer be used (as of version 1.0.6).
      *     It is sufficient to rely on {@link #setSeriesItemLabelsVisible(int,
@@ -3862,7 +3862,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * sends a {@link RendererChangeEvent} to all registered listeners.
      *
      * @param visible  a flag that controls whether or not the item labels are
-     *                 visible (<code>null</code> permitted).
+     *                 visible ({@code null} permitted).
      * @param notify  a flag that controls whether or not listeners are
      *                notified.
      *
@@ -3880,9 +3880,9 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
 
     /**
      * Returns the font used for all item labels.  This may be
-     * <code>null</code>, in which case the per series font settings will apply.
+     * {@code null}, in which case the per series font settings will apply.
      *
-     * @return The font (possibly <code>null</code>).
+     * @return The font (possibly {@code null}).
      *
      * @deprecated This method should no longer be used (as of version 1.0.6).
      *     It is sufficient to rely on {@link #getSeriesItemLabelFont(int)} and
@@ -3895,10 +3895,10 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     /**
      * Sets the item label font for ALL series and sends a
      * {@link RendererChangeEvent} to all registered listeners.  You can set
-     * this to <code>null</code> if you prefer to set the font on a per series
+     * this to {@code null} if you prefer to set the font on a per series
      * basis.
      *
-     * @param font  the font (<code>null</code> permitted).
+     * @param font  the font ({@code null} permitted).
      *
      * @deprecated This method should no longer be used (as of version 1.0.6).
      *     It is sufficient to rely on {@link #setSeriesItemLabelFont(int,
@@ -3912,7 +3912,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * Sets the item label font for ALL series and, if requested, sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param font  the font (<code>null</code> permitted).
+     * @param font  the font ({@code null} permitted).
      * @param notify  a flag that controls whether or not listeners are
      *                notified.
      *
@@ -3929,10 +3929,10 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
 
     /**
      * Returns the paint used for all item labels.  This may be
-     * <code>null</code>, in which case the per series paint settings will
+     * {@code null}, in which case the per series paint settings will
      * apply.
      *
-     * @return The paint (possibly <code>null</code>).
+     * @return The paint (possibly {@code null}).
      *
      * @deprecated This method should no longer be used (as of version 1.0.6).
      *     It is sufficient to rely on {@link #getSeriesItemLabelPaint(int)}
@@ -3946,7 +3946,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * Sets the item label paint for ALL series and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> permitted).
+     * @param paint  the paint ({@code null} permitted).
      *
      * @deprecated This method should no longer be used (as of version 1.0.6).
      *     It is sufficient to rely on {@link #setSeriesItemLabelPaint(int,
@@ -3978,7 +3978,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     /**
      * Returns the item label position for positive values in ALL series.
      *
-     * @return The item label position (possibly <code>null</code>).
+     * @return The item label position (possibly {@code null}).
      *
      * @see #setPositiveItemLabelPosition(ItemLabelPosition)
      *
@@ -3994,10 +3994,10 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     /**
      * Sets the item label position for positive values in ALL series, and
      * sends a {@link RendererChangeEvent} to all registered listeners.  You
-     * need to set this to <code>null</code> to expose the settings for
+     * need to set this to {@code null} to expose the settings for
      * individual series.
      *
-     * @param position  the position (<code>null</code> permitted).
+     * @param position  the position ({@code null} permitted).
      *
      * @see #getPositiveItemLabelPosition()
      *
@@ -4014,7 +4014,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * Sets the positive item label position for ALL series and (if requested)
      * sends a {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param position  the position (<code>null</code> permitted).
+     * @param position  the position ({@code null} permitted).
      * @param notify  notify registered listeners?
      *
      * @see #getPositiveItemLabelPosition()
@@ -4036,7 +4036,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     /**
      * Returns the item label position for negative values in ALL series.
      *
-     * @return The item label position (possibly <code>null</code>).
+     * @return The item label position (possibly {@code null}).
      *
      * @see #setNegativeItemLabelPosition(ItemLabelPosition)
      *
@@ -4052,10 +4052,10 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     /**
      * Sets the item label position for negative values in ALL series, and
      * sends a {@link RendererChangeEvent} to all registered listeners.  You
-     * need to set this to <code>null</code> to expose the settings for
+     * need to set this to {@code null} to expose the settings for
      * individual series.
      *
-     * @param position  the position (<code>null</code> permitted).
+     * @param position  the position ({@code null} permitted).
      *
      * @see #getNegativeItemLabelPosition()
      *
@@ -4073,7 +4073,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * requested) sends a {@link RendererChangeEvent} to all registered
      * listeners.
      *
-     * @param position  the position (<code>null</code> permitted).
+     * @param position  the position ({@code null} permitted).
      * @param notify  notify registered listeners?
      *
      * @see #getNegativeItemLabelPosition()
@@ -4095,10 +4095,10 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     /**
      * Returns the flag that controls whether or not chart entities are created
      * for the items in ALL series.  This flag overrides the per series and
-     * default settings - you must set it to <code>null</code> if you want the
+     * default settings - you must set it to {@code null} if you want the
      * other settings to apply.
      *
-     * @return The flag (possibly <code>null</code>).
+     * @return The flag (possibly {@code null}).
      *
      * @deprecated This method should no longer be used (as of version 1.0.6).
      *     It is sufficient to rely on {@link #getSeriesCreateEntities(int)}
@@ -4112,10 +4112,10 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * Sets the flag that controls whether or not chart entities are created
      * for the items in ALL series, and sends a {@link RendererChangeEvent} to
      * all registered listeners.  This flag overrides the per series and
-     * default settings - you must set it to <code>null</code> if you want the
+     * default settings - you must set it to {@code null} if you want the
      * other settings to apply.
      *
-     * @param create  the flag (<code>null</code> permitted).
+     * @param create  the flag ({@code null} permitted).
      *
      * @deprecated This method should no longer be used (as of version 1.0.6).
      *     It is sufficient to rely on {@link #setSeriesCreateEntities(int,
@@ -4129,10 +4129,10 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * Sets the flag that controls whether or not chart entities are created
      * for the items in ALL series, and sends a {@link RendererChangeEvent} to
      * all registered listeners.  This flag overrides the per series and
-     * default settings - you must set it to <code>null</code> if you want the
+     * default settings - you must set it to {@code null} if you want the
      * other settings to apply.
      *
-     * @param create  the flag (<code>null</code> permitted).
+     * @param create  the flag ({@code null} permitted).
      * @param notify  notify listeners?
      *
      * @deprecated This method should no longer be used (as of version 1.0.6).

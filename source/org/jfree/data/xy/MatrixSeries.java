@@ -69,7 +69,7 @@ public class MatrixSeries extends Series implements Serializable {
      * By default, all matrix items are initialzed to 0.
      * </p>
      *
-     * @param name  series name (<code>null</code> not permitted).
+     * @param name  series name ({@code null} not permitted).
      * @param rows  the number of rows.
      * @param columns  the number of columns.
      */
@@ -207,7 +207,7 @@ public class MatrixSeries extends Series implements Serializable {
     /**
      * Tests this object instance for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

@@ -104,7 +104,7 @@ public abstract class Series implements Cloneable, Serializable {
     /**
      * Creates a new series with the specified key.
      *
-     * @param key  the series key (<code>null</code> not permitted).
+     * @param key  the series key ({@code null} not permitted).
      */
     protected Series(Comparable key) {
         this(key, null);
@@ -113,8 +113,8 @@ public abstract class Series implements Cloneable, Serializable {
     /**
      * Creates a new series with the specified key and description.
      *
-     * @param key  the series key (<code>null</code> NOT permitted).
-     * @param description  the series description (<code>null</code> permitted).
+     * @param key  the series key ({@code null} NOT permitted).
+     * @param description  the series description ({@code null} permitted).
      */
     protected Series(Comparable key, String description) {
         ParamChecks.nullNotPermitted(key, "key");
@@ -129,7 +129,7 @@ public abstract class Series implements Cloneable, Serializable {
     /**
      * Returns the key for the series.
      *
-     * @return The series key (never <code>null</code>).
+     * @return The series key (never {@code null}).
      *
      * @see #setKey(Comparable)
      */
@@ -144,7 +144,7 @@ public abstract class Series implements Cloneable, Serializable {
      * <code>PropertyChangeEvent</code>.  If the key change is vetoed this 
      * method will throw an IllegalArgumentException.
      *
-     * @param key  the key (<code>null</code> not permitted).
+     * @param key  the key ({@code null} not permitted).
      *
      * @see #getKey()
      */
@@ -168,7 +168,7 @@ public abstract class Series implements Cloneable, Serializable {
     /**
      * Returns a description of the series.
      *
-     * @return The series description (possibly <code>null</code>).
+     * @return The series description (possibly {@code null}).
      *
      * @see #setDescription(String)
      */
@@ -180,7 +180,7 @@ public abstract class Series implements Cloneable, Serializable {
      * Sets the description of the series and sends a
      * <code>PropertyChangeEvent</code> to all registered listeners.
      *
-     * @param description  the description (<code>null</code> permitted).
+     * @param description  the description ({@code null} permitted).
      *
      * @see #getDescription()
      */
@@ -266,7 +266,7 @@ public abstract class Series implements Cloneable, Serializable {
     /**
      * Tests the series for equality with another object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return <code>true</code> or <code>false</code>.
      */

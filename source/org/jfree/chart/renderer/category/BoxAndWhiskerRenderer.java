@@ -207,7 +207,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      * Returns the paint used to color the median and average markers.
      *
      * @return The paint used to draw the median and average markers (never
-     *     <code>null</code>).
+     *     {@code null}).
      *
      * @see #setArtifactPaint(Paint)
      */
@@ -219,7 +219,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      * Sets the paint used to color the median and average markers and sends
      * a {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getArtifactPaint()
      */
@@ -446,7 +446,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      * @param datasetIndex  the dataset index (zero-based).
      * @param series  the series index (zero-based).
      *
-     * @return The legend item (possibly <code>null</code>).
+     * @return The legend item (possibly {@code null}).
      */
     @Override
     public LegendItem getLegendItem(int datasetIndex, int series) {
@@ -1046,7 +1046,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
     /**
      * Tests this renderer for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return <code>true</code> or <code>false</code>.
      */

@@ -90,8 +90,8 @@ public class CategoryTextAnnotation extends TextAnnotation
     /**
      * Creates a new annotation to be displayed at the given location.
      *
-     * @param text  the text (<code>null</code> not permitted).
-     * @param category  the category (<code>null</code> not permitted).
+     * @param text  the text ({@code null} not permitted).
+     * @param category  the category ({@code null} not permitted).
      * @param value  the value.
      */
     public CategoryTextAnnotation(String text, Comparable category,
@@ -106,7 +106,7 @@ public class CategoryTextAnnotation extends TextAnnotation
     /**
      * Returns the category.
      *
-     * @return The category (never <code>null</code>).
+     * @return The category (never {@code null}).
      *
      * @see #setCategory(Comparable)
      */
@@ -118,7 +118,7 @@ public class CategoryTextAnnotation extends TextAnnotation
      * Sets the category that the annotation attaches to and sends an
      * {@link AnnotationChangeEvent} to all registered listeners.
      *
-     * @param category  the category (<code>null</code> not permitted).
+     * @param category  the category ({@code null} not permitted).
      *
      * @see #getCategory()
      */
@@ -143,7 +143,7 @@ public class CategoryTextAnnotation extends TextAnnotation
      * Sets the category anchor point and sends an
      * {@link AnnotationChangeEvent} to all registered listeners.
      *
-     * @param anchor  the anchor point (<code>null</code> not permitted).
+     * @param anchor  the anchor point ({@code null} not permitted).
      *
      * @see #getCategoryAnchor()
      */
@@ -226,7 +226,7 @@ public class CategoryTextAnnotation extends TextAnnotation
     /**
      * Tests this object for equality with another.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return <code>true</code> or <code>false</code>.
      */

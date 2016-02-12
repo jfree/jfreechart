@@ -65,8 +65,8 @@ public class KeyedValueComparator implements Comparator, Serializable {
      * Creates a new comparator.
      *
      * @param type  the type (<code>BY_KEY</code> or <code>BY_VALUE</code>,
-     *              <code>null</code> not permitted).
-     * @param order  the order (<code>null</code> not permitted).
+     *              {@code null} not permitted).
+     * @param order  the order ({@code null} not permitted).
      */
     public KeyedValueComparator(KeyedValueComparatorType type,
                                 SortOrder order) {
@@ -79,7 +79,7 @@ public class KeyedValueComparator implements Comparator, Serializable {
     /**
      * Returns the type.
      *
-     * @return The type (never <code>null</code>).
+     * @return The type (never {@code null}).
      */
     public KeyedValueComparatorType getType() {
         return this.type;
@@ -88,7 +88,7 @@ public class KeyedValueComparator implements Comparator, Serializable {
     /**
      * Returns the sort order.
      *
-     * @return The sort order (never <code>null</code>).
+     * @return The sort order (never {@code null}).
      */
     public SortOrder getOrder() {
         return this.order;

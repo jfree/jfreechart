@@ -188,7 +188,7 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
     /**
      * Constructs a new compass plot.
      *
-     * @param dataset  the dataset for the plot (<code>null</code> permitted).
+     * @param dataset  the dataset for the plot ({@code null} permitted).
      */
     public CompassPlot(ValueDataset dataset) {
         super();
@@ -264,7 +264,7 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
     /**
      * Returns the paint used to fill the outer circle of the compass.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @see #setRosePaint(Paint)
      */
@@ -276,7 +276,7 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
      * Sets the paint used to fill the outer circle of the compass,
      * and sends a {@link PlotChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getRosePaint()
      */
@@ -290,7 +290,7 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
      * Returns the paint used to fill the inner background area of the
      * compass.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @see #setRoseCenterPaint(Paint)
      */
@@ -302,7 +302,7 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
      * Sets the paint used to fill the inner background area of the compass,
      * and sends a {@link PlotChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getRoseCenterPaint()
      */
@@ -316,7 +316,7 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
      * Returns the paint used to draw the circles, symbols and labels on the
      * compass.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @see #setRoseHighlightPaint(Paint)
      */
@@ -328,7 +328,7 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
      * Sets the paint used to draw the circles, symbols and labels of the
      * compass, and sends a {@link PlotChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getRoseHighlightPaint()
      */
@@ -512,7 +512,7 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
     /**
      * Adds a dataset to the compass.
      *
-     * @param dataset  the new dataset (<code>null</code> ignored).
+     * @param dataset  the new dataset ({@code null} ignored).
      *
      * @see #addDataset(ValueDataset, MeterNeedle)
      */
@@ -523,8 +523,8 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
     /**
      * Adds a dataset to the compass.
      *
-     * @param dataset  the new dataset (<code>null</code> ignored).
-     * @param needle  the needle (<code>null</code> permitted).
+     * @param dataset  the new dataset ({@code null} ignored).
+     * @param needle  the needle ({@code null} permitted).
      */
     public void addDataset(ValueDataset dataset, MeterNeedle needle) {
 
@@ -560,7 +560,7 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
      *
      * @param g2  the graphics device.
      * @param area  the area within which the plot should be drawn.
-     * @param anchor  the anchor point (<code>null</code> permitted).
+     * @param anchor  the anchor point ({@code null} permitted).
      * @param parentState  the state from the parent plot, if there is one.
      * @param info  collects info about the drawing.
      */
@@ -743,7 +743,7 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
     /**
      * Tests an object for equality with this plot.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

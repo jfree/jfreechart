@@ -235,7 +235,7 @@ public class PieLabelRecord implements Comparable, Serializable {
     /**
      * Tests this record for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

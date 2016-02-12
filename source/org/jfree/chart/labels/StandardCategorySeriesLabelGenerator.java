@@ -79,7 +79,7 @@ public class StandardCategorySeriesLabelGenerator implements
     /**
      * Creates a new series label generator.
      *
-     * @param format  the format pattern (<code>null</code> not permitted).
+     * @param format  the format pattern ({@code null} not permitted).
      */
     public StandardCategorySeriesLabelGenerator(String format) {
         ParamChecks.nullNotPermitted(format, "format");
@@ -89,7 +89,7 @@ public class StandardCategorySeriesLabelGenerator implements
     /**
      * Generates a label for the specified series.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
      * @param series  the series.
      *
      * @return A series label.
@@ -106,10 +106,10 @@ public class StandardCategorySeriesLabelGenerator implements
      * Creates the array of items that can be passed to the
      * {@link MessageFormat} class for creating labels.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
      * @param series  the series (zero-based index).
      *
-     * @return The items (never <code>null</code>).
+     * @return The items (never {@code null}).
      */
     protected Object[] createItemArray(CategoryDataset dataset, int series) {
         Object[] result = new Object[1];
@@ -132,7 +132,7 @@ public class StandardCategorySeriesLabelGenerator implements
     /**
      * Tests this object for equality with an arbitrary object.
      *
-     * @param obj  the other object (<code>null</code> permitted).
+     * @param obj  the other object ({@code null} permitted).
      *
      * @return A boolean.
      */

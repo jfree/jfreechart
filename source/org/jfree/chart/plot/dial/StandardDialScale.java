@@ -424,7 +424,7 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
     /**
      * Returns the major tick paint.
      *
-     * @return The major tick paint (never <code>null</code>).
+     * @return The major tick paint (never {@code null}).
      *
      * @see #setMajorTickPaint(Paint)
      */
@@ -436,7 +436,7 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
      * Sets the major tick paint and sends a {@link DialLayerChangeEvent} to
      * all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getMajorTickPaint()
      */
@@ -449,7 +449,7 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
     /**
      * Returns the stroke used to draw the major tick marks.
      *
-     * @return The stroke (never <code>null</code>).
+     * @return The stroke (never {@code null}).
      *
      * @see #setMajorTickStroke(Stroke)
      */
@@ -461,7 +461,7 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
      * Sets the stroke used to draw the major tick marks and sends a
      * {@link DialLayerChangeEvent} to all registered listeners.
      *
-     * @param stroke  the stroke (<code>null</code> not permitted).
+     * @param stroke  the stroke ({@code null} not permitted).
      *
      * @see #getMajorTickStroke()
      */
@@ -531,7 +531,7 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
     /**
      * Returns the paint used to draw the minor tick marks.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @see #setMinorTickPaint(Paint)
      */
@@ -543,7 +543,7 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
      * Sets the paint used to draw the minor tick marks and sends a
      * {@link DialLayerChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getMinorTickPaint()
      */
@@ -556,7 +556,7 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
     /**
      * Returns the stroke used to draw the minor tick marks.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @see #setMinorTickStroke(Stroke)
      *
@@ -570,7 +570,7 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
      * Sets the stroke used to draw the minor tick marks and sends a
      * {@link DialLayerChangeEvent} to all registered listeners.
      *
-     * @param stroke  the stroke (<code>null</code> not permitted).
+     * @param stroke  the stroke ({@code null} not permitted).
      *
      * @see #getMinorTickStroke()
      *
@@ -609,7 +609,7 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
     /**
      * Returns the font used to draw the tick labels.
      *
-     * @return The font (never <code>null</code>).
+     * @return The font (never {@code null}).
      *
      * @see #setTickLabelFont(Font)
      */
@@ -621,7 +621,7 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
      * Sets the font used to display the tick labels and sends a
      * {@link DialLayerChangeEvent} to all registered listeners.
      *
-     * @param font  the font (<code>null</code> not permitted).
+     * @param font  the font ({@code null} not permitted).
      *
      * @see #getTickLabelFont()
      */
@@ -634,7 +634,7 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
     /**
      * Returns the paint used to draw the tick labels.
      *
-     * @return The paint (<code>null</code> not permitted).
+     * @return The paint ({@code null} not permitted).
      *
      * @see #setTickLabelPaint(Paint)
      */
@@ -646,7 +646,7 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
      * Sets the paint used to draw the tick labels and sends a
      * {@link DialLayerChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      */
     public void setTickLabelPaint(Paint paint) {
         ParamChecks.nullNotPermitted(paint, "paint");
@@ -684,7 +684,7 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
      * Returns the number formatter used to convert the tick label values to
      * strings.
      *
-     * @return The formatter (never <code>null</code>).
+     * @return The formatter (never {@code null}).
      *
      * @see #setTickLabelFormatter(NumberFormat)
      */
@@ -697,7 +697,7 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
      * strings, and sends a {@link DialLayerChangeEvent} to all registered
      * listeners.
      *
-     * @param formatter  the formatter (<code>null</code> not permitted).
+     * @param formatter  the formatter ({@code null} not permitted).
      *
      * @see #getTickLabelFormatter()
      */
@@ -747,11 +747,11 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
     /**
      * Draws the scale on the dial plot.
      *
-     * @param g2  the graphics target (<code>null</code> not permitted).
-     * @param plot  the dial plot (<code>null</code> not permitted).
+     * @param g2  the graphics target ({@code null} not permitted).
+     * @param plot  the dial plot ({@code null} not permitted).
      * @param frame  the reference frame that is used to construct the
-     *     geometry of the plot (<code>null</code> not permitted).
-     * @param view  the visible part of the plot (<code>null</code> not
+     *     geometry of the plot ({@code null} not permitted).
+     * @param view  the visible part of the plot ({@code null} not
      *     permitted).
      */
     @Override
@@ -869,7 +869,7 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
      * Tests this <code>StandardDialScale</code> for equality with an arbitrary
      * object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

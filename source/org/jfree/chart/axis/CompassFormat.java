@@ -145,13 +145,13 @@ public class CompassFormat extends NumberFormat {
     }
 
     /**
-     * This method returns <code>null</code> for all inputs.  This class cannot
+     * This method returns {@code null} for all inputs.  This class cannot
      * be used for parsing.
      *
      * @param source  the source string.
      * @param parsePosition  the parse position.
      *
-     * @return <code>null</code>.
+     * @return {@code null}.
      */
     @Override
     public Number parse(String source, ParsePosition parsePosition) {

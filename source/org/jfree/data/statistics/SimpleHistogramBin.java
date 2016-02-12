@@ -172,7 +172,7 @@ public class SimpleHistogramBin implements Comparable,
      * Returns <code>true</code> if this bin overlaps with the specified bin,
      * and <code>false</code> otherwise.
      *
-     * @param bin  the other bin (<code>null</code> not permitted).
+     * @param bin  the other bin ({@code null} not permitted).
      *
      * @return A boolean.
      */
@@ -226,7 +226,7 @@ public class SimpleHistogramBin implements Comparable,
     /**
      * Tests this bin for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

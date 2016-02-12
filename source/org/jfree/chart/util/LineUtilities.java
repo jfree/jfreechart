@@ -54,8 +54,8 @@ public class LineUtilities {
     /**
      * Clips the specified line to the given rectangle.
      *
-     * @param line  the line (<code>null</code> not permitted).
-     * @param rect  the clipping rectangle (<code>null</code> not permitted).
+     * @param line  the line ({@code null} not permitted).
+     * @param rect  the clipping rectangle ({@code null} not permitted).
      *
      * @return <code>true</code> if the clipped line is visible, and
      *     <code>false</code> otherwise.
@@ -144,7 +144,7 @@ public class LineUtilities {
     /**
      * Creates a new line by extending an existing line.
      *
-     * @param line  the line (<code>null</code> not permitted).
+     * @param line  the line ({@code null} not permitted).
      * @param startPercent  the amount to extend the line at the start point
      *                      end.
      * @param endPercent  the amount to extend the line at the end point end.

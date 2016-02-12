@@ -76,8 +76,8 @@ public abstract class Tick implements Serializable, Cloneable {
      * Creates a new tick.
      *
      * @param text  the formatted version of the tick value.
-     * @param textAnchor  the text anchor (<code>null</code> not permitted).
-     * @param rotationAnchor  the rotation anchor (<code>null</code> not
+     * @param textAnchor  the text anchor ({@code null} not permitted).
+     * @param rotationAnchor  the rotation anchor ({@code null} not
      *                        permitted).
      * @param angle  the angle.
      */
@@ -94,7 +94,7 @@ public abstract class Tick implements Serializable, Cloneable {
     /**
      * Returns the text version of the tick value.
      *
-     * @return A string (possibly <code>null</code>);
+     * @return A string (possibly {@code null});
      */
     public String getText() {
         return this.text;
@@ -103,7 +103,7 @@ public abstract class Tick implements Serializable, Cloneable {
     /**
      * Returns the text anchor.
      *
-     * @return The text anchor (never <code>null</code>).
+     * @return The text anchor (never {@code null}).
      */
     public TextAnchor getTextAnchor() {
         return this.textAnchor;
@@ -113,7 +113,7 @@ public abstract class Tick implements Serializable, Cloneable {
      * Returns the text anchor that defines the point around which the label is
      * rotated.
      *
-     * @return A text anchor (never <code>null</code>).
+     * @return A text anchor (never {@code null}).
      */
     public TextAnchor getRotationAnchor() {
         return this.rotationAnchor;
@@ -131,7 +131,7 @@ public abstract class Tick implements Serializable, Cloneable {
     /**
      * Tests this tick for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

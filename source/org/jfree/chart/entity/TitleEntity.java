@@ -69,8 +69,8 @@ public class TitleEntity extends ChartEntity {
     /**
      * Creates a new chart entity.
      *
-     * @param area  the area (<code>null</code> not permitted).
-     * @param title  the title (<code>null</code> not permitted).
+     * @param area  the area ({@code null} not permitted).
+     * @param title  the title ({@code null} not permitted).
      */
     public TitleEntity(Shape area, Title title) {
         // defer argument checks...
@@ -80,9 +80,9 @@ public class TitleEntity extends ChartEntity {
     /**
      * Creates a new chart entity.
      *
-     * @param area  the area (<code>null</code> not permitted).
-     * @param title  the title (<code>null</code> not permitted).
-     * @param toolTipText  the tool tip text (<code>null</code> permitted).
+     * @param area  the area ({@code null} not permitted).
+     * @param title  the title ({@code null} not permitted).
+     * @param toolTipText  the tool tip text ({@code null} permitted).
      */
     public TitleEntity(Shape area, Title title, String toolTipText) {
         // defer argument checks...
@@ -92,10 +92,10 @@ public class TitleEntity extends ChartEntity {
     /**
      * Creates a new entity.
      *
-     * @param area  the area (<code>null</code> not permitted).
-     * @param title  the title (<code>null</code> not permitted).
-     * @param toolTipText  the tool tip text (<code>null</code> permitted).
-     * @param urlText  the URL text for HTML image maps (<code>null</code>
+     * @param area  the area ({@code null} not permitted).
+     * @param title  the title ({@code null} not permitted).
+     * @param toolTipText  the tool tip text ({@code null} permitted).
+     * @param urlText  the URL text for HTML image maps ({@code null}
      *                 permitted).
      */
     public TitleEntity(Shape area, Title title, String toolTipText,
@@ -108,7 +108,7 @@ public class TitleEntity extends ChartEntity {
     /**
      * Returns the title that occupies the entity area.
      *
-     * @return The title (never <code>null</code>).
+     * @return The title (never {@code null}).
      */
     public Title getTitle() {
         return this.title;
@@ -131,7 +131,7 @@ public class TitleEntity extends ChartEntity {
     /**
      * Tests the entity for equality with an arbitrary object.
      *
-     * @param obj  the object to test against (<code>null</code> permitted).
+     * @param obj  the object to test against ({@code null} permitted).
      *
      * @return A boolean.
      */

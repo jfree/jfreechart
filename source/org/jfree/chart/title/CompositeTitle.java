@@ -93,7 +93,7 @@ public class CompositeTitle extends Title implements Cloneable, Serializable {
     /**
      * Creates a new title using the specified container.
      *
-     * @param container  the container (<code>null</code> not permitted).
+     * @param container  the container ({@code null} not permitted).
      */
     public CompositeTitle(BlockContainer container) {
         ParamChecks.nullNotPermitted(container, "container");
@@ -104,7 +104,7 @@ public class CompositeTitle extends Title implements Cloneable, Serializable {
     /**
      * Returns the background paint.
      *
-     * @return The paint (possibly <code>null</code>).
+     * @return The paint (possibly {@code null}).
      *
      * @since 1.0.11
      */
@@ -114,10 +114,10 @@ public class CompositeTitle extends Title implements Cloneable, Serializable {
 
     /**
      * Sets the background paint and sends a {@link TitleChangeEvent} to all
-     * registered listeners.  If you set this attribute to <code>null</code>,
+     * registered listeners.  If you set this attribute to {@code null},
      * no background is painted (which makes the title background transparent).
      *
-     * @param paint  the background paint (<code>null</code> permitted).
+     * @param paint  the background paint ({@code null} permitted).
      *
      * @since 1.0.11
      */
@@ -129,7 +129,7 @@ public class CompositeTitle extends Title implements Cloneable, Serializable {
     /**
      * Returns the container holding the titles.
      *
-     * @return The title container (never <code>null</code>).
+     * @return The title container (never {@code null}).
      */
     public BlockContainer getContainer() {
         return this.container;
@@ -138,7 +138,7 @@ public class CompositeTitle extends Title implements Cloneable, Serializable {
     /**
      * Sets the title container.
      *
-     * @param container  the container (<code>null</code> not permitted).
+     * @param container  the container ({@code null} not permitted).
      */
     public void setTitleContainer(BlockContainer container) {
         ParamChecks.nullNotPermitted(container, "container");
@@ -150,9 +150,9 @@ public class CompositeTitle extends Title implements Cloneable, Serializable {
      * returns the block size.
      *
      * @param g2  the graphics device.
-     * @param constraint  the constraint (<code>null</code> not permitted).
+     * @param constraint  the constraint ({@code null} not permitted).
      *
-     * @return The block size (in Java2D units, never <code>null</code>).
+     * @return The block size (in Java2D units, never {@code null}).
      */
     @Override
     public Size2D arrange(Graphics2D g2, RectangleConstraint constraint) {
@@ -179,9 +179,9 @@ public class CompositeTitle extends Title implements Cloneable, Serializable {
      *
      * @param g2  the graphics device.
      * @param area  the area.
-     * @param params  ignored (<code>null</code> permitted).
+     * @param params  ignored ({@code null} permitted).
      *
-     * @return Always <code>null</code>.
+     * @return Always {@code null}.
      */
     @Override
     public Object draw(Graphics2D g2, Rectangle2D area, Object params) {
@@ -199,7 +199,7 @@ public class CompositeTitle extends Title implements Cloneable, Serializable {
     /**
      * Tests this title for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

@@ -74,7 +74,7 @@ public class ZoomHandlerFX extends AbstractMouseHandlerFX {
     /**
      * Creates a new instance with no modifier keys required.
      * 
-     * @param id  the handler ID (<code>null</code> not permitted).
+     * @param id  the handler ID ({@code null} not permitted).
      * @param parent  the chart viewer.
      */
     public ZoomHandlerFX(String id, ChartViewer parent) { 
@@ -85,7 +85,7 @@ public class ZoomHandlerFX extends AbstractMouseHandlerFX {
      * Creates a new instance that will be activated using the specified 
      * combination of modifier keys.
      * 
-     * @param id  the handler ID (<code>null</code> not permitted).
+     * @param id  the handler ID ({@code null} not permitted).
      * @param parent  the chart viewer.
      * @param altKey  require ALT key?
      * @param ctrlKey  require CTRL key?
@@ -102,8 +102,8 @@ public class ZoomHandlerFX extends AbstractMouseHandlerFX {
      * Handles a mouse pressed event by recording the initial mouse pointer
      * location.
      * 
-     * @param canvas  the JavaFX canvas (<code>null</code> not permitted).
-     * @param e  the mouse event (<code>null</code> not permitted).
+     * @param canvas  the JavaFX canvas ({@code null} not permitted).
+     * @param e  the mouse event ({@code null} not permitted).
      */
     @Override
     public void handleMousePressed(ChartCanvas canvas, MouseEvent e) {
@@ -122,8 +122,8 @@ public class ZoomHandlerFX extends AbstractMouseHandlerFX {
      * Handles a mouse dragged event by updating the zoom rectangle displayed
      * in the ChartViewer.
      * 
-     * @param canvas  the JavaFX canvas (<code>null</code> not permitted).
-     * @param e  the mouse event (<code>null</code> not permitted).
+     * @param canvas  the JavaFX canvas ({@code null} not permitted).
+     * @param e  the mouse event ({@code null} not permitted).
      */
     @Override
     public void handleMouseDragged(ChartCanvas canvas, MouseEvent e) {

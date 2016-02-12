@@ -147,7 +147,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
     /**
      * Creates a new instance of <code>DialPlot</code>.
      *
-     * @param dataset  the dataset (<code>null</code> permitted).
+     * @param dataset  the dataset ({@code null} permitted).
      */
     public DialPlot(ValueDataset dataset) {
         this.background = null;
@@ -170,7 +170,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
     /**
      * Returns the background.
      *
-     * @return The background (possibly <code>null</code>).
+     * @return The background (possibly {@code null}).
      *
      * @see #setBackground(DialLayer)
      */
@@ -182,7 +182,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
      * Sets the background layer and sends a {@link PlotChangeEvent} to all
      * registered listeners.
      *
-     * @param background  the background layer (<code>null</code> permitted).
+     * @param background  the background layer ({@code null} permitted).
      *
      * @see #getBackground()
      */
@@ -200,7 +200,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
     /**
      * Returns the cap.
      *
-     * @return The cap (possibly <code>null</code>).
+     * @return The cap (possibly {@code null}).
      *
      * @see #setCap(DialLayer)
      */
@@ -212,7 +212,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
      * Sets the cap and sends a {@link PlotChangeEvent} to all registered
      * listeners.
      *
-     * @param cap  the cap (<code>null</code> permitted).
+     * @param cap  the cap ({@code null} permitted).
      *
      * @see #getCap()
      */
@@ -230,7 +230,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
     /**
      * Returns the dial's frame.
      *
-     * @return The dial's frame (never <code>null</code>).
+     * @return The dial's frame (never {@code null}).
      *
      * @see #setDialFrame(DialFrame)
      */
@@ -242,7 +242,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
      * Sets the dial's frame and sends a {@link PlotChangeEvent} to all
      * registered listeners.
      *
-     * @param frame  the frame (<code>null</code> not permitted).
+     * @param frame  the frame ({@code null} not permitted).
      *
      * @see #getDialFrame()
      */
@@ -328,7 +328,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
      * Adds a layer to the plot and sends a {@link PlotChangeEvent} to all
      * registered listeners.
      *
-     * @param layer  the layer (<code>null</code> not permitted).
+     * @param layer  the layer ({@code null} not permitted).
      */
     public void addLayer(DialLayer layer) {
         ParamChecks.nullNotPermitted(layer, "layer");
@@ -340,7 +340,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
     /**
      * Returns the index for the specified layer.
      *
-     * @param layer  the layer (<code>null</code> not permitted).
+     * @param layer  the layer ({@code null} not permitted).
      *
      * @return The layer index.
      */
@@ -368,7 +368,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
      * Removes the specified layer and sends a {@link PlotChangeEvent} to all
      * registered listeners.
      *
-     * @param layer  the layer (<code>null</code> not permitted).
+     * @param layer  the layer ({@code null} not permitted).
      */
     public void removeLayer(DialLayer layer) {
         // defer argument checking
@@ -379,7 +379,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
      * Adds a pointer to the plot and sends a {@link PlotChangeEvent} to all
      * registered listeners.
      *
-     * @param pointer  the pointer (<code>null</code> not permitted).
+     * @param pointer  the pointer ({@code null} not permitted).
      */
     public void addPointer(DialPointer pointer) {
         ParamChecks.nullNotPermitted(pointer, "pointer");
@@ -391,7 +391,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
     /**
      * Returns the index for the specified pointer.
      *
-     * @param pointer  the pointer (<code>null</code> not permitted).
+     * @param pointer  the pointer ({@code null} not permitted).
      *
      * @return The pointer index.
      */
@@ -419,7 +419,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
      * Removes the specified pointer and sends a {@link PlotChangeEvent} to all
      * registered listeners.
      *
-     * @param pointer  the pointer (<code>null</code> not permitted).
+     * @param pointer  the pointer ({@code null} not permitted).
      */
     public void removePointer(DialPointer pointer) {
         // defer argument checking
@@ -428,7 +428,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
 
     /**
      * Returns the dial pointer that is associated with the specified
-     * dataset, or <code>null</code>.
+     * dataset, or {@code null}.
      *
      * @param datasetIndex  the dataset index.
      *
@@ -449,7 +449,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
     /**
      * Returns the primary dataset for the plot.
      *
-     * @return The primary dataset (possibly <code>null</code>).
+     * @return The primary dataset (possibly {@code null}).
      */
     public ValueDataset getDataset() {
         return getDataset(0);
@@ -460,7 +460,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
      *
      * @param index  the dataset index.
      *
-     * @return The dataset (possibly <code>null</code>).
+     * @return The dataset (possibly {@code null}).
      */
     public ValueDataset getDataset(int index) {
         ValueDataset result = null;
@@ -475,7 +475,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
      * is one, and sends a {@link PlotChangeEvent} to all registered
      * listeners.
      *
-     * @param dataset  the dataset (<code>null</code> permitted).
+     * @param dataset  the dataset ({@code null} permitted).
      */
     public void setDataset(ValueDataset dataset) {
         setDataset(0, dataset);
@@ -485,7 +485,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
      * Sets a dataset for the plot.
      *
      * @param index  the dataset index.
-     * @param dataset  the dataset (<code>null</code> permitted).
+     * @param dataset  the dataset ({@code null} permitted).
      */
     public void setDataset(int index, ValueDataset dataset) {
 
@@ -520,9 +520,9 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
      * @param g2  the graphics target.
      * @param area  the area in which the plot should be drawn.
      * @param anchor  the anchor point (typically the last point that the
-     *     mouse clicked on, <code>null</code> is permitted).
+     *     mouse clicked on, {@code null} is permitted).
      * @param parentState  the state for the parent plot (if any).
-     * @param info  used to collect plot rendering info (<code>null</code>
+     * @param info  used to collect plot rendering info ({@code null}
      *     permitted).
      */
     @Override
@@ -605,7 +605,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
     /**
      * Returns the frame surrounding the specified view rectangle.
      *
-     * @param view  the view rectangle (<code>null</code> not permitted).
+     * @param view  the view rectangle ({@code null} not permitted).
      *
      * @return The frame rectangle.
      */
@@ -641,7 +641,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
      * all registered listeners.
      *
      * @param index  the scale index.
-     * @param scale  the scale (<code>null</code> not permitted).
+     * @param scale  the scale ({@code null} not permitted).
      */
     public void addScale(int index, DialScale scale) {
         ParamChecks.nullNotPermitted(scale, "scale");
@@ -660,7 +660,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
      *
      * @param index  the scale index.
      *
-     * @return The scale (possibly <code>null</code>).
+     * @return The scale (possibly {@code null}).
      */
     public DialScale getScale(int index) {
         DialScale result = null;
@@ -732,7 +732,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
      * arbitrary object.  The plot's dataset(s) is (are) not included in
      * the test.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

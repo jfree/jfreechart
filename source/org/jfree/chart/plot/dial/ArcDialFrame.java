@@ -137,7 +137,7 @@ public class ArcDialFrame extends AbstractDialLayer implements DialFrame,
     }
 
     /**
-     * Returns the background paint (never <code>null</code>).
+     * Returns the background paint (never {@code null}).
      *
      * @return The background paint.
      *
@@ -151,7 +151,7 @@ public class ArcDialFrame extends AbstractDialLayer implements DialFrame,
      * Sets the background paint and sends a {@link DialLayerChangeEvent} to
      * all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getBackgroundPaint()
      */
@@ -164,7 +164,7 @@ public class ArcDialFrame extends AbstractDialLayer implements DialFrame,
     /**
      * Returns the foreground paint.
      *
-     * @return The foreground paint (never <code>null</code>).
+     * @return The foreground paint (never {@code null}).
      *
      * @see #setForegroundPaint(Paint)
      */
@@ -176,7 +176,7 @@ public class ArcDialFrame extends AbstractDialLayer implements DialFrame,
      * Sets the foreground paint and sends a {@link DialLayerChangeEvent} to
      * all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getForegroundPaint()
      */
@@ -189,7 +189,7 @@ public class ArcDialFrame extends AbstractDialLayer implements DialFrame,
     /**
      * Returns the stroke.
      *
-     * @return The stroke (never <code>null</code>).
+     * @return The stroke (never {@code null}).
      *
      * @see #setStroke(Stroke)
      */
@@ -201,7 +201,7 @@ public class ArcDialFrame extends AbstractDialLayer implements DialFrame,
      * Sets the stroke and sends a {@link DialLayerChangeEvent} to
      * all registered listeners.
      *
-     * @param stroke  the stroke (<code>null</code> not permitted).
+     * @param stroke  the stroke ({@code null} not permitted).
      *
      * @see #getStroke()
      */
@@ -317,7 +317,7 @@ public class ArcDialFrame extends AbstractDialLayer implements DialFrame,
      * Returns the shape for the window for this dial.  Some dial layers will
      * request that their drawing be clipped within this window.
      *
-     * @param frame  the reference frame (<code>null</code> not permitted).
+     * @param frame  the reference frame ({@code null} not permitted).
      *
      * @return The shape of the dial's window.
      */
@@ -414,7 +414,7 @@ public class ArcDialFrame extends AbstractDialLayer implements DialFrame,
     /**
      * Tests this instance for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

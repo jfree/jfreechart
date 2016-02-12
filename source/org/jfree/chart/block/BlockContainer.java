@@ -88,7 +88,7 @@ public class BlockContainer extends AbstractBlock
     /**
      * Creates a new instance with the specified arrangement.
      *
-     * @param arrangement  the arrangement manager (<code>null</code> not
+     * @param arrangement  the arrangement manager ({@code null} not
      *                     permitted).
      */
     public BlockContainer(Arrangement arrangement) {
@@ -100,7 +100,7 @@ public class BlockContainer extends AbstractBlock
     /**
      * Returns the arrangement (layout) manager for the container.
      *
-     * @return The arrangement manager (never <code>null</code>).
+     * @return The arrangement manager (never {@code null}).
      */
     public Arrangement getArrangement() {
         return this.arrangement;
@@ -109,7 +109,7 @@ public class BlockContainer extends AbstractBlock
     /**
      * Sets the arrangement (layout) manager.
      *
-     * @param arrangement  the arrangement (<code>null</code> not permitted).
+     * @param arrangement  the arrangement ({@code null} not permitted).
      */
     public void setArrangement(Arrangement arrangement) {
         ParamChecks.nullNotPermitted(arrangement, "arrangement");
@@ -139,7 +139,7 @@ public class BlockContainer extends AbstractBlock
     /**
      * Adds a block to the container.
      *
-     * @param block  the block (<code>null</code> permitted).
+     * @param block  the block ({@code null} permitted).
      */
     public void add(Block block) {
         add(block, null);
@@ -148,8 +148,8 @@ public class BlockContainer extends AbstractBlock
     /**
      * Adds a block to the container.
      *
-     * @param block  the block (<code>null</code> permitted).
-     * @param key  the key (<code>null</code> permitted).
+     * @param block  the block ({@code null} permitted).
+     * @param key  the key ({@code null} permitted).
      */
     public void add(Block block, Object key) {
         this.blocks.add(block);
@@ -169,9 +169,9 @@ public class BlockContainer extends AbstractBlock
      * returns the block size.
      *
      * @param g2  the graphics device.
-     * @param constraint  the constraint (<code>null</code> not permitted).
+     * @param constraint  the constraint ({@code null} not permitted).
      *
-     * @return The block size (in Java2D units, never <code>null</code>).
+     * @return The block size (in Java2D units, never {@code null}).
      */
     @Override
     public Size2D arrange(Graphics2D g2, RectangleConstraint constraint) {
@@ -195,9 +195,9 @@ public class BlockContainer extends AbstractBlock
      * @param g2  the graphics device.
      * @param area  the area.
      * @param params  passed on to blocks within the container
-     *                (<code>null</code> permitted).
+     *                ({@code null} permitted).
      *
-     * @return An instance of {@link EntityBlockResult}, or <code>null</code>.
+     * @return An instance of {@link EntityBlockResult}, or {@code null}.
      */
     @Override
     public Object draw(Graphics2D g2, Rectangle2D area, Object params) {
@@ -242,7 +242,7 @@ public class BlockContainer extends AbstractBlock
     /**
      * Tests this container for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

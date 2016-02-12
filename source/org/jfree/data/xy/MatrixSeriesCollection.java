@@ -207,7 +207,7 @@ public class MatrixSeriesCollection extends AbstractXYZDataset
      * Notifies all registered listeners that the dataset has changed.
      * </p>
      *
-     * @param series the series (<code>null</code> not permitted).
+     * @param series the series ({@code null} not permitted).
      */
     public void addSeries(MatrixSeries series) {
         ParamChecks.nullNotPermitted(series, "series");
@@ -296,7 +296,7 @@ public class MatrixSeriesCollection extends AbstractXYZDataset
      * Notifies all registered listeners that the dataset has changed.
      * </p>
      *
-     * @param series the series (<code>null</code>).
+     * @param series the series ({@code null}).
      */
     public void removeSeries(MatrixSeries series) {
         ParamChecks.nullNotPermitted(series, "series");

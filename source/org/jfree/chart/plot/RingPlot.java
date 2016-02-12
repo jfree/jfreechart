@@ -147,7 +147,7 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
     private double sectionDepth;
 
     /**
-     * Creates a new plot with a <code>null</code> dataset.
+     * Creates a new plot with a {@code null} dataset.
      */
     public RingPlot() {
         this(null);
@@ -156,7 +156,7 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
     /**
      * Creates a new plot for the specified dataset.
      *
-     * @param dataset  the dataset (<code>null</code> permitted).
+     * @param dataset  the dataset ({@code null} permitted).
      */
     public RingPlot(PieDataset dataset) {
         super(dataset);
@@ -178,7 +178,7 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
      * default value is {@link CenterTextMode#NONE} therefore no text
      * will be displayed by default.
      * 
-     * @return The mode (never <code>null</code>).
+     * @return The mode (never {@code null}).
      * 
      * @since 1.0.18
      */
@@ -194,7 +194,7 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
      * For {@link CenterTextMode#VALUE}, the center text will be the value from
      * the first section in the dataset.
      * 
-     * @param mode  the mode (<code>null</code> not permitted).
+     * @param mode  the mode ({@code null} not permitted).
      * 
      * @since 1.0.18
      */
@@ -208,7 +208,7 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
      * Returns the text to display in the center of the plot when the mode
      * is {@link CenterTextMode#FIXED}.
      * 
-     * @return The text (possibly <code>null</code>).
+     * @return The text (possibly {@code null}).
      * 
      * @since 1.0.18.
      */
@@ -219,9 +219,9 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
     /**
      * Sets the text to display in the center of the plot and sends a
      * change event to all registered listeners.  If the text is set to 
-     * <code>null</code>, no text will be displayed.
+     * {@code null}, no text will be displayed.
      * 
-     * @param text  the text (<code>null</code> permitted).
+     * @param text  the text ({@code null} permitted).
      * 
      * @since 1.0.18
      */
@@ -235,7 +235,7 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
      * {@link CenterTextMode#VALUE}.  The default value is 
      * <code>DecimalFormat("0.00");</code>.
      * 
-     * @return The formatter (never <code>null</code>).
+     * @return The formatter (never {@code null}).
      * 
      * @since 1.0.18
      */
@@ -247,7 +247,7 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
      * Sets the formatter used to format the center text value and sends a
      * change event to all registered listeners.
      * 
-     * @param formatter  the formatter (<code>null</code> not permitted).
+     * @param formatter  the formatter ({@code null} not permitted).
      * 
      * @since 1.0.18
      */
@@ -260,7 +260,7 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
      * Returns the font used to display the center text.  The default value
      * is {@link PiePlot#DEFAULT_LABEL_FONT}.
      * 
-     * @return The font (never <code>null</code>).
+     * @return The font (never {@code null}).
      * 
      * @since 1.0.18
      */
@@ -272,7 +272,7 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
      * Sets the font used to display the center text and sends a change event
      * to all registered listeners.
      * 
-     * @param font  the font (<code>null</code> not permitted).
+     * @param font  the font ({@code null} not permitted).
      * 
      * @since 1.0.18
      */
@@ -286,7 +286,7 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
      * Returns the color for the center text.  The default value is
      * <code>Color.BLACK</code>.
      * 
-     * @return The color (never <code>null</code>). 
+     * @return The color (never {@code null}). 
      * 
      * @since 1.0.18
      */
@@ -298,7 +298,7 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
      * Sets the color for the center text and sends a change event to all 
      * registered listeners.
      * 
-     * @param color  the color (<code>null</code> not permitted).
+     * @param color  the color ({@code null} not permitted).
      * 
      * @since 1.0.18
      */
@@ -337,7 +337,7 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
     /**
      * Returns the separator stroke.
      *
-     * @return The stroke (never <code>null</code>).
+     * @return The stroke (never {@code null}).
      *
      * @see #setSeparatorStroke(Stroke)
      */
@@ -349,7 +349,7 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
      * Sets the stroke used to draw the separator between sections and sends
      * a change event to all registered listeners.
      *
-     * @param stroke  the stroke (<code>null</code> not permitted).
+     * @param stroke  the stroke ({@code null} not permitted).
      *
      * @see #getSeparatorStroke()
      */
@@ -362,7 +362,7 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
     /**
      * Returns the separator paint.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @see #setSeparatorPaint(Paint)
      */
@@ -374,7 +374,7 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
      * Sets the paint used to draw the separator between sections and sends a
      * change event to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getSeparatorPaint()
      */
@@ -472,9 +472,9 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
      * beginning of each drawing.
      *
      * @param g2  the graphics device.
-     * @param plotArea  the plot area (<code>null</code> not permitted).
+     * @param plotArea  the plot area ({@code null} not permitted).
      * @param plot  the plot.
-     * @param index  the secondary index (<code>null</code> for primary
+     * @param index  the secondary index ({@code null} for primary
      *               renderer).
      * @param info  collects chart rendering information for return to caller.
      *
@@ -492,7 +492,7 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
     /**
      * Draws a single data item.
      *
-     * @param g2  the graphics device (<code>null</code> not permitted).
+     * @param g2  the graphics device ({@code null} not permitted).
      * @param section  the section index.
      * @param dataArea  the data plot area.
      * @param state  state information for one chart.
@@ -651,7 +651,7 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
     /**
      * Tests this plot for equality with an arbitrary object.
      *
-     * @param obj  the object to test against (<code>null</code> permitted).
+     * @param obj  the object to test against ({@code null} permitted).
      *
      * @return A boolean.
      */

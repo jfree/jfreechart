@@ -92,7 +92,7 @@ public class StandardCategoryURLGenerator implements CategoryURLGenerator,
     /**
      * Constructor that overrides default prefix to the URL.
      *
-     * @param prefix  the prefix to the URL (<code>null</code> not permitted).
+     * @param prefix  the prefix to the URL ({@code null} not permitted).
      */
     public StandardCategoryURLGenerator(String prefix) {
         ParamChecks.nullNotPermitted(prefix, "prefix");
@@ -102,11 +102,11 @@ public class StandardCategoryURLGenerator implements CategoryURLGenerator,
     /**
      * Constructor that overrides all the defaults.
      *
-     * @param prefix  the prefix to the URL (<code>null</code> not permitted).
+     * @param prefix  the prefix to the URL ({@code null} not permitted).
      * @param seriesParameterName  the name of the series parameter to go in
-     *                             each URL (<code>null</code> not permitted).
+     *                             each URL ({@code null} not permitted).
      * @param categoryParameterName  the name of the category parameter to go in
-     *                               each URL (<code>null</code> not permitted).
+     *                               each URL ({@code null} not permitted).
      */
     public StandardCategoryURLGenerator(String prefix, 
             String seriesParameterName, String categoryParameterName) {
@@ -169,7 +169,7 @@ public class StandardCategoryURLGenerator implements CategoryURLGenerator,
     /**
      * Tests the generator for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

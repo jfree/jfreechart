@@ -105,7 +105,7 @@ public class XYDataImageAnnotation extends AbstractXYAnnotation
     /**
      * Creates a new annotation to be displayed within the specified rectangle.
      *
-     * @param image  the image (<code>null</code> not permitted).
+     * @param image  the image ({@code null} not permitted).
      * @param x  the x-coordinate (in data space).
      * @param y  the y-coordinate (in data space).
      * @param w  the image display area width.
@@ -119,7 +119,7 @@ public class XYDataImageAnnotation extends AbstractXYAnnotation
     /**
      * Creates a new annotation to be displayed within the specified rectangle.
      *
-     * @param image  the image (<code>null</code> not permitted).
+     * @param image  the image ({@code null} not permitted).
      * @param x  the x-coordinate (in data space).
      * @param y  the y-coordinate (in data space).
      * @param w  the image display area width.
@@ -289,7 +289,7 @@ public class XYDataImageAnnotation extends AbstractXYAnnotation
     /**
      * Tests this object for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

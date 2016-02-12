@@ -59,7 +59,7 @@ public class RendererUtilities {
      * Finds the lower index of the range of live items in the specified data
      * series.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
      * @param series  the series index.
      * @param xLow  the lowest x-value in the live range.
      * @param xHigh  the highest x-value in the live range.
@@ -153,7 +153,7 @@ public class RendererUtilities {
      * Finds the upper index of the range of live items in the specified data
      * series.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
      * @param series  the series index.
      * @param xLow  the lowest x-value in the live range.
      * @param xHigh  the highest x-value in the live range.
@@ -245,7 +245,7 @@ public class RendererUtilities {
      * Finds a range of item indices that is guaranteed to contain all the
      * x-values from x0 to x1 (inclusive).
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
      * @param series  the series index.
      * @param xLow  the lower bound of the x-value range.
      * @param xHigh  the upper bound of the x-value range.

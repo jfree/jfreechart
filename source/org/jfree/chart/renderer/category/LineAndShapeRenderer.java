@@ -270,10 +270,10 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
 
     /**
      * Returns a flag that controls whether or not lines are drawn for ALL
-     * series.  If this flag is <code>null</code>, then the "per series"
+     * series.  If this flag is {@code null}, then the "per series"
      * settings will apply.
      *
-     * @return A flag (possibly <code>null</code>).
+     * @return A flag (possibly {@code null}).
      *
      * @see #setLinesVisible(Boolean)
      *
@@ -287,10 +287,10 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
     /**
      * Sets a flag that controls whether or not lines are drawn between the
      * items in ALL series, and sends a {@link RendererChangeEvent} to all
-     * registered listeners.  You need to set this to <code>null</code> if you
+     * registered listeners.  You need to set this to {@code null} if you
      * want the "per series" settings to apply.
      *
-     * @param visible  the flag (<code>null</code> permitted).
+     * @param visible  the flag ({@code null} permitted).
      *
      * @see #getLinesVisible()
      *
@@ -324,7 +324,7 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
      *
      * @param series  the series index (zero-based).
      *
-     * @return The flag (possibly <code>null</code>).
+     * @return The flag (possibly {@code null}).
      *
      * @see #setSeriesLinesVisible(int, Boolean)
      */
@@ -337,7 +337,7 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param series  the series index (zero-based).
-     * @param flag  the flag (<code>null</code> permitted).
+     * @param flag  the flag ({@code null} permitted).
      *
      * @see #getSeriesLinesVisible(int)
      */
@@ -411,7 +411,7 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
      * Returns the flag that controls whether the shapes are visible for the
      * items in ALL series.
      *
-     * @return The flag (possibly <code>null</code>).
+     * @return The flag (possibly {@code null}).
      *
      * @see #setShapesVisible(Boolean)
      *
@@ -426,7 +426,7 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
      * Sets the 'shapes visible' for ALL series and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param visible  the flag (<code>null</code> permitted).
+     * @param visible  the flag ({@code null} permitted).
      *
      * @see #getShapesVisible()
      *
@@ -655,7 +655,7 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
      * Sets the 'shapes filled' for ALL series and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param filled  the flag (<code>null</code> permitted).
+     * @param filled  the flag ({@code null} permitted).
      *
      * @see #getShapesFilled()
      *
@@ -1041,7 +1041,7 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
     /**
      * Tests this renderer for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

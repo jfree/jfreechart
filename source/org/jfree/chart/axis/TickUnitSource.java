@@ -51,7 +51,7 @@ public interface TickUnitSource {
      * than <code>unit</code> or, if there is no larger unit, returns 
      * <code>unit</code>.
      *
-     * @param unit  the unit (<code>null</code> not permitted).
+     * @param unit  the unit ({@code null} not permitted).
      *
      * @return A tick unit that is larger than the supplied unit.
      */
@@ -74,7 +74,7 @@ public interface TickUnitSource {
      *
      * @param size  the size.
      *
-     * @return A unit from the collection (never <code>null</code>).
+     * @return A unit from the collection (never {@code null}).
      */
     public TickUnit getCeilingTickUnit(double size);
 

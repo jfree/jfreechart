@@ -73,8 +73,8 @@ public class ValueMarker extends Marker {
      * Creates a new marker.
      *
      * @param value  the value.
-     * @param paint  the paint (<code>null</code> not permitted).
-     * @param stroke  the stroke (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
+     * @param stroke  the stroke ({@code null} not permitted).
      */
     public ValueMarker(double value, Paint paint, Stroke stroke) {
         this(value, paint, stroke, paint, stroke, 1.0f);
@@ -84,10 +84,10 @@ public class ValueMarker extends Marker {
      * Creates a new value marker.
      *
      * @param value  the value.
-     * @param paint  the paint (<code>null</code> not permitted).
-     * @param stroke  the stroke (<code>null</code> not permitted).
-     * @param outlinePaint  the outline paint (<code>null</code> permitted).
-     * @param outlineStroke  the outline stroke (<code>null</code> permitted).
+     * @param paint  the paint ({@code null} not permitted).
+     * @param stroke  the stroke ({@code null} not permitted).
+     * @param outlinePaint  the outline paint ({@code null} permitted).
+     * @param outlineStroke  the outline stroke ({@code null} permitted).
      * @param alpha  the alpha transparency (in the range 0.0f to 1.0f).
      */
     public ValueMarker(double value, Paint paint, Stroke stroke,
@@ -127,13 +127,13 @@ public class ValueMarker extends Marker {
      * returns <code>true</code> if:
      *
      * <ul>
-     * <li><code>obj</code> is not <code>null</code>;</li>
+     * <li><code>obj</code> is not {@code null};</li>
      * <li><code>obj</code> is an instance of <code>ValueMarker</code>;</li>
      * <li><code>obj</code> has the same value as this marker;</li>
      * <li><code>super.equals(obj)</code> returns <code>true</code>.</li>
      * </ul>
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

@@ -178,7 +178,7 @@ public class Outlier implements Comparable {
     /**
      * Tests this outlier for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

@@ -344,7 +344,7 @@ public class DefaultDrawingSupplier implements DrawingSupplier, Cloneable,
     /**
      * Tests this object for equality with another object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */
@@ -395,8 +395,8 @@ public class DefaultDrawingSupplier implements DrawingSupplier, Cloneable,
     /**
      * A utility method for testing the equality of two arrays of shapes.
      *
-     * @param s1  the first array (<code>null</code> permitted).
-     * @param s2  the second array (<code>null</code> permitted).
+     * @param s1  the first array ({@code null} permitted).
+     * @param s2  the second array ({@code null} permitted).
      *
      * @return A boolean.
      */

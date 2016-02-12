@@ -96,10 +96,10 @@ public class LabelBlock extends AbstractBlock
     /** The font. */
     private Font font;
 
-    /** The tool tip text (can be <code>null</code>). */
+    /** The tool tip text (can be {@code null}). */
     private String toolTipText;
 
-    /** The URL text (can be <code>null</code>). */
+    /** The URL text (can be {@code null}). */
     private String urlText;
 
     /** The default color. */
@@ -125,7 +125,7 @@ public class LabelBlock extends AbstractBlock
     /**
      * Creates a new label block.
      *
-     * @param label  the label (<code>null</code> not permitted).
+     * @param label  the label ({@code null} not permitted).
      */
     public LabelBlock(String label) {
         this(label, new Font("SansSerif", Font.PLAIN, 10), DEFAULT_PAINT);
@@ -134,8 +134,8 @@ public class LabelBlock extends AbstractBlock
     /**
      * Creates a new label block.
      *
-     * @param text  the text for the label (<code>null</code> not permitted).
-     * @param font  the font (<code>null</code> not permitted).
+     * @param text  the text for the label ({@code null} not permitted).
+     * @param font  the font ({@code null} not permitted).
      */
     public LabelBlock(String text, Font font) {
         this(text, font, DEFAULT_PAINT);
@@ -144,9 +144,9 @@ public class LabelBlock extends AbstractBlock
     /**
      * Creates a new label block.
      *
-     * @param text  the text for the label (<code>null</code> not permitted).
-     * @param font  the font (<code>null</code> not permitted).
-     * @param paint the paint (<code>null</code> not permitted).
+     * @param text  the text for the label ({@code null} not permitted).
+     * @param font  the font ({@code null} not permitted).
+     * @param paint the paint ({@code null} not permitted).
      */
     public LabelBlock(String text, Font font, Paint paint) {
         this.text = text;
@@ -162,7 +162,7 @@ public class LabelBlock extends AbstractBlock
     /**
      * Returns the font.
      *
-     * @return The font (never <code>null</code>).
+     * @return The font (never {@code null}).
      *
      * @see #setFont(Font)
      */
@@ -173,7 +173,7 @@ public class LabelBlock extends AbstractBlock
     /**
      * Sets the font and regenerates the label.
      *
-     * @param font  the font (<code>null</code> not permitted).
+     * @param font  the font ({@code null} not permitted).
      *
      * @see #getFont()
      */
@@ -186,7 +186,7 @@ public class LabelBlock extends AbstractBlock
     /**
      * Returns the paint.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @see #setPaint(Paint)
      */
@@ -197,7 +197,7 @@ public class LabelBlock extends AbstractBlock
     /**
      * Sets the paint and regenerates the label.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getPaint()
      */
@@ -211,7 +211,7 @@ public class LabelBlock extends AbstractBlock
     /**
      * Returns the tool tip text.
      *
-     * @return The tool tip text (possibly <code>null</code>).
+     * @return The tool tip text (possibly {@code null}).
      *
      * @see #setToolTipText(String)
      */
@@ -222,7 +222,7 @@ public class LabelBlock extends AbstractBlock
     /**
      * Sets the tool tip text.
      *
-     * @param text  the text (<code>null</code> permitted).
+     * @param text  the text ({@code null} permitted).
      *
      * @see #getToolTipText()
      */
@@ -233,7 +233,7 @@ public class LabelBlock extends AbstractBlock
     /**
      * Returns the URL text.
      *
-     * @return The URL text (possibly <code>null</code>).
+     * @return The URL text (possibly {@code null}).
      *
      * @see #setURLText(String)
      */
@@ -244,7 +244,7 @@ public class LabelBlock extends AbstractBlock
     /**
      * Sets the URL text.
      *
-     * @param text  the text (<code>null</code> permitted).
+     * @param text  the text ({@code null} permitted).
      *
      * @see #getURLText()
      */
@@ -255,7 +255,7 @@ public class LabelBlock extends AbstractBlock
     /**
      * Returns the content alignment point.
      *
-     * @return The content alignment point (never <code>null</code>).
+     * @return The content alignment point (never {@code null}).
      *
      * @since 1.0.13
      */
@@ -267,7 +267,7 @@ public class LabelBlock extends AbstractBlock
      * Sets the content alignment point.
      *
      * @param anchor  the anchor used to determine the alignment point (never
-     *         <code>null</code>).
+     *         {@code null}).
      *
      * @since 1.0.13
      */
@@ -277,7 +277,7 @@ public class LabelBlock extends AbstractBlock
     }
 
     /**
-     * Returns the text anchor (never <code>null</code>).
+     * Returns the text anchor (never {@code null}).
      *
      * @return The text anchor.
      *
@@ -290,7 +290,7 @@ public class LabelBlock extends AbstractBlock
     /**
      * Sets the text anchor.
      *
-     * @param anchor  the anchor (<code>null</code> not permitted).
+     * @param anchor  the anchor ({@code null} not permitted).
      *
      * @since 1.0.13
      */
@@ -303,9 +303,9 @@ public class LabelBlock extends AbstractBlock
      * returns the block size.
      *
      * @param g2  the graphics device.
-     * @param constraint  the constraint (<code>null</code> not permitted).
+     * @param constraint  the constraint ({@code null} not permitted).
      *
-     * @return The block size (in Java2D units, never <code>null</code>).
+     * @return The block size (in Java2D units, never {@code null}).
      */
     @Override
     public Size2D arrange(Graphics2D g2, RectangleConstraint constraint) {
@@ -331,9 +331,9 @@ public class LabelBlock extends AbstractBlock
      *
      * @param g2  the graphics device.
      * @param area  the area.
-     * @param params  ignored (<code>null</code> permitted).
+     * @param params  ignored ({@code null} permitted).
      *
-     * @return Always <code>null</code>.
+     * @return Always {@code null}.
      */
     @Override
     public Object draw(Graphics2D g2, Rectangle2D area, Object params) {
@@ -375,7 +375,7 @@ public class LabelBlock extends AbstractBlock
      * Tests this <code>LabelBlock</code> for equality with an arbitrary
      * object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

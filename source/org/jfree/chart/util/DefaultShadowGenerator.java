@@ -114,7 +114,7 @@ public class DefaultShadowGenerator implements ShadowGenerator, Serializable {
     /**
      * Returns the shadow color.
      *
-     * @return The shadow color (never <code>null</code>).
+     * @return The shadow color (never {@code null}).
      */
     public Color getShadowColor() {
         return this.shadowColor;
@@ -284,7 +284,7 @@ public class DefaultShadowGenerator implements ShadowGenerator, Serializable {
     /**
      * Tests this object for equality with an arbitrary object.
      * 
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      * 
      * @return The object.
      */

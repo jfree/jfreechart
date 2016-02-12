@@ -93,7 +93,7 @@ public class TaskSeriesCollection extends AbstractSeriesDataset
     /**
      * Returns a series from the collection.
      *
-     * @param key  the series key (<code>null</code> not permitted).
+     * @param key  the series key ({@code null} not permitted).
      *
      * @return The series.
      *
@@ -205,7 +205,7 @@ public class TaskSeriesCollection extends AbstractSeriesDataset
     /**
      * Returns the column index for a column key.
      *
-     * @param columnKey  the column key (<code>null</code> not permitted).
+     * @param columnKey  the column key ({@code null} not permitted).
      *
      * @return The column index.
      */
@@ -254,7 +254,7 @@ public class TaskSeriesCollection extends AbstractSeriesDataset
      * {@link org.jfree.data.general.DatasetChangeEvent} to all registered
      * listeners.
      *
-     * @param series  the series (<code>null</code> not permitted).
+     * @param series  the series ({@code null} not permitted).
      */
     public void add(TaskSeries series) {
         ParamChecks.nullNotPermitted(series, "series");
@@ -365,7 +365,7 @@ public class TaskSeriesCollection extends AbstractSeriesDataset
      * @param rowKey  the series.
      * @param columnKey  the category.
      *
-     * @return The start value (possibly <code>null</code>).
+     * @return The start value (possibly {@code null}).
      */
     @Override
     public Number getStartValue(Comparable rowKey, Comparable columnKey) {
@@ -404,7 +404,7 @@ public class TaskSeriesCollection extends AbstractSeriesDataset
      * @param rowKey  the series.
      * @param columnKey  the category.
      *
-     * @return The end value (possibly <code>null</code>).
+     * @return The end value (possibly {@code null}).
      */
     @Override
     public Number getEndValue(Comparable rowKey, Comparable columnKey) {
@@ -442,7 +442,7 @@ public class TaskSeriesCollection extends AbstractSeriesDataset
      * @param row  the row index (zero-based).
      * @param column  the column index (zero-based).
      *
-     * @return The percent complete (possibly <code>null</code>).
+     * @return The percent complete (possibly {@code null}).
      */
     @Override
     public Number getPercentComplete(int row, int column) {
@@ -513,7 +513,7 @@ public class TaskSeriesCollection extends AbstractSeriesDataset
      * @param column  the column index (zero-based).
      * @param subinterval  the sub-interval index (zero-based).
      *
-     * @return The start value (possibly <code>null</code>).
+     * @return The start value (possibly {@code null}).
      */
     @Override
     public Number getStartValue(int row, int column, int subinterval) {
@@ -529,7 +529,7 @@ public class TaskSeriesCollection extends AbstractSeriesDataset
      * @param columnKey  the column key.
      * @param subinterval  the subinterval.
      *
-     * @return The start value (possibly <code>null</code>).
+     * @return The start value (possibly {@code null}).
      */
     @Override
     public Number getStartValue(Comparable rowKey, Comparable columnKey,
@@ -555,7 +555,7 @@ public class TaskSeriesCollection extends AbstractSeriesDataset
      * @param column  the column index (zero-based).
      * @param subinterval  the subinterval.
      *
-     * @return The end value (possibly <code>null</code>).
+     * @return The end value (possibly {@code null}).
      */
     @Override
     public Number getEndValue(int row, int column, int subinterval) {
@@ -571,7 +571,7 @@ public class TaskSeriesCollection extends AbstractSeriesDataset
      * @param columnKey  the column key.
      * @param subinterval  the subinterval.
      *
-     * @return The end value (possibly <code>null</code>).
+     * @return The end value (possibly {@code null}).
      */
     @Override
     public Number getEndValue(Comparable rowKey, Comparable columnKey,
@@ -597,7 +597,7 @@ public class TaskSeriesCollection extends AbstractSeriesDataset
      * @param column  the column index (zero-based).
      * @param subinterval  the sub-interval.
      *
-     * @return The percent complete value (possibly <code>null</code>).
+     * @return The percent complete value (possibly {@code null}).
      */
     @Override
     public Number getPercentComplete(int row, int column, int subinterval) {
@@ -613,7 +613,7 @@ public class TaskSeriesCollection extends AbstractSeriesDataset
      * @param columnKey  the column key.
      * @param subinterval  the sub-interval.
      *
-     * @return The percent complete value (possibly <code>null</code>).
+     * @return The percent complete value (possibly {@code null}).
      */
     @Override
     public Number getPercentComplete(Comparable rowKey, Comparable columnKey,
@@ -667,7 +667,7 @@ public class TaskSeriesCollection extends AbstractSeriesDataset
     /**
      * Tests this instance for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

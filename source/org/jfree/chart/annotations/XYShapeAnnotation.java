@@ -107,7 +107,7 @@ public class XYShapeAnnotation extends AbstractXYAnnotation
      * Creates a new annotation (where, by default, the shape is drawn
      * with a black outline).
      *
-     * @param shape  the shape (coordinates in data space, <code>null</code>
+     * @param shape  the shape (coordinates in data space, {@code null}
      *     not permitted).
      */
     public XYShapeAnnotation(Shape shape) {
@@ -118,9 +118,9 @@ public class XYShapeAnnotation extends AbstractXYAnnotation
      * Creates a new annotation where the shape is drawn as an outline using
      * the specified <code>stroke</code> and <code>outlinePaint</code>.
      *
-     * @param shape  the shape (<code>null</code> not permitted).
-     * @param stroke  the shape stroke (<code>null</code> permitted).
-     * @param outlinePaint  the shape color (<code>null</code> permitted).
+     * @param shape  the shape ({@code null} not permitted).
+     * @param stroke  the shape stroke ({@code null} permitted).
+     * @param outlinePaint  the shape color ({@code null} permitted).
      */
     public XYShapeAnnotation(Shape shape, Stroke stroke, Paint outlinePaint) {
         this(shape, stroke, outlinePaint, null);
@@ -129,10 +129,10 @@ public class XYShapeAnnotation extends AbstractXYAnnotation
     /**
      * Creates a new annotation.
      *
-     * @param shape  the shape (<code>null</code> not permitted).
-     * @param stroke  the shape stroke (<code>null</code> permitted).
-     * @param outlinePaint  the shape color (<code>null</code> permitted).
-     * @param fillPaint  the paint used to fill the shape (<code>null</code>
+     * @param shape  the shape ({@code null} not permitted).
+     * @param stroke  the shape stroke ({@code null} permitted).
+     * @param outlinePaint  the shape color ({@code null} permitted).
+     * @param fillPaint  the paint used to fill the shape ({@code null}
      *                   permitted.
      */
     public XYShapeAnnotation(Shape shape, Stroke stroke, Paint outlinePaint,
@@ -218,7 +218,7 @@ public class XYShapeAnnotation extends AbstractXYAnnotation
     /**
      * Tests this annotation for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

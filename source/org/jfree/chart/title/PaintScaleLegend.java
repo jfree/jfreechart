@@ -85,15 +85,15 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
     /** For serialization. */
     static final long serialVersionUID = -1365146490993227503L;
 
-    /** The paint scale (never <code>null</code>). */
+    /** The paint scale (never {@code null}). */
     private PaintScale scale;
 
-    /** The value axis (never <code>null</code>). */
+    /** The value axis (never {@code null}). */
     private ValueAxis axis;
 
     /**
      * The axis location (handles both orientations, never
-     * <code>null</code>).
+     * {@code null}).
      */
     private AxisLocation axisLocation;
 
@@ -115,7 +115,7 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
     /** The stroke used to draw an outline around the paint strip. */
     private transient Stroke stripOutlineStroke;
 
-    /** The background paint (never <code>null</code>). */
+    /** The background paint (never {@code null}). */
     private transient Paint backgroundPaint;
 
     /**
@@ -128,8 +128,8 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
     /**
      * Creates a new instance.
      *
-     * @param scale  the scale (<code>null</code> not permitted).
-     * @param axis  the axis (<code>null</code> not permitted).
+     * @param scale  the scale ({@code null} not permitted).
+     * @param axis  the axis ({@code null} not permitted).
      */
     public PaintScaleLegend(PaintScale scale, ValueAxis axis) {
         ParamChecks.nullNotPermitted(axis, "axis");
@@ -150,7 +150,7 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
     /**
      * Returns the scale used to convert values to colors.
      *
-     * @return The scale (never <code>null</code>).
+     * @return The scale (never {@code null}).
      *
      * @see #setScale(PaintScale)
      */
@@ -162,7 +162,7 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
      * Sets the scale and sends a {@link TitleChangeEvent} to all registered
      * listeners.
      *
-     * @param scale  the scale (<code>null</code> not permitted).
+     * @param scale  the scale ({@code null} not permitted).
      *
      * @see #getScale()
      */
@@ -175,7 +175,7 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
     /**
      * Returns the axis for the paint scale.
      *
-     * @return The axis (never <code>null</code>).
+     * @return The axis (never {@code null}).
      *
      * @see #setAxis(ValueAxis)
      */
@@ -187,7 +187,7 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
      * Sets the axis for the paint scale and sends a {@link TitleChangeEvent}
      * to all registered listeners.
      *
-     * @param axis  the axis (<code>null</code> not permitted).
+     * @param axis  the axis ({@code null} not permitted).
      *
      * @see #getAxis()
      */
@@ -202,7 +202,7 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
     /**
      * Returns the axis location.
      *
-     * @return The axis location (never <code>null</code>).
+     * @return The axis location (never {@code null}).
      *
      * @see #setAxisLocation(AxisLocation)
      */
@@ -214,7 +214,7 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
      * Sets the axis location and sends a {@link TitleChangeEvent} to all
      * registered listeners.
      *
-     * @param location  the location (<code>null</code> not permitted).
+     * @param location  the location ({@code null} not permitted).
      *
      * @see #getAxisLocation()
      */
@@ -299,7 +299,7 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
     /**
      * Returns the paint used to draw the outline of the paint strip.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @see #setStripOutlinePaint(Paint)
      */
@@ -311,7 +311,7 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
      * Sets the paint used to draw the outline of the paint strip, and sends
      * a {@link TitleChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getStripOutlinePaint()
      */
@@ -324,7 +324,7 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
     /**
      * Returns the stroke used to draw the outline around the paint strip.
      *
-     * @return The stroke (never <code>null</code>).
+     * @return The stroke (never {@code null}).
      *
      * @see #setStripOutlineStroke(Stroke)
      */
@@ -336,7 +336,7 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
      * Sets the stroke used to draw the outline around the paint strip and
      * sends a {@link TitleChangeEvent} to all registered listeners.
      *
-     * @param stroke  the stroke (<code>null</code> not permitted).
+     * @param stroke  the stroke ({@code null} not permitted).
      *
      * @see #getStripOutlineStroke()
      */
@@ -359,7 +359,7 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
      * Sets the background paint and sends a {@link TitleChangeEvent} to all
      * registered listeners.
      *
-     * @param paint  the paint (<code>null</code> permitted).
+     * @param paint  the paint ({@code null} permitted).
      */
     public void setBackgroundPaint(Paint paint) {
         this.backgroundPaint = paint;
@@ -413,9 +413,9 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
      * returns the block size.
      *
      * @param g2  the graphics device.
-     * @param constraint  the constraint (<code>null</code> not permitted).
+     * @param constraint  the constraint ({@code null} not permitted).
      *
-     * @return The block size (in Java2D units, never <code>null</code>).
+     * @return The block size (in Java2D units, never {@code null}).
      */
     @Override
     public Size2D arrange(Graphics2D g2, RectangleConstraint constraint) {
@@ -507,8 +507,8 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
     /**
      * Draws the legend within the specified area.
      *
-     * @param g2  the graphics target (<code>null</code> not permitted).
-     * @param area  the drawing area (<code>null</code> not permitted).
+     * @param g2  the graphics target ({@code null} not permitted).
+     * @param area  the drawing area ({@code null} not permitted).
      */
     @Override
     public void draw(Graphics2D g2, Rectangle2D area) {
@@ -518,11 +518,11 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
     /**
      * Draws the legend within the specified area.
      *
-     * @param g2  the graphics target (<code>null</code> not permitted).
-     * @param area  the drawing area (<code>null</code> not permitted).
+     * @param g2  the graphics target ({@code null} not permitted).
+     * @param area  the drawing area ({@code null} not permitted).
      * @param params  drawing parameters (ignored here).
      *
-     * @return <code>null</code>.
+     * @return {@code null}.
      */
     @Override
     public Object draw(Graphics2D g2, Rectangle2D area, Object params) {
@@ -653,7 +653,7 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
     /**
      * Tests this legend for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

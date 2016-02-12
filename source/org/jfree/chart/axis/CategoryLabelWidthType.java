@@ -67,7 +67,7 @@ public final class CategoryLabelWidthType implements Serializable {
     /**
      * Private constructor.
      *
-     * @param name  the name (<code>null</code> not permitted).
+     * @param name  the name ({@code null} not permitted).
      */
     private CategoryLabelWidthType(String name) {
         ParamChecks.nullNotPermitted(name, "name");
@@ -77,7 +77,7 @@ public final class CategoryLabelWidthType implements Serializable {
     /**
      * Returns a string representing the object.
      *
-     * @return The string (never <code>null</code>).
+     * @return The string (never {@code null}).
      */
     @Override
     public String toString() {

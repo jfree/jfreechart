@@ -107,7 +107,7 @@ public class TimePeriodValues extends Series implements Serializable {
     /**
      * Creates a new (empty) collection of time period values.
      *
-     * @param name  the name of the series (<code>null</code> not permitted).
+     * @param name  the name of the series ({@code null} not permitted).
      */
     public TimePeriodValues(String name) {
         this(name, DEFAULT_DOMAIN_DESCRIPTION, DEFAULT_RANGE_DESCRIPTION);
@@ -120,7 +120,7 @@ public class TimePeriodValues extends Series implements Serializable {
      * where this is helpful is when generating a chart for the time series -
      * axis labels can be taken from the domain and range description.
      *
-     * @param name  the name of the series (<code>null</code> not permitted).
+     * @param name  the name of the series ({@code null} not permitted).
      * @param domain  the domain description.
      * @param range  the range description.
      */
@@ -134,7 +134,7 @@ public class TimePeriodValues extends Series implements Serializable {
     /**
      * Returns the domain description.
      *
-     * @return The domain description (possibly <code>null</code>).
+     * @return The domain description (possibly {@code null}).
      * 
      * @see #getRangeDescription()
      * @see #setDomainDescription(String)
@@ -147,7 +147,7 @@ public class TimePeriodValues extends Series implements Serializable {
      * Sets the domain description and fires a property change event (with the
      * property name <code>Domain</code> if the description changes).
      *
-     * @param description  the new description (<code>null</code> permitted).
+     * @param description  the new description ({@code null} permitted).
      * 
      * @see #getDomainDescription()
      */
@@ -160,7 +160,7 @@ public class TimePeriodValues extends Series implements Serializable {
     /**
      * Returns the range description.
      *
-     * @return The range description (possibly <code>null</code>).
+     * @return The range description (possibly {@code null}).
      * 
      * @see #getDomainDescription()
      * @see #setRangeDescription(String)
@@ -173,7 +173,7 @@ public class TimePeriodValues extends Series implements Serializable {
      * Sets the range description and fires a property change event with the
      * name <code>Range</code>.
      *
-     * @param description  the new description (<code>null</code> permitted).
+     * @param description  the new description ({@code null} permitted).
      * 
      * @see #getRangeDescription()
      */
@@ -225,7 +225,7 @@ public class TimePeriodValues extends Series implements Serializable {
      * @param index  the item index (in the range <code>0</code> to 
      *     <code>getItemCount() - 1</code>).
      *
-     * @return The value at the specified index (possibly <code>null</code>).
+     * @return The value at the specified index (possibly {@code null}).
      * 
      * @see #getDataItem(int)
      */
@@ -237,7 +237,7 @@ public class TimePeriodValues extends Series implements Serializable {
      * Adds a data item to the series and sends a {@link SeriesChangeEvent} to
      * all registered listeners.
      *
-     * @param item  the item (<code>null</code> not permitted).
+     * @param item  the item ({@code null} not permitted).
      */
     public void add(TimePeriodValue item) {
         ParamChecks.nullNotPermitted(item, "item");
@@ -352,7 +352,7 @@ public class TimePeriodValues extends Series implements Serializable {
      * Adds a new data item to the series and sends a {@link SeriesChangeEvent}
      * to all registered listeners.
      *
-     * @param period  the time period (<code>null</code> not permitted).
+     * @param period  the time period ({@code null} not permitted).
      * @param value  the value.
      * 
      * @see #add(TimePeriod, Number)
@@ -366,8 +366,8 @@ public class TimePeriodValues extends Series implements Serializable {
      * Adds a new data item to the series and sends a {@link SeriesChangeEvent}
      * to all registered listeners.
      *
-     * @param period  the time period (<code>null</code> not permitted).
-     * @param value  the value (<code>null</code> permitted).
+     * @param period  the time period ({@code null} not permitted).
+     * @param value  the value ({@code null} permitted).
      */
     public void add(TimePeriod period, Number value) {
         TimePeriodValue item = new TimePeriodValue(period, value);
@@ -379,7 +379,7 @@ public class TimePeriodValues extends Series implements Serializable {
      * {@link SeriesChangeEvent} to all registered listeners.
      *
      * @param index  the index of the data item to update.
-     * @param value  the new value (<code>null</code> not permitted).
+     * @param value  the new value ({@code null} not permitted).
      */
     public void update(int index, Number value) {
         TimePeriodValue item = getDataItem(index);
@@ -405,7 +405,7 @@ public class TimePeriodValues extends Series implements Serializable {
     /**
      * Tests the series for equality with another object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return <code>true</code> or <code>false</code>.
      */

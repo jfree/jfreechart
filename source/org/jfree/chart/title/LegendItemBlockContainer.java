@@ -83,10 +83,10 @@ public class LegendItemBlockContainer extends BlockContainer {
     /** The series index. */
     private int series;
 
-    /** The tool tip text (can be <code>null</code>). */
+    /** The tool tip text (can be {@code null}). */
     private String toolTipText;
 
-    /** The URL text (can be <code>null</code>). */
+    /** The URL text (can be {@code null}). */
     private String urlText;
 
     /**
@@ -166,7 +166,7 @@ public class LegendItemBlockContainer extends BlockContainer {
     /**
      * Returns the tool tip text.
      *
-     * @return The tool tip text (possibly <code>null</code>).
+     * @return The tool tip text (possibly {@code null}).
      *
      * @since 1.0.3
      */
@@ -177,7 +177,7 @@ public class LegendItemBlockContainer extends BlockContainer {
     /**
      * Sets the tool tip text.
      *
-     * @param text  the text (<code>null</code> permitted).
+     * @param text  the text ({@code null} permitted).
      *
      * @since 1.0.3
      */
@@ -188,7 +188,7 @@ public class LegendItemBlockContainer extends BlockContainer {
     /**
      * Returns the URL text.
      *
-     * @return The URL text (possibly <code>null</code>).
+     * @return The URL text (possibly {@code null}).
      *
      * @since 1.0.3
      */
@@ -199,7 +199,7 @@ public class LegendItemBlockContainer extends BlockContainer {
     /**
      * Sets the URL text.
      *
-     * @param text  the text (<code>null</code> permitted).
+     * @param text  the text ({@code null} permitted).
      *
      * @since 1.0.3
      */
@@ -213,9 +213,9 @@ public class LegendItemBlockContainer extends BlockContainer {
      * @param g2  the graphics device.
      * @param area  the area.
      * @param params  passed on to blocks within the container
-     *                (<code>null</code> permitted).
+     *                ({@code null} permitted).
      *
-     * @return An instance of {@link EntityBlockResult}, or <code>null</code>.
+     * @return An instance of {@link EntityBlockResult}, or {@code null}.
      */
     @Override
     public Object draw(Graphics2D g2, Rectangle2D area, Object params) {

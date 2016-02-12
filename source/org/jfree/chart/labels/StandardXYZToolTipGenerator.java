@@ -95,11 +95,11 @@ public class StandardXYZToolTipGenerator extends StandardXYToolTipGenerator
      * formatters.
      *
      * @param formatString  the format string.
-     * @param xFormat  the format object for the x values (<code>null</code>
+     * @param xFormat  the format object for the x values ({@code null}
      *                 not permitted).
-     * @param yFormat  the format object for the y values (<code>null</code>
+     * @param yFormat  the format object for the y values ({@code null}
      *                 not permitted).
-     * @param zFormat  the format object for the z values (<code>null</code>
+     * @param zFormat  the format object for the z values ({@code null}
      *                 not permitted).
      */
     public StandardXYZToolTipGenerator(String formatString, 
@@ -113,11 +113,11 @@ public class StandardXYZToolTipGenerator extends StandardXYToolTipGenerator
      * Constructs a new tool tip generator using the specified date formatters.
      *
      * @param formatString  the format string.
-     * @param xFormat  the format object for the x values (<code>null</code>
+     * @param xFormat  the format object for the x values ({@code null}
      *                 not permitted).
-     * @param yFormat  the format object for the y values (<code>null</code>
+     * @param yFormat  the format object for the y values ({@code null}
      *                 not permitted).
-     * @param zFormat  the format object for the z values (<code>null</code>
+     * @param zFormat  the format object for the z values ({@code null}
      *                 not permitted).
      */
     public StandardXYZToolTipGenerator(String formatString, DateFormat xFormat,
@@ -132,7 +132,7 @@ public class StandardXYZToolTipGenerator extends StandardXYToolTipGenerator
     /**
      * Returns the number formatter for the z-values.
      *
-     * @return The number formatter (possibly <code>null</code>).
+     * @return The number formatter (possibly {@code null}).
      */
     public NumberFormat getZFormat() {
         return this.zFormat;
@@ -141,7 +141,7 @@ public class StandardXYZToolTipGenerator extends StandardXYToolTipGenerator
     /**
      * Returns the date formatter for the z-values.
      *
-     * @return The date formatter (possibly <code>null</code>).
+     * @return The date formatter (possibly {@code null}).
      */
     public DateFormat getZDateFormat() {
         return this.zDateFormat;
@@ -150,11 +150,11 @@ public class StandardXYZToolTipGenerator extends StandardXYToolTipGenerator
     /**
      * Generates a tool tip text item for a particular item within a series.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
      * @param series  the series index (zero-based).
      * @param item  the item index (zero-based).
      *
-     * @return The tooltip text (possibly <code>null</code>).
+     * @return The tooltip text (possibly {@code null}).
      */
     @Override
     public String generateToolTip(XYZDataset dataset, int series, int item) {
@@ -164,11 +164,11 @@ public class StandardXYZToolTipGenerator extends StandardXYToolTipGenerator
     /**
      * Generates a label string for an item in the dataset.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
      * @param series  the series (zero-based index).
      * @param item  the item (zero-based index).
      *
-     * @return The label (possibly <code>null</code>).
+     * @return The label (possibly {@code null}).
      */
     @Override
     public String generateLabelString(XYDataset dataset, int series, int item) {
@@ -182,11 +182,11 @@ public class StandardXYZToolTipGenerator extends StandardXYToolTipGenerator
      * Creates the array of items that can be passed to the
      * {@link MessageFormat} class for creating labels.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
      * @param series  the series (zero-based index).
      * @param item  the item (zero-based index).
      *
-     * @return The items (never <code>null</code>).
+     * @return The items (never {@code null}).
      */
     protected Object[] createItemArray(XYZDataset dataset,
                                        int series, int item) {
@@ -227,7 +227,7 @@ public class StandardXYZToolTipGenerator extends StandardXYToolTipGenerator
     /**
      * Tests this object for equality with an arbitrary object.
      *
-     * @param obj  the other object (<code>null</code> permitted).
+     * @param obj  the other object ({@code null} permitted).
      *
      * @return A boolean.
      */

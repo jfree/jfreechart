@@ -56,7 +56,7 @@ public class MarkerChangeEvent extends ChartChangeEvent {
     /**
      * Creates a new <code>MarkerChangeEvent</code> instance.
      *
-     * @param marker  the marker that triggered the event (<code>null</code>
+     * @param marker  the marker that triggered the event ({@code null}
      *     not permitted).
      *
      * @since 1.0.3
@@ -69,7 +69,7 @@ public class MarkerChangeEvent extends ChartChangeEvent {
     /**
      * Returns the marker that triggered the event.
      *
-     * @return The marker that triggered the event (never <code>null</code>).
+     * @return The marker that triggered the event (never {@code null}).
      *
      * @since 1.0.3
      */

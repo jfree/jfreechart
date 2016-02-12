@@ -96,7 +96,7 @@ import org.jfree.util.ObjectUtilities;
  * default, items in the series will be sorted into ascending order by x-value,
  * and duplicate x-values are permitted.  Both the sorting and duplicate
  * defaults can be changed in the constructor.  Y-values can be
- * <code>null</code> to represent missing values.
+ * {@code null} to represent missing values.
  */
 public class XYSeries extends Series implements Cloneable, Serializable {
 
@@ -139,7 +139,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * be sorted into ascending order by x-value, and duplicate x-values will
      * be allowed (these defaults can be modified with another constructor).
      *
-     * @param key  the series key (<code>null</code> not permitted).
+     * @param key  the series key ({@code null} not permitted).
      */
     public XYSeries(Comparable key) {
         this(key, true, true);
@@ -149,7 +149,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * Constructs a new empty series, with the auto-sort flag set as requested,
      * and duplicate values allowed.
      *
-     * @param key  the series key (<code>null</code> not permitted).
+     * @param key  the series key ({@code null} not permitted).
      * @param autoSort  a flag that controls whether or not the items in the
      *                  series are sorted.
      */
@@ -161,7 +161,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * Constructs a new xy-series that contains no data.  You can specify
      * whether or not duplicate x-values are allowed for the series.
      *
-     * @param key  the series key (<code>null</code> not permitted).
+     * @param key  the series key ({@code null} not permitted).
      * @param autoSort  a flag that controls whether or not the items in the
      *                  series are sorted.
      * @param allowDuplicateXValues  a flag that controls whether duplicate
@@ -242,7 +242,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
     /**
      * Updates the cached values for the minimum and maximum data values.
      *
-     * @param item  the item added (<code>null</code> not permitted).
+     * @param item  the item added ({@code null} not permitted).
      *
      * @since 1.0.13
      */
@@ -261,7 +261,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * Updates the cached values for the minimum and maximum data values on
      * the basis that the specified item has just been removed.
      *
-     * @param item  the item added (<code>null</code> not permitted).
+     * @param item  the item added ({@code null} not permitted).
      *
      * @since 1.0.13
      */
@@ -397,7 +397,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * Adds a data item to the series and sends a {@link SeriesChangeEvent} to
      * all registered listeners.
      *
-     * @param item  the (x, y) item (<code>null</code> not permitted).
+     * @param item  the (x, y) item ({@code null} not permitted).
      */
     public void add(XYDataItem item) {
         // argument checking delegated...
@@ -432,10 +432,10 @@ public class XYSeries extends Series implements Cloneable, Serializable {
     /**
      * Adds a data item to the series and sends a {@link SeriesChangeEvent} to
      * all registered listeners.  The unusual pairing of parameter types is to
-     * make it easier to add <code>null</code> y-values.
+     * make it easier to add {@code null} y-values.
      *
      * @param x  the x value.
-     * @param y  the y value (<code>null</code> permitted).
+     * @param y  the y value ({@code null} permitted).
      */
     public void add(double x, Number y) {
         add(new Double(x), y);
@@ -447,7 +447,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * pairing of parameter types is to make it easier to add null y-values.
      *
      * @param x  the x value.
-     * @param y  the y value (<code>null</code> permitted).
+     * @param y  the y value ({@code null} permitted).
      * @param notify  a flag that controls whether or not a
      *                {@link SeriesChangeEvent} is sent to all registered
      *                listeners.
@@ -464,8 +464,8 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * Throws an exception if the x-value is a duplicate AND the
      * allowDuplicateXValues flag is false.
      *
-     * @param x  the x-value (<code>null</code> not permitted).
-     * @param y  the y-value (<code>null</code> permitted).
+     * @param x  the x-value ({@code null} not permitted).
+     * @param y  the y-value ({@code null} permitted).
      *
      * @throws SeriesException if the x-value is a duplicate and the
      *     <code>allowDuplicateXValues</code> flag is not set for this series.
@@ -482,8 +482,8 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * Throws an exception if the x-value is a duplicate AND the
      * allowDuplicateXValues flag is false.
      *
-     * @param x  the x-value (<code>null</code> not permitted).
-     * @param y  the y-value (<code>null</code> permitted).
+     * @param x  the x-value ({@code null} not permitted).
+     * @param y  the y-value ({@code null} permitted).
      * @param notify  a flag the controls whether or not a
      *                {@link SeriesChangeEvent} is sent to all registered
      *                listeners.
@@ -498,7 +498,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * Adds a data item to the series and, if requested, sends a
      * {@link SeriesChangeEvent} to all registered listeners.
      *
-     * @param item  the (x, y) item (<code>null</code> not permitted).
+     * @param item  the (x, y) item ({@code null} not permitted).
      * @param notify  a flag that controls whether or not a
      *                {@link SeriesChangeEvent} is sent to all registered
      *                listeners.
@@ -639,7 +639,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      *
      * @param index  the index (zero-based).
      *
-     * @return The x-value (never <code>null</code>).
+     * @return The x-value (never {@code null}).
      */
     public Number getX(int index) {
         return getRawDataItem(index).getX();
@@ -650,7 +650,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      *
      * @param index  the index (zero-based).
      *
-     * @return The y-value (possibly <code>null</code>).
+     * @return The y-value (possibly {@code null}).
      */
     public Number getY(int index) {
         return getRawDataItem(index).getY();
@@ -661,7 +661,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * {@link SeriesChangeEvent} to all registered listeners.
      *
      * @param index  the item (zero based index).
-     * @param y  the new value (<code>null</code> permitted).
+     * @param y  the new value ({@code null} permitted).
      *
      * @deprecated Renamed {@link #updateByIndex(int, Number)} to avoid
      *         confusion with the {@link #update(Number, Number)} method.
@@ -731,7 +731,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * {@link SeriesChangeEvent} to all registered listeners.
      *
      * @param index  the item (zero based index).
-     * @param y  the new value (<code>null</code> permitted).
+     * @param y  the new value ({@code null} permitted).
      *
      * @since 1.0.1
      */
@@ -742,8 +742,8 @@ public class XYSeries extends Series implements Cloneable, Serializable {
     /**
      * Updates an item in the series.
      *
-     * @param x  the x-value (<code>null</code> not permitted).
-     * @param y  the y-value (<code>null</code> permitted).
+     * @param x  the x-value ({@code null} not permitted).
+     * @param y  the y-value ({@code null} permitted).
      *
      * @throws SeriesException if there is no existing item with the specified
      *         x-value.
@@ -775,10 +775,10 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * Adds or updates an item in the series and sends a
      * {@link SeriesChangeEvent} to all registered listeners.
      *
-     * @param x  the x-value (<code>null</code> not permitted).
-     * @param y  the y-value (<code>null</code> permitted).
+     * @param x  the x-value ({@code null} not permitted).
+     * @param y  the y-value ({@code null} permitted).
      *
-     * @return A copy of the overwritten data item, or <code>null</code> if no
+     * @return A copy of the overwritten data item, or {@code null} if no
      *         item was overwritten.
      */
     public XYDataItem addOrUpdate(Number x, Number y) {
@@ -790,9 +790,9 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * Adds or updates an item in the series and sends a
      * {@link SeriesChangeEvent} to all registered listeners.
      *
-     * @param item  the data item (<code>null</code> not permitted).
+     * @param item  the data item ({@code null} not permitted).
      *
-     * @return A copy of the overwritten data item, or <code>null</code> if no
+     * @return A copy of the overwritten data item, or {@code null} if no
      *         item was overwritten.
      *
      * @since 1.0.14
@@ -857,7 +857,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * aware that for an unsorted series, the index is found by iterating
      * through all items in the series.
      *
-     * @param x  the x-value (<code>null</code> not permitted).
+     * @param x  the x-value ({@code null} not permitted).
      *
      * @return The index.
      */
@@ -949,7 +949,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * Tests this series for equality with an arbitrary object.
      *
      * @param obj  the object to test against for equality
-     *             (<code>null</code> permitted).
+     *             ({@code null} permitted).
      *
      * @return A boolean.
      */

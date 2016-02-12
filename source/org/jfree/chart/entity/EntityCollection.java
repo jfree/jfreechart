@@ -64,7 +64,7 @@ public interface EntityCollection {
     /**
      * Adds an entity to the collection.
      *
-     * @param entity  the entity (<code>null</code> not permitted).
+     * @param entity  the entity ({@code null} not permitted).
      */
     public void add(ChartEntity entity);
 

@@ -73,8 +73,8 @@ public class ModuloAxis extends NumberAxis {
     /**
      * Creates a new axis.
      *
-     * @param label  the axis label (<code>null</code> permitted).
-     * @param fixedRange  the fixed range (<code>null</code> not permitted).
+     * @param label  the axis label ({@code null} permitted).
+     * @param fixedRange  the fixed range ({@code null} not permitted).
      */
     public ModuloAxis(String label, Range fixedRange) {
         super(label);
@@ -409,7 +409,7 @@ public class ModuloAxis extends NumberAxis {
     /**
      * Tests this axis for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

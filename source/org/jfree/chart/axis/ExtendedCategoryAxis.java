@@ -97,7 +97,7 @@ public class ExtendedCategoryAxis extends CategoryAxis {
     /**
      * Returns the font for the sublabels.
      *
-     * @return The font (never <code>null</code>).
+     * @return The font (never {@code null}).
      *
      * @see #setSubLabelFont(Font)
      */
@@ -109,7 +109,7 @@ public class ExtendedCategoryAxis extends CategoryAxis {
      * Sets the font for the sublabels and sends an {@link AxisChangeEvent} to
      * all registered listeners.
      *
-     * @param font  the font (<code>null</code> not permitted).
+     * @param font  the font ({@code null} not permitted).
      *
      * @see #getSubLabelFont()
      */
@@ -122,7 +122,7 @@ public class ExtendedCategoryAxis extends CategoryAxis {
     /**
      * Returns the paint for the sublabels.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @see #setSubLabelPaint(Paint)
      */
@@ -134,7 +134,7 @@ public class ExtendedCategoryAxis extends CategoryAxis {
      * Sets the paint for the sublabels and sends an {@link AxisChangeEvent}
      * to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getSubLabelPaint()
      */
@@ -191,7 +191,7 @@ public class ExtendedCategoryAxis extends CategoryAxis {
     /**
      * Tests this axis for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

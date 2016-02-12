@@ -136,7 +136,7 @@ public class StandardDialFrame extends AbstractDialLayer implements DialFrame,
     /**
      * Returns the background paint.
      *
-     * @return The background paint (never <code>null</code>).
+     * @return The background paint (never {@code null}).
      *
      * @see #setBackgroundPaint(Paint)
      */
@@ -148,7 +148,7 @@ public class StandardDialFrame extends AbstractDialLayer implements DialFrame,
      * Sets the background paint and sends a {@link DialLayerChangeEvent} to
      * all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getBackgroundPaint()
      */
@@ -161,7 +161,7 @@ public class StandardDialFrame extends AbstractDialLayer implements DialFrame,
     /**
      * Returns the foreground paint.
      *
-     * @return The foreground paint (never <code>null</code>).
+     * @return The foreground paint (never {@code null}).
      *
      * @see #setForegroundPaint(Paint)
      */
@@ -173,7 +173,7 @@ public class StandardDialFrame extends AbstractDialLayer implements DialFrame,
      * Sets the foreground paint and sends a {@link DialLayerChangeEvent} to
      * all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getForegroundPaint()
      */
@@ -186,7 +186,7 @@ public class StandardDialFrame extends AbstractDialLayer implements DialFrame,
     /**
      * Returns the stroke for the frame.
      *
-     * @return The stroke (never <code>null</code>).
+     * @return The stroke (never {@code null}).
      *
      * @see #setStroke(Stroke)
      */
@@ -198,7 +198,7 @@ public class StandardDialFrame extends AbstractDialLayer implements DialFrame,
      * Sets the stroke and sends a {@link DialLayerChangeEvent} to all
      * registered listeners.
      *
-     * @param stroke  the stroke (<code>null</code> not permitted).
+     * @param stroke  the stroke ({@code null} not permitted).
      *
      * @see #getStroke()
      */
@@ -212,7 +212,7 @@ public class StandardDialFrame extends AbstractDialLayer implements DialFrame,
      * Returns the shape for the window for this dial.  Some dial layers will
      * request that their drawing be clipped within this window.
      *
-     * @param frame  the reference frame (<code>null</code> not permitted).
+     * @param frame  the reference frame ({@code null} not permitted).
      *
      * @return The shape of the dial's window.
      */
@@ -239,10 +239,10 @@ public class StandardDialFrame extends AbstractDialLayer implements DialFrame,
      * Draws the frame.  This method is called by the {@link DialPlot} class,
      * you shouldn't need to call it directly.
      *
-     * @param g2  the graphics target (<code>null</code> not permitted).
-     * @param plot  the plot (<code>null</code> not permitted).
-     * @param frame  the frame (<code>null</code> not permitted).
-     * @param view  the view (<code>null</code> not permitted).
+     * @param g2  the graphics target ({@code null} not permitted).
+     * @param plot  the plot ({@code null} not permitted).
+     * @param frame  the frame ({@code null} not permitted).
+     * @param view  the view ({@code null} not permitted).
      */
     @Override
     public void draw(Graphics2D g2, DialPlot plot, Rectangle2D frame,
@@ -270,7 +270,7 @@ public class StandardDialFrame extends AbstractDialLayer implements DialFrame,
     /**
      * Tests this instance for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

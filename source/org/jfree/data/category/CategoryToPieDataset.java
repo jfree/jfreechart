@@ -82,11 +82,11 @@ public class CategoryToPieDataset extends AbstractDataset
      * An adaptor class that converts any {@link CategoryDataset} into a
      * {@link PieDataset}, by taking the values from a single row or column.
      * <p>
-     * If <code>source</code> is <code>null</code>, the created dataset will
+     * If <code>source</code> is {@code null}, the created dataset will
      * be empty.
      *
-     * @param source  the source dataset (<code>null</code> permitted).
-     * @param extract  extract data from rows or columns? (<code>null</code>
+     * @param source  the source dataset ({@code null} permitted).
+     * @param extract  extract data from rows or columns? ({@code null}
      *                 not permitted).
      * @param index  the row or column index.
      */
@@ -104,7 +104,7 @@ public class CategoryToPieDataset extends AbstractDataset
     /**
      * Returns the underlying dataset.
      *
-     * @return The underlying dataset (possibly <code>null</code>).
+     * @return The underlying dataset (possibly {@code null}).
      *
      * @since 1.0.2
      */
@@ -137,7 +137,7 @@ public class CategoryToPieDataset extends AbstractDataset
 
     /**
      * Returns the number of items (values) in the collection.  If the
-     * underlying dataset is <code>null</code>, this method returns zero.
+     * underlying dataset is {@code null}, this method returns zero.
      *
      * @return The item count.
      */
@@ -160,7 +160,7 @@ public class CategoryToPieDataset extends AbstractDataset
      *
      * @param item  the item index (zero-based).
      *
-     * @return The value (possibly <code>null</code>).
+     * @return The value (possibly {@code null}).
      *
      * @throws IndexOutOfBoundsException if <code>item</code> is not in the
      *     range <code>0</code> to <code>getItemCount() - 1</code>.
@@ -234,7 +234,7 @@ public class CategoryToPieDataset extends AbstractDataset
     /**
      * Returns the keys for the dataset.
      * <p>
-     * If the underlying dataset is <code>null</code>, this method returns an
+     * If the underlying dataset is {@code null}, this method returns an
      * empty list.
      *
      * @return The keys.
@@ -255,12 +255,12 @@ public class CategoryToPieDataset extends AbstractDataset
 
     /**
      * Returns the value for a given key.  If the key is not recognised, the
-     * method should return <code>null</code> (but note that <code>null</code>
+     * method should return {@code null} (but note that {@code null}
      * can be associated with a valid key also).
      *
      * @param key  the key.
      *
-     * @return The value (possibly <code>null</code>).
+     * @return The value (possibly {@code null}).
      */
     @Override
     public Number getValue(Comparable key) {
@@ -294,7 +294,7 @@ public class CategoryToPieDataset extends AbstractDataset
      * <code>true</code> if <code>obj</code> is a dataset containing the same
      * keys and values in the same order as this dataset.
      *
-     * @param obj  the object to test (<code>null</code> permitted).
+     * @param obj  the object to test ({@code null} permitted).
      *
      * @return A boolean.
      */

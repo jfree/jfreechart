@@ -58,7 +58,7 @@ public interface XYSeriesLabelGenerator {
      * Generates a label for the specified series.  This label will be
      * used for the chart legend.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
      * @param series  the series.
      *
      * @return A series label.

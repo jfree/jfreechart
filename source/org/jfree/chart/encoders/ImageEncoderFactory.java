@@ -87,7 +87,7 @@ public class ImageEncoderFactory {
      *
      * @param format  The image format required.
      *
-     * @return The ImageEncoder or <code>null</code> if none available.
+     * @return The ImageEncoder or {@code null} if none available.
      */
     public static ImageEncoder newInstance(String format) {
         ImageEncoder imageEncoder = null;
@@ -112,7 +112,7 @@ public class ImageEncoderFactory {
      * @param format  The image format required.
      * @param quality  The quality to be set before returning.
      *
-     * @return The ImageEncoder or <code>null</code> if none available.
+     * @return The ImageEncoder or {@code null} if none available.
      */
     public static ImageEncoder newInstance(String format, float quality) {
         ImageEncoder imageEncoder = newInstance(format);
@@ -126,7 +126,7 @@ public class ImageEncoderFactory {
      * @param format  The image format required.
      * @param encodingAlpha  Sets whether alpha transparency should be encoded.
      *
-     * @return The ImageEncoder or <code>null</code> if none available.
+     * @return The ImageEncoder or {@code null} if none available.
      */
     public static ImageEncoder newInstance(String format,
                                            boolean encodingAlpha) {
@@ -142,7 +142,7 @@ public class ImageEncoderFactory {
      * @param quality  The quality to be set before returning.
      * @param encodingAlpha  Sets whether alpha transparency should be encoded.
      *
-     * @return The ImageEncoder or <code>null</code> if none available.
+     * @return The ImageEncoder or {@code null} if none available.
      */
     public static ImageEncoder newInstance(String format, float quality,
                                            boolean encodingAlpha) {

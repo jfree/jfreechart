@@ -67,8 +67,8 @@ public class ComparableObjectItem implements Cloneable, Comparable,
     /**
      * Constructs a new data item.
      *
-     * @param x  the x-value (<code>null</code> NOT permitted).
-     * @param y  the y-value (<code>null</code> permitted).
+     * @param x  the x-value ({@code null} NOT permitted).
+     * @param y  the y-value ({@code null} permitted).
      */
     public ComparableObjectItem(Comparable x, Object y) {
         ParamChecks.nullNotPermitted(x, "x");
@@ -79,7 +79,7 @@ public class ComparableObjectItem implements Cloneable, Comparable,
     /**
      * Returns the x-value.
      *
-     * @return The x-value (never <code>null</code>).
+     * @return The x-value (never {@code null}).
      */
     protected Comparable getComparable() {
         return this.x;
@@ -88,7 +88,7 @@ public class ComparableObjectItem implements Cloneable, Comparable,
     /**
      * Returns the y-value.
      *
-     * @return The y-value (possibly <code>null</code>).
+     * @return The y-value (possibly {@code null}).
      */
     protected Object getObject() {
         return this.obj;
@@ -98,7 +98,7 @@ public class ComparableObjectItem implements Cloneable, Comparable,
      * Sets the y-value for this data item.  Note that there is no
      * corresponding method to change the x-value.
      *
-     * @param y  the new y-value (<code>null</code> permitted).
+     * @param y  the new y-value ({@code null} permitted).
      */
     protected void setObject(Object y) {
         this.obj = y;
@@ -155,7 +155,7 @@ public class ComparableObjectItem implements Cloneable, Comparable,
     /**
      * Tests if this object is equal to another.
      *
-     * @param obj  the object to test against for equality (<code>null</code>
+     * @param obj  the object to test against for equality ({@code null}
      *             permitted).
      *
      * @return A boolean.

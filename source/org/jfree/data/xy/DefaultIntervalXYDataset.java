@@ -411,7 +411,7 @@ public class DefaultIntervalXYDataset extends AbstractIntervalXYDataset
      * the data for that series, then sends a {@link DatasetChangeEvent} to
      * all registered listeners.
      *
-     * @param seriesKey  the series key (<code>null</code> not permitted).
+     * @param seriesKey  the series key ({@code null} not permitted).
      * @param data  the data (must be an array with length 6, containing six
      *     arrays of equal length, the first three containing the x-values
      *     (x, xLow and xHigh) and the last three containing the y-values
@@ -453,14 +453,14 @@ public class DefaultIntervalXYDataset extends AbstractIntervalXYDataset
      * with an arbitrary object.  This method returns <code>true</code> if and
      * only if:
      * <ul>
-     * <li><code>obj</code> is not <code>null</code>;</li>
+     * <li><code>obj</code> is not {@code null};</li>
      * <li><code>obj</code> is an instance of
      *         <code>DefaultIntervalXYDataset</code>;</li>
      * <li>both datasets have the same number of series, each containing
      *         exactly the same values.</li>
      * </ul>
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

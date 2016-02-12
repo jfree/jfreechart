@@ -160,7 +160,7 @@ public class RectangleConstraint {
     /**
      * Returns the width range.
      *
-     * @return The range (possibly <code>null</code>).
+     * @return The range (possibly {@code null}).
      */
     public Range getWidthRange() {
         return this.widthRange;
@@ -169,7 +169,7 @@ public class RectangleConstraint {
     /**
      * Returns the constraint type.
      *
-     * @return The constraint type (never <code>null</code>).
+     * @return The constraint type (never {@code null}).
      */
     public LengthConstraintType getWidthConstraintType() {
         return this.widthConstraintType;
@@ -187,7 +187,7 @@ public class RectangleConstraint {
     /**
      * Returns the width range.
      *
-     * @return The range (possibly <code>null</code>).
+     * @return The range (possibly {@code null}).
      */
     public Range getHeightRange() {
         return this.heightRange;
@@ -196,7 +196,7 @@ public class RectangleConstraint {
     /**
      * Returns the constraint type.
      *
-     * @return The constraint type (never <code>null</code>).
+     * @return The constraint type (never {@code null}).
      */
     public LengthConstraintType getHeightConstraintType() {
         return this.heightConstraintType;
@@ -268,7 +268,7 @@ public class RectangleConstraint {
      * Returns a constraint that matches this one on the height attributes,
      * but has a range width constraint.
      *
-     * @param range  the width range (<code>null</code> not permitted).
+     * @param range  the width range ({@code null} not permitted).
      *
      * @return A new constraint.
      */
@@ -283,7 +283,7 @@ public class RectangleConstraint {
      * Returns a constraint that matches this one on the width attributes,
      * but has a range height constraint.
      *
-     * @param range  the height range (<code>null</code> not permitted).
+     * @param range  the height range ({@code null} not permitted).
      *
      * @return A new constraint.
      */

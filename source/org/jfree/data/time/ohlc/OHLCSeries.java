@@ -61,7 +61,7 @@ public class OHLCSeries extends ComparableObjectSeries {
      * be sorted into ascending order by period, and duplicate periods will
      * not be allowed.
      *
-     * @param key  the series key (<code>null</code> not permitted).
+     * @param key  the series key ({@code null} not permitted).
      */
     public OHLCSeries(Comparable key) {
         super(key, true, false);
@@ -116,7 +116,7 @@ public class OHLCSeries extends ComparableObjectSeries {
      * Adds a data item to the series.  The values from the item passed to
      * this method will be copied into a new object.
      * 
-     * @param item  the item (<code>null</code> not permitted).
+     * @param item  the item ({@code null} not permitted).
      * 
      * @since 1.0.17
      */

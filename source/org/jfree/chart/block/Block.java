@@ -85,9 +85,9 @@ public interface Block extends Drawable {
      * returns the block size.
      *
      * @param g2  the graphics device.
-     * @param constraint  the constraint (<code>null</code> not permitted).
+     * @param constraint  the constraint ({@code null} not permitted).
      *
-     * @return The block size (in Java2D units, never <code>null</code>).
+     * @return The block size (in Java2D units, never {@code null}).
      */
     public Size2D arrange(Graphics2D g2, RectangleConstraint constraint);
 
@@ -112,9 +112,9 @@ public interface Block extends Drawable {
      *
      * @param g2  the graphics device.
      * @param area  the area.
-     * @param params  optional parameters (<code>null</code> permitted).
+     * @param params  optional parameters ({@code null} permitted).
      *
-     * @return An optional return value (possibly <code>null</code>).
+     * @return An optional return value (possibly {@code null}).
      */
     public Object draw(Graphics2D g2, Rectangle2D area, Object params);
 

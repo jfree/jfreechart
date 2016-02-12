@@ -116,7 +116,7 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
     /**
      * Creates a new plot.
      *
-     * @param domainAxis  the shared domain axis (<code>null</code> not
+     * @param domainAxis  the shared domain axis ({@code null} not
      *                    permitted).
      */
     public CombinedDomainCategoryPlot(CategoryAxis domainAxis) {
@@ -153,10 +153,10 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
      * Adds a subplot to the combined chart and sends a {@link PlotChangeEvent}
      * to all registered listeners.
      * <br><br>
-     * The domain axis for the subplot will be set to <code>null</code>.  You
+     * The domain axis for the subplot will be set to {@code null}.  You
      * must ensure that the subplot has a non-null range axis.
      *
-     * @param subplot  the subplot (<code>null</code> not permitted).
+     * @param subplot  the subplot ({@code null} not permitted).
      */
     public void add(CategoryPlot subplot) {
         add(subplot, 1);
@@ -166,10 +166,10 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
      * Adds a subplot to the combined chart and sends a {@link PlotChangeEvent}
      * to all registered listeners.
      * <br><br>
-     * The domain axis for the subplot will be set to <code>null</code>.  You
+     * The domain axis for the subplot will be set to {@code null}.  You
      * must ensure that the subplot has a non-null range axis.
      *
-     * @param subplot  the subplot (<code>null</code> not permitted).
+     * @param subplot  the subplot ({@code null} not permitted).
      * @param weight  the weight (must be &gt;= 1).
      */
     public void add(CategoryPlot subplot, int weight) {
@@ -197,7 +197,7 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
      * domain axis is reconfigured, then a {@link PlotChangeEvent} is sent to
      * all registered listeners.
      *
-     * @param subplot  the subplot (<code>null</code> not permitted).
+     * @param subplot  the subplot ({@code null} not permitted).
      */
     public void remove(CategoryPlot subplot) {
         ParamChecks.nullNotPermitted(subplot, "subplot");
@@ -224,7 +224,7 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
 
     /**
      * Returns the list of subplots.  The returned list may be empty, but is
-     * never <code>null</code>.
+     * never {@code null}.
      *
      * @return An unmodifiable list of subplots.
      */
@@ -241,10 +241,10 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
      * Returns the subplot (if any) that contains the (x, y) point (specified
      * in Java2D space).
      *
-     * @param info  the chart rendering info (<code>null</code> not permitted).
-     * @param source  the source point (<code>null</code> not permitted).
+     * @param info  the chart rendering info ({@code null} not permitted).
+     * @param source  the source point ({@code null} not permitted).
      *
-     * @return A subplot (possibly <code>null</code>).
+     * @return A subplot (possibly {@code null}).
      */
     public CategoryPlot findSubplot(PlotRenderingInfo info, Point2D source) {
         ParamChecks.nullNotPermitted(info, "info");
@@ -261,8 +261,8 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
      * Multiplies the range on the range axis/axes by the specified factor.
      *
      * @param factor  the zoom factor.
-     * @param info  the plot rendering info (<code>null</code> not permitted).
-     * @param source  the source point (<code>null</code> not permitted).
+     * @param info  the plot rendering info ({@code null} not permitted).
+     * @param source  the source point ({@code null} not permitted).
      */
     @Override
     public void zoomRangeAxes(double factor, PlotRenderingInfo info,
@@ -274,8 +274,8 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
      * Multiplies the range on the range axis/axes by the specified factor.
      *
      * @param factor  the zoom factor.
-     * @param info  the plot rendering info (<code>null</code> not permitted).
-     * @param source  the source point (<code>null</code> not permitted).
+     * @param info  the plot rendering info ({@code null} not permitted).
+     * @param source  the source point ({@code null} not permitted).
      * @param useAnchor  zoom about the anchor point?
      */
     @Override
@@ -302,8 +302,8 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
      *
      * @param lowerPercent  the lower bound.
      * @param upperPercent  the upper bound.
-     * @param info  the plot rendering info (<code>null</code> not permitted).
-     * @param source  the source point (<code>null</code> not permitted).
+     * @param info  the plot rendering info ({@code null} not permitted).
+     * @param source  the source point ({@code null} not permitted).
      */
     @Override
     public void zoomRangeAxes(double lowerPercent, double upperPercent,
@@ -421,9 +421,9 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
      * @param g2  the graphics device.
      * @param area  the area within which the plot (including axis labels)
      *              should be drawn.
-     * @param anchor  the anchor point (<code>null</code> permitted).
+     * @param anchor  the anchor point ({@code null} permitted).
      * @param parentState  the state from the parent plot, if there is one.
-     * @param info  collects information about the drawing (<code>null</code>
+     * @param info  collects information about the drawing ({@code null}
      *              permitted).
      */
     @Override
@@ -488,7 +488,7 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
      * Sets the size (width or height, depending on the orientation of the
      * plot) for the range axis of each subplot.
      *
-     * @param space  the space (<code>null</code> permitted).
+     * @param space  the space ({@code null} permitted).
      */
     protected void setFixedRangeAxisSpaceForSubplots(AxisSpace space) {
         Iterator iterator = this.subplots.iterator();
@@ -501,7 +501,7 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
     /**
      * Sets the orientation of the plot (and all subplots).
      *
-     * @param orientation  the orientation (<code>null</code> not permitted).
+     * @param orientation  the orientation ({@code null} not permitted).
      */
     @Override
     public void setOrientation(PlotOrientation orientation) {
@@ -518,7 +518,7 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
      * Sets the shadow generator for the plot (and all subplots) and sends
      * a {@link PlotChangeEvent} to all registered listeners.
      * 
-     * @param generator  the new generator (<code>null</code> permitted).
+     * @param generator  the new generator ({@code null} permitted).
      */
     @Override
     public void setShadowGenerator(ShadowGenerator generator) {
@@ -652,7 +652,7 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
     /**
      * Tests the plot for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

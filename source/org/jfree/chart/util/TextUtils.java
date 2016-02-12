@@ -84,14 +84,14 @@ public class TextUtils {
     /**
      * Returns the bounds of an aligned string.
      * 
-     * @param text  the string (<code>null</code> not permitted).
-     * @param g2  the graphics target (<code>null</code> not permitted).
+     * @param text  the string ({@code null} not permitted).
+     * @param g2  the graphics target ({@code null} not permitted).
      * @param x  the x-coordinate.
      * @param y  the y-coordinate.
      * @param anchor  the anchor point that will be aligned to 
-     *     <code>(x, y)</code> (<code>null</code> not permitted).
+     *     <code>(x, y)</code> ({@code null} not permitted).
      * 
-     * @return The text bounds (never <code>null</code>).
+     * @return The text bounds (never {@code null}).
      * 
      * @since 1.3
      */
@@ -114,7 +114,7 @@ public class TextUtils {
      * (x, y) and draw the string, then the anchor point should coincide with
      * the (x, y) point.
      *
-     * @param g2  the graphics device (not <code>null</code>).
+     * @param g2  the graphics device (not {@code null}).
      * @param text  the text.
      * @param anchor  the anchor point.
      *
@@ -171,10 +171,10 @@ public class TextUtils {
      * (x, y) and draw the string, then the anchor point should coincide with
      * the (x, y) point.
      *
-     * @param g2  the graphics device (not <code>null</code>).
+     * @param g2  the graphics device (not {@code null}).
      * @param text  the text.
      * @param anchor  the anchor point.
-     * @param textBounds  the text bounds (if not <code>null</code>, this
+     * @param textBounds  the text bounds (if not {@code null}, this
      *                    object will be updated by this method to match the
      *                    string bounds).
      *
@@ -232,8 +232,8 @@ public class TextUtils {
      * assumed to be on a single line (no carriage return or newline 
      * characters).
      *
-     * @param text  the text (<code>null</code> not permitted).
-     * @param fm  the font metrics (<code>null</code> not permitted).
+     * @param text  the text ({@code null} not permitted).
+     * @param fm  the font metrics ({@code null} not permitted).
      *
      * @return The text bounds.
      */
@@ -245,12 +245,12 @@ public class TextUtils {
      * Returns the bounds for the specified text when it is drawn with the 
      * left-baseline aligned to the point <code>(x, y)</code>.
      * 
-     * @param text  the text (<code>null</code> not permitted).
+     * @param text  the text ({@code null} not permitted).
      * @param x  the x-coordinate.
      * @param y  the y-coordinate.
-     * @param fm  the font metrics (<code>null</code> not permitted).
+     * @param fm  the font metrics ({@code null} not permitted).
      * 
-     * @return The bounding rectangle (never <code>null</code>). 
+     * @return The bounding rectangle (never {@code null}). 
      */
     public static Rectangle2D getTextBounds(String text, double x, double y,
             FontMetrics fm) {

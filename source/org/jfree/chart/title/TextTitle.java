@@ -152,10 +152,10 @@ public class TextTitle extends Title
     /** The background paint. */
     private transient Paint backgroundPaint;
 
-    /** The tool tip text (can be <code>null</code>). */
+    /** The tool tip text (can be {@code null}). */
     private String toolTipText;
 
-    /** The URL text (can be <code>null</code>). */
+    /** The URL text (can be {@code null}). */
     private String urlText;
 
     /** The content. */
@@ -184,7 +184,7 @@ public class TextTitle extends Title
     /**
      * Creates a new title, using default attributes where necessary.
      *
-     * @param text  the title text (<code>null</code> not permitted).
+     * @param text  the title text ({@code null} not permitted).
      */
     public TextTitle(String text) {
         this(text, TextTitle.DEFAULT_FONT, TextTitle.DEFAULT_TEXT_PAINT,
@@ -195,8 +195,8 @@ public class TextTitle extends Title
     /**
      * Creates a new title, using default attributes where necessary.
      *
-     * @param text  the title text (<code>null</code> not permitted).
-     * @param font  the title font (<code>null</code> not permitted).
+     * @param text  the title text ({@code null} not permitted).
+     * @param font  the title font ({@code null} not permitted).
      */
     public TextTitle(String text, Font font) {
         this(text, font, TextTitle.DEFAULT_TEXT_PAINT, Title.DEFAULT_POSITION,
@@ -207,13 +207,13 @@ public class TextTitle extends Title
     /**
      * Creates a new title.
      *
-     * @param text  the text for the title (<code>null</code> not permitted).
-     * @param font  the title font (<code>null</code> not permitted).
-     * @param paint  the title paint (<code>null</code> not permitted).
-     * @param position  the title position (<code>null</code> not permitted).
-     * @param horizontalAlignment  the horizontal alignment (<code>null</code>
+     * @param text  the text for the title ({@code null} not permitted).
+     * @param font  the title font ({@code null} not permitted).
+     * @param paint  the title paint ({@code null} not permitted).
+     * @param position  the title position ({@code null} not permitted).
+     * @param horizontalAlignment  the horizontal alignment ({@code null}
      *                             not permitted).
-     * @param verticalAlignment  the vertical alignment (<code>null</code> not
+     * @param verticalAlignment  the vertical alignment ({@code null} not
      *                           permitted).
      * @param padding  the space to leave around the outside of the title.
      */
@@ -251,7 +251,7 @@ public class TextTitle extends Title
     /**
      * Returns the title text.
      *
-     * @return The text (never <code>null</code>).
+     * @return The text (never {@code null}).
      *
      * @see #setText(String)
      */
@@ -263,7 +263,7 @@ public class TextTitle extends Title
      * Sets the title to the specified text and sends a
      * {@link TitleChangeEvent} to all registered listeners.
      *
-     * @param text  the text (<code>null</code> not permitted).
+     * @param text  the text ({@code null} not permitted).
      */
     public void setText(String text) {
         ParamChecks.nullNotPermitted(text, "text");
@@ -289,7 +289,7 @@ public class TextTitle extends Title
      * Sets the text alignment and sends a {@link TitleChangeEvent} to
      * all registered listeners.
      *
-     * @param alignment  the alignment (<code>null</code> not permitted).
+     * @param alignment  the alignment ({@code null} not permitted).
      */
     public void setTextAlignment(HorizontalAlignment alignment) {
         ParamChecks.nullNotPermitted(alignment, "alignment");
@@ -300,7 +300,7 @@ public class TextTitle extends Title
     /**
      * Returns the font used to display the title string.
      *
-     * @return The font (never <code>null</code>).
+     * @return The font (never {@code null}).
      *
      * @see #setFont(Font)
      */
@@ -312,7 +312,7 @@ public class TextTitle extends Title
      * Sets the font used to display the title string.  Registered listeners
      * are notified that the title has been modified.
      *
-     * @param font  the new font (<code>null</code> not permitted).
+     * @param font  the new font ({@code null} not permitted).
      *
      * @see #getFont()
      */
@@ -327,7 +327,7 @@ public class TextTitle extends Title
     /**
      * Returns the paint used to display the title string.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @see #setPaint(Paint)
      */
@@ -339,7 +339,7 @@ public class TextTitle extends Title
      * Sets the paint used to display the title string.  Registered listeners
      * are notified that the title has been modified.
      *
-     * @param paint  the new paint (<code>null</code> not permitted).
+     * @param paint  the new paint ({@code null} not permitted).
      *
      * @see #getPaint()
      */
@@ -354,7 +354,7 @@ public class TextTitle extends Title
     /**
      * Returns the background paint.
      *
-     * @return The paint (possibly <code>null</code>).
+     * @return The paint (possibly {@code null}).
      */
     public Paint getBackgroundPaint() {
         return this.backgroundPaint;
@@ -362,10 +362,10 @@ public class TextTitle extends Title
 
     /**
      * Sets the background paint and sends a {@link TitleChangeEvent} to all
-     * registered listeners.  If you set this attribute to <code>null</code>,
+     * registered listeners.  If you set this attribute to {@code null},
      * no background is painted (which makes the title background transparent).
      *
-     * @param paint  the background paint (<code>null</code> permitted).
+     * @param paint  the background paint ({@code null} permitted).
      */
     public void setBackgroundPaint(Paint paint) {
         this.backgroundPaint = paint;
@@ -375,7 +375,7 @@ public class TextTitle extends Title
     /**
      * Returns the tool tip text.
      *
-     * @return The tool tip text (possibly <code>null</code>).
+     * @return The tool tip text (possibly {@code null}).
      */
     public String getToolTipText() {
         return this.toolTipText;
@@ -385,7 +385,7 @@ public class TextTitle extends Title
      * Sets the tool tip text to the specified text and sends a
      * {@link TitleChangeEvent} to all registered listeners.
      *
-     * @param text  the text (<code>null</code> permitted).
+     * @param text  the text ({@code null} permitted).
      */
     public void setToolTipText(String text) {
         this.toolTipText = text;
@@ -395,7 +395,7 @@ public class TextTitle extends Title
     /**
      * Returns the URL text.
      *
-     * @return The URL text (possibly <code>null</code>).
+     * @return The URL text (possibly {@code null}).
      */
     public String getURLText() {
         return this.urlText;
@@ -405,7 +405,7 @@ public class TextTitle extends Title
      * Sets the URL text to the specified text and sends a
      * {@link TitleChangeEvent} to all registered listeners.
      *
-     * @param text  the text (<code>null</code> permitted).
+     * @param text  the text ({@code null} permitted).
      */
     public void setURLText(String text) {
         this.urlText = text;
@@ -467,9 +467,9 @@ public class TextTitle extends Title
      * returns the block size.
      *
      * @param g2  the graphics device.
-     * @param constraint  the constraint (<code>null</code> not permitted).
+     * @param constraint  the constraint ({@code null} not permitted).
      *
-     * @return The block size (in Java2D units, never <code>null</code>).
+     * @return The block size (in Java2D units, never {@code null}).
      */
     @Override
     public Size2D arrange(Graphics2D g2, RectangleConstraint constraint) {
@@ -682,7 +682,7 @@ public class TextTitle extends Title
      *                {@link EntityCollection} is returned by this method.
      *
      * @return An {@link EntityCollection} containing a chart entity for the
-     *         title, or <code>null</code>.
+     *         title, or {@code null}.
      */
     @Override
     public Object draw(Graphics2D g2, Rectangle2D area, Object params) {
@@ -822,7 +822,7 @@ public class TextTitle extends Title
     /**
      * Tests this title for equality with another object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return <code>true</code> or <code>false</code>.
      */

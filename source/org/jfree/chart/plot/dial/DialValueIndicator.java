@@ -255,7 +255,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
      * Sets the frame anchor and sends a {@link DialLayerChangeEvent} to all
      * registered listeners.
      *
-     * @param anchor  the anchor (<code>null</code> not permitted).
+     * @param anchor  the anchor ({@code null} not permitted).
      *
      * @see #getFrameAnchor()
      */
@@ -268,7 +268,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
     /**
      * Returns the template value.
      *
-     * @return The template value (never <code>null</code>).
+     * @return The template value (never {@code null}).
      *
      * @see #setTemplateValue(Number)
      */
@@ -280,7 +280,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
      * Sets the template value and sends a {@link DialLayerChangeEvent} to
      * all registered listeners.
      *
-     * @param value  the value (<code>null</code> not permitted).
+     * @param value  the value ({@code null} not permitted).
      *
      * @see #setTemplateValue(Number)
      */
@@ -294,7 +294,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
      * Returns the template value for the maximum size of the indicator
      * bounds.
      *
-     * @return The template value (possibly <code>null</code>).
+     * @return The template value (possibly {@code null}).
      *
      * @since 1.0.14
      *
@@ -308,7 +308,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
      * Sets the template value for the maximum size of the indicator bounds
      * and sends a {@link DialLayerChangeEvent} to all registered listeners.
      *
-     * @param value  the value (<code>null</code> permitted).
+     * @param value  the value ({@code null} permitted).
      *
      * @since 1.0.14
      *
@@ -322,7 +322,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
     /**
      * Returns the formatter used to format the value.
      *
-     * @return The formatter (never <code>null</code>).
+     * @return The formatter (never {@code null}).
      *
      * @see #setNumberFormat(NumberFormat)
      */
@@ -334,7 +334,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
      * Sets the formatter used to format the value and sends a
      * {@link DialLayerChangeEvent} to all registered listeners.
      *
-     * @param formatter  the formatter (<code>null</code> not permitted).
+     * @param formatter  the formatter ({@code null} not permitted).
      *
      * @see #getNumberFormat()
      */
@@ -347,7 +347,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
     /**
      * Returns the font.
      *
-     * @return The font (never <code>null</code>).
+     * @return The font (never {@code null}).
      *
      * @see #getFont()
      */
@@ -359,7 +359,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
      * Sets the font and sends a {@link DialLayerChangeEvent} to all registered
      * listeners.
      *
-     * @param font  the font (<code>null</code> not permitted).
+     * @param font  the font ({@code null} not permitted).
      */
     public void setFont(Font font) {
         ParamChecks.nullNotPermitted(font, "font");
@@ -370,7 +370,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
     /**
      * Returns the paint.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @see #setPaint(Paint)
      */
@@ -382,7 +382,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
      * Sets the paint and sends a {@link DialLayerChangeEvent} to all
      * registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getPaint()
      */
@@ -407,7 +407,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
      * Sets the background paint and sends a {@link DialLayerChangeEvent} to
      * all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getBackgroundPaint()
      */
@@ -420,7 +420,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
     /**
      * Returns the outline stroke.
      *
-     * @return The outline stroke (never <code>null</code>).
+     * @return The outline stroke (never {@code null}).
      *
      * @see #setOutlineStroke(Stroke)
      */
@@ -432,7 +432,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
      * Sets the outline stroke and sends a {@link DialLayerChangeEvent} to
      * all registered listeners.
      *
-     * @param stroke  the stroke (<code>null</code> not permitted).
+     * @param stroke  the stroke ({@code null} not permitted).
      *
      * @see #getOutlineStroke()
      */
@@ -445,7 +445,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
     /**
      * Returns the outline paint.
      *
-     * @return The outline paint (never <code>null</code>).
+     * @return The outline paint (never {@code null}).
      *
      * @see #setOutlinePaint(Paint)
      */
@@ -457,7 +457,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
      * Sets the outline paint and sends a {@link DialLayerChangeEvent} to all
      * registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getOutlinePaint()
      */
@@ -470,7 +470,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
     /**
      * Returns the insets.
      *
-     * @return The insets (never <code>null</code>).
+     * @return The insets (never {@code null}).
      *
      * @see #setInsets(RectangleInsets)
      */
@@ -482,7 +482,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
      * Sets the insets and sends a {@link DialLayerChangeEvent} to all
      * registered listeners.
      *
-     * @param insets  the insets (<code>null</code> not permitted).
+     * @param insets  the insets ({@code null} not permitted).
      *
      * @see #getInsets()
      */
@@ -495,7 +495,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
     /**
      * Returns the value anchor.
      *
-     * @return The value anchor (never <code>null</code>).
+     * @return The value anchor (never {@code null}).
      *
      * @see #setValueAnchor(RectangleAnchor)
      */
@@ -507,7 +507,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
      * Sets the value anchor and sends a {@link DialLayerChangeEvent} to all
      * registered listeners.
      *
-     * @param anchor  the anchor (<code>null</code> not permitted).
+     * @param anchor  the anchor ({@code null} not permitted).
      *
      * @see #getValueAnchor()
      */
@@ -520,7 +520,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
     /**
      * Returns the text anchor.
      *
-     * @return The text anchor (never <code>null</code>).
+     * @return The text anchor (never {@code null}).
      *
      * @see #setTextAnchor(TextAnchor)
      */
@@ -532,7 +532,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
      * Sets the text anchor and sends a {@link DialLayerChangeEvent} to all
      * registered listeners.
      *
-     * @param anchor  the anchor (<code>null</code> not permitted).
+     * @param anchor  the anchor ({@code null} not permitted).
      *
      * @see #getTextAnchor()
      */
@@ -558,10 +558,10 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
      * frame specifies a window, the clipping region will already have been
      * set to this window before this method is called.
      *
-     * @param g2  the graphics device (<code>null</code> not permitted).
+     * @param g2  the graphics device ({@code null} not permitted).
      * @param plot  the plot (ignored here).
      * @param frame  the dial frame (ignored here).
-     * @param view  the view rectangle (<code>null</code> not permitted).
+     * @param view  the view rectangle ({@code null} not permitted).
      */
     @Override
     public void draw(Graphics2D g2, DialPlot plot, Rectangle2D frame,
@@ -655,7 +655,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
     /**
      * Tests this instance for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

@@ -151,7 +151,7 @@ public class Quarter extends RegularTimePeriod implements Serializable {
      * Constructs a new instance, based on a date/time and the default time
      * zone.
      *
-     * @param time  the date/time (<code>null</code> not permitted).
+     * @param time  the date/time ({@code null} not permitted).
      *
      * @see #Quarter(Date, TimeZone)
      */
@@ -163,7 +163,7 @@ public class Quarter extends RegularTimePeriod implements Serializable {
      * Constructs a Quarter, based on a date/time and time zone.
      *
      * @param time  the date/time.
-     * @param zone  the zone (<code>null</code> not permitted).
+     * @param zone  the zone ({@code null} not permitted).
      *
      * @deprecated Since 1.0.12, use {@link #Quarter(Date, TimeZone, Locale)}
      *     instead.
@@ -254,7 +254,7 @@ public class Quarter extends RegularTimePeriod implements Serializable {
      * Recalculates the start date/time and end date/time for this time period
      * relative to the supplied calendar (which incorporates a time zone).
      *
-     * @param calendar  the calendar (<code>null</code> not permitted).
+     * @param calendar  the calendar ({@code null} not permitted).
      *
      * @since 1.0.3
      */
@@ -267,7 +267,7 @@ public class Quarter extends RegularTimePeriod implements Serializable {
     /**
      * Returns the quarter preceding this one.
      *
-     * @return The quarter preceding this one (or <code>null</code> if this is
+     * @return The quarter preceding this one (or {@code null} if this is
      *     Q1 1900).
      */
     @Override
@@ -325,7 +325,7 @@ public class Quarter extends RegularTimePeriod implements Serializable {
      * representing the same quarter as this object.  In all other cases,
      * returns <code>false</code>.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return <code>true</code> if quarter and year of this and the object are
      *         the same.
@@ -423,12 +423,12 @@ public class Quarter extends RegularTimePeriod implements Serializable {
      * Returns the first millisecond in the Quarter, evaluated using the
      * supplied calendar (which determines the time zone).
      *
-     * @param calendar  the calendar (<code>null</code> not permitted).
+     * @param calendar  the calendar ({@code null} not permitted).
      *
      * @return The first millisecond in the Quarter.
      *
      * @throws NullPointerException if <code>calendar</code> is
-     *     <code>null</code>.
+     *     {@code null}.
      */
     @Override
     public long getFirstMillisecond(Calendar calendar) {
@@ -442,12 +442,12 @@ public class Quarter extends RegularTimePeriod implements Serializable {
      * Returns the last millisecond of the Quarter, evaluated using the
      * supplied calendar (which determines the time zone).
      *
-     * @param calendar  the calendar (<code>null</code> not permitted).
+     * @param calendar  the calendar ({@code null} not permitted).
      *
      * @return The last millisecond of the Quarter.
      *
      * @throws NullPointerException if <code>calendar</code> is
-     *     <code>null</code>.
+     *     {@code null}.
      */
     @Override
     public long getLastMillisecond(Calendar calendar) {

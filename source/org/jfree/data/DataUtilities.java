@@ -64,8 +64,8 @@ public abstract class DataUtilities {
      * match (two values that qre both NaN or both INF are considered equal
      * in this test).
      *
-     * @param a  the first array (<code>null</code> permitted).
-     * @param b  the second array (<code>null</code> permitted).
+     * @param a  the first array ({@code null} permitted).
+     * @param b  the second array ({@code null} permitted).
      *
      * @return A boolean.
      *
@@ -92,7 +92,7 @@ public abstract class DataUtilities {
     /**
      * Returns a clone of the specified array.
      *
-     * @param source  the source array (<code>null</code> not permitted).
+     * @param source  the source array ({@code null} not permitted).
      *
      * @return A clone of the array.
      *
@@ -115,7 +115,7 @@ public abstract class DataUtilities {
      * Returns the total of the values in one column of the supplied data
      * table.
      *
-     * @param data  the table of values (<code>null</code> not permitted).
+     * @param data  the table of values ({@code null} not permitted).
      * @param column  the column index (zero-based).
      *
      * @return The total of the values in the specified column.
@@ -137,7 +137,7 @@ public abstract class DataUtilities {
      * Returns the total of the values in one column of the supplied data
      * table by taking only the row numbers in the array into account.
      *
-     * @param data  the table of values (<code>null</code> not permitted).
+     * @param data  the table of values ({@code null} not permitted).
      * @param column  the column index (zero-based).
      * @param validRows the array with valid rows (zero-based).
      *
@@ -166,7 +166,7 @@ public abstract class DataUtilities {
      * Returns the total of the values in one row of the supplied data
      * table.
      *
-     * @param data  the table of values (<code>null</code> not permitted).
+     * @param data  the table of values ({@code null} not permitted).
      * @param row  the row index (zero-based).
      *
      * @return The total of the values in the specified row.
@@ -188,7 +188,7 @@ public abstract class DataUtilities {
      * Returns the total of the values in one row of the supplied data
      * table by taking only the column numbers in the array into account.
      *
-     * @param data  the table of values (<code>null</code> not permitted).
+     * @param data  the table of values ({@code null} not permitted).
      * @param row  the row index (zero-based).
      * @param validCols the array with valid cols (zero-based).
      *
@@ -217,7 +217,7 @@ public abstract class DataUtilities {
      * Constructs an array of <code>Number</code> objects from an array of
      * <code>double</code> primitives.
      *
-     * @param data  the data (<code>null</code> not permitted).
+     * @param data  the data ({@code null} not permitted).
      *
      * @return An array of <code>Double</code>.
      */
@@ -234,7 +234,7 @@ public abstract class DataUtilities {
      * Constructs an array of arrays of <code>Number</code> objects from a
      * corresponding structure containing <code>double</code> primitives.
      *
-     * @param data  the data (<code>null</code> not permitted).
+     * @param data  the data ({@code null} not permitted).
      *
      * @return An array of <code>Double</code>.
      */
@@ -254,7 +254,7 @@ public abstract class DataUtilities {
      * <p>
      * The percentages are values between 0.0 and 1.0 (where 1.0 = 100%).
      *
-     * @param data  the data (<code>null</code> not permitted).
+     * @param data  the data ({@code null} not permitted).
      *
      * @return The cumulative percentages.
      */

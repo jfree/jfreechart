@@ -180,7 +180,7 @@ public class XYBlockRenderer extends AbstractXYItemRenderer
      * Returns the anchor point used to align a block at its (x, y) location.
      * The default values is {@link RectangleAnchor#CENTER}.
      *
-     * @return The anchor point (never <code>null</code>).
+     * @return The anchor point (never {@code null}).
      *
      * @see #setBlockAnchor(RectangleAnchor)
      */
@@ -209,7 +209,7 @@ public class XYBlockRenderer extends AbstractXYItemRenderer
     /**
      * Returns the paint scale used by the renderer.
      *
-     * @return The paint scale (never <code>null</code>).
+     * @return The paint scale (never {@code null}).
      *
      * @see #setPaintScale(PaintScale)
      * @since 1.0.4
@@ -222,7 +222,7 @@ public class XYBlockRenderer extends AbstractXYItemRenderer
      * Sets the paint scale used by the renderer and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param scale  the scale (<code>null</code> not permitted).
+     * @param scale  the scale ({@code null} not permitted).
      *
      * @see #getPaintScale()
      * @since 1.0.4
@@ -280,9 +280,9 @@ public class XYBlockRenderer extends AbstractXYItemRenderer
      * Returns the lower and upper bounds (range) of the x-values in the
      * specified dataset.
      *
-     * @param dataset  the dataset (<code>null</code> permitted).
+     * @param dataset  the dataset ({@code null} permitted).
      *
-     * @return The range (<code>null</code> if the dataset is <code>null</code>
+     * @return The range ({@code null} if the dataset is {@code null}
      *         or empty).
      *
      * @see #findRangeBounds(XYDataset)
@@ -304,9 +304,9 @@ public class XYBlockRenderer extends AbstractXYItemRenderer
      * Returns the range of values the renderer requires to display all the
      * items from the specified dataset.
      *
-     * @param dataset  the dataset (<code>null</code> permitted).
+     * @param dataset  the dataset ({@code null} permitted).
      *
-     * @return The range (<code>null</code> if the dataset is <code>null</code>
+     * @return The range ({@code null} if the dataset is {@code null}
      *         or empty).
      *
      * @see #findDomainBounds(XYDataset)
@@ -394,12 +394,12 @@ public class XYBlockRenderer extends AbstractXYItemRenderer
      * object.  This method returns <code>true</code> if and only if:
      * <ul>
      * <li><code>obj</code> is an instance of <code>XYBlockRenderer</code> (not
-     *     <code>null</code>);</li>
+     *     {@code null});</li>
      * <li><code>obj</code> has the same field values as this
      *     <code>XYBlockRenderer</code>;</li>
      * </ul>
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

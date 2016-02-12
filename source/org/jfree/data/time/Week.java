@@ -160,7 +160,7 @@ public class Week extends RegularTimePeriod implements Serializable {
      * day-of-the-week that marks the beginning of the week, as well as the
      * minimal number of days in the first week of the year).
      *
-     * @param time  the time (<code>null</code> not permitted).
+     * @param time  the time ({@code null} not permitted).
      *
      * @see #Week(Date, TimeZone, Locale)
      */
@@ -173,8 +173,8 @@ public class Week extends RegularTimePeriod implements Serializable {
      * Creates a time period for the week in which the specified date/time
      * falls, calculated relative to the specified time zone.
      *
-     * @param time  the date/time (<code>null</code> not permitted).
-     * @param zone  the time zone (<code>null</code> not permitted).
+     * @param time  the date/time ({@code null} not permitted).
+     * @param zone  the time zone ({@code null} not permitted).
      *
      * @deprecated As of 1.0.7, use {@link #Week(Date, TimeZone, Locale)}.
      */
@@ -187,9 +187,9 @@ public class Week extends RegularTimePeriod implements Serializable {
      * Creates a time period for the week in which the specified date/time
      * falls, calculated relative to the specified time zone.
      *
-     * @param time  the date/time (<code>null</code> not permitted).
-     * @param zone  the time zone (<code>null</code> not permitted).
-     * @param locale  the locale (<code>null</code> not permitted).
+     * @param time  the date/time ({@code null} not permitted).
+     * @param zone  the time zone ({@code null} not permitted).
+     * @param locale  the locale ({@code null} not permitted).
      *
      * @since 1.0.7
      */
@@ -226,7 +226,7 @@ public class Week extends RegularTimePeriod implements Serializable {
     /**
      * Returns the year in which the week falls.
      *
-     * @return The year (never <code>null</code>).
+     * @return The year (never {@code null}).
      */
     public Year getYear() {
         return new Year(this.year);
@@ -284,7 +284,7 @@ public class Week extends RegularTimePeriod implements Serializable {
      * Recalculates the start date/time and end date/time for this time period
      * relative to the supplied calendar (which incorporates a time zone).
      *
-     * @param calendar  the calendar (<code>null</code> not permitted).
+     * @param calendar  the calendar ({@code null} not permitted).
      *
      * @since 1.0.3
      */
@@ -296,11 +296,11 @@ public class Week extends RegularTimePeriod implements Serializable {
 
     /**
      * Returns the week preceding this one.  This method will return
-     * <code>null</code> for some lower limit on the range of weeks (currently
+     * {@code null} for some lower limit on the range of weeks (currently
      * week 1, 1900).  For week 1 of any year, the previous week is always week
      * 53, but week 53 may not contain any days (you should check for this).
      *
-     * @return The preceding week (possibly <code>null</code>).
+     * @return The preceding week (possibly {@code null}).
      */
     @Override
     public RegularTimePeriod previous() {
@@ -328,12 +328,12 @@ public class Week extends RegularTimePeriod implements Serializable {
 
     /**
      * Returns the week following this one.  This method will return
-     * <code>null</code> for some upper limit on the range of weeks (currently
+     * {@code null} for some upper limit on the range of weeks (currently
      * week 53, 9999).  For week 52 of any year, the following week is always
      * week 53, but week 53 may not contain any days (you should check for
      * this).
      *
-     * @return The following week (possibly <code>null</code>).
+     * @return The following week (possibly {@code null}).
      */
     @Override
     public RegularTimePeriod next() {
@@ -377,12 +377,12 @@ public class Week extends RegularTimePeriod implements Serializable {
      * Returns the first millisecond of the week, evaluated using the supplied
      * calendar (which determines the time zone).
      *
-     * @param calendar  the calendar (<code>null</code> not permitted).
+     * @param calendar  the calendar ({@code null} not permitted).
      *
      * @return The first millisecond of the week.
      *
      * @throws NullPointerException if <code>calendar</code> is
-     *     <code>null</code>.
+     *     {@code null}.
      */
     @Override
     public long getFirstMillisecond(Calendar calendar) {
@@ -402,12 +402,12 @@ public class Week extends RegularTimePeriod implements Serializable {
      * Returns the last millisecond of the week, evaluated using the supplied
      * calendar (which determines the time zone).
      *
-     * @param calendar  the calendar (<code>null</code> not permitted).
+     * @param calendar  the calendar ({@code null} not permitted).
      *
      * @return The last millisecond of the week.
      *
      * @throws NullPointerException if <code>calendar</code> is
-     *     <code>null</code>.
+     *     {@code null}.
      */
     @Override
     public long getLastMillisecond(Calendar calendar) {
@@ -440,7 +440,7 @@ public class Week extends RegularTimePeriod implements Serializable {
      * true if the target is a Week instance representing the same week as this
      * object.  In all other cases, returns false.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return <code>true</code> if week and year of this and object are the
      *         same.
@@ -533,7 +533,7 @@ public class Week extends RegularTimePeriod implements Serializable {
      *
      * @param s  string to parse.
      *
-     * @return <code>null</code> if the string is not parseable, the week
+     * @return {@code null} if the string is not parseable, the week
      *         otherwise.
      */
     public static Week parseWeek(String s) {
@@ -615,7 +615,7 @@ public class Week extends RegularTimePeriod implements Serializable {
      *
      * @param s  string to parse.
      *
-     * @return <code>null</code> if the string is not parseable, the year
+     * @return {@code null} if the string is not parseable, the year
      *         otherwise.
      */
     private static Year evaluateAsYear(String s) {

@@ -111,7 +111,7 @@ public class StandardDialRange extends AbstractDialLayer implements DialLayer,
      *
      * @param lower  the lower bound.
      * @param upper  the upper bound.
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      */
     public StandardDialRange(double lower, double upper, Paint paint) {
         ParamChecks.nullNotPermitted(paint, "paint");
@@ -223,7 +223,7 @@ public class StandardDialRange extends AbstractDialLayer implements DialLayer,
     /**
      * Returns the paint used to highlight the range.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @see #setPaint(Paint)
      */
@@ -235,7 +235,7 @@ public class StandardDialRange extends AbstractDialLayer implements DialLayer,
      * Sets the paint used to highlight the range and sends a
      * {@link DialLayerChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getPaint()
      */
@@ -343,7 +343,7 @@ public class StandardDialRange extends AbstractDialLayer implements DialLayer,
     /**
      * Tests this instance for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

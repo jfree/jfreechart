@@ -117,8 +117,8 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
      *
      * @param list  a collection of values from which the various medians will
      *              be calculated.
-     * @param rowKey  the row key (<code>null</code> not permitted).
-     * @param columnKey  the column key (<code>null</code> not permitted).
+     * @param rowKey  the row key ({@code null} not permitted).
+     * @param columnKey  the column key ({@code null} not permitted).
      *
      * @see #add(BoxAndWhiskerItem, Comparable, Comparable)
      */
@@ -132,9 +132,9 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
      * Adds a list of values relating to one Box and Whisker entity to the
      * table.  The various median values are calculated.
      *
-     * @param item  a box and whisker item (<code>null</code> not permitted).
-     * @param rowKey  the row key (<code>null</code> not permitted).
-     * @param columnKey  the column key (<code>null</code> not permitted).
+     * @param item  a box and whisker item ({@code null} not permitted).
+     * @param rowKey  the row key ({@code null} not permitted).
+     * @param columnKey  the column key ({@code null} not permitted).
      *
      * @see #add(List, Comparable, Comparable)
      */
@@ -193,8 +193,8 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
      * Removes an item from the dataset and sends a {@link DatasetChangeEvent}
      * to all registered listeners.
      *
-     * @param rowKey  the row key (<code>null</code> not permitted).
-     * @param columnKey  the column key (<code>null</code> not permitted).
+     * @param rowKey  the row key ({@code null} not permitted).
+     * @param columnKey  the column key ({@code null} not permitted).
      *
      * @see #add(BoxAndWhiskerItem, Comparable, Comparable)
      *
@@ -510,7 +510,7 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
     /**
      * Returns the column index for a given key.
      *
-     * @param key  the column key (<code>null</code> not permitted).
+     * @param key  the column key ({@code null} not permitted).
      *
      * @return The column index.
      *
@@ -550,7 +550,7 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
     /**
      * Returns the row index for a given key.
      *
-     * @param key  the row key (<code>null</code> not permitted).
+     * @param key  the row key ({@code null} not permitted).
      *
      * @return The row index.
      *
@@ -914,7 +914,7 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
     /**
      * Tests this dataset for equality with an arbitrary object.
      *
-     * @param obj  the object to test against (<code>null</code> permitted).
+     * @param obj  the object to test against ({@code null} permitted).
      *
      * @return A boolean.
      */

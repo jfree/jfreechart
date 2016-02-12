@@ -60,7 +60,7 @@ public class XIntervalSeries extends ComparableObjectSeries {
      * be sorted into ascending order by x-value, and duplicate x-values will
      * be allowed (these defaults can be modified with another constructor.
      *
-     * @param key  the series key (<code>null</code> not permitted).
+     * @param key  the series key ({@code null} not permitted).
      */
     public XIntervalSeries(Comparable key) {
         this(key, true, true);
@@ -70,7 +70,7 @@ public class XIntervalSeries extends ComparableObjectSeries {
      * Constructs a new xy-series that contains no data.  You can specify
      * whether or not duplicate x-values are allowed for the series.
      *
-     * @param key  the series key (<code>null</code> not permitted).
+     * @param key  the series key ({@code null} not permitted).
      * @param autoSort  a flag that controls whether or not the items in the
      *                  series are sorted.
      * @param allowDuplicateXValues  a flag that controls whether duplicate
@@ -98,7 +98,7 @@ public class XIntervalSeries extends ComparableObjectSeries {
      * Adds a data item to the series and, if requested, sends a 
      * {@link SeriesChangeEvent} to all registered listeners.
      * 
-     * @param item the data item (<code>null</code> not permitted).
+     * @param item the data item ({@code null} not permitted).
      * @param notify  notify listeners?
      * 
      * @since 1.0.18
@@ -112,7 +112,7 @@ public class XIntervalSeries extends ComparableObjectSeries {
      *
      * @param index  the item index.
      *
-     * @return The x-value (never <code>null</code>).
+     * @return The x-value (never {@code null}).
      */
     public Number getX(int index) {
         XIntervalDataItem item = (XIntervalDataItem) getDataItem(index);

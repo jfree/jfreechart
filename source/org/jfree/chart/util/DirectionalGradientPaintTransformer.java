@@ -84,8 +84,8 @@ public class DirectionalGradientPaintTransformer
      * Transforms a <code>GradientPaint</code> instance to fit some target 
      * shape.
      * 
-     * @param paint  the original paint (not <code>null</code>).
-     * @param target  the reference area (not <code>null</code>).
+     * @param paint  the original paint (not {@code null}).
+     * @param target  the reference area (not {@code null}).
      * 
      * @return A transformed paint.
      */

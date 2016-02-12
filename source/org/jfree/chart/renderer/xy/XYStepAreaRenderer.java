@@ -157,8 +157,8 @@ public class XYStepAreaRenderer extends AbstractXYItemRenderer
      *
      * @param type  the type of renderer.
      * @param toolTipGenerator  the tool tip generator to use
-     *                          (<code>null</code> permitted).
-     * @param urlGenerator  the URL generator (<code>null</code> permitted).
+     *                          ({@code null} permitted).
+     * @param urlGenerator  the URL generator ({@code null} permitted).
      */
     public XYStepAreaRenderer(int type, XYToolTipGenerator toolTipGenerator,
             XYURLGenerator urlGenerator) {
@@ -386,7 +386,7 @@ public class XYStepAreaRenderer extends AbstractXYItemRenderer
      * @param series  the series index (zero-based).
      * @param item  the item index (zero-based).
      * @param crosshairState  crosshair information for the plot
-     *                        (<code>null</code> permitted).
+     *                        ({@code null} permitted).
      * @param pass  the pass index.
      */
     @Override
@@ -573,7 +573,7 @@ public class XYStepAreaRenderer extends AbstractXYItemRenderer
     /**
      * Tests this renderer for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

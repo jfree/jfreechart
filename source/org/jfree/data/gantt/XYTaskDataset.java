@@ -77,7 +77,7 @@ public class XYTaskDataset extends AbstractXYDataset
     /**
      * Creates a new dataset based on the supplied collection of tasks.
      *
-     * @param tasks  the underlying dataset (<code>null</code> not permitted).
+     * @param tasks  the underlying dataset ({@code null} not permitted).
      */
     public XYTaskDataset(TaskSeriesCollection tasks) {
         ParamChecks.nullNotPermitted(tasks, "tasks");
@@ -90,7 +90,7 @@ public class XYTaskDataset extends AbstractXYDataset
      * Returns the underlying task series collection that was supplied to the
      * constructor.
      *
-     * @return The underlying collection (never <code>null</code>).
+     * @return The underlying collection (never {@code null}).
      */
     public TaskSeriesCollection getTasks() {
         return this.underlying;
@@ -437,7 +437,7 @@ public class XYTaskDataset extends AbstractXYDataset
     /**
      * Tests this dataset for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

@@ -404,7 +404,7 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
     /**
      * Returns the current outline stroke.
      *
-     * @return The current outline stroke (possibly <code>null</code>).
+     * @return The current outline stroke (possibly {@code null}).
      */
     public Stroke getOutlineStroke() {
         return this.outlineStrokeSample.getStroke();

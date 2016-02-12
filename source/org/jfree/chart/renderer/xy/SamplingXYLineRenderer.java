@@ -95,7 +95,7 @@ public class SamplingXYLineRenderer extends AbstractXYItemRenderer
     /**
      * Returns the shape used to represent a line in the legend.
      *
-     * @return The legend line (never <code>null</code>).
+     * @return The legend line (never {@code null}).
      *
      * @see #setLegendLine(Shape)
      *
@@ -110,7 +110,7 @@ public class SamplingXYLineRenderer extends AbstractXYItemRenderer
      * Sets the shape used as a line in each legend item and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param line  the line (<code>null</code> not permitted).
+     * @param line  the line ({@code null} not permitted).
      *
      * @see #getLegendLine()
      *
@@ -258,7 +258,7 @@ public class SamplingXYLineRenderer extends AbstractXYItemRenderer
      * @param series  the series index (zero-based).
      * @param item  the item index (zero-based).
      * @param crosshairState  crosshair information for the plot
-     *                        (<code>null</code> permitted).
+     *                        ({@code null} permitted).
      * @param pass  the pass index.
      */
     @Override
@@ -357,7 +357,7 @@ public class SamplingXYLineRenderer extends AbstractXYItemRenderer
     /**
      * Tests this renderer for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return <code>true</code> or <code>false</code>.
      */

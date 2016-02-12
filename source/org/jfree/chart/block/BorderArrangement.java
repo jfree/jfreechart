@@ -91,9 +91,9 @@ public class BorderArrangement implements Arrangement, Serializable {
      * If the key is not an instance of {@link RectangleEdge} the block will
      * be added in the center.
      *
-     * @param block  the block (<code>null</code> permitted).
+     * @param block  the block ({@code null} permitted).
      * @param key  the edge (an instance of {@link RectangleEdge}) or
-     *             <code>null</code> for the center block.
+     *             {@code null} for the center block.
      */
     @Override
     public void add(Block block, Object key) {
@@ -504,7 +504,7 @@ public class BorderArrangement implements Arrangement, Serializable {
     /**
      * Tests this arrangement for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

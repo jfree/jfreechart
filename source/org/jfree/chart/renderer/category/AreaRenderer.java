@@ -126,7 +126,7 @@ public class AreaRenderer extends AbstractCategoryItemRenderer
      * Returns a token that controls how the renderer draws the end points.
      * The default value is {@link AreaRendererEndType#TAPER}.
      *
-     * @return The end type (never <code>null</code>).
+     * @return The end type (never {@code null}).
      *
      * @see #setEndType
      */
@@ -138,7 +138,7 @@ public class AreaRenderer extends AbstractCategoryItemRenderer
      * Sets a token that controls how the renderer draws the end points, and
      * sends a {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param type  the end type (<code>null</code> not permitted).
+     * @param type  the end type ({@code null} not permitted).
      *
      * @see #getEndType()
      */
@@ -336,7 +336,7 @@ public class AreaRenderer extends AbstractCategoryItemRenderer
     /**
      * Tests this instance for equality with an arbitrary object.
      *
-     * @param obj  the object to test (<code>null</code> permitted).
+     * @param obj  the object to test ({@code null} permitted).
      *
      * @return A boolean.
      */

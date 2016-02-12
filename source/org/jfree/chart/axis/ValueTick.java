@@ -80,7 +80,7 @@ public abstract class ValueTick extends Tick {
     /**
      * Creates a new value tick.
      *
-     * @param tickType  the tick type (major or minor, <code>null</code> not 
+     * @param tickType  the tick type (major or minor, {@code null} not 
      *     permitted).
      * @param value  the value.
      * @param label  the label.
@@ -123,7 +123,7 @@ public abstract class ValueTick extends Tick {
     /**
      * Tests this tick for equality with an arbitrary object.
      *
-     * @param obj  the object to test (<code>null</code> permitted).
+     * @param obj  the object to test ({@code null} permitted).
      *
      * @return A boolean.
      */

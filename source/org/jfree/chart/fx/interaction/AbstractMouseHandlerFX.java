@@ -83,7 +83,7 @@ public class AbstractMouseHandlerFX implements MouseHandlerFX {
      * mouse handler to be the current "live" handler (when a handler is
      * used as an auxiliary handler, the modifier keys are not relevant).
      * 
-     * @param id  the handler id (<code>null</code> not permitted).
+     * @param id  the handler id ({@code null} not permitted).
      * @param altKey  require ALT key modifier?
      * @param ctrlKey  require ALT key modifier?
      * @param metaKey  require ALT key modifier?
@@ -103,7 +103,7 @@ public class AbstractMouseHandlerFX implements MouseHandlerFX {
     /**
      * Returns the ID for the handler.
      * 
-     * @return The ID (never <code>null</code>).
+     * @return The ID (never {@code null}).
      */
     @Override
     public String getID() {
@@ -133,7 +133,7 @@ public class AbstractMouseHandlerFX implements MouseHandlerFX {
      * Returns <code>true</code> if the specified mouse event has modifier
      * keys that match this handler.
      * 
-     * @param e  the mouse event (<code>null</code> not permitted).
+     * @param e  the mouse event ({@code null} not permitted).
      * 
      * @return A boolean. 
      */
@@ -151,8 +151,8 @@ public class AbstractMouseHandlerFX implements MouseHandlerFX {
      * Handles a mouse moved event.  This implementation does nothing,
      * override the method if required.
      * 
-     * @param canvas  the canvas (<code>null</code> not permitted).
-     * @param e  the event (<code>null</code> not permitted).
+     * @param canvas  the canvas ({@code null} not permitted).
+     * @param e  the event ({@code null} not permitted).
      */
     @Override
     public void handleMouseMoved(ChartCanvas canvas, MouseEvent e) {
@@ -163,8 +163,8 @@ public class AbstractMouseHandlerFX implements MouseHandlerFX {
      * Handles a mouse clicked event.  This implementation does nothing,
      * override the method if required.
      * 
-     * @param canvas  the canvas (<code>null</code> not permitted).
-     * @param e  the event (<code>null</code> not permitted).
+     * @param canvas  the canvas ({@code null} not permitted).
+     * @param e  the event ({@code null} not permitted).
      */
     @Override
     public void handleMouseClicked(ChartCanvas canvas, MouseEvent e) {
@@ -175,8 +175,8 @@ public class AbstractMouseHandlerFX implements MouseHandlerFX {
      * Handles a mouse pressed event.  This implementation does nothing,
      * override the method if required.
      * 
-     * @param canvas  the canvas (<code>null</code> not permitted).
-     * @param e  the event (<code>null</code> not permitted).
+     * @param canvas  the canvas ({@code null} not permitted).
+     * @param e  the event ({@code null} not permitted).
      */
     @Override
     public void handleMousePressed(ChartCanvas canvas, MouseEvent e) {
@@ -187,8 +187,8 @@ public class AbstractMouseHandlerFX implements MouseHandlerFX {
      * Handles a mouse dragged event.  This implementation does nothing,
      * override the method if required.
      * 
-     * @param canvas  the canvas (<code>null</code> not permitted).
-     * @param e  the event (<code>null</code> not permitted).
+     * @param canvas  the canvas ({@code null} not permitted).
+     * @param e  the event ({@code null} not permitted).
      */
     @Override
     public void handleMouseDragged(ChartCanvas canvas, MouseEvent e) {
@@ -199,8 +199,8 @@ public class AbstractMouseHandlerFX implements MouseHandlerFX {
      * Handles a mouse released event.  This implementation does nothing,
      * override the method if required.
      * 
-     * @param canvas  the canvas (<code>null</code> not permitted).
-     * @param e  the event (<code>null</code> not permitted).
+     * @param canvas  the canvas ({@code null} not permitted).
+     * @param e  the event ({@code null} not permitted).
      */
     @Override
     public void handleMouseReleased(ChartCanvas canvas, MouseEvent e) {
@@ -211,8 +211,8 @@ public class AbstractMouseHandlerFX implements MouseHandlerFX {
      * Handles a scroll event.  This implementation does nothing,
      * override the method if required.
      * 
-     * @param canvas  the canvas (<code>null</code> not permitted).
-     * @param e  the event (<code>null</code> not permitted).
+     * @param canvas  the canvas ({@code null} not permitted).
+     * @param e  the event ({@code null} not permitted).
      */
     @Override
     public void handleScroll(ChartCanvas canvas, ScrollEvent e) {

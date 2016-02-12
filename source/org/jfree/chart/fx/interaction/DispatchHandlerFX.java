@@ -65,7 +65,7 @@ public class DispatchHandlerFX extends AbstractMouseHandlerFX {
     /**
      * Creates a new instance.
      * 
-     * @param id  the id (<code>null</code> not permitted).
+     * @param id  the id ({@code null} not permitted).
      */
     public DispatchHandlerFX(String id) {
         super(id, false, false, false, false);
@@ -95,8 +95,8 @@ public class DispatchHandlerFX extends AbstractMouseHandlerFX {
      * canvas and redrawing the chart (the anchor point is a reference point
      * used by the chart to determine crosshair lines).
      * 
-     * @param canvas  the chart canvas (<code>null</code> not permitted).
-     * @param e  the mouse event (<code>null</code> not permitted).
+     * @param canvas  the chart canvas ({@code null} not permitted).
+     * @param e  the mouse event ({@code null} not permitted).
      */
     @Override
     public void handleMouseClicked(ChartCanvas canvas, MouseEvent e) {

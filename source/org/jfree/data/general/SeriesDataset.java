@@ -81,7 +81,7 @@ public interface SeriesDataset extends Dataset {
      * Returns the index of the series with the specified key, or -1 if there
      * is no such series in the dataset.
      *
-     * @param seriesKey  the series key (<code>null</code> permitted).
+     * @param seriesKey  the series key ({@code null} permitted).
      *
      * @return The index, or -1.
      */

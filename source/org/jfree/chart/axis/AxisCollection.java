@@ -118,9 +118,9 @@ public class AxisCollection {
     /**
      * Adds an axis to the collection.
      *
-     * @param axis  the axis (<code>null</code> not permitted).
+     * @param axis  the axis ({@code null} not permitted).
      * @param edge  the edge of the plot that the axis should be drawn on
-     *              (<code>null</code> not permitted).
+     *              ({@code null} not permitted).
      */
     public void add(Axis axis, RectangleEdge edge) {
         ParamChecks.nullNotPermitted(axis, "axis");

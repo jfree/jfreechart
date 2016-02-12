@@ -194,9 +194,9 @@ public class StackedXYBarRenderer extends XYBarRenderer {
      * Returns the range of values the renderer requires to display all the
      * items from the specified dataset.
      *
-     * @param dataset  the dataset (<code>null</code> permitted).
+     * @param dataset  the dataset ({@code null} permitted).
      *
-     * @return The range (<code>null</code> if the dataset is <code>null</code>
+     * @return The range ({@code null} if the dataset is {@code null}
      *         or empty).
      */
     @Override
@@ -230,7 +230,7 @@ public class StackedXYBarRenderer extends XYBarRenderer {
      * @param series  the series index (zero-based).
      * @param item  the item index (zero-based).
      * @param crosshairState  crosshair information for the plot
-     *                        (<code>null</code> permitted).
+     *                        ({@code null} permitted).
      * @param pass  the pass index.
      */
     @Override
@@ -408,7 +408,7 @@ public class StackedXYBarRenderer extends XYBarRenderer {
     /**
      * Tests this renderer for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

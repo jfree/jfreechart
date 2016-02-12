@@ -72,7 +72,7 @@ public class ColorBlock extends AbstractBlock implements Block {
     /**
      * Creates a new block.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      * @param width  the width.
      * @param height  the height.
      */
@@ -86,7 +86,7 @@ public class ColorBlock extends AbstractBlock implements Block {
     /**
      * Returns the paint.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @since 1.0.5
      */
@@ -99,9 +99,9 @@ public class ColorBlock extends AbstractBlock implements Block {
      * returns the block size.
      *
      * @param g2  the graphics device.
-     * @param constraint  the constraint (<code>null</code> not permitted).
+     * @param constraint  the constraint ({@code null} not permitted).
      *
-     * @return The block size (in Java2D units, never <code>null</code>).
+     * @return The block size (in Java2D units, never {@code null}).
      */
     @Override
     public Size2D arrange(Graphics2D g2, RectangleConstraint constraint) {
@@ -130,9 +130,9 @@ public class ColorBlock extends AbstractBlock implements Block {
      *
      * @param g2  the graphics device.
      * @param area  the area.
-     * @param params  ignored (<code>null</code> permitted).
+     * @param params  ignored ({@code null} permitted).
      *
-     * @return Always <code>null</code>.
+     * @return Always {@code null}.
      */
     @Override
     public Object draw(Graphics2D g2, Rectangle2D area, Object params) {
@@ -143,7 +143,7 @@ public class ColorBlock extends AbstractBlock implements Block {
     /**
      * Tests this block for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

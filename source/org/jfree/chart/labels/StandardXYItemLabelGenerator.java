@@ -92,7 +92,7 @@ public class StandardXYItemLabelGenerator extends AbstractXYItemLabelGenerator
     /**
      * Creates an item label generator using the specified number formatters.
      *
-     * @param formatString  the item label format string (<code>null</code> not
+     * @param formatString  the item label format string ({@code null} not
      *                      permitted).
      *
      * @since 1.0.14
@@ -105,11 +105,11 @@ public class StandardXYItemLabelGenerator extends AbstractXYItemLabelGenerator
     /**
      * Creates an item label generator using the specified number formatters.
      *
-     * @param formatString  the item label format string (<code>null</code> not
+     * @param formatString  the item label format string ({@code null} not
      *                      permitted).
-     * @param xFormat  the format object for the x values (<code>null</code>
+     * @param xFormat  the format object for the x values ({@code null}
      *                 not permitted).
-     * @param yFormat  the format object for the y values (<code>null</code>
+     * @param yFormat  the format object for the y values ({@code null}
      *                 not permitted).
      */
     public StandardXYItemLabelGenerator(String formatString,
@@ -121,11 +121,11 @@ public class StandardXYItemLabelGenerator extends AbstractXYItemLabelGenerator
     /**
      * Creates an item label generator using the specified formatters.
      *
-     * @param formatString  the item label format string (<code>null</code>
+     * @param formatString  the item label format string ({@code null}
      *                      not permitted).
-     * @param xFormat  the format object for the x values (<code>null</code>
+     * @param xFormat  the format object for the x values ({@code null}
      *                 not permitted).
-     * @param yFormat  the format object for the y values (<code>null</code>
+     * @param yFormat  the format object for the y values ({@code null}
      *                 not permitted).
      */
     public StandardXYItemLabelGenerator(String formatString,
@@ -139,11 +139,11 @@ public class StandardXYItemLabelGenerator extends AbstractXYItemLabelGenerator
      * number formatter for the x-values and a date formatter for the
      * y-values).
      *
-     * @param formatString  the item label format string (<code>null</code>
+     * @param formatString  the item label format string ({@code null}
      *                      not permitted).
-     * @param xFormat  the format object for the x values (<code>null</code>
+     * @param xFormat  the format object for the x values ({@code null}
      *                 permitted).
-     * @param yFormat  the format object for the y values (<code>null</code>
+     * @param yFormat  the format object for the y values ({@code null}
      *                 not permitted).
      *
      * @since 1.0.4
@@ -157,11 +157,11 @@ public class StandardXYItemLabelGenerator extends AbstractXYItemLabelGenerator
     /**
      * Creates a label generator using the specified date formatters.
      *
-     * @param formatString  the label format string (<code>null</code> not
+     * @param formatString  the label format string ({@code null} not
      *                      permitted).
-     * @param xFormat  the format object for the x values (<code>null</code>
+     * @param xFormat  the format object for the x values ({@code null}
      *                 not permitted).
-     * @param yFormat  the format object for the y values (<code>null</code>
+     * @param yFormat  the format object for the y values ({@code null}
      *                 not permitted).
      */
     public StandardXYItemLabelGenerator(String formatString,
@@ -173,11 +173,11 @@ public class StandardXYItemLabelGenerator extends AbstractXYItemLabelGenerator
     /**
      * Generates the item label text for an item in a dataset.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
      * @param series  the series index (zero-based).
      * @param item  the item index (zero-based).
      *
-     * @return The label text (possibly <code>null</code>).
+     * @return The label text (possibly {@code null}).
      */
     @Override
     public String generateLabel(XYDataset dataset, int series, int item) {
@@ -199,7 +199,7 @@ public class StandardXYItemLabelGenerator extends AbstractXYItemLabelGenerator
     /**
      * Tests this object for equality with an arbitrary object.
      *
-     * @param obj  the other object (<code>null</code> permitted).
+     * @param obj  the other object ({@code null} permitted).
      *
      * @return A boolean.
      */

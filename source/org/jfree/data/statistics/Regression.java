@@ -238,7 +238,7 @@ public abstract class Regression {
      * Reference: J. D. Faires, R. L. Burden, Numerische Methoden (german
      * edition), pp. 243ff and 327ff.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
      * @param series  the series to fit the regression line against (the series
      *         must have at least order + 1 non-NaN items).
      * @param order  the order of the function (&gt; 0).

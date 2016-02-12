@@ -85,7 +85,7 @@ public class SimpleHistogramDataset extends AbstractIntervalXYDataset
      * Creates a new histogram dataset.  Note that the
      * <code>adjustForBinSize</code> flag defaults to <code>true</code>.
      *
-     * @param key  the series key (<code>null</code> not permitted).
+     * @param key  the series key ({@code null} not permitted).
      */
     public SimpleHistogramDataset(Comparable key) {
         ParamChecks.nullNotPermitted(key, "key");
@@ -146,7 +146,7 @@ public class SimpleHistogramDataset extends AbstractIntervalXYDataset
     /**
      * Returns the order of the domain (or X) values returned by the dataset.
      *
-     * @return The order (never <code>null</code>).
+     * @return The order (never {@code null}).
      */
     @Override
     public DomainOrder getDomainOrder() {
@@ -170,7 +170,7 @@ public class SimpleHistogramDataset extends AbstractIntervalXYDataset
      * Adds a bin to the dataset.  An exception is thrown if the bin overlaps
      * with any existing bin in the dataset.
      *
-     * @param bin  the bin (<code>null</code> not permitted).
+     * @param bin  the bin ({@code null} not permitted).
      *
      * @see #removeAllBins()
      */
@@ -229,7 +229,7 @@ public class SimpleHistogramDataset extends AbstractIntervalXYDataset
      * Adds a set of values to the dataset and sends a
      * {@link DatasetChangeEvent} to all registered listeners.
      *
-     * @param values  the values (<code>null</code> not permitted).
+     * @param values  the values ({@code null} not permitted).
      *
      * @see #clearObservations()
      */
@@ -279,7 +279,7 @@ public class SimpleHistogramDataset extends AbstractIntervalXYDataset
      * @param series  the series index (zero-based).
      * @param item  the item index (zero-based).
      *
-     * @return The x-value (never <code>null</code>).
+     * @return The x-value (never {@code null}).
      */
     @Override
     public Number getX(int series, int item) {
@@ -306,7 +306,7 @@ public class SimpleHistogramDataset extends AbstractIntervalXYDataset
      * @param series  the series index (zero-based).
      * @param item  the item index (zero-based).
      *
-     * @return The y-value (possibly <code>null</code>).
+     * @return The y-value (possibly {@code null}).
      */
     @Override
     public Number getY(int series, int item) {
@@ -448,7 +448,7 @@ public class SimpleHistogramDataset extends AbstractIntervalXYDataset
     /**
      * Compares the dataset for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

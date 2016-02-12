@@ -69,16 +69,16 @@ public interface PieSectionLabelGenerator {
     /**
      * Generates a label for a pie section.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
-     * @param key  the section key (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
+     * @param key  the section key ({@code null} not permitted).
      *
-     * @return The label (possibly <code>null</code>).
+     * @return The label (possibly {@code null}).
      */
     public String generateSectionLabel(PieDataset dataset, Comparable key);
 
     /**
      * Generates an attributed label for the specified series, or
-     * <code>null</code> if no attributed label is available (in which case,
+     * {@code null} if no attributed label is available (in which case,
      * the string returned by
      * {@link #generateSectionLabel(PieDataset, Comparable)} will
      * provide the fallback).  Only certain attributes are recognised by the
@@ -101,7 +101,7 @@ public interface PieSectionLabelGenerator {
      * @param dataset  the dataset.
      * @param key  the key.
      *
-     * @return An attributed label (possibly <code>null</code>).
+     * @return An attributed label (possibly {@code null}).
      */
     public AttributedString generateAttributedSectionLabel(PieDataset dataset,
                                                            Comparable key);

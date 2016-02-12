@@ -59,7 +59,7 @@ public interface StatisticalCategoryDataset extends CategoryDataset {
      * @param row  the row index (zero-based).
      * @param column  the column index (zero-based).
      *
-     * @return The mean value (possibly <code>null</code>).
+     * @return The mean value (possibly {@code null}).
      */
     public Number getMeanValue(int row, int column);
 
@@ -69,7 +69,7 @@ public interface StatisticalCategoryDataset extends CategoryDataset {
      * @param rowKey  the row key.
      * @param columnKey  the columnKey.
      *
-     * @return The mean value (possibly <code>null</code>).
+     * @return The mean value (possibly {@code null}).
      */
     public Number getMeanValue(Comparable rowKey, Comparable columnKey);
 
@@ -79,7 +79,7 @@ public interface StatisticalCategoryDataset extends CategoryDataset {
      * @param row  the row index (zero-based).
      * @param column  the column index (zero-based).
      *
-     * @return The standard deviation (possibly <code>null</code>).
+     * @return The standard deviation (possibly {@code null}).
      */
     public Number getStdDevValue(int row, int column);
 
@@ -89,7 +89,7 @@ public interface StatisticalCategoryDataset extends CategoryDataset {
      * @param rowKey  the row key.
      * @param columnKey  the columnKey.
      *
-     * @return The standard deviation (possibly <code>null</code>).
+     * @return The standard deviation (possibly {@code null}).
      */
     public Number getStdDevValue(Comparable rowKey, Comparable columnKey);
 

@@ -101,7 +101,7 @@ public class NumberAxis3D extends NumberAxis implements Serializable {
     /**
      * Constructs a new axis.
      *
-     * @param label  the axis label (<code>null</code> permitted).
+     * @param label  the axis label ({@code null} permitted).
      */
     public NumberAxis3D(String label) {
         super(label);
@@ -117,7 +117,7 @@ public class NumberAxis3D extends NumberAxis implements Serializable {
      * @param dataArea  the area for drawing the data (a subset of the
      *                  plotArea).
      * @param edge  the axis location.
-     * @param plotState  collects information about the plot (<code>null</code>
+     * @param plotState  collects information about the plot ({@code null}
      *                   permitted).
      *
      * @return The updated cursor value.

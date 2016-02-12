@@ -168,9 +168,9 @@ public class Millisecond extends RegularTimePeriod implements Serializable {
     /**
      * Creates a millisecond.
      *
-     * @param time  the date-time (<code>null</code> not permitted).
-     * @param zone  the time zone (<code>null</code> not permitted).
-     * @param locale  the locale (<code>null</code> not permitted).
+     * @param time  the date-time ({@code null} not permitted).
+     * @param zone  the time zone ({@code null} not permitted).
+     * @param locale  the locale ({@code null} not permitted).
      *
      * @since 1.0.13
      */
@@ -239,7 +239,7 @@ public class Millisecond extends RegularTimePeriod implements Serializable {
      * Recalculates the start date/time and end date/time for this time period
      * relative to the supplied calendar (which incorporates a time zone).
      *
-     * @param calendar  the calendar (<code>null</code> not permitted).
+     * @param calendar  the calendar ({@code null} not permitted).
      *
      * @since 1.0.3
      */
@@ -412,12 +412,12 @@ public class Millisecond extends RegularTimePeriod implements Serializable {
     /**
      * Returns the first millisecond of the time period.
      *
-     * @param calendar  the calendar (<code>null</code> not permitted).
+     * @param calendar  the calendar ({@code null} not permitted).
      *
      * @return The first millisecond of the time period.
      *
      * @throws NullPointerException if <code>calendar</code> is
-     *     <code>null</code>.
+     *     {@code null}.
      */
     @Override
     public long getFirstMillisecond(Calendar calendar) {
@@ -433,12 +433,12 @@ public class Millisecond extends RegularTimePeriod implements Serializable {
     /**
      * Returns the last millisecond of the time period.
      *
-     * @param calendar  the calendar (<code>null</code> not permitted).
+     * @param calendar  the calendar ({@code null} not permitted).
      *
      * @return The last millisecond of the time period.
      *
      * @throws NullPointerException if <code>calendar</code> is
-     *     <code>null</code>.
+     *     {@code null}.
      */
     @Override
     public long getLastMillisecond(Calendar calendar) {

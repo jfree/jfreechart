@@ -110,7 +110,7 @@ public class ChartEntity implements Cloneable, PublicCloneable, Serializable {
     /**
      * Creates a new chart entity.
      *
-     * @param area  the area (<code>null</code> not permitted).
+     * @param area  the area ({@code null} not permitted).
      */
     public ChartEntity(Shape area) {
         // defer argument checks...
@@ -120,8 +120,8 @@ public class ChartEntity implements Cloneable, PublicCloneable, Serializable {
     /**
      * Creates a new chart entity.
      *
-     * @param area  the area (<code>null</code> not permitted).
-     * @param toolTipText  the tool tip text (<code>null</code> permitted).
+     * @param area  the area ({@code null} not permitted).
+     * @param toolTipText  the tool tip text ({@code null} permitted).
      */
     public ChartEntity(Shape area, String toolTipText) {
         // defer argument checks...
@@ -131,9 +131,9 @@ public class ChartEntity implements Cloneable, PublicCloneable, Serializable {
     /**
      * Creates a new entity.
      *
-     * @param area  the area (<code>null</code> not permitted).
-     * @param toolTipText  the tool tip text (<code>null</code> permitted).
-     * @param urlText  the URL text for HTML image maps (<code>null</code>
+     * @param area  the area ({@code null} not permitted).
+     * @param toolTipText  the tool tip text ({@code null} permitted).
+     * @param urlText  the URL text for HTML image maps ({@code null}
      *                 permitted).
      */
     public ChartEntity(Shape area, String toolTipText, String urlText) {
@@ -146,7 +146,7 @@ public class ChartEntity implements Cloneable, PublicCloneable, Serializable {
     /**
      * Returns the area occupied by the entity (in Java 2D space).
      *
-     * @return The area (never <code>null</code>).
+     * @return The area (never {@code null}).
      */
     public Shape getArea() {
         return this.area;
@@ -159,7 +159,7 @@ public class ChartEntity implements Cloneable, PublicCloneable, Serializable {
      * Setting this area doesn't change the entity (which has already been
      * drawn).
      *
-     * @param area  the area (<code>null</code> not permitted).
+     * @param area  the area ({@code null} not permitted).
      */
     public void setArea(Shape area) {
         ParamChecks.nullNotPermitted(area, "area");
@@ -172,7 +172,7 @@ public class ChartEntity implements Cloneable, PublicCloneable, Serializable {
      * reasons some form of filtering should be applied before incorporating
      * this text into any HTML output.
      *
-     * @return The tool tip text (possibly <code>null</code>).
+     * @return The tool tip text (possibly {@code null}).
      */
     public String getToolTipText() {
         return this.toolTipText;
@@ -181,7 +181,7 @@ public class ChartEntity implements Cloneable, PublicCloneable, Serializable {
     /**
      * Sets the tool tip text.
      *
-     * @param text  the text (<code>null</code> permitted).
+     * @param text  the text ({@code null} permitted).
      */
     public void setToolTipText(String text) {
         this.toolTipText = text;
@@ -192,7 +192,7 @@ public class ChartEntity implements Cloneable, PublicCloneable, Serializable {
      * may have been generated from user supplied data, so some form of
      * filtering should be applied before this "URL" is used in any output.
      *
-     * @return The URL text (possibly <code>null</code>).
+     * @return The URL text (possibly {@code null}).
      */
     public String getURLText() {
         return this.urlText;
@@ -201,7 +201,7 @@ public class ChartEntity implements Cloneable, PublicCloneable, Serializable {
     /**
      * Sets the URL text.
      *
-     * @param text the text (<code>null</code> permitted).
+     * @param text the text ({@code null} permitted).
      */
     public void setURLText(String text) {
         this.urlText = text;
@@ -211,7 +211,7 @@ public class ChartEntity implements Cloneable, PublicCloneable, Serializable {
      * Returns a string describing the entity area.  This string is intended
      * for use in an AREA tag when generating an image map.
      *
-     * @return The shape type (never <code>null</code>).
+     * @return The shape type (never {@code null}).
      */
     public String getShapeType() {
         if (this.area instanceof Rectangle2D) {
@@ -225,7 +225,7 @@ public class ChartEntity implements Cloneable, PublicCloneable, Serializable {
     /**
      * Returns the shape coordinates as a string.
      *
-     * @return The shape coordinates (never <code>null</code>).
+     * @return The shape coordinates (never {@code null}).
      */
     public String getShapeCoords() {
         if (this.area instanceof Rectangle2D) {
@@ -240,7 +240,7 @@ public class ChartEntity implements Cloneable, PublicCloneable, Serializable {
      * Returns a string containing the coordinates (x1, y1, x2, y2) for a given
      * rectangle.  This string is intended for use in an image map.
      *
-     * @param rectangle  the rectangle (<code>null</code> not permitted).
+     * @param rectangle  the rectangle ({@code null} not permitted).
      *
      * @return Upper left and lower right corner of a rectangle.
      */
@@ -265,7 +265,7 @@ public class ChartEntity implements Cloneable, PublicCloneable, Serializable {
      * Returns a string containing the coordinates for a given shape.  This
      * string is intended for use in an image map.
      *
-     * @param shape  the shape (<code>null</code> not permitted).
+     * @param shape  the shape ({@code null} not permitted).
      *
      * @return The coordinates for a given shape as string.
      */
@@ -298,10 +298,10 @@ public class ChartEntity implements Cloneable, PublicCloneable, Serializable {
      * should be <code>XHTML 1.0</code> compliant.
      *
      * @param toolTipTagFragmentGenerator  a generator for the HTML fragment
-     *     that will contain the tooltip text (<code>null</code> not permitted
+     *     that will contain the tooltip text ({@code null} not permitted
      *     if this entity contains tooltip information).
      * @param urlTagFragmentGenerator  a generator for the HTML fragment that
-     *     will contain the URL reference (<code>null</code> not permitted if
+     *     will contain the URL reference ({@code null} not permitted if
      *     this entity has a URL).
      *
      * @return The HTML tag.
@@ -356,7 +356,7 @@ public class ChartEntity implements Cloneable, PublicCloneable, Serializable {
     /**
      * Tests the entity for equality with an arbitrary object.
      *
-     * @param obj  the object to test against (<code>null</code> permitted).
+     * @param obj  the object to test against ({@code null} permitted).
      *
      * @return A boolean.
      */

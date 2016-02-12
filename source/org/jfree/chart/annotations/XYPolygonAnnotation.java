@@ -96,7 +96,7 @@ public class XYPolygonAnnotation extends AbstractXYAnnotation
      * plot) and the last point is automatically joined back to the first point.
      *
      * @param polygon  the coordinates of the polygon's vertices
-     *     (<code>null</code> not permitted).
+     *     ({@code null} not permitted).
      */
     public XYPolygonAnnotation(double[] polygon) {
         this(polygon, new BasicStroke(1.0f), Color.black);
@@ -110,9 +110,9 @@ public class XYPolygonAnnotation extends AbstractXYAnnotation
      * point is automatically joined back to the first point.
      *
      * @param polygon  the coordinates of the polygon's vertices
-     *     (<code>null</code> not permitted).
-     * @param stroke  the shape stroke (<code>null</code> permitted).
-     * @param outlinePaint  the shape color (<code>null</code> permitted).
+     *     ({@code null} not permitted).
+     * @param stroke  the shape stroke ({@code null} permitted).
+     * @param outlinePaint  the shape color ({@code null} permitted).
      */
     public XYPolygonAnnotation(double[] polygon,
                                Stroke stroke, Paint outlinePaint) {
@@ -126,10 +126,10 @@ public class XYPolygonAnnotation extends AbstractXYAnnotation
      * first point.
      *
      * @param polygon  the coordinates of the polygon's vertices
-     *     (<code>null</code> not permitted).
-     * @param stroke  the shape stroke (<code>null</code> permitted).
-     * @param outlinePaint  the shape color (<code>null</code> permitted).
-     * @param fillPaint  the paint used to fill the shape (<code>null</code>
+     *     ({@code null} not permitted).
+     * @param stroke  the shape stroke ({@code null} permitted).
+     * @param outlinePaint  the shape color ({@code null} permitted).
+     * @param fillPaint  the paint used to fill the shape ({@code null}
      *                   permitted).
      */
     public XYPolygonAnnotation(double[] polygon, Stroke stroke, 
@@ -162,7 +162,7 @@ public class XYPolygonAnnotation extends AbstractXYAnnotation
     /**
      * Returns the fill paint.
      *
-     * @return The fill paint (possibly <code>null</code>).
+     * @return The fill paint (possibly {@code null}).
      *
      * @since 1.0.2
      */
@@ -173,7 +173,7 @@ public class XYPolygonAnnotation extends AbstractXYAnnotation
     /**
      * Returns the outline stroke.
      *
-     * @return The outline stroke (possibly <code>null</code>).
+     * @return The outline stroke (possibly {@code null}).
      *
      * @since 1.0.2
      */
@@ -184,7 +184,7 @@ public class XYPolygonAnnotation extends AbstractXYAnnotation
     /**
      * Returns the outline paint.
      *
-     * @return The outline paint (possibly <code>null</code>).
+     * @return The outline paint (possibly {@code null}).
      *
      * @since 1.0.2
      */
@@ -265,7 +265,7 @@ public class XYPolygonAnnotation extends AbstractXYAnnotation
     /**
      * Tests this annotation for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */
@@ -333,7 +333,7 @@ public class XYPolygonAnnotation extends AbstractXYAnnotation
     /**
      * Provides serialization support.
      *
-     * @param stream  the output stream (<code>null</code> not permitted).
+     * @param stream  the output stream ({@code null} not permitted).
      *
      * @throws IOException if there is an I/O error.
      */
@@ -347,7 +347,7 @@ public class XYPolygonAnnotation extends AbstractXYAnnotation
     /**
      * Provides serialization support.
      *
-     * @param stream  the input stream (<code>null</code> not permitted).
+     * @param stream  the input stream ({@code null} not permitted).
      *
      * @throws IOException  if there is an I/O error.
      * @throws ClassNotFoundException  if there is a classpath problem.

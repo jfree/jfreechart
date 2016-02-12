@@ -108,7 +108,7 @@ public abstract class AbstractDataset implements Dataset, Cloneable,
     /**
      * Returns the dataset group for the dataset.
      *
-     * @return The group (never <code>null</code>).
+     * @return The group (never {@code null}).
      *
      * @see #setGroup(DatasetGroup)
      */
@@ -120,7 +120,7 @@ public abstract class AbstractDataset implements Dataset, Cloneable,
     /**
      * Sets the dataset group for the dataset.
      *
-     * @param group  the group (<code>null</code> not permitted).
+     * @param group  the group ({@code null} not permitted).
      *
      * @see #getGroup()
      */

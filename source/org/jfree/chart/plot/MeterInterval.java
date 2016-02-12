@@ -84,8 +84,8 @@ public class MeterInterval implements Serializable {
     /**
      * Creates a new interval.
      *
-     * @param label  the label (<code>null</code> not permitted).
-     * @param range  the range (<code>null</code> not permitted).
+     * @param label  the label ({@code null} not permitted).
+     * @param range  the range ({@code null} not permitted).
      */
     public MeterInterval(String label, Range range) {
         this(label, range, Color.yellow, new BasicStroke(2.0f), null);
@@ -94,11 +94,11 @@ public class MeterInterval implements Serializable {
     /**
      * Creates a new interval.
      *
-     * @param label  the label (<code>null</code> not permitted).
-     * @param range  the range (<code>null</code> not permitted).
-     * @param outlinePaint  the outline paint (<code>null</code> permitted).
-     * @param outlineStroke  the outline stroke (<code>null</code> permitted).
-     * @param backgroundPaint  the background paint (<code>null</code>
+     * @param label  the label ({@code null} not permitted).
+     * @param range  the range ({@code null} not permitted).
+     * @param outlinePaint  the outline paint ({@code null} permitted).
+     * @param outlineStroke  the outline stroke ({@code null} permitted).
+     * @param backgroundPaint  the background paint ({@code null}
      *                         permitted).
      */
     public MeterInterval(String label, Range range, Paint outlinePaint,
@@ -115,7 +115,7 @@ public class MeterInterval implements Serializable {
     /**
      * Returns the label.
      *
-     * @return The label (never <code>null</code>).
+     * @return The label (never {@code null}).
      */
     public String getLabel() {
         return this.label;
@@ -124,17 +124,17 @@ public class MeterInterval implements Serializable {
     /**
      * Returns the range.
      *
-     * @return The range (never <code>null</code>).
+     * @return The range (never {@code null}).
      */
     public Range getRange() {
         return this.range;
     }
 
     /**
-     * Returns the background paint.  If <code>null</code>, the background
+     * Returns the background paint.  If {@code null}, the background
      * should remain unfilled.
      *
-     * @return The background paint (possibly <code>null</code>).
+     * @return The background paint (possibly {@code null}).
      */
     public Paint getBackgroundPaint() {
         return this.backgroundPaint;
@@ -143,7 +143,7 @@ public class MeterInterval implements Serializable {
     /**
      * Returns the outline paint.
      *
-     * @return The outline paint (possibly <code>null</code>).
+     * @return The outline paint (possibly {@code null}).
      */
     public Paint getOutlinePaint() {
         return this.outlinePaint;
@@ -152,7 +152,7 @@ public class MeterInterval implements Serializable {
     /**
      * Returns the outline stroke.
      *
-     * @return The outline stroke (possibly <code>null</code>).
+     * @return The outline stroke (possibly {@code null}).
      */
     public Stroke getOutlineStroke() {
         return this.outlineStroke;
@@ -161,7 +161,7 @@ public class MeterInterval implements Serializable {
     /**
      * Checks this instance for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

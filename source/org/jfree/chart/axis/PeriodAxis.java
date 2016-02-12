@@ -130,7 +130,7 @@ public class PeriodAxis extends ValueAxis
     private TimeZone timeZone;
 
     /**
-     * The locale (never <code>null</code>).
+     * The locale (never {@code null}).
      * 
      * @since 1.0.13
      */
@@ -193,11 +193,11 @@ public class PeriodAxis extends ValueAxis
     /**
      * Creates a new axis.
      *
-     * @param label  the axis label (<code>null</code> permitted).
+     * @param label  the axis label ({@code null} permitted).
      * @param first  the first time period in the axis range
-     *               (<code>null</code> not permitted).
+     *               ({@code null} not permitted).
      * @param last  the last time period in the axis range
-     *              (<code>null</code> not permitted).
+     *              ({@code null} not permitted).
      */
     public PeriodAxis(String label,
                       RegularTimePeriod first, RegularTimePeriod last) {
@@ -207,12 +207,12 @@ public class PeriodAxis extends ValueAxis
     /**
      * Creates a new axis.
      *
-     * @param label  the axis label (<code>null</code> permitted).
+     * @param label  the axis label ({@code null} permitted).
      * @param first  the first time period in the axis range
-     *               (<code>null</code> not permitted).
+     *               ({@code null} not permitted).
      * @param last  the last time period in the axis range
-     *              (<code>null</code> not permitted).
-     * @param timeZone  the time zone (<code>null</code> not permitted).
+     *              ({@code null} not permitted).
+     * @param timeZone  the time zone ({@code null} not permitted).
      *
      * @deprecated As of version 1.0.13, you should use the constructor that
      *     specifies a Locale also.
@@ -225,13 +225,13 @@ public class PeriodAxis extends ValueAxis
     /**
      * Creates a new axis.
      *
-     * @param label  the axis label (<code>null</code> permitted).
+     * @param label  the axis label ({@code null} permitted).
      * @param first  the first time period in the axis range
-     *               (<code>null</code> not permitted).
+     *               ({@code null} not permitted).
      * @param last  the last time period in the axis range
-     *              (<code>null</code> not permitted).
-     * @param timeZone  the time zone (<code>null</code> not permitted).
-     * @param locale  the locale (<code>null</code> not permitted).
+     *              ({@code null} not permitted).
+     * @param timeZone  the time zone ({@code null} not permitted).
+     * @param locale  the locale ({@code null} not permitted).
      *
      * @since 1.0.13
      */
@@ -265,7 +265,7 @@ public class PeriodAxis extends ValueAxis
     /**
      * Returns the first time period in the axis range.
      *
-     * @return The first time period (never <code>null</code>).
+     * @return The first time period (never {@code null}).
      */
     public RegularTimePeriod getFirst() {
         return this.first;
@@ -275,7 +275,7 @@ public class PeriodAxis extends ValueAxis
      * Sets the first time period in the axis range and sends an
      * {@link AxisChangeEvent} to all registered listeners.
      *
-     * @param first  the time period (<code>null</code> not permitted).
+     * @param first  the time period ({@code null} not permitted).
      */
     public void setFirst(RegularTimePeriod first) {
         ParamChecks.nullNotPermitted(first, "first");
@@ -287,7 +287,7 @@ public class PeriodAxis extends ValueAxis
     /**
      * Returns the last time period in the axis range.
      *
-     * @return The last time period (never <code>null</code>).
+     * @return The last time period (never {@code null}).
      */
     public RegularTimePeriod getLast() {
         return this.last;
@@ -297,7 +297,7 @@ public class PeriodAxis extends ValueAxis
      * Sets the last time period in the axis range and sends an
      * {@link AxisChangeEvent} to all registered listeners.
      *
-     * @param last  the time period (<code>null</code> not permitted).
+     * @param last  the time period ({@code null} not permitted).
      */
     public void setLast(RegularTimePeriod last) {
         ParamChecks.nullNotPermitted(last, "last");
@@ -310,7 +310,7 @@ public class PeriodAxis extends ValueAxis
      * Returns the time zone used to convert the periods defining the axis
      * range into absolute milliseconds.
      *
-     * @return The time zone (never <code>null</code>).
+     * @return The time zone (never {@code null}).
      */
     public TimeZone getTimeZone() {
         return this.timeZone;
@@ -320,7 +320,7 @@ public class PeriodAxis extends ValueAxis
      * Sets the time zone that is used to convert the time periods into
      * absolute milliseconds.
      *
-     * @param zone  the time zone (<code>null</code> not permitted).
+     * @param zone  the time zone ({@code null} not permitted).
      */
     public void setTimeZone(TimeZone zone) {
         ParamChecks.nullNotPermitted(zone, "zone");
@@ -334,7 +334,7 @@ public class PeriodAxis extends ValueAxis
     /**
      * Returns the locale for this axis.
      *
-     * @return The locale (never (<code>null</code>).
+     * @return The locale (never ({@code null}).
      *
      * @since 1.0.13
      */
@@ -346,7 +346,7 @@ public class PeriodAxis extends ValueAxis
      * Returns the class used to create the first and last time periods for
      * the axis range when the auto-range flag is set to <code>true</code>.
      *
-     * @return The class (never <code>null</code>).
+     * @return The class (never {@code null}).
      */
     public Class getAutoRangeTimePeriodClass() {
         return this.autoRangeTimePeriodClass;
@@ -357,7 +357,7 @@ public class PeriodAxis extends ValueAxis
      * axis range when the auto-range flag is set to <code>true</code> and
      * sends an {@link AxisChangeEvent} to all registered listeners.
      *
-     * @param c  the class (<code>null</code> not permitted).
+     * @param c  the class ({@code null} not permitted).
      */
     public void setAutoRangeTimePeriodClass(Class c) {
         ParamChecks.nullNotPermitted(c, "c");
@@ -368,7 +368,7 @@ public class PeriodAxis extends ValueAxis
     /**
      * Returns the class that controls the spacing of the major tick marks.
      *
-     * @return The class (never <code>null</code>).
+     * @return The class (never {@code null}).
      */
     public Class getMajorTickTimePeriodClass() {
         return this.majorTickTimePeriodClass;
@@ -414,7 +414,7 @@ public class PeriodAxis extends ValueAxis
     /**
      * Returns the class that controls the spacing of the minor tick marks.
      *
-     * @return The class (never <code>null</code>).
+     * @return The class (never {@code null}).
      */
     public Class getMinorTickTimePeriodClass() {
         return this.minorTickTimePeriodClass;
@@ -437,7 +437,7 @@ public class PeriodAxis extends ValueAxis
      * Returns the stroke used to display minor tick marks, if they are
      * visible.
      *
-     * @return A stroke (never <code>null</code>).
+     * @return A stroke (never {@code null}).
      */
     public Stroke getMinorTickMarkStroke() {
         return this.minorTickMarkStroke;
@@ -448,7 +448,7 @@ public class PeriodAxis extends ValueAxis
      * visible, and sends a {@link AxisChangeEvent} to all registered
      * listeners.
      *
-     * @param stroke  the stroke (<code>null</code> not permitted).
+     * @param stroke  the stroke ({@code null} not permitted).
      */
     public void setMinorTickMarkStroke(Stroke stroke) {
         ParamChecks.nullNotPermitted(stroke, "stroke");
@@ -460,7 +460,7 @@ public class PeriodAxis extends ValueAxis
      * Returns the paint used to display minor tick marks, if they are
      * visible.
      *
-     * @return A paint (never <code>null</code>).
+     * @return A paint (never {@code null}).
      */
     public Paint getMinorTickMarkPaint() {
         return this.minorTickMarkPaint;
@@ -471,7 +471,7 @@ public class PeriodAxis extends ValueAxis
      * visible, and sends a {@link AxisChangeEvent} to all registered
      * listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      */
     public void setMinorTickMarkPaint(Paint paint) {
         ParamChecks.nullNotPermitted(paint, "paint");
@@ -548,7 +548,7 @@ public class PeriodAxis extends ValueAxis
      * {@link AxisChangeEvent} to all registered listeners.  As a side-effect,
      * the auto-range flag is set to <code>false</code> (optional).
      *
-     * @param range  the range (<code>null</code> not permitted).
+     * @param range  the range ({@code null} not permitted).
      * @param turnOffAutoRange  a flag that controls whether or not the auto
      *                          range is turned off.
      * @param notify  a flag that controls whether or not listeners are
@@ -649,15 +649,15 @@ public class PeriodAxis extends ValueAxis
      * Draws the axis on a Java 2D graphics device (such as the screen or a
      * printer).
      *
-     * @param g2  the graphics device (<code>null</code> not permitted).
+     * @param g2  the graphics device ({@code null} not permitted).
      * @param cursor  the cursor location (determines where to draw the axis).
      * @param plotArea  the area within which the axes and plot should be drawn.
      * @param dataArea  the area within which the data should be drawn.
-     * @param edge  the axis location (<code>null</code> not permitted).
+     * @param edge  the axis location ({@code null} not permitted).
      * @param plotState  collects information about the plot
-     *                   (<code>null</code> permitted).
+     *                   ({@code null} permitted).
      *
-     * @return The axis state (never <code>null</code>).
+     * @return The axis state (never {@code null}).
      */
     @Override
     public AxisState draw(Graphics2D g2, double cursor, Rectangle2D plotArea,
@@ -1086,7 +1086,7 @@ public class PeriodAxis extends ValueAxis
     /**
      * Tests the axis for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

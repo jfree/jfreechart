@@ -115,7 +115,7 @@ public class DefaultTableXYDataset extends AbstractIntervalXYDataset
      *
      * @param autoPrune  a flag that controls whether or not x-values are
      *                   removed whenever the corresponding y-values are all
-     *                   <code>null</code>.
+     *                   {@code null}.
      */
     public DefaultTableXYDataset(boolean autoPrune) {
         this.autoPrune = autoPrune;
@@ -127,7 +127,7 @@ public class DefaultTableXYDataset extends AbstractIntervalXYDataset
 
     /**
      * Returns the flag that controls whether or not x-values are removed from
-     * the dataset when the corresponding y-values are all <code>null</code>.
+     * the dataset when the corresponding y-values are all {@code null}.
      *
      * @return A boolean.
      */
@@ -140,7 +140,7 @@ public class DefaultTableXYDataset extends AbstractIntervalXYDataset
      * to all registered listeners.  The series should be configured to NOT
      * allow duplicate x-values.
      *
-     * @param series  the series (<code>null</code> not permitted).
+     * @param series  the series ({@code null} not permitted).
      */
     public void addSeries(XYSeries series) {
         ParamChecks.nullNotPermitted(series, "series");
@@ -160,7 +160,7 @@ public class DefaultTableXYDataset extends AbstractIntervalXYDataset
      * Adds any unique x-values from 'series' to the dataset, and also adds any
      * x-values that are in the dataset but not in 'series' to the series.
      *
-     * @param series  the series (<code>null</code> not permitted).
+     * @param series  the series ({@code null} not permitted).
      */
     private void updateXPoints(XYSeries series) {
         ParamChecks.nullNotPermitted(series, "series");
@@ -235,7 +235,7 @@ public class DefaultTableXYDataset extends AbstractIntervalXYDataset
      *
      * @param series  the series (zero-based index).
      *
-     * @return The series (never <code>null</code>).
+     * @return The series (never {@code null}).
      */
     public XYSeries getSeries(int series) {
         if ((series < 0) || (series >= getSeriesCount())) {
@@ -318,7 +318,7 @@ public class DefaultTableXYDataset extends AbstractIntervalXYDataset
      * @param index  the index of the item of interest (zero-based).
      *
      * @return The y-value for the specified series and item (possibly
-     *         <code>null</code>).
+     *         {@code null}).
      */
     @Override
     public Number getY(int series, int index) {
@@ -375,7 +375,7 @@ public class DefaultTableXYDataset extends AbstractIntervalXYDataset
      * Removes a series from the collection and sends a
      * {@link DatasetChangeEvent} to all registered listeners.
      *
-     * @param series  the series (<code>null</code> not permitted).
+     * @param series  the series ({@code null} not permitted).
      */
     public void removeSeries(XYSeries series) {
         ParamChecks.nullNotPermitted(series, "series");
@@ -436,7 +436,7 @@ public class DefaultTableXYDataset extends AbstractIntervalXYDataset
 
     /**
      * Returns <code>true</code> if all the y-values for the specified x-value
-     * are <code>null</code> and <code>false</code> otherwise.
+     * are {@code null} and <code>false</code> otherwise.
      *
      * @param x  the x-value.
      *
@@ -453,7 +453,7 @@ public class DefaultTableXYDataset extends AbstractIntervalXYDataset
     }
 
     /**
-     * Removes all x-values for which all the y-values are <code>null</code>.
+     * Removes all x-values for which all the y-values are {@code null}.
      */
     public void prune() {
         HashSet hs = (HashSet) this.xPoints.clone();
@@ -484,7 +484,7 @@ public class DefaultTableXYDataset extends AbstractIntervalXYDataset
     /**
      * Tests this collection for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

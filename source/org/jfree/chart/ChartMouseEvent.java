@@ -74,11 +74,11 @@ public class ChartMouseEvent extends EventObject implements Serializable {
     /**
      * Constructs a new event.
      *
-     * @param chart  the source chart (<code>null</code> not permitted).
+     * @param chart  the source chart ({@code null} not permitted).
      * @param trigger  the mouse event that triggered this event
-     *                 (<code>null</code> not permitted).
+     *                 ({@code null} not permitted).
      * @param entity  the chart entity (if any) under the mouse point
-     *                (<code>null</code> permitted).
+     *                ({@code null} permitted).
      */
     public ChartMouseEvent(JFreeChart chart, MouseEvent trigger,
                            ChartEntity entity) {
@@ -91,7 +91,7 @@ public class ChartMouseEvent extends EventObject implements Serializable {
     /**
      * Returns the chart that the mouse event relates to.
      *
-     * @return The chart (never <code>null</code>).
+     * @return The chart (never {@code null}).
      */
     public JFreeChart getChart() {
         return this.chart;
@@ -100,7 +100,7 @@ public class ChartMouseEvent extends EventObject implements Serializable {
     /**
      * Returns the mouse event that triggered this event.
      *
-     * @return The event (never <code>null</code>).
+     * @return The event (never {@code null}).
      */
     public MouseEvent getTrigger() {
         return this.trigger;
@@ -109,7 +109,7 @@ public class ChartMouseEvent extends EventObject implements Serializable {
     /**
      * Returns the chart entity (if any) under the mouse point.
      *
-     * @return The chart entity (possibly <code>null</code>).
+     * @return The chart entity (possibly {@code null}).
      */
     public ChartEntity getEntity() {
         return this.entity;

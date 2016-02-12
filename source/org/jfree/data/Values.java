@@ -61,7 +61,7 @@ public interface Values {
      * @param index  the item index (in the range <code>0</code> to
      *     <code>getItemCount() - 1</code>).
      *
-     * @return The value (possibly <code>null</code>).
+     * @return The value (possibly {@code null}).
      *
      * @throws IndexOutOfBoundsException if <code>index</code> is not in the
      *     specified range.

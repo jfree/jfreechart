@@ -226,7 +226,7 @@ public class MarkerAxisBand implements Serializable {
      * Tests this axis for equality with another object.  Note that the axis
      * that the band belongs to is ignored in the test.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return <code>true</code> or <code>false</code>.
      */

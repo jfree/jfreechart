@@ -75,7 +75,7 @@ public interface CategoryItemLabelGenerator {
     /**
      * Generates a label for the specified row.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
      * @param row  the row index (zero-based).
      *
      * @return The label.
@@ -85,7 +85,7 @@ public interface CategoryItemLabelGenerator {
     /**
      * Generates a label for the specified row.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
      * @param column  the column index (zero-based).
      *
      * @return The label.
@@ -96,11 +96,11 @@ public interface CategoryItemLabelGenerator {
      * Generates a label for the specified item. The label is typically a
      * formatted version of the data value, but any text can be used.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
      * @param row  the row index (zero-based).
      * @param column  the column index (zero-based).
      *
-     * @return The label (possibly <code>null</code>).
+     * @return The label (possibly {@code null}).
      */
     public String generateLabel(CategoryDataset dataset, int row, int column);
 

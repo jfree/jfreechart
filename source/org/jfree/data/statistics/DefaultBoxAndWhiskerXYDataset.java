@@ -220,8 +220,8 @@ public class DefaultBoxAndWhiskerXYDataset extends AbstractXYDataset
      * Adds an item to the dataset and sends a {@link DatasetChangeEvent} to
      * all registered listeners.
      *
-     * @param date  the date (<code>null</code> not permitted).
-     * @param item  the item (<code>null</code> not permitted).
+     * @param date  the date ({@code null} not permitted).
+     * @param item  the item ({@code null} not permitted).
      */
     public void add(Date date, BoxAndWhiskerItem item) {
         this.dates.add(date);
@@ -471,7 +471,7 @@ public class DefaultBoxAndWhiskerXYDataset extends AbstractXYDataset
      * @param item  the item (zero-based index).
      *
      * @return The list of outliers for the specified series and item
-     *         (possibly <code>null</code>).
+     *         (possibly {@code null}).
      */
     @Override
     public List getOutliers(int series, int item) {
@@ -533,7 +533,7 @@ public class DefaultBoxAndWhiskerXYDataset extends AbstractXYDataset
     /**
      * Tests this dataset for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

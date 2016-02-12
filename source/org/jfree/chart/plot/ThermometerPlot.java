@@ -419,7 +419,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
     /**
      * Returns the dataset for the plot.
      *
-     * @return The dataset (possibly <code>null</code>).
+     * @return The dataset (possibly {@code null}).
      *
      * @see #setDataset(ValueDataset)
      */
@@ -431,7 +431,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      * Sets the dataset for the plot, replacing the existing dataset if there
      * is one, and sends a {@link PlotChangeEvent} to all registered listeners.
      *
-     * @param dataset  the dataset (<code>null</code> permitted).
+     * @param dataset  the dataset ({@code null} permitted).
      *
      * @see #getDataset()
      */
@@ -460,7 +460,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
     /**
      * Returns the range axis.
      *
-     * @return The range axis (never <code>null</code>).
+     * @return The range axis (never {@code null}).
      *
      * @see #setRangeAxis(ValueAxis)
      */
@@ -472,7 +472,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      * Sets the range axis for the plot and sends a {@link PlotChangeEvent} to
      * all registered listeners.
      *
-     * @param axis  the new axis (<code>null</code> not permitted).
+     * @param axis  the new axis ({@code null} not permitted).
      *
      * @see #getRangeAxis()
      */
@@ -551,7 +551,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      * Returns the padding for the thermometer.  This is the space inside the
      * plot area.
      *
-     * @return The padding (never <code>null</code>).
+     * @return The padding (never {@code null}).
      *
      * @see #setPadding(RectangleInsets)
      */
@@ -563,7 +563,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      * Sets the padding for the thermometer and sends a {@link PlotChangeEvent}
      * to all registered listeners.
      *
-     * @param padding  the padding (<code>null</code> not permitted).
+     * @param padding  the padding ({@code null} not permitted).
      *
      * @see #getPadding()
      */
@@ -576,7 +576,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
     /**
      * Returns the stroke used to draw the thermometer outline.
      *
-     * @return The stroke (never <code>null</code>).
+     * @return The stroke (never {@code null}).
      *
      * @see #setThermometerStroke(Stroke)
      * @see #getThermometerPaint()
@@ -589,7 +589,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      * Sets the stroke used to draw the thermometer outline and sends a
      * {@link PlotChangeEvent} to all registered listeners.
      *
-     * @param s  the new stroke (<code>null</code> ignored).
+     * @param s  the new stroke ({@code null} ignored).
      *
      * @see #getThermometerStroke()
      */
@@ -603,7 +603,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
     /**
      * Returns the paint used to draw the thermometer outline.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @see #setThermometerPaint(Paint)
      * @see #getThermometerStroke()
@@ -616,7 +616,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      * Sets the paint used to draw the thermometer outline and sends a
      * {@link PlotChangeEvent} to all registered listeners.
      *
-     * @param paint  the new paint (<code>null</code> ignored).
+     * @param paint  the new paint ({@code null} ignored).
      *
      * @see #getThermometerPaint()
      */
@@ -667,7 +667,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
     /**
      * Sets the unit type.
      *
-     * @param u  the unit type (<code>null</code> ignored).
+     * @param u  the unit type ({@code null} ignored).
      *
      * @deprecated Use setUnits(int) instead.  Deprecated as of version 1.0.6,
      *     because this method is a little obscure and redundant anyway.
@@ -765,7 +765,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
     /**
      * Sets the font used to display the current value.
      *
-     * @param f  the new font (<code>null</code> not permitted).
+     * @param f  the new font ({@code null} not permitted).
      *
      * @see #getValueFont()
      */
@@ -792,7 +792,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      * Sets the paint used to display the current value and sends a
      * {@link PlotChangeEvent} to all registered listeners.
      *
-     * @param paint  the new paint (<code>null</code> not permitted).
+     * @param paint  the new paint ({@code null} not permitted).
      *
      * @see #getValuePaint()
      */
@@ -810,7 +810,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      * Sets the formatter for the value label and sends a
      * {@link PlotChangeEvent} to all registered listeners.
      *
-     * @param formatter  the new formatter (<code>null</code> not permitted).
+     * @param formatter  the new formatter ({@code null} not permitted).
      */
     public void setValueFormat(NumberFormat formatter) {
         ParamChecks.nullNotPermitted(formatter, "formatter");
@@ -821,7 +821,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
     /**
      * Returns the default mercury paint.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @see #setMercuryPaint(Paint)
      */
@@ -833,7 +833,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      * Sets the default mercury paint and sends a {@link PlotChangeEvent} to
      * all registered listeners.
      *
-     * @param paint  the new paint (<code>null</code> not permitted).
+     * @param paint  the new paint ({@code null} not permitted).
      *
      * @see #getMercuryPaint()
      */
@@ -967,7 +967,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      * {@link PlotChangeEvent} to all registered listeners.
      *
      * @param range  the range (0, 1 or 2).
-     * @param paint  the paint to be applied (<code>null</code> not permitted).
+     * @param paint  the paint to be applied ({@code null} not permitted).
      *
      * @see #getSubrangePaint(int)
      */
@@ -1138,7 +1138,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      *
      * @param g2  the graphics device.
      * @param area  the area within which the plot should be drawn.
-     * @param anchor  the anchor point (<code>null</code> permitted).
+     * @param anchor  the anchor point ({@code null} permitted).
      * @param parentState  the state from the parent plot, if there is one.
      * @param info  collects info about the drawing.
      */
@@ -1448,7 +1448,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
     /**
      * Returns the legend items for the plot.
      *
-     * @return <code>null</code>.
+     * @return {@code null}.
      */
     @Override
     public LegendItemCollection getLegendItems() {
@@ -1495,7 +1495,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      * Called from the {@link #draw(Graphics2D, Rectangle2D, Point2D,
      * PlotState, PlotRenderingInfo)} method.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      */
     private Paint getCurrentPaint() {
         Paint result = this.mercuryPaint;
@@ -1518,7 +1518,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      * Tests this plot for equality with another object.  The plot's dataset
      * is not considered in the test.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return <code>true</code> or <code>false</code>.
      */
@@ -1611,8 +1611,8 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
     /**
      * Tests two double[][] arrays for equality.
      *
-     * @param array1  the first array (<code>null</code> permitted).
-     * @param array2  the second arrray (<code>null</code> permitted).
+     * @param array1  the first array ({@code null} permitted).
+     * @param array2  the second arrray ({@code null} permitted).
      *
      * @return A boolean.
      */

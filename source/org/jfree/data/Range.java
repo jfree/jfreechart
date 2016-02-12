@@ -166,7 +166,7 @@ public strictfp class Range implements Serializable {
      * Returns <code>true</code> if the range intersects with the specified
      * range, and <code>false</code> otherwise.
      *
-     * @param range  another range (<code>null</code> not permitted).
+     * @param range  another range ({@code null} not permitted).
      *
      * @return A boolean.
      *
@@ -202,16 +202,16 @@ public strictfp class Range implements Serializable {
      * <P>
      * Note that:
      * <ul>
-     *   <li>either range can be <code>null</code>, in which case the other
+     *   <li>either range can be {@code null}, in which case the other
      *       range is returned;</li>
-     *   <li>if both ranges are <code>null</code> the return value is
-     *       <code>null</code>.</li>
+     *   <li>if both ranges are {@code null} the return value is
+     *       {@code null}.</li>
      * </ul>
      *
-     * @param range1  the first range (<code>null</code> permitted).
-     * @param range2  the second range (<code>null</code> permitted).
+     * @param range1  the first range ({@code null} permitted).
+     * @param range2  the second range ({@code null} permitted).
      *
-     * @return A new range (possibly <code>null</code>).
+     * @return A new range (possibly {@code null}).
      */
     public static Range combine(Range range1, Range range2) {
         if (range1 == null) {
@@ -230,10 +230,10 @@ public strictfp class Range implements Serializable {
      * <code>range2</code>.  This method has a special handling to ignore
      * Double.NaN values.
      *
-     * @param range1  the first range (<code>null</code> permitted).
-     * @param range2  the second range (<code>null</code> permitted).
+     * @param range1  the first range ({@code null} permitted).
+     * @param range2  the second range ({@code null} permitted).
      *
-     * @return A new range (possibly <code>null</code>).
+     * @return A new range (possibly {@code null}).
      *
      * @since 1.0.15
      */
@@ -291,7 +291,7 @@ public strictfp class Range implements Serializable {
      * Returns a range that includes all the values in the specified
      * <code>range</code> AND the specified <code>value</code>.
      *
-     * @param range  the range (<code>null</code> permitted).
+     * @param range  the range ({@code null} permitted).
      * @param value  the value that must be included.
      *
      * @return A range.
@@ -316,7 +316,7 @@ public strictfp class Range implements Serializable {
     /**
      * Creates a new range by adding margins to an existing range.
      *
-     * @param range  the range (<code>null</code> not permitted).
+     * @param range  the range ({@code null} not permitted).
      * @param lowerMargin  the lower margin (expressed as a percentage of the
      *                     range length).
      * @param upperMargin  the upper margin (expressed as a percentage of the
@@ -340,7 +340,7 @@ public strictfp class Range implements Serializable {
     /**
      * Shifts the range by the specified amount.
      *
-     * @param base  the base range (<code>null</code> not permitted).
+     * @param base  the base range ({@code null} not permitted).
      * @param delta  the shift amount.
      *
      * @return A new range.
@@ -352,7 +352,7 @@ public strictfp class Range implements Serializable {
     /**
      * Shifts the range by the specified amount.
      *
-     * @param base  the base range (<code>null</code> not permitted).
+     * @param base  the base range ({@code null} not permitted).
      * @param delta  the shift amount.
      * @param allowZeroCrossing  a flag that determines whether or not the
      *                           bounds of the range are allowed to cross
@@ -398,7 +398,7 @@ public strictfp class Range implements Serializable {
     /**
      * Scales the range by the specified factor.
      *
-     * @param base the base range (<code>null</code> not permitted).
+     * @param base the base range ({@code null} not permitted).
      * @param factor the scaling factor (must be non-negative).
      *
      * @return A new range.
@@ -417,7 +417,7 @@ public strictfp class Range implements Serializable {
     /**
      * Tests this object for equality with an arbitrary object.
      *
-     * @param obj  the object to test against (<code>null</code> permitted).
+     * @param obj  the object to test against ({@code null} permitted).
      *
      * @return A boolean.
      */

@@ -65,7 +65,7 @@ public class KeyedObject implements Cloneable, PublicCloneable, Serializable {
      * Creates a new (key, object) pair.
      *
      * @param key  the key.
-     * @param object  the object (<code>null</code> permitted).
+     * @param object  the object ({@code null} permitted).
      */
     public KeyedObject(Comparable key, Object object) {
         this.key = key;
@@ -84,7 +84,7 @@ public class KeyedObject implements Cloneable, PublicCloneable, Serializable {
     /**
      * Returns the object.
      *
-     * @return The object (possibly <code>null</code>).
+     * @return The object (possibly {@code null}).
      */
     public Object getObject() {
         return this.object;
@@ -93,7 +93,7 @@ public class KeyedObject implements Cloneable, PublicCloneable, Serializable {
     /**
      * Sets the object.
      *
-     * @param object  the object (<code>null</code> permitted).
+     * @param object  the object ({@code null} permitted).
      */
     public void setObject(Object object) {
         this.object = object;

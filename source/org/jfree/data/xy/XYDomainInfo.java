@@ -58,7 +58,7 @@ public interface XYDomainInfo {
      * @param includeInterval  a flag that determines whether or not the
      *                         y-interval is taken into account.
      *
-     * @return The range (or <code>null</code> if the dataset contains no
+     * @return The range (or {@code null} if the dataset contains no
      *     values).
      */
     public Range getDomainBounds(List visibleSeriesKeys,

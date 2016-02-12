@@ -149,7 +149,7 @@ public class XYPointerAnnotation extends XYTextAnnotation
     /**
      * Creates a new label and arrow annotation.
      *
-     * @param label  the label (<code>null</code> permitted).
+     * @param label  the label ({@code null} permitted).
      * @param x  the x-coordinate (measured against the chart's domain axis).
      * @param y  the y-coordinate (measured against the chart's range axis).
      * @param angle  the angle of the arrow's line (in radians).
@@ -316,7 +316,7 @@ public class XYPointerAnnotation extends XYTextAnnotation
     /**
      * Returns the stroke used to draw the arrow line.
      *
-     * @return The arrow stroke (never <code>null</code>).
+     * @return The arrow stroke (never {@code null}).
      *
      * @see #setArrowStroke(Stroke)
      */
@@ -328,7 +328,7 @@ public class XYPointerAnnotation extends XYTextAnnotation
      * Sets the stroke used to draw the arrow line and sends an
      * {@link AnnotationChangeEvent} to all registered listeners.
      *
-     * @param stroke  the stroke (<code>null</code> not permitted).
+     * @param stroke  the stroke ({@code null} not permitted).
      *
      * @see #getArrowStroke()
      */
@@ -341,7 +341,7 @@ public class XYPointerAnnotation extends XYTextAnnotation
     /**
      * Returns the paint used for the arrow.
      *
-     * @return The arrow paint (never <code>null</code>).
+     * @return The arrow paint (never {@code null}).
      *
      * @see #setArrowPaint(Paint)
      */
@@ -353,7 +353,7 @@ public class XYPointerAnnotation extends XYTextAnnotation
      * Sets the paint used for the arrow and sends an
      * {@link AnnotationChangeEvent} to all registered listeners.
      *
-     * @param paint  the arrow paint (<code>null</code> not permitted).
+     * @param paint  the arrow paint ({@code null} not permitted).
      *
      * @see #getArrowPaint()
      */
@@ -456,7 +456,7 @@ public class XYPointerAnnotation extends XYTextAnnotation
     /**
      * Tests this annotation for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return <code>true</code> or <code>false</code>.
      */

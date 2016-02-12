@@ -152,7 +152,7 @@ public interface BoxAndWhiskerXYDataset extends XYDataset {
      * @param item  the item (zero-based index).
      *
      * @return The list of outliers for the specified series and item
-     *         (possibly <code>null</code>).
+     *         (possibly {@code null}).
      */
     public List getOutliers(int series, int item);
 

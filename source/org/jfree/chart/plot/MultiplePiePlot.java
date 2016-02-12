@@ -155,7 +155,7 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
     /**
      * Creates a new plot.
      *
-     * @param dataset  the dataset (<code>null</code> permitted).
+     * @param dataset  the dataset ({@code null} permitted).
      */
     public MultiplePiePlot(CategoryDataset dataset) {
         super();
@@ -179,7 +179,7 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
     /**
      * Returns the dataset used by the plot.
      *
-     * @return The dataset (possibly <code>null</code>).
+     * @return The dataset (possibly {@code null}).
      */
     public CategoryDataset getDataset() {
         return this.dataset;
@@ -189,7 +189,7 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
      * Sets the dataset used by the plot and sends a {@link PlotChangeEvent}
      * to all registered listeners.
      *
-     * @param dataset  the dataset (<code>null</code> permitted).
+     * @param dataset  the dataset ({@code null} permitted).
      */
     public void setDataset(CategoryDataset dataset) {
         // if there is an existing dataset, remove the plot from the list of
@@ -214,7 +214,7 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
      * Note that there are some attributes on this chart instance that will
      * be ignored at rendering time (for example, legend item settings).
      *
-     * @return The pie chart (never <code>null</code>).
+     * @return The pie chart (never {@code null}).
      *
      * @see #setPieChart(JFreeChart)
      */
@@ -226,7 +226,7 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
      * Sets the chart that is used to draw the individual pie plots.  The
      * chart's plot must be an instance of {@link PiePlot}.
      *
-     * @param pieChart  the pie chart (<code>null</code> not permitted).
+     * @param pieChart  the pie chart ({@code null} not permitted).
      *
      * @see #getPieChart()
      */
@@ -243,7 +243,7 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
     /**
      * Returns the data extract order (by row or by column).
      *
-     * @return The data extract order (never <code>null</code>).
+     * @return The data extract order (never {@code null}).
      */
     public TableOrder getDataExtractOrder() {
         return this.dataExtractOrder;
@@ -253,7 +253,7 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
      * Sets the data extract order (by row or by column) and sends a
      * {@link PlotChangeEvent} to all registered listeners.
      *
-     * @param order  the order (<code>null</code> not permitted).
+     * @param order  the order ({@code null} not permitted).
      */
     public void setDataExtractOrder(TableOrder order) {
         ParamChecks.nullNotPermitted(order, "order");
@@ -298,7 +298,7 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
      * Sets the key for aggregated items in the pie plots.  You must ensure
      * that this doesn't clash with any keys in the dataset.
      *
-     * @param key  the key (<code>null</code> not permitted).
+     * @param key  the key ({@code null} not permitted).
      *
      * @since 1.0.2
      */
@@ -324,7 +324,7 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
      * Sets the paint used to draw the pie section representing the aggregated
      * items and sends a {@link PlotChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @since 1.0.2
      */
@@ -348,7 +348,7 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
     /**
      * Returns the shape used for legend items.
      *
-     * @return The shape (never <code>null</code>).
+     * @return The shape (never {@code null}).
      *
      * @see #setLegendItemShape(Shape)
      *
@@ -362,7 +362,7 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
      * Sets the shape used for legend items and sends a {@link PlotChangeEvent}
      * to all registered listeners.
      *
-     * @param shape  the shape (<code>null</code> not permitted).
+     * @param shape  the shape ({@code null} not permitted).
      *
      * @see #getLegendItemShape()
      *
@@ -380,7 +380,7 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
      *
      * @param g2  the graphics device.
      * @param area  the area within which the plot should be drawn.
-     * @param anchor  the anchor point (<code>null</code> permitted).
+     * @param anchor  the anchor point ({@code null} permitted).
      * @param parentState  the state from the parent plot, if there is one.
      * @param info  collects info about the drawing.
      */
@@ -596,7 +596,7 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
      * Tests this plot for equality with an arbitrary object.  Note that the
      * plot's dataset is not considered in the equality test.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return <code>true</code> if this plot is equal to <code>obj</code>, and
      *     <code>false</code> otherwise.

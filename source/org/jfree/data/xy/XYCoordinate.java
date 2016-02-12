@@ -95,7 +95,7 @@ public class XYCoordinate implements Comparable, Serializable {
     /**
      * Tests this coordinate for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */
@@ -146,7 +146,7 @@ public class XYCoordinate implements Comparable, Serializable {
     /**
      * Compares this instance against an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> not permitted).
+     * @param obj  the object ({@code null} not permitted).
      *
      * @return An integer indicating the relative order of the items.
      */

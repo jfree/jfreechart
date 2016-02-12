@@ -89,7 +89,7 @@ public abstract class AbstractSeriesDataset extends AbstractDataset
     /**
      * Returns the index of the named series, or -1.
      *
-     * @param seriesKey  the series key (<code>null</code> permitted).
+     * @param seriesKey  the series key ({@code null} permitted).
      *
      * @return The index.
      */

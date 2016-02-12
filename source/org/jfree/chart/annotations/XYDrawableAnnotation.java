@@ -94,7 +94,7 @@ public class XYDrawableAnnotation extends AbstractXYAnnotation
      * @param y  the y-coordinate for the area.
      * @param width  the width of the area.
      * @param height  the height of the area.
-     * @param drawable  the drawable object (<code>null</code> not permitted).
+     * @param drawable  the drawable object ({@code null} not permitted).
      */
     public XYDrawableAnnotation(double x, double y, double width, double height,
                                 Drawable drawable) {
@@ -112,7 +112,7 @@ public class XYDrawableAnnotation extends AbstractXYAnnotation
      * @param displayWidth  the width of the area.
      * @param displayHeight  the height of the area.
      * @param drawScaleFactor  the scaling factor for drawing.
-     * @param drawable  the drawable object (<code>null</code> not permitted).
+     * @param drawable  the drawable object ({@code null} not permitted).
      *
      * @since 1.0.11
      */

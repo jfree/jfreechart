@@ -117,7 +117,7 @@ public class LookupPaintScale
         /**
          * Tests this item for equality with an arbitrary object.
          *
-         * @param obj  the object (<code>null</code> permitted).
+         * @param obj  the object ({@code null} permitted).
          *
          * @return A boolean.
          */
@@ -194,7 +194,7 @@ public class LookupPaintScale
      *
      * @param lowerBound  the lower bound.
      * @param upperBound  the upper bound.
-     * @param defaultPaint  the default paint (<code>null</code> not
+     * @param defaultPaint  the default paint ({@code null} not
      *     permitted).
      */
     public LookupPaintScale(double lowerBound, double upperBound,
@@ -211,7 +211,7 @@ public class LookupPaintScale
     }
 
     /**
-     * Returns the default paint (never <code>null</code>).
+     * Returns the default paint (never {@code null}).
      *
      * @return The default paint.
      */
@@ -248,7 +248,7 @@ public class LookupPaintScale
      * to but not including the next value in the table take on the specified
      * <code>paint</code>.
      *
-     * @param value  the data value (<code>null</code> not permitted).
+     * @param value  the data value ({@code null} not permitted).
      * @param paint  the paint.
      *
      * @deprecated Use {@link #add(double, Paint)}.
@@ -335,7 +335,7 @@ public class LookupPaintScale
     /**
      * Tests this instance for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

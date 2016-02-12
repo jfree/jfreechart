@@ -166,9 +166,9 @@ public class StackedAreaRenderer extends AreaRenderer
      * Returns the range of values the renderer requires to display all the
      * items from the specified dataset.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
      *
-     * @return The range (or <code>null</code> if the dataset is empty).
+     * @return The range (or {@code null} if the dataset is empty).
      */
     @Override
     public Range findRangeBounds(CategoryDataset dataset) {
@@ -403,7 +403,7 @@ public class StackedAreaRenderer extends AreaRenderer
      * series up to, but not including, <code>series</code> for the specified
      * item. It returns [0.0, 0.0] if <code>series</code> is the first series.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
      * @param series  the series index.
      * @param index  the item index.
      * @param validRows  the valid rows.
@@ -489,7 +489,7 @@ public class StackedAreaRenderer extends AreaRenderer
     /**
      * Checks this instance for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> not permitted).
+     * @param obj  the object ({@code null} not permitted).
      *
      * @return A boolean.
      */
@@ -513,7 +513,7 @@ public class StackedAreaRenderer extends AreaRenderer
      * <code>series</code> for the specified category, <code>category</code>.
      * It returns 0.0 if <code>series</code> is the first series, i.e. 0.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
      * @param series  the series.
      * @param category  the category.
      *

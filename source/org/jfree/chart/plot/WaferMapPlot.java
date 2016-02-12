@@ -130,7 +130,7 @@ public class WaferMapPlot extends Plot implements RendererChangeListener,
     /**
      * Creates a new plot.
      *
-     * @param dataset  the dataset (<code>null</code> permitted).
+     * @param dataset  the dataset ({@code null} permitted).
      */
     public WaferMapPlot(WaferMapDataset dataset) {
         this(dataset, null);
@@ -139,8 +139,8 @@ public class WaferMapPlot extends Plot implements RendererChangeListener,
     /**
      * Creates a new plot.
      *
-     * @param dataset  the dataset (<code>null</code> permitted).
-     * @param renderer  the renderer (<code>null</code> permitted).
+     * @param dataset  the dataset ({@code null} permitted).
+     * @param renderer  the renderer ({@code null} permitted).
      */
     public WaferMapPlot(WaferMapDataset dataset, WaferMapRenderer renderer) {
 
@@ -174,7 +174,7 @@ public class WaferMapPlot extends Plot implements RendererChangeListener,
     /**
      * Returns the dataset
      *
-     * @return The dataset (possibly <code>null</code>).
+     * @return The dataset (possibly {@code null}).
      */
     public WaferMapDataset getDataset() {
         return this.dataset;
@@ -184,7 +184,7 @@ public class WaferMapPlot extends Plot implements RendererChangeListener,
      * Sets the dataset used by the plot and sends a {@link PlotChangeEvent}
      * to all registered listeners.
      *
-     * @param dataset  the dataset (<code>null</code> permitted).
+     * @param dataset  the dataset ({@code null} permitted).
      */
     public void setDataset(WaferMapDataset dataset) {
         // if there is an existing dataset, remove the plot from the list of
@@ -206,10 +206,10 @@ public class WaferMapPlot extends Plot implements RendererChangeListener,
 
     /**
      * Sets the item renderer, and notifies all listeners of a change to the
-     * plot.  If the renderer is set to <code>null</code>, no chart will be
+     * plot.  If the renderer is set to {@code null}, no chart will be
      * drawn.
      *
-     * @param renderer  the new renderer (<code>null</code> permitted).
+     * @param renderer  the new renderer ({@code null} permitted).
      */
     public void setRenderer(WaferMapRenderer renderer) {
         if (this.renderer != null) {
@@ -227,7 +227,7 @@ public class WaferMapPlot extends Plot implements RendererChangeListener,
      *
      * @param g2  the graphics device.
      * @param area  the plot area.
-     * @param anchor  the anchor point (<code>null</code> permitted).
+     * @param anchor  the anchor point ({@code null} permitted).
      * @param state  the plot state.
      * @param info  the plot rendering info.
      */

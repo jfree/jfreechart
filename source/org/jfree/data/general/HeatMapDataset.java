@@ -43,7 +43,7 @@ package org.jfree.data.general;
 /**
  * A dataset that represents a rectangular grid of (x, y, z) values.  The x
  * and y values appear at regular intervals in the dataset, while the z-values
- * can take any value (including <code>null</code> for unknown values).
+ * can take any value (including {@code null} for unknown values).
  *
  * @since 1.0.13
  */
@@ -134,7 +134,7 @@ public interface HeatMapDataset {
 
     /**
      * Returns the z-value at the specified sample position in the dataset.
-     * This method can return <code>null</code> to indicate a missing/unknown
+     * This method can return {@code null} to indicate a missing/unknown
      * value.
      * <br><br>
      * Bear in mind that the class implementing this interface may
@@ -147,7 +147,7 @@ public interface HeatMapDataset {
      * @param xIndex  the position of the x sample in the dataset.
      * @param yIndex  the position of the y sample in the dataset.
      *
-     * @return The z-value (possibly <code>null</code>).
+     * @return The z-value (possibly {@code null}).
      */
     public Number getZ(int xIndex, int yIndex);
 

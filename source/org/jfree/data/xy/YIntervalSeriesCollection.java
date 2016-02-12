@@ -78,7 +78,7 @@ public class YIntervalSeriesCollection extends AbstractIntervalXYDataset
      * Adds a series to the collection and sends a {@link DatasetChangeEvent}
      * to all registered listeners.
      *
-     * @param series  the series (<code>null</code> not permitted).
+     * @param series  the series ({@code null} not permitted).
      */
     public void addSeries(YIntervalSeries series) {
         ParamChecks.nullNotPermitted(series, "series");
@@ -298,7 +298,7 @@ public class YIntervalSeriesCollection extends AbstractIntervalXYDataset
      * Removes a series from the collection and sends a
      * {@link DatasetChangeEvent} to all registered listeners.
      *
-     * @param series  the series (<code>null</code> not permitted).
+     * @param series  the series ({@code null} not permitted).
      *
      * @since 1.0.10
      */
@@ -331,7 +331,7 @@ public class YIntervalSeriesCollection extends AbstractIntervalXYDataset
     /**
      * Tests this instance for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

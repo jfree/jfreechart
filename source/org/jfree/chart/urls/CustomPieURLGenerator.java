@@ -149,7 +149,7 @@ public class CustomPieURLGenerator implements PieURLGenerator,
      * The map is appended to an internal list...you can add multiple maps
      * if you are working with, say, a {@link MultiplePiePlot}.
      *
-     * @param urlMap  the URLs (<code>null</code> permitted).
+     * @param urlMap  the URLs ({@code null} permitted).
      */
     public void addURLs(Map urlMap) {
         this.urls.add(urlMap);

@@ -78,7 +78,7 @@ public class OHLCDataItem implements Comparable, Serializable {
     /**
      * Creates a new item.
      *
-     * @param date  the date (<code>null</code> not permitted).
+     * @param date  the date ({@code null} not permitted).
      * @param open  the open value.
      * @param high  the high value.
      * @param low  the low value.
@@ -99,7 +99,7 @@ public class OHLCDataItem implements Comparable, Serializable {
     /**
      * Returns the date that the data item relates to.
      *
-     * @return The date (never <code>null</code>).
+     * @return The date (never {@code null}).
      */
     public Date getDate() {
         return this.date;
@@ -108,7 +108,7 @@ public class OHLCDataItem implements Comparable, Serializable {
     /**
      * Returns the open value.
      *
-     * @return The open value (never <code>null</code>).
+     * @return The open value (never {@code null}).
      */
     public Number getOpen() {
         return this.open;
@@ -117,7 +117,7 @@ public class OHLCDataItem implements Comparable, Serializable {
     /**
      * Returns the high value.
      *
-     * @return The high value (never <code>null</code>).
+     * @return The high value (never {@code null}).
      */
     public Number getHigh() {
         return this.high;
@@ -126,7 +126,7 @@ public class OHLCDataItem implements Comparable, Serializable {
     /**
      * Returns the low value.
      *
-     * @return The low value (never <code>null</code>).
+     * @return The low value (never {@code null}).
      */
     public Number getLow() {
         return this.low;
@@ -135,7 +135,7 @@ public class OHLCDataItem implements Comparable, Serializable {
     /**
      * Returns the close value.
      *
-     * @return The close value (never <code>null</code>).
+     * @return The close value (never {@code null}).
      */
     public Number getClose() {
         return this.close;
@@ -144,7 +144,7 @@ public class OHLCDataItem implements Comparable, Serializable {
     /**
      * Returns the volume.
      *
-     * @return The volume (never <code>null</code>).
+     * @return The volume (never {@code null}).
      */
     public Number getVolume() {
         return this.volume;
@@ -153,7 +153,7 @@ public class OHLCDataItem implements Comparable, Serializable {
     /**
      * Checks this instance for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

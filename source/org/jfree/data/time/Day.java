@@ -135,7 +135,7 @@ public class Day extends RegularTimePeriod implements Serializable {
     /**
      * Constructs a new one day time period.
      *
-     * @param serialDate  the day (<code>null</code> not permitted).
+     * @param serialDate  the day ({@code null} not permitted).
      */
     public Day(SerialDate serialDate) {
         ParamChecks.nullNotPermitted(serialDate, "serialDate");
@@ -147,7 +147,7 @@ public class Day extends RegularTimePeriod implements Serializable {
      * Constructs a new instance, based on a particular date/time and the
      * default time zone.
      *
-     * @param time  the time (<code>null</code> not permitted).
+     * @param time  the time ({@code null} not permitted).
      *
      * @see #Day(Date, TimeZone)
      */
@@ -172,9 +172,9 @@ public class Day extends RegularTimePeriod implements Serializable {
     /**
      * Constructs a new instance, based on a particular date/time and time zone.
      *
-     * @param time  the date/time (<code>null</code> not permitted).
-     * @param zone  the time zone (<code>null</code> not permitted).
-     * @param locale  the locale (<code>null</code> not permitted).
+     * @param time  the date/time ({@code null} not permitted).
+     * @param zone  the time zone ({@code null} not permitted).
+     * @param locale  the locale ({@code null} not permitted).
      */
     public Day(Date time, TimeZone zone, Locale locale) {
         ParamChecks.nullNotPermitted(time, "time");
@@ -263,7 +263,7 @@ public class Day extends RegularTimePeriod implements Serializable {
      * Recalculates the start date/time and end date/time for this time period
      * relative to the supplied calendar (which incorporates a time zone).
      *
-     * @param calendar  the calendar (<code>null</code> not permitted).
+     * @param calendar  the calendar ({@code null} not permitted).
      *
      * @since 1.0.3
      */
@@ -293,10 +293,10 @@ public class Day extends RegularTimePeriod implements Serializable {
     }
 
     /**
-     * Returns the day following this one, or <code>null</code> if some limit
+     * Returns the day following this one, or {@code null} if some limit
      * has been reached.
      *
-     * @return The day following this one, or <code>null</code> if some limit
+     * @return The day following this one, or {@code null} if some limit
      *         has been reached.
      */
     @Override
@@ -327,12 +327,12 @@ public class Day extends RegularTimePeriod implements Serializable {
      * Returns the first millisecond of the day, evaluated using the supplied
      * calendar (which determines the time zone).
      *
-     * @param calendar  calendar to use (<code>null</code> not permitted).
+     * @param calendar  calendar to use ({@code null} not permitted).
      *
      * @return The start of the day as milliseconds since 01-01-1970.
      *
      * @throws NullPointerException if <code>calendar</code> is
-     *     <code>null</code>.
+     *     {@code null}.
      */
     @Override
     public long getFirstMillisecond(Calendar calendar) {
@@ -349,12 +349,12 @@ public class Day extends RegularTimePeriod implements Serializable {
      * Returns the last millisecond of the day, evaluated using the supplied
      * calendar (which determines the time zone).
      *
-     * @param calendar  calendar to use (<code>null</code> not permitted).
+     * @param calendar  calendar to use ({@code null} not permitted).
      *
      * @return The end of the day as milliseconds since 01-01-1970.
      *
      * @throws NullPointerException if <code>calendar</code> is
-     *     <code>null</code>.
+     *     {@code null}.
      */
     @Override
     public long getLastMillisecond(Calendar calendar) {
@@ -373,7 +373,7 @@ public class Day extends RegularTimePeriod implements Serializable {
      * representing the same day as this object. In all other cases,
      * returns false.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A flag indicating whether or not an object is equal to this day.
      */
@@ -462,7 +462,7 @@ public class Day extends RegularTimePeriod implements Serializable {
      *
      * @param s  the date string to parse.
      *
-     * @return <code>null</code> if the string does not contain any parseable
+     * @return {@code null} if the string does not contain any parseable
      *      string, the day otherwise.
      */
     public static Day parseDay(String s) {

@@ -75,7 +75,7 @@ public class ItemHandler extends DefaultHandler implements DatasetTags {
     }
 
     /**
-     * Returns the key that has been read by the handler, or <code>null</code>.
+     * Returns the key that has been read by the handler, or {@code null}.
      *
      * @return The key.
      */
@@ -93,7 +93,7 @@ public class ItemHandler extends DefaultHandler implements DatasetTags {
     }
 
     /**
-     * Returns the key that has been read by the handler, or <code>null</code>.
+     * Returns the key that has been read by the handler, or {@code null}.
      *
      * @return The value.
      */

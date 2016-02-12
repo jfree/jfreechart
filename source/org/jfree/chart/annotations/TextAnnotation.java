@@ -117,7 +117,7 @@ public class TextAnnotation extends AbstractAnnotation implements Serializable {
     /**
      * Creates a text annotation with default settings.
      *
-     * @param text  the text (<code>null</code> not permitted).
+     * @param text  the text ({@code null} not permitted).
      */
     protected TextAnnotation(String text) {
         super();
@@ -133,7 +133,7 @@ public class TextAnnotation extends AbstractAnnotation implements Serializable {
     /**
      * Returns the text for the annotation.
      *
-     * @return The text (never <code>null</code>).
+     * @return The text (never {@code null}).
      *
      * @see #setText(String)
      */
@@ -145,7 +145,7 @@ public class TextAnnotation extends AbstractAnnotation implements Serializable {
      * Sets the text for the annotation and sends an 
      * {@link AnnotationChangeEvent} to all registered listeners.
      *
-     * @param text  the text (<code>null</code> not permitted).
+     * @param text  the text ({@code null} not permitted).
      *
      * @see #getText()
      */
@@ -158,7 +158,7 @@ public class TextAnnotation extends AbstractAnnotation implements Serializable {
     /**
      * Returns the font for the annotation.
      *
-     * @return The font (never <code>null</code>).
+     * @return The font (never {@code null}).
      *
      * @see #setFont(Font)
      */
@@ -170,7 +170,7 @@ public class TextAnnotation extends AbstractAnnotation implements Serializable {
      * Sets the font for the annotation and sends an
      * {@link AnnotationChangeEvent} to all registered listeners.
      *
-     * @param font  the font (<code>null</code> not permitted).
+     * @param font  the font ({@code null} not permitted).
      *
      * @see #getFont()
      */
@@ -183,7 +183,7 @@ public class TextAnnotation extends AbstractAnnotation implements Serializable {
     /**
      * Returns the paint for the annotation.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @see #setPaint(Paint)
      */
@@ -195,7 +195,7 @@ public class TextAnnotation extends AbstractAnnotation implements Serializable {
      * Sets the paint for the annotation and sends an
      * {@link AnnotationChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getPaint()
      */
@@ -221,7 +221,7 @@ public class TextAnnotation extends AbstractAnnotation implements Serializable {
      * aligned to the (x, y) coordinate of the annotation) and sends an
      * {@link AnnotationChangeEvent} to all registered listeners.
      *
-     * @param anchor  the anchor point (<code>null</code> not permitted).
+     * @param anchor  the anchor point ({@code null} not permitted).
      *
      * @see #getTextAnchor()
      */
@@ -234,7 +234,7 @@ public class TextAnnotation extends AbstractAnnotation implements Serializable {
     /**
      * Returns the rotation anchor.
      *
-     * @return The rotation anchor point (never <code>null</code>).
+     * @return The rotation anchor point (never {@code null}).
      *
      * @see #setRotationAnchor(TextAnchor)
      */
@@ -246,7 +246,7 @@ public class TextAnnotation extends AbstractAnnotation implements Serializable {
      * Sets the rotation anchor point and sends an
      * {@link AnnotationChangeEvent} to all registered listeners.
      *
-     * @param anchor  the anchor (<code>null</code> not permitted).
+     * @param anchor  the anchor ({@code null} not permitted).
      *
      * @see #getRotationAnchor()
      */
@@ -283,7 +283,7 @@ public class TextAnnotation extends AbstractAnnotation implements Serializable {
     /**
      * Tests this object for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return <code>true</code> or <code>false</code>.
      */

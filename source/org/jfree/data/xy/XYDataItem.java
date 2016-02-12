@@ -61,7 +61,7 @@ public class XYDataItem implements Cloneable, Comparable, Serializable {
     /** For serialization. */
     private static final long serialVersionUID = 2751513470325494890L;
 
-    /** The x-value (<code>null</code> not permitted). */
+    /** The x-value ({@code null} not permitted). */
     private Number x;
 
     /** The y-value. */
@@ -70,8 +70,8 @@ public class XYDataItem implements Cloneable, Comparable, Serializable {
     /**
      * Constructs a new data item.
      *
-     * @param x  the x-value (<code>null</code> NOT permitted).
-     * @param y  the y-value (<code>null</code> permitted).
+     * @param x  the x-value ({@code null} NOT permitted).
+     * @param y  the y-value ({@code null} permitted).
      */
     public XYDataItem(Number x, Number y) {
         ParamChecks.nullNotPermitted(x, "x");
@@ -92,7 +92,7 @@ public class XYDataItem implements Cloneable, Comparable, Serializable {
     /**
      * Returns the x-value.
      *
-     * @return The x-value (never <code>null</code>).
+     * @return The x-value (never {@code null}).
      */
     public Number getX() {
         return this.x;
@@ -116,7 +116,7 @@ public class XYDataItem implements Cloneable, Comparable, Serializable {
     /**
      * Returns the y-value.
      *
-     * @return The y-value (possibly <code>null</code>).
+     * @return The y-value (possibly {@code null}).
      */
     public Number getY() {
         return this.y;
@@ -154,7 +154,7 @@ public class XYDataItem implements Cloneable, Comparable, Serializable {
      * Sets the y-value for this data item.  Note that there is no
      * corresponding method to change the x-value.
      *
-     * @param y  the new y-value (<code>null</code> permitted).
+     * @param y  the new y-value ({@code null} permitted).
      */
     public void setY(Number y) {
         this.y = y;
@@ -227,7 +227,7 @@ public class XYDataItem implements Cloneable, Comparable, Serializable {
     /**
      * Tests if this object is equal to another.
      *
-     * @param obj  the object to test against for equality (<code>null</code>
+     * @param obj  the object to test against for equality ({@code null}
      *             permitted).
      *
      * @return A boolean.

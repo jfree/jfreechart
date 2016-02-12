@@ -58,7 +58,7 @@ public interface BlockFrame {
     /**
      * Returns the space reserved for the border.
      *
-     * @return The space (never <code>null</code>).
+     * @return The space (never {@code null}).
      */
     public RectangleInsets getInsets();
 

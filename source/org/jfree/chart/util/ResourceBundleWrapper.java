@@ -71,7 +71,7 @@ public class ResourceBundleWrapper {
 
     /**
      * A special class loader with no code base lookup.  This field may be
-     * <code>null</code> (the field is only initialised if removeCodeBase() is
+     * {@code null} (the field is only initialised if removeCodeBase() is
      * called from an applet).
      */
     private static URLClassLoader noCodeBaseClassLoader;

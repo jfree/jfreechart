@@ -104,12 +104,12 @@ public class CategoryLineAnnotation extends AbstractAnnotation
      * Creates a new annotation that draws a line between (category1, value1)
      * and (category2, value2).
      *
-     * @param category1  the category (<code>null</code> not permitted).
+     * @param category1  the category ({@code null} not permitted).
      * @param value1  the value.
-     * @param category2  the category (<code>null</code> not permitted).
+     * @param category2  the category ({@code null} not permitted).
      * @param value2  the value.
-     * @param paint  the line color (<code>null</code> not permitted).
-     * @param stroke  the line stroke (<code>null</code> not permitted).
+     * @param paint  the line color ({@code null} not permitted).
+     * @param stroke  the line stroke ({@code null} not permitted).
      */
     public CategoryLineAnnotation(Comparable category1, double value1,
                                   Comparable category2, double value2,
@@ -130,7 +130,7 @@ public class CategoryLineAnnotation extends AbstractAnnotation
     /**
      * Returns the category for the start of the line.
      *
-     * @return The category for the start of the line (never <code>null</code>).
+     * @return The category for the start of the line (never {@code null}).
      *
      * @see #setCategory1(Comparable)
      */
@@ -142,7 +142,7 @@ public class CategoryLineAnnotation extends AbstractAnnotation
      * Sets the category for the start of the line and sends an
      * {@link AnnotationChangeEvent} to all registered listeners.
      *
-     * @param category  the category (<code>null</code> not permitted).
+     * @param category  the category ({@code null} not permitted).
      *
      * @see #getCategory1()
      */
@@ -179,7 +179,7 @@ public class CategoryLineAnnotation extends AbstractAnnotation
     /**
      * Returns the category for the end of the line.
      *
-     * @return The category for the end of the line (never <code>null</code>).
+     * @return The category for the end of the line (never {@code null}).
      *
      * @see #setCategory2(Comparable)
      */
@@ -191,7 +191,7 @@ public class CategoryLineAnnotation extends AbstractAnnotation
      * Sets the category for the end of the line and sends an
      * {@link AnnotationChangeEvent} to all registered listeners.
      *
-     * @param category  the category (<code>null</code> not permitted).
+     * @param category  the category ({@code null} not permitted).
      *
      * @see #getCategory2()
      */
@@ -228,7 +228,7 @@ public class CategoryLineAnnotation extends AbstractAnnotation
     /**
      * Returns the paint used to draw the connecting line.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @see #setPaint(Paint)
      */
@@ -240,7 +240,7 @@ public class CategoryLineAnnotation extends AbstractAnnotation
      * Sets the paint used to draw the connecting line and sends an
      * {@link AnnotationChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getPaint()
      */
@@ -253,7 +253,7 @@ public class CategoryLineAnnotation extends AbstractAnnotation
     /**
      * Returns the stroke used to draw the connecting line.
      *
-     * @return The stroke (never <code>null</code>).
+     * @return The stroke (never {@code null}).
      *
      * @see #setStroke(Stroke)
      */
@@ -265,7 +265,7 @@ public class CategoryLineAnnotation extends AbstractAnnotation
      * Sets the stroke used to draw the connecting line and sends an
      * {@link AnnotationChangeEvent} to all registered listeners.
      *
-     * @param stroke  the stroke (<code>null</code> not permitted).
+     * @param stroke  the stroke ({@code null} not permitted).
      *
      * @see #getStroke()
      */
@@ -331,7 +331,7 @@ public class CategoryLineAnnotation extends AbstractAnnotation
     /**
      * Tests this object for equality with another.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return <code>true</code> or <code>false</code>.
      */

@@ -76,7 +76,7 @@ public class DateTick extends ValueTick {
     /**
      * Creates a new date tick.
      *
-     * @param tickType the tick type (<code>null</code> not permitted).
+     * @param tickType the tick type ({@code null} not permitted).
      * @param date  the date.
      * @param label  the label.
      * @param textAnchor  the part of the label that is aligned to the anchor
@@ -107,7 +107,7 @@ public class DateTick extends ValueTick {
     /**
      * Tests this tick for equality with an arbitrary object.
      *
-     * @param obj  the object to test (<code>null</code> permitted).
+     * @param obj  the object to test ({@code null} permitted).
      *
      * @return A boolean.
      */

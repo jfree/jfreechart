@@ -69,7 +69,7 @@ public class Task implements Cloneable, PublicCloneable, Serializable {
     /** The time period for the task (estimated or actual). */
     private TimePeriod duration;
 
-    /** The percent complete (<code>null</code> is permitted). */
+    /** The percent complete ({@code null} is permitted). */
     private Double percentComplete;
 
     /** Storage for the sub-tasks (if any). */
@@ -78,9 +78,9 @@ public class Task implements Cloneable, PublicCloneable, Serializable {
     /**
      * Creates a new task.
      *
-     * @param description  the task description (<code>null</code> not
+     * @param description  the task description ({@code null} not
      *                     permitted).
-     * @param duration  the task duration (<code>null</code> permitted).
+     * @param duration  the task duration ({@code null} permitted).
      */
     public Task(String description, TimePeriod duration) {
         ParamChecks.nullNotPermitted(description, "description");
@@ -93,10 +93,10 @@ public class Task implements Cloneable, PublicCloneable, Serializable {
     /**
      * Creates a new task.
      *
-     * @param description  the task description (<code>null</code> not
+     * @param description  the task description ({@code null} not
      *                     permitted).
-     * @param start  the start date (<code>null</code> not permitted).
-     * @param end  the end date (<code>null</code> not permitted).
+     * @param start  the start date ({@code null} not permitted).
+     * @param end  the end date ({@code null} not permitted).
      */
     public Task(String description, Date start, Date end) {
         this(description, new SimpleTimePeriod(start, end));
@@ -105,7 +105,7 @@ public class Task implements Cloneable, PublicCloneable, Serializable {
     /**
      * Returns the task description.
      *
-     * @return The task description (never <code>null</code>).
+     * @return The task description (never {@code null}).
      */
     public String getDescription() {
         return this.description;
@@ -114,7 +114,7 @@ public class Task implements Cloneable, PublicCloneable, Serializable {
     /**
      * Sets the task description.
      *
-     * @param description  the description (<code>null</code> not permitted).
+     * @param description  the description ({@code null} not permitted).
      */
     public void setDescription(String description) {
         ParamChecks.nullNotPermitted(description, "description");
@@ -124,7 +124,7 @@ public class Task implements Cloneable, PublicCloneable, Serializable {
     /**
      * Returns the duration (actual or estimated) of the task.
      *
-     * @return The task duration (possibly <code>null</code>).
+     * @return The task duration (possibly {@code null}).
      */
     public TimePeriod getDuration() {
         return this.duration;
@@ -133,7 +133,7 @@ public class Task implements Cloneable, PublicCloneable, Serializable {
     /**
      * Sets the task duration (actual or estimated).
      *
-     * @param duration  the duration (<code>null</code> permitted).
+     * @param duration  the duration ({@code null} permitted).
      */
     public void setDuration(TimePeriod duration) {
         this.duration = duration;
@@ -142,7 +142,7 @@ public class Task implements Cloneable, PublicCloneable, Serializable {
     /**
      * Returns the percentage complete for this task.
      *
-     * @return The percentage complete (possibly <code>null</code>).
+     * @return The percentage complete (possibly {@code null}).
      */
     public Double getPercentComplete() {
         return this.percentComplete;
@@ -151,7 +151,7 @@ public class Task implements Cloneable, PublicCloneable, Serializable {
     /**
      * Sets the percentage complete for the task.
      *
-     * @param percent  the percentage (<code>null</code> permitted).
+     * @param percent  the percentage ({@code null} permitted).
      */
     public void setPercentComplete(Double percent) {
         this.percentComplete = percent;
@@ -169,7 +169,7 @@ public class Task implements Cloneable, PublicCloneable, Serializable {
     /**
      * Adds a sub-task to the task.
      *
-     * @param subtask  the subtask (<code>null</code> not permitted).
+     * @param subtask  the subtask ({@code null} not permitted).
      */
     public void addSubtask(Task subtask) {
         ParamChecks.nullNotPermitted(subtask, "subtask");
@@ -208,7 +208,7 @@ public class Task implements Cloneable, PublicCloneable, Serializable {
     /**
      * Tests this object for equality with an arbitrary object.
      *
-     * @param object  the other object (<code>null</code> permitted).
+     * @param object  the other object ({@code null} permitted).
      *
      * @return A boolean.
      */

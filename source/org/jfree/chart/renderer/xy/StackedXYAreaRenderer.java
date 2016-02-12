@@ -287,7 +287,7 @@ public class StackedXYAreaRenderer extends XYAreaRenderer
     }
 
     /**
-     * Returns the stroke used for rendering shapes, or <code>null</code> if
+     * Returns the stroke used for rendering shapes, or {@code null} if
      * using series strokes.
      *
      * @return The stroke (possibly {@code null}).
@@ -638,7 +638,7 @@ public class StackedXYAreaRenderer extends XYAreaRenderer
     /**
      * Tests the renderer for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

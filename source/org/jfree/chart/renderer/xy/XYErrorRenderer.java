@@ -93,13 +93,13 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
     private double capLength;
 
     /**
-     * The paint used to draw the error bars (if <code>null</code> we use the
+     * The paint used to draw the error bars (if {@code null} we use the
      * series paint).
      */
     private transient Paint errorPaint;
 
     /**
-     * The stroke used to draw the error bars (if <code>null</code> we use the
+     * The stroke used to draw the error bars (if {@code null} we use the
      * series outline stroke).
      *
      * @since 1.0.13
@@ -201,9 +201,9 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
 
     /**
      * Returns the paint used to draw the error bars.  If this is
-     * <code>null</code> (the default), the item paint is used instead.
+     * {@code null} (the default), the item paint is used instead.
      *
-     * @return The paint (possibly <code>null</code>).
+     * @return The paint (possibly {@code null}).
      *
      * @see #setErrorPaint(Paint)
      */
@@ -215,7 +215,7 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
      * Sets the paint used to draw the error bars and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> permitted).
+     * @param paint  the paint ({@code null} permitted).
      *
      * @see #getErrorPaint()
      */
@@ -226,10 +226,10 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
 
     /**
      * Returns the stroke used to draw the error bars.  If this is 
-     * <code>null</code> (the default), the item outline stroke is used 
+     * {@code null} (the default), the item outline stroke is used 
      * instead.
      * 
-     * @return The stroke (possibly <code>null</code>).
+     * @return The stroke (possibly {@code null}).
      *
      * @see #setErrorStroke(Stroke)
      * 
@@ -243,7 +243,7 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
      * Sets the stroke used to draw the error bars and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param stroke   the stroke (<code>null</code> permitted).
+     * @param stroke   the stroke ({@code null} permitted).
      *
      * @see #getErrorStroke()
      *
@@ -258,10 +258,10 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
      * Returns the range required by this renderer to display all the domain
      * values in the specified dataset.
      *
-     * @param dataset  the dataset (<code>null</code> permitted).
+     * @param dataset  the dataset ({@code null} permitted).
      *
-     * @return The range, or <code>null</code> if the dataset is
-     *     <code>null</code>.
+     * @return The range, or {@code null} if the dataset is
+     *     {@code null}.
      */
     @Override
     public Range findDomainBounds(XYDataset dataset) {
@@ -273,10 +273,10 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
      * Returns the range required by this renderer to display all the range
      * values in the specified dataset.
      *
-     * @param dataset  the dataset (<code>null</code> permitted).
+     * @param dataset  the dataset ({@code null} permitted).
      *
-     * @return The range, or <code>null</code> if the dataset is
-     *     <code>null</code>.
+     * @return The range, or {@code null} if the dataset is
+     *     {@code null}.
      */
     @Override
     public Range findRangeBounds(XYDataset dataset) {
@@ -398,7 +398,7 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
     /**
      * Tests this instance for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

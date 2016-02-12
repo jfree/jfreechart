@@ -133,18 +133,18 @@ public abstract class RegularTimePeriod implements TimePeriod, Comparable,
     }
 
     /**
-     * Returns the time period preceding this one, or <code>null</code> if some
+     * Returns the time period preceding this one, or {@code null} if some
      * lower limit has been reached.
      *
-     * @return The previous time period (possibly <code>null</code>).
+     * @return The previous time period (possibly {@code null}).
      */
     public abstract RegularTimePeriod previous();
 
     /**
-     * Returns the time period following this one, or <code>null</code> if some
+     * Returns the time period following this one, or {@code null} if some
      * limit has been reached.
      *
-     * @return The next time period (possibly <code>null</code>).
+     * @return The next time period (possibly {@code null}).
      */
     public abstract RegularTimePeriod next();
 
@@ -177,7 +177,7 @@ public abstract class RegularTimePeriod implements TimePeriod, Comparable,
      * Recalculates the start date/time and end date/time for this time period
      * relative to the supplied calendar (which incorporates a time zone).
      *
-     * @param calendar  the calendar (<code>null</code> not permitted).
+     * @param calendar  the calendar ({@code null} not permitted).
      *
      * @since 1.0.3
      */
@@ -225,7 +225,7 @@ public abstract class RegularTimePeriod implements TimePeriod, Comparable,
      * Returns the first millisecond of the time period, evaluated within a
      * specific time zone.
      *
-     * @param zone  the time zone (<code>null</code> not permitted).
+     * @param zone  the time zone ({@code null} not permitted).
      *
      * @return The first millisecond of the time period.
      *
@@ -244,7 +244,7 @@ public abstract class RegularTimePeriod implements TimePeriod, Comparable,
      * Returns the first millisecond of the time period, evaluated using the
      * supplied calendar (which incorporates a timezone).
      *
-     * @param calendar  the calendar (<code>null</code> not permitted).
+     * @param calendar  the calendar ({@code null} not permitted).
      *
      * @return The first millisecond of the time period.
      *
@@ -270,7 +270,7 @@ public abstract class RegularTimePeriod implements TimePeriod, Comparable,
      * Returns the last millisecond of the time period, evaluated within a
      * specific time zone.
      *
-     * @param zone  the time zone (<code>null</code> not permitted).
+     * @param zone  the time zone ({@code null} not permitted).
      *
      * @return The last millisecond of the time period.
      *
@@ -289,7 +289,7 @@ public abstract class RegularTimePeriod implements TimePeriod, Comparable,
      * Returns the last millisecond of the time period, evaluated using the
      * supplied calendar (which incorporates a timezone).
      *
-     * @param calendar  the calendar (<code>null</code> not permitted).
+     * @param calendar  the calendar ({@code null} not permitted).
      *
      * @return The last millisecond of the time period.
      *
@@ -312,7 +312,7 @@ public abstract class RegularTimePeriod implements TimePeriod, Comparable,
      * Returns the millisecond closest to the middle of the time period,
      * evaluated within a specific time zone.
      *
-     * @param zone  the time zone (<code>null</code> not permitted).
+     * @param zone  the time zone ({@code null} not permitted).
      *
      * @return The middle millisecond.
      *
@@ -346,8 +346,8 @@ public abstract class RegularTimePeriod implements TimePeriod, Comparable,
      * specified <code>anchor</code> using the supplied <code>calendar</code> 
      * (which incorporates a time zone).
      * 
-     * @param anchor  the anchor (<code>null</code> not permitted).
-     * @param calendar  the calendar (<code>null</code> not permitted).
+     * @param anchor  the anchor ({@code null} not permitted).
+     * @param calendar  the calendar ({@code null} not permitted).
      * 
      * @return Milliseconds since the epoch.
      * 

@@ -773,7 +773,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     /**
      * Returns the chart contained in the panel.
      *
-     * @return The chart (possibly <code>null</code>).
+     * @return The chart (possibly {@code null}).
      */
     public JFreeChart getChart() {
         return this.chart;
@@ -782,7 +782,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     /**
      * Sets the chart that is displayed in the panel.
      *
-     * @param chart  the chart (<code>null</code> permitted).
+     * @param chart  the chart ({@code null} permitted).
      */
     public void setChart(JFreeChart chart) {
 
@@ -941,7 +941,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     /**
      * Returns the anchor point.
      *
-     * @return The anchor point (possibly <code>null</code>).
+     * @return The anchor point (possibly {@code null}).
      */
     public Point2D getAnchor() {
         return this.anchor;
@@ -951,7 +951,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * Sets the anchor point.  This method is provided for the use of
      * subclasses, not end users.
      *
-     * @param anchor  the anchor point (<code>null</code> permitted).
+     * @param anchor  the anchor point ({@code null} permitted).
      */
     protected void setAnchor(Point2D anchor) {
         this.anchor = anchor;
@@ -969,7 +969,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     /**
      * Sets the popup menu for the panel.
      *
-     * @param popup  the popup menu (<code>null</code> permitted).
+     * @param popup  the popup menu ({@code null} permitted).
      */
     public void setPopupMenu(JPopupMenu popup) {
         this.popup = popup;
@@ -1128,7 +1128,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     /**
      * Returns the horizontal trace line.
      *
-     * @return The horizontal trace line (possibly <code>null</code>).
+     * @return The horizontal trace line (possibly {@code null}).
      */
     protected Line2D getHorizontalTraceLine() {
         return this.horizontalTraceLine;
@@ -1137,7 +1137,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     /**
      * Sets the horizontal trace line.
      *
-     * @param line  the line (<code>null</code> permitted).
+     * @param line  the line ({@code null} permitted).
      */
     protected void setHorizontalTraceLine(Line2D line) {
         this.horizontalTraceLine = line;
@@ -1166,7 +1166,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     /**
      * Returns the vertical trace line.
      *
-     * @return The vertical trace line (possibly <code>null</code>).
+     * @return The vertical trace line (possibly {@code null}).
      */
     protected Line2D getVerticalTraceLine() {
         return this.verticalTraceLine;
@@ -1175,7 +1175,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     /**
      * Sets the vertical trace line.
      *
-     * @param line  the line (<code>null</code> permitted).
+     * @param line  the line ({@code null} permitted).
      */
     protected void setVerticalTraceLine(Line2D line) {
         this.verticalTraceLine = line;
@@ -1184,7 +1184,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     /**
      * Returns the default directory for the "save as" option.
      *
-     * @return The default directory (possibly <code>null</code>).
+     * @return The default directory (possibly {@code null}).
      *
      * @since 1.0.7
      */
@@ -1194,9 +1194,9 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
 
     /**
      * Sets the default directory for the "save as" option.  If you set this
-     * to <code>null</code>, the user's default directory will be used.
+     * to {@code null}, the user's default directory will be used.
      *
-     * @param directory  the directory (<code>null</code> permitted).
+     * @param directory  the directory ({@code null} permitted).
      *
      * @since 1.0.7
      */
@@ -1264,7 +1264,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     /**
      * Returns the zoom rectangle fill paint.
      *
-     * @return The zoom rectangle fill paint (never <code>null</code>).
+     * @return The zoom rectangle fill paint (never {@code null}).
      *
      * @see #setZoomFillPaint(java.awt.Paint)
      * @see #setFillZoomRectangle(boolean)
@@ -1278,7 +1278,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     /**
      * Sets the zoom rectangle fill paint.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getZoomFillPaint()
      * @see #getFillZoomRectangle()
@@ -1293,7 +1293,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     /**
      * Returns the zoom rectangle outline paint.
      *
-     * @return The zoom rectangle outline paint (never <code>null</code>).
+     * @return The zoom rectangle outline paint (never {@code null}).
      *
      * @see #setZoomOutlinePaint(java.awt.Paint)
      * @see #setFillZoomRectangle(boolean)
@@ -1307,7 +1307,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     /**
      * Sets the zoom rectangle outline paint.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getZoomOutlinePaint()
      * @see #getFillZoomRectangle()
@@ -1355,7 +1355,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     /**
      * Add an overlay to the panel.
      *
-     * @param overlay  the overlay (<code>null</code> not permitted).
+     * @param overlay  the overlay ({@code null} not permitted).
      *
      * @since 1.0.13
      */
@@ -1369,7 +1369,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     /**
      * Removes an overlay from the panel.
      *
-     * @param overlay  the overlay to remove (<code>null</code> not permitted).
+     * @param overlay  the overlay to remove ({@code null} not permitted).
      *
      * @since 1.0.13
      */
@@ -1416,7 +1416,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      *
      * @param e  the mouse event.
      *
-     * @return A tool tip or <code>null</code> if no tooltip is available.
+     * @return A tool tip or {@code null} if no tooltip is available.
      */
     @Override
     public String getToolTipText(MouseEvent e) {
@@ -1453,7 +1453,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     /**
      * Translates a panel (component) location to a Java2D point.
      *
-     * @param screenPoint  the screen location (<code>null</code> not
+     * @param screenPoint  the screen location ({@code null} not
      *                     permitted).
      *
      * @return The Java2D coordinates.
@@ -1469,7 +1469,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * Applies any scaling that is in effect for the chart drawing to the
      * given rectangle.
      *
-     * @param rect  the rectangle (<code>null</code> not permitted).
+     * @param rect  the rectangle ({@code null} not permitted).
      *
      * @return A new scaled rectangle.
      */
@@ -1491,7 +1491,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * @param viewX  the x-coordinate.
      * @param viewY  the y-coordinate.
      *
-     * @return The chart entity (possibly <code>null</code>).
+     * @return The chart entity (possibly {@code null}).
      */
     public ChartEntity getEntityForPoint(int viewX, int viewY) {
 
@@ -1876,7 +1876,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      *
      * @param x  the x-coordinate.
      * @param y  the y-coordinate.
-     * @param area  the rectangle (<code>null</code> not permitted).
+     * @param area  the rectangle ({@code null} not permitted).
      *
      * @return A point within the rectangle.
      */
@@ -2794,7 +2794,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * the classpath.
      * 
      * @return A string containing an SVG element for the current chart, or 
-     *     <code>null</code> if there is a problem with the method invocation
+     *     {@code null} if there is a problem with the method invocation
      *     by reflection.
      */
     private String generateSVG(int width, int height) {
@@ -2914,7 +2914,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * Reflection is used to ensure there is no compile-time dependency on
      * OrsonPDF (which is non-free software).
      * 
-     * @param file  the output file (<code>null</code> not permitted).
+     * @param file  the output file ({@code null} not permitted).
      * @param w  the chart width.
      * @param h  the chart height.
      */
@@ -3006,7 +3006,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     /**
      * Adds a listener to the list of objects listening for chart mouse events.
      *
-     * @param listener  the listener (<code>null</code> not permitted).
+     * @param listener  the listener ({@code null} not permitted).
      */
     public void addChartMouseListener(ChartMouseListener listener) {
         ParamChecks.nullNotPermitted(listener, "listener");

@@ -252,9 +252,9 @@ public class StackedBarRenderer3D extends BarRenderer3D
      * Returns the range of values the renderer requires to display all the
      * items from the specified dataset.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
      *
-     * @return The range (or <code>null</code> if the dataset is empty).
+     * @return The range (or {@code null} if the dataset is empty).
      */
     @Override
     public Range findRangeBounds(CategoryDataset dataset) {
@@ -315,8 +315,8 @@ public class StackedBarRenderer3D extends BarRenderer3D
      * Returns a list containing the stacked values for the specified series
      * in the given dataset, plus the supplied base value.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
-     * @param category  the category key (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
+     * @param category  the category key ({@code null} not permitted).
      * @param base  the base value.
      * @param asPercentages  a flag that controls whether the values in the
      *     list are converted to percentages of the total.
@@ -342,8 +342,8 @@ public class StackedBarRenderer3D extends BarRenderer3D
      * Returns a list containing the stacked values for the specified series
      * in the given dataset, plus the supplied base value.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
-     * @param category  the category key (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
+     * @param category  the category key ({@code null} not permitted).
      * @param includedRows  the included rows.
      * @param base  the base value.
      * @param asPercentages  a flag that controls whether the values in the
@@ -844,7 +844,7 @@ public class StackedBarRenderer3D extends BarRenderer3D
     /**
      * Tests this renderer for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

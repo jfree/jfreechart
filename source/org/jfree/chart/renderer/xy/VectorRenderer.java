@@ -96,9 +96,9 @@ public class VectorRenderer extends AbstractXYItemRenderer
      * Returns the lower and upper bounds (range) of the x-values in the
      * specified dataset.
      *
-     * @param dataset  the dataset (<code>null</code> permitted).
+     * @param dataset  the dataset ({@code null} permitted).
      *
-     * @return The range (<code>null</code> if the dataset is <code>null</code>
+     * @return The range ({@code null} if the dataset is {@code null}
      *         or empty).
      */
     @Override
@@ -151,9 +151,9 @@ public class VectorRenderer extends AbstractXYItemRenderer
      * Returns the range of values the renderer requires to display all the
      * items from the specified dataset.
      *
-     * @param dataset  the dataset (<code>null</code> permitted).
+     * @param dataset  the dataset ({@code null} permitted).
      *
-     * @return The range (<code>null</code> if the dataset is <code>null</code>
+     * @return The range ({@code null} if the dataset is {@code null}
      *         or empty).
      */
     @Override
@@ -306,12 +306,12 @@ public class VectorRenderer extends AbstractXYItemRenderer
      * object.  This method returns <code>true</code> if and only if:
      * <ul>
      * <li><code>obj</code> is an instance of <code>VectorRenderer</code> (not
-     *     <code>null</code>);</li>
+     *     {@code null});</li>
      * <li><code>obj</code> has the same field values as this
      *     <code>VectorRenderer</code>;</li>
      * </ul>
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

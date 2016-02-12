@@ -91,7 +91,7 @@ public class DefaultPieDataset extends AbstractDataset
      * Creates a new dataset by copying data from a {@link KeyedValues}
      * instance.
      *
-     * @param data  the data (<code>null</code> not permitted).
+     * @param data  the data ({@code null} not permitted).
      */
     public DefaultPieDataset(KeyedValues data) {
         ParamChecks.nullNotPermitted(data, "data");
@@ -123,12 +123,12 @@ public class DefaultPieDataset extends AbstractDataset
     }
 
     /**
-     * Returns the key for the specified item, or <code>null</code>.
+     * Returns the key for the specified item, or {@code null}.
      *
      * @param item  the item index (in the range <code>0</code> to
      *     <code>getItemCount() - 1</code>).
      *
-     * @return The key, or <code>null</code>.
+     * @return The key, or {@code null}.
      *
      * @throws IndexOutOfBoundsException if <code>item</code> is not in the
      *     specified range.
@@ -141,12 +141,12 @@ public class DefaultPieDataset extends AbstractDataset
     /**
      * Returns the index for a key, or -1 if the key is not recognised.
      *
-     * @param key  the key (<code>null</code> not permitted).
+     * @param key  the key ({@code null} not permitted).
      *
      * @return The index, or <code>-1</code> if the key is unrecognised.
      *
      * @throws IllegalArgumentException if <code>key</code> is
-     *     <code>null</code>.
+     *     {@code null}.
      */
     @Override
     public int getIndex(Comparable key) {
@@ -158,7 +158,7 @@ public class DefaultPieDataset extends AbstractDataset
      *
      * @param item  the value index.
      *
-     * @return The value (possibly <code>null</code>).
+     * @return The value (possibly {@code null}).
      */
     @Override
     public Number getValue(int item) {
@@ -172,9 +172,9 @@ public class DefaultPieDataset extends AbstractDataset
     /**
      * Returns the data value associated with a key.
      *
-     * @param key  the key (<code>null</code> not permitted).
+     * @param key  the key ({@code null} not permitted).
      *
-     * @return The value (possibly <code>null</code>).
+     * @return The value (possibly {@code null}).
      *
      * @throws UnknownKeyException if the key is not recognised.
      */
@@ -188,11 +188,11 @@ public class DefaultPieDataset extends AbstractDataset
      * Sets the data value for a key and sends a {@link DatasetChangeEvent} to
      * all registered listeners.
      *
-     * @param key  the key (<code>null</code> not permitted).
+     * @param key  the key ({@code null} not permitted).
      * @param value  the value.
      *
      * @throws IllegalArgumentException if <code>key</code> is
-     *     <code>null</code>.
+     *     {@code null}.
      */
     public void setValue(Comparable key, Number value) {
         this.data.setValue(key, value);
@@ -203,11 +203,11 @@ public class DefaultPieDataset extends AbstractDataset
      * Sets the data value for a key and sends a {@link DatasetChangeEvent} to
      * all registered listeners.
      *
-     * @param key  the key (<code>null</code> not permitted).
+     * @param key  the key ({@code null} not permitted).
      * @param value  the value.
      *
      * @throws IllegalArgumentException if <code>key</code> is
-     *     <code>null</code>.
+     *     {@code null}.
      */
     public void setValue(Comparable key, double value) {
         setValue(key, new Double(value));
@@ -221,8 +221,8 @@ public class DefaultPieDataset extends AbstractDataset
      * registered listeners.
      *
      * @param position  the position (in the range 0 to getItemCount()).
-     * @param key  the key (<code>null</code> not permitted).
-     * @param value  the value (<code>null</code> permitted).
+     * @param key  the key ({@code null} not permitted).
+     * @param value  the value ({@code null} permitted).
      *
      * @since 1.0.6
      */
@@ -238,8 +238,8 @@ public class DefaultPieDataset extends AbstractDataset
      * registered listeners.
      *
      * @param position  the position (in the range 0 to getItemCount()).
-     * @param key  the key (<code>null</code> not permitted).
-     * @param value  the value (<code>null</code> permitted).
+     * @param key  the key ({@code null} not permitted).
+     * @param value  the value ({@code null} permitted).
      *
      * @since 1.0.6
      */
@@ -252,10 +252,10 @@ public class DefaultPieDataset extends AbstractDataset
      * Removes an item from the dataset and sends a {@link DatasetChangeEvent}
      * to all registered listeners.
      *
-     * @param key  the key (<code>null</code> not permitted).
+     * @param key  the key ({@code null} not permitted).
      *
      * @throws IllegalArgumentException if <code>key</code> is
-     *     <code>null</code>.
+     *     {@code null}.
      */
     public void remove(Comparable key) {
         this.data.removeValue(key);
@@ -279,7 +279,7 @@ public class DefaultPieDataset extends AbstractDataset
      * Sorts the dataset's items by key and sends a {@link DatasetChangeEvent}
      * to all registered listeners.
      *
-     * @param order  the sort order (<code>null</code> not permitted).
+     * @param order  the sort order ({@code null} not permitted).
      *
      * @since 1.0.3
      */
@@ -292,7 +292,7 @@ public class DefaultPieDataset extends AbstractDataset
      * Sorts the dataset's items by value and sends a {@link DatasetChangeEvent}
      * to all registered listeners.
      *
-     * @param order  the sort order (<code>null</code> not permitted).
+     * @param order  the sort order ({@code null} not permitted).
      *
      * @since 1.0.3
      */

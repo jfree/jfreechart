@@ -177,7 +177,7 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
     /**
      * Returns the row index for a given key.
      *
-     * @param key  the key (<code>null</code> not permitted).
+     * @param key  the key ({@code null} not permitted).
      *
      * @return The row index.
      *
@@ -226,7 +226,7 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
     /**
      * Returns the column index for a given key.
      *
-     * @param key  the key (<code>null</code> not permitted).
+     * @param key  the key ({@code null} not permitted).
      *
      * @return The column index.
      *
@@ -256,10 +256,10 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
      * throw an {@link UnknownKeyException} if either key is not defined in the
      * data structure.
      *
-     * @param rowKey  the row key (<code>null</code> not permitted).
-     * @param columnKey  the column key (<code>null</code> not permitted).
+     * @param rowKey  the row key ({@code null} not permitted).
+     * @param columnKey  the column key ({@code null} not permitted).
      *
-     * @return The value (possibly <code>null</code>).
+     * @return The value (possibly {@code null}).
      *
      * @see #addValue(Number, Comparable, Comparable)
      * @see #removeValue(Comparable, Comparable)
@@ -294,9 +294,9 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
      * Adds a value to the table.  Performs the same function as
      * #setValue(Number, Comparable, Comparable).
      *
-     * @param value  the value (<code>null</code> permitted).
-     * @param rowKey  the row key (<code>null</code> not permitted).
-     * @param columnKey  the column key (<code>null</code> not permitted).
+     * @param value  the value ({@code null} permitted).
+     * @param rowKey  the row key ({@code null} not permitted).
+     * @param columnKey  the column key ({@code null} not permitted).
      *
      * @see #setValue(Number, Comparable, Comparable)
      * @see #removeValue(Comparable, Comparable)
@@ -310,9 +310,9 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
     /**
      * Adds or updates a value.
      *
-     * @param value  the value (<code>null</code> permitted).
-     * @param rowKey  the row key (<code>null</code> not permitted).
-     * @param columnKey  the column key (<code>null</code> not permitted).
+     * @param value  the value ({@code null} permitted).
+     * @param rowKey  the row key ({@code null} not permitted).
+     * @param columnKey  the column key ({@code null} not permitted).
      *
      * @see #addValue(Number, Comparable, Comparable)
      * @see #removeValue(Comparable, Comparable)
@@ -347,12 +347,12 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
     }
 
     /**
-     * Removes a value from the table by setting it to <code>null</code>.  If
+     * Removes a value from the table by setting it to {@code null}.  If
      * all the values in the specified row and/or column are now
-     * <code>null</code>, the row and/or column is removed from the table.
+     * {@code null}, the row and/or column is removed from the table.
      *
-     * @param rowKey  the row key (<code>null</code> not permitted).
-     * @param columnKey  the column key (<code>null</code> not permitted).
+     * @param rowKey  the row key ({@code null} not permitted).
+     * @param columnKey  the column key ({@code null} not permitted).
      *
      * @see #addValue(Number, Comparable, Comparable)
      */
@@ -420,7 +420,7 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
     /**
      * Removes a row from the table.
      *
-     * @param rowKey  the row key (<code>null</code> not permitted).
+     * @param rowKey  the row key ({@code null} not permitted).
      *
      * @see #removeRow(int)
      * @see #removeColumn(Comparable)
@@ -455,12 +455,12 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
     /**
      * Removes a column from the table.
      *
-     * @param columnKey  the column key (<code>null</code> not permitted).
+     * @param columnKey  the column key ({@code null} not permitted).
      *
      * @throws UnknownKeyException if the table does not contain a column with
      *     the specified key.
      * @throws IllegalArgumentException if <code>columnKey</code> is
-     *     <code>null</code>.
+     *     {@code null}.
      *
      * @see #removeColumn(int)
      * @see #removeRow(Comparable)
@@ -493,7 +493,7 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
     /**
      * Tests if this object is equal to another.
      *
-     * @param o  the other object (<code>null</code> permitted).
+     * @param o  the other object ({@code null} permitted).
      *
      * @return A boolean.
      */

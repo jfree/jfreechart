@@ -67,7 +67,7 @@ public class StandardXYToolTipGenerator extends AbstractXYItemLabelGenerator
      * Returns a tool tip generator that formats the x-values as dates and the
      * y-values as numbers.
      *
-     * @return A tool tip generator (never <code>null</code>).
+     * @return A tool tip generator (never {@code null}).
      */
     public static StandardXYToolTipGenerator getTimeSeriesInstance() {
         return new StandardXYToolTipGenerator(DEFAULT_TOOL_TIP_FORMAT,
@@ -85,11 +85,11 @@ public class StandardXYToolTipGenerator extends AbstractXYItemLabelGenerator
     /**
      * Creates a tool tip generator using the specified number formatters.
      *
-     * @param formatString  the item label format string (<code>null</code> not
+     * @param formatString  the item label format string ({@code null} not
      *                      permitted).
-     * @param xFormat  the format object for the x values (<code>null</code>
+     * @param xFormat  the format object for the x values ({@code null}
      *                 not permitted).
-     * @param yFormat  the format object for the y values (<code>null</code>
+     * @param yFormat  the format object for the y values ({@code null}
      *                 not permitted).
      */
     public StandardXYToolTipGenerator(String formatString,
@@ -102,11 +102,11 @@ public class StandardXYToolTipGenerator extends AbstractXYItemLabelGenerator
     /**
      * Creates a tool tip generator using the specified number formatters.
      *
-     * @param formatString  the label format string (<code>null</code> not
+     * @param formatString  the label format string ({@code null} not
      *                      permitted).
-     * @param xFormat  the format object for the x values (<code>null</code>
+     * @param xFormat  the format object for the x values ({@code null}
      *                 not permitted).
-     * @param yFormat  the format object for the y values (<code>null</code>
+     * @param yFormat  the format object for the y values ({@code null}
      *                 not permitted).
      */
     public StandardXYToolTipGenerator(String formatString, DateFormat xFormat,
@@ -121,11 +121,11 @@ public class StandardXYToolTipGenerator extends AbstractXYItemLabelGenerator
      * number formatter for the x-values and a date formatter for the
      * y-values).
      *
-     * @param formatString  the item label format string (<code>null</code>
+     * @param formatString  the item label format string ({@code null}
      *                      not permitted).
-     * @param xFormat  the format object for the x values (<code>null</code>
+     * @param xFormat  the format object for the x values ({@code null}
      *                 permitted).
-     * @param yFormat  the format object for the y values (<code>null</code>
+     * @param yFormat  the format object for the y values ({@code null}
      *                 not permitted).
      *
      * @since 1.0.4
@@ -138,11 +138,11 @@ public class StandardXYToolTipGenerator extends AbstractXYItemLabelGenerator
     /**
      * Creates a tool tip generator using the specified date formatters.
      *
-     * @param formatString  the label format string (<code>null</code> not
+     * @param formatString  the label format string ({@code null} not
      *                      permitted).
-     * @param xFormat  the format object for the x values (<code>null</code>
+     * @param xFormat  the format object for the x values ({@code null}
      *                 not permitted).
-     * @param yFormat  the format object for the y values (<code>null</code>
+     * @param yFormat  the format object for the y values ({@code null}
      *                 not permitted).
      */
     public StandardXYToolTipGenerator(String formatString,
@@ -155,11 +155,11 @@ public class StandardXYToolTipGenerator extends AbstractXYItemLabelGenerator
     /**
      * Generates the tool tip text for an item in a dataset.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
      * @param series  the series index (zero-based).
      * @param item  the item index (zero-based).
      *
-     * @return The tooltip text (possibly <code>null</code>).
+     * @return The tooltip text (possibly {@code null}).
      */
     @Override
     public String generateToolTip(XYDataset dataset, int series, int item) {
@@ -169,7 +169,7 @@ public class StandardXYToolTipGenerator extends AbstractXYItemLabelGenerator
     /**
      * Tests this object for equality with an arbitrary object.
      *
-     * @param obj  the other object (<code>null</code> permitted).
+     * @param obj  the other object ({@code null} permitted).
      *
      * @return A boolean.
      */

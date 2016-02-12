@@ -152,7 +152,7 @@ public class SymbolAxis extends NumberAxis implements Serializable {
      * Constructs a symbol axis, using default attribute values where
      * necessary.
      *
-     * @param label  the axis label (<code>null</code> permitted).
+     * @param label  the axis label ({@code null} permitted).
      * @param sv  the list of symbols to display instead of the numeric
      *            values.
      */
@@ -287,17 +287,17 @@ public class SymbolAxis extends NumberAxis implements Serializable {
      * Draws the axis on a Java 2D graphics device (such as the screen or a
      * printer).
      *
-     * @param g2  the graphics device (<code>null</code> not permitted).
+     * @param g2  the graphics device ({@code null} not permitted).
      * @param cursor  the cursor location.
      * @param plotArea  the area within which the plot and axes should be drawn
-     *                  (<code>null</code> not permitted).
+     *                  ({@code null} not permitted).
      * @param dataArea  the area within which the data should be drawn
-     *                  (<code>null</code> not permitted).
-     * @param edge  the axis location (<code>null</code> not permitted).
+     *                  ({@code null} not permitted).
+     * @param edge  the axis location ({@code null} not permitted).
      * @param plotState  collects information about the plot
-     *                   (<code>null</code> permitted).
+     *                   ({@code null} permitted).
      *
-     * @return The axis state (never <code>null</code>).
+     * @return The axis state (never {@code null}).
      */
     @Override
     public AxisState draw(Graphics2D g2, double cursor, Rectangle2D plotArea,
@@ -739,7 +739,7 @@ public class SymbolAxis extends NumberAxis implements Serializable {
     /**
      * Tests this axis for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

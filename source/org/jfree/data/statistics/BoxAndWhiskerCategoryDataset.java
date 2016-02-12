@@ -217,7 +217,7 @@ public interface BoxAndWhiskerCategoryDataset extends CategoryDataset {
 
     /**
      * Returns a list of outlier values for an item.  The list may be empty,
-     * but should never be <code>null</code>.
+     * but should never be {@code null}.
      *
      * @param row  the row index (zero-based).
      * @param column  the column index (zero-based).
@@ -228,7 +228,7 @@ public interface BoxAndWhiskerCategoryDataset extends CategoryDataset {
 
     /**
      * Returns a list of outlier values for an item.  The list may be empty,
-     * but should never be <code>null</code>.
+     * but should never be {@code null}.
      *
      * @param rowKey  the row key.
      * @param columnKey  the columnKey.

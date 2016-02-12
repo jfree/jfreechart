@@ -100,7 +100,7 @@ public class QuarterDateFormat extends DateFormat
     /**
      * Creates a new instance for the specified time zone.
      *
-     * @param zone  the time zone (<code>null</code> not permitted).
+     * @param zone  the time zone ({@code null} not permitted).
      */
     public QuarterDateFormat(TimeZone zone) {
         this(zone, REGULAR_QUARTERS);
@@ -109,7 +109,7 @@ public class QuarterDateFormat extends DateFormat
     /**
      * Creates a new instance for the specified time zone.
      *
-     * @param zone  the time zone (<code>null</code> not permitted).
+     * @param zone  the time zone ({@code null} not permitted).
      * @param quarterSymbols  the quarter symbols.
      */
     public QuarterDateFormat(TimeZone zone, String[] quarterSymbols) {
@@ -119,7 +119,7 @@ public class QuarterDateFormat extends DateFormat
     /**
      * Creates a new instance for the specified time zone.
      *
-     * @param zone  the time zone (<code>null</code> not permitted).
+     * @param zone  the time zone ({@code null} not permitted).
      * @param quarterSymbols  the quarter symbols.
      * @param quarterFirst  a flag that controls whether the quarter or the
      *         year is displayed first.
@@ -175,7 +175,7 @@ public class QuarterDateFormat extends DateFormat
      * @param source  the date string.
      * @param pos  the parse position.
      *
-     * @return <code>null</code>, as this method has not been implemented.
+     * @return {@code null}, as this method has not been implemented.
      */
     @Override
     public Date parse(String source, ParsePosition pos) {
@@ -185,7 +185,7 @@ public class QuarterDateFormat extends DateFormat
     /**
      * Tests this formatter for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

@@ -112,7 +112,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
     /**
      * Constructs a dataset and populates it with a single series.
      *
-     * @param series  the series (<code>null</code> ignored).
+     * @param series  the series ({@code null} ignored).
      */
     public XYSeriesCollection(XYSeries series) {
         this.data = new java.util.ArrayList();
@@ -146,7 +146,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
      * Adds a series to the collection and sends a {@link DatasetChangeEvent}
      * to all registered listeners.
      *
-     * @param series  the series (<code>null</code> not permitted).
+     * @param series  the series ({@code null} not permitted).
      * 
      * @throws IllegalArgumentException if the key for the series is null or
      *     not unique within the dataset.
@@ -184,7 +184,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
      * Removes a series from the collection and sends a
      * {@link DatasetChangeEvent} to all registered listeners.
      *
-     * @param series  the series (<code>null</code> not permitted).
+     * @param series  the series ({@code null} not permitted).
      */
     public void removeSeries(XYSeries series) {
         ParamChecks.nullNotPermitted(series, "series");
@@ -237,7 +237,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
      * Returns the index of the specified series, or -1 if that series is not
      * present in the dataset.
      *
-     * @param series  the series (<code>null</code> not permitted).
+     * @param series  the series ({@code null} not permitted).
      *
      * @return The series index.
      *
@@ -268,7 +268,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
     /**
      * Returns a series from the collection.
      *
-     * @param key  the key (<code>null</code> not permitted).
+     * @param key  the key ({@code null} not permitted).
      *
      * @return The series with the specified key.
      *
@@ -310,7 +310,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
      * Returns the index of the series with the specified key, or -1 if no
      * series has that key.
      * 
-     * @param key  the key (<code>null</code> not permitted).
+     * @param key  the key ({@code null} not permitted).
      * 
      * @return The index.
      * 
@@ -390,7 +390,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
      * @param series  the series (zero-based index).
      * @param index  the index of the item of interest (zero-based).
      *
-     * @return The value (possibly <code>null</code>).
+     * @return The value (possibly {@code null}).
      */
     @Override
     public Number getY(int series, int index) {
@@ -427,7 +427,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
     /**
      * Tests this collection for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */
@@ -543,7 +543,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
      * @param includeInterval  a flag that determines whether or not the
      *                         x-interval is taken into account.
      *
-     * @return The range (or <code>null</code> if the dataset contains no
+     * @return The range (or {@code null} if the dataset contains no
      *     values).
      */
     @Override
@@ -645,7 +645,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
      *
      * @param includeInterval  ignored.
      *
-     * @return The range (or <code>null</code> if the dataset contains no
+     * @return The range (or {@code null} if the dataset contains no
      *     values).
      */
     @Override

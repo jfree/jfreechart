@@ -220,7 +220,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
 
     /**
      * The shape that is used to represent a line in the legend.
-     * This should never be set to <code>null</code>.
+     * This should never be set to {@code null}.
      */
     private transient Shape legendLine;
 
@@ -248,7 +248,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
      * {@link #SHAPES_AND_LINES}.
      *
      * @param type  the type of renderer.
-     * @param toolTipGenerator  the item label generator (<code>null</code>
+     * @param toolTipGenerator  the item label generator ({@code null}
      *                          permitted).
      */
     public StandardXYItemRenderer(int type,
@@ -262,7 +262,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
      * {@link #SHAPES_AND_LINES}.
      *
      * @param type  the type of renderer.
-     * @param toolTipGenerator  the item label generator (<code>null</code>
+     * @param toolTipGenerator  the item label generator ({@code null}
      *                          permitted).
      * @param urlGenerator  the URL generator.
      */
@@ -356,7 +356,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
      * Returns the override flag that controls whether or not shapes are filled
      * for ALL series.
      *
-     * @return The flag (possibly <code>null</code>).
+     * @return The flag (possibly {@code null}).
      *
      * @since 1.0.5
      *
@@ -392,7 +392,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
      * for ALL series and sends a {@link RendererChangeEvent} to all registered
      * listeners.
      *
-     * @param filled  the flag (<code>null</code> permitted).
+     * @param filled  the flag ({@code null} permitted).
      *
      * @see #setShapesFilled(boolean)
      *
@@ -497,7 +497,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
      * Sets the gap threshold type and sends a {@link RendererChangeEvent} to
      * all registered listeners.
      *
-     * @param thresholdType  the type (<code>null</code> not permitted).
+     * @param thresholdType  the type ({@code null} not permitted).
      *
      * @see #getGapThresholdType()
      */
@@ -611,7 +611,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
     /**
      * Returns the shape used to represent a line in the legend.
      *
-     * @return The legend line (never <code>null</code>).
+     * @return The legend line (never {@code null}).
      *
      * @see #setLegendLine(Shape)
      */
@@ -623,7 +623,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
      * Sets the shape used as a line in each legend item and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param line  the line (<code>null</code> not permitted).
+     * @param line  the line ({@code null} not permitted).
      *
      * @see #getLegendLine()
      */
@@ -796,7 +796,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
      * @param series  the series index (zero-based).
      * @param item  the item index (zero-based).
      * @param crosshairState  crosshair information for the plot
-     *                        (<code>null</code> permitted).
+     *                        ({@code null} permitted).
      * @param pass  the pass index.
      */
     @Override
@@ -994,7 +994,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
     /**
      * Tests this renderer for equality with another object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

@@ -58,7 +58,7 @@ public interface IntervalCategoryDataset extends CategoryDataset {
      * @param series  the series (zero-based index).
      * @param category  the category (zero-based index).
      *
-     * @return The start value (possibly <code>null</code>).
+     * @return The start value (possibly {@code null}).
      *
      * @see #getEndValue(int, int)
      */
@@ -70,7 +70,7 @@ public interface IntervalCategoryDataset extends CategoryDataset {
      * @param series  the series key.
      * @param category  the category key.
      *
-     * @return The start value (possibly <code>null</code>).
+     * @return The start value (possibly {@code null}).
      *
      * @see #getEndValue(Comparable, Comparable)
      */
@@ -82,7 +82,7 @@ public interface IntervalCategoryDataset extends CategoryDataset {
      * @param series  the series (zero-based index).
      * @param category  the category (zero-based index).
      *
-     * @return The end value (possibly <code>null</code>).
+     * @return The end value (possibly {@code null}).
      *
      * @see #getStartValue(int, int)
      */
@@ -94,7 +94,7 @@ public interface IntervalCategoryDataset extends CategoryDataset {
      * @param series  the series key.
      * @param category  the category key.
      *
-     * @return The end value (possibly <code>null</code>).
+     * @return The end value (possibly {@code null}).
      *
      * @see #getStartValue(Comparable, Comparable)
      */

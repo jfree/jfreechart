@@ -314,7 +314,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Creates a new default instance.
      *
-     * @param name  the name of the theme (<code>null</code> not permitted).
+     * @param name  the name of the theme ({@code null} not permitted).
      */
     public StandardChartTheme(String name) {
         this(name, false);
@@ -323,7 +323,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Creates a new default instance.
      *
-     * @param name  the name of the theme (<code>null</code> not permitted).
+     * @param name  the name of the theme ({@code null} not permitted).
      * @param shadow  a flag that controls whether a shadow generator is 
      *                included.
      *
@@ -378,7 +378,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Sets the largest font for this theme.
      *
-     * @param font  the font (<code>null</code> not permitted).
+     * @param font  the font ({@code null} not permitted).
      *
      * @see #getExtraLargeFont()
      */
@@ -390,7 +390,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Returns the large font for this theme.
      *
-     * @return The large font (never <code>null</code>).
+     * @return The large font (never {@code null}).
      *
      * @see #setLargeFont(Font)
      */
@@ -401,7 +401,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Sets the large font for this theme.
      *
-     * @param font  the font (<code>null</code> not permitted).
+     * @param font  the font ({@code null} not permitted).
      *
      * @see #getLargeFont()
      */
@@ -413,7 +413,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Returns the regular font.
      *
-     * @return The regular font (never <code>null</code>).
+     * @return The regular font (never {@code null}).
      *
      * @see #setRegularFont(Font)
      */
@@ -424,7 +424,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Sets the regular font for this theme.
      *
-     * @param font  the font (<code>null</code> not permitted).
+     * @param font  the font ({@code null} not permitted).
      *
      * @see #getRegularFont()
      */
@@ -436,7 +436,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Returns the small font.
      *
-     * @return The small font (never <code>null</code>).
+     * @return The small font (never {@code null}).
      *
      * @see #setSmallFont(Font)
      *
@@ -449,7 +449,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Sets the small font for this theme.
      *
-     * @param font  the font (<code>null</code> not permitted).
+     * @param font  the font ({@code null} not permitted).
      *
      * @see #getSmallFont()
      *
@@ -463,7 +463,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Returns the title paint.
      *
-     * @return The title paint (never <code>null</code>).
+     * @return The title paint (never {@code null}).
      *
      * @see #setTitlePaint(Paint)
      */
@@ -474,7 +474,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Sets the title paint.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getTitlePaint()
      */
@@ -486,7 +486,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Returns the subtitle paint.
      *
-     * @return The subtitle paint (never <code>null</code>).
+     * @return The subtitle paint (never {@code null}).
      *
      * @see #setSubtitlePaint(Paint)
      */
@@ -497,7 +497,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Sets the subtitle paint.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getSubtitlePaint()
      */
@@ -509,7 +509,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Returns the chart background paint.
      *
-     * @return The chart background paint (never <code>null</code>).
+     * @return The chart background paint (never {@code null}).
      *
      * @see #setChartBackgroundPaint(Paint)
      */
@@ -520,7 +520,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Sets the chart background paint.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getChartBackgroundPaint()
      */
@@ -532,7 +532,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Returns the legend background paint.
      *
-     * @return The legend background paint (never <code>null</code>).
+     * @return The legend background paint (never {@code null}).
      *
      * @see #setLegendBackgroundPaint(Paint)
      */
@@ -543,7 +543,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Sets the legend background paint.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getLegendBackgroundPaint()
      */
@@ -555,7 +555,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Returns the legend item paint.
      *
-     * @return The legend item paint (never <code>null</code>).
+     * @return The legend item paint (never {@code null}).
      *
      * @see #setLegendItemPaint(Paint)
      */
@@ -566,7 +566,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Sets the legend item paint.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getLegendItemPaint()
      */
@@ -578,7 +578,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Returns the plot background paint.
      *
-     * @return The plot background paint (never <code>null</code>).
+     * @return The plot background paint (never {@code null}).
      *
      * @see #setPlotBackgroundPaint(Paint)
      */
@@ -589,7 +589,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Sets the plot background paint.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getPlotBackgroundPaint()
      */
@@ -601,7 +601,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Returns the plot outline paint.
      *
-     * @return The plot outline paint (never <code>null</code>).
+     * @return The plot outline paint (never {@code null}).
      *
      * @see #setPlotOutlinePaint(Paint)
      */
@@ -612,7 +612,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Sets the plot outline paint.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getPlotOutlinePaint()
      */
@@ -624,7 +624,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Returns the label link style for pie charts.
      *
-     * @return The label link style (never <code>null</code>).
+     * @return The label link style (never {@code null}).
      *
      * @see #setLabelLinkStyle(PieLabelLinkStyle)
      */
@@ -635,7 +635,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Sets the label link style for pie charts.
      *
-     * @param style  the style (<code>null</code> not permitted).
+     * @param style  the style ({@code null} not permitted).
      *
      * @see #getLabelLinkStyle()
      */
@@ -647,7 +647,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Returns the label link paint for pie charts.
      *
-     * @return The label link paint (never <code>null</code>).
+     * @return The label link paint (never {@code null}).
      *
      * @see #setLabelLinkPaint(Paint)
      */
@@ -658,7 +658,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Sets the label link paint for pie charts.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getLabelLinkPaint()
      */
@@ -670,7 +670,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Returns the domain grid line paint.
      *
-     * @return The domain grid line paint (never <code>null</code>).
+     * @return The domain grid line paint (never {@code null}).
      *
      * @see #setDomainGridlinePaint(Paint)
      */
@@ -681,7 +681,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Sets the domain grid line paint.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getDomainGridlinePaint()
      */
@@ -693,7 +693,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Returns the range grid line paint.
      *
-     * @return The range grid line paint (never <code>null</code>).
+     * @return The range grid line paint (never {@code null}).
      *
      * @see #setRangeGridlinePaint(Paint)
      */
@@ -704,7 +704,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Sets the range grid line paint.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getRangeGridlinePaint()
      */
@@ -727,7 +727,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Sets the baseline paint.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @since 1.0.13
      */
@@ -748,7 +748,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Sets the crosshair paint.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      */
     public void setCrosshairPaint(Paint paint) {
         ParamChecks.nullNotPermitted(paint, "paint");
@@ -758,7 +758,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Returns the axis offsets.
      *
-     * @return The axis offsets (never <code>null</code>).
+     * @return The axis offsets (never {@code null}).
      *
      * @see #setAxisOffset(RectangleInsets)
      */
@@ -769,7 +769,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Sets the axis offset.
      *
-     * @param offset  the offset (<code>null</code> not permitted).
+     * @param offset  the offset ({@code null} not permitted).
      *
      * @see #getAxisOffset()
      */
@@ -781,7 +781,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Returns the axis label paint.
      *
-     * @return The axis label paint (never <code>null</code>).
+     * @return The axis label paint (never {@code null}).
      *
      * @see #setAxisLabelPaint(Paint)
      */
@@ -792,7 +792,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Sets the axis label paint.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getAxisLabelPaint()
      */
@@ -804,7 +804,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Returns the tick label paint.
      *
-     * @return The tick label paint (never <code>null</code>).
+     * @return The tick label paint (never {@code null}).
      *
      * @see #setTickLabelPaint(Paint)
      */
@@ -815,7 +815,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Sets the tick label paint.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getTickLabelPaint()
      */
@@ -827,7 +827,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Returns the item label paint.
      *
-     * @return The item label paint (never <code>null</code>).
+     * @return The item label paint (never {@code null}).
      *
      * @see #setItemLabelPaint(Paint)
      */
@@ -838,7 +838,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Sets the item label paint.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getItemLabelPaint()
      */
@@ -872,7 +872,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Returns the shadow paint.
      *
-     * @return The shadow paint (never <code>null</code>).
+     * @return The shadow paint (never {@code null}).
      *
      * @see #setShadowPaint(Paint)
      */
@@ -883,7 +883,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Sets the shadow paint.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getShadowPaint()
      */
@@ -895,7 +895,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Returns the bar painter.
      *
-     * @return The bar painter (never <code>null</code>).
+     * @return The bar painter (never {@code null}).
      *
      * @see #setBarPainter(BarPainter)
      */
@@ -906,7 +906,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Sets the bar painter.
      *
-     * @param painter  the painter (<code>null</code> not permitted).
+     * @param painter  the painter ({@code null} not permitted).
      *
      * @see #getBarPainter()
      */
@@ -918,7 +918,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Returns the XY bar painter.
      *
-     * @return The XY bar painter (never <code>null</code>).
+     * @return The XY bar painter (never {@code null}).
      *
      * @see #setXYBarPainter(XYBarPainter)
      */
@@ -929,7 +929,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Sets the XY bar painter.
      *
-     * @param painter  the painter (<code>null</code> not permitted).
+     * @param painter  the painter ({@code null} not permitted).
      *
      * @see #getXYBarPainter()
      */
@@ -941,7 +941,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Returns the thermometer paint.
      *
-     * @return The thermometer paint (never <code>null</code>).
+     * @return The thermometer paint (never {@code null}).
      *
      * @see #setThermometerPaint(Paint)
      */
@@ -952,7 +952,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Sets the thermometer paint.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getThermometerPaint()
      */
@@ -964,7 +964,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Returns the wall paint for charts with a 3D effect.
      *
-     * @return The wall paint (never <code>null</code>).
+     * @return The wall paint (never {@code null}).
      *
      * @see #setWallPaint(Paint)
      */
@@ -975,7 +975,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Sets the wall paint for charts with a 3D effect.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getWallPaint()
      */
@@ -987,7 +987,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Returns the error indicator paint.
      *
-     * @return The error indicator paint (never <code>null</code>).
+     * @return The error indicator paint (never {@code null}).
      *
      * @see #setErrorIndicatorPaint(Paint)
      */
@@ -998,7 +998,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Sets the error indicator paint.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getErrorIndicatorPaint()
      */
@@ -1010,7 +1010,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Returns the grid band paint.
      *
-     * @return The grid band paint (never <code>null</code>).
+     * @return The grid band paint (never {@code null}).
      *
      * @see #setGridBandPaint(Paint)
      */
@@ -1021,7 +1021,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Sets the grid band paint.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getGridBandPaint()
      */
@@ -1033,7 +1033,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Returns the grid band alternate paint (used for a {@link SymbolAxis}).
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @see #setGridBandAlternatePaint(Paint)
      */
@@ -1044,7 +1044,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Sets the grid band alternate paint (used for a {@link SymbolAxis}).
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getGridBandAlternatePaint()
      */
@@ -1084,7 +1084,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Sets the drawing supplier for this theme.
      *
-     * @param supplier  the supplier (<code>null</code> not permitted).
+     * @param supplier  the supplier ({@code null} not permitted).
      *
      * @see #getDrawingSupplier()
      */
@@ -1096,7 +1096,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Applies this theme to the supplied chart.
      *
-     * @param chart  the chart (<code>null</code> not permitted).
+     * @param chart  the chart ({@code null} not permitted).
      */
     @Override
     public void apply(JFreeChart chart) {
@@ -1168,7 +1168,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Applies the attributes of this theme to the specified container.
      *
-     * @param bc  a block container (<code>null</code> not permitted).
+     * @param bc  a block container ({@code null} not permitted).
      */
     protected void applyToBlockContainer(BlockContainer bc) {
         Iterator iterator = bc.getBlocks().iterator();
@@ -1197,7 +1197,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Applies the attributes of this theme to a plot.
      *
-     * @param plot  the plot (<code>null</code>).
+     * @param plot  the plot ({@code null}).
      */
     protected void applyToPlot(Plot plot) {
         ParamChecks.nullNotPermitted(plot, "plot");
@@ -1247,7 +1247,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
      * This method also clears any set values for the section paint, outline
      * etc, so that the theme's {@link DrawingSupplier} will be used.
      *
-     * @param plot  the plot (<code>null</code> not permitted).
+     * @param plot  the plot ({@code null} not permitted).
      */
     protected void applyToPiePlot(PiePlot plot) {
         plot.setLabelLinkPaint(this.labelLinkPaint);
@@ -1271,7 +1271,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Applies the attributes of this theme to a {@link MultiplePiePlot}.
      *
-     * @param plot  the plot (<code>null</code> not permitted).
+     * @param plot  the plot ({@code null} not permitted).
      */
     protected void applyToMultiplePiePlot(MultiplePiePlot plot) {
         apply(plot.getPieChart());
@@ -1280,7 +1280,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Applies the attributes of this theme to a {@link CategoryPlot}.
      *
-     * @param plot  the plot (<code>null</code> not permitted).
+     * @param plot  the plot ({@code null} not permitted).
      */
     protected void applyToCategoryPlot(CategoryPlot plot) {
         plot.setAxisOffset(this.axisOffset);
@@ -1341,7 +1341,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Applies the attributes of this theme to a {@link XYPlot}.
      *
-     * @param plot  the plot (<code>null</code> not permitted).
+     * @param plot  the plot ({@code null} not permitted).
      */
     protected void applyToXYPlot(XYPlot plot) {
         plot.setAxisOffset(this.axisOffset);
@@ -1432,7 +1432,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
      * Applies the attributes of this theme to a {@link PolarPlot}.  This
      * method is called from the {@link #applyToPlot(Plot)} method.
      *
-     * @param plot  the plot (<code>null</code> not permitted).
+     * @param plot  the plot ({@code null} not permitted).
      */
     protected void applyToPolarPlot(PolarPlot plot) {
         plot.setAngleLabelFont(this.regularFont);
@@ -1448,7 +1448,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Applies the attributes of this theme to a {@link SpiderWebPlot}.
      *
-     * @param plot  the plot (<code>null</code> not permitted).
+     * @param plot  the plot ({@code null} not permitted).
      */
     protected void applyToSpiderWebPlot(SpiderWebPlot plot) {
         plot.setLabelFont(this.regularFont);
@@ -1459,7 +1459,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Applies the attributes of this theme to a {@link MeterPlot}.
      *
-     * @param plot  the plot (<code>null</code> not permitted).
+     * @param plot  the plot ({@code null} not permitted).
      */
     protected void applyToMeterPlot(MeterPlot plot) {
         plot.setDialBackgroundPaint(this.plotBackgroundPaint);
@@ -1489,7 +1489,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Applies the attributes for this theme to a {@link CategoryAxis}.
      *
-     * @param axis  the axis (<code>null</code> not permitted).
+     * @param axis  the axis ({@code null} not permitted).
      */
     protected void applyToCategoryAxis(CategoryAxis axis) {
         axis.setLabelFont(this.largeFont);
@@ -1506,7 +1506,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Applies the attributes for this theme to a {@link ValueAxis}.
      *
-     * @param axis  the axis (<code>null</code> not permitted).
+     * @param axis  the axis ({@code null} not permitted).
      */
     protected void applyToValueAxis(ValueAxis axis) {
         axis.setLabelFont(this.largeFont);
@@ -1524,7 +1524,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Applies the attributes for this theme to a {@link SymbolAxis}.
      *
-     * @param axis  the axis (<code>null</code> not permitted).
+     * @param axis  the axis ({@code null} not permitted).
      */
     protected void applyToSymbolAxis(SymbolAxis axis) {
         axis.setGridBandPaint(this.gridBandPaint);
@@ -1534,7 +1534,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Applies the attributes for this theme to a {@link PeriodAxis}.
      *
-     * @param axis  the axis (<code>null</code> not permitted).
+     * @param axis  the axis ({@code null} not permitted).
      */
     protected void applyToPeriodAxis(PeriodAxis axis) {
         PeriodAxisLabelInfo[] info = axis.getLabelInfo();
@@ -1552,7 +1552,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Applies the attributes for this theme to an {@link AbstractRenderer}.
      *
-     * @param renderer  the renderer (<code>null</code> not permitted).
+     * @param renderer  the renderer ({@code null} not permitted).
      */
     protected void applyToAbstractRenderer(AbstractRenderer renderer) {
         if (renderer.getAutoPopulateSeriesPaint()) {
@@ -1566,7 +1566,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Applies the settings of this theme to the specified renderer.
      *
-     * @param renderer  the renderer (<code>null</code> not permitted).
+     * @param renderer  the renderer ({@code null} not permitted).
      */
     protected void applyToCategoryItemRenderer(CategoryItemRenderer renderer) {
         ParamChecks.nullNotPermitted(renderer, "renderer");
@@ -1616,7 +1616,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Applies the settings of this theme to the specified renderer.
      *
-     * @param renderer  the renderer (<code>null</code> not permitted).
+     * @param renderer  the renderer ({@code null} not permitted).
      */
     protected void applyToXYItemRenderer(XYItemRenderer renderer) {
         ParamChecks.nullNotPermitted(renderer, "renderer");
@@ -1649,7 +1649,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Tests this theme for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */
@@ -1782,7 +1782,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Provides serialization support.
      *
-     * @param stream  the output stream (<code>null</code> not permitted).
+     * @param stream  the output stream ({@code null} not permitted).
      *
      * @throws IOException  if there is an I/O error.
      */
@@ -1814,7 +1814,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Provides serialization support.
      *
-     * @param stream  the input stream (<code>null</code> not permitted).
+     * @param stream  the input stream ({@code null} not permitted).
      *
      * @throws IOException  if there is an I/O error.
      * @throws ClassNotFoundException  if there is a classpath problem.

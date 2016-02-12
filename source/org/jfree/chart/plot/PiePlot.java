@@ -390,25 +390,25 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
 
     /**
      * The color used to draw the background of the section labels.  If this
-     * is <code>null</code>, the background is not filled.
+     * is {@code null}, the background is not filled.
      */
     private transient Paint labelBackgroundPaint;
 
     /**
      * The paint used to draw the outline of the section labels
-     * (<code>null</code> permitted).
+     * ({@code null} permitted).
      */
     private transient Paint labelOutlinePaint;
 
     /**
      * The stroke used to draw the outline of the section labels
-     * (<code>null</code> permitted).
+     * ({@code null} permitted).
      */
     private transient Stroke labelOutlineStroke;
 
     /**
      * The paint used to draw the shadow for the section labels
-     * (<code>null</code> permitted).
+     * ({@code null} permitted).
      */
     private transient Paint labelShadowPaint;
 
@@ -421,7 +421,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
 
     /**
      * The padding between the labels and the label outlines.  This is not
-     * allowed to be <code>null</code>.
+     * allowed to be {@code null}.
      *
      * @since 1.0.7
      */
@@ -489,7 +489,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     private PieURLGenerator legendLabelURLGenerator;
 
     /**
-     * A flag that controls whether <code>null</code> values are ignored.
+     * A flag that controls whether {@code null} values are ignored.
      */
     private boolean ignoreNullValues;
 
@@ -515,7 +515,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     private double minimumArcAngleToDraw;
 
     /**
-     * The shadow generator for the plot (<code>null</code> permitted).
+     * The shadow generator for the plot ({@code null} permitted).
      * 
      * @since 1.0.14
      */
@@ -547,7 +547,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     static final boolean DEBUG_DRAW_PIE_AREA = false;
 
     /**
-     * Creates a new plot.  The dataset is initially set to <code>null</code>.
+     * Creates a new plot.  The dataset is initially set to {@code null}.
      */
     public PiePlot() {
         this(null);
@@ -556,7 +556,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     /**
      * Creates a plot that will draw a pie chart for the specified dataset.
      *
-     * @param dataset  the dataset (<code>null</code> permitted).
+     * @param dataset  the dataset ({@code null} permitted).
      */
     public PiePlot(PieDataset dataset) {
         super();
@@ -621,7 +621,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     /**
      * Returns the dataset.
      *
-     * @return The dataset (possibly <code>null</code>).
+     * @return The dataset (possibly {@code null}).
      *
      * @see #setDataset(PieDataset)
      */
@@ -632,7 +632,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     /**
      * Sets the dataset and sends a {@link DatasetChangeEvent} to 'this'.
      *
-     * @param dataset  the dataset (<code>null</code> permitted).
+     * @param dataset  the dataset ({@code null} permitted).
      *
      * @see #getDataset()
      */
@@ -711,7 +711,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * Returns the direction in which the pie sections are drawn (clockwise or
      * anti-clockwise).
      *
-     * @return The direction (never <code>null</code>).
+     * @return The direction (never {@code null}).
      *
      * @see #setDirection(Rotation)
      */
@@ -723,7 +723,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * Sets the direction in which the pie sections are drawn and sends a
      * {@link PlotChangeEvent} to all registered listeners.
      *
-     * @param direction  the direction (<code>null</code> not permitted).
+     * @param direction  the direction ({@code null} not permitted).
      *
      * @see #getDirection()
      */
@@ -811,7 +811,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     }
 
     /**
-     * Returns the flag that controls whether <code>null</code> values in the
+     * Returns the flag that controls whether {@code null} values in the
      * dataset are ignored.
      *
      * @return A boolean.
@@ -823,7 +823,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     }
 
     /**
-     * Sets a flag that controls whether <code>null</code> values are ignored,
+     * Sets a flag that controls whether {@code null} values are ignored,
      * and sends a {@link PlotChangeEvent} to all registered listeners.  At
      * present, this only affects whether or not the key is presented in the
      * legend.
@@ -888,11 +888,11 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * Returns the paint for the specified section.  The lookup involves these
      * steps:
      * <ul>
-     * <li>if {@link #getSectionPaint()} is non-<code>null</code>, return
+     * <li>if {@link #getSectionPaint()} is non-{@code null}, return
      *         it;</li>
-     * <li>if {@link #getSectionPaint(int)} is non-<code>null</code> return
+     * <li>if {@link #getSectionPaint(int)} is non-{@code null} return
      *         it;</li>
-     * <li>if {@link #getSectionPaint(int)} is <code>null</code> but
+     * <li>if {@link #getSectionPaint(int)} is {@code null} but
      *         <code>autoPopulate</code> is <code>true</code>, attempt to fetch
      *         a new paint from the drawing supplier
      *         ({@link #getDrawingSupplier()});
@@ -941,7 +941,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     /**
      * Returns the paint for ALL sections in the plot.
      *
-     * @return The paint (possibly <code>null</code>).
+     * @return The paint (possibly {@code null}).
      *
      * @see #setSectionPaint(Paint)
      *
@@ -957,7 +957,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * {@code null}, then a list of paints is used instead (to allow
      * different colors to be used for each section).
      *
-     * @param paint  the paint (<code>null</code> permitted).
+     * @param paint  the paint ({@code null} permitted).
      *
      * @see #getSectionPaint()
      *
@@ -998,15 +998,15 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
 
     /**
      * Returns the paint associated with the specified key, or
-     * <code>null</code> if there is no paint associated with the key.
+     * {@code null} if there is no paint associated with the key.
      *
-     * @param key  the key (<code>null</code> not permitted).
+     * @param key  the key ({@code null} not permitted).
      *
      * @return The paint associated with the specified key, or
-     *     <code>null</code>.
+     *     {@code null}.
      *
      * @throws IllegalArgumentException if <code>key</code> is
-     *     <code>null</code>.
+     *     {@code null}.
      *
      * @see #setSectionPaint(Comparable, Paint)
      *
@@ -1021,11 +1021,11 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * Sets the paint associated with the specified key, and sends a
      * {@link PlotChangeEvent} to all registered listeners.
      *
-     * @param key  the key (<code>null</code> not permitted).
+     * @param key  the key ({@code null} not permitted).
      * @param paint  the paint.
      *
      * @throws IllegalArgumentException if <code>key</code> is
-     *     <code>null</code>.
+     *     {@code null}.
      *
      * @see #getSectionPaint(Comparable)
      *
@@ -1060,7 +1060,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * Returns the base section paint.  This is used when no other paint is
      * defined, which is rare.  The default value is <code>Color.gray</code>.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @see #setBaseSectionPaint(Paint)
      */
@@ -1072,7 +1072,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * Sets the base section paint and sends a {@link PlotChangeEvent} to all
      * registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getBaseSectionPaint()
      */
@@ -1159,11 +1159,11 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * Returns the outline paint for the specified section.  The lookup
      * involves these steps:
      * <ul>
-     * <li>if {@link #getSectionOutlinePaint()} is non-<code>null</code>,
+     * <li>if {@link #getSectionOutlinePaint()} is non-{@code null},
      *         return it;</li>
      * <li>otherwise, if {@link #getSectionOutlinePaint(int)} is
-     *         non-<code>null</code> return it;</li>
-     * <li>if {@link #getSectionOutlinePaint(int)} is <code>null</code> but
+     *         non-{@code null} return it;</li>
+     * <li>if {@link #getSectionOutlinePaint(int)} is {@code null} but
      *         <code>autoPopulate</code> is <code>true</code>, attempt to fetch
      *         a new outline paint from the drawing supplier
      *         ({@link #getDrawingSupplier()});
@@ -1212,15 +1212,15 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
 
     /**
      * Returns the outline paint associated with the specified key, or
-     * <code>null</code> if there is no paint associated with the key.
+     * {@code null} if there is no paint associated with the key.
      *
-     * @param key  the key (<code>null</code> not permitted).
+     * @param key  the key ({@code null} not permitted).
      *
      * @return The paint associated with the specified key, or
-     *     <code>null</code>.
+     *     {@code null}.
      *
      * @throws IllegalArgumentException if <code>key</code> is
-     *     <code>null</code>.
+     *     {@code null}.
      *
      * @see #setSectionOutlinePaint(Comparable, Paint)
      *
@@ -1235,11 +1235,11 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * Sets the outline paint associated with the specified key, and sends a
      * {@link PlotChangeEvent} to all registered listeners.
      *
-     * @param key  the key (<code>null</code> not permitted).
+     * @param key  the key ({@code null} not permitted).
      * @param paint  the paint.
      *
      * @throws IllegalArgumentException if <code>key</code> is
-     *     <code>null</code>.
+     *     {@code null}.
      *
      * @see #getSectionOutlinePaint(Comparable)
      *
@@ -1274,7 +1274,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * Returns the base section paint.  This is used when no other paint is
      * available.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @see #setBaseSectionOutlinePaint(Paint)
      */
@@ -1285,7 +1285,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     /**
      * Sets the base section paint.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getBaseSectionOutlinePaint()
      */
@@ -1346,11 +1346,11 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * Returns the outline stroke for the specified section.  The lookup
      * involves these steps:
      * <ul>
-     * <li>if {@link #getSectionOutlineStroke()} is non-<code>null</code>,
+     * <li>if {@link #getSectionOutlineStroke()} is non-{@code null},
      *         return it;</li>
      * <li>otherwise, if {@link #getSectionOutlineStroke(int)} is
-     *         non-<code>null</code> return it;</li>
-     * <li>if {@link #getSectionOutlineStroke(int)} is <code>null</code> but
+     *         non-{@code null} return it;</li>
+     * <li>if {@link #getSectionOutlineStroke(int)} is {@code null} but
      *         <code>autoPopulate</code> is <code>true</code>, attempt to fetch
      *         a new outline stroke from the drawing supplier
      *         ({@link #getDrawingSupplier()});
@@ -1399,15 +1399,15 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
 
     /**
      * Returns the outline stroke associated with the specified key, or
-     * <code>null</code> if there is no stroke associated with the key.
+     * {@code null} if there is no stroke associated with the key.
      *
-     * @param key  the key (<code>null</code> not permitted).
+     * @param key  the key ({@code null} not permitted).
      *
      * @return The stroke associated with the specified key, or
-     *     <code>null</code>.
+     *     {@code null}.
      *
      * @throws IllegalArgumentException if <code>key</code> is
-     *     <code>null</code>.
+     *     {@code null}.
      *
      * @see #setSectionOutlineStroke(Comparable, Stroke)
      *
@@ -1422,11 +1422,11 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * Sets the outline stroke associated with the specified key, and sends a
      * {@link PlotChangeEvent} to all registered listeners.
      *
-     * @param key  the key (<code>null</code> not permitted).
+     * @param key  the key ({@code null} not permitted).
      * @param stroke  the stroke.
      *
      * @throws IllegalArgumentException if <code>key</code> is
-     *     <code>null</code>.
+     *     {@code null}.
      *
      * @see #getSectionOutlineStroke(Comparable)
      *
@@ -1461,7 +1461,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * Returns the base section stroke.  This is used when no other stroke is
      * available.
      *
-     * @return The stroke (never <code>null</code>).
+     * @return The stroke (never {@code null}).
      *
      * @see #setBaseSectionOutlineStroke(Stroke)
      */
@@ -1472,7 +1472,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     /**
      * Sets the base section stroke.
      *
-     * @param stroke  the stroke (<code>null</code> not permitted).
+     * @param stroke  the stroke ({@code null} not permitted).
      *
      * @see #getBaseSectionOutlineStroke()
      */
@@ -1512,7 +1512,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     /**
      * Returns the shadow paint.
      *
-     * @return The paint (possibly <code>null</code>).
+     * @return The paint (possibly {@code null}).
      *
      * @see #setShadowPaint(Paint)
      */
@@ -1524,7 +1524,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * Sets the shadow paint and sends a {@link PlotChangeEvent} to all
      * registered listeners.
      *
-     * @param paint  the paint (<code>null</code> permitted).
+     * @param paint  the paint ({@code null} permitted).
      *
      * @see #getShadowPaint()
      */
@@ -1585,13 +1585,13 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * Returns the amount that the section with the specified key should be
      * exploded.
      *
-     * @param key  the key (<code>null</code> not permitted).
+     * @param key  the key ({@code null} not permitted).
      *
      * @return The amount that the section with the specified key should be
      *     exploded.
      *
      * @throws IllegalArgumentException if <code>key</code> is
-     *     <code>null</code>.
+     *     {@code null}.
      *
      * @since 1.0.3
      *
@@ -1612,7 +1612,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * Sets the amount that a pie section should be exploded and sends a
      * {@link PlotChangeEvent} to all registered listeners.
      *
-     * @param key  the section key (<code>null</code> not permitted).
+     * @param key  the section key ({@code null} not permitted).
      * @param percent  the explode percentage (0.30 = 30 percent).
      *
      * @since 1.0.3
@@ -1652,7 +1652,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     /**
      * Returns the section label generator.
      *
-     * @return The generator (possibly <code>null</code>).
+     * @return The generator (possibly {@code null}).
      *
      * @see #setLabelGenerator(PieSectionLabelGenerator)
      */
@@ -1664,7 +1664,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * Sets the section label generator and sends a {@link PlotChangeEvent} to
      * all registered listeners.
      *
-     * @param generator  the generator (<code>null</code> permitted).
+     * @param generator  the generator ({@code null} permitted).
      *
      * @see #getLabelGenerator()
      */
@@ -1754,7 +1754,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     /**
      * Returns the label link style.
      *
-     * @return The label link style (never <code>null</code>).
+     * @return The label link style (never {@code null}).
      *
      * @see #setLabelLinkStyle(PieLabelLinkStyle)
      *
@@ -1768,7 +1768,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * Sets the label link style and sends a {@link PlotChangeEvent} to all
      * registered listeners.
      *
-     * @param style  the new style (<code>null</code> not permitted).
+     * @param style  the new style ({@code null} not permitted).
      *
      * @see #getLabelLinkStyle()
      *
@@ -1809,7 +1809,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * Returns the paint used for the lines that connect pie sections to their
      * corresponding labels.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @see #setLabelLinkPaint(Paint)
      */
@@ -1822,7 +1822,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * corresponding labels, and sends a {@link PlotChangeEvent} to all
      * registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getLabelLinkPaint()
      */
@@ -1875,7 +1875,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     /**
      * Returns the section label font.
      *
-     * @return The font (never <code>null</code>).
+     * @return The font (never {@code null}).
      *
      * @see #setLabelFont(Font)
      */
@@ -1887,7 +1887,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * Sets the section label font and sends a {@link PlotChangeEvent} to all
      * registered listeners.
      *
-     * @param font  the font (<code>null</code> not permitted).
+     * @param font  the font ({@code null} not permitted).
      *
      * @see #getLabelFont()
      */
@@ -1900,7 +1900,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     /**
      * Returns the section label paint.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @see #setLabelPaint(Paint)
      */
@@ -1912,7 +1912,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * Sets the section label paint and sends a {@link PlotChangeEvent} to all
      * registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getLabelPaint()
      */
@@ -1925,7 +1925,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     /**
      * Returns the section label background paint.
      *
-     * @return The paint (possibly <code>null</code>).
+     * @return The paint (possibly {@code null}).
      *
      * @see #setLabelBackgroundPaint(Paint)
      */
@@ -1937,7 +1937,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * Sets the section label background paint and sends a
      * {@link PlotChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> permitted).
+     * @param paint  the paint ({@code null} permitted).
      *
      * @see #getLabelBackgroundPaint()
      */
@@ -1949,7 +1949,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     /**
      * Returns the section label outline paint.
      *
-     * @return The paint (possibly <code>null</code>).
+     * @return The paint (possibly {@code null}).
      *
      * @see #setLabelOutlinePaint(Paint)
      */
@@ -1961,7 +1961,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * Sets the section label outline paint and sends a
      * {@link PlotChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> permitted).
+     * @param paint  the paint ({@code null} permitted).
      *
      * @see #getLabelOutlinePaint()
      */
@@ -1973,7 +1973,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     /**
      * Returns the section label outline stroke.
      *
-     * @return The stroke (possibly <code>null</code>).
+     * @return The stroke (possibly {@code null}).
      *
      * @see #setLabelOutlineStroke(Stroke)
      */
@@ -1985,7 +1985,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * Sets the section label outline stroke and sends a
      * {@link PlotChangeEvent} to all registered listeners.
      *
-     * @param stroke  the stroke (<code>null</code> permitted).
+     * @param stroke  the stroke ({@code null} permitted).
      *
      * @see #getLabelOutlineStroke()
      */
@@ -1997,7 +1997,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     /**
      * Returns the section label shadow paint.
      *
-     * @return The paint (possibly <code>null</code>).
+     * @return The paint (possibly {@code null}).
      *
      * @see #setLabelShadowPaint(Paint)
      */
@@ -2009,7 +2009,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * Sets the section label shadow paint and sends a {@link PlotChangeEvent}
      * to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> permitted).
+     * @param paint  the paint ({@code null} permitted).
      *
      * @see #getLabelShadowPaint()
      */
@@ -2021,7 +2021,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     /**
      * Returns the label padding.
      *
-     * @return The label padding (never <code>null</code>).
+     * @return The label padding (never {@code null}).
      *
      * @since 1.0.7
      *
@@ -2035,7 +2035,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * Sets the padding between each label and its outline and sends a
      * {@link PlotChangeEvent} to all registered listeners.
      *
-     * @param padding  the padding (<code>null</code> not permitted).
+     * @param padding  the padding ({@code null} not permitted).
      *
      * @since 1.0.7
      *
@@ -2076,7 +2076,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     /**
      * Returns the offset used for the simple labels, if they are displayed.
      *
-     * @return The offset (never <code>null</code>).
+     * @return The offset (never {@code null}).
      *
      * @since 1.0.7
      *
@@ -2090,7 +2090,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * Sets the offset for the simple labels and sends a
      * {@link PlotChangeEvent} to all registered listeners.
      *
-     * @param offset  the offset (<code>null</code> not permitted).
+     * @param offset  the offset ({@code null} not permitted).
      *
      * @since 1.0.7
      *
@@ -2106,7 +2106,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * Returns the object responsible for the vertical layout of the pie
      * section labels.
      *
-     * @return The label distributor (never <code>null</code>).
+     * @return The label distributor (never {@code null}).
      *
      * @since 1.0.6
      */
@@ -2118,7 +2118,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * Sets the label distributor and sends a {@link PlotChangeEvent} to all
      * registered listeners.
      *
-     * @param distributor  the distributor (<code>null</code> not permitted).
+     * @param distributor  the distributor ({@code null} not permitted).
      *
      * @since 1.0.6
      */
@@ -2131,9 +2131,9 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     /**
      * Returns the tool tip generator, an object that is responsible for
      * generating the text items used for tool tips by the plot.  If the
-     * generator is <code>null</code>, no tool tips will be created.
+     * generator is {@code null}, no tool tips will be created.
      *
-     * @return The generator (possibly <code>null</code>).
+     * @return The generator (possibly {@code null}).
      *
      * @see #setToolTipGenerator(PieToolTipGenerator)
      */
@@ -2143,10 +2143,10 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
 
     /**
      * Sets the tool tip generator and sends a {@link PlotChangeEvent} to all
-     * registered listeners.  Set the generator to <code>null</code> if you
+     * registered listeners.  Set the generator to {@code null} if you
      * don't want any tool tips.
      *
-     * @param generator  the generator (<code>null</code> permitted).
+     * @param generator  the generator ({@code null} permitted).
      *
      * @see #getToolTipGenerator()
      */
@@ -2158,7 +2158,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     /**
      * Returns the URL generator.
      *
-     * @return The generator (possibly <code>null</code>).
+     * @return The generator (possibly {@code null}).
      *
      * @see #setURLGenerator(PieURLGenerator)
      */
@@ -2170,7 +2170,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * Sets the URL generator and sends a {@link PlotChangeEvent} to all
      * registered listeners.
      *
-     * @param generator  the generator (<code>null</code> permitted).
+     * @param generator  the generator ({@code null} permitted).
      *
      * @see #getURLGenerator()
      */
@@ -2216,7 +2216,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     /**
      * Returns the shape used for legend items.
      *
-     * @return The shape (never <code>null</code>).
+     * @return The shape (never {@code null}).
      *
      * @see #setLegendItemShape(Shape)
      */
@@ -2228,7 +2228,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * Sets the shape used for legend items and sends a {@link PlotChangeEvent}
      * to all registered listeners.
      *
-     * @param shape  the shape (<code>null</code> not permitted).
+     * @param shape  the shape ({@code null} not permitted).
      *
      * @see #getLegendItemShape()
      */
@@ -2241,7 +2241,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     /**
      * Returns the legend label generator.
      *
-     * @return The legend label generator (never <code>null</code>).
+     * @return The legend label generator (never {@code null}).
      *
      * @see #setLegendLabelGenerator(PieSectionLabelGenerator)
      */
@@ -2253,7 +2253,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * Sets the legend label generator and sends a {@link PlotChangeEvent} to
      * all registered listeners.
      *
-     * @param generator  the generator (<code>null</code> not permitted).
+     * @param generator  the generator ({@code null} not permitted).
      *
      * @see #getLegendLabelGenerator()
      */
@@ -2266,7 +2266,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     /**
      * Returns the legend label tool tip generator.
      *
-     * @return The legend label tool tip generator (possibly <code>null</code>).
+     * @return The legend label tool tip generator (possibly {@code null}).
      *
      * @see #setLegendLabelToolTipGenerator(PieSectionLabelGenerator)
      */
@@ -2278,7 +2278,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * Sets the legend label tool tip generator and sends a
      * {@link PlotChangeEvent} to all registered listeners.
      *
-     * @param generator  the generator (<code>null</code> permitted).
+     * @param generator  the generator ({@code null} permitted).
      *
      * @see #getLegendLabelToolTipGenerator()
      */
@@ -2291,7 +2291,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     /**
      * Returns the legend label URL generator.
      *
-     * @return The legend label URL generator (possibly <code>null</code>).
+     * @return The legend label URL generator (possibly {@code null}).
      *
      * @see #setLegendLabelURLGenerator(PieURLGenerator)
      *
@@ -2305,7 +2305,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * Sets the legend label URL generator and sends a
      * {@link PlotChangeEvent} to all registered listeners.
      *
-     * @param generator  the generator (<code>null</code> permitted).
+     * @param generator  the generator ({@code null} permitted).
      *
      * @see #getLegendLabelURLGenerator()
      *
@@ -2319,7 +2319,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     /**
      * Returns the shadow generator for the plot, if any.
      * 
-     * @return The shadow generator (possibly <code>null</code>).
+     * @return The shadow generator (possibly {@code null}).
      * 
      * @since 1.0.14
      */
@@ -2334,7 +2334,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * vector based show option that is controlled via the
      * {@link #setShadowPaint(java.awt.Paint)} method.
      *
-     * @param generator  the generator (<code>null</code> permitted).
+     * @param generator  the generator ({@code null} permitted).
      *
      * @since 1.0.14
      */
@@ -2361,9 +2361,9 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * any state information it wants to maintain.
      *
      * @param g2  the graphics device.
-     * @param plotArea  the plot area (<code>null</code> not permitted).
+     * @param plotArea  the plot area ({@code null} not permitted).
      * @param plot  the plot.
-     * @param index  the secondary index (<code>null</code> for primary
+     * @param index  the secondary index ({@code null} for primary
      *               renderer).
      * @param info  collects chart rendering information for return to caller.
      *
@@ -2390,10 +2390,10 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      *
      * @param g2  the graphics device.
      * @param area  the area within which the plot should be drawn.
-     * @param anchor  the anchor point (<code>null</code> permitted).
+     * @param anchor  the anchor point ({@code null} permitted).
      * @param parentState  the state from the parent plot, if there is one.
      * @param info  collects info about the drawing
-     *              (<code>null</code> permitted).
+     *              ({@code null} permitted).
      */
     @Override
     public void draw(Graphics2D g2, Rectangle2D area, Point2D anchor,
@@ -2590,7 +2590,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     /**
      * Draws a single data item.
      *
-     * @param g2  the graphics device (<code>null</code> not permitted).
+     * @param g2  the graphics device ({@code null} not permitted).
      * @param section  the section index.
      * @param dataArea  the data plot area.
      * @param state  state information for one chart.
@@ -2970,7 +2970,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     /**
      * Returns a collection of legend items for the pie chart.
      *
-     * @return The legend items (never <code>null</code>).
+     * @return The legend items (never {@code null}).
      */
     @Override
     public LegendItemCollection getLegendItems() {
@@ -3272,7 +3272,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * Tests this plot for equality with an arbitrary object.  Note that the
      * plot's dataset is NOT included in the test for equality.
      *
-     * @param obj  the object to test against (<code>null</code> permitted).
+     * @param obj  the object to test against ({@code null} permitted).
      *
      * @return <code>true</code> or <code>false</code>.
      */
@@ -3594,7 +3594,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      *
      * @param section  the section index (zero-based).
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @deprecated Use {@link #getSectionPaint(Comparable)} instead.
      */
@@ -3608,7 +3608,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * {@link PlotChangeEvent} to all registered listeners.
      *
      * @param section  the section index (zero-based).
-     * @param paint  the paint (<code>null</code> permitted).
+     * @param paint  the paint ({@code null} permitted).
      *
      * @deprecated Use {@link #setSectionPaint(Comparable, Paint)} instead.
      */
@@ -3620,7 +3620,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     /**
      * Returns the outline paint for ALL sections in the plot.
      *
-     * @return The paint (possibly <code>null</code>).
+     * @return The paint (possibly {@code null}).
      *
      * @see #setSectionOutlinePaint(Paint)
      *
@@ -3637,7 +3637,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * {@code null}, then a list of paints is used instead (to allow
      * different colors to be used for each section).
      *
-     * @param paint  the paint (<code>null</code> permitted).
+     * @param paint  the paint ({@code null} permitted).
      *
      * @see #getSectionOutlinePaint()
      *
@@ -3655,7 +3655,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      *
      * @param section  the section index (zero-based).
      *
-     * @return The paint (possibly <code>null</code>).
+     * @return The paint (possibly {@code null}).
      *
      * @deprecated Use {@link #getSectionOutlinePaint(Comparable)} instead.
      */
@@ -3669,7 +3669,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * {@link PlotChangeEvent} to all registered listeners.
      *
      * @param section  the section index (zero-based).
-     * @param paint  the paint (<code>null</code> permitted).
+     * @param paint  the paint ({@code null} permitted).
      *
      * @deprecated Use {@link #setSectionOutlinePaint(Comparable, Paint)}
      *     instead.
@@ -3682,7 +3682,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     /**
      * Returns the outline stroke for ALL sections in the plot.
      *
-     * @return The stroke (possibly <code>null</code>).
+     * @return The stroke (possibly {@code null}).
      *
      * @see #setSectionOutlineStroke(Stroke)
      *
@@ -3699,7 +3699,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * {@code null}, then a list of paints is used instead (to allow
      * different colors to be used for each section).
      *
-     * @param stroke  the stroke (<code>null</code> permitted).
+     * @param stroke  the stroke ({@code null} permitted).
      *
      * @see #getSectionOutlineStroke()
      *
@@ -3717,7 +3717,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      *
      * @param section  the section index (zero-based).
      *
-     * @return The stroke (possibly <code>null</code>).
+     * @return The stroke (possibly {@code null}).
      *
      * @deprecated Use {@link #getSectionOutlineStroke(Comparable)} instead.
      */
@@ -3731,7 +3731,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * {@link PlotChangeEvent} to all registered listeners.
      *
      * @param section  the section index (zero-based).
-     * @param stroke  the stroke (<code>null</code> permitted).
+     * @param stroke  the stroke ({@code null} permitted).
      *
      * @deprecated Use {@link #setSectionOutlineStroke(Comparable, Stroke)}
      *     instead.

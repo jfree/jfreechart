@@ -157,7 +157,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
     /**
      * Constructs an empty dataset, tied to a specific timezone.
      *
-     * @param zone  the timezone (<code>null</code> permitted, will use
+     * @param zone  the timezone ({@code null} permitted, will use
      *              <code>TimeZone.getDefault()</code> in that case).
      */
     public TimeSeriesCollection(TimeZone zone) {
@@ -169,7 +169,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      * Constructs a dataset containing a single series (more can be added),
      * tied to the default timezone.
      *
-     * @param series the series (<code>null</code> permitted).
+     * @param series the series ({@code null} permitted).
      */
     public TimeSeriesCollection(TimeSeries series) {
         this(series, TimeZone.getDefault());
@@ -179,9 +179,9 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      * Constructs a dataset containing a single series (more can be added),
      * tied to a specific timezone.
      *
-     * @param series  a series to add to the collection (<code>null</code>
+     * @param series  a series to add to the collection ({@code null}
      *                permitted).
-     * @param zone  the timezone (<code>null</code> permitted, will use
+     * @param zone  the timezone ({@code null} permitted, will use
      *              <code>TimeZone.getDefault()</code> in that case).
      */
     public TimeSeriesCollection(TimeSeries series, TimeZone zone) {
@@ -245,7 +245,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      * value when the collection is used as an
      * {@link org.jfree.data.xy.XYDataset}.
      *
-     * @return The anchor position (never <code>null</code>).
+     * @return The anchor position (never {@code null}).
      */
     public TimePeriodAnchor getXPosition() {
         return this.xPosition;
@@ -256,7 +256,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      * when the collection is used as an {@link XYDataset}, then sends a
      * {@link DatasetChangeEvent} is sent to all registered listeners.
      *
-     * @param anchor  the anchor position (<code>null</code> not permitted).
+     * @param anchor  the anchor position ({@code null} not permitted).
      */
     public void setXPosition(TimePeriodAnchor anchor) {
         ParamChecks.nullNotPermitted(anchor, "anchor");
@@ -287,7 +287,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      * Returns the index of the specified series, or -1 if that series is not
      * present in the dataset.
      *
-     * @param series  the series (<code>null</code> not permitted).
+     * @param series  the series ({@code null} not permitted).
      *
      * @return The series index.
      *
@@ -314,10 +314,10 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
     }
 
     /**
-     * Returns the series with the specified key, or <code>null</code> if
+     * Returns the series with the specified key, or {@code null} if
      * there is no such series.
      *
-     * @param key  the series key (<code>null</code> permitted).
+     * @param key  the series key ({@code null} permitted).
      *
      * @return The series with the given key.
      */
@@ -352,7 +352,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      * Returns the index of the series with the specified key, or -1 if no
      * series has that key.
      * 
-     * @param key  the key (<code>null</code> not permitted).
+     * @param key  the key ({@code null} not permitted).
      * 
      * @return The index.
      * 
@@ -374,7 +374,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      * Adds a series to the collection and sends a {@link DatasetChangeEvent} to
      * all registered listeners.
      *
-     * @param series  the series (<code>null</code> not permitted).
+     * @param series  the series ({@code null} not permitted).
      */
     public void addSeries(TimeSeries series) {
         ParamChecks.nullNotPermitted(series, "series");
@@ -388,7 +388,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      * Removes the specified series from the collection and sends a
      * {@link DatasetChangeEvent} to all registered listeners.
      *
-     * @param series  the series (<code>null</code> not permitted).
+     * @param series  the series ({@code null} not permitted).
      */
     public void removeSeries(TimeSeries series) {
         ParamChecks.nullNotPermitted(series, "series");
@@ -476,7 +476,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
     /**
      * Returns the x-value for a time period.
      *
-     * @param period  the time period (<code>null</code> not permitted).
+     * @param period  the time period ({@code null} not permitted).
      *
      * @return The x-value.
      */
@@ -530,7 +530,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      * @param series  the series (zero-based index).
      * @param item  the item (zero-based index).
      *
-     * @return The value (possibly <code>null</code>).
+     * @return The value (possibly {@code null}).
      */
     @Override
     public Number getY(int series, int item) {
@@ -544,7 +544,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      * @param series  the series (zero-based index).
      * @param item  the item (zero-based index).
      *
-     * @return The value (possibly <code>null</code>).
+     * @return The value (possibly {@code null}).
      */
     @Override
     public Number getStartY(int series, int item) {
@@ -557,7 +557,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      * @param series  te series (zero-based index).
      * @param item  the item (zero-based index).
      *
-     * @return The value (possibly <code>null</code>).
+     * @return The value (possibly {@code null}).
      */
     @Override
     public Number getEndY(int series, int item) {
@@ -703,7 +703,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      * 
      * @param includeInterval  ignored for this dataset.
      * 
-     * @return The range of value in the dataset (possibly <code>null</code>).
+     * @return The range of value in the dataset (possibly {@code null}).
      *
      * @since 1.0.15
      */
@@ -722,7 +722,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      * Returns the bounds for the y-values in the dataset.
      *
      * @param visibleSeriesKeys  the visible series keys.
-     * @param xRange  the x-range (<code>null</code> not permitted).
+     * @param xRange  the x-range ({@code null} not permitted).
      * @param includeInterval  ignored.
      *
      * @return The bounds.

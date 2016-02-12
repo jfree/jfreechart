@@ -209,7 +209,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
     /**
      * Constructs a category axis, using default values where necessary.
      *
-     * @param label  the axis label (<code>null</code> permitted).
+     * @param label  the axis label ({@code null} permitted).
      */
     public CategoryAxis(String label) {
         super(label);
@@ -384,7 +384,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * Returns the category label position specification (this contains label
      * positioning info for all four possible axis locations).
      *
-     * @return The positions (never <code>null</code>).
+     * @return The positions (never {@code null}).
      *
      * @see #setCategoryLabelPositions(CategoryLabelPositions)
      */
@@ -396,7 +396,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * Sets the category label position specification for the axis and sends an
      * {@link AxisChangeEvent} to all registered listeners.
      *
-     * @param positions  the positions (<code>null</code> not permitted).
+     * @param positions  the positions ({@code null} not permitted).
      *
      * @see #getCategoryLabelPositions()
      */
@@ -409,9 +409,9 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
     /**
      * Returns the font for the tick label for the given category.
      *
-     * @param category  the category (<code>null</code> not permitted).
+     * @param category  the category ({@code null} not permitted).
      *
-     * @return The font (never <code>null</code>).
+     * @return The font (never {@code null}).
      *
      * @see #setTickLabelFont(Comparable, Font)
      */
@@ -429,8 +429,8 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * Sets the font for the tick label for the specified category and sends
      * an {@link AxisChangeEvent} to all registered listeners.
      *
-     * @param category  the category (<code>null</code> not permitted).
-     * @param font  the font (<code>null</code> permitted).
+     * @param category  the category ({@code null} not permitted).
+     * @param font  the font ({@code null} permitted).
      *
      * @see #getTickLabelFont(Comparable)
      */
@@ -448,9 +448,9 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
     /**
      * Returns the paint for the tick label for the given category.
      *
-     * @param category  the category (<code>null</code> not permitted).
+     * @param category  the category ({@code null} not permitted).
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @see #setTickLabelPaint(Paint)
      */
@@ -468,8 +468,8 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * Sets the paint for the tick label for the specified category and sends
      * an {@link AxisChangeEvent} to all registered listeners.
      *
-     * @param category  the category (<code>null</code> not permitted).
-     * @param paint  the paint (<code>null</code> permitted).
+     * @param category  the category ({@code null} not permitted).
+     * @param paint  the paint ({@code null} permitted).
      *
      * @see #getTickLabelPaint(Comparable)
      */
@@ -488,8 +488,8 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * Adds a tooltip to the specified category and sends an
      * {@link AxisChangeEvent} to all registered listeners.
      *
-     * @param category  the category (<code>null</code> not permitted).
-     * @param tooltip  the tooltip text (<code>null</code> permitted).
+     * @param category  the category ({@code null} not permitted).
+     * @param tooltip  the tooltip text ({@code null} permitted).
      *
      * @see #removeCategoryLabelToolTip(Comparable)
      */
@@ -503,9 +503,9 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * Returns the tool tip text for the label belonging to the specified
      * category.
      *
-     * @param category  the category (<code>null</code> not permitted).
+     * @param category  the category ({@code null} not permitted).
      *
-     * @return The tool tip text (possibly <code>null</code>).
+     * @return The tool tip text (possibly {@code null}).
      *
      * @see #addCategoryLabelToolTip(Comparable, String)
      * @see #removeCategoryLabelToolTip(Comparable)
@@ -520,7 +520,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * associated with that category, sends an {@link AxisChangeEvent} to all 
      * registered listeners.
      *
-     * @param category  the category (<code>null</code> not permitted).
+     * @param category  the category ({@code null} not permitted).
      *
      * @see #addCategoryLabelToolTip(Comparable, String)
      * @see #clearCategoryLabelToolTips()
@@ -548,8 +548,8 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * Adds a URL (to be used in image maps) to the specified category and 
      * sends an {@link AxisChangeEvent} to all registered listeners.
      *
-     * @param category  the category (<code>null</code> not permitted).
-     * @param url  the URL text (<code>null</code> permitted).
+     * @param category  the category ({@code null} not permitted).
+     * @param url  the URL text ({@code null} permitted).
      *
      * @see #removeCategoryLabelURL(Comparable)
      * 
@@ -564,9 +564,9 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
     /**
      * Returns the URL for the label belonging to the specified category.
      *
-     * @param category  the category (<code>null</code> not permitted).
+     * @param category  the category ({@code null} not permitted).
      *
-     * @return The URL text (possibly <code>null</code>).
+     * @return The URL text (possibly {@code null}).
      * 
      * @see #addCategoryLabelURL(Comparable, String)
      * @see #removeCategoryLabelURL(Comparable)
@@ -583,7 +583,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * associated with that category, sends an {@link AxisChangeEvent} to all 
      * registered listeners.
      *
-     * @param category  the category (<code>null</code> not permitted).
+     * @param category  the category ({@code null} not permitted).
      *
      * @see #addCategoryLabelURL(Comparable, String)
      * @see #clearCategoryLabelURLs()
@@ -721,10 +721,10 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * A convenience method that returns the axis coordinate for the centre of
      * a category.
      *
-     * @param category  the category key (<code>null</code> not permitted).
-     * @param categories  the categories (<code>null</code> not permitted).
-     * @param area  the data area (<code>null</code> not permitted).
-     * @param edge  the edge along which the axis lies (<code>null</code> not
+     * @param category  the category key ({@code null} not permitted).
+     * @param categories  the categories ({@code null} not permitted).
+     * @param area  the data area ({@code null} not permitted).
+     * @param edge  the edge along which the axis lies ({@code null} not
      *     permitted).
      *
      * @return The centre coordinate.
@@ -746,12 +746,12 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * Returns the middle coordinate (in Java2D space) for a series within a
      * category.
      *
-     * @param category  the category (<code>null</code> not permitted).
-     * @param seriesKey  the series key (<code>null</code> not permitted).
-     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param category  the category ({@code null} not permitted).
+     * @param seriesKey  the series key ({@code null} not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
      * @param itemMargin  the item margin (0.0 &lt;= itemMargin &lt; 1.0);
-     * @param area  the area (<code>null</code> not permitted).
-     * @param edge  the edge (<code>null</code> not permitted).
+     * @param area  the area ({@code null} not permitted).
+     * @param edge  the edge ({@code null} not permitted).
      *
      * @return The coordinate in Java2D space.
      *
@@ -788,8 +788,8 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * @param seriesIndex the series index.
      * @param seriesCount the series count.
      * @param itemMargin  the item margin (0.0 &lt;= itemMargin &lt; 1.0);
-     * @param area  the area (<code>null</code> not permitted).
-     * @param edge  the edge (<code>null</code> not permitted).
+     * @param area  the area ({@code null} not permitted).
+     * @param edge  the edge ({@code null} not permitted).
      *
      * @return The coordinate in Java2D space.
      *
@@ -951,17 +951,17 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * Draws the axis on a Java 2D graphics device (such as the screen or a
      * printer).
      *
-     * @param g2  the graphics device (<code>null</code> not permitted).
+     * @param g2  the graphics device ({@code null} not permitted).
      * @param cursor  the cursor location.
      * @param plotArea  the area within which the axis should be drawn
-     *                  (<code>null</code> not permitted).
+     *                  ({@code null} not permitted).
      * @param dataArea  the area within which the plot is being drawn
-     *                  (<code>null</code> not permitted).
-     * @param edge  the location of the axis (<code>null</code> not permitted).
+     *                  ({@code null} not permitted).
+     * @param edge  the location of the axis ({@code null} not permitted).
      * @param plotState  collects information about the plot
-     *                   (<code>null</code> permitted).
+     *                   ({@code null} permitted).
      *
-     * @return The axis state (never <code>null</code>).
+     * @return The axis state (never {@code null}).
      */
     @Override
     public AxisState draw(Graphics2D g2, double cursor, Rectangle2D plotArea,
@@ -1000,16 +1000,16 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
     /**
      * Draws the category labels and returns the updated axis state.
      *
-     * @param g2  the graphics device (<code>null</code> not permitted).
-     * @param plotArea  the plot area (<code>null</code> not permitted).
-     * @param dataArea  the area inside the axes (<code>null</code> not
+     * @param g2  the graphics device ({@code null} not permitted).
+     * @param plotArea  the plot area ({@code null} not permitted).
+     * @param dataArea  the area inside the axes ({@code null} not
      *                  permitted).
-     * @param edge  the axis location (<code>null</code> not permitted).
-     * @param state  the axis state (<code>null</code> not permitted).
-     * @param plotState  collects information about the plot (<code>null</code>
+     * @param edge  the axis location ({@code null} not permitted).
+     * @param state  the axis state ({@code null} not permitted).
+     * @param plotState  collects information about the plot ({@code null}
      *                   permitted).
      *
-     * @return The updated axis state (never <code>null</code>).
+     * @return The updated axis state (never {@code null}).
      */
     protected AxisState drawCategoryLabels(Graphics2D g2, Rectangle2D plotArea,
             Rectangle2D dataArea, RectangleEdge edge, AxisState state,
@@ -1345,7 +1345,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
     /**
      * Tests this axis for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */
@@ -1469,7 +1469,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * Writes a map of (<code>Comparable</code>, <code>Paint</code>)
      * elements to a stream.
      *
-     * @param map  the map (<code>null</code> permitted).
+     * @param map  the map ({@code null} permitted).
      *
      * @param out
      * @throws IOException
@@ -1499,8 +1499,8 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * Tests two maps containing (<code>Comparable</code>, <code>Paint</code>)
      * elements for equality.
      *
-     * @param map1  the first map (<code>null</code> not permitted).
-     * @param map2  the second map (<code>null</code> not permitted).
+     * @param map1  the first map ({@code null} not permitted).
+     * @param map2  the second map ({@code null} not permitted).
      *
      * @return A boolean.
      */
@@ -1524,15 +1524,15 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
     /**
      * Draws the category labels and returns the updated axis state.
      *
-     * @param g2  the graphics device (<code>null</code> not permitted).
-     * @param dataArea  the area inside the axes (<code>null</code> not
+     * @param g2  the graphics device ({@code null} not permitted).
+     * @param dataArea  the area inside the axes ({@code null} not
      *                  permitted).
-     * @param edge  the axis location (<code>null</code> not permitted).
-     * @param state  the axis state (<code>null</code> not permitted).
-     * @param plotState  collects information about the plot (<code>null</code>
+     * @param edge  the axis location ({@code null} not permitted).
+     * @param state  the axis state ({@code null} not permitted).
+     * @param plotState  collects information about the plot ({@code null}
      *                   permitted).
      *
-     * @return The updated axis state (never <code>null</code>).
+     * @return The updated axis state (never {@code null}).
      *
      * @deprecated Use {@link #drawCategoryLabels(Graphics2D, Rectangle2D,
      *     Rectangle2D, RectangleEdge, AxisState, PlotRenderingInfo)}.

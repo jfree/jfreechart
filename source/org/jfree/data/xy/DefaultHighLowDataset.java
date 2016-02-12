@@ -90,14 +90,14 @@ public class DefaultHighLowDataset extends AbstractXYDataset
      * The current implementation allows only one series in the dataset.
      * This may be extended in a future version.
      *
-     * @param seriesKey  the key for the series (<code>null</code> not
+     * @param seriesKey  the key for the series ({@code null} not
      *     permitted).
-     * @param date  the dates (<code>null</code> not permitted).
-     * @param high  the high values (<code>null</code> not permitted).
-     * @param low  the low values (<code>null</code> not permitted).
-     * @param open  the open values (<code>null</code> not permitted).
-     * @param close  the close values (<code>null</code> not permitted).
-     * @param volume  the volume values (<code>null</code> not permitted).
+     * @param date  the dates ({@code null} not permitted).
+     * @param high  the high values ({@code null} not permitted).
+     * @param low  the low values ({@code null} not permitted).
+     * @param open  the open values ({@code null} not permitted).
+     * @param close  the close values ({@code null} not permitted).
+     * @param volume  the volume values ({@code null} not permitted).
      */
     public DefaultHighLowDataset(Comparable seriesKey, Date[] date,
             double[] high, double[] low, double[] open, double[] close,
@@ -121,7 +121,7 @@ public class DefaultHighLowDataset extends AbstractXYDataset
      * @param series  the index of the series (ignored, this dataset supports
      *     only one series and this method always returns the key for series 0).
      *
-     * @return The series key (never <code>null</code>).
+     * @return The series key (never {@code null}).
      */
     @Override
     public Comparable getSeriesKey(int series) {
@@ -388,7 +388,7 @@ public class DefaultHighLowDataset extends AbstractXYDataset
     /**
      * Tests this dataset for equality with an arbitrary instance.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */
@@ -428,7 +428,7 @@ public class DefaultHighLowDataset extends AbstractXYDataset
     /**
      * Constructs an array of Number objects from an array of doubles.
      *
-     * @param data  the double values to convert (<code>null</code> not
+     * @param data  the double values to convert ({@code null} not
      *     permitted).
      *
      * @return The data as an array of Number objects.

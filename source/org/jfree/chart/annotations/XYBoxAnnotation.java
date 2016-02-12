@@ -115,8 +115,8 @@ public class XYBoxAnnotation extends AbstractXYAnnotation
      * @param y0  the lower y-coordinate of the box (in data space).
      * @param x1  the upper x-coordinate of the box (in data space).
      * @param y1  the upper y-coordinate of the box (in data space).
-     * @param stroke  the shape stroke (<code>null</code> permitted).
-     * @param outlinePaint  the shape color (<code>null</code> permitted).
+     * @param stroke  the shape stroke ({@code null} permitted).
+     * @param outlinePaint  the shape color ({@code null} permitted).
      */
     public XYBoxAnnotation(double x0, double y0, double x1, double y1,
                            Stroke stroke, Paint outlinePaint) {
@@ -130,9 +130,9 @@ public class XYBoxAnnotation extends AbstractXYAnnotation
      * @param y0  the lower y-coordinate of the box (in data space).
      * @param x1  the upper x-coordinate of the box (in data space).
      * @param y1  the upper y-coordinate of the box (in data space).
-     * @param stroke  the shape stroke (<code>null</code> permitted).
-     * @param outlinePaint  the shape color (<code>null</code> permitted).
-     * @param fillPaint  the paint used to fill the shape (<code>null</code>
+     * @param stroke  the shape stroke ({@code null} permitted).
+     * @param outlinePaint  the shape color ({@code null} permitted).
+     * @param fillPaint  the paint used to fill the shape ({@code null}
      *                   permitted).
      */
     public XYBoxAnnotation(double x0, double y0, double x1, double y1,
@@ -204,7 +204,7 @@ public class XYBoxAnnotation extends AbstractXYAnnotation
     /**
      * Tests this annotation for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */
@@ -282,7 +282,7 @@ public class XYBoxAnnotation extends AbstractXYAnnotation
     /**
      * Provides serialization support.
      *
-     * @param stream  the output stream (<code>null</code> not permitted).
+     * @param stream  the output stream ({@code null} not permitted).
      *
      * @throws IOException if there is an I/O error.
      */
@@ -296,7 +296,7 @@ public class XYBoxAnnotation extends AbstractXYAnnotation
     /**
      * Provides serialization support.
      *
-     * @param stream  the input stream (<code>null</code> not permitted).
+     * @param stream  the input stream ({@code null} not permitted).
      *
      * @throws IOException  if there is an I/O error.
      * @throws ClassNotFoundException  if there is a classpath problem.

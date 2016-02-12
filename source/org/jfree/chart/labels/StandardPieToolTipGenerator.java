@@ -101,7 +101,7 @@ public class StandardPieToolTipGenerator extends AbstractPieItemLabelGenerator
      * Creates a pie tool tip generator for the specified locale, using the
      * default format string.
      *
-     * @param locale  the locale (<code>null</code> not permitted).
+     * @param locale  the locale ({@code null} not permitted).
      *
      * @since 1.0.7
      */
@@ -112,7 +112,7 @@ public class StandardPieToolTipGenerator extends AbstractPieItemLabelGenerator
     /**
      * Creates a pie tool tip generator for the default locale.
      *
-     * @param labelFormat  the label format (<code>null</code> not permitted).
+     * @param labelFormat  the label format ({@code null} not permitted).
      */
     public StandardPieToolTipGenerator(String labelFormat) {
         this(labelFormat, Locale.getDefault());
@@ -121,8 +121,8 @@ public class StandardPieToolTipGenerator extends AbstractPieItemLabelGenerator
     /**
      * Creates a pie tool tip generator for the specified locale.
      *
-     * @param labelFormat  the label format (<code>null</code> not permitted).
-     * @param locale  the locale (<code>null</code> not permitted).
+     * @param labelFormat  the label format ({@code null} not permitted).
+     * @param locale  the locale ({@code null} not permitted).
      *
      * @since 1.0.7
      */
@@ -134,12 +134,12 @@ public class StandardPieToolTipGenerator extends AbstractPieItemLabelGenerator
     /**
      * Creates an item label generator using the specified number formatters.
      *
-     * @param labelFormat  the label format string (<code>null</code> not
+     * @param labelFormat  the label format string ({@code null} not
      *                     permitted).
-     * @param numberFormat  the format object for the values (<code>null</code>
+     * @param numberFormat  the format object for the values ({@code null}
      *                      not permitted).
      * @param percentFormat  the format object for the percentages
-     *                       (<code>null</code> not permitted).
+     *                       ({@code null} not permitted).
      */
     public StandardPieToolTipGenerator(String labelFormat,
             NumberFormat numberFormat, NumberFormat percentFormat) {
@@ -149,10 +149,10 @@ public class StandardPieToolTipGenerator extends AbstractPieItemLabelGenerator
     /**
      * Generates a tool tip text item for one section in a pie chart.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
-     * @param key  the section key (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
+     * @param key  the section key ({@code null} not permitted).
      *
-     * @return The tool tip text (possibly <code>null</code>).
+     * @return The tool tip text (possibly {@code null}).
      */
     @Override
     public String generateToolTip(PieDataset dataset, Comparable key) {

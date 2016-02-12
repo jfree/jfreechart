@@ -199,7 +199,7 @@ public class LineRenderer3D extends LineAndShapeRenderer
      * background, and sends a {@link RendererChangeEvent} to all
      * registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getWallPaint()
      */
@@ -616,7 +616,7 @@ public class LineRenderer3D extends LineAndShapeRenderer
     /**
      * Checks this renderer for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

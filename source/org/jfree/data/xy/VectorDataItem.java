@@ -68,7 +68,7 @@ public class VectorDataItem extends ComparableObjectItem {
     /**
      * Returns the x-value.
      *
-     * @return The x-value (never <code>null</code>).
+     * @return The x-value (never {@code null}).
      */
     public double getXValue() {
         XYCoordinate xy = (XYCoordinate) getComparable();
@@ -88,7 +88,7 @@ public class VectorDataItem extends ComparableObjectItem {
     /**
      * Returns the vector.
      *
-     * @return The vector (possibly <code>null</code>).
+     * @return The vector (possibly {@code null}).
      */
     public Vector getVector() {
         return (Vector) getObject();

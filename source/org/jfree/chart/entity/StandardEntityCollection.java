@@ -114,7 +114,7 @@ public class StandardEntityCollection implements EntityCollection,
     /**
      * Adds an entity to the collection.
      *
-     * @param entity  the entity (<code>null</code> not permitted).
+     * @param entity  the entity ({@code null} not permitted).
      */
     @Override
     public void add(ChartEntity entity) {
@@ -125,7 +125,7 @@ public class StandardEntityCollection implements EntityCollection,
     /**
      * Adds all the entities from the specified collection.
      *
-     * @param collection  the collection of entities (<code>null</code> not
+     * @param collection  the collection of entities ({@code null} not
      *     permitted).
      */
     @Override
@@ -135,12 +135,12 @@ public class StandardEntityCollection implements EntityCollection,
 
     /**
      * Returns the last entity in the list with an area that encloses the
-     * specified coordinates, or <code>null</code> if there is no such entity.
+     * specified coordinates, or {@code null} if there is no such entity.
      *
      * @param x  the x coordinate.
      * @param y  the y coordinate.
      *
-     * @return The entity (possibly <code>null</code>).
+     * @return The entity (possibly {@code null}).
      */
     @Override
     public ChartEntity getEntity(double x, double y) {
@@ -177,7 +177,7 @@ public class StandardEntityCollection implements EntityCollection,
     /**
      * Tests this object for equality with an arbitrary object.
      *
-     * @param obj  the object to test against (<code>null</code> permitted).
+     * @param obj  the object to test against ({@code null} permitted).
      *
      * @return A boolean.
      */

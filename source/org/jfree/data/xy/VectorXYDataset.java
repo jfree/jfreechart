@@ -82,7 +82,7 @@ public interface VectorXYDataset extends XYDataset {
      * @param series  the series index.
      * @param item  the item index.
      *
-     * @return The vector (possibly <code>null</code>).
+     * @return The vector (possibly {@code null}).
      */
     public Vector getVector(int series, int item);
 

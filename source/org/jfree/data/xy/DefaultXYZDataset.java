@@ -116,7 +116,7 @@ public class DefaultXYZDataset extends AbstractXYZDataset
      * Returns the index of the series with the specified key, or -1 if there
      * is no such series in the dataset.
      *
-     * @param seriesKey  the series key (<code>null</code> permitted).
+     * @param seriesKey  the series key ({@code null} permitted).
      *
      * @return The index, or -1.
      */
@@ -297,7 +297,7 @@ public class DefaultXYZDataset extends AbstractXYZDataset
      * the data for that series, then sends a {@link DatasetChangeEvent} to
      * all registered listeners.
      *
-     * @param seriesKey  the series key (<code>null</code> not permitted).
+     * @param seriesKey  the series key ({@code null} not permitted).
      * @param data  the data (must be an array with length 3, containing three
      *     arrays of equal length, the first containing the x-values, the
      *     second containing the y-values and the third containing the
@@ -336,7 +336,7 @@ public class DefaultXYZDataset extends AbstractXYZDataset
      * Removes a series from the dataset, then sends a
      * {@link DatasetChangeEvent} to all registered listeners.
      *
-     * @param seriesKey  the series key (<code>null</code> not permitted).
+     * @param seriesKey  the series key ({@code null} not permitted).
      *
      */
     public void removeSeries(Comparable seriesKey) {
@@ -352,14 +352,14 @@ public class DefaultXYZDataset extends AbstractXYZDataset
      * Tests this <code>DefaultXYDataset</code> instance for equality with an
      * arbitrary object.  This method returns <code>true</code> if and only if:
      * <ul>
-     * <li><code>obj</code> is not <code>null</code>;</li>
+     * <li><code>obj</code> is not {@code null};</li>
      * <li><code>obj</code> is an instance of
      *         <code>DefaultXYDataset</code>;</li>
      * <li>both datasets have the same number of series, each containing
      *         exactly the same values.</li>
      * </ul>
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

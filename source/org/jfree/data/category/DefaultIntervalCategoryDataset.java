@@ -86,9 +86,9 @@ public class DefaultIntervalCategoryDataset extends AbstractSeriesDataset
      * Creates a new dataset using the specified data values and automatically
      * generated series and category keys.
      *
-     * @param starts  the starting values for the intervals (<code>null</code>
+     * @param starts  the starting values for the intervals ({@code null}
      *                not permitted).
-     * @param ends  the ending values for the intervals (<code>null</code> not
+     * @param ends  the ending values for the intervals ({@code null} not
      *                permitted).
      */
     public DefaultIntervalCategoryDataset(double[][] starts, double[][] ends) {
@@ -118,7 +118,7 @@ public class DefaultIntervalCategoryDataset extends AbstractSeriesDataset
      * Category names are generated automatically ("Category 1", "Category 2",
      * etc).
      *
-     * @param seriesNames  the series names (if <code>null</code>, series names
+     * @param seriesNames  the series names (if {@code null}, series names
      *         will be generated automatically).
      * @param starts  the start values data, indexed as data[series][category].
      * @param ends  the end values data, indexed as data[series][category].
@@ -136,9 +136,9 @@ public class DefaultIntervalCategoryDataset extends AbstractSeriesDataset
      * from the arrays, and uses the supplied names for the series and the
      * supplied objects for the categories.
      *
-     * @param seriesKeys  the series keys (if <code>null</code>, series keys
+     * @param seriesKeys  the series keys (if {@code null}, series keys
      *         will be generated automatically).
-     * @param categoryKeys  the category keys (if <code>null</code>, category
+     * @param categoryKeys  the category keys (if {@code null}, category
      *         keys will be generated automatically).
      * @param starts  the start values data, indexed as data[series][category].
      * @param ends  the end values data, indexed as data[series][category].
@@ -274,7 +274,7 @@ public class DefaultIntervalCategoryDataset extends AbstractSeriesDataset
     /**
      * Sets the names of the series in the dataset.
      *
-     * @param seriesKeys  the new keys (<code>null</code> not permitted, the
+     * @param seriesKeys  the new keys ({@code null} not permitted, the
      *         length of the array must match the number of series in the
      *         dataset).
      *
@@ -405,7 +405,7 @@ public class DefaultIntervalCategoryDataset extends AbstractSeriesDataset
      * @param category  the required category.
      *
      * @return The start data value for one category in a series
-     *         (possibly <code>null</code>).
+     *         (possibly {@code null}).
      *
      * @see #getStartValue(int, int)
      */
@@ -429,7 +429,7 @@ public class DefaultIntervalCategoryDataset extends AbstractSeriesDataset
      * @param category  the required category.
      *
      * @return The start data value for one category in a series
-     *         (possibly <code>null</code>).
+     *         (possibly {@code null}).
      *
      * @see #getStartValue(Comparable, Comparable)
      */
@@ -573,7 +573,7 @@ public class DefaultIntervalCategoryDataset extends AbstractSeriesDataset
     /**
      * Returns the index for the given category.
      *
-     * @param category  the category (<code>null</code> not permitted).
+     * @param category  the category ({@code null} not permitted).
      *
      * @return The index.
      *
@@ -626,7 +626,7 @@ public class DefaultIntervalCategoryDataset extends AbstractSeriesDataset
     /**
      * Returns a column index.
      *
-     * @param columnKey  the column key (<code>null</code> not permitted).
+     * @param columnKey  the column key ({@code null} not permitted).
      *
      * @return The column index.
      *
@@ -720,7 +720,7 @@ public class DefaultIntervalCategoryDataset extends AbstractSeriesDataset
     /**
      * Tests this dataset for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */
@@ -772,8 +772,8 @@ public class DefaultIntervalCategoryDataset extends AbstractSeriesDataset
     /**
      * Tests two double[][] arrays for equality.
      *
-     * @param array1  the first array (<code>null</code> permitted).
-     * @param array2  the second arrray (<code>null</code> permitted).
+     * @param array1  the first array ({@code null} permitted).
+     * @param array2  the second arrray ({@code null} permitted).
      *
      * @return A boolean.
      */
@@ -798,7 +798,7 @@ public class DefaultIntervalCategoryDataset extends AbstractSeriesDataset
     /**
      * Clones a two dimensional array of <code>Number</code> objects.
      *
-     * @param array  the array (<code>null</code> not permitted).
+     * @param array  the array ({@code null} not permitted).
      *
      * @return A clone of the array.
      */

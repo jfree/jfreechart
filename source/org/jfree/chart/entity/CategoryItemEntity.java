@@ -113,7 +113,7 @@ public class CategoryItemEntity extends ChartEntity
     /**
      * Creates a new category item entity.
      *
-     * @param area  the area (<code>null</code> not permitted).
+     * @param area  the area ({@code null} not permitted).
      * @param toolTipText  the tool tip text.
      * @param urlText  the URL text for HTML image maps.
      * @param dataset  the dataset.
@@ -141,12 +141,12 @@ public class CategoryItemEntity extends ChartEntity
     /**
      * Creates a new entity instance for an item in the specified dataset.
      *
-     * @param area  the 'hotspot' area (<code>null</code> not permitted).
+     * @param area  the 'hotspot' area ({@code null} not permitted).
      * @param toolTipText  the tool tip text.
      * @param urlText  the URL text.
-     * @param dataset  the dataset (<code>null</code> not permitted).
-     * @param rowKey  the row key (<code>null</code> not permitted).
-     * @param columnKey  the column key (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
+     * @param rowKey  the row key ({@code null} not permitted).
+     * @param columnKey  the column key ({@code null} not permitted).
      *
      * @since 1.0.6
      */
@@ -169,7 +169,7 @@ public class CategoryItemEntity extends ChartEntity
      * differentiate between items in a chart that displays more than one
      * dataset.
      *
-     * @return The dataset (never <code>null</code>).
+     * @return The dataset (never {@code null}).
      *
      * @see #setDataset(CategoryDataset)
      */
@@ -180,7 +180,7 @@ public class CategoryItemEntity extends ChartEntity
     /**
      * Sets the dataset this entity refers to.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
      *
      * @see #getDataset()
      */
@@ -192,7 +192,7 @@ public class CategoryItemEntity extends ChartEntity
     /**
      * Returns the row key.
      *
-     * @return The row key (never <code>null</code>).
+     * @return The row key (never {@code null}).
      *
      * @since 1.0.6
      *
@@ -205,7 +205,7 @@ public class CategoryItemEntity extends ChartEntity
     /**
      * Sets the row key.
      *
-     * @param rowKey  the row key (<code>null</code> not permitted).
+     * @param rowKey  the row key ({@code null} not permitted).
      *
      * @since 1.0.6
      *
@@ -220,7 +220,7 @@ public class CategoryItemEntity extends ChartEntity
     /**
      * Returns the column key.
      *
-     * @return The column key (never <code>null</code>).
+     * @return The column key (never {@code null}).
      *
      * @since 1.0.6
      *
@@ -233,7 +233,7 @@ public class CategoryItemEntity extends ChartEntity
     /**
      * Sets the column key.
      *
-     * @param columnKey  the column key (<code>null</code> not permitted).
+     * @param columnKey  the column key ({@code null} not permitted).
      *
      * @since 1.0.6
      *
@@ -277,7 +277,7 @@ public class CategoryItemEntity extends ChartEntity
     /**
      * Returns the category.
      *
-     * @return The category (possibly <code>null</code>).
+     * @return The category (possibly {@code null}).
      *
      * @see #setCategory(Object)
      *
@@ -292,7 +292,7 @@ public class CategoryItemEntity extends ChartEntity
     /**
      * Sets the category.
      *
-     * @param category  the category (<code>null</code> permitted).
+     * @param category  the category ({@code null} permitted).
      *
      * @see #getCategory()
      *
@@ -334,7 +334,7 @@ public class CategoryItemEntity extends ChartEntity
      * Returns a string representing this object (useful for debugging
      * purposes).
      *
-     * @return A string (never <code>null</code>).
+     * @return A string (never {@code null}).
      */
     @Override
     public String toString() {
@@ -345,7 +345,7 @@ public class CategoryItemEntity extends ChartEntity
     /**
      * Tests the entity for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

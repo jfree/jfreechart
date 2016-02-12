@@ -81,9 +81,9 @@ public class ItemLabelPosition implements Serializable {
     /**
      * Creates a new position record (with zero rotation).
      *
-     * @param itemLabelAnchor  the item label anchor (<code>null</code> not
+     * @param itemLabelAnchor  the item label anchor ({@code null} not
      *                         permitted).
-     * @param textAnchor  the text anchor (<code>null</code> not permitted).
+     * @param textAnchor  the text anchor ({@code null} not permitted).
      */
     public ItemLabelPosition(ItemLabelAnchor itemLabelAnchor,
                              TextAnchor textAnchor) {
@@ -96,10 +96,10 @@ public class ItemLabelPosition implements Serializable {
      * The item label is aligned by aligning the text anchor with the
      * item label anchor.
      *
-     * @param itemLabelAnchor  the item label anchor (<code>null</code> not
+     * @param itemLabelAnchor  the item label anchor ({@code null} not
      *                         permitted).
-     * @param textAnchor  the text anchor (<code>null</code> not permitted).
-     * @param rotationAnchor  the rotation anchor (<code>null</code> not
+     * @param textAnchor  the text anchor ({@code null} not permitted).
+     * @param rotationAnchor  the rotation anchor ({@code null} not
      *                        permitted).
      * @param angle  the rotation angle (in radians).
      */
@@ -118,7 +118,7 @@ public class ItemLabelPosition implements Serializable {
     /**
      * Returns the item label anchor.
      *
-     * @return The item label anchor (never <code>null</code>).
+     * @return The item label anchor (never {@code null}).
      */
     public ItemLabelAnchor getItemLabelAnchor() {
         return this.itemLabelAnchor;
@@ -127,7 +127,7 @@ public class ItemLabelPosition implements Serializable {
     /**
      * Returns the text anchor.
      *
-     * @return The text anchor (never <code>null</code>).
+     * @return The text anchor (never {@code null}).
      */
     public TextAnchor getTextAnchor() {
         return this.textAnchor;
@@ -136,7 +136,7 @@ public class ItemLabelPosition implements Serializable {
     /**
      * Returns the rotation anchor point.
      *
-     * @return The rotation anchor point (never <code>null</code>).
+     * @return The rotation anchor point (never {@code null}).
      */
     public TextAnchor getRotationAnchor() {
         return this.rotationAnchor;
@@ -154,7 +154,7 @@ public class ItemLabelPosition implements Serializable {
     /**
      * Tests this object for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

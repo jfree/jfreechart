@@ -82,7 +82,7 @@ public class StandardXYSeriesLabelGenerator implements XYSeriesLabelGenerator,
     /**
      * Creates a new series label generator.
      *
-     * @param format  the format pattern (<code>null</code> not permitted).
+     * @param format  the format pattern ({@code null} not permitted).
      */
     public StandardXYSeriesLabelGenerator(String format) {
         ParamChecks.nullNotPermitted(format, "format");
@@ -93,7 +93,7 @@ public class StandardXYSeriesLabelGenerator implements XYSeriesLabelGenerator,
      * Generates a label for the specified series.  This label will be
      * used for the chart legend.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
      * @param series  the series.
      *
      * @return A series label.
@@ -111,10 +111,10 @@ public class StandardXYSeriesLabelGenerator implements XYSeriesLabelGenerator,
      * Creates the array of items that can be passed to the
      * {@link MessageFormat} class for creating labels.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
      * @param series  the series (zero-based index).
      *
-     * @return The items (never <code>null</code>).
+     * @return The items (never {@code null}).
      */
     protected Object[] createItemArray(XYDataset dataset, int series) {
         Object[] result = new Object[1];
@@ -139,7 +139,7 @@ public class StandardXYSeriesLabelGenerator implements XYSeriesLabelGenerator,
     /**
      * Tests this object for equality with an arbitrary object.
      *
-     * @param obj  the other object (<code>null</code> permitted).
+     * @param obj  the other object ({@code null} permitted).
      *
      * @return A boolean.
      */

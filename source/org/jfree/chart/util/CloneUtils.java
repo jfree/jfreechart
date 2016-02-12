@@ -57,7 +57,7 @@ public class CloneUtils {
      * Returns a list containing cloned copies of the items in the source
      * list.
      * 
-     * @param source  the source list (<code>null</code> not permitted).
+     * @param source  the source list ({@code null} not permitted).
      * 
      * @return A new list. 
      */
@@ -82,7 +82,7 @@ public class CloneUtils {
      * Returns a new map that contains the same keys and cloned copied of the
      * values.
      * 
-     * @param source  the source map (<code>null</code> not permitted).
+     * @param source  the source map ({@code null} not permitted).
      * 
      * @return A new map. 
      * 

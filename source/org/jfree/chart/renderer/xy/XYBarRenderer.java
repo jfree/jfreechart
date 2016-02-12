@@ -178,7 +178,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
     /**
      * Sets the default bar painter.
      *
-     * @param painter  the painter (<code>null</code> not permitted).
+     * @param painter  the painter ({@code null} not permitted).
      *
      * @since 1.0.11
      */
@@ -277,7 +277,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
 
     /**
      * The shape used to represent a bar in each legend item (this should never
-     * be <code>null</code>).
+     * be {@code null}).
      */
     private transient Shape legendBar;
 
@@ -294,7 +294,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
     private ItemLabelPosition negativeItemLabelPositionFallback;
 
     /**
-     * The bar painter (never <code>null</code>).
+     * The bar painter (never {@code null}).
      *
      * @since 1.0.11
      */
@@ -462,7 +462,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      * Returns the gradient paint transformer (an object used to transform
      * gradient paint objects to fit each bar).
      *
-     * @return A transformer (<code>null</code> possible).
+     * @return A transformer ({@code null} possible).
      *
      * @see #setGradientPaintTransformer(GradientPaintTransformer)
      */
@@ -474,7 +474,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      * Sets the gradient paint transformer and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param transformer  the transformer (<code>null</code> permitted).
+     * @param transformer  the transformer ({@code null} permitted).
      *
      * @see #getGradientPaintTransformer()
      */
@@ -488,7 +488,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      * Returns the shape used to represent bars in each legend item.
      *
      * @return The shape used to represent bars in each legend item (never
-     *         <code>null</code>).
+     *         {@code null}).
      *
      * @see #setLegendBar(Shape)
      */
@@ -500,7 +500,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      * Sets the shape used to represent bars in each legend item and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param bar  the bar shape (<code>null</code> not permitted).
+     * @param bar  the bar shape ({@code null} not permitted).
      *
      * @see #getLegendBar()
      */
@@ -514,7 +514,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      * Returns the fallback position for positive item labels that don't fit
      * within a bar.
      *
-     * @return The fallback position (<code>null</code> possible).
+     * @return The fallback position ({@code null} possible).
      *
      * @see #setPositiveItemLabelPositionFallback(ItemLabelPosition)
      * @since 1.0.2
@@ -528,7 +528,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      * within a bar, and sends a {@link RendererChangeEvent} to all registered
      * listeners.
      *
-     * @param position  the position (<code>null</code> permitted).
+     * @param position  the position ({@code null} permitted).
      *
      * @see #getPositiveItemLabelPositionFallback()
      * @since 1.0.2
@@ -543,7 +543,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      * Returns the fallback position for negative item labels that don't fit
      * within a bar.
      *
-     * @return The fallback position (<code>null</code> possible).
+     * @return The fallback position ({@code null} possible).
      *
      * @see #setNegativeItemLabelPositionFallback(ItemLabelPosition)
      * @since 1.0.2
@@ -557,7 +557,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      * within a bar, and sends a {@link RendererChangeEvent} to all registered
      * listeners.
      *
-     * @param position  the position (<code>null</code> permitted).
+     * @param position  the position ({@code null} permitted).
      *
      * @see #getNegativeItemLabelPositionFallback()
      * @since 1.0.2
@@ -571,7 +571,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
     /**
      * Returns the bar painter.
      *
-     * @return The bar painter (never <code>null</code>).
+     * @return The bar painter (never {@code null}).
      *
      * @since 1.0.11
      */
@@ -583,7 +583,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      * Sets the bar painter and sends a {@link RendererChangeEvent} to all
      * registered listeners.
      *
-     * @param painter  the painter (<code>null</code> not permitted).
+     * @param painter  the painter ({@code null} not permitted).
      *
      * @since 1.0.11
      */
@@ -795,7 +795,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      * @param series  the series index (zero-based).
      * @param item  the item index (zero-based).
      * @param crosshairState  crosshair information for the plot
-     *                        (<code>null</code> permitted).
+     *                        ({@code null} permitted).
      * @param pass  the pass index.
      */
     @Override
@@ -961,7 +961,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      * @param series  the series index.
      * @param item  the item index.
      * @param plot  the plot.
-     * @param generator  the label generator (<code>null</code> permitted, in
+     * @param generator  the label generator ({@code null} permitted, in
      *         which case the method does nothing, just returns).
      * @param bar  the bar.
      * @param negative  a flag indicating a negative value.
@@ -1165,10 +1165,10 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      * specified dataset.  Since this renderer uses the x-interval in the
      * dataset, this is taken into account for the range.
      *
-     * @param dataset  the dataset (<code>null</code> permitted).
+     * @param dataset  the dataset ({@code null} permitted).
      *
-     * @return The range (<code>null</code> if the dataset is
-     *         <code>null</code> or empty).
+     * @return The range ({@code null} if the dataset is
+     *         {@code null} or empty).
      */
     @Override
     public Range findDomainBounds(XYDataset dataset) {
@@ -1180,10 +1180,10 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      * specified dataset.  If the renderer is plotting the y-interval from the
      * dataset, this is taken into account for the range.
      *
-     * @param dataset  the dataset (<code>null</code> permitted).
+     * @param dataset  the dataset ({@code null} permitted).
      *
-     * @return The range (<code>null</code> if the dataset is
-     *         <code>null</code> or empty).
+     * @return The range ({@code null} if the dataset is
+     *         {@code null} or empty).
      */
     @Override
     public Range findRangeBounds(XYDataset dataset) {
@@ -1211,7 +1211,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
     /**
      * Tests this renderer for equality with an arbitrary object.
      *
-     * @param obj  the object to test against (<code>null</code> permitted).
+     * @param obj  the object to test against ({@code null} permitted).
      *
      * @return A boolean.
      */

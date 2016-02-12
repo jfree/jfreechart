@@ -112,7 +112,7 @@ public final class AxisLocation implements Serializable {
      * Returns <code>true</code> if this object is equal to the specified
      * object, and <code>false</code> otherwise.
      *
-     * @param obj  the other object (<code>null</code> permitted).
+     * @param obj  the other object ({@code null} permitted).
      *
      * @return A boolean.
      */
@@ -146,7 +146,7 @@ public final class AxisLocation implements Serializable {
     /**
      * Returns the location that is opposite to the supplied location.
      *
-     * @param location  the location (<code>null</code> not permitted).
+     * @param location  the location ({@code null} not permitted).
      *
      * @return The opposite location.
      */

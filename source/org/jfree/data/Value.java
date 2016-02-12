@@ -49,7 +49,7 @@ public interface Value {
     /**
      * Returns the value.
      *
-     * @return The value (possibly <code>null</code>).
+     * @return The value (possibly {@code null}).
      */
     public Number getValue();
 

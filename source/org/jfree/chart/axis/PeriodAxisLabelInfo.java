@@ -120,8 +120,8 @@ public class PeriodAxisLabelInfo implements Cloneable, Serializable {
      * Creates a new instance.
      *
      * @param periodClass  the subclass of {@link RegularTimePeriod} to use
-     *                     (<code>null</code> not permitted).
-     * @param dateFormat  the date format (<code>null</code> not permitted).
+     *                     ({@code null} not permitted).
+     * @param dateFormat  the date format ({@code null} not permitted).
      */
     public PeriodAxisLabelInfo(Class periodClass, DateFormat dateFormat) {
         this(periodClass, dateFormat, DEFAULT_INSETS, DEFAULT_FONT,
@@ -133,17 +133,17 @@ public class PeriodAxisLabelInfo implements Cloneable, Serializable {
      * Creates a new instance.
      *
      * @param periodClass  the subclass of {@link RegularTimePeriod} to use
-     *                     (<code>null</code> not permitted).
-     * @param dateFormat  the date format (<code>null</code> not permitted).
-     * @param padding  controls the space around the band (<code>null</code>
+     *                     ({@code null} not permitted).
+     * @param dateFormat  the date format ({@code null} not permitted).
+     * @param padding  controls the space around the band ({@code null}
      *                 not permitted).
-     * @param labelFont  the label font (<code>null</code> not permitted).
-     * @param labelPaint  the label paint (<code>null</code> not permitted).
+     * @param labelFont  the label font ({@code null} not permitted).
+     * @param labelPaint  the label paint ({@code null} not permitted).
      * @param drawDividers  a flag that controls whether dividers are drawn.
      * @param dividerStroke  the stroke used to draw the dividers
-     *                       (<code>null</code> not permitted).
+     *                       ({@code null} not permitted).
      * @param dividerPaint  the paint used to draw the dividers
-     *                      (<code>null</code> not permitted).
+     *                      ({@code null} not permitted).
      */
     public PeriodAxisLabelInfo(Class periodClass, DateFormat dateFormat,
             RectangleInsets padding, Font labelFont, Paint labelPaint,
@@ -178,7 +178,7 @@ public class PeriodAxisLabelInfo implements Cloneable, Serializable {
     /**
      * Returns a copy of the date formatter.
      *
-     * @return A copy of the date formatter (never <code>null</code>).
+     * @return A copy of the date formatter (never {@code null}).
      */
     public DateFormat getDateFormat() {
         return (DateFormat) this.dateFormat.clone();
@@ -196,7 +196,7 @@ public class PeriodAxisLabelInfo implements Cloneable, Serializable {
     /**
      * Returns the label font.
      *
-     * @return The label font (never <code>null</code>).
+     * @return The label font (never {@code null}).
      */
     public Font getLabelFont() {
         return this.labelFont;
@@ -283,7 +283,7 @@ public class PeriodAxisLabelInfo implements Cloneable, Serializable {
     /**
      * Tests this object for equality with an arbitrary object.
      *
-     * @param obj  the object to test against (<code>null</code> permitted).
+     * @param obj  the object to test against ({@code null} permitted).
      *
      * @return A boolean.
      */

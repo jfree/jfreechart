@@ -77,7 +77,7 @@ public class ComparableObjectSeries extends Series
      * be sorted into ascending order by x-value, and duplicate x-values will
      * be allowed (these defaults can be modified with another constructor.
      *
-     * @param key  the series key (<code>null</code> not permitted).
+     * @param key  the series key ({@code null} not permitted).
      */
     public ComparableObjectSeries(Comparable key) {
         this(key, true, true);
@@ -87,7 +87,7 @@ public class ComparableObjectSeries extends Series
      * Constructs a new series that contains no data.  You can specify
      * whether or not duplicate x-values are allowed for the series.
      *
-     * @param key  the series key (<code>null</code> not permitted).
+     * @param key  the series key ({@code null} not permitted).
      * @param autoSort  a flag that controls whether or not the items in the
      *                  series are sorted.
      * @param allowDuplicateXValues  a flag that controls whether duplicate
@@ -176,8 +176,8 @@ public class ComparableObjectSeries extends Series
      * Throws an exception if the x-value is a duplicate AND the
      * allowDuplicateXValues flag is false.
      *
-     * @param x  the x-value (<code>null</code> not permitted).
-     * @param y  the y-value (<code>null</code> permitted).
+     * @param x  the x-value ({@code null} not permitted).
+     * @param y  the y-value ({@code null} permitted).
      */
     protected void add(Comparable x, Object y) {
         // argument checking delegated...
@@ -191,8 +191,8 @@ public class ComparableObjectSeries extends Series
      * Throws an exception if the x-value is a duplicate AND the
      * allowDuplicateXValues flag is false.
      *
-     * @param x  the x-value (<code>null</code> not permitted).
-     * @param y  the y-value (<code>null</code> permitted).
+     * @param x  the x-value ({@code null} not permitted).
+     * @param y  the y-value ({@code null} permitted).
      * @param notify  a flag the controls whether or not a
      *                {@link SeriesChangeEvent} is sent to all registered
      *                listeners.
@@ -207,7 +207,7 @@ public class ComparableObjectSeries extends Series
      * Adds a data item to the series and, if requested, sends a
      * {@link SeriesChangeEvent} to all registered listeners.
      *
-     * @param item  the (x, y) item (<code>null</code> not permitted).
+     * @param item  the (x, y) item ({@code null} not permitted).
      * @param notify  a flag that controls whether or not a
      *                {@link SeriesChangeEvent} is sent to all registered
      *                listeners.
@@ -265,7 +265,7 @@ public class ComparableObjectSeries extends Series
      * aware that for an unsorted series, the index is found by iterating
      * through all items in the series.
      *
-     * @param x  the x-value (<code>null</code> not permitted).
+     * @param x  the x-value ({@code null} not permitted).
      *
      * @return The index.
      */
@@ -289,8 +289,8 @@ public class ComparableObjectSeries extends Series
     /**
      * Updates an item in the series.
      *
-     * @param x  the x-value (<code>null</code> not permitted).
-     * @param y  the y-value (<code>null</code> permitted).
+     * @param x  the x-value ({@code null} not permitted).
+     * @param y  the y-value ({@code null} permitted).
      *
      * @throws SeriesException if there is no existing item with the specified
      *         x-value.
@@ -312,7 +312,7 @@ public class ComparableObjectSeries extends Series
      * {@link SeriesChangeEvent} to all registered listeners.
      *
      * @param index  the item (zero based index).
-     * @param y  the new value (<code>null</code> permitted).
+     * @param y  the new value ({@code null} permitted).
      */
     protected void updateByIndex(int index, Object y) {
         ComparableObjectItem item = getDataItem(index);
@@ -388,7 +388,7 @@ public class ComparableObjectSeries extends Series
      * Tests this series for equality with an arbitrary object.
      *
      * @param obj  the object to test against for equality
-     *             (<code>null</code> permitted).
+     *             ({@code null} permitted).
      *
      * @return A boolean.
      */

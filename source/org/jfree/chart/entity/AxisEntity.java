@@ -70,8 +70,8 @@ public class AxisEntity extends ChartEntity {
     /**
      * Creates a new axis entity.
      *
-     * @param area  the area (<code>null</code> not permitted).
-     * @param axis  the axis (<code>null</code> not permitted).
+     * @param area  the area ({@code null} not permitted).
+     * @param axis  the axis ({@code null} not permitted).
      */
     public AxisEntity(Shape area, Axis axis) {
         // defer argument checks...
@@ -81,9 +81,9 @@ public class AxisEntity extends ChartEntity {
     /**
      * Creates a new axis entity.
      *
-     * @param area  the area (<code>null</code> not permitted).
-     * @param axis  the axis (<code>null</code> not permitted).
-     * @param toolTipText  the tool tip text (<code>null</code> permitted).
+     * @param area  the area ({@code null} not permitted).
+     * @param axis  the axis ({@code null} not permitted).
+     * @param toolTipText  the tool tip text ({@code null} permitted).
      */
     public AxisEntity(Shape area, Axis axis, String toolTipText) {
         // defer argument checks...
@@ -93,10 +93,10 @@ public class AxisEntity extends ChartEntity {
     /**
      * Creates a new axis entity.
      *
-     * @param area  the area (<code>null</code> not permitted).
-     * @param axis  the axis (<code>null</code> not permitted).
-     * @param toolTipText  the tool tip text (<code>null</code> permitted).
-     * @param urlText  the URL text for HTML image maps (<code>null</code>
+     * @param area  the area ({@code null} not permitted).
+     * @param axis  the axis ({@code null} not permitted).
+     * @param toolTipText  the tool tip text ({@code null} permitted).
+     * @param urlText  the URL text for HTML image maps ({@code null}
      *                 permitted).
      */
     public AxisEntity(Shape area, Axis axis, String toolTipText,
@@ -109,7 +109,7 @@ public class AxisEntity extends ChartEntity {
     /**
      * Returns the axis that occupies the entity area.
      *
-     * @return The axis (never <code>null</code>).
+     * @return The axis (never {@code null}).
      */
     public Axis getAxis() {
         return this.axis;
@@ -132,7 +132,7 @@ public class AxisEntity extends ChartEntity {
     /**
      * Tests the entity for equality with an arbitrary object.
      *
-     * @param obj  the object to test against (<code>null</code> permitted).
+     * @param obj  the object to test against ({@code null} permitted).
      *
      * @return A boolean.
      */

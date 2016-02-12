@@ -137,7 +137,7 @@ public class Month extends RegularTimePeriod implements Serializable {
      * Constructs a new <code>Month</code> instance, based on a date/time and
      * the default time zone.
      *
-     * @param time  the date/time (<code>null</code> not permitted).
+     * @param time  the date/time ({@code null} not permitted).
      *
      * @see #Month(Date, TimeZone)
      */
@@ -151,7 +151,7 @@ public class Month extends RegularTimePeriod implements Serializable {
      * pegged to the given time zone also.
      *
      * @param time  the date/time.
-     * @param zone  the time zone (<code>null</code> not permitted).
+     * @param zone  the time zone ({@code null} not permitted).
      *
      * @deprecated Since 1.0.12, use {@link #Month(Date, TimeZone, Locale)}
      *     instead.
@@ -239,7 +239,7 @@ public class Month extends RegularTimePeriod implements Serializable {
      * Recalculates the start date/time and end date/time for this time period
      * relative to the supplied calendar (which incorporates a time zone).
      *
-     * @param calendar  the calendar (<code>null</code> not permitted).
+     * @param calendar  the calendar ({@code null} not permitted).
      *
      * @since 1.0.3
      */
@@ -326,7 +326,7 @@ public class Month extends RegularTimePeriod implements Serializable {
      * Returns true if the target is a Month instance representing the same
      * month as this object.  In all other cases, returns false.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return <code>true</code> if month and year of this and object are the
      *         same.
@@ -412,12 +412,12 @@ public class Month extends RegularTimePeriod implements Serializable {
      * Returns the first millisecond of the month, evaluated using the supplied
      * calendar (which determines the time zone).
      *
-     * @param calendar  the calendar (<code>null</code> not permitted).
+     * @param calendar  the calendar ({@code null} not permitted).
      *
      * @return The first millisecond of the month.
      *
      * @throws NullPointerException if <code>calendar</code> is
-     *     <code>null</code>.
+     *     {@code null}.
      */
     @Override
     public long getFirstMillisecond(Calendar calendar) {
@@ -430,12 +430,12 @@ public class Month extends RegularTimePeriod implements Serializable {
      * Returns the last millisecond of the month, evaluated using the supplied
      * calendar (which determines the time zone).
      *
-     * @param calendar  the calendar (<code>null</code> not permitted).
+     * @param calendar  the calendar ({@code null} not permitted).
      *
      * @return The last millisecond of the month.
      *
      * @throws NullPointerException if <code>calendar</code> is
-     *     <code>null</code>.
+     *     {@code null}.
      */
     @Override
     public long getLastMillisecond(Calendar calendar) {
@@ -450,9 +450,9 @@ public class Month extends RegularTimePeriod implements Serializable {
      * accept the format "YYYY-MM".  It will also accept "MM-YYYY". Anything
      * else, at the moment, is a bonus.
      *
-     * @param s  the string to parse (<code>null</code> permitted).
+     * @param s  the string to parse ({@code null} permitted).
      *
-     * @return <code>null</code> if the string is not parseable, the month
+     * @return {@code null} if the string is not parseable, the month
      *         otherwise.
      */
     public static Month parseMonth(String s) {
@@ -534,12 +534,12 @@ public class Month extends RegularTimePeriod implements Serializable {
     }
 
     /**
-     * Creates a year from a string, or returns <code>null</code> (format
+     * Creates a year from a string, or returns {@code null} (format
      * exceptions suppressed).
      *
      * @param s  the string to parse.
      *
-     * @return <code>null</code> if the string is not parseable, the year
+     * @return {@code null} if the string is not parseable, the year
      *         otherwise.
      */
     private static Year evaluateAsYear(String s) {

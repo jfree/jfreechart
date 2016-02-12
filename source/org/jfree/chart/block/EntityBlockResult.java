@@ -51,7 +51,7 @@ public interface EntityBlockResult {
     /**
      * Returns the entity collection.
      *
-     * @return An entity collection (possibly <code>null</code>).
+     * @return An entity collection (possibly {@code null}).
      */
     public EntityCollection getEntityCollection();
 

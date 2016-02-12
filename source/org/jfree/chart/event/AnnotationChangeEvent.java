@@ -59,7 +59,7 @@ public class AnnotationChangeEvent extends ChartChangeEvent {
      *
      * @param source  the event source.
      * @param annotation  the annotation that triggered the event
-     *     (<code>null</code> not permitted).
+     *     ({@code null} not permitted).
      *
      * @since 1.0.14
      */
@@ -72,7 +72,7 @@ public class AnnotationChangeEvent extends ChartChangeEvent {
     /**
      * Returns the annotation that triggered the event.
      *
-     * @return The annotation that triggered the event (never <code>null</code>).
+     * @return The annotation that triggered the event (never {@code null}).
      *
      * @since 1.0.14
      */

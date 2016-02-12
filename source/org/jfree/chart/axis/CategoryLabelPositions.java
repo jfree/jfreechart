@@ -223,13 +223,13 @@ public class CategoryLabelPositions implements Serializable {
      * Creates a new position specification.
      *
      * @param top  the label position info used when an axis is at the top
-     *             (<code>null</code> not permitted).
+     *             ({@code null} not permitted).
      * @param bottom  the label position info used when an axis is at the
-     *                bottom (<code>null</code> not permitted).
+     *                bottom ({@code null} not permitted).
      * @param left  the label position info used when an axis is at the left
-     *              (<code>null</code> not permitted).
+     *              ({@code null} not permitted).
      * @param right  the label position info used when an axis is at the right
-     *               (<code>null</code> not permitted).
+     *               ({@code null} not permitted).
      */
     public CategoryLabelPositions(CategoryLabelPosition top,
             CategoryLabelPosition bottom, CategoryLabelPosition left,
@@ -275,10 +275,10 @@ public class CategoryLabelPositions implements Serializable {
      * Returns a new instance based on an existing instance but with the top
      * position changed.
      *
-     * @param base  the base (<code>null</code> not permitted).
-     * @param top  the top position (<code>null</code> not permitted).
+     * @param base  the base ({@code null} not permitted).
+     * @param top  the top position ({@code null} not permitted).
      *
-     * @return A new instance (never <code>null</code>).
+     * @return A new instance (never {@code null}).
      */
     public static CategoryLabelPositions replaceTopPosition(
             CategoryLabelPositions base, CategoryLabelPosition top) {
@@ -296,10 +296,10 @@ public class CategoryLabelPositions implements Serializable {
      * Returns a new instance based on an existing instance but with the bottom
      * position changed.
      *
-     * @param base  the base (<code>null</code> not permitted).
-     * @param bottom  the bottom position (<code>null</code> not permitted).
+     * @param base  the base ({@code null} not permitted).
+     * @param bottom  the bottom position ({@code null} not permitted).
      *
-     * @return A new instance (never <code>null</code>).
+     * @return A new instance (never {@code null}).
      */
     public static CategoryLabelPositions replaceBottomPosition(
             CategoryLabelPositions base, CategoryLabelPosition bottom) {
@@ -318,10 +318,10 @@ public class CategoryLabelPositions implements Serializable {
      * Returns a new instance based on an existing instance but with the left
      * position changed.
      *
-     * @param base  the base (<code>null</code> not permitted).
-     * @param left  the left position (<code>null</code> not permitted).
+     * @param base  the base ({@code null} not permitted).
+     * @param left  the left position ({@code null} not permitted).
      *
-     * @return A new instance (never <code>null</code>).
+     * @return A new instance (never {@code null}).
      */
     public static CategoryLabelPositions replaceLeftPosition(
             CategoryLabelPositions base, CategoryLabelPosition left) {
@@ -340,10 +340,10 @@ public class CategoryLabelPositions implements Serializable {
      * Returns a new instance based on an existing instance but with the right
      * position changed.
      *
-     * @param base  the base (<code>null</code> not permitted).
-     * @param right  the right position (<code>null</code> not permitted).
+     * @param base  the base ({@code null} not permitted).
+     * @param right  the right position ({@code null} not permitted).
      *
-     * @return A new instance (never <code>null</code>).
+     * @return A new instance (never {@code null}).
      */
     public static CategoryLabelPositions replaceRightPosition(
             CategoryLabelPositions base, CategoryLabelPosition right) {

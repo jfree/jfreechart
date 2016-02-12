@@ -304,7 +304,7 @@ public class ContourPlot extends Plot implements ContourValuePlot,
     /**
      * Returns the primary dataset for the plot.
      *
-     * @return The primary dataset (possibly <code>null</code>).
+     * @return The primary dataset (possibly {@code null}).
      */
     public ContourDataset getDataset() {
         return this.dataset;
@@ -314,7 +314,7 @@ public class ContourPlot extends Plot implements ContourValuePlot,
      * Sets the dataset for the plot, replacing the existing dataset if there
      * is one.
      *
-     * @param dataset  the dataset (<code>null</code> permitted).
+     * @param dataset  the dataset ({@code null} permitted).
      */
     public void setDataset(ContourDataset dataset) {
 
@@ -547,14 +547,14 @@ public class ContourPlot extends Plot implements ContourValuePlot,
      * <P>
      * The optional <code>info</code> argument collects information about the
      * rendering of the plot (dimensions, tooltip information etc).  Just pass
-     * in <code>null</code> if you do not need this information.
+     * in {@code null} if you do not need this information.
      *
      * @param g2  the graphics device.
      * @param area  the area within which the plot (including axis labels)
      *              should be drawn.
-     * @param anchor  the anchor point (<code>null</code> permitted).
+     * @param anchor  the anchor point ({@code null} permitted).
      * @param parentState  the state from the parent plot, if there is one.
-     * @param info  collects chart drawing information (<code>null</code>
+     * @param info  collects chart drawing information ({@code null}
      *              permitted).
      */
     @Override
@@ -709,7 +709,7 @@ public class ContourPlot extends Plot implements ContourValuePlot,
      * current renderer.
      * <P>
      * The <code>info</code> and <code>crosshairState</code> arguments may be
-     * <code>null</code>.
+     * {@code null}.
      *
      * @param g2  the graphics device.
      * @param dataArea  the region in which the data is to be drawn.

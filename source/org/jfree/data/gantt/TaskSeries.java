@@ -67,7 +67,7 @@ public class TaskSeries extends Series {
     /**
      * Constructs a new series with the specified name.
      *
-     * @param name  the series name (<code>null</code> not permitted).
+     * @param name  the series name ({@code null} not permitted).
      */
     public TaskSeries(String name) {
         super(name);
@@ -79,7 +79,7 @@ public class TaskSeries extends Series {
      * {@link org.jfree.data.general.SeriesChangeEvent} to all registered
      * listeners.
      *
-     * @param task  the task (<code>null</code> not permitted).
+     * @param task  the task ({@code null} not permitted).
      */
     public void add(Task task) {
         ParamChecks.nullNotPermitted(task, "task");
@@ -133,9 +133,9 @@ public class TaskSeries extends Series {
     /**
      * Returns the task in the series that has the specified description.
      *
-     * @param description  the name (<code>null</code> not permitted).
+     * @param description  the name ({@code null} not permitted).
      *
-     * @return The task (possibly <code>null</code>).
+     * @return The task (possibly {@code null}).
      */
     public Task get(String description) {
         Task result = null;
@@ -162,7 +162,7 @@ public class TaskSeries extends Series {
     /**
      * Tests this object for equality with an arbitrary object.
      *
-     * @param obj  the object to test against (<code>null</code> permitted).
+     * @param obj  the object to test against ({@code null} permitted).
      *
      * @return A boolean.
      */

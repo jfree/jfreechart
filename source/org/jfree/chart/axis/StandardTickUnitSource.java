@@ -65,7 +65,7 @@ public class StandardTickUnitSource implements TickUnitSource, Serializable {
     /**
      * Returns a tick unit that is larger than the supplied unit.
      *
-     * @param unit  the unit (<code>null</code> not permitted).
+     * @param unit  the unit ({@code null} not permitted).
      *
      * @return A tick unit that is larger than the supplied unit.
      */
@@ -82,7 +82,7 @@ public class StandardTickUnitSource implements TickUnitSource, Serializable {
      * Returns the tick unit in the collection that is greater than or equal
      * to (in size) the specified unit.
      *
-     * @param unit  the unit (<code>null</code> not permitted).
+     * @param unit  the unit ({@code null} not permitted).
      *
      * @return A unit from the collection.
      */
@@ -110,7 +110,7 @@ public class StandardTickUnitSource implements TickUnitSource, Serializable {
     /**
      * Tests this instance for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

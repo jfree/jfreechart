@@ -203,7 +203,7 @@ public class XYBoxAndWhiskerRenderer extends AbstractXYItemRenderer
     /**
      * Returns the paint used to fill boxes.
      *
-     * @return The paint (possibly <code>null</code>).
+     * @return The paint (possibly {@code null}).
      *
      * @see #setBoxPaint(Paint)
      */
@@ -215,7 +215,7 @@ public class XYBoxAndWhiskerRenderer extends AbstractXYItemRenderer
      * Sets the paint used to fill boxes and sends a {@link RendererChangeEvent}
      * to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> permitted).
+     * @param paint  the paint ({@code null} permitted).
      *
      * @see #getBoxPaint()
      */
@@ -252,7 +252,7 @@ public class XYBoxAndWhiskerRenderer extends AbstractXYItemRenderer
      * Returns the paint used to paint the various artifacts such as outliers,
      * farout symbol, median line and the averages ellipse.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @see #setArtifactPaint(Paint)
      */
@@ -265,7 +265,7 @@ public class XYBoxAndWhiskerRenderer extends AbstractXYItemRenderer
      * farout symbol, median line and the averages ellipse, and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getArtifactPaint()
      */
@@ -279,9 +279,9 @@ public class XYBoxAndWhiskerRenderer extends AbstractXYItemRenderer
      * Returns the range of values the renderer requires to display all the
      * items from the specified dataset.
      *
-     * @param dataset  the dataset (<code>null</code> permitted).
+     * @param dataset  the dataset ({@code null} permitted).
      *
-     * @return The range (<code>null</code> if the dataset is <code>null</code>
+     * @return The range ({@code null} if the dataset is {@code null}
      *         or empty).
      *
      * @see #findDomainBounds(XYDataset)
@@ -292,14 +292,14 @@ public class XYBoxAndWhiskerRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Returns the box paint or, if this is <code>null</code>, the item
+     * Returns the box paint or, if this is {@code null}, the item
      * paint.
      *
      * @param series  the series index.
      * @param item  the item index.
      *
      * @return The paint used to fill the box for the specified item (never
-     *         <code>null</code>).
+     *         {@code null}).
      *
      * @since 1.0.10
      */
@@ -331,7 +331,7 @@ public class XYBoxAndWhiskerRenderer extends AbstractXYItemRenderer
      * @param series  the series index (zero-based).
      * @param item  the item index (zero-based).
      * @param crosshairState  crosshair information for the plot
-     *                        (<code>null</code> permitted).
+     *                        ({@code null} permitted).
      * @param pass  the pass index.
      */
     @Override
@@ -368,7 +368,7 @@ public class XYBoxAndWhiskerRenderer extends AbstractXYItemRenderer
      * @param series  the series index (zero-based).
      * @param item  the item index (zero-based).
      * @param crosshairState  crosshair information for the plot
-     *                        (<code>null</code> permitted).
+     *                        ({@code null} permitted).
      * @param pass  the pass index.
      */
     public void drawHorizontalItem(Graphics2D g2, Rectangle2D dataArea,
@@ -508,7 +508,7 @@ public class XYBoxAndWhiskerRenderer extends AbstractXYItemRenderer
      * @param series  the series index (zero-based).
      * @param item  the item index (zero-based).
      * @param crosshairState  crosshair information for the plot
-     *                        (<code>null</code> permitted).
+     *                        ({@code null} permitted).
      * @param pass  the pass index.
      */
     public void drawVerticalItem(Graphics2D g2, Rectangle2D dataArea,
@@ -778,7 +778,7 @@ public class XYBoxAndWhiskerRenderer extends AbstractXYItemRenderer
     /**
      * Tests this renderer for equality with another object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return <code>true</code> or <code>false</code>.
      */

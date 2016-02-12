@@ -68,7 +68,7 @@ public class AbstractOverlay {
     /**
      * Registers an object for notification of changes to the overlay.
      *
-     * @param listener  the listener (<code>null</code> not permitted).
+     * @param listener  the listener ({@code null} not permitted).
      *
      * @see #removeChangeListener(OverlayChangeListener)
      */
@@ -80,7 +80,7 @@ public class AbstractOverlay {
     /**
      * Deregisters an object for notification of changes to the overlay.
      *
-     * @param listener  the listener (<code>null</code> not permitted)
+     * @param listener  the listener ({@code null} not permitted)
      *
      * @see #addChangeListener(OverlayChangeListener)
      */

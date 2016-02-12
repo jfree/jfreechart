@@ -139,13 +139,13 @@ public class WaterfallBarRenderer extends BarRenderer {
     /**
      * Constructs a new waterfall renderer.
      *
-     * @param firstBarPaint  the color of the first bar (<code>null</code> not
+     * @param firstBarPaint  the color of the first bar ({@code null} not
      *                       permitted).
      * @param positiveBarPaint  the color for bars with positive values
-     *                          (<code>null</code> not permitted).
+     *                          ({@code null} not permitted).
      * @param negativeBarPaint  the color for bars with negative values
-     *                          (<code>null</code> not permitted).
-     * @param lastBarPaint  the color of the last bar (<code>null</code> not
+     *                          ({@code null} not permitted).
+     * @param lastBarPaint  the color of the last bar ({@code null} not
      *                      permitted).
      */
     public WaterfallBarRenderer(Paint firstBarPaint, Paint positiveBarPaint,
@@ -167,7 +167,7 @@ public class WaterfallBarRenderer extends BarRenderer {
     /**
      * Returns the paint used to draw the first bar.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      */
     public Paint getFirstBarPaint() {
         return this.firstBarPaint;
@@ -177,7 +177,7 @@ public class WaterfallBarRenderer extends BarRenderer {
      * Sets the paint that will be used to draw the first bar and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      */
     public void setFirstBarPaint(Paint paint) {
         ParamChecks.nullNotPermitted(paint, "paint");
@@ -188,7 +188,7 @@ public class WaterfallBarRenderer extends BarRenderer {
     /**
      * Returns the paint used to draw the last bar.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      */
     public Paint getLastBarPaint() {
         return this.lastBarPaint;
@@ -198,7 +198,7 @@ public class WaterfallBarRenderer extends BarRenderer {
      * Sets the paint that will be used to draw the last bar and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      */
     public void setLastBarPaint(Paint paint) {
         ParamChecks.nullNotPermitted(paint, "paint");
@@ -209,7 +209,7 @@ public class WaterfallBarRenderer extends BarRenderer {
     /**
      * Returns the paint used to draw bars with positive values.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      */
     public Paint getPositiveBarPaint() {
         return this.positiveBarPaint;
@@ -218,7 +218,7 @@ public class WaterfallBarRenderer extends BarRenderer {
     /**
      * Sets the paint that will be used to draw bars having positive values.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      */
     public void setPositiveBarPaint(Paint paint) {
         ParamChecks.nullNotPermitted(paint, "paint");
@@ -229,7 +229,7 @@ public class WaterfallBarRenderer extends BarRenderer {
     /**
      * Returns the paint used to draw bars with negative values.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      */
     public Paint getNegativeBarPaint() {
         return this.negativeBarPaint;
@@ -239,7 +239,7 @@ public class WaterfallBarRenderer extends BarRenderer {
      * Sets the paint that will be used to draw bars having negative values,
      * and sends a {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      */
     public void setNegativeBarPaint(Paint paint) {
         ParamChecks.nullNotPermitted(paint, "paint");
@@ -251,9 +251,9 @@ public class WaterfallBarRenderer extends BarRenderer {
      * Returns the range of values the renderer requires to display all the
      * items from the specified dataset.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
      *
-     * @return The range (or <code>null</code> if the dataset is empty).
+     * @return The range (or {@code null} if the dataset is empty).
      */
     @Override
     public Range findRangeBounds(CategoryDataset dataset) {
@@ -428,7 +428,7 @@ public class WaterfallBarRenderer extends BarRenderer {
     /**
      * Tests an object for equality with this instance.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

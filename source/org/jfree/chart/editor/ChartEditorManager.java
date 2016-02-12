@@ -65,7 +65,7 @@ public class ChartEditorManager {
     /**
      * Returns the current factory.
      *
-     * @return The current factory (never <code>null</code>).
+     * @return The current factory (never {@code null}).
      */
     public static ChartEditorFactory getChartEditorFactory() {
         return factory;
@@ -74,7 +74,7 @@ public class ChartEditorManager {
     /**
      * Sets the chart editor factory.
      *
-     * @param f  the new factory (<code>null</code> not permitted).
+     * @param f  the new factory ({@code null} not permitted).
      */
     public static void setChartEditorFactory(ChartEditorFactory f) {
         ParamChecks.nullNotPermitted(f, "f");

@@ -95,7 +95,7 @@ public class StandardXYURLGenerator implements XYURLGenerator, Serializable {
      * is equivalent to calling
      * <code>StandardXYURLGenerator(prefix, "series", "item");</code>.
      *
-     * @param prefix  the prefix to the URL (<code>null</code> not permitted).
+     * @param prefix  the prefix to the URL ({@code null} not permitted).
      */
     public StandardXYURLGenerator(String prefix) {
         this(prefix, DEFAULT_SERIES_PARAMETER, DEFAULT_ITEM_PARAMETER);
@@ -104,11 +104,11 @@ public class StandardXYURLGenerator implements XYURLGenerator, Serializable {
     /**
      * Constructor that overrides all the defaults
      *
-     * @param prefix  the prefix to the URL (<code>null</code> not permitted).
+     * @param prefix  the prefix to the URL ({@code null} not permitted).
      * @param seriesParameterName  the name of the series parameter to go in
-     *                             each URL (<code>null</code> not permitted).
+     *                             each URL ({@code null} not permitted).
      * @param itemParameterName  the name of the item parameter to go in each
-     *                           URL (<code>null</code> not permitted).
+     *                           URL ({@code null} not permitted).
      */
     public StandardXYURLGenerator(String prefix, String seriesParameterName,
             String itemParameterName) {
@@ -143,7 +143,7 @@ public class StandardXYURLGenerator implements XYURLGenerator, Serializable {
     /**
      * Tests this generator for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

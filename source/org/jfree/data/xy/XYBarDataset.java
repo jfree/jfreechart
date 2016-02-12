@@ -69,7 +69,7 @@ public class XYBarDataset extends AbstractIntervalXYDataset
     /**
      * Creates a new dataset.
      *
-     * @param underlying  the underlying dataset (<code>null</code> not
+     * @param underlying  the underlying dataset ({@code null} not
      *     permitted).
      * @param barWidth  the width of the bars.
      */
@@ -82,7 +82,7 @@ public class XYBarDataset extends AbstractIntervalXYDataset
     /**
      * Returns the underlying dataset that was specified via the constructor.
      *
-     * @return The underlying dataset (never <code>null</code>).
+     * @return The underlying dataset (never {@code null}).
      *
      * @since 1.0.4
      */
@@ -187,7 +187,7 @@ public class XYBarDataset extends AbstractIntervalXYDataset
      * @param series  the series index (zero-based).
      * @param item  the item index (zero-based).
      *
-     * @return The y-value (possibly <code>null</code>).
+     * @return The y-value (possibly {@code null}).
      *
      * @see #getYValue(int, int)
      */
@@ -350,7 +350,7 @@ public class XYBarDataset extends AbstractIntervalXYDataset
     /**
      * Tests this dataset for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

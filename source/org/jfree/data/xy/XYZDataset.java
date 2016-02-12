@@ -55,7 +55,7 @@ public interface XYZDataset extends XYDataset {
      * @param series  the series index (zero-based).
      * @param item  the item index (zero-based).
      *
-     * @return The z-value (possibly <code>null</code>).
+     * @return The z-value (possibly {@code null}).
      */
     public Number getZ(int series, int item);
 

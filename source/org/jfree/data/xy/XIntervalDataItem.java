@@ -64,7 +64,7 @@ public class XIntervalDataItem extends ComparableObjectItem {
     /**
      * Returns the x-value.
      *
-     * @return The x-value (never <code>null</code>).
+     * @return The x-value (never {@code null}).
      */
     public Number getX() {
         return (Number) getComparable();

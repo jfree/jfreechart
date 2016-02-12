@@ -117,7 +117,7 @@ public class IntervalXYDelegate implements DatasetChangeListener,
     /**
      * Creates a new delegate that.
      *
-     * @param dataset  the underlying dataset (<code>null</code> not permitted).
+     * @param dataset  the underlying dataset ({@code null} not permitted).
      */
     public IntervalXYDelegate(XYDataset dataset) {
         this(dataset, true);
@@ -126,7 +126,7 @@ public class IntervalXYDelegate implements DatasetChangeListener,
     /**
      * Creates a new delegate for the specified dataset.
      *
-     * @param dataset  the underlying dataset (<code>null</code> not permitted).
+     * @param dataset  the underlying dataset ({@code null} not permitted).
      * @param autoWidth  a flag that controls whether the interval width is
      *                   calculated automatically.
      */
@@ -253,7 +253,7 @@ public class IntervalXYDelegate implements DatasetChangeListener,
      * @param series  the series index.
      * @param item  the item index.
      *
-     * @return The start value of the x-interval (possibly <code>null</code>).
+     * @return The start value of the x-interval (possibly {@code null}).
      *
      * @see #getStartXValue(int, int)
      */
@@ -288,7 +288,7 @@ public class IntervalXYDelegate implements DatasetChangeListener,
      * @param series  the series index.
      * @param item  the item index.
      *
-     * @return The end value of the x-interval (possibly <code>null</code>).
+     * @return The end value of the x-interval (possibly {@code null}).
      *
      * @see #getEndXValue(int, int)
      */
@@ -436,7 +436,7 @@ public class IntervalXYDelegate implements DatasetChangeListener,
      * dataset itself is NOT included in the equality test, because it is just
      * a reference back to the current 'owner' of the delegate).
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

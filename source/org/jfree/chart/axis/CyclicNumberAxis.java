@@ -226,7 +226,7 @@ public class CyclicNumberAxis extends NumberAxis {
      * The advance line is the line drawn at the limit of the current cycle,
      * when erasing the previous cycle.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      */
     public Paint getAdvanceLinePaint() {
         return this.advanceLinePaint;
@@ -236,7 +236,7 @@ public class CyclicNumberAxis extends NumberAxis {
      * The advance line is the line drawn at the limit of the current cycle,
      * when erasing the previous cycle.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      */
     public void setAdvanceLinePaint(Paint paint) {
         ParamChecks.nullNotPermitted(paint, "paint");
@@ -247,7 +247,7 @@ public class CyclicNumberAxis extends NumberAxis {
      * The advance line is the line drawn at the limit of the current cycle,
      * when erasing the previous cycle.
      *
-     * @return The stroke (never <code>null</code>).
+     * @return The stroke (never {@code null}).
      */
     public Stroke getAdvanceLineStroke() {
         return this.advanceLineStroke;
@@ -256,7 +256,7 @@ public class CyclicNumberAxis extends NumberAxis {
      * The advance line is the line drawn at the limit of the current cycle,
      * when erasing the previous cycle.
      *
-     * @param stroke  the stroke (<code>null</code> not permitted).
+     * @param stroke  the stroke ({@code null} not permitted).
      */
     public void setAdvanceLineStroke(Stroke stroke) {
         ParamChecks.nullNotPermitted(stroke, "stroke");
@@ -1021,15 +1021,15 @@ public class CyclicNumberAxis extends NumberAxis {
     /**
      * Draws the axis.
      *
-     * @param g2  the graphics device (<code>null</code> not permitted).
+     * @param g2  the graphics device ({@code null} not permitted).
      * @param cursor  the cursor position.
-     * @param plotArea  the plot area (<code>null</code> not permitted).
-     * @param dataArea  the data area (<code>null</code> not permitted).
-     * @param edge  the edge (<code>null</code> not permitted).
+     * @param plotArea  the plot area ({@code null} not permitted).
+     * @param dataArea  the data area ({@code null} not permitted).
+     * @param edge  the edge ({@code null} not permitted).
      * @param plotState  collects information about the plot
-     *                   (<code>null</code> permitted).
+     *                   ({@code null} permitted).
      *
-     * @return The axis state (never <code>null</code>).
+     * @return The axis state (never {@code null}).
      */
     @Override
     public AxisState draw(Graphics2D g2, double cursor, Rectangle2D plotArea,

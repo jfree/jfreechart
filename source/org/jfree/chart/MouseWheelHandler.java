@@ -71,7 +71,7 @@ class MouseWheelHandler implements MouseWheelListener, Serializable {
     /**
      * Creates a new instance for the specified chart panel.
      *
-     * @param chartPanel  the chart panel (<code>null</code> not permitted).
+     * @param chartPanel  the chart panel ({@code null} not permitted).
      */
     public MouseWheelHandler(ChartPanel chartPanel) {
         this.chartPanel = chartPanel;

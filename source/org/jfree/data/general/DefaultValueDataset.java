@@ -50,7 +50,7 @@ import org.jfree.util.ObjectUtilities;
 import org.jfree.util.PublicCloneable;
 
 /**
- * A dataset that stores a single value (that is possibly <code>null</code>).
+ * A dataset that stores a single value (that is possibly {@code null}).
  * This class provides a default implementation of the {@link ValueDataset}
  * interface.
  */
@@ -82,7 +82,7 @@ public class DefaultValueDataset extends AbstractDataset
     /**
      * Creates a new dataset with the specified value.
      *
-     * @param value  the initial value (<code>null</code> permitted).
+     * @param value  the initial value ({@code null} permitted).
      */
     public DefaultValueDataset(Number value) {
         super();
@@ -92,7 +92,7 @@ public class DefaultValueDataset extends AbstractDataset
     /**
      * Returns the value.
      *
-     * @return The value (possibly <code>null</code>).
+     * @return The value (possibly {@code null}).
      */
     @Override
     public Number getValue() {
@@ -103,7 +103,7 @@ public class DefaultValueDataset extends AbstractDataset
      * Sets the value and sends a {@link DatasetChangeEvent} to all registered
      * listeners.
      *
-     * @param value  the new value (<code>null</code> permitted).
+     * @param value  the new value ({@code null} permitted).
      */
     public void setValue(Number value) {
         this.value = value;
@@ -113,7 +113,7 @@ public class DefaultValueDataset extends AbstractDataset
     /**
      * Tests this dataset for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

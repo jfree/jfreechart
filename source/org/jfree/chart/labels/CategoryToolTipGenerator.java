@@ -60,11 +60,11 @@ public interface CategoryToolTipGenerator {
      * current dataset implementation, each row is a series, and each column
      * contains values for a particular category.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
      * @param row  the row index (zero-based).
      * @param column  the column index (zero-based).
      *
-     * @return The tooltip text (possibly <code>null</code>).
+     * @return The tooltip text (possibly {@code null}).
      */
     public String generateToolTip(CategoryDataset dataset, int row, int column);
 

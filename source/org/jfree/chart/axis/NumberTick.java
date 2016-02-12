@@ -54,7 +54,7 @@ public class NumberTick extends ValueTick {
     /**
      * Creates a new tick.
      *
-     * @param number  the number (<code>null</code> not permitted).
+     * @param number  the number ({@code null} not permitted).
      * @param label  the label.
      * @param textAnchor  the part of the label that is aligned with the anchor
      *                    point.

@@ -77,7 +77,7 @@ public class NumberTickUnit extends TickUnit implements Serializable {
      * Creates a new number tick unit.
      *
      * @param size  the size of the tick unit.
-     * @param formatter  a number formatter for the tick unit (<code>null</code>
+     * @param formatter  a number formatter for the tick unit ({@code null}
      *                   not permitted).
      */
     public NumberTickUnit(double size, NumberFormat formatter) {
@@ -90,7 +90,7 @@ public class NumberTickUnit extends TickUnit implements Serializable {
      * Creates a new number tick unit.
      *
      * @param size  the size of the tick unit.
-     * @param formatter  a number formatter for the tick unit (<code>null</code>
+     * @param formatter  a number formatter for the tick unit ({@code null}
      *                   not permitted).
      * @param minorTickCount  the number of minor ticks.
      *
@@ -118,7 +118,7 @@ public class NumberTickUnit extends TickUnit implements Serializable {
     /**
      * Tests this formatter for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

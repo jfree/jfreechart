@@ -164,9 +164,9 @@ public class XYDifferenceRenderer extends AbstractXYItemRenderer
      * Creates a new renderer.
      *
      * @param positivePaint  the highlight color for positive differences
-     *                       (<code>null</code> not permitted).
+     *                       ({@code null} not permitted).
      * @param negativePaint  the highlight color for negative differences
-     *                       (<code>null</code> not permitted).
+     *                       ({@code null} not permitted).
      * @param shapes  draw shapes?
      */
     public XYDifferenceRenderer(Paint positivePaint, Paint negativePaint,
@@ -183,7 +183,7 @@ public class XYDifferenceRenderer extends AbstractXYItemRenderer
     /**
      * Returns the paint used to highlight positive differences.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @see #setPositivePaint(Paint)
      */
@@ -195,7 +195,7 @@ public class XYDifferenceRenderer extends AbstractXYItemRenderer
      * Sets the paint used to highlight positive differences and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getPositivePaint()
      */
@@ -208,7 +208,7 @@ public class XYDifferenceRenderer extends AbstractXYItemRenderer
     /**
      * Returns the paint used to highlight negative differences.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @see #setNegativePaint(Paint)
      */
@@ -219,7 +219,7 @@ public class XYDifferenceRenderer extends AbstractXYItemRenderer
     /**
      * Sets the paint used to highlight negative differences.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getNegativePaint()
      */
@@ -258,7 +258,7 @@ public class XYDifferenceRenderer extends AbstractXYItemRenderer
     /**
      * Returns the shape used to represent a line in the legend.
      *
-     * @return The legend line (never <code>null</code>).
+     * @return The legend line (never {@code null}).
      *
      * @see #setLegendLine(Shape)
      */
@@ -270,7 +270,7 @@ public class XYDifferenceRenderer extends AbstractXYItemRenderer
      * Sets the shape used as a line in each legend item and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param line  the line (<code>null</code> not permitted).
+     * @param line  the line ({@code null} not permitted).
      *
      * @see #getLegendLine()
      */
@@ -361,7 +361,7 @@ public class XYDifferenceRenderer extends AbstractXYItemRenderer
      * @param series  the series index (zero-based).
      * @param item  the item index (zero-based).
      * @param crosshairState  crosshair information for the plot
-     *                        (<code>null</code> permitted).
+     *                        ({@code null} permitted).
      * @param pass  the pass index.
      */
     @Override
@@ -395,7 +395,7 @@ public class XYDifferenceRenderer extends AbstractXYItemRenderer
      * @param x_series  the series index (zero-based).
      * @param x_item  the item index (zero-based).
      * @param x_crosshairState  crosshair information for the plot
-     *                          (<code>null</code> permitted).
+     *                          ({@code null} permitted).
      */
     protected void drawItemPass0(Graphics2D x_graphics,
                                  Rectangle2D x_dataArea,
@@ -853,7 +853,7 @@ public class XYDifferenceRenderer extends AbstractXYItemRenderer
      * @param x_series  the series index (zero-based).
      * @param x_item  the item index (zero-based).
      * @param x_crosshairState  crosshair information for the plot
-     *                          (<code>null</code> permitted).
+     *                          ({@code null} permitted).
      */
     protected void drawItemPass1(Graphics2D x_graphics,
                                  Rectangle2D x_dataArea,
@@ -1162,7 +1162,7 @@ public class XYDifferenceRenderer extends AbstractXYItemRenderer
     /**
      * Tests this renderer for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

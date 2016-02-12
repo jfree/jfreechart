@@ -56,7 +56,7 @@ public interface Pannable {
     /**
      * Returns the orientation of the plot.
      *
-     * @return The orientation (never <code>null</code>).
+     * @return The orientation (never {@code null}).
      */
     public PlotOrientation getOrientation();
 

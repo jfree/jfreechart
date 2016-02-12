@@ -73,9 +73,9 @@ public class DefaultKeyedValue implements KeyedValue, Cloneable,
     /**
      * Creates a new (key, value) item.
      *
-     * @param key  the key (should be immutable, <code>null</code> not
+     * @param key  the key (should be immutable, {@code null} not
      *         permitted).
-     * @param value  the value (<code>null</code> permitted).
+     * @param value  the value ({@code null} permitted).
      */
     public DefaultKeyedValue(Comparable key, Number value) {
         ParamChecks.nullNotPermitted(key, "key");
@@ -86,7 +86,7 @@ public class DefaultKeyedValue implements KeyedValue, Cloneable,
     /**
      * Returns the key.
      *
-     * @return The key (never <code>null</code>).
+     * @return The key (never {@code null}).
      */
     @Override
     public Comparable getKey() {
@@ -96,7 +96,7 @@ public class DefaultKeyedValue implements KeyedValue, Cloneable,
     /**
      * Returns the value.
      *
-     * @return The value (possibly <code>null</code>).
+     * @return The value (possibly {@code null}).
      */
     @Override
     public Number getValue() {
@@ -106,7 +106,7 @@ public class DefaultKeyedValue implements KeyedValue, Cloneable,
     /**
      * Sets the value.
      *
-     * @param value  the value (<code>null</code> permitted).
+     * @param value  the value ({@code null} permitted).
      */
     public synchronized void setValue(Number value) {
         this.value = value;
@@ -115,7 +115,7 @@ public class DefaultKeyedValue implements KeyedValue, Cloneable,
     /**
      * Tests this key-value pair for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

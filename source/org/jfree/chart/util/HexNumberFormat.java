@@ -147,12 +147,12 @@ public class HexNumberFormat extends NumberFormat {
 
     /**
      * Parsing is not implemented, so this method always returns
-     * <code>null</code>.
+     * {@code null}.
      *
      * @param source  ignored.
      * @param parsePosition  ignored.
      *
-     * @return Always <code>null</code>.
+     * @return Always {@code null}.
      */
     @Override
     public Number parse (String source, ParsePosition parsePosition) {

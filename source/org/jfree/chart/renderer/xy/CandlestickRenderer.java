@@ -186,7 +186,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
 
     /**
      * The paint used to fill the volume bars (if they are visible).  Once
-     * initialised, this field should never be set to <code>null</code>.
+     * initialised, this field should never be set to {@code null}.
      *
      * @since 1.0.7
      */
@@ -232,7 +232,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
      * @param candleWidth  the candle width.
      * @param drawVolume  a flag indicating whether or not volume bars should
      *                    be drawn.
-     * @param toolTipGenerator  the tool tip generator. <code>null</code> is
+     * @param toolTipGenerator  the tool tip generator. {@code null} is
      *                          none.
      */
     public CandlestickRenderer(double candleWidth, boolean drawVolume,
@@ -419,7 +419,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
      * Returns the paint used to fill candles when the price moves up from open
      * to close.
      *
-     * @return The paint (possibly <code>null</code>).
+     * @return The paint (possibly {@code null}).
      *
      * @see #setUpPaint(Paint)
      */
@@ -432,7 +432,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
      * to close and sends a {@link RendererChangeEvent} to all registered
      * listeners.
      *
-     * @param paint  the paint (<code>null</code> permitted).
+     * @param paint  the paint ({@code null} permitted).
      *
      * @see #getUpPaint()
      */
@@ -445,7 +445,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
      * Returns the paint used to fill candles when the price moves down from
      * open to close.
      *
-     * @return The paint (possibly <code>null</code>).
+     * @return The paint (possibly {@code null}).
      *
      * @see #setDownPaint(Paint)
      */
@@ -458,7 +458,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
      * to close and sends a {@link RendererChangeEvent} to all registered
      * listeners.
      *
-     * @param paint  The paint (<code>null</code> permitted).
+     * @param paint  The paint ({@code null} permitted).
      */
     public void setDownPaint(Paint paint) {
         this.downPaint = paint;
@@ -499,7 +499,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
      * Returns the paint that is used to fill the volume bars if they are
      * visible.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @see #setVolumePaint(Paint)
      *
@@ -513,7 +513,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
      * Sets the paint used to fill the volume bars, and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getVolumePaint()
      * @see #getDrawVolume()
@@ -563,9 +563,9 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
      * Returns the range of values the renderer requires to display all the
      * items from the specified dataset.
      *
-     * @param dataset  the dataset (<code>null</code> permitted).
+     * @param dataset  the dataset ({@code null} permitted).
      *
-     * @return The range (<code>null</code> if the dataset is <code>null</code>
+     * @return The range ({@code null} if the dataset is {@code null}
      *         or empty).
      */
     @Override
@@ -639,7 +639,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
      * @param series  the series index (zero-based).
      * @param item  the item index (zero-based).
      * @param crosshairState  crosshair information for the plot
-     *                        (<code>null</code> permitted).
+     *                        ({@code null} permitted).
      * @param pass  the pass index.
      */
     @Override
@@ -870,7 +870,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
     /**
      * Tests this renderer for equality with another object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return <code>true</code> or <code>false</code>.
      */

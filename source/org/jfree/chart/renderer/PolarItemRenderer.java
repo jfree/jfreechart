@@ -145,7 +145,7 @@ public interface PolarItemRenderer {
      * @param row  the row index (zero based).
      * @param column  the column index (zero based).
      *
-     * @return The generator (possibly <code>null</code>).
+     * @return The generator (possibly {@code null}).
      *
      * @since 1.0.14
      */
@@ -156,7 +156,7 @@ public interface PolarItemRenderer {
      *
      * @param series  the series index (zero based).
      *
-     * @return The generator (possibly <code>null</code>).
+     * @return The generator (possibly {@code null}).
      *
      * @see #setSeriesToolTipGenerator(int, XYToolTipGenerator)
      *
@@ -169,7 +169,7 @@ public interface PolarItemRenderer {
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param series  the series index (zero based).
-     * @param generator  the generator (<code>null</code> permitted).
+     * @param generator  the generator ({@code null} permitted).
      *
      * @see #getSeriesToolTipGenerator(int)
      *
@@ -181,7 +181,7 @@ public interface PolarItemRenderer {
     /**
      * Returns the base tool tip generator.
      *
-     * @return The generator (possibly <code>null</code>).
+     * @return The generator (possibly {@code null}).
      *
      * @see #setBaseToolTipGenerator(XYToolTipGenerator)
      *
@@ -193,7 +193,7 @@ public interface PolarItemRenderer {
      * Sets the base tool tip generator and sends a {@link RendererChangeEvent}
      * to all registered listeners.
      *
-     * @param generator  the generator (<code>null</code> permitted).
+     * @param generator  the generator ({@code null} permitted).
      *
      * @see #getBaseToolTipGenerator()
      *

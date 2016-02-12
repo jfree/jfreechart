@@ -105,7 +105,7 @@ public class HistogramDataset extends AbstractIntervalXYDataset
     /**
      * Returns the histogram type.
      *
-     * @return The type (never <code>null</code>).
+     * @return The type (never {@code null}).
      */
     public HistogramType getType() {
         return this.type;
@@ -115,7 +115,7 @@ public class HistogramDataset extends AbstractIntervalXYDataset
      * Sets the histogram type and sends a {@link DatasetChangeEvent} to all
      * registered listeners.
      *
-     * @param type  the type (<code>null</code> not permitted).
+     * @param type  the type ({@code null} not permitted).
      */
     public void setType(HistogramType type) {
         ParamChecks.nullNotPermitted(type, "type");
@@ -127,8 +127,8 @@ public class HistogramDataset extends AbstractIntervalXYDataset
      * Adds a series to the dataset, using the specified number of bins,
      * and sends a {@link DatasetChangeEvent} to all registered listeners.
      *
-     * @param key  the series key (<code>null</code> not permitted).
-     * @param values the values (<code>null</code> not permitted).
+     * @param key  the series key ({@code null} not permitted).
+     * @param values the values ({@code null} not permitted).
      * @param bins  the number of bins (must be at least 1).
      */
     public void addSeries(Comparable key, double[] values, int bins) {
@@ -144,7 +144,7 @@ public class HistogramDataset extends AbstractIntervalXYDataset
      * be assigned to the last bin.  Values falling on the boundary of
      * adjacent bins will be assigned to the higher indexed bin.
      *
-     * @param key  the series key (<code>null</code> not permitted).
+     * @param key  the series key ({@code null} not permitted).
      * @param values  the raw observations.
      * @param bins  the number of bins (must be at least 1).
      * @param minimum  the lower bound of the bin range.
@@ -211,7 +211,7 @@ public class HistogramDataset extends AbstractIntervalXYDataset
     /**
      * Returns the minimum value in an array of values.
      *
-     * @param values  the values (<code>null</code> not permitted and
+     * @param values  the values ({@code null} not permitted and
      *                zero-length array not permitted).
      *
      * @return The minimum value.
@@ -233,7 +233,7 @@ public class HistogramDataset extends AbstractIntervalXYDataset
     /**
      * Returns the maximum value in an array of values.
      *
-     * @param values  the values (<code>null</code> not permitted and
+     * @param values  the values ({@code null} not permitted and
      *                zero-length array not permitted).
      *
      * @return The maximum value.
@@ -471,7 +471,7 @@ public class HistogramDataset extends AbstractIntervalXYDataset
     /**
      * Tests this dataset for equality with an arbitrary object.
      *
-     * @param obj  the object to test against (<code>null</code> permitted).
+     * @param obj  the object to test against ({@code null} permitted).
      *
      * @return A boolean.
      */

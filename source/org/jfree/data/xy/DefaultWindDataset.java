@@ -81,9 +81,9 @@ public class DefaultWindDataset extends AbstractXYDataset
     /**
      * Constructs a dataset based on the specified data array.
      *
-     * @param data  the data (<code>null</code> not permitted).
+     * @param data  the data ({@code null} not permitted).
      *
-     * @throws NullPointerException if <code>data</code> is <code>null</code>.
+     * @throws NullPointerException if <code>data</code> is {@code null}.
      */
     public DefaultWindDataset(Object[][][] data) {
         this(seriesNameListFromDataArray(data), data);
@@ -92,12 +92,12 @@ public class DefaultWindDataset extends AbstractXYDataset
     /**
      * Constructs a dataset based on the specified data array.
      *
-     * @param seriesNames  the names of the series (<code>null</code> not
+     * @param seriesNames  the names of the series ({@code null} not
      *     permitted).
      * @param data  the wind data.
      *
      * @throws NullPointerException if <code>seriesNames</code> is
-     *     <code>null</code>.
+     *     {@code null}.
      */
     public DefaultWindDataset(String[] seriesNames, Object[][][] data) {
         this(Arrays.asList(seriesNames), data);
@@ -117,15 +117,15 @@ public class DefaultWindDataset extends AbstractXYDataset
      *   Beaufort scale)</li>
      * </ul>
      *
-     * @param seriesKeys  the names of the series (<code>null</code> not
+     * @param seriesKeys  the names of the series ({@code null} not
      *     permitted).
-     * @param data  the wind dataset (<code>null</code> not permitted).
+     * @param data  the wind dataset ({@code null} not permitted).
      *
      * @throws IllegalArgumentException if <code>seriesKeys</code> is
-     *     <code>null</code>.
+     *     {@code null}.
      * @throws IllegalArgumentException if the number of series keys does not
      *     match the number of series in the array.
-     * @throws NullPointerException if <code>data</code> is <code>null</code>.
+     * @throws NullPointerException if <code>data</code> is {@code null}.
      */
     public DefaultWindDataset(List seriesKeys, Object[][][] data) {
         ParamChecks.nullNotPermitted(seriesKeys, "seriesKeys");
@@ -278,11 +278,11 @@ public class DefaultWindDataset extends AbstractXYDataset
     /**
      * Utility method for automatically generating series names.
      *
-     * @param data  the wind data (<code>null</code> not permitted).
+     * @param data  the wind data ({@code null} not permitted).
      *
      * @return An array of <i>Series N</i> with N = { 1 .. data.length }.
      *
-     * @throws NullPointerException if <code>data</code> is <code>null</code>.
+     * @throws NullPointerException if <code>data</code> is {@code null}.
      */
     public static List seriesNameListFromDataArray(Object[][] data) {
         int seriesCount = data.length;
@@ -297,14 +297,14 @@ public class DefaultWindDataset extends AbstractXYDataset
      * Checks this <code>WindDataset</code> for equality with an arbitrary
      * object.  This method returns <code>true</code> if and only if:
      * <ul>
-     *   <li><code>obj</code> is not <code>null</code>;</li>
+     *   <li><code>obj</code> is not {@code null};</li>
      *   <li><code>obj</code> is an instance of
      *       <code>DefaultWindDataset</code>;</li>
      *   <li>both datasets have the same number of series containing identical
      *       values.</li>
      * </ul>
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */
@@ -412,7 +412,7 @@ class WindDataItem implements Comparable, Serializable {
      * Tests this <code>WindDataItem</code> for equality with an arbitrary
      * object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

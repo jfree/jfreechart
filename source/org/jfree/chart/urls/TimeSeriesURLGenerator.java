@@ -90,13 +90,13 @@ public class TimeSeriesURLGenerator implements XYURLGenerator, Serializable {
     /**
      * Construct TimeSeriesURLGenerator overriding defaults.
      *
-     * @param dateFormat  a formatter for the date (<code>null</code> not
+     * @param dateFormat  a formatter for the date ({@code null} not
      *         permitted).
-     * @param prefix  the prefix of the URL (<code>null</code> not permitted).
+     * @param prefix  the prefix of the URL ({@code null} not permitted).
      * @param seriesParameterName  the name of the series parameter in the URL
-     *         (<code>null</code> not permitted).
+     *         ({@code null} not permitted).
      * @param itemParameterName  the name of the item parameter in the URL
-     *         (<code>null</code> not permitted).
+     *         ({@code null} not permitted).
      */
     public TimeSeriesURLGenerator(DateFormat dateFormat, String prefix,
             String seriesParameterName, String itemParameterName) {
@@ -114,7 +114,7 @@ public class TimeSeriesURLGenerator implements XYURLGenerator, Serializable {
     /**
      * Returns a clone of the date format assigned to this URL generator.
      *
-     * @return The date format (never <code>null</code>).
+     * @return The date format (never {@code null}).
      *
      * @since 1.0.6
      */
@@ -125,7 +125,7 @@ public class TimeSeriesURLGenerator implements XYURLGenerator, Serializable {
     /**
      * Returns the prefix string.
      *
-     * @return The prefix string (never <code>null</code>).
+     * @return The prefix string (never {@code null}).
      *
      * @since 1.0.6
      */
@@ -136,7 +136,7 @@ public class TimeSeriesURLGenerator implements XYURLGenerator, Serializable {
     /**
      * Returns the series parameter name.
      *
-     * @return The series parameter name (never <code>null</code>).
+     * @return The series parameter name (never {@code null}).
      *
      * @since 1.0.6
      */
@@ -147,7 +147,7 @@ public class TimeSeriesURLGenerator implements XYURLGenerator, Serializable {
     /**
      * Returns the item parameter name.
      *
-     * @return The item parameter name (never <code>null</code>).
+     * @return The item parameter name (never {@code null}).
      *
      * @since 1.0.6
      */
@@ -158,7 +158,7 @@ public class TimeSeriesURLGenerator implements XYURLGenerator, Serializable {
     /**
      * Generates a URL for a particular item within a series.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
      * @param series  the series number (zero-based index).
      * @param item  the item number (zero-based index).
      *
@@ -196,7 +196,7 @@ public class TimeSeriesURLGenerator implements XYURLGenerator, Serializable {
     /**
      * Tests this generator for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

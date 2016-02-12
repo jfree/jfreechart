@@ -160,7 +160,7 @@ public class AxisSpace implements Cloneable, PublicCloneable, Serializable {
      * Adds space to the top, bottom, left or right edge of the plot area.
      *
      * @param space  the space (in Java2D units).
-     * @param edge  the edge (<code>null</code> not permitted).
+     * @param edge  the edge ({@code null} not permitted).
      */
     public void add(double space, RectangleEdge edge) {
         ParamChecks.nullNotPermitted(edge, "edge");

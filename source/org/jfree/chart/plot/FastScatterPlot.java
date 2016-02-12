@@ -191,9 +191,9 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
      * <p>
      * The data is an array of x, y values:  data[0][i] = x, data[1][i] = y.
      *
-     * @param data  the data (<code>null</code> permitted).
-     * @param domainAxis  the domain (x) axis (<code>null</code> not permitted).
-     * @param rangeAxis  the range (y) axis (<code>null</code> not permitted).
+     * @param data  the data ({@code null} permitted).
+     * @param domainAxis  the domain (x) axis ({@code null} not permitted).
+     * @param rangeAxis  the range (y) axis ({@code null} not permitted).
      */
     public FastScatterPlot(float[][] data,
                            ValueAxis domainAxis, ValueAxis rangeAxis) {
@@ -236,7 +236,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
     /**
      * Returns the data array used by the plot.
      *
-     * @return The data array (possibly <code>null</code>).
+     * @return The data array (possibly {@code null}).
      *
      * @see #setData(float[][])
      */
@@ -248,7 +248,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
      * Sets the data array used by the plot and sends a {@link PlotChangeEvent}
      * to all registered listeners.
      *
-     * @param data  the data array (<code>null</code> permitted).
+     * @param data  the data array ({@code null} permitted).
      *
      * @see #getData()
      */
@@ -270,7 +270,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
     /**
      * Returns the domain axis for the plot.
      *
-     * @return The domain axis (never <code>null</code>).
+     * @return The domain axis (never {@code null}).
      *
      * @see #setDomainAxis(ValueAxis)
      */
@@ -282,7 +282,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
      * Sets the domain axis and sends a {@link PlotChangeEvent} to all
      * registered listeners.
      *
-     * @param axis  the axis (<code>null</code> not permitted).
+     * @param axis  the axis ({@code null} not permitted).
      *
      * @since 1.0.3
      *
@@ -297,7 +297,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
     /**
      * Returns the range axis for the plot.
      *
-     * @return The range axis (never <code>null</code>).
+     * @return The range axis (never {@code null}).
      *
      * @see #setRangeAxis(ValueAxis)
      */
@@ -309,7 +309,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
      * Sets the range axis and sends a {@link PlotChangeEvent} to all
      * registered listeners.
      *
-     * @param axis  the axis (<code>null</code> not permitted).
+     * @param axis  the axis ({@code null} not permitted).
      *
      * @since 1.0.3
      *
@@ -337,7 +337,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
      * Sets the color for the data points and sends a {@link PlotChangeEvent}
      * to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getPaint()
      */
@@ -380,7 +380,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
      * Returns the stroke for the grid-lines (if any) plotted against the
      * domain axis.
      *
-     * @return The stroke (never <code>null</code>).
+     * @return The stroke (never {@code null}).
      *
      * @see #setDomainGridlineStroke(Stroke)
      */
@@ -392,7 +392,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
      * Sets the stroke for the grid lines plotted against the domain axis and
      * sends a {@link PlotChangeEvent} to all registered listeners.
      *
-     * @param stroke  the stroke (<code>null</code> not permitted).
+     * @param stroke  the stroke ({@code null} not permitted).
      *
      * @see #getDomainGridlineStroke()
      */
@@ -406,7 +406,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
      * Returns the paint for the grid lines (if any) plotted against the domain
      * axis.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @see #setDomainGridlinePaint(Paint)
      */
@@ -418,7 +418,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
      * Sets the paint for the grid lines plotted against the domain axis and
      * sends a {@link PlotChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getDomainGridlinePaint()
      */
@@ -460,7 +460,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
      * Returns the stroke for the grid lines (if any) plotted against the range
      * axis.
      *
-     * @return The stroke (never <code>null</code>).
+     * @return The stroke (never {@code null}).
      *
      * @see #setRangeGridlineStroke(Stroke)
      */
@@ -472,7 +472,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
      * Sets the stroke for the grid lines plotted against the range axis and
      * sends a {@link PlotChangeEvent} to all registered listeners.
      *
-     * @param stroke  the stroke (<code>null</code> permitted).
+     * @param stroke  the stroke ({@code null} permitted).
      *
      * @see #getRangeGridlineStroke()
      */
@@ -486,7 +486,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
      * Returns the paint for the grid lines (if any) plotted against the range
      * axis.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @see #setRangeGridlinePaint(Paint)
      */
@@ -498,7 +498,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
      * Sets the paint for the grid lines plotted against the range axis and
      * sends a {@link PlotChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getRangeGridlinePaint()
      */
@@ -515,9 +515,9 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
      * @param g2  the graphics device.
      * @param area   the area within which the plot (including axis labels)
      *                   should be drawn.
-     * @param anchor  the anchor point (<code>null</code> permitted).
+     * @param anchor  the anchor point ({@code null} permitted).
      * @param parentState  the state from the parent plot (ignored).
-     * @param info  collects chart drawing information (<code>null</code>
+     * @param info  collects chart drawing information ({@code null}
      *              permitted).
      */
     @Override
@@ -572,12 +572,12 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
     /**
      * Draws a representation of the data within the dataArea region.  The
      * <code>info</code> and <code>crosshairState</code> arguments may be
-     * <code>null</code>.
+     * {@code null}.
      *
      * @param g2  the graphics device.
      * @param dataArea  the region in which the data is to be drawn.
      * @param info  an optional object for collection dimension information.
-     * @param crosshairState  collects crosshair information (<code>null</code>
+     * @param crosshairState  collects crosshair information ({@code null}
      *                        permitted).
      */
     public void render(Graphics2D g2, Rectangle2D dataArea,
@@ -675,12 +675,12 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
 
     /**
      * Returns the range of data values to be plotted along the axis, or
-     * <code>null</code> if the specified axis isn't the domain axis or the
+     * {@code null} if the specified axis isn't the domain axis or the
      * range axis for the plot.
      *
-     * @param axis  the axis (<code>null</code> permitted).
+     * @param axis  the axis ({@code null} permitted).
      *
-     * @return The range (possibly <code>null</code>).
+     * @return The range (possibly {@code null}).
      */
     @Override
     public Range getDataRange(ValueAxis axis) {
@@ -697,7 +697,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
     /**
      * Calculates the X data range.
      *
-     * @param data  the data (<code>null</code> permitted).
+     * @param data  the data ({@code null} permitted).
      *
      * @return The range.
      */
@@ -729,7 +729,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
     /**
      * Calculates the Y data range.
      *
-     * @param data  the data (<code>null</code> permitted).
+     * @param data  the data ({@code null} permitted).
      *
      * @return The range.
      */
@@ -998,7 +998,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
      * than referencing a dataset), and the data is included in the
      * equality test.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

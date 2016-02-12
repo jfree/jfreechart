@@ -156,7 +156,7 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
      * and specified fill of the area 'under' (between '0' and) the spline.
      *
      * @param precision  the number of points between data items.
-     * @param fillType  the type of fill beneath the curve (<code>null</code> 
+     * @param fillType  the type of fill beneath the curve ({@code null} 
      *     not permitted).
      * 
      * @since 1.0.17
@@ -203,7 +203,7 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
     /**
      * Returns the type of fill that the renderer draws beneath the curve.
      *
-     * @return The type of fill (never <code>null</code>).
+     * @return The type of fill (never {@code null}).
      *
      * @see #setFillType(FillType) 
      * 
@@ -217,7 +217,7 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
      * Set the fill type and sends a {@link RendererChangeEvent}
      * to all registered listeners.
      *
-     * @param fillType   the fill type (<code>null</code> not permitted).
+     * @param fillType   the fill type ({@code null} not permitted).
      *
      * @see #getFillType()
      * 
@@ -229,9 +229,9 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
     }
 
     /**
-     * Returns the gradient paint transformer, or <code>null</code>.
+     * Returns the gradient paint transformer, or {@code null}.
      * 
-     * @return The gradient paint transformer (possibly <code>null</code>).
+     * @return The gradient paint transformer (possibly {@code null}).
      * 
      * @since 1.0.17
      */
@@ -243,7 +243,7 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
      * Sets the gradient paint transformer and sends a 
      * {@link RendererChangeEvent} to all registered listeners.
      * 
-     * @param gpt  the transformer (<code>null</code> permitted).
+     * @param gpt  the transformer ({@code null} permitted).
      * 
      * @since 1.0.17
      */
@@ -484,7 +484,7 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
     /**
      * Tests this renderer for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

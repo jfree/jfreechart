@@ -106,8 +106,8 @@ public interface KeyedValues2D extends Values2D {
     /**
      * Returns the value associated with the specified keys.
      *
-     * @param rowKey  the row key (<code>null</code> not permitted).
-     * @param columnKey  the column key (<code>null</code> not permitted).
+     * @param rowKey  the row key ({@code null} not permitted).
+     * @param columnKey  the column key ({@code null} not permitted).
      *
      * @return The value.
      *

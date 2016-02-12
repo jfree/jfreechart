@@ -53,11 +53,11 @@ public interface XYToolTipGenerator {
     /**
      * Generates the tooltip text for the specified item.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
      * @param series  the series index (zero-based).
      * @param item  the item index (zero-based).
      *
-     * @return The tooltip text (possibly <code>null</code>).
+     * @return The tooltip text (possibly {@code null}).
      */
     public String generateToolTip(XYDataset dataset, int series, int item);
 

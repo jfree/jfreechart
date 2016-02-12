@@ -77,7 +77,7 @@ public abstract class AbstractPieLabelDistributor implements Serializable {
     /**
      * Adds a label record.
      *
-     * @param record  the label record (<code>null</code> not permitted).
+     * @param record  the label record ({@code null} not permitted).
      */
     public void addPieLabelRecord(PieLabelRecord record) {
         ParamChecks.nullNotPermitted(record, "record");

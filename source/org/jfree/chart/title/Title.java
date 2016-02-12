@@ -145,12 +145,12 @@ public abstract class Title extends AbstractBlock
     /**
      * Creates a new title, using default attributes where necessary.
      *
-     * @param position  the position of the title (<code>null</code> not
+     * @param position  the position of the title ({@code null} not
      *                  permitted).
      * @param horizontalAlignment  the horizontal alignment of the title
-     *                             (<code>null</code> not permitted).
+     *                             ({@code null} not permitted).
      * @param verticalAlignment  the vertical alignment of the title
-     *                           (<code>null</code> not permitted).
+     *                           ({@code null} not permitted).
      */
     protected Title(RectangleEdge position,
                     HorizontalAlignment horizontalAlignment,
@@ -164,16 +164,16 @@ public abstract class Title extends AbstractBlock
     /**
      * Creates a new title.
      *
-     * @param position  the position of the title (<code>null</code> not
+     * @param position  the position of the title ({@code null} not
      *                  permitted).
      * @param horizontalAlignment  the horizontal alignment of the title (LEFT,
-     *                             CENTER or RIGHT, <code>null</code> not
+     *                             CENTER or RIGHT, {@code null} not
      *                             permitted).
      * @param verticalAlignment  the vertical alignment of the title (TOP,
-     *                           MIDDLE or BOTTOM, <code>null</code> not
+     *                           MIDDLE or BOTTOM, {@code null} not
      *                           permitted).
      * @param padding  the amount of space to leave around the outside of the
-     *                 title (<code>null</code> not permitted).
+     *                 title ({@code null} not permitted).
      */
     protected Title(RectangleEdge position, 
             HorizontalAlignment horizontalAlignment, 
@@ -225,7 +225,7 @@ public abstract class Title extends AbstractBlock
     /**
      * Returns the position of the title.
      *
-     * @return The title position (never <code>null</code>).
+     * @return The title position (never {@code null}).
      */
     public RectangleEdge getPosition() {
         return this.position;
@@ -235,7 +235,7 @@ public abstract class Title extends AbstractBlock
      * Sets the position for the title and sends a {@link TitleChangeEvent} to
      * all registered listeners.
      *
-     * @param position  the position (<code>null</code> not permitted).
+     * @param position  the position ({@code null} not permitted).
      */
     public void setPosition(RectangleEdge position) {
         ParamChecks.nullNotPermitted(position, "position");
@@ -248,7 +248,7 @@ public abstract class Title extends AbstractBlock
     /**
      * Returns the horizontal alignment of the title.
      *
-     * @return The horizontal alignment (never <code>null</code>).
+     * @return The horizontal alignment (never {@code null}).
      */
     public HorizontalAlignment getHorizontalAlignment() {
         return this.horizontalAlignment;
@@ -258,7 +258,7 @@ public abstract class Title extends AbstractBlock
      * Sets the horizontal alignment for the title and sends a
      * {@link TitleChangeEvent} to all registered listeners.
      *
-     * @param alignment  the horizontal alignment (<code>null</code> not
+     * @param alignment  the horizontal alignment ({@code null} not
      *                   permitted).
      */
     public void setHorizontalAlignment(HorizontalAlignment alignment) {
@@ -272,7 +272,7 @@ public abstract class Title extends AbstractBlock
     /**
      * Returns the vertical alignment of the title.
      *
-     * @return The vertical alignment (never <code>null</code>).
+     * @return The vertical alignment (never {@code null}).
      */
     public VerticalAlignment getVerticalAlignment() {
         return this.verticalAlignment;
@@ -283,7 +283,7 @@ public abstract class Title extends AbstractBlock
      * listeners of the change.
      *
      * @param alignment  the new vertical alignment (TOP, MIDDLE or BOTTOM,
-     *                   <code>null</code> not permitted).
+     *                   {@code null} not permitted).
      */
     public void setVerticalAlignment(VerticalAlignment alignment) {
         ParamChecks.nullNotPermitted(alignment, "alignment");
@@ -388,7 +388,7 @@ public abstract class Title extends AbstractBlock
     /**
      * Tests an object for equality with this title.
      *
-     * @param obj  the object (<code>null</code> not permitted).
+     * @param obj  the object ({@code null} not permitted).
      *
      * @return <code>true</code> or <code>false</code>.
      */

@@ -102,14 +102,14 @@ public interface DialLayer {
     /**
      * Draws the content of this layer.
      *
-     * @param g2  the graphics target (<code>null</code> not permitted).
-     * @param plot  the plot (typically this should not be <code>null</code>,
+     * @param g2  the graphics target ({@code null} not permitted).
+     * @param plot  the plot (typically this should not be {@code null},
      *     but for a layer that doesn't need to reference the plot, it may
      *     be permitted).
      * @param frame  the reference frame for the dial's geometry
-     *     (<code>null</code> not permitted).  This is typically larger than
+     *     ({@code null} not permitted).  This is typically larger than
      *     the visible area of the dial (see the next parameter).
-     * @param view  the visible area for the dial (<code>null</code> not
+     * @param view  the visible area for the dial ({@code null} not
      *     permitted).
      */
     public void draw(Graphics2D g2, DialPlot plot, Rectangle2D frame,

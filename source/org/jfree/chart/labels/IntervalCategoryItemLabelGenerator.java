@@ -74,9 +74,9 @@ public class IntervalCategoryItemLabelGenerator
     /**
      * Creates a new generator with the specified number formatter.
      *
-     * @param labelFormat  the label format string (<code>null</code> not
+     * @param labelFormat  the label format string ({@code null} not
      *                     permitted).
-     * @param formatter  the number formatter (<code>null</code> not permitted).
+     * @param formatter  the number formatter ({@code null} not permitted).
      */
     public IntervalCategoryItemLabelGenerator(String labelFormat,
                                               NumberFormat formatter) {
@@ -86,9 +86,9 @@ public class IntervalCategoryItemLabelGenerator
     /**
      * Creates a new generator with the specified date formatter.
      *
-     * @param labelFormat  the label format string (<code>null</code> not
+     * @param labelFormat  the label format string ({@code null} not
      *                     permitted).
-     * @param formatter  the date formatter (<code>null</code> not permitted).
+     * @param formatter  the date formatter ({@code null} not permitted).
      */
     public IntervalCategoryItemLabelGenerator(String labelFormat,
                                               DateFormat formatter) {
@@ -99,11 +99,11 @@ public class IntervalCategoryItemLabelGenerator
      * Creates the array of items that can be passed to the
      * <code>MessageFormat</code> class for creating labels.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
      * @param row  the row index (zero-based).
      * @param column  the column index (zero-based).
      *
-     * @return The items (never <code>null</code>).
+     * @return The items (never {@code null}).
      */
     @Override
     protected Object[] createItemArray(CategoryDataset dataset,

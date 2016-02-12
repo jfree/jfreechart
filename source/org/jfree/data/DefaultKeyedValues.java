@@ -117,7 +117,7 @@ public class DefaultKeyedValues implements KeyedValues, Cloneable,
      *
      * @param item  the item of interest (zero-based index).
      *
-     * @return The value (possibly <code>null</code>).
+     * @return The value (possibly {@code null}).
      *
      * @throws IndexOutOfBoundsException if <code>item</code> is out of bounds.
      */
@@ -143,12 +143,12 @@ public class DefaultKeyedValues implements KeyedValues, Cloneable,
     /**
      * Returns the index for a given key.
      *
-     * @param key  the key (<code>null</code> not permitted).
+     * @param key  the key ({@code null} not permitted).
      *
      * @return The index, or <code>-1</code> if the key is not recognised.
      *
      * @throws IllegalArgumentException if <code>key</code> is
-     *     <code>null</code>.
+     *     {@code null}.
      */
     @Override
     public int getIndex(Comparable key) {
@@ -163,7 +163,7 @@ public class DefaultKeyedValues implements KeyedValues, Cloneable,
     /**
      * Returns the keys for the values in the collection.
      *
-     * @return The keys (never <code>null</code>).
+     * @return The keys (never {@code null}).
      */
     @Override
     public List getKeys() {
@@ -173,9 +173,9 @@ public class DefaultKeyedValues implements KeyedValues, Cloneable,
     /**
      * Returns the value for a given key.
      *
-     * @param key  the key (<code>null</code> not permitted).
+     * @param key  the key ({@code null} not permitted).
      *
-     * @return The value (possibly <code>null</code>).
+     * @return The value (possibly {@code null}).
      *
      * @throws UnknownKeyException if the key is not recognised.
      *
@@ -193,7 +193,7 @@ public class DefaultKeyedValues implements KeyedValues, Cloneable,
     /**
      * Updates an existing value, or adds a new value to the collection.
      *
-     * @param key  the key (<code>null</code> not permitted).
+     * @param key  the key ({@code null} not permitted).
      * @param value  the value.
      *
      * @see #addValue(Comparable, Number)
@@ -207,8 +207,8 @@ public class DefaultKeyedValues implements KeyedValues, Cloneable,
      * This method passes control directly to the
      * {@link #setValue(Comparable, Number)} method.
      *
-     * @param key  the key (<code>null</code> not permitted).
-     * @param value  the value (<code>null</code> permitted).
+     * @param key  the key ({@code null} not permitted).
+     * @param value  the value ({@code null} permitted).
      */
     public void addValue(Comparable key, Number value) {
         setValue(key, value);
@@ -217,7 +217,7 @@ public class DefaultKeyedValues implements KeyedValues, Cloneable,
     /**
      * Updates an existing value, or adds a new value to the collection.
      *
-     * @param key  the key (<code>null</code> not permitted).
+     * @param key  the key ({@code null} not permitted).
      * @param value  the value.
      */
     public void setValue(Comparable key, double value) {
@@ -227,8 +227,8 @@ public class DefaultKeyedValues implements KeyedValues, Cloneable,
     /**
      * Updates an existing value, or adds a new value to the collection.
      *
-     * @param key  the key (<code>null</code> not permitted).
-     * @param value  the value (<code>null</code> permitted).
+     * @param key  the key ({@code null} not permitted).
+     * @param value  the value ({@code null} permitted).
      */
     public void setValue(Comparable key, Number value) {
         ParamChecks.nullNotPermitted(key, "key");
@@ -250,7 +250,7 @@ public class DefaultKeyedValues implements KeyedValues, Cloneable,
      * for that item and moves it to the specified position.
      *
      * @param position  the position (in the range 0 to getItemCount()).
-     * @param key  the key (<code>null</code> not permitted).
+     * @param key  the key ({@code null} not permitted).
      * @param value  the value.
      *
      * @since 1.0.6
@@ -265,8 +265,8 @@ public class DefaultKeyedValues implements KeyedValues, Cloneable,
      * for that item and moves it to the specified position.
      *
      * @param position  the position (in the range 0 to getItemCount()).
-     * @param key  the key (<code>null</code> not permitted).
-     * @param value  the value (<code>null</code> permitted).
+     * @param key  the key ({@code null} not permitted).
+     * @param value  the value ({@code null} permitted).
      *
      * @since 1.0.6
      */
@@ -322,10 +322,10 @@ public class DefaultKeyedValues implements KeyedValues, Cloneable,
     /**
      * Removes a value from the collection.
      *
-     * @param key  the item key (<code>null</code> not permitted).
+     * @param key  the item key ({@code null} not permitted).
      *
      * @throws IllegalArgumentException if <code>key</code> is
-     *     <code>null</code>.
+     *     {@code null}.
      * @throws UnknownKeyException if <code>key</code> is not recognised.
      */
     public void removeValue(Comparable key) {
@@ -351,7 +351,7 @@ public class DefaultKeyedValues implements KeyedValues, Cloneable,
     /**
      * Sorts the items in the list by key.
      *
-     * @param order  the sort order (<code>null</code> not permitted).
+     * @param order  the sort order ({@code null} not permitted).
      */
     public void sortByKeys(SortOrder order) {
         final int size = this.keys.size();
@@ -375,10 +375,10 @@ public class DefaultKeyedValues implements KeyedValues, Cloneable,
 
     /**
      * Sorts the items in the list by value.  If the list contains
-     * <code>null</code> values, they will sort to the end of the list,
+     * {@code null} values, they will sort to the end of the list,
      * irrespective of the sort order.
      *
-     * @param order  the sort order (<code>null</code> not permitted).
+     * @param order  the sort order ({@code null} not permitted).
      */
     public void sortByValues(SortOrder order) {
         final int size = this.keys.size();
@@ -402,7 +402,7 @@ public class DefaultKeyedValues implements KeyedValues, Cloneable,
     /**
      * Tests if this object is equal to another.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

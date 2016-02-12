@@ -94,10 +94,10 @@ public class DialBackground extends AbstractDialLayer implements DialLayer,
     /**
      * Creates a new instance of <code>DialBackground</code>.  The
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @throws IllegalArgumentException if <code>paint</code> is
-     *     <code>null</code>.
+     *     {@code null}.
      */
     public DialBackground(Paint paint) {
         ParamChecks.nullNotPermitted(paint, "paint");
@@ -108,7 +108,7 @@ public class DialBackground extends AbstractDialLayer implements DialLayer,
     /**
      * Returns the paint used to fill the background.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @see #setPaint(Paint)
      */
@@ -120,7 +120,7 @@ public class DialBackground extends AbstractDialLayer implements DialLayer,
      * Sets the paint for the dial background and sends a
      * {@link DialLayerChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getPaint()
      */
@@ -134,7 +134,7 @@ public class DialBackground extends AbstractDialLayer implements DialLayer,
      * Returns the transformer used to adjust the coordinates of any
      * <code>GradientPaint</code> instance used for the background paint.
      *
-     * @return The transformer (never <code>null</code>).
+     * @return The transformer (never {@code null}).
      *
      * @see #setGradientPaintTransformer(GradientPaintTransformer)
      */
@@ -147,7 +147,7 @@ public class DialBackground extends AbstractDialLayer implements DialLayer,
      * <code>GradientPaint</code> instance used for the background paint, and
      * sends a {@link DialLayerChangeEvent} to all registered listeners.
      *
-     * @param t  the transformer (<code>null</code> not permitted).
+     * @param t  the transformer ({@code null} not permitted).
      *
      * @see #getGradientPaintTransformer()
      */
@@ -173,10 +173,10 @@ public class DialBackground extends AbstractDialLayer implements DialLayer,
      * frame specifies a window, the clipping region will already have been
      * set to this window before this method is called.
      *
-     * @param g2  the graphics device (<code>null</code> not permitted).
+     * @param g2  the graphics device ({@code null} not permitted).
      * @param plot  the plot (ignored here).
      * @param frame  the dial frame (ignored here).
-     * @param view  the view rectangle (<code>null</code> not permitted).
+     * @param view  the view rectangle ({@code null} not permitted).
      */
     @Override
     public void draw(Graphics2D g2, DialPlot plot, Rectangle2D frame,
@@ -194,7 +194,7 @@ public class DialBackground extends AbstractDialLayer implements DialLayer,
     /**
      * Tests this instance for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

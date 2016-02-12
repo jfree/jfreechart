@@ -166,7 +166,7 @@ public class LegendItemEntity extends ChartEntity
     /**
      * Tests this object for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */
@@ -208,7 +208,7 @@ public class LegendItemEntity extends ChartEntity
      * Returns a string representing this object (useful for debugging
      * purposes).
      *
-     * @return A string (never <code>null</code>).
+     * @return A string (never {@code null}).
      */
     @Override
     public String toString() {

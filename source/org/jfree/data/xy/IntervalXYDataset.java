@@ -60,7 +60,7 @@ public interface IntervalXYDataset extends XYDataset {
      * @param series  the series index (zero-based).
      * @param item  the item index (zero-based).
      *
-     * @return The lower bound of the x-interval (<code>null</code> permitted).
+     * @return The lower bound of the x-interval ({@code null} permitted).
      */
     public Number getStartX(int series, int item);
 
@@ -85,7 +85,7 @@ public interface IntervalXYDataset extends XYDataset {
      * @param series  the series index (zero-based).
      * @param item  the item index (zero-based).
      *
-     * @return The upper bound of the x-interval (<code>null</code> permitted).
+     * @return The upper bound of the x-interval ({@code null} permitted).
      */
     public Number getEndX(int series, int item);
 
@@ -110,7 +110,7 @@ public interface IntervalXYDataset extends XYDataset {
      * @param series  the series index (zero-based).
      * @param item  the item index (zero-based).
      *
-     * @return The lower bound of the y-interval (<code>null</code> permitted).
+     * @return The lower bound of the y-interval ({@code null} permitted).
      */
     public Number getStartY(int series, int item);
 
@@ -135,7 +135,7 @@ public interface IntervalXYDataset extends XYDataset {
      * @param series  the series index (zero-based).
      * @param item  the item index (zero-based).
      *
-     * @return The upper bound of the y-interval (<code>null</code> permitted).
+     * @return The upper bound of the y-interval ({@code null} permitted).
      */
     public Number getEndY(int series, int item);
 

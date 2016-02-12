@@ -179,7 +179,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
     /**
      * Sets the default bar painter.
      *
-     * @param painter  the painter (<code>null</code> not permitted).
+     * @param painter  the painter ({@code null} not permitted).
      *
      * @since 1.0.11
      */
@@ -267,7 +267,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
     private boolean includeBaseInRange;
 
     /**
-     * The bar painter (never <code>null</code>).
+     * The bar painter (never {@code null}).
      *
      * @since 1.0.11
      */
@@ -464,7 +464,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      * Returns the gradient paint transformer (an object used to transform
      * gradient paint objects to fit each bar).
      *
-     * @return A transformer (<code>null</code> possible).
+     * @return A transformer ({@code null} possible).
      *
      * @see #setGradientPaintTransformer(GradientPaintTransformer)
      */
@@ -476,7 +476,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      * Sets the gradient paint transformer and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param transformer  the transformer (<code>null</code> permitted).
+     * @param transformer  the transformer ({@code null} permitted).
      *
      * @see #getGradientPaintTransformer()
      */
@@ -490,7 +490,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      * Returns the fallback position for positive item labels that don't fit
      * within a bar.
      *
-     * @return The fallback position (<code>null</code> possible).
+     * @return The fallback position ({@code null} possible).
      *
      * @see #setPositiveItemLabelPositionFallback(ItemLabelPosition)
      */
@@ -503,7 +503,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      * within a bar, and sends a {@link RendererChangeEvent} to all registered
      * listeners.
      *
-     * @param position  the position (<code>null</code> permitted).
+     * @param position  the position ({@code null} permitted).
      *
      * @see #getPositiveItemLabelPositionFallback()
      */
@@ -517,7 +517,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      * Returns the fallback position for negative item labels that don't fit
      * within a bar.
      *
-     * @return The fallback position (<code>null</code> possible).
+     * @return The fallback position ({@code null} possible).
      *
      * @see #setPositiveItemLabelPositionFallback(ItemLabelPosition)
      */
@@ -530,7 +530,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      * within a bar, and sends a {@link RendererChangeEvent} to all registered
      * listeners.
      *
-     * @param position  the position (<code>null</code> permitted).
+     * @param position  the position ({@code null} permitted).
      *
      * @see #getNegativeItemLabelPositionFallback()
      */
@@ -578,7 +578,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
     /**
      * Returns the bar painter.
      *
-     * @return The bar painter (never <code>null</code>).
+     * @return The bar painter (never {@code null}).
      *
      * @see #setBarPainter(BarPainter)
      *
@@ -592,7 +592,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      * Sets the bar painter for this renderer and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param painter  the painter (<code>null</code> not permitted).
+     * @param painter  the painter ({@code null} not permitted).
      *
      * @see #getBarPainter()
      *
@@ -646,7 +646,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      * Sets the shadow paint and sends a {@link RendererChangeEvent} to all
      * registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getShadowPaint()
      *
@@ -862,7 +862,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      *
      * @param value  the value represented by the bar.
      *
-     * @return The coordinates for each end of the bar (or <code>null</code> if
+     * @return The coordinates for each end of the bar (or {@code null} if
      *         the bar is not visible for the current axis range).
      */
     protected double[] calculateBarL0L1(double value) {
@@ -887,11 +887,11 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      * of values in the dataset, plus the flag that determines whether or not
      * the base value for the bars should be included in the range.
      *
-     * @param dataset  the dataset (<code>null</code> permitted).
+     * @param dataset  the dataset ({@code null} permitted).
      * @param includeInterval  include the interval if the dataset has one?
      *
-     * @return The range (or <code>null</code> if the dataset is
-     *         <code>null</code> or empty).
+     * @return The range (or {@code null} if the dataset is
+     *         {@code null} or empty).
      */
     @Override
     public Range findRangeBounds(CategoryDataset dataset,
@@ -914,7 +914,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      * @param datasetIndex  the dataset index (zero-based).
      * @param series  the series index (zero-based).
      *
-     * @return The legend item (possibly <code>null</code>).
+     * @return The legend item (possibly {@code null}).
      */
     @Override
     public LegendItem getLegendItem(int datasetIndex, int series) {
@@ -1327,7 +1327,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
     /**
      * Tests this instance for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

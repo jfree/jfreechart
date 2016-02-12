@@ -50,14 +50,14 @@ public class ParamChecks {
 
     /**
      * Throws an <code>IllegalArgumentException</code> if the supplied 
-     * <code>param</code> is <code>null</code>.
+     * <code>param</code> is {@code null}.
      *
-     * @param param  the parameter to check (<code>null</code> permitted).
+     * @param param  the parameter to check ({@code null} permitted).
      * @param name  the name of the parameter (to use in the exception message
-     *     if <code>param</code> is <code>null</code>).
+     *     if <code>param</code> is {@code null}).
      *
      * @throws IllegalArgumentException  if <code>param</code> is 
-     *     <code>null</code>.
+     *     {@code null}.
      *
      * @since 1.0.14
      */

@@ -84,14 +84,14 @@ public class DialCap extends AbstractDialLayer implements DialLayer, Cloneable,
 
     /**
      * The paint used to draw the cap outline (this should never be
-     * <code>null</code>).  This field is transient because it requires
+     * {@code null}).  This field is transient because it requires
      * special handling for serialization.
      */
     private transient Paint outlinePaint;
 
     /**
      * The stroke used to draw the cap outline (this should never be
-     * <code>null</code>).   This field is transient because it requires
+     * {@code null}).   This field is transient because it requires
      * special handling for serialization.
      */
     private transient Stroke outlineStroke;
@@ -139,7 +139,7 @@ public class DialCap extends AbstractDialLayer implements DialLayer, Cloneable,
     /**
      * Returns the paint used to fill the cap.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @see #setFillPaint(Paint)
      */
@@ -151,7 +151,7 @@ public class DialCap extends AbstractDialLayer implements DialLayer, Cloneable,
      * Sets the paint for the cap background and sends a
      * {@link DialLayerChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getFillPaint()
      */
@@ -164,7 +164,7 @@ public class DialCap extends AbstractDialLayer implements DialLayer, Cloneable,
     /**
      * Returns the paint used to draw the outline of the cap.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @see #setOutlinePaint(Paint)
      */
@@ -176,7 +176,7 @@ public class DialCap extends AbstractDialLayer implements DialLayer, Cloneable,
      * Sets the paint used to draw the outline of the cap and sends a
      * {@link DialLayerChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getOutlinePaint()
      */
@@ -189,7 +189,7 @@ public class DialCap extends AbstractDialLayer implements DialLayer, Cloneable,
     /**
      * Returns the stroke used to draw the outline of the cap.
      *
-     * @return The stroke (never <code>null</code>).
+     * @return The stroke (never {@code null}).
      *
      * @see #setOutlineStroke(Stroke)
      */
@@ -201,7 +201,7 @@ public class DialCap extends AbstractDialLayer implements DialLayer, Cloneable,
      * Sets the stroke used to draw the outline of the cap and sends a
      * {@link DialLayerChangeEvent} to all registered listeners.
      *
-     * @param stroke  the stroke (<code>null</code> not permitted).
+     * @param stroke  the stroke ({@code null} not permitted).
      *
      * @see #getOutlineStroke()
      */
@@ -227,10 +227,10 @@ public class DialCap extends AbstractDialLayer implements DialLayer, Cloneable,
      * frame specifies a window, the clipping region will already have been
      * set to this window before this method is called.
      *
-     * @param g2  the graphics device (<code>null</code> not permitted).
+     * @param g2  the graphics device ({@code null} not permitted).
      * @param plot  the plot (ignored here).
      * @param frame  the dial frame (ignored here).
-     * @param view  the view rectangle (<code>null</code> not permitted).
+     * @param view  the view rectangle ({@code null} not permitted).
      */
     @Override
     public void draw(Graphics2D g2, DialPlot plot, Rectangle2D frame,
@@ -252,7 +252,7 @@ public class DialCap extends AbstractDialLayer implements DialLayer, Cloneable,
     /**
      * Tests this instance for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

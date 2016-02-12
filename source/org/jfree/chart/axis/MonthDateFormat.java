@@ -82,7 +82,7 @@ public class MonthDateFormat extends DateFormat {
     /**
      * Creates a new instance for the specified time zone.
      *
-     * @param zone  the time zone (<code>null</code> not permitted).
+     * @param zone  the time zone ({@code null} not permitted).
      */
     public MonthDateFormat(TimeZone zone) {
         this(zone, Locale.getDefault(), 1, true, false);
@@ -92,7 +92,7 @@ public class MonthDateFormat extends DateFormat {
      * Creates a new instance for the specified time zone.
      *
      * @param locale  the locale used to obtain the month
-     *                names (<code>null</code> not permitted).
+     *                names ({@code null} not permitted).
      */
     public MonthDateFormat(Locale locale) {
         this(TimeZone.getDefault(), locale, 1, true, false);
@@ -101,7 +101,7 @@ public class MonthDateFormat extends DateFormat {
     /**
      * Creates a new instance for the specified time zone.
      *
-     * @param zone  the time zone (<code>null</code> not permitted).
+     * @param zone  the time zone ({@code null} not permitted).
      * @param chars  the maximum number of characters to use from the month
      *               names (that are obtained from the date symbols of the
      *               default locale).  If this value is &lt;= 0, the entire
@@ -114,7 +114,7 @@ public class MonthDateFormat extends DateFormat {
     /**
      * Creates a new instance for the specified time zone.
      *
-     * @param locale  the locale (<code>null</code> not permitted).
+     * @param locale  the locale ({@code null} not permitted).
      * @param chars  the maximum number of characters to use from the month
      *               names (that are obtained from the date symbols of the
      *               default locale).  If this value is &lt;= 0, the entire
@@ -128,9 +128,9 @@ public class MonthDateFormat extends DateFormat {
      * Creates a new formatter.
      *
      * @param zone  the time zone used to extract the month and year from dates
-     *              passed to this formatter (<code>null</code> not permitted).
+     *              passed to this formatter ({@code null} not permitted).
      * @param locale  the locale used to determine the month names
-     *                (<code>null</code> not permitted).
+     *                ({@code null} not permitted).
      * @param chars  the maximum number of characters to use from the month
      *               names, or zero to indicate that the entire month name
      *               should be used.
@@ -152,9 +152,9 @@ public class MonthDateFormat extends DateFormat {
      * Creates a new formatter.
      *
      * @param zone  the time zone used to extract the month and year from dates
-     *              passed to this formatter (<code>null</code> not permitted).
+     *              passed to this formatter ({@code null} not permitted).
      * @param locale  the locale used to determine the month names
-     *                (<code>null</code> not permitted).
+     *                ({@code null} not permitted).
      * @param chars  the maximum number of characters to use from the month
      *               names, or zero to indicate that the entire month name
      *               should be used.
@@ -214,7 +214,7 @@ public class MonthDateFormat extends DateFormat {
      * @param source  the date string.
      * @param pos  the parse position.
      *
-     * @return <code>null</code>, as this method has not been implemented.
+     * @return {@code null}, as this method has not been implemented.
      */
     @Override
     public Date parse(String source, ParsePosition pos) {

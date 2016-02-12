@@ -69,8 +69,8 @@ public class JFreeChartEntity extends ChartEntity {
     /**
      * Creates a new chart entity.
      *
-     * @param area  the area (<code>null</code> not permitted).
-     * @param chart  the chart (<code>null</code> not permitted).
+     * @param area  the area ({@code null} not permitted).
+     * @param chart  the chart ({@code null} not permitted).
      */
     public JFreeChartEntity(Shape area, JFreeChart chart) {
         // defer argument checks...
@@ -80,9 +80,9 @@ public class JFreeChartEntity extends ChartEntity {
     /**
      * Creates a new chart entity.
      *
-     * @param area  the area (<code>null</code> not permitted).
-     * @param chart  the chart (<code>null</code> not permitted).
-     * @param toolTipText  the tool tip text (<code>null</code> permitted).
+     * @param area  the area ({@code null} not permitted).
+     * @param chart  the chart ({@code null} not permitted).
+     * @param toolTipText  the tool tip text ({@code null} permitted).
      */
     public JFreeChartEntity(Shape area, JFreeChart chart, String toolTipText) {
         // defer argument checks...
@@ -92,10 +92,10 @@ public class JFreeChartEntity extends ChartEntity {
     /**
      * Creates a new chart entity.
      *
-     * @param area  the area (<code>null</code> not permitted).
-     * @param chart  the chart (<code>null</code> not permitted).
-     * @param toolTipText  the tool tip text (<code>null</code> permitted).
-     * @param urlText  the URL text for HTML image maps (<code>null</code>
+     * @param area  the area ({@code null} not permitted).
+     * @param chart  the chart ({@code null} not permitted).
+     * @param toolTipText  the tool tip text ({@code null} permitted).
+     * @param urlText  the URL text for HTML image maps ({@code null}
      *                 permitted).
      */
     public JFreeChartEntity(Shape area, JFreeChart chart, String toolTipText,
@@ -108,7 +108,7 @@ public class JFreeChartEntity extends ChartEntity {
     /**
      * Returns the chart that occupies the entity area.
      *
-     * @return The chart (never <code>null</code>).
+     * @return The chart (never {@code null}).
      */
     public JFreeChart getChart() {
         return this.chart;
@@ -131,7 +131,7 @@ public class JFreeChartEntity extends ChartEntity {
     /**
      * Tests the entity for equality with an arbitrary object.
      *
-     * @param obj  the object to test against (<code>null</code> permitted).
+     * @param obj  the object to test against ({@code null} permitted).
      *
      * @return A boolean.
      */

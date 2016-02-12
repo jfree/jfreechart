@@ -71,7 +71,7 @@ public class PanHandlerFX extends AbstractMouseHandlerFX {
     /**
      * Creates a new instance that requires no modifier keys.
      * 
-     * @param id  the id (<code>null</code> not permitted).
+     * @param id  the id ({@code null} not permitted).
      */
     public PanHandlerFX(String id) { 
         this(id, false, false, false, false);
@@ -81,7 +81,7 @@ public class PanHandlerFX extends AbstractMouseHandlerFX {
      * Creates a new instance that will be activated using the specified 
      * combination of modifier keys.
      * 
-     * @param id  the id (<code>null</code> not permitted).
+     * @param id  the id ({@code null} not permitted).
      * @param altKey  require ALT key?
      * @param ctrlKey  require CTRL key?
      * @param metaKey  require META key?
@@ -96,8 +96,8 @@ public class PanHandlerFX extends AbstractMouseHandlerFX {
      * Handles a mouse pressed event by recording the initial mouse pointer
      * location.
      * 
-     * @param canvas  the JavaFX canvas (<code>null</code> not permitted).
-     * @param e  the mouse event (<code>null</code> not permitted).
+     * @param canvas  the JavaFX canvas ({@code null} not permitted).
+     * @param e  the mouse event ({@code null} not permitted).
      */
     @Override
     public void handleMousePressed(ChartCanvas canvas, MouseEvent e) {
@@ -124,8 +124,8 @@ public class PanHandlerFX extends AbstractMouseHandlerFX {
      * Handles a mouse dragged event by calculating the distance panned and
      * updating the axes accordingly.
      * 
-     * @param canvas  the JavaFX canvas (<code>null</code> not permitted).
-     * @param e  the mouse event (<code>null</code> not permitted).
+     * @param canvas  the JavaFX canvas ({@code null} not permitted).
+     * @param e  the mouse event ({@code null} not permitted).
      */
     public void handleMouseDragged(ChartCanvas canvas, MouseEvent e) {
         if (this.panLast == null) {

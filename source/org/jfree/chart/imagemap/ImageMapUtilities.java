@@ -69,9 +69,9 @@ public class ImageMapUtilities {
     /**
      * Writes an image map to an output stream.
      *
-     * @param writer  the writer (<code>null</code> not permitted).
-     * @param name  the map name (<code>null</code> not permitted).
-     * @param info  the chart rendering info (<code>null</code> not permitted).
+     * @param writer  the writer ({@code null} not permitted).
+     * @param name  the map name ({@code null} not permitted).
+     * @param info  the chart rendering info ({@code null} not permitted).
      *
      * @throws java.io.IOException if there are any I/O errors.
      */
@@ -88,9 +88,9 @@ public class ImageMapUtilities {
     /**
      * Writes an image map to an output stream.
      *
-     * @param writer  the writer (<code>null</code> not permitted).
-     * @param name  the map name (<code>null</code> not permitted).
-     * @param info  the chart rendering info (<code>null</code> not permitted).
+     * @param writer  the writer ({@code null} not permitted).
+     * @param name  the map name ({@code null} not permitted).
+     * @param info  the chart rendering info ({@code null} not permitted).
      * @param useOverLibForToolTips  whether to use OverLIB for tooltips
      *                               (http://www.bosrup.com/web/overlib/).
      *
@@ -118,14 +118,14 @@ public class ImageMapUtilities {
     /**
      * Writes an image map to an output stream.
      *
-     * @param writer  the writer (<code>null</code> not permitted).
-     * @param name  the map name (<code>null</code> not permitted).
-     * @param info  the chart rendering info (<code>null</code> not permitted).
+     * @param writer  the writer ({@code null} not permitted).
+     * @param name  the map name ({@code null} not permitted).
+     * @param info  the chart rendering info ({@code null} not permitted).
      * @param toolTipTagFragmentGenerator  a generator for the HTML fragment
-     *     that will contain the tooltip text (<code>null</code> not permitted
+     *     that will contain the tooltip text ({@code null} not permitted
      *     if <code>info</code> contains tooltip information).
      * @param urlTagFragmentGenerator  a generator for the HTML fragment that
-     *     will contain the URL reference (<code>null</code> not permitted if
+     *     will contain the URL reference ({@code null} not permitted if
      *     <code>info</code> contains URLs).
      *
      * @throws java.io.IOException if there are any I/O errors.
@@ -144,8 +144,8 @@ public class ImageMapUtilities {
      * Creates an image map element that complies with the XHTML 1.0
      * specification.
      *
-     * @param name  the map name (<code>null</code> not permitted).
-     * @param info  the chart rendering info (<code>null</code> not permitted).
+     * @param name  the map name ({@code null} not permitted).
+     * @param info  the chart rendering info ({@code null} not permitted).
      *
      * @return The map element.
      */
@@ -159,13 +159,13 @@ public class ImageMapUtilities {
      * Creates an image map element that complies with the XHTML 1.0
      * specification.
      *
-     * @param name  the map name (<code>null</code> not permitted).
-     * @param info  the chart rendering info (<code>null</code> not permitted).
+     * @param name  the map name ({@code null} not permitted).
+     * @param info  the chart rendering info ({@code null} not permitted).
      * @param toolTipTagFragmentGenerator  a generator for the HTML fragment
-     *     that will contain the tooltip text (<code>null</code> not permitted
+     *     that will contain the tooltip text ({@code null} not permitted
      *     if <code>info</code> contains tooltip information).
      * @param urlTagFragmentGenerator  a generator for the HTML fragment that
-     *     will contain the URL reference (<code>null</code> not permitted if
+     *     will contain the URL reference ({@code null} not permitted if
      *     <code>info</code> contains URLs).
      *
      * @return The map tag.
@@ -204,7 +204,7 @@ public class ImageMapUtilities {
      * Returns a string that is equivalent to the input string, but with
      * special characters converted to HTML escape sequences.
      *
-     * @param input  the string to escape (<code>null</code> not permitted).
+     * @param input  the string to escape ({@code null} not permitted).
      *
      * @return A string with characters escaped.
      *
@@ -245,7 +245,7 @@ public class ImageMapUtilities {
      * Returns a string that is equivalent to the input string, but with
      * special characters converted to JavaScript escape sequences.
      *
-     * @param input  the string to escape (<code>null</code> not permitted).
+     * @param input  the string to escape ({@code null} not permitted).
      *
      * @return A string with characters escaped.
      *

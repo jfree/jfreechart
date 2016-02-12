@@ -244,7 +244,7 @@ public class CategoryTableXYDataset extends AbstractIntervalXYDataset
      * @param series  the series index (zero-based).
      * @param item  the item index (zero-based).
      *
-     * @return The y value (possibly <code>null</code>).
+     * @return The y value (possibly {@code null}).
      */
     @Override
     public Number getY(int series, int item) {
@@ -386,7 +386,7 @@ public class CategoryTableXYDataset extends AbstractIntervalXYDataset
     /**
      * Tests this dataset for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

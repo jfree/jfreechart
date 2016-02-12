@@ -96,13 +96,13 @@ public class BoxAndWhiskerXYToolTipGenerator extends StandardXYToolTipGenerator
 
     /**
      * Creates a new item label generator.  If the date formatter is not
-     * <code>null</code>, the x-values will be formatted as dates.
+     * {@code null}, the x-values will be formatted as dates.
      *
-     * @param toolTipFormat  the tool tip format string (<code>null</code> not
+     * @param toolTipFormat  the tool tip format string ({@code null} not
      *                       permitted).
-     * @param numberFormat  the number formatter (<code>null</code> not
+     * @param numberFormat  the number formatter ({@code null} not
      *                      permitted).
-     * @param dateFormat  the date formatter (<code>null</code> permitted).
+     * @param dateFormat  the date formatter ({@code null} permitted).
      */
     public BoxAndWhiskerXYToolTipGenerator(String toolTipFormat,
                                            DateFormat dateFormat,
@@ -116,11 +116,11 @@ public class BoxAndWhiskerXYToolTipGenerator extends StandardXYToolTipGenerator
      * Creates the array of items that can be passed to the
      * {@link MessageFormat} class for creating labels.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
      * @param series  the series (zero-based index).
      * @param item  the item (zero-based index).
      *
-     * @return The items (never <code>null</code>).
+     * @return The items (never {@code null}).
      */
     @Override
     protected Object[] createItemArray(XYDataset dataset, int series,

@@ -72,7 +72,7 @@ public class SlidingCategoryDataset extends AbstractDataset
     /**
      * Creates a new instance.
      *
-     * @param underlying  the underlying dataset (<code>null</code> not
+     * @param underlying  the underlying dataset ({@code null} not
      *     permitted).
      * @param firstColumn  the index of the first visible column from the
      *     underlying dataset.
@@ -88,7 +88,7 @@ public class SlidingCategoryDataset extends AbstractDataset
     /**
      * Returns the underlying dataset that was supplied to the constructor.
      *
-     * @return The underlying dataset (never <code>null</code>).
+     * @return The underlying dataset (never {@code null}).
      */
     public CategoryDataset getUnderlyingDataset() {
         return this.underlying;
@@ -248,10 +248,10 @@ public class SlidingCategoryDataset extends AbstractDataset
     /**
      * Returns the value for a pair of keys.
      *
-     * @param rowKey  the row key (<code>null</code> not permitted).
-     * @param columnKey  the column key (<code>null</code> not permitted).
+     * @param rowKey  the row key ({@code null} not permitted).
+     * @param columnKey  the column key ({@code null} not permitted).
      *
-     * @return The value (possibly <code>null</code>).
+     * @return The value (possibly {@code null}).
      *
      * @throws UnknownKeyException if either key is not defined in the dataset.
      */
@@ -299,7 +299,7 @@ public class SlidingCategoryDataset extends AbstractDataset
      * @param row  the row index (zero-based).
      * @param column  the column index (zero-based).
      *
-     * @return The value (possibly <code>null</code>).
+     * @return The value (possibly {@code null}).
      */
     @Override
     public Number getValue(int row, int column) {
@@ -310,7 +310,7 @@ public class SlidingCategoryDataset extends AbstractDataset
      * Tests this <code>SlidingCategoryDataset</code> for equality with an
      * arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

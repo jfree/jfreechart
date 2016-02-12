@@ -62,7 +62,7 @@ public class VectorSeries extends ComparableObjectSeries {
     /**
      * Creates a new empty series.
      *
-     * @param key  the series key (<code>null</code> not permitted).
+     * @param key  the series key ({@code null} not permitted).
      */
     public VectorSeries(Comparable key) {
         this(key, false, true);
@@ -72,7 +72,7 @@ public class VectorSeries extends ComparableObjectSeries {
      * Constructs a new series that contains no data.  You can specify
      * whether or not duplicate x-values are allowed for the series.
      *
-     * @param key  the series key (<code>null</code> not permitted).
+     * @param key  the series key ({@code null} not permitted).
      * @param autoSort  a flag that controls whether or not the items in the
      *                  series are sorted.
      * @param allowDuplicateXValues  a flag that controls whether duplicate
@@ -99,7 +99,7 @@ public class VectorSeries extends ComparableObjectSeries {
      * Adds a data item to the series and, if requested, sends a 
      * {@link SeriesChangeEvent} to all registered listeners.
      * 
-     * @param item  the data item (<code>null</code> not permitted).
+     * @param item  the data item ({@code null} not permitted).
      * @param notify  notify listeners?
      * 
      * @since 1.0.18

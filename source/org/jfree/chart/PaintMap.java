@@ -84,14 +84,14 @@ public class PaintMap implements Cloneable, Serializable {
 
     /**
      * Returns the paint associated with the specified key, or
-     * <code>null</code>.
+     * {@code null}.
      *
-     * @param key  the key (<code>null</code> not permitted).
+     * @param key  the key ({@code null} not permitted).
      *
-     * @return The paint, or <code>null</code>.
+     * @return The paint, or {@code null}.
      *
      * @throws IllegalArgumentException if <code>key</code> is
-     *     <code>null</code>.
+     *     {@code null}.
      */
     public Paint getPaint(Comparable key) {
         ParamChecks.nullNotPermitted(key, "key");
@@ -115,11 +115,11 @@ public class PaintMap implements Cloneable, Serializable {
      * Adds a mapping between the specified <code>key</code> and
      * <code>paint</code> values.
      *
-     * @param key  the key (<code>null</code> not permitted).
+     * @param key  the key ({@code null} not permitted).
      * @param paint  the paint.
      *
      * @throws IllegalArgumentException if <code>key</code> is
-     *     <code>null</code>.
+     *     {@code null}.
      */
     public void put(Comparable key, Paint paint) {
         ParamChecks.nullNotPermitted(key, "key");
@@ -136,7 +136,7 @@ public class PaintMap implements Cloneable, Serializable {
     /**
      * Tests this map for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

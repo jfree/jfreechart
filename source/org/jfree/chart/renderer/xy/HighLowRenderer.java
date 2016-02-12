@@ -120,13 +120,13 @@ public class HighLowRenderer extends AbstractXYItemRenderer
     private boolean drawCloseTicks;
 
     /**
-     * The paint used for the open ticks (if <code>null</code>, the series
+     * The paint used for the open ticks (if {@code null}, the series
      * paint is used instead).
      */
     private transient Paint openTickPaint;
 
     /**
-     * The paint used for the close ticks (if <code>null</code>, the series
+     * The paint used for the close ticks (if {@code null}, the series
      * paint is used instead).
      */
     private transient Paint closeTickPaint;
@@ -202,7 +202,7 @@ public class HighLowRenderer extends AbstractXYItemRenderer
      * Returns the paint used to draw the ticks for the open values.
      *
      * @return The paint used to draw the ticks for the open values (possibly
-     *         <code>null</code>).
+     *         {@code null}).
      *
      * @see #setOpenTickPaint(Paint)
      */
@@ -213,10 +213,10 @@ public class HighLowRenderer extends AbstractXYItemRenderer
     /**
      * Sets the paint used to draw the ticks for the open values and sends a
      * {@link RendererChangeEvent} to all registered listeners.  If you set
-     * this to <code>null</code> (the default), the series paint is used
+     * this to {@code null} (the default), the series paint is used
      * instead.
      *
-     * @param paint  the paint (<code>null</code> permitted).
+     * @param paint  the paint ({@code null} permitted).
      *
      * @see #getOpenTickPaint()
      */
@@ -229,7 +229,7 @@ public class HighLowRenderer extends AbstractXYItemRenderer
      * Returns the paint used to draw the ticks for the close values.
      *
      * @return The paint used to draw the ticks for the close values (possibly
-     *         <code>null</code>).
+     *         {@code null}).
      *
      * @see #setCloseTickPaint(Paint)
      */
@@ -240,10 +240,10 @@ public class HighLowRenderer extends AbstractXYItemRenderer
     /**
      * Sets the paint used to draw the ticks for the close values and sends a
      * {@link RendererChangeEvent} to all registered listeners.  If you set
-     * this to <code>null</code> (the default), the series paint is used
+     * this to {@code null} (the default), the series paint is used
      * instead.
      *
-     * @param paint  the paint (<code>null</code> permitted).
+     * @param paint  the paint ({@code null} permitted).
      *
      * @see #getCloseTickPaint()
      */
@@ -284,9 +284,9 @@ public class HighLowRenderer extends AbstractXYItemRenderer
      * Returns the range of values the renderer requires to display all the
      * items from the specified dataset.
      *
-     * @param dataset  the dataset (<code>null</code> permitted).
+     * @param dataset  the dataset ({@code null} permitted).
      *
-     * @return The range (<code>null</code> if the dataset is <code>null</code>
+     * @return The range ({@code null} if the dataset is {@code null}
      *         or empty).
      */
     @Override
@@ -314,7 +314,7 @@ public class HighLowRenderer extends AbstractXYItemRenderer
      * @param series  the series index (zero-based).
      * @param item  the item index (zero-based).
      * @param crosshairState  crosshair information for the plot
-     *                        (<code>null</code> permitted).
+     *                        ({@code null} permitted).
      * @param pass  the pass index.
      */
     @Override
@@ -461,7 +461,7 @@ public class HighLowRenderer extends AbstractXYItemRenderer
     /**
      * Tests this renderer for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

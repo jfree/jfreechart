@@ -103,10 +103,10 @@ public class ExportUtils {
      * Reflection is used to ensure there is no compile-time dependency on
      * JFreeSVG.
      * 
-     * @param drawable  the drawable (<code>null</code> not permitted).
+     * @param drawable  the drawable ({@code null} not permitted).
      * @param w  the chart width.
      * @param h  the chart height.
-     * @param file  the output file (<code>null</code> not permitted).
+     * @param file  the output file ({@code null} not permitted).
      */
     public static void writeAsSVG(Drawable drawable, int w, int h, 
             File file) {
@@ -153,10 +153,10 @@ public class ExportUtils {
      * Reflection is used to ensure there is no compile-time dependency on
      * OrsonPDF.
      * 
-     * @param drawable  the drawable (<code>null</code> not permitted).
+     * @param drawable  the drawable ({@code null} not permitted).
      * @param w  the chart width.
      * @param h  the chart height.
-     * @param file  the output file (<code>null</code> not permitted).
+     * @param file  the output file ({@code null} not permitted).
      */
     public static final void writeAsPDF(Drawable drawable, 
             int w, int h, File file) {
@@ -198,10 +198,10 @@ public class ExportUtils {
     /**
      * Writes the current content to the specified file in PNG format.
      * 
-     * @param drawable  the drawable (<code>null</code> not permitted).
+     * @param drawable  the drawable ({@code null} not permitted).
      * @param w  the chart width.
      * @param h  the chart height.
-     * @param file  the output file (<code>null</code> not permitted).
+     * @param file  the output file ({@code null} not permitted).
      * 
      * @throws FileNotFoundException if the file is not found.
      * @throws IOException if there is an I/O problem.
@@ -224,10 +224,10 @@ public class ExportUtils {
     /**
      * Writes the current content to the specified file in JPEG format.
      * 
-     * @param drawable  the drawable (<code>null</code> not permitted).
+     * @param drawable  the drawable ({@code null} not permitted).
      * @param w  the chart width.
      * @param h  the chart height.
-     * @param file  the output file (<code>null</code> not permitted).
+     * @param file  the output file ({@code null} not permitted).
      * 
      * @throws FileNotFoundException if the file is not found.
      * @throws IOException if there is an I/O problem.

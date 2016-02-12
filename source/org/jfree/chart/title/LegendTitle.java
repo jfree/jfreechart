@@ -124,7 +124,7 @@ public class LegendTitle extends Title
     /** The sources for legend items. */
     private LegendItemSource[] sources;
 
-    /** The background paint (possibly <code>null</code>). */
+    /** The background paint (possibly {@code null}). */
     private transient Paint backgroundPaint;
 
     /** The edge for the legend item graphic relative to the text. */
@@ -190,9 +190,9 @@ public class LegendTitle extends Title
      * Creates a new legend title with the specified arrangement.
      *
      * @param source  the source.
-     * @param hLayout  the horizontal item arrangement (<code>null</code> not
+     * @param hLayout  the horizontal item arrangement ({@code null} not
      *                 permitted).
-     * @param vLayout  the vertical item arrangement (<code>null</code> not
+     * @param vLayout  the vertical item arrangement ({@code null} not
      *                 permitted).
      */
     public LegendTitle(LegendItemSource source,
@@ -225,7 +225,7 @@ public class LegendTitle extends Title
      * Sets the legend item sources and sends a {@link TitleChangeEvent} to
      * all registered listeners.
      *
-     * @param sources  the sources (<code>null</code> not permitted).
+     * @param sources  the sources ({@code null} not permitted).
      */
     public void setSources(LegendItemSource[] sources) {
         ParamChecks.nullNotPermitted(sources, "sources");
@@ -236,7 +236,7 @@ public class LegendTitle extends Title
     /**
      * Returns the background paint.
      *
-     * @return The background paint (possibly <code>null</code>).
+     * @return The background paint (possibly {@code null}).
      */
     public Paint getBackgroundPaint() {
         return this.backgroundPaint;
@@ -246,7 +246,7 @@ public class LegendTitle extends Title
      * Sets the background paint for the legend and sends a
      * {@link TitleChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> permitted).
+     * @param paint  the paint ({@code null} permitted).
      */
     public void setBackgroundPaint(Paint paint) {
         this.backgroundPaint = paint;
@@ -256,7 +256,7 @@ public class LegendTitle extends Title
     /**
      * Returns the location of the shape within each legend item.
      *
-     * @return The location (never <code>null</code>).
+     * @return The location (never {@code null}).
      */
     public RectangleEdge getLegendItemGraphicEdge() {
         return this.legendItemGraphicEdge;
@@ -265,7 +265,7 @@ public class LegendTitle extends Title
     /**
      * Sets the location of the shape within each legend item.
      *
-     * @param edge  the edge (<code>null</code> not permitted).
+     * @param edge  the edge ({@code null} not permitted).
      */
     public void setLegendItemGraphicEdge(RectangleEdge edge) {
         ParamChecks.nullNotPermitted(edge, "edge");
@@ -276,7 +276,7 @@ public class LegendTitle extends Title
     /**
      * Returns the legend item graphic anchor.
      *
-     * @return The graphic anchor (never <code>null</code>).
+     * @return The graphic anchor (never {@code null}).
      */
     public RectangleAnchor getLegendItemGraphicAnchor() {
         return this.legendItemGraphicAnchor;
@@ -285,7 +285,7 @@ public class LegendTitle extends Title
     /**
      * Sets the anchor point used for the graphic in each legend item.
      *
-     * @param anchor  the anchor point (<code>null</code> not permitted).
+     * @param anchor  the anchor point ({@code null} not permitted).
      */
     public void setLegendItemGraphicAnchor(RectangleAnchor anchor) {
         ParamChecks.nullNotPermitted(anchor, "anchor");
@@ -295,7 +295,7 @@ public class LegendTitle extends Title
     /**
      * Returns the legend item graphic location.
      *
-     * @return The location (never <code>null</code>).
+     * @return The location (never {@code null}).
      */
     public RectangleAnchor getLegendItemGraphicLocation() {
         return this.legendItemGraphicLocation;
@@ -304,7 +304,7 @@ public class LegendTitle extends Title
     /**
      * Sets the legend item graphic location.
      *
-     * @param anchor  the anchor (<code>null</code> not permitted).
+     * @param anchor  the anchor ({@code null} not permitted).
      */
     public void setLegendItemGraphicLocation(RectangleAnchor anchor) {
         this.legendItemGraphicLocation = anchor;
@@ -313,7 +313,7 @@ public class LegendTitle extends Title
     /**
      * Returns the padding that will be applied to each item graphic.
      *
-     * @return The padding (never <code>null</code>).
+     * @return The padding (never {@code null}).
      */
     public RectangleInsets getLegendItemGraphicPadding() {
         return this.legendItemGraphicPadding;
@@ -323,7 +323,7 @@ public class LegendTitle extends Title
      * Sets the padding that will be applied to each item graphic in the
      * legend and sends a {@link TitleChangeEvent} to all registered listeners.
      *
-     * @param padding  the padding (<code>null</code> not permitted).
+     * @param padding  the padding ({@code null} not permitted).
      */
     public void setLegendItemGraphicPadding(RectangleInsets padding) {
         ParamChecks.nullNotPermitted(padding, "padding");
@@ -334,7 +334,7 @@ public class LegendTitle extends Title
     /**
      * Returns the item font.
      *
-     * @return The font (never <code>null</code>).
+     * @return The font (never {@code null}).
      */
     public Font getItemFont() {
         return this.itemFont;
@@ -344,7 +344,7 @@ public class LegendTitle extends Title
      * Sets the item font and sends a {@link TitleChangeEvent} to
      * all registered listeners.
      *
-     * @param font  the font (<code>null</code> not permitted).
+     * @param font  the font ({@code null} not permitted).
      */
     public void setItemFont(Font font) {
         ParamChecks.nullNotPermitted(font, "font");
@@ -355,7 +355,7 @@ public class LegendTitle extends Title
     /**
      * Returns the item paint.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      */
     public Paint getItemPaint() {
         return this.itemPaint;
@@ -364,7 +364,7 @@ public class LegendTitle extends Title
     /**
      * Sets the item paint.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      */
     public void setItemPaint(Paint paint) {
         ParamChecks.nullNotPermitted(paint, "paint");
@@ -375,7 +375,7 @@ public class LegendTitle extends Title
     /**
      * Returns the padding used for the items labels.
      *
-     * @return The padding (never <code>null</code>).
+     * @return The padding (never {@code null}).
      */
     public RectangleInsets getItemLabelPadding() {
         return this.itemLabelPadding;
@@ -384,7 +384,7 @@ public class LegendTitle extends Title
     /**
      * Sets the padding used for the item labels in the legend.
      *
-     * @param padding  the padding (<code>null</code> not permitted).
+     * @param padding  the padding ({@code null} not permitted).
      */
     public void setItemLabelPadding(RectangleInsets padding) {
         ParamChecks.nullNotPermitted(padding, "padding");
@@ -395,7 +395,7 @@ public class LegendTitle extends Title
     /**
      * Gets the order used to display legend items.
      * 
-     * @return The order (never <code>null</code>).
+     * @return The order (never {@code null}).
      * @since 1.0.15
      */
     public SortOrder getSortOrder() {
@@ -405,7 +405,7 @@ public class LegendTitle extends Title
     /**
      * Sets the order used to display legend items.
      * 
-     * @param order Specifies ascending or descending order (<code>null</code>
+     * @param order Specifies ascending or descending order ({@code null}
      *              not permitted).
      * @since 1.0.15
      */
@@ -521,9 +521,9 @@ public class LegendTitle extends Title
      * returns the block size.
      *
      * @param g2  the graphics device.
-     * @param constraint  the constraint (<code>null</code> not permitted).
+     * @param constraint  the constraint ({@code null} not permitted).
      *
-     * @return The block size (in Java2D units, never <code>null</code>).
+     * @return The block size (in Java2D units, never {@code null}).
      */
     @Override
     public Size2D arrange(Graphics2D g2, RectangleConstraint constraint) {
@@ -560,10 +560,10 @@ public class LegendTitle extends Title
      *
      * @param g2  the graphics device.
      * @param area  the area.
-     * @param params  ignored (<code>null</code> permitted).
+     * @param params  ignored ({@code null} permitted).
      *
      * @return An {@link org.jfree.chart.block.EntityBlockResult} or
-     *         <code>null</code>.
+     *         {@code null}.
      */
     @Override
     public Object draw(Graphics2D g2, Rectangle2D area, Object params) {
@@ -602,7 +602,7 @@ public class LegendTitle extends Title
     /**
      * Returns the wrapper container, if any.
      *
-     * @return The wrapper container (possibly <code>null</code>).
+     * @return The wrapper container (possibly {@code null}).
      *
      * @since 1.0.11
      */
@@ -622,7 +622,7 @@ public class LegendTitle extends Title
     /**
      * Tests this title for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

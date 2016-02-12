@@ -141,7 +141,7 @@ public class CategoryPointerAnnotation extends CategoryTextAnnotation
     /**
      * Creates a new label and arrow annotation.
      *
-     * @param label  the label (<code>null</code> permitted).
+     * @param label  the label ({@code null} permitted).
      * @param key  the category key.
      * @param value  the y-value (measured against the chart's range axis).
      * @param angle  the angle of the arrow's line (in radians).
@@ -309,7 +309,7 @@ public class CategoryPointerAnnotation extends CategoryTextAnnotation
     /**
      * Returns the stroke used to draw the arrow line.
      *
-     * @return The arrow stroke (never <code>null</code>).
+     * @return The arrow stroke (never {@code null}).
      *
      * @see #setArrowStroke(Stroke)
      */
@@ -321,7 +321,7 @@ public class CategoryPointerAnnotation extends CategoryTextAnnotation
      * Sets the stroke used to draw the arrow line and sends an
      * {@link AnnotationChangeEvent} to all registered listeners.
      *
-     * @param stroke  the stroke (<code>null</code> not permitted).
+     * @param stroke  the stroke ({@code null} not permitted).
      *
      * @see #getArrowStroke()
      */
@@ -334,7 +334,7 @@ public class CategoryPointerAnnotation extends CategoryTextAnnotation
     /**
      * Returns the paint used for the arrow.
      *
-     * @return The arrow paint (never <code>null</code>).
+     * @return The arrow paint (never {@code null}).
      *
      * @see #setArrowPaint(Paint)
      */
@@ -346,7 +346,7 @@ public class CategoryPointerAnnotation extends CategoryTextAnnotation
      * Sets the paint used for the arrow and sends an
      * {@link AnnotationChangeEvent} to all registered listeners.
      *
-     * @param paint  the arrow paint (<code>null</code> not permitted).
+     * @param paint  the arrow paint ({@code null} not permitted).
      *
      * @see #getArrowPaint()
      */
@@ -432,7 +432,7 @@ public class CategoryPointerAnnotation extends CategoryTextAnnotation
     /**
      * Tests this annotation for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return <code>true</code> or <code>false</code>.
      */

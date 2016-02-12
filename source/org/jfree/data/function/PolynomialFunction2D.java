@@ -63,7 +63,7 @@ public class PolynomialFunction2D implements Function2D, Serializable {
      * ... + an * x^n</code>
      *
      * @param coefficients  an array with the coefficients [a0, a1, ..., an]
-     *         (<code>null</code> not permitted).
+     *         ({@code null} not permitted).
      */
     public PolynomialFunction2D(double[] coefficients) {
         ParamChecks.nullNotPermitted(coefficients, "coefficients");
@@ -108,7 +108,7 @@ public class PolynomialFunction2D implements Function2D, Serializable {
     /**
      * Tests this function for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

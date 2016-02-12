@@ -498,9 +498,9 @@ public class CombinedDataset extends AbstractIntervalXYDataset
     /**
      * Returns the parent Dataset of this combination. If there is more than
      * one parent, or a child is found that is not a CombinationDataset, then
-     * returns <code>null</code>.
+     * returns {@code null}.
      *
-     * @return The parent Dataset of this combination or <code>null</code>.
+     * @return The parent Dataset of this combination or {@code null}.
      */
     @Override
     public SeriesDataset getParent() {

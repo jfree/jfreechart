@@ -65,7 +65,7 @@ public class ShortTextTitle extends TextTitle {
     /**
      * Creates a new title.
      *
-     * @param text  the text (<code>null</code> not permitted).
+     * @param text  the text ({@code null} not permitted).
      */
     public ShortTextTitle(String text) {
         setText(text);
@@ -221,7 +221,7 @@ public class ShortTextTitle extends TextTitle {
      * @param area  the title area.
      * @param params  optional parameters (ignored here).
      *
-     * @return <code>null</code>.
+     * @return {@code null}.
      */
     @Override
     public Object draw(Graphics2D g2, Rectangle2D area, Object params) {

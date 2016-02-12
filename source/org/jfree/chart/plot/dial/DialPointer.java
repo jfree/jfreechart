@@ -163,7 +163,7 @@ public abstract class DialPointer extends AbstractDialLayer
     /**
      * Checks this instance for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> not permitted).
+     * @param obj  the object ({@code null} not permitted).
      *
      * @return A boolean.
      */
@@ -246,7 +246,7 @@ public abstract class DialPointer extends AbstractDialLayer
         /**
          * Returns the paint.
          *
-         * @return The paint (never <code>null</code>).
+         * @return The paint (never {@code null}).
          *
          * @see #setPaint(Paint)
          */
@@ -258,7 +258,7 @@ public abstract class DialPointer extends AbstractDialLayer
          * Sets the paint and sends a {@link DialLayerChangeEvent} to all
          * registered listeners.
          *
-         * @param paint  the paint (<code>null</code> not permitted).
+         * @param paint  the paint ({@code null} not permitted).
          *
          * @see #getPaint()
          */
@@ -271,7 +271,7 @@ public abstract class DialPointer extends AbstractDialLayer
         /**
          * Returns the stroke.
          *
-         * @return The stroke (never <code>null</code>).
+         * @return The stroke (never {@code null}).
          *
          * @see #setStroke(Stroke)
          */
@@ -283,7 +283,7 @@ public abstract class DialPointer extends AbstractDialLayer
          * Sets the stroke and sends a {@link DialLayerChangeEvent} to all
          * registered listeners.
          *
-         * @param stroke  the stroke (<code>null</code> not permitted).
+         * @param stroke  the stroke ({@code null} not permitted).
          *
          * @see #getStroke()
          */
@@ -325,7 +325,7 @@ public abstract class DialPointer extends AbstractDialLayer
         /**
          * Tests this pointer for equality with an arbitrary object.
          *
-         * @param obj  the object (<code>null</code> permitted).
+         * @param obj  the object ({@code null} permitted).
          *
          * @return A boolean.
          */
@@ -463,7 +463,7 @@ public abstract class DialPointer extends AbstractDialLayer
         /**
          * Returns the fill paint.
          *
-         * @return The paint (never <code>null</code>).
+         * @return The paint (never {@code null}).
          *
          * @see #setFillPaint(Paint)
          *
@@ -477,7 +477,7 @@ public abstract class DialPointer extends AbstractDialLayer
          * Sets the fill paint and sends a {@link DialLayerChangeEvent} to all
          * registered listeners.
          *
-         * @param paint  the paint (<code>null</code> not permitted).
+         * @param paint  the paint ({@code null} not permitted).
          *
          * @see #getFillPaint()
          *
@@ -492,7 +492,7 @@ public abstract class DialPointer extends AbstractDialLayer
         /**
          * Returns the outline paint.
          *
-         * @return The paint (never <code>null</code>).
+         * @return The paint (never {@code null}).
          *
          * @see #setOutlinePaint(Paint)
          *
@@ -506,7 +506,7 @@ public abstract class DialPointer extends AbstractDialLayer
          * Sets the outline paint and sends a {@link DialLayerChangeEvent} to
          * all registered listeners.
          *
-         * @param paint  the paint (<code>null</code> not permitted).
+         * @param paint  the paint ({@code null} not permitted).
          *
          * @see #getOutlinePaint()
          *
@@ -583,7 +583,7 @@ public abstract class DialPointer extends AbstractDialLayer
         /**
          * Tests this pointer for equality with an arbitrary object.
          *
-         * @param obj  the object (<code>null</code> permitted).
+         * @param obj  the object ({@code null} permitted).
          *
          * @return A boolean.
          */

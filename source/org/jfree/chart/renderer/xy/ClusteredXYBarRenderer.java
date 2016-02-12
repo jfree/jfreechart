@@ -143,9 +143,9 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
     /**
      * Returns the x-value bounds for the specified dataset.
      *
-     * @param dataset  the dataset (<code>null</code> permitted).
+     * @param dataset  the dataset ({@code null} permitted).
      *
-     * @return The bounds (possibly <code>null</code>).
+     * @return The bounds (possibly {@code null}).
      */
     @Override
     public Range findDomainBounds(XYDataset dataset) {
@@ -166,9 +166,9 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
      * the range of x-values including the interval OFFSET so that it centers
      * the interval around the start value.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
      *
-     * @return The range (possibly <code>null</code>).
+     * @return The range (possibly {@code null}).
      */
     protected Range findDomainBoundsWithOffset(IntervalXYDataset dataset) {
         ParamChecks.nullNotPermitted(dataset, "dataset");
@@ -218,7 +218,7 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
      * @param series  the series index.
      * @param item  the item index.
      * @param crosshairState  crosshair information for the plot
-     *                        (<code>null</code> permitted).
+     *                        ({@code null} permitted).
      * @param pass  the pass index.
      */
     @Override
@@ -347,7 +347,7 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
      * <code>ClusteredXYBarRenderer</code> with the same settings as this
      * renderer, and <code>false</code> otherwise.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

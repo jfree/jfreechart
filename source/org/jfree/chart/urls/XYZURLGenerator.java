@@ -55,7 +55,7 @@ public interface XYZURLGenerator extends XYURLGenerator {
      * Generates a URL for a particular item within a series. As a guideline,
      * the URL should be valid within the context of an XHTML 1.0 document.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
      * @param series  the series index (zero-based).
      * @param item  the item index (zero-based).
      *

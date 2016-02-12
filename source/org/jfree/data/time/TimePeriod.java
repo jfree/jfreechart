@@ -54,7 +54,7 @@ public interface TimePeriod extends Comparable {
      * Returns the start date/time.  This will always be on or before the
      * end date.
      *
-     * @return The start date/time (never <code>null</code>).
+     * @return The start date/time (never {@code null}).
      */
     public Date getStart();
 
@@ -62,7 +62,7 @@ public interface TimePeriod extends Comparable {
      * Returns the end date/time.  This will always be on or after the
      * start date.
      *
-     * @return The end date/time (never <code>null</code>).
+     * @return The end date/time (never {@code null}).
      */
     public Date getEnd();
 

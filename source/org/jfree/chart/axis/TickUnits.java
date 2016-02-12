@@ -84,7 +84,7 @@ public class TickUnits implements TickUnitSource, Cloneable, Serializable {
      * Adds a tick unit to the collection.  The tick units are maintained in
      * ascending order.
      *
-     * @param unit  the tick unit to add (<code>null</code> not permitted).
+     * @param unit  the tick unit to add ({@code null} not permitted).
      */
     public void add(TickUnit unit) {
         if (unit == null) {
@@ -192,7 +192,7 @@ public class TickUnits implements TickUnitSource, Cloneable, Serializable {
     /**
      * Tests an object for equality with this instance.
      *
-     * @param obj  the object to test (<code>null</code> permitted).
+     * @param obj  the object to test ({@code null} permitted).
      *
      * @return A boolean.
      */

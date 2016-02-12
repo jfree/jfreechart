@@ -100,7 +100,7 @@ public class DateTickUnit extends TickUnit implements Serializable {
     /**
      * Creates a new date tick unit.
      *
-     * @param unitType  the unit type (<code>null</code> not permitted).
+     * @param unitType  the unit type ({@code null} not permitted).
      * @param multiple  the multiple (of the unit type, must be &gt; 0).
      *
      * @since 1.0.13
@@ -112,9 +112,9 @@ public class DateTickUnit extends TickUnit implements Serializable {
     /**
      * Creates a new date tick unit.
      *
-     * @param unitType  the unit type (<code>null</code> not permitted).
+     * @param unitType  the unit type ({@code null} not permitted).
      * @param multiple  the multiple (of the unit type, must be &gt; 0).
-     * @param formatter  the date formatter (<code>null</code> not permitted).
+     * @param formatter  the date formatter ({@code null} not permitted).
      *
      * @since 1.0.13
      */
@@ -130,7 +130,7 @@ public class DateTickUnit extends TickUnit implements Serializable {
      * @param multiple  the multiple.
      * @param rollUnitType  the roll unit.
      * @param rollMultiple  the roll multiple.
-     * @param formatter  the date formatter (<code>null</code> not permitted).
+     * @param formatter  the date formatter ({@code null} not permitted).
      *
      * @since 1.0.13
      */
@@ -159,7 +159,7 @@ public class DateTickUnit extends TickUnit implements Serializable {
     /**
      * Returns the unit type.
      *
-     * @return The unit type (never <code>null</code>).
+     * @return The unit type (never {@code null}).
      *
      * @since 1.0.13
      */
@@ -179,7 +179,7 @@ public class DateTickUnit extends TickUnit implements Serializable {
     /**
      * Returns the roll unit type.
      *
-     * @return The roll unit type (never <code>null</code>).
+     * @return The roll unit type (never {@code null}).
      *
      * @since 1.0.13
      */
@@ -359,7 +359,7 @@ public class DateTickUnit extends TickUnit implements Serializable {
     /**
      * Converts a unit type to the corresponding deprecated integer constant.
      *
-     * @param unitType  the unit type (<code>null</code> not permitted).
+     * @param unitType  the unit type ({@code null} not permitted).
      *
      * @return The int code.
      *
@@ -398,7 +398,7 @@ public class DateTickUnit extends TickUnit implements Serializable {
      * A utility method to put a default in place if a null formatter is
      * supplied.
      *
-     * @param formatter  the formatter (<code>null</code> permitted).
+     * @param formatter  the formatter ({@code null} permitted).
      *
      * @return The formatter if it is not null, otherwise a default.
      */
@@ -414,7 +414,7 @@ public class DateTickUnit extends TickUnit implements Serializable {
     /**
      * Tests this unit for equality with another object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return <code>true</code> or <code>false</code>.
      */

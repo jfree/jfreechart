@@ -146,9 +146,9 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
      * {@link PlotChangeEvent} to all registered listeners.
      * <br><br>
      * You must ensure that the subplot has a non-null domain axis.  The range
-     * axis for the subplot will be set to <code>null</code>.
+     * axis for the subplot will be set to {@code null}.
      *
-     * @param subplot  the subplot (<code>null</code> not permitted).
+     * @param subplot  the subplot ({@code null} not permitted).
      */
     public void add(CategoryPlot subplot) {
         // defer argument checking
@@ -160,9 +160,9 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
      * listeners.
      * <br><br>
      * You must ensure that the subplot has a non-null domain axis.  The range
-     * axis for the subplot will be set to <code>null</code>.
+     * axis for the subplot will be set to {@code null}.
      *
-     * @param subplot  the subplot (<code>null</code> not permitted).
+     * @param subplot  the subplot ({@code null} not permitted).
      * @param weight  the weight (must be &gt;= 1).
      */
     public void add(CategoryPlot subplot, int weight) {
@@ -189,7 +189,7 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
     /**
      * Removes a subplot from the combined chart.
      *
-     * @param subplot  the subplot (<code>null</code> not permitted).
+     * @param subplot  the subplot ({@code null} not permitted).
      */
     public void remove(CategoryPlot subplot) {
         ParamChecks.nullNotPermitted(subplot, "subplot");
@@ -222,7 +222,7 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
 
     /**
      * Returns the list of subplots.  The returned list may be empty, but is
-     * never <code>null</code>.
+     * never {@code null}.
      *
      * @return An unmodifiable list of subplots.
      */
@@ -327,9 +327,9 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
      * @param g2  the graphics device.
      * @param area  the area within which the plot (including axis labels)
      *              should be drawn.
-     * @param anchor  the anchor point (<code>null</code> permitted).
+     * @param anchor  the anchor point ({@code null} permitted).
      * @param parentState  the parent state.
-     * @param info  collects information about the drawing (<code>null</code>
+     * @param info  collects information about the drawing ({@code null}
      *              permitted).
      */
     @Override
@@ -405,7 +405,7 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
      * Sets the shadow generator for the plot (and all subplots) and sends
      * a {@link PlotChangeEvent} to all registered listeners.
      * 
-     * @param generator  the new generator (<code>null</code> permitted).
+     * @param generator  the new generator ({@code null} permitted).
      */
     @Override
     public void setShadowGenerator(ShadowGenerator generator) {
@@ -515,7 +515,7 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
     /**
      * Tests the plot for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return <code>true</code> or <code>false</code>.
      */

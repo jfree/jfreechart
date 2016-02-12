@@ -51,8 +51,8 @@ public class JSONArray extends ArrayList implements List, JSONAware,
      * 
      * @see org.jfree.data.json.impl.JSONValue#writeJSONString(Object, Writer)
      * 
-     * @param list  the list (<code>null</code> permitted).
-     * @param out  the output writer (<code>null</code> not permitted).
+     * @param list  the list ({@code null} permitted).
+     * @param out  the output writer ({@code null} not permitted).
      * 
      * @throws IOException if there is an I/O problem.
      */
@@ -87,7 +87,7 @@ public class JSONArray extends ArrayList implements List, JSONAware,
     /**
      * Writes this array to the specified output writer.
      * 
-     * @param out  the output writer (<code>null</code> not permitted).
+     * @param out  the output writer ({@code null} not permitted).
      * 
      * @throws IOException  if there is an I/O problem.
      */
@@ -103,7 +103,7 @@ public class JSONArray extends ArrayList implements List, JSONAware,
      * 
      * @see org.jfree.data.json.impl.JSONValue#toJSONString(Object)
      * 
-     * @param list  the list (<code>null</code> permitted).
+     * @param list  the list ({@code null} permitted).
      * 
      * @return JSON text, or "null" if list is null.
      */

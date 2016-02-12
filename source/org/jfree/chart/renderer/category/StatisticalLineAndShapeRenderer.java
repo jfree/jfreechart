@@ -137,7 +137,7 @@ public class StatisticalLineAndShapeRenderer extends LineAndShapeRenderer
      * Returns the paint used for the error indicators.
      *
      * @return The paint used for the error indicators (possibly
-     *         <code>null</code>).
+     *         {@code null}).
      *
      * @see #setErrorIndicatorPaint(Paint)
      */
@@ -146,11 +146,11 @@ public class StatisticalLineAndShapeRenderer extends LineAndShapeRenderer
     }
 
     /**
-     * Sets the paint used for the error indicators (if <code>null</code>,
+     * Sets the paint used for the error indicators (if {@code null},
      * the item paint is used instead) and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> permitted).
+     * @param paint  the paint ({@code null} permitted).
      *
      * @see #getErrorIndicatorPaint()
      */
@@ -163,7 +163,7 @@ public class StatisticalLineAndShapeRenderer extends LineAndShapeRenderer
      * Returns the stroke used for the error indicators.
      *
      * @return The stroke used for the error indicators (possibly
-     *         <code>null</code>).
+     *         {@code null}).
      *
      * @see #setErrorIndicatorStroke(Stroke)
      *
@@ -174,11 +174,11 @@ public class StatisticalLineAndShapeRenderer extends LineAndShapeRenderer
     }
 
     /**
-     * Sets the stroke used for the error indicators (if <code>null</code>,
+     * Sets the stroke used for the error indicators (if {@code null},
      * the item outline stroke is used instead) and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param stroke  the stroke (<code>null</code> permitted).
+     * @param stroke  the stroke ({@code null} permitted).
      *
      * @see #getErrorIndicatorStroke()
      *
@@ -193,10 +193,10 @@ public class StatisticalLineAndShapeRenderer extends LineAndShapeRenderer
      * Returns the range of values the renderer requires to display all the
      * items from the specified dataset.
      *
-     * @param dataset  the dataset (<code>null</code> permitted).
+     * @param dataset  the dataset ({@code null} permitted).
      *
-     * @return The range (or <code>null</code> if the dataset is
-     *         <code>null</code> or empty).
+     * @return The range (or {@code null} if the dataset is
+     *         {@code null} or empty).
      */
     @Override
     public Range findRangeBounds(CategoryDataset dataset) {
@@ -423,7 +423,7 @@ public class StatisticalLineAndShapeRenderer extends LineAndShapeRenderer
     /**
      * Tests this renderer for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

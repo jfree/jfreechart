@@ -99,7 +99,7 @@ public class PlumNeedle extends MeterNeedle
     /**
      * Tests another object for equality with this object.
      *
-     * @param obj  the object to test (<code>null</code> permitted).
+     * @param obj  the object to test ({@code null} permitted).
      *
      * @return A boolean.
      */

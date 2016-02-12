@@ -63,10 +63,10 @@ public abstract class BoxAndWhiskerCalculator {
     /**
      * Calculates the statistics required for a {@link BoxAndWhiskerItem}
      * from a list of <code>Number</code> objects.  Any items in the list
-     * that are <code>null</code>, not an instance of <code>Number</code>, or
+     * that are {@code null}, not an instance of <code>Number</code>, or
      * equivalent to <code>Double.NaN</code>, will be ignored.
      *
-     * @param values  a list of numbers (a <code>null</code> list is not
+     * @param values  a list of numbers (a {@code null} list is not
      *                permitted).
      *
      * @return A box-and-whisker item.
@@ -79,10 +79,10 @@ public abstract class BoxAndWhiskerCalculator {
     /**
      * Calculates the statistics required for a {@link BoxAndWhiskerItem}
      * from a list of <code>Number</code> objects.  Any items in the list
-     * that are <code>null</code>, not an instance of <code>Number</code>, or
+     * that are {@code null}, not an instance of <code>Number</code>, or
      * equivalent to <code>Double.NaN</code>, will be ignored.
      *
-     * @param values  a list of numbers (a <code>null</code> list is not
+     * @param values  a list of numbers (a {@code null} list is not
      *                permitted).
      * @param stripNullAndNaNItems  a flag that controls the handling of null
      *     and NaN items.
@@ -169,11 +169,11 @@ public abstract class BoxAndWhiskerCalculator {
     /**
      * Calculates the first quartile for a list of numbers in ascending order.
      * If the items in the list are not in ascending order, the result is
-     * unspecified.  If the list contains items that are <code>null</code>, not
+     * unspecified.  If the list contains items that are {@code null}, not
      * an instance of <code>Number</code>, or equivalent to
      * <code>Double.NaN</code>, the result is unspecified.
      *
-     * @param values  the numbers in ascending order (<code>null</code> not
+     * @param values  the numbers in ascending order ({@code null} not
      *     permitted).
      *
      * @return The first quartile.
@@ -203,11 +203,11 @@ public abstract class BoxAndWhiskerCalculator {
     /**
      * Calculates the third quartile for a list of numbers in ascending order.
      * If the items in the list are not in ascending order, the result is
-     * unspecified.  If the list contains items that are <code>null</code>, not
+     * unspecified.  If the list contains items that are {@code null}, not
      * an instance of <code>Number</code>, or equivalent to
      * <code>Double.NaN</code>, the result is unspecified.
      *
-     * @param values  the list of values (<code>null</code> not permitted).
+     * @param values  the list of values ({@code null} not permitted).
      *
      * @return The third quartile.
      */

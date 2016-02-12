@@ -108,7 +108,7 @@ public class SubCategoryAxis extends CategoryAxis
      * Adds a sub-category to the axis and sends an {@link AxisChangeEvent} to
      * all registered listeners.
      *
-     * @param subCategory  the sub-category (<code>null</code> not permitted).
+     * @param subCategory  the sub-category ({@code null} not permitted).
      */
     public void addSubCategory(Comparable subCategory) {
         ParamChecks.nullNotPermitted(subCategory, "subCategory");
@@ -119,7 +119,7 @@ public class SubCategoryAxis extends CategoryAxis
     /**
      * Returns the font used to display the sub-category labels.
      *
-     * @return The font (never <code>null</code>).
+     * @return The font (never {@code null}).
      *
      * @see #setSubLabelFont(Font)
      */
@@ -131,7 +131,7 @@ public class SubCategoryAxis extends CategoryAxis
      * Sets the font used to display the sub-category labels and sends an
      * {@link AxisChangeEvent} to all registered listeners.
      *
-     * @param font  the font (<code>null</code> not permitted).
+     * @param font  the font ({@code null} not permitted).
      *
      * @see #getSubLabelFont()
      */
@@ -144,7 +144,7 @@ public class SubCategoryAxis extends CategoryAxis
     /**
      * Returns the paint used to display the sub-category labels.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @see #setSubLabelPaint(Paint)
      */
@@ -156,7 +156,7 @@ public class SubCategoryAxis extends CategoryAxis
      * Sets the paint used to display the sub-category labels and sends an
      * {@link AxisChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getSubLabelPaint()
      */
@@ -236,17 +236,17 @@ public class SubCategoryAxis extends CategoryAxis
      * Draws the axis on a Java 2D graphics device (such as the screen or a
      * printer).
      *
-     * @param g2  the graphics device (<code>null</code> not permitted).
+     * @param g2  the graphics device ({@code null} not permitted).
      * @param cursor  the cursor location.
      * @param plotArea  the area within which the axis should be drawn
-     *                  (<code>null</code> not permitted).
+     *                  ({@code null} not permitted).
      * @param dataArea  the area within which the plot is being drawn
-     *                  (<code>null</code> not permitted).
-     * @param edge  the location of the axis (<code>null</code> not permitted).
+     *                  ({@code null} not permitted).
+     * @param edge  the location of the axis ({@code null} not permitted).
      * @param plotState  collects information about the plot
-     *                   (<code>null</code> permitted).
+     *                   ({@code null} permitted).
      *
-     * @return The axis state (never <code>null</code>).
+     * @return The axis state (never {@code null}).
      */
     @Override
     public AxisState draw(Graphics2D g2, double cursor, Rectangle2D plotArea,
@@ -281,16 +281,16 @@ public class SubCategoryAxis extends CategoryAxis
     /**
      * Draws the category labels and returns the updated axis state.
      *
-     * @param g2  the graphics device (<code>null</code> not permitted).
-     * @param plotArea  the plot area (<code>null</code> not permitted).
-     * @param dataArea  the area inside the axes (<code>null</code> not
+     * @param g2  the graphics device ({@code null} not permitted).
+     * @param plotArea  the plot area ({@code null} not permitted).
+     * @param dataArea  the area inside the axes ({@code null} not
      *                  permitted).
-     * @param edge  the axis location (<code>null</code> not permitted).
-     * @param state  the axis state (<code>null</code> not permitted).
-     * @param plotState  collects information about the plot (<code>null</code>
+     * @param edge  the axis location ({@code null} not permitted).
+     * @param state  the axis state ({@code null} not permitted).
+     * @param plotState  collects information about the plot ({@code null}
      *                   permitted).
      *
-     * @return The updated axis state (never <code>null</code>).
+     * @return The updated axis state (never {@code null}).
      */
     protected AxisState drawSubCategoryLabels(Graphics2D g2,
             Rectangle2D plotArea, Rectangle2D dataArea, RectangleEdge edge,
@@ -390,7 +390,7 @@ public class SubCategoryAxis extends CategoryAxis
     /**
      * Tests the axis for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

@@ -179,7 +179,7 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
      * Returns the paint used to draw the line between the minimum and maximum
      * value items in each category.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @see #setGroupPaint(Paint)
      */
@@ -192,7 +192,7 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
      * value items in each category and sends a {@link RendererChangeEvent} to
      * all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getGroupPaint()
      */
@@ -206,7 +206,7 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
      * Returns the stroke used to draw the line between the minimum and maximum
      * value items in each category.
      *
-     * @return The stroke (never <code>null</code>).
+     * @return The stroke (never {@code null}).
      *
      * @see #setGroupStroke(Stroke)
      */
@@ -219,7 +219,7 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
      * value and sends a {@link RendererChangeEvent} to all registered
      * listeners.
      *
-     * @param stroke the new stroke (<code>null</code> not permitted).
+     * @param stroke the new stroke ({@code null} not permitted).
      */
     public void setGroupStroke(Stroke stroke) {
         ParamChecks.nullNotPermitted(stroke, "stroke");
@@ -230,7 +230,7 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
     /**
      * Returns the icon drawn for each data item.
      *
-     * @return The icon (never <code>null</code>).
+     * @return The icon (never {@code null}).
      *
      * @see #setObjectIcon(Icon)
      */
@@ -256,7 +256,7 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
      * Returns the icon displayed for the maximum value data item within each
      * category.
      *
-     * @return The icon (never <code>null</code>).
+     * @return The icon (never {@code null}).
      *
      * @see #setMaxIcon(Icon)
      */
@@ -269,7 +269,7 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
      * category and sends a {@link RendererChangeEvent} to all registered
      * listeners.
      *
-     * @param icon  the icon (<code>null</code> not permitted).
+     * @param icon  the icon ({@code null} not permitted).
      *
      * @see #getMaxIcon()
      */
@@ -283,7 +283,7 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
      * Returns the icon displayed for the minimum value data item within each
      * category.
      *
-     * @return The icon (never <code>null</code>).
+     * @return The icon (never {@code null}).
      *
      * @see #setMinIcon(Icon)
      */
@@ -296,7 +296,7 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
      * category and sends a {@link RendererChangeEvent} to all registered
      * listeners.
      *
-     * @param icon  the icon (<code>null</code> not permitted).
+     * @param icon  the icon ({@code null} not permitted).
      *
      * @see #getMinIcon()
      */
@@ -421,7 +421,7 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
      * fields are NOT included in the test, so this implementation is a little
      * weak.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      *

@@ -416,7 +416,7 @@ public class LevelRenderer extends AbstractCategoryItemRenderer
     /**
      * Tests an object for equality with this instance.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

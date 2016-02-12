@@ -58,7 +58,7 @@ public interface DialFrame extends DialLayer {
 
     /**
      * Returns the shape of the viewing window for the dial, or
-     * <code>null</code> if the dial is completely open.  Other layers in the
+     * {@code null} if the dial is completely open.  Other layers in the
      * plot will rely on their drawing to be clipped within this window.
      *
      * @param frame  the reference frame for the dial.

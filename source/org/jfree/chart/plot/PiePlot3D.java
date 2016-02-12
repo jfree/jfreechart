@@ -155,7 +155,7 @@ public class PiePlot3D extends PiePlot implements Serializable {
      * Creates a pie chart with a three dimensional effect using the specified
      * dataset.
      *
-     * @param dataset  the dataset (<code>null</code> permitted).
+     * @param dataset  the dataset ({@code null} permitted).
      */
     public PiePlot3D(PieDataset dataset) {
         super(dataset);
@@ -228,7 +228,7 @@ public class PiePlot3D extends PiePlot implements Serializable {
      * @param anchor  the anchor point.
      * @param parentState  the state from the parent plot, if there is one.
      * @param info  collects info about the drawing
-     *              (<code>null</code> permitted).
+     *              ({@code null} permitted).
      */
     @Override
     public void draw(Graphics2D g2, Rectangle2D plotArea, Point2D anchor,
@@ -1030,7 +1030,7 @@ public class PiePlot3D extends PiePlot implements Serializable {
     /**
      * Tests this plot for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

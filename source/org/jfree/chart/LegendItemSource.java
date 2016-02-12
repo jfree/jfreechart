@@ -50,7 +50,7 @@ public interface LegendItemSource {
     /**
      * Returns a (possibly empty) collection of legend items.
      *
-     * @return The legend item collection (never <code>null</code>).
+     * @return The legend item collection (never {@code null}).
      */
     public LegendItemCollection getLegendItems();
 

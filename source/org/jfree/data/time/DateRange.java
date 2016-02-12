@@ -75,8 +75,8 @@ public class DateRange extends Range implements Serializable {
     /**
      * Constructs a new range.
      *
-     * @param lower  the lower bound (<code>null</code> not permitted).
-     * @param upper  the upper bound (<code>null</code> not permitted).
+     * @param lower  the lower bound ({@code null} not permitted).
+     * @param upper  the upper bound ({@code null} not permitted).
      */
     public DateRange(Date lower, Date upper) {
         super(lower.getTime(), upper.getTime());
@@ -103,7 +103,7 @@ public class DateRange extends Range implements Serializable {
      * upper and lower bounds are evaluated as milliseconds since midnight
      * GMT, 1-Jan-1970.
      *
-     * @param other  the other range (<code>null</code> not permitted).
+     * @param other  the other range ({@code null} not permitted).
      */
     public DateRange(Range other) {
         this(other.getLowerBound(), other.getUpperBound());

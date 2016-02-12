@@ -236,7 +236,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
     /**
      * Creates a new plot that displays the value from the supplied dataset.
      *
-     * @param dataset  the dataset (<code>null</code> permitted).
+     * @param dataset  the dataset ({@code null} permitted).
      */
     public MeterPlot(ValueDataset dataset) {
         super();
@@ -261,7 +261,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
     /**
      * Returns the dial shape.  The default is {@link DialShape#CIRCLE}).
      *
-     * @return The dial shape (never <code>null</code>).
+     * @return The dial shape (never {@code null}).
      *
      * @see #setDialShape(DialShape)
      */
@@ -273,7 +273,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      * Sets the dial shape and sends a {@link PlotChangeEvent} to all
      * registered listeners.
      *
-     * @param shape  the shape (<code>null</code> not permitted).
+     * @param shape  the shape ({@code null} not permitted).
      *
      * @see #getDialShape()
      */
@@ -315,7 +315,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
     /**
      * Returns the overall range for the dial.
      *
-     * @return The overall range (never <code>null</code>).
+     * @return The overall range (never {@code null}).
      *
      * @see #setRange(Range)
      */
@@ -327,7 +327,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      * Sets the range for the dial and sends a {@link PlotChangeEvent} to all
      * registered listeners.
      *
-     * @param range  the range (<code>null</code> not permitted and zero-length
+     * @param range  the range ({@code null} not permitted and zero-length
      *               ranges not permitted).
      *
      * @see #getRange()
@@ -373,7 +373,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      * Returns the paint used to draw the ticks around the dial.
      *
      * @return The paint used to draw the ticks around the dial (never
-     *         <code>null</code>).
+     *         {@code null}).
      *
      * @see #setTickPaint(Paint)
      */
@@ -385,7 +385,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      * Sets the paint used to draw the tick labels around the dial and sends
      * a {@link PlotChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getTickPaint()
      */
@@ -398,7 +398,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
     /**
      * Returns a string describing the units for the dial.
      *
-     * @return The units (possibly <code>null</code>).
+     * @return The units (possibly {@code null}).
      *
      * @see #setUnits(String)
      */
@@ -410,7 +410,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      * Sets the units for the dial and sends a {@link PlotChangeEvent} to all
      * registered listeners.
      *
-     * @param units  the units (<code>null</code> permitted).
+     * @param units  the units ({@code null} permitted).
      *
      * @see #getUnits()
      */
@@ -422,7 +422,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
     /**
      * Returns the paint for the needle.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @see #setNeedlePaint(Paint)
      */
@@ -434,7 +434,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      * Sets the paint used to display the needle and sends a
      * {@link PlotChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getNeedlePaint()
      */
@@ -473,7 +473,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
     /**
      * Returns the tick label font.
      *
-     * @return The font (never <code>null</code>).
+     * @return The font (never {@code null}).
      *
      * @see #setTickLabelFont(Font)
      */
@@ -485,7 +485,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      * Sets the tick label font and sends a {@link PlotChangeEvent} to all
      * registered listeners.
      *
-     * @param font  the font (<code>null</code> not permitted).
+     * @param font  the font ({@code null} not permitted).
      *
      * @see #getTickLabelFont()
      */
@@ -500,7 +500,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
     /**
      * Returns the tick label paint.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @see #setTickLabelPaint(Paint)
      */
@@ -512,7 +512,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      * Sets the tick label paint and sends a {@link PlotChangeEvent} to all
      * registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getTickLabelPaint()
      */
@@ -527,7 +527,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
     /**
      * Returns the tick label format.
      *
-     * @return The tick label format (never <code>null</code>).
+     * @return The tick label format (never {@code null}).
      *
      * @see #setTickLabelFormat(NumberFormat)
      */
@@ -539,7 +539,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      * Sets the format for the tick labels and sends a {@link PlotChangeEvent}
      * to all registered listeners.
      *
-     * @param format  the format (<code>null</code> not permitted).
+     * @param format  the format ({@code null} not permitted).
      *
      * @see #getTickLabelFormat()
      */
@@ -552,7 +552,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
     /**
      * Returns the font for the value label.
      *
-     * @return The font (never <code>null</code>).
+     * @return The font (never {@code null}).
      *
      * @see #setValueFont(Font)
      */
@@ -564,7 +564,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      * Sets the font used to display the value label and sends a
      * {@link PlotChangeEvent} to all registered listeners.
      *
-     * @param font  the font (<code>null</code> not permitted).
+     * @param font  the font ({@code null} not permitted).
      *
      * @see #getValueFont()
      */
@@ -577,7 +577,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
     /**
      * Returns the paint for the value label.
      *
-     * @return The paint (never <code>null</code>).
+     * @return The paint (never {@code null}).
      *
      * @see #setValuePaint(Paint)
      */
@@ -589,7 +589,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      * Sets the paint used to display the value label and sends a
      * {@link PlotChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getValuePaint()
      */
@@ -602,7 +602,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
     /**
      * Returns the paint for the dial background.
      *
-     * @return The paint (possibly <code>null</code>).
+     * @return The paint (possibly {@code null}).
      *
      * @see #setDialBackgroundPaint(Paint)
      */
@@ -612,9 +612,9 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
 
     /**
      * Sets the paint used to fill the dial background.  Set this to
-     * <code>null</code> for no background.
+     * {@code null} for no background.
      *
-     * @param paint  the paint (<code>null</code> permitted).
+     * @param paint  the paint ({@code null} permitted).
      *
      * @see #getDialBackgroundPaint()
      */
@@ -677,7 +677,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
     /**
      * Returns the dataset for the plot.
      *
-     * @return The dataset (possibly <code>null</code>).
+     * @return The dataset (possibly {@code null}).
      *
      * @see #setDataset(ValueDataset)
      */
@@ -689,7 +689,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      * Sets the dataset for the plot, replacing the existing dataset if there
      * is one, and triggers a {@link PlotChangeEvent}.
      *
-     * @param dataset  the dataset (<code>null</code> permitted).
+     * @param dataset  the dataset ({@code null} permitted).
      *
      * @see #getDataset()
      */
@@ -730,7 +730,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      * Adds an interval and sends a {@link PlotChangeEvent} to all registered
      * listeners.
      *
-     * @param interval  the interval (<code>null</code> not permitted).
+     * @param interval  the interval ({@code null} not permitted).
      *
      * @see #getIntervals()
      * @see #clearIntervals()
@@ -782,7 +782,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      *
      * @param g2  the graphics device.
      * @param area  the area within which the plot should be drawn.
-     * @param anchor  the anchor point (<code>null</code> permitted).
+     * @param anchor  the anchor point ({@code null} permitted).
      * @param parentState  the state from the parent plot, if there is one.
      * @param info  collects info about the drawing.
      */
@@ -984,7 +984,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      * @param area  the plot area.
      * @param minValue  the minimum data value.
      * @param maxValue  the maximum data value.
-     * @param paint  the background paint (<code>null</code> not permitted).
+     * @param paint  the background paint ({@code null} not permitted).
      * @param dial  a flag that indicates whether the arc represents the whole
      *              dial.
      */
@@ -1185,7 +1185,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      * Tests the plot for equality with an arbitrary object.  Note that the
      * dataset is ignored for the purposes of testing equality.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

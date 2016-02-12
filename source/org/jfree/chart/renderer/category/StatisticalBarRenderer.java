@@ -133,7 +133,7 @@ public class StatisticalBarRenderer extends BarRenderer
      * Returns the paint used for the error indicators.
      *
      * @return The paint used for the error indicators (possibly
-     *         <code>null</code>).
+     *         {@code null}).
      *
      * @see #setErrorIndicatorPaint(Paint)
      */
@@ -142,11 +142,11 @@ public class StatisticalBarRenderer extends BarRenderer
     }
 
     /**
-     * Sets the paint used for the error indicators (if <code>null</code>,
+     * Sets the paint used for the error indicators (if {@code null},
      * the item outline paint is used instead) and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param paint  the paint (<code>null</code> permitted).
+     * @param paint  the paint ({@code null} permitted).
      *
      * @see #getErrorIndicatorPaint()
      */
@@ -157,9 +157,9 @@ public class StatisticalBarRenderer extends BarRenderer
 
     /**
      * Returns the stroke used to draw the error indicators.  If this is
-     * <code>null</code>, the renderer will use the item outline stroke).
+     * {@code null}, the renderer will use the item outline stroke).
      *
-     * @return The stroke (possibly <code>null</code>).
+     * @return The stroke (possibly {@code null}).
      *
      * @see #setErrorIndicatorStroke(Stroke)
      *
@@ -172,10 +172,10 @@ public class StatisticalBarRenderer extends BarRenderer
     /**
      * Sets the stroke used to draw the error indicators, and sends a
      * {@link RendererChangeEvent} to all registered listeners.  If you set
-     * this to <code>null</code>, the renderer will use the item outline
+     * this to {@code null}, the renderer will use the item outline
      * stroke.
      *
-     * @param stroke  the stroke (<code>null</code> permitted).
+     * @param stroke  the stroke ({@code null} permitted).
      *
      * @see #getErrorIndicatorStroke()
      *
@@ -191,10 +191,10 @@ public class StatisticalBarRenderer extends BarRenderer
      * items from the specified dataset. This takes into account the range
      * between the min/max values, possibly ignoring invisible series.
      *
-     * @param dataset  the dataset (<code>null</code> permitted).
+     * @param dataset  the dataset ({@code null} permitted).
      *
-     * @return The range (or <code>null</code> if the dataset is
-     *         <code>null</code> or empty).
+     * @return The range (or {@code null} if the dataset is
+     *         {@code null} or empty).
      */
     @Override
     public Range findRangeBounds(CategoryDataset dataset) {
@@ -541,7 +541,7 @@ public class StatisticalBarRenderer extends BarRenderer
     /**
      * Tests this renderer for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

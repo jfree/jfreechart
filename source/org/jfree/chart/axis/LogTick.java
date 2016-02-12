@@ -54,10 +54,10 @@ public class LogTick extends ValueTick {
     /**
      * Creates a new instance.
      * 
-     * @param type  the type (major or minor tick, <code>null</code> not 
+     * @param type  the type (major or minor tick, {@code null} not 
      *         permitted).
      * @param value  the value.
-     * @param label  the label (<code>null</code> permitted).
+     * @param label  the label ({@code null} permitted).
      * @param textAnchor  the text anchor.
      */
     public LogTick(TickType type, double value, AttributedString label, 
@@ -67,10 +67,10 @@ public class LogTick extends ValueTick {
     }
     
     /**
-     * Returns the attributed string for the tick label, or <code>null</code> 
+     * Returns the attributed string for the tick label, or {@code null} 
      * if there is no label.
      * 
-     * @return The attributed string or <code>null</code>. 
+     * @return The attributed string or {@code null}. 
      */
     public AttributedString getAttributedLabel() {
         return this.attributedLabel;

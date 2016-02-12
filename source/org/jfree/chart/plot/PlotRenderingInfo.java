@@ -84,7 +84,7 @@ public class PlotRenderingInfo implements Cloneable, Serializable {
     /**
      * Creates a new instance.
      *
-     * @param owner  the owner (<code>null</code> permitted).
+     * @param owner  the owner ({@code null} permitted).
      */
     public PlotRenderingInfo(ChartRenderingInfo owner) {
         this.owner = owner;
@@ -95,7 +95,7 @@ public class PlotRenderingInfo implements Cloneable, Serializable {
     /**
      * Returns the owner (as specified in the constructor).
      *
-     * @return The owner (possibly <code>null</code>).
+     * @return The owner (possibly {@code null}).
      */
     public ChartRenderingInfo getOwner() {
         return this.owner;
@@ -104,7 +104,7 @@ public class PlotRenderingInfo implements Cloneable, Serializable {
     /**
      * Returns the plot area (in Java2D space).
      *
-     * @return The plot area (possibly <code>null</code>).
+     * @return The plot area (possibly {@code null}).
      *
      * @see #setPlotArea(Rectangle2D)
      */
@@ -115,7 +115,7 @@ public class PlotRenderingInfo implements Cloneable, Serializable {
     /**
      * Sets the plot area.
      *
-     * @param area  the plot area (in Java2D space, <code>null</code>
+     * @param area  the plot area (in Java2D space, {@code null}
      *     permitted but discouraged)
      *
      * @see #getPlotArea()
@@ -127,7 +127,7 @@ public class PlotRenderingInfo implements Cloneable, Serializable {
     /**
      * Returns the plot's data area (in Java2D space).
      *
-     * @return The data area (possibly <code>null</code>).
+     * @return The data area (possibly {@code null}).
      *
      * @see #setDataArea(Rectangle2D)
      */
@@ -138,7 +138,7 @@ public class PlotRenderingInfo implements Cloneable, Serializable {
     /**
      * Sets the data area.
      *
-     * @param area  the data area (in Java2D space, <code>null</code> permitted
+     * @param area  the data area (in Java2D space, {@code null} permitted
      *     but discouraged).
      *
      * @see #getDataArea()
@@ -187,7 +187,7 @@ public class PlotRenderingInfo implements Cloneable, Serializable {
      * and this method is then used to determine the subplot that
      * contains the source point.
      *
-     * @param source  the source point (in Java2D space, <code>null</code> not
+     * @param source  the source point (in Java2D space, {@code null} not
      * permitted).
      *
      * @return The subplot index (or -1 if no subplot contains
@@ -209,7 +209,7 @@ public class PlotRenderingInfo implements Cloneable, Serializable {
     /**
      * Tests this instance for equality against an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

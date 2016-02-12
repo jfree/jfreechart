@@ -63,11 +63,11 @@ public class TimePeriodValue implements Cloneable, Serializable {
     /**
      * Constructs a new data item.
      *
-     * @param period  the time period (<code>null</code> not permitted).
+     * @param period  the time period ({@code null} not permitted).
      * @param value  the value associated with the time period.
      *
      * @throws IllegalArgumentException if <code>period</code> is
-     *     <code>null</code>.
+     *     {@code null}.
      */
     public TimePeriodValue(TimePeriod period, Number value) {
         ParamChecks.nullNotPermitted(period, "period");
@@ -78,11 +78,11 @@ public class TimePeriodValue implements Cloneable, Serializable {
     /**
      * Constructs a new data item.
      *
-     * @param period  the time period (<code>null</code> not permitted).
+     * @param period  the time period ({@code null} not permitted).
      * @param value  the value associated with the time period.
      *
      * @throws IllegalArgumentException if <code>period</code> is
-     *     <code>null</code>.
+     *     {@code null}.
      */
     public TimePeriodValue(TimePeriod period, double value) {
         this(period, new Double(value));
@@ -91,7 +91,7 @@ public class TimePeriodValue implements Cloneable, Serializable {
     /**
      * Returns the time period.
      *
-     * @return The time period (never <code>null</code>).
+     * @return The time period (never {@code null}).
      */
     public TimePeriod getPeriod() {
         return this.period;
@@ -100,7 +100,7 @@ public class TimePeriodValue implements Cloneable, Serializable {
     /**
      * Returns the value.
      *
-     * @return The value (possibly <code>null</code>).
+     * @return The value (possibly {@code null}).
      *
      * @see #setValue(Number)
      */
@@ -111,7 +111,7 @@ public class TimePeriodValue implements Cloneable, Serializable {
     /**
      * Sets the value for this data item.
      *
-     * @param value  the new value (<code>null</code> permitted).
+     * @param value  the new value ({@code null} permitted).
      *
      * @see #getValue()
      */
@@ -122,7 +122,7 @@ public class TimePeriodValue implements Cloneable, Serializable {
     /**
      * Tests this object for equality with the target object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

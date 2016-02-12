@@ -83,7 +83,7 @@ public class OHLCSeriesCollection extends AbstractXYDataset
      * Returns the position within each time period that is used for the X
      * value when the collection is used as an {@link XYDataset}.
      *
-     * @return The anchor position (never <code>null</code>).
+     * @return The anchor position (never {@code null}).
      *
      * @since 1.0.11
      */
@@ -96,7 +96,7 @@ public class OHLCSeriesCollection extends AbstractXYDataset
      * when the collection is used as an {@link XYDataset}, then sends a
      * {@link DatasetChangeEvent} is sent to all registered listeners.
      *
-     * @param anchor  the anchor position (<code>null</code> not permitted).
+     * @param anchor  the anchor position ({@code null} not permitted).
      *
      * @since 1.0.11
      */
@@ -110,7 +110,7 @@ public class OHLCSeriesCollection extends AbstractXYDataset
      * Adds a series to the collection and sends a {@link DatasetChangeEvent}
      * to all registered listeners.
      *
-     * @param series  the series (<code>null</code> not permitted).
+     * @param series  the series ({@code null} not permitted).
      */
     public void addSeries(OHLCSeries series) {
         ParamChecks.nullNotPermitted(series, "series");
@@ -182,7 +182,7 @@ public class OHLCSeriesCollection extends AbstractXYDataset
     /**
      * Returns the x-value for a time period.
      *
-     * @param period  the time period (<code>null</code> not permitted).
+     * @param period  the time period ({@code null} not permitted).
      *
      * @return The x-value.
      */
@@ -357,13 +357,13 @@ public class OHLCSeriesCollection extends AbstractXYDataset
     }
 
     /**
-     * Returns <code>null</code> always, because this dataset doesn't record
+     * Returns {@code null} always, because this dataset doesn't record
      * any volume data.
      *
      * @param series  the series index (ignored).
      * @param item  the item index (ignored).
      *
-     * @return <code>null</code>.
+     * @return {@code null}.
      */
     @Override
     public Number getVolume(int series, int item) {
@@ -403,7 +403,7 @@ public class OHLCSeriesCollection extends AbstractXYDataset
      * Removes the specified series from the dataset and sends a
      * {@link DatasetChangeEvent} to all registered listeners.
      *
-     * @param series  the series (<code>null</code> not permitted).
+     * @param series  the series ({@code null} not permitted).
      *
      * @return <code>true</code> if the series was removed, and
      *     <code>false</code> otherwise.
@@ -448,7 +448,7 @@ public class OHLCSeriesCollection extends AbstractXYDataset
     /**
      * Tests this instance for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

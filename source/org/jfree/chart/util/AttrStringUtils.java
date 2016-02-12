@@ -62,10 +62,10 @@ public class AttrStringUtils {
     /**
      * Returns the bounds for the attributed string.
      * 
-     * @param text  the attributed string (<code>null</code> not permitted).
-     * @param g2  the graphics target (<code>null</code> not permitted).
+     * @param text  the attributed string ({@code null} not permitted).
+     * @param g2  the graphics target ({@code null} not permitted).
      * 
-     * @return The bounds (never <code>null</code>).
+     * @return The bounds (never {@code null}).
      * 
      * @since 1.0.18
      */
@@ -80,7 +80,7 @@ public class AttrStringUtils {
      * Draws the attributed string at <code>(x, y)</code>, rotated by the 
      * specified angle about <code>(x, y)</code>.
      * 
-     * @param text  the attributed string (<code>null</code> not permitted).
+     * @param text  the attributed string ({@code null} not permitted).
      * @param g2  the graphics output target.
      * @param angle  the angle.
      * @param x  the x-coordinate.
@@ -97,7 +97,7 @@ public class AttrStringUtils {
      * Draws the attributed string at <code>(textX, textY)</code>, rotated by 
      * the specified angle about <code>(rotateX, rotateY)</code>.
      * 
-     * @param text  the attributed string (<code>null</code> not permitted).
+     * @param text  the attributed string ({@code null} not permitted).
      * @param g2  the graphics output target.
      * @param textX  the x-coordinate for the text.
      * @param textY  the y-coordinate for the text.
@@ -127,7 +127,7 @@ public class AttrStringUtils {
      * Draws the string anchored to <code>(x, y)</code>, rotated by the 
      * specified angle about <code>(rotationX, rotationY)</code>.
      * 
-     * @param text  the text (<code>null</code> not permitted).
+     * @param text  the text ({@code null} not permitted).
      * @param g2  the graphics target.
      * @param x  the x-coordinate for the text location.
      * @param y  the y-coordinate for the text location.

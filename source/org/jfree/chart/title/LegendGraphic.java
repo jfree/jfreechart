@@ -150,8 +150,8 @@ public class LegendGraphic extends AbstractBlock
     /**
      * Creates a new legend graphic.
      *
-     * @param shape  the shape (<code>null</code> not permitted).
-     * @param fillPaint  the fill paint (<code>null</code> not permitted).
+     * @param shape  the shape ({@code null} not permitted).
+     * @param fillPaint  the fill paint ({@code null} not permitted).
      */
     public LegendGraphic(Shape shape, Paint fillPaint) {
         ParamChecks.nullNotPermitted(shape, "shape");
@@ -262,7 +262,7 @@ public class LegendGraphic extends AbstractBlock
      * Returns the transformer used when the fill paint is an instance of
      * <code>GradientPaint</code>.
      *
-     * @return The transformer (never <code>null</code>).
+     * @return The transformer (never {@code null}).
      *
      * @since 1.0.4.
      *
@@ -276,7 +276,7 @@ public class LegendGraphic extends AbstractBlock
      * Sets the transformer used when the fill paint is an instance of
      * <code>GradientPaint</code>.
      *
-     * @param transformer  the transformer (<code>null</code> not permitted).
+     * @param transformer  the transformer ({@code null} not permitted).
      *
      * @since 1.0.4
      *
@@ -369,7 +369,7 @@ public class LegendGraphic extends AbstractBlock
      * Sets the shape anchor.  This defines a point on the shapes bounding
      * rectangle that will be used to align the shape to a location.
      *
-     * @param anchor  the anchor (<code>null</code> not permitted).
+     * @param anchor  the anchor ({@code null} not permitted).
      *
      * @see #setShapeAnchor(RectangleAnchor)
      */
@@ -393,7 +393,7 @@ public class LegendGraphic extends AbstractBlock
      * Sets the shape location.  This defines a point within the drawing
      * area that will be used to align the shape to.
      *
-     * @param location  the location (<code>null</code> not permitted).
+     * @param location  the location ({@code null} not permitted).
      *
      * @see #getShapeLocation()
      */
@@ -496,9 +496,9 @@ public class LegendGraphic extends AbstractBlock
      * returns the block size.
      *
      * @param g2  the graphics device.
-     * @param constraint  the constraint (<code>null</code> not permitted).
+     * @param constraint  the constraint ({@code null} not permitted).
      *
-     * @return The block size (in Java2D units, never <code>null</code>).
+     * @return The block size (in Java2D units, never {@code null}).
      */
     @Override
     public Size2D arrange(Graphics2D g2, RectangleConstraint constraint) {
@@ -617,9 +617,9 @@ public class LegendGraphic extends AbstractBlock
      *
      * @param g2  the graphics device.
      * @param area  the area.
-     * @param params  ignored (<code>null</code> permitted).
+     * @param params  ignored ({@code null} permitted).
      *
-     * @return Always <code>null</code>.
+     * @return Always {@code null}.
      */
     @Override
     public Object draw(Graphics2D g2, Rectangle2D area, Object params) {
@@ -631,7 +631,7 @@ public class LegendGraphic extends AbstractBlock
      * Tests this <code>LegendGraphic</code> instance for equality with an
      * arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

@@ -125,7 +125,7 @@ public class Year extends RegularTimePeriod implements Serializable {
      * Creates a new <code>Year</code>, based on a particular instant in time,
      * using the default time zone.
      *
-     * @param time  the time (<code>null</code> not permitted).
+     * @param time  the time ({@code null} not permitted).
      *
      * @see #Year(Date, TimeZone)
      */
@@ -136,7 +136,7 @@ public class Year extends RegularTimePeriod implements Serializable {
     /**
      * Constructs a year, based on a particular instant in time and a time zone.
      *
-     * @param time  the time (<code>null</code> not permitted).
+     * @param time  the time ({@code null} not permitted).
      * @param zone  the time zone.
      *
      * @deprecated Since 1.0.12, use {@link #Year(Date, TimeZone, Locale)}
@@ -150,7 +150,7 @@ public class Year extends RegularTimePeriod implements Serializable {
      * Creates a new <code>Year</code> instance, for the specified time zone
      * and locale.
      *
-     * @param time  the current time (<code>null</code> not permitted).
+     * @param time  the current time ({@code null} not permitted).
      * @param zone  the time zone.
      * @param locale  the locale.
      *
@@ -206,7 +206,7 @@ public class Year extends RegularTimePeriod implements Serializable {
      * Recalculates the start date/time and end date/time for this time period
      * relative to the supplied calendar (which incorporates a time zone).
      *
-     * @param calendar  the calendar (<code>null</code> not permitted).
+     * @param calendar  the calendar ({@code null} not permitted).
      *
      * @since 1.0.3
      */
@@ -219,7 +219,7 @@ public class Year extends RegularTimePeriod implements Serializable {
     /**
      * Returns the year preceding this one.
      *
-     * @return The year preceding this one (or <code>null</code> if the
+     * @return The year preceding this one (or {@code null} if the
      *         current year is -9999).
      */
     @Override
@@ -235,7 +235,7 @@ public class Year extends RegularTimePeriod implements Serializable {
     /**
      * Returns the year following this one.
      *
-     * @return The year following this one (or <code>null</code> if the current
+     * @return The year following this one (or {@code null} if the current
      *         year is 9999).
      */
     @Override
@@ -264,12 +264,12 @@ public class Year extends RegularTimePeriod implements Serializable {
      * Returns the first millisecond of the year, evaluated using the supplied
      * calendar (which determines the time zone).
      *
-     * @param calendar  the calendar (<code>null</code> not permitted).
+     * @param calendar  the calendar ({@code null} not permitted).
      *
      * @return The first millisecond of the year.
      *
      * @throws NullPointerException if <code>calendar</code> is
-     *     <code>null</code>.
+     *     {@code null}.
      */
     @Override
     public long getFirstMillisecond(Calendar calendar) {
@@ -282,12 +282,12 @@ public class Year extends RegularTimePeriod implements Serializable {
      * Returns the last millisecond of the year, evaluated using the supplied
      * calendar (which determines the time zone).
      *
-     * @param calendar  the calendar (<code>null</code> not permitted).
+     * @param calendar  the calendar ({@code null} not permitted).
      *
      * @return The last millisecond of the year.
      *
      * @throws NullPointerException if <code>calendar</code> is
-     *     <code>null</code>.
+     *     {@code null}.
      */
     @Override
     public long getLastMillisecond(Calendar calendar) {
@@ -302,7 +302,7 @@ public class Year extends RegularTimePeriod implements Serializable {
      * instance representing the same year as this object.  In all other cases,
      * returns <code>false</code>.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return <code>true</code> if the year of this and the object are the
      *         same.
@@ -393,7 +393,7 @@ public class Year extends RegularTimePeriod implements Serializable {
      *
      * @param s  a string representing the year.
      *
-     * @return <code>null</code> if the string is not parseable, the year
+     * @return {@code null} if the string is not parseable, the year
      *         otherwise.
      */
     public static Year parseYear(String s) {

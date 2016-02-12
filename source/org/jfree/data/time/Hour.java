@@ -111,7 +111,7 @@ public class Hour extends RegularTimePeriod implements Serializable {
      * Constructs a new Hour.
      *
      * @param hour  the hour (in the range 0 to 23).
-     * @param day  the day (<code>null</code> not permitted).
+     * @param day  the day ({@code null} not permitted).
      */
     public Hour(int hour, Day day) {
         ParamChecks.nullNotPermitted(day, "day");
@@ -136,7 +136,7 @@ public class Hour extends RegularTimePeriod implements Serializable {
      * Constructs a new instance, based on the supplied date/time and
      * the default time zone.
      *
-     * @param time  the date-time (<code>null</code> not permitted).
+     * @param time  the date-time ({@code null} not permitted).
      *
      * @see #Hour(Date, TimeZone)
      */
@@ -149,8 +149,8 @@ public class Hour extends RegularTimePeriod implements Serializable {
      * Constructs a new instance, based on the supplied date/time evaluated
      * in the specified time zone.
      *
-     * @param time  the date-time (<code>null</code> not permitted).
-     * @param zone  the time zone (<code>null</code> not permitted).
+     * @param time  the date-time ({@code null} not permitted).
+     * @param zone  the time zone ({@code null} not permitted).
      *
      * @deprecated As of 1.0.13, use the constructor that specifies the locale
      *     also.
@@ -163,9 +163,9 @@ public class Hour extends RegularTimePeriod implements Serializable {
      * Constructs a new instance, based on the supplied date/time evaluated
      * in the specified time zone.
      *
-     * @param time  the date-time (<code>null</code> not permitted).
-     * @param zone  the time zone (<code>null</code> not permitted).
-     * @param locale  the locale (<code>null</code> not permitted).
+     * @param time  the date-time ({@code null} not permitted).
+     * @param zone  the time zone ({@code null} not permitted).
+     * @param locale  the locale ({@code null} not permitted).
      *
      * @since 1.0.13
      */
@@ -259,7 +259,7 @@ public class Hour extends RegularTimePeriod implements Serializable {
      * Recalculates the start date/time and end date/time for this time period
      * relative to the supplied calendar (which incorporates a time zone).
      *
-     * @param calendar  the calendar (<code>null</code> not permitted).
+     * @param calendar  the calendar ({@code null} not permitted).
      *
      * @since 1.0.3
      */
@@ -328,12 +328,12 @@ public class Hour extends RegularTimePeriod implements Serializable {
     /**
      * Returns the first millisecond of the hour.
      *
-     * @param calendar  the calendar/timezone (<code>null</code> not permitted).
+     * @param calendar  the calendar/timezone ({@code null} not permitted).
      *
      * @return The first millisecond.
      *
      * @throws NullPointerException if <code>calendar</code> is
-     *     <code>null</code>.
+     *     {@code null}.
      */
     @Override
     public long getFirstMillisecond(Calendar calendar) {
@@ -348,12 +348,12 @@ public class Hour extends RegularTimePeriod implements Serializable {
     /**
      * Returns the last millisecond of the hour.
      *
-     * @param calendar  the calendar/timezone (<code>null</code> not permitted).
+     * @param calendar  the calendar/timezone ({@code null} not permitted).
      *
      * @return The last millisecond.
      *
      * @throws NullPointerException if <code>calendar</code> is
-     *     <code>null</code>.
+     *     {@code null}.
      */
     @Override
     public long getLastMillisecond(Calendar calendar) {
@@ -371,7 +371,7 @@ public class Hour extends RegularTimePeriod implements Serializable {
      * This method will return true ONLY if the object is an Hour object
      * representing the same hour as this instance.
      *
-     * @param obj  the object to compare (<code>null</code> permitted).
+     * @param obj  the object to compare ({@code null} permitted).
      *
      * @return <code>true</code> if the hour and day value of the object
      *      is the same as this.
@@ -471,7 +471,7 @@ public class Hour extends RegularTimePeriod implements Serializable {
      *
      * @param s  the hour string to parse.
      *
-     * @return <code>null</code> if the string is not parseable, the hour
+     * @return {@code null} if the string is not parseable, the hour
      *         otherwise.
      */
     public static Hour parseHour(String s) {

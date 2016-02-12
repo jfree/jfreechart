@@ -92,8 +92,8 @@ public class TimeSeriesDataItem implements Cloneable, Comparable, Serializable {
     /**
      * Constructs a new data item that associates a value with a time period.
      *
-     * @param period  the time period (<code>null</code> not permitted).
-     * @param value  the value (<code>null</code> permitted).
+     * @param period  the time period ({@code null} not permitted).
+     * @param value  the value ({@code null} permitted).
      */
     public TimeSeriesDataItem(RegularTimePeriod period, Number value) {
         ParamChecks.nullNotPermitted(period, "period");
@@ -104,7 +104,7 @@ public class TimeSeriesDataItem implements Cloneable, Comparable, Serializable {
     /**
      * Constructs a new data item that associates a value with a time period.
      *
-     * @param period  the time period (<code>null</code> not permitted).
+     * @param period  the time period ({@code null} not permitted).
      * @param value  the value associated with the time period.
      */
     public TimeSeriesDataItem(RegularTimePeriod period, double value) {
@@ -114,7 +114,7 @@ public class TimeSeriesDataItem implements Cloneable, Comparable, Serializable {
     /**
      * Returns the time period.
      *
-     * @return The time period (never <code>null</code>).
+     * @return The time period (never {@code null}).
      */
     public RegularTimePeriod getPeriod() {
         return this.period;
@@ -123,7 +123,7 @@ public class TimeSeriesDataItem implements Cloneable, Comparable, Serializable {
     /**
      * Returns the value.
      *
-     * @return The value (<code>null</code> possible).
+     * @return The value ({@code null} possible).
      *
      * @see #setValue(java.lang.Number)
      */
@@ -134,7 +134,7 @@ public class TimeSeriesDataItem implements Cloneable, Comparable, Serializable {
     /**
      * Sets the value for this data item.
      *
-     * @param value  the value (<code>null</code> permitted).
+     * @param value  the value ({@code null} permitted).
      *
      * @see #getValue()
      */
@@ -145,7 +145,7 @@ public class TimeSeriesDataItem implements Cloneable, Comparable, Serializable {
     /**
      * Tests this object for equality with an arbitrary object.
      *
-     * @param obj  the other object (<code>null</code> permitted).
+     * @param obj  the other object ({@code null} permitted).
      *
      * @return A boolean.
      */

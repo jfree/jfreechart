@@ -105,7 +105,7 @@ public interface GanttCategoryDataset extends IntervalCategoryDataset {
      * @param column  the column index (zero-based).
      * @param subinterval  the sub-interval index (zero-based).
      *
-     * @return The start value (possibly <code>null</code>).
+     * @return The start value (possibly {@code null}).
      *
      * @see #getEndValue(int, int, int)
      */
@@ -118,7 +118,7 @@ public interface GanttCategoryDataset extends IntervalCategoryDataset {
      * @param columnKey  the column key.
      * @param subinterval  the sub-interval.
      *
-     * @return The start value (possibly <code>null</code>).
+     * @return The start value (possibly {@code null}).
      *
      * @see #getEndValue(Comparable, Comparable, int)
      */
@@ -132,7 +132,7 @@ public interface GanttCategoryDataset extends IntervalCategoryDataset {
      * @param column  the column index (zero-based).
      * @param subinterval  the sub-interval.
      *
-     * @return The end value (possibly <code>null</code>).
+     * @return The end value (possibly {@code null}).
      *
      * @see #getStartValue(int, int, int)
      */
@@ -145,7 +145,7 @@ public interface GanttCategoryDataset extends IntervalCategoryDataset {
      * @param columnKey  the column key.
      * @param subinterval  the sub-interval.
      *
-     * @return The end value (possibly <code>null</code>).
+     * @return The end value (possibly {@code null}).
      *
      * @see #getStartValue(Comparable, Comparable, int)
      */
@@ -159,7 +159,7 @@ public interface GanttCategoryDataset extends IntervalCategoryDataset {
      * @param column  the column index (zero-based).
      * @param subinterval  the sub-interval.
      *
-     * @return The percent complete value (possibly <code>null</code>).
+     * @return The percent complete value (possibly {@code null}).
      *
      * @see #getPercentComplete(Comparable, Comparable, int)
      */
@@ -172,7 +172,7 @@ public interface GanttCategoryDataset extends IntervalCategoryDataset {
      * @param columnKey  the column key.
      * @param subinterval  the sub-interval.
      *
-     * @return The percent complete value (possibly <code>null</code>).
+     * @return The percent complete value (possibly {@code null}).
      *
      * @see #getPercentComplete(int, int, int)
      */

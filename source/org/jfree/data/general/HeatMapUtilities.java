@@ -61,9 +61,9 @@ public abstract class HeatMapUtilities {
      * Returns a dataset containing one series that holds a copy of the (x, z)
      * data from one row (y-index) of the specified dataset.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
      * @param row  the row (y) index.
-     * @param seriesName  the series name/key (<code>null</code> not permitted).
+     * @param seriesName  the series name/key ({@code null} not permitted).
      *
      * @return The dataset.
      */
@@ -82,9 +82,9 @@ public abstract class HeatMapUtilities {
      * Returns a dataset containing one series that holds a copy of the (y, z)
      * data from one column (x-index) of the specified dataset.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
+     * @param dataset  the dataset ({@code null} not permitted).
      * @param column  the column (x) index.
-     * @param seriesName  the series name (<code>null</code> not permitted).
+     * @param seriesName  the series name ({@code null} not permitted).
      *
      * @return The dataset.
      */
@@ -102,8 +102,8 @@ public abstract class HeatMapUtilities {
     /**
      * Creates an image that displays the values from the specified dataset.
      *
-     * @param dataset  the dataset (<code>null</code> not permitted).
-     * @param paintScale  the paint scale for the z-values (<code>null</code>
+     * @param dataset  the dataset ({@code null} not permitted).
+     * @param paintScale  the paint scale for the z-values ({@code null}
      *         not permitted).
      *
      * @return A buffered image.

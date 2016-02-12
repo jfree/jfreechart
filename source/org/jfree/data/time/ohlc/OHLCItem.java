@@ -68,7 +68,7 @@ public class OHLCItem extends ComparableObjectItem {
     /**
      * Returns the period.
      *
-     * @return The period (never <code>null</code>).
+     * @return The period (never {@code null}).
      */
     public RegularTimePeriod getPeriod() {
         return (RegularTimePeriod) getComparable();

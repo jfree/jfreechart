@@ -86,11 +86,11 @@ public class IntervalMarker extends Marker implements Cloneable, Serializable {
 
     /**
      * Creates a new interval marker with the specified range and fill paint.
-     * The outline paint and stroke default to <code>null</code>.
+     * The outline paint and stroke default to {@code null}.
      *
      * @param start  the lower bound of the interval.
      * @param end  the upper bound of the interval.
-     * @param paint  the fill paint (<code>null</code> not permitted).
+     * @param paint  the fill paint ({@code null} not permitted).
      *
      * @since 1.0.9
      */
@@ -103,8 +103,8 @@ public class IntervalMarker extends Marker implements Cloneable, Serializable {
      *
      * @param start  the start of the interval.
      * @param end  the end of the interval.
-     * @param paint  the paint (<code>null</code> not permitted).
-     * @param stroke  the stroke (<code>null</code> not permitted).
+     * @param paint  the paint ({@code null} not permitted).
+     * @param stroke  the stroke ({@code null} not permitted).
      * @param outlinePaint  the outline paint.
      * @param outlineStroke  the outline stroke.
      * @param alpha  the alpha transparency.
@@ -169,7 +169,7 @@ public class IntervalMarker extends Marker implements Cloneable, Serializable {
     /**
      * Returns the gradient paint transformer.
      *
-     * @return The gradient paint transformer (possibly <code>null</code>).
+     * @return The gradient paint transformer (possibly {@code null}).
      */
     public GradientPaintTransformer getGradientPaintTransformer() {
         return this.gradientPaintTransformer;
@@ -179,7 +179,7 @@ public class IntervalMarker extends Marker implements Cloneable, Serializable {
      * Sets the gradient paint transformer and sends a
      * {@link MarkerChangeEvent} to all registered listeners.
      *
-     * @param transformer  the transformer (<code>null</code> permitted).
+     * @param transformer  the transformer ({@code null} permitted).
      */
     public void setGradientPaintTransformer(
             GradientPaintTransformer transformer) {
@@ -190,7 +190,7 @@ public class IntervalMarker extends Marker implements Cloneable, Serializable {
     /**
      * Tests the marker for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

@@ -95,7 +95,7 @@ public class CustomCategoryURLGenerator implements CategoryURLGenerator,
      * @param series  the series index.
      * @param item  the item index.
      *
-     * @return The URL (possibly <code>null</code>).
+     * @return The URL (possibly {@code null}).
      */
     public String getURL(int series, int item) {
         String result = null;
@@ -117,7 +117,7 @@ public class CustomCategoryURLGenerator implements CategoryURLGenerator,
      * @param series  the series (zero-based index).
      * @param item  the item (zero-based index).
      *
-     * @return A string containing the URL (possibly <code>null</code>).
+     * @return A string containing the URL (possibly {@code null}).
      */
     @Override
     public String generateURL(CategoryDataset dataset, int series, int item) {
@@ -127,7 +127,7 @@ public class CustomCategoryURLGenerator implements CategoryURLGenerator,
     /**
      * Adds a list of URLs.
      *
-     * @param urls  the list of URLs (<code>null</code> permitted).
+     * @param urls  the list of URLs ({@code null} permitted).
      */
     public void addURLSeries(List urls) {
         List listToAdd = null;

@@ -84,8 +84,8 @@ public class SimpleTimePeriod implements TimePeriod, Comparable, Serializable {
     /**
      * Creates a new time allocation.
      *
-     * @param start  the start date/time (<code>null</code> not permitted).
-     * @param end  the end date/time (<code>null</code> not permitted).
+     * @param start  the start date/time ({@code null} not permitted).
+     * @param end  the end date/time ({@code null} not permitted).
      */
     public SimpleTimePeriod(Date start, Date end) {
         this(start.getTime(), end.getTime());
@@ -94,7 +94,7 @@ public class SimpleTimePeriod implements TimePeriod, Comparable, Serializable {
     /**
      * Returns the start date/time.
      *
-     * @return The start date/time (never <code>null</code>).
+     * @return The start date/time (never {@code null}).
      */
     @Override
     public Date getStart() {
@@ -115,7 +115,7 @@ public class SimpleTimePeriod implements TimePeriod, Comparable, Serializable {
     /**
      * Returns the end date/time.
      *
-     * @return The end date/time (never <code>null</code>).
+     * @return The end date/time (never {@code null}).
      */
     @Override
     public Date getEnd() {
@@ -138,7 +138,7 @@ public class SimpleTimePeriod implements TimePeriod, Comparable, Serializable {
      * The object is considered equal if it is an instance of {@link TimePeriod}
      * and it has the same start and end dates.
      *
-     * @param obj  the other object (<code>null</code> permitted).
+     * @param obj  the other object ({@code null} permitted).
      *
      * @return A boolean.
      */
@@ -164,7 +164,7 @@ public class SimpleTimePeriod implements TimePeriod, Comparable, Serializable {
      * Returns an integer that indicates the relative ordering of two
      * time periods.
      *
-     * @param obj  the object (<code>null</code> not permitted).
+     * @param obj  the object ({@code null} not permitted).
      *
      * @return An integer.
      *

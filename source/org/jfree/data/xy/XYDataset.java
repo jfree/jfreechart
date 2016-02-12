@@ -58,7 +58,7 @@ public interface XYDataset extends SeriesDataset {
     /**
      * Returns the order of the domain (or X) values returned by the dataset.
      *
-     * @return The order (never <code>null</code>).
+     * @return The order (never {@code null}).
      */
     public DomainOrder getDomainOrder();
 
@@ -86,7 +86,7 @@ public interface XYDataset extends SeriesDataset {
      * @param item  the item index (in the range <code>0</code> to
      *     <code>getItemCount(series)</code>).
      *
-     * @return The x-value (never <code>null</code>).
+     * @return The x-value (never {@code null}).
      */
     public Number getX(int series, int item);
 
@@ -110,7 +110,7 @@ public interface XYDataset extends SeriesDataset {
      * @param item  the item index (in the range <code>0</code> to
      *     <code>getItemCount(series)</code>).
      *
-     * @return The y-value (possibly <code>null</code>).
+     * @return The y-value (possibly {@code null}).
      */
     public Number getY(int series, int item);
 

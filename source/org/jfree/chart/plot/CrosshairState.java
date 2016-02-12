@@ -334,7 +334,7 @@ public class CrosshairState {
      * this method - the caller is responsible for ensuring that this happens
      * in sync.
      *
-     * @param anchor  the anchor point (<code>null</code> permitted).
+     * @param anchor  the anchor point ({@code null} permitted).
      *
      * @see #getAnchor()
      */

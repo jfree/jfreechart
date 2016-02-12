@@ -343,7 +343,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
     private TimeZone timeZone;
 
     /**
-     * The locale for the axis (<code>null</code> is not permitted).
+     * The locale for the axis ({@code null} is not permitted).
      *
      * @since 1.0.11
      */
@@ -362,7 +362,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
     /**
      * Creates a date axis with the specified label.
      *
-     * @param label  the axis label (<code>null</code> permitted).
+     * @param label  the axis label ({@code null} permitted).
      */
     public DateAxis(String label) {
         this(label, TimeZone.getDefault());
@@ -375,7 +375,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      *
      * @see org.jfree.chart.axis.SegmentedTimeline
      *
-     * @param label  the axis label (<code>null</code> permitted).
+     * @param label  the axis label ({@code null} permitted).
      * @param zone  the time zone.
      *
      * @deprecated From 1.0.11 onwards, use {@link #DateAxis(String, TimeZone,
@@ -392,9 +392,9 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      *
      * @see org.jfree.chart.axis.SegmentedTimeline
      *
-     * @param label  the axis label (<code>null</code> permitted).
+     * @param label  the axis label ({@code null} permitted).
      * @param zone  the time zone.
-     * @param locale  the locale (<code>null</code> not permitted).
+     * @param locale  the locale ({@code null} not permitted).
      *
      * @since 1.0.11
      */
@@ -414,7 +414,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
     /**
      * Returns the time zone for the axis.
      *
-     * @return The time zone (never <code>null</code>).
+     * @return The time zone (never {@code null}).
      *
      * @since 1.0.4
      *
@@ -428,7 +428,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      * Sets the time zone for the axis and sends an {@link AxisChangeEvent} to
      * all registered listeners.
      *
-     * @param zone  the time zone (<code>null</code> not permitted).
+     * @param zone  the time zone ({@code null} not permitted).
      *
      * @since 1.0.4
      *
@@ -444,7 +444,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
     /**
      * Returns the locale for this axis.
      * 
-     * @return The locale (never <code>null</code>).
+     * @return The locale (never {@code null}).
      * 
      * @since 1.0.18
      */
@@ -456,7 +456,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      * Sets the locale for the axis and sends a change event to all registered 
      * listeners.
      * 
-     * @param locale  the new locale (<code>null</code> not permitted).
+     * @param locale  the new locale ({@code null} not permitted).
      */
     public void setLocale(Locale locale) {
         ParamChecks.nullNotPermitted(locale, "locale");
@@ -496,7 +496,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      * drawn, so in that case the return value from this method may be
      * irrelevant if the method is called before the axis has been drawn.
      *
-     * @return The tick unit (possibly <code>null</code>).
+     * @return The tick unit (possibly {@code null}).
      *
      * @see #setTickUnit(DateTickUnit)
      * @see ValueAxis#isAutoTickUnitSelection()
@@ -546,7 +546,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      * Returns the date format override.  If this is non-null, then it will be
      * used to format the dates on the axis.
      *
-     * @return The formatter (possibly <code>null</code>).
+     * @return The formatter (possibly {@code null}).
      */
     public DateFormat getDateFormatOverride() {
         return this.dateFormatOverride;
@@ -557,7 +557,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      * all registered listeners.  If this is non-null, then it will be
      * used to format the dates on the axis.
      *
-     * @param formatter  the date formatter (<code>null</code> permitted).
+     * @param formatter  the date formatter ({@code null} permitted).
      */
     public void setDateFormatOverride(DateFormat formatter) {
         this.dateFormatOverride = formatter;
@@ -569,7 +569,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      * {@link AxisChangeEvent} to all registered listeners.  As a side-effect,
      * the auto-range flag is set to false.
      *
-     * @param range  the new range (<code>null</code> not permitted).
+     * @param range  the new range ({@code null} not permitted).
      */
     @Override
     public void setRange(Range range) {
@@ -581,7 +581,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      * {@link AxisChangeEvent} to all registered listeners.  As a side-effect,
      * the auto-range flag is set to <code>false</code> (optional).
      *
-     * @param range  the range (<code>null</code> not permitted).
+     * @param range  the range ({@code null} not permitted).
      * @param turnOffAutoRange  a flag that controls whether or not the auto
      *                          range is turned off.
      * @param notify  a flag that controls whether or not listeners are
@@ -656,7 +656,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      * the axis, the maximum date will be shifted to preserve the current
      * length of the axis.
      *
-     * @param date  the date (<code>null</code> not permitted).
+     * @param date  the date ({@code null} not permitted).
      *
      * @see #getMinimumDate()
      * @see #setMaximumDate(Date)
@@ -704,7 +704,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      * the axis, the minimum date will be shifted to preserve the current
      * length of the axis.
      *
-     * @param maximumDate  the date (<code>null</code> not permitted).
+     * @param maximumDate  the date ({@code null} not permitted).
      *
      * @see #getMinimumDate()
      * @see #setMinimumDate(Date)
@@ -727,7 +727,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
     /**
      * Returns the tick mark position (start, middle or end of the time period).
      *
-     * @return The position (never <code>null</code>).
+     * @return The position (never {@code null}).
      */
     public DateTickMarkPosition getTickMarkPosition() {
         return this.tickMarkPosition;
@@ -737,7 +737,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      * Sets the tick mark position (start, middle or end of the time period)
      * and sends an {@link AxisChangeEvent} to all registered listeners.
      *
-     * @param position  the position (<code>null</code> not permitted).
+     * @param position  the position ({@code null} not permitted).
      */
     public void setTickMarkPosition(DateTickMarkPosition position) {
         ParamChecks.nullNotPermitted(position, "position");
@@ -1088,7 +1088,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      * within a {@link RegularTimePeriod}.
      *
      * @param period  the period.
-     * @param position  the position (<code>null</code> not permitted).
+     * @param position  the position ({@code null} not permitted).
      *
      * @return A date.
      */
@@ -1147,8 +1147,8 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      * {@link ValueAxis#setStandardTickUnits(TickUnitSource)} method inherited
      * from the {@link ValueAxis} class).
      *
-     * @param zone  the time zone (<code>null</code> not permitted).
-     * @param locale  the locale (<code>null</code> not permitted).
+     * @param zone  the time zone ({@code null} not permitted).
+     * @param locale  the locale ({@code null} not permitted).
      *
      * @return A collection of standard date tick units.
      *
@@ -1834,17 +1834,17 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      * Draws the axis on a Java 2D graphics device (such as the screen or a
      * printer).
      *
-     * @param g2  the graphics device (<code>null</code> not permitted).
+     * @param g2  the graphics device ({@code null} not permitted).
      * @param cursor  the cursor location.
      * @param plotArea  the area within which the axes and data should be
-     *                  drawn (<code>null</code> not permitted).
+     *                  drawn ({@code null} not permitted).
      * @param dataArea  the area within which the data should be drawn
-     *                  (<code>null</code> not permitted).
-     * @param edge  the location of the axis (<code>null</code> not permitted).
+     *                  ({@code null} not permitted).
+     * @param edge  the location of the axis ({@code null} not permitted).
      * @param plotState  collects information about the plot
-     *                   (<code>null</code> permitted).
+     *                   ({@code null} permitted).
      *
-     * @return The axis state (never <code>null</code>).
+     * @return The axis state (never {@code null}).
      */
     @Override
     public AxisState draw(Graphics2D g2, double cursor, Rectangle2D plotArea,
@@ -1917,7 +1917,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
     /**
      * Tests this axis for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */
@@ -1990,7 +1990,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      * {@link ValueAxis#setStandardTickUnits(TickUnitSource)} method inherited
      * from the {@link ValueAxis} class).
      *
-     * @param zone  the time zone (<code>null</code> not permitted).
+     * @param zone  the time zone ({@code null} not permitted).
      *
      * @return A collection of standard date tick units.
      *

@@ -153,7 +153,7 @@ public class RelativeDateFormat extends DateFormat {
     /**
      * Creates a new instance.
      *
-     * @param time  the date/time (<code>null</code> not permitted).
+     * @param time  the date/time ({@code null} not permitted).
      */
     public RelativeDateFormat(Date time) {
         this(time.getTime());
@@ -162,7 +162,7 @@ public class RelativeDateFormat extends DateFormat {
     /**
      * Creates a new instance.
      *
-     * @param baseMillis  the time zone (<code>null</code> not permitted).
+     * @param baseMillis  the time zone ({@code null} not permitted).
      */
     public RelativeDateFormat(long baseMillis) {
         super();
@@ -268,7 +268,7 @@ public class RelativeDateFormat extends DateFormat {
      * Returns the string that is prepended to the format if the relative time
      * is positive.
      *
-     * @return The string (never <code>null</code>).
+     * @return The string (never {@code null}).
      *
      * @see #setPositivePrefix(String)
      *
@@ -282,7 +282,7 @@ public class RelativeDateFormat extends DateFormat {
      * Sets the string that is prepended to the format if the relative time is
      * positive.
      *
-     * @param prefix  the prefix (<code>null</code> not permitted).
+     * @param prefix  the prefix ({@code null} not permitted).
      *
      * @see #getPositivePrefix()
      *
@@ -296,7 +296,7 @@ public class RelativeDateFormat extends DateFormat {
     /**
      * Sets the formatter for the days.
      *
-     * @param formatter  the formatter (<code>null</code> not permitted).
+     * @param formatter  the formatter ({@code null} not permitted).
      *
      * @since 1.0.11
      */
@@ -319,7 +319,7 @@ public class RelativeDateFormat extends DateFormat {
     /**
      * Sets the string that is appended to the day count.
      *
-     * @param suffix  the suffix (<code>null</code> not permitted).
+     * @param suffix  the suffix ({@code null} not permitted).
      *
      * @see #getDaySuffix()
      */
@@ -331,7 +331,7 @@ public class RelativeDateFormat extends DateFormat {
     /**
      * Sets the formatter for the hours.
      *
-     * @param formatter  the formatter (<code>null</code> not permitted).
+     * @param formatter  the formatter ({@code null} not permitted).
      *
      * @since 1.0.11
      */
@@ -354,7 +354,7 @@ public class RelativeDateFormat extends DateFormat {
     /**
      * Sets the string that is appended to the hour count.
      *
-     * @param suffix  the suffix (<code>null</code> not permitted).
+     * @param suffix  the suffix ({@code null} not permitted).
      *
      * @see #getHourSuffix()
      */
@@ -366,7 +366,7 @@ public class RelativeDateFormat extends DateFormat {
     /**
      * Sets the formatter for the minutes.
      *
-     * @param formatter  the formatter (<code>null</code> not permitted).
+     * @param formatter  the formatter ({@code null} not permitted).
      *
      * @since 1.0.11
      */
@@ -389,7 +389,7 @@ public class RelativeDateFormat extends DateFormat {
     /**
      * Sets the string that is appended to the minute count.
      *
-     * @param suffix  the suffix (<code>null</code> not permitted).
+     * @param suffix  the suffix ({@code null} not permitted).
      *
      * @see #getMinuteSuffix()
      */
@@ -412,7 +412,7 @@ public class RelativeDateFormat extends DateFormat {
     /**
      * Sets the string that is appended to the second count.
      *
-     * @param suffix  the suffix (<code>null</code> not permitted).
+     * @param suffix  the suffix ({@code null} not permitted).
      *
      * @see #getSecondSuffix()
      */
@@ -424,7 +424,7 @@ public class RelativeDateFormat extends DateFormat {
     /**
      * Sets the formatter for the seconds and milliseconds.
      *
-     * @param formatter  the formatter (<code>null</code> not permitted).
+     * @param formatter  the formatter ({@code null} not permitted).
      */
     public void setSecondFormatter(NumberFormat formatter) {
         ParamChecks.nullNotPermitted(formatter, "formatter");
@@ -485,7 +485,7 @@ public class RelativeDateFormat extends DateFormat {
      * @param source  the date string.
      * @param pos  the parse position.
      *
-     * @return <code>null</code>, as this method has not been implemented.
+     * @return {@code null}, as this method has not been implemented.
      */
     @Override
     public Date parse(String source, ParsePosition pos) {
@@ -495,7 +495,7 @@ public class RelativeDateFormat extends DateFormat {
     /**
      * Tests this formatter for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

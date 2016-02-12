@@ -71,7 +71,7 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
     /**
      * Creates a new instance.
      *
-     * @param underlying  the underlying dataset (<code>null</code> not
+     * @param underlying  the underlying dataset ({@code null} not
      *     permitted).
      * @param firstColumn  the index of the first visible column from the
      *     underlying dataset.
@@ -87,7 +87,7 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
     /**
      * Returns the underlying dataset that was supplied to the constructor.
      *
-     * @return The underlying dataset (never <code>null</code>).
+     * @return The underlying dataset (never {@code null}).
      */
     public GanttCategoryDataset getUnderlyingDataset() {
         return this.underlying;
@@ -247,10 +247,10 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
     /**
      * Returns the value for a pair of keys.
      *
-     * @param rowKey  the row key (<code>null</code> not permitted).
-     * @param columnKey  the column key (<code>null</code> not permitted).
+     * @param rowKey  the row key ({@code null} not permitted).
+     * @param columnKey  the column key ({@code null} not permitted).
      *
-     * @return The value (possibly <code>null</code>).
+     * @return The value (possibly {@code null}).
      *
      * @throws UnknownKeyException if either key is not defined in the dataset.
      */
@@ -298,7 +298,7 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
      * @param row  the row index (zero-based).
      * @param column  the column index (zero-based).
      *
-     * @return The value (possibly <code>null</code>).
+     * @return The value (possibly {@code null}).
      */
     @Override
     public Number getValue(int row, int column) {
@@ -333,7 +333,7 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
      * @param columnKey  the column key.
      * @param subinterval  the sub-interval.
      *
-     * @return The percent complete value (possibly <code>null</code>).
+     * @return The percent complete value (possibly {@code null}).
      *
      * @see #getPercentComplete(int, int, int)
      */
@@ -358,7 +358,7 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
      * @param columnKey  the column key.
      * @param subinterval  the sub-interval.
      *
-     * @return The end value (possibly <code>null</code>).
+     * @return The end value (possibly {@code null}).
      *
      * @see #getStartValue(Comparable, Comparable, int)
      */
@@ -383,7 +383,7 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
      * @param column  the column index (zero-based).
      * @param subinterval  the sub-interval.
      *
-     * @return The end value (possibly <code>null</code>).
+     * @return The end value (possibly {@code null}).
      *
      * @see #getStartValue(int, int, int)
      */
@@ -414,7 +414,7 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
      * @param column  the column index (zero-based).
      * @param subinterval  the sub-interval.
      *
-     * @return The percent complete value (possibly <code>null</code>).
+     * @return The percent complete value (possibly {@code null}).
      *
      * @see #getPercentComplete(Comparable, Comparable, int)
      */
@@ -431,7 +431,7 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
      * @param columnKey  the column key.
      * @param subinterval  the sub-interval.
      *
-     * @return The start value (possibly <code>null</code>).
+     * @return The start value (possibly {@code null}).
      *
      * @see #getEndValue(Comparable, Comparable, int)
      */
@@ -456,7 +456,7 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
      * @param column  the column index (zero-based).
      * @param subinterval  the sub-interval index (zero-based).
      *
-     * @return The start value (possibly <code>null</code>).
+     * @return The start value (possibly {@code null}).
      *
      * @see #getEndValue(int, int, int)
      */
@@ -511,7 +511,7 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
      * @param rowKey  the series key.
      * @param columnKey  the category key.
      *
-     * @return The start value (possibly <code>null</code>).
+     * @return The start value (possibly {@code null}).
      *
      * @see #getEndValue(Comparable, Comparable)
      */
@@ -534,7 +534,7 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
      * @param row  the series (zero-based index).
      * @param column  the category (zero-based index).
      *
-     * @return The start value (possibly <code>null</code>).
+     * @return The start value (possibly {@code null}).
      *
      * @see #getEndValue(int, int)
      */
@@ -550,7 +550,7 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
      * @param rowKey  the series key.
      * @param columnKey  the category key.
      *
-     * @return The end value (possibly <code>null</code>).
+     * @return The end value (possibly {@code null}).
      *
      * @see #getStartValue(Comparable, Comparable)
      */
@@ -572,7 +572,7 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
      * @param series  the series (zero-based index).
      * @param category  the category (zero-based index).
      *
-     * @return The end value (possibly <code>null</code>).
+     * @return The end value (possibly {@code null}).
      */
     @Override
     public Number getEndValue(int series, int category) {
@@ -584,7 +584,7 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
      * Tests this <code>SlidingCategoryDataset</code> for equality with an
      * arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

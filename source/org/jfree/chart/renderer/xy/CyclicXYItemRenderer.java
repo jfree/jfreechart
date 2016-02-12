@@ -137,7 +137,7 @@ public class CyclicXYItemRenderer extends StandardXYItemRenderer
      * @param series  the series index.
      * @param item  the item index.
      * @param crosshairState  crosshair information for the plot
-     *                        (<code>null</code> permitted).
+     *                        ({@code null} permitted).
      * @param pass  the current pass index.
      */
     @Override

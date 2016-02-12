@@ -83,7 +83,7 @@ public class KeyedObjects implements Cloneable, PublicCloneable, Serializable {
      *
      * @param item  the item index (zero-based).
      *
-     * @return The object (possibly <code>null</code>).
+     * @return The object (possibly {@code null}).
      *
      * @throws IndexOutOfBoundsException if <code>item</code> is out of bounds.
      */
@@ -119,7 +119,7 @@ public class KeyedObjects implements Cloneable, PublicCloneable, Serializable {
     /**
      * Returns the index for a given key, or <code>-1</code>.
      *
-     * @param key  the key (<code>null</code> not permitted).
+     * @param key  the key ({@code null} not permitted).
      *
      * @return The index, or <code>-1</code> if the key is unrecognised.
      *
@@ -142,7 +142,7 @@ public class KeyedObjects implements Cloneable, PublicCloneable, Serializable {
     /**
      * Returns a list containing all the keys in the list.
      *
-     * @return The keys (never <code>null</code>).
+     * @return The keys (never {@code null}).
      */
     public List getKeys() {
         List result = new java.util.ArrayList();
@@ -156,11 +156,11 @@ public class KeyedObjects implements Cloneable, PublicCloneable, Serializable {
 
     /**
      * Returns the object for a given key. If the key is not recognised, the
-     * method should return <code>null</code>.
+     * method should return {@code null}.
      *
      * @param key  the key.
      *
-     * @return The object (possibly <code>null</code>).
+     * @return The object (possibly {@code null}).
      *
      * @see #addObject(Comparable, Object)
      */
@@ -191,7 +191,7 @@ public class KeyedObjects implements Cloneable, PublicCloneable, Serializable {
      * This is the same as the {@link #addObject(Comparable, Object)}
      * method.
      *
-     * @param key  the key (<code>null</code> not permitted).
+     * @param key  the key ({@code null} not permitted).
      * @param object  the object.
      *
      * @see #getObject(Comparable)
@@ -215,8 +215,8 @@ public class KeyedObjects implements Cloneable, PublicCloneable, Serializable {
      *
      * @param position  the position (in the range <code>0</code> to
      *                  <code>getItemCount()</code>).
-     * @param key  the key (<code>null</code> not permitted).
-     * @param value  the value (<code>null</code> permitted).
+     * @param key  the key ({@code null} not permitted).
+     * @param value  the value ({@code null} permitted).
      *
      * @since 1.0.7
      */
@@ -252,7 +252,7 @@ public class KeyedObjects implements Cloneable, PublicCloneable, Serializable {
     /**
      * Removes a value from the collection.
      *
-     * @param key  the key (<code>null</code> not permitted).
+     * @param key  the key ({@code null} not permitted).
      *
      * @see #removeValue(int)
      *
@@ -301,7 +301,7 @@ public class KeyedObjects implements Cloneable, PublicCloneable, Serializable {
     /**
      * Tests this object for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

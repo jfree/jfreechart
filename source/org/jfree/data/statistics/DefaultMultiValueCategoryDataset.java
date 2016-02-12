@@ -94,13 +94,13 @@ public class DefaultMultiValueCategoryDataset extends AbstractDataset
     }
 
     /**
-     * Adds a list of values to the dataset (<code>null</code> and Double.NaN
+     * Adds a list of values to the dataset ({@code null} and Double.NaN
      * items are automatically removed) and sends a {@link DatasetChangeEvent}
      * to all registered listeners.
      *
-     * @param values  a list of values (<code>null</code> not permitted).
-     * @param rowKey  the row key (<code>null</code> not permitted).
-     * @param columnKey  the column key (<code>null</code> not permitted).
+     * @param values  a list of values ({@code null} not permitted).
+     * @param rowKey  the row key ({@code null} not permitted).
+     * @param columnKey  the column key ({@code null} not permitted).
      */
     public void add(List values, Comparable rowKey, Comparable columnKey) {
 
@@ -177,8 +177,8 @@ public class DefaultMultiValueCategoryDataset extends AbstractDataset
      * Returns a list (possibly empty) of the values for the specified item.
      * The returned list should be unmodifiable.
      *
-     * @param rowKey  the row key (<code>null</code> not permitted).
-     * @param columnKey  the column key (<code>null</code> not permitted).
+     * @param rowKey  the row key ({@code null} not permitted).
+     * @param columnKey  the column key ({@code null} not permitted).
      *
      * @return The list of values.
      */
@@ -383,7 +383,7 @@ public class DefaultMultiValueCategoryDataset extends AbstractDataset
     /**
      * Tests this dataset for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */

@@ -69,8 +69,8 @@ public class PlotEntity extends ChartEntity {
     /**
      * Creates a new plot entity.
      *
-     * @param area  the area (<code>null</code> not permitted).
-     * @param plot  the plot (<code>null</code> not permitted).
+     * @param area  the area ({@code null} not permitted).
+     * @param plot  the plot ({@code null} not permitted).
      */
     public PlotEntity(Shape area, Plot plot) {
         // defer argument checks...
@@ -80,9 +80,9 @@ public class PlotEntity extends ChartEntity {
     /**
      * Creates a new plot entity.
      *
-     * @param area  the area (<code>null</code> not permitted).
-     * @param plot  the plot (<code>null</code> not permitted).
-     * @param toolTipText  the tool tip text (<code>null</code> permitted).
+     * @param area  the area ({@code null} not permitted).
+     * @param plot  the plot ({@code null} not permitted).
+     * @param toolTipText  the tool tip text ({@code null} permitted).
      */
     public PlotEntity(Shape area, Plot plot, String toolTipText) {
         // defer argument checks...
@@ -92,10 +92,10 @@ public class PlotEntity extends ChartEntity {
     /**
      * Creates a new plot entity.
      *
-     * @param area  the area (<code>null</code> not permitted).
-     * @param plot  the plot (<code>null</code> not permitted).
-     * @param toolTipText  the tool tip text (<code>null</code> permitted).
-     * @param urlText  the URL text for HTML image maps (<code>null</code>
+     * @param area  the area ({@code null} not permitted).
+     * @param plot  the plot ({@code null} not permitted).
+     * @param toolTipText  the tool tip text ({@code null} permitted).
+     * @param urlText  the URL text for HTML image maps ({@code null}
      *                 permitted).
      */
     public PlotEntity(Shape area, Plot plot, String toolTipText,
@@ -108,7 +108,7 @@ public class PlotEntity extends ChartEntity {
     /**
      * Returns the plot that occupies the entity area.
      *
-     * @return The plot (never <code>null</code>).
+     * @return The plot (never {@code null}).
      */
     public Plot getPlot() {
         return this.plot;
@@ -131,7 +131,7 @@ public class PlotEntity extends ChartEntity {
     /**
      * Tests the entity for equality with an arbitrary object.
      *
-     * @param obj  the object to test against (<code>null</code> permitted).
+     * @param obj  the object to test against ({@code null} permitted).
      *
      * @return A boolean.
      */

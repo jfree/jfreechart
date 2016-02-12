@@ -208,9 +208,9 @@ public class StackedBarRenderer extends BarRenderer
      * Returns the range of values the renderer requires to display all the
      * items from the specified dataset.
      *
-     * @param dataset  the dataset (<code>null</code> permitted).
+     * @param dataset  the dataset ({@code null} permitted).
      *
-     * @return The range (or <code>null</code> if the dataset is empty).
+     * @return The range (or {@code null} if the dataset is empty).
      */
     @Override
     public Range findRangeBounds(CategoryDataset dataset) {
@@ -409,7 +409,7 @@ public class StackedBarRenderer extends BarRenderer
     /**
      * Tests this renderer for equality with an arbitrary object.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */
