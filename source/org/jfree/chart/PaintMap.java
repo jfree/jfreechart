@@ -59,10 +59,10 @@ import org.jfree.util.PaintUtilities;
 
 /**
  * A storage structure that maps <code>Comparable</code> instances with
- * <code>Paint</code> instances.
+ * {@code Paint} instances.
  * <br><br>
  * To support cloning and serialization, you should only use keys that are
- * cloneable and serializable.  Special handling for the <code>Paint</code>
+ * cloneable and serializable.  Special handling for the {@code Paint}
  * instances is included in this class.
  *
  * @since 1.0.3
@@ -113,7 +113,7 @@ public class PaintMap implements Cloneable, Serializable {
 
     /**
      * Adds a mapping between the specified <code>key</code> and
-     * <code>paint</code> values.
+     * {@code Paint} values.
      *
      * @param key  the key ({@code null} not permitted).
      * @param paint  the paint.

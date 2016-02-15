@@ -78,7 +78,7 @@ public abstract class AbstractSeriesDataset extends AbstractDataset
      * implementing method should throw an {@link IndexOutOfBoundsException}
      * (preferred) or an {@link IllegalArgumentException}.
      *
-     * @param series  the series index (in the range <code>0</code> to
+     * @param series  the series index (in the range {@code 0} to
      *     <code>getSeriesCount() - 1</code>).
      *
      * @return The series key.

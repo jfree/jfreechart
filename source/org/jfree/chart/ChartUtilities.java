@@ -671,10 +671,10 @@ public abstract class ChartUtilities {
      * @param info  the chart rendering info ({@code null} not permitted).
      * @param toolTipTagFragmentGenerator  a generator for the HTML fragment
      *     that will contain the tooltip text ({@code null} not permitted
-     *     if <code>info</code> contains tooltip information).
+     *     if {@code info} contains tooltip information).
      * @param urlTagFragmentGenerator  a generator for the HTML fragment that
      *     will contain the URL reference ({@code null} not permitted if
-     *     <code>info</code> contains URLs).
+     *     {@code info} contains URLs).
      *
      * @throws IOException if there are any I/O errors.
      */
@@ -714,10 +714,10 @@ public abstract class ChartUtilities {
      * @param info  the chart rendering info ({@code null} not permitted).
      * @param toolTipTagFragmentGenerator  a generator for the HTML fragment
      *     that will contain the tooltip text ({@code null} not permitted
-     *     if <code>info</code> contains tooltip information).
+     *     if {@code info} contains tooltip information).
      * @param urlTagFragmentGenerator  a generator for the HTML fragment that
      *     will contain the URL reference ({@code null} not permitted if
-     *     <code>info</code> contains URLs).
+     *     {@code info} contains URLs).
      *
      * @return The map tag.
      */

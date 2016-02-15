@@ -175,8 +175,8 @@ public class XYSmoothLineAndShapeRenderer extends XYLineAndShapeRenderer {
 
     /**
      * Draws the item shapes and adds chart entities (second pass). This method
-     * draws the shapes which mark the item positions. If <code>entities</code>
-     * is not <code>null</code> it will be populated with entity information
+     * draws the shapes which mark the item positions. If {@code entities}
+     * is not {@code null} it will be populated with entity information
      * for points that fall within the data area.
      *
      * @param g2  the graphics device.

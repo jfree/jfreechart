@@ -196,7 +196,7 @@ public class TimePeriodValues extends Series implements Serializable {
     /**
      * Returns one data item for the series.
      *
-     * @param index  the item index (in the range <code>0</code> to 
+     * @param index  the item index (in the range {@code 0} to 
      *     <code>getItemCount() - 1</code>).
      *
      * @return One data item for the series.
@@ -208,7 +208,7 @@ public class TimePeriodValues extends Series implements Serializable {
     /**
      * Returns the time period at the specified index.
      *
-     * @param index  the item index (in the range <code>0</code> to 
+     * @param index  the item index (in the range {@code 0} to 
      *     <code>getItemCount() - 1</code>).
      *
      * @return The time period at the specified index.
@@ -222,7 +222,7 @@ public class TimePeriodValues extends Series implements Serializable {
     /**
      * Returns the value at the specified index.
      *
-     * @param index  the item index (in the range <code>0</code> to 
+     * @param index  the item index (in the range {@code 0} to 
      *     <code>getItemCount() - 1</code>).
      *
      * @return The value at the specified index (possibly {@code null}).

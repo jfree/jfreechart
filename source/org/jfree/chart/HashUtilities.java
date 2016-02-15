@@ -61,7 +61,7 @@ import org.jfree.util.StrokeList;
 public class HashUtilities {
     
     /**
-     * Returns a hash code for a <code>Paint</code> instance.  If 
+     * Returns a hash code for a {@code Paint} instance.  If 
      * <code>p</code> is {@code null}, this method returns zero.
      * 
      * @param p  the paint ({@code null} permitted).

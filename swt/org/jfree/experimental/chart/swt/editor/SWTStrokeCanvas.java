@@ -53,7 +53,7 @@ import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
 
 /**
- * A control for displaying a <code>Stroke</code> sample.
+ * A control for displaying a {@code Stroke} sample.
  */
 class SWTStrokeCanvas extends Canvas {
     

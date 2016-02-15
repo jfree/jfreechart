@@ -989,7 +989,7 @@ public class SWTGraphics2D extends Graphics2D {
     }
 
     /**
-     * Returns <code>true</code> if the rectangle (in device space) intersects
+     * Returns {@code true} if the rectangle (in device space) intersects
      * with the shape (the interior, if <code>onStroke</code> is false, 
      * otherwise the stroked outline of the shape).
      * 
@@ -1102,7 +1102,7 @@ public class SWTGraphics2D extends Graphics2D {
      * @param y  the y-coordinate.
      * @param observer  ignored here.
      *
-     * @return <code>true</code> if the image has been drawn.
+     * @return {@code true} if the image has been drawn.
      */
     public boolean drawImage(Image image, int x, int y,
             ImageObserver observer) {
@@ -1128,7 +1128,7 @@ public class SWTGraphics2D extends Graphics2D {
      * @param height  the height for the rendered image.
      * @param observer  ignored here.
      *
-     * @return <code>true</code> if the image has been drawn.
+     * @return {@code true} if the image has been drawn.
      */
     public boolean drawImage(Image image, int x, int y, int width, int height,
             ImageObserver observer) {

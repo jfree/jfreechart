@@ -57,10 +57,10 @@ import org.jfree.util.ObjectUtilities;
 
 /**
  * A storage structure that maps <code>Comparable</code> instances with
- * <code>Stroke</code> instances.
+ * {@code Stroke} instances.
  * <br><br>
  * To support cloning and serialization, you should only use keys that are
- * cloneable and serializable.  Special handling for the <code>Stroke</code>
+ * cloneable and serializable.  Special handling for the {@code Stroke}
  * instances is included in this class.
  *
  * @since 1.0.3

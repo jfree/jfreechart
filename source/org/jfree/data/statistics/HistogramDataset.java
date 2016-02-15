@@ -255,7 +255,7 @@ public class HistogramDataset extends AbstractIntervalXYDataset
     /**
      * Returns the bins for a series.
      *
-     * @param series  the series index (in the range <code>0</code> to
+     * @param series  the series index (in the range {@code 0} to
      *     <code>getSeriesCount() - 1</code>).
      *
      * @return A list of bins.
@@ -305,7 +305,7 @@ public class HistogramDataset extends AbstractIntervalXYDataset
     /**
      * Returns the key for a series.
      *
-     * @param series  the series index (in the range <code>0</code> to
+     * @param series  the series index (in the range {@code 0} to
      *     <code>getSeriesCount() - 1</code>).
      *
      * @return The series key.
@@ -322,7 +322,7 @@ public class HistogramDataset extends AbstractIntervalXYDataset
     /**
      * Returns the number of data items for a series.
      *
-     * @param series  the series index (in the range <code>0</code> to
+     * @param series  the series index (in the range {@code 0} to
      *     <code>getSeriesCount() - 1</code>).
      *
      * @return The item count.
@@ -341,7 +341,7 @@ public class HistogramDataset extends AbstractIntervalXYDataset
      * use it (for example, you could use the dataset to create a line
      * chart).
      *
-     * @param series  the series index (in the range <code>0</code> to
+     * @param series  the series index (in the range {@code 0} to
      *     <code>getSeriesCount() - 1</code>).
      * @param item  the item index (zero based).
      *
@@ -362,7 +362,7 @@ public class HistogramDataset extends AbstractIntervalXYDataset
      * Returns the y-value for a bin (calculated to take into account the
      * histogram type).
      *
-     * @param series  the series index (in the range <code>0</code> to
+     * @param series  the series index (in the range {@code 0} to
      *     <code>getSeriesCount() - 1</code>).
      * @param item  the item index (zero based).
      *
@@ -395,7 +395,7 @@ public class HistogramDataset extends AbstractIntervalXYDataset
     /**
      * Returns the start value for a bin.
      *
-     * @param series  the series index (in the range <code>0</code> to
+     * @param series  the series index (in the range {@code 0} to
      *     <code>getSeriesCount() - 1</code>).
      * @param item  the item index (zero based).
      *
@@ -414,7 +414,7 @@ public class HistogramDataset extends AbstractIntervalXYDataset
     /**
      * Returns the end value for a bin.
      *
-     * @param series  the series index (in the range <code>0</code> to
+     * @param series  the series index (in the range {@code 0} to
      *     <code>getSeriesCount() - 1</code>).
      * @param item  the item index (zero based).
      *
@@ -435,7 +435,7 @@ public class HistogramDataset extends AbstractIntervalXYDataset
      * this method exists only to support the general form of the
      * {@link IntervalXYDataset} interface).
      *
-     * @param series  the series index (in the range <code>0</code> to
+     * @param series  the series index (in the range {@code 0} to
      *     <code>getSeriesCount() - 1</code>).
      * @param item  the item index (zero based).
      *
@@ -454,7 +454,7 @@ public class HistogramDataset extends AbstractIntervalXYDataset
      * this method exists only to support the general form of the
      * {@link IntervalXYDataset} interface).
      *
-     * @param series  the series index (in the range <code>0</code> to
+     * @param series  the series index (in the range {@code 0} to
      *     <code>getSeriesCount() - 1</code>).
      * @param item  the item index (zero based).
      *

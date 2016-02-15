@@ -51,9 +51,9 @@ public interface WindDataset extends XYDataset {
      * Returns the wind direction (should be in the range 0 to 12,
      * corresponding to the positions on an upside-down clock face).
      *
-     * @param series  the series (in the range <code>0</code> to
+     * @param series  the series (in the range {@code 0} to
      *     <code>getSeriesCount() - 1</code>).
-     * @param item  the item (in the range <code>0</code> to
+     * @param item  the item (in the range {@code 0} to
      *     <code>getItemCount(series) - 1</code>).
      *
      * @return The wind direction.
@@ -65,9 +65,9 @@ public interface WindDataset extends XYDataset {
      * <p>
      * http://en.wikipedia.org/wiki/Beaufort_scale
      *
-     * @param series  the series (in the range <code>0</code> to
+     * @param series  the series (in the range {@code 0} to
      *     <code>getSeriesCount() - 1</code>).
-     * @param item  the item (in the range <code>0</code> to
+     * @param item  the item (in the range {@code 0} to
      *     <code>getItemCount(series) - 1</code>).
      *
      * @return The wind force.

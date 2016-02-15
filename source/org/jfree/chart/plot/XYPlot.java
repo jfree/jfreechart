@@ -1887,7 +1887,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      *
      * @param paint  the paint ({@code null} not permitted).
      *
-     * @throws IllegalArgumentException if <code>paint</code> is
+     * @throws IllegalArgumentException if {@code Paint} is
      *     {@code null}.
      *
      * @see #getDomainGridlinePaint()
@@ -1918,7 +1918,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      *
      * @param paint  the paint ({@code null} not permitted).
      *
-     * @throws IllegalArgumentException if <code>paint</code> is
+     * @throws IllegalArgumentException if {@code Paint} is
      *     {@code null}.
      *
      * @see #getDomainMinorGridlinePaint()
@@ -3678,7 +3678,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      * Draws a representation of the data within the dataArea region, using the
      * current renderer.
      * <P>
-     * The <code>info</code> and <code>crosshairState</code> arguments may be
+     * The {@code info} and <code>crosshairState</code> arguments may be
      * {@code null}.
      *
      * @param g2  the graphics device.

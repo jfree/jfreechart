@@ -119,7 +119,7 @@ public class DefaultKeyedValues implements KeyedValues, Cloneable,
      *
      * @return The value (possibly {@code null}).
      *
-     * @throws IndexOutOfBoundsException if <code>item</code> is out of bounds.
+     * @throws IndexOutOfBoundsException if {@code item} is out of bounds.
      */
     @Override
     public Number getValue(int item) {
@@ -133,7 +133,7 @@ public class DefaultKeyedValues implements KeyedValues, Cloneable,
      *
      * @return The row key.
      *
-     * @throws IndexOutOfBoundsException if <code>item</code> is out of bounds.
+     * @throws IndexOutOfBoundsException if {@code item} is out of bounds.
      */
     @Override
     public Comparable getKey(int index) {
@@ -308,7 +308,7 @@ public class DefaultKeyedValues implements KeyedValues, Cloneable,
      * Removes a value from the collection.
      *
      * @param index  the index of the item to remove (in the range
-     *     <code>0</code> to <code>getItemCount() - 1</code>).
+     *     {@code 0} to <code>getItemCount() - 1</code>).
      *
      * @throws IndexOutOfBoundsException if <code>index</code> is not within
      *     the specified range.

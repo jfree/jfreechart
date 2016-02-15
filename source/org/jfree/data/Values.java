@@ -58,7 +58,7 @@ public interface Values {
     /**
      * Returns the value with the specified index.
      *
-     * @param index  the item index (in the range <code>0</code> to
+     * @param index  the item index (in the range {@code 0} to
      *     <code>getItemCount() - 1</code>).
      *
      * @return The value (possibly {@code null}).

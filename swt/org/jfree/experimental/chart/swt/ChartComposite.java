@@ -665,7 +665,7 @@ public class ChartComposite extends Composite implements ChartChangeListener,
      * domain axis.  A check is made to ensure that the current plot supports
      * zooming for the domain values.
      *
-     * @param flag  <code>true</code> enables zooming if possible.
+     * @param flag  {@code true} enables zooming if possible.
      */
     public void setDomainZoomable(boolean flag) {
         if (flag) {
@@ -693,7 +693,7 @@ public class ChartComposite extends Composite implements ChartChangeListener,
     /**
      * A flag that controls mouse-based zooming on the vertical axis.
      *
-     * @param flag  <code>true</code> enables zooming.
+     * @param flag  {@code true} enables zooming.
      */
     public void setRangeZoomable(boolean flag) {
         if (flag) {
@@ -764,8 +764,8 @@ public class ChartComposite extends Composite implements ChartChangeListener,
     }
 
     /**
-     * Returns <code>true</code> if file extensions should be enforced, and
-     * <code>false</code> otherwise.
+     * Returns {@code true} if file extensions should be enforced, and
+     * {@code false} otherwise.
      *
      * @return The flag.
      */
@@ -1170,7 +1170,7 @@ public class ChartComposite extends Composite implements ChartChangeListener,
     /**
      * A flag that controls trace lines on the horizontal axis.
      *
-     * @param flag  <code>true</code> enables trace lines for the mouse
+     * @param flag  {@code true} enables trace lines for the mouse
      *      pointer on the horizontal axis.
      */
     public void setHorizontalAxisTrace(boolean flag) {
@@ -1190,7 +1190,7 @@ public class ChartComposite extends Composite implements ChartChangeListener,
     /**
      * A flag that controls trace lines on the vertical axis.
      *
-     * @param flag  <code>true</code> enables trace lines for the mouse
+     * @param flag  {@code true} enables trace lines for the mouse
      *              pointer on the vertical axis.
      */
     public void setVerticalAxisTrace(boolean flag) {

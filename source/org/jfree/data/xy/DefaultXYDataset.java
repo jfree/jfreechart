@@ -95,7 +95,7 @@ public class DefaultXYDataset extends AbstractXYDataset
     /**
      * Returns the key for a series.
      *
-     * @param series  the series index (in the range <code>0</code> to
+     * @param series  the series index (in the range {@code 0} to
      *     <code>getSeriesCount() - 1</code>).
      *
      * @return The key for the series.
@@ -139,7 +139,7 @@ public class DefaultXYDataset extends AbstractXYDataset
     /**
      * Returns the number of items in the specified series.
      *
-     * @param series  the series index (in the range <code>0</code> to
+     * @param series  the series index (in the range {@code 0} to
      *     <code>getSeriesCount() - 1</code>).
      *
      * @return The item count.
@@ -159,16 +159,16 @@ public class DefaultXYDataset extends AbstractXYDataset
     /**
      * Returns the x-value for an item within a series.
      *
-     * @param series  the series index (in the range <code>0</code> to
+     * @param series  the series index (in the range {@code 0} to
      *     <code>getSeriesCount() - 1</code>).
-     * @param item  the item index (in the range <code>0</code> to
+     * @param item  the item index (in the range {@code 0} to
      *     <code>getItemCount(series)</code>).
      *
      * @return The x-value.
      *
      * @throws ArrayIndexOutOfBoundsException if <code>series</code> is not
      *     within the specified range.
-     * @throws ArrayIndexOutOfBoundsException if <code>item</code> is not
+     * @throws ArrayIndexOutOfBoundsException if {@code item} is not
      *     within the specified range.
      *
      * @see #getX(int, int)
@@ -182,16 +182,16 @@ public class DefaultXYDataset extends AbstractXYDataset
     /**
      * Returns the x-value for an item within a series.
      *
-     * @param series  the series index (in the range <code>0</code> to
+     * @param series  the series index (in the range {@code 0} to
      *     <code>getSeriesCount() - 1</code>).
-     * @param item  the item index (in the range <code>0</code> to
+     * @param item  the item index (in the range {@code 0} to
      *     <code>getItemCount(series)</code>).
      *
      * @return The x-value.
      *
      * @throws ArrayIndexOutOfBoundsException if <code>series</code> is not
      *     within the specified range.
-     * @throws ArrayIndexOutOfBoundsException if <code>item</code> is not
+     * @throws ArrayIndexOutOfBoundsException if {@code item} is not
      *     within the specified range.
      *
      * @see #getXValue(int, int)
@@ -204,16 +204,16 @@ public class DefaultXYDataset extends AbstractXYDataset
     /**
      * Returns the y-value for an item within a series.
      *
-     * @param series  the series index (in the range <code>0</code> to
+     * @param series  the series index (in the range {@code 0} to
      *     <code>getSeriesCount() - 1</code>).
-     * @param item  the item index (in the range <code>0</code> to
+     * @param item  the item index (in the range {@code 0} to
      *     <code>getItemCount(series)</code>).
      *
      * @return The y-value.
      *
      * @throws ArrayIndexOutOfBoundsException if <code>series</code> is not
      *     within the specified range.
-     * @throws ArrayIndexOutOfBoundsException if <code>item</code> is not
+     * @throws ArrayIndexOutOfBoundsException if {@code item} is not
      *     within the specified range.
      *
      * @see #getY(int, int)
@@ -227,16 +227,16 @@ public class DefaultXYDataset extends AbstractXYDataset
     /**
      * Returns the y-value for an item within a series.
      *
-     * @param series  the series index (in the range <code>0</code> to
+     * @param series  the series index (in the range {@code 0} to
      *     <code>getSeriesCount() - 1</code>).
-     * @param item  the item index (in the range <code>0</code> to
+     * @param item  the item index (in the range {@code 0} to
      *     <code>getItemCount(series)</code>).
      *
      * @return The y-value.
      *
      * @throws ArrayIndexOutOfBoundsException if <code>series</code> is not
      *     within the specified range.
-     * @throws ArrayIndexOutOfBoundsException if <code>item</code> is not
+     * @throws ArrayIndexOutOfBoundsException if {@code item} is not
      *     within the specified range.
      *
      * @see #getX(int, int)

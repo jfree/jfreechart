@@ -68,7 +68,7 @@ public class CombinedCategoryPlot extends CombinedDomainCategoryPlot {
     }
 
     /**
-     * Adds a new subplot with weight <code>1</code>.
+     * Adds a new subplot with weight {@code 1}.
      *
      * @param subplot  the subplot.
      */

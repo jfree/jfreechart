@@ -263,7 +263,7 @@ public class GanttChartTest  {
     }
 
     /**
-     * Utility method for creating <code>Date</code> objects.
+     * Utility method for creating {@code Date} objects.
      *
      * @param day  the date.
      * @param month  the month.

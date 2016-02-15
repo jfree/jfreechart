@@ -125,12 +125,12 @@ public class DefaultPieDataset extends AbstractDataset
     /**
      * Returns the key for the specified item, or {@code null}.
      *
-     * @param item  the item index (in the range <code>0</code> to
+     * @param item  the item index (in the range {@code 0} to
      *     <code>getItemCount() - 1</code>).
      *
      * @return The key, or {@code null}.
      *
-     * @throws IndexOutOfBoundsException if <code>item</code> is not in the
+     * @throws IndexOutOfBoundsException if {@code item} is not in the
      *     specified range.
      */
     @Override

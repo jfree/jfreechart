@@ -85,7 +85,7 @@ public class KeyedObjects implements Cloneable, PublicCloneable, Serializable {
      *
      * @return The object (possibly {@code null}).
      *
-     * @throws IndexOutOfBoundsException if <code>item</code> is out of bounds.
+     * @throws IndexOutOfBoundsException if {@code item} is out of bounds.
      */
     public Object getObject(int item) {
         Object result = null;
@@ -103,7 +103,7 @@ public class KeyedObjects implements Cloneable, PublicCloneable, Serializable {
      *
      * @return The row key.
      *
-     * @throws IndexOutOfBoundsException if <code>item</code> is out of bounds.
+     * @throws IndexOutOfBoundsException if {@code item} is out of bounds.
      *
      * @see #getIndex(Comparable)
      */
@@ -213,7 +213,7 @@ public class KeyedObjects implements Cloneable, PublicCloneable, Serializable {
      * there is an existing item with the specified key, updates the value
      * for that item and moves it to the specified position.
      *
-     * @param position  the position (in the range <code>0</code> to
+     * @param position  the position (in the range {@code 0} to
      *                  <code>getItemCount()</code>).
      * @param key  the key ({@code null} not permitted).
      * @param value  the value ({@code null} permitted).

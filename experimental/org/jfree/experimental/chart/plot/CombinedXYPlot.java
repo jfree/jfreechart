@@ -68,7 +68,7 @@ public class CombinedXYPlot extends CombinedDomainXYPlot {
     }
 
     /**
-     * Adds a new subplot with weight <code>1</code>.
+     * Adds a new subplot with weight {@code 1}.
      *
      * @param subplot  the subplot.
      */

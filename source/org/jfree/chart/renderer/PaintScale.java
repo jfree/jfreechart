@@ -46,7 +46,7 @@ import java.awt.Paint;
 import org.jfree.chart.renderer.xy.XYBlockRenderer;
 
 /**
- * A source for <code>Paint</code> instances, used by the
+ * A source for {@code Paint} instances, used by the
  * {@link XYBlockRenderer}.
  * <br><br>
  * NOTE: Classes that implement this interface should also implement
@@ -77,11 +77,11 @@ public interface PaintScale {
     public double getUpperBound();
 
     /**
-     * Returns a <code>Paint</code> instance for the specified value.
+     * Returns a {@code Paint} instance for the specified value.
      *
      * @param value  the value.
      *
-     * @return A <code>Paint</code> instance (never {@code null}).
+     * @return A {@code Paint} instance (never {@code null}).
      */
     public Paint getPaint(double value);
 

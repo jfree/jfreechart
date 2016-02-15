@@ -3162,7 +3162,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     }
 
     /**
-     * Returns the pen-style (<code>Stroke</code>) used to draw the crosshair
+     * Returns the pen-style ({@code Stroke}) used to draw the crosshair
      * (if visible).
      *
      * @return The crosshair stroke (never {@code null}).
@@ -3176,7 +3176,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     }
 
     /**
-     * Sets the pen-style (<code>Stroke</code>) used to draw the range
+     * Sets the pen-style ({@code Stroke}) used to draw the range
      * crosshair (if visible), and sends a {@link PlotChangeEvent} to all
      * registered listeners.
      *

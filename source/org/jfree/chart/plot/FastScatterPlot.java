@@ -571,7 +571,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
 
     /**
      * Draws a representation of the data within the dataArea region.  The
-     * <code>info</code> and <code>crosshairState</code> arguments may be
+     * {@code info} and <code>crosshairState</code> arguments may be
      * {@code null}.
      *
      * @param g2  the graphics device.

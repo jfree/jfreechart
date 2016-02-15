@@ -56,7 +56,7 @@ import java.util.Hashtable;
 
 /**
  * This class contains static methods for the manipulation
- * of objects of type <code>Paint</code>
+ * of objects of type {@code Paint}
  * <p>
  * The intention is to honour the alpha-channel in the process.
  * <code>PaintAlpha</code> was originally conceived to improve the
@@ -66,7 +66,7 @@ import java.util.Hashtable;
  * In, for example
  * {@link org.jfree.chart.renderer.category.StackedBarRenderer3D StackedBarRenderer3D},
  * bars are rendered with 6 faces. The front face is rendered with
- * the <code>Paint</code> requested. The other 5 faces are rendered
+ * the {@code Paint} requested. The other 5 faces are rendered
  * darker to achieve the 3D effect.
  * <p>
  * Previously {@link Color#darker()} was used for this,
@@ -111,13 +111,13 @@ public class PaintAlpha {
     }
 
     /**
-     * Create a new (if possible, darker) <code>Paint</code> of the same Type.
-     * If the Type is not supported, the original <code>Paint</code> is returned.
+     * Create a new (if possible, darker) {@code Paint} of the same Type.
+     * If the Type is not supported, the original {@code Paint} is returned.
      * <p>
-     * @param paint a <code>Paint</code> implementation
+     * @param paint a {@code Paint} implementation
      * (e.g. {@link Color}, {@link GradientPaint}, {@link TexturePaint},..)
      * <p>
-     * @return a (usually new, see above) <code>Paint</code>
+     * @return a (usually new, see above) {@code Paint}
      */
     public static Paint darker(Paint paint) {
 

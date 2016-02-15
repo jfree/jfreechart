@@ -57,7 +57,7 @@ public interface XisSymbolic {
 
     /**
      * Returns the symbolic value of the data set specified by
-     * <CODE>series</CODE> and <CODE>item</CODE> parameters.
+     * <CODE>series</CODE> and {@code item} parameters.
      *
      * @param series  value of the serie.
      * @param item  value of the item.

@@ -48,7 +48,7 @@ import java.awt.Shape;
 import java.awt.Stroke;
 
 /**
- * A supplier of <code>Paint</code>, <code>Stroke</code> and <code>Shape</code>
+ * A supplier of {@code Paint}, {@code Stroke} and <code>Shape</code>
  * objects for use by plots and renderers.  By providing a central place for
  * obtaining these items, we can ensure that duplication is avoided.
  * <p>
@@ -81,7 +81,7 @@ public interface DrawingSupplier {
     public Paint getNextFillPaint();
 
     /**
-     * Returns the next <code>Stroke</code> object in a sequence maintained by
+     * Returns the next {@code Stroke} object in a sequence maintained by
      * the supplier.
      *
      * @return The stroke.
@@ -89,7 +89,7 @@ public interface DrawingSupplier {
     public Stroke getNextStroke();
 
     /**
-     * Returns the next <code>Stroke</code> object in a sequence maintained by
+     * Returns the next {@code Stroke} object in a sequence maintained by
      * the supplier.
      *
      * @return The stroke.

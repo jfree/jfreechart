@@ -70,7 +70,7 @@ public interface SeriesDataset extends Dataset {
     /**
      * Returns the key for a series.
      *
-     * @param series  the series index (in the range <code>0</code> to
+     * @param series  the series index (in the range {@code 0} to
      *     <code>getSeriesCount() - 1</code>).
      *
      * @return The key for the series.

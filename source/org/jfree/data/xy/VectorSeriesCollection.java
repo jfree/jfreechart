@@ -140,7 +140,7 @@ public class VectorSeriesCollection extends AbstractXYDataset
      * @return The series.
      *
      * @throws IllegalArgumentException if <code>series</code> is not in the
-     *     range <code>0</code> to <code>getSeriesCount() - 1</code>.
+     *     range {@code 0} to <code>getSeriesCount() - 1</code>.
      */
     public VectorSeries getSeries(int series) {
         if ((series < 0) || (series >= getSeriesCount())) {
@@ -152,7 +152,7 @@ public class VectorSeriesCollection extends AbstractXYDataset
     /**
      * Returns the key for a series.
      *
-     * @param series  the series index (in the range <code>0</code> to
+     * @param series  the series index (in the range {@code 0} to
      *     <code>getSeriesCount() - 1</code>).
      *
      * @return The key for a series.
@@ -187,7 +187,7 @@ public class VectorSeriesCollection extends AbstractXYDataset
      * @return The item count.
      *
      * @throws IllegalArgumentException if <code>series</code> is not in the
-     *     range <code>0</code> to <code>getSeriesCount() - 1</code>.
+     *     range {@code 0} to <code>getSeriesCount() - 1</code>.
      */
     @Override
     public int getItemCount(int series) {

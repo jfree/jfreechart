@@ -96,7 +96,7 @@ public class DialBackground extends AbstractDialLayer implements DialLayer,
      *
      * @param paint  the paint ({@code null} not permitted).
      *
-     * @throws IllegalArgumentException if <code>paint</code> is
+     * @throws IllegalArgumentException if {@code Paint} is
      *     {@code null}.
      */
     public DialBackground(Paint paint) {

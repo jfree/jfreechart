@@ -683,7 +683,7 @@ public abstract class Plot implements AxisChangeListener,
      * Sets the drawing supplier for the plot and sends a
      * {@link PlotChangeEvent} to all registered listeners.  The drawing
      * supplier is responsible for supplying a limitless (possibly repeating)
-     * sequence of <code>Paint</code>, <code>Stroke</code> and
+     * sequence of {@code Paint}, {@code Stroke} and
      * <code>Shape</code> objects that the plot's renderer(s) can use to
      * populate its (their) tables.
      *
@@ -700,7 +700,7 @@ public abstract class Plot implements AxisChangeListener,
      * Sets the drawing supplier for the plot and, if requested, sends a
      * {@link PlotChangeEvent} to all registered listeners.  The drawing
      * supplier is responsible for supplying a limitless (possibly repeating)
-     * sequence of <code>Paint</code>, <code>Stroke</code> and
+     * sequence of {@code Paint}, {@code Stroke} and
      * <code>Shape</code> objects that the plot's renderer(s) can use to
      * populate its (their) tables.
      *

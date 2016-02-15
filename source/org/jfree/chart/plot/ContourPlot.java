@@ -545,7 +545,7 @@ public class ContourPlot extends Plot implements ContourValuePlot,
      * Draws the plot on a Java 2D graphics device (such as the screen or a
      * printer).
      * <P>
-     * The optional <code>info</code> argument collects information about the
+     * The optional {@code info} argument collects information about the
      * rendering of the plot (dimensions, tooltip information etc).  Just pass
      * in {@code null} if you do not need this information.
      *
@@ -708,7 +708,7 @@ public class ContourPlot extends Plot implements ContourValuePlot,
      * Draws a representation of the data within the dataArea region, using the
      * current renderer.
      * <P>
-     * The <code>info</code> and <code>crosshairState</code> arguments may be
+     * The {@code info} and <code>crosshairState</code> arguments may be
      * {@code null}.
      *
      * @param g2  the graphics device.
