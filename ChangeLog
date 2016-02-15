@@ -1,3 +1,11 @@
+2016-02-15  David Gilbert  <david.gilbert@object-refinery.com>
+
+    * org/jfree/chart/fx/ChartViewer.java
+    (getCanvas): New method,
+    (setCanvas): Likewise,
+    * org/jfree/chart/fx/ChartViewerSkin.java
+    (createNode): Set reference to canvas.
+
 2016-01-25  David Gilbert  <david.gilbert@object-refinery.com>
 
     * org/jfree/chart/fx/FXGraphics2D.java: Deleted,

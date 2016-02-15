@@ -196,7 +196,8 @@ public class ChartViewerSkin extends SkinBase<ChartViewer>  {
  
         this.canvas.addMouseHandler(new ZoomHandlerFX("zoom", control));
         sp.getChildren().add(this.canvas);
-        
+        getSkinnable().setCanvas(canvas); // give the ChartViewer a reference
+                                          // to the canvas
         borderPane.setCenter(sp);
         return borderPane;
     }

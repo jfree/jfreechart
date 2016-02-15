@@ -50,6 +50,7 @@ import javafx.scene.control.Control;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Skinnable;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.WindowEvent;
 import org.jfree.chart.ChartMouseEvent;
@@ -78,6 +79,11 @@ public class ChartViewer extends Control implements Skinnable,
     /** The chart to display. */
     private JFreeChart chart;
 
+    /** 
+     * A reference (for convenience) to the canvas used to display the chart. 
+     */
+    private ChartCanvas canvas;
+    
     /** Does the viewer show tooltips from the chart? */
     private boolean tooltipEnabled;
     
@@ -148,7 +154,32 @@ public class ChartViewer extends Control implements Skinnable,
         ChartViewerSkin skin = (ChartViewerSkin) getSkin();
         skin.setChart(chart);
     }
+ 
+    /**
+     * Returns the canvas used within this control to display the chart.
+     * 
+     * @return The canvas (never {@code null}).
+     * 
+     * @since 1.0.20
+     */
+    public ChartCanvas getCanvas() {
+        return this.canvas;
+    }
     
+    /**
+     * Sets the canvas used within this control to display the chart.
+     * This method is called by the control's skin, you should not need to
+     * call it directly.
+     * 
+     * @param canvas  the canvas ({@code null} not permitted). 
+     * 
+     * @since 1.0.20
+     */
+    public void setCanvas(ChartCanvas canvas) {
+        ParamChecks.nullNotPermitted(canvas, "canvas");
+        this.canvas = canvas;
+    }
+
     /**
      * Returns the flag that controls whether or not tooltips are displayed
      * for the chart.
