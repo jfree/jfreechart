@@ -279,7 +279,7 @@ public class DateTickUnit extends TickUnit implements Serializable {
     }
 
     /**
-     * Returns a field code that can be used with the <code>Calendar</code>
+     * Returns a field code that can be used with the {@code Calendar}
      * class.
      *
      * @return The field code.
@@ -580,12 +580,11 @@ public class DateTickUnit extends TickUnit implements Serializable {
     }
 
     /**
-     * Returns the date unit.  This will be one of the constants
-     * <code>YEAR</code>, <code>MONTH</code>, <code>DAY</code>,
-     * <code>HOUR</code>, <code>MINUTE</code>, <code>SECOND</code> or
-     * <code>MILLISECOND</code>, defined by this class.  Note that these
-     * constants do NOT correspond to those defined in Java's
-     * <code>Calendar</code> class.
+     * Returns the date unit.  This will be one of the constants {@code YEAR}, 
+     * {@code MONTH}, {@code DAY}, {@code HOUR}, {@code MINUTE}, {@code SECOND}
+     * or {@code MILLISECOND}, defined by this class.  Note that these 
+     * constants do NOT correspond to those defined in Java's {@code Calendar} 
+     * class.
      *
      * @return The date unit.
      *

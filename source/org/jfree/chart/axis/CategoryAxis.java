@@ -1437,7 +1437,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
     }
 
     /**
-     * Reads a <code>Map</code> of (<code>Comparable</code>, {@code Paint})
+     * Reads a {@code Map} of ({@code Comparable}, {@code Paint})
      * elements from a stream.
      *
      * @param in  the input stream.
@@ -1466,7 +1466,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
     }
 
     /**
-     * Writes a map of (<code>Comparable</code>, {@code Paint})
+     * Writes a map of ({@code Comparable}, {@code Paint})
      * elements to a stream.
      *
      * @param map  the map ({@code null} permitted).
@@ -1496,7 +1496,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
     }
 
     /**
-     * Tests two maps containing (<code>Comparable</code>, {@code Paint})
+     * Tests two maps containing ({@code Comparable}, {@code Paint})
      * elements for equality.
      *
      * @param map1  the first map ({@code null} not permitted).

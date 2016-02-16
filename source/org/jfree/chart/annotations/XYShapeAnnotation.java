@@ -82,7 +82,7 @@ import org.jfree.util.PaintUtilities;
 import org.jfree.util.PublicCloneable;
 
 /**
- * A simple <code>Shape</code> annotation that can be placed on an
+ * A simple {@code Shape} annotation that can be placed on an
  * {@link XYPlot}.  The shape coordinates are specified in data space.
  */
 public class XYShapeAnnotation extends AbstractXYAnnotation

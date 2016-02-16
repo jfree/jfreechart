@@ -45,7 +45,7 @@ import java.io.Serializable;
 
 /**
  * Used to indicate one of three positions within a category:
- * <code>START</code>, <code>MIDDLE</code> and <code>END</code>.
+ * {@code START}, {@code MIDDLE} and {@code END}.
  */
 public final class CategoryAnchor implements Serializable {
 

@@ -415,7 +415,7 @@ public abstract class Axis implements Cloneable, Serializable {
      * Sets the attributed label for the axis and sends an 
      * {@link AxisChangeEvent} to all registered listeners.  This is a 
      * convenience method that converts the string into an 
-     * <code>AttributedString</code> using the current font attributes.
+     * {@code AttributedString} using the current font attributes.
      * 
      * @param label  the label ({@code null} permitted).
      * 
@@ -443,7 +443,7 @@ public abstract class Axis implements Cloneable, Serializable {
     }
     
     /**
-     * Creates and returns an <code>AttributedString</code> with the specified
+     * Creates and returns an {@code AttributedString} with the specified
      * text and the labelFont and labelPaint applied as attributes.
      * 
      * @param label  the label ({@code null} permitted).
