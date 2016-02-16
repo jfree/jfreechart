@@ -305,9 +305,9 @@ public class VectorRenderer extends AbstractXYItemRenderer
      * Tests this <code>VectorRenderer</code> for equality with an arbitrary
      * object.  This method returns {@code true} if and only if:
      * <ul>
-     * <li><code>obj</code> is an instance of <code>VectorRenderer</code> (not
+     * <li>{@code obj} is an instance of <code>VectorRenderer</code> (not
      *     {@code null});</li>
-     * <li><code>obj</code> has the same field values as this
+     * <li>{@code obj} has the same field values as this
      *     <code>VectorRenderer</code>;</li>
      * </ul>
      *

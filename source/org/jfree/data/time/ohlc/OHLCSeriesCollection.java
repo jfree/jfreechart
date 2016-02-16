@@ -136,8 +136,8 @@ public class OHLCSeriesCollection extends AbstractXYDataset
      *
      * @return The series.
      *
-     * @throws IllegalArgumentException if <code>series</code> is not in the
-     *     range {@code 0} to <code>getSeriesCount() - 1</code>.
+     * @throws IllegalArgumentException if {@code series} is not in the
+     *     range {@code 0} to {@code getSeriesCount() - 1}.
      */
     public OHLCSeries getSeries(int series) {
         if ((series < 0) || (series >= getSeriesCount())) {
@@ -150,11 +150,11 @@ public class OHLCSeriesCollection extends AbstractXYDataset
      * Returns the key for a series.
      *
      * @param series  the series index (in the range {@code 0} to
-     *     <code>getSeriesCount() - 1</code>).
+     *     {@code getSeriesCount() - 1}).
      *
      * @return The key for a series.
      *
-     * @throws IllegalArgumentException if <code>series</code> is not in the
+     * @throws IllegalArgumentException if {@code series} is not in the
      *     specified range.
      */
     @Override
@@ -170,8 +170,8 @@ public class OHLCSeriesCollection extends AbstractXYDataset
      *
      * @return The item count.
      *
-     * @throws IllegalArgumentException if <code>series</code> is not in the
-     *     range {@code 0} to <code>getSeriesCount() - 1</code>.
+     * @throws IllegalArgumentException if {@code series} is not in the
+     *     range {@code 0} to {@code getSeriesCount() - 1}.
      */
     @Override
     public int getItemCount(int series) {

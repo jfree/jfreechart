@@ -74,12 +74,12 @@ public abstract class AbstractSeriesDataset extends AbstractDataset
     /**
      * Returns the key for a series.
      * <p>
-     * If <code>series</code> is not within the specified range, the
+     * If {@code series} is not within the specified range, the
      * implementing method should throw an {@link IndexOutOfBoundsException}
      * (preferred) or an {@link IllegalArgumentException}.
      *
      * @param series  the series index (in the range {@code 0} to
-     *     <code>getSeriesCount() - 1</code>).
+     *     {@code getSeriesCount() - 1}).
      *
      * @return The series key.
      */

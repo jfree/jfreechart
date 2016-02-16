@@ -178,8 +178,8 @@ public class GrayPaintScale
      * arbitrary object.  This method returns {@code true} if and only
      * if:
      * <ul>
-     * <li><code>obj</code> is not {@code null};</li>
-     * <li><code>obj</code> is an instance of <code>GrayPaintScale</code>;</li>
+     * <li>{@code obj} is not {@code null};</li>
+     * <li>{@code obj} is an instance of <code>GrayPaintScale</code>;</li>
      * </ul>
      *
      * @param obj  the object ({@code null} permitted).

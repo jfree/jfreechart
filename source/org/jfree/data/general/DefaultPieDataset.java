@@ -145,7 +145,7 @@ public class DefaultPieDataset extends AbstractDataset
      *
      * @return The index, or <code>-1</code> if the key is unrecognised.
      *
-     * @throws IllegalArgumentException if <code>key</code> is
+     * @throws IllegalArgumentException if {@code key} is
      *     {@code null}.
      */
     @Override
@@ -191,7 +191,7 @@ public class DefaultPieDataset extends AbstractDataset
      * @param key  the key ({@code null} not permitted).
      * @param value  the value.
      *
-     * @throws IllegalArgumentException if <code>key</code> is
+     * @throws IllegalArgumentException if {@code key} is
      *     {@code null}.
      */
     public void setValue(Comparable key, Number value) {
@@ -206,7 +206,7 @@ public class DefaultPieDataset extends AbstractDataset
      * @param key  the key ({@code null} not permitted).
      * @param value  the value.
      *
-     * @throws IllegalArgumentException if <code>key</code> is
+     * @throws IllegalArgumentException if {@code key} is
      *     {@code null}.
      */
     public void setValue(Comparable key, double value) {
@@ -254,7 +254,7 @@ public class DefaultPieDataset extends AbstractDataset
      *
      * @param key  the key ({@code null} not permitted).
      *
-     * @throws IllegalArgumentException if <code>key</code> is
+     * @throws IllegalArgumentException if {@code key} is
      *     {@code null}.
      */
     public void remove(Comparable key) {

@@ -56,14 +56,14 @@ import org.jfree.chart.util.ParamChecks;
 /**
  * A utility class that calculates the mean, median, quartiles Q1 and Q3, plus
  * a list of outlier values...all from an arbitrary list of
- * <code>Number</code> objects.
+ * {@code Number} objects.
  */
 public abstract class BoxAndWhiskerCalculator {
 
     /**
      * Calculates the statistics required for a {@link BoxAndWhiskerItem}
-     * from a list of <code>Number</code> objects.  Any items in the list
-     * that are {@code null}, not an instance of <code>Number</code>, or
+     * from a list of {@code Number} objects.  Any items in the list
+     * that are {@code null}, not an instance of {@code Number}, or
      * equivalent to <code>Double.NaN</code>, will be ignored.
      *
      * @param values  a list of numbers (a {@code null} list is not
@@ -78,8 +78,8 @@ public abstract class BoxAndWhiskerCalculator {
 
     /**
      * Calculates the statistics required for a {@link BoxAndWhiskerItem}
-     * from a list of <code>Number</code> objects.  Any items in the list
-     * that are {@code null}, not an instance of <code>Number</code>, or
+     * from a list of {@code Number} objects.  Any items in the list
+     * that are {@code null}, not an instance of {@code Number}, or
      * equivalent to <code>Double.NaN</code>, will be ignored.
      *
      * @param values  a list of numbers (a {@code null} list is not
@@ -170,7 +170,7 @@ public abstract class BoxAndWhiskerCalculator {
      * Calculates the first quartile for a list of numbers in ascending order.
      * If the items in the list are not in ascending order, the result is
      * unspecified.  If the list contains items that are {@code null}, not
-     * an instance of <code>Number</code>, or equivalent to
+     * an instance of {@code Number}, or equivalent to
      * <code>Double.NaN</code>, the result is unspecified.
      *
      * @param values  the numbers in ascending order ({@code null} not
@@ -204,7 +204,7 @@ public abstract class BoxAndWhiskerCalculator {
      * Calculates the third quartile for a list of numbers in ascending order.
      * If the items in the list are not in ascending order, the result is
      * unspecified.  If the list contains items that are {@code null}, not
-     * an instance of <code>Number</code>, or equivalent to
+     * an instance of {@code Number}, or equivalent to
      * <code>Double.NaN</code>, the result is unspecified.
      *
      * @param values  the list of values ({@code null} not permitted).

@@ -132,7 +132,7 @@ public class SimpleHistogramDataset extends AbstractIntervalXYDataset
 
     /**
      * Returns the key for a series.  Since this dataset only stores a single
-     * series, the <code>series</code> argument is ignored.
+     * series, the {@code series} argument is ignored.
      *
      * @param series  the series (zero-based index, ignored in this dataset).
      *
@@ -155,7 +155,7 @@ public class SimpleHistogramDataset extends AbstractIntervalXYDataset
 
     /**
      * Returns the number of items in a series.  Since this dataset only stores
-     * a single series, the <code>series</code> argument is ignored.
+     * a single series, the {@code series} argument is ignored.
      *
      * @param series  the series index (zero-based, ignored in this dataset).
      *

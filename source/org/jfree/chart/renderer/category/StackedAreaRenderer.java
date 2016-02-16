@@ -400,8 +400,8 @@ public class StackedAreaRenderer extends AreaRenderer
 
     /**
      * Calculates the stacked values (one positive and one negative) of all
-     * series up to, but not including, <code>series</code> for the specified
-     * item. It returns [0.0, 0.0] if <code>series</code> is the first series.
+     * series up to, but not including, {@code series} for the specified
+     * item. It returns [0.0, 0.0] if {@code series} is the first series.
      *
      * @param dataset  the dataset ({@code null} not permitted).
      * @param series  the series index.
@@ -409,7 +409,7 @@ public class StackedAreaRenderer extends AreaRenderer
      * @param validRows  the valid rows.
      *
      * @return An array containing the cumulative negative and positive values
-     *     for all series values up to but excluding <code>series</code>
+     *     for all series values up to but excluding {@code series}
      *     for <code>index</code>.
      */
     protected double[] getStackValues(CategoryDataset dataset,
@@ -510,15 +510,15 @@ public class StackedAreaRenderer extends AreaRenderer
 
     /**
      * Calculates the stacked value of the all series up to, but not including
-     * <code>series</code> for the specified category, <code>category</code>.
-     * It returns 0.0 if <code>series</code> is the first series, i.e. 0.
+     * {@code series} for the specified category, <code>category</code>.
+     * It returns 0.0 if {@code series} is the first series, i.e. 0.
      *
      * @param dataset  the dataset ({@code null} not permitted).
      * @param series  the series.
      * @param category  the category.
      *
      * @return double returns a cumulative value for all series' values up to
-     *         but excluding <code>series</code> for Object
+     *         but excluding {@code series} for Object
      *         <code>category</code>.
      *
      * @deprecated As of 1.0.13, as the method is never used internally.

@@ -214,7 +214,7 @@ public abstract class DataUtilities {
     }
 
     /**
-     * Constructs an array of <code>Number</code> objects from an array of
+     * Constructs an array of {@code Number} objects from an array of
      * <code>double</code> primitives.
      *
      * @param data  the data ({@code null} not permitted).
@@ -231,7 +231,7 @@ public abstract class DataUtilities {
     }
 
     /**
-     * Constructs an array of arrays of <code>Number</code> objects from a
+     * Constructs an array of arrays of {@code Number} objects from a
      * corresponding structure containing <code>double</code> primitives.
      *
      * @param data  the data ({@code null} not permitted).

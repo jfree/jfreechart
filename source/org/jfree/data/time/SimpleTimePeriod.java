@@ -168,7 +168,7 @@ public class SimpleTimePeriod implements TimePeriod, Comparable, Serializable {
      *
      * @return An integer.
      *
-     * @throws ClassCastException if <code>obj</code> is not an instance of
+     * @throws ClassCastException if {@code obj} is not an instance of
      *                            {@link TimePeriod}.
      */
     @Override

@@ -295,7 +295,7 @@ class SWTAxisEditor extends Composite {
      * @param style  the style.
      * @param axis  the axis whose properties are to be displayed/edited
      *              in the composite.
-     * @return A composite or <code>null</code< if axis is <code>null</code>.
+     * @return A composite or <code>null</code< if axis is {@code null}.
      */
     public static SWTAxisEditor getInstance(Composite parent, int style,
             Axis axis) {

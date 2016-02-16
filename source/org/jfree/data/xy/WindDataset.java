@@ -52,7 +52,7 @@ public interface WindDataset extends XYDataset {
      * corresponding to the positions on an upside-down clock face).
      *
      * @param series  the series (in the range {@code 0} to
-     *     <code>getSeriesCount() - 1</code>).
+     *     {@code getSeriesCount() - 1}).
      * @param item  the item (in the range {@code 0} to
      *     <code>getItemCount(series) - 1</code>).
      *
@@ -66,7 +66,7 @@ public interface WindDataset extends XYDataset {
      * http://en.wikipedia.org/wiki/Beaufort_scale
      *
      * @param series  the series (in the range {@code 0} to
-     *     <code>getSeriesCount() - 1</code>).
+     *     {@code getSeriesCount() - 1}).
      * @param item  the item (in the range {@code 0} to
      *     <code>getItemCount(series) - 1</code>).
      *

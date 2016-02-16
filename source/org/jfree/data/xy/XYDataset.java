@@ -66,11 +66,11 @@ public interface XYDataset extends SeriesDataset {
      * Returns the number of items in a series.
      * <br><br>
      * It is recommended that classes that implement this method should throw
-     * an <code>IllegalArgumentException</code> if the <code>series</code>
+     * an <code>IllegalArgumentException</code> if the {@code series}
      * argument is outside the specified range.
      *
      * @param series  the series index (in the range {@code 0} to
-     *     <code>getSeriesCount() - 1</code>).
+     *     {@code getSeriesCount() - 1}).
      *
      * @return The item count.
      */
@@ -82,9 +82,9 @@ public interface XYDataset extends SeriesDataset {
      * implementing the interface.
      *
      * @param series  the series index (in the range {@code 0} to
-     *     <code>getSeriesCount() - 1</code>).
+     *     {@code getSeriesCount() - 1}).
      * @param item  the item index (in the range {@code 0} to
-     *     <code>getItemCount(series)</code>).
+     *     {@code getItemCount(series)}).
      *
      * @return The x-value (never {@code null}).
      */
@@ -94,9 +94,9 @@ public interface XYDataset extends SeriesDataset {
      * Returns the x-value for an item within a series.
      *
      * @param series  the series index (in the range {@code 0} to
-     *     <code>getSeriesCount() - 1</code>).
+     *     {@code getSeriesCount() - 1}).
      * @param item  the item index (in the range {@code 0} to
-     *     <code>getItemCount(series)</code>).
+     *     {@code getItemCount(series)}).
      *
      * @return The x-value.
      */
@@ -106,9 +106,9 @@ public interface XYDataset extends SeriesDataset {
      * Returns the y-value for an item within a series.
      *
      * @param series  the series index (in the range {@code 0} to
-     *     <code>getSeriesCount() - 1</code>).
+     *     {@code getSeriesCount() - 1}).
      * @param item  the item index (in the range {@code 0} to
-     *     <code>getItemCount(series)</code>).
+     *     {@code getItemCount(series)}).
      *
      * @return The y-value (possibly {@code null}).
      */
@@ -118,9 +118,9 @@ public interface XYDataset extends SeriesDataset {
      * Returns the y-value (as a double primitive) for an item within a series.
      *
      * @param series  the series index (in the range {@code 0} to
-     *     <code>getSeriesCount() - 1</code>).
+     *     {@code getSeriesCount() - 1}).
      * @param item  the item index (in the range {@code 0} to
-     *     <code>getItemCount(series)</code>).
+     *     {@code getItemCount(series)}).
      *
      * @return The y-value.
      */

@@ -1005,7 +1005,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * @return The paint associated with the specified key, or
      *     {@code null}.
      *
-     * @throws IllegalArgumentException if <code>key</code> is
+     * @throws IllegalArgumentException if {@code key} is
      *     {@code null}.
      *
      * @see #setSectionPaint(Comparable, Paint)
@@ -1024,7 +1024,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * @param key  the key ({@code null} not permitted).
      * @param paint  the paint.
      *
-     * @throws IllegalArgumentException if <code>key</code> is
+     * @throws IllegalArgumentException if {@code key} is
      *     {@code null}.
      *
      * @see #getSectionPaint(Comparable)
@@ -1219,7 +1219,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * @return The paint associated with the specified key, or
      *     {@code null}.
      *
-     * @throws IllegalArgumentException if <code>key</code> is
+     * @throws IllegalArgumentException if {@code key} is
      *     {@code null}.
      *
      * @see #setSectionOutlinePaint(Comparable, Paint)
@@ -1238,7 +1238,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * @param key  the key ({@code null} not permitted).
      * @param paint  the paint.
      *
-     * @throws IllegalArgumentException if <code>key</code> is
+     * @throws IllegalArgumentException if {@code key} is
      *     {@code null}.
      *
      * @see #getSectionOutlinePaint(Comparable)
@@ -1406,7 +1406,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * @return The stroke associated with the specified key, or
      *     {@code null}.
      *
-     * @throws IllegalArgumentException if <code>key</code> is
+     * @throws IllegalArgumentException if {@code key} is
      *     {@code null}.
      *
      * @see #setSectionOutlineStroke(Comparable, Stroke)
@@ -1425,7 +1425,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * @param key  the key ({@code null} not permitted).
      * @param stroke  the stroke.
      *
-     * @throws IllegalArgumentException if <code>key</code> is
+     * @throws IllegalArgumentException if {@code key} is
      *     {@code null}.
      *
      * @see #getSectionOutlineStroke(Comparable)
@@ -1590,7 +1590,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * @return The amount that the section with the specified key should be
      *     exploded.
      *
-     * @throws IllegalArgumentException if <code>key</code> is
+     * @throws IllegalArgumentException if {@code key} is
      *     {@code null}.
      *
      * @since 1.0.3

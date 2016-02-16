@@ -580,7 +580,7 @@ public class ChartComposite extends Composite implements ChartChangeListener,
     /**
      * Returns the anchor point.
      *
-     * @return The anchor point (possibly <code>null</code>).
+     * @return The anchor point (possibly {@code null}).
      */
     public Point2D getAnchor() {
         return this.anchor;
@@ -590,7 +590,7 @@ public class ChartComposite extends Composite implements ChartChangeListener,
      * Sets the anchor point.  This method is provided for the use of
      * subclasses, not end users.
      *
-     * @param anchor  the anchor point (<code>null</code> permitted).
+     * @param anchor  the anchor point ({@code null} permitted).
      */
     protected void setAnchor(Point2D anchor) {
         this.anchor = anchor;
@@ -599,7 +599,7 @@ public class ChartComposite extends Composite implements ChartChangeListener,
     /**
      * Returns the chart contained in the panel.
      *
-     * @return The chart (possibly <code>null</code>).
+     * @return The chart (possibly {@code null}).
      */
     public JFreeChart getChart() {
         return this.chart;
@@ -608,7 +608,7 @@ public class ChartComposite extends Composite implements ChartChangeListener,
     /**
      * Sets the chart that is displayed in the panel.
      *
-     * @param chart  the chart (<code>null</code> permitted).
+     * @param chart  the chart ({@code null} permitted).
      */
     public void setChart(JFreeChart chart) {
         // stop listening for changes to the existing chart
@@ -644,7 +644,7 @@ public class ChartComposite extends Composite implements ChartChangeListener,
     /**
      * Returns the chart rendering info from the most recent chart redraw.
      *
-     * @return The chart rendering info (possibly <code>null</code>).
+     * @return The chart rendering info (possibly {@code null}).
      */
     public ChartRenderingInfo getChartRenderingInfo() {
         return this.info;
@@ -812,7 +812,7 @@ public class ChartComposite extends Composite implements ChartChangeListener,
      *
      * @param x  the x-coordinate.
      * @param y  the y-coordinate.
-     * @param area  the rectangle (<code>null</code> not permitted).
+     * @param area  the rectangle ({@code null} not permitted).
      *
      * @return A point within the rectangle.
      */
@@ -990,7 +990,7 @@ public class ChartComposite extends Composite implements ChartChangeListener,
     /**
      * Adds a listener to the list of objects listening for chart mouse events.
      *
-     * @param listener  the listener (<code>null</code> not permitted).
+     * @param listener  the listener ({@code null} not permitted).
      */
     public void addChartMouseListener(ChartMouseListener listener) {
         this.chartMouseListeners.add(ChartMouseListener.class, listener);
@@ -1209,7 +1209,7 @@ public class ChartComposite extends Composite implements ChartChangeListener,
      *
      * @param e  the mouse event.
      *
-     * @return A tool tip or <code>null</code> if no tooltip is available.
+     * @return A tool tip or {@code null} if no tooltip is available.
      */
     public String getToolTipText(org.eclipse.swt.events.MouseEvent e) {
         String result = null;

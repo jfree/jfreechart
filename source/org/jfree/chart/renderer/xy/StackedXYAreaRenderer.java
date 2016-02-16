@@ -613,15 +613,15 @@ public class StackedXYAreaRenderer extends XYAreaRenderer
 
     /**
      * Calculates the stacked value of the all series up to, but not including
-     * <code>series</code> for the specified item. It returns 0.0 if
-     * <code>series</code> is the first series, i.e. 0.
+     * {@code series} for the specified item. It returns 0.0 if
+     * {@code series} is the first series, i.e. 0.
      *
      * @param dataset  the dataset.
      * @param series  the series.
      * @param index  the index.
      *
      * @return The cumulative value for all series' values up to but excluding
-     *         <code>series</code> for <code>index</code>.
+     *         {@code series} for <code>index</code>.
      */
     protected double getPreviousHeight(TableXYDataset dataset,
                                        int series, int index) {

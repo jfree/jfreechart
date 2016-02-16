@@ -139,7 +139,7 @@ public interface HeatMapDataset {
      * <br><br>
      * Bear in mind that the class implementing this interface may
      * store its data using primitives rather than objects, so calling this
-     * method may require a new <code>Number</code> object to be allocated...
+     * method may require a new {@code Number} object to be allocated...
      * for this reason, it is generally preferable to use the
      * {@link #getZValue(int, int)} method unless you *know* that the dataset
      * implementation stores the z-values using objects.

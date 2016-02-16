@@ -142,7 +142,7 @@ public class CustomPieURLGenerator implements PieURLGenerator,
 
     /**
      * Adds a map containing <code>(key, URL)</code> mappings where each
-     * <code>key</code> is an instance of <code>Comparable</code>
+     * {@code key} is an instance of <code>Comparable</code>
      * (corresponding to the key for an item in a pie dataset) and each
      * <code>URL</code> is a <code>String</code> representing a URL fragment.
      * <br><br>

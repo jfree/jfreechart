@@ -147,7 +147,7 @@ public class DefaultKeyedValues implements KeyedValues, Cloneable,
      *
      * @return The index, or <code>-1</code> if the key is not recognised.
      *
-     * @throws IllegalArgumentException if <code>key</code> is
+     * @throws IllegalArgumentException if {@code key} is
      *     {@code null}.
      */
     @Override
@@ -324,9 +324,9 @@ public class DefaultKeyedValues implements KeyedValues, Cloneable,
      *
      * @param key  the item key ({@code null} not permitted).
      *
-     * @throws IllegalArgumentException if <code>key</code> is
+     * @throws IllegalArgumentException if {@code key} is
      *     {@code null}.
-     * @throws UnknownKeyException if <code>key</code> is not recognised.
+     * @throws UnknownKeyException if {@code key} is not recognised.
      */
     public void removeValue(Comparable key) {
         int index = getIndex(key);

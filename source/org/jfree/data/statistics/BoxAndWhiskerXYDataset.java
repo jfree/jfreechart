@@ -130,7 +130,7 @@ public interface BoxAndWhiskerXYDataset extends XYDataset {
      * @param series  the series (zero-based index).
      * @param item  the item (zero-based index).
      *
-     * @return A <code>Number</code> representing the maximum non-farout value.
+     * @return A {@code Number} representing the maximum non-farout value.
      */
     public Number getMinOutlier(int series, int item);
 
@@ -141,7 +141,7 @@ public interface BoxAndWhiskerXYDataset extends XYDataset {
      * @param series  the series (zero-based index).
      * @param item  the item (zero-based index).
      *
-     * @return A <code>Number</code> representing the maximum non-farout value.
+     * @return A {@code Number} representing the maximum non-farout value.
      */
     public Number getMaxOutlier(int series, int item);
 

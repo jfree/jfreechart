@@ -308,7 +308,7 @@ public class SWTUtils {
      * Returns an AWT point with the same coordinates as the specified
      * SWT point.
      *
-     * @param p  the SWT point (<code>null</code> not permitted).
+     * @param p  the SWT point ({@code null} not permitted).
      *
      * @return An AWT point with the same coordinates as <code>p</code>.
      *
@@ -322,7 +322,7 @@ public class SWTUtils {
      * Returns an SWT point with the same coordinates as the specified
      * AWT point.
      *
-     * @param p  the AWT point (<code>null</code> not permitted).
+     * @param p  the AWT point ({@code null} not permitted).
      *
      * @return An SWT point with the same coordinates as <code>p</code>.
      *
@@ -336,7 +336,7 @@ public class SWTUtils {
      * Returns an SWT point with the same coordinates as the specified AWT
      * point (rounded to integer values).
      *
-     * @param p  the AWT point (<code>null</code> not permitted).
+     * @param p  the AWT point ({@code null} not permitted).
      *
      * @return An SWT point with the same coordinates as <code>p</code>.
      *
@@ -378,7 +378,7 @@ public class SWTUtils {
     /**
      * Converts an AWT image to SWT.
      *
-     * @param image  the image (<code>null</code> not permitted).
+     * @param image  the image ({@code null} not permitted).
      *
      * @return Image data.
      */
@@ -399,7 +399,7 @@ public class SWTUtils {
     /**
      * Converts a buffered image to SWT <code>ImageData</code>.
      *
-     * @param bufferedImage  the buffered image (<code>null</code> not
+     * @param bufferedImage  the buffered image ({@code null} not
      *         permitted).
      *
      * @return The image data.

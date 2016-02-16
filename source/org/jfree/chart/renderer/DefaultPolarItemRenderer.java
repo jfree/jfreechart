@@ -892,7 +892,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      *
      * @param obj  the object ({@code null} not permitted).
      *
-     * @return {@code true} if this renderer is equal to <code>obj</code>,
+     * @return {@code true} if this renderer is equal to {@code obj},
      *     and {@code false} otherwise.
      */
     @Override

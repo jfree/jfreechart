@@ -796,7 +796,7 @@ public class DefaultIntervalCategoryDataset extends AbstractSeriesDataset
     }
 
     /**
-     * Clones a two dimensional array of <code>Number</code> objects.
+     * Clones a two dimensional array of {@code Number} objects.
      *
      * @param array  the array ({@code null} not permitted).
      *

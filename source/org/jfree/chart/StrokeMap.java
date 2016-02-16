@@ -88,7 +88,7 @@ public class StrokeMap implements Cloneable, Serializable {
      *
      * @return The stroke, or {@code null}.
      *
-     * @throws IllegalArgumentException if <code>key</code> is
+     * @throws IllegalArgumentException if {@code key} is
      *     {@code null}.
      */
     public Stroke getStroke(Comparable key) {
@@ -110,7 +110,7 @@ public class StrokeMap implements Cloneable, Serializable {
     }
 
     /**
-     * Adds a mapping between the specified <code>key</code> and
+     * Adds a mapping between the specified {@code key} and
      * <code>stroke</code> values.
      *
      * @param key  the key ({@code null} not permitted).

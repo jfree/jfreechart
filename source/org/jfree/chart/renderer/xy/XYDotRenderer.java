@@ -327,8 +327,8 @@ public class XYDotRenderer extends AbstractXYItemRenderer
      * returns {@code true} if and only if:
      *
      * <ul>
-     * <li><code>obj</code> is not {@code null};</li>
-     * <li><code>obj</code> is an instance of <code>XYDotRenderer</code>;</li>
+     * <li>{@code obj} is not {@code null};</li>
+     * <li>{@code obj} is an instance of <code>XYDotRenderer</code>;</li>
      * <li>both renderers have the same attribute values.
      * </ul>
      *

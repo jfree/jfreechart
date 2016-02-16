@@ -62,7 +62,7 @@ import org.jfree.ui.RectangleEdge;
 /**
  * This class would typically be used with a
  * {@link org.jfree.chart.plot.ContourPlot}.  It allows the user to define a
- * <code>GeneralPath</code> curve in plot coordinates.  This curve can then be
+ * {@code GeneralPath} curve in plot coordinates.  This curve can then be
  * used mask off or define regions within the contour plot.  The data must be
  * sorted.
  *

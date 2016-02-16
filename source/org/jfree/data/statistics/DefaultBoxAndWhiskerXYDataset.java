@@ -433,7 +433,7 @@ public class DefaultBoxAndWhiskerXYDataset extends AbstractXYDataset
      * @param series  the series (zero-based index).
      * @param item  the item (zero-based index).
      *
-     * @return A <code>Number</code> representing the maximum non-farout value.
+     * @return A {@code Number} representing the maximum non-farout value.
      */
     @Override
     public Number getMinOutlier(int series, int item) {
@@ -452,7 +452,7 @@ public class DefaultBoxAndWhiskerXYDataset extends AbstractXYDataset
      * @param series  the series (zero-based index).
      * @param item  the item (zero-based index).
      *
-     * @return A <code>Number</code> representing the maximum non-farout value.
+     * @return A {@code Number} representing the maximum non-farout value.
      */
     @Override
     public Number getMaxOutlier(int series, int item) {

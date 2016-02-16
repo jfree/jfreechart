@@ -343,7 +343,7 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
 
     /**
      * Tests this renderer for equality with an arbitrary object, returning
-     * {@code true} if <code>obj</code> is a
+     * {@code true} if {@code obj} is a
      * <code>ClusteredXYBarRenderer</code> with the same settings as this
      * renderer, and {@code false} otherwise.
      *

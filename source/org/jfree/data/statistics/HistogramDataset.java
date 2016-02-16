@@ -256,11 +256,11 @@ public class HistogramDataset extends AbstractIntervalXYDataset
      * Returns the bins for a series.
      *
      * @param series  the series index (in the range {@code 0} to
-     *     <code>getSeriesCount() - 1</code>).
+     *     {@code getSeriesCount() - 1}).
      *
      * @return A list of bins.
      *
-     * @throws IndexOutOfBoundsException if <code>series</code> is outside the
+     * @throws IndexOutOfBoundsException if {@code series} is outside the
      *     specified range.
      */
     List getBins(int series) {
@@ -306,11 +306,11 @@ public class HistogramDataset extends AbstractIntervalXYDataset
      * Returns the key for a series.
      *
      * @param series  the series index (in the range {@code 0} to
-     *     <code>getSeriesCount() - 1</code>).
+     *     {@code getSeriesCount() - 1}).
      *
      * @return The series key.
      *
-     * @throws IndexOutOfBoundsException if <code>series</code> is outside the
+     * @throws IndexOutOfBoundsException if {@code series} is outside the
      *     specified range.
      */
     @Override
@@ -323,11 +323,11 @@ public class HistogramDataset extends AbstractIntervalXYDataset
      * Returns the number of data items for a series.
      *
      * @param series  the series index (in the range {@code 0} to
-     *     <code>getSeriesCount() - 1</code>).
+     *     {@code getSeriesCount() - 1}).
      *
      * @return The item count.
      *
-     * @throws IndexOutOfBoundsException if <code>series</code> is outside the
+     * @throws IndexOutOfBoundsException if {@code series} is outside the
      *     specified range.
      */
     @Override
@@ -342,12 +342,12 @@ public class HistogramDataset extends AbstractIntervalXYDataset
      * chart).
      *
      * @param series  the series index (in the range {@code 0} to
-     *     <code>getSeriesCount() - 1</code>).
+     *     {@code getSeriesCount() - 1}).
      * @param item  the item index (zero based).
      *
      * @return The start value.
      *
-     * @throws IndexOutOfBoundsException if <code>series</code> is outside the
+     * @throws IndexOutOfBoundsException if {@code series} is outside the
      *     specified range.
      */
     @Override
@@ -363,12 +363,12 @@ public class HistogramDataset extends AbstractIntervalXYDataset
      * histogram type).
      *
      * @param series  the series index (in the range {@code 0} to
-     *     <code>getSeriesCount() - 1</code>).
+     *     {@code getSeriesCount() - 1}).
      * @param item  the item index (zero based).
      *
      * @return The y-value.
      *
-     * @throws IndexOutOfBoundsException if <code>series</code> is outside the
+     * @throws IndexOutOfBoundsException if {@code series} is outside the
      *     specified range.
      */
     @Override
@@ -396,12 +396,12 @@ public class HistogramDataset extends AbstractIntervalXYDataset
      * Returns the start value for a bin.
      *
      * @param series  the series index (in the range {@code 0} to
-     *     <code>getSeriesCount() - 1</code>).
+     *     {@code getSeriesCount() - 1}).
      * @param item  the item index (zero based).
      *
      * @return The start value.
      *
-     * @throws IndexOutOfBoundsException if <code>series</code> is outside the
+     * @throws IndexOutOfBoundsException if {@code series} is outside the
      *     specified range.
      */
     @Override
@@ -415,12 +415,12 @@ public class HistogramDataset extends AbstractIntervalXYDataset
      * Returns the end value for a bin.
      *
      * @param series  the series index (in the range {@code 0} to
-     *     <code>getSeriesCount() - 1</code>).
+     *     {@code getSeriesCount() - 1}).
      * @param item  the item index (zero based).
      *
      * @return The end value.
      *
-     * @throws IndexOutOfBoundsException if <code>series</code> is outside the
+     * @throws IndexOutOfBoundsException if {@code series} is outside the
      *     specified range.
      */
     @Override
@@ -436,12 +436,12 @@ public class HistogramDataset extends AbstractIntervalXYDataset
      * {@link IntervalXYDataset} interface).
      *
      * @param series  the series index (in the range {@code 0} to
-     *     <code>getSeriesCount() - 1</code>).
+     *     {@code getSeriesCount() - 1}).
      * @param item  the item index (zero based).
      *
      * @return The y-value.
      *
-     * @throws IndexOutOfBoundsException if <code>series</code> is outside the
+     * @throws IndexOutOfBoundsException if {@code series} is outside the
      *     specified range.
      */
     @Override
@@ -455,12 +455,12 @@ public class HistogramDataset extends AbstractIntervalXYDataset
      * {@link IntervalXYDataset} interface).
      *
      * @param series  the series index (in the range {@code 0} to
-     *     <code>getSeriesCount() - 1</code>).
+     *     {@code getSeriesCount() - 1}).
      * @param item  the item index (zero based).
      *
      * @return The Y value.
      *
-     * @throws IndexOutOfBoundsException if <code>series</code> is outside the
+     * @throws IndexOutOfBoundsException if {@code series} is outside the
      *     specified range.
      */
     @Override

@@ -90,7 +90,7 @@ public class PaintMap implements Cloneable, Serializable {
      *
      * @return The paint, or {@code null}.
      *
-     * @throws IllegalArgumentException if <code>key</code> is
+     * @throws IllegalArgumentException if {@code key} is
      *     {@code null}.
      */
     public Paint getPaint(Comparable key) {
@@ -112,13 +112,13 @@ public class PaintMap implements Cloneable, Serializable {
     }
 
     /**
-     * Adds a mapping between the specified <code>key</code> and
+     * Adds a mapping between the specified {@code key} and
      * {@code Paint} values.
      *
      * @param key  the key ({@code null} not permitted).
      * @param paint  the paint.
      *
-     * @throws IllegalArgumentException if <code>key</code> is
+     * @throws IllegalArgumentException if {@code key} is
      *     {@code null}.
      */
     public void put(Comparable key, Paint paint) {

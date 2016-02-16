@@ -109,7 +109,7 @@ public class DefaultWindDataset extends AbstractXYDataset
      * and each item is as follows:
      * <ul>
      * <li><code>data[series][item][0]</code> - the date (either a
-     *   <code>Date</code> or a <code>Number</code> that is the milliseconds
+     *   <code>Date</code> or a {@code Number} that is the milliseconds
      *   since 1-Jan-1970);</li>
      * <li><code>data[series][item][1]</code> - the wind direction (1 - 12,
      *   like the numbers on a clock face);</li>
@@ -297,8 +297,8 @@ public class DefaultWindDataset extends AbstractXYDataset
      * Checks this <code>WindDataset</code> for equality with an arbitrary
      * object.  This method returns {@code true} if and only if:
      * <ul>
-     *   <li><code>obj</code> is not {@code null};</li>
-     *   <li><code>obj</code> is an instance of
+     *   <li>{@code obj} is not {@code null};</li>
+     *   <li>{@code obj} is an instance of
      *       <code>DefaultWindDataset</code>;</li>
      *   <li>both datasets have the same number of series containing identical
      *       values.</li>

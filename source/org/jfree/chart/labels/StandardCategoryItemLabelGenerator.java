@@ -134,7 +134,7 @@ public class StandardCategoryItemLabelGenerator
      * @param obj  the object ({@code null} permitted).
      *
      * @return {@code true} if this generator is equal to
-     *     <code>obj</code>, and {@code false} otherwise.
+     *     {@code obj}, and {@code false} otherwise.
      */
     @Override
     public boolean equals(Object obj) {

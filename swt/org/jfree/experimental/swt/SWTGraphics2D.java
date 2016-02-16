@@ -154,7 +154,7 @@ public class SWTGraphics2D extends Graphics2D {
     /**
      * Not implemented yet - see {@link Graphics#create()}.
      *
-     * @return <code>null</code>.
+     * @return {@code null}.
      */
     public Graphics create() {
         // TODO Auto-generated method stub
@@ -164,7 +164,7 @@ public class SWTGraphics2D extends Graphics2D {
     /**
      * Not implemented yet - see {@link Graphics2D#getDeviceConfiguration()}.
      *
-     * @return <code>null</code>.
+     * @return {@code null}.
      */
     public GraphicsConfiguration getDeviceConfiguration() {
         // TODO Auto-generated method stub
@@ -173,11 +173,11 @@ public class SWTGraphics2D extends Graphics2D {
 
     /**
      * Returns the current value for the specified hint key, or
-     * <code>null</code> if no value is set.
+     * {@code null} if no value is set.
      *
-     * @param hintKey  the hint key (<code>null</code> permitted).
+     * @param hintKey  the hint key ({@code null} permitted).
      *
-     * @return The hint value, or <code>null</code>.
+     * @return The hint value, or {@code null}.
      *
      * @see #setRenderingHint(RenderingHints.Key, Object)
      */
@@ -189,7 +189,7 @@ public class SWTGraphics2D extends Graphics2D {
      * Sets the value for a rendering hint.  For now, this graphics context
      * ignores all hints.
      *
-     * @param hintKey  the key (<code>null</code> not permitted).
+     * @param hintKey  the key ({@code null} not permitted).
      * @param hintValue  the value (must be compatible with the specified key).
      *
      * @throws IllegalArgumentException if <code>hintValue</code> is not
@@ -214,7 +214,7 @@ public class SWTGraphics2D extends Graphics2D {
      * Adds the hints in the specified map to the graphics context, replacing
      * any existing hints.  For now, this graphics context ignores all hints.
      *
-     * @param hints  the hints (<code>null</code> not permitted).
+     * @param hints  the hints ({@code null} not permitted).
      *
      * @see #setRenderingHints(Map)
      */
@@ -226,7 +226,7 @@ public class SWTGraphics2D extends Graphics2D {
      * Replaces the existing hints with those contained in the specified
      * map.  Note that, for now, this graphics context ignores all hints.
      *
-     * @param hints  the hints (<code>null</code> not permitted).
+     * @param hints  the hints ({@code null} not permitted).
      *
      * @see #addRenderingHints(Map)
      */
@@ -258,7 +258,7 @@ public class SWTGraphics2D extends Graphics2D {
      * support, the paint used is the <code>Color</code> returned by
      * <code>getColor1()</code>).
      *
-     * @param paint  the paint (<code>null</code> permitted, ignored).
+     * @param paint  the paint ({@code null} permitted, ignored).
      *
      * @see #getPaint()
      * @see #setColor(Color)
@@ -296,7 +296,7 @@ public class SWTGraphics2D extends Graphics2D {
     /**
      * Sets the current color for this graphics context.
      *
-     * @param color  the color (<code>null</code> permitted but ignored).
+     * @param color  the color ({@code null} permitted but ignored).
      *
      * @see #getColor()
      */
@@ -335,7 +335,7 @@ public class SWTGraphics2D extends Graphics2D {
     /**
      * Returns the background colour.
      *
-     * @return The background colour (possibly <code>null</code>)..
+     * @return The background colour (possibly {@code null})..
      */
     public Color getBackground() {
         return this.backgroundColor;
@@ -372,7 +372,7 @@ public class SWTGraphics2D extends Graphics2D {
      * Sets the current composite.  This implementation currently supports
      * only the {@link AlphaComposite} class.
      *
-     * @param comp  the composite (<code>null</code> not permitted).
+     * @param comp  the composite ({@code null} not permitted).
      */
     public void setComposite(Composite comp) {
         if (comp == null) {
@@ -403,7 +403,7 @@ public class SWTGraphics2D extends Graphics2D {
      * Sets the stroke for this graphics context.  For now, this implementation
      * only recognises the {@link BasicStroke} class.
      *
-     * @param stroke  the stroke (<code>null</code> not permitted).
+     * @param stroke  the stroke ({@code null} not permitted).
      *
      * @see #getStroke()
      */
@@ -619,7 +619,7 @@ public class SWTGraphics2D extends Graphics2D {
      * Draws the outline of the specified shape using the current stroke and
      * paint settings.
      *
-     * @param shape  the shape (<code>null</code> not permitted).
+     * @param shape  the shape ({@code null} not permitted).
      *
      * @see #getPaint()
      * @see #getStroke()
@@ -746,7 +746,7 @@ public class SWTGraphics2D extends Graphics2D {
     /**
      * Fills the specified shape using the current paint.
      *
-     * @param shape  the shape (<code>null</code> not permitted).
+     * @param shape  the shape ({@code null} not permitted).
      *
      * @see #getPaint()
      * @see #draw(Shape)
@@ -922,7 +922,7 @@ public class SWTGraphics2D extends Graphics2D {
     /**
      * Draws the specified glyph vector at the location <code>(x, y)</code>.
      * 
-     * @param g  the glyph vector (<code>null</code> not permitted).
+     * @param g  the glyph vector ({@code null} not permitted).
      * @param x  the x-coordinate.
      * @param y  the y-coordinate.
      */
@@ -1148,7 +1148,7 @@ public class SWTGraphics2D extends Graphics2D {
     /**
      * Draws an image.
      *
-     * @param image (<code>null</code> not permitted).
+     * @param image ({@code null} not permitted).
      * @param x  the x-coordinate.
      * @param y  the y-coordinate.
      * @param bgcolor  the background color.
@@ -1173,7 +1173,7 @@ public class SWTGraphics2D extends Graphics2D {
     /**
      * Draws an image.
      *
-     * @param image  the image (<code>null</code> not permitted).
+     * @param image  the image ({@code null} not permitted).
      * @param x  the x-coordinate.
      * @param y  the y-coordinate.
      * @param width  the width.
@@ -1368,7 +1368,7 @@ public class SWTGraphics2D extends Graphics2D {
     /**
      * Converts an AWT <code>Shape</code> into a SWT <code>Path</code>.
      *
-     * @param shape  the shape (<code>null</code> not permitted).
+     * @param shape  the shape ({@code null} not permitted).
      *
      * @return The path.
      */

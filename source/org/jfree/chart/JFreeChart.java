@@ -912,7 +912,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
      * Returns the plot cast as an {@link XYPlot}.
      * <p>
      * NOTE: if the plot is not an instance of {@link XYPlot}, then a
-     * <code>ClassCastException</code> is thrown.
+     * {@code ClassCastException} is thrown.
      *
      * @return The plot.
      *
