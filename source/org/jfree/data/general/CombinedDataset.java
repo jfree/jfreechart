@@ -180,7 +180,7 @@ public class CombinedDataset extends AbstractIntervalXYDataset
     /**
      * Returns the X-value for the specified series and item.
      * <P>
-     * Note:  throws <code>ClassCastException</code> if the series is not from
+     * Note:  throws {@code ClassCastException} if the series is not from
      * a {@link XYDataset}.
      *
      * @param series  the index of the series of interest (zero-based).
@@ -197,7 +197,7 @@ public class CombinedDataset extends AbstractIntervalXYDataset
     /**
      * Returns the Y-value for the specified series and item.
      * <P>
-     * Note:  throws <code>ClassCastException</code> if the series is not from
+     * Note:  throws {@code ClassCastException} if the series is not from
      * a {@link XYDataset}.
      *
      * @param series  the index of the series of interest (zero-based).
@@ -214,7 +214,7 @@ public class CombinedDataset extends AbstractIntervalXYDataset
     /**
      * Returns the number of items in a series.
      * <P>
-     * Note:  throws <code>ClassCastException</code> if the series is not from
+     * Note:  throws {@code ClassCastException} if the series is not from
      * a {@link XYDataset}.
      *
      * @param series  the index of the series of interest (zero-based).
@@ -234,7 +234,7 @@ public class CombinedDataset extends AbstractIntervalXYDataset
     /**
      * Returns the high-value for the specified series and item.
      * <P>
-     * Note:  throws <code>ClassCastException</code> if the series is not from a
+     * Note:  throws {@code ClassCastException} if the series is not from a
      * {@link OHLCDataset}.
      *
      * @param series  the index of the series of interest (zero-based).
@@ -270,7 +270,7 @@ public class CombinedDataset extends AbstractIntervalXYDataset
     /**
      * Returns the low-value for the specified series and item.
      * <P>
-     * Note:  throws <code>ClassCastException</code> if the series is not from a
+     * Note:  throws {@code ClassCastException} if the series is not from a
      * {@link OHLCDataset}.
      *
      * @param series  the index of the series of interest (zero-based).
@@ -306,7 +306,7 @@ public class CombinedDataset extends AbstractIntervalXYDataset
     /**
      * Returns the open-value for the specified series and item.
      * <P>
-     * Note:  throws <code>ClassCastException</code> if the series is not from a
+     * Note:  throws {@code ClassCastException} if the series is not from a
      * {@link OHLCDataset}.
      *
      * @param series  the index of the series of interest (zero-based).
@@ -342,7 +342,7 @@ public class CombinedDataset extends AbstractIntervalXYDataset
     /**
      * Returns the close-value for the specified series and item.
      * <P>
-     * Note:  throws <code>ClassCastException</code> if the series is not from a
+     * Note:  throws {@code ClassCastException} if the series is not from a
      * {@link OHLCDataset}.
      *
      * @param series  the index of the series of interest (zero-based).
@@ -378,7 +378,7 @@ public class CombinedDataset extends AbstractIntervalXYDataset
     /**
      * Returns the volume value for the specified series and item.
      * <P>
-     * Note:  throws <code>ClassCastException</code> if the series is not from a
+     * Note:  throws {@code ClassCastException} if the series is not from a
      * {@link OHLCDataset}.
      *
      * @param series  the index of the series of interest (zero-based).

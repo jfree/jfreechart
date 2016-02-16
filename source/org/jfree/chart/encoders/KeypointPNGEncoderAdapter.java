@@ -124,8 +124,7 @@ public class KeypointPNGEncoderAdapter implements ImageEncoder {
     }
 
     /**
-     * Encodes an image in PNG format and writes it to an
-     * <code>OutputStream</code>.
+     * Encodes an image in PNG format and writes it to an {@code OutputStream}.
      *
      * @param bufferedImage  The image to be encoded.
      * @param outputStream  The OutputStream to write the encoded image to.

@@ -77,8 +77,8 @@ public class AttrStringUtils {
     }
     
     /**
-     * Draws the attributed string at <code>(x, y)</code>, rotated by the 
-     * specified angle about <code>(x, y)</code>.
+     * Draws the attributed string at {@code (x, y)}, rotated by the 
+     * specified angle about {@code (x, y)}.
      * 
      * @param text  the attributed string ({@code null} not permitted).
      * @param g2  the graphics output target.
@@ -124,7 +124,7 @@ public class AttrStringUtils {
     }
     
     /**
-     * Draws the string anchored to <code>(x, y)</code>, rotated by the 
+     * Draws the string anchored to {@code (x, y)}, rotated by the 
      * specified angle about <code>(rotationX, rotationY)</code>.
      * 
      * @param text  the text ({@code null} not permitted).

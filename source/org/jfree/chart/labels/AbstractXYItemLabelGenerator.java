@@ -260,7 +260,7 @@ public class AbstractXYItemLabelGenerator implements Cloneable, Serializable {
      * @param item  the item (zero-based index).
      *
      * @return An array of three items from the dataset formatted as
-     *         <code>String</code> objects (never {@code null}).
+     *         {@code String} objects (never {@code null}).
      */
     protected Object[] createItemArray(XYDataset dataset, int series,
                                        int item) {

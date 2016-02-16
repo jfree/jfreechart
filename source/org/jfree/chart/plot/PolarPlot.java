@@ -608,7 +608,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     }
 
     /**
-     * Returns the index of the specified dataset, or <code>-1</code> if the
+     * Returns the index of the specified dataset, or {@code -1} if the
      * dataset does not belong to the plot.
      *
      * @param dataset  the dataset ({@code null} not permitted).
@@ -1335,7 +1335,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     }
 
     /**
-     * Returns the index of the specified renderer, or <code>-1</code> if the
+     * Returns the index of the specified renderer, or {@code -1} if the
      * renderer is not assigned to this plot.
      *
      * @param renderer  the renderer ({@code null} permitted).

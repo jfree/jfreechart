@@ -57,7 +57,7 @@ public class TextUtils {
     
     /**
      * Draws a string such that the specified anchor point is aligned to the
-     * given <code>(x, y)</code> location, and returns a bounding rectangle 
+     * given {@code (x, y)} location, and returns a bounding rectangle 
      * for the text.
      *
      * @param text  the text.
@@ -89,7 +89,7 @@ public class TextUtils {
      * @param x  the x-coordinate.
      * @param y  the y-coordinate.
      * @param anchor  the anchor point that will be aligned to 
-     *     <code>(x, y)</code> ({@code null} not permitted).
+     *     {@code (x, y)} ({@code null} not permitted).
      * 
      * @return The text bounds (never {@code null}).
      * 
@@ -243,7 +243,7 @@ public class TextUtils {
     
     /**
      * Returns the bounds for the specified text when it is drawn with the 
-     * left-baseline aligned to the point <code>(x, y)</code>.
+     * left-baseline aligned to the point {@code (x, y)}.
      * 
      * @param text  the text ({@code null} not permitted).
      * @param x  the x-coordinate.

@@ -1678,7 +1678,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
     }
 
     /**
-     * Returns the index of the specified renderer, or <code>-1</code> if the
+     * Returns the index of the specified renderer, or {@code -1} if the
      * renderer is not assigned to this plot.
      *
      * @param renderer  the renderer ({@code null} permitted).

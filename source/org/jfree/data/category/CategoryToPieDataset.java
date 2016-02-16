@@ -210,12 +210,12 @@ public class CategoryToPieDataset extends AbstractDataset
     }
 
     /**
-     * Returns the index for a given key, or <code>-1</code> if there is no
+     * Returns the index for a given key, or {@code -1} if there is no
      * such key.
      *
      * @param key  the key.
      *
-     * @return The index for the key, or <code>-1</code>.
+     * @return The index for the key, or {@code -1}.
      */
     @Override
     public int getIndex(Comparable key) {

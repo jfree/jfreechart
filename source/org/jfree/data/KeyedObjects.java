@@ -117,11 +117,11 @@ public class KeyedObjects implements Cloneable, PublicCloneable, Serializable {
     }
 
     /**
-     * Returns the index for a given key, or <code>-1</code>.
+     * Returns the index for a given key, or {@code -1}.
      *
      * @param key  the key ({@code null} not permitted).
      *
-     * @return The index, or <code>-1</code> if the key is unrecognised.
+     * @return The index, or {@code -1} if the key is unrecognised.
      *
      * @see #getKey(int)
      */

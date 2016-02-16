@@ -123,7 +123,7 @@ public class AbstractPieItemLabelGenerator implements Serializable {
      * {@link MessageFormat} class for creating labels.  The returned array
      * contains four values:
      * <ul>
-     * <li>result[0] = the section key converted to a <code>String</code>;</li>
+     * <li>result[0] = the section key converted to a {@code String};</li>
      * <li>result[1] = the formatted data value;</li>
      * <li>result[2] = the formatted percentage (of the total);</li>
      * <li>result[3] = the formatted total value.</li>

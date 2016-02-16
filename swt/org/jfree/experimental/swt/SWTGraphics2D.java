@@ -920,7 +920,7 @@ public class SWTGraphics2D extends Graphics2D {
     }
 
     /**
-     * Draws the specified glyph vector at the location <code>(x, y)</code>.
+     * Draws the specified glyph vector at the location {@code (x, y)}.
      * 
      * @param g  the glyph vector ({@code null} not permitted).
      * @param x  the x-coordinate.

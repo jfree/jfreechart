@@ -139,7 +139,7 @@ public class KeyedObjects2D implements Cloneable, Serializable {
     }
 
     /**
-     * Returns the row index for a given key, or <code>-1</code> if the key
+     * Returns the row index for a given key, or {@code -1} if the key
      * is not recognised.
      *
      * @param key  the key ({@code null} not permitted).
@@ -178,7 +178,7 @@ public class KeyedObjects2D implements Cloneable, Serializable {
     }
 
     /**
-     * Returns the column index for a given key, or <code>-1</code> if the key
+     * Returns the column index for a given key, or {@code -1} if the key
      * is not recognised.
      *
      * @param key  the key ({@code null} not permitted).

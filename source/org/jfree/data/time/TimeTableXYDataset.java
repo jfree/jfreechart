@@ -76,7 +76,7 @@ import org.jfree.util.PublicCloneable;
  * A dataset for regular time periods that implements the
  * {@link TableXYDataset} interface.  Note that the {@link TableXYDataset}
  * interface requires all series to share the same set of x-values.  When
- * adding a new item <code>(x, y)</code> to one series, all other series
+ * adding a new item {@code (x, y)} to one series, all other series
  * automatically get a new item <code>(x, null)</code> unless a non-null item
  * has already been specified.
  *

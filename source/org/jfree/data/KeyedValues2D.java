@@ -65,7 +65,7 @@ public interface KeyedValues2D extends Values2D {
      *
      * @param key  the row key.
      *
-     * @return The row index, or <code>-1</code> if the key is unrecognised.
+     * @return The row index, or {@code -1} if the key is unrecognised.
      */
     public int getRowIndex(Comparable key);
 
@@ -92,7 +92,7 @@ public interface KeyedValues2D extends Values2D {
      *
      * @param key  the column key.
      *
-     * @return The column index, or <code>-1</code> if the key is unrecognised.
+     * @return The column index, or {@code -1} if the key is unrecognised.
      */
     public int getColumnIndex(Comparable key);
 

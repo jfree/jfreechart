@@ -79,7 +79,7 @@ public class CenterArrangement implements Arrangement, Serializable {
 
     /**
      * Calculates and sets the bounds of all the items in the specified
-     * container, subject to the given constraint.  The <code>Graphics2D</code>
+     * container, subject to the given constraint.  The {@code Graphics2D}
      * can be used by some items (particularly items containing text) to
      * calculate sizing parameters.
      *

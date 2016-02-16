@@ -213,7 +213,7 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
      *
      * @param key  the row key.
      *
-     * @return The row index, or <code>-1</code> if the key is unrecognised.
+     * @return The row index, or {@code -1} if the key is unrecognised.
      */
     @Override
     public int getRowIndex(Comparable key) {

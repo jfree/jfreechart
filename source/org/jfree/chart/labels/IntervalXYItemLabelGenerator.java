@@ -146,7 +146,7 @@ public class IntervalXYItemLabelGenerator extends AbstractXYItemLabelGenerator
      * @param item  the item (zero-based index).
      *
      * @return An array of seven items from the dataset formatted as
-     *         <code>String</code> objects (never {@code null}).
+     *         {@code String} objects (never {@code null}).
      */
     @Override
     protected Object[] createItemArray(XYDataset dataset, int series,

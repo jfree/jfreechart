@@ -591,7 +591,7 @@ public class Week extends RegularTimePeriod implements Serializable {
      *
      * @param s  the string to parse.
      *
-     * @return <code>-1</code> if none of the characters was found, the
+     * @return {@code -1} if none of the characters was found, the
      *      index of the first occurrence otherwise.
      */
     private static int findSeparator(String s) {
@@ -635,7 +635,7 @@ public class Week extends RegularTimePeriod implements Serializable {
      * Converts a string to a week.
      *
      * @param s  the string to parse.
-     * @return <code>-1</code> if the string does not contain a week number,
+     * @return {@code -1} if the string does not contain a week number,
      *         the number of the week otherwise.
      */
     private static int stringToWeek(String s) {

@@ -516,7 +516,7 @@ public class Month extends RegularTimePeriod implements Serializable {
      *
      * @param s  the string to parse.
      *
-     * @return The position of the separator character, or <code>-1</code> if
+     * @return The position of the separator character, or {@code -1} if
      *     none of the characters were found.
      */
     private static int findSeparator(String s) {

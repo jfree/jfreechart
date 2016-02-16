@@ -145,7 +145,7 @@ public class DefaultKeyedValues implements KeyedValues, Cloneable,
      *
      * @param key  the key ({@code null} not permitted).
      *
-     * @return The index, or <code>-1</code> if the key is not recognised.
+     * @return The index, or {@code -1} if the key is not recognised.
      *
      * @throws IllegalArgumentException if {@code key} is
      *     {@code null}.
