@@ -1086,7 +1086,7 @@ public abstract class Plot implements AxisChangeListener,
 
     /**
      * Fills the specified area with the background paint.  If the background
-     * paint is an instance of <code>GradientPaint</code>, the gradient will
+     * paint is an instance of {@code GradientPaint}, the gradient will
      * run in the direction suggested by the plot's orientation.
      *
      * @param g2  the graphics target.

@@ -79,7 +79,7 @@ public class DialBackground extends AbstractDialLayer implements DialLayer,
 
     /**
      * The transformer used when the background paint is an instance of
-     * <code>GradientPaint</code>.
+     * {@code GradientPaint}.
      */
     private GradientPaintTransformer gradientPaintTransformer;
 
@@ -132,7 +132,7 @@ public class DialBackground extends AbstractDialLayer implements DialLayer,
 
     /**
      * Returns the transformer used to adjust the coordinates of any
-     * <code>GradientPaint</code> instance used for the background paint.
+     * {@code GradientPaint} instance used for the background paint.
      *
      * @return The transformer (never {@code null}).
      *
@@ -144,7 +144,7 @@ public class DialBackground extends AbstractDialLayer implements DialLayer,
 
     /**
      * Sets the transformer used to adjust the coordinates of any
-     * <code>GradientPaint</code> instance used for the background paint, and
+     * {@code GradientPaint} instance used for the background paint, and
      * sends a {@link DialLayerChangeEvent} to all registered listeners.
      *
      * @param t  the transformer ({@code null} not permitted).

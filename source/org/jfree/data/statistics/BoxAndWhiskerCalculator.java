@@ -64,7 +64,7 @@ public abstract class BoxAndWhiskerCalculator {
      * Calculates the statistics required for a {@link BoxAndWhiskerItem}
      * from a list of {@code Number} objects.  Any items in the list
      * that are {@code null}, not an instance of {@code Number}, or
-     * equivalent to <code>Double.NaN</code>, will be ignored.
+     * equivalent to {@code Double.NaN}, will be ignored.
      *
      * @param values  a list of numbers (a {@code null} list is not
      *                permitted).
@@ -80,7 +80,7 @@ public abstract class BoxAndWhiskerCalculator {
      * Calculates the statistics required for a {@link BoxAndWhiskerItem}
      * from a list of {@code Number} objects.  Any items in the list
      * that are {@code null}, not an instance of {@code Number}, or
-     * equivalent to <code>Double.NaN</code>, will be ignored.
+     * equivalent to {@code Double.NaN}, will be ignored.
      *
      * @param values  a list of numbers (a {@code null} list is not
      *                permitted).
@@ -171,7 +171,7 @@ public abstract class BoxAndWhiskerCalculator {
      * If the items in the list are not in ascending order, the result is
      * unspecified.  If the list contains items that are {@code null}, not
      * an instance of {@code Number}, or equivalent to
-     * <code>Double.NaN</code>, the result is unspecified.
+     * {@code Double.NaN}, the result is unspecified.
      *
      * @param values  the numbers in ascending order ({@code null} not
      *     permitted).
@@ -205,7 +205,7 @@ public abstract class BoxAndWhiskerCalculator {
      * If the items in the list are not in ascending order, the result is
      * unspecified.  If the list contains items that are {@code null}, not
      * an instance of {@code Number}, or equivalent to
-     * <code>Double.NaN</code>, the result is unspecified.
+     * {@code Double.NaN}, the result is unspecified.
      *
      * @param values  the list of values ({@code null} not permitted).
      *

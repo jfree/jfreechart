@@ -111,7 +111,7 @@ public class StrokeMap implements Cloneable, Serializable {
 
     /**
      * Adds a mapping between the specified {@code key} and
-     * <code>stroke</code> values.
+     * {@code stroke} values.
      *
      * @param key  the key ({@code null} not permitted).
      * @param stroke  the stroke.

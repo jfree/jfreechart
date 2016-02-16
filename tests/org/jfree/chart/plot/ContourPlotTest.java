@@ -46,7 +46,7 @@ import org.jfree.chart.TestUtilities;
 import org.junit.Test;
 
 /**
- * Tests for the <code>ContourPlot</code> class.
+ * Tests for the {@code ContourPlot} class.
  */
 public class ContourPlotTest {
 

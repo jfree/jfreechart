@@ -1824,7 +1824,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      *
      * @param stroke  the stroke ({@code null} not permitted).
      *
-     * @throws IllegalArgumentException if <code>stroke</code> is
+     * @throws IllegalArgumentException if {@code stroke} is
      *     {@code null}.
      *
      * @see #getDomainGridlineStroke()
@@ -1856,7 +1856,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      *
      * @param stroke  the stroke ({@code null} not permitted).
      *
-     * @throws IllegalArgumentException if <code>stroke</code> is
+     * @throws IllegalArgumentException if {@code stroke} is
      *     {@code null}.
      *
      * @see #getDomainMinorGridlineStroke()

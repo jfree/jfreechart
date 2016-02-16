@@ -190,7 +190,7 @@ public class IntervalXYDelegate implements DatasetChangeListener,
      * appropriate {@link DatasetChangeEvent}.
      *
      * @param d  the new interval position factor (in the range
-     *           <code>0.0</code> to <code>1.0</code> inclusive).
+     *           {@code 0.0} to {@code 1.0} inclusive).
      */
     public void setIntervalPositionFactor(double d) {
         if (d < 0.0 || 1.0 < d) {

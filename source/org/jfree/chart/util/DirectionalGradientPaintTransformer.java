@@ -46,8 +46,8 @@ import java.awt.Shape;
 import org.jfree.ui.GradientPaintTransformer;
 
 /**
- * Transforms a <code>GradientPaint</code> to range over the width of a target 
- * shape.  The orientation of the resulting <code>GradientPaint</code>
+ * Transforms a {@code GradientPaint} to range over the width of a target 
+ * shape.  The orientation of the resulting {@code GradientPaint}
  * depend on the coordinates of the original paint:
  *
  * <ul>
@@ -81,7 +81,7 @@ public class DirectionalGradientPaintTransformer
     }
     
     /**
-     * Transforms a <code>GradientPaint</code> instance to fit some target 
+     * Transforms a {@code GradientPaint} instance to fit some target 
      * shape.
      * 
      * @param paint  the original paint (not {@code null}).

@@ -104,7 +104,7 @@ public class XYPolygonAnnotation extends AbstractXYAnnotation
 
     /**
      * Creates a new annotation where the box is drawn as an outline using
-     * the specified <code>stroke</code> and <code>outlinePaint</code>.
+     * the specified {@code stroke} and <code>outlinePaint</code>.
      * The array of polygon coordinates must contain an even number of
      * coordinates (each pair is an (x, y) location on the plot) and the last
      * point is automatically joined back to the first point.

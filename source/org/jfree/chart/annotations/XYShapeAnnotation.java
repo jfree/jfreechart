@@ -116,7 +116,7 @@ public class XYShapeAnnotation extends AbstractXYAnnotation
 
     /**
      * Creates a new annotation where the shape is drawn as an outline using
-     * the specified <code>stroke</code> and <code>outlinePaint</code>.
+     * the specified {@code stroke} and <code>outlinePaint</code>.
      *
      * @param shape  the shape ({@code null} not permitted).
      * @param stroke  the shape stroke ({@code null} permitted).

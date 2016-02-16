@@ -96,7 +96,7 @@ public class MeanAndStandardDeviation implements Serializable {
 
     /**
      * Returns the mean as a double primitive.  If the underlying mean is
-     * {@code null}, this method will return <code>Double.NaN</code>.
+     * {@code null}, this method will return {@code Double.NaN}.
      *
      * @return The mean.
      *
@@ -124,7 +124,7 @@ public class MeanAndStandardDeviation implements Serializable {
     /**
      * Returns the standard deviation as a double primitive.  If the underlying
      * standard deviation is {@code null}, this method will return
-     * <code>Double.NaN</code>.
+     * {@code Double.NaN}.
      *
      * @return The standard deviation.
      *

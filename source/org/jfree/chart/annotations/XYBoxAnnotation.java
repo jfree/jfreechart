@@ -109,7 +109,7 @@ public class XYBoxAnnotation extends AbstractXYAnnotation
 
     /**
      * Creates a new annotation where the box is drawn as an outline using
-     * the specified <code>stroke</code> and <code>outlinePaint</code>.
+     * the specified {@code stroke} and <code>outlinePaint</code>.
      *
      * @param x0  the lower x-coordinate of the box (in data space).
      * @param y0  the lower y-coordinate of the box (in data space).

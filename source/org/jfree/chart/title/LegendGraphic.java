@@ -260,7 +260,7 @@ public class LegendGraphic extends AbstractBlock
 
     /**
      * Returns the transformer used when the fill paint is an instance of
-     * <code>GradientPaint</code>.
+     * {@code GradientPaint}.
      *
      * @return The transformer (never {@code null}).
      *
@@ -274,7 +274,7 @@ public class LegendGraphic extends AbstractBlock
 
     /**
      * Sets the transformer used when the fill paint is an instance of
-     * <code>GradientPaint</code>.
+     * {@code GradientPaint}.
      *
      * @param transformer  the transformer ({@code null} not permitted).
      *

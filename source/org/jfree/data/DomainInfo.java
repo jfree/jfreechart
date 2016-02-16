@@ -63,7 +63,7 @@ public interface DomainInfo {
      * @param includeInterval  a flag that determines whether or not the
      *                         x-interval is taken into account.
      *
-     * @return The minimum value or <code>Double.NaN</code> if there are no 
+     * @return The minimum value or {@code Double.NaN} if there are no 
      *     values.
      */
     public double getDomainLowerBound(boolean includeInterval);
@@ -74,7 +74,7 @@ public interface DomainInfo {
      * @param includeInterval  a flag that determines whether or not the
      *                         x-interval is taken into account.
      *
-     * @return The maximum value or <code>Double.NaN</code> if there are no 
+     * @return The maximum value or {@code Double.NaN} if there are no 
      *     values.
      */
     public double getDomainUpperBound(boolean includeInterval);

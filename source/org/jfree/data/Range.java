@@ -376,7 +376,7 @@ public strictfp class Range implements Serializable {
 
     /**
      * Returns the given <code>value</code> adjusted by <code>delta</code> but
-     * with a check to prevent the result from crossing <code>0.0</code>.
+     * with a check to prevent the result from crossing {@code 0.0}.
      *
      * @param value  the value.
      * @param delta  the adjustment.
@@ -438,7 +438,7 @@ public strictfp class Range implements Serializable {
 
     /**
      * Returns {@code true} if both the lower and upper bounds are 
-     * <code>Double.NaN</code>, and {@code false} otherwise.
+     * {@code Double.NaN}, and {@code false} otherwise.
      * 
      * @return A boolean.
      * 

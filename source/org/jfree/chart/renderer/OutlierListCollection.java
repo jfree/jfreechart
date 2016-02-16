@@ -86,7 +86,7 @@ public class OutlierListCollection {
      * A flag to indicate the presence of one or more far out values at the
      * top end of the range.
      *
-     * @return A <code>boolean</code>.
+     * @return A {@code boolean}.
      */
     public boolean isHighFarOut() {
         return this.highFarOut;
@@ -106,7 +106,7 @@ public class OutlierListCollection {
      * A flag to indicate the presence of one or more far out values at the
      * bottom end of the range.
      *
-     * @return A <code>boolean</code>.
+     * @return A {@code boolean}.
      */
     public boolean isLowFarOut() {
         return this.lowFarOut;

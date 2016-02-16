@@ -2265,7 +2265,7 @@ public final class DatasetUtilities {
     /**
      * Returns the interpolated value of y that corresponds to the specified
      * x-value in the given series.  If the x-value falls outside the range of
-     * x-values for the dataset, this method returns <code>Double.NaN</code>.
+     * x-values for the dataset, this method returns {@code Double.NaN}.
      * 
      * @param dataset  the dataset ({@code null} not permitted).
      * @param series  the series index.

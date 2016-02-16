@@ -326,7 +326,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
 
     /**
      * Returns the base value for the bars.  The default value is
-     * <code>0.0</code>.
+     * {@code 0.0}.
      *
      * @return The base value for the bars.
      *

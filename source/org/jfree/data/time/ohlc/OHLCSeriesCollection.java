@@ -371,13 +371,13 @@ public class OHLCSeriesCollection extends AbstractXYDataset
     }
 
     /**
-     * Returns <code>Double.NaN</code> always, because this dataset doesn't
+     * Returns {@code Double.NaN} always, because this dataset doesn't
      * record any volume data.
      *
      * @param series  the series index (ignored).
      * @param item  the item index (ignored).
      *
-     * @return <code>Double.NaN</code>.
+     * @return {@code Double.NaN}.
      */
     @Override
     public double getVolumeValue(int series, int item) {

@@ -84,8 +84,8 @@ public class GrayPaintScale
      * @param lowerBound  the lower bound.
      * @param upperBound  the upper bound.
      *
-     * @throws IllegalArgumentException if <code>lowerBound</code> is not
-     *       less than <code>upperBound</code>.
+     * @throws IllegalArgumentException if {@code lowerBound} is not
+     *       less than {@code upperBound}.
      */
     public GrayPaintScale(double lowerBound, double upperBound) {
         this(lowerBound, upperBound, 255);
@@ -98,8 +98,8 @@ public class GrayPaintScale
      * @param upperBound  the upper bound.
      * @param alpha  the alpha transparency (0-255).
      *
-     * @throws IllegalArgumentException if <code>lowerBound</code> is not
-     *       less than <code>upperBound</code>, or <code>alpha</code> is not in
+     * @throws IllegalArgumentException if {@code lowerBound} is not
+     *       less than {@code upperBound}, or <code>alpha</code> is not in
      *       the range 0 to 255.
      *
      * @since 1.0.13

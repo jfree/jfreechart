@@ -98,7 +98,7 @@ public class LayeredBarRenderer extends BarRenderer implements Serializable {
     }
 
     /**
-     * Returns the bar width for a series, or <code>Double.NaN</code> if no
+     * Returns the bar width for a series, or {@code Double.NaN} if no
      * width has been set.
      *
      * @param series  the series index (zero based).

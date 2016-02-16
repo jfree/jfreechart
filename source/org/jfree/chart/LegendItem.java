@@ -979,7 +979,7 @@ public class LegendItem implements Cloneable, Serializable {
 
     /**
      * Returns the transformer used when the fill paint is an instance of
-     * <code>GradientPaint</code>.
+     * {@code GradientPaint}.
      *
      * @return The transformer (never {@code null}).
      *
@@ -993,7 +993,7 @@ public class LegendItem implements Cloneable, Serializable {
 
     /**
      * Sets the transformer used when the fill paint is an instance of
-     * <code>GradientPaint</code>.
+     * {@code GradientPaint}.
      *
      * @param transformer  the transformer ({@code null} not permitted).
      *
@@ -1086,8 +1086,7 @@ public class LegendItem implements Cloneable, Serializable {
 
     /**
      * Returns an independent copy of this object (except that the clone will
-     * still reference the same dataset as the original
-     * <code>LegendItem</code>).
+     * still reference the same dataset as the original {@code LegendItem}).
      *
      * @return A clone.
      *
