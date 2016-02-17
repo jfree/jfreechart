@@ -107,7 +107,7 @@ public interface Block extends Drawable {
 
     /**
      * Draws the block within the specified area.  Refer to the documentation
-     * for the implementing class for information about the <code>params</code>
+     * for the implementing class for information about the {@code params}
      * and return value supported.
      *
      * @param g2  the graphics device.

@@ -190,8 +190,7 @@ public class PlotRenderingInfo implements Cloneable, Serializable {
      * @param source  the source point (in Java2D space, {@code null} not
      * permitted).
      *
-     * @return The subplot index (or -1 if no subplot contains
-     *         <code>source</code>).
+     * @return The subplot index (or -1 if no subplot contains {@code source}).
      */
     public int getSubplotIndex(Point2D source) {
         ParamChecks.nullNotPermitted(source, "source");

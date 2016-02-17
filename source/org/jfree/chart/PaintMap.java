@@ -58,7 +58,7 @@ import org.jfree.io.SerialUtilities;
 import org.jfree.util.PaintUtilities;
 
 /**
- * A storage structure that maps <code>Comparable</code> instances with
+ * A storage structure that maps {@code Comparable} instances with
  * {@code Paint} instances.
  * <br><br>
  * To support cloning and serialization, you should only use keys that are
@@ -166,7 +166,7 @@ public class PaintMap implements Cloneable, Serializable {
     }
 
     /**
-     * Returns a clone of this <code>PaintMap</code>.
+     * Returns a clone of this {@code PaintMap}.
      *
      * @return A clone of this instance.
      *

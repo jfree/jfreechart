@@ -56,7 +56,7 @@ import org.jfree.io.SerialUtilities;
 import org.jfree.util.ObjectUtilities;
 
 /**
- * A storage structure that maps <code>Comparable</code> instances with
+ * A storage structure that maps {@code Comparable} instances with
  * {@code Stroke} instances.
  * <br><br>
  * To support cloning and serialization, you should only use keys that are
@@ -161,7 +161,7 @@ public class StrokeMap implements Cloneable, Serializable {
     }
 
     /**
-     * Returns a clone of this <code>StrokeMap</code>.
+     * Returns a clone of this {@code StrokeMap}.
      *
      * @return A clone of this instance.
      *

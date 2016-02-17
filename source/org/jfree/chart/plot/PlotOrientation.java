@@ -77,7 +77,7 @@ public final class PlotOrientation implements Serializable {
     }
 
     /**
-     * Returns {@code true} if this orientation is <code>HORIZONTAL</code>,
+     * Returns {@code true} if this orientation is {@code HORIZONTAL},
      * and {@code false} otherwise.  
      * 
      * @return A boolean.
@@ -89,7 +89,7 @@ public final class PlotOrientation implements Serializable {
     }
     
     /**
-     * Returns {@code true} if this orientation is <code>VERTICAL</code>,
+     * Returns {@code true} if this orientation is {@code VERTICAL},
      * and {@code false} otherwise.
      * 
      * @return A boolean.

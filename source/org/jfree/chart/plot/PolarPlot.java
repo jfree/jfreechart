@@ -2114,7 +2114,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
 
     /**
      * Translates a (theta, radius) pair into Java2D coordinates.  If
-     * <code>radius</code> is less than the lower bound of the axis, then
+     * {@code radius} is less than the lower bound of the axis, then
      * this method returns the centre point.
      *
      * @param angleDegrees  the angle in degrees.
@@ -2165,7 +2165,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
 
     /**
      * Translates a (theta, radius) pair into Java2D coordinates.  If
-     * <code>radius</code> is less than the lower bound of the axis, then
+     * {@code radius} is less than the lower bound of the axis, then
      * this method returns the centre point.
      *
      * @param angleDegrees  the angle in degrees.
