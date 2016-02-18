@@ -228,7 +228,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
 
     /**
      * Returns a flag that controls whether or not each series is drawn as a
-     * single path.
+     * single path.  The default value is {@code false}.
      *
      * @return A boolean.
      *
@@ -1034,7 +1034,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     /**
      * Draws the item (first pass). This method draws the lines
      * connecting the items. Instead of drawing separate lines,
-     * a GeneralPath is constructed and drawn at the end of
+     * a {@code GeneralPath} is constructed and drawn at the end of
      * the series painting.
      *
      * @param g2  the graphics device.
@@ -1080,8 +1080,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
                 s.seriesPath.moveTo(x, y);
             }
             s.setLastPointGood(true);
-        }
-        else {
+        } else {
             s.setLastPointGood(false);
         }
         // if this is the last item, draw the path ...
