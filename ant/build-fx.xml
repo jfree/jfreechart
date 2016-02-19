@@ -256,11 +256,6 @@
         <copy file="${basedir}/ant/build-fx.xml" tofile="${basedir}/distribution/ant/build-fx.xml" />
         <copy file="${basedir}/ant/build-swt.xml" tofile="${basedir}/distribution/ant/build-swt.xml" />
 
-        <!-- copy across checkstyle property file -->
-        <copy todir="${basedir}/distribution/checkstyle">
-            <fileset dir="${basedir}/checkstyle" />
-        </copy>
-
         <!-- convert end-of-line characters in text files -->
         <fixcrlf srcdir="${basedir}/distribution/source"
                  eol="crlf" eof="remove"
