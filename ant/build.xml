@@ -198,6 +198,11 @@
             </fileset>
         </copy>
 
+        <copy todir="${basedir}/distribution/jsfreechart">
+            <fileset dir="${basedir}/jsfreechart">
+            </fileset>
+        </copy>
+
         <copy todir="${basedir}/distribution/svg">
             <fileset dir="${basedir}/svg">
             </fileset>
