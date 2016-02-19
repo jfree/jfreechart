@@ -8,7 +8,7 @@
 
     <name>JFreeChart</name>
 
-    <artifactId>jfreechart-fx</artifactId>
+    <artifactId>jfreechart</artifactId>
     <groupId>org.jfree</groupId>
     <version>1.0.20-SNAPSHOT</version>
     <packaging>jar</packaging>
@@ -34,28 +34,14 @@
 
     <url>http://www.jfree.org/jfreechart/</url>
     <issueManagement>
-        <url>http://sourceforge.net/tracker/?group_id=15494</url>
+        <url>https://github.com/jfree/jfreechart/issues</url>
+        <system>GitHub Issues</system>
     </issueManagement>
     <scm>
-        <connection>scm:svn:https://jfreechart.svn.sourceforge.net/svnroot/jfreechart jfreechart</connection>
-        <url>http://jfreechart.svn.sourceforge.net/viewvc/jfreechart/</url>
+        <connection>scm:git:git:https://github.com/jfree/jfreechart.git</connection>
+        <url>https://github.com/jfree/jfreechart</url>
     </scm>
 
-    <mailingLists>
-        <mailingList>
-            <name>JFreeChart Developer List</name>
-            <subscribe>jfreechart-dev-request@lists.sourceforge.net?subject=subscribe</subscribe>
-            <unsubscribe>jfreechart-dev-request@lists.sourceforge.net?subject=unsubscribe</unsubscribe>
-            <archive>http://sourceforge.net/mailarchive/forum.php?forum=jfreechart-dev</archive>
-        </mailingList>
-    </mailingLists>
-
-    <developers>
-    <!--
-    For an up to date list of developers and contributors have a look at
-    the project info implementations.
-    -->
-    </developers>
     <licenses>
         <license>
             <name>GNU Lesser General Public Licence</name>
@@ -69,13 +55,6 @@
             <groupId>org.jfree</groupId>
             <artifactId>jcommon</artifactId>
             <version>1.0.23</version>
-        </dependency>
-
-        <!-- FXGraphics2D is used for JavaFX support. -->
-        <dependency>
-            <groupId>org.jfree</groupId>
-            <artifactId>fxgraphics2d</artifactId>
-            <version>1.2.1</version>
         </dependency>
 
         <!-- JFreeSVG enables SVG export -->
@@ -110,27 +89,16 @@
 
     <distributionManagement>
         <snapshotRepository>
-          <id>ossrh</id>
-          <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
     </distributionManagement>    
     
     <build>
         <sourceDirectory>source</sourceDirectory>
-        <testSourceDirectory>tests</testSourceDirectory>
+        <testSourceDirectory>src/test/java</testSourceDirectory>
 
-        <resources>
-            <resource>
-                <directory>source</directory>
-                <includes>
-                    <include>**/*.properties</include>
-                    <include>**/*.jpg</include>
-                    <include>**/*.</include>
-                </includes>
-            </resource>
-        </resources>
-
-        <plugins>  
+        <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -170,7 +138,7 @@
                 </configuration>
             </plugin>
 
-            <plugin>
+ <!--           <plugin>
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-gpg-plugin</artifactId>
               <version>1.5</version>
@@ -184,23 +152,23 @@
                 </execution>
               </executions>
             </plugin>
-
+-->
             <plugin>
-              <groupId>org.sonatype.plugins</groupId>
-              <artifactId>nexus-staging-maven-plugin</artifactId>
-              <version>1.6.2</version>
-              <extensions>true</extensions>
-              <configuration>
-                <serverId>ossrh</serverId>
-                <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                <autoReleaseAfterClose>false</autoReleaseAfterClose>
-              </configuration>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.2</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>false</autoReleaseAfterClose>
+                </configuration>
             </plugin>            
       
             <plugin>
-              <groupId>org.codehaus.mojo</groupId>
-              <artifactId>cobertura-maven-plugin</artifactId>
-              <version>2.5.1</version>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <version>2.5.1</version>
             </plugin>
 
             <plugin>
@@ -254,8 +222,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.source.level>1.8</project.source.level>
-        <project.target.level>1.8</project.target.level>
+        <project.source.level>1.6</project.source.level>
+        <project.target.level>1.6</project.target.level>
     </properties>
 
     <profiles>
@@ -278,7 +246,7 @@
                         </executions>
                         <configuration>
                             <sourceFileExcludes>
-                        <!--        <exclude>org/jfree/chart/fx/**</exclude> -->
+                                <exclude>org/jfree/chart/fx/**</exclude>
                             </sourceFileExcludes>
                         </configuration>
                     </plugin>
