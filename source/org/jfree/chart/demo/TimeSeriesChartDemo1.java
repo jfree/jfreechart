@@ -205,7 +205,7 @@ public class TimeSeriesChartDemo1 extends ApplicationFrame {
      */
     public static JPanel createDemoPanel() {
         JFreeChart chart = createChart(createDataset());
-        ChartPanel panel = new ChartPanel(chart);
+        ChartPanel panel = new ChartPanel(chart, false);
         panel.setFillZoomRectangle(true);
         panel.setMouseWheelEnabled(true);
         return panel;
