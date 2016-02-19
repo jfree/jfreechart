@@ -190,7 +190,7 @@ public class PieChartDemo1 extends ApplicationFrame {
     public static JPanel createDemoPanel() {
         JFreeChart chart = createChart(createDataset());
         chart.setPadding(new RectangleInsets(4, 8, 2, 2));
-        ChartPanel panel = new ChartPanel(chart);
+        ChartPanel panel = new ChartPanel(chart, false);
         panel.setMouseWheelEnabled(true);
         panel.setPreferredSize(new Dimension(600, 300));
         return panel;
