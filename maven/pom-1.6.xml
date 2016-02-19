@@ -10,7 +10,7 @@
 
     <artifactId>jfreechart</artifactId>
     <groupId>org.jfree</groupId>
-    <version>1.0.19</version>
+    <version>1.0.20-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <!-- this is required to host it on Sonatype's OSSRH -->
@@ -27,41 +27,21 @@
     <inceptionYear>2001</inceptionYear>
 
     <description>
-    JFreeChart is a class library, written in Java, for generating charts. 
-    Utilising the Java2D APIs, it currently supports bar charts, pie charts, 
-    line charts, XY-plots and time series plots.
+        JFreeChart is a class library, written in Java, for generating charts. 
+        Utilising the Java2D APIs, it currently supports bar charts, pie charts, 
+        line charts, XY-plots and time series plots.
     </description>
 
     <url>http://www.jfree.org/jfreechart/</url>
     <issueManagement>
-        <url>http://sourceforge.net/tracker/?group_id=15494</url>
+        <url>https://github.com/jfree/jfreechart/issues</url>
+        <system>GitHub Issues</system>
     </issueManagement>
     <scm>
-        <connection>scm:svn:https://jfreechart.svn.sourceforge.net/svnroot/jfreechart jfreechart</connection>
-        <url>http://jfreechart.svn.sourceforge.net/viewvc/jfreechart/</url>
+        <connection>scm:git:git:https://github.com/jfree/jfreechart.git</connection>
+        <url>https://github.com/jfree/jfreechart</url>
     </scm>
 
-    <mailingLists>
-        <mailingList>
-            <name>JFreeChart Developer List</name>
-            <subscribe>
-        jfreechart-dev-request@lists.sourceforge.net?subject=subscribe
-            </subscribe>
-            <unsubscribe>
-        jfreechart-dev-request@lists.sourceforge.net?subject=unsubscribe
-            </unsubscribe>
-            <archive>
-        http://sourceforge.net/mailarchive/forum.php?forum=jfreechart-dev
-            </archive>
-        </mailingList>
-    </mailingLists>
-
-    <developers>
-    <!--
-    For an up to date list of developers and contributors have a look at
-    the project info implementations.
-    -->
-    </developers>
     <licenses>
         <license>
             <name>GNU Lesser General Public Licence</name>
@@ -75,6 +55,20 @@
             <groupId>org.jfree</groupId>
             <artifactId>jcommon</artifactId>
             <version>1.0.23</version>
+        </dependency>
+
+        <!-- JFreeSVG enables SVG export -->
+        <dependency>
+            <groupId>org.jfree</groupId>
+            <artifactId>jfreesvg</artifactId>
+            <version>3.0</version>
+        </dependency>
+        
+        <!-- OrsonPDF enables PDF export -->
+        <dependency>
+            <groupId>com.orsonpdf</groupId>
+            <artifactId>orsonpdf</artifactId>
+            <version>1.7</version>
         </dependency>
 
         <dependency>
@@ -94,29 +88,17 @@
     </dependencies>
 
     <distributionManagement>
-      <snapshotRepository>
-        <id>ossrh</id>
-        <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-      </snapshotRepository>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
     </distributionManagement>    
     
     <build>
         <sourceDirectory>source</sourceDirectory>
-        <testSourceDirectory>tests</testSourceDirectory>
-
-        <resources>
-            <resource>
-                <directory>source</directory>
-                <includes>
-                    <include>**/*.properties</include>
-                    <include>**/*.jpg</include>
-                    <include>**/*.</include>
-                </includes>
-            </resource>
-        </resources>
+        <testSourceDirectory>src/test/java</testSourceDirectory>
 
         <plugins>
-          
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -126,8 +108,8 @@
                     <target>${project.target.level}</target>
                     <encoding>${project.build.sourceEncoding}</encoding>
                     <excludes>
-                      <exclude>org/jfree/chart/demo/**</exclude>
-                      <exclude>org/jfree/chart/fx/**</exclude>
+                        <exclude>org/jfree/chart/demo/**</exclude>
+                        <exclude>org/jfree/chart/fx/**</exclude>
                     </excludes>                
                 </configuration>
             </plugin>
@@ -156,7 +138,7 @@
                 </configuration>
             </plugin>
 
-            <plugin>
+ <!--           <plugin>
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-gpg-plugin</artifactId>
               <version>1.5</version>
@@ -170,23 +152,23 @@
                 </execution>
               </executions>
             </plugin>
-
+-->
             <plugin>
-              <groupId>org.sonatype.plugins</groupId>
-              <artifactId>nexus-staging-maven-plugin</artifactId>
-              <version>1.6.2</version>
-              <extensions>true</extensions>
-              <configuration>
-                <serverId>ossrh</serverId>
-                <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                <autoReleaseAfterClose>false</autoReleaseAfterClose>
-              </configuration>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.2</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>false</autoReleaseAfterClose>
+                </configuration>
             </plugin>            
       
             <plugin>
-              <groupId>org.codehaus.mojo</groupId>
-              <artifactId>cobertura-maven-plugin</artifactId>
-              <version>2.5.1</version>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <version>2.5.1</version>
             </plugin>
 
             <plugin>
@@ -244,47 +226,45 @@
         <project.target.level>1.6</project.target.level>
     </properties>
 
-  <profiles>
-    <profile> 
-      <id>release</id>
-      <build>
-        <plugins>
-          <plugin>
-            <inherited>true</inherited>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-javadoc-plugin</artifactId>
-            <version>2.9.1</version>
-            <executions>
-              <execution>
-                <id>attach-javadoc</id>
-                <goals>
-                  <goal>jar</goal>
-                </goals>
-              </execution>
-            </executions>
-            <configuration>
-              <sourceFileExcludes>
-                <exclude>org/jfree/chart/fx/**</exclude>
-              </sourceFileExcludes>
-            </configuration>
-          </plugin>
-
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-source-plugin</artifactId>
-            <version>2.2.1</version>
-            <executions>
-              <execution>
-                <id>attach-sources</id>
-                <goals>
-                  <goal>jar-no-fork</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
-
+    <profiles>
+        <profile> 
+            <id>release</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <inherited>true</inherited>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>2.9.1</version>
+                        <executions>
+                            <execution>
+                                <id>attach-javadoc</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <sourceFileExcludes>
+                                <exclude>org/jfree/chart/fx/**</exclude>
+                            </sourceFileExcludes>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>2.2.1</version>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
