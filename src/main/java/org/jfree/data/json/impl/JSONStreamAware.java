@@ -28,8 +28,15 @@ import java.io.IOException;
 import java.io.Writer;
 
 /**
- * Beans that support customized output of JSON text to a writer shall implement this interface.  
+ * Beans that support customized output of JSON text to a writer shall 
+ * implement this interface.  
  * @author FangYidong&lt;fangyidong@yahoo.com.cn&gt;
+ * <br><br>
+ * This class is for internal use by JFreeChart, it is not 
+ * part of the supported API and you should not call it directly.  If you need
+ * JSON support in your project you should include JSON.simple 
+ * (https://code.google.com/p/json-simple/) or some other JSON library directly
+ * in your project.
  */
 public interface JSONStreamAware {
     

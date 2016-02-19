@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2015, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -24,14 +24,18 @@
 package org.jfree.data.json.impl;
 
 import java.io.IOException;
-import java.io.Reader;
-import java.io.StringReader;
 import java.io.Writer;
 import java.util.List;
 import java.util.Map;
 
 /**
  * Utility methods for JSON values.
+ * <br><br>
+ * This class is for internal use by JFreeChart, it is not 
+ * part of the supported API and you should not call it directly.  If you need
+ * JSON support in your project you should include JSON.simple 
+ * (https://code.google.com/p/json-simple/) or some other JSON library directly
+ * in your project.
  */
 public class JSONValue {
     
