@@ -225,6 +225,11 @@
             </fileset>
         </copy>
 
+        <copy todir="${basedir}/distribution/svg">
+            <fileset dir="${basedir}/svg">
+            </fileset>
+        </copy>
+
         <copy todir="${basedir}/distribution/docfiles">
             <fileset dir="${basedir}/docfiles">
             </fileset>

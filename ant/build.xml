@@ -24,11 +24,14 @@
         <property name="jcommon.name" value="jcommon" />
         <property name="jcommon.version" value="1.0.23" />
         <property name="jcommon.jar" value="${basedir}/lib/${jcommon.name}-${jcommon.version}.jar"/>
+        <property name="fxgraphics2d.name" value="fxgraphics2d" />
+        <property name="fxgraphics2d.version" value="1.3" />
+        <property name="fxgraphics2d.jar" value="${basedir}/lib/${fxgraphics2d.name}-${fxgraphics2d.version}.jar" />
         <property name="jfreesvg.name" value="jfreesvg" />
         <property name="jfreesvg.version" value="3.0" />
         <property name="orsonpdf.name" value="orsonpdf" />
         <property name="orsonpdf.version" value="1.7" />
-        <property name="orsoncharts.version" value="1.4-eval-nofx" />
+        <property name="orsoncharts.version" value="1.5" />
         <property name="builddir" value="${basedir}/build" />
         <property name="servlet.jar" value="${basedir}/lib/servlet.jar"/>
         <property name="junit.jar" value="${basedir}/lib/junit-4.11.jar"/>
@@ -41,7 +44,6 @@
                 <include name="servlet.jar"/>
             </fileset>
         </path>
-
     </target>
 
     <!-- Compile the JFreeChart classes -->
@@ -52,7 +54,7 @@
         <mkdir dir="${basedir}/build" />
 
         <!-- compile the source -->
-        <javac srcdir="${basedir}/source"
+        <javac srcdir="${basedir}/src/main/java"
                destdir="${basedir}/build"
                debug="on"
                deprecation="false"
@@ -65,21 +67,21 @@
         </javac>
 
         <!-- copy across gorilla.jpg -->
-        <copy file="${basedir}/source/org/jfree/chart/gorilla.jpg" tofile="${basedir}/build/org/jfree/chart/gorilla.jpg" />
+        <copy file="${basedir}/src/main/resources/org/jfree/chart/gorilla.jpg" tofile="${basedir}/build/org/jfree/chart/gorilla.jpg" />
 
         <!-- copy across .properties files -->
         <copy todir="${basedir}/build/org/jfree/chart/">
-            <fileset dir="${basedir}/source/org/jfree/chart">
+            <fileset dir="${basedir}/src/main/resources/org/jfree/chart">
                 <include name="*.properties" />
             </fileset>
         </copy>
         <copy todir="${basedir}/build/org/jfree/chart/plot">
-            <fileset dir="${basedir}/source/org/jfree/chart/plot">
+            <fileset dir="${basedir}/src/main/resources/org/jfree/chart/plot">
                 <include name="*.properties" />
             </fileset>
         </copy>
         <copy todir="${basedir}/build/org/jfree/chart/editor">
-            <fileset dir="${basedir}/source/org/jfree/chart/editor">
+            <fileset dir="${basedir}/src/main/resources/org/jfree/chart/editor">
                 <include name="*.properties" />
             </fileset>
         </copy>
@@ -147,7 +149,7 @@
 
         <!-- copy source code -->
         <copy todir="${basedir}/source-jar/">
-            <fileset dir="${basedir}/source"/>
+            <fileset dir="${basedir}/src/main/java"/>
         </copy>
 
         <!-- make the jar -->
@@ -168,12 +170,12 @@
         <mkdir dir="${basedir}/javadoc" />
         <javadoc destdir="${basedir}/javadoc"
                  windowtitle="JFreeChart Class Library (version ${jfreechart.version})"
-                 overview="${basedir}/source/overview.html"
+                 overview="${basedir}/src/main/javadoc/overview.html"
                  use="yes"
                  linksource="yes"
                  splitindex="yes">
             <classpath refid="build.classpath" />
-            <packageset dir="${basedir}/source" defaultexcludes="yes">
+            <packageset dir="${basedir}/src/main/java" defaultexcludes="yes">
                 <include name="org/jfree/**"/>
                 <exclude name="org/jfree/chart/fx/**"/>
             </packageset>
@@ -223,27 +225,18 @@
         <copy file="${basedir}/${jfreechart.name}-${jfreechart.version}-demo.jar" tofile="${basedir}/distribution/${jfreechart.name}-${jfreechart.version}-demo.jar" failonerror="false" />
 
         <!-- copy across source files -->
-        <copy todir="${basedir}/distribution/source">
-            <fileset dir="${basedir}/source">
-              <exclude name="**/CVS/*"/>
+        <copy todir="${basedir}/distribution/src">
+            <fileset dir="${basedir}/src">
             </fileset>
         </copy>
 
         <copy todir="${basedir}/distribution/experimental">
             <fileset dir="${basedir}/experimental">
-              <exclude name="**/CVS/*"/>
-            </fileset>
-        </copy>
-
-        <copy todir="${basedir}/distribution/tests">
-            <fileset dir="${basedir}/tests">
-              <exclude name="**/CVS/*"/>
             </fileset>
         </copy>
 
         <copy todir="${basedir}/distribution/swt">
             <fileset dir="${basedir}/swt">
-              <exclude name="**/CVS/*"/>
             </fileset>
         </copy>
 
@@ -257,8 +250,14 @@
             </fileset>
         </copy>
 
+        <copy todir="${basedir}/distribution/maven">
+            <fileset dir="${basedir}/maven">
+            </fileset>
+        </copy>
+
         <!-- copy across lib files -->
         <copy file="${jcommon.jar}" tofile="${basedir}/distribution/lib/${jcommon.name}-${jcommon.version}.jar" />
+        <copy file="${fxgraphics2d.jar}" tofile="${basedir}/distribution/lib/${fxgraphics2d.name}-${fxgraphics2d.version}.jar" />
         <copy file="${basedir}/lib/swtgraphics2d.jar" tofile="${basedir}/distribution/lib/swtgraphics2d.jar" failonerror="false" />
         <copy file="${basedir}/lib/jfreechart-${jfreechart.version}-swt.jar" tofile="${basedir}/distribution/lib/${jfreechart.name}-${jfreechart.version}-swt.jar" failonerror="false" />
         <copy file="${servlet.jar}" tofile="${basedir}/distribution/lib/servlet.jar" />
@@ -274,7 +273,7 @@
         <copy file="${basedir}/ant/build-swt.xml" tofile="${basedir}/distribution/ant/build-swt.xml" />
 
         <!-- convert end-of-line characters in text files -->
-        <fixcrlf srcdir="${basedir}/distribution/source"
+        <fixcrlf srcdir="${basedir}/distribution/src"
                  eol="crlf" eof="remove"
                  excludes="**/*.jpg" />
 
@@ -285,11 +284,6 @@
         <fixcrlf srcdir="${basedir}/distribution/swt"
                  eol="lf" eof="remove"
                  excludes="**/*.jpg" />
-
-        <fixcrlf srcdir="${basedir}/distribution/tests"
-                 eol="lf" eof="remove"
-                 excludes="**/*.jpg" />
-
     </target>
 
     <!-- Make .zip distribution for JFreeChart -->
@@ -303,27 +297,13 @@
 
     </target>
 
-    <!-- Make .tar.gz distribution for JFreeChart -->
-    <target name="targz" depends="fill-distribution">
-
-        <!-- make the tar.gz file -->
-        <tar tarfile="${basedir}/${jfreechart.name}-${jfreechart.version}.tar">
-             <tarfileset dir="${basedir}/distribution"
-                         prefix="${jfreechart.name}-${jfreechart.version}" />
-        </tar>
-        <gzip zipfile="${basedir}/${jfreechart.name}-${jfreechart.version}.tar.gz"
-              src="${basedir}/${jfreechart.name}-${jfreechart.version}.tar" />
-        <delete file="${basedir}/${jfreechart.name}-${jfreechart.version}.tar" />
-
-    </target>
-
     <!-- COMPILE THE JUNIT TESTS. -->
     <target name="compile-tests"
             depends="compile,compile-experimental"
             description="Compile the test code">
 
         <mkdir dir="${basedir}/build-tests"/>
-        <javac srcdir="${basedir}/tests"
+        <javac srcdir="${basedir}/src/test/java"
                destdir="${basedir}/build-tests"
                source="1.6"
                target="1.6"
@@ -377,7 +357,7 @@
 
     <!-- ALL -->
     <target name="all"
-            depends="compile,compile-experimental,zip-javadocs,zip,targz,source-jar"
+            depends="compile,compile-experimental,zip-javadocs,zip,source-jar"
             description="Compiles JFreeChart, builds the jar files, generates the Javadoc HTML pages and creates distribution files (.zip and .tar.gz).">
 
         <!-- delete the temporary distribution directory -->
