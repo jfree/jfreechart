@@ -104,42 +104,6 @@
 
     </target>
 
-
-    <!-- Compile the experimental classes -->
-    <target name="compile-experimental" depends="compile"
-            description="Compile the JFreeChart experimental classes">
-
-        <!-- create a temp build directory -->
-        <mkdir dir="${basedir}/build" />
-
-        <path id="build.experimental.classpath">
-            <pathelement location="${jcommon.jar}"/>
-            <pathelement location="${servlet.jar}"/>
-            <pathelement location="${basedir}/lib/${jfreechart.name}-${jfreechart.version}.jar"/>
-        </path>
-
-        <!-- compile the source -->
-        <javac srcdir="${basedir}/experimental"
-               destdir="${basedir}/build"
-               debug="on"
-               deprecation="false"
-               source="${src.version}"
-               target="${target.version}"
-               includeantruntime="false">
-               <classpath refid="build.experimental.classpath" />
-            <include name="org/jfree/experimental/**"/>
-            <exclude name="org/jfree/experimental/**/junit/*"/>
-        </javac>
-
-        <!-- make the jar -->
-        <jar jarfile="${basedir}/lib/${jfreechart.name}-${jfreechart.version}-experimental.jar"
-             basedir="${basedir}/build" >
-        </jar>
-
-        <!-- delete the temp directory -->
-        <delete dir="${basedir}/build" />
-    </target>
-
     <!-- Generate the JFreeChart source code jar -->
     <target name="source-jar" depends="initialise"
             description="Package the JFreeChart source code in a jar">
@@ -221,17 +185,11 @@
 
         <!-- copy across runtime jar file and demo jar file -->
         <copy file="${basedir}/lib/${jfreechart.name}-${jfreechart.version}.jar" tofile="${basedir}/distribution/lib/${jfreechart.name}-${jfreechart.version}.jar" />
-        <copy file="${basedir}/lib/${jfreechart.name}-${jfreechart.version}-experimental.jar" tofile="${basedir}/distribution/lib/${jfreechart.name}-${jfreechart.version}-experimental.jar" />
         <copy file="${basedir}/${jfreechart.name}-${jfreechart.version}-demo.jar" tofile="${basedir}/distribution/${jfreechart.name}-${jfreechart.version}-demo.jar" failonerror="false" />
 
         <!-- copy across source files -->
         <copy todir="${basedir}/distribution/src">
             <fileset dir="${basedir}/src">
-            </fileset>
-        </copy>
-
-        <copy todir="${basedir}/distribution/experimental">
-            <fileset dir="${basedir}/experimental">
             </fileset>
         </copy>
 
@@ -277,10 +235,6 @@
                  eol="crlf" eof="remove"
                  excludes="**/*.jpg" />
 
-        <fixcrlf srcdir="${basedir}/distribution/experimental"
-                 eol="lf" eof="remove"
-                 excludes="**/*.jpg" />
-
         <fixcrlf srcdir="${basedir}/distribution/swt"
                  eol="lf" eof="remove"
                  excludes="**/*.jpg" />
@@ -299,7 +253,7 @@
 
     <!-- COMPILE THE JUNIT TESTS. -->
     <target name="compile-tests"
-            depends="compile,compile-experimental"
+            depends="compile"
             description="Compile the test code">
 
         <mkdir dir="${basedir}/build-tests"/>
@@ -316,7 +270,6 @@
                 <pathelement location="${junit.jar}"/>
                 <pathelement location="${hamcrest.jar}"/>
                 <pathelement location="${basedir}/lib/${jfreechart.name}-${jfreechart.version}.jar"/>
-                <pathelement location="${basedir}/lib/${jfreechart.name}-${jfreechart.version}-experimental.jar"/>
                 <pathelement location="${basedir}/build-tests"/>
             </classpath>
         </javac>
@@ -344,7 +297,6 @@
                 <pathelement location="${junit.jar}"/>
                 <pathelement location="${hamcrest.jar}"/>
                 <pathelement location="${basedir}/lib/${jfreechart.name}-${jfreechart.version}.jar"/>
-                <pathelement location="${basedir}/lib/${jfreechart.name}-${jfreechart.version}-experimental.jar"/>
                 <pathelement location="${basedir}/build-tests"/>
             </classpath>
             <batchtest todir="${basedir}/build-tests-reports">
@@ -357,7 +309,7 @@
 
     <!-- ALL -->
     <target name="all"
-            depends="compile,compile-experimental,zip-javadocs,zip,source-jar"
+            depends="compile,zip-javadocs,zip,source-jar"
             description="Compiles JFreeChart, builds the jar files, generates the Javadoc HTML pages and creates distribution files (.zip and .tar.gz).">
 
         <!-- delete the temporary distribution directory -->
