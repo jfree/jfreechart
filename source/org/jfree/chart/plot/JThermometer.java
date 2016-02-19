@@ -94,7 +94,7 @@ public class JThermometer extends JPanel implements Serializable {
         this.plot.setDataset(this.data);
         this.chart = new JFreeChart(null, JFreeChart.DEFAULT_TITLE_FONT,
                 this.plot, false);
-        this.panel = new ChartPanel(this.chart);
+        this.panel = new ChartPanel(this.chart, false);
         add(this.panel, "Panel");
         setBackground(getBackground());
     }
