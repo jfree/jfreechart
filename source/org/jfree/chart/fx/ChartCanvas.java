@@ -52,6 +52,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
+import javafx.scene.text.FontSmoothingType;
 import org.jfree.chart.ChartMouseEvent;
 import org.jfree.chart.ChartRenderingInfo;
 import org.jfree.chart.JFreeChart;
@@ -78,7 +79,12 @@ import org.jfree.fx.FXGraphics2D;
  * The canvas installs several default mouse handlers, if you don't like the
  * behaviour provided by these you can retrieve the handler by ID and
  * disable or remove it (the IDs are "tooltip", "scroll", "anchor", "pan" and 
- * "dispatch").
+ * "dispatch").</p>
+ * <p>
+ * The {@code FontSmoothingType} for the underlying {@code GraphicsContext} is
+ * set to {@code FontSmoothingType.LCD} as this gives better results on the 
+ * systems we've tested on.  You can modify this using 
+ * {@code getGraphicsContext().setFontSmoothingType(yourValue)}.
  * 
  * <p>THE API FOR THIS CLASS IS SUBJECT TO CHANGE IN FUTURE RELEASES.  This is
  * so that we can incorporate feedback on the (new) JavaFX support in 
@@ -146,7 +152,10 @@ public class ChartCanvas extends Canvas implements ChartChangeListener {
         
         widthProperty().addListener(e -> draw());
         heightProperty().addListener(e -> draw());
-        this.g2 = new FXGraphics2D(getGraphicsContext2D());
+        // change the default font smoothing for better results
+        GraphicsContext gc = getGraphicsContext2D();
+        gc.setFontSmoothingType(FontSmoothingType.LCD);
+        this.g2 = new FXGraphics2D(gc);
         this.liveHandler = null;
         this.availableMouseHandlers = new ArrayList<MouseHandlerFX>();
         
