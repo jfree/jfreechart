@@ -95,7 +95,6 @@
     </distributionManagement>    
     
     <build>
-        <sourceDirectory>source</sourceDirectory>
         <testSourceDirectory>src/test/java</testSourceDirectory>
 
         <plugins>
