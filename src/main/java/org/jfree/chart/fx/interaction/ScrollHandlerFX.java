@@ -27,7 +27,7 @@
  * --------------------
  * ScrollHandlerFX.java
  * --------------------
- * (C) Copyright 2014, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2014-2016, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -130,10 +130,10 @@ public class ScrollHandlerFX extends AbstractMouseHandlerFX
             if (clicks < 0) {
                 zf = 1.0 / zf;
             }
-            if (true) { //this.chartPanel.isDomainZoomable()) {
+            if (canvas.isDomainZoomable()) {
                 zoomable.zoomDomainAxes(zf, pinfo, p, true);
             }
-            if (true) { //this.chartPanel.isRangeZoomable()) {
+            if (canvas.isRangeZoomable()) {
                 zoomable.zoomRangeAxes(zf, pinfo, p, true);
             }
             plot.setNotify(notifyState);  // this generates the change event too
