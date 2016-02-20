@@ -28,7 +28,7 @@
  * Zoomable.java
  * -------------
  *
- * (C) Copyright 2004-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2016, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Rune Fauske;
@@ -57,8 +57,8 @@ import org.jfree.chart.ChartPanel;
 public interface Zoomable {
 
     /**
-     * Returns {@code true} if the plot's domain is zoomable, and
-     * {@code false} otherwise.
+     * Returns {@code true} if the plot's domain is zoomable, and {@code false}
+     * otherwise.
      *
      * @return A boolean.
      *
@@ -67,8 +67,8 @@ public interface Zoomable {
     public boolean isDomainZoomable();
 
     /**
-     * Returns {@code true} if the plot's range is zoomable, and
-     * {@code false} otherwise.
+     * Returns {@code true} if the plot's range is zoomable, and {@code false} 
+     * otherwise.
      *
      * @return A boolean.
      *
@@ -79,13 +79,13 @@ public interface Zoomable {
     /**
      * Returns the orientation of the plot.
      *
-     * @return The orientation.
+     * @return The orientation (never {@code null}).
      */
     public PlotOrientation getOrientation();
 
     /**
      * Multiplies the range on the domain axis/axes by the specified factor.
-     * The <code>source</code> point can be used in some cases to identify a
+     * The {@code source} point can be used in some cases to identify a
      * subplot, or to determine the center of zooming (refer to the
      * documentation of the implementing class for details).
      *
@@ -96,11 +96,11 @@ public interface Zoomable {
      * @see #zoomRangeAxes(double, PlotRenderingInfo, Point2D)
      */
     public void zoomDomainAxes(double factor, PlotRenderingInfo state,
-                               Point2D source);
+            Point2D source);
 
     /**
      * Multiplies the range on the domain axis/axes by the specified factor.
-     * The <code>source</code> point can be used in some cases to identify a
+     * The {@code source} point can be used in some cases to identify a
      * subplot, or to determine the center of zooming (refer to the
      * documentation of the implementing class for details).
      *
@@ -114,10 +114,10 @@ public interface Zoomable {
      * @since 1.0.7
      */
     public void zoomDomainAxes(double factor, PlotRenderingInfo state,
-                               Point2D source, boolean useAnchor);
+            Point2D source, boolean useAnchor);
 
     /**
-     * Zooms in on the domain axes.  The <code>source</code> point can be used
+     * Zooms in on the domain axes.  The {@code source} point can be used
      * in some cases to identify a subplot for zooming.
      *
      * @param lowerPercent  the new lower bound.
@@ -128,11 +128,11 @@ public interface Zoomable {
      * @see #zoomRangeAxes(double, double, PlotRenderingInfo, Point2D)
      */
     public void zoomDomainAxes(double lowerPercent, double upperPercent,
-                               PlotRenderingInfo state, Point2D source);
+            PlotRenderingInfo state, Point2D source);
 
     /**
      * Multiplies the range on the range axis/axes by the specified factor.
-     * The <code>source</code> point can be used in some cases to identify a
+     * The {@code source} point can be used in some cases to identify a
      * subplot, or to determine the center of zooming (refer to the
      * documentation of the implementing class for details).
      *
@@ -143,11 +143,11 @@ public interface Zoomable {
      * @see #zoomDomainAxes(double, PlotRenderingInfo, Point2D)
      */
     public void zoomRangeAxes(double factor, PlotRenderingInfo state,
-                              Point2D source);
+            Point2D source);
 
     /**
      * Multiplies the range on the range axis/axes by the specified factor.
-     * The <code>source</code> point can be used in some cases to identify a
+     * The {@code source} point can be used in some cases to identify a
      * subplot, or to determine the center of zooming (refer to the
      * documentation of the implementing class for details).
      *
@@ -161,10 +161,10 @@ public interface Zoomable {
      * @since 1.0.7
      */
     public void zoomRangeAxes(double factor, PlotRenderingInfo state,
-                              Point2D source, boolean useAnchor);
+            Point2D source, boolean useAnchor);
 
     /**
-     * Zooms in on the range axes.  The <code>source</code> point can be used
+     * Zooms in on the range axes.  The {@code source} point can be used
      * in some cases to identify a subplot for zooming.
      *
      * @param lowerPercent  the new lower bound.
@@ -175,6 +175,6 @@ public interface Zoomable {
      * @see #zoomDomainAxes(double, double, PlotRenderingInfo, Point2D)
      */
     public void zoomRangeAxes(double lowerPercent, double upperPercent,
-                              PlotRenderingInfo state, Point2D source);
+            PlotRenderingInfo state, Point2D source);
 
 }
