@@ -131,7 +131,7 @@
         </javadoc>
         <!-- copy across .png files -->
         <copy todir="${basedir}/javadoc/images">
-            <fileset dir="${basedir}/docfiles">
+            <fileset dir="${basedir}/src/main/javadoc/images">
                 <include name="*.png" />
             </fileset>
         </copy>
@@ -190,11 +190,6 @@
 
         <copy todir="${basedir}/distribution/svg">
             <fileset dir="${basedir}/svg">
-            </fileset>
-        </copy>
-
-        <copy todir="${basedir}/distribution/docfiles">
-            <fileset dir="${basedir}/docfiles">
             </fileset>
         </copy>
 
