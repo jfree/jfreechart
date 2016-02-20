@@ -84,7 +84,7 @@ import org.jfree.fx.FXGraphics2D;
  * The {@code FontSmoothingType} for the underlying {@code GraphicsContext} is
  * set to {@code FontSmoothingType.LCD} as this gives better results on the 
  * systems we've tested on.  You can modify this using 
- * {@code getGraphicsContext().setFontSmoothingType(yourValue)}.
+ * {@code getGraphicsContext().setFontSmoothingType(yourValue)}.</p>
  * 
  * <p>THE API FOR THIS CLASS IS SUBJECT TO CHANGE IN FUTURE RELEASES.  This is
  * so that we can incorporate feedback on the (new) JavaFX support in 
@@ -134,6 +134,18 @@ public class ChartCanvas extends Canvas implements ChartChangeListener {
     
     /** The auxiliary mouse handlers (can be empty but not null). */
     private List<MouseHandlerFX> auxiliaryMouseHandlers;
+
+    /** 
+     * A flag that can be used to override the plot setting for domain (x) axis
+     * zooming. 
+     */
+    private boolean domainZoomable;
+    
+    /** 
+     * A flag that can be used to override the plot setting for range (y) axis
+     * zooming. 
+     */
+    private boolean rangeZoomable;
     
     /**
      * Creates a new canvas to display the supplied chart in JavaFX.  If
@@ -201,6 +213,56 @@ public class ChartCanvas extends Canvas implements ChartChangeListener {
         draw();
     }
     
+    /**
+     * Returns the flag that determines whether or not zooming is enabled for
+     * the domain axis.
+     *
+     * @return A boolean.
+     * 
+     * @since 1.0.20
+     */
+    public boolean isDomainZoomable() {
+        return this.domainZoomable;
+    }
+    
+    /**
+     * Sets the flag that controls whether or not domain axis zooming is 
+     * enabled.  If the underlying plot does not support domain axis zooming,
+     * then setting this flag to {@code true} will have no effect.
+     * 
+     * @param zoomable
+     * 
+     * @since 1.0.20
+     */
+    public void setDomainZoomable(boolean zoomable) {
+        this.domainZoomable = zoomable;
+    }
+    
+    /**
+     * Returns the flag that determines whether or not zooming is enabled for
+     * the range axis.
+     *
+     * @return A boolean.
+     * 
+     * @since 1.0.20
+     */
+    public boolean isRangeZoomable() {
+        return this.rangeZoomable;
+    }
+
+    /**
+     * Sets the flag that controls whether or not range axis zooming is 
+     * enabled.  If the underlying plot does not support range axis zooming,
+     * then setting this flag to {@code true} will have no effect.
+     * 
+     * @param zoomable
+     * 
+     * @since 1.0.20
+     */
+    public void setRangeZoomable(boolean zoomable) {
+        this.rangeZoomable = zoomable;
+    }
+
     /**
      * Returns the rendering info from the most recent drawing of the chart.
      * 
