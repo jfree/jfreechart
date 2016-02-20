@@ -44,15 +44,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import javafx.event.ActionEvent;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Control;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Skinnable;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
-import javafx.stage.WindowEvent;
 import org.jfree.chart.ChartMouseEvent;
 import org.jfree.chart.ChartRenderingInfo;
 import org.jfree.chart.JFreeChart;
@@ -64,7 +61,7 @@ import org.jfree.chart.util.ParamChecks;
 /**
  * A control for displaying a {@link JFreeChart} in JavaFX (embeds a 
  * {@link ChartCanvas}, adds drag zooming and provides a popup menu for export
- * to PNG/JPG/SVG and PDF formats).  Many behaviours(tooltips, zooming etc) are 
+ * to PNG/JPG/SVG and PDF formats).  Many behaviours (tooltips, zooming etc) are 
  * provided directly by the canvas.
  * 
  * <p>THE API FOR THIS CLASS IS SUBJECT TO CHANGE IN FUTURE RELEASES.  This is
@@ -163,21 +160,8 @@ public class ChartViewer extends Control implements Skinnable,
      * @since 1.0.20
      */
     public ChartCanvas getCanvas() {
-        return this.canvas;
-    }
-    
-    /**
-     * Sets the canvas used within this control to display the chart.
-     * This method is called by the control's skin, you should not need to
-     * call it directly.
-     * 
-     * @param canvas  the canvas ({@code null} not permitted). 
-     * 
-     * @since 1.0.20
-     */
-    public void setCanvas(ChartCanvas canvas) {
-        ParamChecks.nullNotPermitted(canvas, "canvas");
-        this.canvas = canvas;
+        ChartViewerSkin skin = (ChartViewerSkin) getSkin();
+        return skin.getCanvas();
     }
 
     /**

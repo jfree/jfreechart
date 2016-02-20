@@ -89,6 +89,15 @@ public class ChartViewerSkin extends SkinBase<ChartViewer>  {
     }
     
     /**
+     * Returns the {@code ChartCanvas} used to display the chart.
+     * 
+     * @return The chart canvas. 
+     */
+    public ChartCanvas getCanvas() {
+        return this.canvas;    
+    } 
+    
+    /**
      * Returns the rendering info from the most recent drawing of the chart.
      * 
      * @return The rendering info (possibly {@code null}).
@@ -196,8 +205,6 @@ public class ChartViewerSkin extends SkinBase<ChartViewer>  {
  
         this.canvas.addMouseHandler(new ZoomHandlerFX("zoom", control));
         sp.getChildren().add(this.canvas);
-        getSkinnable().setCanvas(canvas); // give the ChartViewer a reference
-                                          // to the canvas
         borderPane.setCenter(sp);
         return borderPane;
     }
