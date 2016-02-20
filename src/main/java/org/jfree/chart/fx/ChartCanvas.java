@@ -47,6 +47,8 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Tooltip;
@@ -59,6 +61,8 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.entity.ChartEntity;
 import org.jfree.chart.event.ChartChangeEvent;
 import org.jfree.chart.event.ChartChangeListener;
+import org.jfree.chart.event.OverlayChangeEvent;
+import org.jfree.chart.event.OverlayChangeListener;
 import org.jfree.chart.fx.interaction.AnchorHandlerFX;
 import org.jfree.chart.fx.interaction.DispatchHandlerFX;
 import org.jfree.chart.fx.interaction.ChartMouseEventFX;
@@ -67,6 +71,7 @@ import org.jfree.chart.fx.interaction.TooltipHandlerFX;
 import org.jfree.chart.fx.interaction.ScrollHandlerFX;
 import org.jfree.chart.fx.interaction.PanHandlerFX;
 import org.jfree.chart.fx.interaction.MouseHandlerFX;
+import org.jfree.chart.fx.overlay.OverlayFX;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.util.ParamChecks;
 import org.jfree.fx.FXGraphics2D;
@@ -92,7 +97,8 @@ import org.jfree.fx.FXGraphics2D;
  * 
  * @since 1.0.18
  */
-public class ChartCanvas extends Canvas implements ChartChangeListener {
+public class ChartCanvas extends Canvas implements ChartChangeListener,
+        OverlayChangeListener {
     
     /** The chart being displayed in the canvas. */
     private JFreeChart chart;
@@ -134,7 +140,9 @@ public class ChartCanvas extends Canvas implements ChartChangeListener {
     
     /** The auxiliary mouse handlers (can be empty but not null). */
     private List<MouseHandlerFX> auxiliaryMouseHandlers;
-
+    
+    private ObservableList<OverlayFX> overlays;
+    
     /** 
      * A flag that can be used to override the plot setting for domain (x) axis
      * zooming. 
@@ -179,7 +187,9 @@ public class ChartCanvas extends Canvas implements ChartChangeListener {
         this.auxiliaryMouseHandlers.add(new ScrollHandlerFX("scroll"));
         this.auxiliaryMouseHandlers.add(new AnchorHandlerFX("anchor"));
         this.auxiliaryMouseHandlers.add(new DispatchHandlerFX("dispatch"));
-        
+
+        this.overlays = FXCollections.observableArrayList();
+
         setOnMouseMoved(e -> handleMouseMoved(e));
         setOnMouseClicked(e -> handleMouseClicked(e));
         setOnMousePressed(e -> handleMousePressed(e));
@@ -308,6 +318,48 @@ public class ChartCanvas extends Canvas implements ChartChangeListener {
     }
 
     /**
+     * Add an overlay to the canvas.
+     *
+     * @param overlay  the overlay ({@code null} not permitted).
+     *
+     * @since 1.0.20
+     */
+    public void addOverlay(OverlayFX overlay) {
+        ParamChecks.nullNotPermitted(overlay, "overlay");
+        this.overlays.add(overlay);
+        overlay.addChangeListener(this);
+        draw();
+    }
+
+    /**
+     * Removes an overlay from the canvas.
+     *
+     * @param overlay  the overlay to remove ({@code null} not permitted).
+     *
+     * @since 1.0.20
+     */
+    public void removeOverlay(OverlayFX overlay) {
+        ParamChecks.nullNotPermitted(overlay, "overlay");
+        boolean removed = this.overlays.remove(overlay);
+        if (removed) {
+            overlay.removeChangeListener(this);
+            draw();
+        }
+    }
+
+    /**
+     * Handles a change to an overlay by repainting the chart canvas.
+     *
+     * @param event  the event.
+     *
+     * @since 1.0.20
+     */
+    @Override
+    public void overlayChanged(OverlayChangeEvent event) {
+        draw();
+    }
+
+    /**
      * Registers a listener to receive {@link ChartMouseEvent} notifications.
      *
      * @param listener  the listener ({@code null} not permitted).
@@ -425,6 +477,9 @@ public class ChartCanvas extends Canvas implements ChartChangeListener {
             }
         }
         ctx.restore();
+        for (OverlayFX overlay : this.overlays) {
+            overlay.paintOverlay(g2, this);
+        }
         this.anchor = null;
     }
  
