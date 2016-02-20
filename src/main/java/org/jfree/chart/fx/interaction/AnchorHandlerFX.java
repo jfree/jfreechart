@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * -------------------
- * ClickHandlerFX.java
- * -------------------
- * (C) Copyright 2014, by Object Refinery Limited and Contributors.
+ * --------------------
+ * AnchorHandlerFX.java
+ * --------------------
+ * (C) Copyright 2014-2016, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
