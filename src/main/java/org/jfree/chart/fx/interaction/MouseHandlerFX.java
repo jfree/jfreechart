@@ -36,7 +36,9 @@
  * --------
  * 25-Jun-2014 : Version 1 (DG);
  *
- */package org.jfree.chart.fx.interaction;
+ */
+
+package org.jfree.chart.fx.interaction;
 
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
