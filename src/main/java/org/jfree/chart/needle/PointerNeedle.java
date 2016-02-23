@@ -27,7 +27,7 @@
  * ------------------
  * PointerNeedle.java
  * ------------------
- * (C) Copyright 2002-2008, by the Australian Antarctic Division and
+ * (C) Copyright 2002-2016, by the Australian Antarctic Division and
  *                          Contributors.
  *
  * Original Author:  Bryan Scott (for the Australian Antarctic Division);
@@ -55,8 +55,8 @@ import java.io.Serializable;
  * A needle in the shape of a pointer, for use with the
  * {@link org.jfree.chart.plot.CompassPlot} class.
  */
-public class PointerNeedle extends MeterNeedle
-                           implements Cloneable, Serializable {
+public class PointerNeedle extends MeterNeedle implements Cloneable, 
+        Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -4744677345334729606L;
@@ -71,7 +71,7 @@ public class PointerNeedle extends MeterNeedle
      */
     @Override
     protected void drawNeedle(Graphics2D g2, Rectangle2D plotArea,
-                              Point2D rotate, double angle) {
+            Point2D rotate, double angle) {
 
         GeneralPath shape1 = new GeneralPath();
         GeneralPath shape2 = new GeneralPath();
@@ -153,7 +153,7 @@ public class PointerNeedle extends MeterNeedle
      *
      * @return A clone.
      *
-     * @throws CloneNotSupportedException if the <code>PointerNeedle</code>
+     * @throws CloneNotSupportedException if the {@code PointerNeedle}
      *     cannot be cloned (in theory, this should not happen).
      */
     @Override

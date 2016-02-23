@@ -27,7 +27,7 @@
  * --------------------
  * MiddlePinNeedle.java
  * --------------------
- * (C) Copyright 2002-2008, by the Australian Antarctic Division and
+ * (C) Copyright 2002-2016, by the Australian Antarctic Division and
  *                          Contributors.
  *
  * Original Author:  Bryan Scott (for the Australian Antarctic Division);
@@ -56,8 +56,8 @@ import java.io.Serializable;
 /**
  * A needle that is drawn as a pin shape.
  */
-public class MiddlePinNeedle extends MeterNeedle
-                             implements Cloneable, Serializable {
+public class MiddlePinNeedle extends MeterNeedle implements Cloneable, 
+        Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 6237073996403125310L;
@@ -72,7 +72,7 @@ public class MiddlePinNeedle extends MeterNeedle
      */
     @Override
     protected void drawNeedle(Graphics2D g2, Rectangle2D plotArea,
-                              Point2D rotate, double angle) {
+            Point2D rotate, double angle) {
 
         Area shape;
         GeneralPath pointer = new GeneralPath();
@@ -146,7 +146,7 @@ public class MiddlePinNeedle extends MeterNeedle
      *
      * @return A clone.
      *
-     * @throws CloneNotSupportedException if the <code>MiddlePinNeedle</code>
+     * @throws CloneNotSupportedException if the {@code MiddlePinNeedle}
      *     cannot be cloned (in theory, this should not happen).
      */
     @Override

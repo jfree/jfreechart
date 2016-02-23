@@ -27,7 +27,7 @@
  * ---------------
  * LongNeedle.java
  * ---------------
- * (C) Copyright 2002-2008, by the Australian Antarctic Division and
+ * (C) Copyright 2002-2016, by the Australian Antarctic Division and
  *                          Contributors.
  *
  * Original Author:  Bryan Scott (for the Australian Antarctic Division);
@@ -55,8 +55,7 @@ import java.io.Serializable;
 /**
  * A needle that is represented by a long line.
  */
-public class LongNeedle extends MeterNeedle
-                        implements Cloneable, Serializable {
+public class LongNeedle extends MeterNeedle implements Cloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -4319985779783688159L;
@@ -79,7 +78,7 @@ public class LongNeedle extends MeterNeedle
      */
     @Override
     protected void drawNeedle(Graphics2D g2, Rectangle2D plotArea,
-                              Point2D rotate, double angle) {
+            Point2D rotate, double angle) {
 
         GeneralPath shape1 = new GeneralPath();
         GeneralPath shape2 = new GeneralPath();
@@ -125,7 +124,6 @@ public class LongNeedle extends MeterNeedle
             s3 = shape3.createTransformedShape(transform);
         }
 
-
         if (getHighlightPaint() != null) {
             g2.setPaint(getHighlightPaint());
             g2.fill(s3);
@@ -136,7 +134,6 @@ public class LongNeedle extends MeterNeedle
             g2.fill(s1);
             g2.fill(s2);
         }
-
 
         if (getOutlinePaint() != null) {
             g2.setStroke(getOutlineStroke());
@@ -180,7 +177,7 @@ public class LongNeedle extends MeterNeedle
      *
      * @return A clone.
      *
-     * @throws CloneNotSupportedException if the <code>LongNeedle</code>
+     * @throws CloneNotSupportedException if the {@code LongNeedle}
      *     cannot be cloned (in theory, this should not happen).
      */
     @Override

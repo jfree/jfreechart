@@ -27,7 +27,7 @@
  * ---------------
  * LineNeedle.java
  * ---------------
- * (C) Copyright 2002-2008, by the Australian Antarctic Division and
+ * (C) Copyright 2002-2016, by the Australian Antarctic Division and
  *                           Contributors.
  *
  * Original Author:  Bryan Scott (for the Australian Antarctic Division);
@@ -55,8 +55,7 @@ import java.io.Serializable;
 /**
  * A needle that is represented by a line.
  */
-public class LineNeedle extends MeterNeedle
-                        implements Cloneable, Serializable {
+public class LineNeedle extends MeterNeedle implements Cloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 6215321387896748945L;
@@ -71,7 +70,7 @@ public class LineNeedle extends MeterNeedle
      */
     @Override
     protected void drawNeedle(Graphics2D g2, Rectangle2D plotArea,
-                              Point2D rotate, double angle) {
+            Point2D rotate, double angle) {
 
         Line2D shape = new Line2D.Double();
 
@@ -123,7 +122,7 @@ public class LineNeedle extends MeterNeedle
      *
      * @return A clone.
      *
-     * @throws CloneNotSupportedException if the <code>LineNeedle</code>
+     * @throws CloneNotSupportedException if the {@code LineNeedle}
      *     cannot be cloned (in theory, this should not happen).
      */
     @Override
@@ -132,4 +131,3 @@ public class LineNeedle extends MeterNeedle
     }
 
 }
-

@@ -27,7 +27,7 @@
  * ----------------
  * MeterNeedle.java
  * ----------------
- * (C) Copyright 2002-2008, by the Australian Antarctic Division and
+ * (C) Copyright 2002-2016, by the Australian Antarctic Division and
  *                          Contributors.
  *
  * Original Author:  Bryan Scott (for the Australian Antarctic Division);
@@ -91,10 +91,10 @@ public abstract class MeterNeedle implements Serializable {
     /** The size. */
     private int size = 5;
 
-    /** Scalar to aply to locate the rotation x point. */
+    /** Scalar to apply to locate the rotation x point. */
     private double rotateX = 0.5;
 
-    /** Scalar to aply to locate the rotation y point. */
+    /** Scalar to apply to locate the rotation y point. */
     private double rotateY = 0.5;
 
     /** A transform. */
@@ -254,14 +254,10 @@ public abstract class MeterNeedle implements Serializable {
      * @param angle  the angle.
      */
     public void draw(Graphics2D g2, Rectangle2D plotArea, double angle) {
-
         Point2D.Double pt = new Point2D.Double();
-        pt.setLocation(
-            plotArea.getMinX() + this.rotateX * plotArea.getWidth(),
-            plotArea.getMinY() + this.rotateY * plotArea.getHeight()
-        );
+        pt.setLocation(plotArea.getMinX() + this.rotateX * plotArea.getWidth(),
+                plotArea.getMinY() + this.rotateY * plotArea.getHeight());
         draw(g2, plotArea, pt, angle);
-
     }
 
     /**
@@ -273,7 +269,7 @@ public abstract class MeterNeedle implements Serializable {
      * @param angle  the angle.
      */
     public void draw(Graphics2D g2, Rectangle2D plotArea, Point2D rotate,
-                     double angle) {
+            double angle) {
 
         Paint savePaint = g2.getColor();
         Stroke saveStroke = g2.getStroke();
@@ -282,7 +278,6 @@ public abstract class MeterNeedle implements Serializable {
 
         g2.setStroke(saveStroke);
         g2.setPaint(savePaint);
-
     }
 
     /**
@@ -293,9 +288,8 @@ public abstract class MeterNeedle implements Serializable {
      * @param rotate  the rotation point.
      * @param angle  the angle.
      */
-    protected abstract void drawNeedle(Graphics2D g2,
-                                       Rectangle2D plotArea, Point2D rotate,
-                                       double angle);
+    protected abstract void drawNeedle(Graphics2D g2, Rectangle2D plotArea, 
+            Point2D rotate, double angle);
 
     /**
      * Displays a shape.
@@ -304,7 +298,6 @@ public abstract class MeterNeedle implements Serializable {
      * @param shape  the shape.
      */
     protected void defaultDisplay(Graphics2D g2, Shape shape) {
-
         if (this.fillPaint != null) {
             g2.setPaint(this.fillPaint);
             g2.fill(shape);
@@ -315,7 +308,6 @@ public abstract class MeterNeedle implements Serializable {
             g2.setPaint(this.outlinePaint);
             g2.draw(shape);
         }
-
     }
 
     /**

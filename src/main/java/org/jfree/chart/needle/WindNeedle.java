@@ -27,7 +27,7 @@
  * ---------------
  * WindNeedle.java
  * ---------------
- * (C) Copyright 2002-2008, by the Australian Antarctic Division and
+ * (C) Copyright 2002-2016, by the Australian Antarctic Division and
  *                          Contributors.
  *
  * Original Author:  Bryan Scott (for the Australian Antarctic Division);
@@ -52,8 +52,7 @@ import java.io.Serializable;
  * A needle that indicates wind direction, for use with the
  * {@link org.jfree.chart.plot.CompassPlot} class.
  */
-public class WindNeedle extends ArrowNeedle
-                                implements Cloneable, Serializable {
+public class WindNeedle extends ArrowNeedle implements Cloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -2861061368907167834L;
@@ -75,7 +74,7 @@ public class WindNeedle extends ArrowNeedle
      */
     @Override
     protected void drawNeedle(Graphics2D g2, Rectangle2D plotArea,
-                              Point2D rotate, double angle) {
+            Point2D rotate, double angle) {
 
         super.drawNeedle(g2, plotArea, rotate, angle);
         if ((rotate != null) && (plotArea != null)) {
