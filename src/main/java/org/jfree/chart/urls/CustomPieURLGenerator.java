@@ -66,7 +66,7 @@ public class CustomPieURLGenerator implements PieURLGenerator,
     private ArrayList urls;
 
     /**
-     * Creates a new <code>CustomPieURLGenerator</code> instance, initially
+     * Creates a new {@code CustomPieURLGenerator} instance, initially
      * empty.  Call {@link #addURLs(Map)} to specify the URL fragments to be
      * used.
      */
@@ -141,10 +141,10 @@ public class CustomPieURLGenerator implements PieURLGenerator,
     }
 
     /**
-     * Adds a map containing <code>(key, URL)</code> mappings where each
-     * {@code key} is an instance of <code>Comparable</code>
+     * Adds a map containing {@code (key, URL)} mappings where each
+     * {@code key} is an instance of {@code Comparable}
      * (corresponding to the key for an item in a pie dataset) and each
-     * <code>URL</code> is a {@code String} representing a URL fragment.
+     * {@code URL} is a {@code String} representing a URL fragment.
      * <br><br>
      * The map is appended to an internal list...you can add multiple maps
      * if you are working with, say, a {@link MultiplePiePlot}.

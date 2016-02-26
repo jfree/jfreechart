@@ -50,11 +50,11 @@ import org.jfree.ui.RectangleEdge;
  * developing a class that implements this interface, bear in mind the
  * following:
  * <ul>
- * <li>the <code>equals(Object)</code> method should be overridden;</li>
+ * <li>the {@code equals(Object)} method should be overridden;</li>
  * <li>instances of the class should be immutable OR implement the
- *     <code>PublicCloneable</code> interface, so that a renderer using the
+ *     {@code PublicCloneable} interface, so that a renderer using the
  *     painter can be cloned reliably;
- * <li>the class should be <code>Serializable</code>, otherwise chart
+ * <li>the class should be {@code Serializable}, otherwise chart
  *     serialization will not be supported.</li>
  * </ul>
  *

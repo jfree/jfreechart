@@ -70,7 +70,7 @@ public abstract class AbstractCategoryItemLabelGenerator
     private static final long serialVersionUID = -7108591260223293197L;
 
     /**
-     * The label format string used by a <code>MessageFormat</code> object to
+     * The label format string used by a {@code MessageFormat} object to
      * combine the standard items:  {0} = series name, {1} = category,
      * {2} = value, {3} = value as a percentage of the column total.
      */

@@ -97,7 +97,7 @@ public class DialTextAnnotation extends AbstractDialLayer implements DialLayer,
     private TextAnchor anchor;
 
     /**
-     * Creates a new instance of <code>DialTextAnnotation</code>.
+     * Creates a new instance of {@code DialTextAnnotation}.
      *
      * @param label  the label ({@code null} not permitted).
      */

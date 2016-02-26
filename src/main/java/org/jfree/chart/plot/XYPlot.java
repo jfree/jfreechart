@@ -309,7 +309,7 @@ import org.jfree.util.PublicCloneable;
  * A general class for plotting data in the form of (x, y) pairs.  This plot can
  * use data from any class that implements the {@link XYDataset} interface.
  * <P>
- * <code>XYPlot</code> makes use of an {@link XYItemRenderer} to draw each point
+ * {@code XYPlot} makes use of an {@link XYItemRenderer} to draw each point
  * on the plot.  By using different renderers, various chart types can be
  * produced.
  * <p>
@@ -607,7 +607,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
     private ShadowGenerator shadowGenerator;
 
     /**
-     * Creates a new <code>XYPlot</code> instance with no dataset, no axes and
+     * Creates a new {@code XYPlot} instance with no dataset, no axes and
      * no renderer.  You should specify these items before using the plot.
      */
     public XYPlot() {
@@ -618,7 +618,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      * Creates a new plot with the specified dataset, axes and renderer.  Any
      * of the arguments can be {@code null}, but in that case you should
      * take care to specify the value before using the plot (otherwise a
-     * <code>NullPointerException</code> may be thrown).
+     * {@code NullPointerException} may be thrown).
      *
      * @param dataset  the dataset ({@code null} permitted).
      * @param domainAxis  the domain axis ({@code null} permitted).
@@ -3678,7 +3678,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      * Draws a representation of the data within the dataArea region, using the
      * current renderer.
      * <P>
-     * The {@code info} and <code>crosshairState</code> arguments may be
+     * The {@code info} and {@code crosshairState} arguments may be
      * {@code null}.
      *
      * @param g2  the graphics device.

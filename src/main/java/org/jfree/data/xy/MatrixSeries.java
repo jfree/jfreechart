@@ -91,7 +91,7 @@ public class MatrixSeries extends Series implements Serializable {
 
     /**
      * Return the matrix item at the specified index.  Note that this method
-     * creates a new <code>Double</code> instance every time it is called.
+     * creates a new {@code double} instance every time it is called.
      *
      * @param itemIndex item index.
      *

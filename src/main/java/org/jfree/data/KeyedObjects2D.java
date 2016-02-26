@@ -211,10 +211,10 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      *
      * @return The object (possibly {@code null}).
      *
-     * @throws IllegalArgumentException if <code>rowKey</code> or
-     *         <code>columnKey</code> is {@code null}.
-     * @throws UnknownKeyException if <code>rowKey</code> or
-     *         <code>columnKey</code> is not recognised.
+     * @throws IllegalArgumentException if {@code rowKey} or
+     *         {@code columnKey} is {@code null}.
+     * @throws UnknownKeyException if {@code rowKey} or
+     *         {@code columnKey} is not recognised.
      */
     public Object getObject(Comparable rowKey, Comparable columnKey) {
         ParamChecks.nullNotPermitted(rowKey, "rowKey");
@@ -362,7 +362,7 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      *
      * @param rowKey  the row key ({@code null} not permitted).
      *
-     * @throws UnknownKeyException if <code>rowKey</code> is not recognised.
+     * @throws UnknownKeyException if {@code rowKey} is not recognised.
      *
      * @see #removeColumn(Comparable)
      */
@@ -392,7 +392,7 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      *
      * @param columnKey  the column key ({@code null} not permitted).
      *
-     * @throws UnknownKeyException if <code>rowKey</code> is not recognised.
+     * @throws UnknownKeyException if {@code rowKey} is not recognised.
      *
      * @see #removeRow(Comparable)
      */

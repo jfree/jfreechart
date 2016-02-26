@@ -147,7 +147,7 @@ public abstract class AbstractDataset implements Dataset, Cloneable,
     /**
      * Sets the notify flag, which controls whether or not the {@link #fireDatasetChanged()}
      * method notifies listeners.  Setting this flag to {@code true} will
-     * trigger a <code>DatasetChangeEvent</code> because there may be 
+     * trigger a {@code DatasetChangeEvent} because there may be 
      * queued up changes.
      * 
      * @param notify  the new flag value.
@@ -205,7 +205,7 @@ public abstract class AbstractDataset implements Dataset, Cloneable,
 
     /**
      * Notifies all registered listeners that the dataset has changed, 
-     * provided that the <code>notify</code> flag has not been set to 
+     * provided that the {@code notify} flag has not been set to 
      * {@code false}.
      *
      * @see #addChangeListener(DatasetChangeListener)

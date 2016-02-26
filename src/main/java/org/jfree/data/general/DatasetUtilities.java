@@ -354,7 +354,7 @@ public final class DatasetUtilities {
 
     /**
      * Creates a {@link CategoryDataset} that contains a copy of the data in an
-     * array (instances of <code>Double</code> are created to represent the
+     * array (instances of {@code double} are created to represent the
      * data items).
      * <p>
      * Row and column keys are created by appending 0, 1, 2, ... to the
@@ -411,7 +411,7 @@ public final class DatasetUtilities {
 
     /**
      * Creates a {@link CategoryDataset} that contains a copy of the data in
-     * an array (instances of <code>Double</code> are created to represent the
+     * an array (instances of {@code double} are created to represent the
      * data items).
      * <p>
      * Row and column keys are taken from the supplied arrays.

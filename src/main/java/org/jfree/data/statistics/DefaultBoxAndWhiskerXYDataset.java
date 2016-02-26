@@ -135,7 +135,7 @@ public class DefaultBoxAndWhiskerXYDataset extends AbstractXYDataset
      * of values included. Currently only used to ensure farout coefficient is
      * greater than the outlier coefficient
      *
-     * @return A <code>double</code> representing the value used to calculate
+     * @return A {@code double} representing the value used to calculate
      *         outliers.
      *
      * @see #setOutlierCoefficient(double)
@@ -148,7 +148,7 @@ public class DefaultBoxAndWhiskerXYDataset extends AbstractXYDataset
     /**
      * Sets the value used as the outlier coefficient
      *
-     * @param outlierCoefficient  being a <code>double</code> representing the
+     * @param outlierCoefficient  being a {@code double} representing the
      *                            value used to calculate outliers.
      *
      * @see #getOutlierCoefficient()
@@ -161,7 +161,7 @@ public class DefaultBoxAndWhiskerXYDataset extends AbstractXYDataset
      * Returns the value used as the farout coefficient. The farout coefficient
      * allows the calculation of which values will be off the graph.
      *
-     * @return A <code>double</code> representing the value used to calculate
+     * @return A {@code double} representing the value used to calculate
      *         farouts.
      *
      * @see #setFaroutCoefficient(double)
@@ -175,7 +175,7 @@ public class DefaultBoxAndWhiskerXYDataset extends AbstractXYDataset
      * Sets the value used as the farouts coefficient. The farout coefficient
      * must b greater than the outlier coefficient.
      *
-     * @param faroutCoefficient being a <code>double</code> representing the
+     * @param faroutCoefficient being a {@code double} representing the
      *                          value used to calculate farouts.
      *
      * @see #getFaroutCoefficient()

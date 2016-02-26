@@ -215,11 +215,11 @@ public abstract class DataUtilities {
 
     /**
      * Constructs an array of {@code Number} objects from an array of
-     * <code>double</code> primitives.
+     * {@code double} primitives.
      *
      * @param data  the data ({@code null} not permitted).
      *
-     * @return An array of <code>Double</code>.
+     * @return An array of {@code double}.
      */
     public static Number[] createNumberArray(double[] data) {
         ParamChecks.nullNotPermitted(data, "data");
@@ -232,11 +232,11 @@ public abstract class DataUtilities {
 
     /**
      * Constructs an array of arrays of {@code Number} objects from a
-     * corresponding structure containing <code>double</code> primitives.
+     * corresponding structure containing {@code double} primitives.
      *
      * @param data  the data ({@code null} not permitted).
      *
-     * @return An array of <code>Double</code>.
+     * @return An array of {@code double}.
      */
     public static Number[][] createNumberArray2D(double[][] data) {
         ParamChecks.nullNotPermitted(data, "data");
