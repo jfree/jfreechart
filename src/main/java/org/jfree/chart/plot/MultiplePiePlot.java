@@ -310,7 +310,7 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
 
     /**
      * Returns the paint used to draw the pie section representing the
-     * aggregated items.  The default value is <code>Color.lightGray</code>.
+     * aggregated items.  The default value is {code Color.lightGray}.
      *
      * @return The paint.
      *
@@ -498,7 +498,7 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
     }
 
     /**
-     * For each key in the dataset, check the <code>sectionPaints</code>
+     * For each key in the dataset, check the {@code sectionPaints}
      * cache to see if a paint is associated with that key and, if not,
      * fetch one from the drawing supplier.  These colors are cached so that
      * the legend and all the subplots use consistent colors.

@@ -360,7 +360,7 @@ public class DefaultCategoryDataset extends AbstractDataset
      *
      * @see #removeRow(Comparable)
      *
-     * @throws UnknownKeyException if <code>columnKey</code> is not defined
+     * @throws UnknownKeyException if {@code columnKey} is not defined
      *         in the dataset.
      */
     public void removeColumn(Comparable columnKey) {
