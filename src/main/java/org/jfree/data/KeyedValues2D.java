@@ -56,7 +56,7 @@ public interface KeyedValues2D extends Values2D {
      *
      * @return The row key.
      *
-     * @throws IndexOutOfBoundsException if <code>row</code> is out of bounds.
+     * @throws IndexOutOfBoundsException if {@code row} is out of bounds.
      */
     public Comparable getRowKey(int row);
 
@@ -83,7 +83,7 @@ public interface KeyedValues2D extends Values2D {
      *
      * @return The column key.
      *
-     * @throws IndexOutOfBoundsException if <code>row</code> is out of bounds.
+     * @throws IndexOutOfBoundsException if {@code row} is out of bounds.
      */
     public Comparable getColumnKey(int column);
 

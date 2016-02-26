@@ -54,7 +54,7 @@ public interface WindDataset extends XYDataset {
      * @param series  the series (in the range {@code 0} to
      *     {@code getSeriesCount() - 1}).
      * @param item  the item (in the range {@code 0} to
-     *     <code>getItemCount(series) - 1</code>).
+     *     {@code getItemCount(series) - 1}).
      *
      * @return The wind direction.
      */
@@ -68,7 +68,7 @@ public interface WindDataset extends XYDataset {
      * @param series  the series (in the range {@code 0} to
      *     {@code getSeriesCount() - 1}).
      * @param item  the item (in the range {@code 0} to
-     *     <code>getItemCount(series) - 1</code>).
+     *     {@code getItemCount(series) - 1}).
      *
      * @return The wind force.
      */

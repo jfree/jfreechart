@@ -50,7 +50,7 @@ import org.jfree.data.ComparableObjectItem;
 public class XYIntervalDataItem extends ComparableObjectItem {
 
     /**
-     * Creates a new instance of <code>XYIntervalItem</code>.
+     * Creates a new instance of {@code XYIntervalItem}.
      *
      * @param x  the x-value.
      * @param xLow  the lower bound of the x-interval.

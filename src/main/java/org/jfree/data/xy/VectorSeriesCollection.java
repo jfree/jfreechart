@@ -65,7 +65,7 @@ public class VectorSeriesCollection extends AbstractXYDataset
     private List data;
 
     /**
-     * Creates a new instance of <code>VectorSeriesCollection</code>.
+     * Creates a new {@code VectorSeriesCollection} instance.
      */
     public VectorSeriesCollection() {
         this.data = new java.util.ArrayList();
