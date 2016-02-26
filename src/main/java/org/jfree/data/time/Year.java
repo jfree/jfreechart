@@ -268,7 +268,7 @@ public class Year extends RegularTimePeriod implements Serializable {
      *
      * @return The first millisecond of the year.
      *
-     * @throws NullPointerException if <code>calendar</code> is
+     * @throws NullPointerException if {@code calendar} is
      *     {@code null}.
      */
     @Override
@@ -286,7 +286,7 @@ public class Year extends RegularTimePeriod implements Serializable {
      *
      * @return The last millisecond of the year.
      *
-     * @throws NullPointerException if <code>calendar</code> is
+     * @throws NullPointerException if {@code calendar} is
      *     {@code null}.
      */
     @Override

@@ -343,7 +343,7 @@ public abstract class RegularTimePeriod implements TimePeriod, Comparable,
 
     /**
      * Returns the millisecond (relative to the epoch) corresponding to the 
-     * specified <code>anchor</code> using the supplied <code>calendar</code> 
+     * specified <code>anchor</code> using the supplied {@code calendar} 
      * (which incorporates a time zone).
      * 
      * @param anchor  the anchor ({@code null} not permitted).

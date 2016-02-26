@@ -701,11 +701,8 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      * Sets the location at which the current value is displayed and sends a
      * {@link PlotChangeEvent} to all registered listeners.
      * <P>
-     * The location can be one of the constants:
-     * <code>NONE</code>,
-     * <code>RIGHT</code>
-     * <code>LEFT</code> and
-     * <code>BULB</code>.
+     * The location can be one of the constants: {@code NONE}, {@code RIGHT},
+     * {@code LEFT} and {@code BULB}.
      *
      * @param location  the location.
      */

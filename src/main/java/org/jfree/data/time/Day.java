@@ -193,7 +193,7 @@ public class Day extends RegularTimePeriod implements Serializable {
      * Returns the day as a {@link SerialDate}.  Note: the reference that is
      * returned should be an instance of an immutable {@link SerialDate}
      * (otherwise the caller could use the reference to alter the state of
-     * this <code>Day</code> instance, and <code>Day</code> is supposed
+     * this {@code Day} instance, and {@code Day} is supposed
      * to be immutable).
      *
      * @return The day as a {@link SerialDate}.
@@ -331,7 +331,7 @@ public class Day extends RegularTimePeriod implements Serializable {
      *
      * @return The start of the day as milliseconds since 01-01-1970.
      *
-     * @throws NullPointerException if <code>calendar</code> is
+     * @throws NullPointerException if {@code calendar} is
      *     {@code null}.
      */
     @Override
@@ -353,7 +353,7 @@ public class Day extends RegularTimePeriod implements Serializable {
      *
      * @return The end of the day as milliseconds since 01-01-1970.
      *
-     * @throws NullPointerException if <code>calendar</code> is
+     * @throws NullPointerException if {@code calendar} is
      *     {@code null}.
      */
     @Override
@@ -396,8 +396,8 @@ public class Day extends RegularTimePeriod implements Serializable {
      * Returns a hash code for this object instance.  The approach described by
      * Joshua Bloch in "Effective Java" has been used here:
      * <p>
-     * <code>http://developer.java.sun.com/developer/Books/effectivejava
-     * /Chapter3.pdf</code>
+     * {@code http://developer.java.sun.com/developer/Books/effectivejava
+     * /Chapter3.pdf}
      *
      * @return A hash code.
      */

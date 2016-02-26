@@ -86,7 +86,7 @@ import org.jfree.chart.util.ParamChecks;
  * to 53, although in many cases the 53rd week is empty.  Most of the time, the
  * 1st week of the year *begins* in the previous calendar year, but it always
  * finishes in the current year (this behaviour matches the workings of the
- * <code>GregorianCalendar</code> class).
+ * {@code GregorianCalendar} class).
  * <P>
  * This class is immutable, which is a requirement for all
  * {@link RegularTimePeriod} subclasses.
@@ -381,7 +381,7 @@ public class Week extends RegularTimePeriod implements Serializable {
      *
      * @return The first millisecond of the week.
      *
-     * @throws NullPointerException if <code>calendar</code> is
+     * @throws NullPointerException if {@code calendar} is
      *     {@code null}.
      */
     @Override
@@ -406,7 +406,7 @@ public class Week extends RegularTimePeriod implements Serializable {
      *
      * @return The last millisecond of the week.
      *
-     * @throws NullPointerException if <code>calendar</code> is
+     * @throws NullPointerException if {@code calendar} is
      *     {@code null}.
      */
     @Override
@@ -469,8 +469,8 @@ public class Week extends RegularTimePeriod implements Serializable {
      * Returns a hash code for this object instance.  The approach described by
      * Joshua Bloch in "Effective Java" has been used here:
      * <p>
-     * <code>http://developer.java.sun.com/developer/Books/effectivejava
-     * /Chapter3.pdf</code>
+     * {@code http://developer.java.sun.com/developer/Books/effectivejava
+     * /Chapter3.pdf}
      *
      * @return A hash code.
      */

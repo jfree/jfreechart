@@ -134,7 +134,7 @@ public class Month extends RegularTimePeriod implements Serializable {
     }
 
     /**
-     * Constructs a new <code>Month</code> instance, based on a date/time and
+     * Constructs a new {@code Month} instance, based on a date/time and
      * the default time zone.
      *
      * @param time  the date/time ({@code null} not permitted).
@@ -146,7 +146,7 @@ public class Month extends RegularTimePeriod implements Serializable {
     }
 
     /**
-     * Constructs a new <code>Month</code> instance, based on a date/time and
+     * Constructs a new {@code Month} instance, based on a date/time and
      * a time zone.  The first and last millisecond values are initially
      * pegged to the given time zone also.
      *
@@ -161,7 +161,7 @@ public class Month extends RegularTimePeriod implements Serializable {
     }
 
     /**
-     * Creates a new <code>Month</code> instance, based on the specified time,
+     * Creates a new {@code Month} instance, based on the specified time,
      * zone and locale.
      *
      * @param time  the current time.
@@ -353,8 +353,8 @@ public class Month extends RegularTimePeriod implements Serializable {
      * Returns a hash code for this object instance.  The approach described by
      * Joshua Bloch in "Effective Java" has been used here:
      * <p>
-     * <code>http://developer.java.sun.com/developer/Books/effectivejava
-     * /Chapter3.pdf</code>
+     * {@code http://developer.java.sun.com/developer/Books/effectivejava
+     * /Chapter3.pdf}
      *
      * @return A hash code.
      */
@@ -416,7 +416,7 @@ public class Month extends RegularTimePeriod implements Serializable {
      *
      * @return The first millisecond of the month.
      *
-     * @throws NullPointerException if <code>calendar</code> is
+     * @throws NullPointerException if {@code calendar} is
      *     {@code null}.
      */
     @Override
@@ -434,7 +434,7 @@ public class Month extends RegularTimePeriod implements Serializable {
      *
      * @return The last millisecond of the month.
      *
-     * @throws NullPointerException if <code>calendar</code> is
+     * @throws NullPointerException if {@code calendar} is
      *     {@code null}.
      */
     @Override

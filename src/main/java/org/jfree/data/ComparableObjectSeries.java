@@ -134,7 +134,7 @@ public class ComparableObjectSeries extends Series
 
     /**
      * Returns the maximum number of items that will be retained in the series.
-     * The default value is <code>Integer.MAX_VALUE</code>.
+     * The default value is {@code Integer.MAX_VALUE}.
      *
      * @return The maximum item count.
      * @see #setMaximumItemCount(int)

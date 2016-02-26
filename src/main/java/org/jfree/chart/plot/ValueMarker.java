@@ -128,9 +128,9 @@ public class ValueMarker extends Marker {
      *
      * <ul>
      * <li>{@code obj} is not {@code null};</li>
-     * <li>{@code obj} is an instance of <code>ValueMarker</code>;</li>
+     * <li>{@code obj} is an instance of {@code ValueMarker};</li>
      * <li>{@code obj} has the same value as this marker;</li>
-     * <li><code>super.equals(obj)</code> returns {@code true}.</li>
+     * <li>{@code super.equals(obj)} returns {@code true}.</li>
      * </ul>
      *
      * @param obj  the object ({@code null} permitted).

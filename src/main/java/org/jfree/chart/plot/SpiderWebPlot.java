@@ -413,7 +413,7 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      *
      * @param order the order ({@code null} not permitted).
      *
-     * @throws IllegalArgumentException if <code>order</code> is
+     * @throws IllegalArgumentException if {@code order} is
      *     {@code null}.
      *
      * @see #getDataExtractOrder()
@@ -1366,9 +1366,9 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
     }
 
     /**
-     * Returns the value to be plotted at the interseries of the
+     * Returns the value to be plotted at the intersection of the
      * series and the category.  This allows us to plot
-     * <code>BY_ROW</code> or <code>BY_COLUMN</code> which basically is just
+     * {@code BY_ROW} or {@code BY_COLUMN} which basically is just
      * reversing the definition of the categories and data series being
      * plotted.
      *

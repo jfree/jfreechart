@@ -55,7 +55,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * Wrapper for a <code>java.util.Date</code> object that allows it to be used
+ * Wrapper for a {@code java.util.Date} object that allows it to be used
  * as a {@link RegularTimePeriod}.  This class is immutable, which is a
  * requirement for all {@link RegularTimePeriod} subclasses.
  */

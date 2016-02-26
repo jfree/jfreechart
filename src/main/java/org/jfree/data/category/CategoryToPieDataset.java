@@ -163,7 +163,7 @@ public class CategoryToPieDataset extends AbstractDataset
      * @return The value (possibly {@code null}).
      *
      * @throws IndexOutOfBoundsException if {@code item} is not in the
-     *     range {@code 0} to <code>getItemCount() - 1</code>.
+     *     range {@code 0} to {@code getItemCount() -1}.
      */
     @Override
     public Number getValue(int item) {
@@ -186,11 +186,11 @@ public class CategoryToPieDataset extends AbstractDataset
      * Returns the key at the specified index.
      *
      * @param index  the item index (in the range {@code 0} to
-     *     <code>getItemCount() - 1</code>).
+     *     {@code getItemCount() -1}).
      *
      * @return The key.
      *
-     * @throws IndexOutOfBoundsException if <code>index</code> is not in the
+     * @throws IndexOutOfBoundsException if {@code index} is not in the
      *     specified range.
      */
     @Override

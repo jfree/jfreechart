@@ -335,7 +335,7 @@ public class Minute extends RegularTimePeriod implements Serializable {
      *
      * @return The first millisecond.
      *
-     * @throws NullPointerException if <code>calendar</code> is
+     * @throws NullPointerException if {@code calendar} is
      *     {@code null}.
      */
     @Override
@@ -359,7 +359,7 @@ public class Minute extends RegularTimePeriod implements Serializable {
      *
      * @return The last millisecond.
      *
-     * @throws NullPointerException if <code>calendar</code> is
+     * @throws NullPointerException if {@code calendar} is
      *     {@code null}.
      */
     @Override
@@ -408,8 +408,8 @@ public class Minute extends RegularTimePeriod implements Serializable {
      * Returns a hash code for this object instance.  The approach described
      * by Joshua Bloch in "Effective Java" has been used here:
      * <p>
-     * <code>http://developer.java.sun.com/developer/Books/effectivejava
-     * /Chapter3.pdf</code>
+     * {@code http://developer.java.sun.com/developer/Books/effectivejava
+     * /Chapter3.pdf}
      *
      * @return A hash code.
      */

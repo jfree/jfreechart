@@ -308,9 +308,9 @@ public class DefaultKeyedValues implements KeyedValues, Cloneable,
      * Removes a value from the collection.
      *
      * @param index  the index of the item to remove (in the range
-     *     {@code 0} to <code>getItemCount() - 1</code>).
+     *     {@code 0} to {@code getItemCount() -1}).
      *
-     * @throws IndexOutOfBoundsException if <code>index</code> is not within
+     * @throws IndexOutOfBoundsException if {@code index} is not within
      *     the specified range.
      */
     public void removeValue(int index) {

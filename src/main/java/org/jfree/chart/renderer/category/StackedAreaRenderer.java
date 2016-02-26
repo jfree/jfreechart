@@ -410,7 +410,7 @@ public class StackedAreaRenderer extends AreaRenderer
      *
      * @return An array containing the cumulative negative and positive values
      *     for all series values up to but excluding {@code series}
-     *     for <code>index</code>.
+     *     for {@code index}.
      */
     protected double[] getStackValues(CategoryDataset dataset,
             int series, int index, int[] validRows) {
