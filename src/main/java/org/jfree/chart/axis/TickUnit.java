@@ -135,7 +135,7 @@ public abstract class TickUnit implements Comparable, Serializable {
      *
      * @param object  the object to compare against.
      *
-     * @return <code>1</code> if the size of the other object is less than this,
+     * @return {@code 1} if the size of the other object is less than this,
      *      {@code 0} if both have the same size and {@code -1} this
      *      size is less than the others.
      */
