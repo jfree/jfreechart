@@ -97,8 +97,8 @@ public class DialCap extends AbstractDialLayer implements DialLayer, Cloneable,
     private transient Stroke outlineStroke;
 
     /**
-     * Creates a new instance of <code>StandardDialBackground</code>.  The
-     * default background paint is <code>Color.white</code>.
+     * Creates a new instance of {@code StandardDialBackground}.  The
+     * default background paint is {@code Color.WHITE}.
      */
     public DialCap() {
         this.radius = 0.05;

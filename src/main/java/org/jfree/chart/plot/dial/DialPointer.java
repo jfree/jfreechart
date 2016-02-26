@@ -84,7 +84,7 @@ public abstract class DialPointer extends AbstractDialLayer
     int datasetIndex;
 
     /**
-     * Creates a new <code>DialPointer</code> instance.
+     * Creates a new {@code DialPointer} instance.
      */
     protected DialPointer() {
         this(0);

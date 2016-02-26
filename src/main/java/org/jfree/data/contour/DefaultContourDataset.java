@@ -182,7 +182,7 @@ public class DefaultContourDataset extends AbstractXYZDataset
      *
      * @param data  the data.
      *
-     * @return An array of <code>Double</code> objects.
+     * @return An array of {@code double} objects.
      */
     public static Object[][] formObjectArray(double[][] data) {
         Object[][] object = new Double[data.length][data[0].length];
@@ -200,7 +200,7 @@ public class DefaultContourDataset extends AbstractXYZDataset
      *
      * @param data  the data.
      *
-     * @return An array of <code>Double</code> objects.
+     * @return An array of {@code double} objects.
      */
     public static Object[] formObjectArray(double[] data) {
         Object[] object = new Double[data.length];

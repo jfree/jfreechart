@@ -54,17 +54,17 @@ import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PolarPlot;
 
 /**
- * <code>PolarChartPanel</code> is the top level object for using the
- * {@link PolarPlot}. Since this class has a <code>JPanel</code> in the
+ * {@code PolarChartPanel} is the top level object for using the
+ * {@link PolarPlot}. Since this class has a {@code JPanel} in the
  * inheritance hierarchy, one uses this class to integrate the Polar plot into
  * their application.
  * <p>
- * The main modification to <code>ChartPanel</code> is the popup menu.  It
- * removes <code>ChartPanel</code>'s versions of:
+ * The main modification to {@code ChartPanel} is the popup menu.  It
+ * removes {@code ChartPanel}'s versions of:
  * <ul>
- *    <li><code>Zoom In</code></li>
- *    <li><code>Zoom Out</code></li>
- *    <li><code>Auto Range</code></li>
+ *    <li>{@code Zoom In}</li>
+ *    <li>{@code Zoom Out}</li>
+ *    <li>{@code Auto Range}</li>
  * </ul>
  * and replaces them with versions more appropriate for {@link PolarPlot}.
  */
