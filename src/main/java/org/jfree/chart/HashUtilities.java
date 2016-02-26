@@ -62,7 +62,7 @@ public class HashUtilities {
     
     /**
      * Returns a hash code for a {@code Paint} instance.  If 
-     * <code>p</code> is {@code null}, this method returns zero.
+     * {@code p} is {@code null}, this method returns zero.
      * 
      * @param p  the paint ({@code null} permitted).
      * 
@@ -92,7 +92,7 @@ public class HashUtilities {
     }
     
     /**
-     * Returns a hash code for a <code>double[]</code> instance.  If the array
+     * Returns a hash code for a {@code double[]} instance.  If the array
      * is {@code null}, this method returns zero.
      * 
      * @param a  the array ({@code null} permitted).
@@ -203,7 +203,7 @@ public class HashUtilities {
     }
 
     /**
-     * Returns a hash value based on a seed value and a <code>Comparable</code>
+     * Returns a hash value based on a seed value and a {@code Comparable}
      * instance.
      * 
      * @param pre  the seed value.
@@ -219,7 +219,7 @@ public class HashUtilities {
     }
 
     /**
-     * Returns a hash value based on a seed value and an <code>Object</code>
+     * Returns a hash value based on a seed value and an {@code Object}
      * instance.
      * 
      * @param pre  the seed value.
