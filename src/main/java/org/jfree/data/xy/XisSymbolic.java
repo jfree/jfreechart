@@ -57,7 +57,7 @@ public interface XisSymbolic {
 
     /**
      * Returns the symbolic value of the data set specified by
-     * <CODE>series</CODE> and {@code item} parameters.
+     * {@code series} and {@code item} parameters.
      *
      * @param series  value of the serie.
      * @param item  value of the item.
@@ -67,8 +67,7 @@ public interface XisSymbolic {
     public String getXSymbolicValue(int series, int item);
 
     /**
-     * Returns the symbolic value linked with the specified
-     * <CODE>Integer</CODE>.
+     * Returns the symbolic value linked with the specified {@code Integer}.
      *
      * @param val  value of the integer linked with the symbolic value.
      *

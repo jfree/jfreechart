@@ -190,7 +190,7 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
      * Sets the mode for displaying text in the center of the plot and sends 
      * a change event to all registered listeners.  For
      * {@link CenterTextMode#FIXED}, the display text will come from the 
-     * <code>centerText</code> attribute (see {@link #getCenterText()}).
+     * {@code centerText} attribute (see {@link #getCenterText()}).
      * For {@link CenterTextMode#VALUE}, the center text will be the value from
      * the first section in the dataset.
      * 
@@ -233,7 +233,7 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
     /**
      * Returns the formatter used to format the center text value for the mode
      * {@link CenterTextMode#VALUE}.  The default value is 
-     * <code>DecimalFormat("0.00");</code>.
+     * {@code DecimalFormat("0.00")}.
      * 
      * @return The formatter (never {@code null}).
      * 
@@ -284,7 +284,7 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
     
     /**
      * Returns the color for the center text.  The default value is
-     * <code>Color.BLACK</code>.
+     * {@code Color.BLACK}.
      * 
      * @return The color (never {@code null}). 
      * 

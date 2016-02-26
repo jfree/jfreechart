@@ -1716,7 +1716,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
 
     /**
      * Returns the order in which the columns are rendered.  The default value
-     * is <code>SortOrder.ASCENDING</code>.
+     * is {@code SortOrder.ASCENDING}.
      *
      * @return The column rendering order (never {@code null}).
      *
@@ -1745,7 +1745,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
 
     /**
      * Returns the order in which the rows should be rendered.  The default
-     * value is <code>SortOrder.ASCENDING</code>.
+     * value is {@code SortOrder.ASCENDING}.
      *
      * @return The order (never {@code null}).
      *
@@ -4622,7 +4622,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     }
 
     /**
-     * This method does nothing, because <code>CategoryPlot</code> doesn't
+     * This method does nothing, because {@code CategoryPlot} doesn't
      * support zooming on the domain.
      *
      * @param factor  the zoom factor.
@@ -4636,7 +4636,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     }
 
     /**
-     * This method does nothing, because <code>CategoryPlot</code> doesn't
+     * This method does nothing, because {@code CategoryPlot} doesn't
      * support zooming on the domain.
      *
      * @param lowerPercent  the lower bound.
@@ -4651,7 +4651,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     }
 
     /**
-     * This method does nothing, because <code>CategoryPlot</code> doesn't
+     * This method does nothing, because {@code CategoryPlot} doesn't
      * support zooming on the domain.
      *
      * @param factor  the zoom factor.

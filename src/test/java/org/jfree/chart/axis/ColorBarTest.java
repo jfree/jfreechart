@@ -50,7 +50,7 @@ import org.jfree.chart.plot.GreyPalette;
 import org.junit.Test;
 
 /**
- * Tests for the <code>ColorBar</code> class.
+ * Tests for the {@code ColorBar} class.
  */
 public class ColorBarTest {
 

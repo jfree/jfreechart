@@ -70,8 +70,8 @@ import org.jfree.util.PublicCloneable;
  * <p>
  * For the label format, use {0} where the pie section key should be inserted,
  * {1} for the absolute section value and {2} for the percent amount of the pie
- * section, e.g. <code>"{0} = {1} ({2})"</code> will display as
- * <code>apple = 120 (5%)</code>.
+ * section, e.g. {@code "{0} = {1} ({2})"} will display as
+ * {@code apple = 120 (5%)}.
  */
 public class StandardPieToolTipGenerator extends AbstractPieItemLabelGenerator
         implements PieToolTipGenerator, Cloneable, PublicCloneable,

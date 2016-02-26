@@ -60,7 +60,7 @@ public class YInterval implements Serializable {
     private double yHigh;
 
     /**
-     * Creates a new instance of <code>YInterval</code>.
+     * Creates a new instance of {@code YInterval}.
      *
      * @param y  the y-value.
      * @param yLow  the lower bound of the y-interval.

@@ -684,7 +684,7 @@ public abstract class Plot implements AxisChangeListener,
      * {@link PlotChangeEvent} to all registered listeners.  The drawing
      * supplier is responsible for supplying a limitless (possibly repeating)
      * sequence of {@code Paint}, {@code Stroke} and
-     * <code>Shape</code> objects that the plot's renderer(s) can use to
+     * {@code Shape} objects that the plot's renderer(s) can use to
      * populate its (their) tables.
      *
      * @param supplier  the new supplier.
@@ -701,7 +701,7 @@ public abstract class Plot implements AxisChangeListener,
      * {@link PlotChangeEvent} to all registered listeners.  The drawing
      * supplier is responsible for supplying a limitless (possibly repeating)
      * sequence of {@code Paint}, {@code Stroke} and
-     * <code>Shape</code> objects that the plot's renderer(s) can use to
+     * {@code Shape} objects that the plot's renderer(s) can use to
      * populate its (their) tables.
      *
      * @param supplier  the new supplier.
@@ -745,8 +745,7 @@ public abstract class Plot implements AxisChangeListener,
 
     /**
      * Returns the background image alignment. Alignment constants are defined
-     * in the <code>org.jfree.ui.Align</code> class in the JCommon class
-     * library.
+     * in the {@code org.jfree.ui.Align} class in the JCommon class library.
      *
      * @return The alignment.
      *
@@ -792,7 +791,7 @@ public abstract class Plot implements AxisChangeListener,
      * @param alpha  the alpha transparency (in the range 0.0f to 1.0f, where
      *     0.0f is fully transparent, and 1.0f is fully opaque).
      *
-     * @throws IllegalArgumentException if <code>alpha</code> is not within
+     * @throws IllegalArgumentException if {@code alpha} is not within
      *     the specified range.
      *
      * @see #getBackgroundImageAlpha()

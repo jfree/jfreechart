@@ -50,7 +50,7 @@ import org.jfree.chart.TestUtilities;
 import org.junit.Test;
 
 /**
- * Tests for the <code>ContourEntity</code> class.
+ * Tests for the {@code ContourEntity} class.
  */
 public class ContourEntityTest {
 

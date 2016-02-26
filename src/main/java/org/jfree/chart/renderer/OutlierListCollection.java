@@ -122,7 +122,7 @@ public class OutlierListCollection {
         this.lowFarOut = farOut;
     }
     /**
-     * Appends the specified element as a new <code>OutlierList</code> to the
+     * Appends the specified element as a new {@code OutlierList} to the
      * end of this list if it does not overlap an outlier in an existing list.
      *
      * If it does overlap, it is appended to the outlier list which it overlaps

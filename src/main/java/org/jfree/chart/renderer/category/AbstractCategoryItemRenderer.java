@@ -241,7 +241,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
 
     /**
      * Returns the number of passes through the dataset required by the
-     * renderer.  This method returns <code>1</code>, subclasses should
+     * renderer.  This method returns {@code 1}, subclasses should
      * override if they need more passes.
      *
      * @return The pass count.
