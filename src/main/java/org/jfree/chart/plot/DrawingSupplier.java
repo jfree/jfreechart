@@ -48,12 +48,12 @@ import java.awt.Shape;
 import java.awt.Stroke;
 
 /**
- * A supplier of {@code Paint}, {@code Stroke} and <code>Shape</code>
+ * A supplier of {@code Paint}, {@code Stroke} and {@code Shape}
  * objects for use by plots and renderers.  By providing a central place for
  * obtaining these items, we can ensure that duplication is avoided.
  * <p>
  * To support the cloning of charts, classes that implement this interface
- * should also implement <code>PublicCloneable</code>.
+ * should also implement {@code PublicCloneable}.
  */
 public interface DrawingSupplier {
 
@@ -97,7 +97,7 @@ public interface DrawingSupplier {
     public Stroke getNextOutlineStroke();
 
     /**
-     * Returns the next <code>Shape</code> object in a sequence maintained by
+     * Returns the next {@code Shape} object in a sequence maintained by
      * the supplier.
      *
      * @return The shape.

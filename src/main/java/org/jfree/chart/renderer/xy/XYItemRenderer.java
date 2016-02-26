@@ -117,7 +117,7 @@ import org.jfree.ui.Layer;
  * an {@link XYPlot}.
  * <p>
  * To support cloning charts, it is recommended that renderers implement both
- * the {@link Cloneable} and <code>PublicCloneable</code> interfaces.
+ * the {@link Cloneable} and {@code PublicCloneable} interfaces.
  */
 public interface XYItemRenderer extends LegendItemSource {
 
@@ -988,7 +988,7 @@ public interface XYItemRenderer extends LegendItemSource {
      * Returns the base item label font (this is used when no other font
      * setting is available).
      *
-     * @return The font (<code>never</code> null).
+     * @return The font (never {@code null}).
      *
      * @see #setBaseItemLabelFont(Font)
      */
@@ -1284,11 +1284,8 @@ public interface XYItemRenderer extends LegendItemSource {
      *
      * @return The number of passes the renderer requires.
      */
-    public XYItemRendererState initialise(Graphics2D g2,
-                                          Rectangle2D dataArea,
-                                          XYPlot plot,
-                                          XYDataset dataset,
-                                          PlotRenderingInfo info);
+    public XYItemRendererState initialise(Graphics2D g2, Rectangle2D dataArea,
+            XYPlot plot, XYDataset dataset, PlotRenderingInfo info);
 
     /**
      * Called for each item to be plotted.
@@ -1311,18 +1308,10 @@ public interface XYItemRenderer extends LegendItemSource {
      *                        ({@code null} permitted).
      * @param pass  the pass index.
      */
-    public void drawItem(Graphics2D g2,
-                         XYItemRendererState state,
-                         Rectangle2D dataArea,
-                         PlotRenderingInfo info,
-                         XYPlot plot,
-                         ValueAxis domainAxis,
-                         ValueAxis rangeAxis,
-                         XYDataset dataset,
-                         int series,
-                         int item,
-                         CrosshairState crosshairState,
-                         int pass);
+    public void drawItem(Graphics2D g2, XYItemRendererState state,
+            Rectangle2D dataArea, PlotRenderingInfo info, XYPlot plot,
+            ValueAxis domainAxis, ValueAxis rangeAxis, XYDataset dataset,
+            int series, int item, CrosshairState crosshairState, int pass);
 
     /**
      * Fills a band between two values on the axis.  This can be used to color
@@ -1335,11 +1324,8 @@ public interface XYItemRenderer extends LegendItemSource {
      * @param start  the start value.
      * @param end  the end value.
      */
-    public void fillDomainGridBand(Graphics2D g2,
-                                   XYPlot plot,
-                                   ValueAxis axis,
-                                   Rectangle2D dataArea,
-                                   double start, double end);
+    public void fillDomainGridBand(Graphics2D g2, XYPlot plot, ValueAxis axis,
+            Rectangle2D dataArea, double start, double end);
 
     /**
      * Fills a band between two values on the range axis.  This can be used to
@@ -1352,11 +1338,8 @@ public interface XYItemRenderer extends LegendItemSource {
      * @param start  the start value.
      * @param end  the end value.
      */
-    public void fillRangeGridBand(Graphics2D g2,
-                                  XYPlot plot,
-                                  ValueAxis axis,
-                                  Rectangle2D dataArea,
-                                  double start, double end);
+    public void fillRangeGridBand(Graphics2D g2, XYPlot plot, ValueAxis axis,
+            Rectangle2D dataArea, double start, double end);
 
     /**
      * Draws a grid line against the domain axis.
@@ -1368,11 +1351,8 @@ public interface XYItemRenderer extends LegendItemSource {
      *                  3D effect).
      * @param value  the value.
      */
-    public void drawDomainGridLine(Graphics2D g2,
-                                   XYPlot plot,
-                                   ValueAxis axis,
-                                   Rectangle2D dataArea,
-                                   double value);
+    public void drawDomainGridLine(Graphics2D g2, XYPlot plot, ValueAxis axis,
+            Rectangle2D dataArea, double value);
 
     /**
      * Draws a line perpendicular to the range axis.
@@ -1389,7 +1369,7 @@ public interface XYItemRenderer extends LegendItemSource {
             Rectangle2D dataArea, double value, Paint paint, Stroke stroke);
 
     /**
-     * Draws the specified <code>marker</code> against the domain axis.
+     * Draws the specified {@code marker} against the domain axis.
      *
      * @param g2  the graphics device.
      * @param plot  the plot.

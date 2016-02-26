@@ -172,8 +172,8 @@ import org.jfree.util.ObjectUtilities;
  * understand how this axis works if you bear in mind that it really
  * displays/measures integer (or long) data, where the integers are
  * milliseconds since midnight, 1-Jan-1970.  When displaying tick labels, the
- * millisecond values are converted back to dates using a
- * <code>DateFormat</code> instance.
+ * millisecond values are converted back to dates using a {@code DateFormat} 
+ * instance.
  * <P>
  * You can also create a {@link org.jfree.chart.axis.Timeline} and supply in
  * the constructor to create an axis that only contains certain domain values.
@@ -219,7 +219,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
 
     /**
      * A timeline that includes all milliseconds (as defined by
-     * <code>java.util.Date</code>) in the real time line.
+     * {@code java.util.Date}) in the real time line.
      */
     private static class DefaultTimeline implements Timeline, Serializable {
 
@@ -249,7 +249,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
 
         /**
          * Converts a timeline value into a millisecond (as encoded by
-         * <code>java.util.Date</code>).
+         * {@code java.util.Date}).
          *
          * @param value  the value.
          *
@@ -491,7 +491,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
     /**
      * Returns the tick unit for the axis.
      * <p>
-     * Note: if the <code>autoTickUnitSelection</code> flag is
+     * Note: if the {@code autoTickUnitSelection} flag is
      * {@code true} the tick unit may be changed while the axis is being
      * drawn, so in that case the return value from this method may be
      * irrelevant if the method is called before the axis has been drawn.
@@ -652,7 +652,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
     /**
      * Sets the minimum date visible on the axis and sends an
      * {@link AxisChangeEvent} to all registered listeners.  If
-     * <code>date</code> is on or after the current maximum date for
+     * {@code date} is on or after the current maximum date for
      * the axis, the maximum date will be shifted to preserve the current
      * length of the axis.
      *
@@ -700,7 +700,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
     /**
      * Sets the maximum date visible on the axis and sends an
      * {@link AxisChangeEvent} to all registered listeners.  If
-     * <code>maximumDate</code> is on or before the current minimum date for
+     * {@code maximumDate} is on or before the current minimum date for
      * the axis, the minimum date will be shifted to preserve the current
      * length of the axis.
      *

@@ -84,7 +84,7 @@ public class CategoryItemEntity extends ChartEntity
      * The category.
      *
      * @deprecated As of 1.0.6, this field is deprecated in favour of the
-     *         <code>columnKey</code> field.
+     *         {@code columnKey} field.
      */
     private Object category;
 
@@ -92,7 +92,7 @@ public class CategoryItemEntity extends ChartEntity
      * The category index.
      *
      * @deprecated As of 1.0.6, this field is redundant as you can derive the
-     *         index from the <code>columnKey</code> field.
+     *         index from the {@code columnKey} field.
      */
     private int categoryIndex;
 
@@ -282,7 +282,7 @@ public class CategoryItemEntity extends ChartEntity
      * @see #setCategory(Object)
      *
      * @deprecated The return type for this method should be
-     *         <code>Comparable</code>, so it has been deprecated as of
+     *         {@code Comparable}, so it has been deprecated as of
      *         version 1.0.6 and replaced by {@link #getColumnKey()}.
      */
     public Object getCategory() {
