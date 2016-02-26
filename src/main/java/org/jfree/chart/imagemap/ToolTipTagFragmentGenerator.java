@@ -42,7 +42,7 @@ package org.jfree.chart.imagemap;
 
 /**
  * Interface for generating the tooltip fragment of an HTML image map area tag.
- * The fragment should be <code>XHTML 1.0</code> compliant.
+ * The fragment should be {@code XHTML 1.0} compliant.
  */
 public interface ToolTipTagFragmentGenerator {
 
@@ -52,7 +52,7 @@ public interface ToolTipTagFragmentGenerator {
      * to return an 'alt' attribute IN ADDITION TO whatever it does to create
      * the tooltip (often a 'title' attribute).
      * <br><br>
-     * Note that the <code>toolTipText</code> may have been generated from
+     * Note that the {@code toolTipText} may have been generated from
      * user-defined data, so care should be taken to filter/escape any
      * characters that may corrupt the HTML tag.
      *
