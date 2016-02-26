@@ -48,8 +48,7 @@ public interface TickUnitSource {
 
     /**
      * Returns the smallest tick unit available in the source that is larger
-     * than <code>unit</code> or, if there is no larger unit, returns 
-     * <code>unit</code>.
+     * than {@code unit} or, if there is no larger unit, returns {@code unit}.
      *
      * @param unit  the unit ({@code null} not permitted).
      *

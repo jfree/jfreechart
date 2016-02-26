@@ -54,7 +54,7 @@ public class MarkerChangeEvent extends ChartChangeEvent {
     private Marker marker;
 
     /**
-     * Creates a new <code>MarkerChangeEvent</code> instance.
+     * Creates a new {@code MarkerChangeEvent} instance.
      *
      * @param marker  the marker that triggered the event ({@code null}
      *     not permitted).

@@ -55,7 +55,7 @@ public class AnnotationChangeEvent extends ChartChangeEvent {
     private Annotation annotation;
 
     /**
-     * Creates a new <code>AnnotationChangeEvent</code> instance.
+     * Creates a new {@code AnnotationChangeEvent} instance.
      *
      * @param source  the event source.
      * @param annotation  the annotation that triggered the event
