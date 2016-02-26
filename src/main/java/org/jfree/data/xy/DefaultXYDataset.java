@@ -127,9 +127,9 @@ public class DefaultXYDataset extends AbstractXYDataset
     /**
      * Returns the order of the domain (x-) values in the dataset.  In this
      * implementation, we cannot guarantee that the x-values are ordered, so
-     * this method returns <code>DomainOrder.NONE</code>.
+     * this method returns {@code DomainOrder.NONE}.
      *
-     * @return <code>DomainOrder.NONE</code>.
+     * @return {@code DomainOrder.NONE}.
      */
     @Override
     public DomainOrder getDomainOrder() {

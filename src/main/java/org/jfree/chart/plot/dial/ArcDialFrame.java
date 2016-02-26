@@ -112,7 +112,7 @@ public class ArcDialFrame extends AbstractDialLayer implements DialFrame,
     private double outerRadius;
 
     /**
-     * Creates a new instance of <code>ArcDialFrame</code> that spans
+     * Creates a new instance of {@code ArcDialFrame} that spans
      * 180 degrees.
      */
     public ArcDialFrame() {
@@ -120,7 +120,7 @@ public class ArcDialFrame extends AbstractDialLayer implements DialFrame,
     }
 
     /**
-     * Creates a new instance of <code>ArcDialFrame</code> that spans
+     * Creates a new instance of {@code ArcDialFrame} that spans
      * the arc specified.
      *
      * @param startAngle  the startAngle (in degrees).

@@ -50,7 +50,7 @@ import org.jfree.data.general.SeriesChangeListener;
 
 /**
  * Wrapper around a time series to convert it to a table model for use in
- * a <code>JTable</code>.
+ * a {@code JTable}.
  */
 public class TimeSeriesTableModel extends AbstractTableModel
         implements SeriesChangeListener {
