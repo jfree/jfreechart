@@ -372,8 +372,7 @@ public class LabelBlock extends AbstractBlock
     }
 
     /**
-     * Tests this <code>LabelBlock</code> for equality with an arbitrary
-     * object.
+     * Tests this {@code LabelBlock} for equality with an arbitrary object.
      *
      * @param obj  the object ({@code null} permitted).
      *
@@ -410,7 +409,7 @@ public class LabelBlock extends AbstractBlock
     }
 
     /**
-     * Returns a clone of this <code>LabelBlock</code> instance.
+     * Returns a clone of this {@code LabelBlock} instance.
      *
      * @return A clone.
      *
