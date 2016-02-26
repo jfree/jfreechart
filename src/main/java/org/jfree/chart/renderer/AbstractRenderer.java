@@ -152,7 +152,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     /** For serialization. */
     private static final long serialVersionUID = -828267569428206075L;
 
-    /** Zero represented as a <code>Double</code>. */
+    /** Zero represented as a {@code double}. */
     public static final Double ZERO = new Double(0.0);
 
     /** The default paint. */
@@ -766,7 +766,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * Returns the paint used to color data items as they are drawn.
      * <p>
      * The default implementation passes control to the
-     * <code>lookupSeriesPaint()</code> method. You can override this method
+     * {@code lookupSeriesPaint()} method. You can override this method
      * if you require different behaviour.
      *
      * @param row  the row (or series) index (zero-based).
@@ -1848,7 +1848,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
 
     /**
      * Returns the base setting for item label visibility.  A {@code null}
-     * result should be interpreted as equivalent to <code>Boolean.FALSE</code>.
+     * result should be interpreted as equivalent to {@code Boolean.FALSE}.
      *
      * @return A flag (possibly {@code null}).
      *
@@ -1878,7 +1878,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param visible  the flag ({@code null} is permitted, and viewed
-     *     as equivalent to <code>Boolean.FALSE</code>).
+     *     as equivalent to {@code Boolean.FALSE}).
      */
     public void setBaseItemLabelsVisible(Boolean visible) {
         setBaseItemLabelsVisible(visible, true);
@@ -1889,7 +1889,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param visible  the flag ({@code null} is permitted, and viewed
-     *     as equivalent to <code>Boolean.FALSE</code>).
+     *     as equivalent to {@code Boolean.FALSE}).
      * @param notify  a flag that controls whether or not listeners are
      *                notified.
      *
@@ -1971,7 +1971,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * Returns the base item label font (this is used when no other font
      * setting is available).
      *
-     * @return The font (<code>never</code> null).
+     * @return The font (never {@code null}).
      *
      * @see #setBaseItemLabelFont(Font)
      */

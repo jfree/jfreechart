@@ -97,7 +97,7 @@ public class IntervalCategoryItemLabelGenerator
 
     /**
      * Creates the array of items that can be passed to the
-     * <code>MessageFormat</code> class for creating labels.
+     * {@code MessageFormat} class for creating labels.
      *
      * @param dataset  the dataset ({@code null} not permitted).
      * @param row  the row index (zero-based).

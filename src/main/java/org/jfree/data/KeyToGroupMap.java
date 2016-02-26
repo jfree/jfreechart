@@ -60,7 +60,7 @@ import org.jfree.util.ObjectUtilities;
 import org.jfree.util.PublicCloneable;
 
 /**
- * A class that maps keys (instances of <code>Comparable</code>) to groups.
+ * A class that maps keys (instances of {@code Comparable}) to groups.
  */
 public class KeyToGroupMap implements Cloneable, PublicCloneable, Serializable {
 

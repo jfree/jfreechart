@@ -103,7 +103,7 @@ public class XYDrawableAnnotation extends AbstractXYAnnotation
 
     /**
      * Creates a new annotation to be displayed within the given area.  If you
-     * specify a <code>drawScaleFactor</code> of 2.0, the <code>drawable</code>
+     * specify a {@code drawScaleFactor} of 2.0, the {@code drawable}
      * will be drawn at twice the requested display size then scaled down to
      * fit the space.
      *

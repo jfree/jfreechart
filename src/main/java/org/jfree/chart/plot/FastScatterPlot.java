@@ -179,7 +179,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
             "org.jfree.chart.plot.LocalizationBundle");
 
     /**
-     * Creates a new instance of <code>FastScatterPlot</code> with default
+     * Creates a new instance of {@code FastScatterPlot} with default
      * axes.
      */
     public FastScatterPlot() {
@@ -323,7 +323,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
 
     /**
      * Returns the paint used to plot data points.  The default is
-     * <code>Color.red</code>.
+     * {@code Color.RED}.
      *
      * @return The paint.
      *
@@ -571,7 +571,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
 
     /**
      * Draws a representation of the data within the dataArea region.  The
-     * {@code info} and <code>crosshairState</code> arguments may be
+     * {@code info} and {@code crosshairState} arguments may be
      * {@code null}.
      *
      * @param g2  the graphics device.
@@ -994,7 +994,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
 
     /**
      * Tests an arbitrary object for equality with this plot.  Note that
-     * <code>FastScatterPlot</code> carries its data around with it (rather
+     * {@code FastScatterPlot} carries its data around with it (rather
      * than referencing a dataset), and the data is included in the
      * equality test.
      *

@@ -163,7 +163,7 @@ public interface BoxAndWhiskerXYDataset extends XYDataset {
      * of values included.  Currently only used to ensure farout coefficient
      * is greater than the outlier coefficient
      *
-     * @return A <code>double</code> representing the value used to calculate
+     * @return A {@code double} representing the value used to calculate
      *         outliers
      */
     public double getOutlierCoefficient();
@@ -172,7 +172,7 @@ public interface BoxAndWhiskerXYDataset extends XYDataset {
      * Returns the value used as the farout coefficient. The farout coefficient
      * allows the calculation of which values will be off the graph.
      *
-     * @return A <code>double</code> representing the value used to calculate
+     * @return A {@code double} representing the value used to calculate
      *         farouts
      */
     public double getFaroutCoefficient();

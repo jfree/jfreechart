@@ -112,7 +112,7 @@ public class CrosshairState {
     private double distance;
 
     /**
-     * Creates a new <code>CrosshairState</code> instance that calculates
+     * Creates a new {@code crosshairState} instance that calculates
      * distance in Java2D space.
      */
     public CrosshairState() {
@@ -120,7 +120,7 @@ public class CrosshairState {
     }
 
     /**
-     * Creates a new <code>CrosshairState</code> instance.
+     * Creates a new {@code crosshairState} instance.
      *
      * @param calculateDistanceInDataSpace  a flag that controls whether the
      *                                      distance is calculated in data

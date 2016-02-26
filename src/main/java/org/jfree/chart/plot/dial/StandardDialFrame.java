@@ -96,7 +96,7 @@ public class StandardDialFrame extends AbstractDialLayer implements DialFrame,
     private transient Stroke stroke;
 
     /**
-     * Creates a new instance of <code>StandardDialFrame</code>.
+     * Creates a new instance of {@code StandardDialFrame}.
      */
     public StandardDialFrame() {
         this.backgroundPaint = Color.gray;

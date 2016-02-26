@@ -999,7 +999,7 @@ public interface CategoryItemRenderer extends LegendItemSource {
 
     /**
      * Returns the base setting for item label visibility.  A {@code null}
-     * result should be interpreted as equivalent to <code>Boolean.FALSE</code>
+     * result should be interpreted as equivalent to {@code Boolean.FALSE}
      * (this is an error in the API design, the return value should have been
      * a boolean primitive).
      *
@@ -1280,7 +1280,7 @@ public interface CategoryItemRenderer extends LegendItemSource {
      * Returns the base item label font (this is used when no other font
      * setting is available).
      *
-     * @return The font (<code>never</code> null).
+     * @return The font (never {@code null}).
      *
      * @see #setBaseItemLabelFont(Font)
      */
