@@ -45,7 +45,7 @@ import org.junit.Test;
 
 
 /**
- * Tests for the <code>ColorPalette</code> class.
+ * Tests for the {@code ColorPalette} class.
  */
 public class ColorPaletteTest {
 

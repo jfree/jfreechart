@@ -359,7 +359,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
 
     /**
      * Returns the maximum number of items that will be retained in the series.
-     * The default value is <code>Integer.MAX_VALUE</code>.
+     * The default value is {@code Integer.MAX_VALUE}.
      *
      * @return The maximum item count.
      *
@@ -458,7 +458,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
 
     /**
      * Adds a new data item to the series (in the correct position if the
-     * <code>autoSort</code> flag is set for the series) and sends a
+     * {@code autoSort} flag is set for the series) and sends a
      * {@link SeriesChangeEvent} to all registered listeners.
      * <P>
      * Throws an exception if the x-value is a duplicate AND the
@@ -468,7 +468,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * @param y  the y-value ({@code null} permitted).
      *
      * @throws SeriesException if the x-value is a duplicate and the
-     *     <code>allowDuplicateXValues</code> flag is not set for this series.
+     *     {@code allowDuplicateXValues} flag is not set for this series.
      */
     public void add(Number x, Number y) {
         // argument checking delegated...

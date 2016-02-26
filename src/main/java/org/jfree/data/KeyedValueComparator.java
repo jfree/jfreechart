@@ -64,7 +64,7 @@ public class KeyedValueComparator implements Comparator, Serializable {
     /**
      * Creates a new comparator.
      *
-     * @param type  the type (<code>BY_KEY</code> or <code>BY_VALUE</code>,
+     * @param type  the type ({@code BY_KEY} or {@code BY_VALUE},
      *              {@code null} not permitted).
      * @param order  the order ({@code null} not permitted).
      */
@@ -96,7 +96,7 @@ public class KeyedValueComparator implements Comparator, Serializable {
 
     /**
      * Compares two {@link KeyedValue} instances and returns an
-     * <code>int</code> that indicates the relative order of the two objects.
+     * {@code int} that indicates the relative order of the two objects.
      *
      * @param o1  object 1.
      * @param o2  object 2.

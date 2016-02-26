@@ -73,7 +73,7 @@ public class OHLCSeriesCollection extends AbstractXYDataset
     private TimePeriodAnchor xPosition = TimePeriodAnchor.MIDDLE;
 
     /**
-     * Creates a new instance of <code>OHLCSeriesCollection</code>.
+     * Creates a new instance of {@code OHLCSeriesCollection}.
      */
     public OHLCSeriesCollection() {
         this.data = new java.util.ArrayList();

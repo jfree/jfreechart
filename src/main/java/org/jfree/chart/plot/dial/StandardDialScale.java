@@ -195,7 +195,7 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
      * @param lowerBound  the lower bound of the scale.
      * @param upperBound  the upper bound of the scale.
      * @param startAngle  the start angle (in degrees, using the same
-     *     orientation as Java's <code>Arc2D</code> class).
+     *     orientation as Java's {@code Arc2D} class).
      * @param extent  the extent (in degrees, counter-clockwise).
      * @param majorTickIncrement  the interval between major tick marks (must
      *     be &gt; 0).
@@ -288,7 +288,7 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
 
     /**
      * Returns the start angle for the scale (in degrees using the same
-     * orientation as Java's <code>Arc2D</code> class).
+     * orientation as Java's {@code Arc2D} class).
      *
      * @return The start angle.
      *
@@ -866,7 +866,7 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
     }
 
     /**
-     * Tests this <code>StandardDialScale</code> for equality with an arbitrary
+     * Tests this {@code StandardDialScale} for equality with an arbitrary
      * object.
      *
      * @param obj  the object ({@code null} permitted).

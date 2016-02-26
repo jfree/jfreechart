@@ -223,7 +223,7 @@ public class MovingAverage {
 
     /**
      * Creates a new {@link XYDataset} containing the moving averages of each
-     * series in the <code>source</code> dataset.
+     * series in the {@code source} dataset.
      *
      * @param source  the source dataset.
      * @param suffix  the string to append to source series names to create
@@ -244,7 +244,7 @@ public class MovingAverage {
 
     /**
      * Creates a new {@link XYDataset} containing the moving averages of each
-     * series in the <code>source</code> dataset.
+     * series in the {@code source} dataset.
      *
      * @param source  the source dataset.
      * @param suffix  the string to append to source series names to create
@@ -269,7 +269,7 @@ public class MovingAverage {
 
     /**
      * Creates a new {@link XYSeries} containing the moving averages of one
-     * series in the <code>source</code> dataset.
+     * series in the {@code source} dataset.
      *
      * @param source  the source dataset.
      * @param series  the series index (zero based).

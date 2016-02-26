@@ -82,7 +82,7 @@ public class CategoryToPieDataset extends AbstractDataset
      * An adaptor class that converts any {@link CategoryDataset} into a
      * {@link PieDataset}, by taking the values from a single row or column.
      * <p>
-     * If <code>source</code> is {@code null}, the created dataset will
+     * If {@code source} is {@code null}, the created dataset will
      * be empty.
      *
      * @param source  the source dataset ({@code null} permitted).

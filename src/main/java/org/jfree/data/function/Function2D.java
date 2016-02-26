@@ -42,7 +42,7 @@
 package org.jfree.data.function;
 
 /**
- * A function of the form <code>y = f(x)</code>.
+ * A function of the form {@code y = f(x)}.
  */
 public interface Function2D {
 

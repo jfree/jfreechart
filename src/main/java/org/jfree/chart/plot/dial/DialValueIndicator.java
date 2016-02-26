@@ -137,14 +137,14 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
     private TextAnchor textAnchor;
 
     /**
-     * Creates a new instance of <code>DialValueIndicator</code>.
+     * Creates a new instance of {@code DialValueIndicator}.
      */
     public DialValueIndicator() {
         this(0);
     }
 
     /**
-     * Creates a new instance of <code>DialValueIndicator</code>.
+     * Creates a new instance of {@code DialValueIndicator}.
      *
      * @param datasetIndex  the dataset index.
      */
@@ -193,7 +193,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
 
     /**
      * Returns the angle for the anchor point.  The angle is specified in
-     * degrees using the same orientation as Java's <code>Arc2D</code> class.
+     * degrees using the same orientation as Java's {@code Arc2D} class.
      *
      * @return The angle (in degrees).
      *

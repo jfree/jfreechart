@@ -83,8 +83,7 @@ public class StandardXYURLGenerator implements XYURLGenerator, Serializable {
 
     /**
      * Creates a new default generator.  This constructor is equivalent to
-     * calling <code>StandardXYURLGenerator("index.html", "series", "item");
-     * </code>.
+     * calling {@code StandardXYURLGenerator("index.html", "series", "item");}.
      */
     public StandardXYURLGenerator() {
         this(DEFAULT_PREFIX, DEFAULT_SERIES_PARAMETER, DEFAULT_ITEM_PARAMETER);
@@ -93,7 +92,7 @@ public class StandardXYURLGenerator implements XYURLGenerator, Serializable {
     /**
      * Creates a new generator with the specified prefix.  This constructor
      * is equivalent to calling
-     * <code>StandardXYURLGenerator(prefix, "series", "item");</code>.
+     * {@code StandardXYURLGenerator(prefix, "series", "item");}.
      *
      * @param prefix  the prefix to the URL ({@code null} not permitted).
      */

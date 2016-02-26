@@ -44,7 +44,7 @@ package org.jfree.data.xy;
 /**
  * Represents a dense normalized matrix M[i,j] where each Mij item of the
  * matrix has a value (default is 0). When a matrix item is observed using
- * <code>getItem</code> method, it is normalized, that is, divided by the
+ * {@code getItem()} method, it is normalized, that is, divided by the
  * total sum of all items. It can be also be scaled by setting a scale factor.
  */
 public class NormalizedMatrixSeries extends MatrixSeries {

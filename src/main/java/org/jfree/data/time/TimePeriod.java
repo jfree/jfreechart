@@ -46,7 +46,7 @@ import java.util.Date;
 
 /**
  * A period of time measured to millisecond precision using two instances of
- * <code>java.util.Date</code>.
+ * {@code java.util.Date}.
  */
 public interface TimePeriod extends Comparable {
 

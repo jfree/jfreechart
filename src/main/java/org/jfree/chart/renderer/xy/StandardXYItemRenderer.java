@@ -326,7 +326,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
      * filled.
      * <p>
      * The default implementation passes control to the
-     * <code>getSeriesShapesFilled</code> method.  You can override this method
+     * {@code getSeriesShapesFilled()} method.  You can override this method
      * if you require different behaviour.
      *
      * @param series  the series index (zero-based).

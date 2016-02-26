@@ -145,7 +145,7 @@ public class TimePeriodValues extends Series implements Serializable {
 
     /**
      * Sets the domain description and fires a property change event (with the
-     * property name <code>Domain</code> if the description changes).
+     * property name {@code Domain} if the description changes).
      *
      * @param description  the new description ({@code null} permitted).
      * 
@@ -171,7 +171,7 @@ public class TimePeriodValues extends Series implements Serializable {
 
     /**
      * Sets the range description and fires a property change event with the
-     * name <code>Range</code>.
+     * name {@code Range}.
      *
      * @param description  the new description ({@code null} permitted).
      * 

@@ -123,7 +123,7 @@ import org.jfree.util.PublicCloneable;
 /**
  * A renderer that draws candlesticks on an {@link XYPlot} (requires a
  * {@link OHLCDataset}).  The example shown here is generated
- * by the <code>CandlestickChartDemo1.java</code> program included in the
+ * by the {@code CandlestickChartDemo1.java} program included in the
  * JFreeChart demo collection:
  * <br><br>
  * <img src="../../../../../images/CandlestickRendererSample.png"
@@ -322,12 +322,12 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
      * Sets the method of automatically calculating the candle width and
      * sends a {@link RendererChangeEvent} to all registered listeners.
      * <p>
-     * <code>WIDTHMETHOD_AVERAGE</code>: Divides the entire display (ignoring
+     * {@code WIDTHMETHOD_AVERAGE}: Divides the entire display (ignoring
      * scale factor) by the number of items, and uses this as the available
      * width.<br>
-     * <code>WIDTHMETHOD_SMALLEST</code>: Checks the interval between each
+     * {@code WIDTHMETHOD_SMALLEST}: Checks the interval between each
      * item, and uses the smallest as the available width.<br>
-     * <code>WIDTHMETHOD_INTERVALDATA</code>: Assumes that the dataset supports
+     * {@code WIDTHMETHOD_INTERVALDATA}: Assumes that the dataset supports
      * the IntervalXYDataset interface, and uses the startXValue - endXValue as
      * the available width.
      * <br>

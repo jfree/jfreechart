@@ -56,9 +56,9 @@ public class URLUtilities {
             String.class};
 
     /**
-     * Calls <code>java.net.URLEncoder.encode(String, String)</code> via
+     * Calls {@code java.net.URLEncoder.encode(String, String)} via
      * reflection, if we are running on JRE 1.4 or later, otherwise reverts to
-     * the deprecated <code>URLEncoder.encode(String)</code> method.
+     * the deprecated {@code URLEncoder.encode(String)} method.
      *
      * @param s  the string to encode.
      * @param encoding  the encoding.

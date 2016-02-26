@@ -185,7 +185,7 @@ public class SlidingCategoryDataset extends AbstractDataset
      *
      * @return The column key.
      *
-     * @throws IndexOutOfBoundsException if <code>row</code> is out of bounds.
+     * @throws IndexOutOfBoundsException if {@code row} is out of bounds.
      */
     @Override
     public Comparable getColumnKey(int column) {
@@ -228,7 +228,7 @@ public class SlidingCategoryDataset extends AbstractDataset
      *
      * @return The row key.
      *
-     * @throws IndexOutOfBoundsException if <code>row</code> is out of bounds.
+     * @throws IndexOutOfBoundsException if {@code row} is out of bounds.
      */
     @Override
     public Comparable getRowKey(int row) {
@@ -307,7 +307,7 @@ public class SlidingCategoryDataset extends AbstractDataset
     }
 
     /**
-     * Tests this <code>SlidingCategoryDataset</code> for equality with an
+     * Tests this {@code SlidingCategoryDataset} for equality with an
      * arbitrary object.
      *
      * @param obj  the object ({@code null} permitted).

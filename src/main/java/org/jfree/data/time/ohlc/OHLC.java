@@ -65,7 +65,7 @@ public class OHLC implements Serializable {
     private double low;
 
     /**
-     * Creates a new instance of <code>OHLC</code>.
+     * Creates a new instance of {@code OHLC}.
      *
      * @param open  the open value.
      * @param close  the close value.

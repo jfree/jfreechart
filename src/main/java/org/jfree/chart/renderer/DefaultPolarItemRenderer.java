@@ -451,9 +451,9 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * @param series  the series.
      * @param item  the item.
      * @param entityX  the entity's center x-coordinate in user space (only
-     *                 used if <code>area</code> is {@code null}).
+     *                 used if {@code area} is {@code null}).
      * @param entityY  the entity's center y-coordinate in user space (only
-     *                 used if <code>area</code> is {@code null}).
+     *                 used if {@code area} is {@code null}).
      */
     protected void addEntity(EntityCollection entities, Shape area,
                              XYDataset dataset, int series, int item,

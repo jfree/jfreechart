@@ -51,7 +51,7 @@ import java.util.Date;
 import org.jfree.data.Range;
 
 /**
- * A range specified in terms of two <code>java.util.Date</code> objects.
+ * A range specified in terms of two {@code java.util.Date} objects.
  * Instances of this class are immutable.
  */
 public class DateRange extends Range implements Serializable {

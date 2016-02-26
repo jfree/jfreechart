@@ -59,7 +59,7 @@ public class Vector implements Serializable {
     private double y;
 
     /**
-     * Creates a new instance of <code>Vector</code>.
+     * Creates a new instance of {@code Vector}.
      *
      * @param x  the x-component.
      * @param y  the y-component.

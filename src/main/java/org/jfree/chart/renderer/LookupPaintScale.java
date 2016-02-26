@@ -244,7 +244,7 @@ public class LookupPaintScale
     }
 
     /**
-     * Adds an entry to the lookup table.  Any values from <code>n</code> up
+     * Adds an entry to the lookup table.  Any values from {@code n} up
      * to but not including the next value in the table take on the specified
      * {@code Paint}.
      *
@@ -258,7 +258,7 @@ public class LookupPaintScale
     }
 
     /**
-     * Adds an entry to the lookup table.  Any values from <code>n</code> up
+     * Adds an entry to the lookup table.  Any values from {@code n} up
      * to but not including the next value in the table take on the specified
      * {@code Paint}.
      *

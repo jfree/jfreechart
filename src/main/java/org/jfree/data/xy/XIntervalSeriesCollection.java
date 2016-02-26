@@ -66,7 +66,7 @@ public class XIntervalSeriesCollection extends AbstractIntervalXYDataset
     private List data;
 
     /**
-     * Creates a new instance of <code>XIntervalSeriesCollection</code>.
+     * Creates a new {@code XIntervalSeriesCollection} instance.
      */
     public XIntervalSeriesCollection() {
         this.data = new java.util.ArrayList();

@@ -66,7 +66,7 @@ public interface XYDataset extends SeriesDataset {
      * Returns the number of items in a series.
      * <br><br>
      * It is recommended that classes that implement this method should throw
-     * an <code>IllegalArgumentException</code> if the {@code series}
+     * an {@code IllegalArgumentException} if the {@code series}
      * argument is outside the specified range.
      *
      * @param series  the series index (in the range {@code 0} to

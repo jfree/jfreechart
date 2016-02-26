@@ -202,7 +202,7 @@ public class RelativeDateFormat extends DateFormat {
     /**
      * Sets the base date/time used to calculate the elapsed time for display.
      * This should be specified in milliseconds using the same encoding as
-     * <code>java.util.Date</code>.
+     * {@code java.util.Date}.
      *
      * @param baseMillis  the base date/time in milliseconds.
      *

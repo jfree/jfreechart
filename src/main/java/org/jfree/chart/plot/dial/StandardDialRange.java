@@ -100,14 +100,14 @@ public class StandardDialRange extends AbstractDialLayer implements DialLayer,
     private double outerRadius;
 
     /**
-     * Creates a new instance of <code>StandardDialRange</code>.
+     * Creates a new {@code StandardDialRange} instance.
      */
     public StandardDialRange() {
         this(0.0, 100.0, Color.white);
     }
 
     /**
-     * Creates a new instance of <code>StandardDialRange</code>.
+     * Creates a new {@code StandardDialRange} instance.
      *
      * @param lower  the lower bound.
      * @param upper  the upper bound.

@@ -214,7 +214,7 @@ public class KeyedObjects implements Cloneable, PublicCloneable, Serializable {
      * for that item and moves it to the specified position.
      *
      * @param position  the position (in the range {@code 0} to
-     *                  <code>getItemCount()</code>).
+     *                  {@code getItemCount()}).
      * @param key  the key ({@code null} not permitted).
      * @param value  the value ({@code null} permitted).
      *

@@ -211,7 +211,7 @@ public class IntervalXYDelegate implements DatasetChangeListener,
 
     /**
      * Sets the fixed interval width and, as a side effect, sets the
-     * <code>autoWidth</code> flag to {@code false}.
+     * {@code autoWidth} flag to {@code false}.
      * <br><br>
      * Note that changing the interval width amounts to changing the data
      * values represented by the dataset.  Therefore, the dataset

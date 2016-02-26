@@ -83,7 +83,7 @@ public class DefaultWindDataset extends AbstractXYDataset
      *
      * @param data  the data ({@code null} not permitted).
      *
-     * @throws NullPointerException if <code>data</code> is {@code null}.
+     * @throws NullPointerException if {@code data} is {@code null}.
      */
     public DefaultWindDataset(Object[][][] data) {
         this(seriesNameListFromDataArray(data), data);
@@ -96,8 +96,7 @@ public class DefaultWindDataset extends AbstractXYDataset
      *     permitted).
      * @param data  the wind data.
      *
-     * @throws NullPointerException if <code>seriesNames</code> is
-     *     {@code null}.
+     * @throws NullPointerException if {@code seriesNames} is {@code null}.
      */
     public DefaultWindDataset(String[] seriesNames, Object[][][] data) {
         this(Arrays.asList(seriesNames), data);
@@ -108,12 +107,12 @@ public class DefaultWindDataset extends AbstractXYDataset
      * can contain multiple series, each series can contain multiple items,
      * and each item is as follows:
      * <ul>
-     * <li><code>data[series][item][0]</code> - the date (either a
-     *   <code>Date</code> or a {@code Number} that is the milliseconds
+     * <li>{@code data[series][item][0]} - the date (either a
+     *   {@code Date} or a {@code Number} that is the milliseconds
      *   since 1-Jan-1970);</li>
-     * <li><code>data[series][item][1]</code> - the wind direction (1 - 12,
+     * <li>{@code data[series][item][1]} - the wind direction (1 - 12,
      *   like the numbers on a clock face);</li>
-     * <li><code>data[series][item][2]</code> - the wind force (1 - 12 on the
+     * <li>{@code data[series][item][2]} - the wind force (1 - 12 on the
      *   Beaufort scale)</li>
      * </ul>
      *
@@ -121,11 +120,11 @@ public class DefaultWindDataset extends AbstractXYDataset
      *     permitted).
      * @param data  the wind dataset ({@code null} not permitted).
      *
-     * @throws IllegalArgumentException if <code>seriesKeys</code> is
+     * @throws IllegalArgumentException if {@code seriesKeys} is
      *     {@code null}.
      * @throws IllegalArgumentException if the number of series keys does not
      *     match the number of series in the array.
-     * @throws NullPointerException if <code>data</code> is {@code null}.
+     * @throws NullPointerException if {@code data} is {@code null}.
      */
     public DefaultWindDataset(List seriesKeys, Object[][][] data) {
         ParamChecks.nullNotPermitted(seriesKeys, "seriesKeys");
@@ -231,7 +230,7 @@ public class DefaultWindDataset extends AbstractXYDataset
     /**
      * Returns the y-value for one item within a series.  This maps to the
      * {@link #getWindForce(int, int)} method and is implemented because
-     * <code>WindDataset</code> is an extension of {@link XYDataset}.
+     * {@code WindDataset} is an extension of {@link XYDataset}.
      *
      * @param series  the series (zero-based index).
      * @param item  the item (zero-based index).
@@ -282,7 +281,7 @@ public class DefaultWindDataset extends AbstractXYDataset
      *
      * @return An array of <i>Series N</i> with N = { 1 .. data.length }.
      *
-     * @throws NullPointerException if <code>data</code> is {@code null}.
+     * @throws NullPointerException if {@code data} is {@code null}.
      */
     public static List seriesNameListFromDataArray(Object[][] data) {
         int seriesCount = data.length;
@@ -294,12 +293,11 @@ public class DefaultWindDataset extends AbstractXYDataset
     }
 
     /**
-     * Checks this <code>WindDataset</code> for equality with an arbitrary
+     * Checks this {@code WindDataset} for equality with an arbitrary
      * object.  This method returns {@code true} if and only if:
      * <ul>
      *   <li>{@code obj} is not {@code null};</li>
-     *   <li>{@code obj} is an instance of
-     *       <code>DefaultWindDataset</code>;</li>
+     *   <li>{@code obj} is an instance of {@code DefaultWindDataset};</li>
      *   <li>both datasets have the same number of series containing identical
      *       values.</li>
      * </ul>
@@ -409,7 +407,7 @@ class WindDataItem implements Comparable, Serializable {
     }
 
     /**
-     * Tests this <code>WindDataItem</code> for equality with an arbitrary
+     * Tests this {@code WindDataItem} for equality with an arbitrary
      * object.
      *
      * @param obj  the object ({@code null} permitted).

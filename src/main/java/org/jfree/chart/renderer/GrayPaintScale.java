@@ -72,7 +72,7 @@ public class GrayPaintScale
     private int alpha;
 
     /**
-     * Creates a new <code>GrayPaintScale</code> instance with default values.
+     * Creates a new {@code GrayPaintScale} instance with default values.
      */
     public GrayPaintScale() {
         this(0.0, 1.0);
@@ -99,7 +99,7 @@ public class GrayPaintScale
      * @param alpha  the alpha transparency (0-255).
      *
      * @throws IllegalArgumentException if {@code lowerBound} is not
-     *       less than {@code upperBound}, or <code>alpha</code> is not in
+     *       less than {@code upperBound}, or {@code alpha} is not in
      *       the range 0 to 255.
      *
      * @since 1.0.13
@@ -174,12 +174,12 @@ public class GrayPaintScale
     }
 
     /**
-     * Tests this <code>GrayPaintScale</code> instance for equality with an
+     * Tests this {@code GrayPaintScale} instance for equality with an
      * arbitrary object.  This method returns {@code true} if and only
      * if:
      * <ul>
      * <li>{@code obj} is not {@code null};</li>
-     * <li>{@code obj} is an instance of <code>GrayPaintScale</code>;</li>
+     * <li>{@code obj} is an instance of {@code GrayPaintScale};</li>
      * </ul>
      *
      * @param obj  the object ({@code null} permitted).
@@ -222,7 +222,7 @@ public class GrayPaintScale
     }
 
     /**
-     * Returns a clone of this <code>GrayPaintScale</code> instance.
+     * Returns a clone of this {@code GrayPaintScale} instance.
      *
      * @return A clone.
      *

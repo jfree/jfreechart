@@ -87,8 +87,8 @@ import org.jfree.data.category.DefaultCategoryDataset;
  * <p>
  * NOTE: Many people have found this class too restrictive in general use.
  * For the greatest flexibility, please consider writing your own code to read
- * data from a <code>ResultSet</code> and populate a
- * {@link DefaultCategoryDataset} directly.
+ * data from a{@code ResultSet} and populate a {@link DefaultCategoryDataset} 
+ * directly.
  */
 public class JDBCCategoryDataset extends DefaultCategoryDataset {
 

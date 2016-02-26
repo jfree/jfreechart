@@ -66,8 +66,7 @@ public class TimePeriodValue implements Cloneable, Serializable {
      * @param period  the time period ({@code null} not permitted).
      * @param value  the value associated with the time period.
      *
-     * @throws IllegalArgumentException if <code>period</code> is
-     *     {@code null}.
+     * @throws IllegalArgumentException if {@code period} is {@code null}.
      */
     public TimePeriodValue(TimePeriod period, Number value) {
         ParamChecks.nullNotPermitted(period, "period");
@@ -81,8 +80,7 @@ public class TimePeriodValue implements Cloneable, Serializable {
      * @param period  the time period ({@code null} not permitted).
      * @param value  the value associated with the time period.
      *
-     * @throws IllegalArgumentException if <code>period</code> is
-     *     {@code null}.
+     * @throws IllegalArgumentException if {@code period} is {@code null}.
      */
     public TimePeriodValue(TimePeriod period, double value) {
         this(period, new Double(value));

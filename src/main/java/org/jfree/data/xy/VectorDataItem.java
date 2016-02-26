@@ -54,7 +54,7 @@ import org.jfree.data.ComparableObjectItem;
 public class VectorDataItem extends ComparableObjectItem {
 
     /**
-     * Creates a new instance of <code>VectorDataItem</code>.
+     * Creates a new {@code VectorDataItem} instance.
      *
      * @param x  the x-value.
      * @param y  the y-value.

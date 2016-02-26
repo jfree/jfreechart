@@ -67,8 +67,8 @@ public interface Values2D {
      *
      * @return The value (possibly {@code null}).
      *
-     * @throws IndexOutOfBoundsException if the <code>row</code>
-     *         or <code>column</code> is out of bounds.
+     * @throws IndexOutOfBoundsException if the {@code row}
+     *         or {@code column} is out of bounds.
      */
     public Number getValue(int row, int column);
 

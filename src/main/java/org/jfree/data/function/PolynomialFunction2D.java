@@ -48,8 +48,8 @@ import org.jfree.chart.HashUtilities;
 import org.jfree.chart.util.ParamChecks;
 
 /**
- * A function in the form <code>y = a0 + a1 * x + a2 * x^2 + ... + an *
- * x^n</code>.  Instances of this class are immutable.
+ * A function in the form {@code y = a0 + a1 * x + a2 * x^2 + ... + an *
+ * x^n}.  Instances of this class are immutable.
  *
  * @since 1.0.14
  */
@@ -59,8 +59,8 @@ public class PolynomialFunction2D implements Function2D, Serializable {
     private double[] coefficients;
 
     /**
-     * Constructs a new polynomial function <code>y = a0 + a1 * x + a2 * x^2 +
-     * ... + an * x^n</code>
+     * Constructs a new polynomial function {@code y = a0 + a1 * x + a2 * x^2 +
+     * ... + an * x^n}
      *
      * @param coefficients  an array with the coefficients [a0, a1, ..., an]
      *         ({@code null} not permitted).

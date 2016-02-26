@@ -84,15 +84,15 @@ public class DialBackground extends AbstractDialLayer implements DialLayer,
     private GradientPaintTransformer gradientPaintTransformer;
 
     /**
-     * Creates a new instance of <code>DialBackground</code>.  The
-     * default background paint is <code>Color.white</code>.
+     * Creates a new instance of {@code DialBackground}.  The
+     * default background paint is {@code Color.WHITE}.
      */
     public DialBackground() {
         this(Color.white);
     }
 
     /**
-     * Creates a new instance of <code>DialBackground</code>.  The
+     * Creates a new instance of {@code DialBackground}.
      *
      * @param paint  the paint ({@code null} not permitted).
      *
