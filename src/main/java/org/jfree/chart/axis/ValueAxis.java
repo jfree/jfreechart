@@ -145,7 +145,7 @@ import org.jfree.util.PublicCloneable;
 
 /**
  * The base class for axes that display value data, where values are measured
- * using the <code>double</code> primitive.  The two key subclasses are
+ * using the {@code double} primitive.  The two key subclasses are
  * {@link DateAxis} and {@link NumberAxis}.
  */
 public abstract class ValueAxis extends Axis
@@ -1001,7 +1001,7 @@ public abstract class ValueAxis extends Axis
     }
 
     /**
-     * Sets the auto range attribute.  If the <code>notify</code> flag is set,
+     * Sets the auto range attribute.  If the {@code notify} flag is set,
      * an {@link AxisChangeEvent} is sent to registered listeners.
      *
      * @param auto  the flag.
@@ -1276,7 +1276,7 @@ public abstract class ValueAxis extends Axis
 
     /**
      * Sets the range for the axis and, if requested, sends a change event to 
-     * all registered listeners.  Furthermore, if <code>turnOffAutoRange</code>
+     * all registered listeners.  Furthermore, if {@code turnOffAutoRange}
      * is {@code true}, the auto-range flag is set to {@code false} 
      * (normally when setting the axis range manually the caller expects that
      * range to remain in force).

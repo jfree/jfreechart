@@ -425,7 +425,7 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
      * @see #removeRow(int)
      * @see #removeColumn(Comparable)
      *
-     * @throws UnknownKeyException if <code>rowKey</code> is not defined in the
+     * @throws UnknownKeyException if {@code rowKey} is not defined in the
      *         table.
      */
     public void removeRow(Comparable rowKey) {
@@ -459,7 +459,7 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
      *
      * @throws UnknownKeyException if the table does not contain a column with
      *     the specified key.
-     * @throws IllegalArgumentException if <code>columnKey</code> is
+     * @throws IllegalArgumentException if {@code columnKey} is
      *     {@code null}.
      *
      * @see #removeColumn(int)

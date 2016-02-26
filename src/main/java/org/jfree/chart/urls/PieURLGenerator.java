@@ -57,7 +57,7 @@ import org.jfree.data.general.PieDataset;
  *     dataset, as this may be user-specified and could pose a security
  *     risk;</li>
  * <li>should be either (a) immutable, or (b) cloneable via the
- *     <code>PublicCloneable</code> interface (defined in the JCommon class
+ *     {@code PublicCloneable} interface (defined in the JCommon class
  *     library).  This provides a mechanism for the referring plot to clone
  *     the generator if necessary.</li>
  * </ul>

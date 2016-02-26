@@ -74,7 +74,7 @@ import org.jfree.util.ObjectUtilities;
  * often be sorted within a list, and allowing the time period to be changed
  * could destroy the sort order.
  * <P>
- * Implements the <code>Comparable</code> interface so that standard Java
+ * Implements the {@code Comparable} interface so that standard Java
  * sorting can be used to keep the data items in order.
  *
  */

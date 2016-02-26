@@ -71,7 +71,7 @@ public class SunJPEGEncoderAdapter implements ImageEncoder {
     private float quality = 0.95f;
 
     /**
-     * Creates a new <code>SunJPEGEncoderAdapter</code> instance.
+     * Creates a new {@code SunJPEGEncoderAdapter} instance.
      */
     public SunJPEGEncoderAdapter() {
     }
@@ -138,7 +138,7 @@ public class SunJPEGEncoderAdapter implements ImageEncoder {
      * @return The byte[] that is the encoded image.
      *
      * @throws IOException if there is an I/O problem.
-     * @throws NullPointerException if <code>bufferedImage</code> is
+     * @throws NullPointerException if {@code bufferedImage} is
      *     {@code null}.
      */
     @Override
@@ -157,8 +157,7 @@ public class SunJPEGEncoderAdapter implements ImageEncoder {
      *     ({@code null} not permitted).
      *
      * @throws IOException if there is an I/O problem.
-     * @throws NullPointerException if <code>bufferedImage</code> is
-     *     {@code null}.
+     * @throws NullPointerException if {@code bufferedImage} is {@code null}.
      */
     @Override
     public void encode(BufferedImage bufferedImage, OutputStream outputStream)

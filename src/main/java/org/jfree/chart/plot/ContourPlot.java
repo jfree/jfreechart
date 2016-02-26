@@ -708,7 +708,7 @@ public class ContourPlot extends Plot implements ContourValuePlot,
      * Draws a representation of the data within the dataArea region, using the
      * current renderer.
      * <P>
-     * The {@code info} and <code>crosshairState</code> arguments may be
+     * The {@code info} and {@code crosshairState} arguments may be
      * {@code null}.
      *
      * @param g2  the graphics device.

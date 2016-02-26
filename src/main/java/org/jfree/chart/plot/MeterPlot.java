@@ -226,8 +226,8 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
     private List intervals;
 
     /**
-     * Creates a new plot with a default range of {@code 0} to
-     * <code>100</code> and no value to display.
+     * Creates a new plot with a default range of {@code 0} to {@code 100} and 
+     * no value to display.
      */
     public MeterPlot() {
         this(null);

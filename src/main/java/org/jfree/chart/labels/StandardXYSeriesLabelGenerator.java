@@ -56,7 +56,7 @@ import org.jfree.util.PublicCloneable;
  * A standard series label generator for plots that use data from
  * an {@link org.jfree.data.xy.XYDataset}.
  * <br><br>
- * This class implements <code>PublicCloneable</code> by mistake but we retain
+ * This class implements {@code PublicCloneable} by mistake but we retain
  * this for the sake of backward compatibility.
  */
 public class StandardXYSeriesLabelGenerator implements XYSeriesLabelGenerator,
