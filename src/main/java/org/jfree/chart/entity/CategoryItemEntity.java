@@ -76,7 +76,7 @@ public class CategoryItemEntity extends ChartEntity
      * The series (zero-based index).
      *
      * @deprecated As of 1.0.6, this field is redundant as you can derive the
-     *         index from the <code>rowKey</code> field.
+     *         index from the {@code rowKey} field.
      */
     private int series;
 

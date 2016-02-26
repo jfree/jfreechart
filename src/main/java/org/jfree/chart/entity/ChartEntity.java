@@ -295,7 +295,7 @@ public class ChartEntity implements Cloneable, PublicCloneable, Serializable {
 
     /**
      * Returns an HTML image map tag for this entity.  The returned fragment
-     * should be <code>XHTML 1.0</code> compliant.
+     * should be {@code XHTML 1.0} compliant.
      *
      * @param toolTipTagFragmentGenerator  a generator for the HTML fragment
      *     that will contain the tooltip text ({@code null} not permitted
