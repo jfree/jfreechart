@@ -46,7 +46,7 @@ public class JSONArray extends ArrayList implements List, JSONAware,
     /**
      * Encode a list into JSON text and write it to out. 
      * If this list is also a {@link JSONStreamAware} or a {@link JSONAware}, 
-     * <code>JSONStreamAware</code> and <code>JSONAware</code> specific 
+     * {@code JSONStreamAware} and {@code JSONAware} specific 
      * behaviours will be ignored at this top level.
      * 
      * @see org.jfree.data.json.impl.JSONValue#writeJSONString(Object, Writer)

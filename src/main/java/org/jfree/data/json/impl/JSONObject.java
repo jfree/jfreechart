@@ -47,7 +47,7 @@ public class JSONObject extends HashMap implements Map, JSONAware,
     /**
      * Encode a map into JSON text and write it to out.
      * If this map is also a {@link JSONAware} or {@link JSONStreamAware}, 
-     * <code>JSONAware</code> or <code>JSONStreamAware</code> specific 
+     * {@code JSONAware} or {@code JSONStreamAware} specific 
      * behaviours will be ignored at this top level.
      * 
      * @see org.jfree.data.json.impl.JSONValue#writeJSONString(Object, Writer)
@@ -97,7 +97,7 @@ public class JSONObject extends HashMap implements Map, JSONAware,
     
     /**
      * Convert a map to JSON text. The result is a JSON object. 
-     * If this map is also a {@link JSONAware}, <code>JSONAware</code> specific 
+     * If this map is also a {@link JSONAware}, {@code JSONAware} specific 
      * behaviours will be omitted at this top level.
      * 
      * @see org.jfree.data.json.impl.JSONValue#toJSONString(Object)

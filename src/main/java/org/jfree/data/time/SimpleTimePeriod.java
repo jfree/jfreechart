@@ -51,7 +51,7 @@ import java.util.Date;
 
 /**
  * An arbitrary period of time, measured to millisecond precision using
- * <code>java.util.Date</code>.
+ * {@code java.util.Date}.
  * <p>
  * This class is intentionally immutable (that is, once constructed, you cannot
  * alter the start and end attributes).
@@ -211,8 +211,8 @@ public class SimpleTimePeriod implements TimePeriod, Comparable, Serializable {
      * Returns a hash code for this object instance.  The approach described by
      * Joshua Bloch in "Effective Java" has been used here - see:
      * <p>
-     * <code>http://developer.java.sun.com/
-     * developer/Books/effectivejava/Chapter3.pdf</code>
+     * {@code http://developer.java.sun.com/
+     * developer/Books/effectivejava/Chapter3.pdf}
      *
      * @return A hash code.
      */

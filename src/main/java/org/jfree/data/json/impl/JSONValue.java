@@ -119,9 +119,9 @@ public class JSONValue {
     /**
      * Encode an object into JSON text and write it to out.
      * <p>
-     * If this object is a <code>Map</code> or a <code>List</code>, and it's 
+     * If this object is a {@code Map} or a {@code List}, and it's 
      * also a {@link JSONStreamAware} or a  {@link JSONAware}, 
-     * <code>JSONStreamAware</code> or <code>JSONAware</code> will be 
+     * {@code JSONStreamAware} or {@code JSONAware} will be 
      * considered firstly.
      * <p>
      * DO NOT call this method from writeJSONString(Writer) of a class that 

@@ -78,7 +78,7 @@ public class SubSeriesDataset extends AbstractIntervalXYDataset
 
     /**
      * Creates a SubSeriesDataset using one or more series from
-     * <code>parent</code>.  The series to use are passed as an array of int.
+     * {@code parent}.  The series to use are passed as an array of int.
      *
      * @param parent  underlying dataset
      * @param map  int[] of series from parent to include in this Dataset
@@ -89,7 +89,7 @@ public class SubSeriesDataset extends AbstractIntervalXYDataset
     }
 
     /**
-     * Creates a SubSeriesDataset using one series from <code>parent</code>.
+     * Creates a SubSeriesDataset using one series from {@code parent}.
      * The series to is passed as an int.
      *
      * @param parent  underlying dataset

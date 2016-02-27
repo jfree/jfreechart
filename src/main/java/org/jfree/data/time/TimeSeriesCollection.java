@@ -158,7 +158,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      * Constructs an empty dataset, tied to a specific timezone.
      *
      * @param zone  the timezone ({@code null} permitted, will use
-     *              <code>TimeZone.getDefault()</code> in that case).
+     *              {@code TimeZone.getDefault()} in that case).
      */
     public TimeSeriesCollection(TimeZone zone) {
         // FIXME: need a locale as well as a timezone
@@ -182,7 +182,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      * @param series  a series to add to the collection ({@code null}
      *                permitted).
      * @param zone  the timezone ({@code null} permitted, will use
-     *              <code>TimeZone.getDefault()</code> in that case).
+     *              {@code TimeZone.getDefault()} in that case).
      */
     public TimeSeriesCollection(TimeSeries series, TimeZone zone) {
         // FIXME:  need a locale as well as a timezone
@@ -222,7 +222,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      * @param flag  the flag.
      *
      * @deprecated This flag is no longer used, as of 1.0.1.  The
-     *             <code>includeInterval</code> flag in methods such as
+     *             {@code includeInterval} flag in methods such as
      *             {@link #getDomainBounds(boolean)} makes this unnecessary.
      */
     public void setDomainIsPointsInTime(boolean flag) {
