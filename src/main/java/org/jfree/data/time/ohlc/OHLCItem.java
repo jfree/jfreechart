@@ -44,15 +44,15 @@ import org.jfree.data.ComparableObjectItem;
 import org.jfree.data.time.RegularTimePeriod;
 
 /**
- * An item representing data in the form {@code (time-period, open, high, low, 
- * close)}.
+ * An item representing data in the form <code>(time-period, open, high, low, 
+ * close)</code>.
  *
  * @since 1.0.4
  */
 public class OHLCItem extends ComparableObjectItem {
 
     /**
-     * Creates a new instance of {@code OHLCItem}.
+     * Creates a new instance of <code>OHLCItem</code>.
      *
      * @param period  the time period.
      * @param open  the open-value.

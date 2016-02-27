@@ -185,7 +185,7 @@ public abstract class RegularTimePeriod implements TimePeriod, Comparable,
 
     /**
      * Returns the date/time that marks the start of the time period.  This
-     * method returns a new {@code Date} instance every time it is called.
+     * method returns a new <code>Date</code> instance every time it is called.
      *
      * @return The start date/time.
      *
@@ -198,7 +198,7 @@ public abstract class RegularTimePeriod implements TimePeriod, Comparable,
 
     /**
      * Returns the date/time that marks the end of the time period.  This
-     * method returns a new {@code Date} instance every time it is called.
+     * method returns a new <code>Date</code> instance every time it is called.
      *
      * @return The end date/time.
      *
@@ -343,7 +343,7 @@ public abstract class RegularTimePeriod implements TimePeriod, Comparable,
 
     /**
      * Returns the millisecond (relative to the epoch) corresponding to the 
-     * specified {@code anchor} using the supplied {@code calendar} 
+     * specified <code>anchor</code> using the supplied {@code calendar} 
      * (which incorporates a time zone).
      * 
      * @param anchor  the anchor ({@code null} not permitted).

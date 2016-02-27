@@ -130,8 +130,8 @@ public class DefaultHighLowDataset extends AbstractXYDataset
 
     /**
      * Returns the x-value for one item in a series.  The value returned is a
-     * {@code Long} instance generated from the underlying
-     * {@code Date} object.  To avoid generating a new object instance,
+     * <code>Long</code> instance generated from the underlying
+     * <code>Date</code> object.  To avoid generating a new object instance,
      * you might prefer to call {@link #getXValue(int, int)}.
      *
      * @param series  the series (zero-based index).
