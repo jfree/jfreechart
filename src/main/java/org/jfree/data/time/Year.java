@@ -101,7 +101,7 @@ public class Year extends RegularTimePeriod implements Serializable {
     private long lastMillisecond;
 
     /**
-     * Creates a new <code>Year</code>, based on the current system date/time.
+     * Creates a new {@code Year}, based on the current system date/time.
      */
     public Year() {
         this(new Date());
@@ -122,7 +122,7 @@ public class Year extends RegularTimePeriod implements Serializable {
     }
 
     /**
-     * Creates a new <code>Year</code>, based on a particular instant in time,
+     * Creates a new {@code Year}, based on a particular instant in time,
      * using the default time zone.
      *
      * @param time  the time ({@code null} not permitted).
@@ -147,7 +147,7 @@ public class Year extends RegularTimePeriod implements Serializable {
     }
 
     /**
-     * Creates a new <code>Year</code> instance, for the specified time zone
+     * Creates a new {@code Year} instance, for the specified time zone
      * and locale.
      *
      * @param time  the current time ({@code null} not permitted).
@@ -297,8 +297,8 @@ public class Year extends RegularTimePeriod implements Serializable {
     }
 
     /**
-     * Tests the equality of this <code>Year</code> object to an arbitrary
-     * object.  Returns {@code true} if the target is a <code>Year</code>
+     * Tests the equality of this {@code Year} object to an arbitrary
+     * object.  Returns {@code true} if the target is a {@code Year}
      * instance representing the same year as this object.  In all other cases,
      * returns {@code false}.
      *
@@ -323,8 +323,8 @@ public class Year extends RegularTimePeriod implements Serializable {
      * Returns a hash code for this object instance.  The approach described by
      * Joshua Bloch in "Effective Java" has been used here:
      * <p>
-     * <code>http://developer.java.sun.com/developer/Books/effectivejava
-     *     /Chapter3.pdf</code>
+     * {@code http://developer.java.sun.com/developer/Books/effectivejava
+     *     /Chapter3.pdf}
      *
      * @return A hash code.
      */
@@ -337,7 +337,7 @@ public class Year extends RegularTimePeriod implements Serializable {
     }
 
     /**
-     * Returns an integer indicating the order of this <code>Year</code> object
+     * Returns an integer indicating the order of this {@code Year} object
      * relative to the specified object:
      *
      * negative == before, zero == same, positive == after.
