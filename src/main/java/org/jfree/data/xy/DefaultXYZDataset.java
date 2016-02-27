@@ -75,7 +75,7 @@ public class DefaultXYZDataset extends AbstractXYZDataset
     private List seriesList;
 
     /**
-     * Creates a new <code>DefaultXYZDataset</code> instance, initially
+     * Creates a new {@code DefaultXYZDataset} instance, initially
      * containing no data.
      */
     public DefaultXYZDataset() {
@@ -349,12 +349,11 @@ public class DefaultXYZDataset extends AbstractXYZDataset
     }
 
     /**
-     * Tests this <code>DefaultXYDataset</code> instance for equality with an
+     * Tests this {@code DefaultXYZDataset} instance for equality with an
      * arbitrary object.  This method returns {@code true} if and only if:
      * <ul>
      * <li>{@code obj} is not {@code null};</li>
-     * <li>{@code obj} is an instance of
-     *         <code>DefaultXYDataset</code>;</li>
+     * <li>{@code obj} is an instance of {@code DefaultXYDataset};</li>
      * <li>both datasets have the same number of series, each containing
      *         exactly the same values.</li>
      * </ul>

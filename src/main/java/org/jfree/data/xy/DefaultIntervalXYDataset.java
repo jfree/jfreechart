@@ -79,7 +79,7 @@ public class DefaultIntervalXYDataset extends AbstractIntervalXYDataset
     private List seriesList;
 
     /**
-     * Creates a new <code>DefaultIntervalXYDataset</code> instance, initially
+     * Creates a new {@code DefaultIntervalXYDataset} instance, initially
      * containing no data.
      */
     public DefaultIntervalXYDataset() {
@@ -449,13 +449,12 @@ public class DefaultIntervalXYDataset extends AbstractIntervalXYDataset
     }
 
     /**
-     * Tests this <code>DefaultIntervalXYDataset</code> instance for equality
+     * Tests this {@code DefaultIntervalXYDataset} instance for equality
      * with an arbitrary object.  This method returns {@code true} if and
      * only if:
      * <ul>
      * <li>{@code obj} is not {@code null};</li>
-     * <li>{@code obj} is an instance of
-     *         <code>DefaultIntervalXYDataset</code>;</li>
+     * <li>{@code obj} is an instance of {@code DefaultIntervalXYDataset};</li>
      * <li>both datasets have the same number of series, each containing
      *         exactly the same values.</li>
      * </ul>

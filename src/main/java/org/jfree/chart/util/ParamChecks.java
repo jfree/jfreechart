@@ -49,12 +49,12 @@ package org.jfree.chart.util;
 public class ParamChecks {
 
     /**
-     * Throws an <code>IllegalArgumentException</code> if the supplied 
-     * <code>param</code> is {@code null}.
+     * Throws an {@code IllegalArgumentException} if the supplied 
+     * {@code param} is {@code null}.
      *
      * @param param  the parameter to check ({@code null} permitted).
      * @param name  the name of the parameter (to use in the exception message
-     *     if <code>param</code> is {@code null}).
+     *     if {@code param} is {@code null}).
      *
      * @throws IllegalArgumentException  if <code>param</code> is 
      *     {@code null}.
