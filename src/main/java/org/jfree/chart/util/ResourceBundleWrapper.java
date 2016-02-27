@@ -87,7 +87,7 @@ public class ResourceBundleWrapper {
      * Instantiate a {@link URLClassLoader} for resource lookups where the
      * codeBase URL is removed.  This method is typically called from an
      * applet's init() method.  If this method is never called, the
-     * <code>getBundle()</code> methods map to the standard
+     * {@code getBundle()} methods map to the standard
      * {@link ResourceBundle} lookup methods.
      *
      * @param codeBase  the codeBase URL.
@@ -153,8 +153,8 @@ public class ResourceBundleWrapper {
     }
 
     /**
-     * Maps directly to <code>ResourceBundle.getBundle(baseName, locale,
-     * loader)</code>.
+     * Maps directly to {@code ResourceBundle.getBundle(baseName, locale,
+     * loader)}.
      *
      * @param baseName  the base name.
      * @param locale  the locale.

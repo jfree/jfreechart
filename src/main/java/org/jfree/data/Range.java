@@ -226,8 +226,8 @@ public strictfp class Range implements Serializable {
     }
 
     /**
-     * Returns a new range that spans both <code>range1</code> and 
-     * <code>range2</code>.  This method has a special handling to ignore
+     * Returns a new range that spans both {@code range1} and 
+     * {@code range2}.  This method has a special handling to ignore
      * Double.NaN values.
      *
      * @param range1  the first range ({@code null} permitted).
@@ -289,7 +289,7 @@ public strictfp class Range implements Serializable {
 
     /**
      * Returns a range that includes all the values in the specified
-     * <code>range</code> AND the specified <code>value</code>.
+     * {@code range} AND the specified {@code value}.
      *
      * @param range  the range ({@code null} permitted).
      * @param value  the value that must be included.
@@ -375,7 +375,7 @@ public strictfp class Range implements Serializable {
     }
 
     /**
-     * Returns the given <code>value</code> adjusted by <code>delta</code> but
+     * Returns the given {@code value} adjusted by {@code delta} but
      * with a check to prevent the result from crossing {@code 0.0}.
      *
      * @param value  the value.

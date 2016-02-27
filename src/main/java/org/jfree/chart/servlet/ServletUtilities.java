@@ -219,7 +219,7 @@ public class ServletUtilities {
 
     /**
      * Saves the chart as a JPEG format file in the temporary directory and
-     * populates the <code>ChartRenderingInfo</code> object which can be used
+     * populates the {@code ChartRenderingInfo} object which can be used
      * to generate an HTML image map.
      * <p>
      * SPECIAL NOTE: Please avoid using JPEG as an image format for charts,
@@ -262,8 +262,8 @@ public class ServletUtilities {
 
     /**
      * Creates the temporary directory if it does not exist.  Throws a
-     * <code>RuntimeException</code> if the temporary directory is
-     * {@code null}.  Uses the system property <code>java.io.tmpdir</code>
+     * {@code RuntimeException} if the temporary directory is
+     * {@code null}.  Uses the system property {@code java.io.tmpdir}
      * as the temporary directory.  This sounds like a strange thing to do but
      * my temporary directory was not created on my default Tomcat 4.0.3
      * installation.  Could save some questions on the forum if it is created
@@ -285,7 +285,7 @@ public class ServletUtilities {
 
     /**
      * Adds a {@link ChartDeleter} object to the session object with the name
-     * <code>JFreeChart_Deleter</code> if there is not already one bound to the
+     * {@code JFreeChart_Deleter} if there is not already one bound to the
      * session and adds the filename to the list of charts to be deleted.
      *
      * @param tempFile  the file to be deleted.

@@ -56,7 +56,7 @@ public class ParamChecks {
      * @param name  the name of the parameter (to use in the exception message
      *     if {@code param} is {@code null}).
      *
-     * @throws IllegalArgumentException  if <code>param</code> is 
+     * @throws IllegalArgumentException  if {@code param} is 
      *     {@code null}.
      *
      * @since 1.0.14

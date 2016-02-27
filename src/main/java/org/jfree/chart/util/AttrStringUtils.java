@@ -49,7 +49,7 @@ import java.text.AttributedString;
 import org.jfree.ui.TextAnchor;
 
 /**
- * Some <code>AttributedString</code> utilities.
+ * Some {@code AttributedString} utilities.
  * 
  * @since 1.0.16
  */
@@ -94,8 +94,8 @@ public class AttrStringUtils {
     }
     
     /**
-     * Draws the attributed string at <code>(textX, textY)</code>, rotated by 
-     * the specified angle about <code>(rotateX, rotateY)</code>.
+     * Draws the attributed string at {@code (textX, textY)}, rotated by 
+     * the specified angle about {@code (rotateX, rotateY)}.
      * 
      * @param text  the attributed string ({@code null} not permitted).
      * @param g2  the graphics output target.
@@ -125,7 +125,7 @@ public class AttrStringUtils {
     
     /**
      * Draws the string anchored to {@code (x, y)}, rotated by the 
-     * specified angle about <code>(rotationX, rotationY)</code>.
+     * specified angle about {@code (rotationX, rotationY)}.
      * 
      * @param text  the text ({@code null} not permitted).
      * @param g2  the graphics target.

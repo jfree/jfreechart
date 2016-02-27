@@ -628,7 +628,7 @@ public class LegendGraphic extends AbstractBlock
     }
 
     /**
-     * Tests this <code>LegendGraphic</code> instance for equality with an
+     * Tests this {@code LegendGraphic} instance for equality with an
      * arbitrary object.
      *
      * @param obj  the object ({@code null} permitted).
@@ -701,9 +701,9 @@ public class LegendGraphic extends AbstractBlock
     }
 
     /**
-     * Returns a clone of this <code>LegendGraphic</code> instance.
+     * Returns a clone of this {@code LegendGraphic} instance.
      *
-     * @return A clone of this <code>LegendGraphic</code> instance.
+     * @return A clone of this {@code LegendGraphic} instance.
      *
      * @throws CloneNotSupportedException if there is a problem cloning.
      */

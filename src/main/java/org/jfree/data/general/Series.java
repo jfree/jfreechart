@@ -73,7 +73,7 @@ import org.jfree.util.ObjectUtilities;
  * actual data structures.
  * <P>
  * The series has two properties ("Key" and "Description") for which you can
- * register a <code>PropertyChangeListener</code>.
+ * register a {@code PropertyChangeListener}.
  * <P>
  * You can also register a {@link SeriesChangeListener} to receive notification
  * of changes to the series data.
@@ -138,10 +138,10 @@ public abstract class Series implements Cloneable, Serializable {
     }
 
     /**
-     * Sets the key for the series and sends a <code>VetoableChangeEvent</code>
+     * Sets the key for the series and sends a {@code VetoableChangeEvent}
      * (with the property name "Key") to all registered listeners.  For 
      * backwards compatibility, this method also fires a regular 
-     * <code>PropertyChangeEvent</code>.  If the key change is vetoed this 
+     * {@code PropertyChangeEvent}.  If the key change is vetoed this 
      * method will throw an IllegalArgumentException.
      *
      * @param key  the key ({@code null} not permitted).
@@ -178,7 +178,7 @@ public abstract class Series implements Cloneable, Serializable {
 
     /**
      * Sets the description of the series and sends a
-     * <code>PropertyChangeEvent</code> to all registered listeners.
+     * {@code PropertyChangeEvent} to all registered listeners.
      *
      * @param description  the description ({@code null} permitted).
      *

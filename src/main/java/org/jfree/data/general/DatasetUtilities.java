@@ -275,7 +275,7 @@ public final class DatasetUtilities {
     /**
      * Creates a new pie dataset based on the supplied dataset, but modified
      * by aggregating all the low value items (those whose value is lower
-     * than the <code>percentThreshold</code>) into a single item with the
+     * than the {@code percentThreshold}) into a single item with the
      * key "Other".
      *
      * @param source  the source dataset ({@code null} not permitted).
@@ -294,9 +294,9 @@ public final class DatasetUtilities {
     /**
      * Creates a new pie dataset based on the supplied dataset, but modified
      * by aggregating all the low value items (those whose value is lower
-     * than the <code>percentThreshold</code>) into a single item.  The
+     * than the {@code percentThreshold}) into a single item.  The
      * aggregated items are assigned the specified key.  Aggregation only
-     * occurs if there are at least <code>minItems</code> items to aggregate.
+     * occurs if there are at least {@code minItems} items to aggregate.
      *
      * @param source  the source dataset ({@code null} not permitted).
      * @param key  the key to represent the aggregated items.
@@ -668,7 +668,7 @@ public final class DatasetUtilities {
     }
 
     /**
-     * Returns the bounds of the x-values in the specified <code>dataset</code>
+     * Returns the bounds of the x-values in the specified {@code dataset}
      * taking into account only the visible series and including any x-interval
      * if requested.
      *
@@ -2296,11 +2296,11 @@ public final class DatasetUtilities {
      * specified x-value.  There are three cases for the return value:
      * <ul>
      * <li>there is an exact match for the x-value at index i 
-     * (returns <code>int[] {i, i}</code>);</li>
+     * (returns {@code int[] {i, i}});</li>
      * <li>the x-value falls between two (adjacent) items at index i and i+1 
-     * (returns <code>int[] {i, i+1}</code>);</li>
+     * (returns {@code int[] {i, i+1}});</li>
      * <li>the x-value falls outside the domain bounds, in which case the 
-     *    method returns <code>int[] {-1, -1}</code>.</li>
+     *    method returns {@code int[] {-1, -1}}.</li>
      * </ul>
      * @param dataset  the dataset ({@code null} not permitted).
      * @param series  the series index.

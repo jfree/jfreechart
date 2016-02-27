@@ -59,7 +59,7 @@ import java.util.Hashtable;
  * of objects of type {@code Paint}
  * <p>
  * The intention is to honour the alpha-channel in the process.
- * <code>PaintAlpha</code> was originally conceived to improve the
+ * {@code PaintAlpha} was originally conceived to improve the
  * rendering of 3D Shapes with transparent colours and to allow
  * invisible bars by making them completely transparent.
  * <p>
@@ -87,7 +87,7 @@ public class PaintAlpha {
     //      darker(Paint) to private!
 
     /**
-     * Multiplier for the <code>darker</code> Methods.<br>
+     * Multiplier for the {@code darker} Methods.<br>
      * (taken from {@link java.awt.Color}.FACTOR)
      */
     private static final double FACTOR = 0.7;
@@ -95,7 +95,7 @@ public class PaintAlpha {
     private static boolean legacyAlpha = false;
 
     /**
-     * Per default <code>PaintAlpha</code> will try to honour alpha-channel
+     * Per default {@code PaintAlpha} will try to honour alpha-channel
      * information.  In the past this was not the case.
      * If you wish legacy functionality for your application you can request
      * this here.
@@ -163,9 +163,9 @@ public class PaintAlpha {
      * The essential difference is that this method
      * maintains the alpha-channel unchanged<br>
      *
-     * @param paint a <code>Color</code>
+     * @param paint a {@code Color}
      *
-     * @return a darker version of the <code>Color</code>
+     * @return a darker version of the {@code Color}
      */
     private static Color darker(Color paint) {
         return new Color(
@@ -191,9 +191,9 @@ public class PaintAlpha {
     /**
      * Create a new Gradient with its colours darkened.
      *
-     * @param paint a <code>LinearGradientPaint</code>
+     * @param paint a {@code LinearGradientPaint}
      *
-     * @return a darker version of the <code>LinearGradientPaint</code>
+     * @return a darker version of the {@code LinearGradientPaint}
      */
     private static Paint darkerLinearGradientPaint(LinearGradientPaint paint) {
         final Color[] paintColors = paint.getColors();
@@ -209,9 +209,9 @@ public class PaintAlpha {
     /**
      * Create a new Gradient with its colours darkened.
      *
-     * @param paint a <code>RadialGradientPaint</code>
+     * @param paint a {@code RadialGradientPaint}
      *
-     * @return a darker version of the <code>RadialGradientPaint</code>
+     * @return a darker version of the {@code RadialGradientPaint}
      */
     private static Paint darkerRadialGradientPaint(RadialGradientPaint paint) {
         final Color[] paintColors = paint.getColors();
@@ -225,14 +225,14 @@ public class PaintAlpha {
     }
 
     /**
-     * Create a new <code>TexturePaint</code> with its colors darkened.
+     * Create a new {@code TexturePaint} with its colors darkened.
      * <p>
-     * This entails cloning the underlying <code>BufferedImage</code>,
+     * This entails cloning the underlying {@code BufferedImage},
      * then darkening each color-pixel individually!
      *
-     * @param paint a <code>TexturePaint</code>
+     * @param paint a {@code TexturePaint}
      *
-     * @return a darker version of the <code>TexturePaint</code>
+     * @return a darker version of the {@code TexturePaint}
      */
     private static TexturePaint darkerTexturePaint(TexturePaint paint) {
         /**
