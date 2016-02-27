@@ -77,7 +77,7 @@ import org.jfree.util.PublicCloneable;
  * {@link TableXYDataset} interface.  Note that the {@link TableXYDataset}
  * interface requires all series to share the same set of x-values.  When
  * adding a new item {@code (x, y)} to one series, all other series
- * automatically get a new item <code>(x, null)</code> unless a non-null item
+ * automatically get a new item {@code (x, null)} unless a non-null item
  * has already been specified.
  *
  * @see org.jfree.data.xy.TableXYDataset
