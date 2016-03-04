@@ -142,6 +142,9 @@ public class CombinedRangeXYPlot extends XYPlot
     /** Temporary storage for the subplot areas. */
     private transient Rectangle2D[] subplotAreas;
 
+    /** Whether the axis should be displayed at each plot separately */
+    private final boolean axisForEachSubplot;
+
     /**
      * Default constructor.
      */
@@ -155,11 +158,25 @@ public class CombinedRangeXYPlot extends XYPlot
      * @param rangeAxis  the shared axis.
      */
     public CombinedRangeXYPlot(ValueAxis rangeAxis) {
+        this(rangeAxis, false);
+    }
+
+    /**
+     * Creates a new plot.
+     *
+     * @param rangeAxis  the shared axis.
+     * @param axisForEachSubplot Whether the axis should
+     *        be displayed at each plot separately
+     *        instead of one axis at the end of the plot.
+     */
+    public CombinedRangeXYPlot(ValueAxis rangeAxis,
+                               boolean axisForEachSubplot) {
         super(null, // no data in the parent plot
               null,
               rangeAxis,
               null);
         this.subplots = new java.util.ArrayList<XYPlot>();
+        this.axisForEachSubplot = axisForEachSubplot;
     }
 
     /**
@@ -257,7 +274,7 @@ public class CombinedRangeXYPlot extends XYPlot
         subplot.setParent(this);
         subplot.setWeight(weight);
         subplot.setInsets(new RectangleInsets(0.0, 0.0, 0.0, 0.0));
-        subplot.setRangeAxis(null);
+        subplot.setRangeAxis(this.axisForEachSubplot ? getRangeAxis() : null);
         subplot.addChangeListener(this);
         this.subplots.add(subplot);
         configureRangeAxes();
@@ -332,7 +349,7 @@ public class CombinedRangeXYPlot extends XYPlot
                 space.setBottom(fixed.getBottom());
             }
         }
-        else {
+        else if (!this.axisForEachSubplot) {
             ValueAxis valueAxis = getRangeAxis();
             RectangleEdge valueEdge = Plot.resolveRangeAxisLocation(
                 getRangeAxisLocation(), orientation
@@ -423,16 +440,13 @@ public class CombinedRangeXYPlot extends XYPlot
         // set the width and height of non-shared axis of all sub-plots
         setFixedDomainAxisSpaceForSubplots(space);
 
-        // draw the shared axis
-        ValueAxis axis = getRangeAxis();
-        RectangleEdge edge = getRangeAxisEdge();
-        double cursor = RectangleEdge.coordinate(dataArea, edge);
-        AxisState axisState = axis.draw(g2, cursor, area, dataArea, edge, info);
-
         if (parentState == null) {
             parentState = new PlotState();
         }
-        parentState.getSharedAxisStates().put(axis, axisState);
+
+        if (!this.axisForEachSubplot) {
+            this.drawSharedAxis(g2, area, parentState, info, dataArea);
+        }
 
         // draw all the charts
         for (int i = 0; i < this.subplots.size(); i++) {
@@ -450,6 +464,19 @@ public class CombinedRangeXYPlot extends XYPlot
             info.setDataArea(dataArea);
         }
 
+    }
+
+    protected void drawSharedAxis(Graphics2D g2, Rectangle2D area,
+                                  PlotState parentState, PlotRenderingInfo info,
+                                  Rectangle2D dataArea) {
+        final ValueAxis axis = getRangeAxis();
+        final RectangleEdge edge = getRangeAxisEdge();
+        if (axis != null && edge != null) {
+            final double cursor = RectangleEdge.coordinate(dataArea, edge);
+            final AxisState axisState =
+                    axis.draw(g2, cursor, area, dataArea, edge, info);
+            parentState.getSharedAxisStates().put(axis, axisState);
+        }
     }
 
     /**
