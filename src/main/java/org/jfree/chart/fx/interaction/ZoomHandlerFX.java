@@ -30,11 +30,12 @@
  * (C) Copyright 2014, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
+ * Contributor(s):   Tomas Pluskal (Whitehead Institute for Biomedical Research);
  *
  * Changes:
  * --------
  * 25-Jun-2014 : Version 1 (DG);
+ * 03-Mar-2016 : Added single-axis zooming (TP); 
  *
  */
 
