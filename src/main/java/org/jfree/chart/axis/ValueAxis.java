@@ -1010,14 +1010,12 @@ public abstract class ValueAxis extends Axis
      * @see #isAutoRange()
      */
     protected void setAutoRange(boolean auto, boolean notify) {
-        if (this.autoRange != auto) {
-            this.autoRange = auto;
-            if (this.autoRange) {
-                autoAdjustRange();
-            }
-            if (notify) {
-                fireChangeEvent();
-            }
+        this.autoRange = auto;
+        if (this.autoRange) {
+            autoAdjustRange();
+        }
+        if (notify) {
+            fireChangeEvent();
         }
     }
 
