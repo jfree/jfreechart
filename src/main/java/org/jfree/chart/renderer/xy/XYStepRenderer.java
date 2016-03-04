@@ -35,6 +35,7 @@
  *                   Gerald Struck (fix for bug 1569094);
  *                   Ulrich Voigt (patch 1874890);
  *                   Martin Hoeller (contribution to patch 1874890);
+ *                   Matthias Noebl (for Cropster GmbH);
  *
  * Changes
  * -------
@@ -65,6 +66,7 @@
  * 14-May-2008 : Call addEntity() in drawItem() (DG);
  * 24-Sep-2008 : Fixed bug 2113627 by utilising second pass to draw item
  *               labels (DG);
+ * 29-Feb-2015 : Improved performance by only drawing visible lines
  *
  */
 
@@ -87,6 +89,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.urls.XYURLGenerator;
+import org.jfree.chart.util.LineUtilities;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.ui.RectangleEdge;
 import org.jfree.util.PublicCloneable;
@@ -234,7 +237,7 @@ public class XYStepRenderer extends XYLineAndShapeRenderer
                     // this represents the situation
                     // for drawing a horizontal bar.
                     drawLine(g2, state.workingLine, transY0, transX0, transY1,
-                            transX1);
+                            transX1, dataArea);
                 }
                 else {  //this handles the need to perform a 'step'.
 
@@ -242,29 +245,29 @@ public class XYStepRenderer extends XYLineAndShapeRenderer
                     double transXs = transX0 + (getStepPoint()
                             * (transX1 - transX0));
                     drawLine(g2, state.workingLine, transY0, transX0, transY0,
-                            transXs);
+                            transXs, dataArea);
                     drawLine(g2, state.workingLine, transY0, transXs, transY1,
-                            transXs);
+                            transXs, dataArea);
                     drawLine(g2, state.workingLine, transY1, transXs, transY1,
-                            transX1);
+                            transX1, dataArea);
                 }
             }
             else if (orientation == PlotOrientation.VERTICAL) {
                 if (transY0 == transY1) { // this represents the situation
                                           // for drawing a horizontal bar.
                     drawLine(g2, state.workingLine, transX0, transY0, transX1,
-                            transY1);
+                            transY1, dataArea);
                 }
                 else {  //this handles the need to perform a 'step'.
                     // calculate the step point
                     double transXs = transX0 + (getStepPoint()
                             * (transX1 - transX0));
                     drawLine(g2, state.workingLine, transX0, transY0, transXs,
-                            transY0);
+                            transY0, dataArea);
                     drawLine(g2, state.workingLine, transXs, transY0, transXs,
-                            transY1);
+                            transY1, dataArea);
                     drawLine(g2, state.workingLine, transXs, transY1, transX1,
-                            transY1);
+                            transY1, dataArea);
                 }
             }
 
@@ -310,13 +313,17 @@ public class XYStepRenderer extends XYLineAndShapeRenderer
      * @param y1  the y-coordinate for the ending point of the line.
      */
     private void drawLine(Graphics2D g2, Line2D line, double x0, double y0,
-            double x1, double y1) {
+            double x1, double y1, Rectangle2D dataArea) {
         if (Double.isNaN(x0) || Double.isNaN(x1) || Double.isNaN(y0)
                 || Double.isNaN(y1)) {
             return;
         }
         line.setLine(x0, y0, x1, y1);
-        g2.draw(line);
+        boolean visible = LineUtilities.clipLine(line, dataArea);
+        if (visible)
+        {
+            g2.draw(line);
+        }
     }
 
     /**
