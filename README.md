@@ -436,8 +436,16 @@ A number of classes have new methods.  Nothing has been removed or deprecated:
 In addition, a bug in the constructor for the Week class has been fixed.  
 
 ##### Version 1.0.8 (23-Nov-2007)
-        - primarily a bug fix release.  See the NEWS and ChangeLog files for a
-          more detailed description of the changes in this release.
+This release is primarily a bug fix release:
+- a problem with pie chart labeling;
+- a regression in the `DefaultCategoryDataset` class (and underlying `KeyedValues2D` class);
+- a cloning bug in the `TimeSeries` class.  
+
+In addition:
+- the `StatisticalBarRenderer` class has a new `errorIndicatorStroke` field and has been updated to support gradients;
+- the `StandardDialScale` has had some missing accessor methods implemented;
+- an override field in the `StandardXYItemRenderer` class has been deprecated;
+- some warnings reported by FindBugs 1.3.0 have been addressed.
 
 ##### Version 1.0.7 (14-Nov-2007)
         - See the NEWS and ChangeLog files for a more detailed description of
