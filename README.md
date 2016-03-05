@@ -21,7 +21,7 @@ GNU Lesser General Public License (LGPL) version 2.1 or later.
 History
 -------
 
-Version 1.0.19 (31-Jul-2014)
+#### Version 1.0.19 (31-Jul-2014)
 - fixed clipping issues for combined plots in JavaFX;
 - fixed a memory leak in the new JavaFX ChartCanvas class;
 - CombinedDomainXYPlot and CombinedRangeXYPlot now take into account the pannable flags in the subplots;
@@ -30,7 +30,7 @@ Version 1.0.19 (31-Jul-2014)
 - JFreeSVG updated to version 2.0;
 - included a preview of JSFreeChart, a 2D chart library written in JavaScript that is conceptually similar to JFreeChart but runs directly in a web browser.
 
-Version 1.0.18 (3-Jul-2014)
+#### Version 1.0.18 (3-Jul-2014)
 - added JavaFX support via FXGraphics2D;
 - improved LogAxis labelling;
 - improved numeric tick labelling;
@@ -38,8 +38,7 @@ Version 1.0.18 (3-Jul-2014)
 - 'stepPoint' attribute in the XYStepAreaRenderer;
 - other minor improvements and bug fixes, see the NEWS and ChangeLog files for further details.
 
-Version 1.0.17 (22-Nov-2013)
-
+#### Version 1.0.17 (22-Nov-2013)
 - Enhanced XYSplineRenderer with new area fill (contributed by Klaus Rheinwald);
 - added a notify flag to all datasets that extend AbstractDataset;
 - extended TimeSeriesCollection to validate TimeSeries keys for uniqueness;
@@ -48,7 +47,7 @@ Version 1.0.17 (22-Nov-2013)
 - added HMSNumberFormat;
 - updated JCommon to version 1.0.21 (includes rotated text improvements) and fixed some minor bugs.
 
-Bug Fixes:
+Bug Fixes
 
 - 977  : Multithreading issue with DateAxis;
 - 1084 : BorderArrangement.add() possible ClassCastException;
@@ -56,7 +55,7 @@ Bug Fixes:
 - 1109 : WaterfallBarRenderer uses wrong color for diff 0.
 
 
-Version 1.0.16 (13-Sep-2013)
+#### Version 1.0.16 (13-Sep-2013)
 
 *** THIS RELEASE REQUIRES JDK/JRE 1.6.0 OR LATER. ***
 
@@ -79,23 +78,22 @@ Also fixed a line drawing issue with the StackedXYAreaRenderer, and a memory
 leak in the SWT ChartComposite class.
 
 
-1.0.15 : (4-Jul-2013)
-        - various minor feature enhancements and a range of bug fixes, see the 
-          NEWS and ChangeLog files for details.
+#### Version 1.0.15 (4-Jul-2013)
+- various minor feature enhancements and a range of bug fixes, see the NEWS and ChangeLog files for details.
 
-1.0.14 : (20-Nov-2011)
-        - added support for multiple axes in PolarPlot, performance
+#### Version 1.0.14 (20-Nov-2011)
+- added support for multiple axes in PolarPlot, performance
           improvements in the TimeSeriesCollection class, mouse wheel rotation
           in the PiePlot class, improved Maven support, a range of other
           minor functional enhancements and numerous bug fixes - see the NEWS
           and ChangeLog files for details.
 
-1.0.13 : (17-Apr-2009)
+#### Version 1.0.13 (17-Apr-2009)
         - there are some significant new features in this release, as well
           as performance enhancements and bug fixes - see the NEWS and
           ChangeLog files for details.
 
-1.0.12 : (31-Dec-2008)
+#### Version 1.0.12 (31-Dec-2008)
         - added support for minor tick marks, mapping datasets to more than
           one axis, and numerous bug fixes - see the NEWS and ChangeLog files
           for details.
