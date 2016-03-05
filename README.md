@@ -21,30 +21,25 @@ GNU Lesser General Public License (LGPL) version 2.1 or later.
 History
 -------
 
-1.0.19 : (31-Jul-2014)
-        - fixed clipping issues for combined plots in JavaFX;
-        - fix a memory leak in the new JavaFX ChartCanvas class;
-        - CombinedDomainXYPlot and CombinedRangeXYPlot now take into account the
-          pannable flags in the subplots;
-        - FastScatterPlot panning direction is corrected;
-        - added rendering hints to sharpen gridlines and borders in most output 
-          formats;        
-        - JFreeSVG updated to version 2.0;
-        - included a preview of JSFreeChart, a 2D chart library written in
-          JavaScript that is conceptually similar to JFreeChart but runs 
-          directly in a web browser.
+Version 1.0.19 (31-Jul-2014)
+- fixed clipping issues for combined plots in JavaFX;
+- fixed a memory leak in the new JavaFX ChartCanvas class;
+- CombinedDomainXYPlot and CombinedRangeXYPlot now take into account the pannable flags in the subplots;
+- FastScatterPlot panning direction is corrected;
+- added rendering hints to sharpen gridlines and borders in most output formats;        
+- JFreeSVG updated to version 2.0;
+- included a preview of JSFreeChart, a 2D chart library written in JavaScript that is conceptually similar to JFreeChart but runs directly in a web browser.
 
-1.0.18 : (3-Jul-2014)
-        - added JavaFX support via FXGraphics2D;
-        - improved LogAxis labelling;
-        - improved numeric tick labelling;
-        - center text support in RingPlot;
-        - 'stepPoint' attribute in the XYStepAreaRenderer;
-        - other minor improvements and bug fixes, see the NEWS and ChangeLog 
-          files for further details.
+Version 1.0.18 (3-Jul-2014)
+- added JavaFX support via FXGraphics2D;
+- improved LogAxis labelling;
+- improved numeric tick labelling;
+- center text support in RingPlot;
+- 'stepPoint' attribute in the XYStepAreaRenderer;
+- other minor improvements and bug fixes, see the NEWS and ChangeLog files for further details.
 
-1.0.17 : (22-Nov-2013)
-        - see the NEWS and ChangeLog files for details.
+Version 1.0.17 (22-Nov-2013)
+- see the NEWS and ChangeLog files for details.
 
 1.0.16 : (13-Sep-2013)
         - bumped the required JRE to 1.6, enhanced axis labelling, provided
