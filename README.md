@@ -448,8 +448,68 @@ In addition:
 - some warnings reported by FindBugs 1.3.0 have been addressed.
 
 ##### Version 1.0.7 (14-Nov-2007)
-        - See the NEWS and ChangeLog files for a more detailed description of
-          the changes in this release.
+This release features
+- new classes `DialPlot` and `LogAxis` (previously in experimental);
+- initial support for minor tick units;
+- a new anchored zooming option for the `ChartPanel` class;
+- optional simple labeling on pie charts;
+- improvements to the "statistical" datasets and underlying data structures;
+- and numerous bug fixes.
+
+###### API Adjustments
+
+- `CategoryAxis` - added `getCategorySeriesMiddle()` method;
+- `CategoryPlot` - added methods to remove markers;
+- `ChartPanel` - added `defaultDirectoryForSaveAs` attribute;
+- `DialPlot` - new class, an alternative to `MeterPlot`;
+- `LogAxis` - new class, an alternative to `LogarithmicAxis`;
+- `NumberTick` - new constructor that allows specification of the tick type;
+- `NumberTickUnit` - new constructor to specify the minor tick count;
+- `SymbolAxis` - new methods `get/setGridBandAlternatePaint()`;
+- `TickType` - new class;
+- `TickUnit` - added `minorTickCount` attribute;
+- `ValueTick` - added `tickType` attribute;
+- `StandardPieSectionLabelGenerator` - new constructors accepting a Locale;
+- `StandardPieToolTipGenerator` - likewise;
+- `CategoryPlot` - added `getRangeAxisIndex()`, `zoomDomainAxes()` and `zoomRangeAxes()` methods;
+- `FastScatterPlot` - added new zooming methods;
+- `PiePlot` - new attributes to support simple labeling;
+- `PlotUtilities` - new class;
+- `PolarPlot` - added new zooming methods;
+- `ThermometerPlot` - likewise;
+- `XYPlot` - added methods to remove markers (patch 1823697--same as for `CategoryPlot`), and added new zooming methods; 
+- `Zoomable` - added new zooming methods to this interface;
+- `LineAndShapeRenderer` - added `useSeriesOffset` and `itemMargin` attributes;
+- `MinMaxCategoryRenderer` - implemented `equals()`;
+- `XYSplineAndShapeRenderer` - new class;
+- `LogFormat` - new class;
+- `ChartFactory` - new pie and ring chart creation methods that accept a `Locale`;
+- `ChartPanel` - added `zoomAroundAnchor` attribute;
+- `Series` - added `isEmpty()` method;
+- `BoxAndWhiskerItem` - new convenience constructor;
+- `DefaultBoxAndWhiskerCategoryDataset` - new remove methods;
+- `DefaultStatisticalCategoryDataset` - likewise;
+- `MeanAndStandardDeviation` - added new value accessor methods;
+- `TimeTableXYDataset` - added `clear()` method;
+- `Week` - added new constructor;
+- `KeyedObjects` - added `insertValue()` and `clear()` methods;
+- `KeyedObjects2D` - added `clear()` method.
+
+###### Patches
+
+- 1823724 - updated `XYDifferenceRenderer` to support item labels;
+- 1827829 - fixed possible `NullPointerException` in `XYBarRenderer`;
+
+###### Bug Fixes
+
+- 1767315 - `GrayPaintScale.getPaint()` uses wrong value;
+- 1775452 - Inverted `XYBarRenderer` does not render margins correctly;
+- 1802195 - `Marker.listenerList` serializable;
+- 1779941 - `StatisticalBarRenderer` NPE;
+- 1766646 - `XYBlockRenderer` can't handle empty datasets;
+- 1763413 - `PeriodAxis` labels fail to display with setInverted;
+- 1737953 - Zoom doesn't work on `LogAxis` (Demo1);
+- 1749124 - `JFreeChart` not added as `TitleChangeListener`; 
 
 ##### Version 1.0.6 (15-Jun-2007)
         - the VectorRenderer and associated dataset classes have been promoted
