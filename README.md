@@ -92,25 +92,25 @@ http://www.osisecurity.com.au/advisories/jfreechart-path-disclosure
 
 ###### Patches:
 
-3500621 : LegendTitle order attribute (by Simon Kaczor);
-3463807 : ChartComposite does not dispose popup (by Sebastiao Correia);
-3204823 : PaintAlpha for 3D effects (by Dave Law);
+- 3500621 : LegendTitle order attribute (by Simon Kaczor);
+- 3463807 : ChartComposite does not dispose popup (by Sebastiao Correia);
+- 3204823 : PaintAlpha for 3D effects (by Dave Law);
 
-Bug Fixes:
+###### Bug Fixes:
 
-3561093 : Rendering anomaly for XYPlots;
-3555275 : ValueAxis.reserveSpace() problem for axes with fixed dimension;
-3521736 : DeviationRenderer optimisation (by Milan Ramaiya);
-3514487 : SWTGraphics2D get/setStroke() problem;
-3508799 : DefaultPolarItemRenderer does not populate seriesKey in LegendItem;
-3482106 : Missing text in SWTGraphics2D (by Kevin Xu);
-3484408 : Maven fixes (Martin Hoeller);
-3484403 : DateAxis endless loop (by Martin Hoeller);
-3446965 : TimeSeries calculates range incorrectly in addOrUpdate();
-3445507 : TimeSeriesCollection.findRangeBounds() regression;
-3425881 : XYDifferenceRenderer fix (by Patrick Schlott/Christoph Schroeder);
-2963199 : SWT print job (by Jonas Rüttimann);
-2879650 : Path disclosure vulnerability in DisplayChart servlet;
+- 3561093 : Rendering anomaly for XYPlots;
+- 3555275 : ValueAxis.reserveSpace() problem for axes with fixed dimension;
+- 3521736 : DeviationRenderer optimisation (by Milan Ramaiya);
+- 3514487 : SWTGraphics2D get/setStroke() problem;
+- 3508799 : DefaultPolarItemRenderer does not populate seriesKey in LegendItem;
+- 3482106 : Missing text in SWTGraphics2D (by Kevin Xu);
+- 3484408 : Maven fixes (Martin Hoeller);
+- 3484403 : DateAxis endless loop (by Martin Hoeller);
+- 3446965 : TimeSeries calculates range incorrectly in addOrUpdate();
+- 3445507 : TimeSeriesCollection.findRangeBounds() regression;
+- 3425881 : XYDifferenceRenderer fix (by Patrick Schlott/Christoph Schroeder);
+- 2963199 : SWT print job (by Jonas Rüttimann);
+- 2879650 : Path disclosure vulnerability in DisplayChart servlet;
 
 Also fixed a rendering issue for polar charts using an inverted axis.
 
