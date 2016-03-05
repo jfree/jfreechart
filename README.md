@@ -315,14 +315,83 @@ This release passes 1,961 JUnit tests (0 failures) on JRE 1.6.0_07.
 - 2033721 : WaferMapRenderer;
 - 2051168 : No key in LegendItemEntity for pie charts;
 
-Also fixed drawing of alternate grid bands in SymbolAxis, the totalWeight 
+Also fixed drawing of alternate grid bands in `SymbolAxis`, the totalWeight 
 calculation in the CombinedXXXPlot classes, a NullPointerException in the
 XYPlot class when drawing quadrants, outline visibility in the 
 CategoryPlot class, and auto-range calculations with XYBarRenderer.
 
 ##### Version 1.0.10 (8-Jun-2008)
-        - another general maintenance release - see the NEWS and ChangeLog
-          files for more details.
+
+This release contains various bug fixes and minor enhancements to JFreeChart.
+
+- PiePlot labelling has been enhanced (new curve options, and more robust bounds checking);
+- The BoxAndWhiskerRenderer now has a maximumBarWidth attribute;
+- the XYStepRenderer has a new stepPoint attribute;
+- The RelativeDateFormat class has new options;
+- There are new dataset classes (SlidingCategoryDataset and SlidingGanttDataset) that permit a subset of categories to be plotted, and allow charts based on these datasets to simulate scrolling.  
+- There is a new ShortTextTitle class.
+
+This release passes 1,929 JUnit tests (0 failures) on JRE 1.6.0_03.
+
+###### API Adjustments:
+
+- BoxAndWhiskerRenderer - added maximumBarWidth attribute (see patch 1866446);
+- ChartPanel - the zoomPoint attribute has been changed from Point to Point2D;
+- DatasetUtilities - iterateCategoryRangeBounds() is deprecated, the method has been renamed iterateRangeBounds(CategoryDataset) for consistency;
+- DefaultKeyedValue - the constructor now prevents a null key;
+- LogFormat - now has a 'powerLabel' attribute;
+- ShortTextTitle - a new title class;
+- SlidingCategoryDataset - new class;
+- SlidingGanttDataset - new class;
+- TimeSeriesCollection - getSeries(String) changed to getSeries(Comparable);
+- XIntervalSeriesCollection - added series removal methods;
+- YIntervalSeriesCollection - added series removal methods;
+- XYIntervalSeriesCollection - added series removal methods;
+
+`PublicCloneable` is now implemented by a number of classes that didn't previously implement the interface - this should improve the reliability of chart cloning.
+
+###### Patches
+
+- 1943021 : Fix for MultiplePiePlot [Brian Cabana];
+- 1925366 : Speed improvement for DatasetUtilities [Rafal Skalny];
+- 1918209 : LogAxis createTickLabel() changed from private to protected [Andrew Mickish];
+- 1914411 : Simplification of plot event notification [Richard West];
+- 1913751 : XYPlot and CategoryPlot addMarker() methods with optional notification [Richard West];
+- 1902418 : Bug fix for LogAxis vertical labels [Andrew Mickish];
+- 1901599 : Fixes for XYTitleAnnotation [Andrew Mickish];
+- 1891849 : New curve option for pie chart label links [Martin Hilpert];
+- 1874890 : Added step point to XYStepRenderer [Ulrich Voigt];
+- 1873328 : Enhancements to RelativeDateFormat [Michael Siemer];
+- 1871902 : PolarPlot now has angleTickUnit attribute [Martin Hoeller];
+- 1868745 : Fix label anchor points on LogAxis [Andrew Mickish];
+- 1866446 : Added maximumBarWidth to BoxAndWhiskerRenderer [Rob Van der Sanden];
+
+###### Bug Fixes
+
+- 1932146 - PeriodAxis.setRange() doesn't notify listeners;
+- 1927239 - Fix calculation of cumulative range;
+- 1926517 - Bugs in data range calculation for combined plots;
+- 1920854 - PiePlot3D labels drawn multiple times;
+- 1897580 - Fix for DefaultIntervalCategoryDataset;
+- 1892419 - Wrong default for minor tick count in LogAxis;
+- 1880114 - VectorRenderer doesn't work for horizontal plot orientation;
+- 1873160 - DialPlot clipping issues;
+- 1868521 - Problem saving charts to JPEG format;
+- 1864222 - Error on TimeSeries createCopy() method;
+
+The DatasetUtilities.sampleFunction2D() has been changed to sample the correct 
+number of points - you should check any code that calls this method.  The
+XYBlockRenderer class now generates entities.  Bugs in the removeDomainMarker()
+and removeRangeMarker() methods in the CategoryPlot and XYPlot classes have 
+been fixed.  A bug in the TimePeriodValues range calculation has been fixed.
+Fixes were applied to the clone() methods in the TaskSeries and 
+TaskSeriesCollection classes.
+
+###### New Experimental Features
+
+Two new classes CombinedCategoryPlot and CombinedXYPlot have been added to the
+'experimental' source tree - these were contributed by Richard West (see
+patch 1924543).
 
 ##### Version 1.0.9 (4-Jan-2008)
         - this release fixes a security advisory with respect to the HTML
