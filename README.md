@@ -23,35 +23,35 @@ History
 
 ##### Version 1.0.19 (31-Jul-2014)
 - fixed clipping issues for combined plots in JavaFX;
-- fixed a memory leak in the new JavaFX ChartCanvas class;
-- CombinedDomainXYPlot and CombinedRangeXYPlot now take into account the pannable flags in the subplots;
-- FastScatterPlot panning direction is corrected;
+- fixed a memory leak in the new JavaFX `ChartCanvas` class;
+- `CombinedDomainXYPlot` and `CombinedRangeXYPlot` now take into account the pannable flags in the subplots;
+- `FastScatterPlot` panning direction is corrected;
 - added rendering hints to sharpen gridlines and borders in most output formats;        
 - JFreeSVG updated to version 2.0;
 - included a preview of JSFreeChart, a 2D chart library written in JavaScript that is conceptually similar to JFreeChart but runs directly in a web browser.
 
 ##### Version 1.0.18 (3-Jul-2014)
-- added JavaFX support via FXGraphics2D;
-- improved LogAxis labelling;
+- added JavaFX support via `FXGraphics2D`;
+- improved `LogAxis` labelling;
 - improved numeric tick labelling;
-- center text support in RingPlot;
-- 'stepPoint' attribute in the XYStepAreaRenderer;
+- center text support in `RingPlot`;
+- `stepPoint` attribute in the `XYStepAreaRenderer`;
 - other minor improvements and bug fixes.
 
 ##### Version 1.0.17 (22-Nov-2013)
-- Enhanced XYSplineRenderer with new area fill (contributed by Klaus Rheinwald);
-- added a notify flag to all datasets that extend AbstractDataset;
-- extended TimeSeriesCollection to validate TimeSeries keys for uniqueness;
-- added a new DirectionalGradientPaintTransformer (by Peter Kolb);
-- updated OHLCSeries;
-- added HMSNumberFormat;
+- Enhanced `XYSplineRenderer` with new area fill (contributed by Klaus Rheinwald);
+- added a notify flag to all datasets that extend `AbstractDataset`;
+- extended `TimeSeriesCollection` to validate `TimeSeries` keys for uniqueness;
+- added a new `DirectionalGradientPaintTransformer` (by Peter Kolb);
+- updated `OHLCSeries`;
+- added `HMSNumberFormat`;
 - updated JCommon to version 1.0.21 (includes rotated text improvements) and fixed some minor bugs.
 
 ###### Bug Fixes
-- 977  : Multithreading issue with DateAxis;
-- 1084 : BorderArrangement.add() possible ClassCastException;
-- 1099 : XYSeriesCollection.removeSeries(int) does not deregister listener;
-- 1109 : WaterfallBarRenderer uses wrong color for diff 0.
+- 977  : Multithreading issue with `DateAxis`;
+- 1084 : `BorderArrangement.add()` possible `ClassCastException`;
+- 1099 : `XYSeriesCollection.removeSeries(int)` does not deregister listener;
+- 1109 : `WaterfallBarRenderer` uses wrong color for diff 0.
 
 
 ##### Version 1.0.16 (13-Sep-2013)
