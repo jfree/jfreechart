@@ -511,7 +511,7 @@ JFreeChart 1.0.8
 23 November 2007
 
 This release is primarily a bug fix release, correcting a problem with pie
-chart labelling, a regression in the DefaultCategoryDataset class (and 
+chart labeling, a regression in the DefaultCategoryDataset class (and 
 underlying KeyedValues2D class), and a cloning bug in the TimeSeries class.  
 In addition, the StatisticalBarRenderer class has a new 'errorIndicatorStroke' 
 field and has been updated to support gradients, the StandardDialScale has had 
