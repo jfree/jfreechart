@@ -968,4 +968,114 @@ New plots including scatter plot, stacked bar
         auto-tick mechanism.  JFreeChartPanel now incorporates
         buffering, and popup menu.  Javadocs revised.  Fixed numerous
         bugs from version 0.5.6.  Demo application updated.
- 
+
+CONTRIBUTORS
+------------
+JFreeChart wouldn't be half the library that it is today without the contributions (large and small) that have been made by the developers listed below:
+
+- Eric Alexander
+- Richard Atkinson
+- David Basten
+- David Berry
+- Chris Boek
+- Zoheb Borbora
+- Anthony Boulestreau
+- Jeremy Bowman
+- Nicolas Brodu
+- Jody Brownell
+- David Browning
+- Soren Caspersen
+- Thomas A Caswell
+- Chuanhao Chiu
+- Brian Cole
+- Pascal Collet
+- Martin Cordova
+- Paolo Cova
+- Greg Darke
+- Mike Duffy
+- Don Elliott
+- Rune Fauske
+- Jonathan Gabbai
+- Serge V. Grachov
+- Daniel Gredler
+- Joao Guilherme Del Valle
+- Hans-Jurgen Greiner
+- Nick Guenther
+- Aiman Han
+- Cameron Hayne
+- Martin Hoeller (xS+S)
+- Jon Iles
+- Wolfgang Irler
+- Sergei Ivanov
+- Nina Jeliazkova
+- Adriaan Joubert
+- Darren Jung
+- Xun Kang
+- Bill Kelemen
+- Norbert Kiesel
+- Petr Kopac
+- Gideon Krause
+- Dave Law;
+- Pierre-Marie Le Biot
+- Simon Legner
+- Arnaud Lelievre
+- Wolfgang Lenhard
+- Leo Leung
+- David Li
+- Yan Liu
+- Tin Luu
+- Craig MacFarlane
+- Achilleus Mantzios
+- Thomas Meier
+- Jim Moore
+- Jonathan Nash
+- Barak Naveh
+- David M. O'Donnell
+- Krzysztof Paz
+- Eric Penfold
+- Tomer Peretz
+- Xavier Poinsard
+- Andrzej Porebski
+- Viktor Rajewski
+- Eduardo Ramalho
+- Michael Rauch
+- Klaus Rheinwald
+- Cameron Riley
+- Dan Rivett
+- Lukasz Rzeszotarski
+- Scott Sams
+- Michel Santos
+- Thierry Saura
+- Patrick Schlott
+- Andreas Schneider
+- Christoph Schroeder
+- Jean-Luc SCHWAB
+- Bryan Scott
+- Tobias Selb
+- Darshan Shah
+- Mofeed Shahin
+- Michael Siemer
+- Pady Srinivasan
+- Greg Steckman
+- Roger Studner
+- Gerald Struck
+- Irv Thomae
+- Eric Thomas
+- Rich Unger
+- Daniel van Enckevort
+- Laurence Vanhelsuwe
+- Sylvain Vieujot
+- Jelai Wang
+- Mark Watson
+- Alex Weber
+- Richard West
+- Matthew Wright
+- Benoit Xhenseval
+- Christian W. Zuckschwerdt
+- Hari
+- Sam (oldman)
+
+It is possible that I have missed someone on this list, if that applies to you, please e-mail me.
+
+Dave Gilbert (david.gilbert@object-refinery.com)
+JFreeChart Project Leader
