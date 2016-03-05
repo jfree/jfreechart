@@ -176,9 +176,7 @@ Also fixed:
 
 ##### Version 1.0.13 (17-Apr-2009)
 
-> SPECIAL NOTICE:  There will be a birds-of-a-feather session for JFreeChart
-> at this year's JavaOne conference in San Francisco.  The session is        
-> scheduled for 6.45pm to 7.35pm on Wednesday 3 June.                        
+> SPECIAL NOTICE:  There will be a birds-of-a-feather session for JFreeChart at this year's JavaOne conference in San Francisco.  The session is scheduled for 6.45pm to 7.35pm on Wednesday 3 June.                        
 
 This release contains:
 
@@ -237,14 +235,90 @@ This release passes 2110 JUnit tests (0 failures) on JRE 1.6.0_12.
 
 
 ##### Version 1.0.12 (31-Dec-2008)
-        - added support for minor tick marks, mapping datasets to more than
-          one axis, and numerous bug fixes - see the NEWS and ChangeLog files
-          for details.
+
+This release adds 
+- support for minor tick marks;
+- mapping datasets to more than one axis;
+- an important fix for the XYSeries class (relating to the addOrUpdate() method);
+- plus numerous other bug fixes.
+
+This release passes 1996 JUnit test (0 failures) on JRE 1.6.0_10.
+
+###### API Adjustments
+- CategoryPlot : added mapDatasetToDomainAxes() and mapDatasetToRangeAxes() methods;
+- Month : added a new constructor Month(Date, TimeZone, Locale) and deprecated Month(Date, TimeZone);
+- Quarter : added a new constructor Quarter(Date, TimeZone, Locale) and deprecated Quarter(Date, TimeZone);
+- XYPlot : added mapDatasetToDomainAxes() and mapDatasetToRangeAxes() methods;
+- Year : added a new constructor Year(Date, TimeZone, Locale) and deprecated Year(Date, TimeZone);
+
+###### Bug Fixes
+- 2471906 : XYAreaRenderer with dashed outline - performance problem;
+- 2452078 : StackedAreaChart has gaps;
+- 2275695 : NullPointerException for SubCategoryAxis on plot with null dataset;
+- 2221495 : XYLineAnnotation with dashed stroke;
+- 2216511 : SWTBarChartDemo1 throws RuntimeException;
+- 2201869 : DateAxis tick label position error;
+- 2121818 : Label link lines for very thin RingPlot;
+- 2113627 : XYStepRenderer item labels;
+- 1955483 : XYSeries.addOrUpdate() problem.
+
+Also fixed StackedXYBarRenderer which was ignoring the shadowsVisible attribute.
+
 
 ##### Version 1.0.11 (18-Sep-2008)
-        - this release includes a new chart theming mechanism, and numerous
-          other feature enhancements and bug fixes - see the NEWS and ChangeLog
-          files for details.
+
+This release features:
+- a new chart theming mechanism to allow charts to be restyled conveniently;
+- a new BarPainter mechanism to enhance the appearance of bar charts;
+- a new XYShapeRenderer class;
+- a scaling facility for the XYDrawableAnnotation for drawing images within specific data coordinates;
+- some new classes (XYTaskDataset, XYDataImageAnnotation and XYTitleAnnotation);
+- a modification to the Year class to support an extended range; 
+- various bug fixes and API improvements.  
+
+There is an important bug fix for the StackedBarRenderer3D class (see bug 2031407).
+
+This release passes 1,961 JUnit tests (0 failures) on JRE 1.6.0_07.
+
+###### API Adjustments
+- AbstractRenderer - added clearSeriesPaints() and clearSeriesStrokes() methods;
+- BarRenderer - added shadowPaint attribute;
+- CategoryAxis - added getCategoryMiddle() method;
+- CategoryPlot - added getRendererCount() method;
+- ChartFactory - added get/setChartTheme() methods;
+- ChartPanel - increased default maximum drawing width and height;
+- ChartTheme - new interface;
+- ChartUtilities - added applyCurrentTheme() method;
+- CompositeTitle - added backgroundPaint attribute;
+- GradientBarPainter - new class;
+- LegendTitle - added getWrapper() method;
+- OHLCSeriesCollection - added xPosition attribute;
+- PaintScaleLegend - new subdivisions field;
+- PiePlot - added autoPopulate flags, and methods to clear section attributes;
+- Plot - added setDrawingSupplier() method;
+- RegularTimePeriod - the DEFAULT_TIME_ZONE field has been deprecated in this release;
+- RelativeDateFormat - added methods to control formatting of hours and minutes - see patch 2033092;
+- StandardChartTheme - new class;
+- XYItemRendererState - new methods;
+- XYPlot - added getRendererCount() method;
+- XYShapeRenderer - new class;
+- XYTaskDataset - new class.
+
+###### Patches
+- 1997549 : Status calls to XYItemRendererState [Ulrich Voigt];
+- 2006826 : CompositeTitle drawing fix;
+- 2033092 : Additional formatters for RelativeDateFormat [Cole Markham];
+
+###### Bug Fixes
+- 1994355 : ChartComposite listener type;
+- 2031407 : Incorrect rendering in StackedBarRenderer3D;
+- 2033721 : WaferMapRenderer;
+- 2051168 : No key in LegendItemEntity for pie charts;
+
+Also fixed drawing of alternate grid bands in SymbolAxis, the totalWeight 
+calculation in the CombinedXXXPlot classes, a NullPointerException in the
+XYPlot class when drawing quadrants, outline visibility in the 
+CategoryPlot class, and auto-range calculations with XYBarRenderer.
 
 ##### Version 1.0.10 (8-Jun-2008)
         - another general maintenance release - see the NEWS and ChangeLog
