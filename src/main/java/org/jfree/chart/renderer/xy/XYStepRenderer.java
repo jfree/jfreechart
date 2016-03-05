@@ -66,7 +66,7 @@
  * 14-May-2008 : Call addEntity() in drawItem() (DG);
  * 24-Sep-2008 : Fixed bug 2113627 by utilising second pass to draw item
  *               labels (DG);
- * 29-Feb-2015 : Improved performance by only drawing visible lines
+ * 29-Feb-2016 : Improved performance by only drawing visible lines (MN);
  *
  */
 
@@ -320,8 +320,7 @@ public class XYStepRenderer extends XYLineAndShapeRenderer
         }
         line.setLine(x0, y0, x1, y1);
         boolean visible = LineUtilities.clipLine(line, dataArea);
-        if (visible)
-        {
+        if (visible) {
             g2.draw(line);
         }
     }
