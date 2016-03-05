@@ -18,6 +18,29 @@ JFreeChart requires JDK 1.8.0_40 or later and is licensed under the terms of the
 GNU Lesser General Public License (LGPL) version 2.1 or later.
 
 
+Building JFreeChart
+-------------------
+You can build JFreeChart using either Ant or Maven.  The build requires JDK 1.6.0 or later. 
+If you require JavaFX support, then JDK 1.8.0_40 or later is required.
+
+#### Ant
+Using Ant you can build JFreeChart using the following command (issued from the root directory of the project):
+
+    ant -f ant/build-fx.xml
+
+This will include JavaFX support.  To build without JavaFX:
+
+    ant -f ant/build.xml
+
+The Ant build script will perform all build and packaging tasks.
+
+#### Maven
+Using Maven you can build JFreeChart using the following command (issued from the root directory of the project):
+
+    mvn clean install
+
+This will include the JavaFX support.  To build without JavaFX, you should copy the content of the file maven/pom-1.6.xml into the pom.xml file in the root directory and then type the same command as above.
+
 History
 -------
 
