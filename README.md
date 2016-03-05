@@ -39,7 +39,20 @@ Version 1.0.18 (3-Jul-2014)
 - other minor improvements and bug fixes, see the NEWS and ChangeLog files for further details.
 
 Version 1.0.17 (22-Nov-2013)
-- see the NEWS and ChangeLog files for details.
+Enhanced XYSplineRenderer with new area fill (contributed by Klaus Rheinwald),
+added a notify flag to all datasets that extend AbstractDataset, extended 
+TimeSeriesCollection to validate TimeSeries keys for uniqueness, added a new
+DirectionalGradientPaintTransformer (by Peter Kolb), updated OHLCSeries, added 
+HMSNumberFormat, updated JCommon to version 1.0.21 (includes rotated text 
+improvements) and fixed some minor bugs.
+
+Bug Fixes:
+
+ 977 : Multithreading issue with DateAxis;
+1084 : BorderArrangement.add() possible ClassCastException;
+1099 : XYSeriesCollection.removeSeries(int) does not deregister listener;
+1109 : WaterfallBarRenderer uses wrong color for diff 0.
+
 
 1.0.16 : (13-Sep-2013)
         - bumped the required JRE to 1.6, enhanced axis labelling, provided
