@@ -115,11 +115,64 @@ http://www.osisecurity.com.au/advisories/jfreechart-path-disclosure
 Also fixed a rendering issue for polar charts using an inverted axis.
 
 ##### Version 1.0.14 (20-Nov-2011)
-- added support for multiple axes in PolarPlot, performance
-          improvements in the TimeSeriesCollection class, mouse wheel rotation
-          in the PiePlot class, improved Maven support, a range of other
-          minor functional enhancements and numerous bug fixes - see the NEWS
-          and ChangeLog files for details.
+This release contains:
+
+- support for multiple and logarithmic axes with PolarPlot;
+- optional drop-shadows in plot rendering;
+- fitting polynomial functions to a data series;
+- some performance improvements in the TimeSeriesCollection class;
+- mouse wheel rotation of pie charts;
+- improved Maven support.
+
+###### Patches:
+
+- 3435734 : Fix lines overlapping item labels (by Martin Hoeller);
+- 3421088 : Bugfix for misalignment in BoxAndWhiskerRenderer;
+- 2952086 : Enhancement for finding bounds in XYZDatasets;
+- 2954302 : CategoryPointerAnnotation line calculation;
+- 2902842 : HistogramDataset.addSeries() fires change change event (by Thomas A Caswell);
+- 2868608 : Whisker width attribute for BoxAndWhiskerRenderer (by Peter Becker);
+- 2868585 : Added useOutlinePaint flag for BoxAndWhiskerRenderer (by Peter Becker);
+- 2850344 : PolarPlot enhancements (by Martin Hoeller);
+- 2795746 : Support for polynomial regression;
+- 2791407 : Fixes for findRangeBounds() in various renderers.
+
+###### Bug Fixes:
+
+- 3440237 : Shadows always visible;
+- 3432721 : PolarPlot doesn't work with logarithmic axis;
+- 3433405 : LineChart3D - Problem with Item Labels;
+- 3429707 : LogAxis endless loop;
+- 3428870 : Missing argument check in TextAnnotation;
+- 3418287 : RelativeDateFormatTest.java is locale dependent;
+- 3353913 : Localisation fixes for ChartPanel, CompassPlot and PiePlot3D;
+- 3237879 : RingPlot should respect getSectionOutlineVisible();
+- 3190615 : Added missing clear() method in CategoryTableXYDataset;
+- 3165708 : PolarChartPanel localisation fix;
+- 3072674 : Bad handling of NaN in DefaultStatisticalCategoryDataset;
+- 3035289 : StackedXYBarRenderer should respect series/item visible flags;
+- 3026341 : Check for null in getDomain/RangeBounds() for XYShapeRenderer;
+- 2947660 : AbstractCategoryRenderer fix null check in getLegendItems();
+- 2946521 : StandardDialScale check majorTickIncrement argument;
+- 2876406 : TimeTableXYDataset should support Comparable for series keys;
+- 2868557 : BoxAndWhiskerRenderer should fire change event in setMedianVisible();
+- 2849731 : For IntervalCategoryDataset and IntervalXYDataset, fix iterateRangeBounds() in DatasetUtilities;
+- 2840132 : AbstractXYItemRenderer drawAnnotations doesn't set renderer index;
+- 2810220 : Offset problem in StatisticalBarRenderer;
+- 2802014 : Dial value border too small;
+- 2781844 : XYPointerAnnotation arrow drawing;
+- 1937486 : AreaRenderer doesn't respect AreaRendererEndType.LEVEL;
+
+Also fixed:
+- use of simple label offset in PiePlot;
+- cached minY and maxY in TimeSeries.createCopy();
+- scaling issues for charts copied to the clipboard;
+- use of timezone in TimeTableXYDataset constructor;
+- duplicate series names in XYSeriesCollection;
+- HistogramDataset fires a change event in addSeries();
+- check visibility of main chart title before drawing it;
+- fixed serialization of PowerFunction2D, NormalDistributionFunction2D, and LineFunction2D;
+- item label positioning for the AreaRenderer class when the plot has an horizontal orientation.
 
 ###### Version 1.0.13 (17-Apr-2009)
         - there are some significant new features in this release, as well
