@@ -40,36 +40,40 @@ Version 1.0.18 (3-Jul-2014)
 
 Version 1.0.17 (22-Nov-2013)
 
-Enhanced XYSplineRenderer with new area fill (contributed by Klaus Rheinwald),
-added a notify flag to all datasets that extend AbstractDataset, extended 
-TimeSeriesCollection to validate TimeSeries keys for uniqueness, added a new
-DirectionalGradientPaintTransformer (by Peter Kolb), updated OHLCSeries, added 
-HMSNumberFormat, updated JCommon to version 1.0.21 (includes rotated text 
-improvements) and fixed some minor bugs.
+- Enhanced XYSplineRenderer with new area fill (contributed by Klaus Rheinwald);
+- added a notify flag to all datasets that extend AbstractDataset;
+- extended TimeSeriesCollection to validate TimeSeries keys for uniqueness;
+- added a new DirectionalGradientPaintTransformer (by Peter Kolb);
+- updated OHLCSeries;
+- added HMSNumberFormat;
+- updated JCommon to version 1.0.21 (includes rotated text improvements) and fixed some minor bugs.
 
 Bug Fixes:
 
- 977 : Multithreading issue with DateAxis;
-1084 : BorderArrangement.add() possible ClassCastException;
-1099 : XYSeriesCollection.removeSeries(int) does not deregister listener;
-1109 : WaterfallBarRenderer uses wrong color for diff 0.
+- 977  : Multithreading issue with DateAxis;
+- 1084 : BorderArrangement.add() possible ClassCastException;
+- 1099 : XYSeriesCollection.removeSeries(int) does not deregister listener;
+- 1109 : WaterfallBarRenderer uses wrong color for diff 0.
 
 
 Version 1.0.16 (13-Sep-2013)
 
 *** THIS RELEASE REQUIRES JDK/JRE 1.6.0 OR LATER. ***
 
-Provided subscript/superscript support for axis labels (via AttributedString),
-new axis label positioning options, simplified ChartFactory methods,
-added new methods to DatasetUtilities to interpolate y-values in XYDatasets,
-added URLs to labels on CategoryAxis, seamless integration with 
-JFreeSVG (http://www.jfree.org/jfreesvg/) and OrsonPDF 
-(http://www.object-refinery.com/pdf/), improved the consistency of the 
-SWTGraphics2D implementation, and fixed various bugs.  All the JUnit tests 
-have been upgraded to JUnit 4.
+- Provided subscript/superscript support for axis labels (via AttributedString);
+- new axis label positioning options;
+- simplified ChartFactory methods;
+- added new methods to DatasetUtilities to interpolate y-values in XYDatasets;
+- added URLs to labels on CategoryAxis;
+- seamless integration with JFreeSVG (http://www.jfree.org/jfreesvg/) and OrsonPDF 
+(http://www.object-refinery.com/pdf/);
+- improved the consistency of the SWTGraphics2D implementatio;  
+
+All the JUnit tests have been upgraded to JUnit 4.
 
 Bug Fixes:
-1107 : Fixed TimeZone issue in PeriodAxis.
+
+- 1107 : Fixed TimeZone issue in PeriodAxis;
 
 Also fixed a line drawing issue with the StackedXYAreaRenderer, and a memory 
 leak in the SWT ChartComposite class.
