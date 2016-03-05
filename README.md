@@ -39,7 +39,7 @@ Using Maven you can build JFreeChart using the following command (issued from th
 
     mvn clean install
 
-This will include the JavaFX support.  To build without JavaFX, you should copy the content of the file maven/pom-1.6.xml into the pom.xml file in the root directory and then type the same command as above.
+This will include the JavaFX support.  To build without JavaFX, you should copy the content of the file `maven/pom-1.6.xml` into the `pom.xml` file in the root directory and then type the same command as above.
 
 History
 -------
@@ -535,10 +535,55 @@ This release features
 - 1749124 - `JFreeChart` not added as `TitleChangeListener`; 
 
 ##### Version 1.0.6 (15-Jun-2007)
-        - the VectorRenderer and associated dataset classes have been promoted
-          to the standard API from the 'experimental' source tree.  See the
-          NEWS and ChangeLog files for a more detailed description of the
-          changes in this release.
+This release features:
+- a new `VectorRenderer` (previously in experimental);
+- a generalised `XYDifferenceRenderer`;
+- better support for hotspots on legend items;
+- improved performance for time series charts displaying subsets of data;
+- support for `GradientPaint` in plot backgrounds;
+- plus the usual slew of bug fixes and minor feature additions.
+
+###### API Adjustments
+
+- `CategoryItemEntity` - replaced row and column index attributes with row and column key attributes;
+- `CategoryItemRenderer` - numerous series override settings have been deprecated;
+- `DefaultPieDataset` - added `insertValues()` method;
+- `HexNumberFormat` - new class;
+- `LegendItem` - added dataset and seriesKey attributes;
+- `Plot` - added new `fillBackground()` method to support `GradientPaint`, and added `is/setOutlineVisible()` methods;
+- `QuarterDateFormat` - added `GREEK_QUARTERS` field plus a new constructor;
+- `SimpleHistogramDataset` - added `clearObservations()` and `removeAllBins()` methods;
+- `TimeSeriesCollection` - added `indexOf()` method;
+- `URLUtilities` - new class;
+- `XYItemRenderer` - numerous series override settings have been deprecated;
+- `XYSeriesCollection` - added indexOf() method.
+
+###### Bug Fixes
+
+- 1735508 - `ClusteredXYBarRenderer` fails with inverted x-axis;
+- 1726404 - `ChartComposite` tooltips;
+- 1713474 - `StackedBarRenderer3D` doesn't fill shadows;
+- 1713401 - `StackedBarRenderer3D` doesn't check `drawBarOutline` flag;
+- 1701822 - `DefaultBoxAndWhiskerCategoryDataset` doesn't follow contracts;
+- 1698965 - NPE in `CombinedDomainXYPlot`;
+- 1690994 - `HideSeriesDemo1` does not work;
+- 1690654 - Bug in `removeValue()` of `DefaultKeyedValues2D`;
+- 1562701 - `LegendItemEntity` needs dataset index;
+- 1486299 - Use `URLEncoder.encode()` for URL generators;
+
+Plus the following bugs that didn't have entries in the database:
+
+- `BarRenderer` - check for series visibility in `getLegendItem()`;
+- `ChartPanel` - use correct insets for painting chart buffer to screen, update UI for popup menu if LookAndFeel changes;
+- `DateAxis` - fixed boundary cases for `previousStandardDate()` method;
+- `LineBorder` - only draw border if area has positive dimensions;
+- `JFreeChart` - should register as a listener with the default legend;
+- `StandardXYItemRenderer` - fixed a problem where chart entities are created for non-visible items;
+- `TimePeriodValuesCollection.getDomainBounds()` now computes the bounds correctly;
+- `XYLineAndShapeRenderer` - fixed a problem where chart entities are created for non-visible items;
+- `XYLine3DRenderer` - `equals()` implemented, and serialization fixed;
+- `XYTitleAnnotation` - fixed `equals()` method;
+- various resource usage bugs in the experimental `ChartComposite` class;
 
 ##### Version 1.0.5 (23-Mar-2007)
         - this release contains a new DeviationRenderer, enhancements to a
