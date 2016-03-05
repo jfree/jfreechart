@@ -535,7 +535,8 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
     }
 
     /**
-     * Returns the label outline stroke.
+     * Returns the label outline stroke. The default value is 
+     * {@code BasicStroke(0.5)}.
      *
      * @return The label outline stroke (never {@code null}).
      *

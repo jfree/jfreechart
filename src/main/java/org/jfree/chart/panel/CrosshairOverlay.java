@@ -37,6 +37,7 @@
  * 09-Apr-2009 : Version 1 (DG);
  * 19-May-2009 : Fixed FindBugs warnings, patch by Michal Wozniak (DG);
  * 02-Jul-2013 : Use ParamChecks (DG);
+ * 05-Mar-2016 : Fix label outline stroke (DG);
  *
  */
 
@@ -308,6 +309,7 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
                 g2.setPaint(crosshair.getLabelBackgroundPaint());
                 g2.fill(hotspot);
                 g2.setPaint(crosshair.getLabelOutlinePaint());
+                g2.setStroke(crosshair.getLabelOutlineStroke());
                 g2.draw(hotspot);
                 TextUtilities.drawAlignedString(label, g2, xx, yy, alignPt);
             }
@@ -357,6 +359,7 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
                 g2.setPaint(crosshair.getLabelBackgroundPaint());
                 g2.fill(hotspot);
                 g2.setPaint(crosshair.getLabelOutlinePaint());
+                g2.setStroke(crosshair.getLabelOutlineStroke());
                 g2.draw(hotspot);
                 TextUtilities.drawAlignedString(label, g2, xx, yy, alignPt);
             }
