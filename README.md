@@ -1156,85 +1156,93 @@ Added multiple pie charts based on
         The CVS repository at SourceForge has also been restructured
         to match the distribution directory layout.
 
+
 ##### Version 0.9.2 (28-Jun-2002) 
 
-PiePlot now has startAngle and direction
-        attributes.  Added support for image map generation.  Added a
-        new Pie3DPlot class. Added label drawing code to bar
-        renderers. Added optional range markers to horizontal number
-        axis.  Added bar clipping to avoid PRExceptions in bar
-        charts.  JFreeChartDemo has been modified and now includes
-        examples of the dial and thermometer plots.
-        Bug fixes:
-        - auto range for VerticalNumberAxis when zero is forced to be
-          included in the range.
-        - fixed null pointer exception in StackedVerticalBarRenderer3D;
-        - Added get/set methods for min/max chart drawing dimensions
-          in ChartPanel;
-        - HorizontalIntervalBarRenderer now handles single category;
-        - verticalTickLabels now possible in HorizontalNumberAxis3D;
-        - removed unnecessary imports;
+- `PiePlot` now has startAngle and direction attributes;
+- added support for image map generation;
+- added a new `Pie3DPlot` class;
+- added label drawing code to bar renderers;
+- added optional range markers to horizontal number axis;
+- added bar clipping to avoid PRExceptions in bar charts; 
+- JFreeChartDemo has been modified and now includes examples of the dial and thermometer plots.
+
+######Bug fixes
+
+- auto range for `VerticalNumberAxis` when zero is forced to be included in the range;
+- fixed null pointer exception in `StackedVerticalBarRenderer3D`;
+- added get/set methods for min/max chart drawing dimensions in `ChartPanel`;
+- `HorizontalIntervalBarRenderer` now handles single category;
+- `verticalTickLabels` now possible in `HorizontalNumberAxis3D`;
+- removed unnecessary imports;
+
 
 ##### Version 0.9.1 (14-Jun-2002) 
 
 Bug fixes and Javadoc updates.
-        - fixed auto range calculation for category plots;
-        - fixed event notification for XYPlot;
-        - fixed auto axis range for Gantt charts;
-        - check for null popup menu in ChartPanel.mouseDragged;
-        - new checks for null info in renderers;
-        - range markers now drawn only if in visible axis range;
+
+- fixed auto range calculation for category plots;
+- fixed event notification for `XYPlot`;
+- fixed auto axis range for Gantt charts;
+- check for null popup menu in `ChartPanel.mouseDragged`;
+- new checks for null info in renderers;
+- range markers now drawn only if in visible axis range;
+
 
 ##### Version 0.9.0 (7-Jun-2002) 
 
-New plots including an area chart, a horizontal
-        3D bar chart, a Gantt chart and a thermometer chart.
-        Combination plots have been reworked to provide a
-        simpler framework, and extends to allow category plots to be
-        combined. There is now a facility to add a ChartMouseListener
-        to the ChartPanel (formerly JFreeChartPanel).  An interactive
-        zooming feature (experimental at this point) is now available
-        for XYPlots.  A new Polish translation has been added. Several
-        fixes have been applied to the default tool tip generators.  A
-        workaround has been added to fix the alignment between time
-        series charts and the date axis.  There are some improvements
-        to the VerticalLogarithmicAxis class, and now a corresponding
-        HorizontalLogarithmicAxis class.  Additional demonstration
-        applications have been added.  Fixed the popup menu bug.
+- new plots including an area chart, a horizontal 3D bar chart, a Gantt chart 
+  and a thermometer chart;
+- combination plots have been reworked to provide a simpler framework, and 
+  extends to allow category plots to be combined;
+- there is now a facility to add a `ChartMouseListener` to the `ChartPanel` 
+  (formerly `JFreeChartPanel`);
+- an interactive zooming feature (experimental at this point) is now available 
+  for `XYPlots`;
+- a new Polish translation has been added;
+- several fixes have been applied to the default tool tip generators;
+- a workaround has been added to fix the alignment between time series charts 
+  and the date axis;  
+- there are some improvements to the `VerticalLogarithmicAxis` class, and now a 
+  corresponding `HorizontalLogarithmicAxis` class;  
+- additional demonstration applications have been added;
+- fixed the popup menu bug.
+
 
 ##### Version 0.8.1 (5-Apr-2002) 
 
-Localised resource bundles for French, German and
-        Spanish languages (thanks to Anthony Boulestreau, Thomas Meier
-        and Hans-Jurgen Greiner for the translations).  An area XY
-        plot and meter chart contributed by Hari.  Symbol charts
-        contributed by Anthony Boulestreau. An improved
-        CandleStickRenderer class from Sylvain Vieujot.  Updated
-        servlet code from Bryan Scott.  XYItemRenderers now have a
-        change listener mechanism and therefore do not have to be
-        immutable.  Additional demonstration applications for
-        individual chart types. Minor bug fixes.
+- Localised resource bundles for French, German and Spanish languages (thanks to 
+Anthony Boulestreau, Thomas Meier and Hans-Jurgen Greiner for the translations);  
+- an area XY plot and meter chart contributed by Hari;
+- symbol charts contributed by Anthony Boulestreau;
+- an improved `CandleStickRenderer` class from Sylvain Vieujot;
+- updated servlet code from Bryan Scott;
+- `XYItemRenderers` now have a change listener mechanism and therefore do not 
+have to be immutable;
+- additional demonstration applications for individual chart types;
+- minor bug fixes.
+
 
 ##### Version 0.8.0 (22-Mar-2002) 
 
-All the category plots are now controlled
-        through the one class (CategoryPlot) with plug-in renderers.
-        Added a ResourceBundle for user interface items that require
-        localisation. Added a logarithmic axis class contributed by
-        Mike Duffy and some new JDBC and servlet code contributed by
-        Bryan Scott.  Updated the JCommon class library to improve
-        handling of time periods in different time zones.
+- all the category plots are now controlled through the one class (`CategoryPlot`) with plug-in renderers;
+- added a `ResourceBundle` for user interface items that require localisation;
+- added a logarithmic axis class contributed by Mike Duffy and some new JDBC and servlet code contributed by Bryan Scott;
+- updated the JCommon class library to improve handling of time periods in different time zones.
+
 
 ##### Version 0.7.4 (6-Mar-2002) 
 
-Bug fixes in the JCommon Class Library. Various
-        Javadoc comment updates.  Some minor changes to the
-        code. Added new domain name (http://www.object-refinery.com)
-        in the source headers.
+- bug fixes in the JCommon Class Library; 
+- various Javadoc comment updates;  
+- some minor changes to the code; 
+- added new domain name (http://www.object-refinery.com) in the source headers.
+
 
 ##### Version 0.7.3 (14-Feb-2002) 
 
 Bug fixes.
+
 
 ##### Version 0.7.2 (8-Feb-2002) 
 
