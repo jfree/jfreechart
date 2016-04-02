@@ -1238,37 +1238,35 @@ Bug fixes.
 
 ##### Version 0.7.2 (8-Feb-2002) 
 
-Integrated the WindPlot code from Achilleus
-        Mantzios. Added an optional background image for the
-        JFreeChart class, and another optional background image for
-        the Plot class.  Added alpha-transparency for the plot
-        foreground and background.  Added new pie chart label types
-        that show values.  Fixed a bug with the legend that results in
-        a loop at small chart sizes. Added some tooltip methods that
-        were missing from the previous version. Changed the Insets
-        class on chart titles to a new Spacer class that will allow
-        for relative or absolute insets (the plan is to eventually
-        replace all Insets in the JFreeChart classes).  Fixed a bug in
-        the setAutoRangeIncludesZero method of the NumberAxis class.
-        Added the instructions that were missing from the copies of
-        the GNU Lesser General Public Licence included with JFreeChart.
+- integrated the `WindPlot` code from Achilleus Mantzios;
+- added an optional background image for the `JFreeChart` class;
+- added an optional background image for the `Plot` class;
+- added alpha-transparency for the plot foreground and background;
+- added new pie chart label types that show values;
+- fixed a bug with the legend that results in a loop at small chart sizes;
+- added some tooltip methods that were missing from the previous version;
+- changed the `Insets` class on chart titles to a new `Spacer` class that will 
+allow for relative or absolute insets (the plan is to eventually replace all 
+`Insets` in the 'JFreeChart' classes);  
+- fixed a bug in the 'setAutoRangeIncludesZero' method of the 'NumberAxis' class;
+- added the instructions that were missing from the copies of the GNU Lesser General Public Licence included with JFreeChart.
+
 
 ##### Version 0.7.1 (25-Jan-2002) 
 
-Added tooltips, crosshairs and zooming
-        functions, thanks to Jonathan Nash and Hans-Jurgen Greiner
-        for contributing the code that these features are based on.
-        Moved the combination charts into the package
-        com.jrefinery.chart.combination, made a number of other small
-        API changes and fixed some bugs.  Removed the Javadoc HTML
-        from the download to save space (you can regenerate it from
-        the source code if you need it).
+- added tooltips, crosshairs and zooming functions, thanks to Jonathan Nash and Hans-Jurgen Greiner
+  for contributing the code that these features are based on;
+- moved the combination charts into the package `com.jrefinery.chart.combination`;
+- made a number of other small API changes and fixed some bugs;
+- removed the Javadoc HTML from the download to save space (you can regenerate it from the source code if you need it).
+
 
 ##### Version 0.7.0 (11-Dec-2001) 
 
 - new combination plots developed by Bill Kelemen;
 - added Wolfgang Irler's servlet demo to the standard download;
 - the About window in the demo application now includes a list of developers that have contributed to the project.
+
 
 ##### Version 0.6.0 (27-Nov-2001) 
 
@@ -1277,7 +1275,7 @@ Added tooltips, crosshairs and zooming
 - data interfaces and classes moved to the JCommon class library;
 - new properties to control spacing on bar charts;
 - new auto-tick mechanism;
-- JFreeChartPanel now incorporates buffering, and popup menu;
+- 'JFreeChartPanel' now incorporates buffering, and popup menu;
 - Javadocs revised;
 - Fixed numerous bugs from version 0.5.6;  
 - Demo application updated.
@@ -1392,4 +1390,5 @@ JFreeChart wouldn't be half the library that it is today without the contributio
 It is possible that I have missed someone on this list, if that applies to you, please e-mail me.
 
 Dave Gilbert (david.gilbert@object-refinery.com)
+
 JFreeChart Project Leader
