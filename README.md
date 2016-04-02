@@ -772,37 +772,40 @@ be incorporated into the main library.  PLEASE NOTE THAT THE API FOR THESE
 CLASSES IS SUBJECT TO CHANGE. 
 
 ##### Version 1.0.1 (27-Jan-2006)
-This is primarily a bug fix release.  In addition, there are some API adjustments (there should be no breakage of applications coded to the 1.0.0 API).
+This is primarily a bug fix release.  In addition, there are some API 
+adjustments (there should be no breakage of applications coded to the 1.0.0 API).
 
-API adjustments:
-- BarRenderer: added a new flag (includeBaseInRange), plus accessor 
+###### API adjustments
+- `BarRenderer`: added a new flag (`includeBaseInRange`), plus accessor 
     methods, that controls whether or not the base value for the bar is 
-    included in the range calculated by the findRangeBounds() method;
-- BubbleXYItemLabelGenerator: new class;
-- Range: added a new method expandToInclude(Range, double), this is used by 
-    the BarRenderer class;
-- TaskSeriesCollection: added two new methods, getSeries(int) and 
-    getSeries(Comparable).
-- TimeSeriesCollection:  the domainIsPointsInTime flag has been deprecated. The flag serves no function now that renderers are used to calculate the 
-    domain bounds, so you can safely delete any calls to the
-    setDomainIsPointsInTime() method;
-- XYPlot: added a new getAnnotations() method;
-- XYSeries: the update(int, Number) method has been deprecated and a new method updateByIndex(int, Number) has been added;
+    included in the range calculated by the `findRangeBounds()` method;
+- `BubbleXYItemLabelGenerator`: new class;
+- `Range`: added a new method `expandToInclude(Range, double)`, this is used by 
+    the `BarRenderer` class;
+- `TaskSeriesCollection`: added two new methods, `getSeries(int)` and 
+    `getSeries(Comparable)`;
+- `TimeSeriesCollection`:  the `domainIsPointsInTime` flag has been deprecated. 
+  The flag serves no function now that renderers are used to calculate the domain 
+  bounds, so you can safely delete any calls to the `setDomainIsPointsInTime()`
+  method;
+- `XYPlot`: added a new `getAnnotations()` method;
+- `XYSeries`: the `update(int, Number)` method has been deprecated and a new 
+  method `updateByIndex(int, Number)` has been added;
 
 ###### Bug fixes
 
-- 1243050 - XYBarRenderer doesn't show entire range of values for a TimeSeriesCollection;
-- 1373371 - XYBubbleRenderer doesn't support item labels;
-- 1374222 - BarRenderer contains JDK 1.4 specific code;
-- 1374328 - LegendItem serialization problem;
-- 1377239 - Bad argument checking in Quarter constructor;
-- 1379331 - Incorrect drawing of TextTitle at LEFT or RIGHT position;
-- 1386328 - RingPlot entity incorrect;
-- 1400442 - Inconsistent treatment of null and zero values in PiePlot;
-- 1401856 - Bad rendering for non-zero base values in BarRenderer;
-- 1403043 - NullPointerException in CategoryAxis;
-- 1408904 - NumberAxis3D assumes CategoryPlot;
-- 1415480 - XYTextAnnotation equals() method doesn't check (x, y);
+- 1243050 - `XYBarRenderer` doesn't show entire range of values for a `TimeSeriesCollection`;
+- 1373371 - `XYBubbleRenderer` doesn't support item labels;
+- 1374222 - `BarRenderer` contains JDK 1.4 specific code;
+- 1374328 - `LegendItem` serialization problem;
+- 1377239 - Bad argument checking in `Quarter` constructor;
+- 1379331 - Incorrect drawing of `TextTitle` at LEFT or RIGHT position;
+- 1386328 - `RingPlot` entity incorrect;
+- 1400442 - Inconsistent treatment of null and zero values in `PiePlot`;
+- 1401856 - Bad rendering for non-zero base values in `BarRenderer`;
+- 1403043 - `NullPointerException` in `CategoryAxis`;
+- 1408904 - `NumberAxis3D` assumes `CategoryPlot`;
+- 1415480 - `XYTextAnnotation` equals() method doesn't check (x, y);
 
 ##### Version 1.0.0 (2-Dec-2005) 
 - the first stable release of the JFreeChart class library, all future releases in the 1.0.x series will aim to maintain backward compatibility with this release;
@@ -1255,8 +1258,8 @@ Bug fixes.
 - added some tooltip methods that were missing from the previous version;
 - changed the `Insets` class on chart titles to a new `Spacer` class that will 
 allow for relative or absolute insets (the plan is to eventually replace all 
-`Insets` in the 'JFreeChart' classes);  
-- fixed a bug in the 'setAutoRangeIncludesZero' method of the 'NumberAxis' class;
+`Insets` in the `JFreeChart` classes);  
+- fixed a bug in the `setAutoRangeIncludesZero` method of the `NumberAxis` class;
 - added the instructions that were missing from the copies of the GNU Lesser General Public Licence included with JFreeChart.
 
 
@@ -1283,10 +1286,10 @@ allow for relative or absolute insets (the plan is to eventually replace all
 - data interfaces and classes moved to the JCommon class library;
 - new properties to control spacing on bar charts;
 - new auto-tick mechanism;
-- 'JFreeChartPanel' now incorporates buffering, and popup menu;
+- `JFreeChartPanel` now incorporates buffering, and popup menu;
 - Javadocs revised;
-- Fixed numerous bugs from version 0.5.6;  
-- Demo application updated.
+- fixed numerous bugs from version 0.5.6;  
+- demo application updated.
 
 
 CONTRIBUTORS
