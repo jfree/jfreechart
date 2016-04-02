@@ -348,11 +348,19 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     /** Storage for the datasets. */
     private Map<Integer, CategoryDataset> datasets;
 
-    /** Storage for keys that map datasets to domain axes. */
-    private TreeMap datasetToDomainAxesMap;
+    /** 
+     * Storage for keys that map each dataset to one or more domain axes.
+     * Typically a dataset is rendered using the scale of a single axis, but
+     * a dataset can contribute to the "auto-range" of any number of axes.
+     */
+    private TreeMap<Integer, List<Integer>> datasetToDomainAxesMap;
 
-    /** Storage for keys that map datasets to range axes. */
-    private TreeMap datasetToRangeAxesMap;
+    /** 
+     * Storage for keys that map each dataset to one or more range axes. 
+     * Typically a dataset is rendered using the scale of a single axis, but
+     * a dataset can contribute to the "auto-range" of any number of axes.
+     */
+    private TreeMap<Integer, List<Integer>> datasetToRangeAxesMap;
 
     /** Storage for the renderers. */
     private Map<Integer, CategoryItemRenderer> renderers;
@@ -4285,21 +4293,21 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @since 1.0.3
      */
     private List<CategoryDataset> datasetsMappedToDomainAxis(int axisIndex) {
-        Integer key = new Integer(axisIndex);
         List<CategoryDataset> result = new ArrayList<CategoryDataset>();
-        for (CategoryDataset dataset : this.datasets.values()) {
+        for (Entry<Integer, CategoryDataset> entry : this.datasets.entrySet()) {
+            CategoryDataset dataset = entry.getValue();
             if (dataset == null) {
                 continue;
             }
-            int i = indexOf(dataset);
+            Integer datasetIndex = entry.getKey();
             List mappedAxes = (List) this.datasetToDomainAxesMap.get(
-                    new Integer(i));
+                    datasetIndex);
             if (mappedAxes == null) {
-                if (key.equals(ZERO)) {
+                if (axisIndex == 0) {
                     result.add(dataset);
                 }
             } else {
-                if (mappedAxes.contains(key)) {
+                if (mappedAxes.contains(axisIndex)) {
                     result.add(dataset);
                 }
             }
@@ -4311,24 +4319,24 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * A utility method that returns a list of datasets that are mapped to a
      * given range axis.
      *
-     * @param index  the axis index.
+     * @param axisIndex  the axis index.
      *
-     * @return A list of datasets.
+     * @return The list (possibly empty, but never {@code null}).
      */
-    private List datasetsMappedToRangeAxis(int index) {
-        Integer key = new Integer(index);
-        List result = new ArrayList();
-        for (CategoryDataset dataset : this.datasets.values()) {
-            int i = indexOf(dataset);
+    private List<CategoryDataset> datasetsMappedToRangeAxis(int axisIndex) {
+        List<CategoryDataset> result = new ArrayList<CategoryDataset>();
+        for (Entry<Integer, CategoryDataset> entry : this.datasets.entrySet()) {
+            Integer datasetIndex = entry.getKey();
+            CategoryDataset dataset = entry.getValue();
             List mappedAxes = (List) this.datasetToRangeAxesMap.get(
-                    new Integer(i));
+                    datasetIndex);
             if (mappedAxes == null) {
-                if (key.equals(ZERO)) {
-                    result.add(this.datasets.get(i));
+                if (axisIndex == 0) {
+                    result.add(dataset);
                 }
             } else {
-                if (mappedAxes.contains(key)) {
-                    result.add(this.datasets.get(i));
+                if (mappedAxes.contains(axisIndex)) {
+                    result.add(dataset);
                 }
             }
         }
