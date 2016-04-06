@@ -50,6 +50,7 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Skinnable;
 import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import org.jfree.chart.ChartMouseEvent;
 import org.jfree.chart.ChartRenderingInfo;
 import org.jfree.chart.JFreeChart;
@@ -283,11 +284,12 @@ public class ChartViewer extends Control implements Skinnable,
      * A handler for the export to PDF option in the context menu.
      */
     private void handleExportToPDF() {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter(
-                "Portable Document Format (PDF)", "pdf"));
-        fileChooser.setTitle("Export to PDF");
-        File file = fileChooser.showSaveDialog(this.getScene().getWindow());
+        FileChooser chooser = new FileChooser();
+        chooser.setTitle("Export to PDF");
+        ExtensionFilter filter = new FileChooser.ExtensionFilter(
+                "Portable Document Format (PDF)", "pdf");
+        chooser.getExtensionFilters().add(filter);
+        File file = chooser.showSaveDialog(getScene().getWindow());
         if (file != null) {
             ExportUtils.writeAsPDF(this.chart, (int) getWidth(), 
                     (int) getHeight(), file);
@@ -298,11 +300,12 @@ public class ChartViewer extends Control implements Skinnable,
      * A handler for the export to SVG option in the context menu.
      */
     private void handleExportToSVG() {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Export to SVG");
-        fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter(
-                "Scalable Vector Graphics (SVG)", "svg"));
-        File file = fileChooser.showSaveDialog(this.getScene().getWindow());
+        FileChooser chooser = new FileChooser();
+        chooser.setTitle("Export to SVG");
+        ExtensionFilter filter = new FileChooser.ExtensionFilter(
+                "Scalable Vector Graphics (SVG)", "svg");
+        chooser.getExtensionFilters().add(filter);
+        File file = chooser.showSaveDialog(getScene().getWindow());
         if (file != null) {
             ExportUtils.writeAsSVG(this.chart, (int) getWidth(), 
                     (int) getHeight(), file);
@@ -313,11 +316,12 @@ public class ChartViewer extends Control implements Skinnable,
      * A handler for the export to PNG option in the context menu.
      */
     private void handleExportToPNG() {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Export to PNG");
-        fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter(
-                "Portable Network Graphics (PNG)", "png"));
-        File file = fileChooser.showSaveDialog(this.getScene().getWindow());
+        FileChooser chooser = new FileChooser();
+        chooser.setTitle("Export to PNG");
+        ExtensionFilter filter = new FileChooser.ExtensionFilter(
+                "Portable Network Graphics (PNG)", "png");
+        chooser.getExtensionFilters().add(filter);
+        File file = chooser.showSaveDialog(getScene().getWindow());
         if (file != null) {
             try {
                 ExportUtils.writeAsPNG(this.chart, (int) getWidth(),
@@ -332,11 +336,11 @@ public class ChartViewer extends Control implements Skinnable,
      * A handler for the export to JPEG option in the context menu.
      */
     private void handleExportToJPEG() {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Export to JPEG");
-        fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter(
-                "JPEG", "jpg"));
-        File file = fileChooser.showSaveDialog(this.getScene().getWindow());
+        FileChooser chooser = new FileChooser();
+        chooser.setTitle("Export to JPEG");
+        ExtensionFilter filter = new FileChooser.ExtensionFilter("JPEG", "jpg");
+        chooser.getExtensionFilters().add(filter);
+        File file = chooser.showSaveDialog(getScene().getWindow());
         if (file != null) {
             try {
                 ExportUtils.writeAsJPEG(this.chart, (int) getWidth(),
