@@ -370,6 +370,9 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     /** The width of the chart buffer. */
     private int chartBufferWidth;
 
+    /** Flag to check whether the panel was disposed or not */
+    private boolean isPanelDisposed;
+
     /**
      * The minimum width for drawing a chart (uses scaling for smaller widths).
      */
@@ -1538,6 +1541,13 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      */
     @Override
     public void paintComponent(Graphics g) {
+
+        // if the Panel was disposed, do not paint the component
+        if (this.isPanelDisposed)
+        {
+            return;
+        }
+
         super.paintComponent(g);
         if (this.chart == null) {
             return;
@@ -3340,6 +3350,16 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
             this.chart.addChangeListener(this);
         }
 
+    }
+
+    /**
+     * Provides a way to clean the chartBuffer and mark the ChartPanel as disposed to avoid
+     * memory bug.
+     */
+    public void dispose()
+    {
+     this.chartBuffer = null;
+     this.isPanelDisposed = true;
     }
 
 }
