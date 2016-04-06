@@ -1,6 +1,10 @@
 JFreeChart
 ==========
 
+This forked version from the original includes a change to fix a memory leak when using the ChartPanel:
+
+[https://github.com/jfree/jfreechart/pull/11](https://github.com/jfree/jfreechart/pull/11)
+
 Version 1.5.0 (and 1.0.20), not yet released.
 
 
