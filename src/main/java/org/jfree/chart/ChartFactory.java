@@ -2381,6 +2381,25 @@ public abstract class ChartFactory {
         return chart;
 
     }
+    
+    /**
+     * Creates a histogram chart.  This chart is constructed with an
+     * {@link XYPlot} using an {@link XYBarRenderer}.  The domain and range
+     * axes are {@link NumberAxis} instances.
+     *
+     * @param title  the chart title ({@code null} permitted).
+     * @param xAxisLabel  the x axis label ({@code null} permitted).
+     * @param yAxisLabel  the y axis label ({@code null} permitted).
+     * @param dataset  the dataset ({@code null} permitted).
+     * @return A chart.
+     * 
+     * @since 1.0.20
+     */
+    public static JFreeChart createHistogram(String title,
+            String xAxisLabel, String yAxisLabel, IntervalXYDataset dataset) {
+        return createHistogram(title, xAxisLabel, yAxisLabel, dataset,
+                PlotOrientation.VERTICAL, true, true, false);
+    }
 
     /**
      * Creates a histogram chart.  This chart is constructed with an
