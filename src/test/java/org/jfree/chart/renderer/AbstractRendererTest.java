@@ -41,6 +41,7 @@
  * 17-Jun-2008 : Added new fields to testEquals() and testCloning() (DG);
  * 28-Jan-2009 : Updated testEquals() (DG);
  * 28-Apr-2009 : Updated testEquals() (DG);
+ * 25-Apr-2016 : Update testClone() (DG);
  *
  */
 
@@ -134,75 +135,75 @@ public class AbstractRendererTest {
         assertTrue(r1.equals(r2));
 
         // paint
-        r1.setPaint(new GradientPaint(1.0f, 2.0f, Color.blue,
-                3.0f, 4.0f, Color.red));
+        r1.setPaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
+                3.0f, 4.0f, Color.RED));
         assertFalse(r1.equals(r2));
-        r2.setPaint(new GradientPaint(1.0f, 2.0f, Color.blue,
-                3.0f, 4.0f, Color.red));
+        r2.setPaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
+                3.0f, 4.0f, Color.RED));
         assertTrue(r1.equals(r2));
 
         // paintList
-        r1.setSeriesPaint(0, new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.white));
+        r1.setSeriesPaint(0, new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.WHITE));
         assertFalse(r1.equals(r2));
-        r2.setSeriesPaint(0, new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.white));
+        r2.setSeriesPaint(0, new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.WHITE));
         assertTrue(r1.equals(r2));
 
         // basePaint
-        r1.setBasePaint(new GradientPaint(1.0f, 2.0f, Color.blue,
-                3.0f, 4.0f, Color.red));
+        r1.setBasePaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
+                3.0f, 4.0f, Color.RED));
         assertFalse(r1.equals(r2));
-        r2.setBasePaint(new GradientPaint(1.0f, 2.0f, Color.blue,
-                3.0f, 4.0f, Color.red));
+        r2.setBasePaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
+                3.0f, 4.0f, Color.RED));
         assertTrue(r1.equals(r2));
 
         // fillPaint
-        r1.setFillPaint(new GradientPaint(1.0f, 2.0f, Color.blue,
-                3.0f, 4.0f, Color.red));
+        r1.setFillPaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
+                3.0f, 4.0f, Color.RED));
         assertFalse(r1.equals(r2));
-        r2.setFillPaint(new GradientPaint(1.0f, 2.0f, Color.blue,
-                3.0f, 4.0f, Color.red));
+        r2.setFillPaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
+                3.0f, 4.0f, Color.RED));
         assertTrue(r1.equals(r2));
 
         // fillPaintList
-        r1.setSeriesFillPaint(0, new GradientPaint(1.0f, 2.0f, Color.blue,
-                3.0f, 4.0f, Color.red));
+        r1.setSeriesFillPaint(0, new GradientPaint(1.0f, 2.0f, Color.BLUE,
+                3.0f, 4.0f, Color.RED));
         assertFalse(r1.equals(r2));
-        r2.setSeriesFillPaint(0, new GradientPaint(1.0f, 2.0f, Color.blue,
-                3.0f, 4.0f, Color.red));
+        r2.setSeriesFillPaint(0, new GradientPaint(1.0f, 2.0f, Color.BLUE,
+                3.0f, 4.0f, Color.RED));
         assertTrue(r1.equals(r2));
 
         // baseFillPaint
-        r1.setBaseFillPaint(new GradientPaint(1.0f, 2.0f, Color.blue,
-                3.0f, 4.0f, Color.red));
+        r1.setBaseFillPaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
+                3.0f, 4.0f, Color.RED));
         assertFalse(r1.equals(r2));
-        r2.setBaseFillPaint(new GradientPaint(1.0f, 2.0f, Color.blue,
-                3.0f, 4.0f, Color.red));
+        r2.setBaseFillPaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
+                3.0f, 4.0f, Color.RED));
         assertTrue(r1.equals(r2));
 
         // outlinePaint
-        r1.setOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.blue,
-                3.0f, 4.0f, Color.red));
+        r1.setOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
+                3.0f, 4.0f, Color.RED));
         assertFalse(r1.equals(r2));
-        r2.setOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.blue,
-                3.0f, 4.0f, Color.red));
+        r2.setOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
+                3.0f, 4.0f, Color.RED));
         assertTrue(r1.equals(r2));
 
         // outlinePaintList
-        r1.setSeriesOutlinePaint(0, new GradientPaint(1.0f, 2.0f, Color.blue,
-                3.0f, 4.0f, Color.red));
+        r1.setSeriesOutlinePaint(0, new GradientPaint(1.0f, 2.0f, Color.BLUE,
+                3.0f, 4.0f, Color.RED));
         assertFalse(r1.equals(r2));
-        r2.setSeriesOutlinePaint(0, new GradientPaint(1.0f, 2.0f, Color.blue,
-                3.0f, 4.0f, Color.red));
+        r2.setSeriesOutlinePaint(0, new GradientPaint(1.0f, 2.0f, Color.BLUE,
+                3.0f, 4.0f, Color.RED));
         assertTrue(r1.equals(r2));
 
         // baseOutlinePaint
-        r1.setBaseOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.blue,
-                3.0f, 4.0f, Color.red));
+        r1.setBaseOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
+                3.0f, 4.0f, Color.RED));
         assertFalse(r1.equals(r2));
-        r2.setBaseOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.blue,
-                3.0f, 4.0f, Color.red));
+        r2.setBaseOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
+                3.0f, 4.0f, Color.RED));
         assertTrue(r1.equals(r2));
 
         // stroke
@@ -297,27 +298,27 @@ public class AbstractRendererTest {
         assertTrue(r1.equals(r2));
 
         // itemLabelPaint
-        r1.setItemLabelPaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.gray));
+        r1.setItemLabelPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.GRAY));
         assertFalse(r1.equals(r2));
-        r2.setItemLabelPaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.gray));
+        r2.setItemLabelPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.GRAY));
         assertTrue(r1.equals(r2));
 
         // itemLabelPaintList
-        r1.setSeriesItemLabelPaint(0, new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.gray));
+        r1.setSeriesItemLabelPaint(0, new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.GRAY));
         assertFalse(r1.equals(r2));
-        r2.setSeriesItemLabelPaint(0, new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.gray));
+        r2.setSeriesItemLabelPaint(0, new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.GRAY));
         assertTrue(r1.equals(r2));
 
         // baseItemLabelPaint
-        r1.setBaseItemLabelPaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.gray));
+        r1.setBaseItemLabelPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.GRAY));
         assertFalse(r1.equals(r2));
-        r2.setBaseItemLabelPaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.gray));
+        r2.setBaseItemLabelPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.GRAY));
         assertTrue(r1.equals(r2));
 
         // positiveItemLabelPosition;
@@ -413,19 +414,19 @@ public class AbstractRendererTest {
         assertTrue(r1.equals(r2));
 
         // legendTextPaint
-        r1.setLegendTextPaint(0, new GradientPaint(1.0f, 2.0f, Color.blue,
-                3.0f, 4.0f, Color.red));
+        r1.setLegendTextPaint(0, new GradientPaint(1.0f, 2.0f, Color.BLUE,
+                3.0f, 4.0f, Color.RED));
         assertFalse(r1.equals(r2));
-        r2.setLegendTextPaint(0, new GradientPaint(1.0f, 2.0f, Color.blue,
-                3.0f, 4.0f, Color.red));
+        r2.setLegendTextPaint(0, new GradientPaint(1.0f, 2.0f, Color.BLUE,
+                3.0f, 4.0f, Color.RED));
         assertTrue(r1.equals(r2));
 
         // baseOutlinePaint
-        r1.setBaseLegendTextPaint(new GradientPaint(1.0f, 2.0f, Color.blue,
-                3.0f, 4.0f, Color.red));
+        r1.setBaseLegendTextPaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
+                3.0f, 4.0f, Color.RED));
         assertFalse(r1.equals(r2));
-        r2.setBaseLegendTextPaint(new GradientPaint(1.0f, 2.0f, Color.blue,
-                3.0f, 4.0f, Color.red));
+        r2.setBaseLegendTextPaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
+                3.0f, 4.0f, Color.RED));
         assertTrue(r1.equals(r2));
     }
 
@@ -454,22 +455,28 @@ public class AbstractRendererTest {
     @Test
     public void testEquals_ObjectList3() {
         BarRenderer r1 = new BarRenderer();
-        r1.setSeriesPositiveItemLabelPosition(0, new ItemLabelPosition(ItemLabelAnchor.CENTER, TextAnchor.CENTER));
+        r1.setSeriesPositiveItemLabelPosition(0, 
+                new ItemLabelPosition(ItemLabelAnchor.CENTER, TextAnchor.CENTER));
         BarRenderer r2 = new BarRenderer();
-        r2.setSeriesPositiveItemLabelPosition(0, new ItemLabelPosition(ItemLabelAnchor.CENTER, TextAnchor.CENTER));
+        r2.setSeriesPositiveItemLabelPosition(0, 
+                new ItemLabelPosition(ItemLabelAnchor.CENTER, TextAnchor.CENTER));
         assertEquals(r1, r2);
-        r2.setSeriesPositiveItemLabelPosition(1, new ItemLabelPosition(ItemLabelAnchor.INSIDE1, TextAnchor.CENTER));
+        r2.setSeriesPositiveItemLabelPosition(1, 
+                new ItemLabelPosition(ItemLabelAnchor.INSIDE1, TextAnchor.CENTER));
         assertNotEquals(r1, r2);
     }
 
     @Test
     public void testEquals_ObjectList4() {
         BarRenderer r1 = new BarRenderer();
-        r1.setSeriesNegativeItemLabelPosition(0, new ItemLabelPosition(ItemLabelAnchor.CENTER, TextAnchor.CENTER));
+        r1.setSeriesNegativeItemLabelPosition(0, 
+                new ItemLabelPosition(ItemLabelAnchor.CENTER, TextAnchor.CENTER));
         BarRenderer r2 = new BarRenderer();
-        r2.setSeriesNegativeItemLabelPosition(0, new ItemLabelPosition(ItemLabelAnchor.CENTER, TextAnchor.CENTER));
+        r2.setSeriesNegativeItemLabelPosition(0, 
+                new ItemLabelPosition(ItemLabelAnchor.CENTER, TextAnchor.CENTER));
         assertEquals(r1, r2);
-        r2.setSeriesNegativeItemLabelPosition(1, new ItemLabelPosition(ItemLabelAnchor.INSIDE1, TextAnchor.CENTER));
+        r2.setSeriesNegativeItemLabelPosition(1, 
+                new ItemLabelPosition(ItemLabelAnchor.INSIDE1, TextAnchor.CENTER));
         assertNotEquals(r1, r2);
     }
 
@@ -508,7 +515,9 @@ public class AbstractRendererTest {
         r1.setBaseLegendShape(new Rectangle(4, 3, 2, 1));
         r1.setBaseLegendTextFont(new Font("Dialog", Font.PLAIN, 3));
         r1.setBaseLegendTextPaint(new Color(1, 2, 3));
-
+        r1.setSeriesItemLabelFont(0, new Font(Font.MONOSPACED, Font.BOLD, 13));
+        r1.setLegendTextFont(0, new Font(Font.MONOSPACED, Font.BOLD, 14));
+        
         LineAndShapeRenderer r2 = (LineAndShapeRenderer) r1.clone();
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
@@ -524,19 +533,19 @@ public class AbstractRendererTest {
         r2.setSeriesVisibleInLegend(0, Boolean.FALSE);
         assertTrue(r1.equals(r2));
 
-        r1.setSeriesPaint(0, Color.black);
+        r1.setSeriesPaint(0, Color.BLACK);
         assertFalse(r1.equals(r2));
-        r2.setSeriesPaint(0, Color.black);
+        r2.setSeriesPaint(0, Color.BLACK);
         assertTrue(r1.equals(r2));
 
-        r1.setSeriesFillPaint(0, Color.yellow);
+        r1.setSeriesFillPaint(0, Color.YELLOW);
         assertFalse(r1.equals(r2));
-        r2.setSeriesFillPaint(0, Color.yellow);
+        r2.setSeriesFillPaint(0, Color.YELLOW);
         assertTrue(r1.equals(r2));
 
-        r1.setSeriesOutlinePaint(0, Color.yellow);
+        r1.setSeriesOutlinePaint(0, Color.YELLOW);
         assertFalse(r1.equals(r2));
-        r2.setSeriesOutlinePaint(0, Color.yellow);
+        r2.setSeriesOutlinePaint(0, Color.YELLOW);
         assertTrue(r1.equals(r2));
 
         r1.setSeriesStroke(0, new BasicStroke(2.2f));
@@ -569,11 +578,11 @@ public class AbstractRendererTest {
         r2.setSeriesItemLabelsVisible(0, Boolean.TRUE);
         assertTrue(r1.equals(r2));
 
-        r1.setSeriesItemLabelPaint(0, Color.red);
+        r1.setSeriesItemLabelPaint(0, Color.RED);
         assertFalse(r1.equals(r2));
-        r2.setSeriesItemLabelPaint(0, Color.red);
+        r2.setSeriesItemLabelPaint(0, Color.RED);
         assertTrue(r1.equals(r2));
-
+        
         r1.setSeriesPositiveItemLabelPosition(0, new ItemLabelPosition());
         assertFalse(r1.equals(r2));
         r2.setSeriesPositiveItemLabelPosition(0, new ItemLabelPosition());
@@ -609,14 +618,14 @@ public class AbstractRendererTest {
         r2.setBaseLegendTextFont(new Font("Dialog", Font.PLAIN, 11));
         assertTrue(r1.equals(r2));
 
-        r1.setLegendTextPaint(3, Color.red);
+        r1.setLegendTextPaint(3, Color.RED);
         assertFalse(r1.equals(r2));
-        r2.setLegendTextPaint(3, Color.red);
+        r2.setLegendTextPaint(3, Color.RED);
         assertTrue(r1.equals(r2));
 
-        r1.setBaseLegendTextPaint(Color.green);
+        r1.setBaseLegendTextPaint(Color.GREEN);
         assertFalse(r1.equals(r2));
-        r2.setBaseLegendTextPaint(Color.green);
+        r2.setBaseLegendTextPaint(Color.GREEN);
         assertTrue(r1.equals(r2));
     }
 
@@ -646,9 +655,9 @@ public class AbstractRendererTest {
     @Test
     public void testCloning2() throws CloneNotSupportedException {
         LineAndShapeRenderer r1 = new LineAndShapeRenderer();
-        r1.setBasePaint(Color.blue);
-        r1.setBaseLegendTextPaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.blue));
+        r1.setBasePaint(Color.BLUE);
+        r1.setBaseLegendTextPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.BLUE));
         LineAndShapeRenderer r2 = (LineAndShapeRenderer) r1.clone();
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
@@ -656,7 +665,7 @@ public class AbstractRendererTest {
 
         MyRendererChangeListener listener = new MyRendererChangeListener();
         r2.addChangeListener(listener);
-        r2.setBasePaint(Color.red);
+        r2.setBasePaint(Color.RED);
         assertTrue(listener.lastEvent.getRenderer() == r2);
         assertFalse(r1.hasListener(listener));
     }
@@ -677,8 +686,8 @@ public class AbstractRendererTest {
     @Test
     public void testSetPaint() {
         BarRenderer r = new BarRenderer();
-        r.setPaint(Color.orange);
-        assertEquals(Color.orange, r.getItemPaint(0, 0));
+        r.setPaint(Color.ORANGE);
+        assertEquals(Color.ORANGE, r.getItemPaint(0, 0));
     }
 
     /**
@@ -687,8 +696,8 @@ public class AbstractRendererTest {
     @Test
     public void testSetOutlinePaint() {
         BarRenderer r = new BarRenderer();
-        r.setOutlinePaint(Color.orange);
-        assertEquals(Color.orange, r.getItemOutlinePaint(0, 0));
+        r.setOutlinePaint(Color.ORANGE);
+        assertEquals(Color.ORANGE, r.getItemOutlinePaint(0, 0));
     }
 
     /**
@@ -754,8 +763,8 @@ public class AbstractRendererTest {
     @Test
     public void testSetItemLabelPaint() {
         BarRenderer r = new BarRenderer();
-        r.setItemLabelPaint(Color.green);
-        assertEquals(Color.green, r.getItemLabelPaint(0, 0));
+        r.setItemLabelPaint(Color.GREEN);
+        assertEquals(Color.GREEN, r.getItemLabelPaint(0, 0));
     }
 
     /**
@@ -799,28 +808,28 @@ public class AbstractRendererTest {
 
         // PAINT
         detector.setNotified(false);
-        r1.setPaint(Color.red);
+        r1.setPaint(Color.RED);
         assertTrue(detector.getNotified());
 
         detector.setNotified(false);
-        r1.setSeriesPaint(0, Color.red);
+        r1.setSeriesPaint(0, Color.RED);
         assertTrue(detector.getNotified());
 
         detector.setNotified(false);
-        r1.setBasePaint(Color.red);
+        r1.setBasePaint(Color.RED);
         assertTrue(detector.getNotified());
 
         // OUTLINE PAINT
         detector.setNotified(false);
-        r1.setOutlinePaint(Color.red);
+        r1.setOutlinePaint(Color.RED);
         assertTrue(detector.getNotified());
 
         detector.setNotified(false);
-        r1.setSeriesOutlinePaint(0, Color.red);
+        r1.setSeriesOutlinePaint(0, Color.RED);
         assertTrue(detector.getNotified());
 
         detector.setNotified(false);
-        r1.setBaseOutlinePaint(Color.red);
+        r1.setBaseOutlinePaint(Color.RED);
         assertTrue(detector.getNotified());
 
         // STROKE
@@ -890,15 +899,15 @@ public class AbstractRendererTest {
 
         // ITEM_LABEL_PAINT
         detector.setNotified(false);
-        r1.setItemLabelPaint(Color.blue);
+        r1.setItemLabelPaint(Color.BLUE);
         assertTrue(detector.getNotified());
 
         detector.setNotified(false);
-        r1.setSeriesItemLabelPaint(0, Color.blue);
+        r1.setSeriesItemLabelPaint(0, Color.BLUE);
         assertTrue(detector.getNotified());
 
         detector.setNotified(false);
-        r1.setBaseItemLabelPaint(Color.blue);
+        r1.setBaseItemLabelPaint(Color.BLUE);
         assertTrue(detector.getNotified());
 
         // POSITIVE ITEM LABEL POSITION
@@ -945,8 +954,8 @@ public class AbstractRendererTest {
     public void testSerialization() {
         BarRenderer r1 = new BarRenderer();
         r1.setBaseLegendTextFont(new Font("Dialog", Font.PLAIN, 4));
-        r1.setBaseLegendTextPaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.green));
+        r1.setBaseLegendTextPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.GREEN));
         r1.setBaseLegendShape(new Line2D.Double(1.0, 2.0, 3.0, 4.0));
         BarRenderer r2 = (BarRenderer) TestUtilities.serialised(r1);
         assertEquals(r1, r2);
@@ -978,11 +987,11 @@ public class AbstractRendererTest {
     @Test
     public void testPaintLookup() {
         BarRenderer r = new BarRenderer();
-        assertEquals(Color.blue, r.getBasePaint());
+        assertEquals(Color.BLUE, r.getBasePaint());
 
         // first check that autoPopulate==false works as expected
         r.setAutoPopulateSeriesPaint(false);
-        assertEquals(Color.blue, r.lookupSeriesPaint(0));
+        assertEquals(Color.BLUE, r.lookupSeriesPaint(0));
         assertNull(r.getSeriesPaint(0));
 
         // now check autoPopulate==true
@@ -1000,11 +1009,11 @@ public class AbstractRendererTest {
     @Test
     public void testFillPaintLookup() {
         BarRenderer r = new BarRenderer();
-        assertEquals(Color.white, r.getBaseFillPaint());
+        assertEquals(Color.WHITE, r.getBaseFillPaint());
 
         // first check that autoPopulate==false works as expected
         r.setAutoPopulateSeriesFillPaint(false);
-        assertEquals(Color.white, r.lookupSeriesFillPaint(0));
+        assertEquals(Color.WHITE, r.lookupSeriesFillPaint(0));
         assertNull(r.getSeriesFillPaint(0));
 
         // now check autoPopulate==true
@@ -1022,11 +1031,11 @@ public class AbstractRendererTest {
     @Test
     public void testOutlinePaintLookup() {
         BarRenderer r = new BarRenderer();
-        assertEquals(Color.gray, r.getBaseOutlinePaint());
+        assertEquals(Color.GRAY, r.getBaseOutlinePaint());
 
         // first check that autoPopulate==false works as expected
         r.setAutoPopulateSeriesOutlinePaint(false);
-        assertEquals(Color.gray, r.lookupSeriesOutlinePaint(0));
+        assertEquals(Color.GRAY, r.lookupSeriesOutlinePaint(0));
         assertNull(r.getSeriesOutlinePaint(0));
 
         // now check autoPopulate==true
