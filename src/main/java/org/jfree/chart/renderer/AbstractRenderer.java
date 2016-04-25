@@ -93,6 +93,7 @@
  * 03-Jul-2013 : Use ParamChecks (DG);
  * 09-Apr-2014 : Remove use of ObjectList (DG);
  * 24-Aug-2014 : Add begin/endElementGroup() (DG);
+ * 25-Apr-2016 : Fix cloning test failuer (DG);
  *
  */
 
@@ -3286,7 +3287,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
         // 'itemLabelFont' : immutable, no need to clone reference
         if (this.itemLabelFontMap != null) {
             clone.itemLabelFontMap 
-                    = CloneUtils.cloneMapValues(this.itemLabelFontMap);
+                    = new HashMap<Integer, Font>(this.itemLabelFontMap);
         }
         // 'baseItemLabelFont' : immutable, no need to clone reference
 
@@ -3320,7 +3321,8 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
             clone.legendShapeList = (ShapeList) this.legendShapeList.clone();
         }
         if (this.legendTextFontMap != null) {
-            clone.legendTextFontMap = CloneUtils.cloneMapValues(
+            // Font objects are immutable so just shallow copy the map
+            clone.legendTextFontMap = new HashMap<Integer, Font>(
                     this.legendTextFontMap);
         }
         if (this.legendTextPaint != null) {
