@@ -93,7 +93,7 @@
  * 03-Jul-2013 : Use ParamChecks (DG);
  * 09-Apr-2014 : Remove use of ObjectList (DG);
  * 24-Aug-2014 : Add begin/endElementGroup() (DG);
- * 25-Apr-2016 : Fix cloning test failuer (DG);
+ * 25-Apr-2016 : Fix cloning test failure (DG);
  *
  */
 
@@ -3300,14 +3300,16 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
 
         // 'postiveItemLabelAnchor' : immutable, no need to clone reference
         if (this.positiveItemLabelPositionMap != null) {
-            clone.positiveItemLabelPositionMap = CloneUtils.cloneMapValues(
+            clone.positiveItemLabelPositionMap 
+                    = new HashMap<Integer, ItemLabelPosition>(
                     this.positiveItemLabelPositionMap);
         }
         // 'baseItemLabelAnchor' : immutable, no need to clone reference
 
         // 'negativeItemLabelAnchor' : immutable, no need to clone reference
         if (this.negativeItemLabelPositionMap != null) {
-            clone.negativeItemLabelPositionMap = CloneUtils.cloneMapValues(
+            clone.negativeItemLabelPositionMap 
+                    = new HashMap<Integer, ItemLabelPosition>(
                     this.negativeItemLabelPositionMap);
         }
         // 'baseNegativeItemLabelAnchor' : immutable, no need to clone reference
