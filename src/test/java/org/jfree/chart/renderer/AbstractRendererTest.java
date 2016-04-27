@@ -517,6 +517,10 @@ public class AbstractRendererTest {
         r1.setBaseLegendTextPaint(new Color(1, 2, 3));
         r1.setSeriesItemLabelFont(0, new Font(Font.MONOSPACED, Font.BOLD, 13));
         r1.setLegendTextFont(0, new Font(Font.MONOSPACED, Font.BOLD, 14));
+        r1.setSeriesPositiveItemLabelPosition(0, new ItemLabelPosition(
+                ItemLabelAnchor.CENTER, TextAnchor.TOP_LEFT));
+        r1.setSeriesNegativeItemLabelPosition(0, new ItemLabelPosition(
+                ItemLabelAnchor.CENTER, TextAnchor.CENTER));
         
         LineAndShapeRenderer r2 = (LineAndShapeRenderer) r1.clone();
         assertTrue(r1 != r2);
