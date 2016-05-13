@@ -11,7 +11,7 @@ pom-1.6.xml - builds JFreeChart without JavaFX support (jfreechart-1.0.x.jar).
 pom-javafx.xml - builds JFreeChart including JavaFX support 
                  (jfreechart-1.5.x.jar).  This requires JDK 1.8.0_40 or later.
 
-pom-nb.xml - a pom file for use in NetBeans.  Defines the dependencies required
-             by the demo files, and includes the demo source files in the build.
-             This build includes JavaFX support, and so requires JDK 1.8.0_40 
-             or later.
+pom-dev.xml - a pom file for use in Maven-enabled IDEs such as NetBeans.  
+              Defines the dependencies required by the demo files, and includes 
+              the demo source files in the build.  This build includes JavaFX 
+              support, and so requires JDK 1.8.0_40 or later.
