@@ -1441,7 +1441,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
      * XYLineAndShapeRenderer.
      */
     public static interface DrawLinesCondition {
-	private static DrawLinesCondition ALWAYS_DRAW_LINES_CONDITION = new DrawLinesCondition() {
+	public static DrawLinesCondition ALWAYS_DRAW_LINES_CONDITION = new DrawLinesCondition() {
 		@Override
 		public boolean isDrawLine(double y0, double x0, double y1, double x1) {
 			return true;
