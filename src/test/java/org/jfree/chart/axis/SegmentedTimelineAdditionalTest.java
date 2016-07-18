@@ -21,7 +21,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
  * USA.
  *
- * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
+ * [Oracle and Java are registered trademarks of Oracle and/or its affiliates.
  * Other names may be trademarks of their respective owners.]
  *
  * ---------------------------
@@ -41,12 +41,13 @@
 
 package org.jfree.chart.axis;
 
-import static org.junit.Assert.assertTrue;
-
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
+
+import static org.junit.Assert.assertTrue;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -59,6 +60,17 @@ public class SegmentedTimelineAdditionalTest {
      */
     public SegmentedTimelineAdditionalTest() {
         super();
+    }
+
+    /**
+     * Common test setup.
+     */
+    @Before
+    public void setUp() {
+        // We have to make sure this gets called before we change the default
+        // timezone, otherwise the changed timezone will be cached in a static
+        // variable.
+        getTimeline();
     }
 
     /**
