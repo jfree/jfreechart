@@ -37,6 +37,7 @@
  *                   Peter Becker (patches 2868585 and 2868608);
  *                   Martin Krauskopf (patch 3421088);
  *                   Martin Hoeller;
+ *                   John Matthews;
  *
  * Changes
  * -------
@@ -84,6 +85,7 @@
  *               Becker (DG);
  * 11-Oct-2011 : applied patch #3421088 from Martin Krauskopf to fix bug (MH);
  * 03-Jul-2013 : Use ParamChecks (DG);
+ * 18-Jul-2016 : Fix drawing issue with horizontal orientation (JM);
  *
  */
 
@@ -704,7 +706,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
             // draw the lower shadow...
             g2.draw(new Line2D.Double(xxMin, yymid, xxQ1, yymid));
             g2.draw(new Line2D.Double(xxMin, yymid - halfW, xxMin,
-                    yy + halfW));
+                    yymid + halfW));
 
             g2.setStroke(getItemOutlineStroke(row, column));
             g2.setPaint(outlinePaint);
