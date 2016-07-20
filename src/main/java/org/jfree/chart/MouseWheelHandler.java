@@ -52,6 +52,7 @@ import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 
 import org.jfree.chart.axis.ValueAxis;
+import org.jfree.chart.entity.AxisEntity;
 import org.jfree.chart.plot.PiePlot;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotRenderingInfo;
