@@ -234,17 +234,19 @@ import javax.swing.ToolTipManager;
 import javax.swing.event.EventListenerList;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.editor.ChartEditor;
 import org.jfree.chart.editor.ChartEditorManager;
+import org.jfree.chart.entity.AxisEntity;
 import org.jfree.chart.entity.ChartEntity;
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.event.ChartChangeEvent;
 import org.jfree.chart.event.ChartChangeListener;
 import org.jfree.chart.event.ChartProgressEvent;
 import org.jfree.chart.event.ChartProgressListener;
-import org.jfree.chart.panel.Overlay;
 import org.jfree.chart.event.OverlayChangeEvent;
 import org.jfree.chart.event.OverlayChangeListener;
+import org.jfree.chart.panel.Overlay;
 import org.jfree.chart.plot.Pannable;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
@@ -544,6 +546,14 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
 
     /** The last mouse position during panning. */
     private Point panLast;
+    /**
+     * If the drag started on an axis, we're panning only this axis.
+     */
+    private ValueAxis panAxis;
+    /**
+     * Flag to store if the axis we are panning runs horizontal or vertical.
+     */
+    private boolean panAxisHorizontal;
 
     /**
      * The mask for mouse events to trigger panning.
@@ -1848,6 +1858,20 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
                         setCursor(Cursor.getPredefinedCursor(
                                 Cursor.MOVE_CURSOR));
                     }
+                    screenDataArea = getScreenDataArea();
+                    AxisEntity axis = findAxis(e.getPoint());
+                    if (axis != null && axis.getAxis() instanceof ValueAxis) {
+                        this.panAxis = (ValueAxis) axis.getAxis();
+                        this.panLast = e.getPoint();
+                        Rectangle axisArea = axis.getArea().getBounds();
+                        this.panW = axisArea.width;
+                        this.panH = axisArea.height;
+                        if (e.getX() < screenDataArea.getMinX() || e.getX() > screenDataArea.getMaxX()) {
+                            this.panAxisHorizontal = false;
+                        } else {
+                            this.panAxisHorizontal = true;
+                        }
+                    }
                 }
                 // the actual panning occurs later in the mouseDragged() 
                 // method
@@ -1887,6 +1911,34 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     }
 
     /**
+     * Checks if the given source-point is on a specific axis. Returns null if
+     * the point is not on an axis.
+     *
+     * @param source The source point. Usually where the user clicked.
+     * @return The axis that holds the point or null.
+     */
+    public AxisEntity findAxis(Point2D source) {
+        // Lets find the axis first.
+        AxisEntity axis = null;
+        for (Object entity: info.getEntityCollection().getEntities()) {
+            // It would have been nice if there was a collection not containing points...
+            if (entity instanceof AxisEntity) {
+                AxisEntity axisEntity = (AxisEntity) entity;
+                if (axisEntity.getArea().contains(source)) {
+                    axis = axisEntity;
+                    break;
+                }
+            }
+        }
+
+        if (axis != null) {
+            return axis;
+        }
+
+        return null;
+    }
+
+    /**
      * Handles a 'mouse dragged' event.
      *
      * @param e  the mouse event.
@@ -1910,18 +1962,30 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
             double hPercent = dy / this.panH;
             boolean old = this.chart.getPlot().isNotify();
             this.chart.getPlot().setNotify(false);
-            Pannable p = (Pannable) this.chart.getPlot();
-            if (p.getOrientation() == PlotOrientation.VERTICAL) {
-                p.panDomainAxes(wPercent, this.info.getPlotInfo(),
-                        this.panLast);
-                p.panRangeAxes(hPercent, this.info.getPlotInfo(),
-                        this.panLast);
-            }
-            else {
-                p.panDomainAxes(hPercent, this.info.getPlotInfo(),
-                        this.panLast);
-                p.panRangeAxes(wPercent, this.info.getPlotInfo(),
-                        this.panLast);
+            if (this.panAxis != null) {
+                if  (this.panAxis.isInverted()) {
+                    wPercent = -wPercent;
+                    hPercent = -hPercent;
+                }
+                if (this.panAxisHorizontal) {
+                    this.panAxis.pan(wPercent);
+                } else {
+                    this.panAxis.pan(hPercent);
+                }
+            } else {
+                Pannable p = (Pannable) this.chart.getPlot();
+                if (p.getOrientation() == PlotOrientation.VERTICAL) {
+                    p.panDomainAxes(wPercent, this.info.getPlotInfo(),
+                            this.panLast);
+                    p.panRangeAxes(hPercent, this.info.getPlotInfo(),
+                            this.panLast);
+                }
+                else {
+                    p.panDomainAxes(hPercent, this.info.getPlotInfo(),
+                            this.panLast);
+                    p.panRangeAxes(wPercent, this.info.getPlotInfo(),
+                            this.panLast);
+                }
             }
             this.panLast = e.getPoint();
             this.chart.getPlot().setNotify(old);
@@ -2001,6 +2065,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         // released...
         if (this.panLast != null) {
             this.panLast = null;
+            this.panAxis = null;
             setCursor(Cursor.getDefaultCursor());
         }
 

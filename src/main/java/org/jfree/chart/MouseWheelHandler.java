@@ -48,12 +48,15 @@ package org.jfree.chart;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 
+import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.PiePlot;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.Zoomable;
+import org.jfree.ui.RectangleEdge;
 
 /**
  * A class that handles mouse wheel events for the {@link ChartPanel} class.
@@ -135,6 +138,36 @@ class MouseWheelHandler implements MouseWheelListener, Serializable {
         ChartRenderingInfo info = this.chartPanel.getChartRenderingInfo();
         PlotRenderingInfo pinfo = info.getPlotInfo();
         Point2D p = this.chartPanel.translateScreenToJava2D(e.getPoint());
+
+        // If the event is on a specific axis, zoom just that axis.
+        AxisEntity axisEntity = this.chartPanel.findAxis(p);
+        if (axisEntity != null && axisEntity.getAxis() instanceof ValueAxis) {
+            ValueAxis axis = (ValueAxis) axisEntity.getAxis();
+            Plot plot = (Plot) zoomable;
+            // do not notify while zooming each axis
+            boolean notifyState = plot.isNotify();
+            plot.setNotify(false);
+            int clicks = e.getWheelRotation();
+            double zf = 1.0 + this.zoomFactor;
+            if (clicks < 0) {
+                zf = 1.0 / zf;
+            }
+
+            Rectangle2D axisArea = axisEntity.getArea().getBounds2D();
+            Rectangle2D dataArea = pinfo.getDataArea();
+            if (p.getX() < dataArea.getMinX() || p.getX() > dataArea.getMaxX()) {
+                // This axis runs vertical
+                double anchor = axis.java2DToValue(e.getY(), axisArea, RectangleEdge.RIGHT);
+                axis.resizeRange2(zf, anchor);
+            } else {
+                double anchor = axis.java2DToValue(e.getX(), axisArea, RectangleEdge.TOP);
+                axis.resizeRange2(zf, anchor);
+            }
+
+            plot.setNotify(notifyState);  // this generates the change event too
+            return;
+        }
+
         if (!pinfo.getDataArea().contains(p)) {
             return;
         }
