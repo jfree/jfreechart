@@ -1,6 +1,6 @@
-/* --------------------------
- * CrosshairOverlayDemo1.java
- * --------------------------
+/* ----------------------------
+ * CrosshairOverlayFXDemo1.java
+ * ----------------------------
  * (C) Copyright 2003-2016, by Object Refinery Limited.
  *
  */
