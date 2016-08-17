@@ -428,8 +428,7 @@ public class TimeSeriesChartFXDemo1 extends Application {
     public void start(Stage stage) throws Exception {
         XYDataset dataset = createDataset();
         JFreeChart chart = createChart(dataset); 
-        ChartViewer viewer = new ChartViewer(chart);  
-        
+        ChartViewer viewer = new ChartViewer(chart);
         stage.setScene(new Scene(viewer)); 
         stage.setTitle("JFreeChart: TimeSeriesFXDemo1.java"); 
         stage.setWidth(700);
