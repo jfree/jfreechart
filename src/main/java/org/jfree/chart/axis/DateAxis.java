@@ -132,7 +132,8 @@
  * 12-Sep-2013 : Prevent exception when zooming in below 1 millisecond (DG);
  * 23-Nov-2013 : Deprecated DEFAULT_DATE_TICK_UNIT to fix bug #977 (DG);
  * 10-Mar-2014 : Add get/setLocale() methods (DG);
- * 
+ * 29-Aug-2016 : Fix for previousStandardDate - bug #25 (DG);
+ *
  */
 
 package org.jfree.chart.axis;
@@ -919,7 +920,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
 
         Calendar calendar = Calendar.getInstance(this.timeZone, this.locale);
         calendar.setTime(date);
-        int count = unit.getCount();
+        int count = unit.getMultiple();
         int current = calendar.get(unit.getCalendarField());
         int value = count * (current / count);
 
@@ -936,7 +937,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
                 calendar.set(Calendar.MILLISECOND, value);
                 Date mm = calendar.getTime();
                 if (mm.getTime() >= date.getTime()) {
-                    calendar.set(Calendar.MILLISECOND, value - 1);
+                    calendar.set(Calendar.MILLISECOND, value - count);
                     mm = calendar.getTime();
                 }
                 return mm;
@@ -960,7 +961,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
                 calendar.set(years, months, days, hours, minutes, value);
                 Date dd = calendar.getTime();
                 if (dd.getTime() >= date.getTime()) {
-                    calendar.set(Calendar.SECOND, value - 1);
+                    calendar.set(Calendar.SECOND, value - count);
                     dd = calendar.getTime();
                 }
                 return dd;
@@ -983,7 +984,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
                 calendar.set(years, months, days, hours, value, seconds);
                 Date d0 = calendar.getTime();
                 if (d0.getTime() >= date.getTime()) {
-                    calendar.set(Calendar.MINUTE, value - 1);
+                    calendar.set(Calendar.MINUTE, value - count);
                     d0 = calendar.getTime();
                 }
                 return d0;
@@ -1008,7 +1009,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
                 calendar.set(years, months, days, value, minutes, seconds);
                 Date d1 = calendar.getTime();
                 if (d1.getTime() >= date.getTime()) {
-                    calendar.set(Calendar.HOUR_OF_DAY, value - 1);
+                    calendar.set(Calendar.HOUR_OF_DAY, value - count);
                     d1 = calendar.getTime();
                 }
                 return d1;
@@ -1031,12 +1032,13 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
                     // won't work with JDK 1.3
                 Date d2 = calendar.getTime();
                 if (d2.getTime() >= date.getTime()) {
-                    calendar.set(Calendar.DATE, value - 1);
+                    calendar.set(Calendar.DATE, value - count);
                     d2 = calendar.getTime();
                 }
                 return d2;
 
             case DateTickUnit.MONTH :
+                value = count * ((current + 1) / count) - 1;
                 years = calendar.get(Calendar.YEAR);
                 calendar.clear(Calendar.MILLISECOND);
                 calendar.set(years, value, 1, 0, 0, 0);
@@ -1046,7 +1048,9 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
                         month, this.tickMarkPosition);
                 long millis = standardDate.getTime();
                 if (millis >= date.getTime()) {
-                    month = (Month) month.previous();
+                    for (int i = 0; i < count; i++) {
+                        month = (Month) month.previous();
+                    }
                     // need to peg the month in case the time zone isn't the
                     // default - see bug 2078057
                     month.peg(Calendar.getInstance(this.timeZone));
@@ -1072,7 +1076,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
                 calendar.set(value, months, days, 0, 0, 0);
                 Date d3 = calendar.getTime();
                 if (d3.getTime() >= date.getTime()) {
-                    calendar.set(Calendar.YEAR, value - 1);
+                    calendar.set(Calendar.YEAR, value - count);
                     d3 = calendar.getTime();
                 }
                 return d3;
