@@ -162,7 +162,6 @@
         <!-- copy across README and CHANGELOG -->
         <copy file="${basedir}/README.txt" tofile="${basedir}/distribution/README.txt" />
         <copy file="${basedir}/NEWS" tofile="${basedir}/distribution/NEWS" />
-        <copy file="${basedir}/ChangeLog" tofile="${basedir}/distribution/ChangeLog" />
         <copy file="${basedir}/pom.xml" tofile="${basedir}/distribution/pom.xml" />
 
         <!-- copy across LICENCE -->
@@ -175,11 +174,6 @@
         <!-- copy across source files -->
         <copy todir="${basedir}/distribution/src">
             <fileset dir="${basedir}/src">
-            </fileset>
-        </copy>
-
-        <copy todir="${basedir}/distribution/swt">
-            <fileset dir="${basedir}/swt">
             </fileset>
         </copy>
 
@@ -201,8 +195,6 @@
         <!-- copy across lib files -->
         <copy file="${jcommon.jar}" tofile="${basedir}/distribution/lib/${jcommon.name}-${jcommon.version}.jar" />
         <copy file="${fxgraphics2d.jar}" tofile="${basedir}/distribution/lib/${fxgraphics2d.name}-${fxgraphics2d.version}.jar" />
-        <copy file="${basedir}/lib/swtgraphics2d.jar" tofile="${basedir}/distribution/lib/swtgraphics2d.jar" failonerror="false" />
-        <copy file="${basedir}/lib/jfreechart-${jfreechart.version}-swt.jar" tofile="${basedir}/distribution/lib/${jfreechart.name}-${jfreechart.version}-swt.jar" failonerror="false" />
         <copy file="${servlet.jar}" tofile="${basedir}/distribution/lib/servlet.jar" />
         <copy file="${junit.jar}" tofile="${basedir}/distribution/lib/junit-4.11.jar" />
         <copy file="${hamcrest.jar}" tofile="${basedir}/distribution/lib/hamcrest-core-1.3.jar" />
@@ -213,15 +205,10 @@
         <!-- copy across ant build files -->
         <copy file="${basedir}/ant/build.xml" tofile="${basedir}/distribution/ant/build.xml" />
         <copy file="${basedir}/ant/build-fx.xml" tofile="${basedir}/distribution/ant/build-fx.xml" />
-        <copy file="${basedir}/ant/build-swt.xml" tofile="${basedir}/distribution/ant/build-swt.xml" />
 
         <!-- convert end-of-line characters in text files -->
         <fixcrlf srcdir="${basedir}/distribution/src"
                  eol="crlf" eof="remove"
-                 excludes="**/*.jpg" />
-
-        <fixcrlf srcdir="${basedir}/distribution/swt"
-                 eol="lf" eof="remove"
                  excludes="**/*.jpg" />
     </target>
 
