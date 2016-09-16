@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2014, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * SpiderWebPlot.java
  * ------------------
- * (C) Copyright 2005-2014, by Heaps of Flavour Pty Ltd and Contributors.
+ * (C) Copyright 2005-2008, by Heaps of Flavour Pty Ltd and Contributors.
  *
  * Company Info:  http://www.i4-talent.com
  *
@@ -65,7 +65,6 @@
  * 02-Jun-2008 : Fixed bug with chart entities using TableOrder.BY_COLUMN (DG);
  * 02-Jun-2008 : Fixed bug with null dataset (DG);
  * 01-Jun-2009 : Set series key in getLegendItems() (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -93,8 +92,10 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.LegendItemCollection;
@@ -105,7 +106,6 @@ import org.jfree.chart.labels.CategoryItemLabelGenerator;
 import org.jfree.chart.labels.CategoryToolTipGenerator;
 import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
 import org.jfree.chart.urls.CategoryURLGenerator;
-import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.DatasetUtilities;
@@ -166,13 +166,17 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
     public static final Paint  DEFAULT_LABEL_SHADOW_PAINT = Color.lightGray;
 
     /**
-     * The default maximum value plotted - forces the plot to evaluate
-     *  the maximum from the data passed in
+     * Length of the tick mark.
+     * <P>
+     * <B>Note</B>: hardcoded for now, to be customizable in the future.
      */
-    public static final double DEFAULT_MAX_VALUE = -1.0;
+    private static final double TICK_MARK_LENGTH = 6d;
 
     /** The head radius as a percentage of the available drawing area. */
     protected double headPercent;
+
+    /** Stroke to be used for head drawing. */
+    protected Stroke headOutlineStroke;
 
     /** The space left around the outside of the plot as a percentage. */
     private double interiorGap;
@@ -197,8 +201,25 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
     /** The dataset. */
     private CategoryDataset dataset;
 
-    /** The maximum value we are plotting against on each category axis */
-    private double maxValue;
+    /** The maximum value we are plotting against on each category axis. */
+    private Double maxValue;
+
+    /**
+     * Maximum values of individual categories. Note that the field
+     * <code>maxValue</code> has always higher priority. If it is set this field
+     * is ignored.
+     */
+    private Map/*<Integer, Double>*/ maxValues;
+
+    /** The origin common for all categories axes. */
+    private Double origin;
+
+    /**
+     * Origins for individual categories. Note that the field
+     * <code>origin</code> has always higher priority. If it is set this field
+     * is ignored.
+     */
+    private Map/*<Integer, Double>*/ origins;
 
     /**
      * The data extract order (BY_ROW or BY_COLUMN). This denotes whether
@@ -211,7 +232,7 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
     /** The starting angle. */
     private double startAngle;
 
-    /** The direction for drawing the radar axis and plots. */
+    /** The direction for drawing the radar axis & plots. */
     private Rotation direction;
 
     /** The legend item shape. */
@@ -262,6 +283,12 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
     /** A URL generator for the plot (<code>null</code> permitted). */
     private CategoryURLGenerator urlGenerator;
 
+    /** Whether to draw tick marks and labels. */
+    private boolean axisTickVisible;
+
+    /** Whether to draw data point with values of out of axis range. */
+    private boolean drawOutOfRangePoints;
+
     /**
      * Creates a default plot with no dataset.
      */
@@ -288,7 +315,9 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      */
     public SpiderWebPlot(CategoryDataset dataset, TableOrder extract) {
         super();
-        ParamChecks.nullNotPermitted(extract, "extract");
+        if (extract == null) {
+            throw new IllegalArgumentException("Null 'extract' argument.");
+        }
         this.dataset = dataset;
         if (dataset != null) {
             dataset.addChangeListener(this);
@@ -303,7 +332,6 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
         this.interiorGap = DEFAULT_INTERIOR_GAP;
         this.startAngle = DEFAULT_START_ANGLE;
         this.direction = Rotation.CLOCKWISE;
-        this.maxValue = DEFAULT_MAX_VALUE;
 
         this.seriesPaint = null;
         this.seriesPaintList = new PaintList();
@@ -322,6 +350,9 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
         this.labelGenerator = new StandardCategoryItemLabelGenerator();
 
         this.legendItemShape = DEFAULT_LEGEND_ITEM_CIRCLE;
+
+        this.origins = new HashMap();
+        this.maxValues = new HashMap();
     }
 
     /**
@@ -329,7 +360,6 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      *
      * @return The plot type.
      */
-    @Override
     public String getPlotType() {
         // return localizationResources.getString("Radar_Plot");
         return ("Spider Web Plot");
@@ -368,8 +398,15 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
             dataset.addChangeListener(this);
         }
 
+        resetBoundaryValues();
+
         // send a dataset change event to self to trigger plot change event
         datasetChanged(new DatasetChangeEvent(this, dataset));
+    }
+
+    private void resetBoundaryValues() {
+        this.maxValues.clear();
+        this.origins.clear();
     }
 
     /**
@@ -419,7 +456,9 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      * @see #getDataExtractOrder()
      */
     public void setDataExtractOrder(TableOrder order) {
-        ParamChecks.nullNotPermitted(order, "order");
+        if (order == null) {
+            throw new IllegalArgumentException("Null 'order' argument");
+        }
         this.dataExtractOrder = order;
         fireChangeEvent();
     }
@@ -446,6 +485,32 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
     public void setHeadPercent(double percent) {
         this.headPercent = percent;
         fireChangeEvent();
+    }
+
+    /**
+     * Sets the head outline stroke for all series. When <code>null</code>
+     * {@link #getSeriesOutlineStroke(int)} is used. Sends a {@link
+     * PlotChangeEvent} to all registered listeners.
+     *
+     * @param headOutlineStroke head outline stroke
+     */
+    public void setHeadOutlineStroke(Stroke headOutlineStroke) {
+        this.headOutlineStroke = headOutlineStroke;
+        fireChangeEvent();
+    }
+
+    /**
+     * Returns the head outline stroke.
+     *
+     * @return head outline stroke.
+     */
+    public Stroke getHeadOutlineStroke() {
+        return headOutlineStroke;
+    }
+
+    private Stroke getHeadOutlineStroke(int series) {
+        return headOutlineStroke == null
+                ? getSeriesOutlineStroke(series) : headOutlineStroke;
     }
 
     /**
@@ -480,26 +545,76 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
     }
 
     /**
-     * Returns the maximum value any category axis can take.
+     * Returns the maximum value which is used for all categories.
      *
      * @return The maximum value.
      *
-     * @see #setMaxValue(double)
+     * @see #setMaxValue(Double)
      */
-    public double getMaxValue() {
+    public Double getMaxValue() {
         return this.maxValue;
     }
 
     /**
-     * Sets the maximum value any category axis can take and sends
-     * a {@link PlotChangeEvent} to all registered listeners.
+     * Returns maximum value for a particular category.
      *
-     * @param value  the maximum value.
+     * @param cat the category of interest
+     * @return The maximum value.
      *
-     * @see #getMaxValue()
+     * @see #setMaxValue(Double)
      */
-    public void setMaxValue(double value) {
-        this.maxValue = value;
+    public Double getMaxValue(int cat) {
+        return maxValue == null
+                ? (Double) maxValues.get(new Integer(cat)) : maxValue;
+    }
+
+    /**
+     * Sets the maxValue for <em>all</em> series in the plot. If this is set to
+     * <code>null</code>, then a list of maxValues is used instead (to allow
+     * different maxValues to be used for each series).
+     *
+     * @param maxValue the maxValue (<code>null</code> permitted).
+     */
+    public void setMaxValue(Double maxValue) {
+        this.maxValue = maxValue;
+        fireChangeEvent();
+    }
+
+    /**
+     * Sets maximum value for category.
+     *
+     * @param cat the category of interest
+     * @param maxValue the maximum value for the category
+     */
+    public void setMaxValue(int cat, Double maxValue) {
+        maxValues.put(new Integer(cat), maxValue);
+        fireChangeEvent();
+    }
+
+    public Double getOrigin(int cat) {
+        return origin == null ? (Double) origins.get(new Integer(cat)) : origin;
+    }
+
+    /**
+     * Sets origin for category.
+     *
+     * @param cat the category of interest
+     * @param origin the origin for the category
+     */
+    public void setOrigin(int cat, Double origin) {
+        origins.put(new Integer(cat), origin);
+        fireChangeEvent();
+    }
+
+    /**
+     * Sets the origin for <em>all</em> series in the plot. If this is set to
+     * <code>null</code>, then a list of origins is used instead (to allow
+     * different origins to be used for each series).
+     *
+     * @param origin the origin (<code>null</code> permitted).
+     */
+    public void setOrigin(Double origin) {
+        this.origin = origin;
         fireChangeEvent();
     }
 
@@ -524,7 +639,9 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      * @see #getDirection()
      */
     public void setDirection(Rotation direction) {
-        ParamChecks.nullNotPermitted(direction, "direction");
+        if (direction == null) {
+            throw new IllegalArgumentException("Null 'direction' argument.");
+        }
         this.direction = direction;
         fireChangeEvent();
     }
@@ -608,7 +725,9 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      * @since 1.0.4
      */
     public void setAxisLinePaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        if (paint == null) {
+            throw new IllegalArgumentException("Null 'paint' argument.");
+        }
         this.axisLinePaint = paint;
         fireChangeEvent();
     }
@@ -636,7 +755,9 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      * @since 1.0.4
      */
     public void setAxisLineStroke(Stroke stroke) {
-        ParamChecks.nullNotPermitted(stroke, "stroke");
+        if (stroke == null) {
+            throw new IllegalArgumentException("Null 'stroke' argument.");
+        }
         this.axisLineStroke = stroke;
         fireChangeEvent();
     }
@@ -655,11 +776,11 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
     }
 
     /**
-     * Sets the paint for ALL series in the plot.  If this is set to 
-     * {@code null}, then a list of paints is used instead (to allow different 
-     * colors to be used for each series of the radar group).
+     * Sets the paint for ALL series in the plot. If this is set to</code> null
+     * </code>, then a list of paints is used instead (to allow different colors
+     * to be used for each series of the radar group).
      *
-     * @param paint the paint ({@code null} permitted).
+     * @param paint the paint (<code>null</code> permitted).
      *
      * @see #getSeriesPaint()
      */
@@ -735,7 +856,9 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      * @see #getBaseSeriesPaint()
      */
     public void setBaseSeriesPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        if (paint == null) {
+            throw new IllegalArgumentException("Null 'paint' argument.");
+        }
         this.baseSeriesPaint = paint;
         fireChangeEvent();
     }
@@ -753,10 +876,10 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
 
     /**
      * Sets the outline paint for ALL series in the plot. If this is set to
-     * {@code null}, then a list of paints is used instead (to allow
+     * </code> null</code>, then a list of paints is used instead (to allow
      * different colors to be used for each series).
      *
-     * @param paint  the paint ({@code null} permitted).
+     * @param paint  the paint (<code>null</code> permitted).
      */
     public void setSeriesOutlinePaint(Paint paint) {
         this.seriesOutlinePaint = paint;
@@ -811,7 +934,9 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      * @param paint  the paint (<code>null</code> not permitted).
      */
     public void setBaseSeriesOutlinePaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        if (paint == null) {
+            throw new IllegalArgumentException("Null 'paint' argument.");
+        }
         this.baseSeriesOutlinePaint = paint;
         fireChangeEvent();
     }
@@ -829,10 +954,10 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
 
     /**
      * Sets the outline stroke for ALL series in the plot. If this is set to
-     * {@code null}, then a list of paints is used instead (to allow
+     * </code> null</code>, then a list of paints is used instead (to allow
      * different colors to be used for each series).
      *
-     * @param stroke  the stroke ({@code null} permitted).
+     * @param stroke  the stroke (<code>null</code> permitted).
      */
     public void setSeriesOutlineStroke(Stroke stroke) {
         this.seriesOutlineStroke = stroke;
@@ -890,7 +1015,9 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      * @param stroke  the stroke (<code>null</code> not permitted).
      */
     public void setBaseSeriesOutlineStroke(Stroke stroke) {
-        ParamChecks.nullNotPermitted(stroke, "stroke");
+        if (stroke == null) {
+            throw new IllegalArgumentException("Null 'stroke' argument.");
+        }
         this.baseSeriesOutlineStroke = stroke;
         fireChangeEvent();
     }
@@ -915,7 +1042,9 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      * @see #getLegendItemShape()
      */
     public void setLegendItemShape(Shape shape) {
-        ParamChecks.nullNotPermitted(shape, "shape");
+        if (shape == null) {
+            throw new IllegalArgumentException("Null 'shape' argument.");
+        }
         this.legendItemShape = shape;
         fireChangeEvent();
     }
@@ -940,7 +1069,9 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      * @see #getLabelFont()
      */
     public void setLabelFont(Font font) {
-        ParamChecks.nullNotPermitted(font, "font");
+        if (font == null) {
+            throw new IllegalArgumentException("Null 'font' argument.");
+        }
         this.labelFont = font;
         fireChangeEvent();
     }
@@ -965,7 +1096,9 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      * @see #getLabelPaint()
      */
     public void setLabelPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        if (paint == null) {
+            throw new IllegalArgumentException("Null 'paint' argument.");
+        }
         this.labelPaint = paint;
         fireChangeEvent();
     }
@@ -990,7 +1123,9 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      * @see #getLabelGenerator()
      */
     public void setLabelGenerator(CategoryItemLabelGenerator generator) {
-        ParamChecks.nullNotPermitted(generator, "generator");
+        if (generator == null) {
+            throw new IllegalArgumentException("Null 'generator' argument.");
+        }
         this.labelGenerator = generator;
     }
 
@@ -1051,11 +1186,49 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
     }
 
     /**
+     * Whether tick marks and labels are visible.
+     *
+     * @return the visibility of tick marks
+     */
+    public boolean isAxisTickVisible() {
+        return axisTickVisible;
+    }
+
+    /**
+     * Set whether tick marks and labels shall be visible.
+     *
+     * @param visible the visibility of tick marks
+     */
+    public void setAxisTickVisible(boolean visible) {
+        this.axisTickVisible = visible;
+        fireChangeEvent();
+    }
+
+    /**
+     * Whether data points with values of out of axis range are drawn.
+     *
+     * @return are data points with values of out of axis drawn?
+     */
+    public boolean isDrawOutOfRangePoints() {
+        return drawOutOfRangePoints;
+    }
+
+    /**
+     * Set whether data points with values of out of axis range shall be drawn.
+     *
+     * @param drawOutOfRangePoints shall be the points with values of out of
+     *        axis range drawn
+     */
+    public void setDrawOutOfRangePoints(boolean drawOutOfRangePoints) {
+        this.drawOutOfRangePoints = drawOutOfRangePoints;
+        fireChangeEvent();
+    }
+
+    /**
      * Returns a collection of legend items for the spider web chart.
      *
      * @return The legend items (never <code>null</code>).
      */
-    @Override
     public LegendItemCollection getLegendItems() {
         LegendItemCollection result = new LegendItemCollection();
         if (getDataset() == null) {
@@ -1081,7 +1254,7 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
             String description = label;
             Paint paint = getSeriesPaint(series);
             Paint outlinePaint = getSeriesOutlinePaint(series);
-            Stroke stroke = getSeriesOutlineStroke(series);
+            Stroke stroke = getHeadOutlineStroke(series);
             LegendItem item = new LegendItem(label, description,
                     null, null, shape, paint, stroke, outlinePaint);
             item.setDataset(getDataset());
@@ -1123,7 +1296,6 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      * @param parentState  the state from the parent plot, if there is one.
      * @param info  collects info about the drawing.
      */
-    @Override
     public void draw(Graphics2D g2, Rectangle2D area, Point2D anchor,
             PlotState parentState, PlotRenderingInfo info) {
 
@@ -1147,7 +1319,7 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
                 getForegroundAlpha()));
 
         if (!DatasetUtilities.isEmptyOrNull(this.dataset)) {
-            int seriesCount, catCount;
+            int seriesCount = 0, catCount = 0;
 
             if (this.dataExtractOrder == TableOrder.BY_ROW) {
                 seriesCount = this.dataset.getRowCount();
@@ -1158,10 +1330,8 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
                 catCount = this.dataset.getRowCount();
             }
 
-            // ensure we have a maximum value to use on the axes
-            if (this.maxValue == DEFAULT_MAX_VALUE) {
-                calculateMaxValue(seriesCount, catCount);
-            }
+            // ensure we have origin and maximum value for each axis
+            ensureBoundaryValues(seriesCount, catCount);
 
             // Next, setup the plot area
 
@@ -1199,7 +1369,10 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
                 g2.setPaint(this.axisLinePaint);
                 g2.setStroke(this.axisLineStroke);
                 g2.draw(line);
-                drawLabel(g2, radarArea, 0.0, cat, angle, 360.0 / catCount);
+                if (isAxisTickVisible()) {
+                    drawTicks(g2, radarArea, angle, cat);
+                }
+                drawLabel(g2, area, radarArea, 0.0, cat, angle, 360.0 / catCount);
             }
 
             // Now actually plot each of the series polygons..
@@ -1216,26 +1389,151 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
         drawOutline(g2, area);
     }
 
+    private void drawTicks(Graphics2D g2, Rectangle2D radarArea, double axisAngle, int cat) {
+        double[] ticks = {0.5d, 1d};
+        for (int i = 0; i < ticks.length; i++) {
+            double tick = ticks[i];
+            Point2D middlePoint = getWebPoint(radarArea, axisAngle, tick);
+            double xt = middlePoint.getX();
+            double yt = middlePoint.getY();
+            double angrad = Math.toRadians(-axisAngle);
+            g2.translate(xt, yt);
+            g2.rotate(angrad);
+            g2.drawLine(0, (int) -TICK_MARK_LENGTH / 2, 0, (int) TICK_MARK_LENGTH / 2);
+            g2.rotate(-angrad);
+            g2.translate(-xt, -yt);
+            drawTickLabel(g2, radarArea, middlePoint, axisAngle, cat, tick);
+        }
+    }
+
+    private void drawTickLabel(
+            Graphics2D g2,
+            Rectangle2D radarArea,
+            Point2D middlePoint,
+            double _axisAngle,
+            int cat,
+            double tick) {
+        double axisAngle = normalize(_axisAngle);
+        double _origin = getOrigin(cat).doubleValue();
+        double max = getMaxValue(cat).doubleValue();
+        double tickValue = ((max - _origin) * tick) + _origin;
+        String label = "" + Math.round(tickValue * 1000) / 1000d;
+        FontRenderContext frc = g2.getFontRenderContext();
+        Rectangle2D labelBounds = getLabelFont().getStringBounds(label, frc);
+        int labelW = (int) labelBounds.getWidth();
+        int labelH = (int) labelBounds.getHeight();
+
+        double centerX = radarArea.getCenterX();
+        double centerY = radarArea.getCenterY();
+
+        double adj = middlePoint.distance(centerX, centerY);
+        double opp = TICK_MARK_LENGTH / 2 + 4;
+        double hyp = Math.sqrt(Math.pow(opp, 2) + Math.pow(adj, 2));
+        double angle = Math.toDegrees(Math.atan(opp / adj));
+        int charHeight = g2.getFontMetrics().getHeight();
+        int charWidth = g2.getFontMetrics().charWidth('M');
+
+        double alphaRad = Math.toRadians(axisAngle - angle);
+        double labelX = centerX + (hyp * Math.cos(alphaRad));
+        double labelY = centerY - (hyp * Math.sin(alphaRad)) + labelH;
+
+//        g2.draw(new Line2D.Double(centerX, centerY, labelX, labelY - labelH)); // test line
+
+        double sinGap = Math.pow(Math.sin(Math.toRadians(axisAngle)), 2);
+        if (axisAngle > 90 && axisAngle < 270) {
+            labelY -= labelH;
+            labelY += (charHeight * sinGap / 2);
+        } else {
+            labelY -= (charHeight * sinGap / 2);
+        }
+        double cosGap = Math.pow(Math.cos(Math.toRadians(axisAngle)), 2);
+        if (axisAngle > 180) {
+            labelX -= labelW;
+            labelX += (charWidth * cosGap / 2);
+        } else {
+            labelX -= (charWidth * cosGap / 2);
+        }
+//        g2.drawRect((int) labelX, (int) labelY - labelH, labelW, labelH); // test rectangle
+        g2.setPaint(getLabelPaint());
+        g2.setFont(getLabelFont());
+        g2.drawString(label, (float) labelX, (float) labelY);
+    }
+
     /**
-     * loop through each of the series to get the maximum value
-     * on each category axis
+     * Loop through each of the series to get the maximum value
+     * on each category axis.
      *
      * @param seriesCount  the number of series
      * @param catCount  the number of categories
      */
-    private void calculateMaxValue(int seriesCount, int catCount) {
-        double v;
-        Number nV;
-
-        for (int seriesIndex = 0; seriesIndex < seriesCount; seriesIndex++) {
-            for (int catIndex = 0; catIndex < catCount; catIndex++) {
-                nV = getPlotValue(seriesIndex, catIndex);
+    private void ensureBoundaryValues(int seriesCount, int catCount) {
+        // base origin and maxVaue are used
+        if (origin != null && maxValue != null) {
+            return;
+        }
+        for (int catIndex = 0; catIndex < catCount; catIndex++) {
+            Double preferredCatMax = getMaxValue(catIndex);
+            Double preferredCatOrigin = getOrigin(catIndex);
+            if (preferredCatOrigin != null && preferredCatMax != null) {
+                continue; // already set per category
+            }
+            double catDataMaxVal = -Double.MAX_VALUE;
+            double catDataMinVal = Double.MAX_VALUE;
+            boolean hasValues = false;
+            for (int seriesIndex = 0; seriesIndex < seriesCount; seriesIndex++) {
+                Number nV = getPlotValue(seriesIndex, catIndex);
                 if (nV != null) {
-                    v = nV.doubleValue();
-                    if (v > this.maxValue) {
-                        this.maxValue = v;
+                    hasValues = true;
+                    double v = nV.doubleValue();
+                    if (v > catDataMaxVal) {
+                        catDataMaxVal = v;
+                    }
+                    if (v < catDataMinVal) {
+                        catDataMinVal = v;
                     }
                 }
+            }
+            if (!hasValues) {
+                setMaxValue(catIndex, new Double(0));
+                setOrigin(catIndex, new Double(0));
+                continue;
+            }
+
+            if (preferredCatMax == null) {
+                preferredCatMax = new Double(catDataMaxVal);
+                setMaxValue(catIndex, preferredCatMax);
+            }
+
+            // Ensure that origin of a spoke does not coincide with a data point with minimum value.
+            // Such data point would lost information to which spoke (axis) it belongs since it
+            // would be in the center of the spider plot, i.e. it would "belong" to all spokes.
+            if (preferredCatOrigin == null) {
+                double catOriginShift;
+                if (catDataMaxVal == catDataMinVal) {
+                    if (catDataMinVal == 0) {
+                        // all data points at zero
+                        catOriginShift = 0.1;
+                    } else {
+                        // all data points at the same value
+                        catOriginShift = Math.abs(catDataMinVal / 10);
+                    }
+                } else {
+                    // Shift origin about 10% of the data range from minimum.
+                    catOriginShift = Math.abs((catDataMaxVal - catDataMinVal) / 10);
+                }
+                preferredCatOrigin = new Double(catDataMinVal - catOriginShift);
+                setOrigin(catIndex, preferredCatOrigin);
+            }
+
+            double prefOrigin = preferredCatOrigin.doubleValue();
+            double prefMax = preferredCatMax.doubleValue();
+             // special case. Min, max and all values are zero.
+            if (prefOrigin == 0 && prefMax == 0) {
+                prefMax = 0.1;
+                setMaxValue(catIndex, new Double(prefMax));
+            }
+            if (prefOrigin >= prefMax) {
+                setMaxValue(catIndex, new Double(prefOrigin + Math.abs(prefOrigin / 2)));
             }
         }
     }
@@ -1274,76 +1572,98 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
             if (dataValue != null) {
                 double value = dataValue.doubleValue();
 
-                if (value >= 0) { // draw the polygon series...
+                // Finds our starting angle from the centre for this axis
 
-                    // Finds our starting angle from the centre for this axis
+                double angle = getStartAngle()
+                    + (getDirection().getFactor() * cat * 360 / catCount);
 
-                    double angle = getStartAngle()
-                        + (getDirection().getFactor() * cat * 360 / catCount);
+                // The following angle calc will ensure there isn't a top
+                // vertical axis - this may be useful if you don't want any
+                // given criteria to 'appear' move important than the
+                // others..
+                //  + (getDirection().getFactor()
+                //        * (cat + 0.5) * 360 / catCount);
 
-                    // The following angle calc will ensure there isn't a top
-                    // vertical axis - this may be useful if you don't want any
-                    // given criteria to 'appear' move important than the
-                    // others..
-                    //  + (getDirection().getFactor()
-                    //        * (cat + 0.5) * 360 / catCount);
+                // find the point at the appropriate distance end point
+                // along the axis/angle identified above and add it to the
+                // polygon
 
-                    // find the point at the appropriate distance end point
-                    // along the axis/angle identified above and add it to the
-                    // polygon
+                double _maxValue = getMaxValue(cat).doubleValue();
+                double _origin = getOrigin(cat).doubleValue();
+                double lowerBound = Math.min(_origin, _maxValue);
+                double upperBound = Math.max(_origin, _maxValue);
+                boolean lesser = value < lowerBound;
+                boolean greater = value > upperBound;
+                if ((lesser || greater) && !drawOutOfRangePoints) {
+                    continue;
+                }
+                if (lesser) {
+                    value = lowerBound;
+                }
+                if (greater) {
+                    value = upperBound;
+                }
+                double length = _maxValue == _origin ? 0 : (value - lowerBound) / (upperBound - lowerBound);
+                if (_maxValue < _origin) { // inversed
+                    length = 1 - length;
+                }
+                Point2D point = getWebPoint(plotArea, angle, length);
+                polygon.addPoint((int) point.getX(), (int) point.getY());
 
-                    Point2D point = getWebPoint(plotArea, angle,
-                            value / this.maxValue);
-                    polygon.addPoint((int) point.getX(), (int) point.getY());
+                Paint paint = getSeriesPaint(series);
+                Paint outlinePaint = getSeriesOutlinePaint(series);
 
+                double px = point.getX();
+                double py = point.getY();
+                g2.setPaint(paint);
+                if (lesser || greater) {
+                    // user crosshair for out-of-range data points distinguish
+                    g2.setStroke(new BasicStroke(1.5f, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_BEVEL));
+                    double delta = 3;
+                    g2.draw(new Line2D.Double(px - delta, py, px + delta, py));
+                    g2.draw(new Line2D.Double(px, py - delta, px, py + delta));
+                } else {
                     // put an elipse at the point being plotted..
-
-                    Paint paint = getSeriesPaint(series);
-                    Paint outlinePaint = getSeriesOutlinePaint(series);
-                    Stroke outlineStroke = getSeriesOutlineStroke(series);
-
-                    Ellipse2D head = new Ellipse2D.Double(point.getX()
-                            - headW / 2, point.getY() - headH / 2, headW,
-                            headH);
-                    g2.setPaint(paint);
+                    Ellipse2D head = new Ellipse2D.Double(
+                            px - headW / 2, py - headH / 2,
+                            headW, headH);
                     g2.fill(head);
-                    g2.setStroke(outlineStroke);
+                    g2.setStroke(getHeadOutlineStroke(series));
                     g2.setPaint(outlinePaint);
                     g2.draw(head);
+                }
 
-                    if (entities != null) {
-                        int row, col;
-                        if (this.dataExtractOrder == TableOrder.BY_ROW) {
-                            row = series;
-                            col = cat;
-                        }
-                        else {
-                            row = cat;
-                            col = series;
-                        }
-                        String tip = null;
-                        if (this.toolTipGenerator != null) {
-                            tip = this.toolTipGenerator.generateToolTip(
-                                    this.dataset, row, col);
-                        }
-
-                        String url = null;
-                        if (this.urlGenerator != null) {
-                            url = this.urlGenerator.generateURL(this.dataset,
-                                   row, col);
-                        }
-
-                        Shape area = new Rectangle(
-                                (int) (point.getX() - headW),
-                                (int) (point.getY() - headH),
-                                (int) (headW * 2), (int) (headH * 2));
-                        CategoryItemEntity entity = new CategoryItemEntity(
-                                area, tip, url, this.dataset,
-                                this.dataset.getRowKey(row),
-                                this.dataset.getColumnKey(col));
-                        entities.add(entity);
+                if (entities != null) {
+                    int row = 0; int col = 0;
+                    if (this.dataExtractOrder == TableOrder.BY_ROW) {
+                        row = series;
+                        col = cat;
+                    }
+                    else {
+                        row = cat;
+                        col = series;
+                    }
+                    String tip = null;
+                    if (this.toolTipGenerator != null) {
+                        tip = this.toolTipGenerator.generateToolTip(
+                                this.dataset, row, col);
                     }
 
+                    String url = null;
+                    if (this.urlGenerator != null) {
+                        url = this.urlGenerator.generateURL(this.dataset,
+                               row, col);
+                    }
+
+                    Shape area = new Rectangle(
+                            (int) (point.getX() - headW),
+                            (int) (point.getY() - headH),
+                            (int) (headW * 2), (int) (headH * 2));
+                    CategoryItemEntity entity = new CategoryItemEntity(
+                            area, tip, url, this.dataset,
+                            this.dataset.getRowKey(row),
+                            this.dataset.getColumnKey(col));
+                    entities.add(entity);
                 }
             }
         }
@@ -1394,17 +1714,19 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      * Draws the label for one axis.
      *
      * @param g2  the graphics device.
-     * @param plotArea  the plot area
+     * @param plotArea  whole plot drawing area (e.g. including space for labels)
+     * @param plotDrawingArea  the plot drawing area (just spanning of axis)
      * @param value  the value of the label (ignored).
      * @param cat  the category (zero-based index).
      * @param startAngle  the starting angle.
      * @param extent  the extent of the arc.
      */
-    protected void drawLabel(Graphics2D g2, Rectangle2D plotArea, double value,
+    protected void drawLabel(Graphics2D g2, Rectangle2D plotArea,
+                             Rectangle2D plotDrawingArea, double value,
                              int cat, double startAngle, double extent) {
         FontRenderContext frc = g2.getFontRenderContext();
 
-        String label;
+        String label = null;
         if (this.dataExtractOrder == TableOrder.BY_ROW) {
             // if series are in rows, then the categories are the column keys
             label = this.labelGenerator.generateColumnLabel(this.dataset, cat);
@@ -1414,19 +1736,35 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
             label = this.labelGenerator.generateRowLabel(this.dataset, cat);
         }
 
-        Rectangle2D labelBounds = getLabelFont().getStringBounds(label, frc);
-        LineMetrics lm = getLabelFont().getLineMetrics(label, frc);
-        double ascent = lm.getAscent();
+        double angle = normalize(startAngle);
 
-        Point2D labelLocation = calculateLabelLocation(labelBounds, ascent,
-                plotArea, startAngle);
+        Font font = getLabelFont();
+        Point2D labelLocation;
+        do {
+            Rectangle2D labelBounds = font.getStringBounds(label, frc);
+            LineMetrics lm = font.getLineMetrics(label, frc);
+            double ascent = lm.getAscent();
+
+            labelLocation = calculateLabelLocation(labelBounds, ascent,
+                    plotDrawingArea, startAngle);
+
+            boolean leftOut = angle > 90 && angle < 270 && labelLocation.getX() < plotArea.getX();
+            boolean rightOut = (angle < 90 || angle > 270) &&
+                    labelLocation.getX() + labelBounds.getWidth() > plotArea.getX() + plotArea.getWidth();
+
+            if (leftOut || rightOut) {
+                font = font.deriveFont(font.getSize2D() - 1);
+            } else {
+                break;
+            }
+        } while (font.getSize() > 8);
 
         Composite saveComposite = g2.getComposite();
 
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,
                 1.0f));
         g2.setPaint(getLabelPaint());
-        g2.setFont(getLabelFont());
+        g2.setFont(font);
         g2.drawString(label, (float) labelLocation.getX(),
                 (float) labelLocation.getY());
         g2.setComposite(saveComposite);
@@ -1473,6 +1811,14 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
         return new Point2D.Double(labelX, labelY);
     }
 
+    private double normalize(double _axisAngle) {
+        double axisAngle = _axisAngle % 360;
+        if (axisAngle < 0) {
+            axisAngle += 360;
+        }
+        return axisAngle;
+    }
+
     /**
      * Tests this plot for equality with an arbitrary object.
      *
@@ -1480,7 +1826,6 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      *
      * @return A boolean.
      */
-    @Override
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -1507,7 +1852,13 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
         if (!this.direction.equals(that.direction)) {
             return false;
         }
-        if (this.maxValue != that.maxValue) {
+        if (!ObjectUtilities.equal(this.maxValue, that.maxValue)) {
+            return false;
+        }
+        if (!ObjectUtilities.equal(this.maxValues, that.maxValues)) {
+            return false;
+        }
+        if (!ObjectUtilities.equal(this.origins, that.origins)) {
             return false;
         }
         if (this.webFilled != that.webFilled) {
@@ -1574,6 +1925,10 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
                 that.urlGenerator)) {
             return false;
         }
+        if (!ObjectUtilities.equal(this.headOutlineStroke,
+                that.headOutlineStroke)) {
+            return false;
+        }
         return true;
     }
 
@@ -1585,7 +1940,6 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      * @throws CloneNotSupportedException if the plot cannot be cloned for
      *         any reason.
      */
-    @Override
     public Object clone() throws CloneNotSupportedException {
         SpiderWebPlot clone = (SpiderWebPlot) super.clone();
         clone.legendItemShape = ShapeUtilities.clone(this.legendItemShape);
@@ -1646,4 +2000,11 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
         }
     }
 
+    /**
+     * TODO: Copy-paste from DefaultDrawingSupplier. Consider to put into some
+     * utility class.
+     */
+    private static int[] intArray(double a, double b, double c) {
+        return new int[]{(int) a, (int) b, (int) c};
+    }
 }

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2011, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -21,13 +21,13 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
  * USA.
  *
- * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
+ * [Oracle and Java are registered trademarks of Oracle and/or its affiliates.
  * Other names may be trademarks of their respective owners.]
  *
- * ----------------------
- * SpiderWebPlotTest.java
- * ----------------------
- * (C) Copyright 2005-2013, by Object Refinery Limited and Contributors.
+ * -----------------------
+ * SpiderWebPlotTests.java
+ * -----------------------
+ * (C) Copyright 2005-2009, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -42,12 +42,7 @@
  *
  */
 
-package org.jfree.chart.plot;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+package org.jfree.chart.plot.junit;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -57,28 +52,57 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectInput;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
 import java.text.DecimalFormat;
+
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
+
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.LegendItemCollection;
-import org.jfree.chart.TestUtilities;
 import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
 import org.jfree.chart.labels.StandardCategoryToolTipGenerator;
+import org.jfree.chart.plot.SpiderWebPlot;
 import org.jfree.chart.urls.StandardCategoryURLGenerator;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.util.Rotation;
 import org.jfree.util.TableOrder;
-import org.junit.Test;
 
 /**
  * Tests for the {@link SpiderWebPlot} class.
  */
-public class SpiderWebPlotTest {
+public class SpiderWebPlotTest extends TestCase {
+
+    private static final double EPSILON = 0.0000001;
+
+    /**
+     * Returns the tests as a test suite.
+     *
+     * @return The test suite.
+     */
+    public static Test suite() {
+        return new TestSuite(SpiderWebPlotTest.class);
+    }
+
+    /**
+     * Constructs a new set of tests.
+     *
+     * @param name  the name of the tests.
+     */
+    public SpiderWebPlotTest(String name) {
+        super(name);
+    }
 
     /**
      * Some checks for the equals() method.
      */
-    @Test
     public void testEquals() {
         SpiderWebPlot p1 = new SpiderWebPlot(new DefaultCategoryDataset());
         SpiderWebPlot p2 = new SpiderWebPlot(new DefaultCategoryDataset());
@@ -116,9 +140,9 @@ public class SpiderWebPlotTest {
         assertTrue(p1.equals(p2));
 
         // maxValue
-        p1.setMaxValue(123.4);
+        p1.setMaxValue(new Double(123.4));
         assertFalse(p1.equals(p2));
-        p2.setMaxValue(123.4);
+        p2.setMaxValue(new Double(123.4));
         assertTrue(p1.equals(p2));
 
         // legendItemShape
@@ -251,20 +275,42 @@ public class SpiderWebPlotTest {
         assertFalse(p1.equals(p2));
         p2.setAxisLineStroke(new BasicStroke(1.1f));
         assertTrue(p1.equals(p2));
+
+        BasicStroke headStroke = new BasicStroke(2);
+        p1.setHeadOutlineStroke(headStroke);
+        assertFalse(p1.equals(p2));
+        p2.setHeadOutlineStroke(headStroke);
+        assertTrue(p1.equals(p2));
     }
 
     /**
      * Confirm that cloning works.
      */
-    @Test
-    public void testCloning() throws CloneNotSupportedException {
+    public void testCloning() {
         SpiderWebPlot p1 = new SpiderWebPlot(new DefaultCategoryDataset());
         Rectangle2D legendShape = new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0);
         p1.setLegendItemShape(legendShape);
-        SpiderWebPlot p2 = (SpiderWebPlot) p1.clone();
+        p1.setOrigin(0, new Double(-1));
+        p1.setOrigin(1, new Double(-3));
+        p1.setMaxValue(0, new Double(4));
+        p1.setMaxValue(1, new Double(6));
+        BasicStroke headStroke = new BasicStroke(2);
+        p1.setHeadOutlineStroke(headStroke);
+        SpiderWebPlot p2 = null;
+        try {
+            p2 = (SpiderWebPlot) p1.clone();
+        }
+        catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
+        assertEquals("origin 1", -1, p2.getOrigin(0).doubleValue(), EPSILON);
+        assertEquals("origin 2", -3, p2.getOrigin(1).doubleValue(), EPSILON);
+        assertEquals("max 1", 4, p2.getMaxValue(0).doubleValue(), EPSILON);
+        assertEquals("max 2", 6, p2.getMaxValue(1).doubleValue(), EPSILON);
+        assertEquals("head stroke", headStroke, p2.getHeadOutlineStroke());
 
         // change the legendItemShape
         legendShape.setRect(4.0, 3.0, 2.0, 1.0);
@@ -295,18 +341,33 @@ public class SpiderWebPlotTest {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
-    @Test
     public void testSerialization() {
+
         SpiderWebPlot p1 = new SpiderWebPlot(new DefaultCategoryDataset());
-        SpiderWebPlot p2 = (SpiderWebPlot) TestUtilities.serialised(p1);
+        SpiderWebPlot p2 = null;
+
+        try {
+            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+            ObjectOutput out = new ObjectOutputStream(buffer);
+            out.writeObject(p1);
+            out.close();
+
+            ObjectInput in = new ObjectInputStream(
+                    new ByteArrayInputStream(buffer.toByteArray()));
+            p2 = (SpiderWebPlot) in.readObject();
+            in.close();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
         assertEquals(p1, p2);
+
     }
 
     /**
      * Draws the chart with a null info object to make sure that no exceptions
      * are thrown.
      */
-    @Test
     public void testDrawWithNullInfo() {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         dataset.addValue(35.0, "S1", "C1");
@@ -316,22 +377,24 @@ public class SpiderWebPlotTest {
         dataset.addValue(25.0, "S1", "C5");
         SpiderWebPlot plot = new SpiderWebPlot(dataset);
         JFreeChart chart = new JFreeChart(plot);
+        boolean success = false;
         try {
             BufferedImage image = new BufferedImage(200 , 100,
                     BufferedImage.TYPE_INT_RGB);
             Graphics2D g2 = image.createGraphics();
             chart.draw(g2, new Rectangle2D.Double(0, 0, 200, 100), null, null);
             g2.dispose();
+            success = true;
         }
         catch (Exception e) {
-            fail("There should be no exception.");
+            success = false;
         }
+        assertTrue(success);
     }
 
     /**
      * Fetches the legend items and checks the values.
      */
-    @Test
     public void testGetLegendItems() {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         dataset.addValue(35.0, "S1", "C1");
@@ -355,6 +418,130 @@ public class SpiderWebPlotTest {
         assertEquals(1, item2.getSeriesIndex());
         assertEquals(dataset, item2.getDataset());
         assertEquals(0, item2.getDatasetIndex());
+    }
+
+    /**
+     * Test maximum values for categories.
+     */
+    public void testMaxValue() {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        dataset.addValue(35.0, "S1", "C1");
+        dataset.addValue(45.0, "S1", "C2");
+        dataset.addValue(135.0, "S2", "C1");
+        dataset.addValue(145.0, "S2", "C2");
+        SpiderWebPlot plot = new SpiderWebPlot(dataset);
+        plot.setMaxValue(new Double(145));
+        drawPlot(plot);
+
+        assertEquals(145.0, plot.getMaxValue().doubleValue(), 0.1);
+
+        plot.setMaxValue(new Double(20));
+        assertEquals(20, plot.getMaxValue().doubleValue(), 0.1);
+    }
+
+    /**
+     * Test minimum and maximum values for categories.
+     */
+    public void testBoundaryValues() {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        dataset.addValue(35.0, "S1", "C1");
+        dataset.addValue(45.0, "S1", "C2");
+        dataset.addValue(-45.0, "S1", "C3");
+        dataset.addValue(135.0, "S2", "C1");
+        dataset.addValue(145.0, "S2", "C2");
+        dataset.addValue(145.0, "S2", "C3");
+
+        SpiderWebPlot plot = useInPlot(dataset);
+
+        assertEquals(135, plot.getMaxValue(0).doubleValue(), 0.1);
+        assertEquals(145, plot.getMaxValue(1).doubleValue(), 0.1);
+        assertNull(plot.getMaxValue());
+
+        assertEquals(25, plot.getOrigin(0).doubleValue(), 0.1);
+        assertEquals(35, plot.getOrigin(1).doubleValue(), 0.1);
+        assertEquals(-64, plot.getOrigin(2).doubleValue(), 0.1);
+    }
+
+    /**
+     * Test minimum and maximum values for categories.
+     */
+    public void testBoundaryValues2() {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        dataset.addValue(-1, "S1", "C1");
+        dataset.addValue(5, "S2", "C1");
+        SpiderWebPlot plot = useInPlot(dataset);
+        assertEquals(5, plot.getMaxValue(0).doubleValue(), 0.1);
+        assertNull(plot.getMaxValue());
+        assertEquals(-1.6, plot.getOrigin(0).doubleValue(), 0.1);
+    }
+
+    /**
+     * Test minimum and maximum values for categories.
+     */
+    public void testBoundaryValuesWithOneRow() {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        dataset.addValue(-0.65, "S1", "C1");
+        SpiderWebPlot plot = useInPlot(dataset);
+        assertNull(plot.getMaxValue());
+        assertEquals(-0.65, plot.getMaxValue(0).doubleValue(), 0.0001);
+        assertEquals(-0.715, plot.getOrigin(0).doubleValue(), 0.0001);
+    }
+
+    public void testBoundaryValuesWithOneZeroRow() {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        dataset.addValue(0, "S1", "C1");
+        SpiderWebPlot plot = useInPlot(dataset);
+        assertNull(plot.getMaxValue());
+        assertEquals(0, plot.getMaxValue(0).doubleValue(), 0.0001);
+        assertEquals(-0.1, plot.getOrigin(0).doubleValue(), 0.0001);
+    }
+
+    public void testAllValuesAndPreferredOriginZero() {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        dataset.addValue(0, "S1", "C1");
+        SpiderWebPlot plot = new SpiderWebPlot(dataset);
+        plot.setOrigin(0, new Double(0));
+
+        drawPlot(plot);
+
+        assertEquals(0.1, plot.getMaxValue(0).doubleValue(), 0.0001);
+        assertEquals(0, plot.getOrigin(0).doubleValue(), 0.0001);
+    }
+
+    public void testDifferentOrigins() {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        dataset.addValue(10.0, "S1", "C1");
+        dataset.addValue(10.0, "S1", "C2");
+        dataset.addValue(5.0, "S1", "C3");
+        dataset.addValue(100.0, "S2", "C1");
+        dataset.addValue(100.0, "S2", "C2");
+        dataset.addValue(55.0, "S2", "C3");
+
+        SpiderWebPlot plot = new SpiderWebPlot(dataset);
+        plot.setOrigin(0, null);
+        plot.setOrigin(1, new Double(-10d));
+        plot.setOrigin(2, null);
+
+        drawPlot(plot);
+
+        assertEquals(1, plot.getOrigin(0).doubleValue(), 0.1);
+        assertEquals(-10, plot.getOrigin(1).doubleValue(), 0.1);
+        assertEquals(0, plot.getOrigin(2).doubleValue(), 0.1);
+    }
+
+    private SpiderWebPlot useInPlot(DefaultCategoryDataset dataset) {
+        SpiderWebPlot plot = new SpiderWebPlot(dataset);
+        drawPlot(plot);
+        return plot;
+    }
+
+    private void drawPlot(SpiderWebPlot plot) {
+        JFreeChart chart = new JFreeChart(plot);
+        BufferedImage image = new BufferedImage(200, 100,
+                BufferedImage.TYPE_INT_RGB);
+        Graphics2D g2 = image.createGraphics();
+        chart.draw(g2, new Rectangle2D.Double(0, 0, 200, 100), null);
+        g2.dispose();
     }
 
 }
