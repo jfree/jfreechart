@@ -176,7 +176,6 @@
 
         <!-- copy across README and CHANGELOG -->
         <copy file="${basedir}/README.txt" tofile="${basedir}/distribution/README.txt" />
-        <copy file="${basedir}/NEWS" tofile="${basedir}/distribution/NEWS" />
         <copy file="${basedir}/pom.xml" tofile="${basedir}/distribution/pom.xml" />
 
         <!-- copy across LICENCE -->
