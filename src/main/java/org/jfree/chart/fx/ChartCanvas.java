@@ -43,6 +43,7 @@ package org.jfree.chart.fx;
 
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.RenderingHints;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
@@ -75,6 +76,7 @@ import org.jfree.chart.fx.overlay.OverlayFX;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.util.ParamChecks;
 import org.jfree.fx.FXGraphics2D;
+import org.jfree.fx.FXHints;
 
 /**
  * A canvas for displaying a {@link JFreeChart} in JavaFX.  You can use the
@@ -175,7 +177,13 @@ public class ChartCanvas extends Canvas implements ChartChangeListener,
         // change the default font smoothing for better results
         GraphicsContext gc = getGraphicsContext2D();
         gc.setFontSmoothingType(FontSmoothingType.LCD);
-        this.g2 = new FXGraphics2D(gc);
+        FXGraphics2D fxg2 = new FXGraphics2D(gc);
+        fxg2.setRenderingHint(FXHints.KEY_USE_FX_FONT_METRICS, true);
+        fxg2.setZeroStrokeWidth(0.1);
+        fxg2.setRenderingHint(
+                    RenderingHints.KEY_FRACTIONALMETRICS, 
+                    RenderingHints.VALUE_FRACTIONALMETRICS_ON);
+        this.g2 = fxg2;
         this.liveHandler = null;
         this.availableMouseHandlers = new ArrayList<MouseHandlerFX>();
         
@@ -185,6 +193,8 @@ public class ChartCanvas extends Canvas implements ChartChangeListener,
         this.auxiliaryMouseHandlers = new ArrayList<MouseHandlerFX>();
         this.auxiliaryMouseHandlers.add(new TooltipHandlerFX("tooltip"));
         this.auxiliaryMouseHandlers.add(new ScrollHandlerFX("scroll"));
+        this.domainZoomable = true;
+        this.rangeZoomable = true;
         this.auxiliaryMouseHandlers.add(new AnchorHandlerFX("anchor"));
         this.auxiliaryMouseHandlers.add(new DispatchHandlerFX("dispatch"));
 
