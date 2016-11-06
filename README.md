@@ -621,11 +621,11 @@ Also fixed numerous bugs in equals(), cloning and serialization implementations.
 ##### Version 1.0.4 (9-Feb-2007)
 
 This release features:
-- a new XYBlockRenderer class;
+- a new `XYBlockRenderer` class;
 - URLs for pie chart labels in HTML image maps;
 - a new dataset implementation for open-high-low-close charts;
-- support for gradient paint in ClusteredXYBarRenderer, StackedXYBarRenderer and legend graphics;
-- a new anchor attribute for XYImageAnnotation;
+- support for gradient paint in `ClusteredXYBarRenderer`, `StackedXYBarRenderer` and legend graphics;
+- a new anchor attribute for `XYImageAnnotation`;
 - improvements to the experimental SWT support; plus
 - a number of additions to the API for usability; and 
 - many bug fixes.
@@ -663,7 +663,7 @@ This release features:
 - 1599652 - Inverted `StackedBar3D` problem;
 - 1598394 - `XYBarDataset` hiding its proxied object;
 - 1564967 - Crosshairs on `XYDifferenceRenderer`;
-- 1245305 - NullPointerException in `writeImageMap()`;
+- 1245305 - `NullPointerException` in `writeImageMap()`;
 - 1086307 - Crosshairs on plots with multiple axes.
 
 Also fixed numerous bugs in `equals()` and `clone()` methods throughout the API.
@@ -677,7 +677,7 @@ This release features:
 - a new event mechanism to allow updating of markers, plus
 - many other enhancements, bug fixes and documentation updates.
 
-A new DialPlot implementation has been added to the 'experimental' sources. 
+A new `DialPlot` implementation has been added to the 'experimental' sources. 
 We are looking for people to test this code and provide feedback, so that we
 can stabilize the API and add this code to the main JFreeChart API.
 
@@ -722,50 +722,50 @@ attributes in the `XYBubbleRenderer`, and potential `NullPointerExceptions` in t
 
 The following adjustments have been made to the API (there should be no breakage of applications coded to the 1.0.0 or 1.0.1 API):
 
-- CategoryToPieDataset: added accessor methods for underlying dataset, extract type and index (feature request 1477915);
-- DefaultXYDataset:  New dataset implementation that uses double[] arrays;
-- DefaultXYZDataset:  New dataset implementation that uses double[] arrays;
-- LegendItemBlockContainer: New container used in legends (enables legend item entities again);
-- MultiplePiePlot:  Added new fields aggregatedItemsKey and aggregatedItemsPaint, plus accessor methods - see bug 1190647;
-- SpiderWebPlot:  Added new fields toolTipGenerator and urlGenerator, plus accessor methods (see patch 1463455);
-- StackedBarRenderer3D:  Added new flag (renderAsPercentages), plus accessor methods, that controls whether the data items are displayed as values or percentages.  Two new constructors are also added (see patch 1459313);
-- XYPolygonAnnotation: Added new accessor methods.
+- `CategoryToPieDataset`: added accessor methods for underlying dataset, extract type and index (feature request 1477915);
+- `DefaultXYDataset`:  New dataset implementation that uses double[] arrays;
+- `DefaultXYZDataset`:  New dataset implementation that uses double[] arrays;
+- `LegendItemBlockContainer`: New container used in legends (enables legend item entities again);
+- `MultiplePiePlot`:  Added new fields `aggregatedItemsKey` and `aggregatedItemsPaint`, plus accessor methods - see bug 1190647;
+- `SpiderWebPlot`:  Added new fields `toolTipGenerator` and `urlGenerator`, plus accessor methods (see patch 1463455);
+- `StackedBarRenderer3D`:  Added new flag (`renderAsPercentages`), plus accessor methods, that controls whether the data items are displayed as values or percentages.  Two new constructors are also added (see patch 1459313);
+- `XYPolygonAnnotation`: Added new accessor methods.
 
 ###### Patches
 
-- 1459313 - Add renderAsPercentages option to StackedBarRenderer3D;
-- 1462727 - Modify SpiderWebPlot to support zero values;
-- 1463455 - Modify SpiderWebPlot to support mouse clicks, tool tips and URLs;
+- 1459313 - Add `renderAsPercentages` option to `StackedBarRenderer3D`;
+- 1462727 - Modify `SpiderWebPlot` to support zero values;
+- 1463455 - Modify `SpiderWebPlot` to support mouse clicks, tool tips and URLs;
 
 ###### Bug Fixes
 
-- 1514904 - Background image alpha in Plot class;
-- 1499140 - ClusteredXYBarRenderer with margin not drawing correctly;
-- 1494936 - LineAndShapeRenderer generates entity for non-visible item;
-- 1493199 - NPE drawing SpiderWebPlot with null info;
-- 1480978 - AbstractPieItemLabelGenerator.clone() doesn't clone percentFormat;
-- 1472942 - DateAxis.equals() broken;
-- 1468794 - StatisticalLineAndShapeRenderer doesn't draw error bars correctly when the plot has a horizontal orientation;
-- AbstractCategoryItemRenderer doesn't check seriesVisibleInLegend flag before creating new item;
+- 1514904 - Background image alpha in `Plot` class;
+- 1499140 - `ClusteredXYBarRenderer` with margin not drawing correctly;
+- 1494936 - `LineAndShapeRenderer` generates entity for non-visible item;
+- 1493199 - NPE drawing `SpiderWebPlot` with null info;
+- 1480978 - `AbstractPieItemLabelGenerator.clone()` doesn't clone `percentFormat`;
+- 1472942 - `DateAxis.equals()` broken;
+- 1468794 - `StatisticalLineAndShapeRenderer` doesn't draw error bars correctly when the plot has a horizontal orientation;
+- `AbstractCategoryItemRenderer` doesn't check `seriesVisibleInLegend` flag before creating new item;
 - 1440415 - Bad distribution of pie chart section labels;
 - 1440346 - Bad manifest entry for JCommon in JFreeChart jar file;
-- 1435461 - NumberAxis.equals() ignores rangeType field;
-- 1435160 - XYPointerAnnotation.equals() ignores x and y fields;
-- 1398672 - LegendItemEntities not working;
-- 1380480 - StandardXYItemRenderer problems with Double.NaN;
-- 1190647 - Legend and section color mismatch for MultiplePiePlot.
+- 1435461 - `NumberAxis.equals()` ignores `rangeType` field;
+- 1435160 - `XYPointerAnnotation.equals()` ignores x and y fields;
+- 1398672 - `LegendItemEntities` not working;
+- 1380480 - `StandardXYItemRenderer` problems with `Double.NaN`;
+- 1190647 - Legend and section color mismatch for `MultiplePiePlot`.
 
 ###### Miscellaneous Changes
 
-- Updated CandlestickRenderer, CyclicXYItemRenderer, HighLowRenderer, XYStepAreaRenderer and TimeSeriesURLGenerator to call dataset methods that return double primitive only;
-- Updated XYPolygonAnnotation, adding new accessor methods and fixing problems in the equals()/hashCode() methods;
-- ChartFactory.createStackedXYAreaChart() now uses StackedXYAreaRenderer2, for better handling of negative values;
-- Added crosshair support for XYBarRenderer.
+- Updated `CandlestickRenderer`, `CyclicXYItemRenderer`, `HighLowRenderer`, `XYStepAreaRenderer` and `TimeSeriesURLGenerator` to call dataset methods that return double primitive only;
+- Updated `XYPolygonAnnotation`, adding new accessor methods and fixing problems in the `equals()/hashCode()` methods;
+- `ChartFactory.createStackedXYAreaChart()` now uses `StackedXYAreaRenderer2`, for better handling of negative values;
+- Added crosshair support for `XYBarRenderer`.
 
 ###### Experimental Code
 
 In this release, some new (incomplete) classes have been included in the 
-org.jfree.experimental.* namespace.  These classes are not part of the 
+`org.jfree.experimental.*` namespace.  These classes are not part of the 
 standard API, but are included for developers to experiment with and provide
 feedback on.  Hopefully in the future, refined versions of these classes will
 be incorporated into the main library.  PLEASE NOTE THAT THE API FOR THESE
