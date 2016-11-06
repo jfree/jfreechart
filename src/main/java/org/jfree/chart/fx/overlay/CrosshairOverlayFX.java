@@ -47,6 +47,7 @@ import java.util.Iterator;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.fx.ChartCanvas;
+import org.jfree.chart.fx.ChartViewer;
 import org.jfree.chart.panel.CrosshairOverlay;
 import org.jfree.chart.plot.Crosshair;
 import org.jfree.chart.plot.PlotOrientation;
