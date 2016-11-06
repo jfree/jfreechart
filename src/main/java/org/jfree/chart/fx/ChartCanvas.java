@@ -250,7 +250,7 @@ public class ChartCanvas extends Canvas implements ChartChangeListener,
      * enabled.  If the underlying plot does not support domain axis zooming,
      * then setting this flag to {@code true} will have no effect.
      * 
-     * @param zoomable
+     * @param zoomable  the new flag value.
      * 
      * @since 1.0.20
      */
@@ -275,7 +275,7 @@ public class ChartCanvas extends Canvas implements ChartChangeListener,
      * enabled.  If the underlying plot does not support range axis zooming,
      * then setting this flag to {@code true} will have no effect.
      * 
-     * @param zoomable
+     * @param zoomable  the new flag value.
      * 
      * @since 1.0.20
      */
