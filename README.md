@@ -833,22 +833,21 @@ adjustments (there should be no breakage of applications coded to the 1.0.0 API)
 - added support for `GradientPaint` in interval markers.
 
 ##### Version 0.9.20 (7-Jun-2004)
-         - primarily bug fixes.
+- primarily bug fixes.
 
 ##### Version 0.9.19 (28-May-2004)
-         - added methods to XYDataset that return double primitives;
-         - removed distinction between "primary" and "secondary" datasets,
-           renderers and axes;
-         - added fixed legend item options to CategoryPlot and XYPlot;
-         - legend changes by Barek Naveh;
-         - removed Log4j dependency;
-         - many, many bug fixes;
+- added methods to `XYDataset` that return double primitives;
+- removed distinction between "primary" and "secondary" datasets, renderers and axes;
+- added fixed legend item options to `CategoryPlot` and `XYPlot`;
+- legend changes by Barek Naveh;
+- removed Log4j dependency;
+- many, many bug fixes;
 
 ##### Version 0.9.18 (15-Apr-2004)
-         - new legend anchor options;
-         - fixed broken JPEG export;
-         - fixed title size problems;
-         - various other bug fixes;
+- new legend anchor options;
+- fixed broken JPEG export;
+- fixed title size problems;
+- various other bug fixes;
 
 ##### Version 0.9.17 (26-Mar-2004)
          - pie chart enhancements for labelling, shading and multiple pie
@@ -1123,43 +1122,41 @@ Added a new stacked area chart (contributed by Dan
 
 ##### Version 0.9.3 (4-Sep-2002) 
 
-Added multiple pie charts based on
-        CategoryDataset.  Updated logarithmic axes.  Improved URL
-        support for image map generation. Moved the com.jrefinery.data
-        package from JCommon to JFreeChart. Added simple framework for
-        chart annotations. Improved control over renderers. Duplicate
-        x-values now allowed in XYSeries. Optional category label
-        skipping in category axes. Added CategoriesPaint attribute to
-        AbstractCategoryItemRenderer.  Added new attributes to
-        MeterPlot class. Updated 3D pie chart to observe start angle
-        and direction, and also foreground alpha < 1.0. Improved
-        Javadoc comments. New demo applications, including:
-        AnnotationDemo1, EventFrequencyDemo, JDBCCategoryChartDemo,
-        JDBCPieChartDemo, JDBCXYChartDemo and MinMaxCategoryPlotDemo.
-        Bug fixes:
-        - negative percentages on PiePlot.
-        - added listener notification to setXXXAxis(...) methods.
-        - fixed DomainInfo method name clash.
-        - added DomainIsPointsInTime flag to TimeSeriesCollection to
-          give better control over auto range on axis for time series
-          charts.
-        - axis margins for date axes are no longer hard-coded.
-        - fix for ordering of categories in JdbcCategoryDataset.
-        - added check for null axis in mouse click handler.
+- Added multiple pie charts based on `CategoryDataset`;
+- Updated logarithmic axes;
+- Improved URL support for image map generation;
+- Moved the `com.jrefinery.data` package from JCommon to JFreeChart. 
+- Added simple framework for chart annotations;
+- Improved control over renderers;
+- Duplicate x-values now allowed in `XYSeries`; 
+- Optional category label skipping in category axes; 
+- Added `CategoriesPaint` attribute to `AbstractCategoryItemRenderer`;
+- Added new attributes to `MeterPlot` class;
+- Updated 3D pie chart to observe start angle and direction, and also foreground alpha < 1.0;
+- Improved Javadoc comments;
+- New demo applications, including: `AnnotationDemo1`, `EventFrequencyDemo`, `JDBCCategoryChartDemo`, `JDBCPieChartDemo`, `JDBCXYChartDemo` and `MinMaxCategoryPlotDemo`.
 
-        The CVS repository at SourceForge has also been restructured
-        to match the distribution directory layout.
+Bug fixes:
+- negative percentages on `PiePlot`;
+- added listener notification to `setXXXAxis(...)` methods;
+- fixed `DomainInfo` method name clash;
+- added `DomainIsPointsInTime` flag to `TimeSeriesCollection` to give better control over auto range on axis for time series charts;
+- axis margins for date axes are no longer hard-coded;
+- fix for ordering of categories in `JdbcCategoryDataset`;
+- added check for `null` axis in mouse click handler.
+
+The CVS repository at SourceForge has also been restructured to match the distribution directory layout.
 
 
 ##### Version 0.9.2 (28-Jun-2002) 
 
-- `PiePlot` now has startAngle and direction attributes;
+- `PiePlot` now has `startAngle` and `direction` attributes;
 - added support for image map generation;
 - added a new `Pie3DPlot` class;
 - added label drawing code to bar renderers;
 - added optional range markers to horizontal number axis;
 - added bar clipping to avoid PRExceptions in bar charts; 
-- JFreeChartDemo has been modified and now includes examples of the dial and thermometer plots.
+- `JFreeChartDemo` has been modified and now includes examples of the dial and thermometer plots.
 
 ######Bug fixes
 
