@@ -811,35 +811,26 @@ adjustments (there should be no breakage of applications coded to the 1.0.0 API)
 - the first stable release of the JFreeChart class library, all future releases in the 1.0.x series will aim to maintain backward compatibility with this release;
 
 ##### Version 1.0.0-rc3 (28-Nov-2005)
-- the third "release candidate" for version 1.0.0, this release
-          fixes some issues with the 1.0.0-rc2 release (mainly concerning
-          packaging of resource bundles for localisation).
-- if no significant problems are reported in the next few days,
-          the 1.0.0 "final" release will be posted on 2-Dec-2005.
+- the third "release candidate" for version 1.0.0, this release fixes some issues with the 1.0.0-rc2 release (mainly concerning packaging of resource bundles for localisation).
+- if no significant problems are reported in the next few days, the 1.0.0 "final" release will be posted on 2-Dec-2005.
 
 ##### Version 1.0.0-rc2 (25-Nov-2005)
-- the second "release candidate" for version 1.0.0.  If no problems
-              are reported, 1.0.0 "final" will be released on 2-Dec-2005.
+- the second "release candidate" for version 1.0.0.  If no problems are reported, 1.0.0 "final" will be released on 2-Dec-2005.
 
 ##### Version 1.0.0-rc1 (2-Jun-2005)
-            - this is a "release candidate" for version 1.0.0.  If no
-              significant API problems are reported, this release will be
-              re-released as version 1.0.0.
+- this is a "release candidate" for version 1.0.0.  If no significant API problems are reported, this release will be re-released as version 1.0.0.
 
 ##### Version 1.0.0-pre2 (10-Mar-2005)
 
 ##### Version 1.0.0-pre1 (29-Nov-2004)
 
 ##### Version 0.9.21 (9-Sep-2004)
-         - added new axes: PeriodAxis and ModuloAxis.
-         - split org.jfree.data and org.jfree.chart.renderer into
-           subpackages for 'category' and 'xy' charts.
-         - Sun PNG encoder is now used, if available.
-         - a new demo application makes it easier to preview the
-           chart types that JFreeChart can create.
-         - added a new series visibility flag to the AbstractRenderer
-           class.
-         - added support for GradientPaint in interval markers.
+- added new axes: `PeriodAxis` and `ModuloAxis`.
+- split `org.jfree.data` and `org.jfree.chart.renderer` into subpackages for 'category' and 'xy' charts.
+- Sun PNG encoder is now used, if available.
+- a new demo application makes it easier to preview the chart types that JFreeChart can create.
+- added a new series visibility flag to the `AbstractRenderer` class.
+- added support for `GradientPaint` in interval markers.
 
 ##### Version 0.9.20 (7-Jun-2004)
          - primarily bug fixes.
