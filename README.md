@@ -10,6 +10,8 @@ JFreeChart is a comprehensive free chart library for the Java(tm) platform that
 can be used on the client-side (JavaFX and Swing) or the server side (with
 export to multiple formats including SVG, PNG and PDF).
 
+![JFreeChart sample](http://jfree.org/jfreechart/images/coffee_prices.png)
+
 The home page for the project is:
 
 http://www.jfree.org/jfreechart
