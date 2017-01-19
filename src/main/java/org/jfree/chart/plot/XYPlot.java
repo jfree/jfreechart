@@ -4459,19 +4459,19 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
                 XYItemRenderer r = getRendererForDataset(d);
                 if (isDomainAxis) {
                     if (r != null) {
-                        result = Range.combine(result, r.findDomainBounds(d));
+                        result = Range.combineIgnoringNaN(result, r.findDomainBounds(d));
                     }
                     else {
-                        result = Range.combine(result,
+                        result = Range.combineIgnoringNaN(result,
                                 DatasetUtilities.findDomainBounds(d));
                     }
                 }
                 else {
                     if (r != null) {
-                        result = Range.combine(result, r.findRangeBounds(d));
+                        result = Range.combineIgnoringNaN(result, r.findRangeBounds(d));
                     }
                     else {
-                        result = Range.combine(result,
+                        result = Range.combineIgnoringNaN(result,
                                 DatasetUtilities.findRangeBounds(d));
                     }
                 }
@@ -4496,10 +4496,10 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
             XYAnnotationBoundsInfo xyabi = (XYAnnotationBoundsInfo) it.next();
             if (xyabi.getIncludeInDataBounds()) {
                 if (isDomainAxis) {
-                    result = Range.combine(result, xyabi.getXRange());
+                    result = Range.combineIgnoringNaN(result, xyabi.getXRange());
                 }
                 else {
-                    result = Range.combine(result, xyabi.getYRange());
+                    result = Range.combineIgnoringNaN(result, xyabi.getYRange());
                 }
             }
         }
