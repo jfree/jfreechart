@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * ChartPanel.java
  * ---------------
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Andrzej Porebski;
@@ -172,7 +172,7 @@
  * 12-Sep-2013 : Provide auto-detection for JFreeSVG and OrsonPDF 
  *               libraries (no compile time dependencies) (DG);
  * 29-Aug-2014 : Localisation updates from patch attached to bug 1129 (SL);
- * 
+ * 06-Feb-2017 : Add dispose() call for graphics object, see issue #38 (DG);
  */
 
 package org.jfree.chart;
@@ -1630,7 +1630,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
                     this.chart.draw(bufferG2, bufferArea, this.anchor,
                             this.info);
                 }
-
+                bufferG2.dispose();
             }
 
             // zap the buffer onto the panel...
