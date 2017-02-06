@@ -1,2 +1,7 @@
 /nbproject/private/
 /target/
+
+# Eclipse files #
+/.classpath
+/.project
+/.settings
