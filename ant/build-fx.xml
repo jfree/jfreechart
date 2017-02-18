@@ -66,13 +66,6 @@
             <include name="org/jfree/**"/>
         </javac>
 
-        <!-- copy across .css files (chart-viewer.css) -->
-        <copy todir="${basedir}/build/org/jfree/chart/fx/">
-            <fileset dir="${basedir}/src/main/resources/org/jfree/chart/fx/">
-                <include name="*.css" />
-            </fileset>
-        </copy>
-
         <!-- copy across gorilla.jpg -->
         <copy file="${basedir}/src/main/resources/org/jfree/chart/gorilla.jpg" tofile="${basedir}/build/org/jfree/chart/gorilla.jpg" />
 
