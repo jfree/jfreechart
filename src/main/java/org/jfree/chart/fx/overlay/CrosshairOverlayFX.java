@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * --------------
- * OverlayFX.java
- * --------------
- * (C) Copyright 2016, by Object Refinery Limited and Contributors.
+ * -----------------------
+ * CrosshairOverlayFX.java
+ * -----------------------
+ * (C) Copyright 2016, 2017 by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -63,6 +63,9 @@ public class CrosshairOverlayFX extends CrosshairOverlay implements OverlayFX {
 
     @Override
     public void paintOverlay(Graphics2D g2, ChartCanvas chartCanvas) {
+        if (chartCanvas.getRenderingInfo() == null) {
+            return;
+        }
         Shape savedClip = g2.getClip();
         Rectangle2D dataArea = chartCanvas.getRenderingInfo().getPlotInfo().getDataArea();
         g2.clip(dataArea);

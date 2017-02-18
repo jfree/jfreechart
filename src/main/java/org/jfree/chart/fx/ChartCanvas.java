@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------
  * ChartCanvas.java
  * ----------------
- * (C) Copyright 2014-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2014-2017, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -36,6 +36,8 @@
  * --------
  * 25-Jun-2014 : Version 1 (DG);
  * 19-Jul-2014 : Add clearRect() call for each draw (DG);
+ * 18-Feb-2017 : Add methods for auxiliary handlers, move dispatch handling
+ *               methods to DispatchHandlerFX (DG);
  *
  */
 
@@ -59,14 +61,12 @@ import javafx.scene.text.FontSmoothingType;
 import org.jfree.chart.ChartMouseEvent;
 import org.jfree.chart.ChartRenderingInfo;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.entity.ChartEntity;
 import org.jfree.chart.event.ChartChangeEvent;
 import org.jfree.chart.event.ChartChangeListener;
 import org.jfree.chart.event.OverlayChangeEvent;
 import org.jfree.chart.event.OverlayChangeListener;
 import org.jfree.chart.fx.interaction.AnchorHandlerFX;
 import org.jfree.chart.fx.interaction.DispatchHandlerFX;
-import org.jfree.chart.fx.interaction.ChartMouseEventFX;
 import org.jfree.chart.fx.interaction.ChartMouseListenerFX;
 import org.jfree.chart.fx.interaction.TooltipHandlerFX;
 import org.jfree.chart.fx.interaction.ScrollHandlerFX;
@@ -81,7 +81,8 @@ import org.jfree.fx.FXHints;
 /**
  * A canvas for displaying a {@link JFreeChart} in JavaFX.  You can use the
  * canvas directly to display charts, but usually the {@link ChartViewer}
- * class (which embeds a canvas) is a better option.
+ * class (which embeds a canvas) is a better option as it provides additional
+ * features.
  * <p>
  * The canvas installs several default mouse handlers, if you don't like the
  * behaviour provided by these you can retrieve the handler by ID and
@@ -159,7 +160,7 @@ public class ChartCanvas extends Canvas implements ChartChangeListener,
     
     /**
      * Creates a new canvas to display the supplied chart in JavaFX.  If
-     * {@code chart} is null, a blank canvas will be displayed.
+     * {@code chart} is {@code null}, a blank canvas will be displayed.
      * 
      * @param chart  the chart. 
      */
@@ -170,7 +171,7 @@ public class ChartCanvas extends Canvas implements ChartChangeListener,
         }
         this.tooltip = null;
         this.tooltipEnabled = true;
-        this.chartMouseListeners = new ArrayList<ChartMouseListenerFX>();
+        this.chartMouseListeners = new ArrayList<>();
         
         widthProperty().addListener(e -> draw());
         heightProperty().addListener(e -> draw());
@@ -185,12 +186,12 @@ public class ChartCanvas extends Canvas implements ChartChangeListener,
                     RenderingHints.VALUE_FRACTIONALMETRICS_ON);
         this.g2 = fxg2;
         this.liveHandler = null;
-        this.availableMouseHandlers = new ArrayList<MouseHandlerFX>();
+        this.availableMouseHandlers = new ArrayList<>();
         
         this.availableMouseHandlers.add(new PanHandlerFX("pan", true, false, 
                 false, false));
  
-        this.auxiliaryMouseHandlers = new ArrayList<MouseHandlerFX>();
+        this.auxiliaryMouseHandlers = new ArrayList<>();
         this.auxiliaryMouseHandlers.add(new TooltipHandlerFX("tooltip"));
         this.auxiliaryMouseHandlers.add(new ScrollHandlerFX("scroll"));
         this.domainZoomable = true;
@@ -314,6 +315,19 @@ public class ChartCanvas extends Canvas implements ChartChangeListener,
     }
     
     /**
+     * Returns the anchor point.  This is the last point on the canvas
+     * that the user clicked with the mouse, and is used during chart 
+     * rendering to determine the position of crosshairs (if visible).
+     * 
+     * @return The anchor point (possibly {@code null}).
+     * 
+     * @since 1.0.20
+     */
+    public Point2D getAnchor() {
+        return this.anchor;        
+    } 
+
+    /**
      * Set the anchor point and forces a redraw of the chart (the anchor point
      * is used to determine the position of the crosshairs on the chart, if
      * they are visible).
@@ -370,6 +384,18 @@ public class ChartCanvas extends Canvas implements ChartChangeListener,
     }
 
     /**
+     * Returns a (newly created) list containing the listeners currently 
+     * registered with the canvas.
+     * 
+     * @return A list of listeners (possibly empty but never {@code null}).
+     * 
+     * @since 1.0.20
+     */
+    public List<ChartMouseListenerFX> getChartMouseListeners() {
+        return new ArrayList<>(this.chartMouseListeners);
+    }
+    
+    /**
      * Registers a listener to receive {@link ChartMouseEvent} notifications.
      *
      * @param listener  the listener ({@code null} not permitted).
@@ -421,7 +447,7 @@ public class ChartCanvas extends Canvas implements ChartChangeListener,
      * @param handler  the handler ({@code null} not permitted). 
      */
     public void addMouseHandler(MouseHandlerFX handler) {
-        if (!this.hasUniqueID(handler)) {
+        if (!hasUniqueID(handler)) {
             throw new IllegalArgumentException(
                     "There is already a handler with that ID (" 
                             + handler.getID() + ").");
@@ -436,6 +462,35 @@ public class ChartCanvas extends Canvas implements ChartChangeListener,
      */
     public void removeMouseHandler(MouseHandlerFX handler) {
         this.availableMouseHandlers.remove(handler);
+    }
+    
+    /**
+     * Adds a handler to the list of auxiliary handlers.  The handler must
+     * have an ID that uniquely identifies it amongst the handlers registered
+     * with this canvas.
+     * 
+     * @param handler  the handler ({@code null} not permitted).
+     * 
+     * @since 1.0.20
+     */
+    public void addAuxiliaryMouseHandler(MouseHandlerFX handler) {
+        if (!hasUniqueID(handler)) {
+            throw new IllegalArgumentException(
+                    "There is already a handler with that ID (" 
+                            + handler.getID() + ").");
+        }
+        this.auxiliaryMouseHandlers.add(handler);
+    }
+    
+    /**
+     * Removes a handler from the list of auxiliary handlers.
+     * 
+     * @param handler  the handler ({@code null} not permitted). 
+     * 
+     * @since 1.0.20
+     */
+    public void removeAuxiliaryMouseHandler(MouseHandlerFX handler) {
+        this.auxiliaryMouseHandlers.remove(handler);
     }
 
     /**
@@ -680,25 +735,6 @@ public class ChartCanvas extends Canvas implements ChartChangeListener,
     public void chartChanged(ChartChangeEvent event) {
         draw();
     }
-    
-    public void dispatchMouseMovedEvent(Point2D point, MouseEvent e) {
-        double x = point.getX();
-        double y = point.getY();
-        ChartEntity entity = this.info.getEntityCollection().getEntity(x, y);
-        ChartMouseEventFX event = new ChartMouseEventFX(this.chart, e, entity);
-        for (ChartMouseListenerFX listener : this.chartMouseListeners) {
-            listener.chartMouseMoved(event);
-        }
-    }
 
-    public void dispatchMouseClickedEvent(Point2D point, MouseEvent e) {
-        double x = point.getX();
-        double y = point.getY();
-        ChartEntity entity = this.info.getEntityCollection().getEntity(x, y);
-        ChartMouseEventFX event = new ChartMouseEventFX(this.chart, e, entity);
-        for (ChartMouseListenerFX listener : this.chartMouseListeners) {
-            listener.chartMouseClicked(event);
-        }
-    }
 }
 

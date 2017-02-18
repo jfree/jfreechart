@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------
  * DispatchHandlerFX.java
  * ----------------------
- * (C) Copyright 2014, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2014, 2017 by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -35,6 +35,7 @@
  * Changes:
  * --------
  * 25-Jun-2014 : Version 1 (DG);
+ * 18-Feb-2017 : Pull dispatch code from ChartCanvas (DG);
  *
  */
 
@@ -42,6 +43,7 @@ package org.jfree.chart.fx.interaction;
 
 import java.awt.geom.Point2D;
 import javafx.scene.input.MouseEvent;
+import org.jfree.chart.entity.ChartEntity;
 import org.jfree.chart.fx.ChartCanvas;
 import org.jfree.chart.fx.ChartViewer;
 
@@ -86,8 +88,13 @@ public class DispatchHandlerFX extends AbstractMouseHandlerFX {
 
     @Override
     public void handleMouseMoved(ChartCanvas canvas, MouseEvent e) {
-        Point2D currPt = new Point2D.Double(e.getX(), e.getY());
-        canvas.dispatchMouseMovedEvent(currPt, e);
+        double x = e.getX();
+        double y = e.getY();
+        ChartEntity entity = canvas.getRenderingInfo().getEntityCollection().getEntity(x, y);
+        ChartMouseEventFX event = new ChartMouseEventFX(canvas.getChart(), e, entity);
+        for (ChartMouseListenerFX listener : canvas.getChartMouseListeners()) {
+            listener.chartMouseMoved(event);
+        }
      }
 
     /**
@@ -103,11 +110,13 @@ public class DispatchHandlerFX extends AbstractMouseHandlerFX {
         if (this.mousePressedPoint == null) {
             return;
         }
-        Point2D currPt = new Point2D.Double(e.getX(), e.getY());
-        if (this.mousePressedPoint.distance(currPt) < 2) {
-            canvas.dispatchMouseClickedEvent(currPt, e);
+        double x = e.getX();
+        double y = e.getY();
+        ChartEntity entity = canvas.getRenderingInfo().getEntityCollection().getEntity(x, y);
+        ChartMouseEventFX event = new ChartMouseEventFX(canvas.getChart(), e, entity);
+        for (ChartMouseListenerFX listener : canvas.getChartMouseListeners()) {
+            listener.chartMouseClicked(event);
         }
-        this.mousePressedPoint = null;
     }
     
 }
