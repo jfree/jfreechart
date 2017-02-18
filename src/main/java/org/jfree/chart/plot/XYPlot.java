@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------
  * XYPlot.java
  * -----------
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Craig MacFarlane;
@@ -3254,25 +3254,26 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
         DatasetRenderingOrder order = getDatasetRenderingOrder();
         List<Integer> rendererIndices = getRendererIndices(order);
         List<Integer> datasetIndices = getDatasetIndices(order);
-            // draw background annotations
+
+        // draw background annotations
         for (int i : rendererIndices) {
             XYItemRenderer renderer = getRenderer(i);
             if (renderer != null) {
-                    ValueAxis domainAxis = getDomainAxisForDataset(i);
-                    ValueAxis rangeAxis = getRangeAxisForDataset(i);
+                ValueAxis domainAxis = getDomainAxisForDataset(i);
+                ValueAxis rangeAxis = getRangeAxisForDataset(i);
                 renderer.drawAnnotations(g2, dataArea, domainAxis, rangeAxis, 
-                            Layer.BACKGROUND, info);
-                }
+                        Layer.BACKGROUND, info);
             }
+        }
 
-            // render data items...
+        // render data items...
         for (int datasetIndex : datasetIndices) {
             XYDataset dataset = this.getDataset(datasetIndex);
             foundData = render(g2, dataArea, datasetIndex, info, 
                     crosshairState) || foundData;
-            }
+        }
 
-            // draw foreground annotations
+        // draw foreground annotations
         for (int i : rendererIndices) {
             XYItemRenderer renderer = getRenderer(i);
             if (renderer != null) {
@@ -3280,12 +3281,12 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
                     ValueAxis rangeAxis = getRangeAxisForDataset(i);
                 renderer.drawAnnotations(g2, dataArea, domainAxis, rangeAxis, 
                             Layer.FOREGROUND, info);
-                }
             }
+        }
 
         // draw domain crosshair if required...
         int datasetIndex = crosshairState.getDatasetIndex();
-        ValueAxis xAxis = this.getDomainAxisForDataset(datasetIndex);
+        ValueAxis xAxis = getDomainAxisForDataset(datasetIndex);
         RectangleEdge xAxisEdge = getDomainAxisEdge(getDomainAxisIndex(xAxis));
         if (!this.domainCrosshairLockedOnData && anchor != null) {
             double xx;
