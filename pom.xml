@@ -10,15 +10,8 @@
 
     <artifactId>jfreechart</artifactId>
     <groupId>org.jfree</groupId>
-    <version>1.5.0-SNAPSHOT</version>
+    <version>1.5.0</version>
     <packaging>jar</packaging>
-
-    <!-- this is required to host it on Sonatype's OSSRH -->
-    <parent>
-        <groupId>org.sonatype.oss</groupId>
-        <artifactId>oss-parent</artifactId>
-        <version>9</version>
-    </parent>
 
     <organization>
         <name>JFree.org</name>
@@ -42,6 +35,15 @@
         <url>https://github.com/jfree/jfreechart</url>
     </scm>
 
+    <developers>
+      <developer>
+        <name>David Gilbert</name>
+        <email>dave@jfree.org</email>
+        <organization>Object Refinery Limited</organization>
+        <organizationUrl>http://www.object-refinery.com</organizationUrl>
+      </developer>
+    </developers>
+
     <licenses>
         <license>
             <name>GNU Lesser General Public Licence</name>
@@ -54,7 +56,7 @@
         <dependency>
             <groupId>org.jfree</groupId>
             <artifactId>jcommon</artifactId>
-            <version>1.0.23</version>
+            <version>1.0.24</version>
         </dependency>
 
         <!-- FXGraphics2D is used for JavaFX support. -->
@@ -141,7 +143,7 @@
                 </configuration>
             </plugin>
             
- <!--           <plugin>
+            <plugin>
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-gpg-plugin</artifactId>
               <version>1.5</version>
@@ -155,7 +157,7 @@
                 </execution>
               </executions>
             </plugin>
--->
+
             <plugin>
               <groupId>org.sonatype.plugins</groupId>
               <artifactId>nexus-staging-maven-plugin</artifactId>
