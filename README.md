@@ -47,6 +47,22 @@ This will include the JavaFX support.  To build without JavaFX, you should copy 
 History
 -------
 
+##### Version 1.5.0 / 1.0.20 (18-Feb-2017)
+- `ChartViewer` now extends `Region` instead of `Control`;
+- add overlays for the JavaFX `ChartCanvas`;
+- added cleaner method to create histograms in `ChartFactory`;
+- set file extensions correctly for JavaFX file dialogs;
+- FXGraphics2D updated to version 1.5;
+- JFreeSVG updated to version 3.2;
+- OrsonPDF updated to version 1.7;
+- JCommon updated to version 1.0.24;
+- pull request #4 improvements to `XYStepRenderer`;
+- bug #36 fix for crosshairs with multiple datasets / axes;
+- bug #25 fix for `DateAxis.previousStandardDate()` method;
+- bug #19 fix for default time zone in `SegmentedDateAxis`;
+- SourceForge #1147 improve performance of `CategoryPlot` mapping datasets to axes;
+- moved SWT code out into separate projects;
+
 ##### Version 1.0.19 (31-Jul-2014)
 - fixed clipping issues for combined plots in JavaFX;
 - fixed a memory leak in the new JavaFX `ChartCanvas` class;
