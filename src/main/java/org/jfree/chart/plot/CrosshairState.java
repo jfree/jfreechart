@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * CrosshairState.java
  * -------------------
- * (C) Copyright 2002-2008, by Object Refinery Limited.
+ * (C) Copyright 2002-2017, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -46,6 +46,8 @@
  *               1565168 (DG);
  * 06-Feb-2007 : Added new fields and methods to fix bug 1086307 (DG);
  * 26-Jun-2008 : Now tracks dataset index (DG);
+ * 18-Feb-2017 : Fix for crosshairs with multiple datasets / axes - see 
+ *               bug #36 (DG);
  *
  */
 
@@ -90,22 +92,6 @@ public class CrosshairState {
     private int datasetIndex;
 
     /**
-     * The index of the domain axis that the crosshair x-value is measured
-     * against.
-     *
-     * @since 1.0.4
-     */
-    private int domainAxisIndex;
-
-    /**
-     * The index of the range axis that the crosshair y-value is measured
-     * against.
-     *
-     * @since 1.0.4
-     */
-    private int rangeAxisIndex;
-
-    /**
      * The smallest distance (so far) between the anchor point and a data
      * point.
      */
@@ -120,7 +106,10 @@ public class CrosshairState {
     }
 
     /**
-     * Creates a new {@code crosshairState} instance.
+     * Creates a new {@code crosshairState} instance.  Determination of the
+     * data point nearest the anchor point can be calculated in either
+     * dataspace or Java2D space.  The former should only be used for charts
+     * with a single set of axes.
      *
      * @param calculateDistanceInDataSpace  a flag that controls whether the
      *                                      distance is calculated in data
@@ -156,63 +145,22 @@ public class CrosshairState {
     public void setCrosshairDistance(double distance) {
         this.distance = distance;
     }
-
+    
     /**
-     * Evaluates a data point and if it is the closest to the anchor point it
-     * becomes the new crosshair point.
-     * <P>
-     * To understand this method, you need to know the context in which it will
-     * be called.  An instance of this class is passed to an
-     * {@link org.jfree.chart.renderer.xy.XYItemRenderer} as
-     * each data point is plotted.  As the point is plotted, it is passed to
-     * this method to see if it should be the new crosshair point.
      *
-     * @param x  x coordinate (measured against the domain axis).
-     * @param y  y coordinate (measured against the range axis).
-     * @param transX  x translated into Java2D space.
-     * @param transY  y translated into Java2D space.
-     * @param orientation  the plot orientation.
-     *
-     * @deprecated Use {@link #updateCrosshairPoint(double, double, int, int,
-     *     double, double, PlotOrientation)}.  See bug report 1086307.
+     * @since 1.0.20
      */
-    public void updateCrosshairPoint(double x, double y,
-                                     double transX, double transY,
-                                     PlotOrientation orientation) {
-        updateCrosshairPoint(x, y, 0, 0, transX, transY, orientation);
-    }
-
-    /**
-     * Evaluates a data point and if it is the closest to the anchor point it
-     * becomes the new crosshair point.
-     * <P>
-     * To understand this method, you need to know the context in which it will
-     * be called.  An instance of this class is passed to an
-     * {@link org.jfree.chart.renderer.xy.XYItemRenderer} as
-     * each data point is plotted.  As the point is plotted, it is passed to
-     * this method to see if it should be the new crosshair point.
-     *
-     * @param x  x coordinate (measured against the domain axis).
-     * @param y  y coordinate (measured against the range axis).
-     * @param domainAxisIndex  the index of the domain axis for this point.
-     * @param rangeAxisIndex  the index of the range axis for this point.
-     * @param transX  x translated into Java2D space.
-     * @param transY  y translated into Java2D space.
-     * @param orientation  the plot orientation.
-     *
-     * @since 1.0.4
-     */
-    public void updateCrosshairPoint(double x, double y, int domainAxisIndex,
-            int rangeAxisIndex, double transX, double transY,
-            PlotOrientation orientation) {
+    public void updateCrosshairPoint(double x, double y, int datasetIndex,
+            double transX, double transY, PlotOrientation orientation) {
 
         if (this.anchor != null) {
             double d = 0.0;
-            if (this.calculateDistanceInDataSpace) {
+            if (this.calculateDistanceInDataSpace) { 
                 d = (x - this.anchorX) * (x - this.anchorX)
                   + (y - this.anchorY) * (y - this.anchorY);
             }
             else {
+                // anchor point is in Java2D coordinates
                 double xx = this.anchor.getX();
                 double yy = this.anchor.getY();
                 if (orientation == PlotOrientation.HORIZONTAL) {
@@ -227,67 +175,31 @@ public class CrosshairState {
             if (d < this.distance) {
                 this.crosshairX = x;
                 this.crosshairY = y;
-                this.domainAxisIndex = domainAxisIndex;
-                this.rangeAxisIndex = rangeAxisIndex;
+                this.datasetIndex = datasetIndex;
                 this.distance = d;
             }
         }
 
     }
-
+    
     /**
-     * Evaluates an x-value and if it is the closest to the anchor x-value it
-     * becomes the new crosshair value.
-     * <P>
-     * Used in cases where only the x-axis is numerical.
-     *
-     * @param candidateX  x position of the candidate for the new crosshair
-     *                    point.
-     *
-     * @deprecated Use {@link #updateCrosshairX(double, int)}.  See bug report
-     *     1086307.
+     * 
+     * @param x
+     * @param transX
+     * @param datasetIndex 
+     * 
+     * @since 1.0.20
      */
-    public void updateCrosshairX(double candidateX) {
-        updateCrosshairX(candidateX, 0);
-    }
-
-    /**
-     * Evaluates an x-value and if it is the closest to the anchor x-value it
-     * becomes the new crosshair value.
-     * <P>
-     * Used in cases where only the x-axis is numerical.
-     *
-     * @param candidateX  x position of the candidate for the new crosshair
-     *                    point.
-     * @param domainAxisIndex  the index of the domain axis for this x-value.
-     *
-     * @since 1.0.4
-     */
-    public void updateCrosshairX(double candidateX, int domainAxisIndex) {
-
-        double d = Math.abs(candidateX - this.anchorX);
-        if (d < this.distance) {
-            this.crosshairX = candidateX;
-            this.domainAxisIndex = domainAxisIndex;
-            this.distance = d;
+    public void updateCrosshairX(double x, double transX, int datasetIndex) {
+        if (this.anchor == null) {
+            return;
         }
-
-    }
-
-    /**
-     * Evaluates a y-value and if it is the closest to the anchor y-value it
-     * becomes the new crosshair value.
-     * <P>
-     * Used in cases where only the y-axis is numerical.
-     *
-     * @param candidateY  y position of the candidate for the new crosshair
-     *                    point.
-     *
-     * @deprecated Use {@link #updateCrosshairY(double, int)}.  See bug report
-     *     1086307.
-     */
-    public void updateCrosshairY(double candidateY) {
-        updateCrosshairY(candidateY, 0);
+        double d = Math.abs(transX - this.anchor.getX());
+        if (d < this.distance) {
+            this.crosshairX = x;
+            this.datasetIndex = datasetIndex;
+            this.distance = d;
+        }        
     }
 
     /**
@@ -300,13 +212,16 @@ public class CrosshairState {
      *                    point.
      * @param rangeAxisIndex  the index of the range axis for this y-value.
      *
-     * @since 1.0.4
+     * @since 1.0.20
      */
-    public void updateCrosshairY(double candidateY, int rangeAxisIndex) {
-        double d = Math.abs(candidateY - this.anchorY);
+    public void updateCrosshairY(double candidateY, double transY, int datasetIndex) {
+        if (this.anchor == null) {
+            return;
+        }
+        double d = Math.abs(transY - this.anchor.getY());
         if (d < this.distance) {
             this.crosshairY = candidateY;
-            this.rangeAxisIndex = rangeAxisIndex;
+            this.datasetIndex = datasetIndex;
             this.distance = d;
         }
 
@@ -469,33 +384,4 @@ public class CrosshairState {
     public void setDatasetIndex(int index) {
         this.datasetIndex = index;
     }
-
-    /**
-     * Returns the domain axis index for the crosshair x-value.
-     *
-     * @return The domain axis index.
-     *
-     * @since 1.0.4
-     *
-     * @deprecated As of version 1.0.11, the domain axis should be determined
-     *     using the dataset index.
-     */
-    public int getDomainAxisIndex() {
-        return this.domainAxisIndex;
-    }
-
-    /**
-     * Returns the range axis index for the crosshair y-value.
-     *
-     * @return The range axis index.
-     *
-     * @since 1.0.4
-     *
-     * @deprecated As of version 1.0.11, the domain axis should be determined
-     *     using the dataset index.
-     */
-    public int getRangeAxisIndex() {
-        return this.rangeAxisIndex;
-    }
-
 }

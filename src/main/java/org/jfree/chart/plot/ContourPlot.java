@@ -955,18 +955,18 @@ public class ContourPlot extends Plot implements ContourValuePlot,
             if (plot.isDomainCrosshairLockedOnData()) {
                 if (plot.isRangeCrosshairLockedOnData()) {
                     // both axes
-                    crosshairState.updateCrosshairPoint(x[k], y[k], transX,
+                    crosshairState.updateCrosshairPoint(x[k], y[k], 0, transX,
                             transY, PlotOrientation.VERTICAL);
                 }
                 else {
                     // just the horizontal axis...
-                    crosshairState.updateCrosshairX(transX);
+                    crosshairState.updateCrosshairX(x[k], transX, 0);
                 }
             }
             else {
                 if (plot.isRangeCrosshairLockedOnData()) {
                     // just the vertical axis...
-                    crosshairState.updateCrosshairY(transY);
+                    crosshairState.updateCrosshairY(y[k], transY, 0);
                 }
             }
         }
@@ -1080,22 +1080,21 @@ public class ContourPlot extends Plot implements ContourValuePlot,
             if (plot.isDomainCrosshairLockedOnData()) {
                 if (plot.isRangeCrosshairLockedOnData()) {
                     // both axes
-                    crosshairState.updateCrosshairPoint(x[k], y[k], transX,
+                    crosshairState.updateCrosshairPoint(x[k], y[k], 0, transX,
                             transY, PlotOrientation.VERTICAL);
                 }
                 else {
                     // just the horizontal axis...
-                    crosshairState.updateCrosshairX(transX);
+                    crosshairState.updateCrosshairX(x[k], transX, 0);
                 }
             }
             else {
                 if (plot.isRangeCrosshairLockedOnData()) {
                     // just the vertical axis...
-                    crosshairState.updateCrosshairY(transY);
+                    crosshairState.updateCrosshairY(y[k], transY, 0);
                 }
             }
         }
-
 
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, antiAlias);
 

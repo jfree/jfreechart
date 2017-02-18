@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * XYStepAreaRenderer.java
  * -----------------------
- * (C) Copyright 2003-2016, by Matthias Rose and Contributors.
+ * (C) Copyright 2003-2017, by Matthias Rose and Contributors.
  *
  * Original Author:  Matthias Rose (based on XYAreaRenderer.java);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -52,6 +52,7 @@
  * 14-May-2008 : Call addEntity() from within drawItem() (DG);
  * 19-May-2009 : Fixed FindBugs warnings, patch by Michal Wozniak (DG);
  * 05-Dec-2013 : Added setStepPoint() method (LR);
+ * 18-Feb-2017 : Updates for crosshairs (bug #36) (DG);
  *
  */
 
@@ -557,10 +558,9 @@ public class XYStepAreaRenderer extends AbstractXYItemRenderer
 
         // do we need to update the crosshair values?
         if (!Double.isNaN(y1)) {
-            int domainAxisIndex = plot.getDomainAxisIndex(domainAxis);
-            int rangeAxisIndex = plot.getRangeAxisIndex(rangeAxis);
-            updateCrosshairValues(crosshairState, x1, y1, domainAxisIndex,
-                    rangeAxisIndex, transX1, transY1, orientation);
+            int datasetIndex = plot.indexOf(dataset);
+            updateCrosshairValues(crosshairState, x1, y1, datasetIndex,
+                    transX1, transY1, orientation);
         }
 
         // collect entity and tool tip information...

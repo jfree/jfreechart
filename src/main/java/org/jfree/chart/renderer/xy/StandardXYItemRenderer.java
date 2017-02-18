@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * StandardXYItemRenderer.java
  * ---------------------------
- * (C) Copyright 2001-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2001-2017, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Mark Watson (www.markwatson.com);
@@ -105,6 +105,7 @@
  * 02-Jun-2008 : Fixed tooltips for data items at lower edges of data area (DG);
  * 17-Jun-2008 : Apply legend shape, font and paint attributes (DG);
  * 03-Jul-2013 : Use ParamChecks (DG);
+ * 18-Feb-2017 : Updates for crosshairs (bug #36) (DG);
  *
  */
 
@@ -979,10 +980,9 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
                     (y1 < 0.0));
         }
 
-        int domainAxisIndex = plot.getDomainAxisIndex(domainAxis);
-        int rangeAxisIndex = plot.getRangeAxisIndex(rangeAxis);
-        updateCrosshairValues(crosshairState, x1, y1, domainAxisIndex,
-                rangeAxisIndex, transX1, transY1, orientation);
+        int datasetIndex = plot.indexOf(dataset);
+        updateCrosshairValues(crosshairState, x1, y1, datasetIndex,
+                transX1, transY1, orientation);
 
         // add an entity for the item...
         if (entities != null && isPointInRect(dataArea, xx, yy)) {

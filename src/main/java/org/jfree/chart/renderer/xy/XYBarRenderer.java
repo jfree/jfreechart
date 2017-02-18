@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * XYBarRenderer.java
  * ------------------
- * (C) Copyright 2001-2016, by Object Refinery Limited.
+ * (C) Copyright 2001-2017, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Richard Atkinson;
@@ -100,6 +100,7 @@
  *               non-visible series (DG);
  * 03-Jul-2013 : Use ParamChecks (DG);
  * 24-Aug-2014 : Add begin/endElementGroup() (DG);
+ * 18-Feb-2017 : Updates for crosshairs (bug #36) (DG);
  *
  */
 
@@ -938,10 +939,9 @@ public class XYBarRenderer extends AbstractXYItemRenderer
         double transX1 = domainAxis.valueToJava2D(x1, dataArea, location);
         double transY1 = rangeAxis.valueToJava2D(y1, dataArea,
                 plot.getRangeAxisEdge());
-        int domainAxisIndex = plot.getDomainAxisIndex(domainAxis);
-        int rangeAxisIndex = plot.getRangeAxisIndex(rangeAxis);
-        updateCrosshairValues(crosshairState, x1, y1, domainAxisIndex,
-                rangeAxisIndex, transX1, transY1, plot.getOrientation());
+        int datasetIndex = plot.indexOf(dataset);
+        updateCrosshairValues(crosshairState, x1, y1, datasetIndex,
+                transX1, transY1, plot.getOrientation());
 
         EntityCollection entities = state.getEntityCollection();
         if (entities != null) {

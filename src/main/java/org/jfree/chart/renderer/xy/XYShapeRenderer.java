@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2015, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * XYShapeRenderer.java
  * --------------------
- * (C) Copyright 2008-2015 by Andreas Haumer, xS+S and Contributors.
+ * (C) Copyright 2008-2017 by Andreas Haumer, xS+S and Contributors.
  *
  * Original Author:  Martin Hoeller (x Software + Systeme  xS+S - Andreas
  *                       Haumer);
@@ -41,6 +41,7 @@
  * 19-Oct-2011 : Fixed NPE in findRangeBounds() (bug 3026341) (DG);
  * 03-Jul-2013 : Use ParamChecks (DG);
  * 09-Sep-2015 : Add update for crosshair (DG);
+ * 18-Feb-2017 : Updates for crosshairs (bug #36) (DG);
  *
  */
 
@@ -490,10 +491,9 @@ public class XYShapeRenderer extends AbstractXYItemRenderer
                 }
             }
             
-            int domainAxisIndex = plot.getDomainAxisIndex(domainAxis);
-            int rangeAxisIndex = plot.getRangeAxisIndex(rangeAxis);
-            updateCrosshairValues(crosshairState, x, y, domainAxisIndex,
-                    rangeAxisIndex, transX, transY, orientation);
+            int datasetIndex = plot.indexOf(dataset);
+            updateCrosshairValues(crosshairState, x, y, datasetIndex,
+                    transX, transY, orientation);
 
             // add an entity for the item...
             if (entities != null) {

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * XYLineAndShapeRenderer.java
  * ---------------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited.
+ * (C) Copyright 2004-2017, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -67,6 +67,7 @@
  * 18-May-2009 : Clip lines in drawPrimaryLine() (DG);
  * 05-Jul-2012 : Removed JDK 1.3.1 code (DG);
  * 02-Jul-2013 : Use ParamChecks (DG);
+ * 18-Feb-2017 : Updates for crosshairs (bug #36) (DG);
  *
  */
 
@@ -1176,10 +1177,9 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
                     (y1 < 0.0));
         }
 
-        int domainAxisIndex = plot.getDomainAxisIndex(domainAxis);
-        int rangeAxisIndex = plot.getRangeAxisIndex(rangeAxis);
-        updateCrosshairValues(crosshairState, x1, y1, domainAxisIndex,
-                rangeAxisIndex, transX1, transY1, orientation);
+        int datasetIndex = plot.indexOf(dataset);
+        updateCrosshairValues(crosshairState, x1, y1, datasetIndex,
+                transX1, transY1, orientation);
 
         // add an entity for the item, but only if it falls within the data
         // area...

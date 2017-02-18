@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * XYDifferenceRenderer.java
  * -------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2017, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Richard West, Advanced Micro Devices, Inc. (major rewrite
@@ -77,6 +77,7 @@
  * 13-Feb-2012 : Applied patch 3450234 for bug 3425881 by Patrick Schlott and
  *               Christoph Schroeder (MH);
  * 03-Jul-2013 : Use ParamChecks (DG);
+ * 18-Feb-2017 : Updates for crosshairs (bug #36) (DG);
  *
  */
 
@@ -935,10 +936,9 @@ public class XYDifferenceRenderer extends AbstractXYItemRenderer
                           x_item, l_x1, l_y1, (l_y1 < 0.0));
         }
 
-        int l_domainAxisIndex = x_plot.getDomainAxisIndex(x_domainAxis);
-        int l_rangeAxisIndex  = x_plot.getRangeAxisIndex(x_rangeAxis);
-        updateCrosshairValues(x_crosshairState, l_x0, l_y0, l_domainAxisIndex,
-                              l_rangeAxisIndex, l_x1, l_y1, l_orientation);
+        int datasetIndex = x_plot.indexOf(x_dataset);
+        updateCrosshairValues(x_crosshairState, l_x0, l_y0, datasetIndex,
+                              l_x1, l_y1, l_orientation);
 
         if (0 == x_item) {
             return;

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * AbstractXYItemRenderer.java
  * ---------------------------
- * (C) Copyright 2002-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2002-2017, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Richard Atkinson;
@@ -123,7 +123,8 @@
  * 07-Apr-2014 : Don't use ObjectList anymore (DG);
  * 29-Jul-2014 : Add rendering hint to normalise domain and range lines (DG);
  * 24-Aug-2014 : Add beginElementGroup() method, part of JFreeSVG support (DG);
- *
+ * 18-Feb-2017 : Fix for crosshairs with multiple datasets / axes - see 
+ *               bug #36 (DG);
  */
 
 package org.jfree.chart.renderer.xy;
@@ -1645,17 +1646,16 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      *                        but the method does nothing in that case).
      * @param x  the x-value (in data space).
      * @param y  the y-value (in data space).
-     * @param domainAxisIndex  the index of the domain axis for the point.
-     * @param rangeAxisIndex  the index of the range axis for the point.
+     * @param datasetIndex  the index of the dataset for the point.
      * @param transX  the x-value translated to Java2D space.
      * @param transY  the y-value translated to Java2D space.
      * @param orientation  the plot orientation ({@code null} not
      *                     permitted).
      *
-     * @since 1.0.4
+     * @since 1.0.20
      */
     protected void updateCrosshairValues(CrosshairState crosshairState,
-            double x, double y, int domainAxisIndex, int rangeAxisIndex,
+            double x, double y, int datasetIndex,
             double transX, double transY, PlotOrientation orientation) {
 
         ParamChecks.nullNotPermitted(orientation, "orientation");
@@ -1664,18 +1664,18 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
             if (this.plot.isDomainCrosshairLockedOnData()) {
                 if (this.plot.isRangeCrosshairLockedOnData()) {
                     // both axes
-                    crosshairState.updateCrosshairPoint(x, y, domainAxisIndex,
-                            rangeAxisIndex, transX, transY, orientation);
+                    crosshairState.updateCrosshairPoint(x, y, datasetIndex,
+                            transX, transY, orientation);
                 }
                 else {
                     // just the domain axis...
-                    crosshairState.updateCrosshairX(x, domainAxisIndex);
+                    crosshairState.updateCrosshairX(x, transX, datasetIndex);
                 }
             }
             else {
                 if (this.plot.isRangeCrosshairLockedOnData()) {
                     // just the range axis...
-                    crosshairState.updateCrosshairY(y, rangeAxisIndex);
+                    crosshairState.updateCrosshairY(y, transY, datasetIndex);
                 }
             }
         }
@@ -1944,30 +1944,29 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
         fireChangeEvent();
     }
 
-    /**
-     * Considers the current (x, y) coordinate and updates the crosshair point
-     * if it meets the criteria (usually means the (x, y) coordinate is the
-     * closest to the anchor point so far).
-     *
-     * @param crosshairState  the crosshair state ({@code null} permitted,
-     *                        but the method does nothing in that case).
-     * @param x  the x-value (in data space).
-     * @param y  the y-value (in data space).
-     * @param transX  the x-value translated to Java2D space.
-     * @param transY  the y-value translated to Java2D space.
-     * @param orientation  the plot orientation ({@code null} not
-     *                     permitted).
-     *
-     * @deprecated Use {@link #updateCrosshairValues(CrosshairState, double,
-     *         double, int, int, double, double, PlotOrientation)} -- see bug
-     *         report 1086307.
-     */
-    protected void updateCrosshairValues(CrosshairState crosshairState,
-            double x, double y, double transX, double transY,
-            PlotOrientation orientation) {
-        updateCrosshairValues(crosshairState, x, y, 0, 0, transX, transY,
-                orientation);
-    }
-
+//    /**
+//     * Considers the current (x, y) coordinate and updates the crosshair point
+//     * if it meets the criteria (usually means the (x, y) coordinate is the
+//     * closest to the anchor point so far).
+//     *
+//     * @param crosshairState  the crosshair state ({@code null} permitted,
+//     *                        but the method does nothing in that case).
+//     * @param x  the x-value (in data space).
+//     * @param y  the y-value (in data space).
+//     * @param transX  the x-value translated to Java2D space.
+//     * @param transY  the y-value translated to Java2D space.
+//     * @param orientation  the plot orientation ({@code null} not
+//     *                     permitted).
+//     *
+//     * @deprecated Use {@link #updateCrosshairValues(CrosshairState, double,
+//     *         double, int, int, double, double, PlotOrientation)} -- see bug
+//     *         report 1086307.
+//     */
+//    protected void updateCrosshairValues(CrosshairState crosshairState,
+//            double x, double y, double transX, double transY,
+//            PlotOrientation orientation) {
+//        updateCrosshairValues(crosshairState, x, y, 0, transX, transY,
+//                orientation);
+//    }
 
 }

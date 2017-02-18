@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * XYAreaRenderer2.java
  * --------------------
- * (C) Copyright 2004-2016, by Hari and Contributors.
+ * (C) Copyright 2004-2017, by Hari and Contributors.
  *
  * Original Author:  Hari (ourhari@hotmail.com);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -80,6 +80,7 @@
  * 06-Oct-2011 : Avoid GeneralPath methods requiring Java 1.5 (MK);
  * 03-Jul-2013 : Use ParamChecks (DG);
  * 04-Aug-2014 : Restrict entity hotspot to plot area (patch #312) (UV);
+ * 18-Feb-2017 : Updates for crosshairs (bug #36) (DG);
  *
  */
 
@@ -380,10 +381,9 @@ public class XYAreaRenderer2 extends AbstractXYItemRenderer
             g2.setPaint(lookupSeriesOutlinePaint(series));
             g2.draw(hotspot);
         }
-        int domainAxisIndex = plot.getDomainAxisIndex(domainAxis);
-        int rangeAxisIndex = plot.getRangeAxisIndex(rangeAxis);
-        updateCrosshairValues(crosshairState, x1, y1, domainAxisIndex,
-                rangeAxisIndex, transX1, transY1, orientation);
+        int datasetIndex = plot.indexOf(dataset);
+        updateCrosshairValues(crosshairState, x1, y1, datasetIndex,
+                transX1, transY1, orientation);
 
         // collect entity and tool tip information...
         if (state.getInfo() != null) {

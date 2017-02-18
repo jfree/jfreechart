@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * XYStepRenderer.java
  * -------------------
- * (C) Copyright 2002-2016, by Roger Studner and Contributors.
+ * (C) Copyright 2002-2017, by Roger Studner and Contributors.
  *
  * Original Author:  Roger Studner;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -67,6 +67,7 @@
  * 24-Sep-2008 : Fixed bug 2113627 by utilising second pass to draw item
  *               labels (DG);
  * 29-Feb-2016 : Improved performance by only drawing visible lines (MN);
+ * 18-Feb-2017 : Updates for crosshairs (bug #36) (DG);
  *
  */
 
@@ -272,10 +273,9 @@ public class XYStepRenderer extends XYLineAndShapeRenderer
             }
 
             // submit this data item as a candidate for the crosshair point
-            int domainAxisIndex = plot.getDomainAxisIndex(domainAxis);
-            int rangeAxisIndex = plot.getRangeAxisIndex(rangeAxis);
-            updateCrosshairValues(crosshairState, x1, y1, domainAxisIndex,
-                    rangeAxisIndex, transX1, transY1, orientation);
+            int datasetIndex = plot.indexOf(dataset);
+            updateCrosshairValues(crosshairState, x1, y1, datasetIndex,
+                    transX1, transY1, orientation);
 
             // collect entity and tool tip information...
             EntityCollection entities = state.getEntityCollection();

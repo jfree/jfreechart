@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------------
  * StackedXYAreaRenderer.java
  * --------------------------
- * (C) Copyright 2003-2016, by Richard Atkinson and Contributors.
+ * (C) Copyright 2003-2017, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributor(s):   Christian W. Zuckschwerdt;
@@ -65,6 +65,7 @@
  *               methods (DG);
  * 20-Apr-2007 : Updated getLegendItem() for renderer change (DG);
  * 04-Aug-2014 : Fix entity hotspot (patch #312) (UV);
+ * 18-Feb-2017 : Updates for crosshairs (bug #36) (DG);
  *
  */
 
@@ -533,10 +534,9 @@ public class StackedXYAreaRenderer extends XYAreaRenderer
                 }
             }
 
-            int domainAxisIndex = plot.getDomainAxisIndex(domainAxis);
-            int rangeAxisIndex = plot.getRangeAxisIndex(rangeAxis);
-            updateCrosshairValues(crosshairState, x1, ph1 + y1, domainAxisIndex,
-                    rangeAxisIndex, transX1, transY1, orientation);
+            int datasetIndex = plot.indexOf(dataset);
+            updateCrosshairValues(crosshairState, x1, ph1 + y1, datasetIndex,
+                    transX1, transY1, orientation);
 
         }
         else if (pass == 1) {
