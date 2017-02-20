@@ -385,7 +385,7 @@ public class XYBlockRenderer extends AbstractXYItemRenderer
 
         int datasetIndex = plot.indexOf(dataset);
         updateCrosshairValues(crosshairState, x, y, datasetIndex,
-                block.getCenterX(), block.getCenterX(), orientation);
+                block.getCenterX(), block.getCenterY(), orientation);
 
             EntityCollection entities = state.getEntityCollection();
         if (entities != null) {
