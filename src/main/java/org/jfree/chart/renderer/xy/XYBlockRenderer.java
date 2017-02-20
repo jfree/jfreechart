@@ -357,6 +357,7 @@ public class XYBlockRenderer extends AbstractXYItemRenderer
         if (dataset instanceof XYZDataset) {
             z = ((XYZDataset) dataset).getZValue(series, item);
         }
+
         Paint p = this.paintScale.getPaint(z);
         double xx0 = domainAxis.valueToJava2D(x + this.xOffset, dataArea,
                 plot.getDomainAxisEdge());
@@ -384,8 +385,12 @@ public class XYBlockRenderer extends AbstractXYItemRenderer
         g2.draw(block);
 
         int datasetIndex = plot.indexOf(dataset);
+        double transX = domainAxis.valueToJava2D(x, dataArea,
+                plot.getDomainAxisEdge());
+        double transY = rangeAxis.valueToJava2D(y, dataArea,
+                plot.getRangeAxisEdge());        
         updateCrosshairValues(crosshairState, x, y, datasetIndex,
-                block.getCenterX(), block.getCenterY(), orientation);
+                transX, transY, orientation);
 
             EntityCollection entities = state.getEntityCollection();
         if (entities != null) {
