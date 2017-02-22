@@ -392,9 +392,9 @@ public class XYBlockRenderer extends AbstractXYItemRenderer
         updateCrosshairValues(crosshairState, x, y, datasetIndex,
                 transX, transY, orientation);
 
-            EntityCollection entities = state.getEntityCollection();
+        EntityCollection entities = state.getEntityCollection();
         if (entities != null) {
-            addEntity(entities, block, dataset, series, item, 0.0, 0.0);
+            addEntity(entities, block, dataset, series, item, transX, transY);
         }
 
     }
