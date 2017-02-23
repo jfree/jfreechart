@@ -5021,10 +5021,8 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
             if (axis == null) {
                 continue;
             }
-            if (axis.isInverted()) {
-                percent = -percent;
-            }
-            axis.pan(percent);
+
+            axis.pan(axis.isInverted() ? -percent : percent);
         }
     }
 
@@ -5049,10 +5047,8 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
             if (axis == null) {
                 continue;
             }
-            if (axis.isInverted()) {
-                percent = -percent;
-            }
-            axis.pan(percent);
+
+            axis.pan(axis.isInverted() ? -percent : percent);
         }
     }
 
