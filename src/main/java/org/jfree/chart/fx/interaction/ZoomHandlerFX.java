@@ -30,11 +30,12 @@
  * (C) Copyright 2014, 2017, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
+ * Contributor(s):   Tomas Pluskal (Whitehead Institute for Biomedical Research);
  *
  * Changes:
  * --------
  * 25-Jun-2014 : Version 1 (DG);
+ * 03-Mar-2016 : Added single-axis zooming (TP); 
  *
  */
 
@@ -42,13 +43,14 @@ package org.jfree.chart.fx.interaction;
 
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
-import javafx.scene.input.MouseEvent;
+
 import org.jfree.chart.fx.ChartCanvas;
 import org.jfree.chart.fx.ChartViewer;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.Zoomable;
-import org.jfree.util.ShapeUtilities;
+
+import javafx.scene.input.MouseEvent;
 
 /**
  * Handles drag zooming of charts on a {@link ChartCanvas}.  This 
@@ -70,6 +72,10 @@ public class ZoomHandlerFX extends AbstractMouseHandlerFX {
     
     /** The starting point for the zoom. */
     private Point2D startPoint;
+    
+    /** X axis and Y axis zoom indicators */
+    private boolean hZoom, vZoom;
+
     
     /**
      * Creates a new instance with no modifier keys required.
@@ -110,8 +116,7 @@ public class ZoomHandlerFX extends AbstractMouseHandlerFX {
         Point2D pt = new Point2D.Double(e.getX(), e.getY());
         Rectangle2D dataArea = canvas.findDataArea(pt);
         if (dataArea != null) {
-            this.startPoint = ShapeUtilities.getPointInRectangle(e.getX(),
-                    e.getY(), dataArea);
+            this.startPoint = new Point2D.Double(e.getX(), e.getY());
         } else {
             this.startPoint = null;
             canvas.clearLiveHandler();
@@ -134,7 +139,6 @@ public class ZoomHandlerFX extends AbstractMouseHandlerFX {
             return;
         }
 
-        boolean hZoom, vZoom;
         Plot p = canvas.getChart().getPlot();
         if (!(p instanceof Zoomable)) {
             return;
@@ -148,11 +152,18 @@ public class ZoomHandlerFX extends AbstractMouseHandlerFX {
             vZoom = z.isRangeZoomable();
         }
         Rectangle2D dataArea = canvas.findDataArea(this.startPoint);
-        
         double x = this.startPoint.getX();
         double y = this.startPoint.getY();
         double w = 0;
         double h = 0;
+        
+        // if the user clicked started dragging from an axis, let's zoom 
+        // only that axis 
+        if (y >= dataArea.getHeight()) 
+            vZoom = false;
+        if (x <= dataArea.getX()) 
+            hZoom = false;
+        
         if (hZoom && vZoom) {
             // selected rectangle shouldn't extend outside the data area...
             double xmax = Math.min(e.getX(), dataArea.getMaxX());
@@ -181,15 +192,7 @@ public class ZoomHandlerFX extends AbstractMouseHandlerFX {
         if (!(p instanceof Zoomable)) {
             return;
         }
-        boolean hZoom, vZoom;
         Zoomable z = (Zoomable) p;
-        if (z.getOrientation().isHorizontal()) {
-            hZoom = z.isRangeZoomable();
-            vZoom = z.isDomainZoomable();
-        } else {
-            hZoom = z.isDomainZoomable();
-            vZoom = z.isRangeZoomable();
-        }
 
         boolean zoomTrigger1 = hZoom && Math.abs(e.getX()
                 - this.startPoint.getX()) >= 10;
@@ -202,8 +205,12 @@ public class ZoomHandlerFX extends AbstractMouseHandlerFX {
                     || (vZoom && (e.getY() < this.startPoint.getY()))) {
                 boolean saved = p.isNotify();
                 p.setNotify(false);
-                z.zoomDomainAxes(0, pri, endPoint);
-                z.zoomRangeAxes(0, pri, endPoint);
+                if (hZoom) 
+                    z.zoomDomainAxes(0, pri, endPoint);
+                p.setNotify(saved);
+                p.setNotify(false);
+                if (vZoom) 
+                    z.zoomRangeAxes(0, pri, endPoint);
                 p.setNotify(saved);
             } else {
                 double x = this.startPoint.getX();
@@ -230,7 +237,6 @@ public class ZoomHandlerFX extends AbstractMouseHandlerFX {
                     w = Math.min(w, maxX - this.startPoint.getX());
                     h = Math.min(h, maxY - this.startPoint.getY());
                 }
-                Rectangle2D zoomArea = new Rectangle2D.Double(x, y, w, h);
                 
                 boolean saved = p.isNotify();
                 p.setNotify(false);
