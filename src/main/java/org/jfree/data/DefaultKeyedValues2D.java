@@ -62,6 +62,7 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import org.jfree.chart.util.ParamChecks;
 
 import org.jfree.util.ObjectUtilities;
@@ -83,6 +84,12 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
 
     /** The column keys. */
     private List columnKeys;
+    
+    /** The row key index map */
+    private Map<Object, Integer> rowKeyIndexMap;
+    
+    /** The column key index map */
+    private Map<Object, Integer> columnKeyIndexMap;
 
     /** The row data. */
     private List rows;
@@ -106,6 +113,8 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
         this.rowKeys = new java.util.ArrayList();
         this.columnKeys = new java.util.ArrayList();
         this.rows = new java.util.ArrayList();
+        this.rowKeyIndexMap = new java.util.HashMap<>();
+        this.columnKeyIndexMap = new java.util.HashMap<>();
         this.sortRowKeys = sortRowKeys;
     }
 
@@ -191,7 +200,9 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
             return Collections.binarySearch(this.rowKeys, key);
         }
         else {
-            return this.rowKeys.indexOf(key);
+            if (!this.rowKeyIndexMap.containsKey(key))
+                return -1;
+            return this.rowKeyIndexMap.get(key);
         }
     }
 
@@ -236,7 +247,9 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
     @Override
     public int getColumnIndex(Comparable key) {
         ParamChecks.nullNotPermitted(key, "key");
-        return this.columnKeys.indexOf(key);
+        if (!this.columnKeyIndexMap.containsKey(key))
+            return -1;
+        return this.columnKeyIndexMap.get(key);
     }
 
     /**
@@ -332,17 +345,19 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
                 rowIndex = -rowIndex - 1;
                 this.rowKeys.add(rowIndex, rowKey);
                 this.rows.add(rowIndex, row);
+                this.rowKeyIndexMap.put(rowKey, rowIndex);
             }
             else {
                 this.rowKeys.add(rowKey);
                 this.rows.add(row);
+                this.rowKeyIndexMap.put(rowKey, rowKeys.size()-1);
             }
         }
         row.setValue(columnKey, value);
 
-        int columnIndex = this.columnKeys.indexOf(columnKey);
-        if (columnIndex < 0) {
+        if (!this.columnKeyIndexMap.containsKey(columnKey)) {
             this.columnKeys.add(columnKey);
+            this.columnKeyIndexMap.put(columnKey, columnKeys.size()-1);
         }
     }
 
@@ -375,6 +390,7 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
         if (allNull) {
             this.rowKeys.remove(rowIndex);
             this.rows.remove(rowIndex);
+            this.rowKeyIndexMap.remove(rowKey);
         }
 
         // 2. check whether the column is now empty.
@@ -401,6 +417,7 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
                 }
             }
             this.columnKeys.remove(columnKey);
+            this.columnKeyIndexMap.remove(columnKey);
         }
     }
 
@@ -413,6 +430,7 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
      * @see #removeColumn(int)
      */
     public void removeRow(int rowIndex) {
+        this.rowKeyIndexMap.remove(rowKeys.get(rowIndex));
         this.rowKeys.remove(rowIndex);
         this.rows.remove(rowIndex);
     }
@@ -479,6 +497,7 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
             }
         }
         this.columnKeys.remove(columnKey);
+        this.columnKeyIndexMap.remove(columnKey);
     }
 
     /**
@@ -575,6 +594,10 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
         // should be immutable...
         clone.columnKeys = new java.util.ArrayList(this.columnKeys);
         clone.rowKeys = new java.util.ArrayList(this.rowKeys);
+        clone.columnKeyIndexMap =
+            new java.util.HashMap<>(this.columnKeyIndexMap);
+        clone.rowKeyIndexMap =
+            new java.util.HashMap<>(this.rowKeyIndexMap);
 
         // but the row data requires a deep copy
         clone.rows = (List) ObjectUtilities.deepClone(this.rows);
