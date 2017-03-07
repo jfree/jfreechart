@@ -54,13 +54,6 @@
 
     <dependencies>
 
-        <!-- FXGraphics2D is used for JavaFX support. -->
-        <dependency>
-            <groupId>org.jfree</groupId>
-            <artifactId>fxgraphics2d</artifactId>
-            <version>1.5</version>
-        </dependency>
-
         <!-- JFreeSVG enables SVG export -->
         <dependency>
             <groupId>org.jfree</groupId>
