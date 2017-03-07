@@ -52,11 +52,11 @@ import java.text.MessageFormat;
 import java.text.NumberFormat;
 
 import org.jfree.chart.HashUtilities;
+import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.DataUtilities;
 import org.jfree.data.category.CategoryDataset;
-import org.jfree.util.ObjectUtilities;
-import org.jfree.util.PublicCloneable;
 
 /**
  * A base class that can be used to create a label or tooltip generator that
@@ -277,10 +277,10 @@ public abstract class AbstractCategoryItemLabelGenerator
         if (!this.labelFormat.equals(that.labelFormat)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.dateFormat, that.dateFormat)) {
+        if (!ObjectUtils.equal(this.dateFormat, that.dateFormat)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.numberFormat, that.numberFormat)) {
+        if (!ObjectUtils.equal(this.numberFormat, that.numberFormat)) {
             return false;
         }
         return true;

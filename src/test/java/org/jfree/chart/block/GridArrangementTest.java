@@ -46,9 +46,9 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.jfree.chart.TestUtilities;
+import org.jfree.chart.ui.Size2D;
 
 import org.jfree.data.Range;
-import org.jfree.ui.Size2D;
 import org.junit.Test;
 
 /**

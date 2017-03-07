@@ -135,17 +135,16 @@ import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.urls.XYURLGenerator;
+import org.jfree.chart.util.BooleanList;
+import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.util.ShapeUtils;
+import org.jfree.chart.util.UnitType;
 import org.jfree.data.xy.XYDataset;
-import org.jfree.io.SerialUtilities;
-import org.jfree.ui.RectangleEdge;
-import org.jfree.util.BooleanList;
-import org.jfree.util.BooleanUtilities;
-import org.jfree.util.ObjectUtilities;
-import org.jfree.util.PublicCloneable;
-import org.jfree.util.ShapeUtilities;
-import org.jfree.util.UnitType;
 
 /**
  * Standard item renderer for an {@link XYPlot}.  This class can draw (a)
@@ -385,7 +384,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
      */
     public void setShapesFilled(boolean filled) {
         // here we use BooleanUtilities to remain compatible with JDKs < 1.4
-        setShapesFilled(BooleanUtilities.valueOf(filled));
+        setShapesFilled(Boolean.valueOf(filled));
     }
 
     /**
@@ -934,11 +933,11 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
 
             Shape shape = getItemShape(series, item);
             if (orientation == PlotOrientation.HORIZONTAL) {
-                shape = ShapeUtilities.createTranslatedShape(shape, transY1,
+                shape = ShapeUtils.createTranslatedShape(shape, transY1,
                         transX1);
             }
             else if (orientation == PlotOrientation.VERTICAL) {
-                shape = ShapeUtilities.createTranslatedShape(shape, transX1,
+                shape = ShapeUtils.createTranslatedShape(shape, transX1,
                         transY1);
             }
             if (shape.intersects(dataArea)) {
@@ -1026,7 +1025,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
         if (this.gapThreshold != that.gapThreshold) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.shapesFilled, that.shapesFilled)) {
+        if (!ObjectUtils.equal(this.shapesFilled, that.shapesFilled)) {
             return false;
         }
         if (!this.seriesShapesFilled.equals(that.seriesShapesFilled)) {
@@ -1038,7 +1037,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
         if (this.drawSeriesLineAsPath != that.drawSeriesLineAsPath) {
             return false;
         }
-        if (!ShapeUtilities.equal(this.legendLine, that.legendLine)) {
+        if (!ShapeUtils.equal(this.legendLine, that.legendLine)) {
             return false;
         }
         return super.equals(obj);
@@ -1057,7 +1056,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
         StandardXYItemRenderer clone = (StandardXYItemRenderer) super.clone();
         clone.seriesShapesFilled
                 = (BooleanList) this.seriesShapesFilled.clone();
-        clone.legendLine = ShapeUtilities.clone(this.legendLine);
+        clone.legendLine = ShapeUtils.clone(this.legendLine);
         return clone;
     }
 
@@ -1124,7 +1123,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
     private void readObject(ObjectInputStream stream)
             throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
-        this.legendLine = SerialUtilities.readShape(stream);
+        this.legendLine = SerialUtils.readShape(stream);
     }
 
     /**
@@ -1136,7 +1135,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
      */
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
-        SerialUtilities.writeShape(this.legendLine, stream);
+        SerialUtils.writeShape(this.legendLine, stream);
     }
 
 }

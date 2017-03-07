@@ -49,9 +49,8 @@ import java.awt.Stroke;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.RectangularShape;
 import java.io.Serializable;
-
-import org.jfree.ui.GradientPaintTransformer;
-import org.jfree.ui.RectangleEdge;
+import org.jfree.chart.ui.GradientPaintTransformer;
+import org.jfree.chart.ui.RectangleEdge;
 
 /**
  * An implementation of the {@link BarPainter} interface that preserves the

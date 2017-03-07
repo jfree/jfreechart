@@ -44,8 +44,8 @@
 package org.jfree.data.category;
 
 import org.jfree.chart.TestUtilities;
+import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.UnknownKeyException;
-import org.jfree.util.PublicCloneable;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

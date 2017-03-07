@@ -52,11 +52,10 @@ import java.awt.geom.Rectangle2D;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import org.jfree.chart.ui.Size2D;
+import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.ParamChecks;
-
-import org.jfree.io.SerialUtilities;
-import org.jfree.ui.Size2D;
-import org.jfree.util.PaintUtilities;
+import org.jfree.chart.util.SerialUtils;
 
 /**
  * A block that is filled with a single color.
@@ -156,7 +155,7 @@ public class ColorBlock extends AbstractBlock implements Block {
             return false;
         }
         ColorBlock that = (ColorBlock) obj;
-        if (!PaintUtilities.equal(this.paint, that.paint)) {
+        if (!PaintUtils.equal(this.paint, that.paint)) {
             return false;
         }
         return super.equals(obj);
@@ -171,7 +170,7 @@ public class ColorBlock extends AbstractBlock implements Block {
      */
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
-        SerialUtilities.writePaint(this.paint, stream);
+        SerialUtils.writePaint(this.paint, stream);
     }
 
     /**
@@ -185,7 +184,7 @@ public class ColorBlock extends AbstractBlock implements Block {
     private void readObject(ObjectInputStream stream)
         throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
-        this.paint = SerialUtilities.readPaint(stream);
+        this.paint = SerialUtils.readPaint(stream);
     }
 
 }

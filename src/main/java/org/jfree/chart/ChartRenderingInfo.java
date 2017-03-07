@@ -58,9 +58,9 @@ import java.io.Serializable;
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.entity.StandardEntityCollection;
 import org.jfree.chart.plot.PlotRenderingInfo;
-import org.jfree.io.SerialUtilities;
-import org.jfree.util.ObjectUtilities;
-import org.jfree.util.PublicCloneable;
+import org.jfree.chart.util.ObjectUtils;
+import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.util.SerialUtils;
 
 /**
  * A structure for storing rendering information from one call to the
@@ -196,13 +196,13 @@ public class ChartRenderingInfo implements Cloneable, Serializable {
             return false;
         }
         ChartRenderingInfo that = (ChartRenderingInfo) obj;
-        if (!ObjectUtilities.equal(this.chartArea, that.chartArea)) {
+        if (!ObjectUtils.equal(this.chartArea, that.chartArea)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.plotInfo, that.plotInfo)) {
+        if (!ObjectUtils.equal(this.plotInfo, that.plotInfo)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.entities, that.entities)) {
+        if (!ObjectUtils.equal(this.entities, that.entities)) {
             return false;
         }
         return true;
@@ -237,7 +237,7 @@ public class ChartRenderingInfo implements Cloneable, Serializable {
      */
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
-        SerialUtilities.writeShape(this.chartArea, stream);
+        SerialUtils.writeShape(this.chartArea, stream);
     }
 
     /**
@@ -251,7 +251,7 @@ public class ChartRenderingInfo implements Cloneable, Serializable {
     private void readObject(ObjectInputStream stream)
         throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
-        this.chartArea = (Rectangle2D) SerialUtilities.readShape(stream);
+        this.chartArea = (Rectangle2D) SerialUtils.readShape(stream);
     }
 
 }

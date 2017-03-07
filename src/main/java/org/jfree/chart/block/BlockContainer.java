@@ -58,9 +58,9 @@ import java.util.List;
 
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.entity.StandardEntityCollection;
+import org.jfree.chart.ui.Size2D;
 import org.jfree.chart.util.ParamChecks;
-import org.jfree.ui.Size2D;
-import org.jfree.util.PublicCloneable;
+import org.jfree.chart.util.PublicCloneable;
 
 /**
  * A container for a collection of {@link Block} objects.  The container uses

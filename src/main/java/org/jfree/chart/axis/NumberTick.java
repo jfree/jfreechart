@@ -41,7 +41,7 @@
 
 package org.jfree.chart.axis;
 
-import org.jfree.ui.TextAnchor;
+import org.jfree.chart.ui.TextAnchor;
 
 /**
  * A numerical tick.

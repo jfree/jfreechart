@@ -58,9 +58,9 @@ import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.fail;
 
 import org.jfree.chart.TestUtilities;
+import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.Range;
 import org.jfree.data.UnknownKeyException;
-import org.jfree.util.PublicCloneable;
 
 import org.junit.Test;
 

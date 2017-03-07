@@ -53,12 +53,12 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 import org.jfree.chart.HashUtilities;
+import org.jfree.chart.ui.GradientPaintTransformer;
+import org.jfree.chart.ui.StandardGradientPaintTransformer;
+import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.ParamChecks;
-import org.jfree.io.SerialUtilities;
-import org.jfree.ui.GradientPaintTransformer;
-import org.jfree.ui.StandardGradientPaintTransformer;
-import org.jfree.util.PaintUtilities;
-import org.jfree.util.PublicCloneable;
+import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.util.SerialUtils;
 
 /**
  * A regular dial layer that can be used to draw the background for a dial.
@@ -207,7 +207,7 @@ public class DialBackground extends AbstractDialLayer implements DialLayer,
             return false;
         }
         DialBackground that = (DialBackground) obj;
-        if (!PaintUtilities.equal(this.paint, that.paint)) {
+        if (!PaintUtils.equal(this.paint, that.paint)) {
             return false;
         }
         if (!this.gradientPaintTransformer.equals(
@@ -252,7 +252,7 @@ public class DialBackground extends AbstractDialLayer implements DialLayer,
      */
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
-        SerialUtilities.writePaint(this.paint, stream);
+        SerialUtils.writePaint(this.paint, stream);
     }
 
     /**
@@ -266,7 +266,7 @@ public class DialBackground extends AbstractDialLayer implements DialLayer,
     private void readObject(ObjectInputStream stream)
             throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
-        this.paint = SerialUtilities.readPaint(stream);
+        this.paint = SerialUtils.readPaint(stream);
     }
 
 }

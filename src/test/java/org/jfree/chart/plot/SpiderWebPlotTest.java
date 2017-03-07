@@ -65,9 +65,9 @@ import org.jfree.chart.TestUtilities;
 import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
 import org.jfree.chart.labels.StandardCategoryToolTipGenerator;
 import org.jfree.chart.urls.StandardCategoryURLGenerator;
+import org.jfree.chart.util.Rotation;
+import org.jfree.chart.util.TableOrder;
 import org.jfree.data.category.DefaultCategoryDataset;
-import org.jfree.util.Rotation;
-import org.jfree.util.TableOrder;
 import org.junit.Test;
 
 /**

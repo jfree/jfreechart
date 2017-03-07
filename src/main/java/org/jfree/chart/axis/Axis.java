@@ -121,16 +121,16 @@ import org.jfree.chart.event.AxisChangeEvent;
 import org.jfree.chart.event.AxisChangeListener;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotRenderingInfo;
+import org.jfree.chart.text.AttributedStringUtils;
+import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.util.AttrStringUtils;
+import org.jfree.chart.util.ObjectUtils;
+import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.ParamChecks;
-import org.jfree.io.SerialUtilities;
-import org.jfree.text.TextUtilities;
-import org.jfree.ui.RectangleEdge;
-import org.jfree.ui.RectangleInsets;
-import org.jfree.ui.TextAnchor;
-import org.jfree.util.AttributedStringUtilities;
-import org.jfree.util.ObjectUtilities;
-import org.jfree.util.PaintUtilities;
+import org.jfree.chart.util.SerialUtils;
 
 /**
  * The base class for all axes in JFreeChart.  Subclasses are divided into
@@ -1588,20 +1588,20 @@ public abstract class Axis implements Cloneable, Serializable {
         if (this.visible != that.visible) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.label, that.label)) {
+        if (!ObjectUtils.equal(this.label, that.label)) {
             return false;
         }
-        if (!AttributedStringUtilities.equal(this.attributedLabel, 
+        if (!AttributedStringUtils.equal(this.attributedLabel, 
                 that.attributedLabel)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.labelFont, that.labelFont)) {
+        if (!ObjectUtils.equal(this.labelFont, that.labelFont)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.labelPaint, that.labelPaint)) {
+        if (!PaintUtils.equal(this.labelPaint, that.labelPaint)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.labelInsets, that.labelInsets)) {
+        if (!ObjectUtils.equal(this.labelInsets, that.labelInsets)) {
             return false;
         }
         if (this.labelAngle != that.labelAngle) {
@@ -1613,22 +1613,22 @@ public abstract class Axis implements Cloneable, Serializable {
         if (this.axisLineVisible != that.axisLineVisible) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.axisLineStroke, that.axisLineStroke)) {
+        if (!ObjectUtils.equal(this.axisLineStroke, that.axisLineStroke)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.axisLinePaint, that.axisLinePaint)) {
+        if (!PaintUtils.equal(this.axisLinePaint, that.axisLinePaint)) {
             return false;
         }
         if (this.tickLabelsVisible != that.tickLabelsVisible) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.tickLabelFont, that.tickLabelFont)) {
+        if (!ObjectUtils.equal(this.tickLabelFont, that.tickLabelFont)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.tickLabelPaint, that.tickLabelPaint)) {
+        if (!PaintUtils.equal(this.tickLabelPaint, that.tickLabelPaint)) {
             return false;
         }
-        if (!ObjectUtilities.equal(
+        if (!ObjectUtils.equal(
             this.tickLabelInsets, that.tickLabelInsets
         )) {
             return false;
@@ -1642,10 +1642,10 @@ public abstract class Axis implements Cloneable, Serializable {
         if (this.tickMarkOutsideLength != that.tickMarkOutsideLength) {
             return false;
         }
-        if (!PaintUtilities.equal(this.tickMarkPaint, that.tickMarkPaint)) {
+        if (!PaintUtils.equal(this.tickMarkPaint, that.tickMarkPaint)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.tickMarkStroke, that.tickMarkStroke)) {
+        if (!ObjectUtils.equal(this.tickMarkStroke, that.tickMarkStroke)) {
             return false;
         }
         if (this.minorTickMarksVisible != that.minorTickMarksVisible) {
@@ -1687,13 +1687,13 @@ public abstract class Axis implements Cloneable, Serializable {
      */
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
-        SerialUtilities.writeAttributedString(this.attributedLabel, stream);
-        SerialUtilities.writePaint(this.labelPaint, stream);
-        SerialUtilities.writePaint(this.tickLabelPaint, stream);
-        SerialUtilities.writeStroke(this.axisLineStroke, stream);
-        SerialUtilities.writePaint(this.axisLinePaint, stream);
-        SerialUtilities.writeStroke(this.tickMarkStroke, stream);
-        SerialUtilities.writePaint(this.tickMarkPaint, stream);
+        SerialUtils.writeAttributedString(this.attributedLabel, stream);
+        SerialUtils.writePaint(this.labelPaint, stream);
+        SerialUtils.writePaint(this.tickLabelPaint, stream);
+        SerialUtils.writeStroke(this.axisLineStroke, stream);
+        SerialUtils.writePaint(this.axisLinePaint, stream);
+        SerialUtils.writeStroke(this.tickMarkStroke, stream);
+        SerialUtils.writePaint(this.tickMarkPaint, stream);
     }
 
     /**
@@ -1707,13 +1707,13 @@ public abstract class Axis implements Cloneable, Serializable {
     private void readObject(ObjectInputStream stream)
         throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
-        this.attributedLabel = SerialUtilities.readAttributedString(stream);
-        this.labelPaint = SerialUtilities.readPaint(stream);
-        this.tickLabelPaint = SerialUtilities.readPaint(stream);
-        this.axisLineStroke = SerialUtilities.readStroke(stream);
-        this.axisLinePaint = SerialUtilities.readPaint(stream);
-        this.tickMarkStroke = SerialUtilities.readStroke(stream);
-        this.tickMarkPaint = SerialUtilities.readPaint(stream);
+        this.attributedLabel = SerialUtils.readAttributedString(stream);
+        this.labelPaint = SerialUtils.readPaint(stream);
+        this.tickLabelPaint = SerialUtils.readPaint(stream);
+        this.axisLineStroke = SerialUtils.readStroke(stream);
+        this.axisLinePaint = SerialUtils.readPaint(stream);
+        this.tickMarkStroke = SerialUtils.readStroke(stream);
+        this.tickMarkPaint = SerialUtils.readPaint(stream);
         this.listenerList = new EventListenerList();
     }
 

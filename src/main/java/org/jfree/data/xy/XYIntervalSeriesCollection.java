@@ -48,11 +48,11 @@ package org.jfree.data.xy;
 
 import java.io.Serializable;
 import java.util.List;
+import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.general.DatasetChangeEvent;
-import org.jfree.util.ObjectUtilities;
-import org.jfree.util.PublicCloneable;
 
 /**
  * A collection of {@link XYIntervalSeries} objects.
@@ -371,7 +371,7 @@ public class XYIntervalSeriesCollection extends AbstractIntervalXYDataset
             return false;
         }
         XYIntervalSeriesCollection that = (XYIntervalSeriesCollection) obj;
-        return ObjectUtilities.equal(this.data, that.data);
+        return ObjectUtils.equal(this.data, that.data);
     }
 
     /**

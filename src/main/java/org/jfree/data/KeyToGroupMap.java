@@ -54,10 +54,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.ParamChecks;
-
-import org.jfree.util.ObjectUtilities;
-import org.jfree.util.PublicCloneable;
+import org.jfree.chart.util.PublicCloneable;
 
 /**
  * A class that maps keys (instances of {@code Comparable}) to groups.
@@ -232,7 +231,7 @@ public class KeyToGroupMap implements Cloneable, PublicCloneable, Serializable {
             return false;
         }
         KeyToGroupMap that = (KeyToGroupMap) obj;
-        if (!ObjectUtilities.equal(this.defaultGroup, that.defaultGroup)) {
+        if (!ObjectUtils.equal(this.defaultGroup, that.defaultGroup)) {
             return false;
         }
         if (!this.keyToGroupMap.equals(that.keyToGroupMap)) {

@@ -46,8 +46,7 @@ package org.jfree.data;
 import java.io.Serializable;
 import java.util.Comparator;
 import org.jfree.chart.util.ParamChecks;
-
-import org.jfree.util.SortOrder;
+import org.jfree.chart.util.SortOrder;
 
 /**
  * A utility class that can compare and order two {@link KeyedValue} instances

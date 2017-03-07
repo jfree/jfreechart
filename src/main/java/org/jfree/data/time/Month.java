@@ -71,9 +71,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
-
-import org.jfree.date.MonthConstants;
-import org.jfree.date.SerialDate;
+import org.jfree.chart.date.MonthConstants;
+import org.jfree.chart.date.SerialDate;
 
 /**
  * Represents a single month.  This class is immutable, which is a requirement

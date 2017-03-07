@@ -59,9 +59,9 @@ import org.jfree.chart.LegendItem;
 import org.jfree.chart.TestUtilities;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
-import org.jfree.util.PublicCloneable;
 import org.junit.Test;
 
 /**

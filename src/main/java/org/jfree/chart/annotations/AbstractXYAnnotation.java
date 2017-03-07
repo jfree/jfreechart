@@ -52,7 +52,7 @@ import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.entity.XYAnnotationEntity;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.util.ObjectUtilities;
+import org.jfree.chart.util.ObjectUtils;
 
 /**
  * The interface that must be supported by annotations that are to be added to
@@ -182,10 +182,10 @@ public abstract class AbstractXYAnnotation extends AbstractAnnotation
             return false;
         }
         AbstractXYAnnotation that = (AbstractXYAnnotation) obj;
-        if (!ObjectUtilities.equal(this.toolTipText, that.toolTipText)) {
+        if (!ObjectUtils.equal(this.toolTipText, that.toolTipText)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.url, that.url)) {
+        if (!ObjectUtils.equal(this.url, that.url)) {
             return false;
         }
         return true;

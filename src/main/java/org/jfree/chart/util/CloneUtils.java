@@ -37,14 +37,12 @@
  * 08-Apr-2014 : Version 1 (DG);
  *
  */
-
 package org.jfree.chart.util;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.jfree.util.ObjectUtilities;
 
 /**
  * Utilities for cloning.
@@ -67,7 +65,7 @@ public class CloneUtils {
         for (Object obj: source) {
             if (obj != null) {
                 try {
-                    result.add(ObjectUtilities.clone(obj));
+                    result.add(ObjectUtils.clone(obj));
                 } catch (CloneNotSupportedException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -95,7 +93,7 @@ public class CloneUtils {
             Object value = source.get(key);
             if (value != null) {
                 try {
-                    result.put(key, ObjectUtilities.clone(value));
+                    result.put(key, ObjectUtils.clone(value));
                 } catch (CloneNotSupportedException ex) {
                     throw new RuntimeException(ex);
                 }

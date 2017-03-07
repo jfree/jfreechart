@@ -102,13 +102,13 @@ import org.jfree.chart.title.LegendTitle;
 import org.jfree.chart.title.PaintScaleLegend;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.chart.title.Title;
+import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.util.DefaultShadowGenerator;
+import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.util.SerialUtils;
 import org.jfree.chart.util.ShadowGenerator;
-import org.jfree.io.SerialUtilities;
-import org.jfree.ui.RectangleInsets;
-import org.jfree.util.PaintUtilities;
-import org.jfree.util.PublicCloneable;
 
 /**
  * A default implementation of the {@link ChartTheme} interface.  This
@@ -1677,67 +1677,67 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
         if (!this.smallFont.equals(that.smallFont)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.titlePaint, that.titlePaint)) {
+        if (!PaintUtils.equal(this.titlePaint, that.titlePaint)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.subtitlePaint, that.subtitlePaint)) {
+        if (!PaintUtils.equal(this.subtitlePaint, that.subtitlePaint)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.chartBackgroundPaint,
+        if (!PaintUtils.equal(this.chartBackgroundPaint,
                 that.chartBackgroundPaint)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.legendBackgroundPaint,
+        if (!PaintUtils.equal(this.legendBackgroundPaint,
                 that.legendBackgroundPaint)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.legendItemPaint, that.legendItemPaint)) {
+        if (!PaintUtils.equal(this.legendItemPaint, that.legendItemPaint)) {
             return false;
         }
         if (!this.drawingSupplier.equals(that.drawingSupplier)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.plotBackgroundPaint,
+        if (!PaintUtils.equal(this.plotBackgroundPaint,
                 that.plotBackgroundPaint)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.plotOutlinePaint,
+        if (!PaintUtils.equal(this.plotOutlinePaint,
                 that.plotOutlinePaint)) {
             return false;
         }
         if (!this.labelLinkStyle.equals(that.labelLinkStyle)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.labelLinkPaint, that.labelLinkPaint)) {
+        if (!PaintUtils.equal(this.labelLinkPaint, that.labelLinkPaint)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.domainGridlinePaint,
+        if (!PaintUtils.equal(this.domainGridlinePaint,
                 that.domainGridlinePaint)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.rangeGridlinePaint,
+        if (!PaintUtils.equal(this.rangeGridlinePaint,
                 that.rangeGridlinePaint)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.crosshairPaint, that.crosshairPaint)) {
+        if (!PaintUtils.equal(this.crosshairPaint, that.crosshairPaint)) {
             return false;
         }
         if (!this.axisOffset.equals(that.axisOffset)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.axisLabelPaint, that.axisLabelPaint)) {
+        if (!PaintUtils.equal(this.axisLabelPaint, that.axisLabelPaint)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.tickLabelPaint, that.tickLabelPaint)) {
+        if (!PaintUtils.equal(this.tickLabelPaint, that.tickLabelPaint)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.itemLabelPaint, that.itemLabelPaint)) {
+        if (!PaintUtils.equal(this.itemLabelPaint, that.itemLabelPaint)) {
             return false;
         }
         if (this.shadowVisible != that.shadowVisible) {
             return false;
         }
-        if (!PaintUtilities.equal(this.shadowPaint, that.shadowPaint)) {
+        if (!PaintUtils.equal(this.shadowPaint, that.shadowPaint)) {
             return false;
         }
         if (!this.barPainter.equals(that.barPainter)) {
@@ -1746,21 +1746,21 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
         if (!this.xyBarPainter.equals(that.xyBarPainter)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.thermometerPaint,
+        if (!PaintUtils.equal(this.thermometerPaint,
                 that.thermometerPaint)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.wallPaint, that.wallPaint)) {
+        if (!PaintUtils.equal(this.wallPaint, that.wallPaint)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.errorIndicatorPaint,
+        if (!PaintUtils.equal(this.errorIndicatorPaint,
                 that.errorIndicatorPaint)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.gridBandPaint, that.gridBandPaint)) {
+        if (!PaintUtils.equal(this.gridBandPaint, that.gridBandPaint)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.gridBandAlternatePaint,
+        if (!PaintUtils.equal(this.gridBandAlternatePaint,
                 that.gridBandAlternatePaint)) {
             return false;
         }
@@ -1788,27 +1788,27 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
      */
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
-        SerialUtilities.writePaint(this.titlePaint, stream);
-        SerialUtilities.writePaint(this.subtitlePaint, stream);
-        SerialUtilities.writePaint(this.chartBackgroundPaint, stream);
-        SerialUtilities.writePaint(this.legendBackgroundPaint, stream);
-        SerialUtilities.writePaint(this.legendItemPaint, stream);
-        SerialUtilities.writePaint(this.plotBackgroundPaint, stream);
-        SerialUtilities.writePaint(this.plotOutlinePaint, stream);
-        SerialUtilities.writePaint(this.labelLinkPaint, stream);
-        SerialUtilities.writePaint(this.baselinePaint, stream);
-        SerialUtilities.writePaint(this.domainGridlinePaint, stream);
-        SerialUtilities.writePaint(this.rangeGridlinePaint, stream);
-        SerialUtilities.writePaint(this.crosshairPaint, stream);
-        SerialUtilities.writePaint(this.axisLabelPaint, stream);
-        SerialUtilities.writePaint(this.tickLabelPaint, stream);
-        SerialUtilities.writePaint(this.itemLabelPaint, stream);
-        SerialUtilities.writePaint(this.shadowPaint, stream);
-        SerialUtilities.writePaint(this.thermometerPaint, stream);
-        SerialUtilities.writePaint(this.wallPaint, stream);
-        SerialUtilities.writePaint(this.errorIndicatorPaint, stream);
-        SerialUtilities.writePaint(this.gridBandPaint, stream);
-        SerialUtilities.writePaint(this.gridBandAlternatePaint, stream);
+        SerialUtils.writePaint(this.titlePaint, stream);
+        SerialUtils.writePaint(this.subtitlePaint, stream);
+        SerialUtils.writePaint(this.chartBackgroundPaint, stream);
+        SerialUtils.writePaint(this.legendBackgroundPaint, stream);
+        SerialUtils.writePaint(this.legendItemPaint, stream);
+        SerialUtils.writePaint(this.plotBackgroundPaint, stream);
+        SerialUtils.writePaint(this.plotOutlinePaint, stream);
+        SerialUtils.writePaint(this.labelLinkPaint, stream);
+        SerialUtils.writePaint(this.baselinePaint, stream);
+        SerialUtils.writePaint(this.domainGridlinePaint, stream);
+        SerialUtils.writePaint(this.rangeGridlinePaint, stream);
+        SerialUtils.writePaint(this.crosshairPaint, stream);
+        SerialUtils.writePaint(this.axisLabelPaint, stream);
+        SerialUtils.writePaint(this.tickLabelPaint, stream);
+        SerialUtils.writePaint(this.itemLabelPaint, stream);
+        SerialUtils.writePaint(this.shadowPaint, stream);
+        SerialUtils.writePaint(this.thermometerPaint, stream);
+        SerialUtils.writePaint(this.wallPaint, stream);
+        SerialUtils.writePaint(this.errorIndicatorPaint, stream);
+        SerialUtils.writePaint(this.gridBandPaint, stream);
+        SerialUtils.writePaint(this.gridBandAlternatePaint, stream);
     }
 
     /**
@@ -1822,27 +1822,27 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     private void readObject(ObjectInputStream stream)
         throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
-        this.titlePaint = SerialUtilities.readPaint(stream);
-        this.subtitlePaint = SerialUtilities.readPaint(stream);
-        this.chartBackgroundPaint = SerialUtilities.readPaint(stream);
-        this.legendBackgroundPaint = SerialUtilities.readPaint(stream);
-        this.legendItemPaint = SerialUtilities.readPaint(stream);
-        this.plotBackgroundPaint = SerialUtilities.readPaint(stream);
-        this.plotOutlinePaint = SerialUtilities.readPaint(stream);
-        this.labelLinkPaint = SerialUtilities.readPaint(stream);
-        this.baselinePaint = SerialUtilities.readPaint(stream);
-        this.domainGridlinePaint = SerialUtilities.readPaint(stream);
-        this.rangeGridlinePaint = SerialUtilities.readPaint(stream);
-        this.crosshairPaint = SerialUtilities.readPaint(stream);
-        this.axisLabelPaint = SerialUtilities.readPaint(stream);
-        this.tickLabelPaint = SerialUtilities.readPaint(stream);
-        this.itemLabelPaint = SerialUtilities.readPaint(stream);
-        this.shadowPaint = SerialUtilities.readPaint(stream);
-        this.thermometerPaint = SerialUtilities.readPaint(stream);
-        this.wallPaint = SerialUtilities.readPaint(stream);
-        this.errorIndicatorPaint = SerialUtilities.readPaint(stream);
-        this.gridBandPaint = SerialUtilities.readPaint(stream);
-        this.gridBandAlternatePaint = SerialUtilities.readPaint(stream);
+        this.titlePaint = SerialUtils.readPaint(stream);
+        this.subtitlePaint = SerialUtils.readPaint(stream);
+        this.chartBackgroundPaint = SerialUtils.readPaint(stream);
+        this.legendBackgroundPaint = SerialUtils.readPaint(stream);
+        this.legendItemPaint = SerialUtils.readPaint(stream);
+        this.plotBackgroundPaint = SerialUtils.readPaint(stream);
+        this.plotOutlinePaint = SerialUtils.readPaint(stream);
+        this.labelLinkPaint = SerialUtils.readPaint(stream);
+        this.baselinePaint = SerialUtils.readPaint(stream);
+        this.domainGridlinePaint = SerialUtils.readPaint(stream);
+        this.rangeGridlinePaint = SerialUtils.readPaint(stream);
+        this.crosshairPaint = SerialUtils.readPaint(stream);
+        this.axisLabelPaint = SerialUtils.readPaint(stream);
+        this.tickLabelPaint = SerialUtils.readPaint(stream);
+        this.itemLabelPaint = SerialUtils.readPaint(stream);
+        this.shadowPaint = SerialUtils.readPaint(stream);
+        this.thermometerPaint = SerialUtils.readPaint(stream);
+        this.wallPaint = SerialUtils.readPaint(stream);
+        this.errorIndicatorPaint = SerialUtils.readPaint(stream);
+        this.gridBandPaint = SerialUtils.readPaint(stream);
+        this.gridBandAlternatePaint = SerialUtils.readPaint(stream);
     }
 
 }

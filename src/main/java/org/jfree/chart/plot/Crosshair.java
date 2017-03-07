@@ -55,11 +55,11 @@ import java.io.Serializable;
 import org.jfree.chart.HashUtilities;
 import org.jfree.chart.labels.CrosshairLabelGenerator;
 import org.jfree.chart.labels.StandardCrosshairLabelGenerator;
+import org.jfree.chart.ui.RectangleAnchor;
+import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.ParamChecks;
-import org.jfree.io.SerialUtilities;
-import org.jfree.ui.RectangleAnchor;
-import org.jfree.util.PaintUtilities;
-import org.jfree.util.PublicCloneable;
+import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.util.SerialUtils;
 
 /**
  * A crosshair for display on a plot.
@@ -583,7 +583,7 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
         if (this.value != that.value) {
             return false;
         }
-        if (!PaintUtilities.equal(this.paint, that.paint)) {
+        if (!PaintUtils.equal(this.paint, that.paint)) {
             return false;
         }
         if (!this.stroke.equals(that.stroke)) {
@@ -607,17 +607,17 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
         if (!this.labelFont.equals(that.labelFont)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.labelPaint, that.labelPaint)) {
+        if (!PaintUtils.equal(this.labelPaint, that.labelPaint)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.labelBackgroundPaint,
+        if (!PaintUtils.equal(this.labelBackgroundPaint,
                 that.labelBackgroundPaint)) {
             return false;
         }
         if (this.labelOutlineVisible != that.labelOutlineVisible) {
             return false;
         }
-        if (!PaintUtilities.equal(this.labelOutlinePaint,
+        if (!PaintUtils.equal(this.labelOutlinePaint,
                 that.labelOutlinePaint)) {
             return false;
         }
@@ -698,12 +698,12 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      */
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
-        SerialUtilities.writePaint(this.paint, stream);
-        SerialUtilities.writeStroke(this.stroke, stream);
-        SerialUtilities.writePaint(this.labelPaint, stream);
-        SerialUtilities.writePaint(this.labelBackgroundPaint, stream);
-        SerialUtilities.writeStroke(this.labelOutlineStroke, stream);
-        SerialUtilities.writePaint(this.labelOutlinePaint, stream);
+        SerialUtils.writePaint(this.paint, stream);
+        SerialUtils.writeStroke(this.stroke, stream);
+        SerialUtils.writePaint(this.labelPaint, stream);
+        SerialUtils.writePaint(this.labelBackgroundPaint, stream);
+        SerialUtils.writeStroke(this.labelOutlineStroke, stream);
+        SerialUtils.writePaint(this.labelOutlinePaint, stream);
     }
 
     /**
@@ -717,12 +717,12 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
     private void readObject(ObjectInputStream stream)
             throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
-        this.paint = SerialUtilities.readPaint(stream);
-        this.stroke = SerialUtilities.readStroke(stream);
-        this.labelPaint = SerialUtilities.readPaint(stream);
-        this.labelBackgroundPaint = SerialUtilities.readPaint(stream);
-        this.labelOutlineStroke = SerialUtilities.readStroke(stream);
-        this.labelOutlinePaint = SerialUtilities.readPaint(stream);
+        this.paint = SerialUtils.readPaint(stream);
+        this.stroke = SerialUtils.readStroke(stream);
+        this.labelPaint = SerialUtils.readPaint(stream);
+        this.labelBackgroundPaint = SerialUtils.readPaint(stream);
+        this.labelOutlineStroke = SerialUtils.readStroke(stream);
+        this.labelOutlinePaint = SerialUtils.readPaint(stream);
         this.pcs = new PropertyChangeSupport(this);
     }
 

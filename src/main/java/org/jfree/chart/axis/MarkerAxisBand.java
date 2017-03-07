@@ -60,9 +60,9 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.jfree.chart.plot.IntervalMarker;
-import org.jfree.text.TextUtilities;
-import org.jfree.ui.RectangleEdge;
-import org.jfree.util.ObjectUtilities;
+import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.util.ObjectUtils;
 
 /**
  * A band that can be added to a number axis to display regions.
@@ -251,10 +251,10 @@ public class MarkerAxisBand implements Serializable {
         if (this.bottomOuterGap != that.bottomOuterGap) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.font, that.font)) {
+        if (!ObjectUtils.equal(this.font, that.font)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.markers, that.markers)) {
+        if (!ObjectUtils.equal(this.markers, that.markers)) {
             return false;
         }
         return true;

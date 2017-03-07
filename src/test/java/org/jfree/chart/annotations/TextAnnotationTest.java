@@ -55,7 +55,7 @@ import java.awt.GradientPaint;
 
 import org.jfree.chart.event.AnnotationChangeEvent;
 import org.jfree.chart.event.AnnotationChangeListener;
-import org.jfree.ui.TextAnchor;
+import org.jfree.chart.ui.TextAnchor;
 import org.junit.Test;
 
 /**

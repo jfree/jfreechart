@@ -52,7 +52,7 @@ import java.awt.geom.RectangularShape;
 import java.io.Serializable;
 
 import org.jfree.chart.HashUtilities;
-import org.jfree.ui.RectangleEdge;
+import org.jfree.chart.ui.RectangleEdge;
 
 /**
  * An implementation of the {@link BarPainter} interface that uses several

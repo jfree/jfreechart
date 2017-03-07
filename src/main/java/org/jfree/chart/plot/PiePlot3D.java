@@ -115,10 +115,10 @@ import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.entity.PieSectionEntity;
 import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.labels.PieToolTipGenerator;
+import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.util.PaintAlpha;
 import org.jfree.data.general.DatasetUtilities;
 import org.jfree.data.general.PieDataset;
-import org.jfree.ui.RectangleInsets;
 
 /**
  * A plot that displays data in the form of a 3D pie chart, using data from

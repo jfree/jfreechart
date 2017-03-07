@@ -43,10 +43,10 @@ package org.jfree.chart.labels;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.NumberFormat;
+import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.IntervalCategoryDataset;
-import org.jfree.util.PublicCloneable;
 
 /**
  * A label generator for plots that use data from an

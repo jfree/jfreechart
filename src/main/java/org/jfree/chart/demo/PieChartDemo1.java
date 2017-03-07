@@ -57,13 +57,13 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.StandardChartTheme;
 import org.jfree.chart.plot.PiePlot;
 import org.jfree.chart.title.TextTitle;
+import org.jfree.chart.ui.ApplicationFrame;
+import org.jfree.chart.ui.HorizontalAlignment;
+import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.ui.UIUtils;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
-import org.jfree.ui.ApplicationFrame;
-import org.jfree.ui.HorizontalAlignment;
-import org.jfree.ui.RectangleEdge;
-import org.jfree.ui.RectangleInsets;
-import org.jfree.ui.RefineryUtilities;
 
 /**
  * A simple demonstration application showing how to create a pie chart using
@@ -213,7 +213,7 @@ public class PieChartDemo1 extends ApplicationFrame {
 
         PieChartDemo1 demo = new PieChartDemo1("JFreeChart: Pie Chart Demo 1");
         demo.pack();
-        RefineryUtilities.centerFrameOnScreen(demo);
+        UIUtils.centerFrameOnScreen(demo);
         demo.setVisible(true);
     }
 

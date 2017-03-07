@@ -60,11 +60,11 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
+import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.SerialUtils;
 
 import org.jfree.data.time.RegularTimePeriod;
-import org.jfree.io.SerialUtilities;
-import org.jfree.ui.RectangleInsets;
 
 /**
  * A record that contains information for one "band" of date labels in
@@ -358,9 +358,9 @@ public class PeriodAxisLabelInfo implements Cloneable, Serializable {
      */
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
-        SerialUtilities.writePaint(this.labelPaint, stream);
-        SerialUtilities.writeStroke(this.dividerStroke, stream);
-        SerialUtilities.writePaint(this.dividerPaint, stream);
+        SerialUtils.writePaint(this.labelPaint, stream);
+        SerialUtils.writeStroke(this.dividerStroke, stream);
+        SerialUtils.writePaint(this.dividerPaint, stream);
     }
 
     /**
@@ -374,9 +374,9 @@ public class PeriodAxisLabelInfo implements Cloneable, Serializable {
     private void readObject(ObjectInputStream stream)
         throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
-        this.labelPaint = SerialUtilities.readPaint(stream);
-        this.dividerStroke = SerialUtilities.readStroke(stream);
-        this.dividerPaint = SerialUtilities.readPaint(stream);
+        this.labelPaint = SerialUtils.readPaint(stream);
+        this.dividerStroke = SerialUtils.readStroke(stream);
+        this.dividerPaint = SerialUtils.readPaint(stream);
     }
 
 }

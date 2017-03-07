@@ -55,11 +55,6 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import org.jfree.ui.HorizontalAlignment;
-import org.jfree.ui.RectangleEdge;
-import org.jfree.ui.RectangleInsets;
-import org.jfree.ui.VerticalAlignment;
-
 /**
  * A chart title that displays the date.
  * <p>
@@ -72,6 +67,10 @@ import org.jfree.ui.VerticalAlignment;
  * the given locale. For example, a date would appear as "January 17, 2000" in
  * the US, but "17 January 2000" in most European locales.
  */
+import org.jfree.chart.ui.HorizontalAlignment;
+import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.ui.VerticalAlignment;
 public class DateTitle extends TextTitle implements Serializable {
 
     /** For serialization. */

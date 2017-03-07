@@ -69,14 +69,14 @@ import org.jfree.chart.plot.CrosshairState;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.util.ObjectUtils;
+import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.util.ShapeUtils;
 import org.jfree.data.Range;
 import org.jfree.data.xy.IntervalXYDataset;
 import org.jfree.data.xy.XYDataset;
-import org.jfree.text.TextUtilities;
-import org.jfree.ui.RectangleEdge;
-import org.jfree.util.ObjectUtilities;
-import org.jfree.util.PublicCloneable;
-import org.jfree.util.ShapeUtilities;
 
 /**
  * A renderer that draws a line connecting the start and end Y values for an
@@ -213,13 +213,13 @@ public class YIntervalRenderer extends AbstractXYItemRenderer
         PlotOrientation orientation = plot.getOrientation();
         if (orientation == PlotOrientation.HORIZONTAL) {
             line = new Line2D.Double(yyLow, xx, yyHigh, xx);
-            top = ShapeUtilities.createTranslatedShape(shape, yyHigh, xx);
-            bottom = ShapeUtilities.createTranslatedShape(shape, yyLow, xx);
+            top = ShapeUtils.createTranslatedShape(shape, yyHigh, xx);
+            bottom = ShapeUtils.createTranslatedShape(shape, yyLow, xx);
         }
         else if (orientation == PlotOrientation.VERTICAL) {
             line = new Line2D.Double(xx, yyLow, xx, yyHigh);
-            top = ShapeUtilities.createTranslatedShape(shape, xx, yyHigh);
-            bottom = ShapeUtilities.createTranslatedShape(shape, xx, yyLow);
+            top = ShapeUtils.createTranslatedShape(shape, xx, yyHigh);
+            bottom = ShapeUtils.createTranslatedShape(shape, xx, yyLow);
         } else {
             throw new IllegalStateException();
         }
@@ -242,7 +242,7 @@ public class YIntervalRenderer extends AbstractXYItemRenderer
         }
 
         // add an entity for the item...
-        Shape hotspot = ShapeUtilities.createLineRegion(line, 4.0f);
+        Shape hotspot = ShapeUtils.createLineRegion(line, 4.0f);
         if (entities != null && hotspot.intersects(dataArea)) {
             addEntity(entities, hotspot, dataset, series, item, xx, 
                     (yyHigh + yyLow) / 2);
@@ -301,7 +301,7 @@ public class YIntervalRenderer extends AbstractXYItemRenderer
             return false;
         }
         YIntervalRenderer that = (YIntervalRenderer) obj;
-        if (!ObjectUtilities.equal(this.additionalItemLabelGenerator,
+        if (!ObjectUtils.equal(this.additionalItemLabelGenerator,
                 that.additionalItemLabelGenerator)) {
             return false;
         }

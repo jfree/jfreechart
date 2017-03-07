@@ -50,11 +50,11 @@ package org.jfree.chart.block;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
+import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.ui.Size2D;
+import org.jfree.chart.util.ObjectUtils;
 
 import org.jfree.data.Range;
-import org.jfree.ui.RectangleEdge;
-import org.jfree.ui.Size2D;
-import org.jfree.util.ObjectUtilities;
 
 /**
  * An arrangement manager that lays out blocks in a similar way to
@@ -517,19 +517,19 @@ public class BorderArrangement implements Arrangement, Serializable {
             return false;
         }
         BorderArrangement that = (BorderArrangement) obj;
-        if (!ObjectUtilities.equal(this.topBlock, that.topBlock)) {
+        if (!ObjectUtils.equal(this.topBlock, that.topBlock)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.bottomBlock, that.bottomBlock)) {
+        if (!ObjectUtils.equal(this.bottomBlock, that.bottomBlock)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.leftBlock, that.leftBlock)) {
+        if (!ObjectUtils.equal(this.leftBlock, that.leftBlock)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.rightBlock, that.rightBlock)) {
+        if (!ObjectUtils.equal(this.rightBlock, that.rightBlock)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.centerBlock, that.centerBlock)) {
+        if (!ObjectUtils.equal(this.centerBlock, that.centerBlock)) {
             return false;
         }
         return true;

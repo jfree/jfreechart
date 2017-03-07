@@ -48,9 +48,8 @@ package org.jfree.chart.block;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
-
-import org.jfree.ui.Size2D;
-import org.jfree.util.PublicCloneable;
+import org.jfree.chart.ui.Size2D;
+import org.jfree.chart.util.PublicCloneable;
 
 /**
  * An empty block with a fixed size.

@@ -48,8 +48,7 @@ package org.jfree.chart;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
-
-import org.jfree.util.ObjectUtilities;
+import org.jfree.chart.util.ObjectUtils;
 
 /**
  * A collection of legend items.
@@ -150,7 +149,7 @@ public class LegendItemCollection implements Cloneable, Serializable {
     @Override
     public Object clone() throws CloneNotSupportedException {
         LegendItemCollection clone = (LegendItemCollection) super.clone();
-        clone.items = (List) ObjectUtilities.deepClone(this.items);
+        clone.items = (List) ObjectUtils.deepClone(this.items);
         return clone;
     }
 

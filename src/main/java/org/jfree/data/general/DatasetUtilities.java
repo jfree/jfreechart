@@ -132,6 +132,7 @@ package org.jfree.data.general;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import org.jfree.chart.util.ArrayUtils;
 import org.jfree.chart.util.ParamChecks;
 
 import org.jfree.data.DomainInfo;
@@ -158,7 +159,6 @@ import org.jfree.data.xy.XYRangeInfo;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.data.xy.XYZDataset;
-import org.jfree.util.ArrayUtilities;
 
 /**
  * A collection of useful static methods relating to datasets.
@@ -427,10 +427,10 @@ public final class DatasetUtilities {
 
         ParamChecks.nullNotPermitted(rowKeys, "rowKeys");
         ParamChecks.nullNotPermitted(columnKeys, "columnKeys");
-        if (ArrayUtilities.hasDuplicateItems(rowKeys)) {
+        if (ArrayUtils.hasDuplicateItems(rowKeys)) {
             throw new IllegalArgumentException("Duplicate items in 'rowKeys'.");
         }
-        if (ArrayUtilities.hasDuplicateItems(columnKeys)) {
+        if (ArrayUtils.hasDuplicateItems(columnKeys)) {
             throw new IllegalArgumentException(
                     "Duplicate items in 'columnKeys'.");
         }

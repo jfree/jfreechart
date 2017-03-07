@@ -53,8 +53,8 @@ import java.text.NumberFormat;
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.chart.labels.StandardCrosshairLabelGenerator;
-import org.jfree.ui.RectangleAnchor;
-import org.jfree.util.PublicCloneable;
+import org.jfree.chart.ui.RectangleAnchor;
+import org.jfree.chart.util.PublicCloneable;
 import org.junit.Test;
 
 /**

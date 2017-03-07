@@ -63,9 +63,9 @@ package org.jfree.chart.labels;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.NumberFormat;
+import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.xy.XYDataset;
-import org.jfree.util.PublicCloneable;
 
 /**
  * A standard item label generator for plots that use data from an

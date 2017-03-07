@@ -252,7 +252,7 @@ import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.Zoomable;
 import org.jfree.chart.util.ParamChecks;
 import org.jfree.chart.util.ResourceBundleWrapper;
-import org.jfree.io.SerialUtilities;
+import org.jfree.chart.util.SerialUtils;
 
 /**
  * A Swing GUI component for displaying a {@link JFreeChart} object.
@@ -3314,8 +3314,8 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      */
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
-        SerialUtilities.writePaint(this.zoomFillPaint, stream);
-        SerialUtilities.writePaint(this.zoomOutlinePaint, stream);
+        SerialUtils.writePaint(this.zoomFillPaint, stream);
+        SerialUtils.writePaint(this.zoomOutlinePaint, stream);
     }
 
     /**
@@ -3329,8 +3329,8 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     private void readObject(ObjectInputStream stream)
         throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
-        this.zoomFillPaint = SerialUtilities.readPaint(stream);
-        this.zoomOutlinePaint = SerialUtilities.readPaint(stream);
+        this.zoomFillPaint = SerialUtils.readPaint(stream);
+        this.zoomOutlinePaint = SerialUtils.readPaint(stream);
 
         // we create a new but empty chartMouseListeners list
         this.chartMouseListeners = new EventListenerList();

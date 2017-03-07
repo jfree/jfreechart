@@ -111,12 +111,11 @@ import org.jfree.chart.labels.CategoryItemLabelGenerator;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.util.PaintAlpha;
+import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.DataUtilities;
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.general.DatasetUtilities;
-import org.jfree.util.BooleanUtilities;
-import org.jfree.util.PublicCloneable;
 
 /**
  * Renders stacked bars with 3D-effect, for use with the {@link CategoryPlot}
@@ -535,8 +534,7 @@ public class StackedBarRenderer3D extends BarRenderer3D
             }
 
             itemLabelList.add(new Object[] {new Integer(series),
-                    faces[5].getBounds2D(),
-                    BooleanUtilities.valueOf(v0 < getBase())});
+                    faces[5].getBounds2D(), Boolean.valueOf(v0 < getBase())});
 
             // add an item entity, if this information is being collected
             EntityCollection entities = state.getEntityCollection();
@@ -729,8 +727,7 @@ public class StackedBarRenderer3D extends BarRenderer3D
             }
 
             itemLabelList.add(new Object[] {new Integer(series),
-                    faces[5].getBounds2D(),
-                    BooleanUtilities.valueOf(v0 < getBase())});
+                    faces[5].getBounds2D(), Boolean.valueOf(v0 < getBase())});
 
             // add an item entity, if this information is being collected
             EntityCollection entities = state.getEntityCollection();

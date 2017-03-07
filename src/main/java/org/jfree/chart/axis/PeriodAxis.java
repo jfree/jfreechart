@@ -93,17 +93,17 @@ import org.jfree.chart.event.AxisChangeEvent;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.ValueAxisPlot;
+import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.Range;
 import org.jfree.data.time.Day;
 import org.jfree.data.time.Month;
 import org.jfree.data.time.RegularTimePeriod;
 import org.jfree.data.time.Year;
-import org.jfree.io.SerialUtilities;
-import org.jfree.text.TextUtilities;
-import org.jfree.ui.RectangleEdge;
-import org.jfree.ui.TextAnchor;
-import org.jfree.util.PublicCloneable;
 
 /**
  * An axis that displays a date scale based on a
@@ -1208,8 +1208,8 @@ public class PeriodAxis extends ValueAxis
      */
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
-        SerialUtilities.writeStroke(this.minorTickMarkStroke, stream);
-        SerialUtilities.writePaint(this.minorTickMarkPaint, stream);
+        SerialUtils.writeStroke(this.minorTickMarkStroke, stream);
+        SerialUtils.writePaint(this.minorTickMarkPaint, stream);
     }
 
     /**
@@ -1223,8 +1223,8 @@ public class PeriodAxis extends ValueAxis
     private void readObject(ObjectInputStream stream)
         throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
-        this.minorTickMarkStroke = SerialUtilities.readStroke(stream);
-        this.minorTickMarkPaint = SerialUtilities.readPaint(stream);
+        this.minorTickMarkStroke = SerialUtils.readStroke(stream);
+        this.minorTickMarkPaint = SerialUtils.readPaint(stream);
     }
 
 }

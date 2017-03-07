@@ -62,12 +62,12 @@ import org.jfree.chart.plot.CrosshairState;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.util.ShapeUtils;
 import org.jfree.data.xy.XYDataset;
-import org.jfree.io.SerialUtilities;
-import org.jfree.ui.RectangleEdge;
-import org.jfree.util.PublicCloneable;
-import org.jfree.util.ShapeUtilities;
 
 /**
  * A renderer that draws line charts.  The renderer doesn't necessarily plot
@@ -349,7 +349,7 @@ public class SamplingXYLineRenderer extends AbstractXYItemRenderer
     public Object clone() throws CloneNotSupportedException {
         SamplingXYLineRenderer clone = (SamplingXYLineRenderer) super.clone();
         if (this.legendLine != null) {
-            clone.legendLine = ShapeUtilities.clone(this.legendLine);
+            clone.legendLine = ShapeUtils.clone(this.legendLine);
         }
         return clone;
     }
@@ -373,7 +373,7 @@ public class SamplingXYLineRenderer extends AbstractXYItemRenderer
             return false;
         }
         SamplingXYLineRenderer that = (SamplingXYLineRenderer) obj;
-        if (!ShapeUtilities.equal(this.legendLine, that.legendLine)) {
+        if (!ShapeUtils.equal(this.legendLine, that.legendLine)) {
             return false;
         }
         return true;
@@ -390,7 +390,7 @@ public class SamplingXYLineRenderer extends AbstractXYItemRenderer
     private void readObject(ObjectInputStream stream)
             throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
-        this.legendLine = SerialUtilities.readShape(stream);
+        this.legendLine = SerialUtils.readShape(stream);
     }
 
     /**
@@ -402,7 +402,7 @@ public class SamplingXYLineRenderer extends AbstractXYItemRenderer
      */
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
-        SerialUtilities.writeShape(this.legendLine, stream);
+        SerialUtils.writeShape(this.legendLine, stream);
     }
 
 }

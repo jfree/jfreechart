@@ -176,22 +176,22 @@ import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.ValueMarker;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.AbstractRenderer;
+import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.ui.GradientPaintTransformer;
+import org.jfree.chart.ui.Layer;
+import org.jfree.chart.ui.LengthAdjustmentType;
+import org.jfree.chart.ui.RectangleAnchor;
+import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.urls.XYURLGenerator;
 import org.jfree.chart.util.CloneUtils;
+import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.TextUtils;
 import org.jfree.data.Range;
 import org.jfree.data.general.DatasetUtilities;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYItemKey;
-import org.jfree.text.TextUtilities;
-import org.jfree.ui.GradientPaintTransformer;
-import org.jfree.ui.Layer;
-import org.jfree.ui.LengthAdjustmentType;
-import org.jfree.ui.RectangleAnchor;
-import org.jfree.ui.RectangleInsets;
-import org.jfree.util.ObjectUtilities;
-import org.jfree.util.PublicCloneable;
 
 /**
  * A base class that can be used to create new {@link XYItemRenderer}
@@ -1541,20 +1541,20 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
 
         if (this.legendItemLabelGenerator instanceof PublicCloneable) {
             clone.legendItemLabelGenerator = (XYSeriesLabelGenerator)
-                    ObjectUtilities.clone(this.legendItemLabelGenerator);
+                    ObjectUtils.clone(this.legendItemLabelGenerator);
         }
         if (this.legendItemToolTipGenerator instanceof PublicCloneable) {
             clone.legendItemToolTipGenerator = (XYSeriesLabelGenerator)
-                    ObjectUtilities.clone(this.legendItemToolTipGenerator);
+                    ObjectUtils.clone(this.legendItemToolTipGenerator);
         }
         if (this.legendItemURLGenerator instanceof PublicCloneable) {
             clone.legendItemURLGenerator = (XYSeriesLabelGenerator)
-                    ObjectUtilities.clone(this.legendItemURLGenerator);
+                    ObjectUtils.clone(this.legendItemURLGenerator);
         }
 
-        clone.foregroundAnnotations = (List) ObjectUtilities.deepClone(
+        clone.foregroundAnnotations = (List) ObjectUtils.deepClone(
                 this.foregroundAnnotations);
-        clone.backgroundAnnotations = (List) ObjectUtilities.deepClone(
+        clone.backgroundAnnotations = (List) ObjectUtils.deepClone(
                 this.backgroundAnnotations);
 
         return clone;
@@ -1576,29 +1576,29 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
             return false;
         }
         AbstractXYItemRenderer that = (AbstractXYItemRenderer) obj;
-        if (!ObjectUtilities.equal(this.itemLabelGenerator,
+        if (!ObjectUtils.equal(this.itemLabelGenerator,
                 that.itemLabelGenerator)) {
             return false;
         }
         if (!this.itemLabelGeneratorMap.equals(that.itemLabelGeneratorMap)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.baseItemLabelGenerator,
+        if (!ObjectUtils.equal(this.baseItemLabelGenerator,
                 that.baseItemLabelGenerator)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.toolTipGenerator,
+        if (!ObjectUtils.equal(this.toolTipGenerator,
                 that.toolTipGenerator)) {
             return false;
         }
         if (!this.toolTipGeneratorMap.equals(that.toolTipGeneratorMap)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.baseToolTipGenerator,
+        if (!ObjectUtils.equal(this.baseToolTipGenerator,
                 that.baseToolTipGenerator)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.urlGenerator, that.urlGenerator)) {
+        if (!ObjectUtils.equal(this.urlGenerator, that.urlGenerator)) {
             return false;
         }
         if (!this.foregroundAnnotations.equals(that.foregroundAnnotations)) {
@@ -1607,15 +1607,15 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
         if (!this.backgroundAnnotations.equals(that.backgroundAnnotations)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.legendItemLabelGenerator,
+        if (!ObjectUtils.equal(this.legendItemLabelGenerator,
                 that.legendItemLabelGenerator)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.legendItemToolTipGenerator,
+        if (!ObjectUtils.equal(this.legendItemToolTipGenerator,
                 that.legendItemToolTipGenerator)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.legendItemURLGenerator,
+        if (!ObjectUtils.equal(this.legendItemURLGenerator,
                 that.legendItemURLGenerator)) {
             return false;
         }

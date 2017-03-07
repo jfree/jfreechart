@@ -59,8 +59,8 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 import org.jfree.chart.TestUtilities;
+import org.jfree.chart.date.MonthConstants;
 
-import org.jfree.date.MonthConstants;
 import org.junit.Test;
 
 /**

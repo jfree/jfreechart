@@ -101,22 +101,22 @@ import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.event.RendererChangeListener;
 import org.jfree.chart.renderer.PolarItemRenderer;
+import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.ui.TextAnchor;
+import org.jfree.chart.util.ObjectList;
+import org.jfree.chart.util.ObjectUtils;
+import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.ResourceBundleWrapper;
+import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.Range;
 import org.jfree.data.general.Dataset;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.DatasetUtilities;
 import org.jfree.data.xy.XYDataset;
-import org.jfree.io.SerialUtilities;
-import org.jfree.text.TextUtilities;
-import org.jfree.ui.RectangleEdge;
-import org.jfree.ui.RectangleInsets;
-import org.jfree.ui.TextAnchor;
-import org.jfree.util.ObjectList;
-import org.jfree.util.ObjectUtilities;
-import org.jfree.util.PaintUtilities;
-import org.jfree.util.PublicCloneable;
 
 /**
  * Plots data that is in (theta, radius) pairs where
@@ -1829,14 +1829,14 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
         if (!this.angleLabelFont.equals(that.angleLabelFont)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.angleLabelPaint, that.angleLabelPaint)) {
+        if (!PaintUtils.equal(this.angleLabelPaint, that.angleLabelPaint)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.angleGridlineStroke,
+        if (!ObjectUtils.equal(this.angleGridlineStroke,
                 that.angleGridlineStroke)) {
             return false;
         }
-        if (!PaintUtilities.equal(
+        if (!PaintUtils.equal(
             this.angleGridlinePaint, that.angleGridlinePaint
         )) {
             return false;
@@ -1844,11 +1844,11 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
         if (this.radiusGridlinesVisible != that.radiusGridlinesVisible) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.radiusGridlineStroke,
+        if (!ObjectUtils.equal(this.radiusGridlineStroke,
                 that.radiusGridlineStroke)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.radiusGridlinePaint,
+        if (!PaintUtils.equal(this.radiusGridlinePaint,
                 that.radiusGridlinePaint)) {
             return false;
         }
@@ -1862,7 +1862,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
         if (this.margin != that.margin) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.fixedLegendItems,
+        if (!ObjectUtils.equal(this.fixedLegendItems,
                 that.fixedLegendItems)) {
             return false;
         }
@@ -1880,7 +1880,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     @Override
     public Object clone() throws CloneNotSupportedException {
         PolarPlot clone = (PolarPlot) super.clone();
-        clone.axes = (ObjectList) ObjectUtilities.clone(this.axes);
+        clone.axes = (ObjectList) ObjectUtils.clone(this.axes);
         for (int i = 0; i < this.axes.size(); i++) {
             ValueAxis axis = (ValueAxis) this.axes.get(i);
             if (axis != null) {
@@ -1892,7 +1892,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
         }
 
         // the datasets are not cloned, but listeners need to be added...
-        clone.datasets = (ObjectList) ObjectUtilities.clone(this.datasets);
+        clone.datasets = (ObjectList) ObjectUtils.clone(this.datasets);
         for (int i = 0; i < clone.datasets.size(); ++i) {
             XYDataset d = getDataset(i);
             if (d != null) {
@@ -1900,7 +1900,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
             }
         }
 
-        clone.renderers = (ObjectList) ObjectUtilities.clone(this.renderers);
+        clone.renderers = (ObjectList) ObjectUtils.clone(this.renderers);
         for (int i = 0; i < this.renderers.size(); i++) {
             PolarItemRenderer renderer2 = (PolarItemRenderer) this.renderers.get(i);
             if (renderer2 instanceof PublicCloneable) {
@@ -1926,11 +1926,11 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      */
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
-        SerialUtilities.writeStroke(this.angleGridlineStroke, stream);
-        SerialUtilities.writePaint(this.angleGridlinePaint, stream);
-        SerialUtilities.writeStroke(this.radiusGridlineStroke, stream);
-        SerialUtilities.writePaint(this.radiusGridlinePaint, stream);
-        SerialUtilities.writePaint(this.angleLabelPaint, stream);
+        SerialUtils.writeStroke(this.angleGridlineStroke, stream);
+        SerialUtils.writePaint(this.angleGridlinePaint, stream);
+        SerialUtils.writeStroke(this.radiusGridlineStroke, stream);
+        SerialUtils.writePaint(this.radiusGridlinePaint, stream);
+        SerialUtils.writePaint(this.angleLabelPaint, stream);
     }
 
     /**
@@ -1945,11 +1945,11 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
         throws IOException, ClassNotFoundException {
 
         stream.defaultReadObject();
-        this.angleGridlineStroke = SerialUtilities.readStroke(stream);
-        this.angleGridlinePaint = SerialUtilities.readPaint(stream);
-        this.radiusGridlineStroke = SerialUtilities.readStroke(stream);
-        this.radiusGridlinePaint = SerialUtilities.readPaint(stream);
-        this.angleLabelPaint = SerialUtilities.readPaint(stream);
+        this.angleGridlineStroke = SerialUtils.readStroke(stream);
+        this.angleGridlinePaint = SerialUtils.readPaint(stream);
+        this.radiusGridlineStroke = SerialUtils.readStroke(stream);
+        this.radiusGridlinePaint = SerialUtils.readPaint(stream);
+        this.angleLabelPaint = SerialUtils.readPaint(stream);
 
         int rangeAxisCount = this.axes.size();
         for (int i = 0; i < rangeAxisCount; i++) {

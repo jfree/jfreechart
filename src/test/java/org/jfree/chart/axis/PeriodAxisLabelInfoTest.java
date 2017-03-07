@@ -57,11 +57,11 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 import org.jfree.chart.TestUtilities;
+import org.jfree.chart.ui.RectangleInsets;
 
 import org.jfree.data.time.Day;
 import org.jfree.data.time.Month;
 import org.jfree.data.time.Year;
-import org.jfree.ui.RectangleInsets;
 import org.junit.Test;
 
 /**

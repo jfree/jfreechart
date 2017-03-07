@@ -52,10 +52,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.ParamChecks;
-
-import org.jfree.io.SerialUtilities;
-import org.jfree.util.PaintUtilities;
+import org.jfree.chart.util.SerialUtils;
 
 /**
  * A storage structure that maps {@code Comparable} instances with
@@ -158,7 +157,7 @@ public class PaintMap implements Cloneable, Serializable {
             Comparable key = (Comparable) iterator.next();
             Paint p1 = getPaint(key);
             Paint p2 = that.getPaint(key);
-            if (!PaintUtilities.equal(p1, p2)) {
+            if (!PaintUtils.equal(p1, p2)) {
                 return false;
             }
         }
@@ -198,7 +197,7 @@ public class PaintMap implements Cloneable, Serializable {
             Comparable key = (Comparable) iterator.next();
             stream.writeObject(key);
             Paint paint = getPaint(key);
-            SerialUtilities.writePaint(paint, stream);
+            SerialUtils.writePaint(paint, stream);
         }
     }
 
@@ -217,7 +216,7 @@ public class PaintMap implements Cloneable, Serializable {
         int keyCount = stream.readInt();
         for (int i = 0; i < keyCount; i++) {
             Comparable key = (Comparable) stream.readObject();
-            Paint paint = SerialUtilities.readPaint(stream);
+            Paint paint = SerialUtils.readPaint(stream);
             this.store.put(key, paint);
         }
     }

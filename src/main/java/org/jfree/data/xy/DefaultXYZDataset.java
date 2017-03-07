@@ -47,10 +47,10 @@ package org.jfree.data.xy;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.DomainOrder;
 import org.jfree.data.general.DatasetChangeEvent;
-import org.jfree.util.PublicCloneable;
 
 /**
  * A default implementation of the {@link XYZDataset} interface that stores

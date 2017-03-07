@@ -58,8 +58,7 @@ import java.lang.reflect.Constructor;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
-
-import org.jfree.date.MonthConstants;
+import org.jfree.chart.date.MonthConstants;
 
 /**
  * An abstract class representing a unit of time.  Convenient methods are

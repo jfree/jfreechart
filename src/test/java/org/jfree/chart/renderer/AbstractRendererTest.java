@@ -80,7 +80,7 @@ import org.jfree.chart.plot.DefaultDrawingSupplier;
 import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
-import org.jfree.ui.TextAnchor;
+import org.jfree.chart.ui.TextAnchor;
 
 /**
  * Tests for the {@link AbstractRenderer} class.

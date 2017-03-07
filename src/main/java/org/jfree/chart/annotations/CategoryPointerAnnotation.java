@@ -64,13 +64,13 @@ import org.jfree.chart.event.AnnotationChangeEvent;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.category.CategoryDataset;
-import org.jfree.io.SerialUtilities;
-import org.jfree.text.TextUtilities;
-import org.jfree.ui.RectangleEdge;
-import org.jfree.util.ObjectUtilities;
-import org.jfree.util.PublicCloneable;
 
 /**
  * An arrow and label that can be placed on a {@link CategoryPlot}.  The arrow
@@ -467,7 +467,7 @@ public class CategoryPointerAnnotation extends CategoryTextAnnotation
         if (!this.arrowPaint.equals(that.arrowPaint)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.arrowStroke, that.arrowStroke)) {
+        if (!ObjectUtils.equal(this.arrowStroke, that.arrowStroke)) {
             return false;
         }
         if (this.labelOffset != that.labelOffset) {
@@ -522,8 +522,8 @@ public class CategoryPointerAnnotation extends CategoryTextAnnotation
      */
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
-        SerialUtilities.writePaint(this.arrowPaint, stream);
-        SerialUtilities.writeStroke(this.arrowStroke, stream);
+        SerialUtils.writePaint(this.arrowPaint, stream);
+        SerialUtils.writeStroke(this.arrowStroke, stream);
     }
 
     /**
@@ -537,8 +537,8 @@ public class CategoryPointerAnnotation extends CategoryTextAnnotation
     private void readObject(ObjectInputStream stream)
         throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
-        this.arrowPaint = SerialUtilities.readPaint(stream);
-        this.arrowStroke = SerialUtilities.readStroke(stream);
+        this.arrowPaint = SerialUtils.readPaint(stream);
+        this.arrowStroke = SerialUtils.readStroke(stream);
     }
 
 }

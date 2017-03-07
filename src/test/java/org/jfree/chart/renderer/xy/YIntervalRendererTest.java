@@ -58,11 +58,11 @@ import org.jfree.chart.labels.StandardXYItemLabelGenerator;
 import org.jfree.chart.labels.StandardXYSeriesLabelGenerator;
 import org.jfree.chart.labels.StandardXYToolTipGenerator;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.ui.Layer;
 import org.jfree.chart.urls.StandardXYURLGenerator;
+import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.xy.YIntervalSeries;
 import org.jfree.data.xy.YIntervalSeriesCollection;
-import org.jfree.ui.Layer;
-import org.jfree.util.PublicCloneable;
 import org.junit.Test;
 
 /**

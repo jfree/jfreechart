@@ -67,15 +67,14 @@ import java.util.List;
 
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotRenderingInfo;
+import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.ui.TextAnchor;
+import org.jfree.chart.util.ObjectUtils;
+import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.Range;
-import org.jfree.io.SerialUtilities;
-import org.jfree.text.TextUtilities;
-import org.jfree.ui.RectangleEdge;
-import org.jfree.ui.TextAnchor;
-import org.jfree.util.ObjectUtilities;
-import org.jfree.util.PaintUtilities;
-
 /**
 This class extends NumberAxis and handles cycling.
 
@@ -1121,8 +1120,8 @@ public class CyclicNumberAxis extends NumberAxis {
      */
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
-        SerialUtilities.writePaint(this.advanceLinePaint, stream);
-        SerialUtilities.writeStroke(this.advanceLineStroke, stream);
+        SerialUtils.writePaint(this.advanceLinePaint, stream);
+        SerialUtils.writeStroke(this.advanceLineStroke, stream);
     }
 
     /**
@@ -1136,8 +1135,8 @@ public class CyclicNumberAxis extends NumberAxis {
     private void readObject(ObjectInputStream stream)
             throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
-        this.advanceLinePaint = SerialUtilities.readPaint(stream);
-        this.advanceLineStroke = SerialUtilities.readStroke(stream);
+        this.advanceLinePaint = SerialUtils.readPaint(stream);
+        this.advanceLineStroke = SerialUtils.readStroke(stream);
     }
 
 
@@ -1166,11 +1165,11 @@ public class CyclicNumberAxis extends NumberAxis {
         if (this.offset != that.offset) {
             return false;
         }
-        if (!PaintUtilities.equal(this.advanceLinePaint,
+        if (!PaintUtils.equal(this.advanceLinePaint,
                 that.advanceLinePaint)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.advanceLineStroke,
+        if (!ObjectUtils.equal(this.advanceLineStroke,
                 that.advanceLineStroke)) {
             return false;
         }

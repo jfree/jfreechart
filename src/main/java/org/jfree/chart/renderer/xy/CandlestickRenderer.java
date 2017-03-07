@@ -110,15 +110,15 @@ import org.jfree.chart.plot.CrosshairState;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.Range;
 import org.jfree.data.xy.IntervalXYDataset;
 import org.jfree.data.xy.OHLCDataset;
 import org.jfree.data.xy.XYDataset;
-import org.jfree.io.SerialUtilities;
-import org.jfree.ui.RectangleEdge;
-import org.jfree.util.PaintUtilities;
-import org.jfree.util.PublicCloneable;
 
 /**
  * A renderer that draws candlesticks on an {@link XYPlot} (requires a
@@ -886,10 +886,10 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
         if (this.candleWidth != that.candleWidth) {
             return false;
         }
-        if (!PaintUtilities.equal(this.upPaint, that.upPaint)) {
+        if (!PaintUtils.equal(this.upPaint, that.upPaint)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.downPaint, that.downPaint)) {
+        if (!PaintUtils.equal(this.downPaint, that.downPaint)) {
             return false;
         }
         if (this.drawVolume != that.drawVolume) {
@@ -911,7 +911,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
         if (this.useOutlinePaint != that.useOutlinePaint) {
             return false;
         }
-        if (!PaintUtilities.equal(this.volumePaint, that.volumePaint)) {
+        if (!PaintUtils.equal(this.volumePaint, that.volumePaint)) {
             return false;
         }
         return super.equals(obj);
@@ -938,9 +938,9 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
      */
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
-        SerialUtilities.writePaint(this.upPaint, stream);
-        SerialUtilities.writePaint(this.downPaint, stream);
-        SerialUtilities.writePaint(this.volumePaint, stream);
+        SerialUtils.writePaint(this.upPaint, stream);
+        SerialUtils.writePaint(this.downPaint, stream);
+        SerialUtils.writePaint(this.volumePaint, stream);
     }
 
     /**
@@ -954,9 +954,9 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
     private void readObject(ObjectInputStream stream)
             throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
-        this.upPaint = SerialUtilities.readPaint(stream);
-        this.downPaint = SerialUtilities.readPaint(stream);
-        this.volumePaint = SerialUtilities.readPaint(stream);
+        this.upPaint = SerialUtils.readPaint(stream);
+        this.downPaint = SerialUtils.readPaint(stream);
+        this.volumePaint = SerialUtils.readPaint(stream);
     }
 
     // --- DEPRECATED CODE ----------------------------------------------------

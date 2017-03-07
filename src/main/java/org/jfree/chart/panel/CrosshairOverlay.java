@@ -64,13 +64,13 @@ import org.jfree.chart.event.OverlayChangeEvent;
 import org.jfree.chart.plot.Crosshair;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.ui.RectangleAnchor;
+import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.ui.TextAnchor;
+import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.ParamChecks;
-import org.jfree.text.TextUtilities;
-import org.jfree.ui.RectangleAnchor;
-import org.jfree.ui.RectangleEdge;
-import org.jfree.ui.TextAnchor;
-import org.jfree.util.ObjectUtilities;
-import org.jfree.util.PublicCloneable;
+import org.jfree.chart.util.PublicCloneable;
 
 /**
  * An overlay for a {@link ChartPanel} that draws crosshairs on a plot.
@@ -587,8 +587,8 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
     @Override
     public Object clone() throws CloneNotSupportedException {
         CrosshairOverlay clone = (CrosshairOverlay) super.clone();
-        clone.xCrosshairs = (List) ObjectUtilities.deepClone(this.xCrosshairs);
-        clone.yCrosshairs = (List) ObjectUtilities.deepClone(this.yCrosshairs);
+        clone.xCrosshairs = (List) ObjectUtils.deepClone(this.xCrosshairs);
+        clone.yCrosshairs = (List) ObjectUtils.deepClone(this.yCrosshairs);
         return clone;
     }
 

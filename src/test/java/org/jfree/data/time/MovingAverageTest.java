@@ -41,9 +41,9 @@
 
 package org.jfree.data.time;
 
+import org.jfree.chart.date.MonthConstants;
 import static org.junit.Assert.assertEquals;
 
-import org.jfree.date.MonthConstants;
 import org.junit.Test;
 
 /**

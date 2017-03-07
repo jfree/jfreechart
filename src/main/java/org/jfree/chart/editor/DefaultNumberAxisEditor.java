@@ -56,7 +56,7 @@ import javax.swing.JTextField;
 import org.jfree.chart.axis.Axis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.NumberTickUnit;
-import org.jfree.layout.LCBLayout;
+import org.jfree.chart.ui.LCBLayout;
 
 /**
  * A panel for editing the properties of a value axis.

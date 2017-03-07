@@ -100,17 +100,16 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-import org.jfree.chart.event.AxisChangeEvent;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.ValueAxisPlot;
+import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.ui.TextAnchor;
+import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.Range;
-import org.jfree.io.SerialUtilities;
-import org.jfree.text.TextUtilities;
-import org.jfree.ui.RectangleEdge;
-import org.jfree.ui.TextAnchor;
-import org.jfree.util.PaintUtilities;
 
 /**
  * A standard linear value axis that replaces integer values with symbols.
@@ -758,10 +757,10 @@ public class SymbolAxis extends NumberAxis implements Serializable {
         if (this.gridBandsVisible != that.gridBandsVisible) {
             return false;
         }
-        if (!PaintUtilities.equal(this.gridBandPaint, that.gridBandPaint)) {
+        if (!PaintUtils.equal(this.gridBandPaint, that.gridBandPaint)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.gridBandAlternatePaint,
+        if (!PaintUtils.equal(this.gridBandAlternatePaint,
                 that.gridBandAlternatePaint)) {
             return false;
         }
@@ -777,8 +776,8 @@ public class SymbolAxis extends NumberAxis implements Serializable {
      */
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
-        SerialUtilities.writePaint(this.gridBandPaint, stream);
-        SerialUtilities.writePaint(this.gridBandAlternatePaint, stream);
+        SerialUtils.writePaint(this.gridBandPaint, stream);
+        SerialUtils.writePaint(this.gridBandAlternatePaint, stream);
     }
 
     /**
@@ -792,8 +791,8 @@ public class SymbolAxis extends NumberAxis implements Serializable {
     private void readObject(ObjectInputStream stream)
         throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
-        this.gridBandPaint = SerialUtilities.readPaint(stream);
-        this.gridBandAlternatePaint = SerialUtilities.readPaint(stream);
+        this.gridBandPaint = SerialUtils.readPaint(stream);
+        this.gridBandAlternatePaint = SerialUtils.readPaint(stream);
     }
 
 }

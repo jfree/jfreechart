@@ -74,19 +74,19 @@ import java.text.Format;
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.entity.PieSectionEntity;
 import org.jfree.chart.labels.PieToolTipGenerator;
+import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.urls.PieURLGenerator;
 import org.jfree.chart.util.LineUtilities;
+import org.jfree.chart.util.ObjectUtils;
+import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Rotation;
+import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.util.ShapeUtils;
+import org.jfree.chart.util.UnitType;
 import org.jfree.data.general.PieDataset;
-import org.jfree.io.SerialUtilities;
-import org.jfree.text.TextUtilities;
-import org.jfree.ui.RectangleInsets;
-import org.jfree.ui.TextAnchor;
-import org.jfree.util.ObjectUtilities;
-import org.jfree.util.PaintUtilities;
-import org.jfree.util.Rotation;
-import org.jfree.util.ShapeUtilities;
-import org.jfree.util.UnitType;
 
 /**
  * A customised pie plot that leaves a hole in the middle.
@@ -563,7 +563,7 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
                 double shadowXOffset = getShadowXOffset();
                 double shadowYOffset = getShadowYOffset();
                 if (shadowPaint != null && getShadowGenerator() == null) {
-                    Shape shadowArc = ShapeUtilities.createTranslatedShape(
+                    Shape shadowArc = ShapeUtils.createTranslatedShape(
                             path, (float) shadowXOffset, (float) shadowYOffset);
                     g2.setPaint(shadowPaint);
                     g2.fill(shadowArc);
@@ -667,7 +667,7 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
         if (!this.centerTextMode.equals(that.centerTextMode)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.centerText, that.centerText)) {
+        if (!ObjectUtils.equal(this.centerText, that.centerText)) {
             return false;
         }
         if (!this.centerTextFormatter.equals(that.centerTextFormatter)) {
@@ -682,11 +682,11 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
         if (this.separatorsVisible != that.separatorsVisible) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.separatorStroke,
+        if (!ObjectUtils.equal(this.separatorStroke,
                 that.separatorStroke)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.separatorPaint, that.separatorPaint)) {
+        if (!PaintUtils.equal(this.separatorPaint, that.separatorPaint)) {
             return false;
         }
         if (this.innerSeparatorExtension != that.innerSeparatorExtension) {
@@ -710,8 +710,8 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
      */
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
-        SerialUtilities.writeStroke(this.separatorStroke, stream);
-        SerialUtilities.writePaint(this.separatorPaint, stream);
+        SerialUtils.writeStroke(this.separatorStroke, stream);
+        SerialUtils.writePaint(this.separatorPaint, stream);
     }
 
     /**
@@ -725,8 +725,8 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
     private void readObject(ObjectInputStream stream)
         throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
-        this.separatorStroke = SerialUtilities.readStroke(stream);
-        this.separatorPaint = SerialUtilities.readPaint(stream);
+        this.separatorStroke = SerialUtils.readStroke(stream);
+        this.separatorPaint = SerialUtils.readPaint(stream);
     }
 
 }

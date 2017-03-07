@@ -55,10 +55,9 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.ParamChecks;
-
-import org.jfree.util.ObjectUtilities;
-import org.jfree.util.PublicCloneable;
+import org.jfree.chart.util.PublicCloneable;
 
 /**
  * A standard implementation of the {@link EntityCollection} interface.
@@ -188,7 +187,7 @@ public class StandardEntityCollection implements EntityCollection,
         }
         if (obj instanceof StandardEntityCollection) {
             StandardEntityCollection that = (StandardEntityCollection) obj;
-            return ObjectUtilities.equal(this.entities, that.entities);
+            return ObjectUtils.equal(this.entities, that.entities);
         }
         return false;
     }

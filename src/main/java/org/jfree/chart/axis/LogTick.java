@@ -41,7 +41,7 @@
 package org.jfree.chart.axis;
 
 import java.text.AttributedString;
-import org.jfree.ui.TextAnchor;
+import org.jfree.chart.ui.TextAnchor;
 
 /**
  * A tick from a {@link LogAxis}.

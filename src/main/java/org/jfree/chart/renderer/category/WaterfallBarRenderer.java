@@ -78,14 +78,14 @@ import org.jfree.chart.labels.CategoryItemLabelGenerator;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.AbstractRenderer;
+import org.jfree.chart.ui.GradientPaintTransformType;
+import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.ui.StandardGradientPaintTransformer;
+import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
-import org.jfree.io.SerialUtilities;
-import org.jfree.ui.GradientPaintTransformType;
-import org.jfree.ui.RectangleEdge;
-import org.jfree.ui.StandardGradientPaintTransformer;
-import org.jfree.util.PaintUtilities;
 
 /**
  * A renderer that handles the drawing of waterfall bar charts, for use with
@@ -445,17 +445,17 @@ public class WaterfallBarRenderer extends BarRenderer {
             return false;
         }
         WaterfallBarRenderer that = (WaterfallBarRenderer) obj;
-        if (!PaintUtilities.equal(this.firstBarPaint, that.firstBarPaint)) {
+        if (!PaintUtils.equal(this.firstBarPaint, that.firstBarPaint)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.lastBarPaint, that.lastBarPaint)) {
+        if (!PaintUtils.equal(this.lastBarPaint, that.lastBarPaint)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.positiveBarPaint,
+        if (!PaintUtils.equal(this.positiveBarPaint,
                 that.positiveBarPaint)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.negativeBarPaint,
+        if (!PaintUtils.equal(this.negativeBarPaint,
                 that.negativeBarPaint)) {
             return false;
         }
@@ -472,10 +472,10 @@ public class WaterfallBarRenderer extends BarRenderer {
      */
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
-        SerialUtilities.writePaint(this.firstBarPaint, stream);
-        SerialUtilities.writePaint(this.lastBarPaint, stream);
-        SerialUtilities.writePaint(this.positiveBarPaint, stream);
-        SerialUtilities.writePaint(this.negativeBarPaint, stream);
+        SerialUtils.writePaint(this.firstBarPaint, stream);
+        SerialUtils.writePaint(this.lastBarPaint, stream);
+        SerialUtils.writePaint(this.positiveBarPaint, stream);
+        SerialUtils.writePaint(this.negativeBarPaint, stream);
     }
 
     /**
@@ -489,10 +489,10 @@ public class WaterfallBarRenderer extends BarRenderer {
     private void readObject(ObjectInputStream stream)
         throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
-        this.firstBarPaint = SerialUtilities.readPaint(stream);
-        this.lastBarPaint = SerialUtilities.readPaint(stream);
-        this.positiveBarPaint = SerialUtilities.readPaint(stream);
-        this.negativeBarPaint = SerialUtilities.readPaint(stream);
+        this.firstBarPaint = SerialUtils.readPaint(stream);
+        this.lastBarPaint = SerialUtils.readPaint(stream);
+        this.positiveBarPaint = SerialUtils.readPaint(stream);
+        this.negativeBarPaint = SerialUtils.readPaint(stream);
     }
 
 }

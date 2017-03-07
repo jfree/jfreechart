@@ -119,18 +119,18 @@ import org.jfree.chart.LegendItemCollection;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.event.PlotChangeEvent;
+import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.util.ObjectUtils;
+import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.ParamChecks;
 import org.jfree.chart.util.ResourceBundleWrapper;
+import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.util.UnitType;
 import org.jfree.data.Range;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.DefaultValueDataset;
 import org.jfree.data.general.ValueDataset;
-import org.jfree.io.SerialUtilities;
-import org.jfree.ui.RectangleEdge;
-import org.jfree.ui.RectangleInsets;
-import org.jfree.util.ObjectUtilities;
-import org.jfree.util.PaintUtilities;
-import org.jfree.util.UnitType;
 
 /**
  * A plot that displays a single value (from a {@link ValueDataset}) in a
@@ -1531,7 +1531,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
         if (!super.equals(obj)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.rangeAxis, that.rangeAxis)) {
+        if (!ObjectUtils.equal(this.rangeAxis, that.rangeAxis)) {
             return false;
         }
         if (this.axisLocation != that.axisLocation) {
@@ -1543,14 +1543,14 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
         if (this.upperBound != that.upperBound) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.padding, that.padding)) {
+        if (!ObjectUtils.equal(this.padding, that.padding)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.thermometerStroke,
+        if (!ObjectUtils.equal(this.thermometerStroke,
                 that.thermometerStroke)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.thermometerPaint,
+        if (!PaintUtils.equal(this.thermometerPaint,
                 that.thermometerPaint)) {
             return false;
         }
@@ -1560,16 +1560,16 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
         if (this.valueLocation != that.valueLocation) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.valueFont, that.valueFont)) {
+        if (!ObjectUtils.equal(this.valueFont, that.valueFont)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.valuePaint, that.valuePaint)) {
+        if (!PaintUtils.equal(this.valuePaint, that.valuePaint)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.valueFormat, that.valueFormat)) {
+        if (!ObjectUtils.equal(this.valueFormat, that.valueFormat)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.mercuryPaint, that.mercuryPaint)) {
+        if (!PaintUtils.equal(this.mercuryPaint, that.mercuryPaint)) {
             return false;
         }
         if (this.showValueLines != that.showValueLines) {
@@ -1597,7 +1597,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
             return false;
         }
         for (int i = 0; i < this.subrangePaint.length; i++) {
-            if (!PaintUtilities.equal(this.subrangePaint[i],
+            if (!PaintUtils.equal(this.subrangePaint[i],
                     that.subrangePaint[i])) {
                 return false;
             }
@@ -1646,7 +1646,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
         if (clone.dataset != null) {
             clone.dataset.addChangeListener(clone);
         }
-        clone.rangeAxis = (ValueAxis) ObjectUtilities.clone(this.rangeAxis);
+        clone.rangeAxis = (ValueAxis) ObjectUtils.clone(this.rangeAxis);
         if (clone.rangeAxis != null) {
             clone.rangeAxis.setPlot(clone);
             clone.rangeAxis.addChangeListener(clone);
@@ -1667,14 +1667,14 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      */
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
-        SerialUtilities.writeStroke(this.thermometerStroke, stream);
-        SerialUtilities.writePaint(this.thermometerPaint, stream);
-        SerialUtilities.writePaint(this.valuePaint, stream);
-        SerialUtilities.writePaint(this.mercuryPaint, stream);
-        SerialUtilities.writeStroke(this.subrangeIndicatorStroke, stream);
-        SerialUtilities.writeStroke(this.rangeIndicatorStroke, stream);
+        SerialUtils.writeStroke(this.thermometerStroke, stream);
+        SerialUtils.writePaint(this.thermometerPaint, stream);
+        SerialUtils.writePaint(this.valuePaint, stream);
+        SerialUtils.writePaint(this.mercuryPaint, stream);
+        SerialUtils.writeStroke(this.subrangeIndicatorStroke, stream);
+        SerialUtils.writeStroke(this.rangeIndicatorStroke, stream);
         for (int i = 0; i < 3; i++) {
-            SerialUtilities.writePaint(this.subrangePaint[i], stream);
+            SerialUtils.writePaint(this.subrangePaint[i], stream);
         }
     }
 
@@ -1689,15 +1689,15 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
     private void readObject(ObjectInputStream stream) throws IOException,
             ClassNotFoundException {
         stream.defaultReadObject();
-        this.thermometerStroke = SerialUtilities.readStroke(stream);
-        this.thermometerPaint = SerialUtilities.readPaint(stream);
-        this.valuePaint = SerialUtilities.readPaint(stream);
-        this.mercuryPaint = SerialUtilities.readPaint(stream);
-        this.subrangeIndicatorStroke = SerialUtilities.readStroke(stream);
-        this.rangeIndicatorStroke = SerialUtilities.readStroke(stream);
+        this.thermometerStroke = SerialUtils.readStroke(stream);
+        this.thermometerPaint = SerialUtils.readPaint(stream);
+        this.valuePaint = SerialUtils.readPaint(stream);
+        this.mercuryPaint = SerialUtils.readPaint(stream);
+        this.subrangeIndicatorStroke = SerialUtils.readStroke(stream);
+        this.rangeIndicatorStroke = SerialUtils.readStroke(stream);
         this.subrangePaint = new Paint[3];
         for (int i = 0; i < 3; i++) {
-            this.subrangePaint[i] = SerialUtilities.readPaint(stream);
+            this.subrangePaint[i] = SerialUtils.readPaint(stream);
         }
         if (this.rangeAxis != null) {
             this.rangeAxis.addChangeListener(this);

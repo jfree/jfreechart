@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------
  * DialPlot.java
  * -------------
- * (C) Copyright 2006-2016, by Object Refinery Limited.
+ * (C) Copyright 2006-2017, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -61,11 +61,11 @@ import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.PlotState;
+import org.jfree.chart.util.ObjectList;
+import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.ValueDataset;
-import org.jfree.util.ObjectList;
-import org.jfree.util.ObjectUtilities;
 
 /**
  * A dial plot composed of user-definable layers.
@@ -745,10 +745,10 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
             return false;
         }
         DialPlot that = (DialPlot) obj;
-        if (!ObjectUtilities.equal(this.background, that.background)) {
+        if (!ObjectUtils.equal(this.background, that.background)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.cap, that.cap)) {
+        if (!ObjectUtils.equal(this.cap, that.cap)) {
             return false;
         }
         if (!this.dialFrame.equals(that.dialFrame)) {
@@ -783,8 +783,8 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
     @Override
     public int hashCode() {
         int result = 193;
-        result = 37 * result + ObjectUtilities.hashCode(this.background);
-        result = 37 * result + ObjectUtilities.hashCode(this.cap);
+        result = 37 * result + ObjectUtils.hashCode(this.background);
+        result = 37 * result + ObjectUtils.hashCode(this.cap);
         result = 37 * result + this.dialFrame.hashCode();
         long temp = Double.doubleToLongBits(this.viewX);
         result = 37 * result + (int) (temp ^ (temp >>> 32));

@@ -173,21 +173,21 @@ import org.jfree.chart.event.MarkerChangeEvent;
 import org.jfree.chart.event.MarkerChangeListener;
 import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.event.PlotChangeListener;
+import org.jfree.chart.text.G2TextMeasurer;
+import org.jfree.chart.text.TextBlock;
+import org.jfree.chart.text.TextBlockAnchor;
+import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.ui.Align;
+import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.util.ObjectUtils;
+import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.DatasetChangeListener;
 import org.jfree.data.general.DatasetGroup;
-import org.jfree.io.SerialUtilities;
-import org.jfree.text.G2TextMeasurer;
-import org.jfree.text.TextBlock;
-import org.jfree.text.TextBlockAnchor;
-import org.jfree.text.TextUtilities;
-import org.jfree.ui.Align;
-import org.jfree.ui.RectangleEdge;
-import org.jfree.ui.RectangleInsets;
-import org.jfree.util.ObjectUtilities;
-import org.jfree.util.PaintUtilities;
-import org.jfree.util.PublicCloneable;
 
 /**
  * The base class for all plots in JFreeChart.  The {@link JFreeChart} class
@@ -1365,34 +1365,34 @@ public abstract class Plot implements AxisChangeListener,
             return false;
         }
         Plot that = (Plot) obj;
-        if (!ObjectUtilities.equal(this.noDataMessage, that.noDataMessage)) {
+        if (!ObjectUtils.equal(this.noDataMessage, that.noDataMessage)) {
             return false;
         }
-        if (!ObjectUtilities.equal(
+        if (!ObjectUtils.equal(
             this.noDataMessageFont, that.noDataMessageFont
         )) {
             return false;
         }
-        if (!PaintUtilities.equal(this.noDataMessagePaint,
+        if (!PaintUtils.equal(this.noDataMessagePaint,
                 that.noDataMessagePaint)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.insets, that.insets)) {
+        if (!ObjectUtils.equal(this.insets, that.insets)) {
             return false;
         }
         if (this.outlineVisible != that.outlineVisible) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.outlineStroke, that.outlineStroke)) {
+        if (!ObjectUtils.equal(this.outlineStroke, that.outlineStroke)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.outlinePaint, that.outlinePaint)) {
+        if (!PaintUtils.equal(this.outlinePaint, that.outlinePaint)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.backgroundPaint, that.backgroundPaint)) {
+        if (!PaintUtils.equal(this.backgroundPaint, that.backgroundPaint)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.backgroundImage,
+        if (!ObjectUtils.equal(this.backgroundImage,
                 that.backgroundImage)) {
             return false;
         }
@@ -1433,10 +1433,10 @@ public abstract class Plot implements AxisChangeListener,
         // childs in combined plots instead
         if (this.datasetGroup != null) {
             clone.datasetGroup
-                = (DatasetGroup) ObjectUtilities.clone(this.datasetGroup);
+                = (DatasetGroup) ObjectUtils.clone(this.datasetGroup);
         }
         clone.drawingSupplier
-            = (DrawingSupplier) ObjectUtilities.clone(this.drawingSupplier);
+            = (DrawingSupplier) ObjectUtils.clone(this.drawingSupplier);
         clone.listenerList = new EventListenerList();
         return clone;
 
@@ -1451,11 +1451,11 @@ public abstract class Plot implements AxisChangeListener,
      */
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
-        SerialUtilities.writePaint(this.noDataMessagePaint, stream);
-        SerialUtilities.writeStroke(this.outlineStroke, stream);
-        SerialUtilities.writePaint(this.outlinePaint, stream);
+        SerialUtils.writePaint(this.noDataMessagePaint, stream);
+        SerialUtils.writeStroke(this.outlineStroke, stream);
+        SerialUtils.writePaint(this.outlinePaint, stream);
         // backgroundImage
-        SerialUtilities.writePaint(this.backgroundPaint, stream);
+        SerialUtils.writePaint(this.backgroundPaint, stream);
     }
 
     /**
@@ -1469,11 +1469,11 @@ public abstract class Plot implements AxisChangeListener,
     private void readObject(ObjectInputStream stream)
         throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
-        this.noDataMessagePaint = SerialUtilities.readPaint(stream);
-        this.outlineStroke = SerialUtilities.readStroke(stream);
-        this.outlinePaint = SerialUtilities.readPaint(stream);
+        this.noDataMessagePaint = SerialUtils.readPaint(stream);
+        this.outlineStroke = SerialUtils.readStroke(stream);
+        this.outlinePaint = SerialUtils.readPaint(stream);
         // backgroundImage
-        this.backgroundPaint = SerialUtilities.readPaint(stream);
+        this.backgroundPaint = SerialUtils.readPaint(stream);
 
         this.listenerList = new EventListenerList();
 

@@ -84,12 +84,12 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.ParamChecks;
 
 import org.jfree.data.general.Series;
 import org.jfree.data.general.SeriesChangeEvent;
 import org.jfree.data.general.SeriesException;
-import org.jfree.util.ObjectUtilities;
 
 /**
  * Represents a sequence of zero or more data items in the form (x, y).  By
@@ -909,7 +909,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
     @Override
     public Object clone() throws CloneNotSupportedException {
         XYSeries clone = (XYSeries) super.clone();
-        clone.data = (List) ObjectUtilities.deepClone(this.data);
+        clone.data = (List) ObjectUtils.deepClone(this.data);
         return clone;
     }
 
@@ -974,7 +974,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
         if (this.allowDuplicateXValues != that.allowDuplicateXValues) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.data, that.data)) {
+        if (!ObjectUtils.equal(this.data, that.data)) {
             return false;
         }
         return true;

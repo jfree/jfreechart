@@ -49,10 +49,9 @@ package org.jfree.chart.axis;
 
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
+import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.util.ParamChecks;
-
-import org.jfree.ui.RectangleEdge;
-import org.jfree.util.PublicCloneable;
+import org.jfree.chart.util.PublicCloneable;
 
 /**
  * A record that contains the space required at each edge of a plot.

@@ -85,10 +85,10 @@ import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.category.CategoryDataset;
-import org.jfree.io.SerialUtilities;
-import org.jfree.util.PaintUtilities;
 
 /**
  * Renderer for drawing min max plot. This renderer draws all the series under
@@ -439,7 +439,7 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
         if (this.plotLines != that.plotLines) {
             return false;
         }
-        if (!PaintUtilities.equal(this.groupPaint, that.groupPaint)) {
+        if (!PaintUtils.equal(this.groupPaint, that.groupPaint)) {
             return false;
         }
         if (!this.groupStroke.equals(that.groupStroke)) {
@@ -540,8 +540,8 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
      */
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
-        SerialUtilities.writeStroke(this.groupStroke, stream);
-        SerialUtilities.writePaint(this.groupPaint, stream);
+        SerialUtils.writeStroke(this.groupStroke, stream);
+        SerialUtils.writePaint(this.groupPaint, stream);
     }
 
     /**
@@ -555,8 +555,8 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
     private void readObject(ObjectInputStream stream)
         throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
-        this.groupStroke = SerialUtilities.readStroke(stream);
-        this.groupPaint = SerialUtilities.readPaint(stream);
+        this.groupStroke = SerialUtils.readStroke(stream);
+        this.groupPaint = SerialUtils.readPaint(stream);
 
         this.minIcon = getIcon(new Arc2D.Double(-4, -4, 8, 8, 0, 360,
                 Arc2D.OPEN), null, Color.black);

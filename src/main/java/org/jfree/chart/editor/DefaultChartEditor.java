@@ -63,9 +63,9 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PolarPlot;
 import org.jfree.chart.title.Title;
+import org.jfree.chart.ui.LCBLayout;
+import org.jfree.chart.ui.PaintSample;
 import org.jfree.chart.util.ResourceBundleWrapper;
-import org.jfree.layout.LCBLayout;
-import org.jfree.ui.PaintSample;
 
 /**
  * A panel for editing chart properties (includes subpanels for the title,

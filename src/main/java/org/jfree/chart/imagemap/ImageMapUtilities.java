@@ -58,7 +58,7 @@ import org.jfree.chart.ChartRenderingInfo;
 import org.jfree.chart.entity.ChartEntity;
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.util.ParamChecks;
-import org.jfree.util.StringUtils;
+import org.jfree.chart.util.StringUtils;
 
 /**
  * Collection of utility methods related to producing image maps.

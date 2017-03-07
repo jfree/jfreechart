@@ -44,8 +44,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.jfree.chart.TestUtilities;
+import org.jfree.chart.text.TextBox;
 
-import org.jfree.text.TextBox;
 import org.junit.Test;
 
 /**

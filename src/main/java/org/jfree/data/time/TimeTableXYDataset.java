@@ -62,6 +62,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.DefaultKeyedValues2D;
 import org.jfree.data.DomainInfo;
@@ -70,7 +71,6 @@ import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.xy.AbstractIntervalXYDataset;
 import org.jfree.data.xy.IntervalXYDataset;
 import org.jfree.data.xy.TableXYDataset;
-import org.jfree.util.PublicCloneable;
 
 /**
  * A dataset for regular time periods that implements the

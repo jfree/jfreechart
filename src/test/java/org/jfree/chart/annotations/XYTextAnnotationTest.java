@@ -54,9 +54,9 @@ import java.awt.Font;
 import java.awt.GradientPaint;
 
 import org.jfree.chart.TestUtilities;
+import org.jfree.chart.ui.TextAnchor;
+import org.jfree.chart.util.PublicCloneable;
 
-import org.jfree.ui.TextAnchor;
-import org.jfree.util.PublicCloneable;
 import org.junit.Test;
 
 /**

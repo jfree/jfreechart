@@ -82,14 +82,14 @@ import org.jfree.chart.event.AxisChangeEvent;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.ValueAxisPlot;
+import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.util.AttrStringUtils;
 import org.jfree.chart.util.LogFormat;
+import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.Range;
-import org.jfree.ui.RectangleEdge;
-import org.jfree.ui.RectangleInsets;
-import org.jfree.ui.TextAnchor;
-import org.jfree.util.ObjectUtilities;
 
 /**
  * A numerical axis that uses a logarithmic scale.  The class is an
@@ -1056,7 +1056,7 @@ public class LogAxis extends ValueAxis {
         if (this.base != that.base) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.baseSymbol, that.baseSymbol)) {
+        if (!ObjectUtils.equal(this.baseSymbol, that.baseSymbol)) {
             return false;
         }
         if (!this.baseFormatter.equals(that.baseFormatter)) {
@@ -1065,7 +1065,7 @@ public class LogAxis extends ValueAxis {
         if (this.smallestValue != that.smallestValue) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.numberFormatOverride, 
+        if (!ObjectUtils.equal(this.numberFormatOverride, 
                 that.numberFormatOverride)) {
             return false;
         }

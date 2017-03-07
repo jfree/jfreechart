@@ -60,9 +60,9 @@ package org.jfree.chart.labels;
 import java.io.Serializable;
 import java.text.NumberFormat;
 import java.util.Locale;
+import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.general.PieDataset;
-import org.jfree.util.PublicCloneable;
 
 /**
  * A standard item label generator for plots that use data from a

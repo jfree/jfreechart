@@ -54,11 +54,11 @@ import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.Range;
-import org.jfree.ui.RectangleEdge;
-import org.jfree.util.ObjectUtilities;
-import org.jfree.util.PublicCloneable;
 
 /**
  * An annotation that allows an image to be placed within a rectangle specified
@@ -321,7 +321,7 @@ public class XYDataImageAnnotation extends AbstractXYAnnotation
         if (this.includeInDataBounds != that.includeInDataBounds) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.image, that.image)) {
+        if (!ObjectUtils.equal(this.image, that.image)) {
             return false;
         }
         // seems to be the same...

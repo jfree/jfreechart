@@ -50,10 +50,9 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.ParamChecks;
-
-import org.jfree.io.SerialUtilities;
-import org.jfree.util.ObjectUtilities;
+import org.jfree.chart.util.SerialUtils;
 
 /**
  * A storage structure that maps {@code Comparable} instances with
@@ -153,7 +152,7 @@ public class StrokeMap implements Cloneable, Serializable {
             Comparable key = (Comparable) iterator.next();
             Stroke s1 = getStroke(key);
             Stroke s2 = that.getStroke(key);
-            if (!ObjectUtilities.equal(s1, s2)) {
+            if (!ObjectUtils.equal(s1, s2)) {
                 return false;
             }
         }
@@ -193,7 +192,7 @@ public class StrokeMap implements Cloneable, Serializable {
             Comparable key = (Comparable) iterator.next();
             stream.writeObject(key);
             Stroke stroke = getStroke(key);
-            SerialUtilities.writeStroke(stroke, stream);
+            SerialUtils.writeStroke(stroke, stream);
         }
     }
 
@@ -212,7 +211,7 @@ public class StrokeMap implements Cloneable, Serializable {
         int keyCount = stream.readInt();
         for (int i = 0; i < keyCount; i++) {
             Comparable key = (Comparable) stream.readObject();
-            Stroke stroke = SerialUtilities.readStroke(stream);
+            Stroke stroke = SerialUtils.readStroke(stream);
             this.store.put(key, stroke);
         }
     }

@@ -47,8 +47,7 @@ import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
-
-import org.jfree.ui.Size2D;
+import org.jfree.chart.ui.Size2D;
 
 /**
  * Arranges blocks in a grid within their container.

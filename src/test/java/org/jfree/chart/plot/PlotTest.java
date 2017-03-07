@@ -55,8 +55,8 @@ import java.awt.Shape;
 import java.awt.Stroke;
 
 import org.jfree.chart.JFreeChart;
-import org.jfree.ui.Align;
-import org.jfree.ui.RectangleInsets;
+import org.jfree.chart.ui.Align;
+import org.jfree.chart.ui.RectangleInsets;
 import org.junit.Test;
 
 /**
@@ -130,11 +130,11 @@ public class PlotTest {
                 3.0f, 4.0f, Color.green));
         assertTrue(plot1.equals(plot2));
 
-        // backgroundImage
-        plot1.setBackgroundImage(JFreeChart.INFO.getLogo());
-        assertFalse(plot1.equals(plot2));
-        plot2.setBackgroundImage(JFreeChart.INFO.getLogo());
-        assertTrue(plot1.equals(plot2));
+//        // backgroundImage
+//        plot1.setBackgroundImage(JFreeChart.INFO.getLogo());
+//        assertFalse(plot1.equals(plot2));
+//        plot2.setBackgroundImage(JFreeChart.INFO.getLogo());
+//        assertTrue(plot1.equals(plot2));
 
         // backgroundImageAlignment
         plot1.setBackgroundImageAlignment(Align.BOTTOM_RIGHT);

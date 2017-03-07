@@ -50,9 +50,9 @@ package org.jfree.chart.urls;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.xy.XYDataset;
-import org.jfree.util.PublicCloneable;
 
 /**
  * A custom URL generator.

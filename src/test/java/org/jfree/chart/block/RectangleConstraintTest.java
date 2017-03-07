@@ -40,10 +40,10 @@
 
 package org.jfree.chart.block;
 
+import org.jfree.chart.ui.Size2D;
 import static org.junit.Assert.assertEquals;
 
 import org.jfree.data.Range;
-import org.jfree.ui.Size2D;
 import org.junit.Test;
 
 /**

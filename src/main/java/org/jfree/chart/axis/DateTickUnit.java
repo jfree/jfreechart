@@ -61,9 +61,8 @@ import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
+import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.ParamChecks;
-
-import org.jfree.util.ObjectUtilities;
 
 /**
  * A tick unit for use by subclasses of {@link DateAxis}.  Instances of this
@@ -436,7 +435,7 @@ public class DateTickUnit extends TickUnit implements Serializable {
         if (this.count != that.count) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.formatter, that.formatter)) {
+        if (!ObjectUtils.equal(this.formatter, that.formatter)) {
             return false;
         }
         return true;

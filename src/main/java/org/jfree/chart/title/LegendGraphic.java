@@ -66,16 +66,16 @@ import org.jfree.chart.block.AbstractBlock;
 import org.jfree.chart.block.Block;
 import org.jfree.chart.block.LengthConstraintType;
 import org.jfree.chart.block.RectangleConstraint;
+import org.jfree.chart.ui.GradientPaintTransformer;
+import org.jfree.chart.ui.RectangleAnchor;
+import org.jfree.chart.ui.Size2D;
+import org.jfree.chart.ui.StandardGradientPaintTransformer;
+import org.jfree.chart.util.ObjectUtils;
+import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.ParamChecks;
-import org.jfree.io.SerialUtilities;
-import org.jfree.ui.GradientPaintTransformer;
-import org.jfree.ui.RectangleAnchor;
-import org.jfree.ui.Size2D;
-import org.jfree.ui.StandardGradientPaintTransformer;
-import org.jfree.util.ObjectUtilities;
-import org.jfree.util.PaintUtilities;
-import org.jfree.util.PublicCloneable;
-import org.jfree.util.ShapeUtilities;
+import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.util.ShapeUtils;
 
 /**
  * The graphical item within a legend item.
@@ -582,7 +582,7 @@ public class LegendGraphic extends AbstractBlock
         if (this.lineVisible) {
             Point2D location = RectangleAnchor.coordinates(area,
                     this.shapeLocation);
-            Shape aLine = ShapeUtilities.createTranslatedShape(getLine(),
+            Shape aLine = ShapeUtils.createTranslatedShape(getLine(),
                     this.shapeAnchor, location.getX(), location.getY());
             g2.setPaint(this.linePaint);
             g2.setStroke(this.lineStroke);
@@ -593,7 +593,7 @@ public class LegendGraphic extends AbstractBlock
             Point2D location = RectangleAnchor.coordinates(area,
                     this.shapeLocation);
 
-            Shape s = ShapeUtilities.createTranslatedShape(this.shape,
+            Shape s = ShapeUtils.createTranslatedShape(this.shape,
                     this.shapeAnchor, location.getX(), location.getY());
             if (this.shapeFilled) {
                 Paint p = this.fillPaint;
@@ -644,26 +644,26 @@ public class LegendGraphic extends AbstractBlock
         if (this.shapeVisible != that.shapeVisible) {
             return false;
         }
-        if (!ShapeUtilities.equal(this.shape, that.shape)) {
+        if (!ShapeUtils.equal(this.shape, that.shape)) {
             return false;
         }
         if (this.shapeFilled != that.shapeFilled) {
             return false;
         }
-        if (!PaintUtilities.equal(this.fillPaint, that.fillPaint)) {
+        if (!PaintUtils.equal(this.fillPaint, that.fillPaint)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.fillPaintTransformer,
+        if (!ObjectUtils.equal(this.fillPaintTransformer,
                 that.fillPaintTransformer)) {
             return false;
         }
         if (this.shapeOutlineVisible != that.shapeOutlineVisible) {
             return false;
         }
-        if (!PaintUtilities.equal(this.outlinePaint, that.outlinePaint)) {
+        if (!PaintUtils.equal(this.outlinePaint, that.outlinePaint)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.outlineStroke, that.outlineStroke)) {
+        if (!ObjectUtils.equal(this.outlineStroke, that.outlineStroke)) {
             return false;
         }
         if (this.shapeAnchor != that.shapeAnchor) {
@@ -675,13 +675,13 @@ public class LegendGraphic extends AbstractBlock
         if (this.lineVisible != that.lineVisible) {
             return false;
         }
-        if (!ShapeUtilities.equal(this.line, that.line)) {
+        if (!ShapeUtils.equal(this.line, that.line)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.linePaint, that.linePaint)) {
+        if (!PaintUtils.equal(this.linePaint, that.linePaint)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.lineStroke, that.lineStroke)) {
+        if (!ObjectUtils.equal(this.lineStroke, that.lineStroke)) {
             return false;
         }
         return super.equals(obj);
@@ -695,7 +695,7 @@ public class LegendGraphic extends AbstractBlock
     @Override
     public int hashCode() {
         int result = 193;
-        result = 37 * result + ObjectUtilities.hashCode(this.fillPaint);
+        result = 37 * result + ObjectUtils.hashCode(this.fillPaint);
         // FIXME: use other fields too
         return result;
     }
@@ -710,8 +710,8 @@ public class LegendGraphic extends AbstractBlock
     @Override
     public Object clone() throws CloneNotSupportedException {
         LegendGraphic clone = (LegendGraphic) super.clone();
-        clone.shape = ShapeUtilities.clone(this.shape);
-        clone.line = ShapeUtilities.clone(this.line);
+        clone.shape = ShapeUtils.clone(this.shape);
+        clone.line = ShapeUtils.clone(this.line);
         return clone;
     }
 
@@ -724,13 +724,13 @@ public class LegendGraphic extends AbstractBlock
      */
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
-        SerialUtilities.writeShape(this.shape, stream);
-        SerialUtilities.writePaint(this.fillPaint, stream);
-        SerialUtilities.writePaint(this.outlinePaint, stream);
-        SerialUtilities.writeStroke(this.outlineStroke, stream);
-        SerialUtilities.writeShape(this.line, stream);
-        SerialUtilities.writePaint(this.linePaint, stream);
-        SerialUtilities.writeStroke(this.lineStroke, stream);
+        SerialUtils.writeShape(this.shape, stream);
+        SerialUtils.writePaint(this.fillPaint, stream);
+        SerialUtils.writePaint(this.outlinePaint, stream);
+        SerialUtils.writeStroke(this.outlineStroke, stream);
+        SerialUtils.writeShape(this.line, stream);
+        SerialUtils.writePaint(this.linePaint, stream);
+        SerialUtils.writeStroke(this.lineStroke, stream);
     }
 
     /**
@@ -744,13 +744,13 @@ public class LegendGraphic extends AbstractBlock
     private void readObject(ObjectInputStream stream)
             throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
-        this.shape = SerialUtilities.readShape(stream);
-        this.fillPaint = SerialUtilities.readPaint(stream);
-        this.outlinePaint = SerialUtilities.readPaint(stream);
-        this.outlineStroke = SerialUtilities.readStroke(stream);
-        this.line = SerialUtilities.readShape(stream);
-        this.linePaint = SerialUtilities.readPaint(stream);
-        this.lineStroke = SerialUtilities.readStroke(stream);
+        this.shape = SerialUtils.readShape(stream);
+        this.fillPaint = SerialUtils.readPaint(stream);
+        this.outlinePaint = SerialUtils.readPaint(stream);
+        this.outlineStroke = SerialUtils.readStroke(stream);
+        this.line = SerialUtils.readShape(stream);
+        this.linePaint = SerialUtils.readPaint(stream);
+        this.lineStroke = SerialUtils.readStroke(stream);
     }
 
 }

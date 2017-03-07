@@ -42,9 +42,9 @@
 package org.jfree.data.category;
 
 import org.jfree.chart.TestUtilities;
+import org.jfree.chart.util.TableOrder;
 
 import org.jfree.data.general.DefaultPieDataset;
-import org.jfree.util.TableOrder;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

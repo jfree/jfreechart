@@ -80,12 +80,12 @@ import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.event.PlotChangeListener;
+import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.ParamChecks;
 import org.jfree.chart.util.ShadowGenerator;
 import org.jfree.data.Range;
-import org.jfree.ui.RectangleEdge;
-import org.jfree.ui.RectangleInsets;
-import org.jfree.util.ObjectUtilities;
 
 /**
  * A combined category plot where the domain axis is shared.
@@ -668,7 +668,7 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
         if (this.gap != that.gap) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.subplots, that.subplots)) {
+        if (!ObjectUtils.equal(this.subplots, that.subplots)) {
             return false;
         }
         return super.equals(obj);
@@ -687,7 +687,7 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
 
         CombinedDomainCategoryPlot result
             = (CombinedDomainCategoryPlot) super.clone();
-        result.subplots = (List) ObjectUtilities.deepClone(this.subplots);
+        result.subplots = (List) ObjectUtils.deepClone(this.subplots);
         for (Iterator it = result.subplots.iterator(); it.hasNext();) {
             Plot child = (Plot) it.next();
             child.setParent(result);

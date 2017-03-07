@@ -98,6 +98,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.TimeZone;
+import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.ParamChecks;
 
 import org.jfree.data.DomainInfo;
@@ -110,7 +111,6 @@ import org.jfree.data.xy.IntervalXYDataset;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYDomainInfo;
 import org.jfree.data.xy.XYRangeInfo;
-import org.jfree.util.ObjectUtilities;
 
 /**
  * A collection of time series objects.  This class implements the
@@ -797,7 +797,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
         if (this.domainIsPointsInTime != that.domainIsPointsInTime) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.data, that.data)) {
+        if (!ObjectUtils.equal(this.data, that.data)) {
             return false;
         }
         return true;
@@ -831,7 +831,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
     @Override
     public Object clone() throws CloneNotSupportedException {
         TimeSeriesCollection clone = (TimeSeriesCollection) super.clone();
-        clone.data = (List) ObjectUtilities.deepClone(this.data);
+        clone.data = (List) ObjectUtils.deepClone(this.data);
         clone.workingCalendar = (Calendar) this.workingCalendar.clone();
         return clone;
     }

@@ -54,7 +54,7 @@ import org.jfree.chart.TestUtilities;
 
 import org.jfree.chart.block.BlockBorder;
 import org.jfree.chart.block.BlockContainer;
-import org.jfree.ui.RectangleInsets;
+import org.jfree.chart.ui.RectangleInsets;
 import org.junit.Test;
 
 /**

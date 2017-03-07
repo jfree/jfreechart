@@ -45,9 +45,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.jfree.chart.TestUtilities;
+import org.jfree.chart.text.TextBlockAnchor;
+import org.jfree.chart.ui.RectangleAnchor;
 
-import org.jfree.text.TextBlockAnchor;
-import org.jfree.ui.RectangleAnchor;
 import org.junit.Test;
 
 /**

@@ -49,10 +49,10 @@ import static org.junit.Assert.assertFalse;
 import java.util.Date;
 
 import org.jfree.chart.TestUtilities;
+import org.jfree.chart.date.MonthConstants;
 
 import org.jfree.data.general.SeriesChangeEvent;
 import org.jfree.data.general.SeriesChangeListener;
-import org.jfree.date.MonthConstants;
 import org.junit.Before;
 import org.junit.Test;
 

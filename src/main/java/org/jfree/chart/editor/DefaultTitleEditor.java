@@ -63,11 +63,11 @@ import javax.swing.JTextField;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.chart.title.Title;
+import org.jfree.chart.ui.FontChooserPanel;
+import org.jfree.chart.ui.FontDisplayField;
+import org.jfree.chart.ui.LCBLayout;
+import org.jfree.chart.ui.PaintSample;
 import org.jfree.chart.util.ResourceBundleWrapper;
-import org.jfree.layout.LCBLayout;
-import org.jfree.ui.FontChooserPanel;
-import org.jfree.ui.FontDisplayField;
-import org.jfree.ui.PaintSample;
 
 /**
  * A panel for editing the properties of a chart title.

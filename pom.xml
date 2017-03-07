@@ -53,11 +53,6 @@
     </licenses>
 
     <dependencies>
-        <dependency>
-            <groupId>org.jfree</groupId>
-            <artifactId>jcommon</artifactId>
-            <version>1.0.24</version>
-        </dependency>
 
         <!-- FXGraphics2D is used for JavaFX support. -->
         <dependency>

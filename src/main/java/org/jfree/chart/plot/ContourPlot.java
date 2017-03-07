@@ -104,15 +104,15 @@ import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.labels.ContourToolTipGenerator;
 import org.jfree.chart.labels.StandardContourToolTipGenerator;
 import org.jfree.chart.renderer.xy.XYBlockRenderer;
+import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.urls.XYURLGenerator;
+import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.ResourceBundleWrapper;
 import org.jfree.data.Range;
 import org.jfree.data.contour.ContourDataset;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.DatasetUtilities;
-import org.jfree.ui.RectangleEdge;
-import org.jfree.ui.RectangleInsets;
-import org.jfree.util.ObjectUtilities;
 
 /**
  * A class for creating shaded contours.
@@ -1844,11 +1844,11 @@ public class ContourPlot extends Plot implements ContourValuePlot,
             clone.colorBar = (ColorBar) this.colorBar.clone();
         }
 
-        clone.domainMarkers = (List) ObjectUtilities.deepClone(
+        clone.domainMarkers = (List) ObjectUtils.deepClone(
                 this.domainMarkers);
-        clone.rangeMarkers = (List) ObjectUtilities.deepClone(
+        clone.rangeMarkers = (List) ObjectUtils.deepClone(
                 this.rangeMarkers);
-        clone.annotations = (List) ObjectUtilities.deepClone(this.annotations);
+        clone.annotations = (List) ObjectUtils.deepClone(this.annotations);
 
         if (this.clipPath != null) {
             clone.clipPath = (ClipPath) this.clipPath.clone();

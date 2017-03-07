@@ -45,12 +45,12 @@ package org.jfree.data;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
+import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.ParamChecks;
 
 import org.jfree.data.general.Series;
 import org.jfree.data.general.SeriesChangeEvent;
 import org.jfree.data.general.SeriesException;
-import org.jfree.util.ObjectUtilities;
 
 /**
  * A (possibly ordered) list of (Comparable, Object) data items.
@@ -413,7 +413,7 @@ public class ComparableObjectSeries extends Series
         if (this.allowDuplicateXValues != that.allowDuplicateXValues) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.data, that.data)) {
+        if (!ObjectUtils.equal(this.data, that.data)) {
             return false;
         }
         return true;

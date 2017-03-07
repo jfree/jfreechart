@@ -61,8 +61,8 @@ import org.jfree.chart.LegendItemCollection;
 import org.jfree.chart.TestUtilities;
 import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.event.PlotChangeListener;
+import org.jfree.chart.util.TableOrder;
 import org.jfree.data.category.DefaultCategoryDataset;
-import org.jfree.util.TableOrder;
 import org.junit.Test;
 
 /**

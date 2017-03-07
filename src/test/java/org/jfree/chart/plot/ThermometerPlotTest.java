@@ -54,8 +54,8 @@ import java.awt.GradientPaint;
 import java.text.DecimalFormat;
 
 import org.jfree.chart.TestUtilities;
+import org.jfree.chart.ui.RectangleInsets;
 
-import org.jfree.ui.RectangleInsets;
 import org.junit.Test;
 
 /**

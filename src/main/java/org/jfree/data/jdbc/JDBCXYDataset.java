@@ -88,7 +88,6 @@ import org.jfree.data.general.Dataset;
 import org.jfree.data.xy.AbstractXYDataset;
 import org.jfree.data.xy.TableXYDataset;
 import org.jfree.data.xy.XYDataset;
-import org.jfree.util.Log;
 
 /**
  * This class provides an {@link XYDataset} implementation over a database
@@ -267,12 +266,6 @@ public class JDBCXYDataset extends AbstractXYDataset
                             columnTypes[column] = type;
                             break;
                         default:
-                            Log.warn(
-                                "Unable to load column "
-                                + column + " (" + type + ","
-                                + metaData.getColumnClassName(column + 1)
-                                + ")"
-                            );
                             columnTypes[column] = Types.NULL;
                             break;
                     }

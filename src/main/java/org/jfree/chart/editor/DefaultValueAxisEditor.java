@@ -59,11 +59,11 @@ import javax.swing.JTextField;
 
 import org.jfree.chart.axis.Axis;
 import org.jfree.chart.axis.ValueAxis;
+import org.jfree.chart.ui.LCBLayout;
+import org.jfree.chart.ui.PaintSample;
+import org.jfree.chart.ui.StrokeChooserPanel;
+import org.jfree.chart.ui.StrokeSample;
 import org.jfree.chart.util.ResourceBundleWrapper;
-import org.jfree.layout.LCBLayout;
-import org.jfree.ui.PaintSample;
-import org.jfree.ui.StrokeChooserPanel;
-import org.jfree.ui.StrokeSample;
 
 /**
  * A panel for editing properties of a {@link ValueAxis}.

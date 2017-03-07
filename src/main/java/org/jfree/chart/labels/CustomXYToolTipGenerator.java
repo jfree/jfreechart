@@ -48,9 +48,9 @@ package org.jfree.chart.labels;
 
 import java.io.Serializable;
 import java.util.List;
+import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.xy.XYDataset;
-import org.jfree.util.PublicCloneable;
 
 /**
  * A tool tip generator that stores custom tooltips. The dataset passed into

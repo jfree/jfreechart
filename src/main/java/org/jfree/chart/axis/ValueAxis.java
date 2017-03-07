@@ -133,15 +133,15 @@ import java.util.List;
 
 import org.jfree.chart.event.AxisChangeEvent;
 import org.jfree.chart.plot.Plot;
+import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.util.AttrStringUtils;
+import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.Range;
-import org.jfree.io.SerialUtilities;
-import org.jfree.text.TextUtilities;
-import org.jfree.ui.RectangleEdge;
-import org.jfree.ui.RectangleInsets;
-import org.jfree.util.ObjectUtilities;
-import org.jfree.util.PublicCloneable;
 
 /**
  * The base class for axes that display value data, where values are measured
@@ -1699,7 +1699,7 @@ public abstract class ValueAxis extends Axis
             return false;
         }
         // if autoRange is true, then the current range is irrelevant
-        if (!this.autoRange && !ObjectUtilities.equal(this.range, that.range)) {
+        if (!this.autoRange && !ObjectUtils.equal(this.range, that.range)) {
             return false;
         }
         if (this.autoRange != that.autoRange) {
@@ -1723,7 +1723,7 @@ public abstract class ValueAxis extends Axis
         if (this.autoTickUnitSelection != that.autoTickUnitSelection) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.standardTickUnits,
+        if (!ObjectUtils.equal(this.standardTickUnits,
                 that.standardTickUnits)) {
             return false;
         }
@@ -1759,10 +1759,10 @@ public abstract class ValueAxis extends Axis
      */
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
-        SerialUtilities.writeShape(this.upArrow, stream);
-        SerialUtilities.writeShape(this.downArrow, stream);
-        SerialUtilities.writeShape(this.leftArrow, stream);
-        SerialUtilities.writeShape(this.rightArrow, stream);
+        SerialUtils.writeShape(this.upArrow, stream);
+        SerialUtils.writeShape(this.downArrow, stream);
+        SerialUtils.writeShape(this.leftArrow, stream);
+        SerialUtils.writeShape(this.rightArrow, stream);
     }
 
     /**
@@ -1777,10 +1777,10 @@ public abstract class ValueAxis extends Axis
             throws IOException, ClassNotFoundException {
 
         stream.defaultReadObject();
-        this.upArrow = SerialUtilities.readShape(stream);
-        this.downArrow = SerialUtilities.readShape(stream);
-        this.leftArrow = SerialUtilities.readShape(stream);
-        this.rightArrow = SerialUtilities.readShape(stream);
+        this.upArrow = SerialUtils.readShape(stream);
+        this.downArrow = SerialUtils.readShape(stream);
+        this.leftArrow = SerialUtils.readShape(stream);
+        this.rightArrow = SerialUtils.readShape(stream);
     }
 
 }

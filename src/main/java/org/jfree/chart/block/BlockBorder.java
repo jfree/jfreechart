@@ -54,11 +54,10 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.ParamChecks;
-
-import org.jfree.io.SerialUtilities;
-import org.jfree.ui.RectangleInsets;
-import org.jfree.util.PaintUtilities;
+import org.jfree.chart.util.SerialUtils;
 
 /**
  * A border for a block.  This class is immutable.
@@ -209,7 +208,7 @@ public class BlockBorder implements BlockFrame, Serializable {
         if (!this.insets.equals(that.insets)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.paint, that.paint)) {
+        if (!PaintUtils.equal(this.paint, that.paint)) {
             return false;
         }
         return true;
@@ -224,7 +223,7 @@ public class BlockBorder implements BlockFrame, Serializable {
      */
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
-        SerialUtilities.writePaint(this.paint, stream);
+        SerialUtils.writePaint(this.paint, stream);
     }
 
     /**
@@ -238,7 +237,7 @@ public class BlockBorder implements BlockFrame, Serializable {
     private void readObject(ObjectInputStream stream)
         throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
-        this.paint = SerialUtilities.readPaint(stream);
+        this.paint = SerialUtils.readPaint(stream);
     }
 
 }

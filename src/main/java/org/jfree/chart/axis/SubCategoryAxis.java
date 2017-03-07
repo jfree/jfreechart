@@ -69,12 +69,12 @@ import org.jfree.chart.event.AxisChangeEvent;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotRenderingInfo;
+import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.category.CategoryDataset;
-import org.jfree.io.SerialUtilities;
-import org.jfree.text.TextUtilities;
-import org.jfree.ui.RectangleEdge;
-import org.jfree.ui.TextAnchor;
 
 /**
  * A specialised category axis that can display sub-categories.
@@ -434,7 +434,7 @@ public class SubCategoryAxis extends CategoryAxis
      */
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
-        SerialUtilities.writePaint(this.subLabelPaint, stream);
+        SerialUtils.writePaint(this.subLabelPaint, stream);
     }
 
     /**
@@ -448,7 +448,7 @@ public class SubCategoryAxis extends CategoryAxis
     private void readObject(ObjectInputStream stream)
         throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
-        this.subLabelPaint = SerialUtilities.readPaint(stream);
+        this.subLabelPaint = SerialUtils.readPaint(stream);
     }
 
 }

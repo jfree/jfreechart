@@ -97,14 +97,14 @@ import org.jfree.chart.needle.PlumNeedle;
 import org.jfree.chart.needle.PointerNeedle;
 import org.jfree.chart.needle.ShipNeedle;
 import org.jfree.chart.needle.WindNeedle;
+import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.util.ObjectUtils;
+import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.ParamChecks;
 import org.jfree.chart.util.ResourceBundleWrapper;
+import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.general.DefaultValueDataset;
 import org.jfree.data.general.ValueDataset;
-import org.jfree.io.SerialUtilities;
-import org.jfree.ui.RectangleInsets;
-import org.jfree.util.ObjectUtilities;
-import org.jfree.util.PaintUtilities;
 
 /**
  * A specialised plot that draws a compass to indicate a direction based on the
@@ -762,24 +762,24 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
         if (this.labelType != that.labelType) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.labelFont, that.labelFont)) {
+        if (!ObjectUtils.equal(this.labelFont, that.labelFont)) {
             return false;
         }
         if (this.drawBorder != that.drawBorder) {
             return false;
         }
-        if (!PaintUtilities.equal(this.roseHighlightPaint,
+        if (!PaintUtils.equal(this.roseHighlightPaint,
                 that.roseHighlightPaint)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.rosePaint, that.rosePaint)) {
+        if (!PaintUtils.equal(this.rosePaint, that.rosePaint)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.roseCenterPaint,
+        if (!PaintUtils.equal(this.roseCenterPaint,
                 that.roseCenterPaint)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.compassFont, that.compassFont)) {
+        if (!ObjectUtils.equal(this.compassFont, that.compassFont)) {
             return false;
         }
         if (!Arrays.equals(this.seriesNeedle, that.seriesNeedle)) {
@@ -866,9 +866,9 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
      */
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
-        SerialUtilities.writePaint(this.rosePaint, stream);
-        SerialUtilities.writePaint(this.roseCenterPaint, stream);
-        SerialUtilities.writePaint(this.roseHighlightPaint, stream);
+        SerialUtils.writePaint(this.rosePaint, stream);
+        SerialUtils.writePaint(this.roseCenterPaint, stream);
+        SerialUtils.writePaint(this.roseHighlightPaint, stream);
     }
 
     /**
@@ -882,9 +882,9 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
     private void readObject(ObjectInputStream stream)
         throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
-        this.rosePaint = SerialUtilities.readPaint(stream);
-        this.roseCenterPaint = SerialUtilities.readPaint(stream);
-        this.roseHighlightPaint = SerialUtilities.readPaint(stream);
+        this.rosePaint = SerialUtils.readPaint(stream);
+        this.roseCenterPaint = SerialUtils.readPaint(stream);
+        this.roseHighlightPaint = SerialUtils.readPaint(stream);
     }
 
 }

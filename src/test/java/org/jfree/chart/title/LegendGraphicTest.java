@@ -52,10 +52,10 @@ import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 
 import org.jfree.chart.TestUtilities;
+import org.jfree.chart.ui.GradientPaintTransformType;
+import org.jfree.chart.ui.RectangleAnchor;
+import org.jfree.chart.ui.StandardGradientPaintTransformer;
 
-import org.jfree.ui.GradientPaintTransformType;
-import org.jfree.ui.RectangleAnchor;
-import org.jfree.ui.StandardGradientPaintTransformer;
 import org.junit.Test;
 
 /**

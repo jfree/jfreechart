@@ -43,9 +43,8 @@
 package org.jfree.data;
 
 import java.io.Serializable;
-
-import org.jfree.util.ObjectUtilities;
-import org.jfree.util.PublicCloneable;
+import org.jfree.chart.util.ObjectUtils;
+import org.jfree.chart.util.PublicCloneable;
 
 /**
  * A (key, object) pair.
@@ -137,11 +136,11 @@ public class KeyedObject implements Cloneable, PublicCloneable, Serializable {
             return false;
         }
         KeyedObject that = (KeyedObject) obj;
-        if (!ObjectUtilities.equal(this.key, that.key)) {
+        if (!ObjectUtils.equal(this.key, that.key)) {
             return false;
         }
 
-        if (!ObjectUtilities.equal(this.object, that.object)) {
+        if (!ObjectUtils.equal(this.object, that.object)) {
             return false;
         }
 

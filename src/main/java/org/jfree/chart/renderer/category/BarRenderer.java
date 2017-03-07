@@ -122,18 +122,18 @@ import org.jfree.chart.labels.ItemLabelPosition;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
+import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.ui.GradientPaintTransformer;
+import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.ui.StandardGradientPaintTransformer;
+import org.jfree.chart.util.ObjectUtils;
+import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.KeyedValues2DItemKey;
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
-import org.jfree.io.SerialUtilities;
-import org.jfree.text.TextUtilities;
-import org.jfree.ui.GradientPaintTransformer;
-import org.jfree.ui.RectangleEdge;
-import org.jfree.ui.StandardGradientPaintTransformer;
-import org.jfree.util.ObjectUtilities;
-import org.jfree.util.PaintUtilities;
-import org.jfree.util.PublicCloneable;
 
 /**
  * A {@link CategoryItemRenderer} that draws individual data items as bars.
@@ -1355,15 +1355,15 @@ public class BarRenderer extends AbstractCategoryItemRenderer
         if (this.minimumBarLength != that.minimumBarLength) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.gradientPaintTransformer,
+        if (!ObjectUtils.equal(this.gradientPaintTransformer,
                 that.gradientPaintTransformer)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.positiveItemLabelPositionFallback,
+        if (!ObjectUtils.equal(this.positiveItemLabelPositionFallback,
             that.positiveItemLabelPositionFallback)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.negativeItemLabelPositionFallback,
+        if (!ObjectUtils.equal(this.negativeItemLabelPositionFallback,
             that.negativeItemLabelPositionFallback)) {
             return false;
         }
@@ -1373,7 +1373,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
         if (this.shadowsVisible != that.shadowsVisible) {
             return false;
         }
-        if (!PaintUtilities.equal(this.shadowPaint, that.shadowPaint)) {
+        if (!PaintUtils.equal(this.shadowPaint, that.shadowPaint)) {
             return false;
         }
         if (this.shadowXOffset != that.shadowXOffset) {
@@ -1394,7 +1394,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      */
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
-        SerialUtilities.writePaint(this.shadowPaint, stream);
+        SerialUtils.writePaint(this.shadowPaint, stream);
     }
 
     /**
@@ -1408,7 +1408,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
     private void readObject(ObjectInputStream stream)
             throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
-        this.shadowPaint = SerialUtilities.readPaint(stream);
+        this.shadowPaint = SerialUtils.readPaint(stream);
     }
 
 }

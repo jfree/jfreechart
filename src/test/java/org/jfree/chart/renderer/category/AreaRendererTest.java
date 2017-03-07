@@ -55,8 +55,8 @@ import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.renderer.AreaRendererEndType;
+import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.category.DefaultCategoryDataset;
-import org.jfree.util.PublicCloneable;
 import org.junit.Test;
 
 /**

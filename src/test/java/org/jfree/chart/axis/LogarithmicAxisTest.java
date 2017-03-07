@@ -47,8 +47,7 @@ import static org.junit.Assert.assertFalse;
 import java.awt.geom.Rectangle2D;
 
 import org.jfree.chart.TestUtilities;
-
-import org.jfree.ui.RectangleEdge;
+import org.jfree.chart.ui.RectangleEdge;
 import org.junit.Before;
 import org.junit.Test;
 

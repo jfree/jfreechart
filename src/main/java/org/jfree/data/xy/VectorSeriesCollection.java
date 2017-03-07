@@ -47,11 +47,11 @@ package org.jfree.data.xy;
 
 import java.io.Serializable;
 import java.util.List;
+import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.general.DatasetChangeEvent;
-import org.jfree.util.ObjectUtilities;
-import org.jfree.util.PublicCloneable;
 
 /**
  * A collection of {@link VectorSeries} objects.
@@ -316,7 +316,7 @@ public class VectorSeriesCollection extends AbstractXYDataset
             return false;
         }
         VectorSeriesCollection that = (VectorSeriesCollection) obj;
-        return ObjectUtilities.equal(this.data, that.data);
+        return ObjectUtils.equal(this.data, that.data);
     }
 
     /**
@@ -330,7 +330,7 @@ public class VectorSeriesCollection extends AbstractXYDataset
     public Object clone() throws CloneNotSupportedException {
         VectorSeriesCollection clone
                 = (VectorSeriesCollection) super.clone();
-        clone.data = (List) ObjectUtilities.deepClone(this.data);
+        clone.data = (List) ObjectUtils.deepClone(this.data);
         return clone;
     }
 

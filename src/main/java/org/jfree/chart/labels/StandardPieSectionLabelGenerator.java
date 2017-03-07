@@ -56,9 +56,9 @@ import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.general.PieDataset;
-import org.jfree.util.PublicCloneable;
 
 /**
  * A standard item label generator for plots that use data from a

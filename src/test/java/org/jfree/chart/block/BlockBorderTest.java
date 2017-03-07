@@ -49,9 +49,9 @@ import java.awt.Color;
 import java.awt.GradientPaint;
 
 import org.jfree.chart.TestUtilities;
+import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.util.UnitType;
 
-import org.jfree.ui.RectangleInsets;
-import org.jfree.util.UnitType;
 import org.junit.Test;
 
 /**

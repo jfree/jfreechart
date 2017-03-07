@@ -48,9 +48,9 @@ package org.jfree.data.xy;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.general.DatasetChangeEvent;
-import org.jfree.util.PublicCloneable;
 
 /**
  * A dataset that defines a range (interval) for both the x-values and the

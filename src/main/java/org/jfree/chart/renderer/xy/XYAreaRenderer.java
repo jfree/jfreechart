@@ -113,14 +113,14 @@ import org.jfree.chart.plot.CrosshairState;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.ui.GradientPaintTransformer;
+import org.jfree.chart.ui.StandardGradientPaintTransformer;
 import org.jfree.chart.urls.XYURLGenerator;
 import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.util.ShapeUtils;
 import org.jfree.data.xy.XYDataset;
-import org.jfree.io.SerialUtilities;
-import org.jfree.ui.GradientPaintTransformer;
-import org.jfree.ui.StandardGradientPaintTransformer;
-import org.jfree.util.PublicCloneable;
-import org.jfree.util.ShapeUtilities;
 
 /**
  * Area item renderer for an {@link XYPlot}.  This class can draw (a) shapes at
@@ -568,10 +568,10 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
         if (getPlotShapes()) {
             shape = getItemShape(series, item);
             if (orientation == PlotOrientation.VERTICAL) {
-                shape = ShapeUtilities.createTranslatedShape(shape, transX1,
+                shape = ShapeUtils.createTranslatedShape(shape, transX1,
                         transY1);
             } else if (orientation == PlotOrientation.HORIZONTAL) {
-                shape = ShapeUtilities.createTranslatedShape(shape, transY1,
+                shape = ShapeUtils.createTranslatedShape(shape, transY1,
                         transX1);
             }
             g2.draw(shape);
@@ -689,7 +689,7 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
     @Override
     public Object clone() throws CloneNotSupportedException {
         XYAreaRenderer clone = (XYAreaRenderer) super.clone();
-        clone.legendArea = ShapeUtilities.clone(this.legendArea);
+        clone.legendArea = ShapeUtils.clone(this.legendArea);
         return clone;
     }
 
@@ -727,7 +727,7 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
         if (!this.gradientTransformer.equals(that.gradientTransformer)) {
             return false;
         }
-        if (!ShapeUtilities.equal(this.legendArea, that.legendArea)) {
+        if (!ShapeUtils.equal(this.legendArea, that.legendArea)) {
             return false;
         }
         return true;
@@ -759,7 +759,7 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
     private void readObject(ObjectInputStream stream)
             throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
-        this.legendArea = SerialUtilities.readShape(stream);
+        this.legendArea = SerialUtils.readShape(stream);
     }
 
     /**
@@ -771,6 +771,6 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
      */
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
-        SerialUtilities.writeShape(this.legendArea, stream);
+        SerialUtils.writeShape(this.legendArea, stream);
     }
 }

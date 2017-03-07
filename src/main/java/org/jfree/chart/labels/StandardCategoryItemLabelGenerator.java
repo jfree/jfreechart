@@ -46,9 +46,9 @@ package org.jfree.chart.labels;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.NumberFormat;
+import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.category.CategoryDataset;
-import org.jfree.util.PublicCloneable;
 
 /**
  * A standard label generator that can be used with a

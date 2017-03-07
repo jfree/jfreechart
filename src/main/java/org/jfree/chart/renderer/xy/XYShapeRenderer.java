@@ -71,13 +71,13 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.LookupPaintScale;
 import org.jfree.chart.renderer.PaintScale;
 import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.util.ShapeUtils;
 import org.jfree.data.Range;
 import org.jfree.data.general.DatasetUtilities;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYZDataset;
-import org.jfree.io.SerialUtilities;
-import org.jfree.util.PublicCloneable;
-import org.jfree.util.ShapeUtilities;
 
 /**
  * A renderer that draws shapes at (x, y) coordinates and, if the dataset
@@ -467,10 +467,10 @@ public class XYShapeRenderer extends AbstractXYItemRenderer
         } else if (pass == 1) {
             Shape shape = getItemShape(series, item);
             if (orientation == PlotOrientation.HORIZONTAL) {
-                shape = ShapeUtilities.createTranslatedShape(shape, transY,
+                shape = ShapeUtils.createTranslatedShape(shape, transY,
                         transX);
             } else if (orientation == PlotOrientation.VERTICAL) {
-                shape = ShapeUtilities.createTranslatedShape(shape, transX,
+                shape = ShapeUtils.createTranslatedShape(shape, transX,
                         transY);
             }
             hotspot = shape;
@@ -604,8 +604,8 @@ public class XYShapeRenderer extends AbstractXYItemRenderer
     private void readObject(ObjectInputStream stream)
             throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
-        this.guideLinePaint = SerialUtilities.readPaint(stream);
-        this.guideLineStroke = SerialUtilities.readStroke(stream);
+        this.guideLinePaint = SerialUtils.readPaint(stream);
+        this.guideLineStroke = SerialUtils.readStroke(stream);
     }
 
     /**
@@ -617,8 +617,8 @@ public class XYShapeRenderer extends AbstractXYItemRenderer
      */
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
-        SerialUtilities.writePaint(this.guideLinePaint, stream);
-        SerialUtilities.writeStroke(this.guideLineStroke, stream);
+        SerialUtils.writePaint(this.guideLinePaint, stream);
+        SerialUtils.writeStroke(this.guideLineStroke, stream);
     }
 
 }

@@ -49,10 +49,9 @@ import static org.junit.Assert.assertFalse;
 import java.awt.geom.Rectangle2D;
 
 import org.jfree.chart.TestUtilities;
-import org.jfree.ui.GradientPaintTransformType;
-import org.jfree.ui.StandardGradientPaintTransformer;
-
-import org.jfree.util.PublicCloneable;
+import org.jfree.chart.ui.GradientPaintTransformType;
+import org.jfree.chart.ui.StandardGradientPaintTransformer;
+import org.jfree.chart.util.PublicCloneable;
 import org.junit.Test;
 
 /**

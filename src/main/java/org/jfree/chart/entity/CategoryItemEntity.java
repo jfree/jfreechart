@@ -55,10 +55,10 @@ package org.jfree.chart.entity;
 
 import java.awt.Shape;
 import java.io.Serializable;
+import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.ParamChecks;
 
 import org.jfree.data.category.CategoryDataset;
-import org.jfree.util.ObjectUtilities;
 
 /**
  * A chart entity that represents one item within a category plot.
@@ -364,7 +364,7 @@ public class CategoryItemEntity extends ChartEntity
         if (!this.columnKey.equals(that.columnKey)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.dataset, that.dataset)) {
+        if (!ObjectUtils.equal(this.dataset, that.dataset)) {
             return false;
         }
 
@@ -375,7 +375,7 @@ public class CategoryItemEntity extends ChartEntity
         if (this.series != that.series) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.category, that.category)) {
+        if (!ObjectUtils.equal(this.category, that.category)) {
             return false;
         }
         return super.equals(obj);

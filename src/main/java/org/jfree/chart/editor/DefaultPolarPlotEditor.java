@@ -54,7 +54,7 @@ import javax.swing.JTextField;
 import org.jfree.chart.axis.NumberTickUnit;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PolarPlot;
-import org.jfree.layout.LCBLayout;
+import org.jfree.chart.ui.LCBLayout;
 
 /**
  * A panel for editing the properties of a {@link PolarPlot}.

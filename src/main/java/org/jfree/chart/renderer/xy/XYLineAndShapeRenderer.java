@@ -93,15 +93,15 @@ import org.jfree.chart.plot.CrosshairState;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.util.BooleanList;
 import org.jfree.chart.util.LineUtilities;
+import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.util.ShapeUtils;
 import org.jfree.data.xy.XYDataset;
-import org.jfree.io.SerialUtilities;
-import org.jfree.ui.RectangleEdge;
-import org.jfree.util.BooleanList;
-import org.jfree.util.ObjectUtilities;
-import org.jfree.util.PublicCloneable;
-import org.jfree.util.ShapeUtilities;
 
 /**
  * A renderer that connects data points with lines and/or draws shapes at each
@@ -1133,11 +1133,11 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
         if (getItemShapeVisible(series, item)) {
             Shape shape = getItemShape(series, item);
             if (orientation == PlotOrientation.HORIZONTAL) {
-                shape = ShapeUtilities.createTranslatedShape(shape, transY1,
+                shape = ShapeUtils.createTranslatedShape(shape, transY1,
                         transX1);
             }
             else if (orientation == PlotOrientation.VERTICAL) {
-                shape = ShapeUtilities.createTranslatedShape(shape, transX1,
+                shape = ShapeUtils.createTranslatedShape(shape, transX1,
                         transY1);
             }
             entityArea = shape;
@@ -1267,7 +1267,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
         clone.seriesLinesVisible
                 = (BooleanList) this.seriesLinesVisible.clone();
         if (this.legendLine != null) {
-            clone.legendLine = ShapeUtilities.clone(this.legendLine);
+            clone.legendLine = ShapeUtils.clone(this.legendLine);
         }
         clone.seriesShapesVisible
                 = (BooleanList) this.seriesShapesVisible.clone();
@@ -1295,10 +1295,10 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
             return false;
         }
         XYLineAndShapeRenderer that = (XYLineAndShapeRenderer) obj;
-        if (!ObjectUtilities.equal(this.linesVisible, that.linesVisible)) {
+        if (!ObjectUtils.equal(this.linesVisible, that.linesVisible)) {
             return false;
         }
-        if (!ObjectUtilities.equal(
+        if (!ObjectUtils.equal(
             this.seriesLinesVisible, that.seriesLinesVisible)
         ) {
             return false;
@@ -1306,13 +1306,13 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
         if (this.baseLinesVisible != that.baseLinesVisible) {
             return false;
         }
-        if (!ShapeUtilities.equal(this.legendLine, that.legendLine)) {
+        if (!ShapeUtils.equal(this.legendLine, that.legendLine)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.shapesVisible, that.shapesVisible)) {
+        if (!ObjectUtils.equal(this.shapesVisible, that.shapesVisible)) {
             return false;
         }
-        if (!ObjectUtilities.equal(
+        if (!ObjectUtils.equal(
             this.seriesShapesVisible, that.seriesShapesVisible)
         ) {
             return false;
@@ -1320,10 +1320,10 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
         if (this.baseShapesVisible != that.baseShapesVisible) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.shapesFilled, that.shapesFilled)) {
+        if (!ObjectUtils.equal(this.shapesFilled, that.shapesFilled)) {
             return false;
         }
-        if (!ObjectUtilities.equal(
+        if (!ObjectUtils.equal(
             this.seriesShapesFilled, that.seriesShapesFilled)
         ) {
             return false;
@@ -1357,7 +1357,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     private void readObject(ObjectInputStream stream)
             throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
-        this.legendLine = SerialUtilities.readShape(stream);
+        this.legendLine = SerialUtils.readShape(stream);
     }
 
     /**
@@ -1369,7 +1369,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
      */
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
-        SerialUtilities.writeShape(this.legendLine, stream);
+        SerialUtils.writeShape(this.legendLine, stream);
     }
 
 }

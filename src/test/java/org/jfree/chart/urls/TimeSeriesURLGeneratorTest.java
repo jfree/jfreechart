@@ -48,9 +48,9 @@ import static org.junit.Assert.assertTrue;
 import java.text.SimpleDateFormat;
 
 import org.jfree.chart.TestUtilities;
+import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.xy.DefaultXYDataset;
-import org.jfree.util.PublicCloneable;
 import org.junit.Test;
 
 /**

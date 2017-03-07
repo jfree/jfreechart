@@ -49,8 +49,8 @@ import java.awt.Color;
 import java.awt.geom.Rectangle2D;
 
 import org.jfree.chart.TestUtilities;
+import org.jfree.chart.ui.RectangleInsets;
 
-import org.jfree.ui.RectangleInsets;
 import org.junit.Test;
 
 /**

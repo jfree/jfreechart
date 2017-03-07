@@ -48,7 +48,7 @@ import java.awt.Paint;
 import java.io.Serializable;
 
 import org.jfree.chart.HashUtilities;
-import org.jfree.util.PublicCloneable;
+import org.jfree.chart.util.PublicCloneable;
 
 /**
  * A paint scale that returns shades of gray.

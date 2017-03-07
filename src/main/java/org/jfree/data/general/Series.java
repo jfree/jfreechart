@@ -64,9 +64,9 @@ import java.beans.VetoableChangeSupport;
 import java.io.Serializable;
 
 import javax.swing.event.EventListenerList;
+import org.jfree.chart.util.ObjectUtils;
 
 import org.jfree.chart.util.ParamChecks;
-import org.jfree.util.ObjectUtilities;
 
 /**
  * Base class representing a data series.  Subclasses are left to implement the
@@ -282,7 +282,7 @@ public abstract class Series implements Cloneable, Serializable {
         if (!getKey().equals(that.getKey())) {
             return false;
         }
-        if (!ObjectUtilities.equal(getDescription(), that.getDescription())) {
+        if (!ObjectUtils.equal(getDescription(), that.getDescription())) {
             return false;
         }
         return true;

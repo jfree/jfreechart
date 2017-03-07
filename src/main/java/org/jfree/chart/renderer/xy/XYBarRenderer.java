@@ -130,18 +130,18 @@ import org.jfree.chart.plot.CrosshairState;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.ui.GradientPaintTransformer;
+import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.ui.StandardGradientPaintTransformer;
+import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.util.ShapeUtils;
 import org.jfree.data.Range;
 import org.jfree.data.xy.IntervalXYDataset;
 import org.jfree.data.xy.XYDataset;
-import org.jfree.io.SerialUtilities;
-import org.jfree.text.TextUtilities;
-import org.jfree.ui.GradientPaintTransformer;
-import org.jfree.ui.RectangleEdge;
-import org.jfree.ui.StandardGradientPaintTransformer;
-import org.jfree.util.ObjectUtilities;
-import org.jfree.util.PublicCloneable;
-import org.jfree.util.ShapeUtilities;
 
 /**
  * A renderer that draws bars on an {@link XYPlot} (requires an
@@ -1202,9 +1202,9 @@ public class XYBarRenderer extends AbstractXYItemRenderer
         XYBarRenderer result = (XYBarRenderer) super.clone();
         if (this.gradientPaintTransformer != null) {
             result.gradientPaintTransformer = (GradientPaintTransformer)
-                ObjectUtilities.clone(this.gradientPaintTransformer);
+                ObjectUtils.clone(this.gradientPaintTransformer);
         }
-        result.legendBar = ShapeUtilities.clone(this.legendBar);
+        result.legendBar = ShapeUtils.clone(this.legendBar);
         return result;
     }
 
@@ -1236,18 +1236,18 @@ public class XYBarRenderer extends AbstractXYItemRenderer
         if (this.useYInterval != that.useYInterval) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.gradientPaintTransformer,
+        if (!ObjectUtils.equal(this.gradientPaintTransformer,
                 that.gradientPaintTransformer)) {
             return false;
         }
-        if (!ShapeUtilities.equal(this.legendBar, that.legendBar)) {
+        if (!ShapeUtils.equal(this.legendBar, that.legendBar)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.positiveItemLabelPositionFallback,
+        if (!ObjectUtils.equal(this.positiveItemLabelPositionFallback,
                 that.positiveItemLabelPositionFallback)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.negativeItemLabelPositionFallback,
+        if (!ObjectUtils.equal(this.negativeItemLabelPositionFallback,
                 that.negativeItemLabelPositionFallback)) {
             return false;
         }
@@ -1280,7 +1280,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
     private void readObject(ObjectInputStream stream)
             throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
-        this.legendBar = SerialUtilities.readShape(stream);
+        this.legendBar = SerialUtils.readShape(stream);
     }
 
     /**
@@ -1292,7 +1292,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      */
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
-        SerialUtilities.writeShape(this.legendBar, stream);
+        SerialUtils.writeShape(this.legendBar, stream);
     }
 
 }

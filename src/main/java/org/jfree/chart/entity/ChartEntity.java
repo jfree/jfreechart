@@ -84,10 +84,10 @@ import java.io.Serializable;
 import org.jfree.chart.HashUtilities;
 import org.jfree.chart.imagemap.ToolTipTagFragmentGenerator;
 import org.jfree.chart.imagemap.URLTagFragmentGenerator;
+import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.ParamChecks;
-import org.jfree.io.SerialUtilities;
-import org.jfree.util.ObjectUtilities;
-import org.jfree.util.PublicCloneable;
+import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.util.SerialUtils;
 
 /**
  * A class that captures information about some component of a chart (a bar,
@@ -372,10 +372,10 @@ public class ChartEntity implements Cloneable, PublicCloneable, Serializable {
         if (!this.area.equals(that.area)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.toolTipText, that.toolTipText)) {
+        if (!ObjectUtils.equal(this.toolTipText, that.toolTipText)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.urlText, that.urlText)) {
+        if (!ObjectUtils.equal(this.urlText, that.urlText)) {
             return false;
         }
         return true;
@@ -416,7 +416,7 @@ public class ChartEntity implements Cloneable, PublicCloneable, Serializable {
      */
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
-        SerialUtilities.writeShape(this.area, stream);
+        SerialUtils.writeShape(this.area, stream);
      }
 
     /**
@@ -430,7 +430,7 @@ public class ChartEntity implements Cloneable, PublicCloneable, Serializable {
     private void readObject(ObjectInputStream stream)
         throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
-        this.area = SerialUtilities.readShape(stream);
+        this.area = SerialUtils.readShape(stream);
     }
 
 }

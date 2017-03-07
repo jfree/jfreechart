@@ -110,10 +110,10 @@ import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.urls.XYURLGenerator;
 import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.util.ShapeUtils;
 import org.jfree.data.xy.XYDataset;
-import org.jfree.io.SerialUtilities;
-import org.jfree.util.PublicCloneable;
-import org.jfree.util.ShapeUtilities;
 
 /**
  * Area item renderer for an {@link XYPlot}. The example shown here is
@@ -432,7 +432,7 @@ public class XYAreaRenderer2 extends AbstractXYItemRenderer
         if (this.showOutline != that.showOutline) {
             return false;
         }
-        if (!ShapeUtilities.equal(this.legendArea, that.legendArea)) {
+        if (!ShapeUtils.equal(this.legendArea, that.legendArea)) {
             return false;
         }
         return super.equals(obj);
@@ -448,7 +448,7 @@ public class XYAreaRenderer2 extends AbstractXYItemRenderer
     @Override
     public Object clone() throws CloneNotSupportedException {
         XYAreaRenderer2 clone = (XYAreaRenderer2) super.clone();
-        clone.legendArea = ShapeUtilities.clone(this.legendArea);
+        clone.legendArea = ShapeUtils.clone(this.legendArea);
         return clone;
     }
 
@@ -463,7 +463,7 @@ public class XYAreaRenderer2 extends AbstractXYItemRenderer
     private void readObject(ObjectInputStream stream)
             throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
-        this.legendArea = SerialUtilities.readShape(stream);
+        this.legendArea = SerialUtils.readShape(stream);
     }
 
     /**
@@ -475,7 +475,7 @@ public class XYAreaRenderer2 extends AbstractXYItemRenderer
      */
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
-        SerialUtilities.writeShape(this.legendArea, stream);
+        SerialUtils.writeShape(this.legendArea, stream);
     }
 
 }

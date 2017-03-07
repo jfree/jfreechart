@@ -44,10 +44,10 @@
 package org.jfree.chart.axis;
 
 import java.util.Date;
+import org.jfree.chart.ui.TextAnchor;
+import org.jfree.chart.util.ObjectUtils;
 
 import org.jfree.chart.util.ParamChecks;
-import org.jfree.ui.TextAnchor;
-import org.jfree.util.ObjectUtilities;
 
 /**
  * A tick used by the {@link DateAxis} class.
@@ -120,7 +120,7 @@ public class DateTick extends ValueTick {
             return false;
         }
         DateTick that = (DateTick) obj;
-        if (!ObjectUtilities.equal(this.date, that.date)) {
+        if (!ObjectUtils.equal(this.date, that.date)) {
             return false;
         }
         return super.equals(obj);

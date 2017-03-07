@@ -50,8 +50,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.jfree.chart.plot.MultiplePiePlot;
+import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.general.PieDataset;
-import org.jfree.util.PublicCloneable;
 
 /**
  * A custom URL generator for pie charts.

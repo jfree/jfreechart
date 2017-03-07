@@ -104,20 +104,20 @@ import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.labels.CategoryItemLabelGenerator;
 import org.jfree.chart.labels.CategoryToolTipGenerator;
 import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
+import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.urls.CategoryURLGenerator;
+import org.jfree.chart.util.ObjectUtils;
+import org.jfree.chart.util.PaintList;
+import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Rotation;
+import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.util.ShapeUtils;
+import org.jfree.chart.util.StrokeList;
+import org.jfree.chart.util.TableOrder;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.DatasetUtilities;
-import org.jfree.io.SerialUtilities;
-import org.jfree.ui.RectangleInsets;
-import org.jfree.util.ObjectUtilities;
-import org.jfree.util.PaintList;
-import org.jfree.util.PaintUtilities;
-import org.jfree.util.Rotation;
-import org.jfree.util.ShapeUtilities;
-import org.jfree.util.StrokeList;
-import org.jfree.util.TableOrder;
 
 /**
  * A plot that displays data from a {@link CategoryDataset} in the form of a
@@ -1516,36 +1516,36 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
         if (this.axisLabelGap != that.axisLabelGap) {
             return false;
         }
-        if (!PaintUtilities.equal(this.axisLinePaint, that.axisLinePaint)) {
+        if (!PaintUtils.equal(this.axisLinePaint, that.axisLinePaint)) {
             return false;
         }
         if (!this.axisLineStroke.equals(that.axisLineStroke)) {
             return false;
         }
-        if (!ShapeUtilities.equal(this.legendItemShape, that.legendItemShape)) {
+        if (!ShapeUtils.equal(this.legendItemShape, that.legendItemShape)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.seriesPaint, that.seriesPaint)) {
+        if (!PaintUtils.equal(this.seriesPaint, that.seriesPaint)) {
             return false;
         }
         if (!this.seriesPaintList.equals(that.seriesPaintList)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.baseSeriesPaint, that.baseSeriesPaint)) {
+        if (!PaintUtils.equal(this.baseSeriesPaint, that.baseSeriesPaint)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.seriesOutlinePaint,
+        if (!PaintUtils.equal(this.seriesOutlinePaint,
                 that.seriesOutlinePaint)) {
             return false;
         }
         if (!this.seriesOutlinePaintList.equals(that.seriesOutlinePaintList)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.baseSeriesOutlinePaint,
+        if (!PaintUtils.equal(this.baseSeriesOutlinePaint,
                 that.baseSeriesOutlinePaint)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.seriesOutlineStroke,
+        if (!ObjectUtils.equal(this.seriesOutlineStroke,
                 that.seriesOutlineStroke)) {
             return false;
         }
@@ -1560,17 +1560,17 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
         if (!this.labelFont.equals(that.labelFont)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.labelPaint, that.labelPaint)) {
+        if (!PaintUtils.equal(this.labelPaint, that.labelPaint)) {
             return false;
         }
         if (!this.labelGenerator.equals(that.labelGenerator)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.toolTipGenerator,
+        if (!ObjectUtils.equal(this.toolTipGenerator,
                 that.toolTipGenerator)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.urlGenerator,
+        if (!ObjectUtils.equal(this.urlGenerator,
                 that.urlGenerator)) {
             return false;
         }
@@ -1588,7 +1588,7 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
     @Override
     public Object clone() throws CloneNotSupportedException {
         SpiderWebPlot clone = (SpiderWebPlot) super.clone();
-        clone.legendItemShape = ShapeUtilities.clone(this.legendItemShape);
+        clone.legendItemShape = ShapeUtils.clone(this.legendItemShape);
         clone.seriesPaintList = (PaintList) this.seriesPaintList.clone();
         clone.seriesOutlinePaintList
                 = (PaintList) this.seriesOutlinePaintList.clone();
@@ -1607,16 +1607,16 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
 
-        SerialUtilities.writeShape(this.legendItemShape, stream);
-        SerialUtilities.writePaint(this.seriesPaint, stream);
-        SerialUtilities.writePaint(this.baseSeriesPaint, stream);
-        SerialUtilities.writePaint(this.seriesOutlinePaint, stream);
-        SerialUtilities.writePaint(this.baseSeriesOutlinePaint, stream);
-        SerialUtilities.writeStroke(this.seriesOutlineStroke, stream);
-        SerialUtilities.writeStroke(this.baseSeriesOutlineStroke, stream);
-        SerialUtilities.writePaint(this.labelPaint, stream);
-        SerialUtilities.writePaint(this.axisLinePaint, stream);
-        SerialUtilities.writeStroke(this.axisLineStroke, stream);
+        SerialUtils.writeShape(this.legendItemShape, stream);
+        SerialUtils.writePaint(this.seriesPaint, stream);
+        SerialUtils.writePaint(this.baseSeriesPaint, stream);
+        SerialUtils.writePaint(this.seriesOutlinePaint, stream);
+        SerialUtils.writePaint(this.baseSeriesOutlinePaint, stream);
+        SerialUtils.writeStroke(this.seriesOutlineStroke, stream);
+        SerialUtils.writeStroke(this.baseSeriesOutlineStroke, stream);
+        SerialUtils.writePaint(this.labelPaint, stream);
+        SerialUtils.writePaint(this.axisLinePaint, stream);
+        SerialUtils.writeStroke(this.axisLineStroke, stream);
     }
 
     /**
@@ -1631,16 +1631,16 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
             ClassNotFoundException {
         stream.defaultReadObject();
 
-        this.legendItemShape = SerialUtilities.readShape(stream);
-        this.seriesPaint = SerialUtilities.readPaint(stream);
-        this.baseSeriesPaint = SerialUtilities.readPaint(stream);
-        this.seriesOutlinePaint = SerialUtilities.readPaint(stream);
-        this.baseSeriesOutlinePaint = SerialUtilities.readPaint(stream);
-        this.seriesOutlineStroke = SerialUtilities.readStroke(stream);
-        this.baseSeriesOutlineStroke = SerialUtilities.readStroke(stream);
-        this.labelPaint = SerialUtilities.readPaint(stream);
-        this.axisLinePaint = SerialUtilities.readPaint(stream);
-        this.axisLineStroke = SerialUtilities.readStroke(stream);
+        this.legendItemShape = SerialUtils.readShape(stream);
+        this.seriesPaint = SerialUtils.readPaint(stream);
+        this.baseSeriesPaint = SerialUtils.readPaint(stream);
+        this.seriesOutlinePaint = SerialUtils.readPaint(stream);
+        this.baseSeriesOutlinePaint = SerialUtils.readPaint(stream);
+        this.seriesOutlineStroke = SerialUtils.readStroke(stream);
+        this.baseSeriesOutlineStroke = SerialUtils.readStroke(stream);
+        this.labelPaint = SerialUtils.readPaint(stream);
+        this.axisLinePaint = SerialUtils.readPaint(stream);
+        this.axisLineStroke = SerialUtils.readStroke(stream);
         if (this.dataset != null) {
             this.dataset.addChangeListener(this);
         }

@@ -50,11 +50,11 @@ import static org.junit.Assert.assertNull;
 import java.util.List;
 
 import org.jfree.chart.TestUtilities;
+import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
-import org.jfree.util.PublicCloneable;
 import org.junit.Test;
 
 /**

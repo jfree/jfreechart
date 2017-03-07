@@ -62,10 +62,9 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.ParamChecks;
-
-import org.jfree.util.ObjectUtilities;
-import org.jfree.util.PublicCloneable;
+import org.jfree.chart.util.PublicCloneable;
 
 /**
  * A data structure that stores zero, one or many values, where each value
@@ -577,7 +576,7 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
         clone.rowKeys = new java.util.ArrayList(this.rowKeys);
 
         // but the row data requires a deep copy
-        clone.rows = (List) ObjectUtilities.deepClone(this.rows);
+        clone.rows = (List) ObjectUtils.deepClone(this.rows);
         return clone;
     }
 

@@ -44,9 +44,9 @@
 
 package org.jfree.chart.block;
 
+import org.jfree.chart.ui.Size2D;
 import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.Range;
-import org.jfree.ui.Size2D;
 
 /**
  * A description of a constraint for resizing a rectangle.  Constraints are

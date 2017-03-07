@@ -75,9 +75,9 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.urls.XYURLGenerator;
+import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.util.ShapeUtils;
 import org.jfree.data.xy.XYDataset;
-import org.jfree.util.PublicCloneable;
-import org.jfree.util.ShapeUtilities;
 
 /**
  * A step chart renderer that fills the area between the step and the x-axis.
@@ -495,11 +495,11 @@ public class XYStepAreaRenderer extends AbstractXYItemRenderer
             if (getShapesVisible()) {
                 shape = getItemShape(series, item);
                 if (orientation == PlotOrientation.VERTICAL) {
-                    shape = ShapeUtilities.createTranslatedShape(shape,
+                    shape = ShapeUtils.createTranslatedShape(shape,
                             transX1, transY1);
                 }
                 else if (orientation == PlotOrientation.HORIZONTAL) {
-                    shape = ShapeUtilities.createTranslatedShape(shape,
+                    shape = ShapeUtils.createTranslatedShape(shape,
                             transY1, transX1);
                 }
                 if (isShapesFilled()) {

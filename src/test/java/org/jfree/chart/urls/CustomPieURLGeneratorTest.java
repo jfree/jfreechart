@@ -49,8 +49,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.jfree.chart.TestUtilities;
+import org.jfree.chart.util.PublicCloneable;
 
-import org.jfree.util.PublicCloneable;
 import org.junit.Test;
 
 /**

@@ -52,11 +52,11 @@ import java.text.NumberFormat;
 
 import org.jfree.chart.HashUtilities;
 import org.jfree.chart.renderer.xy.XYBubbleRenderer;
+import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYZDataset;
-import org.jfree.util.ObjectUtilities;
-import org.jfree.util.PublicCloneable;
 
 /**
  * An item label generator defined for use with the {@link XYBubbleRenderer}
@@ -253,10 +253,10 @@ public class BubbleXYItemLabelGenerator extends AbstractXYItemLabelGenerator
             return false;
         }
         BubbleXYItemLabelGenerator that = (BubbleXYItemLabelGenerator) obj;
-        if (!ObjectUtilities.equal(this.zFormat, that.zFormat)) {
+        if (!ObjectUtils.equal(this.zFormat, that.zFormat)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.zDateFormat, that.zDateFormat)) {
+        if (!ObjectUtils.equal(this.zDateFormat, that.zDateFormat)) {
             return false;
         }
         return true;

@@ -44,12 +44,12 @@
 package org.jfree.chart.axis;
 
 import java.io.Serializable;
+import org.jfree.chart.text.TextBlockAnchor;
+import org.jfree.chart.ui.RectangleAnchor;
+import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.util.ParamChecks;
 
-import org.jfree.text.TextBlockAnchor;
-import org.jfree.ui.RectangleAnchor;
-import org.jfree.ui.RectangleEdge;
-import org.jfree.ui.TextAnchor;
 
 /**
  * Records the label positions for a category axis.  Instances of this class

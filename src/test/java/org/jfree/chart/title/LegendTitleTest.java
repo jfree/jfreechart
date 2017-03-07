@@ -53,9 +53,9 @@ import java.awt.geom.Rectangle2D;
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.ui.RectangleAnchor;
-import org.jfree.ui.RectangleEdge;
-import org.jfree.util.SortOrder;
+import org.jfree.chart.ui.RectangleAnchor;
+import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.util.SortOrder;
 import org.junit.Test;
 
 /**

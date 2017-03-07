@@ -48,9 +48,8 @@
 package org.jfree.data.xy;
 
 import java.io.Serializable;
+import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.ParamChecks;
-
-import org.jfree.util.ObjectUtilities;
 
 /**
  * Represents one (x, y) data item for an {@link XYSeries}.  Note that
@@ -244,7 +243,7 @@ public class XYDataItem implements Cloneable, Comparable, Serializable {
         if (!this.x.equals(that.x)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.y, that.y)) {
+        if (!ObjectUtils.equal(this.y, that.y)) {
             return false;
         }
         return true;

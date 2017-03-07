@@ -43,7 +43,7 @@ package org.jfree.chart.axis;
 import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import org.jfree.util.ObjectUtilities;
+import org.jfree.chart.util.ObjectUtils;
 
 /**
  * A tick unit source implementation that returns NumberTickUnit instances 
@@ -226,7 +226,7 @@ public class NumberTickUnitSource implements TickUnitSource, Serializable {
         if (this.integers != that.integers) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.formatter, that.formatter)) {
+        if (!ObjectUtils.equal(this.formatter, that.formatter)) {
             return false;
         }
         if (this.power != that.power) {

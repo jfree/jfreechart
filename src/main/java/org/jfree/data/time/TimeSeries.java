@@ -101,13 +101,13 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.TimeZone;
+import org.jfree.chart.util.ObjectUtils;
 
 import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.Range;
 import org.jfree.data.general.Series;
 import org.jfree.data.general.SeriesChangeEvent;
 import org.jfree.data.general.SeriesException;
-import org.jfree.util.ObjectUtilities;
 
 /**
  * Represents a sequence of zero or more data items in the form (period, value)
@@ -1119,7 +1119,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
     @Override
     public Object clone() throws CloneNotSupportedException {
         TimeSeries clone = (TimeSeries) super.clone();
-        clone.data = (List) ObjectUtilities.deepClone(this.data);
+        clone.data = (List) ObjectUtils.deepClone(this.data);
         return clone;
     }
 
@@ -1225,15 +1225,15 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
             return false;
         }
         TimeSeries that = (TimeSeries) obj;
-        if (!ObjectUtilities.equal(getDomainDescription(),
+        if (!ObjectUtils.equal(getDomainDescription(),
                 that.getDomainDescription())) {
             return false;
         }
-        if (!ObjectUtilities.equal(getRangeDescription(),
+        if (!ObjectUtils.equal(getRangeDescription(),
                 that.getRangeDescription())) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.timePeriodClass,
+        if (!ObjectUtils.equal(this.timePeriodClass,
                 that.timePeriodClass)) {
             return false;
         }
@@ -1247,7 +1247,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
         if (count != that.getItemCount()) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.data, that.data)) {
+        if (!ObjectUtils.equal(this.data, that.data)) {
             return false;
         }
         return super.equals(obj);

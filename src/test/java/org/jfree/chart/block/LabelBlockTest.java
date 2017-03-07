@@ -51,9 +51,9 @@ import java.awt.Font;
 import java.awt.GradientPaint;
 
 import org.jfree.chart.TestUtilities;
+import org.jfree.chart.text.TextBlockAnchor;
+import org.jfree.chart.ui.RectangleAnchor;
 
-import org.jfree.text.TextBlockAnchor;
-import org.jfree.ui.RectangleAnchor;
 import org.junit.Test;
 
 /**

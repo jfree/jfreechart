@@ -47,11 +47,10 @@
 package org.jfree.chart.axis;
 
 import java.io.Serializable;
+import org.jfree.chart.text.TextBlockAnchor;
+import org.jfree.chart.ui.RectangleAnchor;
+import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.util.ParamChecks;
-
-import org.jfree.text.TextBlockAnchor;
-import org.jfree.ui.RectangleAnchor;
-import org.jfree.ui.TextAnchor;
 
 /**
  * The attributes that control the position of the labels for the categories on

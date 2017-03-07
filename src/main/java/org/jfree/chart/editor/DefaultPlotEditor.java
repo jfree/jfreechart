@@ -77,13 +77,12 @@ import org.jfree.chart.renderer.category.CategoryItemRenderer;
 import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.chart.renderer.xy.StandardXYItemRenderer;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
+import org.jfree.chart.ui.LCBLayout;
+import org.jfree.chart.ui.PaintSample;
+import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.ui.StrokeChooserPanel;
+import org.jfree.chart.ui.StrokeSample;
 import org.jfree.chart.util.ResourceBundleWrapper;
-import org.jfree.layout.LCBLayout;
-import org.jfree.ui.PaintSample;
-import org.jfree.ui.RectangleInsets;
-import org.jfree.ui.StrokeChooserPanel;
-import org.jfree.ui.StrokeSample;
-import org.jfree.util.BooleanUtilities;
 
 /**
  * A panel for editing the properties of a {@link Plot}.
@@ -194,19 +193,16 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
             CategoryItemRenderer renderer = ((CategoryPlot) plot).getRenderer();
             if (renderer instanceof LineAndShapeRenderer) {
                 LineAndShapeRenderer r = (LineAndShapeRenderer) renderer;
-                this.drawLines = BooleanUtilities.valueOf(
-                        r.getBaseLinesVisible());
-                this.drawShapes = BooleanUtilities.valueOf(
-                        r.getBaseShapesVisible());
+                this.drawLines = Boolean.valueOf(r.getBaseLinesVisible());
+                this.drawShapes = Boolean.valueOf(r.getBaseShapesVisible());
             }
         }
         else if (plot instanceof XYPlot) {
             XYItemRenderer renderer = ((XYPlot) plot).getRenderer();
             if (renderer instanceof StandardXYItemRenderer) {
                 StandardXYItemRenderer r = (StandardXYItemRenderer) renderer;
-                this.drawLines = BooleanUtilities.valueOf(r.getPlotLines());
-                this.drawShapes = BooleanUtilities.valueOf(
-                        r.getBaseShapesVisible());
+                this.drawLines = Boolean.valueOf(r.getPlotLines());
+                this.drawShapes = Boolean.valueOf(r.getBaseShapesVisible());
             }
         }
 
@@ -548,8 +544,7 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
      * <tt>StandardXYItemRenderer</tt>s.
      */
     private void attemptDrawLinesSelection() {
-        this.drawLines = BooleanUtilities.valueOf(
-                this.drawLinesCheckBox.isSelected());
+        this.drawLines = Boolean.valueOf(this.drawLinesCheckBox.isSelected());
     }
 
     /**
@@ -557,8 +552,7 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
      * by <tt>LineAndShapeRenderer</tt>s and <tt>StandardXYItemRenderer</tt>s.
      */
     private void attemptDrawShapesSelection() {
-        this.drawShapes = BooleanUtilities.valueOf(
-                this.drawShapesCheckBox.isSelected());
+        this.drawShapes = Boolean.valueOf(this.drawShapesCheckBox.isSelected());
     }
 
     /**

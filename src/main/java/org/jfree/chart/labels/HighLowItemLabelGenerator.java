@@ -58,9 +58,9 @@ import java.text.NumberFormat;
 import java.util.Date;
 
 import org.jfree.chart.HashUtilities;
+import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.xy.OHLCDataset;
 import org.jfree.data.xy.XYDataset;
-import org.jfree.util.PublicCloneable;
 
 /**
  * A standard item label generator for plots that use data from a 

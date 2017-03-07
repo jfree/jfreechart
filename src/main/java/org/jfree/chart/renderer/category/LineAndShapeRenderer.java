@@ -109,12 +109,11 @@ import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.util.BooleanList;
+import org.jfree.chart.util.ObjectUtils;
+import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.util.ShapeUtils;
 import org.jfree.data.category.CategoryDataset;
-import org.jfree.util.BooleanList;
-import org.jfree.util.BooleanUtilities;
-import org.jfree.util.ObjectUtilities;
-import org.jfree.util.PublicCloneable;
-import org.jfree.util.ShapeUtilities;
 
 /**
  * A renderer that draws shapes for each data item, and lines between data
@@ -315,7 +314,7 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
      *     use the per-series and base (default) settings).
      */
     public void setLinesVisible(boolean visible) {
-        setLinesVisible(BooleanUtilities.valueOf(visible));
+        setLinesVisible(Boolean.valueOf(visible));
     }
 
     /**
@@ -356,7 +355,7 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
      * @see #getSeriesLinesVisible(int)
      */
     public void setSeriesLinesVisible(int series, boolean visible) {
-        setSeriesLinesVisible(series, BooleanUtilities.valueOf(visible));
+        setSeriesLinesVisible(series, Boolean.valueOf(visible));
     }
 
     /**
@@ -450,7 +449,7 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
      *     use the per-series and base (default) settings).
      */
     public void setShapesVisible(boolean visible) {
-        setShapesVisible(BooleanUtilities.valueOf(visible));
+        setShapesVisible(Boolean.valueOf(visible));
     }
 
     /**
@@ -477,7 +476,7 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
      * @see #getSeriesShapesVisible(int)
      */
     public void setSeriesShapesVisible(int series, boolean visible) {
-        setSeriesShapesVisible(series, BooleanUtilities.valueOf(visible));
+        setSeriesShapesVisible(series, Boolean.valueOf(visible));
     }
 
     /**
@@ -692,7 +691,7 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
      */
     public void setSeriesShapesFilled(int series, boolean filled) {
         // delegate
-        setSeriesShapesFilled(series, BooleanUtilities.valueOf(filled));
+        setSeriesShapesFilled(series, Boolean.valueOf(filled));
     }
 
     /**
@@ -983,10 +982,10 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
         if (pass == 1) {
             Shape shape = getItemShape(row, column);
             if (orientation == PlotOrientation.HORIZONTAL) {
-                shape = ShapeUtilities.createTranslatedShape(shape, y1, x1);
+                shape = ShapeUtils.createTranslatedShape(shape, y1, x1);
             }
             else if (orientation == PlotOrientation.VERTICAL) {
-                shape = ShapeUtilities.createTranslatedShape(shape, x1, y1);
+                shape = ShapeUtils.createTranslatedShape(shape, x1, y1);
             }
 
             if (getItemShapeVisible(row, column)) {
@@ -1059,27 +1058,27 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
         if (this.baseLinesVisible != that.baseLinesVisible) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.seriesLinesVisible,
+        if (!ObjectUtils.equal(this.seriesLinesVisible,
                 that.seriesLinesVisible)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.linesVisible, that.linesVisible)) {
+        if (!ObjectUtils.equal(this.linesVisible, that.linesVisible)) {
             return false;
         }
         if (this.baseShapesVisible != that.baseShapesVisible) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.seriesShapesVisible,
+        if (!ObjectUtils.equal(this.seriesShapesVisible,
                 that.seriesShapesVisible)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.shapesVisible, that.shapesVisible)) {
+        if (!ObjectUtils.equal(this.shapesVisible, that.shapesVisible)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.shapesFilled, that.shapesFilled)) {
+        if (!ObjectUtils.equal(this.shapesFilled, that.shapesFilled)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.seriesShapesFilled,
+        if (!ObjectUtils.equal(this.seriesShapesFilled,
                 that.seriesShapesFilled)) {
             return false;
         }

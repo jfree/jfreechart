@@ -49,7 +49,7 @@ import static org.junit.Assert.assertFalse;
 import org.jfree.chart.TestUtilities;
 
 import org.jfree.chart.axis.CategoryAnchor;
-import org.jfree.util.PublicCloneable;
+import org.jfree.chart.util.PublicCloneable;
 import org.junit.Test;
 
 /**

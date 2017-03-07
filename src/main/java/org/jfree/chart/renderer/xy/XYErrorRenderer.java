@@ -58,13 +58,13 @@ import org.jfree.chart.plot.CrosshairState;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.util.ObjectUtils;
+import org.jfree.chart.util.PaintUtils;
+import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.Range;
 import org.jfree.data.xy.IntervalXYDataset;
 import org.jfree.data.xy.XYDataset;
-import org.jfree.io.SerialUtilities;
-import org.jfree.ui.RectangleEdge;
-import org.jfree.util.ObjectUtilities;
-import org.jfree.util.PaintUtilities;
 
 /**
  * A line and shape renderer that can also display x and/or y-error values.
@@ -420,10 +420,10 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
         if (this.capLength != that.capLength) {
             return false;
         }
-        if (!PaintUtilities.equal(this.errorPaint, that.errorPaint)) {
+        if (!PaintUtils.equal(this.errorPaint, that.errorPaint)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.errorStroke, that.errorStroke)) {
+        if (!ObjectUtils.equal(this.errorStroke, that.errorStroke)) {
             return false;
         }
         return super.equals(obj);
@@ -440,8 +440,8 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
     private void readObject(ObjectInputStream stream)
             throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
-        this.errorPaint = SerialUtilities.readPaint(stream);
-        this.errorStroke = SerialUtilities.readStroke(stream);
+        this.errorPaint = SerialUtils.readPaint(stream);
+        this.errorStroke = SerialUtils.readStroke(stream);
     }
 
     /**
@@ -453,8 +453,8 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
      */
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
-        SerialUtilities.writePaint(this.errorPaint, stream);
-        SerialUtilities.writeStroke(this.errorStroke, stream);
+        SerialUtils.writePaint(this.errorPaint, stream);
+        SerialUtils.writeStroke(this.errorStroke, stream);
     }
 
 }

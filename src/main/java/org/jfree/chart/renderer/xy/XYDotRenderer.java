@@ -70,12 +70,12 @@ import org.jfree.chart.plot.CrosshairState;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.util.ShapeUtils;
 import org.jfree.data.xy.XYDataset;
-import org.jfree.io.SerialUtilities;
-import org.jfree.ui.RectangleEdge;
-import org.jfree.util.PublicCloneable;
-import org.jfree.util.ShapeUtilities;
 
 /**
  * A renderer that draws a small dot at each data point for an {@link XYPlot}.
@@ -351,7 +351,7 @@ public class XYDotRenderer extends AbstractXYItemRenderer
         if (this.dotHeight != that.dotHeight) {
             return false;
         }
-        if (!ShapeUtilities.equal(this.legendShape, that.legendShape)) {
+        if (!ShapeUtils.equal(this.legendShape, that.legendShape)) {
             return false;
         }
         return super.equals(obj);
@@ -380,7 +380,7 @@ public class XYDotRenderer extends AbstractXYItemRenderer
     private void readObject(ObjectInputStream stream)
             throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
-        this.legendShape = SerialUtilities.readShape(stream);
+        this.legendShape = SerialUtils.readShape(stream);
     }
 
     /**
@@ -392,7 +392,7 @@ public class XYDotRenderer extends AbstractXYItemRenderer
      */
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
-        SerialUtilities.writeShape(this.legendShape, stream);
+        SerialUtils.writeShape(this.legendShape, stream);
     }
 
 }

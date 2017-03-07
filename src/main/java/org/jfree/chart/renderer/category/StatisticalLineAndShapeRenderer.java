@@ -76,15 +76,15 @@ import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.util.ObjectUtils;
+import org.jfree.chart.util.PaintUtils;
+import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.util.ShapeUtils;
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.statistics.StatisticalCategoryDataset;
-import org.jfree.io.SerialUtilities;
-import org.jfree.ui.RectangleEdge;
-import org.jfree.util.ObjectUtilities;
-import org.jfree.util.PaintUtilities;
-import org.jfree.util.PublicCloneable;
-import org.jfree.util.ShapeUtilities;
 
 /**
  * A renderer that draws shapes for each data item, and lines between data
@@ -333,10 +333,10 @@ public class StatisticalLineAndShapeRenderer extends LineAndShapeRenderer
         if (pass == 1 && getItemShapeVisible(row, column)) {
             Shape shape = getItemShape(row, column);
             if (orientation == PlotOrientation.HORIZONTAL) {
-                shape = ShapeUtilities.createTranslatedShape(shape, y1, x1);
+                shape = ShapeUtils.createTranslatedShape(shape, y1, x1);
             }
             else if (orientation == PlotOrientation.VERTICAL) {
-                shape = ShapeUtilities.createTranslatedShape(shape, x1, y1);
+                shape = ShapeUtils.createTranslatedShape(shape, x1, y1);
             }
             hotspot = shape;
             
@@ -437,11 +437,11 @@ public class StatisticalLineAndShapeRenderer extends LineAndShapeRenderer
         }
         StatisticalLineAndShapeRenderer that
                 = (StatisticalLineAndShapeRenderer) obj;
-        if (!PaintUtilities.equal(this.errorIndicatorPaint,
+        if (!PaintUtils.equal(this.errorIndicatorPaint,
                 that.errorIndicatorPaint)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.errorIndicatorStroke,
+        if (!ObjectUtils.equal(this.errorIndicatorStroke,
                 that.errorIndicatorStroke)) {
             return false;
         }
@@ -469,8 +469,8 @@ public class StatisticalLineAndShapeRenderer extends LineAndShapeRenderer
      */
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
-        SerialUtilities.writePaint(this.errorIndicatorPaint, stream);
-        SerialUtilities.writeStroke(this.errorIndicatorStroke, stream);
+        SerialUtils.writePaint(this.errorIndicatorPaint, stream);
+        SerialUtils.writeStroke(this.errorIndicatorStroke, stream);
     }
 
     /**
@@ -484,8 +484,8 @@ public class StatisticalLineAndShapeRenderer extends LineAndShapeRenderer
     private void readObject(ObjectInputStream stream)
             throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
-        this.errorIndicatorPaint = SerialUtilities.readPaint(stream);
-        this.errorIndicatorStroke = SerialUtilities.readStroke(stream);
+        this.errorIndicatorPaint = SerialUtils.readPaint(stream);
+        this.errorIndicatorStroke = SerialUtils.readStroke(stream);
     }
 
 }

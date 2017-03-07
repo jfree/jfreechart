@@ -52,8 +52,8 @@ import java.awt.Font;
 import java.awt.GradientPaint;
 
 import org.jfree.chart.TestUtilities;
+import org.jfree.chart.ui.HorizontalAlignment;
 
-import org.jfree.ui.HorizontalAlignment;
 import org.junit.Test;
 
 /**

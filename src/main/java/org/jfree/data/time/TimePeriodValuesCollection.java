@@ -53,13 +53,13 @@ package org.jfree.data.time;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
+import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.ParamChecks;
 
 import org.jfree.data.DomainInfo;
 import org.jfree.data.Range;
 import org.jfree.data.xy.AbstractIntervalXYDataset;
 import org.jfree.data.xy.IntervalXYDataset;
-import org.jfree.util.ObjectUtilities;
 
 /**
  * A collection of {@link TimePeriodValues} objects.
@@ -454,7 +454,7 @@ public class TimePeriodValuesCollection extends AbstractIntervalXYDataset
         if (this.xPosition != that.xPosition) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.data, that.data)) {
+        if (!ObjectUtils.equal(this.data, that.data)) {
             return false;
         }
         return true;

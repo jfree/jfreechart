@@ -52,12 +52,12 @@ package org.jfree.data.category;
 import java.util.Collections;
 import java.util.List;
 import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.TableOrder;
 
 import org.jfree.data.general.AbstractDataset;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.DatasetChangeListener;
 import org.jfree.data.general.PieDataset;
-import org.jfree.util.TableOrder;
 
 /**
  * A {@link PieDataset} implementation that obtains its data from one row or

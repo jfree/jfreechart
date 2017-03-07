@@ -43,8 +43,7 @@
 package org.jfree.chart.plot;
 
 import java.io.Serializable;
-
-import org.jfree.text.TextBox;
+import org.jfree.chart.text.TextBox;
 
 /**
  * A structure that retains information about the label for a section in a pie

@@ -25,11 +25,11 @@ import org.jfree.chart.fx.interaction.ChartMouseListenerFX;
 import org.jfree.chart.fx.overlay.CrosshairOverlayFX;
 import org.jfree.chart.plot.Crosshair;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.data.general.DatasetUtilities;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
-import org.jfree.ui.RectangleEdge;
 
 /**
  * A demo showing crosshairs that follow the data points on an XYPlot.

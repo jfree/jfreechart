@@ -67,13 +67,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.xy.AbstractIntervalXYDataset;
 import org.jfree.data.xy.IntervalXYDataset;
-import org.jfree.util.ObjectUtilities;
-import org.jfree.util.PublicCloneable;
 
 /**
  * A dataset that can be used for creating histograms.
@@ -484,10 +484,10 @@ public class HistogramDataset extends AbstractIntervalXYDataset
             return false;
         }
         HistogramDataset that = (HistogramDataset) obj;
-        if (!ObjectUtilities.equal(this.type, that.type)) {
+        if (!ObjectUtils.equal(this.type, that.type)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.list, that.list)) {
+        if (!ObjectUtils.equal(this.list, that.list)) {
             return false;
         }
         return true;

@@ -127,19 +127,19 @@ import org.jfree.chart.event.AxisChangeEvent;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotRenderingInfo;
+import org.jfree.chart.text.G2TextMeasurer;
+import org.jfree.chart.text.TextBlock;
+import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.ui.RectangleAnchor;
+import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.ui.Size2D;
+import org.jfree.chart.util.ObjectUtils;
+import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.util.ShapeUtils;
 import org.jfree.data.category.CategoryDataset;
-import org.jfree.io.SerialUtilities;
-import org.jfree.text.G2TextMeasurer;
-import org.jfree.text.TextBlock;
-import org.jfree.text.TextUtilities;
-import org.jfree.ui.RectangleAnchor;
-import org.jfree.ui.RectangleEdge;
-import org.jfree.ui.RectangleInsets;
-import org.jfree.ui.Size2D;
-import org.jfree.util.ObjectUtilities;
-import org.jfree.util.PaintUtilities;
-import org.jfree.util.ShapeUtilities;
 
 /**
  * An axis that displays categories.
@@ -1295,7 +1295,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
         Size2D size = block.calculateDimensions(g2);
         Rectangle2D box = new Rectangle2D.Double(0.0, 0.0, size.getWidth(),
                 size.getHeight());
-        Shape rotatedBox = ShapeUtilities.rotateShape(box, position.getAngle(),
+        Shape rotatedBox = ShapeUtils.rotateShape(box, position.getAngle(),
                 0.0f, 0.0f);
         double w = rotatedBox.getBounds2D().getWidth() + insets.getLeft()
                 + insets.getRight();
@@ -1317,7 +1317,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
         Size2D size = block.calculateDimensions(g2);
         Rectangle2D box = new Rectangle2D.Double(0.0, 0.0, size.getWidth(),
                 size.getHeight());
-        Shape rotatedBox = ShapeUtilities.rotateShape(box, position.getAngle(),
+        Shape rotatedBox = ShapeUtils.rotateShape(box, position.getAngle(),
                 0.0f, 0.0f);
         double h = rotatedBox.getBounds2D().getHeight()
                    + insets.getTop() + insets.getBottom();
@@ -1378,19 +1378,19 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
                 != this.categoryLabelPositionOffset) {
             return false;
         }
-        if (!ObjectUtilities.equal(that.categoryLabelPositions,
+        if (!ObjectUtils.equal(that.categoryLabelPositions,
                 this.categoryLabelPositions)) {
             return false;
         }
-        if (!ObjectUtilities.equal(that.categoryLabelToolTips,
+        if (!ObjectUtils.equal(that.categoryLabelToolTips,
                 this.categoryLabelToolTips)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.categoryLabelURLs, 
+        if (!ObjectUtils.equal(this.categoryLabelURLs, 
                 that.categoryLabelURLs)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.tickLabelFontMap,
+        if (!ObjectUtils.equal(this.tickLabelFontMap,
                 that.tickLabelFontMap)) {
             return false;
         }
@@ -1459,7 +1459,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
         int count = in.readInt();
         for (int i = 0; i < count; i++) {
             Comparable category = (Comparable) in.readObject();
-            Paint paint = SerialUtilities.readPaint(in);
+            Paint paint = SerialUtils.readPaint(in);
             result.put(category, paint);
         }
         return result;
@@ -1490,7 +1490,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
             while (iterator.hasNext()) {
                 Comparable key = (Comparable) iterator.next();
                 out.writeObject(key);
-                SerialUtilities.writePaint((Paint) map.get(key), out);
+                SerialUtils.writePaint((Paint) map.get(key), out);
             }
         }
     }
@@ -1514,7 +1514,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
             Map.Entry entry = (Map.Entry) iterator.next();
             Paint p1 = (Paint) entry.getValue();
             Paint p2 = (Paint) map2.get(entry.getKey());
-            if (!PaintUtilities.equal(p1, p2)) {
+            if (!PaintUtils.equal(p1, p2)) {
                 return false;
             }
         }

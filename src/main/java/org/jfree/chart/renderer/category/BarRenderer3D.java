@@ -133,18 +133,18 @@ import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.ValueMarker;
+import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.ui.LengthAdjustmentType;
+import org.jfree.chart.ui.RectangleAnchor;
+import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.util.PaintAlpha;
+import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
-import org.jfree.io.SerialUtilities;
-import org.jfree.text.TextUtilities;
-import org.jfree.ui.LengthAdjustmentType;
-import org.jfree.ui.RectangleAnchor;
-import org.jfree.ui.RectangleEdge;
-import org.jfree.ui.TextAnchor;
-import org.jfree.util.PaintUtilities;
-import org.jfree.util.PublicCloneable;
 
 /**
  * A renderer for bars with a 3D effect, for use with the
@@ -811,7 +811,7 @@ public class BarRenderer3D extends BarRenderer
         if (this.yOffset != that.yOffset) {
             return false;
         }
-        if (!PaintUtilities.equal(this.wallPaint, that.wallPaint)) {
+        if (!PaintUtils.equal(this.wallPaint, that.wallPaint)) {
             return false;
         }
         return super.equals(obj);
@@ -826,7 +826,7 @@ public class BarRenderer3D extends BarRenderer
      */
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
-        SerialUtilities.writePaint(this.wallPaint, stream);
+        SerialUtils.writePaint(this.wallPaint, stream);
     }
 
     /**
@@ -840,7 +840,7 @@ public class BarRenderer3D extends BarRenderer
     private void readObject(ObjectInputStream stream)
         throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
-        this.wallPaint = SerialUtilities.readPaint(stream);
+        this.wallPaint = SerialUtils.readPaint(stream);
     }
 
 }

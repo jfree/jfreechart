@@ -46,11 +46,11 @@ package org.jfree.data.xy;
 
 import java.io.Serializable;
 import java.util.List;
+import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.general.DatasetChangeEvent;
-import org.jfree.util.ObjectUtilities;
-import org.jfree.util.PublicCloneable;
 
 /**
  * A collection of {@link XIntervalSeries} objects.
@@ -346,7 +346,7 @@ public class XIntervalSeriesCollection extends AbstractIntervalXYDataset
             return false;
         }
         XIntervalSeriesCollection that = (XIntervalSeriesCollection) obj;
-        return ObjectUtilities.equal(this.data, that.data);
+        return ObjectUtils.equal(this.data, that.data);
     }
 
     /**
@@ -360,7 +360,7 @@ public class XIntervalSeriesCollection extends AbstractIntervalXYDataset
     public Object clone() throws CloneNotSupportedException {
         XIntervalSeriesCollection clone
                 = (XIntervalSeriesCollection) super.clone();
-        clone.data = (List) ObjectUtilities.deepClone(this.data);
+        clone.data = (List) ObjectUtils.deepClone(this.data);
         return clone;
     }
 

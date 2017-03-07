@@ -215,29 +215,29 @@ import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.labels.PieSectionLabelGenerator;
 import org.jfree.chart.labels.PieToolTipGenerator;
 import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
+import org.jfree.chart.text.G2TextMeasurer;
+import org.jfree.chart.text.TextBlock;
+import org.jfree.chart.text.TextBox;
+import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.ui.RectangleAnchor;
+import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.urls.PieURLGenerator;
+import org.jfree.chart.util.ObjectUtils;
+import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.ResourceBundleWrapper;
+import org.jfree.chart.util.Rotation;
+import org.jfree.chart.util.SerialUtils;
 import org.jfree.chart.util.ShadowGenerator;
+import org.jfree.chart.util.ShapeUtils;
+import org.jfree.chart.util.UnitType;
 import org.jfree.data.DefaultKeyedValues;
 import org.jfree.data.KeyedValues;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.DatasetUtilities;
 import org.jfree.data.general.PieDataset;
-import org.jfree.io.SerialUtilities;
-import org.jfree.text.G2TextMeasurer;
-import org.jfree.text.TextBlock;
-import org.jfree.text.TextBox;
-import org.jfree.text.TextUtilities;
-import org.jfree.ui.RectangleAnchor;
-import org.jfree.ui.RectangleInsets;
-import org.jfree.ui.TextAnchor;
-import org.jfree.util.ObjectUtilities;
-import org.jfree.util.PaintUtilities;
-import org.jfree.util.PublicCloneable;
-import org.jfree.util.Rotation;
-import org.jfree.util.ShapeUtilities;
-import org.jfree.util.UnitType;
 
 /**
  * A plot that displays data in the form of a pie chart, using data from any
@@ -2633,7 +2633,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
 
             if (currentPass == 0) {
                 if (this.shadowPaint != null && this.shadowGenerator == null) {
-                    Shape shadowArc = ShapeUtilities.createTranslatedShape(
+                    Shape shadowArc = ShapeUtils.createTranslatedShape(
                             arc, (float) this.shadowXOffset,
                             (float) this.shadowYOffset);
                     g2.setPaint(this.shadowPaint);
@@ -2743,11 +2743,11 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
                 Rectangle2D bounds = TextUtilities.getTextBounds(label, g2, fm);
                 Rectangle2D out = this.labelPadding.createOutsetRectangle(
                         bounds);
-                Shape bg = ShapeUtilities.createTranslatedShape(out,
+                Shape bg = ShapeUtils.createTranslatedShape(out,
                         x - bounds.getCenterX(), y - bounds.getCenterY());
                 if (this.labelShadowPaint != null
                         && this.shadowGenerator == null) {
-                    Shape shadow = ShapeUtilities.createTranslatedShape(bg,
+                    Shape shadow = ShapeUtils.createTranslatedShape(bg,
                             this.shadowXOffset, this.shadowYOffset);
                     g2.setPaint(this.labelShadowPaint);
                     g2.fill(shadow);
@@ -3309,45 +3309,45 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
         if (this.ignoreNullValues != that.ignoreNullValues) {
             return false;
         }
-        if (!PaintUtilities.equal(this.sectionPaint, that.sectionPaint)) {
+        if (!PaintUtils.equal(this.sectionPaint, that.sectionPaint)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.sectionPaintMap,
+        if (!ObjectUtils.equal(this.sectionPaintMap,
                 that.sectionPaintMap)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.baseSectionPaint,
+        if (!PaintUtils.equal(this.baseSectionPaint,
                 that.baseSectionPaint)) {
             return false;
         }
         if (this.sectionOutlinesVisible != that.sectionOutlinesVisible) {
             return false;
         }
-        if (!PaintUtilities.equal(this.sectionOutlinePaint,
+        if (!PaintUtils.equal(this.sectionOutlinePaint,
                 that.sectionOutlinePaint)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.sectionOutlinePaintMap,
+        if (!ObjectUtils.equal(this.sectionOutlinePaintMap,
                 that.sectionOutlinePaintMap)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.baseSectionOutlinePaint,
+        if (!PaintUtils.equal(this.baseSectionOutlinePaint,
                 that.baseSectionOutlinePaint)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.sectionOutlineStroke,
+        if (!ObjectUtils.equal(this.sectionOutlineStroke,
                 that.sectionOutlineStroke)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.sectionOutlineStrokeMap,
+        if (!ObjectUtils.equal(this.sectionOutlineStrokeMap,
                 that.sectionOutlineStrokeMap)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.baseSectionOutlineStroke,
+        if (!ObjectUtils.equal(this.baseSectionOutlineStroke,
                 that.baseSectionOutlineStroke)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.shadowPaint, that.shadowPaint)) {
+        if (!PaintUtils.equal(this.shadowPaint, that.shadowPaint)) {
             return false;
         }
         if (!(this.shadowXOffset == that.shadowXOffset)) {
@@ -3356,33 +3356,33 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
         if (!(this.shadowYOffset == that.shadowYOffset)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.explodePercentages,
+        if (!ObjectUtils.equal(this.explodePercentages,
                 that.explodePercentages)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.labelGenerator,
+        if (!ObjectUtils.equal(this.labelGenerator,
                 that.labelGenerator)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.labelFont, that.labelFont)) {
+        if (!ObjectUtils.equal(this.labelFont, that.labelFont)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.labelPaint, that.labelPaint)) {
+        if (!PaintUtils.equal(this.labelPaint, that.labelPaint)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.labelBackgroundPaint,
+        if (!PaintUtils.equal(this.labelBackgroundPaint,
                 that.labelBackgroundPaint)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.labelOutlinePaint,
+        if (!PaintUtils.equal(this.labelOutlinePaint,
                 that.labelOutlinePaint)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.labelOutlineStroke,
+        if (!ObjectUtils.equal(this.labelOutlineStroke,
                 that.labelOutlineStroke)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.labelShadowPaint,
+        if (!PaintUtils.equal(this.labelShadowPaint,
                 that.labelShadowPaint)) {
             return false;
         }
@@ -3410,35 +3410,35 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
         if (!this.labelLinkStyle.equals(that.labelLinkStyle)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.labelLinkPaint, that.labelLinkPaint)) {
+        if (!PaintUtils.equal(this.labelLinkPaint, that.labelLinkPaint)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.labelLinkStroke,
+        if (!ObjectUtils.equal(this.labelLinkStroke,
                 that.labelLinkStroke)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.toolTipGenerator,
+        if (!ObjectUtils.equal(this.toolTipGenerator,
                 that.toolTipGenerator)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.urlGenerator, that.urlGenerator)) {
+        if (!ObjectUtils.equal(this.urlGenerator, that.urlGenerator)) {
             return false;
         }
         if (!(this.minimumArcAngleToDraw == that.minimumArcAngleToDraw)) {
             return false;
         }
-        if (!ShapeUtilities.equal(this.legendItemShape, that.legendItemShape)) {
+        if (!ShapeUtils.equal(this.legendItemShape, that.legendItemShape)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.legendLabelGenerator,
+        if (!ObjectUtils.equal(this.legendLabelGenerator,
                 that.legendLabelGenerator)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.legendLabelToolTipGenerator,
+        if (!ObjectUtils.equal(this.legendLabelToolTipGenerator,
                 that.legendLabelToolTipGenerator)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.legendLabelURLGenerator,
+        if (!ObjectUtils.equal(this.legendLabelURLGenerator,
                 that.legendLabelURLGenerator)) {
             return false;
         }
@@ -3453,7 +3453,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
                 != that.autoPopulateSectionOutlineStroke) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.shadowGenerator,
+        if (!ObjectUtils.equal(this.shadowGenerator,
                 that.shadowGenerator)) {
             return false;
         }
@@ -3481,27 +3481,27 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
                 = new TreeMap<Comparable<?>, Number>(this.explodePercentages);
         if (this.labelGenerator != null) {
             clone.labelGenerator = (PieSectionLabelGenerator) 
-                    ObjectUtilities.clone(this.labelGenerator);
+                    ObjectUtils.clone(this.labelGenerator);
         }
         if (clone.dataset != null) {
             clone.dataset.addChangeListener(clone);
         }
         if (this.urlGenerator instanceof PublicCloneable) {
-            clone.urlGenerator = (PieURLGenerator) ObjectUtilities.clone(
+            clone.urlGenerator = (PieURLGenerator) ObjectUtils.clone(
                     this.urlGenerator);
         }
-        clone.legendItemShape = ShapeUtilities.clone(this.legendItemShape);
+        clone.legendItemShape = ShapeUtils.clone(this.legendItemShape);
         if (this.legendLabelGenerator != null) {
             clone.legendLabelGenerator = (PieSectionLabelGenerator)
-                    ObjectUtilities.clone(this.legendLabelGenerator);
+                    ObjectUtils.clone(this.legendLabelGenerator);
         }
         if (this.legendLabelToolTipGenerator != null) {
             clone.legendLabelToolTipGenerator = (PieSectionLabelGenerator)
-                    ObjectUtilities.clone(this.legendLabelToolTipGenerator);
+                    ObjectUtils.clone(this.legendLabelToolTipGenerator);
         }
         if (this.legendLabelURLGenerator instanceof PublicCloneable) {
             clone.legendLabelURLGenerator = (PieURLGenerator)
-                    ObjectUtilities.clone(this.legendLabelURLGenerator);
+                    ObjectUtils.clone(this.legendLabelURLGenerator);
         }
         return clone;
     }
@@ -3515,21 +3515,21 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      */
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
-        SerialUtilities.writePaint(this.sectionPaint, stream);
-        SerialUtilities.writePaint(this.baseSectionPaint, stream);
-        SerialUtilities.writePaint(this.sectionOutlinePaint, stream);
-        SerialUtilities.writePaint(this.baseSectionOutlinePaint, stream);
-        SerialUtilities.writeStroke(this.sectionOutlineStroke, stream);
-        SerialUtilities.writeStroke(this.baseSectionOutlineStroke, stream);
-        SerialUtilities.writePaint(this.shadowPaint, stream);
-        SerialUtilities.writePaint(this.labelPaint, stream);
-        SerialUtilities.writePaint(this.labelBackgroundPaint, stream);
-        SerialUtilities.writePaint(this.labelOutlinePaint, stream);
-        SerialUtilities.writeStroke(this.labelOutlineStroke, stream);
-        SerialUtilities.writePaint(this.labelShadowPaint, stream);
-        SerialUtilities.writePaint(this.labelLinkPaint, stream);
-        SerialUtilities.writeStroke(this.labelLinkStroke, stream);
-        SerialUtilities.writeShape(this.legendItemShape, stream);
+        SerialUtils.writePaint(this.sectionPaint, stream);
+        SerialUtils.writePaint(this.baseSectionPaint, stream);
+        SerialUtils.writePaint(this.sectionOutlinePaint, stream);
+        SerialUtils.writePaint(this.baseSectionOutlinePaint, stream);
+        SerialUtils.writeStroke(this.sectionOutlineStroke, stream);
+        SerialUtils.writeStroke(this.baseSectionOutlineStroke, stream);
+        SerialUtils.writePaint(this.shadowPaint, stream);
+        SerialUtils.writePaint(this.labelPaint, stream);
+        SerialUtils.writePaint(this.labelBackgroundPaint, stream);
+        SerialUtils.writePaint(this.labelOutlinePaint, stream);
+        SerialUtils.writeStroke(this.labelOutlineStroke, stream);
+        SerialUtils.writePaint(this.labelShadowPaint, stream);
+        SerialUtils.writePaint(this.labelLinkPaint, stream);
+        SerialUtils.writeStroke(this.labelLinkStroke, stream);
+        SerialUtils.writeShape(this.legendItemShape, stream);
     }
 
     /**
@@ -3543,21 +3543,21 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     private void readObject(ObjectInputStream stream)
         throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
-        this.sectionPaint = SerialUtilities.readPaint(stream);
-        this.baseSectionPaint = SerialUtilities.readPaint(stream);
-        this.sectionOutlinePaint = SerialUtilities.readPaint(stream);
-        this.baseSectionOutlinePaint = SerialUtilities.readPaint(stream);
-        this.sectionOutlineStroke = SerialUtilities.readStroke(stream);
-        this.baseSectionOutlineStroke = SerialUtilities.readStroke(stream);
-        this.shadowPaint = SerialUtilities.readPaint(stream);
-        this.labelPaint = SerialUtilities.readPaint(stream);
-        this.labelBackgroundPaint = SerialUtilities.readPaint(stream);
-        this.labelOutlinePaint = SerialUtilities.readPaint(stream);
-        this.labelOutlineStroke = SerialUtilities.readStroke(stream);
-        this.labelShadowPaint = SerialUtilities.readPaint(stream);
-        this.labelLinkPaint = SerialUtilities.readPaint(stream);
-        this.labelLinkStroke = SerialUtilities.readStroke(stream);
-        this.legendItemShape = SerialUtilities.readShape(stream);
+        this.sectionPaint = SerialUtils.readPaint(stream);
+        this.baseSectionPaint = SerialUtils.readPaint(stream);
+        this.sectionOutlinePaint = SerialUtils.readPaint(stream);
+        this.baseSectionOutlinePaint = SerialUtils.readPaint(stream);
+        this.sectionOutlineStroke = SerialUtils.readStroke(stream);
+        this.baseSectionOutlineStroke = SerialUtils.readStroke(stream);
+        this.shadowPaint = SerialUtils.readPaint(stream);
+        this.labelPaint = SerialUtils.readPaint(stream);
+        this.labelBackgroundPaint = SerialUtils.readPaint(stream);
+        this.labelOutlinePaint = SerialUtils.readPaint(stream);
+        this.labelOutlineStroke = SerialUtils.readStroke(stream);
+        this.labelShadowPaint = SerialUtils.readPaint(stream);
+        this.labelLinkPaint = SerialUtils.readPaint(stream);
+        this.labelLinkStroke = SerialUtils.readStroke(stream);
+        this.legendItemShape = SerialUtils.readShape(stream);
     }
 
     // DEPRECATED FIELDS AND METHODS...

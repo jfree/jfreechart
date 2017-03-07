@@ -46,11 +46,11 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.jfree.chart.TestUtilities;
+import org.jfree.chart.text.TextBlock;
+import org.jfree.chart.text.TextBlockAnchor;
+import org.jfree.chart.text.TextLine;
+import org.jfree.chart.ui.TextAnchor;
 
-import org.jfree.text.TextBlock;
-import org.jfree.text.TextBlockAnchor;
-import org.jfree.text.TextLine;
-import org.jfree.ui.TextAnchor;
 import org.junit.Test;
 
 /**

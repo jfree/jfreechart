@@ -63,8 +63,8 @@ import org.jfree.chart.axis.ColorBar;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.GreyPalette;
 import org.jfree.chart.plot.RainbowPalette;
+import org.jfree.chart.ui.LCBLayout;
 import org.jfree.chart.util.ResourceBundleWrapper;
-import org.jfree.layout.LCBLayout;
 
 /**
  * A DefaultColorBarEditor.  Extends DefaultNumberAxisEditor to allow

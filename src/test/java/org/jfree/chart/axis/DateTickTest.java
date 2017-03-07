@@ -47,8 +47,8 @@ import static org.junit.Assert.assertTrue;
 import java.util.Date;
 
 import org.jfree.chart.TestUtilities;
+import org.jfree.chart.ui.TextAnchor;
 
-import org.jfree.ui.TextAnchor;
 import org.junit.Test;
 
 /**

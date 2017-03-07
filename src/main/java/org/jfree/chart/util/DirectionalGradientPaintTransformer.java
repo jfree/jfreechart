@@ -43,7 +43,7 @@ package org.jfree.chart.util;
 import java.awt.GradientPaint;
 import java.awt.geom.Rectangle2D;
 import java.awt.Shape;
-import org.jfree.ui.GradientPaintTransformer;
+import org.jfree.chart.ui.GradientPaintTransformer;
 
 /**
  * Transforms a {@code GradientPaint} to range over the width of a target 

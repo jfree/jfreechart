@@ -44,10 +44,10 @@ package org.jfree.chart.labels;
 import java.io.Serializable;
 import java.text.MessageFormat;
 import java.text.NumberFormat;
+import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.statistics.BoxAndWhiskerCategoryDataset;
-import org.jfree.util.PublicCloneable;
 
 /**
  * An item label generator for plots that use data from a

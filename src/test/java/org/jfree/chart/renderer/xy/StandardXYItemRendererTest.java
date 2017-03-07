@@ -65,10 +65,10 @@ import org.jfree.chart.entity.XYItemEntity;
 import org.jfree.chart.TestUtilities;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.util.UnitType;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
-import org.jfree.util.PublicCloneable;
-import org.jfree.util.UnitType;
 import org.junit.Test;
 
 /**

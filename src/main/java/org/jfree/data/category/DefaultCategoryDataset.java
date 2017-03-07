@@ -50,12 +50,12 @@ package org.jfree.data.category;
 
 import java.io.Serializable;
 import java.util.List;
+import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.DefaultKeyedValues2D;
 import org.jfree.data.UnknownKeyException;
 import org.jfree.data.general.AbstractDataset;
 import org.jfree.data.general.DatasetChangeEvent;
-import org.jfree.util.PublicCloneable;
 
 /**
  * A default implementation of the {@link CategoryDataset} interface.

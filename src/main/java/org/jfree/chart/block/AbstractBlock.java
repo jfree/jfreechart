@@ -55,15 +55,15 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.ui.Size2D;
+import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.util.ShapeUtils;
 
 import org.jfree.data.Range;
-import org.jfree.io.SerialUtilities;
-import org.jfree.ui.RectangleInsets;
-import org.jfree.ui.Size2D;
-import org.jfree.util.ObjectUtilities;
-import org.jfree.util.PublicCloneable;
-import org.jfree.util.ShapeUtilities;
 
 /**
  * A convenience class for creating new classes that implement
@@ -592,7 +592,7 @@ public class AbstractBlock implements Cloneable, Serializable {
             return false;
         }
         AbstractBlock that = (AbstractBlock) obj;
-        if (!ObjectUtilities.equal(this.id, that.id)) {
+        if (!ObjectUtils.equal(this.id, that.id)) {
             return false;
         }
         if (!this.frame.equals(that.frame)) {
@@ -627,7 +627,7 @@ public class AbstractBlock implements Cloneable, Serializable {
     @Override
     public Object clone() throws CloneNotSupportedException {
         AbstractBlock clone = (AbstractBlock) super.clone();
-        clone.bounds = (Rectangle2D) ShapeUtilities.clone(this.bounds);
+        clone.bounds = (Rectangle2D) ShapeUtils.clone(this.bounds);
         if (this.frame instanceof PublicCloneable) {
             PublicCloneable pc = (PublicCloneable) this.frame;
             clone.frame = (BlockFrame) pc.clone();
@@ -644,7 +644,7 @@ public class AbstractBlock implements Cloneable, Serializable {
      */
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
-        SerialUtilities.writeShape(this.bounds, stream);
+        SerialUtils.writeShape(this.bounds, stream);
     }
 
     /**
@@ -658,7 +658,7 @@ public class AbstractBlock implements Cloneable, Serializable {
     private void readObject(ObjectInputStream stream)
         throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
-        this.bounds = (Rectangle2D) SerialUtilities.readShape(stream);
+        this.bounds = (Rectangle2D) SerialUtils.readShape(stream);
     }
 
 }

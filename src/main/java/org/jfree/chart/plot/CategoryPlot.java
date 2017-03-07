@@ -240,24 +240,23 @@ import org.jfree.chart.event.RendererChangeListener;
 import org.jfree.chart.renderer.category.AbstractCategoryItemRenderer;
 import org.jfree.chart.renderer.category.CategoryItemRenderer;
 import org.jfree.chart.renderer.category.CategoryItemRendererState;
+import org.jfree.chart.ui.Layer;
+import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.util.CloneUtils;
+import org.jfree.chart.util.ObjectUtils;
+import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.ResourceBundleWrapper;
+import org.jfree.chart.util.SerialUtils;
 import org.jfree.chart.util.ShadowGenerator;
+import org.jfree.chart.util.ShapeUtils;
+import org.jfree.chart.util.SortOrder;
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
-import org.jfree.data.general.Dataset;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.DatasetUtilities;
-import org.jfree.io.SerialUtilities;
-import org.jfree.ui.Layer;
-import org.jfree.ui.RectangleEdge;
-import org.jfree.ui.RectangleInsets;
-import org.jfree.util.ObjectUtilities;
-import org.jfree.util.PaintUtilities;
-import org.jfree.util.PublicCloneable;
-import org.jfree.util.ShapeUtilities;
-import org.jfree.util.SortOrder;
 
 /**
  * A general plotting class that uses data from a {@link CategoryDataset} and
@@ -3533,7 +3532,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
         // the anchor point is typically the point where the mouse last
         // clicked - the crosshairs will be driven off this point...
         if (anchor != null && !dataArea.contains(anchor)) {
-            anchor = ShapeUtilities.getPointInRectangle(anchor.getX(),
+            anchor = ShapeUtils.getPointInRectangle(anchor.getX(),
                     anchor.getY(), dataArea);
         }
         CategoryCrosshairState crosshairState = new CategoryCrosshairState();
@@ -4804,7 +4803,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
         if (this.orientation != that.orientation) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.axisOffset, that.axisOffset)) {
+        if (!ObjectUtils.equal(this.axisOffset, that.axisOffset)) {
             return false;
         }
         if (!this.domainAxes.equals(that.domainAxes)) {
@@ -4822,15 +4821,15 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
         if (!this.rangeAxisLocations.equals(that.rangeAxisLocations)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.datasetToDomainAxesMap,
+        if (!ObjectUtils.equal(this.datasetToDomainAxesMap,
                 that.datasetToDomainAxesMap)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.datasetToRangeAxesMap,
+        if (!ObjectUtils.equal(this.datasetToRangeAxesMap,
                 that.datasetToRangeAxesMap)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.renderers, that.renderers)) {
+        if (!ObjectUtils.equal(this.renderers, that.renderers)) {
             return false;
         }
         if (this.renderingOrder != that.renderingOrder) {
@@ -4848,22 +4847,22 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
         if (this.domainGridlinePosition != that.domainGridlinePosition) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.domainGridlineStroke,
+        if (!ObjectUtils.equal(this.domainGridlineStroke,
                 that.domainGridlineStroke)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.domainGridlinePaint,
+        if (!PaintUtils.equal(this.domainGridlinePaint,
                 that.domainGridlinePaint)) {
             return false;
         }
         if (this.rangeGridlinesVisible != that.rangeGridlinesVisible) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.rangeGridlineStroke,
+        if (!ObjectUtils.equal(this.rangeGridlineStroke,
                 that.rangeGridlineStroke)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.rangeGridlinePaint,
+        if (!PaintUtils.equal(this.rangeGridlinePaint,
                 that.rangeGridlinePaint)) {
             return false;
         }
@@ -4876,11 +4875,11 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
         if (this.rangeCrosshairValue != that.rangeCrosshairValue) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.rangeCrosshairStroke,
+        if (!ObjectUtils.equal(this.rangeCrosshairStroke,
                 that.rangeCrosshairStroke)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.rangeCrosshairPaint,
+        if (!PaintUtils.equal(this.rangeCrosshairPaint,
                 that.rangeCrosshairPaint)) {
             return false;
         }
@@ -4888,37 +4887,37 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
                 != that.rangeCrosshairLockedOnData) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.foregroundDomainMarkers,
+        if (!ObjectUtils.equal(this.foregroundDomainMarkers,
                 that.foregroundDomainMarkers)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.backgroundDomainMarkers,
+        if (!ObjectUtils.equal(this.backgroundDomainMarkers,
                 that.backgroundDomainMarkers)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.foregroundRangeMarkers,
+        if (!ObjectUtils.equal(this.foregroundRangeMarkers,
                 that.foregroundRangeMarkers)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.backgroundRangeMarkers,
+        if (!ObjectUtils.equal(this.backgroundRangeMarkers,
                 that.backgroundRangeMarkers)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.annotations, that.annotations)) {
+        if (!ObjectUtils.equal(this.annotations, that.annotations)) {
             return false;
         }
         if (this.weight != that.weight) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.fixedDomainAxisSpace,
+        if (!ObjectUtils.equal(this.fixedDomainAxisSpace,
                 that.fixedDomainAxisSpace)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.fixedRangeAxisSpace,
+        if (!ObjectUtils.equal(this.fixedRangeAxisSpace,
                 that.fixedRangeAxisSpace)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.fixedLegendItems,
+        if (!ObjectUtils.equal(this.fixedLegendItems,
                 that.fixedLegendItems)) {
             return false;
         }
@@ -4928,19 +4927,19 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
         if (this.crosshairDatasetIndex != that.crosshairDatasetIndex) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.domainCrosshairColumnKey,
+        if (!ObjectUtils.equal(this.domainCrosshairColumnKey,
                 that.domainCrosshairColumnKey)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.domainCrosshairRowKey,
+        if (!ObjectUtils.equal(this.domainCrosshairRowKey,
                 that.domainCrosshairRowKey)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.domainCrosshairPaint,
+        if (!PaintUtils.equal(this.domainCrosshairPaint,
                 that.domainCrosshairPaint)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.domainCrosshairStroke,
+        if (!ObjectUtils.equal(this.domainCrosshairStroke,
                 that.domainCrosshairStroke)) {
             return false;
         }
@@ -4948,26 +4947,26 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
                 != that.rangeMinorGridlinesVisible) {
             return false;
         }
-        if (!PaintUtilities.equal(this.rangeMinorGridlinePaint,
+        if (!PaintUtils.equal(this.rangeMinorGridlinePaint,
                 that.rangeMinorGridlinePaint)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.rangeMinorGridlineStroke,
+        if (!ObjectUtils.equal(this.rangeMinorGridlineStroke,
                 that.rangeMinorGridlineStroke)) {
             return false;
         }
         if (this.rangeZeroBaselineVisible != that.rangeZeroBaselineVisible) {
             return false;
         }
-        if (!PaintUtilities.equal(this.rangeZeroBaselinePaint,
+        if (!PaintUtils.equal(this.rangeZeroBaselinePaint,
                 that.rangeZeroBaselinePaint)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.rangeZeroBaselineStroke,
+        if (!ObjectUtils.equal(this.rangeZeroBaselineStroke,
                 that.rangeZeroBaselineStroke)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.shadowGenerator,
+        if (!ObjectUtils.equal(this.shadowGenerator,
                 that.shadowGenerator)) {
             return false;
         }
@@ -5024,15 +5023,15 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
             }
         }
         if (this.fixedDomainAxisSpace != null) {
-            clone.fixedDomainAxisSpace = (AxisSpace) ObjectUtilities.clone(
+            clone.fixedDomainAxisSpace = (AxisSpace) ObjectUtils.clone(
                     this.fixedDomainAxisSpace);
         }
         if (this.fixedRangeAxisSpace != null) {
-            clone.fixedRangeAxisSpace = (AxisSpace) ObjectUtilities.clone(
+            clone.fixedRangeAxisSpace = (AxisSpace) ObjectUtils.clone(
                     this.fixedRangeAxisSpace);
         }
 
-        clone.annotations = (List) ObjectUtilities.deepClone(this.annotations);
+        clone.annotations = (List) ObjectUtils.deepClone(this.annotations);
         clone.foregroundDomainMarkers = cloneMarkerMap(
                 this.foregroundDomainMarkers);
         clone.backgroundDomainMarkers = cloneMarkerMap(
@@ -5065,7 +5064,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
         while (iterator.hasNext()) {
             Object key = iterator.next();
             List entry = (List) map.get(key);
-            Object toAdd = ObjectUtilities.deepClone(entry);
+            Object toAdd = ObjectUtils.deepClone(entry);
             clone.put(key, toAdd);
         }
         return clone;
@@ -5080,18 +5079,18 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      */
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
-        SerialUtilities.writeStroke(this.domainGridlineStroke, stream);
-        SerialUtilities.writePaint(this.domainGridlinePaint, stream);
-        SerialUtilities.writeStroke(this.rangeGridlineStroke, stream);
-        SerialUtilities.writePaint(this.rangeGridlinePaint, stream);
-        SerialUtilities.writeStroke(this.rangeCrosshairStroke, stream);
-        SerialUtilities.writePaint(this.rangeCrosshairPaint, stream);
-        SerialUtilities.writeStroke(this.domainCrosshairStroke, stream);
-        SerialUtilities.writePaint(this.domainCrosshairPaint, stream);
-        SerialUtilities.writeStroke(this.rangeMinorGridlineStroke, stream);
-        SerialUtilities.writePaint(this.rangeMinorGridlinePaint, stream);
-        SerialUtilities.writeStroke(this.rangeZeroBaselineStroke, stream);
-        SerialUtilities.writePaint(this.rangeZeroBaselinePaint, stream);
+        SerialUtils.writeStroke(this.domainGridlineStroke, stream);
+        SerialUtils.writePaint(this.domainGridlinePaint, stream);
+        SerialUtils.writeStroke(this.rangeGridlineStroke, stream);
+        SerialUtils.writePaint(this.rangeGridlinePaint, stream);
+        SerialUtils.writeStroke(this.rangeCrosshairStroke, stream);
+        SerialUtils.writePaint(this.rangeCrosshairPaint, stream);
+        SerialUtils.writeStroke(this.domainCrosshairStroke, stream);
+        SerialUtils.writePaint(this.domainCrosshairPaint, stream);
+        SerialUtils.writeStroke(this.rangeMinorGridlineStroke, stream);
+        SerialUtils.writePaint(this.rangeMinorGridlinePaint, stream);
+        SerialUtils.writeStroke(this.rangeZeroBaselineStroke, stream);
+        SerialUtils.writePaint(this.rangeZeroBaselinePaint, stream);
     }
 
     /**
@@ -5106,18 +5105,18 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
         throws IOException, ClassNotFoundException {
 
         stream.defaultReadObject();
-        this.domainGridlineStroke = SerialUtilities.readStroke(stream);
-        this.domainGridlinePaint = SerialUtilities.readPaint(stream);
-        this.rangeGridlineStroke = SerialUtilities.readStroke(stream);
-        this.rangeGridlinePaint = SerialUtilities.readPaint(stream);
-        this.rangeCrosshairStroke = SerialUtilities.readStroke(stream);
-        this.rangeCrosshairPaint = SerialUtilities.readPaint(stream);
-        this.domainCrosshairStroke = SerialUtilities.readStroke(stream);
-        this.domainCrosshairPaint = SerialUtilities.readPaint(stream);
-        this.rangeMinorGridlineStroke = SerialUtilities.readStroke(stream);
-        this.rangeMinorGridlinePaint = SerialUtilities.readPaint(stream);
-        this.rangeZeroBaselineStroke = SerialUtilities.readStroke(stream);
-        this.rangeZeroBaselinePaint = SerialUtilities.readPaint(stream);
+        this.domainGridlineStroke = SerialUtils.readStroke(stream);
+        this.domainGridlinePaint = SerialUtils.readPaint(stream);
+        this.rangeGridlineStroke = SerialUtils.readStroke(stream);
+        this.rangeGridlinePaint = SerialUtils.readPaint(stream);
+        this.rangeCrosshairStroke = SerialUtils.readStroke(stream);
+        this.rangeCrosshairPaint = SerialUtils.readPaint(stream);
+        this.domainCrosshairStroke = SerialUtils.readStroke(stream);
+        this.domainCrosshairPaint = SerialUtils.readPaint(stream);
+        this.rangeMinorGridlineStroke = SerialUtils.readStroke(stream);
+        this.rangeMinorGridlinePaint = SerialUtils.readPaint(stream);
+        this.rangeZeroBaselineStroke = SerialUtils.readStroke(stream);
+        this.rangeZeroBaselinePaint = SerialUtils.readPaint(stream);
 
         for (CategoryAxis xAxis : this.domainAxes.values()) {
             if (xAxis != null) {

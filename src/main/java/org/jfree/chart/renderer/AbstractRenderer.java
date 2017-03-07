@@ -129,18 +129,17 @@ import org.jfree.chart.labels.ItemLabelPosition;
 import org.jfree.chart.plot.DrawingSupplier;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.title.LegendTitle;
-import org.jfree.chart.util.CloneUtils;
+import org.jfree.chart.ui.TextAnchor;
+import org.jfree.chart.util.BooleanList;
+import org.jfree.chart.util.ObjectUtils;
+import org.jfree.chart.util.PaintList;
+import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.util.ShapeList;
+import org.jfree.chart.util.ShapeUtils;
+import org.jfree.chart.util.StrokeList;
 import org.jfree.data.ItemKey;
-import org.jfree.io.SerialUtilities;
-import org.jfree.ui.TextAnchor;
-import org.jfree.util.BooleanList;
-import org.jfree.util.ObjectUtilities;
-import org.jfree.util.PaintList;
-import org.jfree.util.PaintUtilities;
-import org.jfree.util.ShapeList;
-import org.jfree.util.ShapeUtilities;
-import org.jfree.util.StrokeList;
 
 /**
  * Base class providing common services for renderers.  Most methods that update
@@ -2997,7 +2996,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
         if (this.defaultEntityRadius != that.defaultEntityRadius) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.seriesVisible, that.seriesVisible)) {
+        if (!ObjectUtils.equal(this.seriesVisible, that.seriesVisible)) {
             return false;
         }
         if (!this.seriesVisibleList.equals(that.seriesVisibleList)) {
@@ -3006,7 +3005,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
         if (this.baseSeriesVisible != that.baseSeriesVisible) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.seriesVisibleInLegend,
+        if (!ObjectUtils.equal(this.seriesVisibleInLegend,
                 that.seriesVisibleInLegend)) {
             return false;
         }
@@ -3017,160 +3016,160 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
         if (this.baseSeriesVisibleInLegend != that.baseSeriesVisibleInLegend) {
             return false;
         }
-        if (!PaintUtilities.equal(this.paint, that.paint)) {
+        if (!PaintUtils.equal(this.paint, that.paint)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.paintList, that.paintList)) {
+        if (!ObjectUtils.equal(this.paintList, that.paintList)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.basePaint, that.basePaint)) {
+        if (!PaintUtils.equal(this.basePaint, that.basePaint)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.fillPaint, that.fillPaint)) {
+        if (!PaintUtils.equal(this.fillPaint, that.fillPaint)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.fillPaintList, that.fillPaintList)) {
+        if (!ObjectUtils.equal(this.fillPaintList, that.fillPaintList)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.baseFillPaint, that.baseFillPaint)) {
+        if (!PaintUtils.equal(this.baseFillPaint, that.baseFillPaint)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.outlinePaint, that.outlinePaint)) {
+        if (!PaintUtils.equal(this.outlinePaint, that.outlinePaint)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.outlinePaintList,
+        if (!ObjectUtils.equal(this.outlinePaintList,
                 that.outlinePaintList)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.baseOutlinePaint,
+        if (!PaintUtils.equal(this.baseOutlinePaint,
                 that.baseOutlinePaint)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.stroke, that.stroke)) {
+        if (!ObjectUtils.equal(this.stroke, that.stroke)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.strokeList, that.strokeList)) {
+        if (!ObjectUtils.equal(this.strokeList, that.strokeList)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.baseStroke, that.baseStroke)) {
+        if (!ObjectUtils.equal(this.baseStroke, that.baseStroke)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.outlineStroke, that.outlineStroke)) {
+        if (!ObjectUtils.equal(this.outlineStroke, that.outlineStroke)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.outlineStrokeList,
+        if (!ObjectUtils.equal(this.outlineStrokeList,
                 that.outlineStrokeList)) {
             return false;
         }
-        if (!ObjectUtilities.equal(
+        if (!ObjectUtils.equal(
             this.baseOutlineStroke, that.baseOutlineStroke)
         ) {
             return false;
         }
-        if (!ShapeUtilities.equal(this.shape, that.shape)) {
+        if (!ShapeUtils.equal(this.shape, that.shape)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.shapeList, that.shapeList)) {
+        if (!ObjectUtils.equal(this.shapeList, that.shapeList)) {
             return false;
         }
-        if (!ShapeUtilities.equal(this.baseShape, that.baseShape)) {
+        if (!ShapeUtils.equal(this.baseShape, that.baseShape)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.itemLabelsVisible,
+        if (!ObjectUtils.equal(this.itemLabelsVisible,
                 that.itemLabelsVisible)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.itemLabelsVisibleList,
+        if (!ObjectUtils.equal(this.itemLabelsVisibleList,
                 that.itemLabelsVisibleList)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.baseItemLabelsVisible,
+        if (!ObjectUtils.equal(this.baseItemLabelsVisible,
                 that.baseItemLabelsVisible)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.itemLabelFont, that.itemLabelFont)) {
+        if (!ObjectUtils.equal(this.itemLabelFont, that.itemLabelFont)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.itemLabelFontMap,
+        if (!ObjectUtils.equal(this.itemLabelFontMap,
                 that.itemLabelFontMap)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.baseItemLabelFont,
+        if (!ObjectUtils.equal(this.baseItemLabelFont,
                 that.baseItemLabelFont)) {
             return false;
         }
 
-        if (!PaintUtilities.equal(this.itemLabelPaint, that.itemLabelPaint)) {
+        if (!PaintUtils.equal(this.itemLabelPaint, that.itemLabelPaint)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.itemLabelPaintList,
+        if (!ObjectUtils.equal(this.itemLabelPaintList,
                 that.itemLabelPaintList)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.baseItemLabelPaint,
+        if (!PaintUtils.equal(this.baseItemLabelPaint,
                 that.baseItemLabelPaint)) {
             return false;
         }
 
-        if (!ObjectUtilities.equal(this.positiveItemLabelPosition,
+        if (!ObjectUtils.equal(this.positiveItemLabelPosition,
                 that.positiveItemLabelPosition)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.positiveItemLabelPositionMap,
+        if (!ObjectUtils.equal(this.positiveItemLabelPositionMap,
                 that.positiveItemLabelPositionMap)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.basePositiveItemLabelPosition,
+        if (!ObjectUtils.equal(this.basePositiveItemLabelPosition,
                 that.basePositiveItemLabelPosition)) {
             return false;
         }
 
-        if (!ObjectUtilities.equal(this.negativeItemLabelPosition,
+        if (!ObjectUtils.equal(this.negativeItemLabelPosition,
                 that.negativeItemLabelPosition)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.negativeItemLabelPositionMap,
+        if (!ObjectUtils.equal(this.negativeItemLabelPositionMap,
                 that.negativeItemLabelPositionMap)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.baseNegativeItemLabelPosition,
+        if (!ObjectUtils.equal(this.baseNegativeItemLabelPosition,
                 that.baseNegativeItemLabelPosition)) {
             return false;
         }
         if (this.itemLabelAnchorOffset != that.itemLabelAnchorOffset) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.createEntities, that.createEntities)) {
+        if (!ObjectUtils.equal(this.createEntities, that.createEntities)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.createEntitiesList,
+        if (!ObjectUtils.equal(this.createEntitiesList,
                 that.createEntitiesList)) {
             return false;
         }
         if (this.baseCreateEntities != that.baseCreateEntities) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.legendShapeList,
+        if (!ObjectUtils.equal(this.legendShapeList,
                 that.legendShapeList)) {
             return false;
         }
-        if (!ShapeUtilities.equal(this.baseLegendShape,
+        if (!ShapeUtils.equal(this.baseLegendShape,
                 that.baseLegendShape)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.legendTextFontMap, 
+        if (!ObjectUtils.equal(this.legendTextFontMap, 
                 that.legendTextFontMap)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.baseLegendTextFont,
+        if (!ObjectUtils.equal(this.baseLegendTextFont,
                 that.baseLegendTextFont)) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.legendTextPaint,
+        if (!ObjectUtils.equal(this.legendTextPaint,
                 that.legendTextPaint)) {
             return false;
         }
-        if (!PaintUtilities.equal(this.baseLegendTextPaint,
+        if (!PaintUtils.equal(this.baseLegendTextPaint,
                 that.baseLegendTextPaint)) {
             return false;
         }
@@ -3268,13 +3267,13 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
         // 'baseOutlineStroke' : immutable, no need to clone reference
 
         if (this.shape != null) {
-            clone.shape = ShapeUtilities.clone(this.shape);
+            clone.shape = ShapeUtils.clone(this.shape);
         }
         if (this.shapeList != null) {
             clone.shapeList = (ShapeList) this.shapeList.clone();
         }
         if (this.baseShape != null) {
-            clone.baseShape = ShapeUtilities.clone(this.baseShape);
+            clone.baseShape = ShapeUtils.clone(this.baseShape);
         }
 
         // 'itemLabelsVisible' : immutable, no need to clone reference
@@ -3345,22 +3344,22 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     private void writeObject(ObjectOutputStream stream) throws IOException {
 
         stream.defaultWriteObject();
-        SerialUtilities.writePaint(this.paint, stream);
-        SerialUtilities.writePaint(this.basePaint, stream);
-        SerialUtilities.writePaint(this.fillPaint, stream);
-        SerialUtilities.writePaint(this.baseFillPaint, stream);
-        SerialUtilities.writePaint(this.outlinePaint, stream);
-        SerialUtilities.writePaint(this.baseOutlinePaint, stream);
-        SerialUtilities.writeStroke(this.stroke, stream);
-        SerialUtilities.writeStroke(this.baseStroke, stream);
-        SerialUtilities.writeStroke(this.outlineStroke, stream);
-        SerialUtilities.writeStroke(this.baseOutlineStroke, stream);
-        SerialUtilities.writeShape(this.shape, stream);
-        SerialUtilities.writeShape(this.baseShape, stream);
-        SerialUtilities.writePaint(this.itemLabelPaint, stream);
-        SerialUtilities.writePaint(this.baseItemLabelPaint, stream);
-        SerialUtilities.writeShape(this.baseLegendShape, stream);
-        SerialUtilities.writePaint(this.baseLegendTextPaint, stream);
+        SerialUtils.writePaint(this.paint, stream);
+        SerialUtils.writePaint(this.basePaint, stream);
+        SerialUtils.writePaint(this.fillPaint, stream);
+        SerialUtils.writePaint(this.baseFillPaint, stream);
+        SerialUtils.writePaint(this.outlinePaint, stream);
+        SerialUtils.writePaint(this.baseOutlinePaint, stream);
+        SerialUtils.writeStroke(this.stroke, stream);
+        SerialUtils.writeStroke(this.baseStroke, stream);
+        SerialUtils.writeStroke(this.outlineStroke, stream);
+        SerialUtils.writeStroke(this.baseOutlineStroke, stream);
+        SerialUtils.writeShape(this.shape, stream);
+        SerialUtils.writeShape(this.baseShape, stream);
+        SerialUtils.writePaint(this.itemLabelPaint, stream);
+        SerialUtils.writePaint(this.baseItemLabelPaint, stream);
+        SerialUtils.writeShape(this.baseLegendShape, stream);
+        SerialUtils.writePaint(this.baseLegendTextPaint, stream);
 
     }
 
@@ -3376,22 +3375,22 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
         throws IOException, ClassNotFoundException {
 
         stream.defaultReadObject();
-        this.paint = SerialUtilities.readPaint(stream);
-        this.basePaint = SerialUtilities.readPaint(stream);
-        this.fillPaint = SerialUtilities.readPaint(stream);
-        this.baseFillPaint = SerialUtilities.readPaint(stream);
-        this.outlinePaint = SerialUtilities.readPaint(stream);
-        this.baseOutlinePaint = SerialUtilities.readPaint(stream);
-        this.stroke = SerialUtilities.readStroke(stream);
-        this.baseStroke = SerialUtilities.readStroke(stream);
-        this.outlineStroke = SerialUtilities.readStroke(stream);
-        this.baseOutlineStroke = SerialUtilities.readStroke(stream);
-        this.shape = SerialUtilities.readShape(stream);
-        this.baseShape = SerialUtilities.readShape(stream);
-        this.itemLabelPaint = SerialUtilities.readPaint(stream);
-        this.baseItemLabelPaint = SerialUtilities.readPaint(stream);
-        this.baseLegendShape = SerialUtilities.readShape(stream);
-        this.baseLegendTextPaint = SerialUtilities.readPaint(stream);
+        this.paint = SerialUtils.readPaint(stream);
+        this.basePaint = SerialUtils.readPaint(stream);
+        this.fillPaint = SerialUtils.readPaint(stream);
+        this.baseFillPaint = SerialUtils.readPaint(stream);
+        this.outlinePaint = SerialUtils.readPaint(stream);
+        this.baseOutlinePaint = SerialUtils.readPaint(stream);
+        this.stroke = SerialUtils.readStroke(stream);
+        this.baseStroke = SerialUtils.readStroke(stream);
+        this.outlineStroke = SerialUtils.readStroke(stream);
+        this.baseOutlineStroke = SerialUtils.readStroke(stream);
+        this.shape = SerialUtils.readShape(stream);
+        this.baseShape = SerialUtils.readShape(stream);
+        this.itemLabelPaint = SerialUtils.readPaint(stream);
+        this.baseItemLabelPaint = SerialUtils.readPaint(stream);
+        this.baseLegendShape = SerialUtils.readShape(stream);
+        this.baseLegendTextPaint = SerialUtils.readPaint(stream);
 
         // listeners are not restored automatically, but storage must be
         // provided...

@@ -63,14 +63,13 @@ import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.util.BooleanList;
+import org.jfree.chart.util.ObjectUtils;
+import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.util.ShapeUtils;
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.statistics.MultiValueCategoryDataset;
-import org.jfree.util.BooleanList;
-import org.jfree.util.BooleanUtilities;
-import org.jfree.util.ObjectUtilities;
-import org.jfree.util.PublicCloneable;
-import org.jfree.util.ShapeUtilities;
 
 /**
  * A renderer that handles the multiple values from a
@@ -307,8 +306,7 @@ public class ScatterRenderer extends AbstractCategoryItemRenderer
      * @param filled the flag.
      */
     public void setSeriesShapesFilled(int series, boolean filled) {
-        this.seriesShapesFilled.setBoolean(series,
-                BooleanUtilities.valueOf(filled));
+        this.seriesShapesFilled.setBoolean(series, Boolean.valueOf(filled));
         fireChangeEvent();
     }
 
@@ -427,10 +425,10 @@ public class ScatterRenderer extends AbstractCategoryItemRenderer
 
             Shape shape = getItemShape(row, column);
             if (orientation == PlotOrientation.HORIZONTAL) {
-                shape = ShapeUtilities.createTranslatedShape(shape, y1, x1);
+                shape = ShapeUtils.createTranslatedShape(shape, y1, x1);
             }
             else if (orientation == PlotOrientation.VERTICAL) {
-                shape = ShapeUtilities.createTranslatedShape(shape, x1, y1);
+                shape = ShapeUtils.createTranslatedShape(shape, x1, y1);
             }
             if (getItemShapeFilled(row, column)) {
                 if (this.useFillPaint) {
@@ -529,7 +527,7 @@ public class ScatterRenderer extends AbstractCategoryItemRenderer
             return false;
         }
         ScatterRenderer that = (ScatterRenderer) obj;
-        if (!ObjectUtilities.equal(this.seriesShapesFilled,
+        if (!ObjectUtils.equal(this.seriesShapesFilled,
                 that.seriesShapesFilled)) {
             return false;
         }

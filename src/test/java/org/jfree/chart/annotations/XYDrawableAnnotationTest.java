@@ -52,9 +52,9 @@ import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 
 import org.jfree.chart.TestUtilities;
+import org.jfree.chart.ui.Drawable;
+import org.jfree.chart.util.PublicCloneable;
 
-import org.jfree.ui.Drawable;
-import org.jfree.util.PublicCloneable;
 import org.junit.Test;
 
 /**

@@ -47,13 +47,13 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.KeyedObjects2D;
 import org.jfree.data.Range;
 import org.jfree.data.RangeInfo;
 import org.jfree.data.general.AbstractDataset;
 import org.jfree.data.general.DatasetChangeEvent;
-import org.jfree.util.PublicCloneable;
 
 /**
  * A category dataset that defines multiple values for each item.

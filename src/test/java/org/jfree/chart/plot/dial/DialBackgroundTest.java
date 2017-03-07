@@ -48,9 +48,9 @@ import java.awt.Color;
 import java.awt.GradientPaint;
 
 import org.jfree.chart.TestUtilities;
+import org.jfree.chart.ui.GradientPaintTransformType;
+import org.jfree.chart.ui.StandardGradientPaintTransformer;
 
-import org.jfree.ui.GradientPaintTransformType;
-import org.jfree.ui.StandardGradientPaintTransformer;
 import org.junit.Test;
 
 /**

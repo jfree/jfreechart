@@ -52,8 +52,8 @@ import java.io.Serializable;
 
 import org.jfree.chart.Effect3D;
 import org.jfree.chart.event.RendererChangeEvent;
-import org.jfree.io.SerialUtilities;
-import org.jfree.util.PaintUtilities;
+import org.jfree.chart.util.PaintUtils;
+import org.jfree.chart.util.SerialUtils;
 
 /**
  * A XYLineAndShapeRenderer that adds a shadow line to the graph
@@ -252,7 +252,7 @@ public class XYLine3DRenderer extends XYLineAndShapeRenderer
         if (this.yOffset != that.yOffset) {
             return false;
         }
-        if (!PaintUtilities.equal(this.wallPaint, that.wallPaint)) {
+        if (!PaintUtils.equal(this.wallPaint, that.wallPaint)) {
             return false;
         }
         return super.equals(obj);
@@ -269,7 +269,7 @@ public class XYLine3DRenderer extends XYLineAndShapeRenderer
     private void readObject(ObjectInputStream stream)
             throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
-        this.wallPaint = SerialUtilities.readPaint(stream);
+        this.wallPaint = SerialUtils.readPaint(stream);
     }
 
     /**
@@ -281,7 +281,7 @@ public class XYLine3DRenderer extends XYLineAndShapeRenderer
      */
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
-        SerialUtilities.writePaint(this.wallPaint, stream);
+        SerialUtils.writePaint(this.wallPaint, stream);
     }
 
 }

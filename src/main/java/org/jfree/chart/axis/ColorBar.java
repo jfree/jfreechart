@@ -67,7 +67,7 @@ import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.RainbowPalette;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYBlockRenderer;
-import org.jfree.ui.RectangleEdge;
+import org.jfree.chart.ui.RectangleEdge;
 
 /**
  * A color bar.

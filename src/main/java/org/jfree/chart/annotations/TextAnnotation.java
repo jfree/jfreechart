@@ -65,11 +65,11 @@ import java.io.Serializable;
 
 import org.jfree.chart.HashUtilities;
 import org.jfree.chart.event.AnnotationChangeEvent;
+import org.jfree.chart.ui.TextAnchor;
+import org.jfree.chart.util.ObjectUtils;
+import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.ParamChecks;
-import org.jfree.io.SerialUtilities;
-import org.jfree.ui.TextAnchor;
-import org.jfree.util.ObjectUtilities;
-import org.jfree.util.PaintUtilities;
+import org.jfree.chart.util.SerialUtils;
 
 /**
  * A base class for text annotations.  This class records the content but not
@@ -297,19 +297,19 @@ public class TextAnnotation extends AbstractAnnotation implements Serializable {
             return false;
         }
         TextAnnotation that = (TextAnnotation) obj;
-        if (!ObjectUtilities.equal(this.text, that.getText())) {
+        if (!ObjectUtils.equal(this.text, that.getText())) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.font, that.getFont())) {
+        if (!ObjectUtils.equal(this.font, that.getFont())) {
             return false;
         }
-        if (!PaintUtilities.equal(this.paint, that.getPaint())) {
+        if (!PaintUtils.equal(this.paint, that.getPaint())) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.textAnchor, that.getTextAnchor())) {
+        if (!ObjectUtils.equal(this.textAnchor, that.getTextAnchor())) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.rotationAnchor,
+        if (!ObjectUtils.equal(this.rotationAnchor,
                 that.getRotationAnchor())) {
             return false;
         }
@@ -349,7 +349,7 @@ public class TextAnnotation extends AbstractAnnotation implements Serializable {
      */
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
-        SerialUtilities.writePaint(this.paint, stream);
+        SerialUtils.writePaint(this.paint, stream);
     }
 
     /**
@@ -363,7 +363,7 @@ public class TextAnnotation extends AbstractAnnotation implements Serializable {
     private void readObject(ObjectInputStream stream)
         throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
-        this.paint = SerialUtilities.readPaint(stream);
+        this.paint = SerialUtils.readPaint(stream);
     }
 
 }

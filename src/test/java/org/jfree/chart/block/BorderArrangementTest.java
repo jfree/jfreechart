@@ -48,10 +48,10 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 import org.jfree.chart.TestUtilities;
+import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.ui.Size2D;
 
 import org.jfree.data.Range;
-import org.jfree.ui.RectangleEdge;
-import org.jfree.ui.Size2D;
 import org.junit.Test;
 
 /**

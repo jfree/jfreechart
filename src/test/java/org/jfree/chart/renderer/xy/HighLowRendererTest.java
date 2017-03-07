@@ -54,12 +54,12 @@ import java.awt.Color;
 import java.util.Date;
 
 import org.jfree.chart.TestUtilities;
+import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.Range;
 import org.jfree.data.xy.DefaultOHLCDataset;
 import org.jfree.data.xy.OHLCDataItem;
 import org.jfree.data.xy.OHLCDataset;
-import org.jfree.util.PublicCloneable;
 import org.junit.Test;
 
 /**

@@ -49,8 +49,8 @@ import java.text.MessageFormat;
 
 import org.jfree.chart.HashUtilities;
 import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.category.CategoryDataset;
-import org.jfree.util.PublicCloneable;
 
 /**
  * A standard series label generator for plots that use data from

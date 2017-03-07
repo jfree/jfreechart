@@ -49,10 +49,10 @@ import static org.junit.Assert.assertEquals;
 import java.util.Date;
 
 import org.jfree.chart.TestUtilities;
+import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.Range;
 import org.jfree.data.general.DatasetUtilities;
-import org.jfree.util.PublicCloneable;
 import org.junit.Test;
 
 /**

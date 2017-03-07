@@ -61,12 +61,12 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.util.SortOrder;
 
 import org.jfree.data.DefaultKeyedValues;
 import org.jfree.data.KeyedValues;
 import org.jfree.data.UnknownKeyException;
-import org.jfree.util.PublicCloneable;
-import org.jfree.util.SortOrder;
 
 /**
  * A default implementation of the {@link PieDataset} interface.

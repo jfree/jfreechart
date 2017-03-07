@@ -66,9 +66,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
-
-import org.jfree.date.MonthConstants;
-import org.jfree.date.SerialDate;
+import org.jfree.chart.date.MonthConstants;
+import org.jfree.chart.date.SerialDate;
 
 /**
  * Defines a quarter (in a given year).  The range supported is Q1 1900 to

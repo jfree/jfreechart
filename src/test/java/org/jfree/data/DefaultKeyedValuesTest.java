@@ -52,7 +52,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import org.jfree.chart.TestUtilities;
-import org.jfree.util.SortOrder;
+import org.jfree.chart.util.SortOrder;
 import org.junit.Test;
 
 /**

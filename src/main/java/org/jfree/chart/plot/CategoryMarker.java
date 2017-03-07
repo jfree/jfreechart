@@ -51,8 +51,8 @@ import java.awt.Stroke;
 import java.io.Serializable;
 
 import org.jfree.chart.event.MarkerChangeEvent;
+import org.jfree.chart.ui.LengthAdjustmentType;
 import org.jfree.chart.util.ParamChecks;
-import org.jfree.ui.LengthAdjustmentType;
 
 /**
  * A marker for a category.

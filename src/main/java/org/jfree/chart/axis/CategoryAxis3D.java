@@ -65,7 +65,7 @@ import org.jfree.chart.Effect3D;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.renderer.category.CategoryItemRenderer;
-import org.jfree.ui.RectangleEdge;
+import org.jfree.chart.ui.RectangleEdge;
 
 /**
  * An axis that displays categories and has a 3D effect.

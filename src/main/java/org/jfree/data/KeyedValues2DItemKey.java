@@ -41,8 +41,8 @@
 package org.jfree.data;
 
 import java.io.Serializable;
+import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.ParamChecks;
-import org.jfree.util.ObjectUtilities;
 
 /**
  * An object that references one data item in a {@link KeyedValues2D} data
@@ -129,8 +129,8 @@ public class KeyedValues2DItemKey<R extends Comparable<R>,
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 17 * hash + ObjectUtilities.hashCode(this.rowKey);
-        hash = 17 * hash + ObjectUtilities.hashCode(this.columnKey);
+        hash = 17 * hash + ObjectUtils.hashCode(this.rowKey);
+        hash = 17 * hash + ObjectUtils.hashCode(this.columnKey);
         return hash;
     }
 

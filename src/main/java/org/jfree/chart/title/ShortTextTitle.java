@@ -46,10 +46,10 @@ import java.awt.geom.Rectangle2D;
 
 import org.jfree.chart.block.LengthConstraintType;
 import org.jfree.chart.block.RectangleConstraint;
+import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.ui.Size2D;
+import org.jfree.chart.ui.TextAnchor;
 import org.jfree.data.Range;
-import org.jfree.text.TextUtilities;
-import org.jfree.ui.Size2D;
-import org.jfree.ui.TextAnchor;
 
 /**
  * A text title that is only displayed if the entire text will be visible

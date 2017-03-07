@@ -47,7 +47,6 @@
 
 package org.jfree.chart.plot;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -73,9 +72,9 @@ import org.jfree.chart.labels.StandardPieToolTipGenerator;
 import org.jfree.chart.urls.CustomPieURLGenerator;
 import org.jfree.chart.urls.StandardPieURLGenerator;
 import org.jfree.chart.util.DefaultShadowGenerator;
+import org.jfree.chart.util.Rotation;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
-import org.jfree.util.Rotation;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import org.junit.Test;

@@ -63,14 +63,14 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.title.Title;
+import org.jfree.chart.ui.RectangleAnchor;
+import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.ui.Size2D;
+import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.XYCoordinateType;
 import org.jfree.data.Range;
-import org.jfree.ui.RectangleAnchor;
-import org.jfree.ui.RectangleEdge;
-import org.jfree.ui.Size2D;
-import org.jfree.util.ObjectUtilities;
-import org.jfree.util.PublicCloneable;
 
 /**
  * An annotation that allows any {@link Title} to be placed at a location on
@@ -359,7 +359,7 @@ public class XYTitleAnnotation extends AbstractXYAnnotation
         if (this.maxHeight != that.maxHeight) {
             return false;
         }
-        if (!ObjectUtilities.equal(this.title, that.title)) {
+        if (!ObjectUtils.equal(this.title, that.title)) {
             return false;
         }
         if (!this.anchor.equals(that.anchor)) {

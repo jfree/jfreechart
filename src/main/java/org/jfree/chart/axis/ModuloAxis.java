@@ -44,8 +44,8 @@ package org.jfree.chart.axis;
 import java.awt.geom.Rectangle2D;
 
 import org.jfree.chart.event.AxisChangeEvent;
+import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.data.Range;
-import org.jfree.ui.RectangleEdge;
 
 /**
  * An axis that displays numerical values within a fixed range using a modulo
