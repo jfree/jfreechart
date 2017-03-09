@@ -657,38 +657,6 @@ public class XYSeries extends Series implements Cloneable, Serializable {
     }
 
     /**
-     * Updates the value of an item in the series and sends a
-     * {@link SeriesChangeEvent} to all registered listeners.
-     *
-     * @param index  the item (zero based index).
-     * @param y  the new value ({@code null} permitted).
-     *
-     * @deprecated Renamed {@link #updateByIndex(int, Number)} to avoid
-     *         confusion with the {@link #update(Number, Number)} method.
-     */
-    public void update(int index, Number y) {
-        XYDataItem item = getRawDataItem(index);
-
-        // figure out if we need to iterate through all the y-values
-        boolean iterate = false;
-        double oldY = item.getYValue();
-        if (!Double.isNaN(oldY)) {
-            iterate = oldY <= this.minY || oldY >= this.maxY;
-        }
-        item.setY(y);
-
-        if (iterate) {
-            findBoundsByIteration();
-        }
-        else if (y != null) {
-            double yy = y.doubleValue();
-            this.minY = minIgnoreNaN(this.minY, yy);
-            this.maxY = maxIgnoreNaN(this.maxY, yy);
-        }
-        fireSeriesChanged();
-    }
-
-    /**
      * A function to find the minimum of two values, but ignoring any
      * Double.NaN values.
      *
@@ -736,7 +704,25 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * @since 1.0.1
      */
     public void updateByIndex(int index, Number y) {
-        update(index, y);
+        XYDataItem item = getRawDataItem(index);
+
+        // figure out if we need to iterate through all the y-values
+        boolean iterate = false;
+        double oldY = item.getYValue();
+        if (!Double.isNaN(oldY)) {
+            iterate = oldY <= this.minY || oldY >= this.maxY;
+        }
+        item.setY(y);
+
+        if (iterate) {
+            findBoundsByIteration();
+        }
+        else if (y != null) {
+            double yy = y.doubleValue();
+            this.minY = minIgnoreNaN(this.minY, yy);
+            this.maxY = maxIgnoreNaN(this.maxY, yy);
+        }
+        fireSeriesChanged();
     }
 
     /**

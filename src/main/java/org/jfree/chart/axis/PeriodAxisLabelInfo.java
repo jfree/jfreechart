@@ -244,21 +244,6 @@ public class PeriodAxisLabelInfo implements Cloneable, Serializable {
      *
      * @param millisecond  the time.
      * @param zone  the time zone.
-     *
-     * @return The time period.
-     *
-     * @deprecated As of 1.0.13, use the method that specifies the locale also.
-     */
-    public RegularTimePeriod createInstance(Date millisecond, TimeZone zone) {
-        return createInstance(millisecond, zone, Locale.getDefault());
-    }
-
-    /**
-     * Creates a time period that includes the specified millisecond, assuming
-     * the given time zone.
-     *
-     * @param millisecond  the time.
-     * @param zone  the time zone.
      * @param locale  the locale.
      *
      * @return The time period.

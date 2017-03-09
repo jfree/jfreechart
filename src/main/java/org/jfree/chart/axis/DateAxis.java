@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -192,16 +192,6 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
     /** The default minimum auto range size. */
     public static final double
             DEFAULT_AUTO_RANGE_MINIMUM_SIZE_IN_MILLISECONDS = 2.0;
-
-    /** 
-     * The default date tick unit.
-     * 
-     * @deprecated As pointed out in bug #977, the SimpleDateFormat in this
-     *     object uses Calendar which is not thread safe...so you should 
-     *     avoid reusing this instance and create a new instance as required.
-     */
-    public static final DateTickUnit DEFAULT_DATE_TICK_UNIT
-            = new DateTickUnit(DateTickUnitType.DAY, 1, new SimpleDateFormat());
 
     /** The default anchor date. */
     public static final Date DEFAULT_ANCHOR_DATE = new Date();

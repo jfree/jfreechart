@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2015, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -157,7 +157,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testClone2() throws CloneNotSupportedException {
-        TimeSeries s1 = new TimeSeries("S1", Year.class);
+        TimeSeries s1 = new TimeSeries("S1");
         s1.add(new Year(2007), 100.0);
         s1.add(new Year(2008), null);
         s1.add(new Year(2009), 200.0);
@@ -208,7 +208,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testDelete2() {
-        TimeSeries s1 = new TimeSeries("Series", Year.class);
+        TimeSeries s1 = new TimeSeries("Series");
         s1.add(new Year(2000), 13.75);
         s1.add(new Year(2001), 11.90);
         s1.add(new Year(2002), null);
@@ -335,19 +335,9 @@ public class TimeSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testEquals2() {
-        TimeSeries s1 = new TimeSeries("Series", null, null, Day.class);
-        TimeSeries s2 = new TimeSeries("Series", null, null, Day.class);
+        TimeSeries s1 = new TimeSeries("Series", null, null);
+        TimeSeries s2 = new TimeSeries("Series", null, null);
         assertTrue(s1.equals(s2));
-    }
-
-    /**
-     * Two classes with different period classes are NOT the same.
-     */
-    @Test
-    public void testEquals3() {
-        TimeSeries s1 = new TimeSeries("Series", Day.class);
-        TimeSeries s2 = new TimeSeries("Series", Month.class);
-        assertFalse(s1.equals(s2));
     }
 
     /**
@@ -356,7 +346,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testCreateCopy1() {
-        TimeSeries series = new TimeSeries("Series", Month.class);
+        TimeSeries series = new TimeSeries("Series");
         series.add(new Month(MonthConstants.JANUARY, 2003), 45.0);
         series.add(new Month(MonthConstants.FEBRUARY, 2003), 55.0);
         series.add(new Month(MonthConstants.JUNE, 2003), 35.0);
@@ -449,7 +439,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testCreateCopy2() {
-        TimeSeries series = new TimeSeries("Series", Month.class);
+        TimeSeries series = new TimeSeries("Series");
         series.add(new Month(MonthConstants.JANUARY, 2003), 45.0);
         series.add(new Month(MonthConstants.FEBRUARY, 2003), 55.0);
         series.add(new Month(MonthConstants.JUNE, 2003), 35.0);
@@ -549,7 +539,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testSetMaximumItemCount() {
-        TimeSeries s1 = new TimeSeries("S1", Year.class);
+        TimeSeries s1 = new TimeSeries("S1");
         s1.add(new Year(2000), 13.75);
         s1.add(new Year(2001), 11.90);
         s1.add(new Year(2002), null);
@@ -570,7 +560,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testAddOrUpdate() {
-        TimeSeries s1 = new TimeSeries("S1", Year.class);
+        TimeSeries s1 = new TimeSeries("S1");
         s1.setMaximumItemCount(2);
         s1.addOrUpdate(new Year(2000), 100.0);
         assertEquals(1, s1.getItemCount());
@@ -681,7 +671,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testGetIndex() {
-        TimeSeries series = new TimeSeries("Series", Month.class);
+        TimeSeries series = new TimeSeries("Series");
         assertEquals(-1, series.getIndex(new Month(1, 2003)));
 
         series.add(new Month(1, 2003), 45.0);
@@ -702,7 +692,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testGetDataItem1() {
-        TimeSeries series = new TimeSeries("S", Year.class);
+        TimeSeries series = new TimeSeries("S");
 
         // can't get anything yet...just an exception
         boolean pass = false;
@@ -741,7 +731,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testGetDataItem2() {
-        TimeSeries series = new TimeSeries("S", Year.class);
+        TimeSeries series = new TimeSeries("S");
         assertNull(series.getDataItem(new Year(2006)));
 
         // try a null argument
@@ -760,7 +750,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testRemoveAgedItems() {
-        TimeSeries series = new TimeSeries("Test Series", Year.class);
+        TimeSeries series = new TimeSeries("Test Series");
         series.addChangeListener(this);
         assertEquals(Long.MAX_VALUE, series.getMaximumItemAge());
         assertEquals(Integer.MAX_VALUE, series.getMaximumItemCount());
@@ -799,7 +789,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
     @Test
     public void testRemoveAgedItems2() {
         long y2006 = 1157087372534L;  // milliseconds somewhere in 2006
-        TimeSeries series = new TimeSeries("Test Series", Year.class);
+        TimeSeries series = new TimeSeries("Test Series");
         series.addChangeListener(this);
         assertEquals(Long.MAX_VALUE, series.getMaximumItemAge());
         assertEquals(Integer.MAX_VALUE, series.getMaximumItemCount());

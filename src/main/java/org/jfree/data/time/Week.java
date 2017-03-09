@@ -175,20 +175,6 @@ public class Week extends RegularTimePeriod implements Serializable {
      *
      * @param time  the date/time ({@code null} not permitted).
      * @param zone  the time zone ({@code null} not permitted).
-     *
-     * @deprecated As of 1.0.7, use {@link #Week(Date, TimeZone, Locale)}.
-     */
-    public Week(Date time, TimeZone zone) {
-        // defer argument checking...
-        this(time, zone, Locale.getDefault());
-    }
-
-    /**
-     * Creates a time period for the week in which the specified date/time
-     * falls, calculated relative to the specified time zone.
-     *
-     * @param time  the date/time ({@code null} not permitted).
-     * @param zone  the time zone ({@code null} not permitted).
      * @param locale  the locale ({@code null} not permitted).
      *
      * @since 1.0.7

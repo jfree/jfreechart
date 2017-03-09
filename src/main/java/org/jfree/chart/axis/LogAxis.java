@@ -1091,37 +1091,4 @@ public class LogAxis extends ValueAxis {
         return result;
     }
 
-    /**
-     * Returns a collection of tick units for log (base 10) values.
-     * Uses a given Locale to create the DecimalFormats.
-     *
-     * @param locale the locale to use to represent Numbers.
-     *
-     * @return A collection of tick units for integer values.
-     *
-     * @since 1.0.7
-     * 
-     * @deprecated This method is no longer used internally and will be removed
-     *     from a future version.  If you need this method, copy the source
-     *     code into your project.
-     */
-    public static TickUnitSource createLogTickUnits(Locale locale) {
-        TickUnits units = new TickUnits();
-        NumberFormat numberFormat = new LogFormat();
-        units.add(new NumberTickUnit(0.05, numberFormat, 2));
-        units.add(new NumberTickUnit(0.1, numberFormat, 10));
-        units.add(new NumberTickUnit(0.2, numberFormat, 2));
-        units.add(new NumberTickUnit(0.5, numberFormat, 5));
-        units.add(new NumberTickUnit(1, numberFormat, 10));
-        units.add(new NumberTickUnit(2, numberFormat, 10));
-        units.add(new NumberTickUnit(3, numberFormat, 15));
-        units.add(new NumberTickUnit(4, numberFormat, 20));
-        units.add(new NumberTickUnit(5, numberFormat, 25));
-        units.add(new NumberTickUnit(6, numberFormat));
-        units.add(new NumberTickUnit(7, numberFormat));
-        units.add(new NumberTickUnit(8, numberFormat));
-        units.add(new NumberTickUnit(9, numberFormat));
-        units.add(new NumberTickUnit(10, numberFormat));
-        return units;
-    }
 }

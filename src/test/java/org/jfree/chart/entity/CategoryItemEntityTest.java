@@ -67,9 +67,9 @@ public class CategoryItemEntityTest {
         d.addValue(3.0, "R2", "C1");
         d.addValue(4.0, "R2", "C2");
         CategoryItemEntity e1 = new CategoryItemEntity(new Rectangle2D.Double(
-                1.0, 2.0, 3.0, 4.0), "ToolTip", "URL", d, 1, "C2", 1);
+                1.0, 2.0, 3.0, 4.0), "ToolTip", "URL", d, "R2", "C2");
         CategoryItemEntity e2 = new CategoryItemEntity(new Rectangle2D.Double(
-                1.0, 2.0, 3.0, 4.0), "ToolTip", "URL", d, 1, "C2", 1);
+                1.0, 2.0, 3.0, 4.0), "ToolTip", "URL", d, "R2", "C2");
         assertTrue(e1.equals(e2));
 
         e1.setArea(new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0));
@@ -86,22 +86,6 @@ public class CategoryItemEntityTest {
         assertFalse(e1.equals(e2));
         e2.setURLText("New URL");
         assertTrue(e1.equals(e2));
-
-        e1.setCategory("C1");
-        assertFalse(e1.equals(e2));
-        e2.setCategory("C1");
-        assertTrue(e1.equals(e2));
-
-        e1.setCategoryIndex(0);
-        assertFalse(e1.equals(e2));
-        e2.setCategoryIndex(0);
-        assertTrue(e1.equals(e2));
-
-        e1.setSeries(0);
-        assertFalse(e1.equals(e2));
-        e2.setSeries(0);
-        assertTrue(e1.equals(e2));
-
     }
 
     /**
@@ -115,7 +99,7 @@ public class CategoryItemEntityTest {
         d.addValue(3.0, "R2", "C1");
         d.addValue(4.0, "R2", "C2");
         CategoryItemEntity e1 = new CategoryItemEntity(new Rectangle2D.Double(
-                1.0, 2.0, 3.0, 4.0), "ToolTip", "URL", d, 1, "C2", 1);
+                1.0, 2.0, 3.0, 4.0), "ToolTip", "URL", d, "R2", "C2");
         CategoryItemEntity e2 = (CategoryItemEntity) e1.clone();
         assertTrue(e1 != e2);
         assertTrue(e1.getClass() == e2.getClass());
@@ -133,7 +117,7 @@ public class CategoryItemEntityTest {
         d.addValue(3.0, "R2", "C1");
         d.addValue(4.0, "R2", "C2");
         CategoryItemEntity e1 = new CategoryItemEntity(new Rectangle2D.Double(
-                1.0, 2.0, 3.0, 4.0), "ToolTip", "URL", d, 1, "C2", 1);
+                1.0, 2.0, 3.0, 4.0), "ToolTip", "URL", d, "R2", "C2");
         CategoryItemEntity e2 = (CategoryItemEntity) TestUtilities.serialised(e1);
         assertEquals(e1, e2);
     }

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -87,7 +87,7 @@ public class MovingAverageTest {
      * @return A sample series.
      */
     private TimeSeries createDailyTimeSeries1() {
-        TimeSeries series = new TimeSeries("Series 1", Day.class);
+        TimeSeries series = new TimeSeries("Series 1");
         series.add(new Day(11, MonthConstants.AUGUST, 2003), 11.2);
         series.add(new Day(13, MonthConstants.AUGUST, 2003), 13.8);
         series.add(new Day(17, MonthConstants.AUGUST, 2003), 14.1);

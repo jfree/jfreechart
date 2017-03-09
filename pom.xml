@@ -215,8 +215,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.source.level>1.8</project.source.level>
-        <project.target.level>1.8</project.target.level>
+        <project.source.level>1.6</project.source.level>
+        <project.target.level>1.6</project.target.level>
     </properties>
 
     <profiles>
@@ -237,11 +237,6 @@
                                 </goals>
                             </execution>
                         </executions>
-                        <configuration>
-                            <sourceFileExcludes>
-                        <!--        <exclude>org/jfree/chart/fx/**</exclude> -->
-                            </sourceFileExcludes>
-                        </configuration>
                     </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>

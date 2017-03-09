@@ -213,24 +213,6 @@ public class PeriodAxis extends ValueAxis
      * @param last  the last time period in the axis range
      *              ({@code null} not permitted).
      * @param timeZone  the time zone ({@code null} not permitted).
-     *
-     * @deprecated As of version 1.0.13, you should use the constructor that
-     *     specifies a Locale also.
-     */
-    public PeriodAxis(String label, RegularTimePeriod first, 
-            RegularTimePeriod last, TimeZone timeZone) {
-        this(label, first, last, timeZone, Locale.getDefault());
-    }
-
-    /**
-     * Creates a new axis.
-     *
-     * @param label  the axis label ({@code null} permitted).
-     * @param first  the first time period in the axis range
-     *               ({@code null} not permitted).
-     * @param last  the last time period in the axis range
-     *              ({@code null} not permitted).
-     * @param timeZone  the time zone ({@code null} not permitted).
      * @param locale  the locale ({@code null} not permitted).
      *
      * @since 1.0.13

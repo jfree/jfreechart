@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -73,30 +73,6 @@ public class CategoryItemEntity extends ChartEntity
     private CategoryDataset dataset;
 
     /**
-     * The series (zero-based index).
-     *
-     * @deprecated As of 1.0.6, this field is redundant as you can derive the
-     *         index from the {@code rowKey} field.
-     */
-    private int series;
-
-    /**
-     * The category.
-     *
-     * @deprecated As of 1.0.6, this field is deprecated in favour of the
-     *         {@code columnKey} field.
-     */
-    private Object category;
-
-    /**
-     * The category index.
-     *
-     * @deprecated As of 1.0.6, this field is redundant as you can derive the
-     *         index from the {@code columnKey} field.
-     */
-    private int categoryIndex;
-
-    /**
      * The row key.
      *
      * @since 1.0.6
@@ -109,34 +85,6 @@ public class CategoryItemEntity extends ChartEntity
      * @since 1.0.6
      */
     private Comparable columnKey;
-
-    /**
-     * Creates a new category item entity.
-     *
-     * @param area  the area ({@code null} not permitted).
-     * @param toolTipText  the tool tip text.
-     * @param urlText  the URL text for HTML image maps.
-     * @param dataset  the dataset.
-     * @param series  the series (zero-based index).
-     * @param category  the category.
-     * @param categoryIndex  the category index.
-     *
-     * @deprecated As of 1.0.6, use {@link #CategoryItemEntity(Shape, String,
-     *         String, CategoryDataset, Comparable, Comparable)}.
-     */
-    public CategoryItemEntity(Shape area, String toolTipText, String urlText,
-                              CategoryDataset dataset,
-                              int series, Object category, int categoryIndex) {
-
-        super(area, toolTipText, urlText);
-        ParamChecks.nullNotPermitted(dataset, "dataset");
-        this.dataset = dataset;
-        this.series = series;
-        this.category = category;
-        this.categoryIndex = categoryIndex;
-        this.rowKey = dataset.getRowKey(series);
-        this.columnKey = dataset.getColumnKey(categoryIndex);
-    }
 
     /**
      * Creates a new entity instance for an item in the specified dataset.
@@ -157,11 +105,6 @@ public class CategoryItemEntity extends ChartEntity
         this.dataset = dataset;
         this.rowKey = rowKey;
         this.columnKey = columnKey;
-
-        // populate the deprecated fields
-        this.series = dataset.getRowIndex(rowKey);
-        this.category = columnKey;
-        this.categoryIndex = dataset.getColumnIndex(columnKey);
     }
 
     /**
@@ -213,8 +156,6 @@ public class CategoryItemEntity extends ChartEntity
      */
     public void setRowKey(Comparable rowKey) {
         this.rowKey = rowKey;
-        // update the deprecated field
-        this.series = this.dataset.getRowIndex(rowKey);
     }
 
     /**
@@ -241,93 +182,6 @@ public class CategoryItemEntity extends ChartEntity
      */
     public void setColumnKey(Comparable columnKey) {
         this.columnKey = columnKey;
-        // update the deprecated fields
-        this.category = columnKey;
-        this.categoryIndex = this.dataset.getColumnIndex(columnKey);
-    }
-
-    /**
-     * Returns the series index.
-     *
-     * @return The series index.
-     *
-     * @see #setSeries(int)
-     *
-     * @deprecated As of 1.0.6, you can derive this information from the
-     *         {@link #getRowKey()} method.
-     */
-    public int getSeries() {
-        return this.series;
-    }
-
-    /**
-     * Sets the series index.
-     *
-     * @param series  the series index (zero-based).
-     *
-     * @see #getSeries()
-     *
-     * @deprecated As of 1.0.6, you should use {@link #setRowKey(Comparable)}
-     *         to designate the series.
-     */
-    public void setSeries(int series) {
-        this.series = series;
-    }
-
-    /**
-     * Returns the category.
-     *
-     * @return The category (possibly {@code null}).
-     *
-     * @see #setCategory(Object)
-     *
-     * @deprecated The return type for this method should be
-     *         {@code Comparable}, so it has been deprecated as of
-     *         version 1.0.6 and replaced by {@link #getColumnKey()}.
-     */
-    public Object getCategory() {
-        return this.category;
-    }
-
-    /**
-     * Sets the category.
-     *
-     * @param category  the category ({@code null} permitted).
-     *
-     * @see #getCategory()
-     *
-     * @deprecated As of version 1.0.6, use {@link #setColumnKey(Comparable)}.
-     */
-    public void setCategory(Object category) {
-        this.category = category;
-    }
-
-    /**
-     * Returns the category index.
-     *
-     * @return The index.
-     *
-     * @see #setCategoryIndex(int)
-     *
-     * @deprecated As of 1.0.6, you can derive this information from the
-     *         {@link #getColumnKey()} method.
-     */
-    public int getCategoryIndex() {
-        return this.categoryIndex;
-    }
-
-    /**
-     * Sets the category index.
-     *
-     * @param index  the category index.
-     *
-     * @see #getCategoryIndex()
-     *
-     * @deprecated As of 1.0.6, use {@link #setColumnKey(Comparable)} to
-     *         designate the category.
-     */
-    public void setCategoryIndex(int index) {
-        this.categoryIndex = index;
     }
 
     /**
@@ -368,16 +222,6 @@ public class CategoryItemEntity extends ChartEntity
             return false;
         }
 
-        // check the deprecated fields
-        if (this.categoryIndex != that.categoryIndex) {
-            return false;
-        }
-        if (this.series != that.series) {
-            return false;
-        }
-        if (!ObjectUtils.equal(this.category, that.category)) {
-            return false;
-        }
         return super.equals(obj);
     }
 
