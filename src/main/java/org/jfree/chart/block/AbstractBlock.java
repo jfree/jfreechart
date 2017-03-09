@@ -226,36 +226,6 @@ public class AbstractBlock implements Cloneable, Serializable {
     }
 
     /**
-     * Returns the border.
-     *
-     * @return The border (never {@code null}).
-     *
-     * @deprecated Use {@link #getFrame()} instead.
-     */
-    public BlockBorder getBorder() {
-        if (this.frame instanceof BlockBorder) {
-            return (BlockBorder) this.frame;
-        }
-        else {
-            return null;
-        }
-    }
-
-    /**
-     * Sets the border for the block (use {@link BlockBorder#NONE} for
-     * no border).
-     *
-     * @param border  the border ({@code null} not permitted).
-     *
-     * @see #getBorder()
-     *
-     * @deprecated Use {@link #setFrame(BlockFrame)} instead.
-     */
-    public void setBorder(BlockBorder border) {
-        setFrame(border);
-    }
-
-    /**
      * Sets a black border with the specified line widths.
      *
      * @param top  the top border line width.
