@@ -20,13 +20,7 @@
     <target name="initialise" description="Initialise required settings.">
         <tstamp />
         <property name="jfreechart.name" value="jfreechart" />
-        <property name="jfreechart.version" value="1.0.20" />
-        <property name="jcommon.name" value="jcommon" />
-        <property name="jcommon.version" value="1.0.24" />
-        <property name="jcommon.jar" value="${basedir}/lib/${jcommon.name}-${jcommon.version}.jar"/>
-        <property name="fxgraphics2d.name" value="fxgraphics2d" />
-        <property name="fxgraphics2d.version" value="1.5" />
-        <property name="fxgraphics2d.jar" value="${basedir}/lib/${fxgraphics2d.name}-${fxgraphics2d.version}.jar" />
+        <property name="jfreechart.version" value="1.5.0" />
         <property name="jfreesvg.name" value="jfreesvg" />
         <property name="jfreesvg.version" value="3.2" />
         <property name="orsonpdf.name" value="orsonpdf" />
@@ -40,7 +34,6 @@
         <property name="target.version" value="1.6"/>
         <path id="build.classpath">
             <fileset dir="${basedir}/lib/">
-                <include name="${jcommon.name}-${jcommon.version}.jar"/>
                 <include name="servlet.jar"/>
             </fileset>
         </path>
@@ -63,7 +56,6 @@
                includeantruntime="false">
             <classpath refid="build.classpath" />
             <include name="org/jfree/**"/>
-            <exclude name="org/jfree/chart/fx/**"/>
         </javac>
 
         <!-- copy across gorilla.jpg -->
@@ -141,7 +133,6 @@
             <classpath refid="build.classpath" />
             <packageset dir="${basedir}/src/main/java" defaultexcludes="yes">
                 <include name="org/jfree/**"/>
-                <exclude name="org/jfree/chart/fx/**"/>
             </packageset>
         </javadoc>
         <!-- copy across .png files -->
@@ -207,8 +198,6 @@
         </copy>
 
         <!-- copy across lib files -->
-        <copy file="${jcommon.jar}" tofile="${basedir}/distribution/lib/${jcommon.name}-${jcommon.version}.jar" />
-        <copy file="${fxgraphics2d.jar}" tofile="${basedir}/distribution/lib/${fxgraphics2d.name}-${fxgraphics2d.version}.jar" />
         <copy file="${servlet.jar}" tofile="${basedir}/distribution/lib/servlet.jar" />
         <copy file="${junit.jar}" tofile="${basedir}/distribution/lib/junit-4.11.jar" />
         <copy file="${hamcrest.jar}" tofile="${basedir}/distribution/lib/hamcrest-core-1.3.jar" />
@@ -218,7 +207,6 @@
 
         <!-- copy across ant build files -->
         <copy file="${basedir}/ant/build.xml" tofile="${basedir}/distribution/ant/build.xml" />
-        <copy file="${basedir}/ant/build-fx.xml" tofile="${basedir}/distribution/ant/build-fx.xml" />
 
         <!-- convert end-of-line characters in text files -->
         <fixcrlf srcdir="${basedir}/distribution/src"
