@@ -84,13 +84,6 @@ public class StandardPieToolTipGenerator extends AbstractPieItemLabelGenerator
     public static final String DEFAULT_TOOLTIP_FORMAT = "{0}: ({1}, {2})";
 
     /**
-     * The default section label format.
-     *
-     * @deprecated As of 1.0.7, use {@link #DEFAULT_TOOLTIP_FORMAT} instead.
-     */
-    public static final String DEFAULT_SECTION_LABEL_FORMAT = "{0} = {1}";
-
-    /**
      * Creates an item label generator using default number formatters.
      */
     public StandardPieToolTipGenerator() {
