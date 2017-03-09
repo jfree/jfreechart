@@ -1,7 +1,7 @@
 JFreeChart
 ==========
 
-Version 1.5.0 (and 1.0.20), not yet released.
+Version 1.0.20, not yet released.
 
 
 Overview
@@ -25,8 +25,7 @@ later.
 Building JFreeChart
 -------------------
 You can build JFreeChart using either Ant or Maven.  The build requires 
-JDK 1.8.0_40 or later.  If you do not require JavaFX support, then you can 
-build JFreeChart using JDK 1.6.0 or later.
+JDK 1.6.0 or later.  If you require JavaFX support, then you will ne
 
 #### Ant
 Using Ant you can build JFreeChart using the following command (issued from the root directory of the project):
