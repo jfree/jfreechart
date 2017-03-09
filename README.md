@@ -1,7 +1,7 @@
 JFreeChart
 ==========
 
-Version 1.5.0 (and 1.0.20), not yet released.
+Version 1.5.0, not yet released.
 
 
 Overview
@@ -16,8 +16,8 @@ The home page for the project is:
 
 http://www.jfree.org/jfreechart
 
-JFreeChart requires JDK 1.8.0_40 or later.  If JavaFX support is not required, 
-the library can be built using JDK 1.6.0 or later.  The library is licensed 
+JFreeChart requires JDK 1.6.0 or later.  If JavaFX support is required, you
+need to also include the JFreeChart-FX extensions.  The library is licensed 
 under the terms of the GNU Lesser General Public License (LGPL) version 2.1 or 
 later.
 
@@ -25,17 +25,12 @@ later.
 Building JFreeChart
 -------------------
 You can build JFreeChart using either Ant or Maven.  The build requires 
-JDK 1.8.0_40 or later.  If you do not require JavaFX support, then you can 
-build JFreeChart using JDK 1.6.0 or later.
+JDK 1.6.0 or later.
 
 #### Ant
 Using Ant you can build JFreeChart using the following command (issued from the root directory of the project):
 
     ant -f ant/build.xml
-
-This will include JavaFX support.  To build without JavaFX:
-
-    ant -f ant/build-1.6.xml
 
 The Ant build script will perform all build and packaging tasks.
 
@@ -44,20 +39,16 @@ Using Maven you can build JFreeChart using the following command (issued from th
 
     mvn clean install
 
-This will include the JavaFX support.  To build without JavaFX, you should copy the content of the file `maven/pom-1.6.xml` into the `pom.xml` file in the root directory and then type the same command as above.
 
 History
 -------
 
-##### Version 1.5.0 / 1.0.20 (18-Feb-2017)
-- `ChartViewer` now extends `Region` instead of `Control`;
-- add overlays for the JavaFX `ChartCanvas`;
+##### Version 1.5.0 (not yet release)
+- all JavaFX classes moved to a separate project;
 - added cleaner method to create histograms in `ChartFactory`;
-- set file extensions correctly for JavaFX file dialogs;
-- FXGraphics2D updated to version 1.5;
 - JFreeSVG updated to version 3.2;
 - OrsonPDF updated to version 1.7;
-- JCommon updated to version 1.0.24;
+- JCommon removed as a dependency, and required classes incorporated directly;
 - pull request #4 improvements to `XYStepRenderer`;
 - bug #36 fix for crosshairs with multiple datasets / axes;
 - bug #25 fix for `DateAxis.previousStandardDate()` method;
