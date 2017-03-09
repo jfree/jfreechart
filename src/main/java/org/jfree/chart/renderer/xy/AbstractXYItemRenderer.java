@@ -984,7 +984,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      * @param value  the value at which the grid line should be drawn.
      */
     @Override
-    public void drawDomainGridLine(Graphics2D g2, XYPlot plot, ValueAxis axis,
+    public void drawDomainLine(Graphics2D g2, XYPlot plot, ValueAxis axis,
             Rectangle2D dataArea, double value) {
 
         Range range = axis.getRange();

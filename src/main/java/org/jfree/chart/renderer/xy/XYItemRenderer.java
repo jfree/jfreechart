@@ -1351,7 +1351,7 @@ public interface XYItemRenderer extends LegendItemSource {
      *                  3D effect).
      * @param value  the value.
      */
-    public void drawDomainGridLine(Graphics2D g2, XYPlot plot, ValueAxis axis,
+    public void drawDomainLine(Graphics2D g2, XYPlot plot, ValueAxis axis,
             Rectangle2D dataArea, double value);
 
     /**
