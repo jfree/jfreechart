@@ -1,4 +1,4 @@
-<!-- An ANT build file for JFreeChart including JavaFX support -->
+<!-- An ANT build file for JFreeChart -->
 
 <!-- Written by David Gilbert. -->
 
@@ -20,9 +20,9 @@
     <target name="initialise" description="Initialise required settings.">
         <tstamp />
         <property name="jfreechart.name" value="jfreechart" />
-        <property name="jfreechart.version" value="1.5.0" />
+        <property name="jfreechart.version" value="1.0.20" />
         <property name="jcommon.name" value="jcommon" />
-        <property name="jcommon.version" value="1.0.23" />
+        <property name="jcommon.version" value="1.0.24" />
         <property name="jcommon.jar" value="${basedir}/lib/${jcommon.name}-${jcommon.version}.jar"/>
         <property name="fxgraphics2d.name" value="fxgraphics2d" />
         <property name="fxgraphics2d.version" value="1.5" />
@@ -36,12 +36,11 @@
         <property name="servlet.jar" value="${basedir}/lib/servlet.jar"/>
         <property name="junit.jar" value="${basedir}/lib/junit-4.11.jar"/>
         <property name="hamcrest.jar" value="${basedir}/lib/hamcrest-core-1.3.jar"/>
-        <property name="src.version" value="1.8"/>
-        <property name="target.version" value="1.8"/>
+        <property name="src.version" value="1.6"/>
+        <property name="target.version" value="1.6"/>
         <path id="build.classpath">
             <fileset dir="${basedir}/lib/">
-                <include name="${jcommon.name}-${jcommon.version}.jar" />
-                <include name="${fxgraphics2d.name}-${fxgraphics2d.version}.jar" />
+                <include name="${jcommon.name}-${jcommon.version}.jar"/>
                 <include name="servlet.jar"/>
             </fileset>
         </path>
@@ -64,6 +63,7 @@
                includeantruntime="false">
             <classpath refid="build.classpath" />
             <include name="org/jfree/**"/>
+            <exclude name="org/jfree/chart/fx/**"/>
         </javac>
 
         <!-- copy across gorilla.jpg -->
@@ -104,6 +104,27 @@
 
     </target>
 
+    <!-- Generate the JFreeChart source code jar -->
+    <target name="source-jar" depends="initialise"
+            description="Package the JFreeChart source code in a jar">
+
+        <!-- create a temp build directory -->
+        <mkdir dir="${basedir}/source-jar"/>
+
+        <!-- copy source code -->
+        <copy todir="${basedir}/source-jar/">
+            <fileset dir="${basedir}/src/main/java"/>
+        </copy>
+
+        <!-- make the jar -->
+        <jar jarfile="${basedir}/lib/${jfreechart.name}-${jfreechart.version}-src.jar"
+             basedir="${basedir}/source-jar">
+        </jar>
+
+        <!-- delete the temp directory -->
+        <delete dir="${basedir}/source-jar"/>
+
+    </target>
 
     <!-- Generate the JFreeChart API HTML pages -->
     <target name="javadoc"
@@ -120,6 +141,7 @@
             <classpath refid="build.classpath" />
             <packageset dir="${basedir}/src/main/java" defaultexcludes="yes">
                 <include name="org/jfree/**"/>
+                <exclude name="org/jfree/chart/fx/**"/>
             </packageset>
         </javadoc>
         <!-- copy across .png files -->
@@ -223,8 +245,8 @@
         <mkdir dir="${basedir}/build-tests"/>
         <javac srcdir="${basedir}/src/test/java"
                destdir="${basedir}/build-tests"
-               source="1.8"
-               target="1.8"
+               source="1.6"
+               target="1.6"
                debug="true"
                deprecation="false"
                optimize="false"
@@ -273,7 +295,7 @@
 
     <!-- ALL -->
     <target name="all"
-            depends="compile,zip-javadocs,zip"
+            depends="compile,zip-javadocs,zip,source-jar"
             description="Compiles JFreeChart, builds the jar files, generates the Javadoc HTML pages and creates distribution files (.zip and .tar.gz).">
 
         <!-- delete the temporary distribution directory -->
