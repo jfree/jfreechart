@@ -57,6 +57,7 @@ package org.jfree.data.time;
 import java.lang.reflect.Constructor;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.TimeZone;
 import org.jfree.chart.date.MonthConstants;
 
@@ -82,13 +83,13 @@ public abstract class RegularTimePeriod implements TimePeriod, Comparable,
      * @return The time period.
      */
     public static RegularTimePeriod createInstance(Class c, Date millisecond,
-            TimeZone zone) {
+            TimeZone zone, Locale locale) {
         RegularTimePeriod result = null;
         try {
             Constructor constructor = c.getDeclaredConstructor(
-                    new Class[] {Date.class, TimeZone.class});
+                    new Class[] {Date.class, TimeZone.class, Locale.class});
             result = (RegularTimePeriod) constructor.newInstance(
-                    new Object[] {millisecond, zone});
+                    new Object[] {millisecond, zone, locale});
         }
         catch (Exception e) {
             // do nothing, so null is returned

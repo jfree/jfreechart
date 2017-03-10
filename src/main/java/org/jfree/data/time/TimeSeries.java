@@ -1000,10 +1000,10 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
         try {
             Method m = RegularTimePeriod.class.getDeclaredMethod(
                     "createInstance", new Class[] {Class.class, Date.class,
-                    TimeZone.class});
+                    TimeZone.class, Locale.class});
             RegularTimePeriod newest = (RegularTimePeriod) m.invoke(
                     this.timePeriodClass, new Object[] {this.timePeriodClass,
-                            new Date(latest), TimeZone.getDefault()});
+                            new Date(latest), TimeZone.getDefault(), Locale.getDefault()});
             index = newest.getSerialIndex();
         }
         catch (NoSuchMethodException e) {
