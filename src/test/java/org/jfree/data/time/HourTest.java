@@ -95,15 +95,16 @@ public class HourTest {
     @Test
     public void testDateConstructor1() {
         TimeZone zone = TimeZone.getTimeZone("GMT");
+        Calendar cal = Calendar.getInstance(zone);
         Locale locale = Locale.getDefault();  // locale should not matter here
         Hour h1 = new Hour(new Date(1014307199999L), zone, locale);
         Hour h2 = new Hour(new Date(1014307200000L), zone, locale);
 
         assertEquals(15, h1.getHour());
-        assertEquals(1014307199999L, h1.getLastMillisecond(zone));
+        assertEquals(1014307199999L, h1.getLastMillisecond(cal));
 
         assertEquals(16, h2.getHour());
-        assertEquals(1014307200000L, h2.getFirstMillisecond(zone));
+        assertEquals(1014307200000L, h2.getFirstMillisecond(cal));
     }
 
     /**
@@ -113,15 +114,16 @@ public class HourTest {
     @Test
     public void testDateConstructor2() {
         TimeZone zone = TimeZone.getTimeZone("Australia/Sydney");
+        Calendar cal = Calendar.getInstance(zone);
         Locale locale = Locale.getDefault();  // locale should not matter here
         Hour h1 = new Hour(new Date(1014267599999L), zone, locale);
         Hour h2 = new Hour (new Date(1014267600000L), zone, locale);
 
         assertEquals(15, h1.getHour());
-        assertEquals(1014267599999L, h1.getLastMillisecond(zone));
+        assertEquals(1014267599999L, h1.getLastMillisecond(cal));
 
         assertEquals(16, h2.getHour());
-        assertEquals(1014267600000L, h2.getFirstMillisecond(zone));
+        assertEquals(1014267600000L, h2.getFirstMillisecond(cal));
     }
 
     /**
@@ -234,12 +236,13 @@ public class HourTest {
     public void testGetFirstMillisecondWithTimeZone() {
         Hour h = new Hour(15, 1, 4, 1950);
         TimeZone zone = TimeZone.getTimeZone("America/Los_Angeles");
-        assertEquals(-623293200000L, h.getFirstMillisecond(zone));
+        Calendar cal = Calendar.getInstance(zone);
+        assertEquals(-623293200000L, h.getFirstMillisecond(cal));
 
         // try null calendar
         boolean pass = false;
         try {
-            h.getFirstMillisecond((TimeZone) null);
+            h.getFirstMillisecond((Calendar) null);
         }
         catch (NullPointerException e) {
             pass = true;
@@ -290,12 +293,13 @@ public class HourTest {
     public void testGetLastMillisecondWithTimeZone() {
         Hour h = new Hour(2, 7, 7, 1950);
         TimeZone zone = TimeZone.getTimeZone("America/Los_Angeles");
-        assertEquals(-614959200001L, h.getLastMillisecond(zone));
+        Calendar cal = Calendar.getInstance(zone);
+        assertEquals(-614959200001L, h.getLastMillisecond(cal));
 
         // try null calendar
         boolean pass = false;
         try {
-            h.getLastMillisecond((TimeZone) null);
+            h.getLastMillisecond((Calendar) null);
         }
         catch (NullPointerException e) {
             pass = true;

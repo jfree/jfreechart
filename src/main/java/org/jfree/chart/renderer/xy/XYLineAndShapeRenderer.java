@@ -121,13 +121,6 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     private static final long serialVersionUID = -7435246895986425885L;
 
     /**
-     * A flag that controls whether or not lines are visible for ALL series.
-     *
-     * @deprecated As of 1.0.7.
-     */
-    private Boolean linesVisible;
-
-    /**
      * A table of flags that control (per series) whether or not lines are
      * visible.
      */
@@ -140,13 +133,6 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     private transient Shape legendLine;
 
     /**
-     * A flag that controls whether or not shapes are visible for ALL series.
-     *
-     * @deprecated As of 1.0.7.
-     */
-    private Boolean shapesVisible;
-
-    /**
      * A table of flags that control (per series) whether or not shapes are
      * visible.
      */
@@ -154,13 +140,6 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
 
     /** The default value returned by the getShapeVisible() method. */
     private boolean baseShapesVisible;
-
-    /**
-     * A flag that controls whether or not shapes are filled for ALL series.
-     *
-     * @deprecated As of 1.0.7.
-     */
-    private Boolean shapesFilled;
 
     /**
      * A table of flags that control (per series) whether or not shapes are
@@ -206,16 +185,13 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
      * @param shapes  shapes visible?
      */
     public XYLineAndShapeRenderer(boolean lines, boolean shapes) {
-        this.linesVisible = null;
         this.seriesLinesVisible = new BooleanList();
         this.baseLinesVisible = lines;
         this.legendLine = new Line2D.Double(-7.0, 0.0, 7.0, 0.0);
 
-        this.shapesVisible = null;
         this.seriesShapesVisible = new BooleanList();
         this.baseShapesVisible = shapes;
 
-        this.shapesFilled = null;
         this.useFillPaint = false;     // use item paint for fills by default
         this.seriesShapesFilled = new BooleanList();
         this.baseShapesFilled = true;
@@ -279,63 +255,13 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
      * @return A boolean.
      */
     public boolean getItemLineVisible(int series, int item) {
-        Boolean flag = this.linesVisible;
-        if (flag == null) {
-            flag = getSeriesLinesVisible(series);
-        }
+        Boolean flag = getSeriesLinesVisible(series);
         if (flag != null) {
             return flag.booleanValue();
         }
         else {
             return this.baseLinesVisible;
         }
-    }
-
-    /**
-     * Returns a flag that controls whether or not lines are drawn for ALL
-     * series.  If this flag is {@code null}, then the "per series"
-     * settings will apply.
-     *
-     * @return A flag (possibly {@code null}).
-     *
-     * @see #setLinesVisible(Boolean)
-     *
-     * @deprecated As of 1.0.7, use the per-series and base level settings.
-     */
-    public Boolean getLinesVisible() {
-        return this.linesVisible;
-    }
-
-    /**
-     * Sets a flag that controls whether or not lines are drawn between the
-     * items in ALL series, and sends a {@link RendererChangeEvent} to all
-     * registered listeners.  You need to set this to {@code null} if you
-     * want the "per series" settings to apply.
-     *
-     * @param visible  the flag ({@code null} permitted).
-     *
-     * @see #getLinesVisible()
-     *
-     * @deprecated As of 1.0.7, use the per-series and base level settings.
-     */
-    public void setLinesVisible(Boolean visible) {
-        this.linesVisible = visible;
-        fireChangeEvent();
-    }
-
-    /**
-     * Sets a flag that controls whether or not lines are drawn between the
-     * items in ALL series, and sends a {@link RendererChangeEvent} to all
-     * registered listeners.
-     *
-     * @param visible  the flag.
-     *
-     * @see #getLinesVisible()
-     *
-     * @deprecated As of 1.0.7, use the per-series and base level settings.
-     */
-    public void setLinesVisible(boolean visible) {
-        setLinesVisible(Boolean.valueOf(visible));
     }
 
     /**
@@ -444,59 +370,13 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
      * @return A boolean.
      */
     public boolean getItemShapeVisible(int series, int item) {
-        Boolean flag = this.shapesVisible;
-        if (flag == null) {
-            flag = getSeriesShapesVisible(series);
-        }
+        Boolean flag = getSeriesShapesVisible(series);
         if (flag != null) {
             return flag.booleanValue();
         }
         else {
             return this.baseShapesVisible;
         }
-    }
-
-    /**
-     * Returns the flag that controls whether the shapes are visible for the
-     * items in ALL series.
-     *
-     * @return The flag (possibly {@code null}).
-     *
-     * @see #setShapesVisible(Boolean)
-     *
-     * @deprecated As of 1.0.7, use the per-series and base level settings.
-     */
-    public Boolean getShapesVisible() {
-        return this.shapesVisible;
-    }
-
-    /**
-     * Sets the 'shapes visible' for ALL series and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
-     *
-     * @param visible  the flag ({@code null} permitted).
-     *
-     * @see #getShapesVisible()
-     *
-     * @deprecated As of 1.0.7, use the per-series and base level settings.
-     */
-    public void setShapesVisible(Boolean visible) {
-        this.shapesVisible = visible;
-        fireChangeEvent();
-    }
-
-    /**
-     * Sets the 'shapes visible' for ALL series and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
-     *
-     * @param visible  the flag.
-     *
-     * @see #getShapesVisible()
-     *
-     * @deprecated As of 1.0.7, use the per-series and base level settings.
-     */
-    public void setShapesVisible(boolean visible) {
-        setShapesVisible(Boolean.valueOf(visible));
     }
 
     /**
@@ -580,41 +460,13 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
      * @return A boolean.
      */
     public boolean getItemShapeFilled(int series, int item) {
-        Boolean flag = this.shapesFilled;
-        if (flag == null) {
-            flag = getSeriesShapesFilled(series);
-        }
+        Boolean flag = getSeriesShapesFilled(series);
         if (flag != null) {
             return flag.booleanValue();
         }
         else {
             return this.baseShapesFilled;
         }
-    }
-
-    /**
-     * Sets the 'shapes filled' for ALL series and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
-     *
-     * @param filled  the flag.
-     *
-     * @deprecated As of 1.0.7, use the per-series and base level settings.
-     */
-    public void setShapesFilled(boolean filled) {
-        setShapesFilled(Boolean.valueOf(filled));
-    }
-
-    /**
-     * Sets the 'shapes filled' for ALL series and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
-     *
-     * @param filled  the flag ({@code null} permitted).
-     *
-     * @deprecated As of 1.0.7, use the per-series and base level settings.
-     */
-    public void setShapesFilled(Boolean filled) {
-        this.shapesFilled = filled;
-        fireChangeEvent();
     }
 
     /**
@@ -1295,9 +1147,6 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
             return false;
         }
         XYLineAndShapeRenderer that = (XYLineAndShapeRenderer) obj;
-        if (!ObjectUtils.equal(this.linesVisible, that.linesVisible)) {
-            return false;
-        }
         if (!ObjectUtils.equal(
             this.seriesLinesVisible, that.seriesLinesVisible)
         ) {
@@ -1309,18 +1158,12 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
         if (!ShapeUtils.equal(this.legendLine, that.legendLine)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.shapesVisible, that.shapesVisible)) {
-            return false;
-        }
         if (!ObjectUtils.equal(
             this.seriesShapesVisible, that.seriesShapesVisible)
         ) {
             return false;
         }
         if (this.baseShapesVisible != that.baseShapesVisible) {
-            return false;
-        }
-        if (!ObjectUtils.equal(this.shapesFilled, that.shapesFilled)) {
             return false;
         }
         if (!ObjectUtils.equal(

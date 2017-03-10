@@ -196,38 +196,6 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
             series.addChangeListener(this);
         }
         this.xPosition = TimePeriodAnchor.START;
-        this.domainIsPointsInTime = true;
-
-    }
-
-    /**
-     * Returns a flag that controls whether the domain is treated as 'points in
-     * time'.  This flag is used when determining the max and min values for
-     * the domain.  If {@code true}, then only the x-values are considered
-     * for the max and min values.  If {@code false}, then the start and
-     * end x-values will also be taken into consideration.
-     *
-     * @return The flag.
-     *
-     * @deprecated This flag is no longer used (as of 1.0.1).
-     */
-    public boolean getDomainIsPointsInTime() {
-        return this.domainIsPointsInTime;
-    }
-
-    /**
-     * Sets a flag that controls whether the domain is treated as 'points in
-     * time', or time periods.
-     *
-     * @param flag  the flag.
-     *
-     * @deprecated This flag is no longer used, as of 1.0.1.  The
-     *             {@code includeInterval} flag in methods such as
-     *             {@link #getDomainBounds(boolean)} makes this unnecessary.
-     */
-    public void setDomainIsPointsInTime(boolean flag) {
-        this.domainIsPointsInTime = flag;
-        notifyListeners(new DatasetChangeEvent(this, this));
     }
 
     /**

@@ -195,19 +195,6 @@ public class XYAreaRenderer2 extends AbstractXYItemRenderer
     }
 
     /**
-     * This method should not be used.
-     *
-     * @return {@code false} always.
-     *
-     * @deprecated This method was included in the API by mistake and serves
-     *     no useful purpose.  It has always returned {@code false}.
-     *
-     */
-    public boolean getPlotLines() {
-        return false;
-    }
-
-    /**
      * Returns the shape used to represent an area in the legend.
      *
      * @return The legend area (never {@code null}).

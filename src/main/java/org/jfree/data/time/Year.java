@@ -130,20 +130,7 @@ public class Year extends RegularTimePeriod implements Serializable {
      * @see #Year(Date, TimeZone)
      */
     public Year(Date time) {
-        this(time, TimeZone.getDefault());
-    }
-
-    /**
-     * Constructs a year, based on a particular instant in time and a time zone.
-     *
-     * @param time  the time ({@code null} not permitted).
-     * @param zone  the time zone.
-     *
-     * @deprecated Since 1.0.12, use {@link #Year(Date, TimeZone, Locale)}
-     *     instead.
-     */
-    public Year(Date time, TimeZone zone) {
-        this(time, zone, Locale.getDefault());
+        this(time, TimeZone.getDefault(), Locale.getDefault());
     }
 
     /**

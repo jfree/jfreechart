@@ -100,16 +100,17 @@ public class YearTest {
     public void testDateConstructor1() {
 
         TimeZone zone = TimeZone.getTimeZone("GMT");
+        Calendar cal = Calendar.getInstance(zone);
         Date d1 = new Date(1009843199999L);
         Date d2 = new Date(1009843200000L);
-        Year y1 = new Year(d1, zone);
-        Year y2 = new Year(d2, zone);
+        Year y1 = new Year(d1, zone, Locale.getDefault());
+        Year y2 = new Year(d2, zone, Locale.getDefault());
 
         assertEquals(2001, y1.getYear());
-        assertEquals(1009843199999L, y1.getLastMillisecond(zone));
+        assertEquals(1009843199999L, y1.getLastMillisecond(cal));
 
         assertEquals(2002, y2.getYear());
-        assertEquals(1009843200000L, y2.getFirstMillisecond(zone));
+        assertEquals(1009843200000L, y2.getFirstMillisecond(cal));
 
     }
 
@@ -121,14 +122,15 @@ public class YearTest {
     public void testDateConstructor2() {
 
         TimeZone zone = TimeZone.getTimeZone("America/Los_Angeles");
-        Year y1 = new Year(new Date(1009871999999L), zone);
-        Year y2 = new Year(new Date(1009872000000L), zone);
+        Calendar cal = Calendar.getInstance(zone);
+        Year y1 = new Year(new Date(1009871999999L), zone, Locale.getDefault());
+        Year y2 = new Year(new Date(1009872000000L), zone, Locale.getDefault());
 
         assertEquals(2001, y1.getYear());
-        assertEquals(1009871999999L, y1.getLastMillisecond(zone));
+        assertEquals(1009871999999L, y1.getLastMillisecond(cal));
 
         assertEquals(2002, y2.getYear());
-        assertEquals(1009872000000L, y2.getFirstMillisecond(zone));
+        assertEquals(1009872000000L, y2.getFirstMillisecond(cal));
 
     }
 
@@ -266,12 +268,13 @@ public class YearTest {
     public void testGetFirstMillisecondWithTimeZone() {
         Year y = new Year(1950);
         TimeZone zone = TimeZone.getTimeZone("America/Los_Angeles");
-        assertEquals(-631123200000L, y.getFirstMillisecond(zone));
+        Calendar cal = Calendar.getInstance(zone);
+        assertEquals(-631123200000L, y.getFirstMillisecond(cal));
 
         // try null calendar
         boolean pass = false;
         try {
-            y.getFirstMillisecond((TimeZone) null);
+            y.getFirstMillisecond((Calendar) null);
         }
         catch (NullPointerException e) {
             pass = true;
@@ -323,12 +326,13 @@ public class YearTest {
     public void testGetLastMillisecondWithTimeZone() {
         Year y = new Year(1950);
         TimeZone zone = TimeZone.getTimeZone("America/Los_Angeles");
-        assertEquals(-599587200001L, y.getLastMillisecond(zone));
+        Calendar cal = Calendar.getInstance(zone);
+        assertEquals(-599587200001L, y.getLastMillisecond(cal));
 
         // try null calendar
         boolean pass = false;
         try {
-            y.getLastMillisecond((TimeZone) null);
+            y.getLastMillisecond((Calendar) null);
         }
         catch (NullPointerException e) {
             pass = true;

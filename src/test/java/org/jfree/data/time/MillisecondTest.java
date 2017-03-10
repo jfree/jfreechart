@@ -104,6 +104,7 @@ public class MillisecondTest {
     @Test
     public void testDateConstructor1() {
         TimeZone zone = TimeZone.getTimeZone("GMT");
+        Calendar cal = Calendar.getInstance(zone);
         Locale locale = Locale.getDefault();  // locale should not matter here
         Millisecond m1 = new Millisecond(new Date(1016729759122L), zone,
                 locale);
@@ -111,10 +112,10 @@ public class MillisecondTest {
                 locale);
 
         assertEquals(122, m1.getMillisecond());
-        assertEquals(1016729759122L, m1.getLastMillisecond(zone));
+        assertEquals(1016729759122L, m1.getLastMillisecond(cal));
 
         assertEquals(123, m2.getMillisecond());
-        assertEquals(1016729759123L, m2.getFirstMillisecond(zone));
+        assertEquals(1016729759123L, m2.getFirstMillisecond(cal));
     }
 
     /**
@@ -125,6 +126,7 @@ public class MillisecondTest {
     @Test
     public void testDateConstructor2() {
         TimeZone zone = TimeZone.getTimeZone("Europe/Tallinn");
+        Calendar cal = Calendar.getInstance(zone);
         Locale locale = Locale.getDefault();  // locale should not matter here
         Millisecond m1 = new Millisecond(new Date(1016722559122L), zone,
                 locale);
@@ -132,10 +134,10 @@ public class MillisecondTest {
                 locale);
 
         assertEquals(122, m1.getMillisecond());
-        assertEquals(1016722559122L, m1.getLastMillisecond(zone));
+        assertEquals(1016722559122L, m1.getLastMillisecond(cal));
 
         assertEquals(123, m2.getMillisecond());
-        assertEquals(1016722559123L, m2.getFirstMillisecond(zone));
+        assertEquals(1016722559123L, m2.getFirstMillisecond(cal));
     }
 
     /**
@@ -207,12 +209,13 @@ public class MillisecondTest {
     public void testGetFirstMillisecondWithTimeZone() {
         Millisecond m = new Millisecond(500, 50, 59, 15, 1, 4, 1950);
         TimeZone zone = TimeZone.getTimeZone("America/Los_Angeles");
-        assertEquals(-623289609500L, m.getFirstMillisecond(zone));
+        Calendar cal = Calendar.getInstance(zone);
+        assertEquals(-623289609500L, m.getFirstMillisecond(cal));
 
         // try null calendar
         boolean pass = false;
         try {
-            m.getFirstMillisecond((TimeZone) null);
+            m.getFirstMillisecond((Calendar) null);
         }
         catch (NullPointerException e) {
             pass = true;
@@ -263,12 +266,13 @@ public class MillisecondTest {
     public void testGetLastMillisecondWithTimeZone() {
         Millisecond m = new Millisecond(750, 55, 1, 2, 7, 7, 1950);
         TimeZone zone = TimeZone.getTimeZone("America/Los_Angeles");
-        assertEquals(-614962684250L, m.getLastMillisecond(zone));
+        Calendar cal = Calendar.getInstance(zone);
+        assertEquals(-614962684250L, m.getLastMillisecond(cal));
 
         // try null calendar
         boolean pass = false;
         try {
-            m.getLastMillisecond((TimeZone) null);
+            m.getLastMillisecond((Calendar) null);
         }
         catch (NullPointerException e) {
             pass = true;

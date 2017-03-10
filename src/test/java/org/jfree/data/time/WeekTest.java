@@ -321,7 +321,8 @@ public class WeekTest {
         Locale.setDefault(Locale.US);
         try {
             TimeZone zone = TimeZone.getTimeZone("America/Los_Angeles");
-            assertEquals(-603302400000L, w.getFirstMillisecond(zone));
+            Calendar cal = Calendar.getInstance(zone);
+            assertEquals(-603302400000L, w.getFirstMillisecond(cal));
         }
         finally {
             Locale.setDefault(saved);
@@ -330,7 +331,7 @@ public class WeekTest {
         // try null calendar
         boolean pass = false;
         try {
-            w.getFirstMillisecond((TimeZone) null);
+            w.getFirstMillisecond((Calendar) null);
         }
         catch (NullPointerException e) {
             pass = true;
@@ -384,7 +385,8 @@ public class WeekTest {
         Locale.setDefault(Locale.US);
         try {
             TimeZone zone = TimeZone.getTimeZone("America/Los_Angeles");
-            assertEquals(-629913600001L, w.getLastMillisecond(zone));
+            Calendar cal = Calendar.getInstance(zone);
+            assertEquals(-629913600001L, w.getLastMillisecond(cal));
         }
         finally {
             Locale.setDefault(saved);
@@ -393,7 +395,7 @@ public class WeekTest {
         // try null zone
         boolean pass = false;
         try {
-            w.getLastMillisecond((TimeZone) null);
+            w.getLastMillisecond((Calendar) null);
         }
         catch (NullPointerException e) {
             pass = true;
