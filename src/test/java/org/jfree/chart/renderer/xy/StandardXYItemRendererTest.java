@@ -120,11 +120,6 @@ public class StandardXYItemRendererTest {
         r2.setLegendLine(new Line2D.Double(1.0, 2.0, 3.0, 4.0));
         assertTrue(r1.equals(r2));
 
-        r1.setShapesFilled(false);
-        assertFalse(r1.equals(r2));
-        r2.setShapesFilled(false);
-        assertTrue(r1.equals(r2));
-
         r1.setSeriesShapesFilled(1, Boolean.TRUE);
         assertFalse(r1.equals(r2));
         r2.setSeriesShapesFilled(1, Boolean.TRUE);

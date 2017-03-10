@@ -141,22 +141,7 @@ public class Month extends RegularTimePeriod implements Serializable {
      * @see #Month(Date, TimeZone)
      */
     public Month(Date time) {
-        this(time, TimeZone.getDefault());
-    }
-
-    /**
-     * Constructs a new {@code Month} instance, based on a date/time and
-     * a time zone.  The first and last millisecond values are initially
-     * pegged to the given time zone also.
-     *
-     * @param time  the date/time.
-     * @param zone  the time zone ({@code null} not permitted).
-     *
-     * @deprecated Since 1.0.12, use {@link #Month(Date, TimeZone, Locale)}
-     *     instead.
-     */
-    public Month(Date time, TimeZone zone) {
-        this(time, zone, Locale.getDefault());
+        this(time, TimeZone.getDefault(), Locale.getDefault());
     }
 
     /**

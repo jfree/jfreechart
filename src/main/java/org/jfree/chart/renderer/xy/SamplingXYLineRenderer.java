@@ -93,37 +93,6 @@ public class SamplingXYLineRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Returns the shape used to represent a line in the legend.
-     *
-     * @return The legend line (never {@code null}).
-     *
-     * @see #setLegendLine(Shape)
-     *
-     * @deprecated As of version 1.0.14, this method is deprecated.  You
-     * should use the {@link #getBaseLegendShape()} method instead.
-     */
-    public Shape getLegendLine() {
-        return this.legendLine;
-    }
-
-    /**
-     * Sets the shape used as a line in each legend item and sends a
-     * {@link RendererChangeEvent} to all registered listeners.
-     *
-     * @param line  the line ({@code null} not permitted).
-     *
-     * @see #getLegendLine()
-     *
-     * @deprecated As of version 1.0.14, this method is deprecated.  You should
-     * use the {@link #setBaseLegendShape(java.awt.Shape)} method instead.
-     */
-    public void setLegendLine(Shape line) {
-        ParamChecks.nullNotPermitted(line, "line");
-        this.legendLine = line;
-        fireChangeEvent();
-    }
-
-    /**
      * Returns the number of passes through the data that the renderer requires
      * in order to draw the chart.  Most charts will require a single pass, but
      * some require two passes.

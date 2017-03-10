@@ -143,19 +143,6 @@ public class Minute extends RegularTimePeriod implements Serializable {
      *
      * @param time  the time ({@code null} not permitted).
      * @param zone  the time zone ({@code null} not permitted).
-     *
-     * @deprecated As of 1.0.13, use the constructor that specifies the locale
-     *     also.
-     */
-    public Minute(Date time, TimeZone zone) {
-        this(time, zone, Locale.getDefault());
-    }
-
-    /**
-     * Constructs a new Minute, based on the supplied date/time and timezone.
-     *
-     * @param time  the time ({@code null} not permitted).
-     * @param zone  the time zone ({@code null} not permitted).
      * @param locale  the locale ({@code null} not permitted).
      *
      * @since 1.0.13

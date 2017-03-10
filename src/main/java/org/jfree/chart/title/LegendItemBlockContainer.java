@@ -93,22 +93,6 @@ public class LegendItemBlockContainer extends BlockContainer {
      * Creates a new legend item block.
      *
      * @param arrangement  the arrangement.
-     * @param datasetIndex  the dataset index.
-     * @param series  the series index.
-     *
-     * @deprecated As of 1.0.6, use the other constructor.
-     */
-    public LegendItemBlockContainer(Arrangement arrangement, int datasetIndex,
-            int series) {
-        super(arrangement);
-        this.datasetIndex = datasetIndex;
-        this.series = series;
-    }
-
-    /**
-     * Creates a new legend item block.
-     *
-     * @param arrangement  the arrangement.
      * @param dataset  the dataset.
      * @param seriesKey  the series key.
      *
@@ -141,17 +125,6 @@ public class LegendItemBlockContainer extends BlockContainer {
      */
     public Comparable getSeriesKey() {
         return this.seriesKey;
-    }
-
-    /**
-     * Returns the dataset index.
-     *
-     * @return The dataset index.
-     *
-     * @deprecated As of 1.0.6, use the {@link #getDataset()} method.
-     */
-    public int getDatasetIndex() {
-        return this.datasetIndex;
     }
 
     /**

@@ -233,12 +233,6 @@ public class StandardChartThemeTest {
         t2.setThermometerPaint(new GradientPaint(9f, 7f, Color.red, 5f, 1f, Color.blue));
         assertTrue(t1.equals(t2));
 
-        //wallPaint;
-        t1.setWallPaint(new GradientPaint(4f, 5f, Color.red, 1f, 0f, Color.gray));
-        assertFalse(t1.equals(t2));
-        t2.setWallPaint(new GradientPaint(4f, 5f, Color.red, 1f, 0f, Color.gray));
-        assertTrue(t1.equals(t2));
-
         //errorIndicatorPaint;
         t1.setErrorIndicatorPaint(new GradientPaint(0f, 1f, Color.white, 2f, 3f, Color.blue));
         assertFalse(t1.equals(t2));

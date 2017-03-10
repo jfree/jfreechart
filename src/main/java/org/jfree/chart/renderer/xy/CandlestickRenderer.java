@@ -959,19 +959,4 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
         this.volumePaint = SerialUtils.readPaint(stream);
     }
 
-    // --- DEPRECATED CODE ----------------------------------------------------
-
-    /**
-     * Returns a flag indicating whether or not volume bars are drawn on the
-     * chart.
-     *
-     * @return {@code true} if volume bars are drawn on the chart.
-     *
-     * @deprecated As of 1.0.5, you should use the {@link #getDrawVolume()}
-     *         method.
-     */
-    public boolean drawVolume() {
-        return this.drawVolume;
-    }
-
 }

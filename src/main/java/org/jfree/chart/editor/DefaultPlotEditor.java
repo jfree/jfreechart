@@ -595,7 +595,7 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
                 CategoryPlot p = (CategoryPlot) plot;
                 CategoryItemRenderer r = p.getRenderer();
                 if (r instanceof LineAndShapeRenderer) {
-                    ((LineAndShapeRenderer) r).setLinesVisible(
+                    ((LineAndShapeRenderer) r).setBaseLinesVisible(
                             this.drawLines.booleanValue());
                 }
             }
@@ -614,7 +614,7 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
                 CategoryPlot p = (CategoryPlot) plot;
                 CategoryItemRenderer r = p.getRenderer();
                 if (r instanceof LineAndShapeRenderer) {
-                    ((LineAndShapeRenderer) r).setShapesVisible(
+                    ((LineAndShapeRenderer) r).setBaseShapesVisible(
                             this.drawShapes.booleanValue());
                 }
             }

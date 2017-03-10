@@ -506,32 +506,6 @@ public class JDBCXYDataset extends AbstractXYDataset
     }
 
     /**
-     * Returns the number of items that should be displayed in the legend.
-     *
-     * @return The legendItemCount value
-     *
-     * @deprecated This method is not used in JFreeChart 1.0.x (it was left in
-     *     the API by mistake and is officially deprecated from version 1.0.3
-     *     onwards).
-     */
-    public int getLegendItemCount() {
-        return getSeriesCount();
-    }
-
-    /**
-     * Returns the legend item labels.
-     *
-     * @return The legend item labels.
-     *
-     * @deprecated This method is not used in JFreeChart 1.0.x (it was left in
-     *     the API by mistake and is officially deprecated from version 1.0.3
-     *     onwards).
-     */
-    public String[] getLegendItemLabels() {
-        return this.columnNames;
-    }
-
-    /**
      * Close the database connection
      */
     public void close() {

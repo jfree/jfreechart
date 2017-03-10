@@ -87,10 +87,8 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.AbstractRenderer;
 import org.jfree.chart.renderer.category.BarPainter;
 import org.jfree.chart.renderer.category.BarRenderer;
-import org.jfree.chart.renderer.category.BarRenderer3D;
 import org.jfree.chart.renderer.category.CategoryItemRenderer;
 import org.jfree.chart.renderer.category.GradientBarPainter;
-import org.jfree.chart.renderer.category.LineRenderer3D;
 import org.jfree.chart.renderer.category.MinMaxCategoryRenderer;
 import org.jfree.chart.renderer.category.StatisticalBarRenderer;
 import org.jfree.chart.renderer.xy.GradientXYBarPainter;
@@ -220,12 +218,6 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /** The thermometer paint. */
     private transient Paint thermometerPaint;
 
-    /**
-     * The paint used to fill the interior of the 'walls' in the background
-     * of a plot with a 3D effect.  Applied to BarRenderer3D.
-     */
-    private transient Paint wallPaint;
-
     /** The error indicator paint for the {@link StatisticalBarRenderer}. */
     private transient Paint errorIndicatorPaint;
 
@@ -286,7 +278,6 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
                 new Stroke[] {new BasicStroke(2.0f)},
                 new Stroke[] {new BasicStroke(0.5f)},
                 DefaultDrawingSupplier.DEFAULT_SHAPE_SEQUENCE);
-        theme.wallPaint = Color.darkGray;
         theme.errorIndicatorPaint = Color.lightGray;
         theme.gridBandPaint = new Color(255, 255, 255, 20);
         theme.gridBandAlternatePaint = new Color(255, 255, 255, 40);
@@ -359,7 +350,6 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
         this.shadowPaint = Color.gray;
         this.itemLabelPaint = Color.black;
         this.thermometerPaint = Color.white;
-        this.wallPaint = BarRenderer3D.DEFAULT_WALL_PAINT;
         this.errorIndicatorPaint = Color.black;
         this.shadowGenerator = shadow ? new DefaultShadowGenerator() : null;
     }
@@ -959,29 +949,6 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     public void setThermometerPaint(Paint paint) {
         ParamChecks.nullNotPermitted(paint, "paint");
         this.thermometerPaint = paint;
-    }
-
-    /**
-     * Returns the wall paint for charts with a 3D effect.
-     *
-     * @return The wall paint (never {@code null}).
-     *
-     * @see #setWallPaint(Paint)
-     */
-    public Paint getWallPaint() {
-        return this.wallPaint;
-    }
-
-    /**
-     * Sets the wall paint for charts with a 3D effect.
-     *
-     * @param paint  the paint ({@code null} not permitted).
-     *
-     * @see #getWallPaint()
-     */
-    public void setWallPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
-        this.wallPaint = paint;
     }
 
     /**
@@ -1588,17 +1555,6 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
             br.setShadowPaint(this.shadowPaint);
         }
 
-        // BarRenderer3D
-        if (renderer instanceof BarRenderer3D) {
-            BarRenderer3D br3d = (BarRenderer3D) renderer;
-            br3d.setWallPaint(this.wallPaint);
-        }
-
-        // LineRenderer3D
-        if (renderer instanceof LineRenderer3D) {
-            LineRenderer3D lr3d = (LineRenderer3D) renderer;
-            lr3d.setWallPaint(this.wallPaint);
-        }
 
         //  StatisticalBarRenderer
         if (renderer instanceof StatisticalBarRenderer) {
@@ -1750,9 +1706,6 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
                 that.thermometerPaint)) {
             return false;
         }
-        if (!PaintUtils.equal(this.wallPaint, that.wallPaint)) {
-            return false;
-        }
         if (!PaintUtils.equal(this.errorIndicatorPaint,
                 that.errorIndicatorPaint)) {
             return false;
@@ -1805,7 +1758,6 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
         SerialUtils.writePaint(this.itemLabelPaint, stream);
         SerialUtils.writePaint(this.shadowPaint, stream);
         SerialUtils.writePaint(this.thermometerPaint, stream);
-        SerialUtils.writePaint(this.wallPaint, stream);
         SerialUtils.writePaint(this.errorIndicatorPaint, stream);
         SerialUtils.writePaint(this.gridBandPaint, stream);
         SerialUtils.writePaint(this.gridBandAlternatePaint, stream);
@@ -1839,7 +1791,6 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
         this.itemLabelPaint = SerialUtils.readPaint(stream);
         this.shadowPaint = SerialUtils.readPaint(stream);
         this.thermometerPaint = SerialUtils.readPaint(stream);
-        this.wallPaint = SerialUtils.readPaint(stream);
         this.errorIndicatorPaint = SerialUtils.readPaint(stream);
         this.gridBandPaint = SerialUtils.readPaint(stream);
         this.gridBandAlternatePaint = SerialUtils.readPaint(stream);

@@ -158,19 +158,6 @@ public class Day extends RegularTimePeriod implements Serializable {
     /**
      * Constructs a new instance, based on a particular date/time and time zone.
      *
-     * @param time  the date/time.
-     * @param zone  the time zone.
-     *
-     * @deprecated As of 1.0.13, use the constructor that specifies the locale
-     *     also.
-     */
-    public Day(Date time, TimeZone zone) {
-        this(time, zone, Locale.getDefault());
-    }
-
-    /**
-     * Constructs a new instance, based on a particular date/time and time zone.
-     *
      * @param time  the date/time ({@code null} not permitted).
      * @param zone  the time zone ({@code null} not permitted).
      * @param locale  the locale ({@code null} not permitted).

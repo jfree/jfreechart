@@ -155,20 +155,7 @@ public class Quarter extends RegularTimePeriod implements Serializable {
      * @see #Quarter(Date, TimeZone)
      */
     public Quarter(Date time) {
-        this(time, TimeZone.getDefault());
-    }
-
-    /**
-     * Constructs a Quarter, based on a date/time and time zone.
-     *
-     * @param time  the date/time.
-     * @param zone  the zone ({@code null} not permitted).
-     *
-     * @deprecated Since 1.0.12, use {@link #Quarter(Date, TimeZone, Locale)}
-     *     instead.
-     */
-    public Quarter(Date time, TimeZone zone) {
-        this(time, zone, Locale.getDefault());
+        this(time, TimeZone.getDefault(), Locale.getDefault());
     }
 
     /**

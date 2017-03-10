@@ -139,15 +139,6 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
     private TimePeriodAnchor xPosition;
 
     /**
-     * A flag that indicates that the domain is 'points in time'.  If this
-     * flag is true, only the x-value is used to determine the range of values
-     * in the domain, the start and end x-values are ignored.
-     *
-     * @deprecated No longer used (as of 1.0.1).
-     */
-    private boolean domainIsPointsInTime;
-
-    /**
      * Constructs an empty dataset, tied to the default timezone.
      */
     public TimeSeriesCollection() {
@@ -762,9 +753,6 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
         if (this.xPosition != that.xPosition) {
             return false;
         }
-        if (this.domainIsPointsInTime != that.domainIsPointsInTime) {
-            return false;
-        }
         if (!ObjectUtils.equal(this.data, that.data)) {
             return false;
         }
@@ -784,7 +772,6 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
                 ? this.workingCalendar.hashCode() : 0);
         result = 29 * result + (this.xPosition != null
                 ? this.xPosition.hashCode() : 0);
-        result = 29 * result + (this.domainIsPointsInTime ? 1 : 0);
         return result;
     }
 
