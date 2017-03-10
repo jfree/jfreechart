@@ -814,42 +814,4 @@ public class DefaultIntervalCategoryDataset extends AbstractSeriesDataset
         return result;
     }
 
-    /**
-     * Returns a list of the series in the dataset.
-     *
-     * @return A list of the series in the dataset.
-     *
-     * @deprecated Use {@link #getRowKeys()} instead.
-     */
-    public List getSeries() {
-        if (this.seriesKeys == null) {
-            return new java.util.ArrayList();
-        }
-        else {
-            return Collections.unmodifiableList(Arrays.asList(this.seriesKeys));
-        }
-    }
-
-    /**
-     * Returns a list of the categories in the dataset.
-     *
-     * @return A list of the categories in the dataset.
-     *
-     * @deprecated Use {@link #getColumnKeys()} instead.
-     */
-    public List getCategories() {
-        return getColumnKeys();
-    }
-
-    /**
-     * Returns the item count.
-     *
-     * @return The item count.
-     *
-     * @deprecated Use {@link #getCategoryCount()} instead.
-     */
-    public int getItemCount() {
-        return this.categoryKeys.length;
-    }
-
 }

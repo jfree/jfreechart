@@ -1264,16 +1264,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
 
             Range r = vap.getDataRange(this);
             if (r == null) {
-                if (this.timeline instanceof SegmentedTimeline) {
-                    //Timeline hasn't method getStartTime()
-                    r = new DateRange((
-                            (SegmentedTimeline) this.timeline).getStartTime(),
-                            ((SegmentedTimeline) this.timeline).getStartTime()
-                            + 1);
-                }
-                else {
-                    r = new DateRange();
-                }
+                r = new DateRange();
             }
 
             long upper = this.timeline.toTimelineValue(
@@ -1337,24 +1328,20 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
     protected void selectHorizontalAutoTickUnit(Graphics2D g2,
             Rectangle2D dataArea, RectangleEdge edge) {
 
-        long shift = 0;
-        if (this.timeline instanceof SegmentedTimeline) {
-            shift = ((SegmentedTimeline) this.timeline).getStartTime();
-        }
-        double zero = valueToJava2D(shift + 0.0, dataArea, edge);
+        double zero = valueToJava2D(0.0, dataArea, edge);
         double tickLabelWidth = estimateMaximumTickLabelWidth(g2,
                 getTickUnit());
 
         // start with the current tick unit...
         TickUnitSource tickUnits = getStandardTickUnits();
         TickUnit unit1 = tickUnits.getCeilingTickUnit(getTickUnit());
-        double x1 = valueToJava2D(shift + unit1.getSize(), dataArea, edge);
+        double x1 = valueToJava2D(unit1.getSize(), dataArea, edge);
         double unit1Width = Math.abs(x1 - zero);
 
         // then extrapolate...
         double guess = (tickLabelWidth / unit1Width) * unit1.getSize();
         DateTickUnit unit2 = (DateTickUnit) tickUnits.getCeilingTickUnit(guess);
-        double x2 = valueToJava2D(shift + unit2.getSize(), dataArea, edge);
+        double x2 = valueToJava2D(unit2.getSize(), dataArea, edge);
         double unit2Width = Math.abs(x2 - zero);
         tickLabelWidth = estimateMaximumTickLabelWidth(g2, unit2);
         if (tickLabelWidth > unit2Width) {

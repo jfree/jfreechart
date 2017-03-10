@@ -142,12 +142,6 @@ public class DateAxisTest {
         a2.setTickMarkPosition(DateTickMarkPosition.END);
         assertTrue(a1.equals(a2));
 
-        // timeline
-        a1.setTimeline(SegmentedTimeline.newMondayThroughFridayTimeline());
-        assertFalse(a1.equals(a2));
-        a2.setTimeline(SegmentedTimeline.newMondayThroughFridayTimeline());
-        assertTrue(a1.equals(a2));
-
     }
 
     /**
@@ -1188,11 +1182,6 @@ public class DateAxisTest {
         Date end = new Date(dates[dates.length-1]);
         axis.setMinimumDate(start);
         axis.setMaximumDate(end);
-
-        SegmentedTimeline timeline =
-            SegmentedTimeline.newMondayThroughFridayTimeline();
-        timeline.setStartTime(start.getTime());
-        axis.setTimeline(timeline);
 
         BufferedImage image = new BufferedImage(200, 100,
                 BufferedImage.TYPE_INT_ARGB);

@@ -911,24 +911,6 @@ public final class DatasetUtilities {
      * the range bounds.
      *
      * @param dataset  the dataset ({@code null} not permitted).
-     * @param includeInterval  a flag that determines whether or not the
-     *                         y-interval is taken into account.
-     *
-     * @return The range (possibly {@code null}).
-     *
-     * @deprecated As of 1.0.10, use
-     *         {@link #iterateRangeBounds(CategoryDataset, boolean)}.
-     */
-    public static Range iterateCategoryRangeBounds(CategoryDataset dataset,
-            boolean includeInterval) {
-        return iterateRangeBounds(dataset, includeInterval);
-    }
-
-    /**
-     * Iterates over the data item of the category dataset to find
-     * the range bounds.
-     *
-     * @param dataset  the dataset ({@code null} not permitted).
      *
      * @return The range (possibly {@code null}).
      *
@@ -1160,20 +1142,6 @@ public final class DatasetUtilities {
         else {
             return new Range(minimum, maximum);
         }
-    }
-
-    /**
-     * Iterates over the data item of the xy dataset to find
-     * the range bounds.
-     *
-     * @param dataset  the dataset ({@code null} not permitted).
-     *
-     * @return The range (possibly {@code null}).
-     *
-     * @deprecated As of 1.0.10, use {@link #iterateRangeBounds(XYDataset)}.
-     */
-    public static Range iterateXYRangeBounds(XYDataset dataset) {
-        return iterateRangeBounds(dataset);
     }
 
     /**

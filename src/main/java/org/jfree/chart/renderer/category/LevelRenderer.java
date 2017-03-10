@@ -146,7 +146,7 @@ public class LevelRenderer extends AbstractCategoryItemRenderer
      * @see #setMaximumItemWidth(double)
      */
     public double getMaximumItemWidth() {
-        return getMaxItemWidth();
+        return this.maxItemWidth;
     }
 
     /**
@@ -159,7 +159,8 @@ public class LevelRenderer extends AbstractCategoryItemRenderer
      * @see #getMaximumItemWidth()
      */
     public void setMaximumItemWidth(double percent) {
-        setMaxItemWidth(percent);
+        this.maxItemWidth = percent;
+        fireChangeEvent();
     }
 
     /**
@@ -449,32 +450,6 @@ public class LevelRenderer extends AbstractCategoryItemRenderer
         hash = HashUtilities.hashCode(hash, this.itemMargin);
         hash = HashUtilities.hashCode(hash, this.maxItemWidth);
         return hash;
-    }
-
-    /**
-     * Returns the maximum width, as a percentage of the available drawing
-     * space.
-     *
-     * @return The maximum width.
-     *
-     * @deprecated Use {@link #getMaximumItemWidth()} instead.
-     */
-    public double getMaxItemWidth() {
-        return this.maxItemWidth;
-    }
-
-    /**
-     * Sets the maximum item width, which is specified as a percentage of the
-     * available space for all items, and sends a {@link RendererChangeEvent}
-     * to all registered listeners.
-     *
-     * @param percent  the percent.
-     *
-     * @deprecated Use {@link #setMaximumItemWidth(double)} instead.
-     */
-    public void setMaxItemWidth(double percent) {
-        this.maxItemWidth = percent;
-        fireChangeEvent();
     }
 
 }

@@ -137,33 +137,6 @@ public class LegendItemEntity extends ChartEntity
     }
 
     /**
-     * Returns the series index.
-     *
-     * @return The series index.
-     *
-     * @see #setSeriesIndex(int)
-     *
-     * @deprecated As of 1.0.6, use the {@link #getSeriesKey()} method.
-     */
-    public int getSeriesIndex() {
-        return this.seriesIndex;
-    }
-
-    /**
-     * Sets the series index.
-     *
-     * @param index  the series index.
-     *
-     * @see #getSeriesIndex()
-     *
-     * @deprecated As of 1.0.6, use the {@link #setSeriesKey(Comparable)}
-     *         method.
-     */
-    public void setSeriesIndex(int index) {
-        this.seriesIndex = index;
-    }
-
-    /**
      * Tests this object for equality with an arbitrary object.
      *
      * @param obj  the object ({@code null} permitted).

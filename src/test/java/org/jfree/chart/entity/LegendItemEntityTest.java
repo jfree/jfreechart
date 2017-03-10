@@ -93,11 +93,6 @@ public class LegendItemEntityTest {
         e2.setSeriesKey("A");
         assertTrue(e1.equals(e2));
 
-        e1.setSeriesIndex(7);
-        assertFalse(e1.equals(e2));
-        e2.setSeriesIndex(7);
-        assertTrue(e1.equals(e2));
-
     }
 
     /**

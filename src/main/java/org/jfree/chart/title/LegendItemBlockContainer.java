@@ -202,7 +202,6 @@ public class LegendItemBlockContainer extends BlockContainer {
                 EntityCollection ec = new StandardEntityCollection();
                 LegendItemEntity entity = new LegendItemEntity(
                         (Shape) area.clone());
-                entity.setSeriesIndex(this.series);
                 entity.setSeriesKey(this.seriesKey);
                 entity.setDataset(this.dataset);
                 entity.setToolTipText(getToolTipText());

@@ -140,12 +140,6 @@ public class ThermometerPlotTest {
                 7.0f, 6.0f, Color.blue));
         assertTrue(p2.equals(p1));
 
-        // showValueLines
-        p1.setShowValueLines(true);
-        assertFalse(p1.equals(p2));
-        p2.setShowValueLines(true);
-        assertTrue(p2.equals(p1));
-
         p1.setSubrange(1, 1.0, 2.0);
         assertFalse(p1.equals(p2));
         p2.setSubrange(1, 1.0, 2.0);
@@ -208,16 +202,4 @@ public class ThermometerPlotTest {
         assertTrue(p1.equals(p2));
     }
 
-    /**
-     * Some checks for the setUnits() method.
-     */
-    @Test
-    public void testSetUnits() {
-        ThermometerPlot p1 = new ThermometerPlot();
-        assertEquals(ThermometerPlot.UNITS_CELCIUS, p1.getUnits());
-        p1.setUnits("FAHRENHEIT");  // this doesn't work
-        assertEquals(ThermometerPlot.UNITS_CELCIUS, p1.getUnits());
-        p1.setUnits("\u00B0F");     // ...but this does!
-        assertEquals(ThermometerPlot.UNITS_FAHRENHEIT, p1.getUnits());
-    }
 }

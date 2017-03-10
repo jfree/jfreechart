@@ -623,28 +623,6 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
     }
 
     /**
-     * Sets the unit type.
-     *
-     * @param u  the unit type ({@code null} ignored).
-     *
-     * @deprecated Use setUnits(int) instead.  Deprecated as of version 1.0.6,
-     *     because this method is a little obscure and redundant anyway.
-     */
-    public void setUnits(String u) {
-        if (u == null) {
-            return;
-        }
-
-        u = u.toUpperCase().trim();
-        for (int i = 0; i < UNITS.length; ++i) {
-            if (u.equals(UNITS[i].toUpperCase().trim())) {
-                setUnits(i);
-                i = UNITS.length;
-            }
-        }
-    }
-
-    /**
      * Returns a code indicating the location at which the value label is
      * displayed.
      *
@@ -795,35 +773,6 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
     public void setMercuryPaint(Paint paint) {
         ParamChecks.nullNotPermitted(paint, "paint");
         this.mercuryPaint = paint;
-        fireChangeEvent();
-    }
-
-    /**
-     * Returns the flag that controls whether not value lines are displayed.
-     *
-     * @return The flag.
-     *
-     * @see #setShowValueLines(boolean)
-     *
-     * @deprecated This flag doesn't do anything useful/visible.  Deprecated
-     *     as of version 1.0.6.
-     */
-    public boolean getShowValueLines() {
-        return this.showValueLines;
-    }
-
-    /**
-     * Sets the display as to whether to show value lines in the output.
-     *
-     * @param b Whether to show value lines in the thermometer
-     *
-     * @see #getShowValueLines()
-     *
-     * @deprecated This flag doesn't do anything useful/visible.  Deprecated
-     *     as of version 1.0.6.
-     */
-    public void setShowValueLines(boolean b) {
-        this.showValueLines = b;
         fireChangeEvent();
     }
 
@@ -1344,34 +1293,6 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
             }
         }
         super.datasetChanged(event);
-    }
-
-    /**
-     * Returns the minimum value in either the domain or the range, whichever
-     * is displayed against the vertical axis for the particular type of plot
-     * implementing this interface.
-     *
-     * @return The minimum value in either the domain or the range.
-     *
-     * @deprecated This method is not used.  Officially deprecated in version
-     *         1.0.6.
-     */
-    public Number getMinimumVerticalDataValue() {
-        return new Double(this.lowerBound);
-    }
-
-    /**
-     * Returns the maximum value in either the domain or the range, whichever
-     * is displayed against the vertical axis for the particular type of plot
-     * implementing this interface.
-     *
-     * @return The maximum value in either the domain or the range
-     *
-     * @deprecated This method is not used.  Officially deprecated in version
-     *         1.0.6.
-     */
-    public Number getMaximumVerticalDataValue() {
-        return new Double(this.upperBound);
     }
 
     /**
