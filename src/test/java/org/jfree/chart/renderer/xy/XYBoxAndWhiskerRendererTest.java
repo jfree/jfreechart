@@ -78,13 +78,6 @@ public class XYBoxAndWhiskerRendererTest {
         XYBoxAndWhiskerRenderer r2 = new XYBoxAndWhiskerRenderer();
         assertEquals(r1, r2);
 
-        r1.setPaint(new GradientPaint(1.0f, 2.0f, Color.yellow,
-                3.0f, 4.0f, Color.red));
-        assertFalse(r1.equals(r2));
-        r2.setPaint(new GradientPaint(1.0f, 2.0f, Color.yellow,
-                3.0f, 4.0f, Color.red));
-        assertEquals(r1, r2);
-
         r1.setArtifactPaint(new GradientPaint(1.0f, 2.0f, Color.green,
                 3.0f, 4.0f, Color.red));
         assertFalse(r1.equals(r2));

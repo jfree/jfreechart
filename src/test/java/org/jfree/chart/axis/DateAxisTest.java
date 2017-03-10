@@ -125,9 +125,9 @@ public class DateAxisTest {
         assertTrue(a1.equals(a2));
 
         // tickUnit
-        a1.setTickUnit(new DateTickUnit(DateTickUnit.DAY, 7));
+        a1.setTickUnit(new DateTickUnit(DateTickUnitType.DAY, 7));
         assertFalse(a1.equals(a2));
-        a2.setTickUnit(new DateTickUnit(DateTickUnit.DAY, 7));
+        a2.setTickUnit(new DateTickUnit(DateTickUnitType.DAY, 7));
         assertTrue(a1.equals(a2));
 
         // dateFormatOverride
@@ -321,7 +321,7 @@ public class DateAxisTest {
 
         Date end = new Date(y2007.getLastMillisecond());
 
-        DateTickUnit unit = new DateTickUnit(DateTickUnit.YEAR, 1);
+        DateTickUnit unit = new DateTickUnit(DateTickUnitType.YEAR, 1);
         axis.setTickUnit(unit);
 
         // START: check d0 and d1
@@ -329,13 +329,13 @@ public class DateAxisTest {
 
         axis.setRange(d0, end);
         Date psd = axis.previousStandardDate(d0, unit);
-        Date nsd = unit.addToDate(psd);
+        Date nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d0.getTime());
         assertTrue(nsd.getTime() >= d0.getTime());
 
         axis.setRange(d1, end);
         psd = axis.previousStandardDate(d1, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d1.getTime());
         assertTrue(nsd.getTime() >= d1.getTime());
 
@@ -344,19 +344,19 @@ public class DateAxisTest {
 
         axis.setRange(d1, end);
         psd = axis.previousStandardDate(d1, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d1.getTime());
         assertTrue(nsd.getTime() >= d1.getTime());
 
         axis.setRange(d2, end);
         psd = axis.previousStandardDate(d2, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d2.getTime());
         assertTrue(nsd.getTime() >= d2.getTime());
 
         axis.setRange(d3, end);
         psd = axis.previousStandardDate(d3, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d3.getTime());
         assertTrue(nsd.getTime() >= d3.getTime());
 
@@ -365,13 +365,13 @@ public class DateAxisTest {
 
         axis.setRange(d3, end);
         psd = axis.previousStandardDate(d3, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d3.getTime());
         assertTrue(nsd.getTime() >= d3.getTime());
 
         axis.setRange(d4, end);
         psd = axis.previousStandardDate(d4, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d4.getTime());
         assertTrue(nsd.getTime() >= d4.getTime());
     }
@@ -395,7 +395,7 @@ public class DateAxisTest {
 
         Date end = new Date(y2007.getLastMillisecond());
 
-        DateTickUnit unit = new DateTickUnit(DateTickUnit.YEAR, 10);
+        DateTickUnit unit = new DateTickUnit(DateTickUnitType.YEAR, 10);
         axis.setTickUnit(unit);
 
         // START: check d0 and d1
@@ -403,13 +403,13 @@ public class DateAxisTest {
 
         axis.setRange(d0, end);
         Date psd = axis.previousStandardDate(d0, unit);
-        Date nsd = unit.addToDate(psd);
+        Date nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d0.getTime());
         assertTrue(nsd.getTime() >= d0.getTime());
 
         axis.setRange(d1, end);
         psd = axis.previousStandardDate(d1, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d1.getTime());
         assertTrue(nsd.getTime() >= d1.getTime());
 
@@ -418,19 +418,19 @@ public class DateAxisTest {
 
         axis.setRange(d1, end);
         psd = axis.previousStandardDate(d1, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d1.getTime());
         assertTrue(nsd.getTime() >= d1.getTime());
 
         axis.setRange(d2, end);
         psd = axis.previousStandardDate(d2, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d2.getTime());
         assertTrue(nsd.getTime() >= d2.getTime());
 
         axis.setRange(d3, end);
         psd = axis.previousStandardDate(d3, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d3.getTime());
         assertTrue(nsd.getTime() >= d3.getTime());
 
@@ -439,13 +439,13 @@ public class DateAxisTest {
 
         axis.setRange(d3, end);
         psd = axis.previousStandardDate(d3, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d3.getTime());
         assertTrue(nsd.getTime() >= d3.getTime());
 
         axis.setRange(d4, end);
         psd = axis.previousStandardDate(d4, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d4.getTime());
         assertTrue(nsd.getTime() >= d4.getTime());
     }
@@ -469,7 +469,7 @@ public class DateAxisTest {
 
         Date end = new Date(dec2006.getLastMillisecond());
 
-        DateTickUnit unit = new DateTickUnit(DateTickUnit.MONTH, 1);
+        DateTickUnit unit = new DateTickUnit(DateTickUnitType.MONTH, 1);
         axis.setTickUnit(unit);
 
         // START: check d0 and d1
@@ -477,13 +477,13 @@ public class DateAxisTest {
 
         axis.setRange(d0, end);
         Date psd = axis.previousStandardDate(d0, unit);
-        Date nsd = unit.addToDate(psd);
+        Date nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d0.getTime());
         assertTrue(nsd.getTime() >= d0.getTime());
 
         axis.setRange(d1, end);
         psd = axis.previousStandardDate(d1, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d1.getTime());
         assertTrue(nsd.getTime() >= d1.getTime());
 
@@ -492,19 +492,19 @@ public class DateAxisTest {
 
         axis.setRange(d1, end);
         psd = axis.previousStandardDate(d1, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d1.getTime());
         assertTrue(nsd.getTime() >= d1.getTime());
 
         axis.setRange(d2, end);
         psd = axis.previousStandardDate(d2, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d2.getTime());
         assertTrue(nsd.getTime() >= d2.getTime());
 
         axis.setRange(d3, end);
         psd = axis.previousStandardDate(d3, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d3.getTime());
         assertTrue(nsd.getTime() >= d3.getTime());
 
@@ -513,13 +513,13 @@ public class DateAxisTest {
 
         axis.setRange(d3, end);
         psd = axis.previousStandardDate(d3, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d3.getTime());
         assertTrue(nsd.getTime() >= d3.getTime());
 
         axis.setRange(d4, end);
         psd = axis.previousStandardDate(d4, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d4.getTime());
         assertTrue(nsd.getTime() >= d4.getTime());
     }
@@ -543,7 +543,7 @@ public class DateAxisTest {
 
         Date end = new Date(dec2006.getLastMillisecond());
 
-        DateTickUnit unit = new DateTickUnit(DateTickUnit.MONTH, 3);
+        DateTickUnit unit = new DateTickUnit(DateTickUnitType.MONTH, 3);
         axis.setTickUnit(unit);
 
         // START: check d0 and d1
@@ -551,13 +551,13 @@ public class DateAxisTest {
 
         axis.setRange(d0, end);
         Date psd = axis.previousStandardDate(d0, unit);
-        Date nsd = unit.addToDate(psd);
+        Date nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d0.getTime());
         assertTrue(nsd.getTime() >= d0.getTime());
 
         axis.setRange(d1, end);
         psd = axis.previousStandardDate(d1, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d1.getTime());
         assertTrue(nsd.getTime() >= d1.getTime());
 
@@ -566,19 +566,19 @@ public class DateAxisTest {
 
         axis.setRange(d1, end);
         psd = axis.previousStandardDate(d1, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d1.getTime());
         assertTrue(nsd.getTime() >= d1.getTime());
 
         axis.setRange(d2, end);
         psd = axis.previousStandardDate(d2, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d2.getTime());
         assertTrue(nsd.getTime() >= d2.getTime());
 
         axis.setRange(d3, end);
         psd = axis.previousStandardDate(d3, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d3.getTime());
         assertTrue(nsd.getTime() >= d3.getTime());
 
@@ -587,13 +587,13 @@ public class DateAxisTest {
 
         axis.setRange(d3, end);
         psd = axis.previousStandardDate(d3, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d3.getTime());
         assertTrue(nsd.getTime() >= d3.getTime());
 
         axis.setRange(d4, end);
         psd = axis.previousStandardDate(d4, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d4.getTime());
         assertTrue(nsd.getTime() >= d4.getTime());
     }
@@ -617,7 +617,7 @@ public class DateAxisTest {
 
         Date end = new Date(apr22007.getLastMillisecond());
 
-        DateTickUnit unit = new DateTickUnit(DateTickUnit.DAY, 1);
+        DateTickUnit unit = new DateTickUnit(DateTickUnitType.DAY, 1);
         axis.setTickUnit(unit);
 
         // START: check d0 and d1
@@ -625,13 +625,13 @@ public class DateAxisTest {
 
         axis.setRange(d0, end);
         Date psd = axis.previousStandardDate(d0, unit);
-        Date nsd = unit.addToDate(psd);
+        Date nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d0.getTime());
         assertTrue(nsd.getTime() >= d0.getTime());
 
         axis.setRange(d1, end);
         psd = axis.previousStandardDate(d1, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d1.getTime());
         assertTrue(nsd.getTime() >= d1.getTime());
 
@@ -640,19 +640,19 @@ public class DateAxisTest {
 
         axis.setRange(d1, end);
         psd = axis.previousStandardDate(d1, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d1.getTime());
         assertTrue(nsd.getTime() >= d1.getTime());
 
         axis.setRange(d2, end);
         psd = axis.previousStandardDate(d2, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d2.getTime());
         assertTrue(nsd.getTime() >= d2.getTime());
 
         axis.setRange(d3, end);
         psd = axis.previousStandardDate(d3, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d3.getTime());
         assertTrue(nsd.getTime() >= d3.getTime());
 
@@ -661,13 +661,13 @@ public class DateAxisTest {
 
         axis.setRange(d3, end);
         psd = axis.previousStandardDate(d3, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d3.getTime());
         assertTrue(nsd.getTime() >= d3.getTime());
 
         axis.setRange(d4, end);
         psd = axis.previousStandardDate(d4, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d4.getTime());
         assertTrue(nsd.getTime() >= d4.getTime());
     }
@@ -691,7 +691,7 @@ public class DateAxisTest {
 
         Date end = new Date(apr22007.getLastMillisecond());
 
-        DateTickUnit unit = new DateTickUnit(DateTickUnit.DAY, 7);
+        DateTickUnit unit = new DateTickUnit(DateTickUnitType.DAY, 7);
         axis.setTickUnit(unit);
 
         // START: check d0 and d1
@@ -699,13 +699,13 @@ public class DateAxisTest {
 
         axis.setRange(d0, end);
         Date psd = axis.previousStandardDate(d0, unit);
-        Date nsd = unit.addToDate(psd);
+        Date nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d0.getTime());
         assertTrue(nsd.getTime() >= d0.getTime());
 
         axis.setRange(d1, end);
         psd = axis.previousStandardDate(d1, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d1.getTime());
         assertTrue(nsd.getTime() >= d1.getTime());
 
@@ -714,19 +714,19 @@ public class DateAxisTest {
 
         axis.setRange(d1, end);
         psd = axis.previousStandardDate(d1, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d1.getTime());
         assertTrue(nsd.getTime() >= d1.getTime());
 
         axis.setRange(d2, end);
         psd = axis.previousStandardDate(d2, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d2.getTime());
         assertTrue(nsd.getTime() >= d2.getTime());
 
         axis.setRange(d3, end);
         psd = axis.previousStandardDate(d3, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d3.getTime());
         assertTrue(nsd.getTime() >= d3.getTime());
 
@@ -735,13 +735,13 @@ public class DateAxisTest {
 
         axis.setRange(d3, end);
         psd = axis.previousStandardDate(d3, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d3.getTime());
         assertTrue(nsd.getTime() >= d3.getTime());
 
         axis.setRange(d4, end);
         psd = axis.previousStandardDate(d4, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d4.getTime());
         assertTrue(nsd.getTime() >= d4.getTime());
     }
@@ -765,7 +765,7 @@ public class DateAxisTest {
 
         Date end = new Date(h1.getLastMillisecond());
 
-        DateTickUnit unit = new DateTickUnit(DateTickUnit.HOUR, 1);
+        DateTickUnit unit = new DateTickUnit(DateTickUnitType.HOUR, 1);
         axis.setTickUnit(unit);
 
         // START: check d0 and d1
@@ -773,13 +773,13 @@ public class DateAxisTest {
 
         axis.setRange(d0, end);
         Date psd = axis.previousStandardDate(d0, unit);
-        Date nsd = unit.addToDate(psd);
+        Date nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d0.getTime());
         assertTrue(nsd.getTime() >= d0.getTime());
 
         axis.setRange(d1, end);
         psd = axis.previousStandardDate(d1, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d1.getTime());
         assertTrue(nsd.getTime() >= d1.getTime());
 
@@ -788,19 +788,19 @@ public class DateAxisTest {
 
         axis.setRange(d1, end);
         psd = axis.previousStandardDate(d1, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d1.getTime());
         assertTrue(nsd.getTime() >= d1.getTime());
 
         axis.setRange(d2, end);
         psd = axis.previousStandardDate(d2, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d2.getTime());
         assertTrue(nsd.getTime() >= d2.getTime());
 
         axis.setRange(d3, end);
         psd = axis.previousStandardDate(d3, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d3.getTime());
         assertTrue(nsd.getTime() >= d3.getTime());
 
@@ -809,13 +809,13 @@ public class DateAxisTest {
 
         axis.setRange(d3, end);
         psd = axis.previousStandardDate(d3, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d3.getTime());
         assertTrue(nsd.getTime() >= d3.getTime());
 
         axis.setRange(d4, end);
         psd = axis.previousStandardDate(d4, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d4.getTime());
         assertTrue(nsd.getTime() >= d4.getTime());
     }
@@ -839,7 +839,7 @@ public class DateAxisTest {
 
         Date end = new Date(h1.getLastMillisecond());
 
-        DateTickUnit unit = new DateTickUnit(DateTickUnit.HOUR, 6);
+        DateTickUnit unit = new DateTickUnit(DateTickUnitType.HOUR, 6);
         axis.setTickUnit(unit);
 
         // START: check d0 and d1
@@ -847,13 +847,13 @@ public class DateAxisTest {
 
         axis.setRange(d0, end);
         Date psd = axis.previousStandardDate(d0, unit);
-        Date nsd = unit.addToDate(psd);
+        Date nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d0.getTime());
         assertTrue(nsd.getTime() >= d0.getTime());
 
         axis.setRange(d1, end);
         psd = axis.previousStandardDate(d1, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d1.getTime());
         assertTrue(nsd.getTime() >= d1.getTime());
 
@@ -862,19 +862,19 @@ public class DateAxisTest {
 
         axis.setRange(d1, end);
         psd = axis.previousStandardDate(d1, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d1.getTime());
         assertTrue(nsd.getTime() >= d1.getTime());
 
         axis.setRange(d2, end);
         psd = axis.previousStandardDate(d2, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d2.getTime());
         assertTrue(nsd.getTime() >= d2.getTime());
 
         axis.setRange(d3, end);
         psd = axis.previousStandardDate(d3, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d3.getTime());
         assertTrue(nsd.getTime() >= d3.getTime());
 
@@ -883,13 +883,13 @@ public class DateAxisTest {
 
         axis.setRange(d3, end);
         psd = axis.previousStandardDate(d3, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d3.getTime());
         assertTrue(nsd.getTime() >= d3.getTime());
 
         axis.setRange(d4, end);
         psd = axis.previousStandardDate(d4, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d4.getTime());
         assertTrue(nsd.getTime() >= d4.getTime());
     }
@@ -913,7 +913,7 @@ public class DateAxisTest {
 
         Date end = new Date(s1.getLastMillisecond());
 
-        DateTickUnit unit = new DateTickUnit(DateTickUnit.SECOND, 1);
+        DateTickUnit unit = new DateTickUnit(DateTickUnitType.SECOND, 1);
         axis.setTickUnit(unit);
 
         // START: check d0 and d1
@@ -921,13 +921,13 @@ public class DateAxisTest {
 
         axis.setRange(d0, end);
         Date psd = axis.previousStandardDate(d0, unit);
-        Date nsd = unit.addToDate(psd);
+        Date nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d0.getTime());
         assertTrue(nsd.getTime() >= d0.getTime());
 
         axis.setRange(d1, end);
         psd = axis.previousStandardDate(d1, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d1.getTime());
         assertTrue(nsd.getTime() >= d1.getTime());
 
@@ -936,19 +936,19 @@ public class DateAxisTest {
 
         axis.setRange(d1, end);
         psd = axis.previousStandardDate(d1, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d1.getTime());
         assertTrue(nsd.getTime() >= d1.getTime());
 
         axis.setRange(d2, end);
         psd = axis.previousStandardDate(d2, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d2.getTime());
         assertTrue(nsd.getTime() >= d2.getTime());
 
         axis.setRange(d3, end);
         psd = axis.previousStandardDate(d3, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d3.getTime());
         assertTrue(nsd.getTime() >= d3.getTime());
 
@@ -957,13 +957,13 @@ public class DateAxisTest {
 
         axis.setRange(d3, end);
         psd = axis.previousStandardDate(d3, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d3.getTime());
         assertTrue(nsd.getTime() >= d3.getTime());
 
         axis.setRange(d4, end);
         psd = axis.previousStandardDate(d4, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d4.getTime());
         assertTrue(nsd.getTime() >= d4.getTime());
     }
@@ -987,7 +987,7 @@ public class DateAxisTest {
 
         Date end = new Date(s1.getLastMillisecond());
 
-        DateTickUnit unit = new DateTickUnit(DateTickUnit.SECOND, 5);
+        DateTickUnit unit = new DateTickUnit(DateTickUnitType.SECOND, 5);
         axis.setTickUnit(unit);
 
         // START: check d0 and d1
@@ -995,13 +995,13 @@ public class DateAxisTest {
 
         axis.setRange(d0, end);
         Date psd = axis.previousStandardDate(d0, unit);
-        Date nsd = unit.addToDate(psd);
+        Date nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d0.getTime());
         assertTrue(nsd.getTime() >= d0.getTime());
 
         axis.setRange(d1, end);
         psd = axis.previousStandardDate(d1, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d1.getTime());
         assertTrue(nsd.getTime() >= d1.getTime());
 
@@ -1010,19 +1010,19 @@ public class DateAxisTest {
 
         axis.setRange(d1, end);
         psd = axis.previousStandardDate(d1, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d1.getTime());
         assertTrue(nsd.getTime() >= d1.getTime());
 
         axis.setRange(d2, end);
         psd = axis.previousStandardDate(d2, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d2.getTime());
         assertTrue(nsd.getTime() >= d2.getTime());
 
         axis.setRange(d3, end);
         psd = axis.previousStandardDate(d3, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d3.getTime());
         assertTrue(nsd.getTime() >= d3.getTime());
 
@@ -1031,13 +1031,13 @@ public class DateAxisTest {
 
         axis.setRange(d3, end);
         psd = axis.previousStandardDate(d3, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d3.getTime());
         assertTrue(nsd.getTime() >= d3.getTime());
 
         axis.setRange(d4, end);
         psd = axis.previousStandardDate(d4, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d4.getTime());
         assertTrue(nsd.getTime() >= d4.getTime());
     }
@@ -1055,7 +1055,7 @@ public class DateAxisTest {
         Date d0 = new Date(m0.getFirstMillisecond());
         Date end = new Date(m1.getLastMillisecond());
 
-        DateTickUnit unit = new DateTickUnit(DateTickUnit.MILLISECOND, 1);
+        DateTickUnit unit = new DateTickUnit(DateTickUnitType.MILLISECOND, 1);
         axis.setTickUnit(unit);
 
         // START: check d0
@@ -1063,7 +1063,7 @@ public class DateAxisTest {
 
         axis.setRange(d0, end);
         Date psd = axis.previousStandardDate(d0, unit);
-        Date nsd = unit.addToDate(psd);
+        Date nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d0.getTime());
         assertTrue(nsd.getTime() >= d0.getTime());
 
@@ -1072,7 +1072,7 @@ public class DateAxisTest {
 
         axis.setRange(d0, end);
         psd = axis.previousStandardDate(d0, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d0.getTime());
         assertTrue(nsd.getTime() >= d0.getTime());
 
@@ -1081,7 +1081,7 @@ public class DateAxisTest {
 
         axis.setRange(d0, end);
         psd = axis.previousStandardDate(d0, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d0.getTime());
         assertTrue(nsd.getTime() >= d0.getTime());
     }
@@ -1099,7 +1099,7 @@ public class DateAxisTest {
         Date d0 = new Date(m0.getFirstMillisecond());
         Date end = new Date(m1.getLastMillisecond());
 
-        DateTickUnit unit = new DateTickUnit(DateTickUnit.MILLISECOND, 10);
+        DateTickUnit unit = new DateTickUnit(DateTickUnitType.MILLISECOND, 10);
         axis.setTickUnit(unit);
 
         // START: check d0
@@ -1107,7 +1107,7 @@ public class DateAxisTest {
 
         axis.setRange(d0, end);
         Date psd = axis.previousStandardDate(d0, unit);
-        Date nsd = unit.addToDate(psd);
+        Date nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d0.getTime());
         assertTrue(nsd.getTime() >= d0.getTime());
 
@@ -1116,7 +1116,7 @@ public class DateAxisTest {
 
         axis.setRange(d0, end);
         psd = axis.previousStandardDate(d0, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d0.getTime());
         assertTrue(nsd.getTime() >= d0.getTime());
 
@@ -1125,7 +1125,7 @@ public class DateAxisTest {
 
         axis.setRange(d0, end);
         psd = axis.previousStandardDate(d0, unit);
-        nsd = unit.addToDate(psd);
+        nsd = unit.addToDate(psd, TimeZone.getDefault());
         assertTrue(psd.getTime() < d0.getTime());
         assertTrue(nsd.getTime() >= d0.getTime());
     }
@@ -1140,7 +1140,7 @@ public class DateAxisTest {
         DateAxis axis = new DateAxis("Date", tz, Locale.UK);
         SimpleDateFormat sdf = new SimpleDateFormat("d-MMM-yyyy", Locale.UK);
         sdf.setCalendar(c);
-        axis.setTickUnit(new DateTickUnit(DateTickUnit.MONTH, 1, sdf));
+        axis.setTickUnit(new DateTickUnit(DateTickUnitType.MONTH, 1, sdf));
         Day d1 = new Day(1, 3, 2008);
         d1.peg(c);
         Day d2 = new Day(30, 6, 2008);

@@ -57,8 +57,8 @@ public class DateTickUnitTest {
      */
     @Test
     public void testEquals() {
-        DateTickUnit t1 = new DateTickUnit(DateTickUnit.DAY, 1);
-        DateTickUnit t2 = new DateTickUnit(DateTickUnit.DAY, 1);
+        DateTickUnit t1 = new DateTickUnit(DateTickUnitType.DAY, 1);
+        DateTickUnit t2 = new DateTickUnit(DateTickUnitType.DAY, 1);
         assertTrue(t1.equals(t2));
     }
 
@@ -67,8 +67,8 @@ public class DateTickUnitTest {
      */
     @Test
     public void testHashCode() {
-        DateTickUnit t1 = new DateTickUnit(DateTickUnit.DAY, 1);
-        DateTickUnit t2 = new DateTickUnit(DateTickUnit.DAY, 1);
+        DateTickUnit t1 = new DateTickUnit(DateTickUnitType.DAY, 1);
+        DateTickUnit t2 = new DateTickUnit(DateTickUnitType.DAY, 1);
         assertTrue(t1.equals(t2));
         int h1 = t1.hashCode();
         int h2 = t2.hashCode();
@@ -80,7 +80,7 @@ public class DateTickUnitTest {
      */
     @Test
     public void testSerialization() {
-        DateTickUnit a1 = new DateTickUnit(DateTickUnit.DAY, 7);
+        DateTickUnit a1 = new DateTickUnit(DateTickUnitType.DAY, 7);
         DateTickUnit a2 = (DateTickUnit) TestUtilities.serialised(a1);
         assertEquals(a1, a2);
     }

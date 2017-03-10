@@ -80,11 +80,6 @@ public class YIntervalRendererTest {
         assertEquals(r1, r2);
 
         // the following fields are inherited from the AbstractXYItemRenderer
-        r1.setItemLabelGenerator(new StandardXYItemLabelGenerator());
-        assertFalse(r1.equals(r2));
-        r2.setItemLabelGenerator(new StandardXYItemLabelGenerator());
-        assertTrue(r1.equals(r2));
-
         r1.setSeriesItemLabelGenerator(0, new StandardXYItemLabelGenerator());
         assertFalse(r1.equals(r2));
         r2.setSeriesItemLabelGenerator(0, new StandardXYItemLabelGenerator());
@@ -93,11 +88,6 @@ public class YIntervalRendererTest {
         r1.setBaseItemLabelGenerator(new StandardXYItemLabelGenerator());
         assertFalse(r1.equals(r2));
         r2.setBaseItemLabelGenerator(new StandardXYItemLabelGenerator());
-        assertTrue(r1.equals(r2));
-
-        r1.setToolTipGenerator(new StandardXYToolTipGenerator());
-        assertFalse(r1.equals(r2));
-        r2.setToolTipGenerator(new StandardXYToolTipGenerator());
         assertTrue(r1.equals(r2));
 
         r1.setSeriesToolTipGenerator(0, new StandardXYToolTipGenerator());

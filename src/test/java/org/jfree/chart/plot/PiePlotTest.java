@@ -139,13 +139,6 @@ public class PiePlotTest {
         plot2.setIgnoreNullValues(true);
         assertTrue(plot1.equals(plot2));
 
-        // sectionPaint
-        plot1.setSectionPaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.white));
-        assertFalse(plot1.equals(plot2));
-        plot2.setSectionPaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.white));
-        assertTrue(plot1.equals(plot2));
 
         // sectionPaintMap
         plot1.setSectionPaint("A", new GradientPaint(1.0f, 2.0f, Color.blue,
@@ -169,14 +162,6 @@ public class PiePlotTest {
         plot2.setSectionOutlinesVisible(false);
         assertTrue(plot1.equals(plot2));
 
-        // sectionOutlinePaint
-        plot1.setSectionOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.cyan,
-                3.0f, 4.0f, Color.white));
-        assertFalse(plot1.equals(plot2));
-        plot2.setSectionOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.cyan,
-                3.0f, 4.0f, Color.white));
-        assertTrue(plot1.equals(plot2));
-
         // sectionOutlinePaintList
         plot1.setSectionOutlinePaint("A", new GradientPaint(1.0f, 2.0f,
                 Color.green, 3.0f, 4.0f, Color.white));
@@ -191,12 +176,6 @@ public class PiePlotTest {
         assertFalse(plot1.equals(plot2));
         plot2.setBaseSectionOutlinePaint(new GradientPaint(1.0f, 2.0f,
                 Color.gray, 3.0f, 4.0f, Color.white));
-        assertTrue(plot1.equals(plot2));
-
-        // sectionOutlineStroke
-        plot1.setSectionOutlineStroke(new BasicStroke(1.0f));
-        assertFalse(plot1.equals(plot2));
-        plot2.setSectionOutlineStroke(new BasicStroke(1.0f));
         assertTrue(plot1.equals(plot2));
 
         // sectionOutlineStrokeList

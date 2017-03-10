@@ -685,16 +685,6 @@ public class XYPlotTest {
         p2.mapDatasetToRangeAxis(2, 1);
         assertTrue(p1.equals(p2));
 
-        p1.getRenderer().setOutlinePaint(Color.cyan);
-        assertFalse(p1.equals(p2));
-        p2.getRenderer().setOutlinePaint(Color.cyan);
-        assertTrue(p1.equals(p2));
-
-        p1.getRenderer(1).setOutlinePaint(Color.red);
-        assertFalse(p1.equals(p2));
-        p2.getRenderer(1).setOutlinePaint(Color.red);
-        assertTrue(p1.equals(p2));
-
     }
 
     /**

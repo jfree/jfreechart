@@ -82,12 +82,6 @@ public class AbstractCategoryItemRendererTest {
 
         // the plot field is NOT tested
 
-        // toolTipGenerator
-        r1.setToolTipGenerator(new StandardCategoryToolTipGenerator());
-        assertFalse(r1.equals(r2));
-        r2.setToolTipGenerator(new StandardCategoryToolTipGenerator());
-        assertTrue(r1.equals(r2));
-
         // toolTipGeneratorList
         r1.setSeriesToolTipGenerator(1, new StandardCategoryToolTipGenerator());
         assertFalse(r1.equals(r2));
@@ -100,12 +94,6 @@ public class AbstractCategoryItemRendererTest {
         assertFalse(r1.equals(r2));
         r2.setBaseToolTipGenerator(new StandardCategoryToolTipGenerator("{2}",
                 NumberFormat.getInstance()));
-        assertTrue(r1.equals(r2));
-
-        // itemLabelGenerator
-        r1.setItemLabelGenerator(new StandardCategoryItemLabelGenerator());
-        assertFalse(r1.equals(r2));
-        r2.setItemLabelGenerator(new StandardCategoryItemLabelGenerator());
         assertTrue(r1.equals(r2));
 
         // itemLabelGeneratorList
@@ -122,12 +110,6 @@ public class AbstractCategoryItemRendererTest {
         assertFalse(r1.equals(r2));
         r2.setBaseItemLabelGenerator(new StandardCategoryItemLabelGenerator(
                 "{2}", NumberFormat.getInstance()));
-        assertTrue(r1.equals(r2));
-
-        // urlGenerator
-        r1.setItemURLGenerator(new StandardCategoryURLGenerator());
-        assertFalse(r1.equals(r2));
-        r2.setItemURLGenerator(new StandardCategoryURLGenerator());
         assertTrue(r1.equals(r2));
 
         // urlGeneratorList
@@ -208,7 +190,6 @@ public class AbstractCategoryItemRendererTest {
     @Test
     public void testCloning1() throws CloneNotSupportedException {
         AbstractCategoryItemRenderer r1 = new BarRenderer();
-        r1.setItemLabelGenerator(new StandardCategoryItemLabelGenerator());
         AbstractCategoryItemRenderer r2 = (BarRenderer) r1.clone();
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());

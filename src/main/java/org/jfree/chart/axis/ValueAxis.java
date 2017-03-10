@@ -172,22 +172,6 @@ public abstract class ValueAxis extends Axis
     /** The default value for the upper margin (0.05 = 5%). */
     public static final double DEFAULT_UPPER_MARGIN = 0.05;
 
-    /**
-     * The default lower bound for the axis.
-     *
-     * @deprecated From 1.0.5 onwards, the axis defines a defaultRange
-     *     attribute (see {@link #getDefaultAutoRange()}).
-     */
-    public static final double DEFAULT_LOWER_BOUND = 0.0;
-
-    /**
-     * The default upper bound for the axis.
-     *
-     * @deprecated From 1.0.5 onwards, the axis defines a defaultRange
-     *     attribute (see {@link #getDefaultAutoRange()}).
-     */
-    public static final double DEFAULT_UPPER_BOUND = 1.0;
-
     /** The default auto-tick-unit-selection value. */
     public static final boolean DEFAULT_AUTO_TICK_UNIT_SELECTION = true;
 

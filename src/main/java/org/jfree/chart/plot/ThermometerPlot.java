@@ -189,48 +189,6 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
     /** A constant for the 'critical' range. */
     public static final int CRITICAL = 2;
 
-    /**
-     * The bulb radius.
-     *
-     * @deprecated As of 1.0.7, use {@link #getBulbRadius()}.
-     */
-    protected static final int BULB_RADIUS = 40;
-
-    /**
-     * The bulb diameter.
-     *
-     * @deprecated As of 1.0.7, use {@link #getBulbDiameter()}.
-     */
-    protected static final int BULB_DIAMETER = BULB_RADIUS * 2;
-
-    /**
-     * The column radius.
-     *
-     * @deprecated As of 1.0.7, use {@link #getColumnRadius()}.
-     */
-    protected static final int COLUMN_RADIUS = 20;
-
-    /**
-     * The column diameter.
-     *
-     * @deprecated As of 1.0.7, use {@link #getColumnDiameter()}.
-     */
-    protected static final int COLUMN_DIAMETER = COLUMN_RADIUS * 2;
-
-    /**
-     * The gap radius.
-     *
-     * @deprecated As of 1.0.7, use {@link #getGap()}.
-     */
-    protected static final int GAP_RADIUS = 5;
-
-    /**
-     * The gap diameter.
-     *
-     * @deprecated As of 1.0.7, use {@link #getGap()} times two.
-     */
-    protected static final int GAP_DIAMETER = GAP_RADIUS * 2;
-
     /** The axis gap. */
     protected static final int AXIS_GAP = 10;
 
