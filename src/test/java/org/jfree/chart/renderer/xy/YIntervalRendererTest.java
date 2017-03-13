@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -85,9 +85,9 @@ public class YIntervalRendererTest {
         r2.setSeriesItemLabelGenerator(0, new StandardXYItemLabelGenerator());
         assertTrue(r1.equals(r2));
 
-        r1.setBaseItemLabelGenerator(new StandardXYItemLabelGenerator());
+        r1.setDefaultItemLabelGenerator(new StandardXYItemLabelGenerator());
         assertFalse(r1.equals(r2));
-        r2.setBaseItemLabelGenerator(new StandardXYItemLabelGenerator());
+        r2.setDefaultItemLabelGenerator(new StandardXYItemLabelGenerator());
         assertTrue(r1.equals(r2));
 
         r1.setSeriesToolTipGenerator(0, new StandardXYToolTipGenerator());
@@ -95,9 +95,9 @@ public class YIntervalRendererTest {
         r2.setSeriesToolTipGenerator(0, new StandardXYToolTipGenerator());
         assertTrue(r1.equals(r2));
 
-        r1.setBaseToolTipGenerator(new StandardXYToolTipGenerator());
+        r1.setDefaultToolTipGenerator(new StandardXYToolTipGenerator());
         assertFalse(r1.equals(r2));
-        r2.setBaseToolTipGenerator(new StandardXYToolTipGenerator());
+        r2.setDefaultToolTipGenerator(new StandardXYToolTipGenerator());
         assertTrue(r1.equals(r2));
 
         r1.setURLGenerator(new StandardXYURLGenerator());

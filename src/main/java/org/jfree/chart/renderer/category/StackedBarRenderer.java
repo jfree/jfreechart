@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -158,8 +158,8 @@ public class StackedBarRenderer extends BarRenderer
         // the user requests visible item labels...
         ItemLabelPosition p = new ItemLabelPosition(ItemLabelAnchor.CENTER,
                 TextAnchor.CENTER);
-        setBasePositiveItemLabelPosition(p);
-        setBaseNegativeItemLabelPosition(p);
+        setDefaultPositiveItemLabelPosition(p);
+        setDefaultNegativeItemLabelPosition(p);
         setPositiveItemLabelPositionFallback(null);
         setNegativeItemLabelPositionFallback(null);
     }

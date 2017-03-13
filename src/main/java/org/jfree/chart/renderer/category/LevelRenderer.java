@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -105,10 +105,10 @@ public class LevelRenderer extends AbstractCategoryItemRenderer
         this.itemMargin = DEFAULT_ITEM_MARGIN;
         this.maxItemWidth = 1.0;  // 100 percent, so it will not apply unless
                                   // changed
-        setBaseLegendShape(new Rectangle2D.Float(-5.0f, -1.0f, 10.0f, 2.0f));
+        setDefaultLegendShape(new Rectangle2D.Float(-5.0f, -1.0f, 10.0f, 2.0f));
         // set the outline paint to fully transparent, then the legend shape
         // will just have the same colour as the lines drawn by the renderer
-        setBaseOutlinePaint(new Color(0, 0, 0, 0));
+        setDefaultOutlinePaint(new Color(0, 0, 0, 0));
     }
 
     /**

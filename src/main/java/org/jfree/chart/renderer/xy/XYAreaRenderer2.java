@@ -156,7 +156,7 @@ public class XYAreaRenderer2 extends AbstractXYItemRenderer
                            XYURLGenerator urlGenerator) {
         super();
         this.showOutline = false;
-        setBaseToolTipGenerator(labelGenerator);
+        setDefaultToolTipGenerator(labelGenerator);
         setURLGenerator(urlGenerator);
         GeneralPath area = new GeneralPath();
         area.moveTo(0.0f, -4.0f);

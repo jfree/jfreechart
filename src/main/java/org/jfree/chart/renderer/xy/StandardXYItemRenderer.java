@@ -259,12 +259,11 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
      *                          permitted).
      * @param urlGenerator  the URL generator.
      */
-    public StandardXYItemRenderer(int type,
-                                  XYToolTipGenerator toolTipGenerator,
-                                  XYURLGenerator urlGenerator) {
+    public StandardXYItemRenderer(int type, XYToolTipGenerator toolTipGenerator,
+           XYURLGenerator urlGenerator) {
 
         super();
-        setBaseToolTipGenerator(toolTipGenerator);
+        setDefaultToolTipGenerator(toolTipGenerator);
         setURLGenerator(urlGenerator);
         if ((type & SHAPES) != 0) {
             this.baseShapesVisible = true;

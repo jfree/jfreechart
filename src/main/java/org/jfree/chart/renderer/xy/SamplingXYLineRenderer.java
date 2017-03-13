@@ -88,7 +88,7 @@ public class SamplingXYLineRenderer extends AbstractXYItemRenderer
      */
     public SamplingXYLineRenderer() {
         this.legendLine = new Line2D.Double(-7.0, 0.0, 7.0, 0.0);
-        setBaseLegendShape(this.legendLine);
+        setDefaultLegendShape(this.legendLine);
         setTreatLegendShapeAsLine(true);
     }
 

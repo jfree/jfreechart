@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -87,9 +87,9 @@ public class XYLineAndShapeRendererTest {
         r2.setSeriesLinesVisible(3, true);
         assertTrue(r1.equals(r2));
 
-        r1.setBaseLinesVisible(false);
+        r1.setDefaultLinesVisible(false);
         assertFalse(r1.equals(r2));
-        r2.setBaseLinesVisible(false);
+        r2.setDefaultLinesVisible(false);
         assertTrue(r1.equals(r2));
 
         r1.setLegendLine(new Line2D.Double(1.0, 2.0, 3.0, 4.0));
@@ -102,9 +102,9 @@ public class XYLineAndShapeRendererTest {
         r2.setSeriesShapesVisible(3, true);
         assertTrue(r1.equals(r2));
 
-        r1.setBaseShapesVisible(false);
+        r1.setDefaultShapesVisible(false);
         assertFalse(r1.equals(r2));
-        r2.setBaseShapesVisible(false);
+        r2.setDefaultShapesVisible(false);
         assertTrue(r1.equals(r2));
 
         r1.setSeriesShapesFilled(3, true);
@@ -112,9 +112,9 @@ public class XYLineAndShapeRendererTest {
         r2.setSeriesShapesFilled(3, true);
         assertTrue(r1.equals(r2));
 
-        r1.setBaseShapesFilled(false);
+        r1.setDefaultShapesFilled(false);
         assertFalse(r1.equals(r2));
-        r2.setBaseShapesFilled(false);
+        r2.setDefaultShapesFilled(false);
         assertTrue(r1.equals(r2));
 
         r1.setDrawOutlines(!r1.getDrawOutlines());

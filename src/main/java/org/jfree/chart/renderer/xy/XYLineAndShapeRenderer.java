@@ -127,7 +127,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     private BooleanList seriesLinesVisible;
 
     /** The default value returned by the getLinesVisible() method. */
-    private boolean baseLinesVisible;
+    private boolean defaultLinesVisible;
 
     /** The shape that is used to represent a line in the legend. */
     private transient Shape legendLine;
@@ -139,7 +139,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     private BooleanList seriesShapesVisible;
 
     /** The default value returned by the getShapeVisible() method. */
-    private boolean baseShapesVisible;
+    private boolean defaultShapesVisible;
 
     /**
      * A table of flags that control (per series) whether or not shapes are
@@ -148,7 +148,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     private BooleanList seriesShapesFilled;
 
     /** The default value returned by the getShapeFilled() method. */
-    private boolean baseShapesFilled;
+    private boolean defaultShapesFilled;
 
     /** A flag that controls whether outlines are drawn for shapes. */
     private boolean drawOutlines;
@@ -186,15 +186,15 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
      */
     public XYLineAndShapeRenderer(boolean lines, boolean shapes) {
         this.seriesLinesVisible = new BooleanList();
-        this.baseLinesVisible = lines;
+        this.defaultLinesVisible = lines;
         this.legendLine = new Line2D.Double(-7.0, 0.0, 7.0, 0.0);
 
         this.seriesShapesVisible = new BooleanList();
-        this.baseShapesVisible = shapes;
+        this.defaultShapesVisible = shapes;
 
         this.useFillPaint = false;     // use item paint for fills by default
         this.seriesShapesFilled = new BooleanList();
-        this.baseShapesFilled = true;
+        this.defaultShapesFilled = true;
 
         this.drawOutlines = true;
         this.useOutlinePaint = false;  // use item paint for outlines by
@@ -257,11 +257,9 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     public boolean getItemLineVisible(int series, int item) {
         Boolean flag = getSeriesLinesVisible(series);
         if (flag != null) {
-            return flag.booleanValue();
+            return flag;
         }
-        else {
-            return this.baseLinesVisible;
-        }
+        return this.defaultLinesVisible;
     }
 
     /**
@@ -306,26 +304,26 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Returns the base 'lines visible' attribute.
+     * Returns the default 'lines visible' attribute.
      *
-     * @return The base flag.
+     * @return The default flag.
      *
-     * @see #setBaseLinesVisible(boolean)
+     * @see #setDefaultLinesVisible(boolean)
      */
-    public boolean getBaseLinesVisible() {
-        return this.baseLinesVisible;
+    public boolean getDefaultLinesVisible() {
+        return this.defaultLinesVisible;
     }
 
     /**
-     * Sets the base 'lines visible' flag and sends a
+     * Sets the default 'lines visible' flag and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param flag  the flag.
      *
      * @see #getBaseLinesVisible()
      */
-    public void setBaseLinesVisible(boolean flag) {
-        this.baseLinesVisible = flag;
+    public void setDefaultLinesVisible(boolean flag) {
+        this.defaultLinesVisible = flag;
         fireChangeEvent();
     }
 
@@ -372,11 +370,9 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     public boolean getItemShapeVisible(int series, int item) {
         Boolean flag = getSeriesShapesVisible(series);
         if (flag != null) {
-            return flag.booleanValue();
+            return flag;
         }
-        else {
-            return this.baseShapesVisible;
-        }
+        return this.defaultShapesVisible;
     }
 
     /**
@@ -421,26 +417,26 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Returns the base 'shape visible' attribute.
+     * Returns the default 'shape visible' attribute.
      *
-     * @return The base flag.
+     * @return The default flag.
      *
-     * @see #setBaseShapesVisible(boolean)
+     * @see #setDefaultShapesVisible(boolean)
      */
-    public boolean getBaseShapesVisible() {
-        return this.baseShapesVisible;
+    public boolean getDefaultShapesVisible() {
+        return this.defaultShapesVisible;
     }
 
     /**
-     * Sets the base 'shapes visible' flag and sends a
+     * Sets the default 'shapes visible' flag and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param flag  the flag.
      *
-     * @see #getBaseShapesVisible()
+     * @see #getDefaultShapesVisible()
      */
-    public void setBaseShapesVisible(boolean flag) {
-        this.baseShapesVisible = flag;
+    public void setDefaultShapesVisible(boolean flag) {
+        this.defaultShapesVisible = flag;
         fireChangeEvent();
     }
 
@@ -462,11 +458,10 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     public boolean getItemShapeFilled(int series, int item) {
         Boolean flag = getSeriesShapesFilled(series);
         if (flag != null) {
-            return flag.booleanValue();
+            return flag;
         }
-        else {
-            return this.baseShapesFilled;
-        }
+        return this.defaultShapesFilled;
+       
     }
 
     /**
@@ -511,26 +506,26 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Returns the base 'shape filled' attribute.
+     * Returns the default 'shape filled' attribute.
      *
-     * @return The base flag.
+     * @return The default flag.
      *
-     * @see #setBaseShapesFilled(boolean)
+     * @see #setDefaultShapesFilled(boolean)
      */
-    public boolean getBaseShapesFilled() {
-        return this.baseShapesFilled;
+    public boolean getDefaultShapesFilled() {
+        return this.defaultShapesFilled;
     }
 
     /**
-     * Sets the base 'shapes filled' flag and sends a
+     * Sets the default 'shapes filled' flag and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param flag  the flag.
      *
-     * @see #getBaseShapesFilled()
+     * @see #getDefaultShapesFilled()
      */
-    public void setBaseShapesFilled(boolean flag) {
-        this.baseShapesFilled = flag;
+    public void setDefaultShapesFilled(boolean flag) {
+        this.defaultShapesFilled = flag;
         fireChangeEvent();
     }
 
@@ -1152,7 +1147,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
         ) {
             return false;
         }
-        if (this.baseLinesVisible != that.baseLinesVisible) {
+        if (this.defaultLinesVisible != that.defaultLinesVisible) {
             return false;
         }
         if (!ShapeUtils.equal(this.legendLine, that.legendLine)) {
@@ -1163,7 +1158,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
         ) {
             return false;
         }
-        if (this.baseShapesVisible != that.baseShapesVisible) {
+        if (this.defaultShapesVisible != that.defaultShapesVisible) {
             return false;
         }
         if (!ObjectUtils.equal(
@@ -1171,7 +1166,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
         ) {
             return false;
         }
-        if (this.baseShapesFilled != that.baseShapesFilled) {
+        if (this.defaultShapesFilled != that.defaultShapesFilled) {
             return false;
         }
         if (this.drawOutlines != that.drawOutlines) {

@@ -238,7 +238,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
     public CandlestickRenderer(double candleWidth, boolean drawVolume,
                                XYToolTipGenerator toolTipGenerator) {
         super();
-        setBaseToolTipGenerator(toolTipGenerator);
+        setDefaultToolTipGenerator(toolTipGenerator);
         this.candleWidth = candleWidth;
         this.drawVolume = drawVolume;
         this.volumePaint = Color.gray;

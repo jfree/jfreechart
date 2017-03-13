@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -255,7 +255,7 @@ public class CombinedDomainCategoryPlotTest implements ChartChangeListener {
         NumberAxis rangeAxis1 = new NumberAxis("Value");
         rangeAxis1.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
         LineAndShapeRenderer renderer1 = new LineAndShapeRenderer();
-        renderer1.setBaseToolTipGenerator(
+        renderer1.setDefaultToolTipGenerator(
             new StandardCategoryToolTipGenerator()
         );
         CategoryPlot subplot1 = new CategoryPlot(
@@ -267,7 +267,7 @@ public class CombinedDomainCategoryPlotTest implements ChartChangeListener {
         NumberAxis rangeAxis2 = new NumberAxis("Value");
         rangeAxis2.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
         BarRenderer renderer2 = new BarRenderer();
-        renderer2.setBaseToolTipGenerator(
+        renderer2.setDefaultToolTipGenerator(
             new StandardCategoryToolTipGenerator()
         );
         CategoryPlot subplot2 = new CategoryPlot(

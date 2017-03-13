@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -76,9 +76,9 @@ public class XYStepRendererTest {
         assertTrue(r1.equals(r2));
 
         // try something from the base class
-        r1.setBaseCreateEntities(false);
+        r1.setDefaultCreateEntities(false);
         assertFalse(r1.equals(r2));
-        r2.setBaseCreateEntities(false);
+        r2.setDefaultCreateEntities(false);
         assertTrue(r1.equals(r2));
     }
 

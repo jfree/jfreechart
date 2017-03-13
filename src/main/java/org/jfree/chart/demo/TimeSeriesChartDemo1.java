@@ -123,8 +123,8 @@ public class TimeSeriesChartDemo1 extends ApplicationFrame {
         XYItemRenderer r = plot.getRenderer();
         if (r instanceof XYLineAndShapeRenderer) {
             XYLineAndShapeRenderer renderer = (XYLineAndShapeRenderer) r;
-            renderer.setBaseShapesVisible(true);
-            renderer.setBaseShapesFilled(true);
+            renderer.setDefaultShapesVisible(true);
+            renderer.setDefaultShapesFilled(true);
             renderer.setDrawSeriesLineAsPath(true);
         }
 

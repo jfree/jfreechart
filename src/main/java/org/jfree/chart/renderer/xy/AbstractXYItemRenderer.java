@@ -210,14 +210,14 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
     /** A list of item label generators (one per series). */
     private Map<Integer, XYItemLabelGenerator> itemLabelGeneratorMap;
 
-    /** The base item label generator. */
-    private XYItemLabelGenerator baseItemLabelGenerator;
+    /** The default item label generator. */
+    private XYItemLabelGenerator defaultItemLabelGenerator;
 
     /** A list of tool tip generators (one per series). */
     private Map<Integer, XYToolTipGenerator> toolTipGeneratorMap;
 
-    /** The base tool tip generator. */
-    private XYToolTipGenerator baseToolTipGenerator;
+    /** The default tool tip generator. */
+    private XYToolTipGenerator defaultToolTipGenerator;
 
     /** The URL text generator. */
     private XYURLGenerator urlGenerator;
@@ -351,7 +351,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
         XYItemLabelGenerator generator
             = (XYItemLabelGenerator) this.itemLabelGeneratorMap.get(series);
         if (generator == null) {
-            generator = this.baseItemLabelGenerator;
+            generator = this.defaultItemLabelGenerator;
         }
         return generator;
     }
@@ -383,24 +383,24 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
     }
 
     /**
-     * Returns the base item label generator.
+     * Returns the default item label generator.
      *
      * @return The generator (possibly {@code null}).
      */
     @Override
-    public XYItemLabelGenerator getBaseItemLabelGenerator() {
-        return this.baseItemLabelGenerator;
+    public XYItemLabelGenerator getDefaultItemLabelGenerator() {
+        return this.defaultItemLabelGenerator;
     }
 
     /**
-     * Sets the base item label generator and sends a
+     * Sets the default item label generator and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param generator  the generator ({@code null} permitted).
      */
     @Override
-    public void setBaseItemLabelGenerator(XYItemLabelGenerator generator) {
-        this.baseItemLabelGenerator = generator;
+    public void setDefaultItemLabelGenerator(XYItemLabelGenerator generator) {
+        this.defaultItemLabelGenerator = generator;
         fireChangeEvent();
     }
 
@@ -423,7 +423,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
         XYToolTipGenerator generator
                 = (XYToolTipGenerator) this.toolTipGeneratorMap.get(series);
         if (generator == null) {
-            generator = this.baseToolTipGenerator;
+            generator = this.defaultToolTipGenerator;
         }
         return generator;
     }
@@ -455,28 +455,28 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
     }
 
     /**
-     * Returns the base tool tip generator.
+     * Returns the default tool tip generator.
      *
      * @return The generator (possibly {@code null}).
      *
-     * @see #setBaseToolTipGenerator(XYToolTipGenerator)
+     * @see #setDefaultToolTipGenerator(XYToolTipGenerator)
      */
     @Override
-    public XYToolTipGenerator getBaseToolTipGenerator() {
-        return this.baseToolTipGenerator;
+    public XYToolTipGenerator getDefaultToolTipGenerator() {
+        return this.defaultToolTipGenerator;
     }
 
     /**
-     * Sets the base tool tip generator and sends a {@link RendererChangeEvent}
+     * Sets the default tool tip generator and sends a {@link RendererChangeEvent}
      * to all registered listeners.
      *
      * @param generator  the generator ({@code null} permitted).
      *
-     * @see #getBaseToolTipGenerator()
+     * @see #getDefaultToolTipGenerator()
      */
     @Override
-    public void setBaseToolTipGenerator(XYToolTipGenerator generator) {
-        this.baseToolTipGenerator = generator;
+    public void setDefaultToolTipGenerator(XYToolTipGenerator generator) {
+        this.defaultToolTipGenerator = generator;
         fireChangeEvent();
     }
 
@@ -1505,18 +1505,18 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
 
         clone.itemLabelGeneratorMap = CloneUtils.cloneMapValues(
                 this.itemLabelGeneratorMap);
-        if (this.baseItemLabelGenerator != null
-                && this.baseItemLabelGenerator instanceof PublicCloneable) {
-            PublicCloneable pc = (PublicCloneable) this.baseItemLabelGenerator;
-            clone.baseItemLabelGenerator = (XYItemLabelGenerator) pc.clone();
+        if (this.defaultItemLabelGenerator != null
+                && this.defaultItemLabelGenerator instanceof PublicCloneable) {
+            PublicCloneable pc = (PublicCloneable) this.defaultItemLabelGenerator;
+            clone.defaultItemLabelGenerator = (XYItemLabelGenerator) pc.clone();
         }
 
         clone.toolTipGeneratorMap = CloneUtils.cloneMapValues(
                 this.toolTipGeneratorMap);
-        if (this.baseToolTipGenerator != null
-                && this.baseToolTipGenerator instanceof PublicCloneable) {
-            PublicCloneable pc = (PublicCloneable) this.baseToolTipGenerator;
-            clone.baseToolTipGenerator = (XYToolTipGenerator) pc.clone();
+        if (this.defaultToolTipGenerator != null
+                && this.defaultToolTipGenerator instanceof PublicCloneable) {
+            PublicCloneable pc = (PublicCloneable) this.defaultToolTipGenerator;
+            clone.defaultToolTipGenerator = (XYToolTipGenerator) pc.clone();
         }
 
         if (this.legendItemLabelGenerator instanceof PublicCloneable) {
@@ -1559,15 +1559,15 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
         if (!this.itemLabelGeneratorMap.equals(that.itemLabelGeneratorMap)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.baseItemLabelGenerator,
-                that.baseItemLabelGenerator)) {
+        if (!ObjectUtils.equal(this.defaultItemLabelGenerator,
+                that.defaultItemLabelGenerator)) {
             return false;
         }
         if (!this.toolTipGeneratorMap.equals(that.toolTipGeneratorMap)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.baseToolTipGenerator,
-                that.baseToolTipGenerator)) {
+        if (!ObjectUtils.equal(this.defaultToolTipGenerator,
+                that.defaultToolTipGenerator)) {
             return false;
         }
         if (!ObjectUtils.equal(this.urlGenerator, that.urlGenerator)) {

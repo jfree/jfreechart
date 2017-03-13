@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -193,7 +193,7 @@ public class BarRendererTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         BarRenderer r1 = new BarRenderer();
-        r1.setBaseItemLabelGenerator(new StandardCategoryItemLabelGenerator());
+        r1.setDefaultItemLabelGenerator(new StandardCategoryItemLabelGenerator());
         r1.setBarPainter(new GradientBarPainter(0.11, 0.22, 0.33));
         BarRenderer r2 = (BarRenderer) r1.clone();
         assertTrue(r1 != r2);
@@ -231,7 +231,7 @@ public class BarRendererTest {
         r1.addChangeListener(detector);
 
         detector.setNotified(false);
-        r1.setBasePaint(Color.red);
+        r1.setDefaultPaint(Color.red);
         assertTrue(detector.getNotified());
 
     }

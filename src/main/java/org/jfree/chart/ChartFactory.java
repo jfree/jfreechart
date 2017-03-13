@@ -893,24 +893,24 @@ public abstract class ChartFactory {
         if (orientation == PlotOrientation.HORIZONTAL) {
             ItemLabelPosition position1 = new ItemLabelPosition(
                     ItemLabelAnchor.OUTSIDE3, TextAnchor.CENTER_LEFT);
-            renderer.setBasePositiveItemLabelPosition(position1);
+            renderer.setDefaultPositiveItemLabelPosition(position1);
             ItemLabelPosition position2 = new ItemLabelPosition(
                     ItemLabelAnchor.OUTSIDE9, TextAnchor.CENTER_RIGHT);
-            renderer.setBaseNegativeItemLabelPosition(position2);
+            renderer.setDefaultNegativeItemLabelPosition(position2);
         } else if (orientation == PlotOrientation.VERTICAL) {
             ItemLabelPosition position1 = new ItemLabelPosition(
                     ItemLabelAnchor.OUTSIDE12, TextAnchor.BOTTOM_CENTER);
-            renderer.setBasePositiveItemLabelPosition(position1);
+            renderer.setDefaultPositiveItemLabelPosition(position1);
             ItemLabelPosition position2 = new ItemLabelPosition(
                     ItemLabelAnchor.OUTSIDE6, TextAnchor.TOP_CENTER);
-            renderer.setBaseNegativeItemLabelPosition(position2);
+            renderer.setDefaultNegativeItemLabelPosition(position2);
         }
         if (tooltips) {
-            renderer.setBaseToolTipGenerator(
+            renderer.setDefaultToolTipGenerator(
                     new StandardCategoryToolTipGenerator());
         }
         if (urls) {
-            renderer.setBaseItemURLGenerator(
+            renderer.setDefaultItemURLGenerator(
                     new StandardCategoryURLGenerator());
         }
 
@@ -982,11 +982,11 @@ public abstract class ChartFactory {
 
         StackedBarRenderer renderer = new StackedBarRenderer();
         if (tooltips) {
-            renderer.setBaseToolTipGenerator(
+            renderer.setDefaultToolTipGenerator(
                     new StandardCategoryToolTipGenerator());
         }
         if (urls) {
-            renderer.setBaseItemURLGenerator(
+            renderer.setDefaultItemURLGenerator(
                     new StandardCategoryURLGenerator());
         }
 
@@ -1057,11 +1057,11 @@ public abstract class ChartFactory {
 
         AreaRenderer renderer = new AreaRenderer();
         if (tooltips) {
-            renderer.setBaseToolTipGenerator(
+            renderer.setDefaultToolTipGenerator(
                     new StandardCategoryToolTipGenerator());
         }
         if (urls) {
-            renderer.setBaseItemURLGenerator(
+            renderer.setDefaultItemURLGenerator(
                     new StandardCategoryURLGenerator());
         }
 
@@ -1133,11 +1133,11 @@ public abstract class ChartFactory {
 
         StackedAreaRenderer renderer = new StackedAreaRenderer();
         if (tooltips) {
-            renderer.setBaseToolTipGenerator(
+            renderer.setDefaultToolTipGenerator(
                     new StandardCategoryToolTipGenerator());
         }
         if (urls) {
-            renderer.setBaseItemURLGenerator(
+            renderer.setDefaultItemURLGenerator(
                     new StandardCategoryURLGenerator());
         }
 
@@ -1206,11 +1206,11 @@ public abstract class ChartFactory {
 
         LineAndShapeRenderer renderer = new LineAndShapeRenderer(true, false);
         if (tooltips) {
-            renderer.setBaseToolTipGenerator(
+            renderer.setDefaultToolTipGenerator(
                     new StandardCategoryToolTipGenerator());
         }
         if (urls) {
-            renderer.setBaseItemURLGenerator(
+            renderer.setDefaultItemURLGenerator(
                     new StandardCategoryURLGenerator());
         }
         CategoryPlot plot = new CategoryPlot(dataset, categoryAxis, valueAxis,
@@ -1277,12 +1277,12 @@ public abstract class ChartFactory {
 
         CategoryItemRenderer renderer = new GanttRenderer();
         if (tooltips) {
-            renderer.setBaseToolTipGenerator(
+            renderer.setDefaultToolTipGenerator(
                     new IntervalCategoryToolTipGenerator(
                     "{3} - {4}", DateFormat.getDateInstance()));
         }
         if (urls) {
-            renderer.setBaseItemURLGenerator(
+            renderer.setDefaultItemURLGenerator(
                     new StandardCategoryURLGenerator());
         }
 
@@ -1332,23 +1332,23 @@ public abstract class ChartFactory {
             ItemLabelPosition position = new ItemLabelPosition(
                     ItemLabelAnchor.CENTER, TextAnchor.CENTER,
                     TextAnchor.CENTER, Math.PI / 2.0);
-            renderer.setBasePositiveItemLabelPosition(position);
-            renderer.setBaseNegativeItemLabelPosition(position);
+            renderer.setDefaultPositiveItemLabelPosition(position);
+            renderer.setDefaultNegativeItemLabelPosition(position);
          }
         else if (orientation == PlotOrientation.VERTICAL) {
             ItemLabelPosition position = new ItemLabelPosition(
                     ItemLabelAnchor.CENTER, TextAnchor.CENTER,
                     TextAnchor.CENTER, 0.0);
-            renderer.setBasePositiveItemLabelPosition(position);
-            renderer.setBaseNegativeItemLabelPosition(position);
+            renderer.setDefaultPositiveItemLabelPosition(position);
+            renderer.setDefaultNegativeItemLabelPosition(position);
         }
         if (tooltips) {
             StandardCategoryToolTipGenerator generator
                 = new StandardCategoryToolTipGenerator();
-            renderer.setBaseToolTipGenerator(generator);
+            renderer.setDefaultToolTipGenerator(generator);
         }
         if (urls) {
-            renderer.setBaseItemURLGenerator(
+            renderer.setDefaultItemURLGenerator(
                     new StandardCategoryURLGenerator());
         }
 
@@ -1461,7 +1461,7 @@ public abstract class ChartFactory {
             urlGenerator = new StandardXYURLGenerator();
         }
         XYItemRenderer renderer = new XYLineAndShapeRenderer(false, true);
-        renderer.setBaseToolTipGenerator(toolTipGenerator);
+        renderer.setDefaultToolTipGenerator(toolTipGenerator);
         renderer.setURLGenerator(urlGenerator);
         plot.setRenderer(renderer);
         plot.setOrientation(orientation);
@@ -1544,7 +1544,7 @@ public abstract class ChartFactory {
             else {
                 tt = new StandardXYToolTipGenerator();
             }
-            renderer.setBaseToolTipGenerator(tt);
+            renderer.setDefaultToolTipGenerator(tt);
         }
         if (urls) {
             renderer.setURLGenerator(new StandardXYURLGenerator());
@@ -1753,7 +1753,7 @@ public abstract class ChartFactory {
         XYPlot plot = new XYPlot(dataset, xAxis, yAxis, renderer);
         plot.setOrientation(orientation);
         if (tooltips) {
-            renderer.setBaseToolTipGenerator(new StandardXYToolTipGenerator());
+            renderer.setDefaultToolTipGenerator(new StandardXYToolTipGenerator());
         }
         if (urls) {
             renderer.setURLGenerator(new StandardXYURLGenerator());
@@ -1970,7 +1970,7 @@ public abstract class ChartFactory {
 
         XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer(true,
                 false);
-        renderer.setBaseToolTipGenerator(toolTipGenerator);
+        renderer.setDefaultToolTipGenerator(toolTipGenerator);
         renderer.setURLGenerator(urlGenerator);
         plot.setRenderer(renderer);
 
@@ -2029,7 +2029,7 @@ public abstract class ChartFactory {
         ValueAxis timeAxis = new DateAxis(timeAxisLabel);
         NumberAxis valueAxis = new NumberAxis(valueAxisLabel);
         HighLowRenderer renderer = new HighLowRenderer();
-        renderer.setBaseToolTipGenerator(new HighLowItemLabelGenerator());
+        renderer.setDefaultToolTipGenerator(new HighLowItemLabelGenerator());
         XYPlot plot = new XYPlot(dataset, timeAxis, valueAxis, renderer);
         JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
@@ -2064,7 +2064,7 @@ public abstract class ChartFactory {
         timeAxis.setTimeline(timeline);
         NumberAxis valueAxis = new NumberAxis(valueAxisLabel);
         HighLowRenderer renderer = new HighLowRenderer();
-        renderer.setBaseToolTipGenerator(new HighLowItemLabelGenerator());
+        renderer.setDefaultToolTipGenerator(new HighLowItemLabelGenerator());
         XYPlot plot = new XYPlot(dataset, timeAxis, valueAxis, renderer);
         JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
@@ -2127,7 +2127,7 @@ public abstract class ChartFactory {
         XYItemRenderer renderer = new XYBubbleRenderer(
                 XYBubbleRenderer.SCALE_ON_RANGE_AXIS);
         if (tooltips) {
-            renderer.setBaseToolTipGenerator(new StandardXYZToolTipGenerator());
+            renderer.setDefaultToolTipGenerator(new StandardXYZToolTipGenerator());
         }
         if (urls) {
             renderer.setURLGenerator(new StandardXYZURLGenerator());
@@ -2190,7 +2190,7 @@ public abstract class ChartFactory {
 
         XYItemRenderer renderer = new XYBarRenderer();
         if (tooltips) {
-            renderer.setBaseToolTipGenerator(new StandardXYToolTipGenerator());
+            renderer.setDefaultToolTipGenerator(new StandardXYToolTipGenerator());
         }
         if (urls) {
             renderer.setURLGenerator(new StandardXYURLGenerator());
@@ -2232,7 +2232,7 @@ public abstract class ChartFactory {
         valueAxis.setAutoRangeIncludesZero(false);
 
         BoxAndWhiskerRenderer renderer = new BoxAndWhiskerRenderer();
-        renderer.setBaseToolTipGenerator(new BoxAndWhiskerToolTipGenerator());
+        renderer.setDefaultToolTipGenerator(new BoxAndWhiskerToolTipGenerator());
 
         CategoryPlot plot = new CategoryPlot(dataset, categoryAxis, valueAxis,
                 renderer);
@@ -2295,7 +2295,7 @@ public abstract class ChartFactory {
 
         WindItemRenderer renderer = new WindItemRenderer();
         if (tooltips) {
-            renderer.setBaseToolTipGenerator(new StandardXYToolTipGenerator());
+            renderer.setDefaultToolTipGenerator(new StandardXYToolTipGenerator());
         }
         if (urls) {
             renderer.setURLGenerator(new StandardXYURLGenerator());
