@@ -130,19 +130,19 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
     private transient Paint separatorPaint;
 
     /**
-     * The length of the inner separator extension (as a percentage of the
+     * The length of the inner separator extension (as a proportion of the
      * depth of the sections).
      */
     private double innerSeparatorExtension;
 
     /**
-     * The length of the outer separator extension (as a percentage of the
+     * The length of the outer separator extension (as a proportion of the
      * depth of the sections).
      */
     private double outerSeparatorExtension;
 
     /**
-     * The depth of the section as a percentage of the diameter.
+     * The depth of the section as a proportion of the diameter.
      */
     private double sectionDepth;
 
@@ -386,10 +386,10 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
 
     /**
      * Returns the length of the inner extension of the separator line that
-     * is drawn between sections, expressed as a percentage of the depth of
+     * is drawn between sections, expressed as a proportion of the depth of
      * the section.
      *
-     * @return The inner separator extension (as a percentage).
+     * @return The inner separator extension.
      *
      * @see #setInnerSeparatorExtension(double)
      */
@@ -399,25 +399,25 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
 
     /**
      * Sets the length of the inner extension of the separator line that is
-     * drawn between sections, as a percentage of the depth of the
+     * drawn between sections, as a proportion of the depth of the
      * sections, and sends a change event to all registered listeners.
      *
-     * @param percent  the percentage.
+     * @param proportion  the proportion.
      *
      * @see #getInnerSeparatorExtension()
      * @see #setOuterSeparatorExtension(double)
      */
-    public void setInnerSeparatorExtension(double percent) {
-        this.innerSeparatorExtension = percent;
+    public void setInnerSeparatorExtension(double proportion) {
+        this.innerSeparatorExtension = proportion;
         fireChangeEvent();
     }
 
     /**
      * Returns the length of the outer extension of the separator line that
-     * is drawn between sections, expressed as a percentage of the depth of
+     * is drawn between sections, expressed as a proportion of the depth of
      * the section.
      *
-     * @return The outer separator extension (as a percentage).
+     * @return The outer separator extension (as a proportion).
      *
      * @see #setOuterSeparatorExtension(double)
      */
@@ -427,23 +427,24 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
 
     /**
      * Sets the length of the outer extension of the separator line that is
-     * drawn between sections, as a percentage of the depth of the
+     * drawn between sections, as a proportion of the depth of the
      * sections, and sends a change event to all registered listeners.
      *
-     * @param percent  the percentage.
+     * @param proportion  the proportion.
      *
      * @see #getOuterSeparatorExtension()
      */
-    public void setOuterSeparatorExtension(double percent) {
-        this.outerSeparatorExtension = percent;
+    public void setOuterSeparatorExtension(double proportion) {
+        this.outerSeparatorExtension = proportion;
         fireChangeEvent();
     }
 
     /**
-     * Returns the depth of each section, expressed as a percentage of the
+     * Returns the depth of each section, expressed as a proportion of the
      * plot radius.
      *
      * @return The depth of each section.
+     *         1.0 means a straightforward pie chart.
      *
      * @see #setSectionDepth(double)
      * @since 1.0.3
@@ -453,7 +454,7 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
     }
 
     /**
-     * The section depth is given as percentage of the plot radius.
+     * The section depth is given as proportion of the plot radius.
      * Specifying 1.0 results in a straightforward pie chart.
      *
      * @param sectionDepth  the section depth.
@@ -641,7 +642,7 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
      * This method overrides the default value for cases where the ring plot
      * is very thin.  This fixes bug 2121818.
      *
-     * @return The label link depth, as a percentage of the plot's radius.
+     * @return The label link depth, as a proportion of the plot's radius.
      */
     @Override
     protected double getLabelLinkDepth() {
