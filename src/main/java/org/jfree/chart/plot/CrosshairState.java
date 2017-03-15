@@ -147,8 +147,14 @@ public class CrosshairState {
     }
     
     /**
-     *
-     * @since 1.0.20
+     * Updates the crosshair point.
+     * 
+     * @param x  the x-value.
+     * @param y  the y-value.
+     * @param datasetIndex  the dataset index.
+     * @param transX  the x-value in Java2D space.
+     * @param transY  the y-value in Java2D space.
+     * @param orientation  the plot orientation ({@code null} not permitted).
      */
     public void updateCrosshairPoint(double x, double y, int datasetIndex,
             double transX, double transY, PlotOrientation orientation) {
@@ -183,10 +189,12 @@ public class CrosshairState {
     }
     
     /**
+     * Checks to see if the specified data point is the closest to the
+     * anchor point and, if yes, updates the current state.
      * 
-     * @param x
-     * @param transX
-     * @param datasetIndex 
+     * @param x  the x-value.
+     * @param transX  the x-value in Java2D space.
+     * @param datasetIndex  the dataset index.
      * 
      * @since 1.0.20
      */
@@ -210,7 +218,8 @@ public class CrosshairState {
      *
      * @param candidateY  y position of the candidate for the new crosshair
      *                    point.
-     * @param rangeAxisIndex  the index of the range axis for this y-value.
+     * @param transY  the y-value in Java2D space.
+     * @param datasetIndex  the index of the range axis for this y-value.
      *
      * @since 1.0.20
      */
