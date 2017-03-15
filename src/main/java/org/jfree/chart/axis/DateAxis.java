@@ -360,11 +360,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
     }
 
     /**
-     * Creates a date axis. A timeline is specified for the axis. This allows
-     * special transformations to occur between a domain of values and the
-     * values included in the axis.
-     *
-     * @see org.jfree.chart.axis.SegmentedTimeline
+     * Creates a date axis.
      *
      * @param label  the axis label ({@code null} permitted).
      * @param zone  the time zone.
