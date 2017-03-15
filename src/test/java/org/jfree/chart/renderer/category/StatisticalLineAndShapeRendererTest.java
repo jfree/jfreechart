@@ -165,12 +165,12 @@ public class StatisticalLineAndShapeRendererTest {
     public void test1562759() {
         StatisticalLineAndShapeRenderer r
             = new StatisticalLineAndShapeRenderer(true, false);
-        assertTrue(r.getBaseLinesVisible());
-        assertFalse(r.getBaseShapesVisible());
+        assertTrue(r.getDefaultLinesVisible());
+        assertFalse(r.getDefaultShapesVisible());
 
         r = new StatisticalLineAndShapeRenderer(false, true);
-        assertFalse(r.getBaseLinesVisible());
-        assertTrue(r.getBaseShapesVisible());
+        assertFalse(r.getDefaultLinesVisible());
+        assertTrue(r.getDefaultShapesVisible());
     }
 
     /**

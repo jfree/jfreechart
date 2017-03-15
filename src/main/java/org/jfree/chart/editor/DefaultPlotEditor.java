@@ -185,8 +185,8 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
             CategoryItemRenderer renderer = ((CategoryPlot) plot).getRenderer();
             if (renderer instanceof LineAndShapeRenderer) {
                 LineAndShapeRenderer r = (LineAndShapeRenderer) renderer;
-                this.drawLines = Boolean.valueOf(r.getBaseLinesVisible());
-                this.drawShapes = Boolean.valueOf(r.getBaseShapesVisible());
+                this.drawLines = Boolean.valueOf(r.getDefaultLinesVisible());
+                this.drawShapes = Boolean.valueOf(r.getDefaultShapesVisible());
             }
         }
         else if (plot instanceof XYPlot) {
@@ -595,7 +595,7 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
                 CategoryPlot p = (CategoryPlot) plot;
                 CategoryItemRenderer r = p.getRenderer();
                 if (r instanceof LineAndShapeRenderer) {
-                    ((LineAndShapeRenderer) r).setBaseLinesVisible(
+                    ((LineAndShapeRenderer) r).setDefaultLinesVisible(
                             this.drawLines.booleanValue());
                 }
             }
@@ -614,7 +614,7 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
                 CategoryPlot p = (CategoryPlot) plot;
                 CategoryItemRenderer r = p.getRenderer();
                 if (r instanceof LineAndShapeRenderer) {
-                    ((LineAndShapeRenderer) r).setBaseShapesVisible(
+                    ((LineAndShapeRenderer) r).setDefaultShapesVisible(
                             this.drawShapes.booleanValue());
                 }
             }
@@ -623,7 +623,7 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
                 XYItemRenderer r = p.getRenderer();
                 if (r instanceof StandardXYItemRenderer) {
                     ((StandardXYItemRenderer) r).setBaseShapesVisible(
-                        this.drawShapes.booleanValue());
+                        this.drawShapes);
                 }
             }
         }

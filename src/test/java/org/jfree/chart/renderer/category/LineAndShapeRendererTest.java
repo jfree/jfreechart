@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -75,9 +75,9 @@ public class LineAndShapeRendererTest {
         LineAndShapeRenderer r2 = new LineAndShapeRenderer();
         assertEquals(r1, r2);
 
-        r1.setBaseLinesVisible(!r1.getBaseLinesVisible());
+        r1.setDefaultLinesVisible(!r1.getDefaultLinesVisible());
         assertFalse(r1.equals(r2));
-        r2.setBaseLinesVisible(r1.getBaseLinesVisible());
+        r2.setDefaultLinesVisible(r1.getDefaultLinesVisible());
         assertTrue(r1.equals(r2));
 
         r1.setSeriesLinesVisible(1, true);
@@ -85,9 +85,9 @@ public class LineAndShapeRendererTest {
         r2.setSeriesLinesVisible(1, true);
         assertTrue(r1.equals(r2));
 
-        r1.setBaseShapesVisible(!r1.getBaseShapesVisible());
+        r1.setDefaultShapesVisible(!r1.getDefaultShapesVisible());
         assertFalse(r1.equals(r2));
-        r2.setBaseShapesVisible(r1.getBaseShapesVisible());
+        r2.setDefaultShapesVisible(r1.getDefaultShapesVisible());
         assertTrue(r1.equals(r2));
 
         r1.setSeriesShapesVisible(1, true);
@@ -100,9 +100,9 @@ public class LineAndShapeRendererTest {
         r2.setSeriesShapesFilled(1, true);
         assertTrue(r1.equals(r2));
 
-        r1.setBaseShapesFilled(false);
+        r1.setDefaultShapesFilled(false);
         assertFalse(r1.equals(r2));
-        r2.setBaseShapesFilled(false);
+        r2.setDefaultShapesFilled(false);
         assertTrue(r1.equals(r2));
 
         r1.setUseOutlinePaint(true);
@@ -174,11 +174,11 @@ public class LineAndShapeRendererTest {
         }
 
         // and independent...
-        r1.setBaseLinesVisible(!r1.getBaseLinesVisible());
+        r1.setDefaultLinesVisible(!r1.getDefaultLinesVisible());
         if (r1.equals(r2)) {
             return false;
         }
-        r2.setBaseLinesVisible(r1.getBaseLinesVisible());
+        r2.setDefaultLinesVisible(r1.getDefaultLinesVisible());
         if (!r1.equals(r2)) {
             return false;
         }
@@ -192,11 +192,11 @@ public class LineAndShapeRendererTest {
             return false;
         }
 
-        r1.setBaseShapesVisible(!r1.getBaseShapesVisible());
+        r1.setDefaultShapesVisible(!r1.getDefaultShapesVisible());
         if (r1.equals(r2)) {
             return false;
         }
-        r2.setBaseShapesVisible(r1.getBaseShapesVisible());
+        r2.setDefaultShapesVisible(r1.getDefaultShapesVisible());
         if (!r1.equals(r2)) {
             return false;
         }
@@ -220,12 +220,12 @@ public class LineAndShapeRendererTest {
             return false;
         }
 
-        r1.setBaseShapesFilled(false);
-        r2.setBaseShapesFilled(true);
+        r1.setDefaultShapesFilled(false);
+        r2.setDefaultShapesFilled(true);
         if (r1.equals(r2)) {
             return false;
         }
-        r2.setBaseShapesFilled(false);
+        r2.setDefaultShapesFilled(false);
         if (!r1.equals(r2)) {
             return false;
         }
