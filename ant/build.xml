@@ -58,9 +58,6 @@
             <include name="org/jfree/**"/>
         </javac>
 
-        <!-- copy across gorilla.jpg -->
-        <copy file="${basedir}/src/main/resources/org/jfree/chart/gorilla.jpg" tofile="${basedir}/build/org/jfree/chart/gorilla.jpg" />
-
         <!-- copy across .properties files -->
         <copy todir="${basedir}/build/org/jfree/chart/">
             <fileset dir="${basedir}/src/main/resources/org/jfree/chart">
