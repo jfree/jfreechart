@@ -413,7 +413,7 @@ public interface XYItemRenderer extends LegendItemSource {
 
     public void setDefaultPaint(Paint paint, boolean notify);
 
-//    // FILL PAINT
+    // FILL PAINT
 
     /**
      * Returns the paint used to fill data items as they are drawn.
@@ -438,29 +438,29 @@ public interface XYItemRenderer extends LegendItemSource {
      * Sets the paint used for a series and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-//     * @param series  the series index (zero-based).
-//     * @param paint  the paint ({@code null} permitted).
-//     */
-//    public void setSeriesFillPaint(int series, Paint paint);
-//
-//    // FIXME: add setSeriesFillPaint(int, Paint, boolean)?
-//
-//    /**
-//     * Returns the base paint.
-//     *
-//     * @return The base paint (never {@code null}).
-//     */
-//    public Paint getBaseFillPaint();
-//
-//    /**
-//     * Sets the base paint and sends a {@link RendererChangeEvent} to all
-//     * registered listeners.
-//     *
-//     * @param paint  the paint ({@code null} not permitted).
-//     */
-//    public void setBaseFillPaint(Paint paint);
-//
-//    // FIXME: add setBaseFillPaint(int, Paint, boolean)?
+     * @param series  the series index (zero-based).
+     * @param paint  the paint ({@code null} permitted).
+     */
+    public void setSeriesFillPaint(int series, Paint paint);
+
+    public void setSeriesFillPaint(int series, Paint paint, boolean notify);
+
+    /**
+     * Returns the default paint.
+     *
+     * @return The default paint (never {@code null}).
+     */
+    public Paint getDefaultFillPaint();
+
+    /**
+     * Sets the default paint and sends a {@link RendererChangeEvent} to all
+     * registered listeners.
+     *
+     * @param paint  the paint ({@code null} not permitted).
+     */
+    public void setDefaultFillPaint(Paint paint);
+
+    public void setDefaultFillPaint(Paint paint, boolean notify);
 
     //// OUTLINE PAINT ////////////////////////////////////////////////////////
 
@@ -758,8 +758,8 @@ public interface XYItemRenderer extends LegendItemSource {
      *
      * @see #getSeriesToolTipGenerator(int)
      */
-    public void setSeriesToolTipGenerator(int series,
-                                          XYToolTipGenerator generator);
+    public void setSeriesToolTipGenerator(int series, 
+            XYToolTipGenerator generator);
 
     /**
      * Returns the default tool tip generator.
@@ -853,14 +853,14 @@ public interface XYItemRenderer extends LegendItemSource {
      * @see #isSeriesItemLabelsVisible(int)
      */
     public void setSeriesItemLabelsVisible(int series, Boolean visible,
-                                           boolean notify);
+            boolean notify);
 
     /**
      * Returns the default setting for item label visibility.
      *
      * @return A flag (possibly {@code null}).
      *
-     * @see #setBaseItemLabelsVisible(boolean)
+     * @see #setDefaultItemLabelsVisible(boolean)
      */
     public boolean getDefaultItemLabelsVisible();
 
@@ -918,8 +918,8 @@ public interface XYItemRenderer extends LegendItemSource {
      *
      * @see #getSeriesItemLabelGenerator(int)
      */
-    public void setSeriesItemLabelGenerator(int series,
-                                            XYItemLabelGenerator generator);
+    public void setSeriesItemLabelGenerator(int series, 
+            XYItemLabelGenerator generator);
 
     /**
      * Returns the default item label generator.
@@ -1069,8 +1069,8 @@ public interface XYItemRenderer extends LegendItemSource {
      * @param series  the series index (zero-based).
      * @param position  the position ({@code null} permitted).
      */
-    public void setSeriesPositiveItemLabelPosition(int series,
-                                                   ItemLabelPosition position);
+    public void setSeriesPositiveItemLabelPosition(int series, 
+            ItemLabelPosition position);
 
     /**
      * Sets the item label position for all positive values in a series and (if
@@ -1081,9 +1081,8 @@ public interface XYItemRenderer extends LegendItemSource {
      * @param position  the position ({@code null} permitted).
      * @param notify  notify registered listeners?
      */
-    public void setSeriesPositiveItemLabelPosition(int series,
-                                                   ItemLabelPosition position,
-                                                   boolean notify);
+    public void setSeriesPositiveItemLabelPosition(int series, 
+            ItemLabelPosition position, boolean notify);
 
     /**
      * Returns the default positive item label position.
@@ -1107,7 +1106,7 @@ public interface XYItemRenderer extends LegendItemSource {
      * @param notify  notify registered listeners?
      */
     public void setDefaultPositiveItemLabelPosition(ItemLabelPosition position,
-                                                 boolean notify);
+            boolean notify);
 
 
     // NEGATIVE ITEM LABEL POSITION...
@@ -1140,8 +1139,8 @@ public interface XYItemRenderer extends LegendItemSource {
      * @param series  the series index (zero-based).
      * @param position  the position ({@code null} permitted).
      */
-    public void setSeriesNegativeItemLabelPosition(int series,
-                                                   ItemLabelPosition position);
+    public void setSeriesNegativeItemLabelPosition(int series, 
+            ItemLabelPosition position);
 
     /**
      * Sets the item label position for negative values in a series and (if
@@ -1152,9 +1151,8 @@ public interface XYItemRenderer extends LegendItemSource {
      * @param position  the position ({@code null} permitted).
      * @param notify  notify registered listeners?
      */
-    public void setSeriesNegativeItemLabelPosition(int series,
-                                                   ItemLabelPosition position,
-                                                   boolean notify);
+    public void setSeriesNegativeItemLabelPosition(int series, 
+            ItemLabelPosition position, boolean notify);
 
     /**
      * Returns the default item label position for negative values.
@@ -1179,7 +1177,7 @@ public interface XYItemRenderer extends LegendItemSource {
      * @param notify  notify registered listeners?
      */
     public void setDefaultNegativeItemLabelPosition(ItemLabelPosition position,
-                                                 boolean notify);
+            boolean notify);
 
 
     // CREATE ENTITIES
