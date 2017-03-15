@@ -189,11 +189,6 @@
             </fileset>
         </copy>
 
-        <copy todir="${basedir}/distribution/maven">
-            <fileset dir="${basedir}/maven">
-            </fileset>
-        </copy>
-
         <!-- copy across lib files -->
         <copy file="${servlet.jar}" tofile="${basedir}/distribution/lib/servlet.jar" />
         <copy file="${junit.jar}" tofile="${basedir}/distribution/lib/junit-4.11.jar" />
