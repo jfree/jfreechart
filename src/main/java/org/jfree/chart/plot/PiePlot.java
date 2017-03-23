@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -322,8 +322,8 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     /** The section paint map. */
     private PaintMap sectionPaintMap;
 
-    /** The base section paint (fallback). */
-    private transient Paint baseSectionPaint;
+    /** The default section paint (fallback). */
+    private transient Paint defaultSectionPaint;
 
     /**
      * A flag that controls whether or not the section paint is auto-populated
@@ -342,8 +342,8 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     /** The section outline paint map. */
     private PaintMap sectionOutlinePaintMap;
 
-    /** The base section outline paint (fallback). */
-    private transient Paint baseSectionOutlinePaint;
+    /** The default section outline paint (fallback). */
+    private transient Paint defaultSectionOutlinePaint;
 
     /**
      * A flag that controls whether or not the section outline paint is
@@ -356,8 +356,8 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     /** The section outline stroke map. */
     private StrokeMap sectionOutlineStrokeMap;
 
-    /** The base section outline stroke (fallback). */
-    private transient Stroke baseSectionOutlineStroke;
+    /** The default section outline stroke (fallback). */
+    private transient Stroke defaultSectionOutlineStroke;
 
     /**
      * A flag that controls whether or not the section outline stroke is
@@ -573,16 +573,16 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
         this.minimumArcAngleToDraw = DEFAULT_MINIMUM_ARC_ANGLE_TO_DRAW;
 
         this.sectionPaintMap = new PaintMap();
-        this.baseSectionPaint = Color.gray;
+        this.defaultSectionPaint = Color.gray;
         this.autoPopulateSectionPaint = true;
 
         this.sectionOutlinesVisible = true;
         this.sectionOutlinePaintMap = new PaintMap();
-        this.baseSectionOutlinePaint = DEFAULT_OUTLINE_PAINT;
+        this.defaultSectionOutlinePaint = DEFAULT_OUTLINE_PAINT;
         this.autoPopulateSectionOutlinePaint = false;
 
         this.sectionOutlineStrokeMap = new StrokeMap();
-        this.baseSectionOutlineStroke = DEFAULT_OUTLINE_STROKE;
+        this.defaultSectionOutlineStroke = DEFAULT_OUTLINE_STROKE;
         this.autoPopulateSectionOutlineStroke = false;
 
         this.explodePercentages = new TreeMap();
@@ -885,15 +885,13 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * Returns the paint for the specified section.  The lookup involves these
      * steps:
      * <ul>
-     * <li>if {@link #getSectionPaint()} is non-{@code null}, return
+     * <li>if {@link #getSectionPaint(Comparable)} is non-{@code null} return
      *         it;</li>
-     * <li>if {@link #getSectionPaint(int)} is non-{@code null} return
-     *         it;</li>
-     * <li>if {@link #getSectionPaint(int)} is {@code null} but
+     * <li>if {@link #getSectionPaint(Comparable)} is {@code null} but
      *         {@code autoPopulate} is {@code true}, attempt to fetch
      *         a new paint from the drawing supplier
      *         ({@link #getDrawingSupplier()});
-     * <li>if all else fails, return {@link #getBaseSectionPaint()}.
+     * <li>if all else fails, return {@link #getDefaultSectionPaint()}.
      * </ul>
      *
      * @param key  the section key.
@@ -920,11 +918,11 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
                 this.sectionPaintMap.put(key, result);
             }
             else {
-                result = this.baseSectionPaint;
+                result = this.defaultSectionPaint;
             }
         }
         else {
-            result = this.baseSectionPaint;
+            result = this.defaultSectionPaint;
         }
         return result;
     }
@@ -1017,28 +1015,28 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     }
 
     /**
-     * Returns the base section paint.  This is used when no other paint is
+     * Returns the default section paint.  This is used when no other paint is
      * defined, which is rare.  The default value is {@code Color.GRAY}.
      *
      * @return The paint (never {@code null}).
      *
-     * @see #setBaseSectionPaint(Paint)
+     * @see #setDefaultSectionPaint(Paint)
      */
-    public Paint getBaseSectionPaint() {
-        return this.baseSectionPaint;
+    public Paint getDefaultSectionPaint() {
+        return this.defaultSectionPaint;
     }
 
     /**
-     * Sets the base section paint and sends a {@link PlotChangeEvent} to all
+     * Sets the default section paint and sends a {@link PlotChangeEvent} to all
      * registered listeners.
      *
      * @param paint  the paint ({@code null} not permitted).
      *
-     * @see #getBaseSectionPaint()
+     * @see #getDefaultSectionPaint()
      */
-    public void setBaseSectionPaint(Paint paint) {
+    public void setDefaultSectionPaint(Paint paint) {
         ParamChecks.nullNotPermitted(paint, "paint");
-        this.baseSectionPaint = paint;
+        this.defaultSectionPaint = paint;
         fireChangeEvent();
     }
 
@@ -1119,15 +1117,13 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * Returns the outline paint for the specified section.  The lookup
      * involves these steps:
      * <ul>
-     * <li>if {@link #getSectionOutlinePaint()} is non-{@code null},
-     *         return it;</li>
-     * <li>otherwise, if {@link #getSectionOutlinePaint(int)} is
+     * <li>if {@link #getSectionOutlinePaint(Comparable)} is
      *         non-{@code null} return it;</li>
-     * <li>if {@link #getSectionOutlinePaint(int)} is {@code null} but
+     * <li>if {@link #getSectionOutlinePaint(Comparable)} is {@code null} but
      *         {@code autoPopulate} is {@code true}, attempt to fetch
      *         a new outline paint from the drawing supplier
      *         ({@link #getDrawingSupplier()});
-     * <li>if all else fails, return {@link #getBaseSectionOutlinePaint()}.
+     * <li>if all else fails, return {@link #getDefaultSectionOutlinePaint()}.
      * </ul>
      *
      * @param key  the section key.
@@ -1155,11 +1151,11 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
                 this.sectionOutlinePaintMap.put(key, result);
             }
             else {
-                result = this.baseSectionOutlinePaint;
+                result = this.defaultSectionOutlinePaint;
             }
         }
         else {
-            result = this.baseSectionOutlinePaint;
+            result = this.defaultSectionOutlinePaint;
         }
         return result;
     }
@@ -1225,27 +1221,27 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     }
 
     /**
-     * Returns the base section paint.  This is used when no other paint is
+     * Returns the default section paint.  This is used when no other paint is
      * available.
      *
      * @return The paint (never {@code null}).
      *
-     * @see #setBaseSectionOutlinePaint(Paint)
+     * @see #setDefaultSectionOutlinePaint(Paint)
      */
-    public Paint getBaseSectionOutlinePaint() {
-        return this.baseSectionOutlinePaint;
+    public Paint getDefaultSectionOutlinePaint() {
+        return this.defaultSectionOutlinePaint;
     }
 
     /**
-     * Sets the base section paint.
+     * Sets the default section paint.
      *
      * @param paint  the paint ({@code null} not permitted).
      *
-     * @see #getBaseSectionOutlinePaint()
+     * @see #getDefaultSectionOutlinePaint()
      */
-    public void setBaseSectionOutlinePaint(Paint paint) {
+    public void setDefaultSectionOutlinePaint(Paint paint) {
         ParamChecks.nullNotPermitted(paint, "paint");
-        this.baseSectionOutlinePaint = paint;
+        this.defaultSectionOutlinePaint = paint;
         fireChangeEvent();
     }
 
@@ -1300,15 +1296,13 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * Returns the outline stroke for the specified section.  The lookup
      * involves these steps:
      * <ul>
-     * <li>if {@link #getSectionOutlineStroke()} is non-{@code null},
-     *         return it;</li>
-     * <li>otherwise, if {@link #getSectionOutlineStroke(int)} is
+     * <li>if {@link #getSectionOutlineStroke(Comparable)} is
      *         non-{@code null} return it;</li>
-     * <li>if {@link #getSectionOutlineStroke(int)} is {@code null} but
+     * <li>if {@link #getSectionOutlineStroke(Comparable)} is {@code null} but
      *         {@code autoPopulate} is {@code true}, attempt to fetch
      *         a new outline stroke from the drawing supplier
      *         ({@link #getDrawingSupplier()});
-     * <li>if all else fails, return {@link #getBaseSectionOutlineStroke()}.
+     * <li>if all else fails, return {@link #getDefaultSectionOutlineStroke()}.
      * </ul>
      *
      * @param key  the section key.
@@ -1336,11 +1330,11 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
                 this.sectionOutlineStrokeMap.put(key, result);
             }
             else {
-                result = this.baseSectionOutlineStroke;
+                result = this.defaultSectionOutlineStroke;
             }
         }
         else {
-            result = this.baseSectionOutlineStroke;
+            result = this.defaultSectionOutlineStroke;
         }
         return result;
     }
@@ -1406,27 +1400,27 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     }
 
     /**
-     * Returns the base section stroke.  This is used when no other stroke is
+     * Returns the default section stroke.  This is used when no other stroke is
      * available.
      *
      * @return The stroke (never {@code null}).
      *
-     * @see #setBaseSectionOutlineStroke(Stroke)
+     * @see #setDefaultSectionOutlineStroke(Stroke)
      */
-    public Stroke getBaseSectionOutlineStroke() {
-        return this.baseSectionOutlineStroke;
+    public Stroke getDefaultSectionOutlineStroke() {
+        return this.defaultSectionOutlineStroke;
     }
 
     /**
-     * Sets the base section stroke.
+     * Sets the default section stroke.
      *
      * @param stroke  the stroke ({@code null} not permitted).
      *
-     * @see #getBaseSectionOutlineStroke()
+     * @see #getDefaultSectionOutlineStroke()
      */
-    public void setBaseSectionOutlineStroke(Stroke stroke) {
+    public void setDefaultSectionOutlineStroke(Stroke stroke) {
         ParamChecks.nullNotPermitted(stroke, "stroke");
-        this.baseSectionOutlineStroke = stroke;
+        this.defaultSectionOutlineStroke = stroke;
         fireChangeEvent();
     }
 
@@ -3261,8 +3255,8 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
                 that.sectionPaintMap)) {
             return false;
         }
-        if (!PaintUtils.equal(this.baseSectionPaint,
-                that.baseSectionPaint)) {
+        if (!PaintUtils.equal(this.defaultSectionPaint,
+                that.defaultSectionPaint)) {
             return false;
         }
         if (this.sectionOutlinesVisible != that.sectionOutlinesVisible) {
@@ -3272,16 +3266,16 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
                 that.sectionOutlinePaintMap)) {
             return false;
         }
-        if (!PaintUtils.equal(this.baseSectionOutlinePaint,
-                that.baseSectionOutlinePaint)) {
+        if (!PaintUtils.equal(this.defaultSectionOutlinePaint,
+                that.defaultSectionOutlinePaint)) {
             return false;
         }
         if (!ObjectUtils.equal(this.sectionOutlineStrokeMap,
                 that.sectionOutlineStrokeMap)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.baseSectionOutlineStroke,
-                that.baseSectionOutlineStroke)) {
+        if (!ObjectUtils.equal(this.defaultSectionOutlineStroke,
+                that.defaultSectionOutlineStroke)) {
             return false;
         }
         if (!PaintUtils.equal(this.shadowPaint, that.shadowPaint)) {
@@ -3452,9 +3446,9 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      */
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
-        SerialUtils.writePaint(this.baseSectionPaint, stream);
-        SerialUtils.writePaint(this.baseSectionOutlinePaint, stream);
-        SerialUtils.writeStroke(this.baseSectionOutlineStroke, stream);
+        SerialUtils.writePaint(this.defaultSectionPaint, stream);
+        SerialUtils.writePaint(this.defaultSectionOutlinePaint, stream);
+        SerialUtils.writeStroke(this.defaultSectionOutlineStroke, stream);
         SerialUtils.writePaint(this.shadowPaint, stream);
         SerialUtils.writePaint(this.labelPaint, stream);
         SerialUtils.writePaint(this.labelBackgroundPaint, stream);
@@ -3477,9 +3471,9 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     private void readObject(ObjectInputStream stream)
         throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
-        this.baseSectionPaint = SerialUtils.readPaint(stream);
-        this.baseSectionOutlinePaint = SerialUtils.readPaint(stream);
-        this.baseSectionOutlineStroke = SerialUtils.readStroke(stream);
+        this.defaultSectionPaint = SerialUtils.readPaint(stream);
+        this.defaultSectionOutlinePaint = SerialUtils.readPaint(stream);
+        this.defaultSectionOutlineStroke = SerialUtils.readStroke(stream);
         this.shadowPaint = SerialUtils.readPaint(stream);
         this.labelPaint = SerialUtils.readPaint(stream);
         this.labelBackgroundPaint = SerialUtils.readPaint(stream);
