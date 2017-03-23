@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -62,12 +62,6 @@ import java.util.Hashtable;
  * {@code PaintAlpha} was originally conceived to improve the
  * rendering of 3D Shapes with transparent colours and to allow
  * invisible bars by making them completely transparent.
- * <p>
- * In, for example
- * {@link org.jfree.chart.renderer.category.StackedBarRenderer3D StackedBarRenderer3D},
- * bars are rendered with 6 faces. The front face is rendered with
- * the {@code Paint} requested. The other 5 faces are rendered
- * darker to achieve the 3D effect.
  * <p>
  * Previously {@link Color#darker()} was used for this,
  * which always returns an opaque colour.

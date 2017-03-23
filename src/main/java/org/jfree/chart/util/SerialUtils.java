@@ -89,8 +89,8 @@ public class SerialUtils {
     }
 
     /**
-     * Reads a <code>Paint</code> object that has been serialised by the
-     * {@link SerialUtilities#writePaint(Paint, ObjectOutputStream)} method.
+     * Reads a {@code Paint} object that has been serialised by the
+     * {@link #writePaint(Paint, ObjectOutputStream)} method.
      *
      * @param stream  the input stream (<code>null</code> not permitted).
      *
@@ -166,12 +166,12 @@ public class SerialUtils {
     }
 
     /**
-     * Reads a <code>Stroke</code> object that has been serialised by the
-     * {@link SerialUtilities#writeStroke(Stroke, ObjectOutputStream)} method.
+     * Reads a {@code Stroke} object that has been serialised by the
+     * {@link #writeStroke(Stroke, ObjectOutputStream)} method.
      *
-     * @param stream  the input stream (<code>null</code> not permitted).
+     * @param stream  the input stream ({@code null} not permitted).
      *
-     * @return The stroke object (possibly <code>null</code>).
+     * @return The stroke object (possibly {@code null}).
      *
      * @throws IOException  if there is an I/O problem.
      * @throws ClassNotFoundException  if there is a problem loading a class.
@@ -246,13 +246,13 @@ public class SerialUtils {
     }
 
     /**
-     * Reads a <code>Composite</code> object that has been serialised by the
-     * {@link SerialUtilities#writeComposite(Composite, ObjectOutputStream)}
+     * Reads a {@code Composite} object that has been serialised by the
+     * {@link #writeComposite(Composite, ObjectOutputStream)}
      * method.
      *
-     * @param stream  the input stream (<code>null</code> not permitted).
+     * @param stream  the input stream ({@code null} not permitted).
      *
-     * @return The composite object (possibly <code>null</code>).
+     * @return The composite object (possibly {@code null}).
      *
      * @throws IOException  if there is an I/O problem.
      * @throws ClassNotFoundException  if there is a problem loading a class.
@@ -544,13 +544,13 @@ public class SerialUtils {
     }
 
     /**
-     * Reads a <code>AttributedString</code> object that has been serialised by
-     * the {@link SerialUtilities#writeAttributedString(AttributedString,
+     * Reads a {@code AttributedString} object that has been serialised by
+     * the {@link #writeAttributedString(AttributedString,
      * ObjectOutputStream)} method.
      *
-     * @param stream  the input stream (<code>null</code> not permitted).
+     * @param stream  the input stream ({@code null} not permitted).
      *
-     * @return The attributed string object (possibly <code>null</code>).
+     * @return The attributed string object (possibly {@code null}).
      *
      * @throws IOException  if there is an I/O problem.
      * @throws ClassNotFoundException  if there is a problem loading a class.

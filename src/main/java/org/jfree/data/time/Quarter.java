@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -152,7 +152,7 @@ public class Quarter extends RegularTimePeriod implements Serializable {
      *
      * @param time  the date/time ({@code null} not permitted).
      *
-     * @see #Quarter(Date, TimeZone)
+     * @see #Quarter(Date, TimeZone, Locale)
      */
     public Quarter(Date time) {
         this(time, TimeZone.getDefault(), Locale.getDefault());
