@@ -320,7 +320,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
      *
      * @param flag  the flag.
      *
-     * @see #getBaseLinesVisible()
+     * @see #getDefaultLinesVisible()
      */
     public void setDefaultLinesVisible(boolean flag) {
         this.defaultLinesVisible = flag;

@@ -270,7 +270,7 @@ public interface XYItemRenderer extends LegendItemSource {
      * @param visible  the visibility.
      * @param notify  notify listeners?
      *
-     * @see #getBaseSeriesVisible()
+     * @see #getDefaultSeriesVisible()
      */
     public void setDefaultSeriesVisible(boolean visible, boolean notify);
 
@@ -629,7 +629,7 @@ public interface XYItemRenderer extends LegendItemSource {
      *
      * @param stroke  the stroke ({@code null} not permitted).
      *
-     * @see #getBaseOutlineStroke()
+     * @see #getDefaultOutlineStroke()
      */
     public void setDefaultOutlineStroke(Stroke stroke);
 

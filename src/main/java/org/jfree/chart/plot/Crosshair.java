@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -335,7 +335,7 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      *
      * @return the label anchor point (never {@code null}.
      *
-     * @see #setLabelAnchor(org.jfree.ui.RectangleAnchor)
+     * @see #setLabelAnchor(org.jfree.chart.ui.RectangleAnchor)
      */
     public RectangleAnchor getLabelAnchor() {
         return this.labelAnchor;
