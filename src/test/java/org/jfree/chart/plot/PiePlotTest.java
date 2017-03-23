@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -148,11 +148,11 @@ public class PiePlotTest {
                 3.0f, 4.0f, Color.white));
         assertTrue(plot1.equals(plot2));
 
-        // baseSectionPaint
-        plot1.setBaseSectionPaint(new GradientPaint(1.0f, 2.0f, Color.black,
+        // defaultSectionPaint
+        plot1.setDefaultSectionPaint(new GradientPaint(1.0f, 2.0f, Color.black,
                 3.0f, 4.0f, Color.white));
         assertFalse(plot1.equals(plot2));
-        plot2.setBaseSectionPaint(new GradientPaint(1.0f, 2.0f, Color.black,
+        plot2.setDefaultSectionPaint(new GradientPaint(1.0f, 2.0f, Color.black,
                 3.0f, 4.0f, Color.white));
         assertTrue(plot1.equals(plot2));
 
@@ -170,11 +170,11 @@ public class PiePlotTest {
                 Color.green, 3.0f, 4.0f, Color.white));
         assertTrue(plot1.equals(plot2));
 
-        // baseSectionOutlinePaint
-        plot1.setBaseSectionOutlinePaint(new GradientPaint(1.0f, 2.0f,
+        // defaultSectionOutlinePaint
+        plot1.setDefaultSectionOutlinePaint(new GradientPaint(1.0f, 2.0f,
                 Color.gray, 3.0f, 4.0f, Color.white));
         assertFalse(plot1.equals(plot2));
-        plot2.setBaseSectionOutlinePaint(new GradientPaint(1.0f, 2.0f,
+        plot2.setDefaultSectionOutlinePaint(new GradientPaint(1.0f, 2.0f,
                 Color.gray, 3.0f, 4.0f, Color.white));
         assertTrue(plot1.equals(plot2));
 
@@ -184,10 +184,10 @@ public class PiePlotTest {
         plot2.setSectionOutlineStroke("A", new BasicStroke(1.0f));
         assertTrue(plot1.equals(plot2));
 
-        // baseSectionOutlineStroke
-        plot1.setBaseSectionOutlineStroke(new BasicStroke(1.0f));
+        // defaultSectionOutlineStroke
+        plot1.setDefaultSectionOutlineStroke(new BasicStroke(1.0f));
         assertFalse(plot1.equals(plot2));
-        plot2.setBaseSectionOutlineStroke(new BasicStroke(1.0f));
+        plot2.setDefaultSectionOutlineStroke(new BasicStroke(1.0f));
         assertTrue(plot1.equals(plot2));
 
         // shadowPaint
@@ -558,17 +558,17 @@ public class PiePlotTest {
     }
 
     /**
-     * Check that the default base section paint is not null, and that you
+     * Check that the default section paint is not null, and that you
      * can never set it to null.
      */
     @Test
-    public void testGetBaseSectionPaint() {
+    public void testGetDefaultSectionPaint() {
         PiePlot plot = new PiePlot();
-        assertNotNull(plot.getBaseSectionPaint());
+        assertNotNull(plot.getDefaultSectionPaint());
 
         boolean pass = false;
         try {
-            plot.setBaseSectionPaint(null);
+            plot.setDefaultSectionPaint(null);
         }
         catch (IllegalArgumentException e) {
             pass = true;
