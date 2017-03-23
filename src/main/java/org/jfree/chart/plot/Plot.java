@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -758,8 +758,7 @@ public abstract class Plot implements AxisChangeListener,
     /**
      * Sets the alignment for the background image and sends a
      * {@link PlotChangeEvent} to all registered listeners.  Alignment options
-     * are defined by the {@link org.jfree.ui.Align} class in the JCommon
-     * class library.
+     * are defined by the {@link org.jfree.chart.ui.Align} class.
      *
      * @param alignment  the alignment.
      *

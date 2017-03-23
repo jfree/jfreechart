@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -68,7 +68,7 @@ import org.jfree.data.category.CategoryDataset;
  * items in a {@link org.jfree.chart.plot.CategoryPlot}.
  * <p>
  * To assist with cloning charts, classes that implement this interface should
- * also implement the {@link org.jfree.util.PublicCloneable} interface.
+ * also implement the {@link org.jfree.chart.util.PublicCloneable} interface.
  */
 public interface CategoryItemLabelGenerator {
 

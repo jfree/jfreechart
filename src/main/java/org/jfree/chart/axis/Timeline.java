@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -90,8 +90,6 @@ public interface Timeline {
      * translateDomainValueToTimelineValue(domainValue).
      * This is because the original transformation may not be complete
      * reversable.
-     *
-     * @see org.jfree.chart.axis.SegmentedTimeline
      *
      * @param timelineValue  a timeline value.
      *
