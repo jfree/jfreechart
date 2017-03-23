@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -146,7 +146,7 @@ public class Millisecond extends RegularTimePeriod implements Serializable {
      *
      * @param time  the time.
      *
-     * @see #Millisecond(Date, TimeZone)
+     * @see #Millisecond(Date, TimeZone, Locale)
      */
     public Millisecond(Date time) {
         this(time, TimeZone.getDefault(), Locale.getDefault());

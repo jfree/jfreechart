@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2015, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -1081,7 +1081,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
 
     /**
      * Sets the background alignment.  Alignment options are defined by the
-     * {@link org.jfree.ui.Align} class.
+     * {@link org.jfree.chart.ui.Align} class.
      *
      * @param alignment  the alignment.
      *
