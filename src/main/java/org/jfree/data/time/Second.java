@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2015, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -147,7 +147,7 @@ public class Second extends RegularTimePeriod implements Serializable {
      *
      * @param time  the time ({@code null} not permitted).
      *
-     * @see #Second(Date, TimeZone)
+     * @see #Second(Date, TimeZone, Locale)
      */
     public Second(Date time) {
         this(time, TimeZone.getDefault(), Locale.getDefault());
