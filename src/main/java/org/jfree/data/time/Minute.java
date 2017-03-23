@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -131,7 +131,7 @@ public class Minute extends RegularTimePeriod implements Serializable {
      *
      * @param time  the time ({@code null} not permitted).
      *
-     * @see #Minute(Date, TimeZone)
+     * @see #Minute(Date, TimeZone, Locale)
      */
     public Minute(Date time) {
         // defer argument checking

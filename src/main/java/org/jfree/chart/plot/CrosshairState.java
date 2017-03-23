@@ -333,7 +333,7 @@ public class CrosshairState {
      *
      * @see #getCrosshairX()
      * @see #setCrosshairY(double)
-     * @see #updateCrosshairPoint(double, double, double, double,
+     * @see #updateCrosshairPoint(double, double, int, double, double,
      * PlotOrientation)
      */
     public void setCrosshairX(double x) {
@@ -359,7 +359,7 @@ public class CrosshairState {
      *
      * @see #getCrosshairY()
      * @see #setCrosshairX(double)
-     * @see #updateCrosshairPoint(double, double, double, double,
+     * @see #updateCrosshairPoint(double, double, int, double, double,
      * PlotOrientation)
      */
     public void setCrosshairY(double y) {
