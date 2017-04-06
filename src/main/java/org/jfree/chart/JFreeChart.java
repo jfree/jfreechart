@@ -412,7 +412,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
         
         this.borderVisible = false;
         this.borderStroke = new BasicStroke(1.0f);
-        this.borderPaint = Color.black;
+        this.borderPaint = Color.BLACK;
 
         this.padding = RectangleInsets.ZERO_INSETS;
 
@@ -425,8 +425,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
         if (createLegend) {
             LegendTitle legend = new LegendTitle(this.plot);
             legend.setMargin(new RectangleInsets(1.0, 1.0, 1.0, 1.0));
-            legend.setFrame(new LineBorder());
-            legend.setBackgroundPaint(Color.white);
+            legend.setBackgroundPaint(Color.WHITE);
             legend.setPosition(RectangleEdge.BOTTOM);
             this.subtitles.add(legend);
             legend.addChangeListener(this);
@@ -1068,8 +1067,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
 
     /**
      * Returns the background image alignment. Alignment constants are defined
-     * in the {@code org.jfree.ui.Align} class in the JCommon class
-     * library.
+     * in the {@link Align} class.
      *
      * @return The alignment.
      *

@@ -45,7 +45,7 @@ public class FontDisplayField extends JTextField {
 
     /** The resourceBundle for the localization. */
     protected static final ResourceBundle localizationResources =
-            ResourceBundleWrapper.getBundle("org.jfree.ui.LocalizationBundle");
+            ResourceBundleWrapper.getBundle("org.jfree.chart.ui.LocalizationBundle");
 
     /**
      * Standard constructor - builds a FontDescriptionField initialised with

@@ -745,7 +745,7 @@ public abstract class Plot implements AxisChangeListener,
 
     /**
      * Returns the background image alignment. Alignment constants are defined
-     * in the {@code org.jfree.ui.Align} class in the JCommon class library.
+     * in the {@code Align} class.
      *
      * @return The alignment.
      *
