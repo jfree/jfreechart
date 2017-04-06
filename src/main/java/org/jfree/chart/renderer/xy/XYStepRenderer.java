@@ -280,8 +280,13 @@ public class XYStepRenderer extends XYLineAndShapeRenderer
             // collect entity and tool tip information...
             EntityCollection entities = state.getEntityCollection();
             if (entities != null) {
-                addEntity(entities, null, dataset, series, item, transX1,
-                        transY1);
+                if (orientation == PlotOrientation.HORIZONTAL) {
+                    addEntity(entities, null, dataset, series, item, transY1,
+                            transX1);
+                } else {
+                    addEntity(entities, null, dataset, series, item, transX1,
+                            transY1);
+                }
             }
 
         }

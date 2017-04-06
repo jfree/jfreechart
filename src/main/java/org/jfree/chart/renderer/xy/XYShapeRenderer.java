@@ -482,8 +482,7 @@ public class XYShapeRenderer extends AbstractXYItemRenderer
                 if (this.drawOutlines) {
                     if (getUseOutlinePaint()) {
                         g2.setPaint(getItemOutlinePaint(series, item));
-                    }
-                    else {
+                    } else {
                         g2.setPaint(getItemPaint(series, item));
                     }
                     g2.setStroke(getItemOutlineStroke(series, item));
@@ -497,8 +496,7 @@ public class XYShapeRenderer extends AbstractXYItemRenderer
 
             // add an entity for the item...
             if (entities != null) {
-                addEntity(entities, hotspot, dataset, series, item, transX,
-                        transY);
+                addEntity(entities, hotspot, dataset, series, item, 0.0, 0.0);
             }
         }
     }

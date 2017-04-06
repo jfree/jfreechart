@@ -513,8 +513,7 @@ public class XYStepAreaRenderer extends AbstractXYItemRenderer
                 if (orientation == PlotOrientation.VERTICAL) {
                     shape = new Rectangle2D.Double(transX1 - 2, transY1 - 2,
                             4.0, 4.0);
-                }
-                else if (orientation == PlotOrientation.HORIZONTAL) {
+                } else if (orientation == PlotOrientation.HORIZONTAL) {
                     shape = new Rectangle2D.Double(transY1 - 2, transX1 - 2,
                             4.0, 4.0);
                 }
@@ -565,8 +564,8 @@ public class XYStepAreaRenderer extends AbstractXYItemRenderer
 
         // collect entity and tool tip information...
         EntityCollection entities = state.getEntityCollection();
-        if (entities != null) {
-            addEntity(entities, shape, dataset, series, item, transX1, transY1);
+        if (entities != null && shape != null) {
+            addEntity(entities, shape, dataset, series, item, 0.0, 0.0);
         }
     }
 

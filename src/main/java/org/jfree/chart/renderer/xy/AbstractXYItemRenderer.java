@@ -1735,35 +1735,36 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
     }
 
     /**
-     * Adds an entity to the collection.
+     * Adds an entity to the collection.  Note the the {@code entityX} and
+     * {@code entityY} coordinates are in Java2D space, should already be 
+     * adjusted for the plot orientation, and will only be used if 
+     * {@code hotspot} is {@code null}.
      *
      * @param entities  the entity collection being populated.
-     * @param area  the entity area (if {@code null} a default will be
+     * @param hotspot  the entity area (if {@code null} a default will be
      *              used).
      * @param dataset  the dataset.
      * @param series  the series.
      * @param item  the item.
-     * @param entityX  the entity's center x-coordinate in user space (only
-     *                 used if {@code area} is {@code null}).
-     * @param entityY  the entity's center y-coordinate in user space (only
-     *                 used if {@code area} is {@code null}).
+     * @param entityX  the entity x-coordinate (in Java2D space, only used if 
+     *         {@code hotspot} is {@code null}).
+     * @param entityY  the entity y-coordinate (in Java2D space, only used if 
+     *         {@code hotspot} is {@code null}).
      */
-    protected void addEntity(EntityCollection entities, Shape area,
-                             XYDataset dataset, int series, int item,
-                             double entityX, double entityY) {
+    protected void addEntity(EntityCollection entities, Shape hotspot,
+            XYDataset dataset, int series, int item, double entityX, 
+            double entityY) {
+        
         if (!getItemCreateEntity(series, item)) {
             return;
         }
-        Shape hotspot = area;
+
+        // if not hotspot is provided, we create a default based on the 
+        // provided data coordinates (which are already in Java2D space)
         if (hotspot == null) {
             double r = getDefaultEntityRadius();
             double w = r * 2;
-            if (getPlot().getOrientation() == PlotOrientation.VERTICAL) {
-                hotspot = new Ellipse2D.Double(entityX - r, entityY - r, w, w);
-            }
-            else {
-                hotspot = new Ellipse2D.Double(entityY - r, entityX - r, w, w);
-            }
+            hotspot = new Ellipse2D.Double(entityX - r, entityY - r, w, w);
         }
         String tip = null;
         XYToolTipGenerator generator = getToolTipGenerator(series, item);
