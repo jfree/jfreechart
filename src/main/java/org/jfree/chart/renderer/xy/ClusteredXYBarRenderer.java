@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * ClusteredXYBarRenderer.java
  * ---------------------------
- * (C) Copyright 2003-2016, by Paolo Cova and Contributors.
+ * (C) Copyright 2003-2017, by Paolo Cova and Contributors.
  *
  * Original Author:  Paolo Cova;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -334,7 +334,7 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
                         = info.getOwner().getEntityCollection();
                 if (entities != null) {
                     addEntity(entities, bar, dataset, series, item,
-                            bar.getCenterX(), bar.getCenterY());
+                            bar.getCenterX(), bar.getCenterY(), true);
                 }
             }
         }

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------------
  * XYBoxAndWhiskerRenderer.java
  * ----------------------------
- * (C) Copyright 2003-2016, by David Browning and Contributors.
+ * (C) Copyright 2003-2017, by David Browning and Contributors.
  *
  * Original Author:  David Browning (for Australian Institute of Marine
  *                   Science);
@@ -488,7 +488,7 @@ public class XYBoxAndWhiskerRenderer extends AbstractXYItemRenderer
 
         // add an entity for the item...
         if (entities != null && box.intersects(dataArea)) {
-            addEntity(entities, box, dataset, series, item, yyAverage, xx);
+            addEntity(entities, box, dataset, series, item, yyAverage, xx, true);
         }
 
     }
@@ -705,7 +705,7 @@ public class XYBoxAndWhiskerRenderer extends AbstractXYItemRenderer
 
         // add an entity for the item...
         if (entities != null && box.intersects(dataArea)) {
-            addEntity(entities, box, dataset, series, item, xx, yyAverage);
+            addEntity(entities, box, dataset, series, item, xx, yyAverage, true);
         }
 
     }

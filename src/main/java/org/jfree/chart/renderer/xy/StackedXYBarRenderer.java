@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * StackedXYBarRenderer.java
  * -------------------------
- * (C) Copyright 2004-2016, by Andreas Schroeder and Contributors.
+ * (C) Copyright 2004-2017, by Andreas Schroeder and Contributors.
  *
  * Original Author:  Andreas Schroeder;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -388,7 +388,7 @@ public class StackedXYBarRenderer extends XYBarRenderer {
                         .getEntityCollection();
                 if (entities != null) {
                     addEntity(entities, bar, dataset, series, item,
-                            bar.getCenterX(), bar.getCenterY());
+                            bar.getCenterX(), bar.getCenterY(), true);
                 }
             }
         }

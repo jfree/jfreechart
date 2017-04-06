@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2015, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------
  * YIntervalRenderer.java
  * ----------------------
- * (C) Copyright 2002-2015, by Object Refinery Limited.
+ * (C) Copyright 2002-2017, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -244,8 +244,7 @@ public class YIntervalRenderer extends AbstractXYItemRenderer
         // add an entity for the item...
         Shape hotspot = ShapeUtilities.createLineRegion(line, 4.0f);
         if (entities != null && hotspot.intersects(dataArea)) {
-            addEntity(entities, hotspot, dataset, series, item, xx, 
-                    (yyHigh + yyLow) / 2);
+            addEntity(entities, hotspot, dataset, series, item, 0.0, 0.0, true);
         }
 
     }

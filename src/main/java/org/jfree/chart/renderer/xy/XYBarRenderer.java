@@ -945,7 +945,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
 
         EntityCollection entities = state.getEntityCollection();
         if (entities != null) {
-            addEntity(entities, bar, dataset, series, item, 0.0, 0.0);
+            addEntity(entities, bar, dataset, series, item, 0.0, 0.0, true);
         }
 
     }

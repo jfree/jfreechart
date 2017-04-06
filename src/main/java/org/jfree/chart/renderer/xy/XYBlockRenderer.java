@@ -394,7 +394,7 @@ public class XYBlockRenderer extends AbstractXYItemRenderer
 
         EntityCollection entities = state.getEntityCollection();
         if (entities != null) {
-            addEntity(entities, block, dataset, series, item, transX, transY);
+            addEntity(entities, block, dataset, series, item, 0.0, 0.0, true);
         }
 
     }
