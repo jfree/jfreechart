@@ -334,7 +334,7 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
                         = info.getOwner().getEntityCollection();
                 if (entities != null) {
                     addEntity(entities, bar, dataset, series, item,
-                            bar.getCenterX(), bar.getCenterY(), true);
+                            bar.getCenterX(), bar.getCenterY());
                 }
             }
         }

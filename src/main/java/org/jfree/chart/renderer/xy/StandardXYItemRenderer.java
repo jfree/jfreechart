@@ -986,7 +986,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
 
         // add an entity for the item...
         if (entities != null && isPointInRect(dataArea, xx, yy)) {
-            addEntity(entities, entityArea, dataset, series, item, xx, yy, true);
+            addEntity(entities, entityArea, dataset, series, item, xx, yy);
         }
 
     }

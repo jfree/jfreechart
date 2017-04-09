@@ -265,7 +265,7 @@ public class XYBubbleRenderer extends AbstractXYItemRenderer
                         = info.getOwner().getEntityCollection();
                 if (entities != null && circle.intersects(dataArea)) {
                     addEntity(entities, circle, dataset, series, item,
-                            circle.getCenterX(), circle.getCenterY(), true);
+                            circle.getCenterX(), circle.getCenterY());
                 }
             }
 

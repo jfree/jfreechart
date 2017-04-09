@@ -1781,7 +1781,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      */
     protected void addEntity(EntityCollection entities, Shape hotspot,
             XYDataset dataset, int series, int item, double entityX, 
-            double entityY, boolean xxx) {
+            double entityY) {
         
         if (!getItemCreateEntity(series, item)) {
             return;

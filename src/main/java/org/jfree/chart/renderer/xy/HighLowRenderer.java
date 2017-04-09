@@ -440,7 +440,7 @@ public class HighLowRenderer extends AbstractXYItemRenderer
         }
 
         if (entities != null) {
-            addEntity(entities, entityArea, dataset, series, item, 0.0, 0.0, true);
+            addEntity(entities, entityArea, dataset, series, item, 0.0, 0.0);
         }
 
     }

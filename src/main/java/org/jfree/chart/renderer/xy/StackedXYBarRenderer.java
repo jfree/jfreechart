@@ -388,7 +388,7 @@ public class StackedXYBarRenderer extends XYBarRenderer {
                         .getEntityCollection();
                 if (entities != null) {
                     addEntity(entities, bar, dataset, series, item,
-                            bar.getCenterX(), bar.getCenterY(), true);
+                            bar.getCenterX(), bar.getCenterY());
                 }
             }
         }

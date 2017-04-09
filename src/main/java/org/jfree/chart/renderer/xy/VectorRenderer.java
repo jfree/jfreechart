@@ -295,7 +295,7 @@ public class VectorRenderer extends AbstractXYItemRenderer
             entities = info.getOwner().getEntityCollection();
             if (entities != null) {
                 addEntity(entities, line.getBounds(), dataset, series, item,
-                        0.0, 0.0, true);
+                        0.0, 0.0);
             }
         }
 

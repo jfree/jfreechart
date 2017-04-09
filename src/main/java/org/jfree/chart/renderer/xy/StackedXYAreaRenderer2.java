@@ -441,7 +441,7 @@ public class StackedXYAreaRenderer2 extends XYAreaRenderer2
 
             if (!dataAreaHotspot.isEmpty()) {
                 addEntity(entities, dataAreaHotspot, dataset, series, item,
-                     0.0, 0.0, true);
+                     0.0, 0.0);
             }
         }
     }

@@ -566,7 +566,7 @@ public class XYStepAreaRenderer extends AbstractXYItemRenderer
         // collect entity and tool tip information...
         EntityCollection entities = state.getEntityCollection();
         if (entities != null && shape != null) {
-            addEntity(entities, shape, dataset, series, item, 0.0, 0.0, true);
+            addEntity(entities, shape, dataset, series, item, 0.0, 0.0);
         }
     }
 

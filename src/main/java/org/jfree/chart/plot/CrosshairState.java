@@ -147,6 +147,17 @@ public class CrosshairState {
     }
     
     /**
+     * Checks the specified data item against the latest crosshair item and
+     * updates accordingly.
+     * 
+     * @param x  the data item's x-coordinate.
+     * @param y  the data item's y-coordinate.
+     * @param datasetIndex  the dataset index.
+     * @param transX  the x-value translated to Java2D space (taking into
+     *     account the orientation).
+     * @param transY  the y-value translated to Java2D space (taking into
+     *     account the orientation).
+     * @param orientation  the plot orientation.
      *
      * @since 1.0.20
      */
@@ -183,10 +194,12 @@ public class CrosshairState {
     }
     
     /**
+     * Inspects the specified x-value to determine if the crosshair state 
+     * should be updated.
      * 
-     * @param x
-     * @param transX
-     * @param datasetIndex 
+     * @param x  the x-value.
+     * @param transX  the x-value translated to Java2D units.
+     * @param datasetIndex  the dataset index.
      * 
      * @since 1.0.20
      */
@@ -208,23 +221,22 @@ public class CrosshairState {
      * <P>
      * Used in cases where only the y-axis is numerical.
      *
-     * @param candidateY  y position of the candidate for the new crosshair
-     *                    point.
-     * @param rangeAxisIndex  the index of the range axis for this y-value.
+     * @param y  the y-value.
+     * @param transY  the y-value translated to Java2D units.
+     * @param datasetIndex  the dataset index.
      *
      * @since 1.0.20
      */
-    public void updateCrosshairY(double candidateY, double transY, int datasetIndex) {
+    public void updateCrosshairY(double y, double transY, int datasetIndex) {
         if (this.anchor == null) {
             return;
         }
         double d = Math.abs(transY - this.anchor.getY());
         if (d < this.distance) {
-            this.crosshairY = candidateY;
+            this.crosshairY = y;
             this.datasetIndex = datasetIndex;
             this.distance = d;
         }
-
     }
 
     /**
@@ -324,7 +336,7 @@ public class CrosshairState {
      *
      * @see #getCrosshairX()
      * @see #setCrosshairY(double)
-     * @see #updateCrosshairPoint(double, double, double, double,
+     * @see #updateCrosshairPoint(double, double, int, double, double,
      * PlotOrientation)
      */
     public void setCrosshairX(double x) {
@@ -350,7 +362,7 @@ public class CrosshairState {
      *
      * @see #getCrosshairY()
      * @see #setCrosshairX(double)
-     * @see #updateCrosshairPoint(double, double, double, double,
+     * @see #updateCrosshairPoint(double, double, int, double, double,
      * PlotOrientation)
      */
     public void setCrosshairY(double y) {

@@ -488,7 +488,7 @@ public class XYBoxAndWhiskerRenderer extends AbstractXYItemRenderer
 
         // add an entity for the item...
         if (entities != null && box.intersects(dataArea)) {
-            addEntity(entities, box, dataset, series, item, yyAverage, xx, true);
+            addEntity(entities, box, dataset, series, item, yyAverage, xx);
         }
 
     }
@@ -705,7 +705,7 @@ public class XYBoxAndWhiskerRenderer extends AbstractXYItemRenderer
 
         // add an entity for the item...
         if (entities != null && box.intersects(dataArea)) {
-            addEntity(entities, box, dataset, series, item, xx, yyAverage, true);
+            addEntity(entities, box, dataset, series, item, xx, yyAverage);
         }
 
     }

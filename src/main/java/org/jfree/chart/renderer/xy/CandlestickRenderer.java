@@ -862,7 +862,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
 
         // add an entity for the item...
         if (entities != null) {
-            addEntity(entities, hotspot, dataset, series, item, 0.0, 0.0, true);
+            addEntity(entities, hotspot, dataset, series, item, 0.0, 0.0);
         }
 
     }

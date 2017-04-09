@@ -282,10 +282,10 @@ public class XYStepRenderer extends XYLineAndShapeRenderer
             if (entities != null) {
                 if (orientation == PlotOrientation.VERTICAL) {
                     addEntity(entities, null, dataset, series, item, transX1,
-                            transY1, true);
+                            transY1);
                 } else {
                     addEntity(entities, null, dataset, series, item, transY1,
-                          transX1, true);
+                          transX1);
                 }
             }
 
