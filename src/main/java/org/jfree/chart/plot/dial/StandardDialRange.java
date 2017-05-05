@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------
  * StandardDialRange.java
  * ----------------------
- * (C) Copyright 2006-2016, by Object Refinery Limited.
+ * (C) Copyright 2006-2017, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -103,7 +103,7 @@ public class StandardDialRange extends AbstractDialLayer implements DialLayer,
      * Creates a new {@code StandardDialRange} instance.
      */
     public StandardDialRange() {
-        this(0.0, 100.0, Color.white);
+        this(0.0, 100.0, Color.WHITE);
     }
 
     /**
