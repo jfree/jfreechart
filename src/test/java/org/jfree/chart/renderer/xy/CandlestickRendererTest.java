@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------------
  * CandlestickRendererTest.java
  * ----------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2017, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -79,11 +79,11 @@ public class CandlestickRendererTest {
         CandlestickRenderer r1 = new CandlestickRenderer();
 
         // check defaults
-        assertEquals(Color.green, r1.getUpPaint());
-        assertEquals(Color.red, r1.getDownPaint());
+        assertEquals(Color.GREEN, r1.getUpPaint());
+        assertEquals(Color.RED, r1.getDownPaint());
         assertFalse(r1.getUseOutlinePaint());
         assertTrue(r1.getDrawVolume());
-        assertEquals(Color.gray, r1.getVolumePaint());
+        assertEquals(Color.GRAY, r1.getVolumePaint());
         assertEquals(-1.0, r1.getCandleWidth(), EPSILON);
     }
 
@@ -97,19 +97,19 @@ public class CandlestickRendererTest {
         assertEquals(r1, r2);
 
         // upPaint
-        r1.setUpPaint(new GradientPaint(1.0f, 2.0f, Color.red, 3.0f, 4.0f,
-                Color.white));
+        r1.setUpPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f,
+                Color.WHITE));
         assertFalse(r1.equals(r2));
-        r2.setUpPaint(new GradientPaint(1.0f, 2.0f, Color.red, 3.0f, 4.0f,
-                Color.white));
+        r2.setUpPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f,
+                Color.WHITE));
         assertTrue(r1.equals(r2));
 
         // downPaint
-        r1.setDownPaint(new GradientPaint(5.0f, 6.0f, Color.green, 7.0f, 8.0f,
-                Color.yellow));
+        r1.setDownPaint(new GradientPaint(5.0f, 6.0f, Color.GREEN, 7.0f, 8.0f,
+                Color.YELLOW));
         assertFalse(r1.equals(r2));
-        r2.setDownPaint(new GradientPaint(5.0f, 6.0f, Color.green, 7.0f, 8.0f,
-                Color.yellow));
+        r2.setDownPaint(new GradientPaint(5.0f, 6.0f, Color.GREEN, 7.0f, 8.0f,
+                Color.YELLOW));
         assertTrue(r1.equals(r2));
 
         // drawVolume
@@ -153,9 +153,9 @@ public class CandlestickRendererTest {
         r2.setUseOutlinePaint(true);
         assertTrue(r1.equals(r2));
 
-        r1.setVolumePaint(Color.blue);
+        r1.setVolumePaint(Color.BLUE);
         assertFalse(r1.equals(r2));
-        r2.setVolumePaint(Color.blue);
+        r2.setVolumePaint(Color.BLUE);
         assertTrue(r1.equals(r2));
     }
 
