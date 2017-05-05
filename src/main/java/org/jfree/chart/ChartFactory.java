@@ -417,10 +417,10 @@ public abstract class ChartFactory {
 
             if (oldValue == null) {
                 if (greenForIncrease) {
-                    plot.setSectionPaint(key, Color.green);
+                    plot.setSectionPaint(key, Color.GREEN);
                 }
                 else {
-                    plot.setSectionPaint(key, Color.red);
+                    plot.setSectionPaint(key, Color.RED);
                 }
                 if (showDifference) {
                     assert series != null; // suppresses compiler warning
@@ -538,10 +538,10 @@ public abstract class ChartFactory {
 
             if (oldValue == null) {
                 if (greenForIncrease) {
-                    plot.setSectionPaint(key, Color.green);
+                    plot.setSectionPaint(key, Color.GREEN);
                 }
                 else {
-                    plot.setSectionPaint(key, Color.red);
+                    plot.setSectionPaint(key, Color.RED);
                 }
                 if (showDifference) {
                     assert series != null; // suppresses compiler warning
@@ -1354,7 +1354,7 @@ public abstract class ChartFactory {
                 renderer);
         plot.clearRangeMarkers();
         Marker baseline = new ValueMarker(0.0);
-        baseline.setPaint(Color.black);
+        baseline.setPaint(Color.BLACK);
         plot.addRangeMarker(baseline, Layer.FOREGROUND);
         plot.setOrientation(orientation);
         JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
