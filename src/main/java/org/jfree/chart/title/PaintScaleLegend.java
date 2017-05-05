@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -141,9 +141,9 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
         this.axis.setRange(scale.getLowerBound(), scale.getUpperBound());
         this.stripWidth = 15.0;
         this.stripOutlineVisible = true;
-        this.stripOutlinePaint = Color.gray;
+        this.stripOutlinePaint = Color.GRAY;
         this.stripOutlineStroke = new BasicStroke(0.5f);
-        this.backgroundPaint = Color.white;
+        this.backgroundPaint = Color.WHITE;
         this.subdivisions = 100;
     }
 

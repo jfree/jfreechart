@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * GradientXYBarPainter.java
  * -------------------------
- * (C) Copyright 2008, 2009, by Object Refinery Limited.
+ * (C) Copyright 2008-2017, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -118,8 +118,8 @@ public class GradientXYBarPainter implements XYBarPainter, Serializable {
             c1 = gp.getColor2();
         }
         else {
-            c0 = Color.blue;
-            c1 = Color.blue.brighter();
+            c0 = Color.BLUE;
+            c1 = Color.BLUE.brighter();
         }
 
         // as a special case, if the bar colour has alpha == 0, we draw
@@ -132,12 +132,12 @@ public class GradientXYBarPainter implements XYBarPainter, Serializable {
             Rectangle2D[] regions = splitVerticalBar(bar, this.g1, this.g2,
                     this.g3);
             GradientPaint gp = new GradientPaint((float) regions[0].getMinX(),
-                    0.0f, c0, (float) regions[0].getMaxX(), 0.0f, Color.white);
+                    0.0f, c0, (float) regions[0].getMaxX(), 0.0f, Color.WHITE);
             g2.setPaint(gp);
             g2.fill(regions[0]);
 
             gp = new GradientPaint((float) regions[1].getMinX(), 0.0f,
-                    Color.white, (float) regions[1].getMaxX(), 0.0f, c0);
+                    Color.WHITE, (float) regions[1].getMaxX(), 0.0f, c0);
             g2.setPaint(gp);
             g2.fill(regions[1]);
 
@@ -156,12 +156,12 @@ public class GradientXYBarPainter implements XYBarPainter, Serializable {
                     this.g3);
             GradientPaint gp = new GradientPaint(0.0f,
                     (float) regions[0].getMinY(), c0, 0.0f,
-                    (float) regions[0].getMaxX(), Color.white);
+                    (float) regions[0].getMaxX(), Color.WHITE);
             g2.setPaint(gp);
             g2.fill(regions[0]);
 
             gp = new GradientPaint(0.0f, (float) regions[1].getMinY(),
-                    Color.white, 0.0f, (float) regions[1].getMaxY(), c0);
+                    Color.WHITE, 0.0f, (float) regions[1].getMaxY(), c0);
             g2.setPaint(gp);
             g2.fill(regions[1]);
 
@@ -219,7 +219,7 @@ public class GradientXYBarPainter implements XYBarPainter, Serializable {
 
         RectangularShape shadow = createShadow(bar, renderer.getShadowXOffset(),
                 renderer.getShadowYOffset(), base, pegShadow);
-        g2.setPaint(Color.gray);
+        g2.setPaint(Color.GRAY);
         g2.fill(shadow);
 
     }
