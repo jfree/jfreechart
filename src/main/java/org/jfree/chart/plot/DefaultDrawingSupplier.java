@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * DefaultDrawingSupplier.java
  * ---------------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited.
+ * (C) Copyright 2003-2017, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Jeremy Bowman;
@@ -84,11 +84,11 @@ public class DefaultDrawingSupplier implements DrawingSupplier, Cloneable,
 
     /** The default outline paint sequence. */
     public static final Paint[] DEFAULT_OUTLINE_PAINT_SEQUENCE = new Paint[] {
-            Color.lightGray};
+            Color.LIGHT_GRAY};
 
     /** The default fill paint sequence. */
     public static final Paint[] DEFAULT_FILL_PAINT_SEQUENCE = new Paint[] {
-            Color.white};
+            Color.WHITE};
 
     /** The default stroke sequence. */
     public static final Stroke[] DEFAULT_STROKE_SEQUENCE = new Stroke[] {
