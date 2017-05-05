@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------
  * CompassPlot.java
  * ----------------
- * (C) Copyright 2002-2016, by the Australian Antarctic Division and
+ * (C) Copyright 2002-2017, by the Australian Antarctic Division and
  * Contributors.
  *
  * Original Author:  Bryan Scott (for the Australian Antarctic Division);
@@ -135,13 +135,13 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
     private boolean drawBorder = false;
 
     /** The rose highlight paint. */
-    private transient Paint roseHighlightPaint = Color.black;
+    private transient Paint roseHighlightPaint = Color.BLACK;
 
     /** The rose paint. */
-    private transient Paint rosePaint = Color.yellow;
+    private transient Paint rosePaint = Color.YELLOW;
 
     /** The rose center paint. */
-    private transient Paint roseCenterPaint = Color.white;
+    private transient Paint roseCenterPaint = Color.WHITE;
 
     /** The compass font. */
     private Font compassFont = new Font("Arial", Font.PLAIN, 10);
@@ -442,8 +442,8 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
         switch (type) {
             case 0:
                 setSeriesNeedle(index, new ArrowNeedle(true));
-                setSeriesPaint(index, Color.red);
-                this.seriesNeedle[index].setHighlightPaint(Color.white);
+                setSeriesPaint(index, Color.RED);
+                this.seriesNeedle[index].setHighlightPaint(Color.WHITE);
                 break;
             case 1:
                 setSeriesNeedle(index, new LineNeedle());
@@ -468,7 +468,7 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
                 setSeriesNeedle(index, new ShipNeedle());
                 break;
             case 7:
-                setSeriesPaint(index, Color.blue);
+                setSeriesPaint(index, Color.BLUE);
                 setSeriesNeedle(index, new WindNeedle());
                 break;
             case 8:
