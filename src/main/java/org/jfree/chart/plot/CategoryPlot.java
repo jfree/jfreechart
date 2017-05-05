@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------
  * CategoryPlot.java
  * -----------------
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Jeremy Bowman;
@@ -287,7 +287,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
             {2.0f, 2.0f}, 0.0f);
 
     /** The default grid line paint. */
-    public static final Paint DEFAULT_GRIDLINE_PAINT = Color.lightGray;
+    public static final Paint DEFAULT_GRIDLINE_PAINT = Color.LIGHT_GRAY;
 
     /** The default value label font. */
     public static final Font DEFAULT_VALUE_LABEL_FONT = new Font("SansSerif",
@@ -313,7 +313,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @since 1.0.5
      */
-    public static final Paint DEFAULT_CROSSHAIR_PAINT = Color.blue;
+    public static final Paint DEFAULT_CROSSHAIR_PAINT = Color.BLUE;
 
     /** The resourceBundle for the localization. */
     protected static ResourceBundle localizationResources
@@ -641,7 +641,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
         this.domainGridlinePaint = DEFAULT_GRIDLINE_PAINT;
 
         this.rangeZeroBaselineVisible = false;
-        this.rangeZeroBaselinePaint = Color.black;
+        this.rangeZeroBaselinePaint = Color.BLACK;
         this.rangeZeroBaselineStroke = new BasicStroke(0.5f);
 
         this.rangeGridlinesVisible = DEFAULT_RANGE_GRIDLINES_VISIBLE;
@@ -650,7 +650,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
 
         this.rangeMinorGridlinesVisible = false;
         this.rangeMinorGridlineStroke = DEFAULT_GRIDLINE_STROKE;
-        this.rangeMinorGridlinePaint = Color.white;
+        this.rangeMinorGridlinePaint = Color.WHITE;
 
         this.foregroundDomainMarkers = new HashMap();
         this.backgroundDomainMarkers = new HashMap();

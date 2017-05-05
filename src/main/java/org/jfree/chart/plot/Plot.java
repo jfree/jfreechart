@@ -27,7 +27,7 @@
  * ---------
  * Plot.java
  * ---------
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Sylvain Vieujot;
@@ -213,7 +213,7 @@ public abstract class Plot implements AxisChangeListener,
             BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
 
     /** The default outline color. */
-    public static final Paint DEFAULT_OUTLINE_PAINT = Color.gray;
+    public static final Paint DEFAULT_OUTLINE_PAINT = Color.GRAY;
 
     /** The default foreground alpha transparency. */
     public static final float DEFAULT_FOREGROUND_ALPHA = 1.0f;
@@ -222,7 +222,7 @@ public abstract class Plot implements AxisChangeListener,
     public static final float DEFAULT_BACKGROUND_ALPHA = 1.0f;
 
     /** The default background color. */
-    public static final Paint DEFAULT_BACKGROUND_PAINT = Color.white;
+    public static final Paint DEFAULT_BACKGROUND_PAINT = Color.WHITE;
 
     /** The minimum width at which the plot should be drawn. */
     public static final int MINIMUM_WIDTH_TO_DRAW = 10;
@@ -328,7 +328,7 @@ public abstract class Plot implements AxisChangeListener,
 
         this.noDataMessage = null;
         this.noDataMessageFont = new Font("SansSerif", Font.PLAIN, 12);
-        this.noDataMessagePaint = Color.black;
+        this.noDataMessagePaint = Color.BLACK;
 
         this.drawingSupplier = new DefaultDrawingSupplier();
 
