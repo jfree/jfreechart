@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * DialValueIndicator.java
  * -----------------------
- * (C) Copyright 2006-2016, by Object Refinery Limited.
+ * (C) Copyright 2006-2017, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -157,10 +157,10 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
         this.maxTemplateValue = null;
         this.formatter = new DecimalFormat("0.0");
         this.font = new Font("Dialog", Font.BOLD, 14);
-        this.paint = Color.black;
-        this.backgroundPaint = Color.white;
+        this.paint = Color.BLACK;
+        this.backgroundPaint = Color.WHITE;
         this.outlineStroke = new BasicStroke(1.0f);
-        this.outlinePaint = Color.blue;
+        this.outlinePaint = Color.BLUE;
         this.insets = new RectangleInsets(4, 4, 4, 4);
         this.valueAnchor = RectangleAnchor.RIGHT;
         this.textAnchor = TextAnchor.CENTER_RIGHT;
