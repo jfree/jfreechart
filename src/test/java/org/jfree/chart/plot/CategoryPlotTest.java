@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * CategoryPlotTest.java
  * ---------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2017, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -265,11 +265,11 @@ public class CategoryPlotTest {
         assertTrue(plot1.equals(plot2));
 
         // domainGridlinePaint
-        plot1.setDomainGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.blue,
-                3.0f, 4.0f, Color.yellow));
+        plot1.setDomainGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
+                3.0f, 4.0f, Color.YELLOW));
         assertFalse(plot1.equals(plot2));
-        plot2.setDomainGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.blue,
-                3.0f, 4.0f, Color.yellow));
+        plot2.setDomainGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
+                3.0f, 4.0f, Color.YELLOW));
         assertTrue(plot1.equals(plot2));
 
         // rangeGridlinesVisible
@@ -285,11 +285,11 @@ public class CategoryPlotTest {
         assertTrue(plot1.equals(plot2));
 
         // rangeGridlinePaint
-        plot1.setRangeGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.green,
-                3.0f, 4.0f, Color.yellow));
+        plot1.setRangeGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.GREEN,
+                3.0f, 4.0f, Color.YELLOW));
         assertFalse(plot1.equals(plot2));
-        plot2.setRangeGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.green,
-                3.0f, 4.0f, Color.yellow));
+        plot2.setRangeGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.GREEN,
+                3.0f, 4.0f, Color.YELLOW));
         assertTrue(plot1.equals(plot2));
 
         // anchorValue
@@ -317,11 +317,11 @@ public class CategoryPlotTest {
         assertTrue(plot1.equals(plot2));
 
         // rangeCrosshairPaint
-        plot1.setRangeCrosshairPaint(new GradientPaint(1.0f, 2.0f, Color.white,
-                3.0f, 4.0f, Color.yellow));
+        plot1.setRangeCrosshairPaint(new GradientPaint(1.0f, 2.0f, Color.WHITE,
+                3.0f, 4.0f, Color.YELLOW));
         assertFalse(plot1.equals(plot2));
-        plot2.setRangeCrosshairPaint(new GradientPaint(1.0f, 2.0f, Color.white,
-                3.0f, 4.0f, Color.yellow));
+        plot2.setRangeCrosshairPaint(new GradientPaint(1.0f, 2.0f, Color.WHITE,
+                3.0f, 4.0f, Color.YELLOW));
         assertTrue(plot1.equals(plot2));
 
         // rangeCrosshairLockedOnData
@@ -422,11 +422,11 @@ public class CategoryPlotTest {
         assertTrue(plot1.equals(plot2));
 
         // domainCrosshairPaint
-        plot1.setDomainCrosshairPaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.blue));
+        plot1.setDomainCrosshairPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.BLUE));
         assertFalse(plot1.equals(plot2));
-        plot2.setDomainCrosshairPaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.blue));
+        plot2.setDomainCrosshairPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.BLUE));
         assertTrue(plot1.equals(plot2));
 
         // domainCrosshairStroke
@@ -441,10 +441,10 @@ public class CategoryPlotTest {
         assertTrue(plot1.equals(plot2));
 
         plot1.setRangeMinorGridlinePaint(new GradientPaint(1.0f, 2.0f,
-                Color.red, 3.0f, 4.0f, Color.blue));
+                Color.RED, 3.0f, 4.0f, Color.BLUE));
         assertFalse(plot1.equals(plot2));
-        plot2.setRangeMinorGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.blue));
+        plot2.setRangeMinorGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.BLUE));
         assertTrue(plot1.equals(plot2));
 
         plot1.setRangeMinorGridlineStroke(new BasicStroke(1.23f));
@@ -458,10 +458,10 @@ public class CategoryPlotTest {
         assertTrue(plot1.equals(plot2));
 
         plot1.setRangeZeroBaselinePaint(new GradientPaint(1.0f, 2.0f,
-                Color.red, 3.0f, 4.0f, Color.blue));
+                Color.RED, 3.0f, 4.0f, Color.BLUE));
         assertFalse(plot1.equals(plot2));
-        plot2.setRangeZeroBaselinePaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.blue));
+        plot2.setRangeZeroBaselinePaint(new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.BLUE));
         assertTrue(plot1.equals(plot2));
 
         plot1.setRangeZeroBaselineStroke(new BasicStroke(1.23f));
@@ -470,10 +470,10 @@ public class CategoryPlotTest {
         assertTrue(plot1.equals(plot2));
 
         // shadowGenerator
-        plot1.setShadowGenerator(new DefaultShadowGenerator(5, Color.gray,
+        plot1.setShadowGenerator(new DefaultShadowGenerator(5, Color.GRAY,
                 0.6f, 4, -Math.PI / 4));
         assertFalse(plot1.equals(plot2));
-        plot2.setShadowGenerator(new DefaultShadowGenerator(5, Color.gray,
+        plot2.setShadowGenerator(new DefaultShadowGenerator(5, Color.GRAY,
                 0.6f, 4, -Math.PI / 4));
         assertTrue(plot1.equals(plot2));
 
@@ -559,12 +559,12 @@ public class CategoryPlotTest {
     @Test
     public void testCloning() {
         CategoryPlot p1 = new CategoryPlot();
-        p1.setRangeCrosshairPaint(new GradientPaint(1.0f, 2.0f, Color.white,
-                3.0f, 4.0f, Color.yellow));
-        p1.setRangeMinorGridlinePaint(new GradientPaint(2.0f, 3.0f, Color.white,
-                4.0f, 5.0f, Color.red));
-        p1.setRangeZeroBaselinePaint(new GradientPaint(3.0f, 4.0f, Color.red,
-                5.0f, 6.0f, Color.white));
+        p1.setRangeCrosshairPaint(new GradientPaint(1.0f, 2.0f, Color.WHITE,
+                3.0f, 4.0f, Color.YELLOW));
+        p1.setRangeMinorGridlinePaint(new GradientPaint(2.0f, 3.0f, Color.WHITE,
+                4.0f, 5.0f, Color.RED));
+        p1.setRangeZeroBaselinePaint(new GradientPaint(3.0f, 4.0f, Color.RED,
+                5.0f, 6.0f, Color.WHITE));
         CategoryPlot p2;
         try {
             p2 = (CategoryPlot) p1.clone();
@@ -579,10 +579,10 @@ public class CategoryPlotTest {
 
         // check independence
         p1.addAnnotation(new CategoryLineAnnotation("C1", 1.0, "C2", 2.0,
-                Color.red, new BasicStroke(1.0f)));
+                Color.RED, new BasicStroke(1.0f)));
         assertFalse(p1.equals(p2));
         p2.addAnnotation(new CategoryLineAnnotation("C1", 1.0, "C2", 2.0,
-                Color.red, new BasicStroke(1.0f)));
+                Color.RED, new BasicStroke(1.0f)));
         assertTrue(p1.equals(p2));
 
         p1.addDomainMarker(new CategoryMarker("C1"), Layer.FOREGROUND);
@@ -660,16 +660,16 @@ public class CategoryPlotTest {
         assertTrue(p1.equals(p2));
 
         c1.add(new LegendItem("X", "XX", "tt", "url", true,
-                new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), true, Color.red,
-                true, Color.yellow, new BasicStroke(1.0f), true,
+                new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), true, Color.RED,
+                true, Color.YELLOW, new BasicStroke(1.0f), true,
                 new Line2D.Double(1.0, 2.0, 3.0, 4.0), new BasicStroke(1.0f),
-                Color.green));
+                Color.GREEN));
         assertFalse(p1.equals(p2));
         p2.getFixedLegendItems().add(new LegendItem("X", "XX", "tt", "url",
                 true, new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), true,
-                Color.red, true, Color.yellow, new BasicStroke(1.0f), true,
+                Color.RED, true, Color.YELLOW, new BasicStroke(1.0f), true,
                 new Line2D.Double(1.0, 2.0, 3.0, 4.0), new BasicStroke(1.0f),
-                Color.green));
+                Color.GREEN));
         assertTrue(p1.equals(p2));
     }
 
@@ -834,7 +834,7 @@ public class CategoryPlotTest {
         // change event...
         MyPlotChangeListener listener = new MyPlotChangeListener();
         plot.addChangeListener(listener);
-        renderer.setSeriesPaint(0, Color.black);
+        renderer.setSeriesPaint(0, Color.BLACK);
         assertTrue(listener.getEvent() != null);
     }
 
