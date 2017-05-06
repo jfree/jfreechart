@@ -1030,7 +1030,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
 
         // add an entity for the item, but only if it falls within the data
         // area...
-        if (entities != null && isPointInRect(dataArea, xx, yy)) {
+        if (entities != null && ShapeUtils.isPointInRect(dataArea, xx, yy)) {
             addEntity(entities, entityArea, dataset, series, item, xx, yy);
         }
     }

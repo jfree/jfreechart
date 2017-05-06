@@ -1780,25 +1780,6 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
     }
 
     /**
-     * Returns {@code true} if the specified point (x, y) falls within or
-     * on the boundary of the specified rectangle.
-     *
-     * @param rect  the rectangle ({@code null} not permitted).
-     * @param x  the x-coordinate.
-     * @param y  the y-coordinate.
-     *
-     * @return A boolean.
-     *
-     * @since 1.0.10
-     */
-    public static boolean isPointInRect(Rectangle2D rect, double x, double y) {
-        // TODO: For JFreeChart 1.2.0, this method should go in the
-        //       ShapeUtilities class
-        return (x >= rect.getMinX() && x <= rect.getMaxX()
-                && y >= rect.getMinY() && y <= rect.getMaxY());
-    }
-
-    /**
      * Utility method delegating to {@link GeneralPath#moveTo} taking double as
      * parameters.
      *

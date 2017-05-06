@@ -581,8 +581,8 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
 
                 // add an entity for the item, but only if it falls within the
                 // data area...
-                if (entities != null &&
-                        AbstractXYItemRenderer.isPointInRect(dataArea, x, y)) {
+                if (entities != null && ShapeUtils.isPointInRect(dataArea, x, 
+                        y)) {
                     addEntity(entities, shape, dataset, seriesIndex, i-1, x, y);
                 }
             }
