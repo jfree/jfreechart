@@ -162,7 +162,7 @@ public class PaintUtils {
      */
     public static Color stringToColor(String value) {
         if (value == null) {
-            return Color.black;
+            return Color.BLACK;
         }
         try {
             // get color by hex or octal value
@@ -175,7 +175,7 @@ public class PaintUtils {
                 return (Color) f.get(null);
             } catch (Exception ce) {
                 // if we can't get any color return black
-                return Color.black;
+                return Color.BLACK;
             }
         }
     }
