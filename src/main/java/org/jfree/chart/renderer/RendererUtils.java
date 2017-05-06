@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ----------------------
- * RendererUtilities.java
- * ----------------------
- * (C) Copyright 2007-2016, by Object Refinery Limited.
+ * ------------------
+ * RendererUtils.java
+ * ------------------
+ * (C) Copyright 2007-2017, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -53,7 +53,7 @@ import org.jfree.data.xy.XYDataset;
  *
  * @since 1.0.6
  */
-public class RendererUtilities {
+public class RendererUtils {
 
     /**
      * Finds the lower index of the range of live items in the specified data

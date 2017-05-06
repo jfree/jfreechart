@@ -285,7 +285,7 @@ import org.jfree.chart.event.ChartChangeEventType;
 import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.event.RendererChangeListener;
-import org.jfree.chart.renderer.RendererUtilities;
+import org.jfree.chart.renderer.RendererUtils;
 import org.jfree.chart.renderer.xy.AbstractXYItemRenderer;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.chart.renderer.xy.XYItemRendererState;
@@ -3727,7 +3727,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
                             continue;
                         }
                         if (state.getProcessVisibleItemsOnly()) {
-                            int[] itemBounds = RendererUtilities.findLiveItems(
+                            int[] itemBounds = RendererUtils.findLiveItems(
                                     dataset, series, xAxis.getLowerBound(),
                                     xAxis.getUpperBound());
                             firstItem = Math.max(itemBounds[0] - 1, 0);
@@ -3753,7 +3753,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
                         int firstItem = 0;
                         int lastItem = dataset.getItemCount(series) - 1;
                         if (state.getProcessVisibleItemsOnly()) {
-                            int[] itemBounds = RendererUtilities.findLiveItems(
+                            int[] itemBounds = RendererUtils.findLiveItems(
                                     dataset, series, xAxis.getLowerBound(),
                                     xAxis.getUpperBound());
                             firstItem = Math.max(itemBounds[0] - 1, 0);
