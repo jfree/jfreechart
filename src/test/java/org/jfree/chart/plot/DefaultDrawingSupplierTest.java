@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -70,10 +70,10 @@ public class DefaultDrawingSupplierTest {
         assertTrue(r2.equals(r1));
 
         // set up some objects...
-        Paint[] ps1A = new Paint[] {Color.red, Color.blue};
-        Paint[] ps2A = new Paint[] {Color.green, Color.yellow, Color.white};
-        Paint[] ops1A = new Paint[] {Color.lightGray, Color.blue};
-        Paint[] ops2A = new Paint[] {Color.black, Color.yellow, Color.cyan};
+        Paint[] ps1A = new Paint[] {Color.RED, Color.BLUE};
+        Paint[] ps2A = new Paint[] {Color.GREEN, Color.YELLOW, Color.WHITE};
+        Paint[] ops1A = new Paint[] {Color.LIGHT_GRAY, Color.BLUE};
+        Paint[] ops2A = new Paint[] {Color.BLACK, Color.YELLOW, Color.CYAN};
         Stroke[] ss1A = new Stroke[] {new BasicStroke(1.1f)};
         Stroke[] ss2A
             = new Stroke[] {new BasicStroke(2.2f), new BasicStroke(3.3f)};
@@ -87,10 +87,10 @@ public class DefaultDrawingSupplierTest {
             new Rectangle2D.Double(2.0, 2.0, 2.0, 2.0),
             new Rectangle2D.Double(2.0, 2.0, 2.0, 2.0)
         };
-        Paint[] ps1B = new Paint[] {Color.red, Color.blue};
-        Paint[] ps2B = new Paint[] {Color.green, Color.yellow, Color.white};
-        Paint[] ops1B = new Paint[] {Color.lightGray, Color.blue};
-        Paint[] ops2B = new Paint[] {Color.black, Color.yellow, Color.cyan};
+        Paint[] ps1B = new Paint[] {Color.RED, Color.BLUE};
+        Paint[] ps2B = new Paint[] {Color.GREEN, Color.YELLOW, Color.WHITE};
+        Paint[] ops1B = new Paint[] {Color.LIGHT_GRAY, Color.BLUE};
+        Paint[] ops2B = new Paint[] {Color.BLACK, Color.YELLOW, Color.CYAN};
         Stroke[] ss1B = new Stroke[] {new BasicStroke(1.1f)};
         Stroke[] ss2B
             = new Stroke[] {new BasicStroke(2.2f), new BasicStroke(3.3f)};

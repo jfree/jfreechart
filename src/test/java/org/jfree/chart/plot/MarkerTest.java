@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * MarkerTest.java
  * ---------------
- * (C) Copyright 2006-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2017, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -76,9 +76,9 @@ public class MarkerTest implements MarkerChangeListener {
         ValueMarker m = new ValueMarker(1.1);
         m.addChangeListener(this);
         this.lastEvent = null;
-        assertEquals(Color.gray, m.getPaint());
-        m.setPaint(Color.blue);
-        assertEquals(Color.blue, m.getPaint());
+        assertEquals(Color.GRAY, m.getPaint());
+        m.setPaint(Color.BLUE);
+        assertEquals(Color.BLUE, m.getPaint());
         assertEquals(m, this.lastEvent.getMarker());
 
         // check null argument...
@@ -126,9 +126,9 @@ public class MarkerTest implements MarkerChangeListener {
         ValueMarker m = new ValueMarker(1.1);
         m.addChangeListener(this);
         this.lastEvent = null;
-        assertEquals(Color.gray, m.getOutlinePaint());
-        m.setOutlinePaint(Color.yellow);
-        assertEquals(Color.yellow, m.getOutlinePaint());
+        assertEquals(Color.GRAY, m.getOutlinePaint());
+        m.setOutlinePaint(Color.YELLOW);
+        assertEquals(Color.YELLOW, m.getOutlinePaint());
         assertEquals(m, this.lastEvent.getMarker());
 
         // check null argument...
@@ -229,9 +229,9 @@ public class MarkerTest implements MarkerChangeListener {
         ValueMarker m = new ValueMarker(1.1);
         m.addChangeListener(this);
         this.lastEvent = null;
-        assertEquals(Color.black, m.getLabelPaint());
-        m.setLabelPaint(Color.red);
-        assertEquals(Color.red, m.getLabelPaint());
+        assertEquals(Color.BLACK, m.getLabelPaint());
+        m.setLabelPaint(Color.RED);
+        assertEquals(Color.RED, m.getLabelPaint());
         assertEquals(m, this.lastEvent.getMarker());
 
         // check null argument...
