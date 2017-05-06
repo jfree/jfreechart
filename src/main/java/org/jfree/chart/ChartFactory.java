@@ -231,7 +231,7 @@ public abstract class ChartFactory {
      * @return The chart theme.
      *
      * @see #setChartTheme(ChartTheme)
-     * @see ChartUtilities#applyCurrentTheme(JFreeChart)
+     * @see ChartUtils#applyCurrentTheme(JFreeChart)
      *
      * @since 1.0.11
      */
@@ -246,7 +246,7 @@ public abstract class ChartFactory {
      * @param theme  the theme ({@code null} not permitted).
      *
      * @see #getChartTheme()
-     * @see ChartUtilities#applyCurrentTheme(JFreeChart)
+     * @see ChartUtils#applyCurrentTheme(JFreeChart)
      *
      * @since 1.0.11
      */

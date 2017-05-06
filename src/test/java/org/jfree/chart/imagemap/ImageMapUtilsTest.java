@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * --------------------------
- * ImageMapUtilitiesTest.java
- * --------------------------
- * (C) Copyright 2009-2016, by Object Refinery Limited and Contributors.
+ * ----------------------
+ * ImageMapUtilsTest.java
+ * ----------------------
+ * (C) Copyright 2009-2017, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -44,24 +44,24 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 /**
- * Tests for the {@link ImageMapUtilities} class.
+ * Tests for the {@link ImageMapUtils} class.
  */
-public class ImageMapUtilitiesTest {
+public class ImageMapUtilsTest {
 
     /**
      * Some checks for the htmlEscape() method.
      */
     @Test
     public void testHTMLEscape() {
-        assertEquals("", ImageMapUtilities.htmlEscape(""));
-        assertEquals("abc", ImageMapUtilities.htmlEscape("abc"));
-        assertEquals("&amp;", ImageMapUtilities.htmlEscape("&"));
-        assertEquals("&quot;", ImageMapUtilities.htmlEscape("\""));
-        assertEquals("&lt;", ImageMapUtilities.htmlEscape("<"));
-        assertEquals("&gt;", ImageMapUtilities.htmlEscape(">"));
-        assertEquals("&#39;", ImageMapUtilities.htmlEscape("\'"));
-        assertEquals("&#092;abc", ImageMapUtilities.htmlEscape("\\abc"));
-        assertEquals("abc\n", ImageMapUtilities.htmlEscape("abc\n"));
+        assertEquals("", ImageMapUtils.htmlEscape(""));
+        assertEquals("abc", ImageMapUtils.htmlEscape("abc"));
+        assertEquals("&amp;", ImageMapUtils.htmlEscape("&"));
+        assertEquals("&quot;", ImageMapUtils.htmlEscape("\""));
+        assertEquals("&lt;", ImageMapUtils.htmlEscape("<"));
+        assertEquals("&gt;", ImageMapUtils.htmlEscape(">"));
+        assertEquals("&#39;", ImageMapUtils.htmlEscape("\'"));
+        assertEquals("&#092;abc", ImageMapUtils.htmlEscape("\\abc"));
+        assertEquals("abc\n", ImageMapUtils.htmlEscape("abc\n"));
     }
 
     /**
@@ -69,11 +69,11 @@ public class ImageMapUtilitiesTest {
      */
     @Test
     public void testJavascriptEscape() {
-        assertEquals("", ImageMapUtilities.javascriptEscape(""));
-        assertEquals("abc", ImageMapUtilities.javascriptEscape("abc"));
-        assertEquals("\\\'", ImageMapUtilities.javascriptEscape("\'"));
-        assertEquals("\\\"", ImageMapUtilities.javascriptEscape("\""));   
-        assertEquals("\\\\", ImageMapUtilities.javascriptEscape("\\"));
+        assertEquals("", ImageMapUtils.javascriptEscape(""));
+        assertEquals("abc", ImageMapUtils.javascriptEscape("abc"));
+        assertEquals("\\\'", ImageMapUtils.javascriptEscape("\'"));
+        assertEquals("\\\"", ImageMapUtils.javascriptEscape("\""));   
+        assertEquals("\\\\", ImageMapUtils.javascriptEscape("\\"));
     }
 
 }

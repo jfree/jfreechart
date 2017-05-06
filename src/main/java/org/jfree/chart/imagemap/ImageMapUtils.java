@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ----------------------
- * ImageMapUtilities.java
- * ----------------------
- * (C) Copyright 2004-2016, by Richard Atkinson and Contributors.
+ * ------------------
+ * ImageMapUtils.java
+ * ------------------
+ * (C) Copyright 2004-2017, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -64,7 +64,7 @@ import org.jfree.chart.util.StringUtils;
  * Collection of utility methods related to producing image maps.
  * Functionality was originally in {@link org.jfree.chart.ChartUtilities}.
  */
-public class ImageMapUtilities {
+public class ImageMapUtils {
 
     /**
      * Writes an image map to an output stream.
@@ -79,7 +79,7 @@ public class ImageMapUtilities {
             ChartRenderingInfo info) throws IOException {
 
         // defer argument checking...
-        ImageMapUtilities.writeImageMap(writer, name, info,
+        writeImageMap(writer, name, info,
                 new StandardToolTipTagFragmentGenerator(),
                 new StandardURLTagFragmentGenerator());
 
@@ -109,7 +109,7 @@ public class ImageMapUtilities {
             toolTipTagFragmentGenerator
                     = new StandardToolTipTagFragmentGenerator();
         }
-        ImageMapUtilities.writeImageMap(writer, name, info,
+        writeImageMap(writer, name, info,
                 toolTipTagFragmentGenerator,
                 new StandardURLTagFragmentGenerator());
 
@@ -136,7 +136,7 @@ public class ImageMapUtilities {
             URLTagFragmentGenerator urlTagFragmentGenerator)
         throws IOException {
 
-        writer.println(ImageMapUtilities.getImageMap(name, info,
+        writer.println(ImageMapUtils.getImageMap(name, info,
                 toolTipTagFragmentGenerator, urlTagFragmentGenerator));
     }
 
@@ -150,7 +150,7 @@ public class ImageMapUtilities {
      * @return The map element.
      */
     public static String getImageMap(String name, ChartRenderingInfo info) {
-        return ImageMapUtilities.getImageMap(name, info,
+        return ImageMapUtils.getImageMap(name, info,
                 new StandardToolTipTagFragmentGenerator(),
                 new StandardURLTagFragmentGenerator());
     }

@@ -91,7 +91,7 @@ import java.io.PrintWriter;
 
 import org.jfree.chart.encoders.EncoderUtil;
 import org.jfree.chart.encoders.ImageFormat;
-import org.jfree.chart.imagemap.ImageMapUtilities;
+import org.jfree.chart.imagemap.ImageMapUtils;
 import org.jfree.chart.imagemap.OverLIBToolTipTagFragmentGenerator;
 import org.jfree.chart.imagemap.StandardToolTipTagFragmentGenerator;
 import org.jfree.chart.imagemap.StandardURLTagFragmentGenerator;
@@ -104,7 +104,7 @@ import org.jfree.chart.util.ParamChecks;
  * converting charts to image formats (PNG and JPEG) plus creating simple HTML
  * image maps.
  *
- * @see ImageMapUtilities
+ * @see ImageMapUtils
  */
 public abstract class ChartUtils {
 
@@ -657,7 +657,7 @@ public abstract class ChartUtils {
             toolTipTagFragmentGenerator
                     = new StandardToolTipTagFragmentGenerator();
         }
-        ImageMapUtilities.writeImageMap(writer, name, info,
+        ImageMapUtils.writeImageMap(writer, name, info,
                 toolTipTagFragmentGenerator,
                 new StandardURLTagFragmentGenerator());
 
@@ -684,7 +684,7 @@ public abstract class ChartUtils {
             URLTagFragmentGenerator urlTagFragmentGenerator)
             throws IOException {
 
-        writer.println(ImageMapUtilities.getImageMap(name, info,
+        writer.println(ImageMapUtils.getImageMap(name, info,
                 toolTipTagFragmentGenerator, urlTagFragmentGenerator));
     }
 
@@ -700,7 +700,7 @@ public abstract class ChartUtils {
      * @return The map tag.
      */
     public static String getImageMap(String name, ChartRenderingInfo info) {
-        return ImageMapUtilities.getImageMap(name, info,
+        return ImageMapUtils.getImageMap(name, info,
                 new StandardToolTipTagFragmentGenerator(),
                 new StandardURLTagFragmentGenerator());
     }
@@ -725,7 +725,7 @@ public abstract class ChartUtils {
             ToolTipTagFragmentGenerator toolTipTagFragmentGenerator,
             URLTagFragmentGenerator urlTagFragmentGenerator) {
 
-        return ImageMapUtilities.getImageMap(name, info,
+        return ImageMapUtils.getImageMap(name, info,
                 toolTipTagFragmentGenerator, urlTagFragmentGenerator);
 
     }
