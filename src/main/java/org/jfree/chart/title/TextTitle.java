@@ -135,7 +135,7 @@ public class TextTitle extends Title
             12);
 
     /** The default text color. */
-    public static final Paint DEFAULT_TEXT_PAINT = Color.black;
+    public static final Paint DEFAULT_TEXT_PAINT = Color.BLACK;
 
     /** The title text. */
     private String text;
