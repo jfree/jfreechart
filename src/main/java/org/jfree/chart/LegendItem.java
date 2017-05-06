@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * LegendItem.java
  * ---------------
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Andrzej Porebski;
@@ -211,7 +211,7 @@ public class LegendItem implements Cloneable, Serializable {
      * @since 1.0.10
      */
     public LegendItem(String label) {
-        this(label, Color.black);
+        this(label, Color.BLACK);
     }
 
     /**
@@ -247,9 +247,9 @@ public class LegendItem implements Cloneable, Serializable {
         this(label, description, toolTipText, urlText,
                 /* shape visible = */ true, shape,
                 /* shape filled = */ true, fillPaint,
-                /* shape outlined */ false, Color.black, UNUSED_STROKE,
+                /* shape outlined */ false, Color.BLACK, UNUSED_STROKE,
                 /* line visible */ false, UNUSED_SHAPE, UNUSED_STROKE,
-                Color.black);
+                Color.BLACK);
 
     }
 
@@ -277,7 +277,7 @@ public class LegendItem implements Cloneable, Serializable {
                 /* shape filled = */ true, fillPaint,
                 /* shape outlined = */ true, outlinePaint, outlineStroke,
                 /* line visible */ false, UNUSED_SHAPE, UNUSED_STROKE,
-                Color.black);
+                Color.BLACK);
 
     }
 
@@ -297,8 +297,8 @@ public class LegendItem implements Cloneable, Serializable {
 
         this(label, description, toolTipText, urlText,
                 /* shape visible = */ false, UNUSED_SHAPE,
-                /* shape filled = */ false, Color.black,
-                /* shape outlined = */ false, Color.black, UNUSED_STROKE,
+                /* shape filled = */ false, Color.BLACK,
+                /* shape outlined = */ false, Color.BLACK, UNUSED_STROKE,
                 /* line visible = */ true, line, lineStroke, linePaint);
     }
 
@@ -380,9 +380,9 @@ public class LegendItem implements Cloneable, Serializable {
         this(label, description, toolTipText, urlText,
                 /* shape visible = */ true, shape,
                 /* shape filled = */ true, fillPaint,
-                /* shape outlined = */ false, Color.black, UNUSED_STROKE,
+                /* shape outlined = */ false, Color.BLACK, UNUSED_STROKE,
                 /* line visible = */ false, UNUSED_SHAPE, UNUSED_STROKE,
-                Color.black);
+                Color.BLACK);
 
     }
 
@@ -411,7 +411,7 @@ public class LegendItem implements Cloneable, Serializable {
                 /* shape filled = */ true, fillPaint,
                 /* shape outlined = */ true, outlinePaint, outlineStroke,
                 /* line visible = */ false, UNUSED_SHAPE, UNUSED_STROKE,
-                Color.black);
+                Color.BLACK);
     }
 
     /**
@@ -431,8 +431,8 @@ public class LegendItem implements Cloneable, Serializable {
 
         this(label, description, toolTipText, urlText,
                 /* shape visible = */ false, UNUSED_SHAPE,
-                /* shape filled = */ false, Color.black,
-                /* shape outlined = */ false, Color.black, UNUSED_STROKE,
+                /* shape filled = */ false, Color.BLACK,
+                /* shape outlined = */ false, Color.BLACK, UNUSED_STROKE,
                 /* line visible = */ true, line, lineStroke, linePaint);
     }
 
