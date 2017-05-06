@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * MeterPlotTest.java
  * ------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2017, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -92,11 +92,11 @@ public class MeterPlotTest {
         assertTrue(plot1.equals(plot2));
 
         // dial outline paint
-        plot1.setDialOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.blue));
+        plot1.setDialOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.BLUE));
         assertFalse(plot1.equals(plot2));
-        plot2.setDialOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.blue));
+        plot2.setDialOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.BLUE));
         assertTrue(plot1.equals(plot2));
 
         // dial shape
@@ -106,27 +106,27 @@ public class MeterPlotTest {
         assertTrue(plot1.equals(plot2));
 
         // dial background paint
-        plot1.setDialBackgroundPaint(new GradientPaint(9.0f, 8.0f, Color.red,
-                7.0f, 6.0f, Color.blue));
+        plot1.setDialBackgroundPaint(new GradientPaint(9.0f, 8.0f, Color.RED,
+                7.0f, 6.0f, Color.BLUE));
         assertFalse(plot1.equals(plot2));
-        plot2.setDialBackgroundPaint(new GradientPaint(9.0f, 8.0f, Color.red,
-                7.0f, 6.0f, Color.blue));
+        plot2.setDialBackgroundPaint(new GradientPaint(9.0f, 8.0f, Color.RED,
+                7.0f, 6.0f, Color.BLUE));
         assertTrue(plot1.equals(plot2));
 
         // dial outline paint
-        plot1.setDialOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.green,
-                3.0f, 4.0f, Color.red));
+        plot1.setDialOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.GREEN,
+                3.0f, 4.0f, Color.RED));
         assertFalse(plot1.equals(plot2));
-        plot2.setDialOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.green,
-                3.0f, 4.0f, Color.red));
+        plot2.setDialOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.GREEN,
+                3.0f, 4.0f, Color.RED));
         assertTrue(plot1.equals(plot2));
 
         // needle paint
-        plot1.setNeedlePaint(new GradientPaint(9.0f, 8.0f, Color.red,
-                7.0f, 6.0f, Color.blue));
+        plot1.setNeedlePaint(new GradientPaint(9.0f, 8.0f, Color.RED,
+                7.0f, 6.0f, Color.BLUE));
         assertFalse(plot1.equals(plot2));
-        plot2.setNeedlePaint(new GradientPaint(9.0f, 8.0f, Color.red,
-                7.0f, 6.0f, Color.blue));
+        plot2.setNeedlePaint(new GradientPaint(9.0f, 8.0f, Color.RED,
+                7.0f, 6.0f, Color.BLUE));
         assertTrue(plot1.equals(plot2));
 
         // value font
@@ -136,11 +136,11 @@ public class MeterPlotTest {
         assertTrue(plot1.equals(plot2));
 
         // value paint
-        plot1.setValuePaint(new GradientPaint(1.0f, 2.0f, Color.black,
-                3.0f, 4.0f, Color.white));
+        plot1.setValuePaint(new GradientPaint(1.0f, 2.0f, Color.BLACK,
+                3.0f, 4.0f, Color.WHITE));
         assertFalse(plot1.equals(plot2));
-        plot2.setValuePaint(new GradientPaint(1.0f, 2.0f, Color.black,
-                3.0f, 4.0f, Color.white));
+        plot2.setValuePaint(new GradientPaint(1.0f, 2.0f, Color.BLACK,
+                3.0f, 4.0f, Color.WHITE));
         assertTrue(plot1.equals(plot2));
 
         // tick labels visible
@@ -156,9 +156,9 @@ public class MeterPlotTest {
         assertTrue(plot1.equals(plot2));
 
         // tick label paint
-        plot1.setTickLabelPaint(Color.red);
+        plot1.setTickLabelPaint(Color.RED);
         assertFalse(plot1.equals(plot2));
-        plot2.setTickLabelPaint(Color.red);
+        plot2.setTickLabelPaint(Color.RED);
         assertTrue(plot1.equals(plot2));
 
         // tick label format
@@ -168,9 +168,9 @@ public class MeterPlotTest {
         assertTrue(plot1.equals(plot2));
 
         // tick paint
-        plot1.setTickPaint(Color.green);
+        plot1.setTickPaint(Color.GREEN);
         assertFalse(plot1.equals(plot2));
-        plot2.setTickPaint(Color.green);
+        plot2.setTickPaint(Color.GREEN);
         assertTrue(plot1.equals(plot2));
 
         // tick size
@@ -227,16 +227,16 @@ public class MeterPlotTest {
     @Test
     public void testSerialization1() {
         MeterPlot p1 = new MeterPlot(null);
-        p1.setDialBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.blue));
-        p1.setDialOutlinePaint(new GradientPaint(4.0f, 3.0f, Color.red,
-                2.0f, 1.0f, Color.blue));
-        p1.setNeedlePaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.blue));
-        p1.setTickLabelPaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.blue));
-        p1.setTickPaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.blue));
+        p1.setDialBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.BLUE));
+        p1.setDialOutlinePaint(new GradientPaint(4.0f, 3.0f, Color.RED,
+                2.0f, 1.0f, Color.BLUE));
+        p1.setNeedlePaint(new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.BLUE));
+        p1.setTickLabelPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.BLUE));
+        p1.setTickPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.BLUE));
         MeterPlot p2 = (MeterPlot) TestUtilities.serialised(p1);
         assertEquals(p1, p2);
     }
