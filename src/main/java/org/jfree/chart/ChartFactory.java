@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------
  * ChartFactory.java
  * -----------------
- * (C) Copyright 2001-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2001-2017, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Serge V. Grachov;
@@ -422,10 +422,10 @@ public abstract class ChartFactory {
 
             if (oldValue == null) {
                 if (greenForIncrease) {
-                    plot.setSectionPaint(key, Color.green);
+                    plot.setSectionPaint(key, Color.GREEN);
                 }
                 else {
-                    plot.setSectionPaint(key, Color.red);
+                    plot.setSectionPaint(key, Color.RED);
                 }
                 if (showDifference) {
                     assert series != null; // suppresses compiler warning
@@ -543,10 +543,10 @@ public abstract class ChartFactory {
 
             if (oldValue == null) {
                 if (greenForIncrease) {
-                    plot.setSectionPaint(key, Color.green);
+                    plot.setSectionPaint(key, Color.GREEN);
                 }
                 else {
-                    plot.setSectionPaint(key, Color.red);
+                    plot.setSectionPaint(key, Color.RED);
                 }
                 if (showDifference) {
                     assert series != null; // suppresses compiler warning
@@ -1596,7 +1596,7 @@ public abstract class ChartFactory {
                 renderer);
         plot.clearRangeMarkers();
         Marker baseline = new ValueMarker(0.0);
-        baseline.setPaint(Color.black);
+        baseline.setPaint(Color.BLACK);
         plot.addRangeMarker(baseline, Layer.FOREGROUND);
         plot.setOrientation(orientation);
         JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
