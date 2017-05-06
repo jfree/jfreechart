@@ -95,11 +95,11 @@ public class DialPlotTest implements PlotChangeListener {
 
         // dial cap
         DialCap cap1 = new DialCap();
-        cap1.setFillPaint(Color.red);
+        cap1.setFillPaint(Color.RED);
         p1.setCap(cap1);
         assertFalse(p1.equals(p2));
         DialCap cap2 = new DialCap();
-        cap2.setFillPaint(Color.red);
+        cap2.setFillPaint(Color.RED);
         p2.setCap(cap2);
         assertTrue(p1.equals(p2));
 
@@ -110,13 +110,13 @@ public class DialPlotTest implements PlotChangeListener {
 
         // frame
         StandardDialFrame f1 = new StandardDialFrame();
-        f1.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.red, 3.0f,
-                4.0f, Color.white));
+        f1.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f,
+                4.0f, Color.WHITE));
         p1.setDialFrame(f1);
         assertFalse(p1.equals(p2));
         StandardDialFrame f2 = new StandardDialFrame();
-        f2.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.red, 3.0f,
-                4.0f, Color.white));
+        f2.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f,
+                4.0f, Color.WHITE));
         p2.setDialFrame(f2);
         assertTrue(p1.equals(p2));
 
@@ -175,19 +175,19 @@ public class DialPlotTest implements PlotChangeListener {
     @Test
     public void testBackgroundListener() {
         DialPlot p = new DialPlot();
-        DialBackground b1 = new DialBackground(Color.red);
+        DialBackground b1 = new DialBackground(Color.RED);
         p.setBackground(b1);
         p.addChangeListener(this);
         this.lastEvent = null;
-        b1.setPaint(Color.blue);
+        b1.setPaint(Color.BLUE);
         assertNotNull(this.lastEvent);
 
         DialBackground b2 = new DialBackground(Color.green);
         p.setBackground(b2);
         this.lastEvent = null;
-        b1.setPaint(Color.red);
+        b1.setPaint(Color.RED);
         assertNull(this.lastEvent);
-        b2.setPaint(Color.red);
+        b2.setPaint(Color.RED);
         assertNotNull(this.lastEvent);
     }
 
@@ -201,13 +201,13 @@ public class DialPlotTest implements PlotChangeListener {
         p.setCap(c1);
         p.addChangeListener(this);
         this.lastEvent = null;
-        c1.setFillPaint(Color.red);
+        c1.setFillPaint(Color.RED);
         assertNotNull(this.lastEvent);
 
         DialCap c2 = new DialCap();
         p.setCap(c2);
         this.lastEvent = null;
-        c1.setFillPaint(Color.blue);
+        c1.setFillPaint(Color.BLUE);
         assertNull(this.lastEvent);
         c2.setFillPaint(Color.green);
         assertNotNull(this.lastEvent);
@@ -229,7 +229,7 @@ public class DialPlotTest implements PlotChangeListener {
         ArcDialFrame f2 = new ArcDialFrame();
         p.setDialFrame(f2);
         this.lastEvent = null;
-        f1.setBackgroundPaint(Color.blue);
+        f1.setBackgroundPaint(Color.BLUE);
         assertNull(this.lastEvent);
         f2.setBackgroundPaint(Color.green);
         assertNotNull(this.lastEvent);
@@ -263,24 +263,24 @@ public class DialPlotTest implements PlotChangeListener {
     @Test
     public void testLayerListener() {
         DialPlot p = new DialPlot();
-        DialBackground b1 = new DialBackground(Color.red);
+        DialBackground b1 = new DialBackground(Color.RED);
         p.addLayer(b1);
         p.addChangeListener(this);
         this.lastEvent = null;
-        b1.setPaint(Color.blue);
+        b1.setPaint(Color.BLUE);
         assertNotNull(this.lastEvent);
 
         DialBackground b2 = new DialBackground(Color.green);
         p.addLayer(b2);
         this.lastEvent = null;
-        b1.setPaint(Color.red);
+        b1.setPaint(Color.RED);
         assertNotNull(this.lastEvent);
         b2.setPaint(Color.green);
         assertNotNull(this.lastEvent);
 
         p.removeLayer(b2);
         this.lastEvent = null;
-        b2.setPaint(Color.red);
+        b2.setPaint(Color.RED);
         assertNull(this.lastEvent);
     }
 

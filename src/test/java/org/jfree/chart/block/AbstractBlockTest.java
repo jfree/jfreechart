@@ -78,9 +78,9 @@ public class AbstractBlockTest{
         b2.setMargin(new RectangleInsets(1.0, 2.0, 3.0, 4.0));
         assertTrue(b1.equals(b2));
 
-        b1.setFrame(new BlockBorder(Color.red));
+        b1.setFrame(new BlockBorder(Color.RED));
         assertFalse(b1.equals(b2));
-        b2.setFrame(new BlockBorder(Color.red));
+        b2.setFrame(new BlockBorder(Color.RED));
         assertTrue(b1.equals(b2));
 
         b1.setPadding(new RectangleInsets(2.0, 4.0, 6.0, 8.0));

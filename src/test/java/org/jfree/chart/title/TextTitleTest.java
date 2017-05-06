@@ -87,19 +87,19 @@ public class TextTitleTest {
         assertTrue(t1.equals(t2));
 
         // paint
-        t1.setPaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.blue));
+        t1.setPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.BLUE));
         assertFalse(t1.equals(t2));
-        t2.setPaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.blue));
+        t2.setPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.BLUE));
         assertTrue(t1.equals(t2));
 
         // backgroundPaint
-        t1.setBackgroundPaint(new GradientPaint(4.0f, 3.0f, Color.red,
-                2.0f, 1.0f, Color.blue));
+        t1.setBackgroundPaint(new GradientPaint(4.0f, 3.0f, Color.RED,
+                2.0f, 1.0f, Color.BLUE));
         assertFalse(t1.equals(t2));
-        t2.setBackgroundPaint(new GradientPaint(4.0f, 3.0f, Color.red,
-                2.0f, 1.0f, Color.blue));
+        t2.setBackgroundPaint(new GradientPaint(4.0f, 3.0f, Color.RED,
+                2.0f, 1.0f, Color.BLUE));
         assertTrue(t1.equals(t2));
 
         // maximumLinesToDisplay

@@ -75,14 +75,14 @@ public class DateTitleTest {
         t2.setFont(f);
         assertTrue(t1.equals(t2));
 
-        t1.setPaint(Color.blue);
+        t1.setPaint(Color.BLUE);
         assertFalse(t1.equals(t2));
-        t2.setPaint(Color.blue);
+        t2.setPaint(Color.BLUE);
         assertTrue(t1.equals(t2));
 
-        t1.setBackgroundPaint(Color.blue);
+        t1.setBackgroundPaint(Color.BLUE);
         assertFalse(t1.equals(t2));
-        t2.setBackgroundPaint(Color.blue);
+        t2.setBackgroundPaint(Color.BLUE);
         assertTrue(t1.equals(t2));
 
     }

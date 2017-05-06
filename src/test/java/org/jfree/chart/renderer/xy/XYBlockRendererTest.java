@@ -127,10 +127,10 @@ public class XYBlockRendererTest {
         assertTrue(r1.equals(r2));
 
         // check independence
-        scale1.add(0.5, Color.red);
+        scale1.add(0.5, Color.RED);
         assertFalse(r1.equals(r2));
         LookupPaintScale scale2 = (LookupPaintScale) r2.getPaintScale();
-        scale2.add(0.5, Color.red);
+        scale2.add(0.5, Color.RED);
         assertTrue(r1.equals(r2));
     }
 

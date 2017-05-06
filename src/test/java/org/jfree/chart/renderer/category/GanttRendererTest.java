@@ -68,9 +68,9 @@ public class GanttRendererTest {
         GanttRenderer r2 = new GanttRenderer();
         assertEquals(r1, r2);
 
-        r1.setCompletePaint(Color.yellow);
+        r1.setCompletePaint(Color.YELLOW);
         assertFalse(r1.equals(r2));
-        r2.setCompletePaint(Color.yellow);
+        r2.setCompletePaint(Color.YELLOW);
         assertTrue(r1.equals(r2));
 
         r1.setIncompletePaint(Color.green);
@@ -129,10 +129,10 @@ public class GanttRendererTest {
     @Test
     public void testSerialization() {
         GanttRenderer r1 = new GanttRenderer();
-        r1.setCompletePaint(new GradientPaint(1.0f, 2.0f, Color.red, 3.0f,
-                4.0f, Color.blue));
-        r1.setIncompletePaint(new GradientPaint(4.0f, 3.0f, Color.red, 2.0f,
-                1.0f, Color.blue));
+        r1.setCompletePaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f,
+                4.0f, Color.BLUE));
+        r1.setIncompletePaint(new GradientPaint(4.0f, 3.0f, Color.RED, 2.0f,
+                1.0f, Color.BLUE));
         GanttRenderer r2 = (GanttRenderer) TestUtilities.serialised(r1);
         assertEquals(r1, r2);
     }

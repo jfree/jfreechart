@@ -78,9 +78,9 @@ public class StatisticalLineAndShapeRendererTest {
         assertTrue(r1.equals(r2));
         assertTrue(r2.equals(r1));
 
-        r1.setErrorIndicatorPaint(Color.red);
+        r1.setErrorIndicatorPaint(Color.RED);
         assertFalse(r1.equals(r2));
-        r2.setErrorIndicatorPaint(Color.red);
+        r2.setErrorIndicatorPaint(Color.RED);
         assertTrue(r2.equals(r1));
     }
 

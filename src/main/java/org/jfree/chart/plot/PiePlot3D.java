@@ -304,9 +304,9 @@ public class PiePlot3D extends PiePlot implements Serializable {
         state.setLinkArea(linkAreaXX);
 
         if (DEBUG_DRAW_LINK_AREA) {
-            g2.setPaint(Color.blue);
+            g2.setPaint(Color.BLUE);
             g2.draw(linkAreaXX);
-            g2.setPaint(Color.yellow);
+            g2.setPaint(Color.YELLOW);
             g2.draw(new Ellipse2D.Double(linkAreaXX.getX(), linkAreaXX.getY(),
                     linkAreaXX.getWidth(), linkAreaXX.getHeight()));
         }

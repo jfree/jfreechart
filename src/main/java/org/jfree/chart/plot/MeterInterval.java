@@ -88,7 +88,7 @@ public class MeterInterval implements Serializable {
      * @param range  the range ({@code null} not permitted).
      */
     public MeterInterval(String label, Range range) {
-        this(label, range, Color.yellow, new BasicStroke(2.0f), null);
+        this(label, range, Color.YELLOW, new BasicStroke(2.0f), null);
     }
 
     /**

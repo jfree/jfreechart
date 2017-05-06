@@ -78,9 +78,9 @@ public class StatisticalBarRendererTest {
         StatisticalBarRenderer r2 = new StatisticalBarRenderer();
         assertEquals(r1, r2);
 
-        r1.setErrorIndicatorPaint(Color.red);
+        r1.setErrorIndicatorPaint(Color.RED);
         assertFalse(r1.equals(r2));
-        r2.setErrorIndicatorPaint(Color.red);
+        r2.setErrorIndicatorPaint(Color.RED);
         assertTrue(r2.equals(r1));
 
         r1.setErrorIndicatorStroke(new BasicStroke(1.5f));

@@ -155,9 +155,9 @@ public class BarRendererTest {
         r2.setShadowVisible(false);
         assertTrue(r1.equals(r2));
 
-        r1.setShadowPaint(Color.red);
+        r1.setShadowPaint(Color.RED);
         assertFalse(r1.equals(r2));
-        r2.setShadowPaint(Color.red);
+        r2.setShadowPaint(Color.RED);
         assertTrue(r1.equals(r2));
 
         // shadowXOffset
@@ -231,7 +231,7 @@ public class BarRendererTest {
         r1.addChangeListener(detector);
 
         detector.setNotified(false);
-        r1.setDefaultPaint(Color.red);
+        r1.setDefaultPaint(Color.RED);
         assertTrue(detector.getNotified());
 
     }

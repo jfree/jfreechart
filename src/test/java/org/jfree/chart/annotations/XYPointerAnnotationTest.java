@@ -126,9 +126,9 @@ public class XYPointerAnnotationTest {
         assertTrue(a1.equals(a2));
 
         //private Paint arrowPaint;
-        a1.setArrowPaint(Color.blue);
+        a1.setArrowPaint(Color.BLUE);
         assertFalse(a1.equals(a2));
-        a2.setArrowPaint(Color.blue);
+        a2.setArrowPaint(Color.BLUE);
         assertTrue(a1.equals(a2));
 
         //private double labelOffset;

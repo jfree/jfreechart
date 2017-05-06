@@ -149,9 +149,9 @@ public class PeriodAxisTest implements AxisChangeListener {
         a2.setMinorTickMarkStroke(s);
         assertTrue(a1.equals(a2));
 
-        a1.setMinorTickMarkPaint(Color.blue);
+        a1.setMinorTickMarkPaint(Color.BLUE);
         assertFalse(a1.equals(a2));
-        a2.setMinorTickMarkPaint(Color.blue);
+        a2.setMinorTickMarkPaint(Color.BLUE);
         assertTrue(a1.equals(a2));
     }
 

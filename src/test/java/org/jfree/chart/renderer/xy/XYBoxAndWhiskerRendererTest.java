@@ -79,10 +79,10 @@ public class XYBoxAndWhiskerRendererTest {
         assertEquals(r1, r2);
 
         r1.setArtifactPaint(new GradientPaint(1.0f, 2.0f, Color.green,
-                3.0f, 4.0f, Color.red));
+                3.0f, 4.0f, Color.RED));
         assertFalse(r1.equals(r2));
         r2.setArtifactPaint(new GradientPaint(1.0f, 2.0f, Color.green,
-                3.0f, 4.0f, Color.red));
+                3.0f, 4.0f, Color.RED));
         assertEquals(r1, r2);
 
         r1.setBoxWidth(0.55);
@@ -95,9 +95,9 @@ public class XYBoxAndWhiskerRendererTest {
         r2.setFillBox(!r2.getFillBox());
         assertEquals(r1, r2);
 
-        r1.setBoxPaint(Color.yellow);
+        r1.setBoxPaint(Color.YELLOW);
         assertFalse(r1.equals(r2));
-        r2.setBoxPaint(Color.yellow);
+        r2.setBoxPaint(Color.YELLOW);
         assertEquals(r1, r2);
 
         // check boxPaint null also

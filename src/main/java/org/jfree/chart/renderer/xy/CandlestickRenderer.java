@@ -243,7 +243,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
         this.drawVolume = drawVolume;
         this.volumePaint = Color.gray;
         this.upPaint = Color.green;
-        this.downPaint = Color.red;
+        this.downPaint = Color.RED;
         this.useOutlinePaint = false;  // false preserves the old behaviour
                                        // prior to introducing this flag
     }

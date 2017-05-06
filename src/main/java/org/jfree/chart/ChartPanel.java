@@ -756,7 +756,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         this.ownToolTipReshowDelay = ttm.getReshowDelay();
 
         this.zoomAroundAnchor = false;
-        this.zoomOutlinePaint = Color.blue;
+        this.zoomOutlinePaint = Color.BLUE;
         this.zoomFillPaint = new Color(0, 0, 255, 63);
 
         this.panMask = InputEvent.CTRL_MASK;

@@ -122,17 +122,17 @@ public class CategoryAxisTest {
         assertTrue(a1.equals(a2));
 
         // tickLabelPaint
-        a1.setTickLabelPaint("C1", Color.red);
+        a1.setTickLabelPaint("C1", Color.RED);
         assertFalse(a1.equals(a2));
-        a2.setTickLabelPaint("C1", Color.red);
+        a2.setTickLabelPaint("C1", Color.RED);
         assertTrue(a1.equals(a2));
 
         // tickLabelPaint2
-        a1.setTickLabelPaint("C1", new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.yellow));
+        a1.setTickLabelPaint("C1", new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.YELLOW));
         assertFalse(a1.equals(a2));
-        a2.setTickLabelPaint("C1", new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.yellow));
+        a2.setTickLabelPaint("C1", new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.YELLOW));
         assertTrue(a1.equals(a2));
 
     }
@@ -170,8 +170,8 @@ public class CategoryAxisTest {
     public void testCloning2() throws CloneNotSupportedException {
         CategoryAxis a1 = new CategoryAxis("Test");
         a1.setTickLabelFont("C1", new Font("Dialog", Font.PLAIN, 15));
-        a1.setTickLabelPaint("C1", new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.white));
+        a1.setTickLabelPaint("C1", new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.WHITE));
         CategoryAxis a2 = (CategoryAxis) a1.clone();
         assertTrue(a1 != a2);
         assertTrue(a1.getClass() == a2.getClass());
@@ -184,9 +184,9 @@ public class CategoryAxisTest {
         assertTrue(a1.equals(a2));
 
         // check that changing a tick label paint in a1 doesn't change a2
-        a1.setTickLabelPaint("C1", Color.yellow);
+        a1.setTickLabelPaint("C1", Color.YELLOW);
         assertFalse(a1.equals(a2));
-        a2.setTickLabelPaint("C1", Color.yellow);
+        a2.setTickLabelPaint("C1", Color.YELLOW);
         assertTrue(a1.equals(a2));
 
         // check that changing a category label tooltip in a1 doesn't change a2
@@ -202,8 +202,8 @@ public class CategoryAxisTest {
     @Test
     public void testSerialization() {
         CategoryAxis a1 = new CategoryAxis("Test Axis");
-        a1.setTickLabelPaint("C1", new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.white));
+        a1.setTickLabelPaint("C1", new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.WHITE));
         CategoryAxis a2 = (CategoryAxis) TestUtilities.serialised(a1);
         assertEquals(a1, a2);
     }

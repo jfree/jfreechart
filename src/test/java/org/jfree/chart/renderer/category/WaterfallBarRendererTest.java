@@ -128,9 +128,9 @@ public class WaterfallBarRendererTest {
         assertTrue(r1.equals(r2));
 
         // quick check for independence
-        r1.setFirstBarPaint(Color.yellow);
+        r1.setFirstBarPaint(Color.YELLOW);
         assertFalse(r1.equals(r2));
-        r2.setFirstBarPaint(Color.yellow);
+        r2.setFirstBarPaint(Color.YELLOW);
         assertTrue(r1.equals(r2));
 
     }
@@ -163,8 +163,8 @@ public class WaterfallBarRendererTest {
 // public void testGetSeriesPaintForDifferentValues() {
 //Color firstPaint = Color.cyan;
 //Color positivePaint = Color.green;
-//Color negativePaint = Color.red;
-//Color lastPaint = Color.blue;
+//Color negativePaint = Color.RED;
+//Color lastPaint = Color.BLUE;
 //WaterfallBarRenderer waterfallBarRenderer = new WaterfallBarRenderer(firstPaint, positivePaint, negativePaint, lastPaint);
 //
 //// Sets of tests for making sure the correct paint object is returned

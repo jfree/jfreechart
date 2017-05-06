@@ -88,9 +88,9 @@ public class SubCategoryAxisTest {
         assertTrue(a1.equals(a2));
 
         // subLabelPaint
-        a1.setSubLabelPaint(Color.red);
+        a1.setSubLabelPaint(Color.RED);
         assertFalse(a1.equals(a2));
-        a2.setSubLabelPaint(Color.red);
+        a2.setSubLabelPaint(Color.RED);
         assertTrue(a1.equals(a2));
     }
 

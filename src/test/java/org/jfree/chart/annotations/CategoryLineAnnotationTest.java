@@ -66,9 +66,9 @@ public class CategoryLineAnnotationTest {
         BasicStroke s1 = new BasicStroke(1.0f);
         BasicStroke s2 = new BasicStroke(2.0f);
         CategoryLineAnnotation a1 = new CategoryLineAnnotation("Category 1",
-                1.0, "Category 2", 2.0, Color.red, s1);
+                1.0, "Category 2", 2.0, Color.RED, s1);
         CategoryLineAnnotation a2 = new CategoryLineAnnotation("Category 1",
-                1.0, "Category 2", 2.0, Color.red, s1);
+                1.0, "Category 2", 2.0, Color.RED, s1);
         assertTrue(a1.equals(a2));
         assertTrue(a2.equals(a1));
 
@@ -97,9 +97,9 @@ public class CategoryLineAnnotationTest {
         assertTrue(a1.equals(a2));
 
         // paint
-        a1.setPaint(Color.yellow);
+        a1.setPaint(Color.YELLOW);
         assertFalse(a1.equals(a2));
-        a2.setPaint(Color.yellow);
+        a2.setPaint(Color.YELLOW);
         assertTrue(a1.equals(a2));
 
         // stroke
@@ -115,9 +115,9 @@ public class CategoryLineAnnotationTest {
     @Test
     public void testHashcode() {
         CategoryLineAnnotation a1 = new CategoryLineAnnotation("Category 1", 
-                1.0, "Category 2", 2.0, Color.red, new BasicStroke(1.0f));
+                1.0, "Category 2", 2.0, Color.RED, new BasicStroke(1.0f));
         CategoryLineAnnotation a2 = new CategoryLineAnnotation("Category 1", 
-                1.0, "Category 2", 2.0, Color.red, new BasicStroke(1.0f));
+                1.0, "Category 2", 2.0, Color.RED, new BasicStroke(1.0f));
         assertTrue(a1.equals(a2));
         int h1 = a1.hashCode();
         int h2 = a2.hashCode();
@@ -130,7 +130,7 @@ public class CategoryLineAnnotationTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         CategoryLineAnnotation a1 = new CategoryLineAnnotation("Category 1", 
-                1.0, "Category 2", 2.0, Color.red, new BasicStroke(1.0f));
+                1.0, "Category 2", 2.0, Color.RED, new BasicStroke(1.0f));
         CategoryLineAnnotation a2 = (CategoryLineAnnotation) a1.clone();
         assertTrue(a1 != a2);
         assertTrue(a1.getClass() == a2.getClass());
@@ -143,7 +143,7 @@ public class CategoryLineAnnotationTest {
     @Test
     public void testPublicCloneable() {
         CategoryLineAnnotation a1 = new CategoryLineAnnotation(
-                "Category 1", 1.0, "Category 2", 2.0, Color.red,
+                "Category 1", 1.0, "Category 2", 2.0, Color.RED,
                 new BasicStroke(1.0f));
         assertTrue(a1 instanceof PublicCloneable);
     }
@@ -154,7 +154,7 @@ public class CategoryLineAnnotationTest {
     @Test
     public void testSerialization() {
         CategoryLineAnnotation a1 = new CategoryLineAnnotation("Category 1", 
-                1.0, "Category 2", 2.0, Color.red, new BasicStroke(1.0f));
+                1.0, "Category 2", 2.0, Color.RED, new BasicStroke(1.0f));
         CategoryLineAnnotation a2 = (CategoryLineAnnotation) TestUtilities.serialised(a1);
         assertEquals(a1, a2);
     }

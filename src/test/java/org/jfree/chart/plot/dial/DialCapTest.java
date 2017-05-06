@@ -73,17 +73,17 @@ public class DialCapTest {
         assertTrue(c1.equals(c2));
 
         // fill paint
-        c1.setFillPaint(new GradientPaint(1.0f, 2.0f, Color.blue,
+        c1.setFillPaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
                 3.0f, 4.0f, Color.green));
         assertFalse(c1.equals(c2));
-        c2.setFillPaint(new GradientPaint(1.0f, 2.0f, Color.blue,
+        c2.setFillPaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
                 3.0f, 4.0f, Color.green));
 
         // outline paint
-        c1.setOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.white,
+        c1.setOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.WHITE,
                 3.0f, 4.0f, Color.gray));
         assertFalse(c1.equals(c2));
-        c2.setOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.white,
+        c2.setOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.WHITE,
                 3.0f, 4.0f, Color.gray));
 
         assertTrue(c1.equals(c2));
@@ -129,9 +129,9 @@ public class DialCapTest {
 
         // test a customised instance
         c1 = new DialCap();
-        c1.setFillPaint(new GradientPaint(1.0f, 2.0f, Color.blue,
+        c1.setFillPaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
                 3.0f, 4.0f, Color.green));
-        c1.setOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.white,
+        c1.setOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.WHITE,
                 3.0f, 4.0f, Color.gray));
         c1.setOutlineStroke(new BasicStroke(2.0f));
         c2 = (DialCap) c1.clone();
@@ -159,9 +159,9 @@ public class DialCapTest {
 
         // test a custom instance
         c1 = new DialCap();
-        c1.setFillPaint(new GradientPaint(1.0f, 2.0f, Color.blue,
+        c1.setFillPaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
                 3.0f, 4.0f, Color.green));
-        c1.setOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.white,
+        c1.setOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.WHITE,
                 3.0f, 4.0f, Color.gray));
         c1.setOutlineStroke(new BasicStroke(2.0f));
 

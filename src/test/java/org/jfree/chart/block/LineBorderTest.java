@@ -63,31 +63,31 @@ public class LineBorderTest {
      */
     @Test
     public void testEquals() {
-        LineBorder b1 = new LineBorder(Color.red, new BasicStroke(1.0f),
+        LineBorder b1 = new LineBorder(Color.RED, new BasicStroke(1.0f),
                 new RectangleInsets(1.0, 1.0, 1.0, 1.0));
-        LineBorder b2 = new LineBorder(Color.red, new BasicStroke(1.0f),
+        LineBorder b2 = new LineBorder(Color.RED, new BasicStroke(1.0f),
                 new RectangleInsets(1.0, 1.0, 1.0, 1.0));
         assertTrue(b1.equals(b2));
         assertTrue(b2.equals(b2));
 
-        b1 = new LineBorder(Color.blue, new BasicStroke(1.0f),
+        b1 = new LineBorder(Color.BLUE, new BasicStroke(1.0f),
                 new RectangleInsets(1.0, 1.0, 1.0, 1.0));
         assertFalse(b1.equals(b2));
-        b2 = new LineBorder(Color.blue, new BasicStroke(1.0f),
+        b2 = new LineBorder(Color.BLUE, new BasicStroke(1.0f),
                 new RectangleInsets(1.0, 1.0, 1.0, 1.0));
         assertTrue(b1.equals(b2));
 
-        b1 = new LineBorder(Color.blue, new BasicStroke(1.1f),
+        b1 = new LineBorder(Color.BLUE, new BasicStroke(1.1f),
                 new RectangleInsets(1.0, 1.0, 1.0, 1.0));
         assertFalse(b1.equals(b2));
-        b2 = new LineBorder(Color.blue, new BasicStroke(1.1f),
+        b2 = new LineBorder(Color.BLUE, new BasicStroke(1.1f),
                 new RectangleInsets(1.0, 1.0, 1.0, 1.0));
         assertTrue(b1.equals(b2));
 
-        b1 = new LineBorder(Color.blue, new BasicStroke(1.1f),
+        b1 = new LineBorder(Color.BLUE, new BasicStroke(1.1f),
                 new RectangleInsets(1.0, 2.0, 3.0, 4.0));
         assertFalse(b1.equals(b2));
-        b2 = new LineBorder(Color.blue, new BasicStroke(1.1f),
+        b2 = new LineBorder(Color.BLUE, new BasicStroke(1.1f),
                 new RectangleInsets(1.0, 2.0, 3.0, 4.0));
         assertTrue(b1.equals(b2));
 
@@ -107,8 +107,8 @@ public class LineBorderTest {
      */
     @Test
     public void testSerialization() {
-        LineBorder b1 = new LineBorder(new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.yellow), new BasicStroke(1.0f),
+        LineBorder b1 = new LineBorder(new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.YELLOW), new BasicStroke(1.0f),
                 new RectangleInsets(1.0, 1.0, 1.0, 1.0));
         LineBorder b2 = (LineBorder) TestUtilities.serialised(b1);
         assertEquals(b1, b2);

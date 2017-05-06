@@ -67,19 +67,19 @@ public class ArcDialFrameTest {
         assertTrue(f1.equals(f2));
 
         // background paint
-        f1.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.yellow));
+        f1.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.YELLOW));
         assertFalse(f1.equals(f2));
-        f2.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.yellow));
+        f2.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.YELLOW));
         assertTrue(f1.equals(f2));
 
         // foreground paint
-        f1.setForegroundPaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.yellow));
+        f1.setForegroundPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.YELLOW));
         assertFalse(f1.equals(f2));
-        f2.setForegroundPaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.yellow));
+        f2.setForegroundPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.YELLOW));
         assertTrue(f1.equals(f2));
 
         // stroke

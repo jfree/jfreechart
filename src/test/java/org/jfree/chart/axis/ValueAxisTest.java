@@ -122,9 +122,9 @@ public class ValueAxisTest {
         //private Shape rightArrow;
 
         // axisLinePaint
-        a1.setAxisLinePaint(Color.blue);
+        a1.setAxisLinePaint(Color.BLUE);
         assertFalse(a1.equals(a2));
-        a2.setAxisLinePaint(Color.blue);
+        a2.setAxisLinePaint(Color.BLUE);
         assertTrue(a1.equals(a2));
 
         // axisLineStroke
