@@ -66,7 +66,7 @@ import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.util.ParamChecks;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.Range;
-import org.jfree.data.general.DatasetUtilities;
+import org.jfree.data.general.DatasetUtils;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYZDataset;
 
@@ -293,7 +293,7 @@ public class XYBlockRenderer extends AbstractXYItemRenderer
         if (dataset == null) {
             return null;
         }
-        Range r = DatasetUtilities.findDomainBounds(dataset, false);
+        Range r = DatasetUtils.findDomainBounds(dataset, false);
         if (r == null) {
             return null;
         }
@@ -315,7 +315,7 @@ public class XYBlockRenderer extends AbstractXYItemRenderer
     @Override
     public Range findRangeBounds(XYDataset dataset) {
         if (dataset != null) {
-            Range r = DatasetUtilities.findRangeBounds(dataset, false);
+            Range r = DatasetUtils.findRangeBounds(dataset, false);
             if (r == null) {
                 return null;
             }

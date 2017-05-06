@@ -55,7 +55,7 @@ import org.jfree.chart.renderer.category.CategoryItemRenderer;
 import org.jfree.chart.urls.CategoryURLGenerator;
 import org.jfree.chart.urls.StandardCategoryURLGenerator;
 import org.jfree.data.category.CategoryDataset;
-import org.jfree.data.general.DatasetUtilities;
+import org.jfree.data.general.DatasetUtils;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -135,7 +135,7 @@ public class WaterfallChartTest {
              {new Integer(-1), new Integer(1)},
              {new Integer(2), new Integer(3)}};
 
-        CategoryDataset dataset = DatasetUtilities.createCategoryDataset("S",
+        CategoryDataset dataset = DatasetUtils.createCategoryDataset("S",
                 "C", data);
         return ChartFactory.createWaterfallChart(
             "Waterfall Chart",

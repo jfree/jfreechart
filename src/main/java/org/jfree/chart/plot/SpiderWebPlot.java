@@ -117,7 +117,7 @@ import org.jfree.chart.util.StrokeList;
 import org.jfree.chart.util.TableOrder;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.general.DatasetChangeEvent;
-import org.jfree.data.general.DatasetUtilities;
+import org.jfree.data.general.DatasetUtils;
 
 /**
  * A plot that displays data from a {@link CategoryDataset} in the form of a
@@ -1146,7 +1146,7 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,
                 getForegroundAlpha()));
 
-        if (!DatasetUtilities.isEmptyOrNull(this.dataset)) {
+        if (!DatasetUtils.isEmptyOrNull(this.dataset)) {
             int seriesCount, catCount;
 
             if (this.dataExtractOrder == TableOrder.BY_ROW) {

@@ -54,7 +54,7 @@ import org.jfree.data.DefaultKeyedValues2D;
 import org.jfree.data.DomainInfo;
 import org.jfree.data.Range;
 import org.jfree.data.general.DatasetChangeEvent;
-import org.jfree.data.general.DatasetUtilities;
+import org.jfree.data.general.DatasetUtils;
 
 /**
  * An implementation variant of the {@link TableXYDataset} where every series
@@ -317,7 +317,7 @@ public class CategoryTableXYDataset extends AbstractIntervalXYDataset
             return this.intervalDelegate.getDomainBounds(includeInterval);
         }
         else {
-            return DatasetUtilities.iterateDomainBounds(this, includeInterval);
+            return DatasetUtils.iterateDomainBounds(this, includeInterval);
         }
     }
 

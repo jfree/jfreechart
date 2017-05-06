@@ -41,7 +41,7 @@
 
 package org.jfree.chart.plot;
 
-import org.jfree.data.general.DatasetUtilities;
+import org.jfree.data.general.DatasetUtils;
 import org.jfree.data.xy.XYDataset;
 
 /**
@@ -65,7 +65,7 @@ public class PlotUtilities {
         if (plot != null) {
             for (int i = 0, n = plot.getDatasetCount(); i < n; i++) {
                 final XYDataset dataset = plot.getDataset(i);
-                if (!DatasetUtilities.isEmptyOrNull(dataset)) {
+                if (!DatasetUtils.isEmptyOrNull(dataset)) {
                     return false;
                 }
             }

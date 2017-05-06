@@ -256,7 +256,7 @@ import org.jfree.chart.util.SortOrder;
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.general.DatasetChangeEvent;
-import org.jfree.data.general.DatasetUtilities;
+import org.jfree.data.general.DatasetUtils;
 
 /**
  * A general plotting class that uses data from a {@link CategoryDataset} and
@@ -3875,7 +3875,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
         CategoryItemRenderer renderer = getRenderer(index);
         CategoryAxis domainAxis = getDomainAxisForDataset(index);
         ValueAxis rangeAxis = getRangeAxisForDataset(index);
-        boolean hasData = !DatasetUtilities.isEmptyOrNull(currentDataset);
+        boolean hasData = !DatasetUtils.isEmptyOrNull(currentDataset);
         if (hasData && renderer != null) {
 
             foundData = true;

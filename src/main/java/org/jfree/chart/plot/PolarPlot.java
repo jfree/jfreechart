@@ -115,7 +115,7 @@ import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.Range;
 import org.jfree.data.general.Dataset;
 import org.jfree.data.general.DatasetChangeEvent;
-import org.jfree.data.general.DatasetUtilities;
+import org.jfree.data.general.DatasetUtils;
 import org.jfree.data.xy.XYDataset;
 
 /**
@@ -1559,7 +1559,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
             if (renderer == null) {
                 continue;
             }
-            if (!DatasetUtilities.isEmptyOrNull(dataset)) {
+            if (!DatasetUtils.isEmptyOrNull(dataset)) {
                 hasData = true;
                 int seriesCount = dataset.getSeriesCount();
                 for (int series = 0; series < seriesCount; series++) {
@@ -1714,7 +1714,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
             if (d != null) {
                 // FIXME better ask the renderer instead of DatasetUtilities
                 result = Range.combine(result,
-                        DatasetUtilities.findRangeBounds(d));
+                        DatasetUtils.findRangeBounds(d));
             }
         }
 

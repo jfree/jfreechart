@@ -302,7 +302,7 @@ import org.jfree.chart.util.SerialUtils;
 import org.jfree.chart.util.ShadowGenerator;
 import org.jfree.data.Range;
 import org.jfree.data.general.DatasetChangeEvent;
-import org.jfree.data.general.DatasetUtilities;
+import org.jfree.data.general.DatasetUtils;
 import org.jfree.data.xy.XYDataset;
 
 /**
@@ -3696,7 +3696,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
 
         boolean foundData = false;
         XYDataset dataset = getDataset(index);
-        if (!DatasetUtilities.isEmptyOrNull(dataset)) {
+        if (!DatasetUtils.isEmptyOrNull(dataset)) {
             foundData = true;
             ValueAxis xAxis = getDomainAxisForDataset(index);
             ValueAxis yAxis = getRangeAxisForDataset(index);
@@ -4464,7 +4464,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
                     }
                     else {
                         result = Range.combine(result,
-                                DatasetUtilities.findDomainBounds(d));
+                                DatasetUtils.findDomainBounds(d));
                     }
                 }
                 else {
@@ -4473,7 +4473,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
                     }
                     else {
                         result = Range.combine(result,
-                                DatasetUtilities.findRangeBounds(d));
+                                DatasetUtils.findRangeBounds(d));
                     }
                 }
                 // FIXME: the XYItemRenderer interface doesn't specify the

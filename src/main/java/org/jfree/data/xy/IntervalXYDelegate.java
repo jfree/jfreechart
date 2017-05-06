@@ -63,7 +63,7 @@ import org.jfree.data.Range;
 import org.jfree.data.RangeInfo;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.DatasetChangeListener;
-import org.jfree.data.general.DatasetUtilities;
+import org.jfree.data.general.DatasetUtils;
 
 /**
  * A delegate that handles the specification or automatic calculation of the
@@ -366,7 +366,7 @@ public class IntervalXYDelegate implements DatasetChangeListener,
     public Range getDomainBounds(boolean includeInterval) {
         // first get the range without the interval, then expand it for the
         // interval width
-        Range range = DatasetUtilities.findDomainBounds(this.dataset, false);
+        Range range = DatasetUtils.findDomainBounds(this.dataset, false);
         if (includeInterval && range != null) {
             double lowerAdj = getIntervalWidth() * getIntervalPositionFactor();
             double upperAdj = getIntervalWidth() - lowerAdj;

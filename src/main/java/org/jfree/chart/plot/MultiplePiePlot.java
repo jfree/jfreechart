@@ -93,7 +93,7 @@ import org.jfree.chart.util.TableOrder;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.CategoryToPieDataset;
 import org.jfree.data.general.DatasetChangeEvent;
-import org.jfree.data.general.DatasetUtilities;
+import org.jfree.data.general.DatasetUtils;
 import org.jfree.data.general.PieDataset;
 
 /**
@@ -395,7 +395,7 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
         drawOutline(g2, area);
 
         // check that there is some data to display...
-        if (DatasetUtilities.isEmptyOrNull(this.dataset)) {
+        if (DatasetUtils.isEmptyOrNull(this.dataset)) {
             drawNoDataMessage(g2, area);
             return;
         }
@@ -449,7 +449,7 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
             PieDataset dd = new CategoryToPieDataset(this.dataset,
                     this.dataExtractOrder, pieIndex);
             if (this.limit > 0.0) {
-                piedataset = DatasetUtilities.createConsolidatedPieDataset(
+                piedataset = DatasetUtils.createConsolidatedPieDataset(
                         dd, this.aggregatedItemsKey, this.limit);
             }
             else {

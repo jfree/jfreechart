@@ -117,7 +117,7 @@ import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.labels.PieToolTipGenerator;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.util.PaintAlpha;
-import org.jfree.data.general.DatasetUtilities;
+import org.jfree.data.general.DatasetUtils;
 import org.jfree.data.general.PieDataset;
 
 /**
@@ -348,7 +348,7 @@ public class PiePlot3D extends PiePlot implements Serializable {
 
         // get the data source - return if null;
         PieDataset dataset = getDataset();
-        if (DatasetUtilities.isEmptyOrNull(getDataset())) {
+        if (DatasetUtils.isEmptyOrNull(getDataset())) {
             drawNoDataMessage(g2, plotArea);
             g2.setClip(savedClip);
             drawOutline(g2, plotArea);
@@ -393,7 +393,7 @@ public class PiePlot3D extends PiePlot implements Serializable {
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,
                 getForegroundAlpha()));
 
-        double totalValue = DatasetUtilities.calculatePieDatasetTotal(dataset);
+        double totalValue = DatasetUtils.calculatePieDatasetTotal(dataset);
         double runningTotal = 0;
         if (depth < 0) {
             return;  // if depth is negative don't draw anything

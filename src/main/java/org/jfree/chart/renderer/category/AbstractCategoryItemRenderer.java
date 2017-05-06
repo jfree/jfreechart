@@ -167,7 +167,7 @@ import org.jfree.chart.util.SortOrder;
 import org.jfree.data.KeyedValues2DItemKey;
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
-import org.jfree.data.general.DatasetUtilities;
+import org.jfree.data.general.DatasetUtils;
 
 /**
  * An abstract base class that you can use to implement a new
@@ -760,11 +760,11 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
                     visibleSeriesKeys.add(dataset.getRowKey(s));
                 }
             }
-            return DatasetUtilities.findRangeBounds(dataset,
+            return DatasetUtils.findRangeBounds(dataset,
                     visibleSeriesKeys, includeInterval);
         }
         else {
-            return DatasetUtilities.findRangeBounds(dataset, includeInterval);
+            return DatasetUtils.findRangeBounds(dataset, includeInterval);
         }
     }
 

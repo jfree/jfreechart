@@ -85,7 +85,7 @@ import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.DataUtilities;
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
-import org.jfree.data.general.DatasetUtilities;
+import org.jfree.data.general.DatasetUtils;
 
 /**
  * A renderer that draws stacked area charts for a {@link CategoryPlot}.
@@ -179,7 +179,7 @@ public class StackedAreaRenderer extends AreaRenderer
             return new Range(0.0, 1.0);
         }
         else {
-            return DatasetUtilities.findStackedRangeBounds(dataset);
+            return DatasetUtils.findStackedRangeBounds(dataset);
         }
     }
 

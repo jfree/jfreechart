@@ -50,11 +50,11 @@ package org.jfree.data;
 
 import java.util.Arrays;
 import org.jfree.chart.util.ParamChecks;
-import org.jfree.data.general.DatasetUtilities;
+import org.jfree.data.general.DatasetUtils;
 
 /**
  * Utility methods for use with some of the data classes (but not the datasets,
- * see {@link DatasetUtilities}).
+ * see {@link DatasetUtils}).
  */
 public abstract class DataUtilities {
 

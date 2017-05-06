@@ -66,7 +66,7 @@ import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.KeyToGroupMap;
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
-import org.jfree.data.general.DatasetUtilities;
+import org.jfree.data.general.DatasetUtils;
 
 /**
  * A renderer that draws stacked bars within groups.  This will probably be
@@ -120,7 +120,7 @@ public class GroupedStackedBarRenderer extends StackedBarRenderer
         if (dataset == null) {
             return null;
         }
-        Range r = DatasetUtilities.findStackedRangeBounds(
+        Range r = DatasetUtils.findStackedRangeBounds(
                 dataset, this.seriesToGroupMap);
         return r;
     }

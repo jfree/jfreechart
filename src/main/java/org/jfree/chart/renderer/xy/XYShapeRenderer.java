@@ -75,7 +75,7 @@ import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.chart.util.ShapeUtils;
 import org.jfree.data.Range;
-import org.jfree.data.general.DatasetUtilities;
+import org.jfree.data.general.DatasetUtils;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYZDataset;
 
@@ -349,7 +349,7 @@ public class XYShapeRenderer extends AbstractXYItemRenderer
         if (dataset == null) {
             return null;
         }
-        Range r = DatasetUtilities.findDomainBounds(dataset, false);
+        Range r = DatasetUtils.findDomainBounds(dataset, false);
         if (r == null) {
             return null;
         }
@@ -372,7 +372,7 @@ public class XYShapeRenderer extends AbstractXYItemRenderer
         if (dataset == null) {
             return null;
         }
-        Range r = DatasetUtilities.findRangeBounds(dataset, false);
+        Range r = DatasetUtils.findRangeBounds(dataset, false);
         if (r == null) {
             return null;
         }
@@ -391,7 +391,7 @@ public class XYShapeRenderer extends AbstractXYItemRenderer
      */
     public Range findZBounds(XYZDataset dataset) {
         if (dataset != null) {
-            return DatasetUtilities.findZBounds(dataset);
+            return DatasetUtils.findZBounds(dataset);
         } else {
             return null;
         }

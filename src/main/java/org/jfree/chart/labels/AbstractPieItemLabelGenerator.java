@@ -51,7 +51,7 @@ import java.text.NumberFormat;
 
 import org.jfree.chart.HashUtils;
 import org.jfree.chart.util.ParamChecks;
-import org.jfree.data.general.DatasetUtilities;
+import org.jfree.data.general.DatasetUtils;
 import org.jfree.data.general.PieDataset;
 
 /**
@@ -136,7 +136,7 @@ public class AbstractPieItemLabelGenerator implements Serializable {
      */
     protected Object[] createItemArray(PieDataset dataset, Comparable key) {
         Object[] result = new Object[4];
-        double total = DatasetUtilities.calculatePieDatasetTotal(dataset);
+        double total = DatasetUtils.calculatePieDatasetTotal(dataset);
         result[0] = key.toString();
         Number value = dataset.getValue(key);
         if (value != null) {

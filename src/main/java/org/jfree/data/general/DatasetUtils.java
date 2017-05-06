@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2015, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ---------------------
- * DatasetUtilities.java
- * ---------------------
- * (C) Copyright 2000-2015, by Object Refinery Limited and Contributors.
+ * -----------------
+ * DatasetUtils.java
+ * -----------------
+ * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Andrzej Porebski (bug fix);
@@ -163,12 +163,12 @@ import org.jfree.data.xy.XYZDataset;
 /**
  * A collection of useful static methods relating to datasets.
  */
-public final class DatasetUtilities {
+public final class DatasetUtils {
 
     /**
      * Private constructor for non-instanceability.
      */
-    private DatasetUtilities() {
+    private DatasetUtils() {
         // now try to instantiate this ;-)
     }
 
@@ -287,7 +287,7 @@ public final class DatasetUtilities {
      */
     public static PieDataset createConsolidatedPieDataset(PieDataset source,
             Comparable key, double minimumPercent) {
-        return DatasetUtilities.createConsolidatedPieDataset(source, key,
+        return DatasetUtils.createConsolidatedPieDataset(source, key,
                 minimumPercent, 2);
     }
 
@@ -310,7 +310,7 @@ public final class DatasetUtilities {
             Comparable key, double minimumPercent, int minItems) {
 
         DefaultPieDataset result = new DefaultPieDataset();
-        double total = DatasetUtilities.calculatePieDatasetTotal(source);
+        double total = DatasetUtils.calculatePieDatasetTotal(source);
 
         //  Iterate and find all keys below threshold percentThreshold
         List keys = source.getKeys();

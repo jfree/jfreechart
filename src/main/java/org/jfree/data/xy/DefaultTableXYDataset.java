@@ -74,7 +74,7 @@ import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.DomainInfo;
 import org.jfree.data.Range;
 import org.jfree.data.general.DatasetChangeEvent;
-import org.jfree.data.general.DatasetUtilities;
+import org.jfree.data.general.DatasetUtils;
 import org.jfree.data.general.SeriesChangeEvent;
 
 /**
@@ -596,7 +596,7 @@ public class DefaultTableXYDataset extends AbstractIntervalXYDataset
             return this.intervalDelegate.getDomainBounds(includeInterval);
         }
         else {
-            return DatasetUtilities.iterateDomainBounds(this, includeInterval);
+            return DatasetUtils.iterateDomainBounds(this, includeInterval);
         }
     }
 

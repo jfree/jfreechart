@@ -236,7 +236,7 @@ import org.jfree.chart.util.UnitType;
 import org.jfree.data.DefaultKeyedValues;
 import org.jfree.data.KeyedValues;
 import org.jfree.data.general.DatasetChangeEvent;
-import org.jfree.data.general.DatasetUtilities;
+import org.jfree.data.general.DatasetUtils;
 import org.jfree.data.general.PieDataset;
 
 /**
@@ -2318,7 +2318,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
         PiePlotState state = new PiePlotState(info);
         state.setPassesRequired(2);
         if (this.dataset != null) {
-            state.setTotal(DatasetUtilities.calculatePieDatasetTotal(
+            state.setTotal(DatasetUtils.calculatePieDatasetTotal(
                     plot.getDataset()));
         }
         state.setLatestAngle(plot.getStartAngle());
@@ -2360,7 +2360,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,
                 getForegroundAlpha()));
 
-        if (!DatasetUtilities.isEmptyOrNull(this.dataset)) {
+        if (!DatasetUtils.isEmptyOrNull(this.dataset)) {
             Graphics2D savedG2 = g2;
             boolean suppressShadow = Boolean.TRUE.equals(g2.getRenderingHint(
                     JFreeChart.KEY_SUPPRESS_SHADOW_GENERATION));
@@ -2498,7 +2498,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
         if ((this.dataset != null) && (this.dataset.getKeys().size() > 0)) {
 
             List keys = this.dataset.getKeys();
-            double totalValue = DatasetUtilities.calculatePieDatasetTotal(
+            double totalValue = DatasetUtils.calculatePieDatasetTotal(
                     this.dataset);
 
             int passesRequired = state.getPassesRequired();

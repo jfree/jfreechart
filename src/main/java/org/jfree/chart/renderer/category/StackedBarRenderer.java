@@ -113,7 +113,7 @@ import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.DataUtilities;
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
-import org.jfree.data.general.DatasetUtilities;
+import org.jfree.data.general.DatasetUtils;
 
 /**
  * A stacked bar renderer for use with the {@link CategoryPlot} class.
@@ -221,7 +221,7 @@ public class StackedBarRenderer extends BarRenderer
             return new Range(0.0, 1.0);
         }
         else {
-            return DatasetUtilities.findStackedRangeBounds(dataset, getBase());
+            return DatasetUtils.findStackedRangeBounds(dataset, getBase());
         }
     }
 

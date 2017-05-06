@@ -188,7 +188,7 @@ import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.ParamChecks;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.Range;
-import org.jfree.data.general.DatasetUtilities;
+import org.jfree.data.general.DatasetUtils;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYItemKey;
 
@@ -727,10 +727,10 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
                     visibleSeriesKeys.add(dataset.getSeriesKey(s));
                 }
             }
-            return DatasetUtilities.findDomainBounds(dataset,
+            return DatasetUtils.findDomainBounds(dataset,
                     visibleSeriesKeys, includeInterval);
         }
-        return DatasetUtilities.findDomainBounds(dataset, includeInterval);
+        return DatasetUtils.findDomainBounds(dataset, includeInterval);
     }
 
     /**
@@ -792,10 +792,10 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
                 xRange = new Range(Double.NEGATIVE_INFINITY,
                         Double.POSITIVE_INFINITY);
             }
-            return DatasetUtilities.findRangeBounds(dataset,
+            return DatasetUtils.findRangeBounds(dataset,
                     visibleSeriesKeys, xRange, includeInterval);
         }
-        return DatasetUtilities.findRangeBounds(dataset, includeInterval);
+        return DatasetUtils.findRangeBounds(dataset, includeInterval);
     }
 
     /**
