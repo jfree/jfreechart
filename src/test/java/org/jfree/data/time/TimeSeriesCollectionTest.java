@@ -304,7 +304,7 @@ public class TimeSeriesCollectionTest {
 
     /**
      * This method provides a check for the bounds calculated using the
-     * {@link DatasetUtilities#findDomainBounds(org.jfree.data.xy.XYDataset,
+     * {@link DatasetUtils#findDomainBounds(org.jfree.data.xy.XYDataset,
      * java.util.List, boolean)} method.
      */
     @Test
