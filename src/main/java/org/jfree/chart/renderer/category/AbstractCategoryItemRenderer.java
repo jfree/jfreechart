@@ -164,7 +164,6 @@ import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.ParamChecks;
 import org.jfree.chart.util.PublicCloneable;
-import org.jfree.chart.util.TextUtils;
 import org.jfree.data.KeyedValues2DItemKey;
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;

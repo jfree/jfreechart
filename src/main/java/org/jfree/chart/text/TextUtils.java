@@ -285,6 +285,33 @@ public class TextUtils {
         return bounds;
     }
 
+
+    /**
+     * Returns the bounds of an aligned string.
+     * 
+     * @param text  the string ({@code null} not permitted).
+     * @param g2  the graphics target ({@code null} not permitted).
+     * @param x  the x-coordinate.
+     * @param y  the y-coordinate.
+     * @param anchor  the anchor point that will be aligned to 
+     *     {@code (x, y)} ({@code null} not permitted).
+     * 
+     * @return The text bounds (never {@code null}).
+     * 
+     * @since 1.3
+     */
+    public static Rectangle2D calcAlignedStringBounds(String text,
+            Graphics2D g2, float x, float y, TextAnchor anchor) {
+
+        Rectangle2D textBounds = new Rectangle2D.Double();
+        float[] adjust = deriveTextBoundsAnchorOffsets(g2, text, anchor,
+                textBounds);
+        // adjust text bounds to match string position
+        textBounds.setRect(x + adjust[0], y + adjust[1] + adjust[2],
+            textBounds.getWidth(), textBounds.getHeight());
+        return textBounds;
+    }
+    
     /**
      * Draws a string such that the specified anchor point is aligned to the
      * given (x, y) location.
@@ -560,7 +587,7 @@ public class TextUtils {
         FontRenderContext frc = g2.getFontRenderContext();
         Font f = g2.getFont();
         FontMetrics fm = g2.getFontMetrics(f);
-        Rectangle2D bounds = TextUtils.getTextBounds(text, g2, fm);
+        Rectangle2D bounds = getTextBounds(text, g2, fm);
         LineMetrics metrics = f.getLineMetrics(text, frc);
         float ascent = metrics.getAscent();
         float halfAscent = ascent / 2.0f;

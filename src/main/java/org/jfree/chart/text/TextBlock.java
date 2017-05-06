@@ -45,7 +45,7 @@ import org.jfree.chart.util.ShapeUtils;
 /**
  * A list of {@link TextLine} objects that form a block of text.
  * 
- * @see TextUtilities#createTextBlock(String, Font, Paint)
+ * @see TextUtils#createTextBlock(String, Font, Paint)
  */
 public class TextBlock implements Serializable {
 
