@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------
  * XYPolygonAnnotation.java
  * ------------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2017, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Peter Kolb (patch 2809117);
@@ -99,7 +99,7 @@ public class XYPolygonAnnotation extends AbstractXYAnnotation
      *     ({@code null} not permitted).
      */
     public XYPolygonAnnotation(double[] polygon) {
-        this(polygon, new BasicStroke(1.0f), Color.black);
+        this(polygon, new BasicStroke(1.0f), Color.BLACK);
     }
 
     /**

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------
  * Axis.java
  * ---------
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Bill Kelemen;
@@ -150,14 +150,14 @@ public abstract class Axis implements Cloneable, Serializable {
             "SansSerif", Font.PLAIN, 12);
 
     /** The default axis label paint. */
-    public static final Paint DEFAULT_AXIS_LABEL_PAINT = Color.black;
+    public static final Paint DEFAULT_AXIS_LABEL_PAINT = Color.BLACK;
 
     /** The default axis label insets. */
     public static final RectangleInsets DEFAULT_AXIS_LABEL_INSETS
             = new RectangleInsets(3.0, 3.0, 3.0, 3.0);
 
     /** The default axis line paint. */
-    public static final Paint DEFAULT_AXIS_LINE_PAINT = Color.gray;
+    public static final Paint DEFAULT_AXIS_LINE_PAINT = Color.GRAY;
 
     /** The default axis line stroke. */
     public static final Stroke DEFAULT_AXIS_LINE_STROKE = new BasicStroke(0.5f);
@@ -170,7 +170,7 @@ public abstract class Axis implements Cloneable, Serializable {
             Font.PLAIN, 10);
 
     /** The default tick label paint. */
-    public static final Paint DEFAULT_TICK_LABEL_PAINT = Color.black;
+    public static final Paint DEFAULT_TICK_LABEL_PAINT = Color.BLACK;
 
     /** The default tick label insets. */
     public static final RectangleInsets DEFAULT_TICK_LABEL_INSETS
@@ -183,7 +183,7 @@ public abstract class Axis implements Cloneable, Serializable {
     public static final Stroke DEFAULT_TICK_MARK_STROKE = new BasicStroke(0.5f);
 
     /** The default tick paint. */
-    public static final Paint DEFAULT_TICK_MARK_PAINT = Color.gray;
+    public static final Paint DEFAULT_TICK_MARK_PAINT = Color.GRAY;
 
     /** The default tick mark inside length. */
     public static final float DEFAULT_TICK_MARK_INSIDE_LENGTH = 0.0f;
