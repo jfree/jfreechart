@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * ExtendedCategoryAxis.java
  * -------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2017, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -91,7 +91,7 @@ public class ExtendedCategoryAxis extends CategoryAxis {
         super(label);
         this.sublabels = new HashMap();
         this.sublabelFont = new Font("SansSerif", Font.PLAIN, 10);
-        this.sublabelPaint = Color.black;
+        this.sublabelPaint = Color.BLACK;
     }
 
     /**

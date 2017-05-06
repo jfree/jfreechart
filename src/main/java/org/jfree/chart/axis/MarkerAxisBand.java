@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -216,7 +216,7 @@ public class MarkerAxisBand implements Serializable {
             g2.draw(r);
             g2.setComposite(originalComposite);
 
-            g2.setPaint(Color.black);
+            g2.setPaint(Color.BLACK);
             drawStringInRect(g2, r, this.font, marker.getLabel());
         }
 
