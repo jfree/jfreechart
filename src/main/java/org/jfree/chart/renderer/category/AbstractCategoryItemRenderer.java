@@ -27,7 +27,7 @@
  * ---------------------------------
  * AbstractCategoryItemRenderer.java
  * ---------------------------------
- * (C) Copyright 2002-2016, by Object Refinery Limited.
+ * (C) Copyright 2002-2017, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Richard Atkinson;
@@ -338,6 +338,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      *
      * @param series  the series index (zero based).
      * @param generator  the generator ({@code null} permitted).
+     * @param notify  notify listeners?
      *
      * @see #getSeriesItemLabelGenerator(int)
      */
@@ -381,6 +382,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param generator  the generator ({@code null} permitted).
+     * @param notify  notify listeners?
      *
      * @see #getDefaultItemLabelGenerator()
      */
@@ -453,6 +455,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      *
      * @param series  the series index (zero-based).
      * @param generator  the generator ({@code null} permitted).
+     * @param notify  notify listeners?
      *
      * @see #getSeriesToolTipGenerator(int)
      */
@@ -564,6 +567,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      *
      * @param series  the series index (zero based).
      * @param generator  the generator.
+     * @param notify  notify listeners?
      *
      * @see #getSeriesItemURLGenerator(int)
      */
@@ -606,6 +610,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param generator  the item URL generator ({@code null} permitted).
+     * @param notify  notify listeners?
      *
      * @see #getDefaultItemURLGenerator()
      */

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2015, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * KeyedValues2DItemKey.java
  * -------------------------
- * (C) Copyright 2014, by Object Refinery Limited.
+ * (C) Copyright 2014-2017, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -49,6 +49,8 @@ import org.jfree.chart.util.ParamChecks;
  * structure.  Instances of this class are immutable (subject to the caller
  * using series, row and column keys that are immutable).
  * 
+ * @param <R> the row key type.
+ * @param <C> the column key type.
  * @since 1.3
  */
 public class KeyedValues2DItemKey<R extends Comparable<R>, 
