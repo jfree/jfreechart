@@ -49,7 +49,7 @@ import java.io.Serializable;
 import java.text.MessageFormat;
 import java.text.NumberFormat;
 
-import org.jfree.chart.HashUtilities;
+import org.jfree.chart.HashUtils;
 import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.general.DatasetUtilities;
 import org.jfree.data.general.PieDataset;
@@ -213,9 +213,9 @@ public class AbstractPieItemLabelGenerator implements Serializable {
     @Override
     public int hashCode() {
         int result = 127;
-        result = HashUtilities.hashCode(result, this.labelFormat);
-        result = HashUtilities.hashCode(result, this.numberFormat);
-        result = HashUtilities.hashCode(result, this.percentFormat);
+        result = HashUtils.hashCode(result, this.labelFormat);
+        result = HashUtils.hashCode(result, this.numberFormat);
+        result = HashUtils.hashCode(result, this.percentFormat);
         return result;
     }
 

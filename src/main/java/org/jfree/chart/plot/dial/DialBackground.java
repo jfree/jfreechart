@@ -52,7 +52,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-import org.jfree.chart.HashUtilities;
+import org.jfree.chart.HashUtils;
 import org.jfree.chart.ui.GradientPaintTransformer;
 import org.jfree.chart.ui.StandardGradientPaintTransformer;
 import org.jfree.chart.util.PaintUtils;
@@ -225,7 +225,7 @@ public class DialBackground extends AbstractDialLayer implements DialLayer,
     @Override
     public int hashCode() {
         int result = 193;
-        result = 37 * result + HashUtilities.hashCodeForPaint(this.paint);
+        result = 37 * result + HashUtils.hashCodeForPaint(this.paint);
         result = 37 * result + this.gradientPaintTransformer.hashCode();
         return result;
     }

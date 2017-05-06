@@ -68,7 +68,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-import org.jfree.chart.HashUtilities;
+import org.jfree.chart.HashUtils;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
@@ -263,9 +263,9 @@ public class XYShapeAnnotation extends AbstractXYAnnotation
         if (this.stroke != null) {
             result = 37 * result + this.stroke.hashCode();
         }
-        result = 37 * result + HashUtilities.hashCodeForPaint(
+        result = 37 * result + HashUtils.hashCodeForPaint(
                 this.outlinePaint);
-        result = 37 * result + HashUtilities.hashCodeForPaint(this.fillPaint);
+        result = 37 * result + HashUtils.hashCodeForPaint(this.fillPaint);
         return result;
     }
 

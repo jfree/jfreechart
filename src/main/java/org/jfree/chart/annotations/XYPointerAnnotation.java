@@ -69,7 +69,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-import org.jfree.chart.HashUtilities;
+import org.jfree.chart.HashUtils;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.event.AnnotationChangeEvent;
 import org.jfree.chart.plot.Plot;
@@ -514,7 +514,7 @@ public class XYPointerAnnotation extends XYTextAnnotation
         result = 37 * result + (int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(this.arrowWidth);
         result = 37 * result + (int) (temp ^ (temp >>> 32));
-        result = result * 37 + HashUtilities.hashCodeForPaint(this.arrowPaint);
+        result = result * 37 + HashUtils.hashCodeForPaint(this.arrowPaint);
         result = result * 37 + this.arrowStroke.hashCode();
         temp = Double.doubleToLongBits(this.labelOffset);
         result = 37 * result + (int) (temp ^ (temp >>> 32));

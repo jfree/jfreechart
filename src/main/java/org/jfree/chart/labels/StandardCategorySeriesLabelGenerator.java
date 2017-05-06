@@ -47,7 +47,7 @@ package org.jfree.chart.labels;
 import java.io.Serializable;
 import java.text.MessageFormat;
 
-import org.jfree.chart.HashUtilities;
+import org.jfree.chart.HashUtils;
 import org.jfree.chart.util.ParamChecks;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.category.CategoryDataset;
@@ -160,7 +160,7 @@ public class StandardCategorySeriesLabelGenerator implements
     @Override
     public int hashCode() {
         int result = 127;
-        result = HashUtilities.hashCode(result, this.formatPattern);
+        result = HashUtils.hashCode(result, this.formatPattern);
         return result;
     }
 

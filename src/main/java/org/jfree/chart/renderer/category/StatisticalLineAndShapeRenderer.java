@@ -69,7 +69,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-import org.jfree.chart.HashUtilities;
+import org.jfree.chart.HashUtils;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
@@ -456,7 +456,7 @@ public class StatisticalLineAndShapeRenderer extends LineAndShapeRenderer
     @Override
     public int hashCode() {
         int hash = super.hashCode();
-        hash = HashUtilities.hashCode(hash, this.errorIndicatorPaint);
+        hash = HashUtils.hashCode(hash, this.errorIndicatorPaint);
         return hash;
     }
 

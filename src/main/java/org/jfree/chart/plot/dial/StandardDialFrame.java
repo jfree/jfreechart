@@ -57,7 +57,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-import org.jfree.chart.HashUtilities;
+import org.jfree.chart.HashUtils;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.ParamChecks;
 import org.jfree.chart.util.PublicCloneable;
@@ -308,9 +308,9 @@ public class StandardDialFrame extends AbstractDialLayer implements DialFrame,
         int result = 193;
         long temp = Double.doubleToLongBits(this.radius);
         result = 37 * result + (int) (temp ^ (temp >>> 32));
-        result = 37 * result + HashUtilities.hashCodeForPaint(
+        result = 37 * result + HashUtils.hashCodeForPaint(
                 this.backgroundPaint);
-        result = 37 * result + HashUtilities.hashCodeForPaint(
+        result = 37 * result + HashUtils.hashCodeForPaint(
                 this.foregroundPaint);
         result = 37 * result + this.stroke.hashCode();
         return result;

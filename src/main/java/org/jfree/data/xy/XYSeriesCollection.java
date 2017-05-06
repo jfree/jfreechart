@@ -73,7 +73,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import org.jfree.chart.HashUtilities;
+import org.jfree.chart.HashUtils;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.ParamChecks;
 import org.jfree.chart.util.PublicCloneable;
@@ -470,8 +470,8 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = HashUtilities.hashCode(hash, this.intervalDelegate);
-        hash = HashUtilities.hashCode(hash, this.data);
+        hash = HashUtils.hashCode(hash, this.intervalDelegate);
+        hash = HashUtils.hashCode(hash, this.data);
         return hash;
     }
 

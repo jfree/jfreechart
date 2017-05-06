@@ -53,7 +53,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-import org.jfree.chart.HashUtilities;
+import org.jfree.chart.HashUtils;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.ParamChecks;
 import org.jfree.chart.util.PublicCloneable;
@@ -288,8 +288,8 @@ public class DialCap extends AbstractDialLayer implements DialLayer, Cloneable,
     @Override
     public int hashCode() {
         int result = 193;
-        result = 37 * result + HashUtilities.hashCodeForPaint(this.fillPaint);
-        result = 37 * result + HashUtilities.hashCodeForPaint(
+        result = 37 * result + HashUtils.hashCodeForPaint(this.fillPaint);
+        result = 37 * result + HashUtils.hashCodeForPaint(
                 this.outlinePaint);
         result = 37 * result + this.outlineStroke.hashCode();
         return result;

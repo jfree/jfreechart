@@ -61,7 +61,7 @@ import java.text.MessageFormat;
 import java.text.NumberFormat;
 import java.util.Date;
 
-import org.jfree.chart.HashUtilities;
+import org.jfree.chart.HashUtils;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.xy.XYDataset;
@@ -335,11 +335,11 @@ public class AbstractXYItemLabelGenerator implements Cloneable, Serializable {
     @Override
     public int hashCode() {
         int result = 127;
-        result = HashUtilities.hashCode(result, this.formatString);
-        result = HashUtilities.hashCode(result, this.xFormat);
-        result = HashUtilities.hashCode(result, this.xDateFormat);
-        result = HashUtilities.hashCode(result, this.yFormat);
-        result = HashUtilities.hashCode(result, this.yDateFormat);
+        result = HashUtils.hashCode(result, this.formatString);
+        result = HashUtils.hashCode(result, this.xFormat);
+        result = HashUtils.hashCode(result, this.xDateFormat);
+        result = HashUtils.hashCode(result, this.yFormat);
+        result = HashUtils.hashCode(result, this.yDateFormat);
         return result;
     }
 

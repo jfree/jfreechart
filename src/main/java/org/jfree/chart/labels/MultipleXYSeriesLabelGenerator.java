@@ -52,7 +52,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.jfree.chart.HashUtilities;
+import org.jfree.chart.HashUtils;
 import org.jfree.chart.util.ParamChecks;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.xy.XYDataset;
@@ -233,9 +233,9 @@ public class MultipleXYSeriesLabelGenerator implements XYSeriesLabelGenerator,
     @Override
     public int hashCode() {
         int result = 127;
-        result = HashUtilities.hashCode(result, this.formatPattern);
-        result = HashUtilities.hashCode(result, this.additionalFormatPattern);
-        result = HashUtilities.hashCode(result, this.seriesLabelLists);
+        result = HashUtils.hashCode(result, this.formatPattern);
+        result = HashUtils.hashCode(result, this.additionalFormatPattern);
+        result = HashUtils.hashCode(result, this.seriesLabelLists);
         return result;
     }
 

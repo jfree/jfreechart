@@ -57,7 +57,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-import org.jfree.chart.HashUtilities;
+import org.jfree.chart.HashUtils;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.event.AnnotationChangeEvent;
@@ -494,7 +494,7 @@ public class CategoryPointerAnnotation extends CategoryTextAnnotation
         result = 37 * result + (int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(this.arrowWidth);
         result = 37 * result + (int) (temp ^ (temp >>> 32));
-        result = 37 * result + HashUtilities.hashCodeForPaint(this.arrowPaint);
+        result = 37 * result + HashUtils.hashCodeForPaint(this.arrowPaint);
         result = 37 * result + this.arrowStroke.hashCode();
         temp = Double.doubleToLongBits(this.labelOffset);
         result = 37 * result + (int) (temp ^ (temp >>> 32));

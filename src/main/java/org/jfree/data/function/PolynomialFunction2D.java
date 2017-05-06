@@ -44,7 +44,7 @@ package org.jfree.data.function;
 
 import java.io.Serializable;
 import java.util.Arrays;
-import org.jfree.chart.HashUtilities;
+import org.jfree.chart.HashUtils;
 import org.jfree.chart.util.ParamChecks;
 
 /**
@@ -128,7 +128,7 @@ public class PolynomialFunction2D implements Function2D, Serializable {
      */
     @Override
     public int hashCode() {
-        return HashUtilities.hashCodeForDoubleArray(this.coefficients);
+        return HashUtils.hashCodeForDoubleArray(this.coefficients);
     }
 
 }

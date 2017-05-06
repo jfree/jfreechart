@@ -47,7 +47,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import org.jfree.chart.plot.Plot;
-import org.jfree.chart.HashUtilities;
+import org.jfree.chart.HashUtils;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.ParamChecks;
 import org.jfree.chart.util.SerialUtils;
@@ -167,8 +167,8 @@ public class PlotEntity extends ChartEntity {
     @Override
     public int hashCode() {
         int result = 39;
-        result = HashUtilities.hashCode(result, getToolTipText());
-        result = HashUtilities.hashCode(result, getURLText());
+        result = HashUtils.hashCode(result, getToolTipText());
+        result = HashUtils.hashCode(result, getURLText());
         return result;
     }
 

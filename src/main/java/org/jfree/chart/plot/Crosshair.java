@@ -52,7 +52,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import org.jfree.chart.HashUtilities;
+import org.jfree.chart.HashUtils;
 import org.jfree.chart.labels.CrosshairLabelGenerator;
 import org.jfree.chart.labels.StandardCrosshairLabelGenerator;
 import org.jfree.chart.ui.RectangleAnchor;
@@ -635,21 +635,21 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = HashUtilities.hashCode(hash, this.visible);
-        hash = HashUtilities.hashCode(hash, this.value);
-        hash = HashUtilities.hashCode(hash, this.paint);
-        hash = HashUtilities.hashCode(hash, this.stroke);
-        hash = HashUtilities.hashCode(hash, this.labelVisible);
-        hash = HashUtilities.hashCode(hash, this.labelAnchor);
-        hash = HashUtilities.hashCode(hash, this.labelGenerator);
-        hash = HashUtilities.hashCode(hash, this.labelXOffset);
-        hash = HashUtilities.hashCode(hash, this.labelYOffset);
-        hash = HashUtilities.hashCode(hash, this.labelFont);
-        hash = HashUtilities.hashCode(hash, this.labelPaint);
-        hash = HashUtilities.hashCode(hash, this.labelBackgroundPaint);
-        hash = HashUtilities.hashCode(hash, this.labelOutlineVisible);
-        hash = HashUtilities.hashCode(hash, this.labelOutlineStroke);
-        hash = HashUtilities.hashCode(hash, this.labelOutlinePaint);
+        hash = HashUtils.hashCode(hash, this.visible);
+        hash = HashUtils.hashCode(hash, this.value);
+        hash = HashUtils.hashCode(hash, this.paint);
+        hash = HashUtils.hashCode(hash, this.stroke);
+        hash = HashUtils.hashCode(hash, this.labelVisible);
+        hash = HashUtils.hashCode(hash, this.labelAnchor);
+        hash = HashUtils.hashCode(hash, this.labelGenerator);
+        hash = HashUtils.hashCode(hash, this.labelXOffset);
+        hash = HashUtils.hashCode(hash, this.labelYOffset);
+        hash = HashUtils.hashCode(hash, this.labelFont);
+        hash = HashUtils.hashCode(hash, this.labelPaint);
+        hash = HashUtils.hashCode(hash, this.labelBackgroundPaint);
+        hash = HashUtils.hashCode(hash, this.labelOutlineVisible);
+        hash = HashUtils.hashCode(hash, this.labelOutlineStroke);
+        hash = HashUtils.hashCode(hash, this.labelOutlinePaint);
         return hash;
     }
 

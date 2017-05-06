@@ -121,7 +121,7 @@ import java.util.Map;
 import javax.swing.event.EventListenerList;
 
 import org.jfree.chart.ChartHints;
-import org.jfree.chart.HashUtilities;
+import org.jfree.chart.HashUtils;
 import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.event.RendererChangeListener;
 import org.jfree.chart.labels.ItemLabelAnchor;
@@ -3040,24 +3040,24 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     @Override
     public int hashCode() {
         int result = 193;
-        result = HashUtilities.hashCode(result, this.seriesVisibleList);
-        result = HashUtilities.hashCode(result, this.defaultSeriesVisible);
-        result = HashUtilities.hashCode(result, this.seriesVisibleInLegendList);
-        result = HashUtilities.hashCode(result, this.defaultSeriesVisibleInLegend);
-        result = HashUtilities.hashCode(result, this.paintList);
-        result = HashUtilities.hashCode(result, this.defaultPaint);
-        result = HashUtilities.hashCode(result, this.fillPaintList);
-        result = HashUtilities.hashCode(result, this.defaultFillPaint);
-        result = HashUtilities.hashCode(result, this.outlinePaintList);
-        result = HashUtilities.hashCode(result, this.defaultOutlinePaint);
-        result = HashUtilities.hashCode(result, this.strokeList);
-        result = HashUtilities.hashCode(result, this.defaultStroke);
-        result = HashUtilities.hashCode(result, this.outlineStrokeList);
-        result = HashUtilities.hashCode(result, this.defaultOutlineStroke);
+        result = HashUtils.hashCode(result, this.seriesVisibleList);
+        result = HashUtils.hashCode(result, this.defaultSeriesVisible);
+        result = HashUtils.hashCode(result, this.seriesVisibleInLegendList);
+        result = HashUtils.hashCode(result, this.defaultSeriesVisibleInLegend);
+        result = HashUtils.hashCode(result, this.paintList);
+        result = HashUtils.hashCode(result, this.defaultPaint);
+        result = HashUtils.hashCode(result, this.fillPaintList);
+        result = HashUtils.hashCode(result, this.defaultFillPaint);
+        result = HashUtils.hashCode(result, this.outlinePaintList);
+        result = HashUtils.hashCode(result, this.defaultOutlinePaint);
+        result = HashUtils.hashCode(result, this.strokeList);
+        result = HashUtils.hashCode(result, this.defaultStroke);
+        result = HashUtils.hashCode(result, this.outlineStrokeList);
+        result = HashUtils.hashCode(result, this.defaultOutlineStroke);
         // shapeList
         // baseShape
-        result = HashUtilities.hashCode(result, this.itemLabelsVisibleList);
-        result = HashUtilities.hashCode(result, this.defaultItemLabelsVisible);
+        result = HashUtils.hashCode(result, this.itemLabelsVisibleList);
+        result = HashUtils.hashCode(result, this.defaultItemLabelsVisible);
         // itemLabelFontList
         // baseItemLabelFont
         // itemLabelPaintList

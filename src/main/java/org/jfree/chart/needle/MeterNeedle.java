@@ -62,7 +62,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-import org.jfree.chart.HashUtilities;
+import org.jfree.chart.HashUtils;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.SerialUtils;
@@ -384,13 +384,13 @@ public abstract class MeterNeedle implements Serializable {
      */
     @Override
     public int hashCode() {
-        int result = HashUtilities.hashCode(193, this.fillPaint);
-        result = HashUtilities.hashCode(result, this.highlightPaint);
-        result = HashUtilities.hashCode(result, this.outlinePaint);
-        result = HashUtilities.hashCode(result, this.outlineStroke);
-        result = HashUtilities.hashCode(result, this.rotateX);
-        result = HashUtilities.hashCode(result, this.rotateY);
-        result = HashUtilities.hashCode(result, this.size);
+        int result = HashUtils.hashCode(193, this.fillPaint);
+        result = HashUtils.hashCode(result, this.highlightPaint);
+        result = HashUtils.hashCode(result, this.outlinePaint);
+        result = HashUtils.hashCode(result, this.outlineStroke);
+        result = HashUtils.hashCode(result, this.rotateX);
+        result = HashUtils.hashCode(result, this.rotateY);
+        result = HashUtils.hashCode(result, this.size);
         return result;
     }
 

@@ -51,7 +51,7 @@ import java.text.DateFormat;
 import java.text.MessageFormat;
 import java.text.NumberFormat;
 
-import org.jfree.chart.HashUtilities;
+import org.jfree.chart.HashUtils;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.ParamChecks;
 import org.jfree.chart.util.PublicCloneable;
@@ -294,11 +294,11 @@ public abstract class AbstractCategoryItemLabelGenerator
     @Override
     public int hashCode() {
         int result = 127;
-        result = HashUtilities.hashCode(result, this.labelFormat);
-        result = HashUtilities.hashCode(result, this.nullValueString);
-        result = HashUtilities.hashCode(result, this.dateFormat);
-        result = HashUtilities.hashCode(result, this.numberFormat);
-        result = HashUtilities.hashCode(result, this.percentFormat);
+        result = HashUtils.hashCode(result, this.labelFormat);
+        result = HashUtils.hashCode(result, this.nullValueString);
+        result = HashUtils.hashCode(result, this.dateFormat);
+        result = HashUtils.hashCode(result, this.numberFormat);
+        result = HashUtils.hashCode(result, this.percentFormat);
         return result;
     }
 

@@ -47,7 +47,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 import java.io.Serializable;
-import org.jfree.chart.HashUtilities;
+import org.jfree.chart.HashUtils;
 
 /**
  * A default implementation of the {@link ShadowGenerator} interface, based on
@@ -322,11 +322,11 @@ public class DefaultShadowGenerator implements ShadowGenerator, Serializable {
      */
     @Override
     public int hashCode() {
-        int hash = HashUtilities.hashCode(17, this.shadowSize);
-        hash = HashUtilities.hashCode(hash, this.shadowColor);
-        hash = HashUtilities.hashCode(hash, this.shadowOpacity);
-        hash = HashUtilities.hashCode(hash, this.distance);
-        hash = HashUtilities.hashCode(hash, this.angle);
+        int hash = HashUtils.hashCode(17, this.shadowSize);
+        hash = HashUtils.hashCode(hash, this.shadowColor);
+        hash = HashUtils.hashCode(hash, this.shadowOpacity);
+        hash = HashUtils.hashCode(hash, this.distance);
+        hash = HashUtils.hashCode(hash, this.angle);
         return hash;
     }
 

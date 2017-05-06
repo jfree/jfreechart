@@ -46,7 +46,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import org.jfree.chart.HashUtilities;
+import org.jfree.chart.HashUtils;
 import org.jfree.chart.axis.Axis;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.ParamChecks;
@@ -168,8 +168,8 @@ public class AxisEntity extends ChartEntity {
     @Override
     public int hashCode() {
         int result = 39;
-        result = HashUtilities.hashCode(result, getToolTipText());
-        result = HashUtilities.hashCode(result, getURLText());
+        result = HashUtils.hashCode(result, getToolTipText());
+        result = HashUtils.hashCode(result, getURLText());
         return result;
     }
 

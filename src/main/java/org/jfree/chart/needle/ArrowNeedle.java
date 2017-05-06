@@ -53,7 +53,7 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 
-import org.jfree.chart.HashUtilities;
+import org.jfree.chart.HashUtils;
 
 /**
  * A needle in the shape of an arrow.
@@ -162,7 +162,7 @@ public class ArrowNeedle extends MeterNeedle implements Cloneable,
     @Override
     public int hashCode() {
         int result = super.hashCode();
-        result = HashUtilities.hashCode(result, this.isArrowAtTop);
+        result = HashUtils.hashCode(result, this.isArrowAtTop);
         return result;
     }
 

@@ -47,7 +47,7 @@ package org.jfree.data.time.ohlc;
 import java.io.Serializable;
 import java.util.List;
 
-import org.jfree.chart.HashUtilities;
+import org.jfree.chart.HashUtils;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.ParamChecks;
 import org.jfree.data.general.DatasetChangeEvent;
@@ -475,9 +475,9 @@ public class OHLCSeriesCollection extends AbstractXYDataset
     @Override
     public int hashCode() {
         int result = 137;
-        result = HashUtilities.hashCode(result, this.xPosition);
+        result = HashUtils.hashCode(result, this.xPosition);
         for (int i = 0; i < this.data.size(); i++) {
-            result = HashUtilities.hashCode(result, this.data.get(i));
+            result = HashUtils.hashCode(result, this.data.get(i));
         }
         return result;
     }

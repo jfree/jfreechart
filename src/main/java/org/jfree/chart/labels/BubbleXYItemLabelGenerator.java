@@ -50,7 +50,7 @@ import java.text.DateFormat;
 import java.text.MessageFormat;
 import java.text.NumberFormat;
 
-import org.jfree.chart.HashUtilities;
+import org.jfree.chart.HashUtils;
 import org.jfree.chart.renderer.xy.XYBubbleRenderer;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.ParamChecks;
@@ -270,8 +270,8 @@ public class BubbleXYItemLabelGenerator extends AbstractXYItemLabelGenerator
     @Override
     public int hashCode() {
         int h = super.hashCode();
-        h = HashUtilities.hashCode(h, this.zFormat);
-        h = HashUtilities.hashCode(h, this.zDateFormat);
+        h = HashUtils.hashCode(h, this.zFormat);
+        h = HashUtils.hashCode(h, this.zDateFormat);
         return h;
     }
 

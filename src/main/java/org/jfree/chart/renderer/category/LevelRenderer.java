@@ -59,7 +59,7 @@ import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 
-import org.jfree.chart.HashUtilities;
+import org.jfree.chart.HashUtils;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
@@ -447,8 +447,8 @@ public class LevelRenderer extends AbstractCategoryItemRenderer
     @Override
     public int hashCode() {
         int hash = super.hashCode();
-        hash = HashUtilities.hashCode(hash, this.itemMargin);
-        hash = HashUtilities.hashCode(hash, this.maxItemWidth);
+        hash = HashUtils.hashCode(hash, this.itemMargin);
+        hash = HashUtils.hashCode(hash, this.maxItemWidth);
         return hash;
     }
 

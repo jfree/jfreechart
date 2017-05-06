@@ -102,7 +102,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import org.jfree.chart.HashUtilities;
+import org.jfree.chart.HashUtils;
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
@@ -742,10 +742,10 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
     @Override
     public int hashCode() {
         int result = super.hashCode();
-        result = HashUtilities.hashCode(result, this.plotArea);
-        result = HashUtilities.hashCode(result, this.plotLines);
-        result = HashUtilities.hashCode(result, this.plotShapes);
-        result = HashUtilities.hashCode(result, this.useFillPaint);
+        result = HashUtils.hashCode(result, this.plotArea);
+        result = HashUtils.hashCode(result, this.plotLines);
+        result = HashUtils.hashCode(result, this.plotShapes);
+        result = HashUtils.hashCode(result, this.useFillPaint);
         return result;
     }
 

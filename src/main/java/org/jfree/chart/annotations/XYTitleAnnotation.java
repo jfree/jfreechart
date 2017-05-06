@@ -51,7 +51,7 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 
-import org.jfree.chart.HashUtilities;
+import org.jfree.chart.HashUtils;
 import org.jfree.chart.axis.AxisLocation;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.block.BlockParams;
@@ -376,13 +376,13 @@ public class XYTitleAnnotation extends AbstractXYAnnotation
     @Override
     public int hashCode() {
         int result = 193;
-        result = HashUtilities.hashCode(result, this.anchor);
-        result = HashUtilities.hashCode(result, this.coordinateType);
-        result = HashUtilities.hashCode(result, this.x);
-        result = HashUtilities.hashCode(result, this.y);
-        result = HashUtilities.hashCode(result, this.maxWidth);
-        result = HashUtilities.hashCode(result, this.maxHeight);
-        result = HashUtilities.hashCode(result, this.title);
+        result = HashUtils.hashCode(result, this.anchor);
+        result = HashUtils.hashCode(result, this.coordinateType);
+        result = HashUtils.hashCode(result, this.x);
+        result = HashUtils.hashCode(result, this.y);
+        result = HashUtils.hashCode(result, this.maxWidth);
+        result = HashUtils.hashCode(result, this.maxHeight);
+        result = HashUtils.hashCode(result, this.title);
         return result;
     }
 
