@@ -1,3 +1,31 @@
+/* ===========================================================
+ * JFreeChart : a free chart library for the Java(tm) platform
+ * ===========================================================
+ *
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ *
+ * Project Info:  http://www.jfree.org/jfreechart/index.html
+ *
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
+ * (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+ * License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
+ *
+ * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
+ * Other names may be trademarks of their respective owners.]
+ *
+ */
+
 package org.jfree.chart.text;
 
 import java.awt.Color;
@@ -28,7 +56,7 @@ public class TextFragment implements Serializable {
     public static final Font DEFAULT_FONT = new Font("Serif", Font.PLAIN, 12);
     
     /** The default text color. */
-    public static final Paint DEFAULT_PAINT = Color.black;
+    public static final Paint DEFAULT_PAINT = Color.BLACK;
     
     /** The text. */
     private String text;
@@ -48,43 +76,43 @@ public class TextFragment implements Serializable {
     /**
      * Creates a new text fragment.
      * 
-     * @param text  the text (<code>null</code> not permitted).
+     * @param text  the text ({@code null} not permitted).
      */
-    public TextFragment(final String text) {
+    public TextFragment(String text) {
         this(text, DEFAULT_FONT, DEFAULT_PAINT);
     }
     
     /**
      * Creates a new text fragment.
      * 
-     * @param text  the text (<code>null</code> not permitted).
-     * @param font  the font (<code>null</code> not permitted).
+     * @param text  the text ({@code null} not permitted).
+     * @param font  the font ({@code null} not permitted).
      */
-    public TextFragment(final String text, final Font font) {
+    public TextFragment(String text, Font font) {
         this(text, font, DEFAULT_PAINT);
     }
 
     /**
      * Creates a new text fragment.
      * 
-     * @param text  the text (<code>null</code> not permitted).
-     * @param font  the font (<code>null</code> not permitted).
-     * @param paint  the text color (<code>null</code> not permitted).
+     * @param text  the text ({@code null} not permitted).
+     * @param font  the font ({@code null} not permitted).
+     * @param paint  the text color ({@code null} not permitted).
      */
-    public TextFragment(final String text, final Font font, final Paint paint) {
+    public TextFragment(String text, Font font, Paint paint) {
         this(text, font, paint, 0.0f);
     }
 
     /**
      * Creates a new text fragment.
      * 
-     * @param text  the text (<code>null</code> not permitted).
-     * @param font  the font (<code>null</code> not permitted).
-     * @param paint  the text color (<code>null</code> not permitted).
+     * @param text  the text ({@code null} not permitted).
+     * @param font  the font ({@code null} not permitted).
+     * @param paint  the text color ({@code null} not permitted).
      * @param baselineOffset  the baseline offset.
      */
-    public TextFragment(final String text, final Font font, final Paint paint,
-                        final float baselineOffset) {
+    public TextFragment(String text, Font font, Paint paint,
+            float baselineOffset) {
         if (text == null) {
             throw new IllegalArgumentException("Null 'text' argument.");  
         }
@@ -103,7 +131,7 @@ public class TextFragment implements Serializable {
     /**
      * Returns the text.
      * 
-     * @return The text (possibly <code>null</code>).
+     * @return The text (possibly {@code null}).
      */
     public String getText() {
         return this.text;
@@ -112,7 +140,7 @@ public class TextFragment implements Serializable {
     /**
      * Returns the font.
      * 
-     * @return The font (never <code>null</code>).
+     * @return The font (never {@code null}).
      */
     public Font getFont() {
         return this.font;
@@ -121,7 +149,7 @@ public class TextFragment implements Serializable {
     /**
      * Returns the text paint.
      * 
-     * @return The text paint (never <code>null</code>).
+     * @return The text paint (never {@code null}).
      */
     public Paint getPaint() {
         return this.paint;
@@ -148,16 +176,12 @@ public class TextFragment implements Serializable {
      * @param rotateY  the y-coordinate of the rotation point.
      * @param angle  the angle.
      */
-    public void draw(final Graphics2D g2, final float anchorX, 
-                     final float anchorY, final TextAnchor anchor,
-                     final float rotateX, final float rotateY, 
-                     final double angle) {
-    
+    public void draw(Graphics2D g2, float anchorX, float anchorY, 
+            TextAnchor anchor, float rotateX, float rotateY, double angle) {
         g2.setFont(this.font);
         g2.setPaint(this.paint);
         TextUtilities.drawRotatedString(this.text, g2, anchorX, anchorY 
                 + this.baselineOffset, anchor, angle, rotateX, rotateY);
-    
     }
     
     /**
@@ -167,11 +191,10 @@ public class TextFragment implements Serializable {
      * 
      * @return The width and height of the text.
      */
-    public Size2D calculateDimensions(final Graphics2D g2) {
-        final FontMetrics fm = g2.getFontMetrics(this.font);
-        final Rectangle2D bounds = TextUtilities.getTextBounds(this.text, g2, 
-                fm);
-        final Size2D result = new Size2D(bounds.getWidth(), bounds.getHeight());
+    public Size2D calculateDimensions(Graphics2D g2) {
+        FontMetrics fm = g2.getFontMetrics(this.font);
+        Rectangle2D bounds = TextUtilities.getTextBounds(this.text, g2, fm);
+        Size2D result = new Size2D(bounds.getWidth(), bounds.getHeight());
         return result;
     }
     
@@ -186,8 +209,8 @@ public class TextFragment implements Serializable {
      */
     public float calculateBaselineOffset(Graphics2D g2, TextAnchor anchor) {
         float result = 0.0f;
-        final FontMetrics fm = g2.getFontMetrics(this.font);
-        final LineMetrics lm = fm.getLineMetrics("ABCxyz", g2);
+        FontMetrics fm = g2.getFontMetrics(this.font);
+        LineMetrics lm = fm.getLineMetrics("ABCxyz", g2);
         if (anchor.isTop()) {
             result = lm.getAscent();
         }
@@ -206,11 +229,11 @@ public class TextFragment implements Serializable {
     /**
      * Tests this instance for equality with an arbitrary object.
      * 
-     * @param obj  the object to test against (<code>null</code> permitted).
+     * @param obj  the object to test against ({@code null} permitted).
      * 
      * @return A boolean.
      */
-    public boolean equals(final Object obj) {
+    public boolean equals(Object obj) {
         if (obj == null) {
             return false;   
         }
@@ -218,7 +241,7 @@ public class TextFragment implements Serializable {
             return true;   
         }
         if (obj instanceof TextFragment) {
-            final TextFragment tf = (TextFragment) obj;
+            TextFragment tf = (TextFragment) obj;
             if (!this.text.equals(tf.text)) {
                 return false;   
             }
@@ -253,8 +276,7 @@ public class TextFragment implements Serializable {
      *
      * @throws IOException  if there is an I/O error.
      */
-    private void writeObject(final ObjectOutputStream stream) 
-        throws IOException {
+    private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
         SerialUtils.writePaint(this.paint, stream);
     }
@@ -267,8 +289,8 @@ public class TextFragment implements Serializable {
      * @throws IOException  if there is an I/O error.
      * @throws ClassNotFoundException  if there is a classpath problem.
      */
-    private void readObject(final ObjectInputStream stream) 
-        throws IOException, ClassNotFoundException {
+    private void readObject(ObjectInputStream stream) throws IOException, 
+            ClassNotFoundException {
         stream.defaultReadObject();
         this.paint = SerialUtils.readPaint(stream);
     }
