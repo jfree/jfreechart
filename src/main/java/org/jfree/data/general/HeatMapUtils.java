@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ---------------------
- * HeatMapUtilities.java
- * ---------------------
- * (C) Copyright 2009-2016, by Object Refinery Limited.
+ * -----------------
+ * HeatMapUtils.java
+ * -----------------
+ * (C) Copyright 2009-2017, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -55,7 +55,7 @@ import org.jfree.data.xy.XYSeriesCollection;
  *
  * @since 1.0.13
  */
-public abstract class HeatMapUtilities {
+public abstract class HeatMapUtils {
 
     /**
      * Returns a dataset containing one series that holds a copy of the (x, z)
