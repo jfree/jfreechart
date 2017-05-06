@@ -1,3 +1,31 @@
+/* ===========================================================
+ * JFreeChart : a free chart library for the Java(tm) platform
+ * ===========================================================
+ *
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ *
+ * Project Info:  http://www.jfree.org/jfreechart/index.html
+ *
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
+ * (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+ * License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
+ *
+ * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
+ * Other names may be trademarks of their respective owners.]
+ *
+ */
+
 package org.jfree.chart.ui;
 
 import java.awt.Color;
@@ -23,9 +51,9 @@ public class PaintSample extends JComponent {
     /**
      * Standard constructor - builds a paint sample.
      *
-     * @param paint   the paint to display.
+     * @param paint  the paint to display.
      */
-    public PaintSample(final Paint paint) {
+    public PaintSample(Paint paint) {
         this.paint = paint;
         this.preferredSize = new Dimension(80, 12);
     }
@@ -44,7 +72,7 @@ public class PaintSample extends JComponent {
      *
      * @param paint  the paint.
      */
-    public void setPaint(final Paint paint) {
+    public void setPaint(Paint paint) {
         this.paint = paint;
         repaint();
     }
@@ -54,6 +82,7 @@ public class PaintSample extends JComponent {
      *
      * @return the preferred size.
      */
+    @Override
     public Dimension getPreferredSize() {
         return this.preferredSize;
     }
@@ -63,7 +92,8 @@ public class PaintSample extends JComponent {
      *
      * @param g  the graphics device.
      */
-    public void paintComponent(final Graphics g) {
+    @Override
+    public void paintComponent(Graphics g) {
 
         final Graphics2D g2 = (Graphics2D) g;
         final Dimension size = getSize();
@@ -75,7 +105,7 @@ public class PaintSample extends JComponent {
         final Rectangle2D area = new Rectangle2D.Double(xx, yy, ww, hh);
         g2.setPaint(this.paint);
         g2.fill(area);
-        g2.setPaint(Color.black);
+        g2.setPaint(Color.BLACK);
         g2.draw(area);
 
     }

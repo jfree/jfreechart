@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * CyclicAxisTest.java
  * -------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2017, by Object Refinery Limited and Contributors.
  *
  * Original Author:  Nicolas Brodu
  * Contributor(s):   -;
@@ -95,11 +95,11 @@ public class CyclicNumberAxisTest  {
         assertTrue(a1.equals(a2));
 
         // advance line Paint
-        a1.setAdvanceLinePaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.black));
+        a1.setAdvanceLinePaint(new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.BLACK));
         assertFalse(a1.equals(a2));
-        a2.setAdvanceLinePaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.black));
+        a2.setAdvanceLinePaint(new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.BLACK));
         assertTrue(a1.equals(a2));
 
         // advance line Stroke
