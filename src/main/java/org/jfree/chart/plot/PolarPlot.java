@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------
  * PolarPlot.java
  * --------------
- * (C) Copyright 2004-2016, by Solution Engineering, Inc. and Contributors.
+ * (C) Copyright 2004-2017, by Solution Engineering, Inc. and Contributors.
  *
  * Original Author:  Daniel Bridenbecker, Solution Engineering, Inc.;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -154,7 +154,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
             0.0f, new float[]{2.0f, 2.0f}, 0.0f);
 
     /** The default grid line paint. */
-    public static final Paint DEFAULT_GRIDLINE_PAINT = Color.gray;
+    public static final Paint DEFAULT_GRIDLINE_PAINT = Color.GRAY;
 
     /** The resourceBundle for the localization. */
     protected static ResourceBundle localizationResources
@@ -205,7 +205,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     private Font angleLabelFont = new Font("SansSerif", Font.PLAIN, 12);
 
     /** The paint used to display the angle labels. */
-    private transient Paint angleLabelPaint = Color.black;
+    private transient Paint angleLabelPaint = Color.BLACK;
 
     /** A flag that controls whether the angular grid-lines are visible. */
     private boolean angleGridlinesVisible;
@@ -1437,7 +1437,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
             return;
         }
 
-        g2.setColor(Color.black);
+        g2.setColor(Color.BLACK);
         double width = 0.0;
         double height = 0.0;
         for (Iterator it = this.cornerTextItems.iterator(); it.hasNext();) {
