@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * XYLineAnnotation.java
  * ---------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited.
+ * (C) Copyright 2003-2017, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Peter Kolb (see patch 2809117);
@@ -115,7 +115,7 @@ public class XYLineAnnotation extends AbstractXYAnnotation
      * @param y2  the y-coordinate for the end of the line.
      */
     public XYLineAnnotation(double x1, double y1, double x2, double y2) {
-        this(x1, y1, x2, y2, new BasicStroke(1.0f), Color.black);
+        this(x1, y1, x2, y2, new BasicStroke(1.0f), Color.BLACK);
     }
 
     /**
