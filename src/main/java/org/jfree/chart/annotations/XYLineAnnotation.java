@@ -69,7 +69,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.util.LineUtilities;
+import org.jfree.chart.util.LineUtils;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.ParamChecks;
@@ -198,7 +198,7 @@ public class XYLineAnnotation extends AbstractXYAnnotation
         Line2D line = new Line2D.Float(j2DX1, j2DY1, j2DX2, j2DY2);
         // line is clipped to avoid JRE bug 6574155, for more info
         // see JFreeChart bug 2221495
-        boolean visible = LineUtilities.clipLine(line, dataArea);
+        boolean visible = LineUtils.clipLine(line, dataArea);
         if (visible) {
             g2.draw(line);
         }

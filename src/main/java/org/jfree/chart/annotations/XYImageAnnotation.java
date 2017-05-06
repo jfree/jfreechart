@@ -302,7 +302,7 @@ public class XYImageAnnotation extends AbstractXYAnnotation
      */
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
-        //SerialUtilities.writeImage(this.image, stream);
+        //SerialUtils.writeImage(this.image, stream);
     }
 
     /**
@@ -316,7 +316,7 @@ public class XYImageAnnotation extends AbstractXYAnnotation
     private void readObject(ObjectInputStream stream)
         throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
-        //this.image = SerialUtilities.readImage(stream);
+        //this.image = SerialUtils.readImage(stream);
     }
 
 

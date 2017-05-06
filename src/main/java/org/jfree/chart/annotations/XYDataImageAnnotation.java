@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------------
  * XYDataImageAnnotation.java
  * --------------------------
- * (C) Copyright 2008-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2008-2017, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Peter Kolb (patch 2809117);
@@ -360,7 +360,7 @@ public class XYDataImageAnnotation extends AbstractXYAnnotation
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
         // FIXME
-        //SerialUtilities.writeImage(this.image, stream);
+        //SerialUtils.writeImage(this.image, stream);
     }
 
     /**
@@ -375,7 +375,7 @@ public class XYDataImageAnnotation extends AbstractXYAnnotation
         throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
         // FIXME
-        //this.image = SerialUtilities.readImage(stream);
+        //this.image = SerialUtils.readImage(stream);
     }
 
 }

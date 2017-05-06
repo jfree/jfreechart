@@ -78,7 +78,7 @@ import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.urls.PieURLGenerator;
-import org.jfree.chart.util.LineUtilities;
+import org.jfree.chart.util.LineUtils;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.ParamChecks;
@@ -625,7 +625,7 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
             }
             else if (currentPass == 2) {
                 if (this.separatorsVisible) {
-                    Line2D extendedSeparator = LineUtilities.extendLine(
+                    Line2D extendedSeparator = LineUtils.extendLine(
                             separator, this.innerSeparatorExtension,
                             this.outerSeparatorExtension);
                     g2.setStroke(this.separatorStroke);

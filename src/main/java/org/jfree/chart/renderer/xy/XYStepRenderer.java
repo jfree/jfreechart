@@ -91,7 +91,7 @@ import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.urls.XYURLGenerator;
-import org.jfree.chart.util.LineUtilities;
+import org.jfree.chart.util.LineUtils;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.xy.XYDataset;
 
@@ -324,7 +324,7 @@ public class XYStepRenderer extends XYLineAndShapeRenderer
             return;
         }
         line.setLine(x0, y0, x1, y1);
-        boolean visible = LineUtilities.clipLine(line, dataArea);
+        boolean visible = LineUtils.clipLine(line, dataArea);
         if (visible) {
             g2.draw(line);
         }
