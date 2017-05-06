@@ -27,7 +27,7 @@
  * --------------
  * Crosshair.java
  * --------------
- * (C) Copyright 2009-2016, by Object Refinery Limited.
+ * (C) Copyright 2009-2017, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -144,7 +144,7 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * @param value  the value.
      */
     public Crosshair(double value) {
-       this(value, Color.black, new BasicStroke(1.0f));
+       this(value, Color.BLACK, new BasicStroke(1.0f));
     }
 
     /**
@@ -167,10 +167,10 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
         this.labelXOffset = 3.0;
         this.labelYOffset = 3.0;
         this.labelFont = new Font("Tahoma", Font.PLAIN, 12);
-        this.labelPaint = Color.black;
+        this.labelPaint = Color.BLACK;
         this.labelBackgroundPaint = new Color(0, 0, 255, 63);
         this.labelOutlineVisible = true;
-        this.labelOutlinePaint = Color.black;
+        this.labelOutlinePaint = Color.BLACK;
         this.labelOutlineStroke = new BasicStroke(0.5f);
         this.pcs = new PropertyChangeSupport(this);
     }

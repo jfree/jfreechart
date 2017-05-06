@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------
  * Marker.java
  * -----------
- * (C) Copyright 2002-2016, by Object Refinery Limited.
+ * (C) Copyright 2002-2017, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Nicolas Brodu;
@@ -145,7 +145,7 @@ public abstract class Marker implements Cloneable, Serializable {
      * Creates a new marker with default attributes.
      */
     protected Marker() {
-        this(Color.gray);
+        this(Color.GRAY);
     }
 
     /**
@@ -154,7 +154,7 @@ public abstract class Marker implements Cloneable, Serializable {
      * @param paint  the paint ({@code null} not permitted).
      */
     protected Marker(Paint paint) {
-        this(paint, new BasicStroke(0.5f), Color.gray, new BasicStroke(0.5f),
+        this(paint, new BasicStroke(0.5f), Color.GRAY, new BasicStroke(0.5f),
                 0.80f);
     }
 
@@ -189,7 +189,7 @@ public abstract class Marker implements Cloneable, Serializable {
         this.alpha = alpha;
 
         this.labelFont = new Font("SansSerif", Font.PLAIN, 9);
-        this.labelPaint = Color.black;
+        this.labelPaint = Color.BLACK;
         this.labelBackgroundColor = new Color(100, 100, 100, 100);
         this.labelAnchor = RectangleAnchor.TOP_LEFT;
         this.labelOffset = new RectangleInsets(3.0, 3.0, 3.0, 3.0);
