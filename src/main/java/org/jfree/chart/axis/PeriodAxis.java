@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * PeriodAxis.java
  * ---------------
- * (C) Copyright 2004-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2017, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -176,7 +176,7 @@ public class PeriodAxis extends ValueAxis
     private transient Stroke minorTickMarkStroke = new BasicStroke(0.5f);
 
     /** The paint used to draw tick marks. */
-    private transient Paint minorTickMarkPaint = Color.black;
+    private transient Paint minorTickMarkPaint = Color.BLACK;
 
     /** Info for each labeling band. */
     private PeriodAxisLabelInfo[] labelInfo;

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -85,7 +85,7 @@ public class LineBorder implements BlockFrame, Serializable {
      * Creates a default border.
      */
     public LineBorder() {
-        this(Color.black, new BasicStroke(1.0f), new RectangleInsets(1.0, 1.0,
+        this(Color.BLACK, new BasicStroke(1.0f), new RectangleInsets(1.0, 1.0,
                 1.0, 1.0));
     }
 

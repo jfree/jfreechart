@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * SubCategoryAxis.java
  * --------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited.
+ * (C) Copyright 2004-2017, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Adriaan Joubert;
@@ -92,7 +92,7 @@ public class SubCategoryAxis extends CategoryAxis
     private Font subLabelFont = new Font("SansSerif", Font.PLAIN, 10);
 
     /** The paint for the sub-category labels. */
-    private transient Paint subLabelPaint = Color.black;
+    private transient Paint subLabelPaint = Color.BLACK;
 
     /**
      * Creates a new axis.

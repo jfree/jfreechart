@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -103,7 +103,7 @@ public class LabelBlock extends AbstractBlock
     private String urlText;
 
     /** The default color. */
-    public static final Paint DEFAULT_PAINT = Color.black;
+    public static final Paint DEFAULT_PAINT = Color.BLACK;
 
     /** The paint. */
     private transient Paint paint;
