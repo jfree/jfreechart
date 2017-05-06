@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------
  * DialPointer.java
  * ----------------
- * (C) Copyright 2006-2016, by Object Refinery Limited.
+ * (C) Copyright 2006-2017, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -237,7 +237,7 @@ public abstract class DialPointer extends AbstractDialLayer
          */
         public Pin(int datasetIndex) {
             super(datasetIndex);
-            this.paint = Color.red;
+            this.paint = Color.RED;
             this.stroke = new BasicStroke(3.0f, BasicStroke.CAP_ROUND,
                     BasicStroke.JOIN_BEVEL);
         }
@@ -431,8 +431,8 @@ public abstract class DialPointer extends AbstractDialLayer
         public Pointer(int datasetIndex) {
             super(datasetIndex);
             this.widthRadius = 0.05;
-            this.fillPaint = Color.gray;
-            this.outlinePaint = Color.black;
+            this.fillPaint = Color.GRAY;
+            this.outlinePaint = Color.BLACK;
         }
 
         /**
@@ -529,7 +529,7 @@ public abstract class DialPointer extends AbstractDialLayer
         public void draw(Graphics2D g2, DialPlot plot, Rectangle2D frame,
                 Rectangle2D view) {
 
-            g2.setPaint(Color.blue);
+            g2.setPaint(Color.BLUE);
             g2.setStroke(new BasicStroke(1.0f));
             Rectangle2D lengthRect = DialPlot.rectangleByRadius(frame,
                     this.radius, this.radius);
