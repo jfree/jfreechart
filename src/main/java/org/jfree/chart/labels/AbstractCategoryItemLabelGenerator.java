@@ -55,7 +55,7 @@ import org.jfree.chart.HashUtils;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.ParamChecks;
 import org.jfree.chart.util.PublicCloneable;
-import org.jfree.data.DataUtilities;
+import org.jfree.data.DataUtils;
 import org.jfree.data.category.CategoryDataset;
 
 /**
@@ -248,7 +248,7 @@ public abstract class AbstractCategoryItemLabelGenerator
             result[2] = this.nullValueString;
         }
         if (value != null) {
-            double total = DataUtilities.calculateColumnTotal(dataset, column);
+            double total = DataUtils.calculateColumnTotal(dataset, column);
             double percent = value.doubleValue() / total;
             result[3] = this.percentFormat.format(percent);
         }

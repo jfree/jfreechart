@@ -46,7 +46,7 @@ import java.util.List;
 
 import org.jfree.chart.TestUtilities;
 
-import org.jfree.data.DataUtilities;
+import org.jfree.data.DataUtils;
 import org.jfree.data.UnknownKeyException;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
@@ -72,8 +72,8 @@ public class DefaultIntervalCategoryDatasetTest {
         DefaultIntervalCategoryDataset d = new DefaultIntervalCategoryDataset(
                 new Comparable[] {"Series 1", "Series 2"},
                 new Comparable[] {"Category 1", "Category 2", "Category 3"},
-                DataUtilities.createNumberArray2D(starts),
-                DataUtilities.createNumberArray2D(ends));
+                DataUtils.createNumberArray2D(starts),
+                DataUtils.createNumberArray2D(ends));
 
         assertEquals(new Double(0.1), d.getStartValue("Series 1",
                 "Category 1"));
@@ -207,8 +207,8 @@ public class DefaultIntervalCategoryDatasetTest {
         DefaultIntervalCategoryDataset d1 = new DefaultIntervalCategoryDataset(
                 new Comparable[] {"Series 1", "Series 2"},
                 new Comparable[] {"Category 1", "Category 2", "Category 3"},
-                DataUtilities.createNumberArray2D(starts),
-                DataUtilities.createNumberArray2D(ends));
+                DataUtils.createNumberArray2D(starts),
+                DataUtils.createNumberArray2D(ends));
         DefaultIntervalCategoryDataset d2 = null;
         d2 = (DefaultIntervalCategoryDataset) d1.clone();
         assertTrue(d1 != d2);
@@ -251,8 +251,8 @@ public class DefaultIntervalCategoryDatasetTest {
         DefaultIntervalCategoryDataset d1 = new DefaultIntervalCategoryDataset(
                 new Comparable[] {"Series 1", "Series 2"},
                 new Comparable[] {"Category 1", "Category 2", "Category 3"},
-                DataUtilities.createNumberArray2D(starts),
-                DataUtilities.createNumberArray2D(ends));
+                DataUtils.createNumberArray2D(starts),
+                DataUtils.createNumberArray2D(ends));
         d1.setStartValue(0, "Category 2", new Double(99.9));
         assertEquals(new Double(99.9), d1.getStartValue("Series 1",
                 "Category 2"));
@@ -290,8 +290,8 @@ public class DefaultIntervalCategoryDatasetTest {
         DefaultIntervalCategoryDataset d1 = new DefaultIntervalCategoryDataset(
                 new Comparable[] {"Series 1", "Series 2"},
                 new Comparable[] {"Category 1", "Category 2", "Category 3"},
-                DataUtilities.createNumberArray2D(starts),
-                DataUtilities.createNumberArray2D(ends));
+                DataUtils.createNumberArray2D(starts),
+                DataUtils.createNumberArray2D(ends));
         d1.setEndValue(0, "Category 2", new Double(99.9));
         assertEquals(new Double(99.9), d1.getEndValue("Series 1",
                 "Category 2"));

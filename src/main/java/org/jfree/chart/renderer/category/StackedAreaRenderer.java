@@ -82,7 +82,7 @@ import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.util.PublicCloneable;
-import org.jfree.data.DataUtilities;
+import org.jfree.data.DataUtils;
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.general.DatasetUtils;
@@ -216,7 +216,7 @@ public class StackedAreaRenderer extends AreaRenderer
         if (n != null) {
             y1 = n.doubleValue();
             if (this.renderAsPercentages) {
-                double total = DataUtilities.calculateColumnTotal(dataset,
+                double total = DataUtils.calculateColumnTotal(dataset,
                         column, state.getVisibleSeriesArray());
                 y1 = y1 / total;
             }
@@ -239,7 +239,7 @@ public class StackedAreaRenderer extends AreaRenderer
         if (n != null) {
             y0 = n.doubleValue();
             if (this.renderAsPercentages) {
-                double total = DataUtilities.calculateColumnTotal(dataset,
+                double total = DataUtils.calculateColumnTotal(dataset,
                         Math.max(column - 1, 0), state.getVisibleSeriesArray());
                 y0 = y0 / total;
             }
@@ -257,7 +257,7 @@ public class StackedAreaRenderer extends AreaRenderer
         if (n != null) {
             y2 = n.doubleValue();
             if (this.renderAsPercentages) {
-                double total = DataUtilities.calculateColumnTotal(dataset,
+                double total = DataUtils.calculateColumnTotal(dataset,
                         Math.min(column + 1, itemCount - 1),
                         state.getVisibleSeriesArray());
                 y2 = y2 / total;
@@ -417,7 +417,7 @@ public class StackedAreaRenderer extends AreaRenderer
         double[] result = new double[2];
         double total = 0.0;
         if (this.renderAsPercentages) {
-            total = DataUtilities.calculateColumnTotal(dataset, index, 
+            total = DataUtils.calculateColumnTotal(dataset, index, 
                     validRows);
         }
         for (int i = 0; i < series; i++) {

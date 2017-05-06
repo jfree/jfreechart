@@ -56,7 +56,7 @@ import java.util.ResourceBundle;
 import org.jfree.chart.util.ParamChecks;
 
 import org.jfree.chart.util.ResourceBundleWrapper;
-import org.jfree.data.DataUtilities;
+import org.jfree.data.DataUtils;
 import org.jfree.data.UnknownKeyException;
 import org.jfree.data.general.AbstractSeriesDataset;
 
@@ -92,8 +92,8 @@ public class DefaultIntervalCategoryDataset extends AbstractSeriesDataset
      *                permitted).
      */
     public DefaultIntervalCategoryDataset(double[][] starts, double[][] ends) {
-        this(DataUtilities.createNumberArray2D(starts),
-                DataUtilities.createNumberArray2D(ends));
+        this(DataUtils.createNumberArray2D(starts),
+                DataUtils.createNumberArray2D(ends));
     }
 
     /**
