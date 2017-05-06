@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates.
  * Other names may be trademarks of their respective owners.]
  *
- * ----------------------
- * LineUtilitiesTest.java
- * ----------------------
- * (C) Copyright 2008-2016, by Object Refinery Limited and Contributors.
+ * ------------------
+ * LineUtilsTest.java
+ * ------------------
+ * (C) Copyright 2008-2017, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -48,7 +48,7 @@ import static org.junit.Assert.assertFalse;
 /**
  * Tests for the {@link LineUtils} class.
  */
-public class LineUtilitiesTest {
+public class LineUtilsTest {
 
     private boolean lineEquals(Line2D line, double x1, double y1, double x2,
             double y2) {
