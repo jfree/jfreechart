@@ -27,7 +27,7 @@
  * ----------------------------
  * XYBoxAndWhiskerRenderer.java
  * ----------------------------
- * (C) Copyright 2003-2016, by David Browning and Contributors.
+ * (C) Copyright 2003-2017, by David Browning and Contributors.
  *
  * Original Author:  David Browning (for Australian Institute of Marine
  *                   Science);
@@ -146,7 +146,7 @@ public class XYBoxAndWhiskerRenderer extends AbstractXYItemRenderer
      * The paint used to draw various artifacts such as outliers, farout
      * symbol, average ellipse and median line.
      */
-    private transient Paint artifactPaint = Color.black;
+    private transient Paint artifactPaint = Color.BLACK;
 
     /**
      * Creates a new renderer for box and whisker charts.
@@ -166,7 +166,7 @@ public class XYBoxAndWhiskerRenderer extends AbstractXYItemRenderer
     public XYBoxAndWhiskerRenderer(double boxWidth) {
         super();
         this.boxWidth = boxWidth;
-        this.boxPaint = Color.green;
+        this.boxPaint = Color.GREEN;
         this.fillBox = true;
         setDefaultToolTipGenerator(new BoxAndWhiskerXYToolTipGenerator());
     }
