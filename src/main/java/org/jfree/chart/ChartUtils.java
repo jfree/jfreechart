@@ -690,7 +690,7 @@ public abstract class ChartUtils {
 
     /**
      * Creates an HTML image map.  This method maps to
-     * {@link ImageMapUtilities#getImageMap(String, ChartRenderingInfo,
+     * {@link ImageMapUtils#getImageMap(String, ChartRenderingInfo,
      * ToolTipTagFragmentGenerator, URLTagFragmentGenerator)}, using default
      * generators.
      *
@@ -707,7 +707,7 @@ public abstract class ChartUtils {
 
     /**
      * Creates an HTML image map.  This method maps directly to
-     * {@link ImageMapUtilities#getImageMap(String, ChartRenderingInfo,
+     * {@link ImageMapUtils#getImageMap(String, ChartRenderingInfo,
      * ToolTipTagFragmentGenerator, URLTagFragmentGenerator)}.
      *
      * @param name  the map name ({@code null} not permitted).
