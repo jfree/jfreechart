@@ -72,7 +72,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.jfree.chart.ChartRenderingInfo;
-import org.jfree.chart.ChartUtilities;
+import org.jfree.chart.ChartUtils;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.util.ParamChecks;
 
@@ -180,7 +180,7 @@ public class ServletUtilities {
         }
         File tempFile = File.createTempFile(prefix, ".png",
                 new File(System.getProperty("java.io.tmpdir")));
-        ChartUtilities.saveChartAsPNG(tempFile, chart, width, height, info);
+        ChartUtils.saveChartAsPNG(tempFile, chart, width, height, info);
         if (session != null) {
             ServletUtilities.registerChartForDeletion(tempFile, session);
         }
@@ -252,7 +252,7 @@ public class ServletUtilities {
         }
         File tempFile = File.createTempFile(prefix, ".jpeg",
                 new File(System.getProperty("java.io.tmpdir")));
-        ChartUtilities.saveChartAsJPEG(tempFile, chart, width, height, info);
+        ChartUtils.saveChartAsJPEG(tempFile, chart, width, height, info);
         if (session != null) {
             ServletUtilities.registerChartForDeletion(tempFile, session);
         }

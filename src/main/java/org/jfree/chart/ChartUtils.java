@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * -------------------
- * ChartUtilities.java
- * -------------------
- * (C) Copyright 2001-2016, by Object Refinery Limited and Contributors.
+ * ---------------
+ * ChartUtils.java
+ * ---------------
+ * (C) Copyright 2001-2017, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Wolfgang Irler;
@@ -106,7 +106,7 @@ import org.jfree.chart.util.ParamChecks;
  *
  * @see ImageMapUtilities
  */
-public abstract class ChartUtilities {
+public abstract class ChartUtils {
 
     /**
      * Applies the current theme to the specified chart.  This method is
@@ -156,7 +156,7 @@ public abstract class ChartUtilities {
             throws IOException {
 
         // defer argument checking...
-        ChartUtilities.writeChartAsPNG(out, chart, width, height, null,
+        ChartUtils.writeChartAsPNG(out, chart, width, height, null,
                 encodeAlpha, compression);
 
     }
@@ -210,7 +210,7 @@ public abstract class ChartUtilities {
         ParamChecks.nullNotPermitted(chart, "chart");
         BufferedImage chartImage = chart.createBufferedImage(width, height,
                 BufferedImage.TYPE_INT_ARGB, info);
-        ChartUtilities.writeBufferedImageAsPNG(out, chartImage, encodeAlpha,
+        ChartUtils.writeBufferedImageAsPNG(out, chartImage, encodeAlpha,
                 compression);
 
     }
@@ -307,7 +307,7 @@ public abstract class ChartUtilities {
         ParamChecks.nullNotPermitted(file, "file");
         OutputStream out = new BufferedOutputStream(new FileOutputStream(file));
         try {
-            ChartUtilities.writeChartAsPNG(out, chart, width, height, info);
+            ChartUtils.writeChartAsPNG(out, chart, width, height, info);
         }
         finally {
             out.close();
@@ -382,7 +382,7 @@ public abstract class ChartUtilities {
             JFreeChart chart, int width, int height) throws IOException {
 
         // defer argument checking...
-        ChartUtilities.writeChartAsJPEG(out, quality, chart, width, height,
+        ChartUtils.writeChartAsJPEG(out, quality, chart, width, height,
                 null);
 
     }
