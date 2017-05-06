@@ -44,7 +44,7 @@ package org.jfree.data.category;
 
 import java.util.List;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 
 import org.jfree.data.DataUtils;
 import org.jfree.data.UnknownKeyException;
@@ -189,7 +189,7 @@ public class DefaultIntervalCategoryDatasetTest {
         DefaultIntervalCategoryDataset d1
                 = new DefaultIntervalCategoryDataset(starts, ends);
         DefaultIntervalCategoryDataset d2 = (DefaultIntervalCategoryDataset) 
-                TestUtilities.serialised(d1);
+                TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 

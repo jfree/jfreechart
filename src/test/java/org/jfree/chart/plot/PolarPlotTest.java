@@ -60,7 +60,7 @@ import java.awt.geom.Rectangle2D;
 
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.LegendItemCollection;
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.LogAxis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.NumberTickUnit;
@@ -265,7 +265,7 @@ public class PolarPlotTest {
                 4.0f, Color.BLUE));
         p1.setRadiusGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f,
                 4.0f, Color.BLUE));
-        PolarPlot p2 = (PolarPlot) TestUtilities.serialised(p1);
+        PolarPlot p2 = (PolarPlot) TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 

@@ -51,7 +51,7 @@ import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Stroke;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.Test;
@@ -159,7 +159,7 @@ public class XYLineAnnotationTest {
         Stroke stroke = new BasicStroke(2.0f);
         XYLineAnnotation a1 = new XYLineAnnotation(10.0, 20.0, 100.0, 200.0,
                 stroke, Color.BLUE);
-        XYLineAnnotation a2 = (XYLineAnnotation) TestUtilities.serialised(a1);
+        XYLineAnnotation a2 = (XYLineAnnotation) TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 

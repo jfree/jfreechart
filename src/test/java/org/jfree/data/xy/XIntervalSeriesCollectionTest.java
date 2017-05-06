@@ -46,7 +46,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.Test;
@@ -119,7 +119,7 @@ public class XIntervalSeriesCollectionTest {
         XIntervalSeries s1 = new XIntervalSeries("Series");
         s1.add(1.0, 1.1, 1.2, 1.3);
         XIntervalSeriesCollection c2 = (XIntervalSeriesCollection) 
-                TestUtilities.serialised(c1);
+                TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 

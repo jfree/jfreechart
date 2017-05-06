@@ -51,7 +51,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.GradientPaint;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.Test;
@@ -161,7 +161,7 @@ public class XYErrorRendererTest {
         XYErrorRenderer r1 = new XYErrorRenderer();
         r1.setErrorPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f,
                 Color.WHITE));
-        XYErrorRenderer r2 = (XYErrorRenderer) TestUtilities.serialised(r1);
+        XYErrorRenderer r2 = (XYErrorRenderer) TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 
@@ -172,7 +172,7 @@ public class XYErrorRendererTest {
     public void testSerialization2() {
         XYErrorRenderer r1 = new XYErrorRenderer();
         r1.setErrorStroke(new BasicStroke(1.5f));
-        XYErrorRenderer r2 = (XYErrorRenderer) TestUtilities.serialised(r1);
+        XYErrorRenderer r2 = (XYErrorRenderer) TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

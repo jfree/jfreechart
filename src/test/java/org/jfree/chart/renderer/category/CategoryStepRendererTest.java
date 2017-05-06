@@ -49,7 +49,7 @@ import static org.junit.Assert.assertFalse;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.LegendItem;
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.CategoryPlot;
@@ -105,7 +105,7 @@ public class CategoryStepRendererTest {
     public void testSerialization() {
         CategoryStepRenderer r1 = new CategoryStepRenderer();
         CategoryStepRenderer r2 = (CategoryStepRenderer) 
-                TestUtilities.serialised(r1);
+                TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

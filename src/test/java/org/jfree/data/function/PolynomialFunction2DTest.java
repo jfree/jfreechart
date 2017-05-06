@@ -41,7 +41,7 @@
 package org.jfree.data.function;
 
 import java.util.Arrays;
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -121,7 +121,7 @@ public class PolynomialFunction2DTest {
         PolynomialFunction2D f1 = new PolynomialFunction2D(new double[] {1.0,
                 2.0});
         PolynomialFunction2D f2 = (PolynomialFunction2D) 
-                TestUtilities.serialised(f1);
+                TestUtils.serialised(f1);
         assertEquals(f1, f2);
     }
 

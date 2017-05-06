@@ -45,7 +45,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -107,7 +107,7 @@ public class DefaultPolarItemRendererTest {
     public void testSerialization() {
         DefaultPolarItemRenderer r1 = new DefaultPolarItemRenderer();
         DefaultPolarItemRenderer r2 = (DefaultPolarItemRenderer) 
-                TestUtilities.serialised(r1);
+                TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

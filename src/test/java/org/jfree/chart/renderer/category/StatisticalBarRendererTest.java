@@ -54,7 +54,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.CategoryPlot;
@@ -130,7 +130,7 @@ public class StatisticalBarRendererTest {
     public void testSerialization() {
         StatisticalBarRenderer r1 = new StatisticalBarRenderer();
         StatisticalBarRenderer r2 = (StatisticalBarRenderer) 
-                TestUtilities.serialised(r1);
+                TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

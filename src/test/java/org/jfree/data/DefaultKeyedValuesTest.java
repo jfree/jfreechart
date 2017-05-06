@@ -51,7 +51,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.SortOrder;
 import org.junit.Test;
 
@@ -493,7 +493,7 @@ public class DefaultKeyedValuesTest {
         v1.addValue("Key 3", new Double(42));
 
         DefaultKeyedValues v2 = (DefaultKeyedValues) 
-                TestUtilities.serialised(v1);
+                TestUtils.serialised(v1);
         assertEquals(v1, v2);
     }
 

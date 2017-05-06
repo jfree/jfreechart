@@ -49,7 +49,7 @@ import static org.junit.Assert.assertFalse;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.LegendItem;
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.util.PublicCloneable;
@@ -116,7 +116,7 @@ public class XYBubbleRendererTest {
     @Test
     public void testSerialization() {
         XYBubbleRenderer r1 = new XYBubbleRenderer();
-        XYBubbleRenderer r2 = (XYBubbleRenderer) TestUtilities.serialised(r1);
+        XYBubbleRenderer r2 = (XYBubbleRenderer) TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

@@ -51,7 +51,7 @@ import java.awt.Shape;
 import java.awt.Stroke;
 import java.awt.geom.Rectangle2D;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -185,7 +185,7 @@ public class DefaultDrawingSupplierTest {
     public void testSerialization() {
         DefaultDrawingSupplier r1 = new DefaultDrawingSupplier();
         DefaultDrawingSupplier r2 = (DefaultDrawingSupplier) 
-                TestUtilities.serialised(r1);
+                TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

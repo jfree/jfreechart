@@ -44,7 +44,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.Test;
@@ -110,7 +110,7 @@ public class GradientXYBarPainterTest {
     public void testSerialization() {
         GradientXYBarPainter p1 = new GradientXYBarPainter(0.1, 0.2, 0.3);
         GradientXYBarPainter p2 = (GradientXYBarPainter) 
-                TestUtilities.serialised(p1);
+                TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 

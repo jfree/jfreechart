@@ -55,7 +55,7 @@ import java.awt.Font;
 import java.awt.GradientPaint;
 import java.awt.font.TextAttribute;
 import java.text.AttributedString;
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.ui.RectangleInsets;
 
 import org.junit.Test;
@@ -272,7 +272,7 @@ public class AxisTest  {
         label.addAttribute(TextAttribute.SUPERSCRIPT, 
                 TextAttribute.SUPERSCRIPT_SUB, 1, 4);
         a1.setAttributedLabel(label);
-        Axis a2 = (Axis) TestUtilities.serialised(a1);
+        Axis a2 = (Axis) TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 

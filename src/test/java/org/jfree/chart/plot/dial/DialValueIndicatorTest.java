@@ -50,7 +50,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.TextAnchor;
@@ -202,7 +202,7 @@ public class DialValueIndicatorTest {
     public void testSerialization() {
         DialValueIndicator i1 = new DialValueIndicator(0);
         DialValueIndicator i2 = (DialValueIndicator) 
-                TestUtilities.serialised(i1);
+                TestUtils.serialised(i1);
         assertEquals(i1, i2);
     }
 

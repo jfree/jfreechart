@@ -68,7 +68,7 @@ import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.event.RendererChangeEvent;
@@ -695,7 +695,7 @@ public class AbstractRendererTest {
         r1.setDefaultLegendTextPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.GREEN));
         r1.setDefaultLegendShape(new Line2D.Double(1.0, 2.0, 3.0, 4.0));
-        BarRenderer r2 = (BarRenderer) TestUtilities.serialised(r1);
+        BarRenderer r2 = (BarRenderer) TestUtils.serialised(r1);
         assertEquals(r1, r2);
         try {
             r2.notifyListeners(new RendererChangeEvent(r2));

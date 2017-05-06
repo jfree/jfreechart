@@ -58,7 +58,7 @@ import java.util.Date;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.statistics.BoxAndWhiskerItem;
 import org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset;
@@ -148,7 +148,7 @@ public class XYBoxAndWhiskerRendererTest {
     public void testSerialization() {
         XYBoxAndWhiskerRenderer r1 = new XYBoxAndWhiskerRenderer();
         XYBoxAndWhiskerRenderer r2 = (XYBoxAndWhiskerRenderer) 
-                TestUtilities.serialised(r1);
+                TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

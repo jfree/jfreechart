@@ -52,7 +52,7 @@ import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Stroke;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -142,7 +142,7 @@ public class CyclicNumberAxisTest  {
     @Test
     public void testSerialization() {
         CyclicNumberAxis a1 = new CyclicNumberAxis(10, 0, "Test Axis");
-        CyclicNumberAxis a2 = (CyclicNumberAxis) TestUtilities.serialised(a1);
+        CyclicNumberAxis a2 = (CyclicNumberAxis) TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 

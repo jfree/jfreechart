@@ -50,7 +50,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
 import java.text.NumberFormat;
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 
 import org.jfree.chart.labels.StandardCrosshairLabelGenerator;
 import org.jfree.chart.ui.RectangleAnchor;
@@ -191,7 +191,7 @@ public class CrosshairTest {
     public void testSerialization() {
         Crosshair c1 = new Crosshair(1.0, new GradientPaint(1.0f, 2.0f,
                 Color.RED, 3.0f, 4.0f, Color.BLUE), new BasicStroke(1.0f));
-        Crosshair c2 = (Crosshair) TestUtilities.serialised(c1);
+        Crosshair c2 = (Crosshair) TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 

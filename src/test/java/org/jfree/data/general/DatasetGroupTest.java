@@ -40,7 +40,7 @@
 
 package org.jfree.data.general;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
@@ -55,7 +55,7 @@ public class DatasetGroupTest {
     @Test
     public void testSerialization() {
         DatasetGroup g1 = new DatasetGroup();
-        DatasetGroup g2 = (DatasetGroup) TestUtilities.serialised(g1);
+        DatasetGroup g2 = (DatasetGroup) TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

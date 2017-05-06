@@ -48,7 +48,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.GradientPaint;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 
@@ -154,7 +154,7 @@ public class DialCapTest {
     public void testSerialization() {
         // test a default instance
         DialCap c1 = new DialCap();
-        DialCap c2 = (DialCap) TestUtilities.serialised(c1);
+        DialCap c2 = (DialCap) TestUtils.serialised(c1);
         assertEquals(c1, c2);
 
         // test a custom instance
@@ -165,7 +165,7 @@ public class DialCapTest {
                 3.0f, 4.0f, Color.gray));
         c1.setOutlineStroke(new BasicStroke(2.0f));
 
-        c2 = (DialCap) TestUtilities.serialised(c1);
+        c2 = (DialCap) TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 

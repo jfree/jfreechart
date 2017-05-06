@@ -66,7 +66,7 @@ import java.util.List;
 import org.jfree.chart.ChartRenderingInfo;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.LegendItem;
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.CategoryPlot;
@@ -165,7 +165,7 @@ public class BoxAndWhiskerRendererTest {
     public void testSerialization() {
         BoxAndWhiskerRenderer r1 = new BoxAndWhiskerRenderer();
         BoxAndWhiskerRenderer r2 = (BoxAndWhiskerRenderer) 
-                TestUtilities.serialised(r1);
+                TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

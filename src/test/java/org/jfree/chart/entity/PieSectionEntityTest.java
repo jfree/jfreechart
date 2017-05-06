@@ -46,7 +46,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.awt.geom.Rectangle2D;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 
 import org.jfree.data.general.DefaultPieDataset;
 import org.junit.Test;
@@ -127,7 +127,7 @@ public class PieSectionEntityTest {
         PieSectionEntity e1 = new PieSectionEntity(new Rectangle2D.Double(1.0,
                 2.0, 3.0, 4.0), new DefaultPieDataset(), 1, 2, "Key",
                 "ToolTip", "URL");
-        PieSectionEntity e2 = (PieSectionEntity) TestUtilities.serialised(e1);
+        PieSectionEntity e2 = (PieSectionEntity) TestUtils.serialised(e1);
         assertEquals(e1, e2);
     }
 

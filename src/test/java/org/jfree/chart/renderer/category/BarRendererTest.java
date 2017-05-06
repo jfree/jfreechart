@@ -58,7 +58,7 @@ import java.awt.Color;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.LegendItem;
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.labels.ItemLabelAnchor;
@@ -216,7 +216,7 @@ public class BarRendererTest {
     @Test
     public void testSerialization() {
         BarRenderer r1 = new BarRenderer();
-        BarRenderer r2 = (BarRenderer) TestUtilities.serialised(r1);
+        BarRenderer r2 = (BarRenderer) TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

@@ -56,7 +56,7 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.date.MonthConstants;
 
 import org.junit.Test;
@@ -137,7 +137,7 @@ public class SecondTest {
     @Test
     public void testSerialization() {
         Second s1 = new Second();
-        Second s2 = (Second) TestUtilities.serialised(s1);
+        Second s2 = (Second) TestUtils.serialised(s1);
         assertEquals(s1, s2);
     }
 

@@ -51,7 +51,7 @@ import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.geom.Rectangle2D;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.Test;
@@ -176,7 +176,7 @@ public class XYShapeAnnotationTest {
         XYShapeAnnotation a1 = new XYShapeAnnotation(
                 new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0),
                 new BasicStroke(1.2f), Color.RED, Color.BLUE);
-        XYShapeAnnotation a2 = (XYShapeAnnotation) TestUtilities.serialised(a1);
+        XYShapeAnnotation a2 = (XYShapeAnnotation) TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 

@@ -51,7 +51,7 @@ import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.ui.Drawable;
 import org.jfree.chart.util.PublicCloneable;
 
@@ -197,7 +197,7 @@ public class XYDrawableAnnotationTest {
     public void testSerialization() {
         XYDrawableAnnotation a1 = new XYDrawableAnnotation(10.0, 20.0, 100.0,
                 200.0, new TestDrawable());
-        XYDrawableAnnotation a2 = (XYDrawableAnnotation) TestUtilities.serialised(a1);
+        XYDrawableAnnotation a2 = (XYDrawableAnnotation) TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 

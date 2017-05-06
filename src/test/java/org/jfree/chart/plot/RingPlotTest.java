@@ -55,7 +55,7 @@ import java.awt.GradientPaint;
 import java.awt.Stroke;
 import java.text.DecimalFormat;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 
 /**
  * Tests for the {@link RingPlot} class.
@@ -163,7 +163,7 @@ public class RingPlotTest {
         GradientPaint gp = new GradientPaint(1.0f, 2.0f, Color.YELLOW,
                 3.0f, 4.0f, Color.RED);
         p1.setSeparatorPaint(gp);
-        RingPlot p2 = (RingPlot) TestUtilities.serialised(p1);
+        RingPlot p2 = (RingPlot) TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 

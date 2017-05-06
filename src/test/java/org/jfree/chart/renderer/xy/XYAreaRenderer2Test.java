@@ -52,7 +52,7 @@ import java.awt.Rectangle;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.LegendItem;
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.util.PublicCloneable;
@@ -132,7 +132,7 @@ public class XYAreaRenderer2Test {
     @Test
     public void testSerialization() {
         XYAreaRenderer2 r1 = new XYAreaRenderer2();
-        XYAreaRenderer2 r2 = (XYAreaRenderer2) TestUtilities.serialised(r1);
+        XYAreaRenderer2 r2 = (XYAreaRenderer2) TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

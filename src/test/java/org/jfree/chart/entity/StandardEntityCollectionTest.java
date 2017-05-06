@@ -46,7 +46,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.awt.geom.Rectangle2D;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 
 import org.jfree.data.general.DefaultPieDataset;
 import org.junit.Test;
@@ -110,7 +110,7 @@ public class StandardEntityCollectionTest {
         StandardEntityCollection c1 = new StandardEntityCollection();
         c1.add(e1);
         StandardEntityCollection c2 = (StandardEntityCollection) 
-                TestUtilities.serialised(c1);
+                TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 

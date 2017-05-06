@@ -322,7 +322,7 @@ public class LegendItemTest {
         item1.setLinePaint(new GradientPaint(1.0f, 2.0f, Color.WHITE, 3.0f,
                 4.0f, Color.RED));
         LegendItem item2;
-        item2 = (LegendItem) TestUtilities.serialised(item1);
+        item2 = (LegendItem) TestUtils.serialised(item1);
         assertEquals(item1, item2);
     }
 
@@ -335,7 +335,7 @@ public class LegendItemTest {
         as.addAttribute(TextAttribute.FONT, new Font("Dialog", Font.PLAIN, 12));
         LegendItem item1 = new LegendItem(as, "Description", "ToolTip", "URL",
                 new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), Color.RED);
-        LegendItem item2 = (LegendItem) TestUtilities.serialised(item1);
+        LegendItem item2 = (LegendItem) TestUtils.serialised(item1);
         assertEquals(item1, item2);
     }
 

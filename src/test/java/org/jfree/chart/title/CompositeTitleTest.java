@@ -50,7 +50,7 @@ import static org.junit.Assert.assertNull;
 import java.awt.Color;
 import java.awt.GradientPaint;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 
 import org.jfree.chart.block.BlockBorder;
 import org.jfree.chart.block.BlockContainer;
@@ -159,7 +159,7 @@ public class CompositeTitleTest {
         t1.getContainer().add(new TextTitle("T1"));
         t1.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.BLUE));
-        CompositeTitle t2 = (CompositeTitle) TestUtilities.serialised(t1);
+        CompositeTitle t2 = (CompositeTitle) TestUtils.serialised(t1);
         assertEquals(t1, t2);
     }
 

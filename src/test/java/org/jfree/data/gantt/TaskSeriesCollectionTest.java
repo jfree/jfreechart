@@ -44,7 +44,7 @@ package org.jfree.data.gantt;
 
 import java.util.Date;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 
 import org.jfree.data.time.SimpleTimePeriod;
 import org.junit.Test;
@@ -495,7 +495,7 @@ public class TaskSeriesCollectionTest {
         c1.add(s1);
         c1.add(s2);
         TaskSeriesCollection c2 = (TaskSeriesCollection) 
-                TestUtilities.serialised(c1);
+                TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 

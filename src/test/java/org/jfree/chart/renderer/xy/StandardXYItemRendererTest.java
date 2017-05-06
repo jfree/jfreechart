@@ -62,7 +62,7 @@ import org.jfree.chart.LegendItem;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.entity.XYItemEntity;
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.util.PublicCloneable;
@@ -190,7 +190,7 @@ public class StandardXYItemRendererTest {
     public void testSerialization() {
         StandardXYItemRenderer r1 = new StandardXYItemRenderer();
         StandardXYItemRenderer r2 = (StandardXYItemRenderer) 
-                TestUtilities.serialised(r1);
+                TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 
@@ -255,7 +255,7 @@ public class StandardXYItemRendererTest {
         chart.draw(g2, new Rectangle2D.Double(0, 0, 200, 100), null, info);
         g2.dispose();
         EntityCollection ec = info.getEntityCollection();
-        assertFalse(TestUtilities.containsInstanceOf(ec.getEntities(),
+        assertFalse(TestUtils.containsInstanceOf(ec.getEntities(),
                 XYItemEntity.class));
     }
 

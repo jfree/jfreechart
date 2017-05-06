@@ -49,7 +49,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.Date;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -63,7 +63,7 @@ public class FixedMillisecondTest {
     @Test
     public void testSerialization() {
         FixedMillisecond m1 = new FixedMillisecond();
-        FixedMillisecond m2 = (FixedMillisecond) TestUtilities.serialised(m1);
+        FixedMillisecond m2 = (FixedMillisecond) TestUtils.serialised(m1);
         assertEquals(m1, m2);
     }
 

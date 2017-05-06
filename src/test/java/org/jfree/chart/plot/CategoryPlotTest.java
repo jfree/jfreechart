@@ -74,7 +74,7 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.LegendItemCollection;
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.annotations.CategoryLineAnnotation;
 import org.jfree.chart.annotations.CategoryTextAnnotation;
 import org.jfree.chart.axis.AxisLocation;
@@ -711,7 +711,7 @@ public class CategoryPlotTest {
         CategoryPlot p1 = new CategoryPlot(dataset, domainAxis, rangeAxis,
                 renderer);
         p1.setOrientation(PlotOrientation.HORIZONTAL);
-        CategoryPlot p2 = (CategoryPlot) TestUtilities.serialised(p1);
+        CategoryPlot p2 = (CategoryPlot) TestUtils.serialised(p1);
         assertTrue(p1.equals(p2));
     }
 
@@ -727,7 +727,7 @@ public class CategoryPlotTest {
         CategoryPlot p1 = new CategoryPlot(data, domainAxis, rangeAxis,
                 renderer);
         p1.setOrientation(PlotOrientation.VERTICAL);
-        CategoryPlot p2 = (CategoryPlot) TestUtilities.serialised(p1);
+        CategoryPlot p2 = (CategoryPlot) TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 
@@ -740,7 +740,7 @@ public class CategoryPlotTest {
         JFreeChart chart = ChartFactory.createBarChart(
                 "Test Chart", "Category Axis", "Value Axis", dataset,
                 PlotOrientation.VERTICAL, true, true, false);
-        JFreeChart chart2 = (JFreeChart) TestUtilities.serialised(chart);
+        JFreeChart chart2 = (JFreeChart) TestUtils.serialised(chart);
 
         // now check that the chart is usable...
         try {
@@ -763,7 +763,7 @@ public class CategoryPlotTest {
         CategoryPlot plot = (CategoryPlot) chart.getPlot();
         plot.addRangeMarker(new ValueMarker(1.1), Layer.FOREGROUND);
         plot.addRangeMarker(new IntervalMarker(2.2, 3.3), Layer.BACKGROUND);
-        JFreeChart chart2 = (JFreeChart) TestUtilities.serialised(chart);
+        JFreeChart chart2 = (JFreeChart) TestUtils.serialised(chart);
         assertEquals(chart, chart2);
 
         // now check that the chart is usable...
@@ -796,7 +796,7 @@ public class CategoryPlotTest {
         p1.setDomainAxis(1, domainAxis2);
         p1.setRangeAxis(1, rangeAxis2);
         p1.setRenderer(1, renderer2);
-        CategoryPlot p2 = (CategoryPlot) TestUtilities.serialised(p1);
+        CategoryPlot p2 = (CategoryPlot) TestUtils.serialised(p1);
         assertEquals(p1, p2);
 
         // now check that all datasets, renderers and axes are being listened

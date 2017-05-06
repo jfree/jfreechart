@@ -61,7 +61,7 @@ import java.text.DecimalFormat;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.LegendItemCollection;
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
 import org.jfree.chart.labels.StandardCategoryToolTipGenerator;
 import org.jfree.chart.urls.StandardCategoryURLGenerator;
@@ -298,7 +298,7 @@ public class SpiderWebPlotTest {
     @Test
     public void testSerialization() {
         SpiderWebPlot p1 = new SpiderWebPlot(new DefaultCategoryDataset());
-        SpiderWebPlot p2 = (SpiderWebPlot) TestUtilities.serialised(p1);
+        SpiderWebPlot p2 = (SpiderWebPlot) TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 

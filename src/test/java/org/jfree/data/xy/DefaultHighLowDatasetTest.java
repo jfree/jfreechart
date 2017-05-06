@@ -47,7 +47,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.Date;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.Test;
@@ -180,7 +180,7 @@ public class DefaultHighLowDatasetTest {
                 new double[] {3.4}, new double[] {5.6}, new double[] {7.8},
                 new double[] {99.9});
         DefaultHighLowDataset d2 = (DefaultHighLowDataset) 
-                TestUtilities.serialised(d1);
+                TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 

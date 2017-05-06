@@ -68,7 +68,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.ui.RectangleEdge;
 
 import org.jfree.data.time.DateRange;
@@ -292,7 +292,7 @@ public class DateAxisTest {
     @Test
     public void testSerialization() {
         DateAxis a1 = new DateAxis("Test Axis");
-        DateAxis a2 = (DateAxis) TestUtilities.serialised(a1);
+        DateAxis a2 = (DateAxis) TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 

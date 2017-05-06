@@ -50,7 +50,7 @@ import static org.junit.Assert.assertNotNull;
 
 import java.awt.Color;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 
 import org.jfree.chart.renderer.LookupPaintScale;
 import org.jfree.data.Range;
@@ -122,7 +122,7 @@ public class XYShapeRendererTest {
      */
     public void testSerialization() {
         XYShapeRenderer r1 = new XYShapeRenderer();
-        XYShapeRenderer r2 = (XYShapeRenderer) TestUtilities.serialised(r1);
+        XYShapeRenderer r2 = (XYShapeRenderer) TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

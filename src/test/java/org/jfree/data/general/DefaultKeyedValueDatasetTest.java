@@ -44,7 +44,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 
 import org.junit.Test;
 
@@ -112,7 +112,7 @@ public class DefaultKeyedValueDatasetTest {
         DefaultKeyedValueDataset d1
             = new DefaultKeyedValueDataset("Test", new Double(25.3));
         DefaultKeyedValueDataset d2 = (DefaultKeyedValueDataset) 
-                TestUtilities.serialised(d1);
+                TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 

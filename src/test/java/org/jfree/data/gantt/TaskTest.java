@@ -42,7 +42,7 @@ package org.jfree.data.gantt;
 
 import java.util.Date;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 
 import org.jfree.data.time.SimpleTimePeriod;
 import static org.junit.Assert.assertEquals;
@@ -106,7 +106,7 @@ public class TaskTest {
     @Test
     public void testSerialization() {
         Task t1 = new Task("T", new Date(1), new Date(2));
-        Task t2 = (Task) TestUtilities.serialised(t1);
+        Task t2 = (Task) TestUtils.serialised(t1);
         assertEquals(t1, t2);
     }
 

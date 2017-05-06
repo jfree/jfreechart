@@ -40,7 +40,7 @@
 
 package org.jfree.data;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
@@ -119,7 +119,7 @@ public class DefaultKeyedValueTest {
     @Test
     public void testSerialization() {
         DefaultKeyedValue v1 = new DefaultKeyedValue("Test", new Double(25.3));
-        DefaultKeyedValue v2 = (DefaultKeyedValue) TestUtilities.serialised(v1);
+        DefaultKeyedValue v2 = (DefaultKeyedValue) TestUtils.serialised(v1);
         assertEquals(v1, v2);
     }
 

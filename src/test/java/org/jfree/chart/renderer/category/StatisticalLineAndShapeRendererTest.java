@@ -52,7 +52,7 @@ import static org.junit.Assert.fail;
 import java.awt.Color;
 
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.CategoryPlot;
@@ -131,7 +131,7 @@ public class StatisticalLineAndShapeRendererTest {
         StatisticalLineAndShapeRenderer r1
                 = new StatisticalLineAndShapeRenderer();
         StatisticalLineAndShapeRenderer r2 = (StatisticalLineAndShapeRenderer) 
-                TestUtilities.serialised(r1);
+                TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

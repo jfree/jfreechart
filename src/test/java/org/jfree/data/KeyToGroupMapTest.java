@@ -40,7 +40,7 @@
 
 package org.jfree.data;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -243,7 +243,7 @@ public class KeyToGroupMapTest {
     @Test
     public void testSerialization() {
         KeyToGroupMap m1 = new KeyToGroupMap("Test");
-        KeyToGroupMap m2 = (KeyToGroupMap) TestUtilities.serialised(m1);
+        KeyToGroupMap m2 = (KeyToGroupMap) TestUtils.serialised(m1);
         assertEquals(m1, m2);
     }
 

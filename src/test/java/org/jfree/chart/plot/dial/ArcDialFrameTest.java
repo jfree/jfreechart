@@ -49,7 +49,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.GradientPaint;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -156,7 +156,7 @@ public class ArcDialFrameTest {
     @Test
     public void testSerialization() {
         ArcDialFrame f1 = new ArcDialFrame();
-        ArcDialFrame f2 = (ArcDialFrame) TestUtilities.serialised(f1);
+        ArcDialFrame f2 = (ArcDialFrame) TestUtils.serialised(f1);
         assertEquals(f1, f2);
     }
 

@@ -55,7 +55,7 @@ import java.awt.Color;
 import java.awt.GradientPaint;
 import java.util.Date;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.Range;
@@ -200,7 +200,7 @@ public class CandlestickRendererTest {
     public void testSerialization() {
         CandlestickRenderer r1 = new CandlestickRenderer();
         CandlestickRenderer r2 = (CandlestickRenderer) 
-                TestUtilities.serialised(r1);
+                TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

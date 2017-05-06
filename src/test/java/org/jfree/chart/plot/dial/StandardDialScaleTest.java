@@ -51,7 +51,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -218,7 +218,7 @@ public class StandardDialScaleTest {
     public void testSerialization() {
         // try a default instance
         StandardDialScale s1 = new StandardDialScale();
-        StandardDialScale s2 = (StandardDialScale) TestUtilities.serialised(s1);
+        StandardDialScale s2 = (StandardDialScale) TestUtils.serialised(s1);
         assertEquals(s1, s2);
 
         // try a customised instance
@@ -228,7 +228,7 @@ public class StandardDialScaleTest {
                 4.0f, Color.WHITE));
         s1.setMajorTickStroke(new BasicStroke(2.0f));
 
-        s2 = (StandardDialScale) TestUtilities.serialised(s1);
+        s2 = (StandardDialScale) TestUtils.serialised(s1);
         assertEquals(s1, s2);
     }
 

@@ -45,7 +45,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.Test;
@@ -117,7 +117,7 @@ public class MatrixSeriesCollectionTest {
         MatrixSeriesCollection c1 = new MatrixSeriesCollection();
         c1.addSeries(s1);
         MatrixSeriesCollection c2 = (MatrixSeriesCollection) 
-                TestUtilities.serialised(c1);
+                TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 

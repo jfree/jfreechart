@@ -47,7 +47,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.TimeZone;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -125,7 +125,7 @@ public class QuarterDateFormatTest {
     public void testSerialization() {
         QuarterDateFormat qf1 = new QuarterDateFormat(TimeZone.getTimeZone(
                 "GMT"), new String[] {"1", "2", "3", "4"});
-        QuarterDateFormat qf2 = (QuarterDateFormat) TestUtilities.serialised(qf1);
+        QuarterDateFormat qf2 = (QuarterDateFormat) TestUtils.serialised(qf1);
         assertEquals(qf1, qf2);
     }
 

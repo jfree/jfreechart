@@ -45,7 +45,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.Test;
@@ -148,7 +148,7 @@ public class CategoryTableXYDatasetTest {
         d1.add(1.0, 1.1, "Series 1");
         d1.add(2.0, 2.2, "Series 1");
         CategoryTableXYDataset d2 = (CategoryTableXYDataset) 
-                TestUtilities.serialised(d1);
+                TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 

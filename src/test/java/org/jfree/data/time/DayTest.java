@@ -62,7 +62,7 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.date.MonthConstants;
 
 import org.junit.Test;
@@ -207,7 +207,7 @@ public class DayTest {
     @Test
     public void testSerialization() {
         Day d1 = new Day(15, 4, 2000);
-        Day d2 = (Day) TestUtilities.serialised(d1);
+        Day d2 = (Day) TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 

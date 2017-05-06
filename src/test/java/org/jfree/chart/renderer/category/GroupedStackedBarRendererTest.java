@@ -48,7 +48,7 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.fail;
 
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.CategoryPlot;
@@ -112,7 +112,7 @@ public class GroupedStackedBarRendererTest {
     public void testSerialization() {
         GroupedStackedBarRenderer r1 = new GroupedStackedBarRenderer();
         GroupedStackedBarRenderer r2 = (GroupedStackedBarRenderer) 
-                TestUtilities.serialised(r1);
+                TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

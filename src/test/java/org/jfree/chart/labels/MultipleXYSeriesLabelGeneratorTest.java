@@ -45,7 +45,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.Test;
@@ -132,7 +132,7 @@ public class MultipleXYSeriesLabelGeneratorTest {
         g1.addSeriesLabel(0, "Add0b");
         g1.addSeriesLabel(1, "Add1");
         MultipleXYSeriesLabelGenerator g2 = (MultipleXYSeriesLabelGenerator) 
-                TestUtilities.serialised(g1);
+                TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

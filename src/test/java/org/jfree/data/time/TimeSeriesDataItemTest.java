@@ -44,7 +44,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -90,7 +90,7 @@ public class TimeSeriesDataItemTest {
         TimeSeriesDataItem item1 = new TimeSeriesDataItem(new Day(23, 9, 2001), 
                 99.7);
         TimeSeriesDataItem item2 = (TimeSeriesDataItem) 
-                TestUtilities.serialised(item1);
+                TestUtils.serialised(item1);
         assertEquals(item1, item2);
     }
 

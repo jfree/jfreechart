@@ -50,7 +50,7 @@ import java.awt.image.BufferedImage;
 import java.util.List;
 
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.event.ChartChangeEvent;
@@ -127,7 +127,7 @@ public class CombinedDomainCategoryPlotTest implements ChartChangeListener {
     public void testSerialization() {
         CombinedDomainCategoryPlot plot1 = createPlot();
         CombinedDomainCategoryPlot plot2 = (CombinedDomainCategoryPlot) 
-                TestUtilities.serialised(plot1);
+                TestUtils.serialised(plot1);
         assertEquals(plot1, plot2);
     }
 

@@ -46,7 +46,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.category.DefaultCategoryDataset;
@@ -120,7 +120,7 @@ public class StandardCategoryURLGeneratorTest {
         StandardCategoryURLGenerator g1 = new StandardCategoryURLGenerator(
                 "index.html?");
         StandardCategoryURLGenerator g2 = (StandardCategoryURLGenerator) 
-                TestUtilities.serialised(g1);
+                TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

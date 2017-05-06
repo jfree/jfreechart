@@ -53,7 +53,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.util.PublicCloneable;
 
@@ -189,7 +189,7 @@ public class XYTextAnnotationTest {
         XYTextAnnotation a1 = new XYTextAnnotation("Text", 10.0, 20.0);
         a1.setOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f,
                 Color.BLUE));
-        XYTextAnnotation a2 = (XYTextAnnotation) TestUtilities.serialised(a1);
+        XYTextAnnotation a2 = (XYTextAnnotation) TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 

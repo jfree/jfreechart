@@ -47,7 +47,7 @@ import static org.junit.Assert.assertTrue;
 import java.awt.BasicStroke;
 import java.awt.Color;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 
 import org.jfree.data.Range;
 import org.junit.Test;
@@ -102,7 +102,7 @@ public class MeterIntervalTest {
     @Test
     public void testSerialization() {
         MeterInterval m1 = new MeterInterval("X", new Range(1.0, 2.0));
-        MeterInterval m2 = (MeterInterval) TestUtilities.serialised(m1);
+        MeterInterval m2 = (MeterInterval) TestUtils.serialised(m1);
         assertEquals(m1, m2);
     }
 

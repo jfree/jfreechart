@@ -50,7 +50,7 @@ import java.awt.Font;
 import java.awt.GradientPaint;
 import java.awt.geom.Rectangle2D;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.ui.RectangleAnchor;
@@ -152,7 +152,7 @@ public class LegendTitleTest {
     public void testSerialization() {
         XYPlot plot = new XYPlot();
         LegendTitle t1 = new LegendTitle(plot);
-        LegendTitle t2 = (LegendTitle) TestUtilities.serialised(t1);
+        LegendTitle t2 = (LegendTitle) TestUtils.serialised(t1);
         assertTrue(t1.equals(t2));
         assertTrue(t2.getSources()[0].equals(plot));
     }

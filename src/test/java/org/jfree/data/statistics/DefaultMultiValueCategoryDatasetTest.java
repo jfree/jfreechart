@@ -47,7 +47,7 @@ import static org.junit.Assert.assertFalse;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 
 import org.jfree.data.UnknownKeyException;
 import org.junit.Test;
@@ -184,7 +184,7 @@ public class DefaultMultiValueCategoryDatasetTest {
         DefaultMultiValueCategoryDataset d1
                 = new DefaultMultiValueCategoryDataset();
         DefaultMultiValueCategoryDataset d2 = (DefaultMultiValueCategoryDataset)
-                TestUtilities.serialised(d1);
+                TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 

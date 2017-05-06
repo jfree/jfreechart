@@ -67,7 +67,7 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.date.MonthConstants;
 import org.jfree.data.Range;
 import org.jfree.data.general.SeriesChangeEvent;
@@ -282,7 +282,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
         s1.add(new Year(2002), null);
         s1.add(new Year(2005), 19.32);
         s1.add(new Year(2007), 16.89);
-        TimeSeries s2 = (TimeSeries) TestUtilities.serialised(s1);
+        TimeSeries s2 = (TimeSeries) TestUtils.serialised(s1);
         assertTrue(s1.equals(s2));
     }
 

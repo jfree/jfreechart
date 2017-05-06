@@ -50,7 +50,7 @@ import static org.junit.Assert.assertFalse;
 
 import java.util.ArrayList;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 
 import org.jfree.data.Range;
 import org.jfree.data.UnknownKeyException;
@@ -94,7 +94,7 @@ public class DefaultBoxAndWhiskerCategoryDatasetTest {
                 new Double(6.0), new Double(7.0), new Double(8.0),
                 new ArrayList()), "ROW1", "COLUMN1");
         DefaultBoxAndWhiskerCategoryDataset d2 = 
-                (DefaultBoxAndWhiskerCategoryDataset) TestUtilities.serialised(d1);
+                (DefaultBoxAndWhiskerCategoryDataset) TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 

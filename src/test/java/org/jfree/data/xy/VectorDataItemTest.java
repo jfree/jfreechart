@@ -44,7 +44,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -115,7 +115,7 @@ public class VectorDataItemTest {
     @Test
     public void testSerialization() {
         VectorDataItem v1 = new VectorDataItem(1.0, 2.0, 3.0, 4.0);
-        VectorDataItem v2 = (VectorDataItem) TestUtilities.serialised(v1);
+        VectorDataItem v2 = (VectorDataItem) TestUtils.serialised(v1);
         assertEquals(v1, v2);
     }
 

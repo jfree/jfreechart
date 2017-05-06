@@ -49,7 +49,7 @@ import static org.junit.Assert.assertFalse;
 import java.awt.Color;
 import java.awt.GradientPaint;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.Test;
@@ -133,7 +133,7 @@ public class GanttRendererTest {
                 4.0f, Color.BLUE));
         r1.setIncompletePaint(new GradientPaint(4.0f, 3.0f, Color.RED, 2.0f,
                 1.0f, Color.BLUE));
-        GanttRenderer r2 = (GanttRenderer) TestUtilities.serialised(r1);
+        GanttRenderer r2 = (GanttRenderer) TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

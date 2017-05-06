@@ -46,7 +46,7 @@ import static org.junit.Assert.assertFalse;
 
 import java.awt.geom.Rectangle2D;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.ui.RectangleEdge;
 import org.junit.Before;
 import org.junit.Test;
@@ -105,7 +105,7 @@ public class LogarithmicAxisTest {
     @Test
     public void testSerialization() {
         LogarithmicAxis a1 = new LogarithmicAxis("Test Axis");
-        LogarithmicAxis a2 = (LogarithmicAxis) TestUtilities.serialised(a1);
+        LogarithmicAxis a2 = (LogarithmicAxis) TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 

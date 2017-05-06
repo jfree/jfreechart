@@ -47,7 +47,7 @@ import static org.junit.Assert.assertTrue;
 import java.awt.Color;
 import java.awt.GradientPaint;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -128,7 +128,7 @@ public class StandardDialRangeTest {
     @Test
     public void testSerialization() {
         StandardDialRange r1 = new StandardDialRange();
-        StandardDialRange r2 = (StandardDialRange) TestUtilities.serialised(r1);
+        StandardDialRange r2 = (StandardDialRange) TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

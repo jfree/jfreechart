@@ -56,7 +56,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.ui.RectangleInsets;
 
 import org.jfree.data.time.Day;
@@ -176,7 +176,7 @@ public class PeriodAxisLabelInfoTest {
     public void testSerialization() {
         PeriodAxisLabelInfo info1 = new PeriodAxisLabelInfo(Day.class,
                 new SimpleDateFormat("d"));
-        PeriodAxisLabelInfo info2 = (PeriodAxisLabelInfo) TestUtilities.serialised(info1);
+        PeriodAxisLabelInfo info2 = (PeriodAxisLabelInfo) TestUtils.serialised(info1);
         assertEquals(info1, info2);
     }
 

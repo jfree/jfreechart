@@ -49,7 +49,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.GradientPaint;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 
 import org.jfree.chart.axis.AxisLocation;
 import org.jfree.chart.axis.NumberAxis;
@@ -176,7 +176,7 @@ public class PaintScaleLegendTest {
     public void testSerialization() {
         PaintScaleLegend l1 = new PaintScaleLegend(new GrayPaintScale(),
                 new NumberAxis("X"));
-        PaintScaleLegend l2 = (PaintScaleLegend) TestUtilities.serialised(l1);
+        PaintScaleLegend l2 = (PaintScaleLegend) TestUtils.serialised(l1);
         assertEquals(l1, l2);
     }
 

@@ -54,7 +54,7 @@ import java.awt.image.BufferedImage;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
@@ -152,7 +152,7 @@ public class StackedXYAreaRenderer2Test {
     public void testSerialization() {
         StackedXYAreaRenderer2 r1 = new StackedXYAreaRenderer2();
         StackedXYAreaRenderer2 r2 = (StackedXYAreaRenderer2) 
-                TestUtilities.serialised(r1);
+                TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

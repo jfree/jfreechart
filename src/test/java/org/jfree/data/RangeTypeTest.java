@@ -44,7 +44,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertSame;
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -90,7 +90,7 @@ public class RangeTypeTest {
     @Test
     public void testSerialization() {
         RangeType r1 = RangeType.FULL;
-        RangeType r2 = (RangeType) TestUtilities.serialised(r1);
+        RangeType r2 = (RangeType) TestUtils.serialised(r1);
         assertSame(r1, r2);
     }
 

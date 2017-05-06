@@ -44,7 +44,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -86,7 +86,7 @@ public class DateTickMarkPositionTest {
     @Test
     public void testSerialization() {
         DateTickMarkPosition p1 = DateTickMarkPosition.MIDDLE;
-        DateTickMarkPosition p2 = (DateTickMarkPosition) TestUtilities.serialised(p1);
+        DateTickMarkPosition p2 = (DateTickMarkPosition) TestUtils.serialised(p1);
         assertEquals(p1, p2);
         assertTrue(p1 == p2);
     }

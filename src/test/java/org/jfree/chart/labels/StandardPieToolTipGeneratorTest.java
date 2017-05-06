@@ -54,7 +54,7 @@ import static org.junit.Assert.assertTrue;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.Test;
@@ -151,7 +151,7 @@ public class StandardPieToolTipGeneratorTest {
     public void testSerialization() {
         StandardPieToolTipGenerator g1 = new StandardPieToolTipGenerator();
         StandardPieToolTipGenerator g2 = (StandardPieToolTipGenerator)
-                TestUtilities.serialised(g1);
+                TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

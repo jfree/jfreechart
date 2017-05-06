@@ -51,7 +51,7 @@ import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.category.DefaultCategoryDataset;
@@ -165,7 +165,7 @@ public class StandardCategoryItemLabelGeneratorTest {
                 = new StandardCategoryItemLabelGenerator("{2}",
                 DateFormat.getInstance());
         StandardCategoryItemLabelGenerator g2 = (StandardCategoryItemLabelGenerator) 
-                TestUtilities.serialised(g1);
+                TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

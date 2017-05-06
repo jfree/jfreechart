@@ -49,7 +49,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.GradientPaint;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -138,7 +138,7 @@ public class StandardDialFrameTest {
     @Test
     public void testSerialization() {
         StandardDialFrame f1 = new StandardDialFrame();
-        StandardDialFrame f2 = (StandardDialFrame) TestUtilities.serialised(f1);
+        StandardDialFrame f2 = (StandardDialFrame) TestUtils.serialised(f1);
         assertEquals(f1, f2);
     }
 

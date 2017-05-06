@@ -47,7 +47,7 @@ import static org.junit.Assert.assertTrue;
 import java.awt.Color;
 import java.awt.Font;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -118,7 +118,7 @@ public class DateTitleTest {
     @Test
     public void testSerialization() {
         DateTitle t1 = new DateTitle();
-        DateTitle t2 = (DateTitle) TestUtilities.serialised(t1);
+        DateTitle t2 = (DateTitle) TestUtils.serialised(t1);
         assertEquals(t1, t2);
     }
 

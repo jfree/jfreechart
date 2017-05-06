@@ -57,7 +57,7 @@ import java.awt.Stroke;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
@@ -140,7 +140,7 @@ public class StackedXYAreaRendererTest {
         r1.setShapePaint(Color.RED);
         r1.setShapeStroke(new BasicStroke(1.23f));
         StackedXYAreaRenderer r2 = (StackedXYAreaRenderer) 
-                TestUtilities.serialised(r1);
+                TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

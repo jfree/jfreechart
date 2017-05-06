@@ -50,7 +50,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.text.TextBlockAnchor;
 import org.jfree.chart.ui.RectangleAnchor;
 
@@ -137,7 +137,7 @@ public class LabelBlockTest {
                 Color.BLUE);
         LabelBlock b1 = new LabelBlock("ABC", new Font("Dialog",
                 Font.PLAIN, 12), gp);
-        LabelBlock b2 = (LabelBlock) TestUtilities.serialised(b1);
+        LabelBlock b2 = (LabelBlock) TestUtils.serialised(b1);
         assertEquals(b1, b2);
     }
 

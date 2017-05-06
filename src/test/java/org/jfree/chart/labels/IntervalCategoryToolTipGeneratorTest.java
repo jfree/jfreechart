@@ -50,7 +50,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.Test;
@@ -147,7 +147,7 @@ public class IntervalCategoryToolTipGeneratorTest {
                 = new IntervalCategoryToolTipGenerator("{3} - {4}",
                 DateFormat.getInstance());
         IntervalCategoryToolTipGenerator g2 = (IntervalCategoryToolTipGenerator)
-                TestUtilities.serialised(g1);
+                TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

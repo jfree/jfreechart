@@ -42,7 +42,7 @@ package org.jfree.chart.needle;
 
 import static org.junit.Assert.assertTrue;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -79,7 +79,7 @@ public class PinNeedleTest {
     @Test
     public void testSerialization() {
         PinNeedle n1 = new PinNeedle();
-        PinNeedle n2 = (PinNeedle) TestUtilities.serialised(n1);
+        PinNeedle n2 = (PinNeedle) TestUtils.serialised(n1);
         assertTrue(n1.equals(n2));
     }
 

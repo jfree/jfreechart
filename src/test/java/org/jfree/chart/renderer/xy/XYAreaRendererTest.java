@@ -54,7 +54,7 @@ import java.awt.geom.Rectangle2D;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.LegendItem;
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.ui.GradientPaintTransformType;
@@ -178,7 +178,7 @@ public class XYAreaRendererTest {
     @Test
     public void testSerialization() {
         XYAreaRenderer r1 = new XYAreaRenderer();
-        XYAreaRenderer r2 = (XYAreaRenderer) TestUtilities.serialised(r1);
+        XYAreaRenderer r2 = (XYAreaRenderer) TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

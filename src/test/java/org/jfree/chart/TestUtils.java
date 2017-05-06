@@ -53,7 +53,7 @@ import java.util.Iterator;
 /**
  * Some utility methods for use by the testing code.
  */
-public class TestUtilities {
+public class TestUtils {
 
     /**
      * Returns {@code true} if the collections contains any object that

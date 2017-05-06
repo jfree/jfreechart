@@ -53,7 +53,7 @@ import java.awt.image.BufferedImage;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -88,7 +88,7 @@ public class PiePlot3DTest {
     @Test
     public void testSerialization() {
         PiePlot3D p1 = new PiePlot3D(null);
-        PiePlot3D p2 = (PiePlot3D) TestUtilities.serialised(p1);
+        PiePlot3D p2 = (PiePlot3D) TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 

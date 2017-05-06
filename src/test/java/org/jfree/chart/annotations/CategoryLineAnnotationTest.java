@@ -48,7 +48,7 @@ import static org.junit.Assert.assertFalse;
 import java.awt.BasicStroke;
 import java.awt.Color;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.Test;
@@ -155,7 +155,7 @@ public class CategoryLineAnnotationTest {
     public void testSerialization() {
         CategoryLineAnnotation a1 = new CategoryLineAnnotation("Category 1", 
                 1.0, "Category 2", 2.0, Color.RED, new BasicStroke(1.0f));
-        CategoryLineAnnotation a2 = (CategoryLineAnnotation) TestUtilities.serialised(a1);
+        CategoryLineAnnotation a2 = (CategoryLineAnnotation) TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 

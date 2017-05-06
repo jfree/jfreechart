@@ -43,7 +43,7 @@ package org.jfree.chart.plot;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -74,7 +74,7 @@ public class PlotOrientationTest {
     public void testSerialization() {
         PlotOrientation orientation1 = PlotOrientation.HORIZONTAL;
         PlotOrientation orientation2 = (PlotOrientation) 
-                TestUtilities.serialised(orientation1);
+                TestUtils.serialised(orientation1);
         assertEquals(orientation1, orientation2);
         boolean same = orientation1 == orientation2;
         assertEquals(true, same);

@@ -48,7 +48,7 @@ import static org.junit.Assert.assertTrue;
 import java.awt.Color;
 import java.awt.GradientPaint;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.util.UnitType;
 
@@ -105,7 +105,7 @@ public class BlockBorderTest {
         BlockBorder b1 = new BlockBorder(new RectangleInsets(1.0, 2.0, 3.0,
                 4.0), new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f,
                 Color.YELLOW));
-        BlockBorder b2 = (BlockBorder) TestUtilities.serialised(b1);
+        BlockBorder b2 = (BlockBorder) TestUtils.serialised(b1);
         assertEquals(b1, b2);
     }
 

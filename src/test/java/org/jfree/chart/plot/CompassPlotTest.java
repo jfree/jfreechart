@@ -49,7 +49,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 
 import org.jfree.data.general.DefaultValueDataset;
 import org.junit.Test;
@@ -123,7 +123,7 @@ public class CompassPlotTest {
                 1.0f, Color.green));
         p1.setRoseHighlightPaint(new GradientPaint(4.0f, 3.0f, Color.RED, 2.0f,
                 1.0f, Color.green));
-        CompassPlot p2 = (CompassPlot) TestUtilities.serialised(p1);
+        CompassPlot p2 = (CompassPlot) TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 

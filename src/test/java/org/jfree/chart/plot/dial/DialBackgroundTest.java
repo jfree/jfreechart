@@ -47,7 +47,7 @@ import static org.junit.Assert.assertTrue;
 import java.awt.Color;
 import java.awt.GradientPaint;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.ui.GradientPaintTransformType;
 import org.jfree.chart.ui.StandardGradientPaintTransformer;
 
@@ -141,7 +141,7 @@ public class DialBackgroundTest {
     public void testSerialization() {
         // test a default instance
         DialBackground b1 = new DialBackground();
-        DialBackground b2 = (DialBackground) TestUtilities.serialised(b1);
+        DialBackground b2 = (DialBackground) TestUtils.serialised(b1);
         assertEquals(b1, b2);
 
         // test a customised instance
@@ -151,7 +151,7 @@ public class DialBackgroundTest {
         b1.setGradientPaintTransformer(new StandardGradientPaintTransformer(
                 GradientPaintTransformType.CENTER_VERTICAL));
 
-        b2 = (DialBackground) TestUtilities.serialised(b1);
+        b2 = (DialBackground) TestUtils.serialised(b1);
         assertEquals(b1, b2);
     }
 

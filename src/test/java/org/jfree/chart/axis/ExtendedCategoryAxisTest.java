@@ -48,7 +48,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -157,7 +157,7 @@ public class ExtendedCategoryAxisTest {
         a1.setSubLabelPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f,
                 4.0f, Color.BLUE));
         ExtendedCategoryAxis a2 = (ExtendedCategoryAxis) 
-                TestUtilities.serialised(a1);
+                TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 

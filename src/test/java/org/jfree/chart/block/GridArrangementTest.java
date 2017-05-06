@@ -45,7 +45,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.ui.Size2D;
 
 import org.jfree.data.Range;
@@ -92,7 +92,7 @@ public class GridArrangementTest {
     @Test
     public void testSerialization() {
         GridArrangement f1 = new GridArrangement(33, 44);
-        GridArrangement f2 = (GridArrangement) TestUtilities.serialised(f1);
+        GridArrangement f2 = (GridArrangement) TestUtils.serialised(f1);
         assertEquals(f1, f2);
     }
 

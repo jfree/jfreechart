@@ -46,7 +46,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.Date;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -85,7 +85,7 @@ public class OHLCDataItemTest {
     public void testSerialization() {
         OHLCDataItem i1 = new OHLCDataItem(new Date(1L), 1.0, 2.0, 3.0, 4.0, 
                 5.0);
-        OHLCDataItem i2 = (OHLCDataItem) TestUtilities.serialised(i1);
+        OHLCDataItem i2 = (OHLCDataItem) TestUtils.serialised(i1);
         assertEquals(i1, i2);
     }
 

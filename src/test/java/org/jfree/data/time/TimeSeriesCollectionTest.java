@@ -57,7 +57,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 
 import org.jfree.data.Range;
 import org.jfree.data.general.DatasetUtils;
@@ -232,7 +232,7 @@ public class TimeSeriesCollectionTest {
     public void testSerialization() {
         TimeSeriesCollection c1 = new TimeSeriesCollection(createSeries());
         TimeSeriesCollection c2 = (TimeSeriesCollection) 
-                TestUtilities.serialised(c1);
+                TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 

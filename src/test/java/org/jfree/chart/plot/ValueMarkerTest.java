@@ -56,7 +56,7 @@ import java.awt.Font;
 import java.awt.GradientPaint;
 import java.awt.Stroke;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 
 import org.jfree.chart.event.MarkerChangeEvent;
 import org.jfree.chart.event.MarkerChangeListener;
@@ -177,7 +177,7 @@ public class ValueMarkerTest implements MarkerChangeListener {
     @Test
     public void testSerialization() {
         ValueMarker m1 = new ValueMarker(25.0);
-        ValueMarker m2 = (ValueMarker) TestUtilities.serialised(m1);
+        ValueMarker m2 = (ValueMarker) TestUtils.serialised(m1);
         assertEquals(m1, m2);
     }
 
@@ -213,7 +213,7 @@ public class ValueMarkerTest implements MarkerChangeListener {
     @Test
     public void test1802195() {
         ValueMarker m1 = new ValueMarker(25.0);
-        ValueMarker m2 = (ValueMarker) TestUtilities.serialised(m1);
+        ValueMarker m2 = (ValueMarker) TestUtils.serialised(m1);
         assertEquals(m1, m2);
         try {
             m2.setValue(-10.0);

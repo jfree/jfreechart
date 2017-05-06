@@ -65,7 +65,7 @@ import java.text.AttributedString;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.LegendItemCollection;
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.labels.PieSectionLabelGenerator;
 import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
 import org.jfree.chart.labels.StandardPieToolTipGenerator;
@@ -520,7 +520,7 @@ public class PiePlotTest {
     @Test
     public void testSerialization() {
         PiePlot p1 = new PiePlot(null);
-        PiePlot p2 = (PiePlot) TestUtilities.serialised(p1);
+        PiePlot p2 = (PiePlot) TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 

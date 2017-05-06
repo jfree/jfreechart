@@ -49,7 +49,7 @@ package org.jfree.data.xy;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 
 import org.jfree.data.general.SeriesException;
 import static org.junit.Assert.assertEquals;
@@ -170,7 +170,7 @@ public class XYSeriesTest {
     public void testSerialization() {
         XYSeries s1 = new XYSeries("Series");
         s1.add(1.0, 1.1);
-        XYSeries s2 = (XYSeries) TestUtilities.serialised(s1);
+        XYSeries s2 = (XYSeries) TestUtils.serialised(s1);
         assertEquals(s1, s2);
     }
 

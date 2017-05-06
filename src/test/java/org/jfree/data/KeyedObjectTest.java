@@ -43,7 +43,7 @@ package org.jfree.data;
 
 import java.util.ArrayList;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 
 import org.jfree.data.general.DefaultPieDataset;
 
@@ -124,7 +124,7 @@ public class KeyedObjectTest {
     @Test
     public void testSerialization() {
         KeyedObject ko1 = new KeyedObject("Test", "Object");
-        KeyedObject ko2 = (KeyedObject) TestUtilities.serialised(ko1);
+        KeyedObject ko2 = (KeyedObject) TestUtils.serialised(ko1);
         assertEquals(ko1, ko2);
     }
 

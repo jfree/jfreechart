@@ -40,7 +40,7 @@
 
 package org.jfree.data.function;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -83,7 +83,7 @@ public class PowerFunction2DTest {
     @Test
     public void testSerialization() {
         PowerFunction2D f1 = new PowerFunction2D(1.0, 2.0);
-        PowerFunction2D f2 = (PowerFunction2D) TestUtilities.serialised(f1);
+        PowerFunction2D f2 = (PowerFunction2D) TestUtils.serialised(f1);
         assertEquals(f1, f2);
     }
 

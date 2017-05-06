@@ -49,7 +49,7 @@ import static org.junit.Assert.assertNull;
 
 import java.awt.Color;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.Test;
@@ -151,7 +151,7 @@ public class WaterfallBarRendererTest {
     public void testSerialization() {
         WaterfallBarRenderer r1 = new WaterfallBarRenderer();
         WaterfallBarRenderer r2 = (WaterfallBarRenderer) 
-                TestUtilities.serialised(r1);
+                TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

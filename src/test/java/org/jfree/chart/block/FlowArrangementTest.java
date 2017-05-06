@@ -44,7 +44,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.ui.HorizontalAlignment;
 import org.jfree.chart.ui.VerticalAlignment;
 
@@ -113,7 +113,7 @@ public class FlowArrangementTest {
     public void testSerialization() {
         FlowArrangement f1 = new FlowArrangement(HorizontalAlignment.LEFT,
                 VerticalAlignment.TOP, 1.0, 2.0);
-        FlowArrangement f2 = (FlowArrangement) TestUtilities.serialised(f1);
+        FlowArrangement f2 = (FlowArrangement) TestUtils.serialised(f1);
         assertEquals(f1, f2);
     }
 

@@ -74,7 +74,7 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.LegendItemCollection;
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.annotations.XYTextAnnotation;
 import org.jfree.chart.axis.AxisLocation;
 import org.jfree.chart.axis.DateAxis;
@@ -715,7 +715,7 @@ public class XYPlotTest {
         NumberAxis rangeAxis = new NumberAxis("Range");
         StandardXYItemRenderer renderer = new StandardXYItemRenderer();
         XYPlot p1 = new XYPlot(data, domainAxis, rangeAxis, renderer);
-        XYPlot p2 = (XYPlot) TestUtilities.serialised(p1);
+        XYPlot p2 = (XYPlot) TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 
@@ -730,7 +730,7 @@ public class XYPlotTest {
         renderer1.setDefaultToolTipGenerator(
                 StandardXYToolTipGenerator.getTimeSeriesInstance());
         XYPlot p1 = new XYPlot(data1, new DateAxis("Date"), null, renderer1);
-        XYPlot p2 = (XYPlot) TestUtilities.serialised(p1);
+        XYPlot p2 = (XYPlot) TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 
@@ -750,7 +750,7 @@ public class XYPlotTest {
         XYSeriesCollection dataset = new XYSeriesCollection();
         JFreeChart chart = ChartFactory.createXYLineChart("Test Chart",
                 "Domain Axis", "Range Axis", dataset);
-        JFreeChart chart2 = (JFreeChart) TestUtilities.serialised(chart);
+        JFreeChart chart2 = (JFreeChart) TestUtils.serialised(chart);
         assertEquals(chart, chart2);
         try {
             chart2.createBufferedImage(300, 200);
@@ -775,7 +775,7 @@ public class XYPlotTest {
         plot.addDomainMarker(new IntervalMarker(2.0, 3.0), Layer.BACKGROUND);
         plot.addRangeMarker(new ValueMarker(4.0), Layer.FOREGROUND);
         plot.addRangeMarker(new IntervalMarker(5.0, 6.0), Layer.BACKGROUND);
-        JFreeChart chart2 = (JFreeChart) TestUtilities.serialised(chart);
+        JFreeChart chart2 = (JFreeChart) TestUtils.serialised(chart);
         assertEquals(chart, chart2);
         try {
             chart2.createBufferedImage(300, 200);
@@ -805,7 +805,7 @@ public class XYPlotTest {
         p1.setDomainAxis(1, domainAxis2);
         p1.setRangeAxis(1, rangeAxis2);
         p1.setRenderer(1, renderer2);
-        XYPlot p2 = (XYPlot) TestUtilities.serialised(p1);
+        XYPlot p2 = (XYPlot) TestUtils.serialised(p1);
         assertEquals(p1, p2);
 
         // now check that all datasets, renderers and axes are being listened

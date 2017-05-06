@@ -42,7 +42,7 @@ package org.jfree.chart.needle;
 
 import static org.junit.Assert.assertTrue;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -79,7 +79,7 @@ public class PointerNeedleTest {
     @Test
     public void testSerialization() {
         PointerNeedle n1 = new PointerNeedle();
-        PointerNeedle n2 = (PointerNeedle) TestUtilities.serialised(n1);
+        PointerNeedle n2 = (PointerNeedle) TestUtils.serialised(n1);
         assertTrue(n1.equals(n2));
     }
 

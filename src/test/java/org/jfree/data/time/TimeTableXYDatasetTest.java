@@ -47,7 +47,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.TimeZone;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -146,7 +146,7 @@ public class TimeTableXYDatasetTest {
         TimeTableXYDataset d1 = new TimeTableXYDataset();
         d1.add(new Year(1999), 123.4, "S1");
         TimeTableXYDataset d2 = (TimeTableXYDataset) 
-                TestUtilities.serialised(d1);
+                TestUtils.serialised(d1);
         assertTrue(d1.equals(d2));
     }
 

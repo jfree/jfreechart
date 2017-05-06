@@ -42,7 +42,7 @@ package org.jfree.data.gantt;
 
 import java.util.Date;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -131,7 +131,7 @@ public class SlidingGanttCategoryDatasetTest {
         SlidingGanttCategoryDataset d1 = new SlidingGanttCategoryDataset(
                 u1, 0, 5);
         SlidingGanttCategoryDataset d2 = (SlidingGanttCategoryDataset) 
-                TestUtilities.serialised(d1);
+                TestUtils.serialised(d1);
         assertEquals(d1, d2);
 
         // basic check for independence

@@ -48,7 +48,7 @@ import static org.junit.Assert.assertFalse;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.Test;
@@ -115,7 +115,7 @@ public class CustomPieURLGeneratorTest {
         m1.put("A", "http://www.jfree.org/");
         g1.addURLs(m1);
         CustomPieURLGenerator g2 = (CustomPieURLGenerator) 
-                TestUtilities.serialised(g1);
+                TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

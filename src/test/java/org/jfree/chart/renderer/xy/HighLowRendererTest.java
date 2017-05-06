@@ -53,7 +53,7 @@ import static org.junit.Assert.assertNull;
 import java.awt.Color;
 import java.util.Date;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.Range;
@@ -149,7 +149,7 @@ public class HighLowRendererTest {
     public void testSerialization() {
         HighLowRenderer r1 = new HighLowRenderer();
         r1.setCloseTickPaint(Color.green);
-        HighLowRenderer r2 = (HighLowRenderer) TestUtilities.serialised(r1);
+        HighLowRenderer r2 = (HighLowRenderer) TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

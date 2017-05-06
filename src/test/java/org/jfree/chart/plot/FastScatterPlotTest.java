@@ -53,7 +53,7 @@ import java.awt.GradientPaint;
 import java.awt.Stroke;
 
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.junit.Test;
@@ -193,7 +193,7 @@ public class FastScatterPlotTest {
         ValueAxis domainAxis = new NumberAxis("X");
         ValueAxis rangeAxis = new NumberAxis("Y");
         FastScatterPlot p1 = new FastScatterPlot(data, domainAxis, rangeAxis);
-        FastScatterPlot p2 = (FastScatterPlot) TestUtilities.serialised(p1);
+        FastScatterPlot p2 = (FastScatterPlot) TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 

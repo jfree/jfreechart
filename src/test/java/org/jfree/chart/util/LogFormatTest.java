@@ -43,7 +43,7 @@ package org.jfree.chart.util;
 
 import java.text.DecimalFormat;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
@@ -112,7 +112,7 @@ public class LogFormatTest {
      */
     public void testSerialization() {
         LogFormat f1 = new LogFormat(10.0, "10", true);
-        LogFormat f2 = (LogFormat) TestUtilities.serialised(f1);
+        LogFormat f2 = (LogFormat) TestUtils.serialised(f1);
         assertEquals(f1, f2);
     }
 

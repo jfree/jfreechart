@@ -49,7 +49,7 @@ import static org.junit.Assert.assertNotNull;
 import java.awt.Color;
 import java.awt.GradientPaint;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 
 import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.event.PlotChangeListener;
@@ -165,7 +165,7 @@ public class DialPlotTest implements PlotChangeListener {
     @Test
     public void testSerialization() {
         DialPlot p1 = new DialPlot();
-        DialPlot p2 = (DialPlot) TestUtilities.serialised(p1);
+        DialPlot p2 = (DialPlot) TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 

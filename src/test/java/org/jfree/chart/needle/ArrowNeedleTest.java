@@ -43,7 +43,7 @@ package org.jfree.chart.needle;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -85,7 +85,7 @@ public class ArrowNeedleTest {
     @Test
     public void testSerialization() {
         ArrowNeedle n1 = new ArrowNeedle(false);
-        ArrowNeedle n2 = (ArrowNeedle) TestUtilities.serialised(n1);
+        ArrowNeedle n2 = (ArrowNeedle) TestUtils.serialised(n1);
         assertTrue(n1.equals(n2));
     }
 

@@ -51,7 +51,7 @@ import java.awt.Stroke;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.ui.GradientPaintTransformType;
 import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.ui.StandardGradientPaintTransformer;
@@ -224,7 +224,7 @@ public class LegendGraphicTest {
         LegendGraphic g1 = new LegendGraphic(new Rectangle2D.Double(1.0, 2.0, 
                 3.0, 4.0), Color.BLACK);
         g1.setOutlineStroke(s);
-        LegendGraphic g2 = (LegendGraphic) TestUtilities.serialised(g1);
+        LegendGraphic g2 = (LegendGraphic) TestUtils.serialised(g1);
         assertTrue(g1.equals(g2));
     }
 

@@ -47,7 +47,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.Test;
@@ -121,7 +121,7 @@ public class XYIntervalSeriesCollectionTest {
         XYIntervalSeries s1 = new XYIntervalSeries("Series");
         s1.add(1.0, 1.1, 1.2, 1.3, 1.4, 1.5);
         XYIntervalSeriesCollection c2 = (XYIntervalSeriesCollection) 
-                TestUtilities.serialised(c1);
+                TestUtils.serialised(c1);
         assertEquals(c1, c2);
 
         // check independence

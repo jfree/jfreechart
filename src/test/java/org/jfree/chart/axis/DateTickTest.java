@@ -46,7 +46,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Date;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.ui.TextAnchor;
 
 import org.junit.Test;
@@ -141,7 +141,7 @@ public class DateTickTest {
     public void testSerialization() {
         DateTick t1 = new DateTick(new Date(0L), "Label", TextAnchor.CENTER,
                 TextAnchor.CENTER, 10.0);
-        DateTick t2 = (DateTick) TestUtilities.serialised(t1);
+        DateTick t2 = (DateTick) TestUtils.serialised(t1);
         assertEquals(t1, t2);
     }
 
