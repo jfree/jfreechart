@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -112,7 +112,7 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
     /**
      * The paint of the line between the minimum value and the maximum value.
      */
-    private transient Paint groupPaint = Color.black;
+    private transient Paint groupPaint = Color.BLACK;
 
     /**
      * The stroke of the line between the minimum value and the maximum value.
@@ -121,11 +121,11 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
 
     /** The icon used to indicate the minimum value.*/
     private transient Icon minIcon = getIcon(new Arc2D.Double(-4, -4, 8, 8, 0,
-            360, Arc2D.OPEN), null, Color.black);
+            360, Arc2D.OPEN), null, Color.BLACK);
 
     /** The icon used to indicate the maximum value.*/
     private transient Icon maxIcon = getIcon(new Arc2D.Double(-4, -4, 8, 8, 0,
-            360, Arc2D.OPEN), null, Color.black);
+            360, Arc2D.OPEN), null, Color.BLACK);
 
     /** The icon used to indicate the values.*/
     private transient Icon objectIcon = getIcon(new Line2D.Double(-4, 0, 4, 0),
@@ -559,9 +559,9 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
         this.groupPaint = SerialUtils.readPaint(stream);
 
         this.minIcon = getIcon(new Arc2D.Double(-4, -4, 8, 8, 0, 360,
-                Arc2D.OPEN), null, Color.black);
+                Arc2D.OPEN), null, Color.BLACK);
         this.maxIcon = getIcon(new Arc2D.Double(-4, -4, 8, 8, 0, 360,
-                Arc2D.OPEN), null, Color.black);
+                Arc2D.OPEN), null, Color.BLACK);
         this.objectIcon = getIcon(new Line2D.Double(-4, 0, 4, 0), false, true);
     }
 
