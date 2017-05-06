@@ -153,7 +153,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.ValueMarker;
 import org.jfree.chart.renderer.AbstractRenderer;
-import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.GradientPaintTransformer;
 import org.jfree.chart.ui.LengthAdjustmentType;
 import org.jfree.chart.ui.RectangleAnchor;
@@ -1042,7 +1042,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
             Point2D coordinates = calculateDomainMarkerTextAnchorPoint(
                     g2, orientation, dataArea, bounds, marker.getLabelOffset(),
                     marker.getLabelOffsetType(), anchor);
-            TextUtilities.drawAlignedString(label, g2,
+            TextUtils.drawAlignedString(label, g2,
                     (float) coordinates.getX(), (float) coordinates.getY(),
                     marker.getLabelTextAnchor());
         }
@@ -1218,7 +1218,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
                 g2.setPaint(marker.getLabelBackgroundColor());
                 g2.fill(r);
                 g2.setPaint(marker.getLabelPaint());
-                TextUtilities.drawAlignedString(label, g2,
+                TextUtils.drawAlignedString(label, g2,
                         (float) coords.getX(), (float) coords.getY(),
                         marker.getLabelTextAnchor());
             }
@@ -1498,7 +1498,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
             }
             Point2D anchorPoint = calculateLabelAnchorPoint(
                     position.getItemLabelAnchor(), x, y, orientation);
-            TextUtilities.drawRotatedString(label, g2,
+            TextUtils.drawRotatedString(label, g2,
                     (float) anchorPoint.getX(), (float) anchorPoint.getY(),
                     position.getTextAnchor(),
                     position.getAngle(), position.getRotationAnchor());

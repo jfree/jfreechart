@@ -116,7 +116,7 @@ import java.util.ResourceBundle;
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.LegendItemCollection;
 import org.jfree.chart.event.PlotChangeEvent;
-import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.util.ObjectUtils;
@@ -1115,7 +1115,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
 
             FontMetrics fm = g2.getFontMetrics();
             Rectangle2D tickLabelBounds
-                = TextUtilities.getTextBounds(tickLabel, g2, fm);
+                = TextUtils.getTextBounds(tickLabel, g2, fm);
 
             double x = valueP2X;
             double y = valueP2Y;
@@ -1155,7 +1155,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
         }
         float x = (float) area.getCenterX();
         float y = (float) area.getCenterY() + DEFAULT_CIRCLE_SIZE;
-        TextUtilities.drawAlignedString(valueStr, g2, x, y,
+        TextUtils.drawAlignedString(valueStr, g2, x, y,
                 TextAnchor.TOP_CENTER);
     }
 

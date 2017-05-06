@@ -176,7 +176,7 @@ import org.jfree.chart.event.PlotChangeListener;
 import org.jfree.chart.text.G2TextMeasurer;
 import org.jfree.chart.text.TextBlock;
 import org.jfree.chart.text.TextBlockAnchor;
-import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.Align;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
@@ -1191,7 +1191,7 @@ public abstract class Plot implements AxisChangeListener,
         if (message != null) {
             g2.setFont(this.noDataMessageFont);
             g2.setPaint(this.noDataMessagePaint);
-            TextBlock block = TextUtilities.createTextBlock(
+            TextBlock block = TextUtils.createTextBlock(
                     this.noDataMessage, this.noDataMessageFont,
                     this.noDataMessagePaint, 0.9f * (float) area.getWidth(),
                     new G2TextMeasurer(g2));

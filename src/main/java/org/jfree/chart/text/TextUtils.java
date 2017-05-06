@@ -1,3 +1,31 @@
+/* ===========================================================
+ * JFreeChart : a free chart library for the Java(tm) platform
+ * ===========================================================
+ *
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ *
+ * Project Info:  http://www.jfree.org/jfreechart/index.html
+ *
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
+ * (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+ * License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
+ *
+ * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
+ * Other names may be trademarks of their respective owners.]
+ *
+ */
+
 package org.jfree.chart.text;
 
 import java.awt.Font;
@@ -17,10 +45,10 @@ import org.jfree.chart.ui.TextAnchor;
 /**
  * Some utility methods for working with text in Java2D.
  */
-public class TextUtilities {
+public class TextUtils {
 
     /**
-     * When this flag is set to <code>true</code>, strings will be drawn
+     * When this flag is set to {@code true}, strings will be drawn
      * as attributed strings with the attributes taken from the current font.
      * This allows for underlining, strike-out etc, but it means that
      * TextLayout will be used to render the text:
@@ -44,13 +72,13 @@ public class TextUtilities {
     /**
      * Private constructor prevents object creation.
      */
-    private TextUtilities() {
+    private TextUtils() {
         // prevent instantiation
     }
 
     /**
-     * Creates a {@link TextBlock} from a <code>String</code>.  Line breaks
-     * are added where the <code>String</code> contains '\n' characters.
+     * Creates a {@link TextBlock} from a {@code String}.  Line breaks
+     * are added where the {@code String} contains '\n' characters.
      *
      * @param text  the text.
      * @param font  the font.
@@ -97,8 +125,7 @@ public class TextUtilities {
 
     /**
      * Creates a new text block from the given string, breaking the
-     * text into lines so that the <code>maxWidth</code> value is
-     * respected.
+     * text into lines so that the {@code maxWidth} value is respected.
      *
      * @param text  the text.
      * @param font  the font.
@@ -110,7 +137,6 @@ public class TextUtilities {
      */
     public static TextBlock createTextBlock(String text, Font font,
             Paint paint, float maxWidth, TextMeasurer measurer) {
-
         return createTextBlock(text, font, paint, maxWidth, Integer.MAX_VALUE,
                 measurer);
     }
@@ -240,7 +266,7 @@ public class TextUtilities {
             FontMetrics fm) {
 
         Rectangle2D bounds;
-        if (TextUtilities.useFontMetricsGetStringBounds) {
+        if (TextUtils.useFontMetricsGetStringBounds) {
             bounds = fm.getStringBounds(text, g2);
             // getStringBounds() can return incorrect height for some Unicode
             // characters...see bug parade 6183356, let's replace it with
@@ -313,7 +339,7 @@ public class TextUtilities {
         FontRenderContext frc = g2.getFontRenderContext();
         Font f = g2.getFont();
         FontMetrics fm = g2.getFontMetrics(f);
-        Rectangle2D bounds = TextUtilities.getTextBounds(text, g2, fm);
+        Rectangle2D bounds = TextUtils.getTextBounds(text, g2, fm);
         LineMetrics metrics = f.getLineMetrics(text, frc);
         float ascent = metrics.getAscent();
         result[2] = -ascent;
@@ -534,7 +560,7 @@ public class TextUtilities {
         FontRenderContext frc = g2.getFontRenderContext();
         Font f = g2.getFont();
         FontMetrics fm = g2.getFontMetrics(f);
-        Rectangle2D bounds = TextUtilities.getTextBounds(text, g2, fm);
+        Rectangle2D bounds = TextUtils.getTextBounds(text, g2, fm);
         LineMetrics metrics = f.getLineMetrics(text, frc);
         float ascent = metrics.getAscent();
         float halfAscent = ascent / 2.0f;
@@ -589,7 +615,7 @@ public class TextUtilities {
         FontRenderContext frc = g2.getFontRenderContext();
         LineMetrics metrics = g2.getFont().getLineMetrics(text, frc);
         FontMetrics fm = g2.getFontMetrics();
-        Rectangle2D bounds = TextUtilities.getTextBounds(text, g2, fm);
+        Rectangle2D bounds = TextUtils.getTextBounds(text, g2, fm);
         float ascent = metrics.getAscent();
         float halfAscent = ascent / 2.0f;
         float descent = metrics.getDescent();
@@ -651,7 +677,7 @@ public class TextUtilities {
             return null;
         }
         FontMetrics fm = g2.getFontMetrics();
-        Rectangle2D bounds = TextUtilities.getTextBounds(text, g2, fm);
+        Rectangle2D bounds = TextUtils.getTextBounds(text, g2, fm);
         AffineTransform translate = AffineTransform.getTranslateInstance(
                 textX, textY);
         Shape translatedBounds = translate.createTransformedShape(bounds);
@@ -704,7 +730,7 @@ public class TextUtilities {
      * @param use  the new flag value.
      */
     public static void setUseDrawRotatedStringWorkaround(boolean use) {
-        TextUtilities.useDrawRotatedStringWorkaround = use;
+        TextUtils.useDrawRotatedStringWorkaround = use;
     }
     
     /**
@@ -717,7 +743,7 @@ public class TextUtilities {
      * @since 1.0.21
      */
     public static boolean getDrawStringsWithFontAttributes() {
-        return TextUtilities.drawStringsWithFontAttributes;
+        return TextUtils.drawStringsWithFontAttributes;
     }
     
     /**
@@ -731,7 +757,7 @@ public class TextUtilities {
      * @since 1.0.21
      */
     public static void setDrawStringsWithFontAttributes(boolean b) {
-        TextUtilities.drawStringsWithFontAttributes = b;
+        TextUtils.drawStringsWithFontAttributes = b;
     }
 
 }

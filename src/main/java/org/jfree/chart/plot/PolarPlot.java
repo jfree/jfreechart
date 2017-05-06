@@ -101,7 +101,7 @@ import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.event.RendererChangeListener;
 import org.jfree.chart.renderer.PolarItemRenderer;
-import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.TextAnchor;
@@ -1443,7 +1443,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
         for (Iterator it = this.cornerTextItems.iterator(); it.hasNext();) {
             String msg = (String) it.next();
             FontMetrics fm = g2.getFontMetrics();
-            Rectangle2D bounds = TextUtilities.getTextBounds(msg, g2, fm);
+            Rectangle2D bounds = TextUtils.getTextBounds(msg, g2, fm);
             width = Math.max(width, bounds.getWidth());
             height += bounds.getHeight();
         }
@@ -1459,7 +1459,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
         x += ANNOTATION_MARGIN;
         for (Iterator it = this.cornerTextItems.iterator(); it.hasNext();) {
             String msg = (String) it.next();
-            Rectangle2D bounds = TextUtilities.getTextBounds(msg, g2,
+            Rectangle2D bounds = TextUtils.getTextBounds(msg, g2,
                     g2.getFontMetrics());
             y += bounds.getHeight();
             g2.drawString(msg, (int) x, (int) y);

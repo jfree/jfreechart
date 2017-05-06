@@ -93,7 +93,7 @@ import org.jfree.chart.event.AxisChangeEvent;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.ValueAxisPlot;
-import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.util.ParamChecks;
@@ -829,9 +829,9 @@ public class PeriodAxis extends ValueAxis
         df.setTimeZone(this.timeZone);
         String label1 = df.format(new Date(p1.getMiddleMillisecond()));
         String label2 = df.format(new Date(p2.getMiddleMillisecond()));
-        Rectangle2D b1 = TextUtilities.getTextBounds(label1, g2,
+        Rectangle2D b1 = TextUtils.getTextBounds(label1, g2,
                 g2.getFontMetrics());
-        Rectangle2D b2 = TextUtilities.getTextBounds(label2, g2,
+        Rectangle2D b2 = TextUtils.getTextBounds(label2, g2,
                 g2.getFontMetrics());
         double w = Math.max(b1.getWidth(), b2.getWidth());
         long ww = Math.round(java2DToValue(dataArea.getX() + w + 5.0,
@@ -866,7 +866,7 @@ public class PeriodAxis extends ValueAxis
             if (last > axisMax) {
                 // this is the last period, but it is only partially visible
                 // so check that the label will fit before displaying it...
-                Rectangle2D bb = TextUtilities.getTextBounds(label, g2,
+                Rectangle2D bb = TextUtils.getTextBounds(label, g2,
                         g2.getFontMetrics());
                 if ((x + bb.getWidth() / 2) > dataArea.getMaxX()) {
                     float xstart = (float) valueToJava2D(Math.max(first,
@@ -882,7 +882,7 @@ public class PeriodAxis extends ValueAxis
             if (first < axisMin) {
                 // this is the first period, but it is only partially visible
                 // so check that the label will fit before displaying it...
-                Rectangle2D bb = TextUtilities.getTextBounds(label, g2,
+                Rectangle2D bb = TextUtils.getTextBounds(label, g2,
                         g2.getFontMetrics());
                 if ((x - bb.getWidth() / 2) < dataArea.getX()) {
                     float xlast = (float) valueToJava2D(Math.min(last,
@@ -898,7 +898,7 @@ public class PeriodAxis extends ValueAxis
             }
             if (label != null) {
                 g2.setPaint(this.labelInfo[band].getLabelPaint());
-                b = TextUtilities.drawAlignedString(label, g2, x, y, anchor);
+                b = TextUtils.drawAlignedString(label, g2, x, y, anchor);
             }
             if (lastXX > 0L) {
                 if (this.labelInfo[band].getDrawDividers()) {

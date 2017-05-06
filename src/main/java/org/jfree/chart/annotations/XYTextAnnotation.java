@@ -75,7 +75,7 @@ import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.util.PaintUtils;
@@ -535,7 +535,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
         }
 
         g2.setFont(getFont());
-        Shape hotspot = TextUtilities.calculateRotatedStringBounds(
+        Shape hotspot = TextUtils.calculateRotatedStringBounds(
                 getText(), g2, anchorX, anchorY, getTextAnchor(),
                 getRotationAngle(), getRotationAnchor());
         if (this.backgroundPaint != null) {
@@ -543,7 +543,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
             g2.fill(hotspot);
         }
         g2.setPaint(getPaint());
-        TextUtilities.drawRotatedString(getText(), g2, anchorX, anchorY,
+        TextUtils.drawRotatedString(getText(), g2, anchorX, anchorY,
                 getTextAnchor(), getRotationAngle(), getRotationAnchor());
         if (this.outlineVisible) {
             g2.setStroke(this.outlineStroke);

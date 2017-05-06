@@ -57,7 +57,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 import org.jfree.chart.HashUtilities;
-import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.ParamChecks;
@@ -302,7 +302,7 @@ public class DialTextAnnotation extends AbstractDialLayer implements DialLayer,
         Point2D pt = arc.getStartPoint();
         g2.setPaint(this.paint);
         g2.setFont(this.font);
-        TextUtilities.drawAlignedString(this.label, g2, (float) pt.getX(),
+        TextUtils.drawAlignedString(this.label, g2, (float) pt.getX(),
                 (float) pt.getY(), this.anchor);
 
     }

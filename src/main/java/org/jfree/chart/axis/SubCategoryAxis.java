@@ -69,7 +69,7 @@ import org.jfree.chart.event.AxisChangeEvent;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotRenderingInfo;
-import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.util.ParamChecks;
@@ -219,7 +219,7 @@ public class SubCategoryAxis extends CategoryAxis
         while (iterator.hasNext()) {
             Comparable subcategory = (Comparable) iterator.next();
             String label = subcategory.toString();
-            Rectangle2D bounds = TextUtilities.getTextBounds(label, g2, fm);
+            Rectangle2D bounds = TextUtils.getTextBounds(label, g2, fm);
             double dim;
             if (RectangleEdge.isLeftOrRight(edge)) {
                 dim = bounds.getWidth();
@@ -363,7 +363,7 @@ public class SubCategoryAxis extends CategoryAxis
                     yy = (float) (y0 + (i + 0.5) * height);
                 }
                 String label = this.subCategories.get(i).toString();
-                TextUtilities.drawRotatedString(label, g2, xx, yy,
+                TextUtils.drawRotatedString(label, g2, xx, yy,
                         TextAnchor.CENTER, 0.0, TextAnchor.CENTER);
             }
         }

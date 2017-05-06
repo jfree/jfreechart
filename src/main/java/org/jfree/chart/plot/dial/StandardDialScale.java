@@ -63,7 +63,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.ParamChecks;
@@ -796,7 +796,7 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
                 if (!firstLabel || this.firstTickLabelVisible) {
                     g2.setFont(this.tickLabelFont);
                     g2.setPaint(this.tickLabelPaint);
-                    TextUtilities.drawAlignedString(
+                    TextUtils.drawAlignedString(
                             this.tickLabelFormatter.format(v), g2,
                             (float) pt2.getX(), (float) pt2.getY(),
                             TextAnchor.CENTER);

@@ -27,7 +27,7 @@
  * ---------------
  * LabelBlock.java
  * ---------------
- * (C) Copyright 2004-2016, by Object Refinery Limited.
+ * (C) Copyright 2004-2017, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Pierre-Marie Le Biot;
@@ -66,7 +66,7 @@ import org.jfree.chart.entity.ChartEntity;
 import org.jfree.chart.entity.StandardEntityCollection;
 import org.jfree.chart.text.TextBlock;
 import org.jfree.chart.text.TextBlockAnchor;
-import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.ui.Size2D;
 import org.jfree.chart.util.ObjectUtils;
@@ -151,7 +151,7 @@ public class LabelBlock extends AbstractBlock
     public LabelBlock(String text, Font font, Paint paint) {
         this.text = text;
         this.paint = paint;
-        this.label = TextUtilities.createTextBlock(text, font, this.paint);
+        this.label = TextUtils.createTextBlock(text, font, this.paint);
         this.font = font;
         this.toolTipText = null;
         this.urlText = null;
@@ -180,7 +180,7 @@ public class LabelBlock extends AbstractBlock
     public void setFont(Font font) {
         ParamChecks.nullNotPermitted(font, "font");
         this.font = font;
-        this.label = TextUtilities.createTextBlock(this.text, font, this.paint);
+        this.label = TextUtils.createTextBlock(this.text, font, this.paint);
     }
 
     /**
@@ -204,7 +204,7 @@ public class LabelBlock extends AbstractBlock
     public void setPaint(Paint paint) {
         ParamChecks.nullNotPermitted(paint, "paint");
         this.paint = paint;
-        this.label = TextUtilities.createTextBlock(this.text, this.font,
+        this.label = TextUtils.createTextBlock(this.text, this.font,
                 this.paint);
     }
 

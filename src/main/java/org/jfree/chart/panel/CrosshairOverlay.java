@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * CrosshairOverlay.java
  * ---------------------
- * (C) Copyright 2011-2016, by Object Refinery Limited.
+ * (C) Copyright 2011-2017, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -64,7 +64,7 @@ import org.jfree.chart.event.OverlayChangeEvent;
 import org.jfree.chart.plot.Crosshair;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.TextAnchor;
@@ -294,7 +294,7 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
                 float xx = (float) pt.getX();
                 float yy = (float) pt.getY();
                 TextAnchor alignPt = textAlignPtForLabelAnchorH(anchor);
-                Shape hotspot = TextUtilities.calculateRotatedStringBounds(
+                Shape hotspot = TextUtils.calculateRotatedStringBounds(
                         label, g2, xx, yy, alignPt, 0.0, TextAnchor.CENTER);
                 if (!dataArea.contains(hotspot.getBounds2D())) {
                     anchor = flipAnchorV(anchor);
@@ -302,7 +302,7 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
                     xx = (float) pt.getX();
                     yy = (float) pt.getY();
                     alignPt = textAlignPtForLabelAnchorH(anchor);
-                    hotspot = TextUtilities.calculateRotatedStringBounds(
+                    hotspot = TextUtils.calculateRotatedStringBounds(
                            label, g2, xx, yy, alignPt, 0.0, TextAnchor.CENTER);
                 }
 
@@ -311,7 +311,7 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
                 g2.setPaint(crosshair.getLabelOutlinePaint());
                 g2.setStroke(crosshair.getLabelOutlineStroke());
                 g2.draw(hotspot);
-                TextUtilities.drawAlignedString(label, g2, xx, yy, alignPt);
+                TextUtils.drawAlignedString(label, g2, xx, yy, alignPt);
             }
             g2.setPaint(savedPaint);
             g2.setStroke(savedStroke);
@@ -345,7 +345,7 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
                 float xx = (float) pt.getX();
                 float yy = (float) pt.getY();
                 TextAnchor alignPt = textAlignPtForLabelAnchorV(anchor);
-                Shape hotspot = TextUtilities.calculateRotatedStringBounds(
+                Shape hotspot = TextUtils.calculateRotatedStringBounds(
                         label, g2, xx, yy, alignPt, 0.0, TextAnchor.CENTER);
                 if (!dataArea.contains(hotspot.getBounds2D())) {
                     anchor = flipAnchorH(anchor);
@@ -353,7 +353,7 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
                     xx = (float) pt.getX();
                     yy = (float) pt.getY();
                     alignPt = textAlignPtForLabelAnchorV(anchor);
-                    hotspot = TextUtilities.calculateRotatedStringBounds(
+                    hotspot = TextUtils.calculateRotatedStringBounds(
                            label, g2, xx, yy, alignPt, 0.0, TextAnchor.CENTER);
                 }
                 g2.setPaint(crosshair.getLabelBackgroundPaint());
@@ -361,7 +361,7 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
                 g2.setPaint(crosshair.getLabelOutlinePaint());
                 g2.setStroke(crosshair.getLabelOutlineStroke());
                 g2.draw(hotspot);
-                TextUtilities.drawAlignedString(label, g2, xx, yy, alignPt);
+                TextUtils.drawAlignedString(label, g2, xx, yy, alignPt);
             }
             g2.setPaint(savedPaint);
             g2.setStroke(savedStroke);

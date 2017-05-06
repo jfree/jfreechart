@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------
  * TextTitle.java
  * --------------
- * (C) Copyright 2000-2016, by David Berry and Contributors.
+ * (C) Copyright 2000-2017, by David Berry and Contributors.
  *
  * Original Author:  David Berry;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -107,7 +107,7 @@ import org.jfree.chart.event.TitleChangeEvent;
 import org.jfree.chart.text.G2TextMeasurer;
 import org.jfree.chart.text.TextBlock;
 import org.jfree.chart.text.TextBlockAnchor;
-import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.HorizontalAlignment;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
@@ -551,7 +551,7 @@ public class TextTitle extends Title
         if (position == RectangleEdge.TOP || position == RectangleEdge.BOTTOM) {
             float maxWidth = (float) w;
             g2.setFont(this.font);
-            this.content = TextUtilities.createTextBlock(this.text, this.font,
+            this.content = TextUtils.createTextBlock(this.text, this.font,
                     this.paint, maxWidth, this.maximumLinesToDisplay,
                     new G2TextMeasurer(g2));
             this.content.setLineAlignment(this.textAlignment);
@@ -567,7 +567,7 @@ public class TextTitle extends Title
                 == RectangleEdge.RIGHT) {
             float maxWidth = Float.MAX_VALUE;
             g2.setFont(this.font);
-            this.content = TextUtilities.createTextBlock(this.text, this.font,
+            this.content = TextUtils.createTextBlock(this.text, this.font,
                     this.paint, maxWidth, this.maximumLinesToDisplay,
                     new G2TextMeasurer(g2));
             this.content.setLineAlignment(this.textAlignment);
@@ -625,7 +625,7 @@ public class TextTitle extends Title
         if (position == RectangleEdge.TOP || position == RectangleEdge.BOTTOM) {
             float maxWidth = (float) widthRange.getUpperBound();
             g2.setFont(this.font);
-            this.content = TextUtilities.createTextBlock(this.text, this.font,
+            this.content = TextUtils.createTextBlock(this.text, this.font,
                     this.paint, maxWidth, this.maximumLinesToDisplay,
                     new G2TextMeasurer(g2));
             this.content.setLineAlignment(this.textAlignment);
@@ -641,7 +641,7 @@ public class TextTitle extends Title
                 == RectangleEdge.RIGHT) {
             float maxWidth = (float) heightRange.getUpperBound();
             g2.setFont(this.font);
-            this.content = TextUtilities.createTextBlock(this.text, this.font,
+            this.content = TextUtils.createTextBlock(this.text, this.font,
                     this.paint, maxWidth, this.maximumLinesToDisplay,
                     new G2TextMeasurer(g2));
             this.content.setLineAlignment(this.textAlignment);

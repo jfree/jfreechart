@@ -218,7 +218,7 @@ import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
 import org.jfree.chart.text.G2TextMeasurer;
 import org.jfree.chart.text.TextBlock;
 import org.jfree.chart.text.TextBox;
-import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.TextAnchor;
@@ -2682,7 +2682,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
                 }
                 g2.setFont(this.labelFont);
                 FontMetrics fm = g2.getFontMetrics();
-                Rectangle2D bounds = TextUtilities.getTextBounds(label, g2, fm);
+                Rectangle2D bounds = TextUtils.getTextBounds(label, g2, fm);
                 Rectangle2D out = this.labelPadding.createOutsetRectangle(
                         bounds);
                 Shape bg = ShapeUtils.createTranslatedShape(out,
@@ -2707,7 +2707,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
 
                 g2.setPaint(this.labelPaint);
                 g2.setFont(this.labelFont);
-                TextUtilities.drawAlignedString(label, g2, x, y,
+                TextUtils.drawAlignedString(label, g2, x, y,
                         TextAnchor.CENTER);
 
             }
@@ -2812,7 +2812,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
             String label = this.labelGenerator.generateSectionLabel(
                     this.dataset, leftKeys.getKey(i));
             if (label != null) {
-                TextBlock block = TextUtilities.createTextBlock(label,
+                TextBlock block = TextUtils.createTextBlock(label,
                         this.labelFont, this.labelPaint, maxLabelWidth,
                         new G2TextMeasurer(g2));
                 TextBox labelBox = new TextBox(block);
@@ -2873,7 +2873,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
                     this.dataset, keys.getKey(i));
 
             if (label != null) {
-                TextBlock block = TextUtilities.createTextBlock(label,
+                TextBlock block = TextUtils.createTextBlock(label,
                         this.labelFont, this.labelPaint, maxLabelWidth,
                         new G2TextMeasurer(g2));
                 TextBox labelBox = new TextBox(block);

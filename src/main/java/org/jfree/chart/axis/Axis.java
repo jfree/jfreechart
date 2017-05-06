@@ -122,7 +122,7 @@ import org.jfree.chart.event.AxisChangeListener;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.text.AttributedStringUtils;
-import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.TextAnchor;
@@ -1253,7 +1253,7 @@ public abstract class Axis implements Cloneable, Serializable {
             String axisLabel = getLabel();
             if (axisLabel != null && !axisLabel.equals("")) {
                 FontMetrics fm = g2.getFontMetrics(getLabelFont());
-                bounds = TextUtilities.getTextBounds(axisLabel, g2, fm);
+                bounds = TextUtils.getTextBounds(axisLabel, g2, fm);
             }
         }
         if (bounds != null) {
@@ -1355,7 +1355,7 @@ public abstract class Axis implements Cloneable, Serializable {
         g2.setFont(font);
         g2.setPaint(getLabelPaint());
         FontMetrics fm = g2.getFontMetrics();
-        Rectangle2D labelBounds = TextUtilities.getTextBounds(label, g2, fm);
+        Rectangle2D labelBounds = TextUtils.getTextBounds(label, g2, fm);
 
         if (edge == RectangleEdge.TOP) {
             AffineTransform t = AffineTransform.getRotateInstance(
@@ -1367,7 +1367,7 @@ public abstract class Axis implements Cloneable, Serializable {
             double labely = state.getCursor() - insets.getBottom()
                             - labelBounds.getHeight() / 2.0;
             TextAnchor anchor = labelAnchorH(this.labelLocation);
-            TextUtilities.drawRotatedString(label, g2, (float) labelx,
+            TextUtils.drawRotatedString(label, g2, (float) labelx,
                     (float) labely, anchor, getLabelAngle(), TextAnchor.CENTER);
             state.cursorUp(insets.getTop() + labelBounds.getHeight()
                     + insets.getBottom());
@@ -1382,7 +1382,7 @@ public abstract class Axis implements Cloneable, Serializable {
             double labely = state.getCursor()
                             + insets.getTop() + labelBounds.getHeight() / 2.0;
             TextAnchor anchor = labelAnchorH(this.labelLocation);
-            TextUtilities.drawRotatedString(label, g2, (float) labelx,
+            TextUtils.drawRotatedString(label, g2, (float) labelx,
                     (float) labely, anchor, getLabelAngle(), TextAnchor.CENTER);
             state.cursorDown(insets.getTop() + labelBounds.getHeight()
                     + insets.getBottom());
@@ -1397,7 +1397,7 @@ public abstract class Axis implements Cloneable, Serializable {
                             - insets.getRight() - labelBounds.getWidth() / 2.0;
             double labely = labelLocationY(this.labelLocation, dataArea);
             TextAnchor anchor = labelAnchorV(this.labelLocation);
-            TextUtilities.drawRotatedString(label, g2, (float) labelx,
+            TextUtils.drawRotatedString(label, g2, (float) labelx,
                     (float) labely, anchor, getLabelAngle() - Math.PI / 2.0, 
                     anchor);
             state.cursorLeft(insets.getLeft() + labelBounds.getWidth()
@@ -1413,7 +1413,7 @@ public abstract class Axis implements Cloneable, Serializable {
                             + insets.getLeft() + labelBounds.getWidth() / 2.0;
             double labely = labelLocationY(this.labelLocation, dataArea);
             TextAnchor anchor = labelAnchorV(this.labelLocation);
-            TextUtilities.drawRotatedString(label, g2, (float) labelx,
+            TextUtils.drawRotatedString(label, g2, (float) labelx,
                     (float) labely, anchor, getLabelAngle() + Math.PI / 2.0, 
                     anchor);
             state.cursorRight(insets.getLeft() + labelBounds.getWidth()

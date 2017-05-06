@@ -64,7 +64,7 @@ import org.jfree.chart.event.AnnotationChangeEvent;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.ParamChecks;
@@ -423,7 +423,7 @@ public class CategoryPointerAnnotation extends CategoryTextAnnotation
             + Math.cos(this.angle) * (this.baseRadius + this.labelOffset);
         double labelY = j2DY
             + Math.sin(this.angle) * (this.baseRadius + this.labelOffset);
-        /* Rectangle2D hotspot = */ TextUtilities.drawAlignedString(getText(),
+        /* Rectangle2D hotspot = */ TextUtils.drawAlignedString(getText(),
                 g2, (float) labelX, (float) labelY, getTextAnchor());
         // TODO: implement the entity for the annotation
 

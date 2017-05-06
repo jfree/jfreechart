@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * ShortTextTitle.java
  * -------------------
- * (C) Copyright 2008, by Object Refinery Limited.
+ * (C) Copyright 2008-2017, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -46,7 +46,7 @@ import java.awt.geom.Rectangle2D;
 
 import org.jfree.chart.block.LengthConstraintType;
 import org.jfree.chart.block.RectangleConstraint;
-import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.Size2D;
 import org.jfree.chart.ui.TextAnchor;
 import org.jfree.data.Range;
@@ -180,7 +180,7 @@ public class ShortTextTitle extends TextTitle {
     protected Size2D arrangeFN(Graphics2D g2, double w) {
         g2.setFont(getFont());
         FontMetrics fm = g2.getFontMetrics(getFont());
-        Rectangle2D bounds = TextUtilities.getTextBounds(getText(), g2, fm);
+        Rectangle2D bounds = TextUtils.getTextBounds(getText(), g2, fm);
         if (bounds.getWidth() <= w) {
             return new Size2D(w, bounds.getHeight());
         }
@@ -204,7 +204,7 @@ public class ShortTextTitle extends TextTitle {
 
         g2.setFont(getFont());
         FontMetrics fm = g2.getFontMetrics(getFont());
-        Rectangle2D bounds = TextUtilities.getTextBounds(getText(), g2, fm);
+        Rectangle2D bounds = TextUtils.getTextBounds(getText(), g2, fm);
         if (bounds.getWidth() <= widthRange.getUpperBound()
                 && bounds.getHeight() <= heightRange.getUpperBound()) {
             return new Size2D(bounds.getWidth(), bounds.getHeight());
@@ -234,7 +234,7 @@ public class ShortTextTitle extends TextTitle {
         area = trimPadding(area);
         g2.setFont(getFont());
         g2.setPaint(getPaint());
-        TextUtilities.drawAlignedString(getText(), g2, (float) area.getMinX(),
+        TextUtils.drawAlignedString(getText(), g2, (float) area.getMinX(),
                 (float) area.getMinY(), TextAnchor.TOP_LEFT);
         return null;
     }

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------
  * RingPlot.java
  * -------------
- * (C) Copyright 2004-2016, by Object Refinery Limited.
+ * (C) Copyright 2004-2017, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limtied);
  * Contributor(s):   Christoph Beck (bug 2121818);
@@ -74,7 +74,7 @@ import java.text.Format;
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.entity.PieSectionEntity;
 import org.jfree.chart.labels.PieToolTipGenerator;
-import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.urls.PieURLGenerator;
@@ -592,7 +592,7 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
                     if (nstr != null) {
                         g2.setFont(this.centerTextFont);
                         g2.setPaint(this.centerTextColor);
-                        TextUtilities.drawAlignedString(nstr, g2, 
+                        TextUtils.drawAlignedString(nstr, g2, 
                             (float) dataArea.getCenterX(), 
                             (float) dataArea.getCenterY(),  
                             TextAnchor.CENTER);                        

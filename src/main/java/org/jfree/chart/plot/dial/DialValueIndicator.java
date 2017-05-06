@@ -63,7 +63,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
 import org.jfree.chart.HashUtilities;
-import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.Size2D;
@@ -579,11 +579,11 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
         FontMetrics fm = g2.getFontMetrics(this.font);
         double value = plot.getValue(this.datasetIndex);
         String valueStr = this.formatter.format(value);
-        Rectangle2D valueBounds = TextUtilities.getTextBounds(valueStr, g2, fm);
+        Rectangle2D valueBounds = TextUtils.getTextBounds(valueStr, g2, fm);
 
         // calculate the bounds of the template value
         String s = this.formatter.format(this.templateValue);
-        Rectangle2D tb = TextUtilities.getTextBounds(s, g2, fm);
+        Rectangle2D tb = TextUtils.getTextBounds(s, g2, fm);
         double minW = tb.getWidth();
         double minH = tb.getHeight();
 
@@ -591,7 +591,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
         double maxH = Double.MAX_VALUE;
         if (this.maxTemplateValue != null) {
             s = this.formatter.format(this.maxTemplateValue);
-            tb = TextUtilities.getTextBounds(s, g2, fm);
+            tb = TextUtils.getTextBounds(s, g2, fm);
             maxW = Math.max(tb.getWidth(), minW);
             maxH = Math.max(tb.getHeight(), minH);
         }
@@ -621,7 +621,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
         Point2D pt2 = RectangleAnchor.coordinates(bounds, this.valueAnchor);
         g2.setPaint(this.paint);
         g2.setFont(this.font);
-        TextUtilities.drawAlignedString(valueStr, g2, (float) pt2.getX(),
+        TextUtils.drawAlignedString(valueStr, g2, (float) pt2.getX(),
                 (float) pt2.getY(), this.textAnchor);
         g2.setClip(savedClip);
 

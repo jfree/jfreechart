@@ -76,7 +76,7 @@ import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.ParamChecks;
@@ -428,7 +428,7 @@ public class XYPointerAnnotation extends XYTextAnnotation
         double labelY = j2DY + Math.sin(this.angle) * (this.baseRadius
                 + this.labelOffset);
         g2.setFont(getFont());
-        Shape hotspot = TextUtilities.calculateRotatedStringBounds(
+        Shape hotspot = TextUtils.calculateRotatedStringBounds(
                 getText(), g2, (float) labelX, (float) labelY, getTextAnchor(),
                 getRotationAngle(), getRotationAnchor());
         if (getBackgroundPaint() != null) {
@@ -436,7 +436,7 @@ public class XYPointerAnnotation extends XYTextAnnotation
             g2.fill(hotspot);
         }
         g2.setPaint(getPaint());
-        TextUtilities.drawRotatedString(getText(), g2, (float) labelX,
+        TextUtils.drawRotatedString(getText(), g2, (float) labelX,
                 (float) labelY, getTextAnchor(), getRotationAngle(),
                 getRotationAnchor());
         if (isOutlineVisible()) {

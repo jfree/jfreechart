@@ -180,7 +180,7 @@ public class TextFragment implements Serializable {
             TextAnchor anchor, float rotateX, float rotateY, double angle) {
         g2.setFont(this.font);
         g2.setPaint(this.paint);
-        TextUtilities.drawRotatedString(this.text, g2, anchorX, anchorY 
+        TextUtils.drawRotatedString(this.text, g2, anchorX, anchorY 
                 + this.baselineOffset, anchor, angle, rotateX, rotateY);
     }
     
@@ -193,7 +193,7 @@ public class TextFragment implements Serializable {
      */
     public Size2D calculateDimensions(Graphics2D g2) {
         FontMetrics fm = g2.getFontMetrics(this.font);
-        Rectangle2D bounds = TextUtilities.getTextBounds(this.text, g2, fm);
+        Rectangle2D bounds = TextUtils.getTextBounds(this.text, g2, fm);
         Size2D result = new Size2D(bounds.getWidth(), bounds.getHeight());
         return result;
     }
