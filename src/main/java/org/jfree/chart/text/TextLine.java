@@ -1,3 +1,31 @@
+/* ===========================================================
+ * JFreeChart : a free chart library for the Java(tm) platform
+ * ===========================================================
+ *
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ *
+ * Project Info:  http://www.jfree.org/jfreechart/index.html
+ *
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
+ * (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+ * License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
+ *
+ * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
+ * Other names may be trademarks of their respective owners.]
+ *
+ */
+
 package org.jfree.chart.text;
 
 import java.awt.Font;
@@ -33,7 +61,7 @@ public class TextLine implements Serializable {
      * 
      * @param text  the text (<code>null</code> not permitted).
      */
-    public TextLine(final String text) {
+    public TextLine(String text) {
         this(text, TextFragment.DEFAULT_FONT);   
     }
     
@@ -43,7 +71,7 @@ public class TextLine implements Serializable {
      * @param text  the text (<code>null</code> not permitted).
      * @param font  the text font (<code>null</code> not permitted).
      */
-    public TextLine(final String text, final Font font) {
+    public TextLine(String text, Font font) {
         this.fragments = new java.util.ArrayList();
         final TextFragment fragment = new TextFragment(text, font);
         this.fragments.add(fragment);
@@ -56,7 +84,7 @@ public class TextLine implements Serializable {
      * @param font  the text font (<code>null</code> not permitted).
      * @param paint  the text color (<code>null</code> not permitted).
      */
-    public TextLine(final String text, final Font font, final Paint paint) {
+    public TextLine(String text, Font font, Paint paint) {
         if (text == null) {
             throw new IllegalArgumentException("Null 'text' argument.");   
         }
@@ -76,7 +104,7 @@ public class TextLine implements Serializable {
      * 
      * @param fragment  the text fragment (<code>null</code> not permitted).
      */
-    public void addFragment(final TextFragment fragment) {
+    public void addFragment(TextFragment fragment) {
         this.fragments.add(fragment);        
     }
     
@@ -85,7 +113,7 @@ public class TextLine implements Serializable {
      * 
      * @param fragment  the fragment to remove.
      */
-    public void removeFragment(final TextFragment fragment) {
+    public void removeFragment(TextFragment fragment) {
         this.fragments.remove(fragment);
     }
     
@@ -102,7 +130,7 @@ public class TextLine implements Serializable {
      * @param angle  the rotation angle (in radians).
      */
     public void draw(Graphics2D g2, float anchorX, float anchorY, 
-            TextAnchor anchor, float rotateX,  float rotateY, double angle) {
+            TextAnchor anchor, float rotateX, float rotateY, double angle) {
     
         Size2D dim = calculateDimensions(g2);
         float xAdj = 0.0f;
@@ -132,7 +160,7 @@ public class TextLine implements Serializable {
      * 
      * @return The width and height.
      */
-    public Size2D calculateDimensions(final Graphics2D g2) {
+    public Size2D calculateDimensions(Graphics2D g2) {
         double width = 0.0;
         double height = 0.0;
         final Iterator iterator = this.fragments.iterator();
@@ -181,8 +209,7 @@ public class TextLine implements Serializable {
      * 
      * @return The offsets.
      */
-    private float calculateBaselineOffset(final Graphics2D g2, 
-                                          final TextAnchor anchor) {
+    private float calculateBaselineOffset(Graphics2D g2, TextAnchor anchor) {
         float result = 0.0f;
         Iterator iterator = this.fragments.iterator();
         while (iterator.hasNext()) {
@@ -200,7 +227,8 @@ public class TextLine implements Serializable {
      * 
      * @return A boolean.
      */
-    public boolean equals(final Object obj) {
+    @Override
+    public boolean equals(Object obj) {
         if (obj == null) {
             return false;
         }
@@ -219,6 +247,7 @@ public class TextLine implements Serializable {
      * 
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         return (this.fragments != null ? this.fragments.hashCode() : 0);
     }
