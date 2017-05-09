@@ -53,7 +53,7 @@ public class FontDisplayField extends JTextField {
      *
      * @param font  the font.
      */
-    public FontDisplayField(final Font font) {
+    public FontDisplayField(Font font) {
         super("");
         setDisplayFont(font);
         setEnabled(false);
@@ -73,7 +73,7 @@ public class FontDisplayField extends JTextField {
      *
      * @param font  the font.
      */
-    public void setDisplayFont(final Font font) {
+    public void setDisplayFont(Font font) {
         this.displayFont = font;
         setText(fontToString(this.displayFont));
     }
@@ -85,7 +85,7 @@ public class FontDisplayField extends JTextField {
      *
      * @return a string describing the font.
      */
-    private String fontToString(final Font font) {
+    private String fontToString(Font font) {
         if (font != null) {
             return font.getFontName() + ", " + font.getSize();
         }
