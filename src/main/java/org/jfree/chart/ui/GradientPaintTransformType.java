@@ -66,7 +66,7 @@ public final class GradientPaintTransformType implements Serializable {
      *
      * @param name  the name.
      */
-    private GradientPaintTransformType(final String name) {
+    private GradientPaintTransformType(String name) {
         this.name = name;
     }
 
@@ -87,7 +87,7 @@ public final class GradientPaintTransformType implements Serializable {
      *
      * @return A boolean.
      */
-    public boolean equals(final Object o) {
+    public boolean equals(Object o) {
 
         if (this == o) {
             return true;
