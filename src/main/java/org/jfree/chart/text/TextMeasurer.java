@@ -34,8 +34,8 @@ package org.jfree.chart.text;
 public interface TextMeasurer {
 
     /**
-     * Calculates the width of a <code>String</code> in the current 
-     * <code>Graphics</code> context.
+     * Calculates the width of a {@code String} in the current 
+     * {@code Graphics} context.
      *
      * @param text  the text.
      * @param start  the start position of the substring to be measured.
