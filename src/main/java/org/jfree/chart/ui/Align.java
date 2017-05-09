@@ -109,7 +109,7 @@ public final class Align {
      * @param frame  the reference frame (<code>null</code> not permitted).
      * @param align  the alignment code.
      */
-    public static void align(final Rectangle2D rect, final Rectangle2D frame, final int align) {
+    public static void align(Rectangle2D rect, Rectangle2D frame, int align) {
 
         double x = frame.getCenterX() - rect.getWidth() / 2.0;
         double y = frame.getCenterY() - rect.getHeight() / 2.0;
