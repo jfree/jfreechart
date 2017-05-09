@@ -62,7 +62,7 @@ import org.jfree.chart.util.StringUtils;
 
 /**
  * Collection of utility methods related to producing image maps.
- * Functionality was originally in {@link org.jfree.chart.ChartUtilities}.
+ * Functionality was originally in {@link org.jfree.chart.ChartUtils}.
  */
 public class ImageMapUtils {
 
