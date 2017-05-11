@@ -94,12 +94,12 @@ public final class ObjectUtils {
     }
 
     /**
-     * Returns <code>true</code> if the two objects are equal OR both
-     * <code>null</code>.
+     * Returns {@code true} if the two objects are equal OR both
+     * {@code null}.
      *
-     * @param o1 object 1 (<code>null</code> permitted).
-     * @param o2 object 2 (<code>null</code> permitted).
-     * @return <code>true</code> or <code>false</code>.
+     * @param o1 object 1 ({@code null} permitted).
+     * @param o2 object 2 ({@code null} permitted).
+     * @return {@code true} or {@code false}.
      */
     public static boolean equal(final Object o1, final Object o2) {
         if (o1 == o2) {
@@ -115,11 +115,11 @@ public final class ObjectUtils {
 
     /**
      * Returns a hash code for an object, or zero if the object is
-     * <code>null</code>.
+     * {@code null}.
      *
-     * @param object the object (<code>null</code> permitted).
+     * @param object the object ({@code null} permitted).
      * @return The object's hash code (or zero if the object is
-     *         <code>null</code>).
+     *         {@code null}).
      */
     public static int hashCode(final Object object) {
         int result = 0;
@@ -133,7 +133,7 @@ public final class ObjectUtils {
      * Returns a clone of the specified object, if it can be cloned, otherwise
      * throws a CloneNotSupportedException.
      *
-     * @param object the object to clone (<code>null</code> not permitted).
+     * @param object the object to clone ({@code null} not permitted).
      * @return A clone of the specified object.
      * @throws CloneNotSupportedException if the object cannot be cloned.
      */
@@ -171,7 +171,7 @@ public final class ObjectUtils {
      * Returns a new collection containing clones of all the items in the
      * specified collection.
      *
-     * @param collection the collection (<code>null</code> not permitted).
+     * @param collection the collection ({@code null} not permitted).
      * @return A new collection containing clones of all the items in the
      *         specified collection.
      * @throws CloneNotSupportedException if any of the items in the collection
@@ -415,7 +415,7 @@ public final class ObjectUtils {
     }
 
     /**
-     * Returns <code>true</code> if this is version 1.4 or later of the
+     * Returns {@code true} if this is version 1.4 or later of the
      * Java runtime.
      *
      * @return A boolean.
