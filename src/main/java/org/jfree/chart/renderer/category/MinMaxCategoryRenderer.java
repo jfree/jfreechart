@@ -457,8 +457,7 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
      *
      * @return The icon.
      */
-    private Icon getIcon(Shape shape, final Paint fillPaint,
-                        final Paint outlinePaint) {
+    private Icon getIcon(Shape shape, final Paint fillPaint, final Paint outlinePaint) {
 
         final int width = shape.getBounds().width;
         final int height = shape.getBounds().height;
@@ -500,8 +499,7 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
      *
      * @return The icon.
      */
-    private Icon getIcon(Shape shape, final boolean fill,
-            final boolean outline) {
+    private Icon getIcon(Shape shape, final boolean fill, final boolean outline) {
         final int width = shape.getBounds().width;
         final int height = shape.getBounds().height;
         final GeneralPath path = new GeneralPath(shape);
