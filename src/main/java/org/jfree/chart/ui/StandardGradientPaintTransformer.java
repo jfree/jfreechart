@@ -35,7 +35,7 @@ import java.io.Serializable;
 import org.jfree.chart.util.PublicCloneable;
 
 /**
- * Transforms a <code>GradientPaint</code> to range over the width of a target 
+ * Transforms a {@code GradientPaint} to range over the width of a target 
  * shape.  Instances of this class are immutable.
  */
 public class StandardGradientPaintTransformer 
@@ -59,7 +59,7 @@ public class StandardGradientPaintTransformer
     /**
      * Creates a new transformer with the specified type.
      * 
-     * @param type  the transform type (<code>null</code> not permitted).
+     * @param type  the transform type ({@code null} not permitted).
      */
     public StandardGradientPaintTransformer(
             final GradientPaintTransformType type) {
@@ -72,7 +72,7 @@ public class StandardGradientPaintTransformer
     /**
      * Returns the type of transform.
      * 
-     * @return The type of transform (never <code>null</code>).
+     * @return The type of transform (never {@code null}).
      * 
      * @since 1.0.10
      */
@@ -81,19 +81,19 @@ public class StandardGradientPaintTransformer
     }
     
     /**
-     * Transforms a <code>GradientPaint</code> instance to fit the specified
-     * <code>target</code> shape.
+     * Transforms a {@code GradientPaint} instance to fit the specified
+     * {@code target} shape.
      * 
-     * @param paint  the original paint (<code>null</code> not permitted).
-     * @param target  the target shape (<code>null</code> not permitted).
+     * @param paint  the original paint ({@code null} not permitted).
+     * @param target  the target shape ({@code null} not permitted).
      * 
      * @return The transformed paint.
      */
-    public GradientPaint transform(final GradientPaint paint, 
-                                   final Shape target) {
+    @Override
+    public GradientPaint transform(GradientPaint paint, Shape target) {
         
         GradientPaint result = paint;
-        final Rectangle2D bounds = target.getBounds2D();
+        Rectangle2D bounds = target.getBounds2D();
         
         if (this.type.equals(GradientPaintTransformType.VERTICAL)) {
             result = new GradientPaint((float) bounds.getCenterX(), 
@@ -127,11 +127,12 @@ public class StandardGradientPaintTransformer
     /**
      * Tests this instance for equality with an arbitrary object.
      * 
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      * 
      * @return A boolean.
      */
-    public boolean equals(final Object obj) {
+    @Override
+    public boolean equals(Object obj) {
         if (obj == this) {
             return true;   
         }
