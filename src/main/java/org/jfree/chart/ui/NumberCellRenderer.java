@@ -62,22 +62,21 @@ public class NumberCellRenderer extends DefaultTableCellRenderer {
      *
      * @return the component that can render the contents of the cell.
      */
-    public Component getTableCellRendererComponent(final JTable table, 
-            final Object value, final boolean isSelected, 
-            final boolean hasFocus, final int row, final int column) {
+    @Override
+    public Component getTableCellRendererComponent(JTable table, 
+            Object value, boolean isSelected, 
+            boolean hasFocus, int row, int column) {
 
         setFont(null);
-        final NumberFormat nf = NumberFormat.getNumberInstance();
+        NumberFormat nf = NumberFormat.getNumberInstance();
         if (value != null) {
           setText(nf.format(value));
-        }
-        else {
+        } else {
           setText("");
         }
         if (isSelected) {
             setBackground(table.getSelectionBackground());
-        }
-        else {
+        } else {
             setBackground(null);
         }
         return this;
