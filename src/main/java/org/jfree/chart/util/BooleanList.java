@@ -1,3 +1,31 @@
+/* ===========================================================
+ * JFreeChart : a free chart library for the Java(tm) platform
+ * ===========================================================
+ *
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ *
+ * Project Info:  http://www.jfree.org/jfreechart/index.html
+ *
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
+ * (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+ * License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
+ *
+ * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
+ * Other names may be trademarks of their respective owners.]
+ *
+ */
+
 package org.jfree.chart.util;
 
 /**
@@ -21,7 +49,7 @@ public class BooleanList extends AbstractObjectList {
      *
      * @return a {@link Boolean} from the list.
      */
-    public Boolean getBoolean(final int index) {
+    public Boolean getBoolean(int index) {
         return (Boolean) get(index);
     }
 
@@ -32,7 +60,7 @@ public class BooleanList extends AbstractObjectList {
      * @param index  the index (zero-based).
      * @param b  the boolean.
      */
-    public void setBoolean(final int index, final Boolean b) {
+    public void setBoolean(int index, Boolean b) {
         set(index, b);
     }
 
@@ -43,8 +71,8 @@ public class BooleanList extends AbstractObjectList {
      *
      * @return A boolean.
      */
-    public boolean equals(final Object o) {
-
+    @Override
+    public boolean equals(Object o) {
         if (o instanceof BooleanList) {
             return super.equals(o);
         }
@@ -56,6 +84,7 @@ public class BooleanList extends AbstractObjectList {
      *
      * @return the hashcode
      */
+    @Override
     public int hashCode() {
         return super.hashCode();
     }
