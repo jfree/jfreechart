@@ -4008,20 +4008,8 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
             }
             if (((tick.getValue() != 0.0)
                     || !isRangeZeroBaselineVisible()) && paintLine) {
-                // the method we want isn't in the CategoryItemRenderer
-                // interface...
-                if (r instanceof AbstractCategoryItemRenderer) {
-                    AbstractCategoryItemRenderer aci
-                            = (AbstractCategoryItemRenderer) r;
-                    aci.drawRangeLine(g2, this, axis, dataArea,
+                r .drawRangeLine(g2, this, axis, dataArea,
                             tick.getValue(), gridPaint, gridStroke);
-                }
-                else {
-                    // we'll have to use the method in the interface, but
-                    // this doesn't have the paint and stroke settings...
-                    r.drawRangeGridline(g2, this, axis, dataArea,
-                            tick.getValue());
-                }
             }
         }
     }
@@ -4041,14 +4029,8 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
             return;
         }
         CategoryItemRenderer r = getRenderer();
-        if (r instanceof AbstractCategoryItemRenderer) {
-            AbstractCategoryItemRenderer aci = (AbstractCategoryItemRenderer) r;
-            aci.drawRangeLine(g2, this, getRangeAxis(), area, 0.0,
+        r.drawRangeLine(g2, this, getRangeAxis(), area, 0.0,
                     this.rangeZeroBaselinePaint, this.rangeZeroBaselineStroke);
-        }
-        else {
-            r.drawRangeGridline(g2, this, getRangeAxis(), area, 0.0);
-        }
     }
 
     /**

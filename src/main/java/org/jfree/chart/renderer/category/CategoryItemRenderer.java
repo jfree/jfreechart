@@ -28,7 +28,7 @@
  * CategoryItemRenderer.java
  * -------------------------
  *
- * (C) Copyright 2001-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2001-2017, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Mark Watson (www.markwatson.com);
@@ -1363,9 +1363,6 @@ public interface CategoryItemRenderer extends LegendItemSource {
      * @param dataArea  the area for plotting data (not yet adjusted for any
      *                  3D effect).
      * @param value  the value.
-     *
-     * @see #drawRangeGridline(Graphics2D, CategoryPlot, ValueAxis,
-     *     Rectangle2D, double)
      */
     public void drawDomainGridline(Graphics2D g2, CategoryPlot plot,
             Rectangle2D dataArea, double value);
@@ -1379,11 +1376,11 @@ public interface CategoryItemRenderer extends LegendItemSource {
      * @param dataArea  the area for plotting data (not yet adjusted for any
      *                  3D effect).
      * @param value  the value.
-     *
-     * @see #drawDomainGridline(Graphics2D, CategoryPlot, Rectangle2D, double)
+     * @param paint  the paint ({@code null} not permitted).
+     * @param stroke  the line stroke ({@code null} not permitted).
      */
-    public void drawRangeGridline(Graphics2D g2, CategoryPlot plot,
-            ValueAxis axis, Rectangle2D dataArea, double value);
+    public void drawRangeLine(Graphics2D g2, CategoryPlot plot, ValueAxis axis,
+            Rectangle2D dataArea, double value, Paint paint, Stroke stroke);
 
     /**
      * Draws a line (or some other marker) to indicate a particular category on
