@@ -119,11 +119,11 @@ public class PaintUtils {
      * @param c the color.
      * @return the string for this color.
      */
-    public static String colorToString (final Color c) {
+    public static String colorToString(Color c) {
         try {
-            final Field[] fields = Color.class.getFields();
+            Field[] fields = Color.class.getFields();
             for (int i = 0; i < fields.length; i++) {
-                final Field f = fields[i];
+                Field f = fields[i];
                 if (Modifier.isPublic(f.getModifiers())
                         && Modifier.isFinal(f.getModifiers())
                         && Modifier.isStatic(f.getModifiers())) {
