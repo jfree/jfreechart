@@ -4,8 +4,8 @@ import java.io.ObjectStreamException;
 import java.io.Serializable;
 
 /**
- * An enumeration of the horizontal alignment types (<code>LEFT</code>, 
- * <code>RIGHT</code> and <code>CENTER</code>).
+ * An enumeration of the horizontal alignment types ({@code LEFT}, 
+ * {@code RIGHT} and {@code CENTER}).
  */
 public final class HorizontalAlignment implements Serializable {
 
@@ -46,10 +46,10 @@ public final class HorizontalAlignment implements Serializable {
     }
 
     /**
-     * Returns <code>true</code> if this object is equal to the specified 
-     * object, and <code>false</code> otherwise.
+     * Returns {@code true} if this object is equal to the specified 
+     * object, and {@code false} otherwise.
      *
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
      */
