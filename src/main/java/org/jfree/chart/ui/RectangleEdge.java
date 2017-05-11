@@ -64,7 +64,7 @@ public final class RectangleEdge implements Serializable {
      *
      * @param name  the name.
      */
-    private RectangleEdge(final String name) {
+    private RectangleEdge(String name) {
         this.name = name;
     }
 
@@ -78,14 +78,15 @@ public final class RectangleEdge implements Serializable {
     }
 
     /**
-     * Returns <code>true</code> if this object is equal to the specified 
-     * object, and <code>false</code> otherwise.
+     * Returns {@code true} if this object is equal to the specified 
+     * object, and {@code false} otherwise.
      *
      * @param o  the other object.
      *
      * @return A boolean.
      */
-    public boolean equals(final Object o) {
+    @Override
+    public boolean equals(Object o) {
 
         if (this == o) {
             return true;
@@ -113,26 +114,26 @@ public final class RectangleEdge implements Serializable {
     }
 
     /**
-     * Returns <code>true</code> if the edge is <code>TOP</code> or 
-     * <code>BOTTOM</code>, and <code>false</code> otherwise.
+     * Returns {@code true} if the edge is {@code TOP} or 
+     * {@code BOTTOM}, and {@code false} otherwise.
      * 
      * @param edge  the edge.
      * 
      * @return A boolean.
      */
-    public static boolean isTopOrBottom(final RectangleEdge edge) {
+    public static boolean isTopOrBottom(RectangleEdge edge) {
         return (edge == RectangleEdge.TOP || edge == RectangleEdge.BOTTOM);    
     }
     
     /**
-     * Returns <code>true</code> if the edge is <code>LEFT</code> or 
-     * <code>RIGHT</code>, and <code>false</code> otherwise.
+     * Returns {@code true} if the edge is {@code LEFT} or 
+     * {@code RIGHT}, and {@code false} otherwise.
      * 
      * @param edge  the edge.
      * 
      * @return A boolean.
      */
-    public static boolean isLeftOrRight(final RectangleEdge edge) {
+    public static boolean isLeftOrRight(RectangleEdge edge) {
         return (edge == RectangleEdge.LEFT || edge == RectangleEdge.RIGHT);    
     }
 
@@ -143,7 +144,7 @@ public final class RectangleEdge implements Serializable {
      * 
      * @return The opposite edge.
      */
-    public static RectangleEdge opposite(final RectangleEdge edge) {
+    public static RectangleEdge opposite(RectangleEdge edge) {
         RectangleEdge result = null;
         if (edge == RectangleEdge.TOP) {
             result = RectangleEdge.BOTTOM;
@@ -168,8 +169,7 @@ public final class RectangleEdge implements Serializable {
      * 
      * @return The coordinate.
      */
-    public static double coordinate(final Rectangle2D rectangle, 
-                                    final RectangleEdge edge) {
+    public static double coordinate(Rectangle2D rectangle, RectangleEdge edge) {
         double result = 0.0;
         if (edge == RectangleEdge.TOP) {
             result = rectangle.getMinY();
