@@ -52,7 +52,7 @@ public class ShapeList extends AbstractObjectList {
      *
      * @return The object.
      */
-    public Shape getShape(final int index) {
+    public Shape getShape(int index) {
         return (Shape) get(index);
     }
 
