@@ -46,7 +46,7 @@ public class ObjectList extends AbstractObjectList {
      * 
      * @param initialCapacity  the initial capacity.
      */
-    public ObjectList(final int initialCapacity) {
+    public ObjectList(int initialCapacity) {
         super(initialCapacity);
     }
     
@@ -63,7 +63,8 @@ public class ObjectList extends AbstractObjectList {
      *   
      * @return The object or {@code null}.          
      */          
-    public Object get(final int index) {         
+    @Override
+    public Object get(int index) {         
         return super.get(index);         
     }    
          
@@ -73,7 +74,8 @@ public class ObjectList extends AbstractObjectList {
      * @param index  the object index.   
      * @param object  the object ({@code null} permitted).          
      */          
-    public void set(final int index, final Object object) {      
+    @Override
+    public void set(int index, Object object) {      
         super.set(index, object);        
     }    
          
@@ -84,7 +86,8 @@ public class ObjectList extends AbstractObjectList {
      *   
      * @return The index or -1.          
      */          
-    public int indexOf(final Object object) {    
+    @Override
+    public int indexOf(Object object) {    
         return super.indexOf(object);    
     }    
          
