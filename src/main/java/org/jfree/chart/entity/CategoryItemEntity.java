@@ -56,7 +56,7 @@ package org.jfree.chart.entity;
 import java.awt.Shape;
 import java.io.Serializable;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 
 import org.jfree.data.category.CategoryDataset;
 
@@ -101,7 +101,7 @@ public class CategoryItemEntity extends ChartEntity
     public CategoryItemEntity(Shape area, String toolTipText, String urlText,
             CategoryDataset dataset, Comparable rowKey, Comparable columnKey) {
         super(area, toolTipText, urlText);
-        ParamChecks.nullNotPermitted(dataset, "dataset");
+        Args.nullNotPermitted(dataset, "dataset");
         this.dataset = dataset;
         this.rowKey = rowKey;
         this.columnKey = columnKey;
@@ -128,7 +128,7 @@ public class CategoryItemEntity extends ChartEntity
      * @see #getDataset()
      */
     public void setDataset(CategoryDataset dataset) {
-        ParamChecks.nullNotPermitted(dataset, "dataset");
+        Args.nullNotPermitted(dataset, "dataset");
         this.dataset = dataset;
     }
 

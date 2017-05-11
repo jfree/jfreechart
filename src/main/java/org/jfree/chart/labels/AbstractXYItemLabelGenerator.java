@@ -63,7 +63,7 @@ import java.util.Date;
 
 import org.jfree.chart.HashUtils;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.data.xy.XYDataset;
 
 /**
@@ -113,9 +113,9 @@ public class AbstractXYItemLabelGenerator implements Cloneable, Serializable {
     protected AbstractXYItemLabelGenerator(String formatString, 
             NumberFormat xFormat, NumberFormat yFormat) {
 
-        ParamChecks.nullNotPermitted(formatString, "formatString");
-        ParamChecks.nullNotPermitted(xFormat, "xFormat");
-        ParamChecks.nullNotPermitted(yFormat, "yFormat");
+        Args.nullNotPermitted(formatString, "formatString");
+        Args.nullNotPermitted(xFormat, "xFormat");
+        Args.nullNotPermitted(yFormat, "yFormat");
         this.formatString = formatString;
         this.xFormat = xFormat;
         this.yFormat = yFormat;

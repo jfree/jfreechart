@@ -64,7 +64,7 @@ import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.category.CategoryDataset;
 
@@ -97,7 +97,7 @@ public class CategoryTextAnnotation extends TextAnnotation
     public CategoryTextAnnotation(String text, Comparable category,
                                   double value) {
         super(text);
-        ParamChecks.nullNotPermitted(category, "category");
+        Args.nullNotPermitted(category, "category");
         this.category = category;
         this.value = value;
         this.categoryAnchor = CategoryAnchor.MIDDLE;
@@ -123,7 +123,7 @@ public class CategoryTextAnnotation extends TextAnnotation
      * @see #getCategory()
      */
     public void setCategory(Comparable category) {
-        ParamChecks.nullNotPermitted(category, "category");
+        Args.nullNotPermitted(category, "category");
         this.category = category;
         fireAnnotationChanged();
     }
@@ -148,7 +148,7 @@ public class CategoryTextAnnotation extends TextAnnotation
      * @see #getCategoryAnchor()
      */
     public void setCategoryAnchor(CategoryAnchor anchor) {
-        ParamChecks.nullNotPermitted(anchor, "anchor");
+        Args.nullNotPermitted(anchor, "anchor");
         this.categoryAnchor = anchor;
         fireAnnotationChanged();
     }

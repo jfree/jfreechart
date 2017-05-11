@@ -110,7 +110,7 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.urls.XYURLGenerator;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.chart.util.ShapeUtils;
@@ -172,8 +172,8 @@ public class XYDifferenceRenderer extends AbstractXYItemRenderer
      */
     public XYDifferenceRenderer(Paint positivePaint, Paint negativePaint,
                                 boolean shapes) {
-        ParamChecks.nullNotPermitted(positivePaint, "positivePaint");
-        ParamChecks.nullNotPermitted(negativePaint, "negativePaint");
+        Args.nullNotPermitted(positivePaint, "positivePaint");
+        Args.nullNotPermitted(negativePaint, "negativePaint");
         this.positivePaint = positivePaint;
         this.negativePaint = negativePaint;
         this.shapesVisible = shapes;
@@ -201,7 +201,7 @@ public class XYDifferenceRenderer extends AbstractXYItemRenderer
      * @see #getPositivePaint()
      */
     public void setPositivePaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.positivePaint = paint;
         fireChangeEvent();
     }
@@ -225,7 +225,7 @@ public class XYDifferenceRenderer extends AbstractXYItemRenderer
      * @see #getNegativePaint()
      */
     public void setNegativePaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.negativePaint = paint;
         notifyListeners(new RendererChangeEvent(this));
     }
@@ -276,7 +276,7 @@ public class XYDifferenceRenderer extends AbstractXYItemRenderer
      * @see #getLegendLine()
      */
     public void setLegendLine(Shape line) {
-        ParamChecks.nullNotPermitted(line, "line");
+        Args.nullNotPermitted(line, "line");
         this.legendLine = line;
         fireChangeEvent();
     }

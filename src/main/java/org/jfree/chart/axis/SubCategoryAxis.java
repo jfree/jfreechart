@@ -72,7 +72,7 @@ import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.TextAnchor;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.category.CategoryDataset;
 
@@ -111,7 +111,7 @@ public class SubCategoryAxis extends CategoryAxis
      * @param subCategory  the sub-category ({@code null} not permitted).
      */
     public void addSubCategory(Comparable subCategory) {
-        ParamChecks.nullNotPermitted(subCategory, "subCategory");
+        Args.nullNotPermitted(subCategory, "subCategory");
         this.subCategories.add(subCategory);
         notifyListeners(new AxisChangeEvent(this));
     }
@@ -136,7 +136,7 @@ public class SubCategoryAxis extends CategoryAxis
      * @see #getSubLabelFont()
      */
     public void setSubLabelFont(Font font) {
-        ParamChecks.nullNotPermitted(font, "font");
+        Args.nullNotPermitted(font, "font");
         this.subLabelFont = font;
         notifyListeners(new AxisChangeEvent(this));
     }
@@ -161,7 +161,7 @@ public class SubCategoryAxis extends CategoryAxis
      * @see #getSubLabelPaint()
      */
     public void setSubLabelPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.subLabelPaint = paint;
         notifyListeners(new AxisChangeEvent(this));
     }
@@ -296,7 +296,7 @@ public class SubCategoryAxis extends CategoryAxis
             Rectangle2D plotArea, Rectangle2D dataArea, RectangleEdge edge,
             AxisState state, PlotRenderingInfo plotState) {
 
-        ParamChecks.nullNotPermitted(state, "state");
+        Args.nullNotPermitted(state, "state");
 
         g2.setFont(this.subLabelFont);
         g2.setPaint(this.subLabelPaint);

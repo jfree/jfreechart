@@ -72,7 +72,7 @@ import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.util.LineUtils;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.chart.util.ShapeUtils;
@@ -134,8 +134,8 @@ public class XYLineAnnotation extends AbstractXYAnnotation
                             Stroke stroke, Paint paint) {
 
         super();
-        ParamChecks.nullNotPermitted(stroke, "stroke");
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(stroke, "stroke");
+        Args.nullNotPermitted(paint, "paint");
         this.x1 = x1;
         this.y1 = y1;
         this.x2 = x2;

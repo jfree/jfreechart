@@ -295,7 +295,7 @@ import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.ResourceBundleWrapper;
 import org.jfree.chart.util.SerialUtils;
@@ -748,7 +748,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      * @see #getOrientation()
      */
     public void setOrientation(PlotOrientation orientation) {
-        ParamChecks.nullNotPermitted(orientation, "orientation");
+        Args.nullNotPermitted(orientation, "orientation");
         if (orientation != this.orientation) {
             this.orientation = orientation;
             fireChangeEvent();
@@ -775,7 +775,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      * @see #getAxisOffset()
      */
     public void setAxisOffset(RectangleInsets offset) {
-        ParamChecks.nullNotPermitted(offset, "offset");
+        Args.nullNotPermitted(offset, "offset");
         this.axisOffset = offset;
         fireChangeEvent();
     }
@@ -1448,7 +1448,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      * @since 1.0.12
      */
     public void mapDatasetToDomainAxes(int index, List axisIndices) {
-        ParamChecks.requireNonNegative(index, "index");
+        Args.requireNonNegative(index, "index");
         checkAxisIndices(axisIndices);
         Integer key = new Integer(index);
         this.datasetToDomainAxesMap.put(key, new ArrayList(axisIndices));
@@ -1482,7 +1482,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      * @since 1.0.12
      */
     public void mapDatasetToRangeAxes(int index, List axisIndices) {
-        ParamChecks.requireNonNegative(index, "index");
+        Args.requireNonNegative(index, "index");
         checkAxisIndices(axisIndices);
         Integer key = new Integer(index);
         this.datasetToRangeAxesMap.put(key, new ArrayList(axisIndices));
@@ -1645,7 +1645,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      * @see #getDatasetRenderingOrder()
      */
     public void setDatasetRenderingOrder(DatasetRenderingOrder order) {
-        ParamChecks.nullNotPermitted(order, "order");
+        Args.nullNotPermitted(order, "order");
         this.datasetRenderingOrder = order;
         fireChangeEvent();
     }
@@ -1672,7 +1672,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      * @see #getSeriesRenderingOrder()
      */
     public void setSeriesRenderingOrder(SeriesRenderingOrder order) {
-        ParamChecks.nullNotPermitted(order, "order");
+        Args.nullNotPermitted(order, "order");
         this.seriesRenderingOrder = order;
         fireChangeEvent();
     }
@@ -1830,7 +1830,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      * @see #getDomainGridlineStroke()
      */
     public void setDomainGridlineStroke(Stroke stroke) {
-        ParamChecks.nullNotPermitted(stroke, "stroke");
+        Args.nullNotPermitted(stroke, "stroke");
         this.domainGridlineStroke = stroke;
         fireChangeEvent();
     }
@@ -1864,7 +1864,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      * @since 1.0.12
      */
     public void setDomainMinorGridlineStroke(Stroke stroke) {
-        ParamChecks.nullNotPermitted(stroke, "stroke");
+        Args.nullNotPermitted(stroke, "stroke");
         this.domainMinorGridlineStroke = stroke;
         fireChangeEvent();
     }
@@ -1893,7 +1893,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      * @see #getDomainGridlinePaint()
      */
     public void setDomainGridlinePaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.domainGridlinePaint = paint;
         fireChangeEvent();
     }
@@ -1926,7 +1926,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      * @since 1.0.12
      */
     public void setDomainMinorGridlinePaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.domainMinorGridlinePaint = paint;
         fireChangeEvent();
     }
@@ -1982,7 +1982,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      * @see #getRangeGridlineStroke()
      */
     public void setRangeGridlineStroke(Stroke stroke) {
-        ParamChecks.nullNotPermitted(stroke, "stroke");
+        Args.nullNotPermitted(stroke, "stroke");
         this.rangeGridlineStroke = stroke;
         fireChangeEvent();
     }
@@ -2008,7 +2008,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      * @see #getRangeGridlinePaint()
      */
     public void setRangeGridlinePaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.rangeGridlinePaint = paint;
         fireChangeEvent();
     }
@@ -2072,7 +2072,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      * @since 1.0.12
      */
     public void setRangeMinorGridlineStroke(Stroke stroke) {
-        ParamChecks.nullNotPermitted(stroke, "stroke");
+        Args.nullNotPermitted(stroke, "stroke");
         this.rangeMinorGridlineStroke = stroke;
         fireChangeEvent();
     }
@@ -2102,7 +2102,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      * @since 1.0.12
      */
     public void setRangeMinorGridlinePaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.rangeMinorGridlinePaint = paint;
         fireChangeEvent();
     }
@@ -2161,7 +2161,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      * @see #getRangeZeroBaselineStroke()
      */
     public void setDomainZeroBaselineStroke(Stroke stroke) {
-        ParamChecks.nullNotPermitted(stroke, "stroke");
+        Args.nullNotPermitted(stroke, "stroke");
         this.domainZeroBaselineStroke = stroke;
         fireChangeEvent();
     }
@@ -2191,7 +2191,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      * @see #getDomainZeroBaselinePaint()
      */
     public void setDomainZeroBaselinePaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.domainZeroBaselinePaint = paint;
         fireChangeEvent();
     }
@@ -2242,7 +2242,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      * @see #getRangeZeroBaselineStroke()
      */
     public void setRangeZeroBaselineStroke(Stroke stroke) {
-        ParamChecks.nullNotPermitted(stroke, "stroke");
+        Args.nullNotPermitted(stroke, "stroke");
         this.rangeZeroBaselineStroke = stroke;
         fireChangeEvent();
     }
@@ -2268,7 +2268,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      * @see #getRangeZeroBaselinePaint()
      */
     public void setRangeZeroBaselinePaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.rangeZeroBaselinePaint = paint;
         fireChangeEvent();
     }
@@ -2342,7 +2342,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      * @see #getQuadrantOrigin()
      */
     public void setQuadrantOrigin(Point2D origin) {
-        ParamChecks.nullNotPermitted(origin, "origin");
+        Args.nullNotPermitted(origin, "origin");
         this.quadrantOrigin = origin;
         fireChangeEvent();
     }
@@ -2512,8 +2512,8 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      */
     public void addDomainMarker(int index, Marker marker, Layer layer,
             boolean notify) {
-        ParamChecks.nullNotPermitted(marker, "marker");
-        ParamChecks.nullNotPermitted(layer, "layer");
+        Args.nullNotPermitted(marker, "marker");
+        Args.nullNotPermitted(layer, "layer");
         Collection markers;
         if (layer == Layer.FOREGROUND) {
             markers = (Collection) this.foregroundDomainMarkers.get(
@@ -2835,8 +2835,8 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      */
     public boolean removeRangeMarker(int index, Marker marker, Layer layer,
             boolean notify) {
-        ParamChecks.nullNotPermitted(marker, "marker");
-        ParamChecks.nullNotPermitted(layer, "layer");
+        Args.nullNotPermitted(marker, "marker");
+        Args.nullNotPermitted(layer, "layer");
         List markers;
         if (layer == Layer.FOREGROUND) {
             markers = (List) this.foregroundRangeMarkers.get(
@@ -2879,7 +2879,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      * @since 1.0.10
      */
     public void addAnnotation(XYAnnotation annotation, boolean notify) {
-        ParamChecks.nullNotPermitted(annotation, "annotation");
+        Args.nullNotPermitted(annotation, "annotation");
         this.annotations.add(annotation);
         annotation.addChangeListener(this);
         if (notify) {
@@ -2914,7 +2914,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      * @since 1.0.10
      */
     public boolean removeAnnotation(XYAnnotation annotation, boolean notify) {
-        ParamChecks.nullNotPermitted(annotation, "annotation");
+        Args.nullNotPermitted(annotation, "annotation");
         boolean removed = this.annotations.remove(annotation);
         annotation.removeChangeListener(this);
         if (removed && notify) {
@@ -3783,7 +3783,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      * @return The axis.
      */
     public ValueAxis getDomainAxisForDataset(int index) {
-        ParamChecks.requireNonNegative(index, "index");
+        Args.requireNonNegative(index, "index");
         ValueAxis valueAxis;
         List axisIndices = (List) this.datasetToDomainAxesMap.get(
                 new Integer(index));
@@ -3806,7 +3806,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      * @return The axis.
      */
     public ValueAxis getRangeAxisForDataset(int index) {
-        ParamChecks.requireNonNegative(index, "index");
+        Args.requireNonNegative(index, "index");
         ValueAxis valueAxis;
         List axisIndices = (List) this.datasetToRangeAxesMap.get(
                 new Integer(index));
@@ -4298,7 +4298,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      * @return A list of datasets.
      */
     private List<XYDataset> getDatasetsMappedToDomainAxis(Integer axisIndex) {
-        ParamChecks.nullNotPermitted(axisIndex, "axisIndex");
+        Args.nullNotPermitted(axisIndex, "axisIndex");
         List<XYDataset> result = new ArrayList<XYDataset>();
         for (Entry<Integer, XYDataset> entry : this.datasets.entrySet()) {
             int index = entry.getKey();
@@ -4325,7 +4325,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      * @return A list of datasets.
      */
     private List<XYDataset> getDatasetsMappedToRangeAxis(Integer axisIndex) {
-        ParamChecks.nullNotPermitted(axisIndex, "axisIndex");
+        Args.nullNotPermitted(axisIndex, "axisIndex");
         List<XYDataset> result = new ArrayList<XYDataset>();
         for (Entry<Integer, XYDataset> entry : this.datasets.entrySet()) {
             int index = entry.getKey();
@@ -4683,7 +4683,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      * @see #getDomainCrosshairStroke()
      */
     public void setDomainCrosshairStroke(Stroke stroke) {
-        ParamChecks.nullNotPermitted(stroke, "stroke");
+        Args.nullNotPermitted(stroke, "stroke");
         this.domainCrosshairStroke = stroke;
         fireChangeEvent();
     }
@@ -4710,7 +4710,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      * @see #getDomainCrosshairPaint()
      */
     public void setDomainCrosshairPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.domainCrosshairPaint = paint;
         fireChangeEvent();
     }
@@ -4836,7 +4836,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      * @see #getRangeCrosshairStroke()
      */
     public void setRangeCrosshairStroke(Stroke stroke) {
-        ParamChecks.nullNotPermitted(stroke, "stroke");
+        Args.nullNotPermitted(stroke, "stroke");
         this.rangeCrosshairStroke = stroke;
         fireChangeEvent();
     }
@@ -4863,7 +4863,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      * @see #getRangeCrosshairPaint()
      */
     public void setRangeCrosshairPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.rangeCrosshairPaint = paint;
         fireChangeEvent();
     }

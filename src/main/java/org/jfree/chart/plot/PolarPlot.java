@@ -108,7 +108,7 @@ import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.util.ObjectList;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.ResourceBundleWrapper;
 import org.jfree.chart.util.SerialUtils;
@@ -508,7 +508,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      */
     public void setAxisLocation(int index, PolarAxisLocation location,
             boolean notify) {
-        ParamChecks.nullNotPermitted(location, "location");
+        Args.nullNotPermitted(location, "location");
         this.axisLocations.set(index, location);
         if (notify) {
             fireChangeEvent();
@@ -735,7 +735,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      * @since 1.0.10
      */
     public void setAngleTickUnit(TickUnit unit) {
-        ParamChecks.nullNotPermitted(unit, "unit");
+        Args.nullNotPermitted(unit, "unit");
         this.angleTickUnit = unit;
         fireChangeEvent();
     }
@@ -836,7 +836,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      * @see #getAngleLabelFont()
      */
     public void setAngleLabelFont(Font font) {
-        ParamChecks.nullNotPermitted(font, "font");
+        Args.nullNotPermitted(font, "font");
         this.angleLabelFont = font;
         fireChangeEvent();
     }
@@ -859,7 +859,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      * @param paint  the paint ({@code null} not permitted).
      */
     public void setAngleLabelPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.angleLabelPaint = paint;
         fireChangeEvent();
     }
@@ -1117,7 +1117,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      * @see #removeCornerTextItem(String)
      */
     public void addCornerTextItem(String text) {
-        ParamChecks.nullNotPermitted(text, "text");
+        Args.nullNotPermitted(text, "text");
         this.cornerTextItems.add(text);
         fireChangeEvent();
     }
@@ -1669,7 +1669,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      * @since 1.0.14
      */
     private List getDatasetsMappedToAxis(Integer axisIndex) {
-        ParamChecks.nullNotPermitted(axisIndex, "axisIndex");
+        Args.nullNotPermitted(axisIndex, "axisIndex");
         List result = new ArrayList();
         for (int i = 0; i < this.datasets.size(); i++) {
             List mappedAxes = (List) this.datasetToAxesMap.get(new Integer(i));

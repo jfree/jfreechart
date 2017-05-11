@@ -94,7 +94,7 @@ public class DefaultShadowGenerator implements ShadowGenerator, Serializable {
      */
     public DefaultShadowGenerator(int size, Color color, float opacity,
             int distance, double angle) {
-        ParamChecks.nullNotPermitted(color, "color");
+        Args.nullNotPermitted(color, "color");
         this.shadowSize = size;
         this.shadowColor = color;
         this.shadowOpacity = opacity;

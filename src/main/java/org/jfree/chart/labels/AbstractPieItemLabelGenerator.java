@@ -50,7 +50,7 @@ import java.text.MessageFormat;
 import java.text.NumberFormat;
 
 import org.jfree.chart.HashUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.data.general.DatasetUtils;
 import org.jfree.data.general.PieDataset;
 
@@ -83,9 +83,9 @@ public class AbstractPieItemLabelGenerator implements Serializable {
      */
     protected AbstractPieItemLabelGenerator(String labelFormat, 
             NumberFormat numberFormat, NumberFormat percentFormat) {
-        ParamChecks.nullNotPermitted(labelFormat, "labelFormat");
-        ParamChecks.nullNotPermitted(numberFormat, "numberFormat");
-        ParamChecks.nullNotPermitted(percentFormat, "percentFormat");
+        Args.nullNotPermitted(labelFormat, "labelFormat");
+        Args.nullNotPermitted(numberFormat, "numberFormat");
+        Args.nullNotPermitted(percentFormat, "percentFormat");
         this.labelFormat = labelFormat;
         this.numberFormat = numberFormat;
         this.percentFormat = percentFormat;

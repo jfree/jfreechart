@@ -69,7 +69,7 @@ import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 
 /**
@@ -105,7 +105,7 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
      * @see #addRangeCrosshair(org.jfree.chart.plot.Crosshair)
      */
     public void addDomainCrosshair(Crosshair crosshair) {
-        ParamChecks.nullNotPermitted(crosshair, "crosshair");
+        Args.nullNotPermitted(crosshair, "crosshair");
         this.xCrosshairs.add(crosshair);
         crosshair.addPropertyChangeListener(this);
         fireOverlayChanged();
@@ -120,7 +120,7 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
      * @see #addDomainCrosshair(org.jfree.chart.plot.Crosshair)
      */
     public void removeDomainCrosshair(Crosshair crosshair) {
-        ParamChecks.nullNotPermitted(crosshair, "crosshair");
+        Args.nullNotPermitted(crosshair, "crosshair");
         if (this.xCrosshairs.remove(crosshair)) {
             crosshair.removePropertyChangeListener(this);
             fireOverlayChanged();
@@ -160,7 +160,7 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
      * @param crosshair  the crosshair ({@code null} not permitted).
      */
     public void addRangeCrosshair(Crosshair crosshair) {
-        ParamChecks.nullNotPermitted(crosshair, "crosshair");
+        Args.nullNotPermitted(crosshair, "crosshair");
         this.yCrosshairs.add(crosshair);
         crosshair.addPropertyChangeListener(this);
         fireOverlayChanged();
@@ -175,7 +175,7 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
      * @see #addRangeCrosshair(org.jfree.chart.plot.Crosshair)
      */
     public void removeRangeCrosshair(Crosshair crosshair) {
-        ParamChecks.nullNotPermitted(crosshair, "crosshair");
+        Args.nullNotPermitted(crosshair, "crosshair");
         if (this.yCrosshairs.remove(crosshair)) {
             crosshair.removePropertyChangeListener(this);
             fireOverlayChanged();

@@ -61,7 +61,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 import org.jfree.chart.ui.RectangleInsets;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
 
 import org.jfree.data.time.RegularTimePeriod;
@@ -148,13 +148,13 @@ public class PeriodAxisLabelInfo implements Cloneable, Serializable {
     public PeriodAxisLabelInfo(Class periodClass, DateFormat dateFormat,
             RectangleInsets padding, Font labelFont, Paint labelPaint,
             boolean drawDividers, Stroke dividerStroke, Paint dividerPaint) {
-        ParamChecks.nullNotPermitted(periodClass, "periodClass");
-        ParamChecks.nullNotPermitted(dateFormat, "dateFormat");
-        ParamChecks.nullNotPermitted(padding, "padding");
-        ParamChecks.nullNotPermitted(labelFont, "labelFont");
-        ParamChecks.nullNotPermitted(labelPaint, "labelPaint");
-        ParamChecks.nullNotPermitted(dividerStroke, "dividerStroke");
-        ParamChecks.nullNotPermitted(dividerPaint, "dividerPaint");
+        Args.nullNotPermitted(periodClass, "periodClass");
+        Args.nullNotPermitted(dateFormat, "dateFormat");
+        Args.nullNotPermitted(padding, "padding");
+        Args.nullNotPermitted(labelFont, "labelFont");
+        Args.nullNotPermitted(labelPaint, "labelPaint");
+        Args.nullNotPermitted(dividerStroke, "dividerStroke");
+        Args.nullNotPermitted(dividerPaint, "dividerPaint");
         this.periodClass = periodClass;
         this.dateFormat = (DateFormat) dateFormat.clone();
         this.padding = padding;

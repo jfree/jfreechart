@@ -81,7 +81,7 @@ import org.jfree.chart.urls.PieURLGenerator;
 import org.jfree.chart.util.LineUtils;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.Rotation;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.chart.util.ShapeUtils;
@@ -199,7 +199,7 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
      * @since 1.0.18
      */
     public void setCenterTextMode(CenterTextMode mode) {
-        ParamChecks.nullNotPermitted(mode, "mode");
+        Args.nullNotPermitted(mode, "mode");
         this.centerTextMode = mode;
         fireChangeEvent();
     }
@@ -252,7 +252,7 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
      * @since 1.0.18
      */
     public void setCenterTextFormatter(Format formatter) {
-        ParamChecks.nullNotPermitted(formatter, "formatter");
+        Args.nullNotPermitted(formatter, "formatter");
         this.centerTextFormatter = formatter;
     }
     
@@ -277,7 +277,7 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
      * @since 1.0.18
      */
     public void setCenterTextFont(Font font) {
-        ParamChecks.nullNotPermitted(font, "font");
+        Args.nullNotPermitted(font, "font");
         this.centerTextFont = font;
         fireChangeEvent();
     }
@@ -303,7 +303,7 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
      * @since 1.0.18
      */
     public void setCenterTextColor(Color color) {
-        ParamChecks.nullNotPermitted(color, "color");
+        Args.nullNotPermitted(color, "color");
         this.centerTextColor = color;
         fireChangeEvent();
     }
@@ -354,7 +354,7 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
      * @see #getSeparatorStroke()
      */
     public void setSeparatorStroke(Stroke stroke) {
-        ParamChecks.nullNotPermitted(stroke, "stroke");
+        Args.nullNotPermitted(stroke, "stroke");
         this.separatorStroke = stroke;
         fireChangeEvent();
     }
@@ -379,7 +379,7 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
      * @see #getSeparatorPaint()
      */
     public void setSeparatorPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.separatorPaint = paint;
         fireChangeEvent();
     }

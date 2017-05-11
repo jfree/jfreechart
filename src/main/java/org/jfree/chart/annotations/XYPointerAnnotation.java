@@ -79,7 +79,7 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 
@@ -333,7 +333,7 @@ public class XYPointerAnnotation extends XYTextAnnotation
      * @see #getArrowStroke()
      */
     public void setArrowStroke(Stroke stroke) {
-        ParamChecks.nullNotPermitted(stroke, "stroke");
+        Args.nullNotPermitted(stroke, "stroke");
         this.arrowStroke = stroke;
         fireAnnotationChanged();
     }
@@ -358,7 +358,7 @@ public class XYPointerAnnotation extends XYTextAnnotation
      * @see #getArrowPaint()
      */
     public void setArrowPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.arrowPaint = paint;
         fireAnnotationChanged();
     }

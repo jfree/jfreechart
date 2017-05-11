@@ -67,7 +67,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.category.CategoryDataset;
@@ -326,7 +326,7 @@ public class CategoryPointerAnnotation extends CategoryTextAnnotation
      * @see #getArrowStroke()
      */
     public void setArrowStroke(Stroke stroke) {
-        ParamChecks.nullNotPermitted(stroke, "stroke");
+        Args.nullNotPermitted(stroke, "stroke");
         this.arrowStroke = stroke;
         fireAnnotationChanged();
     }
@@ -351,7 +351,7 @@ public class CategoryPointerAnnotation extends CategoryTextAnnotation
      * @see #getArrowPaint()
      */
     public void setArrowPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.arrowPaint = paint;
         fireAnnotationChanged();
     }

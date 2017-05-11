@@ -56,7 +56,7 @@ import org.jfree.chart.HashUtils;
 import org.jfree.chart.ui.GradientPaintTransformer;
 import org.jfree.chart.ui.StandardGradientPaintTransformer;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 
@@ -100,7 +100,7 @@ public class DialBackground extends AbstractDialLayer implements DialLayer,
      *     {@code null}.
      */
     public DialBackground(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.paint = paint;
         this.gradientPaintTransformer = new StandardGradientPaintTransformer();
     }
@@ -125,7 +125,7 @@ public class DialBackground extends AbstractDialLayer implements DialLayer,
      * @see #getPaint()
      */
     public void setPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.paint = paint;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -152,7 +152,7 @@ public class DialBackground extends AbstractDialLayer implements DialLayer,
      * @see #getGradientPaintTransformer()
      */
     public void setGradientPaintTransformer(GradientPaintTransformer t) {
-        ParamChecks.nullNotPermitted(t, "t");
+        Args.nullNotPermitted(t, "t");
         this.gradientPaintTransformer = t;
         notifyListeners(new DialLayerChangeEvent(this));
     }

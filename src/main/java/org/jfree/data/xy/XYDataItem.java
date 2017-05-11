@@ -49,7 +49,7 @@ package org.jfree.data.xy;
 
 import java.io.Serializable;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 
 /**
  * Represents one (x, y) data item for an {@link XYSeries}.  Note that
@@ -73,7 +73,7 @@ public class XYDataItem implements Cloneable, Comparable, Serializable {
      * @param y  the y-value ({@code null} permitted).
      */
     public XYDataItem(Number x, Number y) {
-        ParamChecks.nullNotPermitted(x, "x");
+        Args.nullNotPermitted(x, "x");
         this.x = x;
         this.y = y;
     }

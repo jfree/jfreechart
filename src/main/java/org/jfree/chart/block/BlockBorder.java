@@ -56,7 +56,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
 
 /**
@@ -126,8 +126,8 @@ public class BlockBorder implements BlockFrame, Serializable {
      * @param paint  the paint ({@code null} not permitted).
      */
     public BlockBorder(RectangleInsets insets, Paint paint) {
-        ParamChecks.nullNotPermitted(insets, "insets");
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(insets, "insets");
+        Args.nullNotPermitted(paint, "paint");
         this.insets = insets;
         this.paint = paint;
     }

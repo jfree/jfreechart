@@ -123,7 +123,7 @@ import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.ResourceBundleWrapper;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.chart.util.UnitType;
@@ -435,7 +435,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      * @see #getRangeAxis()
      */
     public void setRangeAxis(ValueAxis axis) {
-        ParamChecks.nullNotPermitted(axis, "axis");
+        Args.nullNotPermitted(axis, "axis");
         // plot is registered as a listener with the existing axis...
         this.rangeAxis.removeChangeListener(this);
 
@@ -526,7 +526,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      * @see #getPadding()
      */
     public void setPadding(RectangleInsets padding) {
-        ParamChecks.nullNotPermitted(padding, "padding");
+        Args.nullNotPermitted(padding, "padding");
         this.padding = padding;
         fireChangeEvent();
     }
@@ -703,7 +703,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      * @see #getValueFont()
      */
     public void setValueFont(Font f) {
-        ParamChecks.nullNotPermitted(f, "f");
+        Args.nullNotPermitted(f, "f");
         if (!this.valueFont.equals(f)) {
             this.valueFont = f;
             fireChangeEvent();
@@ -730,7 +730,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      * @see #getValuePaint()
      */
     public void setValuePaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         if (!this.valuePaint.equals(paint)) {
             this.valuePaint = paint;
             fireChangeEvent();
@@ -746,7 +746,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      * @param formatter  the new formatter ({@code null} not permitted).
      */
     public void setValueFormat(NumberFormat formatter) {
-        ParamChecks.nullNotPermitted(formatter, "formatter");
+        Args.nullNotPermitted(formatter, "formatter");
         this.valueFormat = formatter;
         fireChangeEvent();
     }
@@ -771,7 +771,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      * @see #getMercuryPaint()
      */
     public void setMercuryPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.mercuryPaint = paint;
         fireChangeEvent();
     }

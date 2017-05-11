@@ -61,7 +61,7 @@ import org.jfree.chart.labels.CategoryItemLabelGenerator;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.KeyToGroupMap;
 import org.jfree.data.Range;
@@ -101,7 +101,7 @@ public class GroupedStackedBarRenderer extends StackedBarRenderer
      * @param map  the map ({@code null} not permitted).
      */
     public void setSeriesToGroupMap(KeyToGroupMap map) {
-        ParamChecks.nullNotPermitted(map, "map");
+        Args.nullNotPermitted(map, "map");
         this.seriesToGroupMap = map;
         fireChangeEvent();
     }

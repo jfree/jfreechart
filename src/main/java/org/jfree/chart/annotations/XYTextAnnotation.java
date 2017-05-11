@@ -79,7 +79,7 @@ import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 
@@ -172,7 +172,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      */
     public XYTextAnnotation(String text, double x, double y) {
         super();
-        ParamChecks.nullNotPermitted(text, "text");
+        Args.nullNotPermitted(text, "text");
         this.text = text;
         this.font = DEFAULT_FONT;
         this.paint = DEFAULT_PAINT;
@@ -208,7 +208,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * @see #getText()
      */
     public void setText(String text) {
-        ParamChecks.nullNotPermitted(text, "text");
+        Args.nullNotPermitted(text, "text");
         this.text = text;
         fireAnnotationChanged();
     }
@@ -233,7 +233,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * @see #getFont()
      */
     public void setFont(Font font) {
-        ParamChecks.nullNotPermitted(font, "font");
+        Args.nullNotPermitted(font, "font");
         this.font = font;
         fireAnnotationChanged();
     }
@@ -258,7 +258,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * @see #getPaint()
      */
     public void setPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.paint = paint;
         fireAnnotationChanged();
     }
@@ -284,7 +284,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * @see #getTextAnchor()
      */
     public void setTextAnchor(TextAnchor anchor) {
-        ParamChecks.nullNotPermitted(anchor, "anchor");
+        Args.nullNotPermitted(anchor, "anchor");
         this.textAnchor = anchor;
         fireAnnotationChanged();
     }
@@ -309,7 +309,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * @see #getRotationAnchor()
      */
     public void setRotationAnchor(TextAnchor anchor) {
-        ParamChecks.nullNotPermitted(anchor, "anchor");
+        Args.nullNotPermitted(anchor, "anchor");
         this.rotationAnchor = anchor;
         fireAnnotationChanged();
     }
@@ -442,7 +442,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * @since 1.0.13
      */
     public void setOutlinePaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.outlinePaint = paint;
         fireAnnotationChanged();
     }
@@ -471,7 +471,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * @since 1.0.13
      */
     public void setOutlineStroke(Stroke stroke) {
-        ParamChecks.nullNotPermitted(stroke, "stroke");
+        Args.nullNotPermitted(stroke, "stroke");
         this.outlineStroke = stroke;
         fireAnnotationChanged();
     }

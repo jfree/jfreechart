@@ -52,7 +52,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
 
 import org.jfree.data.Range;
@@ -103,8 +103,8 @@ public class MeterInterval implements Serializable {
      */
     public MeterInterval(String label, Range range, Paint outlinePaint,
                          Stroke outlineStroke, Paint backgroundPaint) {
-        ParamChecks.nullNotPermitted(label, "label");
-        ParamChecks.nullNotPermitted(range, "range");
+        Args.nullNotPermitted(label, "label");
+        Args.nullNotPermitted(range, "range");
         this.label = label;
         this.range = range;
         this.outlinePaint = outlinePaint;

@@ -42,7 +42,7 @@
 package org.jfree.chart.editor;
 
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 
 /**
  * The central point for obtaining {@link ChartEditor} instances for editing
@@ -77,7 +77,7 @@ public class ChartEditorManager {
      * @param f  the new factory ({@code null} not permitted).
      */
     public static void setChartEditorFactory(ChartEditorFactory f) {
-        ParamChecks.nullNotPermitted(f, "f");
+        Args.nullNotPermitted(f, "f");
         factory = f;
     }
 

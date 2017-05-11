@@ -112,7 +112,7 @@ import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.Range;
@@ -521,7 +521,7 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
      * @since 1.0.7
      */
     public void setVolumePaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.volumePaint = paint;
         fireChangeEvent();
     }

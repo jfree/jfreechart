@@ -97,7 +97,7 @@ import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.util.BooleanList;
 import org.jfree.chart.util.LineUtils;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.chart.util.ShapeUtils;
@@ -347,7 +347,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
      * @see #getLegendLine()
      */
     public void setLegendLine(Shape line) {
-        ParamChecks.nullNotPermitted(line, "line");
+        Args.nullNotPermitted(line, "line");
         this.legendLine = line;
         fireChangeEvent();
     }

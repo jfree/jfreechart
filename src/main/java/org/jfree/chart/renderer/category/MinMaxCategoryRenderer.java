@@ -86,7 +86,7 @@ import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.category.CategoryDataset;
 
@@ -197,7 +197,7 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
      * @see #getGroupPaint()
      */
     public void setGroupPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.groupPaint = paint;
         fireChangeEvent();
     }
@@ -222,7 +222,7 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
      * @param stroke the new stroke ({@code null} not permitted).
      */
     public void setGroupStroke(Stroke stroke) {
-        ParamChecks.nullNotPermitted(stroke, "stroke");
+        Args.nullNotPermitted(stroke, "stroke");
         this.groupStroke = stroke;
         fireChangeEvent();
     }
@@ -247,7 +247,7 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
      * @see #getObjectIcon()
      */
     public void setObjectIcon(Icon icon) {
-        ParamChecks.nullNotPermitted(icon, "icon");
+        Args.nullNotPermitted(icon, "icon");
         this.objectIcon = icon;
         fireChangeEvent();
     }
@@ -274,7 +274,7 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
      * @see #getMaxIcon()
      */
     public void setMaxIcon(Icon icon) {
-        ParamChecks.nullNotPermitted(icon, "icon");
+        Args.nullNotPermitted(icon, "icon");
         this.maxIcon = icon;
         fireChangeEvent();
     }
@@ -301,7 +301,7 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
      * @see #getMinIcon()
      */
     public void setMinIcon(Icon icon) {
-        ParamChecks.nullNotPermitted(icon, "icon");
+        Args.nullNotPermitted(icon, "icon");
         this.minIcon = icon;
         fireChangeEvent();
     }

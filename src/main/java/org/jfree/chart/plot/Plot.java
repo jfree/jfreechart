@@ -182,7 +182,7 @@ import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.general.DatasetChangeEvent;
@@ -451,7 +451,7 @@ public abstract class Plot implements AxisChangeListener,
      * @see #getNoDataMessageFont()
      */
     public void setNoDataMessageFont(Font font) {
-        ParamChecks.nullNotPermitted(font, "font");
+        Args.nullNotPermitted(font, "font");
         this.noDataMessageFont = font;
         fireChangeEvent();
     }
@@ -477,7 +477,7 @@ public abstract class Plot implements AxisChangeListener,
      * @see #getNoDataMessagePaint()
      */
     public void setNoDataMessagePaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.noDataMessagePaint = paint;
         fireChangeEvent();
     }
@@ -585,7 +585,7 @@ public abstract class Plot implements AxisChangeListener,
      * @see #setInsets(RectangleInsets)
      */
     public void setInsets(RectangleInsets insets, boolean notify) {
-        ParamChecks.nullNotPermitted(insets, "insets");
+        Args.nullNotPermitted(insets, "insets");
         if (!this.insets.equals(insets)) {
             this.insets = insets;
             if (notify) {
@@ -1096,7 +1096,7 @@ public abstract class Plot implements AxisChangeListener,
      */
     protected void fillBackground(Graphics2D g2, Rectangle2D area,
             PlotOrientation orientation) {
-        ParamChecks.nullNotPermitted(orientation, "orientation");
+        Args.nullNotPermitted(orientation, "orientation");
         if (this.backgroundPaint == null) {
             return;
         }
@@ -1489,8 +1489,8 @@ public abstract class Plot implements AxisChangeListener,
     public static RectangleEdge resolveDomainAxisLocation(
             AxisLocation location, PlotOrientation orientation) {
 
-        ParamChecks.nullNotPermitted(location, "location");
-        ParamChecks.nullNotPermitted(orientation, "orientation");
+        Args.nullNotPermitted(location, "location");
+        Args.nullNotPermitted(orientation, "orientation");
 
         RectangleEdge result = null;
         if (location == AxisLocation.TOP_OR_RIGHT) {
@@ -1544,8 +1544,8 @@ public abstract class Plot implements AxisChangeListener,
     public static RectangleEdge resolveRangeAxisLocation(
             AxisLocation location, PlotOrientation orientation) {
 
-        ParamChecks.nullNotPermitted(location, "location");
-        ParamChecks.nullNotPermitted(orientation, "orientation");
+        Args.nullNotPermitted(location, "location");
+        Args.nullNotPermitted(orientation, "orientation");
 
         RectangleEdge result = null;
         if (location == AxisLocation.TOP_OR_RIGHT) {

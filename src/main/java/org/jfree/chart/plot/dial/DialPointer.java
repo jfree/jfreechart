@@ -62,7 +62,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import org.jfree.chart.HashUtils;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 
@@ -262,7 +262,7 @@ public abstract class DialPointer extends AbstractDialLayer
          * @see #getPaint()
          */
         public void setPaint(Paint paint) {
-            ParamChecks.nullNotPermitted(paint, "paint");
+            Args.nullNotPermitted(paint, "paint");
             this.paint = paint;
             notifyListeners(new DialLayerChangeEvent(this));
         }
@@ -287,7 +287,7 @@ public abstract class DialPointer extends AbstractDialLayer
          * @see #getStroke()
          */
         public void setStroke(Stroke stroke) {
-            ParamChecks.nullNotPermitted(stroke, "stroke");
+            Args.nullNotPermitted(stroke, "stroke");
             this.stroke = stroke;
             notifyListeners(new DialLayerChangeEvent(this));
         }
@@ -483,7 +483,7 @@ public abstract class DialPointer extends AbstractDialLayer
          * @since 1.0.8
          */
         public void setFillPaint(Paint paint) {
-            ParamChecks.nullNotPermitted(paint, "paint");
+            Args.nullNotPermitted(paint, "paint");
             this.fillPaint = paint;
             notifyListeners(new DialLayerChangeEvent(this));
         }
@@ -512,7 +512,7 @@ public abstract class DialPointer extends AbstractDialLayer
          * @since 1.0.8
          */
         public void setOutlinePaint(Paint paint) {
-            ParamChecks.nullNotPermitted(paint, "paint");
+            Args.nullNotPermitted(paint, "paint");
             this.outlinePaint = paint;
             notifyListeners(new DialLayerChangeEvent(this));
         }

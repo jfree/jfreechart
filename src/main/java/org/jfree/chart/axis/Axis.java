@@ -129,7 +129,7 @@ import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.util.AttrStringUtils;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
 
 /**
@@ -481,7 +481,7 @@ public abstract class Axis implements Cloneable, Serializable {
      * @see #getLabelFont()
      */
     public void setLabelFont(Font font) {
-        ParamChecks.nullNotPermitted(font, "font");
+        Args.nullNotPermitted(font, "font");
         if (!this.labelFont.equals(font)) {
             this.labelFont = font;
             fireChangeEvent();
@@ -508,7 +508,7 @@ public abstract class Axis implements Cloneable, Serializable {
      * @see #getLabelPaint()
      */
     public void setLabelPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.labelPaint = paint;
         fireChangeEvent();
     }
@@ -547,7 +547,7 @@ public abstract class Axis implements Cloneable, Serializable {
      * @since 1.0.10
      */
     public void setLabelInsets(RectangleInsets insets, boolean notify) {
-        ParamChecks.nullNotPermitted(insets, "insets");
+        Args.nullNotPermitted(insets, "insets");
         if (!insets.equals(this.labelInsets)) {
             this.labelInsets = insets;
             if (notify) {
@@ -601,7 +601,7 @@ public abstract class Axis implements Cloneable, Serializable {
      * @since 1.0.16
      */
     public void setLabelLocation(AxisLabelLocation location) {
-        ParamChecks.nullNotPermitted(location, "location");
+        Args.nullNotPermitted(location, "location");
         this.labelLocation = location;
         fireChangeEvent();
     }
@@ -654,7 +654,7 @@ public abstract class Axis implements Cloneable, Serializable {
      * @see #getAxisLinePaint()
      */
     public void setAxisLinePaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.axisLinePaint = paint;
         fireChangeEvent();
     }
@@ -679,7 +679,7 @@ public abstract class Axis implements Cloneable, Serializable {
      * @see #getAxisLineStroke()
      */
     public void setAxisLineStroke(Stroke stroke) {
-        ParamChecks.nullNotPermitted(stroke, "stroke");
+        Args.nullNotPermitted(stroke, "stroke");
         this.axisLineStroke = stroke;
         fireChangeEvent();
     }
@@ -770,7 +770,7 @@ public abstract class Axis implements Cloneable, Serializable {
      * @see #getTickLabelFont()
      */
     public void setTickLabelFont(Font font) {
-        ParamChecks.nullNotPermitted(font, "font");
+        Args.nullNotPermitted(font, "font");
         if (!this.tickLabelFont.equals(font)) {
             this.tickLabelFont = font;
             fireChangeEvent();
@@ -797,7 +797,7 @@ public abstract class Axis implements Cloneable, Serializable {
      * @see #getTickLabelPaint()
      */
     public void setTickLabelPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.tickLabelPaint = paint;
         fireChangeEvent();
     }
@@ -822,7 +822,7 @@ public abstract class Axis implements Cloneable, Serializable {
      * @see #getTickLabelInsets()
      */
     public void setTickLabelInsets(RectangleInsets insets) {
-        ParamChecks.nullNotPermitted(insets, "insets");
+        Args.nullNotPermitted(insets, "insets");
         if (!this.tickLabelInsets.equals(insets)) {
             this.tickLabelInsets = insets;
             fireChangeEvent();
@@ -927,7 +927,7 @@ public abstract class Axis implements Cloneable, Serializable {
      * @see #getTickMarkStroke()
      */
     public void setTickMarkStroke(Stroke stroke) {
-        ParamChecks.nullNotPermitted(stroke, "stroke");
+        Args.nullNotPermitted(stroke, "stroke");
         if (!this.tickMarkStroke.equals(stroke)) {
             this.tickMarkStroke = stroke;
             fireChangeEvent();
@@ -954,7 +954,7 @@ public abstract class Axis implements Cloneable, Serializable {
      * @see #getTickMarkPaint()
      */
     public void setTickMarkPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.tickMarkPaint = paint;
         fireChangeEvent();
     }
@@ -1344,7 +1344,7 @@ public abstract class Axis implements Cloneable, Serializable {
             AxisState state) {
 
         // it is unlikely that 'state' will be null, but check anyway...
-        ParamChecks.nullNotPermitted(state, "state");
+        Args.nullNotPermitted(state, "state");
 
         if ((label == null) || (label.equals(""))) {
             return state;
@@ -1443,7 +1443,7 @@ public abstract class Axis implements Cloneable, Serializable {
             RectangleEdge edge, AxisState state) {
 
         // it is unlikely that 'state' will be null, but check anyway...
-        ParamChecks.nullNotPermitted(state, "state");
+        Args.nullNotPermitted(state, "state");
 
         if (label == null) {
             return state;

@@ -46,7 +46,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.KeyedObjects2D;
@@ -104,9 +104,9 @@ public class DefaultMultiValueCategoryDataset extends AbstractDataset
      */
     public void add(List values, Comparable rowKey, Comparable columnKey) {
 
-        ParamChecks.nullNotPermitted(values, "values");
-        ParamChecks.nullNotPermitted(rowKey, "rowKey");
-        ParamChecks.nullNotPermitted(columnKey, "columnKey");
+        Args.nullNotPermitted(values, "values");
+        Args.nullNotPermitted(rowKey, "rowKey");
+        Args.nullNotPermitted(columnKey, "columnKey");
         List vlist = new ArrayList(values.size());
         Iterator iterator = values.listIterator();
         while (iterator.hasNext()) {

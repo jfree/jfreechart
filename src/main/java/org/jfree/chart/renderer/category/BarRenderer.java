@@ -128,7 +128,7 @@ import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.StandardGradientPaintTransformer;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.KeyedValues2DItemKey;
@@ -184,7 +184,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      * @since 1.0.11
      */
     public static void setDefaultBarPainter(BarPainter painter) {
-        ParamChecks.nullNotPermitted(painter, "painter");
+        Args.nullNotPermitted(painter, "painter");
         BarRenderer.defaultBarPainter = painter;
     }
 
@@ -599,7 +599,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      * @since 1.0.11
      */
     public void setBarPainter(BarPainter painter) {
-        ParamChecks.nullNotPermitted(painter, "painter");
+        Args.nullNotPermitted(painter, "painter");
         this.barPainter = painter;
         fireChangeEvent();
     }
@@ -653,7 +653,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      * @since 1.0.11
      */
     public void setShadowPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.shadowPaint = paint;
         fireChangeEvent();
     }

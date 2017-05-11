@@ -161,7 +161,7 @@ import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.urls.CategoryURLGenerator;
 import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SortOrder;
 import org.jfree.data.KeyedValues2DItemKey;
@@ -272,7 +272,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      */
     @Override
     public void setPlot(CategoryPlot plot) {
-        ParamChecks.nullNotPermitted(plot, "plot");
+        Args.nullNotPermitted(plot, "plot");
         this.plot = plot;
     }
 
@@ -1397,7 +1397,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
             int datasetIndex,
             double transX, double transY, PlotOrientation orientation) {
 
-        ParamChecks.nullNotPermitted(orientation, "orientation");
+        Args.nullNotPermitted(orientation, "orientation");
 
         if (crosshairState != null) {
             if (this.plot.isRangeCrosshairLockedOnData()) {
@@ -1633,7 +1633,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      */
     public void setLegendItemLabelGenerator(
             CategorySeriesLabelGenerator generator) {
-        ParamChecks.nullNotPermitted(generator, "generator");
+        Args.nullNotPermitted(generator, "generator");
         this.legendItemLabelGenerator = generator;
         fireChangeEvent();
     }
@@ -1699,7 +1699,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      */
     protected void addItemEntity(EntityCollection entities,
             CategoryDataset dataset, int row, int column, Shape hotspot) {
-        ParamChecks.nullNotPermitted(hotspot, "hotspot");
+        Args.nullNotPermitted(hotspot, "hotspot");
         if (!getItemCreateEntity(row, column)) {
             return;
         }

@@ -51,7 +51,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
 
 /**
@@ -91,7 +91,7 @@ public class StrokeMap implements Cloneable, Serializable {
      *     {@code null}.
      */
     public Stroke getStroke(Comparable key) {
-        ParamChecks.nullNotPermitted(key, "key");
+        Args.nullNotPermitted(key, "key");
         return (Stroke) this.store.get(key);
     }
 
@@ -116,7 +116,7 @@ public class StrokeMap implements Cloneable, Serializable {
      * @param stroke  the stroke.
      */
     public void put(Comparable key, Stroke stroke) {
-        ParamChecks.nullNotPermitted(key, "key");
+        Args.nullNotPermitted(key, "key");
         this.store.put(key, stroke);
     }
 

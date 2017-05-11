@@ -119,7 +119,7 @@ import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.ShadowGenerator;
 import org.jfree.data.Range;
 import org.jfree.data.general.DatasetChangeEvent;
@@ -312,7 +312,7 @@ public class CombinedDomainXYPlot extends XYPlot
      * @param weight  the weight (must be &gt;= 1).
      */
     public void add(XYPlot subplot, int weight) {
-        ParamChecks.nullNotPermitted(subplot, "subplot");
+        Args.nullNotPermitted(subplot, "subplot");
         if (weight <= 0) {
             throw new IllegalArgumentException("Require weight >= 1.");
         }
@@ -339,7 +339,7 @@ public class CombinedDomainXYPlot extends XYPlot
      * @param subplot  the subplot ({@code null} not permitted).
      */
     public void remove(XYPlot subplot) {
-        ParamChecks.nullNotPermitted(subplot, "subplot");
+        Args.nullNotPermitted(subplot, "subplot");
         int position = -1;
         int size = this.subplots.size();
         int i = 0;
@@ -638,8 +638,8 @@ public class CombinedDomainXYPlot extends XYPlot
      * @return A subplot (possibly {@code null}).
      */
     public XYPlot findSubplot(PlotRenderingInfo info, Point2D source) {
-        ParamChecks.nullNotPermitted(info, "info");
-        ParamChecks.nullNotPermitted(source, "source");
+        Args.nullNotPermitted(info, "info");
+        Args.nullNotPermitted(source, "source");
         XYPlot result = null;
         int subplotIndex = info.getSubplotIndex(source);
         if (subplotIndex >= 0) {

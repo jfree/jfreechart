@@ -134,7 +134,7 @@ import org.jfree.chart.util.BooleanList;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintList;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.chart.util.ShapeList;
 import org.jfree.chart.util.ShapeUtils;
@@ -483,7 +483,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @since 1.0.20
      */
     protected void beginElementGroup(Graphics2D g2, ItemKey key) {
-        ParamChecks.nullNotPermitted(key, "key");
+        Args.nullNotPermitted(key, "key");
         Map m = new HashMap(1);
         m.put("ref", key.toJSONString());
         g2.setRenderingHint(ChartHints.KEY_BEGIN_ELEMENT, m);        
@@ -1028,7 +1028,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #getDefaultFillPaint()
      */
     public void setDefaultFillPaint(Paint paint, boolean notify) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.defaultFillPaint = paint;
         if (notify) {
             fireChangeEvent();
@@ -1187,7 +1187,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #getDefaultOutlinePaint()
      */
     public void setDefaultOutlinePaint(Paint paint, boolean notify) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.defaultOutlinePaint = paint;
         if (notify) {
             fireChangeEvent();
@@ -1359,7 +1359,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #getDefaultStroke()
      */
     public void setDefaultStroke(Stroke stroke, boolean notify) {
-        ParamChecks.nullNotPermitted(stroke, "stroke");
+        Args.nullNotPermitted(stroke, "stroke");
         this.defaultStroke = stroke;
         if (notify) {
             fireChangeEvent();
@@ -1515,7 +1515,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #getDefaultOutlineStroke()
      */
     public void setDefaultOutlineStroke(Stroke stroke, boolean notify) {
-        ParamChecks.nullNotPermitted(stroke, "stroke");
+        Args.nullNotPermitted(stroke, "stroke");
         this.defaultOutlineStroke = stroke;
         if (notify) {
             fireChangeEvent();
@@ -1673,7 +1673,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #getDefaultShape()
      */
     public void setDefaultShape(Shape shape, boolean notify) {
-        ParamChecks.nullNotPermitted(shape, "shape");
+        Args.nullNotPermitted(shape, "shape");
         this.defaultShape = shape;
         if (notify) {
             fireChangeEvent();
@@ -1903,7 +1903,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #getDefaultItemLabelFont()
      */
     public void setDefaultItemLabelFont(Font font) {
-        ParamChecks.nullNotPermitted(font, "font");
+        Args.nullNotPermitted(font, "font");
         setDefaultItemLabelFont(font, true);
     }
 
@@ -2022,7 +2022,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #getDefaultItemLabelPaint()
      */
     public void setDefaultItemLabelPaint(Paint paint, boolean notify) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.defaultItemLabelPaint = paint;
         if (notify) {
             fireChangeEvent();
@@ -2132,7 +2132,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      */
     public void setDefaultPositiveItemLabelPosition(ItemLabelPosition position,
             boolean notify) {
-        ParamChecks.nullNotPermitted(position, "position");
+        Args.nullNotPermitted(position, "position");
         this.defaultPositiveItemLabelPosition = position;
         if (notify) {
             fireChangeEvent();
@@ -2244,7 +2244,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      */
     public void setDefaultNegativeItemLabelPosition(ItemLabelPosition position,
             boolean notify) {
-        ParamChecks.nullNotPermitted(position, "position");
+        Args.nullNotPermitted(position, "position");
         this.defaultNegativeItemLabelPosition = position;
         if (notify) {
             fireChangeEvent();
@@ -2572,7 +2572,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @since 1.0.11
      */
     public void setDefaultLegendTextFont(Font font) {
-        ParamChecks.nullNotPermitted(font, "font");
+        Args.nullNotPermitted(font, "font");
         this.defaultLegendTextFont = font;
         fireChangeEvent();
     }
@@ -2807,7 +2807,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #removeChangeListener(RendererChangeListener)
      */
     public void addChangeListener(RendererChangeListener listener) {
-        ParamChecks.nullNotPermitted(listener, "listener");
+        Args.nullNotPermitted(listener, "listener");
         this.listenerList.add(RendererChangeListener.class, listener);
     }
 
@@ -2820,7 +2820,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #addChangeListener(RendererChangeListener)
      */
     public void removeChangeListener(RendererChangeListener listener) {
-        ParamChecks.nullNotPermitted(listener, "listener");
+        Args.nullNotPermitted(listener, "listener");
         this.listenerList.remove(RendererChangeListener.class, listener);
     }
 

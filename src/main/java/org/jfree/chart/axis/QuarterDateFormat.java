@@ -56,7 +56,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 
 /**
  * A formatter that formats dates to show the year and quarter (for example,
@@ -128,7 +128,7 @@ public class QuarterDateFormat extends DateFormat
      */
     public QuarterDateFormat(TimeZone zone, String[] quarterSymbols,
             boolean quarterFirst) {
-        ParamChecks.nullNotPermitted(zone, "zone");
+        Args.nullNotPermitted(zone, "zone");
         this.calendar = new GregorianCalendar(zone);
         this.quarters = quarterSymbols;
         this.quarterFirst = quarterFirst;

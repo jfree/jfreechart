@@ -66,7 +66,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SortOrder;
 
@@ -151,7 +151,7 @@ public class DefaultKeyedValues implements KeyedValues, Cloneable,
      */
     @Override
     public int getIndex(Comparable key) {
-        ParamChecks.nullNotPermitted(key, "key");
+        Args.nullNotPermitted(key, "key");
         final Integer i = (Integer) this.indexMap.get(key);
         if (i == null) {
             return -1;  // key not found
@@ -230,7 +230,7 @@ public class DefaultKeyedValues implements KeyedValues, Cloneable,
      * @param value  the value ({@code null} permitted).
      */
     public void setValue(Comparable key, Number value) {
-        ParamChecks.nullNotPermitted(key, "key");
+        Args.nullNotPermitted(key, "key");
         int keyIndex = getIndex(key);
         if (keyIndex >= 0) {
             this.keys.set(keyIndex, key);
@@ -273,7 +273,7 @@ public class DefaultKeyedValues implements KeyedValues, Cloneable,
         if (position < 0 || position > getItemCount()) {
             throw new IllegalArgumentException("'position' out of bounds.");
         }
-        ParamChecks.nullNotPermitted(key, "key");
+        Args.nullNotPermitted(key, "key");
         int pos = getIndex(key);
         if (pos == position) {
             this.keys.set(pos, key);

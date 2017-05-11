@@ -91,7 +91,7 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.AreaRendererEndType;
 import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.category.CategoryDataset;
 
@@ -143,7 +143,7 @@ public class AreaRenderer extends AbstractCategoryItemRenderer
      * @see #getEndType()
      */
     public void setEndType(AreaRendererEndType type) {
-        ParamChecks.nullNotPermitted(type, "type");
+        Args.nullNotPermitted(type, "type");
         this.endType = type;
         fireChangeEvent();
     }

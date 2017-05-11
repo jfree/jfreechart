@@ -42,7 +42,7 @@
 
 package org.jfree.data.time.ohlc;
 
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.data.ComparableObjectItem;
 import org.jfree.data.ComparableObjectSeries;
 import org.jfree.data.time.RegularTimePeriod;
@@ -121,7 +121,7 @@ public class OHLCSeries extends ComparableObjectSeries {
      * @since 1.0.17
      */
     public void add(OHLCItem item) {
-        ParamChecks.nullNotPermitted(item, "item");
+        Args.nullNotPermitted(item, "item");
         add(item.getPeriod(), item.getOpenValue(), item.getHighValue(),
                 item.getLowValue(), item.getCloseValue());
     }

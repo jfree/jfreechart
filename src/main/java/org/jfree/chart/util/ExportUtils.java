@@ -114,8 +114,8 @@ public class ExportUtils {
             throw new IllegalStateException(
                     "JFreeSVG is not present on the classpath.");
         }
-        ParamChecks.nullNotPermitted(drawable, "drawable");
-        ParamChecks.nullNotPermitted(file, "file");
+        Args.nullNotPermitted(drawable, "drawable");
+        Args.nullNotPermitted(file, "file");
         try {
             Class<?> svg2Class = Class.forName(
                     "org.jfree.graphics2d.svg.SVGGraphics2D");
@@ -164,8 +164,8 @@ public class ExportUtils {
             throw new IllegalStateException(
                     "OrsonPDF is not present on the classpath.");
         }
-        ParamChecks.nullNotPermitted(drawable, "drawable");
-        ParamChecks.nullNotPermitted(file, "file");
+        Args.nullNotPermitted(drawable, "drawable");
+        Args.nullNotPermitted(file, "file");
         try {
             Class<?> pdfDocClass = Class.forName("com.orsonpdf.PDFDocument");
             Object pdfDoc = pdfDocClass.newInstance();

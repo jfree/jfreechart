@@ -58,7 +58,7 @@ import java.io.Serializable;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.Size2D;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.chart.util.ShapeUtils;
@@ -206,7 +206,7 @@ public class AbstractBlock implements Cloneable, Serializable {
      * @see #getMargin()
      */
     public void setMargin(RectangleInsets margin) {
-        ParamChecks.nullNotPermitted(margin, "margin");
+        Args.nullNotPermitted(margin, "margin");
         this.margin = margin;
     }
 
@@ -259,7 +259,7 @@ public class AbstractBlock implements Cloneable, Serializable {
      * @see #getFrame()
      */
     public void setFrame(BlockFrame frame) {
-        ParamChecks.nullNotPermitted(frame, "frame");
+        Args.nullNotPermitted(frame, "frame");
         this.frame = frame;
     }
 
@@ -283,7 +283,7 @@ public class AbstractBlock implements Cloneable, Serializable {
      * @see #getPadding()
      */
     public void setPadding(RectangleInsets padding) {
-        ParamChecks.nullNotPermitted(padding, "padding");
+        Args.nullNotPermitted(padding, "padding");
         this.padding = padding;
     }
 
@@ -369,7 +369,7 @@ public class AbstractBlock implements Cloneable, Serializable {
      * @see #getBounds()
      */
     public void setBounds(Rectangle2D bounds) {
-        ParamChecks.nullNotPermitted(bounds, "bounds");
+        Args.nullNotPermitted(bounds, "bounds");
         this.bounds = bounds;
     }
 
@@ -418,7 +418,7 @@ public class AbstractBlock implements Cloneable, Serializable {
      * @return The content constraint.
      */
     protected RectangleConstraint toContentConstraint(RectangleConstraint c) {
-        ParamChecks.nullNotPermitted(c, "c");
+        Args.nullNotPermitted(c, "c");
         if (c.equals(RectangleConstraint.NONE)) {
             return c;
         }

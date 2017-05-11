@@ -107,7 +107,7 @@ import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.Range;
 
@@ -230,7 +230,7 @@ public class SymbolAxis extends NumberAxis implements Serializable {
      * @see #getGridBandPaint()
      */
     public void setGridBandPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.gridBandPaint = paint;
         fireChangeEvent();
     }
@@ -264,7 +264,7 @@ public class SymbolAxis extends NumberAxis implements Serializable {
      * @since 1.0.7
      */
     public void setGridBandAlternatePaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.gridBandAlternatePaint = paint;
         fireChangeEvent();
     }

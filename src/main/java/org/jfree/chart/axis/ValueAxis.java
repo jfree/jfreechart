@@ -138,7 +138,7 @@ import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.util.AttrStringUtils;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.Range;
@@ -433,7 +433,7 @@ public abstract class ValueAxis extends Axis
      * @see #getUpArrow()
      */
     public void setUpArrow(Shape arrow) {
-        ParamChecks.nullNotPermitted(arrow, "arrow");
+        Args.nullNotPermitted(arrow, "arrow");
         this.upArrow = arrow;
         fireChangeEvent();
     }
@@ -460,7 +460,7 @@ public abstract class ValueAxis extends Axis
      * @see #getDownArrow()
      */
     public void setDownArrow(Shape arrow) {
-        ParamChecks.nullNotPermitted(arrow, "arrow");
+        Args.nullNotPermitted(arrow, "arrow");
         this.downArrow = arrow;
         fireChangeEvent();
     }
@@ -487,7 +487,7 @@ public abstract class ValueAxis extends Axis
      * @see #getLeftArrow()
      */
     public void setLeftArrow(Shape arrow) {
-        ParamChecks.nullNotPermitted(arrow, "arrow");
+        Args.nullNotPermitted(arrow, "arrow");
         this.leftArrow = arrow;
         fireChangeEvent();
     }
@@ -514,7 +514,7 @@ public abstract class ValueAxis extends Axis
      * @see #getRightArrow()
      */
     public void setRightArrow(Shape arrow) {
-        ParamChecks.nullNotPermitted(arrow, "arrow");
+        Args.nullNotPermitted(arrow, "arrow");
         this.rightArrow = arrow;
         fireChangeEvent();
     }
@@ -1078,7 +1078,7 @@ public abstract class ValueAxis extends Axis
      * @since 1.0.5
      */
     public void setDefaultAutoRange(Range range) {
-        ParamChecks.nullNotPermitted(range, "range");
+        Args.nullNotPermitted(range, "range");
         this.defaultAutoRange = range;
         fireChangeEvent();
     }
@@ -1273,7 +1273,7 @@ public abstract class ValueAxis extends Axis
      */
     public void setRange(Range range, boolean turnOffAutoRange, 
             boolean notify) {
-        ParamChecks.nullNotPermitted(range, "range");
+        Args.nullNotPermitted(range, "range");
         if (range.getLength() <= 0.0) {
             throw new IllegalArgumentException(
                     "A positive range length is required: " + range);
@@ -1328,7 +1328,7 @@ public abstract class ValueAxis extends Axis
      */
     public void setRangeWithMargins(Range range, boolean turnOffAutoRange,
                                     boolean notify) {
-        ParamChecks.nullNotPermitted(range, "range");
+        Args.nullNotPermitted(range, "range");
         setRange(Range.expand(range, getLowerMargin(), getUpperMargin()),
                 turnOffAutoRange, notify);
     }

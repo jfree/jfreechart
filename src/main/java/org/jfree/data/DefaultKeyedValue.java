@@ -50,7 +50,7 @@
 package org.jfree.data;
 
 import java.io.Serializable;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 
 /**
@@ -77,7 +77,7 @@ public class DefaultKeyedValue implements KeyedValue, Cloneable,
      * @param value  the value ({@code null} permitted).
      */
     public DefaultKeyedValue(Comparable key, Number value) {
-        ParamChecks.nullNotPermitted(key, "key");
+        Args.nullNotPermitted(key, "key");
         this.key = key;
         this.value = value;
     }

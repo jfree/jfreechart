@@ -59,7 +59,7 @@ import java.io.Serializable;
 
 import org.jfree.chart.HashUtils;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 
@@ -153,7 +153,7 @@ public class StandardDialFrame extends AbstractDialLayer implements DialFrame,
      * @see #getBackgroundPaint()
      */
     public void setBackgroundPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.backgroundPaint = paint;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -178,7 +178,7 @@ public class StandardDialFrame extends AbstractDialLayer implements DialFrame,
      * @see #getForegroundPaint()
      */
     public void setForegroundPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.foregroundPaint = paint;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -203,7 +203,7 @@ public class StandardDialFrame extends AbstractDialLayer implements DialFrame,
      * @see #getStroke()
      */
     public void setStroke(Stroke stroke) {
-        ParamChecks.nullNotPermitted(stroke, "stroke");
+        Args.nullNotPermitted(stroke, "stroke");
         this.stroke = stroke;
         notifyListeners(new DialLayerChangeEvent(this));
     }

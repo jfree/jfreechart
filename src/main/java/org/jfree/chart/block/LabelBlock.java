@@ -71,7 +71,7 @@ import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.ui.Size2D;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 
@@ -178,7 +178,7 @@ public class LabelBlock extends AbstractBlock
      * @see #getFont()
      */
     public void setFont(Font font) {
-        ParamChecks.nullNotPermitted(font, "font");
+        Args.nullNotPermitted(font, "font");
         this.font = font;
         this.label = TextUtils.createTextBlock(this.text, font, this.paint);
     }
@@ -202,7 +202,7 @@ public class LabelBlock extends AbstractBlock
      * @see #getPaint()
      */
     public void setPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.paint = paint;
         this.label = TextUtils.createTextBlock(this.text, this.font,
                 this.paint);
@@ -272,7 +272,7 @@ public class LabelBlock extends AbstractBlock
      * @since 1.0.13
      */
     public void setContentAlignmentPoint(TextBlockAnchor anchor) {
-        ParamChecks.nullNotPermitted(anchor, "anchor");
+        Args.nullNotPermitted(anchor, "anchor");
         this.contentAlignmentPoint = anchor;
     }
 

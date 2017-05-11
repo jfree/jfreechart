@@ -138,7 +138,7 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.urls.XYURLGenerator;
 import org.jfree.chart.util.BooleanList;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.chart.util.ShapeUtils;
@@ -434,7 +434,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
      * @see #getGapThresholdType()
      */
     public void setGapThresholdType(UnitType thresholdType) {
-        ParamChecks.nullNotPermitted(thresholdType, "thresholdType");
+        Args.nullNotPermitted(thresholdType, "thresholdType");
         this.gapThresholdType = thresholdType;
         fireChangeEvent();
     }
@@ -560,7 +560,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
      * @see #getLegendLine()
      */
     public void setLegendLine(Shape line) {
-        ParamChecks.nullNotPermitted(line, "line");
+        Args.nullNotPermitted(line, "line");
         this.legendLine = line;
         fireChangeEvent();
     }

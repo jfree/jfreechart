@@ -155,7 +155,7 @@ public class LineUtils {
      */
     public static Line2D extendLine(Line2D line, double startPercent,
                               double endPercent) {
-        ParamChecks.nullNotPermitted(line, "line");
+        Args.nullNotPermitted(line, "line");
         double x1 = line.getX1();
         double x2 = line.getX2();
         double deltaX = x2 - x1;

@@ -62,7 +62,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 
 /**
  * A tick unit for use by subclasses of {@link DateAxis}.  Instances of this
@@ -137,7 +137,7 @@ public class DateTickUnit extends TickUnit implements Serializable {
             DateTickUnitType rollUnitType, int rollMultiple,
             DateFormat formatter) {
         super(DateTickUnit.getMillisecondCount(unitType, multiple));
-        ParamChecks.nullNotPermitted(formatter, "formatter");
+        Args.nullNotPermitted(formatter, "formatter");
         if (multiple <= 0) {
             throw new IllegalArgumentException("Requires 'multiple' > 0.");
         }

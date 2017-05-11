@@ -67,7 +67,7 @@ import org.jfree.chart.ui.GradientPaintTransformer;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.StandardGradientPaintTransformer;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.data.xy.XYDataset;
 
 /**
@@ -166,7 +166,7 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
         if (precision <= 0) {
             throw new IllegalArgumentException("Requires precision > 0.");
         }
-        ParamChecks.nullNotPermitted(fillType, "fillType");
+        Args.nullNotPermitted(fillType, "fillType");
         this.precision = precision;
         this.fillType = fillType;
         this.gradientPaintTransformer = new StandardGradientPaintTransformer();

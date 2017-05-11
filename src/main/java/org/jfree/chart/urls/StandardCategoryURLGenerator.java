@@ -59,7 +59,7 @@ import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 
 import org.jfree.data.category.CategoryDataset;
 
@@ -95,7 +95,7 @@ public class StandardCategoryURLGenerator implements CategoryURLGenerator,
      * @param prefix  the prefix to the URL ({@code null} not permitted).
      */
     public StandardCategoryURLGenerator(String prefix) {
-        ParamChecks.nullNotPermitted(prefix, "prefix");
+        Args.nullNotPermitted(prefix, "prefix");
         this.prefix = prefix;
     }
 
@@ -111,10 +111,10 @@ public class StandardCategoryURLGenerator implements CategoryURLGenerator,
     public StandardCategoryURLGenerator(String prefix, 
             String seriesParameterName, String categoryParameterName) {
 
-        ParamChecks.nullNotPermitted(prefix, "prefix");
-        ParamChecks.nullNotPermitted(seriesParameterName, 
+        Args.nullNotPermitted(prefix, "prefix");
+        Args.nullNotPermitted(seriesParameterName, 
                 "seriesParameterName");
-        ParamChecks.nullNotPermitted(categoryParameterName, 
+        Args.nullNotPermitted(categoryParameterName, 
                 "categoryParameterName");
         this.prefix = prefix;
         this.seriesParameterName = seriesParameterName;

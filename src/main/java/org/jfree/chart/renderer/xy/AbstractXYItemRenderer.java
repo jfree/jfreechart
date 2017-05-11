@@ -185,7 +185,7 @@ import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.urls.XYURLGenerator;
 import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.Range;
 import org.jfree.data.general.DatasetUtils;
@@ -525,7 +525,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      */
     @Override
     public void addAnnotation(XYAnnotation annotation, Layer layer) {
-        ParamChecks.nullNotPermitted(annotation, "annotation");
+        Args.nullNotPermitted(annotation, "annotation");
         if (layer.equals(Layer.FOREGROUND)) {
             this.foregroundAnnotations.add(annotation);
             annotation.addChangeListener(this);
@@ -632,7 +632,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      */
     @Override
     public void setLegendItemLabelGenerator(XYSeriesLabelGenerator generator) {
-        ParamChecks.nullNotPermitted(generator, "generator");
+        Args.nullNotPermitted(generator, "generator");
         this.legendItemLabelGenerator = generator;
         fireChangeEvent();
     }
@@ -1629,7 +1629,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
             double x, double y, int datasetIndex,
             double transX, double transY, PlotOrientation orientation) {
 
-        ParamChecks.nullNotPermitted(orientation, "orientation");
+        Args.nullNotPermitted(orientation, "orientation");
         if (crosshairState != null) {
             // do we need to update the crosshair values?
             if (this.plot.isDomainCrosshairLockedOnData()) {

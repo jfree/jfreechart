@@ -67,7 +67,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.category.CategoryDataset;
@@ -115,10 +115,10 @@ public class CategoryLineAnnotation extends AbstractAnnotation
                                   Comparable category2, double value2,
                                   Paint paint, Stroke stroke) {
         super();
-        ParamChecks.nullNotPermitted(category1, "category1");
-        ParamChecks.nullNotPermitted(category2, "category2");
-        ParamChecks.nullNotPermitted(paint, "paint");
-        ParamChecks.nullNotPermitted(stroke, "stroke");
+        Args.nullNotPermitted(category1, "category1");
+        Args.nullNotPermitted(category2, "category2");
+        Args.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(stroke, "stroke");
         this.category1 = category1;
         this.value1 = value1;
         this.category2 = category2;
@@ -147,7 +147,7 @@ public class CategoryLineAnnotation extends AbstractAnnotation
      * @see #getCategory1()
      */
     public void setCategory1(Comparable category) {
-        ParamChecks.nullNotPermitted(category, "category");
+        Args.nullNotPermitted(category, "category");
         this.category1 = category;
         fireAnnotationChanged();
     }
@@ -196,7 +196,7 @@ public class CategoryLineAnnotation extends AbstractAnnotation
      * @see #getCategory2()
      */
     public void setCategory2(Comparable category) {
-        ParamChecks.nullNotPermitted(category, "category");
+        Args.nullNotPermitted(category, "category");
         this.category2 = category;
         fireAnnotationChanged();
     }
@@ -245,7 +245,7 @@ public class CategoryLineAnnotation extends AbstractAnnotation
      * @see #getPaint()
      */
     public void setPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.paint = paint;
         fireAnnotationChanged();
     }
@@ -270,7 +270,7 @@ public class CategoryLineAnnotation extends AbstractAnnotation
      * @see #getStroke()
      */
     public void setStroke(Stroke stroke) {
-        ParamChecks.nullNotPermitted(stroke, "stroke");
+        Args.nullNotPermitted(stroke, "stroke");
         this.stroke = stroke;
         fireAnnotationChanged();
     }

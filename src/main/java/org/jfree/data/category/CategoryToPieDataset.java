@@ -51,7 +51,7 @@ package org.jfree.data.category;
 
 import java.util.Collections;
 import java.util.List;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.TableOrder;
 
 import org.jfree.data.general.AbstractDataset;
@@ -92,7 +92,7 @@ public class CategoryToPieDataset extends AbstractDataset
      */
     public CategoryToPieDataset(CategoryDataset source, TableOrder extract,
             int index) {
-        ParamChecks.nullNotPermitted(extract, "extract");
+        Args.nullNotPermitted(extract, "extract");
         this.source = source;
         if (this.source != null) {
             this.source.addChangeListener(this);

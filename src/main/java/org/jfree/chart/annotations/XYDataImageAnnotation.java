@@ -56,7 +56,7 @@ import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.Range;
 
@@ -133,7 +133,7 @@ public class XYDataImageAnnotation extends AbstractXYAnnotation
             double h, boolean includeInDataBounds) {
 
         super();
-        ParamChecks.nullNotPermitted(image, "image");
+        Args.nullNotPermitted(image, "image");
         this.image = image;
         this.x = x;
         this.y = y;

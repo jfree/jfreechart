@@ -136,7 +136,7 @@ import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.Size2D;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.chart.util.ShapeUtils;
 import org.jfree.data.category.CategoryDataset;
@@ -401,7 +401,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * @see #getCategoryLabelPositions()
      */
     public void setCategoryLabelPositions(CategoryLabelPositions positions) {
-        ParamChecks.nullNotPermitted(positions, "positions");
+        Args.nullNotPermitted(positions, "positions");
         this.categoryLabelPositions = positions;
         fireChangeEvent();
     }
@@ -416,7 +416,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * @see #setTickLabelFont(Comparable, Font)
      */
     public Font getTickLabelFont(Comparable category) {
-        ParamChecks.nullNotPermitted(category, "category");
+        Args.nullNotPermitted(category, "category");
         Font result = (Font) this.tickLabelFontMap.get(category);
         // if there is no specific font, use the general one...
         if (result == null) {
@@ -435,7 +435,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * @see #getTickLabelFont(Comparable)
      */
     public void setTickLabelFont(Comparable category, Font font) {
-        ParamChecks.nullNotPermitted(category, "category");
+        Args.nullNotPermitted(category, "category");
         if (font == null) {
             this.tickLabelFontMap.remove(category);
         }
@@ -455,7 +455,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * @see #setTickLabelPaint(Paint)
      */
     public Paint getTickLabelPaint(Comparable category) {
-        ParamChecks.nullNotPermitted(category, "category");
+        Args.nullNotPermitted(category, "category");
         Paint result = (Paint) this.tickLabelPaintMap.get(category);
         // if there is no specific paint, use the general one...
         if (result == null) {
@@ -474,7 +474,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * @see #getTickLabelPaint(Comparable)
      */
     public void setTickLabelPaint(Comparable category, Paint paint) {
-        ParamChecks.nullNotPermitted(category, "category");
+        Args.nullNotPermitted(category, "category");
         if (paint == null) {
             this.tickLabelPaintMap.remove(category);
         }
@@ -494,7 +494,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * @see #removeCategoryLabelToolTip(Comparable)
      */
     public void addCategoryLabelToolTip(Comparable category, String tooltip) {
-        ParamChecks.nullNotPermitted(category, "category");
+        Args.nullNotPermitted(category, "category");
         this.categoryLabelToolTips.put(category, tooltip);
         fireChangeEvent();
     }
@@ -511,7 +511,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * @see #removeCategoryLabelToolTip(Comparable)
      */
     public String getCategoryLabelToolTip(Comparable category) {
-        ParamChecks.nullNotPermitted(category, "category");
+        Args.nullNotPermitted(category, "category");
         return (String) this.categoryLabelToolTips.get(category);
     }
 
@@ -526,7 +526,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * @see #clearCategoryLabelToolTips()
      */
     public void removeCategoryLabelToolTip(Comparable category) {
-        ParamChecks.nullNotPermitted(category, "category");
+        Args.nullNotPermitted(category, "category");
         if (this.categoryLabelToolTips.remove(category) != null) {
             fireChangeEvent();
         }
@@ -556,7 +556,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * @since 1.0.16
      */
     public void addCategoryLabelURL(Comparable category, String url) {
-        ParamChecks.nullNotPermitted(category, "category");
+        Args.nullNotPermitted(category, "category");
         this.categoryLabelURLs.put(category, url);
         fireChangeEvent();
     }
@@ -574,7 +574,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * @since 1.0.16
      */
     public String getCategoryLabelURL(Comparable category) {
-        ParamChecks.nullNotPermitted(category, "category");
+        Args.nullNotPermitted(category, "category");
         return (String) this.categoryLabelURLs.get(category);
     }
 
@@ -591,7 +591,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * @since 1.0.16
      */
     public void removeCategoryLabelURL(Comparable category) {
-        ParamChecks.nullNotPermitted(category, "category");
+        Args.nullNotPermitted(category, "category");
         if (this.categoryLabelURLs.remove(category) != null) {
             fireChangeEvent();
         }
@@ -736,7 +736,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      */
     public double getCategoryMiddle(Comparable category,
             List categories, Rectangle2D area, RectangleEdge edge) {
-        ParamChecks.nullNotPermitted(categories, "categories");
+        Args.nullNotPermitted(categories, "categories");
         int categoryIndex = categories.indexOf(category);
         int categoryCount = categories.size();
         return getCategoryMiddle(categoryIndex, categoryCount, area, edge);
@@ -1015,7 +1015,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
             Rectangle2D dataArea, RectangleEdge edge, AxisState state,
             PlotRenderingInfo plotState) {
 
-        ParamChecks.nullNotPermitted(state, "state");
+        Args.nullNotPermitted(state, "state");
         if (!isTickLabelsVisible()) {
             return state;
         }

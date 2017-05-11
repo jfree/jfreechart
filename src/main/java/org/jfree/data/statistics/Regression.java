@@ -46,7 +46,7 @@
 
 package org.jfree.data.statistics;
 
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.data.xy.XYDataset;
 
 /**
@@ -249,7 +249,7 @@ public abstract class Regression {
      */
     public static double[] getPolynomialRegression(XYDataset dataset, 
             int series, int order) {
-        ParamChecks.nullNotPermitted(dataset, "dataset");
+        Args.nullNotPermitted(dataset, "dataset");
         int itemCount = dataset.getItemCount(series);
         if (itemCount < order + 1) {
             throw new IllegalArgumentException("Not enough data.");

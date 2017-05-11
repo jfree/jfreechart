@@ -49,7 +49,7 @@ import java.io.ObjectOutputStream;
 import org.jfree.chart.HashUtils;
 import org.jfree.chart.axis.Axis;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
 
 /**
@@ -102,7 +102,7 @@ public class AxisEntity extends ChartEntity {
     public AxisEntity(Shape area, Axis axis, String toolTipText,
             String urlText) {
         super(area, toolTipText, urlText);
-        ParamChecks.nullNotPermitted(axis, "axis");
+        Args.nullNotPermitted(axis, "axis");
         this.axis = axis;
     }
 

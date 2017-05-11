@@ -56,7 +56,7 @@ import java.util.List;
 
 import org.jfree.chart.ChartRenderingInfo;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
 
 /**
@@ -193,7 +193,7 @@ public class PlotRenderingInfo implements Cloneable, Serializable {
      * @return The subplot index (or -1 if no subplot contains {@code source}).
      */
     public int getSubplotIndex(Point2D source) {
-        ParamChecks.nullNotPermitted(source, "source");
+        Args.nullNotPermitted(source, "source");
         int subplotCount = getSubplotCount();
         for (int i = 0; i < subplotCount; i++) {
             PlotRenderingInfo info = getSubplotInfo(i);

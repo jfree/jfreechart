@@ -96,7 +96,7 @@ import org.jfree.chart.plot.ValueAxisPlot;
 import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.TextAnchor;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.Range;
@@ -220,8 +220,8 @@ public class PeriodAxis extends ValueAxis
     public PeriodAxis(String label, RegularTimePeriod first,
             RegularTimePeriod last, TimeZone timeZone, Locale locale) {
         super(label, null);
-        ParamChecks.nullNotPermitted(timeZone, "timeZone");
-        ParamChecks.nullNotPermitted(locale, "locale");
+        Args.nullNotPermitted(timeZone, "timeZone");
+        Args.nullNotPermitted(locale, "locale");
         this.first = first;
         this.last = last;
         this.timeZone = timeZone;
@@ -260,7 +260,7 @@ public class PeriodAxis extends ValueAxis
      * @param first  the time period ({@code null} not permitted).
      */
     public void setFirst(RegularTimePeriod first) {
-        ParamChecks.nullNotPermitted(first, "first");
+        Args.nullNotPermitted(first, "first");
         this.first = first;
         this.first.peg(this.calendar);
         fireChangeEvent();
@@ -282,7 +282,7 @@ public class PeriodAxis extends ValueAxis
      * @param last  the time period ({@code null} not permitted).
      */
     public void setLast(RegularTimePeriod last) {
-        ParamChecks.nullNotPermitted(last, "last");
+        Args.nullNotPermitted(last, "last");
         this.last = last;
         this.last.peg(this.calendar);
         fireChangeEvent();
@@ -305,7 +305,7 @@ public class PeriodAxis extends ValueAxis
      * @param zone  the time zone ({@code null} not permitted).
      */
     public void setTimeZone(TimeZone zone) {
-        ParamChecks.nullNotPermitted(zone, "zone");
+        Args.nullNotPermitted(zone, "zone");
         this.timeZone = zone;
         this.calendar = Calendar.getInstance(zone, this.locale);
         this.first.peg(this.calendar);
@@ -342,7 +342,7 @@ public class PeriodAxis extends ValueAxis
      * @param c  the class ({@code null} not permitted).
      */
     public void setAutoRangeTimePeriodClass(Class c) {
-        ParamChecks.nullNotPermitted(c, "c");
+        Args.nullNotPermitted(c, "c");
         this.autoRangeTimePeriodClass = c;
         fireChangeEvent();
     }
@@ -364,7 +364,7 @@ public class PeriodAxis extends ValueAxis
      *           expected).
      */
     public void setMajorTickTimePeriodClass(Class c) {
-        ParamChecks.nullNotPermitted(c, "c");
+        Args.nullNotPermitted(c, "c");
         this.majorTickTimePeriodClass = c;
         fireChangeEvent();
     }
@@ -410,7 +410,7 @@ public class PeriodAxis extends ValueAxis
      *           expected).
      */
     public void setMinorTickTimePeriodClass(Class c) {
-        ParamChecks.nullNotPermitted(c, "c");
+        Args.nullNotPermitted(c, "c");
         this.minorTickTimePeriodClass = c;
         fireChangeEvent();
     }
@@ -433,7 +433,7 @@ public class PeriodAxis extends ValueAxis
      * @param stroke  the stroke ({@code null} not permitted).
      */
     public void setMinorTickMarkStroke(Stroke stroke) {
-        ParamChecks.nullNotPermitted(stroke, "stroke");
+        Args.nullNotPermitted(stroke, "stroke");
         this.minorTickMarkStroke = stroke;
         fireChangeEvent();
     }
@@ -456,7 +456,7 @@ public class PeriodAxis extends ValueAxis
      * @param paint  the paint ({@code null} not permitted).
      */
     public void setMinorTickMarkPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.minorTickMarkPaint = paint;
         fireChangeEvent();
     }

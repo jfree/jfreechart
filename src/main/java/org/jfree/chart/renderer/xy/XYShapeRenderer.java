@@ -70,7 +70,7 @@ import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.LookupPaintScale;
 import org.jfree.chart.renderer.PaintScale;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.chart.util.ShapeUtils;
@@ -167,7 +167,7 @@ public class XYShapeRenderer extends AbstractXYItemRenderer
      * @see #getPaintScale()
      */
     public void setPaintScale(PaintScale scale) {
-        ParamChecks.nullNotPermitted(scale, "scale");
+        Args.nullNotPermitted(scale, "scale");
         this.paintScale = scale;
         notifyListeners(new RendererChangeEvent(this));
     }
@@ -305,7 +305,7 @@ public class XYShapeRenderer extends AbstractXYItemRenderer
      * @see #getGuideLinePaint()
      */
     public void setGuideLinePaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.guideLinePaint = paint;
         fireChangeEvent();
     }
@@ -330,7 +330,7 @@ public class XYShapeRenderer extends AbstractXYItemRenderer
      * @see #getGuideLineStroke()
      */
     public void setGuideLineStroke(Stroke stroke) {
-        ParamChecks.nullNotPermitted(stroke, "stroke");
+        Args.nullNotPermitted(stroke, "stroke");
         this.guideLineStroke = stroke;
         fireChangeEvent();
     }

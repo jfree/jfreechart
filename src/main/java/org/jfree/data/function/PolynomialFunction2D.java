@@ -45,7 +45,7 @@ package org.jfree.data.function;
 import java.io.Serializable;
 import java.util.Arrays;
 import org.jfree.chart.HashUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 
 /**
  * A function in the form {@code y = a0 + a1 * x + a2 * x^2 + ... + an *
@@ -66,7 +66,7 @@ public class PolynomialFunction2D implements Function2D, Serializable {
      *         ({@code null} not permitted).
      */
     public PolynomialFunction2D(double[] coefficients) {
-        ParamChecks.nullNotPermitted(coefficients, "coefficients");
+        Args.nullNotPermitted(coefficients, "coefficients");
         this.coefficients = (double[]) coefficients.clone();
     }
 

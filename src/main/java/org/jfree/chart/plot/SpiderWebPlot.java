@@ -109,7 +109,7 @@ import org.jfree.chart.urls.CategoryURLGenerator;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintList;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.Rotation;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.chart.util.ShapeUtils;
@@ -288,7 +288,7 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      */
     public SpiderWebPlot(CategoryDataset dataset, TableOrder extract) {
         super();
-        ParamChecks.nullNotPermitted(extract, "extract");
+        Args.nullNotPermitted(extract, "extract");
         this.dataset = dataset;
         if (dataset != null) {
             dataset.addChangeListener(this);
@@ -419,7 +419,7 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      * @see #getDataExtractOrder()
      */
     public void setDataExtractOrder(TableOrder order) {
-        ParamChecks.nullNotPermitted(order, "order");
+        Args.nullNotPermitted(order, "order");
         this.dataExtractOrder = order;
         fireChangeEvent();
     }
@@ -524,7 +524,7 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      * @see #getDirection()
      */
     public void setDirection(Rotation direction) {
-        ParamChecks.nullNotPermitted(direction, "direction");
+        Args.nullNotPermitted(direction, "direction");
         this.direction = direction;
         fireChangeEvent();
     }
@@ -608,7 +608,7 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      * @since 1.0.4
      */
     public void setAxisLinePaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.axisLinePaint = paint;
         fireChangeEvent();
     }
@@ -636,7 +636,7 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      * @since 1.0.4
      */
     public void setAxisLineStroke(Stroke stroke) {
-        ParamChecks.nullNotPermitted(stroke, "stroke");
+        Args.nullNotPermitted(stroke, "stroke");
         this.axisLineStroke = stroke;
         fireChangeEvent();
     }
@@ -735,7 +735,7 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      * @see #getBaseSeriesPaint()
      */
     public void setBaseSeriesPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.baseSeriesPaint = paint;
         fireChangeEvent();
     }
@@ -811,7 +811,7 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      * @param paint  the paint ({@code null} not permitted).
      */
     public void setBaseSeriesOutlinePaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.baseSeriesOutlinePaint = paint;
         fireChangeEvent();
     }
@@ -890,7 +890,7 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      * @param stroke  the stroke ({@code null} not permitted).
      */
     public void setBaseSeriesOutlineStroke(Stroke stroke) {
-        ParamChecks.nullNotPermitted(stroke, "stroke");
+        Args.nullNotPermitted(stroke, "stroke");
         this.baseSeriesOutlineStroke = stroke;
         fireChangeEvent();
     }
@@ -915,7 +915,7 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      * @see #getLegendItemShape()
      */
     public void setLegendItemShape(Shape shape) {
-        ParamChecks.nullNotPermitted(shape, "shape");
+        Args.nullNotPermitted(shape, "shape");
         this.legendItemShape = shape;
         fireChangeEvent();
     }
@@ -940,7 +940,7 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      * @see #getLabelFont()
      */
     public void setLabelFont(Font font) {
-        ParamChecks.nullNotPermitted(font, "font");
+        Args.nullNotPermitted(font, "font");
         this.labelFont = font;
         fireChangeEvent();
     }
@@ -965,7 +965,7 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      * @see #getLabelPaint()
      */
     public void setLabelPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.labelPaint = paint;
         fireChangeEvent();
     }
@@ -990,7 +990,7 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      * @see #getLabelGenerator()
      */
     public void setLabelGenerator(CategoryItemLabelGenerator generator) {
-        ParamChecks.nullNotPermitted(generator, "generator");
+        Args.nullNotPermitted(generator, "generator");
         this.labelGenerator = generator;
     }
 

@@ -63,7 +63,7 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 
@@ -135,7 +135,7 @@ public class XYPolygonAnnotation extends AbstractXYAnnotation
     public XYPolygonAnnotation(double[] polygon, Stroke stroke, 
             Paint outlinePaint, Paint fillPaint) {
         super();
-        ParamChecks.nullNotPermitted(polygon, "polygon");
+        Args.nullNotPermitted(polygon, "polygon");
         if (polygon.length % 2 != 0) {
             throw new IllegalArgumentException("The 'polygon' array must "
                     + "contain an even number of items.");

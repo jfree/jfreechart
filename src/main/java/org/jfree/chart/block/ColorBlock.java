@@ -54,7 +54,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import org.jfree.chart.ui.Size2D;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
 
 /**
@@ -76,7 +76,7 @@ public class ColorBlock extends AbstractBlock implements Block {
      * @param height  the height.
      */
     public ColorBlock(Paint paint, double width, double height) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.paint = paint;
         setWidth(width);
         setHeight(height);

@@ -85,7 +85,7 @@ import org.jfree.chart.HashUtils;
 import org.jfree.chart.imagemap.ToolTipTagFragmentGenerator;
 import org.jfree.chart.imagemap.URLTagFragmentGenerator;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 
@@ -137,7 +137,7 @@ public class ChartEntity implements Cloneable, PublicCloneable, Serializable {
      *                 permitted).
      */
     public ChartEntity(Shape area, String toolTipText, String urlText) {
-        ParamChecks.nullNotPermitted(area, "area");
+        Args.nullNotPermitted(area, "area");
         this.area = area;
         this.toolTipText = toolTipText;
         this.urlText = urlText;
@@ -162,7 +162,7 @@ public class ChartEntity implements Cloneable, PublicCloneable, Serializable {
      * @param area  the area ({@code null} not permitted).
      */
     public void setArea(Shape area) {
-        ParamChecks.nullNotPermitted(area, "area");
+        Args.nullNotPermitted(area, "area");
         this.area = area;
     }
 
@@ -245,7 +245,7 @@ public class ChartEntity implements Cloneable, PublicCloneable, Serializable {
      * @return Upper left and lower right corner of a rectangle.
      */
     private String getRectCoords(Rectangle2D rectangle) {
-        ParamChecks.nullNotPermitted(rectangle, "rectangle");
+        Args.nullNotPermitted(rectangle, "rectangle");
         int x1 = (int) rectangle.getX();
         int y1 = (int) rectangle.getY();
         int x2 = x1 + (int) rectangle.getWidth();
@@ -270,7 +270,7 @@ public class ChartEntity implements Cloneable, PublicCloneable, Serializable {
      * @return The coordinates for a given shape as string.
      */
     private String getPolyCoords(Shape shape) {
-        ParamChecks.nullNotPermitted(shape, "shape");
+        Args.nullNotPermitted(shape, "shape");
         StringBuilder result = new StringBuilder();
         boolean first = true;
         float[] coords = new float[6];

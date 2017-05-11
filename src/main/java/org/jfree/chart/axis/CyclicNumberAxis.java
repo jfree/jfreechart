@@ -72,7 +72,7 @@ import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.Range;
 /**
@@ -238,7 +238,7 @@ public class CyclicNumberAxis extends NumberAxis {
      * @param paint  the paint ({@code null} not permitted).
      */
     public void setAdvanceLinePaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.advanceLinePaint = paint;
     }
 
@@ -258,7 +258,7 @@ public class CyclicNumberAxis extends NumberAxis {
      * @param stroke  the stroke ({@code null} not permitted).
      */
     public void setAdvanceLineStroke(Stroke stroke) {
-        ParamChecks.nullNotPermitted(stroke, "stroke");
+        Args.nullNotPermitted(stroke, "stroke");
         this.advanceLineStroke = stroke;
     }
 

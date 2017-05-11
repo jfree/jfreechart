@@ -97,7 +97,7 @@ import org.jfree.chart.imagemap.StandardToolTipTagFragmentGenerator;
 import org.jfree.chart.imagemap.StandardURLTagFragmentGenerator;
 import org.jfree.chart.imagemap.ToolTipTagFragmentGenerator;
 import org.jfree.chart.imagemap.URLTagFragmentGenerator;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 
 /**
  * A collection of utility methods for JFreeChart.  Includes methods for
@@ -179,7 +179,7 @@ public abstract class ChartUtils {
             int width, int height,  ChartRenderingInfo info)
             throws IOException {
 
-        ParamChecks.nullNotPermitted(chart, "chart");
+        Args.nullNotPermitted(chart, "chart");
         BufferedImage bufferedImage
                 = chart.createBufferedImage(width, height, info);
         EncoderUtil.writeBufferedImage(bufferedImage, ImageFormat.PNG, out);
@@ -206,8 +206,8 @@ public abstract class ChartUtils {
             int width, int height, ChartRenderingInfo info,
             boolean encodeAlpha, int compression) throws IOException {
 
-        ParamChecks.nullNotPermitted(out, "out");
-        ParamChecks.nullNotPermitted(chart, "chart");
+        Args.nullNotPermitted(out, "out");
+        Args.nullNotPermitted(chart, "chart");
         BufferedImage chartImage = chart.createBufferedImage(width, height,
                 BufferedImage.TYPE_INT_ARGB, info);
         ChartUtils.writeBufferedImageAsPNG(out, chartImage, encodeAlpha,
@@ -231,8 +231,8 @@ public abstract class ChartUtils {
             JFreeChart chart, int width, int height, int widthScaleFactor,
             int heightScaleFactor) throws IOException {
 
-        ParamChecks.nullNotPermitted(out, "out");
-        ParamChecks.nullNotPermitted(chart, "chart");
+        Args.nullNotPermitted(out, "out");
+        Args.nullNotPermitted(chart, "chart");
 
         double desiredWidth = width * widthScaleFactor;
         double desiredHeight = height * heightScaleFactor;
@@ -304,7 +304,7 @@ public abstract class ChartUtils {
             int width, int height, ChartRenderingInfo info)
         throws IOException {
 
-        ParamChecks.nullNotPermitted(file, "file");
+        Args.nullNotPermitted(file, "file");
         OutputStream out = new BufferedOutputStream(new FileOutputStream(file));
         try {
             ChartUtils.writeChartAsPNG(out, chart, width, height, info);
@@ -334,8 +334,8 @@ public abstract class ChartUtils {
            int width, int height, ChartRenderingInfo info, boolean encodeAlpha,
            int compression) throws IOException {
 
-        ParamChecks.nullNotPermitted(file, "file");
-        ParamChecks.nullNotPermitted(chart, "chart");
+        Args.nullNotPermitted(file, "file");
+        Args.nullNotPermitted(chart, "chart");
         OutputStream out = new BufferedOutputStream(new FileOutputStream(file));
         try {
             writeChartAsPNG(out, chart, width, height, info, encodeAlpha,
@@ -405,8 +405,8 @@ public abstract class ChartUtils {
             int width, int height, ChartRenderingInfo info)
             throws IOException {
 
-        ParamChecks.nullNotPermitted(out, "out");
-        ParamChecks.nullNotPermitted(chart, "chart");
+        Args.nullNotPermitted(out, "out");
+        Args.nullNotPermitted(chart, "chart");
         BufferedImage image = chart.createBufferedImage(width, height,
                 BufferedImage.TYPE_INT_RGB, info);
         EncoderUtil.writeBufferedImage(image, ImageFormat.JPEG, out);
@@ -432,8 +432,8 @@ public abstract class ChartUtils {
             JFreeChart chart, int width, int height, ChartRenderingInfo info)
             throws IOException {
 
-        ParamChecks.nullNotPermitted(out, "out");
-        ParamChecks.nullNotPermitted(chart, "chart");
+        Args.nullNotPermitted(out, "out");
+        Args.nullNotPermitted(chart, "chart");
         BufferedImage image = chart.createBufferedImage(width, height,
                 BufferedImage.TYPE_INT_RGB, info);
         EncoderUtil.writeBufferedImage(image, ImageFormat.JPEG, out, quality);
@@ -494,8 +494,8 @@ public abstract class ChartUtils {
     public static void saveChartAsJPEG(File file, JFreeChart chart,
             int width, int height, ChartRenderingInfo info) throws IOException {
 
-        ParamChecks.nullNotPermitted(file, "file");
-        ParamChecks.nullNotPermitted(chart, "chart");
+        Args.nullNotPermitted(file, "file");
+        Args.nullNotPermitted(chart, "chart");
         OutputStream out = new BufferedOutputStream(new FileOutputStream(file));
         try {
             writeChartAsJPEG(out, chart, width, height, info);
@@ -525,8 +525,8 @@ public abstract class ChartUtils {
             JFreeChart chart, int width, int height,
             ChartRenderingInfo info) throws IOException {
 
-        ParamChecks.nullNotPermitted(file, "file");
-        ParamChecks.nullNotPermitted(chart, "chart");
+        Args.nullNotPermitted(file, "file");
+        Args.nullNotPermitted(chart, "chart");
         OutputStream out = new BufferedOutputStream(new FileOutputStream(
                 file));
         try {

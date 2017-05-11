@@ -81,7 +81,7 @@ import org.jfree.chart.event.PlotChangeListener;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.ShadowGenerator;
 import org.jfree.data.Range;
 
@@ -166,7 +166,7 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
      * @param weight  the weight (must be &gt;= 1).
      */
     public void add(CategoryPlot subplot, int weight) {
-        ParamChecks.nullNotPermitted(subplot, "subplot");
+        Args.nullNotPermitted(subplot, "subplot");
         if (weight <= 0) {
             throw new IllegalArgumentException("Require weight >= 1.");
         }
@@ -192,7 +192,7 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
      * @param subplot  the subplot ({@code null} not permitted).
      */
     public void remove(CategoryPlot subplot) {
-        ParamChecks.nullNotPermitted(subplot, "subplot");
+        Args.nullNotPermitted(subplot, "subplot");
         int position = -1;
         int size = this.subplots.size();
         int i = 0;

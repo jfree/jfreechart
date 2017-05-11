@@ -70,7 +70,7 @@ import org.jfree.chart.ui.Size2D;
 import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 
@@ -260,7 +260,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
      * @see #getFrameAnchor()
      */
     public void setFrameAnchor(RectangleAnchor anchor) {
-        ParamChecks.nullNotPermitted(anchor, "anchor");
+        Args.nullNotPermitted(anchor, "anchor");
         this.frameAnchor = anchor;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -285,7 +285,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
      * @see #setTemplateValue(Number)
      */
     public void setTemplateValue(Number value) {
-        ParamChecks.nullNotPermitted(value, "value");
+        Args.nullNotPermitted(value, "value");
         this.templateValue = value;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -339,7 +339,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
      * @see #getNumberFormat()
      */
     public void setNumberFormat(NumberFormat formatter) {
-        ParamChecks.nullNotPermitted(formatter, "formatter");
+        Args.nullNotPermitted(formatter, "formatter");
         this.formatter = formatter;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -362,7 +362,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
      * @param font  the font ({@code null} not permitted).
      */
     public void setFont(Font font) {
-        ParamChecks.nullNotPermitted(font, "font");
+        Args.nullNotPermitted(font, "font");
         this.font = font;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -387,7 +387,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
      * @see #getPaint()
      */
     public void setPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.paint = paint;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -412,7 +412,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
      * @see #getBackgroundPaint()
      */
     public void setBackgroundPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.backgroundPaint = paint;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -437,7 +437,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
      * @see #getOutlineStroke()
      */
     public void setOutlineStroke(Stroke stroke) {
-        ParamChecks.nullNotPermitted(stroke, "stroke");
+        Args.nullNotPermitted(stroke, "stroke");
         this.outlineStroke = stroke;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -462,7 +462,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
      * @see #getOutlinePaint()
      */
     public void setOutlinePaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.outlinePaint = paint;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -487,7 +487,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
      * @see #getInsets()
      */
     public void setInsets(RectangleInsets insets) {
-        ParamChecks.nullNotPermitted(insets, "insets");
+        Args.nullNotPermitted(insets, "insets");
         this.insets = insets;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -512,7 +512,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
      * @see #getValueAnchor()
      */
     public void setValueAnchor(RectangleAnchor anchor) {
-        ParamChecks.nullNotPermitted(anchor, "anchor");
+        Args.nullNotPermitted(anchor, "anchor");
         this.valueAnchor = anchor;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -537,7 +537,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
      * @see #getTextAnchor()
      */
     public void setTextAnchor(TextAnchor anchor) {
-        ParamChecks.nullNotPermitted(anchor, "anchor");
+        Args.nullNotPermitted(anchor, "anchor");
         this.textAnchor = anchor;
         notifyListeners(new DialLayerChangeEvent(this));
     }

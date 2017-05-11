@@ -47,7 +47,7 @@ package org.jfree.data;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 
 /**
@@ -125,7 +125,7 @@ public class KeyedObjects implements Cloneable, PublicCloneable, Serializable {
      * @see #getKey(int)
      */
     public int getIndex(Comparable key) {
-        ParamChecks.nullNotPermitted(key, "key");
+        Args.nullNotPermitted(key, "key");
         int i = 0;
         Iterator iterator = this.data.iterator();
         while (iterator.hasNext()) {
@@ -223,7 +223,7 @@ public class KeyedObjects implements Cloneable, PublicCloneable, Serializable {
         if (position < 0 || position > this.data.size()) {
             throw new IllegalArgumentException("'position' out of bounds.");
         }
-        ParamChecks.nullNotPermitted(key, "key");
+        Args.nullNotPermitted(key, "key");
         int pos = getIndex(key);
         if (pos >= 0) {
             this.data.remove(pos);

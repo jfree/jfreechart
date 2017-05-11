@@ -48,7 +48,7 @@ import org.jfree.chart.text.TextBlockAnchor;
 import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.TextAnchor;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 
 
 /**
@@ -235,10 +235,10 @@ public class CategoryLabelPositions implements Serializable {
             CategoryLabelPosition bottom, CategoryLabelPosition left,
             CategoryLabelPosition right) {
 
-        ParamChecks.nullNotPermitted(top, "top");
-        ParamChecks.nullNotPermitted(bottom, "bottom");
-        ParamChecks.nullNotPermitted(left, "left");
-        ParamChecks.nullNotPermitted(right, "right");
+        Args.nullNotPermitted(top, "top");
+        Args.nullNotPermitted(bottom, "bottom");
+        Args.nullNotPermitted(left, "left");
+        Args.nullNotPermitted(right, "right");
 
         this.positionForAxisAtTop = top;
         this.positionForAxisAtBottom = bottom;
@@ -283,8 +283,8 @@ public class CategoryLabelPositions implements Serializable {
     public static CategoryLabelPositions replaceTopPosition(
             CategoryLabelPositions base, CategoryLabelPosition top) {
 
-        ParamChecks.nullNotPermitted(base, "base");
-        ParamChecks.nullNotPermitted(top, "top");
+        Args.nullNotPermitted(base, "base");
+        Args.nullNotPermitted(top, "top");
 
         return new CategoryLabelPositions(top,
             base.getLabelPosition(RectangleEdge.BOTTOM),
@@ -304,8 +304,8 @@ public class CategoryLabelPositions implements Serializable {
     public static CategoryLabelPositions replaceBottomPosition(
             CategoryLabelPositions base, CategoryLabelPosition bottom) {
 
-        ParamChecks.nullNotPermitted(base, "base");
-        ParamChecks.nullNotPermitted(bottom, "bottom");
+        Args.nullNotPermitted(base, "base");
+        Args.nullNotPermitted(bottom, "bottom");
 
         return new CategoryLabelPositions(
             base.getLabelPosition(RectangleEdge.TOP),
@@ -326,8 +326,8 @@ public class CategoryLabelPositions implements Serializable {
     public static CategoryLabelPositions replaceLeftPosition(
             CategoryLabelPositions base, CategoryLabelPosition left) {
 
-        ParamChecks.nullNotPermitted(base, "base");
-        ParamChecks.nullNotPermitted(left, "left");
+        Args.nullNotPermitted(base, "base");
+        Args.nullNotPermitted(left, "left");
 
         return new CategoryLabelPositions(
             base.getLabelPosition(RectangleEdge.TOP),
@@ -348,8 +348,8 @@ public class CategoryLabelPositions implements Serializable {
     public static CategoryLabelPositions replaceRightPosition(
             CategoryLabelPositions base, CategoryLabelPosition right) {
 
-        ParamChecks.nullNotPermitted(base, "base");
-        ParamChecks.nullNotPermitted(right, "right");
+        Args.nullNotPermitted(base, "base");
+        Args.nullNotPermitted(right, "right");
         return new CategoryLabelPositions(
             base.getLabelPosition(RectangleEdge.TOP),
             base.getLabelPosition(RectangleEdge.BOTTOM),

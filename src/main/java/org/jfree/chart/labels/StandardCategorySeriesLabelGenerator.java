@@ -48,7 +48,7 @@ import java.io.Serializable;
 import java.text.MessageFormat;
 
 import org.jfree.chart.HashUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.category.CategoryDataset;
 
@@ -82,7 +82,7 @@ public class StandardCategorySeriesLabelGenerator implements
      * @param format  the format pattern ({@code null} not permitted).
      */
     public StandardCategorySeriesLabelGenerator(String format) {
-        ParamChecks.nullNotPermitted(format, "format");
+        Args.nullNotPermitted(format, "format");
         this.formatPattern = format;
     }
 
@@ -96,7 +96,7 @@ public class StandardCategorySeriesLabelGenerator implements
      */
     @Override
     public String generateLabel(CategoryDataset dataset, int series) {
-        ParamChecks.nullNotPermitted(dataset, "dataset");
+        Args.nullNotPermitted(dataset, "dataset");
         String label = MessageFormat.format(this.formatPattern,
                 createItemArray(dataset, series));
         return label;

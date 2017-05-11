@@ -49,7 +49,7 @@ import java.io.ObjectOutputStream;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.HashUtils;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
 
 /**
@@ -101,7 +101,7 @@ public class PlotEntity extends ChartEntity {
     public PlotEntity(Shape area, Plot plot, String toolTipText,
             String urlText) {
         super(area, toolTipText, urlText);
-        ParamChecks.nullNotPermitted(plot, "plot");
+        Args.nullNotPermitted(plot, "plot");
         this.plot = plot;
     }
 

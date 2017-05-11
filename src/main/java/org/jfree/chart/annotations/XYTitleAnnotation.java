@@ -67,7 +67,7 @@ import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.Size2D;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.XYCoordinateType;
 import org.jfree.data.Range;
@@ -131,8 +131,8 @@ public class XYTitleAnnotation extends AbstractXYAnnotation
     public XYTitleAnnotation(double x, double y, Title title,
             RectangleAnchor anchor) {
         super();
-        ParamChecks.nullNotPermitted(title, "title");
-        ParamChecks.nullNotPermitted(anchor, "anchor");
+        Args.nullNotPermitted(title, "title");
+        Args.nullNotPermitted(anchor, "anchor");
         this.coordinateType = XYCoordinateType.RELATIVE;
         this.x = x;
         this.y = y;

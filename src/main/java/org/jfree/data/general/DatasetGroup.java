@@ -44,7 +44,7 @@
 package org.jfree.data.general;
 
 import java.io.Serializable;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 
 /**
  * A class that is used to group datasets (currently not used for any specific
@@ -72,7 +72,7 @@ public class DatasetGroup implements Cloneable, Serializable {
      * @param id  the identification for the group.
      */
     public DatasetGroup(String id) {
-        ParamChecks.nullNotPermitted(id, "id");
+        Args.nullNotPermitted(id, "id");
         this.id = id;
     }
 

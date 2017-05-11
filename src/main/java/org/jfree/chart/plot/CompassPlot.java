@@ -100,7 +100,7 @@ import org.jfree.chart.needle.WindNeedle;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.ResourceBundleWrapper;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.general.DefaultValueDataset;
@@ -256,7 +256,7 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
      */
     public void setLabelFont(Font font) {
         // FIXME: this attribute is not used - deprecate?
-        ParamChecks.nullNotPermitted(font, "font");
+        Args.nullNotPermitted(font, "font");
         this.labelFont = font;
         fireChangeEvent();
     }
@@ -281,7 +281,7 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
      * @see #getRosePaint()
      */
     public void setRosePaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.rosePaint = paint;
         fireChangeEvent();
     }
@@ -307,7 +307,7 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
      * @see #getRoseCenterPaint()
      */
     public void setRoseCenterPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.roseCenterPaint = paint;
         fireChangeEvent();
     }
@@ -333,7 +333,7 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
      * @see #getRoseHighlightPaint()
      */
     public void setRoseHighlightPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.roseHighlightPaint = paint;
         fireChangeEvent();
     }

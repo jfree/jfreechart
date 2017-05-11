@@ -289,7 +289,7 @@ public class RelativeDateFormat extends DateFormat {
      * @since 1.0.10
      */
     public void setPositivePrefix(String prefix) {
-        ParamChecks.nullNotPermitted(prefix, "prefix");
+        Args.nullNotPermitted(prefix, "prefix");
         this.positivePrefix = prefix;
     }
 
@@ -301,7 +301,7 @@ public class RelativeDateFormat extends DateFormat {
      * @since 1.0.11
      */
     public void setDayFormatter(NumberFormat formatter) {
-        ParamChecks.nullNotPermitted(formatter, "formatter");
+        Args.nullNotPermitted(formatter, "formatter");
         this.dayFormatter = formatter;
     }
 
@@ -324,7 +324,7 @@ public class RelativeDateFormat extends DateFormat {
      * @see #getDaySuffix()
      */
     public void setDaySuffix(String suffix) {
-        ParamChecks.nullNotPermitted(suffix, "suffix");
+        Args.nullNotPermitted(suffix, "suffix");
         this.daySuffix = suffix;
     }
 
@@ -336,7 +336,7 @@ public class RelativeDateFormat extends DateFormat {
      * @since 1.0.11
      */
     public void setHourFormatter(NumberFormat formatter) {
-        ParamChecks.nullNotPermitted(formatter, "formatter");
+        Args.nullNotPermitted(formatter, "formatter");
         this.hourFormatter = formatter;
     }
 
@@ -359,7 +359,7 @@ public class RelativeDateFormat extends DateFormat {
      * @see #getHourSuffix()
      */
     public void setHourSuffix(String suffix) {
-        ParamChecks.nullNotPermitted(suffix, "suffix");
+        Args.nullNotPermitted(suffix, "suffix");
         this.hourSuffix = suffix;
     }
 
@@ -371,7 +371,7 @@ public class RelativeDateFormat extends DateFormat {
      * @since 1.0.11
      */
     public void setMinuteFormatter(NumberFormat formatter) {
-        ParamChecks.nullNotPermitted(formatter, "formatter");
+        Args.nullNotPermitted(formatter, "formatter");
         this.minuteFormatter = formatter;
     }
 
@@ -394,7 +394,7 @@ public class RelativeDateFormat extends DateFormat {
      * @see #getMinuteSuffix()
      */
     public void setMinuteSuffix(String suffix) {
-        ParamChecks.nullNotPermitted(suffix, "suffix");
+        Args.nullNotPermitted(suffix, "suffix");
         this.minuteSuffix = suffix;
     }
 
@@ -417,7 +417,7 @@ public class RelativeDateFormat extends DateFormat {
      * @see #getSecondSuffix()
      */
     public void setSecondSuffix(String suffix) {
-        ParamChecks.nullNotPermitted(suffix, "suffix");
+        Args.nullNotPermitted(suffix, "suffix");
         this.secondSuffix = suffix;
     }
 
@@ -427,7 +427,7 @@ public class RelativeDateFormat extends DateFormat {
      * @param formatter  the formatter ({@code null} not permitted).
      */
     public void setSecondFormatter(NumberFormat formatter) {
-        ParamChecks.nullNotPermitted(formatter, "formatter");
+        Args.nullNotPermitted(formatter, "formatter");
         this.secondFormatter = formatter;
     }
 

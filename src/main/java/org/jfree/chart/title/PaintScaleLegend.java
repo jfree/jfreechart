@@ -68,7 +68,7 @@ import org.jfree.chart.renderer.PaintScale;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.Size2D;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.Range;
@@ -132,7 +132,7 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
      * @param axis  the axis ({@code null} not permitted).
      */
     public PaintScaleLegend(PaintScale scale, ValueAxis axis) {
-        ParamChecks.nullNotPermitted(axis, "axis");
+        Args.nullNotPermitted(axis, "axis");
         this.scale = scale;
         this.axis = axis;
         this.axis.addChangeListener(this);
@@ -167,7 +167,7 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
      * @see #getScale()
      */
     public void setScale(PaintScale scale) {
-        ParamChecks.nullNotPermitted(scale, "scale");
+        Args.nullNotPermitted(scale, "scale");
         this.scale = scale;
         notifyListeners(new TitleChangeEvent(this));
     }
@@ -192,7 +192,7 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
      * @see #getAxis()
      */
     public void setAxis(ValueAxis axis) {
-        ParamChecks.nullNotPermitted(axis, "axis");
+        Args.nullNotPermitted(axis, "axis");
         this.axis.removeChangeListener(this);
         this.axis = axis;
         this.axis.addChangeListener(this);
@@ -219,7 +219,7 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
      * @see #getAxisLocation()
      */
     public void setAxisLocation(AxisLocation location) {
-        ParamChecks.nullNotPermitted(location, "location");
+        Args.nullNotPermitted(location, "location");
         this.axisLocation = location;
         notifyListeners(new TitleChangeEvent(this));
     }
@@ -316,7 +316,7 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
      * @see #getStripOutlinePaint()
      */
     public void setStripOutlinePaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.stripOutlinePaint = paint;
         notifyListeners(new TitleChangeEvent(this));
     }
@@ -341,7 +341,7 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
      * @see #getStripOutlineStroke()
      */
     public void setStripOutlineStroke(Stroke stroke) {
-        ParamChecks.nullNotPermitted(stroke, "stroke");
+        Args.nullNotPermitted(stroke, "stroke");
         this.stripOutlineStroke = stroke;
         notifyListeners(new TitleChangeEvent(this));
     }

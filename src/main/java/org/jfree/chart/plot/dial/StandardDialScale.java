@@ -66,7 +66,7 @@ import java.text.NumberFormat;
 import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 
@@ -440,7 +440,7 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
      * @see #getMajorTickPaint()
      */
     public void setMajorTickPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.majorTickPaint = paint;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -465,7 +465,7 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
      * @see #getMajorTickStroke()
      */
     public void setMajorTickStroke(Stroke stroke) {
-        ParamChecks.nullNotPermitted(stroke, "stroke");
+        Args.nullNotPermitted(stroke, "stroke");
         this.majorTickStroke = stroke;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -547,7 +547,7 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
      * @see #getMinorTickPaint()
      */
     public void setMinorTickPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.minorTickPaint = paint;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -576,7 +576,7 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
      * @since 1.0.8
      */
     public void setMinorTickStroke(Stroke stroke) {
-        ParamChecks.nullNotPermitted(stroke, "stroke");
+        Args.nullNotPermitted(stroke, "stroke");
         this.minorTickStroke = stroke;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -625,7 +625,7 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
      * @see #getTickLabelFont()
      */
     public void setTickLabelFont(Font font) {
-        ParamChecks.nullNotPermitted(font, "font");
+        Args.nullNotPermitted(font, "font");
         this.tickLabelFont = font;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -648,7 +648,7 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
      * @param paint  the paint ({@code null} not permitted).
      */
     public void setTickLabelPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.tickLabelPaint = paint;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -701,7 +701,7 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
      * @see #getTickLabelFormatter()
      */
     public void setTickLabelFormatter(NumberFormat formatter) {
-        ParamChecks.nullNotPermitted(formatter, "formatter");
+        Args.nullNotPermitted(formatter, "formatter");
         this.tickLabelFormatter = formatter;
         notifyListeners(new DialLayerChangeEvent(this));
     }

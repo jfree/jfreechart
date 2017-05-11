@@ -53,7 +53,7 @@ import java.text.NumberFormat;
 
 import org.jfree.chart.HashUtils;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.DataUtils;
 import org.jfree.data.category.CategoryDataset;
@@ -122,9 +122,9 @@ public abstract class AbstractCategoryItemLabelGenerator
      */
     protected AbstractCategoryItemLabelGenerator(String labelFormat,
             NumberFormat formatter, NumberFormat percentFormatter) {
-        ParamChecks.nullNotPermitted(labelFormat, "labelFormat");
-        ParamChecks.nullNotPermitted(formatter, "formatter");
-        ParamChecks.nullNotPermitted(percentFormatter, "percentFormatter");
+        Args.nullNotPermitted(labelFormat, "labelFormat");
+        Args.nullNotPermitted(formatter, "formatter");
+        Args.nullNotPermitted(percentFormatter, "percentFormatter");
         this.labelFormat = labelFormat;
         this.numberFormat = formatter;
         this.percentFormat = percentFormatter;
@@ -141,8 +141,8 @@ public abstract class AbstractCategoryItemLabelGenerator
      */
     protected AbstractCategoryItemLabelGenerator(String labelFormat,
             DateFormat formatter) {
-        ParamChecks.nullNotPermitted(labelFormat, "labelFormat");
-        ParamChecks.nullNotPermitted(formatter, "formatter");
+        Args.nullNotPermitted(labelFormat, "labelFormat");
+        Args.nullNotPermitted(formatter, "formatter");
         this.labelFormat = labelFormat;
         this.numberFormat = null;
         this.percentFormat = NumberFormat.getPercentInstance();
@@ -212,7 +212,7 @@ public abstract class AbstractCategoryItemLabelGenerator
      */
     protected String generateLabelString(CategoryDataset dataset,
                                          int row, int column) {
-        ParamChecks.nullNotPermitted(dataset, "dataset");
+        Args.nullNotPermitted(dataset, "dataset");
         String result;
         Object[] items = createItemArray(dataset, row, column);
         result = MessageFormat.format(this.labelFormat, items);

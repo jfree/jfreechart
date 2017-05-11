@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2015, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -24,29 +24,21 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ----------------
- * ParamChecks.java
- * ----------------
- * (C) Copyright 2011-2015, by Object Refinery Limited.
+ * ---------
+ * Args.java
+ * ---------
+ * (C) Copyright 2011-2017, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 16-Oct-2011 : Version 1 (DG);
- * 23-Nov-2015 : Added requireInRange() method (DG);
- *
  */
 
 package org.jfree.chart.util;
 
 /**
- * A utility class for checking parameters.
- *
- * @since 1.0.14
+ * A utility class for checking method arguments.
  */
-public class ParamChecks {
+public class Args {
 
     /**
      * Throws an {@code IllegalArgumentException} if the supplied 
@@ -58,8 +50,6 @@ public class ParamChecks {
      *
      * @throws IllegalArgumentException  if {@code param} is 
      *     {@code null}.
-     *
-     * @since 1.0.14
      */
     public static void nullNotPermitted(Object param, String name) {
         if (param == null) {
@@ -72,8 +62,6 @@ public class ParamChecks {
      * 
      * @param value  the value.
      * @param name  the parameter name (for use in the exception message).
-     * 
-     * @since 1.0.18
      */
     public static void requireNonNegative(int value, String name) {
         if (value < 0) {
@@ -90,8 +78,6 @@ public class ParamChecks {
      * @param name  the parameter name.
      * @param lowerBound  the lower bound of the permitted range.
      * @param upperBound  the upper bound fo the permitted range.
-     * 
-     * @since 1.0.20
      */
     public static void requireInRange(int value, String name, 
             int lowerBound, int upperBound) {

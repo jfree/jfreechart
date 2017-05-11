@@ -49,7 +49,7 @@ import java.io.ObjectOutputStream;
 import org.jfree.chart.HashUtils;
 import org.jfree.chart.title.Title;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
 
 /**
@@ -101,7 +101,7 @@ public class TitleEntity extends ChartEntity {
     public TitleEntity(Shape area, Title title, String toolTipText,
             String urlText) {
         super(area, toolTipText, urlText);
-        ParamChecks.nullNotPermitted(title, "title");
+        Args.nullNotPermitted(title, "title");
         this.title = title;
     }
 

@@ -45,7 +45,7 @@ import java.util.Date;
 
 import org.jfree.chart.axis.SymbolAxis;
 import org.jfree.chart.renderer.xy.XYBarRenderer;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.DatasetChangeListener;
 import org.jfree.data.time.TimePeriod;
@@ -80,7 +80,7 @@ public class XYTaskDataset extends AbstractXYDataset
      * @param tasks  the underlying dataset ({@code null} not permitted).
      */
     public XYTaskDataset(TaskSeriesCollection tasks) {
-        ParamChecks.nullNotPermitted(tasks, "tasks");
+        Args.nullNotPermitted(tasks, "tasks");
         this.underlying = tasks;
         this.seriesWidth = 0.8;
         this.underlying.addChangeListener(this);

@@ -46,7 +46,7 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 
 import org.jfree.data.general.Series;
 import org.jfree.data.general.SeriesChangeEvent;
@@ -214,7 +214,7 @@ public class ComparableObjectSeries extends Series
      */
     protected void add(ComparableObjectItem item, boolean notify) {
 
-        ParamChecks.nullNotPermitted(item, "item");
+        Args.nullNotPermitted(item, "item");
         if (this.autoSort) {
             int index = Collections.binarySearch(this.data, item);
             if (index < 0) {

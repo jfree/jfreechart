@@ -59,7 +59,7 @@ import org.jfree.chart.plot.CrosshairState;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.Range;
 import org.jfree.data.xy.VectorXYDataset;
@@ -103,7 +103,7 @@ public class VectorRenderer extends AbstractXYItemRenderer
      */
     @Override
     public Range findDomainBounds(XYDataset dataset) {
-        ParamChecks.nullNotPermitted(dataset, "dataset");
+        Args.nullNotPermitted(dataset, "dataset");
         double minimum = Double.POSITIVE_INFINITY;
         double maximum = Double.NEGATIVE_INFINITY;
         int seriesCount = dataset.getSeriesCount();
@@ -158,7 +158,7 @@ public class VectorRenderer extends AbstractXYItemRenderer
      */
     @Override
     public Range findRangeBounds(XYDataset dataset) {
-        ParamChecks.nullNotPermitted(dataset, "dataset");
+        Args.nullNotPermitted(dataset, "dataset");
         double minimum = Double.POSITIVE_INFINITY;
         double maximum = Double.NEGATIVE_INFINITY;
         int seriesCount = dataset.getSeriesCount();

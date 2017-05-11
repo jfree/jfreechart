@@ -115,7 +115,7 @@ import org.jfree.chart.ui.Size2D;
 import org.jfree.chart.ui.VerticalAlignment;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.Range;
@@ -266,7 +266,7 @@ public class TextTitle extends Title
      * @param text  the text ({@code null} not permitted).
      */
     public void setText(String text) {
-        ParamChecks.nullNotPermitted(text, "text");
+        Args.nullNotPermitted(text, "text");
         if (!this.text.equals(text)) {
             this.text = text;
             notifyListeners(new TitleChangeEvent(this));
@@ -292,7 +292,7 @@ public class TextTitle extends Title
      * @param alignment  the alignment ({@code null} not permitted).
      */
     public void setTextAlignment(HorizontalAlignment alignment) {
-        ParamChecks.nullNotPermitted(alignment, "alignment");
+        Args.nullNotPermitted(alignment, "alignment");
         this.textAlignment = alignment;
         notifyListeners(new TitleChangeEvent(this));
     }
@@ -317,7 +317,7 @@ public class TextTitle extends Title
      * @see #getFont()
      */
     public void setFont(Font font) {
-        ParamChecks.nullNotPermitted(font, "font");
+        Args.nullNotPermitted(font, "font");
         if (!this.font.equals(font)) {
             this.font = font;
             notifyListeners(new TitleChangeEvent(this));
@@ -344,7 +344,7 @@ public class TextTitle extends Title
      * @see #getPaint()
      */
     public void setPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         if (!this.paint.equals(paint)) {
             this.paint = paint;
             notifyListeners(new TitleChangeEvent(this));

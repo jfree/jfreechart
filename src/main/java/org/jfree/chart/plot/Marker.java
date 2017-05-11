@@ -82,7 +82,7 @@ import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
 
 /**
@@ -175,8 +175,8 @@ public abstract class Marker implements Cloneable, Serializable {
     protected Marker(Paint paint, Stroke stroke, Paint outlinePaint, 
             Stroke outlineStroke, float alpha) {
 
-        ParamChecks.nullNotPermitted(paint, "paint");
-        ParamChecks.nullNotPermitted(stroke, "stroke");
+        Args.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(stroke, "stroke");
         if (alpha < 0.0f || alpha > 1.0f) {
             throw new IllegalArgumentException(
                     "The 'alpha' value must be in the range 0.0f to 1.0f");
@@ -219,7 +219,7 @@ public abstract class Marker implements Cloneable, Serializable {
      * @see #getPaint()
      */
     public void setPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.paint = paint;
         notifyListeners(new MarkerChangeEvent(this));
     }
@@ -244,7 +244,7 @@ public abstract class Marker implements Cloneable, Serializable {
      * @see #getStroke()
      */
     public void setStroke(Stroke stroke) {
-        ParamChecks.nullNotPermitted(stroke, "stroke");
+        Args.nullNotPermitted(stroke, "stroke");
         this.stroke = stroke;
         notifyListeners(new MarkerChangeEvent(this));
     }
@@ -375,7 +375,7 @@ public abstract class Marker implements Cloneable, Serializable {
      * @see #getLabelFont()
      */
     public void setLabelFont(Font font) {
-        ParamChecks.nullNotPermitted(font, "font");
+        Args.nullNotPermitted(font, "font");
         this.labelFont = font;
         notifyListeners(new MarkerChangeEvent(this));
     }
@@ -400,7 +400,7 @@ public abstract class Marker implements Cloneable, Serializable {
      * @see #getLabelPaint()
      */
     public void setLabelPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.labelPaint = paint;
         notifyListeners(new MarkerChangeEvent(this));
     }
@@ -425,7 +425,7 @@ public abstract class Marker implements Cloneable, Serializable {
      * @since 1.0.18
      */
     public void setLabelBackgroundColor(Color color) {
-        ParamChecks.nullNotPermitted(color, "color");
+        Args.nullNotPermitted(color, "color");
         this.labelBackgroundColor = color;
     }
 
@@ -451,7 +451,7 @@ public abstract class Marker implements Cloneable, Serializable {
      * @see #getLabelAnchor()
      */
     public void setLabelAnchor(RectangleAnchor anchor) {
-        ParamChecks.nullNotPermitted(anchor, "anchor");
+        Args.nullNotPermitted(anchor, "anchor");
         this.labelAnchor = anchor;
         notifyListeners(new MarkerChangeEvent(this));
     }
@@ -476,7 +476,7 @@ public abstract class Marker implements Cloneable, Serializable {
      * @see #getLabelOffset()
      */
     public void setLabelOffset(RectangleInsets offset) {
-        ParamChecks.nullNotPermitted(offset, "offset");
+        Args.nullNotPermitted(offset, "offset");
         this.labelOffset = offset;
         notifyListeners(new MarkerChangeEvent(this));
     }
@@ -501,7 +501,7 @@ public abstract class Marker implements Cloneable, Serializable {
      * @see #getLabelOffsetType()
      */
     public void setLabelOffsetType(LengthAdjustmentType adj) {
-        ParamChecks.nullNotPermitted(adj, "adj");
+        Args.nullNotPermitted(adj, "adj");
         this.labelOffsetType = adj;
         notifyListeners(new MarkerChangeEvent(this));
     }
@@ -526,7 +526,7 @@ public abstract class Marker implements Cloneable, Serializable {
      * @see #getLabelTextAnchor()
      */
     public void setLabelTextAnchor(TextAnchor anchor) {
-        ParamChecks.nullNotPermitted(anchor, "anchor");
+        Args.nullNotPermitted(anchor, "anchor");
         this.labelTextAnchor = anchor;
         notifyListeners(new MarkerChangeEvent(this));
     }

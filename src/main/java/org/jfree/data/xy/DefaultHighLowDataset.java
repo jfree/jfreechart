@@ -51,7 +51,7 @@ package org.jfree.data.xy;
 
 import java.util.Arrays;
 import java.util.Date;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 
 /**
@@ -102,8 +102,8 @@ public class DefaultHighLowDataset extends AbstractXYDataset
             double[] high, double[] low, double[] open, double[] close,
             double[] volume) {
 
-        ParamChecks.nullNotPermitted(seriesKey, "seriesKey");
-        ParamChecks.nullNotPermitted(date, "date");
+        Args.nullNotPermitted(seriesKey, "seriesKey");
+        Args.nullNotPermitted(date, "date");
         this.seriesKey = seriesKey;
         this.date = date;
         this.high = createNumberArray(high);

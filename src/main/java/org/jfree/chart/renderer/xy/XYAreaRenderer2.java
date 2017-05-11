@@ -109,7 +109,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.urls.XYURLGenerator;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.chart.util.ShapeUtils;
@@ -214,7 +214,7 @@ public class XYAreaRenderer2 extends AbstractXYItemRenderer
      * @see #getLegendArea()
      */
     public void setLegendArea(Shape area) {
-        ParamChecks.nullNotPermitted(area, "area");
+        Args.nullNotPermitted(area, "area");
         this.legendArea = area;
         fireChangeEvent();
     }

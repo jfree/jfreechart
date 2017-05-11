@@ -60,7 +60,7 @@ import org.jfree.chart.HashUtils;
 import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 
@@ -102,7 +102,7 @@ public class DialTextAnnotation extends AbstractDialLayer implements DialLayer,
      * @param label  the label ({@code null} not permitted).
      */
     public DialTextAnnotation(String label) {
-        ParamChecks.nullNotPermitted(label, "label");
+        Args.nullNotPermitted(label, "label");
         this.angle = -90.0;
         this.radius = 0.3;
         this.font = new Font("Dialog", Font.BOLD, 14);
@@ -131,7 +131,7 @@ public class DialTextAnnotation extends AbstractDialLayer implements DialLayer,
      * @see #getLabel()
      */
     public void setLabel(String label) {
-        ParamChecks.nullNotPermitted(label, "label");
+        Args.nullNotPermitted(label, "label");
         this.label = label;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -156,7 +156,7 @@ public class DialTextAnnotation extends AbstractDialLayer implements DialLayer,
      * @see #getFont()
      */
     public void setFont(Font font) {
-        ParamChecks.nullNotPermitted(font, "font");
+        Args.nullNotPermitted(font, "font");
         this.font = font;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -181,7 +181,7 @@ public class DialTextAnnotation extends AbstractDialLayer implements DialLayer,
      * @see #getPaint()
      */
     public void setPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.paint = paint;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -265,7 +265,7 @@ public class DialTextAnnotation extends AbstractDialLayer implements DialLayer,
      * @see #getAnchor()
      */
     public void setAnchor(TextAnchor anchor) {
-        ParamChecks.nullNotPermitted(anchor, "anchor");
+        Args.nullNotPermitted(anchor, "anchor");
         this.anchor = anchor;
         notifyListeners(new DialLayerChangeEvent(this));
     }

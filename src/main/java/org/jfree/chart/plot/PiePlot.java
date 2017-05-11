@@ -225,7 +225,7 @@ import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.urls.PieURLGenerator;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.ResourceBundleWrapper;
 import org.jfree.chart.util.Rotation;
@@ -725,7 +725,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * @see #getDirection()
      */
     public void setDirection(Rotation direction) {
-        ParamChecks.nullNotPermitted(direction, "direction");
+        Args.nullNotPermitted(direction, "direction");
         this.direction = direction;
         fireChangeEvent();
 
@@ -1035,7 +1035,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * @see #getDefaultSectionPaint()
      */
     public void setDefaultSectionPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.defaultSectionPaint = paint;
         fireChangeEvent();
     }
@@ -1240,7 +1240,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * @see #getDefaultSectionOutlinePaint()
      */
     public void setDefaultSectionOutlinePaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.defaultSectionOutlinePaint = paint;
         fireChangeEvent();
     }
@@ -1419,7 +1419,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * @see #getDefaultSectionOutlineStroke()
      */
     public void setDefaultSectionOutlineStroke(Stroke stroke) {
-        ParamChecks.nullNotPermitted(stroke, "stroke");
+        Args.nullNotPermitted(stroke, "stroke");
         this.defaultSectionOutlineStroke = stroke;
         fireChangeEvent();
     }
@@ -1562,7 +1562,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * @see #getExplodePercent(Comparable)
      */
     public void setExplodePercent(Comparable key, double percent) {
-        ParamChecks.nullNotPermitted(key, "key");
+        Args.nullNotPermitted(key, "key");
         if (this.explodePercentages == null) {
             this.explodePercentages = new TreeMap();
         }
@@ -1717,7 +1717,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * @since 1.0.10
      */
     public void setLabelLinkStyle(PieLabelLinkStyle style) {
-        ParamChecks.nullNotPermitted(style, "style");
+        Args.nullNotPermitted(style, "style");
         this.labelLinkStyle = style;
         fireChangeEvent();
     }
@@ -1769,7 +1769,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * @see #getLabelLinkPaint()
      */
     public void setLabelLinkPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.labelLinkPaint = paint;
         fireChangeEvent();
     }
@@ -1794,7 +1794,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * @see #getLabelLinkStroke()
      */
     public void setLabelLinkStroke(Stroke stroke) {
-        ParamChecks.nullNotPermitted(stroke, "stroke");
+        Args.nullNotPermitted(stroke, "stroke");
         this.labelLinkStroke = stroke;
         fireChangeEvent();
     }
@@ -1834,7 +1834,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * @see #getLabelFont()
      */
     public void setLabelFont(Font font) {
-        ParamChecks.nullNotPermitted(font, "font");
+        Args.nullNotPermitted(font, "font");
         this.labelFont = font;
         fireChangeEvent();
     }
@@ -1859,7 +1859,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * @see #getLabelPaint()
      */
     public void setLabelPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.labelPaint = paint;
         fireChangeEvent();
     }
@@ -1984,7 +1984,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * @see #getLabelPadding()
      */
     public void setLabelPadding(RectangleInsets padding) {
-        ParamChecks.nullNotPermitted(padding, "padding");
+        Args.nullNotPermitted(padding, "padding");
         this.labelPadding = padding;
         fireChangeEvent();
     }
@@ -2039,7 +2039,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * @see #getSimpleLabelOffset()
      */
     public void setSimpleLabelOffset(RectangleInsets offset) {
-        ParamChecks.nullNotPermitted(offset, "offset");
+        Args.nullNotPermitted(offset, "offset");
         this.simpleLabelOffset = offset;
         fireChangeEvent();
     }
@@ -2065,7 +2065,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * @since 1.0.6
      */
     public void setLabelDistributor(AbstractPieLabelDistributor distributor) {
-        ParamChecks.nullNotPermitted(distributor, "distributor");
+        Args.nullNotPermitted(distributor, "distributor");
         this.labelDistributor = distributor;
         fireChangeEvent();
     }
@@ -2175,7 +2175,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * @see #getLegendItemShape()
      */
     public void setLegendItemShape(Shape shape) {
-        ParamChecks.nullNotPermitted(shape, "shape");
+        Args.nullNotPermitted(shape, "shape");
         this.legendItemShape = shape;
         fireChangeEvent();
     }
@@ -2200,7 +2200,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
      * @see #getLegendLabelGenerator()
      */
     public void setLegendLabelGenerator(PieSectionLabelGenerator generator) {
-        ParamChecks.nullNotPermitted(generator, "generator");
+        Args.nullNotPermitted(generator, "generator");
         this.legendLabelGenerator = generator;
         fireChangeEvent();
     }

@@ -59,7 +59,7 @@ import java.io.Serializable;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
 
 /**
@@ -97,9 +97,9 @@ public class LineBorder implements BlockFrame, Serializable {
      * @param insets  the insets ({@code null} not permitted).
      */
     public LineBorder(Paint paint, Stroke stroke, RectangleInsets insets) {
-        ParamChecks.nullNotPermitted(paint, "paint");
-        ParamChecks.nullNotPermitted(stroke, "stroke");
-        ParamChecks.nullNotPermitted(insets, "insets");
+        Args.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(stroke, "stroke");
+        Args.nullNotPermitted(insets, "insets");
         this.paint = paint;
         this.stroke = stroke;
         this.insets = insets;

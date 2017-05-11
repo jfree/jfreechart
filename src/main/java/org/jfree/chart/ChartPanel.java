@@ -250,7 +250,7 @@ import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.Zoomable;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.ResourceBundleWrapper;
 import org.jfree.chart.util.SerialUtils;
 
@@ -1286,7 +1286,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * @since 1.0.13
      */
     public void setZoomFillPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.zoomFillPaint = paint;
     }
 
@@ -1360,7 +1360,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * @since 1.0.13
      */
     public void addOverlay(Overlay overlay) {
-        ParamChecks.nullNotPermitted(overlay, "overlay");
+        Args.nullNotPermitted(overlay, "overlay");
         this.overlays.add(overlay);
         overlay.addChangeListener(this);
         repaint();
@@ -1374,7 +1374,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * @since 1.0.13
      */
     public void removeOverlay(Overlay overlay) {
-        ParamChecks.nullNotPermitted(overlay, "overlay");
+        Args.nullNotPermitted(overlay, "overlay");
         boolean removed = this.overlays.remove(overlay);
         if (removed) {
             overlay.removeChangeListener(this);
@@ -2923,7 +2923,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
             throw new IllegalStateException(
                     "OrsonPDF is not present on the classpath.");
         }
-        ParamChecks.nullNotPermitted(file, "file");
+        Args.nullNotPermitted(file, "file");
         try {
             Class pdfDocClass = Class.forName("com.orsonpdf.PDFDocument");
             Object pdfDoc = pdfDocClass.newInstance();
@@ -3009,7 +3009,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * @param listener  the listener ({@code null} not permitted).
      */
     public void addChartMouseListener(ChartMouseListener listener) {
-        ParamChecks.nullNotPermitted(listener, "listener");
+        Args.nullNotPermitted(listener, "listener");
         this.chartMouseListeners.add(ChartMouseListener.class, listener);
     }
 

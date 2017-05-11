@@ -56,7 +56,7 @@ package org.jfree.data.xy;
 import java.io.Serializable;
 
 import org.jfree.chart.HashUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.DomainInfo;
 import org.jfree.data.Range;
@@ -131,7 +131,7 @@ public class IntervalXYDelegate implements DatasetChangeListener,
      *                   calculated automatically.
      */
     public IntervalXYDelegate(XYDataset dataset, boolean autoWidth) {
-        ParamChecks.nullNotPermitted(dataset, "dataset");
+        Args.nullNotPermitted(dataset, "dataset");
         this.dataset = dataset;
         this.autoWidth = autoWidth;
         this.intervalPositionFactor = 0.5;

@@ -44,7 +44,7 @@
 
 package org.jfree.chart.renderer;
 
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.data.DomainOrder;
 import org.jfree.data.xy.XYDataset;
 
@@ -72,7 +72,7 @@ public class RendererUtils {
      */
     public static int findLiveItemsLowerBound(XYDataset dataset, int series,
             double xLow, double xHigh) {
-        ParamChecks.nullNotPermitted(dataset, "dataset");
+        Args.nullNotPermitted(dataset, "dataset");
         if (xLow >= xHigh) {
             throw new IllegalArgumentException("Requires xLow < xHigh.");
         }
@@ -166,7 +166,7 @@ public class RendererUtils {
      */
     public static int findLiveItemsUpperBound(XYDataset dataset, int series,
             double xLow, double xHigh) {
-        ParamChecks.nullNotPermitted(dataset, "dataset");
+        Args.nullNotPermitted(dataset, "dataset");
         if (xLow >= xHigh) {
             throw new IllegalArgumentException("Requires xLow < xHigh.");
         }

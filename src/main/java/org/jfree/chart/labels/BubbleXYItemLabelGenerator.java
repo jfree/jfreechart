@@ -53,7 +53,7 @@ import java.text.NumberFormat;
 import org.jfree.chart.HashUtils;
 import org.jfree.chart.renderer.xy.XYBubbleRenderer;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYZDataset;
@@ -110,7 +110,7 @@ public class BubbleXYItemLabelGenerator extends AbstractXYItemLabelGenerator
     public BubbleXYItemLabelGenerator(String formatString,
             NumberFormat xFormat, NumberFormat yFormat, NumberFormat zFormat) {
         super(formatString, xFormat, yFormat);
-        ParamChecks.nullNotPermitted(zFormat, "zFormat");
+        Args.nullNotPermitted(zFormat, "zFormat");
         this.zFormat = zFormat;
     }
 
@@ -129,7 +129,7 @@ public class BubbleXYItemLabelGenerator extends AbstractXYItemLabelGenerator
     public BubbleXYItemLabelGenerator(String formatString,
             DateFormat xFormat, DateFormat yFormat, DateFormat zFormat) {
         super(formatString, xFormat, yFormat);
-        ParamChecks.nullNotPermitted(zFormat, "zFormat");
+        Args.nullNotPermitted(zFormat, "zFormat");
         this.zDateFormat = zFormat;
     }
 

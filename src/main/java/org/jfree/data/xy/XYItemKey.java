@@ -42,7 +42,7 @@ package org.jfree.data.xy;
 
 import java.io.Serializable;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.data.ItemKey;
 
 /**
@@ -70,7 +70,7 @@ public class XYItemKey<S extends Comparable<S>> implements ItemKey,
      * @param itemIndex  the item index.
      */
     public XYItemKey(S seriesKey, int itemIndex) {
-        ParamChecks.nullNotPermitted(seriesKey, "seriesKey");
+        Args.nullNotPermitted(seriesKey, "seriesKey");
         this.seriesKey = seriesKey;
         this.itemIndex = itemIndex;
     }

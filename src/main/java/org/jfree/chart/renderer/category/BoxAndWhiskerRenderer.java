@@ -122,7 +122,7 @@ import org.jfree.chart.renderer.OutlierList;
 import org.jfree.chart.renderer.OutlierListCollection;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.Range;
@@ -226,7 +226,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      * @see #getArtifactPaint()
      */
     public void setArtifactPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.artifactPaint = paint;
         fireChangeEvent();
     }

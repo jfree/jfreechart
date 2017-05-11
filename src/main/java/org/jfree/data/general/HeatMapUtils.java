@@ -45,7 +45,7 @@ import java.awt.Graphics2D;
 import java.awt.Paint;
 import java.awt.image.BufferedImage;
 import org.jfree.chart.renderer.PaintScale;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
@@ -111,8 +111,8 @@ public abstract class HeatMapUtils {
     public static BufferedImage createHeatMapImage(HeatMapDataset dataset,
             PaintScale paintScale) {
 
-        ParamChecks.nullNotPermitted(dataset, "dataset");
-        ParamChecks.nullNotPermitted(paintScale, "paintScale");
+        Args.nullNotPermitted(dataset, "dataset");
+        Args.nullNotPermitted(paintScale, "paintScale");
         int xCount = dataset.getXSampleCount();
         int yCount = dataset.getYSampleCount();
         BufferedImage image = new BufferedImage(xCount, yCount,

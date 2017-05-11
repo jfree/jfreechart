@@ -57,7 +57,7 @@ import java.io.Serializable;
 
 import org.jfree.chart.HashUtils;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 
@@ -114,7 +114,7 @@ public class StandardDialRange extends AbstractDialLayer implements DialLayer,
      * @param paint  the paint ({@code null} not permitted).
      */
     public StandardDialRange(double lower, double upper, Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.scaleIndex = 0;
         this.lowerBound = lower;
         this.upperBound = upper;
@@ -240,7 +240,7 @@ public class StandardDialRange extends AbstractDialLayer implements DialLayer,
      * @see #getPaint()
      */
     public void setPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.paint = paint;
         notifyListeners(new DialLayerChangeEvent(this));
     }

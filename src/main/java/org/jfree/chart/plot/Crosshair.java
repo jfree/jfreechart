@@ -57,7 +57,7 @@ import org.jfree.chart.labels.CrosshairLabelGenerator;
 import org.jfree.chart.labels.StandardCrosshairLabelGenerator;
 import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 
@@ -155,8 +155,8 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * @param stroke  the line stroke ({@code null} not permitted).
      */
     public Crosshair(double value, Paint paint, Stroke stroke) {
-        ParamChecks.nullNotPermitted(paint, "paint");
-        ParamChecks.nullNotPermitted(stroke, "stroke");
+        Args.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(stroke, "stroke");
         this.visible = true;
         this.value = value;
         this.paint = paint;
@@ -324,7 +324,7 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * @see #getLabelGenerator()
      */
     public void setLabelGenerator(CrosshairLabelGenerator generator) {
-        ParamChecks.nullNotPermitted(generator, "generator");
+        Args.nullNotPermitted(generator, "generator");
         CrosshairLabelGenerator old = this.labelGenerator;
         this.labelGenerator = generator;
         this.pcs.firePropertyChange("labelGenerator", old, generator);
@@ -425,7 +425,7 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * @see #getLabelFont()
      */
     public void setLabelFont(Font font) {
-        ParamChecks.nullNotPermitted(font, "font");
+        Args.nullNotPermitted(font, "font");
         Font old = this.labelFont;
         this.labelFont = font;
         this.pcs.firePropertyChange("labelFont", old, font);
@@ -451,7 +451,7 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * @see #getLabelPaint()
      */
     public void setLabelPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         Paint old = this.labelPaint;
         this.labelPaint = paint;
         this.pcs.firePropertyChange("labelPaint", old, paint);
@@ -528,7 +528,7 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * @see #getLabelOutlinePaint()
      */
     public void setLabelOutlinePaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         Paint old = this.labelOutlinePaint;
         this.labelOutlinePaint = paint;
         this.pcs.firePropertyChange("labelOutlinePaint", old, paint);
@@ -555,7 +555,7 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * @see #getLabelOutlineStroke()
      */
     public void setLabelOutlineStroke(Stroke stroke) {
-        ParamChecks.nullNotPermitted(stroke, "stroke");
+        Args.nullNotPermitted(stroke, "stroke");
         Stroke old = this.labelOutlineStroke;
         this.labelOutlineStroke = stroke;
         this.pcs.firePropertyChange("labelOutlineStroke", old, stroke);

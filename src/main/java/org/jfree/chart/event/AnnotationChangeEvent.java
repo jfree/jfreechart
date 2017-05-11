@@ -41,7 +41,7 @@
 package org.jfree.chart.event;
 
 import org.jfree.chart.annotations.Annotation;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 
 /**
  * An event that can be forwarded to any {@link AnnotationChangeListener} to
@@ -65,7 +65,7 @@ public class AnnotationChangeEvent extends ChartChangeEvent {
      */
     public AnnotationChangeEvent(Object source, Annotation annotation) {
         super(source);
-        ParamChecks.nullNotPermitted(annotation, "annotation");
+        Args.nullNotPermitted(annotation, "annotation");
         this.annotation = annotation;
     }
 

@@ -51,7 +51,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 
 /**
  * A utility class that calculates the mean, median, quartiles Q1 and Q3, plus
@@ -94,7 +94,7 @@ public abstract class BoxAndWhiskerCalculator {
     public static BoxAndWhiskerItem calculateBoxAndWhiskerStatistics(
             List values, boolean stripNullAndNaNItems) {
 
-        ParamChecks.nullNotPermitted(values, "values");
+        Args.nullNotPermitted(values, "values");
 
         List vlist;
         if (stripNullAndNaNItems) {
@@ -179,7 +179,7 @@ public abstract class BoxAndWhiskerCalculator {
      * @return The first quartile.
      */
     public static double calculateQ1(List values) {
-        ParamChecks.nullNotPermitted(values, "values");
+        Args.nullNotPermitted(values, "values");
 
         double result = Double.NaN;
         int count = values.size();
@@ -212,7 +212,7 @@ public abstract class BoxAndWhiskerCalculator {
      * @return The third quartile.
      */
     public static double calculateQ3(List values) {
-        ParamChecks.nullNotPermitted(values, "values");
+        Args.nullNotPermitted(values, "values");
         double result = Double.NaN;
         int count = values.size();
         if (count > 0) {

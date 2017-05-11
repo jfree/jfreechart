@@ -74,7 +74,7 @@ import javax.servlet.http.HttpSession;
 import org.jfree.chart.ChartRenderingInfo;
 import org.jfree.chart.ChartUtils;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 
 /**
  * Utility class used for servlet related JFreeChart operations.
@@ -102,7 +102,7 @@ public class ServletUtilities {
      * @param prefix  the prefix ({@code null} not permitted).
      */
     public static void setTempFilePrefix(String prefix) {
-        ParamChecks.nullNotPermitted(prefix, "prefix");
+        Args.nullNotPermitted(prefix, "prefix");
         ServletUtilities.tempFilePrefix = prefix;
     }
 
@@ -123,7 +123,7 @@ public class ServletUtilities {
      * @param prefix  the prefix ({@code null} not permitted).
      */
     public static void setTempOneTimeFilePrefix(String prefix) {
-        ParamChecks.nullNotPermitted(prefix, "prefix");
+        Args.nullNotPermitted(prefix, "prefix");
         ServletUtilities.tempOneTimeFilePrefix = prefix;
     }
 
@@ -172,7 +172,7 @@ public class ServletUtilities {
     public static String saveChartAsPNG(JFreeChart chart, int width, int height,
             ChartRenderingInfo info, HttpSession session) throws IOException {
 
-        ParamChecks.nullNotPermitted(chart, "chart");
+        Args.nullNotPermitted(chart, "chart");
         ServletUtilities.createTempDir();
         String prefix = ServletUtilities.tempFilePrefix;
         if (session == null) {
@@ -244,7 +244,7 @@ public class ServletUtilities {
             int height, ChartRenderingInfo info, HttpSession session)
             throws IOException {
 
-        ParamChecks.nullNotPermitted(chart, "chart");
+        Args.nullNotPermitted(chart, "chart");
         ServletUtilities.createTempDir();
         String prefix = ServletUtilities.tempFilePrefix;
         if (session == null) {

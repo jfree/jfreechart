@@ -52,7 +52,7 @@ import java.io.Serializable;
 
 import org.jfree.chart.event.MarkerChangeEvent;
 import org.jfree.chart.ui.LengthAdjustmentType;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 
 /**
  * A marker for a category.
@@ -128,7 +128,7 @@ public class CategoryMarker extends Marker implements Cloneable, Serializable {
      * @since 1.0.3
      */
     public void setKey(Comparable key) {
-        ParamChecks.nullNotPermitted(key, "key");
+        Args.nullNotPermitted(key, "key");
         this.key = key;
         notifyListeners(new MarkerChangeEvent(this));
     }

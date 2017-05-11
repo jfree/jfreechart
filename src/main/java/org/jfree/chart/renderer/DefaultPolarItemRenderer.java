@@ -99,7 +99,7 @@ import org.jfree.chart.urls.XYURLGenerator;
 import org.jfree.chart.util.BooleanList;
 import org.jfree.chart.util.ObjectList;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.chart.util.ShapeUtils;
@@ -287,7 +287,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * @since 1.0.14
      */
     public void setFillComposite(Composite composite) {
-        ParamChecks.nullNotPermitted(composite, "composite");
+        Args.nullNotPermitted(composite, "composite");
         this.fillComposite = composite;
         fireChangeEvent();
     }
@@ -435,7 +435,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * @see #getLegendLine()
      */
     public void setLegendLine(Shape line) {
-        ParamChecks.nullNotPermitted(line, "line");
+        Args.nullNotPermitted(line, "line");
         this.legendLine = line;
         fireChangeEvent();
     }
@@ -646,7 +646,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
     public void drawRadialGridLines(Graphics2D g2, PolarPlot plot, 
             ValueAxis radialAxis, List ticks, Rectangle2D dataArea) {
 
-        ParamChecks.nullNotPermitted(radialAxis, "radialAxis");
+        Args.nullNotPermitted(radialAxis, "radialAxis");
         g2.setFont(radialAxis.getTickLabelFont());
         g2.setPaint(plot.getRadiusGridlinePaint());
         g2.setStroke(plot.getRadiusGridlineStroke());

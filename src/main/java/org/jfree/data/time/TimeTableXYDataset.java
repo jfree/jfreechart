@@ -61,7 +61,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.DefaultKeyedValues2D;
@@ -137,8 +137,8 @@ public class TimeTableXYDataset extends AbstractIntervalXYDataset
      * @param locale  the locale to use ({@code null} not permitted).
      */
     public TimeTableXYDataset(TimeZone zone, Locale locale) {
-        ParamChecks.nullNotPermitted(zone, "zone");
-        ParamChecks.nullNotPermitted(locale, "locale");
+        Args.nullNotPermitted(zone, "zone");
+        Args.nullNotPermitted(locale, "locale");
         this.values = new DefaultKeyedValues2D(true);
         this.workingCalendar = Calendar.getInstance(zone, locale);
         this.xPosition = TimePeriodAnchor.START;
@@ -196,7 +196,7 @@ public class TimeTableXYDataset extends AbstractIntervalXYDataset
      * @see #getXPosition()
      */
     public void setXPosition(TimePeriodAnchor anchor) {
-        ParamChecks.nullNotPermitted(anchor, "anchor");
+        Args.nullNotPermitted(anchor, "anchor");
         this.xPosition = anchor;
         notifyListeners(new DatasetChangeEvent(this, this));
     }

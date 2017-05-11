@@ -77,7 +77,7 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 
@@ -138,7 +138,7 @@ public class XYShapeAnnotation extends AbstractXYAnnotation
     public XYShapeAnnotation(Shape shape, Stroke stroke, Paint outlinePaint,
                              Paint fillPaint) {
         super();
-        ParamChecks.nullNotPermitted(shape, "shape");
+        Args.nullNotPermitted(shape, "shape");
         this.shape = shape;
         this.stroke = stroke;
         this.outlinePaint = outlinePaint;

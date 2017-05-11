@@ -42,7 +42,7 @@ package org.jfree.data;
 
 import java.io.Serializable;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 
 /**
  * An object that references one data item in a {@link KeyedValues2D} data
@@ -70,8 +70,8 @@ public class KeyedValues2DItemKey<R extends Comparable<R>,
      * @param columnKey  the column key ({@code null} not permitted).
      */
     public KeyedValues2DItemKey(R rowKey, C columnKey) {
-        ParamChecks.nullNotPermitted(rowKey, "rowKey");
-        ParamChecks.nullNotPermitted(columnKey, "columnKey");
+        Args.nullNotPermitted(rowKey, "rowKey");
+        Args.nullNotPermitted(columnKey, "columnKey");
         this.rowKey = rowKey;
         this.columnKey = columnKey;
     }

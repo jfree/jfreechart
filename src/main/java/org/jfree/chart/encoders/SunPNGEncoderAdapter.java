@@ -48,7 +48,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 import javax.imageio.ImageIO;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 
 /**
  * Adapter class for the Sun PNG Encoder.  The ImageEncoderFactory will only
@@ -126,8 +126,8 @@ public class SunPNGEncoderAdapter implements ImageEncoder {
     @Override
     public void encode(BufferedImage bufferedImage, OutputStream outputStream)
             throws IOException {
-        ParamChecks.nullNotPermitted(bufferedImage, "bufferedImage");
-        ParamChecks.nullNotPermitted(outputStream, "outputStream");
+        Args.nullNotPermitted(bufferedImage, "bufferedImage");
+        Args.nullNotPermitted(outputStream, "outputStream");
         ImageIO.write(bufferedImage, ImageFormat.PNG, outputStream);
     }
 

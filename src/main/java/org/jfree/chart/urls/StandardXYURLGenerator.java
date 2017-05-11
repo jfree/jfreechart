@@ -51,7 +51,7 @@ package org.jfree.chart.urls;
 
 import java.io.Serializable;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 
 import org.jfree.data.xy.XYDataset;
 
@@ -111,9 +111,9 @@ public class StandardXYURLGenerator implements XYURLGenerator, Serializable {
      */
     public StandardXYURLGenerator(String prefix, String seriesParameterName,
             String itemParameterName) {
-        ParamChecks.nullNotPermitted(prefix, "prefix");
-        ParamChecks.nullNotPermitted(seriesParameterName, "seriesParameterName");
-        ParamChecks.nullNotPermitted(itemParameterName, "itemParameterName");
+        Args.nullNotPermitted(prefix, "prefix");
+        Args.nullNotPermitted(seriesParameterName, "seriesParameterName");
+        Args.nullNotPermitted(itemParameterName, "itemParameterName");
         this.prefix = prefix;
         this.seriesParameterName = seriesParameterName;
         this.itemParameterName = itemParameterName;

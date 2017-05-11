@@ -57,7 +57,7 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.ui.Drawable;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 
 /**
@@ -120,7 +120,7 @@ public class XYDrawableAnnotation extends AbstractXYAnnotation
             double displayHeight, double drawScaleFactor, Drawable drawable) {
 
         super();
-        ParamChecks.nullNotPermitted(drawable, "drawable");
+        Args.nullNotPermitted(drawable, "drawable");
         this.x = x;
         this.y = y;
         this.displayWidth = displayWidth;

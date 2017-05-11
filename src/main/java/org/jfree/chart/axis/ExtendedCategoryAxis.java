@@ -61,7 +61,7 @@ import org.jfree.chart.text.TextFragment;
 import org.jfree.chart.text.TextLine;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
 
 /**
@@ -114,7 +114,7 @@ public class ExtendedCategoryAxis extends CategoryAxis {
      * @see #getSubLabelFont()
      */
     public void setSubLabelFont(Font font) {
-        ParamChecks.nullNotPermitted(font, "font");
+        Args.nullNotPermitted(font, "font");
         this.sublabelFont = font;
         notifyListeners(new AxisChangeEvent(this));
     }
@@ -139,7 +139,7 @@ public class ExtendedCategoryAxis extends CategoryAxis {
      * @see #getSubLabelPaint()
      */
     public void setSubLabelPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.sublabelPaint = paint;
         notifyListeners(new AxisChangeEvent(this));
     }

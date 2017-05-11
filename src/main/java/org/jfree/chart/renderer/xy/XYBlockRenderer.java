@@ -63,7 +63,7 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.LookupPaintScale;
 import org.jfree.chart.renderer.PaintScale;
 import org.jfree.chart.ui.RectangleAnchor;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.Range;
 import org.jfree.data.general.DatasetUtils;
@@ -198,7 +198,7 @@ public class XYBlockRenderer extends AbstractXYItemRenderer
      * @see #getBlockAnchor()
      */
     public void setBlockAnchor(RectangleAnchor anchor) {
-        ParamChecks.nullNotPermitted(anchor, "anchor");
+        Args.nullNotPermitted(anchor, "anchor");
         if (this.blockAnchor.equals(anchor)) {
             return;  // no change
         }
@@ -229,7 +229,7 @@ public class XYBlockRenderer extends AbstractXYItemRenderer
      * @since 1.0.4
      */
     public void setPaintScale(PaintScale scale) {
-        ParamChecks.nullNotPermitted(scale, "scale");
+        Args.nullNotPermitted(scale, "scale");
         this.paintScale = scale;
         fireChangeEvent();
     }

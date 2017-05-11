@@ -49,7 +49,7 @@
 package org.jfree.data;
 
 import java.util.Arrays;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.data.general.DatasetUtils;
 
 /**
@@ -99,7 +99,7 @@ public abstract class DataUtils {
      * @since 1.0.13
      */
     public static double[][] clone(double[][] source) {
-        ParamChecks.nullNotPermitted(source, "source");
+        Args.nullNotPermitted(source, "source");
         double[][] clone = new double[source.length][];
         for (int i = 0; i < source.length; i++) {
             if (source[i] != null) {
@@ -121,7 +121,7 @@ public abstract class DataUtils {
      * @return The total of the values in the specified column.
      */
     public static double calculateColumnTotal(Values2D data, int column) {
-        ParamChecks.nullNotPermitted(data, "data");
+        Args.nullNotPermitted(data, "data");
         double total = 0.0;
         int rowCount = data.getRowCount();
         for (int r = 0; r < rowCount; r++) {
@@ -147,7 +147,7 @@ public abstract class DataUtils {
      */
     public static double calculateColumnTotal(Values2D data, int column,
              int[] validRows) {
-        ParamChecks.nullNotPermitted(data, "data");
+        Args.nullNotPermitted(data, "data");
         double total = 0.0;
         int rowCount = data.getRowCount();
         for (int v = 0; v < validRows.length; v++) {
@@ -172,7 +172,7 @@ public abstract class DataUtils {
      * @return The total of the values in the specified row.
      */
     public static double calculateRowTotal(Values2D data, int row) {
-        ParamChecks.nullNotPermitted(data, "data");
+        Args.nullNotPermitted(data, "data");
         double total = 0.0;
         int columnCount = data.getColumnCount();
         for (int c = 0; c < columnCount; c++) {
@@ -198,7 +198,7 @@ public abstract class DataUtils {
      */
     public static double calculateRowTotal(Values2D data, int row,
              int[] validCols) {
-        ParamChecks.nullNotPermitted(data, "data");
+        Args.nullNotPermitted(data, "data");
         double total = 0.0;
         int colCount = data.getColumnCount();
         for (int v = 0; v < validCols.length; v++) {
@@ -222,7 +222,7 @@ public abstract class DataUtils {
      * @return An array of {@code double}.
      */
     public static Number[] createNumberArray(double[] data) {
-        ParamChecks.nullNotPermitted(data, "data");
+        Args.nullNotPermitted(data, "data");
         Number[] result = new Number[data.length];
         for (int i = 0; i < data.length; i++) {
             result[i] = new Double(data[i]);
@@ -239,7 +239,7 @@ public abstract class DataUtils {
      * @return An array of {@code double}.
      */
     public static Number[][] createNumberArray2D(double[][] data) {
-        ParamChecks.nullNotPermitted(data, "data");
+        Args.nullNotPermitted(data, "data");
         int l1 = data.length;
         Number[][] result = new Number[l1][];
         for (int i = 0; i < l1; i++) {
@@ -259,7 +259,7 @@ public abstract class DataUtils {
      * @return The cumulative percentages.
      */
     public static KeyedValues getCumulativePercentages(KeyedValues data) {
-        ParamChecks.nullNotPermitted(data, "data");
+        Args.nullNotPermitted(data, "data");
         DefaultKeyedValues result = new DefaultKeyedValues();
         double total = 0.0;
         for (int i = 0; i < data.getItemCount(); i++) {

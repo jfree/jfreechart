@@ -67,7 +67,7 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 
 /**
@@ -124,8 +124,8 @@ public class XYImageAnnotation extends AbstractXYAnnotation
     public XYImageAnnotation(double x, double y, Image image,
             RectangleAnchor anchor) {
         super();
-        ParamChecks.nullNotPermitted(image, "image");
-        ParamChecks.nullNotPermitted(anchor, "anchor");
+        Args.nullNotPermitted(image, "image");
+        Args.nullNotPermitted(anchor, "anchor");
         this.x = x;
         this.y = y;
         this.image = image;

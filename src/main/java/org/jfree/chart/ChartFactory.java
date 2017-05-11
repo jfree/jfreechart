@@ -199,7 +199,7 @@ import org.jfree.chart.urls.StandardPieURLGenerator;
 import org.jfree.chart.urls.StandardXYURLGenerator;
 import org.jfree.chart.urls.StandardXYZURLGenerator;
 import org.jfree.chart.urls.XYURLGenerator;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SortOrder;
 import org.jfree.chart.util.TableOrder;
 import org.jfree.data.category.CategoryDataset;
@@ -251,7 +251,7 @@ public abstract class ChartFactory {
      * @since 1.0.11
      */
     public static void setChartTheme(ChartTheme theme) {
-        ParamChecks.nullNotPermitted(theme, "theme");
+        Args.nullNotPermitted(theme, "theme");
         currentTheme = theme;
 
         // here we do a check to see if the user is installing the "Legacy"
@@ -674,7 +674,7 @@ public abstract class ChartFactory {
             CategoryDataset dataset, TableOrder order, boolean legend,
             boolean tooltips, boolean urls) {
 
-        ParamChecks.nullNotPermitted(order, "order");
+        Args.nullNotPermitted(order, "order");
         MultiplePiePlot plot = new MultiplePiePlot(dataset);
         plot.setDataExtractOrder(order);
         plot.setBackgroundPaint(null);
@@ -718,7 +718,7 @@ public abstract class ChartFactory {
     public static JFreeChart createPieChart3D(String title, PieDataset dataset,
             boolean legend, boolean tooltips, Locale locale) {
 
-        ParamChecks.nullNotPermitted(locale, "locale");
+        Args.nullNotPermitted(locale, "locale");
         PiePlot3D plot = new PiePlot3D(dataset);
         plot.setInsets(new RectangleInsets(0.0, 5.0, 5.0, 5.0));
         if (tooltips) {
@@ -798,7 +798,7 @@ public abstract class ChartFactory {
             CategoryDataset dataset, TableOrder order, boolean legend,
             boolean tooltips, boolean urls) {
 
-        ParamChecks.nullNotPermitted(order, "order");
+        Args.nullNotPermitted(order, "order");
         MultiplePiePlot plot = new MultiplePiePlot(dataset);
         plot.setDataExtractOrder(order);
         plot.setBackgroundPaint(null);
@@ -883,7 +883,7 @@ public abstract class ChartFactory {
             CategoryDataset dataset, PlotOrientation orientation,
             boolean legend, boolean tooltips, boolean urls) {
 
-        ParamChecks.nullNotPermitted(orientation, "orientation");
+        Args.nullNotPermitted(orientation, "orientation");
         CategoryAxis categoryAxis = new CategoryAxis(categoryAxisLabel);
         ValueAxis valueAxis = new NumberAxis(valueAxisLabel);
 
@@ -973,7 +973,7 @@ public abstract class ChartFactory {
             CategoryDataset dataset, PlotOrientation orientation,
             boolean legend, boolean tooltips, boolean urls) {
 
-        ParamChecks.nullNotPermitted(orientation, "orientation");
+        Args.nullNotPermitted(orientation, "orientation");
 
         CategoryAxis categoryAxis = new CategoryAxis(domainAxisLabel);
         ValueAxis valueAxis = new NumberAxis(rangeAxisLabel);
@@ -1047,7 +1047,7 @@ public abstract class ChartFactory {
             CategoryDataset dataset, PlotOrientation orientation,
             boolean legend, boolean tooltips, boolean urls) {
 
-        ParamChecks.nullNotPermitted(orientation, "orientation");
+        Args.nullNotPermitted(orientation, "orientation");
         CategoryAxis categoryAxis = new CategoryAxis(categoryAxisLabel);
         categoryAxis.setCategoryMargin(0.0);
 
@@ -1124,7 +1124,7 @@ public abstract class ChartFactory {
             CategoryDataset dataset, PlotOrientation orientation,
             boolean legend, boolean tooltips, boolean urls) {
 
-        ParamChecks.nullNotPermitted(orientation, "orientation");
+        Args.nullNotPermitted(orientation, "orientation");
         CategoryAxis categoryAxis = new CategoryAxis(categoryAxisLabel);
         categoryAxis.setCategoryMargin(0.0);
         ValueAxis valueAxis = new NumberAxis(valueAxisLabel);
@@ -1198,7 +1198,7 @@ public abstract class ChartFactory {
             CategoryDataset dataset, PlotOrientation orientation,
             boolean legend, boolean tooltips, boolean urls) {
 
-        ParamChecks.nullNotPermitted(orientation, "orientation");
+        Args.nullNotPermitted(orientation, "orientation");
         CategoryAxis categoryAxis = new CategoryAxis(categoryAxisLabel);
         ValueAxis valueAxis = new NumberAxis(valueAxisLabel);
 
@@ -1319,7 +1319,7 @@ public abstract class ChartFactory {
             CategoryDataset dataset, PlotOrientation orientation,
             boolean legend, boolean tooltips, boolean urls) {
 
-        ParamChecks.nullNotPermitted(orientation, "orientation");
+        Args.nullNotPermitted(orientation, "orientation");
         CategoryAxis categoryAxis = new CategoryAxis(categoryAxisLabel);
         categoryAxis.setCategoryMargin(0.0);
 
@@ -1441,7 +1441,7 @@ public abstract class ChartFactory {
             String yAxisLabel, XYDataset dataset, PlotOrientation orientation,
             boolean legend, boolean tooltips, boolean urls) {
 
-        ParamChecks.nullNotPermitted(orientation, "orientation");
+        Args.nullNotPermitted(orientation, "orientation");
         NumberAxis xAxis = new NumberAxis(xAxisLabel);
         xAxis.setAutoRangeIncludesZero(false);
         NumberAxis yAxis = new NumberAxis(yAxisLabel);
@@ -1521,7 +1521,7 @@ public abstract class ChartFactory {
             PlotOrientation orientation, boolean legend, boolean tooltips,
             boolean urls) {
 
-        ParamChecks.nullNotPermitted(orientation, "orientation");
+        Args.nullNotPermitted(orientation, "orientation");
         ValueAxis domainAxis;
         if (dateAxis) {
             domainAxis = new DateAxis(xAxisLabel);
@@ -1605,7 +1605,7 @@ public abstract class ChartFactory {
             String yAxisLabel, XYDataset dataset, PlotOrientation orientation,
             boolean legend, boolean tooltips, boolean urls) {
 
-        ParamChecks.nullNotPermitted(orientation, "orientation");
+        Args.nullNotPermitted(orientation, "orientation");
         NumberAxis xAxis = new NumberAxis(xAxisLabel);
         xAxis.setAutoRangeIncludesZero(false);
         NumberAxis yAxis = new NumberAxis(yAxisLabel);
@@ -1676,7 +1676,7 @@ public abstract class ChartFactory {
             PlotOrientation orientation, boolean legend, boolean tooltips,
             boolean urls) {
 
-        ParamChecks.nullNotPermitted(orientation, "orientation");
+        Args.nullNotPermitted(orientation, "orientation");
         NumberAxis xAxis = new NumberAxis(xAxisLabel);
         xAxis.setAutoRangeIncludesZero(false);
         xAxis.setLowerMargin(0.0);
@@ -1743,7 +1743,7 @@ public abstract class ChartFactory {
             String yAxisLabel, XYDataset dataset, PlotOrientation orientation,
             boolean legend, boolean tooltips, boolean urls) {
 
-        ParamChecks.nullNotPermitted(orientation, "orientation");
+        Args.nullNotPermitted(orientation, "orientation");
         NumberAxis xAxis = new NumberAxis(xAxisLabel);
         xAxis.setAutoRangeIncludesZero(false);
         NumberAxis yAxis = new NumberAxis(yAxisLabel);
@@ -1801,7 +1801,7 @@ public abstract class ChartFactory {
             String yAxisLabel, XYDataset dataset, PlotOrientation orientation,
             boolean legend, boolean tooltips, boolean urls) {
 
-        ParamChecks.nullNotPermitted(orientation, "orientation");
+        Args.nullNotPermitted(orientation, "orientation");
         DateAxis xAxis = new DateAxis(xAxisLabel);
         NumberAxis yAxis = new NumberAxis(yAxisLabel);
         yAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
@@ -1868,7 +1868,7 @@ public abstract class ChartFactory {
             PlotOrientation orientation, boolean legend, boolean tooltips,
             boolean urls) {
 
-        ParamChecks.nullNotPermitted(orientation, "orientation");
+        Args.nullNotPermitted(orientation, "orientation");
         NumberAxis xAxis = new NumberAxis(xAxisLabel);
         xAxis.setAutoRangeIncludesZero(false);
         NumberAxis yAxis = new NumberAxis(yAxisLabel);
@@ -2079,7 +2079,7 @@ public abstract class ChartFactory {
             String yAxisLabel, XYZDataset dataset, PlotOrientation orientation,
             boolean legend, boolean tooltips, boolean urls) {
 
-        ParamChecks.nullNotPermitted(orientation, "orientation");
+        Args.nullNotPermitted(orientation, "orientation");
         NumberAxis xAxis = new NumberAxis(xAxisLabel);
         xAxis.setAutoRangeIncludesZero(false);
         NumberAxis yAxis = new NumberAxis(yAxisLabel);
@@ -2146,7 +2146,7 @@ public abstract class ChartFactory {
             PlotOrientation orientation, boolean legend, boolean tooltips,
             boolean urls) {
 
-        ParamChecks.nullNotPermitted(orientation, "orientation");
+        Args.nullNotPermitted(orientation, "orientation");
         NumberAxis xAxis = new NumberAxis(xAxisLabel);
         xAxis.setAutoRangeIncludesZero(false);
         ValueAxis yAxis = new NumberAxis(yAxisLabel);
@@ -2288,7 +2288,7 @@ public abstract class ChartFactory {
             WaferMapDataset dataset, PlotOrientation orientation,
             boolean legend, boolean tooltips, boolean urls) {
 
-        ParamChecks.nullNotPermitted(orientation, "orientation");
+        Args.nullNotPermitted(orientation, "orientation");
         WaferMapPlot plot = new WaferMapPlot(dataset);
         WaferMapRenderer renderer = new WaferMapRenderer();
         plot.setRenderer(renderer);

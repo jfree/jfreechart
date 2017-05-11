@@ -68,7 +68,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.DomainInfo;
@@ -143,7 +143,7 @@ public class DefaultTableXYDataset extends AbstractIntervalXYDataset
      * @param series  the series ({@code null} not permitted).
      */
     public void addSeries(XYSeries series) {
-        ParamChecks.nullNotPermitted(series, "series");
+        Args.nullNotPermitted(series, "series");
         if (series.getAllowDuplicateXValues()) {
             throw new IllegalArgumentException(
                 "Cannot accept XYSeries that allow duplicate values. "
@@ -163,7 +163,7 @@ public class DefaultTableXYDataset extends AbstractIntervalXYDataset
      * @param series  the series ({@code null} not permitted).
      */
     private void updateXPoints(XYSeries series) {
-        ParamChecks.nullNotPermitted(series, "series");
+        Args.nullNotPermitted(series, "series");
         HashSet seriesXPoints = new HashSet();
         boolean savedState = this.propagateEvents;
         this.propagateEvents = false;
@@ -378,7 +378,7 @@ public class DefaultTableXYDataset extends AbstractIntervalXYDataset
      * @param series  the series ({@code null} not permitted).
      */
     public void removeSeries(XYSeries series) {
-        ParamChecks.nullNotPermitted(series, "series");
+        Args.nullNotPermitted(series, "series");
         if (this.data.contains(series)) {
             series.removeChangeListener(this);
             this.data.remove(series);
@@ -422,7 +422,7 @@ public class DefaultTableXYDataset extends AbstractIntervalXYDataset
      * @param x  the x-value.
      */
     public void removeAllValuesForX(Number x) {
-        ParamChecks.nullNotPermitted(x, "x");
+        Args.nullNotPermitted(x, "x");
         boolean savedState = this.propagateEvents;
         this.propagateEvents = false;
         for (int s = 0; s < this.data.size(); s++) {

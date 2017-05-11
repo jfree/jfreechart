@@ -57,7 +57,7 @@ import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.util.Date;
 
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.data.xy.XYDataset;
 
 /**
@@ -101,10 +101,10 @@ public class TimeSeriesURLGenerator implements XYURLGenerator, Serializable {
     public TimeSeriesURLGenerator(DateFormat dateFormat, String prefix,
             String seriesParameterName, String itemParameterName) {
 
-        ParamChecks.nullNotPermitted(dateFormat, "dateFormat");
-        ParamChecks.nullNotPermitted(prefix, "prefix");
-        ParamChecks.nullNotPermitted(seriesParameterName, "seriesParameterName");
-        ParamChecks.nullNotPermitted(itemParameterName, "itemParameterName");
+        Args.nullNotPermitted(dateFormat, "dateFormat");
+        Args.nullNotPermitted(prefix, "prefix");
+        Args.nullNotPermitted(seriesParameterName, "seriesParameterName");
+        Args.nullNotPermitted(itemParameterName, "itemParameterName");
         this.dateFormat = (DateFormat) dateFormat.clone();
         this.prefix = prefix;
         this.seriesParameterName = seriesParameterName;

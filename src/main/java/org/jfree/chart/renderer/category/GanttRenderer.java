@@ -74,7 +74,7 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.gantt.GanttCategoryDataset;
@@ -143,7 +143,7 @@ public class GanttRenderer extends IntervalBarRenderer
      * @see #getCompletePaint()
      */
     public void setCompletePaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.completePaint = paint;
         fireChangeEvent();
     }
@@ -168,7 +168,7 @@ public class GanttRenderer extends IntervalBarRenderer
      * @see #getIncompletePaint()
      */
     public void setIncompletePaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.incompletePaint = paint;
         fireChangeEvent();
     }

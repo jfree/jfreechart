@@ -57,7 +57,7 @@ import java.io.PrintWriter;
 import org.jfree.chart.ChartRenderingInfo;
 import org.jfree.chart.entity.ChartEntity;
 import org.jfree.chart.entity.EntityCollection;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.StringUtils;
 
 /**
@@ -211,7 +211,7 @@ public class ImageMapUtils {
      * @since 1.0.9
      */
     public static String htmlEscape(String input) {
-        ParamChecks.nullNotPermitted(input, "input");
+        Args.nullNotPermitted(input, "input");
         StringBuilder result = new StringBuilder();
         int length = input.length();
         for (int i = 0; i < length; i++) {
@@ -252,7 +252,7 @@ public class ImageMapUtils {
      * @since 1.0.13
      */
     public static String javascriptEscape(String input) {
-        ParamChecks.nullNotPermitted(input, "input");
+        Args.nullNotPermitted(input, "input");
         StringBuilder result = new StringBuilder();
         int length = input.length();
         for (int i = 0; i < length; i++) {

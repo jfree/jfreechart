@@ -50,7 +50,7 @@
 
 package org.jfree.data.time;
 
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
@@ -77,7 +77,7 @@ public class MovingAverage {
             TimeSeriesCollection source, String suffix, int periodCount,
             int skip) {
 
-        ParamChecks.nullNotPermitted(source, "source");
+        Args.nullNotPermitted(source, "source");
         if (periodCount < 1) {
             throw new IllegalArgumentException("periodCount must be greater "
                     + "than or equal to 1.");
@@ -110,7 +110,7 @@ public class MovingAverage {
     public static TimeSeries createMovingAverage(TimeSeries source,
             String name, int periodCount, int skip) {
 
-        ParamChecks.nullNotPermitted(source, "source");
+        Args.nullNotPermitted(source, "source");
         if (periodCount < 1) {
             throw new IllegalArgumentException("periodCount must be greater " 
                     + "than or equal to 1.");
@@ -191,7 +191,7 @@ public class MovingAverage {
     public static TimeSeries createPointMovingAverage(TimeSeries source,
             String name, int pointCount) {
 
-        ParamChecks.nullNotPermitted(source, "source");
+        Args.nullNotPermitted(source, "source");
         if (pointCount < 2) {
             throw new IllegalArgumentException("periodCount must be greater " 
                     + "than or equal to 2.");
@@ -257,7 +257,7 @@ public class MovingAverage {
     public static XYDataset createMovingAverage(XYDataset source,
             String suffix, double period, double skip) {
 
-        ParamChecks.nullNotPermitted(source, "source");
+        Args.nullNotPermitted(source, "source");
         XYSeriesCollection result = new XYSeriesCollection();
         for (int i = 0; i < source.getSeriesCount(); i++) {
             XYSeries s = createMovingAverage(source, i, source.getSeriesKey(i)
@@ -282,7 +282,7 @@ public class MovingAverage {
     public static XYSeries createMovingAverage(XYDataset source,
             int series, String name, double period, double skip) {
 
-        ParamChecks.nullNotPermitted(source, "source");
+        Args.nullNotPermitted(source, "source");
         if (period < Double.MIN_VALUE) {
             throw new IllegalArgumentException("period must be positive.");
         }
