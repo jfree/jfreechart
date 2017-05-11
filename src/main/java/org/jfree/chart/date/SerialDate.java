@@ -665,10 +665,8 @@ public abstract class SerialDate implements Comparable, Serializable,
      *
      * @return a new serial date.
      */
-    public SerialDate getEndOfCurrentMonth(final SerialDate base) {
-        final int last = SerialDate.lastDayOfMonth(
-            base.getMonth(), base.getYYYY()
-        );
+    public SerialDate getEndOfCurrentMonth(SerialDate base) {
+        int last = SerialDate.lastDayOfMonth(base.getMonth(), base.getYYYY());
         return SerialDate.createInstance(last, base.getMonth(), base.getYYYY());
     }
 
@@ -681,7 +679,7 @@ public abstract class SerialDate implements Comparable, Serializable,
      *
      * @return a string corresponding to the week-in-the-month code.
      */
-    public static String weekInMonthToString(final int count) {
+    public static String weekInMonthToString(int count) {
 
         switch (count) {
             case SerialDate.FIRST_WEEK_IN_MONTH : return "First";
@@ -704,7 +702,7 @@ public abstract class SerialDate implements Comparable, Serializable,
      *
      * @return a string representing the supplied 'relative'.
      */
-    public static String relativeToString(final int relative) {
+    public static String relativeToString(int relative) {
 
         switch (relative) {
             case SerialDate.PRECEDING : return "Preceding";
@@ -725,8 +723,7 @@ public abstract class SerialDate implements Comparable, Serializable,
      *
      * @return An instance of {@link SerialDate}.
      */
-    public static SerialDate createInstance(final int day, final int month, 
-                                            final int yyyy) {
+    public static SerialDate createInstance(int day, int month, int yyyy) {
         return new SpreadsheetDate(day, month, yyyy);
     }
 
@@ -738,7 +735,7 @@ public abstract class SerialDate implements Comparable, Serializable,
      *
      * @return a instance of SerialDate.
      */
-    public static SerialDate createInstance(final int serial) {
+    public static SerialDate createInstance(int serial) {
         return new SpreadsheetDate(serial);
     }
 
@@ -749,13 +746,12 @@ public abstract class SerialDate implements Comparable, Serializable,
      *
      * @return a instance of SerialDate.
      */
-    public static SerialDate createInstance(final java.util.Date date) {
+    public static SerialDate createInstance(java.util.Date date) {
 
-        final GregorianCalendar calendar = new GregorianCalendar();
+        GregorianCalendar calendar = new GregorianCalendar();
         calendar.setTime(date);
-        return new SpreadsheetDate(calendar.get(Calendar.DATE),
-                                   calendar.get(Calendar.MONTH) + 1,
-                                   calendar.get(Calendar.YEAR));
+        return new SpreadsheetDate(calendar.get(Calendar.DATE), 
+                calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.YEAR));
 
     }
 
@@ -939,7 +935,7 @@ public abstract class SerialDate implements Comparable, Serializable,
      * @return the latest date that falls on the specified day-of-the-week and
      *         is BEFORE this date.
      */
-    public SerialDate getPreviousDayOfWeek(final int targetDOW) {
+    public SerialDate getPreviousDayOfWeek(int targetDOW) {
         return getPreviousDayOfWeek(targetDOW, this);
     }
 
@@ -952,7 +948,7 @@ public abstract class SerialDate implements Comparable, Serializable,
      * @return the earliest date that falls on the specified day-of-the-week
      *         and is AFTER this date.
      */
-    public SerialDate getFollowingDayOfWeek(final int targetDOW) {
+    public SerialDate getFollowingDayOfWeek(int targetDOW) {
         return getFollowingDayOfWeek(targetDOW, this);
     }
 
@@ -963,7 +959,7 @@ public abstract class SerialDate implements Comparable, Serializable,
      *
      * @return the nearest date that falls on the specified day-of-the-week.
      */
-    public SerialDate getNearestDayOfWeek(final int targetDOW) {
+    public SerialDate getNearestDayOfWeek(int targetDOW) {
         return getNearestDayOfWeek(targetDOW, this);
     }
 
