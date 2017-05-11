@@ -1,7 +1,7 @@
 package org.jfree.chart.util;
 
 /**
- * A list of <code>Boolean</code> objects.
+ * A list of {@code Boolean} objects.
  */
 public class BooleanList extends AbstractObjectList {
 
