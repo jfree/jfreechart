@@ -1,25 +1,46 @@
-package org.jfree.chart.util;
+/* ===========================================================
+ * JFreeChart : a free chart library for the Java(tm) platform
+ * ===========================================================
+ *
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ *
+ * Project Info:  http://www.jfree.org/jfreechart/index.html
+ *
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
+ * (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+ * License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
+ *
+ * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
+ * Other names may be trademarks of their respective owners.]
+ *
+ */
 
-import java.io.ObjectStreamException;
-import java.io.Serializable;
+package org.jfree.chart.util;
 
 /**
  * Used to indicate the processing order for a table (by row or by column).
  */
-public final class TableOrder implements Serializable {
+public enum TableOrder {
 
-    /** For serialization. */
-    private static final long serialVersionUID = 525193294068177057L;
-    
     /** By row. */
-    public static final TableOrder BY_ROW = new TableOrder("TableOrder.BY_ROW");
+    BY_ROW("TableOrder.BY_ROW"),
 
     /** By column. */
-    public static final TableOrder BY_COLUMN 
-        = new TableOrder("TableOrder.BY_COLUMN");
+    BY_COLUMN("TableOrder.BY_COLUMN");
 
     /** The name. */
-    private String name;
+    private final String name;
 
     /**
      * Private constructor.
@@ -35,57 +56,9 @@ public final class TableOrder implements Serializable {
      *
      * @return The string.
      */
+    @Override
     public String toString() {
         return this.name;
     }
-
-    /**
-     * Returns {@code true} if this object is equal to the specified 
-     * object, and {@code false} otherwise.
-     *
-     * @param obj  the other object.
-     *
-     * @return A boolean.
-     */
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (!(obj instanceof TableOrder)) {
-            return false;
-        }
-        TableOrder that = (TableOrder) obj;
-        if (!this.name.equals(that.name)) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * Returns a hash code value for the object.
-     *
-     * @return The hashcode
-     */
-    public int hashCode() {
-        return this.name.hashCode();
-    }
-
-    /**
-     * Ensures that serialization returns the unique instances.
-     * 
-     * @return The object.
-     * 
-     * @throws ObjectStreamException if there is a problem.
-     */
-    private Object readResolve() throws ObjectStreamException {
-        if (this.equals(TableOrder.BY_ROW)) {
-            return TableOrder.BY_ROW;
-        }
-        else if (this.equals(TableOrder.BY_COLUMN)) {
-            return TableOrder.BY_COLUMN;
-        }
-        return null;
-    }
-    
 }
 
