@@ -143,7 +143,7 @@ public class TextUtils {
 
     /**
      * Creates a new text block from the given string, breaking the
-     * text into lines so that the <code>maxWidth</code> value is
+     * text into lines so that the {@code maxWidth} value is
      * respected.
      *
      * @param text  the text.
@@ -199,10 +199,10 @@ public class TextUtils {
 
     /**
      * Returns the character index of the next line break.  If the next
-     * character is wider than <code>width</code> this method will return
-     * <code>start</code> - the caller should check for this case.
+     * character is wider than {@code width]} this method will return
+     * {@code start} - the caller should check for this case.
      *
-     * @param text  the text (<code>null</code> not permitted).
+     * @param text  the text ({@code null} not permitted).
      * @param start  the start index.
      * @param width  the target display width.
      * @param iterator  the word break iterator.
@@ -255,12 +255,12 @@ public class TextUtils {
     /**
      * Returns the bounds for the specified text.
      *
-     * @param text  the text (<code>null</code> permitted).
-     * @param g2  the graphics context (not <code>null</code>).
-     * @param fm  the font metrics (not <code>null</code>).
+     * @param text  the text ({@code null} permitted).
+     * @param g2  the graphics context (not {@code null}).
+     * @param fm  the font metrics (not {@code null}).
      *
-     * @return The text bounds (<code>null</code> if the <code>text</code>
-     *         argument is <code>null</code>).
+     * @return The text bounds ({@code null} if the {@code text}
+     *         argument is {@code null}).
      */
     public static Rectangle2D getTextBounds(String text, Graphics2D g2, 
             FontMetrics fm) {
@@ -350,10 +350,10 @@ public class TextUtils {
      * (x, y) and draw the string, then the anchor point should coincide with
      * the (x, y) point.
      *
-     * @param g2  the graphics device (not <code>null</code>).
+     * @param g2  the graphics device (not {@code null}).
      * @param text  the text.
      * @param anchor  the anchor point.
-     * @param textBounds  the text bounds (if not <code>null</code>, this
+     * @param textBounds  the text bounds (if not {@code null}, this
      *                    object will be updated by this method to match the
      *                    string bounds).
      *
@@ -540,7 +540,7 @@ public class TextUtils {
      * Returns a shape that represents the bounds of the string after the
      * specified rotation has been applied.
      *
-     * @param text  the text (<code>null</code> permitted).
+     * @param text  the text ({@code null} permitted).
      * @param g2  the graphics device.
      * @param x  the x coordinate for the anchor point.
      * @param y  the y coordinate for the anchor point.
@@ -548,7 +548,7 @@ public class TextUtils {
      * @param angle  the angle.
      * @param rotationAnchor  the rotation anchor.
      *
-     * @return The bounds (possibly <code>null</code>).
+     * @return The bounds (possibly {@code null}).
      */
     public static Shape calculateRotatedStringBounds(String text, Graphics2D g2, 
             float x, float y, TextAnchor textAnchor, 
@@ -574,7 +574,7 @@ public class TextUtils {
      * (x, y) and draw the string, then the anchor point should coincide with
      * the (x, y) point.
      *
-     * @param g2  the graphics device (not <code>null</code>).
+     * @param g2  the graphics device (not {@code null}).
      * @param text  the text.
      * @param anchor  the anchor point.
      *
@@ -627,7 +627,7 @@ public class TextUtils {
     /**
      * A utility method that calculates the rotation anchor offsets for a
      * string.  These offsets are relative to the text starting coordinate
-     * (<code>BASELINE_LEFT</code>).
+     * ({@code BASELINE_LEFT}).
      *
      * @param g2  the graphics device.
      * @param text  the text.
@@ -685,7 +685,7 @@ public class TextUtils {
      * Returns a shape that represents the bounds of the string after the
      * specified rotation has been applied.
      *
-     * @param text  the text (<code>null</code> permitted).
+     * @param text  the text ({@code null} permitted).
      * @param g2  the graphics device.
      * @param textX  the x coordinate for the text.
      * @param textY  the y coordinate for the text.
@@ -693,8 +693,8 @@ public class TextUtils {
      * @param rotateX  the x coordinate for the rotation point.
      * @param rotateY  the y coordinate for the rotation point.
      *
-     * @return The bounds (<code>null</code> if <code>text</code> is
-     *         <code>null</code> or has zero length).
+     * @return The bounds ({@code null} if {@code text} is
+     *         {@code null} or has zero length).
      */
     public static Shape calculateRotatedStringBounds(String text, Graphics2D g2,
             float textX, float textY, double angle, float rotateX, 
@@ -750,9 +750,9 @@ public class TextUtils {
     /**
      * Sets the flag that controls whether or not a workaround is used for
      * drawing rotated strings.  The related bug is on Sun's bug parade
-     * (id 4312117) and the workaround involves using a <code>TextLayout</code>
+     * (id 4312117) and the workaround involves using a {@code TextLayout}
      * instance to draw the text instead of calling the
-     * <code>drawString()</code> method in the <code>Graphics2D</code> class.
+     * {@code drawString()} method in the {@code Graphics2D} class.
      *
      * @param use  the new flag value.
      */
@@ -763,7 +763,7 @@ public class TextUtils {
     /**
      * Returns the flag that controls whether or not strings are drawn using
      * the current font attributes (such as underlining, strikethrough etc).
-     * The default value is <code>false</code>.
+     * The default value is {@code false}.
      * 
      * @return A boolean. 
      * 
