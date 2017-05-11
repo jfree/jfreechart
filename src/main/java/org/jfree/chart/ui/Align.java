@@ -103,10 +103,10 @@ public final class Align {
     }
     
     /**
-     * Aligns one rectangle (<code>rect</code>) relative to another rectangle (<code>frame</code>).
+     * Aligns one rectangle ({@code rect}) relative to another rectangle ({@code frame}).
      *
-     * @param rect  the rectangle to be aligned (<code>null</code> not permitted).
-     * @param frame  the reference frame (<code>null</code> not permitted).
+     * @param rect  the rectangle to be aligned ({@code null} not permitted).
+     * @param frame  the reference frame ({@code null} not permitted).
      * @param align  the alignment code.
      */
     public static void align(Rectangle2D rect, Rectangle2D frame, int align) {
