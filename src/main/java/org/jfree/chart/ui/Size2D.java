@@ -61,7 +61,7 @@ public class Size2D implements Cloneable, PublicCloneable, Serializable {
      * @param width  the width.
      * @param height  the height.
      */
-    public Size2D(final double width, final double height) {
+    public Size2D(double width, double height) {
         this.width = width;
         this.height = height;
     }
@@ -80,7 +80,7 @@ public class Size2D implements Cloneable, PublicCloneable, Serializable {
      * 
      * @param width  the width.
      */
-    public void setWidth(final double width) {
+    public void setWidth(double width) {
         this.width = width;
     }
 
@@ -98,7 +98,7 @@ public class Size2D implements Cloneable, PublicCloneable, Serializable {
      * 
      * @param height  the height.
      */
-    public void setHeight(final double height) {
+    public void setHeight(double height) {
         this.height = height;
     }
     
@@ -119,14 +119,14 @@ public class Size2D implements Cloneable, PublicCloneable, Serializable {
      * 
      * @return A boolean.
      */
-    public boolean equals(final Object obj) {
+    public boolean equals(Object obj) {
         if (this == obj) {
             return true;
         }
         if (!(obj instanceof Size2D)) {
             return false;
         }
-        final Size2D that = (Size2D) obj;
+        Size2D that = (Size2D) obj;
         if (this.width != that.width) {
             return false;
         }
