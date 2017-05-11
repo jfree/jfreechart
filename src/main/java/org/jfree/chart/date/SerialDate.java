@@ -211,7 +211,7 @@ public abstract class SerialDate implements Comparable, Serializable,
      *
      * @param s  a string representing the day of the week.
      *
-     * @return <code>-1</code> if the string is not convertable, the day of 
+     * @return {@code -1} if the string is not convertable, the day of 
      *         the week otherwise.
      */
     public static int stringToWeekdayCode(String s) {
@@ -391,7 +391,7 @@ public abstract class SerialDate implements Comparable, Serializable,
      *
      * @param s  the string to parse.
      *
-     * @return <code>-1</code> if the string is not parseable, the month of the
+     * @return {@code -1} if the string is not parseable, the month of the
      *         year otherwise.
      */
     public static int stringToMonthCode(String s) {
@@ -772,7 +772,7 @@ public abstract class SerialDate implements Comparable, Serializable,
      * Returns a java.util.Date.  Since java.util.Date has more precision than
      * SerialDate, we need to define a convention for the 'time of day'.
      *
-     * @return this as <code>java.util.Date</code>.
+     * @return this as {@code java.util.Date}.
      */
     public abstract java.util.Date toDate();
 
@@ -781,7 +781,7 @@ public abstract class SerialDate implements Comparable, Serializable,
      * required that a date have a description, but for some applications it 
      * is useful.
      *
-     * @return The description (possibly <code>null</code>).
+     * @return The description (possibly {@code null}).
      */
     public String getDescription() {
         return this.description;
@@ -790,10 +790,10 @@ public abstract class SerialDate implements Comparable, Serializable,
     /**
      * Sets the description for the date.
      *
-     * @param description  the description for this date (<code>null</code> 
+     * @param description  the description for this date ({@code null}
      *                     permitted).
      */
-    public void setDescription(final String description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
@@ -854,7 +854,7 @@ public abstract class SerialDate implements Comparable, Serializable,
      *
      * @param other  the date being compared to.
      *
-     * @return <code>true</code> if this SerialDate represents the same date as 
+     * @return {@code true} if this SerialDate represents the same date as 
      *         the specified SerialDate.
      */
     public abstract boolean isOn(SerialDate other);
@@ -865,7 +865,7 @@ public abstract class SerialDate implements Comparable, Serializable,
      *
      * @param other  The date being compared to.
      *
-     * @return <code>true</code> if this SerialDate represents an earlier date 
+     * @return {@code true} if this SerialDate represents an earlier date 
      *         compared to the specified SerialDate.
      */
     public abstract boolean isBefore(SerialDate other);
@@ -876,7 +876,7 @@ public abstract class SerialDate implements Comparable, Serializable,
      *
      * @param other  the date being compared to.
      *
-     * @return <code>true</code> if this SerialDate represents the same date
+     * @return {@code true} if this SerialDate represents the same date
      *         as the specified SerialDate.
      */
     public abstract boolean isOnOrBefore(SerialDate other);
@@ -887,7 +887,7 @@ public abstract class SerialDate implements Comparable, Serializable,
      *
      * @param other  the date being compared to.
      *
-     * @return <code>true</code> if this SerialDate represents the same date
+     * @return {@code true} if this SerialDate represents the same date
      *         as the specified SerialDate.
      */
     public abstract boolean isAfter(SerialDate other);
@@ -898,13 +898,13 @@ public abstract class SerialDate implements Comparable, Serializable,
      *
      * @param other  the date being compared to.
      *
-     * @return <code>true</code> if this SerialDate represents the same date
+     * @return {@code true} if this SerialDate represents the same date
      *         as the specified SerialDate.
      */
     public abstract boolean isOnOrAfter(SerialDate other);
 
     /**
-     * Returns <code>true</code> if this {@link SerialDate} is within the 
+     * Returns {@code true} if this {@link SerialDate} is within the 
      * specified range (INCLUSIVE).  The date order of d1 and d2 is not 
      * important.
      *
@@ -916,7 +916,7 @@ public abstract class SerialDate implements Comparable, Serializable,
     public abstract boolean isInRange(SerialDate d1, SerialDate d2);
 
     /**
-     * Returns <code>true</code> if this {@link SerialDate} is within the 
+     * Returns {@code true} if this {@link SerialDate} is within the 
      * specified range (caller specifies whether or not the end-points are 
      * included).  The date order of d1 and d2 is not important.
      *
