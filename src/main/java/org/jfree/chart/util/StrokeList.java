@@ -52,7 +52,7 @@ public class StrokeList extends AbstractObjectList {
      *
      * @return The object.
      */
-    public Stroke getStroke(final int index) {
+    public Stroke getStroke(int index) {
         return (Stroke) get(index);
     }
 
@@ -62,7 +62,7 @@ public class StrokeList extends AbstractObjectList {
      * @param index  the index (zero-based).
      * @param stroke  the {@link Stroke}.
      */
-    public void setStroke(final int index, final Stroke stroke) {
+    public void setStroke(int index, Stroke stroke) {
         set(index, stroke);
     }
 
@@ -84,7 +84,8 @@ public class StrokeList extends AbstractObjectList {
      *
      * @return A boolean.
      */
-    public boolean equals(final Object o) {
+    @Override
+    public boolean equals(Object o) {
 
         if (o == null) {
             return false;
@@ -118,7 +119,7 @@ public class StrokeList extends AbstractObjectList {
      *
      * @throws IOException  if there is an I/O error.
      */
-    private void writeObject(final ObjectOutputStream stream) throws IOException {
+    private void writeObject(ObjectOutputStream stream) throws IOException {
 
         stream.defaultWriteObject();
         final int count = size();
@@ -144,12 +145,12 @@ public class StrokeList extends AbstractObjectList {
      * @throws IOException  if there is an I/O error.
      * @throws ClassNotFoundException  if there is a classpath problem.
      */
-    private void readObject(final ObjectInputStream stream) throws IOException, ClassNotFoundException {
+    private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
 
         stream.defaultReadObject();
-        final int count = stream.readInt();
+        int count = stream.readInt();
         for (int i = 0; i < count; i++) {
-            final int index = stream.readInt();
+            int index = stream.readInt();
             if (index != -1) {
                 setStroke(index, SerialUtils.readStroke(stream));
             }
