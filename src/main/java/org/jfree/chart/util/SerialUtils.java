@@ -65,26 +65,14 @@ public class SerialUtils {
     }
 
     /**
-     * Returns <code>true</code> if a class implements <code>Serializable</code>
-     * and <code>false</code> otherwise.
+     * Returns {@code true} if a class implements {@code Serializable}
+     * and {@code false} otherwise.
      *
      * @param c  the class.
      *
      * @return A boolean.
      */
-    public static boolean isSerializable(final Class c) {
-        /**
-        final Class[] interfaces = c.getInterfaces();
-        for (int i = 0; i < interfaces.length; i++) {
-            if (interfaces[i].equals(Serializable.class)) {
-                return true;
-            }
-        }
-        Class cc = c.getSuperclass();
-        if (cc != null) {
-            return isSerializable(cc);
-        }
-         */
+    public static boolean isSerializable(Class c) {
         return (Serializable.class.isAssignableFrom(c));
     }
 
@@ -92,34 +80,34 @@ public class SerialUtils {
      * Reads a {@code Paint} object that has been serialised by the
      * {@link #writePaint(Paint, ObjectOutputStream)} method.
      *
-     * @param stream  the input stream (<code>null</code> not permitted).
+     * @param stream  the input stream ({@code null} not permitted).
      *
-     * @return The paint object (possibly <code>null</code>).
+     * @return The paint object (possibly {@code null}).
      *
      * @throws IOException  if there is an I/O problem.
      * @throws ClassNotFoundException  if there is a problem loading a class.
      */
-    public static Paint readPaint(final ObjectInputStream stream)
+    public static Paint readPaint(ObjectInputStream stream)
         throws IOException, ClassNotFoundException {
 
         if (stream == null) {
             throw new IllegalArgumentException("Null 'stream' argument.");
         }
         Paint result = null;
-        final boolean isNull = stream.readBoolean();
+        boolean isNull = stream.readBoolean();
         if (!isNull) {
             final Class c = (Class) stream.readObject();
             if (isSerializable(c)) {
                 result = (Paint) stream.readObject();
             }
             else if (c.equals(GradientPaint.class)) {
-                final float x1 = stream.readFloat();
-                final float y1 = stream.readFloat();
-                final Color c1 = (Color) stream.readObject();
-                final float x2 = stream.readFloat();
-                final float y2 = stream.readFloat();
-                final Color c2 = (Color) stream.readObject();
-                final boolean isCyclic = stream.readBoolean();
+                float x1 = stream.readFloat();
+                float y1 = stream.readFloat();
+                Color c1 = (Color) stream.readObject();
+                float x2 = stream.readFloat();
+                float y2 = stream.readFloat();
+                Color c2 = (Color) stream.readObject();
+                boolean isCyclic = stream.readBoolean();
                 result = new GradientPaint(x1, y1, c1, x2, y2, c2, isCyclic);
             }
         }
@@ -128,15 +116,14 @@ public class SerialUtils {
     }
 
     /**
-     * Serialises a <code>Paint</code> object.
+     * Serialises a {@code Paint} object.
      *
-     * @param paint  the paint object (<code>null</code> permitted).
-     * @param stream  the output stream (<code>null</code> not permitted).
+     * @param paint  the paint object ({@code null} permitted).
+     * @param stream  the output stream ({@code null} not permitted).
      *
      * @throws IOException if there is an I/O error.
      */
-    public static void writePaint(final Paint paint,
-                                  final ObjectOutputStream stream)
+    public static void writePaint(Paint paint, ObjectOutputStream stream)
         throws IOException {
 
         if (stream == null) {
@@ -176,26 +163,25 @@ public class SerialUtils {
      * @throws IOException  if there is an I/O problem.
      * @throws ClassNotFoundException  if there is a problem loading a class.
      */
-    public static Stroke readStroke(final ObjectInputStream stream)
+    public static Stroke readStroke(ObjectInputStream stream)
         throws IOException, ClassNotFoundException {
 
         if (stream == null) {
             throw new IllegalArgumentException("Null 'stream' argument.");
         }
         Stroke result = null;
-        final boolean isNull = stream.readBoolean();
+        boolean isNull = stream.readBoolean();
         if (!isNull) {
-            final Class c = (Class) stream.readObject();
+            Class c = (Class) stream.readObject();
             if (c.equals(BasicStroke.class)) {
-                final float width = stream.readFloat();
-                final int cap = stream.readInt();
-                final int join = stream.readInt();
-                final float miterLimit = stream.readFloat();
-                final float[] dash = (float[]) stream.readObject();
-                final float dashPhase = stream.readFloat();
-                result = new BasicStroke(
-                    width, cap, join, miterLimit, dash, dashPhase
-                );
+                float width = stream.readFloat();
+                int cap = stream.readInt();
+                int join = stream.readInt();
+                float miterLimit = stream.readFloat();
+                float[] dash = (float[]) stream.readObject();
+                float dashPhase = stream.readFloat();
+                result = new BasicStroke(width, cap, join, miterLimit, dash, 
+                        dashPhase);
             }
             else {
                 result = (Stroke) stream.readObject();
@@ -206,19 +192,18 @@ public class SerialUtils {
     }
 
     /**
-     * Serialises a <code>Stroke</code> object.  This code handles the
-     * <code>BasicStroke</code> class which is the only <code>Stroke</code>
+     * Serialises a {@code Stroke} object.  This code handles the
+     * {@code BasicStroke} class which is the only {@code Stroke}
      * implementation provided by the JDK (and isn't directly
-     * <code>Serializable</code>).
+     * {@code Serializable}).
      *
-     * @param stroke  the stroke object (<code>null</code> permitted).
-     * @param stream  the output stream (<code>null</code> not permitted).
+     * @param stroke  the stroke object ({@code null} permitted).
+     * @param stream  the output stream ({@code null} not permitted).
      *
      * @throws IOException if there is an I/O error.
      */
-    public static void writeStroke(final Stroke stroke,
-                                   final ObjectOutputStream stream)
-        throws IOException {
+    public static void writeStroke(Stroke stroke, ObjectOutputStream stream)
+            throws IOException {
 
         if (stream == null) {
             throw new IllegalArgumentException("Null 'stream' argument.");
@@ -226,7 +211,7 @@ public class SerialUtils {
         if (stroke != null) {
             stream.writeBoolean(false);
             if (stroke instanceof BasicStroke) {
-                final BasicStroke s = (BasicStroke) stroke;
+                BasicStroke s = (BasicStroke) stroke;
                 stream.writeObject(BasicStroke.class);
                 stream.writeFloat(s.getLineWidth());
                 stream.writeInt(s.getEndCap());
@@ -234,13 +219,11 @@ public class SerialUtils {
                 stream.writeFloat(s.getMiterLimit());
                 stream.writeObject(s.getDashArray());
                 stream.writeFloat(s.getDashPhase());
-            }
-            else {
+            } else {
                 stream.writeObject(stroke.getClass());
                 stream.writeObject(stroke);
             }
-        }
-        else {
+        } else {
             stream.writeBoolean(true);
         }
     }
@@ -259,22 +242,22 @@ public class SerialUtils {
      * 
      * @since 1.0.17
      */
-    public static Composite readComposite(final ObjectInputStream stream)
-        throws IOException, ClassNotFoundException {
+    public static Composite readComposite(ObjectInputStream stream)
+            throws IOException, ClassNotFoundException {
 
         if (stream == null) {
             throw new IllegalArgumentException("Null 'stream' argument.");
         }
         Composite result = null;
-        final boolean isNull = stream.readBoolean();
+        boolean isNull = stream.readBoolean();
         if (!isNull) {
-            final Class c = (Class) stream.readObject();
+            Class c = (Class) stream.readObject();
             if (isSerializable(c)) {
                 result = (Composite) stream.readObject();
             }
             else if (c.equals(AlphaComposite.class)) {
-                final int rule = stream.readInt();
-                final float alpha = stream.readFloat();
+                int rule = stream.readInt();
+                float alpha = stream.readFloat();
                 result = AlphaComposite.getInstance(rule, alpha);
             }
         }
@@ -283,18 +266,17 @@ public class SerialUtils {
     }
 
     /**
-     * Serialises a <code>Composite</code> object.
+     * Serialises a {@code Composite} object.
      *
-     * @param composite  the composite object (<code>null</code> permitted).
-     * @param stream  the output stream (<code>null</code> not permitted).
+     * @param composite  the composite object ({@code null} permitted).
+     * @param stream  the output stream ({@code null} not permitted).
      *
      * @throws IOException if there is an I/O error.
      * 
      * @since 1.0.17
      */
-    public static void writeComposite(final Composite composite,
-                                      final ObjectOutputStream stream)
-        throws IOException {
+    public static void writeComposite(Composite composite, 
+            ObjectOutputStream stream) throws IOException {
 
         if (stream == null) {
             throw new IllegalArgumentException("Null 'stream' argument.");
@@ -306,74 +288,73 @@ public class SerialUtils {
                 stream.writeObject(composite);
             }
             else if (composite instanceof AlphaComposite) {
-                final AlphaComposite ac = (AlphaComposite) composite;
+                AlphaComposite ac = (AlphaComposite) composite;
                 stream.writeInt(ac.getRule());
                 stream.writeFloat(ac.getAlpha());
             }
-        }
-        else {
+        } else {
             stream.writeBoolean(true);
         }
     }
 
     /**
-     * Reads a <code>Shape</code> object that has been serialised by the
+     * Reads a {@code Shape} object that has been serialised by the
      * {@link #writeShape(Shape, ObjectOutputStream)} method.
      *
-     * @param stream  the input stream (<code>null</code> not permitted).
+     * @param stream  the input stream ({@code null} not permitted).
      *
-     * @return The shape object (possibly <code>null</code>).
+     * @return The shape object (possibly {@code null}).
      *
      * @throws IOException  if there is an I/O problem.
      * @throws ClassNotFoundException  if there is a problem loading a class.
      */
-    public static Shape readShape(final ObjectInputStream stream)
+    public static Shape readShape(ObjectInputStream stream)
         throws IOException, ClassNotFoundException {
 
         if (stream == null) {
             throw new IllegalArgumentException("Null 'stream' argument.");
         }
         Shape result = null;
-        final boolean isNull = stream.readBoolean();
+        boolean isNull = stream.readBoolean();
         if (!isNull) {
-            final Class c = (Class) stream.readObject();
+            Class c = (Class) stream.readObject();
             if (c.equals(Line2D.class)) {
-                final double x1 = stream.readDouble();
-                final double y1 = stream.readDouble();
-                final double x2 = stream.readDouble();
-                final double y2 = stream.readDouble();
+                double x1 = stream.readDouble();
+                double y1 = stream.readDouble();
+                double x2 = stream.readDouble();
+                double y2 = stream.readDouble();
                 result = new Line2D.Double(x1, y1, x2, y2);
             }
             else if (c.equals(Rectangle2D.class)) {
-                final double x = stream.readDouble();
-                final double y = stream.readDouble();
-                final double w = stream.readDouble();
-                final double h = stream.readDouble();
+                double x = stream.readDouble();
+                double y = stream.readDouble();
+                double w = stream.readDouble();
+                double h = stream.readDouble();
                 result = new Rectangle2D.Double(x, y, w, h);
             }
             else if (c.equals(Ellipse2D.class)) {
-                final double x = stream.readDouble();
-                final double y = stream.readDouble();
-                final double w = stream.readDouble();
-                final double h = stream.readDouble();
+                double x = stream.readDouble();
+                double y = stream.readDouble();
+                double w = stream.readDouble();
+                double h = stream.readDouble();
                 result = new Ellipse2D.Double(x, y, w, h);
             }
             else if (c.equals(Arc2D.class)) {
-                final double x = stream.readDouble();
-                final double y = stream.readDouble();
-                final double w = stream.readDouble();
-                final double h = stream.readDouble();
-                final double as = stream.readDouble(); // Angle Start
-                final double ae = stream.readDouble(); // Angle Extent
-                final int at = stream.readInt();       // Arc type
+                double x = stream.readDouble();
+                double y = stream.readDouble();
+                double w = stream.readDouble();
+                double h = stream.readDouble();
+                double as = stream.readDouble(); // Angle Start
+                double ae = stream.readDouble(); // Angle Extent
+                int at = stream.readInt();       // Arc type
                 result = new Arc2D.Double(x, y, w, h, as, ae, at);
             }
             else if (c.equals(GeneralPath.class)) {
-                final GeneralPath gp = new GeneralPath();
-                final float[] args = new float[6];
+                GeneralPath gp = new GeneralPath();
+                float[] args = new float[6];
                 boolean hasNext = stream.readBoolean();
                 while (!hasNext) {
-                    final int type = stream.readInt();
+                    int type = stream.readInt();
                     for (int i = 0; i < 6; i++) {
                         args[i] = stream.readFloat();
                     }
@@ -412,16 +393,15 @@ public class SerialUtils {
     }
 
     /**
-     * Serialises a <code>Shape</code> object.
+     * Serialises a {@code Shape} object.
      *
-     * @param shape  the shape object (<code>null</code> permitted).
-     * @param stream  the output stream (<code>null</code> not permitted).
+     * @param shape  the shape object ({@code null} permitted).
+     * @param stream  the output stream ({@code null} not permitted).
      *
      * @throws IOException if there is an I/O error.
      */
-    public static void writeShape(final Shape shape,
-                                  final ObjectOutputStream stream)
-        throws IOException {
+    public static void writeShape(Shape shape, ObjectOutputStream stream)
+            throws IOException {
 
         if (stream == null) {
             throw new IllegalArgumentException("Null 'stream' argument.");
@@ -492,26 +472,26 @@ public class SerialUtils {
     }
 
     /**
-     * Reads a <code>Point2D</code> object that has been serialised by the
+     * Reads a {@code Point2D} object that has been serialised by the
      * {@link #writePoint2D(Point2D, ObjectOutputStream)} method.
      *
-     * @param stream  the input stream (<code>null</code> not permitted).
+     * @param stream  the input stream ({@code null} not permitted).
      *
-     * @return The point object (possibly <code>null</code>).
+     * @return The point object (possibly {@code null}).
      *
      * @throws IOException  if there is an I/O problem.
      */
-    public static Point2D readPoint2D(final ObjectInputStream stream)
-        throws IOException {
+    public static Point2D readPoint2D(ObjectInputStream stream)
+            throws IOException {
 
         if (stream == null) {
             throw new IllegalArgumentException("Null 'stream' argument.");
         }
         Point2D result = null;
-        final boolean isNull = stream.readBoolean();
+        boolean isNull = stream.readBoolean();
         if (!isNull) {
-            final double x = stream.readDouble();
-            final double y = stream.readDouble();
+            double x = stream.readDouble();
+            double y = stream.readDouble();
             result = new Point2D.Double(x, y);
         }
         return result;
@@ -519,16 +499,15 @@ public class SerialUtils {
     }
 
     /**
-     * Serialises a <code>Point2D</code> object.
+     * Serialises a {@code Point2D} object.
      *
-     * @param p  the point object (<code>null</code> permitted).
-     * @param stream  the output stream (<code>null</code> not permitted).
+     * @param p  the point object ({@code null} permitted).
+     * @param stream  the output stream ({@code null} not permitted).
      *
      * @throws IOException if there is an I/O error.
      */
-    public static void writePoint2D(final Point2D p,
-                                    final ObjectOutputStream stream)
-        throws IOException {
+    public static void writePoint2D(Point2D p, ObjectOutputStream stream)
+            throws IOException {
 
         if (stream == null) {
             throw new IllegalArgumentException("Null 'stream' argument.");
@@ -582,10 +561,10 @@ public class SerialUtils {
     }
 
     /**
-     * Serialises an <code>AttributedString</code> object.
+     * Serialises an {@code AttributedString} object.
      *
-     * @param as  the attributed string object (<code>null</code> permitted).
-     * @param stream  the output stream (<code>null</code> not permitted).
+     * @param as  the attributed string object ({@code null} permitted).
+     * @param stream  the output stream ({@code null} not permitted).
      *
      * @throws IOException if there is an I/O error.
      */
