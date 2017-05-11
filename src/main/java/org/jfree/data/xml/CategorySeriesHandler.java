@@ -87,7 +87,7 @@ public class CategorySeriesHandler extends DefaultHandler
      * @param key  the key.
      * @param value  the value.
      */
-    public void addItem(Comparable key, final Number value) {
+    public void addItem(Comparable key, Number value) {
         this.values.addValue(key, value);
     }
 
