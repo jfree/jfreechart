@@ -107,13 +107,13 @@ public final class TextAnchor implements Serializable {
      *
      * @param name  the name.
      */
-    private TextAnchor(final String name) {
+    private TextAnchor(String name) {
         this.name = name;
     }
     
     /** 
-     * Returns <code>true</code> if the anchor is a left-side anchor, and
-     * <code>false</code> otherwise.
+     * Returns {@code true} if the anchor is a left-side anchor, and
+     * {@code false} otherwise.
      * 
      * @return A boolean.
      * 
@@ -126,8 +126,8 @@ public final class TextAnchor implements Serializable {
     }
 
     /** 
-     * Returns <code>true</code> if the anchor is a right-side anchor, and
-     * <code>false</code> otherwise.
+     * Returns {@code true} if the anchor is a right-side anchor, and
+     * {@code false} otherwise.
      * 
      * @return A boolean.
      * 
@@ -140,8 +140,8 @@ public final class TextAnchor implements Serializable {
     }
 
     /** 
-     * Returns <code>true</code> if the anchor is a center anchor, and
-     * <code>false</code> otherwise.
+     * Returns {@code true} if the anchor is a center anchor, and
+     * {@code false} otherwise.
      * 
      * @return A boolean.
      * 
@@ -154,8 +154,8 @@ public final class TextAnchor implements Serializable {
     }
 
     /** 
-     * Returns <code>true</code> if the anchor is a top anchor, and
-     * <code>false</code> otherwise.
+     * Returns {@code true} if the anchor is a top anchor, and
+     * {@code false} otherwise.
      * 
      * @return A boolean.
      * 
@@ -166,8 +166,8 @@ public final class TextAnchor implements Serializable {
     }
 
     /** 
-     * Returns <code>true</code> if the anchor is a bottom anchor, and
-     * <code>false</code> otherwise.
+     * Returns {@code true} if the anchor is a bottom anchor, and
+     * {@code false} otherwise.
      * 
      * @return A boolean.
      * 
@@ -179,8 +179,8 @@ public final class TextAnchor implements Serializable {
     }
     
     /** 
-     * Returns <code>true</code> if the anchor is a baseline anchor, and
-     * <code>false</code> otherwise.
+     * Returns {@code true} if the anchor is a baseline anchor, and
+     * {@code false} otherwise.
      * 
      * @return A boolean.
      * 
@@ -192,8 +192,8 @@ public final class TextAnchor implements Serializable {
     }
     
     /** 
-     * Returns <code>true</code> if the anchor is a half-ascent anchor, and
-     * <code>false</code> otherwise.
+     * Returns {@code true} if the anchor is a half-ascent anchor, and
+     * {@code false} otherwise.
      * 
      * @return A boolean.
      * 
@@ -205,8 +205,8 @@ public final class TextAnchor implements Serializable {
     }
     
     /** 
-     * Returns <code>true</code> if the anchor is a half-ascent anchor, and
-     * <code>false</code> otherwise.
+     * Returns {@code true} if the anchor is a half-ascent anchor, and
+     * {@code false} otherwise.
      * 
      * @return A boolean.
      * 
@@ -226,14 +226,14 @@ public final class TextAnchor implements Serializable {
     }
 
     /**
-     * Returns <code>true</code> if this object is equal to the specified 
-     * object, and <code>false</code> otherwise.
+     * Returns {@code true} if this object is equal to the specified 
+     * object, and {@code false} otherwise.
      *
      * @param o  the other object.
      *
      * @return A boolean.
      */
-    public boolean equals(final Object o) {
+    public boolean equals(Object o) {
 
         if (this == o) {
             return true;
@@ -242,7 +242,7 @@ public final class TextAnchor implements Serializable {
             return false;
         }
 
-        final TextAnchor order = (TextAnchor) o;
+        TextAnchor order = (TextAnchor) o;
         if (!this.name.equals(order.name)) {
             return false;
         }
@@ -255,6 +255,7 @@ public final class TextAnchor implements Serializable {
      *
      * @return The hashcode
      */
+    @Override
     public int hashCode() {
         return this.name.hashCode();
     }
