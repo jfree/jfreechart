@@ -87,7 +87,7 @@ public final class TextBlockAnchor implements Serializable {
      *
      * @param name  the name.
      */
-    private TextBlockAnchor(final String name) {
+    private TextBlockAnchor(String name) {
         this.name = name;
     }
 
@@ -108,7 +108,8 @@ public final class TextBlockAnchor implements Serializable {
      *
      * @return A boolean.
      */
-    public boolean equals(final Object o) {
+    @Override
+    public boolean equals(Object o) {
 
         if (this == o) {
             return true;
@@ -117,7 +118,7 @@ public final class TextBlockAnchor implements Serializable {
             return false;
         }
 
-        final TextBlockAnchor other = (TextBlockAnchor) o;
+        TextBlockAnchor other = (TextBlockAnchor) o;
         if (!this.name.equals(other.name)) {
             return false;
         }
@@ -130,6 +131,7 @@ public final class TextBlockAnchor implements Serializable {
      *
      * @return the hashcode
      */
+    @Override
     public int hashCode() {
         return this.name.hashCode();
     }
