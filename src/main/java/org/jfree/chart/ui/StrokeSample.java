@@ -56,9 +56,9 @@ public class StrokeSample extends JComponent implements ListCellRenderer {
     /**
      * Creates a StrokeSample for the specified stroke.
      *
-     * @param stroke  the sample stroke (<code>null</code> permitted).
+     * @param stroke  the sample stroke ({@code null} permitted).
      */
-    public StrokeSample(final Stroke stroke) {
+    public StrokeSample(Stroke stroke) {
         this.stroke = stroke;
         this.preferredSize = new Dimension(80, 18);
         setPreferredSize(this.preferredSize);
@@ -67,7 +67,7 @@ public class StrokeSample extends JComponent implements ListCellRenderer {
     /**
      * Returns the current Stroke object being displayed.
      *
-     * @return The stroke (possibly <code>null</code>).
+     * @return The stroke (possibly {@code null}).
      */
     public Stroke getStroke() {
         return this.stroke;
@@ -76,9 +76,9 @@ public class StrokeSample extends JComponent implements ListCellRenderer {
     /**
      * Sets the stroke object being displayed and repaints the component.
      *
-     * @param stroke  the stroke (<code>null</code> permitted).
+     * @param stroke  the stroke ({@code null} permitted).
      */
-    public void setStroke(final Stroke stroke) {
+    public void setStroke(Stroke stroke) {
         this.stroke = stroke;
         repaint();
     }
@@ -88,6 +88,7 @@ public class StrokeSample extends JComponent implements ListCellRenderer {
      *
      * @return the preferred size of the component.
      */
+    @Override
     public Dimension getPreferredSize() {
         return this.preferredSize;
     }
@@ -97,26 +98,27 @@ public class StrokeSample extends JComponent implements ListCellRenderer {
      *
      * @param g  the graphics device.
      */
-    public void paintComponent(final Graphics g) {
+    @Override
+    public void paintComponent(Graphics g) {
 
-        final Graphics2D g2 = (Graphics2D) g;
+        Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
-        final Dimension size = getSize();
-        final Insets insets = getInsets();
-        final double xx = insets.left;
-        final double yy = insets.top;
-        final double ww = size.getWidth() - insets.left - insets.right;
-        final double hh = size.getHeight() - insets.top - insets.bottom;
+        Dimension size = getSize();
+        Insets insets = getInsets();
+        double xx = insets.left;
+        double yy = insets.top;
+        double ww = size.getWidth() - insets.left - insets.right;
+        double hh = size.getHeight() - insets.top - insets.bottom;
 
         // calculate point one
-        final Point2D one =  new Point2D.Double(xx + 6, yy + hh / 2);
+        Point2D one =  new Point2D.Double(xx + 6, yy + hh / 2);
         // calculate point two
-        final Point2D two =  new Point2D.Double(xx + ww - 6, yy + hh / 2);
+        Point2D two =  new Point2D.Double(xx + ww - 6, yy + hh / 2);
         // draw a circle at point one
-        final Ellipse2D circle1 = new Ellipse2D.Double(one.getX() - 5,
+        Ellipse2D circle1 = new Ellipse2D.Double(one.getX() - 5,
                 one.getY() - 5, 10, 10);
-        final Ellipse2D circle2 = new Ellipse2D.Double(two.getX() - 6,
+        Ellipse2D circle2 = new Ellipse2D.Double(two.getX() - 6,
                 two.getY() - 5, 10, 10);
 
         // draw a circle at point two
@@ -126,7 +128,7 @@ public class StrokeSample extends JComponent implements ListCellRenderer {
         g2.fill(circle2);
 
         // draw a line connecting the points
-        final Line2D line = new Line2D.Double(one, two);
+        Line2D line = new Line2D.Double(one, two);
         if (this.stroke != null) {
             g2.setStroke(this.stroke);
             g2.draw(line);
@@ -146,6 +148,7 @@ public class StrokeSample extends JComponent implements ListCellRenderer {
      *
      * @return the component for rendering.
      */
+    @Override
     public Component getListCellRendererComponent(JList list, Object value,
             int index, boolean isSelected, boolean cellHasFocus) {
         if (value instanceof Stroke) {
