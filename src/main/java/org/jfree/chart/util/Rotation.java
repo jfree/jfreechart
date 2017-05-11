@@ -32,8 +32,8 @@ import java.io.ObjectStreamException;
 import java.io.Serializable;
 
 /**
- * Represents a direction of rotation (<code>CLOCKWISE</code> or 
- * <code>ANTICLOCKWISE</code>).
+ * Represents a direction of rotation ({@code CLOCKWISE} or 
+ * {@code ANTICLOCKWISE}).
  */
 public final class Rotation implements Serializable {
 
@@ -52,8 +52,8 @@ public final class Rotation implements Serializable {
     private String name;
     
     /** 
-     * The factor (-1.0 for <code>CLOCKWISE</code> and 1.0 for 
-     * <code>ANTICLOCKWISE</code>). 
+     * The factor (-1.0 for {@code CLOCKWISE} and 1.0 for 
+     * {@code ANTICLOCKWISE}). 
      */
     private double factor;
 
@@ -63,7 +63,7 @@ public final class Rotation implements Serializable {
      * @param name  the name.
      * @param factor  the rotation factor.
      */
-    private Rotation(final String name, final double factor) {
+    private Rotation(String name, double factor) {
         this.name = name;
         this.factor = factor;
     }
@@ -71,15 +71,16 @@ public final class Rotation implements Serializable {
     /**
      * Returns a string representing the object.
      *
-     * @return the string (never <code>null</code>).
+     * @return the string (never {@code null}).
      */
+    @Override
     public String toString() {
         return this.name;
     }
 
     /**
-     * Returns the rotation factor, which is -1.0 for <code>CLOCKWISE</code> 
-     * and 1.0 for <code>ANTICLOCKWISE</code>.
+     * Returns the rotation factor, which is -1.0 for {@code CLOCKWISE} 
+     * and 1.0 for {@code ANTICLOCKWISE}.
      * 
      * @return the rotation factor.
      */
@@ -95,7 +96,8 @@ public final class Rotation implements Serializable {
      * @param o the other object
      * @return true or false
      */
-    public boolean equals(final Object o) {
+    @Override
+    public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
