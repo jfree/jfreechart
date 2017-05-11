@@ -89,7 +89,7 @@ public final class ObjectUtils {
      * @param classLoaderSource the classloader source,
      *                          either THREAD_CONTEXT or CLASS_CONTEXT.
      */
-    public static void setClassLoaderSource(final String classLoaderSource) {
+    public static void setClassLoaderSource(String classLoaderSource) {
         ObjectUtils.classLoaderSource = classLoaderSource;
     }
 
@@ -101,7 +101,7 @@ public final class ObjectUtils {
      * @param o2 object 2 ({@code null} permitted).
      * @return {@code true} or {@code false}.
      */
-    public static boolean equal(final Object o1, final Object o2) {
+    public static boolean equal(Object o1, Object o2) {
         if (o1 == o2) {
             return true;
         }
@@ -121,7 +121,7 @@ public final class ObjectUtils {
      * @return The object's hash code (or zero if the object is
      *         {@code null}).
      */
-    public static int hashCode(final Object object) {
+    public static int hashCode(Object object) {
         int result = 0;
         if (object != null) {
             result = object.hashCode();
@@ -137,18 +137,18 @@ public final class ObjectUtils {
      * @return A clone of the specified object.
      * @throws CloneNotSupportedException if the object cannot be cloned.
      */
-    public static Object clone(final Object object)
+    public static Object clone(Object object)
         throws CloneNotSupportedException {
         if (object == null) {
             throw new IllegalArgumentException("Null 'object' argument.");
         }
         if (object instanceof PublicCloneable) {
-            final PublicCloneable pc = (PublicCloneable) object;
+            PublicCloneable pc = (PublicCloneable) object;
             return pc.clone();
         }
         else {
             try {
-                final Method method = object.getClass().getMethod("clone",
+                Method method = object.getClass().getMethod("clone",
                         (Class[]) null);
                 if (Modifier.isPublic(method.getModifiers())) {
                     return method.invoke(object, (Object[]) null);
@@ -177,8 +177,8 @@ public final class ObjectUtils {
      * @throws CloneNotSupportedException if any of the items in the collection
      *                                    cannot be cloned.
      */
-    public static Collection deepClone(final Collection collection)
-        throws CloneNotSupportedException {
+    public static Collection deepClone(Collection collection)
+            throws CloneNotSupportedException {
 
         if (collection == null) {
             throw new IllegalArgumentException("Null 'collection' argument.");
@@ -186,12 +186,11 @@ public final class ObjectUtils {
         // all JDK-Collections are cloneable ...
         // and if the collection is not clonable, then we should throw
         // a CloneNotSupportedException anyway ...
-        final Collection result
-            = (Collection) ObjectUtils.clone(collection);
+        Collection result = (Collection) ObjectUtils.clone(collection);
         result.clear();
-        final Iterator iterator = collection.iterator();
+        Iterator iterator = collection.iterator();
         while (iterator.hasNext()) {
-            final Object item = iterator.next();
+            Object item = iterator.next();
             if (item != null) {
                 result.add(clone(item));
             }
@@ -231,10 +230,9 @@ public final class ObjectUtils {
      * @throws SecurityException if the SecurityManager does not allow to grab
      *                           the context classloader.
      */
-    public static ClassLoader getClassLoader(final Class c) {
-        final String localClassLoaderSource;
-        synchronized(ObjectUtils.class)
-        {
+    public static ClassLoader getClassLoader(Class c) {
+        String localClassLoaderSource;
+        synchronized(ObjectUtils.class) {
           if (classLoader != null) {
               return classLoader;
           }
@@ -242,7 +240,7 @@ public final class ObjectUtils {
         }
 
         if ("ThreadContext".equals(localClassLoaderSource)) {
-            final ClassLoader threadLoader = Thread.currentThread().getContextClassLoader();
+            ClassLoader threadLoader = Thread.currentThread().getContextClassLoader();
             if (threadLoader != null) {
                 return threadLoader;
             }
@@ -266,7 +264,7 @@ public final class ObjectUtils {
      * @param c    the source class
      * @return the url of the resource or null, if not found.
      */
-    public static URL getResource(final String name, final Class c) {
+    public static URL getResource(String name, Class c) {
         final ClassLoader cl = getClassLoader(c);
         if (cl == null) {
             return null;
@@ -281,9 +279,9 @@ public final class ObjectUtils {
      * @param c    the source class
      * @return the url of the resource or null, if not found.
      */
-    public static URL getResourceRelative(final String name, final Class c) {
-        final ClassLoader cl = getClassLoader(c);
-        final String cname = convertName(name, c);
+    public static URL getResourceRelative(String name, Class c) {
+        ClassLoader cl = getClassLoader(c);
+        String cname = convertName(name, c);
         if (cl == null) {
             return null;
         }
@@ -300,7 +298,7 @@ public final class ObjectUtils {
      * @param c    the class which the resource is relative to
      * @return the tranformed name.
      */
-    private static String convertName(final String name, Class c) {
+    private static String convertName(String name, Class c) {
         if (name.startsWith("/")) {
             // strip leading slash..
             return name.substring(1);
@@ -329,9 +327,8 @@ public final class ObjectUtils {
      * @param context the source class
      * @return the url of the resource or null, if not found.
      */
-    public static InputStream getResourceAsStream(final String name,
-                                                  final Class context) {
-        final URL url = getResource(name, context);
+    public static InputStream getResourceAsStream(String name, Class context) {
+        URL url = getResource(name, context);
         if (url == null) {
             return null;
         }
@@ -352,9 +349,9 @@ public final class ObjectUtils {
      * @param context the source class
      * @return the url of the resource or null, if not found.
      */
-    public static InputStream getResourceRelativeAsStream
-        (final String name, final Class context) {
-        final URL url = getResourceRelative(name, context);
+    public static InputStream getResourceRelativeAsStream(String name, 
+            Class context) {
+        URL url = getResourceRelative(name, context);
         if (url == null) {
             return null;
         }
@@ -365,53 +362,6 @@ public final class ObjectUtils {
         catch (IOException e) {
             return null;
         }
-    }
-
-    /**
-     * Tries to create a new instance of the given class. This is a short cut
-     * for the common bean instantiation code.
-     *
-     * @param className the class name as String, never null.
-     * @param source    the source class, from where to get the classloader.
-     * @return the instantiated object or null, if an error occured.
-     */
-    public static Object loadAndInstantiate(final String className,
-                                            final Class source) {
-        try {
-            final ClassLoader loader = getClassLoader(source);
-            final Class c = loader.loadClass(className);
-            return c.newInstance();
-        }
-        catch (Exception e) {
-            return null;
-        }
-    }
-
-    /**
-     * Tries to create a new instance of the given class. This is a short cut
-     * for the common bean instantiation code. This method is a type-safe method
-     * and will not instantiate the class unless it is an instance of the given
-     * type.
-     *
-     * @param className the class name as String, never null.
-     * @param source    the source class, from where to get the classloader.
-     * @param type  the type.
-     * @return the instantiated object or null, if an error occurred.
-     */
-    public static Object loadAndInstantiate(final String className,
-                                            final Class source,
-                                            final Class type) {
-        try {
-            final ClassLoader loader = getClassLoader(source);
-            final Class c = loader.loadClass(className);
-            if (type.isAssignableFrom(c)) {
-                return c.newInstance();
-            }
-        }
-        catch (Exception e) {
-            return null;
-        }
-        return null;
     }
 
     /**
