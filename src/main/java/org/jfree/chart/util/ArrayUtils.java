@@ -68,12 +68,12 @@ public class ArrayUtils {
     }
 
     /**
-     * Returns <code>true</code> if all the references in <code>array1</code>
-     * are equal to all the references in <code>array2</code> (two
-     * <code>null</code> references are considered equal for this test).
+     * Returns {@code true} if all the references in {@code array1}
+     * are equal to all the references in {@code array2} (two
+     * {@code null} references are considered equal for this test).
      *
-     * @param array1  the first array (<code>null</code> permitted).
-     * @param array2  the second array (<code>null</code> permitted).
+     * @param array1  the first array ({@code null} permitted).
+     * @param array2  the second array ({@code null} permitted).
      *
      * @return A boolean.
      */
@@ -109,8 +109,8 @@ public class ArrayUtils {
     /**
      * Tests two float arrays for equality.
      *
-     * @param array1  the first array (<code>null</code> permitted).
-     * @param array2  the second arrray (<code>null</code> permitted).
+     * @param array1  the first array ({@code null} permitted).
+     * @param array2  the second arrray ({@code null} permitted).
      *
      * @return A boolean.
      */
@@ -137,8 +137,8 @@ public class ArrayUtils {
     }
 
     /**
-     * Returns <code>true</code> if any two items in the array are equal to
-     * one another.  Any <code>null</code> values in the array are ignored.
+     * Returns {@code true} if any two items in the array are equal to
+     * one another.  Any {@code null} values in the array are ignored.
      *
      * @param array  the array to check.
      *
