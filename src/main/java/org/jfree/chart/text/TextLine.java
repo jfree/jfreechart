@@ -59,7 +59,7 @@ public class TextLine implements Serializable {
     /**
      * Creates a new text line using the default font.
      * 
-     * @param text  the text (<code>null</code> not permitted).
+     * @param text  the text ({@code null} not permitted).
      */
     public TextLine(String text) {
         this(text, TextFragment.DEFAULT_FONT);   
@@ -68,8 +68,8 @@ public class TextLine implements Serializable {
     /**
      * Creates a new text line.
      * 
-     * @param text  the text (<code>null</code> not permitted).
-     * @param font  the text font (<code>null</code> not permitted).
+     * @param text  the text ({@code null} not permitted).
+     * @param font  the text font ({@code null} not permitted).
      */
     public TextLine(String text, Font font) {
         this.fragments = new java.util.ArrayList();
@@ -80,9 +80,9 @@ public class TextLine implements Serializable {
     /**
      * Creates a new text line.
      * 
-     * @param text  the text (<code>null</code> not permitted).
-     * @param font  the text font (<code>null</code> not permitted).
-     * @param paint  the text color (<code>null</code> not permitted).
+     * @param text  the text ({@code null} not permitted).
+     * @param font  the text font ({@code null} not permitted).
+     * @param paint  the text color ({@code null} not permitted).
      */
     public TextLine(String text, Font font, Paint paint) {
         if (text == null) {
@@ -102,7 +102,7 @@ public class TextLine implements Serializable {
     /**
      * Adds a text fragment to the text line.
      * 
-     * @param fragment  the text fragment (<code>null</code> not permitted).
+     * @param fragment  the text fragment ({@code null} not permitted).
      */
     public void addFragment(TextFragment fragment) {
         this.fragments.add(fragment);        
@@ -223,7 +223,7 @@ public class TextLine implements Serializable {
     /**
      * Tests this object for equality with an arbitrary object.
      * 
-     * @param obj  the object to test against (<code>null</code> permitted).
+     * @param obj  the object to test against ({@code null} permitted).
      * 
      * @return A boolean.
      */
