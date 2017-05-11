@@ -53,7 +53,7 @@ public final class UnitType implements Serializable {
      *
      * @param name  the name.
      */
-    private UnitType(final String name) {
+    private UnitType(String name) {
         this.name = name;
     }
 
@@ -62,19 +62,21 @@ public final class UnitType implements Serializable {
      *
      * @return The string.
      */
+    @Override
     public String toString() {
         return this.name;
     }
 
     /**
-     * Returns <code>true</code> if this object is equal to the specified 
-     * object, and <code>false</code> otherwise.
+     * Returns {@code true} if this object is equal to the specified 
+     * object, and {@code false} otherwise.
      *
      * @param obj  the other object.
      *
      * @return A boolean.
      */
-    public boolean equals(final Object obj) {
+    @Override
+    public boolean equals(Object obj) {
         if (obj == this) {
             return true;
         }
