@@ -425,15 +425,15 @@ public class SpreadsheetDate extends SerialDate {
      *
      * @return the serial number from the day, month and year.
      */
-    private int calcSerial(int d, final int m, final int y) {
-        final int yy = ((y - 1900) * 365) + SerialDate.leapYearCount(y - 1);
+    private int calcSerial(int d, int m, int y) {
+        int yy = ((y - 1900) * 365) + SerialDate.leapYearCount(y - 1);
         int mm = SerialDate.AGGREGATE_DAYS_TO_END_OF_PRECEDING_MONTH[m];
         if (m > MonthConstants.FEBRUARY) {
             if (SerialDate.isLeapYear(y)) {
                 mm = mm + 1;
             }
         }
-        final int dd = d;
+        int dd = d;
         return yy + mm + dd + 1;
     }
 
