@@ -1360,8 +1360,7 @@ public interface CategoryItemRenderer extends LegendItemSource {
      *
      * @param g2  the graphics device.
      * @param plot  the plot.
-     * @param dataArea  the area for plotting data (not yet adjusted for any
-     *                  3D effect).
+     * @param dataArea  the area for plotting data.
      * @param value  the value.
      */
     public void drawDomainGridline(Graphics2D g2, CategoryPlot plot,
@@ -1373,8 +1372,7 @@ public interface CategoryItemRenderer extends LegendItemSource {
      * @param g2  the graphics device.
      * @param plot  the plot.
      * @param axis  the value axis.
-     * @param dataArea  the area for plotting data (not yet adjusted for any
-     *                  3D effect).
+     * @param dataArea  the area for plotting data.
      * @param value  the value.
      * @param paint  the paint ({@code null} not permitted).
      * @param stroke  the line stroke ({@code null} not permitted).
@@ -1390,7 +1388,7 @@ public interface CategoryItemRenderer extends LegendItemSource {
      * @param plot  the plot.
      * @param axis  the category axis.
      * @param marker  the marker.
-     * @param dataArea  the area for plotting data (not including 3D effect).
+     * @param dataArea  the area for plotting data.
      *
      * @see #drawRangeMarker(Graphics2D, CategoryPlot, ValueAxis, Marker,
      *     Rectangle2D)
@@ -1406,7 +1404,7 @@ public interface CategoryItemRenderer extends LegendItemSource {
      * @param plot  the plot.
      * @param axis  the value axis.
      * @param marker  the marker.
-     * @param dataArea  the area for plotting data (not including 3D effect).
+     * @param dataArea  the area for plotting data.
      *
      * @see #drawDomainMarker(Graphics2D, CategoryPlot, CategoryAxis,
      *     CategoryMarker, Rectangle2D)
