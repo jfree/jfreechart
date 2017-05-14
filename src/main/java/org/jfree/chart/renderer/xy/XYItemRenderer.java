@@ -1332,9 +1332,11 @@ public interface XYItemRenderer extends LegendItemSource {
      * @param dataArea  the area for plotting data (not yet adjusted for any
      *                  3D effect).
      * @param value  the value.
+     * @param paint  the paint ({@code null} not permitted).
+     * @param stroke  the stroke ({@code null} not permitted).
      */
     public void drawDomainLine(Graphics2D g2, XYPlot plot, ValueAxis axis,
-            Rectangle2D dataArea, double value);
+            Rectangle2D dataArea, double value, Paint paint, Stroke stroke);
 
     /**
      * Draws a line perpendicular to the range axis.

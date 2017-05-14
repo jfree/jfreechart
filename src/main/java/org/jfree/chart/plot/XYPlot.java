@@ -3929,17 +3929,10 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      * @since 1.0.5
      */
     protected void drawZeroDomainBaseline(Graphics2D g2, Rectangle2D area) {
-        if (isDomainZeroBaselineVisible()) {
-            XYItemRenderer r = getRenderer();
-            // FIXME: the renderer interface doesn't have the drawDomainLine()
-            // method, so we have to rely on the renderer being a subclass of
-            // AbstractXYItemRenderer (which is lame)
-            if (r instanceof AbstractXYItemRenderer) {
-                AbstractXYItemRenderer renderer = (AbstractXYItemRenderer) r;
-                renderer.drawDomainLine(g2, this, getDomainAxis(), area, 0.0,
+        if (isDomainZeroBaselineVisible() && getRenderer() != null) {
+            getRenderer().drawDomainLine(g2, this, getDomainAxis(), area, 0.0,
                         this.domainZeroBaselinePaint,
                         this.domainZeroBaselineStroke);
-            }
         }
     }
 
