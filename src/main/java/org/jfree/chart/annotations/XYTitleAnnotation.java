@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -300,8 +300,7 @@ public class XYTitleAnnotation extends AbstractXYAnnotation
         Size2D size = this.title.arrange(g2, rc);
         Rectangle2D titleRect = new Rectangle2D.Double(0, 0, size.width,
                 size.height);
-        Point2D anchorPoint = RectangleAnchor.coordinates(titleRect,
-                this.anchor);
+        Point2D anchorPoint = this.anchor.getAnchorPoint(titleRect);
         xx = xx - (float) anchorPoint.getX();
         yy = yy - (float) anchorPoint.getY();
         titleRect.setRect(xx, yy, titleRect.getWidth(), titleRect.getHeight());

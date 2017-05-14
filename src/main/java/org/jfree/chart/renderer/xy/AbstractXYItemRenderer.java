@@ -1242,7 +1242,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
             anchorRect = markerOffset.createAdjustedRectangle(markerArea,
                     labelOffsetType, LengthAdjustmentType.CONTRACT);
         }
-        return RectangleAnchor.coordinates(anchorRect, anchor);
+        return anchor.getAnchorPoint(anchorRect);
 
     }
 
@@ -1442,7 +1442,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
             anchorRect = markerOffset.createAdjustedRectangle(markerArea,
                     LengthAdjustmentType.CONTRACT, labelOffsetForRange);
         }
-        return RectangleAnchor.coordinates(anchorRect, anchor);
+        return anchor.getAnchorPoint(anchorRect);
 
     }
 

@@ -1200,7 +1200,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
             anchorRect = markerOffset.createAdjustedRectangle(markerArea,
                     labelOffsetType, LengthAdjustmentType.CONTRACT);
         }
-        return RectangleAnchor.coordinates(anchorRect, anchor);
+        return anchor.getAnchorPoint(anchorRect);
     }
 
     /**
@@ -1229,7 +1229,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
             anchorRect = markerOffset.createAdjustedRectangle(markerArea,
                     LengthAdjustmentType.CONTRACT, labelOffsetType);
         }
-        return RectangleAnchor.coordinates(anchorRect, anchor);
+        return anchor.getAnchorPoint(anchorRect);
 
     }
 

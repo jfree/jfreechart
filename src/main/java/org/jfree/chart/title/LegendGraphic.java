@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -580,8 +580,7 @@ public class LegendGraphic extends AbstractBlock
         area = trimPadding(area);
 
         if (this.lineVisible) {
-            Point2D location = RectangleAnchor.coordinates(area,
-                    this.shapeLocation);
+            Point2D location = this.shapeLocation.getAnchorPoint(area);
             Shape aLine = ShapeUtils.createTranslatedShape(getLine(),
                     this.shapeAnchor, location.getX(), location.getY());
             g2.setPaint(this.linePaint);
@@ -590,8 +589,7 @@ public class LegendGraphic extends AbstractBlock
         }
 
         if (this.shapeVisible) {
-            Point2D location = RectangleAnchor.coordinates(area,
-                    this.shapeLocation);
+            Point2D location = this.shapeLocation.getAnchorPoint(area);
 
             Shape s = ShapeUtils.createTranslatedShape(this.shape,
                     this.shapeAnchor, location.getX(), location.getY());

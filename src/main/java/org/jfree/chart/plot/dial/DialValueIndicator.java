@@ -618,7 +618,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
         Shape savedClip = g2.getClip();
         g2.clip(fb);
 
-        Point2D pt2 = RectangleAnchor.coordinates(bounds, this.valueAnchor);
+        Point2D pt2 = this.valueAnchor.getAnchorPoint(bounds);
         g2.setPaint(this.paint);
         g2.setFont(this.font);
         TextUtils.drawAlignedString(valueStr, g2, (float) pt2.getX(),

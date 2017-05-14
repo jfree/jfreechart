@@ -1069,8 +1069,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
             }
             Rectangle2D area = new Rectangle2D.Double(x0, y0, (x1 - x0),
                     (y1 - y0));
-            Point2D anchorPoint = RectangleAnchor.coordinates(area,
-                    position.getCategoryAnchor());
+            Point2D anchorPoint = position.getCategoryAnchor().getAnchorPoint(area);
             TextBlock block = tick.getLabel();
             block.draw(g2, (float) anchorPoint.getX(),
                     (float) anchorPoint.getY(), position.getLabelAnchor(),

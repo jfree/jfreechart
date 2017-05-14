@@ -355,7 +355,7 @@ public class LabelBlock extends AbstractBlock
         }
         g2.setPaint(this.paint);
         g2.setFont(this.font);
-        Point2D pt = RectangleAnchor.coordinates(area, this.textAnchor);
+        Point2D pt = this.textAnchor.getAnchorPoint(area);
         this.label.draw(g2, (float) pt.getX(), (float) pt.getY(),
                 this.contentAlignmentPoint);
         BlockResult result = null;

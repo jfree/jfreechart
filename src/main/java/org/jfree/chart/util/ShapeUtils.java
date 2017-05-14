@@ -303,8 +303,7 @@ public class ShapeUtils {
         if (anchor == null) {
             throw new IllegalArgumentException("Null 'anchor' argument.");
         }
-        Point2D anchorPoint = RectangleAnchor.coordinates(
-                shape.getBounds2D(), anchor);
+        Point2D anchorPoint = anchor.getAnchorPoint(shape.getBounds2D());
         final AffineTransform transform = AffineTransform.getTranslateInstance(
                 locationX - anchorPoint.getX(), locationY - anchorPoint.getY());
         return transform.createTransformedShape(shape);
