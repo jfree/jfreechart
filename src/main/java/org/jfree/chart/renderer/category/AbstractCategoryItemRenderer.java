@@ -829,8 +829,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      *
      * @param g2  the graphics device.
      * @param plot  the plot.
-     * @param dataArea  the area for plotting data (not yet adjusted for any
-     *                  3D effect).
+     * @param dataArea  the area for plotting data.
      * @param value  the Java2D value at which the grid line should be drawn.
      *
      */
