@@ -384,6 +384,11 @@ public class XYBlockRenderer extends AbstractXYItemRenderer
         g2.setStroke(new BasicStroke(1.0f));
         g2.draw(block);
 
+        if (isItemLabelVisible(series, item)) {
+            drawItemLabel(g2, orientation, dataset, series, item, 
+                    block.getCenterX(), block.getCenterY(), y < 0.0);
+        }
+
         int datasetIndex = plot.indexOf(dataset);
         double transX = domainAxis.valueToJava2D(x, dataArea,
                 plot.getDomainAxisEdge());
