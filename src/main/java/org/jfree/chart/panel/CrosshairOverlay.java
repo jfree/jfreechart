@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,10 +27,10 @@
  * ---------------------
  * CrosshairOverlay.java
  * ---------------------
- * (C) Copyright 2011-2016, by Object Refinery Limited.
+ * (C) Copyright 2011-2017, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
+ * Contributor(s):   John Matthews;
  *
  * Changes:
  * --------
@@ -38,11 +38,13 @@
  * 19-May-2009 : Fixed FindBugs warnings, patch by Michal Wozniak (DG);
  * 02-Jul-2013 : Use ParamChecks (DG);
  * 05-Mar-2016 : Fix label outline stroke (DG);
+ * 24-May-2017 : Fix for label font (JM);
  *
  */
 
 package org.jfree.chart.panel;
 
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Paint;
 import java.awt.Rectangle;
@@ -81,18 +83,18 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
         PropertyChangeListener, PublicCloneable, Cloneable, Serializable {
 
     /** Storage for the crosshairs along the x-axis. */
-    private List xCrosshairs;
+    private List<Crosshair> xCrosshairs;
 
     /** Storage for the crosshairs along the y-axis. */
-    private List yCrosshairs;
+    private List<Crosshair> yCrosshairs;
 
     /**
      * Default constructor.
      */
     public CrosshairOverlay() {
         super();
-        this.xCrosshairs = new java.util.ArrayList();
-        this.yCrosshairs = new java.util.ArrayList();
+        this.xCrosshairs = new java.util.ArrayList<Crosshair>();
+        this.yCrosshairs = new java.util.ArrayList<Crosshair>();
     }
 
     /**
@@ -135,9 +137,7 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
         if (this.xCrosshairs.isEmpty()) {
             return;  // nothing to do
         }
-        List crosshairs = getDomainCrosshairs();
-        for (int i = 0; i < crosshairs.size(); i++) {
-            Crosshair c = (Crosshair) crosshairs.get(i);
+        for (Crosshair c: getDomainCrosshairs()) {
             this.xCrosshairs.remove(c);
             c.removePropertyChangeListener(this);
         }
@@ -149,8 +149,8 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
      *
      * @return A list of crosshairs.
      */
-    public List getDomainCrosshairs() {
-        return new ArrayList(this.xCrosshairs);
+    public List<Crosshair> getDomainCrosshairs() {
+        return new ArrayList<Crosshair>(this.xCrosshairs);
     }
 
     /**
@@ -190,9 +190,7 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
         if (this.yCrosshairs.isEmpty()) {
             return;  // nothing to do
         }
-        List crosshairs = getRangeCrosshairs();
-        for (int i = 0; i < crosshairs.size(); i++) {
-            Crosshair c = (Crosshair) crosshairs.get(i);
+        for (Crosshair c: getRangeCrosshairs()) {
             this.yCrosshairs.remove(c);
             c.removePropertyChangeListener(this);
         }
@@ -204,8 +202,8 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
      *
      * @return A list of crosshairs.
      */
-    public List getRangeCrosshairs() {
-        return new ArrayList(this.yCrosshairs);
+    public List<Crosshair> getRangeCrosshairs() {
+        return new ArrayList<Crosshair>(this.yCrosshairs);
     }
 
     /**
@@ -234,16 +232,15 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
         XYPlot plot = (XYPlot) chart.getPlot();
         ValueAxis xAxis = plot.getDomainAxis();
         RectangleEdge xAxisEdge = plot.getDomainAxisEdge();
-        Iterator iterator = this.xCrosshairs.iterator();
+        Iterator<Crosshair> iterator = this.xCrosshairs.iterator();
         while (iterator.hasNext()) {
-            Crosshair ch = (Crosshair) iterator.next();
+            Crosshair ch = iterator.next();
             if (ch.isVisible()) {
                 double x = ch.getValue();
                 double xx = xAxis.valueToJava2D(x, dataArea, xAxisEdge);
                 if (plot.getOrientation() == PlotOrientation.VERTICAL) {
                     drawVerticalCrosshair(g2, dataArea, xx, ch);
-                }
-                else {
+                } else {
                     drawHorizontalCrosshair(g2, dataArea, xx, ch);
                 }
             }
@@ -252,14 +249,13 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
         RectangleEdge yAxisEdge = plot.getRangeAxisEdge();
         iterator = this.yCrosshairs.iterator();
         while (iterator.hasNext()) {
-            Crosshair ch = (Crosshair) iterator.next();
+            Crosshair ch = iterator.next();
             if (ch.isVisible()) {
                 double y = ch.getValue();
                 double yy = yAxis.valueToJava2D(y, dataArea, yAxisEdge);
                 if (plot.getOrientation() == PlotOrientation.VERTICAL) {
                     drawHorizontalCrosshair(g2, dataArea, yy, ch);
-                }
-                else {
+                } else {
                     drawVerticalCrosshair(g2, dataArea, yy, ch);
                 }
             }
@@ -287,6 +283,8 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
             g2.setStroke(crosshair.getStroke());
             g2.draw(line);
             if (crosshair.isLabelVisible()) {
+                Font savedFont = g2.getFont();
+                g2.setFont(crosshair.getLabelFont());
                 String label = crosshair.getLabelGenerator().generateLabel(
                         crosshair);
                 RectangleAnchor anchor = crosshair.getLabelAnchor();
@@ -308,10 +306,13 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
 
                 g2.setPaint(crosshair.getLabelBackgroundPaint());
                 g2.fill(hotspot);
-                g2.setPaint(crosshair.getLabelOutlinePaint());
-                g2.setStroke(crosshair.getLabelOutlineStroke());
-                g2.draw(hotspot);
+                if (crosshair.isLabelOutlineVisible()) {
+                    g2.setPaint(crosshair.getLabelOutlinePaint());
+                    g2.setStroke(crosshair.getLabelOutlineStroke());
+                    g2.draw(hotspot);
+                }
                 TextUtilities.drawAlignedString(label, g2, xx, yy, alignPt);
+                g2.setFont(savedFont);
             }
             g2.setPaint(savedPaint);
             g2.setStroke(savedStroke);
@@ -338,6 +339,8 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
             g2.setStroke(crosshair.getStroke());
             g2.draw(line);
             if (crosshair.isLabelVisible()) {
+                Font savedFont = g2.getFont();
+                g2.setFont(crosshair.getLabelFont());
                 String label = crosshair.getLabelGenerator().generateLabel(
                         crosshair);
                 RectangleAnchor anchor = crosshair.getLabelAnchor();
@@ -358,10 +361,13 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
                 }
                 g2.setPaint(crosshair.getLabelBackgroundPaint());
                 g2.fill(hotspot);
-                g2.setPaint(crosshair.getLabelOutlinePaint());
-                g2.setStroke(crosshair.getLabelOutlineStroke());
-                g2.draw(hotspot);
+                if (crosshair.isLabelOutlineVisible()) {
+                    g2.setPaint(crosshair.getLabelOutlinePaint());
+                    g2.setStroke(crosshair.getLabelOutlineStroke());
+                    g2.draw(hotspot);
+                }
                 TextUtilities.drawAlignedString(label, g2, xx, yy, alignPt);
+                g2.setFont(savedFont);
             }
             g2.setPaint(savedPaint);
             g2.setStroke(savedStroke);
