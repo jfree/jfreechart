@@ -30,7 +30,7 @@
  * (C) Copyright 2011-2017, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
+ * Contributor(s):   John Matthews;
  *
  * Changes:
  * --------
