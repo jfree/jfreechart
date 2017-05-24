@@ -1348,6 +1348,7 @@ JFreeChart wouldn't be half the library that it is today without the contributio
 - Tin Luu
 - Craig MacFarlane
 - Achilleus Mantzios
+- John Matthews
 - Thomas Meier
 - Jim Moore
 - Jonathan Nash
