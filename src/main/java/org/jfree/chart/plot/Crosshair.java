@@ -375,9 +375,9 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * @see #getLabelXOffset()
      */
     public void setLabelXOffset(double offset) {
-        Double old = new Double(this.labelXOffset);
+        Double old = this.labelXOffset;
         this.labelXOffset = offset;
-        this.pcs.firePropertyChange("labelXOffset", old, new Double(offset));
+        this.pcs.firePropertyChange("labelXOffset", old, offset);
     }
 
     /**
@@ -400,9 +400,9 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * @see #getLabelYOffset()
      */
     public void setLabelYOffset(double offset) {
-        Double old = new Double(this.labelYOffset);
+        Double old = this.labelYOffset;
         this.labelYOffset = offset;
-        this.pcs.firePropertyChange("labelYOffset", old, new Double(offset));
+        this.pcs.firePropertyChange("labelYOffset", old, offset);
     }
 
     /**
@@ -432,7 +432,7 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
     }
 
     /**
-     * Returns the label paint.
+     * Returns the label paint.  The default value is {@code Color.BLACK}.
      *
      * @return The label paint (never {@code null}).
      *
@@ -484,6 +484,7 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
 
     /**
      * Returns the flag that controls the visibility of the label outline.
+     * The default value is {@code true}.
      *
      * @return A boolean.
      *

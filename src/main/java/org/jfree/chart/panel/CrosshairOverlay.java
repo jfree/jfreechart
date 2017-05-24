@@ -43,6 +43,7 @@
 
 package org.jfree.chart.panel;
 
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Paint;
 import java.awt.Rectangle;
@@ -287,6 +288,8 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
             g2.setStroke(crosshair.getStroke());
             g2.draw(line);
             if (crosshair.isLabelVisible()) {
+                Font savedFont = g2.getFont();
+                g2.setFont(crosshair.getLabelFont());
                 String label = crosshair.getLabelGenerator().generateLabel(
                         crosshair);
                 RectangleAnchor anchor = crosshair.getLabelAnchor();
@@ -308,10 +311,14 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
 
                 g2.setPaint(crosshair.getLabelBackgroundPaint());
                 g2.fill(hotspot);
-                g2.setPaint(crosshair.getLabelOutlinePaint());
-                g2.setStroke(crosshair.getLabelOutlineStroke());
+                if (crosshair.isLabelOutlineVisible()) {
+                    g2.setPaint(crosshair.getLabelOutlinePaint());
+                    g2.setStroke(crosshair.getLabelOutlineStroke());
+                }
                 g2.draw(hotspot);
+                g2.setPaint(crosshair.getLabelPaint());
                 TextUtils.drawAlignedString(label, g2, xx, yy, alignPt);
+                g2.setFont(savedFont);
             }
             g2.setPaint(savedPaint);
             g2.setStroke(savedStroke);
@@ -338,6 +345,8 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
             g2.setStroke(crosshair.getStroke());
             g2.draw(line);
             if (crosshair.isLabelVisible()) {
+                Font savedFont = g2.getFont();
+                g2.setFont(crosshair.getLabelFont());
                 String label = crosshair.getLabelGenerator().generateLabel(
                         crosshair);
                 RectangleAnchor anchor = crosshair.getLabelAnchor();
@@ -358,10 +367,14 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
                 }
                 g2.setPaint(crosshair.getLabelBackgroundPaint());
                 g2.fill(hotspot);
-                g2.setPaint(crosshair.getLabelOutlinePaint());
-                g2.setStroke(crosshair.getLabelOutlineStroke());
-                g2.draw(hotspot);
+                if (crosshair.isLabelOutlineVisible()) {
+                    g2.setPaint(crosshair.getLabelOutlinePaint());
+                    g2.setStroke(crosshair.getLabelOutlineStroke());
+                    g2.draw(hotspot);
+                }
+                g2.setPaint(crosshair.getLabelPaint());
                 TextUtils.drawAlignedString(label, g2, xx, yy, alignPt);
+                g2.setFont(savedFont);
             }
             g2.setPaint(savedPaint);
             g2.setStroke(savedStroke);
