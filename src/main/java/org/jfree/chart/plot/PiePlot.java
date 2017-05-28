@@ -377,7 +377,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
     private double shadowYOffset = 4.0f;
 
     /** The percentage amount to explode each pie section. */
-    private Map explodePercentages;
+    private Map<Comparable, Double> explodePercentages;
 
     /** The section label generator. */
     private PieSectionLabelGenerator labelGenerator;
@@ -2566,7 +2566,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
             double ep = 0.0;
             double mep = getMaximumExplodePercent();
             if (mep > 0.0) {
-                ep = getExplodePercent(section) / mep;
+                ep = getExplodePercent(dataset.getKey(section)) / mep;
             }
             Rectangle2D arcBounds = getArcBounds(state.getPieArea(),
                     state.getExplodedPieArea(), angle1, angle, ep);
@@ -3409,7 +3409,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
         clone.sectionOutlineStrokeMap 
                 = (StrokeMap) this.sectionOutlineStrokeMap.clone();
         clone.explodePercentages 
-                = new TreeMap<Comparable<?>, Number>(this.explodePercentages);
+                = new TreeMap<Comparable, Double>(this.explodePercentages);
         if (this.labelGenerator != null) {
             clone.labelGenerator = (PieSectionLabelGenerator) 
                     ObjectUtils.clone(this.labelGenerator);
