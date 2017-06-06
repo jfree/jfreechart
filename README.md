@@ -3,6 +3,10 @@ JFreeChart
 
 Version 1.5.0, not yet released.
 
+### Status
+
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.jfree/jfreechart/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.postgresql/postgresql)
+
 
 Overview
 --------
