@@ -85,7 +85,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 
 import org.jfree.data.general.Series;
 import org.jfree.data.general.SeriesChangeEvent;
@@ -504,7 +504,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      *                listeners.
      */
     public void add(XYDataItem item, boolean notify) {
-        ParamChecks.nullNotPermitted(item, "item");
+        Args.nullNotPermitted(item, "item");
         item = (XYDataItem) item.clone();
         if (this.autoSort) {
             int index = Collections.binarySearch(this.data, item);
@@ -784,7 +784,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * @since 1.0.14
      */
     public XYDataItem addOrUpdate(XYDataItem item) {
-        ParamChecks.nullNotPermitted(item, "item");
+        Args.nullNotPermitted(item, "item");
         if (this.allowDuplicateXValues) {
             add(item);
             return null;

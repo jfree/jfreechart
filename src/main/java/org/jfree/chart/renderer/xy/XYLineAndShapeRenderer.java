@@ -95,9 +95,9 @@ import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.util.BooleanList;
-import org.jfree.chart.util.LineUtilities;
+import org.jfree.chart.util.LineUtils;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.chart.util.ShapeUtils;
@@ -347,7 +347,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
      * @see #getLegendLine()
      */
     public void setLegendLine(Shape line) {
-        ParamChecks.nullNotPermitted(line, "line");
+        Args.nullNotPermitted(line, "line");
         this.legendLine = line;
         fireChangeEvent();
     }
@@ -856,7 +856,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
         else if (orientation == PlotOrientation.VERTICAL) {
             state.workingLine.setLine(transX0, transY0, transX1, transY1);
         }
-        visible = LineUtilities.clipLine(state.workingLine, dataArea);
+        visible = LineUtils.clipLine(state.workingLine, dataArea);
         if (visible) {
             drawFirstPassShape(g2, pass, series, item, state.workingLine);
         }
@@ -1030,7 +1030,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
 
         // add an entity for the item, but only if it falls within the data
         // area...
-        if (entities != null && isPointInRect(dataArea, xx, yy)) {
+        if (entities != null && ShapeUtils.isPointInRect(dataArea, xx, yy)) {
             addEntity(entities, entityArea, dataset, series, item, xx, yy);
         }
     }

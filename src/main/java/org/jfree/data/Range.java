@@ -64,7 +64,7 @@
 package org.jfree.data;
 
 import java.io.Serializable;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 
 /**
  * Represents an immutable range of values.
@@ -326,7 +326,7 @@ public strictfp class Range implements Serializable {
      */
     public static Range expand(Range range,
                                double lowerMargin, double upperMargin) {
-        ParamChecks.nullNotPermitted(range, "range");
+        Args.nullNotPermitted(range, "range");
         double length = range.getLength();
         double lower = range.getLowerBound() - length * lowerMargin;
         double upper = range.getUpperBound() + length * upperMargin;
@@ -362,7 +362,7 @@ public strictfp class Range implements Serializable {
      */
     public static Range shift(Range base, double delta,
                               boolean allowZeroCrossing) {
-        ParamChecks.nullNotPermitted(base, "base");
+        Args.nullNotPermitted(base, "base");
         if (allowZeroCrossing) {
             return new Range(base.getLowerBound() + delta,
                     base.getUpperBound() + delta);
@@ -406,7 +406,7 @@ public strictfp class Range implements Serializable {
      * @since 1.0.9
      */
     public static Range scale(Range base, double factor) {
-        ParamChecks.nullNotPermitted(base, "base");
+        Args.nullNotPermitted(base, "base");
         if (factor < 0) {
             throw new IllegalArgumentException("Negative 'factor' argument.");
         }

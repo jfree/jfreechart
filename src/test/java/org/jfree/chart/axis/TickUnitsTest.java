@@ -44,7 +44,7 @@ import java.text.DecimalFormat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -59,7 +59,7 @@ public class TickUnitsTest {
     public void testSerialization() {
         TickUnits t1 = new TickUnits();
         t1.add(new NumberTickUnit(10, new DecimalFormat("0.00")));
-        TickUnits t2 = (TickUnits) TestUtilities.serialised(t1);
+        TickUnits t2 = (TickUnits) TestUtils.serialised(t1);
         assertEquals(t1, t2);
     }
 

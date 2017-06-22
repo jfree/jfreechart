@@ -50,7 +50,7 @@ import java.util.List;
 
 import javax.swing.event.EventListenerList;
 
-import org.jfree.chart.HashUtilities;
+import org.jfree.chart.HashUtils;
 
 /**
  * A base class that can be used to implement a {@link DialLayer}.  It includes
@@ -128,7 +128,7 @@ public abstract class AbstractDialLayer implements DialLayer {
     @Override
     public int hashCode() {
         int result = 23;
-        result = HashUtilities.hashCode(result, this.visible);
+        result = HashUtils.hashCode(result, this.visible);
         return result;
     }
 

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * DialTextAnnotation.java
  * -----------------------
- * (C) Copyright 2006-2016, by Object Refinery Limited.
+ * (C) Copyright 2006-2017, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -56,11 +56,11 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-import org.jfree.chart.HashUtilities;
-import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.HashUtils;
+import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 
@@ -102,11 +102,11 @@ public class DialTextAnnotation extends AbstractDialLayer implements DialLayer,
      * @param label  the label ({@code null} not permitted).
      */
     public DialTextAnnotation(String label) {
-        ParamChecks.nullNotPermitted(label, "label");
+        Args.nullNotPermitted(label, "label");
         this.angle = -90.0;
         this.radius = 0.3;
         this.font = new Font("Dialog", Font.BOLD, 14);
-        this.paint = Color.black;
+        this.paint = Color.BLACK;
         this.label = label;
         this.anchor = TextAnchor.TOP_CENTER;
     }
@@ -131,7 +131,7 @@ public class DialTextAnnotation extends AbstractDialLayer implements DialLayer,
      * @see #getLabel()
      */
     public void setLabel(String label) {
-        ParamChecks.nullNotPermitted(label, "label");
+        Args.nullNotPermitted(label, "label");
         this.label = label;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -156,7 +156,7 @@ public class DialTextAnnotation extends AbstractDialLayer implements DialLayer,
      * @see #getFont()
      */
     public void setFont(Font font) {
-        ParamChecks.nullNotPermitted(font, "font");
+        Args.nullNotPermitted(font, "font");
         this.font = font;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -181,7 +181,7 @@ public class DialTextAnnotation extends AbstractDialLayer implements DialLayer,
      * @see #getPaint()
      */
     public void setPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.paint = paint;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -265,7 +265,7 @@ public class DialTextAnnotation extends AbstractDialLayer implements DialLayer,
      * @see #getAnchor()
      */
     public void setAnchor(TextAnchor anchor) {
-        ParamChecks.nullNotPermitted(anchor, "anchor");
+        Args.nullNotPermitted(anchor, "anchor");
         this.anchor = anchor;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -302,7 +302,7 @@ public class DialTextAnnotation extends AbstractDialLayer implements DialLayer,
         Point2D pt = arc.getStartPoint();
         g2.setPaint(this.paint);
         g2.setFont(this.font);
-        TextUtilities.drawAlignedString(this.label, g2, (float) pt.getX(),
+        TextUtils.drawAlignedString(this.label, g2, (float) pt.getX(),
                 (float) pt.getY(), this.anchor);
 
     }
@@ -352,7 +352,7 @@ public class DialTextAnnotation extends AbstractDialLayer implements DialLayer,
     @Override
     public int hashCode() {
         int result = 193;
-        result = 37 * result + HashUtilities.hashCodeForPaint(this.paint);
+        result = 37 * result + HashUtils.hashCodeForPaint(this.paint);
         result = 37 * result + this.font.hashCode();
         result = 37 * result + this.label.hashCode();
         result = 37 * result + this.anchor.hashCode();

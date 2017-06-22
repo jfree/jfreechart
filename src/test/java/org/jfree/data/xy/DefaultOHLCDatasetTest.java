@@ -48,11 +48,11 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.Date;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.Range;
-import org.jfree.data.general.DatasetUtilities;
+import org.jfree.data.general.DatasetUtils;
 import org.junit.Test;
 
 /**
@@ -72,7 +72,7 @@ public class DefaultOHLCDatasetTest {
         data[1] = new OHLCDataItem(new Date(22L), 4.0, 9.0, 2.0, 5.0, 120.0);
         data[2] = new OHLCDataItem(new Date(33L), 3.0, 7.0, 3.0, 6.0, 140.0);
         DefaultOHLCDataset d = new DefaultOHLCDataset("S1", data);
-        Range r = DatasetUtilities.findRangeBounds(d, true);
+        Range r = DatasetUtils.findRangeBounds(d, true);
         assertEquals(1.0, r.getLowerBound(), EPSILON);
         assertEquals(9.0, r.getUpperBound(), EPSILON);
     }
@@ -154,7 +154,7 @@ public class DefaultOHLCDatasetTest {
     public void testSerialization() {
         DefaultOHLCDataset d1 = new DefaultOHLCDataset("Series 1",
                 new OHLCDataItem[0]);
-        DefaultOHLCDataset d2 = (DefaultOHLCDataset) TestUtilities.serialised(d1);
+        DefaultOHLCDataset d2 = (DefaultOHLCDataset) TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------
  * LegendTitle.java
  * ----------------
- * (C) Copyright 2002-2016, by Object Refinery Limited.
+ * (C) Copyright 2002-2017, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Pierre-Marie Le Biot;
@@ -98,7 +98,7 @@ import org.jfree.chart.util.SerialUtils;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.Size2D;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SortOrder;
 
 
@@ -120,7 +120,7 @@ public class LegendTitle extends Title
             = new Font("SansSerif", Font.PLAIN, 12);
 
     /** The default item paint. */
-    public static final Paint DEFAULT_ITEM_PAINT = Color.black;
+    public static final Paint DEFAULT_ITEM_PAINT = Color.BLACK;
 
     /** The sources for legend items. */
     private LegendItemSource[] sources;
@@ -229,7 +229,7 @@ public class LegendTitle extends Title
      * @param sources  the sources ({@code null} not permitted).
      */
     public void setSources(LegendItemSource[] sources) {
-        ParamChecks.nullNotPermitted(sources, "sources");
+        Args.nullNotPermitted(sources, "sources");
         this.sources = sources;
         notifyListeners(new TitleChangeEvent(this));
     }
@@ -269,7 +269,7 @@ public class LegendTitle extends Title
      * @param edge  the edge ({@code null} not permitted).
      */
     public void setLegendItemGraphicEdge(RectangleEdge edge) {
-        ParamChecks.nullNotPermitted(edge, "edge");
+        Args.nullNotPermitted(edge, "edge");
         this.legendItemGraphicEdge = edge;
         notifyListeners(new TitleChangeEvent(this));
     }
@@ -289,7 +289,7 @@ public class LegendTitle extends Title
      * @param anchor  the anchor point ({@code null} not permitted).
      */
     public void setLegendItemGraphicAnchor(RectangleAnchor anchor) {
-        ParamChecks.nullNotPermitted(anchor, "anchor");
+        Args.nullNotPermitted(anchor, "anchor");
         this.legendItemGraphicAnchor = anchor;
     }
 
@@ -327,7 +327,7 @@ public class LegendTitle extends Title
      * @param padding  the padding ({@code null} not permitted).
      */
     public void setLegendItemGraphicPadding(RectangleInsets padding) {
-        ParamChecks.nullNotPermitted(padding, "padding");
+        Args.nullNotPermitted(padding, "padding");
         this.legendItemGraphicPadding = padding;
         notifyListeners(new TitleChangeEvent(this));
     }
@@ -348,7 +348,7 @@ public class LegendTitle extends Title
      * @param font  the font ({@code null} not permitted).
      */
     public void setItemFont(Font font) {
-        ParamChecks.nullNotPermitted(font, "font");
+        Args.nullNotPermitted(font, "font");
         this.itemFont = font;
         notifyListeners(new TitleChangeEvent(this));
     }
@@ -368,7 +368,7 @@ public class LegendTitle extends Title
      * @param paint  the paint ({@code null} not permitted).
      */
     public void setItemPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.itemPaint = paint;
         notifyListeners(new TitleChangeEvent(this));
     }
@@ -388,7 +388,7 @@ public class LegendTitle extends Title
      * @param padding  the padding ({@code null} not permitted).
      */
     public void setItemLabelPadding(RectangleInsets padding) {
-        ParamChecks.nullNotPermitted(padding, "padding");
+        Args.nullNotPermitted(padding, "padding");
         this.itemLabelPadding = padding;
         notifyListeners(new TitleChangeEvent(this));
     }
@@ -411,7 +411,7 @@ public class LegendTitle extends Title
      * @since 1.0.15
      */
     public void setSortOrder(SortOrder order) {
-        ParamChecks.nullNotPermitted(order, "order");
+        Args.nullNotPermitted(order, "order");
         this.sortOrder = order;
         notifyListeners(new TitleChangeEvent(this));
     }

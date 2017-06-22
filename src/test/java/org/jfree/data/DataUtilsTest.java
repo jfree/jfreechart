@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ----------------------
- * DataUtilitiesTest.java
- * ----------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited and Contributors.
+ * ------------------
+ * DataUtilsTest.java
+ * ------------------
+ * (C) Copyright 2005-2017, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -49,9 +49,9 @@ import static org.junit.Assert.assertFalse;
 import org.junit.Test;
 
 /**
- * Some tests for the {@link DataUtilities} class.
+ * Some tests for the {@link DataUtils} class.
  */
-public class DataUtilitiesTest {
+public class DataUtilsTest {
 
     /**
      * Tests the createNumberArray2D() method.
@@ -61,7 +61,7 @@ public class DataUtilitiesTest {
         double[][] d = new double[2][];
         d[0] = new double[] {1.1, 2.2, 3.3, 4.4};
         d[1] = new double[] {1.1, 2.2, 3.3, 4.4, 5.5};
-        Number[][] n = DataUtilities.createNumberArray2D(d);
+        Number[][] n = DataUtils.createNumberArray2D(d);
         assertEquals(2, n.length);
         assertEquals(4, n[0].length);
         assertEquals(5, n[1].length);
@@ -79,10 +79,10 @@ public class DataUtilitiesTest {
         table.addValue(new Double(2.0), "R0", "C1");
         table.addValue(new Double(3.0), "R1", "C0");
         table.addValue(new Double(4.0), "R1", "C1");
-        assertEquals(4.0, DataUtilities.calculateColumnTotal(table, 0), EPSILON);
-        assertEquals(6.0, DataUtilities.calculateColumnTotal(table, 1), EPSILON);
+        assertEquals(4.0, DataUtils.calculateColumnTotal(table, 0), EPSILON);
+        assertEquals(6.0, DataUtils.calculateColumnTotal(table, 1), EPSILON);
         table.setValue(null, "R1", "C1");
-        assertEquals(2.0, DataUtilities.calculateColumnTotal(table, 1), EPSILON);
+        assertEquals(2.0, DataUtils.calculateColumnTotal(table, 1), EPSILON);
     }
 
     /**
@@ -95,26 +95,26 @@ public class DataUtilitiesTest {
         table.addValue(new Double(2.0), "R0", "C1");
         table.addValue(new Double(3.0), "R1", "C0");
         table.addValue(new Double(4.0), "R1", "C1");
-        assertEquals(4.0, DataUtilities.calculateColumnTotal(table, 0,
+        assertEquals(4.0, DataUtils.calculateColumnTotal(table, 0,
                 new int[] {0, 1}), EPSILON);
-        assertEquals(1.0, DataUtilities.calculateColumnTotal(table, 0,
+        assertEquals(1.0, DataUtils.calculateColumnTotal(table, 0,
                 new int[] {0}), EPSILON);
-        assertEquals(3.0, DataUtilities.calculateColumnTotal(table, 0,
+        assertEquals(3.0, DataUtils.calculateColumnTotal(table, 0,
                 new int[] {1}), EPSILON);
-        assertEquals(0.0, DataUtilities.calculateColumnTotal(table, 0,
+        assertEquals(0.0, DataUtils.calculateColumnTotal(table, 0,
                 new int[] {}), EPSILON);
 
-        assertEquals(6.0, DataUtilities.calculateColumnTotal(table, 1,
+        assertEquals(6.0, DataUtils.calculateColumnTotal(table, 1,
                 new int[] {0, 1}), EPSILON);
-        assertEquals(2.0, DataUtilities.calculateColumnTotal(table, 1,
+        assertEquals(2.0, DataUtils.calculateColumnTotal(table, 1,
                 new int[] {0}), EPSILON);
-        assertEquals(4.0, DataUtilities.calculateColumnTotal(table, 1,
+        assertEquals(4.0, DataUtils.calculateColumnTotal(table, 1,
                 new int[] {1}), EPSILON);
 
         table.setValue(null, "R1", "C1");
-        assertEquals(2.0, DataUtilities.calculateColumnTotal(table, 1,
+        assertEquals(2.0, DataUtils.calculateColumnTotal(table, 1,
                 new int[] {0, 1}), EPSILON);
-        assertEquals(0.0, DataUtilities.calculateColumnTotal(table, 1,
+        assertEquals(0.0, DataUtils.calculateColumnTotal(table, 1,
                 new int[] {1}), EPSILON);
     }
 
@@ -128,10 +128,10 @@ public class DataUtilitiesTest {
         table.addValue(new Double(2.0), "R0", "C1");
         table.addValue(new Double(3.0), "R1", "C0");
         table.addValue(new Double(4.0), "R1", "C1");
-        assertEquals(3.0, DataUtilities.calculateRowTotal(table, 0), EPSILON);
-        assertEquals(7.0, DataUtilities.calculateRowTotal(table, 1), EPSILON);
+        assertEquals(3.0, DataUtils.calculateRowTotal(table, 0), EPSILON);
+        assertEquals(7.0, DataUtils.calculateRowTotal(table, 1), EPSILON);
         table.setValue(null, "R1", "C1");
-        assertEquals(3.0, DataUtilities.calculateRowTotal(table, 1), EPSILON);
+        assertEquals(3.0, DataUtils.calculateRowTotal(table, 1), EPSILON);
     }
 
     /**
@@ -144,27 +144,27 @@ public class DataUtilitiesTest {
         table.addValue(new Double(2.0), "R0", "C1");
         table.addValue(new Double(3.0), "R1", "C0");
         table.addValue(new Double(4.0), "R1", "C1");
-        assertEquals(3.0, DataUtilities.calculateRowTotal(table, 0,
+        assertEquals(3.0, DataUtils.calculateRowTotal(table, 0,
                 new int[] {0, 1}), EPSILON);
-        assertEquals(1.0, DataUtilities.calculateRowTotal(table, 0,
+        assertEquals(1.0, DataUtils.calculateRowTotal(table, 0,
                 new int[] {0}), EPSILON);
-        assertEquals(2.0, DataUtilities.calculateRowTotal(table, 0,
+        assertEquals(2.0, DataUtils.calculateRowTotal(table, 0,
                 new int[] {1}), EPSILON);
-        assertEquals(0.0, DataUtilities.calculateRowTotal(table, 0,
+        assertEquals(0.0, DataUtils.calculateRowTotal(table, 0,
                 new int[] {}), EPSILON);
 
-        assertEquals(7.0, DataUtilities.calculateRowTotal(table, 1,
+        assertEquals(7.0, DataUtils.calculateRowTotal(table, 1,
                 new int[] {0, 1}), EPSILON);
-        assertEquals(3.0, DataUtilities.calculateRowTotal(table, 1,
+        assertEquals(3.0, DataUtils.calculateRowTotal(table, 1,
                 new int[] {0}), EPSILON);
-        assertEquals(4.0, DataUtilities.calculateRowTotal(table, 1,
+        assertEquals(4.0, DataUtils.calculateRowTotal(table, 1,
                 new int[] {1}), EPSILON);
-        assertEquals(0.0, DataUtilities.calculateRowTotal(table, 1,
+        assertEquals(0.0, DataUtils.calculateRowTotal(table, 1,
                 new int[] {}), EPSILON);
         table.setValue(null, "R1", "C1");
-        assertEquals(3.0, DataUtilities.calculateRowTotal(table, 1,
+        assertEquals(3.0, DataUtils.calculateRowTotal(table, 1,
                 new int[] {0, 1}), EPSILON);
-        assertEquals(0.0, DataUtilities.calculateRowTotal(table, 1,
+        assertEquals(0.0, DataUtils.calculateRowTotal(table, 1,
                 new int[] {1}), EPSILON);
     }
 
@@ -173,48 +173,48 @@ public class DataUtilitiesTest {
      */
     @Test
     public void testEqual() {
-        assertTrue(DataUtilities.equal(null, null));
+        assertTrue(DataUtils.equal(null, null));
         
         double[][] a = new double[5][];
         double[][] b = new double[5][];
-        assertTrue(DataUtilities.equal(a, b));
+        assertTrue(DataUtils.equal(a, b));
 
         a = new double[4][];
-        assertFalse(DataUtilities.equal(a, b));
+        assertFalse(DataUtils.equal(a, b));
         b = new double[4][];
-        assertTrue(DataUtilities.equal(a, b));
+        assertTrue(DataUtils.equal(a, b));
 
         a[0] = new double[6];
-        assertFalse(DataUtilities.equal(a, b));
+        assertFalse(DataUtils.equal(a, b));
         b[0] = new double[6];
-        assertTrue(DataUtilities.equal(a, b));
+        assertTrue(DataUtils.equal(a, b));
 
         a[0][0] = 1.0;
-        assertFalse(DataUtilities.equal(a, b));
+        assertFalse(DataUtils.equal(a, b));
         b[0][0] = 1.0;
-        assertTrue(DataUtilities.equal(a, b));
+        assertTrue(DataUtils.equal(a, b));
 
         a[0][1] = Double.NaN;
-        assertFalse(DataUtilities.equal(a, b));
+        assertFalse(DataUtils.equal(a, b));
         b[0][1] = Double.NaN;
-        assertTrue(DataUtilities.equal(a, b));
+        assertTrue(DataUtils.equal(a, b));
 
         a[0][2] = Double.NEGATIVE_INFINITY;
-        assertFalse(DataUtilities.equal(a, b));
+        assertFalse(DataUtils.equal(a, b));
         b[0][2] = Double.NEGATIVE_INFINITY;
-        assertTrue(DataUtilities.equal(a, b));
+        assertTrue(DataUtils.equal(a, b));
 
         a[0][3] = Double.POSITIVE_INFINITY;
-        assertFalse(DataUtilities.equal(a, b));
+        assertFalse(DataUtils.equal(a, b));
         b[0][3] = Double.POSITIVE_INFINITY;
-        assertTrue(DataUtilities.equal(a, b));
+        assertTrue(DataUtils.equal(a, b));
 
         a[0][4] = Double.POSITIVE_INFINITY;
-        assertFalse(DataUtilities.equal(a, b));
+        assertFalse(DataUtils.equal(a, b));
         b[0][4] = Double.NEGATIVE_INFINITY;
-        assertFalse(DataUtilities.equal(a, b));
+        assertFalse(DataUtils.equal(a, b));
         b[0][4] = Double.POSITIVE_INFINITY;
-        assertTrue(DataUtilities.equal(a, b));
+        assertTrue(DataUtils.equal(a, b));
     }
 
     /**
@@ -223,23 +223,23 @@ public class DataUtilitiesTest {
     @Test
     public void testClone() {
         double[][] a = new double[1][];
-        double[][] b = DataUtilities.clone(a);
-        assertTrue(DataUtilities.equal(a, b));
+        double[][] b = DataUtils.clone(a);
+        assertTrue(DataUtils.equal(a, b));
         a[0] = new double[] { 3.0, 4.0 };
-        assertFalse(DataUtilities.equal(a, b));
+        assertFalse(DataUtils.equal(a, b));
         b[0] = new double[] { 3.0, 4.0 };
-        assertTrue(DataUtilities.equal(a, b));
+        assertTrue(DataUtils.equal(a, b));
 
         a = new double[2][3];
         a[0][0] = 1.23;
         a[1][1] = Double.NaN;
-        b = DataUtilities.clone(a);
-        assertTrue(DataUtilities.equal(a, b));
+        b = DataUtils.clone(a);
+        assertTrue(DataUtils.equal(a, b));
 
         a[0][0] = 99.9;
-        assertFalse(DataUtilities.equal(a, b));
+        assertFalse(DataUtils.equal(a, b));
         b[0][0] = 99.9;
-        assertTrue(DataUtilities.equal(a, b));
+        assertTrue(DataUtils.equal(a, b));
     }
 
 }

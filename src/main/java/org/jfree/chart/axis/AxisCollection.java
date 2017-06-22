@@ -43,7 +43,7 @@ package org.jfree.chart.axis;
 
 import java.util.List;
 import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 
 /**
  * A collection of axes that have been assigned to the TOP, BOTTOM, LEFT or
@@ -122,8 +122,8 @@ public class AxisCollection {
      *              ({@code null} not permitted).
      */
     public void add(Axis axis, RectangleEdge edge) {
-        ParamChecks.nullNotPermitted(axis, "axis");
-        ParamChecks.nullNotPermitted(edge, "edge");
+        Args.nullNotPermitted(axis, "axis");
+        Args.nullNotPermitted(edge, "edge");
         if (edge == RectangleEdge.TOP) {
             this.axesAtTop.add(axis);
         }

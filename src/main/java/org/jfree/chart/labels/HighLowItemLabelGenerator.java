@@ -57,7 +57,7 @@ import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.util.Date;
 
-import org.jfree.chart.HashUtilities;
+import org.jfree.chart.HashUtils;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.xy.OHLCDataset;
 import org.jfree.data.xy.XYDataset;
@@ -221,8 +221,8 @@ public class HighLowItemLabelGenerator implements XYItemLabelGenerator,
     @Override
     public int hashCode() {
         int result = 127;
-        result = HashUtilities.hashCode(result, this.dateFormatter);
-        result = HashUtilities.hashCode(result, this.numberFormatter);
+        result = HashUtils.hashCode(result, this.dateFormatter);
+        result = HashUtils.hashCode(result, this.numberFormatter);
         return result;
     }
     

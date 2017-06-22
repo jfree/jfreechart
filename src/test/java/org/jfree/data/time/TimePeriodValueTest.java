@@ -43,7 +43,7 @@ package org.jfree.data.time;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -77,7 +77,7 @@ public class TimePeriodValueTest {
     @Test
     public void testSerialization() {
         TimePeriodValue tpv1 = new TimePeriodValue(new Day(30, 7, 2003), 55.75);
-        TimePeriodValue tpv2 = (TimePeriodValue) TestUtilities.serialised(tpv1);
+        TimePeriodValue tpv2 = (TimePeriodValue) TestUtils.serialised(tpv1);
         assertEquals(tpv1, tpv2);
     }
 

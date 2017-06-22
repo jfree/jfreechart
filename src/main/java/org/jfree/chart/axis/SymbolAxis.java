@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * SymbolAxis.java
  * ---------------
- * (C) Copyright 2002-2016, by Anthony Boulestreau and Contributors.
+ * (C) Copyright 2002-2017, by Anthony Boulestreau and Contributors.
  *
  * Original Author:  Anthony Boulestreau;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -103,11 +103,11 @@ import java.util.List;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.ValueAxisPlot;
-import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.Range;
 
@@ -230,7 +230,7 @@ public class SymbolAxis extends NumberAxis implements Serializable {
      * @see #getGridBandPaint()
      */
     public void setGridBandPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.gridBandPaint = paint;
         fireChangeEvent();
     }
@@ -264,7 +264,7 @@ public class SymbolAxis extends NumberAxis implements Serializable {
      * @since 1.0.7
      */
     public void setGridBandAlternatePaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.gridBandAlternatePaint = paint;
         fireChangeEvent();
     }
@@ -569,7 +569,7 @@ public class SymbolAxis extends NumberAxis implements Serializable {
                 }
 
                 // avoid to draw overlapping tick labels
-                Rectangle2D bounds = TextUtilities.getTextBounds(tickLabel, g2,
+                Rectangle2D bounds = TextUtils.getTextBounds(tickLabel, g2,
                         g2.getFontMetrics());
                 double tickLabelLength = isVerticalTickLabels()
                         ? bounds.getHeight() : bounds.getWidth();
@@ -663,7 +663,7 @@ public class SymbolAxis extends NumberAxis implements Serializable {
                 }
 
                 // avoid to draw overlapping tick labels
-                Rectangle2D bounds = TextUtilities.getTextBounds(tickLabel, g2,
+                Rectangle2D bounds = TextUtils.getTextBounds(tickLabel, g2,
                         g2.getFontMetrics());
                 double tickLabelLength = isVerticalTickLabels()
                     ? bounds.getWidth() : bounds.getHeight();

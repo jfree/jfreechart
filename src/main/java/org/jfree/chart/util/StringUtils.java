@@ -47,7 +47,7 @@ public class StringUtils {
      *
      * @return true, if the string starts with the given starting text.
      */
-    public static boolean startsWithIgnoreCase(final String base, final String start) {
+    public static boolean startsWithIgnoreCase(String base, String start) {
         if (base.length() < start.length()) {
             return false;
         }
@@ -62,7 +62,7 @@ public class StringUtils {
      *
      * @return true, if the string ends with the given ending text.
      */
-    public static boolean endsWithIgnoreCase(final String base, final String end) {
+    public static boolean endsWithIgnoreCase(String base, String end) {
         if (base.length() < end.length()) {
             return false;
         }

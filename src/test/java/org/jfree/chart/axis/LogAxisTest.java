@@ -51,7 +51,7 @@ import java.awt.image.BufferedImage;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
@@ -151,7 +151,7 @@ public class LogAxisTest {
     @Test
     public void testSerialization() {
         LogAxis a1 = new LogAxis("Test Axis");
-        LogAxis a2 = (LogAxis) TestUtilities.serialised(a1);
+        LogAxis a2 = (LogAxis) TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 

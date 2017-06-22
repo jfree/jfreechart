@@ -45,7 +45,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.text.TextBlock;
 import org.jfree.chart.text.TextBlockAnchor;
 import org.jfree.chart.text.TextLine;
@@ -145,7 +145,7 @@ public class CategoryTickTest {
     public void testSerialization() {
         CategoryTick t1 = new CategoryTick("C1", new TextBlock(),
                 TextBlockAnchor.CENTER, TextAnchor.CENTER, 1.5f);
-        CategoryTick t2 = (CategoryTick) TestUtilities.serialised(t1);
+        CategoryTick t2 = (CategoryTick) TestUtils.serialised(t1);
         assertEquals(t1, t2);
     }
 

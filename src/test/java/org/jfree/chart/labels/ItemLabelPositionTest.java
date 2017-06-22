@@ -43,7 +43,7 @@ package org.jfree.chart.labels;
 
 import static org.junit.Assert.assertEquals;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -67,7 +67,7 @@ public class ItemLabelPositionTest {
     @Test
     public void testSerialization() {
         ItemLabelPosition p1 = new ItemLabelPosition();
-        ItemLabelPosition p2 = (ItemLabelPosition) TestUtilities.serialised(p1);
+        ItemLabelPosition p2 = (ItemLabelPosition) TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 

@@ -42,7 +42,7 @@ package org.jfree.data.gantt;
 
 import java.util.Date;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -124,7 +124,7 @@ public class XYTaskDatasetTest {
         TaskSeriesCollection u1 = new TaskSeriesCollection();
         u1.add(s1);
         XYTaskDataset d1 = new XYTaskDataset(u1);
-        XYTaskDataset d2 = (XYTaskDataset) TestUtilities.serialised(d1);
+        XYTaskDataset d2 = (XYTaskDataset) TestUtils.serialised(d1);
         assertEquals(d1, d2);
 
         // basic check for independence

@@ -46,7 +46,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.CategoryPlot;
@@ -109,7 +109,7 @@ public class LayeredBarRendererTest {
     @Test
     public void testSerialization() {
         LayeredBarRenderer r1 = new LayeredBarRenderer();
-        LayeredBarRenderer r2 = (LayeredBarRenderer) TestUtilities.serialised(r1);
+        LayeredBarRenderer r2 = (LayeredBarRenderer) TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

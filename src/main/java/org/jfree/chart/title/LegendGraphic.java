@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -72,7 +72,7 @@ import org.jfree.chart.ui.Size2D;
 import org.jfree.chart.ui.StandardGradientPaintTransformer;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.chart.util.ShapeUtils;
@@ -154,8 +154,8 @@ public class LegendGraphic extends AbstractBlock
      * @param fillPaint  the fill paint ({@code null} not permitted).
      */
     public LegendGraphic(Shape shape, Paint fillPaint) {
-        ParamChecks.nullNotPermitted(shape, "shape");
-        ParamChecks.nullNotPermitted(fillPaint, "fillPaint");
+        Args.nullNotPermitted(shape, "shape");
+        Args.nullNotPermitted(fillPaint, "fillPaint");
         this.shapeVisible = true;
         this.shape = shape;
         this.shapeAnchor = RectangleAnchor.CENTER;
@@ -283,7 +283,7 @@ public class LegendGraphic extends AbstractBlock
      * @see #getFillPaintTransformer()
      */
     public void setFillPaintTransformer(GradientPaintTransformer transformer) {
-        ParamChecks.nullNotPermitted(transformer, "transformer");
+        Args.nullNotPermitted(transformer, "transformer");
         this.fillPaintTransformer = transformer;
     }
 
@@ -374,7 +374,7 @@ public class LegendGraphic extends AbstractBlock
      * @see #setShapeAnchor(RectangleAnchor)
      */
     public void setShapeAnchor(RectangleAnchor anchor) {
-        ParamChecks.nullNotPermitted(anchor, "anchor");
+        Args.nullNotPermitted(anchor, "anchor");
         this.shapeAnchor = anchor;
     }
 
@@ -398,7 +398,7 @@ public class LegendGraphic extends AbstractBlock
      * @see #getShapeLocation()
      */
     public void setShapeLocation(RectangleAnchor location) {
-        ParamChecks.nullNotPermitted(location, "location");
+        Args.nullNotPermitted(location, "location");
         this.shapeLocation = location;
     }
 
@@ -580,8 +580,7 @@ public class LegendGraphic extends AbstractBlock
         area = trimPadding(area);
 
         if (this.lineVisible) {
-            Point2D location = RectangleAnchor.coordinates(area,
-                    this.shapeLocation);
+            Point2D location = this.shapeLocation.getAnchorPoint(area);
             Shape aLine = ShapeUtils.createTranslatedShape(getLine(),
                     this.shapeAnchor, location.getX(), location.getY());
             g2.setPaint(this.linePaint);
@@ -590,8 +589,7 @@ public class LegendGraphic extends AbstractBlock
         }
 
         if (this.shapeVisible) {
-            Point2D location = RectangleAnchor.coordinates(area,
-                    this.shapeLocation);
+            Point2D location = this.shapeLocation.getAnchorPoint(area);
 
             Shape s = ShapeUtils.createTranslatedShape(this.shape,
                     this.shapeAnchor, location.getX(), location.getY());

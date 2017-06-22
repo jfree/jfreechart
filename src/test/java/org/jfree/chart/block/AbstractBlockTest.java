@@ -48,7 +48,7 @@ import static org.junit.Assert.fail;
 import java.awt.Color;
 import java.awt.geom.Rectangle2D;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.ui.RectangleInsets;
 
 import org.junit.Test;
@@ -78,9 +78,9 @@ public class AbstractBlockTest{
         b2.setMargin(new RectangleInsets(1.0, 2.0, 3.0, 4.0));
         assertTrue(b1.equals(b2));
 
-        b1.setFrame(new BlockBorder(Color.red));
+        b1.setFrame(new BlockBorder(Color.RED));
         assertFalse(b1.equals(b2));
-        b2.setFrame(new BlockBorder(Color.red));
+        b2.setFrame(new BlockBorder(Color.RED));
         assertTrue(b1.equals(b2));
 
         b1.setPadding(new RectangleInsets(2.0, 4.0, 6.0, 8.0));
@@ -146,7 +146,7 @@ public class AbstractBlockTest{
     @Test
     public void testSerialization() {
         EmptyBlock b1 = new EmptyBlock(1.0, 2.0);
-        EmptyBlock b2 = (EmptyBlock) TestUtilities.serialised(b1);
+        EmptyBlock b2 = (EmptyBlock) TestUtils.serialised(b1);
         assertEquals(b1, b2);
     }
 

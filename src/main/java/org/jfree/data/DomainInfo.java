@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * DomainInfo.java
  * ---------------
- * (C) Copyright 2000-2016, by Object Refinery Limited.
+ * (C) Copyright 2000-2017, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -52,7 +52,7 @@ package org.jfree.data;
 /**
  * An interface (optional) that can be implemented by a dataset to assist in
  * determining the minimum and maximum values.  If not present, 
- * {@link org.jfree.data.general.DatasetUtilities} will iterate over all the 
+ * {@link org.jfree.data.general.DatasetUtils} will iterate over all the 
  * values in the dataset to get the bounds.
  */
 public interface DomainInfo {

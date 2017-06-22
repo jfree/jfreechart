@@ -48,7 +48,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -77,9 +77,9 @@ public class ExtendedCategoryAxisTest {
         a2.setSubLabelFont(new Font("Dialog", Font.BOLD, 8));
         assertTrue(a1.equals(a2));
 
-        a1.setSubLabelPaint(Color.red);
+        a1.setSubLabelPaint(Color.RED);
         assertFalse(a1.equals(a2));
-        a2.setSubLabelPaint(Color.red);
+        a2.setSubLabelPaint(Color.RED);
         assertTrue(a1.equals(a2));
     }
 
@@ -122,8 +122,8 @@ public class ExtendedCategoryAxisTest {
     public void testCloning2() throws CloneNotSupportedException {
         ExtendedCategoryAxis a1 = new ExtendedCategoryAxis("Test");
         a1.setTickLabelFont("C1", new Font("Dialog", Font.PLAIN, 15));
-        a1.setTickLabelPaint("C1", new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.white));
+        a1.setTickLabelPaint("C1", new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.WHITE));
         ExtendedCategoryAxis a2 = (ExtendedCategoryAxis) a1.clone();
         assertTrue(a1 != a2);
         assertTrue(a1.getClass() == a2.getClass());
@@ -136,9 +136,9 @@ public class ExtendedCategoryAxisTest {
         assertTrue(a1.equals(a2));
 
         // check that changing a tick label paint in a1 doesn't change a2
-        a1.setTickLabelPaint("C1", Color.yellow);
+        a1.setTickLabelPaint("C1", Color.YELLOW);
         assertFalse(a1.equals(a2));
-        a2.setTickLabelPaint("C1", Color.yellow);
+        a2.setTickLabelPaint("C1", Color.YELLOW);
         assertTrue(a1.equals(a2));
 
         // check that changing a category label tooltip in a1 doesn't change a2
@@ -154,10 +154,10 @@ public class ExtendedCategoryAxisTest {
     @Test
     public void testSerialization() {
         ExtendedCategoryAxis a1 = new ExtendedCategoryAxis("Test");
-        a1.setSubLabelPaint(new GradientPaint(1.0f, 2.0f, Color.red, 3.0f,
-                4.0f, Color.blue));
+        a1.setSubLabelPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f,
+                4.0f, Color.BLUE));
         ExtendedCategoryAxis a2 = (ExtendedCategoryAxis) 
-                TestUtilities.serialised(a1);
+                TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 

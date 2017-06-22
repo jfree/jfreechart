@@ -44,7 +44,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -93,7 +93,7 @@ public class BlockContainerTest {
     public void testSerialization() {
         BlockContainer c1 = new BlockContainer();
         c1.add(new EmptyBlock(1.2, 3.4));
-        BlockContainer c2 = (BlockContainer) TestUtilities.serialised(c1);
+        BlockContainer c2 = (BlockContainer) TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 

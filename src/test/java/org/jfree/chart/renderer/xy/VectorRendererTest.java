@@ -47,7 +47,7 @@ import static org.junit.Assert.assertFalse;
 
 import java.awt.Color;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.Test;
@@ -115,7 +115,7 @@ public class VectorRendererTest {
     @Test
     public void testSerialization() {
         VectorRenderer r1 = new VectorRenderer();
-        VectorRenderer r2 = (VectorRenderer) TestUtilities.serialised(r1);
+        VectorRenderer r2 = (VectorRenderer) TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

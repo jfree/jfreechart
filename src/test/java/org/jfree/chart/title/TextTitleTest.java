@@ -51,7 +51,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.ui.HorizontalAlignment;
 
 import org.junit.Test;
@@ -87,19 +87,19 @@ public class TextTitleTest {
         assertTrue(t1.equals(t2));
 
         // paint
-        t1.setPaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.blue));
+        t1.setPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.BLUE));
         assertFalse(t1.equals(t2));
-        t2.setPaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.blue));
+        t2.setPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.BLUE));
         assertTrue(t1.equals(t2));
 
         // backgroundPaint
-        t1.setBackgroundPaint(new GradientPaint(4.0f, 3.0f, Color.red,
-                2.0f, 1.0f, Color.blue));
+        t1.setBackgroundPaint(new GradientPaint(4.0f, 3.0f, Color.RED,
+                2.0f, 1.0f, Color.BLUE));
         assertFalse(t1.equals(t2));
-        t2.setBackgroundPaint(new GradientPaint(4.0f, 3.0f, Color.red,
-                2.0f, 1.0f, Color.blue));
+        t2.setBackgroundPaint(new GradientPaint(4.0f, 3.0f, Color.RED,
+                2.0f, 1.0f, Color.BLUE));
         assertTrue(t1.equals(t2));
 
         // maximumLinesToDisplay
@@ -159,7 +159,7 @@ public class TextTitleTest {
     @Test
     public void testSerialization() {
         TextTitle t1 = new TextTitle("Test");
-        TextTitle t2 = (TextTitle) TestUtilities.serialised(t1);
+        TextTitle t2 = (TextTitle) TestUtils.serialised(t1);
         assertEquals(t1, t2);
     }
 

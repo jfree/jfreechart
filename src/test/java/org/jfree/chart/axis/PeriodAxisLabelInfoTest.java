@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------------
  * PeriodAxisLabelInfoTest.java
  * ----------------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2017, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -56,7 +56,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.ui.RectangleInsets;
 
 import org.jfree.data.time.Day;
@@ -89,14 +89,14 @@ public class PeriodAxisLabelInfoTest {
         RectangleInsets sp2 = new RectangleInsets(2, 2, 2, 2);
         Font lf1 = new Font("SansSerif", Font.PLAIN, 10);
         Font lf2 = new Font("SansSerif", Font.BOLD, 9);
-        Paint lp1 = Color.black;
-        Paint lp2 = Color.blue;
+        Paint lp1 = Color.BLACK;
+        Paint lp2 = Color.BLUE;
         boolean b1 = true;
         boolean b2 = false;
         Stroke s1 = new BasicStroke(0.5f);
         Stroke s2 = new BasicStroke(0.25f);
-        Paint dp1 = Color.red;
-        Paint dp2 = Color.green;
+        Paint dp1 = Color.RED;
+        Paint dp2 = Color.GREEN;
 
         info1 = new PeriodAxisLabelInfo(c2, df1, sp1, lf1, lp1, b1, s1, dp1);
         info2 = new PeriodAxisLabelInfo(c1, df1, sp1, lf1, lp1, b1, s1, dp1);
@@ -176,7 +176,7 @@ public class PeriodAxisLabelInfoTest {
     public void testSerialization() {
         PeriodAxisLabelInfo info1 = new PeriodAxisLabelInfo(Day.class,
                 new SimpleDateFormat("d"));
-        PeriodAxisLabelInfo info2 = (PeriodAxisLabelInfo) TestUtilities.serialised(info1);
+        PeriodAxisLabelInfo info2 = (PeriodAxisLabelInfo) TestUtils.serialised(info1);
         assertEquals(info1, info2);
     }
 

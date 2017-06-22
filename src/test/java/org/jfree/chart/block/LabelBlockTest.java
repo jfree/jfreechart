@@ -50,7 +50,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.text.TextBlockAnchor;
 import org.jfree.chart.ui.RectangleAnchor;
 
@@ -67,31 +67,31 @@ public class LabelBlockTest {
     @Test
     public void testEquals() {
         LabelBlock b1 = new LabelBlock("ABC", new Font("Dialog",
-                Font.PLAIN, 12), Color.red);
+                Font.PLAIN, 12), Color.RED);
         LabelBlock b2 = new LabelBlock("ABC", new Font("Dialog",
-                Font.PLAIN, 12), Color.red);
+                Font.PLAIN, 12), Color.RED);
         assertTrue(b1.equals(b2));
         assertTrue(b2.equals(b2));
 
         b1 = new LabelBlock("XYZ", new Font("Dialog", Font.PLAIN, 12),
-                Color.red);
+                Color.RED);
         assertFalse(b1.equals(b2));
         b2 = new LabelBlock("XYZ", new Font("Dialog", Font.PLAIN, 12),
-                Color.red);
+                Color.RED);
         assertTrue(b1.equals(b2));
 
         b1 = new LabelBlock("XYZ", new Font("Dialog", Font.BOLD, 12),
-                Color.red);
+                Color.RED);
         assertFalse(b1.equals(b2));
         b2 = new LabelBlock("XYZ", new Font("Dialog", Font.BOLD, 12),
-                Color.red);
+                Color.RED);
         assertTrue(b1.equals(b2));
 
         b1 = new LabelBlock("XYZ", new Font("Dialog", Font.BOLD, 12),
-                Color.blue);
+                Color.BLUE);
         assertFalse(b1.equals(b2));
         b2 = new LabelBlock("XYZ", new Font("Dialog", Font.BOLD, 12),
-                Color.blue);
+                Color.BLUE);
         assertTrue(b1.equals(b2));
 
         b1.setToolTipText("Tooltip");
@@ -121,7 +121,7 @@ public class LabelBlockTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         LabelBlock b1 = new LabelBlock("ABC", new Font("Dialog",
-                Font.PLAIN, 12), Color.red);
+                Font.PLAIN, 12), Color.RED);
         LabelBlock b2 = (LabelBlock) b1.clone();
         assertTrue(b1 != b2);
         assertTrue(b1.getClass() == b2.getClass());
@@ -133,11 +133,11 @@ public class LabelBlockTest {
      */
     @Test
     public void testSerialization() {
-        GradientPaint gp = new GradientPaint(1.0f, 2.0f, Color.red, 3.0f, 4.0f,
-                Color.blue);
+        GradientPaint gp = new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f,
+                Color.BLUE);
         LabelBlock b1 = new LabelBlock("ABC", new Font("Dialog",
                 Font.PLAIN, 12), gp);
-        LabelBlock b2 = (LabelBlock) TestUtilities.serialised(b1);
+        LabelBlock b2 = (LabelBlock) TestUtils.serialised(b1);
         assertEquals(b1, b2);
     }
 

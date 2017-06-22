@@ -40,7 +40,7 @@
 
 package org.jfree.data.general;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
@@ -190,7 +190,7 @@ public class DefaultHeatMapDatasetTest implements DatasetChangeListener {
         d1.setZValue(0, 2, Double.POSITIVE_INFINITY);
         d1.setZValue(1, 0, Double.NaN);
         DefaultHeatMapDataset d2 = (DefaultHeatMapDataset) 
-                TestUtilities.serialised(d1);
+                TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 

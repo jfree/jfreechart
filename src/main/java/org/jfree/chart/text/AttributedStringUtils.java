@@ -34,7 +34,7 @@ import java.text.CharacterIterator;
 import java.util.Map;
 
 /**
- * Some utility methods for working with <code>AttributedString</code> objects.
+ * Some utility methods for working with {@code AttributedString} objects.
  */
 public class AttributedStringUtils {
 
@@ -47,11 +47,11 @@ public class AttributedStringUtils {
     /**
      * Tests two attributed strings for equality.
      * 
-     * @param s1  string 1 (<code>null</code> permitted).
-     * @param s2  string 2 (<code>null</code> permitted).
+     * @param s1  string 1 ({@code null} permitted).
+     * @param s2  string 2 ({@code null} permitted).
      * 
-     * @return <code>true</code> if <code>s1</code> and <code>s2</code> are
-     *         equal or both <code>null</code>, and <code>false</code> 
+     * @return {@code true} if {@code s1} and {@code s2} are
+     *         equal or both {@code null}, and {@code false} 
      *         otherwise.
      */
     public static boolean equal(AttributedString s1, AttributedString s2) {

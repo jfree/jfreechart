@@ -47,7 +47,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.awt.geom.Rectangle2D;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.junit.Test;
@@ -115,7 +115,7 @@ public class LegendItemEntityTest {
     public void testSerialization() {
         LegendItemEntity e1 = new LegendItemEntity(new Rectangle2D.Double(1.0,
                 2.0, 3.0, 4.0));
-        LegendItemEntity e2 = (LegendItemEntity) TestUtilities.serialised(e1);
+        LegendItemEntity e2 = (LegendItemEntity) TestUtils.serialised(e1);
         assertEquals(e1, e2);
     }
 

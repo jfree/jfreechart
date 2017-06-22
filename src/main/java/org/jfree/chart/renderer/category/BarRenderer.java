@@ -27,7 +27,7 @@
  * ----------------
  * BarRenderer.java
  * ----------------
- * (C) Copyright 2002-2016, by Object Refinery Limited.
+ * (C) Copyright 2002-2017, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Christian W. Zuckschwerdt;
@@ -122,13 +122,13 @@ import org.jfree.chart.labels.ItemLabelPosition;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
-import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.GradientPaintTransformer;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.StandardGradientPaintTransformer;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.KeyedValues2DItemKey;
@@ -184,7 +184,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      * @since 1.0.11
      */
     public static void setDefaultBarPainter(BarPainter painter) {
-        ParamChecks.nullNotPermitted(painter, "painter");
+        Args.nullNotPermitted(painter, "painter");
         BarRenderer.defaultBarPainter = painter;
     }
 
@@ -319,7 +319,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
         setDefaultLegendShape(new Rectangle2D.Double(-4.0, -4.0, 8.0, 8.0));
         this.barPainter = getDefaultBarPainter();
         this.shadowsVisible = getDefaultShadowsVisible();
-        this.shadowPaint = Color.gray;
+        this.shadowPaint = Color.GRAY;
         this.shadowXOffset = 4.0;
         this.shadowYOffset = 4.0;
     }
@@ -599,7 +599,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      * @since 1.0.11
      */
     public void setBarPainter(BarPainter painter) {
-        ParamChecks.nullNotPermitted(painter, "painter");
+        Args.nullNotPermitted(painter, "painter");
         this.barPainter = painter;
         fireChangeEvent();
     }
@@ -653,7 +653,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      * @since 1.0.11
      */
     public void setShadowPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.shadowPaint = paint;
         fireChangeEvent();
     }
@@ -951,7 +951,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
         LegendItem result = new LegendItem(label, description, toolTipText,
                 urlText, true, shape, true, paint, isDrawBarOutline(),
                 outlinePaint, outlineStroke, false, new Line2D.Float(),
-                new BasicStroke(1.0f), Color.black);
+                new BasicStroke(1.0f), Color.BLACK);
         result.setLabelFont(lookupLegendTextFont(series));
         Paint labelPaint = lookupLegendTextPaint(series);
         if (labelPaint != null) {
@@ -1159,7 +1159,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
                 position.getItemLabelAnchor(), bar, plot.getOrientation());
 
         if (isInternalAnchor(position.getItemLabelAnchor())) {
-            Shape bounds = TextUtilities.calculateRotatedStringBounds(label,
+            Shape bounds = TextUtils.calculateRotatedStringBounds(label,
                     g2, (float) anchorPoint.getX(), (float) anchorPoint.getY(),
                     position.getTextAnchor(), position.getAngle(),
                     position.getRotationAnchor());
@@ -1183,7 +1183,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
         }
 
         if (position != null) {
-            TextUtilities.drawRotatedString(label, g2,
+            TextUtils.drawRotatedString(label, g2,
                     (float) anchorPoint.getX(), (float) anchorPoint.getY(),
                     position.getTextAnchor(), position.getAngle(),
                     position.getRotationAnchor());

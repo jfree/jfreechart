@@ -49,7 +49,7 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 
 /**
  * A data structure that stores zero, one or many objects, where each object is
@@ -149,7 +149,7 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      * @see #getRowKey(int)
      */
     public int getRowIndex(Comparable key) {
-        ParamChecks.nullNotPermitted(key, "key");
+        Args.nullNotPermitted(key, "key");
         return this.rowKeys.indexOf(key);
     }
 
@@ -188,7 +188,7 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      * @see #getColumnKey(int)
      */
     public int getColumnIndex(Comparable key) {
-        ParamChecks.nullNotPermitted(key, "key");
+        Args.nullNotPermitted(key, "key");
         return this.columnKeys.indexOf(key);
     }
 
@@ -217,8 +217,8 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      *         {@code columnKey} is not recognised.
      */
     public Object getObject(Comparable rowKey, Comparable columnKey) {
-        ParamChecks.nullNotPermitted(rowKey, "rowKey");
-        ParamChecks.nullNotPermitted(columnKey, "columnKey");
+        Args.nullNotPermitted(rowKey, "rowKey");
+        Args.nullNotPermitted(columnKey, "columnKey");
         int row = this.rowKeys.indexOf(rowKey);
         if (row < 0) {
             throw new UnknownKeyException("Row key (" + rowKey
@@ -260,8 +260,8 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      */
     public void setObject(Object object, Comparable rowKey,
             Comparable columnKey) {
-        ParamChecks.nullNotPermitted(rowKey, "rowKey");
-        ParamChecks.nullNotPermitted(columnKey, "columnKey");
+        Args.nullNotPermitted(rowKey, "rowKey");
+        Args.nullNotPermitted(columnKey, "columnKey");
         KeyedObjects row;
         int rowIndex = this.rowKeys.indexOf(rowKey);
         if (rowIndex >= 0) {

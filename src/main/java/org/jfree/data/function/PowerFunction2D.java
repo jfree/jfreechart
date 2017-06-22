@@ -43,7 +43,7 @@
 package org.jfree.data.function;
 
 import java.io.Serializable;
-import org.jfree.chart.HashUtilities;
+import org.jfree.chart.HashUtils;
 
 /**
  * A function of the form y = a * x ^ b.
@@ -131,8 +131,8 @@ public class PowerFunction2D implements Function2D, Serializable {
     @Override
     public int hashCode() {
         int result = 29;
-        result = HashUtilities.hashCode(result, this.a);
-        result = HashUtilities.hashCode(result, this.b);
+        result = HashUtils.hashCode(result, this.a);
+        result = HashUtils.hashCode(result, this.b);
         return result;
     }
 

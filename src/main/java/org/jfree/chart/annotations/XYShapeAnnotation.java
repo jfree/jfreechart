@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------
  * XYShapeAnnotation.java
  * ----------------------
- * (C) Copyright 2003-2016, by Ondax, Inc. and Contributors.
+ * (C) Copyright 2003-2017, by Ondax, Inc. and Contributors.
  *
  * Original Author:  Greg Steckman (for Ondax, Inc.);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -68,7 +68,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-import org.jfree.chart.HashUtilities;
+import org.jfree.chart.HashUtils;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
@@ -77,7 +77,7 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 
@@ -111,7 +111,7 @@ public class XYShapeAnnotation extends AbstractXYAnnotation
      *     not permitted).
      */
     public XYShapeAnnotation(Shape shape) {
-        this(shape, new BasicStroke(1.0f), Color.black);
+        this(shape, new BasicStroke(1.0f), Color.BLACK);
     }
 
     /**
@@ -138,7 +138,7 @@ public class XYShapeAnnotation extends AbstractXYAnnotation
     public XYShapeAnnotation(Shape shape, Stroke stroke, Paint outlinePaint,
                              Paint fillPaint) {
         super();
-        ParamChecks.nullNotPermitted(shape, "shape");
+        Args.nullNotPermitted(shape, "shape");
         this.shape = shape;
         this.stroke = stroke;
         this.outlinePaint = outlinePaint;
@@ -263,9 +263,9 @@ public class XYShapeAnnotation extends AbstractXYAnnotation
         if (this.stroke != null) {
             result = 37 * result + this.stroke.hashCode();
         }
-        result = 37 * result + HashUtilities.hashCodeForPaint(
+        result = 37 * result + HashUtils.hashCodeForPaint(
                 this.outlinePaint);
-        result = 37 * result + HashUtilities.hashCodeForPaint(this.fillPaint);
+        result = 37 * result + HashUtils.hashCodeForPaint(this.fillPaint);
         return result;
     }
 

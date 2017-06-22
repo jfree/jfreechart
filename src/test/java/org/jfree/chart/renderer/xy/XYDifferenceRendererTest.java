@@ -56,7 +56,7 @@ import java.awt.geom.Line2D;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.LegendItem;
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.util.PublicCloneable;
@@ -75,31 +75,31 @@ public class XYDifferenceRendererTest {
     @Test
     public void testEquals() {
         XYDifferenceRenderer r1 = new XYDifferenceRenderer(
-                Color.red, Color.blue, false);
+                Color.RED, Color.BLUE, false);
         XYDifferenceRenderer r2 = new XYDifferenceRenderer(
-                Color.red, Color.blue, false);
+                Color.RED, Color.BLUE, false);
         assertEquals(r1, r2);
 
         // positive paint
-        r1.setPositivePaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.blue));
+        r1.setPositivePaint(new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.BLUE));
         assertFalse(r1.equals(r2));
-        r2.setPositivePaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.blue));
+        r2.setPositivePaint(new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.BLUE));
         assertTrue(r1.equals(r2));
 
         // negative paint
-        r1.setNegativePaint(new GradientPaint(1.0f, 2.0f, Color.yellow,
-                3.0f, 4.0f, Color.blue));
+        r1.setNegativePaint(new GradientPaint(1.0f, 2.0f, Color.YELLOW,
+                3.0f, 4.0f, Color.BLUE));
         assertFalse(r1.equals(r2));
-        r2.setNegativePaint(new GradientPaint(1.0f, 2.0f, Color.yellow,
-                3.0f, 4.0f, Color.blue));
+        r2.setNegativePaint(new GradientPaint(1.0f, 2.0f, Color.YELLOW,
+                3.0f, 4.0f, Color.BLUE));
         assertTrue(r1.equals(r2));
 
         // shapesVisible
-        r1 = new XYDifferenceRenderer(Color.green, Color.yellow, true);
+        r1 = new XYDifferenceRenderer(Color.green, Color.YELLOW, true);
         assertFalse(r1.equals(r2));
-        r2 = new XYDifferenceRenderer(Color.green, Color.yellow, true);
+        r2 = new XYDifferenceRenderer(Color.green, Color.YELLOW, true);
         assertTrue(r1.equals(r2));
 
         // legendLine
@@ -123,9 +123,9 @@ public class XYDifferenceRendererTest {
     @Test
     public void testHashcode() {
         XYDifferenceRenderer r1
-            = new XYDifferenceRenderer(Color.red, Color.blue, false);
+            = new XYDifferenceRenderer(Color.RED, Color.BLUE, false);
         XYDifferenceRenderer r2
-            = new XYDifferenceRenderer(Color.red, Color.blue, false);
+            = new XYDifferenceRenderer(Color.RED, Color.BLUE, false);
         assertTrue(r1.equals(r2));
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
@@ -137,8 +137,8 @@ public class XYDifferenceRendererTest {
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        XYDifferenceRenderer r1 = new XYDifferenceRenderer(Color.red,
-                Color.blue, false);
+        XYDifferenceRenderer r1 = new XYDifferenceRenderer(Color.RED,
+                Color.BLUE, false);
         XYDifferenceRenderer r2 = (XYDifferenceRenderer) r1.clone();
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
@@ -167,10 +167,10 @@ public class XYDifferenceRendererTest {
      */
     @Test
     public void testSerialization() {
-        XYDifferenceRenderer r1 = new XYDifferenceRenderer(Color.red,
-                Color.blue, false);
+        XYDifferenceRenderer r1 = new XYDifferenceRenderer(Color.RED,
+                Color.BLUE, false);
         XYDifferenceRenderer r2 = (XYDifferenceRenderer) 
-                TestUtilities.serialised(r1);
+                TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

@@ -50,7 +50,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
 import java.text.NumberFormat;
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 
 import org.jfree.chart.labels.StandardCrosshairLabelGenerator;
 import org.jfree.chart.ui.RectangleAnchor;
@@ -67,8 +67,8 @@ public class CrosshairTest {
      */
     @Test
     public void testEquals() {
-        Crosshair c1 = new Crosshair(1.0, Color.blue, new BasicStroke(1.0f));
-        Crosshair c2 = new Crosshair(1.0, Color.blue, new BasicStroke(1.0f));
+        Crosshair c1 = new Crosshair(1.0, Color.BLUE, new BasicStroke(1.0f));
+        Crosshair c2 = new Crosshair(1.0, Color.BLUE, new BasicStroke(1.0f));
         assertTrue(c1.equals(c1));
         assertTrue(c2.equals(c1));
 
@@ -82,9 +82,9 @@ public class CrosshairTest {
         c2.setValue(2.0);
         assertTrue(c1.equals(c2));
 
-        c1.setPaint(Color.red);
+        c1.setPaint(Color.RED);
         assertFalse(c1.equals(c2));
-        c2.setPaint(Color.red);
+        c2.setPaint(Color.RED);
         assertTrue(c1.equals(c2));
 
         c1.setStroke(new BasicStroke(1.1f));
@@ -124,14 +124,14 @@ public class CrosshairTest {
         c2.setLabelFont(new Font("Dialog", Font.PLAIN, 8));
         assertTrue(c1.equals(c2));
 
-        c1.setLabelPaint(Color.red);
+        c1.setLabelPaint(Color.RED);
         assertFalse(c1.equals(c2));
-        c2.setLabelPaint(Color.red);
+        c2.setLabelPaint(Color.RED);
         assertTrue(c1.equals(c2));
 
-        c1.setLabelBackgroundPaint(Color.yellow);
+        c1.setLabelBackgroundPaint(Color.YELLOW);
         assertFalse(c1.equals(c2));
-        c2.setLabelBackgroundPaint(Color.yellow);
+        c2.setLabelBackgroundPaint(Color.YELLOW);
         assertTrue(c1.equals(c2));
 
         c1.setLabelOutlineVisible(false);
@@ -168,7 +168,7 @@ public class CrosshairTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         Crosshair c1 = new Crosshair(1.0, new GradientPaint(1.0f, 2.0f,
-                Color.red, 3.0f, 4.0f, Color.BLUE), new BasicStroke(1.0f));
+                Color.RED, 3.0f, 4.0f, Color.BLUE), new BasicStroke(1.0f));
         Crosshair c2 = (Crosshair) c1.clone();
         assertTrue(c1 != c2);
         assertTrue(c1.getClass() == c2.getClass());
@@ -190,8 +190,8 @@ public class CrosshairTest {
     @Test
     public void testSerialization() {
         Crosshair c1 = new Crosshair(1.0, new GradientPaint(1.0f, 2.0f,
-                Color.red, 3.0f, 4.0f, Color.BLUE), new BasicStroke(1.0f));
-        Crosshair c2 = (Crosshair) TestUtilities.serialised(c1);
+                Color.RED, 3.0f, 4.0f, Color.BLUE), new BasicStroke(1.0f));
+        Crosshair c2 = (Crosshair) TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 

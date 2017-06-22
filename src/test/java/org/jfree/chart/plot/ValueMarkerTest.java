@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * ValueMarkerTest.java
  * --------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2017, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -56,7 +56,7 @@ import java.awt.Font;
 import java.awt.GradientPaint;
 import java.awt.Stroke;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 
 import org.jfree.chart.event.MarkerChangeEvent;
 import org.jfree.chart.event.MarkerChangeListener;
@@ -84,11 +84,11 @@ public class ValueMarkerTest implements MarkerChangeListener {
         assertTrue(m1.equals(m2));
         assertTrue(m2.equals(m1));
 
-        m1.setPaint(new GradientPaint(1.0f, 2.0f, Color.green,
-                3.0f, 4.0f, Color.red));
+        m1.setPaint(new GradientPaint(1.0f, 2.0f, Color.GREEN,
+                3.0f, 4.0f, Color.RED));
         assertFalse(m1.equals(m2));
-        m2.setPaint(new GradientPaint(1.0f, 2.0f, Color.green,
-                3.0f, 4.0f, Color.red));
+        m2.setPaint(new GradientPaint(1.0f, 2.0f, Color.GREEN,
+                3.0f, 4.0f, Color.RED));
         assertTrue(m1.equals(m2));
 
         BasicStroke stroke = new BasicStroke(2.2f);
@@ -97,11 +97,11 @@ public class ValueMarkerTest implements MarkerChangeListener {
         m2.setStroke(stroke);
         assertTrue(m1.equals(m2));
 
-        m1.setOutlinePaint(new GradientPaint(4.0f, 3.0f, Color.yellow,
-                2.0f, 1.0f, Color.white));
+        m1.setOutlinePaint(new GradientPaint(4.0f, 3.0f, Color.YELLOW,
+                2.0f, 1.0f, Color.WHITE));
         assertFalse(m1.equals(m2));
-        m2.setOutlinePaint(new GradientPaint(4.0f, 3.0f, Color.yellow,
-                2.0f, 1.0f, Color.white));
+        m2.setOutlinePaint(new GradientPaint(4.0f, 3.0f, Color.YELLOW,
+                2.0f, 1.0f, Color.WHITE));
         assertTrue(m1.equals(m2));
 
         m1.setOutlineStroke(stroke);
@@ -124,11 +124,11 @@ public class ValueMarkerTest implements MarkerChangeListener {
         m2.setLabelFont(new Font("SansSerif", Font.PLAIN, 10));
         assertTrue(m1.equals(m2));
 
-        m1.setLabelPaint(new GradientPaint(1.0f, 2.0f, Color.blue,
-                3.0f, 4.0f, Color.yellow));
+        m1.setLabelPaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
+                3.0f, 4.0f, Color.YELLOW));
         assertFalse(m1.equals(m2));
-        m2.setLabelPaint(new GradientPaint(1.0f, 2.0f, Color.blue,
-                3.0f, 4.0f, Color.yellow));
+        m2.setLabelPaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
+                3.0f, 4.0f, Color.YELLOW));
         assertTrue(m1.equals(m2));
 
         m1.setLabelAnchor(RectangleAnchor.TOP_RIGHT);
@@ -177,7 +177,7 @@ public class ValueMarkerTest implements MarkerChangeListener {
     @Test
     public void testSerialization() {
         ValueMarker m1 = new ValueMarker(25.0);
-        ValueMarker m2 = (ValueMarker) TestUtilities.serialised(m1);
+        ValueMarker m2 = (ValueMarker) TestUtils.serialised(m1);
         assertEquals(m1, m2);
     }
 
@@ -213,7 +213,7 @@ public class ValueMarkerTest implements MarkerChangeListener {
     @Test
     public void test1802195() {
         ValueMarker m1 = new ValueMarker(25.0);
-        ValueMarker m2 = (ValueMarker) TestUtilities.serialised(m1);
+        ValueMarker m2 = (ValueMarker) TestUtils.serialised(m1);
         assertEquals(m1, m2);
         try {
             m2.setValue(-10.0);
@@ -230,12 +230,12 @@ public class ValueMarkerTest implements MarkerChangeListener {
     public void test1808376() {
         Stroke stroke = new BasicStroke(1.0f);
         Stroke outlineStroke = new BasicStroke(2.0f);
-        ValueMarker m = new ValueMarker(1.0, Color.red, stroke, Color.blue,
+        ValueMarker m = new ValueMarker(1.0, Color.RED, stroke, Color.BLUE,
                 outlineStroke, 0.5f);
         assertEquals(1.0, m.getValue(), EPSILON);
-        assertEquals(Color.red, m.getPaint());
+        assertEquals(Color.RED, m.getPaint());
         assertEquals(stroke, m.getStroke());
-        assertEquals(Color.blue, m.getOutlinePaint());
+        assertEquals(Color.BLUE, m.getOutlinePaint());
         assertEquals(outlineStroke, m.getOutlineStroke());
         assertEquals(0.5f, m.getAlpha(), EPSILON);
     }

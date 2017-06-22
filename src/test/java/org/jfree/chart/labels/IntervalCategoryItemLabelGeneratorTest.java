@@ -50,7 +50,7 @@ import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.Test;
@@ -132,7 +132,7 @@ public class IntervalCategoryItemLabelGeneratorTest {
         IntervalCategoryItemLabelGenerator g1
                 = new IntervalCategoryItemLabelGenerator("{3} - {4}",
                 DateFormat.getInstance());
-        IntervalCategoryItemLabelGenerator g2 = (IntervalCategoryItemLabelGenerator) TestUtilities.serialised(g1);
+        IntervalCategoryItemLabelGenerator g2 = (IntervalCategoryItemLabelGenerator) TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

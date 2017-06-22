@@ -254,7 +254,7 @@ class DefaultChartEditor extends JPanel implements ActionListener, ChartEditor {
     private void attemptModifyBackgroundPaint() {
         Color c;
         c = JColorChooser.showDialog(this, localizationResources.getString(
-                "Background_Color"), Color.blue);
+                "Background_Color"), Color.BLUE);
         if (c != null) {
             this.background.setPaint(c);
         }

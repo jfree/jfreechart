@@ -45,7 +45,7 @@
 package org.jfree.chart.block;
 
 import org.jfree.chart.ui.Size2D;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.data.Range;
 
 /**
@@ -138,8 +138,8 @@ public class RectangleConstraint {
                                LengthConstraintType widthConstraintType,
                                double h, Range heightRange,
                                LengthConstraintType heightConstraintType) {
-        ParamChecks.nullNotPermitted(widthConstraintType, "widthConstraintType");
-        ParamChecks.nullNotPermitted(heightConstraintType, "heightConstraintType");
+        Args.nullNotPermitted(widthConstraintType, "widthConstraintType");
+        Args.nullNotPermitted(heightConstraintType, "heightConstraintType");
         this.width = w;
         this.widthRange = widthRange;
         this.widthConstraintType = widthConstraintType;
@@ -273,7 +273,7 @@ public class RectangleConstraint {
      * @return A new constraint.
      */
     public RectangleConstraint toRangeWidth(Range range) {
-        ParamChecks.nullNotPermitted(range, "range");
+        Args.nullNotPermitted(range, "range");
         return new RectangleConstraint(range.getUpperBound(), range,
                 LengthConstraintType.RANGE, this.height, this.heightRange,
                 this.heightConstraintType);
@@ -288,7 +288,7 @@ public class RectangleConstraint {
      * @return A new constraint.
      */
     public RectangleConstraint toRangeHeight(Range range) {
-        ParamChecks.nullNotPermitted(range, "range");
+        Args.nullNotPermitted(range, "range");
         return new RectangleConstraint(this.width, this.widthRange,
                 this.widthConstraintType, range.getUpperBound(), range,
                 LengthConstraintType.RANGE);

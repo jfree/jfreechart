@@ -51,7 +51,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -111,11 +111,11 @@ public class StandardDialScaleTest {
         assertTrue(s1.equals(s2));
 
         // majorTickPaint
-        s1.setMajorTickPaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.yellow));
+        s1.setMajorTickPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.YELLOW));
         assertFalse(s1.equals(s2));
-        s2.setMajorTickPaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.yellow));
+        s2.setMajorTickPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.YELLOW));
         assertTrue(s1.equals(s2));
 
         // majorTickStroke
@@ -149,10 +149,10 @@ public class StandardDialScaleTest {
         assertTrue(s1.equals(s2));
 
         // tickLabelPaint
-        s1.setTickLabelPaint(new GradientPaint(1.0f, 2.0f, Color.white,
+        s1.setTickLabelPaint(new GradientPaint(1.0f, 2.0f, Color.WHITE,
                 3.0f, 4.0f, Color.green));
         assertFalse(s1.equals(s2));
-        s2.setTickLabelPaint(new GradientPaint(1.0f, 2.0f, Color.white,
+        s2.setTickLabelPaint(new GradientPaint(1.0f, 2.0f, Color.WHITE,
                 3.0f, 4.0f, Color.green));
         assertTrue(s1.equals(s2));
 
@@ -196,8 +196,8 @@ public class StandardDialScaleTest {
         // try a customised instance
         s1 = new StandardDialScale();
         s1.setExtent(123.4);
-        s1.setMajorTickPaint(new GradientPaint(1.0f, 2.0f, Color.red, 3.0f,
-                4.0f, Color.white));
+        s1.setMajorTickPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f,
+                4.0f, Color.WHITE));
         s1.setMajorTickStroke(new BasicStroke(2.0f));
         s2 = (StandardDialScale) s1.clone();
         assertTrue(s1 != s2);
@@ -218,17 +218,17 @@ public class StandardDialScaleTest {
     public void testSerialization() {
         // try a default instance
         StandardDialScale s1 = new StandardDialScale();
-        StandardDialScale s2 = (StandardDialScale) TestUtilities.serialised(s1);
+        StandardDialScale s2 = (StandardDialScale) TestUtils.serialised(s1);
         assertEquals(s1, s2);
 
         // try a customised instance
         s1 = new StandardDialScale();
         s1.setExtent(123.4);
-        s1.setMajorTickPaint(new GradientPaint(1.0f, 2.0f, Color.red, 3.0f,
-                4.0f, Color.white));
+        s1.setMajorTickPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f,
+                4.0f, Color.WHITE));
         s1.setMajorTickStroke(new BasicStroke(2.0f));
 
-        s2 = (StandardDialScale) TestUtilities.serialised(s1);
+        s2 = (StandardDialScale) TestUtils.serialised(s1);
         assertEquals(s1, s2);
     }
 

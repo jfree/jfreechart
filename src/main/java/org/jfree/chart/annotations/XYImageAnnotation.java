@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -67,7 +67,7 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 
 /**
@@ -124,8 +124,8 @@ public class XYImageAnnotation extends AbstractXYAnnotation
     public XYImageAnnotation(double x, double y, Image image,
             RectangleAnchor anchor) {
         super();
-        ParamChecks.nullNotPermitted(image, "image");
-        ParamChecks.nullNotPermitted(anchor, "anchor");
+        Args.nullNotPermitted(image, "image");
+        Args.nullNotPermitted(anchor, "anchor");
         this.x = x;
         this.y = y;
         this.image = image;
@@ -221,8 +221,7 @@ public class XYImageAnnotation extends AbstractXYAnnotation
         int h = this.image.getHeight(null);
 
         Rectangle2D imageRect = new Rectangle2D.Double(0, 0, w, h);
-        Point2D anchorPoint = RectangleAnchor.coordinates(imageRect,
-                this.anchor);
+        Point2D anchorPoint = this.anchor.getAnchorPoint(imageRect);
         xx = xx - (float) anchorPoint.getX();
         yy = yy - (float) anchorPoint.getY();
         g2.drawImage(this.image, (int) xx, (int) yy, null);
@@ -302,7 +301,7 @@ public class XYImageAnnotation extends AbstractXYAnnotation
      */
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
-        //SerialUtilities.writeImage(this.image, stream);
+        //SerialUtils.writeImage(this.image, stream);
     }
 
     /**
@@ -316,7 +315,7 @@ public class XYImageAnnotation extends AbstractXYAnnotation
     private void readObject(ObjectInputStream stream)
         throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
-        //this.image = SerialUtilities.readImage(stream);
+        //this.image = SerialUtils.readImage(stream);
     }
 
 

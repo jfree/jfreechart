@@ -54,7 +54,7 @@ import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 
 import org.jfree.data.DomainInfo;
 import org.jfree.data.Range;
@@ -125,7 +125,7 @@ public class TimePeriodValuesCollection extends AbstractIntervalXYDataset
      * @see #getXPosition()
      */
     public void setXPosition(TimePeriodAnchor position) {
-        ParamChecks.nullNotPermitted(position, "position");
+        Args.nullNotPermitted(position, "position");
         this.xPosition = position;
     }
 
@@ -174,7 +174,7 @@ public class TimePeriodValuesCollection extends AbstractIntervalXYDataset
      * @param series  the time series.
      */
     public void addSeries(TimePeriodValues series) {
-        ParamChecks.nullNotPermitted(series, "series");
+        Args.nullNotPermitted(series, "series");
         this.data.add(series);
         series.addChangeListener(this);
         fireDatasetChanged();
@@ -186,7 +186,7 @@ public class TimePeriodValuesCollection extends AbstractIntervalXYDataset
      * @param series  the series to remove ({@code null} not permitted).
      */
     public void removeSeries(TimePeriodValues series) {
-        ParamChecks.nullNotPermitted(series, "series");
+        Args.nullNotPermitted(series, "series");
         this.data.remove(series);
         series.removeChangeListener(this);
         fireDatasetChanged();

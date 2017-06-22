@@ -46,7 +46,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.Test;
@@ -278,12 +278,12 @@ public class DefaultIntervalXYDatasetTest {
     public void testSerialization() {
         DefaultIntervalXYDataset d1 = new DefaultIntervalXYDataset();
         DefaultIntervalXYDataset d2 = (DefaultIntervalXYDataset) 
-                TestUtilities.serialised(d1);
+                TestUtils.serialised(d1);
         assertEquals(d1, d2);
 
         // try a dataset with some content...
         d1 = createSampleDataset1();
-        d2 = (DefaultIntervalXYDataset) TestUtilities.serialised(d1);
+        d2 = (DefaultIntervalXYDataset) TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 

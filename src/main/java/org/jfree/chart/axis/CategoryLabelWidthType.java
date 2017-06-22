@@ -43,7 +43,7 @@ package org.jfree.chart.axis;
 
 import java.io.ObjectStreamException;
 import java.io.Serializable;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 
 /**
  * Represents the width types for a category label.
@@ -70,7 +70,7 @@ public final class CategoryLabelWidthType implements Serializable {
      * @param name  the name ({@code null} not permitted).
      */
     private CategoryLabelWidthType(String name) {
-        ParamChecks.nullNotPermitted(name, "name");
+        Args.nullNotPermitted(name, "name");
         this.name = name;
     }
 

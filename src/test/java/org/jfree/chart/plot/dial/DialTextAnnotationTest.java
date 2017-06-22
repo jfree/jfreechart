@@ -48,7 +48,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -85,9 +85,9 @@ public class DialTextAnnotationTest {
         assertTrue(a1.equals(a2));
 
         // paint
-        a1.setPaint(Color.red);
+        a1.setPaint(Color.RED);
         assertFalse(a1.equals(a2));
-        a2.setPaint(Color.red);
+        a2.setPaint(Color.RED);
         assertTrue(a1.equals(a2));
 
         // label
@@ -143,15 +143,15 @@ public class DialTextAnnotationTest {
     public void testSerialization() {
         // test a default instance
         DialTextAnnotation a1 = new DialTextAnnotation("A1");
-        DialTextAnnotation a2 = (DialTextAnnotation) TestUtilities.serialised(a1);
+        DialTextAnnotation a2 = (DialTextAnnotation) TestUtils.serialised(a1);
         assertEquals(a1, a2);
 
         // test a custom instance
         a1 = new DialTextAnnotation("A1");
-        a1.setPaint(new GradientPaint(1.0f, 2.0f, Color.red, 3.0f, 4.0f,
-                Color.blue));
+        a1.setPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f,
+                Color.BLUE));
 
-        a2 = (DialTextAnnotation) TestUtilities.serialised(a1);
+        a2 = (DialTextAnnotation) TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------
  * XYPolygonAnnotation.java
  * ------------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2017, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Peter Kolb (patch 2809117);
@@ -54,7 +54,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Arrays;
 
-import org.jfree.chart.HashUtilities;
+import org.jfree.chart.HashUtils;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
@@ -63,7 +63,7 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 
@@ -99,7 +99,7 @@ public class XYPolygonAnnotation extends AbstractXYAnnotation
      *     ({@code null} not permitted).
      */
     public XYPolygonAnnotation(double[] polygon) {
-        this(polygon, new BasicStroke(1.0f), Color.black);
+        this(polygon, new BasicStroke(1.0f), Color.BLACK);
     }
 
     /**
@@ -135,7 +135,7 @@ public class XYPolygonAnnotation extends AbstractXYAnnotation
     public XYPolygonAnnotation(double[] polygon, Stroke stroke, 
             Paint outlinePaint, Paint fillPaint) {
         super();
-        ParamChecks.nullNotPermitted(polygon, "polygon");
+        Args.nullNotPermitted(polygon, "polygon");
         if (polygon.length % 2 != 0) {
             throw new IllegalArgumentException("The 'polygon' array must "
                     + "contain an even number of items.");
@@ -306,10 +306,10 @@ public class XYPolygonAnnotation extends AbstractXYAnnotation
     @Override
     public int hashCode() {
         int result = 193;
-        result = 37 * result + HashUtilities.hashCodeForDoubleArray(
+        result = 37 * result + HashUtils.hashCodeForDoubleArray(
                 this.polygon);
-        result = 37 * result + HashUtilities.hashCodeForPaint(this.fillPaint);
-        result = 37 * result + HashUtilities.hashCodeForPaint(
+        result = 37 * result + HashUtils.hashCodeForPaint(this.fillPaint);
+        result = 37 * result + HashUtils.hashCodeForPaint(
                 this.outlinePaint);
         if (this.stroke != null) {
             result = 37 * result + this.stroke.hashCode();

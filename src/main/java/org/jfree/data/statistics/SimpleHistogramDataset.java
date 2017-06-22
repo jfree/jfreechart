@@ -49,7 +49,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.DomainOrder;
@@ -88,7 +88,7 @@ public class SimpleHistogramDataset extends AbstractIntervalXYDataset
      * @param key  the series key ({@code null} not permitted).
      */
     public SimpleHistogramDataset(Comparable key) {
-        ParamChecks.nullNotPermitted(key, "key");
+        Args.nullNotPermitted(key, "key");
         this.key = key;
         this.bins = new ArrayList();
         this.adjustForBinSize = true;

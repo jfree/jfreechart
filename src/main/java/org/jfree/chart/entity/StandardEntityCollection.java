@@ -56,7 +56,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 
 /**
@@ -117,7 +117,7 @@ public class StandardEntityCollection implements EntityCollection,
      */
     @Override
     public void add(ChartEntity entity) {
-        ParamChecks.nullNotPermitted(entity, "entity");
+        Args.nullNotPermitted(entity, "entity");
         this.entities.add(entity);
     }
 

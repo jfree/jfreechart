@@ -55,7 +55,7 @@ import java.awt.GradientPaint;
 import java.awt.Stroke;
 import java.text.DecimalFormat;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 
 /**
  * Tests for the {@link RingPlot} class.
@@ -113,11 +113,11 @@ public class RingPlotTest {
         assertTrue(plot1.equals(plot2));
 
         // separatorPaint
-        plot1.setSeparatorPaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                2.0f, 1.0f, Color.blue));
+        plot1.setSeparatorPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
+                2.0f, 1.0f, Color.BLUE));
         assertFalse(plot1.equals(plot2));
-        plot2.setSeparatorPaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                2.0f, 1.0f, Color.blue));
+        plot2.setSeparatorPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
+                2.0f, 1.0f, Color.BLUE));
         assertTrue(plot1.equals(plot2));
 
         // innerSeparatorExtension
@@ -145,8 +145,8 @@ public class RingPlotTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         RingPlot p1 = new RingPlot(null);
-        GradientPaint gp = new GradientPaint(1.0f, 2.0f, Color.yellow,
-                3.0f, 4.0f, Color.red);
+        GradientPaint gp = new GradientPaint(1.0f, 2.0f, Color.YELLOW,
+                3.0f, 4.0f, Color.RED);
         p1.setSeparatorPaint(gp);
         RingPlot p2 = (RingPlot) p1.clone();
         assertTrue(p1 != p2);
@@ -160,10 +160,10 @@ public class RingPlotTest {
     @Test
     public void testSerialization() {
         RingPlot p1 = new RingPlot(null);
-        GradientPaint gp = new GradientPaint(1.0f, 2.0f, Color.yellow,
-                3.0f, 4.0f, Color.red);
+        GradientPaint gp = new GradientPaint(1.0f, 2.0f, Color.YELLOW,
+                3.0f, 4.0f, Color.RED);
         p1.setSeparatorPaint(gp);
-        RingPlot p2 = (RingPlot) TestUtilities.serialised(p1);
+        RingPlot p2 = (RingPlot) TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 

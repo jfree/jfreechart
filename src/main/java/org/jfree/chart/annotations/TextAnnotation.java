@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * TextAnnotation.java
  * -------------------
- * (C) Copyright 2002-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2002-2017, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Peter Kolb (patch 2809117);
@@ -63,12 +63,12 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-import org.jfree.chart.HashUtilities;
+import org.jfree.chart.HashUtils;
 import org.jfree.chart.event.AnnotationChangeEvent;
 import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
 
 /**
@@ -85,7 +85,7 @@ public class TextAnnotation extends AbstractAnnotation implements Serializable {
             = new Font("SansSerif", Font.PLAIN, 10);
 
     /** The default paint. */
-    public static final Paint DEFAULT_PAINT = Color.black;
+    public static final Paint DEFAULT_PAINT = Color.BLACK;
 
     /** The default text anchor. */
     public static final TextAnchor DEFAULT_TEXT_ANCHOR = TextAnchor.CENTER;
@@ -121,7 +121,7 @@ public class TextAnnotation extends AbstractAnnotation implements Serializable {
      */
     protected TextAnnotation(String text) {
         super();
-        ParamChecks.nullNotPermitted(text, "text");
+        Args.nullNotPermitted(text, "text");
         this.text = text;
         this.font = DEFAULT_FONT;
         this.paint = DEFAULT_PAINT;
@@ -150,7 +150,7 @@ public class TextAnnotation extends AbstractAnnotation implements Serializable {
      * @see #getText()
      */
     public void setText(String text) {
-        ParamChecks.nullNotPermitted(text, "text");
+        Args.nullNotPermitted(text, "text");
         this.text = text;
         fireAnnotationChanged();
     }
@@ -175,7 +175,7 @@ public class TextAnnotation extends AbstractAnnotation implements Serializable {
      * @see #getFont()
      */
     public void setFont(Font font) {
-        ParamChecks.nullNotPermitted(font, "font");
+        Args.nullNotPermitted(font, "font");
         this.font = font;
         fireAnnotationChanged();
     }
@@ -200,7 +200,7 @@ public class TextAnnotation extends AbstractAnnotation implements Serializable {
      * @see #getPaint()
      */
     public void setPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.paint = paint;
         fireAnnotationChanged();
     }
@@ -226,7 +226,7 @@ public class TextAnnotation extends AbstractAnnotation implements Serializable {
      * @see #getTextAnchor()
      */
     public void setTextAnchor(TextAnchor anchor) {
-        ParamChecks.nullNotPermitted(anchor, "anchor");
+        Args.nullNotPermitted(anchor, "anchor");
         this.textAnchor = anchor;
         fireAnnotationChanged();
     }
@@ -251,7 +251,7 @@ public class TextAnnotation extends AbstractAnnotation implements Serializable {
      * @see #getRotationAnchor()
      */
     public void setRotationAnchor(TextAnchor anchor) {
-        ParamChecks.nullNotPermitted(anchor, "anchor");
+        Args.nullNotPermitted(anchor, "anchor");
         this.rotationAnchor = anchor;
         fireAnnotationChanged();
     }
@@ -331,7 +331,7 @@ public class TextAnnotation extends AbstractAnnotation implements Serializable {
     public int hashCode() {
         int result = 193;
         result = 37 * result + this.font.hashCode();
-        result = 37 * result + HashUtilities.hashCodeForPaint(this.paint);
+        result = 37 * result + HashUtils.hashCodeForPaint(this.paint);
         result = 37 * result + this.rotationAnchor.hashCode();
         long temp = Double.doubleToLongBits(this.rotationAngle);
         result = 37 * result + (int) (temp ^ (temp >>> 32));

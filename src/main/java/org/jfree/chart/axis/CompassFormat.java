@@ -45,7 +45,7 @@ package org.jfree.chart.axis;
 import java.text.FieldPosition;
 import java.text.NumberFormat;
 import java.text.ParsePosition;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 
 /**
  * A formatter that displays numbers as directions.
@@ -90,7 +90,7 @@ public class CompassFormat extends NumberFormat {
      */
     public CompassFormat(String[] directions) {
         super();
-        ParamChecks.nullNotPermitted(directions, "directions");
+        Args.nullNotPermitted(directions, "directions");
         if (directions.length != 16) {
             throw new IllegalArgumentException("The 'directions' array must "
                     + "contain exactly 16 elements");

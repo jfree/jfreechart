@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------------------------
  * StandardToolTipTagFragmentGenerator.java
  * ----------------------------------------
- * (C) Copyright 2003-2008, by Richard Atkinson and Contributors.
+ * (C) Copyright 2003-2017, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributors:     David Gilbert (for Object Refinery Limited);
@@ -63,7 +63,7 @@ public class StandardToolTipTagFragmentGenerator
      */
     @Override
     public String generateToolTipFragment(String toolTipText) {
-        return " title=\"" + ImageMapUtilities.htmlEscape(toolTipText)
+        return " title=\"" + ImageMapUtils.htmlEscape(toolTipText)
             + "\" alt=\"\"";
     }
 

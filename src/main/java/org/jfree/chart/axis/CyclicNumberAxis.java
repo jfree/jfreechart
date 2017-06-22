@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * CyclicNumberAxis.java
  * ---------------------
- * (C) Copyright 2003-2016, by Nicolas Brodu and Contributors.
+ * (C) Copyright 2003-2017, by Nicolas Brodu and Contributors.
  *
  * Original Author:  Nicolas Brodu;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -67,12 +67,12 @@ import java.util.List;
 
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotRenderingInfo;
-import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.Range;
 /**
@@ -238,7 +238,7 @@ public class CyclicNumberAxis extends NumberAxis {
      * @param paint  the paint ({@code null} not permitted).
      */
     public void setAdvanceLinePaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.advanceLinePaint = paint;
     }
 
@@ -258,7 +258,7 @@ public class CyclicNumberAxis extends NumberAxis {
      * @param stroke  the stroke ({@code null} not permitted).
      */
     public void setAdvanceLineStroke(Stroke stroke) {
-        ParamChecks.nullNotPermitted(stroke, "stroke");
+        Args.nullNotPermitted(stroke, "stroke");
         this.advanceLineStroke = stroke;
     }
 
@@ -1086,7 +1086,7 @@ public class CyclicNumberAxis extends NumberAxis {
         }
 
         FontMetrics fm = g2.getFontMetrics(getTickLabelFont());
-        Rectangle2D r = TextUtilities.getTextBounds(
+        Rectangle2D r = TextUtils.getTextBounds(
             this.internalMarkerCycleBoundTick.getText(), g2, fm
         );
 

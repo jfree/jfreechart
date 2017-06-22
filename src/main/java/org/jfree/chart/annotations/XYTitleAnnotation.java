@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -51,7 +51,7 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 
-import org.jfree.chart.HashUtilities;
+import org.jfree.chart.HashUtils;
 import org.jfree.chart.axis.AxisLocation;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.block.BlockParams;
@@ -67,7 +67,7 @@ import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.Size2D;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.XYCoordinateType;
 import org.jfree.data.Range;
@@ -131,8 +131,8 @@ public class XYTitleAnnotation extends AbstractXYAnnotation
     public XYTitleAnnotation(double x, double y, Title title,
             RectangleAnchor anchor) {
         super();
-        ParamChecks.nullNotPermitted(title, "title");
-        ParamChecks.nullNotPermitted(anchor, "anchor");
+        Args.nullNotPermitted(title, "title");
+        Args.nullNotPermitted(anchor, "anchor");
         this.coordinateType = XYCoordinateType.RELATIVE;
         this.x = x;
         this.y = y;
@@ -300,8 +300,7 @@ public class XYTitleAnnotation extends AbstractXYAnnotation
         Size2D size = this.title.arrange(g2, rc);
         Rectangle2D titleRect = new Rectangle2D.Double(0, 0, size.width,
                 size.height);
-        Point2D anchorPoint = RectangleAnchor.coordinates(titleRect,
-                this.anchor);
+        Point2D anchorPoint = this.anchor.getAnchorPoint(titleRect);
         xx = xx - (float) anchorPoint.getX();
         yy = yy - (float) anchorPoint.getY();
         titleRect.setRect(xx, yy, titleRect.getWidth(), titleRect.getHeight());
@@ -376,13 +375,13 @@ public class XYTitleAnnotation extends AbstractXYAnnotation
     @Override
     public int hashCode() {
         int result = 193;
-        result = HashUtilities.hashCode(result, this.anchor);
-        result = HashUtilities.hashCode(result, this.coordinateType);
-        result = HashUtilities.hashCode(result, this.x);
-        result = HashUtilities.hashCode(result, this.y);
-        result = HashUtilities.hashCode(result, this.maxWidth);
-        result = HashUtilities.hashCode(result, this.maxHeight);
-        result = HashUtilities.hashCode(result, this.title);
+        result = HashUtils.hashCode(result, this.anchor);
+        result = HashUtils.hashCode(result, this.coordinateType);
+        result = HashUtils.hashCode(result, this.x);
+        result = HashUtils.hashCode(result, this.y);
+        result = HashUtils.hashCode(result, this.maxWidth);
+        result = HashUtils.hashCode(result, this.maxHeight);
+        result = HashUtils.hashCode(result, this.title);
         return result;
     }
 

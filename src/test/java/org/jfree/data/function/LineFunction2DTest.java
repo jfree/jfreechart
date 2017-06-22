@@ -40,7 +40,7 @@
 
 package org.jfree.data.function;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -84,7 +84,7 @@ public class LineFunction2DTest {
     @Test
     public void testSerialization() {
         LineFunction2D f1 = new LineFunction2D(1.0, 2.0);
-        LineFunction2D f2 = (LineFunction2D) TestUtilities.serialised(f1);
+        LineFunction2D f2 = (LineFunction2D) TestUtils.serialised(f1);
         assertEquals(f1, f2);
     }
 

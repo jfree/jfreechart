@@ -43,7 +43,7 @@ package org.jfree.data.xy;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -119,7 +119,7 @@ public class YIntervalDataItemTest {
     public void testSerialization() {
         YIntervalDataItem item1 = new YIntervalDataItem(1.0, 2.0, 1.5, 2.5);
         YIntervalDataItem item2 = (YIntervalDataItem) 
-                TestUtilities.serialised(item1);
+                TestUtils.serialised(item1);
         assertEquals(item1, item2);
     }
 

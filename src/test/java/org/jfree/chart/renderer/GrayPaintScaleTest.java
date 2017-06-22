@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * GrayPaintScaleTest.java
  * -----------------------
- * (C) Copyright 2006-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2017, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -48,7 +48,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.awt.Color;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -76,16 +76,16 @@ public class GrayPaintScaleTest {
     public void testGetPaint() {
         GrayPaintScale gps = new GrayPaintScale();
         Color c = (Color) gps.getPaint(0.0);
-        assertTrue(c.equals(Color.black));
+        assertTrue(c.equals(Color.BLACK));
         c = (Color) gps.getPaint(1.0);
-        assertTrue(c.equals(Color.white));
+        assertTrue(c.equals(Color.WHITE));
 
         // check lookup values that are outside the bounds - see bug report
         // 1767315
         c = (Color) gps.getPaint(-0.5);
-        assertTrue(c.equals(Color.black));
+        assertTrue(c.equals(Color.BLACK));
         c = (Color) gps.getPaint(1.5);
-        assertTrue(c.equals(Color.white));
+        assertTrue(c.equals(Color.WHITE));
     }
 
     /**
@@ -135,7 +135,7 @@ public class GrayPaintScaleTest {
     @Test
     public void testSerialization() {
         GrayPaintScale g1 = new GrayPaintScale();
-        GrayPaintScale g2 = (GrayPaintScale) TestUtilities.serialised(g1);
+        GrayPaintScale g2 = (GrayPaintScale) TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

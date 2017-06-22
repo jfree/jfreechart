@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * MarkerAxisBand.java
  * -------------------
- * (C) Copyright 2000-2008, by Object Refinery Limited.
+ * (C) Copyright 2000-2017, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -60,7 +60,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.jfree.chart.plot.IntervalMarker;
-import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.util.ObjectUtils;
 
@@ -159,7 +159,7 @@ public class MarkerAxisBand implements Serializable {
 
         g2.setFont(font);
         FontMetrics fm = g2.getFontMetrics(font);
-        Rectangle2D r = TextUtilities.getTextBounds(text, g2, fm);
+        Rectangle2D r = TextUtils.getTextBounds(text, g2, fm);
         double x = bounds.getX();
         if (r.getWidth() < bounds.getWidth()) {
             x = x + (bounds.getWidth() - r.getWidth()) / 2;
@@ -216,7 +216,7 @@ public class MarkerAxisBand implements Serializable {
             g2.draw(r);
             g2.setComposite(originalComposite);
 
-            g2.setPaint(Color.black);
+            g2.setPaint(Color.BLACK);
             drawStringInRect(g2, r, this.font, marker.getLabel());
         }
 

@@ -79,7 +79,7 @@ import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.VerticalAlignment;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 
 /**
  * The base class for all chart titles.  A chart can have multiple titles,
@@ -179,10 +179,10 @@ public abstract class Title extends AbstractBlock
             HorizontalAlignment horizontalAlignment, 
             VerticalAlignment verticalAlignment, RectangleInsets padding) {
 
-        ParamChecks.nullNotPermitted(position, "position");
-        ParamChecks.nullNotPermitted(horizontalAlignment, "horizontalAlignment");
-        ParamChecks.nullNotPermitted(verticalAlignment, "verticalAlignment");
-        ParamChecks.nullNotPermitted(padding, "padding");
+        Args.nullNotPermitted(position, "position");
+        Args.nullNotPermitted(horizontalAlignment, "horizontalAlignment");
+        Args.nullNotPermitted(verticalAlignment, "verticalAlignment");
+        Args.nullNotPermitted(padding, "padding");
 
         this.visible = true;
         this.position = position;
@@ -238,7 +238,7 @@ public abstract class Title extends AbstractBlock
      * @param position  the position ({@code null} not permitted).
      */
     public void setPosition(RectangleEdge position) {
-        ParamChecks.nullNotPermitted(position, "position");
+        Args.nullNotPermitted(position, "position");
         if (this.position != position) {
             this.position = position;
             notifyListeners(new TitleChangeEvent(this));
@@ -262,7 +262,7 @@ public abstract class Title extends AbstractBlock
      *                   permitted).
      */
     public void setHorizontalAlignment(HorizontalAlignment alignment) {
-        ParamChecks.nullNotPermitted(alignment, "alignment");
+        Args.nullNotPermitted(alignment, "alignment");
         if (this.horizontalAlignment != alignment) {
             this.horizontalAlignment = alignment;
             notifyListeners(new TitleChangeEvent(this));
@@ -286,7 +286,7 @@ public abstract class Title extends AbstractBlock
      *                   {@code null} not permitted).
      */
     public void setVerticalAlignment(VerticalAlignment alignment) {
-        ParamChecks.nullNotPermitted(alignment, "alignment");
+        Args.nullNotPermitted(alignment, "alignment");
         if (this.verticalAlignment != alignment) {
             this.verticalAlignment = alignment;
             notifyListeners(new TitleChangeEvent(this));

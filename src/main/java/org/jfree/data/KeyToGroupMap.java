@@ -55,7 +55,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 
 /**
@@ -88,7 +88,7 @@ public class KeyToGroupMap implements Cloneable, PublicCloneable, Serializable {
      * @param defaultGroup  the default group ({@code null} not permitted).
      */
     public KeyToGroupMap(Comparable defaultGroup) {
-        ParamChecks.nullNotPermitted(defaultGroup, "defaultGroup");
+        Args.nullNotPermitted(defaultGroup, "defaultGroup");
         this.defaultGroup = defaultGroup;
         this.groups = new ArrayList();
         this.keyToGroupMap = new HashMap();
@@ -153,7 +153,7 @@ public class KeyToGroupMap implements Cloneable, PublicCloneable, Serializable {
      *         there is no mapping for the specified key).
      */
     public Comparable getGroup(Comparable key) {
-        ParamChecks.nullNotPermitted(key, "key");
+        Args.nullNotPermitted(key, "key");
         Comparable result = this.defaultGroup;
         Comparable group = (Comparable) this.keyToGroupMap.get(key);
         if (group != null) {
@@ -170,7 +170,7 @@ public class KeyToGroupMap implements Cloneable, PublicCloneable, Serializable {
      *               existing mapping).
      */
     public void mapKeyToGroup(Comparable key, Comparable group) {
-        ParamChecks.nullNotPermitted(key, "key");
+        Args.nullNotPermitted(key, "key");
         Comparable currentGroup = getGroup(key);
         if (!currentGroup.equals(this.defaultGroup)) {
             if (!currentGroup.equals(group)) {
@@ -203,7 +203,7 @@ public class KeyToGroupMap implements Cloneable, PublicCloneable, Serializable {
      * @return The key count.
      */
     public int getKeyCount(Comparable group) {
-        ParamChecks.nullNotPermitted(group, "group");
+        Args.nullNotPermitted(group, "group");
         int result = 0;
         Iterator iterator = this.keyToGroupMap.values().iterator();
         while (iterator.hasNext()) {

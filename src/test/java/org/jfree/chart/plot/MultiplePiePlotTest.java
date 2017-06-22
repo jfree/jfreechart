@@ -58,7 +58,7 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.LegendItemCollection;
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.event.PlotChangeListener;
 import org.jfree.chart.util.TableOrder;
@@ -124,11 +124,11 @@ public class MultiplePiePlotTest implements PlotChangeListener {
         p2.setAggregatedItemsKey("Aggregated Items");
         assertTrue(p1.equals(p2));
 
-        p1.setAggregatedItemsPaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.yellow));
+        p1.setAggregatedItemsPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.YELLOW));
         assertFalse(p1.equals(p2));
-        p2.setAggregatedItemsPaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.yellow));
+        p2.setAggregatedItemsPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.YELLOW));
         assertTrue(p1.equals(p2));
 
         p1.setPieChart(ChartFactory.createPieChart("Title", null, true, true,
@@ -168,9 +168,9 @@ public class MultiplePiePlotTest implements PlotChangeListener {
     @Test
     public void testSerialization() {
         MultiplePiePlot p1 = new MultiplePiePlot(null);
-        p1.setAggregatedItemsPaint(new GradientPaint(1.0f, 2.0f, Color.yellow,
-                3.0f, 4.0f, Color.red));
-        MultiplePiePlot p2 = (MultiplePiePlot) TestUtilities.serialised(p1);
+        p1.setAggregatedItemsPaint(new GradientPaint(1.0f, 2.0f, Color.YELLOW,
+                3.0f, 4.0f, Color.RED));
+        MultiplePiePlot p2 = (MultiplePiePlot) TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 

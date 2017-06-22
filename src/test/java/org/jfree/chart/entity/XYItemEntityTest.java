@@ -46,7 +46,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.awt.geom.Rectangle2D;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 
 import org.jfree.data.time.TimeSeriesCollection;
 import org.junit.Test;
@@ -114,7 +114,7 @@ public class XYItemEntityTest {
     public void testSerialization() {
         XYItemEntity e1 = new XYItemEntity(new Rectangle2D.Double(1.0, 2.0,
                 3.0, 4.0), new TimeSeriesCollection(), 1, 9, "ToolTip", "URL");
-        XYItemEntity e2 = (XYItemEntity) TestUtilities.serialised(e1);
+        XYItemEntity e2 = (XYItemEntity) TestUtils.serialised(e1);
         assertEquals(e1, e2);
     }
 

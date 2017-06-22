@@ -74,7 +74,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 import org.jfree.chart.date.SerialDate;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 
 /**
  * Represents a single day in the range 1-Jan-1900 to 31-Dec-9999.  This class
@@ -137,7 +137,7 @@ public class Day extends RegularTimePeriod implements Serializable {
      * @param serialDate  the day ({@code null} not permitted).
      */
     public Day(SerialDate serialDate) {
-        ParamChecks.nullNotPermitted(serialDate, "serialDate");
+        Args.nullNotPermitted(serialDate, "serialDate");
         this.serialDate = serialDate;
         peg(Calendar.getInstance());
     }
@@ -163,9 +163,9 @@ public class Day extends RegularTimePeriod implements Serializable {
      * @param locale  the locale ({@code null} not permitted).
      */
     public Day(Date time, TimeZone zone, Locale locale) {
-        ParamChecks.nullNotPermitted(time, "time");
-        ParamChecks.nullNotPermitted(zone, "zone");
-        ParamChecks.nullNotPermitted(locale, "locale");
+        Args.nullNotPermitted(time, "time");
+        Args.nullNotPermitted(zone, "zone");
+        Args.nullNotPermitted(locale, "locale");
         Calendar calendar = Calendar.getInstance(zone, locale);
         calendar.setTime(time);
         int d = calendar.get(Calendar.DAY_OF_MONTH);

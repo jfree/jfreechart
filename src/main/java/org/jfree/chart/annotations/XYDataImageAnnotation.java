@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------------
  * XYDataImageAnnotation.java
  * --------------------------
- * (C) Copyright 2008-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2008-2017, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Peter Kolb (patch 2809117);
@@ -56,7 +56,7 @@ import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.Range;
 
@@ -133,7 +133,7 @@ public class XYDataImageAnnotation extends AbstractXYAnnotation
             double h, boolean includeInDataBounds) {
 
         super();
-        ParamChecks.nullNotPermitted(image, "image");
+        Args.nullNotPermitted(image, "image");
         this.image = image;
         this.x = x;
         this.y = y;
@@ -360,7 +360,7 @@ public class XYDataImageAnnotation extends AbstractXYAnnotation
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
         // FIXME
-        //SerialUtilities.writeImage(this.image, stream);
+        //SerialUtils.writeImage(this.image, stream);
     }
 
     /**
@@ -375,7 +375,7 @@ public class XYDataImageAnnotation extends AbstractXYAnnotation
         throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
         // FIXME
-        //this.image = SerialUtilities.readImage(stream);
+        //this.image = SerialUtils.readImage(stream);
     }
 
 }

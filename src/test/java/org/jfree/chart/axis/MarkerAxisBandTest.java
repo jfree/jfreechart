@@ -47,7 +47,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.awt.Font;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -114,7 +114,7 @@ public class MarkerAxisBandTest {
     @Test
     public void testSerialization() {
         MarkerAxisBand a1 = new MarkerAxisBand(null, 1.0, 1.0, 1.0, 1.0, null);
-        MarkerAxisBand a2 = (MarkerAxisBand) TestUtilities.serialised(a1);
+        MarkerAxisBand a2 = (MarkerAxisBand) TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 

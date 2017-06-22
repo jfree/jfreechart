@@ -213,7 +213,7 @@ import org.jfree.chart.ui.Size2D;
 import org.jfree.chart.ui.VerticalAlignment;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.Range;
 
@@ -392,7 +392,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
     public JFreeChart(String title, Font titleFont, Plot plot,
                       boolean createLegend) {
 
-        ParamChecks.nullNotPermitted(plot, "plot");
+        Args.nullNotPermitted(plot, "plot");
         this.id = null;
         plot.setChart(this);
         
@@ -520,7 +520,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
      * @see #getRenderingHints()
      */
     public void setRenderingHints(RenderingHints renderingHints) {
-        ParamChecks.nullNotPermitted(renderingHints, "renderingHints");
+        Args.nullNotPermitted(renderingHints, "renderingHints");
         this.renderingHints = renderingHints;
         fireChartChanged();
     }
@@ -616,7 +616,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
      * @see #getPadding()
      */
     public void setPadding(RectangleInsets padding) {
-        ParamChecks.nullNotPermitted(padding, "padding");
+        Args.nullNotPermitted(padding, "padding");
         this.padding = padding;
         notifyListeners(new ChartChangeEvent(this));
     }
@@ -814,7 +814,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
      * @see #getSubtitle(int)
      */
     public void addSubtitle(Title subtitle) {
-        ParamChecks.nullNotPermitted(subtitle, "subtitle");
+        Args.nullNotPermitted(subtitle, "subtitle");
         this.subtitles.add(subtitle);
         subtitle.addChangeListener(this);
         fireChartChanged();
@@ -834,7 +834,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
             throw new IllegalArgumentException(
                     "The 'index' argument is out of range.");
         }
-        ParamChecks.nullNotPermitted(subtitle, "subtitle");
+        Args.nullNotPermitted(subtitle, "subtitle");
         this.subtitles.add(index, subtitle);
         subtitle.addChangeListener(this);
         fireChartChanged();
@@ -1348,8 +1348,8 @@ public class JFreeChart implements Drawable, TitleChangeListener,
     protected EntityCollection drawTitle(Title t, Graphics2D g2,
                                          Rectangle2D area, boolean entities) {
 
-        ParamChecks.nullNotPermitted(t, "t");
-        ParamChecks.nullNotPermitted(area, "area");
+        Args.nullNotPermitted(t, "t");
+        Args.nullNotPermitted(area, "area");
         Rectangle2D titleArea;
         RectangleEdge position = t.getPosition();
         double ww = area.getWidth();
@@ -1514,7 +1514,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
      * @see #removeChangeListener(ChartChangeListener)
      */
     public void addChangeListener(ChartChangeListener listener) {
-        ParamChecks.nullNotPermitted(listener, "listener");
+        Args.nullNotPermitted(listener, "listener");
         this.changeListeners.add(ChartChangeListener.class, listener);
     }
 
@@ -1526,7 +1526,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
      * @see #addChangeListener(ChartChangeListener)
      */
     public void removeChangeListener(ChartChangeListener listener) {
-        ParamChecks.nullNotPermitted(listener, "listener");
+        Args.nullNotPermitted(listener, "listener");
         this.changeListeners.remove(ChartChangeListener.class, listener);
     }
 

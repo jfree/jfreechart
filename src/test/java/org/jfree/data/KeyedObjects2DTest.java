@@ -42,7 +42,7 @@
 
 package org.jfree.data;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -100,7 +100,7 @@ public class KeyedObjects2DTest {
         ko2D1.addObject(new Double(345.9), "Row2", "Col1");
         ko2D1.addObject(new Double(452.7), "Row2", "Col2");
 
-        KeyedObjects2D ko2D2 = (KeyedObjects2D) TestUtilities.serialised(ko2D1);
+        KeyedObjects2D ko2D2 = (KeyedObjects2D) TestUtils.serialised(ko2D1);
         assertEquals(ko2D1, ko2D2);
     }
 

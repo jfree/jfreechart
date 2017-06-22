@@ -51,7 +51,7 @@ import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.Test;
@@ -143,7 +143,7 @@ public class StandardCategoryToolTipGeneratorTest {
                 = new StandardCategoryToolTipGenerator("{2}",
                 DateFormat.getInstance());
         StandardCategoryToolTipGenerator g2 = (StandardCategoryToolTipGenerator)
-                TestUtilities.serialised(g1);
+                TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

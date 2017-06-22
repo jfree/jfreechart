@@ -439,7 +439,7 @@ class DefaultAxisEditor extends JPanel implements ActionListener {
     private void attemptModifyLabelPaint() {
         Color c;
         c = JColorChooser.showDialog(
-            this, localizationResources.getString("Label_Color"), Color.blue
+            this, localizationResources.getString("Label_Color"), Color.BLUE
         );
         if (c != null) {
             this.labelPaintSample.setPaint(c);

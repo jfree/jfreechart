@@ -43,7 +43,7 @@ package org.jfree.data.gantt;
 
 import java.util.Date;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -102,7 +102,7 @@ public class TaskSeriesTest {
         TaskSeries s1 = new TaskSeries("S");
         s1.add(new Task("T1", new Date(1), new Date(2)));
         s1.add(new Task("T2", new Date(11), new Date(22)));
-        TaskSeries s2 = (TaskSeries) TestUtilities.serialised(s1);
+        TaskSeries s2 = (TaskSeries) TestUtils.serialised(s1);
         assertEquals(s1, s2);
     }
 

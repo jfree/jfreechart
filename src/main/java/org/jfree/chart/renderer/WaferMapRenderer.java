@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -303,7 +303,7 @@ public class WaferMapRenderer extends AbstractRenderer {
                     Shape shape = new Rectangle2D.Double(1d, 1d, 1d, 1d);
                     Paint paint = lookupSeriesPaint(
                             ((Integer) entry.getValue()).intValue());
-                    Paint outlinePaint = Color.black;
+                    Paint outlinePaint = Color.BLACK;
                     Stroke outlineStroke = DEFAULT_STROKE;
 
                     result.add(new LegendItem(label, description, null,
@@ -327,7 +327,7 @@ public class WaferMapRenderer extends AbstractRenderer {
                         Paint paint = getSeriesPaint(
                             ((Integer) entry.getValue()).intValue()
                         );
-                        Paint outlinePaint = Color.black;
+                        Paint outlinePaint = Color.BLACK;
                         Stroke outlineStroke = DEFAULT_STROKE;
 
                         result.add(new LegendItem(label, description,

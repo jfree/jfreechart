@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * XYBoxAnnotation.java
  * --------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2017, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Peter Kolb (see patch 2809117);
@@ -104,7 +104,7 @@ public class XYBoxAnnotation extends AbstractXYAnnotation
      * @param y1  the upper y-coordinate of the box (in data space).
      */
     public XYBoxAnnotation(double x0, double y0, double x1, double y1) {
-        this(x0, y0, x1, y1, new BasicStroke(1.0f), Color.black);
+        this(x0, y0, x1, y1, new BasicStroke(1.0f), Color.BLACK);
     }
 
     /**

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------
  * PolarPlot.java
  * --------------
- * (C) Copyright 2004-2016, by Solution Engineering, Inc. and Contributors.
+ * (C) Copyright 2004-2017, by Solution Engineering, Inc. and Contributors.
  *
  * Original Author:  Daniel Bridenbecker, Solution Engineering, Inc.;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -101,21 +101,21 @@ import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.event.RendererChangeListener;
 import org.jfree.chart.renderer.PolarItemRenderer;
-import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.util.ObjectList;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.ResourceBundleWrapper;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.Range;
 import org.jfree.data.general.Dataset;
 import org.jfree.data.general.DatasetChangeEvent;
-import org.jfree.data.general.DatasetUtilities;
+import org.jfree.data.general.DatasetUtils;
 import org.jfree.data.xy.XYDataset;
 
 /**
@@ -154,7 +154,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
             0.0f, new float[]{2.0f, 2.0f}, 0.0f);
 
     /** The default grid line paint. */
-    public static final Paint DEFAULT_GRIDLINE_PAINT = Color.gray;
+    public static final Paint DEFAULT_GRIDLINE_PAINT = Color.GRAY;
 
     /** The resourceBundle for the localization. */
     protected static ResourceBundle localizationResources
@@ -205,7 +205,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     private Font angleLabelFont = new Font("SansSerif", Font.PLAIN, 12);
 
     /** The paint used to display the angle labels. */
-    private transient Paint angleLabelPaint = Color.black;
+    private transient Paint angleLabelPaint = Color.BLACK;
 
     /** A flag that controls whether the angular grid-lines are visible. */
     private boolean angleGridlinesVisible;
@@ -508,7 +508,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      */
     public void setAxisLocation(int index, PolarAxisLocation location,
             boolean notify) {
-        ParamChecks.nullNotPermitted(location, "location");
+        Args.nullNotPermitted(location, "location");
         this.axisLocations.set(index, location);
         if (notify) {
             fireChangeEvent();
@@ -735,7 +735,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      * @since 1.0.10
      */
     public void setAngleTickUnit(TickUnit unit) {
-        ParamChecks.nullNotPermitted(unit, "unit");
+        Args.nullNotPermitted(unit, "unit");
         this.angleTickUnit = unit;
         fireChangeEvent();
     }
@@ -836,7 +836,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      * @see #getAngleLabelFont()
      */
     public void setAngleLabelFont(Font font) {
-        ParamChecks.nullNotPermitted(font, "font");
+        Args.nullNotPermitted(font, "font");
         this.angleLabelFont = font;
         fireChangeEvent();
     }
@@ -859,7 +859,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      * @param paint  the paint ({@code null} not permitted).
      */
     public void setAngleLabelPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.angleLabelPaint = paint;
         fireChangeEvent();
     }
@@ -1117,7 +1117,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      * @see #removeCornerTextItem(String)
      */
     public void addCornerTextItem(String text) {
-        ParamChecks.nullNotPermitted(text, "text");
+        Args.nullNotPermitted(text, "text");
         this.cornerTextItems.add(text);
         fireChangeEvent();
     }
@@ -1437,13 +1437,13 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
             return;
         }
 
-        g2.setColor(Color.black);
+        g2.setColor(Color.BLACK);
         double width = 0.0;
         double height = 0.0;
         for (Iterator it = this.cornerTextItems.iterator(); it.hasNext();) {
             String msg = (String) it.next();
             FontMetrics fm = g2.getFontMetrics();
-            Rectangle2D bounds = TextUtilities.getTextBounds(msg, g2, fm);
+            Rectangle2D bounds = TextUtils.getTextBounds(msg, g2, fm);
             width = Math.max(width, bounds.getWidth());
             height += bounds.getHeight();
         }
@@ -1459,7 +1459,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
         x += ANNOTATION_MARGIN;
         for (Iterator it = this.cornerTextItems.iterator(); it.hasNext();) {
             String msg = (String) it.next();
-            Rectangle2D bounds = TextUtilities.getTextBounds(msg, g2,
+            Rectangle2D bounds = TextUtils.getTextBounds(msg, g2,
                     g2.getFontMetrics());
             y += bounds.getHeight();
             g2.drawString(msg, (int) x, (int) y);
@@ -1559,7 +1559,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
             if (renderer == null) {
                 continue;
             }
-            if (!DatasetUtilities.isEmptyOrNull(dataset)) {
+            if (!DatasetUtils.isEmptyOrNull(dataset)) {
                 hasData = true;
                 int seriesCount = dataset.getSeriesCount();
                 for (int series = 0; series < seriesCount; series++) {
@@ -1669,7 +1669,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      * @since 1.0.14
      */
     private List getDatasetsMappedToAxis(Integer axisIndex) {
-        ParamChecks.nullNotPermitted(axisIndex, "axisIndex");
+        Args.nullNotPermitted(axisIndex, "axisIndex");
         List result = new ArrayList();
         for (int i = 0; i < this.datasets.size(); i++) {
             List mappedAxes = (List) this.datasetToAxesMap.get(new Integer(i));
@@ -1714,7 +1714,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
             if (d != null) {
                 // FIXME better ask the renderer instead of DatasetUtilities
                 result = Range.combine(result,
-                        DatasetUtilities.findRangeBounds(d));
+                        DatasetUtils.findRangeBounds(d));
             }
         }
 

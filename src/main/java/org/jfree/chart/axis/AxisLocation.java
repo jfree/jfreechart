@@ -48,7 +48,7 @@ package org.jfree.chart.axis;
 
 import java.io.ObjectStreamException;
 import java.io.Serializable;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 
 /**
  * Used to indicate the location of an axis on a 2D plot, prior to knowing the
@@ -151,7 +151,7 @@ public final class AxisLocation implements Serializable {
      * @return The opposite location.
      */
     public static AxisLocation getOpposite(AxisLocation location) {
-        ParamChecks.nullNotPermitted(location, "location");
+        Args.nullNotPermitted(location, "location");
         AxisLocation result = null;
         if (location == AxisLocation.TOP_OR_LEFT) {
             result = AxisLocation.BOTTOM_OR_RIGHT;

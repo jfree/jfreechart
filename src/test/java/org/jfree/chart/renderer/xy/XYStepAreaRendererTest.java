@@ -51,7 +51,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.fail;
 
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.util.PublicCloneable;
@@ -146,7 +146,7 @@ public class XYStepAreaRendererTest {
     public void testSerialization() {
         XYStepAreaRenderer r1 = new XYStepAreaRenderer();
         XYStepAreaRenderer r2 = (XYStepAreaRenderer) 
-                TestUtilities.serialised(r1);
+                TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

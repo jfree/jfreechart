@@ -45,7 +45,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 
 import org.jfree.chart.event.MarkerChangeEvent;
 import org.jfree.chart.event.MarkerChangeListener;
@@ -119,7 +119,7 @@ public class IntervalMarkerTest implements MarkerChangeListener {
     @Test
     public void testSerialization() {
         IntervalMarker m1 = new IntervalMarker(45.0, 50.0);
-        IntervalMarker m2 = (IntervalMarker) TestUtilities.serialised(m1);
+        IntervalMarker m2 = (IntervalMarker) TestUtils.serialised(m1);
         assertEquals(m1, m2);
     }
 

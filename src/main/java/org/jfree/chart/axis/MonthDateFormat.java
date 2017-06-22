@@ -53,7 +53,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.TimeZone;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 
 import org.jfree.data.time.Month;
 
@@ -164,7 +164,7 @@ public class MonthDateFormat extends DateFormat {
      */
     public MonthDateFormat(TimeZone zone, Locale locale, int chars,
                            boolean[] showYear, DateFormat yearFormatter) {
-        ParamChecks.nullNotPermitted(locale, "locale");
+        Args.nullNotPermitted(locale, "locale");
         DateFormatSymbols dfs = new DateFormatSymbols(locale);
         String[] monthsFromLocale = dfs.getMonths();
         this.months = new String[12];

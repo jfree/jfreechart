@@ -47,7 +47,7 @@ import static org.junit.Assert.assertFalse;
 import java.util.ArrayList;
 import java.util.Date;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 
 import org.jfree.data.Range;
 import org.junit.Test;
@@ -86,7 +86,7 @@ public class DefaultBoxAndWhiskerXYDatasetTest {
         d1.add(new Date(1L), new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0, 5.0,
                 6.0, 7.0, 8.0, new ArrayList()));
         DefaultBoxAndWhiskerXYDataset d2 = (DefaultBoxAndWhiskerXYDataset) 
-                TestUtilities.serialised(d1);
+                TestUtils.serialised(d1);
         assertEquals(d1, d2);
 
         // test independence

@@ -40,7 +40,7 @@
 
 package org.jfree.data.function;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -87,7 +87,7 @@ public class NormalDistributionFunction2DTest {
         NormalDistributionFunction2D f1 = new NormalDistributionFunction2D(1.0,
                 2.0);
         NormalDistributionFunction2D f2 = (NormalDistributionFunction2D) 
-                TestUtilities.serialised(f1);
+                TestUtils.serialised(f1);
         assertEquals(f1, f2);
     }
 

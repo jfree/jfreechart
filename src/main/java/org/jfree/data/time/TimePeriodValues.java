@@ -52,7 +52,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 
 import org.jfree.data.general.Series;
 import org.jfree.data.general.SeriesChangeEvent;
@@ -240,7 +240,7 @@ public class TimePeriodValues extends Series implements Serializable {
      * @param item  the item ({@code null} not permitted).
      */
     public void add(TimePeriodValue item) {
-        ParamChecks.nullNotPermitted(item, "item");
+        Args.nullNotPermitted(item, "item");
         this.data.add(item);
         updateBounds(item.getPeriod(), this.data.size() - 1);
         fireSeriesChanged();

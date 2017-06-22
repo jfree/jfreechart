@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * CategoryMarkerTest.java
  * -----------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2017, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -49,7 +49,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.GradientPaint;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 
 import org.jfree.chart.event.MarkerChangeEvent;
 import org.jfree.chart.event.MarkerChangeListener;
@@ -89,48 +89,48 @@ public class CategoryMarkerTest implements MarkerChangeListener {
         assertTrue(m1.equals(m2));
 
         //paint
-        m1 = new CategoryMarker("A", new GradientPaint(1.0f, 2.0f, Color.white,
-                3.0f, 4.0f, Color.yellow), new BasicStroke(1.1f));
+        m1 = new CategoryMarker("A", new GradientPaint(1.0f, 2.0f, Color.WHITE,
+                3.0f, 4.0f, Color.YELLOW), new BasicStroke(1.1f));
         assertFalse(m1.equals(m2));
-        m2 = new CategoryMarker("A", new GradientPaint(1.0f, 2.0f, Color.white,
-                3.0f, 4.0f, Color.yellow), new BasicStroke(1.1f));
+        m2 = new CategoryMarker("A", new GradientPaint(1.0f, 2.0f, Color.WHITE,
+                3.0f, 4.0f, Color.YELLOW), new BasicStroke(1.1f));
         assertTrue(m1.equals(m2));
 
         //stroke
-        m1 = new CategoryMarker("A", new GradientPaint(1.0f, 2.0f, Color.white,
-                3.0f, 4.0f, Color.yellow), new BasicStroke(2.2f));
+        m1 = new CategoryMarker("A", new GradientPaint(1.0f, 2.0f, Color.WHITE,
+                3.0f, 4.0f, Color.YELLOW), new BasicStroke(2.2f));
         assertFalse(m1.equals(m2));
-        m2 = new CategoryMarker("A", new GradientPaint(1.0f, 2.0f, Color.white,
-                3.0f, 4.0f, Color.yellow), new BasicStroke(2.2f));
+        m2 = new CategoryMarker("A", new GradientPaint(1.0f, 2.0f, Color.WHITE,
+                3.0f, 4.0f, Color.YELLOW), new BasicStroke(2.2f));
         assertTrue(m1.equals(m2));
 
         //outlinePaint
-        m1 = new CategoryMarker("A", new GradientPaint(1.0f, 2.0f, Color.white,
-                3.0f, 4.0f, Color.yellow), new BasicStroke(2.2f), Color.red,
+        m1 = new CategoryMarker("A", new GradientPaint(1.0f, 2.0f, Color.WHITE,
+                3.0f, 4.0f, Color.YELLOW), new BasicStroke(2.2f), Color.RED,
                 new BasicStroke(1.0f), 1.0f);
         assertFalse(m1.equals(m2));
-        m2 = new CategoryMarker("A", new GradientPaint(1.0f, 2.0f, Color.white,
-                3.0f, 4.0f, Color.yellow), new BasicStroke(2.2f), Color.red,
+        m2 = new CategoryMarker("A", new GradientPaint(1.0f, 2.0f, Color.WHITE,
+                3.0f, 4.0f, Color.YELLOW), new BasicStroke(2.2f), Color.RED,
                 new BasicStroke(1.0f), 1.0f);
         assertTrue(m1.equals(m2));
 
         //outlineStroke
-        m1 = new CategoryMarker("A", new GradientPaint(1.0f, 2.0f, Color.white,
-                3.0f, 4.0f, Color.yellow), new BasicStroke(2.2f), Color.red,
+        m1 = new CategoryMarker("A", new GradientPaint(1.0f, 2.0f, Color.WHITE,
+                3.0f, 4.0f, Color.YELLOW), new BasicStroke(2.2f), Color.RED,
                 new BasicStroke(3.3f), 1.0f);
         assertFalse(m1.equals(m2));
-        m2 = new CategoryMarker("A", new GradientPaint(1.0f, 2.0f, Color.white,
-                3.0f, 4.0f, Color.yellow), new BasicStroke(2.2f), Color.red,
+        m2 = new CategoryMarker("A", new GradientPaint(1.0f, 2.0f, Color.WHITE,
+                3.0f, 4.0f, Color.YELLOW), new BasicStroke(2.2f), Color.RED,
                 new BasicStroke(3.3f), 1.0f);
         assertTrue(m1.equals(m2));
 
         //alpha
-        m1 = new CategoryMarker("A", new GradientPaint(1.0f, 2.0f, Color.white,
-                3.0f, 4.0f, Color.yellow), new BasicStroke(2.2f), Color.red,
+        m1 = new CategoryMarker("A", new GradientPaint(1.0f, 2.0f, Color.WHITE,
+                3.0f, 4.0f, Color.YELLOW), new BasicStroke(2.2f), Color.RED,
                 new BasicStroke(1.0f), 0.5f);
         assertFalse(m1.equals(m2));
-        m2 = new CategoryMarker("A", new GradientPaint(1.0f, 2.0f, Color.white,
-                3.0f, 4.0f, Color.yellow), new BasicStroke(2.2f), Color.red,
+        m2 = new CategoryMarker("A", new GradientPaint(1.0f, 2.0f, Color.WHITE,
+                3.0f, 4.0f, Color.YELLOW), new BasicStroke(2.2f), Color.RED,
                 new BasicStroke(1.0f), 0.5f);
         assertTrue(m1.equals(m2));
 
@@ -142,7 +142,7 @@ public class CategoryMarkerTest implements MarkerChangeListener {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         CategoryMarker m1 = new CategoryMarker("A", new GradientPaint(1.0f,
-                2.0f, Color.white, 3.0f, 4.0f, Color.yellow),
+                2.0f, Color.WHITE, 3.0f, 4.0f, Color.YELLOW),
                 new BasicStroke(1.1f));
         CategoryMarker m2 = (CategoryMarker) m1.clone();
         assertTrue(m1 != m2);
@@ -156,9 +156,9 @@ public class CategoryMarkerTest implements MarkerChangeListener {
     @Test
     public void testSerialization() {
         CategoryMarker m1 = new CategoryMarker("A", new GradientPaint(1.0f,
-                2.0f, Color.white, 3.0f, 4.0f, Color.yellow),
+                2.0f, Color.WHITE, 3.0f, 4.0f, Color.YELLOW),
                 new BasicStroke(1.1f));
-        CategoryMarker m2 = (CategoryMarker) TestUtilities.serialised(m1);
+        CategoryMarker m2 = (CategoryMarker) TestUtils.serialised(m1);
         assertEquals(m1, m2);
     }
 

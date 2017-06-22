@@ -51,7 +51,7 @@ package org.jfree.chart.axis;
 
 import java.io.Serializable;
 import java.text.NumberFormat;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 
 /**
  * A numerical tick unit.
@@ -82,7 +82,7 @@ public class NumberTickUnit extends TickUnit implements Serializable {
      */
     public NumberTickUnit(double size, NumberFormat formatter) {
         super(size);
-        ParamChecks.nullNotPermitted(formatter, "formatter");
+        Args.nullNotPermitted(formatter, "formatter");
         this.formatter = formatter;
     }
 
@@ -99,7 +99,7 @@ public class NumberTickUnit extends TickUnit implements Serializable {
     public NumberTickUnit(double size, NumberFormat formatter,
             int minorTickCount) {
         super(size, minorTickCount);
-        ParamChecks.nullNotPermitted(formatter, "formatter");
+        Args.nullNotPermitted(formatter, "formatter");
         this.formatter = formatter;
     }
 

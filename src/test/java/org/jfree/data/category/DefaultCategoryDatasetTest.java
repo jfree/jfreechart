@@ -43,7 +43,7 @@
 
 package org.jfree.data.category;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.UnknownKeyException;
 
@@ -206,7 +206,7 @@ public class DefaultCategoryDatasetTest {
         DefaultCategoryDataset d1 = new DefaultCategoryDataset();
         d1.setValue(23.4, "R1", "C1");
         DefaultCategoryDataset d2 = (DefaultCategoryDataset) 
-                TestUtilities.serialised(d1);
+                TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 

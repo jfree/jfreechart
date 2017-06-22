@@ -250,7 +250,7 @@ import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.Zoomable;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.ResourceBundleWrapper;
 import org.jfree.chart.util.SerialUtils;
 
@@ -277,10 +277,10 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     public static final boolean DEFAULT_BUFFER_USED = true;
 
     /** The default panel width. */
-    public static final int DEFAULT_WIDTH = 680;
+    public static final int DEFAULT_WIDTH = 1024;
 
     /** The default panel height. */
-    public static final int DEFAULT_HEIGHT = 420;
+    public static final int DEFAULT_HEIGHT = 768;
 
     /** The default limit below which chart scaling kicks in. */
     public static final int DEFAULT_MINIMUM_DRAW_WIDTH = 300;
@@ -557,7 +557,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      *
      * @since 1.0.13
      */
-    protected List overlays;
+    protected List<Overlay> overlays;
     
     /**
      * Constructs a panel that displays the specified chart.
@@ -565,15 +565,9 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * @param chart  the chart.
      */
     public ChartPanel(JFreeChart chart) {
-
-        this(
-            chart,
-            DEFAULT_WIDTH,
-            DEFAULT_HEIGHT,
-            DEFAULT_MINIMUM_DRAW_WIDTH,
-            DEFAULT_MINIMUM_DRAW_HEIGHT,
-            DEFAULT_MAXIMUM_DRAW_WIDTH,
-            DEFAULT_MAXIMUM_DRAW_HEIGHT,
+        this(chart, DEFAULT_WIDTH, DEFAULT_HEIGHT,
+            DEFAULT_MINIMUM_DRAW_WIDTH, DEFAULT_MINIMUM_DRAW_HEIGHT,
+            DEFAULT_MAXIMUM_DRAW_WIDTH, DEFAULT_MAXIMUM_DRAW_HEIGHT,
             DEFAULT_BUFFER_USED,
             true,  // properties
             true,  // save
@@ -629,27 +623,13 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * @param tooltips  a flag indicating whether or not tooltips should be
      *                  enabled for the chart.
      */
-    public ChartPanel(JFreeChart chart,
-                      boolean properties,
-                      boolean save,
-                      boolean print,
-                      boolean zoom,
-                      boolean tooltips) {
+    public ChartPanel(JFreeChart chart, boolean properties, boolean save,
+            boolean print, boolean zoom, boolean tooltips) {
 
-        this(chart,
-             DEFAULT_WIDTH,
-             DEFAULT_HEIGHT,
-             DEFAULT_MINIMUM_DRAW_WIDTH,
-             DEFAULT_MINIMUM_DRAW_HEIGHT,
-             DEFAULT_MAXIMUM_DRAW_WIDTH,
-             DEFAULT_MAXIMUM_DRAW_HEIGHT,
-             DEFAULT_BUFFER_USED,
-             properties,
-             save,
-             print,
-             zoom,
-             tooltips
-             );
+        this(chart, DEFAULT_WIDTH, DEFAULT_HEIGHT,
+             DEFAULT_MINIMUM_DRAW_WIDTH, DEFAULT_MINIMUM_DRAW_HEIGHT,
+             DEFAULT_MAXIMUM_DRAW_WIDTH, DEFAULT_MAXIMUM_DRAW_HEIGHT,
+             DEFAULT_BUFFER_USED, properties, save, print, zoom, tooltips);
 
     }
 
@@ -756,7 +736,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         this.ownToolTipReshowDelay = ttm.getReshowDelay();
 
         this.zoomAroundAnchor = false;
-        this.zoomOutlinePaint = Color.blue;
+        this.zoomOutlinePaint = Color.BLUE;
         this.zoomFillPaint = new Color(0, 0, 255, 63);
 
         this.panMask = InputEvent.CTRL_MASK;
@@ -767,7 +747,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
             this.panMask = InputEvent.ALT_MASK;
         }
 
-        this.overlays = new java.util.ArrayList();
+        this.overlays = new java.util.ArrayList<Overlay>();
     }
 
     /**
@@ -1286,7 +1266,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * @since 1.0.13
      */
     public void setZoomFillPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.zoomFillPaint = paint;
     }
 
@@ -1360,7 +1340,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * @since 1.0.13
      */
     public void addOverlay(Overlay overlay) {
-        ParamChecks.nullNotPermitted(overlay, "overlay");
+        Args.nullNotPermitted(overlay, "overlay");
         this.overlays.add(overlay);
         overlay.addChangeListener(this);
         repaint();
@@ -1374,7 +1354,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * @since 1.0.13
      */
     public void removeOverlay(Overlay overlay) {
-        ParamChecks.nullNotPermitted(overlay, "overlay");
+        Args.nullNotPermitted(overlay, "overlay");
         boolean removed = this.overlays.remove(overlay);
         if (removed) {
             overlay.removeChangeListener(this);
@@ -1649,9 +1629,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
 
         }
 
-        Iterator iterator = this.overlays.iterator();
-        while (iterator.hasNext()) {
-            Overlay overlay = (Overlay) iterator.next();
+        for (Overlay overlay : this.overlays) {
             overlay.paintOverlay(g2, this);
         }
 
@@ -2587,7 +2565,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         if (this.zoomRectangle != null) {
             if (xor) {
                  // Set XOR mode to draw the zoom rectangle
-                g2.setXORMode(Color.gray);
+                g2.setXORMode(Color.GRAY);
             }
             if (this.fillZoomRectangle) {
                 g2.setPaint(this.zoomFillPaint);
@@ -2615,7 +2593,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
 
         Rectangle2D dataArea = getScreenDataArea();
 
-        g2.setXORMode(Color.orange);
+        g2.setXORMode(Color.ORANGE);
         if (((int) dataArea.getMinX() < x) && (x < (int) dataArea.getMaxX())) {
 
             if (this.verticalTraceLine != null) {
@@ -2645,7 +2623,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
 
         Rectangle2D dataArea = getScreenDataArea();
 
-        g2.setXORMode(Color.orange);
+        g2.setXORMode(Color.ORANGE);
         if (((int) dataArea.getMinY() < y) && (y < (int) dataArea.getMaxY())) {
 
             if (this.horizontalTraceLine != null) {
@@ -2722,7 +2700,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
                     filename = filename + ".png";
                 }
             }
-            ChartUtilities.saveChartAsPNG(new File(filename), this.chart,
+            ChartUtils.saveChartAsPNG(new File(filename), this.chart,
                     getWidth(), getHeight());
         }
     }
@@ -2923,7 +2901,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
             throw new IllegalStateException(
                     "OrsonPDF is not present on the classpath.");
         }
-        ParamChecks.nullNotPermitted(file, "file");
+        Args.nullNotPermitted(file, "file");
         try {
             Class pdfDocClass = Class.forName("com.orsonpdf.PDFDocument");
             Object pdfDoc = pdfDocClass.newInstance();
@@ -3009,7 +2987,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * @param listener  the listener ({@code null} not permitted).
      */
     public void addChartMouseListener(ChartMouseListener listener) {
-        ParamChecks.nullNotPermitted(listener, "listener");
+        Args.nullNotPermitted(listener, "listener");
         this.chartMouseListeners.add(ChartMouseListener.class, listener);
     }
 

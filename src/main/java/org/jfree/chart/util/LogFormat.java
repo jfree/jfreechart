@@ -114,8 +114,8 @@ public class LogFormat extends NumberFormat {
      */
     public LogFormat(double base, String baseLabel, String powerLabel,
             boolean showBase) {
-        ParamChecks.nullNotPermitted(baseLabel, "baseLabel");
-        ParamChecks.nullNotPermitted(powerLabel, "powerLabel");
+        Args.nullNotPermitted(baseLabel, "baseLabel");
+        Args.nullNotPermitted(powerLabel, "powerLabel");
         this.base = base;
         this.baseLog = Math.log(this.base);
         this.baseLabel = baseLabel;
@@ -142,7 +142,7 @@ public class LogFormat extends NumberFormat {
      * @since 1.0.13
      */
     public void setExponentFormat(NumberFormat format) {
-        ParamChecks.nullNotPermitted(format, "format");
+        Args.nullNotPermitted(format, "format");
         this.formatter = format;
     }
 

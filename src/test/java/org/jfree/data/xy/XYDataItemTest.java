@@ -44,7 +44,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -87,7 +87,7 @@ public class XYDataItemTest {
     @Test
     public void testSerialization() {
         XYDataItem i1 = new XYDataItem(1.0, 1.1);
-        XYDataItem i2 = (XYDataItem) TestUtilities.serialised(i1);
+        XYDataItem i2 = (XYDataItem) TestUtils.serialised(i1);
         assertEquals(i1, i2);
     }
 

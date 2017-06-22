@@ -45,7 +45,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.Test;
@@ -127,7 +127,7 @@ public class XYBarDatasetTest {
         double[][] data1 = new double[][] {x1, y1};
         d1.addSeries("S1", data1);
         XYBarDataset bd1 = new XYBarDataset(d1, 5.0);
-        XYBarDataset bd2 = (XYBarDataset) TestUtilities.serialised(bd1);
+        XYBarDataset bd2 = (XYBarDataset) TestUtils.serialised(bd1);
         assertEquals(bd1, bd2);
     }
 

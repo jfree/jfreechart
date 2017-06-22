@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -28,7 +28,7 @@
  * ThermometerPlot.java
  * --------------------
  *
- * (C) Copyright 2000-2016, by Bryan Scott and Contributors.
+ * (C) Copyright 2000-2017, by Bryan Scott and Contributors.
  *
  * Original Author:  Bryan Scott (based on MeterPlot by Hari).
  * Contributor(s):   David Gilbert (for Object Refinery Limited).
@@ -123,7 +123,7 @@ import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.ResourceBundleWrapper;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.chart.util.UnitType;
@@ -277,7 +277,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
     private transient Stroke thermometerStroke = new BasicStroke(1.0f);
 
     /** Paint for drawing the thermometer */
-    private transient Paint thermometerPaint = Color.black;
+    private transient Paint thermometerPaint = Color.BLACK;
 
     /** The display units */
     private int units = UNITS_CELCIUS;
@@ -292,13 +292,13 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
     private Font valueFont = new Font("SansSerif", Font.BOLD, 16);
 
     /** Colour that the value is written in */
-    private transient Paint valuePaint = Color.white;
+    private transient Paint valuePaint = Color.WHITE;
 
     /** Number format for the value */
     private NumberFormat valueFormat = new DecimalFormat();
 
     /** The default paint for the mercury in the thermometer. */
-    private transient Paint mercuryPaint = Color.lightGray;
+    private transient Paint mercuryPaint = Color.LIGHT_GRAY;
 
     /** A flag that controls whether value lines are drawn. */
     private boolean showValueLines = false;
@@ -326,8 +326,8 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
     private boolean useSubrangePaint = true;
 
     /** Paint for each range */
-    private transient Paint[] subrangePaint = {Color.green, Color.orange,
-            Color.red};
+    private transient Paint[] subrangePaint = {Color.GREEN, Color.ORANGE,
+            Color.RED};
 
     /** A flag that controls whether the sub-range indicators are visible. */
     private boolean subrangeIndicatorsVisible = true;
@@ -435,7 +435,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      * @see #getRangeAxis()
      */
     public void setRangeAxis(ValueAxis axis) {
-        ParamChecks.nullNotPermitted(axis, "axis");
+        Args.nullNotPermitted(axis, "axis");
         // plot is registered as a listener with the existing axis...
         this.rangeAxis.removeChangeListener(this);
 
@@ -526,7 +526,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      * @see #getPadding()
      */
     public void setPadding(RectangleInsets padding) {
-        ParamChecks.nullNotPermitted(padding, "padding");
+        Args.nullNotPermitted(padding, "padding");
         this.padding = padding;
         fireChangeEvent();
     }
@@ -703,7 +703,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      * @see #getValueFont()
      */
     public void setValueFont(Font f) {
-        ParamChecks.nullNotPermitted(f, "f");
+        Args.nullNotPermitted(f, "f");
         if (!this.valueFont.equals(f)) {
             this.valueFont = f;
             fireChangeEvent();
@@ -730,7 +730,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      * @see #getValuePaint()
      */
     public void setValuePaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         if (!this.valuePaint.equals(paint)) {
             this.valuePaint = paint;
             fireChangeEvent();
@@ -746,7 +746,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      * @param formatter  the new formatter ({@code null} not permitted).
      */
     public void setValueFormat(NumberFormat formatter) {
-        ParamChecks.nullNotPermitted(formatter, "formatter");
+        Args.nullNotPermitted(formatter, "formatter");
         this.valueFormat = formatter;
         fireChangeEvent();
     }
@@ -771,7 +771,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      * @see #getMercuryPaint()
      */
     public void setMercuryPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.mercuryPaint = paint;
         fireChangeEvent();
     }

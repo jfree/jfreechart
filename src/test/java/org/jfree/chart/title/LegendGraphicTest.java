@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------
  * LegendGraphicTest.java
  * ----------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2017, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -51,7 +51,7 @@ import java.awt.Stroke;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.ui.GradientPaintTransformType;
 import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.ui.StandardGradientPaintTransformer;
@@ -69,9 +69,9 @@ public class LegendGraphicTest {
     @Test
     public void testEquals() {
         LegendGraphic g1 = new LegendGraphic(new Rectangle2D.Double(1.0, 2.0,
-                3.0, 4.0), Color.black);
+                3.0, 4.0), Color.BLACK);
         LegendGraphic g2 = new LegendGraphic(new Rectangle2D.Double(1.0, 2.0,
-                3.0, 4.0), Color.black);
+                3.0, 4.0), Color.BLACK);
         assertEquals(g1, g2);
         assertEquals(g2, g1);
 
@@ -94,9 +94,9 @@ public class LegendGraphicTest {
         assertTrue(g1.equals(g2));
 
         // fillPaint
-        g1.setFillPaint(Color.green);
+        g1.setFillPaint(Color.GREEN);
         assertFalse(g1.equals(g2));
-        g2.setFillPaint(Color.green);
+        g2.setFillPaint(Color.GREEN);
         assertTrue(g1.equals(g2));
 
         // shapeOutlineVisible
@@ -106,9 +106,9 @@ public class LegendGraphicTest {
         assertTrue(g1.equals(g2));
 
         // outlinePaint
-        g1.setOutlinePaint(Color.green);
+        g1.setOutlinePaint(Color.GREEN);
         assertFalse(g1.equals(g2));
-        g2.setOutlinePaint(Color.green);
+        g2.setOutlinePaint(Color.GREEN);
         assertTrue(g1.equals(g2));
 
         // outlineStroke
@@ -142,9 +142,9 @@ public class LegendGraphicTest {
         assertTrue(g1.equals(g2));
 
         // linePaint
-        g1.setLinePaint(Color.green);
+        g1.setLinePaint(Color.GREEN);
         assertFalse(g1.equals(g2));
-        g2.setLinePaint(Color.green);
+        g2.setLinePaint(Color.GREEN);
         assertTrue(g1.equals(g2));
 
         // lineStroke
@@ -169,9 +169,9 @@ public class LegendGraphicTest {
     @Test
     public void testHashcode() {
         LegendGraphic g1 = new LegendGraphic(new Rectangle2D.Double(1.0, 2.0,
-                3.0, 4.0), Color.black);
+                3.0, 4.0), Color.BLACK);
         LegendGraphic g2 = new LegendGraphic(new Rectangle2D.Double(1.0, 2.0,
-                3.0, 4.0), Color.black);
+                3.0, 4.0), Color.BLACK);
         assertTrue(g1.equals(g2));
         int h1 = g1.hashCode();
         int h2 = g2.hashCode();
@@ -184,7 +184,7 @@ public class LegendGraphicTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         Rectangle r = new Rectangle(1, 2, 3, 4);
-        LegendGraphic g1 = new LegendGraphic(r, Color.black);
+        LegendGraphic g1 = new LegendGraphic(r, Color.BLACK);
         LegendGraphic g2 = (LegendGraphic) g1.clone();
         assertTrue(g1 != g2);
         assertTrue(g1.getClass() == g2.getClass());
@@ -201,7 +201,7 @@ public class LegendGraphicTest {
     @Test
     public void testCloning2() throws CloneNotSupportedException {
         Rectangle r = new Rectangle(1, 2, 3, 4);
-        LegendGraphic g1 = new LegendGraphic(r, Color.black);
+        LegendGraphic g1 = new LegendGraphic(r, Color.BLACK);
         Line2D l = new Line2D.Double(1.0, 2.0, 3.0, 4.0);
         g1.setLine(l);
         LegendGraphic g2 = (LegendGraphic) g1.clone();
@@ -222,9 +222,9 @@ public class LegendGraphicTest {
     public void testSerialization() {
         Stroke s = new BasicStroke(1.23f);
         LegendGraphic g1 = new LegendGraphic(new Rectangle2D.Double(1.0, 2.0, 
-                3.0, 4.0), Color.black);
+                3.0, 4.0), Color.BLACK);
         g1.setOutlineStroke(s);
-        LegendGraphic g2 = (LegendGraphic) TestUtilities.serialised(g1);
+        LegendGraphic g2 = (LegendGraphic) TestUtils.serialised(g1);
         assertTrue(g1.equals(g2));
     }
 

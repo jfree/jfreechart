@@ -43,7 +43,7 @@ package org.jfree.data.statistics;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -85,7 +85,7 @@ public class HistogramBinTest {
         double start = 10.0;
         double end = 20.0;
         HistogramBin b1 = new HistogramBin(start, end);
-        HistogramBin b2 = (HistogramBin) TestUtilities.serialised(b1);
+        HistogramBin b2 = (HistogramBin) TestUtils.serialised(b1);
         assertEquals(b1, b2);
     }
 

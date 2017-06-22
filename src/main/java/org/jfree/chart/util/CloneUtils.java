@@ -60,7 +60,7 @@ public class CloneUtils {
      * @return A new list. 
      */
     public static List<?> cloneList(List<?> source) {
-        ParamChecks.nullNotPermitted(source, "source");
+        Args.nullNotPermitted(source, "source");
         List result = new ArrayList();
         for (Object obj: source) {
             if (obj != null) {
@@ -87,7 +87,7 @@ public class CloneUtils {
      * @since 1.0.18
      */
     public static Map cloneMapValues(Map source) {
-        ParamChecks.nullNotPermitted(source, "source");
+        Args.nullNotPermitted(source, "source");
         Map result = new HashMap();
         for (Object key : source.keySet()) {
             Object value = source.get(key);

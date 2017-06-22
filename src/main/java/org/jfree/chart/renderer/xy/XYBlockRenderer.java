@@ -63,10 +63,10 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.LookupPaintScale;
 import org.jfree.chart.renderer.PaintScale;
 import org.jfree.chart.ui.RectangleAnchor;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.Range;
-import org.jfree.data.general.DatasetUtilities;
+import org.jfree.data.general.DatasetUtils;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYZDataset;
 
@@ -198,7 +198,7 @@ public class XYBlockRenderer extends AbstractXYItemRenderer
      * @see #getBlockAnchor()
      */
     public void setBlockAnchor(RectangleAnchor anchor) {
-        ParamChecks.nullNotPermitted(anchor, "anchor");
+        Args.nullNotPermitted(anchor, "anchor");
         if (this.blockAnchor.equals(anchor)) {
             return;  // no change
         }
@@ -229,7 +229,7 @@ public class XYBlockRenderer extends AbstractXYItemRenderer
      * @since 1.0.4
      */
     public void setPaintScale(PaintScale scale) {
-        ParamChecks.nullNotPermitted(scale, "scale");
+        Args.nullNotPermitted(scale, "scale");
         this.paintScale = scale;
         fireChangeEvent();
     }
@@ -293,7 +293,7 @@ public class XYBlockRenderer extends AbstractXYItemRenderer
         if (dataset == null) {
             return null;
         }
-        Range r = DatasetUtilities.findDomainBounds(dataset, false);
+        Range r = DatasetUtils.findDomainBounds(dataset, false);
         if (r == null) {
             return null;
         }
@@ -315,7 +315,7 @@ public class XYBlockRenderer extends AbstractXYItemRenderer
     @Override
     public Range findRangeBounds(XYDataset dataset) {
         if (dataset != null) {
-            Range r = DatasetUtilities.findRangeBounds(dataset, false);
+            Range r = DatasetUtils.findRangeBounds(dataset, false);
             if (r == null) {
                 return null;
             }
@@ -383,6 +383,11 @@ public class XYBlockRenderer extends AbstractXYItemRenderer
         g2.fill(block);
         g2.setStroke(new BasicStroke(1.0f));
         g2.draw(block);
+
+        if (isItemLabelVisible(series, item)) {
+            drawItemLabel(g2, orientation, dataset, series, item, 
+                    block.getCenterX(), block.getCenterY(), y < 0.0);
+        }
 
         int datasetIndex = plot.indexOf(dataset);
         double transX = domainAxis.valueToJava2D(x, dataArea,

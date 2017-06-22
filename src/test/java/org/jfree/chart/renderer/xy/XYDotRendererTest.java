@@ -51,7 +51,7 @@ import java.awt.geom.Rectangle2D;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.LegendItem;
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.util.PublicCloneable;
@@ -136,7 +136,7 @@ public class XYDotRendererTest {
     @Test
     public void testSerialization() {
         XYDotRenderer r1 = new XYDotRenderer();
-        XYDotRenderer r2 = (XYDotRenderer) TestUtilities.serialised(r1);
+        XYDotRenderer r2 = (XYDotRenderer) TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

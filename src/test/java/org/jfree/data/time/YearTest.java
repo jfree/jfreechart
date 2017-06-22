@@ -58,7 +58,7 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -219,7 +219,7 @@ public class YearTest {
     @Test
     public void testSerialization() {
         Year y1 = new Year(1999);
-        Year y2 = (Year) TestUtilities.serialised(y1);
+        Year y2 = (Year) TestUtils.serialised(y1);
         assertEquals(y1, y2);
     }
 

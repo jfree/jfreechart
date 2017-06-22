@@ -45,7 +45,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.time.Day;
@@ -107,12 +107,12 @@ public class DefaultWindDatasetTest {
     @Test
     public void testSerialization() {
         DefaultWindDataset d1 = new DefaultWindDataset();
-        DefaultWindDataset d2 = (DefaultWindDataset) TestUtilities.serialised(d1);
+        DefaultWindDataset d2 = (DefaultWindDataset) TestUtils.serialised(d1);
         assertEquals(d1, d2);
 
         // try a dataset with some content...
         d1 = createSampleDataset1();
-        d2 = (DefaultWindDataset) TestUtilities.serialised(d1);
+        d2 = (DefaultWindDataset) TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 

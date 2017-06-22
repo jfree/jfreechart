@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * PeriodAxis.java
  * ---------------
- * (C) Copyright 2004-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2017, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -93,10 +93,10 @@ import org.jfree.chart.event.AxisChangeEvent;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.ValueAxisPlot;
-import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.TextAnchor;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.Range;
@@ -176,7 +176,7 @@ public class PeriodAxis extends ValueAxis
     private transient Stroke minorTickMarkStroke = new BasicStroke(0.5f);
 
     /** The paint used to draw tick marks. */
-    private transient Paint minorTickMarkPaint = Color.black;
+    private transient Paint minorTickMarkPaint = Color.BLACK;
 
     /** Info for each labeling band. */
     private PeriodAxisLabelInfo[] labelInfo;
@@ -220,8 +220,8 @@ public class PeriodAxis extends ValueAxis
     public PeriodAxis(String label, RegularTimePeriod first,
             RegularTimePeriod last, TimeZone timeZone, Locale locale) {
         super(label, null);
-        ParamChecks.nullNotPermitted(timeZone, "timeZone");
-        ParamChecks.nullNotPermitted(locale, "locale");
+        Args.nullNotPermitted(timeZone, "timeZone");
+        Args.nullNotPermitted(locale, "locale");
         this.first = first;
         this.last = last;
         this.timeZone = timeZone;
@@ -260,7 +260,7 @@ public class PeriodAxis extends ValueAxis
      * @param first  the time period ({@code null} not permitted).
      */
     public void setFirst(RegularTimePeriod first) {
-        ParamChecks.nullNotPermitted(first, "first");
+        Args.nullNotPermitted(first, "first");
         this.first = first;
         this.first.peg(this.calendar);
         fireChangeEvent();
@@ -282,7 +282,7 @@ public class PeriodAxis extends ValueAxis
      * @param last  the time period ({@code null} not permitted).
      */
     public void setLast(RegularTimePeriod last) {
-        ParamChecks.nullNotPermitted(last, "last");
+        Args.nullNotPermitted(last, "last");
         this.last = last;
         this.last.peg(this.calendar);
         fireChangeEvent();
@@ -305,7 +305,7 @@ public class PeriodAxis extends ValueAxis
      * @param zone  the time zone ({@code null} not permitted).
      */
     public void setTimeZone(TimeZone zone) {
-        ParamChecks.nullNotPermitted(zone, "zone");
+        Args.nullNotPermitted(zone, "zone");
         this.timeZone = zone;
         this.calendar = Calendar.getInstance(zone, this.locale);
         this.first.peg(this.calendar);
@@ -342,7 +342,7 @@ public class PeriodAxis extends ValueAxis
      * @param c  the class ({@code null} not permitted).
      */
     public void setAutoRangeTimePeriodClass(Class c) {
-        ParamChecks.nullNotPermitted(c, "c");
+        Args.nullNotPermitted(c, "c");
         this.autoRangeTimePeriodClass = c;
         fireChangeEvent();
     }
@@ -364,7 +364,7 @@ public class PeriodAxis extends ValueAxis
      *           expected).
      */
     public void setMajorTickTimePeriodClass(Class c) {
-        ParamChecks.nullNotPermitted(c, "c");
+        Args.nullNotPermitted(c, "c");
         this.majorTickTimePeriodClass = c;
         fireChangeEvent();
     }
@@ -410,7 +410,7 @@ public class PeriodAxis extends ValueAxis
      *           expected).
      */
     public void setMinorTickTimePeriodClass(Class c) {
-        ParamChecks.nullNotPermitted(c, "c");
+        Args.nullNotPermitted(c, "c");
         this.minorTickTimePeriodClass = c;
         fireChangeEvent();
     }
@@ -433,7 +433,7 @@ public class PeriodAxis extends ValueAxis
      * @param stroke  the stroke ({@code null} not permitted).
      */
     public void setMinorTickMarkStroke(Stroke stroke) {
-        ParamChecks.nullNotPermitted(stroke, "stroke");
+        Args.nullNotPermitted(stroke, "stroke");
         this.minorTickMarkStroke = stroke;
         fireChangeEvent();
     }
@@ -456,7 +456,7 @@ public class PeriodAxis extends ValueAxis
      * @param paint  the paint ({@code null} not permitted).
      */
     public void setMinorTickMarkPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.minorTickMarkPaint = paint;
         fireChangeEvent();
     }
@@ -829,9 +829,9 @@ public class PeriodAxis extends ValueAxis
         df.setTimeZone(this.timeZone);
         String label1 = df.format(new Date(p1.getMiddleMillisecond()));
         String label2 = df.format(new Date(p2.getMiddleMillisecond()));
-        Rectangle2D b1 = TextUtilities.getTextBounds(label1, g2,
+        Rectangle2D b1 = TextUtils.getTextBounds(label1, g2,
                 g2.getFontMetrics());
-        Rectangle2D b2 = TextUtilities.getTextBounds(label2, g2,
+        Rectangle2D b2 = TextUtils.getTextBounds(label2, g2,
                 g2.getFontMetrics());
         double w = Math.max(b1.getWidth(), b2.getWidth());
         long ww = Math.round(java2DToValue(dataArea.getX() + w + 5.0,
@@ -866,7 +866,7 @@ public class PeriodAxis extends ValueAxis
             if (last > axisMax) {
                 // this is the last period, but it is only partially visible
                 // so check that the label will fit before displaying it...
-                Rectangle2D bb = TextUtilities.getTextBounds(label, g2,
+                Rectangle2D bb = TextUtils.getTextBounds(label, g2,
                         g2.getFontMetrics());
                 if ((x + bb.getWidth() / 2) > dataArea.getMaxX()) {
                     float xstart = (float) valueToJava2D(Math.max(first,
@@ -882,7 +882,7 @@ public class PeriodAxis extends ValueAxis
             if (first < axisMin) {
                 // this is the first period, but it is only partially visible
                 // so check that the label will fit before displaying it...
-                Rectangle2D bb = TextUtilities.getTextBounds(label, g2,
+                Rectangle2D bb = TextUtils.getTextBounds(label, g2,
                         g2.getFontMetrics());
                 if ((x - bb.getWidth() / 2) < dataArea.getX()) {
                     float xlast = (float) valueToJava2D(Math.min(last,
@@ -898,7 +898,7 @@ public class PeriodAxis extends ValueAxis
             }
             if (label != null) {
                 g2.setPaint(this.labelInfo[band].getLabelPaint());
-                b = TextUtilities.drawAlignedString(label, g2, x, y, anchor);
+                b = TextUtils.drawAlignedString(label, g2, x, y, anchor);
             }
             if (lastXX > 0L) {
                 if (this.labelInfo[band].getDrawDividers()) {

@@ -88,7 +88,7 @@ import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.util.AttrStringUtils;
 import org.jfree.chart.util.LogFormat;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.data.Range;
 
 /**
@@ -222,7 +222,7 @@ public class LogAxis extends ValueAxis {
      * @since 1.0.18
      */
     public void setBaseFormatter(Format formatter) {
-        ParamChecks.nullNotPermitted(formatter, "formatter");
+        Args.nullNotPermitted(formatter, "formatter");
         this.baseFormatter = formatter;
         fireChangeEvent();
     }
@@ -296,7 +296,7 @@ public class LogAxis extends ValueAxis {
      */
     public void setTickUnit(NumberTickUnit unit, boolean notify,
             boolean turnOffAutoSelect) {
-        ParamChecks.nullNotPermitted(unit, "unit");
+        Args.nullNotPermitted(unit, "unit");
         this.tickUnit = unit;
         if (turnOffAutoSelect) {
             setAutoTickUnitSelection(false, false);

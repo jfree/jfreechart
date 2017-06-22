@@ -50,7 +50,7 @@ import static org.junit.Assert.assertNull;
 import java.awt.Color;
 import java.awt.GradientPaint;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 
 import org.jfree.chart.block.BlockBorder;
 import org.jfree.chart.block.BlockContainer;
@@ -88,9 +88,9 @@ public class CompositeTitleTest {
         assertTrue(t1.equals(t2));
 
         // frame
-        t1.setFrame(new BlockBorder(Color.red));
+        t1.setFrame(new BlockBorder(Color.RED));
         assertFalse(t1.equals(t2));
-        t2.setFrame(new BlockBorder(Color.red));
+        t2.setFrame(new BlockBorder(Color.RED));
         assertTrue(t1.equals(t2));
 
         // padding
@@ -105,11 +105,11 @@ public class CompositeTitleTest {
         t2.getContainer().add(new TextTitle("T1"));
         assertTrue(t1.equals(t2));
 
-        t1.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.yellow));
+        t1.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.YELLOW));
         assertFalse(t1.equals(t2));
-        t2.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.yellow));
+        t2.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.YELLOW));
         assertTrue(t1.equals(t2));
 
     }
@@ -136,8 +136,8 @@ public class CompositeTitleTest {
     public void testCloning() {
         CompositeTitle t1 = new CompositeTitle(new BlockContainer());
         t1.getContainer().add(new TextTitle("T1"));
-        t1.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.yellow));
+        t1.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.YELLOW));
         CompositeTitle t2 = null;
         try {
             t2 = (CompositeTitle) t1.clone();
@@ -157,9 +157,9 @@ public class CompositeTitleTest {
     public void testSerialization() {
         CompositeTitle t1 = new CompositeTitle(new BlockContainer());
         t1.getContainer().add(new TextTitle("T1"));
-        t1.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.blue));
-        CompositeTitle t2 = (CompositeTitle) TestUtilities.serialised(t1);
+        t1.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.BLUE));
+        CompositeTitle t2 = (CompositeTitle) TestUtils.serialised(t1);
         assertEquals(t1, t2);
     }
 

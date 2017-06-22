@@ -50,7 +50,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -116,7 +116,7 @@ public class DefaultKeyedValues2DTest {
         kv2D1.addValue(new Double(452.7), "Row2", "Col2");
 
         DefaultKeyedValues2D kv2D2 = (DefaultKeyedValues2D) 
-                TestUtilities.serialised(kv2D1);
+                TestUtils.serialised(kv2D1);
         assertEquals(kv2D1, kv2D2);
     }
 

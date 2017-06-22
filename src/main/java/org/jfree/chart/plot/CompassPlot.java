@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------
  * CompassPlot.java
  * ----------------
- * (C) Copyright 2002-2016, by the Australian Antarctic Division and
+ * (C) Copyright 2002-2017, by the Australian Antarctic Division and
  * Contributors.
  *
  * Original Author:  Bryan Scott (for the Australian Antarctic Division);
@@ -100,7 +100,7 @@ import org.jfree.chart.needle.WindNeedle;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.ResourceBundleWrapper;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.general.DefaultValueDataset;
@@ -135,13 +135,13 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
     private boolean drawBorder = false;
 
     /** The rose highlight paint. */
-    private transient Paint roseHighlightPaint = Color.black;
+    private transient Paint roseHighlightPaint = Color.BLACK;
 
     /** The rose paint. */
-    private transient Paint rosePaint = Color.yellow;
+    private transient Paint rosePaint = Color.YELLOW;
 
     /** The rose center paint. */
-    private transient Paint roseCenterPaint = Color.white;
+    private transient Paint roseCenterPaint = Color.WHITE;
 
     /** The compass font. */
     private Font compassFont = new Font("Arial", Font.PLAIN, 10);
@@ -256,7 +256,7 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
      */
     public void setLabelFont(Font font) {
         // FIXME: this attribute is not used - deprecate?
-        ParamChecks.nullNotPermitted(font, "font");
+        Args.nullNotPermitted(font, "font");
         this.labelFont = font;
         fireChangeEvent();
     }
@@ -281,7 +281,7 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
      * @see #getRosePaint()
      */
     public void setRosePaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.rosePaint = paint;
         fireChangeEvent();
     }
@@ -307,7 +307,7 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
      * @see #getRoseCenterPaint()
      */
     public void setRoseCenterPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.roseCenterPaint = paint;
         fireChangeEvent();
     }
@@ -333,7 +333,7 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
      * @see #getRoseHighlightPaint()
      */
     public void setRoseHighlightPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.roseHighlightPaint = paint;
         fireChangeEvent();
     }
@@ -442,8 +442,8 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
         switch (type) {
             case 0:
                 setSeriesNeedle(index, new ArrowNeedle(true));
-                setSeriesPaint(index, Color.red);
-                this.seriesNeedle[index].setHighlightPaint(Color.white);
+                setSeriesPaint(index, Color.RED);
+                this.seriesNeedle[index].setHighlightPaint(Color.WHITE);
                 break;
             case 1:
                 setSeriesNeedle(index, new LineNeedle());
@@ -468,7 +468,7 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
                 setSeriesNeedle(index, new ShipNeedle());
                 break;
             case 7:
-                setSeriesPaint(index, Color.blue);
+                setSeriesPaint(index, Color.BLUE);
                 setSeriesNeedle(index, new WindNeedle());
                 break;
             case 8:

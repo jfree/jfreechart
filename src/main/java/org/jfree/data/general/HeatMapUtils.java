@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ---------------------
- * HeatMapUtilities.java
- * ---------------------
- * (C) Copyright 2009-2016, by Object Refinery Limited.
+ * -----------------
+ * HeatMapUtils.java
+ * -----------------
+ * (C) Copyright 2009-2017, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -45,7 +45,7 @@ import java.awt.Graphics2D;
 import java.awt.Paint;
 import java.awt.image.BufferedImage;
 import org.jfree.chart.renderer.PaintScale;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
@@ -55,7 +55,7 @@ import org.jfree.data.xy.XYSeriesCollection;
  *
  * @since 1.0.13
  */
-public abstract class HeatMapUtilities {
+public abstract class HeatMapUtils {
 
     /**
      * Returns a dataset containing one series that holds a copy of the (x, z)
@@ -111,8 +111,8 @@ public abstract class HeatMapUtilities {
     public static BufferedImage createHeatMapImage(HeatMapDataset dataset,
             PaintScale paintScale) {
 
-        ParamChecks.nullNotPermitted(dataset, "dataset");
-        ParamChecks.nullNotPermitted(paintScale, "paintScale");
+        Args.nullNotPermitted(dataset, "dataset");
+        Args.nullNotPermitted(paintScale, "paintScale");
         int xCount = dataset.getXSampleCount();
         int yCount = dataset.getYSampleCount();
         BufferedImage image = new BufferedImage(xCount, yCount,

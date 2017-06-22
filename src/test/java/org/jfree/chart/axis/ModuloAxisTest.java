@@ -44,7 +44,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 
 import org.jfree.data.Range;
 import org.junit.Test;
@@ -100,7 +100,7 @@ public class ModuloAxisTest {
     @Test
     public void testSerialization() {
         ModuloAxis a1 = new ModuloAxis("Test", new Range(0.0, 1.0));
-        ModuloAxis a2 = (ModuloAxis) TestUtilities.serialised(a1);
+        ModuloAxis a2 = (ModuloAxis) TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 

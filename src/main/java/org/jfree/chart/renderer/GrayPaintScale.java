@@ -47,7 +47,7 @@ import java.awt.Color;
 import java.awt.Paint;
 import java.io.Serializable;
 
-import org.jfree.chart.HashUtilities;
+import org.jfree.chart.HashUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 /**
@@ -215,8 +215,8 @@ public class GrayPaintScale
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = HashUtilities.hashCode(hash, this.lowerBound);
-        hash = HashUtilities.hashCode(hash, this.upperBound);
+        hash = HashUtils.hashCode(hash, this.lowerBound);
+        hash = HashUtils.hashCode(hash, this.upperBound);
         hash = 43 * hash + this.alpha;
         return hash;
     }

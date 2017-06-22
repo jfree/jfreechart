@@ -44,7 +44,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -98,7 +98,7 @@ public class ShortTextTitleTest {
     @Test
     public void testSerialization() {
         ShortTextTitle t1 = new ShortTextTitle("ABC");
-        ShortTextTitle t2 = (ShortTextTitle) TestUtilities.serialised(t1);
+        ShortTextTitle t2 = (ShortTextTitle) TestUtils.serialised(t1);
         assertEquals(t1, t2);
     }
 

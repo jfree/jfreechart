@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -59,7 +59,7 @@ import java.io.Serializable;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
 
 /**
@@ -85,7 +85,7 @@ public class LineBorder implements BlockFrame, Serializable {
      * Creates a default border.
      */
     public LineBorder() {
-        this(Color.black, new BasicStroke(1.0f), new RectangleInsets(1.0, 1.0,
+        this(Color.BLACK, new BasicStroke(1.0f), new RectangleInsets(1.0, 1.0,
                 1.0, 1.0));
     }
 
@@ -97,9 +97,9 @@ public class LineBorder implements BlockFrame, Serializable {
      * @param insets  the insets ({@code null} not permitted).
      */
     public LineBorder(Paint paint, Stroke stroke, RectangleInsets insets) {
-        ParamChecks.nullNotPermitted(paint, "paint");
-        ParamChecks.nullNotPermitted(stroke, "stroke");
-        ParamChecks.nullNotPermitted(insets, "insets");
+        Args.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(stroke, "stroke");
+        Args.nullNotPermitted(insets, "insets");
         this.paint = paint;
         this.stroke = stroke;
         this.insets = insets;

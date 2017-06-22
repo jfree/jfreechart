@@ -56,7 +56,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import org.jfree.chart.util.ObjectUtils;
 
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.data.general.PieDataset;
 
 /**
@@ -113,8 +113,8 @@ public class StandardPieURLGenerator implements PieURLGenerator, Serializable {
      */
     public StandardPieURLGenerator(String prefix, String categoryParamName,
             String indexParamName) {
-        ParamChecks.nullNotPermitted(prefix, "prefix");
-        ParamChecks.nullNotPermitted(categoryParamName, "categoryParamName");
+        Args.nullNotPermitted(prefix, "prefix");
+        Args.nullNotPermitted(categoryParamName, "categoryParamName");
         this.prefix = prefix;
         this.categoryParamName = categoryParamName;
         this.indexParamName = indexParamName;

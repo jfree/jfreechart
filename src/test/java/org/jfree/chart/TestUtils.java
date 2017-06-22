@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ------------------
- * TestUtilities.java
- * ------------------
- * (C) Copyright 2007-2016, by Object Refinery Limited.
+ * --------------
+ * TestUtils.java
+ * --------------
+ * (C) Copyright 2007-2017, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -53,7 +53,7 @@ import java.util.Iterator;
 /**
  * Some utility methods for use by the testing code.
  */
-public class TestUtilities {
+public class TestUtils {
 
     /**
      * Returns {@code true} if the collections contains any object that

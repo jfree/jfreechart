@@ -44,7 +44,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -94,7 +94,7 @@ public class AbstractDialLayerTest {
     public void testSerialization() {
         // test a default instance
         DialCap c1 = new DialCap();
-        DialCap c2 = (DialCap) TestUtilities.serialised(c1);
+        DialCap c2 = (DialCap) TestUtils.serialised(c1);
         assertEquals(c1, c2);
 
         // check that the listener lists are independent

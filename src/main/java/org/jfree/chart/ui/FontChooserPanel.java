@@ -73,7 +73,7 @@ public class FontChooserPanel extends JPanel {
      *
      * @param font  the initial font to display.
      */
-    public FontChooserPanel(final Font font) {
+    public FontChooserPanel(Font font) {
 
         final GraphicsEnvironment g
                 = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -178,7 +178,7 @@ public class FontChooserPanel extends JPanel {
      *
      * @param font the font from which to read the properties.
      */
-    public void setSelectedFont (final Font font) {
+    public void setSelectedFont (Font font) {
         if (font == null) {
             throw new NullPointerException();
         }

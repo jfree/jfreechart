@@ -58,7 +58,7 @@ import java.util.Date;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.statistics.BoxAndWhiskerItem;
 import org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset;
@@ -79,10 +79,10 @@ public class XYBoxAndWhiskerRendererTest {
         assertEquals(r1, r2);
 
         r1.setArtifactPaint(new GradientPaint(1.0f, 2.0f, Color.green,
-                3.0f, 4.0f, Color.red));
+                3.0f, 4.0f, Color.RED));
         assertFalse(r1.equals(r2));
         r2.setArtifactPaint(new GradientPaint(1.0f, 2.0f, Color.green,
-                3.0f, 4.0f, Color.red));
+                3.0f, 4.0f, Color.RED));
         assertEquals(r1, r2);
 
         r1.setBoxWidth(0.55);
@@ -95,9 +95,9 @@ public class XYBoxAndWhiskerRendererTest {
         r2.setFillBox(!r2.getFillBox());
         assertEquals(r1, r2);
 
-        r1.setBoxPaint(Color.yellow);
+        r1.setBoxPaint(Color.YELLOW);
         assertFalse(r1.equals(r2));
-        r2.setBoxPaint(Color.yellow);
+        r2.setBoxPaint(Color.YELLOW);
         assertEquals(r1, r2);
 
         // check boxPaint null also
@@ -148,7 +148,7 @@ public class XYBoxAndWhiskerRendererTest {
     public void testSerialization() {
         XYBoxAndWhiskerRenderer r1 = new XYBoxAndWhiskerRenderer();
         XYBoxAndWhiskerRenderer r2 = (XYBoxAndWhiskerRenderer) 
-                TestUtilities.serialised(r1);
+                TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

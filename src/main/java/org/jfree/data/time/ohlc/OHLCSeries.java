@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * OHLCSeries.java
  * ---------------
- * (C) Copyright 2006-2016, by Object Refinery Limited.
+ * (C) Copyright 2006-2017, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -42,7 +42,7 @@
 
 package org.jfree.data.time.ohlc;
 
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.data.ComparableObjectItem;
 import org.jfree.data.ComparableObjectSeries;
 import org.jfree.data.time.RegularTimePeriod;
@@ -121,7 +121,7 @@ public class OHLCSeries extends ComparableObjectSeries {
      * @since 1.0.17
      */
     public void add(OHLCItem item) {
-        ParamChecks.nullNotPermitted(item, "item");
+        Args.nullNotPermitted(item, "item");
         add(item.getPeriod(), item.getOpenValue(), item.getHighValue(),
                 item.getLowValue(), item.getCloseValue());
     }
@@ -130,6 +130,8 @@ public class OHLCSeries extends ComparableObjectSeries {
      * Removes the item with the specified index.
      *
      * @param index  the item index.
+     * 
+     * @return The item removed.
      *
      * @since 1.0.14
      */

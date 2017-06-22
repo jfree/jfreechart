@@ -50,7 +50,7 @@ import static org.junit.Assert.assertNull;
 
 import java.awt.Color;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 
 import org.jfree.chart.renderer.GrayPaintScale;
 import org.jfree.chart.renderer.LookupPaintScale;
@@ -127,10 +127,10 @@ public class XYBlockRendererTest {
         assertTrue(r1.equals(r2));
 
         // check independence
-        scale1.add(0.5, Color.red);
+        scale1.add(0.5, Color.RED);
         assertFalse(r1.equals(r2));
         LookupPaintScale scale2 = (LookupPaintScale) r2.getPaintScale();
-        scale2.add(0.5, Color.red);
+        scale2.add(0.5, Color.RED);
         assertTrue(r1.equals(r2));
     }
 
@@ -149,7 +149,7 @@ public class XYBlockRendererTest {
     @Test
     public void testSerialization() {
         XYBlockRenderer r1 = new XYBlockRenderer();
-        XYBlockRenderer r2 = (XYBlockRenderer) TestUtilities.serialised(r1);
+        XYBlockRenderer r2 = (XYBlockRenderer) TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

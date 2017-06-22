@@ -58,7 +58,7 @@ import javax.imageio.ImageIO;
 import javax.imageio.ImageWriteParam;
 import javax.imageio.ImageWriter;
 import javax.imageio.stream.ImageOutputStream;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 
 /**
  * Adapter class for the Sun JPEG Encoder.  The {@link ImageEncoderFactory}
@@ -162,8 +162,8 @@ public class SunJPEGEncoderAdapter implements ImageEncoder {
     @Override
     public void encode(BufferedImage bufferedImage, OutputStream outputStream)
             throws IOException {
-        ParamChecks.nullNotPermitted(bufferedImage, "bufferedImage");
-        ParamChecks.nullNotPermitted(outputStream, "outputStream");
+        Args.nullNotPermitted(bufferedImage, "bufferedImage");
+        Args.nullNotPermitted(outputStream, "outputStream");
         Iterator iterator = ImageIO.getImageWritersByFormatName("jpeg");
         ImageWriter writer = (ImageWriter) iterator.next();
         ImageWriteParam p = writer.getDefaultWriteParam();

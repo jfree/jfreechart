@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * XYTextAnnotation.java
  * ---------------------
- * (C) Copyright 2002-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2002-2017, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Peter Kolb (patch 2809117);
@@ -68,18 +68,18 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-import org.jfree.chart.HashUtilities;
+import org.jfree.chart.HashUtils;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.event.AnnotationChangeEvent;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 
@@ -98,7 +98,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
             10);
 
     /** The default paint. */
-    public static final Paint DEFAULT_PAINT = Color.black;
+    public static final Paint DEFAULT_PAINT = Color.BLACK;
 
     /** The default text anchor. */
     public static final TextAnchor DEFAULT_TEXT_ANCHOR = TextAnchor.CENTER;
@@ -172,7 +172,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      */
     public XYTextAnnotation(String text, double x, double y) {
         super();
-        ParamChecks.nullNotPermitted(text, "text");
+        Args.nullNotPermitted(text, "text");
         this.text = text;
         this.font = DEFAULT_FONT;
         this.paint = DEFAULT_PAINT;
@@ -185,7 +185,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
         // by default the outline and background won't be visible
         this.backgroundPaint = null;
         this.outlineVisible = false;
-        this.outlinePaint = Color.black;
+        this.outlinePaint = Color.BLACK;
         this.outlineStroke = new BasicStroke(0.5f);
     }
 
@@ -208,7 +208,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * @see #getText()
      */
     public void setText(String text) {
-        ParamChecks.nullNotPermitted(text, "text");
+        Args.nullNotPermitted(text, "text");
         this.text = text;
         fireAnnotationChanged();
     }
@@ -233,7 +233,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * @see #getFont()
      */
     public void setFont(Font font) {
-        ParamChecks.nullNotPermitted(font, "font");
+        Args.nullNotPermitted(font, "font");
         this.font = font;
         fireAnnotationChanged();
     }
@@ -258,7 +258,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * @see #getPaint()
      */
     public void setPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.paint = paint;
         fireAnnotationChanged();
     }
@@ -284,7 +284,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * @see #getTextAnchor()
      */
     public void setTextAnchor(TextAnchor anchor) {
-        ParamChecks.nullNotPermitted(anchor, "anchor");
+        Args.nullNotPermitted(anchor, "anchor");
         this.textAnchor = anchor;
         fireAnnotationChanged();
     }
@@ -309,7 +309,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * @see #getRotationAnchor()
      */
     public void setRotationAnchor(TextAnchor anchor) {
-        ParamChecks.nullNotPermitted(anchor, "anchor");
+        Args.nullNotPermitted(anchor, "anchor");
         this.rotationAnchor = anchor;
         fireAnnotationChanged();
     }
@@ -442,7 +442,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * @since 1.0.13
      */
     public void setOutlinePaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.outlinePaint = paint;
         fireAnnotationChanged();
     }
@@ -471,7 +471,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * @since 1.0.13
      */
     public void setOutlineStroke(Stroke stroke) {
-        ParamChecks.nullNotPermitted(stroke, "stroke");
+        Args.nullNotPermitted(stroke, "stroke");
         this.outlineStroke = stroke;
         fireAnnotationChanged();
     }
@@ -535,7 +535,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
         }
 
         g2.setFont(getFont());
-        Shape hotspot = TextUtilities.calculateRotatedStringBounds(
+        Shape hotspot = TextUtils.calculateRotatedStringBounds(
                 getText(), g2, anchorX, anchorY, getTextAnchor(),
                 getRotationAngle(), getRotationAnchor());
         if (this.backgroundPaint != null) {
@@ -543,7 +543,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
             g2.fill(hotspot);
         }
         g2.setPaint(getPaint());
-        TextUtilities.drawRotatedString(getText(), g2, anchorX, anchorY,
+        TextUtils.drawRotatedString(getText(), g2, anchorX, anchorY,
                 getTextAnchor(), getRotationAngle(), getRotationAnchor());
         if (this.outlineVisible) {
             g2.setStroke(this.outlineStroke);
@@ -624,7 +624,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
         int result = 193;
         result = 37 * result + this.text.hashCode();
         result = 37 * result + this.font.hashCode();
-        result = 37 * result + HashUtilities.hashCodeForPaint(this.paint);
+        result = 37 * result + HashUtils.hashCodeForPaint(this.paint);
         long temp = Double.doubleToLongBits(this.x);
         result = 37 * result + (int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(this.y);

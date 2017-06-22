@@ -41,7 +41,7 @@
 
 package org.jfree.data;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -176,7 +176,7 @@ public class ComparableObjectSeriesTest {
         MyComparableObjectSeries s1 = new MyComparableObjectSeries("A");
         s1.add(new Integer(1), "ABC");
         MyComparableObjectSeries s2 = (MyComparableObjectSeries) 
-                TestUtilities.serialised(s1);
+                TestUtils.serialised(s1);
         assertEquals(s1, s2);
     }
 

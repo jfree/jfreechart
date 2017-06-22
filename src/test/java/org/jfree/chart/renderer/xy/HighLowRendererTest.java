@@ -53,7 +53,7 @@ import static org.junit.Assert.assertNull;
 import java.awt.Color;
 import java.util.Date;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.Range;
@@ -89,15 +89,15 @@ public class HighLowRendererTest {
         assertTrue(r1.equals(r2));
 
         // openTickPaint
-        r1.setOpenTickPaint(Color.red);
+        r1.setOpenTickPaint(Color.RED);
         assertFalse(r1.equals(r2));
-        r2.setOpenTickPaint(Color.red);
+        r2.setOpenTickPaint(Color.RED);
         assertTrue(r1.equals(r2));
 
         // closeTickPaint
-        r1.setCloseTickPaint(Color.blue);
+        r1.setCloseTickPaint(Color.BLUE);
         assertFalse(r1.equals(r2));
-        r2.setCloseTickPaint(Color.blue);
+        r2.setCloseTickPaint(Color.BLUE);
         assertTrue(r1.equals(r2));
 
         // tickLength
@@ -149,7 +149,7 @@ public class HighLowRendererTest {
     public void testSerialization() {
         HighLowRenderer r1 = new HighLowRenderer();
         r1.setCloseTickPaint(Color.green);
-        HighLowRenderer r2 = (HighLowRenderer) TestUtilities.serialised(r1);
+        HighLowRenderer r2 = (HighLowRenderer) TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

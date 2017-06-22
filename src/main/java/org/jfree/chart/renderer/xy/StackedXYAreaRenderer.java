@@ -102,7 +102,7 @@ import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.chart.util.ShapeUtils;
 import org.jfree.data.Range;
-import org.jfree.data.general.DatasetUtilities;
+import org.jfree.data.general.DatasetUtils;
 import org.jfree.data.xy.TableXYDataset;
 import org.jfree.data.xy.XYDataset;
 
@@ -363,7 +363,7 @@ public class StackedXYAreaRenderer extends XYAreaRenderer
     @Override
     public Range findRangeBounds(XYDataset dataset) {
         if (dataset != null) {
-            return DatasetUtilities.findStackedRangeBounds(
+            return DatasetUtils.findStackedRangeBounds(
                 (TableXYDataset) dataset);
         }
         else {

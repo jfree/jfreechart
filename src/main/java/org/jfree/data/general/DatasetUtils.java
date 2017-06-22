@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2015, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ---------------------
- * DatasetUtilities.java
- * ---------------------
- * (C) Copyright 2000-2015, by Object Refinery Limited and Contributors.
+ * -----------------
+ * DatasetUtils.java
+ * -----------------
+ * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Andrzej Porebski (bug fix);
@@ -133,7 +133,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import org.jfree.chart.util.ArrayUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 
 import org.jfree.data.DomainInfo;
 import org.jfree.data.DomainOrder;
@@ -163,12 +163,12 @@ import org.jfree.data.xy.XYZDataset;
 /**
  * A collection of useful static methods relating to datasets.
  */
-public final class DatasetUtilities {
+public final class DatasetUtils {
 
     /**
      * Private constructor for non-instanceability.
      */
-    private DatasetUtilities() {
+    private DatasetUtils() {
         // now try to instantiate this ;-)
     }
 
@@ -182,7 +182,7 @@ public final class DatasetUtilities {
      * @return The total.
      */
     public static double calculatePieDatasetTotal(PieDataset dataset) {
-        ParamChecks.nullNotPermitted(dataset, "dataset");
+        Args.nullNotPermitted(dataset, "dataset");
         List keys = dataset.getKeys();
         double totalValue = 0;
         Iterator iterator = keys.iterator();
@@ -287,7 +287,7 @@ public final class DatasetUtilities {
      */
     public static PieDataset createConsolidatedPieDataset(PieDataset source,
             Comparable key, double minimumPercent) {
-        return DatasetUtilities.createConsolidatedPieDataset(source, key,
+        return DatasetUtils.createConsolidatedPieDataset(source, key,
                 minimumPercent, 2);
     }
 
@@ -310,7 +310,7 @@ public final class DatasetUtilities {
             Comparable key, double minimumPercent, int minItems) {
 
         DefaultPieDataset result = new DefaultPieDataset();
-        double total = DatasetUtilities.calculatePieDatasetTotal(source);
+        double total = DatasetUtils.calculatePieDatasetTotal(source);
 
         //  Iterate and find all keys below threshold percentThreshold
         List keys = source.getKeys();
@@ -425,8 +425,8 @@ public final class DatasetUtilities {
     public static CategoryDataset createCategoryDataset(Comparable[] rowKeys,
             Comparable[] columnKeys, double[][] data) {
 
-        ParamChecks.nullNotPermitted(rowKeys, "rowKeys");
-        ParamChecks.nullNotPermitted(columnKeys, "columnKeys");
+        Args.nullNotPermitted(rowKeys, "rowKeys");
+        Args.nullNotPermitted(columnKeys, "columnKeys");
         if (ArrayUtils.hasDuplicateItems(rowKeys)) {
             throw new IllegalArgumentException("Duplicate items in 'rowKeys'.");
         }
@@ -474,8 +474,8 @@ public final class DatasetUtilities {
     public static CategoryDataset createCategoryDataset(Comparable rowKey,
             KeyedValues rowData) {
 
-        ParamChecks.nullNotPermitted(rowKey, "rowKey");
-        ParamChecks.nullNotPermitted(rowData, "rowData");
+        Args.nullNotPermitted(rowKey, "rowKey");
+        Args.nullNotPermitted(rowData, "rowData");
         DefaultCategoryDataset result = new DefaultCategoryDataset();
         for (int i = 0; i < rowData.getItemCount(); i++) {
             result.addValue(rowData.getValue(i), rowKey, rowData.getKey(i));
@@ -525,8 +525,8 @@ public final class DatasetUtilities {
     public static XYSeries sampleFunction2DToSeries(Function2D f,
             double start, double end, int samples, Comparable seriesKey) {
 
-        ParamChecks.nullNotPermitted(f, "f");
-        ParamChecks.nullNotPermitted(seriesKey, "seriesKey");
+        Args.nullNotPermitted(f, "f");
+        Args.nullNotPermitted(seriesKey, "seriesKey");
         if (start >= end) {
             throw new IllegalArgumentException("Requires 'start' < 'end'.");
         }
@@ -652,7 +652,7 @@ public final class DatasetUtilities {
     public static Range findDomainBounds(XYDataset dataset,
             boolean includeInterval) {
 
-        ParamChecks.nullNotPermitted(dataset, "dataset");
+        Args.nullNotPermitted(dataset, "dataset");
 
         Range result;
         // if the dataset implements DomainInfo, life is easier
@@ -685,7 +685,7 @@ public final class DatasetUtilities {
     public static Range findDomainBounds(XYDataset dataset,
             List visibleSeriesKeys, boolean includeInterval) {
         
-        ParamChecks.nullNotPermitted(dataset, "dataset");
+        Args.nullNotPermitted(dataset, "dataset");
         Range result;
         if (dataset instanceof XYDomainInfo) {
             XYDomainInfo info = (XYDomainInfo) dataset;
@@ -725,7 +725,7 @@ public final class DatasetUtilities {
      */
     public static Range iterateDomainBounds(XYDataset dataset,
             boolean includeInterval) {
-        ParamChecks.nullNotPermitted(dataset, "dataset");
+        Args.nullNotPermitted(dataset, "dataset");
         double minimum = Double.POSITIVE_INFINITY;
         double maximum = Double.NEGATIVE_INFINITY;
         int seriesCount = dataset.getSeriesCount();
@@ -796,7 +796,7 @@ public final class DatasetUtilities {
      */
     public static Range findRangeBounds(CategoryDataset dataset,
             boolean includeInterval) {
-        ParamChecks.nullNotPermitted(dataset, "dataset");
+        Args.nullNotPermitted(dataset, "dataset");
         Range result;
         if (dataset instanceof RangeInfo) {
             RangeInfo info = (RangeInfo) dataset;
@@ -824,7 +824,7 @@ public final class DatasetUtilities {
      */
     public static Range findRangeBounds(CategoryDataset dataset,
             List visibleSeriesKeys, boolean includeInterval) {
-        ParamChecks.nullNotPermitted(dataset, "dataset");
+        Args.nullNotPermitted(dataset, "dataset");
         Range result;
         if (dataset instanceof CategoryRangeInfo) {
             CategoryRangeInfo info = (CategoryRangeInfo) dataset;
@@ -862,7 +862,7 @@ public final class DatasetUtilities {
      */
     public static Range findRangeBounds(XYDataset dataset,
             boolean includeInterval) {
-        ParamChecks.nullNotPermitted(dataset, "dataset");
+        Args.nullNotPermitted(dataset, "dataset");
         Range result;
         if (dataset instanceof RangeInfo) {
             RangeInfo info = (RangeInfo) dataset;
@@ -892,7 +892,7 @@ public final class DatasetUtilities {
      */
     public static Range findRangeBounds(XYDataset dataset,
             List visibleSeriesKeys, Range xRange, boolean includeInterval) {
-        ParamChecks.nullNotPermitted(dataset, "dataset");
+        Args.nullNotPermitted(dataset, "dataset");
         Range result;
         if (dataset instanceof XYRangeInfo) {
             XYRangeInfo info = (XYRangeInfo) dataset;
@@ -1006,8 +1006,8 @@ public final class DatasetUtilities {
     public static Range iterateToFindRangeBounds(CategoryDataset dataset,
             List visibleSeriesKeys, boolean includeInterval) {
 
-        ParamChecks.nullNotPermitted(dataset, "dataset");
-        ParamChecks.nullNotPermitted(visibleSeriesKeys, "visibleSeriesKeys");
+        Args.nullNotPermitted(dataset, "dataset");
+        Args.nullNotPermitted(visibleSeriesKeys, "visibleSeriesKeys");
 
         double minimum = Double.POSITIVE_INFINITY;
         double maximum = Double.NEGATIVE_INFINITY;
@@ -1267,7 +1267,7 @@ public final class DatasetUtilities {
      */
     public static Range findZBounds(XYZDataset dataset,
             boolean includeInterval) {
-        ParamChecks.nullNotPermitted(dataset, "dataset");
+        Args.nullNotPermitted(dataset, "dataset");
         Range result = iterateZBounds(dataset, includeInterval);
         return result;
     }
@@ -1288,7 +1288,7 @@ public final class DatasetUtilities {
      */
     public static Range findZBounds(XYZDataset dataset,
             List visibleSeriesKeys, Range xRange, boolean includeInterval) {
-        ParamChecks.nullNotPermitted(dataset, "dataset");
+        Args.nullNotPermitted(dataset, "dataset");
         Range result = iterateToFindZBounds(dataset, visibleSeriesKeys,
                     xRange, includeInterval);
         return result;
@@ -1358,8 +1358,8 @@ public final class DatasetUtilities {
      */
     public static Range iterateToFindDomainBounds(XYDataset dataset,
             List visibleSeriesKeys, boolean includeInterval) {
-        ParamChecks.nullNotPermitted(dataset, "dataset");
-        ParamChecks.nullNotPermitted(visibleSeriesKeys, "visibleSeriesKeys");
+        Args.nullNotPermitted(dataset, "dataset");
+        Args.nullNotPermitted(visibleSeriesKeys, "visibleSeriesKeys");
 
         double minimum = Double.POSITIVE_INFINITY;
         double maximum = Double.NEGATIVE_INFINITY;
@@ -1432,9 +1432,9 @@ public final class DatasetUtilities {
     public static Range iterateToFindRangeBounds(XYDataset dataset,
             List visibleSeriesKeys, Range xRange, boolean includeInterval) {
 
-        ParamChecks.nullNotPermitted(dataset, "dataset");
-        ParamChecks.nullNotPermitted(visibleSeriesKeys, "visibleSeriesKeys");
-        ParamChecks.nullNotPermitted(xRange, "xRange");
+        Args.nullNotPermitted(dataset, "dataset");
+        Args.nullNotPermitted(visibleSeriesKeys, "visibleSeriesKeys");
+        Args.nullNotPermitted(xRange, "xRange");
 
         double minimum = Double.POSITIVE_INFINITY;
         double maximum = Double.NEGATIVE_INFINITY;
@@ -1556,9 +1556,9 @@ public final class DatasetUtilities {
      */
     public static Range iterateToFindZBounds(XYZDataset dataset,
             List visibleSeriesKeys, Range xRange, boolean includeInterval) {
-        ParamChecks.nullNotPermitted(dataset, "dataset");
-        ParamChecks.nullNotPermitted(visibleSeriesKeys, "visibleSeriesKeys");
-        ParamChecks.nullNotPermitted(xRange, "xRange");
+        Args.nullNotPermitted(dataset, "dataset");
+        Args.nullNotPermitted(visibleSeriesKeys, "visibleSeriesKeys");
+        Args.nullNotPermitted(xRange, "xRange");
     
         double minimum = Double.POSITIVE_INFINITY;
         double maximum = Double.NEGATIVE_INFINITY;
@@ -1601,7 +1601,7 @@ public final class DatasetUtilities {
      * @return The minimum value (possibly {@code null}).
      */
     public static Number findMinimumDomainValue(XYDataset dataset) {
-        ParamChecks.nullNotPermitted(dataset, "dataset");
+        Args.nullNotPermitted(dataset, "dataset");
         Number result;
         // if the dataset implements DomainInfo, life is easy
         if (dataset instanceof DomainInfo) {
@@ -1654,7 +1654,7 @@ public final class DatasetUtilities {
      * @return The maximum value (possibly {@code null}).
      */
     public static Number findMaximumDomainValue(XYDataset dataset) {
-        ParamChecks.nullNotPermitted(dataset, "dataset");
+        Args.nullNotPermitted(dataset, "dataset");
         Number result;
         // if the dataset implements DomainInfo, life is easy
         if (dataset instanceof DomainInfo) {
@@ -1709,7 +1709,7 @@ public final class DatasetUtilities {
      * @return The minimum value (possibly {@code null}).
      */
     public static Number findMinimumRangeValue(CategoryDataset dataset) {
-        ParamChecks.nullNotPermitted(dataset, "dataset");
+        Args.nullNotPermitted(dataset, "dataset");
         if (dataset instanceof RangeInfo) {
             RangeInfo info = (RangeInfo) dataset;
             return new Double(info.getRangeLowerBound(true));
@@ -1760,7 +1760,7 @@ public final class DatasetUtilities {
      * @return The minimum value (possibly {@code null}).
      */
     public static Number findMinimumRangeValue(XYDataset dataset) {
-        ParamChecks.nullNotPermitted(dataset, "dataset");
+        Args.nullNotPermitted(dataset, "dataset");
 
         // work out the minimum value...
         if (dataset instanceof RangeInfo) {
@@ -1819,7 +1819,7 @@ public final class DatasetUtilities {
      */
     public static Number findMaximumRangeValue(CategoryDataset dataset) {
 
-        ParamChecks.nullNotPermitted(dataset, "dataset");
+        Args.nullNotPermitted(dataset, "dataset");
 
         // work out the minimum value...
         if (dataset instanceof RangeInfo) {
@@ -1873,7 +1873,7 @@ public final class DatasetUtilities {
      */
     public static Number findMaximumRangeValue(XYDataset dataset) {
 
-        ParamChecks.nullNotPermitted(dataset, "dataset");
+        Args.nullNotPermitted(dataset, "dataset");
 
         // work out the minimum value...
         if (dataset instanceof RangeInfo) {
@@ -1941,7 +1941,7 @@ public final class DatasetUtilities {
      */
     public static Range findStackedRangeBounds(CategoryDataset dataset,
             double base) {
-        ParamChecks.nullNotPermitted(dataset, "dataset");
+        Args.nullNotPermitted(dataset, "dataset");
         Range result = null;
         double minimum = Double.POSITIVE_INFINITY;
         double maximum = Double.NEGATIVE_INFINITY;
@@ -1985,7 +1985,7 @@ public final class DatasetUtilities {
      */
     public static Range findStackedRangeBounds(CategoryDataset dataset,
             KeyToGroupMap map) {
-        ParamChecks.nullNotPermitted(dataset, "dataset");
+        Args.nullNotPermitted(dataset, "dataset");
         boolean hasValidData = false;
         Range result = null;
 
@@ -2047,7 +2047,7 @@ public final class DatasetUtilities {
      * @see #findMaximumStackedRangeValue(CategoryDataset)
      */
     public static Number findMinimumStackedRangeValue(CategoryDataset dataset) {
-        ParamChecks.nullNotPermitted(dataset, "dataset");
+        Args.nullNotPermitted(dataset, "dataset");
         Number result = null;
         boolean hasValidData = false;
         double minimum = 0.0;
@@ -2085,7 +2085,7 @@ public final class DatasetUtilities {
      * @see #findMinimumStackedRangeValue(CategoryDataset)
      */
     public static Number findMaximumStackedRangeValue(CategoryDataset dataset) {
-        ParamChecks.nullNotPermitted(dataset, "dataset");
+        Args.nullNotPermitted(dataset, "dataset");
         Number result = null;
         boolean hasValidData = false;
         double maximum = 0.0;
@@ -2134,7 +2134,7 @@ public final class DatasetUtilities {
      */
     public static Range findStackedRangeBounds(TableXYDataset dataset,
             double base) {
-        ParamChecks.nullNotPermitted(dataset, "dataset");
+        Args.nullNotPermitted(dataset, "dataset");
         double minimum = base;
         double maximum = base;
         for (int itemNo = 0; itemNo < dataset.getItemCount(); itemNo++) {
@@ -2201,7 +2201,7 @@ public final class DatasetUtilities {
      * @see #findRangeBounds(CategoryDataset)
      */
     public static Range findCumulativeRangeBounds(CategoryDataset dataset) {
-        ParamChecks.nullNotPermitted(dataset, "dataset");
+        Args.nullNotPermitted(dataset, "dataset");
         boolean allItemsNull = true; // we'll set this to false if there is at
                                      // least one non-null data item...
         double minimum = 0.0;
@@ -2282,7 +2282,7 @@ public final class DatasetUtilities {
      */
     public static int[] findItemIndicesForX(XYDataset dataset, int series,
             double x) {
-        ParamChecks.nullNotPermitted(dataset, "dataset");
+        Args.nullNotPermitted(dataset, "dataset");
         int itemCount = dataset.getItemCount(series);
         if (itemCount == 0) {
             return new int[] {-1, -1};

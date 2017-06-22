@@ -55,15 +55,15 @@ package org.jfree.data.xy;
 
 import java.io.Serializable;
 
-import org.jfree.chart.HashUtilities;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.HashUtils;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.DomainInfo;
 import org.jfree.data.Range;
 import org.jfree.data.RangeInfo;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.DatasetChangeListener;
-import org.jfree.data.general.DatasetUtilities;
+import org.jfree.data.general.DatasetUtils;
 
 /**
  * A delegate that handles the specification or automatic calculation of the
@@ -131,7 +131,7 @@ public class IntervalXYDelegate implements DatasetChangeListener,
      *                   calculated automatically.
      */
     public IntervalXYDelegate(XYDataset dataset, boolean autoWidth) {
-        ParamChecks.nullNotPermitted(dataset, "dataset");
+        Args.nullNotPermitted(dataset, "dataset");
         this.dataset = dataset;
         this.autoWidth = autoWidth;
         this.intervalPositionFactor = 0.5;
@@ -366,7 +366,7 @@ public class IntervalXYDelegate implements DatasetChangeListener,
     public Range getDomainBounds(boolean includeInterval) {
         // first get the range without the interval, then expand it for the
         // interval width
-        Range range = DatasetUtilities.findDomainBounds(this.dataset, false);
+        Range range = DatasetUtils.findDomainBounds(this.dataset, false);
         if (includeInterval && range != null) {
             double lowerAdj = getIntervalWidth() * getIntervalPositionFactor();
             double upperAdj = getIntervalWidth() - lowerAdj;
@@ -479,9 +479,9 @@ public class IntervalXYDelegate implements DatasetChangeListener,
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = HashUtilities.hashCode(hash, this.autoWidth);
-        hash = HashUtilities.hashCode(hash, this.intervalPositionFactor);
-        hash = HashUtilities.hashCode(hash, this.fixedIntervalWidth);
+        hash = HashUtils.hashCode(hash, this.autoWidth);
+        hash = HashUtils.hashCode(hash, this.intervalPositionFactor);
+        hash = HashUtils.hashCode(hash, this.fixedIntervalWidth);
         return hash;
     }
 

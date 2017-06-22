@@ -45,7 +45,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -80,7 +80,7 @@ public class BoxAndWhiskerItemTest {
                 new Double(2.0), new Double(3.0), new Double(4.0),
                 new Double(5.0), new Double(6.0), new Double(7.0), 
                 new Double(8.0), new ArrayList());
-        BoxAndWhiskerItem i2 = (BoxAndWhiskerItem) TestUtilities.serialised(i1);
+        BoxAndWhiskerItem i2 = (BoxAndWhiskerItem) TestUtils.serialised(i1);
         assertEquals(i1, i2);
     }
 

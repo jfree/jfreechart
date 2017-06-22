@@ -125,7 +125,7 @@ import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.data.Range;
 import org.jfree.data.RangeType;
 
@@ -228,7 +228,7 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
      * @see #getRangeType()
      */
     public void setRangeType(RangeType rangeType) {
-        ParamChecks.nullNotPermitted(rangeType, "rangeType");
+        Args.nullNotPermitted(rangeType, "rangeType");
         this.rangeType = rangeType;
         notifyListeners(new AxisChangeEvent(this));
     }
@@ -344,7 +344,7 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
     public void setTickUnit(NumberTickUnit unit, boolean notify,
             boolean turnOffAutoSelect) {
 
-        ParamChecks.nullNotPermitted(unit, "unit");
+        Args.nullNotPermitted(unit, "unit");
         this.tickUnit = unit;
         if (turnOffAutoSelect) {
             setAutoTickUnitSelection(false, false);

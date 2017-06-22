@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * SubCategoryAxis.java
  * --------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited.
+ * (C) Copyright 2004-2017, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Adriaan Joubert;
@@ -69,10 +69,10 @@ import org.jfree.chart.event.AxisChangeEvent;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotRenderingInfo;
-import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.TextAnchor;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.category.CategoryDataset;
 
@@ -92,7 +92,7 @@ public class SubCategoryAxis extends CategoryAxis
     private Font subLabelFont = new Font("SansSerif", Font.PLAIN, 10);
 
     /** The paint for the sub-category labels. */
-    private transient Paint subLabelPaint = Color.black;
+    private transient Paint subLabelPaint = Color.BLACK;
 
     /**
      * Creates a new axis.
@@ -111,7 +111,7 @@ public class SubCategoryAxis extends CategoryAxis
      * @param subCategory  the sub-category ({@code null} not permitted).
      */
     public void addSubCategory(Comparable subCategory) {
-        ParamChecks.nullNotPermitted(subCategory, "subCategory");
+        Args.nullNotPermitted(subCategory, "subCategory");
         this.subCategories.add(subCategory);
         notifyListeners(new AxisChangeEvent(this));
     }
@@ -136,7 +136,7 @@ public class SubCategoryAxis extends CategoryAxis
      * @see #getSubLabelFont()
      */
     public void setSubLabelFont(Font font) {
-        ParamChecks.nullNotPermitted(font, "font");
+        Args.nullNotPermitted(font, "font");
         this.subLabelFont = font;
         notifyListeners(new AxisChangeEvent(this));
     }
@@ -161,7 +161,7 @@ public class SubCategoryAxis extends CategoryAxis
      * @see #getSubLabelPaint()
      */
     public void setSubLabelPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.subLabelPaint = paint;
         notifyListeners(new AxisChangeEvent(this));
     }
@@ -219,7 +219,7 @@ public class SubCategoryAxis extends CategoryAxis
         while (iterator.hasNext()) {
             Comparable subcategory = (Comparable) iterator.next();
             String label = subcategory.toString();
-            Rectangle2D bounds = TextUtilities.getTextBounds(label, g2, fm);
+            Rectangle2D bounds = TextUtils.getTextBounds(label, g2, fm);
             double dim;
             if (RectangleEdge.isLeftOrRight(edge)) {
                 dim = bounds.getWidth();
@@ -296,7 +296,7 @@ public class SubCategoryAxis extends CategoryAxis
             Rectangle2D plotArea, Rectangle2D dataArea, RectangleEdge edge,
             AxisState state, PlotRenderingInfo plotState) {
 
-        ParamChecks.nullNotPermitted(state, "state");
+        Args.nullNotPermitted(state, "state");
 
         g2.setFont(this.subLabelFont);
         g2.setPaint(this.subLabelPaint);
@@ -363,7 +363,7 @@ public class SubCategoryAxis extends CategoryAxis
                     yy = (float) (y0 + (i + 0.5) * height);
                 }
                 String label = this.subCategories.get(i).toString();
-                TextUtilities.drawRotatedString(label, g2, xx, yy,
+                TextUtils.drawRotatedString(label, g2, xx, yy,
                         TextAnchor.CENTER, 0.0, TextAnchor.CENTER);
             }
         }

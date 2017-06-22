@@ -50,7 +50,7 @@ import static org.junit.Assert.assertTrue;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.Test;
@@ -149,7 +149,7 @@ public class BoxAndWhiskerXYToolTipGeneratorTest {
     public void testSerialization() {
         BoxAndWhiskerXYToolTipGenerator g1
                 = new BoxAndWhiskerXYToolTipGenerator();
-        BoxAndWhiskerXYToolTipGenerator g2 = (BoxAndWhiskerXYToolTipGenerator) TestUtilities.serialised(g1);
+        BoxAndWhiskerXYToolTipGenerator g2 = (BoxAndWhiskerXYToolTipGenerator) TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

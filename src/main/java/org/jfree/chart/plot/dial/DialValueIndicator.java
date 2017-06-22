@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * DialValueIndicator.java
  * -----------------------
- * (C) Copyright 2006-2016, by Object Refinery Limited.
+ * (C) Copyright 2006-2017, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -62,15 +62,15 @@ import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
-import org.jfree.chart.HashUtilities;
-import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.HashUtils;
+import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.Size2D;
 import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 
@@ -157,10 +157,10 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
         this.maxTemplateValue = null;
         this.formatter = new DecimalFormat("0.0");
         this.font = new Font("Dialog", Font.BOLD, 14);
-        this.paint = Color.black;
-        this.backgroundPaint = Color.white;
+        this.paint = Color.BLACK;
+        this.backgroundPaint = Color.WHITE;
         this.outlineStroke = new BasicStroke(1.0f);
-        this.outlinePaint = Color.blue;
+        this.outlinePaint = Color.BLUE;
         this.insets = new RectangleInsets(4, 4, 4, 4);
         this.valueAnchor = RectangleAnchor.RIGHT;
         this.textAnchor = TextAnchor.CENTER_RIGHT;
@@ -260,7 +260,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
      * @see #getFrameAnchor()
      */
     public void setFrameAnchor(RectangleAnchor anchor) {
-        ParamChecks.nullNotPermitted(anchor, "anchor");
+        Args.nullNotPermitted(anchor, "anchor");
         this.frameAnchor = anchor;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -285,7 +285,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
      * @see #setTemplateValue(Number)
      */
     public void setTemplateValue(Number value) {
-        ParamChecks.nullNotPermitted(value, "value");
+        Args.nullNotPermitted(value, "value");
         this.templateValue = value;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -339,7 +339,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
      * @see #getNumberFormat()
      */
     public void setNumberFormat(NumberFormat formatter) {
-        ParamChecks.nullNotPermitted(formatter, "formatter");
+        Args.nullNotPermitted(formatter, "formatter");
         this.formatter = formatter;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -362,7 +362,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
      * @param font  the font ({@code null} not permitted).
      */
     public void setFont(Font font) {
-        ParamChecks.nullNotPermitted(font, "font");
+        Args.nullNotPermitted(font, "font");
         this.font = font;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -387,7 +387,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
      * @see #getPaint()
      */
     public void setPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.paint = paint;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -412,7 +412,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
      * @see #getBackgroundPaint()
      */
     public void setBackgroundPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.backgroundPaint = paint;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -437,7 +437,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
      * @see #getOutlineStroke()
      */
     public void setOutlineStroke(Stroke stroke) {
-        ParamChecks.nullNotPermitted(stroke, "stroke");
+        Args.nullNotPermitted(stroke, "stroke");
         this.outlineStroke = stroke;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -462,7 +462,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
      * @see #getOutlinePaint()
      */
     public void setOutlinePaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.outlinePaint = paint;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -487,7 +487,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
      * @see #getInsets()
      */
     public void setInsets(RectangleInsets insets) {
-        ParamChecks.nullNotPermitted(insets, "insets");
+        Args.nullNotPermitted(insets, "insets");
         this.insets = insets;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -512,7 +512,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
      * @see #getValueAnchor()
      */
     public void setValueAnchor(RectangleAnchor anchor) {
-        ParamChecks.nullNotPermitted(anchor, "anchor");
+        Args.nullNotPermitted(anchor, "anchor");
         this.valueAnchor = anchor;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -537,7 +537,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
      * @see #getTextAnchor()
      */
     public void setTextAnchor(TextAnchor anchor) {
-        ParamChecks.nullNotPermitted(anchor, "anchor");
+        Args.nullNotPermitted(anchor, "anchor");
         this.textAnchor = anchor;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -579,11 +579,11 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
         FontMetrics fm = g2.getFontMetrics(this.font);
         double value = plot.getValue(this.datasetIndex);
         String valueStr = this.formatter.format(value);
-        Rectangle2D valueBounds = TextUtilities.getTextBounds(valueStr, g2, fm);
+        Rectangle2D valueBounds = TextUtils.getTextBounds(valueStr, g2, fm);
 
         // calculate the bounds of the template value
         String s = this.formatter.format(this.templateValue);
-        Rectangle2D tb = TextUtilities.getTextBounds(s, g2, fm);
+        Rectangle2D tb = TextUtils.getTextBounds(s, g2, fm);
         double minW = tb.getWidth();
         double minH = tb.getHeight();
 
@@ -591,7 +591,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
         double maxH = Double.MAX_VALUE;
         if (this.maxTemplateValue != null) {
             s = this.formatter.format(this.maxTemplateValue);
-            tb = TextUtilities.getTextBounds(s, g2, fm);
+            tb = TextUtils.getTextBounds(s, g2, fm);
             maxW = Math.max(tb.getWidth(), minW);
             maxH = Math.max(tb.getHeight(), minH);
         }
@@ -618,10 +618,10 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
         Shape savedClip = g2.getClip();
         g2.clip(fb);
 
-        Point2D pt2 = RectangleAnchor.coordinates(bounds, this.valueAnchor);
+        Point2D pt2 = this.valueAnchor.getAnchorPoint(bounds);
         g2.setPaint(this.paint);
         g2.setFont(this.font);
-        TextUtilities.drawAlignedString(valueStr, g2, (float) pt2.getX(),
+        TextUtils.drawAlignedString(valueStr, g2, (float) pt2.getX(),
                 (float) pt2.getY(), this.textAnchor);
         g2.setClip(savedClip);
 
@@ -722,10 +722,10 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
     @Override
     public int hashCode() {
         int result = 193;
-        result = 37 * result + HashUtilities.hashCodeForPaint(this.paint);
-        result = 37 * result + HashUtilities.hashCodeForPaint(
+        result = 37 * result + HashUtils.hashCodeForPaint(this.paint);
+        result = 37 * result + HashUtils.hashCodeForPaint(
                 this.backgroundPaint);
-        result = 37 * result + HashUtilities.hashCodeForPaint(
+        result = 37 * result + HashUtils.hashCodeForPaint(
                 this.outlinePaint);
         result = 37 * result + this.outlineStroke.hashCode();
         return result;

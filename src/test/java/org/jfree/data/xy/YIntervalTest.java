@@ -44,7 +44,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -92,7 +92,7 @@ public class YIntervalTest {
     @Test
     public void testSerialization() {
         YInterval i1 = new YInterval(1.0, 0.5, 1.5);
-        YInterval i2 = (YInterval) TestUtilities.serialised(i1);
+        YInterval i2 = (YInterval) TestUtils.serialised(i1);
         assertEquals(i1, i2);
     }
 

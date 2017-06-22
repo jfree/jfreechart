@@ -43,7 +43,7 @@ package org.jfree.data;
 
 import java.io.Serializable;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 
 /**
  * Represents one (Comparable, Object) data item for use in a
@@ -70,7 +70,7 @@ public class ComparableObjectItem implements Cloneable, Comparable,
      * @param y  the y-value ({@code null} permitted).
      */
     public ComparableObjectItem(Comparable x, Object y) {
-        ParamChecks.nullNotPermitted(x, "x");
+        Args.nullNotPermitted(x, "x");
         this.x = x;
         this.obj = y;
     }

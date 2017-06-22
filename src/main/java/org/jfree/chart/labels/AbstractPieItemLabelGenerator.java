@@ -49,9 +49,9 @@ import java.io.Serializable;
 import java.text.MessageFormat;
 import java.text.NumberFormat;
 
-import org.jfree.chart.HashUtilities;
-import org.jfree.chart.util.ParamChecks;
-import org.jfree.data.general.DatasetUtilities;
+import org.jfree.chart.HashUtils;
+import org.jfree.chart.util.Args;
+import org.jfree.data.general.DatasetUtils;
 import org.jfree.data.general.PieDataset;
 
 /**
@@ -83,9 +83,9 @@ public class AbstractPieItemLabelGenerator implements Serializable {
      */
     protected AbstractPieItemLabelGenerator(String labelFormat, 
             NumberFormat numberFormat, NumberFormat percentFormat) {
-        ParamChecks.nullNotPermitted(labelFormat, "labelFormat");
-        ParamChecks.nullNotPermitted(numberFormat, "numberFormat");
-        ParamChecks.nullNotPermitted(percentFormat, "percentFormat");
+        Args.nullNotPermitted(labelFormat, "labelFormat");
+        Args.nullNotPermitted(numberFormat, "numberFormat");
+        Args.nullNotPermitted(percentFormat, "percentFormat");
         this.labelFormat = labelFormat;
         this.numberFormat = numberFormat;
         this.percentFormat = percentFormat;
@@ -136,7 +136,7 @@ public class AbstractPieItemLabelGenerator implements Serializable {
      */
     protected Object[] createItemArray(PieDataset dataset, Comparable key) {
         Object[] result = new Object[4];
-        double total = DatasetUtilities.calculatePieDatasetTotal(dataset);
+        double total = DatasetUtils.calculatePieDatasetTotal(dataset);
         result[0] = key.toString();
         Number value = dataset.getValue(key);
         if (value != null) {
@@ -213,9 +213,9 @@ public class AbstractPieItemLabelGenerator implements Serializable {
     @Override
     public int hashCode() {
         int result = 127;
-        result = HashUtilities.hashCode(result, this.labelFormat);
-        result = HashUtilities.hashCode(result, this.numberFormat);
-        result = HashUtilities.hashCode(result, this.percentFormat);
+        result = HashUtils.hashCode(result, this.labelFormat);
+        result = HashUtils.hashCode(result, this.numberFormat);
+        result = HashUtils.hashCode(result, this.percentFormat);
         return result;
     }
 

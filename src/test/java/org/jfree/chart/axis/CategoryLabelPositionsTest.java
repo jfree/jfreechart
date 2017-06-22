@@ -44,7 +44,7 @@ package org.jfree.chart.axis;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.text.TextBlockAnchor;
 import org.jfree.chart.ui.RectangleAnchor;
 
@@ -174,7 +174,7 @@ public class CategoryLabelPositionsTest {
     @Test
     public void testSerialization() {
         CategoryLabelPositions p1 = CategoryLabelPositions.STANDARD;
-        CategoryLabelPositions p2 = (CategoryLabelPositions) TestUtilities.serialised(p1);
+        CategoryLabelPositions p2 = (CategoryLabelPositions) TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 

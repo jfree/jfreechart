@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------
  * MeterNeedle.java
  * ----------------
- * (C) Copyright 2002-2016, by the Australian Antarctic Division and
+ * (C) Copyright 2002-2017, by the Australian Antarctic Division and
  *                          Contributors.
  *
  * Original Author:  Bryan Scott (for the Australian Antarctic Division);
@@ -62,7 +62,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-import org.jfree.chart.HashUtilities;
+import org.jfree.chart.HashUtils;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.SerialUtils;
@@ -77,7 +77,7 @@ public abstract class MeterNeedle implements Serializable {
     private static final long serialVersionUID = 5203064851510951052L;
 
     /** The outline paint. */
-    private transient Paint outlinePaint = Color.black;
+    private transient Paint outlinePaint = Color.BLACK;
 
     /** The outline stroke. */
     private transient Stroke outlineStroke = new BasicStroke(2);
@@ -384,13 +384,13 @@ public abstract class MeterNeedle implements Serializable {
      */
     @Override
     public int hashCode() {
-        int result = HashUtilities.hashCode(193, this.fillPaint);
-        result = HashUtilities.hashCode(result, this.highlightPaint);
-        result = HashUtilities.hashCode(result, this.outlinePaint);
-        result = HashUtilities.hashCode(result, this.outlineStroke);
-        result = HashUtilities.hashCode(result, this.rotateX);
-        result = HashUtilities.hashCode(result, this.rotateY);
-        result = HashUtilities.hashCode(result, this.size);
+        int result = HashUtils.hashCode(193, this.fillPaint);
+        result = HashUtils.hashCode(result, this.highlightPaint);
+        result = HashUtils.hashCode(result, this.outlinePaint);
+        result = HashUtils.hashCode(result, this.outlineStroke);
+        result = HashUtils.hashCode(result, this.rotateX);
+        result = HashUtils.hashCode(result, this.rotateY);
+        result = HashUtils.hashCode(result, this.size);
         return result;
     }
 

@@ -50,7 +50,7 @@ package org.jfree.chart.axis;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 
 /**
@@ -162,7 +162,7 @@ public class AxisSpace implements Cloneable, PublicCloneable, Serializable {
      * @param edge  the edge ({@code null} not permitted).
      */
     public void add(double space, RectangleEdge edge) {
-        ParamChecks.nullNotPermitted(edge, "edge");
+        Args.nullNotPermitted(edge, "edge");
         if (edge == RectangleEdge.TOP) {
             this.top += space;
         }

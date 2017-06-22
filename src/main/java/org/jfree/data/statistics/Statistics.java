@@ -54,7 +54,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 
 /**
  * A utility class that provides some common statistical functions.
@@ -89,7 +89,7 @@ public abstract class Statistics {
     public static double calculateMean(Number[] values,
             boolean includeNullAndNaN) {
 
-        ParamChecks.nullNotPermitted(values, "values");
+        Args.nullNotPermitted(values, "values");
         double sum = 0.0;
         double current;
         int counter = 0;
@@ -138,7 +138,7 @@ public abstract class Statistics {
     public static double calculateMean(Collection values,
             boolean includeNullAndNaN) {
 
-        ParamChecks.nullNotPermitted(values, "values");
+        Args.nullNotPermitted(values, "values");
         int count = 0;
         double total = 0.0;
         Iterator iterator = values.iterator();
@@ -304,7 +304,7 @@ public abstract class Statistics {
      * @return The standard deviation of a set of numbers.
      */
     public static double getStdDev(Number[] data) {
-        ParamChecks.nullNotPermitted(data, "data");
+        Args.nullNotPermitted(data, "data");
         if (data.length == 0) {
             throw new IllegalArgumentException("Zero length 'data' array.");
         }
@@ -329,8 +329,8 @@ public abstract class Statistics {
      */
     public static double[] getLinearFit(Number[] xData, Number[] yData) {
 
-        ParamChecks.nullNotPermitted(xData, "xData");
-        ParamChecks.nullNotPermitted(yData, "yData");
+        Args.nullNotPermitted(xData, "xData");
+        Args.nullNotPermitted(yData, "yData");
         if (xData.length != yData.length) {
             throw new IllegalArgumentException(
                 "Statistics.getLinearFit(): array lengths must be equal.");
@@ -355,8 +355,8 @@ public abstract class Statistics {
      * @return The slope.
      */
     public static double getSlope(Number[] xData, Number[] yData) {
-        ParamChecks.nullNotPermitted(xData, "xData");
-        ParamChecks.nullNotPermitted(yData, "yData");
+        Args.nullNotPermitted(xData, "xData");
+        Args.nullNotPermitted(yData, "yData");
         if (xData.length != yData.length) {
             throw new IllegalArgumentException("Array lengths must be equal.");
         }
@@ -397,8 +397,8 @@ public abstract class Statistics {
      * @return The correlation.
      */
     public static double getCorrelation(Number[] data1, Number[] data2) {
-        ParamChecks.nullNotPermitted(data1, "data1");
-        ParamChecks.nullNotPermitted(data2, "data2");
+        Args.nullNotPermitted(data1, "data1");
+        Args.nullNotPermitted(data2, "data2");
         if (data1.length != data2.length) {
             throw new IllegalArgumentException(
                 "'data1' and 'data2' arrays must have same length."

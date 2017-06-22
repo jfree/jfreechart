@@ -49,7 +49,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Stroke;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.Test;
@@ -123,9 +123,9 @@ public class CategoryPointerAnnotationTest {
         assertTrue(a1.equals(a2));
 
         //private Paint arrowPaint;
-        a1.setArrowPaint(Color.blue);
+        a1.setArrowPaint(Color.BLUE);
         assertFalse(a1.equals(a2));
-        a2.setArrowPaint(Color.blue);
+        a2.setArrowPaint(Color.BLUE);
         assertTrue(a1.equals(a2));
 
         //private double labelOffset;
@@ -181,7 +181,7 @@ public class CategoryPointerAnnotationTest {
         CategoryPointerAnnotation a1 = new CategoryPointerAnnotation("Label",
                 "A", 20.0, Math.PI);
         CategoryPointerAnnotation a2 = (CategoryPointerAnnotation) 
-                TestUtilities.serialised(a1);
+                TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 

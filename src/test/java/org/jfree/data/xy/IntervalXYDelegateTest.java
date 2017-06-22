@@ -45,7 +45,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -115,7 +115,7 @@ public class IntervalXYDelegateTest {
         XYSeriesCollection c1 = new XYSeriesCollection();
         c1.addSeries(s1);
         IntervalXYDelegate d1 = new IntervalXYDelegate(c1);
-        IntervalXYDelegate d2 = (IntervalXYDelegate) TestUtilities.serialised(d1);
+        IntervalXYDelegate d2 = (IntervalXYDelegate) TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 

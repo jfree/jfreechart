@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -86,7 +86,7 @@ import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.category.CategoryDataset;
 
@@ -112,7 +112,7 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
     /**
      * The paint of the line between the minimum value and the maximum value.
      */
-    private transient Paint groupPaint = Color.black;
+    private transient Paint groupPaint = Color.BLACK;
 
     /**
      * The stroke of the line between the minimum value and the maximum value.
@@ -121,11 +121,11 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
 
     /** The icon used to indicate the minimum value.*/
     private transient Icon minIcon = getIcon(new Arc2D.Double(-4, -4, 8, 8, 0,
-            360, Arc2D.OPEN), null, Color.black);
+            360, Arc2D.OPEN), null, Color.BLACK);
 
     /** The icon used to indicate the maximum value.*/
     private transient Icon maxIcon = getIcon(new Arc2D.Double(-4, -4, 8, 8, 0,
-            360, Arc2D.OPEN), null, Color.black);
+            360, Arc2D.OPEN), null, Color.BLACK);
 
     /** The icon used to indicate the values.*/
     private transient Icon objectIcon = getIcon(new Line2D.Double(-4, 0, 4, 0),
@@ -197,7 +197,7 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
      * @see #getGroupPaint()
      */
     public void setGroupPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.groupPaint = paint;
         fireChangeEvent();
     }
@@ -222,7 +222,7 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
      * @param stroke the new stroke ({@code null} not permitted).
      */
     public void setGroupStroke(Stroke stroke) {
-        ParamChecks.nullNotPermitted(stroke, "stroke");
+        Args.nullNotPermitted(stroke, "stroke");
         this.groupStroke = stroke;
         fireChangeEvent();
     }
@@ -247,7 +247,7 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
      * @see #getObjectIcon()
      */
     public void setObjectIcon(Icon icon) {
-        ParamChecks.nullNotPermitted(icon, "icon");
+        Args.nullNotPermitted(icon, "icon");
         this.objectIcon = icon;
         fireChangeEvent();
     }
@@ -274,7 +274,7 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
      * @see #getMaxIcon()
      */
     public void setMaxIcon(Icon icon) {
-        ParamChecks.nullNotPermitted(icon, "icon");
+        Args.nullNotPermitted(icon, "icon");
         this.maxIcon = icon;
         fireChangeEvent();
     }
@@ -301,7 +301,7 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
      * @see #getMinIcon()
      */
     public void setMinIcon(Icon icon) {
-        ParamChecks.nullNotPermitted(icon, "icon");
+        Args.nullNotPermitted(icon, "icon");
         this.minIcon = icon;
         fireChangeEvent();
     }
@@ -457,8 +457,7 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
      *
      * @return The icon.
      */
-    private Icon getIcon(Shape shape, final Paint fillPaint,
-                        final Paint outlinePaint) {
+    private Icon getIcon(Shape shape, final Paint fillPaint, final Paint outlinePaint) {
 
         final int width = shape.getBounds().width;
         final int height = shape.getBounds().height;
@@ -500,8 +499,7 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
      *
      * @return The icon.
      */
-    private Icon getIcon(Shape shape, final boolean fill,
-            final boolean outline) {
+    private Icon getIcon(Shape shape, final boolean fill, final boolean outline) {
         final int width = shape.getBounds().width;
         final int height = shape.getBounds().height;
         final GeneralPath path = new GeneralPath(shape);
@@ -559,9 +557,9 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
         this.groupPaint = SerialUtils.readPaint(stream);
 
         this.minIcon = getIcon(new Arc2D.Double(-4, -4, 8, 8, 0, 360,
-                Arc2D.OPEN), null, Color.black);
+                Arc2D.OPEN), null, Color.BLACK);
         this.maxIcon = getIcon(new Arc2D.Double(-4, -4, 8, 8, 0, 360,
-                Arc2D.OPEN), null, Color.black);
+                Arc2D.OPEN), null, Color.BLACK);
         this.objectIcon = getIcon(new Line2D.Double(-4, 0, 4, 0), false, true);
     }
 

@@ -44,7 +44,7 @@ package org.jfree.chart.axis;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -81,7 +81,7 @@ public class DateTickUnitTest {
     @Test
     public void testSerialization() {
         DateTickUnit a1 = new DateTickUnit(DateTickUnitType.DAY, 7);
-        DateTickUnit a2 = (DateTickUnit) TestUtilities.serialised(a1);
+        DateTickUnit a2 = (DateTickUnit) TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 

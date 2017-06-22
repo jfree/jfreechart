@@ -53,7 +53,7 @@ import java.awt.GradientPaint;
 import java.awt.Stroke;
 
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.junit.Test;
@@ -74,11 +74,11 @@ public class FastScatterPlotTest {
         assertTrue(plot1.equals(plot2));
         assertTrue(plot2.equals(plot1));
 
-        plot1.setPaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.yellow));
+        plot1.setPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.YELLOW));
         assertFalse(plot1.equals(plot2));
-        plot2.setPaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.yellow));
+        plot2.setPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.YELLOW));
         assertTrue(plot1.equals(plot2));
 
         plot1.setDomainGridlinesVisible(false);
@@ -86,11 +86,11 @@ public class FastScatterPlotTest {
         plot2.setDomainGridlinesVisible(false);
         assertTrue(plot1.equals(plot2));
 
-        plot1.setDomainGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.blue,
-                3.0f, 4.0f, Color.yellow));
+        plot1.setDomainGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
+                3.0f, 4.0f, Color.YELLOW));
         assertFalse(plot1.equals(plot2));
-        plot2.setDomainGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.blue,
-                3.0f, 4.0f, Color.yellow));
+        plot2.setDomainGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
+                3.0f, 4.0f, Color.YELLOW));
         assertTrue(plot1.equals(plot2));
 
         Stroke s = new BasicStroke(1.5f);
@@ -105,10 +105,10 @@ public class FastScatterPlotTest {
         assertTrue(plot1.equals(plot2));
 
         plot1.setRangeGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.green,
-                3.0f, 4.0f, Color.yellow));
+                3.0f, 4.0f, Color.YELLOW));
         assertFalse(plot1.equals(plot2));
         plot2.setRangeGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.green,
-                3.0f, 4.0f, Color.yellow));
+                3.0f, 4.0f, Color.YELLOW));
         assertTrue(plot1.equals(plot2));
 
         Stroke s2 = new BasicStroke(1.5f);
@@ -193,7 +193,7 @@ public class FastScatterPlotTest {
         ValueAxis domainAxis = new NumberAxis("X");
         ValueAxis rangeAxis = new NumberAxis("Y");
         FastScatterPlot p1 = new FastScatterPlot(data, domainAxis, rangeAxis);
-        FastScatterPlot p2 = (FastScatterPlot) TestUtilities.serialised(p1);
+        FastScatterPlot p2 = (FastScatterPlot) TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 

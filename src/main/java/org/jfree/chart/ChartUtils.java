@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * -------------------
- * ChartUtilities.java
- * -------------------
- * (C) Copyright 2001-2016, by Object Refinery Limited and Contributors.
+ * ---------------
+ * ChartUtils.java
+ * ---------------
+ * (C) Copyright 2001-2017, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Wolfgang Irler;
@@ -91,22 +91,22 @@ import java.io.PrintWriter;
 
 import org.jfree.chart.encoders.EncoderUtil;
 import org.jfree.chart.encoders.ImageFormat;
-import org.jfree.chart.imagemap.ImageMapUtilities;
+import org.jfree.chart.imagemap.ImageMapUtils;
 import org.jfree.chart.imagemap.OverLIBToolTipTagFragmentGenerator;
 import org.jfree.chart.imagemap.StandardToolTipTagFragmentGenerator;
 import org.jfree.chart.imagemap.StandardURLTagFragmentGenerator;
 import org.jfree.chart.imagemap.ToolTipTagFragmentGenerator;
 import org.jfree.chart.imagemap.URLTagFragmentGenerator;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 
 /**
  * A collection of utility methods for JFreeChart.  Includes methods for
  * converting charts to image formats (PNG and JPEG) plus creating simple HTML
  * image maps.
  *
- * @see ImageMapUtilities
+ * @see ImageMapUtils
  */
-public abstract class ChartUtilities {
+public abstract class ChartUtils {
 
     /**
      * Applies the current theme to the specified chart.  This method is
@@ -156,7 +156,7 @@ public abstract class ChartUtilities {
             throws IOException {
 
         // defer argument checking...
-        ChartUtilities.writeChartAsPNG(out, chart, width, height, null,
+        ChartUtils.writeChartAsPNG(out, chart, width, height, null,
                 encodeAlpha, compression);
 
     }
@@ -179,7 +179,7 @@ public abstract class ChartUtilities {
             int width, int height,  ChartRenderingInfo info)
             throws IOException {
 
-        ParamChecks.nullNotPermitted(chart, "chart");
+        Args.nullNotPermitted(chart, "chart");
         BufferedImage bufferedImage
                 = chart.createBufferedImage(width, height, info);
         EncoderUtil.writeBufferedImage(bufferedImage, ImageFormat.PNG, out);
@@ -206,11 +206,11 @@ public abstract class ChartUtilities {
             int width, int height, ChartRenderingInfo info,
             boolean encodeAlpha, int compression) throws IOException {
 
-        ParamChecks.nullNotPermitted(out, "out");
-        ParamChecks.nullNotPermitted(chart, "chart");
+        Args.nullNotPermitted(out, "out");
+        Args.nullNotPermitted(chart, "chart");
         BufferedImage chartImage = chart.createBufferedImage(width, height,
                 BufferedImage.TYPE_INT_ARGB, info);
-        ChartUtilities.writeBufferedImageAsPNG(out, chartImage, encodeAlpha,
+        ChartUtils.writeBufferedImageAsPNG(out, chartImage, encodeAlpha,
                 compression);
 
     }
@@ -231,8 +231,8 @@ public abstract class ChartUtilities {
             JFreeChart chart, int width, int height, int widthScaleFactor,
             int heightScaleFactor) throws IOException {
 
-        ParamChecks.nullNotPermitted(out, "out");
-        ParamChecks.nullNotPermitted(chart, "chart");
+        Args.nullNotPermitted(out, "out");
+        Args.nullNotPermitted(chart, "chart");
 
         double desiredWidth = width * widthScaleFactor;
         double desiredHeight = height * heightScaleFactor;
@@ -304,10 +304,10 @@ public abstract class ChartUtilities {
             int width, int height, ChartRenderingInfo info)
         throws IOException {
 
-        ParamChecks.nullNotPermitted(file, "file");
+        Args.nullNotPermitted(file, "file");
         OutputStream out = new BufferedOutputStream(new FileOutputStream(file));
         try {
-            ChartUtilities.writeChartAsPNG(out, chart, width, height, info);
+            ChartUtils.writeChartAsPNG(out, chart, width, height, info);
         }
         finally {
             out.close();
@@ -334,8 +334,8 @@ public abstract class ChartUtilities {
            int width, int height, ChartRenderingInfo info, boolean encodeAlpha,
            int compression) throws IOException {
 
-        ParamChecks.nullNotPermitted(file, "file");
-        ParamChecks.nullNotPermitted(chart, "chart");
+        Args.nullNotPermitted(file, "file");
+        Args.nullNotPermitted(chart, "chart");
         OutputStream out = new BufferedOutputStream(new FileOutputStream(file));
         try {
             writeChartAsPNG(out, chart, width, height, info, encodeAlpha,
@@ -382,7 +382,7 @@ public abstract class ChartUtilities {
             JFreeChart chart, int width, int height) throws IOException {
 
         // defer argument checking...
-        ChartUtilities.writeChartAsJPEG(out, quality, chart, width, height,
+        ChartUtils.writeChartAsJPEG(out, quality, chart, width, height,
                 null);
 
     }
@@ -405,8 +405,8 @@ public abstract class ChartUtilities {
             int width, int height, ChartRenderingInfo info)
             throws IOException {
 
-        ParamChecks.nullNotPermitted(out, "out");
-        ParamChecks.nullNotPermitted(chart, "chart");
+        Args.nullNotPermitted(out, "out");
+        Args.nullNotPermitted(chart, "chart");
         BufferedImage image = chart.createBufferedImage(width, height,
                 BufferedImage.TYPE_INT_RGB, info);
         EncoderUtil.writeBufferedImage(image, ImageFormat.JPEG, out);
@@ -432,8 +432,8 @@ public abstract class ChartUtilities {
             JFreeChart chart, int width, int height, ChartRenderingInfo info)
             throws IOException {
 
-        ParamChecks.nullNotPermitted(out, "out");
-        ParamChecks.nullNotPermitted(chart, "chart");
+        Args.nullNotPermitted(out, "out");
+        Args.nullNotPermitted(chart, "chart");
         BufferedImage image = chart.createBufferedImage(width, height,
                 BufferedImage.TYPE_INT_RGB, info);
         EncoderUtil.writeBufferedImage(image, ImageFormat.JPEG, out, quality);
@@ -494,8 +494,8 @@ public abstract class ChartUtilities {
     public static void saveChartAsJPEG(File file, JFreeChart chart,
             int width, int height, ChartRenderingInfo info) throws IOException {
 
-        ParamChecks.nullNotPermitted(file, "file");
-        ParamChecks.nullNotPermitted(chart, "chart");
+        Args.nullNotPermitted(file, "file");
+        Args.nullNotPermitted(chart, "chart");
         OutputStream out = new BufferedOutputStream(new FileOutputStream(file));
         try {
             writeChartAsJPEG(out, chart, width, height, info);
@@ -525,8 +525,8 @@ public abstract class ChartUtilities {
             JFreeChart chart, int width, int height,
             ChartRenderingInfo info) throws IOException {
 
-        ParamChecks.nullNotPermitted(file, "file");
-        ParamChecks.nullNotPermitted(chart, "chart");
+        Args.nullNotPermitted(file, "file");
+        Args.nullNotPermitted(chart, "chart");
         OutputStream out = new BufferedOutputStream(new FileOutputStream(
                 file));
         try {
@@ -657,7 +657,7 @@ public abstract class ChartUtilities {
             toolTipTagFragmentGenerator
                     = new StandardToolTipTagFragmentGenerator();
         }
-        ImageMapUtilities.writeImageMap(writer, name, info,
+        ImageMapUtils.writeImageMap(writer, name, info,
                 toolTipTagFragmentGenerator,
                 new StandardURLTagFragmentGenerator());
 
@@ -684,13 +684,13 @@ public abstract class ChartUtilities {
             URLTagFragmentGenerator urlTagFragmentGenerator)
             throws IOException {
 
-        writer.println(ImageMapUtilities.getImageMap(name, info,
+        writer.println(ImageMapUtils.getImageMap(name, info,
                 toolTipTagFragmentGenerator, urlTagFragmentGenerator));
     }
 
     /**
      * Creates an HTML image map.  This method maps to
-     * {@link ImageMapUtilities#getImageMap(String, ChartRenderingInfo,
+     * {@link ImageMapUtils#getImageMap(String, ChartRenderingInfo,
      * ToolTipTagFragmentGenerator, URLTagFragmentGenerator)}, using default
      * generators.
      *
@@ -700,14 +700,14 @@ public abstract class ChartUtilities {
      * @return The map tag.
      */
     public static String getImageMap(String name, ChartRenderingInfo info) {
-        return ImageMapUtilities.getImageMap(name, info,
+        return ImageMapUtils.getImageMap(name, info,
                 new StandardToolTipTagFragmentGenerator(),
                 new StandardURLTagFragmentGenerator());
     }
 
     /**
      * Creates an HTML image map.  This method maps directly to
-     * {@link ImageMapUtilities#getImageMap(String, ChartRenderingInfo,
+     * {@link ImageMapUtils#getImageMap(String, ChartRenderingInfo,
      * ToolTipTagFragmentGenerator, URLTagFragmentGenerator)}.
      *
      * @param name  the map name ({@code null} not permitted).
@@ -725,7 +725,7 @@ public abstract class ChartUtilities {
             ToolTipTagFragmentGenerator toolTipTagFragmentGenerator,
             URLTagFragmentGenerator urlTagFragmentGenerator) {
 
-        return ImageMapUtilities.getImageMap(name, info,
+        return ImageMapUtils.getImageMap(name, info,
                 toolTipTagFragmentGenerator, urlTagFragmentGenerator);
 
     }

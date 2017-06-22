@@ -44,7 +44,7 @@ package org.jfree.data.xy;
 
 import java.io.Serializable;
 import java.util.Date;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 
 /**
  * Represents a single (open-high-low-close) data item in
@@ -87,7 +87,7 @@ public class OHLCDataItem implements Comparable, Serializable {
      */
     public OHLCDataItem(Date date, double open, double high, double low,
             double close, double volume) {
-        ParamChecks.nullNotPermitted(date, "date");
+        Args.nullNotPermitted(date, "date");
         this.date = date;
         this.open = new Double(open);
         this.high = new Double(high);

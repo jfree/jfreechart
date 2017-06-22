@@ -47,7 +47,7 @@ package org.jfree.data.function;
 
 import java.io.Serializable;
 
-import org.jfree.chart.HashUtilities;
+import org.jfree.chart.HashUtils;
 
 /**
  * A normal distribution function.  See
@@ -145,8 +145,8 @@ public class NormalDistributionFunction2D implements Function2D, Serializable {
     @Override
     public int hashCode() {
         int result = 29;
-        result = HashUtilities.hashCode(result, this.mean);
-        result = HashUtilities.hashCode(result, this.std);
+        result = HashUtils.hashCode(result, this.mean);
+        result = HashUtils.hashCode(result, this.std);
         return result;
     }
 

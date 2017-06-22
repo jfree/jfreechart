@@ -67,7 +67,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 
 /**
  * Represents a second in a particular day.  This class is immutable, which is
@@ -116,9 +116,9 @@ public class Second extends RegularTimePeriod implements Serializable {
      * @param minute  the minute ({@code null} not permitted).
      */
     public Second(int second, Minute minute) {
-        ParamChecks.requireInRange(second, "second", 
+        Args.requireInRange(second, "second", 
                 Second.FIRST_SECOND_IN_MINUTE, Second.LAST_SECOND_IN_MINUTE);
-        ParamChecks.nullNotPermitted(minute, "minute");
+        Args.nullNotPermitted(minute, "minute");
         this.day = minute.getDay();
         this.hour = (byte) minute.getHourValue();
         this.minute = (byte) minute.getMinute();

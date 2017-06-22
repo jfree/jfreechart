@@ -2,7 +2,7 @@
  * BarChartDemo1.java
  * ==================
  *
- * Copyright (c) 2005-2016, Object Refinery Limited.
+ * Copyright (c) 2005-2017, Object Refinery Limited.
  * All rights reserved.
  *
  * http://www.jfree.org/jfreechart/index.html
@@ -66,13 +66,6 @@ public class BarChartDemo1 extends ApplicationFrame {
 
     private static final long serialVersionUID = 1L;
 
-    static {
-        // set a theme using the new shadow generator feature available in
-        // 1.0.14 - for backwards compatibility it is not enabled by default
-        ChartFactory.setChartTheme(new StandardChartTheme("JFree/Shadow",
-                true));
-    }
-
     /**
      * Creates a new demo instance.
      *
@@ -116,7 +109,7 @@ public class BarChartDemo1 extends ApplicationFrame {
                 "Milliseconds" /* y-axis label */, dataset);
         chart.addSubtitle(new TextTitle("Time to generate 1000 charts in SVG " 
                 + "format (lower bars = better performance)"));
-        chart.setBackgroundPaint(Color.white);
+        chart.setBackgroundPaint(Color.WHITE);
         CategoryPlot plot = (CategoryPlot) chart.getPlot();
 
         // ******************************************************************

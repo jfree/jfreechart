@@ -45,7 +45,7 @@ import java.io.StringWriter;
 import java.io.Writer;
 import java.util.Iterator;
 import java.util.List;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.data.KeyedValues;
 import org.jfree.data.KeyedValues2D;
 import org.jfree.data.category.CategoryDataset;
@@ -73,7 +73,7 @@ public class JSONUtils {
      * @return A string in JSON format. 
      */
     public static String writeKeyedValues(KeyedValues data) {
-        ParamChecks.nullNotPermitted(data, "data");
+        Args.nullNotPermitted(data, "data");
         StringWriter sw = new StringWriter();
         try {
             writeKeyedValues(data, sw);
@@ -95,8 +95,8 @@ public class JSONUtils {
      */
     public static void writeKeyedValues(KeyedValues data, Writer writer) 
             throws IOException {
-        ParamChecks.nullNotPermitted(data, "data");
-        ParamChecks.nullNotPermitted(writer, "writer");
+        Args.nullNotPermitted(data, "data");
+        Args.nullNotPermitted(writer, "writer");
         writer.write("[");
         boolean first = true;
         Iterator iterator = data.getKeys().iterator();
@@ -127,7 +127,7 @@ public class JSONUtils {
      * @return A string in JSON format. 
      */
     public static String writeKeyedValues2D(KeyedValues2D data) {
-        ParamChecks.nullNotPermitted(data, "data");
+        Args.nullNotPermitted(data, "data");
         StringWriter sw = new StringWriter();
         try {
             writeKeyedValues2D(data, sw);
@@ -150,8 +150,8 @@ public class JSONUtils {
      */
     public static void writeKeyedValues2D(KeyedValues2D data, Writer writer) 
             throws IOException {
-        ParamChecks.nullNotPermitted(data, "data");
-        ParamChecks.nullNotPermitted(writer, "writer");
+        Args.nullNotPermitted(data, "data");
+        Args.nullNotPermitted(writer, "writer");
         List<Comparable<?>> columnKeys = data.getColumnKeys();
         List<Comparable<?>> rowKeys = data.getRowKeys();
         writer.write("{");

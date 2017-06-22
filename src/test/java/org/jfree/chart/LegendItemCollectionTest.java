@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2012, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------------
  * LegendItemCollectionTest.java
  * -----------------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2017, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -70,14 +70,14 @@ public class LegendItemCollectionTest  {
 
         LegendItem item1 = new LegendItem("Label", "Description",
                 "ToolTip", "URL", true,
-                new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), true, Color.red,
-                true, Color.blue, new BasicStroke(1.2f), true,
+                new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), true, Color.RED,
+                true, Color.BLUE, new BasicStroke(1.2f), true,
                 new Line2D.Double(1.0, 2.0, 3.0, 4.0),
                 new BasicStroke(2.1f), Color.green);
         LegendItem item2 = new LegendItem("Label", "Description",
                 "ToolTip", "URL", true,
                 new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0),
-                true, Color.red, true, Color.blue, new BasicStroke(1.2f), true,
+                true, Color.RED, true, Color.BLUE, new BasicStroke(1.2f), true,
                 new Line2D.Double(1.0, 2.0, 3.0, 4.0), new BasicStroke(2.1f),
                 Color.green);
         c1.add(item1);
@@ -94,13 +94,14 @@ public class LegendItemCollectionTest  {
     public void testSerialization() {
         LegendItemCollection c1 = new LegendItemCollection();
         c1.add(new LegendItem("Item", "Description", "ToolTip", "URL",
-                new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), Color.red));
-        LegendItemCollection c2 = (LegendItemCollection) TestUtilities.serialised(c1);
+                new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), Color.RED));
+        LegendItemCollection c2 = (LegendItemCollection) TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 
     /**
      * Confirm that cloning works.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {

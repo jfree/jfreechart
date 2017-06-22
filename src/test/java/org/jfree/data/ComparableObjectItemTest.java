@@ -40,7 +40,7 @@
 
 package org.jfree.data;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -113,7 +113,7 @@ public class ComparableObjectItemTest {
         ComparableObjectItem item1 = new ComparableObjectItem(new Integer(1),
                 "XYZ");
         ComparableObjectItem item2 = (ComparableObjectItem) 
-                TestUtilities.serialised(item1);
+                TestUtils.serialised(item1);
         assertEquals(item1, item2);
     }
 

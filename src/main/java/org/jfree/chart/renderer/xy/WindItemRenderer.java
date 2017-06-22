@@ -156,7 +156,7 @@ public class WindItemRenderer extends AbstractXYItemRenderer
         Line2D line = new Line2D.Double(ax1, ay1, ax2, ay2);
 
         g2.draw(line);
-        g2.setPaint(Color.blue);
+        g2.setPaint(Color.BLUE);
         g2.setFont(new Font("Dialog", 1, 9));
 
         g2.drawString(dirforce, (float) ax1, (float) ay1);

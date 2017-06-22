@@ -44,7 +44,7 @@
 package org.jfree.data.time;
 
 import java.io.Serializable;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 
 /**
  * Represents a time period and an associated value.
@@ -69,7 +69,7 @@ public class TimePeriodValue implements Cloneable, Serializable {
      * @throws IllegalArgumentException if {@code period} is {@code null}.
      */
     public TimePeriodValue(TimePeriod period, Number value) {
-        ParamChecks.nullNotPermitted(period, "period");
+        Args.nullNotPermitted(period, "period");
         this.period = period;
         this.value = value;
     }

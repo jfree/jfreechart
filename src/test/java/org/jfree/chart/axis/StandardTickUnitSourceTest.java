@@ -43,7 +43,7 @@ package org.jfree.chart.axis;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -67,7 +67,7 @@ public class StandardTickUnitSourceTest {
     @Test
     public void testSerialization() {
         StandardTickUnitSource t1 = new StandardTickUnitSource();
-        StandardTickUnitSource t2 = (StandardTickUnitSource) TestUtilities.serialised(t1);
+        StandardTickUnitSource t2 = (StandardTickUnitSource) TestUtils.serialised(t1);
         assertEquals(t1, t2);
     }
 

@@ -48,7 +48,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.GradientPaint;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 
 import org.jfree.chart.plot.Crosshair;
 import org.junit.Test;
@@ -76,8 +76,8 @@ public class CrosshairOverlayTest {
         CrosshairOverlay o1 = new CrosshairOverlay();
         o1.addDomainCrosshair(new Crosshair(99.9));
         o1.addRangeCrosshair(new Crosshair(1.23, new GradientPaint(1.0f, 2.0f,
-                Color.red, 3.0f, 4.0f, Color.blue), new BasicStroke(1.1f)));
-        CrosshairOverlay o2 = (CrosshairOverlay) TestUtilities.serialised(o1);
+                Color.RED, 3.0f, 4.0f, Color.BLUE), new BasicStroke(1.1f)));
+        CrosshairOverlay o2 = (CrosshairOverlay) TestUtils.serialised(o1);
         assertEquals(o1, o2);
     }
 
@@ -89,7 +89,7 @@ public class CrosshairOverlayTest {
         CrosshairOverlay o1 = new CrosshairOverlay();
         o1.addDomainCrosshair(new Crosshair(99.9));
         o1.addRangeCrosshair(new Crosshair(1.23, new GradientPaint(1.0f, 2.0f,
-                Color.red, 3.0f, 4.0f, Color.blue), new BasicStroke(1.1f)));
+                Color.RED, 3.0f, 4.0f, Color.BLUE), new BasicStroke(1.1f)));
         CrosshairOverlay o2 = (CrosshairOverlay) o1.clone();
         assertTrue(o1 != o2);
         assertTrue(o1.getClass() == o2.getClass());

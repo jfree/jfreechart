@@ -27,7 +27,7 @@
  * --------------
  * Crosshair.java
  * --------------
- * (C) Copyright 2009-2016, by Object Refinery Limited.
+ * (C) Copyright 2009-2017, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -52,12 +52,12 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import org.jfree.chart.HashUtilities;
+import org.jfree.chart.HashUtils;
 import org.jfree.chart.labels.CrosshairLabelGenerator;
 import org.jfree.chart.labels.StandardCrosshairLabelGenerator;
 import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 
@@ -144,7 +144,7 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * @param value  the value.
      */
     public Crosshair(double value) {
-       this(value, Color.black, new BasicStroke(1.0f));
+       this(value, Color.BLACK, new BasicStroke(1.0f));
     }
 
     /**
@@ -155,8 +155,8 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * @param stroke  the line stroke ({@code null} not permitted).
      */
     public Crosshair(double value, Paint paint, Stroke stroke) {
-        ParamChecks.nullNotPermitted(paint, "paint");
-        ParamChecks.nullNotPermitted(stroke, "stroke");
+        Args.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(stroke, "stroke");
         this.visible = true;
         this.value = value;
         this.paint = paint;
@@ -167,10 +167,10 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
         this.labelXOffset = 3.0;
         this.labelYOffset = 3.0;
         this.labelFont = new Font("Tahoma", Font.PLAIN, 12);
-        this.labelPaint = Color.black;
+        this.labelPaint = Color.BLACK;
         this.labelBackgroundPaint = new Color(0, 0, 255, 63);
         this.labelOutlineVisible = true;
-        this.labelOutlinePaint = Color.black;
+        this.labelOutlinePaint = Color.BLACK;
         this.labelOutlineStroke = new BasicStroke(0.5f);
         this.pcs = new PropertyChangeSupport(this);
     }
@@ -324,7 +324,7 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * @see #getLabelGenerator()
      */
     public void setLabelGenerator(CrosshairLabelGenerator generator) {
-        ParamChecks.nullNotPermitted(generator, "generator");
+        Args.nullNotPermitted(generator, "generator");
         CrosshairLabelGenerator old = this.labelGenerator;
         this.labelGenerator = generator;
         this.pcs.firePropertyChange("labelGenerator", old, generator);
@@ -375,9 +375,9 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * @see #getLabelXOffset()
      */
     public void setLabelXOffset(double offset) {
-        Double old = new Double(this.labelXOffset);
+        Double old = this.labelXOffset;
         this.labelXOffset = offset;
-        this.pcs.firePropertyChange("labelXOffset", old, new Double(offset));
+        this.pcs.firePropertyChange("labelXOffset", old, offset);
     }
 
     /**
@@ -400,9 +400,9 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * @see #getLabelYOffset()
      */
     public void setLabelYOffset(double offset) {
-        Double old = new Double(this.labelYOffset);
+        Double old = this.labelYOffset;
         this.labelYOffset = offset;
-        this.pcs.firePropertyChange("labelYOffset", old, new Double(offset));
+        this.pcs.firePropertyChange("labelYOffset", old, offset);
     }
 
     /**
@@ -425,14 +425,14 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * @see #getLabelFont()
      */
     public void setLabelFont(Font font) {
-        ParamChecks.nullNotPermitted(font, "font");
+        Args.nullNotPermitted(font, "font");
         Font old = this.labelFont;
         this.labelFont = font;
         this.pcs.firePropertyChange("labelFont", old, font);
     }
 
     /**
-     * Returns the label paint.
+     * Returns the label paint.  The default value is {@code Color.BLACK}.
      *
      * @return The label paint (never {@code null}).
      *
@@ -451,7 +451,7 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * @see #getLabelPaint()
      */
     public void setLabelPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         Paint old = this.labelPaint;
         this.labelPaint = paint;
         this.pcs.firePropertyChange("labelPaint", old, paint);
@@ -484,6 +484,7 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
 
     /**
      * Returns the flag that controls the visibility of the label outline.
+     * The default value is {@code true}.
      *
      * @return A boolean.
      *
@@ -528,7 +529,7 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * @see #getLabelOutlinePaint()
      */
     public void setLabelOutlinePaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         Paint old = this.labelOutlinePaint;
         this.labelOutlinePaint = paint;
         this.pcs.firePropertyChange("labelOutlinePaint", old, paint);
@@ -555,7 +556,7 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * @see #getLabelOutlineStroke()
      */
     public void setLabelOutlineStroke(Stroke stroke) {
-        ParamChecks.nullNotPermitted(stroke, "stroke");
+        Args.nullNotPermitted(stroke, "stroke");
         Stroke old = this.labelOutlineStroke;
         this.labelOutlineStroke = stroke;
         this.pcs.firePropertyChange("labelOutlineStroke", old, stroke);
@@ -635,21 +636,21 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = HashUtilities.hashCode(hash, this.visible);
-        hash = HashUtilities.hashCode(hash, this.value);
-        hash = HashUtilities.hashCode(hash, this.paint);
-        hash = HashUtilities.hashCode(hash, this.stroke);
-        hash = HashUtilities.hashCode(hash, this.labelVisible);
-        hash = HashUtilities.hashCode(hash, this.labelAnchor);
-        hash = HashUtilities.hashCode(hash, this.labelGenerator);
-        hash = HashUtilities.hashCode(hash, this.labelXOffset);
-        hash = HashUtilities.hashCode(hash, this.labelYOffset);
-        hash = HashUtilities.hashCode(hash, this.labelFont);
-        hash = HashUtilities.hashCode(hash, this.labelPaint);
-        hash = HashUtilities.hashCode(hash, this.labelBackgroundPaint);
-        hash = HashUtilities.hashCode(hash, this.labelOutlineVisible);
-        hash = HashUtilities.hashCode(hash, this.labelOutlineStroke);
-        hash = HashUtilities.hashCode(hash, this.labelOutlinePaint);
+        hash = HashUtils.hashCode(hash, this.visible);
+        hash = HashUtils.hashCode(hash, this.value);
+        hash = HashUtils.hashCode(hash, this.paint);
+        hash = HashUtils.hashCode(hash, this.stroke);
+        hash = HashUtils.hashCode(hash, this.labelVisible);
+        hash = HashUtils.hashCode(hash, this.labelAnchor);
+        hash = HashUtils.hashCode(hash, this.labelGenerator);
+        hash = HashUtils.hashCode(hash, this.labelXOffset);
+        hash = HashUtils.hashCode(hash, this.labelYOffset);
+        hash = HashUtils.hashCode(hash, this.labelFont);
+        hash = HashUtils.hashCode(hash, this.labelPaint);
+        hash = HashUtils.hashCode(hash, this.labelBackgroundPaint);
+        hash = HashUtils.hashCode(hash, this.labelOutlineVisible);
+        hash = HashUtils.hashCode(hash, this.labelOutlineStroke);
+        hash = HashUtils.hashCode(hash, this.labelOutlinePaint);
         return hash;
     }
 

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * ChartRenderingInfoTest.java
  * ---------------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2017, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -88,6 +88,7 @@ public class ChartRenderingInfoTest  {
 
     /**
      * Confirm that cloning works.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
@@ -120,7 +121,7 @@ public class ChartRenderingInfoTest  {
     public void testSerialization() {
         ChartRenderingInfo i1 = new ChartRenderingInfo();
         i1.setChartArea(new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0));
-        ChartRenderingInfo i2 = (ChartRenderingInfo) TestUtilities.serialised(i1);
+        ChartRenderingInfo i2 = (ChartRenderingInfo) TestUtils.serialised(i1);
         assertEquals(i1, i2);
     }
 
@@ -132,7 +133,7 @@ public class ChartRenderingInfoTest  {
         ChartRenderingInfo i1 = new ChartRenderingInfo();
         i1.getPlotInfo().setDataArea(new Rectangle2D.Double(1.0, 2.0, 3.0,
                 4.0));
-        ChartRenderingInfo i2 = (ChartRenderingInfo) TestUtilities.serialised(i1);
+        ChartRenderingInfo i2 = (ChartRenderingInfo) TestUtils.serialised(i1);
         assertEquals(i1, i2);
         assertEquals(i2, i2.getPlotInfo().getOwner());
     }

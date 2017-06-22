@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2015, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------
  * YIntervalRenderer.java
  * ----------------------
- * (C) Copyright 2002-2015, by Object Refinery Limited.
+ * (C) Copyright 2002-2017, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -69,7 +69,7 @@ import org.jfree.chart.plot.CrosshairState;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PublicCloneable;
@@ -278,7 +278,7 @@ public class YIntervalRenderer extends AbstractXYItemRenderer
         ItemLabelPosition position = getNegativeItemLabelPosition(series, item);
         Point2D anchorPoint = calculateLabelAnchorPoint(
                 position.getItemLabelAnchor(), x, y, orientation);
-        TextUtilities.drawRotatedString(label, g2,
+        TextUtils.drawRotatedString(label, g2,
                 (float) anchorPoint.getX(), (float) anchorPoint.getY(),
                 position.getTextAnchor(), position.getAngle(),
                 position.getRotationAnchor());

@@ -99,7 +99,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.TimeZone;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 
 import org.jfree.data.DomainInfo;
 import org.jfree.data.DomainOrder;
@@ -218,7 +218,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      * @param anchor  the anchor position ({@code null} not permitted).
      */
     public void setXPosition(TimePeriodAnchor anchor) {
-        ParamChecks.nullNotPermitted(anchor, "anchor");
+        Args.nullNotPermitted(anchor, "anchor");
         this.xPosition = anchor;
         notifyListeners(new DatasetChangeEvent(this, this));
     }
@@ -253,7 +253,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      * @since 1.0.6
      */
     public int indexOf(TimeSeries series) {
-        ParamChecks.nullNotPermitted(series, "series");
+        Args.nullNotPermitted(series, "series");
         return this.data.indexOf(series);
     }
 
@@ -318,7 +318,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      * @since 1.0.17
      */
     public int getSeriesIndex(Comparable key) {
-        ParamChecks.nullNotPermitted(key, "key");
+        Args.nullNotPermitted(key, "key");
         int seriesCount = getSeriesCount();
         for (int i = 0; i < seriesCount; i++) {
             TimeSeries series = (TimeSeries) this.data.get(i);
@@ -336,7 +336,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      * @param series  the series ({@code null} not permitted).
      */
     public void addSeries(TimeSeries series) {
-        ParamChecks.nullNotPermitted(series, "series");
+        Args.nullNotPermitted(series, "series");
         this.data.add(series);
         series.addChangeListener(this);
         series.addVetoableChangeListener(this);
@@ -350,7 +350,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      * @param series  the series ({@code null} not permitted).
      */
     public void removeSeries(TimeSeries series) {
-        ParamChecks.nullNotPermitted(series, "series");
+        Args.nullNotPermitted(series, "series");
         this.data.remove(series);
         series.removeChangeListener(this);
         series.removeVetoableChangeListener(this);

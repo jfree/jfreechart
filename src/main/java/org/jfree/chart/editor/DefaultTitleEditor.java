@@ -250,7 +250,7 @@ class DefaultTitleEditor extends JPanel implements ActionListener {
      */
     public void attemptPaintSelection() {
         Paint p = this.titlePaint.getPaint();
-        Color defaultColor = (p instanceof Color ? (Color) p : Color.blue);
+        Color defaultColor = (p instanceof Color ? (Color) p : Color.BLUE);
         Color c = JColorChooser.showDialog(
             this, localizationResources.getString("Title_Color"), defaultColor
         );

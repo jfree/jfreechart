@@ -53,10 +53,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 
 import org.jfree.chart.util.ResourceBundleWrapper;
-import org.jfree.data.DataUtilities;
+import org.jfree.data.DataUtils;
 import org.jfree.data.UnknownKeyException;
 import org.jfree.data.general.AbstractSeriesDataset;
 
@@ -92,8 +92,8 @@ public class DefaultIntervalCategoryDataset extends AbstractSeriesDataset
      *                permitted).
      */
     public DefaultIntervalCategoryDataset(double[][] starts, double[][] ends) {
-        this(DataUtilities.createNumberArray2D(starts),
-                DataUtilities.createNumberArray2D(ends));
+        this(DataUtils.createNumberArray2D(starts),
+                DataUtils.createNumberArray2D(ends));
     }
 
     /**
@@ -281,7 +281,7 @@ public class DefaultIntervalCategoryDataset extends AbstractSeriesDataset
      * @see #setCategoryKeys(Comparable[])
      */
     public void setSeriesKeys(Comparable[] seriesKeys) {
-        ParamChecks.nullNotPermitted(seriesKeys, "seriesKeys");
+        Args.nullNotPermitted(seriesKeys, "seriesKeys");
         if (seriesKeys.length != getSeriesCount()) {
             throw new IllegalArgumentException(
                     "The number of series keys does not match the data.");
@@ -338,7 +338,7 @@ public class DefaultIntervalCategoryDataset extends AbstractSeriesDataset
      * @see #setSeriesKeys(Comparable[])
      */
     public void setCategoryKeys(Comparable[] categoryKeys) {
-        ParamChecks.nullNotPermitted(categoryKeys, "categoryKeys");
+        Args.nullNotPermitted(categoryKeys, "categoryKeys");
         if (categoryKeys.length != getCategoryCount()) {
             throw new IllegalArgumentException(
                     "The number of categories does not match the data.");
@@ -634,7 +634,7 @@ public class DefaultIntervalCategoryDataset extends AbstractSeriesDataset
      */
     @Override
     public int getColumnIndex(Comparable columnKey) {
-        ParamChecks.nullNotPermitted(columnKey, "columnKey");
+        Args.nullNotPermitted(columnKey, "columnKey");
         return getCategoryIndex(columnKey);
     }
 
@@ -803,7 +803,7 @@ public class DefaultIntervalCategoryDataset extends AbstractSeriesDataset
      * @return A clone of the array.
      */
     private static Number[][] clone(Number[][] array) {
-        ParamChecks.nullNotPermitted(array, "array");
+        Args.nullNotPermitted(array, "array");
         Number[][] result = new Number[array.length][];
         for (int i = 0; i < array.length; i++) {
             Number[] child = array[i];

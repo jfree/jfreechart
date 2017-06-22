@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * LookupPaintScaleTest.java
  * -------------------------
- * (C) Copyright 2006-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2017, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -50,7 +50,7 @@ import static org.junit.Assert.assertTrue;
 import java.awt.Color;
 import java.awt.GradientPaint;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -68,16 +68,16 @@ public class LookupPaintScaleTest {
         assertTrue(g1.equals(g2));
         assertTrue(g2.equals(g1));
 
-        g1 = new LookupPaintScale(1.0, 2.0, Color.red);
+        g1 = new LookupPaintScale(1.0, 2.0, Color.RED);
         assertFalse(g1.equals(g2));
-        g2 = new LookupPaintScale(1.0, 2.0, Color.red);
+        g2 = new LookupPaintScale(1.0, 2.0, Color.RED);
         assertTrue(g1.equals(g2));
 
-        g1.add(1.5, new GradientPaint(1.0f, 2.0f, Color.red, 3.0f, 4.0f,
-                Color.blue));
+        g1.add(1.5, new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f,
+                Color.BLUE));
         assertFalse(g1.equals(g2));
-        g2.add(1.5, new GradientPaint(1.0f, 2.0f, Color.red, 3.0f, 4.0f,
-                Color.blue));
+        g2.add(1.5, new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f,
+                Color.BLUE));
         assertTrue(g1.equals(g2));
     }
 
@@ -93,16 +93,16 @@ public class LookupPaintScaleTest {
         assertTrue(g1.equals(g2));
 
         // check independence
-        g1.add(0.5, Color.red);
+        g1.add(0.5, Color.RED);
         assertFalse(g1.equals(g2));
-        g2.add(0.5, Color.red);
+        g2.add(0.5, Color.RED);
         assertTrue(g1.equals(g2));
 
         // try with gradient paint
         g1 = new LookupPaintScale(1.0, 2.0, new GradientPaint(1.0f, 2.0f,
-                Color.red, 3.0f, 4.0f, Color.green));
-        g1.add(1.5, new GradientPaint(1.0f, 2.0f, Color.red, 3.0f, 4.0f,
-                Color.blue));
+                Color.RED, 3.0f, 4.0f, Color.GREEN));
+        g1.add(1.5, new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f,
+                Color.BLUE));
         g2 = (LookupPaintScale) g1.clone();
         assertTrue(g1 != g2);
         assertTrue(g1.getClass() == g2.getClass());
@@ -115,14 +115,14 @@ public class LookupPaintScaleTest {
     @Test
     public void testSerialization() {
         LookupPaintScale g1 = new LookupPaintScale();
-        LookupPaintScale g2 = (LookupPaintScale) TestUtilities.serialised(g1);
+        LookupPaintScale g2 = (LookupPaintScale) TestUtils.serialised(g1);
         assertEquals(g1, g2);
 
         g1 = new LookupPaintScale(1.0, 2.0, new GradientPaint(1.0f, 2.0f,
-                Color.red, 3.0f, 4.0f, Color.yellow));
-        g1.add(1.5, new GradientPaint(1.1f, 2.2f, Color.red, 3.3f, 4.4f,
-                Color.blue));
-        g2 = (LookupPaintScale) TestUtilities.serialised(g1);
+                Color.RED, 3.0f, 4.0f, Color.YELLOW));
+        g1.add(1.5, new GradientPaint(1.1f, 2.2f, Color.RED, 3.3f, 4.4f,
+                Color.BLUE));
+        g2 = (LookupPaintScale) TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 
@@ -143,10 +143,10 @@ public class LookupPaintScaleTest {
      */
     @Test
     public void testConstructor2() {
-        LookupPaintScale s = new LookupPaintScale(1.0, 2.0, Color.red);
+        LookupPaintScale s = new LookupPaintScale(1.0, 2.0, Color.RED);
         assertEquals(1.0, s.getLowerBound(), EPSILON);
         assertEquals(2.0, s.getUpperBound(), EPSILON);
-        assertEquals(Color.red, s.getDefaultPaint());
+        assertEquals(Color.RED, s.getDefaultPaint());
     }
 
     /**
@@ -155,43 +155,43 @@ public class LookupPaintScaleTest {
     @Test
     public void testGeneral() {
 
-        LookupPaintScale s = new LookupPaintScale(0.0, 100.0, Color.black);
-        assertEquals(Color.black, s.getPaint(-1.0));
-        assertEquals(Color.black, s.getPaint(0.0));
-        assertEquals(Color.black, s.getPaint(50.0));
-        assertEquals(Color.black, s.getPaint(100.0));
-        assertEquals(Color.black, s.getPaint(101.0));
+        LookupPaintScale s = new LookupPaintScale(0.0, 100.0, Color.BLACK);
+        assertEquals(Color.BLACK, s.getPaint(-1.0));
+        assertEquals(Color.BLACK, s.getPaint(0.0));
+        assertEquals(Color.BLACK, s.getPaint(50.0));
+        assertEquals(Color.BLACK, s.getPaint(100.0));
+        assertEquals(Color.BLACK, s.getPaint(101.0));
 
-        s.add(50.0, Color.blue);
-        assertEquals(Color.black, s.getPaint(-1.0));
-        assertEquals(Color.black, s.getPaint(0.0));
-        assertEquals(Color.blue, s.getPaint(50.0));
-        assertEquals(Color.blue, s.getPaint(100.0));
-        assertEquals(Color.black, s.getPaint(101.0));
+        s.add(50.0, Color.BLUE);
+        assertEquals(Color.BLACK, s.getPaint(-1.0));
+        assertEquals(Color.BLACK, s.getPaint(0.0));
+        assertEquals(Color.BLUE, s.getPaint(50.0));
+        assertEquals(Color.BLUE, s.getPaint(100.0));
+        assertEquals(Color.BLACK, s.getPaint(101.0));
 
-        s.add(50.0, Color.red);
-        assertEquals(Color.black, s.getPaint(-1.0));
-        assertEquals(Color.black, s.getPaint(0.0));
-        assertEquals(Color.red, s.getPaint(50.0));
-        assertEquals(Color.red, s.getPaint(100.0));
-        assertEquals(Color.black, s.getPaint(101.0));
+        s.add(50.0, Color.RED);
+        assertEquals(Color.BLACK, s.getPaint(-1.0));
+        assertEquals(Color.BLACK, s.getPaint(0.0));
+        assertEquals(Color.RED, s.getPaint(50.0));
+        assertEquals(Color.RED, s.getPaint(100.0));
+        assertEquals(Color.BLACK, s.getPaint(101.0));
 
-        s.add(25.0, Color.green);
-        assertEquals(Color.black, s.getPaint(-1.0));
-        assertEquals(Color.black, s.getPaint(0.0));
-        assertEquals(Color.green, s.getPaint(25.0));
-        assertEquals(Color.red, s.getPaint(50.0));
-        assertEquals(Color.red, s.getPaint(100.0));
-        assertEquals(Color.black, s.getPaint(101.0));
+        s.add(25.0, Color.GREEN);
+        assertEquals(Color.BLACK, s.getPaint(-1.0));
+        assertEquals(Color.BLACK, s.getPaint(0.0));
+        assertEquals(Color.GREEN, s.getPaint(25.0));
+        assertEquals(Color.RED, s.getPaint(50.0));
+        assertEquals(Color.RED, s.getPaint(100.0));
+        assertEquals(Color.BLACK, s.getPaint(101.0));
 
-        s.add(75.0, Color.yellow);
-        assertEquals(Color.black, s.getPaint(-1.0));
-        assertEquals(Color.black, s.getPaint(0.0));
-        assertEquals(Color.green, s.getPaint(25.0));
-        assertEquals(Color.red, s.getPaint(50.0));
-        assertEquals(Color.yellow, s.getPaint(75.0));
-        assertEquals(Color.yellow, s.getPaint(100.0));
-        assertEquals(Color.black, s.getPaint(101.0));
+        s.add(75.0, Color.YELLOW);
+        assertEquals(Color.BLACK, s.getPaint(-1.0));
+        assertEquals(Color.BLACK, s.getPaint(0.0));
+        assertEquals(Color.GREEN, s.getPaint(25.0));
+        assertEquals(Color.RED, s.getPaint(50.0));
+        assertEquals(Color.YELLOW, s.getPaint(75.0));
+        assertEquals(Color.YELLOW, s.getPaint(100.0));
+        assertEquals(Color.BLACK, s.getPaint(101.0));
     }
 
 }

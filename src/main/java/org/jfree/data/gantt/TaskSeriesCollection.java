@@ -55,7 +55,7 @@ import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.general.AbstractSeriesDataset;
@@ -211,7 +211,7 @@ public class TaskSeriesCollection extends AbstractSeriesDataset
      */
     @Override
     public int getColumnIndex(Comparable columnKey) {
-        ParamChecks.nullNotPermitted(columnKey, "columnKey");
+        Args.nullNotPermitted(columnKey, "columnKey");
         return this.keys.indexOf(columnKey);
     }
 
@@ -257,7 +257,7 @@ public class TaskSeriesCollection extends AbstractSeriesDataset
      * @param series  the series ({@code null} not permitted).
      */
     public void add(TaskSeries series) {
-        ParamChecks.nullNotPermitted(series, "series");
+        Args.nullNotPermitted(series, "series");
         this.data.add(series);
         series.addChangeListener(this);
 
@@ -282,7 +282,7 @@ public class TaskSeriesCollection extends AbstractSeriesDataset
      * @param series  the series.
      */
     public void remove(TaskSeries series) {
-        ParamChecks.nullNotPermitted(series, "series");
+        Args.nullNotPermitted(series, "series");
         if (this.data.contains(series)) {
             series.removeChangeListener(this);
             this.data.remove(series);

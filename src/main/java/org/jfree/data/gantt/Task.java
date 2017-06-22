@@ -48,7 +48,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.time.SimpleTimePeriod;
@@ -83,7 +83,7 @@ public class Task implements Cloneable, PublicCloneable, Serializable {
      * @param duration  the task duration ({@code null} permitted).
      */
     public Task(String description, TimePeriod duration) {
-        ParamChecks.nullNotPermitted(description, "description");
+        Args.nullNotPermitted(description, "description");
         this.description = description;
         this.duration = duration;
         this.percentComplete = null;
@@ -117,7 +117,7 @@ public class Task implements Cloneable, PublicCloneable, Serializable {
      * @param description  the description ({@code null} not permitted).
      */
     public void setDescription(String description) {
-        ParamChecks.nullNotPermitted(description, "description");
+        Args.nullNotPermitted(description, "description");
         this.description = description;
     }
 
@@ -172,7 +172,7 @@ public class Task implements Cloneable, PublicCloneable, Serializable {
      * @param subtask  the subtask ({@code null} not permitted).
      */
     public void addSubtask(Task subtask) {
-        ParamChecks.nullNotPermitted(subtask, "subtask");
+        Args.nullNotPermitted(subtask, "subtask");
         this.subtasks.add(subtask);
     }
 

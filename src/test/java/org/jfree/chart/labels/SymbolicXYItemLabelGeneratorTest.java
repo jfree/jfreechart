@@ -44,7 +44,7 @@ package org.jfree.chart.labels;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.Test;
@@ -107,7 +107,7 @@ public class SymbolicXYItemLabelGeneratorTest {
     public void testSerialization() {
         SymbolicXYItemLabelGenerator g1 = new SymbolicXYItemLabelGenerator();
         SymbolicXYItemLabelGenerator g2 = (SymbolicXYItemLabelGenerator) 
-                TestUtilities.serialised(g1);
+                TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

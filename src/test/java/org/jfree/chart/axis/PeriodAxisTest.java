@@ -57,7 +57,7 @@ import java.util.Locale;
 import java.util.SimpleTimeZone;
 import java.util.TimeZone;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 
 import org.jfree.chart.event.AxisChangeEvent;
 import org.jfree.chart.event.AxisChangeListener;
@@ -149,9 +149,9 @@ public class PeriodAxisTest implements AxisChangeListener {
         a2.setMinorTickMarkStroke(s);
         assertTrue(a1.equals(a2));
 
-        a1.setMinorTickMarkPaint(Color.blue);
+        a1.setMinorTickMarkPaint(Color.BLUE);
         assertFalse(a1.equals(a2));
-        a2.setMinorTickMarkPaint(Color.blue);
+        a2.setMinorTickMarkPaint(Color.BLUE);
         assertTrue(a1.equals(a2));
     }
 
@@ -242,7 +242,7 @@ public class PeriodAxisTest implements AxisChangeListener {
     @Test
     public void testSerialization() {
         PeriodAxis a1 = new PeriodAxis("Test Axis");
-        PeriodAxis a2 = (PeriodAxis) TestUtilities.serialised(a1);
+        PeriodAxis a2 = (PeriodAxis) TestUtils.serialised(a1);
         boolean b = a1.equals(a2);
         assertTrue(b);
     }

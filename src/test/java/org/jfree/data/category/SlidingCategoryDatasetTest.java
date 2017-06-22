@@ -43,7 +43,7 @@ package org.jfree.data.category;
 
 import java.util.List;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 
 import org.jfree.data.UnknownKeyException;
 import org.junit.Test;
@@ -121,7 +121,7 @@ public class SlidingCategoryDatasetTest {
         u1.addValue(2.0, "R1", "C2");
         SlidingCategoryDataset d1 = new SlidingCategoryDataset(u1, 0, 5);
         SlidingCategoryDataset d2 = (SlidingCategoryDataset) 
-                TestUtilities.serialised(d1);
+                TestUtils.serialised(d1);
         assertEquals(d1, d2);
 
         // basic check for independence

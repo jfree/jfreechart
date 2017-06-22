@@ -66,7 +66,7 @@ public class AbstractObjectList implements Cloneable, Serializable {
      *
      * @param initialCapacity  the initial capacity.
      */
-    protected AbstractObjectList(final int initialCapacity) {
+    protected AbstractObjectList(int initialCapacity) {
         this (initialCapacity, initialCapacity);
     }
 
@@ -76,21 +76,20 @@ public class AbstractObjectList implements Cloneable, Serializable {
      * @param initialCapacity  the initial capacity.
      * @param increment  the increment.
      */
-    protected AbstractObjectList(final int initialCapacity, 
-                                 final int increment) {
+    protected AbstractObjectList(int initialCapacity, int increment) {
         this.objects = new Object[initialCapacity];
         this.increment = increment;
     }
 
     /**
      * Returns the object at the specified index, if there is one, or 
-     * <code>null</code>.
+     * {@code null}.
      *
      * @param index  the object index.
      *
-     * @return The object or <code>null</code>.
+     * @return The object or {@code null}.
      */
-    protected Object get(final int index) {
+    protected Object get(int index) {
         Object result = null;
         if (index >= 0 && index < this.size) {
             result = this.objects[index];
@@ -102,14 +101,14 @@ public class AbstractObjectList implements Cloneable, Serializable {
      * Sets an object reference (overwriting any existing object).
      *
      * @param index  the object index.
-     * @param object  the object (<code>null</code> permitted).
+     * @param object  the object ({@code null} permitted).
      */
-    protected void set(final int index, final Object object) {
+    protected void set(int index, Object object) {
         if (index < 0) {
             throw new IllegalArgumentException("Requires index >= 0.");
         }
         if (index >= this.objects.length) {
-            final Object[] enlarged = new Object[index + this.increment];
+            Object[] enlarged = new Object[index + this.increment];
             System.arraycopy(this.objects, 0, enlarged, 0, this.objects.length);
             this.objects = enlarged;
         }
@@ -142,7 +141,7 @@ public class AbstractObjectList implements Cloneable, Serializable {
      *
      * @return The index or -1.
      */
-    protected int indexOf(final Object object) {
+    protected int indexOf(Object object) {
         for (int index = 0; index < this.size; index++) {
             if (this.objects[index] == object) {
                 return (index);
@@ -158,7 +157,8 @@ public class AbstractObjectList implements Cloneable, Serializable {
      * 
      * @return A boolean.
      */
-    public boolean equals(final Object obj) {
+    @Override
+    public boolean equals(Object obj) {
 
         if (obj == null) {
             return false;
@@ -220,7 +220,7 @@ public class AbstractObjectList implements Cloneable, Serializable {
      *
      * @throws IOException  if there is an I/O error.
      */
-    private void writeObject(final ObjectOutputStream stream) 
+    private void writeObject(ObjectOutputStream stream) 
         throws IOException {
 
         stream.defaultWriteObject();
@@ -247,7 +247,7 @@ public class AbstractObjectList implements Cloneable, Serializable {
      * @throws IOException  if there is an I/O error.
      * @throws ClassNotFoundException  if there is a classpath problem.
      */
-    private void readObject(final ObjectInputStream stream) 
+    private void readObject(ObjectInputStream stream) 
         throws IOException, ClassNotFoundException {
 
         stream.defaultReadObject();

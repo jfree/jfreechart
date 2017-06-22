@@ -50,7 +50,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.Test;
@@ -160,7 +160,7 @@ public class StandardXYToolTipGeneratorTest {
     public void testSerialization() {
         StandardXYToolTipGenerator g1 = new StandardXYToolTipGenerator();
         StandardXYToolTipGenerator g2 = (StandardXYToolTipGenerator) 
-                TestUtilities.serialised(g1);
+                TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

@@ -72,9 +72,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.jfree.chart.ChartRenderingInfo;
-import org.jfree.chart.ChartUtilities;
+import org.jfree.chart.ChartUtils;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 
 /**
  * Utility class used for servlet related JFreeChart operations.
@@ -102,7 +102,7 @@ public class ServletUtilities {
      * @param prefix  the prefix ({@code null} not permitted).
      */
     public static void setTempFilePrefix(String prefix) {
-        ParamChecks.nullNotPermitted(prefix, "prefix");
+        Args.nullNotPermitted(prefix, "prefix");
         ServletUtilities.tempFilePrefix = prefix;
     }
 
@@ -123,7 +123,7 @@ public class ServletUtilities {
      * @param prefix  the prefix ({@code null} not permitted).
      */
     public static void setTempOneTimeFilePrefix(String prefix) {
-        ParamChecks.nullNotPermitted(prefix, "prefix");
+        Args.nullNotPermitted(prefix, "prefix");
         ServletUtilities.tempOneTimeFilePrefix = prefix;
     }
 
@@ -172,7 +172,7 @@ public class ServletUtilities {
     public static String saveChartAsPNG(JFreeChart chart, int width, int height,
             ChartRenderingInfo info, HttpSession session) throws IOException {
 
-        ParamChecks.nullNotPermitted(chart, "chart");
+        Args.nullNotPermitted(chart, "chart");
         ServletUtilities.createTempDir();
         String prefix = ServletUtilities.tempFilePrefix;
         if (session == null) {
@@ -180,7 +180,7 @@ public class ServletUtilities {
         }
         File tempFile = File.createTempFile(prefix, ".png",
                 new File(System.getProperty("java.io.tmpdir")));
-        ChartUtilities.saveChartAsPNG(tempFile, chart, width, height, info);
+        ChartUtils.saveChartAsPNG(tempFile, chart, width, height, info);
         if (session != null) {
             ServletUtilities.registerChartForDeletion(tempFile, session);
         }
@@ -244,7 +244,7 @@ public class ServletUtilities {
             int height, ChartRenderingInfo info, HttpSession session)
             throws IOException {
 
-        ParamChecks.nullNotPermitted(chart, "chart");
+        Args.nullNotPermitted(chart, "chart");
         ServletUtilities.createTempDir();
         String prefix = ServletUtilities.tempFilePrefix;
         if (session == null) {
@@ -252,7 +252,7 @@ public class ServletUtilities {
         }
         File tempFile = File.createTempFile(prefix, ".jpeg",
                 new File(System.getProperty("java.io.tmpdir")));
-        ChartUtilities.saveChartAsJPEG(tempFile, chart, width, height, info);
+        ChartUtils.saveChartAsJPEG(tempFile, chart, width, height, info);
         if (session != null) {
             ServletUtilities.registerChartForDeletion(tempFile, session);
         }

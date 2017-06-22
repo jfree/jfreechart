@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------
  * AxisTest.java
  * -------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2017, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -55,7 +55,7 @@ import java.awt.Font;
 import java.awt.GradientPaint;
 import java.awt.font.TextAttribute;
 import java.text.AttributedString;
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.ui.RectangleInsets;
 
 import org.junit.Test;
@@ -71,7 +71,7 @@ public class AxisTest  {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         CategoryAxis a1 = new CategoryAxis("Test");
-        a1.setAxisLinePaint(Color.red);
+        a1.setAxisLinePaint(Color.RED);
         CategoryAxis a2 = (CategoryAxis) a1.clone();
         assertNotSame(a1, a2);
         assertSame(a1.getClass(), a2.getClass());
@@ -106,11 +106,11 @@ public class AxisTest  {
         assertEquals(a1, a2);
 
         // label paint...
-        a1.setLabelPaint(new GradientPaint(1.0f, 2.0f, Color.white,
-                3.0f, 4.0f, Color.black));
+        a1.setLabelPaint(new GradientPaint(1.0f, 2.0f, Color.WHITE,
+                3.0f, 4.0f, Color.BLACK));
         assertNotEquals(a1, a2);
-        a2.setLabelPaint(new GradientPaint(1.0f, 2.0f, Color.white,
-                3.0f, 4.0f, Color.black));
+        a2.setLabelPaint(new GradientPaint(1.0f, 2.0f, Color.WHITE,
+                3.0f, 4.0f, Color.BLACK));
         assertEquals(a1, a2);
         
         // attributed label...
@@ -162,11 +162,11 @@ public class AxisTest  {
         assertEquals(a1, a2);
 
         // axis line paint...
-        a1.setAxisLinePaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.black));
+        a1.setAxisLinePaint(new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.BLACK));
         assertNotEquals(a1, a2);
-        a2.setAxisLinePaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.black));
+        a2.setAxisLinePaint(new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.BLACK));
         assertEquals(a1, a2);
 
         // tick labels visible flag...
@@ -182,11 +182,11 @@ public class AxisTest  {
         assertEquals(a1, a2);
 
         // tick label paint...
-        a1.setTickLabelPaint(new GradientPaint(1.0f, 2.0f, Color.yellow,
-                3.0f, 4.0f, Color.black));
+        a1.setTickLabelPaint(new GradientPaint(1.0f, 2.0f, Color.YELLOW,
+                3.0f, 4.0f, Color.BLACK));
         assertNotEquals(a1, a2);
-        a2.setTickLabelPaint(new GradientPaint(1.0f, 2.0f, Color.yellow,
-                3.0f, 4.0f, Color.black));
+        a2.setTickLabelPaint(new GradientPaint(1.0f, 2.0f, Color.YELLOW,
+                3.0f, 4.0f, Color.BLACK));
         assertEquals(a1, a2);
 
         // tick label insets...
@@ -220,11 +220,11 @@ public class AxisTest  {
         assertEquals(a1, a2);
 
         // tick mark paint...
-        a1.setTickMarkPaint(new GradientPaint(1.0f, 2.0f, Color.cyan,
-                3.0f, 4.0f, Color.black));
+        a1.setTickMarkPaint(new GradientPaint(1.0f, 2.0f, Color.CYAN,
+                3.0f, 4.0f, Color.BLACK));
         assertNotEquals(a1, a2);
-        a2.setTickMarkPaint(new GradientPaint(1.0f, 2.0f, Color.cyan,
-                3.0f, 4.0f, Color.black));
+        a2.setTickMarkPaint(new GradientPaint(1.0f, 2.0f, Color.CYAN,
+                3.0f, 4.0f, Color.BLACK));
         assertEquals(a1, a2);
 
         // fixed dimension...
@@ -272,7 +272,7 @@ public class AxisTest  {
         label.addAttribute(TextAttribute.SUPERSCRIPT, 
                 TextAttribute.SUPERSCRIPT_SUB, 1, 4);
         a1.setAttributedLabel(label);
-        Axis a2 = (Axis) TestUtilities.serialised(a1);
+        Axis a2 = (Axis) TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 

@@ -66,7 +66,7 @@ import java.util.List;
 import org.jfree.chart.ChartRenderingInfo;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.LegendItem;
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.CategoryPlot;
@@ -91,11 +91,11 @@ public class BoxAndWhiskerRendererTest {
         BoxAndWhiskerRenderer r2 = new BoxAndWhiskerRenderer();
         assertEquals(r1, r2);
 
-        r1.setArtifactPaint(new GradientPaint(1.0f, 2.0f, Color.yellow,
-                3.0f, 4.0f, Color.blue));
+        r1.setArtifactPaint(new GradientPaint(1.0f, 2.0f, Color.YELLOW,
+                3.0f, 4.0f, Color.BLUE));
         assertFalse(r1.equals(r2));
-        r2.setArtifactPaint(new GradientPaint(1.0f, 2.0f, Color.yellow,
-                3.0f, 4.0f, Color.blue));
+        r2.setArtifactPaint(new GradientPaint(1.0f, 2.0f, Color.YELLOW,
+                3.0f, 4.0f, Color.BLUE));
         assertEquals(r1, r2);
 
         r1.setFillBox(!r1.getFillBox());
@@ -165,7 +165,7 @@ public class BoxAndWhiskerRendererTest {
     public void testSerialization() {
         BoxAndWhiskerRenderer r1 = new BoxAndWhiskerRenderer();
         BoxAndWhiskerRenderer r2 = (BoxAndWhiskerRenderer) 
-                TestUtilities.serialised(r1);
+                TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

@@ -43,7 +43,7 @@ package org.jfree.chart.plot;
 
 import java.io.Serializable;
 import java.util.List;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 
 /**
  * A base class for handling the distribution of pie section labels.  Create
@@ -80,7 +80,7 @@ public abstract class AbstractPieLabelDistributor implements Serializable {
      * @param record  the label record ({@code null} not permitted).
      */
     public void addPieLabelRecord(PieLabelRecord record) {
-        ParamChecks.nullNotPermitted(record, "record");
+        Args.nullNotPermitted(record, "record");
         this.labels.add(record);
     }
 

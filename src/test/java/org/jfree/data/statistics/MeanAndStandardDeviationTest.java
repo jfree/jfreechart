@@ -44,7 +44,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -89,7 +89,7 @@ public class MeanAndStandardDeviationTest {
     public void testSerialization() {
         MeanAndStandardDeviation m1 = new MeanAndStandardDeviation(1.2, 3.4);
         MeanAndStandardDeviation m2 = (MeanAndStandardDeviation) 
-                TestUtilities.serialised(m1);
+                TestUtils.serialised(m1);
         assertEquals(m1, m2);
     }
 }

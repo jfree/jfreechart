@@ -42,7 +42,7 @@ package org.jfree.data.general;
 
 import java.io.Serializable;
 import org.jfree.chart.util.PublicCloneable;
-import org.jfree.data.DataUtilities;
+import org.jfree.data.DataUtils;
 
 /**
  * A default implementation of the {@link HeatMapDataset} interface.
@@ -310,7 +310,7 @@ public class DefaultHeatMapDataset extends AbstractDataset
         if (this.maxY != that.maxY) {
             return false;
         }
-        if (!DataUtilities.equal(this.zValues, that.zValues)) {
+        if (!DataUtils.equal(this.zValues, that.zValues)) {
             return false;
         }
         // can't find any differences
@@ -328,7 +328,7 @@ public class DefaultHeatMapDataset extends AbstractDataset
     @Override
     public Object clone() throws CloneNotSupportedException {
         DefaultHeatMapDataset clone = (DefaultHeatMapDataset) super.clone();
-        clone.zValues = DataUtilities.clone(this.zValues);
+        clone.zValues = DataUtils.clone(this.zValues);
         return clone;
     }
 

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2015, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * KeyedValues2DItemKey.java
  * -------------------------
- * (C) Copyright 2014, by Object Refinery Limited.
+ * (C) Copyright 2014-2017, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -42,13 +42,15 @@ package org.jfree.data;
 
 import java.io.Serializable;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 
 /**
  * An object that references one data item in a {@link KeyedValues2D} data
  * structure.  Instances of this class are immutable (subject to the caller
  * using series, row and column keys that are immutable).
  * 
+ * @param <R> the row key type.
+ * @param <C> the column key type.
  * @since 1.3
  */
 public class KeyedValues2DItemKey<R extends Comparable<R>, 
@@ -68,8 +70,8 @@ public class KeyedValues2DItemKey<R extends Comparable<R>,
      * @param columnKey  the column key ({@code null} not permitted).
      */
     public KeyedValues2DItemKey(R rowKey, C columnKey) {
-        ParamChecks.nullNotPermitted(rowKey, "rowKey");
-        ParamChecks.nullNotPermitted(columnKey, "columnKey");
+        Args.nullNotPermitted(rowKey, "rowKey");
+        Args.nullNotPermitted(columnKey, "columnKey");
         this.rowKey = rowKey;
         this.columnKey = columnKey;
     }

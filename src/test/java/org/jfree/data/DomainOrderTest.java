@@ -40,7 +40,7 @@
 
 package org.jfree.data;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -90,7 +90,7 @@ public class DomainOrderTest {
     @Test
     public void testSerialization() {
         DomainOrder d1 = DomainOrder.ASCENDING;
-        DomainOrder d2 = (DomainOrder) TestUtilities.serialised(d1);
+        DomainOrder d2 = (DomainOrder) TestUtils.serialised(d1);
         assertSame(d1, d2);
     }
 

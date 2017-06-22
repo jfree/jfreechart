@@ -45,7 +45,7 @@ public class G2TextMeasurer implements TextMeasurer {
      * 
      * @param g2  the graphics device.
      */
-    public G2TextMeasurer(final Graphics2D g2) {
+    public G2TextMeasurer(Graphics2D g2) {
         this.g2 = g2;
     }
 
@@ -58,13 +58,12 @@ public class G2TextMeasurer implements TextMeasurer {
      * 
      * @return The string width.
      */
-    public float getStringWidth(final String text, 
-                                final int start, final int end) {
-        final FontMetrics fm = this.g2.getFontMetrics();
-        final Rectangle2D bounds = TextUtilities.getTextBounds(
-            text.substring(start, end), this.g2, fm
-        );
-        final float result = (float) bounds.getWidth();
+    @Override
+    public float getStringWidth(String text, int start, int end) {
+        FontMetrics fm = this.g2.getFontMetrics();
+        Rectangle2D bounds = TextUtils.getTextBounds(text.substring(start, end),
+                this.g2, fm);
+        float result = (float) bounds.getWidth();
         return result;
     }
     

@@ -1,3 +1,31 @@
+/* ===========================================================
+ * JFreeChart : a free chart library for the Java(tm) platform
+ * ===========================================================
+ *
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ *
+ * Project Info:  http://www.jfree.org/jfreechart/index.html
+ *
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
+ * (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+ * License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
+ *
+ * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
+ * Other names may be trademarks of their respective owners.]
+ *
+ */
+
 package org.jfree.chart.util;
 
 import java.awt.Graphics2D;
@@ -26,21 +54,21 @@ public class ShapeUtils {
     }
 
     /**
-     * Returns a clone of the specified shape, or <code>null</code>.  At the
+     * Returns a clone of the specified shape, or {@code null}.  At the
      * current time, this method supports cloning for instances of
-     * <code>Line2D</code>, <code>RectangularShape</code>, <code>Area</code>
-     * and <code>GeneralPath</code>.
+     * {@code Line2D}, {@code RectangularShape}, {@code Area}
+     * and {@code GeneralPath}.
      * <p>
-     * <code>RectangularShape</code> includes <code>Arc2D</code>,
-     * <code>Ellipse2D</code>, <code>Rectangle2D</code>,
-     * <code>RoundRectangle2D</code>.
+     * {@code RectangularShape} includes {@code Arc2D},
+     * {@code Ellipse2D}, {@code Rectangle2D},
+     * {@code RoundRectangle2D}.
      *
-     * @param shape  the shape to clone (<code>null</code> permitted,
-     *               returns <code>null</code>).
+     * @param shape  the shape to clone ({@code null} permitted,
+     *               returns {@code null}).
      *
-     * @return A clone or <code>null</code>.
+     * @return A clone or {@code null}.
      */
-    public static Shape clone(final Shape shape) {
+    public static Shape clone(Shape shape) {
         if (shape instanceof Cloneable) {
             try {
                 return (Shape) ObjectUtils.clone(shape);
@@ -53,19 +81,19 @@ public class ShapeUtils {
     }
 
     /**
-     * Tests two shapes for equality.  If both shapes are <code>null</code>,
-     * this method will return <code>true</code>.
+     * Tests two shapes for equality.  If both shapes are {@code null},
+     * this method will return {@code true}.
      * <p>
      * In the current implementation, the following shapes are supported:
-     * <code>Ellipse2D</code>, <code>Line2D</code> and <code>Rectangle2D</code>
+     * {@code Ellipse2D}, {@code Line2D} and {@code Rectangle2D}
      * (implicit).
      *
-     * @param s1  the first shape (<code>null</code> permitted).
-     * @param s2  the second shape (<code>null</code> permitted).
+     * @param s1  the first shape ({@code null} permitted).
+     * @param s2  the second shape ({@code null} permitted).
      *
      * @return A boolean.
      */
-    public static boolean equal(final Shape s1, final Shape s2) {
+    public static boolean equal(Shape s1, Shape s2) {
         if (s1 instanceof Line2D && s2 instanceof Line2D) {
             return equal((Line2D) s1, (Line2D) s2);
         }
@@ -88,15 +116,15 @@ public class ShapeUtils {
     }
 
     /**
-     * Compares two lines are returns <code>true</code> if they are equal or
-     * both <code>null</code>.
+     * Compares two lines are returns {@code true} if they are equal or
+     * both {@code null}.
      *
-     * @param l1  the first line (<code>null</code> permitted).
-     * @param l2  the second line (<code>null</code> permitted).
+     * @param l1  the first line ({@code null} permitted).
+     * @param l2  the second line ({@code null} permitted).
      *
      * @return A boolean.
      */
-    public static boolean equal(final Line2D l1, final Line2D l2) {
+    public static boolean equal(Line2D l1, Line2D l2) {
         if (l1 == null) {
             return (l2 == null);
         }
@@ -113,15 +141,15 @@ public class ShapeUtils {
     }
 
     /**
-     * Compares two ellipses and returns <code>true</code> if they are equal or
-     * both <code>null</code>.
+     * Compares two ellipses and returns {@code true} if they are equal or
+     * both {@code null}.
      *
-     * @param e1  the first ellipse (<code>null</code> permitted).
-     * @param e2  the second ellipse (<code>null</code> permitted).
+     * @param e1  the first ellipse ({@code null} permitted).
+     * @param e2  the second ellipse ({@code null} permitted).
      *
      * @return A boolean.
      */
-    public static boolean equal(final Ellipse2D e1, final Ellipse2D e2) {
+    public static boolean equal(Ellipse2D e1, Ellipse2D e2) {
         if (e1 == null) {
             return (e2 == null);
         }
@@ -135,15 +163,15 @@ public class ShapeUtils {
     }
 
     /**
-     * Compares two arcs and returns <code>true</code> if they are equal or
-     * both <code>null</code>.
+     * Compares two arcs and returns {@code true} if they are equal or
+     * both {@code null}.
      *
-     * @param a1  the first arc (<code>null</code> permitted).
-     * @param a2  the second arc (<code>null</code> permitted).
+     * @param a1  the first arc ({@code null} permitted).
+     * @param a2  the second arc ({@code null} permitted).
      *
      * @return A boolean.
      */
-    public static boolean equal(final Arc2D a1, final Arc2D a2) {
+    public static boolean equal(Arc2D a1, Arc2D a2) {
         if (a1 == null) {
             return (a2 == null);
         }
@@ -166,15 +194,15 @@ public class ShapeUtils {
     }
 
     /**
-     * Tests two polygons for equality.  If both are <code>null</code> this
-     * method returns <code>true</code>.
+     * Tests two polygons for equality.  If both are {@code null} this
+     * method returns {@code true}.
      *
-     * @param p1  polygon 1 (<code>null</code> permitted).
-     * @param p2  polygon 2 (<code>null</code> permitted).
+     * @param p1  polygon 1 ({@code null} permitted).
+     * @param p2  polygon 2 ({@code null} permitted).
      *
      * @return A boolean.
      */
-    public static boolean equal(final Polygon p1, final Polygon p2) {
+    public static boolean equal(Polygon p1, Polygon p2) {
         if (p1 == null) {
             return (p2 == null);
         }
@@ -194,15 +222,15 @@ public class ShapeUtils {
     }
 
     /**
-     * Tests two polygons for equality.  If both are <code>null</code> this
-     * method returns <code>true</code>.
+     * Tests two polygons for equality.  If both are {@code null} this
+     * method returns {@code true}.
      *
-     * @param p1  path 1 (<code>null</code> permitted).
-     * @param p2  path 2 (<code>null</code> permitted).
+     * @param p1  path 1 ({@code null} permitted).
+     * @param p2  path 2 ({@code null} permitted).
      *
      * @return A boolean.
      */
-    public static boolean equal(final GeneralPath p1, final GeneralPath p2) {
+    public static boolean equal(GeneralPath p1, GeneralPath p2) {
         if (p1 == null) {
             return (p2 == null);
         }
@@ -239,15 +267,14 @@ public class ShapeUtils {
     /**
      * Creates and returns a translated shape.
      *
-     * @param shape  the shape (<code>null</code> not permitted).
+     * @param shape  the shape ({@code null} not permitted).
      * @param transX  the x translation (in Java2D space).
      * @param transY  the y translation (in Java2D space).
      *
      * @return The translated shape.
      */
-    public static Shape createTranslatedShape(final Shape shape,
-                                              final double transX,
-                                              final double transY) {
+    public static Shape createTranslatedShape(Shape shape, double transX,
+            double transY) {
         if (shape == null) {
             throw new IllegalArgumentException("Null 'shape' argument.");
         }
@@ -261,25 +288,22 @@ public class ShapeUtils {
      * (relative to the rectangular bounds of the shape) aligns with the
      * specified (x, y) coordinate in Java2D space.
      *
-     * @param shape  the shape (<code>null</code> not permitted).
-     * @param anchor  the anchor (<code>null</code> not permitted).
+     * @param shape  the shape ({@code null} not permitted).
+     * @param anchor  the anchor ({@code null} not permitted).
      * @param locationX  the x-coordinate (in Java2D space).
      * @param locationY  the y-coordinate (in Java2D space).
      *
      * @return A new and translated shape.
      */
-    public static Shape createTranslatedShape(final Shape shape,
-                                              final RectangleAnchor anchor,
-                                              final double locationX,
-                                              final double locationY) {
+    public static Shape createTranslatedShape(Shape shape, 
+            RectangleAnchor anchor, double locationX, double locationY) {
         if (shape == null) {
             throw new IllegalArgumentException("Null 'shape' argument.");
         }
         if (anchor == null) {
             throw new IllegalArgumentException("Null 'anchor' argument.");
         }
-        Point2D anchorPoint = RectangleAnchor.coordinates(
-                shape.getBounds2D(), anchor);
+        Point2D anchorPoint = anchor.getAnchorPoint(shape.getBounds2D());
         final AffineTransform transform = AffineTransform.getTranslateInstance(
                 locationX - anchorPoint.getX(), locationY - anchorPoint.getY());
         return transform.createTransformedShape(shape);
@@ -288,16 +312,15 @@ public class ShapeUtils {
     /**
      * Rotates a shape about the specified coordinates.
      *
-     * @param base  the shape (<code>null</code> permitted, returns
-     *              <code>null</code>).
+     * @param base  the shape ({@code null} permitted, returns
+     *              {@code null}).
      * @param angle  the angle (in radians).
      * @param x  the x coordinate for the rotation point (in Java2D space).
      * @param y  the y coordinate for the rotation point (in Java2D space).
      *
      * @return the rotated shape.
      */
-    public static Shape rotateShape(final Shape base, final double angle,
-                                    final float x, final float y) {
+    public static Shape rotateShape(Shape base, double angle, float x, float y) {
         if (base == null) {
             return null;
         }
@@ -308,21 +331,19 @@ public class ShapeUtils {
     }
 
     /**
-     * Draws a shape with the specified rotation about <code>(x, y)</code>.
+     * Draws a shape with the specified rotation about {@code (x, y)}.
      *
-     * @param g2  the graphics device (<code>null</code> not permitted).
-     * @param shape  the shape (<code>null</code> not permitted).
+     * @param g2  the graphics device ({@code null} not permitted).
+     * @param shape  the shape ({@code null} not permitted).
      * @param angle  the angle (in radians).
      * @param x  the x coordinate for the rotation point.
      * @param y  the y coordinate for the rotation point.
      */
-    public static void drawRotatedShape(final Graphics2D g2, final Shape shape,
-                                        final double angle,
-                                        final float x, final float y) {
+    public static void drawRotatedShape(Graphics2D g2, Shape shape, double angle,
+            float x, float y) {
 
-        final AffineTransform saved = g2.getTransform();
-        final AffineTransform rotate = AffineTransform.getRotateInstance(
-                angle, x, y);
+        AffineTransform saved = g2.getTransform();
+        AffineTransform rotate = AffineTransform.getRotateInstance(angle, x, y);
         g2.transform(rotate);
         g2.draw(shape);
         g2.setTransform(saved);
@@ -340,7 +361,7 @@ public class ShapeUtils {
      *
      * @return A diagonal cross shape.
      */
-    public static Shape createDiagonalCross(final float l, final float t) {
+    public static Shape createDiagonalCross(float l, float t) {
         final GeneralPath p0 = new GeneralPath();
         p0.moveTo(-l - t, -l + t);
         p0.lineTo(-l + t, -l - t);
@@ -366,7 +387,7 @@ public class ShapeUtils {
      *
      * @return A diagonal cross shape.
      */
-    public static Shape createRegularCross(final float l, final float t) {
+    public static Shape createRegularCross(float l, float t) {
         final GeneralPath p0 = new GeneralPath();
         p0.moveTo(-l, t);
         p0.lineTo(-t, t);
@@ -391,7 +412,7 @@ public class ShapeUtils {
      *
      * @return A diamond shape.
      */
-    public static Shape createDiamond(final float s) {
+    public static Shape createDiamond(float s) {
         final GeneralPath p0 = new GeneralPath();
         p0.moveTo(0.0f, -s);
         p0.lineTo(s, 0.0f);
@@ -408,7 +429,7 @@ public class ShapeUtils {
      *
      * @return A triangle shape.
      */
-    public static Shape createUpTriangle(final float s) {
+    public static Shape createUpTriangle(float s) {
         final GeneralPath p0 = new GeneralPath();
         p0.moveTo(0.0f, -s);
         p0.lineTo(s, s);
@@ -424,7 +445,7 @@ public class ShapeUtils {
      *
      * @return A triangle shape.
      */
-    public static Shape createDownTriangle(final float s) {
+    public static Shape createDownTriangle(float s) {
         final GeneralPath p0 = new GeneralPath();
         p0.moveTo(0.0f, s);
         p0.lineTo(s, -s);
@@ -438,12 +459,12 @@ public class ShapeUtils {
      * segment.  A typical use for this method is the creation of a
      * 'clickable' region for a line that is displayed on-screen.
      *
-     * @param line  the line (<code>null</code> not permitted).
+     * @param line  the line ({@code null} not permitted).
      * @param width  the width of the region.
      *
      * @return A region that surrounds the line.
      */
-    public static Shape createLineRegion(final Line2D line, final float width) {
+    public static Shape createLineRegion(Line2D line, float width) {
         final GeneralPath result = new GeneralPath();
         final float x1 = (float) line.getX1();
         final float x2 = (float) line.getX2();
@@ -476,15 +497,15 @@ public class ShapeUtils {
      *
      * @param x  the x-coordinate.
      * @param y  the y-coordinate.
-     * @param area  the constraining rectangle (<code>null</code> not
+     * @param area  the constraining rectangle ({@code null} not
      *              permitted).
      *
      * @return A point within the rectangle.
      *
-     * @throws NullPointerException if <code>area</code> is <code>null</code>.
+     * @throws NullPointerException if {@code area} is {@code null}.
      */
     public static Point2D getPointInRectangle(double x, double y,
-                                              final Rectangle2D area) {
+            Rectangle2D area) {
 
         x = Math.max(area.getMinX(), Math.min(x, area.getMaxX()));
         y = Math.max(area.getMinY(), Math.min(y, area.getMaxY()));
@@ -501,8 +522,7 @@ public class ShapeUtils {
      *
      * @return A boolean.
      */
-    public static boolean contains(final Rectangle2D rect1,
-                                   final Rectangle2D rect2) {
+    public static boolean contains(Rectangle2D rect1, Rectangle2D rect2) {
 
         final double x0 = rect1.getX();
         final double y0 = rect1.getY();
@@ -517,7 +537,6 @@ public class ShapeUtils {
 
     }
 
-
     /**
      * Checks, whether the given rectangle1 fully contains rectangle 2
      * (even if rectangle 2 has a height or width of zero!).
@@ -527,8 +546,7 @@ public class ShapeUtils {
      *
      * @return A boolean.
      */
-    public static boolean intersects (final Rectangle2D rect1,
-                                      final Rectangle2D rect2) {
+    public static boolean intersects(Rectangle2D rect1, Rectangle2D rect2) {
 
       final double x0 = rect1.getX();
       final double y0 = rect1.getY();
@@ -540,6 +558,21 @@ public class ShapeUtils {
       return (x + width >= x0 && y + height >= y0 && x <= x0 + rect1.getWidth()
               && y <= y0 + rect1.getHeight());
     }
-
+    
+    /**
+     * Returns {@code true} if the specified point (x, y) falls within or
+     * on the boundary of the specified rectangle.
+     *
+     * @param rect  the rectangle ({@code null} not permitted).
+     * @param x  the x-coordinate.
+     * @param y  the y-coordinate.
+     *
+     * @return A boolean.
+     */
+    public static boolean isPointInRect(Rectangle2D rect, double x, double y) {
+        return (x >= rect.getMinX() && x <= rect.getMaxX()
+                && y >= rect.getMinY() && y <= rect.getMaxY());
+    }
+ 
 }
 

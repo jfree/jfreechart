@@ -62,7 +62,7 @@ import org.jfree.chart.block.RectangleConstraint;
 import org.jfree.chart.event.TitleChangeEvent;
 import org.jfree.chart.ui.Size2D;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
 
 /**
@@ -96,7 +96,7 @@ public class CompositeTitle extends Title implements Cloneable, Serializable {
      * @param container  the container ({@code null} not permitted).
      */
     public CompositeTitle(BlockContainer container) {
-        ParamChecks.nullNotPermitted(container, "container");
+        Args.nullNotPermitted(container, "container");
         this.container = container;
         this.backgroundPaint = null;
     }
@@ -141,7 +141,7 @@ public class CompositeTitle extends Title implements Cloneable, Serializable {
      * @param container  the container ({@code null} not permitted).
      */
     public void setTitleContainer(BlockContainer container) {
-        ParamChecks.nullNotPermitted(container, "container");
+        Args.nullNotPermitted(container, "container");
         this.container = container;
     }
 

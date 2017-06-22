@@ -47,7 +47,7 @@ import java.text.DateFormat;
 import java.text.MessageFormat;
 import java.text.NumberFormat;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYZDataset;
@@ -105,7 +105,7 @@ public class StandardXYZToolTipGenerator extends StandardXYToolTipGenerator
     public StandardXYZToolTipGenerator(String formatString, 
             NumberFormat xFormat, NumberFormat yFormat, NumberFormat zFormat) {
         super(formatString, xFormat, yFormat);
-        ParamChecks.nullNotPermitted(zFormat, "zFormat");
+        Args.nullNotPermitted(zFormat, "zFormat");
         this.zFormat = zFormat;
     }
 
@@ -123,7 +123,7 @@ public class StandardXYZToolTipGenerator extends StandardXYToolTipGenerator
     public StandardXYZToolTipGenerator(String formatString, DateFormat xFormat,
             DateFormat yFormat, DateFormat zFormat) {
         super(formatString, xFormat, yFormat);
-        ParamChecks.nullNotPermitted(zFormat, "zFormat");
+        Args.nullNotPermitted(zFormat, "zFormat");
         this.zDateFormat = zFormat;
     }
 

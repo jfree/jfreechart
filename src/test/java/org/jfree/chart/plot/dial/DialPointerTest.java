@@ -48,7 +48,7 @@ import static org.junit.Assert.assertTrue;
 import java.awt.BasicStroke;
 import java.awt.Color;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -157,7 +157,7 @@ public class DialPointerTest {
     public void testSerialization() {
         // test a default instance
         DialPointer i1 = new DialPointer.Pin(1);
-        DialPointer i2 = (DialPointer) TestUtilities.serialised(i1);
+        DialPointer i2 = (DialPointer) TestUtils.serialised(i1);
         assertEquals(i1, i2);
     }
 
@@ -167,7 +167,7 @@ public class DialPointerTest {
     @Test
     public void testSerialization2() {
         DialPointer i1 = new DialPointer.Pointer(1);
-        DialPointer i2 = (DialPointer) TestUtilities.serialised(i1);
+        DialPointer i2 = (DialPointer) TestUtils.serialised(i1);
         assertEquals(i1, i2);
     }
 }

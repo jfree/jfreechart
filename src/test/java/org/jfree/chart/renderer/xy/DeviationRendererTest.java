@@ -45,7 +45,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.Test;
@@ -112,7 +112,7 @@ public class DeviationRendererTest {
     @Test
     public void testSerialization() {
         DeviationRenderer r1 = new DeviationRenderer();
-        DeviationRenderer r2 = (DeviationRenderer) TestUtilities.serialised(r1);
+        DeviationRenderer r2 = (DeviationRenderer) TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

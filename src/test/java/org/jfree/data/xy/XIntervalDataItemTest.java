@@ -44,7 +44,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -120,7 +120,7 @@ public class XIntervalDataItemTest {
     @Test
     public void testSerialization() {
         XIntervalDataItem item1 = new XIntervalDataItem(1.0, 2.0, 3.0, 4.0);
-        XIntervalDataItem item2 = (XIntervalDataItem) TestUtilities.serialised(item1);
+        XIntervalDataItem item2 = (XIntervalDataItem) TestUtils.serialised(item1);
         assertEquals(item1, item2);
     }
 

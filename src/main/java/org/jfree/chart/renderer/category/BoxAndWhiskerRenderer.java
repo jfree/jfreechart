@@ -27,7 +27,7 @@
  * --------------------------
  * BoxAndWhiskerRenderer.java
  * --------------------------
- * (C) Copyright 2003-2016, by David Browning and Contributors.
+ * (C) Copyright 2003-2017, by David Browning and Contributors.
  *
  * Original Author:  David Browning (for the Australian Institute of Marine
  *                   Science);
@@ -122,7 +122,7 @@ import org.jfree.chart.renderer.OutlierList;
 import org.jfree.chart.renderer.OutlierListCollection;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.Range;
@@ -194,7 +194,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      * Default constructor.
      */
     public BoxAndWhiskerRenderer() {
-        this.artifactPaint = Color.black;
+        this.artifactPaint = Color.BLACK;
         this.fillBox = true;
         this.itemMargin = 0.20;
         this.maximumBarWidth = 1.0;
@@ -226,7 +226,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      * @see #getArtifactPaint()
      */
     public void setArtifactPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.artifactPaint = paint;
         fireChangeEvent();
     }

@@ -51,7 +51,7 @@ import java.awt.image.BufferedImage;
 import java.util.List;
 
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.annotations.XYTextAnnotation;
 import org.jfree.chart.axis.AxisLocation;
 import org.jfree.chart.axis.NumberAxis;
@@ -128,7 +128,7 @@ public class CombinedRangeXYPlotTest implements ChartChangeListener {
     public void testSerialization() {
         CombinedRangeXYPlot plot1 = createPlot();
         CombinedRangeXYPlot plot2 = (CombinedRangeXYPlot) 
-                TestUtilities.serialised(plot1);
+                TestUtils.serialised(plot1);
         assertEquals(plot1, plot2);
     }
 

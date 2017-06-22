@@ -50,7 +50,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.xy.XYSeries;
@@ -175,7 +175,7 @@ public class BubbleXYItemLabelGeneratorTest {
     public void testSerialization() {
         BubbleXYItemLabelGenerator g1 = new BubbleXYItemLabelGenerator();
         BubbleXYItemLabelGenerator g2 = (BubbleXYItemLabelGenerator) 
-                TestUtilities.serialised(g1);
+                TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

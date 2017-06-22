@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------
  * StandardDialFrame.java
  * ----------------------
- * (C) Copyright 2006-2016, by Object Refinery Limited.
+ * (C) Copyright 2006-2017, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -57,9 +57,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-import org.jfree.chart.HashUtilities;
+import org.jfree.chart.HashUtils;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 
@@ -99,8 +99,8 @@ public class StandardDialFrame extends AbstractDialLayer implements DialFrame,
      * Creates a new instance of {@code StandardDialFrame}.
      */
     public StandardDialFrame() {
-        this.backgroundPaint = Color.gray;
-        this.foregroundPaint = Color.black;
+        this.backgroundPaint = Color.GRAY;
+        this.foregroundPaint = Color.BLACK;
         this.stroke = new BasicStroke(2.0f);
         this.radius = 0.95;
     }
@@ -153,7 +153,7 @@ public class StandardDialFrame extends AbstractDialLayer implements DialFrame,
      * @see #getBackgroundPaint()
      */
     public void setBackgroundPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.backgroundPaint = paint;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -178,7 +178,7 @@ public class StandardDialFrame extends AbstractDialLayer implements DialFrame,
      * @see #getForegroundPaint()
      */
     public void setForegroundPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.foregroundPaint = paint;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -203,7 +203,7 @@ public class StandardDialFrame extends AbstractDialLayer implements DialFrame,
      * @see #getStroke()
      */
     public void setStroke(Stroke stroke) {
-        ParamChecks.nullNotPermitted(stroke, "stroke");
+        Args.nullNotPermitted(stroke, "stroke");
         this.stroke = stroke;
         notifyListeners(new DialLayerChangeEvent(this));
     }
@@ -308,9 +308,9 @@ public class StandardDialFrame extends AbstractDialLayer implements DialFrame,
         int result = 193;
         long temp = Double.doubleToLongBits(this.radius);
         result = 37 * result + (int) (temp ^ (temp >>> 32));
-        result = 37 * result + HashUtilities.hashCodeForPaint(
+        result = 37 * result + HashUtils.hashCodeForPaint(
                 this.backgroundPaint);
-        result = 37 * result + HashUtilities.hashCodeForPaint(
+        result = 37 * result + HashUtils.hashCodeForPaint(
                 this.foregroundPaint);
         result = 37 * result + this.stroke.hashCode();
         return result;

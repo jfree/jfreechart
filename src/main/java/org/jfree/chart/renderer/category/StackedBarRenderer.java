@@ -110,10 +110,10 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.util.PublicCloneable;
-import org.jfree.data.DataUtilities;
+import org.jfree.data.DataUtils;
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
-import org.jfree.data.general.DatasetUtilities;
+import org.jfree.data.general.DatasetUtils;
 
 /**
  * A stacked bar renderer for use with the {@link CategoryPlot} class.
@@ -221,7 +221,7 @@ public class StackedBarRenderer extends BarRenderer
             return new Range(0.0, 1.0);
         }
         else {
-            return DatasetUtilities.findStackedRangeBounds(dataset, getBase());
+            return DatasetUtils.findStackedRangeBounds(dataset, getBase());
         }
     }
 
@@ -302,7 +302,7 @@ public class StackedBarRenderer extends BarRenderer
         double value = dataValue.doubleValue();
         double total = 0.0;  // only needed if calculating percentages
         if (this.renderAsPercentages) {
-            total = DataUtilities.calculateColumnTotal(dataset, column,
+            total = DataUtils.calculateColumnTotal(dataset, column,
                     state.getVisibleSeriesArray());
             value = value / total;
         }

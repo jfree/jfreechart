@@ -48,7 +48,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.Date;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -98,7 +98,7 @@ public class SimpleTimePeriodTest {
     public void testSerialization() {
         SimpleTimePeriod p1 = new SimpleTimePeriod(new Date(1000L),
                 new Date(1001L));
-        SimpleTimePeriod p2 = (SimpleTimePeriod) TestUtilities.serialised(p1);
+        SimpleTimePeriod p2 = (SimpleTimePeriod) TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 

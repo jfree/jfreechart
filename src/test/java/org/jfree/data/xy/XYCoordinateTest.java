@@ -44,7 +44,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -102,7 +102,7 @@ public class XYCoordinateTest {
     @Test
     public void testSerialization() {
         XYCoordinate v1 = new XYCoordinate(1.0, 2.0);
-        XYCoordinate v2 = (XYCoordinate) TestUtilities.serialised(v1);
+        XYCoordinate v2 = (XYCoordinate) TestUtils.serialised(v1);
         assertEquals(v1, v2);
     }
 

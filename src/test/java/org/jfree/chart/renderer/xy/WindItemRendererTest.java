@@ -44,7 +44,7 @@ package org.jfree.chart.renderer.xy;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.Test;
@@ -104,7 +104,7 @@ public class WindItemRendererTest {
     @Test
     public void testSerialization() {
         WindItemRenderer r1 = new WindItemRenderer();
-        WindItemRenderer r2 = (WindItemRenderer) TestUtilities.serialised(r1);
+        WindItemRenderer r2 = (WindItemRenderer) TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

@@ -49,7 +49,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertNotNull;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 
 import org.jfree.data.general.SeriesChangeEvent;
 import org.jfree.data.general.SeriesChangeListener;
@@ -143,7 +143,7 @@ public class OHLCSeriesTest implements SeriesChangeListener {
     public void testSerialization() {
         OHLCSeries s1 = new OHLCSeries("s1");
         s1.add(new Year(2006), 2.0, 4.0, 1.0, 3.0);
-        OHLCSeries s2 = (OHLCSeries) TestUtilities.serialised(s1);
+        OHLCSeries s2 = (OHLCSeries) TestUtils.serialised(s1);
         assertEquals(s1, s2);
     }
 

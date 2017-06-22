@@ -46,7 +46,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.awt.geom.Rectangle2D;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.junit.Test;
@@ -118,7 +118,7 @@ public class CategoryItemEntityTest {
         d.addValue(4.0, "R2", "C2");
         CategoryItemEntity e1 = new CategoryItemEntity(new Rectangle2D.Double(
                 1.0, 2.0, 3.0, 4.0), "ToolTip", "URL", d, "R2", "C2");
-        CategoryItemEntity e2 = (CategoryItemEntity) TestUtilities.serialised(e1);
+        CategoryItemEntity e2 = (CategoryItemEntity) TestUtils.serialised(e1);
         assertEquals(e1, e2);
     }
 

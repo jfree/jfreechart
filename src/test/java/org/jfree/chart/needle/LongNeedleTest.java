@@ -42,7 +42,7 @@ package org.jfree.chart.needle;
 
 import static org.junit.Assert.assertTrue;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -79,7 +79,7 @@ public class LongNeedleTest {
     @Test
     public void testSerialization() {
         LongNeedle n1 = new LongNeedle();
-        LongNeedle n2 = (LongNeedle) TestUtilities.serialised(n1);
+        LongNeedle n2 = (LongNeedle) TestUtils.serialised(n1);
         assertTrue(n1.equals(n2));
     }
 

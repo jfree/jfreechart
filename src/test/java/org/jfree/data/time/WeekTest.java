@@ -61,7 +61,7 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -156,7 +156,7 @@ public class WeekTest {
     @Test
     public void testSerialization() {
         Week w1 = new Week(24, 1999);
-        Week w2 = (Week) TestUtilities.serialised(w1);
+        Week w2 = (Week) TestUtils.serialised(w1);
         assertEquals(w1, w2);
     }
 

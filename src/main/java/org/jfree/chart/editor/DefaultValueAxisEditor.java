@@ -129,7 +129,7 @@ class DefaultValueAxisEditor extends DefaultAxisEditor
         this.maximumValue = axis.getUpperBound();
         this.autoTickUnitSelection = axis.isAutoTickUnitSelection();
 
-        this.gridPaintSample = new PaintSample(Color.blue);
+        this.gridPaintSample = new PaintSample(Color.BLUE);
         this.gridStrokeSample = new StrokeSample(new BasicStroke(1.0f));
 
         this.availableStrokeSamples = new StrokeSample[3];
@@ -312,7 +312,7 @@ class DefaultValueAxisEditor extends DefaultAxisEditor
     protected void attemptGridPaintSelection() {
         Color c;
         c = JColorChooser.showDialog(this, localizationResources.getString(
-                "Grid_Color"), Color.blue);
+                "Grid_Color"), Color.BLUE);
         if (c != null) {
             this.gridPaintSample.setPaint(c);
         }

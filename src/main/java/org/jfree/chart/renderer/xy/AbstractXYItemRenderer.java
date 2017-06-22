@@ -176,7 +176,7 @@ import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.ValueMarker;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.AbstractRenderer;
-import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.GradientPaintTransformer;
 import org.jfree.chart.ui.Layer;
 import org.jfree.chart.ui.LengthAdjustmentType;
@@ -185,11 +185,10 @@ import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.urls.XYURLGenerator;
 import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
-import org.jfree.chart.util.TextUtils;
 import org.jfree.data.Range;
-import org.jfree.data.general.DatasetUtilities;
+import org.jfree.data.general.DatasetUtils;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYItemKey;
 
@@ -526,7 +525,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      */
     @Override
     public void addAnnotation(XYAnnotation annotation, Layer layer) {
-        ParamChecks.nullNotPermitted(annotation, "annotation");
+        Args.nullNotPermitted(annotation, "annotation");
         if (layer.equals(Layer.FOREGROUND)) {
             this.foregroundAnnotations.add(annotation);
             annotation.addChangeListener(this);
@@ -633,7 +632,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      */
     @Override
     public void setLegendItemLabelGenerator(XYSeriesLabelGenerator generator) {
-        ParamChecks.nullNotPermitted(generator, "generator");
+        Args.nullNotPermitted(generator, "generator");
         this.legendItemLabelGenerator = generator;
         fireChangeEvent();
     }
@@ -728,10 +727,10 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
                     visibleSeriesKeys.add(dataset.getSeriesKey(s));
                 }
             }
-            return DatasetUtilities.findDomainBounds(dataset,
+            return DatasetUtils.findDomainBounds(dataset,
                     visibleSeriesKeys, includeInterval);
         }
-        return DatasetUtilities.findDomainBounds(dataset, includeInterval);
+        return DatasetUtils.findDomainBounds(dataset, includeInterval);
     }
 
     /**
@@ -793,10 +792,10 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
                 xRange = new Range(Double.NEGATIVE_INFINITY,
                         Double.POSITIVE_INFINITY);
             }
-            return DatasetUtilities.findRangeBounds(dataset,
+            return DatasetUtils.findRangeBounds(dataset,
                     visibleSeriesKeys, xRange, includeInterval);
         }
-        return DatasetUtilities.findRangeBounds(dataset, includeInterval);
+        return DatasetUtils.findRangeBounds(dataset, includeInterval);
     }
 
     /**
@@ -961,49 +960,6 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
             g2.fill(band);
         }
 
-    }
-
-    /**
-     * Draws a grid line against the range axis.
-     *
-     * @param g2  the graphics device.
-     * @param plot  the plot.
-     * @param axis  the value axis.
-     * @param dataArea  the area for plotting data (not yet adjusted for any
-     *                  3D effect).
-     * @param value  the value at which the grid line should be drawn.
-     */
-    @Override
-    public void drawDomainLine(Graphics2D g2, XYPlot plot, ValueAxis axis,
-            Rectangle2D dataArea, double value) {
-
-        Range range = axis.getRange();
-        if (!range.contains(value)) {
-            return;
-        }
-
-        PlotOrientation orientation = plot.getOrientation();
-        double v = axis.valueToJava2D(value, dataArea,
-                plot.getDomainAxisEdge());
-        Line2D line = null;
-        if (orientation == PlotOrientation.HORIZONTAL) {
-            line = new Line2D.Double(dataArea.getMinX(), v,
-                    dataArea.getMaxX(), v);
-        }
-        else if (orientation == PlotOrientation.VERTICAL) {
-            line = new Line2D.Double(v, dataArea.getMinY(), v,
-                    dataArea.getMaxY());
-        }
-
-        Paint paint = plot.getDomainGridlinePaint();
-        Stroke stroke = plot.getDomainGridlineStroke();
-        g2.setPaint(paint != null ? paint : Plot.DEFAULT_OUTLINE_PAINT);
-        g2.setStroke(stroke != null ? stroke : Plot.DEFAULT_OUTLINE_STROKE);
-        Object saved = g2.getRenderingHint(RenderingHints.KEY_STROKE_CONTROL);
-        g2.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, 
-                RenderingHints.VALUE_STROKE_NORMALIZE);
-        g2.draw(line);
-        g2.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, saved);
     }
 
     /**
@@ -1251,7 +1207,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
                 g2.setPaint(marker.getLabelBackgroundColor());
                 g2.fill(r);
                 g2.setPaint(marker.getLabelPaint());
-                TextUtilities.drawAlignedString(label, g2,
+                TextUtils.drawAlignedString(label, g2,
                         (float) coords.getX(), (float) coords.getY(),
                         marker.getLabelTextAnchor());
             }
@@ -1286,7 +1242,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
             anchorRect = markerOffset.createAdjustedRectangle(markerArea,
                     labelOffsetType, LengthAdjustmentType.CONTRACT);
         }
-        return RectangleAnchor.coordinates(anchorRect, anchor);
+        return anchor.getAnchorPoint(anchorRect);
 
     }
 
@@ -1348,7 +1304,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
                 g2.setPaint(marker.getLabelBackgroundColor());
                 g2.fill(r);
                 g2.setPaint(marker.getLabelPaint());
-                TextUtilities.drawAlignedString(label, g2,
+                TextUtils.drawAlignedString(label, g2,
                         (float) coords.getX(), (float) coords.getY(),
                         marker.getLabelTextAnchor());
             }
@@ -1451,7 +1407,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
                 g2.setPaint(marker.getLabelBackgroundColor());
                 g2.fill(r);
                 g2.setPaint(marker.getLabelPaint());
-                TextUtilities.drawAlignedString(label, g2,
+                TextUtils.drawAlignedString(label, g2,
                         (float) coords.getX(), (float) coords.getY(),
                         marker.getLabelTextAnchor());
             }
@@ -1486,7 +1442,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
             anchorRect = markerOffset.createAdjustedRectangle(markerArea,
                     LengthAdjustmentType.CONTRACT, labelOffsetForRange);
         }
-        return RectangleAnchor.coordinates(anchorRect, anchor);
+        return anchor.getAnchorPoint(anchorRect);
 
     }
 
@@ -1630,7 +1586,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
             double x, double y, int datasetIndex,
             double transX, double transY, PlotOrientation orientation) {
 
-        ParamChecks.nullNotPermitted(orientation, "orientation");
+        Args.nullNotPermitted(orientation, "orientation");
         if (crosshairState != null) {
             // do we need to update the crosshair values?
             if (this.plot.isDomainCrosshairLockedOnData()) {
@@ -1691,7 +1647,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
             // work out the label anchor point...
             Point2D anchorPoint = calculateLabelAnchorPoint(
                     position.getItemLabelAnchor(), x, y, orientation);
-            TextUtilities.drawRotatedString(label, g2,
+            TextUtils.drawRotatedString(label, g2,
                     (float) anchorPoint.getX(), (float) anchorPoint.getY(),
                     position.getTextAnchor(), position.getAngle(),
                     position.getRotationAnchor());
@@ -1778,25 +1734,6 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
         XYItemEntity entity = new XYItemEntity(hotspot, dataset, series, item,
                 tip, url);
         entities.add(entity);
-    }
-
-    /**
-     * Returns {@code true} if the specified point (x, y) falls within or
-     * on the boundary of the specified rectangle.
-     *
-     * @param rect  the rectangle ({@code null} not permitted).
-     * @param x  the x-coordinate.
-     * @param y  the y-coordinate.
-     *
-     * @return A boolean.
-     *
-     * @since 1.0.10
-     */
-    public static boolean isPointInRect(Rectangle2D rect, double x, double y) {
-        // TODO: For JFreeChart 1.2.0, this method should go in the
-        //       ShapeUtilities class
-        return (x >= rect.getMinX() && x <= rect.getMaxX()
-                && y >= rect.getMinY() && y <= rect.getMaxY());
     }
 
     /**

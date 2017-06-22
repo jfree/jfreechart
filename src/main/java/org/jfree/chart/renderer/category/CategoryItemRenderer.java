@@ -28,7 +28,7 @@
  * CategoryItemRenderer.java
  * -------------------------
  *
- * (C) Copyright 2001-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2001-2017, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Mark Watson (www.markwatson.com);
@@ -1360,12 +1360,8 @@ public interface CategoryItemRenderer extends LegendItemSource {
      *
      * @param g2  the graphics device.
      * @param plot  the plot.
-     * @param dataArea  the area for plotting data (not yet adjusted for any
-     *                  3D effect).
+     * @param dataArea  the area for plotting data.
      * @param value  the value.
-     *
-     * @see #drawRangeGridline(Graphics2D, CategoryPlot, ValueAxis,
-     *     Rectangle2D, double)
      */
     public void drawDomainGridline(Graphics2D g2, CategoryPlot plot,
             Rectangle2D dataArea, double value);
@@ -1376,14 +1372,13 @@ public interface CategoryItemRenderer extends LegendItemSource {
      * @param g2  the graphics device.
      * @param plot  the plot.
      * @param axis  the value axis.
-     * @param dataArea  the area for plotting data (not yet adjusted for any
-     *                  3D effect).
+     * @param dataArea  the area for plotting data.
      * @param value  the value.
-     *
-     * @see #drawDomainGridline(Graphics2D, CategoryPlot, Rectangle2D, double)
+     * @param paint  the paint ({@code null} not permitted).
+     * @param stroke  the line stroke ({@code null} not permitted).
      */
-    public void drawRangeGridline(Graphics2D g2, CategoryPlot plot,
-            ValueAxis axis, Rectangle2D dataArea, double value);
+    public void drawRangeLine(Graphics2D g2, CategoryPlot plot, ValueAxis axis,
+            Rectangle2D dataArea, double value, Paint paint, Stroke stroke);
 
     /**
      * Draws a line (or some other marker) to indicate a particular category on
@@ -1393,7 +1388,7 @@ public interface CategoryItemRenderer extends LegendItemSource {
      * @param plot  the plot.
      * @param axis  the category axis.
      * @param marker  the marker.
-     * @param dataArea  the area for plotting data (not including 3D effect).
+     * @param dataArea  the area for plotting data.
      *
      * @see #drawRangeMarker(Graphics2D, CategoryPlot, ValueAxis, Marker,
      *     Rectangle2D)
@@ -1409,7 +1404,7 @@ public interface CategoryItemRenderer extends LegendItemSource {
      * @param plot  the plot.
      * @param axis  the value axis.
      * @param marker  the marker.
-     * @param dataArea  the area for plotting data (not including 3D effect).
+     * @param dataArea  the area for plotting data.
      *
      * @see #drawDomainMarker(Graphics2D, CategoryPlot, CategoryAxis,
      *     CategoryMarker, Rectangle2D)

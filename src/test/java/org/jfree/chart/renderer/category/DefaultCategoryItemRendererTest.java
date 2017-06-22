@@ -45,7 +45,7 @@ package org.jfree.chart.renderer.category;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.Test;
@@ -107,7 +107,7 @@ public class DefaultCategoryItemRendererTest {
     public void testSerialization() {
         DefaultCategoryItemRenderer r1 = new DefaultCategoryItemRenderer();
         DefaultCategoryItemRenderer r2 = (DefaultCategoryItemRenderer) 
-                TestUtilities.serialised(r1);
+                TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

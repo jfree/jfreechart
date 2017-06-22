@@ -50,7 +50,7 @@ import static org.junit.Assert.assertFalse;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.LegendItem;
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.annotations.XYTextAnnotation;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.labels.IntervalXYItemLabelGenerator;
@@ -210,7 +210,7 @@ public class YIntervalRendererTest {
     @Test
     public void testSerialization() {
         YIntervalRenderer r1 = new YIntervalRenderer();
-        YIntervalRenderer r2 = (YIntervalRenderer) TestUtilities.serialised(r1);
+        YIntervalRenderer r2 = (YIntervalRenderer) TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

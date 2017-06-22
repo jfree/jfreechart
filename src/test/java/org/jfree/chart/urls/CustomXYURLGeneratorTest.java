@@ -49,7 +49,7 @@ import static org.junit.Assert.assertFalse;
 
 import java.util.List;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.Test;
@@ -134,7 +134,7 @@ public class CustomXYURLGeneratorTest {
         g1.addURLSeries(u1);
         g1.addURLSeries(u2);
         CustomXYURLGenerator g2 = (CustomXYURLGenerator) 
-                TestUtilities.serialised(g1);
+                TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

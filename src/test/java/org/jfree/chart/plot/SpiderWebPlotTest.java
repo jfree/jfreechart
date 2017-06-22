@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------
  * SpiderWebPlotTest.java
  * ----------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2017, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -61,7 +61,7 @@ import java.text.DecimalFormat;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.LegendItemCollection;
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
 import org.jfree.chart.labels.StandardCategoryToolTipGenerator;
 import org.jfree.chart.urls.StandardCategoryURLGenerator;
@@ -128,51 +128,51 @@ public class SpiderWebPlotTest {
         assertTrue(p1.equals(p2));
 
         // seriesPaint
-        p1.setSeriesPaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.white));
+        p1.setSeriesPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.WHITE));
         assertFalse(p1.equals(p2));
-        p2.setSeriesPaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.white));
+        p2.setSeriesPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.WHITE));
         assertTrue(p1.equals(p2));
 
         // seriesPaintList
-        p1.setSeriesPaint(1, new GradientPaint(1.0f, 2.0f, Color.yellow,
-                3.0f, 4.0f, Color.white));
+        p1.setSeriesPaint(1, new GradientPaint(1.0f, 2.0f, Color.YELLOW,
+                3.0f, 4.0f, Color.WHITE));
         assertFalse(p1.equals(p2));
-        p2.setSeriesPaint(1, new GradientPaint(1.0f, 2.0f, Color.yellow,
-                3.0f, 4.0f, Color.white));
+        p2.setSeriesPaint(1, new GradientPaint(1.0f, 2.0f, Color.YELLOW,
+                3.0f, 4.0f, Color.WHITE));
         assertTrue(p1.equals(p2));
 
         // baseSeriesPaint
-        p1.setBaseSeriesPaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.black));
+        p1.setBaseSeriesPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.BLACK));
         assertFalse(p1.equals(p2));
-        p2.setBaseSeriesPaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.black));
+        p2.setBaseSeriesPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.BLACK));
         assertTrue(p1.equals(p2));
 
         // seriesOutlinePaint
-        p1.setSeriesOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.blue,
-                3.0f, 4.0f, Color.black));
+        p1.setSeriesOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
+                3.0f, 4.0f, Color.BLACK));
         assertFalse(p1.equals(p2));
-        p2.setSeriesOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.blue,
-                3.0f, 4.0f, Color.black));
+        p2.setSeriesOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
+                3.0f, 4.0f, Color.BLACK));
         assertTrue(p1.equals(p2));
 
         // seriesOutlinePaintList
-        p1.setSeriesOutlinePaint(1, new GradientPaint(1.0f, 2.0f, Color.blue,
-                3.0f, 4.0f, Color.green));
+        p1.setSeriesOutlinePaint(1, new GradientPaint(1.0f, 2.0f, Color.BLUE,
+                3.0f, 4.0f, Color.GREEN));
         assertFalse(p1.equals(p2));
-        p2.setSeriesOutlinePaint(1, new GradientPaint(1.0f, 2.0f, Color.blue,
-                3.0f, 4.0f, Color.green));
+        p2.setSeriesOutlinePaint(1, new GradientPaint(1.0f, 2.0f, Color.BLUE,
+                3.0f, 4.0f, Color.GREEN));
         assertTrue(p1.equals(p2));
 
         // baseSeriesOutlinePaint
-        p1.setBaseSeriesOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.cyan,
-                3.0f, 4.0f, Color.green));
+        p1.setBaseSeriesOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.CYAN,
+                3.0f, 4.0f, Color.GREEN));
         assertFalse(p1.equals(p2));
-        p2.setBaseSeriesOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.cyan,
-                3.0f, 4.0f, Color.green));
+        p2.setBaseSeriesOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.CYAN,
+                3.0f, 4.0f, Color.GREEN));
         assertTrue(p1.equals(p2));
 
         // seriesOutlineStroke
@@ -213,11 +213,11 @@ public class SpiderWebPlotTest {
         assertTrue(p1.equals(p2));
 
         // labelPaint
-        p1.setLabelPaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.blue));
+        p1.setLabelPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.BLUE));
         assertFalse(p1.equals(p2));
-        p2.setLabelPaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.blue));
+        p2.setLabelPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.BLUE));
         assertTrue(p1.equals(p2));
 
         // labelGenerator
@@ -241,9 +241,9 @@ public class SpiderWebPlotTest {
         assertTrue(p1.equals(p2));
 
         // axisLinePaint
-        p1.setAxisLinePaint(Color.red);
+        p1.setAxisLinePaint(Color.RED);
         assertFalse(p1.equals(p2));
-        p2.setAxisLinePaint(Color.red);
+        p2.setAxisLinePaint(Color.RED);
         assertTrue(p1.equals(p2));
 
         // axisLineStroke
@@ -273,15 +273,15 @@ public class SpiderWebPlotTest {
         assertTrue(p1.equals(p2));
 
         // change a series paint
-        p1.setSeriesPaint(1, Color.black);
+        p1.setSeriesPaint(1, Color.BLACK);
         assertFalse(p1.equals(p2));
-        p2.setSeriesPaint(1, Color.black);
+        p2.setSeriesPaint(1, Color.BLACK);
         assertTrue(p1.equals(p2));
 
         // change a series outline paint
-        p1.setSeriesOutlinePaint(0, Color.red);
+        p1.setSeriesOutlinePaint(0, Color.RED);
         assertFalse(p1.equals(p2));
-        p2.setSeriesOutlinePaint(0, Color.red);
+        p2.setSeriesOutlinePaint(0, Color.RED);
         assertTrue(p1.equals(p2));
 
         // change a series outline stroke
@@ -298,7 +298,7 @@ public class SpiderWebPlotTest {
     @Test
     public void testSerialization() {
         SpiderWebPlot p1 = new SpiderWebPlot(new DefaultCategoryDataset());
-        SpiderWebPlot p2 = (SpiderWebPlot) TestUtilities.serialised(p1);
+        SpiderWebPlot p2 = (SpiderWebPlot) TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 

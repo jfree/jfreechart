@@ -52,7 +52,7 @@ import java.awt.Color;
 import java.awt.GradientPaint;
 
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.CategoryPlot;
@@ -79,11 +79,11 @@ public class MinMaxCategoryRendererTest {
         r2.setDrawLines(true);
         assertTrue(r1.equals(r2));
 
-        r1.setGroupPaint(new GradientPaint(1.0f, 2.0f, Color.red, 3.0f, 4.0f,
-                Color.yellow));
+        r1.setGroupPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f,
+                Color.YELLOW));
         assertFalse(r1.equals(r2));
-        r2.setGroupPaint(new GradientPaint(1.0f, 2.0f, Color.red, 3.0f, 4.0f,
-                Color.yellow));
+        r2.setGroupPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f,
+                Color.YELLOW));
         assertTrue(r1.equals(r2));
 
         r1.setGroupStroke(new BasicStroke(1.2f));
@@ -133,7 +133,7 @@ public class MinMaxCategoryRendererTest {
     public void testSerialization() {
         MinMaxCategoryRenderer r1 = new MinMaxCategoryRenderer();
         MinMaxCategoryRenderer r2 = (MinMaxCategoryRenderer) 
-                TestUtilities.serialised(r1);
+                TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

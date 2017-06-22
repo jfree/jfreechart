@@ -47,7 +47,7 @@ import static org.junit.Assert.assertTrue;
 import java.awt.Color;
 import java.awt.Font;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -75,14 +75,14 @@ public class DateTitleTest {
         t2.setFont(f);
         assertTrue(t1.equals(t2));
 
-        t1.setPaint(Color.blue);
+        t1.setPaint(Color.BLUE);
         assertFalse(t1.equals(t2));
-        t2.setPaint(Color.blue);
+        t2.setPaint(Color.BLUE);
         assertTrue(t1.equals(t2));
 
-        t1.setBackgroundPaint(Color.blue);
+        t1.setBackgroundPaint(Color.BLUE);
         assertFalse(t1.equals(t2));
-        t2.setBackgroundPaint(Color.blue);
+        t2.setBackgroundPaint(Color.BLUE);
         assertTrue(t1.equals(t2));
 
     }
@@ -118,7 +118,7 @@ public class DateTitleTest {
     @Test
     public void testSerialization() {
         DateTitle t1 = new DateTitle();
-        DateTitle t2 = (DateTitle) TestUtilities.serialised(t1);
+        DateTitle t2 = (DateTitle) TestUtils.serialised(t1);
         assertEquals(t1, t2);
     }
 

@@ -51,7 +51,7 @@ package org.jfree.data.time;
 
 import java.io.Serializable;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 
 /**
  * Represents one data item in a time series.
@@ -96,7 +96,7 @@ public class TimeSeriesDataItem implements Cloneable, Comparable, Serializable {
      * @param value  the value ({@code null} permitted).
      */
     public TimeSeriesDataItem(RegularTimePeriod period, Number value) {
-        ParamChecks.nullNotPermitted(period, "period");
+        Args.nullNotPermitted(period, "period");
         this.period = period;
         this.value = value;
     }

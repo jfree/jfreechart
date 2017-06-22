@@ -47,7 +47,7 @@ import static org.junit.Assert.assertTrue;
 import java.awt.Color;
 import java.awt.GradientPaint;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -77,11 +77,11 @@ public class StandardDialRangeTest {
         assertTrue(r1.equals(r2));
 
         // paint
-        r1.setPaint(new GradientPaint(1.0f, 2.0f, Color.red, 3.0f, 4.0f,
-                Color.blue));
+        r1.setPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f,
+                Color.BLUE));
         assertFalse(r1.equals(r2));
-        r2.setPaint(new GradientPaint(1.0f, 2.0f, Color.red, 3.0f, 4.0f,
-                Color.blue));
+        r2.setPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f,
+                Color.BLUE));
         assertTrue(r1.equals(r2));
 
         // check an inherited attribute
@@ -128,7 +128,7 @@ public class StandardDialRangeTest {
     @Test
     public void testSerialization() {
         StandardDialRange r1 = new StandardDialRange();
-        StandardDialRange r2 = (StandardDialRange) TestUtilities.serialised(r1);
+        StandardDialRange r2 = (StandardDialRange) TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

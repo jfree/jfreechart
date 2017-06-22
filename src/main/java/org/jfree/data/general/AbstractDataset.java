@@ -71,7 +71,7 @@ import java.util.EventListener;
 import java.util.List;
 
 import javax.swing.event.EventListenerList;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 
 /**
  * An abstract implementation of the {@link Dataset} interface, containing a
@@ -126,7 +126,7 @@ public abstract class AbstractDataset implements Dataset, Cloneable,
      */
     @Override
     public void setGroup(DatasetGroup group) {
-        ParamChecks.nullNotPermitted(group, "group");
+        Args.nullNotPermitted(group, "group");
         this.group = group;
     }
 

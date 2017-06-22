@@ -1,3 +1,31 @@
+/* ===========================================================
+ * JFreeChart : a free chart library for the Java(tm) platform
+ * ===========================================================
+ *
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ *
+ * Project Info:  http://www.jfree.org/jfreechart/index.html
+ *
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
+ * (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+ * License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
+ *
+ * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
+ * Other names may be trademarks of their respective owners.]
+ *
+ */
+
 package org.jfree.chart.util;
 
 import java.awt.Shape;
@@ -24,7 +52,7 @@ public class ShapeList extends AbstractObjectList {
      *
      * @return The object.
      */
-    public Shape getShape(final int index) {
+    public Shape getShape(int index) {
         return (Shape) get(index);
     }
 
@@ -35,7 +63,7 @@ public class ShapeList extends AbstractObjectList {
      * @param index  the index (zero-based).
      * @param shape  the {@link Shape}.
      */
-    public void setShape(final int index, final Shape shape) {
+    public void setShape(int index, Shape shape) {
         set(index, shape);
     }
 
@@ -54,7 +82,7 @@ public class ShapeList extends AbstractObjectList {
     /**
      * Tests the list for equality with another object (typically also a list).
      *
-     * @param obj  the other object (<code>null</code> permitted).
+     * @param obj  the other object ({@code null} permitted).
      *
      * @return A boolean.
      */
@@ -82,6 +110,7 @@ public class ShapeList extends AbstractObjectList {
      *
      * @return the hashcode
      */
+    @Override
     public int hashCode() {
         return super.hashCode();
     }
@@ -93,7 +122,7 @@ public class ShapeList extends AbstractObjectList {
      *
      * @throws IOException  if there is an I/O error.
      */
-    private void writeObject(final ObjectOutputStream stream) throws IOException {
+    private void writeObject(ObjectOutputStream stream) throws IOException {
 
         stream.defaultWriteObject();
         final int count = size();
@@ -119,7 +148,7 @@ public class ShapeList extends AbstractObjectList {
      * @throws IOException  if there is an I/O error.
      * @throws ClassNotFoundException  if there is a classpath problem.
      */
-    private void readObject(final ObjectInputStream stream) throws IOException, ClassNotFoundException {
+    private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
 
         stream.defaultReadObject();
         final int count = stream.readInt();

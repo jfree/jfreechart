@@ -47,7 +47,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.text.SimpleDateFormat;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.xy.DefaultXYDataset;
@@ -123,7 +123,7 @@ public class TimeSeriesURLGeneratorTest {
     public void testSerialization() {
         TimeSeriesURLGenerator g1 = new TimeSeriesURLGenerator();
         TimeSeriesURLGenerator g2 = (TimeSeriesURLGenerator) 
-                TestUtilities.serialised(g1);
+                TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

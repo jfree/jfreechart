@@ -57,7 +57,7 @@ import org.jfree.chart.util.StrokeList;
  * 
  * @since 1.0.3
  */
-public class HashUtilities {
+public class HashUtils {
     
     /**
      * Returns a hash code for a {@code Paint} instance.  If 
@@ -252,17 +252,17 @@ public class HashUtilities {
         }
         int result = 127;
         int size = list.size();
-        result = HashUtilities.hashCode(result, size);
+        result = HashUtils.hashCode(result, size);
         
         // for efficiency, we just use the first, last and middle items to
         // compute a hashCode...
         if (size > 0) {
-            result = HashUtilities.hashCode(result, list.getBoolean(0));
+            result = HashUtils.hashCode(result, list.getBoolean(0));
             if (size > 1) {
-                result = HashUtilities.hashCode(result, 
+                result = HashUtils.hashCode(result, 
                         list.getBoolean(size - 1));
                 if (size > 2) {
-                    result = HashUtilities.hashCode(result, 
+                    result = HashUtils.hashCode(result, 
                             list.getBoolean(size / 2));
                 }
             }
@@ -289,17 +289,17 @@ public class HashUtilities {
         }
         int result = 127;
         int size = list.size();
-        result = HashUtilities.hashCode(result, size);
+        result = HashUtils.hashCode(result, size);
         
         // for efficiency, we just use the first, last and middle items to
         // compute a hashCode...
         if (size > 0) {
-            result = HashUtilities.hashCode(result, list.getPaint(0));
+            result = HashUtils.hashCode(result, list.getPaint(0));
             if (size > 1) {
-                result = HashUtilities.hashCode(result, 
+                result = HashUtils.hashCode(result, 
                         list.getPaint(size - 1));
                 if (size > 2) {
-                    result = HashUtilities.hashCode(result, 
+                    result = HashUtils.hashCode(result, 
                             list.getPaint(size / 2));
                 }
             }
@@ -326,17 +326,17 @@ public class HashUtilities {
         }
         int result = 127;
         int size = list.size();
-        result = HashUtilities.hashCode(result, size);
+        result = HashUtils.hashCode(result, size);
         
         // for efficiency, we just use the first, last and middle items to
         // compute a hashCode...
         if (size > 0) {
-            result = HashUtilities.hashCode(result, list.getStroke(0));
+            result = HashUtils.hashCode(result, list.getStroke(0));
             if (size > 1) {
-                result = HashUtilities.hashCode(result, 
+                result = HashUtils.hashCode(result, 
                         list.getStroke(size - 1));
                 if (size > 2) {
-                    result = HashUtilities.hashCode(result, 
+                    result = HashUtils.hashCode(result, 
                             list.getStroke(size / 2));
                 }
             }

@@ -43,7 +43,7 @@ package org.jfree.chart.axis;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -81,7 +81,7 @@ public class CategoryLabelWidthTypeTest {
     @Test
     public void testSerialization() {
         CategoryLabelWidthType w1 = CategoryLabelWidthType.RANGE;
-        CategoryLabelWidthType w2 = (CategoryLabelWidthType) TestUtilities.serialised(w1);
+        CategoryLabelWidthType w2 = (CategoryLabelWidthType) TestUtils.serialised(w1);
         assertEquals(w1, w2);
         assertTrue(w1 == w2);
     }

@@ -50,7 +50,7 @@ import static org.junit.Assert.assertFalse;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.LegendItem;
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.CategoryPlot;
@@ -119,7 +119,7 @@ public class AreaRendererTest {
     @Test
     public void testSerialization() {
         AreaRenderer r1 = new AreaRenderer();
-        AreaRenderer r2 = (AreaRenderer) TestUtilities.serialised(r1);
+        AreaRenderer r2 = (AreaRenderer) TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

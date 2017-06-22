@@ -53,7 +53,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
 
 /**
@@ -93,7 +93,7 @@ public class PaintMap implements Cloneable, Serializable {
      *     {@code null}.
      */
     public Paint getPaint(Comparable key) {
-        ParamChecks.nullNotPermitted(key, "key");
+        Args.nullNotPermitted(key, "key");
         return (Paint) this.store.get(key);
     }
 
@@ -121,7 +121,7 @@ public class PaintMap implements Cloneable, Serializable {
      *     {@code null}.
      */
     public void put(Comparable key, Paint paint) {
-        ParamChecks.nullNotPermitted(key, "key");
+        Args.nullNotPermitted(key, "key");
         this.store.put(key, paint);
     }
 

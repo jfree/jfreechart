@@ -60,7 +60,7 @@ package org.jfree.data.general;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SortOrder;
 
@@ -94,7 +94,7 @@ public class DefaultPieDataset extends AbstractDataset
      * @param data  the data ({@code null} not permitted).
      */
     public DefaultPieDataset(KeyedValues data) {
-        ParamChecks.nullNotPermitted(data, "data");
+        Args.nullNotPermitted(data, "data");
         this.data = new DefaultKeyedValues();
         for (int i = 0; i < data.getItemCount(); i++) {
             this.data.addValue(data.getKey(i), data.getValue(i));
@@ -180,7 +180,7 @@ public class DefaultPieDataset extends AbstractDataset
      */
     @Override
     public Number getValue(Comparable key) {
-        ParamChecks.nullNotPermitted(key, "key");
+        Args.nullNotPermitted(key, "key");
         return this.data.getValue(key);
     }
 

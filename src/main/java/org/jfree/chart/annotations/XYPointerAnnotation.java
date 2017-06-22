@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------
  * XYPointerAnnotation.java
  * ------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited.
+ * (C) Copyright 2003-2017, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Peter Kolb (patch 2809117);
@@ -69,17 +69,17 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-import org.jfree.chart.HashUtilities;
+import org.jfree.chart.HashUtils;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.event.AnnotationChangeEvent;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 
@@ -164,7 +164,7 @@ public class XYPointerAnnotation extends XYTextAnnotation
         this.arrowWidth = DEFAULT_ARROW_WIDTH;
         this.labelOffset = DEFAULT_LABEL_OFFSET;
         this.arrowStroke = new BasicStroke(1.0f);
-        this.arrowPaint = Color.black;
+        this.arrowPaint = Color.BLACK;
 
     }
 
@@ -333,7 +333,7 @@ public class XYPointerAnnotation extends XYTextAnnotation
      * @see #getArrowStroke()
      */
     public void setArrowStroke(Stroke stroke) {
-        ParamChecks.nullNotPermitted(stroke, "stroke");
+        Args.nullNotPermitted(stroke, "stroke");
         this.arrowStroke = stroke;
         fireAnnotationChanged();
     }
@@ -358,7 +358,7 @@ public class XYPointerAnnotation extends XYTextAnnotation
      * @see #getArrowPaint()
      */
     public void setArrowPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.arrowPaint = paint;
         fireAnnotationChanged();
     }
@@ -428,7 +428,7 @@ public class XYPointerAnnotation extends XYTextAnnotation
         double labelY = j2DY + Math.sin(this.angle) * (this.baseRadius
                 + this.labelOffset);
         g2.setFont(getFont());
-        Shape hotspot = TextUtilities.calculateRotatedStringBounds(
+        Shape hotspot = TextUtils.calculateRotatedStringBounds(
                 getText(), g2, (float) labelX, (float) labelY, getTextAnchor(),
                 getRotationAngle(), getRotationAnchor());
         if (getBackgroundPaint() != null) {
@@ -436,7 +436,7 @@ public class XYPointerAnnotation extends XYTextAnnotation
             g2.fill(hotspot);
         }
         g2.setPaint(getPaint());
-        TextUtilities.drawRotatedString(getText(), g2, (float) labelX,
+        TextUtils.drawRotatedString(getText(), g2, (float) labelX,
                 (float) labelY, getTextAnchor(), getRotationAngle(),
                 getRotationAnchor());
         if (isOutlineVisible()) {
@@ -514,7 +514,7 @@ public class XYPointerAnnotation extends XYTextAnnotation
         result = 37 * result + (int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(this.arrowWidth);
         result = 37 * result + (int) (temp ^ (temp >>> 32));
-        result = result * 37 + HashUtilities.hashCodeForPaint(this.arrowPaint);
+        result = result * 37 + HashUtils.hashCodeForPaint(this.arrowPaint);
         result = result * 37 + this.arrowStroke.hashCode();
         temp = Double.doubleToLongBits(this.labelOffset);
         result = 37 * result + (int) (temp ^ (temp >>> 32));

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------
  * BlockBorder.java
  * ----------------
- * (C) Copyright 2004-2016, by Object Refinery Limited.
+ * (C) Copyright 2004-2017, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -56,7 +56,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
 
 /**
@@ -69,7 +69,7 @@ public class BlockBorder implements BlockFrame, Serializable {
 
     /** An empty border. */
     public static final BlockBorder NONE = new BlockBorder(
-            RectangleInsets.ZERO_INSETS, Color.white);
+            RectangleInsets.ZERO_INSETS, Color.WHITE);
 
     /** The space reserved for the border. */
     private RectangleInsets insets;
@@ -81,7 +81,7 @@ public class BlockBorder implements BlockFrame, Serializable {
      * Creates a default border.
      */
     public BlockBorder() {
-        this(Color.black);
+        this(Color.BLACK);
     }
 
     /**
@@ -102,7 +102,7 @@ public class BlockBorder implements BlockFrame, Serializable {
      * @param right  the width of the right border.
      */
     public BlockBorder(double top, double left, double bottom, double right) {
-        this(new RectangleInsets(top, left, bottom, right), Color.black);
+        this(new RectangleInsets(top, left, bottom, right), Color.BLACK);
     }
 
     /**
@@ -126,8 +126,8 @@ public class BlockBorder implements BlockFrame, Serializable {
      * @param paint  the paint ({@code null} not permitted).
      */
     public BlockBorder(RectangleInsets insets, Paint paint) {
-        ParamChecks.nullNotPermitted(insets, "insets");
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(insets, "insets");
+        Args.nullNotPermitted(paint, "paint");
         this.insets = insets;
         this.paint = paint;
     }

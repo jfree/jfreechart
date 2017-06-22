@@ -130,12 +130,12 @@ import org.jfree.chart.plot.CrosshairState;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.GradientPaintTransformer;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.StandardGradientPaintTransformer;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.chart.util.ShapeUtils;
@@ -184,7 +184,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      * @since 1.0.11
      */
     public static void setDefaultBarPainter(XYBarPainter painter) {
-        ParamChecks.nullNotPermitted(painter, "painter");
+        Args.nullNotPermitted(painter, "painter");
         XYBarRenderer.defaultBarPainter = painter;
     }
 
@@ -506,7 +506,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      * @see #getLegendBar()
      */
     public void setLegendBar(Shape bar) {
-        ParamChecks.nullNotPermitted(bar, "bar");
+        Args.nullNotPermitted(bar, "bar");
         this.legendBar = bar;
         fireChangeEvent();
     }
@@ -589,7 +589,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      * @since 1.0.11
      */
     public void setBarPainter(XYBarPainter painter) {
-        ParamChecks.nullNotPermitted(painter, "painter");
+        Args.nullNotPermitted(painter, "painter");
         this.barPainter = painter;
         fireChangeEvent();
     }
@@ -996,7 +996,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
                 position.getItemLabelAnchor(), bar, plot.getOrientation());
 
         if (isInternalAnchor(position.getItemLabelAnchor())) {
-            Shape bounds = TextUtilities.calculateRotatedStringBounds(label,
+            Shape bounds = TextUtils.calculateRotatedStringBounds(label,
                     g2, (float) anchorPoint.getX(), (float) anchorPoint.getY(),
                     position.getTextAnchor(), position.getAngle(),
                     position.getRotationAnchor());
@@ -1020,7 +1020,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
         }
 
         if (position != null) {
-            TextUtilities.drawRotatedString(label, g2,
+            TextUtils.drawRotatedString(label, g2,
                     (float) anchorPoint.getX(), (float) anchorPoint.getY(),
                     position.getTextAnchor(), position.getAngle(),
                     position.getRotationAnchor());

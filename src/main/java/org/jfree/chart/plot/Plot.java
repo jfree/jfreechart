@@ -27,7 +27,7 @@
  * ---------
  * Plot.java
  * ---------
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Sylvain Vieujot;
@@ -176,13 +176,13 @@ import org.jfree.chart.event.PlotChangeListener;
 import org.jfree.chart.text.G2TextMeasurer;
 import org.jfree.chart.text.TextBlock;
 import org.jfree.chart.text.TextBlockAnchor;
-import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.Align;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.general.DatasetChangeEvent;
@@ -213,7 +213,7 @@ public abstract class Plot implements AxisChangeListener,
             BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
 
     /** The default outline color. */
-    public static final Paint DEFAULT_OUTLINE_PAINT = Color.gray;
+    public static final Paint DEFAULT_OUTLINE_PAINT = Color.GRAY;
 
     /** The default foreground alpha transparency. */
     public static final float DEFAULT_FOREGROUND_ALPHA = 1.0f;
@@ -222,7 +222,7 @@ public abstract class Plot implements AxisChangeListener,
     public static final float DEFAULT_BACKGROUND_ALPHA = 1.0f;
 
     /** The default background color. */
-    public static final Paint DEFAULT_BACKGROUND_PAINT = Color.white;
+    public static final Paint DEFAULT_BACKGROUND_PAINT = Color.WHITE;
 
     /** The minimum width at which the plot should be drawn. */
     public static final int MINIMUM_WIDTH_TO_DRAW = 10;
@@ -328,7 +328,7 @@ public abstract class Plot implements AxisChangeListener,
 
         this.noDataMessage = null;
         this.noDataMessageFont = new Font("SansSerif", Font.PLAIN, 12);
-        this.noDataMessagePaint = Color.black;
+        this.noDataMessagePaint = Color.BLACK;
 
         this.drawingSupplier = new DefaultDrawingSupplier();
 
@@ -451,7 +451,7 @@ public abstract class Plot implements AxisChangeListener,
      * @see #getNoDataMessageFont()
      */
     public void setNoDataMessageFont(Font font) {
-        ParamChecks.nullNotPermitted(font, "font");
+        Args.nullNotPermitted(font, "font");
         this.noDataMessageFont = font;
         fireChangeEvent();
     }
@@ -477,7 +477,7 @@ public abstract class Plot implements AxisChangeListener,
      * @see #getNoDataMessagePaint()
      */
     public void setNoDataMessagePaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.noDataMessagePaint = paint;
         fireChangeEvent();
     }
@@ -585,7 +585,7 @@ public abstract class Plot implements AxisChangeListener,
      * @see #setInsets(RectangleInsets)
      */
     public void setInsets(RectangleInsets insets, boolean notify) {
-        ParamChecks.nullNotPermitted(insets, "insets");
+        Args.nullNotPermitted(insets, "insets");
         if (!this.insets.equals(insets)) {
             this.insets = insets;
             if (notify) {
@@ -1096,7 +1096,7 @@ public abstract class Plot implements AxisChangeListener,
      */
     protected void fillBackground(Graphics2D g2, Rectangle2D area,
             PlotOrientation orientation) {
-        ParamChecks.nullNotPermitted(orientation, "orientation");
+        Args.nullNotPermitted(orientation, "orientation");
         if (this.backgroundPaint == null) {
             return;
         }
@@ -1191,7 +1191,7 @@ public abstract class Plot implements AxisChangeListener,
         if (message != null) {
             g2.setFont(this.noDataMessageFont);
             g2.setPaint(this.noDataMessagePaint);
-            TextBlock block = TextUtilities.createTextBlock(
+            TextBlock block = TextUtils.createTextBlock(
                     this.noDataMessage, this.noDataMessageFont,
                     this.noDataMessagePaint, 0.9f * (float) area.getWidth(),
                     new G2TextMeasurer(g2));
@@ -1489,8 +1489,8 @@ public abstract class Plot implements AxisChangeListener,
     public static RectangleEdge resolveDomainAxisLocation(
             AxisLocation location, PlotOrientation orientation) {
 
-        ParamChecks.nullNotPermitted(location, "location");
-        ParamChecks.nullNotPermitted(orientation, "orientation");
+        Args.nullNotPermitted(location, "location");
+        Args.nullNotPermitted(orientation, "orientation");
 
         RectangleEdge result = null;
         if (location == AxisLocation.TOP_OR_RIGHT) {
@@ -1544,8 +1544,8 @@ public abstract class Plot implements AxisChangeListener,
     public static RectangleEdge resolveRangeAxisLocation(
             AxisLocation location, PlotOrientation orientation) {
 
-        ParamChecks.nullNotPermitted(location, "location");
-        ParamChecks.nullNotPermitted(orientation, "orientation");
+        Args.nullNotPermitted(location, "location");
+        Args.nullNotPermitted(orientation, "orientation");
 
         RectangleEdge result = null;
         if (location == AxisLocation.TOP_OR_RIGHT) {

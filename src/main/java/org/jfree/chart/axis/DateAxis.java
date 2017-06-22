@@ -161,7 +161,7 @@ import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.data.Range;
 import org.jfree.data.time.DateRange;
 import org.jfree.data.time.Month;
@@ -405,7 +405,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      * @see #getTimeZone()
      */
     public void setTimeZone(TimeZone zone) {
-        ParamChecks.nullNotPermitted(zone, "zone");
+        Args.nullNotPermitted(zone, "zone");
         this.timeZone = zone;
         setStandardTickUnits(createStandardDateTickUnits(zone, this.locale));
         fireChangeEvent();
@@ -429,7 +429,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      * @param locale  the new locale ({@code null} not permitted).
      */
     public void setLocale(Locale locale) {
-        ParamChecks.nullNotPermitted(locale, "locale");
+        Args.nullNotPermitted(locale, "locale");
         this.locale = locale;
         setStandardTickUnits(createStandardDateTickUnits(this.timeZone, 
                 this.locale));
@@ -560,7 +560,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
     @Override
     public void setRange(Range range, boolean turnOffAutoRange,
                          boolean notify) {
-        ParamChecks.nullNotPermitted(range, "range");
+        Args.nullNotPermitted(range, "range");
         // usually the range will be a DateRange, but if it isn't do a
         // conversion...
         if (!(range instanceof DateRange)) {
@@ -632,7 +632,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      * @see #setMaximumDate(Date)
      */
     public void setMinimumDate(Date date) {
-        ParamChecks.nullNotPermitted(date, "date");
+        Args.nullNotPermitted(date, "date");
         // check the new minimum date relative to the current maximum date
         Date maxDate = getMaximumDate();
         long maxMillis = maxDate.getTime();
@@ -680,7 +680,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      * @see #setMinimumDate(Date)
      */
     public void setMaximumDate(Date maximumDate) {
-        ParamChecks.nullNotPermitted(maximumDate, "maximumDate");
+        Args.nullNotPermitted(maximumDate, "maximumDate");
         // check the new maximum date relative to the current minimum date
         Date minDate = getMinimumDate();
         long minMillis = minDate.getTime();
@@ -710,7 +710,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      * @param position  the position ({@code null} not permitted).
      */
     public void setTickMarkPosition(DateTickMarkPosition position) {
-        ParamChecks.nullNotPermitted(position, "position");
+        Args.nullNotPermitted(position, "position");
         this.tickMarkPosition = position;
         fireChangeEvent();
     }
@@ -1062,7 +1062,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      */
     private Date calculateDateForPosition(RegularTimePeriod period,
             DateTickMarkPosition position) {
-        ParamChecks.nullNotPermitted(period, "period");
+        Args.nullNotPermitted(period, "period");
         Date result = null;
         if (position == DateTickMarkPosition.START) {
             result = new Date(period.getFirstMillisecond());
@@ -1125,8 +1125,8 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
     public static TickUnitSource createStandardDateTickUnits(TimeZone zone,
             Locale locale) {
 
-        ParamChecks.nullNotPermitted(zone, "zone");
-        ParamChecks.nullNotPermitted(locale, "locale");
+        Args.nullNotPermitted(zone, "zone");
+        Args.nullNotPermitted(locale, "locale");
         TickUnits units = new TickUnits();
 
         // date formatters

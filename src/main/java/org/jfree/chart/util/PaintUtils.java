@@ -119,11 +119,11 @@ public class PaintUtils {
      * @param c the color.
      * @return the string for this color.
      */
-    public static String colorToString (final Color c) {
+    public static String colorToString(Color c) {
         try {
-            final Field[] fields = Color.class.getFields();
+            Field[] fields = Color.class.getFields();
             for (int i = 0; i < fields.length; i++) {
-                final Field f = fields[i];
+                Field f = fields[i];
                 if (Modifier.isPublic(f.getModifiers())
                         && Modifier.isFinal(f.getModifiers())
                         && Modifier.isStatic(f.getModifiers())) {
@@ -162,7 +162,7 @@ public class PaintUtils {
      */
     public static Color stringToColor(String value) {
         if (value == null) {
-            return Color.black;
+            return Color.BLACK;
         }
         try {
             // get color by hex or octal value
@@ -175,7 +175,7 @@ public class PaintUtils {
                 return (Color) f.get(null);
             } catch (Exception ce) {
                 // if we can't get any color return black
-                return Color.black;
+                return Color.BLACK;
             }
         }
     }

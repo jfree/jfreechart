@@ -73,9 +73,9 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import org.jfree.chart.HashUtilities;
+import org.jfree.chart.HashUtils;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.DomainInfo;
 import org.jfree.data.DomainOrder;
@@ -152,7 +152,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
      *     not unique within the dataset.
      */
     public void addSeries(XYSeries series) {
-        ParamChecks.nullNotPermitted(series, "series");
+        Args.nullNotPermitted(series, "series");
         if (getSeriesIndex(series.getKey()) >= 0) {
             throw new IllegalArgumentException(
                 "This dataset already contains a series with the key " 
@@ -187,7 +187,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
      * @param series  the series ({@code null} not permitted).
      */
     public void removeSeries(XYSeries series) {
-        ParamChecks.nullNotPermitted(series, "series");
+        Args.nullNotPermitted(series, "series");
         if (this.data.contains(series)) {
             series.removeChangeListener(this);
             series.removeVetoableChangeListener(this);
@@ -244,7 +244,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
      * @since 1.0.6
      */
     public int indexOf(XYSeries series) {
-        ParamChecks.nullNotPermitted(series, "series");
+        Args.nullNotPermitted(series, "series");
         return this.data.indexOf(series);
     }
 
@@ -278,7 +278,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
      * @since 1.0.9
      */
     public XYSeries getSeries(Comparable key) {
-        ParamChecks.nullNotPermitted(key, "key");
+        Args.nullNotPermitted(key, "key");
         Iterator iterator = this.data.iterator();
         while (iterator.hasNext()) {
             XYSeries series = (XYSeries) iterator.next();
@@ -317,7 +317,7 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
      * @since 1.0.14
      */
     public int getSeriesIndex(Comparable key) {
-        ParamChecks.nullNotPermitted(key, "key");
+        Args.nullNotPermitted(key, "key");
         int seriesCount = getSeriesCount();
         for (int i = 0; i < seriesCount; i++) {
             XYSeries series = (XYSeries) this.data.get(i);
@@ -470,8 +470,8 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = HashUtilities.hashCode(hash, this.intervalDelegate);
-        hash = HashUtilities.hashCode(hash, this.data);
+        hash = HashUtils.hashCode(hash, this.intervalDelegate);
+        hash = HashUtils.hashCode(hash, this.data);
         return hash;
     }
 

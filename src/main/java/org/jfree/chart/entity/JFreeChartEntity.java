@@ -47,9 +47,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.HashUtilities;
+import org.jfree.chart.HashUtils;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
 
 /**
@@ -101,7 +101,7 @@ public class JFreeChartEntity extends ChartEntity {
     public JFreeChartEntity(Shape area, JFreeChart chart, String toolTipText,
             String urlText) {
         super(area, toolTipText, urlText);
-        ParamChecks.nullNotPermitted(chart, "chart");
+        Args.nullNotPermitted(chart, "chart");
         this.chart = chart;
     }
 
@@ -167,8 +167,8 @@ public class JFreeChartEntity extends ChartEntity {
     @Override
     public int hashCode() {
         int result = 39;
-        result = HashUtilities.hashCode(result, getToolTipText());
-        result = HashUtilities.hashCode(result, getURLText());
+        result = HashUtils.hashCode(result, getToolTipText());
+        result = HashUtils.hashCode(result, getURLText());
         return result;
     }
 

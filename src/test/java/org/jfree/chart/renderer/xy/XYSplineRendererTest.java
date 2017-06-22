@@ -48,7 +48,7 @@ import static org.junit.Assert.assertFalse;
 
 import java.awt.geom.Rectangle2D;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.ui.GradientPaintTransformType;
 import org.jfree.chart.ui.StandardGradientPaintTransformer;
 import org.jfree.chart.util.PublicCloneable;
@@ -134,7 +134,7 @@ public class XYSplineRendererTest {
     @Test
     public void testSerialization() {
         XYSplineRenderer r1 = new XYSplineRenderer();
-        XYSplineRenderer r2 = (XYSplineRenderer) TestUtilities.serialised(r1);
+        XYSplineRenderer r2 = (XYSplineRenderer) TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

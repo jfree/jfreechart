@@ -102,7 +102,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import org.jfree.chart.HashUtilities;
+import org.jfree.chart.HashUtils;
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
@@ -116,7 +116,7 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.ui.GradientPaintTransformer;
 import org.jfree.chart.ui.StandardGradientPaintTransformer;
 import org.jfree.chart.urls.XYURLGenerator;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.chart.util.ShapeUtils;
@@ -345,7 +345,7 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
      * @param area  the area ({@code null} not permitted).
      */
     public void setLegendArea(Shape area) {
-        ParamChecks.nullNotPermitted(area, "area");
+        Args.nullNotPermitted(area, "area");
         this.legendArea = area;
         fireChangeEvent();
     }
@@ -396,7 +396,7 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
      * @since 1.0.14
      */
     public void setGradientTransformer(GradientPaintTransformer transformer) {
-        ParamChecks.nullNotPermitted(transformer, "transformer");
+        Args.nullNotPermitted(transformer, "transformer");
         this.gradientTransformer = transformer;
         fireChangeEvent();
     }
@@ -742,10 +742,10 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
     @Override
     public int hashCode() {
         int result = super.hashCode();
-        result = HashUtilities.hashCode(result, this.plotArea);
-        result = HashUtilities.hashCode(result, this.plotLines);
-        result = HashUtilities.hashCode(result, this.plotShapes);
-        result = HashUtilities.hashCode(result, this.useFillPaint);
+        result = HashUtils.hashCode(result, this.plotArea);
+        result = HashUtils.hashCode(result, this.plotLines);
+        result = HashUtils.hashCode(result, this.plotShapes);
+        result = HashUtils.hashCode(result, this.useFillPaint);
         return result;
     }
 

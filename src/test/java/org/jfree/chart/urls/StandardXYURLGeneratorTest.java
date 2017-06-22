@@ -44,7 +44,7 @@ package org.jfree.chart.urls;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.Test;
@@ -61,7 +61,7 @@ public class StandardXYURLGeneratorTest {
     public void testSerialization() {
         StandardXYURLGenerator g1 = new StandardXYURLGenerator("index.html?");
         StandardXYURLGenerator g2 = (StandardXYURLGenerator) 
-                TestUtilities.serialised(g1);
+                TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

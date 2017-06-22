@@ -71,7 +71,7 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.TextAnchor;
 import org.jfree.data.Range;
-import org.jfree.data.general.DatasetUtilities;
+import org.jfree.data.general.DatasetUtils;
 import org.jfree.data.xy.IntervalXYDataset;
 import org.jfree.data.xy.TableXYDataset;
 import org.jfree.data.xy.XYDataset;
@@ -206,7 +206,7 @@ public class StackedXYBarRenderer extends XYBarRenderer {
                 return new Range(0.0, 1.0);
             }
             else {
-                return DatasetUtilities.findStackedRangeBounds(
+                return DatasetUtils.findStackedRangeBounds(
                         (TableXYDataset) dataset);
             }
         }
@@ -277,7 +277,7 @@ public class StackedXYBarRenderer extends XYBarRenderer {
         // fixed too.
         double total = 0.0;
         if (this.renderAsPercentages) {
-            total = DatasetUtilities.calculateStackTotal(
+            total = DatasetUtils.calculateStackTotal(
                     (TableXYDataset) dataset, item);
             value = value / total;
         }

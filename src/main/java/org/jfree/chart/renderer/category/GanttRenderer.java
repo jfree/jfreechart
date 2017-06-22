@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * GanttRenderer.java
  * ------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited.
+ * (C) Copyright 2003-2017, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -74,7 +74,7 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.gantt.GanttCategoryDataset;
@@ -118,7 +118,7 @@ public class GanttRenderer extends IntervalBarRenderer
         super();
         setIncludeBaseInRange(false);
         this.completePaint = Color.green;
-        this.incompletePaint = Color.red;
+        this.incompletePaint = Color.RED;
         this.startPercent = 0.35;
         this.endPercent = 0.65;
     }
@@ -143,7 +143,7 @@ public class GanttRenderer extends IntervalBarRenderer
      * @see #getCompletePaint()
      */
     public void setCompletePaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.completePaint = paint;
         fireChangeEvent();
     }
@@ -168,7 +168,7 @@ public class GanttRenderer extends IntervalBarRenderer
      * @see #getIncompletePaint()
      */
     public void setIncompletePaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.incompletePaint = paint;
         fireChangeEvent();
     }

@@ -47,7 +47,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.fail;
 
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
@@ -122,7 +122,7 @@ public class XYTitleAnnotationTest {
     public void testSerialization() {
         TextTitle t = new TextTitle("Title");
         XYTitleAnnotation a1 = new XYTitleAnnotation(1.0, 2.0, t);
-        XYTitleAnnotation a2 = (XYTitleAnnotation) TestUtilities.serialised(a1);
+        XYTitleAnnotation a2 = (XYTitleAnnotation) TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
     

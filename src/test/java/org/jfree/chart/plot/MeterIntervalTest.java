@@ -47,7 +47,7 @@ import static org.junit.Assert.assertTrue;
 import java.awt.BasicStroke;
 import java.awt.Color;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 
 import org.jfree.data.Range;
 import org.junit.Test;
@@ -64,24 +64,24 @@ public class MeterIntervalTest {
     public void testEquals() {
 
         MeterInterval m1 = new MeterInterval(
-            "Label 1", new Range(1.2, 3.4), Color.red, new BasicStroke(1.0f),
-            Color.blue
+            "Label 1", new Range(1.2, 3.4), Color.RED, new BasicStroke(1.0f),
+            Color.BLUE
         );
         MeterInterval m2 = new MeterInterval(
-            "Label 1", new Range(1.2, 3.4), Color.red, new BasicStroke(1.0f),
-            Color.blue
+            "Label 1", new Range(1.2, 3.4), Color.RED, new BasicStroke(1.0f),
+            Color.BLUE
         );
         assertTrue(m1.equals(m2));
         assertTrue(m2.equals(m1));
 
         m1 = new MeterInterval(
-            "Label 2", new Range(1.2, 3.4), Color.red, new BasicStroke(1.0f),
-            Color.blue
+            "Label 2", new Range(1.2, 3.4), Color.RED, new BasicStroke(1.0f),
+            Color.BLUE
         );
         assertFalse(m1.equals(m2));
         m2 = new MeterInterval(
-            "Label 2", new Range(1.2, 3.4), Color.red, new BasicStroke(1.0f),
-            Color.blue
+            "Label 2", new Range(1.2, 3.4), Color.RED, new BasicStroke(1.0f),
+            Color.BLUE
         );
         assertTrue(m1.equals(m2));
 
@@ -102,7 +102,7 @@ public class MeterIntervalTest {
     @Test
     public void testSerialization() {
         MeterInterval m1 = new MeterInterval("X", new Range(1.0, 2.0));
-        MeterInterval m2 = (MeterInterval) TestUtilities.serialised(m1);
+        MeterInterval m2 = (MeterInterval) TestUtils.serialised(m1);
         assertEquals(m1, m2);
     }
 

@@ -82,7 +82,7 @@ import org.jfree.chart.ui.GradientPaintTransformType;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.StandardGradientPaintTransformer;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
@@ -151,10 +151,10 @@ public class WaterfallBarRenderer extends BarRenderer {
     public WaterfallBarRenderer(Paint firstBarPaint, Paint positiveBarPaint,
             Paint negativeBarPaint, Paint lastBarPaint) {
         super();
-        ParamChecks.nullNotPermitted(firstBarPaint, "firstBarPaint");
-        ParamChecks.nullNotPermitted(positiveBarPaint, "positiveBarPaint");
-        ParamChecks.nullNotPermitted(negativeBarPaint, "negativeBarPaint");
-        ParamChecks.nullNotPermitted(lastBarPaint, "lastBarPaint");
+        Args.nullNotPermitted(firstBarPaint, "firstBarPaint");
+        Args.nullNotPermitted(positiveBarPaint, "positiveBarPaint");
+        Args.nullNotPermitted(negativeBarPaint, "negativeBarPaint");
+        Args.nullNotPermitted(lastBarPaint, "lastBarPaint");
         this.firstBarPaint = firstBarPaint;
         this.lastBarPaint = lastBarPaint;
         this.positiveBarPaint = positiveBarPaint;
@@ -180,7 +180,7 @@ public class WaterfallBarRenderer extends BarRenderer {
      * @param paint  the paint ({@code null} not permitted).
      */
     public void setFirstBarPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.firstBarPaint = paint;
         fireChangeEvent();
     }
@@ -201,7 +201,7 @@ public class WaterfallBarRenderer extends BarRenderer {
      * @param paint  the paint ({@code null} not permitted).
      */
     public void setLastBarPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.lastBarPaint = paint;
         fireChangeEvent();
     }
@@ -221,7 +221,7 @@ public class WaterfallBarRenderer extends BarRenderer {
      * @param paint  the paint ({@code null} not permitted).
      */
     public void setPositiveBarPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.positiveBarPaint = paint;
         fireChangeEvent();
     }
@@ -242,7 +242,7 @@ public class WaterfallBarRenderer extends BarRenderer {
      * @param paint  the paint ({@code null} not permitted).
      */
     public void setNegativeBarPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.negativeBarPaint = paint;
         fireChangeEvent();
     }

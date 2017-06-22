@@ -46,7 +46,7 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.event.ChartChangeEvent;
 import org.jfree.chart.event.OverlayChangeEvent;
 import org.jfree.chart.event.OverlayChangeListener;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 
 /**
  * A base class for implementing overlays for a {@link ChartPanel}.
@@ -73,7 +73,7 @@ public class AbstractOverlay {
      * @see #removeChangeListener(OverlayChangeListener)
      */
     public void addChangeListener(OverlayChangeListener listener) {
-        ParamChecks.nullNotPermitted(listener, "listener");
+        Args.nullNotPermitted(listener, "listener");
         this.changeListeners.add(OverlayChangeListener.class, listener);
     }
 
@@ -85,7 +85,7 @@ public class AbstractOverlay {
      * @see #addChangeListener(OverlayChangeListener)
      */
     public void removeChangeListener(OverlayChangeListener listener) {
-        ParamChecks.nullNotPermitted(listener, "listener");
+        Args.nullNotPermitted(listener, "listener");
         this.changeListeners.remove(OverlayChangeListener.class, listener);
     }
 

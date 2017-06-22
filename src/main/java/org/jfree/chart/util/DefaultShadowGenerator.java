@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * DefaultShadowGenerator.java
  * ---------------------------
- * (C) Copyright 2009-2016 by Object Refinery Limited and Contributors.
+ * (C) Copyright 2009-2017 by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -47,7 +47,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 import java.io.Serializable;
-import org.jfree.chart.HashUtilities;
+import org.jfree.chart.HashUtils;
 
 /**
  * A default implementation of the {@link ShadowGenerator} interface, based on
@@ -80,7 +80,7 @@ public class DefaultShadowGenerator implements ShadowGenerator, Serializable {
      * Creates a new instance with default attributes.
      */
     public DefaultShadowGenerator() {
-        this(5, Color.black, 0.5f, 5, -Math.PI / 4);
+        this(5, Color.BLACK, 0.5f, 5, -Math.PI / 4);
     }
 
     /**
@@ -94,7 +94,7 @@ public class DefaultShadowGenerator implements ShadowGenerator, Serializable {
      */
     public DefaultShadowGenerator(int size, Color color, float opacity,
             int distance, double angle) {
-        ParamChecks.nullNotPermitted(color, "color");
+        Args.nullNotPermitted(color, "color");
         this.shadowSize = size;
         this.shadowColor = color;
         this.shadowOpacity = opacity;
@@ -322,11 +322,11 @@ public class DefaultShadowGenerator implements ShadowGenerator, Serializable {
      */
     @Override
     public int hashCode() {
-        int hash = HashUtilities.hashCode(17, this.shadowSize);
-        hash = HashUtilities.hashCode(hash, this.shadowColor);
-        hash = HashUtilities.hashCode(hash, this.shadowOpacity);
-        hash = HashUtilities.hashCode(hash, this.distance);
-        hash = HashUtilities.hashCode(hash, this.angle);
+        int hash = HashUtils.hashCode(17, this.shadowSize);
+        hash = HashUtils.hashCode(hash, this.shadowColor);
+        hash = HashUtils.hashCode(hash, this.shadowOpacity);
+        hash = HashUtils.hashCode(hash, this.distance);
+        hash = HashUtils.hashCode(hash, this.angle);
         return hash;
     }
 

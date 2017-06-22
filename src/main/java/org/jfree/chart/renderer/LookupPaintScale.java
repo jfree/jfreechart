@@ -54,7 +54,7 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 
@@ -202,7 +202,7 @@ public class LookupPaintScale
             throw new IllegalArgumentException(
                     "Requires lowerBound < upperBound.");
         }
-        ParamChecks.nullNotPermitted(defaultPaint, "defaultPaint");
+        Args.nullNotPermitted(defaultPaint, "defaultPaint");
         this.lowerBound = lowerBound;
         this.upperBound = upperBound;
         this.defaultPaint = defaultPaint;

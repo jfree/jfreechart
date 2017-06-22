@@ -44,7 +44,7 @@ package org.jfree.data.function;
 
 import java.io.Serializable;
 
-import org.jfree.chart.HashUtilities;
+import org.jfree.chart.HashUtils;
 
 /**
  * A function in the form y = a + bx.
@@ -132,8 +132,8 @@ public class LineFunction2D implements Function2D, Serializable {
     @Override
     public int hashCode() {
         int result = 29;
-        result = HashUtilities.hashCode(result, this.a);
-        result = HashUtilities.hashCode(result, this.b);
+        result = HashUtils.hashCode(result, this.a);
+        result = HashUtils.hashCode(result, this.b);
         return result;
     }
 }

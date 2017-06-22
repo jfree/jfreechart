@@ -50,7 +50,7 @@ import static org.junit.Assert.assertNotNull;
 
 import java.awt.Color;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 
 import org.jfree.chart.renderer.LookupPaintScale;
 import org.jfree.data.Range;
@@ -74,9 +74,9 @@ public class XYShapeRendererTest {
         assertTrue(r1.equals(r2));
         assertTrue(r2.equals(r1));
 
-        r1.setPaintScale(new LookupPaintScale(1.0, 2.0, Color.white));
+        r1.setPaintScale(new LookupPaintScale(1.0, 2.0, Color.WHITE));
         assertFalse(r1.equals(r2));
-        r2.setPaintScale(new LookupPaintScale(1.0, 2.0, Color.white));
+        r2.setPaintScale(new LookupPaintScale(1.0, 2.0, Color.WHITE));
         assertTrue(r1.equals(r2));
 
         r1.setDrawOutlines(true);
@@ -99,9 +99,9 @@ public class XYShapeRendererTest {
         r2.setGuideLinesVisible(true);
         assertTrue(r1.equals(r2));
 
-        r1.setGuideLinePaint(Color.red);
+        r1.setGuideLinePaint(Color.RED);
         assertFalse(r1.equals(r2));
-        r2.setGuideLinePaint(Color.red);
+        r2.setGuideLinePaint(Color.RED);
         assertTrue(r1.equals(r2));
 
     }
@@ -122,7 +122,7 @@ public class XYShapeRendererTest {
      */
     public void testSerialization() {
         XYShapeRenderer r1 = new XYShapeRenderer();
-        XYShapeRenderer r2 = (XYShapeRenderer) TestUtilities.serialised(r1);
+        XYShapeRenderer r2 = (XYShapeRenderer) TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

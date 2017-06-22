@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------------
  * DefaultPolarItemRenderer.java
  * -----------------------------
- * (C) Copyright 2004-2016, by Solution Engineering, Inc. and
+ * (C) Copyright 2004-2017, by Solution Engineering, Inc. and
  *     Contributors.
  *
  * Original Author:  Daniel Bridenbecker, Solution Engineering, Inc.;
@@ -94,12 +94,12 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.PolarPlot;
 import org.jfree.chart.renderer.xy.AbstractXYItemRenderer;
-import org.jfree.chart.text.TextUtilities;
+import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.urls.XYURLGenerator;
 import org.jfree.chart.util.BooleanList;
 import org.jfree.chart.util.ObjectList;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.chart.util.ShapeUtils;
@@ -287,7 +287,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * @since 1.0.14
      */
     public void setFillComposite(Composite composite) {
-        ParamChecks.nullNotPermitted(composite, "composite");
+        Args.nullNotPermitted(composite, "composite");
         this.fillComposite = composite;
         fireChangeEvent();
     }
@@ -435,7 +435,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * @see #getLegendLine()
      */
     public void setLegendLine(Shape line) {
-        ParamChecks.nullNotPermitted(line, "line");
+        Args.nullNotPermitted(line, "line");
         this.legendLine = line;
         fireChangeEvent();
     }
@@ -581,8 +581,8 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
 
                 // add an entity for the item, but only if it falls within the
                 // data area...
-                if (entities != null &&
-                        AbstractXYItemRenderer.isPointInRect(dataArea, x, y)) {
+                if (entities != null && ShapeUtils.isPointInRect(dataArea, x, 
+                        y)) {
                     addEntity(entities, shape, dataset, seriesIndex, i-1, x, y);
                 }
             }
@@ -627,7 +627,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
                 int x = p.x;
                 int y = p.y;
                 g2.setPaint(plot.getAngleLabelPaint());
-                TextUtilities.drawAlignedString(tick.getText(), g2, x, y,
+                TextUtils.drawAlignedString(tick.getText(), g2, x, y,
                         tick.getTextAnchor());
             }
         }
@@ -646,7 +646,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
     public void drawRadialGridLines(Graphics2D g2, PolarPlot plot, 
             ValueAxis radialAxis, List ticks, Rectangle2D dataArea) {
 
-        ParamChecks.nullNotPermitted(radialAxis, "radialAxis");
+        Args.nullNotPermitted(radialAxis, "radialAxis");
         g2.setFont(radialAxis.getTickLabelFont());
         g2.setPaint(plot.getRadiusGridlinePaint());
         g2.setStroke(plot.getRadiusGridlineStroke());

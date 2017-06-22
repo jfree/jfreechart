@@ -56,7 +56,7 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -235,7 +235,7 @@ public class QuarterTest {
     @Test
     public void testSerialization() {
         Quarter q1 = new Quarter(4, 1999);
-        Quarter q2 = (Quarter) TestUtilities.serialised(q1);
+        Quarter q2 = (Quarter) TestUtils.serialised(q1);
         assertEquals(q1, q2);
     }
 

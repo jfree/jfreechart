@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------
  * ThermometerPlotTest.java
  * ------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2017, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -53,7 +53,7 @@ import java.awt.Font;
 import java.awt.GradientPaint;
 import java.text.DecimalFormat;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.ui.RectangleInsets;
 
 import org.junit.Test;
@@ -87,11 +87,11 @@ public class ThermometerPlotTest {
         assertTrue(p2.equals(p1));
 
         // thermometerPaint
-        p1.setThermometerPaint(new GradientPaint(1.0f, 2.0f, Color.blue,
-                3.0f, 4.0f, Color.red));
+        p1.setThermometerPaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
+                3.0f, 4.0f, Color.RED));
         assertFalse(p1.equals(p2));
-        p2.setThermometerPaint(new GradientPaint(1.0f, 2.0f, Color.blue,
-                3.0f, 4.0f, Color.red));
+        p2.setThermometerPaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
+                3.0f, 4.0f, Color.RED));
         assertTrue(p2.equals(p1));
 
         // units
@@ -119,11 +119,11 @@ public class ThermometerPlotTest {
         assertTrue(p2.equals(p1));
 
         // valuePaint
-        p1.setValuePaint(new GradientPaint(4.0f, 5.0f, Color.red,
-                6.0f, 7.0f, Color.white));
+        p1.setValuePaint(new GradientPaint(4.0f, 5.0f, Color.RED,
+                6.0f, 7.0f, Color.WHITE));
         assertFalse(p1.equals(p2));
-        p2.setValuePaint(new GradientPaint(4.0f, 5.0f, Color.red,
-                6.0f, 7.0f, Color.white));
+        p2.setValuePaint(new GradientPaint(4.0f, 5.0f, Color.RED,
+                6.0f, 7.0f, Color.WHITE));
         assertTrue(p2.equals(p1));
 
         // valueFormat
@@ -133,11 +133,11 @@ public class ThermometerPlotTest {
         assertTrue(p2.equals(p1));
 
         // mercuryPaint
-        p1.setMercuryPaint(new GradientPaint(9.0f, 8.0f, Color.red,
-                7.0f, 6.0f, Color.blue));
+        p1.setMercuryPaint(new GradientPaint(9.0f, 8.0f, Color.RED,
+                7.0f, 6.0f, Color.BLUE));
         assertFalse(p1.equals(p2));
-        p2.setMercuryPaint(new GradientPaint(9.0f, 8.0f, Color.red,
-                7.0f, 6.0f, Color.blue));
+        p2.setMercuryPaint(new GradientPaint(9.0f, 8.0f, Color.RED,
+                7.0f, 6.0f, Color.BLUE));
         assertTrue(p2.equals(p1));
 
         p1.setSubrange(1, 1.0, 2.0);
@@ -145,11 +145,11 @@ public class ThermometerPlotTest {
         p2.setSubrange(1, 1.0, 2.0);
         assertTrue(p2.equals(p1));
 
-        p1.setSubrangePaint(1, new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.yellow));
+        p1.setSubrangePaint(1, new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.YELLOW));
         assertFalse(p1.equals(p2));
-        p2.setSubrangePaint(1, new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.yellow));
+        p2.setSubrangePaint(1, new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.YELLOW));
         assertTrue(p2.equals(p1));
 
         p1.setBulbRadius(9);
@@ -186,7 +186,7 @@ public class ThermometerPlotTest {
     @Test
     public void testSerialization() {
         ThermometerPlot p1 = new ThermometerPlot();
-        ThermometerPlot p2 = (ThermometerPlot) TestUtilities.serialised(p1);
+        ThermometerPlot p2 = (ThermometerPlot) TestUtils.serialised(p1);
         assertTrue(p1.equals(p2));
     }
 
@@ -196,9 +196,9 @@ public class ThermometerPlotTest {
     @Test
     public void testSerialization2() {
         ThermometerPlot p1 = new ThermometerPlot();
-        p1.setSubrangePaint(1, new GradientPaint(1.0f, 2.0f, Color.red, 3.0f,
-                4.0f, Color.blue));
-        ThermometerPlot p2 = (ThermometerPlot) TestUtilities.serialised(p1);
+        p1.setSubrangePaint(1, new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f,
+                4.0f, Color.BLUE));
+        ThermometerPlot p2 = (ThermometerPlot) TestUtils.serialised(p1);
         assertTrue(p1.equals(p2));
     }
 

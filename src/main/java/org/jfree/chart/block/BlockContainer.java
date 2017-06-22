@@ -59,7 +59,7 @@ import java.util.List;
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.entity.StandardEntityCollection;
 import org.jfree.chart.ui.Size2D;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 
 /**
@@ -92,7 +92,7 @@ public class BlockContainer extends AbstractBlock
      *                     permitted).
      */
     public BlockContainer(Arrangement arrangement) {
-        ParamChecks.nullNotPermitted(arrangement, "arrangement");
+        Args.nullNotPermitted(arrangement, "arrangement");
         this.arrangement = arrangement;
         this.blocks = new ArrayList();
     }
@@ -112,7 +112,7 @@ public class BlockContainer extends AbstractBlock
      * @param arrangement  the arrangement ({@code null} not permitted).
      */
     public void setArrangement(Arrangement arrangement) {
-        ParamChecks.nullNotPermitted(arrangement, "arrangement");
+        Args.nullNotPermitted(arrangement, "arrangement");
         this.arrangement = arrangement;
     }
 

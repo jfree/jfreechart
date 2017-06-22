@@ -44,7 +44,7 @@ package org.jfree.chart.axis;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -83,7 +83,7 @@ public class AxisLocationTest {
     @Test
     public void testSerialization() {
         AxisLocation location1 = AxisLocation.BOTTOM_OR_RIGHT;
-        AxisLocation location2 = (AxisLocation) TestUtilities.serialised(location1);
+        AxisLocation location2 = (AxisLocation) TestUtils.serialised(location1);
         assertEquals(location1, location2);
         boolean same = location1 == location2;
         assertEquals(true, same);

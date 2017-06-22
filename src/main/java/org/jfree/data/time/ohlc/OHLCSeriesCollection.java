@@ -47,9 +47,9 @@ package org.jfree.data.time.ohlc;
 import java.io.Serializable;
 import java.util.List;
 
-import org.jfree.chart.HashUtilities;
+import org.jfree.chart.HashUtils;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.time.RegularTimePeriod;
 import org.jfree.data.time.TimePeriodAnchor;
@@ -101,7 +101,7 @@ public class OHLCSeriesCollection extends AbstractXYDataset
      * @since 1.0.11
      */
     public void setXPosition(TimePeriodAnchor anchor) {
-        ParamChecks.nullNotPermitted(anchor, "anchor");
+        Args.nullNotPermitted(anchor, "anchor");
         this.xPosition = anchor;
         notifyListeners(new DatasetChangeEvent(this, this));
     }
@@ -113,7 +113,7 @@ public class OHLCSeriesCollection extends AbstractXYDataset
      * @param series  the series ({@code null} not permitted).
      */
     public void addSeries(OHLCSeries series) {
-        ParamChecks.nullNotPermitted(series, "series");
+        Args.nullNotPermitted(series, "series");
         this.data.add(series);
         series.addChangeListener(this);
         fireDatasetChanged();
@@ -411,7 +411,7 @@ public class OHLCSeriesCollection extends AbstractXYDataset
      * @since 1.0.14
      */
     public boolean removeSeries(OHLCSeries series) {
-        ParamChecks.nullNotPermitted(series, "series");
+        Args.nullNotPermitted(series, "series");
         boolean removed = this.data.remove(series);
         if (removed) {
             series.removeChangeListener(this);
@@ -475,9 +475,9 @@ public class OHLCSeriesCollection extends AbstractXYDataset
     @Override
     public int hashCode() {
         int result = 137;
-        result = HashUtilities.hashCode(result, this.xPosition);
+        result = HashUtils.hashCode(result, this.xPosition);
         for (int i = 0; i < this.data.size(); i++) {
-            result = HashUtilities.hashCode(result, this.data.get(i));
+            result = HashUtils.hashCode(result, this.data.get(i));
         }
         return result;
     }

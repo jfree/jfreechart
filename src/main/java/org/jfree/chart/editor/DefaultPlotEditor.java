@@ -447,7 +447,7 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
     private void attemptBackgroundPaintSelection() {
         Color c;
         c = JColorChooser.showDialog(this, localizationResources.getString(
-                "Background_Color"), Color.blue);
+                "Background_Color"), Color.BLUE);
         if (c != null) {
             this.backgroundPaintSample.setPaint(c);
         }
@@ -475,7 +475,7 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
     private void attemptOutlinePaintSelection() {
         Color c;
         c = JColorChooser.showDialog(this, localizationResources.getString(
-                "Outline_Color"), Color.blue);
+                "Outline_Color"), Color.BLUE);
         if (c != null) {
             this.outlinePaintSample.setPaint(c);
         }

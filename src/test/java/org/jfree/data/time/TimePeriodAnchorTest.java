@@ -42,7 +42,7 @@ package org.jfree.data.time;
 
 import static org.junit.Assert.assertTrue;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -66,7 +66,7 @@ public class TimePeriodAnchorTest {
     @Test
     public void testSerialization() {
         TimePeriodAnchor a1 = TimePeriodAnchor.START;
-        TimePeriodAnchor a2 = (TimePeriodAnchor) TestUtilities.serialised(a1);
+        TimePeriodAnchor a2 = (TimePeriodAnchor) TestUtils.serialised(a1);
         assertTrue(a1 == a2);
     }
 

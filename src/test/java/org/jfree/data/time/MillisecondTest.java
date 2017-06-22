@@ -57,7 +57,7 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.date.MonthConstants;
 
 import org.junit.Test;
@@ -146,7 +146,7 @@ public class MillisecondTest {
     @Test
     public void testSerialization() {
         Millisecond m1 = new Millisecond();
-        Millisecond m2 = (Millisecond) TestUtilities.serialised(m1);
+        Millisecond m2 = (Millisecond) TestUtils.serialised(m1);
         assertEquals(m1, m2);
     }
 

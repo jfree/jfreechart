@@ -74,7 +74,7 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.LegendItemCollection;
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.annotations.XYTextAnnotation;
 import org.jfree.chart.axis.AxisLocation;
 import org.jfree.chart.axis.DateAxis;
@@ -221,11 +221,11 @@ public class XYPlotTest {
         assertTrue(plot1.equals(plot2));
 
         // domainGridlinePaint
-        plot1.setDomainGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.blue,
-                3.0f, 4.0f, Color.red));
+        plot1.setDomainGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
+                3.0f, 4.0f, Color.RED));
         assertFalse(plot1.equals(plot2));
-        plot2.setDomainGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.blue,
-                3.0f, 4.0f, Color.red));
+        plot2.setDomainGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
+                3.0f, 4.0f, Color.RED));
         assertTrue(plot1.equals(plot2));
 
         // rangeGridlinesVisible
@@ -241,11 +241,11 @@ public class XYPlotTest {
         assertTrue(plot1.equals(plot2));
 
         // rangeGridlinePaint
-        plot1.setRangeGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.green,
-                3.0f, 4.0f, Color.red));
+        plot1.setRangeGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.GREEN,
+                3.0f, 4.0f, Color.RED));
         assertFalse(plot1.equals(plot2));
-        plot2.setRangeGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.green,
-                3.0f, 4.0f, Color.red));
+        plot2.setRangeGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.GREEN,
+                3.0f, 4.0f, Color.RED));
         assertTrue(plot1.equals(plot2));
 
         // rangeZeroBaselineVisible
@@ -261,11 +261,11 @@ public class XYPlotTest {
         assertTrue(plot1.equals(plot2));
 
         // rangeZeroBaselinePaint
-        plot1.setRangeZeroBaselinePaint(new GradientPaint(1.0f, 2.0f, Color.white,
-                3.0f, 4.0f, Color.red));
+        plot1.setRangeZeroBaselinePaint(new GradientPaint(1.0f, 2.0f, Color.WHITE,
+                3.0f, 4.0f, Color.RED));
         assertFalse(plot1.equals(plot2));
-        plot2.setRangeZeroBaselinePaint(new GradientPaint(1.0f, 2.0f, Color.white,
-                3.0f, 4.0f, Color.red));
+        plot2.setRangeZeroBaselinePaint(new GradientPaint(1.0f, 2.0f, Color.WHITE,
+                3.0f, 4.0f, Color.RED));
         assertTrue(plot1.equals(plot2));
 
         // rangeCrosshairVisible
@@ -287,11 +287,11 @@ public class XYPlotTest {
         assertTrue(plot1.equals(plot2));
 
         // rangeCrosshairPaint
-        plot1.setRangeCrosshairPaint(new GradientPaint(1.0f, 2.0f, Color.pink,
-                3.0f, 4.0f, Color.red));
+        plot1.setRangeCrosshairPaint(new GradientPaint(1.0f, 2.0f, Color.PINK,
+                3.0f, 4.0f, Color.RED));
         assertFalse(plot1.equals(plot2));
-        plot2.setRangeCrosshairPaint(new GradientPaint(1.0f, 2.0f, Color.pink,
-                3.0f, 4.0f, Color.red));
+        plot2.setRangeCrosshairPaint(new GradientPaint(1.0f, 2.0f, Color.PINK,
+                3.0f, 4.0f, Color.RED));
         assertTrue(plot1.equals(plot2));
 
         // rangeCrosshairLockedOnData
@@ -336,39 +336,39 @@ public class XYPlotTest {
         assertTrue(plot1.equals(plot2));
 
         // quadrant paint
-        plot1.setQuadrantPaint(0, new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.blue));
+        plot1.setQuadrantPaint(0, new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.BLUE));
         assertFalse(plot1.equals(plot2));
-        plot2.setQuadrantPaint(0, new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.blue));
+        plot2.setQuadrantPaint(0, new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.BLUE));
         assertTrue(plot1.equals(plot2));
-        plot1.setQuadrantPaint(1, new GradientPaint(2.0f, 3.0f, Color.red,
-                4.0f, 5.0f, Color.blue));
+        plot1.setQuadrantPaint(1, new GradientPaint(2.0f, 3.0f, Color.RED,
+                4.0f, 5.0f, Color.BLUE));
         assertFalse(plot1.equals(plot2));
-        plot2.setQuadrantPaint(1, new GradientPaint(2.0f, 3.0f, Color.red,
-                4.0f, 5.0f, Color.blue));
+        plot2.setQuadrantPaint(1, new GradientPaint(2.0f, 3.0f, Color.RED,
+                4.0f, 5.0f, Color.BLUE));
         assertTrue(plot1.equals(plot2));
-        plot1.setQuadrantPaint(2, new GradientPaint(3.0f, 4.0f, Color.red,
-                5.0f, 6.0f, Color.blue));
+        plot1.setQuadrantPaint(2, new GradientPaint(3.0f, 4.0f, Color.RED,
+                5.0f, 6.0f, Color.BLUE));
         assertFalse(plot1.equals(plot2));
-        plot2.setQuadrantPaint(2, new GradientPaint(3.0f, 4.0f, Color.red,
-                5.0f, 6.0f, Color.blue));
+        plot2.setQuadrantPaint(2, new GradientPaint(3.0f, 4.0f, Color.RED,
+                5.0f, 6.0f, Color.BLUE));
         assertTrue(plot1.equals(plot2));
-        plot1.setQuadrantPaint(3, new GradientPaint(4.0f, 5.0f, Color.red,
-                6.0f, 7.0f, Color.blue));
+        plot1.setQuadrantPaint(3, new GradientPaint(4.0f, 5.0f, Color.RED,
+                6.0f, 7.0f, Color.BLUE));
         assertFalse(plot1.equals(plot2));
-        plot2.setQuadrantPaint(3, new GradientPaint(4.0f, 5.0f, Color.red,
-                6.0f, 7.0f, Color.blue));
-        assertTrue(plot1.equals(plot2));
-
-        plot1.setDomainTickBandPaint(Color.red);
-        assertFalse(plot1.equals(plot2));
-        plot2.setDomainTickBandPaint(Color.red);
+        plot2.setQuadrantPaint(3, new GradientPaint(4.0f, 5.0f, Color.RED,
+                6.0f, 7.0f, Color.BLUE));
         assertTrue(plot1.equals(plot2));
 
-        plot1.setRangeTickBandPaint(Color.blue);
+        plot1.setDomainTickBandPaint(Color.RED);
         assertFalse(plot1.equals(plot2));
-        plot2.setRangeTickBandPaint(Color.blue);
+        plot2.setDomainTickBandPaint(Color.RED);
+        assertTrue(plot1.equals(plot2));
+
+        plot1.setRangeTickBandPaint(Color.BLUE);
+        assertFalse(plot1.equals(plot2));
+        plot2.setRangeTickBandPaint(Color.BLUE);
         assertTrue(plot1.equals(plot2));
 
         plot1.setDomainMinorGridlinesVisible(true);
@@ -376,9 +376,9 @@ public class XYPlotTest {
         plot2.setDomainMinorGridlinesVisible(true);
         assertTrue(plot1.equals(plot2));
 
-        plot1.setDomainMinorGridlinePaint(Color.red);
+        plot1.setDomainMinorGridlinePaint(Color.RED);
         assertFalse(plot1.equals(plot2));
-        plot2.setDomainMinorGridlinePaint(Color.red);
+        plot2.setDomainMinorGridlinePaint(Color.RED);
         assertTrue(plot1.equals(plot2));
 
         plot1.setDomainGridlineStroke(new BasicStroke(1.1f));
@@ -391,9 +391,9 @@ public class XYPlotTest {
         plot2.setRangeMinorGridlinesVisible(true);
         assertTrue(plot1.equals(plot2));
 
-        plot1.setRangeMinorGridlinePaint(Color.blue);
+        plot1.setRangeMinorGridlinePaint(Color.BLUE);
         assertFalse(plot1.equals(plot2));
-        plot2.setRangeMinorGridlinePaint(Color.blue);
+        plot2.setRangeMinorGridlinePaint(Color.BLUE);
         assertTrue(plot1.equals(plot2));
 
         plot1.setRangeMinorGridlineStroke(new BasicStroke(1.23f));
@@ -414,10 +414,10 @@ public class XYPlotTest {
         assertTrue(plot1.equals(plot2));
         
         // shadowGenerator
-        plot1.setShadowGenerator(new DefaultShadowGenerator(5, Color.gray,
+        plot1.setShadowGenerator(new DefaultShadowGenerator(5, Color.GRAY,
                 0.6f, 4, -Math.PI / 4));
         assertFalse(plot1.equals(plot2));
-        plot2.setShadowGenerator(new DefaultShadowGenerator(5, Color.gray,
+        plot2.setShadowGenerator(new DefaultShadowGenerator(5, Color.GRAY,
                 0.6f, 4, -Math.PI / 4));
         assertTrue(plot1.equals(plot2));
 
@@ -427,11 +427,11 @@ public class XYPlotTest {
         assertTrue(plot1.equals(plot2));
 
         LegendItemCollection lic1 = new LegendItemCollection();
-        lic1.add(new LegendItem("XYZ", Color.red));
+        lic1.add(new LegendItem("XYZ", Color.RED));
         plot1.setFixedLegendItems(lic1);
         assertFalse(plot1.equals(plot2));
         LegendItemCollection lic2 = new LegendItemCollection();
-        lic2.add(new LegendItem("XYZ", Color.red));
+        lic2.add(new LegendItem("XYZ", Color.RED));
         plot2.setFixedLegendItems(lic2);
         assertTrue(plot1.equals(plot2));
     }
@@ -597,17 +597,17 @@ public class XYPlotTest {
     @Test
     public void testCloning_QuadrantPaint() throws CloneNotSupportedException {
         XYPlot p1 = new XYPlot();
-        p1.setQuadrantPaint(3, new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.blue));
+        p1.setQuadrantPaint(3, new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.BLUE));
         XYPlot p2 = (XYPlot) p1.clone();
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
 
         // check for independence
-        p1.setQuadrantPaint(1, Color.red);
+        p1.setQuadrantPaint(1, Color.RED);
         assertFalse(p1.equals(p2));
-        p2.setQuadrantPaint(1, Color.red);
+        p2.setQuadrantPaint(1, Color.RED);
         assertTrue(p1.equals(p2));
     }
 
@@ -715,7 +715,7 @@ public class XYPlotTest {
         NumberAxis rangeAxis = new NumberAxis("Range");
         StandardXYItemRenderer renderer = new StandardXYItemRenderer();
         XYPlot p1 = new XYPlot(data, domainAxis, rangeAxis, renderer);
-        XYPlot p2 = (XYPlot) TestUtilities.serialised(p1);
+        XYPlot p2 = (XYPlot) TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 
@@ -730,7 +730,7 @@ public class XYPlotTest {
         renderer1.setDefaultToolTipGenerator(
                 StandardXYToolTipGenerator.getTimeSeriesInstance());
         XYPlot p1 = new XYPlot(data1, new DateAxis("Date"), null, renderer1);
-        XYPlot p2 = (XYPlot) TestUtilities.serialised(p1);
+        XYPlot p2 = (XYPlot) TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 
@@ -750,7 +750,7 @@ public class XYPlotTest {
         XYSeriesCollection dataset = new XYSeriesCollection();
         JFreeChart chart = ChartFactory.createXYLineChart("Test Chart",
                 "Domain Axis", "Range Axis", dataset);
-        JFreeChart chart2 = (JFreeChart) TestUtilities.serialised(chart);
+        JFreeChart chart2 = (JFreeChart) TestUtils.serialised(chart);
         assertEquals(chart, chart2);
         try {
             chart2.createBufferedImage(300, 200);
@@ -775,7 +775,7 @@ public class XYPlotTest {
         plot.addDomainMarker(new IntervalMarker(2.0, 3.0), Layer.BACKGROUND);
         plot.addRangeMarker(new ValueMarker(4.0), Layer.FOREGROUND);
         plot.addRangeMarker(new IntervalMarker(5.0, 6.0), Layer.BACKGROUND);
-        JFreeChart chart2 = (JFreeChart) TestUtilities.serialised(chart);
+        JFreeChart chart2 = (JFreeChart) TestUtils.serialised(chart);
         assertEquals(chart, chart2);
         try {
             chart2.createBufferedImage(300, 200);
@@ -805,7 +805,7 @@ public class XYPlotTest {
         p1.setDomainAxis(1, domainAxis2);
         p1.setRangeAxis(1, rangeAxis2);
         p1.setRenderer(1, renderer2);
-        XYPlot p2 = (XYPlot) TestUtilities.serialised(p1);
+        XYPlot p2 = (XYPlot) TestUtils.serialised(p1);
         assertEquals(p1, p2);
 
         // now check that all datasets, renderers and axes are being listened
@@ -929,7 +929,7 @@ public class XYPlotTest {
         // change event...
         MyPlotChangeListener listener = new MyPlotChangeListener();
         plot.addChangeListener(listener);
-        renderer.setSeriesPaint(0, Color.black);
+        renderer.setSeriesPaint(0, Color.BLACK);
         assertTrue(listener.getEvent() != null);
     }
 

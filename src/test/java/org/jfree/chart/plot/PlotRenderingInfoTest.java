@@ -48,7 +48,7 @@ import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
 
 import org.jfree.chart.ChartRenderingInfo;
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -117,7 +117,7 @@ public class PlotRenderingInfoTest {
     @Test
     public void testSerialization() {
         PlotRenderingInfo p1 = new PlotRenderingInfo(new ChartRenderingInfo());
-        PlotRenderingInfo p2 = (PlotRenderingInfo) TestUtilities.serialised(p1);
+        PlotRenderingInfo p2 = (PlotRenderingInfo) TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 

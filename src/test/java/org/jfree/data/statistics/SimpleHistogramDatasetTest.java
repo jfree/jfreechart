@@ -45,7 +45,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -92,7 +92,7 @@ public class SimpleHistogramDatasetTest {
     public void testSerialization() {
         SimpleHistogramDataset d1 = new SimpleHistogramDataset("D1");
         SimpleHistogramDataset d2 = (SimpleHistogramDataset) 
-                TestUtilities.serialised(d1);
+                TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 

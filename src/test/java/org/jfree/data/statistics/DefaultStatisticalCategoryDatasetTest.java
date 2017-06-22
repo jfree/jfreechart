@@ -49,7 +49,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.fail;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 
 import org.jfree.data.Range;
 import org.jfree.data.UnknownKeyException;
@@ -154,7 +154,7 @@ public class DefaultStatisticalCategoryDatasetTest {
         d1.add(null, new Double(5.5), "R1", "C3");
         d1.add(new Double(6.6), null, "R2", "C3");
         DefaultStatisticalCategoryDataset d2 = 
-                (DefaultStatisticalCategoryDataset) TestUtilities.serialised(d1);
+                (DefaultStatisticalCategoryDataset) TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 
@@ -167,7 +167,7 @@ public class DefaultStatisticalCategoryDatasetTest {
             = new DefaultStatisticalCategoryDataset();
         d1.add(1.2, 3.4, "Row 1", "Column 1");
         DefaultStatisticalCategoryDataset d2 = 
-                (DefaultStatisticalCategoryDataset) TestUtilities.serialised(d1);
+                (DefaultStatisticalCategoryDataset) TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * SymbolicAxisTest.java
  * ---------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2017, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -47,7 +47,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.awt.Color;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -62,7 +62,7 @@ public class SymbolAxisTest {
     public void testSerialization() {
         String[] tickLabels = new String[] {"One", "Two", "Three"};
         SymbolAxis a1 = new SymbolAxis("Test Axis", tickLabels);
-        SymbolAxis a2 = (SymbolAxis) TestUtilities.serialised(a1);
+        SymbolAxis a2 = (SymbolAxis) TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 
@@ -103,14 +103,14 @@ public class SymbolAxisTest {
         a2.setGridBandsVisible(false);
         assertTrue(a1.equals(a2));
 
-        a1.setGridBandPaint(Color.black);
+        a1.setGridBandPaint(Color.BLACK);
         assertFalse(a1.equals(a2));
-        a2.setGridBandPaint(Color.black);
+        a2.setGridBandPaint(Color.BLACK);
         assertTrue(a1.equals(a2));
 
-        a1.setGridBandAlternatePaint(Color.red);
+        a1.setGridBandAlternatePaint(Color.RED);
         assertFalse(a1.equals(a2));
-        a2.setGridBandAlternatePaint(Color.red);
+        a2.setGridBandAlternatePaint(Color.RED);
         assertTrue(a1.equals(a2));
     }
 

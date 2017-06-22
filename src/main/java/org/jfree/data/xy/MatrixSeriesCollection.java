@@ -48,7 +48,7 @@ package org.jfree.data.xy;
 import java.io.Serializable;
 import java.util.List;
 import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 
 /**
@@ -209,7 +209,7 @@ public class MatrixSeriesCollection extends AbstractXYZDataset
      * @param series the series ({@code null} not permitted).
      */
     public void addSeries(MatrixSeries series) {
-        ParamChecks.nullNotPermitted(series, "series");
+        Args.nullNotPermitted(series, "series");
         // FIXME: Check that there isn't already a series with the same key
 
         // add the series...
@@ -298,7 +298,7 @@ public class MatrixSeriesCollection extends AbstractXYZDataset
      * @param series the series ({@code null}).
      */
     public void removeSeries(MatrixSeries series) {
-        ParamChecks.nullNotPermitted(series, "series");
+        Args.nullNotPermitted(series, "series");
         if (this.seriesList.contains(series)) {
             series.removeChangeListener(this);
             this.seriesList.remove(series);

@@ -46,7 +46,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.text.DecimalFormat;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 import org.junit.Test;
 
 /**
@@ -103,7 +103,7 @@ public class NumberTickUnitTest {
     @Test
     public void testSerialization() {
         NumberTickUnit t1 = new NumberTickUnit(1.23, new DecimalFormat("0.00"));
-        NumberTickUnit t2 = (NumberTickUnit) TestUtilities.serialised(t1);
+        NumberTickUnit t2 = (NumberTickUnit) TestUtils.serialised(t1);
         assertEquals(t1, t2);
     }
 

@@ -86,14 +86,14 @@ import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.chart.util.ShapeUtils;
 import org.jfree.chart.util.TableOrder;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.CategoryToPieDataset;
 import org.jfree.data.general.DatasetChangeEvent;
-import org.jfree.data.general.DatasetUtilities;
+import org.jfree.data.general.DatasetUtils;
 import org.jfree.data.general.PieDataset;
 
 /**
@@ -231,7 +231,7 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
      * @see #getPieChart()
      */
     public void setPieChart(JFreeChart pieChart) {
-        ParamChecks.nullNotPermitted(pieChart, "pieChart");
+        Args.nullNotPermitted(pieChart, "pieChart");
         if (!(pieChart.getPlot() instanceof PiePlot)) {
             throw new IllegalArgumentException("The 'pieChart' argument must "
                     + "be a chart based on a PiePlot.");
@@ -256,7 +256,7 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
      * @param order  the order ({@code null} not permitted).
      */
     public void setDataExtractOrder(TableOrder order) {
-        ParamChecks.nullNotPermitted(order, "order");
+        Args.nullNotPermitted(order, "order");
         this.dataExtractOrder = order;
         fireChangeEvent();
     }
@@ -303,7 +303,7 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
      * @since 1.0.2
      */
     public void setAggregatedItemsKey(Comparable key) {
-        ParamChecks.nullNotPermitted(key, "key");
+        Args.nullNotPermitted(key, "key");
         this.aggregatedItemsKey = key;
         fireChangeEvent();
     }
@@ -329,7 +329,7 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
      * @since 1.0.2
      */
     public void setAggregatedItemsPaint(Paint paint) {
-        ParamChecks.nullNotPermitted(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.aggregatedItemsPaint = paint;
         fireChangeEvent();
     }
@@ -369,7 +369,7 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
      * @since 1.0.12
      */
     public void setLegendItemShape(Shape shape) {
-        ParamChecks.nullNotPermitted(shape, "shape");
+        Args.nullNotPermitted(shape, "shape");
         this.legendItemShape = shape;
         fireChangeEvent();
     }
@@ -395,7 +395,7 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
         drawOutline(g2, area);
 
         // check that there is some data to display...
-        if (DatasetUtilities.isEmptyOrNull(this.dataset)) {
+        if (DatasetUtils.isEmptyOrNull(this.dataset)) {
             drawNoDataMessage(g2, area);
             return;
         }
@@ -449,7 +449,7 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
             PieDataset dd = new CategoryToPieDataset(this.dataset,
                     this.dataExtractOrder, pieIndex);
             if (this.limit > 0.0) {
-                piedataset = DatasetUtilities.createConsolidatedPieDataset(
+                piedataset = DatasetUtils.createConsolidatedPieDataset(
                         dd, this.aggregatedItemsKey, this.limit);
             }
             else {

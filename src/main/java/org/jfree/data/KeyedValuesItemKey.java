@@ -41,7 +41,7 @@
 package org.jfree.data;
 
 import java.io.Serializable;
-import org.jfree.chart.util.ParamChecks;
+import org.jfree.chart.util.Args;
 
 public class KeyedValuesItemKey implements ItemKey, Serializable {
     
@@ -54,7 +54,7 @@ public class KeyedValuesItemKey implements ItemKey, Serializable {
      * @param key  the key ({@code null} not permitted).
      */
     public KeyedValuesItemKey(Comparable<? extends Object> key) {
-        ParamChecks.nullNotPermitted(key, "key");
+        Args.nullNotPermitted(key, "key");
         this.key = key;
     }
     

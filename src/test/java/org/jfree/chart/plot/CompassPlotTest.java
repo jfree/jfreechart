@@ -49,7 +49,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
 
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 
 import org.jfree.data.general.DefaultValueDataset;
 import org.junit.Test;
@@ -87,27 +87,27 @@ public class CompassPlotTest {
         assertTrue(plot1.equals(plot2));
 
         // rosePaint
-        plot1.setRosePaint(new GradientPaint(1.0f, 2.0f, Color.blue,
-                3.0f, 4.0f, Color.yellow));
+        plot1.setRosePaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
+                3.0f, 4.0f, Color.YELLOW));
         assertFalse(plot1.equals(plot2));
-        plot2.setRosePaint(new GradientPaint(1.0f, 2.0f, Color.blue,
-                3.0f, 4.0f, Color.yellow));
+        plot2.setRosePaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
+                3.0f, 4.0f, Color.YELLOW));
         assertTrue(plot1.equals(plot2));
 
         // roseCenterPaint
-        plot1.setRoseCenterPaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.yellow));
+        plot1.setRoseCenterPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.YELLOW));
         assertFalse(plot1.equals(plot2));
-        plot2.setRoseCenterPaint(new GradientPaint(1.0f, 2.0f, Color.red,
-                3.0f, 4.0f, Color.yellow));
+        plot2.setRoseCenterPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
+                3.0f, 4.0f, Color.YELLOW));
         assertTrue(plot1.equals(plot2));
 
         // roseHighlightPaint
         plot1.setRoseHighlightPaint(new GradientPaint(1.0f, 2.0f, Color.green,
-                3.0f, 4.0f, Color.yellow));
+                3.0f, 4.0f, Color.YELLOW));
         assertFalse(plot1.equals(plot2));
         plot2.setRoseHighlightPaint(new GradientPaint(1.0f, 2.0f, Color.green,
-                3.0f, 4.0f, Color.yellow));
+                3.0f, 4.0f, Color.YELLOW));
         assertTrue(plot1.equals(plot2));
     }
 
@@ -117,13 +117,13 @@ public class CompassPlotTest {
     @Test
     public void testSerialization() {
         CompassPlot p1 = new CompassPlot(null);
-        p1.setRosePaint(new GradientPaint(1.0f, 2.0f, Color.red, 3.0f, 4.0f,
-                Color.blue));
-        p1.setRoseCenterPaint(new GradientPaint(4.0f, 3.0f, Color.red, 2.0f,
+        p1.setRosePaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f,
+                Color.BLUE));
+        p1.setRoseCenterPaint(new GradientPaint(4.0f, 3.0f, Color.RED, 2.0f,
                 1.0f, Color.green));
-        p1.setRoseHighlightPaint(new GradientPaint(4.0f, 3.0f, Color.red, 2.0f,
+        p1.setRoseHighlightPaint(new GradientPaint(4.0f, 3.0f, Color.RED, 2.0f,
                 1.0f, Color.green));
-        CompassPlot p2 = (CompassPlot) TestUtilities.serialised(p1);
+        CompassPlot p2 = (CompassPlot) TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 

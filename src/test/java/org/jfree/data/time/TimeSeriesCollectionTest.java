@@ -57,10 +57,10 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
-import org.jfree.chart.TestUtilities;
+import org.jfree.chart.TestUtils;
 
 import org.jfree.data.Range;
-import org.jfree.data.general.DatasetUtilities;
+import org.jfree.data.general.DatasetUtils;
 import org.junit.Test;
 
 /**
@@ -232,7 +232,7 @@ public class TimeSeriesCollectionTest {
     public void testSerialization() {
         TimeSeriesCollection c1 = new TimeSeriesCollection(createSeries());
         TimeSeriesCollection c2 = (TimeSeriesCollection) 
-                TestUtilities.serialised(c1);
+                TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 
@@ -304,21 +304,21 @@ public class TimeSeriesCollectionTest {
 
     /**
      * This method provides a check for the bounds calculated using the
-     * {@link DatasetUtilities#findDomainBounds(org.jfree.data.xy.XYDataset,
+     * {@link DatasetUtils#findDomainBounds(org.jfree.data.xy.XYDataset,
      * java.util.List, boolean)} method.
      */
     @Test
     public void testFindDomainBounds() {
         TimeSeriesCollection dataset = new TimeSeriesCollection();
         List visibleSeriesKeys = new java.util.ArrayList();
-        Range r = DatasetUtilities.findDomainBounds(dataset, visibleSeriesKeys,
+        Range r = DatasetUtils.findDomainBounds(dataset, visibleSeriesKeys,
                 true);
         assertNull(r);
 
         TimeSeries s1 = new TimeSeries("S1");
         dataset.addSeries(s1);
         visibleSeriesKeys.add("S1");
-        r = DatasetUtilities.findDomainBounds(dataset, visibleSeriesKeys, true);
+        r = DatasetUtils.findDomainBounds(dataset, visibleSeriesKeys, true);
         assertNull(r);
 
         // store the current time zone
@@ -326,7 +326,7 @@ public class TimeSeriesCollectionTest {
         TimeZone.setDefault(TimeZone.getTimeZone("Europe/Paris"));
 
         s1.add(new Year(2008), 8.0);
-        r = DatasetUtilities.findDomainBounds(dataset, visibleSeriesKeys, true);
+        r = DatasetUtils.findDomainBounds(dataset, visibleSeriesKeys, true);
         assertEquals(1199142000000.0, r.getLowerBound(), EPSILON);
         assertEquals(1230764399999.0, r.getUpperBound(), EPSILON);
 
@@ -334,12 +334,12 @@ public class TimeSeriesCollectionTest {
         dataset.addSeries(s2);
         s2.add(new Year(2009), 9.0);
         s2.add(new Year(2010), 10.0);
-        r = DatasetUtilities.findDomainBounds(dataset, visibleSeriesKeys, true);
+        r = DatasetUtils.findDomainBounds(dataset, visibleSeriesKeys, true);
         assertEquals(1199142000000.0, r.getLowerBound(), EPSILON);
         assertEquals(1230764399999.0, r.getUpperBound(), EPSILON);
 
         visibleSeriesKeys.add("S2");
-        r = DatasetUtilities.findDomainBounds(dataset, visibleSeriesKeys, true);
+        r = DatasetUtils.findDomainBounds(dataset, visibleSeriesKeys, true);
         assertEquals(1199142000000.0, r.getLowerBound(), EPSILON);
         assertEquals(1293836399999.0, r.getUpperBound(), EPSILON);
 

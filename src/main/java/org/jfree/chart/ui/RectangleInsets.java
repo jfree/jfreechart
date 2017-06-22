@@ -1,3 +1,31 @@
+/* ===========================================================
+ * JFreeChart : a free chart library for the Java(tm) platform
+ * ===========================================================
+ *
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ *
+ * Project Info:  http://www.jfree.org/jfreechart/index.html
+ *
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation; either version 2.1 of the License, or
+ * (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+ * License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+ * USA.
+ *
+ * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
+ * Other names may be trademarks of their respective owners.]
+ *
+ */
+
 package org.jfree.chart.ui;
 
 import java.awt.geom.Rectangle2D;
@@ -35,7 +63,7 @@ public class RectangleInsets implements Serializable {
     private double right;
     
     /**
-     * Creates a new instance with all insets initialised to <code>1.0</code>.
+     * Creates a new instance with all insets initialised to {@code 1.0}.
      * 
      * @since 1.0.9
      */
@@ -51,24 +79,23 @@ public class RectangleInsets implements Serializable {
      * @param bottom  the bottom insets.
      * @param right  the right insets.
      */
-    public RectangleInsets(final double top, final double left,
-                           final double bottom, final double right) {
+    public RectangleInsets(double top, double left, double bottom, 
+            double right) {
         this(UnitType.ABSOLUTE, top, left, bottom, right);   
     }
     
     /**
      * Creates a new instance.
      * 
-     * @param unitType  absolute or relative units (<code>null</code> not 
+     * @param unitType  absolute or relative units ({@code null} not 
      *                  permitted).
      * @param top  the top insets.
      * @param left  the left insets.
      * @param bottom  the bottom insets.
      * @param right  the right insets.
      */
-    public RectangleInsets(final UnitType unitType,
-                           final double top, final double left, 
-                           final double bottom, final double right) {
+    public RectangleInsets(UnitType unitType, double top, double left, 
+            double bottom, double right) {
         if (unitType == null) {
             throw new IllegalArgumentException("Null 'unitType' argument.");
         }
@@ -83,7 +110,7 @@ public class RectangleInsets implements Serializable {
      * Returns the unit type (absolute or relative).  This specifies whether 
      * the insets are measured as Java2D units or percentages.
      * 
-     * @return The unit type (never <code>null</code>).
+     * @return The unit type (never {@code null}).
      */
     public UnitType getUnitType() {
         return this.unitType;
@@ -128,11 +155,12 @@ public class RectangleInsets implements Serializable {
     /**
      * Tests this instance for equality with an arbitrary object.
      * 
-     * @param obj  the object (<code>null</code> permitted).
+     * @param obj  the object ({@code null} permitted).
      * 
      * @return A boolean.
      */
-    public boolean equals(final Object obj) {
+    @Override
+    public boolean equals(Object obj) {
         if (obj == this) {
             return true;   
         }
@@ -163,6 +191,7 @@ public class RectangleInsets implements Serializable {
      * 
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         int result;
         long temp;
@@ -184,6 +213,7 @@ public class RectangleInsets implements Serializable {
      * 
      * @return A string representing this instance.
      */
+    @Override
     public String toString() {
         return "RectangleInsets[t=" + this.top + ",l=" + this.left
                 + ",b=" + this.bottom + ",r=" + this.right + "]";
@@ -194,17 +224,16 @@ public class RectangleInsets implements Serializable {
      * specified by this instance, and the horizontal and vertical 
      * adjustment types.
      * 
-     * @param base  the base rectangle (<code>null</code> not permitted).
-     * @param horizontal  the horizontal adjustment type (<code>null</code> not
+     * @param base  the base rectangle ({@code null} not permitted).
+     * @param horizontal  the horizontal adjustment type ({@code null} not
      *                    permitted).
-     * @param vertical  the vertical adjustment type (<code>null</code> not 
+     * @param vertical  the vertical adjustment type ({@code null} not 
      *                  permitted).
      * 
      * @return The inset rectangle.
      */
-    public Rectangle2D createAdjustedRectangle(final Rectangle2D base,
-                                          final LengthAdjustmentType horizontal, 
-                                                  final LengthAdjustmentType vertical) {
+    public Rectangle2D createAdjustedRectangle(Rectangle2D base,
+            LengthAdjustmentType horizontal, LengthAdjustmentType vertical) {
         if (base == null) {
             throw new IllegalArgumentException("Null 'base' argument.");
         }
@@ -238,26 +267,25 @@ public class RectangleInsets implements Serializable {
     /**
      * Creates an 'inset' rectangle.
      * 
-     * @param base  the base rectangle (<code>null</code> not permitted).
+     * @param base  the base rectangle ({@code null} not permitted).
      * 
      * @return The inset rectangle.
      */
-    public Rectangle2D createInsetRectangle(final Rectangle2D base) {
+    public Rectangle2D createInsetRectangle(Rectangle2D base) {
         return createInsetRectangle(base, true, true);
     }
     
     /**
      * Creates an 'inset' rectangle.
      * 
-     * @param base  the base rectangle (<code>null</code> not permitted).
+     * @param base  the base rectangle ({@code null} not permitted).
      * @param horizontal  apply horizontal insets?
      * @param vertical  apply vertical insets?
      * 
      * @return The inset rectangle.
      */
-    public Rectangle2D createInsetRectangle(final Rectangle2D base,
-                                            final boolean horizontal, 
-                                            final boolean vertical) {
+    public Rectangle2D createInsetRectangle(Rectangle2D base,
+            boolean horizontal, boolean vertical) {
         if (base == null) {
             throw new IllegalArgumentException("Null 'base' argument.");
         }
@@ -273,37 +301,34 @@ public class RectangleInsets implements Serializable {
             leftMargin = calculateLeftInset(base.getWidth());
             rightMargin = calculateRightInset(base.getWidth());
         }
-        return new Rectangle2D.Double(
-            base.getX() + leftMargin, 
-            base.getY() + topMargin,
-            base.getWidth() - leftMargin - rightMargin,
-            base.getHeight() - topMargin - bottomMargin
-        );
+        return new Rectangle2D.Double(base.getX() + leftMargin, 
+                base.getY() + topMargin,
+                base.getWidth() - leftMargin - rightMargin,
+                base.getHeight() - topMargin - bottomMargin);
     }
     
     /**
      * Creates an outset rectangle.
      * 
-     * @param base  the base rectangle (<code>null</code> not permitted).
+     * @param base  the base rectangle ({@code null} not permitted).
      * 
      * @return An outset rectangle.
      */
-    public Rectangle2D createOutsetRectangle(final Rectangle2D base) {
+    public Rectangle2D createOutsetRectangle(Rectangle2D base) {
         return createOutsetRectangle(base, true, true);
     }
     
     /**
      * Creates an outset rectangle.
      * 
-     * @param base  the base rectangle (<code>null</code> not permitted).
+     * @param base  the base rectangle ({@code null} not permitted).
      * @param horizontal  apply horizontal insets?
      * @param vertical  apply vertical insets? 
      * 
      * @return An outset rectangle.
      */
-    public Rectangle2D createOutsetRectangle(final Rectangle2D base,
-                                             final boolean horizontal, 
-                                             final boolean vertical) {
+    public Rectangle2D createOutsetRectangle(Rectangle2D base,
+            boolean horizontal, boolean vertical) {
         if (base == null) {
             throw new IllegalArgumentException("Null 'base' argument.");
         }
@@ -319,12 +344,10 @@ public class RectangleInsets implements Serializable {
             leftMargin = calculateLeftOutset(base.getWidth());
             rightMargin = calculateRightOutset(base.getWidth());
         }
-        return new Rectangle2D.Double(
-            base.getX() - leftMargin, 
-            base.getY() - topMargin,
-            base.getWidth() + leftMargin + rightMargin,
-            base.getHeight() + topMargin + bottomMargin
-        );
+        return new Rectangle2D.Double(base.getX() - leftMargin, 
+                base.getY() - topMargin,
+                base.getWidth() + leftMargin + rightMargin,
+                base.getHeight() + topMargin + bottomMargin);
     }
     
     /**
@@ -334,7 +357,7 @@ public class RectangleInsets implements Serializable {
      * 
      * @return The top margin (in Java2D units).
      */
-    public double calculateTopInset(final double height) {
+    public double calculateTopInset(double height) {
         double result = this.top;
         if (this.unitType == UnitType.RELATIVE) {
             result = (this.top * height);
@@ -349,7 +372,7 @@ public class RectangleInsets implements Serializable {
      * 
      * @return The top margin (in Java2D units).
      */
-    public double calculateTopOutset(final double height) {
+    public double calculateTopOutset(double height) {
         double result = this.top;
         if (this.unitType == UnitType.RELATIVE) {
             result = (height / (1 - this.top - this.bottom)) * this.top;
@@ -364,7 +387,7 @@ public class RectangleInsets implements Serializable {
      * 
      * @return The bottom margin (in Java2D units).
      */
-    public double calculateBottomInset(final double height) {
+    public double calculateBottomInset(double height) {
         double result = this.bottom;
         if (this.unitType == UnitType.RELATIVE) {
             result = (this.bottom * height);
@@ -379,7 +402,7 @@ public class RectangleInsets implements Serializable {
      * 
      * @return The bottom margin (in Java2D units).
      */
-    public double calculateBottomOutset(final double height) {
+    public double calculateBottomOutset(double height) {
         double result = this.bottom;
         if (this.unitType == UnitType.RELATIVE) {
             result = (height / (1 - this.top - this.bottom)) * this.bottom;
@@ -394,7 +417,7 @@ public class RectangleInsets implements Serializable {
      * 
      * @return The left margin (in Java2D units).
      */
-    public double calculateLeftInset(final double width) {
+    public double calculateLeftInset(double width) {
         double result = this.left;
         if (this.unitType == UnitType.RELATIVE) {
             result = (this.left * width);
@@ -409,7 +432,7 @@ public class RectangleInsets implements Serializable {
      * 
      * @return The left margin (in Java2D units).
      */
-    public double calculateLeftOutset(final double width) {
+    public double calculateLeftOutset(double width) {
         double result = this.left;
         if (this.unitType == UnitType.RELATIVE) {
             result = (width / (1 - this.left - this.right)) * this.left;
@@ -424,7 +447,7 @@ public class RectangleInsets implements Serializable {
      * 
      * @return The right margin (in Java2D units).
      */
-    public double calculateRightInset(final double width) {
+    public double calculateRightInset(double width) {
         double result = this.right;
         if (this.unitType == UnitType.RELATIVE) {
             result = (this.right * width);
@@ -439,7 +462,7 @@ public class RectangleInsets implements Serializable {
      * 
      * @return The right margin (in Java2D units).
      */
-    public double calculateRightOutset(final double width) {
+    public double calculateRightOutset(double width) {
         double result = this.right;
         if (this.unitType == UnitType.RELATIVE) {
             result = (width / (1 - this.left - this.right)) * this.right;
@@ -454,7 +477,7 @@ public class RectangleInsets implements Serializable {
      * 
      * @return The trimmed width.
      */
-    public double trimWidth(final double width) {
+    public double trimWidth(double width) {
         return width - calculateLeftInset(width) - calculateRightInset(width);   
     }
     
@@ -465,7 +488,7 @@ public class RectangleInsets implements Serializable {
      * 
      * @return The extended width.
      */
-    public double extendWidth(final double width) {
+    public double extendWidth(double width) {
         return width + calculateLeftOutset(width) + calculateRightOutset(width);   
     }
 
@@ -476,9 +499,9 @@ public class RectangleInsets implements Serializable {
      * 
      * @return The trimmed height.
      */
-    public double trimHeight(final double height) {
-        return height 
-               - calculateTopInset(height) - calculateBottomInset(height);   
+    public double trimHeight(double height) {
+        return height - calculateTopInset(height) 
+                - calculateBottomInset(height);   
     }
     
     /**
@@ -488,23 +511,23 @@ public class RectangleInsets implements Serializable {
      * 
      * @return The extended height.
      */
-    public double extendHeight(final double height) {
-        return height 
-               + calculateTopOutset(height) + calculateBottomOutset(height);   
+    public double extendHeight(double height) {
+        return height + calculateTopOutset(height) 
+                + calculateBottomOutset(height);   
     }
 
     /**
      * Shrinks the given rectangle by the amount of these insets.
      * 
-     * @param area  the area (<code>null</code> not permitted).
+     * @param area  the area ({@code null} not permitted).
      */
-    public void trim(final Rectangle2D area) {
-        final double w = area.getWidth();
-        final double h = area.getHeight();
-        final double l = calculateLeftInset(w);
-        final double r = calculateRightInset(w);
-        final double t = calculateTopInset(h);
-        final double b = calculateBottomInset(h);
+    public void trim(Rectangle2D area) {
+        double w = area.getWidth();
+        double h = area.getHeight();
+        double l = calculateLeftInset(w);
+        double r = calculateRightInset(w);
+        double t = calculateTopInset(h);
+        double b = calculateBottomInset(h);
         area.setRect(area.getX() + l, area.getY() + t, w - l - r, h - t - b);    
     }
     
