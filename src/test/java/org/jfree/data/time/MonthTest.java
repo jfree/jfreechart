@@ -49,6 +49,9 @@
 
 package org.jfree.data.time;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
+import static org.jfree.date.SerialDate.DATE_FORMAT_SYMBOLS;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
@@ -195,44 +198,29 @@ public class MonthTest {
         assertNull(next);
     }
 
-    /**
-     * Tests the string parsing code...
-     */
     @Test
-    public void testParseMonth() {
+    public void parseMonthWhenSeparatorIsDashAndFirstYear() throws Exception {
+        Month month = Month.parseMonth("1990-01");
 
-        Month month = null;
+        assertThat(1, is(month.getMonth()));
+        assertThat(1990, is(month.getYear().getYear()));
+    }
 
-        // test 1...
-        try {
-            month = Month.parseMonth("1990-01");
-        }
-        catch (TimePeriodFormatException e) {
-            month = new Month(1, 1900);
-        }
-        assertEquals(1, month.getMonth());
-        assertEquals(1990, month.getYear().getYear());
+    @Test
+    public void parseMonthWhenSeparatorIsDashAndFirstMonth() throws Exception {
+        Month month = Month.parseMonth("02-1991");
 
-        // test 2...
-        try {
-            month = Month.parseMonth("02-1991");
-        }
-        catch (TimePeriodFormatException e) {
-            month = new Month(1, 1900);
-        }
-        assertEquals(2, month.getMonth());
-        assertEquals(1991, month.getYear().getYear());
+        assertThat(2, is(month.getMonth()));
+        assertThat(1991, is(month.getYear().getYear()));
+    }
 
-        // test 3...
-        try {
-            month = Month.parseMonth("March 1993");
-        }
-        catch (TimePeriodFormatException e) {
-            month = new Month(1, 1900);
-        }
-        assertEquals(3, month.getMonth());
-        assertEquals(1993, month.getYear().getYear());
+    @Test
+    public void parseMonthWhenSeparatorIsSpace() throws Exception {
+        String monthName = DATE_FORMAT_SYMBOLS.getMonths()[2];
+        Month month = Month.parseMonth(monthName+" 1993");
 
+        assertThat(3, is(month.getMonth()));
+        assertThat(1993, is(month.getYear().getYear()));
     }
 
     /**
