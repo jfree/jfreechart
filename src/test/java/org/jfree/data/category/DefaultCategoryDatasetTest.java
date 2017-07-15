@@ -88,6 +88,7 @@ public class DefaultCategoryDatasetTest {
     /**
      * A simple check for the getValue(int, int) method.
      */
+    @Test
     public void testGetValue2() {
         DefaultCategoryDataset d = new DefaultCategoryDataset();
         boolean pass = false;
@@ -103,6 +104,7 @@ public class DefaultCategoryDatasetTest {
     /**
      * Some checks for the incrementValue() method.
      */
+    @Test
     public void testIncrementValue() {
         DefaultCategoryDataset d = new DefaultCategoryDataset();
         d.addValue(1.0, "R1", "C1");
@@ -138,6 +140,7 @@ public class DefaultCategoryDatasetTest {
     /**
      * Some tests for the getRowCount() method.
      */
+    @Test
     public void testGetRowCount() {
         DefaultCategoryDataset d = new DefaultCategoryDataset();
         assertTrue(d.getRowCount() == 0);
@@ -159,6 +162,7 @@ public class DefaultCategoryDatasetTest {
     /**
      * Some tests for the getColumnCount() method.
      */
+    @Test
     public void testGetColumnCount() {
         DefaultCategoryDataset d = new DefaultCategoryDataset();
         assertTrue(d.getColumnCount() == 0);
@@ -180,6 +184,7 @@ public class DefaultCategoryDatasetTest {
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
+    @Test
     public void testEquals() {
         DefaultCategoryDataset d1 = new DefaultCategoryDataset();
         d1.setValue(23.4, "R1", "C1");
@@ -202,6 +207,7 @@ public class DefaultCategoryDatasetTest {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         DefaultCategoryDataset d1 = new DefaultCategoryDataset();
         d1.setValue(23.4, "R1", "C1");
@@ -213,6 +219,7 @@ public class DefaultCategoryDatasetTest {
     /**
      * Some checks for the addValue() method.
      */
+    @Test
     public void testAddValue() {
         DefaultCategoryDataset d1 = new DefaultCategoryDataset();
         d1.addValue(null, "R1", "C1");
@@ -233,6 +240,7 @@ public class DefaultCategoryDatasetTest {
     /**
      * Some basic checks for the removeValue() method.
      */
+    @Test
     public void testRemoveValue() {
         DefaultCategoryDataset d = new DefaultCategoryDataset();
         d.removeValue("R1", "C1");
@@ -268,6 +276,7 @@ public class DefaultCategoryDatasetTest {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         DefaultCategoryDataset d1 = new DefaultCategoryDataset();
         DefaultCategoryDataset d2 = (DefaultCategoryDataset) d1.clone();
@@ -295,6 +304,7 @@ public class DefaultCategoryDatasetTest {
     /**
      * Check that this class implements PublicCloneable.
      */
+    @Test
     public void testPublicCloneable() {
         DefaultCategoryDataset d = new DefaultCategoryDataset();
         assertTrue(d instanceof PublicCloneable);
@@ -305,6 +315,7 @@ public class DefaultCategoryDatasetTest {
     /**
      * A test for bug 1835955.
      */
+    @Test
     public void testBug1835955() {
         DefaultCategoryDataset d = new DefaultCategoryDataset();
         d.addValue(1.0, "R1", "C1");
@@ -317,6 +328,7 @@ public class DefaultCategoryDatasetTest {
     /**
      * Some checks for the removeColumn(Comparable) method.
      */
+    @Test
     public void testRemoveColumn() {
         DefaultCategoryDataset d = new DefaultCategoryDataset();
         d.addValue(1.0, "R1", "C1");
@@ -347,6 +359,7 @@ public class DefaultCategoryDatasetTest {
     /**
      * Some checks for the removeRow(Comparable) method.
      */
+    @Test
     public void testRemoveRow() {
         DefaultCategoryDataset d = new DefaultCategoryDataset();
         d.addValue(1.0, "R1", "C1");

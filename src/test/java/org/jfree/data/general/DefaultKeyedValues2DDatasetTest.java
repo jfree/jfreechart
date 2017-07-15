@@ -69,6 +69,7 @@ public class DefaultKeyedValues2DDatasetTest {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         DefaultKeyedValues2DDataset d1 = new DefaultKeyedValues2DDataset();
         d1.addValue(new Double(234.2), "Row1", "Col1");
