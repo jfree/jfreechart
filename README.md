@@ -25,15 +25,7 @@ later.
 
 Building JFreeChart
 -------------------
-You can build JFreeChart using either Ant or Maven.  The build requires 
-JDK 1.6.0 or later.
-
-#### Ant
-Using Ant you can build JFreeChart using the following command (issued from the root directory of the project):
-
-    ant -f ant/build.xml
-
-The Ant build script will perform all build and packaging tasks.
+You can build JFreeChart using Maven.  The build requires JDK 1.6.0 or later.
 
 #### Maven
 Using Maven you can build JFreeChart using the following command (issued from the root directory of the project):
@@ -56,6 +48,8 @@ History
 - bug #19 fix for default time zone in `SegmentedDateAxis`;
 - SourceForge #1147 improve performance of `CategoryPlot` mapping datasets to axes;
 - moved SWT code out into separate projects;
+- moved demo programs to a separate project;
+- dropped the Ant build;
 
 ##### Version 1.0.19 (31-Jul-2014)
 - fixed clipping issues for combined plots in JavaFX;
