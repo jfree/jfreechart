@@ -18,9 +18,12 @@ The home page for the project is:
 http://www.jfree.org/jfreechart
 
 JFreeChart requires JDK 1.6.0 or later.  If JavaFX support is required, you
-need to also include the JFreeChart-FX extensions.  The library is licensed 
-under the terms of the GNU Lesser General Public License (LGPL) version 2.1 or 
-later.
+need to also include the JFreeChart-FX extensions:
+
+https://github.com/jfree/jfreechart-fx
+
+The library is licensed under the terms of the GNU Lesser General Public 
+License (LGPL) version 2.1 or later.
 
 
 Building JFreeChart
