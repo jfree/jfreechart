@@ -87,6 +87,7 @@ public class DefaultPieDatasetTest implements DatasetChangeListener {
     /**
      * Some checks for the getKey(int) method.
      */
+    @Test
     public void testGetKey() {
         DefaultPieDataset d = new DefaultPieDataset();
         d.setValue("A", 1.0);
@@ -116,6 +117,7 @@ public class DefaultPieDatasetTest implements DatasetChangeListener {
     /**
      * Some checks for the getIndex() method.
      */
+    @Test
     public void testGetIndex() {
         DefaultPieDataset d = new DefaultPieDataset();
         d.setValue("A", 1.0);
@@ -137,6 +139,7 @@ public class DefaultPieDatasetTest implements DatasetChangeListener {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         DefaultPieDataset d1 = new DefaultPieDataset();
         d1.setValue("V1", new Integer(1));
@@ -152,6 +155,7 @@ public class DefaultPieDatasetTest implements DatasetChangeListener {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         DefaultPieDataset d1 = new DefaultPieDataset();
         d1.setValue("C1", new Double(234.2));

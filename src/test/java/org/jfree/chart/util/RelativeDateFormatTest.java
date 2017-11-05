@@ -92,6 +92,7 @@ public class RelativeDateFormatTest {
      * Test that we can configure the RelativeDateFormat to show
      * hh:mm:ss.
      */
+    @Test
     public void test2033092() {
         RelativeDateFormat rdf = new RelativeDateFormat();
         rdf.setShowZeroDays(false);
@@ -121,6 +122,7 @@ public class RelativeDateFormatTest {
     /**
      * Check that the equals() method can distinguish all fields.
      */
+    @Test
     public void testEquals() {
         RelativeDateFormat df1 = new RelativeDateFormat();
         RelativeDateFormat df2 = new RelativeDateFormat();
@@ -180,6 +182,7 @@ public class RelativeDateFormatTest {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashCode() {
         RelativeDateFormat df1 = new RelativeDateFormat(123L);
         RelativeDateFormat df2 = new RelativeDateFormat(123L);
@@ -192,6 +195,7 @@ public class RelativeDateFormatTest {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() {
         NumberFormat nf = new DecimalFormat("0");
         RelativeDateFormat df1 = new RelativeDateFormat();
@@ -210,6 +214,7 @@ public class RelativeDateFormatTest {
     /**
      * Some tests for negative dates.
      */
+    @Test
     public void testNegative() {
         NumberFormat nf = new DecimalFormat("0");
         RelativeDateFormat df1 = new RelativeDateFormat();
