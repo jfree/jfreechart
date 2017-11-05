@@ -1,7 +1,7 @@
 JFreeChart
 ==========
 
-Version 1.5.0, not yet released.
+Version 1.5.0, 5 November 2017.
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.jfree/jfreechart/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.jfree/jfreechart)
 
@@ -36,10 +36,19 @@ Using Maven you can build JFreeChart using the following command (issued from th
     mvn clean install
 
 
+Demos
+-----
+A small set of demo applications can be found in the following projects here
+at GitHub:
+
+* [JFree-Demos](https://github.com/jfree/jfree-demos "JFree-Demos Project Page at GitHub")
+* [JFree-FXDemos](https://github.com/jfree/jfree-fxdemos "JFree-FXDemos Project Page at GitHub")
+
+
 History
 -------
 
-##### Version 1.5.0 (not yet release)
+##### Version 1.5.0 (5 November 2017)
 - all JavaFX classes moved to a separate project;
 - added cleaner method to create histograms in `ChartFactory`;
 - JFreeSVG updated to version 3.2;
