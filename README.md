@@ -28,12 +28,23 @@ License (LGPL) version 2.1 or later.
 
 Building JFreeChart
 -------------------
-You can build JFreeChart using Maven.  The build requires JDK 1.6.0 or later.
-
-#### Maven
-Using Maven you can build JFreeChart using the following command (issued from the root directory of the project):
+You can build JFreeChart using Maven by issuing the following command from the root directory of the project:
 
     mvn clean install
+
+The build requires JDK 1.6.0 or later.
+
+
+Migration from JFreeChart 1.0.x
+-------------------------------
+When migrating from JFreeChart 1.0.x to JFreeChart 1.5.0, please be aware of the following API changes:
+
+* all the classes from JCommon that are used by JFreeChart have integrated within the JFreeChart jar file within a different package than before (you will need to change your imports);
+* many methods `getBaseXXX()/setBaseXXX()` have been renamed `setDefaultXXX()/getDefaultXXX()`;
+* the `ChartUtilities` class has been renamed `ChartUtils`;
+* the `org.jfree.chart.utils.ParamChecks` class has been renamed `org.jfree.chart.utils.Args`.
+
+Please refer to [Issue 66](https://github.com/jfree/jfreechart/issues/66) for additional info.
 
 
 Demos
@@ -51,9 +62,7 @@ History
 ##### Version 1.5.0 (5 November 2017)
 - all JavaFX classes moved to a separate project;
 - added cleaner method to create histograms in `ChartFactory`;
-- JFreeSVG updated to version 3.2;
-- OrsonPDF updated to version 1.7;
-- JCommon removed as a dependency, and required classes incorporated directly;
+- JCommon removed as a dependency, and required classes incorporated directly (including package rename);
 - pull request #4 improvements to `XYStepRenderer`;
 - bug #36 fix for crosshairs with multiple datasets / axes;
 - bug #25 fix for `DateAxis.previousStandardDate()` method;
