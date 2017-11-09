@@ -110,10 +110,10 @@ public class NumberTickUnitSource implements TickUnitSource, Serializable {
 
     @Override
     public TickUnit getCeilingTickUnit(double size) {
-        if (Double.isInfinite(size)) {
-            throw new IllegalArgumentException("Must be finite.");
+        if (!Double.isInfinite(size)) {
+            this.power = (int) Math.ceil(Math.log10(size));
         }
-        this.power = (int) Math.ceil(Math.log10(size));
+
         if (this.integers) {
             power = Math.max(this.power, 0);
         }
