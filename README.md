@@ -42,6 +42,8 @@ When migrating from JFreeChart 1.0.x to JFreeChart 1.5.0, please be aware of the
 * all the classes from JCommon that are used by JFreeChart have integrated within the JFreeChart jar file within a different package than before (you will need to change your imports);
 * many methods `getBaseXXX()/setBaseXXX()` have been renamed `setDefaultXXX()/getDefaultXXX()`;
 * the `ChartUtilities` class has been renamed `ChartUtils`;
+* all the classes relating to pseudo-3D charts have been removed, as much better 3D charts are offered by [Orson Charts](https://github.com/jfree/orson-charts) so we prefer not to maintain the pseudo-3D chart code within JFreeChart;
+* the `SegmentedTimeline` class has been removed due to being (a) complex, (b) not always being correct and, as a result, generating too many support requests;
 * the `org.jfree.chart.utils.ParamChecks` class has been renamed `org.jfree.chart.utils.Args`.
 
 Please refer to [Issue 66](https://github.com/jfree/jfreechart/issues/66) for additional info.
