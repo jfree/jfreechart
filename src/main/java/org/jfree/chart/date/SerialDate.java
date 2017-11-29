@@ -540,6 +540,9 @@ public abstract class SerialDate implements Comparable, Serializable,
      */
     public static SerialDate addMonths(int months, SerialDate base) {
         int yy = (12 * base.getYYYY() + base.getMonth() + months - 1) / 12;
+        if (yy < MINIMUM_YEAR_SUPPORTED || yy > MAXIMUM_YEAR_SUPPORTED) {
+            throw new IllegalArgumentException("Call to addMonths resulted in unsupported year");
+        }
         int mm = (12 * base.getYYYY() + base.getMonth() + months - 1) % 12 + 1;
         int dd = Math.min(base.getDayOfMonth(), 
                 SerialDate.lastDayOfMonth(mm, yy));
@@ -561,6 +564,9 @@ public abstract class SerialDate implements Comparable, Serializable,
         int baseD = base.getDayOfMonth();
 
         int targetY = baseY + years;
+        if (targetY < MINIMUM_YEAR_SUPPORTED || targetY > MAXIMUM_YEAR_SUPPORTED) {
+            throw new IllegalArgumentException("Call to addYears resulted in unsupported year");
+        }
         int targetD = Math.min(baseD, SerialDate.lastDayOfMonth(baseM, targetY));
         return SerialDate.createInstance(targetD, baseM, targetY);
     }
