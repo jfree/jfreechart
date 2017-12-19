@@ -258,11 +258,14 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
     public Number getValue(Comparable rowKey, Comparable columnKey) {
         int r = getRowIndex(rowKey);
         int c = getColumnIndex(columnKey);
-        if (c != -1) {
-            return this.underlying.getValue(r, c + this.firstCategoryIndex);
+        if (c == -1) {
+            throw new UnknownKeyException("Unknown columnKey: " + columnKey);
+        }
+        else if (r == -1) {
+            throw new UnknownKeyException("Unknown rowKey: " + rowKey);
         }
         else {
-            throw new UnknownKeyException("Unknown columnKey: " + columnKey);
+            return this.underlying.getValue(r, c + this.firstCategoryIndex);
         }
     }
 
@@ -317,12 +320,15 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
     public Number getPercentComplete(Comparable rowKey, Comparable columnKey) {
         int r = getRowIndex(rowKey);
         int c = getColumnIndex(columnKey);
-        if (c != -1) {
-            return this.underlying.getPercentComplete(r,
-                    c + this.firstCategoryIndex);
+        if (c == -1) {
+            throw new UnknownKeyException("Unknown columnKey: " + columnKey);
+        }
+        else if (r == -1) {
+            throw new UnknownKeyException("Unknown rowKey: " + rowKey);
         }
         else {
-            throw new UnknownKeyException("Unknown columnKey: " + columnKey);
+            return this.underlying.getPercentComplete(r,
+                    c + this.firstCategoryIndex);
         }
     }
 
@@ -342,12 +348,15 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
             int subinterval) {
         int r = getRowIndex(rowKey);
         int c = getColumnIndex(columnKey);
-        if (c != -1) {
-            return this.underlying.getPercentComplete(r,
-                    c + this.firstCategoryIndex, subinterval);
+        if (c == -1) {
+            throw new UnknownKeyException("Unknown columnKey: " + columnKey);
+        }
+        else if (r == -1) {
+            throw new UnknownKeyException("Unknown rowKey: " + rowKey);
         }
         else {
-            throw new UnknownKeyException("Unknown columnKey: " + columnKey);
+            return this.underlying.getPercentComplete(r,
+                    c + this.firstCategoryIndex, subinterval);
         }
     }
 
@@ -367,12 +376,15 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
             int subinterval) {
         int r = getRowIndex(rowKey);
         int c = getColumnIndex(columnKey);
-        if (c != -1) {
-            return this.underlying.getEndValue(r,
-                    c + this.firstCategoryIndex, subinterval);
+        if (c == -1) {
+            throw new UnknownKeyException("Unknown columnKey: " + columnKey);
+        }
+        else if (r == -1) {
+            throw new UnknownKeyException("Unknown rowKey: " + rowKey);
         }
         else {
-            throw new UnknownKeyException("Unknown columnKey: " + columnKey);
+            return this.underlying.getEndValue(r,
+                    c + this.firstCategoryIndex, subinterval);
         }
     }
 
@@ -440,12 +452,15 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
             int subinterval) {
         int r = getRowIndex(rowKey);
         int c = getColumnIndex(columnKey);
-        if (c != -1) {
-            return this.underlying.getStartValue(r,
-                    c + this.firstCategoryIndex, subinterval);
+        if (c == -1) {
+            throw new UnknownKeyException("Unknown columnKey: " + columnKey);
+        }
+        else if (r == -1) {
+            throw new UnknownKeyException("Unknown rowKey: " + rowKey);
         }
         else {
-            throw new UnknownKeyException("Unknown columnKey: " + columnKey);
+            return this.underlying.getStartValue(r,
+                    c + this.firstCategoryIndex, subinterval);
         }
     }
 
@@ -480,12 +495,14 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
     public int getSubIntervalCount(Comparable rowKey, Comparable columnKey) {
         int r = getRowIndex(rowKey);
         int c = getColumnIndex(columnKey);
-        if (c != -1) {
-            return this.underlying.getSubIntervalCount(r,
-                    c + this.firstCategoryIndex);
+        if (c == -1) {
+            throw new UnknownKeyException("Unknown columnKey: " + columnKey);
+        } else if (r == -1) {
+            throw new UnknownKeyException("Unknown rowKey: " + rowKey);
         }
         else {
-            throw new UnknownKeyException("Unknown columnKey: " + columnKey);
+            return this.underlying.getSubIntervalCount(r,
+                    c + this.firstCategoryIndex);
         }
     }
 
@@ -519,12 +536,14 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
     public Number getStartValue(Comparable rowKey, Comparable columnKey) {
         int r = getRowIndex(rowKey);
         int c = getColumnIndex(columnKey);
-        if (c != -1) {
-            return this.underlying.getStartValue(r,
-                    c + this.firstCategoryIndex);
+        if (c == -1) {
+            throw new UnknownKeyException("Unknown columnKey: " + columnKey);
+        } else if (r == -1) {
+            throw new UnknownKeyException("Unknown rowKey: " + rowKey);
         }
         else {
-            throw new UnknownKeyException("Unknown columnKey: " + columnKey);
+            return this.underlying.getStartValue(r,
+                    c + this.firstCategoryIndex);
         }
     }
 
@@ -558,11 +577,13 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
     public Number getEndValue(Comparable rowKey, Comparable columnKey) {
         int r = getRowIndex(rowKey);
         int c = getColumnIndex(columnKey);
-        if (c != -1) {
-            return this.underlying.getEndValue(r, c + this.firstCategoryIndex);
+        if (c == -1) {
+            throw new UnknownKeyException("Unknown columnKey: " + columnKey);
+        } else if (r == -1) {
+            throw new UnknownKeyException("Unknown rowKey: " + rowKey);
         }
         else {
-            throw new UnknownKeyException("Unknown columnKey: " + columnKey);
+            return this.underlying.getEndValue(r, c + this.firstCategoryIndex);
         }
     }
 
