@@ -43,7 +43,11 @@ package org.jfree.data.gantt;
 import java.util.Date;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.data.UnknownKeyException;
 import org.junit.Test;
+import org.junit.Rule;
+import org.junit.rules.ExpectedException;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -52,6 +56,9 @@ import static org.junit.Assert.assertTrue;
  * Tests for the {@link SlidingGanttCategoryDataset} class.
  */
 public class SlidingGanttCategoryDatasetTest {
+
+    @Rule
+    public ExpectedException exceptions = ExpectedException.none();
 
     /**
      * Some checks for the equals() method.
@@ -142,6 +149,29 @@ public class SlidingGanttCategoryDatasetTest {
         TaskSeries s2 = u2.getSeries("Series");
         s2.add(new Task("Task 2", new Date(10L), new Date(11L)));
         assertTrue(d1.equals(d2));
+    }
+
+    /**
+     * Check that methods taking row keys and column keys throw reasonable exceptions.
+     */
+    @Test
+    public void testKeys() {
+        TaskSeries s1 = new TaskSeries("Series");
+        s1.add(new Task("Task 1", new Date(0L), new Date(1L)));
+        s1.add(new Task("Task 2", new Date(10L), new Date(11L)));
+        s1.add(new Task("Task 3", new Date(20L), new Date(21L)));
+        TaskSeriesCollection u1 = new TaskSeriesCollection();
+        u1.add(s1);
+        SlidingGanttCategoryDataset d1 = new SlidingGanttCategoryDataset(
+                u1, 0, 5);
+
+        exceptions.expect(UnknownKeyException.class);
+        exceptions.expectMessage("Unknown columnKey");
+        d1.getValue(100, 700);
+
+        exceptions.expect(UnknownKeyException.class);
+        exceptions.expectMessage("Unknown rowKey");
+        d1.getValue(0, 700);
     }
 
 }
