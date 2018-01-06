@@ -165,13 +165,24 @@ public class SlidingGanttCategoryDatasetTest {
         SlidingGanttCategoryDataset d1 = new SlidingGanttCategoryDataset(
                 u1, 0, 5);
 
-        exceptions.expect(UnknownKeyException.class);
-        exceptions.expectMessage("Unknown columnKey");
-        d1.getValue(100, 700);
+        boolean invalidRowKey = false;
+        try {
+            d1.getValue("Bad Value", "Task 1"); // Should be "Series", not "Bad Value"
+        } catch (UnknownKeyException e) {
+            if (e.getMessage().contains("rowKey")) {
+                invalidRowKey = true;
+            }
+        }
+        assertTrue(invalidRowKey);
 
-        exceptions.expect(UnknownKeyException.class);
-        exceptions.expectMessage("Unknown rowKey");
-        d1.getValue(0, 700);
+        boolean invalidColumnKey = false;
+        try {
+            d1.getValue("Series", "Task 4"); // only three tasks!
+        } catch (UnknownKeyException e) {
+            if (e.getMessage().contains("columnKey")) {
+                invalidColumnKey = true;
+            }
+        }
+        assertTrue(invalidColumnKey);
     }
-
 }
