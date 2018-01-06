@@ -45,8 +45,6 @@ import java.util.Date;
 import org.jfree.chart.TestUtils;
 import org.jfree.data.UnknownKeyException;
 import org.junit.Test;
-import org.junit.Rule;
-import org.junit.rules.ExpectedException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -56,9 +54,6 @@ import static org.junit.Assert.assertTrue;
  * Tests for the {@link SlidingGanttCategoryDataset} class.
  */
 public class SlidingGanttCategoryDatasetTest {
-
-    @Rule
-    public ExpectedException exceptions = ExpectedException.none();
 
     /**
      * Some checks for the equals() method.
