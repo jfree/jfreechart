@@ -43,7 +43,9 @@ package org.jfree.data.gantt;
 import java.util.Date;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.data.UnknownKeyException;
 import org.junit.Test;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -144,4 +146,38 @@ public class SlidingGanttCategoryDatasetTest {
         assertTrue(d1.equals(d2));
     }
 
+    /**
+     * Check that methods taking row keys and column keys throw reasonable exceptions.
+     */
+    @Test
+    public void testKeys() {
+        TaskSeries s1 = new TaskSeries("Series");
+        s1.add(new Task("Task 1", new Date(0L), new Date(1L)));
+        s1.add(new Task("Task 2", new Date(10L), new Date(11L)));
+        s1.add(new Task("Task 3", new Date(20L), new Date(21L)));
+        TaskSeriesCollection u1 = new TaskSeriesCollection();
+        u1.add(s1);
+        SlidingGanttCategoryDataset d1 = new SlidingGanttCategoryDataset(
+                u1, 0, 5);
+
+        boolean invalidRowKey = false;
+        try {
+            d1.getValue("Bad Value", "Task 1"); // Should be "Series", not "Bad Value"
+        } catch (UnknownKeyException e) {
+            if (e.getMessage().contains("rowKey")) {
+                invalidRowKey = true;
+            }
+        }
+        assertTrue(invalidRowKey);
+
+        boolean invalidColumnKey = false;
+        try {
+            d1.getValue("Series", "Task 4"); // only three tasks!
+        } catch (UnknownKeyException e) {
+            if (e.getMessage().contains("columnKey")) {
+                invalidColumnKey = true;
+            }
+        }
+        assertTrue(invalidColumnKey);
+    }
 }
