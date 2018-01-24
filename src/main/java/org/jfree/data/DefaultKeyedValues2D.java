@@ -190,6 +190,8 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
             int index = Collections.binarySearch(this.rowKeys, key);
             if (index < 0) {
                 return -1;
+            } else {
+                return index;
             }
         }
         else {
