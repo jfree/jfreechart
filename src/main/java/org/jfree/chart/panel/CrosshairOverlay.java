@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2018, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * CrosshairOverlay.java
  * ---------------------
- * (C) Copyright 2011-2017, by Object Refinery Limited.
+ * (C) Copyright 2011-2018, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   John Matthews;
@@ -82,10 +82,10 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
         PropertyChangeListener, PublicCloneable, Cloneable, Serializable {
 
     /** Storage for the crosshairs along the x-axis. */
-    private List<Crosshair> xCrosshairs;
+    protected List<Crosshair> xCrosshairs;
 
     /** Storage for the crosshairs along the y-axis. */
-    private List<Crosshair> yCrosshairs;
+    protected List<Crosshair> yCrosshairs;
 
     /**
      * Default constructor.
@@ -136,8 +136,7 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
         if (this.xCrosshairs.isEmpty()) {
             return;  // nothing to do
         }
-        List<Crosshair> crosshairs = getDomainCrosshairs();
-        for (Crosshair c : crosshairs) {
+        for (Crosshair c : getDomainCrosshairs()) {
             this.xCrosshairs.remove(c);
             c.removePropertyChangeListener(this);
         }
@@ -190,8 +189,7 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
         if (this.yCrosshairs.isEmpty()) {
             return;  // nothing to do
         }
-        List<Crosshair> crosshairs = getRangeCrosshairs();
-        for (Crosshair c : crosshairs) {
+        for (Crosshair c : getRangeCrosshairs()) {
             this.yCrosshairs.remove(c);
             c.removePropertyChangeListener(this);
         }
@@ -233,9 +231,7 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
         XYPlot plot = (XYPlot) chart.getPlot();
         ValueAxis xAxis = plot.getDomainAxis();
         RectangleEdge xAxisEdge = plot.getDomainAxisEdge();
-        Iterator<Crosshair> iterator = this.xCrosshairs.iterator();
-        while (iterator.hasNext()) {
-            Crosshair ch = iterator.next();
+        for (Crosshair ch : getDomainCrosshairs()) {
             if (ch.isVisible()) {
                 double x = ch.getValue();
                 double xx = xAxis.valueToJava2D(x, dataArea, xAxisEdge);
@@ -249,9 +245,7 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
         }
         ValueAxis yAxis = plot.getRangeAxis();
         RectangleEdge yAxisEdge = plot.getRangeAxisEdge();
-        iterator = this.yCrosshairs.iterator();
-        while (iterator.hasNext()) {
-            Crosshair ch = iterator.next();
+        for (Crosshair ch : getRangeCrosshairs()) {
             if (ch.isVisible()) {
                 double y = ch.getValue();
                 double yy = yAxis.valueToJava2D(y, dataArea, yAxisEdge);
