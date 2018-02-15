@@ -74,41 +74,41 @@ class DefaultValueAxisEditor extends DefaultAxisEditor
     /** A flag that indicates whether or not the axis range is determined
      *  automatically.
      */
-    private boolean autoRange;
+    protected boolean autoRange;
 
     /** Flag if auto-tickunit-selection is enabled. */
-    private boolean autoTickUnitSelection;
+    protected boolean autoTickUnitSelection;
 
     /** The lowest value in the axis range. */
-    private double minimumValue;
+    protected double minimumValue;
 
     /** The highest value in the axis range. */
-    private double maximumValue;
+    protected double maximumValue;
 
     /** A checkbox that indicates whether or not the axis range is determined
      *  automatically.
      */
-    private JCheckBox autoRangeCheckBox;
+    protected JCheckBox autoRangeCheckBox;
 
     /** A check-box enabling/disabling auto-tickunit-selection. */
-    private JCheckBox autoTickUnitSelectionCheckBox;
+    protected JCheckBox autoTickUnitSelectionCheckBox;
 
     /** A text field for entering the minimum value in the axis range. */
-    private JTextField minimumRangeValue;
+    protected JTextField minimumRangeValue;
 
     /** A text field for entering the maximum value in the axis range. */
-    private JTextField maximumRangeValue;
+    protected JTextField maximumRangeValue;
 
     /** The paint selected for drawing the gridlines. */
-    private PaintSample gridPaintSample;
+    protected PaintSample gridPaintSample;
 
     /** The stroke selected for drawing the gridlines. */
-    private StrokeSample gridStrokeSample;
+    protected StrokeSample gridStrokeSample;
 
     /** An array of stroke samples to choose from (since I haven't written a
      *  decent StrokeChooser component yet).
      */
-    private StrokeSample[] availableStrokeSamples;
+    protected StrokeSample[] availableStrokeSamples;
 
     /** The resourceBundle for the localization. */
     protected static ResourceBundle localizationResources

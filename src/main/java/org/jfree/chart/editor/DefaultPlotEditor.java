@@ -88,66 +88,66 @@ import org.jfree.chart.util.ResourceBundleWrapper;
 class DefaultPlotEditor extends JPanel implements ActionListener {
 
     /** Orientation constants. */
-    private final static String[] orientationNames = {"Vertical", "Horizontal"};
-    private final static int ORIENTATION_VERTICAL = 0;
-    private final static int ORIENTATION_HORIZONTAL = 1;
+    protected final static String[] orientationNames = {"Vertical", "Horizontal"};
+    protected final static int ORIENTATION_VERTICAL = 0;
+    protected final static int ORIENTATION_HORIZONTAL = 1;
 
     /** The paint (color) used to fill the background of the plot. */
-    private PaintSample backgroundPaintSample;
+    protected PaintSample backgroundPaintSample;
 
     /** The stroke used to draw the outline of the plot. */
-    private StrokeSample outlineStrokeSample;
+    protected StrokeSample outlineStrokeSample;
 
     /** The paint (color) used to draw the outline of the plot. */
-    private PaintSample outlinePaintSample;
+    protected PaintSample outlinePaintSample;
 
     /**
      * A panel used to display/edit the properties of the domain axis (if any).
      */
-    private DefaultAxisEditor domainAxisPropertyPanel;
+    protected DefaultAxisEditor domainAxisPropertyPanel;
 
     /**
      * A panel used to display/edit the properties of the range axis (if any).
      */
-    private DefaultAxisEditor rangeAxisPropertyPanel;
+    protected DefaultAxisEditor rangeAxisPropertyPanel;
 
     /** An array of stroke samples to choose from. */
-    private StrokeSample[] availableStrokeSamples;
+    protected StrokeSample[] availableStrokeSamples;
 
     /** The insets for the plot. */
-    private RectangleInsets plotInsets;
+    protected RectangleInsets plotInsets;
 
     /**
      * The orientation for the plot (for <tt>CategoryPlot</tt>s and
      * <tt>XYPlot</tt>s).
      */
-    private PlotOrientation plotOrientation;
+    protected PlotOrientation plotOrientation;
 
     /**
      * The orientation combo box (for <tt>CategoryPlot</tt>s and
      * <tt>XYPlot</tt>s).
      */
-    private JComboBox orientationCombo;
+    protected JComboBox orientationCombo;
 
     /** Whether or not to draw lines between each data point (for
      * <tt>LineAndShapeRenderer</tt>s and <tt>StandardXYItemRenderer</tt>s).
      */
-    private Boolean drawLines;
+    protected Boolean drawLines;
 
     /**
      * The checkbox for whether or not to draw lines between each data point.
      */
-    private JCheckBox drawLinesCheckBox;
+    protected JCheckBox drawLinesCheckBox;
 
     /** Whether or not to draw shapes at each data point (for
      * <tt>LineAndShapeRenderer</tt>s and <tt>StandardXYItemRenderer</tt>s).
      */
-    private Boolean drawShapes;
+    protected Boolean drawShapes;
 
     /**
      * The checkbox for whether or not to draw shapes at each data point.
      */
-    private JCheckBox drawShapesCheckBox;
+    protected JCheckBox drawShapesCheckBox;
 
     /** The resourceBundle for the localization. */
     protected static ResourceBundle localizationResources
@@ -321,7 +321,7 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
         else if (plot instanceof XYPlot) {
             domainAxis = ((XYPlot) plot).getDomainAxis();
         }
-        this.domainAxisPropertyPanel = DefaultAxisEditor.getInstance(
+        this.domainAxisPropertyPanel = instantiateAxisPropertyPanel(
                 domainAxis);
         if (this.domainAxisPropertyPanel != null) {
             this.domainAxisPropertyPanel.setBorder(
@@ -341,7 +341,7 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
             rangeAxis = ((PolarPlot) plot).getAxis();
         }
 
-        this.rangeAxisPropertyPanel = DefaultAxisEditor.getInstance(rangeAxis);
+        this.rangeAxisPropertyPanel = instantiateAxisPropertyPanel(rangeAxis);
         if (this.rangeAxisPropertyPanel != null) {
             this.rangeAxisPropertyPanel.setBorder(
                     BorderFactory.createEmptyBorder(2, 2, 2, 2));
@@ -350,6 +350,17 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
         }
 
         return tabs;
+    }
+    
+    /**
+     * Instantiates the Axis Editor
+     * - This can be overridden by a subclass to use a different DefaultAxisEditor that inherits DefaultAxisEditor
+     * @param axis
+     * @return
+     */
+    protected DefaultAxisEditor instantiateAxisPropertyPanel(Axis axis)
+    {
+    	return DefaultAxisEditor.getInstance(axis);
     }
 
     /**
@@ -444,7 +455,7 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
     /**
      * Allow the user to change the background paint.
      */
-    private void attemptBackgroundPaintSelection() {
+    protected void attemptBackgroundPaintSelection() {
         Color c;
         c = JColorChooser.showDialog(this, localizationResources.getString(
                 "Background_Color"), Color.BLUE);
@@ -456,7 +467,7 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
     /**
      * Allow the user to change the outline stroke.
      */
-    private void attemptOutlineStrokeSelection() {
+    protected void attemptOutlineStrokeSelection() {
         StrokeChooserPanel panel = new StrokeChooserPanel(
                 this.outlineStrokeSample, this.availableStrokeSamples);
         int result = JOptionPane.showConfirmDialog(this, panel,
@@ -472,7 +483,7 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
      * Allow the user to change the outline paint.  We use JColorChooser, so
      * the user can only choose colors (a subset of all possible paints).
      */
-    private void attemptOutlinePaintSelection() {
+    protected void attemptOutlinePaintSelection() {
         Color c;
         c = JColorChooser.showDialog(this, localizationResources.getString(
                 "Outline_Color"), Color.BLUE);
@@ -484,7 +495,7 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
 //    /**
 //     * Allow the user to edit the individual insets' values.
 //     */
-//    private void editInsets() {
+//    protected void editInsets() {
 //        InsetsChooserPanel panel = new InsetsChooserPanel(this.plotInsets);
 //        int result = JOptionPane.showConfirmDialog(
 //            this, panel, localizationResources.getString("Edit_Insets"),
@@ -502,7 +513,7 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
      * Allow the user to modify the plot orientation if this is an editor for a
      * <tt>CategoryPlot</tt> or a <tt>XYPlot</tt>.
      */
-    private void attemptOrientationSelection() {
+    protected void attemptOrientationSelection() {
 
         int index = this.orientationCombo.getSelectedIndex();
 
@@ -519,7 +530,7 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
      * points by <tt>LineAndShapeRenderer</tt>s and
      * <tt>StandardXYItemRenderer</tt>s.
      */
-    private void attemptDrawLinesSelection() {
+    protected void attemptDrawLinesSelection() {
         this.drawLines = Boolean.valueOf(this.drawLinesCheckBox.isSelected());
     }
 
@@ -527,7 +538,7 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
      * Allow the user to modify whether or not shapes are drawn at data points
      * by <tt>LineAndShapeRenderer</tt>s and <tt>StandardXYItemRenderer</tt>s.
      */
-    private void attemptDrawShapesSelection() {
+    protected void attemptDrawShapesSelection() {
         this.drawShapes = Boolean.valueOf(this.drawShapesCheckBox.isSelected());
     }
 

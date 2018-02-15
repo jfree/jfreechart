@@ -64,9 +64,9 @@ import org.jfree.chart.ui.LCBLayout;
 class DefaultNumberAxisEditor extends DefaultValueAxisEditor
     implements FocusListener {
 
-    private double manualTickUnitValue;
+    protected double manualTickUnitValue;
 
-    private JTextField manualTickUnit;
+    protected JTextField manualTickUnit;
 
 
     /**

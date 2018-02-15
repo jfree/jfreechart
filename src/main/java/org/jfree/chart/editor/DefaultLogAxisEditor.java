@@ -56,9 +56,9 @@ import org.jfree.chart.axis.NumberTickUnit;
  */
 public class DefaultLogAxisEditor extends DefaultValueAxisEditor {
 
-    private double manualTickUnitValue;
+    protected double manualTickUnitValue;
 
-    private JTextField manualTickUnit;
+    protected JTextField manualTickUnit;
 
     /**
      * Standard constructor: builds a property panel for the specified axis.
