@@ -92,10 +92,6 @@
                     <includes>
                         <include>**/*Test.java</include>
                     </includes>
-                    <excludes>
-                        <exclude>**/JFreeChartTestSuite.java</exclude>
-                        <exclude>**/*PackageTests.java</exclude>
-                    </excludes>
                 </configuration>
             </plugin>
 
