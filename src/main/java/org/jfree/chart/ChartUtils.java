@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2018, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,52 +27,12 @@
  * ---------------
  * ChartUtils.java
  * ---------------
- * (C) Copyright 2001-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2001-2018, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Wolfgang Irler;
  *                   Richard Atkinson;
  *                   Xavier Poinsard;
- *
- * Changes
- * -------
- * 11-Dec-2001 : Version 1.  The JPEG method comes from Wolfgang Irler's
- *               JFreeChartServletDemo class (DG);
- * 23-Jan-2002 : Changed saveChartAsXXX() methods to pass IOExceptions back to
- *               caller (DG);
- * 26-Jun-2002 : Added image map methods (DG);
- * 05-Aug-2002 : Added writeBufferedImage methods
- *               Modified writeImageMap method to support flexible image
- *               maps (RA);
- * 26-Aug-2002 : Added saveChartAsJPEG and writeChartAsJPEG methods with info
- *               objects (RA);
- * 05-Sep-2002 : Added writeImageMap() method to support OverLIB
- *               - http://www.bosrup.com/web/overlib (RA);
- * 26-Sep-2002 : Fixed errors reported by Checkstyle (DG);
- * 17-Oct-2002 : Exposed JPEG quality setting and PNG compression level as
- *               parameters (DG);
- * 25-Oct-2002 : Fixed writeChartAsJPEG() empty method bug (DG);
- * 13-Mar-2003 : Updated writeImageMap method as suggested by Xavier Poinsard
- *               (see Feature Request 688079) (DG);
- * 12-Aug-2003 : Added support for custom image maps using
- *               ToolTipTagFragmentGenerator and URLTagFragmentGenerator (RA);
- * 02-Sep-2003 : Separated PNG encoding from writing chart to an
- *               OutputStream (RA);
- * 04-Dec-2003 : Chart draw() method modified to include anchor point (DG);
- * 20-Feb-2004 : Edited Javadocs and added argument checking (DG);
- * 05-Apr-2004 : Fixed problem with buffered image type (DG);
- * 01-Aug-2004 : Modified to use EncoderUtil for all image encoding (RA);
- * 02-Aug-2004 : Delegated image map related functionality to ImageMapUtil (RA);
- * 13-Jan-2005 : Renamed ImageMapUtil --> ImageMapUtilities, removed method
- *               writeImageMap(PrintWriter, String, ChartRenderingInfo) which
- *               exists in ImageMapUtilities (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 06-Feb-2006 : API doc update (DG);
- * 19-Mar-2007 : Use try-finally to close output stream in saveChartAsXXX()
- *               methods (DG);
- * 10-Jan-2008 : Fix bug 1868251 - don't create image with transparency when
- *               saving to JPEG format (DG);
- * 02-Jul-2013 : Use ParamChecks class (DG);
  *
  */
 
@@ -107,6 +67,44 @@ import org.jfree.chart.util.Args;
  * @see ImageMapUtils
  */
 public abstract class ChartUtils {
+
+    /**
+     * Returns {@code true} if JFreeSVG is on the classpath, and 
+     * {@code false} otherwise.  The JFreeSVG library can be found at
+     * http://www.jfree.org/jfreesvg/
+     * 
+     * @return A boolean.
+     * 
+     * @since 1.6.0
+     */
+    public static boolean isJFreeSVGAvailable() {
+        Class svgGraphics2DClass = null;
+        try {
+            svgGraphics2DClass =  Class.forName("org.jfree.graphics2d.svg.SVGGraphics2D");
+        } catch (ClassNotFoundException e) {
+            // svgGraphics2DClass will be null so the function will return false
+        }
+        return svgGraphics2DClass != null;
+    }
+    
+    /**
+     * Returns {@code true} if OrsonPDF is on the classpath, and 
+     * {@code false} otherwise.  The OrsonPDF library can be found at
+     * http://www.object-refinery.com/orsonpdf/
+     * 
+     * @return A boolean.
+     * 
+     * @since 1.6.0
+     */
+    public static boolean isOrsonPDFAvailable() {
+        Class pdfDocumentClass = null;
+        try {
+            pdfDocumentClass = Class.forName("com.orsonpdf.PDFDocument");
+        } catch (ClassNotFoundException e) {
+            // pdfDocument class will be null so the function will return false
+        }
+        return (pdfDocumentClass != null);
+    }
 
     /**
      * Applies the current theme to the specified chart.  This method is
