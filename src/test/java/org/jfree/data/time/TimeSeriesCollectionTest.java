@@ -32,14 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * Changes
- * -------
- * 01-May-2003 : Version 1 (DG);
- * 04-Dec-2003 : Added a test for the getSurroundingItems() method (DG);
- * 08-May-2007 : Added testIndexOf() method (DG);
- * 18-May-2009 : Added testFindDomainBounds() (DG);
- * 08-Jan-2012 : Added testBug3445507() (DG);
- *
  */
 
 package org.jfree.data.time;
@@ -58,7 +50,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 import org.jfree.chart.TestUtils;
-
 import org.jfree.data.Range;
 import org.jfree.data.general.DatasetUtils;
 import org.junit.jupiter.api.Test;
@@ -309,6 +300,10 @@ public class TimeSeriesCollectionTest {
      */
     @Test
     public void testFindDomainBounds() {
+        // store the current time zone
+        TimeZone saved = TimeZone.getDefault();
+        TimeZone.setDefault(TimeZone.getTimeZone("Europe/Paris"));
+
         TimeSeriesCollection dataset = new TimeSeriesCollection();
         List<String> visibleSeriesKeys = new ArrayList<>();
         Range r = DatasetUtils.findDomainBounds(dataset, visibleSeriesKeys,
@@ -320,10 +315,6 @@ public class TimeSeriesCollectionTest {
         visibleSeriesKeys.add("S1");
         r = DatasetUtils.findDomainBounds(dataset, visibleSeriesKeys, true);
         assertNull(r);
-
-        // store the current time zone
-        TimeZone saved = TimeZone.getDefault();
-        TimeZone.setDefault(TimeZone.getTimeZone("Europe/Paris"));
 
         s1.add(new Year(2008), 8.0);
         r = DatasetUtils.findDomainBounds(dataset, visibleSeriesKeys, true);
