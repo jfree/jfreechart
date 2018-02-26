@@ -32,13 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   John Matthews;
  *
- * Changes:
- * --------
- * 09-Apr-2009 : Version 1 (DG);
- * 19-May-2009 : Fixed FindBugs warnings, patch by Michal Wozniak (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
- * 05-Mar-2016 : Fix label outline stroke (DG);
- *
  */
 
 package org.jfree.chart.panel;
@@ -56,7 +49,6 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -74,7 +66,9 @@ import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 
 /**
- * An overlay for a {@link ChartPanel} that draws crosshairs on a plot.
+ * An overlay for a {@link ChartPanel} that draws crosshairs on a chart.  If 
+ * you are using the JavaFX extensions for JFreeChart, then you should use
+ * the {@code CrosshairOverlayFX} class.
  *
  * @since 1.0.13
  */
@@ -88,7 +82,7 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
     protected List<Crosshair> yCrosshairs;
 
     /**
-     * Default constructor.
+     * Creates a new overlay that initially contains no crosshairs.
      */
     public CrosshairOverlay() {
         super();
@@ -97,7 +91,7 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
     }
 
     /**
-     * Adds a crosshair against the domain axis and sends an
+     * Adds a crosshair against the domain axis (x-axis) and sends an
      * {@link OverlayChangeEvent} to all registered listeners.
      *
      * @param crosshair  the crosshair ({@code null} not permitted).
@@ -217,7 +211,10 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
     }
 
     /**
-     * Paints the crosshairs in the layer.
+     * Renders the crosshairs in the overlay on top of the chart that has just
+     * been rendered in the specified {@code chartPanel}.  This method is
+     * called by the JFreeChart framework, you won't normally call it from
+     * user code.
      *
      * @param g2  the graphics target.
      * @param chartPanel  the chart panel.
