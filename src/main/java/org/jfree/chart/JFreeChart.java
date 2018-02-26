@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2018, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * JFreeChart.java
  * ---------------
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2018, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Andrzej Porebski;
@@ -41,115 +41,6 @@
  * NOTE: The above list of contributors lists only the people that have
  * contributed to this source file (JFreeChart.java) - for a list of ALL
  * contributors to the project, please see the README.txt file.
- *
- * Changes (from 20-Jun-2001)
- * --------------------------
- * 20-Jun-2001 : Modifications submitted by Andrzej Porebski for legend
- *               placement;
- * 21-Jun-2001 : Removed JFreeChart parameter from Plot constructors (DG);
- * 22-Jun-2001 : Multiple titles added (original code by David Berry, with
- *               reworkings by DG);
- * 18-Sep-2001 : Updated header (DG);
- * 15-Oct-2001 : Moved data source classes into new package
- *               com.jrefinery.data.* (DG);
- * 18-Oct-2001 : New factory method for creating VerticalXYBarChart (DG);
- * 19-Oct-2001 : Moved series paint and stroke methods to the Plot class (DG);
- *               Moved static chart creation methods to new ChartFactory
- *               class (DG);
- * 22-Oct-2001 : Renamed DataSource.java --> Dataset.java etc. (DG);
- *               Fixed bug where chart isn't registered with the dataset (DG);
- * 07-Nov-2001 : Fixed bug where null title in constructor causes
- *               exception (DG);
- *               Tidied up event notification code (DG);
- * 17-Nov-2001 : Added getLegendItemCount() method (DG);
- * 21-Nov-2001 : Set clipping in draw method to ensure that nothing gets drawn
- *               outside the chart area (DG);
- * 11-Dec-2001 : Added the createBufferedImage() method, taken from the
- *               JFreeChartServletDemo class (DG);
- * 13-Dec-2001 : Added tooltips (DG);
- * 16-Jan-2002 : Added handleClick() method (DG);
- * 22-Jan-2002 : Fixed bug correlating legend labels with pie data (DG);
- * 05-Feb-2002 : Removed redundant tooltips code (DG);
- * 19-Feb-2002 : Added accessor methods for the backgroundImage and
- *               backgroundImageAlpha attributes (DG);
- * 21-Feb-2002 : Added static fields for INFO, COPYRIGHT, LICENCE, CONTRIBUTORS
- *               and LIBRARIES.  These can be used to display information about
- *               JFreeChart (DG);
- * 06-Mar-2002 : Moved constants to JFreeChartConstants interface (DG);
- * 18-Apr-2002 : PieDataset is no longer sorted (oldman);
- * 23-Apr-2002 : Moved dataset to the Plot class (DG);
- * 13-Jun-2002 : Added an extra draw() method (DG);
- * 25-Jun-2002 : Implemented the Drawable interface and removed redundant
- *               imports (DG);
- * 26-Jun-2002 : Added another createBufferedImage() method (DG);
- * 18-Sep-2002 : Fixed issues reported by Checkstyle (DG);
- * 23-Sep-2002 : Added new contributor (DG);
- * 28-Oct-2002 : Created main title and subtitle list to replace existing title
- *               list (DG);
- * 08-Jan-2003 : Added contributor (DG);
- * 17-Jan-2003 : Added new constructor (DG);
- * 22-Jan-2003 : Added ChartColor class by Cameron Riley, and background image
- *               alignment code by Christian W. Zuckschwerdt (DG);
- * 11-Feb-2003 : Added flag to allow suppression of chart change events, based
- *               on a suggestion by Klaus Rheinwald (DG);
- * 04-Mar-2003 : Added small fix for suppressed chart change events (see bug id
- *               690865) (DG);
- * 10-Mar-2003 : Added Benoit Xhenseval to contributors (DG);
- * 26-Mar-2003 : Implemented Serializable (DG);
- * 15-Jul-2003 : Added an optional border for the chart (DG);
- * 11-Sep-2003 : Took care of listeners while cloning (NB);
- * 16-Sep-2003 : Changed ChartRenderingInfo --> PlotRenderingInfo (DG);
- * 22-Sep-2003 : Added nullpointer checks.
- * 25-Sep-2003 : Added nullpointer checks too (NB).
- * 03-Dec-2003 : Legends are now registered by this class instead of using the
- *               old constructor way (TM);
- * 03-Dec-2003 : Added anchorPoint to draw() method (DG);
- * 08-Jan-2004 : Reworked title code, introducing line wrapping (DG);
- * 09-Feb-2004 : Created additional createBufferedImage() method (DG);
- * 05-Apr-2004 : Added new createBufferedImage() method (DG);
- * 27-May-2004 : Moved constants from JFreeChartConstants.java back to this
- *               class (DG);
- * 25-Nov-2004 : Updates for changes to Title class (DG);
- * 06-Jan-2005 : Change lookup for default background color (DG);
- * 31-Jan-2005 : Added Don Elliott to contributors (DG);
- * 02-Feb-2005 : Added clearSubtitles() method (DG);
- * 03-Feb-2005 : Added Mofeed Shahin to contributors (DG);
- * 08-Feb-2005 : Updated for RectangleConstraint changes (DG);
- * 28-Mar-2005 : Renamed Legend --> OldLegend (DG);
- * 12-Apr-2005 : Added methods to access legend(s) in subtitle list (DG);
- * 13-Apr-2005 : Added removeLegend() and removeSubtitle() methods (DG);
- * 20-Apr-2005 : Modified to collect chart entities from titles and
- *               subtitles (DG);
- * 26-Apr-2005 : Removed LOGGER (DG);
- * 06-Jun-2005 : Added addLegend() method and padding attribute, fixed equals()
- *               method (DG);
- * 24-Nov-2005 : Removed OldLegend and related code - don't want to support
- *               this in 1.0.0 final (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 27-Jan-2006 : Updated version number (DG);
- * 07-Dec-2006 : Added some missing credits (DG);
- * 17-Jan-2007 : Added Darren Jung to contributor list (DG);
- * 05-Mar-2007 : Added Sergei Ivanov to the contributor list (DG);
- * 16-Mar-2007 : Modified initial legend border (DG);
- * 22-Mar-2007 : New methods for text anti-aliasing (DG);
- * 16-May-2007 : Fixed argument check in getSubtitle(), copy list in
- *               get/setSubtitles(), and added new addSubtitle(int, Title)
- *               method (DG);
- * 05-Jun-2007 : Add change listener to default legend (DG);
- * 04-Dec-2007 : In createBufferedImage() methods, make the default image type
- *               BufferedImage.TYPE_INT_ARGB (thanks to Klaus Rheinwald) (DG);
- * 05-Dec-2007 : Fixed bug 1749124 (not registering as listener with
- *               TextTitle) (DG);
- * 23-Apr-2008 : Added new contributor (Diego Pierangeli) (DG);
- * 16-May-2008 : Added new contributor (Michael Siemer) (DG);
- * 19-Sep-2008 : Check for title visibility (DG);
- * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
- *               Jess Thrysoee (DG);
- * 19-Mar-2009 : Added entity support - see patch 2603321 by Peter Kolb (DG);
- * 19-May-2009 : Fixed FindBugs warnings, patch by Michal Wozniak (DG);
- * 29-Jun-2009 : Check visibility flag in main title (DG);
- * 02-Jul-2013 : Use ParamChecks class (DG);
- * 21-Jun-2014 : Set default hint value for stroke control (DG);
  *
  */
 
@@ -176,7 +67,6 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import javax.swing.UIManager;
@@ -185,7 +75,6 @@ import javax.swing.event.EventListenerList;
 import org.jfree.chart.block.BlockParams;
 import org.jfree.chart.block.EntityBlockResult;
 import org.jfree.chart.block.LengthConstraintType;
-import org.jfree.chart.block.LineBorder;
 import org.jfree.chart.block.RectangleConstraint;
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.entity.JFreeChartEntity;
@@ -304,7 +193,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
      * The chart subtitles (zero, one or many).  This field should never be
      * {@code null}.
      */
-    private List subtitles;
+    private List<Title> subtitles;
 
     /** Draws the visual representation of the data. */
     private Plot plot;
@@ -419,7 +308,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
         this.plot = plot;
         plot.addChangeListener(this);
 
-        this.subtitles = new ArrayList();
+        this.subtitles = new ArrayList<Title>();
 
         // create a legend, if requested...
         if (createLegend) {
@@ -716,9 +605,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
      */
     public LegendTitle getLegend(int index) {
         int seen = 0;
-        Iterator iterator = this.subtitles.iterator();
-        while (iterator.hasNext()) {
-            Title subtitle = (Title) iterator.next();
+        for (Title subtitle : this.subtitles) {
             if (subtitle instanceof LegendTitle) {
                 if (seen == index) {
                     return (LegendTitle) subtitle;
@@ -742,13 +629,13 @@ public class JFreeChart implements Drawable, TitleChangeListener,
     }
 
     /**
-     * Returns the list of subtitles for the chart.
+     * Returns a new list containing all the subtitles for the chart.
      *
      * @return The subtitle list (possibly empty, but never {@code null}).
      *
      * @see #setSubtitles(List)
      */
-    public List getSubtitles() {
+    public List<Title> getSubtitles() {
         return new ArrayList(this.subtitles);
     }
 
@@ -762,15 +649,11 @@ public class JFreeChart implements Drawable, TitleChangeListener,
      *
      * @see #getSubtitles()
      */
-    public void setSubtitles(List subtitles) {
-        if (subtitles == null) {
-            throw new NullPointerException("Null 'subtitles' argument.");
-        }
+    public void setSubtitles(List<Title> subtitles) {
+        Args.nullNotPermitted(subtitles, "subtitles");
         setNotify(false);
         clearSubtitles();
-        Iterator iterator = subtitles.iterator();
-        while (iterator.hasNext()) {
-            Title t = (Title) iterator.next();
+        for (Title t: subtitles) {
             if (t != null) {
                 addSubtitle(t);
             }
@@ -802,7 +685,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
         if ((index < 0) || (index >= getSubtitleCount())) {
             throw new IllegalArgumentException("Index out of range.");
         }
-        return (Title) this.subtitles.get(index);
+        return this.subtitles.get(index);
     }
 
     /**
@@ -847,9 +730,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
      * @see #addSubtitle(Title)
      */
     public void clearSubtitles() {
-        Iterator iterator = this.subtitles.iterator();
-        while (iterator.hasNext()) {
-            Title t = (Title) iterator.next();
+        for (Title t : this.subtitles) {
             t.removeChangeListener(this);
         }
         this.subtitles.clear();
@@ -1264,9 +1145,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
             }
         }
 
-        Iterator iterator = this.subtitles.iterator();
-        while (iterator.hasNext()) {
-            Title currentTitle = (Title) iterator.next();
+        for (Title currentTitle : this.subtitles) {
             if (currentTitle.isVisible()) {
                 EntityCollection e = drawTitle(currentTitle, g2, nonTitleArea,
                         (entities != null));
@@ -1750,7 +1629,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
             chart.title.addChangeListener(chart);
         }
 
-        chart.subtitles = new ArrayList();
+        chart.subtitles = new ArrayList<Title>();
         for (int i = 0; i < getSubtitleCount(); i++) {
             Title subtitle = (Title) getSubtitle(i).clone();
             chart.subtitles.add(subtitle);
