@@ -34,33 +34,9 @@ package org.jfree.chart.ui;
 public enum Layer {
 
     /** Foreground. */
-    FOREGROUND("Layer.FOREGROUND"),
+    FOREGROUND,
 
     /** Background. */
-    BACKGROUND("Layer.BACKGROUND");
-
-    /** The name. */
-    private String name;
-
-    /**
-     * Private constructor.
-     *
-     * @param name  the name.
-     */
-    private Layer(final String name) {
-        this.name = name;
-    }
-
-    /**
-     * Returns a string representing the object.
-     *
-     * @return The string.
-     */
-    @Override
-    public String toString() {
-        return this.name;
-    }
+    BACKGROUND
 
 }
-
-

@@ -35,13 +35,10 @@ package org.jfree.chart.util;
 public enum Rotation {
 
     /** Clockwise. */
-    CLOCKWISE("Rotation.CLOCKWISE", -1.0),
+    CLOCKWISE(-1.0),
 
     /** The reverse order renders the primary dataset first. */
-    ANTICLOCKWISE("Rotation.ANTICLOCKWISE", 1.0);
-
-    /** The name. */
-    private String name;
+    ANTICLOCKWISE(1.0);
 
     /**
      * The factor (-1.0 for {@code CLOCKWISE} and 1.0 for
@@ -52,22 +49,10 @@ public enum Rotation {
     /**
      * Private constructor.
      *
-     * @param name  the name.
      * @param factor  the rotation factor.
      */
-    private Rotation(String name, double factor) {
-        this.name = name;
+    Rotation(double factor) {
         this.factor = factor;
-    }
-
-    /**
-     * Returns a string representing the object.
-     *
-     * @return the string (never {@code null}).
-     */
-    @Override
-    public String toString() {
-        return this.name;
     }
 
     /**

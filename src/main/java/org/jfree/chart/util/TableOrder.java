@@ -34,31 +34,10 @@ package org.jfree.chart.util;
 public enum TableOrder {
 
     /** By row. */
-    BY_ROW("TableOrder.BY_ROW"),
+    BY_ROW,
 
     /** By column. */
-    BY_COLUMN("TableOrder.BY_COLUMN");
+    BY_COLUMN
 
-    /** The name. */
-    private final String name;
-
-    /**
-     * Private constructor.
-     *
-     * @param name  the name.
-     */
-    private TableOrder(String name) {
-        this.name = name;
-    }
-
-    /**
-     * Returns a string representing the object.
-     *
-     * @return The string.
-     */
-    @Override
-    public String toString() {
-        return this.name;
-    }
 }
 
