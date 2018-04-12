@@ -2706,7 +2706,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * @return An array of listeners.
      */
     @Override
-    public EventListener[] getListeners(Class listenerType) {
+    public <T extends EventListener> T[] getListeners(Class<T> listenerType) {
         if (listenerType == ChartMouseListener.class) {
             // fetch listeners from local storage
             return this.chartMouseListeners.getListeners(listenerType);

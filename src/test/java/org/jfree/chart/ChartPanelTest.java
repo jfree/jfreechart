@@ -122,16 +122,6 @@ public class ChartPanelTest implements ChartChangeListener, ChartMouseListener {
             pass = true;
         }
         assertTrue(pass);
-
-        // try a class that isn't a listener
-        pass = false;
-        try {
-            listeners = p.getListeners(Integer.class);
-        }
-        catch (ClassCastException e) {
-            pass = true;
-        }
-        assertTrue(pass);
     }
 
     /**
