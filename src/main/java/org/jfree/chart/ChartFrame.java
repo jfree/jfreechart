@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2018, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * ---------------
  * ChartFrame.java
  * ---------------
- * (C) Copyright 2001-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2001-2018, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 22-Nov-2001 : Version 1 (DG);
- * 08-Jan-2001 : Added chartPanel attribute (DG);
- * 24-May-2002 : Renamed JFreeChartFrame --> ChartFrame (DG);
  *
  */
 
@@ -75,7 +69,7 @@ public class ChartFrame extends JFrame {
     public ChartFrame(String title, JFreeChart chart, boolean scrollPane) {
         super(title);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        this.chartPanel = new ChartPanel(chart);
+        this.chartPanel = new ChartPanel(chart, false);
         if (scrollPane) {
             setContentPane(new JScrollPane(this.chartPanel));
         }
