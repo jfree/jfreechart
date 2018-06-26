@@ -69,6 +69,8 @@ package org.jfree.chart.renderer.xy;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
@@ -222,10 +224,22 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
      * @param pass  the pass index.
      */
     @Override
-    public void drawItem(Graphics2D g2, XYItemRendererState state, 
-            Rectangle2D dataArea, PlotRenderingInfo info, XYPlot plot,
-            ValueAxis domainAxis, ValueAxis rangeAxis, XYDataset dataset, 
-            int series, int item, CrosshairState crosshairState, int pass) {
+    public void drawItem(Graphics2D g2,
+            XYItemRendererState state,
+            Rectangle2D dataArea,
+            PlotRenderingInfo info,
+            XYPlot plot,
+            ValueAxis domainAxis,
+            ValueAxis rangeAxis,
+            XYDataset dataset,
+            int series,
+            int item,
+            CrosshairState crosshairState,
+            int pass) {
+
+        if (!getItemVisible(series, item)) {
+            return;
+        }
 
         IntervalXYDataset intervalDataset = (IntervalXYDataset) dataset;
 
@@ -257,7 +271,7 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
 
         double intervalW = xx1 - xx0;  // this may be negative
         double baseX = xx0;
-        if (this.centerBarAtStartValue) {
+        if (false) {
             baseX = baseX - intervalW / 2.0;
         }
         double m = getMargin();
@@ -271,12 +285,21 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
 
         PlotOrientation orientation = plot.getOrientation();
 
-        int numSeries = dataset.getSeriesCount();
+
+        List<Integer> visibleSeries = new ArrayList<Integer>();
+        for (int i = 0; i < dataset.getSeriesCount(); i++) {
+            if (isSeriesVisible(i)) {
+                visibleSeries.add(i);
+            }
+        }
+
+        int numSeries = visibleSeries.size();
         double seriesBarWidth = intervalW / numSeries;  // may be negative
+        int visibleSeriesIndex = visibleSeries.indexOf(series);
 
         Rectangle2D bar = null;
         if (orientation == PlotOrientation.HORIZONTAL) {
-            double barY0 = baseX + (seriesBarWidth * series);
+            double barY0 = baseX + (seriesBarWidth * visibleSeriesIndex);
             double barY1 = barY0 + seriesBarWidth;
             double rx = Math.min(yy0, yy1);
             double rw = intervalH;
@@ -285,7 +308,7 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
             bar = new Rectangle2D.Double(rx, ry, rw, rh);
         }
         else if (orientation == PlotOrientation.VERTICAL) {
-            double barX0 = baseX + (seriesBarWidth * series);
+            double barX0 = baseX + (seriesBarWidth * visibleSeriesIndex);
             double barX1 = barX0 + seriesBarWidth;
             double rx = Math.min(barX0, barX1);
             double rw = Math.abs(barX1 - barX0);
@@ -316,7 +339,7 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
         }
         if (pass == 0 && getShadowsVisible()) {
             getBarPainter().paintBarShadow(g2, this, series, item, bar, barBase,
-                !getUseYInterval());
+                    !getUseYInterval());
         }
         if (pass == 1) {
             getBarPainter().paintBar(g2, this, series, item, bar, barBase);
