@@ -224,18 +224,10 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
      * @param pass  the pass index.
      */
     @Override
-    public void drawItem(Graphics2D g2,
-            XYItemRendererState state,
-            Rectangle2D dataArea,
-            PlotRenderingInfo info,
-            XYPlot plot,
-            ValueAxis domainAxis,
-            ValueAxis rangeAxis,
-            XYDataset dataset,
-            int series,
-            int item,
-            CrosshairState crosshairState,
-            int pass) {
+    public void drawItem(Graphics2D g2, XYItemRendererState state,
+            Rectangle2D dataArea, PlotRenderingInfo info, XYPlot plot,
+            ValueAxis domainAxis, ValueAxis rangeAxis, XYDataset dataset,
+            int series, int item, CrosshairState crosshairState, int pass) {
 
         if (!getItemVisible(series, item)) {
             return;
@@ -271,7 +263,7 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
 
         double intervalW = xx1 - xx0;  // this may be negative
         double baseX = xx0;
-        if (false) {
+        if (this.centerBarAtStartValue) {
             baseX = baseX - intervalW / 2.0;
         }
         double m = getMargin();
