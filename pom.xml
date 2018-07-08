@@ -10,7 +10,7 @@
 
     <artifactId>jfreechart</artifactId>
     <groupId>org.jfree</groupId>
-    <version>1.5.0</version>
+    <version>1.6.0-snapshot</version>
     <packaging>jar</packaging>
 
     <organization>
@@ -54,13 +54,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.11</version>
@@ -99,10 +92,6 @@
                     <includes>
                         <include>**/*Test.java</include>
                     </includes>
-                    <excludes>
-                        <exclude>**/JFreeChartTestSuite.java</exclude>
-                        <exclude>**/*PackageTests.java</exclude>
-                    </excludes>
                 </configuration>
             </plugin>
 
@@ -208,6 +197,10 @@
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
                         <version>2.9.1</version>
+                        <configuration>
+                            <docfilessubdirs/>
+                            <linksource>true</linksource>
+                        </configuration>
                         <executions>
                             <execution>
                                 <id>attach-javadoc</id>

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2018, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,27 +27,15 @@
  * --------------------
  * XYBlockRenderer.java
  * --------------------
- * (C) Copyright 2006-2017, by Object Refinery Limited.
+ * (C) Copyright 2006-2018, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 05-Jul-2006 : Version 1 (DG);
- * 02-Feb-2007 : Added getPaintScale() method (DG);
- * 09-Mar-2007 : Fixed cloning (DG);
- * 03-Aug-2007 : Fix for bug 1766646 (DG);
- * 07-Apr-2008 : Added entity collection code (DG);
- * 22-Apr-2008 : Implemented PublicCloneable (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
- * 20-Feb-2017 : Add update for crosshairs (DG);
  *
  */
 
 package org.jfree.chart.renderer.xy;
 
-import java.awt.BasicStroke;
 import java.awt.Graphics2D;
 import java.awt.Paint;
 import java.awt.geom.Rectangle2D;
@@ -109,6 +97,15 @@ public class XYBlockRenderer extends AbstractXYItemRenderer
 
     /** The paint scale. */
     private PaintScale paintScale;
+    
+    /** A flag that controls whether outlines are drawn for blocks. */
+    private boolean drawOutlines;
+
+    /**
+     * A flag that controls whether the outline paint is used for drawing block
+     * outlines.
+     */
+    private boolean useOutlinePaint;
 
     /**
      * Creates a new {@code XYBlockRenderer} instance with default
@@ -117,6 +114,8 @@ public class XYBlockRenderer extends AbstractXYItemRenderer
     public XYBlockRenderer() {
         updateOffsets();
         this.paintScale = new LookupPaintScale();
+        this.drawOutlines = true;
+        this.useOutlinePaint = false; // use item paint by default
     }
 
     /**
@@ -231,6 +230,59 @@ public class XYBlockRenderer extends AbstractXYItemRenderer
     public void setPaintScale(PaintScale scale) {
         Args.nullNotPermitted(scale, "scale");
         this.paintScale = scale;
+        fireChangeEvent();
+    }
+
+    /**
+     * Returns {@code true} if outlines should be drawn for blocks, and
+     * {@code false} otherwise.  The default value is {@code true}.
+     *
+     * @return A boolean.
+     *
+     * @see #setDrawOutlines(boolean)
+     */
+    public boolean getDrawOutlines() {
+        return this.drawOutlines;
+    }
+
+    /**
+     * Sets the flag that controls whether outlines are drawn for
+     * blocks, and sends a {@link RendererChangeEvent} to all registered
+     * listeners.
+     *
+     * @param flag  the flag.
+     *
+     * @see #getDrawOutlines()
+     */
+    public void setDrawOutlines(boolean flag) {
+        this.drawOutlines = flag;
+        fireChangeEvent();
+    }
+
+    /**
+     * Returns {@code true} if the renderer should use the outline paint
+     * setting to draw block outlines, and {@code false} if it should just
+     * use the regular item paint.
+     *
+     * @return A boolean.
+     *
+     * @see #setUseOutlinePaint(boolean)
+     */
+    public boolean getUseOutlinePaint() {
+        return this.useOutlinePaint;
+    }
+
+    /**
+     * Sets the flag that controls whether the outline paint is used to draw
+     * block outlines, and sends a {@link RendererChangeEvent} to all
+     * registered listeners.
+     *
+     * @param flag  the flag.
+     *
+     * @see #getUseOutlinePaint()
+     */
+    public void setUseOutlinePaint(boolean flag) {
+        this.useOutlinePaint = flag;
         fireChangeEvent();
     }
 
@@ -381,8 +433,13 @@ public class XYBlockRenderer extends AbstractXYItemRenderer
         }
         g2.setPaint(p);
         g2.fill(block);
-        g2.setStroke(new BasicStroke(1.0f));
-        g2.draw(block);
+        if (getDrawOutlines()) {
+            if (getUseOutlinePaint()) {
+                g2.setPaint(getItemOutlinePaint(series, item));
+            }
+            g2.setStroke(lookupSeriesOutlineStroke(series));
+            g2.draw(block);
+        }
 
         if (isItemLabelVisible(series, item)) {
             drawItemLabel(g2, orientation, dataset, series, item, 
@@ -438,6 +495,12 @@ public class XYBlockRenderer extends AbstractXYItemRenderer
             return false;
         }
         if (!this.paintScale.equals(that.paintScale)) {
+            return false;
+        }
+        if (this.drawOutlines != that.drawOutlines) {
+            return false;
+        }
+        if (this.useOutlinePaint != that.useOutlinePaint) {
             return false;
         }
         return super.equals(obj);

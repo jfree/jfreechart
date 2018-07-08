@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2018, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * --------------
  * Crosshair.java
  * --------------
- * (C) Copyright 2009-2017, by Object Refinery Limited.
+ * (C) Copyright 2009-2018, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 13-Feb-2009 : Version 1 (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -55,6 +50,7 @@ import java.io.Serializable;
 import org.jfree.chart.HashUtils;
 import org.jfree.chart.labels.CrosshairLabelGenerator;
 import org.jfree.chart.labels.StandardCrosshairLabelGenerator;
+import org.jfree.chart.panel.CrosshairOverlay;
 import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
@@ -62,7 +58,17 @@ import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 
 /**
- * A crosshair for display on a plot.
+ * A {@code Crosshair} represents a value on a chart and is usually displayed
+ * as a line perpendicular to the x or y-axis (and sometimes including a label
+ * that shows the crosshair value as text).  Instances of this class are used
+ * to store the cross hair value plus the visual characteristics of the line
+ * that will be rendered once the instance is added to a 
+ * {@link CrosshairOverlay} (or {@code CrosshairOverlaydFX} if you are using 
+ * the JavaFX extensions for JFreeChart).
+ * <br><br>
+ * Crosshairs support a property change mechanism which is used by JFreeChart
+ * to automatically repaint the overlay whenever a crosshair attribute is 
+ * updated.
  *
  * @since 1.0.13
  */
