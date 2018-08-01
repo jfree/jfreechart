@@ -651,30 +651,32 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
 
         this.annotations = new java.util.ArrayList();
 
-        this.datasets.put(0, dataset);
         if (dataset != null) {
             dataset.addChangeListener(this);
+
+            this.datasets.put(0, dataset);
         }
 
-        this.renderers.put(0, renderer);
         if (renderer != null) {
             renderer.setPlot(this);
             renderer.addChangeListener(this);
+            this.renderers.put(0, renderer);
         }
 
-        this.domainAxes.put(0, domainAxis);
-        mapDatasetToDomainAxis(0, 0);
         if (domainAxis != null) {
             domainAxis.setPlot(this);
             domainAxis.addChangeListener(this);
+            this.domainAxes.put(0, domainAxis);
+            mapDatasetToDomainAxis(0, 0);
         }
+
         this.domainAxisLocations.put(0, AxisLocation.BOTTOM_OR_LEFT);
 
-        this.rangeAxes.put(0, rangeAxis);
-        mapDatasetToRangeAxis(0, 0);
         if (rangeAxis != null) {
             rangeAxis.setPlot(this);
             rangeAxis.addChangeListener(this);
+            this.rangeAxes.put(0, rangeAxis);
+            mapDatasetToRangeAxis(0, 0);
         }
         this.rangeAxisLocations.put(0, AxisLocation.BOTTOM_OR_LEFT);
 

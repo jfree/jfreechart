@@ -1,8 +1,9 @@
 JFreeChart
 ==========
 
-Version 1.5.0, not yet released.
+Version 1.5.0, 5 November 2017.
 
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.jfree/jfreechart/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.jfree/jfreechart)
 
 Overview
 --------
@@ -17,44 +18,61 @@ The home page for the project is:
 http://www.jfree.org/jfreechart
 
 JFreeChart requires JDK 1.6.0 or later.  If JavaFX support is required, you
-need to also include the JFreeChart-FX extensions.  The library is licensed 
-under the terms of the GNU Lesser General Public License (LGPL) version 2.1 or 
-later.
+need to also include the JFreeChart-FX extensions:
+
+https://github.com/jfree/jfreechart-fx
+
+The library is licensed under the terms of the GNU Lesser General Public 
+License (LGPL) version 2.1 or later.
 
 
 Building JFreeChart
 -------------------
-You can build JFreeChart using either Ant or Maven.  The build requires 
-JDK 1.6.0 or later.
-
-#### Ant
-Using Ant you can build JFreeChart using the following command (issued from the root directory of the project):
-
-    ant -f ant/build.xml
-
-The Ant build script will perform all build and packaging tasks.
-
-#### Maven
-Using Maven you can build JFreeChart using the following command (issued from the root directory of the project):
+You can build JFreeChart using Maven by issuing the following command from the root directory of the project:
 
     mvn clean install
+
+The build requires JDK 1.6.0 or later.
+
+
+Migration from JFreeChart 1.0.x
+-------------------------------
+When migrating from JFreeChart 1.0.x to JFreeChart 1.5.0, please be aware of the following API changes:
+
+* all the classes from JCommon that are used by JFreeChart have integrated within the JFreeChart jar file within a different package than before (you will need to change your imports);
+* many methods `getBaseXXX()/setBaseXXX()` have been renamed `setDefaultXXX()/getDefaultXXX()`;
+* the `ChartUtilities` class has been renamed `ChartUtils`;
+* all the classes relating to pseudo-3D charts have been removed, as much better 3D charts are offered by [Orson Charts](https://github.com/jfree/orson-charts) so we prefer not to maintain the pseudo-3D chart code within JFreeChart;
+* the `SegmentedTimeline` class has been removed due to being (a) complex, (b) not always being correct and, as a result, generating too many support requests;
+* the `org.jfree.chart.utils.ParamChecks` class has been renamed `org.jfree.chart.utils.Args`.
+
+Please refer to [Issue 66](https://github.com/jfree/jfreechart/issues/66) for additional info.
+
+
+Demos
+-----
+A small set of demo applications can be found in the following projects here
+at GitHub:
+
+* [JFree-Demos](https://github.com/jfree/jfree-demos "JFree-Demos Project Page at GitHub")
+* [JFree-FXDemos](https://github.com/jfree/jfree-fxdemos "JFree-FXDemos Project Page at GitHub")
 
 
 History
 -------
 
-##### Version 1.5.0 (not yet release)
+##### Version 1.5.0 (5 November 2017)
 - all JavaFX classes moved to a separate project;
 - added cleaner method to create histograms in `ChartFactory`;
-- JFreeSVG updated to version 3.2;
-- OrsonPDF updated to version 1.7;
-- JCommon removed as a dependency, and required classes incorporated directly;
+- JCommon removed as a dependency, and required classes incorporated directly (including package rename);
 - pull request #4 improvements to `XYStepRenderer`;
 - bug #36 fix for crosshairs with multiple datasets / axes;
 - bug #25 fix for `DateAxis.previousStandardDate()` method;
 - bug #19 fix for default time zone in `SegmentedDateAxis`;
 - SourceForge #1147 improve performance of `CategoryPlot` mapping datasets to axes;
 - moved SWT code out into separate projects;
+- moved demo programs to a separate project;
+- dropped the Ant build;
 
 ##### Version 1.0.19 (31-Jul-2014)
 - fixed clipping issues for combined plots in JavaFX;

@@ -87,6 +87,7 @@ public class LogFormatTest {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashcode() {
         LogFormat f1 = new LogFormat(10.0, "10", true);
         LogFormat f2 = new LogFormat(10.0, "10", true);
@@ -99,6 +100,7 @@ public class LogFormatTest {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() {
         LogFormat f1 = new LogFormat(10.0, "10", true);
         LogFormat f2 = (LogFormat) f1.clone();
@@ -110,6 +112,7 @@ public class LogFormatTest {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         LogFormat f1 = new LogFormat(10.0, "10", true);
         LogFormat f2 = (LogFormat) TestUtils.serialised(f1);

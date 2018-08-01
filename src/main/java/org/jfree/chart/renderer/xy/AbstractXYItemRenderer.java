@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2018, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * AbstractXYItemRenderer.java
  * ---------------------------
- * (C) Copyright 2002-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2002-2018, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Richard Atkinson;
@@ -147,7 +147,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -170,7 +169,6 @@ import org.jfree.chart.plot.CrosshairState;
 import org.jfree.chart.plot.DrawingSupplier;
 import org.jfree.chart.plot.IntervalMarker;
 import org.jfree.chart.plot.Marker;
-import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.ValueMarker;
@@ -225,13 +223,13 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      * Annotations to be drawn in the background layer ('underneath' the data
      * items).
      */
-    private List backgroundAnnotations;
+    private List<XYAnnotation> backgroundAnnotations;
 
     /**
      * Annotations to be drawn in the foreground layer ('on top' of the data
      * items).
      */
-    private List foregroundAnnotations;
+    private List<XYAnnotation> foregroundAnnotations;
 
     /** The legend item label generator. */
     private XYSeriesLabelGenerator legendItemLabelGenerator;
@@ -252,8 +250,8 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
                 = new HashMap<Integer, XYItemLabelGenerator>();
         this.toolTipGeneratorMap = new HashMap<Integer, XYToolTipGenerator>();
         this.urlGenerator = null;
-        this.backgroundAnnotations = new java.util.ArrayList();
-        this.foregroundAnnotations = new java.util.ArrayList();
+        this.backgroundAnnotations = new ArrayList<XYAnnotation>();
+        this.foregroundAnnotations = new ArrayList<XYAnnotation>();
         this.legendItemLabelGenerator = new StandardXYSeriesLabelGenerator(
                 "{0}");
     }
@@ -466,8 +464,8 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
     }
 
     /**
-     * Sets the default tool tip generator and sends a {@link RendererChangeEvent}
-     * to all registered listeners.
+     * Sets the default tool tip generator and sends a 
+     * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param generator  the generator ({@code null} permitted).
      *
@@ -566,14 +564,10 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      */
     @Override
     public void removeAnnotations() {
-        for(int i = 0; i < this.foregroundAnnotations.size(); i++){
-            XYAnnotation annotation 
-                    = (XYAnnotation) this.foregroundAnnotations.get(i);
+        for (XYAnnotation annotation : this.foregroundAnnotations) {
             annotation.removeChangeListener(this);
         }
-         for(int i = 0; i < this.backgroundAnnotations.size(); i++){
-            XYAnnotation annotation 
-                    = (XYAnnotation) this.backgroundAnnotations.get(i);
+        for (XYAnnotation annotation : this.backgroundAnnotations) {
             annotation.removeChangeListener(this);
         }
         this.foregroundAnnotations.clear();
@@ -604,8 +598,9 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      * 
      * @since 1.0.13
      */
-    public Collection getAnnotations() {
-        List result = new java.util.ArrayList(this.foregroundAnnotations);
+    public Collection<XYAnnotation> getAnnotations() {
+        List<XYAnnotation> result 
+                = new ArrayList<XYAnnotation>(this.foregroundAnnotations);
         result.addAll(this.backgroundAnnotations);
         return result;
     }
@@ -1670,20 +1665,19 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
             ValueAxis domainAxis, ValueAxis rangeAxis, Layer layer,
             PlotRenderingInfo info) {
 
-        Iterator iterator = null;
+        List<XYAnnotation> toDraw = new ArrayList<XYAnnotation>();
         if (layer.equals(Layer.FOREGROUND)) {
-            iterator = this.foregroundAnnotations.iterator();
+            toDraw.addAll(this.foregroundAnnotations);
         }
         else if (layer.equals(Layer.BACKGROUND)) {
-            iterator = this.backgroundAnnotations.iterator();
+            toDraw.addAll(this.backgroundAnnotations);
         }
         else {
             // should not get here
             throw new RuntimeException("Unknown layer.");
         }
-        while (iterator.hasNext()) {
-            XYAnnotation annotation = (XYAnnotation) iterator.next();
-            int index = this.plot.getIndexOf(this);
+        int index = this.plot.getIndexOf(this);
+        for (XYAnnotation annotation : toDraw) {
             annotation.draw(g2, this.plot, dataArea, domainAxis, rangeAxis,
                     index, info);
         }

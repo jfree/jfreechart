@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------
  * MonthTest.java
  * --------------
- * (C) Copyright 2001-2016, by Object Refinery Limited.
+ * (C) Copyright 2001-2017, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -62,6 +62,7 @@ import java.util.TimeZone;
 
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.date.MonthConstants;
+import org.jfree.chart.date.SerialDate;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -200,7 +201,6 @@ public class MonthTest {
      */
     @Test
     public void testParseMonth() {
-
         Month month = null;
 
         // test 1...
@@ -225,7 +225,8 @@ public class MonthTest {
 
         // test 3...
         try {
-            month = Month.parseMonth("March 1993");
+            String monthName = SerialDate.DATE_FORMAT_SYMBOLS.getMonths()[2];
+            month = Month.parseMonth(monthName + " 1993");
         }
         catch (TimePeriodFormatException e) {
             month = new Month(1, 1900);

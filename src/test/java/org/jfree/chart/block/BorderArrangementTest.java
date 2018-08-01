@@ -453,6 +453,7 @@ public class BorderArrangementTest {
     /**
      * Run some checks on sizing when there is a fixed width constraint.
      */
+    @Test
     public void testSizingWithWidthConstraint() {
         RectangleConstraint constraint = new RectangleConstraint(
                 10.0, new Range(10.0, 10.0), LengthConstraintType.FIXED,

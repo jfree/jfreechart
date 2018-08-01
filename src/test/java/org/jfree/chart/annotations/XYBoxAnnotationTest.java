@@ -123,6 +123,7 @@ public class XYBoxAnnotationTest {
     /**
      * Two objects that are equal are required to return the same hashCode.
      */
+    @Test
     public void testHashCode() {
         XYBoxAnnotation a1 = new XYBoxAnnotation(1.0, 2.0, 3.0, 4.0,
                 new BasicStroke(1.2f), Color.RED, Color.BLUE);
@@ -137,6 +138,7 @@ public class XYBoxAnnotationTest {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         XYBoxAnnotation a1 = new XYBoxAnnotation(1.0, 2.0, 3.0, 4.0,
                 new BasicStroke(1.2f), Color.RED, Color.BLUE);
@@ -149,6 +151,7 @@ public class XYBoxAnnotationTest {
     /**
      * Checks that this class implements PublicCloneable.
      */
+    @Test
     public void testPublicCloneable() {
         XYBoxAnnotation a1 = new XYBoxAnnotation(1.0, 2.0, 3.0, 4.0,
                 new BasicStroke(1.2f), Color.RED, Color.BLUE);
@@ -158,6 +161,7 @@ public class XYBoxAnnotationTest {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         XYBoxAnnotation a1 = new XYBoxAnnotation(1.0, 2.0, 3.0, 4.0,
                 new BasicStroke(1.2f), Color.RED, Color.BLUE);
@@ -169,6 +173,7 @@ public class XYBoxAnnotationTest {
      * Draws the chart with a {@code null} info object to make sure that
      * no exceptions are thrown.
      */
+    @Test
     public void testDrawWithNullInfo() {
         try {
             DefaultTableXYDataset dataset = new DefaultTableXYDataset();

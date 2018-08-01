@@ -402,6 +402,7 @@ public class TaskSeriesCollectionTest {
     /**
      * Some tests for the getColumnKey() method.
      */
+    @Test
     public void testGetColumnKey() {
         TaskSeriesCollection c = createCollection1();
         assertEquals("Task 1", c.getColumnKey(0));

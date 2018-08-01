@@ -109,6 +109,7 @@ public class XYShapeRendererTest {
     /**
      * Confirm that cloning works.
      */
+    @Test
     public void testCloning() throws CloneNotSupportedException {
         XYShapeRenderer r1 = new XYShapeRenderer();
         XYShapeRenderer r2 = (XYShapeRenderer) r1.clone();
@@ -120,6 +121,7 @@ public class XYShapeRendererTest {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         XYShapeRenderer r1 = new XYShapeRenderer();
         XYShapeRenderer r2 = (XYShapeRenderer) TestUtils.serialised(r1);
@@ -131,6 +133,7 @@ public class XYShapeRendererTest {
     /**
      * Check if finding the bounds in z-dimension of an XYZDataset works. 
      */
+    @Test
     public void testFindZBounds() {
         XYShapeRenderer r = new XYShapeRenderer();
         assertNull(r.findZBounds(null));
@@ -165,6 +168,7 @@ public class XYShapeRendererTest {
     /**
      * Test for bug 3026341.
      */
+    @Test
     public void test3026341() {
         XYShapeRenderer renderer = new XYShapeRenderer();
         assertNull(renderer.findRangeBounds(null));
