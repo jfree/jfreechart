@@ -268,6 +268,7 @@ public class PeriodAxisTest implements AxisChangeListener {
      */
     @Test
     public void test2490803() {
+        new Day();  // Initialize Day class before changing default locale and time zone
         Locale savedLocale = Locale.getDefault();
         TimeZone savedTimeZone = TimeZone.getDefault();
         try {
