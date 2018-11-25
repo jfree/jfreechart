@@ -26,6 +26,17 @@ The library is licensed under the terms of the GNU Lesser General Public
 License (LGPL) version 2.1 or later.
 
 
+Using JFreeChart
+----------------
+To use JFreeChart in your projects, add the following dependency to your build tool:
+
+    <dependency>
+        <groupId>org.jfree</groupId>
+        <artifactId>jfreechart</artifactId>
+        <version>1.5.0</version>
+    </dependency>
+
+
 Building JFreeChart
 -------------------
 You can build JFreeChart using Maven by issuing the following command from the root directory of the project:
