@@ -34,31 +34,9 @@ package org.jfree.chart.util;
 public enum SortOrder {
 
     /** Ascending order. */
-    ASCENDING("SortOrder.ASCENDING"),
+    ASCENDING,
 
     /** Descending order. */
-    DESCENDING("SortOrder.DESCENDING");
-
-    /** The name. */
-    private final String name;
-
-    /**
-     * Private constructor.
-     *
-     * @param name  the name.
-     */
-    private SortOrder(String name) {
-        this.name = name;
-    }
-
-    /**
-     * Returns a string representing the object.
-     *
-     * @return The string.
-     */
-    @Override
-    public String toString() {
-        return this.name;
-    }
+    DESCENDING
 
 }

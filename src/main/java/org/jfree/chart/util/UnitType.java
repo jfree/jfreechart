@@ -34,30 +34,9 @@ package org.jfree.chart.util;
 public enum UnitType {
 
     /** Absolute. */
-    ABSOLUTE("UnitType.ABSOLUTE"),
+    ABSOLUTE,
 
     /** Relative. */
-    RELATIVE("UnitType.RELATIVE");
+    RELATIVE
 
-    /** The name. */
-    private final String name;
-
-    /**
-     * Private constructor.
-     *
-     * @param name  the name.
-     */
-    private UnitType(String name) {
-        this.name = name;
-    }
-
-    /**
-     * Returns a string representing the object.
-     *
-     * @return The string.
-     */
-    @Override
-    public String toString() {
-        return this.name;
-    }    
 }

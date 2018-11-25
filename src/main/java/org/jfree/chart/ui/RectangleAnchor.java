@@ -38,43 +38,31 @@ import org.jfree.chart.util.Args;
 public enum RectangleAnchor {
 
     /** Center. */
-    CENTER("RectangleAnchor.CENTER"),
+    CENTER,
 
     /** Top. */
-    TOP("RectangleAnchor.TOP"),
+    TOP,
 
     /** Top-Left. */
-    TOP_LEFT("RectangleAnchor.TOP_LEFT"),
+    TOP_LEFT,
 
     /** Top-Right. */
-    TOP_RIGHT("RectangleAnchor.TOP_RIGHT"),
+    TOP_RIGHT,
 
     /** Bottom. */
-    BOTTOM("RectangleAnchor.BOTTOM"),
+    BOTTOM,
 
     /** Bottom-Left. */
-    BOTTOM_LEFT("RectangleAnchor.BOTTOM_LEFT"),
+    BOTTOM_LEFT,
 
     /** Bottom-Right. */
-    BOTTOM_RIGHT("RectangleAnchor.BOTTOM_RIGHT"),
+    BOTTOM_RIGHT,
 
     /** Left. */
-    LEFT("RectangleAnchor.LEFT"),
+    LEFT,
 
     /** Right. */
-    RIGHT("RectangleAnchor.RIGHT");
-
-    /** The name. */
-    private final String name;
-
-    /**
-     * Private constructor.
-     *
-     * @param name  the name.
-     */
-    private RectangleAnchor(String name) {
-        this.name = name;
-    }
+    RIGHT;
 
     /**
      * Returns the anchor point relative to the specified rectangle.
@@ -106,16 +94,6 @@ public enum RectangleAnchor {
             result.setLocation(rectangle.getMaxX(), rectangle.getMaxY());
         }
         return result;
-    }
-
-    /**
-     * Returns a string representing the object.
-     *
-     * @return The string.
-     */
-    @Override
-    public String toString() {
-        return this.name;
     }
     
     /**
