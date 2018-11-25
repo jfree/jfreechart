@@ -125,6 +125,8 @@ public class DateTickUnit extends TickUnit implements Serializable {
     /**
      * Creates a new unit.
      *
+     * The {@code rollUnitType} and {@code rollCount} are intended to roll the date forward when it falls on a "hidden" part of the DateAxis. For example, if the tick size is 1 week (7 days), but Saturday and Sunday are hidden, if the ticks happen to fall on Saturday, none of them will be visible. A sensible {@code rollUnitType}/{@code rollCount} would be 1 day, so that the date would roll forward to the following Monday, which is visible.
+     *
      * @param unitType  the unit.
      * @param multiple  the multiple.
      * @param rollUnitType  the roll unit.
