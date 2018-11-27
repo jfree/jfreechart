@@ -24,94 +24,32 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
+ * Changes:
+ * --------
+ * 26-Nov-2018 : Made RectangleEdge an enum (TH);
+ *
  */
 
 package org.jfree.chart.ui;
 
 import java.awt.geom.Rectangle2D;
-import java.io.ObjectStreamException;
-import java.io.Serializable;
 
 /**
  * Used to indicate the edge of a rectangle.
  */
-public final class RectangleEdge implements Serializable {
+public enum RectangleEdge {
 
-    /** For serialization. */
-    private static final long serialVersionUID = -7400988293691093548L;
-    
     /** Top. */
-    public static final RectangleEdge TOP 
-        = new RectangleEdge("RectangleEdge.TOP");
+    TOP,
 
     /** Bottom. */
-    public static final RectangleEdge BOTTOM 
-        = new RectangleEdge("RectangleEdge.BOTTOM");
+    BOTTOM, 
 
     /** Left. */
-    public static final RectangleEdge LEFT 
-        = new RectangleEdge("RectangleEdge.LEFT");
+    LEFT,
 
     /** Right. */
-    public static final RectangleEdge RIGHT 
-        = new RectangleEdge("RectangleEdge.RIGHT");
-
-    /** The name. */
-    private String name;
-
-    /**
-     * Private constructor.
-     *
-     * @param name  the name.
-     */
-    private RectangleEdge(String name) {
-        this.name = name;
-    }
-
-    /**
-     * Returns a string representing the object.
-     *
-     * @return The string.
-     */
-    public String toString() {
-        return this.name;
-    }
-
-    /**
-     * Returns {@code true} if this object is equal to the specified 
-     * object, and {@code false} otherwise.
-     *
-     * @param o  the other object.
-     *
-     * @return A boolean.
-     */
-    @Override
-    public boolean equals(Object o) {
-
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof RectangleEdge)) {
-            return false;
-        }
-
-        final RectangleEdge order = (RectangleEdge) o;
-        if (!this.name.equals(order.name)) {
-            return false;
-        }
-
-        return true;
-
-    }
-
-    /**
-     * Returns a hash code value for the object.
-     *
-     * @return the hashcode
-     */
-    public int hashCode() {
-        return this.name.hashCode();
-    }
+    RIGHT;
 
     /**
      * Returns {@code true} if the edge is {@code TOP} or 
@@ -182,30 +120,6 @@ public final class RectangleEdge implements Serializable {
         }
         else if (edge == RectangleEdge.RIGHT) {
             result = rectangle.getMaxX();
-        }
-        return result;
-    }
-    
-    /**
-     * Ensures that serialization returns the unique instances.
-     * 
-     * @return The object.
-     * 
-     * @throws ObjectStreamException if there is a problem.
-     */
-    private Object readResolve() throws ObjectStreamException {
-        RectangleEdge result = null;
-        if (this.equals(RectangleEdge.TOP)) {
-            result = RectangleEdge.TOP;
-        }
-        else if (this.equals(RectangleEdge.BOTTOM)) {
-            result = RectangleEdge.BOTTOM;
-        }
-        else if (this.equals(RectangleEdge.LEFT)) {
-            result = RectangleEdge.LEFT;
-        }
-        else if (this.equals(RectangleEdge.RIGHT)) {
-            result = RectangleEdge.RIGHT;
         }
         return result;
     }

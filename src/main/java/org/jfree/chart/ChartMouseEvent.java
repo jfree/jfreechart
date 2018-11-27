@@ -58,7 +58,7 @@ import org.jfree.chart.entity.ChartEntity;
  * @see ChartMouseListener
  */
 public class ChartMouseEvent extends EventObject implements Serializable {
-
+    
     /** For serialization. */
     private static final long serialVersionUID = -682393837314562149L;
 

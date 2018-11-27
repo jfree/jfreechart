@@ -38,43 +38,24 @@
  * 17-Jul-2003 : Added readResolve() method (DG);
  * 21-Nov-2007 : Implemented hashCode() (DG);
  * 14-May-2014 : Added isHorizontal() and isVertical() methods (DG);
+ * 26-Nov-2018 : Made PlotOrientation an enum (TH);
  *
  */
 
 package org.jfree.chart.plot;
-
-import java.io.ObjectStreamException;
-import java.io.Serializable;
 
 /**
  * Used to indicate the orientation (horizontal or vertical) of a 2D plot.
  * It is the direction of the y-axis that is the determinant (a conventional
  * plot has a vertical y-axis).
  */
-public final class PlotOrientation implements Serializable {
-
-    /** For serialization. */
-    private static final long serialVersionUID = -2508771828190337782L;
+public enum PlotOrientation {
 
     /** For a plot where the range axis is horizontal. */
-    public static final PlotOrientation HORIZONTAL
-            = new PlotOrientation("PlotOrientation.HORIZONTAL");
+    HORIZONTAL,
 
     /** For a plot where the range axis is vertical. */
-    public static final PlotOrientation VERTICAL
-            = new PlotOrientation("PlotOrientation.VERTICAL");
-
-    /** The name. */
-    private String name;
-
-    /**
-     * Private constructor.
-     *
-     * @param name  the name.
-     */
-    private PlotOrientation(String name) {
-        this.name = name;
-    }
+    VERTICAL;
 
     /**
      * Returns {@code true} if this orientation is {@code HORIZONTAL},
@@ -98,67 +79,6 @@ public final class PlotOrientation implements Serializable {
      */
     public boolean isVertical() {
         return this.equals(PlotOrientation.VERTICAL);
-    }
-    
-    /**
-     * Returns a string representing the object.
-     *
-     * @return The string.
-     */
-    @Override
-    public String toString() {
-        return this.name;
-    }
-
-    /**
-     * Returns {@code true} if this object is equal to the specified
-     * object, and {@code false} otherwise.
-     *
-     * @param obj  the object ({@code null} permitted).
-     *
-     * @return A boolean.
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (!(obj instanceof PlotOrientation)) {
-            return false;
-        }
-        PlotOrientation orientation = (PlotOrientation) obj;
-        if (!this.name.equals(orientation.toString())) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * Returns a hash code for this instance.
-     *
-     * @return A hash code.
-     */
-    @Override
-    public int hashCode() {
-        return this.name.hashCode();
-    }
-
-    /**
-     * Ensures that serialization returns the unique instances.
-     *
-     * @return The object.
-     *
-     * @throws ObjectStreamException if there is a problem.
-     */
-    private Object readResolve() throws ObjectStreamException {
-        Object result = null;
-        if (this.equals(PlotOrientation.HORIZONTAL)) {
-            result = PlotOrientation.HORIZONTAL;
-        }
-        else if (this.equals(PlotOrientation.VERTICAL)) {
-            result = PlotOrientation.VERTICAL;
-        }
-        return result;
     }
 
 }
