@@ -195,7 +195,7 @@ import org.jfree.data.xy.XYItemKey;
  * implementations.
  */
 public abstract class AbstractXYItemRenderer extends AbstractRenderer
-        implements XYItemRenderer, AnnotationChangeListener,
+        implements XYItemRenderer, AnnotationChangeListener, PublicCloneable,
         Cloneable, Serializable {
 
     /** For serialization. */
@@ -1450,7 +1450,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      *         cloning.
      */
     @Override
-    protected Object clone() throws CloneNotSupportedException {
+    public Object clone() throws CloneNotSupportedException {
         AbstractXYItemRenderer clone = (AbstractXYItemRenderer) super.clone();
         // 'plot' : just retain reference, not a deep copy
 
