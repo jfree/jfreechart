@@ -37,12 +37,15 @@
  * 05-Feb-2003 : Version 1 (DG);
  * 27-Jan-2003 : Implemented Cloneable and Serializable, and added an equals()
  *               method (DG);
+ * 19-Jan-2019 : Added missing hashCode (TH);
  *
  */
 
 package org.jfree.data;
 
 import java.io.Serializable;
+import java.util.Objects;
+
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PublicCloneable;
 
@@ -145,6 +148,14 @@ public class KeyedObject implements Cloneable, PublicCloneable, Serializable {
         }
 
         return true;
+    }
+
+    @Override
+    public int hashCode(){
+        int hash = 7;
+        hash = 47 * hash + Objects.hashCode(this.key);
+        hash = 47 * hash + Objects.hashCode(this.object);
+        return hash;
     }
 
 }

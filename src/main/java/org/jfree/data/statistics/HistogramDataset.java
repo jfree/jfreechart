@@ -57,6 +57,7 @@
  * 08-Dec-2009 : Fire change event in addSeries() - see patch 2902842
  *               contributed by Thomas A Caswell (DG);
  * 03-Jul-2013 : Use ParamChecks (DG);
+ * 19-Jan-2019 : Added missing hashCode (TH);
  *
  */
 
@@ -67,6 +68,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
@@ -491,6 +493,14 @@ public class HistogramDataset extends AbstractIntervalXYDataset
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode(){
+        int hash = 3;
+        hash = 83 * hash + Objects.hashCode(this.list);
+        hash = 83 * hash + Objects.hashCode(this.type);
+        return hash;
     }
 
     /**

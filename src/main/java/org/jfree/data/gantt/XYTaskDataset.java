@@ -36,12 +36,14 @@
  * -------
  * 17-Sep-2008 : Version 1 (DG);
  * 03-Jul-2016 : Use ParamChecks (DG);
+ * 19-Jan-2019 : Added missing hashCode (TH);
  *
  */
 
 package org.jfree.data.gantt;
 
 import java.util.Date;
+import java.util.Objects;
 
 import org.jfree.chart.axis.SymbolAxis;
 import org.jfree.chart.renderer.xy.XYBarRenderer;
@@ -460,6 +462,16 @@ public class XYTaskDataset extends AbstractXYDataset
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode(){
+        int hash = 7;
+        hash = 17 * hash + Objects.hashCode(this.underlying);
+        hash = 17 * hash + (int) (Double.doubleToLongBits(this.seriesWidth) ^ 
+                                 (Double.doubleToLongBits(this.seriesWidth) >>> 32));
+        hash = 17 * hash + (this.transposed ? 1 : 0);
+        return hash;
     }
 
     /**

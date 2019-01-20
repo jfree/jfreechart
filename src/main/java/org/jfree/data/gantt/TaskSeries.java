@@ -41,6 +41,7 @@
  * 30-Jul-2004 : Added equals() method (DG);
  * 09-May-2008 : Fixed cloning bug (DG);
  * 03-Jul-2013 : Use ParamChecks (DG);
+ * 19-Jan-2019 : Added missing hashCode (TH);
  *
  */
 
@@ -48,6 +49,7 @@ package org.jfree.data.gantt;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
 
@@ -182,6 +184,13 @@ public class TaskSeries extends Series {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode(){
+        int hash = 5;
+        hash = 67 * hash + Objects.hashCode(this.tasks);
+        return hash;
     }
 
     /**

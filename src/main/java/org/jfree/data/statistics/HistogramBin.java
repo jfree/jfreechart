@@ -39,6 +39,7 @@
  * 01-Mar-2004 : Moved from org.jfree.data --> org.jfree.data.statistics (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 02-Feb-2007 : Removed author tags from all over JFreeChart sources (DG);
+ * 29-Jan-2017 : Added missing hashCode (TH);
  *
  */
 
@@ -145,6 +146,16 @@ public class HistogramBin implements Cloneable, Serializable {
             return b0 && b1 && b2;
         }
         return false;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int hash = 7;
+        hash = 37 * hash + this.count;
+        hash = 37 * hash + (int) ( Double.doubleToLongBits( this.startBoundary ) ^ ( Double.doubleToLongBits( this.startBoundary ) >>> 32 ) );
+        hash = 37 * hash + (int) ( Double.doubleToLongBits( this.endBoundary ) ^ ( Double.doubleToLongBits( this.endBoundary ) >>> 32 ) );
+        return hash;
     }
 
     /**

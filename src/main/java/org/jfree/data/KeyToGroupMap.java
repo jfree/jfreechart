@@ -40,6 +40,7 @@
  * 18-Aug-2005 : Added casts in clone() method to suppress 1.5 compiler
  *               warnings - see patch 1260587 (DG);
  * 03-Jul-2013 : Use ParamChecks (DG);
+ * 19-Jan-2019 : Added missing hashCode (TH);
  *
  */
 
@@ -54,6 +55,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
@@ -238,6 +240,14 @@ public class KeyToGroupMap implements Cloneable, PublicCloneable, Serializable {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode(){
+        int hash = 3;
+        hash = 83 * hash + Objects.hashCode(this.defaultGroup);
+        hash = 83 * hash + Objects.hashCode(this.keyToGroupMap);
+        return hash;
     }
 
     /**

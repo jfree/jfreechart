@@ -38,12 +38,15 @@
  * 05-Feb-2005 : Added equals() method and implemented Serializable (DG);
  * 02-Oct-2007 : Added getMeanValue() and getStandardDeviationValue() methods
  *               for convenience, and toString() method for debugging (DG);
+ * 29-Jan-2017 : Added missing hashCode (TH);
  *
  */
 
 package org.jfree.data.statistics;
 
 import java.io.Serializable;
+import java.util.Objects;
+
 import org.jfree.chart.util.ObjectUtils;
 
 /**
@@ -162,6 +165,15 @@ public class MeanAndStandardDeviation implements Serializable {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int hash = 3;
+        hash = 79 * hash + Objects.hashCode( this.mean );
+        hash = 79 * hash + Objects.hashCode( this.standardDeviation );
+        return hash;
     }
 
     /**

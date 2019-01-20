@@ -40,6 +40,7 @@
  * 18-Apr-2005 : Added equals() method and implemented Cloneable and
  *               Serializable (DG);
  * 23-Apr-2008 : Fixed clone() method (DG);
+ * 28-Jan-2017 : Added missing hashCode (TH);
  *
  */
 
@@ -48,6 +49,8 @@ package org.jfree.chart;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
+
 import org.jfree.chart.util.ObjectUtils;
 
 /**
@@ -136,6 +139,14 @@ public class LegendItemCollection implements Cloneable, Serializable {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int hash = 7;
+        hash = 17 * hash + Objects.hashCode( this.items );
+        return hash;
     }
 
     /**

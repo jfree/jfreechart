@@ -52,6 +52,7 @@
  * 26-May-2009 : Peg to time zone if RegularTimePeriod is used (DG);
  * 02-Nov-2009 : Changed String to Comparable in add methods (DG);
  * 03-Jul-2013 : Use ParamChecks (DG);
+ * 29-Jan-2017 : Added missing hashCode (TH);
  *
  */
 
@@ -60,6 +61,7 @@ package org.jfree.data.time;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.TimeZone;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
@@ -593,6 +595,17 @@ public class TimeTableXYDataset extends AbstractIntervalXYDataset
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int hash = 7;
+        hash = 19 * hash + Objects.hashCode( this.values );
+        hash = 19 * hash + ( this.domainIsPointsInTime ? 1 : 0 );
+        hash = 19 * hash + Objects.hashCode( this.xPosition );
+        hash = 19 * hash + Objects.hashCode( this.workingCalendar );
+        return hash;
     }
 
     /**
