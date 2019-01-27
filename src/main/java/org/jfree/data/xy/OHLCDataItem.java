@@ -37,6 +37,7 @@
  * 03-Dec-2003 : Version 1 (DG);
  * 29-Apr-2005 : Added equals() method (DG);
  * 02-Jul-2013 : Use ParamChecks (DG);
+ * 20-Jan-2019 : Pass type to Comparable (TH);
  *
  */
 
@@ -52,7 +53,7 @@ import org.jfree.chart.util.Args;
  * to summarise the trading activity of a financial commodity for
  * a fixed period (most often one day).
  */
-public class OHLCDataItem implements Comparable, Serializable {
+public class OHLCDataItem implements Comparable<OHLCDataItem>, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 7753817154401169901L;
@@ -89,11 +90,11 @@ public class OHLCDataItem implements Comparable, Serializable {
             double close, double volume) {
         Args.nullNotPermitted(date, "date");
         this.date = date;
-        this.open = new Double(open);
-        this.high = new Double(high);
-        this.low = new Double(low);
-        this.close = new Double(close);
-        this.volume = new Double(volume);
+        this.open = open;
+        this.high = high;
+        this.low = low;
+        this.close = close;
+        this.volume = volume;
     }
 
     /**
@@ -184,25 +185,30 @@ public class OHLCDataItem implements Comparable, Serializable {
         return true;
     }
 
+    @Override
+    public int hashCode(){
+        int hash = 7;
+        hash = 19 * hash + (this.date != null ? this.date.hashCode() : 0);
+        hash = 19 * hash + (this.open != null ? this.open.hashCode() : 0);
+        hash = 19 * hash + (this.high != null ? this.high.hashCode() : 0);
+        hash = 19 * hash + (this.low != null ? this.low.hashCode() : 0);
+        hash = 19 * hash + (this.close != null ? this.close.hashCode() : 0);
+        return hash;
+    }
+
     /**
      * Compares this object with the specified object for order. Returns a
      * negative integer, zero, or a positive integer as this object is less
      * than, equal to, or greater than the specified object.
      *
-     * @param object  the object to compare to.
+     * @param item  the object to compare to.
      *
      * @return A negative integer, zero, or a positive integer as this object
      *         is less than, equal to, or greater than the specified object.
      */
     @Override
-    public int compareTo(Object object) {
-        if (object instanceof OHLCDataItem) {
-            OHLCDataItem item = (OHLCDataItem) object;
-            return this.date.compareTo(item.date);
-        }
-        else {
-            throw new ClassCastException("OHLCDataItem.compareTo().");
-        }
+    public int compareTo(OHLCDataItem item) {
+        return this.date.compareTo(item.date);
     }
 
 }
