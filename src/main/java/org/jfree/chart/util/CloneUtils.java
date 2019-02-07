@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2019, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,18 +27,17 @@
  * ---------------
  * CloneUtils.java
  * ---------------
- * (C) Copyright 2014, by Object Refinery Limited.
+ * (C) Copyright 2014-2019, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * Changes
- * -------
- * 08-Apr-2014 : Version 1 (DG);
- *
  */
 package org.jfree.chart.util;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -52,6 +51,43 @@ import java.util.Map;
 public class CloneUtils {
     
     /**
+     * Returns a clone of the specified object, if it can be cloned, otherwise
+     * throws a {@code CloneNotSupportedException}.  If the object is 
+     * {@code null} this method returns {@code null}.
+     *
+     * @param object the object to clone ({@code null} permitted).
+     * 
+     * @return A clone of the specified object, or {@code null}.
+     * 
+     * @throws CloneNotSupportedException if the object cannot be cloned.
+     */
+    public static Object clone(Object object)
+        throws CloneNotSupportedException {
+        if (object == null) {
+            return null;
+        }
+        if (object instanceof PublicCloneable) {
+            PublicCloneable pc = (PublicCloneable) object;
+            return pc.clone();
+        } else {
+            try {
+                Method method = object.getClass().getMethod("clone",
+                        (Class[]) null);
+                if (Modifier.isPublic(method.getModifiers())) {
+                    return method.invoke(object, (Object[]) null);
+                }
+            } catch (NoSuchMethodException e) {
+                throw new CloneNotSupportedException("Object without clone() method is impossible.");
+            } catch (IllegalAccessException e) {
+                throw new CloneNotSupportedException("Object.clone(): unable to call method.");
+            } catch (InvocationTargetException e) {
+                throw new CloneNotSupportedException("Object without clone() method is impossible.");
+            }
+        }
+        throw new CloneNotSupportedException("Failed to clone.");
+    }
+
+    /**
      * Returns a list containing cloned copies of the items in the source
      * list.
      * 
@@ -63,14 +99,10 @@ public class CloneUtils {
         Args.nullNotPermitted(source, "source");
         List result = new ArrayList();
         for (Object obj: source) {
-            if (obj != null) {
-                try {
-                    result.add(ObjectUtils.clone(obj));
-                } catch (CloneNotSupportedException ex) {
-                    throw new RuntimeException(ex);
-                }
-            } else {
-                result.add(null);
+            try {
+                result.add(CloneUtils.clone(obj));
+            } catch (CloneNotSupportedException ex) {
+                throw new RuntimeException(ex);
             }
         }
         return result;
