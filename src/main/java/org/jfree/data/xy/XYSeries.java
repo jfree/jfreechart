@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2019, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------
  * XYSeries.java
  * -------------
- * (C) Copyright 2001-2016, Object Refinery Limited and Contributors.
+ * (C) Copyright 2001-2019, Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Aaron Metzger;
@@ -610,7 +610,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
     }
 
     /**
-     * Return the data item with the specified index.
+     * Returns a copy of the data item with the specified index.
      *
      * @param index  the index.
      *
