@@ -41,7 +41,6 @@
  * 26-Mar-2003 : Implemented Serializable (DG);
  * 05-Sep-2005 : Implemented hashCode(), thanks to Thomas Morgner (DG);
  * 02-Aug-2007 : Added minorTickCount attribute (DG);
- * 20-Jan-2019 : Pass type to Comparable (TH);
  *
  */
 
@@ -61,7 +60,7 @@ import java.io.Serializable;
  *
  * @see ValueAxis
  */
-public abstract class TickUnit implements Comparable<TickUnit>, Serializable {
+public abstract class TickUnit implements Comparable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 510179855057013974L;
@@ -134,23 +133,31 @@ public abstract class TickUnit implements Comparable<TickUnit>, Serializable {
     /**
      * Compares this tick unit to an arbitrary object.
      *
-     * @param other  the object to compare against.
+     * @param object  the object to compare against.
      *
      * @return {@code 1} if the size of the other object is less than this,
      *      {@code 0} if both have the same size and {@code -1} this
      *      size is less than the others.
      */
     @Override
-    public int compareTo(TickUnit other) {
-        if (this.size > other.getSize()){
-            return 1;
+    public int compareTo(Object object) {
+
+        if (object instanceof TickUnit) {
+            TickUnit other = (TickUnit) object;
+            if (this.size > other.getSize()) {
+                return 1;
+            }
+            else if (this.size < other.getSize()) {
+                return -1;
+            }
+            else {
+                return 0;
+            }
         }
-        else if (this.size < other.getSize()){
+        else {
             return -1;
         }
-        else{
-            return 0;
-        }
+
     }
 
     /**

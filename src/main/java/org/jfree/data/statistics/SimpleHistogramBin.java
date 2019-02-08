@@ -36,7 +36,6 @@
  * -------
  * 10-Jan-2005 : Version 1 (DG);
  * 29-Jan-2017 : Added missing hashCode (TH);
- * 20-Jan-2019 : Pass type to Comparable (TH);
  *
  */
 
@@ -48,7 +47,7 @@ import org.jfree.chart.util.PublicCloneable;
 /**
  * A bin for the {@link SimpleHistogramDataset}.
  */
-public class SimpleHistogramBin implements Comparable<SimpleHistogramBin>,
+public class SimpleHistogramBin implements Comparable,
         Cloneable, PublicCloneable, Serializable {
 
     /** For serialization. */
@@ -197,13 +196,17 @@ public class SimpleHistogramBin implements Comparable<SimpleHistogramBin>,
      * Compares the bin to an arbitrary object and returns the relative
      * ordering.
      *
-     * @param bin  the object.
+     * @param obj  the object.
      *
      * @return An integer indicating the relative ordering of the this bin and
      *         the given object.
      */
     @Override
-    public int compareTo(SimpleHistogramBin bin) {
+    public int compareTo(Object obj) {
+        if (!(obj instanceof SimpleHistogramBin)) {
+            return 0;
+        }
+        SimpleHistogramBin bin = (SimpleHistogramBin) obj;
         if (this.lowerBound < bin.lowerBound) {
             return -1;
         }

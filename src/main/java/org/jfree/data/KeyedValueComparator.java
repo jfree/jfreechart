@@ -38,7 +38,6 @@
  * 27-Aug-2003 : Moved SortOrder from org.jfree.data --> org.jfree.util (DG);
  * 12-Jan-2005 : Added accessor methods (DG);
  * 23-Sep-2012 : Make this class serializable (DG);
- * 20-Jan-2019 : Pass type to Comparator (TH);
  *
  */
 
@@ -53,7 +52,7 @@ import org.jfree.chart.util.SortOrder;
  * A utility class that can compare and order two {@link KeyedValue} instances
  * and sort them into ascending or descending order by key or by value.
  */
-public class KeyedValueComparator implements Comparator<KeyedValue>, Serializable {
+public class KeyedValueComparator implements Comparator, Serializable {
 
     /** The comparator type. */
     private KeyedValueComparatorType type;
@@ -98,22 +97,25 @@ public class KeyedValueComparator implements Comparator<KeyedValue>, Serializabl
      * Compares two {@link KeyedValue} instances and returns an
      * {@code int} that indicates the relative order of the two objects.
      *
-     * @param kv1  object 1.
-     * @param kv2  object 2.
+     * @param o1  object 1.
+     * @param o2  object 2.
      *
      * @return An int indicating the relative order of the objects.
      */
     @Override
-    public int compare(KeyedValue kv1, KeyedValue kv2) {
+    public int compare(Object o1, Object o2) {
 
-        if (kv2 == null) {
+        if (o2 == null) {
             return -1;
         }
-        if (kv1 == null) {
+        if (o1 == null) {
             return 1;
         }
 
         int result;
+
+        KeyedValue kv1 = (KeyedValue) o1;
+        KeyedValue kv2 = (KeyedValue) o2;
 
         if (this.type == KeyedValueComparatorType.BY_KEY) {
             if (this.order.equals(SortOrder.ASCENDING)) {

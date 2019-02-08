@@ -36,7 +36,6 @@
  * -------
  * 30-Jan-2007 : Version 1 (DG);
  * 25-May-2007 : Moved from experimental to the main source tree (DG);
- * 20-Jan-2019 : Pass type to Comparable (TH);
  *
  */
 
@@ -49,8 +48,7 @@ import java.io.Serializable;
  *
  * @since 1.0.6
  */
-@SuppressWarnings("serial")
-public class XYCoordinate implements Comparable<XYCoordinate>, Serializable {
+public class XYCoordinate implements Comparable, Serializable {
 
     /** The x-coordinate. */
     private double x;
@@ -148,12 +146,16 @@ public class XYCoordinate implements Comparable<XYCoordinate>, Serializable {
     /**
      * Compares this instance against an arbitrary object.
      *
-     * @param that  the object ({@code null} not permitted).
+     * @param obj  the object ({@code null} not permitted).
      *
      * @return An integer indicating the relative order of the items.
      */
     @Override
-    public int compareTo(XYCoordinate that) {
+    public int compareTo(Object obj) {
+        if (!(obj instanceof XYCoordinate)) {
+            throw new IllegalArgumentException("Incomparable object.");
+        }
+        XYCoordinate that = (XYCoordinate) obj;
         if (this.x > that.x) {
             return 1;
         }
