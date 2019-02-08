@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2018, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2019, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * AbstractXYItemRenderer.java
  * ---------------------------
- * (C) Copyright 2002-2018, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2002-2019, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Richard Atkinson;
@@ -184,7 +184,6 @@ import org.jfree.chart.urls.XYURLGenerator;
 import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
-import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.Range;
 import org.jfree.data.general.DatasetUtils;
 import org.jfree.data.xy.XYDataset;
@@ -192,7 +191,12 @@ import org.jfree.data.xy.XYItemKey;
 
 /**
  * A base class that can be used to create new {@link XYItemRenderer}
- * implementations.
+ * implementations.  
+ * 
+ * <b>Subclassing</b>
+ * If you create your own subclass of this renderer, please refer to the 
+ * Javadocs for {@link AbstractRenderer} for important information about
+ * cloning.
  */
 public abstract class AbstractXYItemRenderer extends AbstractRenderer
         implements XYItemRenderer, AnnotationChangeListener,
@@ -1456,36 +1460,27 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
 
         clone.itemLabelGeneratorMap = CloneUtils.cloneMapValues(
                 this.itemLabelGeneratorMap);
-        if (this.defaultItemLabelGenerator != null
-                && this.defaultItemLabelGenerator instanceof PublicCloneable) {
-            PublicCloneable pc = (PublicCloneable) this.defaultItemLabelGenerator;
-            clone.defaultItemLabelGenerator = (XYItemLabelGenerator) pc.clone();
-        }
+        clone.defaultItemLabelGenerator = (XYItemLabelGenerator) 
+                CloneUtils.clone(this.defaultItemLabelGenerator);
 
         clone.toolTipGeneratorMap = CloneUtils.cloneMapValues(
                 this.toolTipGeneratorMap);
-        if (this.defaultToolTipGenerator != null
-                && this.defaultToolTipGenerator instanceof PublicCloneable) {
-            PublicCloneable pc = (PublicCloneable) this.defaultToolTipGenerator;
-            clone.defaultToolTipGenerator = (XYToolTipGenerator) pc.clone();
-        }
+        
+        clone.defaultToolTipGenerator = (XYToolTipGenerator) CloneUtils.clone(
+                this.defaultToolTipGenerator);
 
-        if (this.legendItemLabelGenerator instanceof PublicCloneable) {
-            clone.legendItemLabelGenerator = (XYSeriesLabelGenerator)
-                    ObjectUtils.clone(this.legendItemLabelGenerator);
-        }
-        if (this.legendItemToolTipGenerator instanceof PublicCloneable) {
-            clone.legendItemToolTipGenerator = (XYSeriesLabelGenerator)
-                    ObjectUtils.clone(this.legendItemToolTipGenerator);
-        }
-        if (this.legendItemURLGenerator instanceof PublicCloneable) {
-            clone.legendItemURLGenerator = (XYSeriesLabelGenerator)
-                    ObjectUtils.clone(this.legendItemURLGenerator);
-        }
+        clone.legendItemLabelGenerator = (XYSeriesLabelGenerator)
+                CloneUtils.clone(this.legendItemLabelGenerator);
+        
+        clone.legendItemToolTipGenerator = (XYSeriesLabelGenerator)
+                CloneUtils.clone(this.legendItemToolTipGenerator);
 
-        clone.foregroundAnnotations = (List) ObjectUtils.deepClone(
+        clone.legendItemURLGenerator = (XYSeriesLabelGenerator)
+                CloneUtils.clone(this.legendItemURLGenerator);
+        
+        clone.foregroundAnnotations = (List) CloneUtils.cloneList(
                 this.foregroundAnnotations);
-        clone.backgroundAnnotations = (List) ObjectUtils.deepClone(
+        clone.backgroundAnnotations = (List) CloneUtils.cloneList(
                 this.backgroundAnnotations);
 
         return clone;

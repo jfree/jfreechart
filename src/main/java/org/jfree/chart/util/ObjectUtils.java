@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2019, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -28,9 +28,6 @@
 
 package org.jfree.chart.util;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -89,35 +86,15 @@ public final class ObjectUtils {
      * @param object the object to clone ({@code null} not permitted).
      * @return A clone of the specified object.
      * @throws CloneNotSupportedException if the object cannot be cloned.
+     * 
+     * @deprecated Use CloneUtils#clone(Object).
      */
     public static Object clone(Object object)
         throws CloneNotSupportedException {
         if (object == null) {
             throw new IllegalArgumentException("Null 'object' argument.");
         }
-        if (object instanceof PublicCloneable) {
-            PublicCloneable pc = (PublicCloneable) object;
-            return pc.clone();
-        }
-        else {
-            try {
-                Method method = object.getClass().getMethod("clone",
-                        (Class[]) null);
-                if (Modifier.isPublic(method.getModifiers())) {
-                    return method.invoke(object, (Object[]) null);
-                }
-            }
-            catch (NoSuchMethodException e) {
-                throw new CloneNotSupportedException("Object without clone() method is impossible.");
-            }
-            catch (IllegalAccessException e) {
-                throw new CloneNotSupportedException("Object.clone(): unable to call method.");
-            }
-            catch (InvocationTargetException e) {
-                throw new CloneNotSupportedException("Object without clone() method is impossible.");
-            }
-        }
-        throw new CloneNotSupportedException("Failed to clone.");
+        return CloneUtils.clone(object);
     }
 
     /**
@@ -144,12 +121,7 @@ public final class ObjectUtils {
         Iterator iterator = collection.iterator();
         while (iterator.hasNext()) {
             Object item = iterator.next();
-            if (item != null) {
-                result.add(clone(item));
-            }
-            else {
-                result.add(null);
-            }
+            result.add(CloneUtils.clone(item));
         }
         return result;
     }

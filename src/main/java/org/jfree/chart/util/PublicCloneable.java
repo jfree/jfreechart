@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2019, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -29,7 +29,11 @@
 package org.jfree.chart.util;
 
 /**
- * An interface that exposes the clone() method.
+ * An interface that exposes the clone() method.  In order to support the 
+ * cloning of {@link JFreeChart} instances, it is advisable to implement this
+ * interface for custom plots, renderers and other chart components.  If
+ * this interface is not implemented, cloning will still be attempted via 
+ * reflection.
  */
 public interface PublicCloneable extends Cloneable {
     

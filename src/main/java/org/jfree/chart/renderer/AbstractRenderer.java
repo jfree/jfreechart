@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2019, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * AbstractRenderer.java
  * ---------------------
- * (C) Copyright 2002-2016, by Object Refinery Limited.
+ * (C) Copyright 2002-2019, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Nicolas Brodu;
@@ -146,6 +146,14 @@ import org.jfree.data.ItemKey;
  * attributes of the renderer will fire a {@link RendererChangeEvent}, which
  * normally means the plot that owns the renderer will receive notification that
  * the renderer has been changed (the plot will, in turn, notify the chart).
+ * 
+ * <b>Subclassing</b>
+ * If you create your own renderer that is a subclass of this, you should take
+ * care to ensure that the renderer implements cloning correctly, to ensure
+ * that {@link JFreeChart} instances that use your renderer are also
+ * cloneable.  It is recommended that you also implement the 
+ * {@link PublicCloneable} interface to provide simple access to the clone 
+ * method.
  */
 public abstract class AbstractRenderer implements Cloneable, Serializable {
 

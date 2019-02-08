@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2019, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * XYShapeRenderer.java
  * --------------------
- * (C) Copyright 2008-2017 by Andreas Haumer, xS+S and Contributors.
+ * (C) Copyright 2008-2019 by Andreas Haumer, xS+S and Contributors.
  *
  * Original Author:  Martin Hoeller (x Software + Systeme  xS+S - Andreas
  *                       Haumer);
@@ -71,6 +71,7 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.LookupPaintScale;
 import org.jfree.chart.renderer.PaintScale;
 import org.jfree.chart.util.Args;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.chart.util.ShapeUtils;
@@ -99,7 +100,7 @@ import org.jfree.data.xy.XYZDataset;
  * @since 1.0.11
  */
 public class XYShapeRenderer extends AbstractXYItemRenderer
-        implements XYItemRenderer, Cloneable, Serializable {
+        implements XYItemRenderer, Cloneable, PublicCloneable, Serializable {
 
     /** Auto generated serial version id. */
     private static final long serialVersionUID = 8320552104211173221L;
@@ -584,10 +585,7 @@ public class XYShapeRenderer extends AbstractXYItemRenderer
     @Override
     public Object clone() throws CloneNotSupportedException {
         XYShapeRenderer clone = (XYShapeRenderer) super.clone();
-        if (this.paintScale instanceof PublicCloneable) {
-            PublicCloneable pc = (PublicCloneable) this.paintScale;
-            clone.paintScale = (PaintScale) pc.clone();
-        }
+        clone.paintScale = (PaintScale) CloneUtils.clone(this.paintScale);
         return clone;
     }
 
