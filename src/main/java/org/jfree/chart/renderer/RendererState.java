@@ -104,11 +104,8 @@ public class RendererState {
     }
 
     /**
-     * A convenience method that returns a reference to the entity
-     * collection (may be {@code null}) being used to record
-     * chart entities.
-     *
-     * @return The entity collection (possibly {@code null}).
+     * Returns the collection of entities maintained by this instance.
+     * @return The entity collection (possibly null.
      */
     public EntityCollection getEntityCollection() {
         EntityCollection result = null;
