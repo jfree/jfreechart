@@ -783,11 +783,9 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
     }
 
     /**
-     * Returns the domain axis with index 0.  If the domain axis for this plot
-     * is {@code null}, then the method will return the parent plot's
-     * domain axis (if there is a parent plot).
+     * Returns a domain axis.
      *
-     * @return The domain axis (possibly {@code null}).
+     * @return The axis (null possible).
      *
      * @see #getDomainAxis(int)
      * @see #setDomainAxis(ValueAxis)
