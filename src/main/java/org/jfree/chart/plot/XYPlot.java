@@ -3801,11 +3801,11 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
     }
 
     /**
-     * Returns the range axis for a dataset.
+     * Returns a range axis.
      *
      * @param index  the dataset index (must be &gt;= 0).
      *
-     * @return The axis.
+     * @return The axis (null possible).
      */
     public ValueAxis getRangeAxisForDataset(int index) {
         Args.requireNonNegative(index, "index");
