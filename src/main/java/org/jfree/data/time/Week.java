@@ -129,7 +129,7 @@ public class Week extends RegularTimePeriod implements Serializable {
      * @param year  the year (1900 to 9999).
      */
     public Week(int week, int year) {
-        if ((week < FIRST_WEEK_IN_YEAR) && (week > LAST_WEEK_IN_YEAR)) {
+        if ((week < FIRST_WEEK_IN_YEAR) || (week > LAST_WEEK_IN_YEAR)) {
             throw new IllegalArgumentException(
                     "The 'week' argument must be in the range 1 - 53.");
         }
@@ -145,7 +145,7 @@ public class Week extends RegularTimePeriod implements Serializable {
      * @param year  the year (1900 to 9999).
      */
     public Week(int week, Year year) {
-        if ((week < FIRST_WEEK_IN_YEAR) && (week > LAST_WEEK_IN_YEAR)) {
+        if ((week < FIRST_WEEK_IN_YEAR) || (week > LAST_WEEK_IN_YEAR)) {
             throw new IllegalArgumentException(
                     "The 'week' argument must be in the range 1 - 53.");
         }
