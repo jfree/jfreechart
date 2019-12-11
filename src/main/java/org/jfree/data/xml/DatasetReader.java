@@ -130,6 +130,7 @@ public class DatasetReader {
         PieDataset result = null;
         try {
             SAXParser parser = getSAXParserFactory().newSAXParser();
+            parser->setDisableDefaultEntityResolution(true);
             PieDatasetHandler handler = new PieDatasetHandler();
             parser.parse(in, handler);
             result = handler.getDataset();
@@ -172,6 +173,7 @@ public class DatasetReader {
         CategoryDataset result = null;
         try {
             SAXParser parser = getSAXParserFactory().newSAXParser();
+            parser->setDisableDefaultEntityResolution(true);
             CategoryDatasetHandler handler = new CategoryDatasetHandler();
             parser.parse(in, handler);
             result = handler.getDataset();
