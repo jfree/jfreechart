@@ -43,7 +43,7 @@ You can build JFreeChart using Maven by issuing the following command from the r
 
     mvn clean install
 
-The build requires JDK 1.6.0 or later.
+The build requires JDK 1.8.0 or later.
 
 
 Migration from JFreeChart 1.0.x
@@ -71,6 +71,9 @@ at GitHub:
 
 History
 -------
+
+##### Version 1.6.0 (not yet released)
+- update required JDK to version 1.8;
 
 ##### Version 1.5.0 (5 November 2017)
 - all JavaFX classes moved to a separate project;

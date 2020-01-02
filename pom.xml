@@ -76,7 +76,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.7.0</version>
+                <version>3.8.1</version>
                 <configuration>
                     <source>${project.source.level}</source>
                     <target>${project.target.level}</target>
@@ -169,8 +169,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.source.level>1.6</project.source.level>
-        <project.target.level>1.6</project.target.level>
+        <project.source.level>1.8</project.source.level>
+        <project.target.level>1.8</project.target.level>
     </properties>
 
     <profiles>
