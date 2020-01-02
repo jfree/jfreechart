@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,23 +27,10 @@
  * -----------------------
  * TableXYDatasetTest.java
  * -----------------------
- * (C) Copyright 2003-2016, by Richard Atkinson and Contributors.
+ * (C) Copyright 2003-2020, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 11-Aug-2003 : Version 1 (RA);
- * 18-Aug-2003 : Added tests for event notification when removing and updating
- *               series (RA);
- * 22-Sep-2003 : Changed to recognise that empty values are now null rather
- *               than zero (RA);
- * 16-Feb-2004 : Added some additional tests (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
- *               getYValue() (DG);
- * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
- * 22-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
@@ -82,6 +69,8 @@ public class TableXYDatasetTest {
 
     /**
      * Confirm that cloning works.
+     * 
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
@@ -174,13 +163,13 @@ public class TableXYDatasetTest {
         DefaultTableXYDataset dataset = new DefaultTableXYDataset();
         dataset.addSeries(createSeries1());
         dataset.addSeries(createSeries2());
-        dataset.removeAllValuesForX(new Double(2.0));
+        dataset.removeAllValuesForX(2.0);
         assertEquals(5, dataset.getItemCount());
-        assertEquals(new Double(1.0), dataset.getX(0, 0));
-        assertEquals(new Double(3.0), dataset.getX(0, 1));
-        assertEquals(new Double(4.0), dataset.getX(0, 2));
-        assertEquals(new Double(5.0), dataset.getX(0, 3));
-        assertEquals(new Double(6.0), dataset.getX(0, 4));
+        assertEquals(1.0, dataset.getX(0, 0));
+        assertEquals(3.0, dataset.getX(0, 1));
+        assertEquals(4.0, dataset.getX(0, 2));
+        assertEquals(5.0, dataset.getX(0, 3));
+        assertEquals(6.0, dataset.getX(0, 4));
     }
 
     /**

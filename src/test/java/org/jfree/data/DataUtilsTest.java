@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,17 +27,10 @@
  * ------------------
  * DataUtilsTest.java
  * ------------------
- * (C) Copyright 2005-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 03-Mar-2005 : Version 1 (DG);
- * 28-Jan-2009 : Added tests for equal(double[][], double[][]) method (DG);
- * 28-Jan-2009 : Added tests for clone(double[][]) (DG);
- * 04-Feb-2009 : Added tests for new calculateColumnTotal/RowTotal methods (DG);
  *
  */
 
@@ -75,10 +68,10 @@ public class DataUtilsTest {
     @Test
     public void testCalculateColumnTotal() {
         DefaultKeyedValues2D table = new DefaultKeyedValues2D();
-        table.addValue(new Double(1.0), "R0", "C0");
-        table.addValue(new Double(2.0), "R0", "C1");
-        table.addValue(new Double(3.0), "R1", "C0");
-        table.addValue(new Double(4.0), "R1", "C1");
+        table.addValue(1.0, "R0", "C0");
+        table.addValue(2.0, "R0", "C1");
+        table.addValue(3.0, "R1", "C0");
+        table.addValue(4.0, "R1", "C1");
         assertEquals(4.0, DataUtils.calculateColumnTotal(table, 0), EPSILON);
         assertEquals(6.0, DataUtils.calculateColumnTotal(table, 1), EPSILON);
         table.setValue(null, "R1", "C1");
@@ -91,10 +84,10 @@ public class DataUtilsTest {
     @Test
     public void testCalculateColumnTotal2() {
         DefaultKeyedValues2D table = new DefaultKeyedValues2D();
-        table.addValue(new Double(1.0), "R0", "C0");
-        table.addValue(new Double(2.0), "R0", "C1");
-        table.addValue(new Double(3.0), "R1", "C0");
-        table.addValue(new Double(4.0), "R1", "C1");
+        table.addValue(1.0, "R0", "C0");
+        table.addValue(2.0, "R0", "C1");
+        table.addValue(3.0, "R1", "C0");
+        table.addValue(4.0, "R1", "C1");
         assertEquals(4.0, DataUtils.calculateColumnTotal(table, 0,
                 new int[] {0, 1}), EPSILON);
         assertEquals(1.0, DataUtils.calculateColumnTotal(table, 0,
@@ -124,10 +117,10 @@ public class DataUtilsTest {
     @Test
     public void testCalculateRowTotal() {
         DefaultKeyedValues2D table = new DefaultKeyedValues2D();
-        table.addValue(new Double(1.0), "R0", "C0");
-        table.addValue(new Double(2.0), "R0", "C1");
-        table.addValue(new Double(3.0), "R1", "C0");
-        table.addValue(new Double(4.0), "R1", "C1");
+        table.addValue(1.0, "R0", "C0");
+        table.addValue(2.0, "R0", "C1");
+        table.addValue(3.0, "R1", "C0");
+        table.addValue(4.0, "R1", "C1");
         assertEquals(3.0, DataUtils.calculateRowTotal(table, 0), EPSILON);
         assertEquals(7.0, DataUtils.calculateRowTotal(table, 1), EPSILON);
         table.setValue(null, "R1", "C1");
@@ -140,10 +133,10 @@ public class DataUtilsTest {
     @Test
     public void testCalculateRowTotal2() {
         DefaultKeyedValues2D table = new DefaultKeyedValues2D();
-        table.addValue(new Double(1.0), "R0", "C0");
-        table.addValue(new Double(2.0), "R0", "C1");
-        table.addValue(new Double(3.0), "R1", "C0");
-        table.addValue(new Double(4.0), "R1", "C1");
+        table.addValue(1.0, "R0", "C0");
+        table.addValue(2.0, "R0", "C1");
+        table.addValue(3.0, "R1", "C0");
+        table.addValue(4.0, "R1", "C1");
         assertEquals(3.0, DataUtils.calculateRowTotal(table, 0,
                 new int[] {0, 1}), EPSILON);
         assertEquals(1.0, DataUtils.calculateRowTotal(table, 0,
