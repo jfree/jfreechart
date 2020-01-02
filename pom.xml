@@ -52,6 +52,12 @@
         </license>
     </licenses>
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.source.level>1.8</project.source.level>
+        <project.target.level>1.8</project.target.level>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -126,11 +132,11 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>animal-sniffer-maven-plugin</artifactId>
-                <version>1.7</version>
+                <version>1.18</version>
                 <configuration>
                     <signature>
                         <groupId>org.codehaus.mojo.signature</groupId>
-                        <artifactId>java16</artifactId>
+                        <artifactId>java18</artifactId>
                         <version>1.0</version>
                     </signature>
                 </configuration>
@@ -166,12 +172,6 @@
             </plugin>
         </plugins>
     </reporting>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.source.level>1.8</project.source.level>
-        <project.target.level>1.8</project.target.level>
-    </properties>
 
     <profiles>
         <profile> 
