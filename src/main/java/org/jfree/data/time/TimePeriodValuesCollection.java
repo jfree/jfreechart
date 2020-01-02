@@ -45,6 +45,7 @@
  * 11-Jun-2007 : Fixed bug in getDomainBounds() method, and changed default
  *               value for domainIsPointsInTime to false (DG);
  * 03-Jul-2013 : Use ParamChecks (DG);
+ * 19-Jan-2019 : Added missing hashCode (TH);
  *
  */
 
@@ -53,6 +54,7 @@ package org.jfree.data.time;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
 
@@ -447,6 +449,14 @@ public class TimePeriodValuesCollection extends AbstractIntervalXYDataset
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode(){
+        int hash = 3;
+        hash = 83 * hash + Objects.hashCode(this.data);
+        hash = 83 * hash + Objects.hashCode(this.xPosition);
+        return hash;
     }
 
 }

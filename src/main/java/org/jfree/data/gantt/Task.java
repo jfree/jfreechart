@@ -39,6 +39,7 @@
  * 30-Jul-2004 : Added clone() and equals() methods and implemented
  *               Serializable (DG);
  * 03-Jul-2013 : Use ParamChecks (DG);
+ * 19-Jan-2019 : Added missing hashCode (TH);
  *
  */
 
@@ -47,6 +48,7 @@ package org.jfree.data.gantt;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
@@ -235,6 +237,16 @@ public class Task implements Cloneable, PublicCloneable, Serializable {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode(){
+        int hash = 7;
+        hash = 71 * hash + Objects.hashCode(this.description);
+        hash = 71 * hash + Objects.hashCode(this.duration);
+        hash = 71 * hash + Objects.hashCode(this.percentComplete);
+        hash = 71 * hash + Objects.hashCode(this.subtasks);
+        return hash;
     }
 
     /**

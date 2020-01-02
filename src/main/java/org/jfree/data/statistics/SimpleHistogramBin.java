@@ -35,6 +35,7 @@
  * Changes
  * -------
  * 10-Jan-2005 : Version 1 (DG);
+ * 29-Jan-2017 : Added missing hashCode (TH);
  *
  */
 
@@ -251,6 +252,18 @@ public class SimpleHistogramBin implements Comparable,
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int hash = 5;
+        hash = 67 * hash + (int) ( Double.doubleToLongBits( this.lowerBound ) ^ ( Double.doubleToLongBits( this.lowerBound ) >>> 32 ) );
+        hash = 67 * hash + (int) ( Double.doubleToLongBits( this.upperBound ) ^ ( Double.doubleToLongBits( this.upperBound ) >>> 32 ) );
+        hash = 67 * hash + ( this.includeLowerBound ? 1 : 0 );
+        hash = 67 * hash + ( this.includeUpperBound ? 1 : 0 );
+        hash = 67 * hash + this.itemCount;
+        return hash;
     }
 
     /**

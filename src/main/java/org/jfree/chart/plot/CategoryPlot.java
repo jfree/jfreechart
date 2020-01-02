@@ -182,7 +182,8 @@
  * 12-Sep-2013 : Check for KEY_SUPPRESS_SHADOW_GENERATION rendering hint (DG);
  * 10-Mar-2014 : Updated Javadocs for issue #1123 (DG);
  * 09-Apr-2014 : Remove use of ObjectList (DG);
- * 
+ * 08-Dec-2019 : Use generics for marker storage and retrieval, added missing 
+ *               hashCode, fixed equals to check for datasets (TH);
  */
 
 package org.jfree.chart.plot;
@@ -237,7 +238,6 @@ import org.jfree.chart.event.ChartChangeEventType;
 import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.event.RendererChangeListener;
-import org.jfree.chart.renderer.category.AbstractCategoryItemRenderer;
 import org.jfree.chart.renderer.category.CategoryItemRenderer;
 import org.jfree.chart.renderer.category.CategoryItemRendererState;
 import org.jfree.chart.ui.Layer;
@@ -516,16 +516,16 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     private boolean rangeCrosshairLockedOnData = true;
 
     /** A map containing lists of markers for the domain axes. */
-    private Map foregroundDomainMarkers;
+    private Map<Integer, Collection<Marker>> foregroundDomainMarkers;
 
     /** A map containing lists of markers for the domain axes. */
-    private Map backgroundDomainMarkers;
+    private Map<Integer, Collection<Marker>> backgroundDomainMarkers;
 
     /** A map containing lists of markers for the range axes. */
-    private Map foregroundRangeMarkers;
+    private Map<Integer, Collection<Marker>> foregroundRangeMarkers;
 
     /** A map containing lists of markers for the range axes. */
-    private Map backgroundRangeMarkers;
+    private Map<Integer, Collection<Marker>> backgroundRangeMarkers;
 
     /**
      * A (possibly empty) list of annotations for the plot.  The list should
@@ -652,10 +652,10 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
         this.rangeMinorGridlineStroke = DEFAULT_GRIDLINE_STROKE;
         this.rangeMinorGridlinePaint = Color.WHITE;
 
-        this.foregroundDomainMarkers = new HashMap();
-        this.backgroundDomainMarkers = new HashMap();
-        this.foregroundRangeMarkers = new HashMap();
-        this.backgroundRangeMarkers = new HashMap();
+        this.foregroundDomainMarkers = new HashMap<Integer, Collection<Marker>>();
+        this.backgroundDomainMarkers = new HashMap<Integer, Collection<Marker>>();
+        this.foregroundRangeMarkers = new HashMap<Integer, Collection<Marker>>();
+        this.backgroundRangeMarkers = new HashMap<Integer, Collection<Marker>>();
 
         this.anchorValue = 0.0;
 
@@ -758,7 +758,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @see #setDomainAxis(int, CategoryAxis)
      */
     public CategoryAxis getDomainAxis(int index) {
-        CategoryAxis result = (CategoryAxis) this.domainAxes.get(index);
+        CategoryAxis result = this.domainAxes.get(index);
         if (result == null) {
             Plot parent = getParent();
             if (parent instanceof CategoryPlot) {
@@ -1336,7 +1336,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @see #getDataset(int)
      */
     public void setDataset(int index, CategoryDataset dataset) {
-        CategoryDataset existing = (CategoryDataset) this.datasets.get(index);
+        CategoryDataset existing = this.datasets.get(index);
         if (existing != null) {
             existing.removeChangeListener(this);
         }
@@ -2380,21 +2380,19 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
             boolean notify) {
         Args.nullNotPermitted(marker, "marker");
         Args.nullNotPermitted(layer, "layer");
-        Collection markers;
+        Collection<Marker> markers;
         if (layer == Layer.FOREGROUND) {
-            markers = (Collection) this.foregroundDomainMarkers.get(
-                    new Integer(index));
+            markers = this.foregroundDomainMarkers.get(index);
             if (markers == null) {
-                markers = new java.util.ArrayList();
-                this.foregroundDomainMarkers.put(new Integer(index), markers);
+                markers = new java.util.ArrayList<Marker>();
+                this.foregroundDomainMarkers.put(index, markers);
             }
             markers.add(marker);
         } else if (layer == Layer.BACKGROUND) {
-            markers = (Collection) this.backgroundDomainMarkers.get(
-                    new Integer(index));
+            markers = this.backgroundDomainMarkers.get(index);
             if (markers == null) {
-                markers = new java.util.ArrayList();
-                this.backgroundDomainMarkers.put(new Integer(index), markers);
+                markers = new java.util.ArrayList<Marker>();
+                this.backgroundDomainMarkers.put(index, markers);
             }
             markers.add(marker);
         }
@@ -2412,20 +2410,20 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      */
     public void clearDomainMarkers() {
         if (this.backgroundDomainMarkers != null) {
-            Set keys = this.backgroundDomainMarkers.keySet();
-            Iterator iterator = keys.iterator();
+            Set<Integer> keys = this.backgroundDomainMarkers.keySet();
+            Iterator<Integer> iterator = keys.iterator();
             while (iterator.hasNext()) {
-                Integer key = (Integer) iterator.next();
-                clearDomainMarkers(key.intValue());
+                Integer key = iterator.next();
+                clearDomainMarkers(key);
             }
             this.backgroundDomainMarkers.clear();
         }
         if (this.foregroundDomainMarkers != null) {
-            Set keys = this.foregroundDomainMarkers.keySet();
-            Iterator iterator = keys.iterator();
+            Set<Integer> keys = this.foregroundDomainMarkers.keySet();
+            Iterator<Integer> iterator = keys.iterator();
             while (iterator.hasNext()) {
-                Integer key = (Integer) iterator.next();
-                clearDomainMarkers(key.intValue());
+                Integer key = iterator.next();
+                clearDomainMarkers(key);
             }
             this.foregroundDomainMarkers.clear();
         }
@@ -2439,7 +2437,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @return The list of domain markers.
      */
-    public Collection getDomainMarkers(Layer layer) {
+    public Collection<Marker> getDomainMarkers(Layer layer) {
         return getDomainMarkers(0, layer);
     }
 
@@ -2452,14 +2450,14 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @return A collection of markers (possibly {@code null}).
      */
-    public Collection getDomainMarkers(int index, Layer layer) {
-        Collection result = null;
-        Integer key = new Integer(index);
+    public Collection<Marker> getDomainMarkers(int index, Layer layer) {
+        Collection<Marker> result = null;
+        Integer key = index;
         if (layer == Layer.FOREGROUND) {
-            result = (Collection) this.foregroundDomainMarkers.get(key);
+            result = this.foregroundDomainMarkers.get(key);
         }
         else if (layer == Layer.BACKGROUND) {
-            result = (Collection) this.backgroundDomainMarkers.get(key);
+            result = this.backgroundDomainMarkers.get(key);
         }
         if (result != null) {
             result = Collections.unmodifiableCollection(result);
@@ -2475,26 +2473,26 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @see #clearRangeMarkers(int)
      */
     public void clearDomainMarkers(int index) {
-        Integer key = new Integer(index);
+        Integer key = index;
         if (this.backgroundDomainMarkers != null) {
-            Collection markers
-                = (Collection) this.backgroundDomainMarkers.get(key);
+            Collection<Marker> markers
+                = this.backgroundDomainMarkers.get(key);
             if (markers != null) {
-                Iterator iterator = markers.iterator();
+                Iterator<Marker> iterator = markers.iterator();
                 while (iterator.hasNext()) {
-                    Marker m = (Marker) iterator.next();
+                    Marker m = iterator.next();
                     m.removeChangeListener(this);
                 }
                 markers.clear();
             }
         }
         if (this.foregroundDomainMarkers != null) {
-            Collection markers
-                = (Collection) this.foregroundDomainMarkers.get(key);
+            Collection<Marker> markers
+                = this.foregroundDomainMarkers.get(key);
             if (markers != null) {
-                Iterator iterator = markers.iterator();
+                Iterator<Marker> iterator = markers.iterator();
                 while (iterator.hasNext()) {
-                    Marker m = (Marker) iterator.next();
+                    Marker m = iterator.next();
                     m.removeChangeListener(this);
                 }
                 markers.clear();
@@ -2567,13 +2565,11 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      */
     public boolean removeDomainMarker(int index, Marker marker, Layer layer,
             boolean notify) {
-        ArrayList markers;
+        ArrayList<Marker> markers;
         if (layer == Layer.FOREGROUND) {
-            markers = (ArrayList) this.foregroundDomainMarkers.get(new Integer(
-                    index));
+            markers = (ArrayList<Marker>) this.foregroundDomainMarkers.get(index);
         } else {
-            markers = (ArrayList) this.backgroundDomainMarkers.get(new Integer(
-                    index));
+            markers = (ArrayList<Marker>) this.backgroundDomainMarkers.get(index);
         }
         if (markers == null) {
             return false;
@@ -2650,21 +2646,19 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      */
     public void addRangeMarker(int index, Marker marker, Layer layer,
             boolean notify) {
-        Collection markers;
+        Collection<Marker> markers;
         if (layer == Layer.FOREGROUND) {
-            markers = (Collection) this.foregroundRangeMarkers.get(
-                    new Integer(index));
+            markers = this.foregroundRangeMarkers.get(index);
             if (markers == null) {
-                markers = new java.util.ArrayList();
-                this.foregroundRangeMarkers.put(new Integer(index), markers);
+                markers = new java.util.ArrayList<Marker>();
+                this.foregroundRangeMarkers.put(index, markers);
             }
             markers.add(marker);
         } else if (layer == Layer.BACKGROUND) {
-            markers = (Collection) this.backgroundRangeMarkers.get(
-                    new Integer(index));
+            markers = this.backgroundRangeMarkers.get(index);
             if (markers == null) {
-                markers = new java.util.ArrayList();
-                this.backgroundRangeMarkers.put(new Integer(index), markers);
+                markers = new java.util.ArrayList<Marker>();
+                this.backgroundRangeMarkers.put(index, markers);
             }
             markers.add(marker);
         }
@@ -2682,20 +2676,20 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      */
     public void clearRangeMarkers() {
         if (this.backgroundRangeMarkers != null) {
-            Set keys = this.backgroundRangeMarkers.keySet();
-            Iterator iterator = keys.iterator();
+            Set<Integer> keys = this.backgroundRangeMarkers.keySet();
+            Iterator<Integer> iterator = keys.iterator();
             while (iterator.hasNext()) {
-                Integer key = (Integer) iterator.next();
-                clearRangeMarkers(key.intValue());
+                Integer key = iterator.next();
+                clearRangeMarkers(key);
             }
             this.backgroundRangeMarkers.clear();
         }
         if (this.foregroundRangeMarkers != null) {
-            Set keys = this.foregroundRangeMarkers.keySet();
-            Iterator iterator = keys.iterator();
+            Set<Integer> keys = this.foregroundRangeMarkers.keySet();
+            Iterator<Integer> iterator = keys.iterator();
             while (iterator.hasNext()) {
-                Integer key = (Integer) iterator.next();
-                clearRangeMarkers(key.intValue());
+                Integer key = iterator.next();
+                clearRangeMarkers(key);
             }
             this.foregroundRangeMarkers.clear();
         }
@@ -2711,7 +2705,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @see #getRangeMarkers(int, Layer)
      */
-    public Collection getRangeMarkers(Layer layer) {
+    public Collection<Marker> getRangeMarkers(Layer layer) {
         return getRangeMarkers(0, layer);
     }
 
@@ -2724,14 +2718,14 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @return A collection of markers (possibly {@code null}).
      */
-    public Collection getRangeMarkers(int index, Layer layer) {
-        Collection result = null;
-        Integer key = new Integer(index);
+    public Collection<Marker> getRangeMarkers(int index, Layer layer) {
+        Collection<Marker> result = null;
+        Integer key = index;
         if (layer == Layer.FOREGROUND) {
-            result = (Collection) this.foregroundRangeMarkers.get(key);
+            result = this.foregroundRangeMarkers.get(key);
         }
         else if (layer == Layer.BACKGROUND) {
-            result = (Collection) this.backgroundRangeMarkers.get(key);
+            result = this.backgroundRangeMarkers.get(key);
         }
         if (result != null) {
             result = Collections.unmodifiableCollection(result);
@@ -2747,26 +2741,26 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @see #clearDomainMarkers(int)
      */
     public void clearRangeMarkers(int index) {
-        Integer key = new Integer(index);
+        Integer key = index;
         if (this.backgroundRangeMarkers != null) {
-            Collection markers
-                = (Collection) this.backgroundRangeMarkers.get(key);
+            Collection<Marker> markers
+                = this.backgroundRangeMarkers.get(key);
             if (markers != null) {
-                Iterator iterator = markers.iterator();
+                Iterator<Marker> iterator = markers.iterator();
                 while (iterator.hasNext()) {
-                    Marker m = (Marker) iterator.next();
+                    Marker m = iterator.next();
                     m.removeChangeListener(this);
                 }
                 markers.clear();
             }
         }
         if (this.foregroundRangeMarkers != null) {
-            Collection markers
-                = (Collection) this.foregroundRangeMarkers.get(key);
+            Collection<Marker> markers
+                = this.foregroundRangeMarkers.get(key);
             if (markers != null) {
-                Iterator iterator = markers.iterator();
+                Iterator<Marker> iterator = markers.iterator();
                 while (iterator.hasNext()) {
-                    Marker m = (Marker) iterator.next();
+                    Marker m = iterator.next();
                     m.removeChangeListener(this);
                 }
                 markers.clear();
@@ -2848,13 +2842,11 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     public boolean removeRangeMarker(int index, Marker marker, Layer layer,
             boolean notify) {
         Args.nullNotPermitted(marker, "marker");
-        ArrayList markers;
+        ArrayList<Marker> markers;
         if (layer == Layer.FOREGROUND) {
-            markers = (ArrayList) this.foregroundRangeMarkers.get(new Integer(
-                    index));
+            markers = (ArrayList<Marker>) this.foregroundRangeMarkers.get(index);
         } else {
-            markers = (ArrayList) this.backgroundRangeMarkers.get(new Integer(
-                    index));
+            markers = (ArrayList<Marker>) this.backgroundRangeMarkers.get(index);
         }
         if (markers == null) {
             return false;
@@ -4873,6 +4865,9 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
                 that.foregroundDomainMarkers)) {
             return false;
         }
+        if (!ObjectUtils.equal(this.datasets, that.datasets)){
+            return false;
+        }
         if (!ObjectUtils.equal(this.backgroundDomainMarkers,
                 that.backgroundDomainMarkers)) {
             return false;
@@ -4953,6 +4948,103 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
             return false;
         }
         return super.equals(obj);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int hash = 7;
+        hash = 37 * hash +
+                (this.orientation != null ? this.orientation.hashCode() : 0);
+        hash = 37 * hash +
+                (this.axisOffset != null ? this.axisOffset.hashCode() : 0);
+        hash = 37 * hash +
+                (this.domainAxes != null ? this.domainAxes.hashCode() : 0);
+        hash = 37 * hash +
+                (this.domainAxisLocations != null ? this.domainAxisLocations.hashCode() : 0);
+        hash = 37 * hash + (this.drawSharedDomainAxis ? 1 : 0);
+        hash = 37 * hash +
+                (this.rangeAxes != null ? this.rangeAxes.hashCode() : 0);
+        hash = 37 * hash +
+                (this.rangeAxisLocations != null ? this.rangeAxisLocations.hashCode() : 0);
+        hash = 37 * hash + (this.datasets != null ? this.datasets.hashCode() : 0);
+        hash = 37 * hash +
+                (this.datasetToDomainAxesMap != null ? this.datasetToDomainAxesMap.hashCode() : 0);
+        hash = 37 * hash +
+                (this.datasetToRangeAxesMap != null ? this.datasetToRangeAxesMap.hashCode() : 0);
+        hash = 37 * hash +
+                (this.renderers != null ? this.renderers.hashCode() : 0);
+        hash = 37 * hash +
+                (this.renderingOrder != null ? this.renderingOrder.hashCode() : 0);
+        hash = 37 * hash +
+                (this.columnRenderingOrder != null ? this.columnRenderingOrder.hashCode() : 0);
+        hash = 37 * hash +
+                (this.rowRenderingOrder != null ? this.rowRenderingOrder.hashCode() : 0);
+        hash = 37 * hash + (this.domainGridlinesVisible ? 1 : 0);
+        hash = 37 * hash +
+                (this.domainGridlinePosition != null ? this.domainGridlinePosition.hashCode() : 0);
+        hash = 37 * hash +
+                (this.domainGridlineStroke != null ? this.domainGridlineStroke.hashCode() : 0);
+        hash = 37 * hash +
+                (this.domainGridlinePaint != null ? this.domainGridlinePaint.hashCode() : 0);
+        hash = 37 * hash + (this.rangeZeroBaselineVisible ? 1 : 0);
+        hash = 37 * hash +
+                (this.rangeZeroBaselineStroke != null ? this.rangeZeroBaselineStroke.hashCode() : 0);
+        hash = 37 * hash +
+                (this.rangeZeroBaselinePaint != null ? this.rangeZeroBaselinePaint.hashCode() : 0);
+        hash = 37 * hash + (this.rangeGridlinesVisible ? 1 : 0);
+        hash = 37 * hash +
+                (this.rangeGridlineStroke != null ? this.rangeGridlineStroke.hashCode() : 0);
+        hash = 37 * hash +
+                (this.rangeGridlinePaint != null ? this.rangeGridlinePaint.hashCode() : 0);
+        hash = 37 * hash + (this.rangeMinorGridlinesVisible ? 1 : 0);
+        hash = 37 * hash +
+                (this.rangeMinorGridlineStroke != null ? this.rangeMinorGridlineStroke.hashCode() : 0);
+        hash = 37 * hash +
+                (this.rangeMinorGridlinePaint != null ? this.rangeMinorGridlinePaint.hashCode() : 0);
+        hash = 37 * hash +
+                (int) (Double.doubleToLongBits(this.anchorValue) ^
+                (Double.doubleToLongBits(this.anchorValue) >>> 32));
+        hash = 37 * hash + this.crosshairDatasetIndex;
+        hash = 37 * hash + (this.domainCrosshairVisible ? 1 : 0);
+        hash = 37 * hash +
+                (this.domainCrosshairRowKey != null ? this.domainCrosshairRowKey.hashCode() : 0);
+        hash = 37 * hash +
+                (this.domainCrosshairColumnKey != null ? this.domainCrosshairColumnKey.hashCode() : 0);
+        hash = 37 * hash +
+                (this.domainCrosshairStroke != null ? this.domainCrosshairStroke.hashCode() : 0);
+        hash = 37 * hash +
+                (this.domainCrosshairPaint != null ? this.domainCrosshairPaint.hashCode() : 0);
+        hash = 37 * hash + (this.rangeCrosshairVisible ? 1 : 0);
+        hash = 37 * hash +
+                (int) (Double.doubleToLongBits(this.rangeCrosshairValue) ^
+                (Double.doubleToLongBits(this.rangeCrosshairValue) >>> 32));
+        hash = 37 * hash +
+                (this.rangeCrosshairStroke != null ? this.rangeCrosshairStroke.hashCode() : 0);
+        hash = 37 * hash +
+                (this.rangeCrosshairPaint != null ? this.rangeCrosshairPaint.hashCode() : 0);
+        hash = 37 * hash + (this.rangeCrosshairLockedOnData ? 1 : 0);
+        hash = 37 * hash +
+                (this.foregroundDomainMarkers != null ? this.foregroundDomainMarkers.hashCode() : 0);
+        hash = 37 * hash +
+                (this.backgroundDomainMarkers != null ? this.backgroundDomainMarkers.hashCode() : 0);
+        hash = 37 * hash +
+                (this.foregroundRangeMarkers != null ? this.foregroundRangeMarkers.hashCode() : 0);
+        hash = 37 * hash +
+                (this.backgroundRangeMarkers != null ? this.backgroundRangeMarkers.hashCode() : 0);
+        hash = 37 * hash +
+                (this.annotations != null ? this.annotations.hashCode() : 0);
+        hash = 37 * hash + this.weight;
+        hash = 37 * hash +
+                (this.fixedDomainAxisSpace != null ? this.fixedDomainAxisSpace.hashCode() : 0);
+        hash = 37 * hash +
+                (this.fixedRangeAxisSpace != null ? this.fixedRangeAxisSpace.hashCode() : 0);
+        hash = 37 * hash +
+                (this.fixedLegendItems != null ? this.fixedLegendItems.hashCode() : 0);
+        hash = 37 * hash + (this.rangePannable ? 1 : 0);
+        hash = 37 * hash +
+                (this.shadowGenerator != null ? this.shadowGenerator.hashCode() : 0);
+        return hash;
     }
 
     /**

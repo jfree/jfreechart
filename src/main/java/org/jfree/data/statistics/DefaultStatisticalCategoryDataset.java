@@ -52,12 +52,14 @@
  * 02-Oct-2007 : Fixed bug updating cached range values (DG);
  * 19-May-2009 : Fixed FindBugs warnings, patch by Michal Wozniak (DG);
  * 20-Oct-2011 : Fixed getRangeBounds() bug 3072674 (DG);
+ * 19-Jan-2019 : Added missing hashCode (TH);
  *
  */
 
 package org.jfree.data.statistics;
 
 import java.util.List;
+import java.util.Objects;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.KeyedObjects2D;
@@ -716,6 +718,13 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode(){
+        int hash = 7;
+        hash = 47 * hash + Objects.hashCode(this.data);
+        return hash;
     }
 
     /**

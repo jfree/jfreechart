@@ -35,12 +35,14 @@
  * Changes:
  * --------
  * 18-Aug-2014 : Version 1, based on code from Orson Charts (DG);
+ * 19-Jan-2019 : Added missing hashCode (TH);
  *
  */
 
 package org.jfree.data;
 
 import java.io.Serializable;
+import java.util.Objects;
 import org.jfree.chart.util.Args;
 
 public class KeyedValuesItemKey implements ItemKey, Serializable {
@@ -87,6 +89,13 @@ public class KeyedValuesItemKey implements ItemKey, Serializable {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode(){
+        int hash = 7;
+        hash = 23 * hash + Objects.hashCode(this.key);
+        return hash;
     }
     
     @Override

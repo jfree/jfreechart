@@ -44,6 +44,7 @@
  * 30-Nov-2005 : Removed get/setPlotArea() (DG);
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 01-Dec-2006 : Fixed equals() and clone() (DG);
+ * 19-Jan-2019 : Added missing hashCode (TH);
  *
  */
 
@@ -54,6 +55,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Objects;
 
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.entity.StandardEntityCollection;
@@ -206,6 +208,15 @@ public class ChartRenderingInfo implements Cloneable, Serializable {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode(){
+        int hash = 7;
+        hash = 79 * hash + Objects.hashCode(this.chartArea);
+        hash = 79 * hash + Objects.hashCode(this.entities);
+        hash = 79 * hash + Objects.hashCode(this.plotInfo);
+        return hash;
     }
 
     /**

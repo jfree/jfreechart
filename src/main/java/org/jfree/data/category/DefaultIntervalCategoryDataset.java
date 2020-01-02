@@ -43,6 +43,7 @@
  * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
  *               Jess Thrysoee (DG);
  * 03-Jul-2013 : Use ParamChecks (DG);
+ * 28-Jan-2017 : Added missing hashCode (TH);
  *
  */
 
@@ -748,6 +749,17 @@ public class DefaultIntervalCategoryDataset extends AbstractSeriesDataset
         }
         // seem to be the same...
         return true;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int hash = 3;
+        hash = 61 * hash + Arrays.deepHashCode( this.seriesKeys );
+        hash = 61 * hash + Arrays.deepHashCode( this.categoryKeys );
+        hash = 61 * hash + Arrays.deepHashCode( this.startData );
+        hash = 61 * hash + Arrays.deepHashCode( this.endData );
+        return hash;
     }
 
     /**

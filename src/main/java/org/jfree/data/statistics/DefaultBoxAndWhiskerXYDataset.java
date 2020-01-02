@@ -55,6 +55,7 @@
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 02-Feb-2007 : Removed author tags from all over JFreeChart sources (DG);
  * 12-Nov-2007 : Implemented equals() and clone() (DG);
+ * 19-Jan-2019 : Added missing hashCode (TH);
  *
  */
 
@@ -63,6 +64,7 @@ package org.jfree.data.statistics;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import org.jfree.chart.util.ObjectUtils;
 
 import org.jfree.data.Range;
@@ -557,6 +559,15 @@ public class DefaultBoxAndWhiskerXYDataset extends AbstractXYDataset
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode(){
+        int hash = 5;
+        hash = 59 * hash + Objects.hashCode(this.seriesKey);
+        hash = 59 * hash + Objects.hashCode(this.dates);
+        hash = 59 * hash + Objects.hashCode(this.items);
+        return hash;
     }
 
     /**

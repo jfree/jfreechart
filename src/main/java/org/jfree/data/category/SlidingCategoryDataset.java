@@ -36,6 +36,7 @@
  * -------
  * 08-May-2008 : Version 1 (DG);
  * 15-Mar-2009 : Fixed bug in getColumnKeys() method (DG);
+ * 19-Jan-2019 : Added missing hashCode (TH);
  *
  */
 
@@ -43,6 +44,7 @@ package org.jfree.data.category;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.UnknownKeyException;
@@ -336,6 +338,15 @@ public class SlidingCategoryDataset extends AbstractDataset
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode(){
+        int hash = 7;
+        hash = 43 * hash + Objects.hashCode(this.underlying);
+        hash = 43 * hash + this.firstCategoryIndex;
+        hash = 43 * hash + this.maximumCategoryCount;
+        return hash;
     }
 
     /**

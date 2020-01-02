@@ -36,6 +36,7 @@
  * --------
  * 27-Sep-2006 : Version 1 (DG);
  * 02-Jul-2013 : Use ParamChecks (DG);
+ * 19-Jan-2019 : Added missing hashCode (TH);
  *
  */
 
@@ -48,6 +49,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.TreeMap;
 import org.jfree.chart.util.ObjectUtils;
@@ -157,6 +159,13 @@ public class StrokeMap implements Cloneable, Serializable {
             }
         }
         return true;
+    }
+
+    @Override
+    public int hashCode(){
+        int hash = 7;
+        hash = 89 * hash + Objects.hashCode(this.store);
+        return hash;
     }
 
     /**

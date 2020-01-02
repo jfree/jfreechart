@@ -51,12 +51,15 @@
  * 02-Oct-2007 : Fixed bug in updating cached bounds (DG);
  * 03-Oct-2007 : Fixed another bug in updating cached bounds, added removal
  *               methods (DG);
+ * 29-Jan-2017 : Added missing hashCode (TH);
  *
  */
 
 package org.jfree.data.statistics;
 
 import java.util.List;
+import java.util.Objects;
+
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PublicCloneable;
 
@@ -929,6 +932,14 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
             return ObjectUtils.equal(this.data, dataset.data);
         }
         return false;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int hash = 5;
+        hash = 23 * hash + Objects.hashCode( this.data );
+        return hash;
     }
 
     /**

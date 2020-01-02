@@ -37,6 +37,7 @@
  * 08-Oct-2007 : Version 1, see patch 1780779 (DG);
  * 06-Nov-2007 : Return EMPTY_LIST not null from getValues() (DG);
  * 02-JUL-2013 : Use ParamChecks (DG);
+ * 19-Jan-2019 : Added missing hashCode (TH);
  * 
  */
 
@@ -46,6 +47,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 
@@ -398,6 +400,13 @@ public class DefaultMultiValueCategoryDataset extends AbstractDataset
         DefaultMultiValueCategoryDataset that
                 = (DefaultMultiValueCategoryDataset) obj;
         return this.data.equals(that.data);
+    }
+
+    @Override
+    public int hashCode(){
+        int hash = 7;
+        hash = 37 * hash + Objects.hashCode(this.data);
+        return hash;
     }
 
     /**

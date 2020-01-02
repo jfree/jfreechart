@@ -38,6 +38,7 @@
  * 17-Jan-2007 : Changed TreeMap to HashMap, so that different classes that
  *               implement Comparable can be used as keys (DG);
  * 02-Jul-2013 : Use ParamChecks class (DG);
+ * 28-Jan-2017 : Added missing hashCode (TH);
  *
  */
 
@@ -51,6 +52,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
@@ -162,6 +164,14 @@ public class PaintMap implements Cloneable, Serializable {
             }
         }
         return true;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int hash = 3;
+        hash = 67 * hash + Objects.hashCode( this.store );
+        return hash;
     }
 
     /**

@@ -39,6 +39,7 @@
  * ------------- JFREECHART 1.0.x ---------------------------------------------
  * 15-Nov-2006 : Added toString() method override (DG);
  * 02-Oct-2007 : Added new constructor (for convenience) (DG);
+ * 19-Jan-2019 : Added missing hashCode (TH);
  *
  */
 
@@ -47,6 +48,7 @@ package org.jfree.data.statistics;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import org.jfree.chart.util.ObjectUtils;
 
 /**
@@ -292,6 +294,21 @@ public class BoxAndWhiskerItem implements Serializable {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode(){
+        int hash = 3;
+        hash = 67 * hash + Objects.hashCode(this.mean);
+        hash = 67 * hash + Objects.hashCode(this.median);
+        hash = 67 * hash + Objects.hashCode(this.q1);
+        hash = 67 * hash + Objects.hashCode(this.q3);
+        hash = 67 * hash + Objects.hashCode(this.minRegularValue);
+        hash = 67 * hash + Objects.hashCode(this.maxRegularValue);
+        hash = 67 * hash + Objects.hashCode(this.minOutlier);
+        hash = 67 * hash + Objects.hashCode(this.maxOutlier);
+        hash = 67 * hash + Objects.hashCode(this.outliers);
+        return hash;
     }
 
 }

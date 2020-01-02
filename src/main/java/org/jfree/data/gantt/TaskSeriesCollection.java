@@ -46,6 +46,7 @@
  *               getSeries(Comparable) (DG);
  * 09-May-2008 : Fixed cloning bug (DG);
  * 03-Jul-2013 : Use ParamChecks (DG);
+ * 19-Jan-2019 : Added missing hashCode (TH);
  *
  */
 
@@ -54,6 +55,7 @@ package org.jfree.data.gantt;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
@@ -684,6 +686,13 @@ public class TaskSeriesCollection extends AbstractSeriesDataset
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode(){
+        int hash = 7;
+        hash = 89 * hash + Objects.hashCode(this.data);
+        return hash;
     }
 
     /**

@@ -38,6 +38,7 @@
  * 21-May-2007 : Added clearObservations() and removeAllBins() (SI);
  * 10-Jul-2007 : Added null argument check to constructor (DG);
  * 03-Jul-2013 : Use ParamChecks (DG);
+ * 19-Jan-2019 : Added missing hashCode (TH);
  *
  */
 
@@ -48,6 +49,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
@@ -471,6 +473,15 @@ public class SimpleHistogramDataset extends AbstractIntervalXYDataset
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode(){
+        int hash = 7;
+        hash = 11 * hash + Objects.hashCode(this.key);
+        hash = 11 * hash + Objects.hashCode(this.bins);
+        hash = 11 * hash + (this.adjustForBinSize ? 1 : 0);
+        return hash;
     }
 
     /**
