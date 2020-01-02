@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,13 +27,15 @@
  * ---------
  * Args.java
  * ---------
- * (C) Copyright 2011-2017, by Object Refinery Limited.
+ * (C) Copyright 2011-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  */
 
 package org.jfree.chart.util;
+
+import java.util.Objects;
 
 /**
  * A utility class for checking method arguments.
@@ -50,6 +52,9 @@ public class Args {
      *
      * @throws IllegalArgumentException  if {@code param} is 
      *     {@code null}.
+     * 
+     * @deprecated Now that JFreeChart requires JDK1.8 or later, you can use
+     *    {@link Objects#requireNonNull}.
      */
     public static void nullNotPermitted(Object param, String name) {
         if (param == null) {
