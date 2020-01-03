@@ -67,7 +67,7 @@ public class CustomXYURLGeneratorTest {
         u1.add("URL A3");
         g1.addURLSeries(u1);
         assertFalse(g1.equals(g2));
-        List<String> u2 = new List<>();
+        List<String> u2 = new ArrayList<>();
         u2.add("URL A1");
         u2.add("URL A2");
         u2.add("URL A3");
