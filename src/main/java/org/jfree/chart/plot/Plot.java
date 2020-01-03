@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------
  * Plot.java
  * ---------
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Sylvain Vieujot;
@@ -38,98 +38,6 @@
  *                   Michal Krause;
  *                   Richard West, Advanced Micro Devices, Inc.;
  *                   Peter Kolb - patches 2603321, 2809117;
- *
- * Changes
- * -------
- * 21-Jun-2001 : Removed redundant JFreeChart parameter from constructors (DG);
- * 18-Sep-2001 : Updated header info and fixed DOS encoding problem (DG);
- * 19-Oct-2001 : Moved series paint and stroke methods from JFreeChart
- *               class (DG);
- * 23-Oct-2001 : Created renderer for LinePlot class (DG);
- * 07-Nov-2001 : Changed type names for ChartChangeEvent (DG);
- *               Tidied up some Javadoc comments (DG);
- * 13-Nov-2001 : Changes to allow for null axes on plots such as PiePlot (DG);
- *               Added plot/axis compatibility checks (DG);
- * 12-Dec-2001 : Changed constructors to protected, and removed unnecessary
- *               'throws' clauses (DG);
- * 13-Dec-2001 : Added tooltips (DG);
- * 22-Jan-2002 : Added handleClick() method, as part of implementation for
- *               crosshairs (DG);
- *               Moved tooltips reference into ChartInfo class (DG);
- * 23-Jan-2002 : Added test for null axes in chartChanged() method, thanks
- *               to Barry Evans for the bug report (number 506979 on
- *               SourceForge) (DG);
- *               Added a zoom() method (DG);
- * 05-Feb-2002 : Updated setBackgroundPaint(), setOutlineStroke() and
- *               setOutlinePaint() to better handle null values, as suggested
- *               by Sylvain Vieujot (DG);
- * 06-Feb-2002 : Added background image, plus alpha transparency for background
- *               and foreground (DG);
- * 06-Mar-2002 : Added AxisConstants interface (DG);
- * 26-Mar-2002 : Changed zoom method from empty to abstract (DG);
- * 23-Apr-2002 : Moved dataset from JFreeChart class (DG);
- * 11-May-2002 : Added ShapeFactory interface for getShape() methods,
- *               contributed by Jeremy Bowman (DG);
- * 28-May-2002 : Fixed bug in setSeriesPaint(int, Paint) for subplots (AS);
- * 25-Jun-2002 : Removed redundant imports (DG);
- * 30-Jul-2002 : Added 'no data' message for charts with null or empty
- *               datasets (DG);
- * 21-Aug-2002 : Added code to extend series array if necessary (refer to
- *               SourceForge bug id 594547 for details) (DG);
- * 17-Sep-2002 : Fixed bug in getSeriesOutlineStroke() method, reported by
- *               Andreas Schroeder (DG);
- * 23-Sep-2002 : Added getLegendItems() abstract method (DG);
- * 24-Sep-2002 : Removed firstSeriesIndex, subplots now use their own paint
- *               settings, there is a new mechanism for the legend to collect
- *               the legend items (DG);
- * 27-Sep-2002 : Added dataset group (DG);
- * 14-Oct-2002 : Moved listener storage into EventListenerList.  Changed some
- *               abstract methods to empty implementations (DG);
- * 28-Oct-2002 : Added a getBackgroundImage() method (DG);
- * 21-Nov-2002 : Added a plot index for identifying subplots in combined and
- *               overlaid charts (DG);
- * 22-Nov-2002 : Changed all attributes from 'protected' to 'private'.  Added
- *               dataAreaRatio attribute from David M O'Donnell's code (DG);
- * 09-Jan-2003 : Integrated fix for plot border contributed by Gideon
- *               Krause (DG);
- * 17-Jan-2003 : Moved to com.jrefinery.chart.plot (DG);
- * 23-Jan-2003 : Removed one constructor (DG);
- * 26-Mar-2003 : Implemented Serializable (DG);
- * 14-Jul-2003 : Moved the dataset and secondaryDataset attributes to the
- *               CategoryPlot and XYPlot classes (DG);
- * 21-Jul-2003 : Moved DrawingSupplier from CategoryPlot and XYPlot up to this
- *               class (DG);
- * 20-Aug-2003 : Implemented Cloneable (DG);
- * 11-Sep-2003 : Listeners and clone (NB);
- * 29-Oct-2003 : Added workaround for font alignment in PDF output (DG);
- * 03-Dec-2003 : Modified draw method to accept anchor (DG);
- * 12-Mar-2004 : Fixed clipping bug in drawNoDataMessage() method (DG);
- * 07-Apr-2004 : Modified string bounds calculation (DG);
- * 04-Nov-2004 : Added default shapes for legend items (DG);
- * 25-Nov-2004 : Some changes to the clone() method implementation (DG);
- * 23-Feb-2005 : Implemented new LegendItemSource interface (and also
- *               PublicCloneable) (DG);
- * 21-Apr-2005 : Replaced Insets with RectangleInsets (DG);
- * 05-May-2005 : Removed unused draw() method (DG);
- * 06-Jun-2005 : Fixed bugs in equals() method (DG);
- * 01-Sep-2005 : Moved dataAreaRatio from here to ContourPlot (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 30-Jun-2006 : Added background image alpha - see bug report 1514904 (DG);
- * 05-Sep-2006 : Implemented the MarkerChangeListener interface (DG);
- * 11-Jan-2007 : Added some argument checks, event notifications, and many
- *               API doc updates (DG);
- * 03-Apr-2007 : Made drawBackgroundImage() public (DG);
- * 07-Jun-2007 : Added new fillBackground() method to handle GradientPaint
- *               taking into account orientation (DG);
- * 25-Mar-2008 : Added fireChangeEvent() method - see patch 1914411 (DG);
- * 15-Aug-2008 : Added setDrawingSupplier() method with notify flag (DG);
- * 13-Jan-2009 : Added notify flag (DG);
- * 19-Mar-2009 : Added entity support - see patch 2603321 by Peter Kolb (DG);
- * 24-Jun-2009 : Implemented AnnotationChangeListener (see patch 2809117 by
- *               PK) (DG);
- * 13-Jul-2009 : Plot background image should be clipped if necessary (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
- * 29-Jul-2014 : Add hint to normalise stroke for plot border (DG);
  * 
  */
 
@@ -154,6 +62,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Objects;
 
 import javax.swing.event.EventListenerList;
 
@@ -180,9 +89,9 @@ import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.Align;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.general.DatasetChangeEvent;
@@ -202,7 +111,7 @@ public abstract class Plot implements AxisChangeListener,
     private static final long serialVersionUID = -8831571430103671324L;
 
     /** Useful constant representing zero. */
-    public static final Number ZERO = new Integer(0);
+    public static final Number ZERO = 0;
 
     /** The default insets. */
     public static final RectangleInsets DEFAULT_INSETS
@@ -451,7 +360,7 @@ public abstract class Plot implements AxisChangeListener,
      * @see #getNoDataMessageFont()
      */
     public void setNoDataMessageFont(Font font) {
-        Args.nullNotPermitted(font, "font");
+        Objects.requireNonNull(font, "font");
         this.noDataMessageFont = font;
         fireChangeEvent();
     }
@@ -477,7 +386,7 @@ public abstract class Plot implements AxisChangeListener,
      * @see #getNoDataMessagePaint()
      */
     public void setNoDataMessagePaint(Paint paint) {
-        Args.nullNotPermitted(paint, "paint");
+        Objects.requireNonNull(paint, "paint");
         this.noDataMessagePaint = paint;
         fireChangeEvent();
     }
@@ -585,7 +494,7 @@ public abstract class Plot implements AxisChangeListener,
      * @see #setInsets(RectangleInsets)
      */
     public void setInsets(RectangleInsets insets, boolean notify) {
-        Args.nullNotPermitted(insets, "insets");
+        Objects.requireNonNull(insets, "insets");
         if (!this.insets.equals(insets)) {
             this.insets = insets;
             if (notify) {
@@ -1096,7 +1005,7 @@ public abstract class Plot implements AxisChangeListener,
      */
     protected void fillBackground(Graphics2D g2, Rectangle2D area,
             PlotOrientation orientation) {
-        Args.nullNotPermitted(orientation, "orientation");
+        Objects.requireNonNull(orientation, "orientation");
         if (this.backgroundPaint == null) {
             return;
         }
@@ -1432,10 +1341,10 @@ public abstract class Plot implements AxisChangeListener,
         // childs in combined plots instead
         if (this.datasetGroup != null) {
             clone.datasetGroup
-                = (DatasetGroup) ObjectUtils.clone(this.datasetGroup);
+                = (DatasetGroup) CloneUtils.clone(this.datasetGroup);
         }
         clone.drawingSupplier
-            = (DrawingSupplier) ObjectUtils.clone(this.drawingSupplier);
+            = (DrawingSupplier) CloneUtils.clone(this.drawingSupplier);
         clone.listenerList = new EventListenerList();
         return clone;
 
@@ -1489,41 +1398,41 @@ public abstract class Plot implements AxisChangeListener,
     public static RectangleEdge resolveDomainAxisLocation(
             AxisLocation location, PlotOrientation orientation) {
 
-        Args.nullNotPermitted(location, "location");
-        Args.nullNotPermitted(orientation, "orientation");
+        Objects.requireNonNull(location, "location");
+        Objects.requireNonNull(orientation, "orientation");
 
         RectangleEdge result = null;
-        if (location == AxisLocation.TOP_OR_RIGHT) {
-            if (orientation == PlotOrientation.HORIZONTAL) {
-                result = RectangleEdge.RIGHT;
-            }
-            else if (orientation == PlotOrientation.VERTICAL) {
-                result = RectangleEdge.TOP;
-            }
-        }
-        else if (location == AxisLocation.TOP_OR_LEFT) {
-            if (orientation == PlotOrientation.HORIZONTAL) {
-                result = RectangleEdge.LEFT;
-            }
-            else if (orientation == PlotOrientation.VERTICAL) {
-                result = RectangleEdge.TOP;
-            }
-        }
-        else if (location == AxisLocation.BOTTOM_OR_RIGHT) {
-            if (orientation == PlotOrientation.HORIZONTAL) {
-                result = RectangleEdge.RIGHT;
-            }
-            else if (orientation == PlotOrientation.VERTICAL) {
-                result = RectangleEdge.BOTTOM;
-            }
-        }
-        else if (location == AxisLocation.BOTTOM_OR_LEFT) {
-            if (orientation == PlotOrientation.HORIZONTAL) {
-                result = RectangleEdge.LEFT;
-            }
-            else if (orientation == PlotOrientation.VERTICAL) {
-                result = RectangleEdge.BOTTOM;
-            }
+        switch (location) {
+            case TOP_OR_RIGHT:
+                if (orientation == PlotOrientation.HORIZONTAL) {
+                    result = RectangleEdge.RIGHT;
+                }
+                else if (orientation == PlotOrientation.VERTICAL) {
+                    result = RectangleEdge.TOP;
+                }   break;
+            case TOP_OR_LEFT:
+                if (orientation == PlotOrientation.HORIZONTAL) {
+                    result = RectangleEdge.LEFT;
+                }
+                else if (orientation == PlotOrientation.VERTICAL) {
+                    result = RectangleEdge.TOP;
+                }   break;
+            case BOTTOM_OR_RIGHT:
+                if (orientation == PlotOrientation.HORIZONTAL) {
+                    result = RectangleEdge.RIGHT;
+                }
+                else if (orientation == PlotOrientation.VERTICAL) {
+                    result = RectangleEdge.BOTTOM;
+                }   break;
+            case BOTTOM_OR_LEFT:
+                if (orientation == PlotOrientation.HORIZONTAL) {
+                    result = RectangleEdge.LEFT;
+                }
+                else if (orientation == PlotOrientation.VERTICAL) {
+                    result = RectangleEdge.BOTTOM;
+                }   break;
+            default:
+                break;
         }
         // the above should cover all the options...
         if (result == null) {
@@ -1544,41 +1453,41 @@ public abstract class Plot implements AxisChangeListener,
     public static RectangleEdge resolveRangeAxisLocation(
             AxisLocation location, PlotOrientation orientation) {
 
-        Args.nullNotPermitted(location, "location");
-        Args.nullNotPermitted(orientation, "orientation");
+        Objects.requireNonNull(location, "location");
+        Objects.requireNonNull(orientation, "orientation");
 
         RectangleEdge result = null;
-        if (location == AxisLocation.TOP_OR_RIGHT) {
-            if (orientation == PlotOrientation.HORIZONTAL) {
-                result = RectangleEdge.TOP;
-            }
-            else if (orientation == PlotOrientation.VERTICAL) {
-                result = RectangleEdge.RIGHT;
-            }
-        }
-        else if (location == AxisLocation.TOP_OR_LEFT) {
-            if (orientation == PlotOrientation.HORIZONTAL) {
-                result = RectangleEdge.TOP;
-            }
-            else if (orientation == PlotOrientation.VERTICAL) {
-                result = RectangleEdge.LEFT;
-            }
-        }
-        else if (location == AxisLocation.BOTTOM_OR_RIGHT) {
-            if (orientation == PlotOrientation.HORIZONTAL) {
-                result = RectangleEdge.BOTTOM;
-            }
-            else if (orientation == PlotOrientation.VERTICAL) {
-                result = RectangleEdge.RIGHT;
-            }
-        }
-        else if (location == AxisLocation.BOTTOM_OR_LEFT) {
-            if (orientation == PlotOrientation.HORIZONTAL) {
-                result = RectangleEdge.BOTTOM;
-            }
-            else if (orientation == PlotOrientation.VERTICAL) {
-                result = RectangleEdge.LEFT;
-            }
+        switch (location) {
+            case TOP_OR_RIGHT:
+                if (orientation == PlotOrientation.HORIZONTAL) {
+                    result = RectangleEdge.TOP;
+                }
+                else if (orientation == PlotOrientation.VERTICAL) {
+                    result = RectangleEdge.RIGHT;
+                }   break;
+            case TOP_OR_LEFT:
+                if (orientation == PlotOrientation.HORIZONTAL) {
+                    result = RectangleEdge.TOP;
+                }
+                else if (orientation == PlotOrientation.VERTICAL) {
+                    result = RectangleEdge.LEFT;
+                }   break;
+            case BOTTOM_OR_RIGHT:
+                if (orientation == PlotOrientation.HORIZONTAL) {
+                    result = RectangleEdge.BOTTOM;
+                }
+                else if (orientation == PlotOrientation.VERTICAL) {
+                    result = RectangleEdge.RIGHT;
+                }   break;
+            case BOTTOM_OR_LEFT:
+                if (orientation == PlotOrientation.HORIZONTAL) {
+                    result = RectangleEdge.BOTTOM;
+                }
+                else if (orientation == PlotOrientation.VERTICAL) {
+                    result = RectangleEdge.LEFT;
+                }   break;
+            default:
+                break;
         }
 
         // the above should cover all the options...
