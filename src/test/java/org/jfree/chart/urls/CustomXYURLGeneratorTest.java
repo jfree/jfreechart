@@ -97,7 +97,7 @@ public class CustomXYURLGeneratorTest {
         u2.add("URL XXX");
         g1.addURLSeries(u2);
         assertFalse(g1.equals(g2));
-        g2.addURLSeries(new java.util.ArrayList(u2));
+        g2.addURLSeries(new ArrayList<>(u2));
         assertTrue(g1.equals(g2));
     }
 

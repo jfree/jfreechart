@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * ----------------------------------
  * DefaultKeyedValuesDatasetTest.java
  * ----------------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 13-Mar-2003 : Version 1 (DG);
  *
  */
 
@@ -52,13 +48,14 @@ public class DefaultKeyedValuesDatasetTest {
 
     /**
      * Confirm that cloning works.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
         DefaultKeyedValuesDataset d1 = new DefaultKeyedValuesDataset();
-        d1.setValue("V1", new Integer(1));
+        d1.setValue("V1", 1);
         d1.setValue("V2", null);
-        d1.setValue("V3", new Integer(3));
+        d1.setValue("V3", 3);
         DefaultKeyedValuesDataset d2 = (DefaultKeyedValuesDataset) d1.clone();
         assertTrue(d1 != d2);
         assertTrue(d1.getClass() == d2.getClass());
@@ -70,10 +67,10 @@ public class DefaultKeyedValuesDatasetTest {
      */
     public void testSerialization() {
         DefaultKeyedValuesDataset d1 = new DefaultKeyedValuesDataset();
-        d1.setValue("C1", new Double(234.2));
+        d1.setValue("C1", 234.2);
         d1.setValue("C2", null);
-        d1.setValue("C3", new Double(345.9));
-        d1.setValue("C4", new Double(452.7));
+        d1.setValue("C3", 345.9);
+        d1.setValue("C4", 452.7);
 
         KeyedValuesDataset d2 = (KeyedValuesDataset) 
                 TestUtils.serialised(d1);

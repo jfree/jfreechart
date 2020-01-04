@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2019, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * CloneUtils.java
  * ---------------
- * (C) Copyright 2014-2019, by Object Refinery Limited.
+ * (C) Copyright 2014-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -42,6 +42,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Utilities for cloning.
@@ -61,20 +62,20 @@ public class CloneUtils {
      * 
      * @throws CloneNotSupportedException if the object cannot be cloned.
      */
-    public static Object clone(Object object)
-        throws CloneNotSupportedException {
+    public static <T> T clone(T object)
+            throws CloneNotSupportedException {
         if (object == null) {
             return null;
         }
         if (object instanceof PublicCloneable) {
             PublicCloneable pc = (PublicCloneable) object;
-            return pc.clone();
+            return (T) pc.clone();
         } else {
             try {
                 Method method = object.getClass().getMethod("clone",
                         (Class[]) null);
                 if (Modifier.isPublic(method.getModifiers())) {
-                    return method.invoke(object, (Object[]) null);
+                    return (T) method.invoke(object, (Object[]) null);
                 }
             } catch (NoSuchMethodException e) {
                 throw new CloneNotSupportedException("Object without clone() method is impossible.");
@@ -95,12 +96,12 @@ public class CloneUtils {
      * 
      * @return A new list. 
      */
-    public static List<?> cloneList(List<?> source) {
-        Args.nullNotPermitted(source, "source");
-        List result = new ArrayList();
+    public static <T> List<T>cloneList(List<T> source) {
+        Objects.requireNonNull(source, "source");
+        List<T> result = new ArrayList<>();
         for (Object obj: source) {
             try {
-                result.add(CloneUtils.clone(obj));
+                result.add((T) clone(obj));
             } catch (CloneNotSupportedException ex) {
                 throw new RuntimeException(ex);
             }
@@ -118,14 +119,14 @@ public class CloneUtils {
      * 
      * @since 1.0.18
      */
-    public static Map cloneMapValues(Map source) {
-        Args.nullNotPermitted(source, "source");
-        Map result = new HashMap();
-        for (Object key : source.keySet()) {
-            Object value = source.get(key);
+    public static <K, V> Map<K, V> cloneMapValues(Map<K, V> source) {
+        Objects.requireNonNull(source, "source");
+        Map<K, V> result = new HashMap<>();
+        for (K key : source.keySet()) {
+            V value = source.get(key);
             if (value != null) {
                 try {
-                    result.put(key, ObjectUtils.clone(value));
+                    result.put(key, clone(value));
                 } catch (CloneNotSupportedException ex) {
                     throw new RuntimeException(ex);
                 }
