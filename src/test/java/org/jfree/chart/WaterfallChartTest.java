@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * -----------------------
  * WaterfallChartTest.java
  * -----------------------
- * (C) Copyright 2002-2016, by Object Refinery Limited.
+ * (C) Copyright 2002-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 12-Apr-2005 : Version 1 (DG);
  *
  */
 
@@ -130,22 +126,14 @@ public class WaterfallChartTest {
      * @return The chart.
      */
     private static JFreeChart createWaterfallChart() {
-        Number[][] data = new Integer[][]
-            {{new Integer(-3), new Integer(-2)},
-             {new Integer(-1), new Integer(1)},
-             {new Integer(2), new Integer(3)}};
+        Number[][] data = new Integer[][] {{-3, -2}, {-1, 1}, {2, 3}};
 
         CategoryDataset dataset = DatasetUtils.createCategoryDataset("S",
                 "C", data);
-        return ChartFactory.createWaterfallChart(
-            "Waterfall Chart",
-            "Domain", "Range",
-            dataset,
-            PlotOrientation.HORIZONTAL,
+        return ChartFactory.createWaterfallChart("Waterfall Chart",
+            "Domain", "Range", dataset, PlotOrientation.HORIZONTAL,
             true,     // include legend
-            true,
-            true
-        );
+            true, true);
 
     }
 

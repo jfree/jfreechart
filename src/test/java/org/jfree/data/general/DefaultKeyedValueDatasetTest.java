@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * ---------------------------------
  * DefaultKeyedValueDatasetTest.java
  * ---------------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 18-Aug-2003 : Version 1 (DG);
  *
  */
 
@@ -59,30 +55,28 @@ public class DefaultKeyedValueDatasetTest {
     @Test
     public void testEquals() {
 
-        DefaultKeyedValueDataset d1
-            = new DefaultKeyedValueDataset("Test", new Double(45.5));
-        DefaultKeyedValueDataset d2
-            = new DefaultKeyedValueDataset("Test", new Double(45.5));
+        DefaultKeyedValueDataset d1 = new DefaultKeyedValueDataset("Test", 45.5);
+        DefaultKeyedValueDataset d2 = new DefaultKeyedValueDataset("Test", 45.5);
         assertTrue(d1.equals(d2));
         assertTrue(d2.equals(d1));
 
-        d1 = new DefaultKeyedValueDataset("Test 1", new Double(45.5));
-        d2 = new DefaultKeyedValueDataset("Test 2", new Double(45.5));
+        d1 = new DefaultKeyedValueDataset("Test 1", 45.5);
+        d2 = new DefaultKeyedValueDataset("Test 2", 45.5);
         assertFalse(d1.equals(d2));
 
-        d1 = new DefaultKeyedValueDataset("Test", new Double(45.5));
-        d2 = new DefaultKeyedValueDataset("Test", new Double(45.6));
+        d1 = new DefaultKeyedValueDataset("Test", 45.5);
+        d2 = new DefaultKeyedValueDataset("Test", 45.6);
         assertFalse(d1.equals(d2));
 
     }
 
     /**
      * Confirm that cloning works.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        DefaultKeyedValueDataset d1
-            = new DefaultKeyedValueDataset("Test", new Double(45.5));
+        DefaultKeyedValueDataset d1 = new DefaultKeyedValueDataset("Test", 45.5);
         DefaultKeyedValueDataset d2 = (DefaultKeyedValueDataset) d1.clone();
         assertTrue(d1 != d2);
         assertTrue(d1.getClass() == d2.getClass());
@@ -91,16 +85,17 @@ public class DefaultKeyedValueDatasetTest {
 
     /**
      * Confirm that the clone is independent of the original.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloneIndependence() throws CloneNotSupportedException {
         DefaultKeyedValueDataset d1
-            = new DefaultKeyedValueDataset("Key", new Double(10.0));
+            = new DefaultKeyedValueDataset("Key", 10.0);
         DefaultKeyedValueDataset d2 = (DefaultKeyedValueDataset) d1.clone();
         assertTrue(d1.equals(d2));
-        d2.updateValue(new Double(99.9));
+        d2.updateValue(99.9);
         assertFalse(d1.equals(d2));
-        d2.updateValue(new Double(10.0));
+        d2.updateValue(10.0);
         assertTrue(d1.equals(d2));
     }
 
@@ -109,8 +104,7 @@ public class DefaultKeyedValueDatasetTest {
      */
     @Test
     public void testSerialization() {
-        DefaultKeyedValueDataset d1
-            = new DefaultKeyedValueDataset("Test", new Double(25.3));
+        DefaultKeyedValueDataset d1 = new DefaultKeyedValueDataset("Test", 25.3);
         DefaultKeyedValueDataset d2 = (DefaultKeyedValueDataset) 
                 TestUtils.serialised(d1);
         assertEquals(d1, d2);

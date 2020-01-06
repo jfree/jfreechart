@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2019, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,73 +27,10 @@
  * ---------------------
  * AbstractRenderer.java
  * ---------------------
- * (C) Copyright 2002-2019, by Object Refinery Limited.
+ * (C) Copyright 2002-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Nicolas Brodu;
- *
- * Changes:
- * --------
- * 22-Aug-2002 : Version 1, draws code out of AbstractXYItemRenderer to share
- *               with AbstractCategoryItemRenderer (DG);
- * 01-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 06-Nov-2002 : Moved to the com.jrefinery.chart.renderer package (DG);
- * 21-Nov-2002 : Added a paint table for the renderer to use (DG);
- * 17-Jan-2003 : Moved plot classes into a separate package (DG);
- * 25-Mar-2003 : Implemented Serializable (DG);
- * 29-Apr-2003 : Added valueLabelFont and valueLabelPaint attributes, based on
- *               code from Arnaud Lelievre (DG);
- * 29-Jul-2003 : Amended code that doesn't compile with JDK 1.2.2 (DG);
- * 13-Aug-2003 : Implemented Cloneable (DG);
- * 15-Sep-2003 : Fixed serialization (NB);
- * 17-Sep-2003 : Changed ChartRenderingInfo --> PlotRenderingInfo (DG);
- * 07-Oct-2003 : Moved PlotRenderingInfo into RendererState to allow for
- *               multiple threads using a single renderer (DG);
- * 20-Oct-2003 : Added missing setOutlinePaint() method (DG);
- * 23-Oct-2003 : Split item label attributes into 'positive' and 'negative'
- *               values (DG);
- * 26-Nov-2003 : Added methods to get the positive and negative item label
- *               positions (DG);
- * 01-Mar-2004 : Modified readObject() method to prevent null pointer exceptions
- *               after deserialization (DG);
- * 19-Jul-2004 : Fixed bug in getItemLabelFont(int, int) method (DG);
- * 04-Oct-2004 : Updated equals() method, eliminated use of NumberUtils,
- *               renamed BooleanUtils --> BooleanUtilities, ShapeUtils -->
- *               ShapeUtilities (DG);
- * 15-Mar-2005 : Fixed serialization of baseFillPaint (DG);
- * 16-May-2005 : Base outline stroke should never be null (DG);
- * 01-Jun-2005 : Added hasListener() method for unit testing (DG);
- * 08-Jun-2005 : Fixed equals() method to handle GradientPaint (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 02-Feb-2007 : Minor API doc update (DG);
- * 19-Feb-2007 : Fixes for clone() method (DG);
- * 28-Feb-2007 : Use cached event to signal changes (DG);
- * 19-Apr-2007 : Deprecated seriesVisible and seriesVisibleInLegend flags (DG);
- * 20-Apr-2007 : Deprecated paint, fillPaint, outlinePaint, stroke,
- *               outlineStroke, shape, itemLabelsVisible, itemLabelFont,
- *               itemLabelPaint, positiveItemLabelPosition,
- *               negativeItemLabelPosition and createEntities override
- *               fields (DG);
- * 13-Jun-2007 : Added new autoPopulate flags for core series attributes (DG);
- * 23-Oct-2007 : Updated lookup methods to better handle overridden
- *               methods (DG);
- * 04-Dec-2007 : Modified hashCode() implementation (DG);
- * 29-Apr-2008 : Minor API doc update (DG);
- * 17-Jun-2008 : Added legendShape, legendTextFont and legendTextPaint
- *               attributes (DG);
- * 18-Aug-2008 : Added clearSeriesPaints() and clearSeriesStrokes() (DG);
- * 28-Jan-2009 : Equals method doesn't test Shape equality correctly (DG);
- * 27-Mar-2009 : Added dataBoundsIncludesVisibleSeriesOnly attribute, and
- *               updated renderer events for series visibility changes (DG);
- * 01-Apr-2009 : Factored up the defaultEntityRadius field from the
- *               AbstractXYItemRenderer class (DG);
- * 28-Apr-2009 : Added flag to allow a renderer to treat the legend shape as
- *               a line (DG);
- * 05-Jul-2012 : No need for BooleanUtilities now that min JDK = 1.4.2 (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
- * 09-Apr-2014 : Remove use of ObjectList (DG);
- * 24-Aug-2014 : Add begin/endElementGroup() (DG);
- * 25-Apr-2016 : Fix cloning test failure (DG);
  *
  */
 
@@ -117,11 +54,13 @@ import java.util.EventListener;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.swing.event.EventListenerList;
 
 import org.jfree.chart.ChartHints;
 import org.jfree.chart.HashUtils;
+import org.jfree.chart.JFreeChart;
 import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.event.RendererChangeListener;
 import org.jfree.chart.labels.ItemLabelAnchor;
@@ -134,7 +73,7 @@ import org.jfree.chart.util.BooleanList;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintList;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.Args;
+import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.chart.util.ShapeList;
 import org.jfree.chart.util.ShapeUtils;
@@ -437,19 +376,17 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
         this.itemLabelsVisibleList = new BooleanList();
         this.defaultItemLabelsVisible = false;
 
-        this.itemLabelFontMap = new HashMap<Integer, Font>();
+        this.itemLabelFontMap = new HashMap<>();
         this.defaultItemLabelFont = new Font("SansSerif", Font.PLAIN, 10);
 
         this.itemLabelPaintList = new PaintList();
         this.defaultItemLabelPaint = Color.BLACK;
 
-        this.positiveItemLabelPositionMap 
-                = new HashMap<Integer, ItemLabelPosition>();
+        this.positiveItemLabelPositionMap = new HashMap<>();
         this.defaultPositiveItemLabelPosition = new ItemLabelPosition(
                 ItemLabelAnchor.OUTSIDE12, TextAnchor.BOTTOM_CENTER);
 
-        this.negativeItemLabelPositionMap 
-                = new HashMap<Integer, ItemLabelPosition>();
+        this.negativeItemLabelPositionMap = new HashMap<>();
         this.defaultNegativeItemLabelPosition = new ItemLabelPosition(
                 ItemLabelAnchor.OUTSIDE6, TextAnchor.TOP_CENTER);
 
@@ -491,8 +428,8 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @since 1.0.20
      */
     protected void beginElementGroup(Graphics2D g2, ItemKey key) {
-        Args.nullNotPermitted(key, "key");
-        Map m = new HashMap(1);
+        Objects.requireNonNull(key, "key");
+        Map<String, String> m = new HashMap<>(1);
         m.put("ref", key.toJSONString());
         g2.setRenderingHint(ChartHints.KEY_BEGIN_ELEMENT, m);        
     }
@@ -1036,7 +973,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #getDefaultFillPaint()
      */
     public void setDefaultFillPaint(Paint paint, boolean notify) {
-        Args.nullNotPermitted(paint, "paint");
+        Objects.requireNonNull(paint, "paint");
         this.defaultFillPaint = paint;
         if (notify) {
             fireChangeEvent();
@@ -1195,7 +1132,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #getDefaultOutlinePaint()
      */
     public void setDefaultOutlinePaint(Paint paint, boolean notify) {
-        Args.nullNotPermitted(paint, "paint");
+        Objects.requireNonNull(paint, "paint");
         this.defaultOutlinePaint = paint;
         if (notify) {
             fireChangeEvent();
@@ -1367,7 +1304,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #getDefaultStroke()
      */
     public void setDefaultStroke(Stroke stroke, boolean notify) {
-        Args.nullNotPermitted(stroke, "stroke");
+        Objects.requireNonNull(stroke, "stroke");
         this.defaultStroke = stroke;
         if (notify) {
             fireChangeEvent();
@@ -1523,7 +1460,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #getDefaultOutlineStroke()
      */
     public void setDefaultOutlineStroke(Stroke stroke, boolean notify) {
-        Args.nullNotPermitted(stroke, "stroke");
+        Objects.requireNonNull(stroke, "stroke");
         this.defaultOutlineStroke = stroke;
         if (notify) {
             fireChangeEvent();
@@ -1681,7 +1618,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #getDefaultShape()
      */
     public void setDefaultShape(Shape shape, boolean notify) {
-        Args.nullNotPermitted(shape, "shape");
+        Objects.requireNonNull(shape, "shape");
         this.defaultShape = shape;
         if (notify) {
             fireChangeEvent();
@@ -1911,7 +1848,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #getDefaultItemLabelFont()
      */
     public void setDefaultItemLabelFont(Font font) {
-        Args.nullNotPermitted(font, "font");
+        Objects.requireNonNull(font, "font");
         setDefaultItemLabelFont(font, true);
     }
 
@@ -2030,7 +1967,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #getDefaultItemLabelPaint()
      */
     public void setDefaultItemLabelPaint(Paint paint, boolean notify) {
-        Args.nullNotPermitted(paint, "paint");
+        Objects.requireNonNull(paint, "paint");
         this.defaultItemLabelPaint = paint;
         if (notify) {
             fireChangeEvent();
@@ -2064,8 +2001,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      */
     public ItemLabelPosition getSeriesPositiveItemLabelPosition(int series) {
         // otherwise look up the position table
-        ItemLabelPosition position = (ItemLabelPosition)
-            this.positiveItemLabelPositionMap.get(series);
+        ItemLabelPosition position = this.positiveItemLabelPositionMap.get(series);
         if (position == null) {
             position = this.defaultPositiveItemLabelPosition;
         }
@@ -2140,7 +2076,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      */
     public void setDefaultPositiveItemLabelPosition(ItemLabelPosition position,
             boolean notify) {
-        Args.nullNotPermitted(position, "position");
+        Objects.requireNonNull(position, "position");
         this.defaultPositiveItemLabelPosition = position;
         if (notify) {
             fireChangeEvent();
@@ -2252,7 +2188,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      */
     public void setDefaultNegativeItemLabelPosition(ItemLabelPosition position,
             boolean notify) {
-        Args.nullNotPermitted(position, "position");
+        Objects.requireNonNull(position, "position");
         this.defaultNegativeItemLabelPosition = position;
         if (notify) {
             fireChangeEvent();
@@ -2580,7 +2516,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @since 1.0.11
      */
     public void setDefaultLegendTextFont(Font font) {
-        Args.nullNotPermitted(font, "font");
+        Objects.requireNonNull(font, "font");
         this.defaultLegendTextFont = font;
         fireChangeEvent();
     }
@@ -2815,7 +2751,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #removeChangeListener(RendererChangeListener)
      */
     public void addChangeListener(RendererChangeListener listener) {
-        Args.nullNotPermitted(listener, "listener");
+        Objects.requireNonNull(listener, "listener");
         this.listenerList.add(RendererChangeListener.class, listener);
     }
 
@@ -2828,7 +2764,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #addChangeListener(RendererChangeListener)
      */
     public void removeChangeListener(RendererChangeListener listener) {
-        Args.nullNotPermitted(listener, "listener");
+        Objects.requireNonNull(listener, "listener");
         this.listenerList.remove(RendererChangeListener.class, listener);
     }
 
@@ -3146,8 +3082,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
 
         // 'itemLabelFont' : immutable, no need to clone reference
         if (this.itemLabelFontMap != null) {
-            clone.itemLabelFontMap 
-                    = new HashMap<Integer, Font>(this.itemLabelFontMap);
+            clone.itemLabelFontMap = new HashMap<>(this.itemLabelFontMap);
         }
         // 'baseItemLabelFont' : immutable, no need to clone reference
 

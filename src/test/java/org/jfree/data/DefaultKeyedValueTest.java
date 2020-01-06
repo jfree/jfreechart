@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -24,17 +24,13 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ---------------------------
- * DefaultKeyedValueTests.java
- * ---------------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
+ * --------------------------
+ * DefaultKeyedValueTest.java
+ * --------------------------
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 13-Mar-2003 : Version 1 (DG);
  *
  */
 
@@ -57,14 +53,14 @@ public class DefaultKeyedValueTest {
      */
     @Test
     public void testConstructor() {
-        DefaultKeyedValue v = new DefaultKeyedValue("A", new Integer(1));
+        DefaultKeyedValue v = new DefaultKeyedValue("A", 1);
         assertEquals("A", v.getKey());
-        assertEquals(new Integer(1), v.getValue());
+        assertEquals(1, v.getValue());
 
         // try null key
         boolean pass = false;
         try {
-            /*v =*/ new DefaultKeyedValue(null, new Integer(1));
+            /*v =*/ new DefaultKeyedValue(null, 1);
         }
         catch (IllegalArgumentException e) {
             pass = true;
@@ -82,34 +78,35 @@ public class DefaultKeyedValueTest {
     @Test
     public void testEquals() {
 
-        DefaultKeyedValue v1 = new DefaultKeyedValue("Test", new Double(45.5));
-        DefaultKeyedValue v2 = new DefaultKeyedValue("Test", new Double(45.5));
+        DefaultKeyedValue v1 = new DefaultKeyedValue("Test", 45.5);
+        DefaultKeyedValue v2 = new DefaultKeyedValue("Test", 45.5);
         assertTrue(v1.equals(v2));
         assertTrue(v2.equals(v1));
 
-        v1 = new DefaultKeyedValue("Test 1", new Double(45.5));
-        v2 = new DefaultKeyedValue("Test 2", new Double(45.5));
+        v1 = new DefaultKeyedValue("Test 1", 45.5);
+        v2 = new DefaultKeyedValue("Test 2", 45.5);
         assertFalse(v1.equals(v2));
 
-        v1 = new DefaultKeyedValue("Test", new Double(45.5));
-        v2 = new DefaultKeyedValue("Test", new Double(45.6));
+        v1 = new DefaultKeyedValue("Test", 45.5);
+        v2 = new DefaultKeyedValue("Test", 45.6);
         assertFalse(v1.equals(v2));
 
     }
 
     /**
      * Some checks for the clone() method.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        DefaultKeyedValue v1 = new DefaultKeyedValue("Test", new Double(45.5));
+        DefaultKeyedValue v1 = new DefaultKeyedValue("Test", 45.5);
         DefaultKeyedValue v2 = (DefaultKeyedValue) v1.clone();
         assertTrue(v1 != v2);
         assertTrue(v1.getClass() == v2.getClass());
         assertTrue(v1.equals(v2));
 
         // confirm that the clone is independent of the original
-        v2.setValue(new Double(12.3));
+        v2.setValue(12.3);
         assertFalse(v1.equals(v2));
     }
 
@@ -118,7 +115,7 @@ public class DefaultKeyedValueTest {
      */
     @Test
     public void testSerialization() {
-        DefaultKeyedValue v1 = new DefaultKeyedValue("Test", new Double(25.3));
+        DefaultKeyedValue v1 = new DefaultKeyedValue("Test", 25.3);
         DefaultKeyedValue v2 = (DefaultKeyedValue) TestUtils.serialised(v1);
         assertEquals(v1, v2);
     }
