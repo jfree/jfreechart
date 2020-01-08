@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * JFreeChartTest.java
  * -------------------
- * (C) Copyright 2002-2016, by Object Refinery Limited.
+ * (C) Copyright 2002-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -382,10 +382,10 @@ public class JFreeChartTest implements ChartChangeListener {
 
         try {
             chart.addSubtitle(null);
-            fail("Should have thrown an IllegalArgumentException on index out of range");
+            fail("Should have thrown a NullPointerException.");
         }
-        catch (IllegalArgumentException e) {
-            assertEquals("Null 'subtitle' argument.", e.getMessage());
+        catch (NullPointerException e) {
+            assertEquals("subtitle", e.getMessage());
         }
 
         try {

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,23 +27,19 @@
  * -------------------
  * AxisCollection.java
  * -------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited.
+ * (C) Copyright 2003-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 03-Nov-2003 : Added standard header (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
 package org.jfree.chart.axis;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.util.Args;
 
 /**
  * A collection of axes that have been assigned to the TOP, BOTTOM, LEFT or
@@ -53,25 +49,25 @@ import org.jfree.chart.util.Args;
 public class AxisCollection {
 
     /** The axes that need to be drawn at the top of the plot area. */
-    private List axesAtTop;
+    private final List<Axis> axesAtTop;
 
     /** The axes that need to be drawn at the bottom of the plot area. */
-    private List axesAtBottom;
+    private final List<Axis> axesAtBottom;
 
     /** The axes that need to be drawn at the left of the plot area. */
-    private List axesAtLeft;
+    private final List<Axis> axesAtLeft;
 
     /** The axes that need to be drawn at the right of the plot area. */
-    private List axesAtRight;
+    private final List<Axis> axesAtRight;
 
     /**
      * Creates a new empty collection.
      */
     public AxisCollection() {
-        this.axesAtTop = new java.util.ArrayList();
-        this.axesAtBottom = new java.util.ArrayList();
-        this.axesAtLeft = new java.util.ArrayList();
-        this.axesAtRight = new java.util.ArrayList();
+        this.axesAtTop = new ArrayList<>();
+        this.axesAtBottom = new ArrayList<>();
+        this.axesAtLeft = new ArrayList<>();
+        this.axesAtRight = new ArrayList<>();
     }
 
     /**
@@ -80,7 +76,7 @@ public class AxisCollection {
      *
      * @return A list of axes.
      */
-    public List getAxesAtTop() {
+    public List<Axis> getAxesAtTop() {
         return this.axesAtTop;
     }
 
@@ -90,7 +86,7 @@ public class AxisCollection {
     *
     * @return A list of axes.
     */
-   public List getAxesAtBottom() {
+   public List<Axis> getAxesAtBottom() {
         return this.axesAtBottom;
     }
 
@@ -100,7 +96,7 @@ public class AxisCollection {
      *
      * @return A list of axes.
      */
-    public List getAxesAtLeft() {
+    public List<Axis> getAxesAtLeft() {
         return this.axesAtLeft;
     }
 
@@ -110,7 +106,7 @@ public class AxisCollection {
     *
     * @return A list of axes.
     */
-    public List getAxesAtRight() {
+    public List<Axis> getAxesAtRight() {
         return this.axesAtRight;
     }
 
@@ -122,19 +118,23 @@ public class AxisCollection {
      *              ({@code null} not permitted).
      */
     public void add(Axis axis, RectangleEdge edge) {
-        Args.nullNotPermitted(axis, "axis");
-        Args.nullNotPermitted(edge, "edge");
-        if (edge == RectangleEdge.TOP) {
-            this.axesAtTop.add(axis);
-        }
-        else if (edge == RectangleEdge.BOTTOM) {
-            this.axesAtBottom.add(axis);
-        }
-        else if (edge == RectangleEdge.LEFT) {
-            this.axesAtLeft.add(axis);
-        }
-        else if (edge == RectangleEdge.RIGHT) {
-            this.axesAtRight.add(axis);
+        Objects.requireNonNull(axis, "axis");
+        Objects.requireNonNull(edge, "edge");
+        switch (edge) {
+            case TOP:
+                this.axesAtTop.add(axis);
+                break;
+            case BOTTOM:
+                this.axesAtBottom.add(axis);
+                break;
+            case LEFT:
+                this.axesAtLeft.add(axis);
+                break;
+            case RIGHT:
+                this.axesAtRight.add(axis);
+                break;
+            default:
+                break;
         }
     }
 

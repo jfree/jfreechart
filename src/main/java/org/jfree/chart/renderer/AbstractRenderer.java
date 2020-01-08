@@ -2778,7 +2778,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @return A boolean.
      */
     public boolean hasListener(EventListener listener) {
-        List list = Arrays.asList(this.listenerList.getListenerList());
+        List<Object> list = Arrays.asList(this.listenerList.getListenerList());
         return list.contains(listener);
     }
 

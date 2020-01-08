@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,21 +27,18 @@
  * --------------
  * AxisState.java
  * --------------
- * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 03-Nov-2003 : Added standard header (DG);
- * 07-Nov-2003 : Added 'max' attribute (DG);
  *
  */
 
 package org.jfree.chart.axis;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import org.jfree.chart.ui.RectangleEdge;
 
 /**
@@ -57,7 +54,7 @@ public class AxisState {
     private double cursor;
 
     /** The axis ticks. */
-    private List ticks;
+    private List<ValueTick> ticks;
 
     /** The maximum width/height. */
     private double max;
@@ -76,7 +73,7 @@ public class AxisState {
      */
     public AxisState(double cursor) {
         this.cursor = cursor;
-        this.ticks = new java.util.ArrayList();
+        this.ticks = new ArrayList<>();
     }
 
     /**
@@ -101,20 +98,25 @@ public class AxisState {
      * Moves the cursor outwards by the specified number of units.
      *
      * @param units  the units.
-     * @param edge  the edge.
+     * @param edge  the edge ({@code null} not permitted).
      */
     public void moveCursor(double units, RectangleEdge edge) {
-        if (edge == RectangleEdge.TOP) {
-            cursorUp(units);
-        }
-        else if (edge == RectangleEdge.BOTTOM) {
-            cursorDown(units);
-        }
-        else if (edge == RectangleEdge.LEFT) {
-            cursorLeft(units);
-        }
-        else if (edge == RectangleEdge.RIGHT) {
-            cursorRight(units);
+        Objects.requireNonNull(edge);
+        switch (edge) {
+            case TOP:
+                cursorUp(units);
+                break;
+            case BOTTOM:
+                cursorDown(units);
+                break;
+            case LEFT:
+                cursorLeft(units);
+                break;
+            case RIGHT:
+                cursorRight(units);
+                break;
+            default:
+                throw new IllegalStateException("Unexpected enum value " + edge);
         }
     }
 
@@ -159,7 +161,7 @@ public class AxisState {
      *
      * @return The list of ticks.
      */
-    public List getTicks() {
+    public List<ValueTick> getTicks() {
         return this.ticks;
     }
 
@@ -168,7 +170,7 @@ public class AxisState {
      *
      * @param ticks  the ticks.
      */
-    public void setTicks(List ticks) {
+    public void setTicks(List<ValueTick> ticks) {
         this.ticks = ticks;
     }
 
