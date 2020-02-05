@@ -136,7 +136,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         MouseMotionListener, OverlayChangeListener, Printable, Serializable {
 
     /** For serialization. */
-    private static final long serialVersionUID = 6046366297214274674L;
+    protected static final long serialVersionUID = 6046366297214274674L;
 
     /**
      * Default setting for buffer usage.  The default has been changed to
@@ -181,13 +181,13 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     public static final String SAVE_COMMAND = "SAVE";
 
     /** Action command to save as PNG. */
-    private static final String SAVE_AS_PNG_COMMAND = "SAVE_AS_PNG";
+    protected static final String SAVE_AS_PNG_COMMAND = "SAVE_AS_PNG";
     
     /** Action command to save as SVG. */
-    private static final String SAVE_AS_SVG_COMMAND = "SAVE_AS_SVG";
+    protected static final String SAVE_AS_SVG_COMMAND = "SAVE_AS_SVG";
     
     /** Action command to save as PDF. */
-    private static final String SAVE_AS_PDF_COMMAND = "SAVE_AS_PDF";
+    protected static final String SAVE_AS_PDF_COMMAND = "SAVE_AS_PDF";
     
     /** Print action command. */
     public static final String PRINT_COMMAND = "PRINT";
@@ -220,152 +220,152 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     public static final String ZOOM_RESET_RANGE_COMMAND = "ZOOM_RESET_RANGE";
 
     /** The chart that is displayed in the panel. */
-    private JFreeChart chart;
+    protected JFreeChart chart;
 
     /** Storage for registered (chart) mouse listeners. */
-    private transient EventListenerList chartMouseListeners;
+    protected transient EventListenerList chartMouseListeners;
 
     /** A flag that controls whether or not the off-screen buffer is used. */
-    private boolean useBuffer;
+    protected boolean useBuffer;
 
     /** A flag that indicates that the buffer should be refreshed. */
-    private boolean refreshBuffer;
+    protected boolean refreshBuffer;
 
     /** A buffer for the rendered chart. */
-    private transient Image chartBuffer;
+    protected transient Image chartBuffer;
 
     /** The height of the chart buffer. */
-    private int chartBufferHeight;
+    protected int chartBufferHeight;
 
     /** The width of the chart buffer. */
-    private int chartBufferWidth;
+    protected int chartBufferWidth;
 
     /**
      * The minimum width for drawing a chart (uses scaling for smaller widths).
      */
-    private int minimumDrawWidth;
+    protected int minimumDrawWidth;
 
     /**
      * The minimum height for drawing a chart (uses scaling for smaller
      * heights).
      */
-    private int minimumDrawHeight;
+    protected int minimumDrawHeight;
 
     /**
      * The maximum width for drawing a chart (uses scaling for bigger
      * widths).
      */
-    private int maximumDrawWidth;
+    protected int maximumDrawWidth;
 
     /**
      * The maximum height for drawing a chart (uses scaling for bigger
      * heights).
      */
-    private int maximumDrawHeight;
+    protected int maximumDrawHeight;
 
     /** The popup menu for the frame. */
-    private JPopupMenu popup;
+    protected JPopupMenu popup;
 
     /** The drawing info collected the last time the chart was drawn. */
-    private ChartRenderingInfo info;
+    protected ChartRenderingInfo info;
 
     /** The chart anchor point. */
-    private Point2D anchor;
+    protected Point2D anchor;
 
     /** The scale factor used to draw the chart. */
-    private double scaleX;
+    protected double scaleX;
 
     /** The scale factor used to draw the chart. */
-    private double scaleY;
+    protected double scaleY;
 
     /** The plot orientation. */
-    private PlotOrientation orientation = PlotOrientation.VERTICAL;
+    protected PlotOrientation orientation = PlotOrientation.VERTICAL;
 
     /** A flag that controls whether or not domain zooming is enabled. */
-    private boolean domainZoomable = false;
+    protected boolean domainZoomable = false;
 
     /** A flag that controls whether or not range zooming is enabled. */
-    private boolean rangeZoomable = false;
+    protected boolean rangeZoomable = false;
 
     /**
      * The zoom rectangle starting point (selected by the user with a mouse
      * click).  This is a point on the screen, not the chart (which may have
      * been scaled up or down to fit the panel).
      */
-    private Point2D zoomPoint = null;
+    protected Point2D zoomPoint = null;
 
     /** The zoom rectangle (selected by the user with the mouse). */
-    private transient Rectangle2D zoomRectangle = null;
+    protected transient Rectangle2D zoomRectangle = null;
 
     /** Controls if the zoom rectangle is drawn as an outline or filled. */
-    private boolean fillZoomRectangle = true;
+    protected boolean fillZoomRectangle = true;
 
     /** The minimum distance required to drag the mouse to trigger a zoom. */
-    private int zoomTriggerDistance;
+    protected int zoomTriggerDistance;
 
     /** Menu item for zooming in on a chart (both axes). */
-    private JMenuItem zoomInBothMenuItem;
+    protected JMenuItem zoomInBothMenuItem;
 
     /** Menu item for zooming in on a chart (domain axis). */
-    private JMenuItem zoomInDomainMenuItem;
+    protected JMenuItem zoomInDomainMenuItem;
 
     /** Menu item for zooming in on a chart (range axis). */
-    private JMenuItem zoomInRangeMenuItem;
+    protected JMenuItem zoomInRangeMenuItem;
 
     /** Menu item for zooming out on a chart. */
-    private JMenuItem zoomOutBothMenuItem;
+    protected JMenuItem zoomOutBothMenuItem;
 
     /** Menu item for zooming out on a chart (domain axis). */
-    private JMenuItem zoomOutDomainMenuItem;
+    protected JMenuItem zoomOutDomainMenuItem;
 
     /** Menu item for zooming out on a chart (range axis). */
-    private JMenuItem zoomOutRangeMenuItem;
+    protected JMenuItem zoomOutRangeMenuItem;
 
     /** Menu item for resetting the zoom (both axes). */
-    private JMenuItem zoomResetBothMenuItem;
+    protected JMenuItem zoomResetBothMenuItem;
 
     /** Menu item for resetting the zoom (domain axis only). */
-    private JMenuItem zoomResetDomainMenuItem;
+    protected JMenuItem zoomResetDomainMenuItem;
 
     /** Menu item for resetting the zoom (range axis only). */
-    private JMenuItem zoomResetRangeMenuItem;
+    protected JMenuItem zoomResetRangeMenuItem;
 
     /**
      * The default directory for saving charts to file.
      *
      * @since 1.0.7
      */
-    private File defaultDirectoryForSaveAs;
+    protected File defaultDirectoryForSaveAs;
 
     /** A flag that controls whether or not file extensions are enforced. */
-    private boolean enforceFileExtensions;
+    protected boolean enforceFileExtensions;
 
     /** A flag that indicates if original tooltip delays are changed. */
-    private boolean ownToolTipDelaysActive;
+    protected boolean ownToolTipDelaysActive;
 
     /** Original initial tooltip delay of ToolTipManager.sharedInstance(). */
-    private int originalToolTipInitialDelay;
+    protected int originalToolTipInitialDelay;
 
     /** Original reshow tooltip delay of ToolTipManager.sharedInstance(). */
-    private int originalToolTipReshowDelay;
+    protected int originalToolTipReshowDelay;
 
     /** Original dismiss tooltip delay of ToolTipManager.sharedInstance(). */
-    private int originalToolTipDismissDelay;
+    protected int originalToolTipDismissDelay;
 
     /** Own initial tooltip delay to be used in this chart panel. */
-    private int ownToolTipInitialDelay;
+    protected int ownToolTipInitialDelay;
 
     /** Own reshow tooltip delay to be used in this chart panel. */
-    private int ownToolTipReshowDelay;
+    protected int ownToolTipReshowDelay;
 
     /** Own dismiss tooltip delay to be used in this chart panel. */
-    private int ownToolTipDismissDelay;
+    protected int ownToolTipDismissDelay;
 
     /** The factor used to zoom in on an axis range. */
-    private double zoomInFactor = 0.5;
+    protected double zoomInFactor = 0.5;
 
     /** The factor used to zoom out on an axis range. */
-    private double zoomOutFactor = 2.0;
+    protected double zoomOutFactor = 2.0;
 
     /**
      * A flag that controls whether zoom operations are centred on the
@@ -373,21 +373,21 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      *
      * @since 1.0.7
      */
-    private boolean zoomAroundAnchor;
+    protected boolean zoomAroundAnchor;
 
     /**
      * The paint used to draw the zoom rectangle outline.
      *
      * @since 1.0.13
      */
-    private transient Paint zoomOutlinePaint;
+    protected transient Paint zoomOutlinePaint;
 
     /**
      * The zoom fill paint (should use transparency).
      *
      * @since 1.0.13
      */
-    private transient Paint zoomFillPaint;
+    protected transient Paint zoomFillPaint;
 
     /** The resourceBundle for the localization. */
     protected static ResourceBundle localizationResources
@@ -398,24 +398,24 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * Temporary storage for the width and height of the chart 
      * drawing area during panning.
      */
-    private double panW, panH;
+    protected double panW, panH;
 
     /** The last mouse position during panning. */
-    private Point panLast;
+    protected Point panLast;
 
     /**
      * The mask for mouse events to trigger panning.
      *
      * @since 1.0.13
      */
-    private int panMask = InputEvent.CTRL_MASK;
+    protected int panMask = InputEvent.CTRL_MASK;
 
     /**
      * A list of overlays for the panel.
      *
      * @since 1.0.13
      */
-    private List<Overlay> overlays;
+    protected List<Overlay> overlays;
     
     /**
      * Constructs a panel that displays the specified chart.
@@ -1083,7 +1083,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     /**
      * The mouse wheel handler.
      */
-    private MouseWheelHandler mouseWheelHandler;
+    protected MouseWheelHandler mouseWheelHandler;
 
     /**
      * Returns {@code true} if the mouse wheel handler is enabled, and
@@ -1638,7 +1638,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      *
      * @return A point within the rectangle.
      */
-    private Point2D getPointInRectangle(int x, int y, Rectangle2D area) {
+    protected Point2D getPointInRectangle(int x, int y, Rectangle2D area) {
         double xx = Math.max(area.getMinX(), Math.min(x, area.getMaxX()));
         double yy = Math.max(area.getMinY(), Math.min(y, area.getMaxY()));
         return new Point2D.Double(xx, yy);
@@ -2335,7 +2335,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * @param g2 the graphics device.
      * @param xor  use XOR for drawing?
      */
-    private void drawZoomRectangle(Graphics2D g2, boolean xor) {
+    protected void drawZoomRectangle(Graphics2D g2, boolean xor) {
         if (this.zoomRectangle != null) {
             if (xor) {
                  // Set XOR mode to draw the zoom rectangle
@@ -2424,7 +2424,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * if the JFreeSVG library is on the classpath...if this library is not 
      * present, the method will fail.
      */
-    private void saveAsSVG(File f) throws IOException {
+    protected void saveAsSVG(File f) throws IOException {
         File file = f;
         if (file == null) {
             JFileChooser fileChooser = new JFileChooser();
@@ -2488,7 +2488,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      *     {@code null} if there is a problem with the method invocation
      *     by reflection.
      */
-    private String generateSVG(int width, int height) {
+    protected String generateSVG(int width, int height) {
         Graphics2D g2 = createSVGGraphics2D(width, height);
         if (g2 == null) {
             throw new IllegalStateException("JFreeSVG library is not present.");
@@ -2516,7 +2516,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         return svg;
     }
 
-    private Graphics2D createSVGGraphics2D(int w, int h) {
+    protected Graphics2D createSVGGraphics2D(int w, int h) {
         try {
             Class svgGraphics2d = Class.forName("org.jfree.graphics2d.svg.SVGGraphics2D");
             Constructor ctor = svgGraphics2d.getConstructor(int.class, int.class);
@@ -2544,7 +2544,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * if the OrsonPDF library is on the classpath...if this library is not
      * present, the method will fail.
      */
-    private void saveAsPDF(File f) {
+    protected void saveAsPDF(File f) {
         File file = f;
         if (file == null) {
             JFileChooser fileChooser = new JFileChooser();
@@ -2993,7 +2993,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      *
      * @throws IOException  if there is an I/O error.
      */
-    private void writeObject(ObjectOutputStream stream) throws IOException {
+    protected void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
         SerialUtils.writePaint(this.zoomFillPaint, stream);
         SerialUtils.writePaint(this.zoomOutlinePaint, stream);
@@ -3007,7 +3007,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * @throws IOException  if there is an I/O error.
      * @throws ClassNotFoundException  if there is a classpath problem.
      */
-    private void readObject(ObjectInputStream stream)
+    protected void readObject(ObjectInputStream stream)
         throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
         this.zoomFillPaint = SerialUtils.readPaint(stream);
