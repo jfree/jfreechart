@@ -43,7 +43,7 @@ public enum RectangleEdge {
     TOP,
 
     /** Bottom. */
-    BOTTOM, 
+    BOTTOM,
 
     /** Left. */
     LEFT,
@@ -83,20 +83,18 @@ public enum RectangleEdge {
      * @return The opposite edge.
      */
     public static RectangleEdge opposite(RectangleEdge edge) {
-        RectangleEdge result = null;
-        if (edge == RectangleEdge.TOP) {
-            result = RectangleEdge.BOTTOM;
+        switch (edge) {
+            case TOP:
+                return RectangleEdge.BOTTOM;
+            case BOTTOM:
+                return RectangleEdge.TOP;
+            case LEFT:
+                return RectangleEdge.RIGHT;
+            case RIGHT:
+                return RectangleEdge.LEFT;
+            default:
+                return null;
         }
-        else if (edge == RectangleEdge.BOTTOM) {
-            result = RectangleEdge.TOP;
-        }
-        else if (edge == RectangleEdge.LEFT) {
-            result = RectangleEdge.RIGHT;
-        }
-        else if (edge == RectangleEdge.RIGHT) {
-            result = RectangleEdge.LEFT;
-        }
-        return result;
     }
     
     /**
@@ -108,20 +106,18 @@ public enum RectangleEdge {
      * @return The coordinate.
      */
     public static double coordinate(Rectangle2D rectangle, RectangleEdge edge) {
-        double result = 0.0;
-        if (edge == RectangleEdge.TOP) {
-            result = rectangle.getMinY();
+        switch (edge) {
+            case TOP:
+                return rectangle.getMinY();
+            case BOTTOM:
+                return rectangle.getMaxY();
+            case LEFT:
+                return rectangle.getMinX();
+            case RIGHT:
+                return rectangle.getMaxX();
+            default:
+                return 0.0;
         }
-        else if (edge == RectangleEdge.BOTTOM) {
-            result = rectangle.getMaxY();
-        }
-        else if (edge == RectangleEdge.LEFT) {
-            result = rectangle.getMinX();
-        }
-        else if (edge == RectangleEdge.RIGHT) {
-            result = rectangle.getMaxX();
-        }
-        return result;
     }
     
 }

@@ -48,10 +48,11 @@ public enum HistogramType {
 
     /** Frequency histogram. */
     FREQUENCY,
-    
+
     /** Relative frequency. */
     RELATIVE_FREQUENCY,
-    
+
     /** Scale area to one. */
     SCALE_AREA_TO_1
+
 }

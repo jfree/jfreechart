@@ -56,4 +56,5 @@ public enum DialShape {
 
     /** Pie. */
     PIE
+
 }

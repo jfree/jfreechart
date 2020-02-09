@@ -56,4 +56,5 @@ public enum TimePeriodAnchor {
 
     /** End of period. */
     END
+
 }

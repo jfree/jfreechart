@@ -54,4 +54,5 @@ public enum ChartChangeEventType {
 
     /** DATASET_UPDATED. */
     DATASET_UPDATED
+
 }

@@ -54,4 +54,5 @@ public enum DomainOrder {
 
     /** Descending order. */
     DESCENDING
+
 }

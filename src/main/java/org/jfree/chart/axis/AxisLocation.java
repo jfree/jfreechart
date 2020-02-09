@@ -87,23 +87,18 @@ public enum AxisLocation {
      */
     public static AxisLocation getOpposite(AxisLocation location) {
         Args.nullNotPermitted(location, "location");
-        AxisLocation result = null;
-        if (location == AxisLocation.TOP_OR_LEFT) {
-            result = AxisLocation.BOTTOM_OR_RIGHT;
+        switch (location) {
+            case TOP_OR_LEFT:
+                return AxisLocation.BOTTOM_OR_RIGHT;
+            case TOP_OR_RIGHT:
+                return AxisLocation.BOTTOM_OR_LEFT;
+            case BOTTOM_OR_LEFT:
+                return AxisLocation.TOP_OR_RIGHT;
+            case BOTTOM_OR_RIGHT:
+                return AxisLocation.TOP_OR_LEFT;
+            default:
+                throw new IllegalStateException("AxisLocation not recognised.");
         }
-        else if (location == AxisLocation.TOP_OR_RIGHT) {
-            result = AxisLocation.BOTTOM_OR_LEFT;
-        }
-        else if (location == AxisLocation.BOTTOM_OR_LEFT) {
-            result = AxisLocation.TOP_OR_RIGHT;
-        }
-        else if (location == AxisLocation.BOTTOM_OR_RIGHT) {
-            result = AxisLocation.TOP_OR_LEFT;
-        }
-        else {
-            throw new IllegalStateException("AxisLocation not recognised.");
-        }
-        return result;
     }
 
 }

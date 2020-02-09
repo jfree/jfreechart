@@ -57,4 +57,5 @@ public enum PieLabelLinkStyle {
 
     /** CUBIC_CURVE. */
     CUBIC_CURVE
+
 }

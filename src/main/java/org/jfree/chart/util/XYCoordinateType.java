@@ -63,4 +63,5 @@ public enum XYCoordinateType {
      * In this case, the values should be in the range (0.0 to 1.0).
      */
     INDEX
+
 }

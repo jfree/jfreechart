@@ -46,7 +46,7 @@ package org.jfree.chart.plot;
  * Defines the tokens that indicate the rendering order for series in a
  * {@link org.jfree.chart.plot.XYPlot}.
  */
-public enum SeriesRenderingOrder{
+public enum SeriesRenderingOrder {
 
     /**
      * Render series in the order 0, 1, 2, ..., N-1, where N is the number
@@ -59,4 +59,5 @@ public enum SeriesRenderingOrder{
      * number of series.
      */
     REVERSE
+
 }
