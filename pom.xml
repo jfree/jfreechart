@@ -11,7 +11,7 @@
     <artifactId>jfreechart</artifactId>
     <groupId>org.jfree</groupId>
     <version>1.6.0-snapshot</version>
-    <packaging>jar</packaging>
+    <packaging>bundle</packaging>
 
     <organization>
         <name>JFree.org</name>
@@ -149,6 +149,21 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
                 <version>3.8.2</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>3.3.0</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Import-Package>
+                            org.jfree.graphics2d.svg;resolution:=optional,
+                            com.orsonpdf;resolution:=optional,
+                            *
+                        </Import-Package>
+                    </instructions>
+                </configuration>
             </plugin>
         </plugins>
     </build>
