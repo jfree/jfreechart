@@ -47,4 +47,5 @@ public enum GradientPaintTransformType {
 
     /** Center/horizontal. */
     CENTER_HORIZONTAL
+
 }

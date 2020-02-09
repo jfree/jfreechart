@@ -45,4 +45,5 @@ public enum HorizontalAlignment {
 
     /** Center alignment. */
     CENTER
+    
 }

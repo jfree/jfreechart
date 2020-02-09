@@ -53,5 +53,5 @@ public enum KeyedValueComparatorType {
 
     /** An object representing 'by value' sorting. */
     BY_VALUE
-}
 
+}

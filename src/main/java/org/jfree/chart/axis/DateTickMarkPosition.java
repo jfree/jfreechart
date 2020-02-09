@@ -49,10 +49,11 @@ public enum DateTickMarkPosition {
 
     /** Start of period. */
     START,
-    
+
     /** Middle of period. */
     MIDDLE,
-    
+
     /** End of period. */
     END
+
 }

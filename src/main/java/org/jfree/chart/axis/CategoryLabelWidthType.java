@@ -48,8 +48,9 @@ package org.jfree.chart.axis;
 public enum CategoryLabelWidthType {
 
     /** Percentage of category. */
-    CATEGORY, 
+    CATEGORY,
 
     /** Percentage of range. */
-    RANGE 
+    RANGE
+
 }

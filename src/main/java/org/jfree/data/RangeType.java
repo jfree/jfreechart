@@ -55,4 +55,5 @@ public enum RangeType {
 
     /** Negative range. */
     NEGATIVE
+
 }

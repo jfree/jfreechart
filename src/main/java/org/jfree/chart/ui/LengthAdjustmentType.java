@@ -45,4 +45,5 @@ public enum LengthAdjustmentType {
 
     /** CONTRACT. */
     CONTRACT
+    
 }

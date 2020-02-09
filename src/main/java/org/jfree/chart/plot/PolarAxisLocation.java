@@ -71,4 +71,5 @@ public enum PolarAxisLocation {
 
     /** Axis below west. */
     WEST_BELOW
+
 }
