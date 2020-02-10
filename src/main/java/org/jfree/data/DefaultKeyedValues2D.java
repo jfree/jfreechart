@@ -187,7 +187,12 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
     public int getRowIndex(Comparable key) {
         Args.nullNotPermitted(key, "key");
         if (this.sortRowKeys) {
-            return Collections.binarySearch(this.rowKeys, key);
+            int index = Collections.binarySearch(this.rowKeys, key);
+            if (index < 0) {
+                return -1;
+            } else {
+                return index;
+            }
         }
         else {
             return this.rowKeys.indexOf(key);
