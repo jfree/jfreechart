@@ -37,9 +37,17 @@
 package org.jfree.chart;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
+
+import java.awt.*;
 import java.awt.geom.Rectangle2D;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.EventListener;
 import java.util.List;
@@ -51,6 +59,8 @@ import org.jfree.chart.event.ChartChangeEvent;
 import org.jfree.chart.event.ChartChangeListener;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.data.general.PieDataset;
 import org.jfree.data.xy.DefaultXYDataset;
 import org.junit.Test;
 
@@ -338,5 +348,30 @@ public class ChartPanelTest implements ChartChangeListener, ChartMouseListener {
         assertTrue(panel.isMouseWheelEnabled());
         panel.setMouseWheelEnabled(false);
         assertFalse(panel.isMouseWheelEnabled());
+    }
+
+    /**
+     * Test that transient zoom paint properties moved to the strategy still saved properly
+     */
+    @Test
+    public void testSerialization() throws IOException, ClassNotFoundException {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
+
+        DefaultXYDataset dataset = new DefaultXYDataset();
+        JFreeChart chart = ChartFactory.createXYLineChart("TestChart", "X",
+                "Y", dataset, PlotOrientation.VERTICAL, false, false, false);
+        ChartPanel panel = new ChartPanel(chart);
+        panel.setZoomFillPaint(Color.MAGENTA);
+        panel.setZoomOutlinePaint(Color.CYAN);
+
+        objectOutputStream.writeObject(panel);
+
+        ObjectInputStream objectInputStream = new ObjectInputStream(new ByteArrayInputStream(byteArrayOutputStream.toByteArray()));
+        Object read = objectInputStream.readObject();
+        assertTrue(read instanceof ChartPanel);
+        ChartPanel readPanel = (ChartPanel) read;
+        assertEquals(Color.MAGENTA, readPanel.getZoomFillPaint());
+        assertEquals(Color.CYAN, readPanel.getZoomOutlinePaint());
     }
 }
