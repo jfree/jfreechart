@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * ------------------
  * KeyedValues2D.java
  * ------------------
- * (C) Copyright 2002-2008, by Object Refinery Limited.
+ * (C) Copyright 2002-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 28-Oct-2002 : Version 1 (DG);
- * 12-Jan-2005 : Updated Javadocs (DG);
  *
  */
 
@@ -65,7 +60,7 @@ public interface KeyedValues2D extends Values2D {
      *
      * @param key  the row key.
      *
-     * @return The row index, or {@code -1} if the key is unrecognised.
+     * @return The row index, or a negative value if the key is unrecognised.
      */
     public int getRowIndex(Comparable key);
 

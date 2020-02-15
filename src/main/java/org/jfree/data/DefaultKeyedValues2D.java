@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,32 +27,10 @@
  * -------------------------
  * DefaultKeyedValues2D.java
  * -------------------------
- * (C) Copyright 2002-2016, by Object Refinery Limited.
+ * (C) Copyright 2002-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Andreas Schroeder;
- *
- * Changes
- * -------
- * 28-Oct-2002 : Version 1 (DG);
- * 21-Jan-2003 : Updated Javadocs (DG);
- * 13-Mar-2003 : Implemented Serializable (DG);
- * 18-Aug-2003 : Implemented Cloneable (DG);
- * 31-Mar-2004 : Made the rows optionally sortable by a flag (AS);
- * 01-Apr-2004 : Implemented remove method (AS);
- * 05-Apr-2004 : Added clear() method (DG);
- * 15-Sep-2004 : Fixed clone() method (DG);
- * 12-Jan-2005 : Fixed bug in getValue() method (DG);
- * 23-Mar-2005 : Implemented PublicCloneable (DG);
- * 09-Jun-2005 : Modified getValue() method to throw exception for unknown
- *               keys (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 18-Jan-2007 : Fixed bug in getValue() method (DG);
- * 30-Mar-2007 : Fixed bug 1690654, problem with removeValue() (DG);
- * 21-Nov-2007 : Fixed bug (1835955) in removeColumn(Comparable) method (DG);
- * 23-Nov-2007 : Added argument checks to removeRow(Comparable) to make it
- *               consistent with the removeRow(Comparable) method (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  * 
  */
 
@@ -187,12 +165,7 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
     public int getRowIndex(Comparable key) {
         Args.nullNotPermitted(key, "key");
         if (this.sortRowKeys) {
-            int index = Collections.binarySearch(this.rowKeys, key);
-            if (index < 0) {
-                return -1;
-            } else {
-                return index;
-            }
+            return Collections.binarySearch(this.rowKeys, key);
         }
         else {
             return this.rowKeys.indexOf(key);
