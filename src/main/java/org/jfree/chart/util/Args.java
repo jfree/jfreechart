@@ -35,8 +35,6 @@
 
 package org.jfree.chart.util;
 
-import java.util.Objects;
-
 /**
  * A utility class for checking method arguments.
  */
@@ -52,9 +50,6 @@ public class Args {
      *
      * @throws IllegalArgumentException  if {@code param} is 
      *     {@code null}.
-     * 
-     * @deprecated Now that JFreeChart requires JDK1.8 or later, you can use
-     *    {@link Objects#requireNonNull}.
      */
     public static void nullNotPermitted(Object param, String name) {
         if (param == null) {
