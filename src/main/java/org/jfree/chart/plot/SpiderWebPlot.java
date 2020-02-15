@@ -444,6 +444,10 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      * @see #getHeadPercent()
      */
     public void setHeadPercent(double percent) {
+        if (percent < 0.0) {
+            throw new IllegalArgumentException(
+                    "Percentage outside valid range.");
+        }
         this.headPercent = percent;
         fireChangeEvent();
     }
