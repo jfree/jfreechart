@@ -74,19 +74,19 @@ import org.jfree.chart.util.ResourceBundleWrapper;
 class DefaultChartEditor extends JPanel implements ActionListener, ChartEditor {
 
     /** A panel for displaying/editing the properties of the title. */
-    private DefaultTitleEditor titleEditor;
+    protected DefaultTitleEditor titleEditor;
 
     /** A panel for displaying/editing the properties of the plot. */
-    private DefaultPlotEditor plotEditor;
+    protected DefaultPlotEditor plotEditor;
 
     /**
      * A checkbox indicating whether or not the chart is drawn with
      * anti-aliasing.
      */
-    private JCheckBox antialias;
+    protected JCheckBox antialias;
 
     /** The chart background color. */
-    private PaintSample background;
+    protected PaintSample background;
 
     /** The resourceBundle for the localization. */
     protected static ResourceBundle localizationResources
@@ -179,15 +179,15 @@ class DefaultChartEditor extends JPanel implements ActionListener, ChartEditor {
 
         JTabbedPane tabs = new JTabbedPane();
 
-        this.titleEditor = new DefaultTitleEditor(title);
+        this.titleEditor = instantiateTitleEditor(title);
         this.titleEditor.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
         tabs.addTab(localizationResources.getString("Title"), this.titleEditor);
 
         if (plot instanceof PolarPlot) {
-            this.plotEditor = new DefaultPolarPlotEditor((PolarPlot) plot);
+            this.plotEditor = instantiatePolarPlotEditor((PolarPlot) plot);
         }
         else {
-            this.plotEditor = new DefaultPlotEditor(plot);
+            this.plotEditor = instantiatePlotEditor(plot);
         }
         this.plotEditor.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
         tabs.addTab(localizationResources.getString("Plot"), this.plotEditor);
@@ -196,6 +196,40 @@ class DefaultChartEditor extends JPanel implements ActionListener, ChartEditor {
         parts.add(tabs, BorderLayout.NORTH);
         add(parts);
     }
+    
+    /**
+     * Instantiates the title editor
+     * - This can be overridden by a subclass to use a different TitleEditor that inherits DeafultTitleEditor
+     * @param title
+     * @return
+     */
+    protected DefaultTitleEditor instantiateTitleEditor(Title title)
+    {
+    	return  new DefaultTitleEditor(title);
+    }
+    
+    /**
+     * Instantiates the DefaultPlotEditor
+     * - This can be overridden by a subclass to use a different DefaultPlotEditor that inherits DefaultPlotEditor
+     * @param plot
+     * @return
+     */
+    protected DefaultPlotEditor instantiatePlotEditor(Plot plot)
+    {
+    	return new DefaultPlotEditor(plot);
+    }
+    
+    /**
+     * Instantiates the PolarPlotEditor
+     * - This can be overridden by a subclass to use a different PolarPlotEditor that inherits PolarPlotEditor
+     * @param plot
+     * @return
+     */
+    protected DefaultPolarPlotEditor instantiatePolarPlotEditor(PolarPlot plot)
+    {
+    	return new DefaultPolarPlotEditor(plot);
+    }
+    
 
     /**
      * Returns a reference to the title editor.
@@ -251,7 +285,7 @@ class DefaultChartEditor extends JPanel implements ActionListener, ChartEditor {
      * JColorChooser, so we are only allowing a subset of all Paint objects to
      * be selected (fix later).
      */
-    private void attemptModifyBackgroundPaint() {
+    protected void attemptModifyBackgroundPaint() {
         Color c;
         c = JColorChooser.showDialog(this, localizationResources.getString(
                 "Background_Color"), Color.BLUE);

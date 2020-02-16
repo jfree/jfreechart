@@ -75,28 +75,28 @@ import org.jfree.chart.util.ResourceBundleWrapper;
 class DefaultTitleEditor extends JPanel implements ActionListener {
 
     /** Whether or not to display the title on the chart. */
-    private boolean showTitle;
+    protected boolean showTitle;
 
     /** The checkbox to indicate whether or not to display the title. */
-    private JCheckBox showTitleCheckBox;
+    protected JCheckBox showTitleCheckBox;
 
     /** A field for displaying/editing the title text. */
-    private JTextField titleField;
+    protected JTextField titleField;
 
     /** The font used to draw the title. */
-    private Font titleFont;
+    protected Font titleFont;
 
     /** A field for displaying a description of the title font. */
-    private JTextField fontfield;
+    protected JTextField fontfield;
 
     /** The button to use to select a new title font. */
-    private JButton selectFontButton;
+    protected JButton selectFontButton;
 
     /** The paint (color) used to draw the title. */
-    private PaintSample titlePaint;
+    protected PaintSample titlePaint;
 
     /** The button to use to select a new paint (color) to draw the title. */
-    private JButton selectPaintButton;
+    protected JButton selectPaintButton;
 
     /** The resourceBundle for the localization. */
     protected static ResourceBundle localizationResources
@@ -263,7 +263,7 @@ class DefaultTitleEditor extends JPanel implements ActionListener {
      * Allow the user the opportunity to change whether the title is
      * displayed on the chart or not.
      */
-    private void attemptModifyShowTitle() {
+    protected void attemptModifyShowTitle() {
         this.showTitle = this.showTitleCheckBox.isSelected();
         this.enableOrDisableControls();
     }
@@ -272,7 +272,7 @@ class DefaultTitleEditor extends JPanel implements ActionListener {
      * If we are supposed to show the title, the controls are enabled.
      * If we are not supposed to show the title, the controls are disabled.
      */
-    private void enableOrDisableControls() {
+    protected void enableOrDisableControls() {
         boolean enabled = (this.showTitle == true);
         this.titleField.setEnabled(enabled);
         this.selectFontButton.setEnabled(enabled);

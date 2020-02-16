@@ -63,16 +63,16 @@ public class DefaultPolarPlotEditor extends DefaultPlotEditor
     implements FocusListener {
 
     /** A text field to enter a manual TickUnit. */
-    private JTextField manualTickUnit;
+    protected JTextField manualTickUnit;
 
     /** A text field to enter the angleOffset. */
-    private JTextField angleOffset;
+    protected JTextField angleOffset;
 
     /** The size for the manual TickUnit. */
-    private double manualTickUnitValue;
+    protected double manualTickUnitValue;
 
     /** The value for the plot's angle offset. */
-    private double angleOffsetValue;
+    protected double angleOffsetValue;
 
     
     /**
@@ -106,7 +106,7 @@ public class DefaultPolarPlotEditor extends DefaultPlotEditor
         return tabs;
     }
 
-    private JPanel createPlotPanel() {
+    protected JPanel createPlotPanel() {
         JPanel plotPanel = new JPanel(new LCBLayout(3));
         plotPanel.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
 

@@ -77,61 +77,61 @@ import org.jfree.chart.util.ResourceBundleWrapper;
 class DefaultAxisEditor extends JPanel implements ActionListener {
 
     /** The axis label. */
-    private JTextField label;
+    protected JTextField label;
 
     /** The label font. */
-    private Font labelFont;
+    protected Font labelFont;
 
     /** The label paint. */
-    private PaintSample labelPaintSample;
+    protected PaintSample labelPaintSample;
 
     /** A field showing a description of the label font. */
-    private JTextField labelFontField;
+    protected JTextField labelFontField;
 
     /** The font for displaying tick labels on the axis. */
-    private Font tickLabelFont;
+    protected Font tickLabelFont;
 
     /**
      * A field containing a description of the font for displaying tick labels
      * on the axis.
      */
-    private JTextField tickLabelFontField;
+    protected JTextField tickLabelFontField;
 
     /** The paint (color) for the tick labels. */
-    private PaintSample tickLabelPaintSample;
+    protected PaintSample tickLabelPaintSample;
 
     /**
      * An empty sub-panel for extending the user interface to handle more
      * complex axes.
      */
-    private JPanel slot1;
+    protected JPanel slot1;
 
     /**
      * An empty sub-panel for extending the user interface to handle more
      * complex axes.
      */
-    private JPanel slot2;
+    protected JPanel slot2;
 
     /** A flag that indicates whether or not the tick labels are visible. */
-    private JCheckBox showTickLabelsCheckBox;
+    protected JCheckBox showTickLabelsCheckBox;
 
     /** A flag that indicates whether or not the tick marks are visible. */
-    private JCheckBox showTickMarksCheckBox;
+    protected JCheckBox showTickMarksCheckBox;
 
 //    /** Insets text field. */
-//    private InsetsTextField tickLabelInsetsTextField;
+//    protected InsetsTextField tickLabelInsetsTextField;
 //
 //    /** Label insets text field. */
-//    private InsetsTextField labelInsetsTextField;
+//    protected InsetsTextField labelInsetsTextField;
 
     /** The tick label insets. */
-    private RectangleInsets tickLabelInsets;
+    protected RectangleInsets tickLabelInsets;
 
     /** The label insets. */
-    private RectangleInsets labelInsets;
+    protected RectangleInsets labelInsets;
 
     /** A tabbed pane for... */
-    private JTabbedPane otherTabs;
+    protected JTabbedPane otherTabs;
 
     /** The resourceBundle for the localization. */
     protected static ResourceBundle localizationResources
@@ -417,7 +417,7 @@ class DefaultAxisEditor extends JPanel implements ActionListener {
     /**
      * Presents a font selection dialog to the user.
      */
-    private void attemptLabelFontSelection() {
+    protected void attemptLabelFontSelection() {
 
         FontChooserPanel panel = new FontChooserPanel(this.labelFont);
         int result = JOptionPane.showConfirmDialog(this, panel,
@@ -436,7 +436,7 @@ class DefaultAxisEditor extends JPanel implements ActionListener {
     /**
      * Allows the user the opportunity to change the outline paint.
      */
-    private void attemptModifyLabelPaint() {
+    protected void attemptModifyLabelPaint() {
         Color c;
         c = JColorChooser.showDialog(
             this, localizationResources.getString("Label_Color"), Color.BLUE
@@ -471,7 +471,7 @@ class DefaultAxisEditor extends JPanel implements ActionListener {
 //     * individual insets values. Updates the current insets text field if
 //     * edit is accepted.
 //     */
-//    private void editTickLabelInsets() {
+//    protected void editTickLabelInsets() {
 //        InsetsChooserPanel panel = new InsetsChooserPanel(
 //            this.tickLabelInsets);
 //        int result =  JOptionPane.showConfirmDialog(
@@ -490,7 +490,7 @@ class DefaultAxisEditor extends JPanel implements ActionListener {
 //     * individual insets values. Updates the current insets text field if edit
 //     * is accepted.
 //     */
-//    private void editLabelInsets() {
+//    protected void editLabelInsets() {
 //        InsetsChooserPanel panel = new InsetsChooserPanel(this.labelInsets);
 //        int result = JOptionPane.showConfirmDialog(
 //            this, panel, localizationResources.getString("Edit_Insets"),
