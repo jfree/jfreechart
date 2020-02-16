@@ -2826,7 +2826,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
             if (ChartUtils.isJFreeSVGAvailable()) {
                 JMenuItem svgItem = new JMenuItem(localizationResources.getString(
                         "SVG..."));
-                svgItem.setActionCommand("SAVE_AS_SVG");
+                svgItem.setActionCommand(SAVE_AS_SVG_COMMAND);
                 svgItem.addActionListener(this);
                 saveSubMenu.add(svgItem);                
             }
@@ -2834,7 +2834,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
             if (ChartUtils.isOrsonPDFAvailable()) {
                 JMenuItem pdfItem = new JMenuItem(
                         localizationResources.getString("PDF..."));
-                pdfItem.setActionCommand("SAVE_AS_PDF");
+                pdfItem.setActionCommand(SAVE_AS_PDF_COMMAND);
                 pdfItem.addActionListener(this);
                 saveSubMenu.add(pdfItem);
             }
