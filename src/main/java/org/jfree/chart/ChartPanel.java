@@ -1479,7 +1479,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         }
         else if (command.equals(SAVE_AS_PNG_COMMAND)) {
             try {
-                doSaveAs();
+                doSaveAs(-1,-1);
             }
             catch (IOException e) {
                 JOptionPane.showMessageDialog(this, "I/O error occurred.",
@@ -2397,7 +2397,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      *
      * @throws IOException if there is an I/O error.
      */
-    public void doSaveAs() throws IOException {
+    public void doSaveAs(int w, int h) throws IOException {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setCurrentDirectory(this.defaultDirectoryForSaveAs);
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
@@ -2413,8 +2413,13 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
                     filename = filename + ".png";
                 }
             }
-            ChartUtils.saveChartAsPNG(new File(filename), this.chart,
-                    getWidth(), getHeight());
+            if(w<0) {
+            	w=getWidth();
+            }
+            if(h<0) {
+            	h=getHeight();
+            }
+            ChartUtils.saveChartAsPNG(new File(filename), this.chart, w, h);
         }
     }
     
@@ -2782,13 +2787,43 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
             if (separator) {
                 result.addSeparator();
             }
-            JMenu saveSubMenu = new JMenu(localizationResources.getString(
-                    "Save_as"));
-            JMenuItem pngItem = new JMenuItem(localizationResources.getString(
-                    "PNG..."));
-            pngItem.setActionCommand("SAVE_AS_PNG");
-            pngItem.addActionListener(this);
-            saveSubMenu.add(pngItem);
+            
+            JMenu saveSubMenu = new JMenu(localizationResources.getString("Save_as"));
+            
+            // PNG - current res
+            {
+                JMenuItem pngItem = new JMenuItem(localizationResources.getString(
+                        "PNG..."));
+                pngItem.setActionCommand("SAVE_AS_PNG");
+                pngItem.addActionListener(this);
+                saveSubMenu.add(pngItem);
+                
+            }
+            
+            // PNG - screen res
+            {
+            	final Dimension ss = Toolkit.getDefaultToolkit().getScreenSize();
+                JMenuItem pngItem = new JMenuItem(
+                		// not sure how to add params to loca'zed msgs...
+                		//localizationResources.getString(
+                        "PNG ("+ss.width+"x"+ss.height+") ..."
+                        //)
+                		);
+                pngItem.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent evt) {
+			            try {
+			                doSaveAs(ss.width, ss.height);
+			            }
+			            catch (IOException e) {
+			                JOptionPane.showMessageDialog(ChartPanel.this, "I/O error occurred.",
+			                        localizationResources.getString("Save_as_PNG"),
+			                        JOptionPane.WARNING_MESSAGE);
+			            }
+					}
+				});
+                saveSubMenu.add(pngItem);
+            }
             
             if (ChartUtils.isJFreeSVGAvailable()) {
                 JMenuItem svgItem = new JMenuItem(localizationResources.getString(
