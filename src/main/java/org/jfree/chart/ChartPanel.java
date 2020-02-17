@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2018, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * ChartPanel.java
  * ---------------
- * (C) Copyright 2000-2018, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Andrzej Porebski;
@@ -1479,7 +1479,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         }
         else if (command.equals(SAVE_AS_PNG_COMMAND)) {
             try {
-                doSaveAs(-1,-1);
+                doSaveAs();
             }
             catch (IOException e) {
                 JOptionPane.showMessageDialog(this, "I/O error occurred.",
@@ -2397,6 +2397,21 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      *
      * @throws IOException if there is an I/O error.
      */
+    public void doSaveAs() throws IOException {
+        doSaveAs(-1, -1);
+    }
+    
+    /**
+     * Opens a file chooser and gives the user an opportunity to save the chart
+     * in PNG format.
+     *
+     * @param w  the width for the saved image (if less than or equal to zero, 
+     *      the panel width will be used);
+     * @param h  the height for the PNG image (if less than or equal to zero, 
+     *      the panel height will be used);
+     * 
+     * @throws IOException if there is an I/O error.
+     */
     public void doSaveAs(int w, int h) throws IOException {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setCurrentDirectory(this.defaultDirectoryForSaveAs);
@@ -2413,11 +2428,11 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
                     filename = filename + ".png";
                 }
             }
-            if(w<0) {
-            	w=getWidth();
+            if (w <= 0) {
+            	w = getWidth();
             }
-            if(h<0) {
-            	h=getHeight();
+            if (h <= 0) {
+            	h = getHeight();
             }
             ChartUtils.saveChartAsPNG(new File(filename), this.chart, w, h);
         }
@@ -2804,24 +2819,24 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
             {
             	final Dimension ss = Toolkit.getDefaultToolkit().getScreenSize();
                 JMenuItem pngItem = new JMenuItem(
-                		// not sure how to add params to loca'zed msgs...
-                		//localizationResources.getString(
-                        "PNG ("+ss.width+"x"+ss.height+") ..."
-                        //)
-                		);
+                	// not sure how to add params to localized msgs...
+                	//localizationResources.getString(
+                     "PNG ("+ss.width+"x"+ss.height+") ..."
+                 //)
+                	);
                 pngItem.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent evt) {
-			            try {
-			                doSaveAs(ss.width, ss.height);
-			            }
-			            catch (IOException e) {
-			                JOptionPane.showMessageDialog(ChartPanel.this, "I/O error occurred.",
-			                        localizationResources.getString("Save_as_PNG"),
-			                        JOptionPane.WARNING_MESSAGE);
-			            }
-					}
-				});
+                    @Override
+                    public void actionPerformed(ActionEvent evt) {
+                        try {
+                            doSaveAs(ss.width, ss.height);
+                        } catch (IOException e) {
+                            JOptionPane.showMessageDialog(ChartPanel.this, 
+                                "I/O error occurred.",
+                                localizationResources.getString("Save_as_PNG"),
+                                JOptionPane.WARNING_MESSAGE);
+                            }
+                        }
+                    });
                 saveSubMenu.add(pngItem);
             }
             
