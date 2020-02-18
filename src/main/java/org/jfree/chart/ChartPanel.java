@@ -183,6 +183,9 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     /** Action command to save as PNG. */
     protected static final String SAVE_AS_PNG_COMMAND = "SAVE_AS_PNG";
     
+    /** Action command to save as PNG - use screen size */
+    protected static final String SAVE_AS_PNG_SIZE_COMMAND = "SAVE_AS_PNG_SIZE";
+    
     /** Action command to save as SVG. */
     protected static final String SAVE_AS_SVG_COMMAND = "SAVE_AS_SVG";
     
@@ -1483,6 +1486,17 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
             }
             catch (IOException e) {
                 JOptionPane.showMessageDialog(this, "I/O error occurred.",
+                        localizationResources.getString("Save_as_PNG"),
+                        JOptionPane.WARNING_MESSAGE);
+            }
+        }
+        else if (command.equals(SAVE_AS_PNG_SIZE_COMMAND)) {
+            try{
+            	final Dimension ss = Toolkit.getDefaultToolkit().getScreenSize();
+                doSaveAs(ss.width, ss.height);
+            }
+            catch (IOException e){
+                JOptionPane.showMessageDialog(ChartPanel.this, "I/O error occurred.",
                         localizationResources.getString("Save_as_PNG"),
                         JOptionPane.WARNING_MESSAGE);
             }
@@ -2809,7 +2823,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
             {
                 JMenuItem pngItem = new JMenuItem(localizationResources.getString(
                         "PNG..."));
-                pngItem.setActionCommand("SAVE_AS_PNG");
+                pngItem.setActionCommand(SAVE_AS_PNG_COMMAND);
                 pngItem.addActionListener(this);
                 saveSubMenu.add(pngItem);
                 
@@ -2818,32 +2832,17 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
             // PNG - screen res
             {
             	final Dimension ss = Toolkit.getDefaultToolkit().getScreenSize();
-                JMenuItem pngItem = new JMenuItem(
-                	// not sure how to add params to localized msgs...
-                	//localizationResources.getString(
-                     "PNG ("+ss.width+"x"+ss.height+") ..."
-                 //)
-                	);
-                pngItem.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent evt) {
-                        try {
-                            doSaveAs(ss.width, ss.height);
-                        } catch (IOException e) {
-                            JOptionPane.showMessageDialog(ChartPanel.this, 
-                                "I/O error occurred.",
-                                localizationResources.getString("Save_as_PNG"),
-                                JOptionPane.WARNING_MESSAGE);
-                            }
-                        }
-                    });
+                final String pngName = "PNG ("+ss.width+"x"+ss.height+") ...";
+                JMenuItem pngItem = new JMenuItem(pngName);
+                pngItem.setActionCommand(SAVE_AS_PNG_SIZE_COMMAND);
+                pngItem.addActionListener(this);
                 saveSubMenu.add(pngItem);
             }
             
             if (ChartUtils.isJFreeSVGAvailable()) {
                 JMenuItem svgItem = new JMenuItem(localizationResources.getString(
                         "SVG..."));
-                svgItem.setActionCommand("SAVE_AS_SVG");
+                svgItem.setActionCommand(SAVE_AS_SVG_COMMAND);
                 svgItem.addActionListener(this);
                 saveSubMenu.add(svgItem);                
             }
@@ -2851,7 +2850,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
             if (ChartUtils.isOrsonPDFAvailable()) {
                 JMenuItem pdfItem = new JMenuItem(
                         localizationResources.getString("PDF..."));
-                pdfItem.setActionCommand("SAVE_AS_PDF");
+                pdfItem.setActionCommand(SAVE_AS_PDF_COMMAND);
                 pdfItem.addActionListener(this);
                 saveSubMenu.add(pdfItem);
             }
