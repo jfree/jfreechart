@@ -106,6 +106,9 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
     private transient Rectangle2D[] subplotAreas;
     // TODO:  move the above to the plot state
 
+    /** Whether the axis should be displayed at each plot separately */
+    private final boolean axisForEachSubplot;
+
     /**
      * Default constructor.
      */
@@ -120,9 +123,24 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
      *                    permitted).
      */
     public CombinedDomainCategoryPlot(CategoryAxis domainAxis) {
+        this(domainAxis, false);
+    }
+
+    /**
+     * Creates a new plot.
+     *
+     * @param domainAxis  the shared domain axis (<code>null</code> not
+     *                    permitted).
+     * @param axisForEachSubplot Whether the axis should
+     *        be displayed at each plot separately
+     *        instead of one axis at the end of the plot.
+     */
+    public CombinedDomainCategoryPlot(CategoryAxis domainAxis,
+                                      boolean axisForEachSubplot) {
         super(null, domainAxis, null, null);
         this.subplots = new java.util.ArrayList();
         this.gap = 5.0;
+        this.axisForEachSubplot = axisForEachSubplot;
     }
 
     /**
@@ -180,7 +198,7 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
         subplot.setParent(this);
         subplot.setWeight(weight);
         subplot.setInsets(new RectangleInsets(0.0, 0.0, 0.0, 0.0));
-        subplot.setDomainAxis(null);
+        subplot.setDomainAxis(this.axisForEachSubplot ? getDomainAxis() : null);
         subplot.setOrientation(getOrientation());
         subplot.addChangeListener(this);
         this.subplots.add(subplot);
@@ -351,7 +369,7 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
                 space.setBottom(fixed.getBottom());
             }
         }
-        else {
+        else if (!this.axisForEachSubplot) {
             CategoryAxis categoryAxis = getDomainAxis();
             RectangleEdge categoryEdge = Plot.resolveDomainAxisLocation(
                     getDomainAxisLocation(), orientation);
@@ -451,16 +469,13 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
         // set the width and height of non-shared axis of all sub-plots
         setFixedRangeAxisSpaceForSubplots(space);
 
-        // draw the shared axis
-        CategoryAxis axis = getDomainAxis();
-        RectangleEdge domainEdge = getDomainAxisEdge();
-        double cursor = RectangleEdge.coordinate(dataArea, domainEdge);
-        AxisState axisState = axis.draw(g2, cursor, area, dataArea,
-                domainEdge, info);
         if (parentState == null) {
             parentState = new PlotState();
         }
-        parentState.getSharedAxisStates().put(axis, axisState);
+
+        if (!this.axisForEachSubplot) {
+            this.drawSharedAxis(g2, area, parentState, info, dataArea);
+        }
 
         // draw all the subplots
         for (int i = 0; i < this.subplots.size(); i++) {
@@ -482,6 +497,19 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
             info.setDataArea(dataArea);
         }
 
+    }
+
+    protected void drawSharedAxis(Graphics2D g2, Rectangle2D area,
+                                  PlotState parentState, PlotRenderingInfo info,
+                                  Rectangle2D dataArea) {
+        final CategoryAxis axis = getDomainAxis();
+        final RectangleEdge edge = getDomainAxisEdge();
+        if (axis != null && edge != null) {
+            final double cursor = RectangleEdge.coordinate(dataArea, edge);
+            final AxisState axisState =
+                    axis.draw(g2, cursor, area, dataArea, edge, info);
+            parentState.getSharedAxisStates().put(axis, axisState);
+        }
     }
 
     /**

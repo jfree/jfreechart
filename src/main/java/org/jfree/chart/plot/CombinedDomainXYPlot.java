@@ -146,6 +146,9 @@ public class CombinedDomainXYPlot extends XYPlot
     // TODO:  the subplot areas needs to be moved out of the plot into the plot
     //        state
 
+    /** Whether the axis should be displayed at each plot separately */
+    private final boolean axisForEachSubplot;
+
     /**
      * Default constructor.
      */
@@ -160,11 +163,26 @@ public class CombinedDomainXYPlot extends XYPlot
      * @param domainAxis  the shared axis.
      */
     public CombinedDomainXYPlot(ValueAxis domainAxis) {
+        this(domainAxis, false);
+    }
+
+    /**
+     * Creates a new combined plot that shares a domain axis among multiple
+     * subplots.
+     *
+     * @param domainAxis  the shared axis.
+     * @param axisForEachSubplot Whether the axis should
+     *        be displayed at each plot separately
+     *        instead of one axis at the end of the plot.
+     */
+    public CombinedDomainXYPlot(ValueAxis domainAxis,
+                                boolean axisForEachSubplot) {
         super(null,        // no data in the parent plot
               domainAxis,
               null,        // no range axis
               null);       // no renderer
         this.subplots = new java.util.ArrayList<XYPlot>();
+        this.axisForEachSubplot = axisForEachSubplot;
     }
 
     /**
@@ -321,7 +339,7 @@ public class CombinedDomainXYPlot extends XYPlot
         subplot.setParent(this);
         subplot.setWeight(weight);
         subplot.setInsets(RectangleInsets.ZERO_INSETS, false);
-        subplot.setDomainAxis(null);
+        subplot.setDomainAxis(this.axisForEachSubplot ? getDomainAxis() : null);
         subplot.addChangeListener(this);
         this.subplots.add(subplot);
 
@@ -398,7 +416,7 @@ public class CombinedDomainXYPlot extends XYPlot
                 space.setBottom(fixed.getBottom());
             }
         }
-        else {
+        else if (!this.axisForEachSubplot) {
             ValueAxis xAxis = getDomainAxis();
             RectangleEdge xEdge = Plot.resolveDomainAxisLocation(
                     getDomainAxisLocation(), orientation);
@@ -485,15 +503,13 @@ public class CombinedDomainXYPlot extends XYPlot
         // set the width and height of non-shared axis of all sub-plots
         setFixedRangeAxisSpaceForSubplots(space);
 
-        // draw the shared axis
-        ValueAxis axis = getDomainAxis();
-        RectangleEdge edge = getDomainAxisEdge();
-        double cursor = RectangleEdge.coordinate(dataArea, edge);
-        AxisState axisState = axis.draw(g2, cursor, area, dataArea, edge, info);
         if (parentState == null) {
             parentState = new PlotState();
         }
-        parentState.getSharedAxisStates().put(axis, axisState);
+
+        if (!this.axisForEachSubplot) {
+            this.drawSharedAxis(g2, area, parentState, info, dataArea);
+        }
 
         // draw all the subplots
         for (int i = 0; i < this.subplots.size(); i++) {
@@ -511,6 +527,19 @@ public class CombinedDomainXYPlot extends XYPlot
             info.setDataArea(dataArea);
         }
 
+    }
+
+    protected void drawSharedAxis(Graphics2D g2, Rectangle2D area,
+                                  PlotState parentState, PlotRenderingInfo info,
+                                  Rectangle2D dataArea) {
+        final ValueAxis axis = getDomainAxis();
+        final RectangleEdge edge = getDomainAxisEdge();
+        if (axis != null && edge != null) {
+            final double cursor = RectangleEdge.coordinate(dataArea, edge);
+            final AxisState axisState =
+                    axis.draw(g2, cursor, area, dataArea, edge, info);
+            parentState.getSharedAxisStates().put(axis, axisState);
+        }
     }
 
     /**
