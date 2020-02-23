@@ -604,6 +604,7 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
 
             if (this.useFillPaint) {
                 paint = lookupSeriesFillPaint(series);
+                g2.setPaint(paint);
             }
             if (paint instanceof GradientPaint) {
                 GradientPaint gp = (GradientPaint) paint;
