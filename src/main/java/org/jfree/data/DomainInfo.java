@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,23 +27,10 @@
  * ---------------
  * DomainInfo.java
  * ---------------
- * (C) Copyright 2000-2017, by Object Refinery Limited.
+ * (C) Copyright 2000-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes (from 18-Sep-2001)
- * --------------------------
- * 18-Sep-2001 : Added standard header and fixed DOS encoding problem (DG);
- * 15-Nov-2001 : Moved to package com.jrefinery.data.* (DG);
- *               Updated Javadoc comments (DG);
- * 22-Apr-2002 : Added getValueRange() method (DG);
- * 12-Jul-2002 : Renamed getValueRange() --> getDomainRange() (DG);
- * 06-Oct-2004 : Renamed getDomainRange() --> getDomainBounds() (DG);
- * 17-Nov-2004 : Added 'includeInterval' argument to all methods (DG);
- * 11-Jan-2005 : Removed deprecated code in preparation for the 1.0.0
- *               release (DG);
- * 02-Aug-2013 : Updated Javadocs from David Tonhofer (bug 1117) (DG);
  *
  */
 
