@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------
  * PiePlot3D.java
  * --------------
- * (C) Copyright 2000-2016, by Object Refinery and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery and Contributors.
  *
  * Original Author:  Tomer Peretz;
  * Contributor(s):   Richard Atkinson;
@@ -38,53 +38,6 @@
  *                   Dave Crane;
  *                   Martin Hoeller;
  *                   DaveLaw (dave ATT davelaw DOTT de);
- *
- * Changes
- * -------
- * 21-Jun-2002 : Version 1;
- * 31-Jul-2002 : Modified to use startAngle and direction, drawing modified so
- *               that charts render with foreground alpha < 1.0 (DG);
- * 05-Aug-2002 : Small modification to draw method to support URLs for HTML
- *               image maps (RA);
- * 26-Sep-2002 : Fixed errors reported by Checkstyle (DG);
- * 18-Oct-2002 : Added drawing bug fix sent in by Xun Kang, and made a couple
- *               of other related fixes (DG);
- * 30-Oct-2002 : Changed the PieDataset interface. Fixed another drawing
- *               bug (DG);
- * 12-Nov-2002 : Fixed null pointer exception for zero or negative values (DG);
- * 07-Mar-2003 : Modified to pass pieIndex on to PieSectionEntity (DG);
- * 21-Mar-2003 : Added workaround for bug id 620031 (DG);
- * 26-Mar-2003 : Implemented Serializable (DG);
- * 30-Jul-2003 : Modified entity constructor (CZ);
- * 29-Aug-2003 : Small changes for API updates in PiePlot class (DG);
- * 02-Sep-2003 : Fixed bug where the 'no data' message is not displayed (DG);
- * 08-Sep-2003 : Added internationalization via use of properties
- *               resourceBundle (RFE 690236) (AL);
- * 29-Oct-2003 : Added workaround for font alignment in PDF output (DG);
- * 20-Nov-2003 : Fixed bug 845289 (sides not showing) (DG);
- * 25-Nov-2003 : Added patch (845095) to fix outline paint issues (DG);
- * 10-Mar-2004 : Numerous changes to enhance labelling (DG);
- * 31-Mar-2004 : Adjusted plot area when label generator is null (DG);
- * 08-Apr-2004 : Added flag to PiePlot class to control the treatment of null
- *               values (DG);
- *               Added pieIndex to PieSectionEntity (DG);
- * 15-Nov-2004 : Removed creation of default tool tip generator (DG);
- * 16-Jun-2005 : Added default constructor (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 27-Sep-2006 : Updated draw() method for new lookup methods (DG);
- * 22-Mar-2007 : Added equals() override (DG);
- * 18-Jun-2007 : Added handling for simple label option (DG);
- * 04-Oct-2007 : Added option to darken sides of plot - thanks to Alex Moots
- *               (see patch 1805262) (DG);
- * 21-Nov-2007 : Changed default depth factor, fixed labelling bugs and added
- *               debug code - see debug flags in PiePlot class (DG);
- * 20-Mar-2008 : Fixed bug 1920854 - multiple redraws of the section
- *               labels (DG);
- * 19-May-2009 : Fixed FindBugs warnings, patch by Michal Wozniak (DG);
- * 10-Jul-2009 : Added drop shaow support (DG);
- * 10-Oct-2011 : Localization fix: bug #3353913 (MH);
- * 18-Oct-2011 : Fix tooltip offset with shadow generator (DG);
- * 11-Jun-2012 : Utilise new PaintAlpha class (patch 3204823 from DaveLaw) (DG);
  *
  */
 
@@ -503,7 +456,7 @@ public class PiePlot3D extends PiePlot implements Serializable {
 
         }
 
-        g2.setPaint(Color.gray);
+        g2.setPaint(Color.GRAY);
         g2.fill(back);
         g2.fill(front);
 

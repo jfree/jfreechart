@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * --------------------
  * DialPointerTest.java
  * --------------------
- * (C) Copyright 2007-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 30-Apr-2007 : Version 1 (DG);
- * 23-Nov-2007 : Added testEqualsPointer() and testSerialization2() (DG);
  *
  */
 
@@ -87,9 +82,9 @@ public class DialPointerTest {
         DialPointer.Pin p2 = new DialPointer.Pin();
         assertEquals(p1, p2);
 
-        p1.setPaint(Color.green);
+        p1.setPaint(Color.GREEN);
         assertFalse(p1.equals(p2));
-        p2.setPaint(Color.green);
+        p2.setPaint(Color.GREEN);
         assertTrue(p1.equals(p2));
 
         BasicStroke s = new BasicStroke(4.4f);
@@ -108,14 +103,14 @@ public class DialPointerTest {
         DialPointer.Pointer p2 = new DialPointer.Pointer();
         assertEquals(p1, p2);
 
-        p1.setFillPaint(Color.green);
+        p1.setFillPaint(Color.GREEN);
         assertFalse(p1.equals(p2));
-        p2.setFillPaint(Color.green);
+        p2.setFillPaint(Color.GREEN);
         assertTrue(p1.equals(p2));
 
-        p1.setOutlinePaint(Color.green);
+        p1.setOutlinePaint(Color.GREEN);
         assertFalse(p1.equals(p2));
-        p2.setOutlinePaint(Color.green);
+        p2.setOutlinePaint(Color.GREEN);
         assertTrue(p1.equals(p2));
     }
 

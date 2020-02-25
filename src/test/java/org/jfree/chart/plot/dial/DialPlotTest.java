@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * -----------------
  * DialPlotTest.java
  * -----------------
- * (C) Copyright 2006-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 03-Nov-2006 : Version 1 (DG);
  *
  */
 
@@ -83,9 +79,9 @@ public class DialPlotTest implements PlotChangeListener {
         assertTrue(p1.equals(p2));
 
         // background
-        p1.setBackground(new DialBackground(Color.green));
+        p1.setBackground(new DialBackground(Color.GREEN));
         assertFalse(p1.equals(p2));
-        p2.setBackground(new DialBackground(Color.green));
+        p2.setBackground(new DialBackground(Color.GREEN));
         assertTrue(p1.equals(p2));
 
         p1.setBackground(null);
@@ -182,7 +178,7 @@ public class DialPlotTest implements PlotChangeListener {
         b1.setPaint(Color.BLUE);
         assertNotNull(this.lastEvent);
 
-        DialBackground b2 = new DialBackground(Color.green);
+        DialBackground b2 = new DialBackground(Color.GREEN);
         p.setBackground(b2);
         this.lastEvent = null;
         b1.setPaint(Color.RED);
@@ -209,7 +205,7 @@ public class DialPlotTest implements PlotChangeListener {
         this.lastEvent = null;
         c1.setFillPaint(Color.BLUE);
         assertNull(this.lastEvent);
-        c2.setFillPaint(Color.green);
+        c2.setFillPaint(Color.GREEN);
         assertNotNull(this.lastEvent);
     }
 
@@ -223,7 +219,7 @@ public class DialPlotTest implements PlotChangeListener {
         p.setDialFrame(f1);
         p.addChangeListener(this);
         this.lastEvent = null;
-        f1.setBackgroundPaint(Color.gray);
+        f1.setBackgroundPaint(Color.GRAY);
         assertNotNull(this.lastEvent);
 
         ArcDialFrame f2 = new ArcDialFrame();
@@ -231,7 +227,7 @@ public class DialPlotTest implements PlotChangeListener {
         this.lastEvent = null;
         f1.setBackgroundPaint(Color.BLUE);
         assertNull(this.lastEvent);
-        f2.setBackgroundPaint(Color.green);
+        f2.setBackgroundPaint(Color.GREEN);
         assertNotNull(this.lastEvent);
     }
 
@@ -270,12 +266,12 @@ public class DialPlotTest implements PlotChangeListener {
         b1.setPaint(Color.BLUE);
         assertNotNull(this.lastEvent);
 
-        DialBackground b2 = new DialBackground(Color.green);
+        DialBackground b2 = new DialBackground(Color.GREEN);
         p.addLayer(b2);
         this.lastEvent = null;
         b1.setPaint(Color.RED);
         assertNotNull(this.lastEvent);
-        b2.setPaint(Color.green);
+        b2.setPaint(Color.GREEN);
         assertNotNull(this.lastEvent);
 
         p.removeLayer(b2);

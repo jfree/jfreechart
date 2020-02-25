@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------------
  * StandardDialFrameTest.java
  * --------------------------
- * (C) Copyright 2006-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -82,10 +82,10 @@ public class StandardDialFrameTest {
 
         // foregroundPaint
         f1.setForegroundPaint(new GradientPaint(1.0f, 2.0f, Color.BLUE, 3.0f,
-                4.0f, Color.green));
+                4.0f, Color.GREEN));
         assertFalse(f1.equals(f2));
         f2.setForegroundPaint(new GradientPaint(1.0f, 2.0f, Color.BLUE, 3.0f,
-                4.0f, Color.green));
+                4.0f, Color.GREEN));
         assertTrue(f1.equals(f2));
 
         // stroke

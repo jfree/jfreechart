@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------------
  * XYDifferenceRendererTest.java
  * -----------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -97,9 +97,9 @@ public class XYDifferenceRendererTest {
         assertTrue(r1.equals(r2));
 
         // shapesVisible
-        r1 = new XYDifferenceRenderer(Color.green, Color.YELLOW, true);
+        r1 = new XYDifferenceRenderer(Color.GREEN, Color.YELLOW, true);
         assertFalse(r1.equals(r2));
-        r2 = new XYDifferenceRenderer(Color.green, Color.YELLOW, true);
+        r2 = new XYDifferenceRenderer(Color.GREEN, Color.YELLOW, true);
         assertTrue(r1.equals(r2));
 
         // legendLine
