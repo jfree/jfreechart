@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * KeyedObjects2DTest.java
  * -----------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -64,21 +64,22 @@ public class KeyedObjects2DTest {
         assertTrue(k1.equals(k2));
         assertTrue(k2.equals(k1));
 
-        k1.addObject(new Integer(99), "R1", "C1");
+        k1.addObject(99, "R1", "C1");
         assertFalse(k1.equals(k2));
-        k2.addObject(new Integer(99), "R1", "C1");
+        k2.addObject(99, "R1", "C1");
         assertTrue(k1.equals(k2));
     }
 
     /**
      * Confirm that cloning works.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
         KeyedObjects2D o1 = new KeyedObjects2D();
-        o1.setObject(new Integer(1), "V1", "C1");
+        o1.setObject(1, "V1", "C1");
         o1.setObject(null, "V2", "C1");
-        o1.setObject(new Integer(3), "V3", "C2");
+        o1.setObject(3, "V3", "C2");
         KeyedObjects2D o2 = (KeyedObjects2D) o1.clone();
         assertTrue(o1 != o2);
         assertTrue(o1.getClass() == o2.getClass());
@@ -95,10 +96,10 @@ public class KeyedObjects2DTest {
     @Test
     public void testSerialization() {
         KeyedObjects2D ko2D1 = new KeyedObjects2D();
-        ko2D1.addObject(new Double(234.2), "Row1", "Col1");
+        ko2D1.addObject(234.2, "Row1", "Col1");
         ko2D1.addObject(null, "Row1", "Col2");
-        ko2D1.addObject(new Double(345.9), "Row2", "Col1");
-        ko2D1.addObject(new Double(452.7), "Row2", "Col2");
+        ko2D1.addObject(345.9, "Row2", "Col1");
+        ko2D1.addObject(452.7, "Row2", "Col2");
 
         KeyedObjects2D ko2D2 = (KeyedObjects2D) TestUtils.serialised(ko2D1);
         assertEquals(ko2D1, ko2D2);
