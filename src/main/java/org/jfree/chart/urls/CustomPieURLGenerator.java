@@ -2,7 +2,7 @@
  * JFreeChart : a free Java chart library
  * ======================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------------
  * CustomPieURLGenerator.java
  * --------------------------
- * (C) Copyright 2004-2008, by David Basten and Contributors.
+ * (C) Copyright 2004-2020, by David Basten and Contributors.
  *
  * Original Author:  David Basten;
  * Contributors:     -;
@@ -46,6 +46,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -54,7 +55,8 @@ import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.general.PieDataset;
 
 /**
- * A custom URL generator for pie charts.
+ * A custom URL generator for pie charts.  This implementation supports both
+ * the standard {@link PiePlot} as well as {@link MultiplePiePlot}.
  */
 public class CustomPieURLGenerator implements PieURLGenerator,
         Cloneable, PublicCloneable, Serializable {
@@ -62,8 +64,8 @@ public class CustomPieURLGenerator implements PieURLGenerator,
     /** For serialization. */
     private static final long serialVersionUID = 7100607670144900503L;
 
-    /** Storage for the URLs. */
-    private ArrayList urls;
+    /** Storage for the URLs - a list to support multi pie plots. */
+    private final List<Map<Comparable<?>, String>> urlMaps;
 
     /**
      * Creates a new {@code CustomPieURLGenerator} instance, initially
@@ -71,7 +73,7 @@ public class CustomPieURLGenerator implements PieURLGenerator,
      * used.
      */
     public CustomPieURLGenerator() {
-        this.urls = new ArrayList();
+        this.urlMaps = new ArrayList<>();
     }
 
     /**
@@ -79,42 +81,44 @@ public class CustomPieURLGenerator implements PieURLGenerator,
      *
      * @param dataset  the dataset (ignored).
      * @param key  the item key.
-     * @param pieIndex  the pie index.
+     * @param plotIndex  the plot index.
      *
      * @return A string containing the generated URL.
      *
      * @see #getURL(Comparable, int)
      */
     @Override
-    public String generateURL(PieDataset dataset, Comparable key,
-                              int pieIndex) {
-        return getURL(key, pieIndex);
+    public String generateURL(PieDataset dataset, Comparable<?> key,
+                              int plotIndex) {
+        return getURL(key, plotIndex);
     }
 
     /**
-     * Returns the number of URL maps stored by the renderer.
+     * Returns the number of URL maps stored by the generator.  For a standard
+     * pie chart, only one map is required, but for a {@link MultiplePiePlot}
+     * the generator will use multiple maps.
      *
      * @return The list count.
      *
      * @see #addURLs(Map)
      */
     public int getListCount() {
-        return this.urls.size();
+        return this.urlMaps.size();
     }
 
     /**
      * Returns the number of URLs in a given map (specified by its position
      * in the map list).
      *
-     * @param list  the list index (zero based).
+     * @param plotIndex  the plot index (zero based).
      *
      * @return The URL count.
      *
      * @see #getListCount()
      */
-    public int getURLCount(int list) {
+    public int getURLCount(int plotIndex) {
         int result = 0;
-        Map urlMap = (Map) this.urls.get(list);
+        Map<Comparable<?>, String> urlMap = this.urlMaps.get(plotIndex);
         if (urlMap != null) {
             result = urlMap.size();
         }
@@ -125,14 +129,14 @@ public class CustomPieURLGenerator implements PieURLGenerator,
      * Returns the URL for a section in the specified map.
      *
      * @param key  the key.
-     * @param mapIndex  the map index.
+     * @param plotIndex  the plot index.
      *
      * @return The URL.
      */
-    public String getURL(Comparable key, int mapIndex) {
+    public String getURL(Comparable<?> key, int plotIndex) {
         String result = null;
-        if (mapIndex < getListCount()) {
-            Map urlMap = (Map) this.urls.get(mapIndex);
+        if (plotIndex < getListCount()) {
+            Map<Comparable<?>, String> urlMap = this.urlMaps.get(plotIndex);
             if (urlMap != null) {
                 result = (String) urlMap.get(key);
             }
@@ -152,7 +156,7 @@ public class CustomPieURLGenerator implements PieURLGenerator,
      * @param urlMap  the URLs ({@code null} permitted).
      */
     public void addURLs(Map urlMap) {
-        this.urls.add(urlMap);
+        this.urlMaps.add(urlMap);
     }
 
     /**
@@ -179,7 +183,7 @@ public class CustomPieURLGenerator implements PieURLGenerator,
                 if (getURLCount(pieItem) != generator.getURLCount(pieItem)) {
                     return false;
                 }
-                keySet = ((HashMap) this.urls.get(pieItem)).keySet();
+                keySet = this.urlMaps.get(pieItem).keySet();
                 String key;
                 for (Iterator i = keySet.iterator(); i.hasNext();) {
                 key = (String) i.next();
@@ -208,7 +212,7 @@ public class CustomPieURLGenerator implements PieURLGenerator,
         Map newMap;
         String key;
 
-        for (Iterator i = this.urls.iterator(); i.hasNext();) {
+        for (Iterator i = this.urlMaps.iterator(); i.hasNext();) {
             map = (Map) i.next();
 
             newMap = new HashMap();

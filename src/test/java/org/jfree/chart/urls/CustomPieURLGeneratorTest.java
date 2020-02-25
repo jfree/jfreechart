@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * ------------------------------
  * CustomPieURLGeneratorTest.java
  * ------------------------------
- * (C) Copyright 2008-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2008-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 11-Apr-2008 : Version 1 (DG);
- * 23-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
@@ -67,7 +62,7 @@ public class CustomPieURLGeneratorTest {
         CustomPieURLGenerator g2 = new CustomPieURLGenerator();
         assertTrue(g1.equals(g2));
 
-        Map m1 = new HashMap();
+        Map<String, String> m1 = new HashMap<>();
         m1.put("A", "http://www.jfree.org/");
         g1.addURLs(m1);
         assertFalse(g1.equals(g2));
@@ -77,11 +72,12 @@ public class CustomPieURLGeneratorTest {
 
     /**
      * Confirm that cloning works.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
         CustomPieURLGenerator g1 = new CustomPieURLGenerator();
-        Map m1 = new HashMap();
+        Map<String, String> m1 = new HashMap<>();
         m1.put("A", "http://www.jfree.org/");
         g1.addURLs(m1);
         CustomPieURLGenerator g2 = (CustomPieURLGenerator) g1.clone();
@@ -90,7 +86,7 @@ public class CustomPieURLGeneratorTest {
         assertTrue(g1.equals(g2));
 
         // check independence
-        Map m2 = new HashMap();
+        Map<String, String> m2 = new HashMap<>();
         m2.put("B", "XYZ");
         g1.addURLs(m2);
         assertFalse(g1.equals(g2));
@@ -111,7 +107,7 @@ public class CustomPieURLGeneratorTest {
     @Test
     public void testSerialization() {
         CustomPieURLGenerator g1 = new CustomPieURLGenerator();
-        Map m1 = new HashMap();
+        Map<String, String> m1 = new HashMap<>();
         m1.put("A", "http://www.jfree.org/");
         g1.addURLs(m1);
         CustomPieURLGenerator g2 = (CustomPieURLGenerator) 
