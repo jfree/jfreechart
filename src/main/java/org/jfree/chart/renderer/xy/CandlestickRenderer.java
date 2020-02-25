@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,62 +27,13 @@
  * ------------------------
  * CandlestickRenderer.java
  * ------------------------
- * (C) Copyright 2001-2017, by Object Refinery Limited.
+ * (C) Copyright 2001-2020, by Object Refinery Limited.
  *
  * Original Authors:  David Gilbert (for Object Refinery Limited);
  *                    Sylvain Vieujot;
  * Contributor(s):    Richard Atkinson;
  *                    Christian W. Zuckschwerdt;
  *                    Jerome Fisher;
- *
- * Changes
- * -------
- * 13-Dec-2001 : Version 1.  Based on code in the (now redundant)
- *               CandlestickPlot class, written by Sylvain Vieujot (DG);
- * 23-Jan-2002 : Added DrawInfo parameter to drawItem() method (DG);
- * 28-Mar-2002 : Added a property change listener mechanism so that renderers
- *               no longer need to be immutable.  Added properties for up and
- *               down colors (DG);
- * 04-Apr-2002 : Updated with new automatic width calculation and optional
- *               volume display, contributed by Sylvain Vieujot (DG);
- * 09-Apr-2002 : Removed translatedRangeZero from the drawItem() method, and
- *               changed the return type of the drawItem method to void,
- *               reflecting a change in the XYItemRenderer interface.  Added
- *               tooltip code to drawItem() method (DG);
- * 25-Jun-2002 : Removed redundant code (DG);
- * 05-Aug-2002 : Small modification to drawItem method to support URLs for HTML
- *               image maps (RA);
- * 19-Sep-2002 : Fixed errors reported by Checkstyle (DG);
- * 25-Mar-2003 : Implemented Serializable (DG);
- * 01-May-2003 : Modified drawItem() method signature (DG);
- * 30-Jun-2003 : Added support for PlotOrientation (for completeness, this
- *               renderer is unlikely to be used with a HORIZONTAL
- *               orientation) (DG);
- * 30-Jul-2003 : Modified entity constructor (CZ);
- * 20-Aug-2003 : Implemented Cloneable and PublicCloneable (DG);
- * 29-Aug-2003 : Moved maxVolume calculation to initialise method (see bug
- *               report 796619) (DG);
- * 02-Sep-2003 : Added maxCandleWidthInMilliseconds as workaround for bug
- *               796621 (DG);
- * 08-Sep-2003 : Changed ValueAxis API (DG);
- * 16-Sep-2003 : Changed ChartRenderingInfo --> PlotRenderingInfo (DG);
- * 13-Oct-2003 : Applied patch from Jerome Fisher to improve auto width
- *               calculations (DG);
- * 23-Dec-2003 : Fixed bug where up and down paint are used incorrectly (DG);
- * 25-Feb-2004 : Replaced CrosshairInfo with CrosshairState (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
- *               getYValue() (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 06-Jul-2006 : Swapped calls to getX() --> getXValue(), and the same for the
- *               other data values (DG);
- * 17-Aug-2006 : Corrections to the equals() method (DG);
- * 05-Mar-2007 : Added flag to allow optional use of outline paint (DG);
- * 08-Oct-2007 : Added new volumePaint field (DG);
- * 08-Apr-2008 : Added findRangeBounds() method override (DG);
- * 13-May-2008 : Fixed chart entity bugs (1962467 and 1962472) (DG);
- * 27-Mar-2009 : Updated findRangeBounds() to call new method in
- *               superclass (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -241,8 +192,8 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
         setDefaultToolTipGenerator(toolTipGenerator);
         this.candleWidth = candleWidth;
         this.drawVolume = drawVolume;
-        this.volumePaint = Color.gray;
-        this.upPaint = Color.green;
+        this.volumePaint = Color.GRAY;
+        this.upPaint = Color.GREEN;
         this.downPaint = Color.RED;
         this.useOutlinePaint = false;  // false preserves the old behaviour
                                        // prior to introducing this flag
