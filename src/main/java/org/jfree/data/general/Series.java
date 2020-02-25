@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,30 +27,10 @@
  * -----------
  * Series.java
  * -----------
- * (C) Copyright 2001-2016, by Object Refinery Limited.
+ * (C) Copyright 2001-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 15-Nov-2001 : Version 1 (DG);
- * 29-Nov-2001 : Added cloning and property change support (DG);
- * 30-Jan-2002 : Added a description attribute and changed the constructors to
- *               protected (DG);
- * 07-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 13-Mar-2003 : Implemented Serializable (DG);
- * 01-May-2003 : Added equals() method (DG);
- * 26-Jun-2003 : Changed listener list to use EventListenerList - see bug
- *               757027 (DG);
- * 15-Oct-2003 : Added a flag to control whether or not change events are sent
- *               to registered listeners (DG);
- * 19-May-2005 : Made abstract (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 04-May-2006 : Updated API docs (DG);
- * 26-Sep-2007 : Added isEmpty() and getItemCount() methods (DG);
- * 16-Oct-2011 : Added vetoable property change support for series name (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  * 
  */
 
@@ -84,7 +64,7 @@ public abstract class Series implements Cloneable, Serializable {
     private static final long serialVersionUID = -6906561437538683581L;
 
     /** The key for the series. */
-    private Comparable key;
+    private Comparable<?> key;
 
     /** A description of the series. */
     private String description;
@@ -106,7 +86,7 @@ public abstract class Series implements Cloneable, Serializable {
      *
      * @param key  the series key ({@code null} not permitted).
      */
-    protected Series(Comparable key) {
+    protected Series(Comparable<?> key) {
         this(key, null);
     }
 
@@ -116,7 +96,7 @@ public abstract class Series implements Cloneable, Serializable {
      * @param key  the series key ({@code null} NOT permitted).
      * @param description  the series description ({@code null} permitted).
      */
-    protected Series(Comparable key, String description) {
+    protected Series(Comparable<?> key, String description) {
         Args.nullNotPermitted(key, "key");
         this.key = key;
         this.description = description;
@@ -133,7 +113,7 @@ public abstract class Series implements Cloneable, Serializable {
      *
      * @see #setKey(Comparable)
      */
-    public Comparable getKey() {
+    public Comparable<?> getKey() {
         return this.key;
     }
 
@@ -148,9 +128,9 @@ public abstract class Series implements Cloneable, Serializable {
      *
      * @see #getKey()
      */
-    public void setKey(Comparable key) {
+    public void setKey(Comparable<?> key) {
         Args.nullNotPermitted(key, "key");
-        Comparable old = this.key;
+        Comparable<?> old = this.key;
         try {
             // if this series belongs to a dataset, the dataset might veto the
             // change if it results in two series within the dataset having the

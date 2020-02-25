@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,21 +27,10 @@
  * ---------------
  * XYDataItem.java
  * ---------------
- * (C) Copyright 2003-2013, by Object Refinery Limited.
+ * (C) Copyright 2003-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 05-Aug-2003 : Renamed XYDataPair --> XYDataItem (DG);
- * 03-Feb-2004 : Fixed bug in equals() method (DG);
- * 21-Feb-2005 : Added setY(double) method (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 30-Nov-2007 : Implemented getXValue() and getYValue(), plus toString() for
- *               debugging use (DG);
- * 10-Jun-2009 : Reimplemented cloning (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -55,7 +44,7 @@ import org.jfree.chart.util.Args;
  * Represents one (x, y) data item for an {@link XYSeries}.  Note that
  * subclasses are REQUIRED to support cloning.
  */
-public class XYDataItem implements Cloneable, Comparable, Serializable {
+public class XYDataItem implements Cloneable, Comparable<XYDataItem>, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 2751513470325494890L;
@@ -85,7 +74,7 @@ public class XYDataItem implements Cloneable, Comparable, Serializable {
      * @param y  the y-value.
      */
     public XYDataItem(double x, double y) {
-        this(new Double(x), new Double(y));
+        this(Double.valueOf(x), Double.valueOf(y));
     }
 
     /**
@@ -146,7 +135,7 @@ public class XYDataItem implements Cloneable, Comparable, Serializable {
      * @param y  the new y-value.
      */
     public void setY(double y) {
-        setY(new Double(y));
+        setY(Double.valueOf(y));
     }
 
     /**
@@ -172,7 +161,7 @@ public class XYDataItem implements Cloneable, Comparable, Serializable {
      *      relative to another object.
      */
     @Override
-    public int compareTo(Object o1) {
+    public int compareTo(XYDataItem o1) {
 
         int result;
 
