@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * --------------------------
  * BoxAndWhiskerItemTest.java
  * --------------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 01-Mar-2004 : Version 1 (DG);
  *
  */
 
@@ -59,14 +55,10 @@ public class BoxAndWhiskerItemTest {
     @Test
     public void testEquals() {
 
-        BoxAndWhiskerItem i1 = new BoxAndWhiskerItem(new Double(1.0), 
-                new Double(2.0), new Double(3.0), new Double(4.0),
-                new Double(5.0), new Double(6.0), new Double(7.0), 
-                new Double(8.0), new ArrayList());
-        BoxAndWhiskerItem i2 = new BoxAndWhiskerItem(new Double(1.0), 
-                new Double(2.0), new Double(3.0), new Double(4.0),
-                new Double(5.0), new Double(6.0), new Double(7.0), 
-                new Double(8.0), new ArrayList());
+        BoxAndWhiskerItem i1 = new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0,
+                5.0, 6.0, 7.0, 8.0, new ArrayList<>());
+        BoxAndWhiskerItem i2 = new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0,
+                5.0, 6.0, 7.0, 8.0, new ArrayList<>());
         assertTrue(i1.equals(i2));
         assertTrue(i2.equals(i1));
     }
@@ -76,10 +68,8 @@ public class BoxAndWhiskerItemTest {
      */
     @Test
     public void testSerialization() {
-        BoxAndWhiskerItem i1 = new BoxAndWhiskerItem(new Double(1.0), 
-                new Double(2.0), new Double(3.0), new Double(4.0),
-                new Double(5.0), new Double(6.0), new Double(7.0), 
-                new Double(8.0), new ArrayList());
+        BoxAndWhiskerItem i1 = new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0,
+                5.0, 6.0, 7.0, 8.0, new ArrayList<>());
         BoxAndWhiskerItem i2 = (BoxAndWhiskerItem) TestUtils.serialised(i1);
         assertEquals(i1, i2);
     }

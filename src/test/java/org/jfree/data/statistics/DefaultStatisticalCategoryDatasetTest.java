@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,18 +27,10 @@
  * ------------------------------------------
  * DefaultStatisticalCategoryDatasetTest.java
  * ------------------------------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 05-Feb-2005 : Version 1 (DG);
- * 03-Aug-2006 : Added testGetRangeBounds() method (DG);
- * 28-Sep-2007 : Enhanced testCloning() method (DG);
- * 02-Oct-2007 : Added new bounds tests (DG);
- * 03-Oct-2007 : Added testRemove() method (DG);
  *
  */
 
@@ -124,8 +116,8 @@ public class DefaultStatisticalCategoryDatasetTest {
                 = new DefaultStatisticalCategoryDataset();
         d1.add(1.1, 2.2, "R1", "C1");
         d1.add(3.3, 4.4, "R1", "C2");
-        d1.add(null, new Double(5.5), "R1", "C3");
-        d1.add(new Double(6.6), null, "R2", "C3");
+        d1.add(null, 5.5, "R1", "C3");
+        d1.add(6.6, null, "R2", "C3");
         DefaultStatisticalCategoryDataset d2 = null;
         try {
             d2 = (DefaultStatisticalCategoryDataset) d1.clone();
@@ -151,8 +143,8 @@ public class DefaultStatisticalCategoryDatasetTest {
             = new DefaultStatisticalCategoryDataset();
         d1.add(1.1, 2.2, "R1", "C1");
         d1.add(3.3, 4.4, "R1", "C2");
-        d1.add(null, new Double(5.5), "R1", "C3");
-        d1.add(new Double(6.6), null, "R2", "C3");
+        d1.add(null, 5.5, "R1", "C3");
+        d1.add(6.6, null, "R2", "C3");
         DefaultStatisticalCategoryDataset d2 = 
                 (DefaultStatisticalCategoryDataset) TestUtils.serialised(d1);
         assertEquals(d1, d2);
@@ -280,6 +272,5 @@ public class DefaultStatisticalCategoryDatasetTest {
         assertEquals(1.0, r.getLowerBound(), EPSILON);
         assertEquals(1.0, r.getUpperBound(), EPSILON);
     }
-
 
 }

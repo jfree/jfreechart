@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * -----------------------------------------
  * DefaultMultiValueCategoryDatasetTest.java
  * -----------------------------------------
- * (C) Copyright 2007-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 28-Sep-2007 : Version 1 (DG);
  *
  */
 
@@ -64,11 +60,11 @@ public class DefaultMultiValueCategoryDatasetTest {
     public void testGetValue() {
         DefaultMultiValueCategoryDataset d
                 = new DefaultMultiValueCategoryDataset();
-        List values = new ArrayList();
-        values.add(new Integer(1));
-        values.add(new Integer(2));
+        List<Number> values = new ArrayList<>();
+        values.add(1);
+        values.add(2);
         d.add(values, "R1", "C1");
-        assertEquals(new Double(1.5), d.getValue("R1", "C1"));
+        assertEquals(1.5, d.getValue("R1", "C1"));
         boolean pass = false;
         try {
             d.getValue("XX", "C1");
@@ -113,7 +109,7 @@ public class DefaultMultiValueCategoryDatasetTest {
         DefaultMultiValueCategoryDataset d
                 = new DefaultMultiValueCategoryDataset();
         assertTrue(d.getRowCount() == 0);
-        List values = new ArrayList();
+        List<Number> values = new ArrayList<>();
         d.add(values, "R1", "C1");
         assertTrue(d.getRowCount() == 1);
 
@@ -133,7 +129,7 @@ public class DefaultMultiValueCategoryDatasetTest {
                 = new DefaultMultiValueCategoryDataset();
         assertTrue(d.getColumnCount() == 0);
 
-        List values = new ArrayList();
+        List<Number> values = new ArrayList<>();
         d.add(values, "R1", "C1");
         assertTrue(d.getColumnCount() == 1);
 
@@ -157,19 +153,19 @@ public class DefaultMultiValueCategoryDatasetTest {
         assertTrue(d1.equals(d2));
         assertTrue(d2.equals(d1));
 
-        List values = new ArrayList();
+        List<Number> values = new ArrayList<>();
         d1.add(values, "R1", "C1");
         assertFalse(d1.equals(d2));
         d2.add(values, "R1", "C1");
         assertTrue(d1.equals(d2));
 
-        values.add(new Integer(99));
+        values.add(99);
         d1.add(values, "R1", "C1");
         assertFalse(d1.equals(d2));
         d2.add(values, "R1", "C1");
         assertTrue(d1.equals(d2));
 
-        values.add(new Integer(99));
+        values.add(99);
         d1.add(values, "R1", "C2");
         assertFalse(d1.equals(d2));
         d2.add(values, "R1", "C2");
@@ -205,7 +201,7 @@ public class DefaultMultiValueCategoryDatasetTest {
         }
         assertTrue(pass);
 
-        List values = new ArrayList();
+        List<Number> values = new ArrayList<>();
         d1.add(values, "R2", "C1");
         assertEquals(values, d1.getValues("R2", "C1"));
 
@@ -220,7 +216,8 @@ public class DefaultMultiValueCategoryDatasetTest {
     }
 
     /**
-     * Confirm that cloning works.
+     * Confirm that clon
+     * @throws java.lang.CloneNotSupportedExceptioning works.
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
@@ -233,8 +230,8 @@ public class DefaultMultiValueCategoryDatasetTest {
         assertTrue(d1.equals(d2));
 
         // try a dataset with some content...
-        List values = new ArrayList();
-        values.add(new Integer(99));
+        List<Integer> values = new ArrayList<>();
+        values.add(99);
         d1.add(values, "R1", "C1");
         d2 = (DefaultMultiValueCategoryDataset) d1.clone();
         assertTrue(d1 != d2);
@@ -242,8 +239,8 @@ public class DefaultMultiValueCategoryDatasetTest {
         assertTrue(d1.equals(d2));
 
         // check that the clone doesn't share the same underlying arrays.
-        List values2 = new ArrayList();
-        values2.add(new Integer(111));
+        List<Integer> values2 = new ArrayList<>();
+        values2.add(111);
         d1.add(values2, "R2", "C2");
         assertFalse(d1.equals(d2));
         d2.add(values2, "R2", "C2");

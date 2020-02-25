@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,30 +27,10 @@
  * -------------------
  * TimeSeriesTest.java
  * -------------------
- * (C) Copyright 2001-2015, by Object Refinery Limited.
+ * (C) Copyright 2001-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 16-Nov-2001 : Version 1 (DG);
- * 17-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 13-Mar-2003 : Added serialization test (DG);
- * 15-Oct-2003 : Added test for setMaximumItemCount method (DG);
- * 23-Aug-2004 : Added test that highlights a bug where the addOrUpdate()
- *               method can lead to more than maximumItemCount items in the
- *               dataset (DG);
- * 24-May-2006 : Added new tests (DG);
- * 31-Oct-2007 : New hashCode() test (DG);
- * 21-Nov-2007 : Added testBug1832432() and testClone2() (DG);
- * 10-Jan-2008 : Added testBug1864222() (DG);
- * 13-Jan-2009 : Added testEquals3() and testRemoveAgedItems3() (DG);
- * 26-May-2009 : Added various tests for min/maxY values (DG);
- * 09-Jun-2009 : Added testAdd_TimeSeriesDataItem (DG);
- * 31-Aug-2009 : Added new test for createCopy() method (DG);
- * 03-Dec-2011 : Added testBug3446965() (DG);
- * 06-Sep-2015 : Added test for findRangeBounds() (DG);
  * 
  */
 
@@ -100,22 +80,22 @@ public class TimeSeriesTest implements SeriesChangeListener {
     @Before
     public void setUp() {
         this.seriesA = new TimeSeries("Series A");
-        this.seriesA.add(new Year(2000), new Integer(102000));
-        this.seriesA.add(new Year(2001), new Integer(102001));
-        this.seriesA.add(new Year(2002), new Integer(102002));
-        this.seriesA.add(new Year(2003), new Integer(102003));
-        this.seriesA.add(new Year(2004), new Integer(102004));
-        this.seriesA.add(new Year(2005), new Integer(102005));
+        this.seriesA.add(new Year(2000), 102000);
+        this.seriesA.add(new Year(2001), 102001);
+        this.seriesA.add(new Year(2002), 102002);
+        this.seriesA.add(new Year(2003), 102003);
+        this.seriesA.add(new Year(2004), 102004);
+        this.seriesA.add(new Year(2005), 102005);
 
         this.seriesB = new TimeSeries("Series B");
-        this.seriesB.add(new Year(2006), new Integer(202006));
-        this.seriesB.add(new Year(2007), new Integer(202007));
-        this.seriesB.add(new Year(2008), new Integer(202008));
+        this.seriesB.add(new Year(2006), 202006);
+        this.seriesB.add(new Year(2007), 202007);
+        this.seriesB.add(new Year(2008), 202008);
 
         this.seriesC = new TimeSeries("Series C");
-        this.seriesC.add(new Year(1999), new Integer(301999));
-        this.seriesC.add(new Year(2000), new Integer(302000));
-        this.seriesC.add(new Year(2002), new Integer(302002));
+        this.seriesC.add(new Year(1999), 301999);
+        this.seriesC.add(new Year(2000), 302000);
+        this.seriesC.add(new Year(2002), 302002);
     }
 
     /**
@@ -131,17 +111,18 @@ public class TimeSeriesTest implements SeriesChangeListener {
 
     /**
      * Check that cloning works.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testClone() throws CloneNotSupportedException {
         TimeSeries series = new TimeSeries("Test Series");
         RegularTimePeriod jan1st2002 = new Day(1, MonthConstants.JANUARY, 2002);
-        series.add(jan1st2002, new Integer(42));
+        series.add(jan1st2002, 42);
 
         TimeSeries clone;
         clone = (TimeSeries) series.clone();
         clone.setKey("Clone Series");
-        clone.update(jan1st2002, new Integer(10));
+        clone.update(jan1st2002, 10);
 
         int seriesValue = series.getValue(jan1st2002).intValue();
         int cloneValue = clone.getValue(jan1st2002).intValue();
@@ -154,6 +135,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
 
     /**
      * Another test of the clone() method.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testClone2() throws CloneNotSupportedException {
@@ -176,7 +158,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testAddValue() {
-        this.seriesA.add(new Year(1999), new Integer(1));
+        this.seriesA.add(new Year(1999), 1);
         int value = this.seriesA.getValue(0).intValue();
         assertEquals(1, value);
     }
@@ -616,20 +598,20 @@ public class TimeSeriesTest implements SeriesChangeListener {
         TimeSeriesDataItem overwritten = ts.addOrUpdate(new Year(2009), 20.09);
         assertNull(overwritten);
         overwritten = ts.addOrUpdate(new Year(2009), 1.0);
-        assertEquals(new Double(20.09), overwritten.getValue());
-        assertEquals(new Double(1.0), ts.getValue(new Year(2009)));
+        assertEquals(20.09, overwritten.getValue());
+        assertEquals(1.0, ts.getValue(new Year(2009)));
 
         // changing the overwritten record shouldn't affect the series
         overwritten.setValue(null);
-        assertEquals(new Double(1.0), ts.getValue(new Year(2009)));
+        assertEquals(1.0, ts.getValue(new Year(2009)));
 
         TimeSeriesDataItem item = new TimeSeriesDataItem(new Year(2010), 20.10);
         overwritten = ts.addOrUpdate(item);
         assertNull(overwritten);
-        assertEquals(new Double(20.10), ts.getValue(new Year(2010)));
+        assertEquals(20.10, ts.getValue(new Year(2010)));
         // changing the item that was added should not change the series
         item.setValue(null);
-        assertEquals(new Double(20.10), ts.getValue(new Year(2010)));
+        assertEquals(20.10, ts.getValue(new Year(2010)));
     }
 
     /**
@@ -652,6 +634,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
 
     /**
      * A test for bug 1832432.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testBug1832432() throws CloneNotSupportedException {
@@ -1096,7 +1079,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
         TimeSeries series = new TimeSeries("S1");
         series.add(item);
         assertTrue(item.equals(series.getDataItem(0)));
-        item.setValue(new Double(99.9));
+        item.setValue(99.9);
         assertFalse(item.equals(series.getDataItem(0)));
     }
     

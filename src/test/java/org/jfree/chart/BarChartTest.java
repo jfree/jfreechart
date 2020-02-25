@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,17 +27,10 @@
  * -----------------
  * BarChartTest.java
  * -----------------
- * (C) Copyright 2002-2016, by Object Refinery Limited.
+ * (C) Copyright 2002-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 11-Jun-2002 : Version 1 (DG);
- * 25-Jun-2002 : Removed redundant code (DG);
- * 17-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 14-Jul-2003 : Renamed BarChartTests.java (DG);
  *
  */
 
@@ -109,10 +102,7 @@ public class BarChartTest {
     public void testReplaceDataset() {
 
         // create a dataset...
-        Number[][] data = new Integer[][]
-            {{new Integer(-30), new Integer(-20)},
-             {new Integer(-10), new Integer(10)},
-             {new Integer(20), new Integer(30)}};
+        Number[][] data = new Integer[][] {{-30, -20}, {-10, 10}, {20, 30}};
 
         CategoryDataset newData = DatasetUtils.createCategoryDataset("S",
                 "C", data);
@@ -168,35 +158,19 @@ public class BarChartTest {
      */
     private static JFreeChart createBarChart() {
 
-        // create a dataset...
-        Number[][] data = new Integer[][]
-            {{new Integer(-3), new Integer(-2)},
-             {new Integer(-1), new Integer(1)},
-             {new Integer(2), new Integer(3)}};
-
+        Number[][] data = new Integer[][] {{-3, -2}, {-1, 1}, {2, 3}};
         CategoryDataset dataset = DatasetUtils.createCategoryDataset("S",
                 "C", data);
-
-        // create the chart...
-        return ChartFactory.createBarChart(
-            "Bar Chart",
-            "Domain", "Range",
-            dataset,
-            PlotOrientation.HORIZONTAL,
-            true,     // include legend
-            true,
-            true
-        );
-
+        return ChartFactory.createBarChart("Bar Chart", "Domain", "Range", 
+                dataset, PlotOrientation.HORIZONTAL, true, true, true);
     }
 
     /**
      * A chart change listener.
-     *
      */
     static class LocalListener implements ChartChangeListener {
 
-        /** A flag. */
+        /** Set to true after the listener is triggered. */
         private boolean flag = false;
 
         /**

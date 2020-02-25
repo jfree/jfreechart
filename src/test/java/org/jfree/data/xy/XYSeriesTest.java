@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,20 +27,10 @@
  * -----------------
  * XYSeriesTest.java
  * -----------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 23-Dec-2003 : Version 1 (DG);
- * 15-Jan-2007 : Added tests for new toArray() method (DG);
- * 30-Jan-2007 : Fixed some code that won't compile with Java 1.4 (DG);
- * 31-Oct-2007 : New hashCode() test (DG);
- * 01-May-2008 : Added testAddOrUpdate3() (DG);
- * 24-Nov-2008 : Added testBug1955483() (DG);
- * 06-Mar-2009 : Added tests for cached bounds values (DG);
  *
  */
 
@@ -117,6 +107,7 @@ public class XYSeriesTest {
 
     /**
      * Confirm that cloning works.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
@@ -130,6 +121,7 @@ public class XYSeriesTest {
 
     /**
      * Another test of the clone() method.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning2() throws CloneNotSupportedException {
@@ -149,6 +141,7 @@ public class XYSeriesTest {
 
     /**
      * Another test of the clone() method.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning3() throws CloneNotSupportedException {
@@ -183,10 +176,10 @@ public class XYSeriesTest {
         s1.add(1.0, 1.0);
         s1.add(2.0, 2.0);
         s1.add(3.0, 3.0);
-        assertEquals(0, s1.indexOf(new Double(1.0)));
-        assertEquals(1, s1.indexOf(new Double(2.0)));
-        assertEquals(2, s1.indexOf(new Double(3.0)));
-        assertEquals(-4, s1.indexOf(new Double(99.9)));
+        assertEquals(0, s1.indexOf(1.0));
+        assertEquals(1, s1.indexOf(2.0));
+        assertEquals(2, s1.indexOf(3.0));
+        assertEquals(-4, s1.indexOf(99.9));
     }
 
     /**
@@ -198,9 +191,9 @@ public class XYSeriesTest {
         s1.add(1.0, 1.0);
         s1.add(3.0, 3.0);
         s1.add(2.0, 2.0);
-        assertEquals(0, s1.indexOf(new Double(1.0)));
-        assertEquals(1, s1.indexOf(new Double(3.0)));
-        assertEquals(2, s1.indexOf(new Double(2.0)));
+        assertEquals(0, s1.indexOf(1.0));
+        assertEquals(1, s1.indexOf(3.0));
+        assertEquals(2, s1.indexOf(2.0));
     }
 
     /**
@@ -213,8 +206,8 @@ public class XYSeriesTest {
         s1.add(1.0, 1.0);
         s1.add(2.0, 2.0);
         s1.add(2.0, 3.0);
-        assertEquals(0, s1.indexOf(new Double(1.0)));
-        assertEquals(1, s1.indexOf(new Double(2.0)));
+        assertEquals(0, s1.indexOf(1.0));
+        assertEquals(1, s1.indexOf(2.0));
     }
 
     /**
@@ -228,11 +221,11 @@ public class XYSeriesTest {
         s1.add(3.0, 3.0);
         assertEquals(3, s1.getItemCount());
 
-        s1.remove(new Double(2.0));
-        assertEquals(new Double(3.0), s1.getX(1));
+        s1.remove(2.0);
+        assertEquals(3.0, s1.getX(1));
 
         s1.remove(0);
-        assertEquals(new Double(3.0), s1.getX(0));
+        assertEquals(3.0, s1.getX(0));
     }
 
     /**
@@ -288,12 +281,12 @@ public class XYSeriesTest {
     @Test
     public void testUpdate() {
         XYSeries series = new XYSeries("S1");
-        series.add(new Integer(1), new Integer(2));
-        assertEquals(new Integer(2), series.getY(0));
-        series.update(new Integer(1), new Integer(3));
-        assertEquals(new Integer(3), series.getY(0));
+        series.add(1, Integer.valueOf(2));
+        assertEquals(2, series.getY(0));
+        series.update(1, 3);
+        assertEquals(3, series.getY(0));
         try {
-            series.update(new Integer(2), new Integer(99));
+            series.update(2, 99);
             assertTrue(false);
         }
         catch (SeriesException e) {
@@ -310,8 +303,8 @@ public class XYSeriesTest {
        series.add(5.0, 55.0);
        series.add(4.0, 44.0);
        series.add(6.0, 66.0);
-       series.update(new Double(4.0), new Double(99.0));
-       assertEquals(new Double(99.0), series.getY(1));
+       series.update(4.0, 99.0);
+       assertEquals(99.0, series.getY(1));
     }
 
     /**
@@ -320,21 +313,21 @@ public class XYSeriesTest {
     @Test
     public void testAddOrUpdate() {
         XYSeries series = new XYSeries("S1", true, false);
-        XYDataItem old = series.addOrUpdate(new Long(1), new Long(2));
+        XYDataItem old = series.addOrUpdate(Long.valueOf(1L), Long.valueOf(2L));
         assertTrue(old == null);
         assertEquals(1, series.getItemCount());
-        assertEquals(new Long(2), series.getY(0));
+        assertEquals(2L, series.getY(0));
 
-        old = series.addOrUpdate(new Long(2), new Long(3));
+        old = series.addOrUpdate(Long.valueOf(2L), Long.valueOf(3L));
         assertTrue(old == null);
         assertEquals(2, series.getItemCount());
-        assertEquals(new Long(3), series.getY(1));
+        assertEquals(3L, series.getY(1));
 
-        old = series.addOrUpdate(new Long(1), new Long(99));
-        assertEquals(new XYDataItem(new Long(1), new Long(2)), old);
+        old = series.addOrUpdate(Long.valueOf(1L), Long.valueOf(99L));
+        assertEquals(new XYDataItem(Long.valueOf(1L), Long.valueOf(2L)), old);
         assertEquals(2, series.getItemCount());
-        assertEquals(new Long(99), series.getY(0));
-        assertEquals(new Long(3), series.getY(1));
+        assertEquals(99L, series.getY(0));
+        assertEquals(3L, series.getY(1));
     }
 
     /**
@@ -349,8 +342,8 @@ public class XYSeriesTest {
         series.add(4.0, 4.4);
         series.add(2.0, 2.2);
         series.add(1.0, 1.1);
-        series.addOrUpdate(new Double(3.0), new Double(33.3));
-        series.addOrUpdate(new Double(2.0), new Double(22.2));
+        series.addOrUpdate(3.0, 33.3);
+        series.addOrUpdate(2.0, 22.2);
         assertEquals(33.3, series.getY(2).doubleValue(), EPSILON);
         assertEquals(22.2, series.getY(4).doubleValue(), EPSILON);
     }
@@ -364,9 +357,9 @@ public class XYSeriesTest {
         series.addOrUpdate(1.0, 1.0);
         series.addOrUpdate(1.0, 2.0);
         series.addOrUpdate(1.0, 3.0);
-        assertEquals(new Double(1.0), series.getY(0));
-        assertEquals(new Double(2.0), series.getY(1));
-        assertEquals(new Double(3.0), series.getY(2));
+        assertEquals(1.0, series.getY(0));
+        assertEquals(2.0, series.getY(1));
+        assertEquals(3.0, series.getY(2));
         assertEquals(3, series.getItemCount());
     }
 
@@ -524,8 +517,8 @@ public class XYSeriesTest {
         XYSeries series = new XYSeries("Series", true, true);
         series.addOrUpdate(1.0, 1.0);
         series.addOrUpdate(1.0, 2.0);
-        assertEquals(new Double(1.0), series.getY(0));
-        assertEquals(new Double(2.0), series.getY(1));
+        assertEquals(1.0, series.getY(0));
+        assertEquals(2.0, series.getY(1));
         assertEquals(2, series.getItemCount());
     }
 
@@ -696,7 +689,7 @@ public class XYSeriesTest {
         assertEquals(1.1, s1.getMinY(), EPSILON);
         assertEquals(3.3, s1.getMaxY(), EPSILON);
 
-        s1.updateByIndex(0, new Double(-5.0));
+        s1.updateByIndex(0, -5.0);
         assertEquals(-5.0, s1.getMinY(), EPSILON);
         assertEquals(3.3, s1.getMaxY(), EPSILON);
 
@@ -724,16 +717,16 @@ public class XYSeriesTest {
         assertTrue(Double.isNaN(s1.getMinY()));
         assertTrue(Double.isNaN(s1.getMaxY()));
 
-        s1.updateByIndex(0, new Double(1.0));
+        s1.updateByIndex(0, 1.0);
         assertEquals(1.0, s1.getMinY(), EPSILON);
         assertEquals(1.0, s1.getMaxY(), EPSILON);
 
-        s1.updateByIndex(0, new Double(2.0));
+        s1.updateByIndex(0, 2.0);
         assertEquals(2.0, s1.getMinY(), EPSILON);
         assertEquals(2.0, s1.getMaxY(), EPSILON);
 
         s1.add(-1.0, -1.0);
-        s1.updateByIndex(0, new Double(0.0));
+        s1.updateByIndex(0, 0.0);
         assertEquals(0.0, s1.getMinY(), EPSILON);
         assertEquals(2.0, s1.getMaxY(), EPSILON);
     }
@@ -748,7 +741,7 @@ public class XYSeriesTest {
         s1.add(2.0, 2.2);
         s1.add(3.0, 3.3);
 
-        s1.updateByIndex(1, new Double(2.05));
+        s1.updateByIndex(1, 2.05);
         assertEquals(1.1, s1.getMinY(), EPSILON);
         assertEquals(3.3, s1.getMaxY(), EPSILON);
     }
@@ -764,11 +757,11 @@ public class XYSeriesTest {
         assertTrue(Double.isNaN(s1.getMinY()));
         assertTrue(Double.isNaN(s1.getMaxY()));
 
-        s1.update(new Double(1.0), new Double(1.0));
+        s1.update(1.0, 1.0);
         assertEquals(1.0, s1.getMinY(), EPSILON);
         assertEquals(1.0, s1.getMaxY(), EPSILON);
 
-        s1.update(new Double(1.0), new Double(2.0));
+        s1.update(1.0, 2.0);
         assertEquals(2.0, s1.getMinY(), EPSILON);
         assertEquals(2.0, s1.getMaxY(), EPSILON);
     }

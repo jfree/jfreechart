@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * ------------------------
  * TimePeriodValueTest.java
  * ------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited.
+ * (C) Copyright 2003-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 30-Jul-2003 : Version 1 (DG);
- * 07-Apr-2008 : Added new tests for min/max-start/middle/end
- *               index updates (DG);
  *
  */
 
@@ -77,22 +71,22 @@ public class TimePeriodValuesTest {
     @Before
     public void setUp() {
         this.seriesA = new TimePeriodValues("Series A");
-        this.seriesA.add(new Year(2000), new Integer(102000));
-        this.seriesA.add(new Year(2001), new Integer(102001));
-        this.seriesA.add(new Year(2002), new Integer(102002));
-        this.seriesA.add(new Year(2003), new Integer(102003));
-        this.seriesA.add(new Year(2004), new Integer(102004));
-        this.seriesA.add(new Year(2005), new Integer(102005));
+        this.seriesA.add(new Year(2000), 102000);
+        this.seriesA.add(new Year(2001), 102001);
+        this.seriesA.add(new Year(2002), 102002);
+        this.seriesA.add(new Year(2003), 102003);
+        this.seriesA.add(new Year(2004), 102004);
+        this.seriesA.add(new Year(2005), 102005);
 
         this.seriesB = new TimePeriodValues("Series B");
-        this.seriesB.add(new Year(2006), new Integer(202006));
-        this.seriesB.add(new Year(2007), new Integer(202007));
-        this.seriesB.add(new Year(2008), new Integer(202008));
+        this.seriesB.add(new Year(2006), 202006);
+        this.seriesB.add(new Year(2007), 202007);
+        this.seriesB.add(new Year(2008), 202008);
 
         this.seriesC = new TimePeriodValues("Series C");
-        this.seriesC.add(new Year(1999), new Integer(301999));
-        this.seriesC.add(new Year(2000), new Integer(302000));
-        this.seriesC.add(new Year(2002), new Integer(302002));
+        this.seriesC.add(new Year(1999), 301999);
+        this.seriesC.add(new Year(2000), 302000);
+        this.seriesC.add(new Year(2002), 302002);
     }
 
     /**
@@ -103,10 +97,10 @@ public class TimePeriodValuesTest {
     public void testClone() throws CloneNotSupportedException {
         TimePeriodValues series = new TimePeriodValues("Test Series");
         RegularTimePeriod jan1st2002 = new Day(1, MonthConstants.JANUARY, 2002);
-        series.add(jan1st2002, new Integer(42));
+        series.add(jan1st2002, 42);
         TimePeriodValues clone = (TimePeriodValues) series.clone();
         clone.setKey("Clone Series");
-        clone.update(0, new Integer(10));
+        clone.update(0, 10);
 
         int seriesValue = series.getValue(0).intValue();
         int cloneValue = clone.getValue(0).intValue();
@@ -123,7 +117,7 @@ public class TimePeriodValuesTest {
     @Test
     public void testAddValue() {
         TimePeriodValues tpvs = new TimePeriodValues("Test");
-        tpvs.add(new Year(1999), new Integer(1));
+        tpvs.add(new Year(1999), 1);
         int value = tpvs.getValue(0).intValue();
         assertEquals(1, value);
     }
