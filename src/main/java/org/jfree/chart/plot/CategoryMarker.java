@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,18 +27,10 @@
  * -------------------
  * CategoryMarker.java
  * -------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited.
+ * (C) Copyright 2005-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Nicolas Brodu;
- *
- * Changes
- * -------
- * 20-May-2005 : Version 1 (DG);
- * 19-Aug-2005 : Implemented equals(), fixed bug in constructor (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 05-Sep-2006 : Added MarkerChangeListener support (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -65,7 +57,7 @@ import org.jfree.chart.util.Args;
 public class CategoryMarker extends Marker implements Cloneable, Serializable {
 
     /** The category key. */
-    private Comparable key;
+    private Comparable<?> key;
 
     /**
      * A hint that the marker should be drawn as a line rather than a region.
@@ -77,8 +69,8 @@ public class CategoryMarker extends Marker implements Cloneable, Serializable {
      *
      * @param key  the category key.
      */
-    public CategoryMarker(Comparable key) {
-        this(key, Color.gray, new BasicStroke(1.0f));
+    public CategoryMarker(Comparable<?> key) {
+        this(key, Color.GRAY, new BasicStroke(1.0f));
     }
 
     /**
@@ -88,7 +80,7 @@ public class CategoryMarker extends Marker implements Cloneable, Serializable {
      * @param paint  the paint ({@code null} not permitted).
      * @param stroke  the stroke ({@code null} not permitted).
      */
-    public CategoryMarker(Comparable key, Paint paint, Stroke stroke) {
+    public CategoryMarker(Comparable<?> key, Paint paint, Stroke stroke) {
         this(key, paint, stroke, paint, stroke, 1.0f);
     }
 
@@ -102,7 +94,7 @@ public class CategoryMarker extends Marker implements Cloneable, Serializable {
      * @param outlineStroke  the outline stroke ({@code null} permitted).
      * @param alpha  the alpha transparency.
      */
-    public CategoryMarker(Comparable key, Paint paint, Stroke stroke,
+    public CategoryMarker(Comparable<?> key, Paint paint, Stroke stroke,
                           Paint outlinePaint, Stroke outlineStroke,
                           float alpha) {
         super(paint, stroke, outlinePaint, outlineStroke, alpha);
@@ -115,7 +107,7 @@ public class CategoryMarker extends Marker implements Cloneable, Serializable {
      *
      * @return The key.
      */
-    public Comparable getKey() {
+    public Comparable<?> getKey() {
         return this.key;
     }
 
@@ -127,7 +119,7 @@ public class CategoryMarker extends Marker implements Cloneable, Serializable {
      *
      * @since 1.0.3
      */
-    public void setKey(Comparable key) {
+    public void setKey(Comparable<?> key) {
         Args.nullNotPermitted(key, "key");
         this.key = key;
         notifyListeners(new MarkerChangeEvent(this));

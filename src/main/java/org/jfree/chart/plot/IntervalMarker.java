@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,19 +27,10 @@
  * -------------------
  * IntervalMarker.java
  * -------------------
- * (C) Copyright 2002-2008, by Object Refinery Limited.
+ * (C) Copyright 2002-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 20-Aug-2002 : Added stroke to constructor in Marker class (DG);
- * 02-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 26-Mar-2003 : Implemented Serializable (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 05-Sep-2006 : Added MarkerChangeEvent notification (DG);
- * 18-Dec-2007 : Added new constructor (DG);
  *
  */
 
@@ -80,7 +71,7 @@ public class IntervalMarker extends Marker implements Cloneable, Serializable {
      * @param end  the end of the interval.
      */
     public IntervalMarker(double start, double end) {
-        this(start, end, Color.gray, new BasicStroke(0.5f), Color.gray,
+        this(start, end, Color.GRAY, new BasicStroke(0.5f), Color.GRAY,
                 new BasicStroke(0.5f), 0.8f);
     }
 
@@ -119,7 +110,6 @@ public class IntervalMarker extends Marker implements Cloneable, Serializable {
         this.endValue = end;
         this.gradientPaintTransformer = null;
         setLabelOffsetType(LengthAdjustmentType.CONTRACT);
-
     }
 
     /**

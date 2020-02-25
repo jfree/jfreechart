@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------
  * PaintMapTest.java
  * -----------------
- * (C) Copyright 2006-2016, by Object Refinery Limited.
+ * (C) Copyright 2006-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -114,10 +114,10 @@ public class PaintMapTest  {
         m2.put("K1", Color.RED);
         assertEquals(m1, m2);
 
-        m1.put("K2", new GradientPaint(1.0f, 2.0f, Color.green, 3.0f, 4.0f,
+        m1.put("K2", new GradientPaint(1.0f, 2.0f, Color.GREEN, 3.0f, 4.0f,
                 Color.YELLOW));
         assertFalse(m1.equals(m2));
-        m2.put("K2", new GradientPaint(1.0f, 2.0f, Color.green, 3.0f, 4.0f,
+        m2.put("K2", new GradientPaint(1.0f, 2.0f, Color.GREEN, 3.0f, 4.0f,
                 Color.YELLOW));
         assertEquals(m1, m2);
 
@@ -129,6 +129,7 @@ public class PaintMapTest  {
 
     /**
      * Some checks for cloning.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
@@ -137,7 +138,7 @@ public class PaintMapTest  {
         assertEquals(m1, m2);
 
         m1.put("K1", Color.RED);
-        m1.put("K2", new GradientPaint(1.0f, 2.0f, Color.green, 3.0f, 4.0f,
+        m1.put("K2", new GradientPaint(1.0f, 2.0f, Color.GREEN, 3.0f, 4.0f,
                 Color.YELLOW));
         m2 = (PaintMap) m1.clone();
         assertEquals(m1, m2);
@@ -160,7 +161,7 @@ public class PaintMapTest  {
     public void testSerialization2() {
         PaintMap m1 = new PaintMap();
         m1.put("K1", Color.RED);
-        m1.put("K2", new GradientPaint(1.0f, 2.0f, Color.green, 3.0f, 4.0f,
+        m1.put("K2", new GradientPaint(1.0f, 2.0f, Color.GREEN, 3.0f, 4.0f,
                 Color.YELLOW));
         PaintMap m2 = (PaintMap) TestUtils.serialised(m1);
         assertEquals(m1, m2);
@@ -175,8 +176,8 @@ public class PaintMapTest  {
     public void testKeysOfDifferentClasses() {
         PaintMap m = new PaintMap();
         m.put("ABC", Color.RED);
-        m.put(new Integer(99), Color.BLUE);
-        assertEquals(Color.BLUE, m.getPaint(new Integer(99)));
+        m.put(99, Color.BLUE);
+        assertEquals(Color.BLUE, m.getPaint(99));
     }
 
 }
