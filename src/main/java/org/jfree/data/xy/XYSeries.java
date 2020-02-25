@@ -874,7 +874,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
         copy.data = new ArrayList<>();
         if (this.data.size() > 0) {
             for (int index = start; index <= end; index++) {
-                XYDataItem item = (XYDataItem) this.data.get(index);
+                XYDataItem item = this.data.get(index);
                 XYDataItem clone = (XYDataItem) item.clone();
                 try {
                     copy.add(clone);
