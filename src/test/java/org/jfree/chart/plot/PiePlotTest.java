@@ -574,11 +574,11 @@ public class PiePlotTest {
     static class NullLegendLabelGenerator implements PieSectionLabelGenerator {
         @Override
         public AttributedString generateAttributedSectionLabel(
-                PieDataset dataset, Comparable key) {
+                PieDataset dataset, Comparable<?> key) {
             return null;
         }
         @Override
-        public String generateSectionLabel(PieDataset dataset, Comparable key) {
+        public String generateSectionLabel(PieDataset dataset, Comparable<?> key) {
             return null;
         }
     }
