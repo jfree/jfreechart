@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * -------------------------------
  * SlidingCategoryDatasetTest.java
  * -------------------------------
- * (C) Copyright 2008-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2008-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 08-May-2008 : Version 1 (DG);
- * 15-Mar-2009 : Added testGetColumnKeys() (DG);
  *
  */
 
@@ -89,6 +84,7 @@ public class SlidingCategoryDatasetTest {
 
     /**
      * Confirm that cloning works.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
@@ -220,8 +216,8 @@ public class SlidingCategoryDatasetTest {
         underlying.addValue(4.0, "R1", "C4");
         SlidingCategoryDataset dataset = new SlidingCategoryDataset(underlying,
                 1, 2);
-        assertEquals(new Double(2.0), dataset.getValue("R1", "C2"));
-        assertEquals(new Double(3.0), dataset.getValue("R1", "C3"));
+        assertEquals(2.0, dataset.getValue("R1", "C2"));
+        assertEquals(3.0, dataset.getValue("R1", "C3"));
         boolean pass = false;
         try {
             dataset.getValue("R1", "C1");

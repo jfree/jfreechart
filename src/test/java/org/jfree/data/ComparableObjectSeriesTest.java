@@ -54,7 +54,7 @@ public class ComparableObjectSeriesTest {
          *
          * @param key  the series key.
          */
-        public MyComparableObjectSeries(Comparable key) {
+        public MyComparableObjectSeries(Comparable<?> key) {
             super(key);
         }
         /**
@@ -64,7 +64,7 @@ public class ComparableObjectSeriesTest {
          * @param autoSort  automatically sort by x-value?
          * @param allowDuplicateXValues  allow duplicate values?
          */
-        public MyComparableObjectSeries(Comparable key, boolean autoSort,
+        public MyComparableObjectSeries(Comparable<?> key, boolean autoSort,
                 boolean allowDuplicateXValues) {
             super(key, autoSort, allowDuplicateXValues);
         }
