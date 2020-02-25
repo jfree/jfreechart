@@ -1097,7 +1097,7 @@ public class DatasetUtilsTest {
         // null dataset throws IllegalArgumentException
         boolean pass = false;
         try {
-            DatasetUtils.iterateToFindRangeBounds(null, new ArrayList(),
+            DatasetUtils.iterateToFindRangeBounds(null, new ArrayList<>(),
                     new Range(0.0, 1.0), true);
         }
         catch (IllegalArgumentException e) {
@@ -1120,7 +1120,7 @@ public class DatasetUtilsTest {
         pass = false;
         try {
             DatasetUtils.iterateToFindRangeBounds(new XYSeriesCollection(),
-                    new ArrayList(), null, true);
+                    new ArrayList<>(), null, true);
         }
         catch (IllegalArgumentException e) {
             pass = true;
@@ -1133,7 +1133,7 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testIterateToFindRangeBounds2_XYDataset() {
-        List visibleSeriesKeys = new ArrayList();
+        List<String> visibleSeriesKeys = new ArrayList<>();
         Range xRange = new Range(0.0, 10.0);
 
         // empty dataset returns null
@@ -1210,7 +1210,7 @@ public class DatasetUtilsTest {
     public void testIterateToFindRangeBounds_BoxAndWhiskerXYDataset() {
         DefaultBoxAndWhiskerXYDataset dataset
                 = new DefaultBoxAndWhiskerXYDataset("Series 1");
-        List visibleSeriesKeys = new ArrayList();
+        List<String> visibleSeriesKeys = new ArrayList<>();
         visibleSeriesKeys.add("Series 1");
         Range xRange = new Range(Double.NEGATIVE_INFINITY,
                 Double.POSITIVE_INFINITY);
@@ -1218,7 +1218,7 @@ public class DatasetUtilsTest {
                 visibleSeriesKeys, xRange, false));
 
         dataset.add(new Date(50L), new BoxAndWhiskerItem(5.0, 4.9, 2.0, 8.0,
-                1.0, 9.0, 0.0, 10.0, new ArrayList()));
+                1.0, 9.0, 0.0, 10.0, new ArrayList<>()));
         assertEquals(new Range(5.0, 5.0),
                 DatasetUtils.iterateToFindRangeBounds(dataset,
                 visibleSeriesKeys, xRange, false));
@@ -1235,7 +1235,7 @@ public class DatasetUtilsTest {
     public void testIterateToFindRangeBounds_StatisticalCategoryDataset() {
         DefaultStatisticalCategoryDataset dataset
                 = new DefaultStatisticalCategoryDataset();
-        List visibleSeriesKeys = new ArrayList();
+        List<String> visibleSeriesKeys = new ArrayList<>();
         assertNull(DatasetUtils.iterateToFindRangeBounds(dataset,
                 visibleSeriesKeys, false));
         dataset.add(1.0, 0.5, "R1", "C1");
@@ -1256,7 +1256,7 @@ public class DatasetUtilsTest {
     public void testIterateToFindRangeBounds_MultiValueCategoryDataset() {
         DefaultMultiValueCategoryDataset dataset
                 = new DefaultMultiValueCategoryDataset();
-        List<String> visibleSeriesKeys = new ArrayList();
+        List<String> visibleSeriesKeys = new ArrayList<>();
         assertNull(DatasetUtils.iterateToFindRangeBounds(dataset,
                 visibleSeriesKeys, true));
         List<Double> values = Arrays.asList(new Double[] {1.0});

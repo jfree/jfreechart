@@ -53,6 +53,7 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.Arrays;
+import java.util.EventListener;
 import java.util.List;
 
 import org.jfree.chart.ChartFactory;
@@ -491,8 +492,9 @@ public class XYPlotTest {
     }
 
     /**
-     * Confirm that basic cloni
-     * @throws java.lang.CloneNotSupportedExceptionng works.
+     * Confirm that basic cloning works.
+     * 
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
@@ -956,7 +958,7 @@ public class XYPlotTest {
         XYPlot plot = new XYPlot();
         Marker m = new ValueMarker(1.0);
         plot.addDomainMarker(m);
-        List listeners = Arrays.asList(m.getListeners(
+        List<EventListener> listeners = Arrays.asList(m.getListeners(
                 MarkerChangeListener.class));
         assertTrue(listeners.contains(plot));
         plot.clearDomainMarkers();
@@ -972,7 +974,7 @@ public class XYPlotTest {
         XYPlot plot = new XYPlot();
         Marker m = new ValueMarker(1.0);
         plot.addRangeMarker(m);
-        List listeners = Arrays.asList(m.getListeners(
+        List<EventListener> listeners = Arrays.asList(m.getListeners(
                 MarkerChangeListener.class));
         assertTrue(listeners.contains(plot));
         plot.clearRangeMarkers();

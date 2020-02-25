@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------------
  * YIntervalDataItemTest.java
  * --------------------------
- * (C) Copyright 2006-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -59,7 +59,7 @@ public class YIntervalDataItemTest {
     @Test
     public void testConstructor1() {
         YIntervalDataItem item1 = new YIntervalDataItem(1.0, 2.0, 3.0, 4.0);
-        assertEquals(new Double(1.0), item1.getX());
+        assertEquals(Double.valueOf(1.0), item1.getX());
         assertEquals(2.0, item1.getYValue(), EPSILON);
         assertEquals(3.0, item1.getYLowValue(), EPSILON);
         assertEquals(4.0, item1.getYHighValue(), EPSILON);
@@ -101,7 +101,8 @@ public class YIntervalDataItemTest {
     }
 
     /**
-     * Some checks for the clone() method.
+     * Some checks for the clone() met
+     * @throws java.lang.CloneNotSupportedExceptionhod.
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {

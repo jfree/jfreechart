@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * -------------------
  * PieChart3DTest.java
  * -------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited.
+ * (C) Copyright 2004-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 21-May-2004 : Version 1 (DG);
  *
  */
 
@@ -66,11 +62,10 @@ public class PieChart3DTest  {
      */
     @Before
     public void setUp() {
-        // create a dataset...
         DefaultPieDataset dataset = new DefaultPieDataset();
-        dataset.setValue("Java", new Double(43.2));
-        dataset.setValue("Visual Basic", new Double(0.0));
-        dataset.setValue("C/C++", new Double(17.5));
+        dataset.setValue("Java", 43.2);
+        dataset.setValue("Visual Basic", 0.0);
+        dataset.setValue("C/C++", 17.5);
         this.pieChart = createPieChart3D(dataset);
     }
 
@@ -105,7 +100,6 @@ public class PieChart3DTest  {
         Graphics2D g2 = image.createGraphics();
         chart.draw(g2, new Rectangle2D.Double(0, 0, 200, 100), null, null);
         g2.dispose();
-        //FIXME we should really assert a value here
     }
 
     /**
