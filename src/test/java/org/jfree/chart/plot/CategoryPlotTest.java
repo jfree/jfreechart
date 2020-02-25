@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,25 +27,10 @@
  * ---------------------
  * CategoryPlotTest.java
  * ---------------------
- * (C) Copyright 2003-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 26-Mar-2003 : Version 1 (DG);
- * 15-Sep-2003 : Added a unit test to reproduce a bug in serialization (now
- *               fixed) (DG);
- * 05-Feb-2007 : Added testAddDomainMarker() and testAddRangeMarker() (DG);
- * 07-Feb-2007 : Added test1654215() (DG);
- * 07-Apr-2008 : Added testRemoveDomainMarker() and
- *               testRemoveRangeMarker() (DG);
- * 23-Apr-2008 : Extended testEquals() and testCloning(), and added
- *               testCloning2() and testCloning3() (DG);
- * 26-Jun-2008 : Updated testEquals() (DG);
- * 21-Jan-2009 : Updated testEquals() for new fields (DG);
- * 10-Jul-2009 : Updated testEquals() for new field (DG);
  *
  */
 
@@ -68,6 +53,7 @@ import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.Arrays;
+import java.util.EventListener;
 import java.util.List;
 
 import org.jfree.chart.ChartFactory;
@@ -647,7 +633,7 @@ public class CategoryPlotTest {
         LegendItemCollection c1 = new LegendItemCollection();
         CategoryPlot p1 = new CategoryPlot();
         p1.setFixedLegendItems(c1);
-        CategoryPlot p2 = null;
+        CategoryPlot p2;
         try {
             p2 = (CategoryPlot) p1.clone();
         }
@@ -859,7 +845,7 @@ public class CategoryPlotTest {
         CategoryPlot plot = new CategoryPlot();
         CategoryMarker m = new CategoryMarker("C1");
         plot.addDomainMarker(m);
-        List listeners = Arrays.asList(m.getListeners(
+        List<EventListener> listeners = Arrays.asList(m.getListeners(
                 MarkerChangeListener.class));
         assertTrue(listeners.contains(plot));
         plot.clearDomainMarkers();
@@ -875,7 +861,7 @@ public class CategoryPlotTest {
         CategoryPlot plot = new CategoryPlot();
         Marker m = new ValueMarker(1.0);
         plot.addRangeMarker(m);
-        List listeners = Arrays.asList(m.getListeners(
+        List<EventListener> listeners = Arrays.asList(m.getListeners(
                 MarkerChangeListener.class));
         assertTrue(listeners.contains(plot));
         plot.clearRangeMarkers();
@@ -1007,13 +993,11 @@ public class CategoryPlotTest {
         plot.mapDatasetToDomainAxis(0, 1);
         assertEquals(xAxis2, plot.getDomainAxisForDataset(0));
 
-        List axisIndices = Arrays.asList(new Integer[] {new Integer(0),
-                new Integer(1)});
+        List<Integer> axisIndices = Arrays.asList(new Integer[] {0, 1});
         plot.mapDatasetToDomainAxes(0, axisIndices);
         assertEquals(xAxis, plot.getDomainAxisForDataset(0));
 
-        axisIndices = Arrays.asList(new Integer[] {new Integer(1),
-                new Integer(2)});
+        axisIndices = Arrays.asList(new Integer[] {1, 2});
         plot.mapDatasetToDomainAxes(0, axisIndices);
         assertEquals(xAxis2, plot.getDomainAxisForDataset(0));
     }
@@ -1049,13 +1033,11 @@ public class CategoryPlotTest {
         plot.mapDatasetToRangeAxis(0, 1);
         assertEquals(yAxis2, plot.getRangeAxisForDataset(0));
 
-        List axisIndices = Arrays.asList(new Integer[] {new Integer(0),
-                new Integer(1)});
+        List<Integer> axisIndices = Arrays.asList(new Integer[] {0, 1});
         plot.mapDatasetToRangeAxes(0, axisIndices);
         assertEquals(yAxis, plot.getRangeAxisForDataset(0));
 
-        axisIndices = Arrays.asList(new Integer[] {new Integer(1),
-                new Integer(2)});
+        axisIndices = Arrays.asList(new Integer[] {1, 2});
         plot.mapDatasetToRangeAxes(0, axisIndices);
         assertEquals(yAxis2, plot.getRangeAxisForDataset(0));
     }

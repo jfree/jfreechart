@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,17 +27,10 @@
  * ------------------------
  * ScatterRendererTest.java
  * ------------------------
- * (C) Copyright 2007-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 08-Oct-2007 : Version 1 (DG);
- * 11-Oct-2007 : Renamed ScatterRenderer (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG);
- * 16-May-2009 : Added testFindRangeBounds() (DG);
  *
  */
 
@@ -119,6 +112,7 @@ public class ScatterRendererTest {
 
     /**
      * Confirm that cloning works.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
@@ -202,26 +196,24 @@ public class ScatterRendererTest {
                 = new DefaultMultiValueCategoryDataset();
         assertNull(r.findRangeBounds(dataset));
 
-        List values = Arrays.asList(new Double[] {new Double(1.0)});
+        List<Number> values = Arrays.asList(new Double[] {1.0});
         dataset.add(values, "R1", "C1");
         assertEquals(new Range(1.0, 1.0), r.findRangeBounds(dataset));
 
-        values = Arrays.asList(new Double[] {new Double(2.0), new Double(2.2)});
+        values = Arrays.asList(new Double[] {2.0, 2.2});
         dataset.add(values, "R1", "C2");
         assertEquals(new Range(1.0, 2.2), r.findRangeBounds(dataset));
 
-        values = Arrays.asList(new Double[] {new Double(-3.0),
-                new Double(-3.2)});
+        values = Arrays.asList(new Double[] {-3.0, -3.2});
         dataset.add(values, "R1", "C3");
         assertEquals(new Range(-3.2, 2.2), r.findRangeBounds(dataset));
 
-        values = Arrays.asList(new Double[] {new Double(6.0)});
+        values = Arrays.asList(new Double[] {6.0});
         dataset.add(values, "R2", "C1");
         assertEquals(new Range(-3.2, 6.0), r.findRangeBounds(dataset));
 
         r.setSeriesVisible(1, Boolean.FALSE);
         assertEquals(new Range(-3.2, 2.2), r.findRangeBounds(dataset));
     }
-
 
 }

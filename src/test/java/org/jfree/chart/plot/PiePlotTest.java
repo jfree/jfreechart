@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,21 +27,10 @@
  * ----------------
  * PiePlotTest.java
  * ----------------
- * (C) Copyright 2003-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 18-Mar-2003 : Version 1 (DG);
- * 10-May-2005 : Strengthened equals() test (DG);
- * 27-Sep-2006 : Added tests for the getBaseSectionPaint() method (DG);
- * 23-Nov-2006 : Additional equals() and clone() tests (DG);
- * 17-Apr-2007 : Added check for label generator that returns a null label (DG);
- * 31-Mar-2008 : Updated testEquals() (DG);
- * 10-Jul-2009 : Updated testEquals() (DG);
- * 07-Apr-2014 : Add cloning tests (DG);
  *
  */
 
@@ -413,6 +402,7 @@ public class PiePlotTest {
 
     /**
      * Some basic checks for the clone() method.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
@@ -425,6 +415,7 @@ public class PiePlotTest {
 
     /**
      * Check cloning of the urlGenerator field.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning_URLGenerator() throws CloneNotSupportedException {
@@ -442,6 +433,7 @@ public class PiePlotTest {
 
     /**
      * Check cloning of the legendItemShape field.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning_LegendItemShape() throws CloneNotSupportedException {
@@ -460,6 +452,7 @@ public class PiePlotTest {
 
     /**
      * Check cloning of the legendLabelGenerator field.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning_LegendLabelGenerator() throws CloneNotSupportedException {
@@ -479,6 +472,7 @@ public class PiePlotTest {
 
     /**
      * Check cloning of the legendLabelToolTipGenerator field.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning_LegendLabelToolTipGenerator() throws CloneNotSupportedException {
@@ -498,6 +492,7 @@ public class PiePlotTest {
 
     /**
      * Check cloning of the legendLabelURLGenerator field.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning_LegendLabelURLGenerator() throws CloneNotSupportedException {
@@ -600,7 +595,7 @@ public class PiePlotTest {
                 false, false);
         PiePlot plot = (PiePlot) chart.getPlot();
         plot.setLegendLabelGenerator(new NullLegendLabelGenerator());
-        boolean success = false;
+        boolean success;
         try {
             BufferedImage image = new BufferedImage(200 , 100,
                     BufferedImage.TYPE_INT_RGB);
