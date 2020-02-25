@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * CombinedDomainXYPlot.java
  * -------------------------
- * (C) Copyright 2001-2016, by Bill Kelemen and Contributors.
+ * (C) Copyright 2001-2020, by Bill Kelemen and Contributors.
  *
  * Original Author:  Bill Kelemen;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -37,66 +37,6 @@
  *                   Nicolas Brodu;
  *                   Petr Kubanek (bug 1606205);
  *                   Vladimir Shirokov (bug 986);
- *
- * Changes:
- * --------
- * 06-Dec-2001 : Version 1 (BK);
- * 12-Dec-2001 : Removed unnecessary 'throws' clause from constructor (DG);
- * 18-Dec-2001 : Added plotArea attribute and get/set methods (BK);
- * 22-Dec-2001 : Fixed bug in chartChanged with multiple combinations of
- *               CombinedPlots (BK);
- * 08-Jan-2002 : Moved to new package com.jrefinery.chart.combination (DG);
- * 25-Feb-2002 : Updated import statements (DG);
- * 28-Feb-2002 : Readded "this.plotArea = plotArea" that was deleted from
- *               draw() method (BK);
- * 26-Mar-2002 : Added an empty zoom method (this method needs to be written so
- *               that combined plots will support zooming (DG);
- * 29-Mar-2002 : Changed the method createCombinedAxis adding the creation of
- *               OverlaidSymbolicAxis and CombinedSymbolicAxis(AB);
- * 23-Apr-2002 : Renamed CombinedPlot-->MultiXYPlot, and simplified the
- *               structure (DG);
- * 23-May-2002 : Renamed (again) MultiXYPlot-->CombinedXYPlot (DG);
- * 19-Jun-2002 : Added get/setGap() methods suggested by David Basten (DG);
- * 25-Jun-2002 : Removed redundant imports (DG);
- * 16-Jul-2002 : Draws shared axis after subplots (to fix missing gridlines),
- *               added overrides of 'setSeriesPaint()' and 'setXYItemRenderer()'
- *               that pass changes down to subplots (KF);
- * 09-Oct-2002 : Added add(XYPlot) method (DG);
- * 26-Mar-2003 : Implemented Serializable (DG);
- * 16-May-2003 : Renamed CombinedXYPlot --> CombinedDomainXYPlot (DG);
- * 04-Aug-2003 : Removed leftover code that was causing domain axis drawing
- *               problem (DG);
- * 08-Aug-2003 : Adjusted totalWeight in remove() method (DG);
- * 21-Aug-2003 : Implemented Cloneable (DG);
- * 11-Sep-2003 : Fix cloning support (subplots) (NB);
- * 15-Sep-2003 : Fixed error in cloning (DG);
- * 16-Sep-2003 : Changed ChartRenderingInfo --> PlotRenderingInfo (DG);
- * 17-Sep-2003 : Updated handling of 'clicks' (DG);
- * 12-Nov-2004 : Implemented the new Zoomable interface (DG);
- * 25-Nov-2004 : Small update to clone() implementation (DG);
- * 21-Feb-2005 : The getLegendItems() method now returns the fixed legend
- *               items if set (DG);
- * 05-May-2005 : Removed unused draw() method (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 23-Aug-2006 : Override setFixedRangeAxisSpace() to update subplots (DG);
- * 06-Feb-2007 : Fixed bug 1606205, draw shared axis after subplots (DG);
- * 23-Mar-2007 : Reverted previous patch (bug fix 1606205) (DG);
- * 17-Apr-2007 : Added null argument checks to findSubplot() (DG);
- * 27-Nov-2007 : Modified setFixedRangeAxisSpaceForSubplots() so as not to
- *               trigger change event in subplots (DG);
- * 28-Jan-2008 : Reset fixed range axis space in subplots for each call to
- *               draw() (DG);
- * 27-Mar-2008 : Add documentation for getDataRange() method (DG);
- * 31-Mar-2008 : Updated getSubplots() to return EMPTY_LIST for null
- *               subplots, as suggested by Richard West (DG);
- * 28-Apr-2008 : Fixed zooming problem (see bug 1950037) (DG);
- * 11-Aug-2008 : Don't store totalWeight of subplots, calculate it as
- *               required (DG);
- * 21-Dec-2011 : Apply patch 3447161 by Ulrich Voigt and Martin Hoeller (MH);
- * 21-Jul-2014 : Override isRangePannable() and setRangePannable() - motivated 
- *               by patch #304 by Ulrich Voigt (DG);
- * 31-Aug-2014 : Fix range axis bounds (bug 986, patch by Vladimir 
- *               Shirokov) (DG);
  */
 
 package org.jfree.chart.plot;
@@ -104,6 +44,7 @@ package org.jfree.chart.plot;
 import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -164,7 +105,7 @@ public class CombinedDomainXYPlot extends XYPlot
               domainAxis,
               null,        // no range axis
               null);       // no renderer
-        this.subplots = new java.util.ArrayList<XYPlot>();
+        this.subplots = new ArrayList<>();
     }
 
     /**
@@ -367,7 +308,7 @@ public class CombinedDomainXYPlot extends XYPlot
      *
      * @return An unmodifiable list of subplots.
      */
-    public List getSubplots() {
+    public List<XYPlot> getSubplots() {
         return Collections.unmodifiableList(this.subplots);
     }
 

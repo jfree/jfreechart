@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,21 +27,16 @@
  * -----------------------------------
  * CustomXYItemLabelGeneratorTest.java
  * -----------------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 23-Mar-2003 : Version 1 (DG);
- * 13-Aug-2003 : Added cloning tests (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG);
  *
  */
 
 package org.jfree.chart.labels;
 
+import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -59,6 +54,7 @@ public class CustomXYItemLabelGeneratorTest {
 
     /**
      * Confirm that cloning works.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
@@ -83,12 +79,12 @@ public class CustomXYItemLabelGeneratorTest {
      */
     @Test
     public void testSerialization() {
-        List t1 = new java.util.ArrayList();
+        List<String> t1 = new ArrayList<>();
         t1.add("Tooltip A1");
         t1.add("Tooltip A2");
         t1.add("Tooltip A3");
 
-        List t2 = new java.util.ArrayList();
+        List<String> t2 = new ArrayList<>();
         t2.add("Tooltip B1");
         t2.add("Tooltip B2");
         t2.add("Tooltip B3");

@@ -115,7 +115,7 @@ public class KeyToGroupMap implements Cloneable, PublicCloneable, Serializable {
     public List<Comparable<?>> getGroups() {
         List<Comparable<?>> result = new ArrayList<>();
         result.add(this.defaultGroup);
-        for (Comparable group : this.groups) {
+        for (Comparable<?> group : this.groups) {
             if (!result.contains(group)) {
                 result.add(group);
             }
@@ -202,7 +202,7 @@ public class KeyToGroupMap implements Cloneable, PublicCloneable, Serializable {
      *
      * @return The key count.
      */
-    public int getKeyCount(Comparable group) {
+    public int getKeyCount(Comparable<?> group) {
         Args.nullNotPermitted(group, "group");
         int result = 0;
         for (Comparable<?> g : this.keyToGroupMap.values()) {
@@ -276,7 +276,7 @@ public class KeyToGroupMap implements Cloneable, PublicCloneable, Serializable {
         if (object == null) {
             return null;
         }
-        Class c = object.getClass();
+        Class<?> c = object.getClass();
         Object result = null;
         try {
             Method m = c.getMethod("clone", (Class[]) null);

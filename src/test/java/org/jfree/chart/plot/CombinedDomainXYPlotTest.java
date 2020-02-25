@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * -----------------------------
  * CombinedDomainXYPlotTest.java
  * -----------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 21-Aug-2003 : Version 1 (DG);
- * 03-Jan-2008 : Added testNotification() (DG);
  *
  */
 
@@ -48,6 +43,7 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.jfree.chart.JFreeChart;
@@ -70,7 +66,7 @@ import org.junit.Test;
 public class CombinedDomainXYPlotTest implements ChartChangeListener {
 
     /** A list of the events received. */
-    private List events = new java.util.ArrayList();
+    private List<ChartChangeEvent> events = new ArrayList<>();
 
     /**
      * Receives a chart change event.
@@ -103,7 +99,7 @@ public class CombinedDomainXYPlotTest implements ChartChangeListener {
         plot.add(plot2);
         // remove plot2, but plot1 is removed instead
         plot.remove(plot2);
-        List plots = plot.getSubplots();
+        List<XYPlot> plots = plot.getSubplots();
         assertTrue(plots.get(0) == plot1);
     }
 
@@ -120,6 +116,7 @@ public class CombinedDomainXYPlotTest implements ChartChangeListener {
 
     /**
      * Confirm that cloning works.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {

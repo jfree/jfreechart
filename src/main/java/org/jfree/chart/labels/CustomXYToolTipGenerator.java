@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -24,29 +24,20 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * -------------------------------
- * CustomXYItemLabelGenerator.java
- * -------------------------------
- * (C) Copyright 2002-2008, by Richard Atkinson and Contributors.
+ * -----------------------------
+ * CustomXYToolTipGenerator.java
+ * -----------------------------
+ * (C) Copyright 2002-2020, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes:
- * --------
- * 05-Aug-2002 : Version 1, contributed by Richard Atkinson (RA);
- * 26-Sep-2002 : Fixed errors reported by Checkstyle (DG);
- * 21-Mar-2003 : Implemented Serializable (DG);
- * 13-Aug-2003 : Implemented Cloneable (DG);
- * 17-Nov-2003 : Implemented PublicCloneable (DG);
- * 25-Feb-2004 : Renamed XYToolTipGenerator --> XYItemLabelGenerator (DG);
- * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
  *
  */
 
 package org.jfree.chart.labels;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import org.jfree.chart.util.PublicCloneable;
 
@@ -63,7 +54,7 @@ public class CustomXYToolTipGenerator implements XYToolTipGenerator,
     private static final long serialVersionUID = 8636030004670141362L;
 
     /** Storage for the tooltip lists. */
-    private List toolTipSeries = new java.util.ArrayList();
+    private List<List<String>> toolTipSeries = new ArrayList<>();
 
     /**
      * Default constructor.
@@ -91,7 +82,7 @@ public class CustomXYToolTipGenerator implements XYToolTipGenerator,
     public int getToolTipCount(int list) {
 
         int result = 0;
-        List tooltips = (List) this.toolTipSeries.get(list);
+        List<String> tooltips = this.toolTipSeries.get(list);
         if (tooltips != null) {
             result = tooltips.size();
         }
@@ -104,21 +95,18 @@ public class CustomXYToolTipGenerator implements XYToolTipGenerator,
      * @param series  the series index.
      * @param item  the item index.
      *
-     * @return The tool tip text.
+     * @return The tool tip text (possibly {@code null}).
      */
     public String getToolTipText(int series, int item) {
-
         String result = null;
-
         if (series < getListCount()) {
-            List tooltips = (List) this.toolTipSeries.get(series);
+            List<String> tooltips = this.toolTipSeries.get(series);
             if (tooltips != null) {
                 if (item < tooltips.size()) {
-                    result = (String) tooltips.get(item);
+                    result = tooltips.get(item);
                 }
             }
         }
-
         return result;
     }
 
@@ -127,7 +115,7 @@ public class CustomXYToolTipGenerator implements XYToolTipGenerator,
      *
      * @param toolTips  the list of tool tips.
      */
-    public void addToolTipSeries(List toolTips) {
+    public void addToolTipSeries(List<String> toolTips) {
         this.toolTipSeries.add(toolTips);
     }
 
