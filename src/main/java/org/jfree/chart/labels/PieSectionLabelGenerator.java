@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------------
  * PieSectionLabelGenerator.java
  * -----------------------------
- * (C) Copyright 2001-2008, by Object Refinery Limited.
+ * (C) Copyright 2001-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -74,7 +74,7 @@ public interface PieSectionLabelGenerator {
      *
      * @return The label (possibly {@code null}).
      */
-    public String generateSectionLabel(PieDataset dataset, Comparable key);
+    public String generateSectionLabel(PieDataset dataset, Comparable<?> key);
 
     /**
      * Generates an attributed label for the specified series, or
@@ -104,6 +104,6 @@ public interface PieSectionLabelGenerator {
      * @return An attributed label (possibly {@code null}).
      */
     public AttributedString generateAttributedSectionLabel(PieDataset dataset,
-                                                           Comparable key);
+            Comparable<?> key);
 
 }
