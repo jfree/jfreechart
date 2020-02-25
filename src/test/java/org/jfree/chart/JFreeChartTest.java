@@ -94,9 +94,9 @@ public class JFreeChartTest implements ChartChangeListener {
     @Before
     public void setUp() {
         DefaultPieDataset data = new DefaultPieDataset();
-        data.setValue("Java", new Double(43.2));
-        data.setValue("Visual Basic", new Double(0.0));
-        data.setValue("C/C++", new Double(17.5));
+        data.setValue("Java", 43.2);
+        data.setValue("Visual Basic", 0.0);
+        data.setValue("C/C++", 17.5);
         this.pieChart = ChartFactory.createPieChart("Pie Chart", data);
     }
 
@@ -413,7 +413,7 @@ public class JFreeChartTest implements ChartChangeListener {
     public void testGetSubtitles() {
         DefaultPieDataset dataset = new DefaultPieDataset();
         JFreeChart chart = ChartFactory.createPieChart("title", dataset);
-        List subtitles = chart.getSubtitles();
+        List<Title> subtitles = chart.getSubtitles();
 
         assertEquals(1, chart.getSubtitleCount());
 
