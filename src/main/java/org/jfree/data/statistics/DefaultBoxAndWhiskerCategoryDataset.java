@@ -125,7 +125,7 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
      *
      * @see #add(BoxAndWhiskerItem, Comparable, Comparable)
      */
-    public void add(List list, Comparable rowKey, Comparable columnKey) {
+    public void add(List<? extends Number> list, Comparable rowKey, Comparable columnKey) {
         BoxAndWhiskerItem item = BoxAndWhiskerCalculator
                 .calculateBoxAndWhiskerStatistics(list);
         add(item, rowKey, columnKey);
