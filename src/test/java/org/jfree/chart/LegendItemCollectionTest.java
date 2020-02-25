@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------------
  * LegendItemCollectionTest.java
  * -----------------------------
- * (C) Copyright 2005-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -73,13 +73,13 @@ public class LegendItemCollectionTest  {
                 new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), true, Color.RED,
                 true, Color.BLUE, new BasicStroke(1.2f), true,
                 new Line2D.Double(1.0, 2.0, 3.0, 4.0),
-                new BasicStroke(2.1f), Color.green);
+                new BasicStroke(2.1f), Color.GREEN);
         LegendItem item2 = new LegendItem("Label", "Description",
                 "ToolTip", "URL", true,
                 new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0),
                 true, Color.RED, true, Color.BLUE, new BasicStroke(1.2f), true,
                 new Line2D.Double(1.0, 2.0, 3.0, 4.0), new BasicStroke(2.1f),
-                Color.green);
+                Color.GREEN);
         c1.add(item1);
         assertFalse(c1.equals(c2));
         c2.add(item2);
