@@ -64,7 +64,7 @@ import org.jfree.data.general.PieDataset;
  * Interface for a label generator for plots that use data from
  * a {@link PieDataset}.
  */
-public interface PieSectionLabelGenerator {
+public interface PieSectionLabelGenerator<K extends Comparable<K>> {
 
     /**
      * Generates a label for a pie section.
@@ -74,7 +74,7 @@ public interface PieSectionLabelGenerator {
      *
      * @return The label (possibly {@code null}).
      */
-    public String generateSectionLabel(PieDataset dataset, Comparable<?> key);
+    public String generateSectionLabel(PieDataset<K> dataset, K key);
 
     /**
      * Generates an attributed label for the specified series, or
@@ -103,7 +103,7 @@ public interface PieSectionLabelGenerator {
      *
      * @return An attributed label (possibly {@code null}).
      */
-    public AttributedString generateAttributedSectionLabel(PieDataset dataset,
-            Comparable<?> key);
+    public AttributedString generateAttributedSectionLabel(PieDataset<K> dataset,
+            K key);
 
 }

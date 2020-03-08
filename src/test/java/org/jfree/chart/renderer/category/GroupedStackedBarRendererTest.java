@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * ----------------------------------
  * GroupedStackedBarRendererTest.java
  * ----------------------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 08-Jul-2004 : Version 1 (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG);
  *
  */
 
@@ -74,11 +69,11 @@ public class GroupedStackedBarRendererTest {
         assertTrue(r2.equals(r1));
 
         // map
-        KeyToGroupMap m1 = new KeyToGroupMap("G1");
+        KeyToGroupMap<String, String> m1 = new KeyToGroupMap<>("G1");
         m1.mapKeyToGroup("S1", "G2");
         r1.setSeriesToGroupMap(m1);
         assertFalse(r1.equals(r2));
-        KeyToGroupMap m2 = new KeyToGroupMap("G1");
+        KeyToGroupMap<String, String> m2 = new KeyToGroupMap<>("G1");
         m2.mapKeyToGroup("S1", "G2");
         r2.setSeriesToGroupMap(m2);
         assertTrue(r1.equals(r2));
@@ -123,7 +118,7 @@ public class GroupedStackedBarRendererTest {
     @Test
     public void testDrawWithNullInfo() {
         try {
-            DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+            DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
             dataset.addValue(1.0, "S1", "C1");
             dataset.addValue(2.0, "S1", "C2");
             dataset.addValue(3.0, "S2", "C1");
@@ -151,7 +146,7 @@ public class GroupedStackedBarRendererTest {
         assertNull(r.findRangeBounds(null));
 
         // an empty dataset should return a null range
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         assertNull(r.findRangeBounds(dataset));
 
         dataset.addValue(1.0, "R1", "C1");
@@ -163,7 +158,7 @@ public class GroupedStackedBarRendererTest {
         dataset.addValue(null, "R1", "C3");
         assertEquals(new Range(-2.0, 1.0), r.findRangeBounds(dataset));
 
-        KeyToGroupMap m = new KeyToGroupMap("G1");
+        KeyToGroupMap<String, String> m = new KeyToGroupMap<>("G1");
         m.mapKeyToGroup("R1", "G1");
         m.mapKeyToGroup("R2", "G1");
         m.mapKeyToGroup("R3", "G2");

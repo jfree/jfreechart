@@ -104,8 +104,8 @@ public class BarChartTest {
         // create a dataset...
         Number[][] data = new Integer[][] {{-30, -20}, {-10, 10}, {20, 30}};
 
-        CategoryDataset newData = DatasetUtils.createCategoryDataset("S",
-                "C", data);
+        CategoryDataset<String, String> newData 
+                = DatasetUtils.createCategoryDataset("S", "C", data);
 
         LocalListener l = new LocalListener();
         this.chart.addChangeListener(l);
@@ -159,8 +159,8 @@ public class BarChartTest {
     private static JFreeChart createBarChart() {
 
         Number[][] data = new Integer[][] {{-3, -2}, {-1, 1}, {2, 3}};
-        CategoryDataset dataset = DatasetUtils.createCategoryDataset("S",
-                "C", data);
+        CategoryDataset<String, String> dataset 
+                = DatasetUtils.createCategoryDataset("S", "C", data);
         return ChartFactory.createBarChart("Bar Chart", "Domain", "Range", 
                 dataset, PlotOrientation.HORIZONTAL, true, true, true);
     }

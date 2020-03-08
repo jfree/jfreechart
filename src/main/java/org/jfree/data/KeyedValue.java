@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * ---------------
  * KeyedValue.java
  * ---------------
- * (C) Copyright 2002-2008, by Object Refinery Limited.
+ * (C) Copyright 2002-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 31-Oct-2002 : Version 1 (DG);
- * 18-Aug-2004 : Moved from org.jfree.data --> org.jfree.data.base (DG);
  *
  */
 
@@ -46,7 +41,7 @@ package org.jfree.data;
  *
  * @see DefaultKeyedValue
  */
-public interface KeyedValue extends Value {
+public interface KeyedValue<K extends Comparable<K>> extends Value {
 
     /**
      * Returns the key associated with the value.  The key returned by this
@@ -54,6 +49,6 @@ public interface KeyedValue extends Value {
      *
      * @return The key (never {@code null}).
      */
-    public Comparable getKey();
+    public K getKey();
 
 }

@@ -53,25 +53,26 @@ import org.jfree.chart.util.PublicCloneable;
 /**
  * A class that maps keys (instances of {@code Comparable}) to groups.
  */
-public class KeyToGroupMap implements Cloneable, PublicCloneable, Serializable {
+public class KeyToGroupMap<K extends Comparable<K>, G extends Comparable<G>> 
+        implements Cloneable, PublicCloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -2228169345475318082L;
 
     /** The default group. */
-    private Comparable<?> defaultGroup;
+    private G defaultGroup;
 
     /** The groups. */
-    private List<Comparable<?>> groups;
+    private List<G> groups;
 
     /** A mapping between keys and groups. */
-    private Map<Comparable<?>, Comparable<?>> keyToGroupMap;
+    private Map<K, G> keyToGroupMap;
 
     /**
      * Creates a new map with a default group named 'Default Group'.
      */
     public KeyToGroupMap() {
-        this("Default Group");
+        this((G) "Default Group");
     }
 
     /**
@@ -79,7 +80,7 @@ public class KeyToGroupMap implements Cloneable, PublicCloneable, Serializable {
      *
      * @param defaultGroup  the default group ({@code null} not permitted).
      */
-    public KeyToGroupMap(Comparable<?> defaultGroup) {
+    public KeyToGroupMap(G defaultGroup) {
         Args.nullNotPermitted(defaultGroup, "defaultGroup");
         this.defaultGroup = defaultGroup;
         this.groups = new ArrayList<>();
@@ -102,10 +103,10 @@ public class KeyToGroupMap implements Cloneable, PublicCloneable, Serializable {
      *
      * @return The groups (never {@code null}).
      */
-    public List<Comparable<?>> getGroups() {
-        List<Comparable<?>> result = new ArrayList<>();
+    public List<G> getGroups() {
+        List<G> result = new ArrayList<>();
         result.add(this.defaultGroup);
-        for (Comparable<?> group : this.groups) {
+        for (G group : this.groups) {
             if (!result.contains(group)) {
                 result.add(group);
             }
@@ -121,7 +122,7 @@ public class KeyToGroupMap implements Cloneable, PublicCloneable, Serializable {
      * @return The group index (or -1 if the group is not represented within
      *         the map).
      */
-    public int getGroupIndex(Comparable<?> group) {
+    public int getGroupIndex(G group) {
         int result = this.groups.indexOf(group);
         if (result < 0) {
             if (this.defaultGroup.equals(group)) {
@@ -142,10 +143,10 @@ public class KeyToGroupMap implements Cloneable, PublicCloneable, Serializable {
      * @return The group (never {@code null}, returns the default group if
      *         there is no mapping for the specified key).
      */
-    public Comparable<?> getGroup(Comparable<?> key) {
+    public G getGroup(K key) {
         Args.nullNotPermitted(key, "key");
-        Comparable<?> result = this.defaultGroup;
-        Comparable<?> group = this.keyToGroupMap.get(key);
+        G result = this.defaultGroup;
+        G group = this.keyToGroupMap.get(key);
         if (group != null) {
             result = group;
         }
@@ -159,9 +160,9 @@ public class KeyToGroupMap implements Cloneable, PublicCloneable, Serializable {
      * @param group  the group ({@code null} permitted, clears any
      *               existing mapping).
      */
-    public void mapKeyToGroup(Comparable<?> key, Comparable<?> group) {
+    public void mapKeyToGroup(K key, G group) {
         Args.nullNotPermitted(key, "key");
-        Comparable<?> currentGroup = getGroup(key);
+        G currentGroup = getGroup(key);
         if (!currentGroup.equals(this.defaultGroup)) {
             if (!currentGroup.equals(group)) {
                 int count = getKeyCount(currentGroup);
@@ -192,10 +193,10 @@ public class KeyToGroupMap implements Cloneable, PublicCloneable, Serializable {
      *
      * @return The key count.
      */
-    public int getKeyCount(Comparable<?> group) {
+    public int getKeyCount(G group) {
         Args.nullNotPermitted(group, "group");
         int result = 0;
-        for (Comparable<?> g : this.keyToGroupMap.values()) {
+        for (G g : this.keyToGroupMap.values()) {
             if (group.equals(g)) {
                 result++;
             }
@@ -218,7 +219,7 @@ public class KeyToGroupMap implements Cloneable, PublicCloneable, Serializable {
         if (!(obj instanceof KeyToGroupMap)) {
             return false;
         }
-        KeyToGroupMap that = (KeyToGroupMap) obj;
+        KeyToGroupMap<K, G> that = (KeyToGroupMap) obj;
         if (!ObjectUtils.equal(this.defaultGroup, that.defaultGroup)) {
             return false;
         }
@@ -246,12 +247,11 @@ public class KeyToGroupMap implements Cloneable, PublicCloneable, Serializable {
      */
     @Override
     public Object clone() throws CloneNotSupportedException {
-        KeyToGroupMap result = (KeyToGroupMap) super.clone();
+        KeyToGroupMap<K, G> result = (KeyToGroupMap) super.clone();
         result.defaultGroup
-            = (Comparable<?>) KeyToGroupMap.clone(this.defaultGroup);
-        result.groups = (List<Comparable<?>>) KeyToGroupMap.clone(this.groups);
-        result.keyToGroupMap = (Map<Comparable<?>, Comparable<?>>) 
-                KeyToGroupMap.clone(this.keyToGroupMap);
+            = (G) KeyToGroupMap.clone(this.defaultGroup);
+        result.groups = (List<G>) KeyToGroupMap.clone(this.groups);
+        result.keyToGroupMap = (Map<K, G>) KeyToGroupMap.clone(this.keyToGroupMap);
         return result;
     }
 

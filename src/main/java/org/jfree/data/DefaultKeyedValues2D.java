@@ -37,8 +37,8 @@
 package org.jfree.data;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
@@ -49,20 +49,20 @@ import org.jfree.chart.util.PublicCloneable;
  * is associated with two keys (a 'row' key and a 'column' key).  The keys
  * should be (a) instances of {@link Comparable} and (b) immutable.
  */
-public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
-        Cloneable, Serializable {
+public class DefaultKeyedValues2D<R extends Comparable<R>, C extends Comparable<C>> 
+        implements KeyedValues2D<R, C>, PublicCloneable, Cloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -5514169970951994748L;
 
     /** The row keys. */
-    private List rowKeys;
+    private List<R> rowKeys;
 
     /** The column keys. */
-    private List columnKeys;
+    private List<C> columnKeys;
 
     /** The row data. */
-    private List rows;
+    private List<DefaultKeyedValues<C>> rows;
 
     /** If the row keys should be sorted by their comparable order. */
     private boolean sortRowKeys;
@@ -80,9 +80,9 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
      * @param sortRowKeys  if the row keys should be sorted.
      */
     public DefaultKeyedValues2D(boolean sortRowKeys) {
-        this.rowKeys = new java.util.ArrayList();
-        this.columnKeys = new java.util.ArrayList();
-        this.rows = new java.util.ArrayList();
+        this.rowKeys = new ArrayList<>();
+        this.columnKeys = new ArrayList<>();
+        this.rows = new ArrayList<>();
         this.sortRowKeys = sortRowKeys;
     }
 
@@ -123,9 +123,9 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
     @Override
     public Number getValue(int row, int column) {
         Number result = null;
-        DefaultKeyedValues rowData = (DefaultKeyedValues) this.rows.get(row);
+        DefaultKeyedValues<C> rowData = this.rows.get(row);
         if (rowData != null) {
-            Comparable columnKey = (Comparable) this.columnKeys.get(column);
+            C columnKey = this.columnKeys.get(column);
             // the row may not have an entry for this key, in which case the
             // return value is null
             int index = rowData.getIndex(columnKey);
@@ -147,8 +147,8 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
      * @see #getColumnKey(int)
      */
     @Override
-    public Comparable getRowKey(int row) {
-        return (Comparable) this.rowKeys.get(row);
+    public R getRowKey(int row) {
+        return this.rowKeys.get(row);
     }
 
     /**
@@ -162,12 +162,11 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
      * @see #getColumnIndex(Comparable)
      */
     @Override
-    public int getRowIndex(Comparable key) {
+    public int getRowIndex(R key) {
         Args.nullNotPermitted(key, "key");
         if (this.sortRowKeys) {
-            return Collections.binarySearch(this.rowKeys, key);
-        }
-        else {
+            return Collections.<R>binarySearch(this.rowKeys, key);
+        } else {
             return this.rowKeys.indexOf(key);
         }
     }
@@ -180,7 +179,7 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
      * @see #getColumnKeys()
      */
     @Override
-    public List getRowKeys() {
+    public List<R> getRowKeys() {
         return Collections.unmodifiableList(this.rowKeys);
     }
 
@@ -196,8 +195,8 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
      * @see #getRowKey(int)
      */
     @Override
-    public Comparable getColumnKey(int column) {
-        return (Comparable) this.columnKeys.get(column);
+    public C getColumnKey(int column) {
+        return this.columnKeys.get(column);
     }
 
     /**
@@ -211,7 +210,7 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
      * @see #getRowIndex(Comparable)
      */
     @Override
-    public int getColumnIndex(Comparable key) {
+    public int getColumnIndex(C key) {
         Args.nullNotPermitted(key, "key");
         return this.columnKeys.indexOf(key);
     }
@@ -224,7 +223,7 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
      * @see #getRowKeys()
      */
     @Override
-    public List getColumnKeys() {
+    public List<C> getColumnKeys() {
         return Collections.unmodifiableList(this.columnKeys);
     }
 
@@ -242,7 +241,7 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
      * @see #removeValue(Comparable, Comparable)
      */
     @Override
-    public Number getValue(Comparable rowKey, Comparable columnKey) {
+    public Number getValue(R rowKey, C columnKey) {
         Args.nullNotPermitted(rowKey, "rowKey");
         Args.nullNotPermitted(columnKey, "columnKey");
 
@@ -257,8 +256,7 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
         // have already checked that the key is valid for the 2D structure
         int row = getRowIndex(rowKey);
         if (row >= 0) {
-            DefaultKeyedValues rowData
-                = (DefaultKeyedValues) this.rows.get(row);
+            DefaultKeyedValues rowData = this.rows.get(row);
             int col = rowData.getIndex(columnKey);
             return (col >= 0 ? rowData.getValue(col) : null);
         }
@@ -278,8 +276,7 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
      * @see #setValue(Number, Comparable, Comparable)
      * @see #removeValue(Comparable, Comparable)
      */
-    public void addValue(Number value, Comparable rowKey,
-                         Comparable columnKey) {
+    public void addValue(Number value, R rowKey, C columnKey) {
         // defer argument checking
         setValue(value, rowKey, columnKey);
     }
@@ -294,14 +291,13 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
      * @see #addValue(Number, Comparable, Comparable)
      * @see #removeValue(Comparable, Comparable)
      */
-    public void setValue(Number value, Comparable rowKey,
-                         Comparable columnKey) {
+    public void setValue(Number value, R rowKey, C columnKey) {
 
         DefaultKeyedValues row;
         int rowIndex = getRowIndex(rowKey);
 
         if (rowIndex >= 0) {
-            row = (DefaultKeyedValues) this.rows.get(rowIndex);
+            row = this.rows.get(rowIndex);
         }
         else {
             row = new DefaultKeyedValues();
@@ -333,13 +329,13 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
      *
      * @see #addValue(Number, Comparable, Comparable)
      */
-    public void removeValue(Comparable rowKey, Comparable columnKey) {
+    public void removeValue(R rowKey, C columnKey) {
         setValue(null, rowKey, columnKey);
 
         // 1. check whether the row is now empty.
         boolean allNull = true;
         int rowIndex = getRowIndex(rowKey);
-        DefaultKeyedValues row = (DefaultKeyedValues) this.rows.get(rowIndex);
+        DefaultKeyedValues row = this.rows.get(rowIndex);
 
         for (int item = 0, itemCount = row.getItemCount(); item < itemCount;
              item++) {
@@ -360,7 +356,7 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
 
         for (int item = 0, itemCount = this.rows.size(); item < itemCount;
              item++) {
-            row = (DefaultKeyedValues) this.rows.get(item);
+            row = this.rows.get(item);
             int columnIndex = row.getIndex(columnKey);
             if (columnIndex >= 0 && row.getValue(columnIndex) != null) {
                 allNull = false;
@@ -371,7 +367,7 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
         if (allNull) {
             for (int item = 0, itemCount = this.rows.size(); item < itemCount;
                  item++) {
-                row = (DefaultKeyedValues) this.rows.get(item);
+                row = this.rows.get(item);
                 int columnIndex = row.getIndex(columnKey);
                 if (columnIndex >= 0) {
                     row.removeValue(columnIndex);
@@ -405,7 +401,7 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
      * @throws UnknownKeyException if {@code rowKey} is not defined in the
      *         table.
      */
-    public void removeRow(Comparable rowKey) {
+    public void removeRow(R rowKey) {
         Args.nullNotPermitted(rowKey, "rowKey");
         int index = getRowIndex(rowKey);
         if (index >= 0) {
@@ -425,7 +421,7 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
      * @see #removeRow(int)
      */
     public void removeColumn(int columnIndex) {
-        Comparable columnKey = getColumnKey(columnIndex);
+        C columnKey = getColumnKey(columnIndex);
         removeColumn(columnKey);
     }
 
@@ -442,14 +438,12 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
      * @see #removeColumn(int)
      * @see #removeRow(Comparable)
      */
-    public void removeColumn(Comparable columnKey) {
+    public void removeColumn(C columnKey) {
         Args.nullNotPermitted(columnKey, "columnKey");
         if (!this.columnKeys.contains(columnKey)) {
             throw new UnknownKeyException("Unknown key: " + columnKey);
         }
-        Iterator iterator = this.rows.iterator();
-        while (iterator.hasNext()) {
-            DefaultKeyedValues rowData = (DefaultKeyedValues) iterator.next();
+        for (DefaultKeyedValues rowData : this.rows) {
             int index = rowData.getIndex(columnKey);
             if (index >= 0) {
                 rowData.removeValue(columnKey);

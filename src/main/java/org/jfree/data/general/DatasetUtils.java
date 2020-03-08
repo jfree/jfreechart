@@ -96,15 +96,12 @@ public final class DatasetUtils {
      *
      * @return The total.
      */
-    public static double calculatePieDatasetTotal(PieDataset dataset) {
+    public static <K extends Comparable<K>> double calculatePieDatasetTotal(PieDataset<K> dataset) {
         Args.nullNotPermitted(dataset, "dataset");
-        List keys = dataset.getKeys();
         double totalValue = 0;
-        Iterator iterator = keys.iterator();
-        while (iterator.hasNext()) {
-            Comparable current = (Comparable) iterator.next();
-            if (current != null) {
-                Number value = dataset.getValue(current);
+        for (K key : dataset.getKeys()) {
+            if (key != null) {
+                Number value = dataset.getValue(key);
                 double v = 0.0;
                 if (value != null) {
                     v = value.doubleValue();
@@ -126,8 +123,8 @@ public final class DatasetUtils {
      *
      * @return A pie dataset.
      */
-    public static PieDataset createPieDatasetForRow(CategoryDataset dataset,
-            Comparable rowKey) {
+    public static <R extends Comparable<R>, C extends Comparable<C>> 
+            PieDataset<C> createPieDatasetForRow(CategoryDataset<R, C> dataset, R rowKey) {
         int row = dataset.getRowIndex(rowKey);
         return createPieDatasetForRow(dataset, row);
     }
@@ -141,12 +138,12 @@ public final class DatasetUtils {
      *
      * @return A pie dataset.
      */
-    public static PieDataset createPieDatasetForRow(CategoryDataset dataset,
-            int row) {
-        DefaultPieDataset result = new DefaultPieDataset();
+    public static <R extends Comparable<R>, C extends Comparable<C>> 
+            PieDataset<C> createPieDatasetForRow(CategoryDataset<R, C> dataset, int row) {
+        DefaultPieDataset<C> result = new DefaultPieDataset<>();
         int columnCount = dataset.getColumnCount();
         for (int current = 0; current < columnCount; current++) {
-            Comparable columnKey = dataset.getColumnKey(current);
+            C columnKey = dataset.getColumnKey(current);
             result.setValue(columnKey, dataset.getValue(row, current));
         }
         return result;
@@ -161,8 +158,8 @@ public final class DatasetUtils {
      *
      * @return A pie dataset.
      */
-    public static PieDataset createPieDatasetForColumn(CategoryDataset dataset,
-            Comparable columnKey) {
+    public static <R extends Comparable<R>, C extends Comparable<C>> 
+            PieDataset<R> createPieDatasetForColumn(CategoryDataset<R, C> dataset, C columnKey) {
         int column = dataset.getColumnIndex(columnKey);
         return createPieDatasetForColumn(dataset, column);
     }
@@ -176,12 +173,12 @@ public final class DatasetUtils {
      *
      * @return A pie dataset.
      */
-    public static PieDataset createPieDatasetForColumn(CategoryDataset dataset,
-            int column) {
-        DefaultPieDataset result = new DefaultPieDataset();
+    public static <R extends Comparable<R>, C extends Comparable<C>> 
+            PieDataset<R> createPieDatasetForColumn(CategoryDataset<R, C> dataset, int column) {
+        DefaultPieDataset<R> result = new DefaultPieDataset<>();
         int rowCount = dataset.getRowCount();
         for (int i = 0; i < rowCount; i++) {
-            Comparable rowKey = dataset.getRowKey(i);
+            R rowKey = dataset.getRowKey(i);
             result.setValue(rowKey, dataset.getValue(i, column));
         }
         return result;
@@ -200,8 +197,8 @@ public final class DatasetUtils {
      *
      * @return The pie dataset with (possibly) aggregated items.
      */
-    public static PieDataset createConsolidatedPieDataset(PieDataset source,
-            Comparable key, double minimumPercent) {
+    public static <K extends Comparable<K>> PieDataset<K> createConsolidatedPieDataset(PieDataset<K> source,
+            K key, double minimumPercent) {
         return DatasetUtils.createConsolidatedPieDataset(source, key,
                 minimumPercent, 2);
     }
@@ -221,18 +218,18 @@ public final class DatasetUtils {
      *
      * @return The pie dataset with (possibly) aggregated items.
      */
-    public static PieDataset createConsolidatedPieDataset(PieDataset source,
-            Comparable key, double minimumPercent, int minItems) {
+    public static <K extends Comparable<K>> PieDataset<K> createConsolidatedPieDataset(
+            PieDataset<K> source, K key, double minimumPercent, int minItems) {
 
-        DefaultPieDataset result = new DefaultPieDataset();
+        DefaultPieDataset<K> result = new DefaultPieDataset<>();
         double total = DatasetUtils.calculatePieDatasetTotal(source);
 
         //  Iterate and find all keys below threshold percentThreshold
-        List keys = source.getKeys();
-        ArrayList otherKeys = new ArrayList();
-        Iterator iterator = keys.iterator();
+        List<K> keys = source.getKeys();
+        List<K> otherKeys = new ArrayList<>();
+        Iterator<K> iterator = keys.iterator();
         while (iterator.hasNext()) {
-            Comparable currentKey = (Comparable) iterator.next();
+            K currentKey = iterator.next();
             Number dataValue = source.getValue(currentKey);
             if (dataValue != null) {
                 double value = dataValue.doubleValue();
@@ -246,7 +243,7 @@ public final class DatasetUtils {
         iterator = keys.iterator();
         double otherValue = 0;
         while (iterator.hasNext()) {
-            Comparable currentKey = (Comparable) iterator.next();
+            K currentKey = iterator.next();
             Number dataValue = source.getValue(currentKey);
             if (dataValue != null) {
                 if (otherKeys.contains(currentKey)
@@ -281,15 +278,15 @@ public final class DatasetUtils {
      *
      * @return The dataset.
      */
-    public static CategoryDataset createCategoryDataset(String rowKeyPrefix,
-            String columnKeyPrefix, double[][] data) {
+    public static CategoryDataset<String, String> createCategoryDataset(
+            String rowKeyPrefix, String columnKeyPrefix, double[][] data) {
 
-        DefaultCategoryDataset result = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> result = new DefaultCategoryDataset<>();
         for (int r = 0; r < data.length; r++) {
             String rowKey = rowKeyPrefix + (r + 1);
             for (int c = 0; c < data[r].length; c++) {
                 String columnKey = columnKeyPrefix + (c + 1);
-                result.addValue(new Double(data[r][c]), rowKey, columnKey);
+                result.addValue(data[r][c], rowKey, columnKey);
             }
         }
         return result;
@@ -309,10 +306,11 @@ public final class DatasetUtils {
      *
      * @return The dataset.
      */
-    public static CategoryDataset createCategoryDataset(String rowKeyPrefix,
-            String columnKeyPrefix, Number[][] data) {
+    public static CategoryDataset<String, String> createCategoryDataset(
+            String rowKeyPrefix, String columnKeyPrefix, Number[][] data) {
 
-        DefaultCategoryDataset result = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> result 
+                = new DefaultCategoryDataset<>();
         for (int r = 0; r < data.length; r++) {
             String rowKey = rowKeyPrefix + (r + 1);
             for (int c = 0; c < data[r].length; c++) {
@@ -337,8 +335,9 @@ public final class DatasetUtils {
      *
      * @return The dataset.
      */
-    public static CategoryDataset createCategoryDataset(Comparable[] rowKeys,
-            Comparable[] columnKeys, double[][] data) {
+    public static <R extends Comparable<R>, C extends Comparable<C>> 
+            CategoryDataset createCategoryDataset(R[] rowKeys, C[] columnKeys, 
+            double[][] data) {
 
         Args.nullNotPermitted(rowKeys, "rowKeys");
         Args.nullNotPermitted(columnKeys, "columnKeys");
@@ -365,12 +364,12 @@ public final class DatasetUtils {
         }
 
         // now do the work...
-        DefaultCategoryDataset result = new DefaultCategoryDataset();
+        DefaultCategoryDataset<R, C> result = new DefaultCategoryDataset<>();
         for (int r = 0; r < data.length; r++) {
-            Comparable rowKey = rowKeys[r];
+            R rowKey = rowKeys[r];
             for (int c = 0; c < data[r].length; c++) {
-                Comparable columnKey = columnKeys[c];
-                result.addValue(new Double(data[r][c]), rowKey, columnKey);
+                C columnKey = columnKeys[c];
+                result.addValue(data[r][c], rowKey, columnKey);
             }
         }
         return result;
@@ -1546,7 +1545,7 @@ public final class DatasetUtils {
         // if the dataset implements DomainInfo, life is easy
         if (dataset instanceof DomainInfo) {
             DomainInfo info = (DomainInfo) dataset;
-            return new Double(info.getDomainLowerBound(true));
+            return info.getDomainLowerBound(true);
         }
         else {
             double minimum = Double.POSITIVE_INFINITY;
@@ -1574,7 +1573,7 @@ public final class DatasetUtils {
                 result = null;
             }
             else {
-                result = new Double(minimum);
+                result = minimum;
             }
         }
 
@@ -1599,7 +1598,7 @@ public final class DatasetUtils {
         // if the dataset implements DomainInfo, life is easy
         if (dataset instanceof DomainInfo) {
             DomainInfo info = (DomainInfo) dataset;
-            return new Double(info.getDomainUpperBound(true));
+            return info.getDomainUpperBound(true);
         }
 
         // hasn't implemented DomainInfo, so iterate...
@@ -2046,7 +2045,7 @@ public final class DatasetUtils {
             maximum = Math.max(maximum, total);
         }
         if (hasValidData) {
-            result = new Double(maximum);
+            result = maximum;
         }
         return result;
     }

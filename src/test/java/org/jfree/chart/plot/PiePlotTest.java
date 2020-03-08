@@ -128,7 +128,6 @@ public class PiePlotTest {
         plot2.setIgnoreNullValues(true);
         assertTrue(plot1.equals(plot2));
 
-
         // sectionPaintMap
         plot1.setSectionPaint("A", new GradientPaint(1.0f, 2.0f, Color.BLUE,
                 3.0f, 4.0f, Color.WHITE));
@@ -317,13 +316,9 @@ public class PiePlotTest {
         assertTrue(plot1.equals(plot2));
 
         // toolTipGenerator
-        plot1.setToolTipGenerator(
-            new StandardPieToolTipGenerator("{2}{1}{0}")
-        );
+        plot1.setToolTipGenerator(new StandardPieToolTipGenerator("{2}{1}{0}"));
         assertFalse(plot1.equals(plot2));
-        plot2.setToolTipGenerator(
-            new StandardPieToolTipGenerator("{2}{1}{0}")
-        );
+        plot2.setToolTipGenerator(new StandardPieToolTipGenerator("{2}{1}{0}"));
         assertTrue(plot1.equals(plot2));
 
         // urlGenerator
@@ -524,7 +519,7 @@ public class PiePlotTest {
      */
     @Test
     public void testGetLegendItems() {
-        DefaultPieDataset dataset = new DefaultPieDataset();
+        DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
         dataset.setValue("Item 1", 1.0);
         dataset.setValue("Item 2", 2.0);
         dataset.setValue("Item 3", 0.0);
@@ -571,14 +566,14 @@ public class PiePlotTest {
         assertTrue(pass);
     }
 
-    static class NullLegendLabelGenerator implements PieSectionLabelGenerator {
+    static class NullLegendLabelGenerator implements PieSectionLabelGenerator<String> {
         @Override
         public AttributedString generateAttributedSectionLabel(
-                PieDataset dataset, Comparable<?> key) {
+                PieDataset<String> dataset, String key) {
             return null;
         }
         @Override
-        public String generateSectionLabel(PieDataset dataset, Comparable<?> key) {
+        public String generateSectionLabel(PieDataset<String> dataset, String key) {
             return null;
         }
     }
@@ -588,7 +583,7 @@ public class PiePlotTest {
      */
     @Test
     public void testDrawWithNullLegendLabels() {
-        DefaultPieDataset dataset = new DefaultPieDataset();
+        DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
         dataset.setValue("L1", 12.0);
         dataset.setValue("L2", 11.0);
         JFreeChart chart = ChartFactory.createPieChart("Test", dataset, true,
@@ -612,7 +607,7 @@ public class PiePlotTest {
     
     @Test
     public void testBug1126() throws CloneNotSupportedException {
-        DefaultPieDataset dataset1 = new DefaultPieDataset();
+        DefaultPieDataset<String> dataset1 = new DefaultPieDataset<>();
         PiePlot plot1 = new PiePlot(dataset1);
         plot1.setSectionPaint("A", Color.RED);
         plot1.setSectionPaint("B", Color.GREEN);
@@ -627,7 +622,7 @@ public class PiePlotTest {
     
     @Test
     public void testBug1126_b() throws CloneNotSupportedException {
-        DefaultPieDataset dataset1 = new DefaultPieDataset();
+        DefaultPieDataset<String> dataset1 = new DefaultPieDataset<>();
         PiePlot plot1 = new PiePlot(dataset1);
         plot1.setSectionOutlinePaint("A", Color.RED);
         plot1.setSectionOutlinePaint("B", Color.GREEN);
@@ -642,7 +637,7 @@ public class PiePlotTest {
     
     @Test
     public void testBug1126_c() throws CloneNotSupportedException {
-        DefaultPieDataset dataset1 = new DefaultPieDataset();
+        DefaultPieDataset<String> dataset1 = new DefaultPieDataset<>();
         PiePlot plot1 = new PiePlot(dataset1);
         plot1.setSectionOutlineStroke("A", new BasicStroke(5.0f));
         plot1.setSectionOutlineStroke("B", new BasicStroke(6.0f));
@@ -657,7 +652,7 @@ public class PiePlotTest {
     
     @Test
     public void testBug1126_d() throws CloneNotSupportedException {
-        DefaultPieDataset dataset1 = new DefaultPieDataset();
+        DefaultPieDataset<String> dataset1 = new DefaultPieDataset<>();
         PiePlot plot1 = new PiePlot(dataset1);
         plot1.setExplodePercent("A", 0.1);
         plot1.setExplodePercent("B", 0.2);
@@ -674,7 +669,7 @@ public class PiePlotTest {
 
     @Test
     public void testBug1126_e() throws CloneNotSupportedException {
-        DefaultPieDataset dataset1 = new DefaultPieDataset();
+        DefaultPieDataset<String> dataset1 = new DefaultPieDataset<>();
         PiePlot plot1 = new PiePlot(dataset1);
         plot1.setLabelGenerator(new StandardPieSectionLabelGenerator());
         PiePlot plot2 = (PiePlot) plot1.clone();

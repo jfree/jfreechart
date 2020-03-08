@@ -147,7 +147,7 @@ public class CombinedDomainXYPlotTest implements ChartChangeListener {
         CombinedDomainXYPlot plot = createPlot();
         JFreeChart chart = new JFreeChart(plot);
         chart.addChangeListener(this);
-        XYPlot subplot1 = (XYPlot) plot.getSubplots().get(0);
+        XYPlot subplot1 = plot.getSubplots().get(0);
         NumberAxis yAxis = (NumberAxis) subplot1.getRangeAxis();
         yAxis.setAutoRangeIncludesZero(!yAxis.getAutoRangeIncludesZero());
         assertEquals(1, this.events.size());

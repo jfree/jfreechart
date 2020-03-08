@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * -------------------------
  * ComparableObjectItem.java
  * -------------------------
- * (C) Copyright 2006-2016, by Object Refinery Limited.
+ * (C) Copyright 2006-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 19-Oct-2006 : New class, based on XYDataItem (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -51,8 +46,8 @@ import org.jfree.chart.util.Args;
  *
  * @since 1.0.3
  */
-public class ComparableObjectItem implements Cloneable, Comparable,
-        Serializable {
+public class ComparableObjectItem implements Comparable<ComparableObjectItem>, 
+        Cloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 2751513470325494890L;
@@ -110,32 +105,14 @@ public class ComparableObjectItem implements Cloneable, Comparable,
      * For the order we consider only the x-value:
      * negative == "less-than", zero == "equal", positive == "greater-than".
      *
-     * @param o1  the object being compared to.
+     * @param other  the object being compared to.
      *
      * @return An integer indicating the order of this data pair object
      *      relative to another object.
      */
     @Override
-    public int compareTo(Object o1) {
-
-        int result;
-
-        // CASE 1 : Comparing to another ComparableObjectItem object
-        // ---------------------------------------------------------
-        if (o1 instanceof ComparableObjectItem) {
-            ComparableObjectItem that = (ComparableObjectItem) o1;
-            return this.x.compareTo(that.x);
-        }
-
-        // CASE 2 : Comparing to a general object
-        // ---------------------------------------------
-        else {
-            // consider these to be ordered after general objects
-            result = 1;
-        }
-
-        return result;
-
+    public int compareTo(ComparableObjectItem other) {
+        return this.x.compareTo(other.getComparable());
     }
 
     /**

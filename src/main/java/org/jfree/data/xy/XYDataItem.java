@@ -155,44 +155,25 @@ public class XYDataItem implements Cloneable, Comparable<XYDataItem>, Serializab
      * For the order we consider only the x-value:
      * negative == "less-than", zero == "equal", positive == "greater-than".
      *
-     * @param o1  the object being compared to.
+     * @param other  the data item being compared to.
      *
      * @return An integer indicating the order of this data pair object
      *      relative to another object.
      */
     @Override
-    public int compareTo(XYDataItem o1) {
-
+    public int compareTo(XYDataItem other) {
         int result;
-
-        // CASE 1 : Comparing to another TimeSeriesDataPair object
-        // -------------------------------------------------------
-        if (o1 instanceof XYDataItem) {
-            XYDataItem dataItem = (XYDataItem) o1;
-            double compare = this.x.doubleValue()
-                             - dataItem.getX().doubleValue();
-            if (compare > 0.0) {
-                result = 1;
-            }
-            else {
-                if (compare < 0.0) {
-                    result = -1;
-                }
-                else {
-                    result = 0;
-                }
-            }
-        }
-
-        // CASE 2 : Comparing to a general object
-        // ---------------------------------------------
-        else {
-            // consider time periods to be ordered after general objects
+        double compare = this.x.doubleValue() - other.getX().doubleValue();
+        if (compare > 0.0) {
             result = 1;
+        } else {
+            if (compare < 0.0) {
+                result = -1;
+            } else {
+                result = 0;
+            }
         }
-
         return result;
-
     }
 
     /**

@@ -101,8 +101,8 @@ public class CategoryPlotTest {
      */
     @Test
     public void testAxisRange() {
-        DefaultCategoryDataset datasetA = new DefaultCategoryDataset();
-        DefaultCategoryDataset datasetB = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> datasetA = new DefaultCategoryDataset<>();
+        DefaultCategoryDataset<String, String> datasetB = new DefaultCategoryDataset<>();
         datasetB.addValue(50.0, "R1", "C1");
         datasetB.addValue(80.0, "R1", "C1");
         CategoryPlot plot = new CategoryPlot(datasetA, new CategoryAxis(null),
@@ -690,7 +690,7 @@ public class CategoryPlotTest {
      */
     @Test
     public void testSerialization() {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         CategoryAxis domainAxis = new CategoryAxis("Domain");
         NumberAxis rangeAxis = new NumberAxis("Range");
         BarRenderer renderer = new BarRenderer();
@@ -706,7 +706,7 @@ public class CategoryPlotTest {
      */
     @Test
     public void testSerialization2() {
-        DefaultCategoryDataset data = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> data = new DefaultCategoryDataset<>();
         CategoryAxis domainAxis = new CategoryAxis("Domain");
         NumberAxis rangeAxis = new NumberAxis("Range");
         BarRenderer renderer = new BarRenderer();
@@ -722,7 +722,7 @@ public class CategoryPlotTest {
      */
     @Test
     public void testSerialization3() {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         JFreeChart chart = ChartFactory.createBarChart(
                 "Test Chart", "Category Axis", "Value Axis", dataset,
                 PlotOrientation.VERTICAL, true, true, false);
@@ -742,7 +742,7 @@ public class CategoryPlotTest {
      */
     @Test
     public void testSerialization4() {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         JFreeChart chart = ChartFactory.createBarChart(
                 "Test Chart", "Category Axis", "Value Axis",
                 dataset, PlotOrientation.VERTICAL, true, true, false);
@@ -768,7 +768,7 @@ public class CategoryPlotTest {
      */
     @Test
     public void testSerialization5() {
-        DefaultCategoryDataset dataset1 = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset1 = new DefaultCategoryDataset<>();
         CategoryAxis domainAxis1 = new CategoryAxis("Domain 1");
         NumberAxis rangeAxis1 = new NumberAxis("Range 1");
         BarRenderer renderer1 = new BarRenderer();
@@ -777,7 +777,7 @@ public class CategoryPlotTest {
         CategoryAxis domainAxis2 = new CategoryAxis("Domain 2");
         NumberAxis rangeAxis2 = new NumberAxis("Range 2");
         BarRenderer renderer2 = new BarRenderer();
-        DefaultCategoryDataset dataset2 = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset2 = new DefaultCategoryDataset<>();
         p1.setDataset(1, dataset2);
         p1.setDomainAxis(1, domainAxis2);
         p1.setRangeAxis(1, rangeAxis2);
@@ -789,12 +789,12 @@ public class CategoryPlotTest {
         // too...
         CategoryAxis domainAxisA = p2.getDomainAxis(0);
         NumberAxis rangeAxisA = (NumberAxis) p2.getRangeAxis(0);
-        DefaultCategoryDataset datasetA
+        DefaultCategoryDataset<String, String> datasetA
                 = (DefaultCategoryDataset) p2.getDataset(0);
         BarRenderer rendererA = (BarRenderer) p2.getRenderer(0);
         CategoryAxis domainAxisB = p2.getDomainAxis(1);
         NumberAxis rangeAxisB = (NumberAxis) p2.getRangeAxis(1);
-        DefaultCategoryDataset datasetB
+        DefaultCategoryDataset<String, String> datasetB
                 = (DefaultCategoryDataset) p2.getDataset(1);
         BarRenderer rendererB  = (BarRenderer) p2.getRenderer(1);
         assertTrue(datasetA.hasListener(p2));
@@ -875,7 +875,7 @@ public class CategoryPlotTest {
      */
     @Test
     public void test1654215() {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         JFreeChart chart = ChartFactory.createLineChart("Title", "X", "Y",
                 dataset, PlotOrientation.VERTICAL, true, false, false);
         CategoryPlot plot = (CategoryPlot) chart.getPlot();
@@ -967,7 +967,7 @@ public class CategoryPlotTest {
      */
     @Test
     public void testGetDomainAxisForDataset() {
-        CategoryDataset dataset = new DefaultCategoryDataset();
+        CategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         CategoryAxis xAxis = new CategoryAxis("X");
         NumberAxis yAxis = new NumberAxis("Y");
         CategoryItemRenderer renderer = new BarRenderer();
@@ -1007,7 +1007,7 @@ public class CategoryPlotTest {
      */
     @Test
     public void testGetRangeAxisForDataset() {
-        CategoryDataset dataset = new DefaultCategoryDataset();
+        CategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         CategoryAxis xAxis = new CategoryAxis("X");
         NumberAxis yAxis = new NumberAxis("Y");
         CategoryItemRenderer renderer = new DefaultCategoryItemRenderer();
@@ -1048,7 +1048,7 @@ public class CategoryPlotTest {
      */
     @Test
     public void testDatasetIndices() {
-        CategoryDataset dataset = new DefaultCategoryDataset();
+        CategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         CategoryAxis xAxis = new CategoryAxis("X");
         NumberAxis yAxis = new NumberAxis("Y");
         CategoryItemRenderer renderer = new BarRenderer();
@@ -1070,7 +1070,7 @@ public class CategoryPlotTest {
     
     @Test
     public void testAxisIndices() {
-        CategoryDataset dataset = new DefaultCategoryDataset();
+        CategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         CategoryAxis xAxis = new CategoryAxis("X");
         NumberAxis yAxis = new NumberAxis("Y");
         CategoryItemRenderer renderer = new BarRenderer();
@@ -1089,7 +1089,7 @@ public class CategoryPlotTest {
     
     @Test 
     public void testAxisLocationIndices() {
-        CategoryDataset dataset = new DefaultCategoryDataset();
+        CategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         CategoryAxis xAxis = new CategoryAxis("X");
         NumberAxis yAxis = new NumberAxis("Y");
         CategoryItemRenderer renderer = new BarRenderer();
@@ -1110,7 +1110,7 @@ public class CategoryPlotTest {
     
     @Test 
     public void testRendererIndices() {
-        CategoryDataset dataset = new DefaultCategoryDataset();
+        CategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         CategoryAxis xAxis = new CategoryAxis("X");
         NumberAxis yAxis = new NumberAxis("Y");
         CategoryItemRenderer renderer = new BarRenderer();
@@ -1129,14 +1129,14 @@ public class CategoryPlotTest {
 
     @Test 
     public void testGetRendererForDataset2() {
-        CategoryDataset dataset = new DefaultCategoryDataset();
+        CategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         CategoryAxis xAxis = new CategoryAxis("X");
         NumberAxis yAxis = new NumberAxis("Y");
         CategoryItemRenderer renderer = new BarRenderer();
         CategoryPlot plot = new CategoryPlot(dataset, xAxis, yAxis, renderer);
 
         // add a second dataset
-        DefaultCategoryDataset dataset2 = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset2 = new DefaultCategoryDataset<>();
         dataset2.setValue(1, "R1", "C1");
         plot.setDataset(99, dataset2);
        
@@ -1152,7 +1152,7 @@ public class CategoryPlotTest {
     
     @Test
     public void testMapDatasetToDomainAxis() {
-        CategoryDataset dataset = new DefaultCategoryDataset();
+        CategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         CategoryAxis xAxis = new CategoryAxis("X");
         NumberAxis yAxis = new NumberAxis("Y");
         CategoryItemRenderer renderer = new BarRenderer();
@@ -1162,7 +1162,7 @@ public class CategoryPlotTest {
         plot.setDomainAxis(11, xAxis2);
         
         // add a second dataset
-        DefaultCategoryDataset dataset2 = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset2 = new DefaultCategoryDataset<>();
         dataset2.setValue(1, "R1", "C1");
         plot.setDataset(99, dataset);    
         
@@ -1175,7 +1175,7 @@ public class CategoryPlotTest {
 
     @Test
     public void testMapDatasetToRangeAxis() {
-        CategoryDataset dataset = new DefaultCategoryDataset();
+        CategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         CategoryAxis xAxis = new CategoryAxis("X");
         NumberAxis yAxis = new NumberAxis("Y");
         CategoryItemRenderer renderer = new BarRenderer();
@@ -1185,7 +1185,7 @@ public class CategoryPlotTest {
         plot.setRangeAxis(22, yAxis2);
         
         // add a second dataset
-        DefaultCategoryDataset dataset2 = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset2 = new DefaultCategoryDataset<>();
         dataset2.setValue(1, "R1", "C1");
         plot.setDataset(99, dataset);    
         
@@ -1198,14 +1198,14 @@ public class CategoryPlotTest {
     
     @Test
     public void testDomainMarkerIndices() {
-        CategoryDataset dataset = new DefaultCategoryDataset();
+        CategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         CategoryAxis xAxis = new CategoryAxis("X");
         NumberAxis yAxis = new NumberAxis("Y");
         CategoryItemRenderer renderer = new BarRenderer();
         CategoryPlot plot = new CategoryPlot(dataset, xAxis, yAxis, renderer);
         
         // add a second dataset, plotted against a second x axis
-        DefaultCategoryDataset dataset2 = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset2 = new DefaultCategoryDataset<>();
         dataset2.setValue(1, "R1", "C1");
         plot.setDataset(99, dataset);    
         CategoryAxis xAxis2 = new CategoryAxis("X2");
@@ -1222,14 +1222,14 @@ public class CategoryPlotTest {
 
     @Test
     public void testRangeMarkerIndices() {
-        CategoryDataset dataset = new DefaultCategoryDataset();
+        CategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         CategoryAxis xAxis = new CategoryAxis("X");
         NumberAxis yAxis = new NumberAxis("Y");
         CategoryItemRenderer renderer = new BarRenderer();
         CategoryPlot plot = new CategoryPlot(dataset, xAxis, yAxis, renderer);
         
         // add a second dataset, plotted against a second axis
-        DefaultCategoryDataset dataset2 = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset2 = new DefaultCategoryDataset<>();
         dataset2.setValue(1, "R1", "C1");
         plot.setDataset(99, dataset);    
         NumberAxis yAxis2 = new NumberAxis("Y2");

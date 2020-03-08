@@ -71,20 +71,20 @@ import org.jfree.data.UnknownKeyException;
 /**
  * A default implementation of the {@link PieDataset} interface.
  */
-public class DefaultPieDataset extends AbstractDataset
-        implements PieDataset, Cloneable, PublicCloneable, Serializable {
+public class DefaultPieDataset<K extends Comparable<K>> extends AbstractDataset
+        implements PieDataset<K>, Cloneable, PublicCloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 2904745139106540618L;
 
     /** Storage for the data. */
-    private DefaultKeyedValues data;
+    private DefaultKeyedValues<K> data;
 
     /**
      * Constructs a new dataset, initially empty.
      */
     public DefaultPieDataset() {
-        this.data = new DefaultKeyedValues();
+        this.data = new DefaultKeyedValues<>();
     }
 
     /**
@@ -93,7 +93,7 @@ public class DefaultPieDataset extends AbstractDataset
      *
      * @param data  the data ({@code null} not permitted).
      */
-    public DefaultPieDataset(KeyedValues data) {
+    public DefaultPieDataset(KeyedValues<K> data) {
         Args.nullNotPermitted(data, "data");
         this.data = new DefaultKeyedValues();
         for (int i = 0; i < data.getItemCount(); i++) {
@@ -118,7 +118,7 @@ public class DefaultPieDataset extends AbstractDataset
      * @return The categories in the dataset.
      */
     @Override
-    public List getKeys() {
+    public List<K> getKeys() {
         return Collections.unmodifiableList(this.data.getKeys());
     }
 
@@ -134,7 +134,7 @@ public class DefaultPieDataset extends AbstractDataset
      *     specified range.
      */
     @Override
-    public Comparable getKey(int item) {
+    public K getKey(int item) {
         return this.data.getKey(item);
     }
 
@@ -149,7 +149,7 @@ public class DefaultPieDataset extends AbstractDataset
      *     {@code null}.
      */
     @Override
-    public int getIndex(Comparable key) {
+    public int getIndex(K key) {
         return this.data.getIndex(key);
     }
 
@@ -179,7 +179,7 @@ public class DefaultPieDataset extends AbstractDataset
      * @throws UnknownKeyException if the key is not recognised.
      */
     @Override
-    public Number getValue(Comparable key) {
+    public Number getValue(K key) {
         Args.nullNotPermitted(key, "key");
         return this.data.getValue(key);
     }
@@ -194,7 +194,7 @@ public class DefaultPieDataset extends AbstractDataset
      * @throws IllegalArgumentException if {@code key} is
      *     {@code null}.
      */
-    public void setValue(Comparable key, Number value) {
+    public void setValue(K key, Number value) {
         this.data.setValue(key, value);
         fireDatasetChanged();
     }
@@ -210,7 +210,7 @@ public class DefaultPieDataset extends AbstractDataset
      *     {@code null}.
      */
     public void setValue(Comparable key, double value) {
-        setValue(key, new Double(value));
+        setValue(key, Double.valueOf(value));
     }
 
     /**
@@ -226,8 +226,8 @@ public class DefaultPieDataset extends AbstractDataset
      *
      * @since 1.0.6
      */
-    public void insertValue(int position, Comparable key, double value) {
-        insertValue(position, key, new Double(value));
+    public void insertValue(int position, K key, double value) {
+        insertValue(position, key, Double.valueOf(value));
     }
 
     /**
@@ -243,7 +243,7 @@ public class DefaultPieDataset extends AbstractDataset
      *
      * @since 1.0.6
      */
-    public void insertValue(int position, Comparable key, Number value) {
+    public void insertValue(int position, K key, Number value) {
         this.data.insertValue(position, key, value);
         fireDatasetChanged();
     }
@@ -257,7 +257,7 @@ public class DefaultPieDataset extends AbstractDataset
      * @throws IllegalArgumentException if {@code key} is
      *     {@code null}.
      */
-    public void remove(Comparable key) {
+    public void remove(K key) {
         this.data.removeValue(key);
         fireDatasetChanged();
     }

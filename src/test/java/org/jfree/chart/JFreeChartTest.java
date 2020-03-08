@@ -93,7 +93,7 @@ public class JFreeChartTest implements ChartChangeListener {
      */
     @Before
     public void setUp() {
-        DefaultPieDataset data = new DefaultPieDataset();
+        DefaultPieDataset<String> data = new DefaultPieDataset<>();
         data.setValue("Java", 43.2);
         data.setValue("Visual Basic", 0.0);
         data.setValue("C/C++", 17.5);
@@ -224,7 +224,7 @@ public class JFreeChartTest implements ChartChangeListener {
      */
     @Test
     public void testGetSubtitle() {
-        DefaultPieDataset dataset = new DefaultPieDataset();
+        DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
         JFreeChart chart = ChartFactory.createPieChart("title", dataset);
         Title t = chart.getSubtitle(0);
         assertTrue(t instanceof LegendTitle);
@@ -260,7 +260,7 @@ public class JFreeChartTest implements ChartChangeListener {
      */
     @Test
     public void testSerialization1() {
-        DefaultPieDataset data = new DefaultPieDataset();
+        DefaultPieDataset<String> data = new DefaultPieDataset<>();
         data.setValue("Type 1", 54.5);
         data.setValue("Type 2", 23.9);
         data.setValue("Type 3", 45.8);
@@ -277,7 +277,7 @@ public class JFreeChartTest implements ChartChangeListener {
      */
     @Test
     public void testSerialization2() {
-        DefaultPieDataset data = new DefaultPieDataset();
+        DefaultPieDataset<String> data = new DefaultPieDataset<>();
         data.setValue("Type 1", 54.5);
         data.setValue("Type 2", 23.9);
         data.setValue("Type 3", 45.8);
@@ -308,7 +308,7 @@ public class JFreeChartTest implements ChartChangeListener {
         String category8 = "Category 8";
 
         // create the dataset...
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
 
         dataset.addValue(1.0, series1, category1);
         dataset.addValue(4.0, series1, category2);
@@ -369,7 +369,7 @@ public class JFreeChartTest implements ChartChangeListener {
      */
     @Test
     public void testAddSubtitle() {
-        DefaultPieDataset dataset = new DefaultPieDataset();
+        DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
         JFreeChart chart = ChartFactory.createPieChart("title", dataset);
 
         TextTitle t0 = new TextTitle("T0");
@@ -411,7 +411,7 @@ public class JFreeChartTest implements ChartChangeListener {
      */
     @Test
     public void testGetSubtitles() {
-        DefaultPieDataset dataset = new DefaultPieDataset();
+        DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
         JFreeChart chart = ChartFactory.createPieChart("title", dataset);
         List<Title> subtitles = chart.getSubtitles();
 
@@ -427,7 +427,7 @@ public class JFreeChartTest implements ChartChangeListener {
      */
     @Test
     public void testLegendEvents() {
-        DefaultPieDataset dataset = new DefaultPieDataset();
+        DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
         JFreeChart chart = ChartFactory.createPieChart("title", dataset);
         chart.addChangeListener(this);
         this.lastChartChangeEvent = null;
@@ -441,7 +441,7 @@ public class JFreeChartTest implements ChartChangeListener {
      */
     @Test
     public void testTitleChangeEvent() {
-        DefaultPieDataset dataset = new DefaultPieDataset();
+        DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
         JFreeChart chart = ChartFactory.createPieChart("title", dataset);
         chart.addChangeListener(this);
         this.lastChartChangeEvent = null;
@@ -474,7 +474,7 @@ public class JFreeChartTest implements ChartChangeListener {
     public void testBug942() throws Exception {
         final String title = "Pie Chart Demo 1\n\n\ntestnew line";
         assertEquals(title, ChartFactory.createPieChart(title, 
-                new DefaultPieDataset()).getTitle().getText());
+                new DefaultPieDataset<String>()).getTitle().getText());
     }
 
     /** The last ChartChangeEvent received. */

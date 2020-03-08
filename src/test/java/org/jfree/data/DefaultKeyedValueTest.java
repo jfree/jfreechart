@@ -53,14 +53,14 @@ public class DefaultKeyedValueTest {
      */
     @Test
     public void testConstructor() {
-        DefaultKeyedValue v = new DefaultKeyedValue("A", 1);
+        DefaultKeyedValue<String> v = new DefaultKeyedValue<>("A", 1);
         assertEquals("A", v.getKey());
         assertEquals(1, v.getValue());
 
         // try null key
         boolean pass = false;
         try {
-            /*v =*/ new DefaultKeyedValue(null, 1);
+            /*v =*/ new DefaultKeyedValue<>(null, 1);
         }
         catch (IllegalArgumentException e) {
             pass = true;
@@ -68,7 +68,7 @@ public class DefaultKeyedValueTest {
         assertTrue(pass);
 
         // try a null value
-        v = new DefaultKeyedValue("A", null);
+        v = new DefaultKeyedValue<>("A", null);
         assertNull(v.getValue());
     }
 
@@ -78,17 +78,17 @@ public class DefaultKeyedValueTest {
     @Test
     public void testEquals() {
 
-        DefaultKeyedValue v1 = new DefaultKeyedValue("Test", 45.5);
-        DefaultKeyedValue v2 = new DefaultKeyedValue("Test", 45.5);
+        DefaultKeyedValue<String> v1 = new DefaultKeyedValue<>("Test", 45.5);
+        DefaultKeyedValue<String> v2 = new DefaultKeyedValue<>("Test", 45.5);
         assertTrue(v1.equals(v2));
         assertTrue(v2.equals(v1));
 
-        v1 = new DefaultKeyedValue("Test 1", 45.5);
-        v2 = new DefaultKeyedValue("Test 2", 45.5);
+        v1 = new DefaultKeyedValue<>("Test 1", 45.5);
+        v2 = new DefaultKeyedValue<>("Test 2", 45.5);
         assertFalse(v1.equals(v2));
 
-        v1 = new DefaultKeyedValue("Test", 45.5);
-        v2 = new DefaultKeyedValue("Test", 45.6);
+        v1 = new DefaultKeyedValue<>("Test", 45.5);
+        v2 = new DefaultKeyedValue<>("Test", 45.6);
         assertFalse(v1.equals(v2));
 
     }
@@ -99,8 +99,8 @@ public class DefaultKeyedValueTest {
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        DefaultKeyedValue v1 = new DefaultKeyedValue("Test", 45.5);
-        DefaultKeyedValue v2 = (DefaultKeyedValue) v1.clone();
+        DefaultKeyedValue<String> v1 = new DefaultKeyedValue<>("Test", 45.5);
+        DefaultKeyedValue<String> v2 = (DefaultKeyedValue) v1.clone();
         assertTrue(v1 != v2);
         assertTrue(v1.getClass() == v2.getClass());
         assertTrue(v1.equals(v2));
@@ -115,8 +115,8 @@ public class DefaultKeyedValueTest {
      */
     @Test
     public void testSerialization() {
-        DefaultKeyedValue v1 = new DefaultKeyedValue("Test", 25.3);
-        DefaultKeyedValue v2 = (DefaultKeyedValue) TestUtils.serialised(v1);
+        DefaultKeyedValue<String> v1 = new DefaultKeyedValue<>("Test", 25.3);
+        DefaultKeyedValue<String> v2 = (DefaultKeyedValue) TestUtils.serialised(v1);
         assertEquals(v1, v2);
     }
 

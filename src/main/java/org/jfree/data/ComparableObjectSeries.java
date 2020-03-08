@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,22 +27,17 @@
  * ---------------------------
  * ComparableObjectSeries.java
  * ---------------------------
- * (C) Copyright 2006-2016, by Object Refinery Limited.
+ * (C) Copyright 2006-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 19-Oct-2006 : New class (DG);
- * 31-Oct-2007 : Implemented faster hashCode() (DG);
- * 27-Nov-2007 : Changed clear() from protected to public (DG);
  *
  */
 
 package org.jfree.data;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import org.jfree.chart.util.ObjectUtils;
@@ -61,7 +56,7 @@ public class ComparableObjectSeries extends Series
         implements Cloneable, Serializable {
 
     /** Storage for the data items in the series. */
-    protected List data;
+    protected List<ComparableObjectItem> data;
 
     /** The maximum number of items for the series. */
     private int maximumItemCount = Integer.MAX_VALUE;
@@ -79,7 +74,7 @@ public class ComparableObjectSeries extends Series
      *
      * @param key  the series key ({@code null} not permitted).
      */
-    public ComparableObjectSeries(Comparable key) {
+    public ComparableObjectSeries(Comparable<?> key) {
         this(key, true, true);
     }
 
@@ -93,10 +88,10 @@ public class ComparableObjectSeries extends Series
      * @param allowDuplicateXValues  a flag that controls whether duplicate
      *                               x-values are allowed.
      */
-    public ComparableObjectSeries(Comparable key, boolean autoSort,
+    public ComparableObjectSeries(Comparable<?> key, boolean autoSort,
             boolean allowDuplicateXValues) {
         super(key);
-        this.data = new java.util.ArrayList();
+        this.data = new ArrayList<>();
         this.autoSort = autoSort;
         this.allowDuplicateXValues = allowDuplicateXValues;
     }
@@ -179,7 +174,7 @@ public class ComparableObjectSeries extends Series
      * @param x  the x-value ({@code null} not permitted).
      * @param y  the y-value ({@code null} permitted).
      */
-    protected void add(Comparable x, Object y) {
+    protected void add(Comparable<?> x, Object y) {
         // argument checking delegated...
         add(x, y, true);
     }
@@ -197,7 +192,7 @@ public class ComparableObjectSeries extends Series
      *                {@link SeriesChangeEvent} is sent to all registered
      *                listeners.
      */
-    protected void add(Comparable x, Object y, boolean notify) {
+    protected void add(Comparable<?> x, Object y, boolean notify) {
         // delegate argument checking to XYDataItem...
         ComparableObjectItem item = new ComparableObjectItem(x, y);
         add(item, notify);
@@ -269,15 +264,14 @@ public class ComparableObjectSeries extends Series
      *
      * @return The index.
      */
-    public int indexOf(Comparable x) {
+    public int indexOf(Comparable<?> x) {
         if (this.autoSort) {
             return Collections.binarySearch(this.data, new ComparableObjectItem(
                     x, null));
         }
         else {
             for (int i = 0; i < this.data.size(); i++) {
-                ComparableObjectItem item = (ComparableObjectItem)
-                        this.data.get(i);
+                ComparableObjectItem item = this.data.get(i);
                 if (item.getComparable().equals(x)) {
                     return i;
                 }
@@ -295,7 +289,7 @@ public class ComparableObjectSeries extends Series
      * @throws SeriesException if there is no existing item with the specified
      *         x-value.
      */
-    protected void update(Comparable x, Object y) {
+    protected void update(Comparable<?> x, Object y) {
         int index = indexOf(x);
         if (index < 0) {
             throw new SeriesException("No observation for x = " + x);
@@ -328,7 +322,7 @@ public class ComparableObjectSeries extends Series
      * @return The data item with the specified index.
      */
     protected ComparableObjectItem getDataItem(int index) {
-        return (ComparableObjectItem) this.data.get(index);
+        return this.data.get(index);
     }
 
     /**
@@ -366,8 +360,7 @@ public class ComparableObjectSeries extends Series
      * @return The item removed.
      */
     protected ComparableObjectItem remove(int index) {
-        ComparableObjectItem result = (ComparableObjectItem) this.data.remove(
-                index);
+        ComparableObjectItem result = this.data.remove(index);
         fireSeriesChanged();
         return result;
     }
@@ -380,7 +373,7 @@ public class ComparableObjectSeries extends Series
 
      * @return The item removed.
      */
-    public ComparableObjectItem remove(Comparable x) {
+    public ComparableObjectItem remove(Comparable<?> x) {
         return remove(indexOf(x));
     }
 

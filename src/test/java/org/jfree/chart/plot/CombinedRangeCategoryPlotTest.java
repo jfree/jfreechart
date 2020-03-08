@@ -47,6 +47,7 @@ import static org.junit.Assert.assertTrue;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.jfree.chart.JFreeChart;
@@ -68,7 +69,7 @@ import org.junit.Test;
 public class CombinedRangeCategoryPlotTest implements ChartChangeListener {
 
     /** A list of the events received. */
-    private List events = new java.util.ArrayList();
+    private List<ChartChangeEvent> events = new ArrayList<>();
 
     /**
      * Receives a chart change event.
@@ -159,9 +160,10 @@ public class CombinedRangeCategoryPlotTest implements ChartChangeListener {
      *
      * @return A dataset.
      */
-    public CategoryDataset createDataset1() {
+    public CategoryDataset<String, String> createDataset1() {
 
-        DefaultCategoryDataset result = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> result 
+                = new DefaultCategoryDataset<>();
 
         // row keys...
         String series1 = "First";
@@ -204,9 +206,9 @@ public class CombinedRangeCategoryPlotTest implements ChartChangeListener {
      *
      * @return A dataset.
      */
-    public CategoryDataset createDataset2() {
+    public CategoryDataset<String, String> createDataset2() {
 
-        DefaultCategoryDataset result = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> result = new DefaultCategoryDataset<>();
 
         // row keys...
         String series1 = "Third";
@@ -250,7 +252,7 @@ public class CombinedRangeCategoryPlotTest implements ChartChangeListener {
      * @return A plot.
      */
     private CombinedRangeCategoryPlot createPlot() {
-        CategoryDataset dataset1 = createDataset1();
+        CategoryDataset<String, String> dataset1 = createDataset1();
         CategoryAxis catAxis1 = new CategoryAxis("Category");
         LineAndShapeRenderer renderer1 = new LineAndShapeRenderer();
         renderer1.setDefaultToolTipGenerator(
@@ -259,7 +261,7 @@ public class CombinedRangeCategoryPlotTest implements ChartChangeListener {
                 renderer1);
         subplot1.setDomainGridlinesVisible(true);
 
-        CategoryDataset dataset2 = createDataset2();
+        CategoryDataset<String, String> dataset2 = createDataset2();
         CategoryAxis catAxis2 = new CategoryAxis("Category");
         BarRenderer renderer2 = new BarRenderer();
         renderer2.setDefaultToolTipGenerator(

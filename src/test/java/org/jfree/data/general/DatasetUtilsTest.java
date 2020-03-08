@@ -93,7 +93,7 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testCalculatePieDatasetTotal() {
-        DefaultPieDataset d = new DefaultPieDataset();
+        DefaultPieDataset<String> d = new DefaultPieDataset<>();
         assertEquals(0.0, DatasetUtils.calculatePieDatasetTotal(d),
                 EPSILON);
         d.setValue("A", 1.0);

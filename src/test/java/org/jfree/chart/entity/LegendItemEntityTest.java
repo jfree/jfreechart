@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * -------------------------
  * LegendItemEntityTest.java
  * -------------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 20-May-2004 : Version 1 (DG);
- * 18-May-2007 : Added checks for new fields (DG);
  *
  */
 
@@ -83,9 +78,9 @@ public class LegendItemEntityTest {
         e2.setURLText("New URL");
         assertTrue(e1.equals(e2));
 
-        e1.setDataset(new DefaultCategoryDataset());
+        e1.setDataset(new DefaultCategoryDataset<String, String>());
         assertFalse(e1.equals(e2));
-        e2.setDataset(new DefaultCategoryDataset());
+        e2.setDataset(new DefaultCategoryDataset<String, String>());
         assertTrue(e1.equals(e2));
 
         e1.setSeriesKey("A");
