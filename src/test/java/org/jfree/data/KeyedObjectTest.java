@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * --------------------
  * KeyedObjectTest.java
  * --------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited.
+ * (C) Copyright 2004-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 27-Jan-2004 : Version 1 (DG);
- * 28-Sep-2007 : Added testCloning2() (DG);
  *
  */
 
@@ -107,7 +102,7 @@ public class KeyedObjectTest {
         assertTrue(ko2.getObject() == obj1);
 
         // CASE 2 - object is mutable AND PublicCloneable
-        obj1 = new DefaultPieDataset();
+        obj1 = new DefaultPieDataset<String>();
         ko1 = new KeyedObject("Test", obj1);
         ko2 = (KeyedObject) ko1.clone();
         assertTrue(ko1 != ko2);

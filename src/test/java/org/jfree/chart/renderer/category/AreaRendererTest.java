@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,18 +27,10 @@
  * ---------------------
  * AreaRendererTest.java
  * ---------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 25-Mar-2003 : Version 1 (DG);
- * 22-Oct-2003 : Added hashCode() test (DG);
- * 11-Oct-2006 : Strengthened the testEquals() method (DG);
- * 17-May-2007 : Added testGetLegendItemSeriesIndex() (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG);
  *
  */
 
@@ -129,10 +121,10 @@ public class AreaRendererTest {
      */
     @Test
     public void testGetLegendItemSeriesIndex() {
-        DefaultCategoryDataset dataset0 = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String,String> dataset0 = new DefaultCategoryDataset<>();
         dataset0.addValue(21.0, "R1", "C1");
         dataset0.addValue(22.0, "R2", "C1");
-        DefaultCategoryDataset dataset1 = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String,String> dataset1 = new DefaultCategoryDataset<>();
         dataset1.addValue(23.0, "R3", "C1");
         dataset1.addValue(24.0, "R4", "C1");
         dataset1.addValue(25.0, "R5", "C1");

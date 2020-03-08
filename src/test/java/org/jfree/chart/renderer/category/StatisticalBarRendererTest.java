@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,18 +27,10 @@
  * -------------------------------
  * StatisticalBarRendererTest.java
  * -------------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 25-Mar-2003 : Version 1 (DG);
- * 28-Aug-2007 : Added tests for bug 1779941 (DG);
- * 14-Nov-2007 : Updated testEquals() (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG);
- * 16-May-2009 : Added testFindRangeBounds (DG);
  *
  */
 
@@ -168,7 +160,7 @@ public class StatisticalBarRendererTest {
             DefaultStatisticalCategoryDataset dataset
                     = new DefaultStatisticalCategoryDataset();
             dataset.add(1.0, 2.0, "S1", "C1");
-            dataset.add(null, new Double(4.0), "S1", "C2");
+            dataset.add(null, 4.0, "S1", "C2");
             CategoryPlot plot = new CategoryPlot(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new StatisticalBarRenderer());
@@ -192,7 +184,7 @@ public class StatisticalBarRendererTest {
             DefaultStatisticalCategoryDataset dataset
                     = new DefaultStatisticalCategoryDataset();
             dataset.add(1.0, 2.0, "S1", "C1");
-            dataset.add(null, new Double(4.0), "S1", "C2");
+            dataset.add(null, 4.0, "S1", "C2");
             CategoryPlot plot = new CategoryPlot(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new StatisticalBarRenderer());
@@ -217,7 +209,7 @@ public class StatisticalBarRendererTest {
             DefaultStatisticalCategoryDataset dataset
                     = new DefaultStatisticalCategoryDataset();
             dataset.add(1.0, 2.0, "S1", "C1");
-            dataset.add(new Double(4.0), null, "S1", "C2");
+            dataset.add(4.0, null, "S1", "C2");
             CategoryPlot plot = new CategoryPlot(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new StatisticalBarRenderer());
@@ -241,7 +233,7 @@ public class StatisticalBarRendererTest {
             DefaultStatisticalCategoryDataset dataset
                     = new DefaultStatisticalCategoryDataset();
             dataset.add(1.0, 2.0, "S1", "C1");
-            dataset.add(new Double(4.0), null, "S1", "C2");
+            dataset.add(4.0, null, "S1", "C2");
             CategoryPlot plot = new CategoryPlot(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new StatisticalBarRenderer());

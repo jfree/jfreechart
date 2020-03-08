@@ -385,17 +385,17 @@ public final class DatasetUtils {
      *
      * @return A dataset.
      */
-    public static CategoryDataset createCategoryDataset(Comparable rowKey,
-            KeyedValues rowData) {
+    public static <R extends Comparable<R>, C extends Comparable<C>> 
+            CategoryDataset<R, C> createCategoryDataset(R rowKey, 
+            KeyedValues<C> rowData) {
 
         Args.nullNotPermitted(rowKey, "rowKey");
         Args.nullNotPermitted(rowData, "rowData");
-        DefaultCategoryDataset result = new DefaultCategoryDataset();
+        DefaultCategoryDataset<R, C> result = new DefaultCategoryDataset<>();
         for (int i = 0; i < rowData.getItemCount(); i++) {
             result.addValue(rowData.getValue(i), rowKey, rowData.getKey(i));
         }
         return result;
-
     }
 
     /**
@@ -465,17 +465,14 @@ public final class DatasetUtils {
      *
      * @return A boolean.
      */
-    public static boolean isEmptyOrNull(PieDataset dataset) {
-
+    public static boolean isEmptyOrNull(PieDataset<?> dataset) {
         if (dataset == null) {
             return true;
         }
-
         int itemCount = dataset.getItemCount();
         if (itemCount == 0) {
             return true;
         }
-
         for (int item = 0; item < itemCount; item++) {
             Number y = dataset.getValue(item);
             if (y != null) {
@@ -485,9 +482,7 @@ public final class DatasetUtils {
                 }
             }
         }
-
         return true;
-
     }
 
     /**
@@ -498,18 +493,15 @@ public final class DatasetUtils {
      *
      * @return A boolean.
      */
-    public static boolean isEmptyOrNull(CategoryDataset dataset) {
-
+    public static boolean isEmptyOrNull(CategoryDataset<?, ?> dataset) {
         if (dataset == null) {
             return true;
         }
-
         int rowCount = dataset.getRowCount();
         int columnCount = dataset.getColumnCount();
         if (rowCount == 0 || columnCount == 0) {
             return true;
         }
-
         for (int r = 0; r < rowCount; r++) {
             for (int c = 0; c < columnCount; c++) {
                 if (dataset.getValue(r, c) != null) {
@@ -518,9 +510,7 @@ public final class DatasetUtils {
 
             }
         }
-
         return true;
-
     }
 
     /**
@@ -695,7 +685,7 @@ public final class DatasetUtils {
      *
      * @return The range (possibly {@code null}).
      */
-    public static Range findRangeBounds(CategoryDataset dataset) {
+    public static Range findRangeBounds(CategoryDataset<?, ?> dataset) {
         return findRangeBounds(dataset, true);
     }
 
@@ -708,7 +698,7 @@ public final class DatasetUtils {
      *
      * @return The range (possibly {@code null}).
      */
-    public static Range findRangeBounds(CategoryDataset dataset,
+    public static Range findRangeBounds(CategoryDataset<?, ?> dataset,
             boolean includeInterval) {
         Args.nullNotPermitted(dataset, "dataset");
         Range result;
@@ -736,8 +726,9 @@ public final class DatasetUtils {
      *
      * @since 1.0.13
      */
-    public static Range findRangeBounds(CategoryDataset dataset,
-            List visibleSeriesKeys, boolean includeInterval) {
+    public static <R extends Comparable<R>, C extends Comparable<C>> 
+            Range findRangeBounds(CategoryDataset<R, C> dataset, 
+            List<R> visibleSeriesKeys, boolean includeInterval) {
         Args.nullNotPermitted(dataset, "dataset");
         Range result;
         if (dataset instanceof CategoryRangeInfo) {
@@ -830,7 +821,7 @@ public final class DatasetUtils {
      *
      * @since 1.0.10
      */
-    public static Range iterateRangeBounds(CategoryDataset dataset) {
+    public static Range iterateRangeBounds(CategoryDataset<?, ?> dataset) {
         return iterateRangeBounds(dataset, true);
     }
 
@@ -846,7 +837,7 @@ public final class DatasetUtils {
      *
      * @since 1.0.10
      */
-    public static Range iterateRangeBounds(CategoryDataset dataset,
+    public static Range iterateRangeBounds(CategoryDataset<?, ?> dataset,
             boolean includeInterval) {
         double minimum = Double.POSITIVE_INFINITY;
         double maximum = Double.NEGATIVE_INFINITY;
@@ -917,8 +908,9 @@ public final class DatasetUtils {
      *
      * @since 1.0.13
      */
-    public static Range iterateToFindRangeBounds(CategoryDataset dataset,
-            List visibleSeriesKeys, boolean includeInterval) {
+    public static <R extends Comparable<R>, C extends Comparable<C>> 
+            Range iterateToFindRangeBounds(CategoryDataset<R, C> dataset, 
+            List<R> visibleSeriesKeys, boolean includeInterval) {
 
         Args.nullNotPermitted(dataset, "dataset");
         Args.nullNotPermitted(visibleSeriesKeys, "visibleSeriesKeys");
@@ -931,9 +923,9 @@ public final class DatasetUtils {
             // handle special case of BoxAndWhiskerDataset
             BoxAndWhiskerCategoryDataset bx
                     = (BoxAndWhiskerCategoryDataset) dataset;
-            Iterator iterator = visibleSeriesKeys.iterator();
+            Iterator<R> iterator = visibleSeriesKeys.iterator();
             while (iterator.hasNext()) {
-                Comparable seriesKey = (Comparable) iterator.next();
+                R seriesKey = iterator.next();
                 int series = dataset.getRowIndex(seriesKey);
                 int itemCount = dataset.getColumnCount();
                 for (int item = 0; item < itemCount; item++) {
@@ -960,9 +952,9 @@ public final class DatasetUtils {
             // we want to measure
             IntervalCategoryDataset icd = (IntervalCategoryDataset) dataset;
             Number lvalue, uvalue;
-            Iterator iterator = visibleSeriesKeys.iterator();
+            Iterator<R> iterator = visibleSeriesKeys.iterator();
             while (iterator.hasNext()) {
-                Comparable seriesKey = (Comparable) iterator.next();
+                R seriesKey = iterator.next();
                 int series = dataset.getRowIndex(seriesKey);
                 for (int column = 0; column < columnCount; column++) {
                     lvalue = icd.getStartValue(series, column);
@@ -982,9 +974,9 @@ public final class DatasetUtils {
             // we want to measure
             MultiValueCategoryDataset mvcd
                     = (MultiValueCategoryDataset) dataset;
-            Iterator iterator = visibleSeriesKeys.iterator();
+            Iterator<R> iterator = visibleSeriesKeys.iterator();
             while (iterator.hasNext()) {
-                Comparable seriesKey = (Comparable) iterator.next();
+                R seriesKey = iterator.next();
                 int series = dataset.getRowIndex(seriesKey);
                 for (int column = 0; column < columnCount; column++) {
                     List values = mvcd.getValues(series, column);
@@ -1008,9 +1000,9 @@ public final class DatasetUtils {
             // we want to measure
             StatisticalCategoryDataset scd
                     = (StatisticalCategoryDataset) dataset;
-            Iterator iterator = visibleSeriesKeys.iterator();
+            Iterator<R> iterator = visibleSeriesKeys.iterator();
             while (iterator.hasNext()) {
-                Comparable seriesKey = (Comparable) iterator.next();
+                R seriesKey = iterator.next();
                 int series = dataset.getRowIndex(seriesKey);
                 for (int column = 0; column < columnCount; column++) {
                     Number meanN = scd.getMeanValue(series, column);
@@ -1034,9 +1026,9 @@ public final class DatasetUtils {
         }
         else {
             // handle the standard case (plain CategoryDataset)
-            Iterator iterator = visibleSeriesKeys.iterator();
+            Iterator<R> iterator = visibleSeriesKeys.iterator();
             while (iterator.hasNext()) {
-                Comparable seriesKey = (Comparable) iterator.next();
+                R seriesKey = iterator.next();
                 int series = dataset.getRowIndex(seriesKey);
                 for (int column = 0; column < columnCount; column++) {
                     Number value = dataset.getValue(series, column);
@@ -1627,7 +1619,7 @@ public final class DatasetUtils {
                 result = null;
             }
             else {
-                result = new Double(maximum);
+                result = maximum;
             }
 
         }
@@ -1647,11 +1639,11 @@ public final class DatasetUtils {
      *
      * @return The minimum value (possibly {@code null}).
      */
-    public static Number findMinimumRangeValue(CategoryDataset dataset) {
+    public static Number findMinimumRangeValue(CategoryDataset<?, ?> dataset) {
         Args.nullNotPermitted(dataset, "dataset");
         if (dataset instanceof RangeInfo) {
             RangeInfo info = (RangeInfo) dataset;
-            return new Double(info.getRangeLowerBound(true));
+            return info.getRangeLowerBound(true);
         }
 
         // hasn't implemented RangeInfo, so we'll have to iterate...
@@ -1679,7 +1671,7 @@ public final class DatasetUtils {
                 return null;
             }
             else {
-                return new Double(minimum);
+                return minimum;
             }
 
         }
@@ -1704,7 +1696,7 @@ public final class DatasetUtils {
         // work out the minimum value...
         if (dataset instanceof RangeInfo) {
             RangeInfo info = (RangeInfo) dataset;
-            return new Double(info.getRangeLowerBound(true));
+            return info.getRangeLowerBound(true);
         }
 
         // hasn't implemented RangeInfo, so we'll have to iterate...
@@ -1738,7 +1730,7 @@ public final class DatasetUtils {
                 return null;
             }
             else {
-                return new Double(minimum);
+                return minimum;
             }
 
         }
@@ -1756,14 +1748,14 @@ public final class DatasetUtils {
      *
      * @return The maximum value (possibly {@code null}).
      */
-    public static Number findMaximumRangeValue(CategoryDataset dataset) {
+    public static Number findMaximumRangeValue(CategoryDataset<?, ?> dataset) {
 
         Args.nullNotPermitted(dataset, "dataset");
 
         // work out the minimum value...
         if (dataset instanceof RangeInfo) {
             RangeInfo info = (RangeInfo) dataset;
-            return new Double(info.getRangeUpperBound(true));
+            return info.getRangeUpperBound(true);
         }
 
         // hasn't implemented RangeInfo, so we'll have to iterate...
@@ -1792,7 +1784,7 @@ public final class DatasetUtils {
                 return null;
             }
             else {
-                return new Double(maximum);
+                return maximum;
             }
 
         }
@@ -1817,7 +1809,7 @@ public final class DatasetUtils {
         // work out the minimum value...
         if (dataset instanceof RangeInfo) {
             RangeInfo info = (RangeInfo) dataset;
-            return new Double(info.getRangeUpperBound(true));
+            return info.getRangeUpperBound(true);
         }
 
         // hasn't implemented RangeInfo, so we'll have to iterate...
@@ -1850,7 +1842,7 @@ public final class DatasetUtils {
                 return null;
             }
             else {
-                return new Double(maximum);
+                return maximum;
             }
 
         }
@@ -1878,7 +1870,7 @@ public final class DatasetUtils {
      *
      * @return The range ({@code null} if the dataset contains no values).
      */
-    public static Range findStackedRangeBounds(CategoryDataset dataset,
+    public static Range findStackedRangeBounds(CategoryDataset<?, ?> dataset,
             double base) {
         Args.nullNotPermitted(dataset, "dataset");
         Range result = null;

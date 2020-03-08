@@ -50,7 +50,6 @@ import org.jfree.chart.event.ChartChangeListener;
 import org.jfree.chart.labels.CategoryToolTipGenerator;
 import org.jfree.chart.labels.StandardCategoryToolTipGenerator;
 import org.jfree.chart.plot.CategoryPlot;
-import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.CategoryItemRenderer;
 import org.jfree.chart.urls.CategoryURLGenerator;
 import org.jfree.chart.urls.StandardCategoryURLGenerator;
@@ -101,8 +100,8 @@ public class StackedBarChartTest {
     @Test
     public void testReplaceDataset() {
         Number[][] data = new Integer[][] {{-30, -20}, {-10, 10}, {20, 30}};
-        CategoryDataset newData = DatasetUtils.createCategoryDataset("S",
-                "C", data);
+        CategoryDataset<String, String> newData 
+                = DatasetUtils.createCategoryDataset("S", "C", data);
 
         LocalListener l = new LocalListener();
         this.chart.addChangeListener(l);
@@ -156,8 +155,8 @@ public class StackedBarChartTest {
     private static JFreeChart createChart() {
         Number[][] data = new Integer[][] {{-3, -2}, {-1, 1}, {2, 3}};
 
-        CategoryDataset dataset = DatasetUtils.createCategoryDataset("S",
-                "C", data);
+        CategoryDataset<String, String> dataset 
+                = DatasetUtils.createCategoryDataset("S", "C", data);
         return ChartFactory.createStackedBarChart("Stacked Bar Chart",
                 "Domain", "Range", dataset);
     }
