@@ -161,7 +161,7 @@ public class LogAxisTest {
      */
     @Test
     public void testAutoRange1() {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         dataset.setValue(100.0, "Row 1", "Column 1");
         dataset.setValue(200.0, "Row 1", "Column 2");
         JFreeChart chart = ChartFactory.createBarChart("Test", "Categories",
@@ -180,7 +180,7 @@ public class LogAxisTest {
      */
     @Test
     public void testAutoRange3() {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         dataset.setValue(100.0, "Row 1", "Column 1");
         dataset.setValue(200.0, "Row 1", "Column 2");
         JFreeChart chart = ChartFactory.createLineChart("Test", "Categories",
@@ -193,7 +193,7 @@ public class LogAxisTest {
         assertEquals(207.0529847682752, axis.getUpperBound(), EPSILON);
 
         // now replacing the dataset should update the axis range...
-        DefaultCategoryDataset dataset2 = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset2 = new DefaultCategoryDataset<>();
         dataset2.setValue(900.0, "Row 1", "Column 1");
         dataset2.setValue(1000.0, "Row 1", "Column 2");
         plot.setDataset(dataset2);

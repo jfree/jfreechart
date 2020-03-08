@@ -62,7 +62,7 @@ public class PieChart3DTest  {
      */
     @Before
     public void setUp() {
-        DefaultPieDataset dataset = new DefaultPieDataset();
+        DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
         dataset.setValue("Java", 43.2);
         dataset.setValue("Visual Basic", 0.0);
         dataset.setValue("C/C++", 17.5);
@@ -90,7 +90,7 @@ public class PieChart3DTest  {
      */
     @Test
     public void testNullValueInDataset() {
-        DefaultPieDataset dataset = new DefaultPieDataset();
+        DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
         dataset.setValue("Section 1", 10.0);
         dataset.setValue("Section 2", 11.0);
         dataset.setValue("Section 3", null);
