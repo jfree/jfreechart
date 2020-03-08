@@ -209,7 +209,7 @@ public class DefaultPieDataset<K extends Comparable<K>> extends AbstractDataset
      * @throws IllegalArgumentException if {@code key} is
      *     {@code null}.
      */
-    public void setValue(Comparable key, double value) {
+    public void setValue(K key, double value) {
         setValue(key, Double.valueOf(value));
     }
 
