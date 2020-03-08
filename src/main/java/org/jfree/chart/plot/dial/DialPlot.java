@@ -662,7 +662,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
      * @param scaleIndex  the scale index (zero-based).
      */
     public void mapDatasetToScale(int index, int scaleIndex) {
-        this.datasetToScaleMap.set(index, new Integer(scaleIndex));
+        this.datasetToScaleMap.set(index, scaleIndex);
         fireChangeEvent();
     }
 
