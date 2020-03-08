@@ -123,7 +123,7 @@ public class DefaultKeyedValues2DTest {
 
         d1.addValue(1.0, "R1", "C1");
         assertFalse(d1.equals(d2));
-        d2.addValue(1.0, "R1", "S1");
+        d2.addValue(1.0, "R1", "C1");
         assertTrue(d1.equals(d2));
     }
 
