@@ -53,7 +53,7 @@ public class PlotState {
      * Creates a new state object.
      */
     public PlotState() {
-        this.sharedAxisStates = new HashMap();
+        this.sharedAxisStates = new HashMap<>();
     }
 
     /**

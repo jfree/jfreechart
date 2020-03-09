@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,20 +27,10 @@
  * ----------------------
  * PlotRenderingInfo.java
  * ----------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited.
+ * (C) Copyright 2003-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 16-Sep-2003 : Version 1 (DG);
- * 23-Sep-2003 : Added Javadocs (DG);
- * 12-Nov-2004 : Added getSubplotCount() and findSubplot() methods (DG);
- * 01-Nov-2005 : Made 'owner' non-transient to fix bug 1344048 (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 01-Dec-2006 : Implemented clone() method properly (DG);
- * 17-Apr-2007 : Fixed bug 1698965 (NPE in CombinedDomainXYPlot) (DG);
  *
  */
 
@@ -52,11 +42,13 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.jfree.chart.ChartRenderingInfo;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.SerialUtils;
 
 /**
@@ -79,7 +71,7 @@ public class PlotRenderingInfo implements Cloneable, Serializable {
     /**
      * Storage for the plot rendering info objects belonging to the subplots.
      */
-    private List subplotInfo;
+    private List<PlotRenderingInfo> subplotInfo;
 
     /**
      * Creates a new instance.
@@ -89,7 +81,7 @@ public class PlotRenderingInfo implements Cloneable, Serializable {
     public PlotRenderingInfo(ChartRenderingInfo owner) {
         this.owner = owner;
         this.dataArea = new Rectangle2D.Double();
-        this.subplotInfo = new java.util.ArrayList();
+        this.subplotInfo = new ArrayList<>();
     }
 
     /**
@@ -177,7 +169,7 @@ public class PlotRenderingInfo implements Cloneable, Serializable {
      * @see #addSubplotInfo(PlotRenderingInfo)
      */
     public PlotRenderingInfo getSubplotInfo(int index) {
-        return (PlotRenderingInfo) this.subplotInfo.get(index);
+        return this.subplotInfo.get(index);
     }
 
     /**
@@ -249,11 +241,9 @@ public class PlotRenderingInfo implements Cloneable, Serializable {
         if (this.dataArea != null) {
             clone.dataArea = (Rectangle2D) this.dataArea.clone();
         }
-        clone.subplotInfo = new java.util.ArrayList(this.subplotInfo.size());
+        clone.subplotInfo = new ArrayList<>(this.subplotInfo.size());
         for (int i = 0; i < this.subplotInfo.size(); i++) {
-            PlotRenderingInfo info
-                    = (PlotRenderingInfo) this.subplotInfo.get(i);
-            clone.subplotInfo.add(info.clone());
+            clone.subplotInfo.add(CloneUtils.clone(this.subplotInfo.get(i)));
         }
         return clone;
     }

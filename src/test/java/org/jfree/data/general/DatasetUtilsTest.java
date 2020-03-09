@@ -752,7 +752,7 @@ public class DatasetUtilsTest {
     @Test
     public void testFindStackedRangeBounds_CategoryDataset3() {
         DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
-        KeyToGroupMap map = new KeyToGroupMap("Group A");
+        KeyToGroupMap<String, String> map = new KeyToGroupMap<>("Group A");
         Range r = DatasetUtils.findStackedRangeBounds(dataset, map);
         assertTrue(r == null);
 
@@ -841,15 +841,15 @@ public class DatasetUtilsTest {
 
         // check that empty dataset is handled OK
         DefaultPieDataset<String> d1 = new DefaultPieDataset<>();
-        PieDataset d2 = DatasetUtils.createConsolidatedPieDataset(d1,
-                "Other", 0.05);
+        PieDataset<String> d2 = DatasetUtils.<String>createConsolidatedPieDataset(
+                d1, "Other", 0.05);
         assertEquals(0, d2.getItemCount());
 
         // check that minItem limit is observed
         d1.setValue("Item 1", 1.0);
         d1.setValue("Item 2", 49.50);
         d1.setValue("Item 3", 49.50);
-        d2 = DatasetUtils.createConsolidatedPieDataset(d1, "Other", 0.05);
+        d2 = DatasetUtils.<String>createConsolidatedPieDataset(d1, "Other", 0.05);
         assertEquals(3, d2.getItemCount());
         assertEquals("Item 1", d2.getKey(0));
         assertEquals("Item 2", d2.getKey(1));
@@ -857,7 +857,7 @@ public class DatasetUtilsTest {
 
         // check that minItem limit is observed
         d1.setValue("Item 4", 1.0);
-        d2 = DatasetUtils.createConsolidatedPieDataset(d1, "Other", 0.05, 2);
+        d2 = DatasetUtils.<String>createConsolidatedPieDataset(d1, "Other", 0.05, 2);
 
         // and that simple aggregation works
         assertEquals(3, d2.getItemCount());
@@ -1258,8 +1258,8 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testIterateToFindRangeBounds_MultiValueCategoryDataset() {
-        DefaultMultiValueCategoryDataset dataset
-                = new DefaultMultiValueCategoryDataset();
+        DefaultMultiValueCategoryDataset<String, String> dataset
+                = new DefaultMultiValueCategoryDataset<>();
         List<String> visibleSeriesKeys = new ArrayList<>();
         assertNull(DatasetUtils.<String, String>iterateToFindRangeBounds(dataset,
                 visibleSeriesKeys, true));

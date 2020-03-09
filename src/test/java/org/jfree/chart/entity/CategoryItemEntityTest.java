@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * ---------------------------
  * CategoryItemEntityTest.java
  * ---------------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 20-May-2004 : Version 1 (DG);
  *
  */
 
@@ -61,7 +57,7 @@ public class CategoryItemEntityTest {
      */
     @Test
     public void testEquals() {
-        DefaultCategoryDataset d = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> d = new DefaultCategoryDataset<>();
         d.addValue(1.0, "R1", "C1");
         d.addValue(2.0, "R1", "C2");
         d.addValue(3.0, "R2", "C1");
@@ -93,7 +89,7 @@ public class CategoryItemEntityTest {
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        DefaultCategoryDataset d = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> d = new DefaultCategoryDataset<>();
         d.addValue(1.0, "R1", "C1");
         d.addValue(2.0, "R1", "C2");
         d.addValue(3.0, "R2", "C1");
@@ -111,7 +107,7 @@ public class CategoryItemEntityTest {
      */
     @Test
     public void testSerialization() {
-        DefaultCategoryDataset d = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> d = new DefaultCategoryDataset<>();
         d.addValue(1.0, "R1", "C1");
         d.addValue(2.0, "R1", "C2");
         d.addValue(3.0, "R2", "C1");

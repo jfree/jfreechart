@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,18 +27,10 @@
  * -----------------------------
  * LineAndShapeRendererTest.java
  * -----------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 22-Sep-2003 : Version 1 (DG);
- * 17-May-2007 : Added check for getLegendItem() method (DG);
- * 27-Sep-2007 : Extended equals() test (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG);
- * 16-May-2009 : Added testFindRangeBounds() (DG);
  *
  */
 
@@ -70,7 +62,6 @@ public class LineAndShapeRendererTest {
      */
     @Test
     public void testEquals() {
-
         LineAndShapeRenderer r1 = new LineAndShapeRenderer();
         LineAndShapeRenderer r2 = new LineAndShapeRenderer();
         assertEquals(r1, r2);
@@ -119,7 +110,6 @@ public class LineAndShapeRendererTest {
         assertFalse(r1.equals(r2));
         r2.setItemMargin(0.14);
         assertTrue(r1.equals(r2));
-
     }
 
     /**
@@ -166,7 +156,7 @@ public class LineAndShapeRendererTest {
      * @return A boolean.
      */
     private boolean checkIndependence(LineAndShapeRenderer r1,
-                                      LineAndShapeRenderer r2) {
+            LineAndShapeRenderer r2) {
 
         // should be equal...
         if (!r1.equals(r2)) {
@@ -250,10 +240,10 @@ public class LineAndShapeRendererTest {
      */
     @Test
     public void testGetLegendItemSeriesIndex() {
-        DefaultCategoryDataset dataset0 = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset0 = new DefaultCategoryDataset<>();
         dataset0.addValue(21.0, "R1", "C1");
         dataset0.addValue(22.0, "R2", "C1");
-        DefaultCategoryDataset dataset1 = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset1 = new DefaultCategoryDataset<>();
         dataset1.addValue(23.0, "R3", "C1");
         dataset1.addValue(24.0, "R4", "C1");
         dataset1.addValue(25.0, "R5", "C1");
@@ -277,7 +267,7 @@ public class LineAndShapeRendererTest {
         assertNull(r.findRangeBounds(null));
 
         // an empty dataset should return a null range
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         assertNull(r.findRangeBounds(dataset));
 
         dataset.addValue(1.0, "R1", "C1");
