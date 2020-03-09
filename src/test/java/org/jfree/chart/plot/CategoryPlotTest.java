@@ -833,7 +833,7 @@ public class CategoryPlotTest {
         plot.setDomainAxis(new CategoryAxis("C"));
         plot.setRangeAxis(new NumberAxis("Y"));
         plot.setRenderer(new BarRenderer());
-        plot.setDataset(new DefaultCategoryDataset());
+        plot.setDataset(new DefaultCategoryDataset<String,String>());
         assertTrue(true); // we didn't get an exception so all is good
     }
 
@@ -1056,7 +1056,7 @@ public class CategoryPlotTest {
         
         assertEquals(dataset, plot.getDataset(0));
         
-        DefaultCategoryDataset dataset2 = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String,String> dataset2 = new DefaultCategoryDataset<>();
         dataset2.setValue(1, "R1", "C1");
         
         // we should be able to give a dataset an arbitrary index

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * ------------------------------
  * MultiValueCategoryDataset.java
  * ------------------------------
- * (C) Copyright 2007, 2008, by David Forslund and Contributors.
+ * (C) Copyright 2007-2020, by David Forslund and Contributors.
  *
  * Original Author:  David Forslund;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 08-Oct-2007 : Version 1, see patch 1780779 (DG);
  *
  */
 
@@ -49,7 +45,8 @@ import org.jfree.data.category.CategoryDataset;
  *
  * @since 1.0.7
  */
-public interface MultiValueCategoryDataset extends CategoryDataset {
+public interface MultiValueCategoryDataset<R extends Comparable<R>, C extends Comparable<C>>
+        extends CategoryDataset<R, C> {
 
     /**
      * Returns a list (possibly empty) of the values for the specified item.
@@ -60,7 +57,7 @@ public interface MultiValueCategoryDataset extends CategoryDataset {
      *
      * @return The list of values.
      */
-    public List getValues(int row, int column);
+    public List<? extends Number> getValues(int row, int column);
 
     /**
      * Returns a list (possibly empty) of the values for the specified item.
@@ -71,6 +68,6 @@ public interface MultiValueCategoryDataset extends CategoryDataset {
      *
      * @return The list of values.
      */
-    public List getValues(Comparable rowKey, Comparable columnKey);
+    public List<? extends Number> getValues(R rowKey, C columnKey);
 
 }

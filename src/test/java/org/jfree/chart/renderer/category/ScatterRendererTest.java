@@ -60,7 +60,6 @@ public class ScatterRendererTest {
      */
     @Test
     public void testEquals() {
-
         ScatterRenderer r1 = new ScatterRenderer();
         ScatterRenderer r2 = new ScatterRenderer();
         assertEquals(r1, r2);
@@ -94,7 +93,6 @@ public class ScatterRendererTest {
         assertFalse(r1.equals(r2));
         r2.setUseSeriesOffset(false);
         assertTrue(r1.equals(r2));
-
     }
 
     /**
@@ -192,8 +190,8 @@ public class ScatterRendererTest {
         assertNull(r.findRangeBounds(null));
 
         // an empty dataset should return a null range
-        DefaultMultiValueCategoryDataset dataset
-                = new DefaultMultiValueCategoryDataset();
+        DefaultMultiValueCategoryDataset<String, String> dataset
+                = new DefaultMultiValueCategoryDataset<>();
         assertNull(r.findRangeBounds(dataset));
 
         List<Number> values = Arrays.asList(new Double[] {1.0});

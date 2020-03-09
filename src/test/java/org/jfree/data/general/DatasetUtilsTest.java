@@ -255,7 +255,7 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testFindRangeBounds_CategoryDataset() {
-        CategoryDataset dataset = createCategoryDataset1();
+        CategoryDataset<String,String> dataset = createCategoryDataset1();
         Range r = DatasetUtils.findRangeBounds(dataset);
         assertEquals(1.0, r.getLowerBound(), EPSILON);
         assertEquals(6.0, r.getUpperBound(), EPSILON);
@@ -326,7 +326,7 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testIterateRangeBounds_CategoryDataset() {
-        CategoryDataset dataset = createCategoryDataset1();
+        CategoryDataset<String,String> dataset = createCategoryDataset1();
         Range r = DatasetUtils.iterateRangeBounds(dataset, false);
         assertEquals(1.0, r.getLowerBound(), EPSILON);
         assertEquals(6.0, r.getUpperBound(), EPSILON);
@@ -338,7 +338,7 @@ public class DatasetUtilsTest {
     @Test
     public void testIterateRangeBounds2_CategoryDataset() {
         // an empty dataset should return a null range
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String,String> dataset = new DefaultCategoryDataset<>();
         Range r = DatasetUtils.iterateRangeBounds(dataset, false);
         assertNull(r);
 
@@ -382,8 +382,8 @@ public class DatasetUtilsTest {
         ends[1][1] = 15.0;
         ends[1][2] = 14.0;
 
-        DefaultIntervalCategoryDataset d = new DefaultIntervalCategoryDataset(
-                starts, ends);
+        DefaultIntervalCategoryDataset d 
+                = new DefaultIntervalCategoryDataset(starts, ends);
         Range r = DatasetUtils.iterateRangeBounds(d, false);
         assertEquals(4.0, r.getLowerBound(), EPSILON);
         assertEquals(16.0, r.getUpperBound(), EPSILON);
@@ -516,7 +516,7 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testFindMinimumRangeValue() {
-        CategoryDataset d1 = createCategoryDataset1();
+        CategoryDataset<String, String> d1 = createCategoryDataset1();
         Number min1 = DatasetUtils.findMinimumRangeValue(d1);
         assertEquals(1.0, min1);
 
@@ -530,7 +530,7 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testFindMaximumRangeValue() {
-        CategoryDataset d1 = createCategoryDataset1();
+        CategoryDataset<String, String> d1 = createCategoryDataset1();
         Number max1 = DatasetUtils.findMaximumRangeValue(d1);
         assertEquals(6.0, max1);
 
@@ -544,7 +544,7 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testMinMaxRange() {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         dataset.addValue(100.0, "Series 1", "Type 1");
         dataset.addValue(101.1, "Series 1", "Type 2");
         Number min = DatasetUtils.findMinimumRangeValue(dataset);
@@ -558,7 +558,7 @@ public class DatasetUtilsTest {
      */
     @Test
     public void test803660() {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         dataset.addValue(100.0, "Series 1", "Type 1");
         dataset.addValue(101.1, "Series 1", "Type 2");
         Number n = DatasetUtils.findMaximumRangeValue(dataset);
@@ -572,7 +572,7 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testCumulativeRange1() {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         dataset.addValue(10.0, "Series 1", "Start");
         dataset.addValue(15.0, "Series 1", "Delta 1");
         dataset.addValue(-7.0, "Series 1", "Delta 2");
@@ -586,7 +586,7 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testCumulativeRange2() {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         dataset.addValue(-21.4, "Series 1", "Start Value");
         dataset.addValue(11.57, "Series 1", "Delta 1");
         dataset.addValue(3.51, "Series 1", "Delta 2");
@@ -607,7 +607,7 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testCumulativeRange3() {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         dataset.addValue(15.76, "Product 1", "Labour");
         dataset.addValue(8.66, "Product 1", "Administration");
         dataset.addValue(4.71, "Product 1", "Marketing");
@@ -624,7 +624,7 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testCumulativeRange_NaN() {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         dataset.addValue(10.0, "Series 1", "Start");
         dataset.addValue(15.0, "Series 1", "Delta 1");
         dataset.addValue(Double.NaN, "Series 1", "Delta 2");
@@ -644,7 +644,7 @@ public class DatasetUtilsTest {
         data[0] = new double[] {1.1, 1.2};
         data[1] = new double[] {2.1, 2.2};
         data[2] = new double[] {3.1, 3.2};
-        CategoryDataset dataset = DatasetUtils.createCategoryDataset(
+        CategoryDataset<String, String> dataset = DatasetUtils.createCategoryDataset(
                 rowKeys, columnKeys, data);
         assertTrue(dataset.getRowCount() == 3);
         assertTrue(dataset.getColumnCount() == 2);
@@ -662,7 +662,7 @@ public class DatasetUtilsTest {
         double[][] data = new double[2][];
         data[0] = new double[] {1.1, 1.2, 1.3};
         data[1] = new double[] {2.1, 2.2, 2.3};
-        CategoryDataset dataset = null;
+        CategoryDataset<String, String> dataset = null;
         try {
             dataset = DatasetUtils.createCategoryDataset(rowKeys,
                     columnKeys, data);
@@ -688,7 +688,7 @@ public class DatasetUtilsTest {
         double v5 = 26.3;
         double v6 = 22.6;
         Number answer = Math.max(v1 + v2 + v3, v4 + v5 + v6);
-        DefaultCategoryDataset d = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> d = new DefaultCategoryDataset<>();
         d.addValue(v1, "Row 0", "Column 0");
         d.addValue(v2, "Row 1", "Column 0");
         d.addValue(v3, "Row 2", "Column 0");
@@ -704,7 +704,7 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testFindStackedRangeBounds_CategoryDataset1() {
-        CategoryDataset d1 = createCategoryDataset1();
+        CategoryDataset<String, String> d1 = createCategoryDataset1();
         Range r = DatasetUtils.findStackedRangeBounds(d1);
         assertEquals(0.0, r.getLowerBound(), EPSILON);
         assertEquals(15.0, r.getUpperBound(), EPSILON);
@@ -720,7 +720,7 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testFindStackedRangeBounds_CategoryDataset2() {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         Range r = DatasetUtils.findStackedRangeBounds(dataset);
         assertTrue(r == null);
 
@@ -751,7 +751,7 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testFindStackedRangeBounds_CategoryDataset3() {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         KeyToGroupMap map = new KeyToGroupMap("Group A");
         Range r = DatasetUtils.findStackedRangeBounds(dataset, map);
         assertTrue(r == null);
@@ -807,8 +807,8 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testStackedRangeWithMap() {
-        CategoryDataset d = createCategoryDataset1();
-        KeyToGroupMap map = new KeyToGroupMap("G0");
+        CategoryDataset<String, String> d = createCategoryDataset1();
+        KeyToGroupMap<String, String> map = new KeyToGroupMap<>("G0");
         map.mapKeyToGroup("R2", "G1");
         Range r = DatasetUtils.findStackedRangeBounds(d, map);
         assertEquals(0.0, r.getLowerBound(), EPSILON);
@@ -840,7 +840,7 @@ public class DatasetUtilsTest {
     public void testLimitPieDataset() {
 
         // check that empty dataset is handled OK
-        DefaultPieDataset d1 = new DefaultPieDataset();
+        DefaultPieDataset<String> d1 = new DefaultPieDataset<>();
         PieDataset d2 = DatasetUtils.createConsolidatedPieDataset(d1,
                 "Other", 0.05);
         assertEquals(0, d2.getItemCount());
@@ -857,8 +857,7 @@ public class DatasetUtilsTest {
 
         // check that minItem limit is observed
         d1.setValue("Item 4", 1.0);
-        d2 = DatasetUtils.createConsolidatedPieDataset(d1, "Other", 0.05,
-                2);
+        d2 = DatasetUtils.createConsolidatedPieDataset(d1, "Other", 0.05, 2);
 
         // and that simple aggregation works
         assertEquals(3, d2.getItemCount());
@@ -866,7 +865,6 @@ public class DatasetUtilsTest {
         assertEquals("Item 3", d2.getKey(1));
         assertEquals("Other", d2.getKey(2));
         assertEquals(2.0, d2.getValue("Other"));
-
     }
 
     /**
@@ -891,7 +889,8 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testFindMinimumStackedRangeValue() {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset 
+                = new DefaultCategoryDataset<>();
 
         // an empty dataset should return a null max
         Number min = DatasetUtils.findMinimumStackedRangeValue(dataset);
@@ -919,7 +918,8 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testFindMinimumStackedRangeValue2() {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset 
+                = new DefaultCategoryDataset<>();
         dataset.addValue(-1.0, "R1", "C1");
         Number min = DatasetUtils.findMinimumStackedRangeValue(dataset);
         assertEquals(-1.0, min.doubleValue(), EPSILON);
@@ -934,7 +934,8 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testFindMaximumStackedRangeValue() {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset 
+                = new DefaultCategoryDataset<>();
 
         // an empty dataset should return a null max
         Number max = DatasetUtils.findMaximumStackedRangeValue(dataset);
@@ -962,7 +963,8 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testFindMaximumStackedRangeValue2() {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset 
+                = new DefaultCategoryDataset<>();
         dataset.addValue(-1.0, "R1", "C1");
         Number max = DatasetUtils.findMaximumStackedRangeValue(dataset);
         assertEquals(0.0, max.doubleValue(), EPSILON);
@@ -977,8 +979,9 @@ public class DatasetUtilsTest {
      *
      * @return A dataset.
      */
-    private CategoryDataset createCategoryDataset1() {
-        DefaultCategoryDataset result = new DefaultCategoryDataset();
+    private CategoryDataset<String, String> createCategoryDataset1() {
+        DefaultCategoryDataset<String, String> result 
+                = new DefaultCategoryDataset<>();
         result.addValue(1.0, "R0", "C0");
         result.addValue(1.0, "R1", "C0");
         result.addValue(1.0, "R2", "C0");
@@ -993,8 +996,9 @@ public class DatasetUtilsTest {
      *
      * @return A dataset.
      */
-    private CategoryDataset createCategoryDataset2() {
-        DefaultCategoryDataset result = new DefaultCategoryDataset();
+    private CategoryDataset<String, String> createCategoryDataset2() {
+        DefaultCategoryDataset<String, String> result 
+                = new DefaultCategoryDataset<>();
         result.addValue(1.0, "R0", "C0");
         result.addValue(-2.0, "R1", "C0");
         result.addValue(2.0, "R0", "C1");
@@ -1257,29 +1261,29 @@ public class DatasetUtilsTest {
         DefaultMultiValueCategoryDataset dataset
                 = new DefaultMultiValueCategoryDataset();
         List<String> visibleSeriesKeys = new ArrayList<>();
-        assertNull(DatasetUtils.iterateToFindRangeBounds(dataset,
+        assertNull(DatasetUtils.<String, String>iterateToFindRangeBounds(dataset,
                 visibleSeriesKeys, true));
         List<Double> values = Arrays.asList(new Double[] {1.0});
         dataset.add(values, "R1", "C1");
         visibleSeriesKeys.add("R1");
         assertEquals(new Range(1.0, 1.0),
-                DatasetUtils.iterateToFindRangeBounds(dataset,
+                DatasetUtils.<String, String>iterateToFindRangeBounds(dataset,
                 visibleSeriesKeys, true));
 
         values = Arrays.asList(new Double[] {2.0, 3.0});
         dataset.add(values, "R1", "C2");
         assertEquals(new Range(1.0, 3.0),
-                DatasetUtils.iterateToFindRangeBounds(dataset,
+                DatasetUtils.<String, String>iterateToFindRangeBounds(dataset,
                 visibleSeriesKeys, true));
 
         values = Arrays.asList(new Double[] {-1.0, -2.0});
         dataset.add(values, "R2", "C1");
         assertEquals(new Range(1.0, 3.0),
-                DatasetUtils.iterateToFindRangeBounds(dataset,
+                DatasetUtils.<String, String>iterateToFindRangeBounds(dataset,
                 visibleSeriesKeys, true));
         visibleSeriesKeys.add("R2");
         assertEquals(new Range(-2.0, 3.0),
-                DatasetUtils.iterateToFindRangeBounds(dataset,
+                DatasetUtils.<String, String>iterateToFindRangeBounds(dataset,
                 visibleSeriesKeys, true));
     }
 

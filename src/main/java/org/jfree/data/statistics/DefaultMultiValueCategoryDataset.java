@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,17 +27,10 @@
  * -------------------------------------
  * DefaultMultiValueCategoryDataset.java
  * -------------------------------------
- * (C) Copyright 2007-2016, by David Forslund and Contributors.
+ * (C) Copyright 2007-2020, by David Forslund and Contributors.
  *
  * Original Author:  David Forslund;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 08-Oct-2007 : Version 1, see patch 1780779 (DG);
- * 06-Nov-2007 : Return EMPTY_LIST not null from getValues() (DG);
- * 02-JUL-2013 : Use ParamChecks (DG);
- * 19-Jan-2019 : Added missing hashCode (TH);
  * 
  */
 
@@ -45,7 +38,6 @@ package org.jfree.data.statistics;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import org.jfree.chart.util.Args;
@@ -62,8 +54,9 @@ import org.jfree.data.general.DatasetChangeEvent;
  *
  * @since 1.0.7
  */
-public class DefaultMultiValueCategoryDataset extends AbstractDataset
-        implements MultiValueCategoryDataset, RangeInfo, PublicCloneable {
+public class DefaultMultiValueCategoryDataset<R extends Comparable<R>, C extends Comparable<C>>
+        extends AbstractDataset implements MultiValueCategoryDataset<R, C>, 
+        RangeInfo, PublicCloneable {
 
     /**
      * Storage for the data.
@@ -104,21 +97,15 @@ public class DefaultMultiValueCategoryDataset extends AbstractDataset
      * @param rowKey  the row key ({@code null} not permitted).
      * @param columnKey  the column key ({@code null} not permitted).
      */
-    public void add(List values, Comparable rowKey, Comparable columnKey) {
+    public void add(List<? extends Number> values, R rowKey, C columnKey) {
 
         Args.nullNotPermitted(values, "values");
         Args.nullNotPermitted(rowKey, "rowKey");
         Args.nullNotPermitted(columnKey, "columnKey");
-        List vlist = new ArrayList(values.size());
-        Iterator iterator = values.listIterator();
-        while (iterator.hasNext()) {
-            Object obj = iterator.next();
-            if (obj instanceof Number) {
-                Number n = (Number) obj;
-                double v = n.doubleValue();
-                if (!Double.isNaN(v)) {
-                    vlist.add(n);
-                }
+        List<Double> vlist = new ArrayList<>(values.size());
+        for (Number v : values) {
+            if (v != null && !Double.isNaN(v.doubleValue())) {
+                vlist.add(v.doubleValue());
             }
         }
         Collections.sort(vlist);
@@ -136,17 +123,17 @@ public class DefaultMultiValueCategoryDataset extends AbstractDataset
 
             // update the cached range values...
             if (this.maximumRangeValue == null) {
-                this.maximumRangeValue = new Double(maxval);
+                this.maximumRangeValue = maxval;
             }
             else if (maxval > this.maximumRangeValue.doubleValue()) {
-                this.maximumRangeValue = new Double(maxval);
+                this.maximumRangeValue = maxval;
             }
 
             if (this.minimumRangeValue == null) {
-                this.minimumRangeValue = new Double(minval);
+                this.minimumRangeValue = minval;
             }
             else if (minval < this.minimumRangeValue.doubleValue()) {
-                this.minimumRangeValue = new Double(minval);
+                this.minimumRangeValue = minval;
             }
             this.rangeBounds = new Range(this.minimumRangeValue.doubleValue(),
                     this.maximumRangeValue.doubleValue());
@@ -165,7 +152,7 @@ public class DefaultMultiValueCategoryDataset extends AbstractDataset
      * @return The list of values.
      */
     @Override
-    public List getValues(int row, int column) {
+    public List<? extends Number> getValues(int row, int column) {
         List values = (List) this.data.getObject(row, column);
         if (values != null) {
             return Collections.unmodifiableList(values);
@@ -185,7 +172,7 @@ public class DefaultMultiValueCategoryDataset extends AbstractDataset
      * @return The list of values.
      */
     @Override
-    public List getValues(Comparable rowKey, Comparable columnKey) {
+    public List<? extends Number> getValues(Comparable rowKey, Comparable columnKey) {
         return Collections.unmodifiableList((List) this.data.getObject(rowKey,
                 columnKey));
     }
@@ -216,7 +203,7 @@ public class DefaultMultiValueCategoryDataset extends AbstractDataset
         if (count == 0) {
             return null;
         }
-        return new Double(average);
+        return average;
     }
 
     /**
@@ -245,7 +232,7 @@ public class DefaultMultiValueCategoryDataset extends AbstractDataset
         if (count == 0) {
             return null;
         }
-        return new Double(average);
+        return average;
     }
 
     /**
@@ -268,8 +255,8 @@ public class DefaultMultiValueCategoryDataset extends AbstractDataset
      * @return The column key.
      */
     @Override
-    public Comparable getColumnKey(int column) {
-        return this.data.getColumnKey(column);
+    public C getColumnKey(int column) {
+        return (C) this.data.getColumnKey(column);
     }
 
     /**
@@ -302,8 +289,8 @@ public class DefaultMultiValueCategoryDataset extends AbstractDataset
      * @return The row key.
      */
     @Override
-    public Comparable getRowKey(int row) {
-        return this.data.getRowKey(row);
+    public R getRowKey(int row) {
+        return (R) this.data.getRowKey(row);
     }
 
     /**

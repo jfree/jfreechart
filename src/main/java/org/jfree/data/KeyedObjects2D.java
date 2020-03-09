@@ -46,6 +46,7 @@
 package org.jfree.data;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -55,26 +56,27 @@ import org.jfree.chart.util.Args;
  * A data structure that stores zero, one or many objects, where each object is
  * associated with two keys (a 'row' key and a 'column' key).
  */
-public class KeyedObjects2D implements Cloneable, Serializable {
+public class KeyedObjects2D<R extends Comparable<R>, C extends Comparable<C>> 
+        implements Cloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -1015873563138522374L;
 
     /** The row keys. */
-    private List rowKeys;
+    private List<R> rowKeys;
 
     /** The column keys. */
-    private List columnKeys;
+    private List<C> columnKeys;
 
     /** The row data. */
-    private List rows;
+    private List<KeyedObjects> rows;
 
     /**
      * Creates a new instance (initially empty).
      */
     public KeyedObjects2D() {
-        this.rowKeys = new java.util.ArrayList();
-        this.columnKeys = new java.util.ArrayList();
+        this.rowKeys = new ArrayList<>();
+        this.columnKeys = new ArrayList<>();
         this.rows = new java.util.ArrayList();
     }
 
@@ -134,8 +136,8 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      *
      * @see #getRowIndex(Comparable)
      */
-    public Comparable getRowKey(int row) {
-        return (Comparable) this.rowKeys.get(row);
+    public R getRowKey(int row) {
+        return this.rowKeys.get(row);
     }
 
     /**
@@ -148,7 +150,7 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      *
      * @see #getRowKey(int)
      */
-    public int getRowIndex(Comparable key) {
+    public int getRowIndex(R key) {
         Args.nullNotPermitted(key, "key");
         return this.rowKeys.indexOf(key);
     }
@@ -160,7 +162,7 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      *
      * @see #getRowKeys()
      */
-    public List getRowKeys() {
+    public List<R> getRowKeys() {
         return Collections.unmodifiableList(this.rowKeys);
     }
 
@@ -173,8 +175,8 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      *
      * @see #getColumnIndex(Comparable)
      */
-    public Comparable getColumnKey(int column) {
-        return (Comparable) this.columnKeys.get(column);
+    public C getColumnKey(int column) {
+        return this.columnKeys.get(column);
     }
 
     /**
@@ -187,7 +189,7 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      *
      * @see #getColumnKey(int)
      */
-    public int getColumnIndex(Comparable key) {
+    public int getColumnIndex(C key) {
         Args.nullNotPermitted(key, "key");
         return this.columnKeys.indexOf(key);
     }
@@ -199,7 +201,7 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      *
      * @see #getRowKeys()
      */
-    public List getColumnKeys() {
+    public List<C> getColumnKeys() {
         return Collections.unmodifiableList(this.columnKeys);
     }
 
@@ -216,7 +218,7 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      * @throws UnknownKeyException if {@code rowKey} or
      *         {@code columnKey} is not recognised.
      */
-    public Object getObject(Comparable rowKey, Comparable columnKey) {
+    public Object getObject(R rowKey, C columnKey) {
         Args.nullNotPermitted(rowKey, "rowKey");
         Args.nullNotPermitted(columnKey, "columnKey");
         int row = this.rowKeys.indexOf(rowKey);
@@ -246,8 +248,7 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      * @param rowKey  the row key ({@code null} not permitted).
      * @param columnKey  the column key ({@code null} not permitted).
      */
-    public void addObject(Object object, Comparable rowKey,
-            Comparable columnKey) {
+    public void addObject(Object object, R rowKey, C columnKey) {
         setObject(object, rowKey, columnKey);
     }
 
@@ -258,8 +259,7 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      * @param rowKey  the row key ({@code null} not permitted).
      * @param columnKey  the column key ({@code null} not permitted).
      */
-    public void setObject(Object object, Comparable rowKey,
-            Comparable columnKey) {
+    public void setObject(Object object, R rowKey, C columnKey) {
         Args.nullNotPermitted(rowKey, "rowKey");
         Args.nullNotPermitted(columnKey, "columnKey");
         KeyedObjects row;
@@ -289,7 +289,7 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      *
      * @see #addObject(Object, Comparable, Comparable)
      */
-    public void removeObject(Comparable rowKey, Comparable columnKey) {
+    public void removeObject(R rowKey, C columnKey) {
         int rowIndex = getRowIndex(rowKey);
         if (rowIndex < 0) {
             throw new UnknownKeyException("Row key (" + rowKey
@@ -366,7 +366,7 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      *
      * @see #removeColumn(Comparable)
      */
-    public void removeRow(Comparable rowKey) {
+    public void removeRow(R rowKey) {
         int index = getRowIndex(rowKey);
         if (index < 0) {
             throw new UnknownKeyException("Row key (" + rowKey
@@ -383,7 +383,7 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      * @see #removeRow(int)
      */
     public void removeColumn(int columnIndex) {
-        Comparable columnKey = getColumnKey(columnIndex);
+        C columnKey = getColumnKey(columnIndex);
         removeColumn(columnKey);
     }
 
@@ -396,7 +396,7 @@ public class KeyedObjects2D implements Cloneable, Serializable {
      *
      * @see #removeRow(Comparable)
      */
-    public void removeColumn(Comparable columnKey) {
+    public void removeColumn(C columnKey) {
         int index = getColumnIndex(columnKey);
         if (index < 0) {
             throw new UnknownKeyException("Column key (" + columnKey

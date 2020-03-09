@@ -38,7 +38,6 @@ package org.jfree.data;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
@@ -46,13 +45,13 @@ import org.jfree.chart.util.PublicCloneable;
 /**
  * A collection of (key, object) pairs.
  */
-public class KeyedObjects implements Cloneable, PublicCloneable, Serializable {
+public class KeyedObjects<K extends Comparable<K>> implements Cloneable, PublicCloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 1321582394193530984L;
 
     /** Storage for the data. */
-    private List<KeyedObject> data;
+    private List<KeyedObject<K>> data;
 
     /**
      * Creates a new collection (initially empty).
@@ -99,9 +98,9 @@ public class KeyedObjects implements Cloneable, PublicCloneable, Serializable {
      *
      * @see #getIndex(Comparable)
      */
-    public Comparable<?> getKey(int index) {
-        Comparable<?> result = null;
-        KeyedObject item = this.data.get(index);
+    public K getKey(int index) {
+        K result = null;
+        KeyedObject<K> item = this.data.get(index);
         if (item != null) {
             result = item.getKey();
         }
@@ -117,7 +116,7 @@ public class KeyedObjects implements Cloneable, PublicCloneable, Serializable {
      *
      * @see #getKey(int)
      */
-    public int getIndex(Comparable<?> key) {
+    public int getIndex(K key) {
         Args.nullNotPermitted(key, "key");
         int i = 0;
         for (KeyedObject ko : this.data) {
@@ -134,9 +133,9 @@ public class KeyedObjects implements Cloneable, PublicCloneable, Serializable {
      *
      * @return The keys (never {@code null}).
      */
-    public List<Comparable<?>> getKeys() {
-        List<Comparable<?>> result = new ArrayList<>();
-        for (KeyedObject ko : this.data) {
+    public List<K> getKeys() {
+        List<K> result = new ArrayList<>();
+        for (KeyedObject<K> ko : this.data) {
             result.add(ko.getKey());
         }
         return result;
@@ -152,7 +151,7 @@ public class KeyedObjects implements Cloneable, PublicCloneable, Serializable {
      *
      * @see #addObject(Comparable, Object)
      */
-    public Object getObject(Comparable<?> key) {
+    public Object getObject(K key) {
         int index = getIndex(key);
         if (index < 0) {
             throw new UnknownKeyException("The key (" + key
@@ -170,7 +169,7 @@ public class KeyedObjects implements Cloneable, PublicCloneable, Serializable {
      *
      * @see #getObject(Comparable)
      */
-    public void addObject(Comparable<?> key, Object object) {
+    public void addObject(K key, Object object) {
         setObject(key, object);
     }
 
@@ -184,7 +183,7 @@ public class KeyedObjects implements Cloneable, PublicCloneable, Serializable {
      *
      * @see #getObject(Comparable)
      */
-    public void setObject(Comparable<?> key, Object object) {
+    public void setObject(K key, Object object) {
         int keyIndex = getIndex(key);
         if (keyIndex >= 0) {
             KeyedObject ko = this.data.get(keyIndex);
@@ -208,7 +207,7 @@ public class KeyedObjects implements Cloneable, PublicCloneable, Serializable {
      *
      * @since 1.0.7
      */
-    public void insertValue(int position, Comparable<?> key, Object value) {
+    public void insertValue(int position, K key, Object value) {
         if (position < 0 || position > this.data.size()) {
             throw new IllegalArgumentException("'position' out of bounds.");
         }
@@ -245,7 +244,7 @@ public class KeyedObjects implements Cloneable, PublicCloneable, Serializable {
      *
      * @throws UnknownKeyException if the key is not recognised.
      */
-    public void removeValue(Comparable<?> key) {
+    public void removeValue(K key) {
         // defer argument checking
         int index = getIndex(key);
         if (index < 0) {

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * ---------------------------------------------
  * StandardCategorySeriesLabelGeneratorTest.java
  * ---------------------------------------------
- * (C) Copyright 2006-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 03-May-2006 : Version 1 (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG);
  *
  */
 
@@ -63,7 +58,7 @@ public class StandardCategorySeriesLabelGeneratorTest {
     public void testGenerateLabel() {
         StandardCategorySeriesLabelGenerator g
                 = new StandardCategorySeriesLabelGenerator("{0}");
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String,String> dataset = new DefaultCategoryDataset<>();
         dataset.addValue(1.0, "R0", "C0");
         dataset.addValue(2.0, "R0", "C1");
         dataset.addValue(3.0, "R1", "C0");

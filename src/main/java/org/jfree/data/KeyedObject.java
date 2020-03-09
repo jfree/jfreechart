@@ -45,13 +45,14 @@ import org.jfree.chart.util.PublicCloneable;
 /**
  * A (key, object) pair.
  */
-public class KeyedObject implements Cloneable, PublicCloneable, Serializable {
+public class KeyedObject<K extends Comparable<K>> implements Cloneable, 
+        PublicCloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 2677930479256885863L;
 
     /** The key. */
-    private Comparable<?> key;
+    private K key;
 
     /** The object. */
     private Object object;
@@ -62,7 +63,7 @@ public class KeyedObject implements Cloneable, PublicCloneable, Serializable {
      * @param key  the key.
      * @param object  the object ({@code null} permitted).
      */
-    public KeyedObject(Comparable<?> key, Object object) {
+    public KeyedObject(K key, Object object) {
         this.key = key;
         this.object = object;
     }
@@ -72,7 +73,7 @@ public class KeyedObject implements Cloneable, PublicCloneable, Serializable {
      *
      * @return The key.
      */
-    public Comparable<?> getKey() {
+    public K getKey() {
         return this.key;
     }
 

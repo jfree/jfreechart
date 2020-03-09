@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------------
  * IntervalCategoryDataset.java
  * ----------------------------
- * (C) Copyright 2002-2008, by Eduard Martinescu and Contributors.
+ * (C) Copyright 2002-2020, by Eduard Martinescu and Contributors.
  *
  * Original Author:  Eduard Martinescu;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -50,7 +50,8 @@ package org.jfree.data.category;
  * A category dataset that defines a value range for each series/category
  * combination.
  */
-public interface IntervalCategoryDataset extends CategoryDataset {
+public interface IntervalCategoryDataset<R extends Comparable<R>, C extends Comparable<C>> 
+        extends CategoryDataset<R, C> {
 
     /**
      * Returns the start value for the interval for a given series and category.
@@ -74,7 +75,7 @@ public interface IntervalCategoryDataset extends CategoryDataset {
      *
      * @see #getEndValue(Comparable, Comparable)
      */
-    public Number getStartValue(Comparable series, Comparable category);
+    public Number getStartValue(R series, C category);
 
     /**
      * Returns the end value for the interval for a given series and category.
@@ -98,6 +99,6 @@ public interface IntervalCategoryDataset extends CategoryDataset {
      *
      * @see #getStartValue(Comparable, Comparable)
      */
-    public Number getEndValue(Comparable series, Comparable category);
+    public Number getEndValue(R series, C category);
 
 }

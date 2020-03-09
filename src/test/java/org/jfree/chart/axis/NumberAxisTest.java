@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,21 +27,10 @@
  * -------------------
  * NumberAxisTest.java
  * -------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 26-Mar-2003 : Version 1 (DG);
- * 14-Aug-2003 : Added tests for equals() method (DG);
- * 05-Oct-2004 : Added tests to pick up a bug in the auto-range calculation for
- *               a domain axis on an XYPlot using an XYSeriesCollection (DG);
- * 07-Jan-2005 : Added test for hashCode() (DG);
- * 11-Jan-2006 : Fixed testAutoRange2() and testAutoRange3() following changes
- *               to BarRenderer (DG);
- * 20-Feb-2006 : Added rangeType field to equals() test (DG);
  *
  */
 
@@ -184,7 +173,7 @@ public class NumberAxisTest {
      */
     @Test
     public void testAutoRange1() {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         dataset.setValue(100.0, "Row 1", "Column 1");
         dataset.setValue(200.0, "Row 1", "Column 2");
         JFreeChart chart = ChartFactory.createBarChart("Test", "Categories",
@@ -202,7 +191,7 @@ public class NumberAxisTest {
      */
     @Test
     public void testAutoRange2() {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String,String> dataset = new DefaultCategoryDataset<>();
         dataset.setValue(100.0, "Row 1", "Column 1");
         dataset.setValue(200.0, "Row 1", "Column 2");
         JFreeChart chart = ChartFactory.createLineChart("Test", "Categories",
@@ -223,7 +212,7 @@ public class NumberAxisTest {
      */
     @Test
     public void testAutoRange3() {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String,String> dataset = new DefaultCategoryDataset<>();
         dataset.setValue(100.0, "Row 1", "Column 1");
         dataset.setValue(200.0, "Row 1", "Column 2");
         JFreeChart chart = ChartFactory.createLineChart("Test", "Categories",
@@ -236,7 +225,7 @@ public class NumberAxisTest {
         assertEquals(axis.getUpperBound(), 205.0, EPSILON);
 
         // now replacing the dataset should update the axis range...
-        DefaultCategoryDataset dataset2 = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String,String> dataset2 = new DefaultCategoryDataset<>();
         dataset2.setValue(900.0, "Row 1", "Column 1");
         dataset2.setValue(1000.0, "Row 1", "Column 2");
         plot.setDataset(dataset2);
@@ -250,7 +239,7 @@ public class NumberAxisTest {
      */
     @Test
     public void testAutoRange4() {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String,String> dataset = new DefaultCategoryDataset<>();
         dataset.setValue(100.0, "Row 1", "Column 1");
         dataset.setValue(200.0, "Row 1", "Column 2");
         JFreeChart chart = ChartFactory.createBarChart("Test", "Categories",
@@ -277,7 +266,7 @@ public class NumberAxisTest {
         assertEquals(210.0, axis.getUpperBound(), EPSILON);
 
         // now replacing the dataset should update the axis range...
-        DefaultCategoryDataset dataset2 = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String,String> dataset2 = new DefaultCategoryDataset<>();
         dataset2.setValue(900.0, "Row 1", "Column 1");
         dataset2.setValue(1000.0, "Row 1", "Column 2");
         plot.setDataset(dataset2);

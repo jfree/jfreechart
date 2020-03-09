@@ -58,9 +58,9 @@ public class DefaultMultiValueCategoryDatasetTest {
      */
     @Test
     public void testGetValue() {
-        DefaultMultiValueCategoryDataset d
-                = new DefaultMultiValueCategoryDataset();
-        List<Number> values = new ArrayList<>();
+        DefaultMultiValueCategoryDataset<String, String> d
+                = new DefaultMultiValueCategoryDataset<>();
+        List<Integer> values = new ArrayList<>();
         values.add(1);
         values.add(2);
         d.add(values, "R1", "C1");
@@ -89,8 +89,8 @@ public class DefaultMultiValueCategoryDatasetTest {
      */
     @Test
     public void testGetValue2() {
-        DefaultMultiValueCategoryDataset d
-                = new DefaultMultiValueCategoryDataset();
+        DefaultMultiValueCategoryDataset<String, String> d
+                = new DefaultMultiValueCategoryDataset<>();
         boolean pass = false;
         try {
             /* Number n =*/ d.getValue(0, 0);
@@ -106,8 +106,8 @@ public class DefaultMultiValueCategoryDatasetTest {
      */
     @Test
     public void testGetRowCount() {
-        DefaultMultiValueCategoryDataset d
-                = new DefaultMultiValueCategoryDataset();
+        DefaultMultiValueCategoryDataset<String, String> d
+                = new DefaultMultiValueCategoryDataset<>();
         assertTrue(d.getRowCount() == 0);
         List<Number> values = new ArrayList<>();
         d.add(values, "R1", "C1");
@@ -125,8 +125,8 @@ public class DefaultMultiValueCategoryDatasetTest {
      */
     @Test
     public void testGetColumnCount() {
-        DefaultMultiValueCategoryDataset d
-                = new DefaultMultiValueCategoryDataset();
+        DefaultMultiValueCategoryDataset<String, String> d
+                = new DefaultMultiValueCategoryDataset<>();
         assertTrue(d.getColumnCount() == 0);
 
         List<Number> values = new ArrayList<>();
@@ -146,10 +146,10 @@ public class DefaultMultiValueCategoryDatasetTest {
      */
     @Test
     public void testEquals() {
-        DefaultMultiValueCategoryDataset d1
-                = new DefaultMultiValueCategoryDataset();
-        DefaultMultiValueCategoryDataset d2
-                = new DefaultMultiValueCategoryDataset();
+        DefaultMultiValueCategoryDataset<String, String> d1
+                = new DefaultMultiValueCategoryDataset<>();
+        DefaultMultiValueCategoryDataset<String, String> d2
+                = new DefaultMultiValueCategoryDataset<>();
         assertTrue(d1.equals(d2));
         assertTrue(d2.equals(d1));
 
@@ -177,10 +177,10 @@ public class DefaultMultiValueCategoryDatasetTest {
      */
     @Test
     public void testSerialization() {
-        DefaultMultiValueCategoryDataset d1
-                = new DefaultMultiValueCategoryDataset();
-        DefaultMultiValueCategoryDataset d2 = (DefaultMultiValueCategoryDataset)
-                TestUtils.serialised(d1);
+        DefaultMultiValueCategoryDataset<String, String> d1
+                = new DefaultMultiValueCategoryDataset<>();
+        DefaultMultiValueCategoryDataset<String, String> d2 
+                = (DefaultMultiValueCategoryDataset<String, String>) TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 
@@ -189,8 +189,8 @@ public class DefaultMultiValueCategoryDatasetTest {
      */
     @Test
     public void testAddValue() {
-        DefaultMultiValueCategoryDataset d1
-                = new DefaultMultiValueCategoryDataset();
+        DefaultMultiValueCategoryDataset<String, String> d1
+                = new DefaultMultiValueCategoryDataset<>();
 
         boolean pass = false;
         try {
@@ -221,10 +221,10 @@ public class DefaultMultiValueCategoryDatasetTest {
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        DefaultMultiValueCategoryDataset d1
-                = new DefaultMultiValueCategoryDataset();
-        DefaultMultiValueCategoryDataset d2 
-                = (DefaultMultiValueCategoryDataset) d1.clone();
+        DefaultMultiValueCategoryDataset<String, String> d1
+                = new DefaultMultiValueCategoryDataset<>();
+        DefaultMultiValueCategoryDataset<String, String> d2 
+                = (DefaultMultiValueCategoryDataset<String, String>) d1.clone();
         assertTrue(d1 != d2);
         assertTrue(d1.getClass() == d2.getClass());
         assertTrue(d1.equals(d2));
