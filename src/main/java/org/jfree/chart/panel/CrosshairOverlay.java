@@ -143,7 +143,7 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
      * @return A list of crosshairs.
      */
     public List<Crosshair> getDomainCrosshairs() {
-        return new ArrayList<Crosshair>(this.xCrosshairs);
+        return new ArrayList<>(this.xCrosshairs);
     }
 
     /**
@@ -196,7 +196,7 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
      * @return A list of crosshairs.
      */
     public List<Crosshair> getRangeCrosshairs() {
-        return new ArrayList<Crosshair>(this.yCrosshairs);
+        return new ArrayList<>(this.yCrosshairs);
     }
 
     /**
