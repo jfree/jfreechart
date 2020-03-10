@@ -504,10 +504,10 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
         this.rangeMinorGridlineStroke = DEFAULT_GRIDLINE_STROKE;
         this.rangeMinorGridlinePaint = Color.WHITE;
 
-        this.foregroundDomainMarkers = new HashMap<Integer, Collection<Marker>>();
-        this.backgroundDomainMarkers = new HashMap<Integer, Collection<Marker>>();
-        this.foregroundRangeMarkers = new HashMap<Integer, Collection<Marker>>();
-        this.backgroundRangeMarkers = new HashMap<Integer, Collection<Marker>>();
+        this.foregroundDomainMarkers = new HashMap<>();
+        this.backgroundDomainMarkers = new HashMap<>();
+        this.foregroundRangeMarkers = new HashMap<>();
+        this.backgroundRangeMarkers = new HashMap<>();
 
         this.anchorValue = 0.0;
 
