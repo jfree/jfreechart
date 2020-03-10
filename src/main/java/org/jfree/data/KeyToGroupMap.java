@@ -72,7 +72,7 @@ public class KeyToGroupMap<K extends Comparable<K>, G extends Comparable<G>>
      * Creates a new map with a default group named 'Default Group'.
      */
     public KeyToGroupMap() {
-        this((G) "Default Group");
+        this((G) "Default Group"); // FIXME
     }
 
     /**
