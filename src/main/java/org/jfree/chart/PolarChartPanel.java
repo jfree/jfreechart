@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,18 +27,11 @@
  * --------------------
  * PolarChartPanel.java
  * --------------------
- * (C) Copyright 2004-2016, by Solution Engineering, Inc. and Contributors.
+ * (C) Copyright 2004-2020, by Solution Engineering, Inc. and Contributors.
  *
  * Original Author:  Daniel Bridenbecker, Solution Engineering, Inc.;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Martin Hoeller;
- *
- * Changes
- * -------
- * 19-Jan-2004 : Version 1, contributed by DB with minor changes by DG (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
- * 10-Oct-2011 : bug #3165708: localization (MH);
  *
  */
 

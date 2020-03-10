@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,19 +27,10 @@
  * -----------------------
  * ChartMouseListener.java
  * -----------------------
- * (C) Copyright 2002-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2002-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Alex Weber;
- *
- * Changes
- * -------
- * 27-May-2002 : Version 1, incorporating code and ideas by Alex Weber (DG);
- * 13-Jun-2002 : Added Javadocs (DG);
- * 26-Sep-2002 : Fixed errors reported by Checkstyle (DG);
- * 23-Nov-2005 : Now extends EventListener (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 24-May-2007 : Updated API docs (DG);
  *
  */
 

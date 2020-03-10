@@ -89,6 +89,7 @@ import java.io.Serializable;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.EventListener;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -608,7 +609,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
             this.panMask = InputEvent.ALT_MASK;
         }
 
-        this.overlays = new java.util.ArrayList<Overlay>();
+        this.overlays = new ArrayList<>();
     }
 
     /**

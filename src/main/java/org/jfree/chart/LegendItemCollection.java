@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,26 +27,17 @@
  * -------------------------
  * LegendItemCollection.java
  * -------------------------
- * (C) Copyright 2002-2016, by Object Refinery Limited.
+ * (C) Copyright 2002-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 07-Feb-2002 : Version 1 (DG);
- * 24-Sep-2002 : Added get(int) and getItemCount() methods (DG);
- * 02-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 18-Apr-2005 : Added equals() method and implemented Cloneable and
- *               Serializable (DG);
- * 23-Apr-2008 : Fixed clone() method (DG);
- * 28-Jan-2017 : Added missing hashCode (TH);
  *
  */
 
 package org.jfree.chart;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
@@ -62,13 +53,13 @@ public class LegendItemCollection implements Cloneable, Serializable {
     private static final long serialVersionUID = 1365215565589815953L;
 
     /** Storage for the legend items. */
-    private List items;
+    private List<LegendItem> items;
 
     /**
      * Constructs a new legend item collection, initially empty.
      */
     public LegendItemCollection() {
-        this.items = new java.util.ArrayList();
+        this.items = new ArrayList<>();
     }
 
     /**
@@ -98,7 +89,7 @@ public class LegendItemCollection implements Cloneable, Serializable {
      * @return The legend item.
      */
     public LegendItem get(int index) {
-        return (LegendItem) this.items.get(index);
+        return this.items.get(index);
     }
 
     /**
@@ -115,7 +106,7 @@ public class LegendItemCollection implements Cloneable, Serializable {
      *
      * @return An iterator.
      */
-    public Iterator iterator() {
+    public Iterator<LegendItem> iterator() {
         return this.items.iterator();
     }
 
@@ -142,8 +133,7 @@ public class LegendItemCollection implements Cloneable, Serializable {
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         int hash = 7;
         hash = 17 * hash + Objects.hashCode( this.items );
         return hash;

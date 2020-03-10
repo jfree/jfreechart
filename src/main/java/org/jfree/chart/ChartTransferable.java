@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * ----------------------
  * ChartTransferable.java
  * ----------------------
- * (C) Copyright 2009-2016, by Object Refinery Limited.
+ * (C) Copyright 2009-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 08-Apr-2009 : Version 1, with inspiration from patch 1460845 (DG);
- * 05-May-2009 : Match the scaling options provided by the ChartPanel
- *               class (DG);
  *
  */
 

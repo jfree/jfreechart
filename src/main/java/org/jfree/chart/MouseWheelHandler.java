@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,19 +27,11 @@
  * ----------------------
  * MouseWheelHandler.java
  * ----------------------
- * (C) Copyright 2009-2016 by Object Refinery Limited and Contributors.
+ * (C) Copyright 2009-2020 by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Ulrich Voigt - patch 2686040;
  *                   Jim Goodwin - bug fix;
- *
- * Changes
- * -------
- * 18-Mar-2009 : Version 1, based on ideas by UV in patch 2686040 (DG);
- * 26-Mar-2009 : Implemented Serializable (DG);
- * 10-Sep-2009 : Bug fix by Jim Goodwin to respect domain/rangeZoomable flags
- *               in the ChartPanel (DG);
- * 04-Nov-2009 : Pass mouse wheel notification to PiePlot (DG);
  *
  */
 
@@ -63,7 +55,7 @@ import org.jfree.chart.plot.Zoomable;
 class MouseWheelHandler implements MouseWheelListener, Serializable {
 
     /** The chart panel. */
-    private ChartPanel chartPanel;
+    private final ChartPanel chartPanel;
 
     /** The zoom factor. */
     double zoomFactor;

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,24 +27,10 @@
  * -----------------------
  * ChartRenderingInfo.java
  * -----------------------
- * (C) Copyright 2002-2016, by Object Refinery Limited.
+ * (C) Copyright 2002-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 22-Jan-2002 : Version 1 (DG);
- * 05-Feb-2002 : Added a new constructor, completed Javadoc comments (DG);
- * 05-Mar-2002 : Added a clear() method (DG);
- * 23-May-2002 : Renamed DrawInfo --> ChartRenderingInfo (DG);
- * 26-Sep-2002 : Fixed errors reported by Checkstyle (DG);
- * 17-Sep-2003 : Added PlotRenderingInfo (DG);
- * 01-Nov-2005 : Updated equals() method (DG);
- * 30-Nov-2005 : Removed get/setPlotArea() (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 01-Dec-2006 : Fixed equals() and clone() (DG);
- * 19-Jan-2019 : Added missing hashCode (TH);
  *
  */
 
