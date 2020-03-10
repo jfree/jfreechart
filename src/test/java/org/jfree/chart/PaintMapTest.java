@@ -32,11 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * Changes:
- * --------
- * 27-Sep-2006 : Version 1 (DG);
- * 17-Jan-2007 : Added testKeysOfDifferentClasses() (DG);
- *
  */
 
 package org.jfree.chart;
@@ -60,7 +55,7 @@ public class PaintMapTest  {
      */
     @Test
     public void testGetPaint() {
-        PaintMap m1 = new PaintMap();
+        PaintMap<String> m1 = new PaintMap<>();
         assertEquals(null, m1.getPaint("A"));
         m1.put("A", Color.RED);
         assertEquals(Color.RED, m1.getPaint("A"));
@@ -82,7 +77,7 @@ public class PaintMapTest  {
      */
     @Test
     public void testPut() {
-        PaintMap m1 = new PaintMap();
+        PaintMap<String> m1 = new PaintMap<>();
         m1.put("A", Color.RED);
         assertEquals(Color.RED, m1.getPaint("A"));
 
@@ -102,8 +97,8 @@ public class PaintMapTest  {
      */
     @Test
     public void testEquals() {
-        PaintMap m1 = new PaintMap();
-        PaintMap m2 = new PaintMap();
+        PaintMap<String> m1 = new PaintMap<>();
+        PaintMap<String> m2 = new PaintMap<>();
         assertEquals(m1, m1);
         assertEquals(m1, m2);
         assertFalse(m1.equals(null));
@@ -133,8 +128,8 @@ public class PaintMapTest  {
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        PaintMap m1 = new PaintMap();
-        PaintMap m2 = (PaintMap) m1.clone();
+        PaintMap<String> m1 = new PaintMap<>();
+        PaintMap<String> m2 = (PaintMap) m1.clone();
         assertEquals(m1, m2);
 
         m1.put("K1", Color.RED);
@@ -149,8 +144,8 @@ public class PaintMapTest  {
      */
     @Test
     public void testSerialization1() {
-        PaintMap m1 = new PaintMap();
-        PaintMap m2 = (PaintMap) TestUtils.serialised(m1);
+        PaintMap<String> m1 = new PaintMap<>();
+        PaintMap<String> m2 = (PaintMap) TestUtils.serialised(m1);
         assertEquals(m1, m2);
     }
 
@@ -159,25 +154,12 @@ public class PaintMapTest  {
      */
     @Test
     public void testSerialization2() {
-        PaintMap m1 = new PaintMap();
+        PaintMap<String> m1 = new PaintMap<>();
         m1.put("K1", Color.RED);
         m1.put("K2", new GradientPaint(1.0f, 2.0f, Color.GREEN, 3.0f, 4.0f,
                 Color.YELLOW));
-        PaintMap m2 = (PaintMap) TestUtils.serialised(m1);
+        PaintMap<String> m2 = (PaintMap) TestUtils.serialised(m1);
         assertEquals(m1, m2);
-    }
-
-    /**
-     * This test covers a bug reported in the forum:
-     *
-     * http://www.jfree.org/phpBB2/viewtopic.php?t=19980
-     */
-    @Test
-    public void testKeysOfDifferentClasses() {
-        PaintMap m = new PaintMap();
-        m.put("ABC", Color.RED);
-        m.put(99, Color.BLUE);
-        assertEquals(Color.BLUE, m.getPaint(99));
     }
 
 }
