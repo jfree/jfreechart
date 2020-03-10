@@ -56,14 +56,14 @@ public class SlidingCategoryDatasetTest {
      */
     @Test
     public void testEquals() {
-        DefaultCategoryDataset u1 = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> u1 = new DefaultCategoryDataset<>();
         u1.addValue(1.0, "R1", "C1");
         u1.addValue(2.0, "R1", "C2");
-        SlidingCategoryDataset d1 = new SlidingCategoryDataset(u1, 0, 5);
-        DefaultCategoryDataset u2 = new DefaultCategoryDataset();
+        SlidingCategoryDataset<String, String> d1 = new SlidingCategoryDataset<>(u1, 0, 5);
+        DefaultCategoryDataset<String, String> u2 = new DefaultCategoryDataset<>();
         u2.addValue(1.0, "R1", "C1");
         u2.addValue(2.0, "R1", "C2");
-        SlidingCategoryDataset d2 = new SlidingCategoryDataset(u2, 0, 5);
+        SlidingCategoryDataset<String, String> d2 = new SlidingCategoryDataset<>(u2, 0, 5);
         assertTrue(d1.equals(d2));
 
         d1.setFirstCategoryIndex(1);
@@ -88,11 +88,11 @@ public class SlidingCategoryDatasetTest {
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        DefaultCategoryDataset u1 = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> u1 = new DefaultCategoryDataset<>();
         u1.addValue(1.0, "R1", "C1");
         u1.addValue(2.0, "R1", "C2");
-        SlidingCategoryDataset d1 = new SlidingCategoryDataset(u1, 0, 5);
-        SlidingCategoryDataset d2;
+        SlidingCategoryDataset<String, String> d1 = new SlidingCategoryDataset<>(u1, 0, 5);
+        SlidingCategoryDataset<String, String> d2;
         d2 = (SlidingCategoryDataset) d1.clone();
         assertTrue(d1 != d2);
         assertTrue(d1.getClass() == d2.getClass());
@@ -101,8 +101,7 @@ public class SlidingCategoryDatasetTest {
         // basic check for independence
         u1.addValue(3.0, "R1", "C3");
         assertFalse(d1.equals(d2));
-        DefaultCategoryDataset u2
-                = (DefaultCategoryDataset) d2.getUnderlyingDataset();
+        DefaultCategoryDataset<String, String> u2 = (DefaultCategoryDataset) d2.getUnderlyingDataset();
         u2.addValue(3.0, "R1", "C3");
         assertTrue(d1.equals(d2));
     }
@@ -112,18 +111,18 @@ public class SlidingCategoryDatasetTest {
      */
     @Test
     public void testSerialization() {
-        DefaultCategoryDataset u1 = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> u1 = new DefaultCategoryDataset<>();
         u1.addValue(1.0, "R1", "C1");
         u1.addValue(2.0, "R1", "C2");
-        SlidingCategoryDataset d1 = new SlidingCategoryDataset(u1, 0, 5);
-        SlidingCategoryDataset d2 = (SlidingCategoryDataset) 
+        SlidingCategoryDataset<String, String> d1 = new SlidingCategoryDataset<>(u1, 0, 5);
+        SlidingCategoryDataset<String, String> d2 = (SlidingCategoryDataset) 
                 TestUtils.serialised(d1);
         assertEquals(d1, d2);
 
         // basic check for independence
         u1.addValue(3.0, "R1", "C3");
         assertFalse(d1.equals(d2));
-        DefaultCategoryDataset u2
+        DefaultCategoryDataset<String, String> u2
                 = (DefaultCategoryDataset) d2.getUnderlyingDataset();
         u2.addValue(3.0, "R1", "C3");
         assertTrue(d1.equals(d2));
@@ -134,9 +133,9 @@ public class SlidingCategoryDatasetTest {
      */
     @Test
     public void testGetColumnCount() {
-        DefaultCategoryDataset underlying = new DefaultCategoryDataset();
-        SlidingCategoryDataset dataset = new SlidingCategoryDataset(underlying,
-                10, 2);
+        DefaultCategoryDataset<String, String> underlying = new DefaultCategoryDataset<>();
+        SlidingCategoryDataset<String, String> dataset 
+                = new SlidingCategoryDataset<>(underlying, 10, 2);
         assertEquals(0, dataset.getColumnCount());
         underlying.addValue(1.0, "R1", "C1");
         assertEquals(0, dataset.getColumnCount());
@@ -157,9 +156,9 @@ public class SlidingCategoryDatasetTest {
      */
     @Test
     public void testGetRowCount() {
-        DefaultCategoryDataset underlying = new DefaultCategoryDataset();
-        SlidingCategoryDataset dataset = new SlidingCategoryDataset(underlying,
-                10, 5);
+        DefaultCategoryDataset<String, String> underlying = new DefaultCategoryDataset<>();
+        SlidingCategoryDataset<String, String> dataset 
+                = new SlidingCategoryDataset<>(underlying, 10, 5);
         assertEquals(0, dataset.getRowCount());
         underlying.addValue(1.0, "R1", "C1");
         assertEquals(1, dataset.getRowCount());
@@ -173,13 +172,13 @@ public class SlidingCategoryDatasetTest {
      */
     @Test
     public void testGetColumnIndex() {
-        DefaultCategoryDataset underlying = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> underlying = new DefaultCategoryDataset<>();
         underlying.addValue(1.0, "R1", "C1");
         underlying.addValue(2.0, "R1", "C2");
         underlying.addValue(3.0, "R1", "C3");
         underlying.addValue(4.0, "R1", "C4");
-        SlidingCategoryDataset dataset = new SlidingCategoryDataset(underlying,
-                1, 2);
+        SlidingCategoryDataset<String, String> dataset 
+                = new SlidingCategoryDataset<>(underlying, 1, 2);
         assertEquals(-1, dataset.getColumnIndex("C1"));
         assertEquals(0, dataset.getColumnIndex("C2"));
         assertEquals(1, dataset.getColumnIndex("C3"));
@@ -191,13 +190,13 @@ public class SlidingCategoryDatasetTest {
      */
     @Test
     public void testGetRowIndex() {
-        DefaultCategoryDataset underlying = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> underlying = new DefaultCategoryDataset<>();
         underlying.addValue(1.0, "R1", "C1");
         underlying.addValue(2.0, "R2", "C1");
         underlying.addValue(3.0, "R3", "C1");
         underlying.addValue(4.0, "R4", "C1");
-        SlidingCategoryDataset dataset = new SlidingCategoryDataset(underlying,
-                1, 2);
+        SlidingCategoryDataset<String, String> dataset 
+                = new SlidingCategoryDataset<>(underlying, 1, 2);
         assertEquals(0, dataset.getRowIndex("R1"));
         assertEquals(1, dataset.getRowIndex("R2"));
         assertEquals(2, dataset.getRowIndex("R3"));
@@ -209,13 +208,14 @@ public class SlidingCategoryDatasetTest {
      */
     @Test
     public void testGetValue() {
-        DefaultCategoryDataset underlying = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> underlying 
+                = new DefaultCategoryDataset<>();
         underlying.addValue(1.0, "R1", "C1");
         underlying.addValue(2.0, "R1", "C2");
         underlying.addValue(3.0, "R1", "C3");
         underlying.addValue(4.0, "R1", "C4");
-        SlidingCategoryDataset dataset = new SlidingCategoryDataset(underlying,
-                1, 2);
+        SlidingCategoryDataset<String, String> dataset 
+                = new SlidingCategoryDataset<>(underlying, 1, 2);
         assertEquals(2.0, dataset.getValue("R1", "C2"));
         assertEquals(3.0, dataset.getValue("R1", "C3"));
         boolean pass = false;
@@ -242,14 +242,15 @@ public class SlidingCategoryDatasetTest {
      */
     @Test
     public void testGetColumnKeys() {
-        DefaultCategoryDataset underlying = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> underlying 
+                = new DefaultCategoryDataset<>();
         underlying.addValue(1.0, "R1", "C1");
         underlying.addValue(2.0, "R1", "C2");
         underlying.addValue(3.0, "R1", "C3");
         underlying.addValue(4.0, "R1", "C4");
-        SlidingCategoryDataset dataset = new SlidingCategoryDataset(underlying,
-                1, 2);
-        List keys = dataset.getColumnKeys();
+        SlidingCategoryDataset<String, String> dataset 
+                = new SlidingCategoryDataset<>(underlying, 1, 2);
+        List<String> keys = dataset.getColumnKeys();
         assertTrue(keys.contains("C2"));
         assertTrue(keys.contains("C3"));
         assertEquals(2, keys.size());

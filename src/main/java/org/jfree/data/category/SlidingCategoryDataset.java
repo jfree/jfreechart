@@ -59,11 +59,11 @@ import org.jfree.data.general.DatasetChangeEvent;
  *
  * @since 1.0.10
  */
-public class SlidingCategoryDataset extends AbstractDataset
-        implements CategoryDataset {
+public class SlidingCategoryDataset<R extends Comparable<R>, C extends Comparable<C>> 
+        extends AbstractDataset implements CategoryDataset<R, C> {
 
     /** The underlying dataset. */
-    private CategoryDataset underlying;
+    private CategoryDataset<R, C> underlying;
 
     /** The index of the first category to present. */
     private int firstCategoryIndex;
@@ -80,8 +80,8 @@ public class SlidingCategoryDataset extends AbstractDataset
      *     underlying dataset.
      * @param maxColumns  the maximumColumnCount.
      */
-    public SlidingCategoryDataset(CategoryDataset underlying, int firstColumn,
-            int maxColumns) {
+    public SlidingCategoryDataset(CategoryDataset<R, C> underlying, 
+            int firstColumn, int maxColumns) {
         this.underlying = underlying;
         this.firstCategoryIndex = firstColumn;
         this.maximumCategoryCount = maxColumns;
@@ -92,7 +92,7 @@ public class SlidingCategoryDataset extends AbstractDataset
      *
      * @return The underlying dataset (never {@code null}).
      */
-    public CategoryDataset getUnderlyingDataset() {
+    public CategoryDataset<R, C> getUnderlyingDataset() {
         return this.underlying;
     }
 
@@ -172,7 +172,7 @@ public class SlidingCategoryDataset extends AbstractDataset
      * @return The column index, or -1 if the key is not recognised.
      */
     @Override
-    public int getColumnIndex(Comparable key) {
+    public int getColumnIndex(C key) {
         int index = this.underlying.getColumnIndex(key);
         if (index >= this.firstCategoryIndex && index <= lastCategoryIndex()) {
             return index - this.firstCategoryIndex;
@@ -190,7 +190,7 @@ public class SlidingCategoryDataset extends AbstractDataset
      * @throws IndexOutOfBoundsException if {@code row} is out of bounds.
      */
     @Override
-    public Comparable getColumnKey(int column) {
+    public C getColumnKey(int column) {
         return this.underlying.getColumnKey(column + this.firstCategoryIndex);
     }
 
@@ -202,7 +202,7 @@ public class SlidingCategoryDataset extends AbstractDataset
      * @see #getColumnKey(int)
      */
     @Override
-    public List getColumnKeys() {
+    public List<C> getColumnKeys() {
         List result = new java.util.ArrayList();
         int last = lastCategoryIndex();
         for (int i = this.firstCategoryIndex; i <= last; i++) {
@@ -219,7 +219,7 @@ public class SlidingCategoryDataset extends AbstractDataset
      * @return The row index, or {@code -1} if the key is unrecognised.
      */
     @Override
-    public int getRowIndex(Comparable key) {
+    public int getRowIndex(R key) {
         return this.underlying.getRowIndex(key);
     }
 
@@ -233,7 +233,7 @@ public class SlidingCategoryDataset extends AbstractDataset
      * @throws IndexOutOfBoundsException if {@code row} is out of bounds.
      */
     @Override
-    public Comparable getRowKey(int row) {
+    public R getRowKey(int row) {
         return this.underlying.getRowKey(row);
     }
 
@@ -243,7 +243,7 @@ public class SlidingCategoryDataset extends AbstractDataset
      * @return The keys.
      */
     @Override
-    public List getRowKeys() {
+    public List<R> getRowKeys() {
         return this.underlying.getRowKeys();
     }
 
@@ -258,7 +258,7 @@ public class SlidingCategoryDataset extends AbstractDataset
      * @throws UnknownKeyException if either key is not defined in the dataset.
      */
     @Override
-    public Number getValue(Comparable rowKey, Comparable columnKey) {
+    public Number getValue(R rowKey, C columnKey) {
         int r = getRowIndex(rowKey);
         int c = getColumnIndex(columnKey);
         if (c == -1) {
@@ -365,7 +365,7 @@ public class SlidingCategoryDataset extends AbstractDataset
      */
     @Override
     public Object clone() throws CloneNotSupportedException {
-        SlidingCategoryDataset clone = (SlidingCategoryDataset) super.clone();
+        SlidingCategoryDataset<R, C> clone = (SlidingCategoryDataset) super.clone();
         if (this.underlying instanceof PublicCloneable) {
             PublicCloneable pc = (PublicCloneable) this.underlying;
             clone.underlying = (CategoryDataset) pc.clone();
