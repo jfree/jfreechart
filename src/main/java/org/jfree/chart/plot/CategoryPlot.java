@@ -443,17 +443,17 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
         this.orientation = PlotOrientation.VERTICAL;
 
         // allocate storage for dataset, axes and renderers
-        this.domainAxes = new HashMap<Integer, CategoryAxis>();
-        this.domainAxisLocations = new HashMap<Integer, AxisLocation>();
-        this.rangeAxes = new HashMap<Integer, ValueAxis>();
-        this.rangeAxisLocations = new HashMap<Integer, AxisLocation>();
+        this.domainAxes = new HashMap<>();
+        this.domainAxisLocations = new HashMap<>();
+        this.rangeAxes = new HashMap<>();
+        this.rangeAxisLocations = new HashMap<>();
 
         this.datasetToDomainAxesMap = new TreeMap();
         this.datasetToRangeAxesMap = new TreeMap();
 
-        this.renderers = new HashMap<Integer, CategoryItemRenderer>();
+        this.renderers = new HashMap<>();
 
-        this.datasets = new HashMap<Integer, CategoryDataset>();
+        this.datasets = new HashMap<>();
         this.datasets.put(0, dataset);
         if (dataset != null) {
             dataset.addChangeListener(this);
@@ -1240,7 +1240,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @see #getDomainAxisForDataset(int)
      */
     public void mapDatasetToDomainAxis(int index, int axisIndex) {
-        List<Integer> axisIndices = new java.util.ArrayList<Integer>(1);
+        List<Integer> axisIndices = new ArrayList<>(1);
         axisIndices.add(axisIndex);
         mapDatasetToDomainAxes(index, axisIndices);
     }
@@ -2236,14 +2236,14 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
         if (layer == Layer.FOREGROUND) {
             markers = this.foregroundDomainMarkers.get(index);
             if (markers == null) {
-                markers = new java.util.ArrayList<Marker>();
+                markers = new ArrayList<>();
                 this.foregroundDomainMarkers.put(index, markers);
             }
             markers.add(marker);
         } else if (layer == Layer.BACKGROUND) {
             markers = this.backgroundDomainMarkers.get(index);
             if (markers == null) {
-                markers = new java.util.ArrayList<Marker>();
+                markers = new ArrayList<>();
                 this.backgroundDomainMarkers.put(index, markers);
             }
             markers.add(marker);
@@ -2502,14 +2502,14 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
         if (layer == Layer.FOREGROUND) {
             markers = this.foregroundRangeMarkers.get(index);
             if (markers == null) {
-                markers = new java.util.ArrayList<Marker>();
+                markers = new ArrayList<>();
                 this.foregroundRangeMarkers.put(index, markers);
             }
             markers.add(marker);
         } else if (layer == Layer.BACKGROUND) {
             markers = this.backgroundRangeMarkers.get(index);
             if (markers == null) {
-                markers = new java.util.ArrayList<Marker>();
+                markers = new ArrayList<>();
                 this.backgroundRangeMarkers.put(index, markers);
             }
             markers.add(marker);
@@ -3549,7 +3549,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @return The list of indices. 
      */
     private List<Integer> getDatasetIndices(DatasetRenderingOrder order) {
-        List<Integer> result = new ArrayList<Integer>();
+        List<Integer> result = new ArrayList<>();
         for (Map.Entry<Integer, CategoryDataset> entry : 
                 this.datasets.entrySet()) {
             if (entry.getValue() != null) {
@@ -3572,7 +3572,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @return A list of indices.
      */
     private List<Integer> getRendererIndices(DatasetRenderingOrder order) {
-        List<Integer> result = new ArrayList<Integer>();
+        List<Integer> result = new ArrayList<>();
         for (Map.Entry<Integer, CategoryItemRenderer> entry: 
                 this.renderers.entrySet()) {
             if (entry.getValue() != null) {
@@ -4087,7 +4087,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     @Override
     public Range getDataRange(ValueAxis axis) {
         Range result = null;
-        List<CategoryDataset> mappedDatasets = new ArrayList<CategoryDataset>();
+        List<CategoryDataset> mappedDatasets = new ArrayList<>();
         int rangeIndex = findRangeAxisIndex(axis);
         if (rangeIndex >= 0) {
             mappedDatasets.addAll(datasetsMappedToRangeAxis(rangeIndex));
@@ -4118,7 +4118,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @since 1.0.3
      */
     private List<CategoryDataset> datasetsMappedToDomainAxis(int axisIndex) {
-        List<CategoryDataset> result = new ArrayList<CategoryDataset>();
+        List<CategoryDataset> result = new ArrayList<>();
         for (Entry<Integer, CategoryDataset> entry : this.datasets.entrySet()) {
             CategoryDataset dataset = entry.getValue();
             if (dataset == null) {
@@ -4149,7 +4149,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @return The list (possibly empty, but never {@code null}).
      */
     private List<CategoryDataset> datasetsMappedToRangeAxis(int axisIndex) {
-        List<CategoryDataset> result = new ArrayList<CategoryDataset>();
+        List<CategoryDataset> result = new ArrayList<>();
         for (Entry<Integer, CategoryDataset> entry : this.datasets.entrySet()) {
             Integer datasetIndex = entry.getKey();
             CategoryDataset dataset = entry.getValue();
@@ -4925,12 +4925,12 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
         }
 
         // AxisLocation is immutable, so we can just copy the maps
-        clone.domainAxisLocations = new HashMap<Integer, AxisLocation>(
+        clone.domainAxisLocations = new HashMap<>(
                 this.domainAxisLocations);
-        clone.rangeAxisLocations = new HashMap<Integer, AxisLocation>(
+        clone.rangeAxisLocations = new HashMap<>(
                 this.rangeAxisLocations);
 
-        clone.datasets = new HashMap<Integer, CategoryDataset>(this.datasets);
+        clone.datasets = new HashMap<>(this.datasets);
         for (CategoryDataset dataset : clone.datasets.values()) {
             if (dataset != null) {
                 dataset.addChangeListener(clone);

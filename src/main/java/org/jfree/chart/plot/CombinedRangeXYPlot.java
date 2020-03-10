@@ -104,6 +104,7 @@ package org.jfree.chart.plot;
 import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -156,10 +157,8 @@ public class CombinedRangeXYPlot extends XYPlot
      */
     public CombinedRangeXYPlot(ValueAxis rangeAxis) {
         super(null, // no data in the parent plot
-              null,
-              rangeAxis,
-              null);
-        this.subplots = new java.util.ArrayList<XYPlot>();
+              null, rangeAxis, null);
+        this.subplots = new ArrayList<>();
     }
 
     /**
@@ -464,9 +463,7 @@ public class CombinedRangeXYPlot extends XYPlot
             result = new LegendItemCollection();
 
             if (this.subplots != null) {
-                Iterator iterator = this.subplots.iterator();
-                while (iterator.hasNext()) {
-                    XYPlot plot = (XYPlot) iterator.next();
+                for (XYPlot plot : this.subplots) {
                     LegendItemCollection more = plot.getLegendItems();
                     result.addAll(more);
                 }
@@ -507,10 +504,8 @@ public class CombinedRangeXYPlot extends XYPlot
         else {
             // if the source point doesn't fall within a subplot, we do the
             // zoom on all subplots...
-            Iterator iterator = getSubplots().iterator();
-            while (iterator.hasNext()) {
-                subplot = (XYPlot) iterator.next();
-                subplot.zoomDomainAxes(factor, info, source, useAnchor);
+            for (XYPlot plot : getSubplots()) {
+                plot.zoomDomainAxes(factor, info, source, useAnchor);
             }
         }
     }
@@ -534,11 +529,8 @@ public class CombinedRangeXYPlot extends XYPlot
         else {
             // if the source point doesn't fall within a subplot, we do the
             // zoom on all subplots...
-            Iterator iterator = getSubplots().iterator();
-            while (iterator.hasNext()) {
-                subplot = (XYPlot) iterator.next();
-                subplot.zoomDomainAxes(lowerPercent, upperPercent, info,
-                        source);
+            for (XYPlot plot : getSubplots()) {
+                plot.zoomDomainAxes(lowerPercent, upperPercent, info, source);
             }
         }
     }
@@ -611,9 +603,8 @@ public class CombinedRangeXYPlot extends XYPlot
         super.setRenderer(renderer);  // not strictly necessary, since the
                                       // renderer set for the
                                       // parent plot is not used
-        Iterator iterator = this.subplots.iterator();
-        while (iterator.hasNext()) {
-            XYPlot plot = (XYPlot) iterator.next();
+                                      
+        for (XYPlot plot : this.subplots) {
             plot.setRenderer(renderer);
         }
     }
