@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -31,7 +31,6 @@ package org.jfree.chart.ui;
 import java.awt.BorderLayout;
 import java.awt.Stroke;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
@@ -66,11 +65,8 @@ public class StrokeChooserPanel extends JPanel {
         this.selector.setRenderer(new StrokeSample(null));
         add(this.selector);
         // Changes due to focus problems!! DZ
-        this.selector.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                getSelector().transferFocus();
-            }
+        this.selector.addActionListener((ActionEvent evt) -> {
+            getSelector().transferFocus();
         });
     }
 
