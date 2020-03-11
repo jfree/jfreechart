@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,21 +27,10 @@
  * -------------------------
  * AbstractRendererTest.java
  * -------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 23-Oct-2003 : Version 1 (DG);
- * 01-Mar-2004 : Added serialization test (DG);
- * 19-Feb-2007 : Added testCloning (DG);
- * 28-Feb-2007 : Added checks for cloning (DG);
- * 17-Jun-2008 : Added new fields to testEquals() and testCloning() (DG);
- * 28-Jan-2009 : Updated testEquals() (DG);
- * 28-Apr-2009 : Updated testEquals() (DG);
- * 25-Apr-2016 : Update testClone() (DG);
  *
  */
 
@@ -62,7 +51,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
 import java.awt.Rectangle;
-import java.awt.Shape;
 import java.awt.Stroke;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
@@ -734,7 +722,7 @@ public class AbstractRendererTest {
 
         // now check autoPopulate==true
         r.setAutoPopulateSeriesPaint(true);
-        /*CategoryPlot plot =*/ new CategoryPlot(null, new CategoryAxis(
+        CategoryPlot plot = new CategoryPlot(null, new CategoryAxis(
                 "Category"), new NumberAxis("Value"), r);
         assertEquals(DefaultDrawingSupplier.DEFAULT_PAINT_SEQUENCE[0],
                 r.lookupSeriesPaint(0));
