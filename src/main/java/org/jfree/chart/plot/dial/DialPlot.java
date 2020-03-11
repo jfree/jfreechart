@@ -44,7 +44,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.jfree.chart.JFreeChart;
@@ -677,7 +676,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
         DialScale result = (DialScale) this.scales.get(0);
         Integer scaleIndex = (Integer) this.datasetToScaleMap.get(datasetIndex);
         if (scaleIndex != null) {
-            result = getScale(scaleIndex.intValue());
+            result = getScale(scaleIndex);
         }
         return result;
     }
