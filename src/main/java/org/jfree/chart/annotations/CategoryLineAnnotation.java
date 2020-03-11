@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,19 +27,10 @@
  * ---------------------------
  * CategoryLineAnnotation.java
  * ---------------------------
- * (C) Copyright 2005-2017, by Object Refinery Limited.
+ * (C) Copyright 2005-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Peter Kolb (patch 2809117);
- *
- * Changes:
- * --------
- * 29-Jul-2005 : Version 1, based on CategoryTextAnnotation (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 06-Mar-2007 : Reimplemented hashCode() (DG);
- * 23-Apr-2008 : Implemented PublicCloneable (DG);
- * 24-Jun-2009 : Now extends AbstractAnnotation (see patch 2809117 by PK) (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
