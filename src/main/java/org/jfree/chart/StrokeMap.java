@@ -86,9 +86,9 @@ public class StrokeMap<K extends Comparable<K>> implements Cloneable, Serializab
      * @throws IllegalArgumentException if {@code key} is
      *     {@code null}.
      */
-    public Stroke getStroke(Comparable key) {
+    public Stroke getStroke(K key) {
         Args.nullNotPermitted(key, "key");
-        return (Stroke) this.store.get(key);
+        return this.store.get(key);
     }
 
     /**
@@ -189,10 +189,7 @@ public class StrokeMap<K extends Comparable<K>> implements Cloneable, Serializab
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
         stream.writeInt(this.store.size());
-        Set keys = this.store.keySet();
-        Iterator iterator = keys.iterator();
-        while (iterator.hasNext()) {
-            Comparable key = (Comparable) iterator.next();
+        for (K key : this.store.keySet()) {
             stream.writeObject(key);
             Stroke stroke = getStroke(key);
             SerialUtils.writeStroke(stroke, stream);
