@@ -2551,6 +2551,15 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         return svg;
     }
 
+    /**
+     * Creates an {@code SVGGraphics2D} instance (from JFreeSVG) using reflection.
+     * If JFreeSVG is not on the classpath, this method returns {@code null}.
+     * 
+     * @param w  the width.
+     * @param h  the height.
+     * 
+     * @return An {@code SVGGraphics2D} instance or {@code null}. 
+     */
     protected Graphics2D createSVGGraphics2D(int w, int h) {
         try {
             Class svgGraphics2d = Class.forName("org.jfree.graphics2d.svg.SVGGraphics2D");
