@@ -216,11 +216,7 @@ public class LineAndShapeRendererTest {
             return false;
         }
         r2.setDefaultShapesFilled(false);
-        if (!r1.equals(r2)) {
-            return false;
-        }
-        return true;
-
+        return r1.equals(r2);
     }
 
     /**
