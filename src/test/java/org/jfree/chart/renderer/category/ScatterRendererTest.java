@@ -140,8 +140,7 @@ public class ScatterRendererTest {
      *
      * @return A boolean.
      */
-    private boolean checkIndependence(ScatterRenderer r1,
-            ScatterRenderer r2) {
+    private boolean checkIndependence(ScatterRenderer r1, ScatterRenderer r2) {
 
         // should be equal...
         if (!r1.equals(r2)) {
@@ -164,10 +163,7 @@ public class ScatterRendererTest {
             return false;
         }
         r2.setBaseShapesFilled(false);
-        if (!r1.equals(r2)) {
-            return false;
-        }
-        return true;
+        return r1.equals(r2);
 
     }
 
