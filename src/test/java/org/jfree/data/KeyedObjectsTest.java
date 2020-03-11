@@ -74,7 +74,7 @@ public class KeyedObjectsTest {
     @Test
     public void testCloning2() throws CloneNotSupportedException {
         // case 1 - object is mutable but not PublicCloneable
-        Object obj1 = new ArrayList<Object>();
+        Object obj1 = new ArrayList<>();
         KeyedObjects ko1 = new KeyedObjects();
         ko1.addObject("K1", obj1);
         KeyedObjects ko2 = (KeyedObjects) ko1.clone();
