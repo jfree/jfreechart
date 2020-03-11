@@ -1338,19 +1338,15 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
                 applyToXYItemRenderer(r);
             }
         }
-
         // process all annotations
-        Iterator iter = plot.getAnnotations().iterator();
-        while (iter.hasNext()) {
-            XYAnnotation a = (XYAnnotation) iter.next();
+
+        for (XYAnnotation a : plot.getAnnotations()) {
             applyToXYAnnotation(a);
         }
 
         if (plot instanceof CombinedDomainXYPlot) {
             CombinedDomainXYPlot cp = (CombinedDomainXYPlot) plot;
-            Iterator iterator = cp.getSubplots().iterator();
-            while (iterator.hasNext()) {
-                XYPlot subplot = (XYPlot) iterator.next();
+            for (XYPlot subplot : cp.getSubplots()) {
                 if (subplot != null) {
                     applyToPlot(subplot);
                 }
@@ -1358,9 +1354,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
         }
         if (plot instanceof CombinedRangeXYPlot) {
             CombinedRangeXYPlot cp = (CombinedRangeXYPlot) plot;
-            Iterator iterator = cp.getSubplots().iterator();
-            while (iterator.hasNext()) {
-                XYPlot subplot = (XYPlot) iterator.next();
+            for (XYPlot subplot : cp.getSubplots()) {
                 if (subplot != null) {
                     applyToPlot(subplot);
                 }
