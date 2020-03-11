@@ -52,7 +52,7 @@ import org.jfree.chart.plot.Zoomable;
  *
  * @since 1.0.13
  */
-class MouseWheelHandler implements MouseWheelListener, Serializable {
+public class MouseWheelHandler implements MouseWheelListener, Serializable {
 
     /** The chart panel. */
     private final ChartPanel chartPanel;
