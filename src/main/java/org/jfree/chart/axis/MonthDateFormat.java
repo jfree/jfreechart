@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * --------------------
  * MonthDateFormat.java
  * --------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 10-May-2005 : Version 1 (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -54,8 +49,6 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.TimeZone;
 import org.jfree.chart.util.Args;
-
-import org.jfree.data.time.Month;
 
 /**
  * A formatter that formats dates to show the initial letter(s) of the month
