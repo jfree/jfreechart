@@ -24,6 +24,14 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
+ * ---------------
+ * SerialDate.java
+ * ---------------
+ * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
+ *
+ * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Contributor(s):   -;
+ *
  */
 
 package org.jfree.chart.date;
