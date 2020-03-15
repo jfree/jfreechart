@@ -79,9 +79,17 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
      * @since 1.0.17
      */
     public static enum FillType {
+       
+        /** No fill. */
         NONE,
+        
+        /** Fill down to zero. */
         TO_ZERO,
+        
+        /** Fill to the lower bound. */
         TO_LOWER_BOUND,
+        
+        /** Fill to the upper bound. */
         TO_UPPER_BOUND
     }
     
