@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * -----------------------
  * XYAnnotationEntity.java
  * -----------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited.
+ * (C) Copyright 2004-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 29-Sep-2004 : Version 1 (DG);
  *
  */
 
@@ -47,8 +43,7 @@ import java.io.Serializable;
  * A chart entity that represents an annotation on an
  * {@link org.jfree.chart.plot.XYPlot}.
  */
-public class XYAnnotationEntity extends ChartEntity
-                                implements Serializable {
+public class XYAnnotationEntity extends ChartEntity implements Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 2340334068383660799L;

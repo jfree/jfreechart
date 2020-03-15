@@ -3639,9 +3639,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
         // draw the top axes
         double cursor = dataArea.getMinY() - this.axisOffset.calculateTopOutset(
                 dataArea.getHeight());
-        Iterator iterator = axisCollection.getAxesAtTop().iterator();
-        while (iterator.hasNext()) {
-            Axis axis = (Axis) iterator.next();
+        for (Axis axis: axisCollection.getAxesAtTop()) {
             if (axis != null) {
                 AxisState axisState = axis.draw(g2, cursor, plotArea, dataArea,
                         RectangleEdge.TOP, plotState);
@@ -3653,9 +3651,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
         // draw the bottom axes
         cursor = dataArea.getMaxY()
                  + this.axisOffset.calculateBottomOutset(dataArea.getHeight());
-        iterator = axisCollection.getAxesAtBottom().iterator();
-        while (iterator.hasNext()) {
-            Axis axis = (Axis) iterator.next();
+        for (Axis axis : axisCollection.getAxesAtBottom()) {
             if (axis != null) {
                 AxisState axisState = axis.draw(g2, cursor, plotArea, dataArea,
                         RectangleEdge.BOTTOM, plotState);
@@ -3667,9 +3663,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
         // draw the left axes
         cursor = dataArea.getMinX()
                  - this.axisOffset.calculateLeftOutset(dataArea.getWidth());
-        iterator = axisCollection.getAxesAtLeft().iterator();
-        while (iterator.hasNext()) {
-            Axis axis = (Axis) iterator.next();
+        for (Axis axis : axisCollection.getAxesAtLeft()) {
             if (axis != null) {
                 AxisState axisState = axis.draw(g2, cursor, plotArea, dataArea,
                         RectangleEdge.LEFT, plotState);
@@ -3681,9 +3675,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
         // draw the right axes
         cursor = dataArea.getMaxX()
                  + this.axisOffset.calculateRightOutset(dataArea.getWidth());
-        iterator = axisCollection.getAxesAtRight().iterator();
-        while (iterator.hasNext()) {
-            Axis axis = (Axis) iterator.next();
+        for (Axis axis: axisCollection.getAxesAtRight()) {
             if (axis != null) {
                 AxisState axisState = axis.draw(g2, cursor, plotArea, dataArea,
                         RectangleEdge.RIGHT, plotState);

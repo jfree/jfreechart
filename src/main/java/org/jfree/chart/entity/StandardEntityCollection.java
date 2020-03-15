@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,30 +27,17 @@
  * -----------------------------
  * StandardEntityCollection.java
  * -----------------------------
- * (C) Copyright 2001-2016, by Object Refinery Limited.
+ * (C) Copyright 2001-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 23-May-2002 : Version 1 (DG);
- * 26-Jun-2002 : Added iterator() method (DG);
- * 03-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 19-May-2004 : Implemented Serializable (DG);
- * 29-Sep-2004 : Renamed addEntity() --> add() and addEntities()
- *               --> addAll() (DG);
- * 19-Jan-2005 : Changed storage from Collection --> List (DG);
- * 20-May-2005 : Fixed bug 1113521 - inefficiency in getEntity() method (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 01-Dec-2006 : Implemented PublicCloneable and fixed clone() method (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
 package org.jfree.chart.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
@@ -69,13 +56,13 @@ public class StandardEntityCollection implements EntityCollection,
     private static final long serialVersionUID = 5384773031184897047L;
 
     /** Storage for the entities. */
-    private List entities;
+    private List<ChartEntity> entities;
 
     /**
      * Constructs a new entity collection (initially empty).
      */
     public StandardEntityCollection() {
-        this.entities = new java.util.ArrayList();
+        this.entities = new ArrayList<>();
     }
 
     /**
@@ -99,7 +86,7 @@ public class StandardEntityCollection implements EntityCollection,
      */
     @Override
     public ChartEntity getEntity(int index) {
-        return (ChartEntity) this.entities.get(index);
+        return this.entities.get(index);
     }
 
     /**
@@ -159,7 +146,7 @@ public class StandardEntityCollection implements EntityCollection,
      * @return The entities.
      */
     @Override
-    public Collection getEntities() {
+    public Collection<ChartEntity> getEntities() {
         return Collections.unmodifiableCollection(this.entities);
     }
 
@@ -169,7 +156,7 @@ public class StandardEntityCollection implements EntityCollection,
      * @return An iterator.
      */
     @Override
-    public Iterator iterator() {
+    public Iterator<ChartEntity> iterator() {
         return this.entities.iterator();
     }
 
@@ -203,10 +190,10 @@ public class StandardEntityCollection implements EntityCollection,
     public Object clone() throws CloneNotSupportedException {
         StandardEntityCollection clone
                 = (StandardEntityCollection) super.clone();
-        clone.entities = new java.util.ArrayList(this.entities.size());
+        clone.entities = new ArrayList(this.entities.size());
         for (int i = 0; i < this.entities.size(); i++) {
-            ChartEntity entity = (ChartEntity) this.entities.get(i);
-            clone.entities.add(entity.clone());
+            ChartEntity entity = this.entities.get(i);
+            clone.entities.add((ChartEntity) entity.clone());
         }
         return clone;
     }

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,23 +27,10 @@
  * ---------------------------
  * StandardXYURLGenerator.java
  * ---------------------------
- * (C) Copyright 2002-2016, by Richard Atkinson and Contributors.
+ * (C) Copyright 2002-2020, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributors:     David Gilbert (for Object Refinery Limited);
- *
- * Changes:
- * --------
- * 05-Aug-2002 : Version 1, contributed by Richard Atkinson;
- * 29-Aug-2002 : New constructor and member variables to customise series and
- *               item parameter names (RA);
- * 09-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 23-Mar-2003 : Implemented Serializable (DG);
- * 01-Mar-2004 : Added equals() method (DG);
- * 13-Jan-2005 : Modified for XHTML 1.0 compliance (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 02-Feb-2007 : Removed author tags from all over JFreeChart sources (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -132,7 +119,7 @@ public class StandardXYURLGenerator implements XYURLGenerator, Serializable {
     public String generateURL(XYDataset dataset, int series, int item) {
         // TODO: URLEncode?
         String url = this.prefix;
-        boolean firstParameter = url.indexOf("?") == -1;
+        boolean firstParameter = !url.contains("?");
         url += firstParameter ? "?" : "&amp;";
         url += this.seriesParameterName + "=" + series
                 + "&amp;" + this.itemParameterName + "=" + item;

@@ -336,7 +336,7 @@ public final class DatasetUtils {
      * @return The dataset.
      */
     public static <R extends Comparable<R>, C extends Comparable<C>> 
-            CategoryDataset createCategoryDataset(R[] rowKeys, C[] columnKeys, 
+            CategoryDataset<R, C> createCategoryDataset(R[] rowKeys, C[] columnKeys, 
             double[][] data) {
 
         Args.nullNotPermitted(rowKeys, "rowKeys");
@@ -412,7 +412,7 @@ public final class DatasetUtils {
      * @return A dataset.
      */
     public static XYDataset sampleFunction2D(Function2D f, double start,
-            double end, int samples, Comparable seriesKey) {
+            double end, int samples, Comparable<?> seriesKey) {
 
         // defer argument checking
         XYSeries series = sampleFunction2DToSeries(f, start, end, samples,
@@ -437,7 +437,7 @@ public final class DatasetUtils {
      * @since 1.0.13
      */
     public static XYSeries sampleFunction2DToSeries(Function2D f,
-            double start, double end, int samples, Comparable seriesKey) {
+            double start, double end, int samples, Comparable<?> seriesKey) {
 
         Args.nullNotPermitted(f, "f");
         Args.nullNotPermitted(seriesKey, "seriesKey");
@@ -1287,8 +1287,8 @@ public final class DatasetUtils {
      * 
      * @since 1.0.13
      */
-    public static Range iterateToFindDomainBounds(XYDataset dataset,
-            List visibleSeriesKeys, boolean includeInterval) {
+    public static <S extends Comparable<S>> Range iterateToFindDomainBounds(
+            XYDataset dataset, List<S> visibleSeriesKeys, boolean includeInterval) {
         Args.nullNotPermitted(dataset, "dataset");
         Args.nullNotPermitted(visibleSeriesKeys, "visibleSeriesKeys");
 
@@ -1298,9 +1298,7 @@ public final class DatasetUtils {
         if (includeInterval && dataset instanceof IntervalXYDataset) {
             // handle special case of IntervalXYDataset
             IntervalXYDataset ixyd = (IntervalXYDataset) dataset;
-            Iterator iterator = visibleSeriesKeys.iterator();
-            while (iterator.hasNext()) {
-                Comparable seriesKey = (Comparable) iterator.next();
+            for (S seriesKey : visibleSeriesKeys) {
                 int series = dataset.indexOf(seriesKey);
                 int itemCount = dataset.getItemCount(series);
                 for (int item = 0; item < itemCount; item++) {
@@ -1321,9 +1319,7 @@ public final class DatasetUtils {
             }
         } else {
             // standard case - plain XYDataset
-            Iterator iterator = visibleSeriesKeys.iterator();
-            while (iterator.hasNext()) {
-                Comparable seriesKey = (Comparable) iterator.next();
+            for (S seriesKey : visibleSeriesKeys) {
                 int series = dataset.indexOf(seriesKey);
                 int itemCount = dataset.getItemCount(series);
                 for (int item = 0; item < itemCount; item++) {
@@ -1748,7 +1744,8 @@ public final class DatasetUtils {
      *
      * @return The maximum value (possibly {@code null}).
      */
-    public static Number findMaximumRangeValue(CategoryDataset<?, ?> dataset) {
+    public static <R extends Comparable<R>, C extends Comparable<C>> 
+            Number findMaximumRangeValue(CategoryDataset<R, C> dataset) {
 
         Args.nullNotPermitted(dataset, "dataset");
 
@@ -2131,7 +2128,8 @@ public final class DatasetUtils {
      *
      * @see #findRangeBounds(CategoryDataset)
      */
-    public static Range findCumulativeRangeBounds(CategoryDataset dataset) {
+    public static <R extends Comparable<R>, C extends Comparable<C>> Range 
+        findCumulativeRangeBounds(CategoryDataset<R, C> dataset) {
         Args.nullNotPermitted(dataset, "dataset");
         boolean allItemsNull = true; // we'll set this to false if there is at
                                      // least one non-null data item...
