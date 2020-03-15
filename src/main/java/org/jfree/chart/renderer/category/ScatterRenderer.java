@@ -270,7 +270,7 @@ public class ScatterRenderer extends AbstractCategoryItemRenderer
     public boolean getSeriesShapesFilled(int series) {
         Boolean flag = this.seriesShapesFilled.getBoolean(series);
         if (flag != null) {
-            return flag.booleanValue();
+            return flag;
         }
         else {
             return this.baseShapesFilled;

@@ -345,7 +345,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
         boolean result = false;
         Boolean b = this.seriesFilled.getBoolean(series);
         if (b != null) {
-            result = b.booleanValue();
+            result = b;
         }
         return result;
     }
