@@ -46,7 +46,6 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 import org.jfree.chart.LegendItemCollection;
@@ -465,9 +464,7 @@ public class CombinedDomainXYPlot extends XYPlot
         if (result == null) {
             result = new LegendItemCollection();
             if (this.subplots != null) {
-                Iterator iterator = this.subplots.iterator();
-                while (iterator.hasNext()) {
-                    XYPlot plot = (XYPlot) iterator.next();
+                for (XYPlot plot : this.subplots) {
                     LegendItemCollection more = plot.getLegendItems();
                     result.addAll(more);
                 }
@@ -725,8 +722,7 @@ public class CombinedDomainXYPlot extends XYPlot
 
         CombinedDomainXYPlot result = (CombinedDomainXYPlot) super.clone();
         result.subplots = (List) ObjectUtils.deepClone(this.subplots);
-        for (Iterator it = result.subplots.iterator(); it.hasNext();) {
-            Plot child = (Plot) it.next();
+        for (XYPlot child : result.subplots) {
             child.setParent(result);
         }
 

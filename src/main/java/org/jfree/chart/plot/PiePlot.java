@@ -817,7 +817,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
             }
         }
         if (key == null) {
-            key = new Integer(section);
+            key = section;
         }
         return key;
     }
@@ -1434,7 +1434,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
         if (this.explodePercentages == null) {
             this.explodePercentages = new TreeMap();
         }
-        this.explodePercentages.put(key, new Double(percent));
+        this.explodePercentages.put(key, percent);
         fireChangeEvent();
     }
 

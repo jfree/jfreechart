@@ -1308,12 +1308,11 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     public CategoryAxis getDomainAxisForDataset(int index) {
         Args.requireNonNegative(index, "index");
         CategoryAxis axis;
-        List axisIndices = (List) this.datasetToDomainAxesMap.get(
-                new Integer(index));
+        List<Integer> axisIndices = this.datasetToDomainAxesMap.get(index);
         if (axisIndices != null) {
             // the first axis in the list is used for data <--> Java2D
-            Integer axisIndex = (Integer) axisIndices.get(0);
-            axis = getDomainAxis(axisIndex.intValue());
+            Integer axisIndex = axisIndices.get(0);
+            axis = getDomainAxis(axisIndex);
         } else {
             axis = getDomainAxis(0);
         }
@@ -1329,8 +1328,8 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @see #getRangeAxisForDataset(int)
      */
     public void mapDatasetToRangeAxis(int index, int axisIndex) {
-        List axisIndices = new java.util.ArrayList(1);
-        axisIndices.add(new Integer(axisIndex));
+        List<Integer> axisIndices = new ArrayList<>(1);
+        axisIndices.add(axisIndex);
         mapDatasetToRangeAxes(index, axisIndices);
     }
 
@@ -1365,12 +1364,10 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     public ValueAxis getRangeAxisForDataset(int index) {
         Args.requireNonNegative(index, "index");
         ValueAxis axis;
-        List axisIndices = (List) this.datasetToRangeAxesMap.get(
-                new Integer(index));
+        List<Integer> axisIndices = this.datasetToRangeAxesMap.get(index);
         if (axisIndices != null) {
             // the first axis in the list is used for data <--> Java2D
-            Integer axisIndex = (Integer) axisIndices.get(0);
-            axis = getRangeAxis(axisIndex.intValue());
+            axis = getRangeAxis(axisIndices.get(0));
         } else {
             axis = getRangeAxis(0);
         }

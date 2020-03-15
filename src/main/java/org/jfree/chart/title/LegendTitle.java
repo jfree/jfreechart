@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,36 +27,10 @@
  * ----------------
  * LegendTitle.java
  * ----------------
- * (C) Copyright 2002-2017, by Object Refinery Limited.
+ * (C) Copyright 2002-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Pierre-Marie Le Biot;
- *
- * Changes
- * -------
- * 25-Nov-2004 : First working version (DG);
- * 11-Jan-2005 : Removed deprecated code in preparation for 1.0.0 release (DG);
- * 08-Feb-2005 : Updated for changes in RectangleConstraint class (DG);
- * 11-Feb-2005 : Implemented PublicCloneable (DG);
- * 23-Feb-2005 : Replaced chart reference with LegendItemSource (DG);
- * 16-Mar-2005 : Added itemFont attribute (DG);
- * 17-Mar-2005 : Fixed missing fillShape setting (DG);
- * 20-Apr-2005 : Added new draw() method (DG);
- * 03-May-2005 : Modified equals() method to ignore sources (DG);
- * 13-May-2005 : Added settings for legend item label and graphic padding (DG);
- * 09-Jun-2005 : Fixed serialization bug (DG);
- * 01-Sep-2005 : Added itemPaint attribute (PMLB);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 20-Jul-2006 : Use new LegendItemBlockContainer to restore support for
- *               LegendItemEntities (DG);
- * 06-Oct-2006 : Add tooltip and URL text to legend item (DG);
- * 13-Dec-2006 : Added support for GradientPaint in legend items (DG);
- * 16-Mar-2007 : Updated border drawing for changes in AbstractBlock (DG);
- * 18-May-2007 : Pass seriesKey and dataset to legend item block (DG);
- * 15-Aug-2008 : Added getWrapper() method (DG);
- * 19-Mar-2009 : Added entity support - see patch 2603321 by Peter Kolb (DG);
- * 11-Mar-2012 : Added sort-order support - patch 3500621 by Simon Kaczor (MH);
- * 03-Jul-2013 : Use ParamChecks (DG);
  * 
  */
 

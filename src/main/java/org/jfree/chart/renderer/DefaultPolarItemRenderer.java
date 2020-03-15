@@ -357,7 +357,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * @param filled  the flag.
      */
     public void setSeriesFilled(int series, boolean filled) {
-        this.seriesFilled.setBoolean(series, Boolean.valueOf(filled));
+        this.seriesFilled.setBoolean(series, filled);
     }
 
     /**

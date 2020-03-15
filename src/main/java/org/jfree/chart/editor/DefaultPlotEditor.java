@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,20 +27,12 @@
  * ----------------------
  * DefaultPlotEditor.java
  * ----------------------
- * (C) Copyright 2005-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Andrzej Porebski;
  *                   Arnaud Lelievre;
  *                   Daniel Gredler;
- *
- * Changes:
- * --------
- * 24-Nov-2005 : Version 1, based on PlotPropertyEditPanel.java (DG);
- * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
- *               Jess Thrysoee (DG);
- * 27-Feb-2009 : Fixed bug 2612649, NullPointerException (DG);
- * 03-Nov-2011 : Added support for DefaultPolarPlotEditor (MH);
  *
  */
 
@@ -185,16 +177,16 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
             CategoryItemRenderer renderer = ((CategoryPlot) plot).getRenderer();
             if (renderer instanceof LineAndShapeRenderer) {
                 LineAndShapeRenderer r = (LineAndShapeRenderer) renderer;
-                this.drawLines = Boolean.valueOf(r.getDefaultLinesVisible());
-                this.drawShapes = Boolean.valueOf(r.getDefaultShapesVisible());
+                this.drawLines = r.getDefaultLinesVisible();
+                this.drawShapes = r.getDefaultShapesVisible();
             }
         }
         else if (plot instanceof XYPlot) {
             XYItemRenderer renderer = ((XYPlot) plot).getRenderer();
             if (renderer instanceof StandardXYItemRenderer) {
                 StandardXYItemRenderer r = (StandardXYItemRenderer) renderer;
-                this.drawLines = Boolean.valueOf(r.getPlotLines());
-                this.drawShapes = Boolean.valueOf(r.getBaseShapesVisible());
+                this.drawLines = r.getPlotLines();
+                this.drawShapes = r.getBaseShapesVisible();
             }
         }
 
@@ -520,7 +512,7 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
      * <tt>StandardXYItemRenderer</tt>s.
      */
     private void attemptDrawLinesSelection() {
-        this.drawLines = Boolean.valueOf(this.drawLinesCheckBox.isSelected());
+        this.drawLines = this.drawLinesCheckBox.isSelected();
     }
 
     /**
@@ -528,7 +520,7 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
      * by <tt>LineAndShapeRenderer</tt>s and <tt>StandardXYItemRenderer</tt>s.
      */
     private void attemptDrawShapesSelection() {
-        this.drawShapes = Boolean.valueOf(this.drawShapesCheckBox.isSelected());
+        this.drawShapes = this.drawShapesCheckBox.isSelected();
     }
 
     /**

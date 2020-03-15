@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,57 +27,10 @@
  * ---------------
  * SymbolAxis.java
  * ---------------
- * (C) Copyright 2002-2017, by Anthony Boulestreau and Contributors.
+ * (C) Copyright 2002-2020, by Anthony Boulestreau and Contributors.
  *
  * Original Author:  Anthony Boulestreau;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- *
- * Changes
- * -------
- * 29-Mar-2002 : First version (AB);
- * 19-Apr-2002 : Updated formatting and import statements (DG);
- * 21-Jun-2002 : Make change to use the class TickUnit - remove valueToString()
- *               method and add SymbolicTickUnit (AB);
- * 25-Jun-2002 : Removed redundant code (DG);
- * 25-Jul-2002 : Changed order of parameters in ValueAxis constructor (DG);
- * 05-Sep-2002 : Updated constructor to reflect changes in the Axis class (DG);
- * 08-Nov-2002 : Moved to new package com.jrefinery.chart.axis (DG);
- * 14-Feb-2003 : Added back missing constructor code (DG);
- * 26-Mar-2003 : Implemented Serializable (DG);
- * 14-May-2003 : Renamed HorizontalSymbolicAxis --> SymbolicAxis and merged in
- *               VerticalSymbolicAxis (DG);
- * 12-Aug-2003 : Fixed bug where refreshTicks() method has different signature
- *               to super class (DG);
- * 29-Oct-2003 : Added workaround for font alignment in PDF output (DG);
- * 02-Nov-2003 : Added code to avoid overlapping labels (MR);
- * 07-Nov-2003 : Modified to use new tick classes (DG);
- * 18-Nov-2003 : Fixed bug where symbols are not being displayed on the
- *               axis (DG);
- * 24-Nov-2003 : Added fix for gridlines on zooming (bug id 834643) (DG);
- * 21-Jan-2004 : Update for renamed method in ValueAxis (DG);
- * 11-Mar-2004 : Modified the way the background grid color is being drawn, see
- *               this thread:
- *               http://www.jfree.org/phpBB2/viewtopic.php?p=22973 (DG);
- * 16-Mar-2004 : Added plotState to draw() method (DG);
- * 07-Apr-2004 : Modified string bounds calculation (DG);
- * 28-Mar-2005 : Renamed autoRangeIncludesZero() --> getAutoRangeIncludesZero()
- *               and autoRangeStickyZero() --> getAutoRangeStickyZero() (DG);
- * 05-Jul-2005 : Fixed signature on refreshTicks() method - see bug report
- *               1232264 (DG);
- * 06-Jul-2005 : Renamed SymbolicAxis --> SymbolAxis, added equals() method,
- *               renamed getSymbolicValue() --> getSymbols(), renamed
- *               symbolicGridPaint --> gridBandPaint, fixed serialization of
- *               gridBandPaint, renamed symbolicGridLinesVisible -->
- *               gridBandsVisible, eliminated symbolicGridLineList (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
- * 28-Feb-2007 : Fixed bug 1669302 (tick label overlap) (DG);
- * 25-Jul-2007 : Added new field for alternate grid band paint (DG);
- * 15-Aug-2008 : Use alternate grid band paint when drawing (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
- * 19-Mar-2014 : Fix gridbands (bug #1056) (DG);
- * 08-Sep-2014 : Update Javadocs for grid bands (DG):
  *
  */
 
@@ -614,8 +567,8 @@ public class SymbolAxis extends NumberAxis implements Serializable {
                         rotationAnchor = TextAnchor.TOP_CENTER;
                     }
                 }
-                Tick tick = new NumberTick(new Double(currentTickValue),
-                        tickLabel, anchor, rotationAnchor, angle);
+                Tick tick = new NumberTick(currentTickValue, tickLabel, anchor, 
+                        rotationAnchor, angle);
                 ticks.add(tick);
             }
         }
@@ -708,8 +661,8 @@ public class SymbolAxis extends NumberAxis implements Serializable {
                         rotationAnchor = TextAnchor.CENTER_LEFT;
                     }
                 }
-                Tick tick = new NumberTick(new Double(currentTickValue),
-                        tickLabel, anchor, rotationAnchor, angle);
+                Tick tick = new NumberTick(currentTickValue, tickLabel, anchor, 
+                        rotationAnchor, angle);
                 ticks.add(tick);
             }
         }

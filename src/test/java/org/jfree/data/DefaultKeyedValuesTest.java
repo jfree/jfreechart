@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,20 +27,10 @@
  * ---------------------------
  * DefaultKeyedValuesTest.java
  * ---------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited.
+ * (C) Copyright 2003-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 05-Mar-2003 : Version 1 (DG);
- * 27-Aug-2003 : Moved SortOrder from org.jfree.data --> org.jfree.util (DG);
- * 31-Jul-2006 : Added test for new clear() method (DG);
- * 01-Aug-2006 : Extended testGetIndex() method (DG);
- * 30-Apr-2007 : Added some new tests (DG);
- * 03-Oct-2007 : Updated testRemoveValue() (DG);
- * 21-Nov-2007 : Added testGetIndex2() method (DG);
  *
  */
 
@@ -297,9 +287,9 @@ public class DefaultKeyedValuesTest {
     public void testInsertAndRetrieve() {
 
         DefaultKeyedValues<String> data = new DefaultKeyedValues<>();
-        data.addValue("A", new Double(1.0));
-        data.addValue("B", new Double(2.0));
-        data.addValue("C", new Double(3.0));
+        data.addValue("A", 1.0);
+        data.addValue("B", 2.0);
+        data.addValue("C", 3.0);
         data.addValue("D", null);
 
         // check key order
@@ -309,15 +299,15 @@ public class DefaultKeyedValuesTest {
         assertEquals(data.getKey(3), "D");
 
         // check retrieve value by key
-        assertEquals(data.getValue("A"), new Double(1.0));
-        assertEquals(data.getValue("B"), new Double(2.0));
-        assertEquals(data.getValue("C"), new Double(3.0));
+        assertEquals(data.getValue("A"), 1.0);
+        assertEquals(data.getValue("B"), 2.0);
+        assertEquals(data.getValue("C"), 3.0);
         assertEquals(data.getValue("D"), null);
 
         // check retrieve value by index
-        assertEquals(data.getValue(0), new Double(1.0));
-        assertEquals(data.getValue(1), new Double(2.0));
-        assertEquals(data.getValue(2), new Double(3.0));
+        assertEquals(data.getValue(0), 1.0);
+        assertEquals(data.getValue(1), 2.0);
+        assertEquals(data.getValue(2), 3.0);
         assertEquals(data.getValue(3), null);
 
     }
@@ -328,10 +318,10 @@ public class DefaultKeyedValuesTest {
     @Test
     public void testRemoveValue() {
         DefaultKeyedValues<String> data = new DefaultKeyedValues<>();
-        data.addValue("A", new Double(1.0));
+        data.addValue("A", 1.0);
         data.addValue("B", null);
-        data.addValue("C", new Double(3.0));
-        data.addValue("D", new Double(2.0));
+        data.addValue("C", 3.0);
+        data.addValue("D", 2.0);
         assertEquals(1, data.getIndex("B"));
         data.removeValue("B");
         assertEquals(-1, data.getIndex("B"));
@@ -353,10 +343,10 @@ public class DefaultKeyedValuesTest {
     public void testSortByKeyAscending() {
 
         DefaultKeyedValues<String> data = new DefaultKeyedValues<>();
-        data.addValue("C", new Double(1.0));
+        data.addValue("C", 1.0);
         data.addValue("B", null);
-        data.addValue("D", new Double(3.0));
-        data.addValue("A", new Double(2.0));
+        data.addValue("D", 3.0);
+        data.addValue("A", 2.0);
 
         data.sortByKeys(SortOrder.ASCENDING);
 
@@ -367,16 +357,16 @@ public class DefaultKeyedValuesTest {
         assertEquals(data.getKey(3), "D");
 
         // check retrieve value by key
-        assertEquals(data.getValue("A"), new Double(2.0));
+        assertEquals(data.getValue("A"), 2.0);
         assertEquals(data.getValue("B"), null);
-        assertEquals(data.getValue("C"), new Double(1.0));
-        assertEquals(data.getValue("D"), new Double(3.0));
+        assertEquals(data.getValue("C"), 1.0);
+        assertEquals(data.getValue("D"), 3.0);
 
         // check retrieve value by index
-        assertEquals(data.getValue(0), new Double(2.0));
+        assertEquals(data.getValue(0), 2.0);
         assertEquals(data.getValue(1), null);
-        assertEquals(data.getValue(2), new Double(1.0));
-        assertEquals(data.getValue(3), new Double(3.0));
+        assertEquals(data.getValue(2), 1.0);
+        assertEquals(data.getValue(3), 3.0);
 
     }
 
@@ -387,10 +377,10 @@ public class DefaultKeyedValuesTest {
     public void testSortByKeyDescending() {
 
         DefaultKeyedValues<String> data = new DefaultKeyedValues<>();
-        data.addValue("C", new Double(1.0));
+        data.addValue("C", 1.0);
         data.addValue("B", null);
-        data.addValue("D", new Double(3.0));
-        data.addValue("A", new Double(2.0));
+        data.addValue("D", 3.0);
+        data.addValue("A", 2.0);
 
         data.sortByKeys(SortOrder.DESCENDING);
 
@@ -401,16 +391,16 @@ public class DefaultKeyedValuesTest {
         assertEquals(data.getKey(3), "A");
 
         // check retrieve value by key
-        assertEquals(data.getValue("A"), new Double(2.0));
+        assertEquals(data.getValue("A"), 2.0);
         assertEquals(data.getValue("B"), null);
-        assertEquals(data.getValue("C"), new Double(1.0));
-        assertEquals(data.getValue("D"), new Double(3.0));
+        assertEquals(data.getValue("C"), 1.0);
+        assertEquals(data.getValue("D"), 3.0);
 
         // check retrieve value by index
-        assertEquals(data.getValue(0), new Double(3.0));
-        assertEquals(data.getValue(1), new Double(1.0));
+        assertEquals(data.getValue(0), 3.0);
+        assertEquals(data.getValue(1), 1.0);
         assertEquals(data.getValue(2), null);
-        assertEquals(data.getValue(3), new Double(2.0));
+        assertEquals(data.getValue(3), 2.0);
 
     }
 
@@ -421,10 +411,10 @@ public class DefaultKeyedValuesTest {
     public void testSortByValueAscending() {
 
         DefaultKeyedValues<String> data = new DefaultKeyedValues<>();
-        data.addValue("C", new Double(1.0));
+        data.addValue("C", 1.0);
         data.addValue("B", null);
-        data.addValue("D", new Double(3.0));
-        data.addValue("A", new Double(2.0));
+        data.addValue("D", 3.0);
+        data.addValue("A", 2.0);
 
         data.sortByValues(SortOrder.ASCENDING);
 
@@ -455,10 +445,10 @@ public class DefaultKeyedValuesTest {
     public void testSortByValueDescending() {
 
         DefaultKeyedValues<String> data = new DefaultKeyedValues<>();
-        data.addValue("C", new Double(1.0));
+        data.addValue("C", 1.0);
         data.addValue("B", null);
-        data.addValue("D", new Double(3.0));
-        data.addValue("A", new Double(2.0));
+        data.addValue("D", 3.0);
+        data.addValue("A", 2.0);
 
         data.sortByValues(SortOrder.DESCENDING);
 
@@ -488,9 +478,9 @@ public class DefaultKeyedValuesTest {
     @Test
     public void testSerialization() {
         DefaultKeyedValues<String> v1 = new DefaultKeyedValues<>();
-        v1.addValue("Key 1", new Double(23));
+        v1.addValue("Key 1", 23);
         v1.addValue("Key 2", null);
-        v1.addValue("Key 3", new Double(42));
+        v1.addValue("Key 3", 42);
 
         DefaultKeyedValues<String> v2 = (DefaultKeyedValues) 
                 TestUtils.serialised(v1);
