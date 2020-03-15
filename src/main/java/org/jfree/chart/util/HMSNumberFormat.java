@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * --------------------
  * HMSNumberFormat.java
  * --------------------
- * (C) Copyright 2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2013-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 28-Sep-2013 : Version 1 (RW);
  *
  */
 
@@ -55,7 +51,7 @@ import java.text.ParsePosition;
  */
 public class HMSNumberFormat extends NumberFormat {
 
-    private NumberFormat formatter = new DecimalFormat("00");
+    private final NumberFormat formatter = new DecimalFormat("00");
     
     /**
      * Creates a new instance.

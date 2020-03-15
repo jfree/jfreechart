@@ -24,6 +24,14 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
+ * -----------------------
+ * AbstractObjectList.java
+ * -----------------------
+ * (C) Copyright 2002-2020, by Object Refinery Limited and Contributors.
+ *
+ * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Contributors:     -;
+ *
  */
 
 package org.jfree.chart.util;

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * --------------------------
  * ResourceBundleWrapper.java
  * --------------------------
- * (C)opyright 2008, 2009, by Jess Thrysoee and Contributors.
+ * (C)opyright 2008-2020, by Jess Thrysoee and Contributors.
  *
  * Original Author:  Jess Thrysoee;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 18-Dec-2008 : Version 1 (JT);
  *
  */
 
