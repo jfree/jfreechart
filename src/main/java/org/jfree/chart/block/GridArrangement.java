@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * --------------------
  * GridArrangement.java
  * --------------------
- * (C) Copyright 2005-2008, by Object Refinery Limited.
+ * (C) Copyright 2005-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 08-Feb-2005 : Version 1 (DG);
- * 03-Dec-2008 : Implemented missing methods, and fixed bugs reported in
- *               patch 2370487 (DG);
  *
  */
 
@@ -58,10 +52,10 @@ public class GridArrangement implements Arrangement, Serializable {
     private static final long serialVersionUID = -2563758090144655938L;
 
     /** The rows. */
-    private int rows;
+    private final int rows;
 
     /** The columns. */
-    private int columns;
+    private final int columns;
 
     /**
      * Creates a new grid arrangement.

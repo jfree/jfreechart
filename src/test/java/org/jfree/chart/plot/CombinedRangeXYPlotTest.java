@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * ----------------------------
  * CombinedRangeXYPlotTest.java
  * ----------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 21-Aug-2003 : Version 1 (DG);
- * 03-Jan-2008 : Added testNotification (DG);
  *
  */
 
@@ -71,7 +66,7 @@ import org.junit.Test;
 public class CombinedRangeXYPlotTest implements ChartChangeListener {
 
     /** A list of the events received. */
-    private List<ChartChangeEvent> events = new ArrayList<>();
+    private final List<ChartChangeEvent> events = new ArrayList<>();
 
     /**
      * Receives a chart change event.

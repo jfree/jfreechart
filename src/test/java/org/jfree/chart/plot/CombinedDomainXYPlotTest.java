@@ -66,7 +66,7 @@ import org.junit.Test;
 public class CombinedDomainXYPlotTest implements ChartChangeListener {
 
     /** A list of the events received. */
-    private List<ChartChangeEvent> events = new ArrayList<>();
+    private final List<ChartChangeEvent> events = new ArrayList<>();
 
     /**
      * Receives a chart change event.
