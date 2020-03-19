@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * -----------------------
  * OverlayChangeEvent.java
  * -----------------------
- * (C) Copyright 2009, by Object Refinery Limited.
+ * (C) Copyright 2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 09-Apr-2009 : Version 1 (DG);
  *
  */
 
@@ -53,10 +49,10 @@ public class OverlayChangeEvent extends EventObject {
     /**
      * Creates a new change event.
      *
-     * @param source  the event source.
+     * @param source  the event source ({@code null} not permitted).
      */
     public OverlayChangeEvent(Object source) {
-        super(source);
+        super(source); // null check is in here
     }
     
 }
