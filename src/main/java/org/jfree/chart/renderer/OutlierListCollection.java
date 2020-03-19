@@ -54,7 +54,7 @@ import java.util.List;
 public class OutlierListCollection {
 
     /** Storage for the outlier lists. */
-    private List outlierLists;
+    private List<OutlierList> outlierLists;
 
     /**
      * Unbelievably, outliers which are more than 2 * interquartile range are
@@ -72,7 +72,7 @@ public class OutlierListCollection {
      * Creates a new empty collection.
      */
     public OutlierListCollection() {
-        this.outlierLists = new ArrayList();
+        this.outlierLists = new ArrayList<>();
     }
 
     /**
@@ -126,26 +126,20 @@ public class OutlierListCollection {
      * @return <tt>true</tt> (as per the general contract of Collection.add).
      */
     public boolean add(Outlier outlier) {
-
         if (this.outlierLists.isEmpty()) {
             return this.outlierLists.add(new OutlierList(outlier));
-        }
-        else {
+        } else {
             boolean updated = false;
-            for (Iterator iterator = this.outlierLists.iterator();
-                 iterator.hasNext();) {
-                OutlierList list = (OutlierList) iterator.next();
+            for (OutlierList list : this.outlierLists) {
                 if (list.isOverlapped(outlier)) {
                     updated = updateOutlierList(list, outlier);
                 }
             }
             if (!updated) {
-                //System.err.print(" creating new outlier list ");
                 updated = this.outlierLists.add(new OutlierList(outlier));
             }
             return updated;
         }
-
     }
 
     /**
@@ -153,14 +147,14 @@ public class OutlierListCollection {
      *
      * @return An iterator.
      */
-    public Iterator iterator() {
+    public Iterator<OutlierList> iterator() {
         return this.outlierLists.iterator();
     }
 
 
     /**
      * Updates the outlier list by adding the outlier to the end of the list and
-     * setting the averaged outlier to the average x and y coordinnate values
+     * setting the averaged outlier to the average x and y coordinate values
      * of the outliers in the list.
      *
      * @param list  the outlier list to be updated.
@@ -169,8 +163,7 @@ public class OutlierListCollection {
      * @return <tt>true</tt> (as per the general contract of Collection.add).
      */
     private boolean updateOutlierList(OutlierList list, Outlier outlier) {
-        boolean result;
-        result = list.add(outlier);
+        boolean result = list.add(outlier);
         list.updateAveragedOutlier();
         list.setMultiple(true);
         return result;
