@@ -470,6 +470,11 @@ public class JFreeChartTest implements ChartChangeListener {
         this.lastChartChangeEvent = null;
     }
 
+    /**
+     * Test for bug 942.
+     * 
+     * @throws Exception 
+     */
     @Test
     public void testBug942() throws Exception {
         final String title = "Pie Chart Demo 1\n\n\ntestnew line";
