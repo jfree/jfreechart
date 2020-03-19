@@ -42,79 +42,79 @@ package org.jfree.chart.labels;
  */
 public enum ItemLabelAnchor {
 
-    /* Center anchor point. */
+    /** Center anchor point. */
     CENTER,
 
-    /* 1 o'clock anchor point. */
+    /** 1 o'clock anchor point. */
     INSIDE1,
 
-    /* 2 o'clock  anchor point. */
+    /** 2 o'clock  anchor point. */
     INSIDE2,
 
-    /* 3 o'clock  anchor point. */
+    /** 3 o'clock  anchor point. */
     INSIDE3,
 
-    /* 4 o'clock  anchor point. */
+    /** 4 o'clock  anchor point. */
     INSIDE4,
 
-    /* 5 o'clock  anchor point. */
+    /** 5 o'clock  anchor point. */
     INSIDE5,
 
-    /* 6 o'clock  anchor point. */
+    /** 6 o'clock  anchor point. */
     INSIDE6,
 
-    /* 7 o'clock  anchor point. */
+    /** 7 o'clock  anchor point. */
     INSIDE7,
 
-    /* 8 o'clock  anchor point. */
+    /** 8 o'clock  anchor point. */
     INSIDE8,
 
-    /* 9 o'clock  anchor point. */
+    /** 9 o'clock  anchor point. */
     INSIDE9,
 
-    /* 10 o'clock  anchor point. */
+    /** 10 o'clock  anchor point. */
     INSIDE10,
 
-    /* 11 o'clock  anchor point. */
+    /** 11 o'clock  anchor point. */
     INSIDE11,
 
-    /* 12 o'clock  anchor point. */
+    /** 12 o'clock  anchor point. */
     INSIDE12,
 
-    /* 1 o'clock  anchor point. */
+    /** 1 o'clock  anchor point. */
     OUTSIDE1,
 
-    /* 2 o'clock  anchor point. */
+    /** 2 o'clock  anchor point. */
     OUTSIDE2,
 
-    /* 3 o'clock  anchor point. */
+    /** 3 o'clock  anchor point. */
     OUTSIDE3,
 
-    /* 4 o'clock  anchor point. */
+    /** 4 o'clock  anchor point. */
     OUTSIDE4,
 
-    /* 5 o'clock  anchor point. */
+    /** 5 o'clock  anchor point. */
     OUTSIDE5,
 
-    /* 6 o'clock  anchor point. */
+    /** 6 o'clock  anchor point. */
     OUTSIDE6,
 
-    /* 7 o'clock  anchor point. */
+    /** 7 o'clock  anchor point. */
     OUTSIDE7,
 
-    /* 8 o'clock  anchor point. */
+    /** 8 o'clock  anchor point. */
     OUTSIDE8,
 
-    /* 9 o'clock  anchor point. */
+    /** 9 o'clock  anchor point. */
     OUTSIDE9,
 
-    /* 10 o'clock  anchor point. */
+    /** 10 o'clock  anchor point. */
     OUTSIDE10,
 
-    /* 11 o'clock  anchor point. */
+    /** 11 o'clock  anchor point. */
     OUTSIDE11,
 
-    /* 12 o'clock  anchor point. */
+    /** 12 o'clock  anchor point. */
     OUTSIDE12
 
 }
