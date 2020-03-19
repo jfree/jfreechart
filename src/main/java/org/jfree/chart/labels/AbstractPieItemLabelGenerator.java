@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,19 +27,10 @@
  * ----------------------------------
  * AbstractPieItemLabelGenerator.java
  * ----------------------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited.
+ * (C) Copyright 2004-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 09-Nov-2004 : Version 1, draws out code from StandardPieItemLabelGenerator
- *               and StandardPieToolTipGenerator (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 03-May-2006 : Fixed bug 1480978, a problem in the clone() method (DG);
- * 23-Nov-2007 : Implemented hashCode() (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -63,7 +54,7 @@ public class AbstractPieItemLabelGenerator implements Serializable {
     private static final long serialVersionUID = 7347703325267846275L;
 
     /** The label format string. */
-    private String labelFormat;
+    private final String labelFormat;
 
     /** A number formatter for the value. */
     private NumberFormat numberFormat;

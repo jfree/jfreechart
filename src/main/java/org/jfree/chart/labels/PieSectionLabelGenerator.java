@@ -32,23 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * Changes
- * -------
- * 13-Dec-2001 : Version 1 (DG);
- * 16-Jan-2002 : Completed Javadocs (DG);
- * 26-Sep-2002 : Fixed errors reported by Checkstyle (DG);
- * 30-Oct-2002 : Category is now a Comparable instance (DG);
- * 07-Mar-2003 : Changed to KeyedValuesDataset and added pieIndex
- *               parameter (DG);
- * 21-Mar-2003 : Updated Javadocs (DG);
- * 24-Apr-2003 : Switched around PieDataset and KeyedValuesDataset (DG);
- * 13-Aug-2003 : Added clone() method (DG);
- * 19-Aug-2003 : Renamed PieToolTipGenerator --> PieItemLabelGenerator (DG);
- * 11-Nov-2003 : Removed clone() method (DG);
- * 30-Jan-2004 : Added generateSectionLabel() method (DG);
- * 15-Apr-2004 : Moved generateToolTip() method into separate interface and
- *               renamed this interface PieSectionLabelGenerator (DG);
- *
  */
 
 package org.jfree.chart.labels;

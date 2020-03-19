@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -32,24 +32,12 @@
  * Original Author:  Anthony Boulestreau;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * Changes
- * -------
- * 29-Mar-2002 : Version 1, contributed by Anthony Boulestreau (DG);
- * 26-Sep-2002 : Fixed errors reported by Checkstyle (DG);
- * 23-Mar-2003 : Implemented Serializable (DG);
- * 13-Aug-2003 : Implemented Cloneable (DG);
- * 17-Nov-2003 : Implemented PublicCloneable (DG);
- * 25-Feb-2004 : Renamed XYToolTipGenerator --> XYItemLabelGenerator (DG);
- * 19-Jan-2005 : Now accesses primitives only from dataset (DG);
- * 20-Apr-2005 : Renamed XYLabelGenerator --> XYItemLabelGenerator (DG);
- * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
- * 31-Mar-2008 : Added hashCode() method to appease FindBugs (DG);
- *
  */
 
 package org.jfree.chart.labels;
 
 import java.io.Serializable;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.time.RegularTimePeriod;
@@ -71,34 +59,34 @@ public class SymbolicXYItemLabelGenerator implements XYItemLabelGenerator,
     /**
      * Generates a tool tip text item for a particular item within a series.
      *
-     * @param data  the dataset.
+     * @param dataset  the dataset ({@code null} not permitted).
      * @param series  the series number (zero-based index).
      * @param item  the item number (zero-based index).
      *
      * @return The tool tip text (possibly {@code null}).
      */
     @Override
-    public String generateToolTip(XYDataset data, int series, int item) {
-
+    public String generateToolTip(XYDataset dataset, int series, int item) {
+        Args.nullNotPermitted(dataset, "dataset");
         String xStr, yStr;
-        if (data instanceof YisSymbolic) {
-            yStr = ((YisSymbolic) data).getYSymbolicValue(series, item);
+        if (dataset instanceof YisSymbolic) {
+            yStr = ((YisSymbolic) dataset).getYSymbolicValue(series, item);
         }
         else {
-            double y = data.getYValue(series, item);
+            double y = dataset.getYValue(series, item);
             yStr = Double.toString(round(y, 2));
         }
-        if (data instanceof XisSymbolic) {
-            xStr = ((XisSymbolic) data).getXSymbolicValue(series, item);
+        if (dataset instanceof XisSymbolic) {
+            xStr = ((XisSymbolic) dataset).getXSymbolicValue(series, item);
         }
-        else if (data instanceof TimeSeriesCollection) {
+        else if (dataset instanceof TimeSeriesCollection) {
             RegularTimePeriod p
-                = ((TimeSeriesCollection) data).getSeries(series)
+                = ((TimeSeriesCollection) dataset).getSeries(series)
                     .getTimePeriod(item);
             xStr = p.toString();
         }
         else {
-            double x = data.getXValue(series, item);
+            double x = dataset.getXValue(series, item);
             xStr = Double.toString(round(x, 2));
         }
         return "X: " + xStr + ", Y: " + yStr;

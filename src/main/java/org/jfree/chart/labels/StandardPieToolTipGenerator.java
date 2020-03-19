@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,31 +27,11 @@
  * --------------------------------
  * StandardPieToolTipGenerator.java
  * --------------------------------
- * (C) Copyright 2001-2008, by Object Refinery Limited.
+ * (C) Copyright 2001-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Richard Atkinson;
  *                   Andreas Schroeder;
- *
- * Changes
- * -------
- * 13-Dec-2001 : Version 1 (DG);
- * 16-Jan-2002 : Completed Javadocs (DG);
- * 29-Aug-2002 : Changed to format numbers using default locale (RA);
- * 26-Sep-2002 : Fixed errors reported by Checkstyle (DG);
- * 30-Oct-2002 : Changed PieToolTipGenerator interface (DG);
- * 21-Mar-2003 : Implemented Serializable (DG);
- * 13-Aug-2003 : Implemented Cloneable (DG);
- * 19-Aug-2003 : Renamed StandardPieToolTipGenerator -->
- *               StandardPieItemLabelGenerator (DG);
- * 10-Mar-2004 : Modified to use MessageFormat class (DG);
- * 31-Mar-2004 : Added javadocs for the MessageFormat usage (AS);
- * 15-Apr-2004 : Split PieItemLabelGenerator interface into
- *               PieSectionLabelGenerator and PieToolTipGenerator (DG);
- * 25-Nov-2004 : Moved some code into abstract super class (DG);
- * 29-Jul-2005 : Removed implementation of PieSectionLabelGenerator
- *               interface (DG);
- * 10-Jul-2007 : Added constructors with locale argument (DG);
  *
  */
 

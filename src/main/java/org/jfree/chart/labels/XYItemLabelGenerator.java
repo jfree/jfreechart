@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,22 +27,10 @@
  * -------------------------
  * XYItemLabelGenerator.java
  * -------------------------
- * (C) Copyright 2001-2008, by Object Refinery Limited.
+ * (C) Copyright 2001-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 13-Dec-2001 : Version 1 (DG);
- * 16-Jan-2002 : Completed Javadocs (DG);
- * 13-Jun-2002 : Correction to Javadoc comments (DG);
- * 26-Sep-2002 : Fixed errors reported by Checkstyle (DG);
- * 25-Feb-2004 : Renamed XYToolTipGenerator --> XYItemLabelGenerator (DG);
- * 15-Apr-2004 : Moved the generateToolTip() method to a separate
- *               interface (DG);
- * 11-May-2004 : Renamed XYItemLabelGenerator --> XYLabelGenerator (DG);
- * 20-Apr-2005 : Reverted name change of 11-May-2004 (DG);
  *
  */
 

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,21 +27,10 @@
  * -------------------------------------
  * StandardPieSectionLabelGenerator.java
  * -------------------------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited.
+ * (C) Copyright 2004-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 09-Nov-2004 : Version 1, derived from StandardPieItemLabelGenerator (DG);
- * 29-Jul-2005 : Removed unused generateToolTip() method (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 03-May-2006 : Modified DEFAULT_SECTION_LABEL_FORMAT (DG);
- * 10-Jan-2007 : Include attributedLabels in equals() test (DG);
- * 10-Jul-2007 : Added constructors with locale parameter (DG);
- * 23-Apr-2008 : Implemented PublicCloneable (DG);
- * 07-Apr-2014 : Fix cloning issue (DG);
  *
  */
 
@@ -56,6 +45,7 @@ import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.general.PieDataset;
@@ -236,6 +226,13 @@ public class StandardPieSectionLabelGenerator
             return false;
         }
         return super.equals(obj);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = super.hashCode();
+        hash = 53 * hash + Objects.hashCode(this.attributedLabels);
+        return hash;
     }
 
     /**

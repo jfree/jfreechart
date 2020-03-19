@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * -------------------------------------
  * StandardCategoryToolTipGenerator.java
  * -------------------------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited.
+ * (C) Copyright 2004-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 11-May-2004 : Version 1 (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 03-May-2006 : Added equals() method to fix bug 1481087 (DG);
  *
  */
 
@@ -78,7 +72,7 @@ public class StandardCategoryToolTipGenerator
      * @param formatter  the number formatter ({@code null} not permitted).
      */
     public StandardCategoryToolTipGenerator(String labelFormat,
-                                            NumberFormat formatter) {
+            NumberFormat formatter) {
         super(labelFormat, formatter);
     }
 
@@ -90,7 +84,7 @@ public class StandardCategoryToolTipGenerator
      * @param formatter  the date formatter ({@code null} not permitted).
      */
     public StandardCategoryToolTipGenerator(String labelFormat,
-                                            DateFormat formatter) {
+            DateFormat formatter) {
         super(labelFormat, formatter);
     }
 
@@ -127,6 +121,12 @@ public class StandardCategoryToolTipGenerator
             return false;
         }
         return super.equals(obj);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        return hash;
     }
 
 }
