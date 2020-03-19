@@ -1167,6 +1167,10 @@ public class DateAxisTest {
         assertEquals("31-May-2008", t3.getText());
     }
 
+    /**
+     * A test for bug 3484403 (SourceForge 
+     * https://sourceforge.net/p/jfreechart/bugs/1078/).
+     */
     @Test
     public void testBug3484403() {
 
