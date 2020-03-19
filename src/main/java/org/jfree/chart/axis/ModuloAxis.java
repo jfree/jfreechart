@@ -136,7 +136,7 @@ public class ModuloAxis extends NumberAxis {
      */
     @Override
     public double valueToJava2D(double value, Rectangle2D area,
-                                RectangleEdge edge) {
+            RectangleEdge edge) {
         double result;
         double v = mapValueToFixedRange(value);
         if (this.displayStart < this.displayEnd) {  // regular number axis
@@ -200,9 +200,8 @@ public class ModuloAxis extends NumberAxis {
      *
      * @return The Java2D coordinate.
      */
-    private double transStart(double value, Rectangle2D area,
-                              RectangleEdge edge,
-                              double length1, double length2) {
+    private double transStart(double value, Rectangle2D area, RectangleEdge edge,
+            double length1, double length2) {
         double min = 0.0;
         double max = 0.0;
         if (RectangleEdge.isTopOrBottom(edge)) {
@@ -240,7 +239,7 @@ public class ModuloAxis extends NumberAxis {
      * @return The Java2D coordinate.
      */
     private double transEnd(double value, Rectangle2D area, RectangleEdge edge,
-                            double length1, double length2) {
+            double length1, double length2) {
         double min = 0.0;
         double max = 0.0;
         if (RectangleEdge.isTopOrBottom(edge)) {
@@ -359,7 +358,6 @@ public class ModuloAxis extends NumberAxis {
      */
     @Override
     public void resizeRange(double percent, double anchorValue) {
-
         if (percent > 0.0) {
             double halfLength = getDisplayLength() * percent / 2;
             setDisplayRange(anchorValue - halfLength, anchorValue + halfLength);
@@ -367,7 +365,6 @@ public class ModuloAxis extends NumberAxis {
         else {
             setAutoRange(true);
         }
-
     }
 
     /**
@@ -382,20 +379,18 @@ public class ModuloAxis extends NumberAxis {
      */
     @Override
     public double lengthToJava2D(double length, Rectangle2D area,
-                                 RectangleEdge edge) {
+            RectangleEdge edge) {
         double axisLength;
         if (this.displayEnd > this.displayStart) {
             axisLength = this.displayEnd - this.displayStart;
-        }
-        else {
+        } else {
             axisLength = (this.fixedRange.getUpperBound() - this.displayStart)
                 + (this.displayEnd - this.fixedRange.getLowerBound());
         }
         double areaLength;
         if (RectangleEdge.isLeftOrRight(edge)) {
             areaLength = area.getHeight();
-        }
-        else {
+        } else {
             areaLength = area.getWidth();
         }
         return (length / axisLength) * areaLength;
