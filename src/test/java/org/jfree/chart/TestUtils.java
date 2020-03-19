@@ -71,6 +71,14 @@ public class TestUtils {
         return false;
     }
 
+    /**
+     * Serialises an object, deserialises it and returns the deserialised 
+     * version.
+     * 
+     * @param original  the original object.
+     * 
+     * @return A serialised and deserialised version of the original.
+     */
     public static Object serialised(Object original) {
         Object result = null;
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
