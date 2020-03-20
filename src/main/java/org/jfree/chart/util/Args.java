@@ -31,6 +31,7 @@
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
+ *
  */
 
 package org.jfree.chart.util;
@@ -81,7 +82,7 @@ public class Args {
      */
     public static void requireInRange(int value, String name, 
             int lowerBound, int upperBound) {
-        if (value < lowerBound) {
+        if (value < lowerBound || value > upperBound) {
             throw new IllegalArgumentException("Require '" + name + "' (" 
                     + value + ") to be in the range " + lowerBound + " to " 
                     + upperBound);
