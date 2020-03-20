@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * ----------------------------
  * IntervalBarRendererTest.java
  * ----------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 25-Mar-2003 : Version 1 (DG);
- * 23-Apr-2008 : Added testPublicCloneable (DG);
- * 16-May-2009 : Added testFindRangeBounds() (DG);
  *
  */
 
@@ -53,6 +47,7 @@ import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.Range;
 import org.jfree.data.category.DefaultIntervalCategoryDataset;
@@ -96,7 +91,7 @@ public class IntervalBarRendererTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         IntervalBarRenderer r1 = new IntervalBarRenderer();
-        IntervalBarRenderer r2 = (IntervalBarRenderer) r1.clone();
+        IntervalBarRenderer r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -117,7 +112,7 @@ public class IntervalBarRendererTest {
     @Test
     public void testSerialization() {
         IntervalBarRenderer r1 = new IntervalBarRenderer();
-        IntervalBarRenderer r2 = (IntervalBarRenderer) TestUtils.serialised(r1);
+        IntervalBarRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

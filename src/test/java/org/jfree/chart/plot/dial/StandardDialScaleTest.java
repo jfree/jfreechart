@@ -223,7 +223,7 @@ public class StandardDialScaleTest {
                 4.0f, Color.WHITE));
         s1.setMajorTickStroke(new BasicStroke(2.0f));
 
-        s2 = (StandardDialScale) TestUtils.serialised(s1);
+        s2 = TestUtils.serialised(s1);
         assertEquals(s1, s2);
     }
 

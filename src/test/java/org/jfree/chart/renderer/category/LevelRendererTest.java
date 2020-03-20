@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * ----------------------
  * LevelRendererTest.java
  * ----------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 29-Mar-2005 : Version 1 (DG);
- * 23-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
@@ -151,7 +146,7 @@ public class LevelRendererTest {
     @Test
     public void testSerialization() {
         LevelRenderer r1 = new LevelRenderer();
-        LevelRenderer r2 = (LevelRenderer) TestUtils.serialised(r1);
+        LevelRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

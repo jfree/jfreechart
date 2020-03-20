@@ -47,6 +47,7 @@ import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.renderer.AreaRendererEndType;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.junit.Test;
@@ -90,7 +91,7 @@ public class AreaRendererTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         AreaRenderer r1 = new AreaRenderer();
-        AreaRenderer r2 = (AreaRenderer) r1.clone();
+        AreaRenderer r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -111,7 +112,7 @@ public class AreaRendererTest {
     @Test
     public void testSerialization() {
         AreaRenderer r1 = new AreaRenderer();
-        AreaRenderer r2 = (AreaRenderer) TestUtils.serialised(r1);
+        AreaRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

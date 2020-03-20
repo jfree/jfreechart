@@ -69,6 +69,7 @@ import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.chart.ui.TextAnchor;
+import org.jfree.chart.util.CloneUtils;
 
 /**
  * Tests for the {@link AbstractRenderer} class.
@@ -417,7 +418,7 @@ public class AbstractRendererTest {
         r1.setSeriesNegativeItemLabelPosition(0, new ItemLabelPosition(
                 ItemLabelAnchor.CENTER, TextAnchor.CENTER));
         
-        LineAndShapeRenderer r2 = (LineAndShapeRenderer) r1.clone();
+        LineAndShapeRenderer r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -552,7 +553,7 @@ public class AbstractRendererTest {
         r1.setDefaultPaint(Color.BLUE);
         r1.setDefaultLegendTextPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.BLUE));
-        LineAndShapeRenderer r2 = (LineAndShapeRenderer) r1.clone();
+        LineAndShapeRenderer r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -683,7 +684,7 @@ public class AbstractRendererTest {
         r1.setDefaultLegendTextPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.GREEN));
         r1.setDefaultLegendShape(new Line2D.Double(1.0, 2.0, 3.0, 4.0));
-        BarRenderer r2 = (BarRenderer) TestUtils.serialised(r1);
+        BarRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
         try {
             r2.notifyListeners(new RendererChangeEvent(r2));
