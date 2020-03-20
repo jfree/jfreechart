@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * -------------------------------
  * CategoryLabelWidthTypeTest.java
  * -------------------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 13-May-2004 : Version 1 (DG);
  *
  */
 
@@ -81,7 +77,7 @@ public class CategoryLabelWidthTypeTest {
     @Test
     public void testSerialization() {
         CategoryLabelWidthType w1 = CategoryLabelWidthType.RANGE;
-        CategoryLabelWidthType w2 = (CategoryLabelWidthType) TestUtils.serialised(w1);
+        CategoryLabelWidthType w2 = TestUtils.serialised(w1);
         assertEquals(w1, w2);
         assertTrue(w1 == w2);
     }

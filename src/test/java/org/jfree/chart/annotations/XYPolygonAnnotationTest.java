@@ -32,11 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * Changes
- * -------
- * 10-Jul-2006 : Version 1 (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG);
- *
  */
 
 package org.jfree.chart.annotations;
@@ -160,7 +155,7 @@ public class XYPolygonAnnotationTest {
         Stroke stroke1 = new BasicStroke(2.0f);
         XYPolygonAnnotation a1 = new XYPolygonAnnotation(new double[] {1.0,
                 2.0, 3.0, 4.0, 5.0, 6.0}, stroke1, Color.RED, Color.BLUE);
-        XYPolygonAnnotation a2 = (XYPolygonAnnotation) TestUtils.serialised(a1);
+        XYPolygonAnnotation a2 = TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 

@@ -45,6 +45,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
+import org.jfree.chart.util.CloneUtils;
 
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
@@ -62,7 +63,6 @@ public class LegendItemCollectionTest  {
      */
     @Test
     public void testEquals() {
-
         LegendItemCollection c1 = new LegendItemCollection();
         LegendItemCollection c2 = new LegendItemCollection();
         assertEquals(c1, c2);
@@ -95,7 +95,7 @@ public class LegendItemCollectionTest  {
         LegendItemCollection c1 = new LegendItemCollection();
         c1.add(new LegendItem("Item", "Description", "ToolTip", "URL",
                 new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), Color.RED));
-        LegendItemCollection c2 = (LegendItemCollection) TestUtils.serialised(c1);
+        LegendItemCollection c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 
@@ -108,7 +108,7 @@ public class LegendItemCollectionTest  {
         LegendItemCollection c1 = new LegendItemCollection();
         LegendItem item1 = new LegendItem("Item 1");
         c1.add(item1);
-        LegendItemCollection c2 = (LegendItemCollection) c1.clone();
+        LegendItemCollection c2 = CloneUtils.clone(c1);
 
         assertNotSame(c1, c2);
         assertSame(c1.getClass(), c2.getClass());

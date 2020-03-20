@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * ----------------
  * LogAxisTest.java
  * ----------------
- * (C) Copyright 2007-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 11-Jul-2007 : Version 1 (DG);
- * 08-Apr-2008 : Fixed incorrect testEquals() method (DG);
- * 28-Oct-2011 : Cdded test for endless loop, # 3429707 (MH);
  */
 
 package org.jfree.chart.axis;
@@ -151,7 +145,7 @@ public class LogAxisTest {
     @Test
     public void testSerialization() {
         LogAxis a1 = new LogAxis("Test Axis");
-        LogAxis a2 = (LogAxis) TestUtils.serialised(a1);
+        LogAxis a2 = TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 

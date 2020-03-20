@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * -------------------------------
  * CategoryLineAnnotationTest.java
  * -------------------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 29-Jul-2005 : Version 1 (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG);
  *
  */
 
@@ -155,7 +150,7 @@ public class CategoryLineAnnotationTest {
     public void testSerialization() {
         CategoryLineAnnotation a1 = new CategoryLineAnnotation("Category 1", 
                 1.0, "Category 2", 2.0, Color.RED, new BasicStroke(1.0f));
-        CategoryLineAnnotation a2 = (CategoryLineAnnotation) TestUtils.serialised(a1);
+        CategoryLineAnnotation a2 = TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 

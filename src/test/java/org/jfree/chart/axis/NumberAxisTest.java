@@ -163,7 +163,7 @@ public class NumberAxisTest {
     @Test
     public void testSerialization() {
         NumberAxis a1 = new NumberAxis("Test Axis");
-        NumberAxis a2 = (NumberAxis) TestUtils.serialised(a1);
+        NumberAxis a2 = TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 

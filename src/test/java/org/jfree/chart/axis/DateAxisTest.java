@@ -32,20 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * Changes
- * -------
- * 22-Apr-2003 : Version 1 (DG);
- * 07-Jan-2005 : Added test for hashCode() method (DG);
- * 25-Sep-2005 : New tests for bug 1564977 (DG);
- * 19-Apr-2007 : Added further checks for setMinimumDate() and
- *               setMaximumDate() (DG);
- * 03-May-2007 : Replaced the tests for the previousStandardDate() method with
- *               new tests that check that the previousStandardDate and the
- *               next standard date do in fact span the reference date (DG);
- * 25-Nov-2008 : Added testBug2201869 (DG);
- * 08-Feb-2012 : Added testBug3484403 (MH);
- * 29-Aug-2016 : Added testBug25 (DG);
- *
  */
 
 package org.jfree.chart.axis;
@@ -292,7 +278,7 @@ public class DateAxisTest {
     @Test
     public void testSerialization() {
         DateAxis a1 = new DateAxis("Test Axis");
-        DateAxis a2 = (DateAxis) TestUtils.serialised(a1);
+        DateAxis a2 = TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 

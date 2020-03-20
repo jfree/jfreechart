@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * ---------------------
  * DateTickUnitTest.java
  * ---------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 26-Mar-2003 : Version 1 (DG);
- * 07-Jan-2005 : Added test for hashCode() (DG);
  *
  */
 
@@ -81,7 +76,7 @@ public class DateTickUnitTest {
     @Test
     public void testSerialization() {
         DateTickUnit a1 = new DateTickUnit(DateTickUnitType.DAY, 7);
-        DateTickUnit a2 = (DateTickUnit) TestUtils.serialised(a1);
+        DateTickUnit a2 = TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 

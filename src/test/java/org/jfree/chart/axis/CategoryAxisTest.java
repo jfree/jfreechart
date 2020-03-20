@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * ---------------------
  * CategoryAxisTest.java
  * ---------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 18-Mar-2003 : Version 1 (DG);
- * 13-Aug-2003 : Added clone() test (DG);
- * 07-Jan-2005 : Added hashCode() test (DG);
  *
  */
 
@@ -204,7 +198,7 @@ public class CategoryAxisTest {
         CategoryAxis a1 = new CategoryAxis("Test Axis");
         a1.setTickLabelPaint("C1", new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.WHITE));
-        CategoryAxis a2 = (CategoryAxis) TestUtils.serialised(a1);
+        CategoryAxis a2 = TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 

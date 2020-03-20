@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * -----------------------
  * NumberTickUnitTest.java
  * -----------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 5-Jul-2005 : Version 1 (DG);
  *
  */
 
@@ -103,7 +99,7 @@ public class NumberTickUnitTest {
     @Test
     public void testSerialization() {
         NumberTickUnit t1 = new NumberTickUnit(1.23, new DecimalFormat("0.00"));
-        NumberTickUnit t2 = (NumberTickUnit) TestUtils.serialised(t1);
+        NumberTickUnit t2 = TestUtils.serialised(t1);
         assertEquals(t1, t2);
     }
 

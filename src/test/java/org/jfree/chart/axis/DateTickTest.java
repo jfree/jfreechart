@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * -----------------
  * DateTickTest.java
  * -----------------
- * (C) Copyright 2004-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 13-May-2004 : Version 1 (DG);
- * 25-Sep-2008 : Extended testEquals() to cover new fields (DG);
  */
 
 package org.jfree.chart.axis;
@@ -141,7 +136,7 @@ public class DateTickTest {
     public void testSerialization() {
         DateTick t1 = new DateTick(new Date(0L), "Label", TextAnchor.CENTER,
                 TextAnchor.CENTER, 10.0);
-        DateTick t2 = (DateTick) TestUtils.serialised(t1);
+        DateTick t2 = TestUtils.serialised(t1);
         assertEquals(t1, t2);
     }
 

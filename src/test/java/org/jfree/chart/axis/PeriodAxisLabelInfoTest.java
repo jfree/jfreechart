@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * ----------------------------
  * PeriodAxisLabelInfoTest.java
  * ----------------------------
- * (C) Copyright 2004-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 10-Jun-2003 : Version 1 (DG);
- * 07-Jan-2005 : Added test for hashCode() (DG);
  *
  */
 
@@ -176,7 +171,7 @@ public class PeriodAxisLabelInfoTest {
     public void testSerialization() {
         PeriodAxisLabelInfo info1 = new PeriodAxisLabelInfo(Day.class,
                 new SimpleDateFormat("d"));
-        PeriodAxisLabelInfo info2 = (PeriodAxisLabelInfo) TestUtils.serialised(info1);
+        PeriodAxisLabelInfo info2 = TestUtils.serialised(info1);
         assertEquals(info1, info2);
     }
 

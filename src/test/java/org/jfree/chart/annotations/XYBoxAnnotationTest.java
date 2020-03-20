@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * ------------------------
  * XYBoxAnnotationTest.java
  * ------------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 19-Jan-2005 : Version 1 (DG);
- * 26-Feb-2008 : Added testDrawWithNullInfo() method (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG);
  *
  */
 
@@ -165,7 +159,7 @@ public class XYBoxAnnotationTest {
     public void testSerialization() {
         XYBoxAnnotation a1 = new XYBoxAnnotation(1.0, 2.0, 3.0, 4.0,
                 new BasicStroke(1.2f), Color.RED, Color.BLUE);
-        XYBoxAnnotation a2 = (XYBoxAnnotation) TestUtils.serialised(a1);
+        XYBoxAnnotation a2 = TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 

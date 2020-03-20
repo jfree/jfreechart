@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * ---------------------------
  * ChartRenderingInfoTest.java
  * ---------------------------
- * (C) Copyright 2004-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 19-Mar-2004 : Version 1 (DG);
- * 30-Nov-2005 : Updated for removed field in ChartRenderingInfo (DG);
  *
  */
 
@@ -51,6 +46,7 @@ import static org.junit.Assert.assertSame;
 
 import org.jfree.chart.entity.ChartEntity;
 import org.jfree.chart.entity.StandardEntityCollection;
+import org.jfree.chart.util.CloneUtils;
 import org.junit.Test;
 
 /**
@@ -93,7 +89,7 @@ public class ChartRenderingInfoTest  {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         ChartRenderingInfo i1 = new ChartRenderingInfo();
-        ChartRenderingInfo i2 = (ChartRenderingInfo) i1.clone();
+        ChartRenderingInfo i2 = CloneUtils.clone(i1);
 
         assertNotSame(i1, i2);
         assertSame(i1.getClass(), i2.getClass());
@@ -121,7 +117,7 @@ public class ChartRenderingInfoTest  {
     public void testSerialization() {
         ChartRenderingInfo i1 = new ChartRenderingInfo();
         i1.setChartArea(new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0));
-        ChartRenderingInfo i2 = (ChartRenderingInfo) TestUtils.serialised(i1);
+        ChartRenderingInfo i2 = TestUtils.serialised(i1);
         assertEquals(i1, i2);
     }
 
@@ -133,7 +129,7 @@ public class ChartRenderingInfoTest  {
         ChartRenderingInfo i1 = new ChartRenderingInfo();
         i1.getPlotInfo().setDataArea(new Rectangle2D.Double(1.0, 2.0, 3.0,
                 4.0));
-        ChartRenderingInfo i2 = (ChartRenderingInfo) TestUtils.serialised(i1);
+        ChartRenderingInfo i2 = TestUtils.serialised(i1);
         assertEquals(i1, i2);
         assertEquals(i2, i2.getPlotInfo().getOwner());
     }

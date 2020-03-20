@@ -266,7 +266,7 @@ public class JFreeChartTest implements ChartChangeListener {
         data.setValue("Type 3", 45.8);
 
         JFreeChart c1 = ChartFactory.createPieChart("Test", data);
-        JFreeChart c2 = (JFreeChart) TestUtils.serialised(c1);
+        JFreeChart c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
         LegendTitle lt2 = c2.getLegend();
         assertSame(lt2.getSources()[0], c2.getPlot());
@@ -282,7 +282,7 @@ public class JFreeChartTest implements ChartChangeListener {
         data.setValue("Type 2", 23.9);
         data.setValue("Type 3", 45.8);
         JFreeChart c1 = ChartFactory.createPieChart3D("Test", data);
-        JFreeChart c2 = (JFreeChart) TestUtils.serialised(c1);
+        JFreeChart c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 
@@ -340,7 +340,7 @@ public class JFreeChartTest implements ChartChangeListener {
         // create the chart...
         JFreeChart c1 = ChartFactory.createBarChart("Vertical Bar Chart",
                 "Category", "Value", dataset);
-        JFreeChart c2 = (JFreeChart) TestUtils.serialised(c1);
+        JFreeChart c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 
@@ -360,7 +360,7 @@ public class JFreeChartTest implements ChartChangeListener {
 
         JFreeChart c1 = ChartFactory.createTimeSeriesChart("Test", "Date",
                 "Value", dataset);
-        JFreeChart c2 = (JFreeChart) TestUtils.serialised(c1);
+        JFreeChart c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 
