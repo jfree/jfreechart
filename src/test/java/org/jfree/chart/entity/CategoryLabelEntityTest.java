@@ -43,6 +43,7 @@ import static org.junit.Assert.assertTrue;
 import java.awt.geom.Rectangle2D;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.junit.Test;
 
 /**
@@ -91,7 +92,7 @@ public class CategoryLabelEntityTest {
     public void testCloning() throws CloneNotSupportedException {
         CategoryLabelEntity<String> e1 = new CategoryLabelEntity<>("A",
                 new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), "ToolTip", "URL");
-        CategoryLabelEntity<String> e2 = (CategoryLabelEntity) e1.clone();
+        CategoryLabelEntity<String> e2 = CloneUtils.clone(e1);
         assertTrue(e1 != e2);
         assertTrue(e1.getClass() == e2.getClass());
         assertTrue(e1.equals(e2));
@@ -104,7 +105,7 @@ public class CategoryLabelEntityTest {
     public void testSerialization() {
         CategoryLabelEntity<String> e1 = new CategoryLabelEntity<>("A",
                 new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), "ToolTip", "URL");
-        CategoryLabelEntity<String> e2 = (CategoryLabelEntity) TestUtils.serialised(e1);
+        CategoryLabelEntity<String> e2 = TestUtils.serialised(e1);
         assertEquals(e1, e2);
     }
 

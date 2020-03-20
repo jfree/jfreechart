@@ -43,6 +43,7 @@ import static org.junit.Assert.assertTrue;
 import java.awt.geom.Rectangle2D;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.junit.Test;
 
 /**
@@ -84,7 +85,7 @@ public class TickLabelEntityTest {
     public void testCloning() throws CloneNotSupportedException {
         TickLabelEntity e1 = new TickLabelEntity(new Rectangle2D.Double(1.0,
                 2.0, 3.0, 4.0), "ToolTip", "URL");
-        TickLabelEntity e2 = (TickLabelEntity) e1.clone();
+        TickLabelEntity e2 = CloneUtils.clone(e1);
         assertTrue(e1 != e2);
         assertTrue(e1.getClass() == e2.getClass());
         assertTrue(e1.equals(e2));
@@ -97,7 +98,7 @@ public class TickLabelEntityTest {
     public void testSerialization() {
         TickLabelEntity e1 = new TickLabelEntity(new Rectangle2D.Double(1.0,
                 2.0, 3.0, 4.0), "ToolTip", "URL");
-        TickLabelEntity e2 = (TickLabelEntity) TestUtils.serialised(e1);
+        TickLabelEntity e2 = TestUtils.serialised(e1);
         assertEquals(e1, e2);
     }
 

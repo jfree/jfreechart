@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,17 +27,10 @@
  * ----------------------------------------
  * BoxAndWhiskerXYToolTipGeneratorTest.java
  * ----------------------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 13-Aug-2003 : Version 1 (DG);
- * 27-Feb-2004 : Renamed BoxAndWhiskerItemLabelGenerator
- *               --> XYBoxAndWhiskerItemLabelGenerator (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG);
  *
  */
 
@@ -149,7 +142,7 @@ public class BoxAndWhiskerXYToolTipGeneratorTest {
     public void testSerialization() {
         BoxAndWhiskerXYToolTipGenerator g1
                 = new BoxAndWhiskerXYToolTipGenerator();
-        BoxAndWhiskerXYToolTipGenerator g2 = (BoxAndWhiskerXYToolTipGenerator) TestUtils.serialised(g1);
+        BoxAndWhiskerXYToolTipGenerator g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

@@ -43,6 +43,7 @@ import static org.junit.Assert.assertTrue;
 import java.awt.geom.Rectangle2D;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 
 import org.jfree.data.general.DefaultPieDataset;
 import org.junit.Test;
@@ -109,7 +110,7 @@ public class PieSectionEntityTest {
         PieSectionEntity<String> e1 = new PieSectionEntity<>(
                 new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), 
                 new DefaultPieDataset<String>(), 1, 2, "Key", "ToolTip", "URL");
-        PieSectionEntity<String> e2 = (PieSectionEntity) e1.clone();
+        PieSectionEntity<String> e2 = CloneUtils.clone(e1);
         assertTrue(e1 != e2);
         assertTrue(e1.getClass() == e2.getClass());
         assertTrue(e1.equals(e2));
@@ -123,7 +124,7 @@ public class PieSectionEntityTest {
         PieSectionEntity<String> e1 = new PieSectionEntity<>(
                 new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), 
                 new DefaultPieDataset<String>(), 1, 2, "Key", "ToolTip", "URL");
-        PieSectionEntity<String> e2 = (PieSectionEntity) TestUtils.serialised(e1);
+        PieSectionEntity<String> e2 = TestUtils.serialised(e1);
         assertEquals(e1, e2);
     }
 

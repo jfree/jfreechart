@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * -------------------
  * EmptyBlockTest.java
  * -------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 04-Feb-2005 : Version 1 (DG);
  *
  */
 
@@ -46,6 +42,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.junit.Test;
 
 /**
@@ -83,7 +80,7 @@ public class EmptyBlockTest {
         EmptyBlock b2 = null;
 
         try {
-            b2 = (EmptyBlock) b1.clone();
+            b2 = CloneUtils.clone(b1);
         }
         catch (CloneNotSupportedException e) {
             fail(e.toString());
@@ -99,7 +96,7 @@ public class EmptyBlockTest {
     @Test
     public void testSerialization() {
         EmptyBlock b1 = new EmptyBlock(1.0, 2.0);
-        EmptyBlock b2 = (EmptyBlock) TestUtils.serialised(b1);
+        EmptyBlock b2 = TestUtils.serialised(b1);
         assertEquals(b1, b2);
     }
 

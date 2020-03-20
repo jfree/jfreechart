@@ -43,6 +43,7 @@ import static org.junit.Assert.assertTrue;
 import java.awt.geom.Rectangle2D;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 
 import org.jfree.data.time.TimeSeriesCollection;
 import org.junit.Test;
@@ -97,7 +98,7 @@ public class XYItemEntityTest {
     public void testCloning() throws CloneNotSupportedException {
         XYItemEntity e1 = new XYItemEntity(new Rectangle2D.Double(1.0, 2.0,
                 3.0, 4.0), new TimeSeriesCollection(), 1, 9, "ToolTip", "URL");
-        XYItemEntity e2 = (XYItemEntity) e1.clone();
+        XYItemEntity e2 = CloneUtils.clone(e1);
         assertTrue(e1 != e2);
         assertTrue(e1.getClass() == e2.getClass());
         assertTrue(e1.equals(e2));
@@ -110,7 +111,7 @@ public class XYItemEntityTest {
     public void testSerialization() {
         XYItemEntity e1 = new XYItemEntity(new Rectangle2D.Double(1.0, 2.0,
                 3.0, 4.0), new TimeSeriesCollection(), 1, 9, "ToolTip", "URL");
-        XYItemEntity e2 = (XYItemEntity) TestUtils.serialised(e1);
+        XYItemEntity e2 = TestUtils.serialised(e1);
         assertEquals(e1, e2);
     }
 
