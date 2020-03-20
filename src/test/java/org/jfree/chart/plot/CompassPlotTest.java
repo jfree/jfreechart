@@ -45,6 +45,7 @@ import java.awt.Font;
 import java.awt.GradientPaint;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 
 import org.jfree.data.general.DefaultValueDataset;
 import org.junit.Test;
@@ -118,7 +119,7 @@ public class CompassPlotTest {
                 1.0f, Color.GREEN));
         p1.setRoseHighlightPaint(new GradientPaint(4.0f, 3.0f, Color.RED, 2.0f,
                 1.0f, Color.GREEN));
-        CompassPlot p2 = (CompassPlot) TestUtils.serialised(p1);
+        CompassPlot p2 = TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 
@@ -129,7 +130,7 @@ public class CompassPlotTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         CompassPlot p1 = new CompassPlot(new DefaultValueDataset(15.0));
-        CompassPlot p2 = (CompassPlot) p1.clone();
+        CompassPlot p2 = CloneUtils.clone(p1);
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
