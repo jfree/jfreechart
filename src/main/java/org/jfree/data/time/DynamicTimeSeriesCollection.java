@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,36 +27,11 @@
  * --------------------------------
  * DynamicTimeSeriesCollection.java
  * --------------------------------
- * (C) Copyright 2002-2016, by I. H. Thomae and Contributors.
+ * (C) Copyright 2002-2020, by I. H. Thomae and Contributors.
  *
  * Original Author:  I. H. Thomae (ithomae@ists.dartmouth.edu);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Ricardo JL Rufino (patch #310);
- *
- * Changes
- * -------
- * 22-Nov-2002 : Initial version completed
- *    Jan 2003 : Optimized advanceTime(), added implemnt'n of RangeInfo intfc
- *               (using cached values for min, max, and range); also added
- *               getOldestIndex() and getNewestIndex() ftns so client classes
- *               can use this class as the master "index authority".
- * 22-Jan-2003 : Made this class stand on its own, rather than extending
- *               class FastTimeSeriesCollection
- * 31-Jan-2003 : Changed TimePeriod --> RegularTimePeriod (DG);
- * 13-Mar-2003 : Moved to com.jrefinery.data.time package (DG);
- * 29-Apr-2003 : Added small change to appendData method, from Irv Thomae (DG);
- * 19-Sep-2003 : Added new appendData method, from Irv Thomae (DG);
- * 05-May-2004 : Now extends AbstractIntervalXYDataset.  This also required a
- *               change to the return type of the getY() method - I'm slightly
- *               unsure of the implications of this, so it might require some
- *               further amendment (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
- *               getYValue() (DG);
- * 11-Jan-2004 : Removed deprecated code in preparation for the 1.0.0
- *               release (DG);
- * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
- * 01-Jul-2014 : Add millisecond time period - see patch #310 by Ricardo JL
- *               Rufino (DG);
  *
  */
 
@@ -213,7 +188,7 @@ public class DynamicTimeSeriesCollection extends AbstractIntervalXYDataset
     //   A single set of extrema covers the entire SeriesCollection
 
     /** The minimum value. */
-    private Float minValue = new Float(0.0f);
+    private Float minValue = 0.0f;
 
     /** The maximum value. */
     private Float maxValue = null;
@@ -339,8 +314,8 @@ public class DynamicTimeSeriesCollection extends AbstractIntervalXYDataset
         else {
             endL = getNewestTime().getLastMillisecond(this.workingCalendar);
         }
-        this.domainStart = new Long(startL);
-        this.domainEnd = new Long(endL);
+        this.domainStart = startL;
+        this.domainEnd = endL;
         this.domainRange = new Range(startL, endL);
     }
 
@@ -561,7 +536,7 @@ public class DynamicTimeSeriesCollection extends AbstractIntervalXYDataset
         boolean extremaChanged = false;
         float oldMax = 0.0f;
         if (this.maxValue != null) {
-            oldMax = this.maxValue.floatValue();
+            oldMax = this.maxValue;
         }
         for (int s = 0; s < getSeriesCount(); s++) {
             if (this.valueHistory[s].getData(this.oldestAt) == oldMax) {
@@ -587,10 +562,10 @@ public class DynamicTimeSeriesCollection extends AbstractIntervalXYDataset
             this.oldestAt = 0;
         }
         // Update the domain limits:
-        long startL = this.domainStart.longValue();  //(time is kept in msec)
-        this.domainStart = new Long(startL + this.deltaTime);
-        long endL = this.domainEnd.longValue();
-        this.domainEnd = new Long(endL + this.deltaTime);
+        long startL = this.domainStart;  //(time is kept in msec)
+        this.domainStart = startL + this.deltaTime;
+        long endL = this.domainEnd;
+        this.domainEnd = endL + this.deltaTime;
         this.domainRange = new Range(startL, endL);
         fireSeriesChanged();
         return nextInstant;
@@ -728,7 +703,7 @@ public class DynamicTimeSeriesCollection extends AbstractIntervalXYDataset
     @Override
     public Number getX(int series, int item) {
         RegularTimePeriod tp = this.pointsInTime[translateGet(item)];
-        return new Long(getX(tp));
+        return getX(tp);
     }
 
     /**
@@ -771,7 +746,7 @@ public class DynamicTimeSeriesCollection extends AbstractIntervalXYDataset
     @Override
     public Number getStartX(int series, int item) {
         RegularTimePeriod tp = this.pointsInTime[translateGet(item)];
-        return new Long(tp.getFirstMillisecond(this.workingCalendar));
+        return tp.getFirstMillisecond(this.workingCalendar);
     }
 
     /**
@@ -785,7 +760,7 @@ public class DynamicTimeSeriesCollection extends AbstractIntervalXYDataset
     @Override
     public Number getEndX(int series, int item) {
         RegularTimePeriod tp = this.pointsInTime[translateGet(item)];
-        return new Long(tp.getLastMillisecond(this.workingCalendar));
+        return tp.getLastMillisecond(this.workingCalendar);
     }
 
     /**
