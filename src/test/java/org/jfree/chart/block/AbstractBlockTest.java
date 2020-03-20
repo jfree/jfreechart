@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * ----------------------
  * AbstractBlockTest.java
  * ----------------------
- * (C) Copyright 2007-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 16-Mar-2007 : Version 1 (DG);
  *
  */
 
@@ -146,7 +142,7 @@ public class AbstractBlockTest{
     @Test
     public void testSerialization() {
         EmptyBlock b1 = new EmptyBlock(1.0, 2.0);
-        EmptyBlock b2 = (EmptyBlock) TestUtils.serialised(b1);
+        EmptyBlock b2 = TestUtils.serialised(b1);
         assertEquals(b1, b2);
     }
 
