@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,24 +27,10 @@
  * ------------------
  * MovingAverage.java
  * ------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited.
+ * (C) Copyright 2003-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Benoit Xhenseval;
- *
- * Changes
- * -------
- * 28-Jan-2003 : Version 1 (DG);
- * 10-Mar-2003 : Added createPointMovingAverage() method contributed by Benoit
- *               Xhenseval (DG);
- * 01-Aug-2003 : Added new method for TimeSeriesCollection, and fixed bug in
- *               XYDataset method (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
- *               getYValue() (DG);
- * 11-Jan-2005 : Removed deprecated code in preparation for the 1.0.0
- *               release (DG);
- * 09-Jun-2009 : Tidied up some calls to TimeSeries (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 

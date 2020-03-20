@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,23 +27,10 @@
  * -----------------------
  * TimeSeriesDataItem.java
  * -----------------------
- * (C) Copyright 2001-2016, by Object Refinery Limited.
+ * (C) Copyright 2001-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 11-Oct-2001 : Version 1 (DG);
- * 15-Nov-2001 : Updated Javadoc comments (DG);
- * 29-Nov-2001 : Added cloning (DG);
- * 24-Jun-2002 : Removed unnecessary import (DG);
- * 07-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 13-Mar-2003 : Renamed TimeSeriesDataPair --> TimeSeriesDataItem, moved to
- *               com.jrefinery.data.time package, implemented Serializable (DG)
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 09-Jun-2009 : Tidied up equals() (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  * 
  */
 
