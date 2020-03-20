@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,20 +27,10 @@
  * ------------------
  * PolarPlotTest.java
  * ------------------
- * (C) Copyright 2005-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 23-Feb-2005 : Version 1 (DG);
- * 08-Jun-2005 : Extended testEquals() (DG);
- * 07-Feb-2007 : Extended testEquals() and testCloning() (DG);
- * 17-Feb-2008 : Tests for new angleTickUnit field (DG);
- * 09-Dec-2009 : Added new tests (DG);
- * 12-Nov-2011 : Added tests for translateToJava2D (MH);
- * 17-Dec-2011 : Updated testEquals() (DG);
  * 
  */
 
@@ -66,6 +56,7 @@ import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.NumberTickUnit;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.renderer.DefaultPolarItemRenderer;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.data.xy.DefaultXYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
@@ -228,7 +219,7 @@ public class PolarPlotTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         PolarPlot p1 = new PolarPlot();
-        PolarPlot p2 = (PolarPlot) p1.clone();
+        PolarPlot p2 = CloneUtils.clone(p1);
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
@@ -265,7 +256,7 @@ public class PolarPlotTest {
                 4.0f, Color.BLUE));
         p1.setRadiusGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f,
                 4.0f, Color.BLUE));
-        PolarPlot p2 = (PolarPlot) TestUtils.serialised(p1);
+        PolarPlot p2 = TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 

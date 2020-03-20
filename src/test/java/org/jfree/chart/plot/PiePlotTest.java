@@ -60,6 +60,7 @@ import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
 import org.jfree.chart.labels.StandardPieToolTipGenerator;
 import org.jfree.chart.urls.CustomPieURLGenerator;
 import org.jfree.chart.urls.StandardPieURLGenerator;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.DefaultShadowGenerator;
 import org.jfree.chart.util.Rotation;
 import org.jfree.data.general.DefaultPieDataset;
@@ -402,7 +403,7 @@ public class PiePlotTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         PiePlot p1 = new PiePlot();
-        PiePlot p2 = (PiePlot) p1.clone();
+        PiePlot p2 = CloneUtils.clone(p1);
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
@@ -417,7 +418,7 @@ public class PiePlotTest {
         CustomPieURLGenerator generator = new CustomPieURLGenerator();
         PiePlot p1 = new PiePlot();
         p1.setURLGenerator(generator);
-        PiePlot p2 = (PiePlot) p1.clone();
+        PiePlot p2 = CloneUtils.clone(p1);
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
@@ -435,7 +436,7 @@ public class PiePlotTest {
         Rectangle shape = new Rectangle(-4, -4, 8, 8);
         PiePlot p1 = new PiePlot();
         p1.setLegendItemShape(shape);
-        PiePlot p2 = (PiePlot) p1.clone();
+        PiePlot p2 = CloneUtils.clone(p1);
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
@@ -455,7 +456,7 @@ public class PiePlotTest {
                 = new StandardPieSectionLabelGenerator();
         PiePlot p1 = new PiePlot();
         p1.setLegendLabelGenerator(generator);
-        PiePlot p2 = (PiePlot) p1.clone();
+        PiePlot p2 = CloneUtils.clone(p1);
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
@@ -475,7 +476,7 @@ public class PiePlotTest {
                 = new StandardPieSectionLabelGenerator();
         PiePlot p1 = new PiePlot();
         p1.setLegendLabelToolTipGenerator(generator);
-        PiePlot p2 = (PiePlot) p1.clone();
+        PiePlot p2 = CloneUtils.clone(p1);
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
@@ -494,7 +495,7 @@ public class PiePlotTest {
         CustomPieURLGenerator generator = new CustomPieURLGenerator();
         PiePlot p1 = new PiePlot();
         p1.setLegendLabelURLGenerator(generator);
-        PiePlot p2 = (PiePlot) p1.clone();
+        PiePlot p2 = CloneUtils.clone(p1);
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
@@ -510,7 +511,7 @@ public class PiePlotTest {
     @Test
     public void testSerialization() {
         PiePlot p1 = new PiePlot(null);
-        PiePlot p2 = (PiePlot) TestUtils.serialised(p1);
+        PiePlot p2 = TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 
@@ -611,7 +612,7 @@ public class PiePlotTest {
         PiePlot plot1 = new PiePlot(dataset1);
         plot1.setSectionPaint("A", Color.RED);
         plot1.setSectionPaint("B", Color.GREEN);
-        PiePlot plot2 = (PiePlot) plot1.clone();
+        PiePlot plot2 = CloneUtils.clone(plot1);
         plot2.setSectionPaint("A", Color.BLUE);
         plot2.setSectionPaint("B", Color.YELLOW);
         assertEquals(Color.RED, plot1.getSectionPaint("A"));
@@ -626,7 +627,7 @@ public class PiePlotTest {
         PiePlot plot1 = new PiePlot(dataset1);
         plot1.setSectionOutlinePaint("A", Color.RED);
         plot1.setSectionOutlinePaint("B", Color.GREEN);
-        PiePlot plot2 = (PiePlot) plot1.clone();
+        PiePlot plot2 = CloneUtils.clone(plot1);
         plot2.setSectionOutlinePaint("A", Color.BLUE);
         plot2.setSectionOutlinePaint("B", Color.YELLOW);
         assertEquals(Color.RED, plot1.getSectionOutlinePaint("A"));
@@ -641,7 +642,7 @@ public class PiePlotTest {
         PiePlot plot1 = new PiePlot(dataset1);
         plot1.setSectionOutlineStroke("A", new BasicStroke(5.0f));
         plot1.setSectionOutlineStroke("B", new BasicStroke(6.0f));
-        PiePlot plot2 = (PiePlot) plot1.clone();
+        PiePlot plot2 = CloneUtils.clone(plot1);
         plot2.setSectionOutlineStroke("A", new BasicStroke(7.0f));
         plot2.setSectionOutlineStroke("B", new BasicStroke(8.0f));
         assertEquals(new BasicStroke(5.0f), plot1.getSectionOutlineStroke("A"));
@@ -656,7 +657,7 @@ public class PiePlotTest {
         PiePlot plot1 = new PiePlot(dataset1);
         plot1.setExplodePercent("A", 0.1);
         plot1.setExplodePercent("B", 0.2);
-        PiePlot plot2 = (PiePlot) plot1.clone();
+        PiePlot plot2 = CloneUtils.clone(plot1);
         plot2.setExplodePercent("A", 0.3);
         plot2.setExplodePercent("B", 0.4);
         assertEquals(0.1, plot1.getExplodePercent("A"), EPSILON);
@@ -672,7 +673,7 @@ public class PiePlotTest {
         DefaultPieDataset<String> dataset1 = new DefaultPieDataset<>();
         PiePlot plot1 = new PiePlot(dataset1);
         plot1.setLabelGenerator(new StandardPieSectionLabelGenerator());
-        PiePlot plot2 = (PiePlot) plot1.clone();
+        PiePlot plot2 = CloneUtils.clone(plot1);
         StandardPieSectionLabelGenerator g2 
                 = (StandardPieSectionLabelGenerator) plot2.getLabelGenerator();
         g2.setAttributedLabel(1, new AttributedString("TESTING"));

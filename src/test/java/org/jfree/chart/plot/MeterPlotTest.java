@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,17 +27,10 @@
  * ------------------
  * MeterPlotTest.java
  * ------------------
- * (C) Copyright 2003-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 27-Mar-2003 : Version 1 (DG);
- * 12-May-2004 : Updated testEquals() (DG);
- * 29-Nov-2007 : Updated testEquals() and testSerialization1() for
- *               dialOutlinePaint (DG)
  *
  */
 
@@ -53,6 +46,7 @@ import java.awt.GradientPaint;
 import java.text.DecimalFormat;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 
 import org.jfree.data.Range;
 import org.jfree.data.general.DefaultValueDataset;
@@ -199,7 +193,7 @@ public class MeterPlotTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         MeterPlot p1 = new MeterPlot();
-        MeterPlot p2 = (MeterPlot) p1.clone();
+        MeterPlot p2 = CloneUtils.clone(p1);
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
@@ -237,7 +231,7 @@ public class MeterPlotTest {
                 3.0f, 4.0f, Color.BLUE));
         p1.setTickPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.BLUE));
-        MeterPlot p2 = (MeterPlot) TestUtils.serialised(p1);
+        MeterPlot p2 = TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 
@@ -247,7 +241,7 @@ public class MeterPlotTest {
     @Test
     public void testSerialization2() {
         MeterPlot p1 = new MeterPlot(new DefaultValueDataset(1.23));
-        MeterPlot p2 = (MeterPlot) TestUtils.serialised(p1);
+        MeterPlot p2 = TestUtils.serialised(p1);
         assertEquals(p1, p2);
 
     }

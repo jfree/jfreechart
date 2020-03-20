@@ -32,12 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * Changes
- * -------
- * 18-Mar-2003 : Version 1 (DG);
- * 29-Jan-2009 : Updated testEquals() (DG);
- * 26-Mar-2009 : Updated testEquals() for new panning fields (DG);
- *
  */
 
 package org.jfree.chart.plot;
@@ -56,6 +50,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.ValueAxis;
+import org.jfree.chart.util.CloneUtils;
 import org.junit.Test;
 
 /**
@@ -179,7 +174,7 @@ public class FastScatterPlotTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         FastScatterPlot p1 = new FastScatterPlot();
-        FastScatterPlot p2 = (FastScatterPlot) p1.clone();
+        FastScatterPlot p2 = CloneUtils.clone(p1);
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
@@ -194,7 +189,7 @@ public class FastScatterPlotTest {
         ValueAxis domainAxis = new NumberAxis("X");
         ValueAxis rangeAxis = new NumberAxis("Y");
         FastScatterPlot p1 = new FastScatterPlot(data, domainAxis, rangeAxis);
-        FastScatterPlot p2 = (FastScatterPlot) TestUtils.serialised(p1);
+        FastScatterPlot p2 = TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 
