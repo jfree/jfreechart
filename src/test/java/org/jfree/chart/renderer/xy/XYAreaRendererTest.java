@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,19 +27,10 @@
  * -----------------------
  * XYAreaRendererTest.java
  * -----------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 25-Mar-2003 : Version 1 (DG);
- * 22-Oct-2003 : Added hashCode test (DG);
- * 14-Feb-2007 : Updated testCloning() (DG);
- * 17-May-2007 : Added testGetLegendItemSeriesIndex() (DG);
- * 22-Apr-2008 : Added testPublicCloneable (DG);
- * 10-Jun-2009 : Check new fields (DG);
  *
  */
 
@@ -59,6 +50,7 @@ import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.ui.GradientPaintTransformType;
 import org.jfree.chart.ui.StandardGradientPaintTransformer;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.xy.DefaultTableXYDataset;
 import org.jfree.data.xy.XYSeries;
@@ -151,7 +143,7 @@ public class XYAreaRendererTest {
         XYAreaRenderer r1 = new XYAreaRenderer();
         Rectangle2D rect1 = new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0);
         r1.setLegendArea(rect1);
-        XYAreaRenderer r2 = (XYAreaRenderer) r1.clone();
+        XYAreaRenderer r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -178,7 +170,7 @@ public class XYAreaRendererTest {
     @Test
     public void testSerialization() {
         XYAreaRenderer r1 = new XYAreaRenderer();
-        XYAreaRenderer r2 = (XYAreaRenderer) TestUtils.serialised(r1);
+        XYAreaRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

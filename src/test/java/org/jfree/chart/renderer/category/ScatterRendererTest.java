@@ -44,6 +44,7 @@ import static org.junit.Assert.assertNull;
 import java.util.Arrays;
 import java.util.List;
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.Range;
@@ -115,7 +116,7 @@ public class ScatterRendererTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         ScatterRenderer r1 = new ScatterRenderer();
-        ScatterRenderer r2 = (ScatterRenderer) r1.clone();
+        ScatterRenderer r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -173,7 +174,7 @@ public class ScatterRendererTest {
     @Test
     public void testSerialization() {
         ScatterRenderer r1 = new ScatterRenderer();
-        ScatterRenderer r2 = (ScatterRenderer) TestUtils.serialised(r1);
+        ScatterRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

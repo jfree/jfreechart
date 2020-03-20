@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,19 +27,10 @@
  * ----------------------
  * XYBarRendererTest.java
  * ----------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 25-Mar-2003 : Version 1 (DG);
- * 22-Oct-2003 : Added hashCode test (DG);
- * 09-Feb-2007 : Added to testCloning() (DG);
- * 17-May-2007 : Added testGetLegendItemSeriesIndex() (DG);
- * 22-Apr-2008 : Added testPublicCloneable (DG);
- * 19-Jun-2008 : Added testFindRangeBounds() (DG);
  *
  */
 
@@ -61,6 +52,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.ui.GradientPaintTransformType;
 import org.jfree.chart.ui.StandardGradientPaintTransformer;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.Range;
 import org.jfree.data.xy.DefaultIntervalXYDataset;
@@ -185,7 +177,7 @@ public class XYBarRendererTest {
         XYBarRenderer r1 = new XYBarRenderer();
         Rectangle2D rect = new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0);
         r1.setLegendBar(rect);
-        XYBarRenderer r2 = (XYBarRenderer) r1.clone();
+        XYBarRenderer r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -212,7 +204,7 @@ public class XYBarRendererTest {
     @Test
     public void testSerialization() {
         XYBarRenderer r1 = new XYBarRenderer();
-        XYBarRenderer r2 = (XYBarRenderer) TestUtils.serialised(r1);
+        XYBarRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 
@@ -223,7 +215,7 @@ public class XYBarRendererTest {
     public void testSerialization2() {
         XYBarRenderer r1 = new XYBarRenderer();
         r1.setPositiveItemLabelPositionFallback(new ItemLabelPosition());
-        XYBarRenderer r2 = (XYBarRenderer) TestUtils.serialised(r1);
+        XYBarRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

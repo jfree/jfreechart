@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,19 +27,10 @@
  * ------------------------
  * HighLowRendererTest.java
  * ------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 25-Mar-2003 : Version 1 (DG);
- * 22-Oct-2003 : Added hashCode test (DG);
- * 01-Nov-2005 : Added tests for new fields (DG);
- * 17-Aug-2006 : Added testFindRangeBounds() method (DG);
- * 22-Apr-2008 : Added testPublicCloneable (DG);
- * 29-Apr-2008 : Extended testEquals() for new field (DG);
  *
  */
 
@@ -54,6 +45,7 @@ import java.awt.Color;
 import java.util.Date;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.Range;
@@ -127,7 +119,7 @@ public class HighLowRendererTest {
     public void testCloning() throws CloneNotSupportedException {
         HighLowRenderer r1 = new HighLowRenderer();
         r1.setCloseTickPaint(Color.green);
-        HighLowRenderer r2 = (HighLowRenderer) r1.clone();
+        HighLowRenderer r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -149,7 +141,7 @@ public class HighLowRendererTest {
     public void testSerialization() {
         HighLowRenderer r1 = new HighLowRenderer();
         r1.setCloseTickPaint(Color.green);
-        HighLowRenderer r2 = (HighLowRenderer) TestUtils.serialised(r1);
+        HighLowRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

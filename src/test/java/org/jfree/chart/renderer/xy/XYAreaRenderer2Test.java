@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,17 +27,10 @@
  * ------------------------
  * XYAreaRenderer2Test.java
  * ------------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited.
+ * (C) Copyright 2005-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 24-May-2005 : Version 1 (DG);
- * 30-Nov-2006 : Extended testEquals() and testCloning() (DG);
- * 17-May-2007 : Added testGetLegendItemSeriesIndex() (DG);
- * 22-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
@@ -132,7 +125,7 @@ public class XYAreaRenderer2Test {
     @Test
     public void testSerialization() {
         XYAreaRenderer2 r1 = new XYAreaRenderer2();
-        XYAreaRenderer2 r2 = (XYAreaRenderer2) TestUtils.serialised(r1);
+        XYAreaRenderer2 r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * -----------------------
  * VectorRendererTest.java
  * -----------------------
- * (C) Copyright 2007-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 30-Jan-2007 : Version 1 (DG);
- * 22-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
@@ -115,7 +110,7 @@ public class VectorRendererTest {
     @Test
     public void testSerialization() {
         VectorRenderer r1 = new VectorRenderer();
-        VectorRenderer r2 = (VectorRenderer) TestUtils.serialised(r1);
+        VectorRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 
