@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * ----------------------------
  * CategoryLabelEntityTest.java
  * ----------------------------
- * (C) Copyright 2007-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 17-Nov-2007 : Version 1 (DG);
  *
  */
 
@@ -59,16 +55,16 @@ public class CategoryLabelEntityTest {
      */
     @Test
     public void testEquals() {
-        CategoryLabelEntity e1 = new CategoryLabelEntity("A",
+        CategoryLabelEntity<String> e1 = new CategoryLabelEntity<>("A",
                 new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), "ToolTip", "URL");
-        CategoryLabelEntity e2 = new CategoryLabelEntity("A",
+        CategoryLabelEntity<String> e2 = new CategoryLabelEntity<>("A",
                 new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), "ToolTip", "URL");
         assertTrue(e1.equals(e2));
 
-        e1 = new CategoryLabelEntity("B", new Rectangle2D.Double(1.0, 2.0,
+        e1 = new CategoryLabelEntity<>("B", new Rectangle2D.Double(1.0, 2.0,
                 3.0, 4.0), "ToolTip", "URL");
         assertFalse(e1.equals(e2));
-        e2 = new CategoryLabelEntity("B", new Rectangle2D.Double(1.0, 2.0,
+        e2 = new CategoryLabelEntity<>("B", new Rectangle2D.Double(1.0, 2.0,
                 3.0, 4.0), "ToolTip", "URL");
         assertTrue(e1.equals(e2));
 
@@ -93,9 +89,9 @@ public class CategoryLabelEntityTest {
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        CategoryLabelEntity e1 = new CategoryLabelEntity("A",
+        CategoryLabelEntity<String> e1 = new CategoryLabelEntity<>("A",
                 new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), "ToolTip", "URL");
-        CategoryLabelEntity e2 = (CategoryLabelEntity) e1.clone();
+        CategoryLabelEntity<String> e2 = (CategoryLabelEntity) e1.clone();
         assertTrue(e1 != e2);
         assertTrue(e1.getClass() == e2.getClass());
         assertTrue(e1.equals(e2));
@@ -106,9 +102,9 @@ public class CategoryLabelEntityTest {
      */
     @Test
     public void testSerialization() {
-        CategoryLabelEntity e1 = new CategoryLabelEntity("A",
+        CategoryLabelEntity<String> e1 = new CategoryLabelEntity<>("A",
                 new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), "ToolTip", "URL");
-        CategoryLabelEntity e2 = (CategoryLabelEntity) TestUtils.serialised(e1);
+        CategoryLabelEntity<String> e2 = (CategoryLabelEntity) TestUtils.serialised(e1);
         assertEquals(e1, e2);
     }
 

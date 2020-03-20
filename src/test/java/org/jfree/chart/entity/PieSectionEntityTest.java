@@ -57,12 +57,12 @@ public class PieSectionEntityTest {
      */
     @Test
     public void testEquals() {
-        PieSectionEntity e1 = new PieSectionEntity(new Rectangle2D.Double(
-                1.0, 2.0, 3.0, 4.0), new DefaultPieDataset<String>(), 1, 2, "Key",
-                "ToolTip", "URL");
-        PieSectionEntity e2 = new PieSectionEntity(new Rectangle2D.Double(1.0,
-                2.0, 3.0, 4.0), new DefaultPieDataset<String>(), 1, 2, "Key",
-                "ToolTip", "URL");
+        PieSectionEntity<String> e1 = new PieSectionEntity<>(
+                new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), 
+                new DefaultPieDataset<String>(), 1, 2, "Key", "ToolTip", "URL");
+        PieSectionEntity<String> e2 = new PieSectionEntity<>(
+                new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), 
+                new DefaultPieDataset<String>(), 1, 2, "Key", "ToolTip", "URL");
         assertTrue(e1.equals(e2));
 
         e1.setArea(new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0));
@@ -106,10 +106,10 @@ public class PieSectionEntityTest {
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        PieSectionEntity e1 = new PieSectionEntity(new Rectangle2D.Double(1.0,
-                2.0, 3.0, 4.0), new DefaultPieDataset<String>(), 1, 2, "Key",
-                "ToolTip", "URL");
-        PieSectionEntity e2 = (PieSectionEntity) e1.clone();
+        PieSectionEntity<String> e1 = new PieSectionEntity<>(
+                new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), 
+                new DefaultPieDataset<String>(), 1, 2, "Key", "ToolTip", "URL");
+        PieSectionEntity<String> e2 = (PieSectionEntity) e1.clone();
         assertTrue(e1 != e2);
         assertTrue(e1.getClass() == e2.getClass());
         assertTrue(e1.equals(e2));
@@ -120,10 +120,10 @@ public class PieSectionEntityTest {
      */
     @Test
     public void testSerialization() {
-        PieSectionEntity e1 = new PieSectionEntity(new Rectangle2D.Double(1.0,
-                2.0, 3.0, 4.0), new DefaultPieDataset<String>(), 1, 2, "Key",
-                "ToolTip", "URL");
-        PieSectionEntity e2 = (PieSectionEntity) TestUtils.serialised(e1);
+        PieSectionEntity<String> e1 = new PieSectionEntity<>(
+                new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), 
+                new DefaultPieDataset<String>(), 1, 2, "Key", "ToolTip", "URL");
+        PieSectionEntity<String> e2 = (PieSectionEntity) TestUtils.serialised(e1);
         assertEquals(e1, e2);
     }
 
