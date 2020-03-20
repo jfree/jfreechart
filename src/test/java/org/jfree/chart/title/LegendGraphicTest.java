@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * ----------------------
  * LegendGraphicTest.java
  * ----------------------
- * (C) Copyright 2005-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 01-Sep-2005 : Version 1 (DG);
  *
  */
 
@@ -55,6 +51,7 @@ import org.jfree.chart.TestUtils;
 import org.jfree.chart.ui.GradientPaintTransformType;
 import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.ui.StandardGradientPaintTransformer;
+import org.jfree.chart.util.CloneUtils;
 
 import org.junit.Test;
 
@@ -185,7 +182,7 @@ public class LegendGraphicTest {
     public void testCloning() throws CloneNotSupportedException {
         Rectangle r = new Rectangle(1, 2, 3, 4);
         LegendGraphic g1 = new LegendGraphic(r, Color.BLACK);
-        LegendGraphic g2 = (LegendGraphic) g1.clone();
+        LegendGraphic g2 = CloneUtils.clone(g1);
         assertTrue(g1 != g2);
         assertTrue(g1.getClass() == g2.getClass());
         assertTrue(g1.equals(g2));
@@ -204,7 +201,7 @@ public class LegendGraphicTest {
         LegendGraphic g1 = new LegendGraphic(r, Color.BLACK);
         Line2D l = new Line2D.Double(1.0, 2.0, 3.0, 4.0);
         g1.setLine(l);
-        LegendGraphic g2 = (LegendGraphic) g1.clone();
+        LegendGraphic g2 = CloneUtils.clone(g1);
         assertTrue(g1 != g2);
         assertTrue(g1.getClass() == g2.getClass());
         assertTrue(g1.equals(g2));
@@ -224,7 +221,7 @@ public class LegendGraphicTest {
         LegendGraphic g1 = new LegendGraphic(new Rectangle2D.Double(1.0, 2.0, 
                 3.0, 4.0), Color.BLACK);
         g1.setOutlineStroke(s);
-        LegendGraphic g2 = (LegendGraphic) TestUtils.serialised(g1);
+        LegendGraphic g2 = TestUtils.serialised(g1);
         assertTrue(g1.equals(g2));
     }
 

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * ------------------------
  * XYShapeRendererTest.java
  * ------------------------
- * (C) Copyright 2010-2016, by Object Refinery Limited.
+ * (C) Copyright 2010-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Martin Hoeller (patch 2952086);
- *
- * Changes
- * -------
- * 17-Sep-2008 : Version 1 (DG);
- * 16-Feb-2010 : Added testFindZBounds() (MH);
- * 19-Oct-2011 : Added test3026341() (DG);
  *
  */
 
@@ -53,6 +47,7 @@ import java.awt.Color;
 import org.jfree.chart.TestUtils;
 
 import org.jfree.chart.renderer.LookupPaintScale;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.data.Range;
 import org.jfree.data.xy.DefaultXYZDataset;
 import org.jfree.data.xy.XYSeries;
@@ -112,7 +107,7 @@ public class XYShapeRendererTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         XYShapeRenderer r1 = new XYShapeRenderer();
-        XYShapeRenderer r2 = (XYShapeRenderer) r1.clone();
+        XYShapeRenderer r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -124,7 +119,7 @@ public class XYShapeRendererTest {
     @Test
     public void testSerialization() {
         XYShapeRenderer r1 = new XYShapeRenderer();
-        XYShapeRenderer r2 = (XYShapeRenderer) TestUtils.serialised(r1);
+        XYShapeRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

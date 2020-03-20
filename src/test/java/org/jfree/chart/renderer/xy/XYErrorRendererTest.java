@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * ------------------------
  * XYErrorRendererTest.java
  * ------------------------
- * (C) Copyright 2006-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 25-Oct-2006 : Version 1 (DG);
- * 22-Apr-2008 : Added testPublicCloneable (DG);
- * 28-Jan-2009 : Updated tests for new errorStroke field (DG);
  *
  */
 
@@ -52,6 +46,7 @@ import java.awt.Color;
 import java.awt.GradientPaint;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.Test;
@@ -125,7 +120,7 @@ public class XYErrorRendererTest {
         XYErrorRenderer r1 = new XYErrorRenderer();
         r1.setErrorPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f,
                 Color.WHITE));
-        XYErrorRenderer r2 = (XYErrorRenderer) r1.clone();
+        XYErrorRenderer r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -138,7 +133,7 @@ public class XYErrorRendererTest {
     public void testCloning2() throws CloneNotSupportedException {
         XYErrorRenderer r1 = new XYErrorRenderer();
         r1.setErrorStroke(new BasicStroke(1.5f));
-        XYErrorRenderer r2 = (XYErrorRenderer) r1.clone();
+        XYErrorRenderer r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -161,7 +156,7 @@ public class XYErrorRendererTest {
         XYErrorRenderer r1 = new XYErrorRenderer();
         r1.setErrorPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f,
                 Color.WHITE));
-        XYErrorRenderer r2 = (XYErrorRenderer) TestUtils.serialised(r1);
+        XYErrorRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 
@@ -172,7 +167,7 @@ public class XYErrorRendererTest {
     public void testSerialization2() {
         XYErrorRenderer r1 = new XYErrorRenderer();
         r1.setErrorStroke(new BasicStroke(1.5f));
-        XYErrorRenderer r2 = (XYErrorRenderer) TestUtils.serialised(r1);
+        XYErrorRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

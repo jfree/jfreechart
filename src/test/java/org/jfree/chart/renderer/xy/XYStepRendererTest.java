@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * -----------------------
  * XYStepRendererTest.java
  * -----------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 25-Mar-2003 : Version 1 (DG);
- * 14-Feb-2008 : Added checks for new code (DG);
- * 22-Apr-2008 : Added testPublicCloneable() (DG);
  *
  */
 
@@ -51,6 +45,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.xy.DefaultTableXYDataset;
 import org.jfree.data.xy.XYSeries;
@@ -103,7 +98,7 @@ public class XYStepRendererTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         XYStepRenderer r1 = new XYStepRenderer();
-        XYStepRenderer r2 = (XYStepRenderer) r1.clone();
+        XYStepRenderer r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -125,7 +120,7 @@ public class XYStepRendererTest {
     public void testSerialization() {
         XYStepRenderer r1 = new XYStepRenderer();
         r1.setStepPoint(0.123);
-        XYStepRenderer r2 = (XYStepRenderer) TestUtils.serialised(r1);
+        XYStepRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

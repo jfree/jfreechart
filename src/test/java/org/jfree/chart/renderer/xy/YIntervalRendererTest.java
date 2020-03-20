@@ -210,7 +210,7 @@ public class YIntervalRendererTest {
     @Test
     public void testSerialization() {
         YIntervalRenderer r1 = new YIntervalRenderer();
-        YIntervalRenderer r2 = (YIntervalRenderer) TestUtils.serialised(r1);
+        YIntervalRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

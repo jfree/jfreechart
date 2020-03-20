@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * -----------------------
  * ShortTextTitleTest.java
  * -----------------------
- * (C) Copyright 2008-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2008-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 05-May-2008 : Version 1 (DG);
  *
  */
 
@@ -45,6 +41,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.junit.Test;
 
 /**
@@ -86,7 +83,7 @@ public class ShortTextTitleTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         ShortTextTitle t1 = new ShortTextTitle("ABC");
-        ShortTextTitle t2 = (ShortTextTitle) t1.clone();
+        ShortTextTitle t2 = CloneUtils.clone(t1);
         assertTrue(t1 != t2);
         assertTrue(t1.getClass() == t2.getClass());
         assertTrue(t1.equals(t2));
@@ -98,7 +95,7 @@ public class ShortTextTitleTest {
     @Test
     public void testSerialization() {
         ShortTextTitle t1 = new ShortTextTitle("ABC");
-        ShortTextTitle t2 = (ShortTextTitle) TestUtils.serialised(t1);
+        ShortTextTitle t2 = TestUtils.serialised(t1);
         assertEquals(t1, t2);
     }
 
