@@ -32,10 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * Changes
- * -------
- * 03-Nov-2006 : Version 1 (DG);
- *
  */
 
 package org.jfree.chart.plot.dial;
@@ -49,6 +45,7 @@ import java.awt.Color;
 import java.awt.GradientPaint;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.junit.Test;
 
 
@@ -121,7 +118,7 @@ public class DialCapTest {
     public void testCloning() throws CloneNotSupportedException {
         // test a default instance
         DialCap c1 = new DialCap();
-        DialCap c2 = (DialCap) c1.clone();
+        DialCap c2 = CloneUtils.clone(c1);
 
         assertTrue(c1 != c2);
         assertTrue(c1.getClass() == c2.getClass());
@@ -154,7 +151,7 @@ public class DialCapTest {
     public void testSerialization() {
         // test a default instance
         DialCap c1 = new DialCap();
-        DialCap c2 = (DialCap) TestUtils.serialised(c1);
+        DialCap c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
 
         // test a custom instance
@@ -165,7 +162,7 @@ public class DialCapTest {
                 3.0f, 4.0f, Color.GRAY));
         c1.setOutlineStroke(new BasicStroke(2.0f));
 
-        c2 = (DialCap) TestUtils.serialised(c1);
+        c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 

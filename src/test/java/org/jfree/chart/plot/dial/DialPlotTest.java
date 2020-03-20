@@ -49,6 +49,7 @@ import org.jfree.chart.TestUtils;
 
 import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.event.PlotChangeListener;
+import org.jfree.chart.util.CloneUtils;
 import org.junit.Test;
 
 /**
@@ -148,7 +149,7 @@ public class DialPlotTest implements PlotChangeListener {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         DialPlot p1 = new DialPlot();
-        DialPlot p2 = (DialPlot) p1.clone();
+        DialPlot p2 = CloneUtils.clone(p1);
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
@@ -161,7 +162,7 @@ public class DialPlotTest implements PlotChangeListener {
     @Test
     public void testSerialization() {
         DialPlot p1 = new DialPlot();
-        DialPlot p2 = (DialPlot) TestUtils.serialised(p1);
+        DialPlot p2 = TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 

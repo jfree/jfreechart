@@ -75,6 +75,7 @@ import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.chart.ui.Layer;
 import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.DefaultShadowGenerator;
 import org.jfree.data.Range;
 import org.jfree.data.time.Day;
@@ -499,7 +500,7 @@ public class XYPlotTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         XYPlot p1 = new XYPlot();
-        XYPlot p2 = (XYPlot) p1.clone();
+        XYPlot p2 = CloneUtils.clone(p1);
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
@@ -518,7 +519,7 @@ public class XYPlotTest {
         p1.mapDatasetToDomainAxes(0, axisIndices);
         p1.mapDatasetToRangeAxes(0, axisIndices);
         p1.setRenderer(1, new XYBarRenderer());
-        XYPlot p2 = (XYPlot) p1.clone();
+        XYPlot p2 = CloneUtils.clone(p1);
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
@@ -535,7 +536,7 @@ public class XYPlotTest {
                 new NumberAxis("Range Axis"), new StandardXYItemRenderer());
         LegendItemCollection c1 = new LegendItemCollection();
         p1.setFixedLegendItems(c1);
-        XYPlot p2 = (XYPlot) p1.clone();
+        XYPlot p2 = CloneUtils.clone(p1);
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
@@ -555,7 +556,7 @@ public class XYPlotTest {
         XYLineAndShapeRenderer r1 = new XYLineAndShapeRenderer();
         XYPlot p1 = new XYPlot(null, new NumberAxis("Domain Axis"),
                 new NumberAxis("Range Axis"), r1);
-        XYPlot p2 = (XYPlot) p1.clone();
+        XYPlot p2 = CloneUtils.clone(p1);
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
@@ -574,7 +575,7 @@ public class XYPlotTest {
         XYPlot p1 = new XYPlot();
         Point2D p = new Point2D.Double(1.2, 3.4);
         p1.setQuadrantOrigin(p);
-        XYPlot p2 = (XYPlot) p1.clone();
+        XYPlot p2 = CloneUtils.clone(p1);
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
@@ -590,7 +591,7 @@ public class XYPlotTest {
         XYPlot p1 = new XYPlot();
         p1.setQuadrantPaint(3, new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.BLUE));
-        XYPlot p2 = (XYPlot) p1.clone();
+        XYPlot p2 = CloneUtils.clone(p1);
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
@@ -635,7 +636,7 @@ public class XYPlotTest {
         p1.setRangeAxis(1, new NumberAxis("Range Axis 2"));
         p1.setRangeAxisLocation(1, AxisLocation.TOP_OR_RIGHT);
         p1.setRenderer(1, new XYBarRenderer());
-        XYPlot p2 = (XYPlot) p1.clone();
+        XYPlot p2 = CloneUtils.clone(p1);
         assertTrue(p1.equals(p2));
 
         p1.getDomainAxis().setLabel("Label");
@@ -708,7 +709,7 @@ public class XYPlotTest {
         NumberAxis rangeAxis = new NumberAxis("Range");
         StandardXYItemRenderer renderer = new StandardXYItemRenderer();
         XYPlot p1 = new XYPlot(data, domainAxis, rangeAxis, renderer);
-        XYPlot p2 = (XYPlot) TestUtils.serialised(p1);
+        XYPlot p2 = TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 
@@ -723,7 +724,7 @@ public class XYPlotTest {
         renderer1.setDefaultToolTipGenerator(
                 StandardXYToolTipGenerator.getTimeSeriesInstance());
         XYPlot p1 = new XYPlot(data1, new DateAxis("Date"), null, renderer1);
-        XYPlot p2 = (XYPlot) TestUtils.serialised(p1);
+        XYPlot p2 = TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 
@@ -743,7 +744,7 @@ public class XYPlotTest {
         XYSeriesCollection dataset = new XYSeriesCollection();
         JFreeChart chart = ChartFactory.createXYLineChart("Test Chart",
                 "Domain Axis", "Range Axis", dataset);
-        JFreeChart chart2 = (JFreeChart) TestUtils.serialised(chart);
+        JFreeChart chart2 = TestUtils.serialised(chart);
         assertEquals(chart, chart2);
         try {
             chart2.createBufferedImage(300, 200);
@@ -768,7 +769,7 @@ public class XYPlotTest {
         plot.addDomainMarker(new IntervalMarker(2.0, 3.0), Layer.BACKGROUND);
         plot.addRangeMarker(new ValueMarker(4.0), Layer.FOREGROUND);
         plot.addRangeMarker(new IntervalMarker(5.0, 6.0), Layer.BACKGROUND);
-        JFreeChart chart2 = (JFreeChart) TestUtils.serialised(chart);
+        JFreeChart chart2 = TestUtils.serialised(chart);
         assertEquals(chart, chart2);
         try {
             chart2.createBufferedImage(300, 200);
@@ -798,7 +799,7 @@ public class XYPlotTest {
         p1.setDomainAxis(1, domainAxis2);
         p1.setRangeAxis(1, rangeAxis2);
         p1.setRenderer(1, renderer2);
-        XYPlot p2 = (XYPlot) TestUtils.serialised(p1);
+        XYPlot p2 = TestUtils.serialised(p1);
         assertEquals(p1, p2);
 
         // now check that all datasets, renderers and axes are being listened

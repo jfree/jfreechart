@@ -47,6 +47,7 @@ import java.text.DecimalFormat;
 
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.util.CloneUtils;
 
 import org.junit.Test;
 
@@ -166,7 +167,7 @@ public class ThermometerPlotTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         ThermometerPlot p1 = new ThermometerPlot();
-        ThermometerPlot p2 = (ThermometerPlot) p1.clone();
+        ThermometerPlot p2 = CloneUtils.clone(p1);
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
@@ -178,7 +179,7 @@ public class ThermometerPlotTest {
     @Test
     public void testSerialization() {
         ThermometerPlot p1 = new ThermometerPlot();
-        ThermometerPlot p2 = (ThermometerPlot) TestUtils.serialised(p1);
+        ThermometerPlot p2 = TestUtils.serialised(p1);
         assertTrue(p1.equals(p2));
     }
 
@@ -190,7 +191,7 @@ public class ThermometerPlotTest {
         ThermometerPlot p1 = new ThermometerPlot();
         p1.setSubrangePaint(1, new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f,
                 4.0f, Color.BLUE));
-        ThermometerPlot p2 = (ThermometerPlot) TestUtils.serialised(p1);
+        ThermometerPlot p2 = TestUtils.serialised(p1);
         assertTrue(p1.equals(p2));
     }
 

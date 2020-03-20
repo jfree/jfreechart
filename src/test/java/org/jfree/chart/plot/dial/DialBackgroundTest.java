@@ -46,6 +46,7 @@ import java.awt.GradientPaint;
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.ui.GradientPaintTransformType;
 import org.jfree.chart.ui.StandardGradientPaintTransformer;
+import org.jfree.chart.util.CloneUtils;
 
 import org.junit.Test;
 
@@ -108,7 +109,7 @@ public class DialBackgroundTest {
     public void testCloning() throws CloneNotSupportedException {
         // test default instance
         DialBackground b1 = new DialBackground();
-        DialBackground b2 = (DialBackground) b1.clone();
+        DialBackground b2 = CloneUtils.clone(b1);
         assertTrue(b1 != b2);
         assertTrue(b1.getClass() == b2.getClass());
         assertTrue(b1.equals(b2));
@@ -138,7 +139,7 @@ public class DialBackgroundTest {
     public void testSerialization() {
         // test a default instance
         DialBackground b1 = new DialBackground();
-        DialBackground b2 = (DialBackground) TestUtils.serialised(b1);
+        DialBackground b2 = TestUtils.serialised(b1);
         assertEquals(b1, b2);
 
         // test a customised instance
@@ -148,7 +149,7 @@ public class DialBackgroundTest {
         b1.setGradientPaintTransformer(new StandardGradientPaintTransformer(
                 GradientPaintTransformType.CENTER_VERTICAL));
 
-        b2 = (DialBackground) TestUtils.serialised(b1);
+        b2 = TestUtils.serialised(b1);
         assertEquals(b1, b2);
     }
 
