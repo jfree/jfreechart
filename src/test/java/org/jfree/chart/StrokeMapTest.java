@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * ------------------
  * StrokeMapTest.java
  * ------------------
- * (C) Copyright 2006-2016, by Object Refinery Limited.
+ * (C) Copyright 2006-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 27-Sep-2006 : Version 1 (DG);
  *
  */
 
@@ -57,7 +53,7 @@ public class StrokeMapTest {
      */
     @Test
     public void testGetStroke() {
-        StrokeMap m1 = new StrokeMap();
+        StrokeMap<String> m1 = new StrokeMap<>();
         assertEquals(null, m1.getStroke("A"));
         m1.put("A", new BasicStroke(1.1f));
         assertEquals(new BasicStroke(1.1f), m1.getStroke("A"));
@@ -80,7 +76,7 @@ public class StrokeMapTest {
      */
     @Test
     public void testPut() {
-        StrokeMap m1 = new StrokeMap();
+        StrokeMap<String> m1 = new StrokeMap<>();
         m1.put("A", new BasicStroke(1.1f));
         assertEquals(new BasicStroke(1.1f), m1.getStroke("A"));
 
@@ -100,8 +96,8 @@ public class StrokeMapTest {
      */
     @Test
     public void testEquals() {
-        StrokeMap m1 = new StrokeMap();
-        StrokeMap m2 = new StrokeMap();
+        StrokeMap<String> m1 = new StrokeMap<>();
+        StrokeMap<String> m2 = new StrokeMap<>();
         assertTrue(m1.equals(m1));
         assertTrue(m1.equals(m2));
         assertFalse(m1.equals(null));
@@ -128,8 +124,8 @@ public class StrokeMapTest {
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        StrokeMap m1 = new StrokeMap();
-        StrokeMap m2 = (StrokeMap) m1.clone();
+        StrokeMap<String> m1 = new StrokeMap<>();
+        StrokeMap<String> m2 = (StrokeMap) m1.clone();
         assertTrue(m1.equals(m2));
 
         m1.put("K1", new BasicStroke(1.1f));
@@ -143,8 +139,8 @@ public class StrokeMapTest {
      */
     @Test
     public void testSerialization1() {
-        StrokeMap m1 = new StrokeMap();
-        StrokeMap m2 = (StrokeMap) TestUtils.serialised(m1);
+        StrokeMap<String> m1 = new StrokeMap<>();
+        StrokeMap<String> m2 = (StrokeMap) TestUtils.serialised(m1);
         assertEquals(m1, m2);
     }
 
@@ -153,10 +149,10 @@ public class StrokeMapTest {
      */
     @Test
     public void testSerialization2() {
-        StrokeMap m1 = new StrokeMap();
+        StrokeMap<String> m1 = new StrokeMap<>();
         m1.put("K1", new BasicStroke(1.1f));
         m1.put("K2", new BasicStroke(2.2f));
-        StrokeMap m2 = (StrokeMap) TestUtils.serialised(m1);
+        StrokeMap<String> m2 = (StrokeMap) TestUtils.serialised(m1);
         assertEquals(m1, m2);
     }
 
