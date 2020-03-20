@@ -62,8 +62,7 @@ public class CloneUtils {
      * 
      * @throws CloneNotSupportedException if the object cannot be cloned.
      */
-    public static <T> T clone(T object)
-            throws CloneNotSupportedException {
+    public static <T> T clone(T object) throws CloneNotSupportedException {
         if (object == null) {
             return null;
         }

@@ -79,8 +79,8 @@ public class TestUtils {
      * 
      * @return A serialised and deserialised version of the original.
      */
-    public static Object serialised(Object original) {
-        Object result = null;
+    public static <K> K serialised(K original) {
+        K result = null;
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
         ObjectOutput out;
         try {
@@ -89,7 +89,7 @@ public class TestUtils {
             out.close();
             ObjectInput in = new ObjectInputStream(
                     new ByteArrayInputStream(buffer.toByteArray()));
-            result = in.readObject();
+            result = (K) in.readObject();
             in.close();
         } catch (IOException e) {
             throw new RuntimeException(e);

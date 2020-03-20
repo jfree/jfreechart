@@ -41,6 +41,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 
 import java.awt.BasicStroke;
+import org.jfree.chart.util.CloneUtils;
 import org.junit.Test;
 
 /**
@@ -125,7 +126,7 @@ public class StrokeMapTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         StrokeMap<String> m1 = new StrokeMap<>();
-        StrokeMap<String> m2 = (StrokeMap) m1.clone();
+        StrokeMap<String> m2 = CloneUtils.clone(m1);
         assertTrue(m1.equals(m2));
 
         m1.put("K1", new BasicStroke(1.1f));
@@ -140,7 +141,7 @@ public class StrokeMapTest {
     @Test
     public void testSerialization1() {
         StrokeMap<String> m1 = new StrokeMap<>();
-        StrokeMap<String> m2 = (StrokeMap) TestUtils.serialised(m1);
+        StrokeMap<String> m2 = TestUtils.serialised(m1);
         assertEquals(m1, m2);
     }
 
@@ -152,7 +153,7 @@ public class StrokeMapTest {
         StrokeMap<String> m1 = new StrokeMap<>();
         m1.put("K1", new BasicStroke(1.1f));
         m1.put("K2", new BasicStroke(2.2f));
-        StrokeMap<String> m2 = (StrokeMap) TestUtils.serialised(m1);
+        StrokeMap<String> m2 = TestUtils.serialised(m1);
         assertEquals(m1, m2);
     }
 
