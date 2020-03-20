@@ -96,9 +96,9 @@ public class LogFormatTest {
      * Confirm that cloning works.
      */
     @Test
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         LogFormat f1 = new LogFormat(10.0, "10", true);
-        LogFormat f2 = (LogFormat) f1.clone();
+        LogFormat f2 = CloneUtils.clone(f1);
         assertTrue(f1 != f2);
         assertTrue(f1.getClass() == f2.getClass());
         assertTrue(f1.equals(f2));
@@ -110,7 +110,7 @@ public class LogFormatTest {
     @Test
     public void testSerialization() {
         LogFormat f1 = new LogFormat(10.0, "10", true);
-        LogFormat f2 = (LogFormat) TestUtils.serialised(f1);
+        LogFormat f2 = TestUtils.serialised(f1);
         assertEquals(f1, f2);
     }
 

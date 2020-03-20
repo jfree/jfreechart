@@ -37,6 +37,7 @@
 package org.jfree.data;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
@@ -77,7 +78,6 @@ public class DefaultKeyedValueTest {
      */
     @Test
     public void testEquals() {
-
         DefaultKeyedValue<String> v1 = new DefaultKeyedValue<>("Test", 45.5);
         DefaultKeyedValue<String> v2 = new DefaultKeyedValue<>("Test", 45.5);
         assertTrue(v1.equals(v2));
@@ -90,7 +90,6 @@ public class DefaultKeyedValueTest {
         v1 = new DefaultKeyedValue<>("Test", 45.5);
         v2 = new DefaultKeyedValue<>("Test", 45.6);
         assertFalse(v1.equals(v2));
-
     }
 
     /**
@@ -100,7 +99,7 @@ public class DefaultKeyedValueTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         DefaultKeyedValue<String> v1 = new DefaultKeyedValue<>("Test", 45.5);
-        DefaultKeyedValue<String> v2 = (DefaultKeyedValue) v1.clone();
+        DefaultKeyedValue<String> v2 = CloneUtils.clone(v1);
         assertTrue(v1 != v2);
         assertTrue(v1.getClass() == v2.getClass());
         assertTrue(v1.equals(v2));
@@ -116,7 +115,7 @@ public class DefaultKeyedValueTest {
     @Test
     public void testSerialization() {
         DefaultKeyedValue<String> v1 = new DefaultKeyedValue<>("Test", 25.3);
-        DefaultKeyedValue<String> v2 = (DefaultKeyedValue) TestUtils.serialised(v1);
+        DefaultKeyedValue<String> v2 = TestUtils.serialised(v1);
         assertEquals(v1, v2);
     }
 
