@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,22 +27,10 @@
  * ---------------------
  * TimePeriodValues.java
  * ---------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited.
+ * (C) Copyright 2003-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 22-Apr-2003 : Version 1 (DG);
- * 30-Jul-2003 : Added clone and equals methods while testing (DG);
- * 11-Mar-2005 : Fixed bug in bounds recalculation - see bug report 
- *               1161329 (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 03-Oct-2006 : Fixed NullPointerException in equals(), fire change event in 
- *               add() method, updated API docs (DG);
- * 07-Apr-2008 : Fixed bug with maxMiddleIndex in updateBounds() (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -84,7 +72,7 @@ public class TimePeriodValues extends Series implements Serializable {
     private String range;
 
     /** The list of data pairs in the series. */
-    private List data;
+    private List<TimePeriodValue> data;
 
     /** Index of the time period with the minimum start milliseconds. */
     private int minStartIndex = -1;
@@ -128,7 +116,7 @@ public class TimePeriodValues extends Series implements Serializable {
         super(name);
         this.domain = domain;
         this.range = range;
-        this.data = new ArrayList();
+        this.data = new ArrayList<>();
     }
 
     /**
@@ -202,7 +190,7 @@ public class TimePeriodValues extends Series implements Serializable {
      * @return One data item for the series.
      */
     public TimePeriodValue getDataItem(int index) {
-        return (TimePeriodValue) this.data.get(index);
+        return this.data.get(index);
     }
 
     /**
@@ -343,7 +331,7 @@ public class TimePeriodValues extends Series implements Serializable {
         this.maxMiddleIndex = -1;
         this.maxEndIndex = -1;
         for (int i = 0; i < this.data.size(); i++) {
-            TimePeriodValue tpv = (TimePeriodValue) this.data.get(i);
+            TimePeriodValue tpv = this.data.get(i);
             updateBounds(tpv.getPeriod(), i);
         }
     }
@@ -498,10 +486,10 @@ public class TimePeriodValues extends Series implements Serializable {
 
         TimePeriodValues copy = (TimePeriodValues) super.clone();
 
-        copy.data = new ArrayList();
+        copy.data = new ArrayList<>();
         if (this.data.size() > 0) {
             for (int index = start; index <= end; index++) {
-                TimePeriodValue item = (TimePeriodValue) this.data.get(index);
+                TimePeriodValue item = this.data.get(index);
                 TimePeriodValue clone = (TimePeriodValue) item.clone();
                 try {
                     copy.add(clone);
