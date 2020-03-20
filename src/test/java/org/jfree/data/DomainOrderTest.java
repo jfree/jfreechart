@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * --------------------
  * DomainOrderTest.java
  * --------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 19-May-2005 : Version 1 (DG);
  *
  */
 
@@ -90,7 +86,7 @@ public class DomainOrderTest {
     @Test
     public void testSerialization() {
         DomainOrder d1 = DomainOrder.ASCENDING;
-        DomainOrder d2 = (DomainOrder) TestUtils.serialised(d1);
+        DomainOrder d2 = TestUtils.serialised(d1);
         assertSame(d1, d2);
     }
 

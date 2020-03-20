@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,20 +27,17 @@
  * -----------------------
  * KeyToGroupMapTests.java
  * -----------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 29-Apr-2004 : Version 1 (DG);
  *
  */
 
 package org.jfree.data;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -56,7 +53,7 @@ public class KeyToGroupMapTest {
      */
     @Test
     public void testMapKeyToGroup() {
-        KeyToGroupMap m1 = new KeyToGroupMap("G1");
+        KeyToGroupMap<String, String> m1 = new KeyToGroupMap<>("G1");
 
         // map a key to the default group
         m1.mapKeyToGroup("K1", "G1");
@@ -88,7 +85,7 @@ public class KeyToGroupMapTest {
      */
     @Test
     public void testGroupCount() {
-        KeyToGroupMap m1 = new KeyToGroupMap("Default Group");
+        KeyToGroupMap<String, String> m1 = new KeyToGroupMap<>("Default Group");
 
         // a new map always has 1 group (the default group)
         assertEquals(1, m1.getGroupCount());
@@ -122,7 +119,7 @@ public class KeyToGroupMapTest {
      */
     @Test
     public void testKeyCount() {
-        KeyToGroupMap m1 = new KeyToGroupMap("Default Group");
+        KeyToGroupMap<String, String> m1 = new KeyToGroupMap<>("Default Group");
 
         // a new map always has 1 group (the default group)
         assertEquals(0, m1.getKeyCount("Default Group"));
@@ -157,7 +154,7 @@ public class KeyToGroupMapTest {
      */
     @Test
     public void testGetGroupIndex() {
-        KeyToGroupMap m1 = new KeyToGroupMap("Default Group");
+        KeyToGroupMap<String, String> m1 = new KeyToGroupMap<>("Default Group");
 
         // the default group is always at index 0
         assertEquals(0, m1.getGroupIndex("Default Group"));
@@ -179,7 +176,7 @@ public class KeyToGroupMapTest {
      */
     @Test
     public void testGetGroup() {
-        KeyToGroupMap m1 = new KeyToGroupMap("Default Group");
+        KeyToGroupMap<String, String> m1 = new KeyToGroupMap<>("Default Group");
 
         // a key that hasn't been mapped should return the default group
         assertEquals("Default Group", m1.getGroup("K1"));
@@ -207,8 +204,8 @@ public class KeyToGroupMapTest {
      */
     @Test
     public void testEquals() {
-        KeyToGroupMap m1 = new KeyToGroupMap("Default Group");
-        KeyToGroupMap m2 = new KeyToGroupMap("Default Group");
+        KeyToGroupMap<String, String> m1 = new KeyToGroupMap<>("Default Group");
+        KeyToGroupMap<String, String> m2 = new KeyToGroupMap<>("Default Group");
         assertTrue(m1.equals(m2));
         assertTrue(m2.equals(m1));
 
@@ -223,9 +220,9 @@ public class KeyToGroupMapTest {
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        KeyToGroupMap m1 = new KeyToGroupMap("Test");
+        KeyToGroupMap<String, String> m1 = new KeyToGroupMap<>("Test");
         m1.mapKeyToGroup("K1", "G1");
-        KeyToGroupMap m2 = (KeyToGroupMap) m1.clone();
+        KeyToGroupMap m2 = CloneUtils.clone(m1);
         assertTrue(m1 != m2);
         assertTrue(m1.getClass() == m2.getClass());
         assertTrue(m1.equals(m2));
@@ -242,8 +239,8 @@ public class KeyToGroupMapTest {
      */
     @Test
     public void testSerialization() {
-        KeyToGroupMap m1 = new KeyToGroupMap("Test");
-        KeyToGroupMap m2 = (KeyToGroupMap) TestUtils.serialised(m1);
+        KeyToGroupMap<String, String> m1 = new KeyToGroupMap<>("Test");
+        KeyToGroupMap<String, String> m2 = TestUtils.serialised(m1);
         assertEquals(m1, m2);
     }
 
