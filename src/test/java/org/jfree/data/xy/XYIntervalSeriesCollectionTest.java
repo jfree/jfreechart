@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,17 +27,10 @@
  * -----------------------------------
  * XYIntervalSeriesCollectionTest.java
  * -----------------------------------
- * (C) Copyright 2006-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 20-Oct-2006 : Version 1 (DG);
- * 13-Feb-2007 : Check for independence in testCloning() (DG);
- * 18-Jan-2008 : Added testRemoveSeries() (DG);
- * 22-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
@@ -48,6 +41,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.Test;
@@ -91,7 +85,7 @@ public class XYIntervalSeriesCollectionTest {
         XYIntervalSeriesCollection c1 = new XYIntervalSeriesCollection();
         XYIntervalSeries s1 = new XYIntervalSeries("Series");
         s1.add(1.0, 1.1, 1.2, 1.3, 1.4, 1.5);
-        XYIntervalSeriesCollection c2 = (XYIntervalSeriesCollection) c1.clone();
+        XYIntervalSeriesCollection c2 = CloneUtils.clone(c1);
         assertTrue(c1 != c2);
         assertTrue(c1.getClass() == c2.getClass());
         assertTrue(c1.equals(c2));
@@ -120,8 +114,7 @@ public class XYIntervalSeriesCollectionTest {
         XYIntervalSeriesCollection c1 = new XYIntervalSeriesCollection();
         XYIntervalSeries s1 = new XYIntervalSeries("Series");
         s1.add(1.0, 1.1, 1.2, 1.3, 1.4, 1.5);
-        XYIntervalSeriesCollection c2 = (XYIntervalSeriesCollection) 
-                TestUtils.serialised(c1);
+        XYIntervalSeriesCollection c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
 
         // check independence

@@ -44,21 +44,18 @@ import org.jfree.chart.ChartRenderingInfo;
 import org.jfree.chart.entity.ChartEntity;
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.entity.StandardEntityCollection;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import java.awt.Rectangle;
 import java.awt.Shape;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 /**
  * Tests for the {@link ImageMapUtils} class.
  */
 public class ImageMapUtilsTest {
-
-    @Rule public ExpectedException thrown = ExpectedException.none();
 
     /**
      * Some checks for the htmlEscape() method.
@@ -109,13 +106,15 @@ public class ImageMapUtilsTest {
 
     @Test
     public void testGetImageMapIllegalArgumentException() {
-        thrown.expect(IllegalArgumentException.class);
-        ImageMapUtils.getImageMap(null, null, null, null);
+        assertThrows(IllegalArgumentException.class, () -> {
+            ImageMapUtils.getImageMap(null, null, null, null);        
+        });
     }
 
     @Test
     public void testGetImageMapIllegalArgumentException_2() {
-        thrown.expect(IllegalArgumentException.class);
-        ImageMapUtils.getImageMap(null, null);
+        assertThrows(IllegalArgumentException.class, () -> {
+            ImageMapUtils.getImageMap(null, null);
+        });
     }
 }

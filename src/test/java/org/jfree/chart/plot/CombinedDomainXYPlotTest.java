@@ -55,6 +55,7 @@ import org.jfree.chart.event.ChartChangeEvent;
 import org.jfree.chart.event.ChartChangeListener;
 import org.jfree.chart.renderer.xy.StandardXYItemRenderer;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
@@ -121,7 +122,7 @@ public class CombinedDomainXYPlotTest implements ChartChangeListener {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         CombinedDomainXYPlot plot1 = createPlot();
-        CombinedDomainXYPlot plot2 = (CombinedDomainXYPlot) plot1.clone();
+        CombinedDomainXYPlot plot2 = CloneUtils.clone(plot1);
         assertTrue(plot1 != plot2);
         assertTrue(plot1.getClass() == plot2.getClass());
         assertTrue(plot1.equals(plot2));
@@ -133,8 +134,7 @@ public class CombinedDomainXYPlotTest implements ChartChangeListener {
     @Test
     public void testSerialization() {
         CombinedDomainXYPlot plot1 = createPlot();
-        CombinedDomainXYPlot plot2 = (CombinedDomainXYPlot) 
-                TestUtils.serialised(plot1);
+        CombinedDomainXYPlot plot2 = TestUtils.serialised(plot1);
         assertEquals(plot1, plot2);
     }
 

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * -----------------------------------
  * StandardXYToolTipGeneratorTest.java
  * -----------------------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 11-May-2004 : Version 1 (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG);
  *
  */
 
@@ -51,6 +46,7 @@ import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.Test;
@@ -138,7 +134,7 @@ public class StandardXYToolTipGeneratorTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         StandardXYToolTipGenerator g1 = new StandardXYToolTipGenerator();
-        StandardXYToolTipGenerator g2 = (StandardXYToolTipGenerator) g1.clone();
+        StandardXYToolTipGenerator g2 = CloneUtils.clone(g1);
         assertTrue(g1 != g2);
         assertTrue(g1.getClass() == g2.getClass());
         assertTrue(g1.equals(g2));
@@ -159,8 +155,7 @@ public class StandardXYToolTipGeneratorTest {
     @Test
     public void testSerialization() {
         StandardXYToolTipGenerator g1 = new StandardXYToolTipGenerator();
-        StandardXYToolTipGenerator g2 = (StandardXYToolTipGenerator) 
-                TestUtils.serialised(g1);
+        StandardXYToolTipGenerator g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

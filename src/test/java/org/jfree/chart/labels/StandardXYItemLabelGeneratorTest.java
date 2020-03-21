@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,18 +27,10 @@
  * -------------------------------------
  * StandardXYItemLabelGeneratorTest.java
  * -------------------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 23-Mar-2003 : Version 1 (DG);
- * 26-Feb-2004 : Updates for new code (DG);
- * 20-Jan-2006 : Renamed StandardXYItemLabelGeneratorTests.java (DG);
- * 25-Jan-2007 : Added independence checks to testCloning() (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG);
  *
  */
 
@@ -54,6 +46,7 @@ import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.Test;
@@ -77,11 +70,8 @@ public class StandardXYItemLabelGeneratorTest {
         NumberFormat ynf1 = new DecimalFormat("0.00");
         NumberFormat ynf2 = new DecimalFormat("0.000");
 
-        StandardXYItemLabelGenerator g1 = null;
-        StandardXYItemLabelGenerator g2 = null;
-
-        g1 = new StandardXYItemLabelGenerator(f1, xnf1, ynf1);
-        g2 = new StandardXYItemLabelGenerator(f1, xnf1, ynf1);
+        StandardXYItemLabelGenerator g1 = new StandardXYItemLabelGenerator(f1, xnf1, ynf1);
+        StandardXYItemLabelGenerator g2 = new StandardXYItemLabelGenerator(f1, xnf1, ynf1);
         assertTrue(g1.equals(g2));
         assertTrue(g2.equals(g1));
 
@@ -141,8 +131,7 @@ public class StandardXYItemLabelGeneratorTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         StandardXYItemLabelGenerator g1 = new StandardXYItemLabelGenerator();
-        StandardXYItemLabelGenerator g2 = (StandardXYItemLabelGenerator) 
-                g1.clone();
+        StandardXYItemLabelGenerator g2 = CloneUtils.clone(g1);
         assertTrue(g1 != g2);
         assertTrue(g1.getClass() == g2.getClass());
         assertTrue(g1.equals(g2));
@@ -161,7 +150,7 @@ public class StandardXYItemLabelGeneratorTest {
         // another test...
         g1 = new StandardXYItemLabelGenerator("{0} {1} {2}",
                 DateFormat.getInstance(), DateFormat.getInstance());
-        g2 = (StandardXYItemLabelGenerator) g1.clone();
+        g2 = CloneUtils.clone(g1);
         assertTrue(g1 != g2);
         assertTrue(g1.getClass() == g2.getClass());
         assertTrue(g1.equals(g2));
@@ -194,8 +183,7 @@ public class StandardXYItemLabelGeneratorTest {
     @Test
     public void testSerialization() {
         StandardXYItemLabelGenerator g1 = new StandardXYItemLabelGenerator();
-        StandardXYItemLabelGenerator g2 = (StandardXYItemLabelGenerator) 
-                TestUtils.serialised(g1);
+        StandardXYItemLabelGenerator g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

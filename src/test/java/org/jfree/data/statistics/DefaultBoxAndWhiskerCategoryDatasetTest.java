@@ -80,7 +80,8 @@ public class DefaultBoxAndWhiskerCategoryDatasetTest {
                 = new DefaultBoxAndWhiskerCategoryDataset<>();
         d1.add(new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0,
                 new ArrayList<>()), "ROW1", "COLUMN1");
-        DefaultBoxAndWhiskerCategoryDataset d2 = TestUtils.serialised(d1);
+        DefaultBoxAndWhiskerCategoryDataset<String, String> d2 
+                = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 
@@ -91,7 +92,7 @@ public class DefaultBoxAndWhiskerCategoryDatasetTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         DefaultBoxAndWhiskerCategoryDataset<String, String> d1
-                = new DefaultBoxAndWhiskerCategoryDataset();
+                = new DefaultBoxAndWhiskerCategoryDataset<>();
         d1.add(new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0,
                 new ArrayList<>()), "ROW1", "COLUMN1");
         DefaultBoxAndWhiskerCategoryDataset<String, String> d2 
