@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * -------------------------
  * TimePeriodAnchorTest.java
  * -------------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 01-Mar-2004 : Version 1 (DG);
  *
  */
 
@@ -66,7 +62,7 @@ public class TimePeriodAnchorTest {
     @Test
     public void testSerialization() {
         TimePeriodAnchor a1 = TimePeriodAnchor.START;
-        TimePeriodAnchor a2 = (TimePeriodAnchor) TestUtils.serialised(a1);
+        TimePeriodAnchor a2 = TestUtils.serialised(a1);
         assertTrue(a1 == a2);
     }
 

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * ---------------------
  * HistogramBinTest.java
  * ---------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited.
+ * (C) Copyright 2004-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 01-Mar-2004 : Version 1 (DG);
  *
  */
 
@@ -44,6 +40,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.junit.Test;
 
 /**
@@ -71,7 +68,7 @@ public class HistogramBinTest {
         double start = 10.0;
         double end = 20.0;
         HistogramBin b1 = new HistogramBin(start, end);
-        HistogramBin b2 = (HistogramBin) b1.clone();
+        HistogramBin b2 = CloneUtils.clone(b1);
         assertTrue(b1 != b2);
         assertTrue(b1.getClass() == b2.getClass());
         assertTrue(b1.equals(b2));
@@ -85,7 +82,7 @@ public class HistogramBinTest {
         double start = 10.0;
         double end = 20.0;
         HistogramBin b1 = new HistogramBin(start, end);
-        HistogramBin b2 = (HistogramBin) TestUtils.serialised(b1);
+        HistogramBin b2 = TestUtils.serialised(b1);
         assertEquals(b1, b2);
     }
 
