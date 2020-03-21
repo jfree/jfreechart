@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * ---------------------
  * XYCoordinateTest.java
  * ---------------------
- * (C) Copyright 2007-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 30-Jan-2007 : Version 1 (DG);
  *
  */
 
@@ -102,7 +98,7 @@ public class XYCoordinateTest {
     @Test
     public void testSerialization() {
         XYCoordinate v1 = new XYCoordinate(1.0, 2.0);
-        XYCoordinate v2 = (XYCoordinate) TestUtils.serialised(v1);
+        XYCoordinate v2 = TestUtils.serialised(v1);
         assertEquals(v1, v2);
     }
 

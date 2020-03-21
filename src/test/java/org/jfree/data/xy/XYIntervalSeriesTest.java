@@ -32,12 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * Changes
- * -------
- * 20-Oct-2006 : Version 1, based on XYSeriesTests (DG);
- * 13-Feb-2007 : Added testValues() (DG);
- * 27-Nov-2007 : Added testClear() method (DG);
- *
  */
 
 package org.jfree.data.xy;
@@ -49,6 +43,7 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertNotNull;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 
 import org.jfree.data.general.SeriesChangeEvent;
 import org.jfree.data.general.SeriesChangeListener;
@@ -125,7 +120,7 @@ public class XYIntervalSeriesTest implements SeriesChangeListener {
     public void testCloning() throws CloneNotSupportedException {
         XYIntervalSeries s1 = new XYIntervalSeries("s1");
         s1.add(1.0, 0.5, 1.5, 2.0, 1.9, 2.01);
-        XYIntervalSeries s2 = (XYIntervalSeries) s1.clone();
+        XYIntervalSeries s2 = CloneUtils.clone(s1);
         assertTrue(s1 != s2);
         assertTrue(s1.getClass() == s2.getClass());
         assertTrue(s1.equals(s2));
@@ -138,7 +133,7 @@ public class XYIntervalSeriesTest implements SeriesChangeListener {
     public void testSerialization() {
         XYIntervalSeries s1 = new XYIntervalSeries("s1");
         s1.add(1.0, 0.5, 1.5, 2.0, 1.9, 2.1);
-        XYIntervalSeries s2 = (XYIntervalSeries) TestUtils.serialised(s1);
+        XYIntervalSeries s2 = TestUtils.serialised(s1);
         assertEquals(s1, s2);
     }
 

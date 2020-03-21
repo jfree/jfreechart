@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * ---------------------
  * XYBarDatasetTest.java
  * ---------------------
- * (C) Copyright 2007-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 25-Jan-2007 : Version 1 (DG);
- * 22-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
@@ -46,6 +41,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.Test;
@@ -88,7 +84,7 @@ public class XYBarDatasetTest {
         double[][] data1 = new double[][] {x1, y1};
         d1.addSeries("S1", data1);
         XYBarDataset bd1 = new XYBarDataset(d1, 5.0);
-        XYBarDataset bd2 = (XYBarDataset) bd1.clone();
+        XYBarDataset bd2 = CloneUtils.clone(bd1);
         assertTrue(bd1 != bd2);
         assertTrue(bd1.getClass() == bd2.getClass());
         assertTrue(bd1.equals(bd2));
@@ -127,7 +123,7 @@ public class XYBarDatasetTest {
         double[][] data1 = new double[][] {x1, y1};
         d1.addSeries("S1", data1);
         XYBarDataset bd1 = new XYBarDataset(d1, 5.0);
-        XYBarDataset bd2 = (XYBarDataset) TestUtils.serialised(bd1);
+        XYBarDataset bd2 = TestUtils.serialised(bd1);
         assertEquals(bd1, bd2);
     }
 

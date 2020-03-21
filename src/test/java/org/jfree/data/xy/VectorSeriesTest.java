@@ -43,6 +43,7 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertNotNull;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 
 import org.jfree.data.general.SeriesChangeEvent;
 import org.jfree.data.general.SeriesChangeListener;
@@ -120,7 +121,7 @@ public class VectorSeriesTest implements SeriesChangeListener {
     public void testCloning() throws CloneNotSupportedException {
         VectorSeries s1 = new VectorSeries("s1");
         s1.add(1.0, 0.5, 1.5, 2.0);
-        VectorSeries s2 = (VectorSeries) s1.clone();
+        VectorSeries s2 = CloneUtils.clone(s1);
         assertTrue(s1 != s2);
         assertTrue(s1.getClass() == s2.getClass());
         assertTrue(s1.equals(s2));
@@ -133,7 +134,7 @@ public class VectorSeriesTest implements SeriesChangeListener {
     public void testSerialization() {
         VectorSeries s1 = new VectorSeries("s1");
         s1.add(1.0, 0.5, 1.5, 2.0);
-        VectorSeries s2 = (VectorSeries) TestUtils.serialised(s1);
+        VectorSeries s2 = TestUtils.serialised(s1);
         assertEquals(s1, s2);
     }
 

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * -----------------------
  * VectorDataItemTest.java
  * -----------------------
- * (C) Copyright 2007-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 30-Jan-2007 : Version 1 (DG);
  *
  */
 
@@ -45,6 +41,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.junit.Test;
 
 /**
@@ -103,7 +100,7 @@ public class VectorDataItemTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         VectorDataItem v1 = new VectorDataItem(1.0, 2.0, 3.0, 4.0);
-        VectorDataItem v2 = (VectorDataItem) v1.clone();
+        VectorDataItem v2 = CloneUtils.clone(v1);
         assertTrue(v1 != v2);
         assertTrue(v1.getClass() == v2.getClass());
         assertTrue(v1.equals(v2));
@@ -115,7 +112,7 @@ public class VectorDataItemTest {
     @Test
     public void testSerialization() {
         VectorDataItem v1 = new VectorDataItem(1.0, 2.0, 3.0, 4.0);
-        VectorDataItem v2 = (VectorDataItem) TestUtils.serialised(v1);
+        VectorDataItem v2 = TestUtils.serialised(v1);
         assertEquals(v1, v2);
     }
 

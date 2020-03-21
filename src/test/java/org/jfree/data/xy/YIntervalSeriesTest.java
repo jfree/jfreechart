@@ -43,6 +43,7 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertNotNull;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 
 import org.jfree.data.general.SeriesChangeEvent;
 import org.jfree.data.general.SeriesChangeListener;
@@ -120,7 +121,7 @@ public class YIntervalSeriesTest implements SeriesChangeListener {
     public void testCloning() throws CloneNotSupportedException {
         YIntervalSeries s1 = new YIntervalSeries("s1");
         s1.add(1.0, 0.5, 1.5, 2.0);
-        YIntervalSeries s2 = (YIntervalSeries) s1.clone();
+        YIntervalSeries s2 = CloneUtils.clone(s1);
         assertTrue(s1 != s2);
         assertTrue(s1.getClass() == s2.getClass());
         assertTrue(s1.equals(s2));
@@ -133,7 +134,7 @@ public class YIntervalSeriesTest implements SeriesChangeListener {
     public void testSerialization() {
         YIntervalSeries s1 = new YIntervalSeries("s1");
         s1.add(1.0, 0.5, 1.5, 2.0);
-        YIntervalSeries s2 = (YIntervalSeries) TestUtils.serialised(s1);
+        YIntervalSeries s2 = TestUtils.serialised(s1);
         assertEquals(s1, s2);
     }
 

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * ---------------------
  * MatrixSeriesTest.java
  * ---------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 21-May-2004 : Version 1 (DG);
  *
  */
 
@@ -45,6 +41,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.junit.Test;
 
 
@@ -96,7 +93,7 @@ public class MatrixSeriesTest {
         MatrixSeries m1 = new MatrixSeries("Test", 8, 3);
         m1.update(0, 0, 11.0);
         m1.update(7, 2, 22.0);
-        MatrixSeries m2 = (MatrixSeries) m1.clone();
+        MatrixSeries m2 = CloneUtils.clone(m1);
         assertTrue(m1 != m2);
         assertTrue(m1.getClass() == m2.getClass());
         assertTrue(m1.equals(m2));
@@ -110,7 +107,7 @@ public class MatrixSeriesTest {
         MatrixSeries m1 = new MatrixSeries("Test", 8, 3);
         m1.update(0, 0, 11.0);
         m1.update(7, 2, 22.0);
-        MatrixSeries m2 = (MatrixSeries) TestUtils.serialised(m1);
+        MatrixSeries m2 = TestUtils.serialised(m1);
         assertEquals(m1, m2);
     }
 

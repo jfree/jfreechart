@@ -40,6 +40,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 
 import org.jfree.data.general.SeriesException;
 import static org.junit.Assert.assertEquals;
@@ -146,7 +147,7 @@ public class XYSeriesTest {
     @Test
     public void testCloning3() throws CloneNotSupportedException {
         XYSeries s1 = new XYSeries("S1");
-        XYSeries s2 = (XYSeries) s1.clone();
+        XYSeries s2 = CloneUtils.clone(s1);
         assertTrue(s1.equals(s2));
 
         // check independence
@@ -163,7 +164,7 @@ public class XYSeriesTest {
     public void testSerialization() {
         XYSeries s1 = new XYSeries("Series");
         s1.add(1.0, 1.1);
-        XYSeries s2 = (XYSeries) TestUtils.serialised(s1);
+        XYSeries s2 = TestUtils.serialised(s1);
         assertEquals(s1, s2);
     }
 
