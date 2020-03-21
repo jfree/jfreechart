@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,19 +27,10 @@
  * ------------------------------------
  * TimePeriodValuesCollectionTests.java
  * ------------------------------------
- * (C) Copyright 2005-2008, by Object Refinery Limited.
+ * (C) Copyright 2005-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 11-Mar-2005 : Version 1 (DG);
- * 08-Mar-2007 : Added testGetSeries() (DG);
- * 11-Jun-2007 : Added tests for getDomainBounds() (DG);
- * 10-Jul-2007 : Fixed compile errors (DG);
- * 07-Apr-2008 : Added more checks to 
- *               testGetDomainBoundsWithInterval() (DG);
  *
  */
 
@@ -112,8 +103,7 @@ public class TimePeriodValuesCollectionTest {
     @Test
     public void testSerialization() {
         TimePeriodValuesCollection c1 = new TimePeriodValuesCollection();
-        TimePeriodValuesCollection c2 = (TimePeriodValuesCollection) 
-                TestUtils.serialised(c1);
+        TimePeriodValuesCollection c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * -----------------------------
  * OHLCSeriesCollectionTest.java
  * -----------------------------
- * (C) Copyright 2006-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 04-Dec-2006 : Version 1 (DG);
- * 10-Jul-2008 : Updated testEquals() method (DG);
- * 26-Jun-2009 : Added tests for removeSeries() methods (DG);
  *
  */
 
@@ -49,6 +43,7 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertNotNull;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.DatasetChangeListener;
@@ -102,7 +97,7 @@ public class OHLCSeriesCollectionTest implements DatasetChangeListener {
         OHLCSeries s1 = new OHLCSeries("Series");
         s1.add(new Year(2006), 1.0, 1.1, 1.2, 1.3);
         c1.addSeries(s1);
-        OHLCSeriesCollection c2 = (OHLCSeriesCollection) c1.clone();
+        OHLCSeriesCollection c2 = CloneUtils.clone(c1);
         assertTrue(c1 != c2);
         assertTrue(c1.getClass() == c2.getClass());
         assertTrue(c1.equals(c2));
@@ -121,8 +116,7 @@ public class OHLCSeriesCollectionTest implements DatasetChangeListener {
         OHLCSeries s1 = new OHLCSeries("Series");
         s1.add(new Year(2006), 1.0, 1.1, 1.2, 1.3);
         c1.addSeries(s1);
-        OHLCSeriesCollection c2 = (OHLCSeriesCollection) 
-                TestUtils.serialised(c1);
+        OHLCSeriesCollection c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 
