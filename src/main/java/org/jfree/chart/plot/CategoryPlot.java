@@ -1255,10 +1255,10 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @since 1.0.12
      */
-    public void mapDatasetToDomainAxes(int index, List axisIndices) {
+    public void mapDatasetToDomainAxes(int index, List<Integer> axisIndices) {
         Args.requireNonNegative(index, "index");
         checkAxisIndices(axisIndices);
-        this.datasetToDomainAxesMap.put(index, new ArrayList(axisIndices));
+        this.datasetToDomainAxesMap.put(index, new ArrayList<>(axisIndices));
         // fake a dataset change event to update axes...
         datasetChanged(new DatasetChangeEvent(this, getDataset(index)));
     }
@@ -1343,10 +1343,10 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @since 1.0.12
      */
-    public void mapDatasetToRangeAxes(int index, List axisIndices) {
+    public void mapDatasetToRangeAxes(int index, List<Integer> axisIndices) {
         Args.requireNonNegative(index, "index");
         checkAxisIndices(axisIndices);
-        this.datasetToRangeAxesMap.put(index, new ArrayList(axisIndices));
+        this.datasetToRangeAxesMap.put(index, new ArrayList<>(axisIndices));
         // fake a dataset change event to update axes...
         datasetChanged(new DatasetChangeEvent(this, getDataset(index)));
     }
@@ -4289,8 +4289,8 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @since 1.0.3
      */
-    public List getCategoriesForAxis(CategoryAxis axis) {
-        List result = new ArrayList();
+    public List<Comparable> getCategoriesForAxis(CategoryAxis axis) {
+        List<Comparable> result = new ArrayList<>();
         int axisIndex = getDomainAxisIndex(axis);
         for (CategoryDataset dataset : datasetsMappedToDomainAxis(axisIndex)) {
             // add the unique categories from this dataset
