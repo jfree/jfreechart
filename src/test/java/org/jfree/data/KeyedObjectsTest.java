@@ -90,7 +90,7 @@ public class KeyedObjectsTest {
         obj1 = new DefaultPieDataset<String>();
         ko1 = new KeyedObjects<>();
         ko1.addObject("K1", obj1);
-        ko2 = (KeyedObjects) ko1.clone();
+        ko2 = CloneUtils.clone(ko1);
         assertTrue(ko1 != ko2);
         assertTrue(ko1.getClass() == ko2.getClass());
         assertTrue(ko1.equals(ko2));

@@ -233,7 +233,7 @@ public class DefaultMultiValueCategoryDatasetTest {
         List<Integer> values = new ArrayList<>();
         values.add(99);
         d1.add(values, "R1", "C1");
-        d2 = (DefaultMultiValueCategoryDataset) d1.clone();
+        d2 = CloneUtils.clone(d1);
         assertTrue(d1 != d2);
         assertTrue(d1.getClass() == d2.getClass());
         assertTrue(d1.equals(d2));
