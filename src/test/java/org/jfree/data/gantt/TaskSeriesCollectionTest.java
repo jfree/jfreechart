@@ -39,6 +39,7 @@ package org.jfree.data.gantt;
 import java.util.Date;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 
 import org.jfree.data.time.SimpleTimePeriod;
 import org.junit.Test;
@@ -462,7 +463,7 @@ public class TaskSeriesCollectionTest {
         c1.add(s1);
         c1.add(s2);
 
-        TaskSeriesCollection c2 = (TaskSeriesCollection) c1.clone();
+        TaskSeriesCollection c2 = CloneUtils.clone(c1);
         assertTrue(c1 != c2);
         assertTrue(c1.getClass() == c2.getClass());
         assertTrue(c1.equals(c2));
@@ -490,8 +491,7 @@ public class TaskSeriesCollectionTest {
         TaskSeriesCollection c1 = new TaskSeriesCollection();
         c1.add(s1);
         c1.add(s2);
-        TaskSeriesCollection c2 = (TaskSeriesCollection) 
-                TestUtils.serialised(c1);
+        TaskSeriesCollection c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 
