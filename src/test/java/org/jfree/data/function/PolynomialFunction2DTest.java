@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * ------------------------------
  * PolynomialFunction2DTests.java
  * ------------------------------
- * (C) Copyright 2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2009-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 28-May-2009 : Version 1 (DG);
  *
  */
 
@@ -120,8 +116,7 @@ public class PolynomialFunction2DTest {
     public void testSerialization() {
         PolynomialFunction2D f1 = new PolynomialFunction2D(new double[] {1.0,
                 2.0});
-        PolynomialFunction2D f2 = (PolynomialFunction2D) 
-                TestUtils.serialised(f1);
+        PolynomialFunction2D f2 = TestUtils.serialised(f1);
         assertEquals(f1, f2);
     }
 
@@ -136,7 +131,6 @@ public class PolynomialFunction2DTest {
         PolynomialFunction2D f2 = new PolynomialFunction2D(new double[] {1.0,
                 2.0});
         assertEquals(f1.hashCode(), f2.hashCode());
-
     }
 
 }

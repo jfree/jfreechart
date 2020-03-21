@@ -37,6 +37,7 @@
 package org.jfree.data;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -93,7 +94,7 @@ public class ComparableObjectItemTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         ComparableObjectItem item1 = new ComparableObjectItem(1, "XYZ");
-        ComparableObjectItem item2 = (ComparableObjectItem) item1.clone();
+        ComparableObjectItem item2 = CloneUtils.clone(item1);
         assertNotSame(item1, item2);
         assertSame(item1.getClass(), item2.getClass());
         assertEquals(item1, item2);

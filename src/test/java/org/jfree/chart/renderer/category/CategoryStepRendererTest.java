@@ -46,6 +46,7 @@ import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.junit.Test;
@@ -76,7 +77,7 @@ public class CategoryStepRendererTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         CategoryStepRenderer r1 = new CategoryStepRenderer(false);
-        CategoryStepRenderer r2 = (CategoryStepRenderer) r1.clone();
+        CategoryStepRenderer r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -97,8 +98,7 @@ public class CategoryStepRendererTest {
     @Test
     public void testSerialization() {
         CategoryStepRenderer r1 = new CategoryStepRenderer();
-        CategoryStepRenderer r2 = (CategoryStepRenderer) 
-                TestUtils.serialised(r1);
+        CategoryStepRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 
