@@ -37,6 +37,7 @@
 package org.jfree.data.general;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.junit.Test;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
@@ -140,7 +141,7 @@ public class DefaultPieDatasetTest implements DatasetChangeListener {
         d1.setValue("V1", 1);
         d1.setValue("V2", null);
         d1.setValue("V3", 3);
-        DefaultPieDataset<String> d2 = (DefaultPieDataset) d1.clone();
+        DefaultPieDataset<String> d2 = CloneUtils.clone(d1);
 
         assertTrue(d1 != d2);
         assertTrue(d1.getClass() == d2.getClass());
@@ -158,7 +159,7 @@ public class DefaultPieDatasetTest implements DatasetChangeListener {
         d1.setValue("C3", 345.9);
         d1.setValue("C4", 452.7);
 
-        DefaultPieDataset<String> d2 = (DefaultPieDataset) TestUtils.serialised(d1);
+        DefaultPieDataset<String> d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 

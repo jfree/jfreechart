@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * ----------------------
  * XYTaskDatasetTest.java
  * ----------------------
- * (C) Copyright 2008-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2008-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 16-Sep-2008 : Version 1 (DG);
  *
  */
 
@@ -43,6 +39,7 @@ package org.jfree.data.gantt;
 import java.util.Date;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -100,7 +97,7 @@ public class XYTaskDatasetTest {
         TaskSeriesCollection u1 = new TaskSeriesCollection();
         u1.add(s1);
         XYTaskDataset d1 = new XYTaskDataset(u1);
-        XYTaskDataset d2 = (XYTaskDataset) d1.clone();
+        XYTaskDataset d2 = CloneUtils.clone(d1);
         assertTrue(d1 != d2);
         assertTrue(d1.getClass() == d2.getClass());
         assertTrue(d1.equals(d2));
@@ -124,7 +121,7 @@ public class XYTaskDatasetTest {
         TaskSeriesCollection u1 = new TaskSeriesCollection();
         u1.add(s1);
         XYTaskDataset d1 = new XYTaskDataset(u1);
-        XYTaskDataset d2 = (XYTaskDataset) TestUtils.serialised(d1);
+        XYTaskDataset d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
 
         // basic check for independence

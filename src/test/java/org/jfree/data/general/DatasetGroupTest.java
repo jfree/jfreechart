@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * ---------------------
  * DatasetGroupTest.java
  * ---------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 14-Jan-2005 : Version 1 (DG);
  *
  */
 
@@ -55,7 +51,7 @@ public class DatasetGroupTest {
     @Test
     public void testSerialization() {
         DatasetGroup g1 = new DatasetGroup();
-        DatasetGroup g2 = (DatasetGroup) TestUtils.serialised(g1);
+        DatasetGroup g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

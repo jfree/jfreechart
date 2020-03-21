@@ -85,8 +85,7 @@ public class DefaultBoxAndWhiskerCategoryDatasetTest {
                 Double.valueOf(3.0), Double.valueOf(4.0), Double.valueOf(5.0),
                 Double.valueOf(6.0), Double.valueOf(7.0), Double.valueOf(8.0),
                 new ArrayList<>()), "ROW1", "COLUMN1");
-        DefaultBoxAndWhiskerCategoryDataset d2 = 
-                (DefaultBoxAndWhiskerCategoryDataset) TestUtils.serialised(d1);
+        DefaultBoxAndWhiskerCategoryDataset d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 
