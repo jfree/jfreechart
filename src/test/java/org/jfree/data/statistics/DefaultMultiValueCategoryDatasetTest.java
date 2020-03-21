@@ -44,6 +44,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 
 import org.jfree.data.UnknownKeyException;
 import org.junit.Test;
@@ -180,7 +181,7 @@ public class DefaultMultiValueCategoryDatasetTest {
         DefaultMultiValueCategoryDataset<String, String> d1
                 = new DefaultMultiValueCategoryDataset<>();
         DefaultMultiValueCategoryDataset<String, String> d2 
-                = (DefaultMultiValueCategoryDataset<String, String>) TestUtils.serialised(d1);
+                = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 
@@ -223,8 +224,7 @@ public class DefaultMultiValueCategoryDatasetTest {
     public void testCloning() throws CloneNotSupportedException {
         DefaultMultiValueCategoryDataset<String, String> d1
                 = new DefaultMultiValueCategoryDataset<>();
-        DefaultMultiValueCategoryDataset<String, String> d2 
-                = (DefaultMultiValueCategoryDataset<String, String>) d1.clone();
+        DefaultMultiValueCategoryDataset<String, String> d2 = CloneUtils.clone(d1);
         assertTrue(d1 != d2);
         assertTrue(d1.getClass() == d2.getClass());
         assertTrue(d1.equals(d2));
