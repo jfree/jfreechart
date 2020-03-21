@@ -32,15 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * Changes
- * -------
- * 22-Oct-2003 : Version 1 (DG);
- * 04-May-2005 : Improved equals() test (DG);
- * 24-Jan-2007 : Added 'roundXCoordinates' to testEquals(), and improved
- *               testClone() (DG);
- * 17-May-2007 : Added testGetLegendItemSeriesIndex() (DG);
- * 22-Apr-2008 : Added testPublicCloneable (DG);
- *
  */
 
 package org.jfree.chart.renderer.xy;
@@ -59,6 +50,7 @@ import org.jfree.chart.LegendItem;
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
@@ -139,7 +131,7 @@ public class XYDifferenceRendererTest {
     public void testCloning() throws CloneNotSupportedException {
         XYDifferenceRenderer r1 = new XYDifferenceRenderer(Color.RED,
                 Color.BLUE, false);
-        XYDifferenceRenderer r2 = (XYDifferenceRenderer) r1.clone();
+        XYDifferenceRenderer r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -169,8 +161,7 @@ public class XYDifferenceRendererTest {
     public void testSerialization() {
         XYDifferenceRenderer r1 = new XYDifferenceRenderer(Color.RED,
                 Color.BLUE, false);
-        XYDifferenceRenderer r2 = (XYDifferenceRenderer) 
-                TestUtils.serialised(r1);
+        XYDifferenceRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 
