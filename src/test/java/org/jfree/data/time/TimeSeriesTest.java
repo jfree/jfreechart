@@ -49,6 +49,7 @@ import java.util.TimeZone;
 
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.date.MonthConstants;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.data.Range;
 import org.jfree.data.general.SeriesChangeEvent;
 import org.jfree.data.general.SeriesChangeListener;
@@ -119,8 +120,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
         RegularTimePeriod jan1st2002 = new Day(1, MonthConstants.JANUARY, 2002);
         series.add(jan1st2002, 42);
 
-        TimeSeries clone;
-        clone = (TimeSeries) series.clone();
+        TimeSeries clone = CloneUtils.clone(series);
         clone.setKey("Clone Series");
         clone.update(jan1st2002, 10);
 
@@ -143,7 +143,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
         s1.add(new Year(2007), 100.0);
         s1.add(new Year(2008), null);
         s1.add(new Year(2009), 200.0);
-        TimeSeries s2 = (TimeSeries) s1.clone();
+        TimeSeries s2 = CloneUtils.clone(s1);
         assertTrue(s1.equals(s2));
 
         // check independence
@@ -264,7 +264,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
         s1.add(new Year(2002), null);
         s1.add(new Year(2005), 19.32);
         s1.add(new Year(2007), 16.89);
-        TimeSeries s2 = (TimeSeries) TestUtils.serialised(s1);
+        TimeSeries s2 = TestUtils.serialised(s1);
         assertTrue(s1.equals(s2));
     }
 

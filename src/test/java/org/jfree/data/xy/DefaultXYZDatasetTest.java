@@ -47,6 +47,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.Test;
@@ -87,7 +88,7 @@ public class DefaultXYZDatasetTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         DefaultXYZDataset d1 = new DefaultXYZDataset();
-        DefaultXYZDataset d2 = (DefaultXYZDataset) d1.clone();
+        DefaultXYZDataset d2 = CloneUtils.clone(d1);
         assertTrue(d1 != d2);
         assertTrue(d1.getClass() == d2.getClass());
         assertTrue(d1.equals(d2));
@@ -125,7 +126,7 @@ public class DefaultXYZDatasetTest {
     @Test
     public void testSerialization() {
         DefaultXYZDataset d1 = new DefaultXYZDataset();
-        DefaultXYZDataset d2 = (DefaultXYZDataset) TestUtils.serialised(d1);
+        DefaultXYZDataset d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
 
         // try a dataset with some content...
@@ -134,7 +135,7 @@ public class DefaultXYZDatasetTest {
         double[] z1 = new double[] {7.0, 8.0, 9.0};
         double[][] data1 = new double[][] {x1, y1, z1};
         d1.addSeries("S1", data1);
-        d2 = (DefaultXYZDataset) TestUtils.serialised(d1);
+        d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 
