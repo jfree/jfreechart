@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * -------------------------------
  * MatrixSeriesCollectionTest.java
  * -------------------------------
- * (C) Copyright 2006-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 27-Nov-2006 : Version 1 (DG);
- * 22-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
@@ -46,6 +41,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.Test;
@@ -87,7 +83,7 @@ public class MatrixSeriesCollectionTest {
         s1.update(0, 0, 1.1);
         MatrixSeriesCollection c1 = new MatrixSeriesCollection();
         c1.addSeries(s1);
-        MatrixSeriesCollection c2 = (MatrixSeriesCollection) c1.clone();
+        MatrixSeriesCollection c2 = CloneUtils.clone(c1);
 
         assertTrue(c1 != c2);
         assertTrue(c1.getClass() == c2.getClass());
@@ -116,8 +112,7 @@ public class MatrixSeriesCollectionTest {
         s1.update(0, 0, 1.1);
         MatrixSeriesCollection c1 = new MatrixSeriesCollection();
         c1.addSeries(s1);
-        MatrixSeriesCollection c2 = (MatrixSeriesCollection) 
-                TestUtils.serialised(c1);
+        MatrixSeriesCollection c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 

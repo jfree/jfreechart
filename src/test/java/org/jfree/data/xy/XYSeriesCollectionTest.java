@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,23 +27,10 @@
  * ---------------------------
  * XYSeriesCollectionTest.java
  * ---------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 18-May-2003 : Version 1 (DG);
- * 27-Nov-2006 : Updated testCloning() (DG);
- * 08-Mar-2007 : Added testGetSeries() and testRemoveSeries() (DG);
- * 08-May-2007 : Added testIndexOf() (DG);
- * 03-Dec-2007 : Added testGetSeriesByKey() (DG);
- * 22-Apr-2008 : Added testPublicCloneable (DG);
- * 06-Mar-2009 : Added testGetDomainBounds (DG);
- * 17-May-2010 : Added checks for duplicate series names (DG);
- * 08-Jan-2012 : Added testBug3445507() (DG);
- * 28-Jul-2012 : Added testSeriesRename() (DG);
  *
  */
 
@@ -58,6 +45,7 @@ import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.fail;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.Range;
 import org.jfree.data.UnknownKeyException;
@@ -129,7 +117,7 @@ public class XYSeriesCollectionTest {
         s1.add(1.0, 1.1);
         XYSeriesCollection c1 = new XYSeriesCollection();
         c1.addSeries(s1);
-        XYSeriesCollection c2 = (XYSeriesCollection) c1.clone();
+        XYSeriesCollection c2 = CloneUtils.clone(c1);
         assertNotSame(c1, c2);
         assertSame(c1.getClass(), c2.getClass());
         assertEquals(c1, c2);
@@ -157,8 +145,7 @@ public class XYSeriesCollectionTest {
         s1.add(1.0, 1.1);
         XYSeriesCollection c1 = new XYSeriesCollection();
         c1.addSeries(s1);
-        XYSeriesCollection c2 = (XYSeriesCollection) 
-                TestUtils.serialised(c1);
+        XYSeriesCollection c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 
