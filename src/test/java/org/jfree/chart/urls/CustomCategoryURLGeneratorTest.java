@@ -44,6 +44,7 @@ import static org.junit.Assert.assertFalse;
 import java.util.List;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.Test;
@@ -87,7 +88,7 @@ public class CustomCategoryURLGeneratorTest {
         u1.add("URL A2");
         u1.add("URL A3");
         g1.addURLSeries(u1);
-        CustomCategoryURLGenerator g2 = (CustomCategoryURLGenerator) g1.clone();
+        CustomCategoryURLGenerator g2 = CloneUtils.clone(g1);
         assertTrue(g1 != g2);
         assertTrue(g1.getClass() == g2.getClass());
         assertTrue(g1.equals(g2));
@@ -129,8 +130,7 @@ public class CustomCategoryURLGeneratorTest {
         CustomCategoryURLGenerator g1 = new CustomCategoryURLGenerator();
         g1.addURLSeries(u1);
         g1.addURLSeries(u2);
-        CustomCategoryURLGenerator g2 = (CustomCategoryURLGenerator) 
-                TestUtils.serialised(g1);
+        CustomCategoryURLGenerator g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

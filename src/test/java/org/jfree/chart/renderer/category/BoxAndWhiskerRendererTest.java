@@ -59,6 +59,7 @@ import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.statistics.BoxAndWhiskerItem;
@@ -132,7 +133,7 @@ public class BoxAndWhiskerRendererTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         BoxAndWhiskerRenderer r1 = new BoxAndWhiskerRenderer();
-        BoxAndWhiskerRenderer r2 = (BoxAndWhiskerRenderer) r1.clone();
+        BoxAndWhiskerRenderer r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -153,8 +154,7 @@ public class BoxAndWhiskerRendererTest {
     @Test
     public void testSerialization() {
         BoxAndWhiskerRenderer r1 = new BoxAndWhiskerRenderer();
-        BoxAndWhiskerRenderer r2 = (BoxAndWhiskerRenderer) 
-                TestUtils.serialised(r1);
+        BoxAndWhiskerRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 
@@ -165,8 +165,8 @@ public class BoxAndWhiskerRendererTest {
     @Test
     public void testDrawWithNullInfo() {
         try {
-            DefaultBoxAndWhiskerCategoryDataset dataset
-                = new DefaultBoxAndWhiskerCategoryDataset();
+            DefaultBoxAndWhiskerCategoryDataset<String, String> dataset
+                = new DefaultBoxAndWhiskerCategoryDataset<>();
             dataset.add(new BoxAndWhiskerItem(1.0, 2.0, 0.0, 4.0, 0.5,
                     4.5, -0.5, 5.5, null), "S1", "C1");
             CategoryPlot plot = new CategoryPlot(dataset,
@@ -186,8 +186,8 @@ public class BoxAndWhiskerRendererTest {
      */
     @Test
     public void testBug1572478Vertical() {
-        DefaultBoxAndWhiskerCategoryDataset dataset
-                = new DefaultBoxAndWhiskerCategoryDataset() {
+        DefaultBoxAndWhiskerCategoryDataset<String, String> dataset
+                = new DefaultBoxAndWhiskerCategoryDataset<String, String>() {
 
             @Override
             public Number getQ1Value(int row, int column) {
@@ -195,7 +195,7 @@ public class BoxAndWhiskerRendererTest {
             }
 
             @Override
-            public Number getQ1Value(Comparable rowKey, Comparable columnKey) {
+            public Number getQ1Value(String rowKey, String columnKey) {
                 return null;
             }
         };
@@ -231,8 +231,8 @@ public class BoxAndWhiskerRendererTest {
      */
     @Test
     public void testBug1572478Horizontal() {
-        DefaultBoxAndWhiskerCategoryDataset dataset
-                = new DefaultBoxAndWhiskerCategoryDataset() {
+        DefaultBoxAndWhiskerCategoryDataset<String, String> dataset
+                = new DefaultBoxAndWhiskerCategoryDataset<String, String>() {
 
             @Override
             public Number getQ1Value(int row, int column) {
@@ -240,7 +240,7 @@ public class BoxAndWhiskerRendererTest {
             }
 
             @Override
-            public Number getQ1Value(Comparable rowKey, Comparable columnKey) {
+            public Number getQ1Value(String rowKey, String columnKey) {
                 return null;
             }
         };
@@ -277,8 +277,8 @@ public class BoxAndWhiskerRendererTest {
      */
     @Test
     public void testGetLegendItem() {
-        DefaultBoxAndWhiskerCategoryDataset dataset
-                = new DefaultBoxAndWhiskerCategoryDataset();
+        DefaultBoxAndWhiskerCategoryDataset<String, String> dataset
+                = new DefaultBoxAndWhiskerCategoryDataset<>();
         List<Double> values = new ArrayList<>();
         values.add(1.10);
         values.add(1.45);
@@ -327,8 +327,8 @@ public class BoxAndWhiskerRendererTest {
     public void testDrawWithNullMean() {
         boolean success;
         try {
-            DefaultBoxAndWhiskerCategoryDataset dataset
-                    = new DefaultBoxAndWhiskerCategoryDataset();
+            DefaultBoxAndWhiskerCategoryDataset<String, String> dataset
+                    = new DefaultBoxAndWhiskerCategoryDataset<>();
             dataset.add(new BoxAndWhiskerItem(null, 2.0, 0.0, 4.0, 0.5, 4.5, 
                     -0.5, 5.5, null), "S1", "C1");
             CategoryPlot plot = new CategoryPlot(dataset,
@@ -353,8 +353,8 @@ public class BoxAndWhiskerRendererTest {
     public void testDrawWithNullMedian() {
         boolean success;
         try {
-            DefaultBoxAndWhiskerCategoryDataset dataset
-                    = new DefaultBoxAndWhiskerCategoryDataset();
+            DefaultBoxAndWhiskerCategoryDataset<String, String> dataset
+                    = new DefaultBoxAndWhiskerCategoryDataset<>();
             dataset.add(new BoxAndWhiskerItem(1.0, null, 0.0, 4.0, 0.5, 4.5, 
                     -0.5, 5.5, null), "S1", "C1");
             CategoryPlot plot = new CategoryPlot(dataset,
@@ -379,8 +379,8 @@ public class BoxAndWhiskerRendererTest {
     public void testDrawWithNullQ1() {
         boolean success;
         try {
-            DefaultBoxAndWhiskerCategoryDataset dataset
-                    = new DefaultBoxAndWhiskerCategoryDataset();
+            DefaultBoxAndWhiskerCategoryDataset<String, String> dataset
+                    = new DefaultBoxAndWhiskerCategoryDataset<>();
             dataset.add(new BoxAndWhiskerItem(1.0, 2.0, null, 4.0, 0.5, 4.5, 
                     -0.5, 5.5, null), "S1", "C1");
             CategoryPlot plot = new CategoryPlot(dataset,
@@ -405,8 +405,8 @@ public class BoxAndWhiskerRendererTest {
     public void testDrawWithNullQ3() {
         boolean success;
         try {
-            DefaultBoxAndWhiskerCategoryDataset dataset
-                    = new DefaultBoxAndWhiskerCategoryDataset();
+            DefaultBoxAndWhiskerCategoryDataset<String, String> dataset
+                    = new DefaultBoxAndWhiskerCategoryDataset<>();
             dataset.add(new BoxAndWhiskerItem(1.0, 2.0, 3.0, null, 0.5, 4.5, 
                     -0.5, 5.5, null), "S1", "C1");
             CategoryPlot plot = new CategoryPlot(dataset,
@@ -431,8 +431,8 @@ public class BoxAndWhiskerRendererTest {
     public void testDrawWithNullMinRegular() {
         boolean success;
         try {
-            DefaultBoxAndWhiskerCategoryDataset dataset
-                    = new DefaultBoxAndWhiskerCategoryDataset();
+            DefaultBoxAndWhiskerCategoryDataset<String, String> dataset
+                    = new DefaultBoxAndWhiskerCategoryDataset<>();
             dataset.add(new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0, null, 4.5, 
                     -0.5, 5.5, null), "S1", "C1");
             CategoryPlot plot = new CategoryPlot(dataset,
@@ -456,8 +456,8 @@ public class BoxAndWhiskerRendererTest {
     @Test
     public void testDrawWithNullMaxRegular() {
         try {
-            DefaultBoxAndWhiskerCategoryDataset dataset
-                    = new DefaultBoxAndWhiskerCategoryDataset();
+            DefaultBoxAndWhiskerCategoryDataset<String, String> dataset
+                    = new DefaultBoxAndWhiskerCategoryDataset<>();
             dataset.add(new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0, 0.5, null, 
                     -0.5, 5.5, null), "S1", "C1");
             CategoryPlot plot = new CategoryPlot(dataset,
@@ -480,8 +480,8 @@ public class BoxAndWhiskerRendererTest {
     public void testDrawWithNullMinOutlier() {
         boolean success;
         try {
-            DefaultBoxAndWhiskerCategoryDataset dataset
-                    = new DefaultBoxAndWhiskerCategoryDataset();
+            DefaultBoxAndWhiskerCategoryDataset<String, String> dataset
+                    = new DefaultBoxAndWhiskerCategoryDataset<>();
             dataset.add(new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0, 0.5, 4.5, 
                     null, 5.5, null), "S1", "C1");
             CategoryPlot plot = new CategoryPlot(dataset,
@@ -506,8 +506,8 @@ public class BoxAndWhiskerRendererTest {
     public void testDrawWithNullMaxOutlier() {
         boolean success;
         try {
-            DefaultBoxAndWhiskerCategoryDataset dataset
-                    = new DefaultBoxAndWhiskerCategoryDataset();
+            DefaultBoxAndWhiskerCategoryDataset<String, String> dataset
+                    = new DefaultBoxAndWhiskerCategoryDataset<>();
             dataset.add(new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0, 0.5, 4.5, -0.5, 
                     null, new ArrayList<>()), "S1", "C1");
             CategoryPlot plot = new CategoryPlot(dataset,

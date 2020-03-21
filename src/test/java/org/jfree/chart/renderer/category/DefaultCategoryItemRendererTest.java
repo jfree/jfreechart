@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * ------------------------------------
  * DefaultCategoryItemRendererTest.java
  * ------------------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 29-Apr-2003 : Version 1 (DG);
- * 22-Oct-2003 : Added hashCode test (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG);
  *
  */
 
@@ -46,6 +40,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.Test;
@@ -84,8 +79,7 @@ public class DefaultCategoryItemRendererTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         DefaultCategoryItemRenderer r1 = new DefaultCategoryItemRenderer();
-        DefaultCategoryItemRenderer r2 = (DefaultCategoryItemRenderer) 
-                r1.clone();
+        DefaultCategoryItemRenderer r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -106,8 +100,7 @@ public class DefaultCategoryItemRendererTest {
     @Test
     public void testSerialization() {
         DefaultCategoryItemRenderer r1 = new DefaultCategoryItemRenderer();
-        DefaultCategoryItemRenderer r2 = (DefaultCategoryItemRenderer) 
-                TestUtils.serialised(r1);
+        DefaultCategoryItemRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

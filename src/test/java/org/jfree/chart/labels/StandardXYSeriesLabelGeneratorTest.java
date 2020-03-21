@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * ---------------------------------------
  * StandardXYSeriesLabelGeneratorTest.java
  * ---------------------------------------
- * (C) Copyright 2006-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 24-Nov-2006 : Version 1 (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG)
  *
  */
 
@@ -46,6 +41,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.xy.XYSeries;
@@ -109,8 +105,7 @@ public class StandardXYSeriesLabelGeneratorTest {
     public void testCloning() throws CloneNotSupportedException {
         StandardXYSeriesLabelGenerator g1
                 = new StandardXYSeriesLabelGenerator("Series {0}");
-        StandardXYSeriesLabelGenerator g2 = (StandardXYSeriesLabelGenerator) 
-                g1.clone();
+        StandardXYSeriesLabelGenerator g2 = CloneUtils.clone(g1);
         assertTrue(g1 != g2);
         assertTrue(g1.getClass() == g2.getClass());
         assertTrue(g1.equals(g2));
@@ -133,8 +128,7 @@ public class StandardXYSeriesLabelGeneratorTest {
     public void testSerialization() {
         StandardXYSeriesLabelGenerator g1
                 = new StandardXYSeriesLabelGenerator("Series {0}");
-        StandardXYSeriesLabelGenerator g2 = (StandardXYSeriesLabelGenerator) 
-                TestUtils.serialised(g1);
+        StandardXYSeriesLabelGenerator g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 }
