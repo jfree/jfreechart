@@ -44,6 +44,7 @@ import org.jfree.chart.ChartRenderingInfo;
 import org.jfree.chart.entity.ChartEntity;
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.entity.StandardEntityCollection;
+import org.jfree.chart.util.StringUtils;
 import org.junit.Test;
 
 import java.awt.Rectangle;
@@ -98,9 +99,9 @@ public class ImageMapUtilsTest {
         final String retval = ImageMapUtils.getImageMap("name", new ChartRenderingInfo(entities),
                 new StandardToolTipTagFragmentGenerator(), new StandardURLTagFragmentGenerator());
 
-        assertEquals("<map id=\"name\" name=\"name\">\n" +
-                "<area shape=\"rect\" coords=\"5,6,12,14\" title=\"toolTip2\" alt=\"\" href=\"URL2\"/>\n" +
-                "<area shape=\"rect\" coords=\"1,2,4,6\" title=\"toolTip1\" alt=\"\" href=\"URL1\"/>\n" +
+        assertEquals("<map id=\"name\" name=\"name\">" + StringUtils.getLineSeparator() +
+                "<area shape=\"rect\" coords=\"5,6,12,14\" title=\"toolTip2\" alt=\"\" href=\"URL2\"/>" + StringUtils.getLineSeparator() +
+                "<area shape=\"rect\" coords=\"1,2,4,6\" title=\"toolTip1\" alt=\"\" href=\"URL1\"/>" + StringUtils.getLineSeparator() +
                 "</map>", retval);
     }
 
