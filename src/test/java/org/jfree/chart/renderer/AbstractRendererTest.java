@@ -378,6 +378,7 @@ public class AbstractRendererTest {
     }
 
     private static class TestRenderer extends XYLineAndShapeRenderer {
+        private static final long serialVersionUID = 1L;    
         @Override
         public void setTreatLegendShapeAsLine(boolean flag) {
             super.setTreatLegendShapeAsLine(flag);
@@ -405,7 +406,6 @@ public class AbstractRendererTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         LineAndShapeRenderer r1 = new LineAndShapeRenderer();
-        Rectangle2D shape = new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0);
         Rectangle2D baseShape = new Rectangle2D.Double(11.0, 12.0, 13.0, 14.0);
         r1.setDefaultShape(baseShape);
         r1.setDefaultLegendShape(new Rectangle(4, 3, 2, 1));

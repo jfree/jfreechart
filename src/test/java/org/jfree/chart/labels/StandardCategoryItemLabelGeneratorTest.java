@@ -45,6 +45,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.category.DefaultCategoryDataset;
@@ -132,8 +133,7 @@ public class StandardCategoryItemLabelGeneratorTest {
     public void testCloning() throws CloneNotSupportedException {
         StandardCategoryItemLabelGenerator g1
                 = new StandardCategoryItemLabelGenerator();
-        StandardCategoryItemLabelGenerator g2 
-                = (StandardCategoryItemLabelGenerator) g1.clone();
+        StandardCategoryItemLabelGenerator g2 = CloneUtils.clone(g1);
         assertTrue(g1 != g2);
         assertTrue(g1.getClass() == g2.getClass());
         assertTrue(g1.equals(g2));
@@ -157,8 +157,7 @@ public class StandardCategoryItemLabelGeneratorTest {
         StandardCategoryItemLabelGenerator g1
                 = new StandardCategoryItemLabelGenerator("{2}",
                 DateFormat.getInstance());
-        StandardCategoryItemLabelGenerator g2 = (StandardCategoryItemLabelGenerator) 
-                TestUtils.serialised(g1);
+        StandardCategoryItemLabelGenerator g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

@@ -55,6 +55,7 @@ import org.jfree.chart.event.ChartChangeEvent;
 import org.jfree.chart.event.ChartChangeListener;
 import org.jfree.chart.renderer.xy.StandardXYItemRenderer;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
@@ -101,7 +102,7 @@ public class CombinedRangeXYPlotTest implements ChartChangeListener {
         plot.add(plot2);
         // remove plot2, but plot1 is removed instead
         plot.remove(plot2);
-        List plots = plot.getSubplots();
+        List<XYPlot> plots = plot.getSubplots();
         assertTrue(plots.get(0) == plot1);
     }
 
@@ -111,7 +112,7 @@ public class CombinedRangeXYPlotTest implements ChartChangeListener {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         CombinedRangeXYPlot plot1 = createPlot();
-        CombinedRangeXYPlot plot2 = (CombinedRangeXYPlot) plot1.clone();
+        CombinedRangeXYPlot plot2 = CloneUtils.clone(plot1);
         assertTrue(plot1 != plot2);
         assertTrue(plot1.getClass() == plot2.getClass());
         assertTrue(plot1.equals(plot2));
@@ -123,8 +124,7 @@ public class CombinedRangeXYPlotTest implements ChartChangeListener {
     @Test
     public void testSerialization() {
         CombinedRangeXYPlot plot1 = createPlot();
-        CombinedRangeXYPlot plot2 = (CombinedRangeXYPlot) 
-                TestUtils.serialised(plot1);
+        CombinedRangeXYPlot plot2 = TestUtils.serialised(plot1);
         assertEquals(plot1, plot2);
     }
 

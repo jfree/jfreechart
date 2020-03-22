@@ -42,6 +42,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.Range;
@@ -115,7 +116,7 @@ public class StackedAreaRendererTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         StackedAreaRenderer r1 = new StackedAreaRenderer();
-        StackedAreaRenderer r2 = (StackedAreaRenderer) r1.clone();
+        StackedAreaRenderer r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -136,8 +137,7 @@ public class StackedAreaRendererTest {
     @Test
     public void testSerialization() {
         StackedAreaRenderer r1 = new StackedAreaRenderer();
-        StackedAreaRenderer r2 = (StackedAreaRenderer) 
-                TestUtils.serialised(r1);
+        StackedAreaRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

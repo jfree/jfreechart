@@ -66,7 +66,7 @@ public class CategoryItemEntityTest {
         CategoryItemEntity<String, String> e1 = new CategoryItemEntity<>(
                 new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), "ToolTip", "URL", d, 
                 "R2", "C2");
-        CategoryItemEntity<String, String> e2 = new CategoryItemEntity(
+        CategoryItemEntity<String, String> e2 = new CategoryItemEntity<>(
                 new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), "ToolTip", "URL", d, 
                 "R2", "C2");
         assertTrue(e1.equals(e2));
