@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,21 +27,11 @@
  * -----------------
  * MatrixSeries.java
  * -----------------
- * (C) Copyright 2003-2008, by Barak Naveh and Contributors.
+ * (C) Copyright 2003-2020, by Barak Naveh and Contributors.
  *
  * Original Author:  Barak Naveh;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Zhitao Wang;
- *
- * Changes
- * -------
- * 10-Jul-2003 : Version 1 contributed by Barak Naveh (DG);
- * 10-Feb-2004 : Fixed Checkstyle complaints (DG);
- * 21-May-2004 : Fixed bug 940188 - problem in getItemColumn() and
- *               getItemRow() (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 27-Nov-2006 : Fixed bug in equals() method (DG);
- * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
  *
  */
 
@@ -55,7 +45,8 @@ import org.jfree.data.general.Series;
  * Represents a dense matrix M[i,j] where each Mij item of the matrix has a
  * value (default is 0).
  */
-public class MatrixSeries extends Series implements Serializable {
+public class MatrixSeries<K extends Comparable<K>> extends Series<K> 
+        implements Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 7934188527308315704L;
@@ -73,7 +64,7 @@ public class MatrixSeries extends Series implements Serializable {
      * @param rows  the number of rows.
      * @param columns  the number of columns.
      */
-    public MatrixSeries(String name, int rows, int columns) {
+    public MatrixSeries(K name, int rows, int columns) {
         super(name);
         this.data = new double[rows][columns];
         zeroAll();
@@ -102,10 +93,7 @@ public class MatrixSeries extends Series implements Serializable {
     public Number getItem(int itemIndex) {
         int i = getItemRow(itemIndex);
         int j = getItemColumn(itemIndex);
-
-        Number n = new Double(get(i, j));
-
-        return n;
+        return get(i, j);
     }
 
 

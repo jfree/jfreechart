@@ -201,11 +201,11 @@ public class LogAxisTest {
      */
     @Test
     public void testXYAutoRange1() {
-        XYSeries series = new XYSeries("Series 1");
+        XYSeries<String> series = new XYSeries<>("Series 1");
         series.add(1.0, 1.0);
         series.add(2.0, 2.0);
         series.add(3.0, 3.0);
-        XYSeriesCollection dataset = new XYSeriesCollection();
+        XYSeriesCollection<String> dataset = new XYSeriesCollection<>();
         dataset.addSeries(series);
         JFreeChart chart = ChartFactory.createScatterPlot("Test", "X", "Y",
                 dataset);
@@ -222,11 +222,11 @@ public class LogAxisTest {
      */
     @Test
     public void testXYAutoRange2() {
-        XYSeries series = new XYSeries("Series 1");
+        XYSeries<String> series = new XYSeries<>("Series 1");
         series.add(1.0, 1.0);
         series.add(2.0, 2.0);
         series.add(3.0, 3.0);
-        XYSeriesCollection dataset = new XYSeriesCollection();
+        XYSeriesCollection<String> dataset = new XYSeriesCollection<>();
         dataset.addSeries(series);
         JFreeChart chart = ChartFactory.createScatterPlot("Test", "X", "Y",
                 dataset);

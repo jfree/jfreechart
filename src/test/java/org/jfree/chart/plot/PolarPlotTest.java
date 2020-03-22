@@ -72,9 +72,9 @@ public class PolarPlotTest {
      */
     @Test
     public void testGetLegendItems() {
-        XYSeriesCollection d = new XYSeriesCollection();
-        d.addSeries(new XYSeries("A"));
-        d.addSeries(new XYSeries("B"));
+        XYSeriesCollection<String> d = new XYSeriesCollection<>();
+        d.addSeries(new XYSeries<>("A"));
+        d.addSeries(new XYSeries<>("B"));
         DefaultPolarItemRenderer r = new DefaultPolarItemRenderer();
         PolarPlot plot = new PolarPlot();
         plot.setDataset(d);
@@ -92,12 +92,12 @@ public class PolarPlotTest {
      */
     @Test
     public void testGetLegendItems2() {
-        XYSeriesCollection d1 = new XYSeriesCollection();
-        d1.addSeries(new XYSeries("A"));
-        d1.addSeries(new XYSeries("B"));
-        XYSeriesCollection d2 = new XYSeriesCollection();
-        d2.addSeries(new XYSeries("C"));
-        d2.addSeries(new XYSeries("D"));
+        XYSeriesCollection<String> d1 = new XYSeriesCollection<>();
+        d1.addSeries(new XYSeries<>("A"));
+        d1.addSeries(new XYSeries<>("B"));
+        XYSeriesCollection<String> d2 = new XYSeriesCollection<>();
+        d2.addSeries(new XYSeries<>("C"));
+        d2.addSeries(new XYSeries<>("D"));
         DefaultPolarItemRenderer r = new DefaultPolarItemRenderer();
         PolarPlot plot = new PolarPlot();
         plot.setDataset(d1);

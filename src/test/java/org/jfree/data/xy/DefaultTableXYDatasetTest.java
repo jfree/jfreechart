@@ -57,13 +57,13 @@ public class DefaultTableXYDatasetTest {
     @Test
     public void testEquals() {
         DefaultTableXYDataset d1 = new DefaultTableXYDataset();
-        XYSeries s1 = new XYSeries("Series 1", true, false);
+        XYSeries<String> s1 = new XYSeries<>("Series 1", true, false);
         s1.add(1.0, 1.1);
         s1.add(2.0, 2.2);
         d1.addSeries(s1);
 
         DefaultTableXYDataset d2 = new DefaultTableXYDataset();
-        XYSeries s2 = new XYSeries("Series 1", true, false);
+        XYSeries<String> s2 = new XYSeries<>("Series 1", true, false);
         s2.add(1.0, 1.1);
         s2.add(2.0, 2.2);
         d2.addSeries(s2);
@@ -84,7 +84,7 @@ public class DefaultTableXYDatasetTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         DefaultTableXYDataset d1 = new DefaultTableXYDataset();
-        XYSeries s1 = new XYSeries("Series 1", true, false);
+        XYSeries<String> s1 = new XYSeries<>("Series 1", true, false);
         s1.add(1.0, 1.1);
         s1.add(2.0, 2.2);
         d1.addSeries(s1);
@@ -114,7 +114,7 @@ public class DefaultTableXYDatasetTest {
     @Test
     public void testSerialization() {
         DefaultTableXYDataset d1 = new DefaultTableXYDataset();
-        XYSeries s1 = new XYSeries("Series 1", true, false);
+        XYSeries<String> s1 = new XYSeries<>("Series 1", true, false);
         s1.add(1.0, 1.1);
         s1.add(2.0, 2.2);
         d1.addSeries(s1);
@@ -134,7 +134,7 @@ public class DefaultTableXYDatasetTest {
     public void testAddSeries() {
         DefaultTableXYDataset d1 = new DefaultTableXYDataset();
         d1.setAutoWidth(true);
-        XYSeries s1 = new XYSeries("Series 1", true, false);
+        XYSeries<String> s1 = new XYSeries<>("Series 1", true, false);
         s1.add(3.0, 1.1);
         s1.add(7.0, 2.2);
         d1.addSeries(s1);
@@ -146,7 +146,7 @@ public class DefaultTableXYDatasetTest {
         assertEquals(9.0, d1.getEndXValue(0, 1), EPSILON);
 
         // now add another series
-        XYSeries s2 = new XYSeries("Series 2", true, false);
+        XYSeries<String> s2 = new XYSeries<>("Series 2", true, false);
         s2.add(7.5, 1.1);
         s2.add(9.0, 2.2);
         d1.addSeries(s2);
@@ -174,7 +174,7 @@ public class DefaultTableXYDatasetTest {
     @Test
     public void testGetSeries() {
         DefaultTableXYDataset d1 = new DefaultTableXYDataset();
-        XYSeries s1 = new XYSeries("Series 1", true, false);
+        XYSeries<String> s1 = new XYSeries<>("Series 1", true, false);
         d1.addSeries(s1);
         assertEquals("Series 1", d1.getSeries(0).getKey());
 

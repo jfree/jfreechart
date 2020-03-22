@@ -52,7 +52,7 @@ import org.jfree.data.general.SeriesException;
  *
  * @since 1.0.3
  */
-public class ComparableObjectSeries extends Series
+public class ComparableObjectSeries<K extends Comparable<K>> extends Series<K>
         implements Cloneable, Serializable {
 
     /** Storage for the data items in the series. */
@@ -74,7 +74,7 @@ public class ComparableObjectSeries extends Series
      *
      * @param key  the series key ({@code null} not permitted).
      */
-    public ComparableObjectSeries(Comparable<?> key) {
+    public ComparableObjectSeries(K key) {
         this(key, true, true);
     }
 
@@ -88,7 +88,7 @@ public class ComparableObjectSeries extends Series
      * @param allowDuplicateXValues  a flag that controls whether duplicate
      *                               x-values are allowed.
      */
-    public ComparableObjectSeries(Comparable<?> key, boolean autoSort,
+    public ComparableObjectSeries(K key, boolean autoSort,
             boolean allowDuplicateXValues) {
         super(key);
         this.data = new ArrayList<>();

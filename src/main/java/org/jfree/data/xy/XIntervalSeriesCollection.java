@@ -45,9 +45,11 @@
 package org.jfree.data.xy;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.general.DatasetChangeEvent;
@@ -59,17 +61,18 @@ import org.jfree.data.general.DatasetChangeEvent;
  *
  * @see XIntervalSeries
  */
-public class XIntervalSeriesCollection extends AbstractIntervalXYDataset
+public class XIntervalSeriesCollection<S extends Comparable<S>> 
+        extends AbstractIntervalXYDataset
         implements IntervalXYDataset, PublicCloneable, Serializable {
 
     /** Storage for the data series. */
-    private List data;
+    private List<XIntervalSeries<S>> data;
 
     /**
      * Creates a new {@code XIntervalSeriesCollection} instance.
      */
     public XIntervalSeriesCollection() {
-        this.data = new java.util.ArrayList();
+        this.data = new ArrayList<>();
     }
 
     /**
@@ -78,7 +81,7 @@ public class XIntervalSeriesCollection extends AbstractIntervalXYDataset
      *
      * @param series  the series ({@code null} not permitted).
      */
-    public void addSeries(XIntervalSeries series) {
+    public void addSeries(XIntervalSeries<S> series) {
         Args.nullNotPermitted(series, "series");
         this.data.add(series);
         series.addChangeListener(this);
@@ -105,11 +108,9 @@ public class XIntervalSeriesCollection extends AbstractIntervalXYDataset
      * @throws IllegalArgumentException if {@code series} is not in the
      *     range {@code 0} to {@code getSeriesCount() - 1}.
      */
-    public XIntervalSeries getSeries(int series) {
-        if ((series < 0) || (series >= getSeriesCount())) {
-            throw new IllegalArgumentException("Series index out of bounds");
-        }
-        return (XIntervalSeries) this.data.get(series);
+    public XIntervalSeries<S> getSeries(int series) {
+        Args.requireInRange(series, "series", 0, this.data.size() - 1);
+        return this.data.get(series);
     }
 
     /**
@@ -124,7 +125,7 @@ public class XIntervalSeriesCollection extends AbstractIntervalXYDataset
      *     specified range.
      */
     @Override
-    public Comparable getSeriesKey(int series) {
+    public S getSeriesKey(int series) {
         // defer argument checking
         return getSeries(series).getKey();
     }
@@ -155,7 +156,7 @@ public class XIntervalSeriesCollection extends AbstractIntervalXYDataset
      */
     @Override
     public Number getX(int series, int item) {
-        XIntervalSeries s = (XIntervalSeries) this.data.get(series);
+        XIntervalSeries<S> s = this.data.get(series);
         XIntervalDataItem di = (XIntervalDataItem) s.getDataItem(item);
         return di.getX();
     }
@@ -171,7 +172,7 @@ public class XIntervalSeriesCollection extends AbstractIntervalXYDataset
      */
     @Override
     public double getStartXValue(int series, int item) {
-        XIntervalSeries s = (XIntervalSeries) this.data.get(series);
+        XIntervalSeries<S> s = this.data.get(series);
         return s.getXLowValue(item);
     }
 
@@ -186,7 +187,7 @@ public class XIntervalSeriesCollection extends AbstractIntervalXYDataset
      */
     @Override
     public double getEndXValue(int series, int item) {
-        XIntervalSeries s = (XIntervalSeries) this.data.get(series);
+        XIntervalSeries<S> s = this.data.get(series);
         return s.getXHighValue(item);
     }
 
@@ -201,7 +202,7 @@ public class XIntervalSeriesCollection extends AbstractIntervalXYDataset
      */
     @Override
     public double getYValue(int series, int item) {
-        XIntervalSeries s = (XIntervalSeries) this.data.get(series);
+        XIntervalSeries<S> s = this.data.get(series);
         return s.getYValue(item);
     }
 
@@ -215,9 +216,9 @@ public class XIntervalSeriesCollection extends AbstractIntervalXYDataset
      */
     @Override
     public Number getY(int series, int item) {
-        XIntervalSeries s = (XIntervalSeries) this.data.get(series);
+        XIntervalSeries<S> s = this.data.get(series);
         XIntervalDataItem di = (XIntervalDataItem) s.getDataItem(item);
-        return new Double(di.getYValue());
+        return di.getYValue();
     }
 
     /**
@@ -230,9 +231,9 @@ public class XIntervalSeriesCollection extends AbstractIntervalXYDataset
      */
     @Override
     public Number getStartX(int series, int item) {
-        XIntervalSeries s = (XIntervalSeries) this.data.get(series);
+        XIntervalSeries<S> s = this.data.get(series);
         XIntervalDataItem di = (XIntervalDataItem) s.getDataItem(item);
-        return new Double(di.getXLowValue());
+        return di.getXLowValue();
     }
 
     /**
@@ -245,9 +246,9 @@ public class XIntervalSeriesCollection extends AbstractIntervalXYDataset
      */
     @Override
     public Number getEndX(int series, int item) {
-        XIntervalSeries s = (XIntervalSeries) this.data.get(series);
+        XIntervalSeries<S> s = this.data.get(series);
         XIntervalDataItem di = (XIntervalDataItem) s.getDataItem(item);
-        return new Double(di.getXHighValue());
+        return di.getXHighValue();
     }
 
     /**
@@ -287,10 +288,8 @@ public class XIntervalSeriesCollection extends AbstractIntervalXYDataset
      * @since 1.0.10
      */
     public void removeSeries(int series) {
-        if ((series < 0) || (series >= getSeriesCount())) {
-            throw new IllegalArgumentException("Series index out of bounds.");
-        }
-        XIntervalSeries ts = (XIntervalSeries) this.data.get(series);
+        Args.requireInRange(series, "series", 0, this.data.size() - 1);
+        XIntervalSeries ts = this.data.get(series);
         ts.removeChangeListener(this);
         this.data.remove(series);
         fireDatasetChanged();
@@ -304,7 +303,7 @@ public class XIntervalSeriesCollection extends AbstractIntervalXYDataset
      *
      * @since 1.0.10
      */
-    public void removeSeries(XIntervalSeries series) {
+    public void removeSeries(XIntervalSeries<S> series) {
         Args.nullNotPermitted(series, "series");
         if (this.data.contains(series)) {
             series.removeChangeListener(this);
@@ -322,8 +321,7 @@ public class XIntervalSeriesCollection extends AbstractIntervalXYDataset
     public void removeAllSeries() {
         // Unregister the collection as a change listener to each series in
         // the collection.
-        for (int i = 0; i < this.data.size(); i++) {
-          XIntervalSeries series = (XIntervalSeries) this.data.get(i);
+        for (XIntervalSeries series : this.data) { ;
           series.removeChangeListener(this);
         }
         this.data.clear();
@@ -345,7 +343,7 @@ public class XIntervalSeriesCollection extends AbstractIntervalXYDataset
         if (!(obj instanceof XIntervalSeriesCollection)) {
             return false;
         }
-        XIntervalSeriesCollection that = (XIntervalSeriesCollection) obj;
+        XIntervalSeriesCollection<S> that = (XIntervalSeriesCollection) obj;
         return ObjectUtils.equal(this.data, that.data);
     }
 
@@ -360,7 +358,7 @@ public class XIntervalSeriesCollection extends AbstractIntervalXYDataset
     public Object clone() throws CloneNotSupportedException {
         XIntervalSeriesCollection clone
                 = (XIntervalSeriesCollection) super.clone();
-        clone.data = (List) ObjectUtils.deepClone(this.data);
+        clone.data = CloneUtils.cloneList(this.data);
         return clone;
     }
 

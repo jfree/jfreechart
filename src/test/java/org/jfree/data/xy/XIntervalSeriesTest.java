@@ -71,26 +71,26 @@ public class XIntervalSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testEquals() {
-        XIntervalSeries s1 = new XIntervalSeries("s1");
-        XIntervalSeries s2 = new XIntervalSeries("s1");
+        XIntervalSeries<String> s1 = new XIntervalSeries<>("s1");
+        XIntervalSeries<String> s2 = new XIntervalSeries<>("s1");
         assertTrue(s1.equals(s2));
 
         // seriesKey
-        s1 = new XIntervalSeries("s2");
+        s1 = new XIntervalSeries<>("s2");
         assertFalse(s1.equals(s2));
-        s2 = new XIntervalSeries("s2");
+        s2 = new XIntervalSeries<>("s2");
         assertTrue(s1.equals(s2));
 
         // autoSort
-        s1 = new XIntervalSeries("s2", false, true);
+        s1 = new XIntervalSeries<>("s2", false, true);
         assertFalse(s1.equals(s2));
-        s2 = new XIntervalSeries("s2", false, true);
+        s2 = new XIntervalSeries<>("s2", false, true);
         assertTrue(s1.equals(s2));
 
         // allowDuplicateValues
-        s1 = new XIntervalSeries("s2", false, false);
+        s1 = new XIntervalSeries<>("s2", false, false);
         assertFalse(s1.equals(s2));
-        s2 = new XIntervalSeries("s2", false, false);
+        s2 = new XIntervalSeries<>("s2", false, false);
         assertTrue(s1.equals(s2));
 
         // add a value
@@ -118,9 +118,9 @@ public class XIntervalSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        XIntervalSeries s1 = new XIntervalSeries("s1");
+        XIntervalSeries<String> s1 = new XIntervalSeries<>("s1");
         s1.add(1.0, 0.5, 1.5, 2.0);
-        XIntervalSeries s2 = CloneUtils.clone(s1);
+        XIntervalSeries<String> s2 = CloneUtils.clone(s1);
         assertTrue(s1 != s2);
         assertTrue(s1.getClass() == s2.getClass());
         assertTrue(s1.equals(s2));
@@ -131,9 +131,9 @@ public class XIntervalSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testSerialization()  {
-        XIntervalSeries s1 = new XIntervalSeries("s1");
+        XIntervalSeries<String> s1 = new XIntervalSeries<>("s1");
         s1.add(1.0, 0.5, 1.5, 2.0);
-        XIntervalSeries s2 = TestUtils.serialised(s1);
+        XIntervalSeries<String> s2 = TestUtils.serialised(s1);
         assertEquals(s1, s2);
     }
 
@@ -142,7 +142,7 @@ public class XIntervalSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testIndexOf() {
-        XIntervalSeries s1 = new XIntervalSeries("Series 1");
+        XIntervalSeries<String> s1 = new XIntervalSeries<>("Series 1");
         s1.add(1.0, 1.0, 1.0, 2.0);
         s1.add(2.0, 2.0, 2.0, 3.0);
         s1.add(3.0, 3.0, 3.0, 4.0);
@@ -154,7 +154,7 @@ public class XIntervalSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testIndexOf2() {
-        XIntervalSeries s1 = new XIntervalSeries("Series 1", false, true);
+        XIntervalSeries<String> s1 = new XIntervalSeries<>("Series 1", false, true);
         s1.add(1.0, 1.0, 1.0, 2.0);
         s1.add(3.0, 3.0, 3.0, 3.0);
         s1.add(2.0, 2.0, 2.0, 2.0);
@@ -168,7 +168,7 @@ public class XIntervalSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testRemove() {
-        XIntervalSeries s1 = new XIntervalSeries("Series 1");
+        XIntervalSeries<String> s1 = new XIntervalSeries<>("Series 1");
         s1.add(1.0, 1.0, 1.0, 2.0);
         s1.add(2.0, 2.0, 2.0, 2.0);
         s1.add(3.0, 3.0, 3.0, 3.0);
@@ -189,7 +189,7 @@ public class XIntervalSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testAdditionOfDuplicateXValues() {
-        XIntervalSeries s1 = new XIntervalSeries("Series 1");
+        XIntervalSeries<String> s1 = new XIntervalSeries<>("Series 1");
         s1.add(1.0, 1.0, 1.0, 1.0);
         s1.add(2.0, 2.0, 2.0, 2.0);
         s1.add(2.0, 3.0, 3.0, 3.0);
@@ -207,7 +207,7 @@ public class XIntervalSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testAdd() {
-        XIntervalSeries series = new XIntervalSeries("Series", false, true);
+        XIntervalSeries<String> series = new XIntervalSeries<>("Series", false, true);
         series.add(5.0, 5.50, 5.50, 5.50);
         series.add(5.1, 5.51, 5.51, 5.51);
         series.add(6.0, 6.6, 6.6, 6.6);
@@ -229,7 +229,7 @@ public class XIntervalSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testSetMaximumItemCount() {
-        XIntervalSeries s1 = new XIntervalSeries("S1");
+        XIntervalSeries<String> s1 = new XIntervalSeries<>("S1");
         assertEquals(Integer.MAX_VALUE, s1.getMaximumItemCount());
         s1.setMaximumItemCount(2);
         assertEquals(2, s1.getMaximumItemCount());
@@ -245,7 +245,7 @@ public class XIntervalSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testSetMaximumItemCount2() {
-        XIntervalSeries s1 = new XIntervalSeries("S1");
+        XIntervalSeries<String> s1 = new XIntervalSeries<>("S1");
         s1.add(1.0, 1.1, 1.1, 1.1);
         s1.add(2.0, 2.2, 2.2, 2.2);
         s1.add(3.0, 3.3, 3.3, 3.3);
@@ -259,7 +259,7 @@ public class XIntervalSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testClear() {
-        XIntervalSeries s1 = new XIntervalSeries("S1");
+        XIntervalSeries<String> s1 = new XIntervalSeries<>("S1");
         s1.addChangeListener(this);
         s1.clear();
         assertNull(this.lastEvent);
@@ -276,7 +276,7 @@ public class XIntervalSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testGetXLowValue() {
-        XIntervalSeries s1 = new XIntervalSeries("S1");
+        XIntervalSeries<String> s1 = new XIntervalSeries<>("S1");
         s1.add(1.0, 2.0, 3.0, 4.0);
         assertEquals(2.0, s1.getXLowValue(0), EPSILON);
         s1.add(2.0, 1.0, 4.0, 2.5);
@@ -288,7 +288,7 @@ public class XIntervalSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testGetXHighValue() {
-        XIntervalSeries s1 = new XIntervalSeries("S1");
+        XIntervalSeries<String> s1 = new XIntervalSeries<>("S1");
         s1.add(1.0, 2.0, 3.0, 4.0);
         assertEquals(3.0, s1.getXHighValue(0), EPSILON);
         s1.add(2.0, 1.0, 4.0, 2.5);

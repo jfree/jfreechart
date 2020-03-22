@@ -58,13 +58,14 @@ import org.jfree.chart.util.Args;
  * You can also register a {@link SeriesChangeListener} to receive notification
  * of changes to the series data.
  */
-public abstract class Series implements Cloneable, Serializable {
+public abstract class Series<K extends Comparable<K>> 
+        implements Cloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -6906561437538683581L;
 
     /** The key for the series. */
-    private Comparable<?> key;
+    private K key;
 
     /** A description of the series. */
     private String description;
@@ -86,7 +87,7 @@ public abstract class Series implements Cloneable, Serializable {
      *
      * @param key  the series key ({@code null} not permitted).
      */
-    protected Series(Comparable<?> key) {
+    protected Series(K key) {
         this(key, null);
     }
 
@@ -96,7 +97,7 @@ public abstract class Series implements Cloneable, Serializable {
      * @param key  the series key ({@code null} NOT permitted).
      * @param description  the series description ({@code null} permitted).
      */
-    protected Series(Comparable<?> key, String description) {
+    protected Series(K key, String description) {
         Args.nullNotPermitted(key, "key");
         this.key = key;
         this.description = description;
@@ -113,7 +114,7 @@ public abstract class Series implements Cloneable, Serializable {
      *
      * @see #setKey(Comparable)
      */
-    public Comparable<?> getKey() {
+    public K getKey() {
         return this.key;
     }
 
@@ -128,9 +129,9 @@ public abstract class Series implements Cloneable, Serializable {
      *
      * @see #getKey()
      */
-    public void setKey(Comparable<?> key) {
+    public void setKey(K key) {
         Args.nullNotPermitted(key, "key");
-        Comparable<?> old = this.key;
+        K old = this.key;
         try {
             // if this series belongs to a dataset, the dataset might veto the
             // change if it results in two series within the dataset having the
@@ -236,7 +237,7 @@ public abstract class Series implements Cloneable, Serializable {
      */
     @Override
     public Object clone() throws CloneNotSupportedException {
-        Series clone = (Series) super.clone();
+        Series<K> clone = (Series<K>) super.clone();
         clone.listeners = new EventListenerList();
         clone.propertyChangeSupport = new PropertyChangeSupport(clone);
         clone.vetoableChangeSupport = new VetoableChangeSupport(clone);
@@ -258,7 +259,7 @@ public abstract class Series implements Cloneable, Serializable {
         if (!(obj instanceof Series)) {
             return false;
         }
-        Series that = (Series) obj;
+        Series<K> that = (Series<K>) obj;
         if (!getKey().equals(that.getKey())) {
             return false;
         }

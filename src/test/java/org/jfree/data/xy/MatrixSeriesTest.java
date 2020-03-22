@@ -55,28 +55,28 @@ public class MatrixSeriesTest {
      */
     @Test
     public void testEquals() {
-        MatrixSeries m1 = new MatrixSeries("Test", 8, 3);
+        MatrixSeries<String> m1 = new MatrixSeries<>("Test", 8, 3);
         m1.update(0, 0, 11.0);
         m1.update(7, 2, 22.0);
-        MatrixSeries m2 = new MatrixSeries("Test", 8, 3);
+        MatrixSeries<String> m2 = new MatrixSeries<>("Test", 8, 3);
         m2.update(0, 0, 11.0);
         m2.update(7, 2, 22.0);
         assertTrue(m1.equals(m2));
         assertTrue(m2.equals(m1));
 
-        m1 = new MatrixSeries("Test 2", 8, 3);
+        m1 = new MatrixSeries<>("Test 2", 8, 3);
         assertFalse(m1.equals(m2));
-        m2 = new MatrixSeries("Test 2", 8, 3);
+        m2 = new MatrixSeries<>("Test 2", 8, 3);
         assertTrue(m1.equals(m2));
 
-        m1 = new MatrixSeries("Test 2", 10, 3);
+        m1 = new MatrixSeries<>("Test 2", 10, 3);
         assertFalse(m1.equals(m2));
-        m2 = new MatrixSeries("Test 2", 10, 3);
+        m2 = new MatrixSeries<>("Test 2", 10, 3);
         assertTrue(m1.equals(m2));
 
-        m1 = new MatrixSeries("Test 2", 10, 5);
+        m1 = new MatrixSeries<>("Test 2", 10, 5);
         assertFalse(m1.equals(m2));
-        m2 = new MatrixSeries("Test 2", 10, 5);
+        m2 = new MatrixSeries<>("Test 2", 10, 5);
         assertTrue(m1.equals(m2));
 
         m1.update(0, 0, 99);
@@ -90,10 +90,10 @@ public class MatrixSeriesTest {
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        MatrixSeries m1 = new MatrixSeries("Test", 8, 3);
+        MatrixSeries<String> m1 = new MatrixSeries<>("Test", 8, 3);
         m1.update(0, 0, 11.0);
         m1.update(7, 2, 22.0);
-        MatrixSeries m2 = CloneUtils.clone(m1);
+        MatrixSeries<String> m2 = CloneUtils.clone(m1);
         assertTrue(m1 != m2);
         assertTrue(m1.getClass() == m2.getClass());
         assertTrue(m1.equals(m2));
@@ -104,10 +104,10 @@ public class MatrixSeriesTest {
      */
     @Test
     public void testSerialization() {
-        MatrixSeries m1 = new MatrixSeries("Test", 8, 3);
+        MatrixSeries<String> m1 = new MatrixSeries<>("Test", 8, 3);
         m1.update(0, 0, 11.0);
         m1.update(7, 2, 22.0);
-        MatrixSeries m2 = TestUtils.serialised(m1);
+        MatrixSeries<String> m2 = TestUtils.serialised(m1);
         assertEquals(m1, m2);
     }
 
@@ -116,7 +116,7 @@ public class MatrixSeriesTest {
      */
     @Test
     public void testGetItemColumn() {
-        MatrixSeries m = new MatrixSeries("Test", 3, 2);
+        MatrixSeries<String> m = new MatrixSeries<>("Test", 3, 2);
         assertEquals(0, m.getItemColumn(0));
         assertEquals(1, m.getItemColumn(1));
         assertEquals(0, m.getItemColumn(2));
@@ -130,7 +130,7 @@ public class MatrixSeriesTest {
      */
     @Test
     public void testGetItemRow() {
-        MatrixSeries m = new MatrixSeries("Test", 3, 2);
+        MatrixSeries<String> m = new MatrixSeries<>("Test", 3, 2);
         assertEquals(0, m.getItemRow(0));
         assertEquals(0, m.getItemRow(1));
         assertEquals(1, m.getItemRow(2));
@@ -144,7 +144,7 @@ public class MatrixSeriesTest {
      */
     @Test
     public void testGetItem() {
-        MatrixSeries m = new MatrixSeries("Test", 3, 2);
+        MatrixSeries<String> m = new MatrixSeries<>("Test", 3, 2);
         m.update(0, 0, 0.0);
         m.update(0, 1, 1.0);
         m.update(1, 0, 2.0);

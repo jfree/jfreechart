@@ -104,11 +104,11 @@ public class XYAreaChartTest {
     public void testReplaceDataset() {
 
         // create a dataset...
-        XYSeries series1 = new XYSeries("Series 1");
+        XYSeries<String> series1 = new XYSeries<>("Series 1");
         series1.add(10.0, 10.0);
         series1.add(20.0, 20.0);
         series1.add(30.0, 30.0);
-        XYDataset dataset = new XYSeriesCollection(series1);
+        XYDataset dataset = new XYSeriesCollection<String>(series1);
 
         LocalListener l = new LocalListener();
         this.chart.addChangeListener(l);
@@ -144,11 +144,11 @@ public class XYAreaChartTest {
      * @return The chart.
      */
     private static JFreeChart createChart() {
-        XYSeries series1 = new XYSeries("Series 1");
+        XYSeries<String> series1 = new XYSeries<>("Series 1");
         series1.add(1.0, 1.0);
         series1.add(2.0, 2.0);
         series1.add(3.0, 3.0);
-        XYDataset dataset = new XYSeriesCollection(series1);
+        XYDataset dataset = new XYSeriesCollection<String>(series1);
         return ChartFactory.createXYAreaChart("Area Chart", "Domain",
                 "Range", dataset);
     }

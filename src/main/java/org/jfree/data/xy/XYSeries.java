@@ -58,7 +58,8 @@ import org.jfree.data.general.SeriesException;
  * defaults can be changed in the constructor.  Y-values can be
  * {@code null} to represent missing values.
  */
-public class XYSeries extends Series implements Cloneable, Serializable {
+public class XYSeries<K extends Comparable<K>> extends Series<K> 
+        implements Cloneable, Serializable {
 
     /** For serialization. */
     static final long serialVersionUID = -5908509288197150436L;
@@ -101,7 +102,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      *
      * @param key  the series key ({@code null} not permitted).
      */
-    public XYSeries(Comparable<?> key) {
+    public XYSeries(K key) {
         this(key, true, true);
     }
 
@@ -113,7 +114,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * @param autoSort  a flag that controls whether or not the items in the
      *                  series are sorted.
      */
-    public XYSeries(Comparable<?> key, boolean autoSort) {
+    public XYSeries(K key, boolean autoSort) {
         this(key, autoSort, true);
     }
 
@@ -127,8 +128,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * @param allowDuplicateXValues  a flag that controls whether duplicate
      *                               x-values are allowed.
      */
-    public XYSeries(Comparable<?> key, boolean autoSort,
-            boolean allowDuplicateXValues) {
+    public XYSeries(K key, boolean autoSort, boolean allowDuplicateXValues) {
         super(key);
         this.data = new java.util.ArrayList<>();
         this.autoSort = autoSort;

@@ -40,6 +40,7 @@ package org.jfree.data.time;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
@@ -51,6 +52,7 @@ import java.util.TimeZone;
 import org.jfree.chart.util.ObjectUtils;
 
 import org.jfree.chart.util.Args;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.data.Range;
 import org.jfree.data.general.Series;
 import org.jfree.data.general.SeriesChangeEvent;
@@ -63,7 +65,8 @@ import org.jfree.data.general.SeriesException;
  * period (for example, {@link Day}) and (b) that each period appears at
  * most one time in the series.
  */
-public class TimeSeries extends Series implements Cloneable, Serializable {
+public class TimeSeries<S extends Comparable<S>> extends Series<S> 
+        implements Cloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -5032960206869675528L;
@@ -84,7 +87,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
     protected Class timePeriodClass;
 
     /** The list of data items in the series. */
-    protected List data;
+    protected List<TimeSeriesDataItem> data;
 
     /** The maximum number of items for the series. */
     private int maximumItemCount;
@@ -116,7 +119,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      *
      * @param name  the series name ({@code null} not permitted).
      */
-    public TimeSeries(Comparable name) {
+    public TimeSeries(S name) {
         this(name, DEFAULT_DOMAIN_DESCRIPTION, DEFAULT_RANGE_DESCRIPTION);
     }
 
@@ -133,12 +136,12 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      *
      * @since 1.0.13
      */
-    public TimeSeries(Comparable name, String domain, String range) {
+    public TimeSeries(S name, String domain, String range) {
         super(name);
         this.domain = domain;
         this.range = range;
         this.timePeriodClass = null;
-        this.data = new java.util.ArrayList();
+        this.data = new ArrayList<>();
         this.maximumItemCount = Integer.MAX_VALUE;
         this.maximumItemAge = Long.MAX_VALUE;
         this.minY = Double.NaN;
@@ -212,9 +215,8 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      *
      * @return The list of data items.
      */
-    public List getItems() {
-        // FIXME: perhaps we should clone the data list
-        return Collections.unmodifiableList(this.data);
+    public List<TimeSeriesDataItem> getItems() {
+        return CloneUtils.cloneList(this.data);
     }
 
     /**
@@ -346,7 +348,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
         double lowY = Double.POSITIVE_INFINITY;
         double highY = Double.NEGATIVE_INFINITY;
         for (int i = 0; i < this.data.size(); i++) {
-            TimeSeriesDataItem item = (TimeSeriesDataItem) this.data.get(i);
+            TimeSeriesDataItem item = this.data.get(i);
             long millis = item.getPeriod().getMillisecond(xAnchor, calendar);
             if (xRange.contains(millis)) {
                 Number n = item.getValue();
@@ -528,7 +530,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      *
      * @return The unique time periods.
      */
-    public Collection getTimePeriodsUniqueToOtherSeries(TimeSeries series) {
+    public Collection getTimePeriodsUniqueToOtherSeries(TimeSeries<S> series) {
         Collection result = new java.util.ArrayList();
         for (int i = 0; i < series.getItemCount(); i++) {
             RegularTimePeriod period = series.getTimePeriod(i);
@@ -785,9 +787,8 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      *
      * @return A series containing the values that were overwritten.
      */
-    public TimeSeries addAndOrUpdate(TimeSeries series) {
-        TimeSeries overwritten = new TimeSeries("Overwritten values from: "
-                + getKey());
+    public TimeSeries<S> addAndOrUpdate(TimeSeries<S> series) {
+        TimeSeries<S> overwritten = new TimeSeries<>(getKey());
         for (int i = 0; i < series.getItemCount(); i++) {
             TimeSeriesDataItem item = series.getRawDataItem(i);
             TimeSeriesDataItem oldItem = addOrUpdate(item.getPeriod(),
@@ -1065,7 +1066,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      */
     @Override
     public Object clone() throws CloneNotSupportedException {
-        TimeSeries clone = (TimeSeries) super.clone();
+        TimeSeries<S> clone = (TimeSeries) super.clone();
         clone.data = (List) ObjectUtils.deepClone(this.data);
         return clone;
     }
@@ -1082,7 +1083,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      *
      * @throws CloneNotSupportedException if there is a cloning problem.
      */
-    public TimeSeries createCopy(int start, int end)
+    public TimeSeries<S> createCopy(int start, int end)
             throws CloneNotSupportedException {
         if (start < 0) {
             throw new IllegalArgumentException("Requires start >= 0.");
@@ -1090,7 +1091,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
         if (end < start) {
             throw new IllegalArgumentException("Requires start <= end.");
         }
-        TimeSeries copy = (TimeSeries) super.clone();
+        TimeSeries<S> copy = (TimeSeries) super.clone();
         copy.minY = Double.NaN;
         copy.maxY = Double.NaN;
         copy.data = new java.util.ArrayList();
@@ -1123,7 +1124,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      *
      * @throws CloneNotSupportedException if there is a cloning problem.
      */
-    public TimeSeries createCopy(RegularTimePeriod start, RegularTimePeriod end)
+    public TimeSeries<S> createCopy(RegularTimePeriod start, RegularTimePeriod end)
         throws CloneNotSupportedException {
 
         Args.nullNotPermitted(start, "start");
@@ -1149,7 +1150,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
             emptyRange = true;
         }
         if (emptyRange) {
-            TimeSeries copy = (TimeSeries) super.clone();
+            TimeSeries<S> copy = (TimeSeries) super.clone();
             copy.data = new java.util.ArrayList();
             return copy;
         }
@@ -1171,7 +1172,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
         if (!(obj instanceof TimeSeries)) {
             return false;
         }
-        TimeSeries that = (TimeSeries) obj;
+        TimeSeries<S> that = (TimeSeries) obj;
         if (!ObjectUtils.equal(getDomainDescription(),
                 that.getDomainDescription())) {
             return false;

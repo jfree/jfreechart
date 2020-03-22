@@ -44,6 +44,7 @@ import java.util.Date;
 
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.date.MonthConstants;
+import org.jfree.chart.util.CloneUtils;
 
 import org.jfree.data.general.SeriesChangeEvent;
 import org.jfree.data.general.SeriesChangeListener;
@@ -56,21 +57,20 @@ import org.junit.Test;
 public class TimePeriodValuesTest {
 
     /** Series A. */
-    private TimePeriodValues seriesA;
+    private TimePeriodValues<String> seriesA;
 
     /** Series B. */
-    private TimePeriodValues seriesB;
+    private TimePeriodValues<String> seriesB;
 
     /** Series C. */
-    private TimePeriodValues seriesC;
-
+    private TimePeriodValues<String> seriesC;
 
     /**
      * Common test setup.
      */
     @Before
     public void setUp() {
-        this.seriesA = new TimePeriodValues("Series A");
+        this.seriesA = new TimePeriodValues<>("Series A");
         this.seriesA.add(new Year(2000), 102000);
         this.seriesA.add(new Year(2001), 102001);
         this.seriesA.add(new Year(2002), 102002);
@@ -78,12 +78,12 @@ public class TimePeriodValuesTest {
         this.seriesA.add(new Year(2004), 102004);
         this.seriesA.add(new Year(2005), 102005);
 
-        this.seriesB = new TimePeriodValues("Series B");
+        this.seriesB = new TimePeriodValues<>("Series B");
         this.seriesB.add(new Year(2006), 202006);
         this.seriesB.add(new Year(2007), 202007);
         this.seriesB.add(new Year(2008), 202008);
 
-        this.seriesC = new TimePeriodValues("Series C");
+        this.seriesC = new TimePeriodValues<>("Series C");
         this.seriesC.add(new Year(1999), 301999);
         this.seriesC.add(new Year(2000), 302000);
         this.seriesC.add(new Year(2002), 302002);
@@ -95,10 +95,10 @@ public class TimePeriodValuesTest {
      */
     @Test
     public void testClone() throws CloneNotSupportedException {
-        TimePeriodValues series = new TimePeriodValues("Test Series");
+        TimePeriodValues<String> series = new TimePeriodValues<>("Test Series");
         RegularTimePeriod jan1st2002 = new Day(1, MonthConstants.JANUARY, 2002);
         series.add(jan1st2002, 42);
-        TimePeriodValues clone = (TimePeriodValues) series.clone();
+        TimePeriodValues<String> clone = CloneUtils.clone(series);
         clone.setKey("Clone Series");
         clone.update(0, 10);
 
@@ -116,7 +116,7 @@ public class TimePeriodValuesTest {
      */
     @Test
     public void testAddValue() {
-        TimePeriodValues tpvs = new TimePeriodValues("Test");
+        TimePeriodValues<String> tpvs = new TimePeriodValues<>("Test");
         tpvs.add(new Year(1999), 1);
         int value = tpvs.getValue(0).intValue();
         assertEquals(1, value);
@@ -127,13 +127,13 @@ public class TimePeriodValuesTest {
      */
     @Test
     public void testSerialization() {
-        TimePeriodValues s1 = new TimePeriodValues("A test");
+        TimePeriodValues<String> s1 = new TimePeriodValues<>("A test");
         s1.add(new Year(2000), 13.75);
         s1.add(new Year(2001), 11.90);
         s1.add(new Year(2002), null);
         s1.add(new Year(2005), 19.32);
         s1.add(new Year(2007), 16.89);
-        TimePeriodValues s2 = TestUtils.serialised(s1);
+        TimePeriodValues<String> s2 = TestUtils.serialised(s1);
         assertTrue(s1.equals(s2));
     }
 
@@ -142,8 +142,8 @@ public class TimePeriodValuesTest {
      */
     @Test
     public void testEquals() {
-        TimePeriodValues s1 = new TimePeriodValues("Time Series 1");
-        TimePeriodValues s2 = new TimePeriodValues("Time Series 2");
+        TimePeriodValues<String> s1 = new TimePeriodValues<>("Time Series 1");
+        TimePeriodValues<String> s2 = new TimePeriodValues<>("Time Series 2");
         boolean b1 = s1.equals(s2);
         assertFalse("b1", b1);
 
@@ -194,7 +194,7 @@ public class TimePeriodValuesTest {
      */
     @Test
     public void test1161329() {
-        TimePeriodValues tpv = new TimePeriodValues("Test");
+        TimePeriodValues<String> tpv = new TimePeriodValues<>("Test");
         RegularTimePeriod t = new Day();
         tpv.add(t, 1.0);
         t = t.next();
@@ -212,7 +212,7 @@ public class TimePeriodValuesTest {
      */
     @Test
     public void testAdd() {
-        TimePeriodValues tpv = new TimePeriodValues("Test");
+        TimePeriodValues<String> tpv = new TimePeriodValues<>("Test");
         MySeriesChangeListener listener = new MySeriesChangeListener();
         tpv.addChangeListener(listener);
         tpv.add(new TimePeriodValue(new SimpleTimePeriod(new Date(1L), 
@@ -236,7 +236,7 @@ public class TimePeriodValuesTest {
      */
     @Test
     public void testGetMinStartIndex() {
-        TimePeriodValues s = new TimePeriodValues("Test");
+        TimePeriodValues<String> s = new TimePeriodValues<>("Test");
         assertEquals(-1, s.getMinStartIndex());
         s.add(new SimpleTimePeriod(100L, 200L), 1.0);
         assertEquals(0, s.getMinStartIndex());
@@ -251,7 +251,7 @@ public class TimePeriodValuesTest {
      */
     @Test
     public void testGetMaxStartIndex() {
-        TimePeriodValues s = new TimePeriodValues("Test");
+        TimePeriodValues<String> s = new TimePeriodValues<>("Test");
         assertEquals(-1, s.getMaxStartIndex());
         s.add(new SimpleTimePeriod(100L, 200L), 1.0);
         assertEquals(0, s.getMaxStartIndex());
@@ -266,7 +266,7 @@ public class TimePeriodValuesTest {
      */
     @Test
     public void testGetMinMiddleIndex() {
-        TimePeriodValues s = new TimePeriodValues("Test");
+        TimePeriodValues<String> s = new TimePeriodValues<>("Test");
         assertEquals(-1, s.getMinMiddleIndex());
         s.add(new SimpleTimePeriod(100L, 200L), 1.0);
         assertEquals(0, s.getMinMiddleIndex());
@@ -281,7 +281,7 @@ public class TimePeriodValuesTest {
      */
     @Test
     public void testGetMaxMiddleIndex() {
-        TimePeriodValues s = new TimePeriodValues("Test");
+        TimePeriodValues<String> s = new TimePeriodValues<>("Test");
         assertEquals(-1, s.getMaxMiddleIndex());
         s.add(new SimpleTimePeriod(100L, 200L), 1.0);
         assertEquals(0, s.getMaxMiddleIndex());
@@ -298,7 +298,7 @@ public class TimePeriodValuesTest {
      */
     @Test
     public void getMinEndIndex() {
-        TimePeriodValues s = new TimePeriodValues("Test");
+        TimePeriodValues<String> s = new TimePeriodValues<>("Test");
         assertEquals(-1, s.getMinEndIndex());
         s.add(new SimpleTimePeriod(100L, 200L), 1.0);
         assertEquals(0, s.getMinEndIndex());
@@ -313,7 +313,7 @@ public class TimePeriodValuesTest {
      */
     @Test
     public void getMaxEndIndex() {
-        TimePeriodValues s = new TimePeriodValues("Test");
+        TimePeriodValues<String> s = new TimePeriodValues<>("Test");
         assertEquals(-1, s.getMaxEndIndex());
         s.add(new SimpleTimePeriod(100L, 200L), 1.0);
         assertEquals(0, s.getMaxEndIndex());

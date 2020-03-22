@@ -54,7 +54,8 @@ import org.jfree.data.general.SeriesException;
  * This is similar to the {@link TimeSeries} class, except that the time 
  * periods can have irregular lengths.
  */
-public class TimePeriodValues extends Series implements Serializable {
+public class TimePeriodValues<S extends Comparable<S>> extends Series<S> 
+        implements Serializable {
 
     /** For serialization. */
     static final long serialVersionUID = -2210593619794989709L;
@@ -97,7 +98,7 @@ public class TimePeriodValues extends Series implements Serializable {
      *
      * @param name  the name of the series ({@code null} not permitted).
      */
-    public TimePeriodValues(String name) {
+    public TimePeriodValues(S name) {
         this(name, DEFAULT_DOMAIN_DESCRIPTION, DEFAULT_RANGE_DESCRIPTION);
     }
 
@@ -112,7 +113,7 @@ public class TimePeriodValues extends Series implements Serializable {
      * @param domain  the domain description.
      * @param range  the range description.
      */
-    public TimePeriodValues(String name, String domain, String range) {
+    public TimePeriodValues(S name, String domain, String range) {
         super(name);
         this.domain = domain;
         this.range = range;

@@ -56,24 +56,24 @@ public class XIntervalSeriesCollectionTest {
      */
     @Test
     public void testEquals() {
-        XIntervalSeriesCollection c1 = new XIntervalSeriesCollection();
-        XIntervalSeriesCollection c2 = new XIntervalSeriesCollection();
+        XIntervalSeriesCollection<String> c1 = new XIntervalSeriesCollection<>();
+        XIntervalSeriesCollection<String> c2 = new XIntervalSeriesCollection<>();
         assertEquals(c1, c2);
 
         // add a series
-        XIntervalSeries s1 = new XIntervalSeries("Series");
+        XIntervalSeries<String> s1 = new XIntervalSeries<>("Series");
         s1.add(1.0, 1.1, 1.2, 1.3);
         c1.addSeries(s1);
         assertFalse(c1.equals(c2));
-        XIntervalSeries s2 = new XIntervalSeries("Series");
+        XIntervalSeries<String> s2 = new XIntervalSeries<>("Series");
         s2.add(1.0, 1.1, 1.2, 1.3);
         c2.addSeries(s2);
         assertTrue(c1.equals(c2));
 
         // add an empty series
-        c1.addSeries(new XIntervalSeries("Empty Series"));
+        c1.addSeries(new XIntervalSeries<>("Empty Series"));
         assertFalse(c1.equals(c2));
-        c2.addSeries(new XIntervalSeries("Empty Series"));
+        c2.addSeries(new XIntervalSeries<>("Empty Series"));
         assertTrue(c1.equals(c2));
     }
 
@@ -82,11 +82,11 @@ public class XIntervalSeriesCollectionTest {
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        XIntervalSeriesCollection c1 = new XIntervalSeriesCollection();
-        XIntervalSeries s1 = new XIntervalSeries("Series");
+        XIntervalSeriesCollection<String> c1 = new XIntervalSeriesCollection<>();
+        XIntervalSeries<String> s1 = new XIntervalSeries<>("Series");
         s1.add(1.0, 1.1, 1.2, 1.3);
         c1.addSeries(s1);
-        XIntervalSeriesCollection c2 = CloneUtils.clone(c1);
+        XIntervalSeriesCollection<String> c2 = CloneUtils.clone(c1);
         assertTrue(c1 != c2);
         assertTrue(c1.getClass() == c2.getClass());
         assertTrue(c1.equals(c2));
@@ -101,7 +101,7 @@ public class XIntervalSeriesCollectionTest {
      */
     @Test
     public void testPublicCloneable() {
-        XIntervalSeriesCollection c1 = new XIntervalSeriesCollection();
+        XIntervalSeriesCollection<String> c1 = new XIntervalSeriesCollection<>();
         assertTrue(c1 instanceof PublicCloneable);
     }
 
@@ -110,10 +110,10 @@ public class XIntervalSeriesCollectionTest {
      */
     @Test
     public void testSerialization() {
-        XIntervalSeriesCollection c1 = new XIntervalSeriesCollection();
-        XIntervalSeries s1 = new XIntervalSeries("Series");
+        XIntervalSeriesCollection<String> c1 = new XIntervalSeriesCollection<>();
+        XIntervalSeries<String> s1 = new XIntervalSeries<>("Series");
         s1.add(1.0, 1.1, 1.2, 1.3);
-        XIntervalSeriesCollection c2 = TestUtils.serialised(c1);
+        XIntervalSeriesCollection<String> c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 
@@ -122,8 +122,8 @@ public class XIntervalSeriesCollectionTest {
      */
     @Test
     public void testRemoveSeries() {
-        XIntervalSeriesCollection c = new XIntervalSeriesCollection();
-        XIntervalSeries s1 = new XIntervalSeries("s1");
+        XIntervalSeriesCollection<String> c = new XIntervalSeriesCollection<>();
+        XIntervalSeries<String> s1 = new XIntervalSeries<>("s1");
         c.addSeries(s1);
         c.removeSeries(0);
         assertEquals(0, c.getSeriesCount());
@@ -154,8 +154,8 @@ public class XIntervalSeriesCollectionTest {
      */
     @Test
     public void test1170825() {
-        XIntervalSeries s1 = new XIntervalSeries("Series1");
-        XIntervalSeriesCollection dataset = new XIntervalSeriesCollection();
+        XIntervalSeries<String> s1 = new XIntervalSeries<>("Series1");
+        XIntervalSeriesCollection<String> dataset = new XIntervalSeriesCollection<>();
         dataset.addSeries(s1);
         try {
             /* XYSeries s = */ dataset.getSeries(1);

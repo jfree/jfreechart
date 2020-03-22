@@ -55,10 +55,10 @@ public class TaskSeriesTest {
      */
     @Test
     public void testEquals() {
-        TaskSeries s1 = new TaskSeries("S");
+        TaskSeries<String> s1 = new TaskSeries<>("S");
         s1.add(new Task("T1", new Date(1), new Date(2)));
         s1.add(new Task("T2", new Date(11), new Date(22)));
-        TaskSeries s2 = new TaskSeries("S");
+        TaskSeries<String> s2 = new TaskSeries<>("S");
         s2.add(new Task("T1", new Date(1), new Date(2)));
         s2.add(new Task("T2", new Date(11), new Date(22)));
         assertTrue(s1.equals(s2));
@@ -75,10 +75,10 @@ public class TaskSeriesTest {
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        TaskSeries s1 = new TaskSeries("S");
+        TaskSeries<String> s1 = new TaskSeries<>("S");
         s1.add(new Task("T1", new Date(1), new Date(2)));
         s1.add(new Task("T2", new Date(11), new Date(22)));
-        TaskSeries s2 = CloneUtils.clone(s1);
+        TaskSeries<String> s2 = CloneUtils.clone(s1);
         assertTrue(s1 != s2);
         assertTrue(s1.getClass() == s2.getClass());
         assertTrue(s1.equals(s2));
@@ -95,10 +95,10 @@ public class TaskSeriesTest {
      */
     @Test
     public void testSerialization() {
-        TaskSeries s1 = new TaskSeries("S");
+        TaskSeries<String> s1 = new TaskSeries<>("S");
         s1.add(new Task("T1", new Date(1), new Date(2)));
         s1.add(new Task("T2", new Date(11), new Date(22)));
-        TaskSeries s2 = TestUtils.serialised(s1);
+        TaskSeries<String> s2 = TestUtils.serialised(s1);
         assertEquals(s1, s2);
     }
 
@@ -107,7 +107,7 @@ public class TaskSeriesTest {
      */
     @Test
     public void testGetTask() {
-        TaskSeries s1 = new TaskSeries("S");
+        TaskSeries<String> s1 = new TaskSeries<>("S");
         s1.add(new Task("T1", new Date(1), new Date(2)));
         s1.add(new Task("T2", new Date(11), new Date(22)));
         Task t1 = s1.get("T1");

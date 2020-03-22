@@ -57,9 +57,9 @@ public class XYSeriesTest {
      */
     @Test
     public void testEquals() {
-        XYSeries s1 = new XYSeries("Series");
+        XYSeries<String> s1 = new XYSeries<>("Series");
         s1.add(1.0, 1.1);
-        XYSeries s2 = new XYSeries("Series");
+        XYSeries<String> s2 = new XYSeries<>("Series");
         s2.add(1.0, 1.1);
         assertTrue(s1.equals(s2));
         assertTrue(s2.equals(s1));
@@ -80,8 +80,8 @@ public class XYSeriesTest {
      */
     @Test
     public void testHashCode() {
-        XYSeries s1 = new XYSeries("Test");
-        XYSeries s2 = new XYSeries("Test");
+        XYSeries<String> s1 = new XYSeries<>("Test");
+        XYSeries<String> s2 = new XYSeries<>("Test");
         assertEquals(s1, s2);
         assertEquals(s1.hashCode(), s2.hashCode());
 
@@ -112,9 +112,9 @@ public class XYSeriesTest {
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        XYSeries s1 = new XYSeries("Series");
+        XYSeries<String> s1 = new XYSeries<>("Series");
         s1.add(1.0, 1.1);
-        XYSeries s2 = (XYSeries) s1.clone();
+        XYSeries<String> s2 = CloneUtils.clone(s1);
         assertTrue(s1 != s2);
         assertTrue(s1.getClass() == s2.getClass());
         assertTrue(s1.equals(s2));
@@ -126,11 +126,11 @@ public class XYSeriesTest {
      */
     @Test
     public void testCloning2() throws CloneNotSupportedException {
-        XYSeries s1 = new XYSeries("S1");
+        XYSeries<String> s1 = new XYSeries<>("S1");
         s1.add(1.0, 100.0);
         s1.add(2.0, null);
         s1.add(3.0, 200.0);
-        XYSeries s2 = (XYSeries) s1.clone();
+        XYSeries<String> s2 = CloneUtils.clone(s1);
         assertTrue(s1.equals(s2));
 
         // check independence
@@ -146,8 +146,8 @@ public class XYSeriesTest {
      */
     @Test
     public void testCloning3() throws CloneNotSupportedException {
-        XYSeries s1 = new XYSeries("S1");
-        XYSeries s2 = CloneUtils.clone(s1);
+        XYSeries<String> s1 = new XYSeries<>("S1");
+        XYSeries<String> s2 = CloneUtils.clone(s1);
         assertTrue(s1.equals(s2));
 
         // check independence
@@ -162,9 +162,9 @@ public class XYSeriesTest {
      */
     @Test
     public void testSerialization() {
-        XYSeries s1 = new XYSeries("Series");
+        XYSeries<String> s1 = new XYSeries<>("Series");
         s1.add(1.0, 1.1);
-        XYSeries s2 = TestUtils.serialised(s1);
+        XYSeries<String> s2 = TestUtils.serialised(s1);
         assertEquals(s1, s2);
     }
 
@@ -173,7 +173,7 @@ public class XYSeriesTest {
      */
     @Test
     public void testIndexOf() {
-        XYSeries s1 = new XYSeries("Series 1");
+        XYSeries<String> s1 = new XYSeries<>("Series 1");
         s1.add(1.0, 1.0);
         s1.add(2.0, 2.0);
         s1.add(3.0, 3.0);
@@ -188,7 +188,7 @@ public class XYSeriesTest {
      */
     @Test
     public void testIndexOf2() {
-        XYSeries s1 = new XYSeries("Series 1", false, true);
+        XYSeries<String> s1 = new XYSeries<>("Series 1", false, true);
         s1.add(1.0, 1.0);
         s1.add(3.0, 3.0);
         s1.add(2.0, 2.0);
@@ -203,7 +203,7 @@ public class XYSeriesTest {
      */
     @Test
     public void testIndexOf3() {
-        XYSeries s1 = new XYSeries("Series 1");
+        XYSeries<String> s1 = new XYSeries<>("Series 1");
         s1.add(1.0, 1.0);
         s1.add(2.0, 2.0);
         s1.add(2.0, 3.0);
@@ -216,7 +216,7 @@ public class XYSeriesTest {
      */
     @Test
     public void testRemove() {
-        XYSeries s1 = new XYSeries("Series 1");
+        XYSeries<String> s1 = new XYSeries<>("Series 1");
         s1.add(1.0, 1.0);
         s1.add(2.0, 2.0);
         s1.add(3.0, 3.0);
@@ -234,7 +234,7 @@ public class XYSeriesTest {
      */
     @Test
     public void testRemove2() {
-        XYSeries s1 = new XYSeries("S1");
+        XYSeries<String> s1 = new XYSeries<>("S1");
         s1.add(1.0, 1.1);
         s1.add(2.0, 2.2);
         s1.add(3.0, 3.3);
@@ -263,7 +263,7 @@ public class XYSeriesTest {
      */
     @Test
     public void testAdditionOfDuplicateXValues() {
-        XYSeries s1 = new XYSeries("Series 1");
+        XYSeries<String> s1 = new XYSeries<>("Series 1");
         s1.add(1.0, 1.0);
         s1.add(2.0, 2.0);
         s1.add(2.0, 3.0);
@@ -281,7 +281,7 @@ public class XYSeriesTest {
      */
     @Test
     public void testUpdate() {
-        XYSeries series = new XYSeries("S1");
+        XYSeries<String> series = new XYSeries<>("S1");
         series.add(1, Integer.valueOf(2));
         assertEquals(2, series.getY(0));
         series.update(1, 3);
@@ -300,7 +300,7 @@ public class XYSeriesTest {
      */
     @Test
     public void testUpdate2() {
-       XYSeries series = new XYSeries("Series", false, true);
+       XYSeries<String> series = new XYSeries<>("Series", false, true);
        series.add(5.0, 55.0);
        series.add(4.0, 44.0);
        series.add(6.0, 66.0);
@@ -313,7 +313,7 @@ public class XYSeriesTest {
      */
     @Test
     public void testAddOrUpdate() {
-        XYSeries series = new XYSeries("S1", true, false);
+        XYSeries<String> series = new XYSeries<>("S1", true, false);
         XYDataItem old = series.addOrUpdate(Long.valueOf(1L), Long.valueOf(2L));
         assertTrue(old == null);
         assertEquals(1, series.getItemCount());
@@ -336,7 +336,7 @@ public class XYSeriesTest {
      */
     @Test
     public void testAddOrUpdate2() {
-        XYSeries series = new XYSeries("Series", false, false);
+        XYSeries<String> series = new XYSeries<>("Series", false, false);
         series.add(5.0, 5.5);
         series.add(6.0, 6.6);
         series.add(3.0, 3.3);
@@ -354,7 +354,7 @@ public class XYSeriesTest {
      */
     @Test
     public void testAddOrUpdate3() {
-        XYSeries series = new XYSeries("Series", false, true);
+        XYSeries<String> series = new XYSeries<>("Series", false, true);
         series.addOrUpdate(1.0, 1.0);
         series.addOrUpdate(1.0, 2.0);
         series.addOrUpdate(1.0, 3.0);
@@ -369,7 +369,7 @@ public class XYSeriesTest {
      */
     @Test
     public void testAdd() {
-        XYSeries series = new XYSeries("Series", false, true);
+        XYSeries<String> series = new XYSeries<>("Series", false, true);
         series.add(5.0, 5.50);
         series.add(5.1, 5.51);
         series.add(6.0, 6.6);
@@ -391,7 +391,7 @@ public class XYSeriesTest {
      */
     @Test
     public void testSetMaximumItemCount() {
-        XYSeries s1 = new XYSeries("S1");
+        XYSeries<String> s1 = new XYSeries<>("S1");
         assertEquals(Integer.MAX_VALUE, s1.getMaximumItemCount());
         s1.setMaximumItemCount(2);
         assertEquals(2, s1.getMaximumItemCount());
@@ -407,7 +407,7 @@ public class XYSeriesTest {
      */
     @Test
     public void testSetMaximumItemCount2() {
-        XYSeries s1 = new XYSeries("S1");
+        XYSeries<String> s1 = new XYSeries<>("S1");
         s1.add(1.0, 1.1);
         s1.add(2.0, 2.2);
         s1.add(3.0, 3.3);
@@ -422,7 +422,7 @@ public class XYSeriesTest {
      */
     @Test
     public void testSetMaximumItemCount3() {
-        XYSeries s1 = new XYSeries("S1");
+        XYSeries<String> s1 = new XYSeries<>("S1");
         s1.add(1.0, 1.1);
         s1.add(2.0, 2.2);
         s1.add(3.0, 3.3);
@@ -444,7 +444,7 @@ public class XYSeriesTest {
      */
     @Test
     public void testSetMaximumItemCount4() {
-        XYSeries s1 = new XYSeries("S1");
+        XYSeries<String> s1 = new XYSeries<>("S1");
         s1.setMaximumItemCount(2);
         s1.add(1.0, 1.1);
         s1.add(2.0, 2.2);
@@ -462,7 +462,7 @@ public class XYSeriesTest {
      */
     @Test
     public void testToArray() {
-        XYSeries s = new XYSeries("S1");
+        XYSeries<String> s = new XYSeries<>("S1");
         double[][] array = s.toArray();
         assertEquals(2, array.length);
         assertEquals(0, array[0].length);
@@ -490,7 +490,7 @@ public class XYSeriesTest {
      */
     @Test
     public void testToArrayExample() {
-        XYSeries s = new XYSeries("S");
+        XYSeries<String> s = new XYSeries<>("S");
         s.add(1.0, 11.0);
         s.add(2.0, 22.0);
         s.add(3.5, 35.0);
@@ -515,7 +515,7 @@ public class XYSeriesTest {
      */
     @Test
     public void testBug1955483() {
-        XYSeries series = new XYSeries("Series", true, true);
+        XYSeries<String> series = new XYSeries<>("Series", true, true);
         series.addOrUpdate(1.0, 1.0);
         series.addOrUpdate(1.0, 2.0);
         assertEquals(1.0, series.getY(0));
@@ -528,7 +528,7 @@ public class XYSeriesTest {
      */
     @Test
     public void testDelete() {
-        XYSeries s1 = new XYSeries("S1");
+        XYSeries<String> s1 = new XYSeries<>("S1");
         s1.add(1.0, 1.1);
         s1.add(2.0, 2.2);
         s1.add(3.0, 3.3);
@@ -550,7 +550,7 @@ public class XYSeriesTest {
      */
     @Test
     public void testGetMinX() {
-        XYSeries s1 = new XYSeries("S1");
+        XYSeries<String> s1 = new XYSeries<>("S1");
         assertTrue(Double.isNaN(s1.getMinX()));
 
         s1.add(1.0, 1.1);
@@ -574,7 +574,7 @@ public class XYSeriesTest {
      */
     @Test
     public void testGetMaxX() {
-        XYSeries s1 = new XYSeries("S1");
+        XYSeries<String> s1 = new XYSeries<>("S1");
         assertTrue(Double.isNaN(s1.getMaxX()));
 
         s1.add(1.0, 1.1);
@@ -598,7 +598,7 @@ public class XYSeriesTest {
      */
     @Test
     public void testGetMinY() {
-        XYSeries s1 = new XYSeries("S1");
+        XYSeries<String> s1 = new XYSeries<>("S1");
         assertTrue(Double.isNaN(s1.getMinY()));
 
         s1.add(1.0, 1.1);
@@ -622,7 +622,7 @@ public class XYSeriesTest {
      */
     @Test
     public void testGetMaxY() {
-        XYSeries s1 = new XYSeries("S1");
+        XYSeries<String> s1 = new XYSeries<>("S1");
         assertTrue(Double.isNaN(s1.getMaxY()));
 
         s1.add(1.0, 1.1);
@@ -648,7 +648,7 @@ public class XYSeriesTest {
      */
     @Test
     public void testGetMaxY2() {
-        XYSeries series = new XYSeries(1, true, false);
+        XYSeries<Integer> series = new XYSeries<>(1, true, false);
         series.addOrUpdate(1, 20);
         series.addOrUpdate(2, 30);
         series.addOrUpdate(3, 40);
@@ -662,7 +662,7 @@ public class XYSeriesTest {
      */
     @Test
     public void testClear() {
-        XYSeries s1 = new XYSeries("S1");
+        XYSeries<String> s1 = new XYSeries<>("S1");
         s1.add(1.0, 1.1);
         s1.add(2.0, 2.2);
         s1.add(3.0, 3.3);
@@ -682,7 +682,7 @@ public class XYSeriesTest {
      */
     @Test
     public void testUpdateByIndex() {
-        XYSeries s1 = new XYSeries("S1");
+        XYSeries<String> s1 = new XYSeries<>("S1");
         s1.add(1.0, 1.1);
         s1.add(2.0, 2.2);
         s1.add(3.0, 3.3);
@@ -712,7 +712,7 @@ public class XYSeriesTest {
      */
     @Test
     public void testUpdateByIndex2() {
-        XYSeries s1 = new XYSeries("S1");
+        XYSeries<String> s1 = new XYSeries<>("S1");
         s1.add(1.0, Double.NaN);
 
         assertTrue(Double.isNaN(s1.getMinY()));
@@ -737,7 +737,7 @@ public class XYSeriesTest {
      */
     @Test
     public void testUpdateByIndex3() {
-        XYSeries s1 = new XYSeries("S1");
+        XYSeries<String> s1 = new XYSeries<>("S1");
         s1.add(1.0, 1.1);
         s1.add(2.0, 2.2);
         s1.add(3.0, 3.3);
@@ -752,7 +752,7 @@ public class XYSeriesTest {
      */
     @Test
     public void testUpdateXY() {
-        XYSeries s1 = new XYSeries("S1");
+        XYSeries<String> s1 = new XYSeries<>("S1");
         s1.add(1.0, Double.NaN);
 
         assertTrue(Double.isNaN(s1.getMinY()));
@@ -769,13 +769,13 @@ public class XYSeriesTest {
 
     @Test
     public void testSetKey() {
-        XYSeries s1 = new XYSeries("S");
+        XYSeries<String> s1 = new XYSeries<>("S");
         s1.setKey("S1");
         assertEquals("S1", s1.getKey());
         
-        XYSeriesCollection c = new XYSeriesCollection();
+        XYSeriesCollection<String> c = new XYSeriesCollection<>();
         c.addSeries(s1);
-        XYSeries s2 = new XYSeries("S2");
+        XYSeries<String> s2 = new XYSeries<>("S2");
         c.addSeries(s2);
         
         // now we should be allowed to change s1's key to anything but "S2"
