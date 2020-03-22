@@ -58,7 +58,7 @@ public class TimePeriodValuesCollectionTest {
     @Test
     public void test1161340() {
         TimePeriodValuesCollection dataset = new TimePeriodValuesCollection();
-        TimePeriodValues v1 = new TimePeriodValues("V1");
+        TimePeriodValues<String> v1 = new TimePeriodValues<>("V1");
         v1.add(new Day(11, 3, 2005), 1.2);
         v1.add(new Day(12, 3, 2005), 3.4);
         dataset.addSeries(v1);
@@ -66,7 +66,7 @@ public class TimePeriodValuesCollectionTest {
         dataset.removeSeries(v1);
         assertEquals(0, dataset.getSeriesCount());
         
-        TimePeriodValues v2 = new TimePeriodValues("V2");
+        TimePeriodValues<String> v2 = new TimePeriodValues<>("V2");
         v1.add(new Day(5, 3, 2005), 1.2);
         v1.add(new Day(6, 3, 2005), 3.4);
         dataset.addSeries(v2);
@@ -113,7 +113,7 @@ public class TimePeriodValuesCollectionTest {
     @Test
     public void testGetSeries() {
         TimePeriodValuesCollection c1 = new TimePeriodValuesCollection();
-        TimePeriodValues s1 = new TimePeriodValues("Series 1");
+        TimePeriodValues<String> s1 = new TimePeriodValues<>("Series 1");
         c1.addSeries(s1);
         assertEquals("Series 1", c1.getSeries(0).getKey());
         
@@ -149,7 +149,7 @@ public class TimePeriodValuesCollectionTest {
         assertNull(r);
         
         // check dataset with one time period
-        TimePeriodValues s1 = new TimePeriodValues("S1");
+        TimePeriodValues<String> s1 = new TimePeriodValues<>("S1");
         s1.add(new SimpleTimePeriod(1000L, 2000L), 1.0);
         dataset.addSeries(s1);
         r = dataset.getDomainBounds(false);
@@ -176,7 +176,7 @@ public class TimePeriodValuesCollectionTest {
         assertNull(r);
         
         // check dataset with one time period
-        TimePeriodValues s1 = new TimePeriodValues("S1");
+        TimePeriodValues<String> s1 = new TimePeriodValues<>("S1");
         s1.add(new SimpleTimePeriod(1000L, 2000L), 1.0);
         dataset.addSeries(s1);
         r = dataset.getDomainBounds(true);

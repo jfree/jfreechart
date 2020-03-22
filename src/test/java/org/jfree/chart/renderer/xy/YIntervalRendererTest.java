@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,18 +27,10 @@
  * --------------------------
  * YIntervalRendererTest.java
  * --------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 25-Mar-2003 : Version 1 (DG);
- * 20-Feb-2007 : Extended the testEquals() checks (DG);
- * 17-May-2007 : Added testGetLegendItemSeriesIndex() (DG);
- * 22-Apr-2008 : Added testPublicCloneable() (DG);
- * 26-May-2008 : Extended testEquals() (DG);
  *
  */
 
@@ -60,6 +52,7 @@ import org.jfree.chart.labels.StandardXYToolTipGenerator;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.ui.Layer;
 import org.jfree.chart.urls.StandardXYURLGenerator;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.xy.YIntervalSeries;
 import org.jfree.data.xy.YIntervalSeriesCollection;
@@ -163,7 +156,7 @@ public class YIntervalRendererTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         YIntervalRenderer r1 = new YIntervalRenderer();
-        YIntervalRenderer r2 = (YIntervalRenderer) r1.clone();
+        YIntervalRenderer r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -220,20 +213,20 @@ public class YIntervalRendererTest {
      */
     @Test
     public void testGetLegendItemSeriesIndex() {
-        YIntervalSeriesCollection d1 = new YIntervalSeriesCollection();
-        YIntervalSeries s1 = new YIntervalSeries("S1");
+        YIntervalSeriesCollection<String> d1 = new YIntervalSeriesCollection<>();
+        YIntervalSeries<String> s1 = new YIntervalSeries<>("S1");
         s1.add(1.0, 1.1, 1.2, 1.3);
-        YIntervalSeries s2 = new YIntervalSeries("S2");
+        YIntervalSeries<String> s2 = new YIntervalSeries<>("S2");
         s2.add(1.0, 1.1, 1.2, 1.3);
         d1.addSeries(s1);
         d1.addSeries(s2);
 
-        YIntervalSeriesCollection d2 = new YIntervalSeriesCollection();
-        YIntervalSeries s3 = new YIntervalSeries("S3");
+        YIntervalSeriesCollection<String> d2 = new YIntervalSeriesCollection<>();
+        YIntervalSeries<String> s3 = new YIntervalSeries<>("S3");
         s3.add(1.0, 1.1, 1.2, 1.3);
-        YIntervalSeries s4 = new YIntervalSeries("S4");
+        YIntervalSeries<String> s4 = new YIntervalSeries<>("S4");
         s4.add(1.0, 1.1, 1.2, 1.3);
-        YIntervalSeries s5 = new YIntervalSeries("S5");
+        YIntervalSeries<String> s5 = new YIntervalSeries<>("S5");
         s5.add(1.0, 1.1, 1.2, 1.3);
         d2.addSeries(s3);
         d2.addSeries(s4);
