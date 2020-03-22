@@ -65,11 +65,11 @@ public class TimeSeriesCollectionTest {
      */
     @Test
     public void testEquals() {
-        TimeSeriesCollection c1 = new TimeSeriesCollection();
-        TimeSeriesCollection c2 = new TimeSeriesCollection();
+        TimeSeriesCollection<String> c1 = new TimeSeriesCollection<>();
+        TimeSeriesCollection<String> c2 = new TimeSeriesCollection<>();
 
-        TimeSeries s1 = new TimeSeries("Series 1");
-        TimeSeries s2 = new TimeSeries("Series 2");
+        TimeSeries<String> s1 = new TimeSeries<>("Series 1");
+        TimeSeries<String> s2 = new TimeSeries<>("Series 2");
 
         // newly created collections should be equal
         boolean b1 = c1.equals(c2);
@@ -103,12 +103,12 @@ public class TimeSeriesCollectionTest {
      */
     @Test
     public void testRemoveSeries() {
-        TimeSeriesCollection c1 = new TimeSeriesCollection();
+        TimeSeriesCollection<String> c1 = new TimeSeriesCollection<>();
 
-        TimeSeries s1 = new TimeSeries("Series 1");
-        TimeSeries s2 = new TimeSeries("Series 2");
-        TimeSeries s3 = new TimeSeries("Series 3");
-        TimeSeries s4 = new TimeSeries("Series 4");
+        TimeSeries<String> s1 = new TimeSeries<>("Series 1");
+        TimeSeries<String> s2 = new TimeSeries<>("Series 2");
+        TimeSeries<String> s3 = new TimeSeries<>("Series 3");
+        TimeSeries<String> s4 = new TimeSeries<>("Series 4");
 
         c1.addSeries(s1);
         c1.addSeries(s2);
@@ -117,7 +117,7 @@ public class TimeSeriesCollectionTest {
 
         c1.removeSeries(s3);
 
-        TimeSeries s = c1.getSeries(2);
+        TimeSeries<String> s = c1.getSeries(2);
         boolean b1 = s.equals(s4);
         assertTrue(b1);
     }
@@ -128,11 +128,11 @@ public class TimeSeriesCollectionTest {
      */
     @Test
     public void testRemoveSeries_int() {
-        TimeSeriesCollection c1 = new TimeSeriesCollection();
-        TimeSeries s1 = new TimeSeries("Series 1");
-        TimeSeries s2 = new TimeSeries("Series 2");
-        TimeSeries s3 = new TimeSeries("Series 3");
-        TimeSeries s4 = new TimeSeries("Series 4");
+        TimeSeriesCollection<String> c1 = new TimeSeriesCollection<>();
+        TimeSeries<String> s1 = new TimeSeries<>("Series 1");
+        TimeSeries<String> s2 = new TimeSeries<>("Series 2");
+        TimeSeries<String> s3 = new TimeSeries<>("Series 3");
+        TimeSeries<String> s4 = new TimeSeries<>("Series 4");
         c1.addSeries(s1);
         c1.addSeries(s2);
         c1.addSeries(s3);
@@ -150,8 +150,8 @@ public class TimeSeriesCollectionTest {
      */
     @Test
     public void testGetSurroundingItems() {
-        TimeSeries series = new TimeSeries("Series 1");
-        TimeSeriesCollection collection = new TimeSeriesCollection(series);
+        TimeSeries<String> series = new TimeSeries<>("Series 1");
+        TimeSeriesCollection<String> collection = new TimeSeriesCollection<>(series);
         collection.setXPosition(TimePeriodAnchor.MIDDLE);
 
         // for a series with no data, we expect {-1, -1}...
@@ -222,8 +222,8 @@ public class TimeSeriesCollectionTest {
      */
     @Test
     public void testSerialization() {
-        TimeSeriesCollection c1 = new TimeSeriesCollection(createSeries());
-        TimeSeriesCollection c2 = TestUtils.serialised(c1);
+        TimeSeriesCollection<String> c1 = new TimeSeriesCollection<>(createSeries());
+        TimeSeriesCollection<String> c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 
@@ -232,9 +232,9 @@ public class TimeSeriesCollectionTest {
      *
      * @return A time series.
      */
-    private TimeSeries createSeries() {
+    private TimeSeries<String> createSeries() {
         RegularTimePeriod t = new Day();
-        TimeSeries series = new TimeSeries("Test");
+        TimeSeries<String> series = new TimeSeries<>("Test");
         series.add(t, 1.0);
         t = t.next();
         series.add(t, 2.0);
@@ -250,8 +250,8 @@ public class TimeSeriesCollectionTest {
      */
     @Test
     public void test1170825() {
-        TimeSeries s1 = new TimeSeries("Series1");
-        TimeSeriesCollection dataset = new TimeSeriesCollection();
+        TimeSeries<String> s1 = new TimeSeries<>("Series1");
+        TimeSeriesCollection<String> dataset = new TimeSeriesCollection<>();
         dataset.addSeries(s1);
         try {
             /* TimeSeries s = */ dataset.getSeries(1);
@@ -269,9 +269,9 @@ public class TimeSeriesCollectionTest {
      */
     @Test
     public void testIndexOf() {
-        TimeSeries s1 = new TimeSeries("S1");
-        TimeSeries s2 = new TimeSeries("S2");
-        TimeSeriesCollection dataset = new TimeSeriesCollection();
+        TimeSeries<String> s1 = new TimeSeries<>("S1");
+        TimeSeries<String> s2 = new TimeSeries<>("S2");
+        TimeSeriesCollection<String> dataset = new TimeSeriesCollection<>();
         assertEquals(-1, dataset.indexOf(s1));
         assertEquals(-1, dataset.indexOf(s2));
 
@@ -304,13 +304,13 @@ public class TimeSeriesCollectionTest {
         TimeZone saved = TimeZone.getDefault();
         TimeZone.setDefault(TimeZone.getTimeZone("Europe/Paris"));
 
-        TimeSeriesCollection dataset = new TimeSeriesCollection();
+        TimeSeriesCollection<String> dataset = new TimeSeriesCollection<>();
         List<String> visibleSeriesKeys = new ArrayList<>();
         Range r = DatasetUtils.findDomainBounds(dataset, visibleSeriesKeys,
                 true);
         assertNull(r);
 
-        TimeSeries s1 = new TimeSeries("S1");
+        TimeSeries<String> s1 = new TimeSeries<>("S1");
         dataset.addSeries(s1);
         visibleSeriesKeys.add("S1");
         r = DatasetUtils.findDomainBounds(dataset, visibleSeriesKeys, true);
@@ -321,7 +321,7 @@ public class TimeSeriesCollectionTest {
         assertEquals(1199142000000.0, r.getLowerBound(), EPSILON);
         assertEquals(1230764399999.0, r.getUpperBound(), EPSILON);
 
-        TimeSeries s2 = new TimeSeries("S2");
+        TimeSeries<String> s2 = new TimeSeries<>("S2");
         dataset.addSeries(s2);
         s2.add(new Year(2009), 9.0);
         s2.add(new Year(2010), 10.0);
@@ -343,11 +343,11 @@ public class TimeSeriesCollectionTest {
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        TimeSeries s1 = new TimeSeries("Series");
+        TimeSeries<String> s1 = new TimeSeries<>("Series");
         s1.add(new Year(2009), 1.1);
-        TimeSeriesCollection c1 = new TimeSeriesCollection();
+        TimeSeriesCollection<String> c1 = new TimeSeriesCollection<>();
         c1.addSeries(s1);
-        TimeSeriesCollection c2 = CloneUtils.clone(c1);
+        TimeSeriesCollection<String> c2 = CloneUtils.clone(c1);
         assertTrue(c1 != c2);
         assertTrue(c1.getClass() == c2.getClass());
         assertTrue(c1.equals(c2));
@@ -364,15 +364,15 @@ public class TimeSeriesCollectionTest {
      */
     @Test
     public void testBug3445507() {
-        TimeSeries s1 = new TimeSeries("S1");
+        TimeSeries<String> s1 = new TimeSeries<>("S1");
         s1.add(new Year(2011), null);
         s1.add(new Year(2012), null);
 
-        TimeSeries s2 = new TimeSeries("S2");
+        TimeSeries<String> s2 = new TimeSeries<>("S2");
         s2.add(new Year(2011), 5.0);
         s2.add(new Year(2012), 6.0);
 
-        TimeSeriesCollection dataset = new TimeSeriesCollection();
+        TimeSeriesCollection<String> dataset = new TimeSeriesCollection<>();
         dataset.addSeries(s1);
         dataset.addSeries(s2);
 
@@ -390,7 +390,7 @@ public class TimeSeriesCollectionTest {
      */
     @Test
     public void testGetRangeBounds() {
-        TimeSeriesCollection dataset = new TimeSeriesCollection();
+        TimeSeriesCollection<String> dataset = new TimeSeriesCollection<>();
         
         // when the dataset contains no series, we expect the range to be null
         assertNull(dataset.getRangeBounds(false));
@@ -398,7 +398,7 @@ public class TimeSeriesCollectionTest {
 
         // when the dataset contains one or more series, but those series
         // contain no items, we still expect the range to be null
-        TimeSeries s1 = new TimeSeries("S1");
+        TimeSeries<String> s1 = new TimeSeries<>("S1");
         dataset.addSeries(s1);
         assertNull(dataset.getRangeBounds(false));
         assertNull(dataset.getRangeBounds(true));
@@ -415,7 +415,7 @@ public class TimeSeriesCollectionTest {
         assertEquals(new Range(-1.0, 1.0), dataset.getRangeBounds(true));
         
         // adding a second series
-        TimeSeries s2 = new TimeSeries("S2");
+        TimeSeries<String> s2 = new TimeSeries<>("S2");
         dataset.addSeries(s2);
         assertEquals(new Range(-1.0, 1.0), dataset.getRangeBounds(false));
         assertEquals(new Range(-1.0, 1.0), dataset.getRangeBounds(true));
@@ -428,8 +428,8 @@ public class TimeSeriesCollectionTest {
         assertNull(dataset.getRangeBounds(false));
         assertNull(dataset.getRangeBounds(true));
         
-        s1 = new TimeSeries("s1");
-        s2 = new TimeSeries("s2");
+        s1 = new TimeSeries<>("s1");
+        s2 = new TimeSeries<>("s2");
         dataset.addSeries(s1);
         dataset.addSeries(s2);
         assertNull(dataset.getRangeBounds(false));
@@ -452,11 +452,11 @@ public class TimeSeriesCollectionTest {
         long end = calendar.getTimeInMillis();
         Range range = new Range(start, end);
         
-        TimeSeriesCollection collection = new TimeSeriesCollection(tzone);
+        TimeSeriesCollection<String> collection = new TimeSeriesCollection<>(tzone);
         assertNull(collection.getRangeBounds(Collections.EMPTY_LIST, range, 
                 true));
         
-        TimeSeries s1 = new TimeSeries("S1");
+        TimeSeries<String> s1 = new TimeSeries<>("S1");
         s1.add(new Day(24, 2, 2014), 10.0);
         collection.addSeries(s1);
         assertEquals(new Range(10.0, 10.0), collection.getRangeBounds(

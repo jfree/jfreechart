@@ -181,8 +181,8 @@ public class XYBlockRendererTest {
         XYBlockRenderer renderer = new XYBlockRenderer();
         assertNull(renderer.findRangeBounds(null));
 
-        XYSeriesCollection dataset = new XYSeriesCollection();
-        XYSeries series = new XYSeries("S1");
+        XYSeriesCollection<String> dataset = new XYSeriesCollection<>();
+        XYSeries<String> series = new XYSeries<>("S1");
         series.add(1.0, null);
         dataset.addSeries(series);
         Range r = renderer.findRangeBounds(dataset);
@@ -197,8 +197,8 @@ public class XYBlockRendererTest {
         XYBlockRenderer renderer = new XYBlockRenderer();
         assertNull(renderer.findRangeBounds(null));
 
-        XYSeriesCollection dataset = new XYSeriesCollection();
-        XYSeries series = new XYSeries("S1");
+        XYSeriesCollection<String> dataset = new XYSeriesCollection<>();
+        XYSeries<String> series = new XYSeries<>("S1");
         series.add(1.0, null);
         dataset.addSeries(series);
         Range r = renderer.findDomainBounds(dataset);
