@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * -----------------------------------------
  * IntervalCategoryToolTipGeneratorTest.java
  * -----------------------------------------
- * (C) Copyright 2008, 2013 by Object Refinery Limited and Contributors.
+ * (C) Copyright 2008-2020 by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 07-Oct-2008 : Version 1, based on
- *               IntervalCategoryItemLabelGeneratorTests (DG);
  *
  */
 
@@ -51,6 +46,7 @@ import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.Test;
@@ -121,8 +117,7 @@ public class IntervalCategoryToolTipGeneratorTest {
     public void testCloning() throws CloneNotSupportedException {
         IntervalCategoryToolTipGenerator g1
                 = new IntervalCategoryToolTipGenerator();
-        IntervalCategoryToolTipGenerator g2 
-                = (IntervalCategoryToolTipGenerator) g1.clone();
+        IntervalCategoryToolTipGenerator g2 = CloneUtils.clone(g1);
         assertTrue(g1 != g2);
         assertTrue(g1.getClass() == g2.getClass());
         assertTrue(g1.equals(g2));
@@ -146,8 +141,7 @@ public class IntervalCategoryToolTipGeneratorTest {
         IntervalCategoryToolTipGenerator g1
                 = new IntervalCategoryToolTipGenerator("{3} - {4}",
                 DateFormat.getInstance());
-        IntervalCategoryToolTipGenerator g2 = (IntervalCategoryToolTipGenerator)
-                TestUtils.serialised(g1);
+        IntervalCategoryToolTipGenerator g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

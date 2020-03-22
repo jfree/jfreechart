@@ -43,6 +43,7 @@ import static org.junit.Assert.assertTrue;
 import java.awt.geom.Rectangle2D;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 
 import org.jfree.data.general.DefaultPieDataset;
 import org.junit.Test;
@@ -84,7 +85,7 @@ public class StandardEntityCollectionTest {
                 new DefaultPieDataset<String>(), 0, 1, "Key", "ToolTip", "URL");
         StandardEntityCollection c1 = new StandardEntityCollection();
         c1.add(e1);
-        StandardEntityCollection c2 = (StandardEntityCollection) c1.clone();
+        StandardEntityCollection c2 = CloneUtils.clone(c1);
         assertTrue(c1 != c2);
         assertTrue(c1.getClass() == c2.getClass());
         assertTrue(c1.equals(c2));
@@ -106,8 +107,7 @@ public class StandardEntityCollectionTest {
                 new DefaultPieDataset<String>(), 0, 1, "Key", "ToolTip", "URL");
         StandardEntityCollection c1 = new StandardEntityCollection();
         c1.add(e1);
-        StandardEntityCollection c2 = (StandardEntityCollection) 
-                TestUtils.serialised(c1);
+        StandardEntityCollection c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 

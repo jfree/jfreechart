@@ -44,6 +44,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 
 import org.jfree.data.Range;
 import org.junit.Test;
@@ -81,8 +82,7 @@ public class DefaultBoxAndWhiskerXYDatasetTest {
                 "Series");
         d1.add(new Date(1L), new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0, 5.0,
                 6.0, 7.0, 8.0, new ArrayList<>()));
-        DefaultBoxAndWhiskerXYDataset d2 = (DefaultBoxAndWhiskerXYDataset) 
-                TestUtils.serialised(d1);
+        DefaultBoxAndWhiskerXYDataset d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
 
         // test independence
@@ -101,8 +101,7 @@ public class DefaultBoxAndWhiskerXYDatasetTest {
                 "Series");
         d1.add(new Date(1L), new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0, 5.0,
                 6.0, 7.0, 8.0, new ArrayList<>()));
-        DefaultBoxAndWhiskerXYDataset d2 = (DefaultBoxAndWhiskerXYDataset) 
-                d1.clone();
+        DefaultBoxAndWhiskerXYDataset d2 = CloneUtils.clone(d1);
         assertTrue(d1 != d2);
         assertTrue(d1.getClass() == d2.getClass());
         assertTrue(d1.equals(d2));

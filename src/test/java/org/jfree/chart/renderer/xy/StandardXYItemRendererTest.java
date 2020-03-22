@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,20 +27,10 @@
  * -------------------------------
  * StandardXYItemRendererTest.java
  * -------------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 25-Mar-2003 : Version 1 (DG);
- * 22-Oct-2003 : Added hashCode test (DG);
- * 08-Oct-2004 : Strengthened test for equals() method (DG);
- * 14-Mar-2007 : Added new checks in testEquals() and testCloning() (DG);
- * 17-May-2007 : Added testGetLegendItemSeriesIndex() (DG);
- * 08-Jun-2007 : Added testNoDisplayedItem() (DG);
- * 22-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
@@ -65,6 +55,7 @@ import org.jfree.chart.entity.XYItemEntity;
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.UnitType;
 import org.jfree.data.xy.XYSeries;
@@ -157,7 +148,7 @@ public class StandardXYItemRendererTest {
         StandardXYItemRenderer r1 = new StandardXYItemRenderer();
         Rectangle2D rect1 = new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0);
         r1.setLegendLine(rect1);
-        StandardXYItemRenderer r2 = (StandardXYItemRenderer) r1.clone();
+        StandardXYItemRenderer r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -189,8 +180,7 @@ public class StandardXYItemRendererTest {
     @Test
     public void testSerialization() {
         StandardXYItemRenderer r1 = new StandardXYItemRenderer();
-        StandardXYItemRenderer r2 = (StandardXYItemRenderer) 
-                TestUtils.serialised(r1);
+        StandardXYItemRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

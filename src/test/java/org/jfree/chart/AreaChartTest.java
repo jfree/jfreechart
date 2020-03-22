@@ -132,9 +132,8 @@ public class AreaChartTest {
     @Test
     public void testReplaceDataset() {
         Number[][] data = new Integer[][] {{-30, -20}, {-10, 10}, {20, 30}};
-
-        CategoryDataset newData = DatasetUtils.createCategoryDataset(
-                "S", "C", data);
+        CategoryDataset<String, String> newData = 
+                DatasetUtils.createCategoryDataset("S", "C", data);
         LocalListener l = new LocalListener();
         this.chart.addChangeListener(l);
         CategoryPlot plot = (CategoryPlot) this.chart.getPlot();
@@ -156,8 +155,8 @@ public class AreaChartTest {
      */
     private static JFreeChart createAreaChart() {
         Number[][] data = new Integer[][] {{-3, -2}, {-1, 1}, {2, 3}};
-        CategoryDataset dataset = DatasetUtils.createCategoryDataset("S",
-                "C", data);
+        CategoryDataset<String, String> dataset 
+                = DatasetUtils.createCategoryDataset("S", "C", data);
         return ChartFactory.createAreaChart("Area Chart", "Domain", "Range",
                 dataset, PlotOrientation.HORIZONTAL, true, true, true);
     }
