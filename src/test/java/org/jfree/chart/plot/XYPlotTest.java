@@ -704,7 +704,7 @@ public class XYPlotTest {
      */
     @Test
     public void testSerialization1() {
-        XYDataset data = new XYSeriesCollection();
+        XYDataset data = new XYSeriesCollection<String>();
         NumberAxis domainAxis = new NumberAxis("Domain");
         NumberAxis rangeAxis = new NumberAxis("Range");
         StandardXYItemRenderer renderer = new StandardXYItemRenderer();
@@ -741,7 +741,7 @@ public class XYPlotTest {
     @Test
     public void testSerialization3() {
 
-        XYSeriesCollection dataset = new XYSeriesCollection();
+        XYSeriesCollection<String> dataset = new XYSeriesCollection<>();
         JFreeChart chart = ChartFactory.createXYLineChart("Test Chart",
                 "Domain Axis", "Range Axis", dataset);
         JFreeChart chart2 = TestUtils.serialised(chart);
@@ -761,7 +761,7 @@ public class XYPlotTest {
     @Test
     public void testSerialization4() {
 
-        XYSeriesCollection dataset = new XYSeriesCollection();
+        XYSeriesCollection<String> dataset = new XYSeriesCollection<>();
         JFreeChart chart = ChartFactory.createXYLineChart("Test Chart",
                 "Domain Axis", "Range Axis", dataset);
         XYPlot plot = (XYPlot) chart.getPlot();
@@ -786,7 +786,7 @@ public class XYPlotTest {
      */
     @Test
     public void testSerialization5() {
-        XYSeriesCollection dataset1 = new XYSeriesCollection();
+        XYSeriesCollection<String> dataset1 = new XYSeriesCollection<>();
         NumberAxis domainAxis1 = new NumberAxis("Domain 1");
         NumberAxis rangeAxis1 = new NumberAxis("Range 1");
         StandardXYItemRenderer renderer1 = new StandardXYItemRenderer();
@@ -794,7 +794,7 @@ public class XYPlotTest {
         NumberAxis domainAxis2 = new NumberAxis("Domain 2");
         NumberAxis rangeAxis2 = new NumberAxis("Range 2");
         StandardXYItemRenderer renderer2 = new StandardXYItemRenderer();
-        XYSeriesCollection dataset2 = new XYSeriesCollection();
+        XYSeriesCollection<String> dataset2 = new XYSeriesCollection<>();
         p1.setDataset(1, dataset2);
         p1.setDomainAxis(1, domainAxis2);
         p1.setRangeAxis(1, rangeAxis2);
@@ -806,12 +806,12 @@ public class XYPlotTest {
         // too...
         NumberAxis domainAxisA = (NumberAxis) p2.getDomainAxis(0);
         NumberAxis rangeAxisA = (NumberAxis) p2.getRangeAxis(0);
-        XYSeriesCollection datasetA = (XYSeriesCollection) p2.getDataset(0);
+        XYSeriesCollection<String> datasetA = (XYSeriesCollection) p2.getDataset(0);
         StandardXYItemRenderer rendererA
             = (StandardXYItemRenderer) p2.getRenderer(0);
         NumberAxis domainAxisB = (NumberAxis) p2.getDomainAxis(1);
         NumberAxis rangeAxisB = (NumberAxis) p2.getRangeAxis(1);
-        XYSeriesCollection datasetB = (XYSeriesCollection) p2.getDataset(1);
+        XYSeriesCollection<String> datasetB = (XYSeriesCollection) p2.getDataset(1);
         StandardXYItemRenderer rendererB
             = (StandardXYItemRenderer) p2.getRenderer(1);
         assertTrue(datasetA.hasListener(p2));
@@ -829,10 +829,10 @@ public class XYPlotTest {
      */
     @Test
     public void testGetRendererForDataset() {
-        XYDataset d0 = new XYSeriesCollection();
-        XYDataset d1 = new XYSeriesCollection();
-        XYDataset d2 = new XYSeriesCollection();
-        XYDataset d3 = new XYSeriesCollection();  // not used by plot
+        XYDataset d0 = new XYSeriesCollection<String>();
+        XYDataset d1 = new XYSeriesCollection<String>();
+        XYDataset d2 = new XYSeriesCollection<String>();
+        XYDataset d3 = new XYSeriesCollection<String>();  // not used by plot
         XYItemRenderer r0 = new XYLineAndShapeRenderer();
         XYItemRenderer r2 = new XYLineAndShapeRenderer();
         XYPlot plot = new XYPlot();
@@ -875,7 +875,7 @@ public class XYPlotTest {
     private IntervalXYDataset createDataset1() {
 
         // create dataset 1...
-        TimeSeries series1 = new TimeSeries("Series 1");
+        TimeSeries<String> series1 = new TimeSeries<>("Series 1");
         series1.add(new Day(1, MonthConstants.MARCH, 2002), 12353.3);
         series1.add(new Day(2, MonthConstants.MARCH, 2002), 13734.4);
         series1.add(new Day(3, MonthConstants.MARCH, 2002), 14525.3);
@@ -892,7 +892,7 @@ public class XYPlotTest {
         series1.add(new Day(14, MonthConstants.MARCH, 2002), 14230.2);
         series1.add(new Day(15, MonthConstants.MARCH, 2002), 11235.2);
 
-        TimeSeriesCollection collection = new TimeSeriesCollection(series1);
+        TimeSeriesCollection<String> collection = new TimeSeriesCollection<>(series1);
         return collection;
 
     }
@@ -904,8 +904,8 @@ public class XYPlotTest {
      */
     private XYDataset createDataset2() {
         // create dataset 1...
-        XYSeries series = new XYSeries("Series 2");
-        XYSeriesCollection collection = new XYSeriesCollection(series);
+        XYSeries<String> series = new XYSeries<>("Series 2");
+        XYSeriesCollection<String> collection = new XYSeriesCollection<>(series);
         return collection;
 
     }
@@ -1077,7 +1077,7 @@ public class XYPlotTest {
      */
     @Test
     public void testGetDomainAxisForDataset() {
-        XYDataset dataset = new XYSeriesCollection();
+        XYDataset dataset = new XYSeriesCollection<String>();
         NumberAxis xAxis = new NumberAxis("X");
         NumberAxis yAxis = new NumberAxis("Y");
         XYItemRenderer renderer = new DefaultXYItemRenderer();
@@ -1117,7 +1117,7 @@ public class XYPlotTest {
      */
     @Test
     public void testGetRangeAxisForDataset() {
-        XYDataset dataset = new XYSeriesCollection();
+        XYDataset dataset = new XYSeriesCollection<String>();
         NumberAxis xAxis = new NumberAxis("X");
         NumberAxis yAxis = new NumberAxis("Y");
         XYItemRenderer renderer = new DefaultXYItemRenderer();
@@ -1158,7 +1158,7 @@ public class XYPlotTest {
      */
     @Test
     public void testDatasetIndices() {
-        XYDataset dataset = new XYSeriesCollection();
+        XYDataset dataset = new XYSeriesCollection<String>();
         NumberAxis xAxis = new NumberAxis("X");
         NumberAxis yAxis = new NumberAxis("Y");
         XYItemRenderer renderer = new DefaultXYItemRenderer();
@@ -1166,8 +1166,8 @@ public class XYPlotTest {
         
         assertEquals(dataset, plot.getDataset(0));
         
-        XYSeriesCollection dataset2 = new XYSeriesCollection();
-        dataset2.addSeries(new XYSeries("Series in dataset 2"));
+        XYSeriesCollection<String> dataset2 = new XYSeriesCollection<>();
+        dataset2.addSeries(new XYSeries<>("Series in dataset 2"));
         
         // we should be able to give a dataset an arbitrary index
         plot.setDataset(99, dataset2);
@@ -1180,7 +1180,7 @@ public class XYPlotTest {
     
     @Test
     public void testAxisIndices() {
-        XYDataset dataset = new XYSeriesCollection();
+        XYDataset dataset = new XYSeriesCollection<String>();
         NumberAxis xAxis = new NumberAxis("X");
         NumberAxis yAxis = new NumberAxis("Y");
         XYItemRenderer renderer = new DefaultXYItemRenderer();
@@ -1199,7 +1199,7 @@ public class XYPlotTest {
     
     @Test 
     public void testAxisLocationIndices() {
-        XYDataset dataset = new XYSeriesCollection();
+        XYDataset dataset = new XYSeriesCollection<String>();
         NumberAxis xAxis = new NumberAxis("X");
         NumberAxis yAxis = new NumberAxis("Y");
         XYItemRenderer renderer = new DefaultXYItemRenderer();
@@ -1220,7 +1220,7 @@ public class XYPlotTest {
     
     @Test 
     public void testRendererIndices() {
-        XYDataset dataset = new XYSeriesCollection();
+        XYDataset dataset = new XYSeriesCollection<String>();
         NumberAxis xAxis = new NumberAxis("X");
         NumberAxis yAxis = new NumberAxis("Y");
         XYItemRenderer renderer = new DefaultXYItemRenderer();
@@ -1239,15 +1239,15 @@ public class XYPlotTest {
 
     @Test 
     public void testGetRendererForDataset2() {
-        XYDataset dataset = new XYSeriesCollection();
+        XYDataset dataset = new XYSeriesCollection<String>();
         NumberAxis xAxis = new NumberAxis("X");
         NumberAxis yAxis = new NumberAxis("Y");
         XYItemRenderer renderer = new DefaultXYItemRenderer();
         XYPlot plot = new XYPlot(dataset, xAxis, yAxis, renderer);
 
         // add a second dataset
-        XYSeriesCollection dataset2 = new XYSeriesCollection();
-        dataset2.addSeries(new XYSeries("Series in dataset 2"));
+        XYSeriesCollection<String> dataset2 = new XYSeriesCollection<>();
+        dataset2.addSeries(new XYSeries<>("Series in dataset 2"));
         plot.setDataset(99, dataset2);
        
         // by default, the renderer with index 0 is used
@@ -1262,7 +1262,7 @@ public class XYPlotTest {
     
     @Test
     public void testMapDatasetToDomainAxis() {
-        XYDataset dataset = new XYSeriesCollection();
+        XYDataset dataset = new XYSeriesCollection<String>();
         NumberAxis xAxis = new NumberAxis("X");
         NumberAxis yAxis = new NumberAxis("Y");
         XYItemRenderer renderer = new DefaultXYItemRenderer();
@@ -1272,8 +1272,8 @@ public class XYPlotTest {
         plot.setDomainAxis(11, xAxis2);
         
         // add a second dataset
-        XYSeriesCollection dataset2 = new XYSeriesCollection();
-        dataset2.addSeries(new XYSeries("Series in dataset 2"));
+        XYSeriesCollection<String> dataset2 = new XYSeriesCollection<>();
+        dataset2.addSeries(new XYSeries<>("Series in dataset 2"));
         plot.setDataset(99, dataset);    
         
         assertEquals(xAxis, plot.getDomainAxisForDataset(99));
@@ -1285,7 +1285,7 @@ public class XYPlotTest {
 
     @Test
     public void testMapDatasetToRangeAxis() {
-        XYDataset dataset = new XYSeriesCollection();
+        XYDataset dataset = new XYSeriesCollection<String>();
         NumberAxis xAxis = new NumberAxis("X");
         NumberAxis yAxis = new NumberAxis("Y");
         XYItemRenderer renderer = new DefaultXYItemRenderer();
@@ -1295,8 +1295,8 @@ public class XYPlotTest {
         plot.setRangeAxis(22, yAxis2);
         
         // add a second dataset
-        XYSeriesCollection dataset2 = new XYSeriesCollection();
-        dataset2.addSeries(new XYSeries("Series in dataset 2"));
+        XYSeriesCollection<String> dataset2 = new XYSeriesCollection<>();
+        dataset2.addSeries(new XYSeries<>("Series in dataset 2"));
         plot.setDataset(99, dataset);    
         
         assertEquals(yAxis, plot.getRangeAxisForDataset(99));
@@ -1308,15 +1308,15 @@ public class XYPlotTest {
     
     @Test
     public void testDomainMarkerIndices() {
-        XYDataset dataset = new XYSeriesCollection();
+        XYDataset dataset = new XYSeriesCollection<String>();
         NumberAxis xAxis = new NumberAxis("X");
         NumberAxis yAxis = new NumberAxis("Y");
         XYItemRenderer renderer = new DefaultXYItemRenderer();
         XYPlot plot = new XYPlot(dataset, xAxis, yAxis, renderer);
         
         // add a second dataset, plotted against a second x axis
-        XYSeriesCollection dataset2 = new XYSeriesCollection();
-        dataset2.addSeries(new XYSeries("Series in dataset 2"));
+        XYSeriesCollection<String> dataset2 = new XYSeriesCollection<>();
+        dataset2.addSeries(new XYSeries<>("Series in dataset 2"));
         plot.setDataset(99, dataset);    
         NumberAxis xAxis2 = new NumberAxis("X2");
         plot.setDomainAxis(1, xAxis2);
@@ -1332,15 +1332,15 @@ public class XYPlotTest {
 
     @Test
     public void testRangeMarkerIndices() {
-        XYDataset dataset = new XYSeriesCollection();
+        XYDataset dataset = new XYSeriesCollection<String>();
         NumberAxis xAxis = new NumberAxis("X");
         NumberAxis yAxis = new NumberAxis("Y");
         XYItemRenderer renderer = new DefaultXYItemRenderer();
         XYPlot plot = new XYPlot(dataset, xAxis, yAxis, renderer);
         
         // add a second dataset, plotted against a second axis
-        XYSeriesCollection dataset2 = new XYSeriesCollection();
-        dataset2.addSeries(new XYSeries("Series in dataset 2"));
+        XYSeriesCollection<String> dataset2 = new XYSeriesCollection<>();
+        dataset2.addSeries(new XYSeries<>("Series in dataset 2"));
         plot.setDataset(99, dataset);    
         NumberAxis yAxis2 = new NumberAxis("Y2");
         plot.setRangeAxis(1, yAxis2);
@@ -1358,7 +1358,7 @@ public class XYPlotTest {
      */
     @Test
     public void testGetDataRange() {
-        XYSeriesCollection dataset = new XYSeriesCollection();
+        XYSeriesCollection<String> dataset = new XYSeriesCollection<>();
         NumberAxis xAxis = new NumberAxis("X");
         NumberAxis yAxis = new NumberAxis("Y");
         XYItemRenderer renderer = new DefaultXYItemRenderer();
@@ -1366,7 +1366,7 @@ public class XYPlotTest {
         assertEquals(null, plot.getDataRange(xAxis));
         assertEquals(null, plot.getDataRange(yAxis));
         
-        XYSeries s1 = new XYSeries("S1");
+        XYSeries<String> s1 = new XYSeries<>("S1");
         s1.add(1.0, 2.0);
         dataset.addSeries(s1);
         assertEquals(new Range(1.0, 1.0), plot.getDataRange(xAxis));
@@ -1386,8 +1386,8 @@ public class XYPlotTest {
      */
     @Test
     public void testGetDataRangeWithMultipleDatasets() {
-        XYSeriesCollection dataset1 = new XYSeriesCollection();
-        XYSeriesCollection dataset2 = new XYSeriesCollection();
+        XYSeriesCollection<String> dataset1 = new XYSeriesCollection<>();
+        XYSeriesCollection<String> dataset2 = new XYSeriesCollection<>();
         NumberAxis xAxis = new NumberAxis("X");
         NumberAxis yAxis = new NumberAxis("Y");
         XYItemRenderer renderer = new DefaultXYItemRenderer();
@@ -1398,13 +1398,13 @@ public class XYPlotTest {
         assertEquals(null, plot.getDataRange(xAxis));
         assertEquals(null, plot.getDataRange(yAxis));
         
-        XYSeries s1 = new XYSeries("S1");
+        XYSeries<String> s1 = new XYSeries<>("S1");
         s1.add(1.0, 2.0);
         dataset1.addSeries(s1);
         assertEquals(new Range(1.0, 1.0), plot.getDataRange(xAxis));
         assertEquals(new Range(2.0, 2.0), plot.getDataRange(yAxis));
         
-        XYSeries s2 = new XYSeries("S2");
+        XYSeries<String> s2 = new XYSeries<>("S2");
         s2.add(5.0, 10.0);
         dataset2.addSeries(s2);
         assertEquals(new Range(1.0, 5.0), plot.getDataRange(xAxis));

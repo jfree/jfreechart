@@ -86,15 +86,15 @@ public class MovingAverage {
      * result is an empty series.
      *
      * @param source  the source series.
-     * @param name  the name of the new series.
+     * @param seriesKey  the series key ({@code null} not permitted).
      * @param periodCount  the number of periods used in the average
      *                     calculation.
      * @param skip  the number of initial periods to skip.
      *
      * @return The moving average series.
      */
-    public static TimeSeries createMovingAverage(TimeSeries source,
-            String name, int periodCount, int skip) {
+    public static <S extends Comparable<S>> TimeSeries<S> createMovingAverage(
+            TimeSeries<S> source, S name, int periodCount, int skip) {
 
         Args.nullNotPermitted(source, "source");
         if (periodCount < 1) {
@@ -102,8 +102,7 @@ public class MovingAverage {
                     + "than or equal to 1.");
         }
 
-        TimeSeries result = new TimeSeries(name);
-
+        TimeSeries<S> result = new TimeSeries<>(name);
         if (source.getItemCount() > 0) {
 
             // if the initial averaging period is to be excluded, then
@@ -154,9 +153,7 @@ public class MovingAverage {
 
             }
         }
-
         return result;
-
     }
 
     /**
@@ -168,14 +165,14 @@ public class MovingAverage {
      * Developed by Benoit Xhenseval (www.ObjectLab.co.uk).
      *
      * @param source  the source series.
-     * @param name  the name of the new series.
+     * @param seriesKey  the series key ({@code null} not permitted).
      * @param pointCount  the number of POINTS used in the average calculation
      *                    (not periods!)
      *
      * @return The moving average series.
      */
-    public static TimeSeries createPointMovingAverage(TimeSeries source,
-            String name, int pointCount) {
+    public static <S extends Comparable<S>> TimeSeries<S> createPointMovingAverage(
+            TimeSeries<S> source, S name, int pointCount) {
 
         Args.nullNotPermitted(source, "source");
         if (pointCount < 2) {
@@ -183,7 +180,7 @@ public class MovingAverage {
                     + "than or equal to 2.");
         }
 
-        TimeSeries result = new TimeSeries(name);
+        TimeSeries<S> result = new TimeSeries<>(name);
         double rollingSumForPeriod = 0.0;
         for (int i = 0; i < source.getItemCount(); i++) {
             // get the current data item...

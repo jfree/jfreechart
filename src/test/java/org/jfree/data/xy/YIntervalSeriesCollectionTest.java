@@ -56,24 +56,24 @@ public class YIntervalSeriesCollectionTest {
      */
     @Test
     public void testEquals() {
-        YIntervalSeriesCollection c1 = new YIntervalSeriesCollection();
-        YIntervalSeriesCollection c2 = new YIntervalSeriesCollection();
+        YIntervalSeriesCollection<String> c1 = new YIntervalSeriesCollection<>();
+        YIntervalSeriesCollection<String> c2 = new YIntervalSeriesCollection<>();
         assertEquals(c1, c2);
 
         // add a series
-        YIntervalSeries s1 = new YIntervalSeries("Series");
+        YIntervalSeries<String> s1 = new YIntervalSeries<>("Series");
         s1.add(1.0, 1.1, 1.2, 1.3);
         c1.addSeries(s1);
         assertFalse(c1.equals(c2));
-        YIntervalSeries s2 = new YIntervalSeries("Series");
+        YIntervalSeries<String> s2 = new YIntervalSeries<>("Series");
         s2.add(1.0, 1.1, 1.2, 1.3);
         c2.addSeries(s2);
         assertTrue(c1.equals(c2));
 
         // add an empty series
-        c1.addSeries(new YIntervalSeries("Empty Series"));
+        c1.addSeries(new YIntervalSeries<>("Empty Series"));
         assertFalse(c1.equals(c2));
-        c2.addSeries(new YIntervalSeries("Empty Series"));
+        c2.addSeries(new YIntervalSeries<>("Empty Series"));
         assertTrue(c1.equals(c2));
     }
 
@@ -82,11 +82,11 @@ public class YIntervalSeriesCollectionTest {
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        YIntervalSeriesCollection c1 = new YIntervalSeriesCollection();
-        YIntervalSeries s1 = new YIntervalSeries("Series");
+        YIntervalSeriesCollection<String> c1 = new YIntervalSeriesCollection<>();
+        YIntervalSeries<String> s1 = new YIntervalSeries<>("Series");
         s1.add(1.0, 1.1, 1.2, 1.3);
         c1.addSeries(s1);
-        YIntervalSeriesCollection c2 = CloneUtils.clone(c1);
+        YIntervalSeriesCollection<String> c2 = CloneUtils.clone(c1);
         assertTrue(c1 != c2);
         assertTrue(c1.getClass() == c2.getClass());
         assertTrue(c1.equals(c2));
@@ -101,7 +101,7 @@ public class YIntervalSeriesCollectionTest {
      */
     @Test
     public void testPublicCloneable() {
-        YIntervalSeriesCollection c1 = new YIntervalSeriesCollection();
+        YIntervalSeriesCollection<String> c1 = new YIntervalSeriesCollection<>();
         assertTrue(c1 instanceof PublicCloneable);
     }
 
@@ -110,9 +110,10 @@ public class YIntervalSeriesCollectionTest {
      */
     @Test
     public void testSerialization() {
-        YIntervalSeriesCollection c1 = new YIntervalSeriesCollection();
-        YIntervalSeries s1 = new YIntervalSeries("Series");
+        YIntervalSeriesCollection<String> c1 = new YIntervalSeriesCollection<>();
+        YIntervalSeries<String> s1 = new YIntervalSeries<>("Series");
         s1.add(1.0, 1.1, 1.2, 1.3);
+        c1.addSeries(s1);
         YIntervalSeriesCollection c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
@@ -122,8 +123,8 @@ public class YIntervalSeriesCollectionTest {
      */
     @Test
     public void testRemoveSeries() {
-        YIntervalSeriesCollection c = new YIntervalSeriesCollection();
-        YIntervalSeries s1 = new YIntervalSeries("s1");
+        YIntervalSeriesCollection<String> c = new YIntervalSeriesCollection<>();
+        YIntervalSeries<String> s1 = new YIntervalSeries<>("s1");
         c.addSeries(s1);
         c.removeSeries(0);
         assertEquals(0, c.getSeriesCount());
@@ -154,8 +155,8 @@ public class YIntervalSeriesCollectionTest {
      */
     @Test
     public void test1170825() {
-        YIntervalSeries s1 = new YIntervalSeries("Series1");
-        YIntervalSeriesCollection dataset = new YIntervalSeriesCollection();
+        YIntervalSeries<String> s1 = new YIntervalSeries<>("Series1");
+        YIntervalSeriesCollection<String> dataset = new YIntervalSeriesCollection<>();
         dataset.addSeries(s1);
         try {
             /* XYSeries s = */ dataset.getSeries(1);

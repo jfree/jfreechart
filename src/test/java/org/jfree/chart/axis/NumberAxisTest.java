@@ -51,6 +51,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.data.RangeType;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.xy.XYSeries;
@@ -68,7 +69,7 @@ public class NumberAxisTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         NumberAxis a1 = new NumberAxis("Test");
-        NumberAxis a2 = (NumberAxis) a1.clone();
+        NumberAxis a2 = CloneUtils.clone(a1);
         assertTrue(a1 != a2);
         assertTrue(a1.getClass() == a2.getClass());
         assertTrue(a1.equals(a2));
@@ -288,11 +289,11 @@ public class NumberAxisTest {
      */
     @Test
     public void testXYAutoRange1() {
-        XYSeries series = new XYSeries("Series 1");
+        XYSeries<String> series = new XYSeries<>("Series 1");
         series.add(1.0, 1.0);
         series.add(2.0, 2.0);
         series.add(3.0, 3.0);
-        XYSeriesCollection dataset = new XYSeriesCollection();
+        XYSeriesCollection<String> dataset = new XYSeriesCollection<>();
         dataset.addSeries(series);
         JFreeChart chart = ChartFactory.createScatterPlot("Test", "X", "Y",
                 dataset);
@@ -309,11 +310,11 @@ public class NumberAxisTest {
      */
     @Test
     public void testXYAutoRange2() {
-        XYSeries series = new XYSeries("Series 1");
+        XYSeries<String> series = new XYSeries<>("Series 1");
         series.add(1.0, 1.0);
         series.add(2.0, 2.0);
         series.add(3.0, 3.0);
-        XYSeriesCollection dataset = new XYSeriesCollection();
+        XYSeriesCollection<String> dataset = new XYSeriesCollection<>();
         dataset.addSeries(series);
         JFreeChart chart = ChartFactory.createScatterPlot("Test", "X", "Y",
                 dataset);

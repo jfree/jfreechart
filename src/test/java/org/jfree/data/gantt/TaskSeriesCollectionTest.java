@@ -59,11 +59,11 @@ public class TaskSeriesCollectionTest {
      */
     private TaskSeriesCollection createCollection1() {
         TaskSeriesCollection result = new TaskSeriesCollection();
-        TaskSeries s1 = new TaskSeries("S1");
+        TaskSeries<String> s1 = new TaskSeries<>("S1");
         s1.add(new Task("Task 1", new Date(1), new Date(2)));
         s1.add(new Task("Task 2", new Date(3), new Date(4)));
         result.add(s1);
-        TaskSeries s2 = new TaskSeries("S2");
+        TaskSeries<String> s2 = new TaskSeries<>("S2");
         s2.add(new Task("Task 3", new Date(5), new Date(6)));
         result.add(s2);
         return result;
@@ -76,7 +76,7 @@ public class TaskSeriesCollectionTest {
      */
     private TaskSeriesCollection createCollection2() {
         TaskSeriesCollection result = new TaskSeriesCollection();
-        TaskSeries s1 = new TaskSeries("S1");
+        TaskSeries<String> s1 = new TaskSeries<>("S1");
         Task t1 = new Task("Task 1", new Date(10), new Date(20));
         t1.addSubtask(new Task("Task 1A", new Date(10), new Date(15)));
         t1.addSubtask(new Task("Task 1B", new Date(16), new Date(20)));
@@ -88,7 +88,7 @@ public class TaskSeriesCollectionTest {
         t2.setPercentComplete(0.20);
         s1.add(t2);
         result.add(s1);
-        TaskSeries s2 = new TaskSeries("S2");
+        TaskSeries<String> s2 = new TaskSeries<>("S2");
         Task t3 = new Task("Task 3", new Date(50), new Date(60));
         t3.addSubtask(new Task("Task 3A", new Date(50), new Date(55)));
         t3.addSubtask(new Task("Task 3B", new Date(56), new Date(60)));
@@ -119,7 +119,7 @@ public class TaskSeriesCollectionTest {
         sub5.setPercentComplete(0.555);
         sub6.setPercentComplete(0.666);
 
-        TaskSeries seriesA = new TaskSeries("Series A");
+        TaskSeries<String> seriesA = new TaskSeries<>("Series A");
         Task taskA1 = new Task("Task 1", new SimpleTimePeriod(new Date(100),
                 new Date(200)));
         taskA1.setPercentComplete(0.1);
@@ -132,7 +132,7 @@ public class TaskSeriesCollectionTest {
         seriesA.add(taskA1);
         seriesA.add(taskA2);
 
-        TaskSeries seriesB = new TaskSeries("Series B");
+        TaskSeries<String> seriesB = new TaskSeries<>("Series B");
         // note that we don't define taskB1
         Task taskB2 = new Task("Task 2", new SimpleTimePeriod(new Date(2220),
                 new Date(3350)));
@@ -276,7 +276,7 @@ public class TaskSeriesCollectionTest {
     @Test
     public void testGetStartValue3() {
         TaskSeriesCollection c = new TaskSeriesCollection();
-        TaskSeries s = new TaskSeries("Series 1");
+        TaskSeries<String> s = new TaskSeries<>("Series 1");
         s.add(new Task("Task with null duration", null));
         c.add(s);
         Number millis = c.getStartValue("Series 1", "Task with null duration");
@@ -344,7 +344,7 @@ public class TaskSeriesCollectionTest {
     @Test
     public void testGetEndValue3() {
         TaskSeriesCollection c = new TaskSeriesCollection();
-        TaskSeries s = new TaskSeries("Series 1");
+        TaskSeries<String> s = new TaskSeries<>("Series 1");
         s.add(new Task("Task with null duration", null));
         c.add(s);
         Number millis = c.getEndValue("Series 1", "Task with null duration");
@@ -422,20 +422,20 @@ public class TaskSeriesCollectionTest {
     @Test
     public void testEquals() {
 
-        TaskSeries s1 = new TaskSeries("S");
+        TaskSeries<String> s1 = new TaskSeries<>("S");
         s1.add(new Task("T1", new Date(1), new Date(2)));
         s1.add(new Task("T2", new Date(11), new Date(22)));
-        TaskSeries s2 = new TaskSeries("S");
+        TaskSeries<String> s2 = new TaskSeries<>("S");
         s2.add(new Task("T1", new Date(1), new Date(2)));
         s2.add(new Task("T2", new Date(11), new Date(22)));
         TaskSeriesCollection c1 = new TaskSeriesCollection();
         c1.add(s1);
         c1.add(s2);
 
-        TaskSeries s1b = new TaskSeries("S");
+        TaskSeries<String> s1b = new TaskSeries<>("S");
         s1b.add(new Task("T1", new Date(1), new Date(2)));
         s1b.add(new Task("T2", new Date(11), new Date(22)));
-        TaskSeries s2b = new TaskSeries("S");
+        TaskSeries<String> s2b = new TaskSeries<>("S");
         s2b.add(new Task("T1", new Date(1), new Date(2)));
         s2b.add(new Task("T2", new Date(11), new Date(22)));
         TaskSeriesCollection c2 = new TaskSeriesCollection();
@@ -453,10 +453,10 @@ public class TaskSeriesCollectionTest {
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        TaskSeries s1 = new TaskSeries("S1");
+        TaskSeries<String> s1 = new TaskSeries<>("S1");
         s1.add(new Task("T1", new Date(1), new Date(2)));
         s1.add(new Task("T2", new Date(11), new Date(22)));
-        TaskSeries s2 = new TaskSeries("S2");
+        TaskSeries<String> s2 = new TaskSeries<>("S2");
         s2.add(new Task("T1", new Date(33), new Date(44)));
         s2.add(new Task("T2", new Date(55), new Date(66)));
         TaskSeriesCollection c1 = new TaskSeriesCollection();
@@ -482,10 +482,10 @@ public class TaskSeriesCollectionTest {
      */
     @Test
     public void testSerialization() {
-        TaskSeries s1 = new TaskSeries("S");
+        TaskSeries<String> s1 = new TaskSeries<>("S");
         s1.add(new Task("T1", new Date(1), new Date(2)));
         s1.add(new Task("T2", new Date(11), new Date(22)));
-        TaskSeries s2 = new TaskSeries("S");
+        TaskSeries<String> s2 = new TaskSeries<>("S");
         s2.add(new Task("T1", new Date(1), new Date(2)));
         s2.add(new Task("T2", new Date(11), new Date(22)));
         TaskSeriesCollection c1 = new TaskSeriesCollection();
@@ -501,7 +501,7 @@ public class TaskSeriesCollectionTest {
     @Test
     public void test697153() {
 
-        TaskSeries s1 = new TaskSeries("S1");
+        TaskSeries<String> s1 = new TaskSeries<>("S1");
         s1.add(new Task("Task 1", new SimpleTimePeriod(new Date(),
                 new Date())));
         s1.add(new Task("Task 2", new SimpleTimePeriod(new Date(),
@@ -509,7 +509,7 @@ public class TaskSeriesCollectionTest {
         s1.add(new Task("Task 3", new SimpleTimePeriod(new Date(),
                 new Date())));
 
-        TaskSeries s2 = new TaskSeries("S2");
+        TaskSeries<String> s2 = new TaskSeries<>("S2");
         s2.add(new Task("Task 2", new SimpleTimePeriod(new Date(),
                 new Date())));
         s2.add(new Task("Task 3", new SimpleTimePeriod(new Date(),
@@ -534,7 +534,7 @@ public class TaskSeriesCollectionTest {
      */
     @Test
     public void test800324() {
-        TaskSeries s1 = new TaskSeries("S1");
+        TaskSeries<String> s1 = new TaskSeries<>("S1");
         s1.add(new Task("Task 1", new SimpleTimePeriod(new Date(),
                 new Date())));
         s1.add(new Task("Task 2", new SimpleTimePeriod(new Date(),
@@ -591,8 +591,8 @@ public class TaskSeriesCollectionTest {
      */
     @Test
     public void testGetSeries() {
-        TaskSeries s1 = new TaskSeries("S1");
-        TaskSeries s2 = new TaskSeries("S2");
+        TaskSeries<String> s1 = new TaskSeries<>("S1");
+        TaskSeries<String> s2 = new TaskSeries<>("S2");
         TaskSeriesCollection c = new TaskSeriesCollection();
         c.add(s1);
 
@@ -620,7 +620,7 @@ public class TaskSeriesCollectionTest {
     @Test
     public void testRemove() {
         TaskSeriesCollection c = new TaskSeriesCollection();
-        TaskSeries s1 = new TaskSeries("S1");
+        TaskSeries<String> s1 = new TaskSeries<>("S1");
         c.add(s1);
         assertEquals("S1", c.getSeries(0).getKey());
         c.remove(0);
