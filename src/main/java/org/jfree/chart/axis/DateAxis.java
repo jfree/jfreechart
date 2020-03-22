@@ -53,6 +53,7 @@ import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -1413,10 +1414,10 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      * @return A list of ticks.
      */
     @Override
-    public List refreshTicks(Graphics2D g2, AxisState state, 
+    public List<? extends Tick> refreshTicks(Graphics2D g2, AxisState state, 
             Rectangle2D dataArea, RectangleEdge edge) {
 
-        List result = null;
+        List<? extends Tick> result = null;
         if (RectangleEdge.isTopOrBottom(edge)) {
             result = refreshTicksHorizontal(g2, dataArea, edge);
         }
@@ -1458,10 +1459,10 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      *
      * @return A list of ticks.
      */
-    protected List refreshTicksHorizontal(Graphics2D g2,
+    protected List<? extends Tick> refreshTicksHorizontal(Graphics2D g2,
                 Rectangle2D dataArea, RectangleEdge edge) {
 
-        List result = new java.util.ArrayList();
+        List<DateTick> result = new ArrayList<>();
 
         Font tickLabelFont = getTickLabelFont();
         g2.setFont(tickLabelFont);
@@ -1533,7 +1534,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
                     }
                 }
 
-                Tick tick = new DateTick(tickDate, tickLabel, anchor,
+                DateTick tick = new DateTick(tickDate, tickLabel, anchor,
                         rotationAnchor, angle);
                 result.add(tick);
                 hasRolled = false;
@@ -1574,10 +1575,10 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      *
      * @return A list of ticks.
      */
-    protected List refreshTicksVertical(Graphics2D g2,
+    protected List<? extends Tick> refreshTicksVertical(Graphics2D g2,
             Rectangle2D dataArea, RectangleEdge edge) {
 
-        List result = new java.util.ArrayList();
+        List<DateTick> result = new ArrayList<>();
 
         Font tickLabelFont = getTickLabelFont();
         g2.setFont(tickLabelFont);
@@ -1648,7 +1649,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
                     }
                 }
 
-                Tick tick = new DateTick(tickDate, tickLabel, anchor,
+                DateTick tick = new DateTick(tickDate, tickLabel, anchor,
                         rotationAnchor, angle);
                 result.add(tick);
                 hasRolled = false;

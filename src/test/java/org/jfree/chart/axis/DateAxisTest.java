@@ -72,7 +72,9 @@ import org.jfree.data.time.Year;
 public class DateAxisTest {
 
     static class MyDateAxis extends DateAxis {
-
+        
+        private static final long serialVersionUID = 1L;
+        
         /**
          * Creates a new instance.
          *
@@ -1131,7 +1133,7 @@ public class DateAxisTest {
         Graphics2D g2 = image.createGraphics();
         Rectangle2D area = new Rectangle2D.Double(0.0, 0.0, 200, 100);
         axis.setTickMarkPosition(DateTickMarkPosition.END);
-        List ticks = axis.refreshTicks(g2, new AxisState(), area,
+        List<? extends Tick> ticks = axis.refreshTicks(g2, new AxisState(), area,
                 RectangleEdge.BOTTOM);
         assertEquals(3, ticks.size());
         DateTick t1 = (DateTick) ticks.get(0);
