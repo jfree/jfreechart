@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * ---------------------------------
  * MeanAndStandardDeviationTest.java
  * ---------------------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 05-Feb-2005 : Version 1 (DG);
  *
  */
 
@@ -88,8 +84,7 @@ public class MeanAndStandardDeviationTest {
     @Test
     public void testSerialization() {
         MeanAndStandardDeviation m1 = new MeanAndStandardDeviation(1.2, 3.4);
-        MeanAndStandardDeviation m2 = (MeanAndStandardDeviation) 
-                TestUtils.serialised(m1);
+        MeanAndStandardDeviation m2 = TestUtils.serialised(m1);
         assertEquals(m1, m2);
     }
 }

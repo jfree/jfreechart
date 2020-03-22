@@ -287,7 +287,7 @@ public class TimeSeriesCollectionTest {
         assertEquals(-1, dataset.indexOf(s1));
         assertEquals(0, dataset.indexOf(s2));
 
-        TimeSeries s2b = new TimeSeries("S2");
+        TimeSeries<String> s2b = new TimeSeries<>("S2");
         assertEquals(0, dataset.indexOf(s2b));
     }
 

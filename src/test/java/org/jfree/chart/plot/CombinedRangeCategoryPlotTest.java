@@ -122,7 +122,7 @@ public class CombinedRangeCategoryPlotTest implements ChartChangeListener {
         plot.add(plot2);
         plot.add(plot3);
         plot.remove(plot2);
-        List plots = plot.getSubplots();
+        List<CategoryPlot> plots = plot.getSubplots();
         assertEquals(2, plots.size());
     }
 

@@ -51,6 +51,7 @@ import java.util.Date;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.statistics.BoxAndWhiskerItem;
 import org.jfree.data.statistics.DefaultBoxAndWhiskerXYDataset;
@@ -119,7 +120,7 @@ public class XYBoxAndWhiskerRendererTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         XYBoxAndWhiskerRenderer r1 = new XYBoxAndWhiskerRenderer();
-        XYBoxAndWhiskerRenderer r2 = (XYBoxAndWhiskerRenderer) r1.clone();
+        XYBoxAndWhiskerRenderer r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -140,8 +141,7 @@ public class XYBoxAndWhiskerRendererTest {
     @Test
     public void testSerialization() {
         XYBoxAndWhiskerRenderer r1 = new XYBoxAndWhiskerRenderer();
-        XYBoxAndWhiskerRenderer r2 = (XYBoxAndWhiskerRenderer) 
-                TestUtils.serialised(r1);
+        XYBoxAndWhiskerRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

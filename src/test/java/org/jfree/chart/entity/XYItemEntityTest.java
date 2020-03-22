@@ -59,9 +59,11 @@ public class XYItemEntityTest {
     @Test
     public void testEquals() {
         XYItemEntity e1 = new XYItemEntity(new Rectangle2D.Double(1.0, 2.0,
-                3.0, 4.0), new TimeSeriesCollection(), 1, 9, "ToolTip", "URL");
+                3.0, 4.0), new TimeSeriesCollection<String>(), 1, 9, "ToolTip", 
+                "URL");
         XYItemEntity e2 = new XYItemEntity(new Rectangle2D.Double(1.0, 2.0,
-                3.0, 4.0), new TimeSeriesCollection(), 1, 9, "ToolTip", "URL");
+                3.0, 4.0), new TimeSeriesCollection<String>(), 1, 9, "ToolTip", 
+                "URL");
         assertTrue(e1.equals(e2));
 
         e1.setArea(new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0));
@@ -97,7 +99,8 @@ public class XYItemEntityTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         XYItemEntity e1 = new XYItemEntity(new Rectangle2D.Double(1.0, 2.0,
-                3.0, 4.0), new TimeSeriesCollection(), 1, 9, "ToolTip", "URL");
+                3.0, 4.0), new TimeSeriesCollection<String>(), 1, 9, "ToolTip", 
+                "URL");
         XYItemEntity e2 = CloneUtils.clone(e1);
         assertTrue(e1 != e2);
         assertTrue(e1.getClass() == e2.getClass());
@@ -110,7 +113,8 @@ public class XYItemEntityTest {
     @Test
     public void testSerialization() {
         XYItemEntity e1 = new XYItemEntity(new Rectangle2D.Double(1.0, 2.0,
-                3.0, 4.0), new TimeSeriesCollection(), 1, 9, "ToolTip", "URL");
+                3.0, 4.0), new TimeSeriesCollection<String>(), 1, 9, "ToolTip", 
+                "URL");
         XYItemEntity e2 = TestUtils.serialised(e1);
         assertEquals(e1, e2);
     }

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * -------------------
  * GanttChartTest.java
  * -------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited.
+ * (C) Copyright 2005-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 12-Apr-2005 : Version 1 (DG);
  *
  */
 
@@ -161,15 +157,8 @@ public class GanttChartTest  {
      * @return The chart.
      */
     private static JFreeChart createGanttChart() {
-
-        return ChartFactory.createGanttChart(
-            "Gantt Chart",
-            "Domain", "Range",
-            null,
-            true,     // include legend
-            true,
-            true
-        );
+        return ChartFactory.createGanttChart("Gantt Chart", "Domain", "Range",
+               null, true, true, true);
     }
 
     /**
@@ -179,7 +168,7 @@ public class GanttChartTest  {
      */
     public static IntervalCategoryDataset createDataset() {
 
-        TaskSeries s1 = new TaskSeries("Scheduled");
+        TaskSeries<String> s1 = new TaskSeries<>("Scheduled");
         s1.add(new Task("Write Proposal",
                new SimpleTimePeriod(date(1, Calendar.APRIL, 2001),
                                     date(5, Calendar.APRIL, 2001))));
@@ -217,7 +206,7 @@ public class GanttChartTest  {
                new SimpleTimePeriod(date(28, Calendar.NOVEMBER, 2001),
                                     date(30, Calendar.NOVEMBER, 2001))));
 
-        TaskSeries s2 = new TaskSeries("Actual");
+        TaskSeries<String> s2 = new TaskSeries<>("Actual");
         s2.add(new Task("Write Proposal",
                new SimpleTimePeriod(date(1, Calendar.APRIL, 2001),
                                     date(5, Calendar.APRIL, 2001))));
@@ -272,13 +261,13 @@ public class GanttChartTest  {
      * @return a date.
      */
     private static Date date(int day, int month, int year) {
-
         Calendar calendar = Calendar.getInstance();
         calendar.set(year, month, day);
         Date result = calendar.getTime();
         return result;
+    }    
 
-    }    /**
+    /**
      * A chart change listener.
      *
      */

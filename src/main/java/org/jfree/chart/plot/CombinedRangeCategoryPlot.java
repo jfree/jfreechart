@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,36 +27,10 @@
  * ------------------------------
  * CombinedRangeCategoryPlot.java
  * ------------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited.
+ * (C) Copyright 2003-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Nicolas Brodu;
- *
- * Changes:
- * --------
- * 16-May-2003 : Version 1 (DG);
- * 08-Aug-2003 : Adjusted totalWeight in remove() method (DG);
- * 19-Aug-2003 : Implemented Cloneable (DG);
- * 11-Sep-2003 : Fix cloning support (subplots) (NB);
- * 15-Sep-2003 : Implemented PublicCloneable.  Fixed errors in cloning and
- *               serialization (DG);
- * 16-Sep-2003 : Changed ChartRenderingInfo --> PlotRenderingInfo (DG);
- * 17-Sep-2003 : Updated handling of 'clicks' (DG);
- * 04-May-2004 : Added getter/setter methods for 'gap' attributes (DG);
- * 12-Nov-2004 : Implements the new Zoomable interface (DG);
- * 25-Nov-2004 : Small update to clone() implementation (DG);
- * 21-Feb-2005 : Fixed bug in remove() method (id = 1121172) (DG);
- * 21-Feb-2005 : The getLegendItems() method now returns the fixed legend
- *               items if set (DG);
- * 05-May-2005 : Updated draw() method parameters (DG);
- * 14-Nov-2007 : Updated setFixedDomainAxisSpaceForSubplots() method (DG);
- * 27-Mar-2008 : Add documentation for getDataRange() method (DG);
- * 31-Mar-2008 : Updated getSubplots() to return EMPTY_LIST for null
- *               subplots, as suggested by Richard West (DG);
- * 26-Jun-2008 : Fixed crosshair support (DG);
- * 11-Aug-2008 : Don't store totalWeight of subplots, calculate it as
- *               required (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -67,6 +41,7 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -82,6 +57,7 @@ import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.ShadowGenerator;
 import org.jfree.data.Range;
 
@@ -95,7 +71,7 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
     private static final long serialVersionUID = 7260210007554504515L;
 
     /** Storage for the subplot references. */
-    private List subplots;
+    private List<CategoryPlot> subplots;
 
     /** The gap between subplots. */
     private double gap;
@@ -117,7 +93,7 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
      */
     public CombinedRangeCategoryPlot(ValueAxis rangeAxis) {
         super(null, null, rangeAxis, null);
-        this.subplots = new java.util.ArrayList();
+        this.subplots = new ArrayList<>();
         this.gap = 5.0;
     }
 
@@ -226,7 +202,7 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
      *
      * @return An unmodifiable list of subplots.
      */
-    public List getSubplots() {
+    public List<CategoryPlot> getSubplots() {
         if (this.subplots != null) {
             return Collections.unmodifiableList(this.subplots);
         }
@@ -277,7 +253,7 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
         int n = this.subplots.size();
         int totalWeight = 0;
         for (int i = 0; i < n; i++) {
-            CategoryPlot sub = (CategoryPlot) this.subplots.get(i);
+            CategoryPlot sub = this.subplots.get(i);
             totalWeight += sub.getWeight();
         }
         // calculate plotAreas of all sub-plots, maximum vertical/horizontal
@@ -294,7 +270,7 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
         }
 
         for (int i = 0; i < n; i++) {
-            CategoryPlot plot = (CategoryPlot) this.subplots.get(i);
+            CategoryPlot plot = this.subplots.get(i);
 
             // calculate sub-plot area
             if (orientation == PlotOrientation.VERTICAL) {
@@ -366,7 +342,7 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
 
         // draw all the charts
         for (int i = 0; i < this.subplots.size(); i++) {
-            CategoryPlot plot = (CategoryPlot) this.subplots.get(i);
+            CategoryPlot plot = this.subplots.get(i);
             PlotRenderingInfo subplotInfo = null;
             if (info != null) {
                 subplotInfo = new PlotRenderingInfo(info.getOwner());
@@ -394,10 +370,8 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
     @Override
     public void setOrientation(PlotOrientation orientation) {
         super.setOrientation(orientation);
-        Iterator iterator = this.subplots.iterator();
-        while (iterator.hasNext()) {
-            CategoryPlot plot = (CategoryPlot) iterator.next();
-            plot.setOrientation(orientation);
+        for (CategoryPlot subplot : this.subplots) {
+            subplot.setOrientation(orientation);
         }
     }
 
@@ -411,10 +385,8 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
     public void setShadowGenerator(ShadowGenerator generator) {
         setNotify(false);
         super.setShadowGenerator(generator);
-        Iterator iterator = this.subplots.iterator();
-        while (iterator.hasNext()) {
-            CategoryPlot plot = (CategoryPlot) iterator.next();
-            plot.setShadowGenerator(generator);
+        for (CategoryPlot subplot : this.subplots) {
+            subplot.setShadowGenerator(generator);
         }
         setNotify(true);
     }
@@ -436,9 +408,7 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
      public Range getDataRange(ValueAxis axis) {
          Range result = null;
          if (this.subplots != null) {
-             Iterator iterator = this.subplots.iterator();
-             while (iterator.hasNext()) {
-                 CategoryPlot subplot = (CategoryPlot) iterator.next();
+             for (CategoryPlot subplot : this.subplots) {
                  result = Range.combine(result, subplot.getDataRange(axis));
              }
          }
@@ -456,10 +426,8 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
         if (result == null) {
             result = new LegendItemCollection();
             if (this.subplots != null) {
-                Iterator iterator = this.subplots.iterator();
-                while (iterator.hasNext()) {
-                    CategoryPlot plot = (CategoryPlot) iterator.next();
-                    LegendItemCollection more = plot.getLegendItems();
+                for (CategoryPlot subplot : this.subplots) {
+                    LegendItemCollection more = subplot.getLegendItems();
                     result.addAll(more);
                 }
             }
@@ -474,10 +442,8 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
      * @param space  the space.
      */
     protected void setFixedDomainAxisSpaceForSubplots(AxisSpace space) {
-        Iterator iterator = this.subplots.iterator();
-        while (iterator.hasNext()) {
-            CategoryPlot plot = (CategoryPlot) iterator.next();
-            plot.setFixedDomainAxisSpace(space, false);
+        for (CategoryPlot subplot : this.subplots) {
+            subplot.setFixedDomainAxisSpace(space, false);
         }
     }
 
@@ -494,7 +460,7 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
         Rectangle2D dataArea = info.getDataArea();
         if (dataArea.contains(x, y)) {
             for (int i = 0; i < this.subplots.size(); i++) {
-                CategoryPlot subplot = (CategoryPlot) this.subplots.get(i);
+                CategoryPlot subplot = this.subplots.get(i);
                 PlotRenderingInfo subplotInfo = info.getSubplotInfo(i);
                 subplot.handleClick(x, y, subplotInfo);
             }
@@ -549,9 +515,8 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
     public Object clone() throws CloneNotSupportedException {
         CombinedRangeCategoryPlot result
             = (CombinedRangeCategoryPlot) super.clone();
-        result.subplots = (List) ObjectUtils.deepClone(this.subplots);
-        for (Iterator it = result.subplots.iterator(); it.hasNext();) {
-            Plot child = (Plot) it.next();
+        result.subplots = CloneUtils.cloneList(this.subplots);
+        for (Plot child : result.subplots) {
             child.setParent(result);
         }
 
@@ -573,8 +538,8 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
      * @throws IOException  if there is an I/O error.
      * @throws ClassNotFoundException  if there is a classpath problem.
      */
-    private void readObject(ObjectInputStream stream)
-        throws IOException, ClassNotFoundException {
+    private void readObject(ObjectInputStream stream) throws IOException, 
+            ClassNotFoundException {
 
         stream.defaultReadObject();
 

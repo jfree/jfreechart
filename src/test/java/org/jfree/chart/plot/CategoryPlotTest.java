@@ -76,6 +76,7 @@ import org.jfree.chart.renderer.category.DefaultCategoryItemRenderer;
 import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.chart.ui.Layer;
 import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.DefaultShadowGenerator;
 import org.jfree.chart.util.SortOrder;
 import org.jfree.data.Range;
@@ -553,7 +554,7 @@ public class CategoryPlotTest {
                 5.0f, 6.0f, Color.WHITE));
         CategoryPlot p2;
         try {
-            p2 = (CategoryPlot) p1.clone();
+            p2 = CloneUtils.clone(p1);
         }
         catch (CloneNotSupportedException e) {
             fail("Cloning failed.");
@@ -604,7 +605,7 @@ public class CategoryPlotTest {
         p1.setFixedRangeAxisSpace(ra1);
         CategoryPlot p2;
         try {
-            p2 = (CategoryPlot) p1.clone();
+            p2 = CloneUtils.clone(p1);
         }
         catch (CloneNotSupportedException e) {
             fail("Cloning failed.");
@@ -635,7 +636,7 @@ public class CategoryPlotTest {
         p1.setFixedLegendItems(c1);
         CategoryPlot p2;
         try {
-            p2 = (CategoryPlot) p1.clone();
+            p2 = CloneUtils.clone(p1);
         }
         catch (CloneNotSupportedException e) {
             fail("Cloning failed.");
@@ -670,7 +671,7 @@ public class CategoryPlotTest {
         p1.setRenderer(r1);
         CategoryPlot p2;
         try {
-            p2 = (CategoryPlot) p1.clone();
+            p2 = CloneUtils.clone(p1);
         }
         catch (CloneNotSupportedException e) {
             fail("Cloning failed.");

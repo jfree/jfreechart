@@ -49,6 +49,7 @@ import org.jfree.chart.TestUtils;
 import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.TextAnchor;
+import org.jfree.chart.util.CloneUtils;
 
 import org.junit.Test;
 
@@ -178,7 +179,7 @@ public class DialValueIndicatorTest {
     public void testCloning() throws CloneNotSupportedException {
         // test a default instance
         DialValueIndicator i1 = new DialValueIndicator(0);
-        DialValueIndicator i2 = (DialValueIndicator) i1.clone();
+        DialValueIndicator i2 = CloneUtils.clone(i1);
         assertTrue(i1 != i2);
         assertTrue(i1.getClass() == i2.getClass());
         assertTrue(i1.equals(i2));
@@ -197,8 +198,7 @@ public class DialValueIndicatorTest {
     @Test
     public void testSerialization() {
         DialValueIndicator i1 = new DialValueIndicator(0);
-        DialValueIndicator i2 = (DialValueIndicator) 
-                TestUtils.serialised(i1);
+        DialValueIndicator i2 = TestUtils.serialised(i1);
         assertEquals(i1, i2);
     }
 
