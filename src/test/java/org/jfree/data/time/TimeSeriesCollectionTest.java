@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2018, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------------
  * TimeSeriesCollectionTest.java
  * -----------------------------
- * (C) Copyright 2003-2018, by Object Refinery Limited.
+ * (C) Copyright 2003-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -50,6 +50,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.data.Range;
 import org.jfree.data.general.DatasetUtils;
 import org.junit.Test;
@@ -222,8 +223,7 @@ public class TimeSeriesCollectionTest {
     @Test
     public void testSerialization() {
         TimeSeriesCollection c1 = new TimeSeriesCollection(createSeries());
-        TimeSeriesCollection c2 = (TimeSeriesCollection) 
-                TestUtils.serialised(c1);
+        TimeSeriesCollection c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 
@@ -347,7 +347,7 @@ public class TimeSeriesCollectionTest {
         s1.add(new Year(2009), 1.1);
         TimeSeriesCollection c1 = new TimeSeriesCollection();
         c1.addSeries(s1);
-        TimeSeriesCollection c2 = (TimeSeriesCollection) c1.clone();
+        TimeSeriesCollection c2 = CloneUtils.clone(c1);
         assertTrue(c1 != c2);
         assertTrue(c1.getClass() == c2.getClass());
         assertTrue(c1.equals(c2));

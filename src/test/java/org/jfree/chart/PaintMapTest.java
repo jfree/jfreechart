@@ -40,6 +40,7 @@ import org.junit.Test;
 
 import java.awt.Color;
 import java.awt.GradientPaint;
+import org.jfree.chart.util.CloneUtils;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -129,13 +130,13 @@ public class PaintMapTest  {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         PaintMap<String> m1 = new PaintMap<>();
-        PaintMap<String> m2 = (PaintMap) m1.clone();
+        PaintMap<String> m2 = CloneUtils.clone(m1);
         assertEquals(m1, m2);
 
         m1.put("K1", Color.RED);
         m1.put("K2", new GradientPaint(1.0f, 2.0f, Color.GREEN, 3.0f, 4.0f,
                 Color.YELLOW));
-        m2 = (PaintMap) m1.clone();
+        m2 = CloneUtils.clone(m1);
         assertEquals(m1, m2);
     }
 

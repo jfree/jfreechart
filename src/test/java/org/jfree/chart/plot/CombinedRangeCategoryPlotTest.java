@@ -54,6 +54,7 @@ import org.jfree.chart.event.ChartChangeListener;
 import org.jfree.chart.labels.StandardCategoryToolTipGenerator;
 import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.chart.renderer.category.LineAndShapeRenderer;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.junit.Test;
@@ -92,8 +93,7 @@ public class CombinedRangeCategoryPlotTest implements ChartChangeListener {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         CombinedRangeCategoryPlot plot1 = createPlot();
-        CombinedRangeCategoryPlot plot2 = (CombinedRangeCategoryPlot) 
-                plot1.clone();
+        CombinedRangeCategoryPlot plot2 = CloneUtils.clone(plot1);
         assertTrue(plot1 != plot2);
         assertTrue(plot1.getClass() == plot2.getClass());
         assertTrue(plot1.equals(plot2));
@@ -105,8 +105,7 @@ public class CombinedRangeCategoryPlotTest implements ChartChangeListener {
     @Test
     public void testSerialization() {
         CombinedRangeCategoryPlot plot1 = createPlot();
-        CombinedRangeCategoryPlot plot2 = (CombinedRangeCategoryPlot) 
-                TestUtils.serialised(plot1);
+        CombinedRangeCategoryPlot plot2 = TestUtils.serialised(plot1);
         assertEquals(plot1, plot2);
     }
 

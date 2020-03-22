@@ -47,6 +47,7 @@ import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.Range;
 import org.jfree.data.category.DefaultCategoryDataset;
@@ -131,7 +132,7 @@ public class LineAndShapeRendererTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         LineAndShapeRenderer r1 = new LineAndShapeRenderer();
-        LineAndShapeRenderer r2 = (LineAndShapeRenderer) r1.clone();
+        LineAndShapeRenderer r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -225,8 +226,7 @@ public class LineAndShapeRendererTest {
     @Test
     public void testSerialization() {
         LineAndShapeRenderer r1 = new LineAndShapeRenderer();
-        LineAndShapeRenderer r2 = (LineAndShapeRenderer) 
-                TestUtils.serialised(r1);
+        LineAndShapeRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,17 +27,10 @@
  * -------------------------------
  * StackedXYAreaRenderer2Test.java
  * -------------------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 06-Jan-2005 : Version 1 (DG);
- * 22-Aug-2006 : Added testDrawWithEmptyDataset() method (DG);
- * 30-Nov-2006 : Extended testEquals() (DG);
- * 22-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
@@ -58,6 +51,7 @@ import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.Range;
 import org.jfree.data.xy.DefaultTableXYDataset;
@@ -130,7 +124,7 @@ public class StackedXYAreaRenderer2Test {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         StackedXYAreaRenderer2 r1 = new StackedXYAreaRenderer2();
-        StackedXYAreaRenderer2 r2 = (StackedXYAreaRenderer2) r1.clone();
+        StackedXYAreaRenderer2 r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -151,8 +145,7 @@ public class StackedXYAreaRenderer2Test {
     @Test
     public void testSerialization() {
         StackedXYAreaRenderer2 r1 = new StackedXYAreaRenderer2();
-        StackedXYAreaRenderer2 r2 = (StackedXYAreaRenderer2) 
-                TestUtils.serialised(r1);
+        StackedXYAreaRenderer2 r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

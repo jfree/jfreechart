@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,18 +27,10 @@
  * -----------------------------------------
  * StandardPieSectionLabelGeneratorTest.java
  * -----------------------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 18-Mar-2003 : Version 1 (DG);
- * 13-Aug-2003 : Added clone tests (DG);
- * 04-Mar-2004 : Added test for equals() method (DG);
- * 23-Nov-2006 : Extended equals() test (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG);
  *
  */
 
@@ -53,6 +45,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.Test;
@@ -133,8 +126,7 @@ public class StandardPieSectionLabelGeneratorTest {
     public void testCloning() throws CloneNotSupportedException {
         StandardPieSectionLabelGenerator g1
                 = new StandardPieSectionLabelGenerator();
-        StandardPieSectionLabelGenerator g2 
-                = (StandardPieSectionLabelGenerator) g1.clone();
+        StandardPieSectionLabelGenerator g2 = CloneUtils.clone(g1);
         assertTrue(g1 != g2);
         assertTrue(g1.getClass() == g2.getClass());
         assertTrue(g1.equals(g2));
@@ -157,8 +149,7 @@ public class StandardPieSectionLabelGeneratorTest {
     public void testSerialization() {
         StandardPieSectionLabelGenerator g1
                 = new StandardPieSectionLabelGenerator();
-        StandardPieSectionLabelGenerator g2 = (StandardPieSectionLabelGenerator) 
-                TestUtils.serialised(g1);
+        StandardPieSectionLabelGenerator g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 
