@@ -51,7 +51,7 @@ import org.jfree.data.xy.XYZDataset;
  * @see XYDataset
  * @see XYZDataset
  */
-public interface SeriesDataset extends Dataset {
+public interface SeriesDataset<S extends Comparable<S>> extends Dataset {
 
     /**
      * Returns the number of series in the dataset.
@@ -68,7 +68,7 @@ public interface SeriesDataset extends Dataset {
      *
      * @return The key for the series.
      */
-    public Comparable<?> getSeriesKey(int series);
+    public S getSeriesKey(int series);
 
     /**
      * Returns the index of the series with the specified key, or -1 if there
@@ -78,6 +78,6 @@ public interface SeriesDataset extends Dataset {
      *
      * @return The index, or -1.
      */
-    public int indexOf(Comparable<?> seriesKey);
+    public int indexOf(S seriesKey);
 
 }

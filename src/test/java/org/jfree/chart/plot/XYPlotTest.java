@@ -704,7 +704,7 @@ public class XYPlotTest {
      */
     @Test
     public void testSerialization1() {
-        XYDataset data = new XYSeriesCollection<String>();
+        XYDataset<String> data = new XYSeriesCollection<>();
         NumberAxis domainAxis = new NumberAxis("Domain");
         NumberAxis rangeAxis = new NumberAxis("Range");
         StandardXYItemRenderer renderer = new StandardXYItemRenderer();
@@ -829,10 +829,10 @@ public class XYPlotTest {
      */
     @Test
     public void testGetRendererForDataset() {
-        XYDataset d0 = new XYSeriesCollection<String>();
-        XYDataset d1 = new XYSeriesCollection<String>();
-        XYDataset d2 = new XYSeriesCollection<String>();
-        XYDataset d3 = new XYSeriesCollection<String>();  // not used by plot
+        XYDataset<String> d0 = new XYSeriesCollection<>();
+        XYDataset<String> d1 = new XYSeriesCollection<String>();
+        XYDataset<String> d2 = new XYSeriesCollection<String>();
+        XYDataset<String> d3 = new XYSeriesCollection<String>();  // not used by plot
         XYItemRenderer r0 = new XYLineAndShapeRenderer();
         XYItemRenderer r2 = new XYLineAndShapeRenderer();
         XYPlot plot = new XYPlot();
@@ -856,8 +856,8 @@ public class XYPlotTest {
     public void testGetLegendItems() {
         // check the case where there is a secondary dataset that doesn't
         // have a renderer (i.e. falls back to renderer 0)
-        XYDataset d0 = createDataset1();
-        XYDataset d1 = createDataset2();
+        XYDataset<String> d0 = createDataset1();
+        XYDataset<String> d1 = createDataset2();
         XYItemRenderer r0 = new XYLineAndShapeRenderer();
         XYPlot plot = new XYPlot();
         plot.setDataset(0, d0);
@@ -872,7 +872,7 @@ public class XYPlotTest {
      *
      * @return Series 1.
      */
-    private IntervalXYDataset createDataset1() {
+    private IntervalXYDataset<String> createDataset1() {
 
         // create dataset 1...
         TimeSeries<String> series1 = new TimeSeries<>("Series 1");
@@ -902,7 +902,7 @@ public class XYPlotTest {
      *
      * @return A sample dataset.
      */
-    private XYDataset createDataset2() {
+    private XYDataset<String> createDataset2() {
         // create dataset 1...
         XYSeries<String> series = new XYSeries<>("Series 2");
         XYSeriesCollection<String> collection = new XYSeriesCollection<>(series);
@@ -1035,7 +1035,7 @@ public class XYPlotTest {
      */
     @Test
     public void testDrawSeriesWithZeroItems() {
-        DefaultXYDataset dataset = new DefaultXYDataset();
+        DefaultXYDataset<String> dataset = new DefaultXYDataset<>();
         dataset.addSeries("Series 1", new double[][] {{1.0, 2.0}, {3.0, 4.0}});
         dataset.addSeries("Series 2", new double[][] {{}, {}});
         JFreeChart chart = ChartFactory.createXYLineChart("Title", "X", "Y",

@@ -216,8 +216,8 @@ public class TableXYDatasetTest {
      *
      * @return A series.
      */
-    private XYSeries createSeriesA() {
-        XYSeries s = new XYSeries("A", true, false);
+    private XYSeries<String> createSeriesA() {
+        XYSeries<String> s = new XYSeries<>("A", true, false);
         s.add(1.0, 1.1);
         s.add(2.0, null);
         return s;
@@ -228,8 +228,8 @@ public class TableXYDatasetTest {
      *
      * @return A series.
      */
-    private XYSeries createSeriesB() {
-        XYSeries s = new XYSeries("B", true, false);
+    private XYSeries<String> createSeriesB() {
+        XYSeries<String> s = new XYSeries<>("B", true, false);
         s.add(1.0, null);
         s.add(2.0, 2.2);
         return s;
@@ -240,8 +240,8 @@ public class TableXYDatasetTest {
      *
      * @return A series.
      */
-    private XYSeries createSeries1() {
-        XYSeries series1 = new XYSeries("Series 1", true, false);
+    private XYSeries<String> createSeries1() {
+        XYSeries<String> series1 = new XYSeries<>("Series 1", true, false);
         series1.add(1.0, 1.0);
         series1.add(2.0, 1.0);
         series1.add(4.0, 1.0);
@@ -254,8 +254,8 @@ public class TableXYDatasetTest {
      *
      * @return A series.
      */
-    private XYSeries createSeries2() {
-        XYSeries series2 = new XYSeries("Series 2", true, false);
+    private XYSeries<String> createSeries2() {
+        XYSeries<String> series2 = new XYSeries<>("Series 2", true, false);
         series2.add(2.0, 2.0);
         series2.add(3.0, 2.0);
         series2.add(4.0, 2.0);

@@ -72,7 +72,7 @@ public class RegressionTest {
         for (int i = 0; i < 11; i++) {
             series.add(data[i][0], data[i][1]);
         }
-        XYDataset ds = new XYSeriesCollection<String>(series);
+        XYDataset<String> ds = new XYSeriesCollection<>(series);
         double[] result2 = Regression.getOLSRegression(ds, 0);
 
         assertEquals(.25680930, result2[0], 0.0000001);
@@ -104,7 +104,7 @@ public class RegressionTest {
         for (int i = 0; i < 11; i++) {
             series.add(data[i][0], data[i][1]);
         }
-        XYDataset ds = new XYSeriesCollection<String>(series);
+        XYDataset<String> ds = new XYSeriesCollection<>(series);
         double[] result = Regression.getPowerRegression(ds, 0);
 
         assertEquals(0.91045813, result[0], 0.0000001);
@@ -136,7 +136,7 @@ public class RegressionTest {
         for (int i = 0; i < 10; i++) {
             series.add(data[i][0], data[i][1]);
         }
-        XYDataset ds = new XYSeriesCollection<String>(series);
+        XYDataset<String> ds = new XYSeriesCollection<>(series);
         double[] result = Regression.getOLSRegression(ds, 0);
 
         assertEquals(53.9729697, result[0], 0.0000001);
@@ -168,7 +168,7 @@ public class RegressionTest {
         for (int i = 0; i < 10; i++) {
             series.add(data[i][0], data[i][1]);
         }
-        XYDataset ds = new XYSeriesCollection<String>(series);
+        XYDataset<String> ds = new XYSeriesCollection<>(series);
         double[] result = Regression.getPowerRegression(ds, 0);
 
         assertEquals(106.1241681, result[0], 0.0000001);

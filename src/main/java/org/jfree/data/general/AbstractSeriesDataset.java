@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,18 +27,10 @@
  * --------------------------
  * AbstractSeriesDataset.java
  * --------------------------
- * (C) Copyright 2001-2008, by Object Refinery Limited.
+ * (C) Copyright 2001-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 17-Nov-2001 : Version 1 (DG);
- * 28-Mar-2002 : Implemented SeriesChangeListener interface (DG);
- * 04-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 04-Feb-2003 : Removed redundant methods (DG);
- * 27-Mar-2003 : Implemented Serializable (DG);
  *
  */
 
@@ -50,8 +42,9 @@ import java.io.Serializable;
  * An abstract implementation of the {@link SeriesDataset} interface,
  * containing a mechanism for registering change listeners.
  */
-public abstract class AbstractSeriesDataset extends AbstractDataset
-        implements SeriesDataset, SeriesChangeListener, Serializable {
+public abstract class AbstractSeriesDataset<S extends Comparable<S>> 
+        extends AbstractDataset 
+        implements SeriesDataset<S>, SeriesChangeListener, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -6074996219705033171L;
@@ -84,7 +77,7 @@ public abstract class AbstractSeriesDataset extends AbstractDataset
      * @return The series key.
      */
     @Override
-    public abstract Comparable getSeriesKey(int series);
+    public abstract S getSeriesKey(int series);
 
     /**
      * Returns the index of the named series, or -1.
@@ -94,7 +87,7 @@ public abstract class AbstractSeriesDataset extends AbstractDataset
      * @return The index.
      */
     @Override
-    public int indexOf(Comparable seriesKey) {
+    public int indexOf(S seriesKey) {
         int seriesCount = getSeriesCount();
         for (int s = 0; s < seriesCount; s++) {
            if (getSeriesKey(s).equals(seriesKey)) {

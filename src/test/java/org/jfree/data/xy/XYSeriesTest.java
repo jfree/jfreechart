@@ -495,7 +495,7 @@ public class XYSeriesTest {
         s.add(2.0, 22.0);
         s.add(3.5, 35.0);
         s.add(5.0, null);
-        DefaultXYDataset dataset = new DefaultXYDataset();
+        DefaultXYDataset<String> dataset = new DefaultXYDataset<>();
         dataset.addSeries("S", s.toArray());
         assertEquals(1, dataset.getSeriesCount());
         assertEquals(4, dataset.getItemCount(0));
