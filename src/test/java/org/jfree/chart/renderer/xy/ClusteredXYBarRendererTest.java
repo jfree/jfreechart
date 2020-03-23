@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,17 +27,10 @@
  * -------------------------------
  * ClusteredXYBarRendererTest.java
  * -------------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 25-Mar-2003 : Version 1 (DG);
- * 22-Oct-2003 : Added hashCode test (DG);
- * 10-Jul-2007 : Fixed compile errors (DG);
- * 22-Apr-2008 : Added testPublicCloneable() (DG);
  *
  */
 
@@ -48,6 +41,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.Range;
@@ -100,7 +94,7 @@ public class ClusteredXYBarRendererTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         ClusteredXYBarRenderer r1 = new ClusteredXYBarRenderer();
-        ClusteredXYBarRenderer r2 = (ClusteredXYBarRenderer) r1.clone();
+        ClusteredXYBarRenderer r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -121,8 +115,7 @@ public class ClusteredXYBarRendererTest {
     @Test
     public void testSerialization() {
         ClusteredXYBarRenderer r1 = new ClusteredXYBarRenderer();
-        ClusteredXYBarRenderer r2 = (ClusteredXYBarRenderer) 
-                TestUtils.serialised(r1);
+        ClusteredXYBarRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

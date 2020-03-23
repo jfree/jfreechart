@@ -37,6 +37,7 @@
 package org.jfree.data;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -159,7 +160,7 @@ public class ComparableObjectSeriesTest {
     public void testCloning() throws CloneNotSupportedException {
         MyComparableObjectSeries s1 = new MyComparableObjectSeries("A");
         s1.add(1, "ABC");
-        MyComparableObjectSeries s2 = (MyComparableObjectSeries) s1.clone();
+        MyComparableObjectSeries s2 = CloneUtils.clone(s1);
         assertTrue(s1 != s2);
         assertTrue(s1.getClass() == s2.getClass());
         assertTrue(s1.equals(s2));
@@ -172,8 +173,7 @@ public class ComparableObjectSeriesTest {
     public void testSerialization() {
         MyComparableObjectSeries s1 = new MyComparableObjectSeries("A");
         s1.add(1, "ABC");
-        MyComparableObjectSeries s2 = (MyComparableObjectSeries) 
-                TestUtils.serialised(s1);
+        MyComparableObjectSeries s2 = TestUtils.serialised(s1);
         assertEquals(s1, s2);
     }
 

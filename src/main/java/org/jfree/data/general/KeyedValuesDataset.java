@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * -----------------------
  * KeyedValuesDataset.java
  * -----------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited.
+ * (C) Copyright 2003-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 05-Mar-2003 : Version 1 (DG);
- * 24-Apr-2003 : Switched places with PieDataset (DG);
  *
  */
 
@@ -44,7 +39,8 @@ package org.jfree.data.general;
 /**
  * A dataset containing (key, value) data items.
  */
-public interface KeyedValuesDataset extends PieDataset {
+public interface KeyedValuesDataset<K extends Comparable<K>> 
+        extends PieDataset<K> {
 
     // no new methods required
 

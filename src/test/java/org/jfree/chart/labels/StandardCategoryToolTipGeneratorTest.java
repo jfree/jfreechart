@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,17 +27,10 @@
  * -----------------------------------------
  * StandardCategoryToolTipGeneratorTest.java
  * -----------------------------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 11-May-2004 : Version 1 (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 03-May-2006 : Added testEquals1481087() (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG);
  *
  */
 
@@ -52,6 +45,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.Test;
@@ -117,8 +111,7 @@ public class StandardCategoryToolTipGeneratorTest {
     public void testCloning() throws CloneNotSupportedException {
         StandardCategoryToolTipGenerator g1
                 = new StandardCategoryToolTipGenerator();
-        StandardCategoryToolTipGenerator g2 
-                = (StandardCategoryToolTipGenerator) g1.clone();
+        StandardCategoryToolTipGenerator g2 = CloneUtils.clone(g1);
         assertTrue(g1 != g2);
         assertTrue(g1.getClass() == g2.getClass());
         assertTrue(g1.equals(g2));
@@ -142,8 +135,7 @@ public class StandardCategoryToolTipGeneratorTest {
         StandardCategoryToolTipGenerator g1
                 = new StandardCategoryToolTipGenerator("{2}",
                 DateFormat.getInstance());
-        StandardCategoryToolTipGenerator g2 = (StandardCategoryToolTipGenerator)
-                TestUtils.serialised(g1);
+        StandardCategoryToolTipGenerator g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

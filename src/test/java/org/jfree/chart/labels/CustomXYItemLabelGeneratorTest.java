@@ -43,6 +43,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.List;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.Test;
@@ -59,7 +60,7 @@ public class CustomXYItemLabelGeneratorTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         CustomXYToolTipGenerator g1 = new CustomXYToolTipGenerator();
-        CustomXYToolTipGenerator g2 = (CustomXYToolTipGenerator) g1.clone();
+        CustomXYToolTipGenerator g2 = CloneUtils.clone(g1);
         assertTrue(g1 != g2);
         assertTrue(g1.getClass() == g2.getClass());
         assertTrue(g1.equals(g2));
@@ -92,8 +93,7 @@ public class CustomXYItemLabelGeneratorTest {
         CustomXYToolTipGenerator g1 = new CustomXYToolTipGenerator();
         g1.addToolTipSeries(t1);
         g1.addToolTipSeries(t2);
-        CustomXYToolTipGenerator g2 = (CustomXYToolTipGenerator) 
-                TestUtils.serialised(g1);
+        CustomXYToolTipGenerator g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

@@ -191,7 +191,7 @@ public class KeyToGroupMapTest {
         // a null argument should throw an exception
         boolean pass = false;
         try {
-            Comparable g = m1.getGroup(null);
+            String g = m1.getGroup(null);
         }
         catch (IllegalArgumentException e) {
             pass = true;
@@ -222,7 +222,7 @@ public class KeyToGroupMapTest {
     public void testCloning() throws CloneNotSupportedException {
         KeyToGroupMap<String, String> m1 = new KeyToGroupMap<>("Test");
         m1.mapKeyToGroup("K1", "G1");
-        KeyToGroupMap m2 = CloneUtils.clone(m1);
+        KeyToGroupMap<String, String> m2 = CloneUtils.clone(m1);
         assertTrue(m1 != m2);
         assertTrue(m1.getClass() == m2.getClass());
         assertTrue(m1.equals(m2));
