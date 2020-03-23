@@ -55,14 +55,14 @@ public class XYTaskDatasetTest {
      */
     @Test
     public void testEquals() {
-        TaskSeries s1 = new TaskSeries("Series");
+        TaskSeries<String> s1 = new TaskSeries<>("Series");
         s1.add(new Task("Task 1", new Date(0L), new Date(1L)));
         s1.add(new Task("Task 2", new Date(10L), new Date(11L)));
         s1.add(new Task("Task 3", new Date(20L), new Date(21L)));
         TaskSeriesCollection u1 = new TaskSeriesCollection();
         u1.add(s1);
         XYTaskDataset d1 = new XYTaskDataset(u1);
-        TaskSeries s2 = new TaskSeries("Series");
+        TaskSeries<String> s2 = new TaskSeries<>("Series");
         s2.add(new Task("Task 1", new Date(0L), new Date(1L)));
         s2.add(new Task("Task 2", new Date(10L), new Date(11L)));
         s2.add(new Task("Task 3", new Date(20L), new Date(21L)));
@@ -92,7 +92,7 @@ public class XYTaskDatasetTest {
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        TaskSeries s1 = new TaskSeries("Series");
+        TaskSeries<String> s1 = new TaskSeries<>("Series");
         s1.add(new Task("Task 1", new Date(0L), new Date(1L)));
         TaskSeriesCollection u1 = new TaskSeriesCollection();
         u1.add(s1);
@@ -106,7 +106,7 @@ public class XYTaskDatasetTest {
         s1.add(new Task("Task 2", new Date(10L), new Date(11L)));
         assertFalse(d1.equals(d2));
         TaskSeriesCollection u2 = d2.getTasks();
-        TaskSeries s2 = u2.getSeries("Series");
+        TaskSeries<String> s2 = u2.getSeries("Series");
         s2.add(new Task("Task 2", new Date(10L), new Date(11L)));
         assertTrue(d1.equals(d2));
     }
@@ -116,7 +116,7 @@ public class XYTaskDatasetTest {
      */
     @Test
     public void testSerialization() {
-        TaskSeries s1 = new TaskSeries("Series");
+        TaskSeries<String> s1 = new TaskSeries<>("Series");
         s1.add(new Task("Task 1", new Date(0L), new Date(1L)));
         TaskSeriesCollection u1 = new TaskSeriesCollection();
         u1.add(s1);
@@ -128,7 +128,7 @@ public class XYTaskDatasetTest {
         s1.add(new Task("Task 2", new Date(10L), new Date(11L)));
         assertFalse(d1.equals(d2));
         TaskSeriesCollection u2 = d2.getTasks();
-        TaskSeries s2 = u2.getSeries("Series");
+        TaskSeries<String> s2 = u2.getSeries("Series");
         s2.add(new Task("Task 2", new Date(10L), new Date(11L)));
         assertTrue(d1.equals(d2));
     }

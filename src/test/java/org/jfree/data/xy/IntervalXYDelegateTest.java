@@ -54,14 +54,14 @@ public class IntervalXYDelegateTest {
      */
     @Test
     public void testEquals() {
-       XYSeries s1 = new XYSeries("Series");
+       XYSeries<String> s1 = new XYSeries<>("Series");
        s1.add(1.2, 3.4);
-       XYSeriesCollection c1 = new XYSeriesCollection();
+       XYSeriesCollection<String> c1 = new XYSeriesCollection<>();
        c1.addSeries(s1);
        IntervalXYDelegate d1 = new IntervalXYDelegate(c1);
 
-       XYSeries s2 = new XYSeries("Series");
-       XYSeriesCollection c2 = new XYSeriesCollection();
+       XYSeries<String> s2 = new XYSeries<>("Series");
+       XYSeriesCollection<String> c2 = new XYSeriesCollection<>();
        s2.add(1.2, 3.4);
        c2.addSeries(s2);
        IntervalXYDelegate d2 = new IntervalXYDelegate(c2);
@@ -90,9 +90,9 @@ public class IntervalXYDelegateTest {
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        XYSeries s1 = new XYSeries("Series");
+        XYSeries<String> s1 = new XYSeries<>("Series");
         s1.add(1.2, 3.4);
-        XYSeriesCollection c1 = new XYSeriesCollection();
+        XYSeriesCollection<String> c1 = new XYSeriesCollection<>();
         c1.addSeries(s1);
         IntervalXYDelegate d1 = new IntervalXYDelegate(c1);
         IntervalXYDelegate d2 = CloneUtils.clone(d1);
@@ -106,9 +106,9 @@ public class IntervalXYDelegateTest {
      */
     @Test
     public void testSerialization() {
-        XYSeries s1 = new XYSeries("Series");
+        XYSeries<String> s1 = new XYSeries<>("Series");
         s1.add(1.2, 3.4);
-        XYSeriesCollection c1 = new XYSeriesCollection();
+        XYSeriesCollection<String> c1 = new XYSeriesCollection<>();
         c1.addSeries(s1);
         IntervalXYDelegate d1 = new IntervalXYDelegate(c1);
         IntervalXYDelegate d2 = TestUtils.serialised(d1);

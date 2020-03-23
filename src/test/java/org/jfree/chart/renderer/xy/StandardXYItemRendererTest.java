@@ -190,20 +190,20 @@ public class StandardXYItemRendererTest {
      */
     @Test
     public void testGetLegendItemSeriesIndex() {
-        XYSeriesCollection d1 = new XYSeriesCollection();
-        XYSeries s1 = new XYSeries("S1");
+        XYSeriesCollection<String> d1 = new XYSeriesCollection<>();
+        XYSeries<String> s1 = new XYSeries<>("S1");
         s1.add(1.0, 1.1);
-        XYSeries s2 = new XYSeries("S2");
+        XYSeries<String> s2 = new XYSeries<>("S2");
         s2.add(1.0, 1.1);
         d1.addSeries(s1);
         d1.addSeries(s2);
 
-        XYSeriesCollection d2 = new XYSeriesCollection();
-        XYSeries s3 = new XYSeries("S3");
+        XYSeriesCollection<String> d2 = new XYSeriesCollection<>();
+        XYSeries<String> s3 = new XYSeries<>("S3");
         s3.add(1.0, 1.1);
-        XYSeries s4 = new XYSeries("S4");
+        XYSeries<String> s4 = new XYSeries<>("S4");
         s4.add(1.0, 1.1);
-        XYSeries s5 = new XYSeries("S5");
+        XYSeries<String> s5 = new XYSeries<>("S5");
         s5.add(1.0, 1.1);
         d2.addSeries(s3);
         d2.addSeries(s4);
@@ -226,8 +226,8 @@ public class StandardXYItemRendererTest {
      */
     @Test
     public void testNoDisplayedItem() {
-        XYSeriesCollection dataset = new XYSeriesCollection();
-        XYSeries s1 = new XYSeries("S1");
+        XYSeriesCollection<String> dataset = new XYSeriesCollection<>();
+        XYSeries<String> s1 = new XYSeries<>("S1");
         s1.add(10.0, 10.0);
         dataset.addSeries(s1);
         JFreeChart chart = ChartFactory.createXYLineChart("Title", "X", "Y",

@@ -88,8 +88,8 @@ public class TimePeriodValuesCollectionTest {
         c2.setXPosition(TimePeriodAnchor.END);
         assertTrue(c1.equals(c2));
         
-        TimePeriodValues v1 = new TimePeriodValues("Test");
-        TimePeriodValues v2 = new TimePeriodValues("Test");
+        TimePeriodValues<String> v1 = new TimePeriodValues<>("Test");
+        TimePeriodValues<String> v2 = new TimePeriodValues<>("Test");
         
         c1.addSeries(v1);
         assertFalse(c1.equals(c2));

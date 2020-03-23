@@ -158,7 +158,7 @@ public class CombinedRangeXYPlotTest implements ChartChangeListener {
      */
     private XYDataset createDataset1() {
 
-        XYSeries series1 = new XYSeries("Series 1");
+        XYSeries<String> series1 = new XYSeries<>("Series 1");
         series1.add(10.0, 12353.3);
         series1.add(20.0, 13734.4);
         series1.add(30.0, 14525.3);
@@ -175,7 +175,7 @@ public class CombinedRangeXYPlotTest implements ChartChangeListener {
         series1.add(140.0, 14230.2);
         series1.add(150.0, 11235.2);
 
-        XYSeries series2 = new XYSeries("Series 2");
+        XYSeries<String> series2 = new XYSeries<>("Series 2");
         series2.add(10.0, 15000.3);
         series2.add(20.0, 11000.4);
         series2.add(30.0, 17000.3);
@@ -192,7 +192,7 @@ public class CombinedRangeXYPlotTest implements ChartChangeListener {
         series2.add(140.0, 16000.2);
         series2.add(150.0, 17000.2);
 
-        XYSeriesCollection collection = new XYSeriesCollection();
+        XYSeriesCollection<String> collection = new XYSeriesCollection<>();
         collection.addSeries(series1);
         collection.addSeries(series2);
         return collection;
@@ -207,7 +207,7 @@ public class CombinedRangeXYPlotTest implements ChartChangeListener {
     private XYDataset createDataset2() {
 
         // create dataset 2...
-        XYSeries series2 = new XYSeries("Series 3");
+        XYSeries<String> series2 = new XYSeries<>("Series 3");
 
         series2.add(10.0, 16853.2);
         series2.add(20.0, 19642.3);
@@ -224,7 +224,7 @@ public class CombinedRangeXYPlotTest implements ChartChangeListener {
         series2.add(170.0, 18500.7);
         series2.add(180.0, 19595.9);
 
-        return new XYSeriesCollection(series2);
+        return new XYSeriesCollection<>(series2);
 
     }
 

@@ -47,6 +47,7 @@ import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.junit.Test;
@@ -99,7 +100,7 @@ public class LevelRendererTest {
         LevelRenderer r1 = new LevelRenderer();
         r1.setItemMargin(0.123);
         r1.setMaximumItemWidth(0.234);
-        LevelRenderer r2 = (LevelRenderer) r1.clone();
+        LevelRenderer r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -157,7 +158,8 @@ public class LevelRendererTest {
     @Test
     public void testDrawWithNullInfo() {
         try {
-            DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+            DefaultCategoryDataset<String, String> dataset 
+                    = new DefaultCategoryDataset<>();
             dataset.addValue(1.0, "S1", "C1");
             CategoryPlot plot = new CategoryPlot(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
@@ -177,10 +179,12 @@ public class LevelRendererTest {
      */
     @Test
     public void testGetLegendItemSeriesIndex() {
-        DefaultCategoryDataset dataset0 = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset0 
+                = new DefaultCategoryDataset<>();
         dataset0.addValue(21.0, "R1", "C1");
         dataset0.addValue(22.0, "R2", "C1");
-        DefaultCategoryDataset dataset1 = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset1 
+                = new DefaultCategoryDataset<>();
         dataset1.addValue(23.0, "R3", "C1");
         dataset1.addValue(24.0, "R4", "C1");
         dataset1.addValue(25.0, "R5", "C1");

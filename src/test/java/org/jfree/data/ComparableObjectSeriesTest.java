@@ -48,13 +48,13 @@ import static org.junit.Assert.assertNull;
  */
 public class ComparableObjectSeriesTest {
 
-    static class MyComparableObjectSeries extends ComparableObjectSeries {
+    static class MyComparableObjectSeries extends ComparableObjectSeries<String> {
         /**
          * Creates a new instance.
          *
          * @param key  the series key.
          */
-        public MyComparableObjectSeries(Comparable<?> key) {
+        public MyComparableObjectSeries(String key) {
             super(key);
         }
         /**
@@ -64,18 +64,18 @@ public class ComparableObjectSeriesTest {
          * @param autoSort  automatically sort by x-value?
          * @param allowDuplicateXValues  allow duplicate values?
          */
-        public MyComparableObjectSeries(Comparable<?> key, boolean autoSort,
+        public MyComparableObjectSeries(String key, boolean autoSort,
                 boolean allowDuplicateXValues) {
             super(key, autoSort, allowDuplicateXValues);
         }
 
         @Override
-        public void add(Comparable x, Object y) {
+        public void add(Comparable<?> x, Object y) {
             super.add(x, y);
         }
 
         @Override
-        public ComparableObjectItem remove(Comparable x) {
+        public ComparableObjectItem remove(Comparable<?> x) {
             return super.remove(x);
         }
     }
@@ -85,7 +85,7 @@ public class ComparableObjectSeriesTest {
      */
     @Test
     public void testConstructor1() {
-        ComparableObjectSeries s1 = new ComparableObjectSeries("s1");
+        ComparableObjectSeries<String> s1 = new ComparableObjectSeries<>("s1");
         assertEquals("s1", s1.getKey());
         assertNull(s1.getDescription());
         assertTrue(s1.getAllowDuplicateXValues());
@@ -96,7 +96,7 @@ public class ComparableObjectSeriesTest {
         // try null key
         boolean pass = false;
         try {
-            /*s1 = */new ComparableObjectSeries(null);
+            /*s1 = */new ComparableObjectSeries<String>(null);
         }
         catch (IllegalArgumentException e) {
             pass = true;
