@@ -37,7 +37,6 @@
 package org.jfree.chart.util;
 
 import static org.junit.Assert.assertThrows;
-import org.junit.Assert;
 import org.junit.Test;
 
 /**

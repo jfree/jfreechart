@@ -1069,6 +1069,9 @@ public class CategoryPlotTest {
         assertEquals(99, plot.indexOf(dataset2));
     }
     
+    /**
+     * Tests for the getDomainAxis() and getRangeAxis() methods.
+     */
     @Test
     public void testAxisIndices() {
         CategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
@@ -1087,7 +1090,10 @@ public class CategoryPlotTest {
         plot.setRangeAxis(99, yAxis2);
         assertEquals(yAxis2, plot.getRangeAxis(99));
     }
-    
+
+    /**
+     * Tests for the getDomainAxisLocation() and getRangeAxisLocation() methods.
+     */
     @Test 
     public void testAxisLocationIndices() {
         CategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();

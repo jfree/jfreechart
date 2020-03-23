@@ -340,6 +340,9 @@ public class RangeTest {
         assertEquals(2.0, rr.getUpperBound(), EPSILON);
     }
     
+    /**
+     * Tests for the isNaNRange() method.
+     */
     @Test
     public void testIsNaNRange() {
         assertTrue(new Range(Double.NaN, Double.NaN).isNaNRange());

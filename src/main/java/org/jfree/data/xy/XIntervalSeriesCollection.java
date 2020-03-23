@@ -321,7 +321,7 @@ public class XIntervalSeriesCollection<S extends Comparable<S>>
     public void removeAllSeries() {
         // Unregister the collection as a change listener to each series in
         // the collection.
-        for (XIntervalSeries series : this.data) { ;
+        for (XIntervalSeries series : this.data) {
           series.removeChangeListener(this);
         }
         this.data.clear();
