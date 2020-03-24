@@ -56,13 +56,13 @@ public class DefaultTableXYDatasetTest {
      */
     @Test
     public void testEquals() {
-        DefaultTableXYDataset d1 = new DefaultTableXYDataset();
+        DefaultTableXYDataset<String> d1 = new DefaultTableXYDataset<>();
         XYSeries<String> s1 = new XYSeries<>("Series 1", true, false);
         s1.add(1.0, 1.1);
         s1.add(2.0, 2.2);
         d1.addSeries(s1);
 
-        DefaultTableXYDataset d2 = new DefaultTableXYDataset();
+        DefaultTableXYDataset<String> d2 = new DefaultTableXYDataset<>();
         XYSeries<String> s2 = new XYSeries<>("Series 1", true, false);
         s2.add(1.0, 1.1);
         s2.add(2.0, 2.2);
@@ -83,13 +83,13 @@ public class DefaultTableXYDatasetTest {
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        DefaultTableXYDataset d1 = new DefaultTableXYDataset();
+        DefaultTableXYDataset<String> d1 = new DefaultTableXYDataset<>();
         XYSeries<String> s1 = new XYSeries<>("Series 1", true, false);
         s1.add(1.0, 1.1);
         s1.add(2.0, 2.2);
         d1.addSeries(s1);
 
-        DefaultTableXYDataset d2 = CloneUtils.clone(d1);
+        DefaultTableXYDataset<String> d2 = CloneUtils.clone(d1);
 
         assertTrue(d1 != d2);
         assertTrue(d1.getClass() == d2.getClass());
@@ -104,7 +104,7 @@ public class DefaultTableXYDatasetTest {
      */
     @Test
     public void testPublicCloneable() {
-        DefaultTableXYDataset d1 = new DefaultTableXYDataset();
+        DefaultTableXYDataset<String> d1 = new DefaultTableXYDataset<>();
         assertTrue(d1 instanceof PublicCloneable);
     }
 
@@ -113,13 +113,13 @@ public class DefaultTableXYDatasetTest {
      */
     @Test
     public void testSerialization() {
-        DefaultTableXYDataset d1 = new DefaultTableXYDataset();
+        DefaultTableXYDataset<String> d1 = new DefaultTableXYDataset<>();
         XYSeries<String> s1 = new XYSeries<>("Series 1", true, false);
         s1.add(1.0, 1.1);
         s1.add(2.0, 2.2);
         d1.addSeries(s1);
 
-        DefaultTableXYDataset d2 = TestUtils.serialised(d1);
+        DefaultTableXYDataset<String> d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 
@@ -132,7 +132,7 @@ public class DefaultTableXYDatasetTest {
      */
     @Test
     public void testAddSeries() {
-        DefaultTableXYDataset d1 = new DefaultTableXYDataset();
+        DefaultTableXYDataset<String> d1 = new DefaultTableXYDataset<>();
         d1.setAutoWidth(true);
         XYSeries<String> s1 = new XYSeries<>("Series 1", true, false);
         s1.add(3.0, 1.1);
@@ -173,7 +173,7 @@ public class DefaultTableXYDatasetTest {
      */
     @Test
     public void testGetSeries() {
-        DefaultTableXYDataset d1 = new DefaultTableXYDataset();
+        DefaultTableXYDataset<String> d1 = new DefaultTableXYDataset<>();
         XYSeries<String> s1 = new XYSeries<>("Series 1", true, false);
         d1.addSeries(s1);
         assertEquals("Series 1", d1.getSeries(0).getKey());

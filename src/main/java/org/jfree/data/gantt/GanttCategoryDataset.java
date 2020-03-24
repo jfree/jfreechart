@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * -------------------------
  * GanttCategoryDataset.java
  * -------------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited.
+ * (C) Copyright 2003-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 16-Sep-2003 : Version 1, based on MultiIntervalCategoryDataset (DG);
- * 23-Sep-2003 : Fixed Checkstyle issues (DG);
- * 12-May-2008 : Updated API docs (DG);
  *
  */
 
@@ -48,7 +42,8 @@ import org.jfree.data.category.IntervalCategoryDataset;
  * An extension of the {@link IntervalCategoryDataset} interface that adds
  * support for multiple sub-intervals.
  */
-public interface GanttCategoryDataset extends IntervalCategoryDataset {
+public interface GanttCategoryDataset<R extends Comparable<R>, C extends Comparable<C>> 
+        extends IntervalCategoryDataset<R, C> {
 
     /**
      * Returns the percent complete for a given item.
@@ -72,7 +67,7 @@ public interface GanttCategoryDataset extends IntervalCategoryDataset {
      *
      * @see #getPercentComplete(int, int)
      */
-    public Number getPercentComplete(Comparable rowKey, Comparable columnKey);
+    public Number getPercentComplete(R rowKey, C columnKey);
 
     /**
      * Returns the number of sub-intervals for a given item.
@@ -96,7 +91,7 @@ public interface GanttCategoryDataset extends IntervalCategoryDataset {
      *
      * @see #getSubIntervalCount(int, int)
      */
-    public int getSubIntervalCount(Comparable rowKey, Comparable columnKey);
+    public int getSubIntervalCount(R rowKey, C columnKey);
 
     /**
      * Returns the start value of a sub-interval for a given item.
@@ -122,8 +117,7 @@ public interface GanttCategoryDataset extends IntervalCategoryDataset {
      *
      * @see #getEndValue(Comparable, Comparable, int)
      */
-    public Number getStartValue(Comparable rowKey, Comparable columnKey,
-                                int subinterval);
+    public Number getStartValue(R rowKey, C columnKey, int subinterval);
 
     /**
      * Returns the end value of a sub-interval for a given item.
@@ -149,8 +143,7 @@ public interface GanttCategoryDataset extends IntervalCategoryDataset {
      *
      * @see #getStartValue(Comparable, Comparable, int)
      */
-    public Number getEndValue(Comparable rowKey, Comparable columnKey,
-                              int subinterval);
+    public Number getEndValue(R rowKey, C columnKey, int subinterval);
 
     /**
      * Returns the percentage complete value of a sub-interval for a given item.
@@ -176,7 +169,6 @@ public interface GanttCategoryDataset extends IntervalCategoryDataset {
      *
      * @see #getPercentComplete(int, int, int)
      */
-    public Number getPercentComplete(Comparable rowKey, Comparable columnKey,
-                                     int subinterval);
+    public Number getPercentComplete(R rowKey, C columnKey, int subinterval);
 
 }

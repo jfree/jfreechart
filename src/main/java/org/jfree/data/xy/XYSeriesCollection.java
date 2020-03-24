@@ -61,8 +61,8 @@ import org.jfree.data.general.Series;
  * dataset.
  */
 public class XYSeriesCollection<S extends Comparable<S>> 
-        extends AbstractIntervalXYDataset
-        implements IntervalXYDataset, DomainInfo, RangeInfo, 
+        extends AbstractIntervalXYDataset<S>
+        implements IntervalXYDataset<S>, DomainInfo, RangeInfo, 
         VetoableChangeListener, PublicCloneable, Serializable {
 
     /** For serialization. */

@@ -219,7 +219,7 @@ public class XYLineAndShapeRendererTest {
      */
     @Test
     public void testFindDomainBounds() {
-        XYSeriesCollection dataset
+        XYSeriesCollection<String> dataset
                 = RendererXYPackageUtils.createTestXYSeriesCollection();
         JFreeChart chart = ChartFactory.createXYLineChart(
                 "Test Chart", "X", "Y", dataset, PlotOrientation.VERTICAL,
@@ -239,7 +239,7 @@ public class XYLineAndShapeRendererTest {
      */
     @Test
     public void testFindRangeBounds() {
-        TableXYDataset dataset
+        TableXYDataset<String> dataset
                 = RendererXYPackageUtils.createTestTableXYDataset();
         JFreeChart chart = ChartFactory.createXYLineChart(
                 "Test Chart", "X", "Y", dataset, PlotOrientation.VERTICAL,

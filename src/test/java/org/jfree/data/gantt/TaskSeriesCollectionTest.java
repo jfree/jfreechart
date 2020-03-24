@@ -608,7 +608,7 @@ public class TaskSeriesCollectionTest {
         try {
             c.getSeries(null);
         }
-        catch (NullPointerException e) {
+        catch (IllegalArgumentException e) {
             pass = true;
         }
         assertTrue(pass);

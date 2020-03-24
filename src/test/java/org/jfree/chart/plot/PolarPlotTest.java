@@ -230,7 +230,7 @@ public class PolarPlotTest {
         p2.addCornerTextItem("XYZ");
         assertTrue(p1.equals(p2));
 
-        p1 = new PolarPlot(new DefaultXYDataset(), new NumberAxis("A1"),
+        p1 = new PolarPlot(new DefaultXYDataset<String>(), new NumberAxis("A1"),
                 new DefaultPolarItemRenderer());
         p2 = (PolarPlot) p1.clone();
         assertTrue(p1 != p2);

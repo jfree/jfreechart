@@ -71,8 +71,8 @@ public class RendererXYPackageUtils {
      *
      * @return A sample dataset.
      */
-    public static TableXYDataset createTestTableXYDataset() {
-        DefaultTableXYDataset result = new DefaultTableXYDataset();
+    public static TableXYDataset<String> createTestTableXYDataset() {
+        DefaultTableXYDataset<String> result = new DefaultTableXYDataset<>();
         XYSeries<String> series1 = new XYSeries<>("Series 1", false, false);
         series1.add(1.0, 2.0);
         series1.add(2.0, 5.0);

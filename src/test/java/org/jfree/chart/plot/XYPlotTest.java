@@ -719,7 +719,7 @@ public class XYPlotTest {
      */
     @Test
     public void testSerialization2() {
-        IntervalXYDataset data1 = createDataset1();
+        IntervalXYDataset<String> data1 = createDataset1();
         XYItemRenderer renderer1 = new XYBarRenderer(0.20);
         renderer1.setDefaultToolTipGenerator(
                 StandardXYToolTipGenerator.getTimeSeriesInstance());
@@ -830,9 +830,9 @@ public class XYPlotTest {
     @Test
     public void testGetRendererForDataset() {
         XYDataset<String> d0 = new XYSeriesCollection<>();
-        XYDataset<String> d1 = new XYSeriesCollection<String>();
-        XYDataset<String> d2 = new XYSeriesCollection<String>();
-        XYDataset<String> d3 = new XYSeriesCollection<String>();  // not used by plot
+        XYDataset<String> d1 = new XYSeriesCollection<>();
+        XYDataset<String> d2 = new XYSeriesCollection<>();
+        XYDataset<String> d3 = new XYSeriesCollection<>();  // not used by plot
         XYItemRenderer r0 = new XYLineAndShapeRenderer();
         XYItemRenderer r2 = new XYLineAndShapeRenderer();
         XYPlot plot = new XYPlot();
@@ -989,7 +989,7 @@ public class XYPlotTest {
      */
     @Test
     public void test1654215() {
-        DefaultXYDataset dataset = new DefaultXYDataset();
+        DefaultXYDataset<String> dataset = new DefaultXYDataset<>();
         JFreeChart chart = ChartFactory.createXYLineChart("Title", "X", "Y",
                 dataset, PlotOrientation.VERTICAL, true, false, false);
         XYPlot plot = (XYPlot) chart.getPlot();
@@ -1012,7 +1012,7 @@ public class XYPlotTest {
      */
     @Test
     public void testDrawRangeGridlines() {
-        DefaultXYDataset dataset = new DefaultXYDataset();
+        DefaultXYDataset<String> dataset = new DefaultXYDataset<>();
         JFreeChart chart = ChartFactory.createXYLineChart("Title", "X", "Y",
                 dataset, PlotOrientation.VERTICAL, true, false, false);
         XYPlot plot = (XYPlot) chart.getPlot();
@@ -1077,7 +1077,7 @@ public class XYPlotTest {
      */
     @Test
     public void testGetDomainAxisForDataset() {
-        XYDataset dataset = new XYSeriesCollection<String>();
+        XYDataset<String> dataset = new XYSeriesCollection<>();
         NumberAxis xAxis = new NumberAxis("X");
         NumberAxis yAxis = new NumberAxis("Y");
         XYItemRenderer renderer = new DefaultXYItemRenderer();
@@ -1117,7 +1117,7 @@ public class XYPlotTest {
      */
     @Test
     public void testGetRangeAxisForDataset() {
-        XYDataset dataset = new XYSeriesCollection<String>();
+        XYDataset<String> dataset = new XYSeriesCollection<>();
         NumberAxis xAxis = new NumberAxis("X");
         NumberAxis yAxis = new NumberAxis("Y");
         XYItemRenderer renderer = new DefaultXYItemRenderer();
@@ -1158,7 +1158,7 @@ public class XYPlotTest {
      */
     @Test
     public void testDatasetIndices() {
-        XYDataset dataset = new XYSeriesCollection<String>();
+        XYDataset<String> dataset = new XYSeriesCollection<>();
         NumberAxis xAxis = new NumberAxis("X");
         NumberAxis yAxis = new NumberAxis("Y");
         XYItemRenderer renderer = new DefaultXYItemRenderer();
@@ -1180,7 +1180,7 @@ public class XYPlotTest {
     
     @Test
     public void testAxisIndices() {
-        XYDataset dataset = new XYSeriesCollection<String>();
+        XYDataset<String> dataset = new XYSeriesCollection<>();
         NumberAxis xAxis = new NumberAxis("X");
         NumberAxis yAxis = new NumberAxis("Y");
         XYItemRenderer renderer = new DefaultXYItemRenderer();
@@ -1199,7 +1199,7 @@ public class XYPlotTest {
     
     @Test 
     public void testAxisLocationIndices() {
-        XYDataset dataset = new XYSeriesCollection<String>();
+        XYDataset<String> dataset = new XYSeriesCollection<>();
         NumberAxis xAxis = new NumberAxis("X");
         NumberAxis yAxis = new NumberAxis("Y");
         XYItemRenderer renderer = new DefaultXYItemRenderer();
@@ -1220,7 +1220,7 @@ public class XYPlotTest {
     
     @Test 
     public void testRendererIndices() {
-        XYDataset dataset = new XYSeriesCollection<String>();
+        XYDataset<String> dataset = new XYSeriesCollection<>();
         NumberAxis xAxis = new NumberAxis("X");
         NumberAxis yAxis = new NumberAxis("Y");
         XYItemRenderer renderer = new DefaultXYItemRenderer();
@@ -1239,7 +1239,7 @@ public class XYPlotTest {
 
     @Test 
     public void testGetRendererForDataset2() {
-        XYDataset dataset = new XYSeriesCollection<String>();
+        XYDataset<String> dataset = new XYSeriesCollection<>();
         NumberAxis xAxis = new NumberAxis("X");
         NumberAxis yAxis = new NumberAxis("Y");
         XYItemRenderer renderer = new DefaultXYItemRenderer();
@@ -1262,7 +1262,7 @@ public class XYPlotTest {
     
     @Test
     public void testMapDatasetToDomainAxis() {
-        XYDataset dataset = new XYSeriesCollection<String>();
+        XYDataset<String> dataset = new XYSeriesCollection<>();
         NumberAxis xAxis = new NumberAxis("X");
         NumberAxis yAxis = new NumberAxis("Y");
         XYItemRenderer renderer = new DefaultXYItemRenderer();
@@ -1285,7 +1285,7 @@ public class XYPlotTest {
 
     @Test
     public void testMapDatasetToRangeAxis() {
-        XYDataset dataset = new XYSeriesCollection<String>();
+        XYDataset<String> dataset = new XYSeriesCollection<>();
         NumberAxis xAxis = new NumberAxis("X");
         NumberAxis yAxis = new NumberAxis("Y");
         XYItemRenderer renderer = new DefaultXYItemRenderer();
@@ -1308,7 +1308,7 @@ public class XYPlotTest {
     
     @Test
     public void testDomainMarkerIndices() {
-        XYDataset dataset = new XYSeriesCollection<String>();
+        XYDataset<String> dataset = new XYSeriesCollection<>();
         NumberAxis xAxis = new NumberAxis("X");
         NumberAxis yAxis = new NumberAxis("Y");
         XYItemRenderer renderer = new DefaultXYItemRenderer();
@@ -1332,7 +1332,7 @@ public class XYPlotTest {
 
     @Test
     public void testRangeMarkerIndices() {
-        XYDataset dataset = new XYSeriesCollection<String>();
+        XYDataset<String> dataset = new XYSeriesCollection<>();
         NumberAxis xAxis = new NumberAxis("X");
         NumberAxis yAxis = new NumberAxis("Y");
         XYItemRenderer renderer = new DefaultXYItemRenderer();

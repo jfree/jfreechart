@@ -411,13 +411,13 @@ public final class DatasetUtils {
      *
      * @return A dataset.
      */
-    public static XYDataset sampleFunction2D(Function2D f, double start,
-            double end, int samples, Comparable<?> seriesKey) {
+    public static <S extends Comparable<S>> XYDataset<S> sampleFunction2D(
+            Function2D f, double start, double end, int samples, S seriesKey) {
 
         // defer argument checking
-        XYSeries series = sampleFunction2DToSeries(f, start, end, samples,
+        XYSeries<S> series = sampleFunction2DToSeries(f, start, end, samples,
                 seriesKey);
-        XYSeriesCollection collection = new XYSeriesCollection(series);
+        XYSeriesCollection<S> collection = new XYSeriesCollection<>(series);
         return collection;
     }
 
@@ -436,8 +436,8 @@ public final class DatasetUtils {
      *
      * @since 1.0.13
      */
-    public static XYSeries sampleFunction2DToSeries(Function2D f,
-            double start, double end, int samples, Comparable<?> seriesKey) {
+    public static <S extends Comparable<S>> XYSeries<S> sampleFunction2DToSeries(
+            Function2D f, double start, double end, int samples, S seriesKey) {
 
         Args.nullNotPermitted(f, "f");
         Args.nullNotPermitted(seriesKey, "seriesKey");
@@ -448,7 +448,7 @@ public final class DatasetUtils {
             throw new IllegalArgumentException("Requires 'samples' > 1");
         }
 
-        XYSeries series = new XYSeries(seriesKey);
+        XYSeries<S> series = new XYSeries<>(seriesKey);
         double step = (end - start) / (samples - 1);
         for (int i = 0; i < samples; i++) {
             double x = start + (step * i);
@@ -521,7 +521,8 @@ public final class DatasetUtils {
      *
      * @return A boolean.
      */
-    public static boolean isEmptyOrNull(XYDataset dataset) {
+    public static <S extends Comparable<S>> boolean isEmptyOrNull(
+            XYDataset<S> dataset) {
         if (dataset != null) {
             for (int s = 0; s < dataset.getSeriesCount(); s++) {
                 if (dataset.getItemCount(s) > 0) {
@@ -539,7 +540,7 @@ public final class DatasetUtils {
      *
      * @return The range of values (possibly {@code null}).
      */
-    public static Range findDomainBounds(XYDataset dataset) {
+    public static <S extends Comparable<S>> Range findDomainBounds(XYDataset<S> dataset) {
         return findDomainBounds(dataset, true);
     }
 

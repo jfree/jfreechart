@@ -55,7 +55,7 @@ public class RendererUtilsTest {
      */
     @Test
     public void testFindLiveItemsLowerBound_Unordered() {
-        DefaultXYDataset d = new DefaultXYDataset();
+        DefaultXYDataset<String> d = new DefaultXYDataset<>();
 
         // check a series with no items
         d.addSeries("S1", new double[][] {{}, {}});
@@ -99,7 +99,7 @@ public class RendererUtilsTest {
      */
     @Test
     public void testFindLiveItemsLowerBound_Ascending() {
-        DefaultXYDataset d = new DefaultXYDataset() {
+        DefaultXYDataset<String> d = new DefaultXYDataset<String>() {
             @Override
             public DomainOrder getDomainOrder() {
                 // we're doing this for testing only, and make sure that we
@@ -155,7 +155,7 @@ public class RendererUtilsTest {
      */
     @Test
     public void testFindLiveItemsLowerBound_Descending() {
-        DefaultXYDataset d = new DefaultXYDataset() {
+        DefaultXYDataset<String> d = new DefaultXYDataset<String>() {
             @Override
             public DomainOrder getDomainOrder() {
                 // we're doing this for testing only, and make sure that we
@@ -212,7 +212,7 @@ public class RendererUtilsTest {
      */
     @Test
     public void testFindLiveItemsUpperBound_Unordered() {
-        DefaultXYDataset d = new DefaultXYDataset();
+        DefaultXYDataset<String> d = new DefaultXYDataset<>();
 
         // check a series with no items
         d.addSeries("S1", new double[][] {{}, {}});
@@ -253,7 +253,7 @@ public class RendererUtilsTest {
      */
     @Test
     public void testFindLiveItemsUpperBound_Ascending() {
-        DefaultXYDataset d = new DefaultXYDataset() {
+        DefaultXYDataset<String> d = new DefaultXYDataset<String>() {
             @Override
             public DomainOrder getDomainOrder() {
                 // we're doing this for testing only, and make sure that we
@@ -309,7 +309,7 @@ public class RendererUtilsTest {
      */
     @Test
     public void testFindLiveItemsUpperBound_Descending() {
-        DefaultXYDataset d = new DefaultXYDataset() {
+        DefaultXYDataset<String> d = new DefaultXYDataset<String>() {
             @Override
             public DomainOrder getDomainOrder() {
                 // we're doing this for testing only, and make sure that we
