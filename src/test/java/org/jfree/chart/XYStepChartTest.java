@@ -105,7 +105,7 @@ public class XYStepChartTest {
         series1.add(10.0, 10.0);
         series1.add(20.0, 20.0);
         series1.add(30.0, 30.0);
-        XYDataset dataset = new XYSeriesCollection<>(series1);
+        XYDataset<String> dataset = new XYSeriesCollection<>(series1);
 
         LocalListener l = new LocalListener();
         this.chart.addChangeListener(l);
@@ -147,7 +147,7 @@ public class XYStepChartTest {
         series1.add(1.0, 1.0);
         series1.add(2.0, 2.0);
         series1.add(3.0, 3.0);
-        XYDataset dataset = new XYSeriesCollection<>(series1);
+        XYDataset<String> dataset = new XYSeriesCollection<>(series1);
 
         // create the chart...
         return ChartFactory.createXYStepChart(

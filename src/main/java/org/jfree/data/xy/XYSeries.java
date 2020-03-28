@@ -46,6 +46,7 @@ import java.util.Collections;
 import java.util.List;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
+import org.jfree.chart.util.CloneUtils;
 
 import org.jfree.data.general.Series;
 import org.jfree.data.general.SeriesChangeEvent;
@@ -852,8 +853,8 @@ public class XYSeries<K extends Comparable<K>> extends Series<K>
      */
     @Override
     public Object clone() throws CloneNotSupportedException {
-        XYSeries clone = (XYSeries) super.clone();
-        clone.data = (List<XYDataItem>) ObjectUtils.deepClone(this.data);
+        XYSeries<K> clone = (XYSeries) super.clone();
+        clone.data = CloneUtils.cloneList(this.data);
         return clone;
     }
 
@@ -867,15 +868,15 @@ public class XYSeries<K extends Comparable<K>> extends Series<K>
      *
      * @throws CloneNotSupportedException if there is a cloning problem.
      */
-    public XYSeries createCopy(int start, int end)
+    public XYSeries<K> createCopy(int start, int end)
             throws CloneNotSupportedException {
 
-        XYSeries copy = (XYSeries) super.clone();
+        XYSeries<K> copy = (XYSeries) super.clone();
         copy.data = new ArrayList<>();
         if (this.data.size() > 0) {
             for (int index = start; index <= end; index++) {
                 XYDataItem item = this.data.get(index);
-                XYDataItem clone = (XYDataItem) item.clone();
+                XYDataItem clone = CloneUtils.clone(item);
                 try {
                     copy.add(clone);
                 }
@@ -908,7 +909,7 @@ public class XYSeries<K extends Comparable<K>> extends Series<K>
         if (!super.equals(obj)) {
             return false;
         }
-        XYSeries that = (XYSeries) obj;
+        XYSeries<K> that = (XYSeries) obj;
         if (this.maximumItemCount != that.maximumItemCount) {
             return false;
         }

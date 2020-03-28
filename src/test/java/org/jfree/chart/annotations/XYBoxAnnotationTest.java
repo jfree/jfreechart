@@ -50,6 +50,7 @@ import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.xy.DefaultTableXYDataset;
 import org.jfree.data.xy.XYSeries;
@@ -136,7 +137,7 @@ public class XYBoxAnnotationTest {
     public void testCloning() throws CloneNotSupportedException {
         XYBoxAnnotation a1 = new XYBoxAnnotation(1.0, 2.0, 3.0, 4.0,
                 new BasicStroke(1.2f), Color.RED, Color.BLUE);
-        XYBoxAnnotation a2 = (XYBoxAnnotation) a1.clone();
+        XYBoxAnnotation a2 = CloneUtils.clone(a1);
         assertTrue(a1 != a2);
         assertTrue(a1.getClass() == a2.getClass());
         assertTrue(a1.equals(a2));
@@ -170,7 +171,7 @@ public class XYBoxAnnotationTest {
     @Test
     public void testDrawWithNullInfo() {
         try {
-            DefaultTableXYDataset dataset = new DefaultTableXYDataset();
+            DefaultTableXYDataset<String> dataset = new DefaultTableXYDataset<>();
 
             XYSeries<String> s1 = new XYSeries<>("Series 1", true, false);
             s1.add(5.0, 5.0);

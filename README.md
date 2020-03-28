@@ -74,6 +74,9 @@ History
 
 ##### Version 1.6.0 (not yet released)
 - update required JDK to version 1.8;
+- added generics 
+- DefaultIntervalCategoryDataset no longer allows null keys in constructor (this
+  is a consequence of introducing generics)
 
 ##### Version 1.5.0 (5 November 2017)
 - all JavaFX classes moved to a separate project;

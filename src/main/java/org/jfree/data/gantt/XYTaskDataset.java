@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * ------------------
  * XYTaskDataset.java
  * ------------------
- * (C) Copyright 2008-2016, by Object Refinery Limited.
+ * (C) Copyright 2008-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 17-Sep-2008 : Version 1 (DG);
- * 03-Jul-2016 : Use ParamChecks (DG);
- * 19-Jan-2019 : Added missing hashCode (TH);
  *
  */
 
@@ -255,7 +249,7 @@ public class XYTaskDataset extends AbstractXYDataset
      */
     @Override
     public Number getX(int series, int item) {
-        return new Double(getXValue(series, item));
+        return getXValue(series, item);
     }
 
     /**
@@ -270,7 +264,7 @@ public class XYTaskDataset extends AbstractXYDataset
      */
     @Override
     public Number getStartX(int series, int item) {
-        return new Double(getStartXValue(series, item));
+        return getStartXValue(series, item);
     }
 
     /**
@@ -285,7 +279,7 @@ public class XYTaskDataset extends AbstractXYDataset
      */
     @Override
     public Number getEndX(int series, int item) {
-        return new Double(getEndXValue(series, item));
+        return getEndXValue(series, item);
     }
 
     /**
@@ -356,7 +350,7 @@ public class XYTaskDataset extends AbstractXYDataset
      */
     @Override
     public Number getY(int series, int item) {
-        return new Double(getYValue(series, item));
+        return getYValue(series, item);
     }
 
     /**
@@ -370,7 +364,7 @@ public class XYTaskDataset extends AbstractXYDataset
      */
     @Override
     public Number getStartY(int series, int item) {
-        return new Double(getStartYValue(series, item));
+        return getStartYValue(series, item);
     }
 
     /**
@@ -384,7 +378,7 @@ public class XYTaskDataset extends AbstractXYDataset
      */
     @Override
     public Number getEndY(int series, int item) {
-        return new Double(getEndYValue(series, item));
+        return getEndYValue(series, item);
     }
 
     private double getSeriesValue(int series) {

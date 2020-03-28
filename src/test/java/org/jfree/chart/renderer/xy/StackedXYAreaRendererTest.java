@@ -140,7 +140,7 @@ public class StackedXYAreaRendererTest {
      */
     @Test
     public void testFindRangeBounds() {
-        TableXYDataset dataset
+        TableXYDataset<String> dataset
                 = RendererXYPackageUtils.createTestTableXYDataset();
         JFreeChart chart = ChartFactory.createStackedXYAreaChart(
                 "Test Chart", "X", "Y", dataset, PlotOrientation.VERTICAL,
@@ -159,7 +159,7 @@ public class StackedXYAreaRendererTest {
     @Test
     public void testDrawWithNullInfo() {
         try {
-            DefaultTableXYDataset dataset = new DefaultTableXYDataset();
+            DefaultTableXYDataset<String> dataset = new DefaultTableXYDataset<>();
 
             XYSeries<String> s1 = new XYSeries<>("Series 1", true, false);
             s1.add(5.0, 5.0);
@@ -192,7 +192,7 @@ public class StackedXYAreaRendererTest {
     @Test
     public void testBug1593156() {
         try {
-            DefaultTableXYDataset dataset = new DefaultTableXYDataset();
+            DefaultTableXYDataset<String> dataset = new DefaultTableXYDataset<>();
 
             XYSeries<String> s1 = new XYSeries<>("Series 1", true, false);
             s1.add(5.0, 5.0);

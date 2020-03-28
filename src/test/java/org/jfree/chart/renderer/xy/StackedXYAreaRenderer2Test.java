@@ -69,7 +69,7 @@ public class StackedXYAreaRenderer2Test {
      */
     @Test
     public void testDrawWithEmptyDataset() {
-        boolean success = false;
+        boolean success;
         JFreeChart chart = ChartFactory.createStackedXYAreaChart("title", "x",
                 "y", new DefaultTableXYDataset(), PlotOrientation.VERTICAL,
                 true, false, false);
@@ -154,7 +154,7 @@ public class StackedXYAreaRenderer2Test {
      */
     @Test
     public void testFindRangeBounds() {
-        TableXYDataset dataset
+        TableXYDataset<String> dataset
                 = RendererXYPackageUtils.createTestTableXYDataset();
         JFreeChart chart = ChartFactory.createStackedXYAreaChart(
                 "Test Chart", "X", "Y", dataset, PlotOrientation.VERTICAL,
