@@ -1302,7 +1302,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
      *
      * @param plot  the plot ({@code null} not permitted).
      */
-    protected void applyToXYPlot(XYPlot plot) {
+    protected <S extends Comparable<S>> void  applyToXYPlot(XYPlot<S> plot) {
         plot.setAxisOffset(this.axisOffset);
         plot.setDomainZeroBaselinePaint(this.baselinePaint);
         plot.setRangeZeroBaselinePaint(this.baselinePaint);

@@ -763,34 +763,6 @@ public class JFreeChart implements Drawable, TitleChangeListener,
     }
 
     /**
-     * Returns the plot cast as a {@link CategoryPlot}.
-     * <p>
-     * NOTE: if the plot is not an instance of {@link CategoryPlot}, then a
-     * {@code ClassCastException} is thrown.
-     *
-     * @return The plot.
-     *
-     * @see #getPlot()
-     */
-    public CategoryPlot getCategoryPlot() {
-        return (CategoryPlot) this.plot;
-    }
-
-    /**
-     * Returns the plot cast as an {@link XYPlot}.
-     * <p>
-     * NOTE: if the plot is not an instance of {@link XYPlot}, then a
-     * {@code ClassCastException} is thrown.
-     *
-     * @return The plot.
-     *
-     * @see #getPlot()
-     */
-    public XYPlot getXYPlot() {
-        return (XYPlot) this.plot;
-    }
-
-    /**
      * Returns a flag that indicates whether or not anti-aliasing is used when
      * the chart is drawn.
      *

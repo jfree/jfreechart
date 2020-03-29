@@ -1492,8 +1492,9 @@ public abstract class ChartFactory {
      * 
      * @since 1.0.16
      */
-    public static JFreeChart createXYAreaChart(String title,String xAxisLabel,
-            String yAxisLabel, XYDataset dataset) {
+    public static <S extends Comparable<S>> JFreeChart createXYAreaChart(
+            String title,String xAxisLabel, String yAxisLabel, 
+            XYDataset<S> dataset) {
         return createXYAreaChart(title, xAxisLabel, yAxisLabel, dataset, 
                 PlotOrientation.VERTICAL, true, true, false);
     }
@@ -1518,15 +1519,16 @@ public abstract class ChartFactory {
      *
      * @return An XY area chart.
      */
-    public static JFreeChart createXYAreaChart(String title, String xAxisLabel,
-            String yAxisLabel, XYDataset dataset, PlotOrientation orientation,
+    public static <S extends Comparable<S>> JFreeChart createXYAreaChart(
+            String title, String xAxisLabel,
+            String yAxisLabel, XYDataset<S> dataset, PlotOrientation orientation,
             boolean legend, boolean tooltips, boolean urls) {
 
         Args.nullNotPermitted(orientation, "orientation");
         NumberAxis xAxis = new NumberAxis(xAxisLabel);
         xAxis.setAutoRangeIncludesZero(false);
         NumberAxis yAxis = new NumberAxis(yAxisLabel);
-        XYPlot plot = new XYPlot(dataset, xAxis, yAxis, null);
+        XYPlot<S> plot = new XYPlot<>(dataset, xAxis, yAxis, null);
         plot.setOrientation(orientation);
         plot.setForegroundAlpha(0.5f);
 
@@ -1673,10 +1675,14 @@ public abstract class ChartFactory {
         if (urls) {
             renderer.setURLGenerator(new StandardXYURLGenerator());
         }
-
-        JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
+        JFreeChart chart = null;
+try {
+        chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
         currentTheme.apply(chart);
+} catch (NullPointerException e) {
+    e.printStackTrace();
+}
         return chart;
 
     }

@@ -1121,7 +1121,7 @@ public class XYPlotTest {
         NumberAxis xAxis = new NumberAxis("X");
         NumberAxis yAxis = new NumberAxis("Y");
         XYItemRenderer renderer = new DefaultXYItemRenderer();
-        XYPlot plot = new XYPlot(dataset, xAxis, yAxis, renderer);
+        XYPlot<String> plot = new XYPlot<>(dataset, xAxis, yAxis, renderer);
         assertEquals(yAxis, plot.getRangeAxisForDataset(0));
 
         // should get IllegalArgumentException for negative index

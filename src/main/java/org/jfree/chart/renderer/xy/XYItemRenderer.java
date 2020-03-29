@@ -45,6 +45,7 @@ import java.awt.Paint;
 import java.awt.Shape;
 import java.awt.Stroke;
 import java.awt.geom.Rectangle2D;
+import java.util.Collection;
 
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.LegendItemSource;
@@ -1497,4 +1498,12 @@ public interface XYItemRenderer extends LegendItemSource {
     public void drawRangeMarker(Graphics2D g2, XYPlot plot, ValueAxis axis,
             Marker marker, Rectangle2D dataArea);
 
+    /**
+     * Returns the annotations for the renderer.
+     * 
+     * @return The annotations (possibly empty, but never {@code null}).
+     * 
+     * @since 1.6.0
+     */
+    public Collection<XYAnnotation> getAnnotations();
 }
