@@ -166,7 +166,7 @@ public class CombinedDomainXYPlotTest implements ChartChangeListener {
      *
      * @return Series 1.
      */
-    private XYDataset createDataset1() {
+    private XYDataset<String> createDataset1() {
 
         // create dataset 1...
         XYSeries<String> series1 = new XYSeries<>("Series 1");
@@ -215,7 +215,7 @@ public class CombinedDomainXYPlotTest implements ChartChangeListener {
      *
      * @return Series 2.
      */
-    private XYDataset createDataset2() {
+    private XYDataset<String> createDataset2() {
 
         XYSeries<String> series2 = new XYSeries<>("Series 3");
 
@@ -245,7 +245,7 @@ public class CombinedDomainXYPlotTest implements ChartChangeListener {
      */
     private CombinedDomainXYPlot createPlot() {
         // create subplot 1...
-        XYDataset data1 = createDataset1();
+        XYDataset<String> data1 = createDataset1();
         XYItemRenderer renderer1 = new StandardXYItemRenderer();
         NumberAxis rangeAxis1 = new NumberAxis("Range 1");
         XYPlot subplot1 = new XYPlot(data1, null, rangeAxis1, renderer1);
@@ -258,7 +258,7 @@ public class CombinedDomainXYPlotTest implements ChartChangeListener {
         subplot1.addAnnotation(annotation);
 
         // create subplot 2...
-        XYDataset data2 = createDataset2();
+        XYDataset<String> data2 = createDataset2();
         XYItemRenderer renderer2 = new StandardXYItemRenderer();
         NumberAxis rangeAxis2 = new NumberAxis("Range 2");
         rangeAxis2.setAutoRangeIncludesZero(false);
