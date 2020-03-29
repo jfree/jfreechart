@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,17 +27,10 @@
  * ---------------
  * XYZDataset.java
  * ---------------
- * (C) Copyright 2001-2008, by Object Refinery Limited.
+ * (C) Copyright 2001-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 31-Oct-2001 : Initial version (DG);
- * 05-May-2004 : Added getZ() method;
- * 15-Jul-2004 : Switched getZ() and getZValue() methods (DG);
- * 18-Aug-2004 : Moved from org.jfree.data --> org.jfree.data.xy (DG);
  *
  */
 
@@ -47,7 +40,7 @@ package org.jfree.data.xy;
  * The interface through which JFreeChart obtains data in the form of (x, y, z)
  * items - used for XY and XYZ plots.
  */
-public interface XYZDataset extends XYDataset {
+public interface XYZDataset<S extends Comparable<S>> extends XYDataset<S> {
 
     /**
      * Returns the z-value for the specified series and item.

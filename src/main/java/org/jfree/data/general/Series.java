@@ -237,7 +237,7 @@ public abstract class Series<K extends Comparable<K>>
      */
     @Override
     public Object clone() throws CloneNotSupportedException {
-        Series<K> clone = (Series<K>) super.clone();
+        Series<K> clone = (Series) super.clone();
         clone.listeners = new EventListenerList();
         clone.propertyChangeSupport = new PropertyChangeSupport(clone);
         clone.vetoableChangeSupport = new VetoableChangeSupport(clone);
@@ -259,7 +259,7 @@ public abstract class Series<K extends Comparable<K>>
         if (!(obj instanceof Series)) {
             return false;
         }
-        Series<K> that = (Series<K>) obj;
+        Series<K> that = (Series) obj;
         if (!getKey().equals(that.getKey())) {
             return false;
         }
