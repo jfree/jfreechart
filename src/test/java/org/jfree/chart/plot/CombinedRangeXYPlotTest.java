@@ -156,7 +156,7 @@ public class CombinedRangeXYPlotTest implements ChartChangeListener {
      *
      * @return Series 1.
      */
-    private XYDataset createDataset1() {
+    private XYDataset<String> createDataset1() {
 
         XYSeries<String> series1 = new XYSeries<>("Series 1");
         series1.add(10.0, 12353.3);
@@ -204,7 +204,7 @@ public class CombinedRangeXYPlotTest implements ChartChangeListener {
      *
      * @return Series 2.
      */
-    private XYDataset createDataset2() {
+    private XYDataset<String> createDataset2() {
 
         // create dataset 2...
         XYSeries<String> series2 = new XYSeries<>("Series 3");
@@ -235,7 +235,7 @@ public class CombinedRangeXYPlotTest implements ChartChangeListener {
      */
     private CombinedRangeXYPlot createPlot() {
         // create subplot 1...
-        XYDataset data1 = createDataset1();
+        XYDataset<String> data1 = createDataset1();
         XYItemRenderer renderer1 = new StandardXYItemRenderer();
         NumberAxis xAxis1 = new NumberAxis("X1");
         XYPlot subplot1 = new XYPlot(data1, xAxis1, null, renderer1);
@@ -248,7 +248,7 @@ public class CombinedRangeXYPlotTest implements ChartChangeListener {
         subplot1.addAnnotation(annotation);
 
         // create subplot 2...
-        XYDataset data2 = createDataset2();
+        XYDataset<String> data2 = createDataset2();
         XYItemRenderer renderer2 = new StandardXYItemRenderer();
         NumberAxis xAxis2 = new NumberAxis("X2");
         xAxis2.setAutoRangeIncludesZero(false);

@@ -128,7 +128,7 @@ public class ClusteredXYBarRendererTest {
     @Test
     public void testFindDomainBounds() {
         AbstractXYItemRenderer renderer = new ClusteredXYBarRenderer();
-        XYDataset dataset = createSampleDataset1();
+        XYDataset<String> dataset = createSampleDataset1();
         Range r = renderer.findDomainBounds(dataset);
         assertEquals(0.9, r.getLowerBound(), EPSILON);
         assertEquals(13.1, r.getUpperBound(), EPSILON);
@@ -147,8 +147,8 @@ public class ClusteredXYBarRendererTest {
      *
      * @return A sample dataset.
      */
-    public DefaultIntervalXYDataset createSampleDataset1() {
-        DefaultIntervalXYDataset d = new DefaultIntervalXYDataset();
+    public DefaultIntervalXYDataset<String> createSampleDataset1() {
+        DefaultIntervalXYDataset<String> d = new DefaultIntervalXYDataset<>();
         double[] x1 = new double[] {1.0, 2.0, 3.0};
         double[] x1Start = new double[] {0.9, 1.9, 2.9};
         double[] x1End = new double[] {1.1, 2.1, 3.1};

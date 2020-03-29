@@ -59,10 +59,10 @@ public class DefaultBoxAndWhiskerXYDatasetTest {
      */
     @Test
     public void testEquals() {
-        DefaultBoxAndWhiskerXYDataset d1 = new DefaultBoxAndWhiskerXYDataset(
-                "Series");
-        DefaultBoxAndWhiskerXYDataset d2 = new DefaultBoxAndWhiskerXYDataset(
-                "Series");
+        DefaultBoxAndWhiskerXYDataset<String> d1 
+                = new DefaultBoxAndWhiskerXYDataset<>("Series");
+        DefaultBoxAndWhiskerXYDataset<String> d2 
+                = new DefaultBoxAndWhiskerXYDataset<>("Series");
         assertTrue(d1.equals(d2));
 
         d1.add(new Date(1L), new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0, 5.0,
@@ -78,8 +78,8 @@ public class DefaultBoxAndWhiskerXYDatasetTest {
      */
     @Test
     public void testSerialization() {
-        DefaultBoxAndWhiskerXYDataset d1 = new DefaultBoxAndWhiskerXYDataset(
-                "Series");
+        DefaultBoxAndWhiskerXYDataset<String> d1 
+                = new DefaultBoxAndWhiskerXYDataset<>("Series");
         d1.add(new Date(1L), new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0, 5.0,
                 6.0, 7.0, 8.0, new ArrayList<>()));
         DefaultBoxAndWhiskerXYDataset d2 = TestUtils.serialised(d1);
@@ -97,11 +97,11 @@ public class DefaultBoxAndWhiskerXYDatasetTest {
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        DefaultBoxAndWhiskerXYDataset d1 = new DefaultBoxAndWhiskerXYDataset(
-                "Series");
+        DefaultBoxAndWhiskerXYDataset<String> d1 
+                = new DefaultBoxAndWhiskerXYDataset<>("Series");
         d1.add(new Date(1L), new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0, 5.0,
                 6.0, 7.0, 8.0, new ArrayList<>()));
-        DefaultBoxAndWhiskerXYDataset d2 = CloneUtils.clone(d1);
+        DefaultBoxAndWhiskerXYDataset<String> d2 = CloneUtils.clone(d1);
         assertTrue(d1 != d2);
         assertTrue(d1.getClass() == d2.getClass());
         assertTrue(d1.equals(d2));
@@ -119,8 +119,8 @@ public class DefaultBoxAndWhiskerXYDatasetTest {
      */
     @Test
     public void testAdd() {
-        DefaultBoxAndWhiskerXYDataset dataset
-                = new DefaultBoxAndWhiskerXYDataset("S1");
+        DefaultBoxAndWhiskerXYDataset<String> dataset
+                = new DefaultBoxAndWhiskerXYDataset<>("S1");
         BoxAndWhiskerItem item1 = new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0,
                 5.0, 6.0, 7.0, 8.0, new ArrayList<>());
         dataset.add(new Date(33L), item1);
@@ -144,8 +144,8 @@ public class DefaultBoxAndWhiskerXYDatasetTest {
      */
     @Test
     public void testConstructor() {
-        DefaultBoxAndWhiskerXYDataset dataset
-                = new DefaultBoxAndWhiskerXYDataset("S1");
+        DefaultBoxAndWhiskerXYDataset<String> dataset
+                = new DefaultBoxAndWhiskerXYDataset<>("S1");
         assertEquals(1, dataset.getSeriesCount());
         assertEquals(0, dataset.getItemCount(0));
         assertTrue(Double.isNaN(dataset.getRangeLowerBound(false)));
@@ -157,8 +157,8 @@ public class DefaultBoxAndWhiskerXYDatasetTest {
      */
     @Test
     public void testGetRangeBounds() {
-        DefaultBoxAndWhiskerXYDataset d1
-                = new DefaultBoxAndWhiskerXYDataset("S");
+        DefaultBoxAndWhiskerXYDataset<String> d1
+                = new DefaultBoxAndWhiskerXYDataset<>("S");
         d1.add(new Date(1L), new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0, 5.0,
                 6.0, 7.0, 8.0, new ArrayList<>()));
         assertEquals(new Range(5.0, 6.0), d1.getRangeBounds(false));
