@@ -851,7 +851,8 @@ public class XYSeries<K extends Comparable<K>> extends Series<K>
      *
      * @throws CloneNotSupportedException if there is a cloning problem.
      */
-    @Override
+    @Override 
+    @SuppressWarnings("unchecked")
     public Object clone() throws CloneNotSupportedException {
         XYSeries<K> clone = (XYSeries) super.clone();
         clone.data = CloneUtils.cloneList(this.data);
@@ -868,12 +869,13 @@ public class XYSeries<K extends Comparable<K>> extends Series<K>
      *
      * @throws CloneNotSupportedException if there is a cloning problem.
      */
+    @SuppressWarnings("unchecked")
     public XYSeries<K> createCopy(int start, int end)
             throws CloneNotSupportedException {
 
         XYSeries<K> copy = (XYSeries) super.clone();
         copy.data = new ArrayList<>();
-        if (this.data.size() > 0) {
+        if (!this.data.isEmpty()) {
             for (int index = start; index <= end; index++) {
                 XYDataItem item = this.data.get(index);
                 XYDataItem clone = CloneUtils.clone(item);
@@ -899,6 +901,7 @@ public class XYSeries<K extends Comparable<K>> extends Series<K>
      * @return A boolean.
      */
     @Override
+    @SuppressWarnings("unchecked")
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
