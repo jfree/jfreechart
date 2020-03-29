@@ -110,7 +110,7 @@ public class CloneUtils {
     
     /**
      * Returns a new map that contains the same keys and cloned copied of the
-     * values.
+     * values from the source map.
      * 
      * @param source  the source map ({@code null} not permitted).
      * 
