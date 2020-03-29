@@ -224,7 +224,7 @@ public class XYBarRendererTest {
      */
     @Test
     public void testFindDomainBounds() {
-        XYSeriesCollection dataset
+        XYSeriesCollection<String> dataset
                 = RendererXYPackageUtils.createTestXYSeriesCollection();
         JFreeChart chart = ChartFactory.createXYBarChart("Test Chart", "X",
                 false, "Y", dataset, PlotOrientation.VERTICAL, false, false,
@@ -245,13 +245,13 @@ public class XYBarRendererTest {
      */
     @Test
     public void testFindDomainBounds2() {
-        XYIntervalSeries s1 = new XYIntervalSeries("S1");
+        XYIntervalSeries<String> s1 = new XYIntervalSeries<>("S1");
         s1.add(1.0, 0.5, 1.5, 10.0, 9.5, 10.5);
         s1.add(2.0, 1.9, 2.1, 20.0, 19.8, 20.3);
-        XYIntervalSeries s2 = new XYIntervalSeries("S2");
+        XYIntervalSeries<String> s2 = new XYIntervalSeries("S2");
         s2.add(3.0, 2.5, 3.5, 30.0, 29.5, 30.5);
         s2.add(4.0, 3.9, 4.1, 9.0, 9.0, 9.0);
-        XYIntervalSeriesCollection dataset = new XYIntervalSeriesCollection();
+        XYIntervalSeriesCollection<String> dataset = new XYIntervalSeriesCollection<>();
         dataset.addSeries(s1);
         dataset.addSeries(s2);
         
@@ -273,7 +273,7 @@ public class XYBarRendererTest {
      */
     @Test
     public void testFindRangeBounds() {
-        DefaultIntervalXYDataset dataset = new DefaultIntervalXYDataset();
+        DefaultIntervalXYDataset<String> dataset = new DefaultIntervalXYDataset<>();
         double[] x = {1.0, 2.0, 3.0, 4.0};
         double[] startx = {0.9, 1.8, 2.7, 3.6};
         double[] endx = {1.1, 2.2, 3.3, 4.4};
@@ -300,13 +300,13 @@ public class XYBarRendererTest {
      */
     @Test
     public void testFindRangeBounds2() {
-        XYIntervalSeries s1 = new XYIntervalSeries("S1");
+        XYIntervalSeries<String> s1 = new XYIntervalSeries<>("S1");
         s1.add(1.0, 0.5, 1.5, 10.0, 9.5, 10.5);
         s1.add(2.0, 1.9, 2.1, 20.0, 19.8, 20.3);
-        XYIntervalSeries s2 = new XYIntervalSeries("S2");
+        XYIntervalSeries<String> s2 = new XYIntervalSeries<>("S2");
         s2.add(3.0, 2.5, 3.5, 30.0, 29.5, 30.5);
         s2.add(4.0, 3.9, 4.1, 9.0, 9.0, 9.0);
-        XYIntervalSeriesCollection dataset = new XYIntervalSeriesCollection();
+        XYIntervalSeriesCollection<String> dataset = new XYIntervalSeriesCollection<>();
         dataset.addSeries(s1);
         dataset.addSeries(s2);
         
@@ -328,29 +328,29 @@ public class XYBarRendererTest {
      */
     @Test
     public void testGetLegendItemSeriesIndex() {
-        XYSeriesCollection d1 = new XYSeriesCollection();
-        XYSeries s1 = new XYSeries("S1");
+        XYSeriesCollection<String> d1 = new XYSeriesCollection<>();
+        XYSeries<String> s1 = new XYSeries<>("S1");
         s1.add(1.0, 1.1);
-        XYSeries s2 = new XYSeries("S2");
+        XYSeries<String> s2 = new XYSeries<>("S2");
         s2.add(1.0, 1.1);
         d1.addSeries(s1);
         d1.addSeries(s2);
 
-        XYSeriesCollection d2 = new XYSeriesCollection();
-        XYSeries s3 = new XYSeries("S3");
+        XYSeriesCollection<String> d2 = new XYSeriesCollection<>();
+        XYSeries<String> s3 = new XYSeries<>("S3");
         s3.add(1.0, 1.1);
-        XYSeries s4 = new XYSeries("S4");
+        XYSeries<String> s4 = new XYSeries<>("S4");
         s4.add(1.0, 1.1);
-        XYSeries s5 = new XYSeries("S5");
+        XYSeries<String> s5 = new XYSeries<>("S5");
         s5.add(1.0, 1.1);
         d2.addSeries(s3);
         d2.addSeries(s4);
         d2.addSeries(s5);
 
         XYBarRenderer r = new XYBarRenderer();
-        XYPlot plot = new XYPlot(new XYBarDataset(d1, 1.0), new NumberAxis("x"),
-                new NumberAxis("y"), r);
-        plot.setDataset(1, new XYBarDataset(d2, 2.0));
+        XYPlot plot = new XYPlot(new XYBarDataset<String>(d1, 1.0), 
+                new NumberAxis("x"), new NumberAxis("y"), r);
+        plot.setDataset(1, new XYBarDataset<String>(d2, 2.0));
         /*JFreeChart chart =*/ new JFreeChart(plot);
         LegendItem li = r.getLegendItem(1, 2);
         assertEquals("S5", li.getLabel());

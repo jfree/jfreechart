@@ -1101,7 +1101,7 @@ public class DatasetUtilsTest {
         // null dataset throws IllegalArgumentException
         boolean pass = false;
         try {
-            DatasetUtils.iterateToFindRangeBounds(null, new ArrayList<>(),
+            DatasetUtils.iterateToFindRangeBounds(null, new ArrayList<String>(),
                     new Range(0.0, 1.0), true);
         }
         catch (IllegalArgumentException e) {
@@ -1112,7 +1112,7 @@ public class DatasetUtilsTest {
         // null list throws IllegalArgumentException
         pass = false;
         try {
-            DatasetUtils.iterateToFindRangeBounds(new XYSeriesCollection<>(),
+            DatasetUtils.iterateToFindRangeBounds(new XYSeriesCollection<String>(),
                     null, new Range(0.0, 1.0), true);
         }
         catch (IllegalArgumentException e) {
@@ -1123,7 +1123,7 @@ public class DatasetUtilsTest {
         // null range throws IllegalArgumentException
         pass = false;
         try {
-            DatasetUtils.iterateToFindRangeBounds(new XYSeriesCollection<>(),
+            DatasetUtils.iterateToFindRangeBounds(new XYSeriesCollection<String>(),
                     new ArrayList<>(), null, true);
         }
         catch (IllegalArgumentException e) {
