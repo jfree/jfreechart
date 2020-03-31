@@ -64,18 +64,16 @@ public class LegendTitleTest {
      */
     @Test
     public void testEquals() {
-        XYPlot plot1 = new XYPlot();
+        XYPlot<String> plot1 = new XYPlot<>();
         LegendTitle t1 = new LegendTitle(plot1);
         LegendTitle t2 = new LegendTitle(plot1);
         assertEquals(t1, t2);
 
-        t1.setBackgroundPaint(
-            new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f, Color.YELLOW)
-        );
+        t1.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 
+                4.0f, Color.YELLOW));
         assertFalse(t1.equals(t2));
-        t2.setBackgroundPaint(
-            new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f, Color.YELLOW)
-        );
+        t2.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 
+                4.0f, Color.YELLOW));
         assertTrue(t1.equals(t2));
 
         t1.setLegendItemGraphicEdge(RectangleEdge.BOTTOM);
@@ -109,7 +107,7 @@ public class LegendTitleTest {
      */
     @Test
     public void testHashcode() {
-        XYPlot plot1 = new XYPlot();
+        XYPlot<String> plot1 = new XYPlot<>();
         LegendTitle t1 = new LegendTitle(plot1);
         LegendTitle t2 = new LegendTitle(plot1);
         assertTrue(t1.equals(t2));
@@ -123,7 +121,7 @@ public class LegendTitleTest {
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        XYPlot plot = new XYPlot();
+        XYPlot<String> plot = new XYPlot<>();
         Rectangle2D bounds1 = new Rectangle2D.Double(10.0, 20.0, 30.0, 40.0);
         LegendTitle t1 = new LegendTitle(plot);
         t1.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f,
@@ -146,7 +144,7 @@ public class LegendTitleTest {
      */
     @Test
     public void testSerialization() {
-        XYPlot plot = new XYPlot();
+        XYPlot<String> plot = new XYPlot<>();
         LegendTitle t1 = new LegendTitle(plot);
         LegendTitle t2 = TestUtils.serialised(t1);
         assertTrue(t1.equals(t2));
