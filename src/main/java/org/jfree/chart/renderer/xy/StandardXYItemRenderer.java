@@ -864,14 +864,8 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
         if (getBaseShapesVisible()) {
 
             Shape shape = getItemShape(series, item);
-            if (orientation == PlotOrientation.HORIZONTAL) {
-                shape = ShapeUtils.createTranslatedShape(shape, transY1,
-                        transX1);
-            }
-            else if (orientation == PlotOrientation.VERTICAL) {
-                shape = ShapeUtils.createTranslatedShape(shape, transX1,
-                        transY1);
-            }
+            shape = ShapeUtils.createTranslatedShape(shape, transX1,
+                    transY1, orientation);
             if (shape.intersects(dataArea)) {
                 if (getItemShapeFilled(series, item)) {
                     g2.fill(shape);
