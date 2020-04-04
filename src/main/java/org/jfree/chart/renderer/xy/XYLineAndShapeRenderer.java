@@ -979,14 +979,8 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
 
         if (getItemShapeVisible(series, item)) {
             Shape shape = getItemShape(series, item);
-            if (orientation == PlotOrientation.HORIZONTAL) {
-                shape = ShapeUtils.createTranslatedShape(shape, transY1,
-                        transX1);
-            }
-            else if (orientation == PlotOrientation.VERTICAL) {
-                shape = ShapeUtils.createTranslatedShape(shape, transX1,
-                        transY1);
-            }
+            shape = ShapeUtils.createTranslatedShape(shape, transX1,
+                    transY1, orientation);
             entityArea = shape;
             if (shape.intersects(dataArea)) {
                 if (getItemShapeFilled(series, item)) {

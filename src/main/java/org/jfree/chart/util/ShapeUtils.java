@@ -40,6 +40,8 @@ import java.awt.geom.PathIterator;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.Arrays;
+
+import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.ui.RectangleAnchor;
 
 /**
@@ -306,6 +308,34 @@ public class ShapeUtils {
         Point2D anchorPoint = anchor.getAnchorPoint(shape.getBounds2D());
         final AffineTransform transform = AffineTransform.getTranslateInstance(
                 locationX - anchorPoint.getX(), locationY - anchorPoint.getY());
+        return transform.createTransformedShape(shape);
+    }
+
+    /**
+     * Creates and returns a translated shape.
+     *
+     * @param shape  the shape ({@code null} not permitted).
+     * @param transX  the x translation (in Java2D space).
+     * @param transY  the y translation (in Java2D space).
+     * @param orientation the orientation of the plot.
+     *
+     * @return The translated shape.
+     */
+    public static Shape createTranslatedShape(Shape shape, double transX,
+                                              double transY, PlotOrientation orientation) {
+        if (shape == null) {
+            throw new IllegalArgumentException("Null 'shape' argument.");
+        }
+        AffineTransform transform = null;
+        if (orientation == PlotOrientation.HORIZONTAL) {
+            transform = AffineTransform.getTranslateInstance(
+                    transY, transX);
+        } else if (orientation == PlotOrientation.VERTICAL) {
+            transform = AffineTransform.getTranslateInstance(
+                    transX, transY);
+        } else {
+            throw new IllegalArgumentException("Invalid 'orientation' argument.");
+        }
         return transform.createTransformedShape(shape);
     }
 
