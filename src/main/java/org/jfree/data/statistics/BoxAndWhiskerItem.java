@@ -41,12 +41,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import org.jfree.chart.util.ObjectUtils;
+import org.jfree.data.DataItem;
 
 /**
  * Represents one data item within a box-and-whisker dataset.  Instances of
  * this class are immutable.
  */
-public class BoxAndWhiskerItem implements Serializable {
+public class BoxAndWhiskerItem extends DataItem implements Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 7329649623148167423L;
@@ -295,5 +296,10 @@ public class BoxAndWhiskerItem implements Serializable {
         hash = 67 * hash + Objects.hashCode(this.outliers);
         return hash;
     }
+
+	@Override
+	public int compareTo(Object o) {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
 
 }

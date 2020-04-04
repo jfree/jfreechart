@@ -57,8 +57,11 @@ import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.fail;
 
+import java.awt.Shape;
+
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.util.ShapeUtils;
 import org.jfree.data.Range;
 import org.jfree.data.UnknownKeyException;
 
@@ -533,5 +536,81 @@ public class XYSeriesCollectionTest {
         assertEquals("B", series2.getKey());  // the series name should not 
         // change because "C" is already the key for the other series in the
         // collection
+    }
+    
+    @Test
+    public void testNoShapeItemInMultipleSeriesWithSpecifiedType() {
+    	XYShapeDataItem item1 = new XYShapeDataItem(1.0, 2.0);
+    	XYSeries<XYShapeDataItem> series1 = new XYSeries<XYShapeDataItem>("A");
+    	XYSeries<XYShapeDataItem> series2 = new XYSeries<XYShapeDataItem>("B");
+
+    	series2.add(item1);
+    	
+    	XYSeriesCollection<XYShapeDataItem> collection = new XYSeriesCollection<XYShapeDataItem>();
+    	collection.addSeries(series1);
+        collection.addSeries(series2);
+        
+        
+        XYShapeDataItem result = collection.getItem(1, 0);
+        assertEquals(1.0, result.getX());
+        assertEquals(2.0, result.getY());
+        assertEquals(false, result.getHasShape());
+    }
+    
+    @Test
+    public void testNoShapeItemInSingleSeriesWithSpecifiedType() {
+    	XYShapeDataItem item1 = new XYShapeDataItem(1.0, 2.0);
+    	XYSeries<XYShapeDataItem> series1 = new XYSeries<XYShapeDataItem>("A");
+
+    	series1.add(item1);
+    	
+    	XYSeriesCollection<XYShapeDataItem> collection = new XYSeriesCollection<XYShapeDataItem>();
+    	collection.addSeries(series1);
+        
+        
+        XYShapeDataItem result = collection.getItem(0, 0);
+        assertEquals(1.0, result.getX());
+        assertEquals(2.0, result.getY());
+        assertEquals(false, result.getHasShape());
+    }
+    
+    @Test
+    public void testShapeItemInSingleSeriesWithSpecifiedType() {
+    	Shape shape = ShapeUtils.createRegularCross(5, 5);
+    	XYShapeDataItem item1 = new XYShapeDataItem(1.0, 2.0, shape);
+    	XYSeries<XYShapeDataItem> series1 = new XYSeries<XYShapeDataItem>("A");
+
+    	series1.add(item1);
+    	
+    	XYSeriesCollection<XYShapeDataItem> collection = new XYSeriesCollection<XYShapeDataItem>();
+    	collection.addSeries(series1);
+        
+        
+        XYShapeDataItem result = collection.getItem(0, 0);
+        assertEquals(1.0, result.getX());
+        assertEquals(2.0, result.getY());
+        assertEquals(true, result.getHasShape());
+        assertEquals(shape, result.getShape());
+    }
+    
+    @Test
+    public void testUpdateShapeItemInSingleSeriesWithSpecifiedType() {
+    	XYShapeDataItem item1 = new XYShapeDataItem(1.0, 2.0);
+    	XYSeries<XYShapeDataItem> series1 = new XYSeries<XYShapeDataItem>("A");
+
+    	series1.add(item1);
+    	
+    	XYSeriesCollection<XYShapeDataItem> collection = new XYSeriesCollection<XYShapeDataItem>();
+    	collection.addSeries(series1);
+        
+        
+        XYShapeDataItem result = collection.getItem(0, 0);
+        assertEquals(1.0, result.getX());
+        assertEquals(2.0, result.getY());
+        assertEquals(false, result.getHasShape());
+        Shape shape = ShapeUtils.createRegularCross(5, 5);
+        result.setShape(shape);
+        assertEquals(true, result.getHasShape());
+        assertEquals(shape, result.getShape());
     }
 }

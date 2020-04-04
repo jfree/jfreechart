@@ -51,8 +51,7 @@ import org.jfree.chart.util.Args;
  *
  * @since 1.0.3
  */
-public class ComparableObjectItem implements Cloneable, Comparable,
-        Serializable {
+public class ComparableObjectItem extends DataItem implements Cloneable {
 
     /** For serialization. */
     private static final long serialVersionUID = 2751513470325494890L;

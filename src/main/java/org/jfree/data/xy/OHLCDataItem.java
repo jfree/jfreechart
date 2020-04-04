@@ -45,6 +45,7 @@ package org.jfree.data.xy;
 import java.io.Serializable;
 import java.util.Date;
 import org.jfree.chart.util.Args;
+import org.jfree.data.DataItem;
 
 /**
  * Represents a single (open-high-low-close) data item in
@@ -52,7 +53,7 @@ import org.jfree.chart.util.Args;
  * to summarise the trading activity of a financial commodity for
  * a fixed period (most often one day).
  */
-public class OHLCDataItem implements Comparable, Serializable {
+public class OHLCDataItem extends DataItem {
 
     /** For serialization. */
     private static final long serialVersionUID = 7753817154401169901L;

@@ -38,13 +38,14 @@ package org.jfree.data.xy;
 
 import java.io.Serializable;
 import org.jfree.chart.util.ObjectUtils;
+import org.jfree.data.DataItem;
 import org.jfree.chart.util.Args;
 
 /**
  * Represents one (x, y) data item for an {@link XYSeries}.  Note that
  * subclasses are REQUIRED to support cloning.
  */
-public class XYDataItem implements Cloneable, Comparable<XYDataItem>, Serializable {
+public class XYDataItem extends DataItem<XYDataItem> implements Cloneable {
 
     /** For serialization. */
     private static final long serialVersionUID = 2751513470325494890L;
@@ -162,7 +163,6 @@ public class XYDataItem implements Cloneable, Comparable<XYDataItem>, Serializab
      */
     @Override
     public int compareTo(XYDataItem o1) {
-
         int result;
 
         // CASE 1 : Comparing to another TimeSeriesDataPair object
@@ -261,5 +261,4 @@ public class XYDataItem implements Cloneable, Comparable<XYDataItem>, Serializab
     public String toString() {
         return "[" + getXValue() + ", " + getYValue() + "]";
     }
-
 }

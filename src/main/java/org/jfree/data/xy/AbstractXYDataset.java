@@ -43,6 +43,7 @@
 
 package org.jfree.data.xy;
 
+import org.jfree.data.DataItem;
 import org.jfree.data.DomainOrder;
 import org.jfree.data.general.AbstractSeriesDataset;
 
@@ -98,5 +99,9 @@ public abstract class AbstractXYDataset extends AbstractSeriesDataset
         }
         return result;
     }
-
+    
+    @Override
+    public DataItem getItem(int series, int item) {
+    	throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

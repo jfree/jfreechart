@@ -272,6 +272,7 @@ public class DefaultBoxAndWhiskerXYDataset extends AbstractXYDataset
      *
      * @return The item.
      */
+    @Override
     public BoxAndWhiskerItem getItem(int series, int item) {
         return (BoxAndWhiskerItem) this.items.get(item);
     }

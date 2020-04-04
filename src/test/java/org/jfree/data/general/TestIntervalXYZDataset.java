@@ -168,5 +168,10 @@ public class TestIntervalXYZDataset implements IntervalXYZDataset {
     public void setGroup(DatasetGroup group) {
         this.group = group;
     }
+
+	@Override
+	public Object getItem(int series, int item) {
+		throw new UnsupportedOperationException("Not supported yet."); 
+	}
     
 }

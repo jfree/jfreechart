@@ -58,7 +58,7 @@ import org.jfree.data.general.SeriesException;
  * defaults can be changed in the constructor.  Y-values can be
  * {@code null} to represent missing values.
  */
-public class XYSeries extends Series implements Cloneable, Serializable {
+public class XYSeries<TDataItem extends XYDataItem> extends Series implements Cloneable, Serializable {
 
     /** For serialization. */
     static final long serialVersionUID = -5908509288197150436L;
@@ -68,7 +68,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
     // make subclasses that work directly with the underlying data structure.
 
     /** Storage for the data items in the series. */
-    protected List<XYDataItem> data;
+    protected List<TDataItem> data;
 
     /** The maximum number of items for the series. */
     private int maximumItemCount = Integer.MAX_VALUE;
@@ -206,7 +206,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      *
      * @since 1.0.13
      */
-    private void updateBoundsForAddedItem(XYDataItem item) {
+    private void updateBoundsForAddedItem(TDataItem item) {
         double x = item.getXValue();
         this.minX = minIgnoreNaN(this.minX, x);
         this.maxX = maxIgnoreNaN(this.maxX, x);
@@ -225,7 +225,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      *
      * @since 1.0.13
      */
-    private void updateBoundsForRemovedItem(XYDataItem item) {
+    private void updateBoundsForRemovedItem(TDataItem item) {
         boolean itemContributesToXBounds = false;
         boolean itemContributesToYBounds = false;
         double x = item.getXValue();
@@ -267,7 +267,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
         this.maxX = Double.NaN;
         this.minY = Double.NaN;
         this.maxY = Double.NaN;
-        for (XYDataItem item : this.data) {
+        for (TDataItem item : this.data) {
             updateBoundsForAddedItem(item);
         }
     }
@@ -307,11 +307,11 @@ public class XYSeries extends Series implements Cloneable, Serializable {
 
     /**
      * Returns the list of data items for the series (the list contains
-     * {@link XYDataItem} objects and is unmodifiable).
+     * {@link TDataItem} objects and is unmodifiable).
      *
      * @return The list of data items.
      */
-    public List<XYDataItem> getItems() {
+    public List<TDataItem> getItems() {
         return Collections.unmodifiableList(this.data);
     }
 
@@ -357,7 +357,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      *
      * @param item  the (x, y) item ({@code null} not permitted).
      */
-    public void add(XYDataItem item) {
+    public void add(TDataItem item) {
         // argument checking delegated...
         add(item, true);
     }
@@ -448,7 +448,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      */
     public void add(Number x, Number y, boolean notify) {
         // delegate argument checking to XYDataItem...
-        XYDataItem item = new XYDataItem(x, y);
+    	TDataItem item = (TDataItem) new XYDataItem(x, y);
         add(item, notify);
     }
 
@@ -461,9 +461,9 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      *                {@link SeriesChangeEvent} is sent to all registered
      *                listeners.
      */
-    public void add(XYDataItem item, boolean notify) {
+    public void add(TDataItem item, boolean notify) {
         Args.nullNotPermitted(item, "item");
-        item = (XYDataItem) item.clone();
+        item = (TDataItem) item.clone();
         if (this.autoSort) {
             int index = Collections.binarySearch(this.data, item);
             if (index < 0) {
@@ -502,7 +502,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
         }
         updateBoundsForAddedItem(item);
         if (getItemCount() > this.maximumItemCount) {
-            XYDataItem removed = this.data.remove(0);
+        	TDataItem removed = this.data.remove(0);
             updateBoundsForRemovedItem(removed);
         }
         if (notify) {
@@ -531,8 +531,8 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      *
      * @return The item removed.
      */
-    public XYDataItem remove(int index) {
-        XYDataItem removed = this.data.remove(index);
+    public TDataItem remove(int index) {
+    	TDataItem removed = this.data.remove(index);
         updateBoundsForRemovedItem(removed);
         fireSeriesChanged();
         return removed;
@@ -548,7 +548,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
 
      * @return The item removed.
      */
-    public XYDataItem remove(Number x) {
+    public TDataItem remove(Number x) {
         return remove(indexOf(x));
     }
 
@@ -574,9 +574,9 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      *
      * @return The data item with the specified index.
      */
-    public XYDataItem getDataItem(int index) {
-        XYDataItem item = this.data.get(index);
-        return (XYDataItem) item.clone();
+    public TDataItem getDataItem(int index) {
+    	TDataItem item = this.data.get(index);
+        return (TDataItem) item.clone();
     }
 
     /**
@@ -588,7 +588,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      *
      * @since 1.0.14
      */
-    XYDataItem getRawDataItem(int index) {
+    TDataItem getRawDataItem(int index) {
         return this.data.get(index);
     }
 
@@ -662,7 +662,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * @since 1.0.1
      */
     public void updateByIndex(int index, Number y) {
-        XYDataItem item = getRawDataItem(index);
+    	TDataItem item = getRawDataItem(index);
 
         // figure out if we need to iterate through all the y-values
         boolean iterate = false;
@@ -727,7 +727,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      */
     public XYDataItem addOrUpdate(Number x, Number y) {
         // defer argument checking
-        return addOrUpdate(new XYDataItem(x, y));
+        return addOrUpdate((TDataItem) new XYDataItem(x, y));
     }
 
     /**
@@ -741,7 +741,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      *
      * @since 1.0.14
      */
-    public XYDataItem addOrUpdate(XYDataItem item) {
+    public TDataItem addOrUpdate(TDataItem item) {
         Args.nullNotPermitted(item, "item");
         if (this.allowDuplicateXValues) {
             add(item);
@@ -749,11 +749,11 @@ public class XYSeries extends Series implements Cloneable, Serializable {
         }
 
         // if we get to here, we know that duplicate X values are not permitted
-        XYDataItem overwritten = null;
+        TDataItem overwritten = null;
         int index = indexOf(item.getX());
         if (index >= 0) {
-            XYDataItem existing = this.data.get(index);
-            overwritten = (XYDataItem) existing.clone();
+        	TDataItem existing = this.data.get(index);
+            overwritten = (TDataItem) existing.clone();
             // figure out if we need to iterate through all the y-values
             boolean iterate = false;
             double oldY = existing.getYValue();
@@ -776,7 +776,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
             // Collections.binarySearch() and tells us where to insert the
             // new item...otherwise it will be just -1 and we should just
             // append the value to the list...
-            item = (XYDataItem) item.clone();
+            item = (TDataItem) item.clone();
             if (this.autoSort) {
                 this.data.add(-index - 1, item);
             }
@@ -787,7 +787,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
 
             // check if this addition will exceed the maximum item count...
             if (getItemCount() > this.maximumItemCount) {
-                XYDataItem removed = this.data.remove(0);
+            	TDataItem removed = this.data.remove(0);
                 updateBoundsForRemovedItem(removed);
             }
         }
@@ -811,7 +811,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
         }
         else {
             for (int i = 0; i < this.data.size(); i++) {
-                XYDataItem item = this.data.get(i);
+            	TDataItem item = this.data.get(i);
                 if (item.getX().equals(x)) {
                     return i;
                 }
@@ -853,7 +853,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
     @Override
     public Object clone() throws CloneNotSupportedException {
         XYSeries clone = (XYSeries) super.clone();
-        clone.data = (List<XYDataItem>) ObjectUtils.deepClone(this.data);
+        clone.data = (List<TDataItem>) ObjectUtils.deepClone(this.data);
         return clone;
     }
 
@@ -874,8 +874,8 @@ public class XYSeries extends Series implements Cloneable, Serializable {
         copy.data = new ArrayList<>();
         if (this.data.size() > 0) {
             for (int index = start; index <= end; index++) {
-                XYDataItem item = this.data.get(index);
-                XYDataItem clone = (XYDataItem) item.clone();
+            	TDataItem item = this.data.get(index);
+            	TDataItem clone = (TDataItem) item.clone();
                 try {
                     copy.add(clone);
                 }
@@ -936,15 +936,15 @@ public class XYSeries extends Series implements Cloneable, Serializable {
         // the first, middle and last items...
         int count = getItemCount();
         if (count > 0) {
-            XYDataItem item = getRawDataItem(0);
+        	TDataItem item = getRawDataItem(0);
             result = 29 * result + item.hashCode();
         }
         if (count > 1) {
-            XYDataItem item = getRawDataItem(count - 1);
+        	TDataItem item = getRawDataItem(count - 1);
             result = 29 * result + item.hashCode();
         }
         if (count > 2) {
-            XYDataItem item = getRawDataItem(count / 2);
+        	TDataItem item = getRawDataItem(count / 2);
             result = 29 * result + item.hashCode();
         }
         result = 29 * result + this.maximumItemCount;
@@ -952,6 +952,5 @@ public class XYSeries extends Series implements Cloneable, Serializable {
         result = 29 * result + (this.allowDuplicateXValues ? 1 : 0);
         return result;
     }
-
 }
 

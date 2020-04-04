@@ -41,6 +41,8 @@
 
 package org.jfree.data.xy;
 
+import org.jfree.data.DataItem;
+
 /**
  * An base class that you can use to create new implementations of the
  * {@link XYZDataset} interface.
@@ -66,4 +68,8 @@ public abstract class AbstractXYZDataset extends AbstractXYDataset
         return result;
     }
 
+    @Override
+    public DataItem getItem(int series, int item) {
+    	throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

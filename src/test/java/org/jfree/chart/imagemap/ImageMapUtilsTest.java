@@ -101,10 +101,12 @@ public class ImageMapUtilsTest {
         final String retval = ImageMapUtils.getImageMap("name", new ChartRenderingInfo(entities),
                 new StandardToolTipTagFragmentGenerator(), new StandardURLTagFragmentGenerator());
 
-        assertEquals("<map id=\"name\" name=\"name\">\n" +
-                "<area shape=\"rect\" coords=\"5,6,12,14\" title=\"toolTip2\" alt=\"\" href=\"URL2\"/>\n" +
-                "<area shape=\"rect\" coords=\"1,2,4,6\" title=\"toolTip1\" alt=\"\" href=\"URL1\"/>\n" +
-                "</map>", retval);
+        String expected = "<map id=\"name\" name=\"name\">\r\n" +
+                "<area shape=\"rect\" coords=\"5,6,12,14\" title=\"toolTip2\" alt=\"\" href=\"URL2\"/>\r\n" +
+                "<area shape=\"rect\" coords=\"1,2,4,6\" title=\"toolTip1\" alt=\"\" href=\"URL1\"/>\r\n" +
+                "</map>";
+        
+        assertEquals(expected, retval);
     }
 
     @Test

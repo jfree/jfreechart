@@ -50,6 +50,7 @@ import java.util.List;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
+import org.jfree.data.DataItem;
 
 /**
  * Represents a collection of {@link MatrixSeries} that can be used as a
@@ -326,5 +327,11 @@ public class MatrixSeriesCollection extends AbstractXYZDataset
         this.seriesList.remove(seriesIndex);
         fireDatasetChanged();
     }
+
+
+	@Override
+	public DataItem getItem(int series, int item) {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
 
 }
