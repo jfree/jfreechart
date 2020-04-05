@@ -36,6 +36,7 @@
 
 package org.jfree.data.general;
 
+import org.jfree.data.DataItem;
 import org.jfree.data.DomainOrder;
 import org.jfree.data.xy.IntervalXYZDataset;
 
@@ -170,7 +171,7 @@ public class TestIntervalXYZDataset implements IntervalXYZDataset {
     }
 
 	@Override
-	public Object getItem(int series, int item) {
+	public DataItem getItem(int series, int item) {
 		throw new UnsupportedOperationException("Not supported yet."); 
 	}
     
