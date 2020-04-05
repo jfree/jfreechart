@@ -1059,6 +1059,32 @@ public class LegendItem implements Cloneable, Serializable {
         return true;
     }
 
+    @Override
+    public int hashCode()
+    {
+        int hash = 7;
+        hash = 79 * hash + this.datasetIndex;
+        hash = 79 * hash + this.series;
+        hash = 79 * hash + Objects.hashCode(this.label);
+        hash = 79 * hash + Objects.hashCode(this.labelFont);
+        hash = 79 * hash + Objects.hashCode(this.labelPaint);
+        hash = 79 * hash + Objects.hashCode(this.attributedLabel);
+        hash = 79 * hash + Objects.hashCode(this.description);
+        hash = 79 * hash + (this.shapeVisible ? 1 : 0);
+        hash = 79 * hash + Objects.hashCode(this.shape);
+        hash = 79 * hash + (this.shapeFilled ? 1 : 0);
+        hash = 79 * hash + Objects.hashCode(this.fillPaint);
+        hash = 79 * hash + Objects.hashCode(this.fillPaintTransformer);
+        hash = 79 * hash + (this.shapeOutlineVisible ? 1 : 0);
+        hash = 79 * hash + Objects.hashCode(this.outlinePaint);
+        hash = 79 * hash + Objects.hashCode(this.outlineStroke);
+        hash = 79 * hash + (this.lineVisible ? 1 : 0);
+        hash = 79 * hash + Objects.hashCode(this.line);
+        hash = 79 * hash + Objects.hashCode(this.lineStroke);
+        hash = 79 * hash + Objects.hashCode(this.linePaint);
+        return hash;
+    }
+
     /**
      * Returns an independent copy of this object (except that the clone will
      * still reference the same dataset as the original {@code LegendItem}).

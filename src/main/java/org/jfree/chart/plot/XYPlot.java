@@ -69,6 +69,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -5256,6 +5257,66 @@ public class XYPlot<S extends Comparable<S>> extends Plot
             return false;
         }
         return super.equals(obj);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int hash = 7;
+        hash = 43 * hash + Objects.hashCode(this.orientation);
+        hash = 43 * hash + Objects.hashCode(this.axisOffset);
+        hash = 43 * hash + Objects.hashCode(this.domainAxes);
+        hash = 43 * hash + Objects.hashCode(this.domainAxisLocations);
+        hash = 43 * hash + Objects.hashCode(this.rangeAxes);
+        hash = 43 * hash + Objects.hashCode(this.rangeAxisLocations);
+        hash = 43 * hash + Objects.hashCode(this.renderers);
+        hash = 43 * hash + Objects.hashCode(this.datasetToDomainAxesMap);
+        hash = 43 * hash + Objects.hashCode(this.datasetToRangeAxesMap);
+        hash = 43 * hash + Objects.hashCode(this.quadrantOrigin);
+        hash = 43 * hash + Arrays.deepHashCode(this.quadrantPaint);
+        hash = 43 * hash + (this.domainGridlinesVisible ? 1 : 0);
+        hash = 43 * hash + Objects.hashCode(this.domainGridlineStroke);
+        hash = 43 * hash + Objects.hashCode(this.domainGridlinePaint);
+        hash = 43 * hash + (this.rangeGridlinesVisible ? 1 : 0);
+        hash = 43 * hash + Objects.hashCode(this.rangeGridlineStroke);
+        hash = 43 * hash + Objects.hashCode(this.rangeGridlinePaint);
+        hash = 43 * hash + (this.domainMinorGridlinesVisible ? 1 : 0);
+        hash = 43 * hash + Objects.hashCode(this.domainMinorGridlineStroke);
+        hash = 43 * hash + Objects.hashCode(this.domainMinorGridlinePaint);
+        hash = 43 * hash + (this.rangeMinorGridlinesVisible ? 1 : 0);
+        hash = 43 * hash + Objects.hashCode(this.rangeMinorGridlineStroke);
+        hash = 43 * hash + Objects.hashCode(this.rangeMinorGridlinePaint);
+        hash = 43 * hash + (this.domainZeroBaselineVisible ? 1 : 0);
+        hash = 43 * hash + Objects.hashCode(this.domainZeroBaselineStroke);
+        hash = 43 * hash + Objects.hashCode(this.domainZeroBaselinePaint);
+        hash = 43 * hash + (this.rangeZeroBaselineVisible ? 1 : 0);
+        hash = 43 * hash + Objects.hashCode(this.rangeZeroBaselineStroke);
+        hash = 43 * hash + Objects.hashCode(this.rangeZeroBaselinePaint);
+        hash = 43 * hash + (this.domainCrosshairVisible ? 1 : 0);
+        hash = 43 * hash +
+                (int) (Double.doubleToLongBits(this.domainCrosshairValue) ^
+                (Double.doubleToLongBits(this.domainCrosshairValue) >>> 32));
+        hash = 43 * hash + Objects.hashCode(this.domainCrosshairStroke);
+        hash = 43 * hash + Objects.hashCode(this.domainCrosshairPaint);
+        hash = 43 * hash + (this.domainCrosshairLockedOnData ? 1 : 0);
+        hash = 43 * hash + (this.rangeCrosshairVisible ? 1 : 0);
+        hash = 43 * hash +
+                (int) (Double.doubleToLongBits(this.rangeCrosshairValue) ^
+                (Double.doubleToLongBits(this.rangeCrosshairValue) >>> 32));
+        hash = 43 * hash + Objects.hashCode(this.rangeCrosshairStroke);
+        hash = 43 * hash + Objects.hashCode(this.rangeCrosshairPaint);
+        hash = 43 * hash + (this.rangeCrosshairLockedOnData ? 1 : 0);
+        hash = 43 * hash + Objects.hashCode(this.foregroundDomainMarkers);
+        hash = 43 * hash + Objects.hashCode(this.backgroundDomainMarkers);
+        hash = 43 * hash + Objects.hashCode(this.foregroundRangeMarkers);
+        hash = 43 * hash + Objects.hashCode(this.backgroundRangeMarkers);
+        hash = 43 * hash + Objects.hashCode(this.annotations);
+        hash = 43 * hash + Objects.hashCode(this.domainTickBandPaint);
+        hash = 43 * hash + Objects.hashCode(this.rangeTickBandPaint);
+        hash = 43 * hash + this.weight;
+        hash = 43 * hash + Objects.hashCode(this.fixedLegendItems);
+        hash = 43 * hash + Objects.hashCode(this.shadowGenerator);
+        return hash;
     }
 
     /**

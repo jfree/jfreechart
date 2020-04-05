@@ -137,6 +137,19 @@ public class Size2D implements Cloneable, PublicCloneable, Serializable {
         }
         return true;
     }
+
+    @Override
+    public int hashCode()
+    {
+        int hash = 7;
+        hash = 79 * hash +
+                (int) (Double.doubleToLongBits(this.width) ^
+                (Double.doubleToLongBits(this.width) >>> 32));
+        hash = 79 * hash +
+                (int) (Double.doubleToLongBits(this.height) ^
+                (Double.doubleToLongBits(this.height) >>> 32));
+        return hash;
+    }
     
     /**
      * Returns a clone of this object.
