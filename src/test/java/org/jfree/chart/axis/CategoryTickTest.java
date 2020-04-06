@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -32,11 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * Changes
- * -------
- * 13-May-2004 : Version 1 (DG);
- * 07-Jan-2005 : Added test for hashCode() (DG);
- *
  */
 
 package org.jfree.chart.axis;
@@ -63,8 +58,8 @@ public class CategoryTickTest {
      */
     @Test
     public void testEquals() {
-        Comparable c1 = "C1";
-        Comparable c2 = "C2";
+        Comparable<String> c1 = "C1";
+        Comparable<String> c2 = "C2";
         TextBlock tb1 = new TextBlock();
         tb1.addLine(new TextLine("Block 1"));
         TextBlock tb2 = new TextBlock();
@@ -110,7 +105,7 @@ public class CategoryTickTest {
      */
     @Test
     public void testHashCode() {
-        Comparable c1 = "C1";
+        Comparable<String> c1 = "C1";
         TextBlock tb1 = new TextBlock();
         tb1.addLine(new TextLine("Block 1"));
         tb1.addLine(new TextLine("Block 2"));
@@ -145,7 +140,7 @@ public class CategoryTickTest {
     public void testSerialization() {
         CategoryTick t1 = new CategoryTick("C1", new TextBlock(),
                 TextBlockAnchor.CENTER, TextAnchor.CENTER, 1.5f);
-        CategoryTick t2 = (CategoryTick) TestUtils.serialised(t1);
+        CategoryTick t2 = TestUtils.serialised(t1);
         assertEquals(t1, t2);
     }
 

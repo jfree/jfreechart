@@ -514,6 +514,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      * 
      * @since 1.0.13
      */
+    @Override
     public Collection<XYAnnotation> getAnnotations() {
         List<XYAnnotation> result = new ArrayList<>(this.foregroundAnnotations);
         result.addAll(this.backgroundAnnotations);

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * ------------------------
  * MonthDateFormatTest.java
  * ------------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 10-May-2005 : Version 1 (DG);
  *
  */
 
@@ -145,7 +141,7 @@ public class MonthDateFormatTest {
     @Test
     public void testSerialization() {
         MonthDateFormat mf1 = new MonthDateFormat();
-        MonthDateFormat mf2 = (MonthDateFormat) TestUtils.serialised(mf1);
+        MonthDateFormat mf2 = TestUtils.serialised(mf1);
         assertTrue(mf1.equals(mf2));
     }
 

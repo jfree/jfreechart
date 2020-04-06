@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,28 +27,11 @@
  * -----------------------
  * LayeredBarRenderer.java
  * -----------------------
- * (C) Copyright 2003-2016, by Arnaud Lelievre and Contributors.
+ * (C) Copyright 2003-2020, by Arnaud Lelievre and Contributors.
  *
  * Original Author:  Arnaud Lelievre (for Garden);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Zoheb Borbora;
- *
- * Changes
- * -------
- * 28-Aug-2003 : Version 1 (AL);
- * 16-Sep-2003 : Changed ChartRenderingInfo --> PlotRenderingInfo (DG);
- * 07-Oct-2003 : Added renderer state (DG);
- * 21-Oct-2003 : Bar width moved to renderer state (DG);
- * 05-Nov-2004 : Modified drawItem() signature (DG);
- * 20-Apr-2005 : Renamed CategoryLabelGenerator
- *               --> CategoryItemLabelGenerator (DG);
- * 17-Nov-2005 : Added support for gradient paint (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 18-Aug-2006 : Fixed the bar width calculation to respect the maximum bar
- *               width setting (thanks to Zoheb Borbora) (DG);
- * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
- * 19-May-2009 : Fixed FindBugs warnings, patch by Michal Wozniak (DG);
- * 24-Aug-2014 : Add element hinting for JFreeSVG (DG);
  *
  */
 
@@ -122,7 +105,7 @@ public class LayeredBarRenderer extends BarRenderer implements Serializable {
      *               the maximum).
      */
     public void setSeriesBarWidth(int series, double width) {
-        this.seriesBarWidthList.set(series, new Double(width));
+        this.seriesBarWidthList.set(series, width);
     }
 
     /**

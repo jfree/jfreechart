@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,29 +27,10 @@
  * ---------------------------------
  * AbstractXYItemLabelGenerator.java
  * ---------------------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited.
+ * (C) Copyright 2004-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 27-Feb-2004 : Version 1 (DG);
- * 12-May-2004 : Moved default tool tip format to
- *               StandardXYToolTipGenerator (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
- *               getYValue() (DG);
- * 08-Oct-2004 : Modified createItemArray() method to handle null values (DG);
- * 10-Jan-2005 : Updated createItemArray() to use x, y primitives if
- *               possible (DG);
- * ------------- JFREECHART 1.0.x --------------------------------------------
- * 26-Jan-2006 : Minor API doc update (DG);
- * 25-Jan-2007 : Added new constructor and fixed bug in clone() method (DG);
- * 16-Oct-2007 : Removed redundant code (DG);
- * 23-Nov-2007 : Implemented hashCode() (DG);
- * 26-May-2008 : Added accessor methods for nullYString and updated equals()
- *               method (DG);
- * 03-Jul-2016 : Use ParamChecks (DG);
  *
  */
 

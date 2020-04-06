@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * --------------------------
  * PlotRenderingInfoTest.java
  * --------------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 20-May-2004 : Version 1 (DG);
  *
  */
 
@@ -49,6 +45,7 @@ import java.awt.geom.Rectangle2D;
 
 import org.jfree.chart.ChartRenderingInfo;
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.junit.Test;
 
 /**
@@ -94,7 +91,7 @@ public class PlotRenderingInfoTest {
     public void testCloning() throws CloneNotSupportedException {
         PlotRenderingInfo p1 = new PlotRenderingInfo(new ChartRenderingInfo());
         p1.setPlotArea(new Rectangle2D.Double());
-        PlotRenderingInfo p2 = (PlotRenderingInfo) p1.clone();
+        PlotRenderingInfo p2 = CloneUtils.clone(p1);
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
@@ -117,7 +114,7 @@ public class PlotRenderingInfoTest {
     @Test
     public void testSerialization() {
         PlotRenderingInfo p1 = new PlotRenderingInfo(new ChartRenderingInfo());
-        PlotRenderingInfo p2 = (PlotRenderingInfo) TestUtils.serialised(p1);
+        PlotRenderingInfo p2 = TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 

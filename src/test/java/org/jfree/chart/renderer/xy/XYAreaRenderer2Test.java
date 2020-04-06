@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,17 +27,10 @@
  * ------------------------
  * XYAreaRenderer2Test.java
  * ------------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited.
+ * (C) Copyright 2005-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 24-May-2005 : Version 1 (DG);
- * 30-Nov-2006 : Extended testEquals() and testCloning() (DG);
- * 17-May-2007 : Added testGetLegendItemSeriesIndex() (DG);
- * 22-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
@@ -132,7 +125,7 @@ public class XYAreaRenderer2Test {
     @Test
     public void testSerialization() {
         XYAreaRenderer2 r1 = new XYAreaRenderer2();
-        XYAreaRenderer2 r2 = (XYAreaRenderer2) TestUtils.serialised(r1);
+        XYAreaRenderer2 r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 
@@ -145,14 +138,14 @@ public class XYAreaRenderer2Test {
         try {
             DefaultTableXYDataset dataset = new DefaultTableXYDataset();
 
-            XYSeries s1 = new XYSeries("Series 1", true, false);
+            XYSeries<String> s1 = new XYSeries<>("Series 1", true, false);
             s1.add(5.0, 5.0);
             s1.add(10.0, 15.5);
             s1.add(15.0, 9.5);
             s1.add(20.0, 7.5);
             dataset.addSeries(s1);
 
-            XYSeries s2 = new XYSeries("Series 2", true, false);
+            XYSeries<String> s2 = new XYSeries<>("Series 2", true, false);
             s2.add(5.0, 5.0);
             s2.add(10.0, 15.5);
             s2.add(15.0, 9.5);
@@ -176,20 +169,20 @@ public class XYAreaRenderer2Test {
      */
     @Test
     public void testGetLegendItemSeriesIndex() {
-        XYSeriesCollection d1 = new XYSeriesCollection();
-        XYSeries s1 = new XYSeries("S1");
+        XYSeriesCollection<String> d1 = new XYSeriesCollection<>();
+        XYSeries<String> s1 = new XYSeries<>("S1");
         s1.add(1.0, 1.1);
-        XYSeries s2 = new XYSeries("S2");
+        XYSeries<String> s2 = new XYSeries<>("S2");
         s2.add(1.0, 1.1);
         d1.addSeries(s1);
         d1.addSeries(s2);
 
-        XYSeriesCollection d2 = new XYSeriesCollection();
-        XYSeries s3 = new XYSeries("S3");
+        XYSeriesCollection<String> d2 = new XYSeriesCollection<>();
+        XYSeries<String> s3 = new XYSeries<>("S3");
         s3.add(1.0, 1.1);
-        XYSeries s4 = new XYSeries("S4");
+        XYSeries<String> s4 = new XYSeries<>("S4");
         s4.add(1.0, 1.1);
-        XYSeries s5 = new XYSeries("S5");
+        XYSeries<String> s5 = new XYSeries<>("S5");
         s5.add(1.0, 1.1);
         d2.addSeries(s3);
         d2.addSeries(s4);

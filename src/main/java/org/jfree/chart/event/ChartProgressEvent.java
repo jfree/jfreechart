@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,35 +27,25 @@
  * -----------------------
  * ChartProgressEvent.java
  * -----------------------
- * (C) Copyright 2003-2010, by Object Refinery Limited.
+ * (C) Copyright 2003-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 14-Jan-2003 : Version 1 (DG);
- * 20-Jan-2010 : Fixed bug in constructor (DG);
  *
  */
 
 package org.jfree.chart.event;
 
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.util.Args;
 
 /**
  * An event that contains information about the drawing progress of a chart.
  */
 public class ChartProgressEvent extends java.util.EventObject {
 
-    /** Indicates drawing has started. */
-    public static final int DRAWING_STARTED = 1;
-
-    /** Indicates drawing has finished. */
-    public static final int DRAWING_FINISHED = 2;
-
     /** The type of event. */
-    private int type;
+    private ChartProgressEventType type;
 
     /** The percentage of completion. */
     private int percent;
@@ -69,12 +59,13 @@ public class ChartProgressEvent extends java.util.EventObject {
      * @param source  the source of the event (could be the chart, a title, an
      *                axis etc.)
      * @param chart  the chart that generated the event.
-     * @param type  the type of event.
+     * @param type  the type of event ({@code null} not permitted).
      * @param percent  the percentage of completion.
      */
-    public ChartProgressEvent(Object source, JFreeChart chart, int type,
-                              int percent) {
+    public ChartProgressEvent(Object source, JFreeChart chart, 
+            ChartProgressEventType type, int percent) {
         super(source);
+        Args.nullNotPermitted(type, "type");
         this.chart = chart;
         this.type = type;
         this.percent = percent;
@@ -101,18 +92,19 @@ public class ChartProgressEvent extends java.util.EventObject {
     /**
      * Returns the event type.
      *
-     * @return The event type.
+     * @return The event type (never {@code null}).
      */
-    public int getType() {
+    public ChartProgressEventType getType() {
         return this.type;
     }
 
     /**
      * Sets the event type.
      *
-     * @param type  the event type.
+     * @param type  the event type ({@code null} not permitted).
      */
-    public void setType(int type) {
+    public void setType(ChartProgressEventType type) {
+        Args.nullNotPermitted(type, "type");
         this.type = type;
     }
 

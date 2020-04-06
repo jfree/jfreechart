@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * --------------------------
  * ColumnArrangementTest.java
  * --------------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 04-Feb-2005 : Version 1 (DG);
  *
  */
 
@@ -101,7 +97,7 @@ public class ColumnArrangementTest {
      */
     @Test
     public void testCloning() {
-        FlowArrangement f1 = new FlowArrangement();
+        ColumnArrangement f1 = new ColumnArrangement();
         assertFalse(f1 instanceof Cloneable);
     }
 
@@ -110,10 +106,10 @@ public class ColumnArrangementTest {
      */
     @Test
     public void testSerialization() {
-        FlowArrangement f1 = new FlowArrangement(HorizontalAlignment.LEFT,
+        ColumnArrangement c1 = new ColumnArrangement(HorizontalAlignment.LEFT,
                 VerticalAlignment.TOP, 1.0, 2.0);
-        FlowArrangement f2 = (FlowArrangement) TestUtils.serialised(f1);
-        assertEquals(f1, f2);
+        ColumnArrangement c2 = TestUtils.serialised(c1);
+        assertEquals(c1, c2);
     }
 
 }

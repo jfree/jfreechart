@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * -------------------
  * XYBarChartTest.java
  * -------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited.
+ * (C) Copyright 2005-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 12-Apr-2005 : Version 1 (DG);
  *
  */
 
@@ -106,11 +102,11 @@ public class XYBarChartTest {
     public void testReplaceDataset() {
 
         // create a dataset...
-        XYSeries series1 = new XYSeries("Series 1");
+        XYSeries<String> series1 = new XYSeries<>("Series 1");
         series1.add(10.0, 10.0);
         series1.add(20.0, 20.0);
         series1.add(30.0, 30.0);
-        XYDataset dataset = new XYSeriesCollection(series1);
+        XYDataset<String> dataset = new XYSeriesCollection<>(series1);
 
         LocalListener l = new LocalListener();
         this.chart.addChangeListener(l);
@@ -147,12 +143,12 @@ public class XYBarChartTest {
      * @return The chart.
      */
     private static JFreeChart createChart() {
-        XYSeries series1 = new XYSeries("Series 1");
+        XYSeries<String> series1 = new XYSeries<>("Series 1");
         series1.add(1.0, 1.0);
         series1.add(2.0, 2.0);
         series1.add(3.0, 3.0);
-        IntervalXYDataset dataset = new XYBarDataset(new XYSeriesCollection(
-                series1), 1.0);
+        IntervalXYDataset<String> dataset = new XYBarDataset<>(
+                new XYSeriesCollection<>(series1), 1.0);
         return ChartFactory.createXYBarChart("XY Bar Chart", "Domain", false,
                 "Range", dataset);
 

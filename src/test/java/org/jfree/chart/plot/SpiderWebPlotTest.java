@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,18 +27,10 @@
  * ----------------------
  * SpiderWebPlotTest.java
  * ----------------------
- * (C) Copyright 2005-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 10-Jun-2005 : Version 1 (DG);
- * 01-Jun-2006 : Added testDrawWithNullInfo() method (DG);
- * 05-Feb-2007 : Added more checks to testCloning (DG);
- * 01-Jun-2009 : Added test for getLegendItems() bug, series key is not
- *               set (DG);
  *
  */
 
@@ -65,6 +57,7 @@ import org.jfree.chart.TestUtils;
 import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
 import org.jfree.chart.labels.StandardCategoryToolTipGenerator;
 import org.jfree.chart.urls.StandardCategoryURLGenerator;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.Rotation;
 import org.jfree.chart.util.TableOrder;
 import org.jfree.data.category.DefaultCategoryDataset;
@@ -261,7 +254,7 @@ public class SpiderWebPlotTest {
         SpiderWebPlot p1 = new SpiderWebPlot(new DefaultCategoryDataset());
         Rectangle2D legendShape = new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0);
         p1.setLegendItemShape(legendShape);
-        SpiderWebPlot p2 = (SpiderWebPlot) p1.clone();
+        SpiderWebPlot p2 = CloneUtils.clone(p1);
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
@@ -298,7 +291,7 @@ public class SpiderWebPlotTest {
     @Test
     public void testSerialization() {
         SpiderWebPlot p1 = new SpiderWebPlot(new DefaultCategoryDataset());
-        SpiderWebPlot p2 = (SpiderWebPlot) TestUtils.serialised(p1);
+        SpiderWebPlot p2 = TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 

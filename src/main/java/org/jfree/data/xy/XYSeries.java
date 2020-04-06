@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2019, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------
  * XYSeries.java
  * -------------
- * (C) Copyright 2001-2019, Object Refinery Limited and Contributors.
+ * (C) Copyright 2001-2020, Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Aaron Metzger;
@@ -35,57 +35,18 @@
  *                   Richard Atkinson;
  *                   Michel Santos;
  *                   Ted Schwartz (fix for bug 1955483);
- *
- * Changes
- * -------
- * 15-Nov-2001 : Version 1 (DG);
- * 03-Apr-2002 : Added an add(double, double) method (DG);
- * 29-Apr-2002 : Added a clear() method (ARM);
- * 06-Jun-2002 : Updated Javadoc comments (DG);
- * 29-Aug-2002 : Modified to give user control over whether or not duplicate
- *               x-values are allowed (DG);
- * 07-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 11-Nov-2002 : Added maximum item count, code contributed by Jonathan
- *               Gabbai (DG);
- * 26-Mar-2003 : Implemented Serializable (DG);
- * 04-Aug-2003 : Added getItems() method (DG);
- * 15-Aug-2003 : Changed 'data' from private to protected, added new add()
- *               methods with a 'notify' argument (DG);
- * 22-Sep-2003 : Added getAllowDuplicateXValues() method (RA);
- * 29-Jan-2004 : Added autoSort attribute, based on a contribution by
- *               Michel Santos - see patch 886740 (DG);
- * 03-Feb-2004 : Added indexOf() method (DG);
- * 16-Feb-2004 : Added remove() method (DG);
- * 18-Aug-2004 : Moved from org.jfree.data --> org.jfree.data.xy (DG);
- * 21-Feb-2005 : Added update(Number, Number) and addOrUpdate(Number, Number)
- *               methods (DG);
- * 03-May-2005 : Added a new constructor, fixed the setMaximumItemCount()
- *               method to remove items (and notify listeners) if necessary,
- *               fixed the add() and addOrUpdate() methods to handle unsorted
- *               series (DG);
- * ------------- JFreeChart 1.0.x ---------------------------------------------
- * 11-Jan-2005 : Renamed update(int, Number) --> updateByIndex() (DG);
- * 15-Jan-2007 : Added toArray() method (DG);
- * 31-Oct-2007 : Implemented faster hashCode() (DG);
- * 22-Nov-2007 : Reimplemented clone() (DG);
- * 01-May-2008 : Fixed bug 1955483 in addOrUpdate() method, thanks to
- *               Ted Schwartz (DG);
- * 24-Nov-2008 : Further fix for 1955483 (DG);
- * 06-Mar-2009 : Added minX, maxX, minY and maxY fields (DG);
- * 10-Jun-2009 : Make clones to isolate XYDataItem instances used
- *               for data storage (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  * 
  */
 
 package org.jfree.data.xy;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
+import org.jfree.chart.util.CloneUtils;
 
 import org.jfree.data.general.Series;
 import org.jfree.data.general.SeriesChangeEvent;
@@ -98,7 +59,8 @@ import org.jfree.data.general.SeriesException;
  * defaults can be changed in the constructor.  Y-values can be
  * {@code null} to represent missing values.
  */
-public class XYSeries extends Series implements Cloneable, Serializable {
+public class XYSeries<K extends Comparable<K>> extends Series<K> 
+        implements Cloneable, Serializable {
 
     /** For serialization. */
     static final long serialVersionUID = -5908509288197150436L;
@@ -108,7 +70,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
     // make subclasses that work directly with the underlying data structure.
 
     /** Storage for the data items in the series. */
-    protected List data;
+    protected List<XYDataItem> data;
 
     /** The maximum number of items for the series. */
     private int maximumItemCount = Integer.MAX_VALUE;
@@ -141,7 +103,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      *
      * @param key  the series key ({@code null} not permitted).
      */
-    public XYSeries(Comparable key) {
+    public XYSeries(K key) {
         this(key, true, true);
     }
 
@@ -153,7 +115,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * @param autoSort  a flag that controls whether or not the items in the
      *                  series are sorted.
      */
-    public XYSeries(Comparable key, boolean autoSort) {
+    public XYSeries(K key, boolean autoSort) {
         this(key, autoSort, true);
     }
 
@@ -167,10 +129,9 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * @param allowDuplicateXValues  a flag that controls whether duplicate
      *                               x-values are allowed.
      */
-    public XYSeries(Comparable key, boolean autoSort,
-            boolean allowDuplicateXValues) {
+    public XYSeries(K key, boolean autoSort, boolean allowDuplicateXValues) {
         super(key);
-        this.data = new java.util.ArrayList();
+        this.data = new java.util.ArrayList<>();
         this.autoSort = autoSort;
         this.allowDuplicateXValues = allowDuplicateXValues;
         this.minX = Double.NaN;
@@ -307,9 +268,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
         this.maxX = Double.NaN;
         this.minY = Double.NaN;
         this.maxY = Double.NaN;
-        Iterator iterator = this.data.iterator();
-        while (iterator.hasNext()) {
-            XYDataItem item = (XYDataItem) iterator.next();
+        for (XYDataItem item : this.data) {
             updateBoundsForAddedItem(item);
         }
     }
@@ -353,7 +312,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      *
      * @return The list of data items.
      */
-    public List getItems() {
+    public List<XYDataItem> getItems() {
         return Collections.unmodifiableList(this.data);
     }
 
@@ -412,7 +371,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * @param y  the y value.
      */
     public void add(double x, double y) {
-        add(new Double(x), new Double(y), true);
+        add(Double.valueOf(x), Double.valueOf(y), true);
     }
 
     /**
@@ -426,7 +385,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      *                listeners.
      */
     public void add(double x, double y, boolean notify) {
-        add(new Double(x), new Double(y), notify);
+        add(Double.valueOf(x), Double.valueOf(y), notify);
     }
 
     /**
@@ -438,7 +397,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * @param y  the y value ({@code null} permitted).
      */
     public void add(double x, Number y) {
-        add(new Double(x), y);
+        add(Double.valueOf(x), y);
     }
 
     /**
@@ -453,7 +412,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      *                listeners.
      */
     public void add(double x, Number y, boolean notify) {
-        add(new Double(x), y, notify);
+        add(Double.valueOf(x), y, notify);
     }
 
     /**
@@ -544,7 +503,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
         }
         updateBoundsForAddedItem(item);
         if (getItemCount() > this.maximumItemCount) {
-            XYDataItem removed = (XYDataItem) this.data.remove(0);
+            XYDataItem removed = this.data.remove(0);
             updateBoundsForRemovedItem(removed);
         }
         if (notify) {
@@ -574,7 +533,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * @return The item removed.
      */
     public XYDataItem remove(int index) {
-        XYDataItem removed = (XYDataItem) this.data.remove(index);
+        XYDataItem removed = this.data.remove(index);
         updateBoundsForRemovedItem(removed);
         fireSeriesChanged();
         return removed;
@@ -617,7 +576,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * @return The data item with the specified index.
      */
     public XYDataItem getDataItem(int index) {
-        XYDataItem item = (XYDataItem) this.data.get(index);
+        XYDataItem item = this.data.get(index);
         return (XYDataItem) item.clone();
     }
 
@@ -631,7 +590,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * @since 1.0.14
      */
     XYDataItem getRawDataItem(int index) {
-        return (XYDataItem) this.data.get(index);
+        return this.data.get(index);
     }
 
     /**
@@ -754,7 +713,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * @since 1.0.10
      */
     public XYDataItem addOrUpdate(double x, double y) {
-        return addOrUpdate(new Double(x), new Double(y));
+        return addOrUpdate(Double.valueOf(x), Double.valueOf(y));
     }
 
     /**
@@ -794,7 +753,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
         XYDataItem overwritten = null;
         int index = indexOf(item.getX());
         if (index >= 0) {
-            XYDataItem existing = (XYDataItem) this.data.get(index);
+            XYDataItem existing = this.data.get(index);
             overwritten = (XYDataItem) existing.clone();
             // figure out if we need to iterate through all the y-values
             boolean iterate = false;
@@ -829,7 +788,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
 
             // check if this addition will exceed the maximum item count...
             if (getItemCount() > this.maximumItemCount) {
-                XYDataItem removed = (XYDataItem) this.data.remove(0);
+                XYDataItem removed = this.data.remove(0);
                 updateBoundsForRemovedItem(removed);
             }
         }
@@ -853,7 +812,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
         }
         else {
             for (int i = 0; i < this.data.size(); i++) {
-                XYDataItem item = (XYDataItem) this.data.get(i);
+                XYDataItem item = this.data.get(i);
                 if (item.getX().equals(x)) {
                     return i;
                 }
@@ -892,10 +851,11 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      *
      * @throws CloneNotSupportedException if there is a cloning problem.
      */
-    @Override
+    @Override 
+    @SuppressWarnings("unchecked")
     public Object clone() throws CloneNotSupportedException {
-        XYSeries clone = (XYSeries) super.clone();
-        clone.data = (List) ObjectUtils.deepClone(this.data);
+        XYSeries<K> clone = (XYSeries) super.clone();
+        clone.data = CloneUtils.cloneList(this.data);
         return clone;
     }
 
@@ -909,15 +869,16 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      *
      * @throws CloneNotSupportedException if there is a cloning problem.
      */
-    public XYSeries createCopy(int start, int end)
+    @SuppressWarnings("unchecked")
+    public XYSeries<K> createCopy(int start, int end)
             throws CloneNotSupportedException {
 
-        XYSeries copy = (XYSeries) super.clone();
-        copy.data = new java.util.ArrayList();
-        if (this.data.size() > 0) {
+        XYSeries<K> copy = (XYSeries) super.clone();
+        copy.data = new ArrayList<>();
+        if (!this.data.isEmpty()) {
             for (int index = start; index <= end; index++) {
-                XYDataItem item = (XYDataItem) this.data.get(index);
-                XYDataItem clone = (XYDataItem) item.clone();
+                XYDataItem item = this.data.get(index);
+                XYDataItem clone = CloneUtils.clone(item);
                 try {
                     copy.add(clone);
                 }
@@ -940,6 +901,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * @return A boolean.
      */
     @Override
+    @SuppressWarnings("unchecked")
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -950,7 +912,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
         if (!super.equals(obj)) {
             return false;
         }
-        XYSeries that = (XYSeries) obj;
+        XYSeries<K> that = (XYSeries) obj;
         if (this.maximumItemCount != that.maximumItemCount) {
             return false;
         }

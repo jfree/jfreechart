@@ -82,6 +82,7 @@ import org.jfree.chart.entity.JFreeChartEntity;
 import org.jfree.chart.event.ChartChangeEvent;
 import org.jfree.chart.event.ChartChangeListener;
 import org.jfree.chart.event.ChartProgressEvent;
+import org.jfree.chart.event.ChartProgressEventType;
 import org.jfree.chart.event.ChartProgressListener;
 import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.event.PlotChangeListener;
@@ -762,34 +763,6 @@ public class JFreeChart implements Drawable, TitleChangeListener,
     }
 
     /**
-     * Returns the plot cast as a {@link CategoryPlot}.
-     * <p>
-     * NOTE: if the plot is not an instance of {@link CategoryPlot}, then a
-     * {@code ClassCastException} is thrown.
-     *
-     * @return The plot.
-     *
-     * @see #getPlot()
-     */
-    public CategoryPlot getCategoryPlot() {
-        return (CategoryPlot) this.plot;
-    }
-
-    /**
-     * Returns the plot cast as an {@link XYPlot}.
-     * <p>
-     * NOTE: if the plot is not an instance of {@link XYPlot}, then a
-     * {@code ClassCastException} is thrown.
-     *
-     * @return The plot.
-     *
-     * @see #getPlot()
-     */
-    public XYPlot getXYPlot() {
-        return (XYPlot) this.plot;
-    }
-
-    /**
      * Returns a flag that indicates whether or not anti-aliasing is used when
      * the chart is drawn.
      *
@@ -1069,7 +1042,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
              ChartRenderingInfo info) {
 
         notifyListeners(new ChartProgressEvent(this, this,
-                ChartProgressEvent.DRAWING_STARTED, 0));
+                ChartProgressEventType.DRAWING_STARTED, 0));
         
         if (this.elementHinting) {
             Map<String, String> m = new HashMap<>();
@@ -1169,7 +1142,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
         }
 
         notifyListeners(new ChartProgressEvent(this, this,
-                ChartProgressEvent.DRAWING_FINISHED, 100));
+                ChartProgressEventType.DRAWING_FINISHED, 100));
     }
 
     /**

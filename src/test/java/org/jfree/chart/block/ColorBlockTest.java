@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * -------------------
  * ColorBlockTest.java
  * -------------------
- * (C) Copyright 2007-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 16-Mar-2007 : Version 1 (DG);
  *
  */
 
@@ -120,7 +116,7 @@ public class ColorBlockTest {
         GradientPaint gp = new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f,
                 Color.BLUE);
         ColorBlock b1 = new ColorBlock(gp, 1.0, 2.0);
-        ColorBlock b2 = (ColorBlock) TestUtils.serialised(b1);
+        ColorBlock b2 = TestUtils.serialised(b1);
         assertEquals(b1, b2);
     }
 

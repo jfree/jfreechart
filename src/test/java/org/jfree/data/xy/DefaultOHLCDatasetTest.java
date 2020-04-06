@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * ---------------------------
  * DefaultOHLCDatasetTest.java
  * ---------------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 29-Apr-2005 : Version 1 (DG);
- * 28-Nov-2006 : Extended equals() test (DG);
- * 22-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
@@ -154,7 +148,7 @@ public class DefaultOHLCDatasetTest {
     public void testSerialization() {
         DefaultOHLCDataset d1 = new DefaultOHLCDataset("Series 1",
                 new OHLCDataItem[0]);
-        DefaultOHLCDataset d2 = (DefaultOHLCDataset) TestUtils.serialised(d1);
+        DefaultOHLCDataset d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 

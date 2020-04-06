@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * --------------------------
  * StandardDialFrameTest.java
  * --------------------------
- * (C) Copyright 2006-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 03-Nov-2006 : Version 1 (DG);
- * 29-Oct-2007 : Renamed StandardDialFrameTests (DG);
  *
  */
 
@@ -50,6 +45,7 @@ import java.awt.Color;
 import java.awt.GradientPaint;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.junit.Test;
 
 /**
@@ -82,10 +78,10 @@ public class StandardDialFrameTest {
 
         // foregroundPaint
         f1.setForegroundPaint(new GradientPaint(1.0f, 2.0f, Color.BLUE, 3.0f,
-                4.0f, Color.green));
+                4.0f, Color.GREEN));
         assertFalse(f1.equals(f2));
         f2.setForegroundPaint(new GradientPaint(1.0f, 2.0f, Color.BLUE, 3.0f,
-                4.0f, Color.green));
+                4.0f, Color.GREEN));
         assertTrue(f1.equals(f2));
 
         // stroke
@@ -120,7 +116,7 @@ public class StandardDialFrameTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         StandardDialFrame f1 = new StandardDialFrame();
-        StandardDialFrame f2 = (StandardDialFrame) f1.clone();
+        StandardDialFrame f2 = CloneUtils.clone(f1);
         assertTrue(f1 != f2);
         assertTrue(f1.getClass() == f2.getClass());
         assertTrue(f1.equals(f2));
@@ -138,7 +134,7 @@ public class StandardDialFrameTest {
     @Test
     public void testSerialization() {
         StandardDialFrame f1 = new StandardDialFrame();
-        StandardDialFrame f2 = (StandardDialFrame) TestUtils.serialised(f1);
+        StandardDialFrame f2 = TestUtils.serialised(f1);
         assertEquals(f1, f2);
     }
 

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------------
  * LegendItemCollectionTest.java
  * -----------------------------
- * (C) Copyright 2005-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -45,6 +45,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
+import org.jfree.chart.util.CloneUtils;
 
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
@@ -62,7 +63,6 @@ public class LegendItemCollectionTest  {
      */
     @Test
     public void testEquals() {
-
         LegendItemCollection c1 = new LegendItemCollection();
         LegendItemCollection c2 = new LegendItemCollection();
         assertEquals(c1, c2);
@@ -73,13 +73,13 @@ public class LegendItemCollectionTest  {
                 new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), true, Color.RED,
                 true, Color.BLUE, new BasicStroke(1.2f), true,
                 new Line2D.Double(1.0, 2.0, 3.0, 4.0),
-                new BasicStroke(2.1f), Color.green);
+                new BasicStroke(2.1f), Color.GREEN);
         LegendItem item2 = new LegendItem("Label", "Description",
                 "ToolTip", "URL", true,
                 new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0),
                 true, Color.RED, true, Color.BLUE, new BasicStroke(1.2f), true,
                 new Line2D.Double(1.0, 2.0, 3.0, 4.0), new BasicStroke(2.1f),
-                Color.green);
+                Color.GREEN);
         c1.add(item1);
         assertFalse(c1.equals(c2));
         c2.add(item2);
@@ -95,7 +95,7 @@ public class LegendItemCollectionTest  {
         LegendItemCollection c1 = new LegendItemCollection();
         c1.add(new LegendItem("Item", "Description", "ToolTip", "URL",
                 new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), Color.RED));
-        LegendItemCollection c2 = (LegendItemCollection) TestUtils.serialised(c1);
+        LegendItemCollection c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 
@@ -108,7 +108,7 @@ public class LegendItemCollectionTest  {
         LegendItemCollection c1 = new LegendItemCollection();
         LegendItem item1 = new LegendItem("Item 1");
         c1.add(item1);
-        LegendItemCollection c2 = (LegendItemCollection) c1.clone();
+        LegendItemCollection c2 = CloneUtils.clone(c1);
 
         assertNotSame(c1, c2);
         assertSame(c1.getClass(), c2.getClass());

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,17 +27,10 @@
  * ----------------------
  * XYDotRendererTest.java
  * ----------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 25-Mar-2003 : Version 1 (DG);
- * 17-May-2007 : Added testGetLegendItemSeriesIndex() (DG);
- * 09-Nov-2007 : Updated testEquals() (DG);
- * 22-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
@@ -54,6 +47,7 @@ import org.jfree.chart.LegendItem;
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
@@ -115,7 +109,7 @@ public class XYDotRendererTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         XYDotRenderer r1 = new XYDotRenderer();
-        XYDotRenderer r2 = (XYDotRenderer) r1.clone();
+        XYDotRenderer r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -136,7 +130,7 @@ public class XYDotRendererTest {
     @Test
     public void testSerialization() {
         XYDotRenderer r1 = new XYDotRenderer();
-        XYDotRenderer r2 = (XYDotRenderer) TestUtils.serialised(r1);
+        XYDotRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 
@@ -146,20 +140,20 @@ public class XYDotRendererTest {
      */
     @Test
     public void testGetLegendItemSeriesIndex() {
-        XYSeriesCollection d1 = new XYSeriesCollection();
-        XYSeries s1 = new XYSeries("S1");
+        XYSeriesCollection<String> d1 = new XYSeriesCollection<>();
+        XYSeries<String> s1 = new XYSeries<>("S1");
         s1.add(1.0, 1.1);
-        XYSeries s2 = new XYSeries("S2");
+        XYSeries<String> s2 = new XYSeries<>("S2");
         s2.add(1.0, 1.1);
         d1.addSeries(s1);
         d1.addSeries(s2);
 
-        XYSeriesCollection d2 = new XYSeriesCollection();
-        XYSeries s3 = new XYSeries("S3");
+        XYSeriesCollection<String> d2 = new XYSeriesCollection<>();
+        XYSeries<String> s3 = new XYSeries<>("S3");
         s3.add(1.0, 1.1);
-        XYSeries s4 = new XYSeries("S4");
+        XYSeries<String> s4 = new XYSeries<>("S4");
         s4.add(1.0, 1.1);
-        XYSeries s5 = new XYSeries("S5");
+        XYSeries<String> s5 = new XYSeries<>("S5");
         s5.add(1.0, 1.1);
         d2.addSeries(s3);
         d2.addSeries(s4);

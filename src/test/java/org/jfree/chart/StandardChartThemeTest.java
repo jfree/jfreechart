@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * ---------------------------
  * StandardChartThemeTest.java
  * ---------------------------
- * (C) Copyright 2008-2017, by Object Refinery Limited.
+ * (C) Copyright 2008-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 14-Aug-2008 : Version 1 (DG);
  *
  */
 
@@ -116,9 +112,9 @@ public class StandardChartThemeTest {
         assertTrue(t1.equals(t2));
 
         //legendBackgroundPaint;
-        t1.setLegendBackgroundPaint(new GradientPaint(3f, 4f, Color.gray, 1f, 2f, Color.RED));
+        t1.setLegendBackgroundPaint(new GradientPaint(3f, 4f, Color.GRAY, 1f, 2f, Color.RED));
         assertFalse(t1.equals(t2));
-        t2.setLegendBackgroundPaint(new GradientPaint(3f, 4f, Color.gray, 1f, 2f, Color.RED));
+        t2.setLegendBackgroundPaint(new GradientPaint(3f, 4f, Color.GRAY, 1f, 2f, Color.RED));
         assertTrue(t1.equals(t2));
 
         //legendItemPaint;
@@ -186,9 +182,9 @@ public class StandardChartThemeTest {
         assertTrue(t1.equals(t2));
 
         //axisLabelPaint;
-        t1.setAxisLabelPaint(new GradientPaint(8f, 4f, Color.gray, 2f, 9f, Color.BLUE));
+        t1.setAxisLabelPaint(new GradientPaint(8f, 4f, Color.GRAY, 2f, 9f, Color.BLUE));
         assertFalse(t1.equals(t2));
-        t2.setAxisLabelPaint(new GradientPaint(8f, 4f, Color.gray, 2f, 9f, Color.BLUE));
+        t2.setAxisLabelPaint(new GradientPaint(8f, 4f, Color.GRAY, 2f, 9f, Color.BLUE));
         assertTrue(t1.equals(t2));
 
         //tickLabelPaint;
@@ -198,9 +194,9 @@ public class StandardChartThemeTest {
         assertTrue(t1.equals(t2));
 
         //itemLabelPaint;
-        t1.setItemLabelPaint(new GradientPaint(2f, 5f, Color.gray, 1f, 2f, Color.BLUE));
+        t1.setItemLabelPaint(new GradientPaint(2f, 5f, Color.GRAY, 1f, 2f, Color.BLUE));
         assertFalse(t1.equals(t2));
-        t2.setItemLabelPaint(new GradientPaint(2f, 5f, Color.gray, 1f, 2f, Color.BLUE));
+        t2.setItemLabelPaint(new GradientPaint(2f, 5f, Color.GRAY, 1f, 2f, Color.BLUE));
         assertTrue(t1.equals(t2));
 
         //shadowVisible;
@@ -246,9 +242,9 @@ public class StandardChartThemeTest {
         assertTrue(t1.equals(t2));
 
         //gridBandAlternatePaint
-        t1.setGridBandAlternatePaint(new GradientPaint(1f, 4f, Color.green, 1f, 2f, Color.RED));
+        t1.setGridBandAlternatePaint(new GradientPaint(1f, 4f, Color.GREEN, 1f, 2f, Color.RED));
         assertFalse(t1.equals(t2));
-        t2.setGridBandAlternatePaint(new GradientPaint(1f, 4f, Color.green, 1f, 2f, Color.RED));
+        t2.setGridBandAlternatePaint(new GradientPaint(1f, 4f, Color.GREEN, 1f, 2f, Color.RED));
         assertTrue(t1.equals(t2));
 
     }
@@ -259,12 +255,13 @@ public class StandardChartThemeTest {
     @Test
     public void testSerialization() {
         StandardChartTheme t1 = new StandardChartTheme("Name");
-        StandardChartTheme t2 = (StandardChartTheme) TestUtils.serialised(t1);
+        StandardChartTheme t2 = TestUtils.serialised(t1);
         assertTrue(t1.equals(t2));
     }
 
     /**
      * Basic checks for cloning.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {

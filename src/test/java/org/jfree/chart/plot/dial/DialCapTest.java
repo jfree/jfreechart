@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * ----------------
  * DialCapTest.java
  * ----------------
- * (C) Copyright 2006-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 03-Nov-2006 : Version 1 (DG);
  *
  */
 
@@ -49,6 +45,7 @@ import java.awt.Color;
 import java.awt.GradientPaint;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.junit.Test;
 
 
@@ -74,17 +71,17 @@ public class DialCapTest {
 
         // fill paint
         c1.setFillPaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
-                3.0f, 4.0f, Color.green));
+                3.0f, 4.0f, Color.GREEN));
         assertFalse(c1.equals(c2));
         c2.setFillPaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
-                3.0f, 4.0f, Color.green));
+                3.0f, 4.0f, Color.GREEN));
 
         // outline paint
         c1.setOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.WHITE,
-                3.0f, 4.0f, Color.gray));
+                3.0f, 4.0f, Color.GRAY));
         assertFalse(c1.equals(c2));
         c2.setOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.WHITE,
-                3.0f, 4.0f, Color.gray));
+                3.0f, 4.0f, Color.GRAY));
 
         assertTrue(c1.equals(c2));
 
@@ -121,7 +118,7 @@ public class DialCapTest {
     public void testCloning() throws CloneNotSupportedException {
         // test a default instance
         DialCap c1 = new DialCap();
-        DialCap c2 = (DialCap) c1.clone();
+        DialCap c2 = CloneUtils.clone(c1);
 
         assertTrue(c1 != c2);
         assertTrue(c1.getClass() == c2.getClass());
@@ -130,9 +127,9 @@ public class DialCapTest {
         // test a customised instance
         c1 = new DialCap();
         c1.setFillPaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
-                3.0f, 4.0f, Color.green));
+                3.0f, 4.0f, Color.GREEN));
         c1.setOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.WHITE,
-                3.0f, 4.0f, Color.gray));
+                3.0f, 4.0f, Color.GRAY));
         c1.setOutlineStroke(new BasicStroke(2.0f));
         c2 = (DialCap) c1.clone();
         assertTrue(c1 != c2);
@@ -154,18 +151,18 @@ public class DialCapTest {
     public void testSerialization() {
         // test a default instance
         DialCap c1 = new DialCap();
-        DialCap c2 = (DialCap) TestUtils.serialised(c1);
+        DialCap c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
 
         // test a custom instance
         c1 = new DialCap();
         c1.setFillPaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
-                3.0f, 4.0f, Color.green));
+                3.0f, 4.0f, Color.GREEN));
         c1.setOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.WHITE,
-                3.0f, 4.0f, Color.gray));
+                3.0f, 4.0f, Color.GRAY));
         c1.setOutlineStroke(new BasicStroke(2.0f));
 
-        c2 = (DialCap) TestUtils.serialised(c1);
+        c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * ---------------------------
  * DialValueIndicatorTest.java
  * ---------------------------
- * (C) Copyright 2006-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 03-Nov-2006 : Version 1 (DG);
- * 24-Oct-2007 : Updated for API changes (DG);
  *
  */
 
@@ -54,6 +49,7 @@ import org.jfree.chart.TestUtils;
 import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.TextAnchor;
+import org.jfree.chart.util.CloneUtils;
 
 import org.junit.Test;
 
@@ -96,9 +92,9 @@ public class DialValueIndicatorTest {
         assertTrue(i1.equals(i2));
 
         // templateValue
-        i1.setTemplateValue(new Double(1.23));
+        i1.setTemplateValue(1.23);
         assertFalse(i1.equals(i2));
-        i2.setTemplateValue(new Double(1.23));
+        i2.setTemplateValue(1.23);
         assertTrue(i1.equals(i2));
 
         // font
@@ -109,18 +105,18 @@ public class DialValueIndicatorTest {
 
         // paint
         i1.setPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f,
-                Color.green));
+                Color.GREEN));
         assertFalse(i1.equals(i2));
         i2.setPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f,
-                Color.green));
+                Color.GREEN));
         assertTrue(i1.equals(i2));
 
         // backgroundPaint
         i1.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f,
-                4.0f, Color.green));
+                4.0f, Color.GREEN));
         assertFalse(i1.equals(i2));
         i2.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f,
-                4.0f, Color.green));
+                4.0f, Color.GREEN));
         assertTrue(i1.equals(i2));
 
         // outlineStroke
@@ -131,10 +127,10 @@ public class DialValueIndicatorTest {
 
         // outlinePaint
         i1.setOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f,
-                Color.green));
+                Color.GREEN));
         assertFalse(i1.equals(i2));
         i2.setOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f,
-                Color.green));
+                Color.GREEN));
         assertTrue(i1.equals(i2));
 
         // insets
@@ -177,12 +173,13 @@ public class DialValueIndicatorTest {
 
     /**
      * Confirm that cloning works.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
         // test a default instance
         DialValueIndicator i1 = new DialValueIndicator(0);
-        DialValueIndicator i2 = (DialValueIndicator) i1.clone();
+        DialValueIndicator i2 = CloneUtils.clone(i1);
         assertTrue(i1 != i2);
         assertTrue(i1.getClass() == i2.getClass());
         assertTrue(i1.equals(i2));
@@ -201,8 +198,7 @@ public class DialValueIndicatorTest {
     @Test
     public void testSerialization() {
         DialValueIndicator i1 = new DialValueIndicator(0);
-        DialValueIndicator i2 = (DialValueIndicator) 
-                TestUtils.serialised(i1);
+        DialValueIndicator i2 = TestUtils.serialised(i1);
         assertEquals(i1, i2);
     }
 

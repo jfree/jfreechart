@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * -----------------------
  * KeyedValuesItemKey.java
  * -----------------------
- * (C) Copyright 2014, by Object Refinery Limited.
+ * (C) Copyright 2014-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 18-Aug-2014 : Version 1, based on code from Orson Charts (DG);
- * 19-Jan-2019 : Added missing hashCode (TH);
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
@@ -45,17 +40,23 @@ import java.io.Serializable;
 import java.util.Objects;
 import org.jfree.chart.util.Args;
 
-public class KeyedValuesItemKey implements ItemKey, Serializable {
+/**
+ * A reference to an item in a {link KeyedValues} instance.
+ * 
+ * @param <K> The key type.
+ */
+public class KeyedValuesItemKey<K extends Comparable<K>> implements ItemKey, 
+        Serializable {
     
     /** The key for the item. */
-    Comparable<? extends Object> key;
+    K key;
     
     /**
      * Creates a new instance.
      * 
      * @param key  the key ({@code null} not permitted).
      */
-    public KeyedValuesItemKey(Comparable<? extends Object> key) {
+    public KeyedValuesItemKey(K key) {
         Args.nullNotPermitted(key, "key");
         this.key = key;
     }
@@ -65,7 +66,7 @@ public class KeyedValuesItemKey implements ItemKey, Serializable {
      * 
      * @return The key (never {@code null}). 
      */
-    public Comparable<?> getKey() {
+    public K getKey() {
         return this.key;
     }
     

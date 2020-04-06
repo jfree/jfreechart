@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,17 +27,10 @@
  * -------------------------
  * TimeSeriesTableModel.java
  * -------------------------
- * (C) Copyright 2001-2016, by Object Refinery Limited.
+ * (C) Copyright 2001-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 14-Nov-2001 : Version 1 (DG);
- * 05-Apr-2002 : Removed redundant first column (DG);
- * 24-Jun-2002 : Removed unnecessary local variable (DG);
- * 07-Oct-2002 : Fixed errors reported by Checkstyle (DG);
  *
  */
 

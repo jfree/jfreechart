@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,23 +27,10 @@
  * -----------------------
  * TimeSeriesDataItem.java
  * -----------------------
- * (C) Copyright 2001-2016, by Object Refinery Limited.
+ * (C) Copyright 2001-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 11-Oct-2001 : Version 1 (DG);
- * 15-Nov-2001 : Updated Javadoc comments (DG);
- * 29-Nov-2001 : Added cloning (DG);
- * 24-Jun-2002 : Removed unnecessary import (DG);
- * 07-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 13-Mar-2003 : Renamed TimeSeriesDataPair --> TimeSeriesDataItem, moved to
- *               com.jrefinery.data.time package, implemented Serializable (DG)
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 09-Jun-2009 : Tidied up equals() (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  * 
  */
 
@@ -78,7 +65,8 @@ import org.jfree.chart.util.Args;
  * sorting can be used to keep the data items in order.
  *
  */
-public class TimeSeriesDataItem implements Cloneable, Comparable, Serializable {
+public class TimeSeriesDataItem implements Cloneable, 
+        Comparable<TimeSeriesDataItem>, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -2235346966016401302L;
@@ -108,7 +96,7 @@ public class TimeSeriesDataItem implements Cloneable, Comparable, Serializable {
      * @param value  the value associated with the time period.
      */
     public TimeSeriesDataItem(RegularTimePeriod period, double value) {
-        this(period, new Double(value));
+        this(period, Double.valueOf(value));
     }
 
     /**
@@ -193,26 +181,8 @@ public class TimeSeriesDataItem implements Cloneable, Comparable, Serializable {
      *         relative to another object.
      */
     @Override
-    public int compareTo(Object o1) {
-
-        int result;
-
-        // CASE 1 : Comparing to another TimeSeriesDataItem object
-        // -------------------------------------------------------
-        if (o1 instanceof TimeSeriesDataItem) {
-            TimeSeriesDataItem datapair = (TimeSeriesDataItem) o1;
-            result = getPeriod().compareTo(datapair.getPeriod());
-        }
-
-        // CASE 2 : Comparing to a general object
-        // ---------------------------------------------
-        else {
-            // consider time periods to be ordered after general objects
-            result = 1;
-        }
-
-        return result;
-
+    public int compareTo(TimeSeriesDataItem other) {
+        return getPeriod().compareTo(other.getPeriod());
     }
 
     /**

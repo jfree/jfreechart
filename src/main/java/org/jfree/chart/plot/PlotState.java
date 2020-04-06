@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * --------------
  * PlotState.java
  * --------------
- * (C) Copyright 2003-2008, by Object Refinery Limited.
+ * (C) Copyright 2003-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 30-Oct-2003 : Version 1 (DG);
  *
  */
 
@@ -42,6 +38,8 @@ package org.jfree.chart.plot;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.jfree.chart.axis.Axis;
+import org.jfree.chart.axis.AxisState;
 
 /**
  * Records information about the state of a plot during the drawing process.
@@ -49,13 +47,13 @@ import java.util.Map;
 public class PlotState {
 
     /** The shared axis states. */
-    private Map sharedAxisStates;
+    private final Map<Axis, AxisState> sharedAxisStates;
 
     /**
      * Creates a new state object.
      */
     public PlotState() {
-        this.sharedAxisStates = new HashMap();
+        this.sharedAxisStates = new HashMap<>();
     }
 
     /**
@@ -63,7 +61,7 @@ public class PlotState {
      *
      * @return A map.
      */
-    public Map getSharedAxisStates() {
+    public Map<Axis, AxisState> getSharedAxisStates() {
         return this.sharedAxisStates;
     }
 

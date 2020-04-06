@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,19 +27,10 @@
  * --------------------
  * ItemLabelAnchor.java
  * --------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited.
+ * (C) Copyright 2003-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 29-Apr-2003 : Version 1 (DG);
- * 19-Feb-2004 : Moved to org.jfree.chart.labels package, added readResolve()
- *               method (DG);
- * 11-Jan-2005 : Removed deprecated code in preparation for the 1.0.0
- *               release (DG);
- * 08-Jul-2018 : Made ItemLabelAnchor an enum (TH);
  *
  */
 
@@ -51,30 +42,79 @@ package org.jfree.chart.labels;
  */
 public enum ItemLabelAnchor {
 
+    /** Center anchor point. */
     CENTER,
+
+    /** 1 o'clock anchor point. */
     INSIDE1,
+
+    /** 2 o'clock  anchor point. */
     INSIDE2,
+
+    /** 3 o'clock  anchor point. */
     INSIDE3,
+
+    /** 4 o'clock  anchor point. */
     INSIDE4,
+
+    /** 5 o'clock  anchor point. */
     INSIDE5,
+
+    /** 6 o'clock  anchor point. */
     INSIDE6,
+
+    /** 7 o'clock  anchor point. */
     INSIDE7,
+
+    /** 8 o'clock  anchor point. */
     INSIDE8,
+
+    /** 9 o'clock  anchor point. */
     INSIDE9,
+
+    /** 10 o'clock  anchor point. */
     INSIDE10,
+
+    /** 11 o'clock  anchor point. */
     INSIDE11,
+
+    /** 12 o'clock  anchor point. */
     INSIDE12,
+
+    /** 1 o'clock  anchor point. */
     OUTSIDE1,
+
+    /** 2 o'clock  anchor point. */
     OUTSIDE2,
+
+    /** 3 o'clock  anchor point. */
     OUTSIDE3,
+
+    /** 4 o'clock  anchor point. */
     OUTSIDE4,
+
+    /** 5 o'clock  anchor point. */
     OUTSIDE5,
+
+    /** 6 o'clock  anchor point. */
     OUTSIDE6,
+
+    /** 7 o'clock  anchor point. */
     OUTSIDE7,
+
+    /** 8 o'clock  anchor point. */
     OUTSIDE8,
+
+    /** 9 o'clock  anchor point. */
     OUTSIDE9,
+
+    /** 10 o'clock  anchor point. */
     OUTSIDE10,
+
+    /** 11 o'clock  anchor point. */
     OUTSIDE11,
+
+    /** 12 o'clock  anchor point. */
     OUTSIDE12
 
 }

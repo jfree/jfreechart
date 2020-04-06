@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * -------------------
  * ModuloAxisTest.java
  * -------------------
- * (C) Copyright 2007-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 13-Nov-2007 : Version 1 (DG);
  *
  */
 
@@ -100,7 +96,7 @@ public class ModuloAxisTest {
     @Test
     public void testSerialization() {
         ModuloAxis a1 = new ModuloAxis("Test", new Range(0.0, 1.0));
-        ModuloAxis a2 = (ModuloAxis) TestUtils.serialised(a1);
+        ModuloAxis a2 = TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 

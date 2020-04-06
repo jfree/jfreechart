@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * ----------------------------------
  * HighLowItemLabelGeneratorTest.java
  * ----------------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 18-Mar-2003 : Version 1 (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG);
  *
  */
 
@@ -50,6 +45,7 @@ import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.Test;
@@ -101,7 +97,7 @@ public class HighLowItemLabelGeneratorTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         HighLowItemLabelGenerator g1 = new HighLowItemLabelGenerator();
-        HighLowItemLabelGenerator g2 = (HighLowItemLabelGenerator) g1.clone();
+        HighLowItemLabelGenerator g2 = CloneUtils.clone(g1);
         assertTrue(g1 != g2);
         assertTrue(g1.getClass() == g2.getClass());
         assertTrue(g1.equals(g2));
@@ -122,8 +118,7 @@ public class HighLowItemLabelGeneratorTest {
     @Test
     public void testSerialization() {
         HighLowItemLabelGenerator g1 = new HighLowItemLabelGenerator();
-        HighLowItemLabelGenerator g2 = (HighLowItemLabelGenerator) 
-                TestUtils.serialised(g1);
+        HighLowItemLabelGenerator g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

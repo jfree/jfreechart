@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2015, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,65 +27,11 @@
  * ---------------
  * TimeSeries.java
  * ---------------
- * (C) Copyright 2001-2015, by Object Refinery Limited.
+ * (C) Copyright 2001-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Bryan Scott;
  *                   Nick Guenther;
- *
- * Changes
- * -------
- * 11-Oct-2001 : Version 1 (DG);
- * 14-Nov-2001 : Added listener mechanism (DG);
- * 15-Nov-2001 : Updated argument checking and exceptions in add() method (DG);
- * 29-Nov-2001 : Added properties to describe the domain and range (DG);
- * 07-Dec-2001 : Renamed TimeSeries --> BasicTimeSeries (DG);
- * 01-Mar-2002 : Updated import statements (DG);
- * 28-Mar-2002 : Added a method add(TimePeriod, double) (DG);
- * 27-Aug-2002 : Changed return type of delete method to void (DG);
- * 04-Oct-2002 : Added itemCount and historyCount attributes, fixed errors
- *               reported by Checkstyle (DG);
- * 29-Oct-2002 : Added series change notification to addOrUpdate() method (DG);
- * 28-Jan-2003 : Changed name back to TimeSeries (DG);
- * 13-Mar-2003 : Moved to com.jrefinery.data.time package and implemented
- *               Serializable (DG);
- * 01-May-2003 : Updated equals() method (see bug report 727575) (DG);
- * 14-Aug-2003 : Added ageHistoryCountItems method (copied existing code for
- *               contents) made a method and added to addOrUpdate.  Made a
- *               public method to enable ageing against a specified time
- *               (eg now) as opposed to lastest time in series (BS);
- * 15-Oct-2003 : Added fix for setItemCount method - see bug report 804425.
- *               Modified exception message in add() method to be more
- *               informative (DG);
- * 13-Apr-2004 : Added clear() method (DG);
- * 21-May-2004 : Added an extra addOrUpdate() method (DG);
- * 15-Jun-2004 : Fixed NullPointerException in equals() method (DG);
- * 29-Nov-2004 : Fixed bug 1075255 (DG);
- * 17-Nov-2005 : Renamed historyCount --> maximumItemAge (DG);
- * 28-Nov-2005 : Changed maximumItemAge from int to long (DG);
- * 01-Dec-2005 : New add methods accept notify flag (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 24-May-2006 : Improved error handling in createCopy() methods (DG);
- * 01-Sep-2006 : Fixed bugs in removeAgedItems() methods - see bug report
- *               1550045 (DG);
- * 22-Mar-2007 : Simplified getDataItem(RegularTimePeriod) - see patch 1685500
- *               by Nick Guenther (DG);
- * 31-Oct-2007 : Implemented faster hashCode() (DG);
- * 21-Nov-2007 : Fixed clone() method (bug 1832432) (DG);
- * 10-Jan-2008 : Fixed createCopy(RegularTimePeriod, RegularTimePeriod) (bug
- *               1864222) (DG);
- * 13-Jan-2009 : Fixed constructors so that timePeriodClass doesn't need to
- *               be specified in advance (DG);
- * 26-May-2009 : Added cache for minY and maxY values (DG);
- * 09-Jun-2009 : Ensure that TimeSeriesDataItem objects used in underlying
- *               storage are cloned to keep series isolated from external
- *               changes (DG);
- * 10-Jun-2009 : Added addOrUpdate(TimeSeriesDataItem) method (DG);
- * 31-Aug-2009 : Clear minY and maxY cache values in createCopy (DG);
- * 03-Dec-2011 : Fixed bug 3446965 which affects the y-range calculation for 
- *               the series (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
- * 06-Sep-2015 : Fix bug with Double.NaN values and findRangeBounds() (DG);
  *
  */
 
@@ -94,6 +40,7 @@ package org.jfree.data.time;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
@@ -105,6 +52,7 @@ import java.util.TimeZone;
 import org.jfree.chart.util.ObjectUtils;
 
 import org.jfree.chart.util.Args;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.data.Range;
 import org.jfree.data.general.Series;
 import org.jfree.data.general.SeriesChangeEvent;
@@ -117,7 +65,8 @@ import org.jfree.data.general.SeriesException;
  * period (for example, {@link Day}) and (b) that each period appears at
  * most one time in the series.
  */
-public class TimeSeries extends Series implements Cloneable, Serializable {
+public class TimeSeries<S extends Comparable<S>> extends Series<S> 
+        implements Cloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -5032960206869675528L;
@@ -138,7 +87,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
     protected Class timePeriodClass;
 
     /** The list of data items in the series. */
-    protected List data;
+    protected List<TimeSeriesDataItem> data;
 
     /** The maximum number of items for the series. */
     private int maximumItemCount;
@@ -170,7 +119,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      *
      * @param name  the series name ({@code null} not permitted).
      */
-    public TimeSeries(Comparable name) {
+    public TimeSeries(S name) {
         this(name, DEFAULT_DOMAIN_DESCRIPTION, DEFAULT_RANGE_DESCRIPTION);
     }
 
@@ -187,12 +136,12 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      *
      * @since 1.0.13
      */
-    public TimeSeries(Comparable name, String domain, String range) {
+    public TimeSeries(S name, String domain, String range) {
         super(name);
         this.domain = domain;
         this.range = range;
         this.timePeriodClass = null;
-        this.data = new java.util.ArrayList();
+        this.data = new ArrayList<>();
         this.maximumItemCount = Integer.MAX_VALUE;
         this.maximumItemAge = Long.MAX_VALUE;
         this.minY = Double.NaN;
@@ -266,9 +215,8 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      *
      * @return The list of data items.
      */
-    public List getItems() {
-        // FIXME: perhaps we should clone the data list
-        return Collections.unmodifiableList(this.data);
+    public List<TimeSeriesDataItem> getItems() {
+        return CloneUtils.cloneList(this.data);
     }
 
     /**
@@ -400,7 +348,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
         double lowY = Double.POSITIVE_INFINITY;
         double highY = Double.NEGATIVE_INFINITY;
         for (int i = 0; i < this.data.size(); i++) {
-            TimeSeriesDataItem item = (TimeSeriesDataItem) this.data.get(i);
+            TimeSeriesDataItem item = this.data.get(i);
             long millis = item.getPeriod().getMillisecond(xAnchor, calendar);
             if (xRange.contains(millis)) {
                 Number n = item.getValue();
@@ -582,7 +530,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      *
      * @return The unique time periods.
      */
-    public Collection getTimePeriodsUniqueToOtherSeries(TimeSeries series) {
+    public Collection getTimePeriodsUniqueToOtherSeries(TimeSeries<S> series) {
         Collection result = new java.util.ArrayList();
         for (int i = 0; i < series.getItemCount(); i++) {
             RegularTimePeriod period = series.getTimePeriod(i);
@@ -839,9 +787,8 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      *
      * @return A series containing the values that were overwritten.
      */
-    public TimeSeries addAndOrUpdate(TimeSeries series) {
-        TimeSeries overwritten = new TimeSeries("Overwritten values from: "
-                + getKey());
+    public TimeSeries<S> addAndOrUpdate(TimeSeries<S> series) {
+        TimeSeries<S> overwritten = new TimeSeries<>(getKey());
         for (int i = 0; i < series.getItemCount(); i++) {
             TimeSeriesDataItem item = series.getRawDataItem(i);
             TimeSeriesDataItem oldItem = addOrUpdate(item.getPeriod(),
@@ -1119,7 +1066,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      */
     @Override
     public Object clone() throws CloneNotSupportedException {
-        TimeSeries clone = (TimeSeries) super.clone();
+        TimeSeries<S> clone = (TimeSeries) super.clone();
         clone.data = (List) ObjectUtils.deepClone(this.data);
         return clone;
     }
@@ -1136,7 +1083,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      *
      * @throws CloneNotSupportedException if there is a cloning problem.
      */
-    public TimeSeries createCopy(int start, int end)
+    public TimeSeries<S> createCopy(int start, int end)
             throws CloneNotSupportedException {
         if (start < 0) {
             throw new IllegalArgumentException("Requires start >= 0.");
@@ -1144,7 +1091,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
         if (end < start) {
             throw new IllegalArgumentException("Requires start <= end.");
         }
-        TimeSeries copy = (TimeSeries) super.clone();
+        TimeSeries<S> copy = (TimeSeries) super.clone();
         copy.minY = Double.NaN;
         copy.maxY = Double.NaN;
         copy.data = new java.util.ArrayList();
@@ -1177,7 +1124,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      *
      * @throws CloneNotSupportedException if there is a cloning problem.
      */
-    public TimeSeries createCopy(RegularTimePeriod start, RegularTimePeriod end)
+    public TimeSeries<S> createCopy(RegularTimePeriod start, RegularTimePeriod end)
         throws CloneNotSupportedException {
 
         Args.nullNotPermitted(start, "start");
@@ -1203,7 +1150,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
             emptyRange = true;
         }
         if (emptyRange) {
-            TimeSeries copy = (TimeSeries) super.clone();
+            TimeSeries<S> copy = (TimeSeries) super.clone();
             copy.data = new java.util.ArrayList();
             return copy;
         }
@@ -1225,7 +1172,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
         if (!(obj instanceof TimeSeries)) {
             return false;
         }
-        TimeSeries that = (TimeSeries) obj;
+        TimeSeries<S> that = (TimeSeries) obj;
         if (!ObjectUtils.equal(getDomainDescription(),
                 that.getDomainDescription())) {
             return false;

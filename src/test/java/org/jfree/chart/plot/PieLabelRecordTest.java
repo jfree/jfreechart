@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * PieLabelRecordTest.java
  * -----------------------
- * (C) Copyright 2007-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -119,7 +119,7 @@ public class PieLabelRecordTest {
     public void testSerialization() {
         PieLabelRecord p1 = new PieLabelRecord("A", 1.0, 2.0, new TextBox("B"),
                 3.0, 4.0, 5.0);
-        PieLabelRecord p2 = (PieLabelRecord) TestUtils.serialised(p1);
+        PieLabelRecord p2 = TestUtils.serialised(p1);
         boolean b = p1.equals(p2);
         assertTrue(b);
     }

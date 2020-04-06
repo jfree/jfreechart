@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * --------------------------
  * DeviationRendererTest.java
  * --------------------------
- * (C) Copyright 2007-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 26-Feb-2007 : Version 1 (DG);
- * 22-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
@@ -112,7 +107,7 @@ public class DeviationRendererTest {
     @Test
     public void testSerialization() {
         DeviationRenderer r1 = new DeviationRenderer();
-        DeviationRenderer r2 = (DeviationRenderer) TestUtils.serialised(r1);
+        DeviationRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

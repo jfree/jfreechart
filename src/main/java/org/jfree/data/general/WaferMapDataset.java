@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,17 +27,10 @@
  * --------------------
  * WaferMapDataset.java
  * --------------------
- * (C)opyright 2003-2008, by Robert Redburn and Contributors.
+ * (C)opyright 2003-2020, by Robert Redburn and Contributors.
  *
  * Original Author:  Robert Redburn;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 25-Nov-2003 : Version 1 contributed by Robert Redburn (with some
- *               modifications to match style conventions) (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 02-Feb-2007 : Removed author tags from all over JFreeChart sources (DG);
  *
  */
 
@@ -219,7 +212,7 @@ public class WaferMapDataset extends AbstractDataset {
      * @return A boolean.
      */
     public boolean isMaxValue(Number check) {
-        if (check.doubleValue() > this.maxValue.doubleValue()) {
+        if (check.doubleValue() > this.maxValue) {
             return true;
         }
         return false;
@@ -233,7 +226,7 @@ public class WaferMapDataset extends AbstractDataset {
      * @return A boolean.
      */
     public boolean isMinValue(Number check) {
-        if (check.doubleValue() < this.minValue.doubleValue()) {
+        if (check.doubleValue() < this.minValue) {
             return true;
         }
         return false;

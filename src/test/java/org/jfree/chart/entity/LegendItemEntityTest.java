@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * -------------------------
  * LegendItemEntityTest.java
  * -------------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 20-May-2004 : Version 1 (DG);
- * 18-May-2007 : Added checks for new fields (DG);
  *
  */
 
@@ -48,6 +43,7 @@ import static org.junit.Assert.assertTrue;
 import java.awt.geom.Rectangle2D;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.junit.Test;
@@ -62,10 +58,10 @@ public class LegendItemEntityTest {
      */
     @Test
     public void testEquals() {
-        LegendItemEntity e1 = new LegendItemEntity(new Rectangle2D.Double(1.0,
-                2.0, 3.0, 4.0));
-        LegendItemEntity e2 = new LegendItemEntity(new Rectangle2D.Double(1.0,
-                2.0, 3.0, 4.0));
+        LegendItemEntity<String> e1 = new LegendItemEntity<>(
+                new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0));
+        LegendItemEntity<String> e2 = new LegendItemEntity<>(
+                new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0));
         assertTrue(e1.equals(e2));
 
         e1.setArea(new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0));
@@ -83,9 +79,9 @@ public class LegendItemEntityTest {
         e2.setURLText("New URL");
         assertTrue(e1.equals(e2));
 
-        e1.setDataset(new DefaultCategoryDataset());
+        e1.setDataset(new DefaultCategoryDataset<String, String>());
         assertFalse(e1.equals(e2));
-        e2.setDataset(new DefaultCategoryDataset());
+        e2.setDataset(new DefaultCategoryDataset<String, String>());
         assertTrue(e1.equals(e2));
 
         e1.setSeriesKey("A");
@@ -100,9 +96,9 @@ public class LegendItemEntityTest {
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        LegendItemEntity e1 = new LegendItemEntity(new Rectangle2D.Double(1.0,
-                2.0, 3.0, 4.0));
-        LegendItemEntity e2 = (LegendItemEntity) e1.clone();
+        LegendItemEntity<String> e1 = new LegendItemEntity<>(
+                new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0));
+        LegendItemEntity<String> e2 = CloneUtils.clone(e1);
         assertTrue(e1 != e2);
         assertTrue(e1.getClass() == e2.getClass());
         assertTrue(e1.equals(e2));
@@ -113,9 +109,9 @@ public class LegendItemEntityTest {
      */
     @Test
     public void testSerialization() {
-        LegendItemEntity e1 = new LegendItemEntity(new Rectangle2D.Double(1.0,
-                2.0, 3.0, 4.0));
-        LegendItemEntity e2 = (LegendItemEntity) TestUtils.serialised(e1);
+        LegendItemEntity<String> e1 = new LegendItemEntity<>(
+                new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0));
+        LegendItemEntity<String> e2 = TestUtils.serialised(e1);
         assertEquals(e1, e2);
     }
 

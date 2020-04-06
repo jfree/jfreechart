@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -24,6 +24,13 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
+ * ---------------
+ * StrokeList.java
+ * ---------------
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ *
+ * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Contributors:     -;
  */
 
 package org.jfree.chart.util;
@@ -73,6 +80,7 @@ public class StrokeList extends AbstractObjectList {
      * 
      * @throws CloneNotSupportedException if an item in the list cannot be cloned.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
@@ -108,6 +116,7 @@ public class StrokeList extends AbstractObjectList {
      *
      * @return the hashcode
      */
+    @Override
     public int hashCode() {
         return super.hashCode();
     }

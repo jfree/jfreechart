@@ -31,11 +31,10 @@
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
+ *
  */
 
 package org.jfree.chart.util;
-
-import java.util.Objects;
 
 /**
  * A utility class for checking method arguments.
@@ -52,9 +51,6 @@ public class Args {
      *
      * @throws IllegalArgumentException  if {@code param} is 
      *     {@code null}.
-     * 
-     * @deprecated Now that JFreeChart requires JDK1.8 or later, you can use
-     *    {@link Objects#requireNonNull}.
      */
     public static void nullNotPermitted(Object param, String name) {
         if (param == null) {
@@ -86,7 +82,7 @@ public class Args {
      */
     public static void requireInRange(int value, String name, 
             int lowerBound, int upperBound) {
-        if (value < lowerBound) {
+        if (value < lowerBound || value > upperBound) {
             throw new IllegalArgumentException("Require '" + name + "' (" 
                     + value + ") to be in the range " + lowerBound + " to " 
                     + upperBound);

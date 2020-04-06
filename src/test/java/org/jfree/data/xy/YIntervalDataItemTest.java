@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------------
  * YIntervalDataItemTest.java
  * --------------------------
- * (C) Copyright 2006-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -44,6 +44,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.junit.Test;
 
 /**
@@ -59,7 +60,7 @@ public class YIntervalDataItemTest {
     @Test
     public void testConstructor1() {
         YIntervalDataItem item1 = new YIntervalDataItem(1.0, 2.0, 3.0, 4.0);
-        assertEquals(new Double(1.0), item1.getX());
+        assertEquals(Double.valueOf(1.0), item1.getX());
         assertEquals(2.0, item1.getYValue(), EPSILON);
         assertEquals(3.0, item1.getYLowValue(), EPSILON);
         assertEquals(4.0, item1.getYHighValue(), EPSILON);
@@ -101,12 +102,13 @@ public class YIntervalDataItemTest {
     }
 
     /**
-     * Some checks for the clone() method.
+     * Some checks for the clone() met
+     * @throws java.lang.CloneNotSupportedExceptionhod.
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
         YIntervalDataItem item1 = new YIntervalDataItem(1.0, 2.0, 1.5, 2.5);
-        YIntervalDataItem item2 = (YIntervalDataItem) item1.clone();
+        YIntervalDataItem item2 = CloneUtils.clone(item1);
         assertTrue(item1 != item2);
         assertTrue(item1.getClass() == item2.getClass());
         assertTrue(item1.equals(item2));
@@ -118,8 +120,7 @@ public class YIntervalDataItemTest {
     @Test
     public void testSerialization() {
         YIntervalDataItem item1 = new YIntervalDataItem(1.0, 2.0, 1.5, 2.5);
-        YIntervalDataItem item2 = (YIntervalDataItem) 
-                TestUtils.serialised(item1);
+        YIntervalDataItem item2 = TestUtils.serialised(item1);
         assertEquals(item1, item2);
     }
 

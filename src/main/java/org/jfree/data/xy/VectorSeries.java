@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,20 +27,10 @@
  * -----------------
  * VectorSeries.java
  * -----------------
- * (C) Copyright 2007-2016, by Object Refinery Limited.
+ * (C) Copyright 2007-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 30-Jan-2007 : Version 1 (DG);
- * 24-May-2007 : Renamed getDeltaXValue() --> getVectorXValue(), and likewise
- *               for getDeltaYValue() (DG);
- * 25-May-2007 : Added remove(int) and clear() methods, and moved from the
- *               experimental to the main source tree (DG);
- * 27-Nov-2007 : Removed redundant clear() method (DG);
- * 09-Jan-2014 : Added add(VectorDataItem, boolean) method (DG);
  *
  */
 
@@ -57,14 +47,14 @@ import org.jfree.data.general.SeriesChangeEvent;
  *
  * @see VectorSeriesCollection
  */
-public class VectorSeries extends ComparableObjectSeries {
+public class VectorSeries<S extends Comparable<S>> extends ComparableObjectSeries<S> {
 
     /**
      * Creates a new empty series.
      *
      * @param key  the series key ({@code null} not permitted).
      */
-    public VectorSeries(Comparable key) {
+    public VectorSeries(S key) {
         this(key, false, true);
     }
 
@@ -78,8 +68,7 @@ public class VectorSeries extends ComparableObjectSeries {
      * @param allowDuplicateXValues  a flag that controls whether duplicate
      *                               x-values are allowed.
      */
-    public VectorSeries(Comparable key, boolean autoSort,
-            boolean allowDuplicateXValues) {
+    public VectorSeries(S key, boolean autoSort, boolean allowDuplicateXValues) {
         super(key, autoSort, allowDuplicateXValues);
     }
 

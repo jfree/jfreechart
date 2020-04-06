@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * ----------------------
  * MovingAverageTest.java
  * ----------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 14-Aug-2003 : Version 1 (DG);
- * 04-Oct-2004 : Eliminated NumberUtils usage (DG);
  *
  */
 
@@ -58,8 +53,8 @@ public class MovingAverageTest {
      */
     @Test
     public void test1() {
-        TimeSeries source = createDailyTimeSeries1();
-        TimeSeries maverage = MovingAverage.createMovingAverage(source, 
+        TimeSeries<String> source = createDailyTimeSeries1();
+        TimeSeries<String> maverage = MovingAverage.createMovingAverage(source, 
                 "Moving Average", 3, 3);
 
         // the moving average series has 7 items, the first three
@@ -86,8 +81,8 @@ public class MovingAverageTest {
      *
      * @return A sample series.
      */
-    private TimeSeries createDailyTimeSeries1() {
-        TimeSeries series = new TimeSeries("Series 1");
+    private TimeSeries<String> createDailyTimeSeries1() {
+        TimeSeries<String> series = new TimeSeries<>("Series 1");
         series.add(new Day(11, MonthConstants.AUGUST, 2003), 11.2);
         series.add(new Day(13, MonthConstants.AUGUST, 2003), 13.8);
         series.add(new Day(17, MonthConstants.AUGUST, 2003), 14.1);

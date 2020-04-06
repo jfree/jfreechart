@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,18 +27,10 @@
  * ---------------------
  * LegendItemEntity.java
  * ---------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 05-Jun-2003 : Version 1 (DG);
- * 20-May-2004 : Added equals() method and implemented Cloneable and
- *               Serializable (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 18-May-2007 : Added dataset and seriesKey fields (DG);
  *
  */
 
@@ -53,8 +45,8 @@ import org.jfree.data.general.Dataset;
 /**
  * An entity that represents an item within a legend.
  */
-public class LegendItemEntity extends ChartEntity
-                              implements Cloneable, Serializable {
+public class LegendItemEntity<S extends Comparable<S>> extends ChartEntity 
+        implements Cloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -7435683933545666702L;
@@ -71,7 +63,7 @@ public class LegendItemEntity extends ChartEntity
      *
      * @since 1.0.6
      */
-    private Comparable seriesKey;
+    private S seriesKey;
 
     /** The series index. */
     private int seriesIndex;
@@ -119,7 +111,7 @@ public class LegendItemEntity extends ChartEntity
      *
      * @see #setSeriesKey(Comparable)
      */
-    public Comparable getSeriesKey() {
+    public S getSeriesKey() {
         return this.seriesKey;
     }
 
@@ -132,7 +124,7 @@ public class LegendItemEntity extends ChartEntity
      *
      * @see #getSeriesKey()
      */
-    public void setSeriesKey(Comparable key) {
+    public void setSeriesKey(S key) {
         this.seriesKey = key;
     }
 
@@ -151,7 +143,7 @@ public class LegendItemEntity extends ChartEntity
         if (!(obj instanceof LegendItemEntity)) {
             return false;
         }
-        LegendItemEntity that = (LegendItemEntity) obj;
+        LegendItemEntity<?> that = (LegendItemEntity) obj;
         if (!ObjectUtils.equal(this.seriesKey, that.seriesKey)) {
             return false;
         }

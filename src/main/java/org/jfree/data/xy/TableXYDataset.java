@@ -50,7 +50,7 @@ package org.jfree.data.xy;
  * x-values between series). This is used primarily by the
  * {@link org.jfree.chart.renderer.xy.StackedXYAreaRenderer}.
  */
-public interface TableXYDataset extends XYDataset {
+public interface TableXYDataset<S extends Comparable<S>> extends XYDataset<S> {
 
     /**
      * Returns the number of items every series.

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * ---------------------------------------
  * DefaultIntervalCategoryDatasetTest.java
  * ---------------------------------------
- * (C) Copyright 2007-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 08-Mar-2007 : Version 1 (DG);
- * 25-Feb-2008 : Added new tests to check behaviour of an empty dataset (DG);
- * 11-Feb-2009 : Fixed locale-sensitive failures (DG);
  *
  */
 
@@ -75,31 +69,18 @@ public class DefaultIntervalCategoryDatasetTest {
                 DataUtils.createNumberArray2D(starts),
                 DataUtils.createNumberArray2D(ends));
 
-        assertEquals(new Double(0.1), d.getStartValue("Series 1",
-                "Category 1"));
-        assertEquals(new Double(0.2), d.getStartValue("Series 1",
-                "Category 2"));
-        assertEquals(new Double(0.3), d.getStartValue("Series 1",
-                "Category 3"));
-        assertEquals(new Double(0.3), d.getStartValue("Series 2",
-                "Category 1"));
-        assertEquals(new Double(0.4), d.getStartValue("Series 2",
-                "Category 2"));
-        assertEquals(new Double(0.5), d.getStartValue("Series 2",
-                "Category 3"));
-
-        assertEquals(new Double(0.5), d.getEndValue("Series 1",
-                "Category 1"));
-        assertEquals(new Double(0.6), d.getEndValue("Series 1",
-                "Category 2"));
-        assertEquals(new Double(0.7), d.getEndValue("Series 1",
-                "Category 3"));
-        assertEquals(new Double(0.7), d.getEndValue("Series 2",
-                "Category 1"));
-        assertEquals(new Double(0.8), d.getEndValue("Series 2",
-                "Category 2"));
-        assertEquals(new Double(0.9), d.getEndValue("Series 2",
-                "Category 3"));
+        assertEquals(0.1, d.getStartValue("Series 1", "Category 1"));
+        assertEquals(0.2, d.getStartValue("Series 1", "Category 2"));
+        assertEquals(0.3, d.getStartValue("Series 1", "Category 3"));
+        assertEquals(0.3, d.getStartValue("Series 2", "Category 1"));
+        assertEquals(0.4, d.getStartValue("Series 2", "Category 2"));
+        assertEquals(0.5, d.getStartValue("Series 2", "Category 3"));
+        assertEquals(0.5, d.getEndValue("Series 1", "Category 1"));
+        assertEquals(0.6, d.getEndValue("Series 1", "Category 2"));
+        assertEquals(0.7, d.getEndValue("Series 1", "Category 3"));
+        assertEquals(0.7, d.getEndValue("Series 2", "Category 1"));
+        assertEquals(0.8, d.getEndValue("Series 2", "Category 2"));
+        assertEquals(0.9, d.getEndValue("Series 2", "Category 3"));
 
         boolean pass = false;
         try {
@@ -195,6 +176,7 @@ public class DefaultIntervalCategoryDatasetTest {
 
     /**
      * Confirm that cloning works.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
@@ -209,28 +191,29 @@ public class DefaultIntervalCategoryDatasetTest {
                 new Comparable[] {"Category 1", "Category 2", "Category 3"},
                 DataUtils.createNumberArray2D(starts),
                 DataUtils.createNumberArray2D(ends));
-        DefaultIntervalCategoryDataset d2 = null;
-        d2 = (DefaultIntervalCategoryDataset) d1.clone();
+        DefaultIntervalCategoryDataset d2 
+                = (DefaultIntervalCategoryDataset) d1.clone();
         assertTrue(d1 != d2);
         assertTrue(d1.getClass() == d2.getClass());
         assertTrue(d1.equals(d2));
 
         // check that the clone doesn't share the same underlying arrays.
-        d1.setStartValue(0, "Category 1", new Double(0.99));
+        d1.setStartValue(0, "Category 1", 0.99);
         assertFalse(d1.equals(d2));
-        d2.setStartValue(0, "Category 1", new Double(0.99));
+        d2.setStartValue(0, "Category 1", 0.99);
         assertTrue(d1.equals(d2));
     }
 
     /**
      * A check to ensure that an empty dataset can be cloned.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning2() throws CloneNotSupportedException {
         DefaultIntervalCategoryDataset d1
                 = new DefaultIntervalCategoryDataset(new double[0][0],
                     new double[0][0]);
-        DefaultIntervalCategoryDataset d2 = null;
+        DefaultIntervalCategoryDataset d2;
         d2 = (DefaultIntervalCategoryDataset) d1.clone();
         assertTrue(d1 != d2);
         assertTrue(d1.getClass() == d2.getClass());
@@ -253,13 +236,12 @@ public class DefaultIntervalCategoryDatasetTest {
                 new Comparable[] {"Category 1", "Category 2", "Category 3"},
                 DataUtils.createNumberArray2D(starts),
                 DataUtils.createNumberArray2D(ends));
-        d1.setStartValue(0, "Category 2", new Double(99.9));
-        assertEquals(new Double(99.9), d1.getStartValue("Series 1",
-                "Category 2"));
+        d1.setStartValue(0, "Category 2", 99.9);
+        assertEquals(99.9, d1.getStartValue("Series 1", "Category 2"));
 
         boolean pass = false;
         try {
-            d1.setStartValue(-1, "Category 2", new Double(99.9));
+            d1.setStartValue(-1, "Category 2", 99.9);
         }
         catch (IllegalArgumentException e) {
             pass = true;
@@ -268,7 +250,7 @@ public class DefaultIntervalCategoryDatasetTest {
 
         pass = false;
         try {
-            d1.setStartValue(2, "Category 2", new Double(99.9));
+            d1.setStartValue(2, "Category 2", 99.9);
         }
         catch (IllegalArgumentException e) {
             pass = true;
@@ -292,13 +274,12 @@ public class DefaultIntervalCategoryDatasetTest {
                 new Comparable[] {"Category 1", "Category 2", "Category 3"},
                 DataUtils.createNumberArray2D(starts),
                 DataUtils.createNumberArray2D(ends));
-        d1.setEndValue(0, "Category 2", new Double(99.9));
-        assertEquals(new Double(99.9), d1.getEndValue("Series 1",
-                "Category 2"));
+        d1.setEndValue(0, "Category 2", 99.9);
+        assertEquals(99.9, d1.getEndValue("Series 1", "Category 2"));
 
         boolean pass = false;
         try {
-            d1.setEndValue(-1, "Category 2", new Double(99.9));
+            d1.setEndValue(-1, "Category 2", 99.9);
         }
         catch (IllegalArgumentException e) {
             pass = true;
@@ -307,7 +288,7 @@ public class DefaultIntervalCategoryDatasetTest {
 
         pass = false;
         try {
-            d1.setEndValue(2, "Category 2", new Double(99.9));
+            d1.setEndValue(2, "Category 2", 99.9);
         }
         catch (IllegalArgumentException e) {
             pass = true;

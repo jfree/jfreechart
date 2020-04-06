@@ -41,6 +41,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 
 import org.junit.Test;
 
@@ -91,7 +92,7 @@ public class DefaultKeyedValueDatasetTest {
     public void testCloneIndependence() throws CloneNotSupportedException {
         DefaultKeyedValueDataset d1
             = new DefaultKeyedValueDataset("Key", 10.0);
-        DefaultKeyedValueDataset d2 = (DefaultKeyedValueDataset) d1.clone();
+        DefaultKeyedValueDataset d2 = CloneUtils.clone(d1);
         assertTrue(d1.equals(d2));
         d2.updateValue(99.9);
         assertFalse(d1.equals(d2));
@@ -105,8 +106,7 @@ public class DefaultKeyedValueDatasetTest {
     @Test
     public void testSerialization() {
         DefaultKeyedValueDataset d1 = new DefaultKeyedValueDataset("Test", 25.3);
-        DefaultKeyedValueDataset d2 = (DefaultKeyedValueDataset) 
-                TestUtils.serialised(d1);
+        DefaultKeyedValueDataset d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 

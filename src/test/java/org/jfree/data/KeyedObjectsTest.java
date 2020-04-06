@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,29 +27,24 @@
  * ---------------------
  * KeyedObjectsTest.java
  * ---------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited.
+ * (C) Copyright 2004-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 27-Jan-2004 : Version 1 (DG);
- * 28-Sep-2007 : Added testCloning2() (DG);
- * 03-Oct-2007 : New tests (DG);
  *
  */
 
 package org.jfree.data;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertNull;
 import java.util.ArrayList;
-
 import org.jfree.chart.TestUtils;
 
+import org.jfree.chart.util.CloneUtils;
+
 import org.jfree.data.general.DefaultPieDataset;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import org.junit.Test;
 
 /**
@@ -59,14 +54,15 @@ public class KeyedObjectsTest {
 
     /**
      * Confirm that cloning works.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        KeyedObjects ko1 = new KeyedObjects();
-        ko1.addObject("V1", new Integer(1));
+        KeyedObjects<String> ko1 = new KeyedObjects<>();
+        ko1.addObject("V1", 1);
         ko1.addObject("V2", null);
-        ko1.addObject("V3", new Integer(3));
-        KeyedObjects ko2 = (KeyedObjects) ko1.clone();
+        ko1.addObject("V3", 3);
+        KeyedObjects<String> ko2 = CloneUtils.clone(ko1);
         assertTrue(ko1 != ko2);
         assertTrue(ko1.getClass() == ko2.getClass());
         assertTrue(ko1.equals(ko2));
@@ -74,14 +70,15 @@ public class KeyedObjectsTest {
 
     /**
      * Confirm special features of cloning.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning2() throws CloneNotSupportedException {
         // case 1 - object is mutable but not PublicCloneable
-        Object obj1 = new ArrayList();
-        KeyedObjects ko1 = new KeyedObjects();
+        Object obj1 = new ArrayList<>();
+        KeyedObjects<String> ko1 = new KeyedObjects<>();
         ko1.addObject("K1", obj1);
-        KeyedObjects ko2 = (KeyedObjects) ko1.clone();
+        KeyedObjects<String> ko2 = CloneUtils.clone(ko1);
         assertTrue(ko1 != ko2);
         assertTrue(ko1.getClass() == ko2.getClass());
         assertTrue(ko1.equals(ko2));
@@ -90,10 +87,10 @@ public class KeyedObjectsTest {
         assertTrue(ko2.getObject("K1") == obj1);
 
         // CASE 2 - object is mutable AND PublicCloneable
-        obj1 = new DefaultPieDataset();
-        ko1 = new KeyedObjects();
+        obj1 = new DefaultPieDataset<String>();
+        ko1 = new KeyedObjects<>();
         ko1.addObject("K1", obj1);
-        ko2 = (KeyedObjects) ko1.clone();
+        ko2 = CloneUtils.clone(ko1);
         assertTrue(ko1 != ko2);
         assertTrue(ko1.getClass() == ko2.getClass());
         assertTrue(ko1.equals(ko2));
@@ -108,10 +105,10 @@ public class KeyedObjectsTest {
     @Test
     public void testInsertAndRetrieve() {
 
-        KeyedObjects data = new KeyedObjects();
-        data.addObject("A", new Double(1.0));
-        data.addObject("B", new Double(2.0));
-        data.addObject("C", new Double(3.0));
+        KeyedObjects<String> data = new KeyedObjects<>();
+        data.addObject("A", 1.0);
+        data.addObject("B", 2.0);
+        data.addObject("C", 3.0);
         data.addObject("D", null);
 
         // check key order
@@ -121,9 +118,9 @@ public class KeyedObjectsTest {
         assertEquals(data.getKey(3), "D");
 
         // check retrieve value by key
-        assertEquals(data.getObject("A"), new Double(1.0));
-        assertEquals(data.getObject("B"), new Double(2.0));
-        assertEquals(data.getObject("C"), new Double(3.0));
+        assertEquals(data.getObject("A"), 1.0);
+        assertEquals(data.getObject("B"), 2.0);
+        assertEquals(data.getObject("C"), 3.0);
         assertEquals(data.getObject("D"), null);
 
         boolean pass = false;
@@ -136,9 +133,9 @@ public class KeyedObjectsTest {
         assertTrue(pass);
 
         // check retrieve value by index
-        assertEquals(data.getObject(0), new Double(1.0));
-        assertEquals(data.getObject(1), new Double(2.0));
-        assertEquals(data.getObject(2), new Double(3.0));
+        assertEquals(data.getObject(0), 1.0);
+        assertEquals(data.getObject(1), 2.0);
+        assertEquals(data.getObject(2), 3.0);
         assertEquals(data.getObject(3), null);
 
     }
@@ -148,11 +145,11 @@ public class KeyedObjectsTest {
      */
     @Test
     public void testSerialization() {
-        KeyedObjects ko1 = new KeyedObjects();
+        KeyedObjects<String> ko1 = new KeyedObjects<>();
         ko1.addObject("Key 1", "Object 1");
         ko1.addObject("Key 2", null);
         ko1.addObject("Key 3", "Object 2");
-        KeyedObjects ko2 = (KeyedObjects) TestUtils.serialised(ko1);
+        KeyedObjects<String> ko2 = TestUtils.serialised(ko1);
         assertEquals(ko1, ko2);
     }
 
@@ -162,7 +159,7 @@ public class KeyedObjectsTest {
     @Test
     public void testGetObject() {
         // retrieve an item
-        KeyedObjects ko1 = new KeyedObjects();
+        KeyedObjects<String> ko1 = new KeyedObjects<>();
         ko1.addObject("Key 1", "Object 1");
         ko1.addObject("Key 2", null);
         ko1.addObject("Key 3", "Object 2");
@@ -197,7 +194,7 @@ public class KeyedObjectsTest {
     @Test
     public void testGetKey() {
         // retrieve an item
-        KeyedObjects ko1 = new KeyedObjects();
+        KeyedObjects<String> ko1 = new KeyedObjects<>();
         ko1.addObject("Key 1", "Object 1");
         ko1.addObject("Key 2", null);
         ko1.addObject("Key 3", "Object 2");
@@ -231,7 +228,7 @@ public class KeyedObjectsTest {
      */
     @Test
     public void testGetIndex() {
-        KeyedObjects ko1 = new KeyedObjects();
+        KeyedObjects<String> ko1 = new KeyedObjects<>();
         ko1.addObject("Key 1", "Object 1");
         ko1.addObject("Key 2", null);
         ko1.addObject("Key 3", "Object 2");
@@ -255,7 +252,7 @@ public class KeyedObjectsTest {
      */
     @Test
     public void testSetObject() {
-        KeyedObjects ko1 = new KeyedObjects();
+        KeyedObjects<String> ko1 = new KeyedObjects<>();
         ko1.setObject("Key 1", "Object 1");
         ko1.setObject("Key 2", null);
         ko1.setObject("Key 3", "Object 2");
@@ -286,7 +283,7 @@ public class KeyedObjectsTest {
      */
     @Test
     public void testRemoveValue() {
-        KeyedObjects ko1 = new KeyedObjects();
+        KeyedObjects<String> ko1 = new KeyedObjects<>();
         ko1.setObject("Key 1", "Object 1");
         ko1.setObject("Key 2", null);
         ko1.setObject("Key 3", "Object 2");
@@ -325,7 +322,7 @@ public class KeyedObjectsTest {
      */
     @Test
     public void testRemoveValueInt() {
-        KeyedObjects ko1 = new KeyedObjects();
+        KeyedObjects<String> ko1 = new KeyedObjects<>();
         ko1.setObject("Key 1", "Object 1");
         ko1.setObject("Key 2", null);
         ko1.setObject("Key 3", "Object 2");

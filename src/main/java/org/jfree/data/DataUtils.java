@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,22 +27,10 @@
  * --------------
  * DataUtils.java
  * --------------
- * (C) Copyright 2003-2017, by Object Refinery Limited and contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Peter Kolb (patch 2511330);
- *
- * Changes
- * -------
- * 05-Mar-2003 : Version 1 (DG);
- * 03-Mar-2005 : Moved createNumberArray() and createNumberArray2D() methods
- *               from the DatasetUtilities class (DG);
- * 17-May-2005 : Added calculateColumnTotal() and calculateRowTotal()
- *               methods (DG);
- * 28-Jan-2009 : Added equal(double[][], double[][]) method (DG);
- * 28-Jan-2009 : Added clone(double[][]) method (DG);
- * 04-Feb-2009 : Added calculateColumnTotal/RowTotal variants (PK);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -225,7 +213,7 @@ public abstract class DataUtils {
         Args.nullNotPermitted(data, "data");
         Number[] result = new Number[data.length];
         for (int i = 0; i < data.length; i++) {
-            result[i] = new Double(data[i]);
+            result[i] = data[i];
         }
         return result;
     }

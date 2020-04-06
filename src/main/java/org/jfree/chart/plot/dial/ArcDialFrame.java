@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,18 +27,10 @@
  * -----------------
  * ArcDialFrame.java
  * -----------------
- * (C) Copyright 2006-2016, by Object Refinery Limited.
+ * (C) Copyright 2006-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 03-Nov-2006 : Version 1 (DG);
- * 08-Mar-2007 : Fix in hashCode() (DG);
- * 17-Oct-2007 : Updated equals() (DG);
- * 24-Oct-2007 : Added argument checks and API docs, and renamed
- *               StandardDialFrame --> ArcDialFrame (DG);
  *
  */
 
@@ -127,7 +119,7 @@ public class ArcDialFrame extends AbstractDialLayer implements DialFrame,
      * @param extent  the extent of the arc (in degrees, counter-clockwise).
      */
     public ArcDialFrame(double startAngle, double extent) {
-        this.backgroundPaint = Color.gray;
+        this.backgroundPaint = Color.GRAY;
         this.foregroundPaint = new Color(100, 100, 150);
         this.stroke = new BasicStroke(2.0f);
         this.innerRadius = 0.25;

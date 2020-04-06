@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,24 +27,10 @@
  * ---------------------
  * CyclicNumberAxis.java
  * ---------------------
- * (C) Copyright 2003-2017, by Nicolas Brodu and Contributors.
+ * (C) Copyright 2003-2020, by Nicolas Brodu and Contributors.
  *
  * Original Author:  Nicolas Brodu;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 19-Nov-2003 : Initial import to JFreeChart from the JSynoptic project (NB);
- * 16-Mar-2004 : Added plotState to draw() method (DG);
- * 07-Apr-2004 : Modifed text bounds calculation (DG);
- * 21-Apr-2005 : Replaced Insets with RectangleInsets, removed redundant
- *               argument in selectAutoTickUnit() (DG);
- * 22-Apr-2005 : Renamed refreshHorizontalTicks() --> refreshTicksHorizontal
- *               (for consistency with other classes) and removed unused
- *               parameters (DG);
- * 08-Jun-2005 : Fixed equals() method to handle GradientPaint (DG);
- * 19-May-2009 : Fixed FindBugs warnings, patch by Michal Wozniak (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -133,7 +119,7 @@ public class CyclicNumberAxis extends NumberAxis {
     public static Stroke DEFAULT_ADVANCE_LINE_STROKE = new BasicStroke(1.0f);
 
     /** The default axis line paint. */
-    public static final Paint DEFAULT_ADVANCE_LINE_PAINT = Color.gray;
+    public static final Paint DEFAULT_ADVANCE_LINE_PAINT = Color.GRAY;
 
     /** The offset. */
     protected double offset;
@@ -527,11 +513,8 @@ public class CyclicNumberAxis extends NumberAxis {
                 }
             }
 
-            CycleBoundTick tick = new CycleBoundTick(
-                this.boundMappedToLastCycle,
-                new Double(currentTickValue), tickLabel, anchor,
-                rotationAnchor, angle
-            );
+            CycleBoundTick tick = new CycleBoundTick(this.boundMappedToLastCycle, 
+                    currentTickValue, tickLabel, anchor, rotationAnchor, angle);
             if (currentTickValue == cycleBound) {
                 this.internalMarkerCycleBoundTick = tick;
             }
@@ -696,9 +679,8 @@ public class CyclicNumberAxis extends NumberAxis {
                 }
             }
 
-            CycleBoundTick tick = new CycleBoundTick(
-                this.boundMappedToLastCycle, new Double(currentTickValue),
-                tickLabel, anchor, rotationAnchor, angle);
+            CycleBoundTick tick = new CycleBoundTick(this.boundMappedToLastCycle, 
+                    currentTickValue, tickLabel, anchor, rotationAnchor, angle);
             if (currentTickValue == cycleBound) {
                 this.internalMarkerCycleBoundTick = tick;
             }

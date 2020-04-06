@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * -------------------
  * LongNeedleTest.java
  * -------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 08-Jun-2005 : Version 1 (DG);
  *
  */
 
@@ -43,6 +39,7 @@ package org.jfree.chart.needle;
 import static org.junit.Assert.assertTrue;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.junit.Test;
 
 /**
@@ -67,7 +64,7 @@ public class LongNeedleTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         LongNeedle n1 = new LongNeedle();
-        LongNeedle n2 = (LongNeedle) n1.clone();
+        LongNeedle n2 = CloneUtils.clone(n1);
         assertTrue(n1 != n2);
         assertTrue(n1.getClass() == n2.getClass());
         assertTrue(n1.equals(n2));
@@ -79,7 +76,7 @@ public class LongNeedleTest {
     @Test
     public void testSerialization() {
         LongNeedle n1 = new LongNeedle();
-        LongNeedle n2 = (LongNeedle) TestUtils.serialised(n1);
+        LongNeedle n2 = TestUtils.serialised(n1);
         assertTrue(n1.equals(n2));
     }
 

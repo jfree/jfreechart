@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------
  * PolarPlot.java
  * --------------
- * (C) Copyright 2004-2017, by Solution Engineering, Inc. and Contributors.
+ * (C) Copyright 2004-2020, by Solution Engineering, Inc. and Contributors.
  *
  * Original Author:  Daniel Bridenbecker, Solution Engineering, Inc.;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -255,7 +255,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      * entry for a dataset, it is assumed to map to the primary domain axis
      * (index = 0).
      */
-    private Map datasetToAxesMap;
+    private Map<Integer, List<Integer>> datasetToAxesMap;
 
     /**
      * Default constructor.
@@ -1164,7 +1164,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
                 currentTickVal += this.angleTickUnit.getSize()) {
 
             TextAnchor ta = calculateTextAnchor(currentTickVal);
-            NumberTick tick = new NumberTick(new Double(currentTickVal),
+            NumberTick tick = new NumberTick(currentTickVal,
                 this.angleTickUnit.valueToString(currentTickVal),
                 ta, TextAnchor.CENTER, 0.0);
             ticks.add(tick);
@@ -1231,8 +1231,8 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      * @since 1.0.14
      */
     public void mapDatasetToAxis(int index, int axisIndex) {
-        List axisIndices = new java.util.ArrayList(1);
-        axisIndices.add(new Integer(axisIndex));
+        List<Integer> axisIndices = new ArrayList<>(1);
+        axisIndices.add(axisIndex);
         mapDatasetToAxes(index, axisIndices);
     }
 
@@ -1246,13 +1246,13 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      *
      * @since 1.0.14
      */
-    public void mapDatasetToAxes(int index, List axisIndices) {
+    public void mapDatasetToAxes(int index, List<Integer> axisIndices) {
         if (index < 0) {
             throw new IllegalArgumentException("Requires 'index' >= 0.");
         }
         checkAxisIndices(axisIndices);
-        Integer key = new Integer(index);
-        this.datasetToAxesMap.put(key, new ArrayList(axisIndices));
+        Integer key = index;
+        this.datasetToAxesMap.put(key, new ArrayList<>(axisIndices));
         // fake a dataset change event to update axes...
         datasetChanged(new DatasetChangeEvent(this, getDataset(index)));
     }
@@ -1299,12 +1299,11 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      */
     public ValueAxis getAxisForDataset(int index) {
         ValueAxis valueAxis;
-        List axisIndices = (List) this.datasetToAxesMap.get(
-                new Integer(index));
+        List<Integer> axisIndices = this.datasetToAxesMap.get(index);
         if (axisIndices != null) {
             // the first axis in the list is used for data <--> Java2D
-            Integer axisIndex = (Integer) axisIndices.get(0);
-            valueAxis = getAxis(axisIndex.intValue());
+            Integer axisIndex = axisIndices.get(0);
+            valueAxis = getAxis(axisIndex);
         }
         else {
             valueAxis = getAxis(0);
@@ -1672,7 +1671,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
         Args.nullNotPermitted(axisIndex, "axisIndex");
         List result = new ArrayList();
         for (int i = 0; i < this.datasets.size(); i++) {
-            List mappedAxes = (List) this.datasetToAxesMap.get(new Integer(i));
+            List<Integer> mappedAxes = this.datasetToAxesMap.get(i);
             if (mappedAxes == null) {
                 if (axisIndex.equals(ZERO)) {
                     result.add(this.datasets.get(i));
@@ -1698,10 +1697,10 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     public Range getDataRange(ValueAxis axis) {
         Range result = null;
         int axisIdx = getAxisIndex(axis);
-        List mappedDatasets = new ArrayList();
+        List<Integer> mappedDatasets = new ArrayList<>();
 
         if (axisIdx >= 0) {
-            mappedDatasets = getDatasetsMappedToAxis(new Integer(axisIdx));
+            mappedDatasets = getDatasetsMappedToAxis(axisIdx);
         }
 
         // iterate through the datasets that map to the axis and get the union

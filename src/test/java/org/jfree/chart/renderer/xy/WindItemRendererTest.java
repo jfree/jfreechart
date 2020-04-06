@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * -------------------------
  * WindItemRendererTest.java
  * -------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 25-Mar-2003 : Version 1 (DG);
- * 22-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
@@ -104,7 +99,7 @@ public class WindItemRendererTest {
     @Test
     public void testSerialization() {
         WindItemRenderer r1 = new WindItemRenderer();
-        WindItemRenderer r2 = (WindItemRenderer) TestUtils.serialised(r1);
+        WindItemRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

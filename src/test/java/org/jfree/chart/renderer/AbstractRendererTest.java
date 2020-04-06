@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,21 +27,10 @@
  * -------------------------
  * AbstractRendererTest.java
  * -------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 23-Oct-2003 : Version 1 (DG);
- * 01-Mar-2004 : Added serialization test (DG);
- * 19-Feb-2007 : Added testCloning (DG);
- * 28-Feb-2007 : Added checks for cloning (DG);
- * 17-Jun-2008 : Added new fields to testEquals() and testCloning() (DG);
- * 28-Jan-2009 : Updated testEquals() (DG);
- * 28-Apr-2009 : Updated testEquals() (DG);
- * 25-Apr-2016 : Update testClone() (DG);
  *
  */
 
@@ -62,7 +51,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
 import java.awt.Rectangle;
-import java.awt.Shape;
 import java.awt.Stroke;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
@@ -81,6 +69,7 @@ import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.chart.ui.TextAnchor;
+import org.jfree.chart.util.CloneUtils;
 
 /**
  * Tests for the {@link AbstractRenderer} class.
@@ -389,6 +378,7 @@ public class AbstractRendererTest {
     }
 
     private static class TestRenderer extends XYLineAndShapeRenderer {
+        private static final long serialVersionUID = 1L;    
         @Override
         public void setTreatLegendShapeAsLine(boolean flag) {
             super.setTreatLegendShapeAsLine(flag);
@@ -416,7 +406,6 @@ public class AbstractRendererTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         LineAndShapeRenderer r1 = new LineAndShapeRenderer();
-        Rectangle2D shape = new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0);
         Rectangle2D baseShape = new Rectangle2D.Double(11.0, 12.0, 13.0, 14.0);
         r1.setDefaultShape(baseShape);
         r1.setDefaultLegendShape(new Rectangle(4, 3, 2, 1));
@@ -429,7 +418,7 @@ public class AbstractRendererTest {
         r1.setSeriesNegativeItemLabelPosition(0, new ItemLabelPosition(
                 ItemLabelAnchor.CENTER, TextAnchor.CENTER));
         
-        LineAndShapeRenderer r2 = (LineAndShapeRenderer) r1.clone();
+        LineAndShapeRenderer r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -564,7 +553,7 @@ public class AbstractRendererTest {
         r1.setDefaultPaint(Color.BLUE);
         r1.setDefaultLegendTextPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.BLUE));
-        LineAndShapeRenderer r2 = (LineAndShapeRenderer) r1.clone();
+        LineAndShapeRenderer r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -695,7 +684,7 @@ public class AbstractRendererTest {
         r1.setDefaultLegendTextPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.GREEN));
         r1.setDefaultLegendShape(new Line2D.Double(1.0, 2.0, 3.0, 4.0));
-        BarRenderer r2 = (BarRenderer) TestUtils.serialised(r1);
+        BarRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
         try {
             r2.notifyListeners(new RendererChangeEvent(r2));
@@ -734,7 +723,7 @@ public class AbstractRendererTest {
 
         // now check autoPopulate==true
         r.setAutoPopulateSeriesPaint(true);
-        /*CategoryPlot plot =*/ new CategoryPlot(null, new CategoryAxis(
+        CategoryPlot plot = new CategoryPlot(null, new CategoryAxis(
                 "Category"), new NumberAxis("Value"), r);
         assertEquals(DefaultDrawingSupplier.DEFAULT_PAINT_SEQUENCE[0],
                 r.lookupSeriesPaint(0));

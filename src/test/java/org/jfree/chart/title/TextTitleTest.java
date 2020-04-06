@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,17 +27,10 @@
  * ------------------
  * TextTitleTest.java
  * ------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 17-Feb-2004 : Version 1 (DG);
- * 06-Jun-2005 : Use GradientPaint in equals() test (DG);
- * 07-Oct-2005 : Updated testEquals() (DG);
- * 28-Apr-2008 : Extended testEquals() (DG);
  *
  */
 
@@ -53,6 +46,7 @@ import java.awt.GradientPaint;
 
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.ui.HorizontalAlignment;
+import org.jfree.chart.util.CloneUtils;
 
 import org.junit.Test;
 
@@ -147,7 +141,7 @@ public class TextTitleTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         TextTitle t1 = new TextTitle();
-        TextTitle t2 = (TextTitle) t1.clone();
+        TextTitle t2 = CloneUtils.clone(t1);
         assertTrue(t1 != t2);
         assertTrue(t1.getClass() == t2.getClass());
         assertTrue(t1.equals(t2));
@@ -159,7 +153,7 @@ public class TextTitleTest {
     @Test
     public void testSerialization() {
         TextTitle t1 = new TextTitle("Test");
-        TextTitle t2 = (TextTitle) TestUtils.serialised(t1);
+        TextTitle t2 = TestUtils.serialised(t1);
         assertEquals(t1, t2);
     }
 

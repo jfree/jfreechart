@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * -------------------------
  * PieSectionEntityTest.java
  * -------------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 20-May-2004 : Version 1 (DG);
  *
  */
 
@@ -47,6 +43,7 @@ import static org.junit.Assert.assertTrue;
 import java.awt.geom.Rectangle2D;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 
 import org.jfree.data.general.DefaultPieDataset;
 import org.junit.Test;
@@ -61,12 +58,12 @@ public class PieSectionEntityTest {
      */
     @Test
     public void testEquals() {
-        PieSectionEntity e1 = new PieSectionEntity(new Rectangle2D.Double(
-                1.0, 2.0, 3.0, 4.0), new DefaultPieDataset(), 1, 2, "Key",
-                "ToolTip", "URL");
-        PieSectionEntity e2 = new PieSectionEntity(new Rectangle2D.Double(1.0,
-                2.0, 3.0, 4.0), new DefaultPieDataset(), 1, 2, "Key",
-                "ToolTip", "URL");
+        PieSectionEntity<String> e1 = new PieSectionEntity<>(
+                new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), 
+                new DefaultPieDataset<String>(), 1, 2, "Key", "ToolTip", "URL");
+        PieSectionEntity<String> e2 = new PieSectionEntity<>(
+                new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), 
+                new DefaultPieDataset<String>(), 1, 2, "Key", "ToolTip", "URL");
         assertTrue(e1.equals(e2));
 
         e1.setArea(new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0));
@@ -110,10 +107,10 @@ public class PieSectionEntityTest {
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        PieSectionEntity e1 = new PieSectionEntity(new Rectangle2D.Double(1.0,
-                2.0, 3.0, 4.0), new DefaultPieDataset(), 1, 2, "Key",
-                "ToolTip", "URL");
-        PieSectionEntity e2 = (PieSectionEntity) e1.clone();
+        PieSectionEntity<String> e1 = new PieSectionEntity<>(
+                new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), 
+                new DefaultPieDataset<String>(), 1, 2, "Key", "ToolTip", "URL");
+        PieSectionEntity<String> e2 = CloneUtils.clone(e1);
         assertTrue(e1 != e2);
         assertTrue(e1.getClass() == e2.getClass());
         assertTrue(e1.equals(e2));
@@ -124,10 +121,10 @@ public class PieSectionEntityTest {
      */
     @Test
     public void testSerialization() {
-        PieSectionEntity e1 = new PieSectionEntity(new Rectangle2D.Double(1.0,
-                2.0, 3.0, 4.0), new DefaultPieDataset(), 1, 2, "Key",
-                "ToolTip", "URL");
-        PieSectionEntity e2 = (PieSectionEntity) TestUtils.serialised(e1);
+        PieSectionEntity<String> e1 = new PieSectionEntity<>(
+                new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), 
+                new DefaultPieDataset<String>(), 1, 2, "Key", "ToolTip", "URL");
+        PieSectionEntity<String> e2 = TestUtils.serialised(e1);
         assertEquals(e1, e2);
     }
 

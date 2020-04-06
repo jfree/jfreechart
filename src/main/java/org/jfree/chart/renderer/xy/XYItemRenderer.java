@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,60 +27,13 @@
  * -------------------
  * XYItemRenderer.java
  * -------------------
- * (C) Copyright 2001-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2001-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Mark Watson (www.markwatson.com);
  *                   Sylvain Vieujot;
  *                   Focus Computer Services Limited;
  *                   Richard Atkinson;
- *
- * Changes
- * -------
- * 19-Oct-2001 : Version 1, based on code by Mark Watson (DG);
- * 22-Oct-2001 : Renamed DataSource.java --> Dataset.java etc. (DG);
- * 13-Dec-2001 : Changed return type of drawItem from void --> Shape.  The area
- *               returned can be used as the tooltip region.
- * 23-Jan-2002 : Added DrawInfo parameter to drawItem() method (DG);
- * 28-Mar-2002 : Added a property change listener mechanism.  Now renderers do
- *               not have to be immutable (DG);
- * 04-Apr-2002 : Added the initialise() method (DG);
- * 09-Apr-2002 : Removed the translated zero from the drawItem method, it can
- *               be calculated inside the initialise method if it is required.
- *               Added a new getToolTipGenerator() method.  Changed the return
- *               type for drawItem() to void (DG);
- * 24-May-2002 : Added ChartRenderingInfo the initialise method API (DG);
- * 25-Jun-2002 : Removed redundant import (DG);
- * 20-Aug-2002 : Added get/setURLGenerator methods to interface (DG);
- * 02-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 18-Nov-2002 : Added methods for drawing grid lines (DG);
- * 17-Jan-2003 : Moved plot classes into a separate package (DG);
- * 27-Jan-2003 : Added shape lookup table (DG);
- * 05-Jun-2003 : Added domain and range grid bands (sponsored by Focus Computer
- *               Services Ltd) (DG);
- * 27-Jul-2003 : Added getRangeType() to support stacked XY area charts (RA);
- * 16-Sep-2003 : Changed ChartRenderingInfo --> PlotRenderingInfo (DG);
- * 25-Feb-2004 : Replaced CrosshairInfo with CrosshairState.  Renamed
- *               XYToolTipGenerator --> XYItemLabelGenerator (DG);
- * 26-Feb-2004 : Added lots of new methods (DG);
- * 30-Apr-2004 : Added getRangeExtent() method (DG);
- * 06-May-2004 : Added methods for controlling item label visibility (DG);
- * 13-May-2004 : Removed property change listener mechanism (DG);
- * 18-May-2004 : Added item label font and paint methods (DG);
- * 10-Sep-2004 : Removed redundant getRangeType() method (DG);
- * 06-Oct-2004 : Replaced getRangeExtent() with findRangeBounds() and added
- *               findDomainBounds (DG);
- * 23-Nov-2004 : Changed drawRangeGridLine() --> drawRangeLine() (DG);
- * 07-Jan-2005 : Removed deprecated method (DG);
- * 24-Feb-2005 : Now extends LegendItemSource (DG);
- * 20-Apr-2005 : Renamed XYLabelGenerator --> XYItemLabelGenerator (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 19-Apr-2007 : Deprecated seriesVisible and seriesVisibleInLegend flags (DG);
- * 20-Apr-2007 : Deprecated paint, fillPaint, outlinePaint, stroke,
- *               outlineStroke, shape, itemLabelsVisible, itemLabelFont,
- *               itemLabelPaint, positiveItemLabelPosition,
- *               negativeItemLabelPosition and createEntities override
- *               fields (DG);
  *
  */
 
@@ -92,6 +45,7 @@ import java.awt.Paint;
 import java.awt.Shape;
 import java.awt.Stroke;
 import java.awt.geom.Rectangle2D;
+import java.util.Collection;
 
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.LegendItemSource;
@@ -390,6 +344,16 @@ public interface XYItemRenderer extends LegendItemSource {
      */
     public void setSeriesPaint(int series, Paint paint);
 
+    /**
+     * Sets the paint used for a series and sends a {@link RendererChangeEvent}
+     * to all registered listeners if requested.
+     *
+     * @param series  the series index (zero-based).
+     * @param paint  the paint ({@code null} permitted).
+     * @param notify  send a change event?
+     *
+     * @see #getSeriesPaint(int)
+     */
     public void setSeriesPaint(int series, Paint paint, boolean notify);
 
     /**
@@ -411,6 +375,15 @@ public interface XYItemRenderer extends LegendItemSource {
      */
     public void setDefaultPaint(Paint paint);
 
+    /**
+     * Sets the default paint and sends a {@link RendererChangeEvent} to all
+     * registered listeners if requested.
+     *
+     * @param paint  the paint ({@code null} not permitted).
+     * @param notify  send a change event?
+     *
+     * @see #getDefaultPaint()
+     */
     public void setDefaultPaint(Paint paint, boolean notify);
 
     // FILL PAINT
@@ -443,6 +416,14 @@ public interface XYItemRenderer extends LegendItemSource {
      */
     public void setSeriesFillPaint(int series, Paint paint);
 
+    /**
+     * Sets the paint used for a series and sends a
+     * {@link RendererChangeEvent} to all registered listeners if requested.
+     *
+     * @param series  the series index (zero-based).
+     * @param paint  the paint ({@code null} permitted).
+     * @param notify  send a change event?
+     */
     public void setSeriesFillPaint(int series, Paint paint, boolean notify);
 
     /**
@@ -460,6 +441,13 @@ public interface XYItemRenderer extends LegendItemSource {
      */
     public void setDefaultFillPaint(Paint paint);
 
+    /**
+     * Sets the default paint and sends a {@link RendererChangeEvent} to all
+     * registered listeners if requested.
+     *
+     * @param paint  the paint ({@code null} not permitted).
+     * @param notify  send a change event?
+     */
     public void setDefaultFillPaint(Paint paint, boolean notify);
 
     //// OUTLINE PAINT ////////////////////////////////////////////////////////
@@ -496,6 +484,16 @@ public interface XYItemRenderer extends LegendItemSource {
      */
     public void setSeriesOutlinePaint(int series, Paint paint);
 
+    /**
+     * Sets the paint used for a series outline and sends a
+     * {@link RendererChangeEvent} to all registered listeners if requested.
+     *
+     * @param series  the series index (zero-based).
+     * @param paint  the paint ({@code null} permitted).
+     * @param notify  send a change event?
+     *
+     * @see #getSeriesOutlinePaint(int)
+     */
     public void setSeriesOutlinePaint(int series, Paint paint, boolean notify);
 
     /**
@@ -517,6 +515,15 @@ public interface XYItemRenderer extends LegendItemSource {
      */
     public void setDefaultOutlinePaint(Paint paint);
 
+    /**
+     * Sets the default outline paint and sends a {@link RendererChangeEvent} to
+     * all registered listeners if requested.
+     *
+     * @param paint  the paint ({@code null} not permitted).
+     * @param notify  send a change event?
+     *
+     * @see #getDefaultOutlinePaint()
+     */
     public void setDefaultOutlinePaint(Paint paint, boolean notify);
 
     //// STROKE ///////////////////////////////////////////////////////////////
@@ -553,6 +560,16 @@ public interface XYItemRenderer extends LegendItemSource {
      */
     public void setSeriesStroke(int series, Stroke stroke);
 
+    /**
+     * Sets the stroke used for a series and sends a
+     * {@link RendererChangeEvent} to all registered listeners if requested.
+     *
+     * @param series  the series index (zero-based).
+     * @param stroke  the stroke ({@code null} permitted).
+     * @param notify  send a change event?
+     *
+     * @see #getSeriesStroke(int)
+     */
     public void setSeriesStroke(int series, Stroke stroke, boolean notify);
 
     /**
@@ -574,6 +591,15 @@ public interface XYItemRenderer extends LegendItemSource {
      */
     public void setDefaultStroke(Stroke stroke);
 
+    /**
+     * Sets the default stroke and sends a {@link RendererChangeEvent} to all
+     * registered listeners if requested.
+     *
+     * @param stroke  the stroke ({@code null} not permitted).
+     * @param notify  send a change event?
+     *
+     * @see #getDefaultStroke()
+     */
     public void setDefaultStroke(Stroke stroke, boolean notify);
 
     //// OUTLINE STROKE ///////////////////////////////////////////////////////
@@ -612,6 +638,16 @@ public interface XYItemRenderer extends LegendItemSource {
      */
     public void setSeriesOutlineStroke(int series, Stroke stroke);
 
+    /**
+     * Sets the outline stroke used for a series and sends a
+     * {@link RendererChangeEvent} to all registered listeners if requested.
+     *
+     * @param series  the series index (zero-based).
+     * @param stroke  the stroke ({@code null} permitted).
+     * @param notify  send a change event?
+     *
+     * @see #getSeriesOutlineStroke(int)
+     */
     public void setSeriesOutlineStroke(int series, Stroke stroke, boolean notify);
 
     /**
@@ -633,6 +669,15 @@ public interface XYItemRenderer extends LegendItemSource {
      */
     public void setDefaultOutlineStroke(Stroke stroke);
 
+    /**
+     * Sets the base outline stroke and sends a {@link RendererChangeEvent} to
+     * all registered listeners if requested.
+     *
+     * @param stroke  the stroke ({@code null} not permitted).
+     * @param notify  send a change event.
+     *
+     * @see #getDefaultOutlineStroke()
+     */
     public void setDefaultOutlineStroke(Stroke stroke, boolean notify);
 
     //// SHAPE ////////////////////////////////////////////////////////////////
@@ -669,6 +714,16 @@ public interface XYItemRenderer extends LegendItemSource {
      */
     public void setSeriesShape(int series, Shape shape);
 
+    /**
+     * Sets the shape used for a series and sends a {@link RendererChangeEvent}
+     * to all registered listeners if requested.
+     *
+     * @param series  the series index (zero-based).
+     * @param shape  the shape ({@code null} permitted).
+     * @param notify  send a change event?
+     *
+     * @see #getSeriesShape(int)
+     */
     public void setSeriesShape(int series, Shape shape, boolean notify);
 
     /**
@@ -690,6 +745,15 @@ public interface XYItemRenderer extends LegendItemSource {
      */
     public void setDefaultShape(Shape shape);
 
+    /**
+     * Sets the default shape and sends a {@link RendererChangeEvent} to all
+     * registered listeners if requested.
+     *
+     * @param shape  the shape ({@code null} not permitted).
+     * @param notify  send a change event?
+     *
+     * @see #getDefaultShape()
+     */
     public void setDefaultShape(Shape shape, boolean notify);
 
 
@@ -1182,19 +1246,78 @@ public interface XYItemRenderer extends LegendItemSource {
 
     // CREATE ENTITIES
 
+    /**
+     * Returns {@code true} if an entity should be created for an item, and
+     * {@code false} otherwise.
+     * 
+     * @param series  the series.
+     * @param item  the item.
+     * 
+     * @return A boolean.
+     */
     public boolean getItemCreateEntity(int series, int item);
 
+    /**
+     * Returns {@code true} if entities should be created for a series, and
+     * {@code false} otherwise.  This method can return {@code null} in which
+     * case the renderering framework will look at the default setting.
+     * 
+     * @param series  the series.
+     * 
+     * @return A boolean.
+     */
     public Boolean getSeriesCreateEntities(int series);
 
+    /**
+     * Sets a flag that specifies whether or not entities should be created for
+     * a series during rendering, and sends a change event to registered 
+     * listeners.
+     * 
+     * @param series  the series.
+     * @param create  the flag value ({@code null} permitted).
+     */
     public void setSeriesCreateEntities(int series, Boolean create);
 
+    /**
+     * Sets a flag that specifies whether or not entities should be created for
+     * a series during rendering, and sends a change event to registered 
+     * listeners.
+     * 
+     * @param series  the series.
+     * @param create  the flag value ({@code null} permitted).
+     * @param notify  send a change event?
+     */
     public void setSeriesCreateEntities(int series, Boolean create,
             boolean notify);
 
+    /**
+     * Returns the default value determining whether or not entities should be
+     * created by the renderer.
+     * 
+     * @return A boolean. 
+     */
     public boolean getDefaultCreateEntities();
 
+    /**
+     * Sets the default value determining whether or not entities should be
+     * created by the renderer, and sends a change event to all registered
+     * listeners.
+     * 
+     * @param create  the flag value.
+     * 
+     * @return A boolean. 
+     */
     public void setDefaultCreateEntities(boolean create);
 
+    /**
+     * Sets the default value determining whether or not entities should be
+     * created by the renderer, and sends a change event to all registered
+     * listeners.
+     * 
+     * @param create  the flag value.
+     * 
+     * @return A boolean. 
+     */
     public void setDefaultCreateEntities(boolean create, boolean notify);
 
     //// ANNOTATIONS //////////////////////////////////////////////////////////
@@ -1375,4 +1498,12 @@ public interface XYItemRenderer extends LegendItemSource {
     public void drawRangeMarker(Graphics2D g2, XYPlot plot, ValueAxis axis,
             Marker marker, Rectangle2D dataArea);
 
+    /**
+     * Returns the annotations for the renderer.
+     * 
+     * @return The annotations (possibly empty, but never {@code null}).
+     * 
+     * @since 1.6.0
+     */
+    public Collection<XYAnnotation> getAnnotations();
 }

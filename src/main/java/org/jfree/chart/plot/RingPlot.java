@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,27 +27,10 @@
  * -------------
  * RingPlot.java
  * -------------
- * (C) Copyright 2004-2017, by Object Refinery Limited.
+ * (C) Copyright 2004-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limtied);
  * Contributor(s):   Christoph Beck (bug 2121818);
- *
- * Changes
- * -------
- * 08-Nov-2004 : Version 1 (DG);
- * 22-Feb-2005 : Renamed DonutPlot --> RingPlot (DG);
- * 06-Jun-2005 : Added default constructor and fixed equals() method to handle
- *               GradientPaint (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 20-Dec-2005 : Fixed problem with entity shape (bug 1386328) (DG);
- * 27-Sep-2006 : Updated drawItem() method for new lookup methods (DG);
- * 12-Oct-2006 : Added configurable section depth (DG);
- * 14-Feb-2007 : Added notification in setSectionDepth() method (DG);
- * 23-Sep-2008 : Fix for bug 2121818 by Christoph Beck (DG);
- * 13-Jul-2009 : Added support for shadow generator (DG);
- * 11-Oct-2011 : Check sectionOutlineVisible - bug 3237879 (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
- * 28-Feb-2014 : Add center text feature (DG);
  *
  */
 
@@ -167,7 +150,7 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
         this.centerTextColor = Color.BLACK;
         this.separatorsVisible = true;
         this.separatorStroke = new BasicStroke(0.5f);
-        this.separatorPaint = Color.gray;
+        this.separatorPaint = Color.GRAY;
         this.innerSeparatorExtension = 0.20;  // 20%
         this.outerSeparatorExtension = 0.20;  // 20%
         this.sectionDepth = 0.20; // 20%

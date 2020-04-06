@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * ---------------------
  * AxisLocationTest.java
  * ---------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 10-Jul-2003 : Version 1 (DG);
- * 07-Jan-2005 : Added hashCode() test (DG);
  *
  */
 
@@ -83,7 +78,7 @@ public class AxisLocationTest {
     @Test
     public void testSerialization() {
         AxisLocation location1 = AxisLocation.BOTTOM_OR_RIGHT;
-        AxisLocation location2 = (AxisLocation) TestUtils.serialised(location1);
+        AxisLocation location2 = TestUtils.serialised(location1);
         assertEquals(location1, location2);
         boolean same = location1 == location2;
         assertEquals(true, same);

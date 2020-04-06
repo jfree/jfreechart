@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * ----------------------------
  * StackedAreaRendererTest.java
  * ----------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 25-Mar-2003 : Version 1 (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG);
- * 04-Feb-2009 : Added testFindRangeBounds (DG);
  *
  */
 
@@ -48,6 +42,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.Range;
@@ -68,7 +63,7 @@ public class StackedAreaRendererTest {
         assertNull(r.findRangeBounds(null));
 
         // an empty dataset should return a null range
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         assertNull(r.findRangeBounds(dataset));
 
         dataset.addValue(1.0, "R1", "C1");
@@ -121,7 +116,7 @@ public class StackedAreaRendererTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         StackedAreaRenderer r1 = new StackedAreaRenderer();
-        StackedAreaRenderer r2 = (StackedAreaRenderer) r1.clone();
+        StackedAreaRenderer r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -142,8 +137,7 @@ public class StackedAreaRendererTest {
     @Test
     public void testSerialization() {
         StackedAreaRenderer r1 = new StackedAreaRenderer();
-        StackedAreaRenderer r2 = (StackedAreaRenderer) 
-                TestUtils.serialised(r1);
+        StackedAreaRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

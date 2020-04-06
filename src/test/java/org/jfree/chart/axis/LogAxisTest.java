@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * ----------------
  * LogAxisTest.java
  * ----------------
- * (C) Copyright 2007-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 11-Jul-2007 : Version 1 (DG);
- * 08-Apr-2008 : Fixed incorrect testEquals() method (DG);
- * 28-Oct-2011 : Cdded test for endless loop, # 3429707 (MH);
  */
 
 package org.jfree.chart.axis;
@@ -151,7 +145,7 @@ public class LogAxisTest {
     @Test
     public void testSerialization() {
         LogAxis a1 = new LogAxis("Test Axis");
-        LogAxis a2 = (LogAxis) TestUtils.serialised(a1);
+        LogAxis a2 = TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 
@@ -161,7 +155,7 @@ public class LogAxisTest {
      */
     @Test
     public void testAutoRange1() {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         dataset.setValue(100.0, "Row 1", "Column 1");
         dataset.setValue(200.0, "Row 1", "Column 2");
         JFreeChart chart = ChartFactory.createBarChart("Test", "Categories",
@@ -180,7 +174,7 @@ public class LogAxisTest {
      */
     @Test
     public void testAutoRange3() {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         dataset.setValue(100.0, "Row 1", "Column 1");
         dataset.setValue(200.0, "Row 1", "Column 2");
         JFreeChart chart = ChartFactory.createLineChart("Test", "Categories",
@@ -193,7 +187,7 @@ public class LogAxisTest {
         assertEquals(207.0529847682752, axis.getUpperBound(), EPSILON);
 
         // now replacing the dataset should update the axis range...
-        DefaultCategoryDataset dataset2 = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset2 = new DefaultCategoryDataset<>();
         dataset2.setValue(900.0, "Row 1", "Column 1");
         dataset2.setValue(1000.0, "Row 1", "Column 2");
         plot.setDataset(dataset2);
@@ -207,11 +201,11 @@ public class LogAxisTest {
      */
     @Test
     public void testXYAutoRange1() {
-        XYSeries series = new XYSeries("Series 1");
+        XYSeries<String> series = new XYSeries<>("Series 1");
         series.add(1.0, 1.0);
         series.add(2.0, 2.0);
         series.add(3.0, 3.0);
-        XYSeriesCollection dataset = new XYSeriesCollection();
+        XYSeriesCollection<String> dataset = new XYSeriesCollection<>();
         dataset.addSeries(series);
         JFreeChart chart = ChartFactory.createScatterPlot("Test", "X", "Y",
                 dataset);
@@ -228,11 +222,11 @@ public class LogAxisTest {
      */
     @Test
     public void testXYAutoRange2() {
-        XYSeries series = new XYSeries("Series 1");
+        XYSeries<String> series = new XYSeries<>("Series 1");
         series.add(1.0, 1.0);
         series.add(2.0, 2.0);
         series.add(3.0, 3.0);
-        XYSeriesCollection dataset = new XYSeriesCollection();
+        XYSeriesCollection<String> dataset = new XYSeriesCollection<>();
         dataset.addSeries(series);
         JFreeChart chart = ChartFactory.createScatterPlot("Test", "X", "Y",
                 dataset);

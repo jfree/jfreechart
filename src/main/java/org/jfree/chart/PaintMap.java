@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,18 +27,10 @@
  * -------------
  * PaintMap.java
  * -------------
- * (C) Copyright 2006-2016, by Object Refinery Limited.
+ * (C) Copyright 2006-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 27-Sep-2006 : Version 1 (DG);
- * 17-Jan-2007 : Changed TreeMap to HashMap, so that different classes that
- *               implement Comparable can be used as keys (DG);
- * 02-Jul-2013 : Use ParamChecks class (DG);
- * 28-Jan-2017 : Added missing hashCode (TH);
  *
  */
 
@@ -68,19 +60,19 @@ import org.jfree.chart.util.SerialUtils;
  *
  * @since 1.0.3
  */
-public class PaintMap implements Cloneable, Serializable {
+public class PaintMap<K extends Comparable<K>> implements Cloneable, Serializable {
 
     /** For serialization. */
     static final long serialVersionUID = -4639833772123069274L;
 
     /** Storage for the keys and values. */
-    private transient Map store;
+    private transient Map<K, Paint> store;
 
     /**
      * Creates a new (empty) map.
      */
     public PaintMap() {
-        this.store = new HashMap();
+        this.store = new HashMap<>();
     }
 
     /**
@@ -94,9 +86,9 @@ public class PaintMap implements Cloneable, Serializable {
      * @throws IllegalArgumentException if {@code key} is
      *     {@code null}.
      */
-    public Paint getPaint(Comparable key) {
+    public Paint getPaint(K key) {
         Args.nullNotPermitted(key, "key");
-        return (Paint) this.store.get(key);
+        return this.store.get(key);
     }
 
     /**
@@ -108,7 +100,7 @@ public class PaintMap implements Cloneable, Serializable {
      * @return {@code true} if the map contains the specified key, and
      * {@code false} otherwise.
      */
-    public boolean containsKey(Comparable key) {
+    public boolean containsKey(K key) {
         return this.store.containsKey(key);
     }
 
@@ -122,7 +114,7 @@ public class PaintMap implements Cloneable, Serializable {
      * @throws IllegalArgumentException if {@code key} is
      *     {@code null}.
      */
-    public void put(Comparable key, Paint paint) {
+    public void put(K key, Paint paint) {
         Args.nullNotPermitted(key, "key");
         this.store.put(key, paint);
     }
@@ -154,9 +146,9 @@ public class PaintMap implements Cloneable, Serializable {
             return false;
         }
         Set keys = this.store.keySet();
-        Iterator iterator = keys.iterator();
+        Iterator<K> iterator = keys.iterator();
         while (iterator.hasNext()) {
-            Comparable key = (Comparable) iterator.next();
+            K key = iterator.next();
             Paint p1 = getPaint(key);
             Paint p2 = that.getPaint(key);
             if (!PaintUtils.equal(p1, p2)) {
@@ -167,8 +159,7 @@ public class PaintMap implements Cloneable, Serializable {
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         int hash = 3;
         hash = 67 * hash + Objects.hashCode( this.store );
         return hash;
@@ -183,8 +174,8 @@ public class PaintMap implements Cloneable, Serializable {
      */
     @Override
     public Object clone() throws CloneNotSupportedException {
-        PaintMap clone = (PaintMap) super.clone();
-        clone.store = new HashMap();
+        PaintMap<K> clone = (PaintMap) super.clone();
+        clone.store = new HashMap<>();
         clone.store.putAll(this.store);
         // TODO: I think we need to make sure the keys are actually cloned,
         // whereas the paint instances are always immutable so they're OK
@@ -202,9 +193,9 @@ public class PaintMap implements Cloneable, Serializable {
         stream.defaultWriteObject();
         stream.writeInt(this.store.size());
         Set keys = this.store.keySet();
-        Iterator iterator = keys.iterator();
+        Iterator<K> iterator = keys.iterator();
         while (iterator.hasNext()) {
-            Comparable key = (Comparable) iterator.next();
+            K key = iterator.next();
             stream.writeObject(key);
             Paint paint = getPaint(key);
             SerialUtils.writePaint(paint, stream);
@@ -222,10 +213,10 @@ public class PaintMap implements Cloneable, Serializable {
     private void readObject(ObjectInputStream stream)
             throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
-        this.store = new HashMap();
+        this.store = new HashMap<>();
         int keyCount = stream.readInt();
         for (int i = 0; i < keyCount; i++) {
-            Comparable key = (Comparable) stream.readObject();
+            K key = (K) stream.readObject();
             Paint paint = SerialUtils.readPaint(stream);
             this.store.put(key, paint);
         }

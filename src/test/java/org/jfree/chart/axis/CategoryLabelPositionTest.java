@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * ------------------------------
  * CategoryLabelPositionTest.java
  * ------------------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 17-Feb-2004 : Version 1 (DG);
- * 07-Jan-2005 : Improved testEquals() code and added hashCode() test (DG);
  *
  */
 
@@ -147,7 +142,7 @@ public class CategoryLabelPositionTest {
     @Test
     public void testSerialization() {
         CategoryLabelPosition p1 = new CategoryLabelPosition();
-        CategoryLabelPosition p2 = (CategoryLabelPosition) TestUtils.serialised(p1);
+        CategoryLabelPosition p2 = TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 

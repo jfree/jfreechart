@@ -400,7 +400,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
 
         this.treatLegendShapeAsLine = false;
 
-        this.legendTextFontMap = new HashMap<Integer, Font>();
+        this.legendTextFontMap = new HashMap<>();
         this.defaultLegendTextFont = null;
 
         this.legendTextPaint = new PaintList();
@@ -3095,14 +3095,12 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
 
         if (this.positiveItemLabelPositionMap != null) {
             clone.positiveItemLabelPositionMap 
-                    = new HashMap<Integer, ItemLabelPosition>(
-                    this.positiveItemLabelPositionMap);
+                    = new HashMap<>(this.positiveItemLabelPositionMap);
         }
 
         if (this.negativeItemLabelPositionMap != null) {
             clone.negativeItemLabelPositionMap 
-                    = new HashMap<Integer, ItemLabelPosition>(
-                    this.negativeItemLabelPositionMap);
+                    = new HashMap<>(this.negativeItemLabelPositionMap);
         }
 
         if (this.createEntitiesList != null) {
@@ -3115,8 +3113,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
         }
         if (this.legendTextFontMap != null) {
             // Font objects are immutable so just shallow copy the map
-            clone.legendTextFontMap = new HashMap<Integer, Font>(
-                    this.legendTextFontMap);
+            clone.legendTextFontMap = new HashMap<>(this.legendTextFontMap);
         }
         if (this.legendTextPaint != null) {
             clone.legendTextPaint = (PaintList) this.legendTextPaint.clone();

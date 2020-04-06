@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * -------------------
  * LineBorderTest.java
  * -------------------
- * (C) Copyright 2007-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 16-Mar-2007 : Version 1 (DG);
  *
  */
 
@@ -110,7 +106,7 @@ public class LineBorderTest {
         LineBorder b1 = new LineBorder(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.YELLOW), new BasicStroke(1.0f),
                 new RectangleInsets(1.0, 1.0, 1.0, 1.0));
-        LineBorder b2 = (LineBorder) TestUtils.serialised(b1);
+        LineBorder b2 = TestUtils.serialised(b1);
         assertEquals(b1, b2);
     }
 

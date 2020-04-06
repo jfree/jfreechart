@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,17 +27,10 @@
  * -------------------------
  * KeyedValueComparator.java
  * -------------------------
- * (C) Copyright 2003-2012, by Object Refinery Limited.
+ * (C) Copyright 2003-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 05-Mar-2003 : Version 1 (DG);
- * 27-Aug-2003 : Moved SortOrder from org.jfree.data --> org.jfree.util (DG);
- * 12-Jan-2005 : Added accessor methods (DG);
- * 23-Sep-2012 : Make this class serializable (DG);
  *
  */
 
@@ -52,7 +45,7 @@ import org.jfree.chart.util.SortOrder;
  * A utility class that can compare and order two {@link KeyedValue} instances
  * and sort them into ascending or descending order by key or by value.
  */
-public class KeyedValueComparator implements Comparator, Serializable {
+public class KeyedValueComparator implements Comparator<KeyedValue>, Serializable {
 
     /** The comparator type. */
     private KeyedValueComparatorType type;
@@ -103,19 +96,16 @@ public class KeyedValueComparator implements Comparator, Serializable {
      * @return An int indicating the relative order of the objects.
      */
     @Override
-    public int compare(Object o1, Object o2) {
+    public int compare(KeyedValue kv1, KeyedValue kv2) {
 
-        if (o2 == null) {
+        if (kv2 == null) {
             return -1;
         }
-        if (o1 == null) {
+        if (kv1 == null) {
             return 1;
         }
 
         int result;
-
-        KeyedValue kv1 = (KeyedValue) o1;
-        KeyedValue kv2 = (KeyedValue) o2;
 
         if (this.type == KeyedValueComparatorType.BY_KEY) {
             if (this.order.equals(SortOrder.ASCENDING)) {

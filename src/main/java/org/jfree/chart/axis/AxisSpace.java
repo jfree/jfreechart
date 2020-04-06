@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,21 +27,10 @@
  * --------------
  * AxisSpace.java
  * --------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 03-Jul-2003 : Version 1 (DG);
- * 14-Aug-2003 : Implemented Cloneable (DG);
- * 18-Aug-2003 : Implemented Serializable (DG);
- * 17-Mar-2004 : Added a toString() method for debugging (DG);
- * 07-Jan-2005 : Updated equals() method (DG);
- * 11-Jan-2005 : Removed deprecated methods in preparation for 1.0.0
- *               release (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 

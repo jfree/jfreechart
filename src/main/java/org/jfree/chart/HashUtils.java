@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -24,22 +24,13 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ------------------
- * HashUtilities.java
- * ------------------
- * (C) Copyright 2006-2016, by Object Refinery Limited;
+ * --------------
+ * HashUtils.java
+ * --------------
+ * (C) Copyright 2006-2020, by Object Refinery Limited;
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 03-Oct-2006 : Version 1 (DG);
- * 06-Mar-2007 : Fix for hashCodeForDoubleArray() method (DG);
- * 13-Nov-2007 : Added new utility methods (DG);
- * 22-Nov-2007 : Added hashCode() method for 'int' (DG);
- * 05-Dec-2007 : Added special methods to handle BooleanList, PaintList,
- *               and StrokeList (DG);
  *
  */
 

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,19 +27,10 @@
  * -----------------------------
  * XYDifferenceRendererTest.java
  * -----------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 22-Oct-2003 : Version 1 (DG);
- * 04-May-2005 : Improved equals() test (DG);
- * 24-Jan-2007 : Added 'roundXCoordinates' to testEquals(), and improved
- *               testClone() (DG);
- * 17-May-2007 : Added testGetLegendItemSeriesIndex() (DG);
- * 22-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
@@ -59,6 +50,7 @@ import org.jfree.chart.LegendItem;
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
@@ -97,9 +89,9 @@ public class XYDifferenceRendererTest {
         assertTrue(r1.equals(r2));
 
         // shapesVisible
-        r1 = new XYDifferenceRenderer(Color.green, Color.YELLOW, true);
+        r1 = new XYDifferenceRenderer(Color.GREEN, Color.YELLOW, true);
         assertFalse(r1.equals(r2));
-        r2 = new XYDifferenceRenderer(Color.green, Color.YELLOW, true);
+        r2 = new XYDifferenceRenderer(Color.GREEN, Color.YELLOW, true);
         assertTrue(r1.equals(r2));
 
         // legendLine
@@ -139,7 +131,7 @@ public class XYDifferenceRendererTest {
     public void testCloning() throws CloneNotSupportedException {
         XYDifferenceRenderer r1 = new XYDifferenceRenderer(Color.RED,
                 Color.BLUE, false);
-        XYDifferenceRenderer r2 = (XYDifferenceRenderer) r1.clone();
+        XYDifferenceRenderer r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -169,8 +161,7 @@ public class XYDifferenceRendererTest {
     public void testSerialization() {
         XYDifferenceRenderer r1 = new XYDifferenceRenderer(Color.RED,
                 Color.BLUE, false);
-        XYDifferenceRenderer r2 = (XYDifferenceRenderer) 
-                TestUtils.serialised(r1);
+        XYDifferenceRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 
@@ -180,20 +171,20 @@ public class XYDifferenceRendererTest {
      */
     @Test
     public void testGetLegendItemSeriesIndex() {
-        XYSeriesCollection d1 = new XYSeriesCollection();
-        XYSeries s1 = new XYSeries("S1");
+        XYSeriesCollection<String> d1 = new XYSeriesCollection<>();
+        XYSeries<String> s1 = new XYSeries<>("S1");
         s1.add(1.0, 1.1);
-        XYSeries s2 = new XYSeries("S2");
+        XYSeries<String> s2 = new XYSeries<>("S2");
         s2.add(1.0, 1.1);
         d1.addSeries(s1);
         d1.addSeries(s2);
 
-        XYSeriesCollection d2 = new XYSeriesCollection();
-        XYSeries s3 = new XYSeries("S3");
+        XYSeriesCollection<String> d2 = new XYSeriesCollection<>();
+        XYSeries<String> s3 = new XYSeries<>("S3");
         s3.add(1.0, 1.1);
-        XYSeries s4 = new XYSeries("S4");
+        XYSeries<String> s4 = new XYSeries<>("S4");
         s4.add(1.0, 1.1);
-        XYSeries s5 = new XYSeries("S5");
+        XYSeries<String> s5 = new XYSeries<>("S5");
         s5.add(1.0, 1.1);
         d2.addSeries(s3);
         d2.addSeries(s4);

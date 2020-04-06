@@ -54,7 +54,7 @@ import org.jfree.data.time.RegularTimePeriod;
  *
  * @see OHLCSeriesCollection
  */
-public class OHLCSeries extends ComparableObjectSeries {
+public class OHLCSeries<S extends Comparable<S>> extends ComparableObjectSeries<S> {
 
     /**
      * Creates a new empty series.  By default, items added to the series will
@@ -63,7 +63,7 @@ public class OHLCSeries extends ComparableObjectSeries {
      *
      * @param key  the series key ({@code null} not permitted).
      */
-    public OHLCSeries(Comparable key) {
+    public OHLCSeries(S key) {
         super(key, true, false);
     }
 

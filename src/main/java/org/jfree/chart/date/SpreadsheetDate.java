@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -24,8 +24,15 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
+ * --------------------
+ * SpreadsheetDate.java
+ * --------------------
+ * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
+ *
+ * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Contributor(s):   -;
+ *
  */
-
 package org.jfree.chart.date;
 
 import java.util.Calendar;
@@ -247,6 +254,7 @@ public class SpreadsheetDate extends SerialDate {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object object) {
 
         if (object instanceof SerialDate) {
@@ -332,6 +340,7 @@ public class SpreadsheetDate extends SerialDate {
      * @return {@code true} if this SerialDate represents the same date
      *         as the specified SerialDate.
      */
+    @Override
     public boolean isOnOrBefore(SerialDate other) {
         return (this.serial <= other.toSerial());
     }

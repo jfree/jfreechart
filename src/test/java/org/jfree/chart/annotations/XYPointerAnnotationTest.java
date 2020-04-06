@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,18 +27,10 @@
  * ----------------------------
  * XYPointerAnnotationTest.java
  * ----------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 19-Aug-2003 : Version 1 (DG);
- * 13-Oct-2003 : Expanded test for equals() method (DG);
- * 07-Jan-2005 : Added hashCode() test (DG);
- * 20-Feb-2006 : Added 'x' and 'y' checks to testEquals() (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG);
  *
  */
 
@@ -183,7 +175,7 @@ public class XYPointerAnnotationTest {
     public void testSerialization() {
         XYPointerAnnotation a1 = new XYPointerAnnotation("Label", 10.0, 20.0,
                 Math.PI);
-        XYPointerAnnotation a2 = (XYPointerAnnotation) TestUtils.serialised(a1);
+        XYPointerAnnotation a2 = TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 

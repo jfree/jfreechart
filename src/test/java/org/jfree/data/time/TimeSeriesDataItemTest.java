@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * TimeSeriesDataItemTest.java
  * ---------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited.
+ * (C) Copyright 2003-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -76,9 +76,9 @@ public class TimeSeriesDataItemTest {
         assertTrue(item1.equals(item2));
         assertTrue(item2.equals(item1));
 
-        item1.setValue(new Integer(5));
+        item1.setValue(5);
         assertFalse(item1.equals(item2));
-        item2.setValue(new Integer(5));
+        item2.setValue(5);
         assertTrue(item1.equals(item2));
     }
 
@@ -89,8 +89,7 @@ public class TimeSeriesDataItemTest {
     public void testSerialization() {
         TimeSeriesDataItem item1 = new TimeSeriesDataItem(new Day(23, 9, 2001), 
                 99.7);
-        TimeSeriesDataItem item2 = (TimeSeriesDataItem) 
-                TestUtils.serialised(item1);
+        TimeSeriesDataItem item2 = TestUtils.serialised(item1);
         assertEquals(item1, item2);
     }
 

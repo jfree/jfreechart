@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,17 +27,10 @@
  * -----------------------------
  * StackedXYBarRendererTest.java
  * -----------------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 10-Sep-2004 : Version 1 (DG);
- * 06-Jan-2005 : Added test for auto range calculation (DG);
- * 06-Dec-2006 : Confirm serialization of GradientPaint (DG);
- * 22-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
@@ -56,6 +49,7 @@ import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.Range;
 import org.jfree.data.xy.TableXYDataset;
@@ -106,7 +100,7 @@ public class StackedXYBarRendererTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         StackedXYBarRenderer r1 = new StackedXYBarRenderer();
-        StackedXYBarRenderer r2 = (StackedXYBarRenderer) r1.clone();
+        StackedXYBarRenderer r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -129,8 +123,7 @@ public class StackedXYBarRendererTest {
         StackedXYBarRenderer r1 = new StackedXYBarRenderer();
         r1.setSeriesPaint(0, new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f,
                 4.0f, Color.YELLOW));
-        StackedXYBarRenderer r2 = (StackedXYBarRenderer) 
-                TestUtils.serialised(r1);
+        StackedXYBarRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

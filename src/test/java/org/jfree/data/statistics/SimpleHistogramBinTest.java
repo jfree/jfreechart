@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * ---------------------------
  * SimpleHistogramBinTest.java
  * ---------------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 10-Jan-2005 : Version 1 (DG);
  *
  */
 
@@ -45,6 +41,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.junit.Test;
 
 /**
@@ -141,7 +138,7 @@ public class SimpleHistogramBinTest {
     public void testCloning() throws CloneNotSupportedException {
         SimpleHistogramBin b1 = new SimpleHistogramBin(1.1, 2.2, false, true);
         b1.setItemCount(99);
-        SimpleHistogramBin b2 = (SimpleHistogramBin) b1.clone();
+        SimpleHistogramBin b2 = CloneUtils.clone(b1);
         assertTrue(b1 != b2);
         assertTrue(b1.getClass() == b2.getClass());
         assertTrue(b1.equals(b2));
@@ -158,7 +155,7 @@ public class SimpleHistogramBinTest {
     public void testSerialization() {
         SimpleHistogramBin b1 = new SimpleHistogramBin(1.0, 2.0, false, true);
         b1.setItemCount(123);
-        SimpleHistogramBin b2 = (SimpleHistogramBin) TestUtils.serialised(b1);
+        SimpleHistogramBin b2 = TestUtils.serialised(b1);
         assertEquals(b1, b2);
     }
 

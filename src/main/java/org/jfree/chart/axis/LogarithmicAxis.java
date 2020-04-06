@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,68 +27,13 @@
  * --------------------
  * LogarithmicAxis.java
  * --------------------
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  Michael Duffy / Eric Thomas;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   David M. O'Donnell;
  *                   Scott Sams;
  *                   Sergei Ivanov;
- *
- * Changes
- * -------
- * 14-Mar-2002 : Version 1 contributed by Michael Duffy (DG);
- * 19-Apr-2002 : drawVerticalString() is now drawRotatedString() in
- *               RefineryUtilities (DG);
- * 23-Apr-2002 : Added a range property (DG);
- * 15-May-2002 : Modified to be able to deal with negative and zero values (via
- *               new 'adjustedLog10()' method);  occurrences of "Math.log(10)"
- *               changed to "LOG10_VALUE"; changed 'intValue()' to
- *               'longValue()' in 'refreshTicks()' to fix label-text value
- *               out-of-range problem; removed 'draw()' method; added
- *               'autoRangeMinimumSize' check; added 'log10TickLabelsFlag'
- *               parameter flag and implementation (ET);
- * 25-Jun-2002 : Removed redundant import (DG);
- * 25-Jul-2002 : Changed order of parameters in ValueAxis constructor (DG);
- * 16-Jul-2002 : Implemented support for plotting positive values arbitrarily
- *               close to zero (added 'allowNegativesFlag' flag) (ET).
- * 05-Sep-2002 : Updated constructor reflecting changes in the Axis class (DG);
- * 02-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 08-Nov-2002 : Moved to new package com.jrefinery.chart.axis (DG);
- * 22-Nov-2002 : Bug fixes from David M. O'Donnell (DG);
- * 14-Jan-2003 : Changed autoRangeMinimumSize from Number --> double (DG);
- * 20-Jan-2003 : Removed unnecessary constructors (DG);
- * 26-Mar-2003 : Implemented Serializable (DG);
- * 08-May-2003 : Fixed plotting of datasets with lower==upper bounds when
- *               'minAutoRange' is very small; added 'strictValuesFlag'
- *               and default functionality of throwing a runtime exception
- *               if 'allowNegativesFlag' is false and any values are less
- *               than or equal to zero; added 'expTickLabelsFlag' and
- *               changed to use "1e#"-style tick labels by default
- *               ("10^n"-style tick labels still supported via 'set'
- *               method); improved generation of tick labels when range of
- *               values is small; changed to use 'NumberFormat.getInstance()'
- *               to create 'numberFormatterObj' (ET);
- * 14-May-2003 : Merged HorizontalLogarithmicAxis and
- *               VerticalLogarithmicAxis (DG);
- * 29-Oct-2003 : Added workaround for font alignment in PDF output (DG);
- * 07-Nov-2003 : Modified to use new NumberTick class (DG);
- * 08-Apr-2004 : Use numberFormatOverride if set - see patch 930139 (DG);
- * 11-Jan-2005 : Removed deprecated code in preparation for 1.0.0 release (DG);
- * 21-Apr-2005 : Added support for upper and lower margins; added
- *               get/setAutoRangeNextLogFlag() methods and changed
- *               default to 'autoRangeNextLogFlag'==false (ET);
- * 22-Apr-2005 : Removed refreshTicks() and fixed names and parameters for
- *               refreshHorizontalTicks() & refreshVerticalTicks();
- *               changed javadoc on setExpTickLabelsFlag() to specify
- *               proper default (ET);
- * 22-Apr-2005 : Renamed refreshHorizontalTicks --> refreshTicksHorizontal
- *               (and likewise the vertical version) for consistency with
- *               other axis classes (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
- * 02-Mar-2007 : Applied patch 1671069 to fix zooming (DG);
- * 22-Mar-2007 : Use new defaultAutoRange attribute (DG);
  *
  */
 
@@ -860,8 +805,8 @@ public class LogarithmicAxis extends NumberAxis {
                         }
                     }
 
-                    Tick tick = new NumberTick(new Double(currentTickValue),
-                            tickLabel, anchor, rotationAnchor, angle);
+                    Tick tick = new NumberTick(currentTickValue, tickLabel, 
+                            anchor, rotationAnchor, angle);
                     ticks.add(tick);
                 }
             }
@@ -1052,8 +997,8 @@ public class LogarithmicAxis extends NumberAxis {
                         }
                     }
                     //create tick object and add to list:
-                    ticks.add(new NumberTick(new Double(tickVal), tickLabel,
-                            anchor, rotationAnchor, angle));
+                    ticks.add(new NumberTick(tickVal, tickLabel, anchor, 
+                            rotationAnchor, angle));
                 }
             }
         }

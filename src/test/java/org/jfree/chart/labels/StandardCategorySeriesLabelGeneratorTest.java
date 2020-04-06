@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * ---------------------------------------------
  * StandardCategorySeriesLabelGeneratorTest.java
  * ---------------------------------------------
- * (C) Copyright 2006-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 03-May-2006 : Version 1 (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG);
  *
  */
 
@@ -46,6 +41,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.category.DefaultCategoryDataset;
@@ -63,7 +59,7 @@ public class StandardCategorySeriesLabelGeneratorTest {
     public void testGenerateLabel() {
         StandardCategorySeriesLabelGenerator g
                 = new StandardCategorySeriesLabelGenerator("{0}");
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String,String> dataset = new DefaultCategoryDataset<>();
         dataset.addValue(1.0, "R0", "C0");
         dataset.addValue(2.0, "R0", "C1");
         dataset.addValue(3.0, "R1", "C0");
@@ -110,8 +106,7 @@ public class StandardCategorySeriesLabelGeneratorTest {
     public void testCloning() throws CloneNotSupportedException {
         StandardCategorySeriesLabelGenerator g1
                 = new StandardCategorySeriesLabelGenerator("{1}");
-        StandardCategorySeriesLabelGenerator g2 
-                = (StandardCategorySeriesLabelGenerator) g1.clone();
+        StandardCategorySeriesLabelGenerator g2 = CloneUtils.clone(g1);
         assertTrue(g1 != g2);
         assertTrue(g1.getClass() == g2.getClass());
         assertTrue(g1.equals(g2));
@@ -134,8 +129,7 @@ public class StandardCategorySeriesLabelGeneratorTest {
     public void testSerialization() {
         StandardCategorySeriesLabelGenerator g1
                 = new StandardCategorySeriesLabelGenerator("{2}");
-        StandardCategorySeriesLabelGenerator g2 = (StandardCategorySeriesLabelGenerator) 
-                TestUtils.serialised(g1);
+        StandardCategorySeriesLabelGenerator g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * --------------
  * TestUtils.java
  * --------------
- * (C) Copyright 2007-2017, by Object Refinery Limited.
+ * (C) Copyright 2007-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 08-Jun-2007 : Version 1 (DG);
  *
  */
 
@@ -64,7 +60,7 @@ public class TestUtils {
      *
      * @return A boolean.
      */
-    public static boolean containsInstanceOf(Collection collection, Class c) {
+    public static boolean containsInstanceOf(Collection<?> collection, Class c) {
         Iterator iterator = collection.iterator();
         while (iterator.hasNext()) {
             Object obj = iterator.next();
@@ -75,8 +71,16 @@ public class TestUtils {
         return false;
     }
 
-    public static Object serialised(Object original) {
-        Object result = null;
+    /**
+     * Serialises an object, deserialises it and returns the deserialised 
+     * version.
+     * 
+     * @param original  the original object.
+     * 
+     * @return A serialised and deserialised version of the original.
+     */
+    public static <K> K serialised(K original) {
+        K result = null;
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
         ObjectOutput out;
         try {
@@ -85,7 +89,7 @@ public class TestUtils {
             out.close();
             ObjectInput in = new ObjectInputStream(
                     new ByteArrayInputStream(buffer.toByteArray()));
-            result = in.readObject();
+            result = (K) in.readObject();
             in.close();
         } catch (IOException e) {
             throw new RuntimeException(e);

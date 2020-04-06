@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,36 +27,10 @@
  * ---------
  * Year.java
  * ---------
- * (C) Copyright 2001-2012, by Object Refinery Limited.
+ * (C) Copyright 2001-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 11-Oct-2001 : Version 1 (DG);
- * 14-Nov-2001 : Override for toString() method (DG);
- * 19-Dec-2001 : Added a new constructor as suggested by Paul English (DG);
- * 29-Jan-2002 : Worked on parseYear() method (DG);
- * 14-Feb-2002 : Fixed bug in Year(Date) constructor (DG);
- * 26-Feb-2002 : Changed getStart(), getMiddle() and getEnd() methods to
- *               evaluate with reference to a particular time zone (DG);
- * 19-Mar-2002 : Changed API for TimePeriod classes (DG);
- * 10-Sep-2002 : Added getSerialIndex() method (DG);
- * 04-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 10-Jan-2003 : Changed base class and method names (DG);
- * 05-Mar-2003 : Fixed bug in getFirstMillisecond() picked up in JUnit
- *               tests (DG);
- * 13-Mar-2003 : Moved to com.jrefinery.data.time package, and implemented
- *               Serializable (DG);
- * 21-Oct-2003 : Added hashCode() method (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 05-Oct-2006 : Updated API docs (DG);
- * 06-Oct-2006 : Refactored to cache first and last millisecond values (DG);
- * 16-Sep-2008 : Extended range of valid years, and deprecated
- *               DEFAULT_TIME_ZONE (DG);
- * 25-Nov-2008 : Added new constructor with Locale (DG);
- * 05-Jul-2012 : Removed JRE 1.3.1 code (DG);
  *
  */
 

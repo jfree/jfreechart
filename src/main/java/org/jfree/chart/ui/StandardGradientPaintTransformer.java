@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -156,6 +156,7 @@ public class StandardGradientPaintTransformer
      * @throws CloneNotSupportedException not thrown by this class, but 
      *         subclasses (if any) might.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
@@ -165,6 +166,7 @@ public class StandardGradientPaintTransformer
      * 
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         return (this.type != null ? this.type.hashCode() : 0);
     }

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,18 +27,10 @@
  * --------------------
  * VectorXYDataset.java
  * --------------------
- * (C) Copyright 2007, 2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 30-Jan-2007 : Version 1 (DG);
- * 24-May-2007 : Renamed getDeltaXValue() as getVectorXValue(), and likewise
- *               for getDeltaYValue(), and replaced getDeltaX()/getDeltaY()
- *               with getVector() (DG);
- * 25-May-2007 : Moved from experimental to the main source tree (DG);
  *
  */
 
@@ -50,7 +42,7 @@ package org.jfree.data.xy;
  *
  * @since 1.0.6
  */
-public interface VectorXYDataset extends XYDataset {
+public interface VectorXYDataset<S extends Comparable<S>> extends XYDataset<S> {
 
     /**
      * Returns the x-component of the vector for an item in a series.

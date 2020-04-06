@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * ------------------
  * CrosshairTest.java
  * ------------------
- * (C) Copyright 2009-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2009-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 09-Apr-2009 : Version 1 (DG);
  *
  */
 
@@ -191,7 +187,7 @@ public class CrosshairTest {
     public void testSerialization() {
         Crosshair c1 = new Crosshair(1.0, new GradientPaint(1.0f, 2.0f,
                 Color.RED, 3.0f, 4.0f, Color.BLUE), new BasicStroke(1.0f));
-        Crosshair c2 = (Crosshair) TestUtils.serialised(c1);
+        Crosshair c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 

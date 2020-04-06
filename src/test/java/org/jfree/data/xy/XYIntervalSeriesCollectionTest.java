@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,17 +27,10 @@
  * -----------------------------------
  * XYIntervalSeriesCollectionTest.java
  * -----------------------------------
- * (C) Copyright 2006-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 20-Oct-2006 : Version 1 (DG);
- * 13-Feb-2007 : Check for independence in testCloning() (DG);
- * 18-Jan-2008 : Added testRemoveSeries() (DG);
- * 22-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
@@ -48,6 +41,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.Test;
@@ -62,24 +56,24 @@ public class XYIntervalSeriesCollectionTest {
      */
     @Test
     public void testEquals() {
-        XYIntervalSeriesCollection c1 = new XYIntervalSeriesCollection();
-        XYIntervalSeriesCollection c2 = new XYIntervalSeriesCollection();
+        XYIntervalSeriesCollection<String> c1 = new XYIntervalSeriesCollection<>();
+        XYIntervalSeriesCollection<String> c2 = new XYIntervalSeriesCollection<>();
         assertEquals(c1, c2);
 
         // add a series
-        XYIntervalSeries s1 = new XYIntervalSeries("Series");
+        XYIntervalSeries<String> s1 = new XYIntervalSeries<>("Series");
         s1.add(1.0, 1.1, 1.2, 1.3, 1.4, 1.5);
         c1.addSeries(s1);
         assertFalse(c1.equals(c2));
-        XYIntervalSeries s2 = new XYIntervalSeries("Series");
+        XYIntervalSeries<String> s2 = new XYIntervalSeries<>("Series");
         s2.add(1.0, 1.1, 1.2, 1.3, 1.4, 1.5);
         c2.addSeries(s2);
         assertTrue(c1.equals(c2));
 
         // add an empty series
-        c1.addSeries(new XYIntervalSeries("Empty Series"));
+        c1.addSeries(new XYIntervalSeries<>("Empty Series"));
         assertFalse(c1.equals(c2));
-        c2.addSeries(new XYIntervalSeries("Empty Series"));
+        c2.addSeries(new XYIntervalSeries<>("Empty Series"));
         assertTrue(c1.equals(c2));
     }
 
@@ -88,18 +82,18 @@ public class XYIntervalSeriesCollectionTest {
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        XYIntervalSeriesCollection c1 = new XYIntervalSeriesCollection();
-        XYIntervalSeries s1 = new XYIntervalSeries("Series");
+        XYIntervalSeriesCollection<String> c1 = new XYIntervalSeriesCollection<>();
+        XYIntervalSeries<String> s1 = new XYIntervalSeries<>("Series");
         s1.add(1.0, 1.1, 1.2, 1.3, 1.4, 1.5);
-        XYIntervalSeriesCollection c2 = (XYIntervalSeriesCollection) c1.clone();
+        XYIntervalSeriesCollection<String> c2 = CloneUtils.clone(c1);
         assertTrue(c1 != c2);
         assertTrue(c1.getClass() == c2.getClass());
         assertTrue(c1.equals(c2));
 
         // check independence
-        c1.addSeries(new XYIntervalSeries("Empty"));
+        c1.addSeries(new XYIntervalSeries<>("Empty"));
         assertFalse(c1.equals(c2));
-        c2.addSeries(new XYIntervalSeries("Empty"));
+        c2.addSeries(new XYIntervalSeries<>("Empty"));
         assertTrue(c1.equals(c2));
     }
 
@@ -108,7 +102,7 @@ public class XYIntervalSeriesCollectionTest {
      */
     @Test
     public void testPublicCloneable() {
-        XYIntervalSeriesCollection c1 = new XYIntervalSeriesCollection();
+        XYIntervalSeriesCollection<String> c1 = new XYIntervalSeriesCollection<>();
         assertTrue(c1 instanceof PublicCloneable);
     }
 
@@ -117,17 +111,16 @@ public class XYIntervalSeriesCollectionTest {
      */
     @Test
     public void testSerialization() {
-        XYIntervalSeriesCollection c1 = new XYIntervalSeriesCollection();
-        XYIntervalSeries s1 = new XYIntervalSeries("Series");
+        XYIntervalSeriesCollection<String> c1 = new XYIntervalSeriesCollection<>();
+        XYIntervalSeries<String> s1 = new XYIntervalSeries<>("Series");
         s1.add(1.0, 1.1, 1.2, 1.3, 1.4, 1.5);
-        XYIntervalSeriesCollection c2 = (XYIntervalSeriesCollection) 
-                TestUtils.serialised(c1);
+        XYIntervalSeriesCollection<String> c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
 
         // check independence
-        c1.addSeries(new XYIntervalSeries("Empty"));
+        c1.addSeries(new XYIntervalSeries<>("Empty"));
         assertFalse(c1.equals(c2));
-        c2.addSeries(new XYIntervalSeries("Empty"));
+        c2.addSeries(new XYIntervalSeries<>("Empty"));
         assertTrue(c1.equals(c2));
     }
 
@@ -136,8 +129,8 @@ public class XYIntervalSeriesCollectionTest {
      */
     @Test
     public void testRemoveSeries() {
-        XYIntervalSeriesCollection c = new XYIntervalSeriesCollection();
-        XYIntervalSeries s1 = new XYIntervalSeries("s1");
+        XYIntervalSeriesCollection<String> c = new XYIntervalSeriesCollection<>();
+        XYIntervalSeries<String> s1 = new XYIntervalSeries<>("s1");
         c.addSeries(s1);
         c.removeSeries(0);
         assertEquals(0, c.getSeriesCount());
@@ -168,8 +161,8 @@ public class XYIntervalSeriesCollectionTest {
      */
     @Test
     public void test1170825() {
-        XYIntervalSeries s1 = new XYIntervalSeries("Series1");
-        XYIntervalSeriesCollection dataset = new XYIntervalSeriesCollection();
+        XYIntervalSeries<String> s1 = new XYIntervalSeries<>("Series1");
+        XYIntervalSeriesCollection<String> dataset = new XYIntervalSeriesCollection<>();
         dataset.addSeries(s1);
         try {
             /* XYSeries s = */ dataset.getSeries(1);

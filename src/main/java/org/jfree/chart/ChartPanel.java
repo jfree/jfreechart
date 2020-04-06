@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2018, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * ChartPanel.java
  * ---------------
- * (C) Copyright 2000-2018, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Andrzej Porebski;
@@ -89,6 +89,7 @@ import java.io.Serializable;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.EventListener;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -179,6 +180,9 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     /** Action command to save as PNG. */
     protected static final String SAVE_AS_PNG_COMMAND = "SAVE_AS_PNG";
     
+    /** Action command to save as PNG - use screen size */
+    protected static final String SAVE_AS_PNG_SIZE_COMMAND = "SAVE_AS_PNG_SIZE";
+
     /** Action command to save as SVG. */
     protected static final String SAVE_AS_SVG_COMMAND = "SAVE_AS_SVG";
     
@@ -571,7 +575,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
             this.panMask = InputEvent.ALT_MASK;
         }
 
-        this.overlays = new java.util.ArrayList<Overlay>();
+        this.overlays = new ArrayList<>();
     }
 
     /**
@@ -1471,6 +1475,17 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
                         JOptionPane.WARNING_MESSAGE);
             }
         }
+        else if (command.equals(SAVE_AS_PNG_SIZE_COMMAND)) {
+            try{
+            	final Dimension ss = Toolkit.getDefaultToolkit().getScreenSize();
+                doSaveAs(ss.width, ss.height);
+            }
+            catch (IOException e){
+                JOptionPane.showMessageDialog(ChartPanel.this, "I/O error occurred.",
+                        localizationResources.getString("Save_as_PNG"),
+                        JOptionPane.WARNING_MESSAGE);
+            }
+        }
         else if (command.equals(SAVE_AS_SVG_COMMAND)) {
             try {
                 saveAsSVG(null);
@@ -2308,6 +2323,21 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * @throws IOException if there is an I/O error.
      */
     public void doSaveAs() throws IOException {
+        doSaveAs(-1, -1);
+    }
+
+    /**
+     * Opens a file chooser and gives the user an opportunity to save the chart
+     * in PNG format.
+     *
+     * @param w  the width for the saved image (if less than or equal to zero,
+     *      the panel width will be used);
+     * @param h  the height for the PNG image (if less than or equal to zero,
+     *      the panel height will be used);
+     *
+     * @throws IOException if there is an I/O error.
+     */
+    public void doSaveAs(int w, int h) throws IOException {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setCurrentDirectory(this.defaultDirectoryForSaveAs);
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
@@ -2323,8 +2353,13 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
                     filename = filename + ".png";
                 }
             }
-            ChartUtils.saveChartAsPNG(new File(filename), this.chart,
-                    getWidth(), getHeight());
+            if (w <= 0) {
+            	w = getWidth();
+            }
+            if (h <= 0) {
+            	h = getHeight();
+            }
+            ChartUtils.saveChartAsPNG(new File(filename), this.chart, w, h);
         }
     }
     
@@ -2426,6 +2461,15 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         return svg;
     }
 
+    /**
+     * Creates an {@code SVGGraphics2D} instance (from JFreeSVG) using reflection.
+     * If JFreeSVG is not on the classpath, this method returns {@code null}.
+     *
+     * @param w  the width.
+     * @param h  the height.
+     *
+     * @return An {@code SVGGraphics2D} instance or {@code null}.
+     */
     protected Graphics2D createSVGGraphics2D(int w, int h) {
         try {
             Class svgGraphics2d = Class.forName("org.jfree.graphics2d.svg.SVGGraphics2D");
@@ -2692,18 +2736,33 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
             if (separator) {
                 result.addSeparator();
             }
-            JMenu saveSubMenu = new JMenu(localizationResources.getString(
-                    "Save_as"));
-            JMenuItem pngItem = new JMenuItem(localizationResources.getString(
-                    "PNG..."));
-            pngItem.setActionCommand("SAVE_AS_PNG");
-            pngItem.addActionListener(this);
-            saveSubMenu.add(pngItem);
+
+            JMenu saveSubMenu = new JMenu(localizationResources.getString("Save_as"));
+
+            // PNG - current res
+            {
+                JMenuItem pngItem = new JMenuItem(localizationResources.getString(
+                        "PNG..."));
+                pngItem.setActionCommand(SAVE_AS_PNG_COMMAND);
+                pngItem.addActionListener(this);
+                saveSubMenu.add(pngItem);
+
+            }
+
+            // PNG - screen res
+            {
+            	final Dimension ss = Toolkit.getDefaultToolkit().getScreenSize();
+                final String pngName = "PNG ("+ss.width+"x"+ss.height+") ...";
+                JMenuItem pngItem = new JMenuItem(pngName);
+                pngItem.setActionCommand(SAVE_AS_PNG_SIZE_COMMAND);
+                pngItem.addActionListener(this);
+                saveSubMenu.add(pngItem);
+            }
             
             if (ChartUtils.isJFreeSVGAvailable()) {
                 JMenuItem svgItem = new JMenuItem(localizationResources.getString(
                         "SVG..."));
-                svgItem.setActionCommand("SAVE_AS_SVG");
+                svgItem.setActionCommand(SAVE_AS_SVG_COMMAND);
                 svgItem.addActionListener(this);
                 saveSubMenu.add(svgItem);                
             }
@@ -2711,7 +2770,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
             if (ChartUtils.isOrsonPDFAvailable()) {
                 JMenuItem pdfItem = new JMenuItem(
                         localizationResources.getString("PDF..."));
-                pdfItem.setActionCommand("SAVE_AS_PDF");
+                pdfItem.setActionCommand(SAVE_AS_PDF_COMMAND);
                 pdfItem.addActionListener(this);
                 saveSubMenu.add(pdfItem);
             }

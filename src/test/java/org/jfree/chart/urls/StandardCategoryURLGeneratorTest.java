@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * -------------------------------------
  * StandardCategoryURLGeneratorTest.java
  * -------------------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 13-Aug-2003 : Version 1 (DG);
- * 13-Dec-2007 : Added testGenerateURL() and testEquals() (DG);
- * 23-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
@@ -63,7 +57,8 @@ public class StandardCategoryURLGeneratorTest {
     @Test
     public void testGenerateURL() {
         StandardCategoryURLGenerator g1 = new StandardCategoryURLGenerator();
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset 
+                = new DefaultCategoryDataset<>();
         dataset.addValue(1.0, "R1", "C1");
         dataset.addValue(2.0, "R2", "C2");
         dataset.addValue(3.0, "R&", "C&");
@@ -119,8 +114,7 @@ public class StandardCategoryURLGeneratorTest {
     public void testSerialization() {
         StandardCategoryURLGenerator g1 = new StandardCategoryURLGenerator(
                 "index.html?");
-        StandardCategoryURLGenerator g2 = (StandardCategoryURLGenerator) 
-                TestUtils.serialised(g1);
+        StandardCategoryURLGenerator g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,17 +27,10 @@
  * ---------------------
  * DefaultXYDataset.java
  * ---------------------
- * (C) Copyright 2006-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 06-Jul-2006 : Version 1 (DG);
- * 02-Nov-2006 : Fixed a problem with adding a new series with the same key
- *               as an existing series (see bug 1589392) (DG);
- * 25-Jan-2007 : Implemented PublicCloneable (DG);
  *
  */
 
@@ -46,6 +39,7 @@ package org.jfree.data.xy;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.DomainOrder;
@@ -57,14 +51,15 @@ import org.jfree.data.general.DatasetChangeEvent;
  *
  * @since 1.0.2
  */
-public class DefaultXYDataset extends AbstractXYDataset
-        implements XYDataset, PublicCloneable {
+public class DefaultXYDataset<S extends Comparable<S>> 
+        extends AbstractXYDataset<S>
+        implements XYDataset<S>, PublicCloneable {
 
     /**
      * Storage for the series keys.  This list must be kept in sync with the
      * seriesList.
      */
-    private List seriesKeys;
+    private List<S> seriesKeys;
 
     /**
      * Storage for the series in the dataset.  We use a list because the
@@ -78,7 +73,7 @@ public class DefaultXYDataset extends AbstractXYDataset
      * containing no data.
      */
     public DefaultXYDataset() {
-        this.seriesKeys = new java.util.ArrayList();
+        this.seriesKeys = new ArrayList<>();
         this.seriesList = new java.util.ArrayList();
     }
 
@@ -104,11 +99,9 @@ public class DefaultXYDataset extends AbstractXYDataset
      *     specified range.
      */
     @Override
-    public Comparable getSeriesKey(int series) {
-        if ((series < 0) || (series >= getSeriesCount())) {
-            throw new IllegalArgumentException("Series index out of bounds");
-        }
-        return (Comparable) this.seriesKeys.get(series);
+    public S getSeriesKey(int series) {
+        Args.requireInRange(series, "series", 0, this.seriesKeys.size() - 1);
+        return this.seriesKeys.get(series);
     }
 
     /**
@@ -120,7 +113,7 @@ public class DefaultXYDataset extends AbstractXYDataset
      * @return The index, or -1.
      */
     @Override
-    public int indexOf(Comparable seriesKey) {
+    public int indexOf(S seriesKey) {
         return this.seriesKeys.indexOf(seriesKey);
     }
 
@@ -256,7 +249,7 @@ public class DefaultXYDataset extends AbstractXYDataset
      *     arrays of equal length, the first containing the x-values and the
      *     second containing the y-values).
      */
-    public void addSeries(Comparable seriesKey, double[][] data) {
+    public void addSeries(S seriesKey, double[][] data) {
         if (seriesKey == null) {
             throw new IllegalArgumentException(
                     "The 'seriesKey' cannot be null.");
@@ -291,7 +284,7 @@ public class DefaultXYDataset extends AbstractXYDataset
      * @param seriesKey  the series key ({@code null} not permitted).
      *
      */
-    public void removeSeries(Comparable seriesKey) {
+    public void removeSeries(S seriesKey) {
         int seriesIndex = indexOf(seriesKey);
         if (seriesIndex >= 0) {
             this.seriesKeys.remove(seriesIndex);

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * ----------------------
  * LevelRendererTest.java
  * ----------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 29-Mar-2005 : Version 1 (DG);
- * 23-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
@@ -52,6 +47,7 @@ import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.junit.Test;
@@ -104,7 +100,7 @@ public class LevelRendererTest {
         LevelRenderer r1 = new LevelRenderer();
         r1.setItemMargin(0.123);
         r1.setMaximumItemWidth(0.234);
-        LevelRenderer r2 = (LevelRenderer) r1.clone();
+        LevelRenderer r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -151,7 +147,7 @@ public class LevelRendererTest {
     @Test
     public void testSerialization() {
         LevelRenderer r1 = new LevelRenderer();
-        LevelRenderer r2 = (LevelRenderer) TestUtils.serialised(r1);
+        LevelRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 
@@ -162,7 +158,8 @@ public class LevelRendererTest {
     @Test
     public void testDrawWithNullInfo() {
         try {
-            DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+            DefaultCategoryDataset<String, String> dataset 
+                    = new DefaultCategoryDataset<>();
             dataset.addValue(1.0, "S1", "C1");
             CategoryPlot plot = new CategoryPlot(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
@@ -182,10 +179,12 @@ public class LevelRendererTest {
      */
     @Test
     public void testGetLegendItemSeriesIndex() {
-        DefaultCategoryDataset dataset0 = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset0 
+                = new DefaultCategoryDataset<>();
         dataset0.addValue(21.0, "R1", "C1");
         dataset0.addValue(22.0, "R2", "C1");
-        DefaultCategoryDataset dataset1 = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset1 
+                = new DefaultCategoryDataset<>();
         dataset1.addValue(23.0, "R3", "C1");
         dataset1.addValue(24.0, "R4", "C1");
         dataset1.addValue(25.0, "R5", "C1");

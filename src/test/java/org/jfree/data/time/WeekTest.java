@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,24 +27,10 @@
  * -------------
  * WeekTest.java
  * -------------
- * (C) Copyright 2002-2016, by Object Refinery Limited.
+ * (C) Copyright 2002-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 05-Apr-2002 : Version 1 (DG);
- * 26-Jun-2002 : Removed unnecessary imports (DG);
- * 17-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 13-Mar-2003 : Added serialization test (DG);
- * 21-Oct-2003 : Added hashCode test (DG);
- * 06-Apr-2006 : Added testBug1448828() method (DG);
- * 01-Jun-2006 : Added testBug1498805() method (DG);
- * 11-Jul-2007 : Fixed bad time zone assumption (DG);
- * 28-Aug-2007 : Added test for constructor problem (DG);
- * 19-Dec-2007 : Set default locale for tests that are sensitive
- *               to the locale (DG);
  *
  */
 
@@ -156,7 +142,7 @@ public class WeekTest {
     @Test
     public void testSerialization() {
         Week w1 = new Week(24, 1999);
-        Week w2 = (Week) TestUtils.serialised(w1);
+        Week w2 = TestUtils.serialised(w1);
         assertEquals(w1, w2);
     }
 
@@ -515,6 +501,25 @@ public class WeekTest {
 
         Locale.setDefault(savedLocale);
         TimeZone.setDefault(savedZone);
+    }
+
+    @Test
+    public void testBug134() {
+        boolean pass = false;
+        try {
+            Week w = new Week(0, 2020);
+        } catch (IllegalArgumentException e) {
+            pass = true;
+        }
+        assertTrue(pass);
+
+        pass = false;
+        try {
+            Week w = new Week(54, 2020);
+        } catch (IllegalArgumentException e) {
+            pass = true;
+        }
+        assertTrue(pass);
     }
 
 }

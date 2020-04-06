@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * -----------------------------------
  * CombinedRangeCategoryPlotTest.java
  * -----------------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 21-Aug-2003 : Version 1 (DG);
- * 03-Jan-2008 : Added testNotification() (DG);
  *
  */
 
@@ -47,6 +42,7 @@ import static org.junit.Assert.assertTrue;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.jfree.chart.JFreeChart;
@@ -58,6 +54,7 @@ import org.jfree.chart.event.ChartChangeListener;
 import org.jfree.chart.labels.StandardCategoryToolTipGenerator;
 import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.chart.renderer.category.LineAndShapeRenderer;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.junit.Test;
@@ -68,7 +65,7 @@ import org.junit.Test;
 public class CombinedRangeCategoryPlotTest implements ChartChangeListener {
 
     /** A list of the events received. */
-    private List events = new java.util.ArrayList();
+    private final List<ChartChangeEvent> events = new ArrayList<>();
 
     /**
      * Receives a chart change event.
@@ -96,8 +93,7 @@ public class CombinedRangeCategoryPlotTest implements ChartChangeListener {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         CombinedRangeCategoryPlot plot1 = createPlot();
-        CombinedRangeCategoryPlot plot2 = (CombinedRangeCategoryPlot) 
-                plot1.clone();
+        CombinedRangeCategoryPlot plot2 = CloneUtils.clone(plot1);
         assertTrue(plot1 != plot2);
         assertTrue(plot1.getClass() == plot2.getClass());
         assertTrue(plot1.equals(plot2));
@@ -109,8 +105,7 @@ public class CombinedRangeCategoryPlotTest implements ChartChangeListener {
     @Test
     public void testSerialization() {
         CombinedRangeCategoryPlot plot1 = createPlot();
-        CombinedRangeCategoryPlot plot2 = (CombinedRangeCategoryPlot) 
-                TestUtils.serialised(plot1);
+        CombinedRangeCategoryPlot plot2 = TestUtils.serialised(plot1);
         assertEquals(plot1, plot2);
     }
 
@@ -127,7 +122,7 @@ public class CombinedRangeCategoryPlotTest implements ChartChangeListener {
         plot.add(plot2);
         plot.add(plot3);
         plot.remove(plot2);
-        List plots = plot.getSubplots();
+        List<CategoryPlot> plots = plot.getSubplots();
         assertEquals(2, plots.size());
     }
 
@@ -159,9 +154,10 @@ public class CombinedRangeCategoryPlotTest implements ChartChangeListener {
      *
      * @return A dataset.
      */
-    public CategoryDataset createDataset1() {
+    public CategoryDataset<String, String> createDataset1() {
 
-        DefaultCategoryDataset result = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> result 
+                = new DefaultCategoryDataset<>();
 
         // row keys...
         String series1 = "First";
@@ -204,9 +200,9 @@ public class CombinedRangeCategoryPlotTest implements ChartChangeListener {
      *
      * @return A dataset.
      */
-    public CategoryDataset createDataset2() {
+    public CategoryDataset<String, String> createDataset2() {
 
-        DefaultCategoryDataset result = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> result = new DefaultCategoryDataset<>();
 
         // row keys...
         String series1 = "Third";
@@ -250,7 +246,7 @@ public class CombinedRangeCategoryPlotTest implements ChartChangeListener {
      * @return A plot.
      */
     private CombinedRangeCategoryPlot createPlot() {
-        CategoryDataset dataset1 = createDataset1();
+        CategoryDataset<String, String> dataset1 = createDataset1();
         CategoryAxis catAxis1 = new CategoryAxis("Category");
         LineAndShapeRenderer renderer1 = new LineAndShapeRenderer();
         renderer1.setDefaultToolTipGenerator(
@@ -259,7 +255,7 @@ public class CombinedRangeCategoryPlotTest implements ChartChangeListener {
                 renderer1);
         subplot1.setDomainGridlinesVisible(true);
 
-        CategoryDataset dataset2 = createDataset2();
+        CategoryDataset<String, String> dataset2 = createDataset2();
         CategoryAxis catAxis2 = new CategoryAxis("Category");
         BarRenderer renderer2 = new BarRenderer();
         renderer2.setDefaultToolTipGenerator(

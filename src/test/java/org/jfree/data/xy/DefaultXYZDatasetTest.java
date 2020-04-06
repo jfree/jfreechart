@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * --------------------------
  * DefaultXYZDatasetTest.java
  * --------------------------
- * (C) Copyright 2006-2016, by Object Refinery Limited.
+ * (C) Copyright 2006-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 12-Jul-2006 : Version 1 (DG);
- * 02-Nov-2006 : Added testAddSeries() method (DG);
- * 22-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
@@ -47,6 +41,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.Test;
@@ -87,7 +82,7 @@ public class DefaultXYZDatasetTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         DefaultXYZDataset d1 = new DefaultXYZDataset();
-        DefaultXYZDataset d2 = (DefaultXYZDataset) d1.clone();
+        DefaultXYZDataset d2 = CloneUtils.clone(d1);
         assertTrue(d1 != d2);
         assertTrue(d1.getClass() == d2.getClass());
         assertTrue(d1.equals(d2));
@@ -125,7 +120,7 @@ public class DefaultXYZDatasetTest {
     @Test
     public void testSerialization() {
         DefaultXYZDataset d1 = new DefaultXYZDataset();
-        DefaultXYZDataset d2 = (DefaultXYZDataset) TestUtils.serialised(d1);
+        DefaultXYZDataset d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
 
         // try a dataset with some content...
@@ -134,7 +129,7 @@ public class DefaultXYZDatasetTest {
         double[] z1 = new double[] {7.0, 8.0, 9.0};
         double[][] data1 = new double[][] {x1, y1, z1};
         d1.addSeries("S1", data1);
-        d2 = (DefaultXYZDataset) TestUtils.serialised(d1);
+        d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 

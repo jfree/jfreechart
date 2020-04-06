@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,18 +27,10 @@
  * ------------------------
  * StackedBarChartTest.java
  * ------------------------
- * (C) Copyright 2002-2016, by Object Refinery Limited.
+ * (C) Copyright 2002-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 11-Jun-2002 : Version 1 (DG);
- * 25-Jun-2002 : Removed unnecessary import (DG);
- * 17-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 29-Jan-2004 : Renamed StackedHorizontalBarChartTests
- *               --> StackedBarChartTests (DG);
  *
  */
 
@@ -58,7 +50,6 @@ import org.jfree.chart.event.ChartChangeListener;
 import org.jfree.chart.labels.CategoryToolTipGenerator;
 import org.jfree.chart.labels.StandardCategoryToolTipGenerator;
 import org.jfree.chart.plot.CategoryPlot;
-import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.CategoryItemRenderer;
 import org.jfree.chart.urls.CategoryURLGenerator;
 import org.jfree.chart.urls.StandardCategoryURLGenerator;
@@ -108,15 +99,9 @@ public class StackedBarChartTest {
      */
     @Test
     public void testReplaceDataset() {
-
-        // create a dataset...
-        Number[][] data = new Integer[][]
-            {{new Integer(-30), new Integer(-20)},
-             {new Integer(-10), new Integer(10)},
-             {new Integer(20), new Integer(30)}};
-
-        CategoryDataset newData = DatasetUtils.createCategoryDataset("S",
-                "C", data);
+        Number[][] data = new Integer[][] {{-30, -20}, {-10, 10}, {20, 30}};
+        CategoryDataset<String, String> newData 
+                = DatasetUtils.createCategoryDataset("S", "C", data);
 
         LocalListener l = new LocalListener();
         this.chart.addChangeListener(l);
@@ -168,23 +153,12 @@ public class StackedBarChartTest {
      * @return The chart.
      */
     private static JFreeChart createChart() {
-        Number[][] data = new Integer[][]
-            {{new Integer(-3), new Integer(-2)},
-             {new Integer(-1), new Integer(1)},
-             {new Integer(2), new Integer(3)}};
+        Number[][] data = new Integer[][] {{-3, -2}, {-1, 1}, {2, 3}};
 
-        CategoryDataset dataset = DatasetUtils.createCategoryDataset("S",
-                "C", data);
-        return ChartFactory.createStackedBarChart(
-            "Stacked Bar Chart",  // chart title
-            "Domain", "Range",
-            dataset,      // data
-            PlotOrientation.HORIZONTAL,
-            true,         // include legend
-            true,
-            true
-        );
-
+        CategoryDataset<String, String> dataset 
+                = DatasetUtils.createCategoryDataset("S", "C", data);
+        return ChartFactory.createStackedBarChart("Stacked Bar Chart",
+                "Domain", "Range", dataset);
     }
 
     /**
@@ -192,7 +166,7 @@ public class StackedBarChartTest {
      */
     static class LocalListener implements ChartChangeListener {
 
-        /** A flag. */
+        /** Set to true once the listener is triggered. */
         private boolean flag = false;
 
         /**

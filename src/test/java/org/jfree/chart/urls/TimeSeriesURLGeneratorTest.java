@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * -------------------------------
  * TimeSeriesURLGeneratorTest.java
  * -------------------------------
- * (C) Copyright 2007-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 17-Apr-2007 : Version 1 (DG);
- * 23-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
@@ -64,7 +59,7 @@ public class TimeSeriesURLGeneratorTest {
     @Test
     public void testGenerateURL() {
         TimeSeriesURLGenerator g = new TimeSeriesURLGenerator();
-        DefaultXYDataset dataset = new DefaultXYDataset();
+        DefaultXYDataset<String> dataset = new DefaultXYDataset<>();
         dataset.addSeries("Series '1'", new double[][] {{1.0, 2.0},
                 {3.0, 4.0}});
         String s = g.generateURL(dataset, 0, 0);
@@ -122,8 +117,7 @@ public class TimeSeriesURLGeneratorTest {
     @Test
     public void testSerialization() {
         TimeSeriesURLGenerator g1 = new TimeSeriesURLGenerator();
-        TimeSeriesURLGenerator g2 = (TimeSeriesURLGenerator) 
-                TestUtils.serialised(g1);
+        TimeSeriesURLGenerator g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

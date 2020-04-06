@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * ------------------------------------
  * BoxAndWhiskerToolTipGenerator.java
  * ------------------------------------
- * (C) Copyright 2004-2016, by David Browning and Contributors.
+ * (C) Copyright 2004-2020, by David Browning and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 02-Jun-2004 : Version 1 (DG);
- * 23-Mar-2005 : Implemented PublicCloneable (DG);
  *
  */
 

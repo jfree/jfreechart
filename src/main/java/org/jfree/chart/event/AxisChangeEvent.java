@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * --------------------
  * AxisChangeEvent.java
  * --------------------
- * (C) Copyright 2000-2008, by Object Refinery Limited.
+ * (C) Copyright 2000-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes (from 24-Aug-2001)
- * --------------------------
- * 24-Aug-2001 : Added standard source header. Fixed DOS encoding problem (DG);
- * 09-Oct-2002 : Fixed errors reported by Checkstyle (DG);
  *
  */
 
@@ -49,22 +44,23 @@ import org.jfree.chart.axis.Axis;
 public class AxisChangeEvent extends ChartChangeEvent {
 
     /** The axis that generated the change event. */
-    private Axis axis;
+    private final Axis axis;
 
     /**
      * Creates a new AxisChangeEvent.
      *
-     * @param axis  the axis that generated the event.
+     * @param axis  the axis that generated the event ({@code null} not 
+     *     permitted).
      */
     public AxisChangeEvent(Axis axis) {
-        super(axis);
+        super(axis); // null is checked in this call
         this.axis = axis;
     }
 
     /**
      * Returns the axis that generated the event.
      *
-     * @return The axis that generated the event.
+     * @return The axis that generated the event (never {@code null}).
      */
     public Axis getAxis() {
         return this.axis;

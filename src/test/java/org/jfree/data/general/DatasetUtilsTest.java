@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,26 +27,10 @@
  * ---------------------
  * DatasetUtilsTest.java
  * ---------------------
- * (C) Copyright 2003-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 18-Sep-2003 : Version 1 (DG);
- * 23-Mar-2004 : Added test for maximumStackedRangeValue() method (DG);
- * 04-Oct-2004 : Eliminated NumberUtils usage (DG);
- * 07-Jan-2005 : Updated for method name changes (DG);
- * 03-Feb-2005 : Added testFindStackedRangeBounds2() method (DG);
- * 26-Sep-2007 : Added testIsEmptyOrNullXYDataset() method (DG);
- * 28-Mar-2008 : Added and renamed various tests (DG);
- * 08-Oct-2008 : New tests to support patch 2131001 and related 
- *               changes (DG);
- * 25-Mar-2009 : Added tests for new iterateToFindRangeBounds() method (DG);
- * 16-May-2009 : Added
- *               testIterateToFindRangeBounds_MultiValueCategoryDataset() (DG);
- * 10-Sep-2009 : Added tests for bug 2849731 (DG);
  *
  */
 
@@ -73,6 +57,7 @@ import org.jfree.data.xy.DefaultIntervalXYDataset;
 import org.jfree.data.xy.DefaultTableXYDataset;
 import org.jfree.data.xy.DefaultXYDataset;
 import org.jfree.data.xy.IntervalXYDataset;
+import org.jfree.data.xy.IntervalXYZDataset;
 import org.jfree.data.xy.TableXYDataset;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYIntervalSeries;
@@ -108,7 +93,7 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testCalculatePieDatasetTotal() {
-        DefaultPieDataset d = new DefaultPieDataset();
+        DefaultPieDataset<String> d = new DefaultPieDataset<>();
         assertEquals(0.0, DatasetUtils.calculatePieDatasetTotal(d),
                 EPSILON);
         d.setValue("A", 1.0);
@@ -124,7 +109,7 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testFindDomainBounds() {
-        XYDataset dataset = createXYDataset1();
+        XYDataset<String> dataset = createXYDataset1();
         Range r = DatasetUtils.findDomainBounds(dataset);
         assertEquals(1.0, r.getLowerBound(), EPSILON);
         assertEquals(3.0, r.getUpperBound(), EPSILON);
@@ -136,7 +121,7 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testFindDomainBounds2() {
-        DefaultIntervalXYDataset dataset = new DefaultIntervalXYDataset();
+        DefaultIntervalXYDataset<String> dataset = new DefaultIntervalXYDataset<>();
         double[] x1 = new double[] {1.0, 2.0, 3.0};
         double[] x1Start = new double[] {0.9, 1.9, 2.9};
         double[] x1End = new double[] {1.1, 2.1, 3.1};
@@ -157,7 +142,7 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testFindDomainBounds3() {
-        DefaultIntervalXYDataset dataset = new DefaultIntervalXYDataset();
+        DefaultIntervalXYDataset<String> dataset = new DefaultIntervalXYDataset<>();
         double[] x1 = new double[] {1.0, 2.0, 3.0};
         double[] x1Start = new double[] {0.9, 1.9, 2.9};
         double[] x1End = new double[] {1.1, 2.1, 3.1};
@@ -178,7 +163,7 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testFindDomainBounds4() {
-        DefaultIntervalXYDataset dataset = new DefaultIntervalXYDataset();
+        DefaultIntervalXYDataset<String> dataset = new DefaultIntervalXYDataset<>();
         double[] x1 = new double[] {0.8, 3.2, 3.0};
         double[] x1Start = new double[] {0.9, 1.9, 2.9};
         double[] x1End = new double[] {1.1, 2.1, 3.1};
@@ -198,7 +183,7 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testFindDomainBounds_NaN() {
-        DefaultIntervalXYDataset dataset = new DefaultIntervalXYDataset();
+        DefaultIntervalXYDataset<String> dataset = new DefaultIntervalXYDataset<>();
         double[] x1 = new double[] {1.0, 2.0, Double.NaN};
         double[] x1Start = new double[] {0.9, 1.9, Double.NaN};
         double[] x1End = new double[] {1.1, 2.1, Double.NaN};
@@ -222,7 +207,7 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testIterateDomainBounds() {
-        XYDataset dataset = createXYDataset1();
+        XYDataset<String> dataset = createXYDataset1();
         Range r = DatasetUtils.iterateDomainBounds(dataset);
         assertEquals(1.0, r.getLowerBound(), EPSILON);
         assertEquals(3.0, r.getUpperBound(), EPSILON);
@@ -233,7 +218,7 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testIterateDomainBounds_NaN() {
-        DefaultXYDataset dataset = new DefaultXYDataset();
+        DefaultXYDataset<String> dataset = new DefaultXYDataset<>();
         double[] x = new double[] {1.0, 2.0, Double.NaN, 3.0};
         double[] y = new double[] {9.0, 8.0, 7.0, 6.0};
         dataset.addSeries("S1", new double[][] {x, y});
@@ -247,7 +232,7 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testIterateDomainBounds_NaN2() {
-        DefaultIntervalXYDataset dataset = new DefaultIntervalXYDataset();
+        DefaultIntervalXYDataset<String> dataset = new DefaultIntervalXYDataset<>();
         double[] x1 = new double[] {Double.NaN, 2.0, 3.0};
         double[] x1Start = new double[] {0.9, Double.NaN, 2.9};
         double[] x1End = new double[] {1.1, Double.NaN, 3.1};
@@ -270,7 +255,7 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testFindRangeBounds_CategoryDataset() {
-        CategoryDataset dataset = createCategoryDataset1();
+        CategoryDataset<String,String> dataset = createCategoryDataset1();
         Range r = DatasetUtils.findRangeBounds(dataset);
         assertEquals(1.0, r.getLowerBound(), EPSILON);
         assertEquals(6.0, r.getUpperBound(), EPSILON);
@@ -281,7 +266,7 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testFindRangeBounds() {
-        XYDataset dataset = createXYDataset1();
+        XYDataset<String> dataset = createXYDataset1();
         Range r = DatasetUtils.findRangeBounds(dataset);
         assertEquals(100.0, r.getLowerBound(), EPSILON);
         assertEquals(105.0, r.getUpperBound(), EPSILON);
@@ -293,10 +278,10 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testFindRangeBounds2() {
-        YIntervalSeriesCollection dataset = new YIntervalSeriesCollection();
+        YIntervalSeriesCollection<String> dataset = new YIntervalSeriesCollection<>();
         Range r = DatasetUtils.findRangeBounds(dataset);
         assertNull(r);
-        YIntervalSeries s1 = new YIntervalSeries("S1");
+        YIntervalSeries<String> s1 = new YIntervalSeries<>("S1");
         dataset.addSeries(s1);
         r = DatasetUtils.findRangeBounds(dataset);
         assertNull(r);
@@ -318,7 +303,7 @@ public class DatasetUtilsTest {
         assertEquals(2.5, r.getUpperBound(), EPSILON);
 
         // another empty series
-        YIntervalSeries s2 = new YIntervalSeries("S2");
+        YIntervalSeries<String> s2 = new YIntervalSeries<>("S2");
         dataset.addSeries(s2);
         r = DatasetUtils.findRangeBounds(dataset);
         assertEquals(1.4, r.getLowerBound(), EPSILON);
@@ -341,7 +326,7 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testIterateRangeBounds_CategoryDataset() {
-        CategoryDataset dataset = createCategoryDataset1();
+        CategoryDataset<String,String> dataset = createCategoryDataset1();
         Range r = DatasetUtils.iterateRangeBounds(dataset, false);
         assertEquals(1.0, r.getLowerBound(), EPSILON);
         assertEquals(6.0, r.getUpperBound(), EPSILON);
@@ -353,7 +338,7 @@ public class DatasetUtilsTest {
     @Test
     public void testIterateRangeBounds2_CategoryDataset() {
         // an empty dataset should return a null range
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String,String> dataset = new DefaultCategoryDataset<>();
         Range r = DatasetUtils.iterateRangeBounds(dataset, false);
         assertNull(r);
 
@@ -384,21 +369,21 @@ public class DatasetUtilsTest {
     public void testIterateRangeBounds3_CategoryDataset() {
         Number[][] starts = new Double[2][3];
         Number[][] ends = new Double[2][3];
-        starts[0][0] = new Double(1.0);
-        starts[0][1] = new Double(2.0);
-        starts[0][2] = new Double(3.0);
-        starts[1][0] = new Double(11.0);
-        starts[1][1] = new Double(12.0);
-        starts[1][2] = new Double(13.0);
-        ends[0][0] = new Double(4.0);
-        ends[0][1] = new Double(5.0);
-        ends[0][2] = new Double(6.0);
-        ends[1][0] = new Double(16.0);
-        ends[1][1] = new Double(15.0);
-        ends[1][2] = new Double(14.0);
+        starts[0][0] = 1.0;
+        starts[0][1] = 2.0;
+        starts[0][2] = 3.0;
+        starts[1][0] = 11.0;
+        starts[1][1] = 12.0;
+        starts[1][2] = 13.0;
+        ends[0][0] = 4.0;
+        ends[0][1] = 5.0;
+        ends[0][2] = 6.0;
+        ends[1][0] = 16.0;
+        ends[1][1] = 15.0;
+        ends[1][2] = 14.0;
 
-        DefaultIntervalCategoryDataset d = new DefaultIntervalCategoryDataset(
-                starts, ends);
+        DefaultIntervalCategoryDataset d 
+                = new DefaultIntervalCategoryDataset(starts, ends);
         Range r = DatasetUtils.iterateRangeBounds(d, false);
         assertEquals(4.0, r.getLowerBound(), EPSILON);
         assertEquals(16.0, r.getUpperBound(), EPSILON);
@@ -412,7 +397,7 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testIterateRangeBounds() {
-        XYDataset dataset = createXYDataset1();
+        XYDataset<String> dataset = createXYDataset1();
         Range r = DatasetUtils.iterateRangeBounds(dataset);
         assertEquals(100.0, r.getLowerBound(), EPSILON);
         assertEquals(105.0, r.getUpperBound(), EPSILON);
@@ -423,11 +408,11 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testIterateRangeBounds2() {
-        XYSeries s1 = new XYSeries("S1");
+        XYSeries<String> s1 = new XYSeries<>("S1");
         s1.add(1.0, 1.1);
         s1.add(2.0, null);
         s1.add(3.0, 3.3);
-        XYSeriesCollection dataset = new XYSeriesCollection(s1);
+        XYSeriesCollection<String> dataset = new XYSeriesCollection<>(s1);
         Range r = DatasetUtils.iterateRangeBounds(dataset);
         assertEquals(1.1, r.getLowerBound(), EPSILON);
         assertEquals(3.3, r.getUpperBound(), EPSILON);
@@ -439,10 +424,10 @@ public class DatasetUtilsTest {
     @Test
     public void testIterateRangeBounds3() {
         // an empty dataset should return a null range
-        XYSeriesCollection dataset = new XYSeriesCollection();
+        XYSeriesCollection<String> dataset = new XYSeriesCollection<>();
         Range r = DatasetUtils.iterateRangeBounds(dataset);
         assertNull(r);
-        XYSeries s1 = new XYSeries("S1");
+        XYSeries<String> s1 = new XYSeries<>("S1");
         dataset.addSeries(s1);
         r = DatasetUtils.iterateRangeBounds(dataset);
         assertNull(r);
@@ -472,10 +457,10 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testIterateRangeBounds4() {
-        YIntervalSeriesCollection dataset = new YIntervalSeriesCollection();
+        YIntervalSeriesCollection<String> dataset = new YIntervalSeriesCollection<>();
         Range r = DatasetUtils.iterateRangeBounds(dataset);
         assertNull(r);
-        YIntervalSeries s1 = new YIntervalSeries("S1");
+        YIntervalSeries<String> s1 = new YIntervalSeries<>("S1");
         dataset.addSeries(s1);
         r = DatasetUtils.iterateRangeBounds(dataset);
         assertNull(r);
@@ -493,7 +478,7 @@ public class DatasetUtilsTest {
         assertEquals(2.5, r.getUpperBound(), EPSILON);
 
         // another empty series
-        YIntervalSeries s2 = new YIntervalSeries("S2");
+        YIntervalSeries<String> s2 = new YIntervalSeries<>("S2");
         dataset.addSeries(s2);
         r = DatasetUtils.iterateRangeBounds(dataset);
         assertEquals(1.4, r.getLowerBound(), EPSILON);
@@ -511,9 +496,9 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testFindMinimumDomainValue() {
-        XYDataset dataset = createXYDataset1();
+        XYDataset<String> dataset = createXYDataset1();
         Number minimum = DatasetUtils.findMinimumDomainValue(dataset);
-        assertEquals(new Double(1.0), minimum);
+        assertEquals(1.0, minimum);
     }
 
     /**
@@ -521,9 +506,9 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testFindMaximumDomainValue() {
-        XYDataset dataset = createXYDataset1();
+        XYDataset<String> dataset = createXYDataset1();
         Number maximum = DatasetUtils.findMaximumDomainValue(dataset);
-        assertEquals(new Double(3.0), maximum);
+        assertEquals(3.0, maximum);
     }
 
     /**
@@ -531,13 +516,13 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testFindMinimumRangeValue() {
-        CategoryDataset d1 = createCategoryDataset1();
+        CategoryDataset<String, String> d1 = createCategoryDataset1();
         Number min1 = DatasetUtils.findMinimumRangeValue(d1);
-        assertEquals(new Double(1.0), min1);
+        assertEquals(1.0, min1);
 
-        XYDataset d2 = createXYDataset1();
+        XYDataset<String> d2 = createXYDataset1();
         Number min2 = DatasetUtils.findMinimumRangeValue(d2);
-        assertEquals(new Double(100.0), min2);
+        assertEquals(100.0, min2);
     }
 
     /**
@@ -545,13 +530,13 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testFindMaximumRangeValue() {
-        CategoryDataset d1 = createCategoryDataset1();
+        CategoryDataset<String, String> d1 = createCategoryDataset1();
         Number max1 = DatasetUtils.findMaximumRangeValue(d1);
-        assertEquals(new Double(6.0), max1);
+        assertEquals(6.0, max1);
 
-        XYDataset dataset = createXYDataset1();
+        XYDataset<String> dataset = createXYDataset1();
         Number maximum = DatasetUtils.findMaximumRangeValue(dataset);
-        assertEquals(new Double(105.0), maximum);
+        assertEquals(105.0, maximum);
     }
 
     /**
@@ -559,7 +544,7 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testMinMaxRange() {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         dataset.addValue(100.0, "Series 1", "Type 1");
         dataset.addValue(101.1, "Series 1", "Type 2");
         Number min = DatasetUtils.findMinimumRangeValue(dataset);
@@ -573,7 +558,7 @@ public class DatasetUtilsTest {
      */
     @Test
     public void test803660() {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         dataset.addValue(100.0, "Series 1", "Type 1");
         dataset.addValue(101.1, "Series 1", "Type 2");
         Number n = DatasetUtils.findMaximumRangeValue(dataset);
@@ -587,7 +572,7 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testCumulativeRange1() {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         dataset.addValue(10.0, "Series 1", "Start");
         dataset.addValue(15.0, "Series 1", "Delta 1");
         dataset.addValue(-7.0, "Series 1", "Delta 2");
@@ -601,7 +586,7 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testCumulativeRange2() {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         dataset.addValue(-21.4, "Series 1", "Start Value");
         dataset.addValue(11.57, "Series 1", "Delta 1");
         dataset.addValue(3.51, "Series 1", "Delta 2");
@@ -622,7 +607,7 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testCumulativeRange3() {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         dataset.addValue(15.76, "Product 1", "Labour");
         dataset.addValue(8.66, "Product 1", "Administration");
         dataset.addValue(4.71, "Product 1", "Marketing");
@@ -639,7 +624,7 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testCumulativeRange_NaN() {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         dataset.addValue(10.0, "Series 1", "Start");
         dataset.addValue(15.0, "Series 1", "Delta 1");
         dataset.addValue(Double.NaN, "Series 1", "Delta 2");
@@ -659,7 +644,7 @@ public class DatasetUtilsTest {
         data[0] = new double[] {1.1, 1.2};
         data[1] = new double[] {2.1, 2.2};
         data[2] = new double[] {3.1, 3.2};
-        CategoryDataset dataset = DatasetUtils.createCategoryDataset(
+        CategoryDataset<String, String> dataset = DatasetUtils.createCategoryDataset(
                 rowKeys, columnKeys, data);
         assertTrue(dataset.getRowCount() == 3);
         assertTrue(dataset.getColumnCount() == 2);
@@ -677,7 +662,7 @@ public class DatasetUtilsTest {
         double[][] data = new double[2][];
         data[0] = new double[] {1.1, 1.2, 1.3};
         data[1] = new double[] {2.1, 2.2, 2.3};
-        CategoryDataset dataset = null;
+        CategoryDataset<String, String> dataset = null;
         try {
             dataset = DatasetUtils.createCategoryDataset(rowKeys,
                     columnKeys, data);
@@ -702,8 +687,8 @@ public class DatasetUtilsTest {
         double v4 = 32.4;
         double v5 = 26.3;
         double v6 = 22.6;
-        Number answer = new Double(Math.max(v1 + v2 + v3, v4 + v5 + v6));
-        DefaultCategoryDataset d = new DefaultCategoryDataset();
+        Number answer = Math.max(v1 + v2 + v3, v4 + v5 + v6);
+        DefaultCategoryDataset<String, String> d = new DefaultCategoryDataset<>();
         d.addValue(v1, "Row 0", "Column 0");
         d.addValue(v2, "Row 1", "Column 0");
         d.addValue(v3, "Row 2", "Column 0");
@@ -719,7 +704,7 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testFindStackedRangeBounds_CategoryDataset1() {
-        CategoryDataset d1 = createCategoryDataset1();
+        CategoryDataset<String, String> d1 = createCategoryDataset1();
         Range r = DatasetUtils.findStackedRangeBounds(d1);
         assertEquals(0.0, r.getLowerBound(), EPSILON);
         assertEquals(15.0, r.getUpperBound(), EPSILON);
@@ -735,7 +720,7 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testFindStackedRangeBounds_CategoryDataset2() {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         Range r = DatasetUtils.findStackedRangeBounds(dataset);
         assertTrue(r == null);
 
@@ -766,8 +751,8 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testFindStackedRangeBounds_CategoryDataset3() {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        KeyToGroupMap map = new KeyToGroupMap("Group A");
+        DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
+        KeyToGroupMap<String, String> map = new KeyToGroupMap<>("Group A");
         Range r = DatasetUtils.findStackedRangeBounds(dataset, map);
         assertTrue(r == null);
 
@@ -801,7 +786,7 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testFindStackedRangeBoundsForTableXYDataset1() {
-        TableXYDataset d2 = createTableXYDataset1();
+        TableXYDataset<String> d2 = createTableXYDataset1();
         Range r = DatasetUtils.findStackedRangeBounds(d2);
         assertEquals(-2.0, r.getLowerBound(), EPSILON);
         assertEquals(2.0, r.getUpperBound(), EPSILON);
@@ -812,7 +797,7 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testFindStackedRangeBoundsForTableXYDataset2() {
-        DefaultTableXYDataset d = new DefaultTableXYDataset();
+        DefaultTableXYDataset<String> d = new DefaultTableXYDataset<>();
         Range r = DatasetUtils.findStackedRangeBounds(d);
         assertEquals(r, new Range(0.0, 0.0));
     }
@@ -822,8 +807,8 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testStackedRangeWithMap() {
-        CategoryDataset d = createCategoryDataset1();
-        KeyToGroupMap map = new KeyToGroupMap("G0");
+        CategoryDataset<String, String> d = createCategoryDataset1();
+        KeyToGroupMap<String, String> map = new KeyToGroupMap<>("G0");
         map.mapKeyToGroup("R2", "G1");
         Range r = DatasetUtils.findStackedRangeBounds(d, map);
         assertEquals(0.0, r.getLowerBound(), EPSILON);
@@ -835,11 +820,11 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testIsEmptyOrNullXYDataset() {
-        XYSeriesCollection dataset = null;
+        XYSeriesCollection<String> dataset = null;
         assertTrue(DatasetUtils.isEmptyOrNull(dataset));
-        dataset = new XYSeriesCollection();
+        dataset = new XYSeriesCollection<>();
         assertTrue(DatasetUtils.isEmptyOrNull(dataset));
-        XYSeries s1 = new XYSeries("S1");
+        XYSeries<String> s1 = new XYSeries<>("S1");
         dataset.addSeries(s1);
         assertTrue(DatasetUtils.isEmptyOrNull(dataset));
         s1.add(1.0, 2.0);
@@ -855,16 +840,16 @@ public class DatasetUtilsTest {
     public void testLimitPieDataset() {
 
         // check that empty dataset is handled OK
-        DefaultPieDataset d1 = new DefaultPieDataset();
-        PieDataset d2 = DatasetUtils.createConsolidatedPieDataset(d1,
-                "Other", 0.05);
+        DefaultPieDataset<String> d1 = new DefaultPieDataset<>();
+        PieDataset<String> d2 = DatasetUtils.<String>createConsolidatedPieDataset(
+                d1, "Other", 0.05);
         assertEquals(0, d2.getItemCount());
 
         // check that minItem limit is observed
         d1.setValue("Item 1", 1.0);
         d1.setValue("Item 2", 49.50);
         d1.setValue("Item 3", 49.50);
-        d2 = DatasetUtils.createConsolidatedPieDataset(d1, "Other", 0.05);
+        d2 = DatasetUtils.<String>createConsolidatedPieDataset(d1, "Other", 0.05);
         assertEquals(3, d2.getItemCount());
         assertEquals("Item 1", d2.getKey(0));
         assertEquals("Item 2", d2.getKey(1));
@@ -872,16 +857,14 @@ public class DatasetUtilsTest {
 
         // check that minItem limit is observed
         d1.setValue("Item 4", 1.0);
-        d2 = DatasetUtils.createConsolidatedPieDataset(d1, "Other", 0.05,
-                2);
+        d2 = DatasetUtils.<String>createConsolidatedPieDataset(d1, "Other", 0.05, 2);
 
         // and that simple aggregation works
         assertEquals(3, d2.getItemCount());
         assertEquals("Item 2", d2.getKey(0));
         assertEquals("Item 3", d2.getKey(1));
         assertEquals("Other", d2.getKey(2));
-        assertEquals(new Double(2.0), d2.getValue("Other"));
-
+        assertEquals(2.0, d2.getValue("Other"));
     }
 
     /**
@@ -890,7 +873,7 @@ public class DatasetUtilsTest {
     @Test
     public void testSampleFunction2D() {
         Function2D f = new LineFunction2D(0, 1);
-        XYDataset dataset = DatasetUtils.sampleFunction2D(f, 0.0, 1.0, 2,
+        XYDataset<String> dataset = DatasetUtils.sampleFunction2D(f, 0.0, 1.0, 2,
                 "S1");
         assertEquals(1, dataset.getSeriesCount());
         assertEquals("S1", dataset.getSeriesKey(0));
@@ -906,7 +889,8 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testFindMinimumStackedRangeValue() {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset 
+                = new DefaultCategoryDataset<>();
 
         // an empty dataset should return a null max
         Number min = DatasetUtils.findMinimumStackedRangeValue(dataset);
@@ -934,7 +918,8 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testFindMinimumStackedRangeValue2() {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset 
+                = new DefaultCategoryDataset<>();
         dataset.addValue(-1.0, "R1", "C1");
         Number min = DatasetUtils.findMinimumStackedRangeValue(dataset);
         assertEquals(-1.0, min.doubleValue(), EPSILON);
@@ -949,7 +934,8 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testFindMaximumStackedRangeValue() {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset 
+                = new DefaultCategoryDataset<>();
 
         // an empty dataset should return a null max
         Number max = DatasetUtils.findMaximumStackedRangeValue(dataset);
@@ -977,7 +963,8 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testFindMaximumStackedRangeValue2() {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset 
+                = new DefaultCategoryDataset<>();
         dataset.addValue(-1.0, "R1", "C1");
         Number max = DatasetUtils.findMaximumStackedRangeValue(dataset);
         assertEquals(0.0, max.doubleValue(), EPSILON);
@@ -992,8 +979,9 @@ public class DatasetUtilsTest {
      *
      * @return A dataset.
      */
-    private CategoryDataset createCategoryDataset1() {
-        DefaultCategoryDataset result = new DefaultCategoryDataset();
+    private CategoryDataset<String, String> createCategoryDataset1() {
+        DefaultCategoryDataset<String, String> result 
+                = new DefaultCategoryDataset<>();
         result.addValue(1.0, "R0", "C0");
         result.addValue(1.0, "R1", "C0");
         result.addValue(1.0, "R2", "C0");
@@ -1008,8 +996,9 @@ public class DatasetUtilsTest {
      *
      * @return A dataset.
      */
-    private CategoryDataset createCategoryDataset2() {
-        DefaultCategoryDataset result = new DefaultCategoryDataset();
+    private CategoryDataset<String, String> createCategoryDataset2() {
+        DefaultCategoryDataset<String, String> result 
+                = new DefaultCategoryDataset<>();
         result.addValue(1.0, "R0", "C0");
         result.addValue(-2.0, "R1", "C0");
         result.addValue(2.0, "R0", "C1");
@@ -1023,16 +1012,16 @@ public class DatasetUtilsTest {
      *
      * @return A dataset.
      */
-    private XYDataset createXYDataset1() {
-        XYSeries series1 = new XYSeries("S1");
+    private XYDataset<String> createXYDataset1() {
+        XYSeries<String> series1 = new XYSeries<>("S1");
         series1.add(1.0, 100.0);
         series1.add(2.0, 101.0);
         series1.add(3.0, 102.0);
-        XYSeries series2 = new XYSeries("S2");
+        XYSeries<String> series2 = new XYSeries<>("S2");
         series2.add(1.0, 103.0);
         series2.add(2.0, null);
         series2.add(3.0, 105.0);
-        XYSeriesCollection result = new XYSeriesCollection();
+        XYSeriesCollection<String> result = new XYSeriesCollection<>();
         result.addSeries(series1);
         result.addSeries(series2);
         result.setIntervalWidth(0.0);
@@ -1044,15 +1033,15 @@ public class DatasetUtilsTest {
      *
      * @return A sample dataset.
      */
-    private TableXYDataset createTableXYDataset1() {
-        DefaultTableXYDataset dataset = new DefaultTableXYDataset();
+    private TableXYDataset<String> createTableXYDataset1() {
+        DefaultTableXYDataset<String> dataset = new DefaultTableXYDataset<>();
 
-        XYSeries s1 = new XYSeries("Series 1", true, false);
+        XYSeries<String> s1 = new XYSeries<>("Series 1", true, false);
         s1.add(1.0, 1.0);
         s1.add(2.0, 2.0);
         dataset.addSeries(s1);
 
-        XYSeries s2 = new XYSeries("Series 2", true, false);
+        XYSeries<String> s2 = new XYSeries<>("Series 2", true, false);
         s2.add(1.0, -2.0);
         s2.add(2.0, -1.0);
         dataset.addSeries(s2);
@@ -1066,7 +1055,7 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testIterateToFindDomainBounds_IntervalXYDataset() {
-        DefaultIntervalXYDataset dataset = new DefaultIntervalXYDataset();
+        DefaultIntervalXYDataset<String> dataset = new DefaultIntervalXYDataset<>();
         double[] x1 = new double[] {0.8, 3.2, 3.0};
         double[] x1Start = new double[] {0.9, 1.9, 2.9};
         double[] x1End = new double[] {1.1, 2.1, 3.1};
@@ -1088,7 +1077,7 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testIterateToFindRangeBounds_IntervalXYDataset() {
-        DefaultIntervalXYDataset dataset = new DefaultIntervalXYDataset();
+        DefaultIntervalXYDataset<String> dataset = new DefaultIntervalXYDataset<>();
         double[] x1 = new double[] {0.8, 3.2, 3.0};
         double[] x1Start = new double[] {0.9, 1.9, 2.9};
         double[] x1End = new double[] {1.1, 2.1, 3.1};
@@ -1112,7 +1101,7 @@ public class DatasetUtilsTest {
         // null dataset throws IllegalArgumentException
         boolean pass = false;
         try {
-            DatasetUtils.iterateToFindRangeBounds(null, new ArrayList(),
+            DatasetUtils.iterateToFindRangeBounds(null, new ArrayList<String>(),
                     new Range(0.0, 1.0), true);
         }
         catch (IllegalArgumentException e) {
@@ -1123,7 +1112,7 @@ public class DatasetUtilsTest {
         // null list throws IllegalArgumentException
         pass = false;
         try {
-            DatasetUtils.iterateToFindRangeBounds(new XYSeriesCollection(),
+            DatasetUtils.iterateToFindRangeBounds(new XYSeriesCollection<String>(),
                     null, new Range(0.0, 1.0), true);
         }
         catch (IllegalArgumentException e) {
@@ -1134,8 +1123,8 @@ public class DatasetUtilsTest {
         // null range throws IllegalArgumentException
         pass = false;
         try {
-            DatasetUtils.iterateToFindRangeBounds(new XYSeriesCollection(),
-                    new ArrayList(), null, true);
+            DatasetUtils.iterateToFindRangeBounds(new XYSeriesCollection<String>(),
+                    new ArrayList<>(), null, true);
         }
         catch (IllegalArgumentException e) {
             pass = true;
@@ -1148,17 +1137,17 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testIterateToFindRangeBounds2_XYDataset() {
-        List visibleSeriesKeys = new ArrayList();
+        List<String> visibleSeriesKeys = new ArrayList<>();
         Range xRange = new Range(0.0, 10.0);
 
         // empty dataset returns null
-        XYSeriesCollection dataset = new XYSeriesCollection();
+        XYSeriesCollection<String> dataset = new XYSeriesCollection<>();
         Range r = DatasetUtils.iterateToFindRangeBounds(dataset,
                 visibleSeriesKeys, xRange, false);
         assertNull(r);
 
         // add an empty series
-        XYSeries s1 = new XYSeries("A");
+        XYSeries<String> s1 = new XYSeries<>("A");
         dataset.addSeries(s1);
         visibleSeriesKeys.add("A");
         r = DatasetUtils.iterateToFindRangeBounds(dataset,
@@ -1190,7 +1179,7 @@ public class DatasetUtilsTest {
         assertEquals(new Range(5.0, 6.0), r);
 
         // add a second series
-        XYSeries s2 = new XYSeries("B");
+        XYSeries<String> s2 = new XYSeries<>("B");
         dataset.addSeries(s2);
         r = DatasetUtils.iterateToFindRangeBounds(dataset,
                 visibleSeriesKeys, xRange, false);
@@ -1223,9 +1212,9 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testIterateToFindRangeBounds_BoxAndWhiskerXYDataset() {
-        DefaultBoxAndWhiskerXYDataset dataset
-                = new DefaultBoxAndWhiskerXYDataset("Series 1");
-        List visibleSeriesKeys = new ArrayList();
+        DefaultBoxAndWhiskerXYDataset<String> dataset
+                = new DefaultBoxAndWhiskerXYDataset<>("Series 1");
+        List<String> visibleSeriesKeys = new ArrayList<>();
         visibleSeriesKeys.add("Series 1");
         Range xRange = new Range(Double.NEGATIVE_INFINITY,
                 Double.POSITIVE_INFINITY);
@@ -1233,7 +1222,7 @@ public class DatasetUtilsTest {
                 visibleSeriesKeys, xRange, false));
 
         dataset.add(new Date(50L), new BoxAndWhiskerItem(5.0, 4.9, 2.0, 8.0,
-                1.0, 9.0, 0.0, 10.0, new ArrayList()));
+                1.0, 9.0, 0.0, 10.0, new ArrayList<>()));
         assertEquals(new Range(5.0, 5.0),
                 DatasetUtils.iterateToFindRangeBounds(dataset,
                 visibleSeriesKeys, xRange, false));
@@ -1248,9 +1237,9 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testIterateToFindRangeBounds_StatisticalCategoryDataset() {
-        DefaultStatisticalCategoryDataset dataset
-                = new DefaultStatisticalCategoryDataset();
-        List visibleSeriesKeys = new ArrayList();
+        DefaultStatisticalCategoryDataset<String, String> dataset
+                = new DefaultStatisticalCategoryDataset<>();
+        List<String> visibleSeriesKeys = new ArrayList<>();
         assertNull(DatasetUtils.iterateToFindRangeBounds(dataset,
                 visibleSeriesKeys, false));
         dataset.add(1.0, 0.5, "R1", "C1");
@@ -1269,33 +1258,32 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testIterateToFindRangeBounds_MultiValueCategoryDataset() {
-        DefaultMultiValueCategoryDataset dataset
-                = new DefaultMultiValueCategoryDataset();
-        List visibleSeriesKeys = new ArrayList();
-        assertNull(DatasetUtils.iterateToFindRangeBounds(dataset,
+        DefaultMultiValueCategoryDataset<String, String> dataset
+                = new DefaultMultiValueCategoryDataset<>();
+        List<String> visibleSeriesKeys = new ArrayList<>();
+        assertNull(DatasetUtils.<String, String>iterateToFindRangeBounds(dataset,
                 visibleSeriesKeys, true));
-        List values = Arrays.asList(new Double[] {new Double(1.0)});
+        List<Double> values = Arrays.asList(new Double[] {1.0});
         dataset.add(values, "R1", "C1");
         visibleSeriesKeys.add("R1");
         assertEquals(new Range(1.0, 1.0),
-                DatasetUtils.iterateToFindRangeBounds(dataset,
+                DatasetUtils.<String, String>iterateToFindRangeBounds(dataset,
                 visibleSeriesKeys, true));
 
-        values = Arrays.asList(new Double[] {new Double(2.0), new Double(3.0)});
+        values = Arrays.asList(new Double[] {2.0, 3.0});
         dataset.add(values, "R1", "C2");
         assertEquals(new Range(1.0, 3.0),
-                DatasetUtils.iterateToFindRangeBounds(dataset,
+                DatasetUtils.<String, String>iterateToFindRangeBounds(dataset,
                 visibleSeriesKeys, true));
 
-        values = Arrays.asList(new Double[] {new Double(-1.0),
-                new Double(-2.0)});
+        values = Arrays.asList(new Double[] {-1.0, -2.0});
         dataset.add(values, "R2", "C1");
         assertEquals(new Range(1.0, 3.0),
-                DatasetUtils.iterateToFindRangeBounds(dataset,
+                DatasetUtils.<String, String>iterateToFindRangeBounds(dataset,
                 visibleSeriesKeys, true));
         visibleSeriesKeys.add("R2");
         assertEquals(new Range(-2.0, 3.0),
-                DatasetUtils.iterateToFindRangeBounds(dataset,
+                DatasetUtils.<String, String>iterateToFindRangeBounds(dataset,
                 visibleSeriesKeys, true));
     }
 
@@ -1305,45 +1293,39 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testIterateRangeBounds_IntervalCategoryDataset() {
-        TestIntervalCategoryDataset d = new TestIntervalCategoryDataset();
+        TestIntervalCategoryDataset<String, String> d 
+                = new TestIntervalCategoryDataset<>();
         d.addItem(1.0, 2.0, 3.0, "R1", "C1");
-        assertEquals(new Range(1.0, 3.0),
-                DatasetUtils.iterateRangeBounds(d));
+        assertEquals(new Range(1.0, 3.0), DatasetUtils.iterateRangeBounds(d));
 
-        d = new TestIntervalCategoryDataset();
+        d = new TestIntervalCategoryDataset<>();
         d.addItem(2.5, 2.0, 3.0, "R1", "C1");
-        assertEquals(new Range(2.0, 3.0),
-                DatasetUtils.iterateRangeBounds(d));
+        assertEquals(new Range(2.0, 3.0), DatasetUtils.iterateRangeBounds(d));
 
-        d = new TestIntervalCategoryDataset();
+        d = new TestIntervalCategoryDataset<>();
         d.addItem(4.0, 2.0, 3.0, "R1", "C1");
-        assertEquals(new Range(2.0, 4.0),
-                DatasetUtils.iterateRangeBounds(d));
+        assertEquals(new Range(2.0, 4.0), DatasetUtils.iterateRangeBounds(d));
 
-        d = new TestIntervalCategoryDataset();
-        d.addItem(null, new Double(2.0), new Double(3.0), "R1", "C1");
-        assertEquals(new Range(2.0, 3.0),
-                DatasetUtils.iterateRangeBounds(d));
+        d = new TestIntervalCategoryDataset<>();
+        d.addItem(null, 2.0, 3.0, "R1", "C1");
+        assertEquals(new Range(2.0, 3.0), DatasetUtils.iterateRangeBounds(d));
 
         // try some nulls
-        d = new TestIntervalCategoryDataset();
+        d = new TestIntervalCategoryDataset<>();
         d.addItem(null, null, null, "R1", "C1");
         assertNull(DatasetUtils.iterateRangeBounds(d));
 
-        d = new TestIntervalCategoryDataset();
-        d.addItem(new Double(1.0), null, null, "R1", "C1");
-        assertEquals(new Range(1.0, 1.0),
-                DatasetUtils.iterateRangeBounds(d));
+        d = new TestIntervalCategoryDataset<>();
+        d.addItem(1.0, null, null, "R1", "C1");
+        assertEquals(new Range(1.0, 1.0), DatasetUtils.iterateRangeBounds(d));
 
-        d = new TestIntervalCategoryDataset();
-        d.addItem(null, new Double(1.0), null, "R1", "C1");
-        assertEquals(new Range(1.0, 1.0),
-                DatasetUtils.iterateRangeBounds(d));
+        d = new TestIntervalCategoryDataset<>();
+        d.addItem(null, 1.0, null, "R1", "C1");
+        assertEquals(new Range(1.0, 1.0), DatasetUtils.iterateRangeBounds(d));
 
-        d = new TestIntervalCategoryDataset();
-        d.addItem(null, null, new Double(1.0), "R1", "C1");
-        assertEquals(new Range(1.0, 1.0),
-                DatasetUtils.iterateRangeBounds(d));
+        d = new TestIntervalCategoryDataset<>();
+        d.addItem(null, null, 1.0, "R1", "C1");
+        assertEquals(new Range(1.0, 1.0), DatasetUtils.iterateRangeBounds(d));
     }
 
     /**
@@ -1351,11 +1333,11 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testBug2849731() {
-        TestIntervalCategoryDataset d = new TestIntervalCategoryDataset();
+        TestIntervalCategoryDataset<String, String> d 
+                = new TestIntervalCategoryDataset<>();
         d.addItem(2.5, 2.0, 3.0, "R1", "C1");
-        d.addItem(new Double(4.0), null, null, "R2", "C1");
-        assertEquals(new Range(2.0, 4.0),
-                DatasetUtils.iterateRangeBounds(d));
+        d.addItem(4.0, null, null, "R2", "C1");
+        assertEquals(new Range(2.0, 4.0), DatasetUtils.iterateRangeBounds(d));
     }
 
     /**
@@ -1363,8 +1345,8 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testBug2849731_2() {
-        XYIntervalSeriesCollection d = new XYIntervalSeriesCollection();
-        XYIntervalSeries s = new XYIntervalSeries("S1");
+        XYIntervalSeriesCollection<String> d = new XYIntervalSeriesCollection<>();
+        XYIntervalSeries<String> s = new XYIntervalSeries<>("S1");
         s.add(1.0, Double.NaN, Double.NaN, Double.NaN, 1.5, Double.NaN);
         d.addSeries(s);
         Range r = DatasetUtils.iterateDomainBounds(d);
@@ -1386,8 +1368,8 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testBug2849731_3() {
-        XYIntervalSeriesCollection d = new XYIntervalSeriesCollection();
-        XYIntervalSeries s = new XYIntervalSeries("S1");
+        XYIntervalSeriesCollection<String> d = new XYIntervalSeriesCollection<>();
+        XYIntervalSeries<String> s = new XYIntervalSeries<>("S1");
         s.add(1.0, Double.NaN, Double.NaN, 1.5, Double.NaN, Double.NaN);
         d.addSeries(s);
         Range r = DatasetUtils.iterateRangeBounds(d);
@@ -1411,8 +1393,8 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testFindYValue() {
-        XYSeries series = new XYSeries("S1");
-        XYSeriesCollection dataset = new XYSeriesCollection(series);
+        XYSeries<String> series = new XYSeries<>("S1");
+        XYSeriesCollection<String> dataset = new XYSeriesCollection<>(series);
         assertTrue(Double.isNaN(DatasetUtils.findYValue(dataset, 0, 100.0)));
         
         series.add(1.0, 5.0);
@@ -1434,8 +1416,8 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testFindYValueNonSorted() {
-        XYSeries series = new XYSeries("S1", false);
-        XYSeriesCollection dataset = new XYSeriesCollection(series);
+        XYSeries<String> series = new XYSeries<>("S1", false);
+        XYSeriesCollection<String> dataset = new XYSeriesCollection<>(series);
         assertTrue(Double.isNaN(DatasetUtils.findYValue(dataset, 0, 100.0)));
         
         series.add(1.0, 5.0);
@@ -1460,8 +1442,8 @@ public class DatasetUtilsTest {
      */
     @Test
     public void testFindYValueWithDuplicates() {
-        XYSeries series = new XYSeries("S1", true, true);
-        XYSeriesCollection dataset = new XYSeriesCollection(series);
+        XYSeries<String> series = new XYSeries<>("S1", true, true);
+        XYSeriesCollection<String> dataset = new XYSeriesCollection<>(series);
         assertTrue(Double.isNaN(DatasetUtils.findYValue(dataset, 0, 100.0)));
         
         series.add(1.0, 5.0);
@@ -1483,4 +1465,30 @@ public class DatasetUtilsTest {
         assertTrue(Double.isNaN(DatasetUtils.findYValue(dataset, 0, 3.0)));
     }
 
+    @Test
+    public void testFindZBounds() {
+        IntervalXYZDataset dataset = new TestIntervalXYZDataset(2, 3);
+        assertEquals(0.0, dataset.getZValue(0, 0), EPSILON);
+        assertEquals(3.0, dataset.getZValue(0, 1), EPSILON);
+        assertEquals(6.0, dataset.getZValue(0, 2), EPSILON);
+        assertEquals(9.0, dataset.getZValue(1, 0), EPSILON);
+        assertEquals(12.0, dataset.getZValue(1, 1), EPSILON);
+        assertEquals(15.0, dataset.getZValue(1, 2), EPSILON);
+        assertEquals(-2.5, dataset.getStartZValue(0, 0).doubleValue(), EPSILON);
+        assertEquals(0.5, dataset.getStartZValue(0, 1).doubleValue(), EPSILON);
+        assertEquals(3.5, dataset.getStartZValue(0, 2).doubleValue(), EPSILON);
+        assertEquals(6.5, dataset.getStartZValue(1, 0).doubleValue(), EPSILON);
+        assertEquals(9.5, dataset.getStartZValue(1, 1).doubleValue(), EPSILON);
+        assertEquals(12.5, dataset.getStartZValue(1, 2).doubleValue(), EPSILON);
+        assertEquals(2.5, dataset.getEndZValue(0, 0).doubleValue(), EPSILON);
+        assertEquals(5.5, dataset.getEndZValue(0, 1).doubleValue(), EPSILON);
+        assertEquals(8.5, dataset.getEndZValue(0, 2).doubleValue(), EPSILON);
+        assertEquals(11.5, dataset.getEndZValue(1, 0).doubleValue(), EPSILON);
+        assertEquals(14.5, dataset.getEndZValue(1, 1).doubleValue(), EPSILON);
+        assertEquals(17.5, dataset.getEndZValue(1, 2).doubleValue(), EPSILON);
+        
+        // https://github.com/jfree/jfreechart/issues/141
+        assertEquals(new Range(-2.5, 17.5), DatasetUtils.findZBounds(dataset));
+        assertEquals(new Range(0.0, 15.0), DatasetUtils.findZBounds(dataset, false));
+    }
 }

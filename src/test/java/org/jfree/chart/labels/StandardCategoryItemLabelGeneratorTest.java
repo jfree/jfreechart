@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,17 +27,10 @@
  * -------------------------------------------
  * StandardCategoryItemLabelGeneratorTest.java
  * -------------------------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 21-Mar-2003 : Version 1 (DG);
- * 13-Aug-2003 : Added cloning tests (DG);
- * 11-May-2004 : Renamed class (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG);
  *
  */
 
@@ -52,6 +45,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.category.DefaultCategoryDataset;
@@ -70,7 +64,7 @@ public class StandardCategoryItemLabelGeneratorTest {
         StandardCategoryItemLabelGenerator g
                 = new StandardCategoryItemLabelGenerator("{2}",
                 new DecimalFormat("0.000"));
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         dataset.addValue(1.0, "R0", "C0");
         dataset.addValue(2.0, "R0", "C1");
         dataset.addValue(3.0, "R1", "C0");
@@ -139,8 +133,7 @@ public class StandardCategoryItemLabelGeneratorTest {
     public void testCloning() throws CloneNotSupportedException {
         StandardCategoryItemLabelGenerator g1
                 = new StandardCategoryItemLabelGenerator();
-        StandardCategoryItemLabelGenerator g2 
-                = (StandardCategoryItemLabelGenerator) g1.clone();
+        StandardCategoryItemLabelGenerator g2 = CloneUtils.clone(g1);
         assertTrue(g1 != g2);
         assertTrue(g1.getClass() == g2.getClass());
         assertTrue(g1.equals(g2));
@@ -164,8 +157,7 @@ public class StandardCategoryItemLabelGeneratorTest {
         StandardCategoryItemLabelGenerator g1
                 = new StandardCategoryItemLabelGenerator("{2}",
                 DateFormat.getInstance());
-        StandardCategoryItemLabelGenerator g2 = (StandardCategoryItemLabelGenerator) 
-                TestUtils.serialised(g1);
+        StandardCategoryItemLabelGenerator g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

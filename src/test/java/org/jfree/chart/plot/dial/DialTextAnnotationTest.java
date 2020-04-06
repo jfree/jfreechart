@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * ---------------------------
  * DialTextAnnotationTest.java
  * ---------------------------
- * (C) Copyright 2006-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 03-Nov-2006 : Version 1 (DG);
  *
  */
 
@@ -49,6 +45,7 @@ import java.awt.Font;
 import java.awt.GradientPaint;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.junit.Test;
 
 /**
@@ -123,7 +120,7 @@ public class DialTextAnnotationTest {
     public void testCloning() throws CloneNotSupportedException {
         // test a default instance
         DialTextAnnotation a1 = new DialTextAnnotation("A1");
-        DialTextAnnotation a2 = (DialTextAnnotation) a1.clone();
+        DialTextAnnotation a2 = CloneUtils.clone(a1);
         assertTrue(a1 != a2);
         assertTrue(a1.getClass() == a2.getClass());
         assertTrue(a1.equals(a2));
@@ -143,7 +140,7 @@ public class DialTextAnnotationTest {
     public void testSerialization() {
         // test a default instance
         DialTextAnnotation a1 = new DialTextAnnotation("A1");
-        DialTextAnnotation a2 = (DialTextAnnotation) TestUtils.serialised(a1);
+        DialTextAnnotation a2 = TestUtils.serialised(a1);
         assertEquals(a1, a2);
 
         // test a custom instance
@@ -151,7 +148,7 @@ public class DialTextAnnotationTest {
         a1.setPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f,
                 Color.BLUE));
 
-        a2 = (DialTextAnnotation) TestUtils.serialised(a1);
+        a2 = TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 

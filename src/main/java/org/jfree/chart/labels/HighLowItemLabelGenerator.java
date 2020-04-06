@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,26 +27,10 @@
  * ------------------------------
  * HighLowItemLabelGenerator.java
  * ------------------------------
- * (C) Copyright 2001-2016, by Object Refinery Limited.
+ * (C) Copyright 2001-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   David Basten;
- *
- * Changes
- * -------
- * 13-Dec-2001 : Version 1 (DG);
- * 16-Jan-2002 : Completed Javadocs (DG);
- * 23-Apr-2002 : Added date to the tooltip string (DG);
- * 26-Sep-2002 : Fixed errors reported by Checkstyle (DG);
- * 21-Mar-2003 : Implemented Serializable (DG);
- * 13-Aug-2003 : Implemented Cloneable (DG);
- * 17-Nov-2003 : Implemented PublicCloneable (DG);
- * 25-Feb-2004 : Renamed XYToolTipGenerator --> XYItemLabelGenerator (DG);
- * 25-May-2004 : Added number formatter (see patch 890496) (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with 
- *               getYValue() (DG);
- * 20-Apr-2005 : Renamed XYLabelGenerator --> XYItemLabelGenerator (DG);
- * 31-Mar-2008 : Added hashCode() method to appease FindBugs (DG);
  *
  */
 

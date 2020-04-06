@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,18 +27,10 @@
  * -------------------------------
  * XYLineAndShapeRendererTest.java
  * -------------------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 27-Jan-2004 : Version 1 (DG);
- * 07-Jan-2005 : Added check for findRangeBounds() method (DG);
- * 21-Feb-2007 : Check independence in testCloning() (DG);
- * 17-May-2007 : Added testGetLegendItemSeriesIndex() (DG);
- * 22-Apr-2008 : Added testPublicCloneable() (DG);
  *
  */
 
@@ -59,6 +51,7 @@ import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.urls.TimeSeriesURLGenerator;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.Range;
 import org.jfree.data.xy.TableXYDataset;
@@ -176,7 +169,7 @@ public class XYLineAndShapeRendererTest {
         Rectangle2D legendShape = new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0);
         XYLineAndShapeRenderer r1 = new XYLineAndShapeRenderer();
         r1.setLegendLine(legendShape);
-        XYLineAndShapeRenderer r2 = (XYLineAndShapeRenderer) r1.clone();
+        XYLineAndShapeRenderer r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -217,8 +210,7 @@ public class XYLineAndShapeRendererTest {
     @Test
     public void testSerialization() {
         XYLineAndShapeRenderer r1 = new XYLineAndShapeRenderer();
-        XYLineAndShapeRenderer r2 = (XYLineAndShapeRenderer) 
-                TestUtils.serialised(r1);
+        XYLineAndShapeRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 
@@ -227,7 +219,7 @@ public class XYLineAndShapeRendererTest {
      */
     @Test
     public void testFindDomainBounds() {
-        XYSeriesCollection dataset
+        XYSeriesCollection<String> dataset
                 = RendererXYPackageUtils.createTestXYSeriesCollection();
         JFreeChart chart = ChartFactory.createXYLineChart(
                 "Test Chart", "X", "Y", dataset, PlotOrientation.VERTICAL,
@@ -247,7 +239,7 @@ public class XYLineAndShapeRendererTest {
      */
     @Test
     public void testFindRangeBounds() {
-        TableXYDataset dataset
+        TableXYDataset<String> dataset
                 = RendererXYPackageUtils.createTestTableXYDataset();
         JFreeChart chart = ChartFactory.createXYLineChart(
                 "Test Chart", "X", "Y", dataset, PlotOrientation.VERTICAL,
@@ -268,20 +260,20 @@ public class XYLineAndShapeRendererTest {
      */
     @Test
     public void testGetLegendItemSeriesIndex() {
-        XYSeriesCollection d1 = new XYSeriesCollection();
-        XYSeries s1 = new XYSeries("S1");
+        XYSeriesCollection<String> d1 = new XYSeriesCollection<>();
+        XYSeries<String> s1 = new XYSeries<>("S1");
         s1.add(1.0, 1.1);
-        XYSeries s2 = new XYSeries("S2");
+        XYSeries<String> s2 = new XYSeries<>("S2");
         s2.add(1.0, 1.1);
         d1.addSeries(s1);
         d1.addSeries(s2);
 
-        XYSeriesCollection d2 = new XYSeriesCollection();
-        XYSeries s3 = new XYSeries("S3");
+        XYSeriesCollection<String> d2 = new XYSeriesCollection<>();
+        XYSeries<String> s3 = new XYSeries<>("S3");
         s3.add(1.0, 1.1);
-        XYSeries s4 = new XYSeries("S4");
+        XYSeries<String> s4 = new XYSeries<>("S4");
         s4.add(1.0, 1.1);
-        XYSeries s5 = new XYSeries("S5");
+        XYSeries<String> s5 = new XYSeries<>("S5");
         s5.add(1.0, 1.1);
         d2.addSeries(s3);
         d2.addSeries(s4);

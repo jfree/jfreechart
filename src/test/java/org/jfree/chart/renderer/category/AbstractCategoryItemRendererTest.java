@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,18 +27,10 @@
  * -------------------------------------
  * AbstractCategoryItemRendererTest.java
  * -------------------------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 12-Feb-2004 : Version 1 (DG);
- * 24-Nov-2006 : New cloning tests (DG);
- * 07-Dec-2006 : Added testEquals() method (DG);
- * 25-Nov-2008 : Added testFindRangeBounds() (DG);
- * 09-Feb-2010 : Added test2947660() (DG);
  *
  */
 
@@ -313,7 +305,7 @@ public class AbstractCategoryItemRendererTest {
         assertNull(r.findRangeBounds(null));
 
         // an empty dataset should return a null range
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         assertNull(r.findRangeBounds(dataset));
 
         dataset.addValue(1.0, "R1", "C1");
@@ -335,7 +327,7 @@ public class AbstractCategoryItemRendererTest {
         assertNotNull(r.getLegendItems());
         assertEquals(0, r.getLegendItems().getItemCount());
 
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         CategoryPlot plot = new CategoryPlot();
         plot.setDataset(dataset);
         plot.setRenderer(r);

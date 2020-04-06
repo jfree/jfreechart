@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------
  * PieChartTest.java
  * -----------------
- * (C) Copyright 2002-2016, by Object Refinery Limited.
+ * (C) Copyright 2002-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -53,7 +53,6 @@ import static org.junit.Assert.assertNull;
 
 /**
  * Tests for a pie chart.
- *
  */
 public class PieChartTest  {
 
@@ -89,20 +88,19 @@ public class PieChartTest  {
      * @return The pie chart.
      */
     private static JFreeChart createPieChart() {
-        DefaultPieDataset data = new DefaultPieDataset();
-        data.setValue("Java", new Double(43.2));
-        data.setValue("Visual Basic", new Double(0.0));
-        data.setValue("C/C++", new Double(17.5));
+        DefaultPieDataset<String> data = new DefaultPieDataset<>();
+        data.setValue("Java", 43.2);
+        data.setValue("Visual Basic", 0.0);
+        data.setValue("C/C++", 17.5);
         return ChartFactory.createPieChart("Pie Chart", data);
     }
 
     /**
      * A chart change listener.
-     *
      */
     static class LocalListener implements ChartChangeListener {
 
-        /** A flag. */
+        /** Set to true when the listener is triggered. */
         private boolean flag;
 
         /**

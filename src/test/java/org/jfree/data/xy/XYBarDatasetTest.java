@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * ---------------------
  * XYBarDatasetTest.java
  * ---------------------
- * (C) Copyright 2007-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 25-Jan-2007 : Version 1 (DG);
- * 22-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
@@ -46,6 +41,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.Test;
@@ -60,19 +56,19 @@ public class XYBarDatasetTest {
      */
     @Test
     public void testEquals() {
-        DefaultXYDataset d1 = new DefaultXYDataset();
+        DefaultXYDataset<String> d1 = new DefaultXYDataset<>();
         double[] x1 = new double[] {1.0, 2.0, 3.0};
         double[] y1 = new double[] {4.0, 5.0, 6.0};
         double[][] data1 = new double[][] {x1, y1};
         d1.addSeries("S1", data1);
-        DefaultXYDataset d2 = new DefaultXYDataset();
+        DefaultXYDataset<String> d2 = new DefaultXYDataset<>();
         double[] x2 = new double[] {1.0, 2.0, 3.0};
         double[] y2 = new double[] {4.0, 5.0, 6.0};
         double[][] data2 = new double[][] {x2, y2};
         d2.addSeries("S1", data2);
 
-        XYBarDataset bd1 = new XYBarDataset(d1, 5.0);
-        XYBarDataset bd2 = new XYBarDataset(d2, 5.0);
+        XYBarDataset<String> bd1 = new XYBarDataset<>(d1, 5.0);
+        XYBarDataset<String> bd2 = new XYBarDataset<>(d2, 5.0);
         assertTrue(bd1.equals(bd2));
         assertTrue(bd2.equals(bd1));
     }
@@ -82,13 +78,13 @@ public class XYBarDatasetTest {
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        DefaultXYDataset d1 = new DefaultXYDataset();
+        DefaultXYDataset<String> d1 = new DefaultXYDataset<>();
         double[] x1 = new double[] {1.0, 2.0, 3.0};
         double[] y1 = new double[] {4.0, 5.0, 6.0};
         double[][] data1 = new double[][] {x1, y1};
         d1.addSeries("S1", data1);
-        XYBarDataset bd1 = new XYBarDataset(d1, 5.0);
-        XYBarDataset bd2 = (XYBarDataset) bd1.clone();
+        XYBarDataset<String> bd1 = new XYBarDataset<>(d1, 5.0);
+        XYBarDataset<String> bd2 = CloneUtils.clone(bd1);
         assertTrue(bd1 != bd2);
         assertTrue(bd1.getClass() == bd2.getClass());
         assertTrue(bd1.equals(bd2));
@@ -97,7 +93,7 @@ public class XYBarDatasetTest {
         d1 = (DefaultXYDataset) bd1.getUnderlyingDataset();
         d1.addSeries("S2", new double[][] {{1.0}, {2.0}});
         assertFalse(bd1.equals(bd2));
-        DefaultXYDataset d2 = (DefaultXYDataset) bd2.getUnderlyingDataset();
+        DefaultXYDataset<String> d2 = (DefaultXYDataset) bd2.getUnderlyingDataset();
         d2.addSeries("S2", new double[][] {{1.0}, {2.0}});
         assertTrue(bd1.equals(bd2));
     }
@@ -107,12 +103,12 @@ public class XYBarDatasetTest {
      */
     @Test
     public void testPublicCloneable() {
-        DefaultXYDataset d1 = new DefaultXYDataset();
+        DefaultXYDataset<String> d1 = new DefaultXYDataset<>();
         double[] x1 = new double[] {1.0, 2.0, 3.0};
         double[] y1 = new double[] {4.0, 5.0, 6.0};
         double[][] data1 = new double[][] {x1, y1};
         d1.addSeries("S1", data1);
-        XYBarDataset bd1 = new XYBarDataset(d1, 5.0);
+        XYBarDataset<String> bd1 = new XYBarDataset<>(d1, 5.0);
         assertTrue(bd1 instanceof PublicCloneable);
     }
 
@@ -121,13 +117,13 @@ public class XYBarDatasetTest {
      */
     @Test
     public void testSerialization() {
-        DefaultXYDataset d1 = new DefaultXYDataset();
+        DefaultXYDataset<String> d1 = new DefaultXYDataset<>();
         double[] x1 = new double[] {1.0, 2.0, 3.0};
         double[] y1 = new double[] {4.0, 5.0, 6.0};
         double[][] data1 = new double[][] {x1, y1};
         d1.addSeries("S1", data1);
-        XYBarDataset bd1 = new XYBarDataset(d1, 5.0);
-        XYBarDataset bd2 = (XYBarDataset) TestUtils.serialised(bd1);
+        XYBarDataset<String> bd1 = new XYBarDataset<>(d1, 5.0);
+        XYBarDataset<String> bd2 = TestUtils.serialised(bd1);
         assertEquals(bd1, bd2);
     }
 

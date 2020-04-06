@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,18 +27,10 @@
  * -------------------------------
  * StatisticalBarRendererTest.java
  * -------------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 25-Mar-2003 : Version 1 (DG);
- * 28-Aug-2007 : Added tests for bug 1779941 (DG);
- * 14-Nov-2007 : Updated testEquals() (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG);
- * 16-May-2009 : Added testFindRangeBounds (DG);
  *
  */
 
@@ -59,6 +51,7 @@ import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.Range;
 import org.jfree.data.statistics.DefaultStatisticalCategoryDataset;
@@ -108,7 +101,7 @@ public class StatisticalBarRendererTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         StatisticalBarRenderer r1 = new StatisticalBarRenderer();
-        StatisticalBarRenderer r2 = (StatisticalBarRenderer) r1.clone();
+        StatisticalBarRenderer r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -129,8 +122,7 @@ public class StatisticalBarRendererTest {
     @Test
     public void testSerialization() {
         StatisticalBarRenderer r1 = new StatisticalBarRenderer();
-        StatisticalBarRenderer r2 = (StatisticalBarRenderer) 
-                TestUtils.serialised(r1);
+        StatisticalBarRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 
@@ -141,8 +133,8 @@ public class StatisticalBarRendererTest {
     @Test
     public void testDrawWithNullInfo() {
         try {
-            DefaultStatisticalCategoryDataset dataset
-                    = new DefaultStatisticalCategoryDataset();
+            DefaultStatisticalCategoryDataset<String, String> dataset
+                    = new DefaultStatisticalCategoryDataset<>();
             dataset.add(1.0, 2.0, "S1", "C1");
             dataset.add(3.0, 4.0, "S1", "C2");
             CategoryPlot plot = new CategoryPlot(dataset,
@@ -165,10 +157,10 @@ public class StatisticalBarRendererTest {
     @Test
     public void testDrawWithNullMeanVertical() {
         try {
-            DefaultStatisticalCategoryDataset dataset
-                    = new DefaultStatisticalCategoryDataset();
+            DefaultStatisticalCategoryDataset<String, String> dataset
+                    = new DefaultStatisticalCategoryDataset<>();
             dataset.add(1.0, 2.0, "S1", "C1");
-            dataset.add(null, new Double(4.0), "S1", "C2");
+            dataset.add(null, 4.0, "S1", "C2");
             CategoryPlot plot = new CategoryPlot(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new StatisticalBarRenderer());
@@ -189,10 +181,10 @@ public class StatisticalBarRendererTest {
     @Test
     public void testDrawWithNullMeanHorizontal() {
         try {
-            DefaultStatisticalCategoryDataset dataset
-                    = new DefaultStatisticalCategoryDataset();
+            DefaultStatisticalCategoryDataset<String, String> dataset
+                    = new DefaultStatisticalCategoryDataset<>();
             dataset.add(1.0, 2.0, "S1", "C1");
-            dataset.add(null, new Double(4.0), "S1", "C2");
+            dataset.add(null, 4.0, "S1", "C2");
             CategoryPlot plot = new CategoryPlot(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new StatisticalBarRenderer());
@@ -214,10 +206,10 @@ public class StatisticalBarRendererTest {
     @Test
     public void testDrawWithNullDeviationVertical() {
         try {
-            DefaultStatisticalCategoryDataset dataset
-                    = new DefaultStatisticalCategoryDataset();
+            DefaultStatisticalCategoryDataset<String, String> dataset
+                    = new DefaultStatisticalCategoryDataset<>();
             dataset.add(1.0, 2.0, "S1", "C1");
-            dataset.add(new Double(4.0), null, "S1", "C2");
+            dataset.add(4.0, null, "S1", "C2");
             CategoryPlot plot = new CategoryPlot(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new StatisticalBarRenderer());
@@ -238,10 +230,10 @@ public class StatisticalBarRendererTest {
     @Test
     public void testDrawWithNullDeviationHorizontal() {
         try {
-            DefaultStatisticalCategoryDataset dataset
-                    = new DefaultStatisticalCategoryDataset();
+            DefaultStatisticalCategoryDataset<String, String> dataset
+                    = new DefaultStatisticalCategoryDataset<>();
             dataset.add(1.0, 2.0, "S1", "C1");
-            dataset.add(new Double(4.0), null, "S1", "C2");
+            dataset.add(4.0, null, "S1", "C2");
             CategoryPlot plot = new CategoryPlot(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new StatisticalBarRenderer());
@@ -264,8 +256,8 @@ public class StatisticalBarRendererTest {
         assertNull(r.findRangeBounds(null));
 
         // an empty dataset should return a null range
-        DefaultStatisticalCategoryDataset dataset
-                = new DefaultStatisticalCategoryDataset();
+        DefaultStatisticalCategoryDataset<String, String> dataset
+                = new DefaultStatisticalCategoryDataset<>();
         assertNull(r.findRangeBounds(dataset));
 
         dataset.add(1.0, 0.5, "R1", "C1");

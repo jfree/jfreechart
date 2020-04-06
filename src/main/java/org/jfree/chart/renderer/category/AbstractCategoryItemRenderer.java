@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,85 +27,11 @@
  * ---------------------------------
  * AbstractCategoryItemRenderer.java
  * ---------------------------------
- * (C) Copyright 2002-2017, by Object Refinery Limited.
+ * (C) Copyright 2002-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Richard Atkinson;
  *                   Peter Kolb (patch 2497611);
- *
- * Changes:
- * --------
- * 29-May-2002 : Version 1 (DG);
- * 06-Jun-2002 : Added accessor methods for the tool tip generator (DG);
- * 11-Jun-2002 : Made constructors protected (DG);
- * 26-Jun-2002 : Added axis to initialise method (DG);
- * 05-Aug-2002 : Added urlGenerator member variable plus accessors (RA);
- * 22-Aug-2002 : Added categoriesPaint attribute, based on code submitted by
- *               Janet Banks.  This can be used when there is only one series,
- *               and you want each category item to have a different color (DG);
- * 01-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 29-Oct-2002 : Fixed bug where background image for plot was not being
- *               drawn (DG);
- * 05-Nov-2002 : Replaced references to CategoryDataset with TableDataset (DG);
- * 26-Nov 2002 : Replaced the isStacked() method with getRangeType() (DG);
- * 09-Jan-2003 : Renamed grid-line methods (DG);
- * 17-Jan-2003 : Moved plot classes into separate package (DG);
- * 25-Mar-2003 : Implemented Serializable (DG);
- * 12-May-2003 : Modified to take into account the plot orientation (DG);
- * 12-Aug-2003 : Very minor javadoc corrections (DB)
- * 13-Aug-2003 : Implemented Cloneable (DG);
- * 16-Sep-2003 : Changed ChartRenderingInfo --> PlotRenderingInfo (DG);
- * 05-Nov-2003 : Fixed marker rendering bug (833623) (DG);
- * 21-Jan-2004 : Update for renamed method in ValueAxis (DG);
- * 11-Feb-2004 : Modified labelling for markers (DG);
- * 12-Feb-2004 : Updated clone() method (DG);
- * 15-Apr-2004 : Created a new CategoryToolTipGenerator interface (DG);
- * 05-May-2004 : Fixed bug (948310) where interval markers extend outside axis
- *               range (DG);
- * 14-Jun-2004 : Fixed bug in drawRangeMarker() method - now uses 'paint' and
- *               'stroke' rather than 'outlinePaint' and 'outlineStroke' (DG);
- * 15-Jun-2004 : Interval markers can now use GradientPaint (DG);
- * 30-Sep-2004 : Moved drawRotatedString() from RefineryUtilities
- *               --> TextUtilities (DG);
- * 01-Oct-2004 : Fixed bug 1029697, problem with label alignment in
- *               drawRangeMarker() method (DG);
- * 07-Jan-2005 : Renamed getRangeExtent() --> findRangeBounds() (DG);
- * 21-Jan-2005 : Modified return type of calculateRangeMarkerTextAnchorPoint()
- *               method (DG);
- * 08-Mar-2005 : Fixed positioning of marker labels (DG);
- * 20-Apr-2005 : Added legend label, tooltip and URL generators (DG);
- * 01-Jun-2005 : Handle one dimension of the marker label adjustment
- *               automatically (DG);
- * 09-Jun-2005 : Added utility method for adding an item entity (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 01-Mar-2006 : Updated getLegendItems() to check seriesVisibleInLegend
- *               flags (DG);
- * 20-Jul-2006 : Set dataset and series indices in LegendItem (DG);
- * 23-Oct-2006 : Draw outlines for interval markers (DG);
- * 24-Oct-2006 : Respect alpha setting in markers, as suggested by Sergei
- *               Ivanov in patch 1567843 (DG);
- * 30-Nov-2006 : Added a check for series visibility in the getLegendItem()
- *               method (DG);
- * 07-Dec-2006 : Fix for equals() method (DG);
- * 22-Feb-2007 : Added createState() method (DG);
- * 01-Mar-2007 : Fixed interval marker drawing (patch 1670686 thanks to
- *               Sergei Ivanov) (DG);
- * 20-Apr-2007 : Updated getLegendItem() for renderer change, and deprecated
- *               itemLabelGenerator, toolTipGenerator and itemURLGenerator
- *               override fields (DG);
- * 18-May-2007 : Set dataset and seriesKey for LegendItem (DG);
- * 17-Jun-2008 : Apply legend shape, font and paint attributes (DG);
- * 26-Jun-2008 : Added crosshair support (DG);
- * 25-Nov-2008 : Fixed bug in findRangeBounds() method (DG);
- * 14-Jan-2009 : Update initialise() to store visible series indices (PK);
- * 21-Jan-2009 : Added drawRangeLine() method (DG);
- * 27-Mar-2009 : Added new findRangeBounds() method to account for hidden
- *               series (DG);
- * 01-Apr-2009 : Added new addEntity() method (DG);
- * 09-Feb-2010 : Fixed bug 2947660 (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
- * 08-Apr-2014 : Remove use of ObjectList (DG);
- * 29-Jul-2014 : Add rendering hints to normalise range lines (DG);
  * 
  */
 
@@ -226,11 +152,9 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      * generators.
      */
     protected AbstractCategoryItemRenderer() {
-        this.itemLabelGeneratorMap 
-                = new HashMap<Integer, CategoryItemLabelGenerator>();
-        this.toolTipGeneratorMap 
-                = new HashMap<Integer, CategoryToolTipGenerator>();
-        this.itemURLGeneratorMap = new HashMap<Integer, CategoryURLGenerator>();
+        this.itemLabelGeneratorMap = new HashMap<>();
+        this.toolTipGeneratorMap = new HashMap<>();
+        this.itemURLGeneratorMap = new HashMap<>();
         this.legendItemLabelGenerator
                 = new StandardCategorySeriesLabelGenerator();
     }

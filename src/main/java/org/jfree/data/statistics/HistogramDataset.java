@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,37 +27,13 @@
  * ---------------------
  * HistogramDataset.java
  * ---------------------
- * (C) Copyright 2003-2016, by Jelai Wang and Contributors.
+ * (C) Copyright 2003-2020, by Jelai Wang and Contributors.
  *
  * Original Author:  Jelai Wang (jelaiw AT mindspring.com);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Cameron Hayne;
  *                   Rikard Bj?rklind;
  *                   Thomas A Caswell (patch 2902842);
- *
- * Changes
- * -------
- * 06-Jul-2003 : Version 1, contributed by Jelai Wang (DG);
- * 07-Jul-2003 : Changed package and added Javadocs (DG);
- * 15-Oct-2003 : Updated Javadocs and removed array sorting (JW);
- * 09-Jan-2004 : Added fix by "Z." posted in the JFreeChart forum (DG);
- * 01-Mar-2004 : Added equals() and clone() methods and implemented
- *               Serializable.  Also added new addSeries() method (DG);
- * 06-May-2004 : Now extends AbstractIntervalXYDataset (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
- *               getYValue() (DG);
- * 20-May-2005 : Speed up binning - see patch 1026151 contributed by Cameron
- *               Hayne (DG);
- * 08-Jun-2005 : Fixed bug in getSeriesKey() method (DG);
- * 22-Nov-2005 : Fixed cast in getSeriesKey() method - see patch 1329287 (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 03-Aug-2006 : Improved precision of bin boundary calculation (DG);
- * 07-Sep-2006 : Fixed bug 1553088 (DG);
- * 22-May-2008 : Implemented clone() method override (DG);
- * 08-Dec-2009 : Fire change event in addSeries() - see patch 2902842
- *               contributed by Thomas A Caswell (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
- * 19-Jan-2019 : Added missing hashCode (TH);
  *
  */
 
@@ -90,7 +66,7 @@ public class HistogramDataset extends AbstractIntervalXYDataset
     private static final long serialVersionUID = -6341668077370231153L;
 
     /** A list of maps. */
-    private List list;
+    private List<Map<String, Object>> list;
 
     /** The histogram type. */
     private HistogramType type;
@@ -100,7 +76,7 @@ public class HistogramDataset extends AbstractIntervalXYDataset
      * {@link HistogramType}.FREQUENCY.
      */
     public HistogramDataset() {
-        this.list = new ArrayList();
+        this.list = new ArrayList<>();
         this.type = HistogramType.FREQUENCY;
     }
 
@@ -165,7 +141,7 @@ public class HistogramDataset extends AbstractIntervalXYDataset
 
         double lower = minimum;
         double upper;
-        List binList = new ArrayList(bins);
+        List<HistogramBin> binList = new ArrayList<>(bins);
         for (int i = 0; i < bins; i++) {
             HistogramBin bin;
             // make sure bins[bins.length]'s upper boundary ends at maximum
@@ -201,11 +177,11 @@ public class HistogramDataset extends AbstractIntervalXYDataset
             bin.incrementCount();
         }
         // generic map for each series
-        Map map = new HashMap();
+        Map<String, Object> map = new HashMap<>();
         map.put("key", key);
         map.put("bins", binList);
-        map.put("values.length", new Integer(values.length));
-        map.put("bin width", new Double(binWidth));
+        map.put("values.length", values.length);
+        map.put("bin width", binWidth);
         this.list.add(map);
         fireDatasetChanged();
     }
@@ -265,9 +241,9 @@ public class HistogramDataset extends AbstractIntervalXYDataset
      * @throws IndexOutOfBoundsException if {@code series} is outside the
      *     specified range.
      */
-    List getBins(int series) {
-        Map map = (Map) this.list.get(series);
-        return (List) map.get("bins");
+    List<HistogramBin> getBins(int series) {
+        Map<String, Object> map = this.list.get(series);
+        return (List<HistogramBin>) map.get("bins");
     }
 
     /**
@@ -278,8 +254,8 @@ public class HistogramDataset extends AbstractIntervalXYDataset
      * @return The total.
      */
     private int getTotal(int series) {
-        Map map = (Map) this.list.get(series);
-        return ((Integer) map.get("values.length")).intValue();
+        Map<String, Object> map = this.list.get(series);
+        return (Integer) map.get("values.length");
     }
 
     /**
@@ -290,8 +266,8 @@ public class HistogramDataset extends AbstractIntervalXYDataset
      * @return The bin width.
      */
     private double getBinWidth(int series) {
-        Map map = (Map) this.list.get(series);
-        return ((Double) map.get("bin width")).doubleValue();
+        Map<String, Object> map = this.list.get(series);
+        return (Double) map.get("bin width");
     }
 
     /**
@@ -317,7 +293,7 @@ public class HistogramDataset extends AbstractIntervalXYDataset
      */
     @Override
     public Comparable getSeriesKey(int series) {
-        Map map = (Map) this.list.get(series);
+        Map<String, Object> map = this.list.get(series);
         return (Comparable) map.get("key");
     }
 
@@ -354,10 +330,9 @@ public class HistogramDataset extends AbstractIntervalXYDataset
      */
     @Override
     public Number getX(int series, int item) {
-        List bins = getBins(series);
-        HistogramBin bin = (HistogramBin) bins.get(item);
-        double x = (bin.getStartBoundary() + bin.getEndBoundary()) / 2.;
-        return new Double(x);
+        List<HistogramBin> bins = getBins(series);
+        HistogramBin bin = bins.get(item);
+        return (bin.getStartBoundary() + bin.getEndBoundary()) / 2.0;
     }
 
     /**
@@ -375,19 +350,19 @@ public class HistogramDataset extends AbstractIntervalXYDataset
      */
     @Override
     public Number getY(int series, int item) {
-        List bins = getBins(series);
-        HistogramBin bin = (HistogramBin) bins.get(item);
+        List<HistogramBin> bins = getBins(series);
+        HistogramBin bin = bins.get(item);
         double total = getTotal(series);
         double binWidth = getBinWidth(series);
 
         if (this.type == HistogramType.FREQUENCY) {
-            return new Double(bin.getCount());
+            return bin.getCount();
         }
         else if (this.type == HistogramType.RELATIVE_FREQUENCY) {
-            return new Double(bin.getCount() / total);
+            return bin.getCount() / total;
         }
         else if (this.type == HistogramType.SCALE_AREA_TO_1) {
-            return new Double(bin.getCount() / (binWidth * total));
+            return bin.getCount() / (binWidth * total);
         }
         else { // pretty sure this shouldn't ever happen
             throw new IllegalStateException();
@@ -408,9 +383,9 @@ public class HistogramDataset extends AbstractIntervalXYDataset
      */
     @Override
     public Number getStartX(int series, int item) {
-        List bins = getBins(series);
-        HistogramBin bin = (HistogramBin) bins.get(item);
-        return new Double(bin.getStartBoundary());
+        List<HistogramBin> bins = getBins(series);
+        HistogramBin bin = bins.get(item);
+        return bin.getStartBoundary();
     }
 
     /**
@@ -427,9 +402,9 @@ public class HistogramDataset extends AbstractIntervalXYDataset
      */
     @Override
     public Number getEndX(int series, int item) {
-        List bins = getBins(series);
-        HistogramBin bin = (HistogramBin) bins.get(item);
-        return new Double(bin.getEndBoundary());
+        List<HistogramBin> bins = getBins(series);
+        HistogramBin bin = bins.get(item);
+        return bin.getEndBoundary();
     }
 
     /**
@@ -514,9 +489,9 @@ public class HistogramDataset extends AbstractIntervalXYDataset
     public Object clone() throws CloneNotSupportedException {
         HistogramDataset clone = (HistogramDataset) super.clone();
         int seriesCount = getSeriesCount();
-        clone.list = new java.util.ArrayList(seriesCount);
+        clone.list = new ArrayList<>(seriesCount);
         for (int i = 0; i < seriesCount; i++) {
-            clone.list.add(new HashMap((Map) this.list.get(i)));
+            clone.list.add(new HashMap(this.list.get(i)));
         }
         return clone;
     }

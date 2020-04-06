@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * --------------------
  * ArrowNeedleTest.java
  * --------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 08-Jun-2005 : Version 1 (DG);
  *
  */
 
@@ -44,6 +40,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.junit.Test;
 
 /**
@@ -73,7 +70,7 @@ public class ArrowNeedleTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         ArrowNeedle n1 = new ArrowNeedle(false);
-        ArrowNeedle n2 = (ArrowNeedle) n1.clone();
+        ArrowNeedle n2 = CloneUtils.clone(n1);
         assertTrue(n1 != n2);
         assertTrue(n1.getClass() == n2.getClass());
         assertTrue(n1.equals(n2));
@@ -85,7 +82,7 @@ public class ArrowNeedleTest {
     @Test
     public void testSerialization() {
         ArrowNeedle n1 = new ArrowNeedle(false);
-        ArrowNeedle n2 = (ArrowNeedle) TestUtils.serialised(n1);
+        ArrowNeedle n2 = TestUtils.serialised(n1);
         assertTrue(n1.equals(n2));
     }
 

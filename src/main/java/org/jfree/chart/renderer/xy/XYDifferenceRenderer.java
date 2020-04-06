@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * XYDifferenceRenderer.java
  * -------------------------
- * (C) Copyright 2003-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Richard West, Advanced Micro Devices, Inc. (major rewrite
@@ -35,49 +35,6 @@
  *                   Patrick Schlott
  *                   Christoph Schroeder
  *                   Martin Hoeller
- *
- * Changes:
- * --------
- * 30-Apr-2003 : Version 1 (DG);
- * 30-Jul-2003 : Modified entity constructor (CZ);
- * 20-Aug-2003 : Implemented Cloneable and PublicCloneable (DG);
- * 16-Sep-2003 : Changed ChartRenderingInfo --> PlotRenderingInfo (DG);
- * 09-Feb-2004 : Updated to support horizontal plot orientation (DG);
- * 10-Feb-2004 : Added default constructor, setter methods and updated
- *               Javadocs (DG);
- * 25-Feb-2004 : Replaced CrosshairInfo with CrosshairState (DG);
- * 30-Mar-2004 : Fixed bug in getNegativePaint() method (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
- *               getYValue() (DG);
- * 25-Aug-2004 : Fixed a bug preventing the use of crosshairs (DG);
- * 11-Nov-2004 : Now uses ShapeUtilities to translate shapes (DG);
- * 19-Jan-2005 : Now accesses only primitive values from dataset (DG);
- * 22-Feb-2005 : Override getLegendItem(int, int) to return "line" items (DG);
- * 13-Apr-2005 : Fixed shape positioning bug (id = 1182062) (DG);
- * 20-Apr-2005 : Use generators for legend tooltips and URLs (DG);
- * 04-May-2005 : Override equals() method, renamed get/setPlotShapes() -->
- *               get/setShapesVisible (DG);
- * 09-Jun-2005 : Updated equals() to handle GradientPaint (DG);
- * 16-Jun-2005 : Fix bug (1221021) affecting stroke used for each series (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 24-Jan-2007 : Added flag to allow rounding of x-coordinates, and fixed
- *               bug in clone() (DG);
- * 05-Feb-2007 : Added an extra call to updateCrosshairValues() in
- *               drawItemPass1(), to fix bug 1564967 (DG);
- * 06-Feb-2007 : Fixed bug 1086307, crosshairs with multiple axes (DG);
- * 08-Mar-2007 : Fixed entity generation (DG);
- * 20-Apr-2007 : Updated getLegendItem() for renderer change (DG);
- * 23-Apr-2007 : Rewrite of difference drawing algorithm to allow use of
- *               series with disjoint x-values (RW);
- * 04-May-2007 : Set processVisibleItemsOnly flag to false (DG);
- * 17-May-2007 : Set datasetIndex and seriesIndex in getLegendItem() (DG);
- * 18-May-2007 : Set dataset and seriesKey for LegendItem (DG);
- * 05-Nov-2007 : Draw item labels if visible (RW);
- * 17-Jun-2008 : Apply legend shape, font and paint attributes (DG);
- * 13-Feb-2012 : Applied patch 3450234 for bug 3425881 by Patrick Schlott and
- *               Christoph Schroeder (MH);
- * 03-Jul-2013 : Use ParamChecks (DG);
- * 18-Feb-2017 : Updates for crosshairs (bug #36) (DG);
  *
  */
 
@@ -158,7 +115,7 @@ public class XYDifferenceRenderer extends AbstractXYItemRenderer
      * Creates a new renderer with default attributes.
      */
     public XYDifferenceRenderer() {
-        this(Color.green, Color.RED, false);
+        this(Color.GREEN, Color.RED, false);
     }
 
     /**

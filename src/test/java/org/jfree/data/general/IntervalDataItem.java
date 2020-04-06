@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * ---------------------
  * IntervalDataItem.java
  * ---------------------
- * (C) Copyright 2009, by Object Refinery Limited.
+ * (C) Copyright 2009-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 10-Sep-2009 : Version 1, based on DefaultCategoryDataset (DG);
  *
  */
 
@@ -46,11 +42,11 @@ package org.jfree.data.general;
  */
 public class IntervalDataItem {
 
-    private Number value;
+    private final Number value;
 
-    private Number lowerBound;
+    private final Number lowerBound;
 
-    private Number upperBound;
+    private final Number upperBound;
 
     public IntervalDataItem(Number value, Number lowerBound, Number upperBound) {
         this.value = value;

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,19 +27,10 @@
  * ------------------------
  * MultiplePiePlotTest.java
  * ------------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 16-Jun-2005 : Version 1 (DG);
- * 06-Apr-2006 : Added tests for new fields (DG);
- * 18-Apr-2008 : Added testConstructor() (DG);
- * 30-Dec-2008 : Updated for new legendItemShape field (DG);
- * 01-Jun-2009 : Added test for getLegendItems() bug, series key is not
- *               set (DG);
  *
  */
 
@@ -61,6 +52,7 @@ import org.jfree.chart.LegendItemCollection;
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.event.PlotChangeListener;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.TableOrder;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.junit.Test;
@@ -94,7 +86,7 @@ public class MultiplePiePlotTest implements PlotChangeListener {
 
         // the following checks that the plot registers itself as a listener
         // with the dataset passed to the constructor - see patch 1943021
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String,String> dataset = new DefaultCategoryDataset<>();
         plot = new MultiplePiePlot(dataset);
         assertTrue(dataset.hasListener(plot));
     }
@@ -152,7 +144,7 @@ public class MultiplePiePlotTest implements PlotChangeListener {
         MultiplePiePlot p1 = new MultiplePiePlot();
         Rectangle2D rect = new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0);
         p1.setLegendItemShape(rect);
-        MultiplePiePlot p2 = (MultiplePiePlot) p1.clone();
+        MultiplePiePlot p2 = CloneUtils.clone(p1);
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
@@ -170,7 +162,7 @@ public class MultiplePiePlotTest implements PlotChangeListener {
         MultiplePiePlot p1 = new MultiplePiePlot(null);
         p1.setAggregatedItemsPaint(new GradientPaint(1.0f, 2.0f, Color.YELLOW,
                 3.0f, 4.0f, Color.RED));
-        MultiplePiePlot p2 = (MultiplePiePlot) TestUtils.serialised(p1);
+        MultiplePiePlot p2 = TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 
@@ -179,7 +171,7 @@ public class MultiplePiePlotTest implements PlotChangeListener {
      */
     @Test
     public void testGetLegendItems() {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String,String> dataset = new DefaultCategoryDataset<>();
         dataset.addValue(35.0, "S1", "C1");
         dataset.addValue(45.0, "S1", "C2");
         dataset.addValue(55.0, "S2", "C1");

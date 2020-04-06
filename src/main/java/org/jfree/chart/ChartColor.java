@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,19 +27,10 @@
  * ---------------
  * ChartColor.java
  * ---------------
- * (C) Copyright 2003-2016, by Cameron Riley and Contributors.
+ * (C) Copyright 2003-2020, by Cameron Riley and Contributors.
  *
  * Original Author:  Cameron Riley;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 23-Jan-2003 : Version 1, contributed by Cameron Riley (DG);
- * 25-Nov-2004 : Changed first 7 colors to softer shades (DG);
- * 03-Nov-2005 : Removed orange color, too close to yellow - see bug
- *               report 1328408 (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
  *
  */
 
@@ -51,7 +42,7 @@ import java.awt.Paint;
 /**
  * Class to extend the number of Colors available to the charts. This
  * extends the java.awt.Color object and extends the number of final
- * Colors publically accessible.
+ * Colors publicly accessible.
  */
 public class ChartColor extends Color {
 
@@ -155,22 +146,22 @@ public class ChartColor extends Color {
             new Color(0xFF, 0xFF, 0x55),
             new Color(0xFF, 0x55, 0xFF),
             new Color(0x55, 0xFF, 0xFF),
-            Color.pink,
-            Color.gray,
+            Color.PINK,
+            Color.GRAY,
             ChartColor.DARK_RED,
             ChartColor.DARK_BLUE,
             ChartColor.DARK_GREEN,
             ChartColor.DARK_YELLOW,
             ChartColor.DARK_MAGENTA,
             ChartColor.DARK_CYAN,
-            Color.darkGray,
+            Color.DARK_GRAY,
             ChartColor.LIGHT_RED,
             ChartColor.LIGHT_BLUE,
             ChartColor.LIGHT_GREEN,
             ChartColor.LIGHT_YELLOW,
             ChartColor.LIGHT_MAGENTA,
             ChartColor.LIGHT_CYAN,
-            Color.lightGray,
+            Color.LIGHT_GRAY,
             ChartColor.VERY_DARK_RED,
             ChartColor.VERY_DARK_BLUE,
             ChartColor.VERY_DARK_GREEN,

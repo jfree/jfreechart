@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2018, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * AbstractOverlay.java
  * --------------------
- * (C) Copyright 2009-2018, by Object Refinery Limited.
+ * (C) Copyright 2009-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -51,7 +51,7 @@ import org.jfree.chart.util.Args;
 public class AbstractOverlay {
 
     /** Storage for registered change listeners. */
-    private transient EventListenerList changeListeners;
+    private final transient EventListenerList changeListeners;
 
     /**
      * Default constructor.

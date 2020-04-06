@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * --------------
  * StrokeMap.java
  * --------------
- * (C) Copyright 2006-2016, by Object Refinery Limited.
+ * (C) Copyright 2006-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 27-Sep-2006 : Version 1 (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
- * 19-Jan-2019 : Added missing hashCode (TH);
  *
  */
 
@@ -66,13 +60,13 @@ import org.jfree.chart.util.SerialUtils;
  *
  * @since 1.0.3
  */
-public class StrokeMap implements Cloneable, Serializable {
+public class StrokeMap<K extends Comparable<K>> implements Cloneable, Serializable {
 
     /** For serialization. */
     static final long serialVersionUID = -8148916785963525169L;
 
     /** Storage for the keys and values. */
-    private transient Map store;
+    private transient Map<K, Stroke> store;
 
     /**
      * Creates a new (empty) map.
@@ -92,9 +86,9 @@ public class StrokeMap implements Cloneable, Serializable {
      * @throws IllegalArgumentException if {@code key} is
      *     {@code null}.
      */
-    public Stroke getStroke(Comparable key) {
+    public Stroke getStroke(K key) {
         Args.nullNotPermitted(key, "key");
-        return (Stroke) this.store.get(key);
+        return this.store.get(key);
     }
 
     /**
@@ -106,7 +100,7 @@ public class StrokeMap implements Cloneable, Serializable {
      * @return {@code true} if the map contains the specified key, and
      * {@code false} otherwise.
      */
-    public boolean containsKey(Comparable key) {
+    public boolean containsKey(K key) {
         return this.store.containsKey(key);
     }
 
@@ -117,7 +111,7 @@ public class StrokeMap implements Cloneable, Serializable {
      * @param key  the key ({@code null} not permitted).
      * @param stroke  the stroke.
      */
-    public void put(Comparable key, Stroke stroke) {
+    public void put(K key, Stroke stroke) {
         Args.nullNotPermitted(key, "key");
         this.store.put(key, stroke);
     }
@@ -149,9 +143,9 @@ public class StrokeMap implements Cloneable, Serializable {
             return false;
         }
         Set keys = this.store.keySet();
-        Iterator iterator = keys.iterator();
+        Iterator<K> iterator = keys.iterator();
         while (iterator.hasNext()) {
-            Comparable key = (Comparable) iterator.next();
+            K key = iterator.next();
             Stroke s1 = getStroke(key);
             Stroke s2 = that.getStroke(key);
             if (!ObjectUtils.equal(s1, s2)) {
@@ -178,7 +172,7 @@ public class StrokeMap implements Cloneable, Serializable {
     @Override
     public Object clone() throws CloneNotSupportedException {
         StrokeMap clone = (StrokeMap) super.clone();
-        clone.store = new TreeMap();
+        clone.store = new TreeMap<>();
         clone.store.putAll(this.store);
         // TODO: I think we need to make sure the keys are actually cloned,
         // whereas the stroke instances are always immutable so they're OK
@@ -195,10 +189,7 @@ public class StrokeMap implements Cloneable, Serializable {
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
         stream.writeInt(this.store.size());
-        Set keys = this.store.keySet();
-        Iterator iterator = keys.iterator();
-        while (iterator.hasNext()) {
-            Comparable key = (Comparable) iterator.next();
+        for (K key : this.store.keySet()) {
             stream.writeObject(key);
             Stroke stroke = getStroke(key);
             SerialUtils.writeStroke(stroke, stream);
@@ -216,10 +207,10 @@ public class StrokeMap implements Cloneable, Serializable {
     private void readObject(ObjectInputStream stream)
             throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
-        this.store = new TreeMap();
+        this.store = new TreeMap<>();
         int keyCount = stream.readInt();
         for (int i = 0; i < keyCount; i++) {
-            Comparable key = (Comparable) stream.readObject();
+            K key = (K) stream.readObject();
             Stroke stroke = SerialUtils.readStroke(stream);
             this.store.put(key, stroke);
         }

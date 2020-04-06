@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * ---------------
  * NumberTick.java
  * ---------------
- * (C) Copyright 2003-2008, by Object Refinery Limited.
+ * (C) Copyright 2003-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 07-Nov-2003 : Version 1 (DG);
- * 02-Aug-2007 : Added new constructor with tick type (DG);
  *
  */
 
@@ -49,7 +44,7 @@ import org.jfree.chart.ui.TextAnchor;
 public class NumberTick extends ValueTick {
 
     /** The number. */
-    private Number number;
+    private final Number number;
 
     /**
      * Creates a new tick.
@@ -84,12 +79,9 @@ public class NumberTick extends ValueTick {
      * @since 1.0.7
      */
     public NumberTick(TickType tickType, double value, String label,
-                      TextAnchor textAnchor,
-                      TextAnchor rotationAnchor, double angle) {
-
+            TextAnchor textAnchor, TextAnchor rotationAnchor, double angle) {
         super(tickType, value, label, textAnchor, rotationAnchor, angle);
-        this.number = new Double(value);
-
+        this.number = value;
     }
 
     /**

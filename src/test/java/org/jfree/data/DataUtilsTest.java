@@ -67,7 +67,7 @@ public class DataUtilsTest {
      */
     @Test
     public void testCalculateColumnTotal() {
-        DefaultKeyedValues2D table = new DefaultKeyedValues2D();
+        DefaultKeyedValues2D<String, String> table = new DefaultKeyedValues2D<>();
         table.addValue(1.0, "R0", "C0");
         table.addValue(2.0, "R0", "C1");
         table.addValue(3.0, "R1", "C0");
@@ -83,7 +83,7 @@ public class DataUtilsTest {
      */
     @Test
     public void testCalculateColumnTotal2() {
-        DefaultKeyedValues2D table = new DefaultKeyedValues2D();
+        DefaultKeyedValues2D<String, String> table = new DefaultKeyedValues2D<>();
         table.addValue(1.0, "R0", "C0");
         table.addValue(2.0, "R0", "C1");
         table.addValue(3.0, "R1", "C0");
@@ -116,7 +116,7 @@ public class DataUtilsTest {
      */
     @Test
     public void testCalculateRowTotal() {
-        DefaultKeyedValues2D table = new DefaultKeyedValues2D();
+        DefaultKeyedValues2D<String, String> table = new DefaultKeyedValues2D<>();
         table.addValue(1.0, "R0", "C0");
         table.addValue(2.0, "R0", "C1");
         table.addValue(3.0, "R1", "C0");
@@ -132,7 +132,7 @@ public class DataUtilsTest {
      */
     @Test
     public void testCalculateRowTotal2() {
-        DefaultKeyedValues2D table = new DefaultKeyedValues2D();
+        DefaultKeyedValues2D<String, String> table = new DefaultKeyedValues2D<>();
         table.addValue(1.0, "R0", "C0");
         table.addValue(2.0, "R0", "C1");
         table.addValue(3.0, "R1", "C0");

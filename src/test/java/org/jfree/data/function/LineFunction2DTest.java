@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * -----------------------
  * LineFunction2DTest.java
  * -----------------------
- * (C) Copyright 2009-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2009-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 28-May-2009 : Version 1 (DG);
  *
  */
 
@@ -45,6 +41,7 @@ import org.jfree.chart.TestUtils;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import org.junit.Test;
+
 /**
  * Tests for the {@link LineFunction2D} class.
  */
@@ -84,7 +81,7 @@ public class LineFunction2DTest {
     @Test
     public void testSerialization() {
         LineFunction2D f1 = new LineFunction2D(1.0, 2.0);
-        LineFunction2D f2 = (LineFunction2D) TestUtils.serialised(f1);
+        LineFunction2D f2 = TestUtils.serialised(f1);
         assertEquals(f1, f2);
     }
 

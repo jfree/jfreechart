@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,17 +27,10 @@
  * -----------------------------
  * XYDrawableAnnotationTest.java
  * -----------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited.
+ * (C) Copyright 2003-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 19-Aug-2003 : Version 1 (DG);
- * 01-Oct-2004 : Fixed bugs in tests (DG);
- * 07-Jan-2005 : Added hashCode() test (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG);
  *
  */
 
@@ -197,7 +190,7 @@ public class XYDrawableAnnotationTest {
     public void testSerialization() {
         XYDrawableAnnotation a1 = new XYDrawableAnnotation(10.0, 20.0, 100.0,
                 200.0, new TestDrawable());
-        XYDrawableAnnotation a2 = (XYDrawableAnnotation) TestUtils.serialised(a1);
+        XYDrawableAnnotation a2 = TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 

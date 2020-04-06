@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -24,18 +24,13 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ------------------------------
- * CategoryToPieDatasetTests.java
- * ------------------------------
- * (C) Copyright 2006-2016, by Object Refinery Limited and Contributors.
+ * -----------------------------
+ * CategoryToPieDatasetTest.java
+ * -----------------------------
+ * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 26-Jul-2006 : Version 1 (DG);
- * 01-Aug-2006 : Added testGetIndex() method (DG);
  *
  */
 
@@ -75,13 +70,13 @@ public class CategoryToPieDatasetTest {
      */
     @Test
     public void testGetValue() {
-        DefaultCategoryDataset underlying = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> underlying = new DefaultCategoryDataset<>();
         underlying.addValue(1.1, "R1", "C1");
         underlying.addValue(2.2, "R1", "C2");
         CategoryToPieDataset d1 = new CategoryToPieDataset(underlying,
                 TableOrder.BY_ROW, 0);
-        assertEquals(d1.getValue("C1"), new Double(1.1));
-        assertEquals(d1.getValue("C2"), new Double(2.2));
+        assertEquals(d1.getValue("C1"), 1.1);
+        assertEquals(d1.getValue("C2"), 2.2);
 
         // check negative index throws exception
         try {
@@ -118,7 +113,7 @@ public class CategoryToPieDatasetTest {
      */
     @Test
     public void testGetKey() {
-        DefaultCategoryDataset underlying = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> underlying = new DefaultCategoryDataset<>();
         underlying.addValue(1.1, "R1", "C1");
         underlying.addValue(2.2, "R1", "C2");
         CategoryToPieDataset d1 = new CategoryToPieDataset(underlying,
@@ -161,7 +156,7 @@ public class CategoryToPieDatasetTest {
      */
     @Test
     public void testGetIndex() {
-        DefaultCategoryDataset underlying = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> underlying = new DefaultCategoryDataset<>();
         underlying.addValue(1.1, "R1", "C1");
         underlying.addValue(2.2, "R1", "C2");
         CategoryToPieDataset d1 = new CategoryToPieDataset(underlying,
@@ -186,7 +181,7 @@ public class CategoryToPieDatasetTest {
      */
     @Test
     public void testEquals() {
-        DefaultCategoryDataset underlying = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> underlying = new DefaultCategoryDataset<>();
         underlying.addValue(1.1, "R1", "C1");
         underlying.addValue(2.2, "R1", "C2");
         CategoryToPieDataset d1 = new CategoryToPieDataset(underlying,
@@ -201,7 +196,7 @@ public class CategoryToPieDatasetTest {
      */
     @Test
     public void testSerialization() {
-        DefaultCategoryDataset underlying = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> underlying = new DefaultCategoryDataset<>();
         underlying.addValue(1.1, "R1", "C1");
         underlying.addValue(2.2, "R1", "C2");
         CategoryToPieDataset d1 = new CategoryToPieDataset(underlying,

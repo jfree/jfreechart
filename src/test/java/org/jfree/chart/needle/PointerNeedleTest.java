@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * ----------------------
  * PointerNeedleTest.java
  * ----------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 08-Jun-2005 : Version 1 (DG);
  *
  */
 
@@ -43,6 +39,7 @@ package org.jfree.chart.needle;
 import static org.junit.Assert.assertTrue;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.junit.Test;
 
 /**
@@ -67,7 +64,7 @@ public class PointerNeedleTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         PointerNeedle n1 = new PointerNeedle();
-        PointerNeedle n2 = (PointerNeedle) n1.clone();
+        PointerNeedle n2 = CloneUtils.clone(n1);
         assertTrue(n1 != n2);
         assertTrue(n1.getClass() == n2.getClass());
         assertTrue(n1.equals(n2));
@@ -79,7 +76,7 @@ public class PointerNeedleTest {
     @Test
     public void testSerialization() {
         PointerNeedle n1 = new PointerNeedle();
-        PointerNeedle n2 = (PointerNeedle) TestUtils.serialised(n1);
+        PointerNeedle n2 = TestUtils.serialised(n1);
         assertTrue(n1.equals(n2));
     }
 

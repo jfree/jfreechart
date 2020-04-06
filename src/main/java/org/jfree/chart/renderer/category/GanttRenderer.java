@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,29 +27,10 @@
  * ------------------
  * GanttRenderer.java
  * ------------------
- * (C) Copyright 2003-2017, by Object Refinery Limited.
+ * (C) Copyright 2003-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 16-Sep-2003 : Version 1 (DG);
- * 23-Sep-2003 : Fixed Checkstyle issues (DG);
- * 21-Oct-2003 : Bar width moved into CategoryItemRendererState (DG);
- * 03-Feb-2004 : Added get/set methods for attributes (DG);
- * 12-Aug-2004 : Fixed rendering problem with maxBarWidth attribute (DG);
- * 05-Nov-2004 : Modified drawItem() signature (DG);
- * 20-Apr-2005 : Renamed CategoryLabelGenerator
- *               --> CategoryItemLabelGenerator (DG);
- * 01-Dec-2005 : Fix for bug 1369954, drawBarOutline flag ignored (DG);
- * ------------- JFREECHART 1.0.x --------------------------------------------
- * 17-Jan-2006 : Set includeBaseInRange flag to false (DG);
- * 20-Mar-2007 : Implemented equals() and fixed serialization (DG);
- * 24-Jun-2008 : Added new barPainter mechanism (DG);
- * 26-Jun-2008 : Added crosshair support (DG);
- * 19-May-2009 : Fixed FindBugs warnings, patch by Michal Wozniak (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  * 
  */
 
@@ -117,7 +98,7 @@ public class GanttRenderer extends IntervalBarRenderer
     public GanttRenderer() {
         super();
         setIncludeBaseInRange(false);
-        this.completePaint = Color.green;
+        this.completePaint = Color.GREEN;
         this.incompletePaint = Color.RED;
         this.startPercent = 0.35;
         this.endPercent = 0.65;
@@ -126,7 +107,7 @@ public class GanttRenderer extends IntervalBarRenderer
     /**
      * Returns the paint used to show the percentage complete.
      *
-     * @return The paint (never {@code null}.
+     * @return The paint (never {@code null}).
      *
      * @see #setCompletePaint(Paint)
      */

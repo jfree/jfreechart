@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * -----------------------------
  * WaterfallBarRendererTest.java
  * -----------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 21-Oct-2003 : Version 1 (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG);
- * 04-Feb-2009 : Added testFindRangeBounds() (DG);
  *
  */
 
@@ -50,6 +44,7 @@ import static org.junit.Assert.assertNull;
 import java.awt.Color;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.Test;
@@ -122,7 +117,7 @@ public class WaterfallBarRendererTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         WaterfallBarRenderer r1 = new WaterfallBarRenderer();
-        WaterfallBarRenderer r2 = (WaterfallBarRenderer) r1.clone();
+        WaterfallBarRenderer r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -150,8 +145,7 @@ public class WaterfallBarRendererTest {
     @Test
     public void testSerialization() {
         WaterfallBarRenderer r1 = new WaterfallBarRenderer();
-        WaterfallBarRenderer r2 = (WaterfallBarRenderer) 
-                TestUtils.serialised(r1);
+        WaterfallBarRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

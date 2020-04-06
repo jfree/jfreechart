@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,18 +27,10 @@
  * -----------------------
  * StandardChartTheme.java
  * -----------------------
- * (C) Copyright 2008-2017, by Object Refinery Limited.
+ * (C) Copyright 2008-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 14-Aug-2008 : Version 1 (DG);
- * 10-Apr-2009 : Added getter/setter for smallFont (DG);
- * 10-Jul-2009 : Added shadowGenerator field (DG);
- * 29-Oct-2011 : Fixed Eclipse warnings (DG);
- * 02-Jul-2013 : Use ParamChecks class (DG);
  *
  */
 
@@ -1310,7 +1302,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
      *
      * @param plot  the plot ({@code null} not permitted).
      */
-    protected void applyToXYPlot(XYPlot plot) {
+    protected <S extends Comparable<S>> void  applyToXYPlot(XYPlot<S> plot) {
         plot.setAxisOffset(this.axisOffset);
         plot.setDomainZeroBaselinePaint(this.baselinePaint);
         plot.setRangeZeroBaselinePaint(this.baselinePaint);
@@ -1346,19 +1338,15 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
                 applyToXYItemRenderer(r);
             }
         }
-
         // process all annotations
-        Iterator iter = plot.getAnnotations().iterator();
-        while (iter.hasNext()) {
-            XYAnnotation a = (XYAnnotation) iter.next();
+
+        for (XYAnnotation a : plot.getAnnotations()) {
             applyToXYAnnotation(a);
         }
 
         if (plot instanceof CombinedDomainXYPlot) {
             CombinedDomainXYPlot cp = (CombinedDomainXYPlot) plot;
-            Iterator iterator = cp.getSubplots().iterator();
-            while (iterator.hasNext()) {
-                XYPlot subplot = (XYPlot) iterator.next();
+            for (XYPlot subplot : cp.getSubplots()) {
                 if (subplot != null) {
                     applyToPlot(subplot);
                 }
@@ -1366,9 +1354,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
         }
         if (plot instanceof CombinedRangeXYPlot) {
             CombinedRangeXYPlot cp = (CombinedRangeXYPlot) plot;
-            Iterator iterator = cp.getSubplots().iterator();
-            while (iterator.hasNext()) {
-                XYPlot subplot = (XYPlot) iterator.next();
+            for (XYPlot subplot : cp.getSubplots()) {
                 if (subplot != null) {
                     applyToPlot(subplot);
                 }

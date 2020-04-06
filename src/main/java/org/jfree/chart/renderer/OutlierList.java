@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,18 +27,11 @@
  * ----------------
  * OutlierList.java
  * ----------------
- * (C) Copyright 2003-2008, by David Browning and Contributors.
+ * (C) Copyright 2003-2020, by David Browning and Contributors.
  *
  * Original Author:  David Browning (for Australian Institute of Marine
  *                   Science);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 05-Aug-2003 : Version 1, contributed by David Browning (DG);
- * 28-Aug-2003 : Minor tidy-up including Javadocs (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 02-Feb-2007 : Removed author tags from all over JFreeChart sources (DG);
  *
  */
 
@@ -46,7 +39,6 @@ package org.jfree.chart.renderer;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -66,7 +58,7 @@ import java.util.List;
 public class OutlierList {
 
     /** Storage for the outliers. */
-    private List outliers;
+    private final List<Outlier> outliers;
 
     /** The averaged outlier. */
     private Outlier averagedOutlier;
@@ -83,7 +75,7 @@ public class OutlierList {
      * @param outlier  the outlier.
      */
     public OutlierList(Outlier outlier) {
-        this.outliers = new ArrayList();
+        this.outliers = new ArrayList<>();
         setAveragedOutlier(outlier);
     }
 
@@ -154,11 +146,9 @@ public class OutlierList {
      * @return A boolean.
      */
     public boolean isOverlapped(Outlier other) {
-
         if (other == null) {
             return false;
         }
-
         boolean result = other.overlaps(getAveragedOutlier());
         return result;
 
@@ -172,9 +162,7 @@ public class OutlierList {
         double totalXCoords = 0.0;
         double totalYCoords = 0.0;
         int size = getItemCount();
-        for (Iterator iterator = this.outliers.iterator();
-                iterator.hasNext();) {
-            Outlier o = (Outlier) iterator.next();
+        for (Outlier o : this.outliers) {
             totalXCoords += o.getX();
             totalYCoords += o.getY();
         }

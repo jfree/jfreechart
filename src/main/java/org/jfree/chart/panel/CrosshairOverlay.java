@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2018, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * CrosshairOverlay.java
  * ---------------------
- * (C) Copyright 2011-2018, by Object Refinery Limited.
+ * (C) Copyright 2011-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   John Matthews;
@@ -86,8 +86,8 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
      */
     public CrosshairOverlay() {
         super();
-        this.xCrosshairs = new java.util.ArrayList<Crosshair>();
-        this.yCrosshairs = new java.util.ArrayList<Crosshair>();
+        this.xCrosshairs = new ArrayList<>();
+        this.yCrosshairs = new ArrayList<>();
     }
 
     /**
@@ -143,7 +143,7 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
      * @return A list of crosshairs.
      */
     public List<Crosshair> getDomainCrosshairs() {
-        return new ArrayList<Crosshair>(this.xCrosshairs);
+        return new ArrayList<>(this.xCrosshairs);
     }
 
     /**
@@ -196,7 +196,7 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
      * @return A list of crosshairs.
      */
     public List<Crosshair> getRangeCrosshairs() {
-        return new ArrayList<Crosshair>(this.yCrosshairs);
+        return new ArrayList<>(this.yCrosshairs);
     }
 
     /**

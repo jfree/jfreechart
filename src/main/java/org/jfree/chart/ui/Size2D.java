@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -108,6 +108,7 @@ public class Size2D implements Cloneable, PublicCloneable, Serializable {
      * 
      * @return A string.
      */
+    @Override
     public String toString() {
         return "Size2D[width=" + this.width + ", height=" + this.height + "]";   
     }
@@ -119,6 +120,7 @@ public class Size2D implements Cloneable, PublicCloneable, Serializable {
      * 
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
@@ -143,6 +145,7 @@ public class Size2D implements Cloneable, PublicCloneable, Serializable {
      * 
      * @throws CloneNotSupportedException if the object cannot be cloned.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }

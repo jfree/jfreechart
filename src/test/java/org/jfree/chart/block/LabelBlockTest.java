@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * -------------------
  * LabelBlockTest.java
  * -------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 01-Sep-2005 : Version 1 (DG);
- * 16-Mar-2007 : Check GradientPaint in testSerialization() (DG);
- * 10-Feb-2009 : Added new fields to testEquals() (DG);
  *
  */
 
@@ -53,6 +47,7 @@ import java.awt.GradientPaint;
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.text.TextBlockAnchor;
 import org.jfree.chart.ui.RectangleAnchor;
+import org.jfree.chart.util.CloneUtils;
 
 import org.junit.Test;
 
@@ -122,7 +117,7 @@ public class LabelBlockTest {
     public void testCloning() throws CloneNotSupportedException {
         LabelBlock b1 = new LabelBlock("ABC", new Font("Dialog",
                 Font.PLAIN, 12), Color.RED);
-        LabelBlock b2 = (LabelBlock) b1.clone();
+        LabelBlock b2 = CloneUtils.clone(b1);
         assertTrue(b1 != b2);
         assertTrue(b1.getClass() == b2.getClass());
         assertTrue(b1.equals(b2));
@@ -137,7 +132,7 @@ public class LabelBlockTest {
                 Color.BLUE);
         LabelBlock b1 = new LabelBlock("ABC", new Font("Dialog",
                 Font.PLAIN, 12), gp);
-        LabelBlock b2 = (LabelBlock) TestUtils.serialised(b1);
+        LabelBlock b2 = TestUtils.serialised(b1);
         assertEquals(b1, b2);
     }
 

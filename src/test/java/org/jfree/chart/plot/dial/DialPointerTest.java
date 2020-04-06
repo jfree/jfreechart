@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * --------------------
  * DialPointerTest.java
  * --------------------
- * (C) Copyright 2007-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 30-Apr-2007 : Version 1 (DG);
- * 23-Nov-2007 : Added testEqualsPointer() and testSerialization2() (DG);
  *
  */
 
@@ -49,6 +44,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.junit.Test;
 
 /**
@@ -87,9 +83,9 @@ public class DialPointerTest {
         DialPointer.Pin p2 = new DialPointer.Pin();
         assertEquals(p1, p2);
 
-        p1.setPaint(Color.green);
+        p1.setPaint(Color.GREEN);
         assertFalse(p1.equals(p2));
-        p2.setPaint(Color.green);
+        p2.setPaint(Color.GREEN);
         assertTrue(p1.equals(p2));
 
         BasicStroke s = new BasicStroke(4.4f);
@@ -108,14 +104,14 @@ public class DialPointerTest {
         DialPointer.Pointer p2 = new DialPointer.Pointer();
         assertEquals(p1, p2);
 
-        p1.setFillPaint(Color.green);
+        p1.setFillPaint(Color.GREEN);
         assertFalse(p1.equals(p2));
-        p2.setFillPaint(Color.green);
+        p2.setFillPaint(Color.GREEN);
         assertTrue(p1.equals(p2));
 
-        p1.setOutlinePaint(Color.green);
+        p1.setOutlinePaint(Color.GREEN);
         assertFalse(p1.equals(p2));
-        p2.setOutlinePaint(Color.green);
+        p2.setOutlinePaint(Color.GREEN);
         assertTrue(p1.equals(p2));
     }
 
@@ -138,7 +134,7 @@ public class DialPointerTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         DialPointer i1 = new DialPointer.Pin(1);
-        DialPointer i2 = (DialPointer) i1.clone();
+        DialPointer i2 = CloneUtils.clone(i1);
         assertTrue(i1 != i2);
         assertTrue(i1.getClass() == i2.getClass());
         assertTrue(i1.equals(i2));
@@ -157,7 +153,7 @@ public class DialPointerTest {
     public void testSerialization() {
         // test a default instance
         DialPointer i1 = new DialPointer.Pin(1);
-        DialPointer i2 = (DialPointer) TestUtils.serialised(i1);
+        DialPointer i2 = TestUtils.serialised(i1);
         assertEquals(i1, i2);
     }
 
@@ -167,7 +163,7 @@ public class DialPointerTest {
     @Test
     public void testSerialization2() {
         DialPointer i1 = new DialPointer.Pointer(1);
-        DialPointer i2 = (DialPointer) TestUtils.serialised(i1);
+        DialPointer i2 = TestUtils.serialised(i1);
         assertEquals(i1, i2);
     }
 }

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * ------------------------
  * GridArrangementTest.java
  * ------------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 08-Mar-2005 : Version 1 (DG);
- * 03-Dec-2008 : Added more tests (DG);
  *
  */
 
@@ -92,7 +87,7 @@ public class GridArrangementTest {
     @Test
     public void testSerialization() {
         GridArrangement f1 = new GridArrangement(33, 44);
-        GridArrangement f2 = (GridArrangement) TestUtils.serialised(f1);
+        GridArrangement f2 = TestUtils.serialised(f1);
         assertEquals(f1, f2);
     }
 

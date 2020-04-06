@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * ------------------
  * ValueAxisTest.java
  * ------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 13-Aug-2003 : Version 1 (DG);
- * 22-Mar-2007 : Extended testEquals() for new field (DG);
- * 04-Sep-2012 : Added test3555275() (DG);
  *
  */
 
@@ -212,10 +206,10 @@ public class ValueAxisTest {
      */
     @Test
     public void testAxisMargins() {
-        XYSeries series = new XYSeries("S1");
+        XYSeries<String> series = new XYSeries<>("S1");
         series.add(100.0, 1.1);
         series.add(200.0, 2.2);
-        XYSeriesCollection dataset = new XYSeriesCollection(series);
+        XYSeriesCollection<String> dataset = new XYSeriesCollection<>(series);
         dataset.setIntervalWidth(0.0);
         JFreeChart chart = ChartFactory.createScatterPlot("Title", "X", "Y", 
                 dataset);
@@ -234,7 +228,7 @@ public class ValueAxisTest {
      */
     @Test
     public void test3555275() {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         JFreeChart chart = ChartFactory.createLineChart("Title", "X", "Y",
                 dataset, PlotOrientation.VERTICAL, true, false, false);
         CategoryPlot plot = (CategoryPlot) chart.getPlot();

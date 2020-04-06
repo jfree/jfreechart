@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * -------------------------
  * CrosshairOverlayTest.java
  * -------------------------
- * (C) Copyright 2009-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2009-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 10-Apr-2009 : Version 1 (DG);
  *
  */
 
@@ -51,6 +47,7 @@ import java.awt.GradientPaint;
 import org.jfree.chart.TestUtils;
 
 import org.jfree.chart.plot.Crosshair;
+import org.jfree.chart.util.CloneUtils;
 import org.junit.Test;
 
 /**
@@ -77,7 +74,7 @@ public class CrosshairOverlayTest {
         o1.addDomainCrosshair(new Crosshair(99.9));
         o1.addRangeCrosshair(new Crosshair(1.23, new GradientPaint(1.0f, 2.0f,
                 Color.RED, 3.0f, 4.0f, Color.BLUE), new BasicStroke(1.1f)));
-        CrosshairOverlay o2 = (CrosshairOverlay) TestUtils.serialised(o1);
+        CrosshairOverlay o2 = TestUtils.serialised(o1);
         assertEquals(o1, o2);
     }
 
@@ -90,7 +87,7 @@ public class CrosshairOverlayTest {
         o1.addDomainCrosshair(new Crosshair(99.9));
         o1.addRangeCrosshair(new Crosshair(1.23, new GradientPaint(1.0f, 2.0f,
                 Color.RED, 3.0f, 4.0f, Color.BLUE), new BasicStroke(1.1f)));
-        CrosshairOverlay o2 = (CrosshairOverlay) o1.clone();
+        CrosshairOverlay o2 = CloneUtils.clone(o1);
         assertTrue(o1 != o2);
         assertTrue(o1.getClass() == o2.getClass());
         assertTrue(o1.equals(o2));

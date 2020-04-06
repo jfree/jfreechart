@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,39 +27,10 @@
  * ---------------
  * PeriodAxis.java
  * ---------------
- * (C) Copyright 2004-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 01-Jun-2004 : Version 1 (DG);
- * 16-Sep-2004 : Fixed bug in equals() method, added clone() method and
- *               PublicCloneable interface (DG);
- * 25-Nov-2004 : Updates to support major and minor tick marks (DG);
- * 25-Feb-2005 : Fixed some tick mark bugs (DG);
- * 15-Apr-2005 : Fixed some more tick mark bugs (DG);
- * 26-Apr-2005 : Removed LOGGER (DG);
- * 16-Jun-2005 : Fixed zooming (DG);
- * 15-Sep-2005 : Changed configure() method to check autoRange flag,
- *               and added ticks to state (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 06-Oct-2006 : Updated for deprecations in RegularTimePeriod and
- *               subclasses (DG);
- * 22-Mar-2007 : Use new defaultAutoRange attribute (DG);
- * 31-Jul-2007 : Fix for inverted axis labelling (see bug 1763413) (DG);
- * 08-Apr-2008 : Notify listeners in setRange(Range, boolean, boolean) - fixes
- *               bug 1932146 (DG);
- * 16-Jan-2009 : Fixed bug 2490803, a problem in the setRange() method (DG);
- * 02-Mar-2009 : Added locale - see patch 2569670 by Benjamin Bignell (DG);
- * 02-Mar-2009 : Fixed draw() method to check tickMarksVisible and
- *               tickLabelsVisible (DG);
- * 19-May-2009 : Fixed FindBugs warnings, patch by Michal Wozniak (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
- * 25-Jul-2013 : Fix for axis timezone and label formatting, bug 1107 (DG);
- * 01-Aug-2013 : Added attributedLabel override to support superscripts,
- *               subscripts and more (DG);
  *
  */
 
@@ -598,8 +569,7 @@ public class PeriodAxis extends ValueAxis
         double labelHeight, labelWidth;
         double tickLabelBandsDimension = 0.0;
 
-        for (int i = 0; i < this.labelInfo.length; i++) {
-            PeriodAxisLabelInfo info = this.labelInfo[i];
+        for (PeriodAxisLabelInfo info : this.labelInfo) {
             FontMetrics fm = g2.getFontMetrics(info.getLabelFont());
             tickLabelBandsDimension
                 += info.getPadding().extendHeight(fm.getHeight());

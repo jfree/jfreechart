@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------
  * CategoryLabelEntity.java
  * ------------------------
- * (C) Copyright 2006-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -52,10 +52,10 @@ import org.jfree.chart.util.ObjectUtils;
  *
  * @since 1.0.3
  */
-public class CategoryLabelEntity extends TickLabelEntity {
+public class CategoryLabelEntity<C extends Comparable<C>> extends TickLabelEntity {
 
     /** The category key. */
-    private Comparable key;
+    private final C key;
 
     /**
      * Creates a new entity.
@@ -65,8 +65,8 @@ public class CategoryLabelEntity extends TickLabelEntity {
      * @param toolTipText  the tool tip text.
      * @param urlText  the URL text.
      */
-    public CategoryLabelEntity(Comparable key, Shape area,
-            String toolTipText, String urlText) {
+    public CategoryLabelEntity(C key, Shape area, String toolTipText, 
+            String urlText) {
         super(area, toolTipText, urlText);
         this.key = key;
     }
@@ -76,7 +76,7 @@ public class CategoryLabelEntity extends TickLabelEntity {
      *
      * @return The category key.
      */
-    public Comparable getKey() {
+    public C getKey() {
         return this.key;
     }
 
@@ -95,7 +95,7 @@ public class CategoryLabelEntity extends TickLabelEntity {
         if (!(obj instanceof CategoryLabelEntity)) {
             return false;
         }
-        CategoryLabelEntity that = (CategoryLabelEntity) obj;
+        CategoryLabelEntity<C> that = (CategoryLabelEntity) obj;
         if (!ObjectUtils.equal(this.key, that.key)) {
             return false;
         }

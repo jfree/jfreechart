@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,17 +27,10 @@
  * --------------------------------
  * DefaultCategoryDatasetTests.java
  * --------------------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 23-Mar-2004 : Version 1 (DG);
- * 08-Mar-2007 : Added testCloning() (DG);
- * 21-Nov-2007 : Added testBug1835955() method (DG);
- * 09-May-2008 : Added testPublicCloneable() (DG);
  *
  */
 
@@ -63,9 +56,9 @@ public class DefaultCategoryDatasetTest {
      */
     @Test
     public void testGetValue() {
-        DefaultCategoryDataset d = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> d = new DefaultCategoryDataset<>();
         d.addValue(1.0, "R1", "C1");
-        assertEquals(new Double(1.0), d.getValue("R1", "C1"));
+        assertEquals(1.0, d.getValue("R1", "C1"));
         boolean pass = false;
         try {
             d.getValue("XX", "C1");
@@ -90,7 +83,7 @@ public class DefaultCategoryDatasetTest {
      */
     @Test
     public void testGetValue2() {
-        DefaultCategoryDataset d = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String,String> d = new DefaultCategoryDataset<>();
         boolean pass = false;
         try {
             /* Number n =*/ d.getValue(0, 0);
@@ -106,15 +99,15 @@ public class DefaultCategoryDatasetTest {
      */
     @Test
     public void testIncrementValue() {
-        DefaultCategoryDataset d = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String,String> d = new DefaultCategoryDataset<>();
         d.addValue(1.0, "R1", "C1");
         d.incrementValue(2.0, "R1", "C1");
-        assertEquals(new Double(3.0), d.getValue("R1", "C1"));
+        assertEquals(3.0, d.getValue("R1", "C1"));
 
         // increment a null value
         d.addValue(null, "R2", "C1");
         d.incrementValue(2.0, "R2", "C1");
-        assertEquals(new Double(2.0), d.getValue("R2", "C1"));
+        assertEquals(2.0, d.getValue("R2", "C1"));
 
         // increment an unknown row
         boolean pass = false;
@@ -142,7 +135,7 @@ public class DefaultCategoryDatasetTest {
      */
     @Test
     public void testGetRowCount() {
-        DefaultCategoryDataset d = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String,String> d = new DefaultCategoryDataset<>();
         assertTrue(d.getRowCount() == 0);
 
         d.addValue(1.0, "R1", "C1");
@@ -164,7 +157,7 @@ public class DefaultCategoryDatasetTest {
      */
     @Test
     public void testGetColumnCount() {
-        DefaultCategoryDataset d = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String,String> d = new DefaultCategoryDataset<>();
         assertTrue(d.getColumnCount() == 0);
 
         d.addValue(1.0, "R1", "C1");
@@ -186,9 +179,9 @@ public class DefaultCategoryDatasetTest {
      */
     @Test
     public void testEquals() {
-        DefaultCategoryDataset d1 = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String,String> d1 = new DefaultCategoryDataset<>();
         d1.setValue(23.4, "R1", "C1");
-        DefaultCategoryDataset d2 = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String,String> d2 = new DefaultCategoryDataset<>();
         d2.setValue(23.4, "R1", "C1");
         assertTrue(d1.equals(d2));
         assertTrue(d2.equals(d1));
@@ -209,9 +202,9 @@ public class DefaultCategoryDatasetTest {
      */
     @Test
     public void testSerialization() {
-        DefaultCategoryDataset d1 = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String,String> d1 = new DefaultCategoryDataset<>();
         d1.setValue(23.4, "R1", "C1");
-        DefaultCategoryDataset d2 = (DefaultCategoryDataset) 
+        DefaultCategoryDataset<String,String> d2 = (DefaultCategoryDataset) 
                 TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
@@ -221,15 +214,15 @@ public class DefaultCategoryDatasetTest {
      */
     @Test
     public void testAddValue() {
-        DefaultCategoryDataset d1 = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String,String> d1 = new DefaultCategoryDataset<>();
         d1.addValue(null, "R1", "C1");
         assertNull(d1.getValue("R1", "C1"));
-        d1.addValue(new Double(1.0), "R2", "C1");
-        assertEquals(new Double(1.0), d1.getValue("R2", "C1"));
+        d1.addValue(1.0, "R2", "C1");
+        assertEquals(1.0, d1.getValue("R2", "C1"));
 
         boolean pass = false;
         try {
-            d1.addValue(new Double(1.1), null, "C2");
+            d1.addValue(1.1, null, "C2");
         }
         catch (IllegalArgumentException e) {
             pass = true;
@@ -242,17 +235,17 @@ public class DefaultCategoryDatasetTest {
      */
     @Test
     public void testRemoveValue() {
-        DefaultCategoryDataset d = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String,String> d = new DefaultCategoryDataset<>();
         d.removeValue("R1", "C1");
-        d.addValue(new Double(1.0), "R1", "C1");
+        d.addValue(1.0, "R1", "C1");
         d.removeValue("R1", "C1");
         assertEquals(0, d.getRowCount());
         assertEquals(0, d.getColumnCount());
 
-        d.addValue(new Double(1.0), "R1", "C1");
-        d.addValue(new Double(2.0), "R2", "C1");
+        d.addValue(1.0, "R1", "C1");
+        d.addValue(2.0, "R2", "C1");
         d.removeValue("R1", "C1");
-        assertEquals(new Double(2.0), d.getValue(0, 0));
+        assertEquals(2.0, d.getValue(0, 0));
 
         boolean pass = false;
         try {
@@ -275,11 +268,12 @@ public class DefaultCategoryDatasetTest {
 
     /**
      * Confirm that cloning works.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        DefaultCategoryDataset d1 = new DefaultCategoryDataset();
-        DefaultCategoryDataset d2 = (DefaultCategoryDataset) d1.clone();
+        DefaultCategoryDataset<String,String> d1 = new DefaultCategoryDataset<>();
+        DefaultCategoryDataset<String,String> d2 = (DefaultCategoryDataset) d1.clone();
 
         assertTrue(d1 != d2);
         assertTrue(d1.getClass() == d2.getClass());
@@ -306,7 +300,7 @@ public class DefaultCategoryDatasetTest {
      */
     @Test
     public void testPublicCloneable() {
-        DefaultCategoryDataset d = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String,String> d = new DefaultCategoryDataset<>();
         assertTrue(d instanceof PublicCloneable);
     }
 
@@ -317,7 +311,7 @@ public class DefaultCategoryDatasetTest {
      */
     @Test
     public void testBug1835955() {
-        DefaultCategoryDataset d = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String,String> d = new DefaultCategoryDataset<>();
         d.addValue(1.0, "R1", "C1");
         d.addValue(2.0, "R2", "C2");
         d.removeColumn("C2");
@@ -330,7 +324,7 @@ public class DefaultCategoryDatasetTest {
      */
     @Test
     public void testRemoveColumn() {
-        DefaultCategoryDataset d = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String,String> d = new DefaultCategoryDataset<>();
         d.addValue(1.0, "R1", "C1");
         d.addValue(2.0, "R2", "C2");
         assertEquals(2, d.getColumnCount());
@@ -361,7 +355,7 @@ public class DefaultCategoryDatasetTest {
      */
     @Test
     public void testRemoveRow() {
-        DefaultCategoryDataset d = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String,String> d = new DefaultCategoryDataset<>();
         d.addValue(1.0, "R1", "C1");
         d.addValue(2.0, "R2", "C2");
         assertEquals(2, d.getRowCount());

@@ -53,7 +53,7 @@ import org.jfree.data.general.SeriesChangeEvent;
  *
  * @see YIntervalSeriesCollection
  */
-public class YIntervalSeries extends ComparableObjectSeries {
+public class YIntervalSeries<S extends Comparable<S>> extends ComparableObjectSeries<S> {
 
     /**
      * Creates a new empty series.  By default, items added to the series will
@@ -62,7 +62,7 @@ public class YIntervalSeries extends ComparableObjectSeries {
      *
      * @param key  the series key ({@code null} not permitted).
      */
-    public YIntervalSeries(Comparable key) {
+    public YIntervalSeries(S key) {
         this(key, true, true);
     }
 
@@ -76,7 +76,7 @@ public class YIntervalSeries extends ComparableObjectSeries {
      * @param allowDuplicateXValues  a flag that controls whether duplicate
      *                               x-values are allowed.
      */
-    public YIntervalSeries(Comparable key, boolean autoSort,
+    public YIntervalSeries(S key, boolean autoSort,
             boolean allowDuplicateXValues) {
         super(key, autoSort, allowDuplicateXValues);
     }

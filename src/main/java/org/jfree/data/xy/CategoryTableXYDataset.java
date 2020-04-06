@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,23 +27,10 @@
  * ---------------------------
  * CategoryTableXYDataset.java
  * ---------------------------
- * (C) Copyright 2004-2016, by Andreas Schroeder and Contributors.
+ * (C) Copyright 2004-2020, by Andreas Schroeder and Contributors.
  *
  * Original Author:  Andreas Schroeder;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 31-Mar-2004 : Version 1 (AS);
- * 05-May-2004 : Now extends AbstractIntervalXYDataset (DG);
- * 15-Jul-2004 : Switched interval access method names (DG);
- * 18-Aug-2004 : Moved from org.jfree.data --> org.jfree.data.xy (DG);
- * 17-Nov-2004 : Updates required by changes to DomainInfo interface (DG);
- * 11-Jan-2005 : Removed deprecated code in preparation for 1.0.0 release (DG);
- * 05-Oct-2005 : Made the interval delegate a dataset change listener (DG);
- * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
- * 22-Apr-2008 : Implemented PublicCloneable, and fixed clone() method (DG);
- * 18-Oct-2011 : Fixed bug 3190615 - added clear() method (DG);
  *
  */
 
@@ -99,7 +86,7 @@ public class CategoryTableXYDataset extends AbstractIntervalXYDataset
      * @param seriesName  the name of the series to add the data item.
      */
     public void add(double x, double y, String seriesName) {
-        add(new Double(x), new Double(y), seriesName, true);
+        add(Double.valueOf(x), Double.valueOf(y), seriesName, true);
     }
 
     /**
@@ -112,7 +99,7 @@ public class CategoryTableXYDataset extends AbstractIntervalXYDataset
      * @param notify  notify listeners?
      */
     public void add(Number x, Number y, String seriesName, boolean notify) {
-        this.values.addValue(y, (Comparable) x, seriesName);
+        this.values.addValue(y, (Comparable<?>) x, seriesName);
         if (notify) {
             fireDatasetChanged();
         }
@@ -125,7 +112,7 @@ public class CategoryTableXYDataset extends AbstractIntervalXYDataset
      * @param seriesName  the series name.
      */
     public void remove(double x, String seriesName) {
-        remove(new Double(x), seriesName, true);
+        remove(x, seriesName, true);
     }
 
     /**
@@ -171,7 +158,7 @@ public class CategoryTableXYDataset extends AbstractIntervalXYDataset
      * @return The key for a series.
      */
     @Override
-    public Comparable getSeriesKey(int series) {
+    public Comparable<?> getSeriesKey(int series) {
         return this.values.getColumnKey(series);
     }
 

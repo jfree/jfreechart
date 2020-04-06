@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * --------------------
  * CompassPlotTest.java
  * --------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 27-Mar-2003 : Version 1 (DG);
- * 20-Mar-2007 : Extended serialization tests (DG);
  *
  */
 
@@ -50,6 +45,7 @@ import java.awt.Font;
 import java.awt.GradientPaint;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 
 import org.jfree.data.general.DefaultValueDataset;
 import org.junit.Test;
@@ -103,10 +99,10 @@ public class CompassPlotTest {
         assertTrue(plot1.equals(plot2));
 
         // roseHighlightPaint
-        plot1.setRoseHighlightPaint(new GradientPaint(1.0f, 2.0f, Color.green,
+        plot1.setRoseHighlightPaint(new GradientPaint(1.0f, 2.0f, Color.GREEN,
                 3.0f, 4.0f, Color.YELLOW));
         assertFalse(plot1.equals(plot2));
-        plot2.setRoseHighlightPaint(new GradientPaint(1.0f, 2.0f, Color.green,
+        plot2.setRoseHighlightPaint(new GradientPaint(1.0f, 2.0f, Color.GREEN,
                 3.0f, 4.0f, Color.YELLOW));
         assertTrue(plot1.equals(plot2));
     }
@@ -120,20 +116,21 @@ public class CompassPlotTest {
         p1.setRosePaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f,
                 Color.BLUE));
         p1.setRoseCenterPaint(new GradientPaint(4.0f, 3.0f, Color.RED, 2.0f,
-                1.0f, Color.green));
+                1.0f, Color.GREEN));
         p1.setRoseHighlightPaint(new GradientPaint(4.0f, 3.0f, Color.RED, 2.0f,
-                1.0f, Color.green));
-        CompassPlot p2 = (CompassPlot) TestUtils.serialised(p1);
+                1.0f, Color.GREEN));
+        CompassPlot p2 = TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 
     /**
      * Confirm that cloning works.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
         CompassPlot p1 = new CompassPlot(new DefaultValueDataset(15.0));
-        CompassPlot p2 = (CompassPlot) p1.clone();
+        CompassPlot p2 = CloneUtils.clone(p1);
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));

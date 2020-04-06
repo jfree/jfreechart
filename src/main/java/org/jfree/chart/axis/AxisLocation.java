@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,21 +27,10 @@
  * -----------------
  * AxisLocation.java
  * -----------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   Nick Guenther;
- *
- * Changes:
- * --------
- * 02-May-2003 : Version 1 (DG);
- * 03-Jul-2003 : Added isTopOrBottom() and isLeftOrRight() methods (DG);
- * 13-Aug-2003 : Fixed readResolve() bug (id=788202) (DG);
- * 24-Mar-2004 : Added static getOpposite() method (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 22-Mar-2007 : Added getOpposite() method, suggested by Nick Guenther (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
- * 26-Nov-2018 : Made AxisLocation an enum (TH);
+ * Contributor(s):   Nick Guenther, Tracy Hiltbrand;
  *
  */
 

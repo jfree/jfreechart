@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,21 +27,10 @@
  * ---------------------------
  * CyclicXYItemRenderer.java
  * ---------------------------
- * (C) Copyright 2003-2008, by Nicolas Brodu and Contributors.
+ * (C) Copyright 2003-2020, by Nicolas Brodu and Contributors.
  *
  * Original Author:  Nicolas Brodu;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 19-Nov-2003 : Initial import to JFreeChart from the JSynoptic project (NB);
- * 23-Dec-2003 : Added missing Javadocs (DG);
- * 25-Feb-2004 : Replaced CrosshairInfo with CrosshairState (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
- *               getYValue() (DG);
- * ------------- JFREECHART 1.0.0 ---------------------------------------------
- * 06-Jul-2006 : Modified to call only dataset methods that return double
- *               primitives (DG);
  *
  */
 
@@ -335,13 +324,12 @@ public class CyclicXYItemRenderer extends StandardXYItemRenderer
          * @param y  the y values.
          * @param delegateSet  the dataset.
          */
-        public OverwriteDataSet(double [] x, double[] y,
-                                XYDataset delegateSet) {
+        public OverwriteDataSet(double[] x, double[] y, XYDataset delegateSet) {
             this.delegateSet = delegateSet;
             this.x = new Double[x.length]; this.y = new Double[y.length];
             for (int i = 0; i < x.length; ++i) {
-                this.x[i] = new Double(x[i]);
-                this.y[i] = new Double(y[i]);
+                this.x[i] = x[i];
+                this.y[i] = y[i];
             }
         }
 

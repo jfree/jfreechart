@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,21 +27,10 @@
  * ----------------------------
  * BoxAndWhiskerCalculator.java
  * ----------------------------
- * (C) Copyright 2003-2016,  by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020,  by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 28-Aug-2003 : Version 1 (DG);
- * 17-Nov-2003 : Fixed bug in calculations of outliers and median (DG);
- * 10-Jan-2005 : Removed deprecated methods in preparation for 1.0.0
- *               release (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 15-Nov-2006 : Cleaned up handling of null arguments, and null or NaN items
- *               in the list (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -72,7 +61,7 @@ public abstract class BoxAndWhiskerCalculator {
      * @return A box-and-whisker item.
      */
     public static BoxAndWhiskerItem calculateBoxAndWhiskerStatistics(
-                                        List values) {
+            List<? extends Number> values) {
         return calculateBoxAndWhiskerStatistics(values, true);
     }
 
@@ -92,7 +81,7 @@ public abstract class BoxAndWhiskerCalculator {
      * @since 1.0.3
      */
     public static BoxAndWhiskerItem calculateBoxAndWhiskerStatistics(
-            List values, boolean stripNullAndNaNItems) {
+            List<? extends Number> values, boolean stripNullAndNaNItems) {
 
         Args.nullNotPermitted(values, "values");
 
@@ -133,7 +122,7 @@ public abstract class BoxAndWhiskerCalculator {
         double maxRegularValue = Double.NEGATIVE_INFINITY;
         double minOutlier = Double.POSITIVE_INFINITY;
         double maxOutlier = Double.NEGATIVE_INFINITY;
-        List outliers = new ArrayList();
+        List<Number> outliers = new ArrayList<>();
 
         Iterator iterator = vlist.iterator();
         while (iterator.hasNext()) {
@@ -159,10 +148,8 @@ public abstract class BoxAndWhiskerCalculator {
             maxOutlier = Math.max(maxOutlier, maxRegularValue);
         }
 
-        return new BoxAndWhiskerItem(new Double(mean), new Double(median),
-                new Double(q1), new Double(q3), new Double(minRegularValue),
-                new Double(maxRegularValue), new Double(minOutlier),
-                new Double(maxOutlier), outliers);
+        return new BoxAndWhiskerItem(mean, median, q1, q3, minRegularValue,
+                maxRegularValue, minOutlier, maxOutlier, outliers);
 
     }
 

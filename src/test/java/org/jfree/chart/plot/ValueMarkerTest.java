@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,19 +27,10 @@
  * --------------------
  * ValueMarkerTest.java
  * --------------------
- * (C) Copyright 2003-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 18-Aug-2003 : Version 1 (DG);
- * 14-Jun-2004 : Renamed MarkerTests --> ValueMarkerTests (DG);
- * 01-Jun-2005 : Strengthened equals() test (DG);
- * 05-Sep-2006 : Added checks for MarkerChangeEvent generation (DG);
- * 26-Sep-2007 : Added test1802195() method (DG);
- * 08-Oct-2007 : Added test1808376() method (DG);
  *
  */
 
@@ -64,6 +55,7 @@ import org.jfree.chart.ui.LengthAdjustmentType;
 import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.TextAnchor;
+import org.jfree.chart.util.CloneUtils;
 import org.junit.Test;
 
 /**
@@ -165,7 +157,7 @@ public class ValueMarkerTest implements MarkerChangeListener {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         ValueMarker m1 = new ValueMarker(25.0);
-        ValueMarker m2 = (ValueMarker) m1.clone();
+        ValueMarker m2 = CloneUtils.clone(m1);
         assertTrue(m1 != m2);
         assertTrue(m1.getClass() == m2.getClass());
         assertTrue(m1.equals(m2));
@@ -177,7 +169,7 @@ public class ValueMarkerTest implements MarkerChangeListener {
     @Test
     public void testSerialization() {
         ValueMarker m1 = new ValueMarker(25.0);
-        ValueMarker m2 = (ValueMarker) TestUtils.serialised(m1);
+        ValueMarker m2 = TestUtils.serialised(m1);
         assertEquals(m1, m2);
     }
 
@@ -213,7 +205,7 @@ public class ValueMarkerTest implements MarkerChangeListener {
     @Test
     public void test1802195() {
         ValueMarker m1 = new ValueMarker(25.0);
-        ValueMarker m2 = (ValueMarker) TestUtils.serialised(m1);
+        ValueMarker m2 = TestUtils.serialised(m1);
         assertEquals(m1, m2);
         try {
             m2.setValue(-10.0);

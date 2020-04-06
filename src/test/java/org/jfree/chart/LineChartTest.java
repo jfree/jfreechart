@@ -98,8 +98,8 @@ public class LineChartTest  {
         // create a dataset...
         Number[][] data = new Integer[][] {{-30, -20}, {-10, 10}, {20, 30}};
 
-        CategoryDataset newData = DatasetUtils.createCategoryDataset("S",
-                "C", data);
+        CategoryDataset<String,String> newData 
+                = DatasetUtils.createCategoryDataset("S", "C", data);
 
         LocalListener l = new LocalListener();
         this.chart.addChangeListener(l);
@@ -112,7 +112,6 @@ public class LineChartTest  {
                    + range.getLowerBound(), range.getLowerBound() <= -30);
         assertTrue("Expecting the upper bound of the range to be around 30: "
                    + range.getUpperBound(), range.getUpperBound() >= 30);
-
     }
 
     /**
@@ -151,15 +150,11 @@ public class LineChartTest  {
      * @return The chart.
      */
     private static JFreeChart createLineChart() {
-
         Number[][] data = new Integer[][] {{-3, -2}, {-1, 1}, {2, 3}};
-
-        CategoryDataset dataset = DatasetUtils.createCategoryDataset("S",
-                "C", data);
-
+        CategoryDataset<String,String> dataset 
+                = DatasetUtils.createCategoryDataset("S", "C", data);
         return ChartFactory.createLineChart("Line Chart", "Domain", "Range",
                 dataset);
-
     }
 
     /**

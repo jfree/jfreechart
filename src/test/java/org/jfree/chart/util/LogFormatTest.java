@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * ------------------
  * LogFormatTest.java
  * ------------------
- * (C) Copyright 2008-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2008-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 08-Feb-2008 : Version 1 (DG);
- * 14-Jan-2009 : Updated testEquals() for new field (DG);
  *
  */
 
@@ -101,9 +96,9 @@ public class LogFormatTest {
      * Confirm that cloning works.
      */
     @Test
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         LogFormat f1 = new LogFormat(10.0, "10", true);
-        LogFormat f2 = (LogFormat) f1.clone();
+        LogFormat f2 = CloneUtils.clone(f1);
         assertTrue(f1 != f2);
         assertTrue(f1.getClass() == f2.getClass());
         assertTrue(f1.equals(f2));
@@ -115,7 +110,7 @@ public class LogFormatTest {
     @Test
     public void testSerialization() {
         LogFormat f1 = new LogFormat(10.0, "10", true);
-        LogFormat f2 = (LogFormat) TestUtils.serialised(f1);
+        LogFormat f2 = TestUtils.serialised(f1);
         assertEquals(f1, f2);
     }
 

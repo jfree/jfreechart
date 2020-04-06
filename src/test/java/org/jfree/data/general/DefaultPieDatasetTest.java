@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,22 +27,17 @@
  * -------------------
  * PieDatasetTest.java
  * -------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 18-Aug-2003 : Version 1 (DG);
- * 31-Jul-2006 : Added test for new clear() method (DG);
- * 01-Aug-2006 : Added testGetKey() and testGetIndex() methods (DG);
  *
  */
 
 package org.jfree.data.general;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.junit.Test;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
@@ -71,7 +66,7 @@ public class DefaultPieDatasetTest implements DatasetChangeListener {
      */
     @Test
     public void testClear() {
-        DefaultPieDataset d = new DefaultPieDataset();
+        DefaultPieDataset<String> d = new DefaultPieDataset<>();
         d.addChangeListener(this);
         // no event is generated if the dataset is already empty
         d.clear();
@@ -89,7 +84,7 @@ public class DefaultPieDatasetTest implements DatasetChangeListener {
      */
     @Test
     public void testGetKey() {
-        DefaultPieDataset d = new DefaultPieDataset();
+        DefaultPieDataset<String> d = new DefaultPieDataset<>();
         d.setValue("A", 1.0);
         d.setValue("B", 2.0);
         assertEquals("A", d.getKey(0));
@@ -119,7 +114,7 @@ public class DefaultPieDatasetTest implements DatasetChangeListener {
      */
     @Test
     public void testGetIndex() {
-        DefaultPieDataset d = new DefaultPieDataset();
+        DefaultPieDataset<String> d = new DefaultPieDataset<>();
         d.setValue("A", 1.0);
         d.setValue("B", 2.0);
         assertEquals(0, d.getIndex("A"));
@@ -138,14 +133,15 @@ public class DefaultPieDatasetTest implements DatasetChangeListener {
 
     /**
      * Confirm that cloning works.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        DefaultPieDataset d1 = new DefaultPieDataset();
-        d1.setValue("V1", new Integer(1));
+        DefaultPieDataset<String> d1 = new DefaultPieDataset<>();
+        d1.setValue("V1", 1);
         d1.setValue("V2", null);
-        d1.setValue("V3", new Integer(3));
-        DefaultPieDataset d2 = (DefaultPieDataset) d1.clone();
+        d1.setValue("V3", 3);
+        DefaultPieDataset<String> d2 = CloneUtils.clone(d1);
 
         assertTrue(d1 != d2);
         assertTrue(d1.getClass() == d2.getClass());
@@ -157,13 +153,13 @@ public class DefaultPieDatasetTest implements DatasetChangeListener {
      */
     @Test
     public void testSerialization() {
-        DefaultPieDataset d1 = new DefaultPieDataset();
-        d1.setValue("C1", new Double(234.2));
+        DefaultPieDataset<String> d1 = new DefaultPieDataset<>();
+        d1.setValue("C1", 234.2);
         d1.setValue("C2", null);
-        d1.setValue("C3", new Double(345.9));
-        d1.setValue("C4", new Double(452.7));
+        d1.setValue("C3", 345.9);
+        d1.setValue("C4", 452.7);
 
-        DefaultPieDataset d2 = (DefaultPieDataset) TestUtils.serialised(d1);
+        DefaultPieDataset<String> d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 

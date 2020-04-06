@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,27 +27,11 @@
  * -----------------------
  * CategoryItemEntity.java
  * -----------------------
- * (C) Copyright 2002-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2002-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Richard Atkinson;
  *                   Christian W. Zuckschwerdt;
- *
- * Changes:
- * --------
- * 23-May-2002 : Version 1 (DG);
- * 12-Jun-2002 : Added Javadoc comments (DG);
- * 26-Jun-2002 : Added getImageMapAreaTag() method (DG);
- * 05-Aug-2002 : Added new constructor to populate URLText
- *               Moved getImageMapAreaTag() to ChartEntity (superclass) (RA);
- * 03-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 30-Jul-2003 : Added CategoryDataset reference (CZ);
- * 20-May-2004 : Added equals() and clone() methods, and implemented
- *               Serializable (DG);
- * 11-Jan-2005 : Removed deprecated code in preparation for 1.0.0 release (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 18-May-2007 : Updated to use row and column keys to identify item (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -63,28 +47,28 @@ import org.jfree.data.category.CategoryDataset;
 /**
  * A chart entity that represents one item within a category plot.
  */
-public class CategoryItemEntity extends ChartEntity
-        implements Cloneable, Serializable {
+public class CategoryItemEntity<R extends Comparable<R>, C extends Comparable<C>> 
+        extends ChartEntity implements Cloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -8657249457902337349L;
 
     /** The dataset. */
-    private CategoryDataset dataset;
+    private CategoryDataset<R, C> dataset;
 
     /**
      * The row key.
      *
      * @since 1.0.6
      */
-    private Comparable rowKey;
+    private R rowKey;
 
     /**
      * The column key.
      *
      * @since 1.0.6
      */
-    private Comparable columnKey;
+    private C columnKey;
 
     /**
      * Creates a new entity instance for an item in the specified dataset.
@@ -99,7 +83,7 @@ public class CategoryItemEntity extends ChartEntity
      * @since 1.0.6
      */
     public CategoryItemEntity(Shape area, String toolTipText, String urlText,
-            CategoryDataset dataset, Comparable rowKey, Comparable columnKey) {
+            CategoryDataset dataset, R rowKey, C columnKey) {
         super(area, toolTipText, urlText);
         Args.nullNotPermitted(dataset, "dataset");
         this.dataset = dataset;
@@ -116,7 +100,7 @@ public class CategoryItemEntity extends ChartEntity
      *
      * @see #setDataset(CategoryDataset)
      */
-    public CategoryDataset getDataset() {
+    public CategoryDataset<R, C> getDataset() {
         return this.dataset;
     }
 
@@ -127,7 +111,7 @@ public class CategoryItemEntity extends ChartEntity
      *
      * @see #getDataset()
      */
-    public void setDataset(CategoryDataset dataset) {
+    public void setDataset(CategoryDataset<R, C> dataset) {
         Args.nullNotPermitted(dataset, "dataset");
         this.dataset = dataset;
     }
@@ -141,7 +125,7 @@ public class CategoryItemEntity extends ChartEntity
      *
      * @see #setRowKey(Comparable)
      */
-    public Comparable getRowKey() {
+    public R getRowKey() {
         return this.rowKey;
     }
 
@@ -154,7 +138,7 @@ public class CategoryItemEntity extends ChartEntity
      *
      * @see #getRowKey()
      */
-    public void setRowKey(Comparable rowKey) {
+    public void setRowKey(R rowKey) {
         this.rowKey = rowKey;
     }
 
@@ -167,7 +151,7 @@ public class CategoryItemEntity extends ChartEntity
      *
      * @see #setColumnKey(Comparable)
      */
-    public Comparable getColumnKey() {
+    public C getColumnKey() {
         return this.columnKey;
     }
 
@@ -180,7 +164,7 @@ public class CategoryItemEntity extends ChartEntity
      *
      * @see #getColumnKey()
      */
-    public void setColumnKey(Comparable columnKey) {
+    public void setColumnKey(C columnKey) {
         this.columnKey = columnKey;
     }
 

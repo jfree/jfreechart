@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * ---------------------------------
  * DefaultIntervalXYDatasetTest.java
  * ---------------------------------
- * (C) Copyright 2006-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 23-Oct-2006 : Version 1 (DG);
- * 02-Nov-2006 : Added testAddSeries() method (DG);
- * 22-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
@@ -47,6 +41,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.Test;
@@ -61,7 +56,7 @@ public class DefaultIntervalXYDatasetTest {
      */
     @Test
     public void testGetSeriesCount() {
-        DefaultIntervalXYDataset d = new DefaultIntervalXYDataset();
+        DefaultIntervalXYDataset<String> d = new DefaultIntervalXYDataset<>();
         assertEquals(0, d.getSeriesCount());
         d = createSampleDataset1();
         assertEquals(2, d.getSeriesCount());
@@ -72,7 +67,7 @@ public class DefaultIntervalXYDatasetTest {
      */
     @Test
     public void testGetSeriesKey() {
-        DefaultIntervalXYDataset d = createSampleDataset1();
+        DefaultIntervalXYDataset<String> d = createSampleDataset1();
         assertEquals("S1", d.getSeriesKey(0));
         assertEquals("S2", d.getSeriesKey(1));
 
@@ -101,7 +96,7 @@ public class DefaultIntervalXYDatasetTest {
      */
     @Test
     public void testGetItemCount() {
-        DefaultIntervalXYDataset d = createSampleDataset1();
+        DefaultIntervalXYDataset<String> d = createSampleDataset1();
         assertEquals(3, d.getItemCount(0));
         assertEquals(3, d.getItemCount(1));
 
@@ -123,7 +118,7 @@ public class DefaultIntervalXYDatasetTest {
      */
     @Test
     public void testGetXValue() {
-        DefaultIntervalXYDataset d = createSampleDataset1();
+        DefaultIntervalXYDataset<String> d = createSampleDataset1();
         assertEquals(1.0, d.getXValue(0, 0), EPSILON);
         assertEquals(2.0, d.getXValue(0, 1), EPSILON);
         assertEquals(3.0, d.getXValue(0, 2), EPSILON);
@@ -137,7 +132,7 @@ public class DefaultIntervalXYDatasetTest {
      */
     @Test
     public void testGetYValue() {
-        DefaultIntervalXYDataset d = createSampleDataset1();
+        DefaultIntervalXYDataset<String> d = createSampleDataset1();
         assertEquals(4.0, d.getYValue(0, 0), EPSILON);
         assertEquals(5.0, d.getYValue(0, 1), EPSILON);
         assertEquals(6.0, d.getYValue(0, 2), EPSILON);
@@ -151,7 +146,7 @@ public class DefaultIntervalXYDatasetTest {
      */
     @Test
     public void testGetStartXValue() {
-        DefaultIntervalXYDataset d = createSampleDataset1();
+        DefaultIntervalXYDataset<String> d = createSampleDataset1();
         assertEquals(0.9, d.getStartXValue(0, 0), EPSILON);
         assertEquals(1.9, d.getStartXValue(0, 1), EPSILON);
         assertEquals(2.9, d.getStartXValue(0, 2), EPSILON);
@@ -165,7 +160,7 @@ public class DefaultIntervalXYDatasetTest {
      */
     @Test
     public void testGetEndXValue() {
-        DefaultIntervalXYDataset d = createSampleDataset1();
+        DefaultIntervalXYDataset<String> d = createSampleDataset1();
         assertEquals(1.1, d.getEndXValue(0, 0), EPSILON);
         assertEquals(2.1, d.getEndXValue(0, 1), EPSILON);
         assertEquals(3.1, d.getEndXValue(0, 2), EPSILON);
@@ -179,7 +174,7 @@ public class DefaultIntervalXYDatasetTest {
      */
     @Test
     public void testGetStartYValue() {
-        DefaultIntervalXYDataset d = createSampleDataset1();
+        DefaultIntervalXYDataset<String> d = createSampleDataset1();
         assertEquals(1.09, d.getStartYValue(0, 0), EPSILON);
         assertEquals(2.09, d.getStartYValue(0, 1), EPSILON);
         assertEquals(3.09, d.getStartYValue(0, 2), EPSILON);
@@ -193,7 +188,7 @@ public class DefaultIntervalXYDatasetTest {
      */
     @Test
     public void testGetEndYValue() {
-        DefaultIntervalXYDataset d = createSampleDataset1();
+        DefaultIntervalXYDataset<String> d = createSampleDataset1();
         assertEquals(1.11, d.getEndYValue(0, 0), EPSILON);
         assertEquals(2.11, d.getEndYValue(0, 1), EPSILON);
         assertEquals(3.11, d.getEndYValue(0, 2), EPSILON);
@@ -207,8 +202,8 @@ public class DefaultIntervalXYDatasetTest {
      */
     @Test
     public void testEquals() {
-        DefaultIntervalXYDataset d1 = new DefaultIntervalXYDataset();
-        DefaultIntervalXYDataset d2 = new DefaultIntervalXYDataset();
+        DefaultIntervalXYDataset<String> d1 = new DefaultIntervalXYDataset<>();
+        DefaultIntervalXYDataset<String> d2 = new DefaultIntervalXYDataset<>();
         assertTrue(d1.equals(d2));
         assertTrue(d2.equals(d1));
 
@@ -223,15 +218,15 @@ public class DefaultIntervalXYDatasetTest {
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        DefaultIntervalXYDataset d1 = new DefaultIntervalXYDataset();
-        DefaultIntervalXYDataset d2 = (DefaultIntervalXYDataset) d1.clone();
+        DefaultIntervalXYDataset<String> d1 = new DefaultIntervalXYDataset<>();
+        DefaultIntervalXYDataset<String> d2 = CloneUtils.clone(d1);
         assertTrue(d1 != d2);
         assertTrue(d1.getClass() == d2.getClass());
         assertTrue(d1.equals(d2));
 
         // try a dataset with some content...
         d1 = createSampleDataset1();
-        d2 = (DefaultIntervalXYDataset) d1.clone();
+        d2 = CloneUtils.clone(d1);
         assertTrue(d1 != d2);
         assertTrue(d1.getClass() == d2.getClass());
         assertTrue(d1.equals(d2));
@@ -242,7 +237,7 @@ public class DefaultIntervalXYDatasetTest {
      */
     @Test
     public void testCloning2() throws CloneNotSupportedException {
-        DefaultIntervalXYDataset d1 = new DefaultIntervalXYDataset();
+        DefaultIntervalXYDataset<String> d1 = new DefaultIntervalXYDataset<>();
         double[] x1 = new double[] {1.0, 2.0, 3.0};
         double[] x1Start = new double[] {0.9, 1.9, 2.9};
         double[] x1End = new double[] {1.1, 2.1, 3.1};
@@ -252,7 +247,7 @@ public class DefaultIntervalXYDatasetTest {
         double[][] data1 = new double[][] {x1, x1Start, x1End, y1, y1Start,
                 y1End};
         d1.addSeries("S1", data1);
-        DefaultIntervalXYDataset d2 = (DefaultIntervalXYDataset) d1.clone();
+        DefaultIntervalXYDataset<String> d2 = CloneUtils.clone(d1);
         assertTrue(d1 != d2);
         assertTrue(d1.getClass() == d2.getClass());
         assertTrue(d1.equals(d2));
@@ -267,7 +262,7 @@ public class DefaultIntervalXYDatasetTest {
      */
     @Test
     public void testPublicCloneable() {
-        DefaultIntervalXYDataset d1 = new DefaultIntervalXYDataset();
+        DefaultIntervalXYDataset<String> d1 = new DefaultIntervalXYDataset<>();
         assertTrue(d1 instanceof PublicCloneable);
     }
 
@@ -276,14 +271,13 @@ public class DefaultIntervalXYDatasetTest {
      */
     @Test
     public void testSerialization() {
-        DefaultIntervalXYDataset d1 = new DefaultIntervalXYDataset();
-        DefaultIntervalXYDataset d2 = (DefaultIntervalXYDataset) 
-                TestUtils.serialised(d1);
+        DefaultIntervalXYDataset<String> d1 = new DefaultIntervalXYDataset<>();
+        DefaultIntervalXYDataset<String> d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
 
         // try a dataset with some content...
         d1 = createSampleDataset1();
-        d2 = (DefaultIntervalXYDataset) TestUtils.serialised(d1);
+        d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 
@@ -292,7 +286,7 @@ public class DefaultIntervalXYDatasetTest {
      */
     @Test
     public void testIndexOf() {
-        DefaultIntervalXYDataset d = createSampleDataset1();
+        DefaultIntervalXYDataset<String> d = createSampleDataset1();
         assertEquals(0, d.indexOf("S1"));
         assertEquals(1, d.indexOf("S2"));
         assertEquals(-1, d.indexOf("Green Eggs and Ham"));
@@ -304,7 +298,7 @@ public class DefaultIntervalXYDatasetTest {
      */
     @Test
     public void testAddSeries() {
-        DefaultIntervalXYDataset d = new DefaultIntervalXYDataset();
+        DefaultIntervalXYDataset<String> d = new DefaultIntervalXYDataset<>();
         d.addSeries("S1", new double[][] {{1.0}, {0.5}, {1.5}, {2.0}, {2.5},
                 {1.5}});
         assertEquals(1, d.getSeriesCount());
@@ -318,13 +312,11 @@ public class DefaultIntervalXYDatasetTest {
 
         // check null key
         boolean pass = false;
-        try
-        {
+        try {
           d.addSeries(null, new double[][] {{1.1}, {0.6}, {1.6}, {2.1}, {2.6},
                   {1.6}});
         }
-        catch (IllegalArgumentException e)
-        {
+        catch (IllegalArgumentException e) {
           pass = true;
         }
         assertTrue(pass);
@@ -335,8 +327,8 @@ public class DefaultIntervalXYDatasetTest {
      *
      * @return A sample dataset.
      */
-    public DefaultIntervalXYDataset createSampleDataset1() {
-        DefaultIntervalXYDataset d = new DefaultIntervalXYDataset();
+    public DefaultIntervalXYDataset<String> createSampleDataset1() {
+        DefaultIntervalXYDataset<String> d = new DefaultIntervalXYDataset<>();
         double[] x1 = new double[] {1.0, 2.0, 3.0};
         double[] x1Start = new double[] {0.9, 1.9, 2.9};
         double[] x1End = new double[] {1.1, 2.1, 3.1};

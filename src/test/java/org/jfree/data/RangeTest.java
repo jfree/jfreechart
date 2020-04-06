@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,17 +27,10 @@
  * --------------
  * RangeTest.java
  * --------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Sergei Ivanov;
- *
- * Changes
- * -------
- * 14-Aug-2003 : Version 1 (DG);
- * 18-Dec-2007 : Additional tests from Sergei Ivanov (DG);
- * 08-Jan-2012 : Added test for combine() method (DG);
- * 23-Feb-2014 : Added isNaNRange() test (DG);
  * 
  */
 
@@ -66,7 +59,7 @@ public class RangeTest {
         assertEquals(r1.getUpperBound(), 1000.0, 0.0d);
 
         try {
-            /*Range r2 =*/ new Range(10.0, 0.0);
+            Range r2 = new Range(10.0, 0.0);
             fail("Lower bound cannot be greater than the upper");
         }
         catch (Exception e) {
@@ -93,7 +86,7 @@ public class RangeTest {
         assertFalse(r1.equals(r2));
 
         // a Range object cannot be equal to a different object type
-        assertFalse(r1.equals(new Double(0.0)));
+        assertFalse(r1.equals(0.0));
     }
 
     /**
@@ -293,7 +286,7 @@ public class RangeTest {
     @Test
     public void testSerialization() {
         Range r1 = new Range(25.0, 133.42);
-        Range r2 = (Range) TestUtils.serialised(r1);
+        Range r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 
@@ -347,6 +340,9 @@ public class RangeTest {
         assertEquals(2.0, rr.getUpperBound(), EPSILON);
     }
     
+    /**
+     * Tests for the isNaNRange() method.
+     */
     @Test
     public void testIsNaNRange() {
         assertTrue(new Range(Double.NaN, Double.NaN).isNaNRange());

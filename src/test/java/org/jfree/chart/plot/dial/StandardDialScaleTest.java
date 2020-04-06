@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * --------------------------
  * StandardDialScaleTest.java
  * --------------------------
- * (C) Copyright 2006-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 03-Nov-2006 : Version 1 (DG);
- * 24-Oct-2007 : Updated for API changes (DG);
- * 08-Jan-2012 : Added tests for valueToAngle() and angleToValue();
  *
  */
 
@@ -52,6 +46,7 @@ import java.awt.Font;
 import java.awt.GradientPaint;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.junit.Test;
 
 /**
@@ -188,7 +183,7 @@ public class StandardDialScaleTest {
     public void testCloning() throws CloneNotSupportedException {
         // try a default instance
         StandardDialScale s1 = new StandardDialScale();
-        StandardDialScale s2 = (StandardDialScale) s1.clone();
+        StandardDialScale s2 = CloneUtils.clone(s1);
         assertTrue(s1 != s2);
         assertTrue(s1.getClass() == s2.getClass());
         assertTrue(s1.equals(s2));
@@ -218,7 +213,7 @@ public class StandardDialScaleTest {
     public void testSerialization() {
         // try a default instance
         StandardDialScale s1 = new StandardDialScale();
-        StandardDialScale s2 = (StandardDialScale) TestUtils.serialised(s1);
+        StandardDialScale s2 = TestUtils.serialised(s1);
         assertEquals(s1, s2);
 
         // try a customised instance
@@ -228,7 +223,7 @@ public class StandardDialScaleTest {
                 4.0f, Color.WHITE));
         s1.setMajorTickStroke(new BasicStroke(2.0f));
 
-        s2 = (StandardDialScale) TestUtils.serialised(s1);
+        s2 = TestUtils.serialised(s1);
         assertEquals(s1, s2);
     }
 

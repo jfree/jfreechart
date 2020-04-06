@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * ---------------------------
  * GradientBarPainterTest.java
  * ---------------------------
- * (C) Copyright 2008-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2008-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 20-Jun-2008 : Version 1 (DG);
  *
  */
 
@@ -109,7 +105,7 @@ public class GradientBarPainterTest {
     @Test
     public void testSerialization() {
         GradientBarPainter p1 = new GradientBarPainter(0.1, 0.2, 0.3);
-        GradientBarPainter p2 = (GradientBarPainter) TestUtils.serialised(p1);
+        GradientBarPainter p2 = TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 

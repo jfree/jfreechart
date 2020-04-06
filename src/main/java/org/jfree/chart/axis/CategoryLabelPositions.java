@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,17 +27,10 @@
  * ---------------------------
  * CategoryLabelPositions.java
  * ---------------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 06-Jan-2004 : Version 1 (DG);
- * 17-Feb-2004 : Added equals() method (DG);
- * 05-Nov-2004 : Adjusted settings for UP_90 and DOWN_90 (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -189,25 +182,25 @@ public class CategoryLabelPositions implements Serializable {
      * The label positioning details used when an axis is at the top of a
      * chart.
      */
-    private CategoryLabelPosition positionForAxisAtTop;
+    private final CategoryLabelPosition positionForAxisAtTop;
 
     /**
      * The label positioning details used when an axis is at the bottom of a
      * chart.
      */
-    private CategoryLabelPosition positionForAxisAtBottom;
+    private final CategoryLabelPosition positionForAxisAtBottom;
 
     /**
      * The label positioning details used when an axis is at the left of a
      * chart.
      */
-    private CategoryLabelPosition positionForAxisAtLeft;
+    private final CategoryLabelPosition positionForAxisAtLeft;
 
     /**
      * The label positioning details used when an axis is at the right of a
      * chart.
      */
-    private CategoryLabelPosition positionForAxisAtRight;
+    private final CategoryLabelPosition positionForAxisAtRight;
 
     /**
      * Default constructor.

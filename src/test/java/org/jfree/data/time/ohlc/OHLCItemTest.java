@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * -----------------
  * OHLCItemTest.java
  * -----------------
- * (C) Copyright 2006-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 04-Dec-2006 : Version 1 (DG);
- * 23-May-2009 : Added testHashCode() (DG);
  *
  */
 
@@ -46,6 +41,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 
 import org.jfree.data.time.Year;
 import org.junit.Test;
@@ -117,7 +113,7 @@ public class OHLCItemTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         OHLCItem item1 = new OHLCItem(new Year(2006), 2.0, 4.0, 1.0, 3.0);
-        OHLCItem item2 = (OHLCItem) item1.clone();
+        OHLCItem item2 = CloneUtils.clone(item1);
         assertTrue(item1 != item2);
         assertTrue(item1.getClass() == item2.getClass());
         assertTrue(item1.equals(item2));
@@ -129,7 +125,7 @@ public class OHLCItemTest {
     @Test
     public void testSerialization() {
         OHLCItem item1 = new OHLCItem(new Year(2006), 2.0, 4.0, 1.0, 3.0);
-        OHLCItem item2 = (OHLCItem) TestUtils.serialised(item1);
+        OHLCItem item2 = TestUtils.serialised(item1);
         assertEquals(item1, item2);
     }
 

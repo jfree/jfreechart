@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,23 +27,15 @@
  * ------------------------
  * ThermometerPlotTest.java
  * ------------------------
- * (C) Copyright 2003-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 26-Mar-2003 : Version 1 (DG);
- * 30-Apr-2007 : Added new serialization test (DG);
- * 03-May-2007 : Added cloning test (DG);
- * 08-Oct-2007 : Updated testEquals() for new fields (DG);
  *
  */
 
 package org.jfree.chart.plot;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -55,6 +47,7 @@ import java.text.DecimalFormat;
 
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.util.CloneUtils;
 
 import org.junit.Test;
 
@@ -174,7 +167,7 @@ public class ThermometerPlotTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         ThermometerPlot p1 = new ThermometerPlot();
-        ThermometerPlot p2 = (ThermometerPlot) p1.clone();
+        ThermometerPlot p2 = CloneUtils.clone(p1);
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
@@ -186,7 +179,7 @@ public class ThermometerPlotTest {
     @Test
     public void testSerialization() {
         ThermometerPlot p1 = new ThermometerPlot();
-        ThermometerPlot p2 = (ThermometerPlot) TestUtils.serialised(p1);
+        ThermometerPlot p2 = TestUtils.serialised(p1);
         assertTrue(p1.equals(p2));
     }
 
@@ -198,7 +191,7 @@ public class ThermometerPlotTest {
         ThermometerPlot p1 = new ThermometerPlot();
         p1.setSubrangePaint(1, new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f,
                 4.0f, Color.BLUE));
-        ThermometerPlot p2 = (ThermometerPlot) TestUtils.serialised(p1);
+        ThermometerPlot p2 = TestUtils.serialised(p1);
         assertTrue(p1.equals(p2));
     }
 

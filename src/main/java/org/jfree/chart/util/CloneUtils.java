@@ -62,8 +62,7 @@ public class CloneUtils {
      * 
      * @throws CloneNotSupportedException if the object cannot be cloned.
      */
-    public static <T> T clone(T object)
-            throws CloneNotSupportedException {
+    public static <T> T clone(T object) throws CloneNotSupportedException {
         if (object == null) {
             return null;
         }
@@ -111,7 +110,7 @@ public class CloneUtils {
     
     /**
      * Returns a new map that contains the same keys and cloned copied of the
-     * values.
+     * values from the source map.
      * 
      * @param source  the source map ({@code null} not permitted).
      * 

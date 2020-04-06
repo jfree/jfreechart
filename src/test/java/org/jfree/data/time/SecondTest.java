@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,19 +27,10 @@
  * ----------------
  * SecondTest.java
  * ----------------
- * (C) Copyright 2002-2016, by Object Refinery Limited.
+ * (C) Copyright 2002-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 29-Jan-2002 : Version 1 (DG);
- * 17-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 13-Oct-2003 : Added serialization test (DG);
- * 11-Jan-2005 : Added test for non-clonability (DG);
- * 06-Oct-2006 : Added some new tests (DG);
- * 11-Jul-2007 : Fixed bad time zone assumption (DG);
  *
  */
 
@@ -137,7 +128,7 @@ public class SecondTest {
     @Test
     public void testSerialization() {
         Second s1 = new Second();
-        Second s2 = (Second) TestUtils.serialised(s1);
+        Second s2 = TestUtils.serialised(s1);
         assertEquals(s1, s2);
     }
 

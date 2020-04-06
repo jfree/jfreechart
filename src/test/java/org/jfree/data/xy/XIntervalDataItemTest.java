@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * --------------------------
  * XIntervalDataItemTest.java
  * --------------------------
- * (C) Copyright 2006-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 20-Oct-2006 : Version 1 (DG);
  *
  */
 
@@ -45,6 +41,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.junit.Test;
 
 /**
@@ -60,7 +57,7 @@ public class XIntervalDataItemTest {
     @Test
     public void testConstructor1() {
         XIntervalDataItem item1 = new XIntervalDataItem(1.0, 2.0, 3.0, 4.0);
-        assertEquals(new Double(1.0), item1.getX());
+        assertEquals(1.0, item1.getX());
         assertEquals(2.0, item1.getXLowValue(), EPSILON);
         assertEquals(3.0, item1.getXHighValue(), EPSILON);
         assertEquals(4.0, item1.getYValue(), EPSILON);
@@ -108,7 +105,7 @@ public class XIntervalDataItemTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         XIntervalDataItem item1 = new XIntervalDataItem(1.0, 2.0, 3.0, 4.0);
-        XIntervalDataItem item2 = (XIntervalDataItem) item1.clone();
+        XIntervalDataItem item2 = CloneUtils.clone(item1);
         assertTrue(item1 != item2);
         assertTrue(item1.getClass() == item2.getClass());
         assertTrue(item1.equals(item2));
@@ -120,7 +117,7 @@ public class XIntervalDataItemTest {
     @Test
     public void testSerialization() {
         XIntervalDataItem item1 = new XIntervalDataItem(1.0, 2.0, 3.0, 4.0);
-        XIntervalDataItem item2 = (XIntervalDataItem) TestUtils.serialised(item1);
+        XIntervalDataItem item2 = TestUtils.serialised(item1);
         assertEquals(item1, item2);
     }
 

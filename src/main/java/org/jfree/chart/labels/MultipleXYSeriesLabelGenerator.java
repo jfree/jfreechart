@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,18 +27,10 @@
  * -----------------------------------
  * MultipleXYSeriesLabelGenerator.java
  * -----------------------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited.
+ * (C) Copyright 2004-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 19-Nov-2004 : Version 1 (DG);
- * 18-Apr-2005 : Use StringBuffer (DG);
- * 20-Feb-2007 : Fixed for equals() and cloning() (DG);
- * 31-Mar-2008 : Added hashCode() method to appease FindBugs (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -105,7 +97,7 @@ public class MultipleXYSeriesLabelGenerator implements XYSeriesLabelGenerator,
      * @param label  the label.
      */
     public void addSeriesLabel(int series, String label) {
-        Integer key = new Integer(series);
+        Integer key = series;
         List labelList = (List) this.seriesLabelLists.get(key);
         if (labelList == null) {
             labelList = new java.util.ArrayList();
@@ -120,7 +112,7 @@ public class MultipleXYSeriesLabelGenerator implements XYSeriesLabelGenerator,
      * @param series  the series index.
      */
     public void clearSeriesLabels(int series) {
-        Integer key = new Integer(series);
+        Integer key = series;
         this.seriesLabelLists.put(key, null);
     }
 
@@ -139,7 +131,7 @@ public class MultipleXYSeriesLabelGenerator implements XYSeriesLabelGenerator,
         StringBuilder label = new StringBuilder();
         label.append(MessageFormat.format(this.formatPattern,
                 createItemArray(dataset, series)));
-        Integer key = new Integer(series);
+        Integer key = series;
         List extraLabels = (List) this.seriesLabelLists.get(key);
         if (extraLabels != null) {
             Object[] temp = new Object[1];

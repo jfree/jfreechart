@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,28 +27,11 @@
  * ---------------------
  * PieSectionEntity.java
  * ---------------------
- * (C) Copyright 2002-2008, by Object Refinery Limited.
+ * (C) Copyright 2002-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Richard Atkinson;
  *                   Christian W. Zuckschwerdt;
- *
- * Changes:
- * --------
- * 23-May-2002 : Version 1 (DG);
- * 12-Jun-2002 : Added Javadoc comments (DG);
- * 26-Jun-2002 : Added method to generate AREA tag for image map
- *               generation (DG);
- * 05-Aug-2002 : Added new constructor to populate URLText
- *               Moved getImageMapAreaTag() to ChartEntity (superclass) (RA);
- * 03-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 07-Mar-2003 : Added pie index attribute, since the PiePlot class can create
- *               multiple pie plots within one chart.  Also renamed 'category'
- *               --> 'sectionKey' and changed the class from Object -->
- *               Comparable (DG);
- * 30-Jul-2003 : Added PieDataset reference (CZ);
- * 11-Jan-2005 : Removed deprecated code in preparation for 1.0.0 release (DG);
- * 13-Nov-2007 : Implemented equals() and hashCode() (DG);
  *
  */
 
@@ -64,14 +47,14 @@ import org.jfree.data.general.PieDataset;
 /**
  * A chart entity that represents one section within a pie plot.
  */
-public class PieSectionEntity extends ChartEntity
-                              implements Serializable {
+public class PieSectionEntity<K extends Comparable<K>> extends ChartEntity 
+        implements Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 9199892576531984162L;
 
     /** The dataset. */
-    private PieDataset dataset;
+    private PieDataset<K> dataset;
 
     /** The pie index. */
     private int pieIndex;
@@ -80,7 +63,7 @@ public class PieSectionEntity extends ChartEntity
     private int sectionIndex;
 
     /** The section key. */
-    private Comparable sectionKey;
+    private K sectionKey;
 
     /**
      * Creates a new pie section entity.
@@ -93,11 +76,8 @@ public class PieSectionEntity extends ChartEntity
      * @param toolTipText  the tool tip text.
      * @param urlText  the URL text for HTML image maps.
      */
-    public PieSectionEntity(Shape area,
-                            PieDataset dataset,
-                            int pieIndex, int sectionIndex,
-                            Comparable sectionKey,
-                            String toolTipText, String urlText) {
+    public PieSectionEntity(Shape area, PieDataset dataset, int pieIndex, 
+            int sectionIndex, K sectionKey, String toolTipText, String urlText) {
 
         super(area, toolTipText, urlText);
         this.dataset = dataset;
@@ -114,7 +94,7 @@ public class PieSectionEntity extends ChartEntity
      *
      * @see #setDataset(PieDataset)
      */
-    public PieDataset getDataset() {
+    public PieDataset<K> getDataset() {
         return this.dataset;
     }
 
@@ -125,7 +105,7 @@ public class PieSectionEntity extends ChartEntity
      *
      * @see #getDataset()
      */
-    public void setDataset(PieDataset dataset) {
+    public void setDataset(PieDataset<K> dataset) {
         this.dataset = dataset;
     }
 
@@ -182,7 +162,7 @@ public class PieSectionEntity extends ChartEntity
      *
      * @see #setSectionKey(Comparable)
      */
-    public Comparable getSectionKey() {
+    public K getSectionKey() {
         return this.sectionKey;
     }
 
@@ -193,7 +173,7 @@ public class PieSectionEntity extends ChartEntity
      *
      * @see #getSectionKey()
      */
-    public void setSectionKey(Comparable key) {
+    public void setSectionKey(K key) {
         this.sectionKey = key;
     }
 

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * -------------------------
  * PaintScaleLegendTest.java
  * -------------------------
- * (C) Copyright 2007-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 22-Jan-2007 : Version 1 (DG);
- * 18-Jun-2008 : Extended testEquals() for new field (DG);
  *
  */
 
@@ -55,6 +50,7 @@ import org.jfree.chart.axis.AxisLocation;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.renderer.GrayPaintScale;
 import org.jfree.chart.renderer.LookupPaintScale;
+import org.jfree.chart.util.CloneUtils;
 import org.junit.Test;
 
 /**
@@ -163,7 +159,7 @@ public class PaintScaleLegendTest {
     public void testCloning() throws CloneNotSupportedException {
         PaintScaleLegend l1 = new PaintScaleLegend(new GrayPaintScale(),
                 new NumberAxis("X"));
-        PaintScaleLegend l2 = (PaintScaleLegend) l1.clone();
+        PaintScaleLegend l2 = CloneUtils.clone(l1);
         assertTrue(l1 != l2);
         assertTrue(l1.getClass() == l2.getClass());
         assertTrue(l1.equals(l2));
@@ -176,7 +172,7 @@ public class PaintScaleLegendTest {
     public void testSerialization() {
         PaintScaleLegend l1 = new PaintScaleLegend(new GrayPaintScale(),
                 new NumberAxis("X"));
-        PaintScaleLegend l2 = (PaintScaleLegend) TestUtils.serialised(l1);
+        PaintScaleLegend l2 = TestUtils.serialised(l1);
         assertEquals(l1, l2);
     }
 

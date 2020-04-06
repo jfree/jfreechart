@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * -----------------
  * CategoryTick.java
  * -----------------
- * (C) Copyright 2003-2008, by Object Refinery Limited.
+ * (C) Copyright 2003-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 07-Nov-2003 : Version 1 (DG);
- * 13-May-2004 : Added equals() method (DG);
  *
  */
 
@@ -52,7 +47,7 @@ import org.jfree.chart.util.ObjectUtils;
 public class CategoryTick extends Tick {
 
     /** The category. */
-    private Comparable category;
+    private Comparable<?> category;
 
     /** The label. */
     private TextBlock label;
@@ -69,11 +64,9 @@ public class CategoryTick extends Tick {
      * @param rotationAnchor  the rotation anchor.
      * @param angle  the rotation angle (in radians).
      */
-    public CategoryTick(Comparable category,
-                        TextBlock label,
-                        TextBlockAnchor labelAnchor,
-                        TextAnchor rotationAnchor,
-                        double angle) {
+    public CategoryTick(Comparable<?> category, TextBlock label,
+            TextBlockAnchor labelAnchor, TextAnchor rotationAnchor, 
+            double angle) {
 
         super("", TextAnchor.CENTER, rotationAnchor, angle);
         this.category = category;
@@ -87,7 +80,7 @@ public class CategoryTick extends Tick {
      *
      * @return The category.
      */
-    public Comparable getCategory() {
+    public Comparable<?> getCategory() {
         return this.category;
     }
 

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,31 +27,17 @@
  * -------------------------------
  * TimePeriodValuesCollection.java
  * -------------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited.
+ * (C) Copyright 2003-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 22-Apr-2003 : Version 1 (DG);
- * 05-May-2004 : Now extends AbstractIntervalXYDataset (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
- *               getYValue() (DG);
- * 06-Oct-2004 : Updated for changes in DomainInfo interface (DG);
- * 11-Jan-2005 : Removed deprecated code in preparation for 1.0.0 release (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 03-Oct-2006 : Deprecated get/setDomainIsPointsInTime() (DG);
- * 11-Jun-2007 : Fixed bug in getDomainBounds() method, and changed default
- *               value for domainIsPointsInTime to false (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
- * 19-Jan-2019 : Added missing hashCode (TH);
  *
  */
 
 package org.jfree.data.time;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
@@ -78,7 +64,7 @@ public class TimePeriodValuesCollection extends AbstractIntervalXYDataset
     private static final long serialVersionUID = -3077934065236454199L;
 
     /** Storage for the time series. */
-    private List data;
+    private List<TimePeriodValues> data;
 
     /**
      * The position within a time period to return as the x-value (START,
@@ -100,7 +86,7 @@ public class TimePeriodValuesCollection extends AbstractIntervalXYDataset
      * @param series  the series ({@code null} ignored).
      */
     public TimePeriodValuesCollection(TimePeriodValues series) {
-        this.data = new java.util.ArrayList();
+        this.data = new ArrayList<>();
         this.xPosition = TimePeriodAnchor.MIDDLE;
         if (series != null) {
             this.data.add(series);
@@ -149,10 +135,11 @@ public class TimePeriodValuesCollection extends AbstractIntervalXYDataset
      * @return The series.
      */
     public TimePeriodValues getSeries(int series) {
+        Args.requireInRange(series, "series", 0, getSeriesCount() - 1);
         if ((series < 0) || (series >= getSeriesCount())) {
             throw new IllegalArgumentException("Index 'series' out of range.");
         }
-        return (TimePeriodValues) this.data.get(series);
+        return this.data.get(series);
     }
 
     /**

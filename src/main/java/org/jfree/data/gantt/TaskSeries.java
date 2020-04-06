@@ -47,11 +47,12 @@
 
 package org.jfree.data.gantt;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
+import org.jfree.chart.util.CloneUtils;
 
 import org.jfree.data.general.Series;
 
@@ -61,19 +62,19 @@ import org.jfree.data.general.Series;
  * This class is used as a building block for the {@link TaskSeriesCollection}
  * class that can be used to construct basic Gantt charts.
  */
-public class TaskSeries extends Series {
+public class TaskSeries<K extends Comparable<K>> extends Series<K> {
 
     /** Storage for the tasks in the series. */
-    private List tasks;
+    private List<Task> tasks;
 
     /**
      * Constructs a new series with the specified name.
      *
      * @param name  the series name ({@code null} not permitted).
      */
-    public TaskSeries(String name) {
+    public TaskSeries(K name) {
         super(name);
-        this.tasks = new java.util.ArrayList();
+        this.tasks = new ArrayList<>();
     }
 
     /**
@@ -129,7 +130,7 @@ public class TaskSeries extends Series {
      * @return The task.
      */
     public Task get(int index) {
-        return (Task) this.tasks.get(index);
+        return this.tasks.get(index);
     }
 
     /**
@@ -143,7 +144,7 @@ public class TaskSeries extends Series {
         Task result = null;
         int count = this.tasks.size();
         for (int i = 0; i < count; i++) {
-            Task t = (Task) this.tasks.get(i);
+            Task t = this.tasks.get(i);
             if (t.getDescription().equals(description)) {
                 result = t;
                 break;
@@ -157,7 +158,7 @@ public class TaskSeries extends Series {
      *
      * @return The tasks.
      */
-    public List getTasks() {
+    public List<Task> getTasks() {
         return Collections.unmodifiableList(this.tasks);
     }
 
@@ -204,7 +205,7 @@ public class TaskSeries extends Series {
     @Override
     public Object clone() throws CloneNotSupportedException {
         TaskSeries clone = (TaskSeries) super.clone();
-        clone.tasks = (List) ObjectUtils.deepClone(this.tasks);
+        clone.tasks = CloneUtils.cloneList(this.tasks);
         return clone;
     }
 

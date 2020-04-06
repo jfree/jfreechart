@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * ---------------------
  * VectorSeriesTest.java
  * ---------------------
- * (C) Copyright 2007-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 30-Jan-2007 : Version 1, based on XYSeriesTests (DG);
- * 24-May-2007 : Updated for modified method names (DG);
- * 27-Nov-2007 : Added testClear() method (DG);
  *
  */
 
@@ -49,6 +43,7 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertNotNull;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 
 import org.jfree.data.general.SeriesChangeEvent;
 import org.jfree.data.general.SeriesChangeListener;
@@ -66,6 +61,7 @@ public class VectorSeriesTest implements SeriesChangeListener {
      *
      * @param event  the event.
      */
+    @Override
     public void seriesChanged(SeriesChangeEvent event) {
         this.lastEvent = event;
     }
@@ -76,26 +72,26 @@ public class VectorSeriesTest implements SeriesChangeListener {
     @Test
     public void testEquals() {
 
-        VectorSeries s1 = new VectorSeries("s1");
-        VectorSeries s2 = new VectorSeries("s1");
+        VectorSeries<String> s1 = new VectorSeries<>("s1");
+        VectorSeries<String> s2 = new VectorSeries<>("s1");
         assertTrue(s1.equals(s2));
 
         // seriesKey
-        s1 = new VectorSeries("s2");
+        s1 = new VectorSeries<>("s2");
         assertFalse(s1.equals(s2));
-        s2 = new VectorSeries("s2");
+        s2 = new VectorSeries<>("s2");
         assertTrue(s1.equals(s2));
 
         // autoSort
-        s1 = new VectorSeries("s2", true, true);
+        s1 = new VectorSeries<>("s2", true, true);
         assertFalse(s1.equals(s2));
-        s2 = new VectorSeries("s2", true, true);
+        s2 = new VectorSeries<>("s2", true, true);
         assertTrue(s1.equals(s2));
 
         // allowDuplicateValues
-        s1 = new VectorSeries("s2", false, false);
+        s1 = new VectorSeries<>("s2", false, false);
         assertFalse(s1.equals(s2));
-        s2 = new VectorSeries("s2", false, false);
+        s2 = new VectorSeries<>("s2", false, false);
         assertTrue(s1.equals(s2));
 
         // add a value
@@ -123,9 +119,9 @@ public class VectorSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        VectorSeries s1 = new VectorSeries("s1");
+        VectorSeries<String> s1 = new VectorSeries<>("s1");
         s1.add(1.0, 0.5, 1.5, 2.0);
-        VectorSeries s2 = (VectorSeries) s1.clone();
+        VectorSeries<String> s2 = CloneUtils.clone(s1);
         assertTrue(s1 != s2);
         assertTrue(s1.getClass() == s2.getClass());
         assertTrue(s1.equals(s2));
@@ -136,9 +132,9 @@ public class VectorSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testSerialization() {
-        VectorSeries s1 = new VectorSeries("s1");
+        VectorSeries<String> s1 = new VectorSeries<>("s1");
         s1.add(1.0, 0.5, 1.5, 2.0);
-        VectorSeries s2 = (VectorSeries) TestUtils.serialised(s1);
+        VectorSeries<String> s2 = TestUtils.serialised(s1);
         assertEquals(s1, s2);
     }
 
@@ -147,7 +143,7 @@ public class VectorSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testIndexOf() {
-        VectorSeries s1 = new VectorSeries("Series 1");
+        VectorSeries<String> s1 = new VectorSeries<>("Series 1");
         s1.add(1.0, 1.0, 1.0, 2.0);
         s1.add(2.0, 2.0, 2.0, 3.0);
         s1.add(3.0, 3.0, 3.0, 4.0);
@@ -159,7 +155,7 @@ public class VectorSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testIndexOf2() {
-        VectorSeries s1 = new VectorSeries("Series 1");
+        VectorSeries<String> s1 = new VectorSeries<>("Series 1");
         s1.add(1.0, 1.0, 1.0, 2.0);
         s1.add(3.0, 3.0, 3.0, 3.0);
         s1.add(2.0, 2.0, 2.0, 2.0);
@@ -173,7 +169,7 @@ public class VectorSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testRemove() {
-        VectorSeries s1 = new VectorSeries("Series 1");
+        VectorSeries<String> s1 = new VectorSeries<>("Series 1");
         s1.add(1.0, 1.0, 1.0, 2.0);
         s1.add(3.0, 3.0, 3.0, 3.0);
         s1.add(2.0, 2.0, 2.0, 2.0);
@@ -194,7 +190,7 @@ public class VectorSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testAdditionOfDuplicateXValues() {
-        VectorSeries s1 = new VectorSeries("Series 1");
+        VectorSeries<String> s1 = new VectorSeries<>("Series 1");
         s1.add(1.0, 1.0, 1.0, 1.0);
         s1.add(2.0, 2.0, 2.0, 2.0);
         s1.add(2.0, 2.0, 3.0, 3.0);
@@ -212,7 +208,7 @@ public class VectorSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testAdd() {
-        VectorSeries series = new VectorSeries("Series", false, true);
+        VectorSeries<String> series = new VectorSeries<>("Series", false, true);
         series.add(5.0, 5.50, 5.50, 5.50);
         series.add(5.1, 5.51, 5.51, 5.51);
         series.add(6.0, 6.6, 6.6, 6.6);
@@ -234,7 +230,7 @@ public class VectorSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testSetMaximumItemCount() {
-        VectorSeries s1 = new VectorSeries("S1");
+        VectorSeries<String> s1 = new VectorSeries<>("S1");
         assertEquals(Integer.MAX_VALUE, s1.getMaximumItemCount());
         s1.setMaximumItemCount(2);
         assertEquals(2, s1.getMaximumItemCount());
@@ -250,7 +246,7 @@ public class VectorSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testSetMaximumItemCount2() {
-        VectorSeries s1 = new VectorSeries("S1");
+        VectorSeries<String> s1 = new VectorSeries<>("S1");
         s1.add(1.0, 1.1, 1.1, 1.1);
         s1.add(2.0, 2.2, 2.2, 2.2);
         s1.add(3.0, 3.3, 3.3, 3.3);
@@ -264,7 +260,7 @@ public class VectorSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testClear() {
-        VectorSeries s1 = new VectorSeries("S1");
+        VectorSeries<String> s1 = new VectorSeries<>("S1");
         s1.addChangeListener(this);
         s1.clear();
         assertNull(this.lastEvent);

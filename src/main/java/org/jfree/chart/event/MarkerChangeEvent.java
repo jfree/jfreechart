@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * ----------------------
  * MarkerChangeEvent.java
  * ----------------------
- * (C) Copyright 2006-2008, by Object Refinery Limited.
+ * (C) Copyright 2006-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 05-Sep-2006 : Version 1 (DG);
  *
  */
 
@@ -51,7 +47,7 @@ import org.jfree.chart.plot.Marker;
 public class MarkerChangeEvent extends ChartChangeEvent {
 
     /** The plot that generated the event. */
-    private Marker marker;
+    private final Marker marker;
 
     /**
      * Creates a new {@code MarkerChangeEvent} instance.
@@ -62,7 +58,7 @@ public class MarkerChangeEvent extends ChartChangeEvent {
      * @since 1.0.3
      */
     public MarkerChangeEvent(Marker marker) {
-        super(marker);
+        super(marker); // null check is in here
         this.marker = marker;
     }
 

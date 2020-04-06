@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * -----------------------
  * GrayPaintScaleTest.java
  * -----------------------
- * (C) Copyright 2006-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 05-Jul-2006 : Version 1 (DG);
- * 26-Sep-2007 : Added testConstructor() and testGetPaint() (DG);
- * 29-Jan-2009 : Extended testEquals() for new alpha field (DG);
  *
  */
 
@@ -49,6 +43,7 @@ import static org.junit.Assert.assertTrue;
 import java.awt.Color;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.junit.Test;
 
 /**
@@ -123,7 +118,7 @@ public class GrayPaintScaleTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         GrayPaintScale g1 = new GrayPaintScale();
-        GrayPaintScale g2 = (GrayPaintScale) g1.clone();
+        GrayPaintScale g2 = CloneUtils.clone(g1);
         assertTrue(g1 != g2);
         assertTrue(g1.getClass() == g2.getClass());
         assertTrue(g1.equals(g2));
@@ -135,7 +130,7 @@ public class GrayPaintScaleTest {
     @Test
     public void testSerialization() {
         GrayPaintScale g1 = new GrayPaintScale();
-        GrayPaintScale g2 = (GrayPaintScale) TestUtils.serialised(g1);
+        GrayPaintScale g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

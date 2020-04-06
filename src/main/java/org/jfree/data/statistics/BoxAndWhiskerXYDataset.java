@@ -63,7 +63,8 @@ import org.jfree.data.xy.XYDataset;
  * Example: JFreeChart uses this interface to obtain data for AIMS
  * max-min-average-median plots.
  */
-public interface BoxAndWhiskerXYDataset extends XYDataset {
+public interface BoxAndWhiskerXYDataset<S extends Comparable<S>> 
+        extends XYDataset<S> {
 
     /**
      * Returns the mean for the specified series and item.

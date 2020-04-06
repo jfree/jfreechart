@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,17 +27,11 @@
  * -------------------------
  * XYSplineRendererTest.java
  * -------------------------
- * (C) Copyright 2007-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * Changes
- * -------
- * 25-Jul-2007 : Version 1 (DG);
- * 22-Apr-2008 : Added testPublicCloneable() (DG);
- * 20-Nov-2013 : Add tests for new fields (DG);
- * 
  */
 
 package org.jfree.chart.renderer.xy;
@@ -51,6 +45,7 @@ import java.awt.geom.Rectangle2D;
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.ui.GradientPaintTransformType;
 import org.jfree.chart.ui.StandardGradientPaintTransformer;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 import org.junit.Test;
 
@@ -113,7 +108,7 @@ public class XYSplineRendererTest {
         Rectangle2D legendShape = new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0);
         XYSplineRenderer r1 = new XYSplineRenderer();
         r1.setLegendLine(legendShape);
-        XYSplineRenderer r2 = (XYSplineRenderer) r1.clone();
+        XYSplineRenderer r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -134,7 +129,7 @@ public class XYSplineRendererTest {
     @Test
     public void testSerialization() {
         XYSplineRenderer r1 = new XYSplineRenderer();
-        XYSplineRenderer r2 = (XYSplineRenderer) TestUtils.serialised(r1);
+        XYSplineRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

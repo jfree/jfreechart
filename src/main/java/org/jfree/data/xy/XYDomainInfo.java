@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * -----------------
  * XYDomainInfo.java
  * -----------------
- * (C) Copyright 2009, by Object Refinery Limited.
+ * (C) Copyright 2009-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 27-Mar-2009 : Version 1 (DG);
  *
  */
 
@@ -49,7 +45,7 @@ import org.jfree.data.Range;
  *
  * @since 1.0.13
  */
-public interface XYDomainInfo {
+public interface XYDomainInfo<S extends Comparable<S>> {
 
     /**
      * Returns the range of the values in this dataset's domain.
@@ -61,7 +57,7 @@ public interface XYDomainInfo {
      * @return The range (or {@code null} if the dataset contains no
      *     values).
      */
-    public Range getDomainBounds(List visibleSeriesKeys,
+    public Range getDomainBounds(List<S> visibleSeriesKeys,
             boolean includeInterval);
 
 }

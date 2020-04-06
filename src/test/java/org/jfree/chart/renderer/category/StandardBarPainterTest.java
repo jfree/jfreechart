@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * ---------------------------
  * StandardBarPainterTest.java
  * ---------------------------
- * (C) Copyright 2008-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2008-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 20-Jun-2008 : Version 1 (DG);
  *
  */
 
@@ -94,8 +90,7 @@ public class StandardBarPainterTest {
     @Test
     public void testSerialization() {
         StandardBarPainter p1 = new StandardBarPainter();
-        StandardBarPainter p2 = (StandardBarPainter) 
-                TestUtils.serialised(p1);
+        StandardBarPainter p2 = TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 

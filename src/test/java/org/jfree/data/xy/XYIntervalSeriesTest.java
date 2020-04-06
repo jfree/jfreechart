@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * -------------------------
  * XYIntervalSeriesTest.java
  * -------------------------
- * (C) Copyright 2006-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 20-Oct-2006 : Version 1, based on XYSeriesTests (DG);
- * 13-Feb-2007 : Added testValues() (DG);
- * 27-Nov-2007 : Added testClear() method (DG);
  *
  */
 
@@ -49,6 +43,7 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertNotNull;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 
 import org.jfree.data.general.SeriesChangeEvent;
 import org.jfree.data.general.SeriesChangeListener;
@@ -66,6 +61,7 @@ public class XYIntervalSeriesTest implements SeriesChangeListener {
      *
      * @param event  the event.
      */
+    @Override
     public void seriesChanged(SeriesChangeEvent event) {
         this.lastEvent = event;
     }
@@ -75,26 +71,26 @@ public class XYIntervalSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testEquals() {
-        XYIntervalSeries s1 = new XYIntervalSeries("s1");
-        XYIntervalSeries s2 = new XYIntervalSeries("s1");
+        XYIntervalSeries<String> s1 = new XYIntervalSeries<>("s1");
+        XYIntervalSeries<String> s2 = new XYIntervalSeries<>("s1");
         assertTrue(s1.equals(s2));
 
         // seriesKey
-        s1 = new XYIntervalSeries("s2");
+        s1 = new XYIntervalSeries<>("s2");
         assertFalse(s1.equals(s2));
-        s2 = new XYIntervalSeries("s2");
+        s2 = new XYIntervalSeries<>("s2");
         assertTrue(s1.equals(s2));
 
         // autoSort
-        s1 = new XYIntervalSeries("s2", false, true);
+        s1 = new XYIntervalSeries<>("s2", false, true);
         assertFalse(s1.equals(s2));
-        s2 = new XYIntervalSeries("s2", false, true);
+        s2 = new XYIntervalSeries<>("s2", false, true);
         assertTrue(s1.equals(s2));
 
         // allowDuplicateValues
-        s1 = new XYIntervalSeries("s2", false, false);
+        s1 = new XYIntervalSeries<>("s2", false, false);
         assertFalse(s1.equals(s2));
-        s2 = new XYIntervalSeries("s2", false, false);
+        s2 = new XYIntervalSeries<>("s2", false, false);
         assertTrue(s1.equals(s2));
 
         // add a value
@@ -110,20 +106,21 @@ public class XYIntervalSeriesTest implements SeriesChangeListener {
         assertTrue(s2.equals(s1));
 
         // remove a value
-        s1.remove(new Double(1.0));
+        s1.remove(1.0);
         assertFalse(s1.equals(s2));
-        s2.remove(new Double(1.0));
+        s2.remove(1.0);
         assertTrue(s2.equals(s1));
     }
 
     /**
      * Confirm that cloning works.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        XYIntervalSeries s1 = new XYIntervalSeries("s1");
+        XYIntervalSeries<String> s1 = new XYIntervalSeries<>("s1");
         s1.add(1.0, 0.5, 1.5, 2.0, 1.9, 2.01);
-        XYIntervalSeries s2 = (XYIntervalSeries) s1.clone();
+        XYIntervalSeries<String> s2 = CloneUtils.clone(s1);
         assertTrue(s1 != s2);
         assertTrue(s1.getClass() == s2.getClass());
         assertTrue(s1.equals(s2));
@@ -134,9 +131,9 @@ public class XYIntervalSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testSerialization() {
-        XYIntervalSeries s1 = new XYIntervalSeries("s1");
+        XYIntervalSeries<String> s1 = new XYIntervalSeries<>("s1");
         s1.add(1.0, 0.5, 1.5, 2.0, 1.9, 2.1);
-        XYIntervalSeries s2 = (XYIntervalSeries) TestUtils.serialised(s1);
+        XYIntervalSeries<String> s2 = TestUtils.serialised(s1);
         assertEquals(s1, s2);
     }
 
@@ -145,11 +142,11 @@ public class XYIntervalSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testIndexOf() {
-        XYIntervalSeries s1 = new XYIntervalSeries("Series 1");
+        XYIntervalSeries<String> s1 = new XYIntervalSeries<>("Series 1");
         s1.add(1.0, 1.0, 1.0, 2.0, 1.9, 2.1);
         s1.add(2.0, 2.0, 2.0, 3.0, 2.9, 3.1);
         s1.add(3.0, 3.0, 3.0, 4.0, 3.9, 4.1);
-        assertEquals(0, s1.indexOf(new Double(1.0)));
+        assertEquals(0, s1.indexOf(1.0));
     }
 
     /**
@@ -157,13 +154,13 @@ public class XYIntervalSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testIndexOf2() {
-        XYIntervalSeries s1 = new XYIntervalSeries("Series 1", false, true);
+        XYIntervalSeries<String> s1 = new XYIntervalSeries<>("Series 1", false, true);
         s1.add(1.0, 1.0, 1.0, 2.0, 1.9, 2.1);
         s1.add(3.0, 3.0, 3.0, 3.0, 2.9, 3.1);
         s1.add(2.0, 2.0, 2.0, 2.0, 1.9, 2.1);
-        assertEquals(0, s1.indexOf(new Double(1.0)));
-        assertEquals(1, s1.indexOf(new Double(3.0)));
-        assertEquals(2, s1.indexOf(new Double(2.0)));
+        assertEquals(0, s1.indexOf(1.0));
+        assertEquals(1, s1.indexOf(3.0));
+        assertEquals(2, s1.indexOf(2.0));
     }
 
     /**
@@ -171,17 +168,17 @@ public class XYIntervalSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testRemove() {
-        XYIntervalSeries s1 = new XYIntervalSeries("Series 1");
+        XYIntervalSeries<String> s1 = new XYIntervalSeries<>("Series 1");
         s1.add(1.0, 1.0, 1.0, 2.0, 1.9, 2.1);
         s1.add(2.0, 2.0, 2.0, 2.0, 1.9, 2.1);
         s1.add(3.0, 3.0, 3.0, 3.0, 2.9, 3.1);
         assertEquals(3, s1.getItemCount());
 
-        s1.remove(new Double(2.0));
-        assertEquals(new Double(3.0), s1.getX(1));
+        s1.remove(2.0);
+        assertEquals(3.0, s1.getX(1));
 
-        s1.remove(new Double(1.0));
-        assertEquals(new Double(3.0), s1.getX(0));
+        s1.remove(1.0);
+        assertEquals(3.0, s1.getX(0));
     }
 
     private static final double EPSILON = 0.0000000001;
@@ -192,7 +189,7 @@ public class XYIntervalSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testAdditionOfDuplicateXValues() {
-        XYIntervalSeries s1 = new XYIntervalSeries("Series 1");
+        XYIntervalSeries<String> s1 = new XYIntervalSeries<>("Series 1");
         s1.add(1.0, 1.0, 1.0, 1.0, 1.0, 1.0);
         s1.add(2.0, 2.0, 2.0, 2.0, 2.0, 2.0);
         s1.add(2.0, 3.0, 3.0, 3.0, 3.0, 3.0);
@@ -210,7 +207,7 @@ public class XYIntervalSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testAdd() {
-        XYIntervalSeries series = new XYIntervalSeries("Series", false, true);
+        XYIntervalSeries<String> series = new XYIntervalSeries<>("Series", false, true);
         series.add(5.0, 5.50, 5.50, 5.50, 5.50, 5.50);
         series.add(5.1, 5.51, 5.51, 5.51, 5.51, 5.51);
         series.add(6.0, 6.6, 6.6, 6.6, 6.6, 6.6);
@@ -232,7 +229,7 @@ public class XYIntervalSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testSetMaximumItemCount() {
-        XYIntervalSeries s1 = new XYIntervalSeries("S1");
+        XYIntervalSeries<String> s1 = new XYIntervalSeries<>("S1");
         assertEquals(Integer.MAX_VALUE, s1.getMaximumItemCount());
         s1.setMaximumItemCount(2);
         assertEquals(2, s1.getMaximumItemCount());
@@ -248,7 +245,7 @@ public class XYIntervalSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testSetMaximumItemCount2() {
-        XYIntervalSeries s1 = new XYIntervalSeries("S1");
+        XYIntervalSeries<String> s1 = new XYIntervalSeries<>("S1");
         s1.add(1.0, 1.1, 1.1, 1.1, 1.1, 1.1);
         s1.add(2.0, 2.2, 2.2, 2.2, 2.2, 2.2);
         s1.add(3.0, 3.3, 3.3, 3.3, 2.2, 2.2);
@@ -262,7 +259,7 @@ public class XYIntervalSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testValues() {
-        XYIntervalSeries s1 = new XYIntervalSeries("S1");
+        XYIntervalSeries<String> s1 = new XYIntervalSeries<>("S1");
         s1.add(2.0, 1.0, 3.0, 5.0, 4.0, 6.0);
         assertEquals(2.0, s1.getX(0).doubleValue(), EPSILON);
         assertEquals(1.0, s1.getXLowValue(0), EPSILON);
@@ -277,7 +274,7 @@ public class XYIntervalSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testClear() {
-        XYIntervalSeries s1 = new XYIntervalSeries("S1");
+        XYIntervalSeries<String> s1 = new XYIntervalSeries<>("S1");
         s1.addChangeListener(this);
         s1.clear();
         assertNull(this.lastEvent);

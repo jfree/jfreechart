@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,18 +27,10 @@
  * --------------------------------
  * StandardPieURLGeneratorTest.java
  * --------------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 21-Mar-2003 : Version 1 (DG);
- * 06-Jan-2003 : Added a test for URL generation (DG);
- * 24-Nov-2006 : New equals() test (DG);
- * 17-Apr-2007 : Added additional check to testURL() (DG);
- * 23-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
@@ -112,8 +104,7 @@ public class StandardPieURLGeneratorTest {
     public void testSerialization() {
         StandardPieURLGenerator g1 = new StandardPieURLGenerator(
                 "index.html?", "cat");
-        StandardPieURLGenerator g2 = (StandardPieURLGenerator) 
-                TestUtils.serialised(g1);
+        StandardPieURLGenerator g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 
@@ -122,9 +113,9 @@ public class StandardPieURLGeneratorTest {
      */
     @Test
     public void testURL() {
-        DefaultPieDataset dataset = new DefaultPieDataset();
-        dataset.setValue("Alpha '1'", new Double(5.0));
-        dataset.setValue("Beta", new Double(5.5));
+        DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
+        dataset.setValue("Alpha '1'", 5.0);
+        dataset.setValue("Beta", 5.5);
         StandardPieURLGenerator g1 = new StandardPieURLGenerator(
                 "chart.jsp", "category");
         String url = g1.generateURL(dataset, "Beta", 0);

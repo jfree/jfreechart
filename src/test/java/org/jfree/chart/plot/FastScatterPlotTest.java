@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * ------------------------
  * FastScatterPlotTest.java
  * ------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 18-Mar-2003 : Version 1 (DG);
- * 29-Jan-2009 : Updated testEquals() (DG);
- * 26-Mar-2009 : Updated testEquals() for new panning fields (DG);
  *
  */
 
@@ -56,6 +50,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.ValueAxis;
+import org.jfree.chart.util.CloneUtils;
 import org.junit.Test;
 
 /**
@@ -104,10 +99,10 @@ public class FastScatterPlotTest {
         plot2.setRangeGridlinesVisible(false);
         assertTrue(plot1.equals(plot2));
 
-        plot1.setRangeGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.green,
+        plot1.setRangeGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.GREEN,
                 3.0f, 4.0f, Color.YELLOW));
         assertFalse(plot1.equals(plot2));
-        plot2.setRangeGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.green,
+        plot2.setRangeGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.GREEN,
                 3.0f, 4.0f, Color.YELLOW));
         assertTrue(plot1.equals(plot2));
 
@@ -174,11 +169,12 @@ public class FastScatterPlotTest {
 
     /**
      * Confirm that cloning works.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
         FastScatterPlot p1 = new FastScatterPlot();
-        FastScatterPlot p2 = (FastScatterPlot) p1.clone();
+        FastScatterPlot p2 = CloneUtils.clone(p1);
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
@@ -193,7 +189,7 @@ public class FastScatterPlotTest {
         ValueAxis domainAxis = new NumberAxis("X");
         ValueAxis rangeAxis = new NumberAxis("Y");
         FastScatterPlot p1 = new FastScatterPlot(data, domainAxis, rangeAxis);
-        FastScatterPlot p2 = (FastScatterPlot) TestUtils.serialised(p1);
+        FastScatterPlot p2 = TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 

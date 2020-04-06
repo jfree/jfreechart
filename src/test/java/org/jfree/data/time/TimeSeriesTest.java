@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,30 +27,10 @@
  * -------------------
  * TimeSeriesTest.java
  * -------------------
- * (C) Copyright 2001-2015, by Object Refinery Limited.
+ * (C) Copyright 2001-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 16-Nov-2001 : Version 1 (DG);
- * 17-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 13-Mar-2003 : Added serialization test (DG);
- * 15-Oct-2003 : Added test for setMaximumItemCount method (DG);
- * 23-Aug-2004 : Added test that highlights a bug where the addOrUpdate()
- *               method can lead to more than maximumItemCount items in the
- *               dataset (DG);
- * 24-May-2006 : Added new tests (DG);
- * 31-Oct-2007 : New hashCode() test (DG);
- * 21-Nov-2007 : Added testBug1832432() and testClone2() (DG);
- * 10-Jan-2008 : Added testBug1864222() (DG);
- * 13-Jan-2009 : Added testEquals3() and testRemoveAgedItems3() (DG);
- * 26-May-2009 : Added various tests for min/maxY values (DG);
- * 09-Jun-2009 : Added testAdd_TimeSeriesDataItem (DG);
- * 31-Aug-2009 : Added new test for createCopy() method (DG);
- * 03-Dec-2011 : Added testBug3446965() (DG);
- * 06-Sep-2015 : Added test for findRangeBounds() (DG);
  * 
  */
 
@@ -69,6 +49,7 @@ import java.util.TimeZone;
 
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.date.MonthConstants;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.data.Range;
 import org.jfree.data.general.SeriesChangeEvent;
 import org.jfree.data.general.SeriesChangeListener;
@@ -83,13 +64,13 @@ import org.junit.Test;
 public class TimeSeriesTest implements SeriesChangeListener {
 
     /** A time series. */
-    private TimeSeries seriesA;
+    private TimeSeries<String> seriesA;
 
     /** A time series. */
-    private TimeSeries seriesB;
+    private TimeSeries<String> seriesB;
 
     /** A time series. */
-    private TimeSeries seriesC;
+    private TimeSeries<String> seriesC;
 
     /** A flag that indicates whether or not a change event was fired. */
     private boolean gotSeriesChangeEvent = false;
@@ -99,23 +80,23 @@ public class TimeSeriesTest implements SeriesChangeListener {
      */
     @Before
     public void setUp() {
-        this.seriesA = new TimeSeries("Series A");
-        this.seriesA.add(new Year(2000), new Integer(102000));
-        this.seriesA.add(new Year(2001), new Integer(102001));
-        this.seriesA.add(new Year(2002), new Integer(102002));
-        this.seriesA.add(new Year(2003), new Integer(102003));
-        this.seriesA.add(new Year(2004), new Integer(102004));
-        this.seriesA.add(new Year(2005), new Integer(102005));
+        this.seriesA = new TimeSeries<>("Series A");
+        this.seriesA.add(new Year(2000), 102000);
+        this.seriesA.add(new Year(2001), 102001);
+        this.seriesA.add(new Year(2002), 102002);
+        this.seriesA.add(new Year(2003), 102003);
+        this.seriesA.add(new Year(2004), 102004);
+        this.seriesA.add(new Year(2005), 102005);
 
-        this.seriesB = new TimeSeries("Series B");
-        this.seriesB.add(new Year(2006), new Integer(202006));
-        this.seriesB.add(new Year(2007), new Integer(202007));
-        this.seriesB.add(new Year(2008), new Integer(202008));
+        this.seriesB = new TimeSeries<>("Series B");
+        this.seriesB.add(new Year(2006), 202006);
+        this.seriesB.add(new Year(2007), 202007);
+        this.seriesB.add(new Year(2008), 202008);
 
-        this.seriesC = new TimeSeries("Series C");
-        this.seriesC.add(new Year(1999), new Integer(301999));
-        this.seriesC.add(new Year(2000), new Integer(302000));
-        this.seriesC.add(new Year(2002), new Integer(302002));
+        this.seriesC = new TimeSeries<>("Series C");
+        this.seriesC.add(new Year(1999), 301999);
+        this.seriesC.add(new Year(2000), 302000);
+        this.seriesC.add(new Year(2002), 302002);
     }
 
     /**
@@ -131,17 +112,17 @@ public class TimeSeriesTest implements SeriesChangeListener {
 
     /**
      * Check that cloning works.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testClone() throws CloneNotSupportedException {
-        TimeSeries series = new TimeSeries("Test Series");
+        TimeSeries<String> series = new TimeSeries<>("Test Series");
         RegularTimePeriod jan1st2002 = new Day(1, MonthConstants.JANUARY, 2002);
-        series.add(jan1st2002, new Integer(42));
+        series.add(jan1st2002, 42);
 
-        TimeSeries clone;
-        clone = (TimeSeries) series.clone();
+        TimeSeries<String> clone = CloneUtils.clone(series);
         clone.setKey("Clone Series");
-        clone.update(jan1st2002, new Integer(10));
+        clone.update(jan1st2002, 10);
 
         int seriesValue = series.getValue(jan1st2002).intValue();
         int cloneValue = clone.getValue(jan1st2002).intValue();
@@ -154,14 +135,15 @@ public class TimeSeriesTest implements SeriesChangeListener {
 
     /**
      * Another test of the clone() method.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testClone2() throws CloneNotSupportedException {
-        TimeSeries s1 = new TimeSeries("S1");
+        TimeSeries<String> s1 = new TimeSeries<>("S1");
         s1.add(new Year(2007), 100.0);
         s1.add(new Year(2008), null);
         s1.add(new Year(2009), 200.0);
-        TimeSeries s2 = (TimeSeries) s1.clone();
+        TimeSeries<String> s2 = CloneUtils.clone(s1);
         assertTrue(s1.equals(s2));
 
         // check independence
@@ -176,7 +158,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testAddValue() {
-        this.seriesA.add(new Year(1999), new Integer(1));
+        this.seriesA.add(new Year(1999), 1);
         int value = this.seriesA.getValue(0).intValue();
         assertEquals(1, value);
     }
@@ -208,7 +190,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testDelete2() {
-        TimeSeries s1 = new TimeSeries("Series");
+        TimeSeries<String> s1 = new TimeSeries<>("Series");
         s1.add(new Year(2000), 13.75);
         s1.add(new Year(2001), 11.90);
         s1.add(new Year(2002), null);
@@ -239,7 +221,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testDelete3() {
-        TimeSeries s1 = new TimeSeries("S1");
+        TimeSeries<String> s1 = new TimeSeries<>("S1");
         s1.add(new Year(2011), 1.1);
         s1.add(new Year(2012), 2.2);
         s1.add(new Year(2013), 3.3);
@@ -260,7 +242,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testDelete_RegularTimePeriod() {
-        TimeSeries s1 = new TimeSeries("S1");
+        TimeSeries<String> s1 = new TimeSeries<>("S1");
         s1.add(new Year(2010), 1.1);
         s1.add(new Year(2011), 2.2);
         s1.add(new Year(2012), 3.3);
@@ -276,13 +258,13 @@ public class TimeSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testSerialization() {
-        TimeSeries s1 = new TimeSeries("A test");
+        TimeSeries<String> s1 = new TimeSeries<>("A test");
         s1.add(new Year(2000), 13.75);
         s1.add(new Year(2001), 11.90);
         s1.add(new Year(2002), null);
         s1.add(new Year(2005), 19.32);
         s1.add(new Year(2007), 16.89);
-        TimeSeries s2 = (TimeSeries) TestUtils.serialised(s1);
+        TimeSeries<String> s2 = TestUtils.serialised(s1);
         assertTrue(s1.equals(s2));
     }
 
@@ -291,8 +273,8 @@ public class TimeSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testEquals() {
-        TimeSeries s1 = new TimeSeries("Time Series 1");
-        TimeSeries s2 = new TimeSeries("Time Series 2");
+        TimeSeries<String> s1 = new TimeSeries<>("Time Series 1");
+        TimeSeries<String> s2 = new TimeSeries<>("Time Series 2");
         boolean b1 = s1.equals(s2);
         assertFalse("b1", b1);
 
@@ -335,8 +317,8 @@ public class TimeSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testEquals2() {
-        TimeSeries s1 = new TimeSeries("Series", null, null);
-        TimeSeries s2 = new TimeSeries("Series", null, null);
+        TimeSeries<String> s1 = new TimeSeries<>("Series", null, null);
+        TimeSeries<String> s2 = new TimeSeries<>("Series", null, null);
         assertTrue(s1.equals(s2));
     }
 
@@ -346,7 +328,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testCreateCopy1() {
-        TimeSeries series = new TimeSeries("Series");
+        TimeSeries<String> series = new TimeSeries<>("Series");
         series.add(new Month(MonthConstants.JANUARY, 2003), 45.0);
         series.add(new Month(MonthConstants.FEBRUARY, 2003), 55.0);
         series.add(new Month(MonthConstants.JUNE, 2003), 35.0);
@@ -355,75 +337,75 @@ public class TimeSeriesTest implements SeriesChangeListener {
 
         try {
             // copy a range before the start of the series data...
-            TimeSeries result1 = series.createCopy(
+            TimeSeries<String> result1 = series.createCopy(
                     new Month(MonthConstants.NOVEMBER, 2002),
                     new Month(MonthConstants.DECEMBER, 2002));
             assertEquals(0, result1.getItemCount());
 
             // copy a range that includes only the first item in the series...
-            TimeSeries result2 = series.createCopy(
+            TimeSeries<String> result2 = series.createCopy(
                     new Month(MonthConstants.NOVEMBER, 2002),
                     new Month(MonthConstants.JANUARY, 2003));
             assertEquals(1, result2.getItemCount());
 
             // copy a range that begins before and ends in the middle of the
             // series...
-            TimeSeries result3 = series.createCopy(
+            TimeSeries<String> result3 = series.createCopy(
                     new Month(MonthConstants.NOVEMBER, 2002),
                     new Month(MonthConstants.APRIL, 2003));
             assertEquals(2, result3.getItemCount());
 
-            TimeSeries result4 = series.createCopy(
+            TimeSeries<String> result4 = series.createCopy(
                     new Month(MonthConstants.NOVEMBER, 2002),
                     new Month(MonthConstants.DECEMBER, 2003));
             assertEquals(5, result4.getItemCount());
 
-            TimeSeries result5 = series.createCopy(
+            TimeSeries<String> result5 = series.createCopy(
                     new Month(MonthConstants.NOVEMBER, 2002),
                     new Month(MonthConstants.MARCH, 2004));
             assertEquals(5, result5.getItemCount());
 
-            TimeSeries result6 = series.createCopy(
+            TimeSeries<String> result6 = series.createCopy(
                     new Month(MonthConstants.JANUARY, 2003),
                     new Month(MonthConstants.JANUARY, 2003));
             assertEquals(1, result6.getItemCount());
 
-            TimeSeries result7 = series.createCopy(
+            TimeSeries<String> result7 = series.createCopy(
                     new Month(MonthConstants.JANUARY, 2003),
                     new Month(MonthConstants.APRIL, 2003));
             assertEquals(2, result7.getItemCount());
 
-            TimeSeries result8 = series.createCopy(
+            TimeSeries<String> result8 = series.createCopy(
                     new Month(MonthConstants.JANUARY, 2003),
                     new Month(MonthConstants.DECEMBER, 2003));
             assertEquals(5, result8.getItemCount());
 
-            TimeSeries result9 = series.createCopy(
+            TimeSeries<String> result9 = series.createCopy(
                     new Month(MonthConstants.JANUARY, 2003),
                     new Month(MonthConstants.MARCH, 2004));
             assertEquals(5, result9.getItemCount());
 
-            TimeSeries result10 = series.createCopy(
+            TimeSeries<String> result10 = series.createCopy(
                     new Month(MonthConstants.MAY, 2003),
                     new Month(MonthConstants.DECEMBER, 2003));
             assertEquals(3, result10.getItemCount());
 
-            TimeSeries result11 = series.createCopy(
+            TimeSeries<String> result11 = series.createCopy(
                     new Month(MonthConstants.MAY, 2003),
                     new Month(MonthConstants.MARCH, 2004));
             assertEquals(3, result11.getItemCount());
 
-            TimeSeries result12 = series.createCopy(
+            TimeSeries<String> result12 = series.createCopy(
                     new Month(MonthConstants.DECEMBER, 2003),
                     new Month(MonthConstants.DECEMBER, 2003));
             assertEquals(1, result12.getItemCount());
 
-            TimeSeries result13 = series.createCopy(
+            TimeSeries<String> result13 = series.createCopy(
                     new Month(MonthConstants.DECEMBER, 2003),
                     new Month(MonthConstants.MARCH, 2004));
             assertEquals(1, result13.getItemCount());
 
-            TimeSeries result14 = series.createCopy(
+            TimeSeries<String> result14 = series.createCopy(
                     new Month(MonthConstants.JANUARY, 2004),
                     new Month(MonthConstants.MARCH, 2004));
             assertEquals(0, result14.getItemCount());
@@ -439,7 +421,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testCreateCopy2() {
-        TimeSeries series = new TimeSeries("Series");
+        TimeSeries<String> series = new TimeSeries<>("Series");
         series.add(new Month(MonthConstants.JANUARY, 2003), 45.0);
         series.add(new Month(MonthConstants.FEBRUARY, 2003), 55.0);
         series.add(new Month(MonthConstants.JUNE, 2003), 35.0);
@@ -448,7 +430,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
 
         try {
             // copy just the first item...
-            TimeSeries result1 = series.createCopy(0, 0);
+            TimeSeries<String> result1 = series.createCopy(0, 0);
             assertEquals(new Month(1, 2003), result1.getTimePeriod(0));
 
             // copy the first two items...
@@ -499,9 +481,9 @@ public class TimeSeriesTest implements SeriesChangeListener {
         }
         assertTrue(pass);
 
-        TimeSeries series2 = new TimeSeries("Series 2");
+        TimeSeries<String> series2 = new TimeSeries<>("Series 2");
         try {
-            TimeSeries series3 = series2.createCopy(99, 999);
+            TimeSeries<String> series3 = series2.createCopy(99, 999);
             assertEquals(0, series3.getItemCount());
         }
         catch (CloneNotSupportedException e) {
@@ -517,18 +499,18 @@ public class TimeSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testCreateCopy3() throws CloneNotSupportedException {
-        TimeSeries s1 = new TimeSeries("S1");
+        TimeSeries<String> s1 = new TimeSeries<>("S1");
         s1.add(new Year(2009), 100.0);
         s1.add(new Year(2010), 101.0);
         s1.add(new Year(2011), 102.0);
         assertEquals(100.0, s1.getMinY(), EPSILON);
         assertEquals(102.0, s1.getMaxY(), EPSILON);
         
-        TimeSeries s2 = s1.createCopy(0, 1);
+        TimeSeries<String> s2 = s1.createCopy(0, 1);
         assertEquals(100.0, s2.getMinY(), EPSILON);
         assertEquals(101.0, s2.getMaxY(), EPSILON);
 
-        TimeSeries s3 = s1.createCopy(1, 2);
+        TimeSeries<String> s3 = s1.createCopy(1, 2);
         assertEquals(101.0, s3.getMinY(), EPSILON);
         assertEquals(102.0, s3.getMaxY(), EPSILON);
     }
@@ -539,7 +521,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testSetMaximumItemCount() {
-        TimeSeries s1 = new TimeSeries("S1");
+        TimeSeries<String> s1 = new TimeSeries<>("S1");
         s1.add(new Year(2000), 13.75);
         s1.add(new Year(2001), 11.90);
         s1.add(new Year(2002), null);
@@ -560,7 +542,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testAddOrUpdate() {
-        TimeSeries s1 = new TimeSeries("S1");
+        TimeSeries<String> s1 = new TimeSeries<>("S1");
         s1.setMaximumItemCount(2);
         s1.addOrUpdate(new Year(2000), 100.0);
         assertEquals(1, s1.getItemCount());
@@ -577,7 +559,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testAddOrUpdate2() {
-        TimeSeries s1 = new TimeSeries("S1");
+        TimeSeries<String> s1 = new TimeSeries<>("S1");
         s1.setMaximumItemCount(2);
         s1.addOrUpdate(new Year(2010), 1.1);
         s1.addOrUpdate(new Year(2011), 2.2);
@@ -593,7 +575,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testAddOrUpdate3() {
-        TimeSeries s1 = new TimeSeries("S1");
+        TimeSeries<String> s1 = new TimeSeries<>("S1");
         s1.addOrUpdate(new Year(2010), 1.1);
         assertEquals(Year.class, s1.getTimePeriodClass());
 
@@ -612,24 +594,24 @@ public class TimeSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testAddOrUpdate4() {
-        TimeSeries ts = new TimeSeries("S");
+        TimeSeries<String> ts = new TimeSeries<>("S");
         TimeSeriesDataItem overwritten = ts.addOrUpdate(new Year(2009), 20.09);
         assertNull(overwritten);
         overwritten = ts.addOrUpdate(new Year(2009), 1.0);
-        assertEquals(new Double(20.09), overwritten.getValue());
-        assertEquals(new Double(1.0), ts.getValue(new Year(2009)));
+        assertEquals(20.09, overwritten.getValue());
+        assertEquals(1.0, ts.getValue(new Year(2009)));
 
         // changing the overwritten record shouldn't affect the series
         overwritten.setValue(null);
-        assertEquals(new Double(1.0), ts.getValue(new Year(2009)));
+        assertEquals(1.0, ts.getValue(new Year(2009)));
 
         TimeSeriesDataItem item = new TimeSeriesDataItem(new Year(2010), 20.10);
         overwritten = ts.addOrUpdate(item);
         assertNull(overwritten);
-        assertEquals(new Double(20.10), ts.getValue(new Year(2010)));
+        assertEquals(20.10, ts.getValue(new Year(2010)));
         // changing the item that was added should not change the series
         item.setValue(null);
-        assertEquals(new Double(20.10), ts.getValue(new Year(2010)));
+        assertEquals(20.10, ts.getValue(new Year(2010)));
     }
 
     /**
@@ -637,9 +619,9 @@ public class TimeSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testBug1075255() {
-        TimeSeries ts = new TimeSeries("dummy");
+        TimeSeries<String> ts = new TimeSeries<>("dummy");
         ts.add(new FixedMillisecond(0L), 0.0);
-        TimeSeries ts2 = new TimeSeries("dummy2");
+        TimeSeries<String> ts2 = new TimeSeries<>("dummy2");
         ts2.add(new FixedMillisecond(0L), 1.0);
         try {
             ts.addAndOrUpdate(ts2);
@@ -652,11 +634,12 @@ public class TimeSeriesTest implements SeriesChangeListener {
 
     /**
      * A test for bug 1832432.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testBug1832432() throws CloneNotSupportedException {
-        TimeSeries s1 = new TimeSeries("Series");
-        TimeSeries s2 = (TimeSeries) s1.clone();
+        TimeSeries<String> s1 = new TimeSeries<>("Series");
+        TimeSeries<String> s2 = CloneUtils.clone(s1);
         assertTrue(s1 != s2);
         assertTrue(s1.getClass() == s2.getClass());
         assertTrue(s1.equals(s2));
@@ -671,7 +654,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testGetIndex() {
-        TimeSeries series = new TimeSeries("Series");
+        TimeSeries<String> series = new TimeSeries<>("Series");
         assertEquals(-1, series.getIndex(new Month(1, 2003)));
 
         series.add(new Month(1, 2003), 45.0);
@@ -692,7 +675,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testGetDataItem1() {
-        TimeSeries series = new TimeSeries("S");
+        TimeSeries<String> series = new TimeSeries<>("S");
 
         // can't get anything yet...just an exception
         boolean pass = false;
@@ -731,7 +714,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testGetDataItem2() {
-        TimeSeries series = new TimeSeries("S");
+        TimeSeries<String> series = new TimeSeries<>("S");
         assertNull(series.getDataItem(new Year(2006)));
 
         // try a null argument
@@ -750,7 +733,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testRemoveAgedItems() {
-        TimeSeries series = new TimeSeries("Test Series");
+        TimeSeries<String> series = new TimeSeries<>("Test Series");
         series.addChangeListener(this);
         assertEquals(Long.MAX_VALUE, series.getMaximumItemAge());
         assertEquals(Integer.MAX_VALUE, series.getMaximumItemCount());
@@ -789,7 +772,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
     @Test
     public void testRemoveAgedItems2() {
         long y2006 = 1157087372534L;  // milliseconds somewhere in 2006
-        TimeSeries series = new TimeSeries("Test Series");
+        TimeSeries<String> series = new TimeSeries<>("Test Series");
         series.addChangeListener(this);
         assertEquals(Long.MAX_VALUE, series.getMaximumItemAge());
         assertEquals(Integer.MAX_VALUE, series.getMaximumItemCount());
@@ -833,7 +816,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testRemoveAgedItems3() {
-        TimeSeries s = new TimeSeries("Test");
+        TimeSeries<String> s = new TimeSeries<>("Test");
         boolean pass = true;
         try {
             s.removeAgedItems(0L, true);
@@ -850,7 +833,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testRemoveAgedItems4() {
-        TimeSeries s1 = new TimeSeries("S1");
+        TimeSeries<String> s1 = new TimeSeries<>("S1");
         s1.setMaximumItemAge(2);
         s1.add(new Year(2010), 1.1);
         s1.add(new Year(2011), 2.2);
@@ -867,7 +850,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testRemoveAgedItems5() {
-        TimeSeries s1 = new TimeSeries("S1");
+        TimeSeries<String> s1 = new TimeSeries<>("S1");
         s1.setMaximumItemAge(4);
         s1.add(new Year(2010), 1.1);
         s1.add(new Year(2011), 2.2);
@@ -884,8 +867,8 @@ public class TimeSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testHashCode() {
-        TimeSeries s1 = new TimeSeries("Test");
-        TimeSeries s2 = new TimeSeries("Test");
+        TimeSeries<String> s1 = new TimeSeries<>("Test");
+        TimeSeries<String> s2 = new TimeSeries<>("Test");
         assertEquals(s1, s2);
         assertEquals(s1.hashCode(), s2.hashCode());
 
@@ -915,7 +898,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testBug1864222() {
-        TimeSeries s = new TimeSeries("S");
+        TimeSeries<String> s = new TimeSeries<>("S");
         s.add(new Day(19, 8, 2005), 1);
         s.add(new Day(31, 1, 2006), 1);
         boolean pass = true;
@@ -933,7 +916,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testBug3446965() {
-        TimeSeries s = new TimeSeries("s");
+        TimeSeries<String> s = new TimeSeries<>("s");
         s.addOrUpdate(new Year(2011), 100.0);
         s.addOrUpdate(new Year(2012), 150.0);
         s.addOrUpdate(new Year(2013), 200.0);
@@ -949,7 +932,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testGetMinY() {
-        TimeSeries s1 = new TimeSeries("S1");
+        TimeSeries<String> s1 = new TimeSeries<>("S1");
         assertTrue(Double.isNaN(s1.getMinY()));
 
         s1.add(new Year(2008), 1.1);
@@ -973,7 +956,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
 
     @Test
     public void testGetMinY2() {
-        TimeSeries ts = new TimeSeries("Time Series");
+        TimeSeries<String> ts = new TimeSeries<>("Time Series");
         assertTrue(Double.isNaN(ts.getMinY()));
         
         ts.add(new Year(2014), 1.0);
@@ -994,7 +977,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testGetMaxY() {
-        TimeSeries s1 = new TimeSeries("S1");
+        TimeSeries<String> s1 = new TimeSeries<>("S1");
         assertTrue(Double.isNaN(s1.getMaxY()));
 
         s1.add(new Year(2008), 1.1);
@@ -1018,7 +1001,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
 
     @Test
     public void testGetMaxY2() {
-        TimeSeries ts = new TimeSeries("Time Series");
+        TimeSeries<String> ts = new TimeSeries<>("Time Series");
         assertTrue(Double.isNaN(ts.getMaxY()));
         
         ts.add(new Year(2014), 1.0);
@@ -1039,7 +1022,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testClear() {
-        TimeSeries s1 = new TimeSeries("S1");
+        TimeSeries<String> s1 = new TimeSeries<>("S1");
         s1.add(new Year(2009), 1.1);
         s1.add(new Year(2010), 2.2);
 
@@ -1057,7 +1040,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testAdd() {
-        TimeSeries s1 = new TimeSeries("S1");
+        TimeSeries<String> s1 = new TimeSeries<>("S1");
         s1.setMaximumItemCount(2);
         s1.add(new Year(2010), 1.1);
         s1.add(new Year(2011), 2.2);
@@ -1072,7 +1055,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testUpdate_RegularTimePeriod() {
-        TimeSeries s1 = new TimeSeries("S1");
+        TimeSeries<String> s1 = new TimeSeries<>("S1");
         s1.add(new Year(2010), 1.1);
         s1.add(new Year(2011), 2.2);
         s1.add(new Year(2012), 3.3);
@@ -1093,22 +1076,22 @@ public class TimeSeriesTest implements SeriesChangeListener {
     @Test
     public void testAdd_TimeSeriesDataItem() {
         TimeSeriesDataItem item = new TimeSeriesDataItem(new Year(2009), 1.0);
-        TimeSeries series = new TimeSeries("S1");
+        TimeSeries<String> series = new TimeSeries<>("S1");
         series.add(item);
         assertTrue(item.equals(series.getDataItem(0)));
-        item.setValue(new Double(99.9));
+        item.setValue(99.9);
         assertFalse(item.equals(series.getDataItem(0)));
     }
     
     @Test
     public void testSetKey() {
-        TimeSeries s1 = new TimeSeries("S");
+        TimeSeries<String> s1 = new TimeSeries<>("S");
         s1.setKey("S1");
         assertEquals("S1", s1.getKey());
         
-        TimeSeriesCollection c = new TimeSeriesCollection();
+        TimeSeriesCollection<String> c = new TimeSeriesCollection<>();
         c.addSeries(s1);
-        TimeSeries s2 = new TimeSeries("S2");
+        TimeSeries<String> s2 = new TimeSeries<>("S2");
         c.addSeries(s2);
         
         // now we should be allowed to change s1's key to anything but "S2"
@@ -1136,7 +1119,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
 
     @Test
     public void testFindValueRange() {
-        TimeSeries ts = new TimeSeries("Time Series");
+        TimeSeries<String> ts = new TimeSeries<>("Time Series");
         assertNull(ts.findValueRange());
         
         ts.add(new Year(2014), 1.0);
@@ -1177,7 +1160,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
         long end = calendar.getTimeInMillis();
         Range range = new Range(start, end);
         
-        TimeSeries ts = new TimeSeries("Time Series");
+        TimeSeries<String> ts = new TimeSeries<>("Time Series");
         assertNull(ts.findValueRange(range, TimePeriodAnchor.START, tzone));
         assertNull(ts.findValueRange(range, TimePeriodAnchor.MIDDLE, tzone));
         assertNull(ts.findValueRange(range, TimePeriodAnchor.END, tzone));
@@ -1219,7 +1202,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
         long end = calendar.getTimeInMillis();
         Range range = new Range(start, end);
         
-        TimeSeries ts = new TimeSeries("Time Series");
+        TimeSeries<String> ts = new TimeSeries<>("Time Series");
         assertNull(ts.findValueRange(range, TimePeriodAnchor.START, tzone));
         assertNull(ts.findValueRange(range, TimePeriodAnchor.MIDDLE, tzone));
         assertNull(ts.findValueRange(range, TimePeriodAnchor.END, tzone));

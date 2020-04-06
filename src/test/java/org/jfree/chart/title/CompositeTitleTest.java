@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * -----------------------
  * CompositeTitleTest.java
  * -----------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 04-Feb-2005 : Version 1 (DG);
- * 09-Jul-2008 : Added new field into testEquals() (DG);
  *
  */
 
@@ -55,6 +50,7 @@ import org.jfree.chart.TestUtils;
 import org.jfree.chart.block.BlockBorder;
 import org.jfree.chart.block.BlockContainer;
 import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.util.CloneUtils;
 import org.junit.Test;
 
 /**
@@ -140,7 +136,7 @@ public class CompositeTitleTest {
                 3.0f, 4.0f, Color.YELLOW));
         CompositeTitle t2 = null;
         try {
-            t2 = (CompositeTitle) t1.clone();
+            t2 = CloneUtils.clone(t1);
         }
         catch (CloneNotSupportedException e) {
             fail(e.toString());
@@ -159,7 +155,7 @@ public class CompositeTitleTest {
         t1.getContainer().add(new TextTitle("T1"));
         t1.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.BLUE));
-        CompositeTitle t2 = (CompositeTitle) TestUtils.serialised(t1);
+        CompositeTitle t2 = TestUtils.serialised(t1);
         assertEquals(t1, t2);
     }
 

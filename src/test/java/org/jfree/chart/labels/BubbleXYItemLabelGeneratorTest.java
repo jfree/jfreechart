@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * -----------------------------------
  * BubbleXYItemLabelGeneratorTest.java
  * -----------------------------------
- * (C) Copyright 2006-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 20-Jan-2006 : Version 1 (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG);
  *
  */
 
@@ -51,6 +46,7 @@ import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.xy.XYSeries;
@@ -153,7 +149,7 @@ public class BubbleXYItemLabelGeneratorTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         BubbleXYItemLabelGenerator g1 = new BubbleXYItemLabelGenerator();
-        BubbleXYItemLabelGenerator g2 = (BubbleXYItemLabelGenerator) g1.clone();
+        BubbleXYItemLabelGenerator g2 = CloneUtils.clone(g1);
         assertTrue(g1 != g2);
         assertTrue(g1.getClass() == g2.getClass());
         assertTrue(g1.equals(g2));
@@ -174,8 +170,7 @@ public class BubbleXYItemLabelGeneratorTest {
     @Test
     public void testSerialization() {
         BubbleXYItemLabelGenerator g1 = new BubbleXYItemLabelGenerator();
-        BubbleXYItemLabelGenerator g2 = (BubbleXYItemLabelGenerator) 
-                TestUtils.serialised(g1);
+        BubbleXYItemLabelGenerator g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 
@@ -186,10 +181,10 @@ public class BubbleXYItemLabelGeneratorTest {
     public void testGenerateLabel() {
         // check handling when the dataset is a regular XYDataset, not an
         // XYZDataset...
-        XYSeries s1 = new XYSeries("S1");
+        XYSeries<String> s1 = new XYSeries<>("S1");
         s1.add(1.0, 2.0);
         s1.add(2.2, 3.3);
-        XYSeriesCollection dataset = new XYSeriesCollection(s1);
+        XYSeriesCollection<String> dataset = new XYSeriesCollection<>(s1);
         BubbleXYItemLabelGenerator g = new BubbleXYItemLabelGenerator();
         assertEquals("{3}", g.generateLabel(dataset, 0, 0));
         assertEquals("{3}", g.generateLabel(dataset, 0, 1));

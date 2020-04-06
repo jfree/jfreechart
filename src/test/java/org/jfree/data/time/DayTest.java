@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,23 +27,10 @@
  * ------------
  * DayTest.java
  * ------------
- * (C) Copyright 2001-2016, by Object Refinery Limited.
+ * (C) Copyright 2001-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 15-Nov-2001 : Version 1 (DG);
- * 20-Mar-2002 : Added new tests for Day constructor and getStart() and
- *               getEnd() in different time zones (DG);
- * 26-Jun-2002 : Removed unnecessary imports (DG);
- * 17-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 13-Mar-2003 : Added serialization test (DG);
- * 21-Oct-2003 : Added hashCode test (DG);
- * 11-Jan-2005 : Added test for non-clonability (DG);
- * 03-Oct-2006 : Added testGetSerialIndex() (DG);
- * 11-Jul-2007 : Fixed bad time zone assumption (DG);
  *
  */
 
@@ -207,7 +194,7 @@ public class DayTest {
     @Test
     public void testSerialization() {
         Day d1 = new Day(15, 4, 2000);
-        Day d2 = (Day) TestUtils.serialised(d1);
+        Day d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,38 +27,13 @@
  * ---------------------------
  * StatisticalBarRenderer.java
  * ---------------------------
- * (C) Copyright 2002-2016, by Pascal Collet and Contributors.
+ * (C) Copyright 2002-2020, by Pascal Collet and Contributors.
  *
  * Original Author:  Pascal Collet;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Christian W. Zuckschwerdt;
  *                   Peter Kolb (patches 2497611, 2791407);
  *                   Martin Hoeller;
- *
- * Changes
- * -------
- * 21-Aug-2002 : Version 1, contributed by Pascal Collet (DG);
- * 01-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 24-Oct-2002 : Changes to dataset interface (DG);
- * 05-Nov-2002 : Base dataset is now TableDataset not CategoryDataset (DG);
- * 05-Feb-2003 : Updates for new DefaultStatisticalCategoryDataset (DG);
- * 25-Mar-2003 : Implemented Serializable (DG);
- * 30-Jul-2003 : Modified entity constructor (CZ);
- * 06-Oct-2003 : Corrected typo in exception message (DG);
- * 05-Nov-2004 : Modified drawItem() signature (DG);
- * 15-Jun-2005 : Added errorIndicatorPaint attribute (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 19-May-2006 : Added support for tooltips and URLs (DG);
- * 12-Jul-2006 : Added support for item labels (DG);
- * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
- * 28-Aug-2007 : Fixed NullPointerException - see bug 1779941 (DG);
- * 14-Nov-2007 : Added errorIndicatorStroke, and fixed bugs with drawBarOutline
- *               and gradientPaintTransformer attributes being ignored (DG);
- * 14-Jan-2009 : Added support for seriesVisible flags (PK);
- * 16-May-2009 : Added findRangeBounds() override to take into account the
- *               dataset interval (PK);
- * 28-Oct-2011 : Fixed problem with maximalBarWidth, bug #2810220 (MH);
- * 30-Oct-2011 : Additional change for bug #2810220 (DG);
  *
  */
 
@@ -125,7 +100,7 @@ public class StatisticalBarRenderer extends BarRenderer
      */
     public StatisticalBarRenderer() {
         super();
-        this.errorIndicatorPaint = Color.gray;
+        this.errorIndicatorPaint = Color.GRAY;
         this.errorIndicatorStroke = new BasicStroke(1.0f);
     }
 

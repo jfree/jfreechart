@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,19 +27,10 @@
  * -------------------
  * LegendItemTest.java
  * -------------------
- * (C) Copyright 2004-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 04-Jun-2004 : Version 1 (DG);
- * 10-Dec-2005 : Addded new test to cover bug report 1374328 (DG);
- * 13-Dec-2006 : Extended testEquals() for new fillPaintTransformer
- *               attribute (DG);
- * 23-Apr-2008 : Implemented Cloneable (DG);
- * 17-Jun-2008 : Included new fields in existing tests (DG);
  *
  */
 
@@ -55,6 +46,7 @@ import java.awt.geom.Rectangle2D;
 import java.text.AttributedString;
 import org.jfree.chart.ui.GradientPaintTransformType;
 import org.jfree.chart.ui.StandardGradientPaintTransformer;
+import org.jfree.chart.util.CloneUtils;
 
 
 import org.junit.Test;
@@ -224,7 +216,7 @@ public class LegendItemTest {
                 "URL", false, new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0),
                 false, Color.BLACK, false, Color.YELLOW, new BasicStroke(2.1f),
                 false, new Line2D.Double(4.0, 3.0, 2.0, 1.0),
-                new BasicStroke(2.1f), Color.green);
+                new BasicStroke(2.1f), Color.GREEN);
         assertFalse(item1.equals(item2));
         item2 = new LegendItem("Label2", "Description2", "ToolTip",
                 "URL", false, new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0),
@@ -321,8 +313,7 @@ public class LegendItemTest {
                 1.0f, Color.RED));
         item1.setLinePaint(new GradientPaint(1.0f, 2.0f, Color.WHITE, 3.0f,
                 4.0f, Color.RED));
-        LegendItem item2;
-        item2 = (LegendItem) TestUtils.serialised(item1);
+        LegendItem item2 = TestUtils.serialised(item1);
         assertEquals(item1, item2);
     }
 
@@ -335,17 +326,18 @@ public class LegendItemTest {
         as.addAttribute(TextAttribute.FONT, new Font("Dialog", Font.PLAIN, 12));
         LegendItem item1 = new LegendItem(as, "Description", "ToolTip", "URL",
                 new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), Color.RED);
-        LegendItem item2 = (LegendItem) TestUtils.serialised(item1);
+        LegendItem item2 = TestUtils.serialised(item1);
         assertEquals(item1, item2);
     }
 
     /**
      * Basic checks for cloning.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
         LegendItem item1 = new LegendItem("Item");
-        LegendItem item2 = (LegendItem) item1.clone();
+        LegendItem item2 = CloneUtils.clone(item1);
 
         assertNotSame(item1, item2);
         assertSame(item1.getClass(), item2.getClass());

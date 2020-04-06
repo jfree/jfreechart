@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * ----------------------------
  * XYPolygonAnnotationTest.java
  * ----------------------------
- * (C) Copyright 2006-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 10-Jul-2006 : Version 1 (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG);
  *
  */
 
@@ -98,9 +93,9 @@ public class XYPolygonAnnotationTest {
                 6.0}, stroke2, gp2, Color.BLUE);
         assertTrue(a1.equals(a2));
 
-        GradientPaint gp3 = new GradientPaint(1.0f, 2.0f, Color.green, 3.0f,
+        GradientPaint gp3 = new GradientPaint(1.0f, 2.0f, Color.GREEN, 3.0f,
                 4.0f, Color.WHITE);
-        GradientPaint gp4 = new GradientPaint(1.0f, 2.0f, Color.green, 3.0f,
+        GradientPaint gp4 = new GradientPaint(1.0f, 2.0f, Color.GREEN, 3.0f,
                 4.0f, Color.WHITE);
         a1 = new XYPolygonAnnotation(new double[] {99.0, 2.0, 3.0, 4.0, 5.0,
                 6.0}, stroke2, gp1, gp3);
@@ -128,6 +123,7 @@ public class XYPolygonAnnotationTest {
 
     /**
      * Confirm that cloning works.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
@@ -159,7 +155,7 @@ public class XYPolygonAnnotationTest {
         Stroke stroke1 = new BasicStroke(2.0f);
         XYPolygonAnnotation a1 = new XYPolygonAnnotation(new double[] {1.0,
                 2.0, 3.0, 4.0, 5.0, 6.0}, stroke1, Color.RED, Color.BLUE);
-        XYPolygonAnnotation a2 = (XYPolygonAnnotation) TestUtils.serialised(a1);
+        XYPolygonAnnotation a2 = TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 
