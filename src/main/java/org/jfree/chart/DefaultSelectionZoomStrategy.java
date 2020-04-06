@@ -12,11 +12,17 @@ import java.io.Serializable;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
 
+/**
+ * A strategy for zooming plots on the chart panel by selecting a smaller region on the initial screen.
+ * This implementation can be extended to override default behavior.
+ * See {@link ChartPanel#setSelectionZoomStrategy(DefaultSelectionZoomStrategy)}
+ */
 public class DefaultSelectionZoomStrategy implements Serializable {
+
+    private static final long serialVersionUID = -8042265475645652131L;
 
     /** The minimum size required to perform a zoom on a rectangle */
     public static final int DEFAULT_ZOOM_TRIGGER_DISTANCE = 10;
-    private static final long serialVersionUID = -8042265475645652131L;
 
     /**
      * The zoom rectangle starting point (selected by the user with a mouse
