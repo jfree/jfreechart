@@ -141,7 +141,7 @@ public class MinMaxCategoryRendererTest {
             DefaultCategoryDataset<String, String> dataset 
                     = new DefaultCategoryDataset<>();
             dataset.addValue(1.0, "S1", "C1");
-            CategoryPlot plot = new CategoryPlot(dataset,
+            CategoryPlot<String, String> plot = new CategoryPlot<>(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new MinMaxCategoryRenderer());
             JFreeChart chart = new JFreeChart(plot);

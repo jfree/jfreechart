@@ -96,8 +96,8 @@ public class CombinedRangeXYPlotTest implements ChartChangeListener {
     @Test
     public void testRemoveSubplot() {
         CombinedRangeXYPlot plot = new CombinedRangeXYPlot();
-        XYPlot plot1 = new XYPlot();
-        XYPlot plot2 = new XYPlot();
+        XYPlot<String> plot1 = new XYPlot<>();
+        XYPlot<String> plot2 = new XYPlot<>();
         plot.add(plot1);
         plot.add(plot2);
         // remove plot2, but plot1 is removed instead
@@ -137,7 +137,7 @@ public class CombinedRangeXYPlotTest implements ChartChangeListener {
         CombinedRangeXYPlot plot = createPlot();
         JFreeChart chart = new JFreeChart(plot);
         chart.addChangeListener(this);
-        XYPlot subplot1 = plot.getSubplots().get(0);
+        XYPlot<String> subplot1 = plot.getSubplots().get(0);
         NumberAxis xAxis = (NumberAxis) subplot1.getDomainAxis();
         xAxis.setAutoRangeIncludesZero(!xAxis.getAutoRangeIncludesZero());
         assertEquals(1, this.events.size());
@@ -238,7 +238,7 @@ public class CombinedRangeXYPlotTest implements ChartChangeListener {
         XYDataset<String> data1 = createDataset1();
         XYItemRenderer renderer1 = new StandardXYItemRenderer();
         NumberAxis xAxis1 = new NumberAxis("X1");
-        XYPlot subplot1 = new XYPlot(data1, xAxis1, null, renderer1);
+        XYPlot<String> subplot1 = new XYPlot<>(data1, xAxis1, null, renderer1);
         subplot1.setRangeAxisLocation(AxisLocation.BOTTOM_OR_LEFT);
 
         XYTextAnnotation annotation
@@ -252,7 +252,7 @@ public class CombinedRangeXYPlotTest implements ChartChangeListener {
         XYItemRenderer renderer2 = new StandardXYItemRenderer();
         NumberAxis xAxis2 = new NumberAxis("X2");
         xAxis2.setAutoRangeIncludesZero(false);
-        XYPlot subplot2 = new XYPlot(data2, xAxis2, null, renderer2);
+        XYPlot<String> subplot2 = new XYPlot<>(data2, xAxis2, null, renderer2);
         subplot2.setRangeAxisLocation(AxisLocation.TOP_OR_LEFT);
 
         // parent plot...

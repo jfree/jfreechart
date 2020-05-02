@@ -129,7 +129,7 @@ public class IntervalBarRendererTest {
             DefaultIntervalCategoryDataset dataset
                     = new DefaultIntervalCategoryDataset(starts, ends);
             IntervalBarRenderer renderer = new IntervalBarRenderer();
-            CategoryPlot plot = new CategoryPlot(dataset,
+            CategoryPlot<String, String> plot = new CategoryPlot<>(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     renderer);
             JFreeChart chart = new JFreeChart(plot);

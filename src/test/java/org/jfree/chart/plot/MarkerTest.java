@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * ---------------
  * MarkerTest.java
  * ---------------
- * (C) Copyright 2006-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 05-Sep-2006 : Version 1 (DG);
  *
  */
 
@@ -351,7 +347,7 @@ public class MarkerTest implements MarkerChangeListener {
      */
     @Test
     public void testListenersWithCategoryPlot() {
-        CategoryPlot plot = new CategoryPlot();
+        CategoryPlot<String, String> plot = new CategoryPlot<>();
         CategoryMarker marker1 = new CategoryMarker("X");
         ValueMarker marker2 = new ValueMarker(1.0);
         plot.addDomainMarker(marker1);
@@ -375,7 +371,7 @@ public class MarkerTest implements MarkerChangeListener {
      */
     @Test
     public void testListenersWithXYPlot() {
-        XYPlot plot = new XYPlot();
+        XYPlot<String> plot = new XYPlot<>();
         ValueMarker marker1 = new ValueMarker(1.0);
         ValueMarker marker2 = new ValueMarker(2.0);
         plot.addDomainMarker(marker1);
