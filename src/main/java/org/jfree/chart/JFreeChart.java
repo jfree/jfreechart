@@ -88,10 +88,8 @@ import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.event.PlotChangeListener;
 import org.jfree.chart.event.TitleChangeEvent;
 import org.jfree.chart.event.TitleChangeListener;
-import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotRenderingInfo;
-import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.title.LegendTitle;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.chart.title.Title;
@@ -1228,38 +1226,47 @@ public class JFreeChart implements Drawable, TitleChangeListener,
         Object retValue = null;
         BlockParams p = new BlockParams();
         p.setGenerateEntities(entities);
-        if (position == RectangleEdge.TOP) {
-            Size2D size = t.arrange(g2, constraint);
-            titleArea = createAlignedRectangle2D(size, area,
-                    t.getHorizontalAlignment(), VerticalAlignment.TOP);
-            retValue = t.draw(g2, titleArea, p);
-            area.setRect(area.getX(), Math.min(area.getY() + size.height,
-                    area.getMaxY()), area.getWidth(), Math.max(area.getHeight()
-                    - size.height, 0));
-        } else if (position == RectangleEdge.BOTTOM) {
-            Size2D size = t.arrange(g2, constraint);
-            titleArea = createAlignedRectangle2D(size, area,
-                    t.getHorizontalAlignment(), VerticalAlignment.BOTTOM);
-            retValue = t.draw(g2, titleArea, p);
-            area.setRect(area.getX(), area.getY(), area.getWidth(),
-                    area.getHeight() - size.height);
-        } else if (position == RectangleEdge.RIGHT) {
-            Size2D size = t.arrange(g2, constraint);
-            titleArea = createAlignedRectangle2D(size, area,
-                    HorizontalAlignment.RIGHT, t.getVerticalAlignment());
-            retValue = t.draw(g2, titleArea, p);
-            area.setRect(area.getX(), area.getY(), area.getWidth()
-                    - size.width, area.getHeight());
-        } else if (position == RectangleEdge.LEFT) {
-            Size2D size = t.arrange(g2, constraint);
-            titleArea = createAlignedRectangle2D(size, area,
-                    HorizontalAlignment.LEFT, t.getVerticalAlignment());
-            retValue = t.draw(g2, titleArea, p);
-            area.setRect(area.getX() + size.width, area.getY(), area.getWidth()
-                    - size.width, area.getHeight());
-        }
-        else {
-            throw new RuntimeException("Unrecognised title position.");
+        switch (position) {
+            case TOP: {
+                Size2D size = t.arrange(g2, constraint);
+                titleArea = createAlignedRectangle2D(size, area,
+                        t.getHorizontalAlignment(), VerticalAlignment.TOP);
+                retValue = t.draw(g2, titleArea, p);
+                area.setRect(area.getX(), Math.min(area.getY() + size.height,
+                        area.getMaxY()), area.getWidth(), Math.max(area.getHeight()
+                        - size.height, 0));
+                break;
+            }
+            case BOTTOM: {
+                Size2D size = t.arrange(g2, constraint);
+                titleArea = createAlignedRectangle2D(size, area,
+                        t.getHorizontalAlignment(), VerticalAlignment.BOTTOM);
+                retValue = t.draw(g2, titleArea, p);
+                area.setRect(area.getX(), area.getY(), area.getWidth(),
+                        area.getHeight() - size.height);
+                break;
+            }
+            case RIGHT: {
+                Size2D size = t.arrange(g2, constraint);
+                titleArea = createAlignedRectangle2D(size, area,
+                        HorizontalAlignment.RIGHT, t.getVerticalAlignment());
+                retValue = t.draw(g2, titleArea, p);
+                area.setRect(area.getX(), area.getY(), area.getWidth()
+                        - size.width, area.getHeight());
+                break;
+            }
+            case LEFT: {
+                Size2D size = t.arrange(g2, constraint);
+                titleArea = createAlignedRectangle2D(size, area,
+                        HorizontalAlignment.LEFT, t.getVerticalAlignment());
+                retValue = t.draw(g2, titleArea, p);
+                area.setRect(area.getX() + size.width, area.getY(), area.getWidth()
+                        - size.width, area.getHeight());
+                break;
+            }
+            default: {
+                throw new RuntimeException("Unrecognised title position.");
+            }
         }
         EntityCollection result = null;
         if (retValue instanceof EntityBlockResult) {
