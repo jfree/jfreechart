@@ -44,6 +44,7 @@
 package org.jfree.data.general;
 
 import java.io.Serializable;
+import java.util.Objects;
 import org.jfree.chart.util.Args;
 
 /**
@@ -117,6 +118,13 @@ public class DatasetGroup implements Cloneable, Serializable {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 13 * hash + Objects.hashCode(this.id);
+        return hash;
     }
 
 }

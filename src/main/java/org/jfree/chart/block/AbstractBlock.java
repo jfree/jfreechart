@@ -55,6 +55,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Objects;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.Size2D;
 import org.jfree.chart.util.ObjectUtils;
@@ -584,6 +585,24 @@ public class AbstractBlock implements Cloneable, Serializable {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int hash = 5;
+        hash = 41 * hash + Objects.hashCode(this.id);
+        hash = 41 * hash + Objects.hashCode(this.margin);
+        hash = 41 * hash + Objects.hashCode(this.frame);
+        hash = 41 * hash + Objects.hashCode(this.padding);
+        hash = 41 * hash +
+                (int) (Double.doubleToLongBits(this.width) ^
+                (Double.doubleToLongBits(this.width) >>> 32));
+        hash = 41 * hash +
+                (int) (Double.doubleToLongBits(this.height) ^
+                (Double.doubleToLongBits(this.height) >>> 32));
+        hash = 41 * hash + Objects.hashCode(this.bounds);
+        return hash;
     }
 
     /**

@@ -44,6 +44,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.jfree.chart.ChartRenderingInfo;
 import org.jfree.chart.util.ObjectUtils;
@@ -223,6 +224,16 @@ public class PlotRenderingInfo implements Cloneable, Serializable {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int hash = 5;
+        hash = 53 * hash + Objects.hashCode(this.plotArea);
+        hash = 53 * hash + Objects.hashCode(this.dataArea);
+        hash = 53 * hash + Objects.hashCode(this.subplotInfo);
+        return hash;
     }
 
     /**

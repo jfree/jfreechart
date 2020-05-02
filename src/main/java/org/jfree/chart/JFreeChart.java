@@ -1543,6 +1543,26 @@ public class JFreeChart implements Drawable, TitleChangeListener,
         return true;
     }
 
+    @Override
+    public int hashCode()
+    {
+        int hash = 7;
+        hash = 59 * hash + Objects.hashCode(this.renderingHints);
+        hash = 59 * hash + (this.borderVisible ? 1 : 0);
+        hash = 59 * hash + Objects.hashCode(this.borderStroke);
+        hash = 59 * hash + Objects.hashCode(this.borderPaint);
+        hash = 59 * hash + Objects.hashCode(this.padding);
+        hash = 59 * hash + Objects.hashCode(this.title);
+        hash = 59 * hash + Objects.hashCode(this.subtitles);
+        hash = 59 * hash + Objects.hashCode(this.plot);
+        hash = 59 * hash + Objects.hashCode(this.backgroundPaint);
+        hash = 59 * hash + Objects.hashCode(this.backgroundImage);
+        hash = 59 * hash + this.backgroundImageAlignment;
+        hash = 59 * hash + Float.floatToIntBits(this.backgroundImageAlpha);
+        hash = 59 * hash + (this.notify ? 1 : 0);
+        return hash;
+    }
+
     /**
      * Provides serialization support.
      *
