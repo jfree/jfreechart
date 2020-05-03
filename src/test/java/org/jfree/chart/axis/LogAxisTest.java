@@ -160,7 +160,7 @@ public class LogAxisTest {
         dataset.setValue(200.0, "Row 1", "Column 2");
         JFreeChart chart = ChartFactory.createBarChart("Test", "Categories",
                 "Value", dataset);
-        CategoryPlot plot = (CategoryPlot) chart.getPlot();
+        CategoryPlot<String, String> plot = (CategoryPlot) chart.getPlot();
         LogAxis axis = new LogAxis("Log(Y)");
         plot.setRangeAxis(axis);
         assertEquals(0.0, axis.getLowerBound(), EPSILON);
@@ -180,7 +180,7 @@ public class LogAxisTest {
         JFreeChart chart = ChartFactory.createLineChart("Test", "Categories",
                 "Value", dataset, PlotOrientation.VERTICAL, false, false,
                 false);
-        CategoryPlot plot = (CategoryPlot) chart.getPlot();
+        CategoryPlot<String, String> plot = (CategoryPlot) chart.getPlot();
         LogAxis axis = new LogAxis("Log(Y)");
         plot.setRangeAxis(axis);
         assertEquals(96.59363289248458, axis.getLowerBound(), EPSILON);
@@ -209,7 +209,7 @@ public class LogAxisTest {
         dataset.addSeries(series);
         JFreeChart chart = ChartFactory.createScatterPlot("Test", "X", "Y",
                 dataset);
-        XYPlot plot = (XYPlot) chart.getPlot();
+        XYPlot<String> plot = (XYPlot) chart.getPlot();
         LogAxis axis = new LogAxis("Log(Y)");
         plot.setRangeAxis(axis);
         assertEquals(0.9465508226401592, axis.getLowerBound(), EPSILON);
@@ -230,7 +230,7 @@ public class LogAxisTest {
         dataset.addSeries(series);
         JFreeChart chart = ChartFactory.createScatterPlot("Test", "X", "Y",
                 dataset);
-        XYPlot plot = (XYPlot) chart.getPlot();
+        XYPlot<String> plot = (XYPlot) chart.getPlot();
         LogAxis axis = new LogAxis("Log(Y)");
         plot.setRangeAxis(axis);
         assertEquals(0.9465508226401592, axis.getLowerBound(), EPSILON);

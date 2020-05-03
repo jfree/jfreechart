@@ -150,7 +150,7 @@ public class XYBubbleRendererTest {
         d2.addSeries("S5", s5);
 
         XYBubbleRenderer r = new XYBubbleRenderer();
-        XYPlot plot = new XYPlot(d1, new NumberAxis("x"),
+        XYPlot<String> plot = new XYPlot<>(d1, new NumberAxis("x"),
                 new NumberAxis("y"), r);
         plot.setDataset(1, d2);
         /*JFreeChart chart =*/ new JFreeChart(plot);

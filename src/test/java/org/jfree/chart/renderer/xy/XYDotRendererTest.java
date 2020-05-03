@@ -160,7 +160,7 @@ public class XYDotRendererTest {
         d2.addSeries(s5);
 
         XYDotRenderer r = new XYDotRenderer();
-        XYPlot plot = new XYPlot(d1, new NumberAxis("x"),
+        XYPlot<String> plot = new XYPlot<>(d1, new NumberAxis("x"),
                 new NumberAxis("y"), r);
         plot.setDataset(1, d2);
         /*JFreeChart chart =*/ new JFreeChart(plot);

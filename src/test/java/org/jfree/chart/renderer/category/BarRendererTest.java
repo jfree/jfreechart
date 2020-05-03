@@ -232,8 +232,8 @@ public class BarRendererTest {
         DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         dataset.addValue(21.0, "R1", "C1");
         BarRenderer r = new BarRenderer();
-        CategoryPlot plot = new CategoryPlot(dataset, new CategoryAxis("x"),
-                new NumberAxis("y"), r);
+        CategoryPlot<String, String> plot = new CategoryPlot<>(dataset, 
+                new CategoryAxis("x"), new NumberAxis("y"), r);
         /*JFreeChart chart =*/ new JFreeChart(plot);
         LegendItem li = r.getLegendItem(0, 0);
         assertNotNull(li);
@@ -256,8 +256,8 @@ public class BarRendererTest {
         dataset1.addValue(24.0, "R4", "C1");
         dataset1.addValue(25.0, "R5", "C1");
         BarRenderer r = new BarRenderer();
-        CategoryPlot plot = new CategoryPlot(dataset0, new CategoryAxis("x"),
-                new NumberAxis("y"), r);
+        CategoryPlot<String, String> plot = new CategoryPlot<>(dataset0, 
+                new CategoryAxis("x"), new NumberAxis("y"), r);
         plot.setDataset(1, dataset1);
         /*JFreeChart chart =*/ new JFreeChart(plot);
         LegendItem li = r.getLegendItem(1, 2);
