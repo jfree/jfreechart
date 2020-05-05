@@ -42,6 +42,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
@@ -132,7 +133,7 @@ public class StandardEntityCollection implements EntityCollection,
     public ChartEntity getEntity(double x, double y) {
         int entityCount = this.entities.size();
         for (int i = entityCount - 1; i >= 0; i--) {
-            ChartEntity entity = (ChartEntity) this.entities.get(i);
+            ChartEntity entity = this.entities.get(i);
             if (entity.getArea().contains(x, y)) {
                 return entity;
             }
@@ -179,6 +180,13 @@ public class StandardEntityCollection implements EntityCollection,
         return false;
     }
 
+    @Override
+    public int hashCode(){
+        int hash = 5;
+        hash = 29 * hash + Objects.hashCode(this.entities);
+        return hash;
+    }
+
     /**
      * Returns a clone of this entity collection.
      *
@@ -190,7 +198,7 @@ public class StandardEntityCollection implements EntityCollection,
     public Object clone() throws CloneNotSupportedException {
         StandardEntityCollection clone
                 = (StandardEntityCollection) super.clone();
-        clone.entities = new ArrayList(this.entities.size());
+        clone.entities = new ArrayList<>(this.entities.size());
         for (int i = 0; i < this.entities.size(); i++) {
             ChartEntity entity = this.entities.get(i);
             clone.entities.add((ChartEntity) entity.clone());

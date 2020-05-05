@@ -43,6 +43,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.entity.StandardEntityCollection;
@@ -203,9 +204,9 @@ public class BlockContainer extends AbstractBlock
         drawBorder(g2, contentArea);
         contentArea = trimBorder(contentArea);
         contentArea = trimPadding(contentArea);
-        Iterator iterator = this.blocks.iterator();
+        Iterator<Block> iterator = this.blocks.iterator();
         while (iterator.hasNext()) {
-            Block block = (Block) iterator.next();
+            Block block = iterator.next();
             Rectangle2D bounds = block.getBounds();
             Rectangle2D drawArea = new Rectangle2D.Double(bounds.getX()
                     + area.getX(), bounds.getY() + area.getY(),
@@ -253,6 +254,14 @@ public class BlockContainer extends AbstractBlock
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode(){
+        int hash = 3;
+        hash = 97 * hash + Objects.hashCode(this.blocks);
+        hash = 97 * hash + Objects.hashCode(this.arrangement);
+        return hash;
     }
 
     /**
