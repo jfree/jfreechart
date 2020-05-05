@@ -53,7 +53,7 @@ public class TextBlock implements Serializable {
     private static final long serialVersionUID = -4333175719424385526L;
     
     /** Storage for the lines of text. */
-    private List lines;
+    private List<TextLine> lines;
     
     /** The alignment of the lines. */
     private HorizontalAlignment lineAlignment;
@@ -62,7 +62,7 @@ public class TextBlock implements Serializable {
      * Creates a new empty text block.
      */
     public TextBlock() {
-        this.lines = new java.util.ArrayList();
+        this.lines = new java.util.ArrayList<>();
         this.lineAlignment = HorizontalAlignment.CENTER;
     }
     
@@ -116,7 +116,7 @@ public class TextBlock implements Serializable {
         TextLine last = null;
         final int index = this.lines.size() - 1;
         if (index >= 0) {
-            last = (TextLine) this.lines.get(index);
+            last = this.lines.get(index);
         }
         return last;
     }
@@ -126,7 +126,7 @@ public class TextBlock implements Serializable {
      *
      * @return A list of {@link TextLine} objects.
      */
-    public List getLines() {
+    public List<TextLine> getLines() {
         return Collections.unmodifiableList(this.lines);
     }
     
@@ -140,9 +140,9 @@ public class TextBlock implements Serializable {
     public Size2D calculateDimensions(Graphics2D g2) {
         double width = 0.0;
         double height = 0.0;
-        Iterator iterator = this.lines.iterator();
+        Iterator<TextLine> iterator = this.lines.iterator();
         while (iterator.hasNext()) {
-            final TextLine line = (TextLine) iterator.next();
+            final TextLine line = iterator.next();
             final Size2D dimension = line.calculateDimensions(g2);
             width = Math.max(width, dimension.getWidth());
             height = height + dimension.getHeight();
@@ -207,10 +207,10 @@ public class TextBlock implements Serializable {
         Size2D d = calculateDimensions(g2);
         float[] offsets = calculateOffsets(anchor, d.getWidth(), 
                 d.getHeight());
-        Iterator iterator = this.lines.iterator();
+        Iterator<TextLine> iterator = this.lines.iterator();
         float yCursor = 0.0f;
         while (iterator.hasNext()) {
-            TextLine line = (TextLine) iterator.next();
+            TextLine line = iterator.next();
             Size2D dimension = line.calculateDimensions(g2);
             float lineOffset = 0.0f;
             if (this.lineAlignment == HorizontalAlignment.CENTER) {
