@@ -47,7 +47,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import java.util.TimeZone;
-import org.jfree.chart.util.ObjectUtils;
+
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.Args;
 
 import org.jfree.data.DomainInfo;
@@ -721,7 +722,7 @@ public class TimeSeriesCollection<S extends Comparable<S>>
     @Override
     public Object clone() throws CloneNotSupportedException {
         TimeSeriesCollection clone = (TimeSeriesCollection) super.clone();
-        clone.data = (List) ObjectUtils.deepClone(this.data);
+        clone.data = CloneUtils.cloneList(this.data);
         clone.workingCalendar = (Calendar) this.workingCalendar.clone();
         return clone;
     }

@@ -50,33 +50,4 @@ public final class ObjectUtils {
     private ObjectUtils() {
     }
 
-    /**
-     * Returns a new collection containing clones of all the items in the
-     * specified collection.
-     *
-     * @param collection the collection ({@code null} not permitted).
-     * @return A new collection containing clones of all the items in the
-     *         specified collection.
-     * @throws CloneNotSupportedException if any of the items in the collection
-     *                                    cannot be cloned.
-     */
-    public static Collection deepClone(Collection collection)
-            throws CloneNotSupportedException {
-
-        if (collection == null) {
-            throw new IllegalArgumentException("Null 'collection' argument.");
-        }
-        // all JDK-Collections are cloneable ...
-        // and if the collection is not clonable, then we should throw
-        // a CloneNotSupportedException anyway ...
-        Collection result = (Collection) CloneUtils.clone(collection);
-        result.clear();
-        Iterator iterator = collection.iterator();
-        while (iterator.hasNext()) {
-            Object item = iterator.next();
-            result.add(CloneUtils.clone(item));
-        }
-        return result;
-    }
-
 }

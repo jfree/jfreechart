@@ -50,7 +50,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.TimeZone;
-import org.jfree.chart.util.ObjectUtils;
 
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.CloneUtils;
@@ -1068,7 +1067,7 @@ public class TimeSeries<S extends Comparable<S>> extends Series<S>
     @Override
     public Object clone() throws CloneNotSupportedException {
         TimeSeries<S> clone = (TimeSeries) super.clone();
-        clone.data = (List) ObjectUtils.deepClone(this.data);
+        clone.data = CloneUtils.cloneList(this.data);
         return clone;
     }
 

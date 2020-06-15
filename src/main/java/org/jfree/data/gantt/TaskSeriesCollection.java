@@ -41,7 +41,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
-import org.jfree.chart.util.ObjectUtils;
+
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 
@@ -682,7 +683,7 @@ public class TaskSeriesCollection<R extends Comparable<R>, C extends Comparable<
     @Override
     public Object clone() throws CloneNotSupportedException {
         TaskSeriesCollection clone = (TaskSeriesCollection) super.clone();
-        clone.data = (List) ObjectUtils.deepClone(this.data);
+        clone.data = CloneUtils.cloneList(this.data);
         clone.keys = new java.util.ArrayList(this.keys);
         return clone;
     }

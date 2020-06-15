@@ -40,7 +40,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import org.jfree.chart.util.ObjectUtils;
+
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 
@@ -548,7 +549,7 @@ public class DefaultKeyedValues2D<R extends Comparable<R>, C extends Comparable<
         clone.rowKeys = new java.util.ArrayList(this.rowKeys);
 
         // but the row data requires a deep copy
-        clone.rows = (List) ObjectUtils.deepClone(this.rows);
+        clone.rows = CloneUtils.cloneList(this.rows);
         return clone;
     }
 

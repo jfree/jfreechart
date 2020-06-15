@@ -59,7 +59,7 @@ import org.jfree.chart.event.PlotChangeListener;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
-import org.jfree.chart.util.ObjectUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.ShadowGenerator;
 import org.jfree.data.Range;
@@ -722,7 +722,7 @@ public class CombinedDomainXYPlot extends XYPlot
     public Object clone() throws CloneNotSupportedException {
 
         CombinedDomainXYPlot result = (CombinedDomainXYPlot) super.clone();
-        result.subplots = (List) ObjectUtils.deepClone(this.subplots);
+        result.subplots = CloneUtils.cloneList(this.subplots);
         for (XYPlot child : result.subplots) {
             child.setParent(result);
         }
