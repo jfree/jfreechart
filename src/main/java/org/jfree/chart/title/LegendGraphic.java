@@ -61,6 +61,7 @@ import java.awt.geom.Rectangle2D;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Objects;
 
 import org.jfree.chart.block.AbstractBlock;
 import org.jfree.chart.block.Block;
@@ -693,7 +694,7 @@ public class LegendGraphic extends AbstractBlock
     @Override
     public int hashCode() {
         int result = 193;
-        result = 37 * result + ObjectUtils.hashCode(this.fillPaint);
+        result = 37 * result + Objects.hashCode(this.fillPaint);
         // FIXME: use other fields too
         return result;
     }

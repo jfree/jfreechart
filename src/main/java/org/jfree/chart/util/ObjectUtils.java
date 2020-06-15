@@ -37,6 +37,7 @@ package org.jfree.chart.util;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Objects;
 
 /**
  * A collection of useful static utility methods for handling classes and object
@@ -68,22 +69,6 @@ public final class ObjectUtils {
         else {
             return false;
         }
-    }
-
-    /**
-     * Returns a hash code for an object, or zero if the object is
-     * {@code null}.
-     *
-     * @param object the object ({@code null} permitted).
-     * @return The object's hash code (or zero if the object is
-     *         {@code null}).
-     */
-    public static int hashCode(Object object) {
-        int result = 0;
-        if (object != null) {
-            result = object.hashCode();
-        }
-        return result;
     }
 
     /**
