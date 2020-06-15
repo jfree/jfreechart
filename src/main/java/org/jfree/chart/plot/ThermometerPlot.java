@@ -113,6 +113,7 @@ import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 import org.jfree.chart.LegendItemCollection;
@@ -1410,7 +1411,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
         if (!super.equals(obj)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.rangeAxis, that.rangeAxis)) {
+        if (!Objects.equals(this.rangeAxis, that.rangeAxis)) {
             return false;
         }
         if (this.axisLocation != that.axisLocation) {
@@ -1422,11 +1423,10 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
         if (this.upperBound != that.upperBound) {
             return false;
         }
-        if (!ObjectUtils.equal(this.padding, that.padding)) {
+        if (!Objects.equals(this.padding, that.padding)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.thermometerStroke,
-                that.thermometerStroke)) {
+        if (!Objects.equals(this.thermometerStroke, that.thermometerStroke)) {
             return false;
         }
         if (!PaintUtils.equal(this.thermometerPaint,
@@ -1439,13 +1439,13 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
         if (this.valueLocation != that.valueLocation) {
             return false;
         }
-        if (!ObjectUtils.equal(this.valueFont, that.valueFont)) {
+        if (!Objects.equals(this.valueFont, that.valueFont)) {
             return false;
         }
         if (!PaintUtils.equal(this.valuePaint, that.valuePaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.valueFormat, that.valueFormat)) {
+        if (!Objects.equals(this.valueFormat, that.valueFormat)) {
             return false;
         }
         if (!PaintUtils.equal(this.mercuryPaint, that.mercuryPaint)) {

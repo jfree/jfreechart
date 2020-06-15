@@ -45,7 +45,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import org.jfree.chart.util.ObjectUtils;
+
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 
@@ -461,10 +461,10 @@ public class HistogramDataset extends AbstractIntervalXYDataset
             return false;
         }
         HistogramDataset that = (HistogramDataset) obj;
-        if (!ObjectUtils.equal(this.type, that.type)) {
+        if (!Objects.equals(this.type, that.type)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.list, that.list)) {
+        if (!Objects.equals(this.list, that.list)) {
             return false;
         }
         return true;

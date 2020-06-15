@@ -53,6 +53,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import org.jfree.chart.entity.CategoryLabelEntity;
@@ -67,7 +68,6 @@ import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.Size2D;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
@@ -1310,20 +1310,16 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
                 != this.categoryLabelPositionOffset) {
             return false;
         }
-        if (!ObjectUtils.equal(that.categoryLabelPositions,
-                this.categoryLabelPositions)) {
+        if (!Objects.equals(that.categoryLabelPositions, this.categoryLabelPositions)) {
             return false;
         }
-        if (!ObjectUtils.equal(that.categoryLabelToolTips,
-                this.categoryLabelToolTips)) {
+        if (!Objects.equals(that.categoryLabelToolTips, this.categoryLabelToolTips)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.categoryLabelURLs, 
-                that.categoryLabelURLs)) {
+        if (!Objects.equals(this.categoryLabelURLs, that.categoryLabelURLs)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.tickLabelFontMap,
-                that.tickLabelFontMap)) {
+        if (!Objects.equals(this.tickLabelFontMap, that.tickLabelFontMap)) {
             return false;
         }
         if (!equalPaintMaps(this.tickLabelPaintMap, that.tickLabelPaintMap)) {

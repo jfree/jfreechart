@@ -130,6 +130,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 import org.jfree.chart.event.AxisChangeEvent;
 import org.jfree.chart.plot.Plot;
@@ -137,7 +138,6 @@ import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.util.AttrStringUtils;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
@@ -1683,7 +1683,7 @@ public abstract class ValueAxis extends Axis
             return false;
         }
         // if autoRange is true, then the current range is irrelevant
-        if (!this.autoRange && !ObjectUtils.equal(this.range, that.range)) {
+        if (!this.autoRange && !Objects.equals(this.range, that.range)) {
             return false;
         }
         if (this.autoRange != that.autoRange) {
@@ -1707,8 +1707,7 @@ public abstract class ValueAxis extends Axis
         if (this.autoTickUnitSelection != that.autoTickUnitSelection) {
             return false;
         }
-        if (!ObjectUtils.equal(this.standardTickUnits,
-                that.standardTickUnits)) {
+        if (!Objects.equals(this.standardTickUnits, that.standardTickUnits)) {
             return false;
         }
         if (this.verticalTickLabels != that.verticalTickLabels) {

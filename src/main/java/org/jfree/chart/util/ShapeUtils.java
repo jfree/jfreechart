@@ -47,6 +47,8 @@ import java.awt.geom.PathIterator;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.Arrays;
+import java.util.Objects;
+
 import org.jfree.chart.ui.RectangleAnchor;
 
 /**
@@ -118,7 +120,7 @@ public class ShapeUtils {
         }
         else {
             // this will handle Rectangle2D...
-            return ObjectUtils.equal(s1, s2);
+            return Objects.equals(s1, s2);
         }
     }
 

@@ -95,6 +95,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.LegendItemCollection;
@@ -106,7 +107,6 @@ import org.jfree.chart.labels.CategoryToolTipGenerator;
 import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.urls.CategoryURLGenerator;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintList;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
@@ -1549,8 +1549,7 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
                 that.baseSeriesOutlinePaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.seriesOutlineStroke,
-                that.seriesOutlineStroke)) {
+        if (!Objects.equals(this.seriesOutlineStroke, that.seriesOutlineStroke)) {
             return false;
         }
         if (!this.seriesOutlineStrokeList.equals(
@@ -1570,12 +1569,10 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
         if (!this.labelGenerator.equals(that.labelGenerator)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.toolTipGenerator,
-                that.toolTipGenerator)) {
+        if (!Objects.equals(this.toolTipGenerator, that.toolTipGenerator)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.urlGenerator,
-                that.urlGenerator)) {
+        if (!Objects.equals(this.urlGenerator, that.urlGenerator)) {
             return false;
         }
         return true;

@@ -71,6 +71,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.EventListener;
+import java.util.Objects;
 
 import javax.swing.event.EventListenerList;
 
@@ -80,7 +81,6 @@ import org.jfree.chart.ui.LengthAdjustmentType;
 import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.TextAnchor;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
@@ -607,22 +607,22 @@ public abstract class Marker implements Cloneable, Serializable {
         if (!PaintUtils.equal(this.paint, that.paint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.stroke, that.stroke)) {
+        if (!Objects.equals(this.stroke, that.stroke)) {
             return false;
         }
         if (!PaintUtils.equal(this.outlinePaint, that.outlinePaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.outlineStroke, that.outlineStroke)) {
+        if (!Objects.equals(this.outlineStroke, that.outlineStroke)) {
             return false;
         }
         if (this.alpha != that.alpha) {
             return false;
         }
-        if (!ObjectUtils.equal(this.label, that.label)) {
+        if (!Objects.equals(this.label, that.label)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.labelFont, that.labelFont)) {
+        if (!Objects.equals(this.labelFont, that.labelFont)) {
             return false;
         }
         if (!PaintUtils.equal(this.labelPaint, that.labelPaint)) {
@@ -637,7 +637,7 @@ public abstract class Marker implements Cloneable, Serializable {
         if (this.labelTextAnchor != that.labelTextAnchor) {
             return false;
         }
-        if (!ObjectUtils.equal(this.labelOffset, that.labelOffset)) {
+        if (!Objects.equals(this.labelOffset, that.labelOffset)) {
             return false;
         }
         if (!this.labelOffsetType.equals(that.labelOffsetType)) {

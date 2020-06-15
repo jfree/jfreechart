@@ -40,7 +40,6 @@ package org.jfree.data.statistics;
 import java.util.List;
 import java.util.Objects;
 
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.KeyedObjects2D;
@@ -907,7 +906,7 @@ public class DefaultBoxAndWhiskerCategoryDataset<R extends Comparable<R>,
         if (obj instanceof DefaultBoxAndWhiskerCategoryDataset) {
             DefaultBoxAndWhiskerCategoryDataset dataset
                     = (DefaultBoxAndWhiskerCategoryDataset) obj;
-            return ObjectUtils.equal(this.data, dataset.data);
+            return Objects.equals(this.data, dataset.data);
         }
         return false;
     }

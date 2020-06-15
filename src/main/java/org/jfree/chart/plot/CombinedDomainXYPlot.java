@@ -47,6 +47,7 @@ import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import org.jfree.chart.LegendItemCollection;
 import org.jfree.chart.axis.AxisSpace;
@@ -703,7 +704,7 @@ public class CombinedDomainXYPlot extends XYPlot
         if (this.gap != that.gap) {
             return false;
         }
-        if (!ObjectUtils.equal(this.subplots, that.subplots)) {
+        if (!Objects.equals(this.subplots, that.subplots)) {
             return false;
         }
         return super.equals(obj);

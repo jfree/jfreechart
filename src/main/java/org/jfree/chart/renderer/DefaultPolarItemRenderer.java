@@ -55,6 +55,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.axis.NumberTick;
@@ -883,7 +884,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
         if (this.drawOutlineWhenFilled != that.drawOutlineWhenFilled) {
             return false;
         }
-        if (!ObjectUtils.equal(this.fillComposite, that.fillComposite)) {
+        if (!Objects.equals(this.fillComposite, that.fillComposite)) {
             return false;
         }
         if (this.useFillPaint != that.useFillPaint) {
@@ -901,19 +902,16 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
         if (!this.toolTipGeneratorList.equals(that.toolTipGeneratorList)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.baseToolTipGenerator,
-                that.baseToolTipGenerator)) {
+        if (!Objects.equals(this.baseToolTipGenerator, that.baseToolTipGenerator)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.urlGenerator, that.urlGenerator)) {
+        if (!Objects.equals(this.urlGenerator, that.urlGenerator)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.legendItemToolTipGenerator,
-                that.legendItemToolTipGenerator)) {
+        if (!Objects.equals(this.legendItemToolTipGenerator, that.legendItemToolTipGenerator)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.legendItemURLGenerator,
-                that.legendItemURLGenerator)) {
+        if (!Objects.equals(this.legendItemURLGenerator, that.legendItemURLGenerator)) {
             return false;
         }
         return super.equals(obj);

@@ -117,6 +117,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Objects;
 
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.axis.ValueAxis;
@@ -1236,19 +1237,16 @@ public class XYBarRenderer extends AbstractXYItemRenderer
         if (this.useYInterval != that.useYInterval) {
             return false;
         }
-        if (!ObjectUtils.equal(this.gradientPaintTransformer,
-                that.gradientPaintTransformer)) {
+        if (!Objects.equals(this.gradientPaintTransformer, that.gradientPaintTransformer)) {
             return false;
         }
         if (!ShapeUtils.equal(this.legendBar, that.legendBar)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.positiveItemLabelPositionFallback,
-                that.positiveItemLabelPositionFallback)) {
+        if (!Objects.equals(this.positiveItemLabelPositionFallback, that.positiveItemLabelPositionFallback)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.negativeItemLabelPositionFallback,
-                that.negativeItemLabelPositionFallback)) {
+        if (!Objects.equals(this.negativeItemLabelPositionFallback, that.negativeItemLabelPositionFallback)) {
             return false;
         }
         if (!this.barPainter.equals(that.barPainter)) {

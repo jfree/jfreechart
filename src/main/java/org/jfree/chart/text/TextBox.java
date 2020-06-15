@@ -39,10 +39,11 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Objects;
+
 import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.Size2D;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.SerialUtils;
 
 /**
@@ -329,20 +330,19 @@ public class TextBox implements Serializable {
             return false;
         }
         final TextBox that = (TextBox) obj;
-        if (!ObjectUtils.equal(this.outlinePaint, that.outlinePaint)) {
+        if (!Objects.equals(this.outlinePaint, that.outlinePaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.outlineStroke, that.outlineStroke)) {
+        if (!Objects.equals(this.outlineStroke, that.outlineStroke)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.interiorGap, that.interiorGap)) {
+        if (!Objects.equals(this.interiorGap, that.interiorGap)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.backgroundPaint,
-                that.backgroundPaint)) {
+        if (!Objects.equals(this.backgroundPaint, that.backgroundPaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.shadowPaint, that.shadowPaint)) {
+        if (!Objects.equals(this.shadowPaint, that.shadowPaint)) {
             return false;
         }
         if (this.shadowXOffset != that.shadowXOffset) {
@@ -351,7 +351,7 @@ public class TextBox implements Serializable {
         if (this.shadowYOffset != that.shadowYOffset) {
             return false;
         }
-        if (!ObjectUtils.equal(this.textBlock, that.textBlock)) {
+        if (!Objects.equals(this.textBlock, that.textBlock)) {
             return false;
         }
 

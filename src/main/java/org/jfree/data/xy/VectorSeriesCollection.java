@@ -39,7 +39,8 @@ package org.jfree.data.xy;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import org.jfree.chart.util.ObjectUtils;
+import java.util.Objects;
+
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
@@ -307,7 +308,7 @@ public class VectorSeriesCollection<S extends Comparable<S>>
             return false;
         }
         VectorSeriesCollection<S> that = (VectorSeriesCollection) obj;
-        return ObjectUtils.equal(this.data, that.data);
+        return Objects.equals(this.data, that.data);
     }
 
     /**

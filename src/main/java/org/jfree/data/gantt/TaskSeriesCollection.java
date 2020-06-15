@@ -658,7 +658,7 @@ public class TaskSeriesCollection<R extends Comparable<R>, C extends Comparable<
             return false;
         }
         TaskSeriesCollection that = (TaskSeriesCollection) obj;
-        if (!ObjectUtils.equal(this.data, that.data)) {
+        if (!Objects.equals(this.data, that.data)) {
             return false;
         }
         return true;

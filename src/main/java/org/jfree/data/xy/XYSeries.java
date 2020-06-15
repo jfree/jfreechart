@@ -44,7 +44,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import org.jfree.chart.util.ObjectUtils;
+import java.util.Objects;
+
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.CloneUtils;
 
@@ -922,7 +923,7 @@ public class XYSeries<K extends Comparable<K>> extends Series<K>
         if (this.allowDuplicateXValues != that.allowDuplicateXValues) {
             return false;
         }
-        if (!ObjectUtils.equal(this.data, that.data)) {
+        if (!Objects.equals(this.data, that.data)) {
             return false;
         }
         return true;

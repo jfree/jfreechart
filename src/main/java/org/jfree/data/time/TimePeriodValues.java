@@ -39,7 +39,8 @@ package org.jfree.data.time;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import org.jfree.chart.util.ObjectUtils;
+import java.util.Objects;
+
 import org.jfree.chart.util.Args;
 
 import org.jfree.data.general.Series;
@@ -410,12 +411,10 @@ public class TimePeriodValues<S extends Comparable<S>> extends Series<S>
             return false;
         }
         TimePeriodValues that = (TimePeriodValues) obj;
-        if (!ObjectUtils.equal(this.getDomainDescription(), 
-                that.getDomainDescription())) {
+        if (!Objects.equals(this.getDomainDescription(), that.getDomainDescription())) {
             return false;
         }
-        if (!ObjectUtils.equal(this.getRangeDescription(), 
-                that.getRangeDescription())) {
+        if (!Objects.equals(this.getRangeDescription(), that.getRangeDescription())) {
             return false;
         }
         int count = getItemCount();

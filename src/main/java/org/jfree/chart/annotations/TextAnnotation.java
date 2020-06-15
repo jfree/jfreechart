@@ -44,11 +44,11 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Objects;
 
 import org.jfree.chart.HashUtils;
 import org.jfree.chart.event.AnnotationChangeEvent;
 import org.jfree.chart.ui.TextAnchor;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
@@ -279,20 +279,19 @@ public class TextAnnotation extends AbstractAnnotation implements Serializable {
             return false;
         }
         TextAnnotation that = (TextAnnotation) obj;
-        if (!ObjectUtils.equal(this.text, that.getText())) {
+        if (!Objects.equals(this.text, that.getText())) {
             return false;
         }
-        if (!ObjectUtils.equal(this.font, that.getFont())) {
+        if (!Objects.equals(this.font, that.getFont())) {
             return false;
         }
         if (!PaintUtils.equal(this.paint, that.getPaint())) {
             return false;
         }
-        if (!ObjectUtils.equal(this.textAnchor, that.getTextAnchor())) {
+        if (!Objects.equals(this.textAnchor, that.getTextAnchor())) {
             return false;
         }
-        if (!ObjectUtils.equal(this.rotationAnchor,
-                that.getRotationAnchor())) {
+        if (!Objects.equals(this.rotationAnchor, that.getRotationAnchor())) {
             return false;
         }
         if (this.rotationAngle != that.getRotationAngle()) {

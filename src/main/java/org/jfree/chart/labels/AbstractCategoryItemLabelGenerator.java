@@ -40,9 +40,9 @@ import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.MessageFormat;
 import java.text.NumberFormat;
+import java.util.Objects;
 
 import org.jfree.chart.HashUtils;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.DataUtils;
@@ -267,10 +267,10 @@ public abstract class AbstractCategoryItemLabelGenerator
         if (!this.labelFormat.equals(that.labelFormat)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.dateFormat, that.dateFormat)) {
+        if (!Objects.equals(this.dateFormat, that.dateFormat)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.numberFormat, that.numberFormat)) {
+        if (!Objects.equals(this.numberFormat, that.numberFormat)) {
             return false;
         }
         return true;

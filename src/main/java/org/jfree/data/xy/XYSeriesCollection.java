@@ -42,6 +42,7 @@ import java.beans.VetoableChangeListener;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.jfree.chart.HashUtils;
 import org.jfree.chart.util.ObjectUtils;
@@ -413,7 +414,7 @@ public class XYSeriesCollection<S extends Comparable<S>>
         if (!this.intervalDelegate.equals(that.intervalDelegate)) {
             return false;
         }
-        return ObjectUtils.equal(this.data, that.data);
+        return Objects.equals(this.data, that.data);
     }
 
     /**

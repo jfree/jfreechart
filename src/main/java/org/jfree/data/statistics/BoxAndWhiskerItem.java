@@ -40,7 +40,6 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import org.jfree.chart.util.ObjectUtils;
 
 /**
  * Represents one data item within a box-and-whisker dataset.  Instances of
@@ -249,33 +248,31 @@ public class BoxAndWhiskerItem implements Serializable {
             return false;
         }
         BoxAndWhiskerItem that = (BoxAndWhiskerItem) obj;
-        if (!ObjectUtils.equal(this.mean, that.mean)) {
+        if (!Objects.equals(this.mean, that.mean)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.median, that.median)) {
+        if (!Objects.equals(this.median, that.median)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.q1, that.q1)) {
+        if (!Objects.equals(this.q1, that.q1)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.q3, that.q3)) {
+        if (!Objects.equals(this.q3, that.q3)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.minRegularValue,
-                that.minRegularValue)) {
+        if (!Objects.equals(this.minRegularValue, that.minRegularValue)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.maxRegularValue,
-                that.maxRegularValue)) {
+        if (!Objects.equals(this.maxRegularValue, that.maxRegularValue)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.minOutlier, that.minOutlier)) {
+        if (!Objects.equals(this.minOutlier, that.minOutlier)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.maxOutlier, that.maxOutlier)) {
+        if (!Objects.equals(this.maxOutlier, that.maxOutlier)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.outliers, that.outliers)) {
+        if (!Objects.equals(this.outliers, that.outliers)) {
             return false;
         }
         return true;

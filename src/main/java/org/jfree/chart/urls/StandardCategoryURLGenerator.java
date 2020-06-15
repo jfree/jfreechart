@@ -58,7 +58,8 @@ package org.jfree.chart.urls;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import org.jfree.chart.util.ObjectUtils;
+import java.util.Objects;
+
 import org.jfree.chart.util.Args;
 
 import org.jfree.data.category.CategoryDataset;
@@ -182,16 +183,14 @@ public class StandardCategoryURLGenerator implements CategoryURLGenerator,
             return false;
         }
         StandardCategoryURLGenerator that = (StandardCategoryURLGenerator) obj;
-        if (!ObjectUtils.equal(this.prefix, that.prefix)) {
+        if (!Objects.equals(this.prefix, that.prefix)) {
             return false;
         }
 
-        if (!ObjectUtils.equal(this.seriesParameterName,
-                that.seriesParameterName)) {
+        if (!Objects.equals(this.seriesParameterName, that.seriesParameterName)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.categoryParameterName,
-                that.categoryParameterName)) {
+        if (!Objects.equals(this.categoryParameterName, that.categoryParameterName)) {
             return false;
         }
         return true;

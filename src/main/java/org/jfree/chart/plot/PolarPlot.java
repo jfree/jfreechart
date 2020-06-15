@@ -84,6 +84,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
 
@@ -1831,8 +1832,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
         if (!PaintUtils.equal(this.angleLabelPaint, that.angleLabelPaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.angleGridlineStroke,
-                that.angleGridlineStroke)) {
+        if (!Objects.equals(this.angleGridlineStroke, that.angleGridlineStroke)) {
             return false;
         }
         if (!PaintUtils.equal(
@@ -1843,8 +1843,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
         if (this.radiusGridlinesVisible != that.radiusGridlinesVisible) {
             return false;
         }
-        if (!ObjectUtils.equal(this.radiusGridlineStroke,
-                that.radiusGridlineStroke)) {
+        if (!Objects.equals(this.radiusGridlineStroke, that.radiusGridlineStroke)) {
             return false;
         }
         if (!PaintUtils.equal(this.radiusGridlinePaint,
@@ -1861,8 +1860,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
         if (this.margin != that.margin) {
             return false;
         }
-        if (!ObjectUtils.equal(this.fixedLegendItems,
-                that.fixedLegendItems)) {
+        if (!Objects.equals(this.fixedLegendItems, that.fixedLegendItems)) {
             return false;
         }
         return super.equals(obj);

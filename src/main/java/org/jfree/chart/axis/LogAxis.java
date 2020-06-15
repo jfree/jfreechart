@@ -48,6 +48,7 @@ import java.text.Format;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.jfree.chart.event.AxisChangeEvent;
 import org.jfree.chart.plot.Plot;
@@ -57,7 +58,6 @@ import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.util.AttrStringUtils;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.data.Range;
 
@@ -1026,7 +1026,7 @@ public class LogAxis extends ValueAxis {
         if (this.base != that.base) {
             return false;
         }
-        if (!ObjectUtils.equal(this.baseSymbol, that.baseSymbol)) {
+        if (!Objects.equals(this.baseSymbol, that.baseSymbol)) {
             return false;
         }
         if (!this.baseFormatter.equals(that.baseFormatter)) {
@@ -1035,8 +1035,7 @@ public class LogAxis extends ValueAxis {
         if (this.smallestValue != that.smallestValue) {
             return false;
         }
-        if (!ObjectUtils.equal(this.numberFormatOverride, 
-                that.numberFormatOverride)) {
+        if (!Objects.equals(this.numberFormatOverride, that.numberFormatOverride)) {
             return false;
         }
         return super.equals(obj);

@@ -46,6 +46,7 @@ package org.jfree.data.time.ohlc;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 import org.jfree.chart.HashUtils;
 import org.jfree.chart.util.ObjectUtils;
@@ -464,7 +465,7 @@ public class OHLCSeriesCollection extends AbstractXYDataset
         if (!this.xPosition.equals(that.xPosition)) {
             return false;
         }
-        return ObjectUtils.equal(this.data, that.data);
+        return Objects.equals(this.data, that.data);
     }
 
     /**

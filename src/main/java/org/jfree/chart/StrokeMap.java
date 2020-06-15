@@ -46,7 +46,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.TreeMap;
-import org.jfree.chart.util.ObjectUtils;
+
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
 
@@ -148,7 +148,7 @@ public class StrokeMap<K extends Comparable<K>> implements Cloneable, Serializab
             K key = iterator.next();
             Stroke s1 = getStroke(key);
             Stroke s2 = that.getStroke(key);
-            if (!ObjectUtils.equal(s1, s2)) {
+            if (!Objects.equals(s1, s2)) {
                 return false;
             }
         }

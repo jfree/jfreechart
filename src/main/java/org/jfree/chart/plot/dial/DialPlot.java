@@ -53,7 +53,6 @@ import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.PlotState;
 import org.jfree.chart.util.ObjectList;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.ValueDataset;
@@ -730,10 +729,10 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
             return false;
         }
         DialPlot that = (DialPlot) obj;
-        if (!ObjectUtils.equal(this.background, that.background)) {
+        if (!Objects.equals(this.background, that.background)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.cap, that.cap)) {
+        if (!Objects.equals(this.cap, that.cap)) {
             return false;
         }
         if (!this.dialFrame.equals(that.dialFrame)) {

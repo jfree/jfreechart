@@ -45,6 +45,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.TimeZone;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
@@ -687,7 +688,7 @@ public class TimeSeriesCollection<S extends Comparable<S>>
         if (this.xPosition != that.xPosition) {
             return false;
         }
-        if (!ObjectUtils.equal(this.data, that.data)) {
+        if (!Objects.equals(this.data, that.data)) {
             return false;
         }
         return true;

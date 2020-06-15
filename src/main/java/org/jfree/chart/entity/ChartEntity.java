@@ -45,11 +45,11 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Objects;
 
 import org.jfree.chart.HashUtils;
 import org.jfree.chart.imagemap.ToolTipTagFragmentGenerator;
 import org.jfree.chart.imagemap.URLTagFragmentGenerator;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
@@ -337,10 +337,10 @@ public class ChartEntity implements Cloneable, PublicCloneable, Serializable {
         if (!this.area.equals(that.area)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.toolTipText, that.toolTipText)) {
+        if (!Objects.equals(this.toolTipText, that.toolTipText)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.urlText, that.urlText)) {
+        if (!Objects.equals(this.urlText, that.urlText)) {
             return false;
         }
         return true;

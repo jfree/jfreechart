@@ -38,7 +38,7 @@ package org.jfree.chart.entity;
 
 import java.awt.Shape;
 import java.io.Serializable;
-import org.jfree.chart.util.ObjectUtils;
+import java.util.Objects;
 
 import org.jfree.data.general.Dataset;
 
@@ -144,13 +144,13 @@ public class LegendItemEntity<S extends Comparable<S>> extends ChartEntity
             return false;
         }
         LegendItemEntity<?> that = (LegendItemEntity) obj;
-        if (!ObjectUtils.equal(this.seriesKey, that.seriesKey)) {
+        if (!Objects.equals(this.seriesKey, that.seriesKey)) {
             return false;
         }
         if (this.seriesIndex != that.seriesIndex) {
             return false;
         }
-        if (!ObjectUtils.equal(this.dataset, that.dataset)) {
+        if (!Objects.equals(this.dataset, that.dataset)) {
             return false;
         }
         return super.equals(obj);

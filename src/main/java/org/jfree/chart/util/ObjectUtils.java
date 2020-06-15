@@ -52,26 +52,6 @@ public final class ObjectUtils {
     }
 
     /**
-     * Returns {@code true} if the two objects are equal OR both
-     * {@code null}.
-     *
-     * @param o1 object 1 ({@code null} permitted).
-     * @param o2 object 2 ({@code null} permitted).
-     * @return {@code true} or {@code false}.
-     */
-    public static boolean equal(Object o1, Object o2) {
-        if (o1 == o2) {
-            return true;
-        }
-        if (o1 != null) {
-            return o1.equals(o2);
-        }
-        else {
-            return false;
-        }
-    }
-
-    /**
      * Returns a clone of the specified object, if it can be cloned, otherwise
      * throws a CloneNotSupportedException.
      *

@@ -60,8 +60,9 @@ import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 import java.util.TimeZone;
-import org.jfree.chart.util.ObjectUtils;
+
 import org.jfree.chart.util.Args;
 
 /**
@@ -354,7 +355,7 @@ public class DateTickUnit extends TickUnit implements Serializable {
         if (this.count != that.count) {
             return false;
         }
-        if (!ObjectUtils.equal(this.formatter, that.formatter)) {
+        if (!Objects.equals(this.formatter, that.formatter)) {
             return false;
         }
         return true;
