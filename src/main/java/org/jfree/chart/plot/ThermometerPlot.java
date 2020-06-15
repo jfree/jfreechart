@@ -122,7 +122,7 @@ import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
-import org.jfree.chart.util.ObjectUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.ResourceBundleWrapper;
@@ -1525,7 +1525,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
         if (clone.dataset != null) {
             clone.dataset.addChangeListener(clone);
         }
-        clone.rangeAxis = (ValueAxis) ObjectUtils.clone(this.rangeAxis);
+        clone.rangeAxis = CloneUtils.clone(this.rangeAxis);
         if (clone.rangeAxis != null) {
             clone.rangeAxis.setPlot(clone);
             clone.rangeAxis.addChangeListener(clone);

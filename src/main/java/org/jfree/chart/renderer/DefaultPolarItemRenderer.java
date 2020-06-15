@@ -72,8 +72,8 @@ import org.jfree.chart.plot.PolarPlot;
 import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.urls.XYURLGenerator;
 import org.jfree.chart.util.BooleanList;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.ObjectList;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
@@ -935,20 +935,16 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
         clone.toolTipGeneratorList
                 = (ObjectList) this.toolTipGeneratorList.clone();
         if (clone.baseToolTipGenerator instanceof PublicCloneable) {
-            clone.baseToolTipGenerator = (XYToolTipGenerator)
-                    ObjectUtils.clone(this.baseToolTipGenerator);
+            clone.baseToolTipGenerator = CloneUtils.clone(this.baseToolTipGenerator);
         }
         if (clone.urlGenerator instanceof PublicCloneable) {
-            clone.urlGenerator = (XYURLGenerator)
-                    ObjectUtils.clone(this.urlGenerator);
+            clone.urlGenerator = CloneUtils.clone(this.urlGenerator);
         }
         if (clone.legendItemToolTipGenerator instanceof PublicCloneable) {
-            clone.legendItemToolTipGenerator = (XYSeriesLabelGenerator)
-                    ObjectUtils.clone(this.legendItemToolTipGenerator);
+            clone.legendItemToolTipGenerator = CloneUtils.clone(this.legendItemToolTipGenerator);
         }
         if (clone.legendItemURLGenerator instanceof PublicCloneable) {
-            clone.legendItemURLGenerator = (XYSeriesLabelGenerator)
-                    ObjectUtils.clone(this.legendItemURLGenerator);
+            clone.legendItemURLGenerator = CloneUtils.clone(this.legendItemURLGenerator);
         }
         return clone;
     }

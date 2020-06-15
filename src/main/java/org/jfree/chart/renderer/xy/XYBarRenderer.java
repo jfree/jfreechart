@@ -135,7 +135,7 @@ import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.GradientPaintTransformer;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.StandardGradientPaintTransformer;
-import org.jfree.chart.util.ObjectUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
@@ -1202,8 +1202,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
     public Object clone() throws CloneNotSupportedException {
         XYBarRenderer result = (XYBarRenderer) super.clone();
         if (this.gradientPaintTransformer != null) {
-            result.gradientPaintTransformer = (GradientPaintTransformer)
-                ObjectUtils.clone(this.gradientPaintTransformer);
+            result.gradientPaintTransformer = CloneUtils.clone(this.gradientPaintTransformer);
         }
         result.legendBar = ShapeUtils.clone(this.legendBar);
         return result;

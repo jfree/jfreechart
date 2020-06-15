@@ -37,7 +37,6 @@ package org.jfree.chart.util;
 
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.Objects;
 
 /**
  * A collection of useful static utility methods for handling classes and object
@@ -49,24 +48,6 @@ public final class ObjectUtils {
      * Default constructor - private.
      */
     private ObjectUtils() {
-    }
-
-    /**
-     * Returns a clone of the specified object, if it can be cloned, otherwise
-     * throws a CloneNotSupportedException.
-     *
-     * @param object the object to clone ({@code null} not permitted).
-     * @return A clone of the specified object.
-     * @throws CloneNotSupportedException if the object cannot be cloned.
-     * 
-     * @deprecated Use CloneUtils#clone(Object).
-     */
-    public static Object clone(Object object)
-        throws CloneNotSupportedException {
-        if (object == null) {
-            throw new IllegalArgumentException("Null 'object' argument.");
-        }
-        return CloneUtils.clone(object);
     }
 
     /**
@@ -88,7 +69,7 @@ public final class ObjectUtils {
         // all JDK-Collections are cloneable ...
         // and if the collection is not clonable, then we should throw
         // a CloneNotSupportedException anyway ...
-        Collection result = (Collection) ObjectUtils.clone(collection);
+        Collection result = (Collection) CloneUtils.clone(collection);
         result.clear();
         Iterator iterator = collection.iterator();
         while (iterator.hasNext()) {

@@ -80,7 +80,7 @@ public class ShapeUtils {
     public static Shape clone(Shape shape) {
         if (shape instanceof Cloneable) {
             try {
-                return (Shape) ObjectUtils.clone(shape);
+                return CloneUtils.clone(shape);
             }
             catch (CloneNotSupportedException cnse) {
             }

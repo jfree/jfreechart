@@ -92,7 +92,7 @@ import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.urls.PieURLGenerator;
-import org.jfree.chart.util.ObjectUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
@@ -3266,28 +3266,23 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
                 = (StrokeMap) this.sectionOutlineStrokeMap.clone();
         clone.explodePercentages = new TreeMap<>(this.explodePercentages);
         if (this.labelGenerator != null) {
-            clone.labelGenerator = (PieSectionLabelGenerator) 
-                    ObjectUtils.clone(this.labelGenerator);
+            clone.labelGenerator = CloneUtils.clone(this.labelGenerator);
         }
         if (clone.dataset != null) {
             clone.dataset.addChangeListener(clone);
         }
         if (this.urlGenerator instanceof PublicCloneable) {
-            clone.urlGenerator = (PieURLGenerator) ObjectUtils.clone(
-                    this.urlGenerator);
+            clone.urlGenerator = CloneUtils.clone(this.urlGenerator);
         }
         clone.legendItemShape = ShapeUtils.clone(this.legendItemShape);
         if (this.legendLabelGenerator != null) {
-            clone.legendLabelGenerator = (PieSectionLabelGenerator)
-                    ObjectUtils.clone(this.legendLabelGenerator);
+            clone.legendLabelGenerator = CloneUtils.clone(this.legendLabelGenerator);
         }
         if (this.legendLabelToolTipGenerator != null) {
-            clone.legendLabelToolTipGenerator = (PieSectionLabelGenerator)
-                    ObjectUtils.clone(this.legendLabelToolTipGenerator);
+            clone.legendLabelToolTipGenerator = CloneUtils.clone(this.legendLabelToolTipGenerator);
         }
         if (this.legendLabelURLGenerator instanceof PublicCloneable) {
-            clone.legendLabelURLGenerator = (PieURLGenerator)
-                    ObjectUtils.clone(this.legendLabelURLGenerator);
+            clone.legendLabelURLGenerator = CloneUtils.clone(this.legendLabelURLGenerator);
         }
         return clone;
     }

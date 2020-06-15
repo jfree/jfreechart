@@ -88,7 +88,6 @@ import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.urls.CategoryURLGenerator;
 import org.jfree.chart.util.CloneUtils;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SortOrder;
@@ -1440,15 +1439,15 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
 
         if (this.legendItemLabelGenerator instanceof PublicCloneable) {
             clone.legendItemLabelGenerator = (CategorySeriesLabelGenerator)
-                    ObjectUtils.clone(this.legendItemLabelGenerator);
+                    CloneUtils.clone((Object) this.legendItemLabelGenerator);
         }
         if (this.legendItemToolTipGenerator instanceof PublicCloneable) {
             clone.legendItemToolTipGenerator = (CategorySeriesLabelGenerator)
-                    ObjectUtils.clone(this.legendItemToolTipGenerator);
+                    CloneUtils.clone((Object) this.legendItemToolTipGenerator);
         }
         if (this.legendItemURLGenerator instanceof PublicCloneable) {
             clone.legendItemURLGenerator = (CategorySeriesLabelGenerator)
-                    ObjectUtils.clone(this.legendItemURLGenerator);
+                    CloneUtils.clone((Object) this.legendItemURLGenerator);
         }
         return clone;
     }

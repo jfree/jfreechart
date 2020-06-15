@@ -106,8 +106,8 @@ import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.TextAnchor;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.ObjectList;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
@@ -1877,7 +1877,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     @Override
     public Object clone() throws CloneNotSupportedException {
         PolarPlot clone = (PolarPlot) super.clone();
-        clone.axes = (ObjectList) ObjectUtils.clone(this.axes);
+        clone.axes = CloneUtils.clone(this.axes);
         for (int i = 0; i < this.axes.size(); i++) {
             ValueAxis axis = (ValueAxis) this.axes.get(i);
             if (axis != null) {
@@ -1889,7 +1889,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
         }
 
         // the datasets are not cloned, but listeners need to be added...
-        clone.datasets = (ObjectList) ObjectUtils.clone(this.datasets);
+        clone.datasets = CloneUtils.clone(this.datasets);
         for (int i = 0; i < clone.datasets.size(); ++i) {
             XYDataset d = getDataset(i);
             if (d != null) {
@@ -1897,7 +1897,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
             }
         }
 
-        clone.renderers = (ObjectList) ObjectUtils.clone(this.renderers);
+        clone.renderers = CloneUtils.clone(this.renderers);
         for (int i = 0; i < this.renderers.size(); i++) {
             PolarItemRenderer renderer2 = (PolarItemRenderer) this.renderers.get(i);
             if (renderer2 instanceof PublicCloneable) {
