@@ -59,6 +59,7 @@ import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
+import java.util.Objects;
 
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
@@ -71,7 +72,6 @@ import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.ShapeUtils;
 import org.jfree.data.Range;
@@ -300,8 +300,7 @@ public class YIntervalRenderer extends AbstractXYItemRenderer
             return false;
         }
         YIntervalRenderer that = (YIntervalRenderer) obj;
-        if (!ObjectUtils.equal(this.additionalItemLabelGenerator,
-                that.additionalItemLabelGenerator)) {
+        if (!Objects.equals(this.additionalItemLabelGenerator, that.additionalItemLabelGenerator)) {
             return false;
         }
         return super.equals(obj);

@@ -69,6 +69,7 @@ import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
 import org.jfree.chart.JFreeChart;
@@ -91,7 +92,7 @@ import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.urls.PieURLGenerator;
-import org.jfree.chart.util.ObjectUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
@@ -3119,8 +3120,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
         if (this.ignoreNullValues != that.ignoreNullValues) {
             return false;
         }
-        if (!ObjectUtils.equal(this.sectionPaintMap,
-                that.sectionPaintMap)) {
+        if (!Objects.equals(this.sectionPaintMap, that.sectionPaintMap)) {
             return false;
         }
         if (!PaintUtils.equal(this.defaultSectionPaint,
@@ -3130,20 +3130,17 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
         if (this.sectionOutlinesVisible != that.sectionOutlinesVisible) {
             return false;
         }
-        if (!ObjectUtils.equal(this.sectionOutlinePaintMap,
-                that.sectionOutlinePaintMap)) {
+        if (!Objects.equals(this.sectionOutlinePaintMap, that.sectionOutlinePaintMap)) {
             return false;
         }
         if (!PaintUtils.equal(this.defaultSectionOutlinePaint,
                 that.defaultSectionOutlinePaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.sectionOutlineStrokeMap,
-                that.sectionOutlineStrokeMap)) {
+        if (!Objects.equals(this.sectionOutlineStrokeMap, that.sectionOutlineStrokeMap)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.defaultSectionOutlineStroke,
-                that.defaultSectionOutlineStroke)) {
+        if (!Objects.equals(this.defaultSectionOutlineStroke, that.defaultSectionOutlineStroke)) {
             return false;
         }
         if (!PaintUtils.equal(this.shadowPaint, that.shadowPaint)) {
@@ -3155,15 +3152,13 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
         if (!(this.shadowYOffset == that.shadowYOffset)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.explodePercentages,
-                that.explodePercentages)) {
+        if (!Objects.equals(this.explodePercentages, that.explodePercentages)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.labelGenerator,
-                that.labelGenerator)) {
+        if (!Objects.equals(this.labelGenerator, that.labelGenerator)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.labelFont, that.labelFont)) {
+        if (!Objects.equals(this.labelFont, that.labelFont)) {
             return false;
         }
         if (!PaintUtils.equal(this.labelPaint, that.labelPaint)) {
@@ -3177,8 +3172,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
                 that.labelOutlinePaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.labelOutlineStroke,
-                that.labelOutlineStroke)) {
+        if (!Objects.equals(this.labelOutlineStroke, that.labelOutlineStroke)) {
             return false;
         }
         if (!PaintUtils.equal(this.labelShadowPaint,
@@ -3212,15 +3206,13 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
         if (!PaintUtils.equal(this.labelLinkPaint, that.labelLinkPaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.labelLinkStroke,
-                that.labelLinkStroke)) {
+        if (!Objects.equals(this.labelLinkStroke, that.labelLinkStroke)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.toolTipGenerator,
-                that.toolTipGenerator)) {
+        if (!Objects.equals(this.toolTipGenerator, that.toolTipGenerator)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.urlGenerator, that.urlGenerator)) {
+        if (!Objects.equals(this.urlGenerator, that.urlGenerator)) {
             return false;
         }
         if (!(this.minimumArcAngleToDraw == that.minimumArcAngleToDraw)) {
@@ -3229,16 +3221,13 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
         if (!ShapeUtils.equal(this.legendItemShape, that.legendItemShape)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.legendLabelGenerator,
-                that.legendLabelGenerator)) {
+        if (!Objects.equals(this.legendLabelGenerator, that.legendLabelGenerator)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.legendLabelToolTipGenerator,
-                that.legendLabelToolTipGenerator)) {
+        if (!Objects.equals(this.legendLabelToolTipGenerator, that.legendLabelToolTipGenerator)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.legendLabelURLGenerator,
-                that.legendLabelURLGenerator)) {
+        if (!Objects.equals(this.legendLabelURLGenerator, that.legendLabelURLGenerator)) {
             return false;
         }
         if (this.autoPopulateSectionPaint != that.autoPopulateSectionPaint) {
@@ -3252,8 +3241,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
                 != that.autoPopulateSectionOutlineStroke) {
             return false;
         }
-        if (!ObjectUtils.equal(this.shadowGenerator,
-                that.shadowGenerator)) {
+        if (!Objects.equals(this.shadowGenerator, that.shadowGenerator)) {
             return false;
         }
         // can't find any difference...
@@ -3278,28 +3266,23 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
                 = (StrokeMap) this.sectionOutlineStrokeMap.clone();
         clone.explodePercentages = new TreeMap<>(this.explodePercentages);
         if (this.labelGenerator != null) {
-            clone.labelGenerator = (PieSectionLabelGenerator) 
-                    ObjectUtils.clone(this.labelGenerator);
+            clone.labelGenerator = CloneUtils.clone(this.labelGenerator);
         }
         if (clone.dataset != null) {
             clone.dataset.addChangeListener(clone);
         }
         if (this.urlGenerator instanceof PublicCloneable) {
-            clone.urlGenerator = (PieURLGenerator) ObjectUtils.clone(
-                    this.urlGenerator);
+            clone.urlGenerator = CloneUtils.clone(this.urlGenerator);
         }
         clone.legendItemShape = ShapeUtils.clone(this.legendItemShape);
         if (this.legendLabelGenerator != null) {
-            clone.legendLabelGenerator = (PieSectionLabelGenerator)
-                    ObjectUtils.clone(this.legendLabelGenerator);
+            clone.legendLabelGenerator = CloneUtils.clone(this.legendLabelGenerator);
         }
         if (this.legendLabelToolTipGenerator != null) {
-            clone.legendLabelToolTipGenerator = (PieSectionLabelGenerator)
-                    ObjectUtils.clone(this.legendLabelToolTipGenerator);
+            clone.legendLabelToolTipGenerator = CloneUtils.clone(this.legendLabelToolTipGenerator);
         }
         if (this.legendLabelURLGenerator instanceof PublicCloneable) {
-            clone.legendLabelURLGenerator = (PieURLGenerator)
-                    ObjectUtils.clone(this.legendLabelURLGenerator);
+            clone.legendLabelURLGenerator = CloneUtils.clone(this.legendLabelURLGenerator);
         }
         return clone;
     }

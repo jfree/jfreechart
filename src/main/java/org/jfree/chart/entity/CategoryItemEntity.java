@@ -39,7 +39,8 @@ package org.jfree.chart.entity;
 
 import java.awt.Shape;
 import java.io.Serializable;
-import org.jfree.chart.util.ObjectUtils;
+import java.util.Objects;
+
 import org.jfree.chart.util.Args;
 
 import org.jfree.data.category.CategoryDataset;
@@ -202,7 +203,7 @@ public class CategoryItemEntity<R extends Comparable<R>, C extends Comparable<C>
         if (!this.columnKey.equals(that.columnKey)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.dataset, that.dataset)) {
+        if (!Objects.equals(this.dataset, that.dataset)) {
             return false;
         }
 

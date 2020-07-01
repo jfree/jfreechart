@@ -100,7 +100,6 @@ import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.Size2D;
 import org.jfree.chart.ui.VerticalAlignment;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.Range;
@@ -1511,7 +1510,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
         if (this.borderVisible != that.borderVisible) {
             return false;
         }
-        if (!ObjectUtils.equal(this.borderStroke, that.borderStroke)) {
+        if (!Objects.equals(this.borderStroke, that.borderStroke)) {
             return false;
         }
         if (!PaintUtils.equal(this.borderPaint, that.borderPaint)) {
@@ -1520,13 +1519,13 @@ public class JFreeChart implements Drawable, TitleChangeListener,
         if (!this.padding.equals(that.padding)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.title, that.title)) {
+        if (!Objects.equals(this.title, that.title)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.subtitles, that.subtitles)) {
+        if (!Objects.equals(this.subtitles, that.subtitles)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.plot, that.plot)) {
+        if (!Objects.equals(this.plot, that.plot)) {
             return false;
         }
         if (!PaintUtils.equal(
@@ -1534,8 +1533,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
         )) {
             return false;
         }
-        if (!ObjectUtils.equal(this.backgroundImage,
-                that.backgroundImage)) {
+        if (!Objects.equals(this.backgroundImage, that.backgroundImage)) {
             return false;
         }
         if (this.backgroundImageAlignment != that.backgroundImageAlignment) {

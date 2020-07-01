@@ -46,6 +46,7 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.event.RendererChangeEvent;
@@ -55,7 +56,6 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.ui.GradientPaintTransformer;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.StandardGradientPaintTransformer;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.data.xy.XYDataset;
 
@@ -500,8 +500,7 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
         if (this.fillType != that.fillType) {
             return false;
         }
-        if (!ObjectUtils.equal(this.gradientPaintTransformer, 
-                that.gradientPaintTransformer)) {
+        if (!Objects.equals(this.gradientPaintTransformer, that.gradientPaintTransformer)) {
             return false;
         }
         return super.equals(obj);

@@ -51,6 +51,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Objects;
 
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;
@@ -61,7 +62,6 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.ui.GradientPaintTransformer;
 import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
@@ -533,8 +533,7 @@ public class StatisticalBarRenderer extends BarRenderer
                 that.errorIndicatorPaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.errorIndicatorStroke,
-                that.errorIndicatorStroke)) {
+        if (!Objects.equals(this.errorIndicatorStroke, that.errorIndicatorStroke)) {
             return false;
         }
         return super.equals(obj);

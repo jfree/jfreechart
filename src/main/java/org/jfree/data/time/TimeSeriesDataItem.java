@@ -37,7 +37,8 @@
 package org.jfree.data.time;
 
 import java.io.Serializable;
-import org.jfree.chart.util.ObjectUtils;
+import java.util.Objects;
+
 import org.jfree.chart.util.Args;
 
 /**
@@ -146,10 +147,10 @@ public class TimeSeriesDataItem implements Cloneable,
             return false;
         }
         TimeSeriesDataItem that = (TimeSeriesDataItem) obj;
-        if (!ObjectUtils.equal(this.period, that.period)) {
+        if (!Objects.equals(this.period, that.period)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.value, that.value)) {
+        if (!Objects.equals(this.value, that.value)) {
             return false;
         }
         return true;

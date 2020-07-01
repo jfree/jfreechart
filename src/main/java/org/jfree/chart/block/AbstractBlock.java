@@ -58,7 +58,6 @@ import java.io.Serializable;
 import java.util.Objects;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.Size2D;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
@@ -563,7 +562,7 @@ public class AbstractBlock implements Cloneable, Serializable {
             return false;
         }
         AbstractBlock that = (AbstractBlock) obj;
-        if (!ObjectUtils.equal(this.id, that.id)) {
+        if (!Objects.equals(this.id, that.id)) {
             return false;
         }
         if (!this.frame.equals(that.frame)) {

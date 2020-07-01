@@ -48,6 +48,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.axis.CategoryAxis;
@@ -56,7 +57,6 @@ import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.util.BooleanList;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.ShapeUtils;
 import org.jfree.data.Range;
@@ -519,8 +519,7 @@ public class ScatterRenderer extends AbstractCategoryItemRenderer
             return false;
         }
         ScatterRenderer that = (ScatterRenderer) obj;
-        if (!ObjectUtils.equal(this.seriesShapesFilled,
-                that.seriesShapesFilled)) {
+        if (!Objects.equals(this.seriesShapesFilled, that.seriesShapesFilled)) {
             return false;
         }
         if (this.baseShapesFilled != that.baseShapesFilled) {

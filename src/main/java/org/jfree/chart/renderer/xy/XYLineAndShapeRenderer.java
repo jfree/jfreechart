@@ -84,6 +84,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Objects;
 
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.axis.ValueAxis;
@@ -96,7 +97,6 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.util.BooleanList;
 import org.jfree.chart.util.LineUtils;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
@@ -1142,8 +1142,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
             return false;
         }
         XYLineAndShapeRenderer that = (XYLineAndShapeRenderer) obj;
-        if (!ObjectUtils.equal(
-            this.seriesLinesVisible, that.seriesLinesVisible)
+        if (!Objects.equals(this.seriesLinesVisible, that.seriesLinesVisible)
         ) {
             return false;
         }
@@ -1153,16 +1152,14 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
         if (!ShapeUtils.equal(this.legendLine, that.legendLine)) {
             return false;
         }
-        if (!ObjectUtils.equal(
-            this.seriesShapesVisible, that.seriesShapesVisible)
+        if (!Objects.equals(this.seriesShapesVisible, that.seriesShapesVisible)
         ) {
             return false;
         }
         if (this.defaultShapesVisible != that.defaultShapesVisible) {
             return false;
         }
-        if (!ObjectUtils.equal(
-            this.seriesShapesFilled, that.seriesShapesFilled)
+        if (!Objects.equals(this.seriesShapesFilled, that.seriesShapesFilled)
         ) {
             return false;
         }

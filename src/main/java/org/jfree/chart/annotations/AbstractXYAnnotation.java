@@ -39,13 +39,13 @@ package org.jfree.chart.annotations;
 import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
+import java.util.Objects;
 
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.entity.XYAnnotationEntity;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.util.ObjectUtils;
 
 /**
  * The interface that must be supported by annotations that are to be added to
@@ -175,10 +175,10 @@ public abstract class AbstractXYAnnotation extends AbstractAnnotation
             return false;
         }
         AbstractXYAnnotation that = (AbstractXYAnnotation) obj;
-        if (!ObjectUtils.equal(this.toolTipText, that.toolTipText)) {
+        if (!Objects.equals(this.toolTipText, that.toolTipText)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.url, that.url)) {
+        if (!Objects.equals(this.url, that.url)) {
             return false;
         }
         return true;

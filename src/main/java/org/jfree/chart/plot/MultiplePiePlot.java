@@ -75,6 +75,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.jfree.chart.ChartRenderingInfo;
 import org.jfree.chart.JFreeChart;
@@ -84,7 +85,6 @@ import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
@@ -623,7 +623,7 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
                 that.aggregatedItemsPaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.pieChart, that.pieChart)) {
+        if (!Objects.equals(this.pieChart, that.pieChart)) {
             return false;
         }
         if (!ShapeUtils.equal(this.legendItemShape, that.legendItemShape)) {

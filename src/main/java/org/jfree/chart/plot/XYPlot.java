@@ -110,7 +110,6 @@ import org.jfree.chart.ui.Layer;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.util.CloneUtils;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
@@ -5112,52 +5111,46 @@ public class XYPlot<S extends Comparable<S>> extends Plot
         if (this.rangeCrosshairValue != that.rangeCrosshairValue) {
             return false;
         }
-        if (!ObjectUtils.equal(this.axisOffset, that.axisOffset)) {
+        if (!Objects.equals(this.axisOffset, that.axisOffset)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.renderers, that.renderers)) {
+        if (!Objects.equals(this.renderers, that.renderers)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.rangeAxes, that.rangeAxes)) {
+        if (!Objects.equals(this.rangeAxes, that.rangeAxes)) {
             return false;
         }
         if (!this.rangeAxisLocations.equals(that.rangeAxisLocations)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.datasetToDomainAxesMap,
-                that.datasetToDomainAxesMap)) {
+        if (!Objects.equals(this.datasetToDomainAxesMap, that.datasetToDomainAxesMap)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.datasetToRangeAxesMap,
-                that.datasetToRangeAxesMap)) {
+        if (!Objects.equals(this.datasetToRangeAxesMap, that.datasetToRangeAxesMap)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.domainGridlineStroke,
-                that.domainGridlineStroke)) {
+        if (!Objects.equals(this.domainGridlineStroke, that.domainGridlineStroke)) {
             return false;
         }
         if (!PaintUtils.equal(this.domainGridlinePaint,
                 that.domainGridlinePaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.rangeGridlineStroke,
-                that.rangeGridlineStroke)) {
+        if (!Objects.equals(this.rangeGridlineStroke, that.rangeGridlineStroke)) {
             return false;
         }
         if (!PaintUtils.equal(this.rangeGridlinePaint,
                 that.rangeGridlinePaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.domainMinorGridlineStroke,
-                that.domainMinorGridlineStroke)) {
+        if (!Objects.equals(this.domainMinorGridlineStroke, that.domainMinorGridlineStroke)) {
             return false;
         }
         if (!PaintUtils.equal(this.domainMinorGridlinePaint,
                 that.domainMinorGridlinePaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.rangeMinorGridlineStroke,
-                that.rangeMinorGridlineStroke)) {
+        if (!Objects.equals(this.rangeMinorGridlineStroke, that.rangeMinorGridlineStroke)) {
             return false;
         }
         if (!PaintUtils.equal(this.rangeMinorGridlinePaint,
@@ -5168,71 +5161,58 @@ public class XYPlot<S extends Comparable<S>> extends Plot
                 that.domainZeroBaselinePaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.domainZeroBaselineStroke,
-                that.domainZeroBaselineStroke)) {
+        if (!Objects.equals(this.domainZeroBaselineStroke, that.domainZeroBaselineStroke)) {
             return false;
         }
         if (!PaintUtils.equal(this.rangeZeroBaselinePaint,
                 that.rangeZeroBaselinePaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.rangeZeroBaselineStroke,
-                that.rangeZeroBaselineStroke)) {
+        if (!Objects.equals(this.rangeZeroBaselineStroke, that.rangeZeroBaselineStroke)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.domainCrosshairStroke,
-                that.domainCrosshairStroke)) {
+        if (!Objects.equals(this.domainCrosshairStroke, that.domainCrosshairStroke)) {
             return false;
         }
         if (!PaintUtils.equal(this.domainCrosshairPaint,
                 that.domainCrosshairPaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.rangeCrosshairStroke,
-                that.rangeCrosshairStroke)) {
+        if (!Objects.equals(this.rangeCrosshairStroke, that.rangeCrosshairStroke)) {
             return false;
         }
         if (!PaintUtils.equal(this.rangeCrosshairPaint,
                 that.rangeCrosshairPaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.foregroundDomainMarkers,
-                that.foregroundDomainMarkers)) {
+        if (!Objects.equals(this.foregroundDomainMarkers, that.foregroundDomainMarkers)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.backgroundDomainMarkers,
-                that.backgroundDomainMarkers)) {
+        if (!Objects.equals(this.backgroundDomainMarkers, that.backgroundDomainMarkers)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.foregroundRangeMarkers,
-                that.foregroundRangeMarkers)) {
+        if (!Objects.equals(this.foregroundRangeMarkers, that.foregroundRangeMarkers)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.backgroundRangeMarkers,
-                that.backgroundRangeMarkers)) {
+        if (!Objects.equals(this.backgroundRangeMarkers, that.backgroundRangeMarkers)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.foregroundDomainMarkers,
-                that.foregroundDomainMarkers)) {
+        if (!Objects.equals(this.foregroundDomainMarkers, that.foregroundDomainMarkers)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.backgroundDomainMarkers,
-                that.backgroundDomainMarkers)) {
+        if (!Objects.equals(this.backgroundDomainMarkers, that.backgroundDomainMarkers)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.foregroundRangeMarkers,
-                that.foregroundRangeMarkers)) {
+        if (!Objects.equals(this.foregroundRangeMarkers, that.foregroundRangeMarkers)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.backgroundRangeMarkers,
-                that.backgroundRangeMarkers)) {
+        if (!Objects.equals(this.backgroundRangeMarkers, that.backgroundRangeMarkers)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.annotations, that.annotations)) {
+        if (!Objects.equals(this.annotations, that.annotations)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.fixedLegendItems,
-                that.fixedLegendItems)) {
+        if (!Objects.equals(this.fixedLegendItems, that.fixedLegendItems)) {
             return false;
         }
         if (!PaintUtils.equal(this.domainTickBandPaint,
@@ -5252,8 +5232,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
                 return false;
             }
         }
-        if (!ObjectUtils.equal(this.shadowGenerator,
-                that.shadowGenerator)) {
+        if (!Objects.equals(this.shadowGenerator, that.shadowGenerator)) {
             return false;
         }
         return super.equals(obj);

@@ -110,6 +110,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Objects;
 
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.axis.CategoryAxis;
@@ -126,7 +127,6 @@ import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.GradientPaintTransformer;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.StandardGradientPaintTransformer;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
@@ -1355,16 +1355,13 @@ public class BarRenderer extends AbstractCategoryItemRenderer
         if (this.minimumBarLength != that.minimumBarLength) {
             return false;
         }
-        if (!ObjectUtils.equal(this.gradientPaintTransformer,
-                that.gradientPaintTransformer)) {
+        if (!Objects.equals(this.gradientPaintTransformer, that.gradientPaintTransformer)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.positiveItemLabelPositionFallback,
-            that.positiveItemLabelPositionFallback)) {
+        if (!Objects.equals(this.positiveItemLabelPositionFallback, that.positiveItemLabelPositionFallback)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.negativeItemLabelPositionFallback,
-            that.negativeItemLabelPositionFallback)) {
+        if (!Objects.equals(this.negativeItemLabelPositionFallback, that.negativeItemLabelPositionFallback)) {
             return false;
         }
         if (!this.barPainter.equals(that.barPainter)) {

@@ -101,6 +101,7 @@ import java.awt.Stroke;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
+import java.util.Objects;
 
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.axis.CategoryAxis;
@@ -110,7 +111,6 @@ import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.util.BooleanList;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.ShapeUtils;
 import org.jfree.data.category.CategoryDataset;
@@ -867,19 +867,16 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
         if (this.defaultLinesVisible != that.defaultLinesVisible) {
             return false;
         }
-        if (!ObjectUtils.equal(this.seriesLinesVisible,
-                that.seriesLinesVisible)) {
+        if (!Objects.equals(this.seriesLinesVisible, that.seriesLinesVisible)) {
             return false;
         }
         if (this.defaultShapesVisible != that.defaultShapesVisible) {
             return false;
         }
-        if (!ObjectUtils.equal(this.seriesShapesVisible,
-                that.seriesShapesVisible)) {
+        if (!Objects.equals(this.seriesShapesVisible, that.seriesShapesVisible)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.seriesShapesFilled,
-                that.seriesShapesFilled)) {
+        if (!Objects.equals(this.seriesShapesFilled, that.seriesShapesFilled)) {
             return false;
         }
         if (this.defaultShapesFilled != that.defaultShapesFilled) {

@@ -37,7 +37,8 @@
 package org.jfree.data;
 
 import java.io.Serializable;
-import org.jfree.chart.util.ObjectUtils;
+import java.util.Objects;
+
 import org.jfree.chart.util.Args;
 
 /**
@@ -148,7 +149,7 @@ public class ComparableObjectItem implements Comparable<ComparableObjectItem>,
         if (!this.x.equals(that.x)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.obj, that.obj)) {
+        if (!Objects.equals(this.obj, that.obj)) {
             return false;
         }
         return true;

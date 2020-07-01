@@ -46,9 +46,10 @@ package org.jfree.data.time.ohlc;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 import org.jfree.chart.HashUtils;
-import org.jfree.chart.util.ObjectUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.time.RegularTimePeriod;
@@ -464,7 +465,7 @@ public class OHLCSeriesCollection extends AbstractXYDataset
         if (!this.xPosition.equals(that.xPosition)) {
             return false;
         }
-        return ObjectUtils.equal(this.data, that.data);
+        return Objects.equals(this.data, that.data);
     }
 
     /**
@@ -493,7 +494,7 @@ public class OHLCSeriesCollection extends AbstractXYDataset
     public Object clone() throws CloneNotSupportedException {
         OHLCSeriesCollection clone
                 = (OHLCSeriesCollection) super.clone();
-        clone.data = (List) ObjectUtils.deepClone(this.data);
+        clone.data = CloneUtils.cloneList(this.data);
         return clone;
     }
 

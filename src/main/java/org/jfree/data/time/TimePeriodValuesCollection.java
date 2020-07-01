@@ -41,7 +41,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
-import org.jfree.chart.util.ObjectUtils;
+
 import org.jfree.chart.util.Args;
 
 import org.jfree.data.DomainInfo;
@@ -432,7 +432,7 @@ public class TimePeriodValuesCollection extends AbstractIntervalXYDataset
         if (this.xPosition != that.xPosition) {
             return false;
         }
-        if (!ObjectUtils.equal(this.data, that.data)) {
+        if (!Objects.equals(this.data, that.data)) {
             return false;
         }
         return true;

@@ -43,7 +43,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
-import org.jfree.chart.util.ObjectUtils;
+
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 
@@ -175,7 +175,7 @@ public class StandardEntityCollection implements EntityCollection,
         }
         if (obj instanceof StandardEntityCollection) {
             StandardEntityCollection that = (StandardEntityCollection) obj;
-            return ObjectUtils.equal(this.entities, that.entities);
+            return Objects.equals(this.entities, that.entities);
         }
         return false;
     }

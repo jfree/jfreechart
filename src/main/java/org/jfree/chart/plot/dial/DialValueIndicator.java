@@ -53,6 +53,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.Objects;
 
 import org.jfree.chart.HashUtils;
 import org.jfree.chart.text.TextUtils;
@@ -60,7 +61,6 @@ import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.Size2D;
 import org.jfree.chart.ui.TextAnchor;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
@@ -675,8 +675,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
         if (!this.templateValue.equals(that.templateValue)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.maxTemplateValue,
-                that.maxTemplateValue)) {
+        if (!Objects.equals(this.maxTemplateValue, that.maxTemplateValue)) {
             return false;
         }
         if (!this.font.equals(that.font)) {

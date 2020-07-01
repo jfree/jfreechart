@@ -84,6 +84,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.Stack;
 
 import org.jfree.chart.axis.ValueAxis;
@@ -96,7 +97,6 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.urls.XYURLGenerator;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
@@ -654,7 +654,7 @@ public class StackedXYAreaRenderer extends XYAreaRenderer
         if (!PaintUtils.equal(this.shapePaint, that.shapePaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.shapeStroke, that.shapeStroke)) {
+        if (!Objects.equals(this.shapeStroke, that.shapeStroke)) {
             return false;
         }
         return true;

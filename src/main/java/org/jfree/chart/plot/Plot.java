@@ -90,7 +90,6 @@ import org.jfree.chart.ui.Align;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.util.CloneUtils;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
@@ -1273,25 +1272,23 @@ public abstract class Plot implements AxisChangeListener,
             return false;
         }
         Plot that = (Plot) obj;
-        if (!ObjectUtils.equal(this.noDataMessage, that.noDataMessage)) {
+        if (!Objects.equals(this.noDataMessage, that.noDataMessage)) {
             return false;
         }
-        if (!ObjectUtils.equal(
-            this.noDataMessageFont, that.noDataMessageFont
-        )) {
+        if (!Objects.equals(this.noDataMessageFont, that.noDataMessageFont)) {
             return false;
         }
         if (!PaintUtils.equal(this.noDataMessagePaint,
                 that.noDataMessagePaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.insets, that.insets)) {
+        if (!Objects.equals(this.insets, that.insets)) {
             return false;
         }
         if (this.outlineVisible != that.outlineVisible) {
             return false;
         }
-        if (!ObjectUtils.equal(this.outlineStroke, that.outlineStroke)) {
+        if (!Objects.equals(this.outlineStroke, that.outlineStroke)) {
             return false;
         }
         if (!PaintUtils.equal(this.outlinePaint, that.outlinePaint)) {
@@ -1300,8 +1297,7 @@ public abstract class Plot implements AxisChangeListener,
         if (!PaintUtils.equal(this.backgroundPaint, that.backgroundPaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.backgroundImage,
-                that.backgroundImage)) {
+        if (!Objects.equals(this.backgroundImage, that.backgroundImage)) {
             return false;
         }
         if (this.backgroundImageAlignment != that.backgroundImageAlignment) {

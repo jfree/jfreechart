@@ -58,11 +58,11 @@ import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 import org.jfree.chart.plot.IntervalMarker;
 import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.util.ObjectUtils;
 
 /**
  * A band that can be added to a number axis to display regions.
@@ -251,10 +251,10 @@ public class MarkerAxisBand implements Serializable {
         if (this.bottomOuterGap != that.bottomOuterGap) {
             return false;
         }
-        if (!ObjectUtils.equal(this.font, that.font)) {
+        if (!Objects.equals(this.font, that.font)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.markers, that.markers)) {
+        if (!Objects.equals(this.markers, that.markers)) {
             return false;
         }
         return true;

@@ -94,6 +94,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Objects;
 
 import org.jfree.chart.block.BlockResult;
 import org.jfree.chart.block.EntityBlockParams;
@@ -113,7 +114,6 @@ import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.Size2D;
 import org.jfree.chart.ui.VerticalAlignment;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
@@ -835,10 +835,10 @@ public class TextTitle extends Title
             return false;
         }
         TextTitle that = (TextTitle) obj;
-        if (!ObjectUtils.equal(this.text, that.text)) {
+        if (!Objects.equals(this.text, that.text)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.font, that.font)) {
+        if (!Objects.equals(this.font, that.font)) {
             return false;
         }
         if (!PaintUtils.equal(this.paint, that.paint)) {
@@ -856,10 +856,10 @@ public class TextTitle extends Title
         if (this.expandToFitSpace != that.expandToFitSpace) {
             return false;
         }
-        if (!ObjectUtils.equal(this.toolTipText, that.toolTipText)) {
+        if (!Objects.equals(this.toolTipText, that.toolTipText)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.urlText, that.urlText)) {
+        if (!Objects.equals(this.urlText, that.urlText)) {
             return false;
         }
         return super.equals(obj);

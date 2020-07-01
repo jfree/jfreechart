@@ -47,6 +47,7 @@ import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import org.jfree.chart.LegendItemCollection;
 import org.jfree.chart.axis.AxisSpace;
@@ -58,7 +59,7 @@ import org.jfree.chart.event.PlotChangeListener;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
-import org.jfree.chart.util.ObjectUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.ShadowGenerator;
 import org.jfree.data.Range;
@@ -703,7 +704,7 @@ public class CombinedDomainXYPlot extends XYPlot
         if (this.gap != that.gap) {
             return false;
         }
-        if (!ObjectUtils.equal(this.subplots, that.subplots)) {
+        if (!Objects.equals(this.subplots, that.subplots)) {
             return false;
         }
         return super.equals(obj);
@@ -721,7 +722,7 @@ public class CombinedDomainXYPlot extends XYPlot
     public Object clone() throws CloneNotSupportedException {
 
         CombinedDomainXYPlot result = (CombinedDomainXYPlot) super.clone();
-        result.subplots = (List) ObjectUtils.deepClone(this.subplots);
+        result.subplots = CloneUtils.cloneList(this.subplots);
         for (XYPlot child : result.subplots) {
             child.setParent(result);
         }

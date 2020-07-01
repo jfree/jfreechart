@@ -45,6 +45,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.event.PlotChangeEvent;
@@ -52,7 +53,6 @@ import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.PlotState;
 import org.jfree.chart.util.ObjectList;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.ValueDataset;
@@ -729,10 +729,10 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
             return false;
         }
         DialPlot that = (DialPlot) obj;
-        if (!ObjectUtils.equal(this.background, that.background)) {
+        if (!Objects.equals(this.background, that.background)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.cap, that.cap)) {
+        if (!Objects.equals(this.cap, that.cap)) {
             return false;
         }
         if (!this.dialFrame.equals(that.dialFrame)) {
@@ -767,8 +767,8 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
     @Override
     public int hashCode() {
         int result = 193;
-        result = 37 * result + ObjectUtils.hashCode(this.background);
-        result = 37 * result + ObjectUtils.hashCode(this.cap);
+        result = 37 * result + Objects.hashCode(this.background);
+        result = 37 * result + Objects.hashCode(this.cap);
         result = 37 * result + this.dialFrame.hashCode();
         long temp = Double.doubleToLongBits(this.viewX);
         result = 37 * result + (int) (temp ^ (temp >>> 32));

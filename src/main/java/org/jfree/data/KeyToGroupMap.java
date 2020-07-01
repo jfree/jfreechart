@@ -46,7 +46,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import org.jfree.chart.util.ObjectUtils;
+
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 
@@ -220,7 +220,7 @@ public class KeyToGroupMap<K extends Comparable<K>, G extends Comparable<G>>
             return false;
         }
         KeyToGroupMap<K, G> that = (KeyToGroupMap) obj;
-        if (!ObjectUtils.equal(this.defaultGroup, that.defaultGroup)) {
+        if (!Objects.equals(this.defaultGroup, that.defaultGroup)) {
             return false;
         }
         if (!this.keyToGroupMap.equals(that.keyToGroupMap)) {

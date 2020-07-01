@@ -47,8 +47,6 @@ package org.jfree.data.statistics;
 import java.io.Serializable;
 import java.util.Objects;
 
-import org.jfree.chart.util.ObjectUtils;
-
 /**
  * A simple data structure that holds a mean value and a standard deviation
  * value.  This is used in the
@@ -156,11 +154,10 @@ public class MeanAndStandardDeviation implements Serializable {
             return false;
         }
         MeanAndStandardDeviation that = (MeanAndStandardDeviation) obj;
-        if (!ObjectUtils.equal(this.mean, that.mean)) {
+        if (!Objects.equals(this.mean, that.mean)) {
             return false;
         }
-        if (!ObjectUtils.equal(
-            this.standardDeviation, that.standardDeviation)
+        if (!Objects.equals(this.standardDeviation, that.standardDeviation)
         ) {
             return false;
         }

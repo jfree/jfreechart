@@ -51,6 +51,7 @@ import java.awt.geom.Rectangle2D;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Objects;
 
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.event.RendererChangeEvent;
@@ -59,7 +60,6 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.Range;
@@ -423,7 +423,7 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
         if (!PaintUtils.equal(this.errorPaint, that.errorPaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.errorStroke, that.errorStroke)) {
+        if (!Objects.equals(this.errorStroke, that.errorStroke)) {
             return false;
         }
         return super.equals(obj);

@@ -37,7 +37,8 @@
 package org.jfree.data;
 
 import java.io.Serializable;
-import org.jfree.chart.util.ObjectUtils;
+import java.util.Objects;
+
 import org.jfree.chart.util.Args;
 
 /**
@@ -127,8 +128,8 @@ public class KeyedValues2DItemKey<R extends Comparable<R>,
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 17 * hash + ObjectUtils.hashCode(this.rowKey);
-        hash = 17 * hash + ObjectUtils.hashCode(this.columnKey);
+        hash = 17 * hash + Objects.hashCode(this.rowKey);
+        hash = 17 * hash + Objects.hashCode(this.columnKey);
         return hash;
     }
 

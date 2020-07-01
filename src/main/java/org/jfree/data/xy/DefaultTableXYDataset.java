@@ -42,7 +42,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import org.jfree.chart.util.ObjectUtils;
+import java.util.Objects;
+
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
@@ -476,7 +477,7 @@ public class DefaultTableXYDataset<S extends Comparable<S>>
         if (!this.intervalDelegate.equals(that.intervalDelegate)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.data, that.data)) {
+        if (!Objects.equals(this.data, that.data)) {
             return false;
         }
         return true;

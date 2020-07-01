@@ -70,7 +70,6 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.title.LegendTitle;
 import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.util.BooleanList;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintList;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.PublicCloneable;
@@ -2855,66 +2854,58 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
                 != that.defaultSeriesVisibleInLegend) {
             return false;
         }
-        if (!ObjectUtils.equal(this.paintList, that.paintList)) {
+        if (!Objects.equals(this.paintList, that.paintList)) {
             return false;
         }
         if (!PaintUtils.equal(this.defaultPaint, that.defaultPaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.fillPaintList, that.fillPaintList)) {
+        if (!Objects.equals(this.fillPaintList, that.fillPaintList)) {
             return false;
         }
         if (!PaintUtils.equal(this.defaultFillPaint,
                 that.defaultFillPaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.outlinePaintList,
-                that.outlinePaintList)) {
+        if (!Objects.equals(this.outlinePaintList, that.outlinePaintList)) {
             return false;
         }
         if (!PaintUtils.equal(this.defaultOutlinePaint,
                 that.defaultOutlinePaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.strokeList, that.strokeList)) {
+        if (!Objects.equals(this.strokeList, that.strokeList)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.defaultStroke, that.defaultStroke)) {
+        if (!Objects.equals(this.defaultStroke, that.defaultStroke)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.outlineStrokeList,
-                that.outlineStrokeList)) {
+        if (!Objects.equals(this.outlineStrokeList, that.outlineStrokeList)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.defaultOutlineStroke,
-                that.defaultOutlineStroke)) {
+        if (!Objects.equals(this.defaultOutlineStroke, that.defaultOutlineStroke)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.shapeList, that.shapeList)) {
+        if (!Objects.equals(this.shapeList, that.shapeList)) {
             return false;
         }
         if (!ShapeUtils.equal(this.defaultShape, that.defaultShape)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.itemLabelsVisibleList,
-                that.itemLabelsVisibleList)) {
+        if (!Objects.equals(this.itemLabelsVisibleList, that.itemLabelsVisibleList)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.defaultItemLabelsVisible,
-                that.defaultItemLabelsVisible)) {
+        if (!Objects.equals(this.defaultItemLabelsVisible, that.defaultItemLabelsVisible)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.itemLabelFontMap,
-                that.itemLabelFontMap)) {
+        if (!Objects.equals(this.itemLabelFontMap, that.itemLabelFontMap)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.defaultItemLabelFont,
-                that.defaultItemLabelFont)) {
+        if (!Objects.equals(this.defaultItemLabelFont, that.defaultItemLabelFont)) {
             return false;
         }
 
-        if (!ObjectUtils.equal(this.itemLabelPaintList,
-                that.itemLabelPaintList)) {
+        if (!Objects.equals(this.itemLabelPaintList, that.itemLabelPaintList)) {
             return false;
         }
         if (!PaintUtils.equal(this.defaultItemLabelPaint,
@@ -2922,51 +2913,42 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
             return false;
         }
 
-        if (!ObjectUtils.equal(this.positiveItemLabelPositionMap,
-                that.positiveItemLabelPositionMap)) {
+        if (!Objects.equals(this.positiveItemLabelPositionMap, that.positiveItemLabelPositionMap)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.defaultPositiveItemLabelPosition,
-                that.defaultPositiveItemLabelPosition)) {
+        if (!Objects.equals(this.defaultPositiveItemLabelPosition, that.defaultPositiveItemLabelPosition)) {
             return false;
         }
 
-        if (!ObjectUtils.equal(this.negativeItemLabelPositionMap,
-                that.negativeItemLabelPositionMap)) {
+        if (!Objects.equals(this.negativeItemLabelPositionMap, that.negativeItemLabelPositionMap)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.defaultNegativeItemLabelPosition,
-                that.defaultNegativeItemLabelPosition)) {
+        if (!Objects.equals(this.defaultNegativeItemLabelPosition, that.defaultNegativeItemLabelPosition)) {
             return false;
         }
         if (this.itemLabelAnchorOffset != that.itemLabelAnchorOffset) {
             return false;
         }
-        if (!ObjectUtils.equal(this.createEntitiesList,
-                that.createEntitiesList)) {
+        if (!Objects.equals(this.createEntitiesList, that.createEntitiesList)) {
             return false;
         }
         if (this.defaultCreateEntities != that.defaultCreateEntities) {
             return false;
         }
-        if (!ObjectUtils.equal(this.legendShapeList,
-                that.legendShapeList)) {
+        if (!Objects.equals(this.legendShapeList, that.legendShapeList)) {
             return false;
         }
         if (!ShapeUtils.equal(this.defaultLegendShape,
                 that.defaultLegendShape)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.legendTextFontMap, 
-                that.legendTextFontMap)) {
+        if (!Objects.equals(this.legendTextFontMap, that.legendTextFontMap)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.defaultLegendTextFont,
-                that.defaultLegendTextFont)) {
+        if (!Objects.equals(this.defaultLegendTextFont, that.defaultLegendTextFont)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.legendTextPaint,
-                that.legendTextPaint)) {
+        if (!Objects.equals(this.legendTextPaint, that.legendTextPaint)) {
             return false;
         }
         if (!PaintUtils.equal(this.defaultLegendTextPaint,

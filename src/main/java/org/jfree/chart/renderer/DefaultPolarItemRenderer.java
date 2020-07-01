@@ -55,6 +55,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.axis.NumberTick;
@@ -71,8 +72,8 @@ import org.jfree.chart.plot.PolarPlot;
 import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.urls.XYURLGenerator;
 import org.jfree.chart.util.BooleanList;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.ObjectList;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
@@ -883,7 +884,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
         if (this.drawOutlineWhenFilled != that.drawOutlineWhenFilled) {
             return false;
         }
-        if (!ObjectUtils.equal(this.fillComposite, that.fillComposite)) {
+        if (!Objects.equals(this.fillComposite, that.fillComposite)) {
             return false;
         }
         if (this.useFillPaint != that.useFillPaint) {
@@ -901,19 +902,16 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
         if (!this.toolTipGeneratorList.equals(that.toolTipGeneratorList)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.baseToolTipGenerator,
-                that.baseToolTipGenerator)) {
+        if (!Objects.equals(this.baseToolTipGenerator, that.baseToolTipGenerator)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.urlGenerator, that.urlGenerator)) {
+        if (!Objects.equals(this.urlGenerator, that.urlGenerator)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.legendItemToolTipGenerator,
-                that.legendItemToolTipGenerator)) {
+        if (!Objects.equals(this.legendItemToolTipGenerator, that.legendItemToolTipGenerator)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.legendItemURLGenerator,
-                that.legendItemURLGenerator)) {
+        if (!Objects.equals(this.legendItemURLGenerator, that.legendItemURLGenerator)) {
             return false;
         }
         return super.equals(obj);
@@ -937,20 +935,16 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
         clone.toolTipGeneratorList
                 = (ObjectList) this.toolTipGeneratorList.clone();
         if (clone.baseToolTipGenerator instanceof PublicCloneable) {
-            clone.baseToolTipGenerator = (XYToolTipGenerator)
-                    ObjectUtils.clone(this.baseToolTipGenerator);
+            clone.baseToolTipGenerator = CloneUtils.clone(this.baseToolTipGenerator);
         }
         if (clone.urlGenerator instanceof PublicCloneable) {
-            clone.urlGenerator = (XYURLGenerator)
-                    ObjectUtils.clone(this.urlGenerator);
+            clone.urlGenerator = CloneUtils.clone(this.urlGenerator);
         }
         if (clone.legendItemToolTipGenerator instanceof PublicCloneable) {
-            clone.legendItemToolTipGenerator = (XYSeriesLabelGenerator)
-                    ObjectUtils.clone(this.legendItemToolTipGenerator);
+            clone.legendItemToolTipGenerator = CloneUtils.clone(this.legendItemToolTipGenerator);
         }
         if (clone.legendItemURLGenerator instanceof PublicCloneable) {
-            clone.legendItemURLGenerator = (XYSeriesLabelGenerator)
-                    ObjectUtils.clone(this.legendItemURLGenerator);
+            clone.legendItemURLGenerator = CloneUtils.clone(this.legendItemURLGenerator);
         }
         return clone;
     }
