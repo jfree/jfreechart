@@ -77,6 +77,8 @@ History
 - added generics 
 - DefaultIntervalCategoryDataset no longer allows null keys in constructor (this
   is a consequence of introducing generics)
+- removed ObjectUtils class (https://github.com/jfree/jfreechart/pull/163)
+- removed unused URLUtilities class (https://github.com/jfree/jfreechart/pull/162)
 
 ##### Version 1.5.0 (5 November 2017)
 - all JavaFX classes moved to a separate project;
