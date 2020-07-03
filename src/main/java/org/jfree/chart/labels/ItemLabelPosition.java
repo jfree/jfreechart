@@ -37,6 +37,7 @@
 package org.jfree.chart.labels;
 
 import java.io.Serializable;
+import java.util.Objects;
 import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.util.Args;
 
@@ -171,6 +172,18 @@ public class ItemLabelPosition implements Serializable {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode(){
+        int hash = 5;
+        hash = 83 * hash + Objects.hashCode(this.itemLabelAnchor);
+        hash = 83 * hash + Objects.hashCode(this.textAnchor);
+        hash = 83 * hash + Objects.hashCode(this.rotationAnchor);
+        hash = 83 * hash +
+                (int) (Double.doubleToLongBits(this.angle) ^
+                (Double.doubleToLongBits(this.angle) >>> 32));
+        return hash;
     }
 
 }
