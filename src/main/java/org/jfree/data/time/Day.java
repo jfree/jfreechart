@@ -40,10 +40,8 @@ import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-import java.util.TimeZone;
+import java.util.*;
+
 import org.jfree.chart.date.SerialDate;
 import org.jfree.chart.util.Args;
 
@@ -86,8 +84,9 @@ public class Day extends RegularTimePeriod implements Serializable {
     private long lastMillisecond;
 
     /**
-     * Creates a new instance, derived from the system date/time (and assuming
-     * the default timezone).
+     * Creates a new instance, derived from the system date/time.
+     * The time zone and locale are determined by the calendar
+     * returned by {@link RegularTimePeriod#getCalendarInstance()}.
      */
     public Day() {
         this(new Date());
@@ -95,6 +94,8 @@ public class Day extends RegularTimePeriod implements Serializable {
 
     /**
      * Constructs a new one day time period.
+     * The time zone and locale are determined by the calendar
+     * returned by {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @param day  the day-of-the-month.
      * @param month  the month (1 to 12).
@@ -102,23 +103,26 @@ public class Day extends RegularTimePeriod implements Serializable {
      */
     public Day(int day, int month, int year) {
         this.serialDate = SerialDate.createInstance(day, month, year);
-        peg(Calendar.getInstance());
+        peg(getCalendarInstance());
     }
 
     /**
      * Constructs a new one day time period.
+     * The time zone and locale are determined by the calendar
+     * returned by {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @param serialDate  the day ({@code null} not permitted).
      */
     public Day(SerialDate serialDate) {
         Args.nullNotPermitted(serialDate, "serialDate");
         this.serialDate = serialDate;
-        peg(Calendar.getInstance());
+        peg(getCalendarInstance());
     }
 
     /**
-     * Constructs a new instance, based on a particular date/time and the
-     * default time zone.
+     * Constructs a new instance, based on a particular date/time.
+     * The time zone and locale are determined by the calendar
+     * returned by {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @param time  the time ({@code null} not permitted).
      *
@@ -126,7 +130,7 @@ public class Day extends RegularTimePeriod implements Serializable {
      */
     public Day(Date time) {
         // defer argument checking...
-        this(time, TimeZone.getDefault(), Locale.getDefault());
+        this(time, getCalendarInstance());
     }
 
     /**
@@ -142,11 +146,31 @@ public class Day extends RegularTimePeriod implements Serializable {
         Args.nullNotPermitted(locale, "locale");
         Calendar calendar = Calendar.getInstance(zone, locale);
         calendar.setTime(time);
+        initUsing(calendar);
+        peg(calendar);
+    }
+
+    /**
+     * Constructs a new instance, based on a particular date/time.
+     * The time zone and locale are determined by the {@code calendar}
+     * parameter.
+     *
+     * @param time the date/time ({@code null} not permitted).
+     * @param calendar the calendar to use for calculations ({@code null} not permitted).
+     */
+    public Day(Date time, Calendar calendar) {
+        Args.nullNotPermitted(time, "time");
+        Args.nullNotPermitted(calendar, "calendar");
+        calendar.setTime(time);
+        initUsing(calendar);
+        peg(calendar);
+    }
+
+    private void initUsing(Calendar calendar) {
         int d = calendar.get(Calendar.DAY_OF_MONTH);
         int m = calendar.get(Calendar.MONTH) + 1;
         int y = calendar.get(Calendar.YEAR);
         this.serialDate = SerialDate.createInstance(d, m, y);
-        peg(calendar);
     }
 
     /**
@@ -235,6 +259,9 @@ public class Day extends RegularTimePeriod implements Serializable {
 
     /**
      * Returns the day preceding this one.
+     * No matter what time zone and locale this instance was created with,
+     * the returned instance will use the default calendar for time
+     * calculations, obtained with {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @return The day preceding this one.
      */
@@ -255,6 +282,9 @@ public class Day extends RegularTimePeriod implements Serializable {
     /**
      * Returns the day following this one, or {@code null} if some limit
      * has been reached.
+     * No matter what time zone and locale this instance was created with,
+     * the returned instance will use the default calendar for time
+     * calculations, obtained with {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @return The day following this one, or {@code null} if some limit
      *         has been reached.

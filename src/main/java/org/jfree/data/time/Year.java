@@ -76,6 +76,8 @@ public class Year extends RegularTimePeriod implements Serializable {
 
     /**
      * Creates a new {@code Year}, based on the current system date/time.
+     * The time zone and locale are determined by the calendar
+     * returned by {@link RegularTimePeriod#getCalendarInstance()}.
      */
     public Year() {
         this(new Date());
@@ -83,6 +85,8 @@ public class Year extends RegularTimePeriod implements Serializable {
 
     /**
      * Creates a time period representing a single year.
+     * The time zone and locale are determined by the calendar
+     * returned by {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @param year  the year.
      */
@@ -92,19 +96,20 @@ public class Year extends RegularTimePeriod implements Serializable {
                 "Year constructor: year (" + year + ") outside valid range.");
         }
         this.year = (short) year;
-        peg(Calendar.getInstance());
+        peg(getCalendarInstance());
     }
 
     /**
-     * Creates a new {@code Year}, based on a particular instant in time,
-     * using the default time zone.
+     * Creates a new {@code Year}, based on a particular instant in time.
+     * The time zone and locale are determined by the calendar
+     * returned by {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @param time  the time ({@code null} not permitted).
      *
      * @see #Year(Date, TimeZone, Locale)
      */
     public Year(Date time) {
-        this(time, TimeZone.getDefault(), Locale.getDefault());
+        this(time, getCalendarInstance());
     }
 
     /**
@@ -119,6 +124,20 @@ public class Year extends RegularTimePeriod implements Serializable {
      */
     public Year(Date time, TimeZone zone, Locale locale) {
         Calendar calendar = Calendar.getInstance(zone, locale);
+        calendar.setTime(time);
+        this.year = (short) calendar.get(Calendar.YEAR);
+        peg(calendar);
+    }
+
+    /**
+     * Constructs a new instance, based on a particular date/time.
+     * The time zone and locale are determined by the {@code calendar}
+     * parameter.
+     *
+     * @param time the date/time ({@code null} not permitted).
+     * @param calendar the calendar to use for calculations ({@code null} not permitted).
+     */
+    public Year(Date time, Calendar calendar) {
         calendar.setTime(time);
         this.year = (short) calendar.get(Calendar.YEAR);
         peg(calendar);
@@ -179,6 +198,9 @@ public class Year extends RegularTimePeriod implements Serializable {
 
     /**
      * Returns the year preceding this one.
+     * No matter what time zone and locale this instance was created with,
+     * the returned instance will use the default calendar for time
+     * calculations, obtained with {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @return The year preceding this one (or {@code null} if the
      *         current year is -9999).
@@ -195,6 +217,9 @@ public class Year extends RegularTimePeriod implements Serializable {
 
     /**
      * Returns the year following this one.
+     * No matter what time zone and locale this instance was created with,
+     * the returned instance will use the default calendar for time
+     * calculations, obtained with {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @return The year following this one (or {@code null} if the current
      *         year is 9999).

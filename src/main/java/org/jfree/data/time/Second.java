@@ -78,6 +78,8 @@ public class Second extends RegularTimePeriod implements Serializable {
 
     /**
      * Constructs a new Second, based on the system date/time.
+     * The time zone and locale are determined by the calendar
+     * returned by {@link RegularTimePeriod#getCalendarInstance()}.
      */
     public Second() {
         this(new Date());
@@ -85,6 +87,8 @@ public class Second extends RegularTimePeriod implements Serializable {
 
     /**
      * Constructs a new Second.
+     * The time zone and locale are determined by the calendar
+     * returned by {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @param second  the second (0 to 59).
      * @param minute  the minute ({@code null} not permitted).
@@ -97,11 +101,13 @@ public class Second extends RegularTimePeriod implements Serializable {
         this.hour = (byte) minute.getHourValue();
         this.minute = (byte) minute.getMinute();
         this.second = (byte) second;
-        peg(Calendar.getInstance());
+        peg(getCalendarInstance());
     }
 
     /**
      * Creates a new second.
+     * The time zone and locale are determined by the calendar
+     * returned by {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @param second  the second (0-59).
      * @param minute  the minute (0-59).
@@ -116,15 +122,16 @@ public class Second extends RegularTimePeriod implements Serializable {
     }
 
     /**
-     * Constructs a new instance from the specified date/time and the default
-     * time zone.
+     * Constructs a new instance from the specified date/time.
+     * The time zone and locale are determined by the calendar
+     * returned by {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @param time  the time ({@code null} not permitted).
      *
      * @see #Second(Date, TimeZone, Locale)
      */
     public Second(Date time) {
-        this(time, TimeZone.getDefault(), Locale.getDefault());
+        this(time, getCalendarInstance());
     }
 
     /**
@@ -137,12 +144,23 @@ public class Second extends RegularTimePeriod implements Serializable {
      * @since 1.0.13
      */
     public Second(Date time, TimeZone zone, Locale locale) {
-        Calendar calendar = Calendar.getInstance(zone, locale);
+        this(time, Calendar.getInstance(zone, locale));
+    }
+
+    /**
+     * Constructs a new instance, based on a particular date/time.
+     * The time zone and locale are determined by the {@code calendar}
+     * parameter.
+     *
+     * @param time the date/time ({@code null} not permitted).
+     * @param calendar the calendar to use for calculations ({@code null} not permitted).
+     */
+    public Second(Date time, Calendar calendar) {
         calendar.setTime(time);
         this.second = (byte) calendar.get(Calendar.SECOND);
         this.minute = (byte) calendar.get(Calendar.MINUTE);
         this.hour = (byte) calendar.get(Calendar.HOUR_OF_DAY);
-        this.day = new Day(time, zone, locale);
+        this.day = new Day(time, calendar);
         peg(calendar);
     }
 
@@ -209,6 +227,9 @@ public class Second extends RegularTimePeriod implements Serializable {
 
     /**
      * Returns the second preceding this one.
+     * No matter what time zone and locale this instance was created with,
+     * the returned instance will use the default calendar for time
+     * calculations, obtained with {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @return The second preceding this one.
      */
@@ -229,6 +250,9 @@ public class Second extends RegularTimePeriod implements Serializable {
 
     /**
      * Returns the second following this one.
+     * No matter what time zone and locale this instance was created with,
+     * the returned instance will use the default calendar for time
+     * calculations, obtained with {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @return The second following this one.
      */

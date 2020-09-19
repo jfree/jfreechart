@@ -41,11 +41,14 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+import java.time.ZoneOffset;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.TimeZone;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.BeforeEach;
@@ -435,6 +438,50 @@ public class WeekTest {
     }
 
     /**
+     * If a thread-local calendar was set, next() should use its time zone.
+     */
+    @Test
+    public void testNextWithThreadLocalCalendar() {
+        BiConsumer<Integer, String> calendarSetup = (hours, locale) -> RegularTimePeriod.setCalendarInstancePrototype(
+                Calendar.getInstance(TimeZone.getTimeZone(ZoneOffset.ofHours(hours)),
+                        Locale.forLanguageTag(locale))
+        );
+        testNextWithCustomCalendar(3, "ru-RU", 4, calendarSetup);
+        testNextWithCustomCalendar(-6, "en-US", 3, calendarSetup);
+    }
+
+    /**
+     * If a calendar prototype was set, next() should use its time zone.
+     */
+    @Test
+    public void testNextWithCalendarPrototype() {
+        BiConsumer<Integer, String> calendarSetup = (hours, locale) -> RegularTimePeriod.setCalendarInstancePrototype(
+                Calendar.getInstance(TimeZone.getTimeZone(ZoneOffset.ofHours(hours)),
+                        Locale.forLanguageTag(locale))
+        );
+        testNextWithCustomCalendar(3, "ru-RU", 4, calendarSetup);
+        testNextWithCustomCalendar(-6, "en-US", 3, calendarSetup);
+    }
+
+    private void testNextWithCustomCalendar(int hoursOffset, String locale,
+                                            int secondWeekOffsetInDays,
+                                            BiConsumer<Integer, String> calendarSetup) {
+        try {
+            calendarSetup.accept(hoursOffset, locale);
+            long ms = secondWeekOffsetInDays * 86_400_000L - hoursOffset * 3_600_000L;
+            Week w = new Week(new Date(ms));
+            w = (Week) w.next();
+            assertEquals(1970, w.getYear().getYear());
+            assertEquals(3, w.getWeek());
+            assertEquals(ms + 86_400_000L * 7, w.getFirstMillisecond());
+        } finally {
+            // reset everything, to avoid affecting other tests
+            RegularTimePeriod.setThreadLocalCalendarInstance(null);
+            RegularTimePeriod.setCalendarInstancePrototype(null);
+        }
+    }
+
+    /**
      * Some checks for the getStart() method.
      */
     @Test
@@ -501,6 +548,132 @@ public class WeekTest {
 
         Locale.setDefault(savedLocale);
         TimeZone.setDefault(savedZone);
+    }
+
+    /**
+     * If a thread-local calendar was set, the Date constructor should use it.
+     */
+    @Test
+    public void testDateConstructorWithThreadLocalCalendar() {
+        BiConsumer<Integer, String> calendarSetup = (hours, locale) -> RegularTimePeriod.setCalendarInstancePrototype(
+                Calendar.getInstance(TimeZone.getTimeZone(ZoneOffset.ofHours(hours)),
+                        Locale.forLanguageTag(locale))
+        );
+        testDateConstructorWithCustomCalendar(3, "ru-RU", 4, calendarSetup);
+        testDateConstructorWithCustomCalendar(-6, "en-US", 3, calendarSetup);
+    }
+
+    /**
+     * If a calendar prototype was set, the Date constructor should use it.
+     */
+    @Test
+    public void testDateConstructorWithCalendarPrototype() {
+        BiConsumer<Integer, String> calendarSetup = (hours, locale) -> RegularTimePeriod.setCalendarInstancePrototype(
+                Calendar.getInstance(TimeZone.getTimeZone(ZoneOffset.ofHours(hours)),
+                        Locale.forLanguageTag(locale))
+        );
+        testDateConstructorWithCustomCalendar(3, "ru-RU", 4, calendarSetup);
+        testDateConstructorWithCustomCalendar(-6, "en-US", 3, calendarSetup);
+    }
+
+    private void testDateConstructorWithCustomCalendar(int hoursOffset, String locale, int secondWeekOffsetInDays,
+                                                       BiConsumer<Integer, String> calendarSetup) {
+        try {
+            calendarSetup.accept(hoursOffset, locale);
+            long ms = secondWeekOffsetInDays * 86_400_000L - 3_600_000L * hoursOffset;
+            Week w = new Week(new Date(ms));
+            assertEquals(1970, w.getYear().getYear());
+            assertEquals(2, w.getWeek());
+            assertEquals(ms, w.getFirstMillisecond());
+        } finally {
+            // reset everything, to avoid affecting other tests
+            RegularTimePeriod.setThreadLocalCalendarInstance(null);
+            RegularTimePeriod.setCalendarInstancePrototype(null);
+        }
+    }
+
+    /**
+     * If a thread-local calendar was set, the (int, int) week-year constructor should use it.
+     */
+    @Test
+    public void testWeekIntYearConstructorWithThreadLocalCalendar() {
+        BiConsumer<Integer, String> calendarSetup = (hours, locale) -> RegularTimePeriod.setCalendarInstancePrototype(
+                Calendar.getInstance(TimeZone.getTimeZone(ZoneOffset.ofHours(hours)),
+                        Locale.forLanguageTag(locale))
+        );
+        testWeekIntYearConstructorWithCustomCalendar(3, "ru-RU", 4, calendarSetup);
+        testWeekIntYearConstructorWithCustomCalendar(-6, "en-US", 3, calendarSetup);
+    }
+
+    /**
+     * If a calendar prototype was set, the (int, int) week-year constructor should use it.
+     */
+    @Test
+    public void testWeekIntYearConstructorWithCalendarPrototype() {
+        BiConsumer<Integer, String> calendarSetup = (hours, locale) -> RegularTimePeriod.setCalendarInstancePrototype(
+                Calendar.getInstance(TimeZone.getTimeZone(ZoneOffset.ofHours(hours)),
+                        Locale.forLanguageTag(locale))
+        );
+        testWeekIntYearConstructorWithCustomCalendar(3, "ru-RU", 4, calendarSetup);
+        testWeekIntYearConstructorWithCustomCalendar(-6, "en-US", 3, calendarSetup);
+    }
+
+    private void testWeekIntYearConstructorWithCustomCalendar(int hoursOffset, String locale, int secondWeekOffsetInDays,
+                                                       BiConsumer<Integer, String> calendarSetup) {
+        try {
+            calendarSetup.accept(hoursOffset, locale);
+            long ms = secondWeekOffsetInDays * 86_400_000L - 3_600_000L * hoursOffset;
+            Week w = new Week(2, 1970);
+            assertEquals(1970, w.getYear().getYear());
+            assertEquals(2, w.getWeek());
+            assertEquals(ms, w.getFirstMillisecond());
+        } finally {
+            // reset everything, to avoid affecting other tests
+            RegularTimePeriod.setThreadLocalCalendarInstance(null);
+            RegularTimePeriod.setCalendarInstancePrototype(null);
+        }
+    }
+
+    /**
+     * If a thread-local calendar was set, the (int, Year) week-year constructor should use it.
+     */
+    @Test
+    public void testWeekYearConstructorWithThreadLocalCalendar() {
+        BiConsumer<Integer, String> calendarSetup = (hours, locale) -> RegularTimePeriod.setCalendarInstancePrototype(
+                Calendar.getInstance(TimeZone.getTimeZone(ZoneOffset.ofHours(hours)),
+                        Locale.forLanguageTag(locale))
+        );
+        testWeekYearConstructorWithCustomCalendar(3, "ru-RU", 4, calendarSetup);
+        testWeekYearConstructorWithCustomCalendar(-6, "en-US", 3, calendarSetup);
+    }
+
+    /**
+     * If a calendar prototype was set, the (int, Year) week-year constructor should use it.
+     */
+    @Test
+    public void testWeekYearConstructorWithCalendarPrototype() {
+        BiConsumer<Integer, String> calendarSetup = (hours, locale) -> RegularTimePeriod.setCalendarInstancePrototype(
+                Calendar.getInstance(TimeZone.getTimeZone(ZoneOffset.ofHours(hours)),
+                        Locale.forLanguageTag(locale))
+        );
+        testWeekYearConstructorWithCustomCalendar(3, "ru-RU", 4, calendarSetup);
+        testWeekYearConstructorWithCustomCalendar(-6, "en-US", 3, calendarSetup);
+    }
+
+    private void testWeekYearConstructorWithCustomCalendar(int hoursOffset, String locale, int secondWeekOffsetInDays,
+                                                       BiConsumer<Integer, String> calendarSetup) {
+        try {
+            calendarSetup.accept(hoursOffset, locale);
+            long ms = secondWeekOffsetInDays * 86_400_000L - 3_600_000L * hoursOffset;
+            Week w = new Week(2, new Year(1970));
+            assertEquals(1970, w.getYear().getYear());
+            assertEquals(2, w.getWeek());
+            assertEquals(ms, w.getFirstMillisecond());
+        } finally {
+            // reset everything, to avoid affecting other tests
+            RegularTimePeriod.setThreadLocalCalendarInstance(null);
+            RegularTimePeriod.setCalendarInstancePrototype(null);
+        }
     }
 
     @Test
