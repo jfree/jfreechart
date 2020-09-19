@@ -94,8 +94,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <source>${project.source.level}</source>
-                    <target>${project.target.level}</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                     <encoding>${project.build.sourceEncoding}</encoding>                
                     <showWarnings>true</showWarnings>
                     <showDeprecation>true</showDeprecation>

@@ -79,6 +79,8 @@ public class Week extends RegularTimePeriod implements Serializable {
     /**
      * Creates a new time period for the week in which the current system
      * date/time falls.
+     * The time zone and locale are determined by the calendar
+     * returned by {@link RegularTimePeriod#getCalendarInstance()}.
      */
     public Week() {
         this(new Date());
@@ -86,6 +88,8 @@ public class Week extends RegularTimePeriod implements Serializable {
 
     /**
      * Creates a time period representing the week in the specified year.
+     * The time zone and locale are determined by the calendar
+     * returned by {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @param week  the week (1 to 53).
      * @param year  the year (1900 to 9999).
@@ -94,11 +98,13 @@ public class Week extends RegularTimePeriod implements Serializable {
         Args.requireInRange(week, "week", FIRST_WEEK_IN_YEAR, LAST_WEEK_IN_YEAR);
         this.week = (byte) week;
         this.year = (short) year;
-        peg(Calendar.getInstance());
+        peg(getCalendarInstance());
     }
 
     /**
      * Creates a time period representing the week in the specified year.
+     * The time zone and locale are determined by the calendar
+     * returned by {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @param week  the week (1 to 53).
      * @param year  the year (1900 to 9999).
@@ -109,9 +115,12 @@ public class Week extends RegularTimePeriod implements Serializable {
 
     /**
      * Creates a time period for the week in which the specified date/time
-     * falls, using the default time zone and locale (the locale can affect the
-     * day-of-the-week that marks the beginning of the week, as well as the
-     * minimal number of days in the first week of the year).
+     * falls.
+     * The time zone and locale are determined by the calendar
+     * returned by {@link RegularTimePeriod#getCalendarInstance()}.
+     * The locale can affect the day-of-the-week that marks the beginning
+     * of the week, as well as the minimal number of days in the first week
+     * of the year.
      *
      * @param time  the time ({@code null} not permitted).
      *
@@ -119,7 +128,7 @@ public class Week extends RegularTimePeriod implements Serializable {
      */
     public Week(Date time) {
         // defer argument checking...
-        this(time, TimeZone.getDefault(), Locale.getDefault());
+        this(time, getCalendarInstance());
     }
 
     /**
@@ -137,6 +146,40 @@ public class Week extends RegularTimePeriod implements Serializable {
         Args.nullNotPermitted(zone, "zone");
         Args.nullNotPermitted(locale, "locale");
         Calendar calendar = Calendar.getInstance(zone, locale);
+        calendar.setTime(time);
+
+        // sometimes the last few days of the year are considered to fall in
+        // the *first* week of the following year.  Refer to the Javadocs for
+        // GregorianCalendar.
+        int tempWeek = calendar.get(Calendar.WEEK_OF_YEAR);
+        if (tempWeek == 1
+                && calendar.get(Calendar.MONTH) == Calendar.DECEMBER) {
+            this.week = 1;
+            this.year = (short) (calendar.get(Calendar.YEAR) + 1);
+        }
+        else {
+            this.week = (byte) Math.min(tempWeek, LAST_WEEK_IN_YEAR);
+            int yyyy = calendar.get(Calendar.YEAR);
+            // alternatively, sometimes the first few days of the year are
+            // considered to fall in the *last* week of the previous year...
+            if (calendar.get(Calendar.MONTH) == Calendar.JANUARY
+                    && this.week >= 52) {
+                yyyy--;
+            }
+            this.year = (short) yyyy;
+        }
+        peg(calendar);
+    }
+
+    /**
+     * Constructs a new instance, based on a particular date/time.
+     * The time zone and locale are determined by the {@code calendar}
+     * parameter.
+     *
+     * @param time the date/time ({@code null} not permitted).
+     * @param calendar the calendar to use for calculations ({@code null} not permitted).
+     */
+    public Week(Date time, Calendar calendar) {
         calendar.setTime(time);
 
         // sometimes the last few days of the year are considered to fall in
@@ -221,7 +264,8 @@ public class Week extends RegularTimePeriod implements Serializable {
 
     /**
      * Recalculates the start date/time and end date/time for this time period
-     * relative to the supplied calendar (which incorporates a time zone).
+     * relative to the supplied calendar (which incorporates a time zone
+     * and information about what day is the first day of the week).
      *
      * @param calendar  the calendar ({@code null} not permitted).
      *
@@ -238,6 +282,9 @@ public class Week extends RegularTimePeriod implements Serializable {
      * {@code null} for some lower limit on the range of weeks (currently
      * week 1, 1900).  For week 1 of any year, the previous week is always week
      * 53, but week 53 may not contain any days (you should check for this).
+     * No matter what time zone and locale this instance was created with,
+     * the returned instance will use the default calendar for time
+     * calculations, obtained with {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @return The preceding week (possibly {@code null}).
      */
@@ -252,7 +299,7 @@ public class Week extends RegularTimePeriod implements Serializable {
             // we need to work out if the previous year has 52 or 53 weeks...
             if (this.year > 1900) {
                 int yy = this.year - 1;
-                Calendar prevYearCalendar = Calendar.getInstance();
+                Calendar prevYearCalendar = getCalendarInstance();
                 prevYearCalendar.set(yy, Calendar.DECEMBER, 31);
                 result = new Week(prevYearCalendar.getActualMaximum(
                         Calendar.WEEK_OF_YEAR), yy);
@@ -271,6 +318,9 @@ public class Week extends RegularTimePeriod implements Serializable {
      * week 53, 9999).  For week 52 of any year, the following week is always
      * week 53, but week 53 may not contain any days (you should check for
      * this).
+     * No matter what time zone and locale this instance was created with,
+     * the returned instance will use the default calendar for time
+     * calculations, obtained with {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @return The following week (possibly {@code null}).
      */
@@ -282,7 +332,7 @@ public class Week extends RegularTimePeriod implements Serializable {
             result = new Week(this.week + 1, this.year);
         }
         else {
-            Calendar calendar = Calendar.getInstance();
+            Calendar calendar = getCalendarInstance();
             calendar.set(this.year, Calendar.DECEMBER, 31);
             int actualMaxWeek
                 = calendar.getActualMaximum(Calendar.WEEK_OF_YEAR);

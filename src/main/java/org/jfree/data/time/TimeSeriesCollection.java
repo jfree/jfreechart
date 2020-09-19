@@ -638,12 +638,11 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
     public Range getRangeBounds(List visibleSeriesKeys, Range xRange,
             boolean includeInterval) {
         Range result = null;
-        Iterator iterator = visibleSeriesKeys.iterator();
-        while (iterator.hasNext()) {
-            Comparable seriesKey = (Comparable) iterator.next();
+        for (Object visibleSeriesKey : visibleSeriesKeys) {
+            Comparable seriesKey = (Comparable) visibleSeriesKey;
             TimeSeries series = getSeries(seriesKey);
-            Range r = series.findValueRange(xRange, this.xPosition, 
-                    this.workingCalendar.getTimeZone());
+            Range r = series.findValueRange(xRange, this.xPosition,
+                    this.workingCalendar);
             result = Range.combineIgnoringNaN(result, r);
         }
         return result;

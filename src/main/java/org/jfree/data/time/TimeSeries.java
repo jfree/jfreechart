@@ -341,6 +341,10 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
             return null;
         }
         Calendar calendar = Calendar.getInstance(zone);
+        return findValueRange(xRange, xAnchor, calendar);
+    }
+
+    public Range findValueRange(Range xRange, TimePeriodAnchor xAnchor, Calendar calendar) {
         // since the items are ordered, we could be more clever here and avoid
         // iterating over all the data
         double lowY = Double.POSITIVE_INFINITY;
