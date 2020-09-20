@@ -391,11 +391,8 @@ public class MillisecondTest {
         assertEquals(176461500L, m.getSerialIndex());
     }
 
-    /**
-     * Some checks for the testNext() method.
-     */
     @Test
-    public void testNext() {
+    public void testNextPrevious() {
         Millisecond m = new Millisecond(555, 55, 30, 1, 12, 12, 2000);
         m = (Millisecond) m.next();
         assertEquals(2000, m.getSecond().getMinute().getHour().getYear());
@@ -405,35 +402,43 @@ public class MillisecondTest {
         assertEquals(30, m.getSecond().getMinute().getMinute());
         assertEquals(55, m.getSecond().getSecond());
         assertEquals(556, m.getMillisecond());
+        m = (Millisecond) m.previous();
+        assertEquals(2000, m.getSecond().getMinute().getHour().getYear());
+        assertEquals(12, m.getSecond().getMinute().getHour().getMonth());
+        assertEquals(12, m.getSecond().getMinute().getHour().getDayOfMonth());
+        assertEquals(1, m.getSecond().getMinute().getHour().getHour());
+        assertEquals(30, m.getSecond().getMinute().getMinute());
+        assertEquals(55, m.getSecond().getSecond());
+        assertEquals(555, m.getMillisecond());
         m = new Millisecond(999, 59, 59, 23, 31, 12, 9999);
         assertNull(m.next());
     }
 
     /**
-     * If a thread-local calendar was set, next() should use its time zone.
+     * If a thread-local calendar was set, next() and previous() should use its time zone.
      */
     @Test
-    public void testNextWithThreadLocalCalendar() {
+    public void testNextPreviousWithThreadLocalCalendar() {
         Consumer<Integer> calendarSetup = hours -> RegularTimePeriod.setThreadLocalCalendarInstance(
                 Calendar.getInstance(TimeZone.getTimeZone(ZoneOffset.ofHours(hours)))
         );
-        testNextWithCustomCalendar(3, calendarSetup);
-        testNextWithCustomCalendar(4, calendarSetup);
+        testNextPreviousWithCustomCalendar(3, calendarSetup);
+        testNextPreviousWithCustomCalendar(4, calendarSetup);
     }
 
     /**
      * If a calendar prototype was set, next() should use its time zone.
      */
     @Test
-    public void testNextWithCalendarPrototype() {
+    public void testNextPreviousWithCalendarPrototype() {
         Consumer<Integer> calendarSetup = hours -> RegularTimePeriod.setCalendarInstancePrototype(
                 Calendar.getInstance(TimeZone.getTimeZone(ZoneOffset.ofHours(hours)))
         );
-        testNextWithCustomCalendar(3, calendarSetup);
-        testNextWithCustomCalendar(4, calendarSetup);
+        testNextPreviousWithCustomCalendar(3, calendarSetup);
+        testNextPreviousWithCustomCalendar(4, calendarSetup);
     }
 
-    private void testNextWithCustomCalendar(int hoursOffset, Consumer<Integer> calendarSetup) {
+    private void testNextPreviousWithCustomCalendar(int hoursOffset, Consumer<Integer> calendarSetup) {
         try {
             calendarSetup.accept(hoursOffset);
             Millisecond m = new Millisecond(new Date(0L));
@@ -446,6 +451,15 @@ public class MillisecondTest {
             assertEquals(0, m.getSecond().getSecond());
             assertEquals(1L, m.getMillisecond());
             assertEquals(1L, m.getFirstMillisecond());
+            m = (Millisecond) m.previous();
+            assertEquals(1970, m.getSecond().getMinute().getHour().getYear());
+            assertEquals(1, m.getSecond().getMinute().getHour().getMonth());
+            assertEquals(1, m.getSecond().getMinute().getHour().getDayOfMonth());
+            assertEquals(hoursOffset, m.getSecond().getMinute().getHour().getHour());
+            assertEquals(0, m.getSecond().getMinute().getMinute());
+            assertEquals(0, m.getSecond().getSecond());
+            assertEquals(0L, m.getMillisecond());
+            assertEquals(0L, m.getFirstMillisecond());
         } finally {
             // reset everything, to avoid affecting other tests
             RegularTimePeriod.setThreadLocalCalendarInstance(null);

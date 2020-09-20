@@ -467,45 +467,46 @@ public class DayTest {
         assertTrue(pass);
     }
 
-    /**
-     * Some checks for the testNext() method.
-     */
     @Test
-    public void testNext() {
+    public void testNextPrevious() {
         Day d = new Day(25, 12, 2000);
         d = (Day) d.next();
         assertEquals(2000, d.getYear());
         assertEquals(12, d.getMonth());
         assertEquals(26, d.getDayOfMonth());
+        d = (Day) d.previous();
+        assertEquals(2000, d.getYear());
+        assertEquals(12, d.getMonth());
+        assertEquals(25, d.getDayOfMonth());
         d = new Day(31, 12, 9999);
         assertNull(d.next());
     }
 
     /**
-     * If a thread-local calendar was set, next() should use its time zone.
+     * If a thread-local calendar was set, next() and previous() should use its time zone.
      */
     @Test
-    public void testNextWithThreadLocalCalendar() {
+    public void testNextPreviousWithThreadLocalCalendar() {
         Consumer<Integer> calendarSetup = hours -> RegularTimePeriod.setThreadLocalCalendarInstance(
                 Calendar.getInstance(TimeZone.getTimeZone(ZoneOffset.ofHours(hours)))
         );
-        testNextWithCustomCalendar(3, calendarSetup);
-        testNextWithCustomCalendar(4, calendarSetup);
+        testNextPreviousWithCustomCalendar(3, calendarSetup);
+        testNextPreviousWithCustomCalendar(4, calendarSetup);
     }
 
     /**
      * If a calendar prototype was set, next() should use its time zone.
      */
     @Test
-    public void testNextWithCalendarPrototype() {
+    public void testNextPreviousWithCalendarPrototype() {
         Consumer<Integer> calendarSetup = hours -> RegularTimePeriod.setCalendarInstancePrototype(
                 Calendar.getInstance(TimeZone.getTimeZone(ZoneOffset.ofHours(hours)))
         );
-        testNextWithCustomCalendar(3, calendarSetup);
-        testNextWithCustomCalendar(4, calendarSetup);
+        testNextPreviousWithCustomCalendar(3, calendarSetup);
+        testNextPreviousWithCustomCalendar(4, calendarSetup);
     }
 
-    private void testNextWithCustomCalendar(int hoursOffset, Consumer<Integer> calendarSetup) {
+    private void testNextPreviousWithCustomCalendar(int hoursOffset, Consumer<Integer> calendarSetup) {
         try {
             calendarSetup.accept(hoursOffset);
             long ms = 86_400_000L - hoursOffset * 3_600_000L;
@@ -515,6 +516,11 @@ public class DayTest {
             assertEquals(1, d.getMonth());
             assertEquals(3, d.getDayOfMonth());
             assertEquals(ms + 86_400_000L, d.getFirstMillisecond());
+            d = (Day) d.previous();
+            assertEquals(1970, d.getYear());
+            assertEquals(1, d.getMonth());
+            assertEquals(2, d.getDayOfMonth());
+            assertEquals(ms, d.getFirstMillisecond());
         } finally {
             // reset everything, to avoid affecting other tests
             RegularTimePeriod.setThreadLocalCalendarInstance(null);

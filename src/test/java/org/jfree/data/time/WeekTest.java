@@ -428,42 +428,45 @@ public class WeekTest {
      * Some checks for the testNext() method.
      */
     @Test
-    public void testNext() {
+    public void testNextPrevious() {
         Week w = new Week(12, 2000);
         w = (Week) w.next();
         assertEquals(new Year(2000), w.getYear());
         assertEquals(13, w.getWeek());
+        w = (Week) w.previous();
+        assertEquals(new Year(2000), w.getYear());
+        assertEquals(12, w.getWeek());
         w = new Week(53, 9999);
         assertNull(w.next());
     }
 
     /**
-     * If a thread-local calendar was set, next() should use its time zone.
+     * If a thread-local calendar was set, next() and previous() should use its time zone.
      */
     @Test
-    public void testNextWithThreadLocalCalendar() {
+    public void testNextPreviousWithThreadLocalCalendar() {
         BiConsumer<Integer, String> calendarSetup = (hours, locale) -> RegularTimePeriod.setCalendarInstancePrototype(
                 Calendar.getInstance(TimeZone.getTimeZone(ZoneOffset.ofHours(hours)),
                         Locale.forLanguageTag(locale))
         );
-        testNextWithCustomCalendar(3, "ru-RU", 4, calendarSetup);
-        testNextWithCustomCalendar(-6, "en-US", 3, calendarSetup);
+        testNextPreviousWithCustomCalendar(3, "ru-RU", 4, calendarSetup);
+        testNextPreviousWithCustomCalendar(-6, "en-US", 3, calendarSetup);
     }
 
     /**
      * If a calendar prototype was set, next() should use its time zone.
      */
     @Test
-    public void testNextWithCalendarPrototype() {
+    public void testNextPreviousWithCalendarPrototype() {
         BiConsumer<Integer, String> calendarSetup = (hours, locale) -> RegularTimePeriod.setCalendarInstancePrototype(
                 Calendar.getInstance(TimeZone.getTimeZone(ZoneOffset.ofHours(hours)),
                         Locale.forLanguageTag(locale))
         );
-        testNextWithCustomCalendar(3, "ru-RU", 4, calendarSetup);
-        testNextWithCustomCalendar(-6, "en-US", 3, calendarSetup);
+        testNextPreviousWithCustomCalendar(3, "ru-RU", 4, calendarSetup);
+        testNextPreviousWithCustomCalendar(-6, "en-US", 3, calendarSetup);
     }
 
-    private void testNextWithCustomCalendar(int hoursOffset, String locale,
+    private void testNextPreviousWithCustomCalendar(int hoursOffset, String locale,
                                             int secondWeekOffsetInDays,
                                             BiConsumer<Integer, String> calendarSetup) {
         try {
@@ -474,6 +477,10 @@ public class WeekTest {
             assertEquals(1970, w.getYear().getYear());
             assertEquals(3, w.getWeek());
             assertEquals(ms + 86_400_000L * 7, w.getFirstMillisecond());
+            w = (Week) w.previous();
+            assertEquals(1970, w.getYear().getYear());
+            assertEquals(2, w.getWeek());
+            assertEquals(ms, w.getFirstMillisecond());
         } finally {
             // reset everything, to avoid affecting other tests
             RegularTimePeriod.setThreadLocalCalendarInstance(null);
