@@ -429,7 +429,7 @@ public class LayeredBarRenderer extends BarRenderer implements Serializable {
             double transX1 = rangeAxis.valueToJava2D(base, dataArea, edge);
             double transX2 = rangeAxis.valueToJava2D(value, dataArea, edge);
             drawItemLabel(g2, dataset, row, column, plot, generator, bar,
-                    (transX1 > transX2));
+                    (transX1 < transX2));
         }
 
         // collect entity and tool tip information...
