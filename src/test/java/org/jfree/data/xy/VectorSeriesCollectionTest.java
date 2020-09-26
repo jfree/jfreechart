@@ -58,11 +58,11 @@ public class VectorSeriesCollectionTest {
     public void testEquals() {
         VectorSeries<String> s1 = new VectorSeries<>("Series");
         s1.add(1.0, 1.1, 1.2, 1.3);
-        VectorSeriesCollection c1 = new VectorSeriesCollection();
+        VectorSeriesCollection<String> c1 = new VectorSeriesCollection<>();
         c1.addSeries(s1);
         VectorSeries<String> s2 = new VectorSeries<>("Series");
         s2.add(1.0, 1.1, 1.2, 1.3);
-        VectorSeriesCollection c2 = new VectorSeriesCollection();
+        VectorSeriesCollection<String> c2 = new VectorSeriesCollection<>();
         c2.addSeries(s2);
         assertTrue(c1.equals(c2));
         assertTrue(c2.equals(c1));
@@ -81,9 +81,9 @@ public class VectorSeriesCollectionTest {
     public void testCloning() throws CloneNotSupportedException {
         VectorSeries<String> s1 = new VectorSeries<>("Series");
         s1.add(1.0, 1.1, 1.2, 1.3);
-        VectorSeriesCollection c1 = new VectorSeriesCollection();
+        VectorSeriesCollection<String> c1 = new VectorSeriesCollection<>();
         c1.addSeries(s1);
-        VectorSeriesCollection c2 = CloneUtils.clone(c1);
+        VectorSeriesCollection<String> c2 = CloneUtils.clone(c1);
         assertTrue(c1 != c2);
         assertTrue(c1.getClass() == c2.getClass());
         assertTrue(c1.equals(c2));
@@ -98,7 +98,7 @@ public class VectorSeriesCollectionTest {
      */
     @Test
     public void testPublicCloneable() {
-        VectorSeriesCollection d1 = new VectorSeriesCollection();
+        VectorSeriesCollection<String> d1 = new VectorSeriesCollection<>();
         assertTrue(d1 instanceof PublicCloneable);
     }
 
@@ -109,9 +109,9 @@ public class VectorSeriesCollectionTest {
     public void testSerialization() {
         VectorSeries<String> s1 = new VectorSeries<>("Series");
         s1.add(1.0, 1.1, 1.2, 1.3);
-        VectorSeriesCollection c1 = new VectorSeriesCollection();
+        VectorSeriesCollection<String> c1 = new VectorSeriesCollection<>();
         c1.addSeries(s1);
-        VectorSeriesCollection c2 = TestUtils.serialised(c1);
+        VectorSeriesCollection<String> c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 
@@ -122,7 +122,7 @@ public class VectorSeriesCollectionTest {
     public void testRemoveSeries() {
         VectorSeries<String> s1 = new VectorSeries<>("S1");
         VectorSeries<String> s2 = new VectorSeries<>("S2");
-        VectorSeriesCollection vsc = new VectorSeriesCollection();
+        VectorSeriesCollection<String> vsc = new VectorSeriesCollection<>();
         vsc.addSeries(s1);
         vsc.addSeries(s2);
         assertEquals(2, vsc.getSeriesCount());
