@@ -1375,32 +1375,15 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
     protected Object clone() throws CloneNotSupportedException {
         AbstractXYItemRenderer clone = (AbstractXYItemRenderer) super.clone();
         // 'plot' : just retain reference, not a deep copy
-
-        clone.itemLabelGeneratorMap = CloneUtils.cloneMapValues(
-                this.itemLabelGeneratorMap);
-        clone.defaultItemLabelGenerator = (XYItemLabelGenerator) 
-                CloneUtils.clone(this.defaultItemLabelGenerator);
-
-        clone.toolTipGeneratorMap = CloneUtils.cloneMapValues(
-                this.toolTipGeneratorMap);
-        
-        clone.defaultToolTipGenerator = (XYToolTipGenerator) CloneUtils.clone(
-                this.defaultToolTipGenerator);
-
-        clone.legendItemLabelGenerator = (XYSeriesLabelGenerator)
-                CloneUtils.clone(this.legendItemLabelGenerator);
-        
-        clone.legendItemToolTipGenerator = (XYSeriesLabelGenerator)
-                CloneUtils.clone(this.legendItemToolTipGenerator);
-
-        clone.legendItemURLGenerator = (XYSeriesLabelGenerator)
-                CloneUtils.clone(this.legendItemURLGenerator);
-        
-        clone.foregroundAnnotations = (List) CloneUtils.cloneList(
-                this.foregroundAnnotations);
-        clone.backgroundAnnotations = (List) CloneUtils.cloneList(
-                this.backgroundAnnotations);
-
+        clone.itemLabelGeneratorMap = CloneUtils.cloneMapValues(this.itemLabelGeneratorMap);
+        clone.defaultItemLabelGenerator = CloneUtils.clone(this.defaultItemLabelGenerator);
+        clone.toolTipGeneratorMap = CloneUtils.cloneMapValues(this.toolTipGeneratorMap);
+        clone.defaultToolTipGenerator = CloneUtils.clone(this.defaultToolTipGenerator);
+        clone.legendItemLabelGenerator = CloneUtils.clone(this.legendItemLabelGenerator);
+        clone.legendItemToolTipGenerator = CloneUtils.clone(this.legendItemToolTipGenerator);
+        clone.legendItemURLGenerator = CloneUtils.clone(this.legendItemURLGenerator);
+        clone.foregroundAnnotations = CloneUtils.cloneList(this.foregroundAnnotations);
+        clone.backgroundAnnotations = CloneUtils.cloneList(this.backgroundAnnotations);
         return clone;
     }
 
