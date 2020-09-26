@@ -57,6 +57,8 @@ import org.jfree.data.general.SeriesChangeEvent;
 /**
  * An {@link XYDataset} where every series shares the same x-values (required
  * for generating stacked area charts).
+ * 
+ * @param <S> The type for the series keys.
  */
 public class DefaultTableXYDataset<S extends Comparable<S>> 
         extends AbstractIntervalXYDataset<S>
