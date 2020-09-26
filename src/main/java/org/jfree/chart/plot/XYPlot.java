@@ -131,6 +131,8 @@ import org.jfree.data.xy.XYDataset;
  * <p>
  * The {@link org.jfree.chart.ChartFactory} class contains static methods for
  * creating pre-configured charts.
+ * 
+ * @param <S>The type for the series keys.
  */
 public class XYPlot<S extends Comparable<S>> extends Plot 
         implements ValueAxisPlot, Pannable, Zoomable,
