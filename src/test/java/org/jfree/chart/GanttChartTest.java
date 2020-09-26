@@ -103,7 +103,7 @@ public class GanttChartTest  {
     @Test
     public void testDrawWithNullInfo2() {
         JFreeChart chart = createGanttChart();
-        CategoryPlot plot = (CategoryPlot) chart.getPlot();
+        CategoryPlot<String, String> plot = (CategoryPlot) chart.getPlot();
         plot.setDataset(createDataset());
         /* BufferedImage img =*/ chart.createBufferedImage(300, 200, null);
         //FIXME we should really assert a value
@@ -116,7 +116,7 @@ public class GanttChartTest  {
     public void testReplaceDataset() {
         LocalListener l = new LocalListener();
         this.chart.addChangeListener(l);
-        CategoryPlot plot = (CategoryPlot) this.chart.getPlot();
+        CategoryPlot<String, String> plot = (CategoryPlot) this.chart.getPlot();
         plot.setDataset(null);
         assertEquals(true, l.flag);
     }
@@ -127,7 +127,7 @@ public class GanttChartTest  {
      */
     @Test
     public void testSetSeriesToolTipGenerator() {
-        CategoryPlot plot = (CategoryPlot) this.chart.getPlot();
+        CategoryPlot<String, String> plot = (CategoryPlot) this.chart.getPlot();
         CategoryItemRenderer renderer = plot.getRenderer();
         StandardCategoryToolTipGenerator tt
                 = new StandardCategoryToolTipGenerator();
@@ -142,7 +142,7 @@ public class GanttChartTest  {
      */
     @Test
     public void testSetSeriesURLGenerator() {
-        CategoryPlot plot = (CategoryPlot) this.chart.getPlot();
+        CategoryPlot<String, String> plot = (CategoryPlot) this.chart.getPlot();
         CategoryItemRenderer renderer = plot.getRenderer();
         StandardCategoryURLGenerator url1
                 = new StandardCategoryURLGenerator();
@@ -166,8 +166,7 @@ public class GanttChartTest  {
      *
      * @return The dataset.
      */
-    public static IntervalCategoryDataset createDataset() {
-
+    private static IntervalCategoryDataset<String, String> createDataset() {
         TaskSeries<String> s1 = new TaskSeries<>("Scheduled");
         s1.add(new Task("Write Proposal",
                new SimpleTimePeriod(date(1, Calendar.APRIL, 2001),
@@ -244,7 +243,7 @@ public class GanttChartTest  {
                new SimpleTimePeriod(date(10, Calendar.DECEMBER, 2001),
                                     date(11, Calendar.DECEMBER, 2001))));
 
-        TaskSeriesCollection collection = new TaskSeriesCollection();
+        TaskSeriesCollection<String, String> collection = new TaskSeriesCollection<>();
         collection.add(s1);
         collection.add(s2);
 

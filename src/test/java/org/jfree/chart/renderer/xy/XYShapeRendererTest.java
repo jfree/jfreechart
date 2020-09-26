@@ -103,6 +103,8 @@ public class XYShapeRendererTest {
 
     /**
      * Confirm that cloning works.
+     * 
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
@@ -133,7 +135,7 @@ public class XYShapeRendererTest {
         XYShapeRenderer r = new XYShapeRenderer();
         assertNull(r.findZBounds(null));
 
-        DefaultXYZDataset dataset = new DefaultXYZDataset();
+        DefaultXYZDataset<String> dataset = new DefaultXYZDataset<>();
         Range range;
 
         double data1[][] = { {1,1,1}, {1,1,1}, {1,2,3} };
