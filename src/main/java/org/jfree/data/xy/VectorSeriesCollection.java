@@ -50,6 +50,8 @@ import org.jfree.data.general.DatasetChangeEvent;
 /**
  * A collection of {@link VectorSeries} objects.
  *
+ * @param <S> The type for the series keys.
+ * 
  * @since 1.0.6
  */
 public class VectorSeriesCollection<S extends Comparable<S>> 
