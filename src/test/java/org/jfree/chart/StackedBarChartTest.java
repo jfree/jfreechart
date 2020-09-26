@@ -105,7 +105,7 @@ public class StackedBarChartTest {
 
         LocalListener l = new LocalListener();
         this.chart.addChangeListener(l);
-        CategoryPlot plot = (CategoryPlot) this.chart.getPlot();
+        CategoryPlot<String, String> plot = (CategoryPlot) this.chart.getPlot();
         plot.setDataset(newData);
         assertEquals(true, l.flag);
         ValueAxis axis = plot.getRangeAxis();
@@ -123,7 +123,7 @@ public class StackedBarChartTest {
      */
     @Test
     public void testSetSeriesToolTipGenerator() {
-        CategoryPlot plot = (CategoryPlot) this.chart.getPlot();
+        CategoryPlot<String, String> plot = (CategoryPlot) this.chart.getPlot();
         CategoryItemRenderer renderer = plot.getRenderer();
         StandardCategoryToolTipGenerator tt
                 = new StandardCategoryToolTipGenerator();
@@ -138,7 +138,7 @@ public class StackedBarChartTest {
      */
     @Test
     public void testSetSeriesURLGenerator() {
-        CategoryPlot plot = (CategoryPlot) this.chart.getPlot();
+        CategoryPlot<String, String> plot = (CategoryPlot) this.chart.getPlot();
         CategoryItemRenderer renderer = plot.getRenderer();
         StandardCategoryURLGenerator url1
                 = new StandardCategoryURLGenerator();
@@ -154,7 +154,6 @@ public class StackedBarChartTest {
      */
     private static JFreeChart createChart() {
         Number[][] data = new Integer[][] {{-3, -2}, {-1, 1}, {2, 3}};
-
         CategoryDataset<String, String> dataset 
                 = DatasetUtils.createCategoryDataset("S", "C", data);
         return ChartFactory.createStackedBarChart("Stacked Bar Chart",
