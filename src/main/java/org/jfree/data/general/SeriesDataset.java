@@ -45,6 +45,8 @@ import org.jfree.data.xy.XYZDataset;
 /**
  * The interface for a dataset consisting of one or many series of data.
  *
+ * @param <S> The type for the series keys.
+ * 
  * @see CategoryDataset
  * @see IntervalXYDataset
  * @see IntervalXYZDataset
