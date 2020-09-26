@@ -50,13 +50,15 @@ import org.jfree.data.general.DatasetChangeEvent;
 /**
  * A collection of {@link XYIntervalSeries} objects.
  *
+ * @param <S> The type for the series keys.
+ * 
  * @since 1.0.3
  *
  * @see XYIntervalSeries
  */
 public class XYIntervalSeriesCollection<S extends Comparable<S>> 
-        extends AbstractIntervalXYDataset
-        implements IntervalXYDataset, PublicCloneable, Serializable {
+        extends AbstractIntervalXYDataset<S>
+        implements IntervalXYDataset<S>, PublicCloneable, Serializable {
 
     /** Storage for the data series. */
     private List<XYIntervalSeries<S>> data;
