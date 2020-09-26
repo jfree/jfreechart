@@ -1304,8 +1304,6 @@ public interface XYItemRenderer extends LegendItemSource {
      * listeners.
      * 
      * @param create  the flag value.
-     * 
-     * @return A boolean. 
      */
     public void setDefaultCreateEntities(boolean create);
 
@@ -1315,8 +1313,7 @@ public interface XYItemRenderer extends LegendItemSource {
      * listeners.
      * 
      * @param create  the flag value.
-     * 
-     * @return A boolean. 
+     * @param notify  notify listeners?
      */
     public void setDefaultCreateEntities(boolean create, boolean notify);
 
