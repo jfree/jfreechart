@@ -96,7 +96,7 @@ public class XYPlotTest {
      * Added this test in response to a bug report.
      */
     public void testGetDatasetCount() {
-        XYPlot plot = new XYPlot();
+        XYPlot<String> plot = new XYPlot<>();
         assertEquals(0, plot.getDatasetCount());
     }
 
@@ -106,8 +106,8 @@ public class XYPlotTest {
     @Test
     public void testEquals() {
 
-        XYPlot plot1 = new XYPlot();
-        XYPlot plot2 = new XYPlot();
+        XYPlot<String> plot1 = new XYPlot<>();
+        XYPlot<String> plot2 = new XYPlot<>();
         assertTrue(plot1.equals(plot2));
 
         // orientation...
@@ -427,9 +427,9 @@ public class XYPlotTest {
      */
     @Test
     public void testEquals_ObjectList() {
-        XYPlot p1 = new XYPlot();
+        XYPlot<String> p1 = new XYPlot<>();
         p1.setDomainAxis(new NumberAxis("A"));
-        XYPlot p2 = new XYPlot();
+        XYPlot<String> p2 = new XYPlot<>();
         p2.setDomainAxis(new NumberAxis("A"));
         assertEquals(p1, p2);
         p2.setDomainAxis(1, new NumberAxis("B"));
@@ -441,9 +441,9 @@ public class XYPlotTest {
      */
     @Test
     public void testEquals_ObjectList2() {
-        XYPlot p1 = new XYPlot();
+        XYPlot<String> p1 = new XYPlot<>();
         p1.setDomainAxisLocation(AxisLocation.BOTTOM_OR_RIGHT);
-        XYPlot p2 = new XYPlot();
+        XYPlot<String> p2 = new XYPlot<>();
         p2.setDomainAxisLocation(AxisLocation.BOTTOM_OR_RIGHT);
         assertEquals(p1, p2);
         p2.setDomainAxisLocation(1, AxisLocation.TOP_OR_LEFT);
@@ -455,9 +455,9 @@ public class XYPlotTest {
      */
     @Test
     public void testEquals_ObjectList3() {
-        XYPlot p1 = new XYPlot();
+        XYPlot<String> p1 = new XYPlot<>();
         p1.setRangeAxis(new NumberAxis("A"));
-        XYPlot p2 = new XYPlot();
+        XYPlot<String> p2 = new XYPlot<>();
         p2.setRangeAxis(new NumberAxis("A"));
         assertEquals(p1, p2);
         p2.setRangeAxis(1, new NumberAxis("B"));
@@ -469,9 +469,9 @@ public class XYPlotTest {
      */
     @Test
     public void testEquals_ObjectList4() {
-        XYPlot p1 = new XYPlot();
+        XYPlot<String> p1 = new XYPlot<>();
         p1.setRangeAxisLocation(AxisLocation.BOTTOM_OR_RIGHT);
-        XYPlot p2 = new XYPlot();
+        XYPlot<String> p2 = new XYPlot<>();
         p2.setRangeAxisLocation(AxisLocation.BOTTOM_OR_RIGHT);
         assertEquals(p1, p2);
         p2.setRangeAxisLocation(1, AxisLocation.TOP_OR_LEFT);
@@ -483,9 +483,9 @@ public class XYPlotTest {
      */
     @Test
     public void testEquals_ObjectList5() {
-        XYPlot p1 = new XYPlot();
+        XYPlot<String> p1 = new XYPlot<>();
         p1.setRenderer(new XYBarRenderer());
-        XYPlot p2 = new XYPlot();
+        XYPlot<String> p2 = new XYPlot<>();
         p2.setRenderer(new XYBarRenderer());
         assertEquals(p1, p2);
         p2.setRenderer(1, new XYLineAndShapeRenderer());
@@ -499,8 +499,8 @@ public class XYPlotTest {
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        XYPlot p1 = new XYPlot();
-        XYPlot p2 = CloneUtils.clone(p1);
+        XYPlot<String> p1 = new XYPlot<>();
+        XYPlot<String> p2 = CloneUtils.clone(p1);
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
@@ -512,14 +512,14 @@ public class XYPlotTest {
      */
     @Test
     public void testCloning2() throws CloneNotSupportedException {
-        XYPlot p1 = new XYPlot(null, new NumberAxis("Domain Axis"),
+        XYPlot<String> p1 = new XYPlot<>(null, new NumberAxis("Domain Axis"),
                 new NumberAxis("Range Axis"), new StandardXYItemRenderer());
         p1.setRangeAxis(1, new NumberAxis("Range Axis 2"));
         List<Integer> axisIndices = Arrays.asList(new Integer[] {0, 1});
         p1.mapDatasetToDomainAxes(0, axisIndices);
         p1.mapDatasetToRangeAxes(0, axisIndices);
         p1.setRenderer(1, new XYBarRenderer());
-        XYPlot p2 = CloneUtils.clone(p1);
+        XYPlot<String> p2 = CloneUtils.clone(p1);
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
@@ -532,11 +532,11 @@ public class XYPlotTest {
      */
     @Test
     public void testCloning3() throws CloneNotSupportedException {
-        XYPlot p1 = new XYPlot(null, new NumberAxis("Domain Axis"),
+        XYPlot<String> p1 = new XYPlot<>(null, new NumberAxis("Domain Axis"),
                 new NumberAxis("Range Axis"), new StandardXYItemRenderer());
         LegendItemCollection c1 = new LegendItemCollection();
         p1.setFixedLegendItems(c1);
-        XYPlot p2 = CloneUtils.clone(p1);
+        XYPlot<String> p2 = CloneUtils.clone(p1);
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
@@ -554,9 +554,9 @@ public class XYPlotTest {
     @Test
     public void testCloning4() throws CloneNotSupportedException {
         XYLineAndShapeRenderer r1 = new XYLineAndShapeRenderer();
-        XYPlot p1 = new XYPlot(null, new NumberAxis("Domain Axis"),
+        XYPlot<String> p1 = new XYPlot<>(null, new NumberAxis("Domain Axis"),
                 new NumberAxis("Range Axis"), r1);
-        XYPlot p2 = CloneUtils.clone(p1);
+        XYPlot<String> p2 = CloneUtils.clone(p1);
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
@@ -572,10 +572,10 @@ public class XYPlotTest {
      */
     @Test
     public void testCloning_QuadrantOrigin() throws CloneNotSupportedException {
-        XYPlot p1 = new XYPlot();
+        XYPlot<String> p1 = new XYPlot<>();
         Point2D p = new Point2D.Double(1.2, 3.4);
         p1.setQuadrantOrigin(p);
-        XYPlot p2 = CloneUtils.clone(p1);
+        XYPlot<String> p2 = CloneUtils.clone(p1);
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
@@ -588,10 +588,10 @@ public class XYPlotTest {
      */
     @Test
     public void testCloning_QuadrantPaint() throws CloneNotSupportedException {
-        XYPlot p1 = new XYPlot();
+        XYPlot<String> p1 = new XYPlot<>();
         p1.setQuadrantPaint(3, new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.BLUE));
-        XYPlot p2 = CloneUtils.clone(p1);
+        XYPlot<String> p2 = CloneUtils.clone(p1);
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
@@ -610,10 +610,10 @@ public class XYPlotTest {
      */
     @Test
     public void testBug2817504() throws CloneNotSupportedException {
-        XYPlot p1 = new XYPlot();
+        XYPlot<String> p1 = new XYPlot<>();
         XYLineAndShapeRenderer r1 = new XYLineAndShapeRenderer();
         p1.setRenderer(r1);
-        XYPlot p2 = (XYPlot) p1.clone();
+        XYPlot<String> p2 = CloneUtils.clone(p1);
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
@@ -629,14 +629,14 @@ public class XYPlotTest {
      */
     @Test
     public void testCloneIndependence() throws CloneNotSupportedException {
-        XYPlot p1 = new XYPlot(null, new NumberAxis("Domain Axis"),
+        XYPlot<String> p1 = new XYPlot<>(null, new NumberAxis("Domain Axis"),
                 new NumberAxis("Range Axis"), new StandardXYItemRenderer());
         p1.setDomainAxis(1, new NumberAxis("Domain Axis 2"));
         p1.setDomainAxisLocation(1, AxisLocation.BOTTOM_OR_LEFT);
         p1.setRangeAxis(1, new NumberAxis("Range Axis 2"));
         p1.setRangeAxisLocation(1, AxisLocation.TOP_OR_RIGHT);
         p1.setRenderer(1, new XYBarRenderer());
-        XYPlot p2 = CloneUtils.clone(p1);
+        XYPlot<String> p2 = CloneUtils.clone(p1);
         assertTrue(p1.equals(p2));
 
         p1.getDomainAxis().setLabel("Label");
@@ -689,7 +689,7 @@ public class XYPlotTest {
     public void testSetNullRenderer() {
         boolean failed = false;
         try {
-            XYPlot plot = new XYPlot(null, new NumberAxis("X"),
+            XYPlot<String> plot = new XYPlot<>(null, new NumberAxis("X"),
                     new NumberAxis("Y"), null);
             plot.setRenderer(null);
         }
@@ -708,8 +708,8 @@ public class XYPlotTest {
         NumberAxis domainAxis = new NumberAxis("Domain");
         NumberAxis rangeAxis = new NumberAxis("Range");
         StandardXYItemRenderer renderer = new StandardXYItemRenderer();
-        XYPlot p1 = new XYPlot(data, domainAxis, rangeAxis, renderer);
-        XYPlot p2 = TestUtils.serialised(p1);
+        XYPlot<String> p1 = new XYPlot<>(data, domainAxis, rangeAxis, renderer);
+        XYPlot<String> p2 = TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 
@@ -723,8 +723,8 @@ public class XYPlotTest {
         XYItemRenderer renderer1 = new XYBarRenderer(0.20);
         renderer1.setDefaultToolTipGenerator(
                 StandardXYToolTipGenerator.getTimeSeriesInstance());
-        XYPlot p1 = new XYPlot(data1, new DateAxis("Date"), null, renderer1);
-        XYPlot p2 = TestUtils.serialised(p1);
+        XYPlot<String> p1 = new XYPlot<>(data1, new DateAxis("Date"), null, renderer1);
+        XYPlot<String> p2 = TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 
@@ -764,7 +764,7 @@ public class XYPlotTest {
         XYSeriesCollection<String> dataset = new XYSeriesCollection<>();
         JFreeChart chart = ChartFactory.createXYLineChart("Test Chart",
                 "Domain Axis", "Range Axis", dataset);
-        XYPlot plot = (XYPlot) chart.getPlot();
+        XYPlot<String> plot = (XYPlot) chart.getPlot();
         plot.addDomainMarker(new ValueMarker(1.0), Layer.FOREGROUND);
         plot.addDomainMarker(new IntervalMarker(2.0, 3.0), Layer.BACKGROUND);
         plot.addRangeMarker(new ValueMarker(4.0), Layer.FOREGROUND);
@@ -790,7 +790,7 @@ public class XYPlotTest {
         NumberAxis domainAxis1 = new NumberAxis("Domain 1");
         NumberAxis rangeAxis1 = new NumberAxis("Range 1");
         StandardXYItemRenderer renderer1 = new StandardXYItemRenderer();
-        XYPlot p1 = new XYPlot(dataset1, domainAxis1, rangeAxis1, renderer1);
+        XYPlot<String> p1 = new XYPlot<>(dataset1, domainAxis1, rangeAxis1, renderer1);
         NumberAxis domainAxis2 = new NumberAxis("Domain 2");
         NumberAxis rangeAxis2 = new NumberAxis("Range 2");
         StandardXYItemRenderer renderer2 = new StandardXYItemRenderer();
@@ -799,7 +799,7 @@ public class XYPlotTest {
         p1.setDomainAxis(1, domainAxis2);
         p1.setRangeAxis(1, rangeAxis2);
         p1.setRenderer(1, renderer2);
-        XYPlot p2 = TestUtils.serialised(p1);
+        XYPlot<String> p2 = TestUtils.serialised(p1);
         assertEquals(p1, p2);
 
         // now check that all datasets, renderers and axes are being listened
@@ -835,7 +835,7 @@ public class XYPlotTest {
         XYDataset<String> d3 = new XYSeriesCollection<>();  // not used by plot
         XYItemRenderer r0 = new XYLineAndShapeRenderer();
         XYItemRenderer r2 = new XYLineAndShapeRenderer();
-        XYPlot plot = new XYPlot();
+        XYPlot<String> plot = new XYPlot<>();
         plot.setDataset(0, d0);
         plot.setDataset(1, d1);
         plot.setDataset(2, d2);
@@ -859,7 +859,7 @@ public class XYPlotTest {
         XYDataset<String> d0 = createDataset1();
         XYDataset<String> d1 = createDataset2();
         XYItemRenderer r0 = new XYLineAndShapeRenderer();
-        XYPlot plot = new XYPlot();
+        XYPlot<String> plot = new XYPlot<>();
         plot.setDataset(0, d0);
         plot.setDataset(1, d1);
         plot.setRenderer(0, r0);
@@ -916,7 +916,7 @@ public class XYPlotTest {
      */
     @Test
     public void testSetRenderer() {
-        XYPlot plot = new XYPlot();
+        XYPlot<String> plot = new XYPlot<>();
         XYItemRenderer renderer = new XYLineAndShapeRenderer();
         plot.setRenderer(renderer);
         // now make a change to the renderer and see if it triggers a plot
@@ -932,7 +932,7 @@ public class XYPlotTest {
      */
     @Test
     public void testRemoveAnnotation() {
-        XYPlot plot = new XYPlot();
+        XYPlot<String> plot = new XYPlot<>();
         XYTextAnnotation a1 = new XYTextAnnotation("X", 1.0, 2.0);
         XYTextAnnotation a2 = new XYTextAnnotation("X", 3.0, 4.0);
         XYTextAnnotation a3 = new XYTextAnnotation("X", 1.0, 2.0);
@@ -956,7 +956,7 @@ public class XYPlotTest {
      */
     @Test
     public void testAddDomainMarker() {
-        XYPlot plot = new XYPlot();
+        XYPlot<String> plot = new XYPlot<>();
         Marker m = new ValueMarker(1.0);
         plot.addDomainMarker(m);
         List<EventListener> listeners = Arrays.asList(m.getListeners(
@@ -972,7 +972,7 @@ public class XYPlotTest {
      */
     @Test
     public void testAddRangeMarker() {
-        XYPlot plot = new XYPlot();
+        XYPlot<String> plot = new XYPlot<>();
         Marker m = new ValueMarker(1.0);
         plot.addRangeMarker(m);
         List<EventListener> listeners = Arrays.asList(m.getListeners(
@@ -992,7 +992,7 @@ public class XYPlotTest {
         DefaultXYDataset<String> dataset = new DefaultXYDataset<>();
         JFreeChart chart = ChartFactory.createXYLineChart("Title", "X", "Y",
                 dataset, PlotOrientation.VERTICAL, true, false, false);
-        XYPlot plot = (XYPlot) chart.getPlot();
+        XYPlot<String> plot = (XYPlot) chart.getPlot();
         plot.setRenderer(1, new XYLineAndShapeRenderer());
         try {
             BufferedImage image = new BufferedImage(200 , 100,
@@ -1015,7 +1015,7 @@ public class XYPlotTest {
         DefaultXYDataset<String> dataset = new DefaultXYDataset<>();
         JFreeChart chart = ChartFactory.createXYLineChart("Title", "X", "Y",
                 dataset, PlotOrientation.VERTICAL, true, false, false);
-        XYPlot plot = (XYPlot) chart.getPlot();
+        XYPlot<String> plot = (XYPlot) chart.getPlot();
         plot.setRenderer(null);
         try {
             BufferedImage image = new BufferedImage(200 , 100,
@@ -1058,7 +1058,7 @@ public class XYPlotTest {
      */
     @Test
     public void testRemoveDomainMarker() {
-        XYPlot plot = new XYPlot();
+        XYPlot<String> plot = new XYPlot<>();
         assertFalse(plot.removeDomainMarker(new ValueMarker(0.5)));
     }
 
@@ -1068,7 +1068,7 @@ public class XYPlotTest {
      */
     @Test
     public void testRemoveRangeMarker() {
-        XYPlot plot = new XYPlot();
+        XYPlot<String> plot = new XYPlot<>();
         assertFalse(plot.removeRangeMarker(new ValueMarker(0.5)));
     }
 
@@ -1081,7 +1081,7 @@ public class XYPlotTest {
         NumberAxis xAxis = new NumberAxis("X");
         NumberAxis yAxis = new NumberAxis("Y");
         XYItemRenderer renderer = new DefaultXYItemRenderer();
-        XYPlot plot = new XYPlot(dataset, xAxis, yAxis, renderer);
+        XYPlot<String> plot = new XYPlot<>(dataset, xAxis, yAxis, renderer);
         assertEquals(xAxis, plot.getDomainAxisForDataset(0));
 
         // should get IllegalArgumentException for negative index
@@ -1162,7 +1162,7 @@ public class XYPlotTest {
         NumberAxis xAxis = new NumberAxis("X");
         NumberAxis yAxis = new NumberAxis("Y");
         XYItemRenderer renderer = new DefaultXYItemRenderer();
-        XYPlot plot = new XYPlot(dataset, xAxis, yAxis, renderer);
+        XYPlot<String> plot = new XYPlot<>(dataset, xAxis, yAxis, renderer);
         
         assertEquals(dataset, plot.getDataset(0));
         
@@ -1184,7 +1184,7 @@ public class XYPlotTest {
         NumberAxis xAxis = new NumberAxis("X");
         NumberAxis yAxis = new NumberAxis("Y");
         XYItemRenderer renderer = new DefaultXYItemRenderer();
-        XYPlot plot = new XYPlot(dataset, xAxis, yAxis, renderer);
+        XYPlot<String> plot = new XYPlot<>(dataset, xAxis, yAxis, renderer);
         assertEquals(xAxis, plot.getDomainAxis(0));        
         assertEquals(yAxis, plot.getRangeAxis(0)); 
         
@@ -1203,7 +1203,7 @@ public class XYPlotTest {
         NumberAxis xAxis = new NumberAxis("X");
         NumberAxis yAxis = new NumberAxis("Y");
         XYItemRenderer renderer = new DefaultXYItemRenderer();
-        XYPlot plot = new XYPlot(dataset, xAxis, yAxis, renderer);
+        XYPlot<String> plot = new XYPlot<>(dataset, xAxis, yAxis, renderer);
 
         NumberAxis xAxis2 = new NumberAxis("X2");
         NumberAxis yAxis2 = new NumberAxis("Y2");
@@ -1224,7 +1224,7 @@ public class XYPlotTest {
         NumberAxis xAxis = new NumberAxis("X");
         NumberAxis yAxis = new NumberAxis("Y");
         XYItemRenderer renderer = new DefaultXYItemRenderer();
-        XYPlot plot = new XYPlot(dataset, xAxis, yAxis, renderer);
+        XYPlot<String> plot = new XYPlot<>(dataset, xAxis, yAxis, renderer);
         
         assertEquals(renderer, plot.getRenderer(0));
         
@@ -1243,7 +1243,7 @@ public class XYPlotTest {
         NumberAxis xAxis = new NumberAxis("X");
         NumberAxis yAxis = new NumberAxis("Y");
         XYItemRenderer renderer = new DefaultXYItemRenderer();
-        XYPlot plot = new XYPlot(dataset, xAxis, yAxis, renderer);
+        XYPlot<String> plot = new XYPlot<>(dataset, xAxis, yAxis, renderer);
 
         // add a second dataset
         XYSeriesCollection<String> dataset2 = new XYSeriesCollection<>();
@@ -1266,7 +1266,7 @@ public class XYPlotTest {
         NumberAxis xAxis = new NumberAxis("X");
         NumberAxis yAxis = new NumberAxis("Y");
         XYItemRenderer renderer = new DefaultXYItemRenderer();
-        XYPlot plot = new XYPlot(dataset, xAxis, yAxis, renderer);
+        XYPlot<String> plot = new XYPlot<>(dataset, xAxis, yAxis, renderer);
 
         NumberAxis xAxis2 = new NumberAxis("X2");
         plot.setDomainAxis(11, xAxis2);
@@ -1289,7 +1289,7 @@ public class XYPlotTest {
         NumberAxis xAxis = new NumberAxis("X");
         NumberAxis yAxis = new NumberAxis("Y");
         XYItemRenderer renderer = new DefaultXYItemRenderer();
-        XYPlot plot = new XYPlot(dataset, xAxis, yAxis, renderer);
+        XYPlot<String> plot = new XYPlot<>(dataset, xAxis, yAxis, renderer);
 
         NumberAxis yAxis2 = new NumberAxis("Y2");
         plot.setRangeAxis(22, yAxis2);
@@ -1312,7 +1312,7 @@ public class XYPlotTest {
         NumberAxis xAxis = new NumberAxis("X");
         NumberAxis yAxis = new NumberAxis("Y");
         XYItemRenderer renderer = new DefaultXYItemRenderer();
-        XYPlot plot = new XYPlot(dataset, xAxis, yAxis, renderer);
+        XYPlot<String> plot = new XYPlot<>(dataset, xAxis, yAxis, renderer);
         
         // add a second dataset, plotted against a second x axis
         XYSeriesCollection<String> dataset2 = new XYSeriesCollection<>();
@@ -1336,7 +1336,7 @@ public class XYPlotTest {
         NumberAxis xAxis = new NumberAxis("X");
         NumberAxis yAxis = new NumberAxis("Y");
         XYItemRenderer renderer = new DefaultXYItemRenderer();
-        XYPlot plot = new XYPlot(dataset, xAxis, yAxis, renderer);
+        XYPlot<String> plot = new XYPlot<>(dataset, xAxis, yAxis, renderer);
         
         // add a second dataset, plotted against a second axis
         XYSeriesCollection<String> dataset2 = new XYSeriesCollection<>();
@@ -1362,7 +1362,7 @@ public class XYPlotTest {
         NumberAxis xAxis = new NumberAxis("X");
         NumberAxis yAxis = new NumberAxis("Y");
         XYItemRenderer renderer = new DefaultXYItemRenderer();
-        XYPlot plot = new XYPlot(dataset, xAxis, yAxis, renderer);
+        XYPlot<String> plot = new XYPlot<>(dataset, xAxis, yAxis, renderer);
         assertEquals(null, plot.getDataRange(xAxis));
         assertEquals(null, plot.getDataRange(yAxis));
         
@@ -1391,7 +1391,7 @@ public class XYPlotTest {
         NumberAxis xAxis = new NumberAxis("X");
         NumberAxis yAxis = new NumberAxis("Y");
         XYItemRenderer renderer = new DefaultXYItemRenderer();
-        XYPlot plot = new XYPlot(dataset1, xAxis, yAxis, renderer);
+        XYPlot<String> plot = new XYPlot<>(dataset1, xAxis, yAxis, renderer);
         plot.setDataset(1, dataset2);
         plot.mapDatasetToDomainAxis(1, 0);
         plot.mapDatasetToRangeAxis(1, 0);

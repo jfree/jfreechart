@@ -94,6 +94,8 @@ public class LevelRendererTest {
 
     /**
      * Confirm that cloning works.
+     * 
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
@@ -161,7 +163,7 @@ public class LevelRendererTest {
             DefaultCategoryDataset<String, String> dataset 
                     = new DefaultCategoryDataset<>();
             dataset.addValue(1.0, "S1", "C1");
-            CategoryPlot plot = new CategoryPlot(dataset,
+            CategoryPlot<String, String> plot = new CategoryPlot<>(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new LevelRenderer());
             JFreeChart chart = new JFreeChart(plot);
@@ -189,10 +191,10 @@ public class LevelRendererTest {
         dataset1.addValue(24.0, "R4", "C1");
         dataset1.addValue(25.0, "R5", "C1");
         LevelRenderer r = new LevelRenderer();
-        CategoryPlot plot = new CategoryPlot(dataset0, new CategoryAxis("x"),
+        CategoryPlot<String, String> plot = new CategoryPlot<>(dataset0, new CategoryAxis("x"),
                 new NumberAxis("y"), r);
         plot.setDataset(1, dataset1);
-        /*JFreeChart chart =*/ new JFreeChart(plot);
+        JFreeChart chart = new JFreeChart(plot);
         LegendItem li = r.getLegendItem(1, 2);
         assertEquals("R5", li.getLabel());
         assertEquals(1, li.getDatasetIndex());

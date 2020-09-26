@@ -128,6 +128,8 @@ public class LineAndShapeRendererTest {
 
     /**
      * Confirm that cloning works.
+     * 
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
@@ -244,10 +246,10 @@ public class LineAndShapeRendererTest {
         dataset1.addValue(24.0, "R4", "C1");
         dataset1.addValue(25.0, "R5", "C1");
         LineAndShapeRenderer r = new LineAndShapeRenderer();
-        CategoryPlot plot = new CategoryPlot(dataset0, new CategoryAxis("x"),
+        CategoryPlot<String, String> plot = new CategoryPlot<>(dataset0, new CategoryAxis("x"),
                 new NumberAxis("y"), r);
         plot.setDataset(1, dataset1);
-        /*JFreeChart chart =*/ new JFreeChart(plot);
+        JFreeChart chart = new JFreeChart(plot);
         LegendItem li = r.getLegendItem(1, 2);
         assertEquals("R5", li.getLabel());
         assertEquals(1, li.getDatasetIndex());

@@ -335,7 +335,7 @@ public class AbstractCategoryItemRendererTest {
         assertEquals(0, r.getLegendItems().getItemCount());
 
         DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
-        CategoryPlot<String, String> plot = new CategoryPlot();
+        CategoryPlot<String, String> plot = new CategoryPlot<>();
         plot.setDataset(dataset);
         plot.setRenderer(r);
         assertEquals(0, r.getLegendItems().getItemCount());

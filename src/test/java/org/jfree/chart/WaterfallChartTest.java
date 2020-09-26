@@ -96,7 +96,7 @@ public class WaterfallChartTest {
      */
     @Test
     public void testSetSeriesToolTipGenerator() {
-        CategoryPlot plot = (CategoryPlot) this.chart.getPlot();
+        CategoryPlot<String, String> plot = (CategoryPlot) this.chart.getPlot();
         CategoryItemRenderer renderer = plot.getRenderer();
         StandardCategoryToolTipGenerator tt
                 = new StandardCategoryToolTipGenerator();
@@ -111,7 +111,7 @@ public class WaterfallChartTest {
      */
     @Test
     public void testSetSeriesURLGenerator() {
-        CategoryPlot plot = (CategoryPlot) this.chart.getPlot();
+        CategoryPlot<String, String> plot = (CategoryPlot) this.chart.getPlot();
         CategoryItemRenderer renderer = plot.getRenderer();
         StandardCategoryURLGenerator url1
                 = new StandardCategoryURLGenerator();
@@ -133,7 +133,6 @@ public class WaterfallChartTest {
             "Domain", "Range", dataset, PlotOrientation.HORIZONTAL,
             true,     // include legend
             true, true);
-
     }
 
 }

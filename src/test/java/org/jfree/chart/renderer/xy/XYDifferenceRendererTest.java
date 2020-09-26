@@ -114,10 +114,8 @@ public class XYDifferenceRendererTest {
      */
     @Test
     public void testHashcode() {
-        XYDifferenceRenderer r1
-            = new XYDifferenceRenderer(Color.RED, Color.BLUE, false);
-        XYDifferenceRenderer r2
-            = new XYDifferenceRenderer(Color.RED, Color.BLUE, false);
+        XYDifferenceRenderer r1 = new XYDifferenceRenderer(Color.RED, Color.BLUE, false);
+        XYDifferenceRenderer r2 = new XYDifferenceRenderer(Color.RED, Color.BLUE, false);
         assertTrue(r1.equals(r2));
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
@@ -126,11 +124,12 @@ public class XYDifferenceRendererTest {
 
     /**
      * Confirm that cloning works.
+     * 
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        XYDifferenceRenderer r1 = new XYDifferenceRenderer(Color.RED,
-                Color.BLUE, false);
+        XYDifferenceRenderer r1 = new XYDifferenceRenderer(Color.RED, Color.BLUE, false);
         XYDifferenceRenderer r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
@@ -191,10 +190,10 @@ public class XYDifferenceRendererTest {
         d2.addSeries(s5);
 
         XYDifferenceRenderer r = new XYDifferenceRenderer();
-        XYPlot plot = new XYPlot(d1, new NumberAxis("x"),
+        XYPlot<String> plot = new XYPlot<>(d1, new NumberAxis("x"),
                 new NumberAxis("y"), r);
         plot.setDataset(1, d2);
-        /*JFreeChart chart =*/ new JFreeChart(plot);
+        JFreeChart chart = new JFreeChart(plot);
         LegendItem li = r.getLegendItem(1, 2);
         assertEquals("S5", li.getLabel());
         assertEquals(1, li.getDatasetIndex());

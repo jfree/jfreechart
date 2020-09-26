@@ -171,6 +171,8 @@ public class XYBarRendererTest {
 
     /**
      * Confirm that cloning works.
+     * 
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
@@ -229,7 +231,7 @@ public class XYBarRendererTest {
         JFreeChart chart = ChartFactory.createXYBarChart("Test Chart", "X",
                 false, "Y", dataset, PlotOrientation.VERTICAL, false, false,
                 false);
-        XYPlot plot = (XYPlot) chart.getPlot();
+        XYPlot<String> plot = (XYPlot) chart.getPlot();
         NumberAxis domainAxis = (NumberAxis) plot.getDomainAxis();
         domainAxis.setAutoRangeIncludesZero(false);
         Range bounds = domainAxis.getRange();
@@ -248,7 +250,7 @@ public class XYBarRendererTest {
         XYIntervalSeries<String> s1 = new XYIntervalSeries<>("S1");
         s1.add(1.0, 0.5, 1.5, 10.0, 9.5, 10.5);
         s1.add(2.0, 1.9, 2.1, 20.0, 19.8, 20.3);
-        XYIntervalSeries<String> s2 = new XYIntervalSeries("S2");
+        XYIntervalSeries<String> s2 = new XYIntervalSeries<>("S2");
         s2.add(3.0, 2.5, 3.5, 30.0, 29.5, 30.5);
         s2.add(4.0, 3.9, 4.1, 9.0, 9.0, 9.0);
         XYIntervalSeriesCollection<String> dataset = new XYIntervalSeriesCollection<>();
@@ -348,10 +350,10 @@ public class XYBarRendererTest {
         d2.addSeries(s5);
 
         XYBarRenderer r = new XYBarRenderer();
-        XYPlot plot = new XYPlot(new XYBarDataset<String>(d1, 1.0), 
+        XYPlot<String> plot = new XYPlot<>(new XYBarDataset<String>(d1, 1.0), 
                 new NumberAxis("x"), new NumberAxis("y"), r);
         plot.setDataset(1, new XYBarDataset<String>(d2, 2.0));
-        /*JFreeChart chart =*/ new JFreeChart(plot);
+        JFreeChart chart = new JFreeChart(plot);
         LegendItem li = r.getLegendItem(1, 2);
         assertEquals("S5", li.getLabel());
         assertEquals(1, li.getDatasetIndex());

@@ -84,7 +84,7 @@ public class CombinedDomainXYPlotTest implements ChartChangeListener {
      */
     @Test
     public void testConstructor1() {
-        CombinedDomainXYPlot plot = new CombinedDomainXYPlot(null);
+        CombinedDomainXYPlot<String> plot = new CombinedDomainXYPlot<>(null);
         assertEquals(null, plot.getDomainAxis());
     }
 
@@ -93,7 +93,7 @@ public class CombinedDomainXYPlotTest implements ChartChangeListener {
      */
     @Test
     public void testRemoveSubplot() {
-        CombinedDomainXYPlot plot = new CombinedDomainXYPlot();
+        CombinedDomainXYPlot<String> plot = new CombinedDomainXYPlot<>();
         XYPlot<String> plot1 = new XYPlot<>();
         XYPlot<String> plot2 = new XYPlot<>();
         plot.add(plot1);
@@ -109,8 +109,8 @@ public class CombinedDomainXYPlotTest implements ChartChangeListener {
      */
     @Test
     public void testEquals() {
-        CombinedDomainXYPlot plot1 = createPlot();
-        CombinedDomainXYPlot plot2 = createPlot();
+        CombinedDomainXYPlot<String> plot1 = createPlot();
+        CombinedDomainXYPlot<String> plot2 = createPlot();
         assertTrue(plot1.equals(plot2));
         assertTrue(plot2.equals(plot1));
     }
@@ -121,8 +121,8 @@ public class CombinedDomainXYPlotTest implements ChartChangeListener {
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        CombinedDomainXYPlot plot1 = createPlot();
-        CombinedDomainXYPlot plot2 = CloneUtils.clone(plot1);
+        CombinedDomainXYPlot<String> plot1 = createPlot();
+        CombinedDomainXYPlot<String> plot2 = CloneUtils.clone(plot1);
         assertTrue(plot1 != plot2);
         assertTrue(plot1.getClass() == plot2.getClass());
         assertTrue(plot1.equals(plot2));
@@ -133,8 +133,8 @@ public class CombinedDomainXYPlotTest implements ChartChangeListener {
      */
     @Test
     public void testSerialization() {
-        CombinedDomainXYPlot plot1 = createPlot();
-        CombinedDomainXYPlot plot2 = TestUtils.serialised(plot1);
+        CombinedDomainXYPlot<String> plot1 = createPlot();
+        CombinedDomainXYPlot<String> plot2 = TestUtils.serialised(plot1);
         assertEquals(plot1, plot2);
     }
 
@@ -144,7 +144,7 @@ public class CombinedDomainXYPlotTest implements ChartChangeListener {
      */
     @Test
     public void testNotification() {
-        CombinedDomainXYPlot plot = createPlot();
+        CombinedDomainXYPlot<String> plot = createPlot();
         JFreeChart chart = new JFreeChart(plot);
         chart.addChangeListener(this);
         XYPlot<String> subplot1 = plot.getSubplots().get(0);
@@ -243,7 +243,7 @@ public class CombinedDomainXYPlotTest implements ChartChangeListener {
      *
      * @return A sample plot.
      */
-    private CombinedDomainXYPlot createPlot() {
+    private CombinedDomainXYPlot<String> createPlot() {
         // create subplot 1...
         XYDataset<String> data1 = createDataset1();
         XYItemRenderer renderer1 = new StandardXYItemRenderer();
@@ -266,7 +266,7 @@ public class CombinedDomainXYPlotTest implements ChartChangeListener {
         subplot2.setRangeAxisLocation(AxisLocation.TOP_OR_LEFT);
 
         // parent plot...
-        CombinedDomainXYPlot plot = new CombinedDomainXYPlot(
+        CombinedDomainXYPlot<String> plot = new CombinedDomainXYPlot<> (
                 new NumberAxis("Domain"));
         plot.setGap(10.0);
 

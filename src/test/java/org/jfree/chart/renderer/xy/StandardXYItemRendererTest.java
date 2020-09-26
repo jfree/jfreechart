@@ -142,6 +142,8 @@ public class StandardXYItemRendererTest {
 
     /**
      * Confirm that cloning works.
+     * 
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
@@ -210,10 +212,10 @@ public class StandardXYItemRendererTest {
         d2.addSeries(s5);
 
         StandardXYItemRenderer r = new StandardXYItemRenderer();
-        XYPlot plot = new XYPlot(d1, new NumberAxis("x"),
+        XYPlot<String> plot = new XYPlot<>(d1, new NumberAxis("x"),
                 new NumberAxis("y"), r);
         plot.setDataset(1, d2);
-        /*JFreeChart chart =*/ new JFreeChart(plot);
+        JFreeChart chart = new JFreeChart(plot);
         LegendItem li = r.getLegendItem(1, 2);
         assertEquals("S5", li.getLabel());
         assertEquals(1, li.getDatasetIndex());
@@ -232,7 +234,7 @@ public class StandardXYItemRendererTest {
         dataset.addSeries(s1);
         JFreeChart chart = ChartFactory.createXYLineChart("Title", "X", "Y",
                 dataset, PlotOrientation.VERTICAL, false, true, false);
-        XYPlot plot = (XYPlot) chart.getPlot();
+        XYPlot<String> plot = (XYPlot) chart.getPlot();
         plot.setRenderer(new StandardXYItemRenderer());
         NumberAxis xAxis = (NumberAxis) plot.getDomainAxis();
         xAxis.setRange(0.0, 5.0);
@@ -245,8 +247,7 @@ public class StandardXYItemRendererTest {
         chart.draw(g2, new Rectangle2D.Double(0, 0, 200, 100), null, info);
         g2.dispose();
         EntityCollection ec = info.getEntityCollection();
-        assertFalse(TestUtils.containsInstanceOf(ec.getEntities(),
-                XYItemEntity.class));
+        assertFalse(TestUtils.containsInstanceOf(ec.getEntities(), XYItemEntity.class));
     }
 
 }

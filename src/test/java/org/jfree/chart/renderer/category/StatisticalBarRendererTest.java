@@ -97,6 +97,8 @@ public class StatisticalBarRendererTest {
 
     /**
      * Confirm that cloning works.
+     * 
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
@@ -137,7 +139,7 @@ public class StatisticalBarRendererTest {
                     = new DefaultStatisticalCategoryDataset<>();
             dataset.add(1.0, 2.0, "S1", "C1");
             dataset.add(3.0, 4.0, "S1", "C2");
-            CategoryPlot plot = new CategoryPlot(dataset,
+            CategoryPlot<String, String> plot = new CategoryPlot<>(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new StatisticalBarRenderer());
             JFreeChart chart = new JFreeChart(plot);
@@ -161,7 +163,7 @@ public class StatisticalBarRendererTest {
                     = new DefaultStatisticalCategoryDataset<>();
             dataset.add(1.0, 2.0, "S1", "C1");
             dataset.add(null, 4.0, "S1", "C2");
-            CategoryPlot plot = new CategoryPlot(dataset,
+            CategoryPlot<String, String> plot = new CategoryPlot<>(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new StatisticalBarRenderer());
             JFreeChart chart = new JFreeChart(plot);
@@ -185,7 +187,7 @@ public class StatisticalBarRendererTest {
                     = new DefaultStatisticalCategoryDataset<>();
             dataset.add(1.0, 2.0, "S1", "C1");
             dataset.add(null, 4.0, "S1", "C2");
-            CategoryPlot plot = new CategoryPlot(dataset,
+            CategoryPlot<String, String> plot = new CategoryPlot<>(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new StatisticalBarRenderer());
             plot.setOrientation(PlotOrientation.HORIZONTAL);
@@ -210,7 +212,7 @@ public class StatisticalBarRendererTest {
                     = new DefaultStatisticalCategoryDataset<>();
             dataset.add(1.0, 2.0, "S1", "C1");
             dataset.add(4.0, null, "S1", "C2");
-            CategoryPlot plot = new CategoryPlot(dataset,
+            CategoryPlot<String, String> plot = new CategoryPlot<>(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new StatisticalBarRenderer());
             JFreeChart chart = new JFreeChart(plot);
@@ -234,7 +236,7 @@ public class StatisticalBarRendererTest {
                     = new DefaultStatisticalCategoryDataset<>();
             dataset.add(1.0, 2.0, "S1", "C1");
             dataset.add(4.0, null, "S1", "C2");
-            CategoryPlot plot = new CategoryPlot(dataset,
+            CategoryPlot<String, String> plot = new CategoryPlot<>(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new StatisticalBarRenderer());
             plot.setOrientation(PlotOrientation.HORIZONTAL);
