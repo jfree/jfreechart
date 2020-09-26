@@ -108,7 +108,7 @@ public class TimeSeriesChartTest {
 
         LocalListener l = new LocalListener();
         this.chart.addChangeListener(l);
-        XYPlot plot = (XYPlot) this.chart.getPlot();
+        XYPlot<String> plot = (XYPlot) this.chart.getPlot();
         plot.setDataset(dataset);
         assertEquals(true, l.flag);
         ValueAxis axis = plot.getRangeAxis();
@@ -126,7 +126,7 @@ public class TimeSeriesChartTest {
      */
     @Test
     public void testSetSeriesToolTipGenerator() {
-        XYPlot plot = (XYPlot) this.chart.getPlot();
+        XYPlot<String> plot = (XYPlot) this.chart.getPlot();
         XYItemRenderer renderer = plot.getRenderer();
         StandardXYToolTipGenerator tt = new StandardXYToolTipGenerator();
         renderer.setSeriesToolTipGenerator(0, tt);
