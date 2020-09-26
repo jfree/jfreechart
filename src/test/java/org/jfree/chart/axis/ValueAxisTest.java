@@ -231,7 +231,7 @@ public class ValueAxisTest {
         DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         JFreeChart chart = ChartFactory.createLineChart("Title", "X", "Y",
                 dataset, PlotOrientation.VERTICAL, true, false, false);
-        CategoryPlot plot = (CategoryPlot) chart.getPlot();
+        CategoryPlot<String, String> plot = (CategoryPlot) chart.getPlot();
         plot.setInsets(RectangleInsets.ZERO_INSETS);
         plot.setAxisOffset(RectangleInsets.ZERO_INSETS);
         ValueAxis yAxis = plot.getRangeAxis();

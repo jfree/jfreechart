@@ -180,7 +180,7 @@ public class XYStepRendererTest {
             s2.add(15.0, null);
             s2.add(20.0, null);
             dataset.addSeries(s2);
-            XYPlot plot = new XYPlot(dataset,
+            XYPlot<String> plot = new XYPlot<>(dataset,
                     new NumberAxis("X"), new NumberAxis("Y"),
                     new XYStepRenderer());
             JFreeChart chart = new JFreeChart(plot);

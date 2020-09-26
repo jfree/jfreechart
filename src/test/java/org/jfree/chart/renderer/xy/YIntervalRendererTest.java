@@ -233,8 +233,7 @@ public class YIntervalRendererTest {
         d2.addSeries(s5);
 
         YIntervalRenderer r = new YIntervalRenderer();
-        XYPlot plot = new XYPlot(d1, new NumberAxis("x"),
-                new NumberAxis("y"), r);
+        XYPlot<String> plot = new XYPlot<>(d1, new NumberAxis("x"), new NumberAxis("y"), r);
         plot.setDataset(1, d2);
         /*JFreeChart chart =*/ new JFreeChart(plot);
         LegendItem li = r.getLegendItem(1, 2);

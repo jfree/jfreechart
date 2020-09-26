@@ -101,13 +101,10 @@ public class StackedAreaChartTest {
     @Test
     public void testReplaceDataset() {
         Number[][] data = new Integer[][] {{-30, -20}, {-10, 10}, {20, 30}};
-
-        CategoryDataset newData = DatasetUtils.createCategoryDataset("S",
-                "C", data);
-
+        CategoryDataset<String, String> newData = DatasetUtils.createCategoryDataset("S", "C", data);
         LocalListener l = new LocalListener();
         this.chart.addChangeListener(l);
-        CategoryPlot plot = (CategoryPlot) this.chart.getPlot();
+        CategoryPlot<String, String> plot = (CategoryPlot) this.chart.getPlot();
         plot.setDataset(newData);
         assertEquals(true, l.flag);
         ValueAxis axis = plot.getRangeAxis();
@@ -125,7 +122,7 @@ public class StackedAreaChartTest {
      */
     @Test
     public void testSetSeriesToolTipGenerator() {
-        CategoryPlot plot = (CategoryPlot) this.chart.getPlot();
+        CategoryPlot<String, String> plot = (CategoryPlot) this.chart.getPlot();
         CategoryItemRenderer renderer = plot.getRenderer();
         StandardCategoryToolTipGenerator tt
             = new StandardCategoryToolTipGenerator();
@@ -140,10 +137,9 @@ public class StackedAreaChartTest {
      */
     @Test
     public void testSetSeriesURLGenerator() {
-        CategoryPlot plot = (CategoryPlot) this.chart.getPlot();
+        CategoryPlot<String, String> plot = (CategoryPlot) this.chart.getPlot();
         CategoryItemRenderer renderer = plot.getRenderer();
-        StandardCategoryURLGenerator url1
-                = new StandardCategoryURLGenerator();
+        StandardCategoryURLGenerator url1 = new StandardCategoryURLGenerator();
         renderer.setSeriesItemURLGenerator(0, url1);
         CategoryURLGenerator url2 = renderer.getItemURLGenerator(0, 0);
         assertTrue(url2 == url1);
@@ -157,18 +153,9 @@ public class StackedAreaChartTest {
     private static JFreeChart createChart() {
         Number[][] data = new Integer[][] {{-3, -2}, {-1, 1}, {2, 3}};
 
-        CategoryDataset dataset = DatasetUtils.createCategoryDataset("S",
-                "C", data);
-        return ChartFactory.createStackedAreaChart(
-            "Stacked Area Chart",  // chart title
-            "Domain", "Range",
-            dataset,      // data
-            PlotOrientation.HORIZONTAL,
-            true,         // include legend
-            true,
-            true
-        );
-
+        CategoryDataset<String, String> dataset = DatasetUtils.createCategoryDataset("S", "C", data);
+        return ChartFactory.createStackedAreaChart("Stacked Area Chart", "Domain", "Range",
+            dataset, PlotOrientation.HORIZONTAL, true, true, true);
     }
 
     /**

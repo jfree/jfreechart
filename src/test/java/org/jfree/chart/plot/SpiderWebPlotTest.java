@@ -73,8 +73,8 @@ public class SpiderWebPlotTest {
      */
     @Test
     public void testEquals() {
-        SpiderWebPlot p1 = new SpiderWebPlot(new DefaultCategoryDataset());
-        SpiderWebPlot p2 = new SpiderWebPlot(new DefaultCategoryDataset());
+        SpiderWebPlot p1 = new SpiderWebPlot(new DefaultCategoryDataset<String, String>());
+        SpiderWebPlot p2 = new SpiderWebPlot(new DefaultCategoryDataset<String, String>());
         assertTrue(p1.equals(p2));
         assertTrue(p2.equals(p1));
 
@@ -248,10 +248,12 @@ public class SpiderWebPlotTest {
 
     /**
      * Confirm that cloning works.
+     * 
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        SpiderWebPlot p1 = new SpiderWebPlot(new DefaultCategoryDataset());
+        SpiderWebPlot p1 = new SpiderWebPlot(new DefaultCategoryDataset<String, String>());
         Rectangle2D legendShape = new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0);
         p1.setLegendItemShape(legendShape);
         SpiderWebPlot p2 = CloneUtils.clone(p1);
@@ -290,7 +292,7 @@ public class SpiderWebPlotTest {
      */
     @Test
     public void testSerialization() {
-        SpiderWebPlot p1 = new SpiderWebPlot(new DefaultCategoryDataset());
+        SpiderWebPlot p1 = new SpiderWebPlot(new DefaultCategoryDataset<String, String>());
         SpiderWebPlot p2 = TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
@@ -301,7 +303,7 @@ public class SpiderWebPlotTest {
      */
     @Test
     public void testDrawWithNullInfo() {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         dataset.addValue(35.0, "S1", "C1");
         dataset.addValue(45.0, "S1", "C2");
         dataset.addValue(55.0, "S1", "C3");
@@ -326,7 +328,7 @@ public class SpiderWebPlotTest {
      */
     @Test
     public void testGetLegendItems() {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         dataset.addValue(35.0, "S1", "C1");
         dataset.addValue(45.0, "S1", "C2");
         dataset.addValue(55.0, "S2", "C1");

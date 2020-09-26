@@ -96,6 +96,8 @@ public class StackedXYBarRendererTest {
 
     /**
      * Confirm that cloning works.
+     * 
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
@@ -132,12 +134,12 @@ public class StackedXYBarRendererTest {
      */
     @Test
     public void testFindDomainBounds() {
-        TableXYDataset dataset
+        TableXYDataset<String> dataset
                 = RendererXYPackageUtils.createTestTableXYDataset();
         JFreeChart chart = ChartFactory.createStackedXYAreaChart(
                 "Test Chart", "X", "Y", dataset,
                 PlotOrientation.VERTICAL, false, false, false);
-        XYPlot plot = (XYPlot) chart.getPlot();
+        XYPlot<String> plot = (XYPlot) chart.getPlot();
         plot.setRenderer(new StackedXYBarRenderer());
         NumberAxis domainAxis = (NumberAxis) plot.getDomainAxis();
         domainAxis.setAutoRangeIncludesZero(false);
@@ -153,12 +155,12 @@ public class StackedXYBarRendererTest {
      */
     @Test
     public void testFindRangeBounds() {
-        TableXYDataset dataset
+        TableXYDataset<String> dataset
                 = RendererXYPackageUtils.createTestTableXYDataset();
         JFreeChart chart = ChartFactory.createStackedXYAreaChart(
                 "Test Chart", "X", "Y", dataset,
                 PlotOrientation.VERTICAL, false, false, false);
-        XYPlot plot = (XYPlot) chart.getPlot();
+        XYPlot<String> plot = (XYPlot) chart.getPlot();
         plot.setRenderer(new StackedXYBarRenderer());
         NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
         Range bounds = rangeAxis.getRange();

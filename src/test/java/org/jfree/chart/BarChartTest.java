@@ -109,7 +109,7 @@ public class BarChartTest {
 
         LocalListener l = new LocalListener();
         this.chart.addChangeListener(l);
-        CategoryPlot plot = (CategoryPlot) this.chart.getPlot();
+        CategoryPlot<String, String> plot = (CategoryPlot) this.chart.getPlot();
         plot.setDataset(newData);
         assertEquals(true, l.flag);
         ValueAxis axis = plot.getRangeAxis();
@@ -127,7 +127,7 @@ public class BarChartTest {
      */
     @Test
     public void testSetSeriesToolTipGenerator() {
-        CategoryPlot plot = (CategoryPlot) this.chart.getPlot();
+        CategoryPlot<String, String> plot = (CategoryPlot) this.chart.getPlot();
         CategoryItemRenderer renderer = plot.getRenderer();
         StandardCategoryToolTipGenerator tt
                 = new StandardCategoryToolTipGenerator();
@@ -142,7 +142,7 @@ public class BarChartTest {
      */
     @Test
     public void testSetSeriesURLGenerator() {
-        CategoryPlot plot = (CategoryPlot) this.chart.getPlot();
+        CategoryPlot<String, String> plot = (CategoryPlot) this.chart.getPlot();
         CategoryItemRenderer renderer = plot.getRenderer();
         StandardCategoryURLGenerator url1
                 = new StandardCategoryURLGenerator();
@@ -157,7 +157,6 @@ public class BarChartTest {
      * @return The chart.
      */
     private static JFreeChart createBarChart() {
-
         Number[][] data = new Integer[][] {{-3, -2}, {-1, 1}, {2, 3}};
         CategoryDataset<String, String> dataset 
                 = DatasetUtils.createCategoryDataset("S", "C", data);

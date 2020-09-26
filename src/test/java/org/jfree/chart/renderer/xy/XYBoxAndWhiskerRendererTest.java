@@ -150,8 +150,7 @@ public class XYBoxAndWhiskerRendererTest {
      */
     @Test
     public void test2909215() {
-        DefaultBoxAndWhiskerXYDataset d1 = new DefaultBoxAndWhiskerXYDataset(
-                "Series");
+        DefaultBoxAndWhiskerXYDataset<String> d1 = new DefaultBoxAndWhiskerXYDataset<>("Series");
         d1.add(new Date(1L), new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 
                 null, null, null));
         JFreeChart chart = ChartFactory.createBoxAndWhiskerChart("Title", "X",
