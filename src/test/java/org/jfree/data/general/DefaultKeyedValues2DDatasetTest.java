@@ -49,14 +49,16 @@ public class DefaultKeyedValues2DDatasetTest {
 
     /**
      * Confirm that cloning works.
+     * 
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        DefaultKeyedValues2DDataset d1 = new DefaultKeyedValues2DDataset();
+        DefaultKeyedValues2DDataset<String, String> d1 = new DefaultKeyedValues2DDataset<>();
         d1.setValue(Integer.valueOf(1), "V1", "C1");
         d1.setValue(null, "V2", "C1");
         d1.setValue(Integer.valueOf(3), "V3", "C2");
-        DefaultKeyedValues2DDataset d2 = CloneUtils.clone(d1);
+        DefaultKeyedValues2DDataset<String, String> d2 = CloneUtils.clone(d1);
         assertTrue(d1 != d2);
         assertTrue(d1.getClass() == d2.getClass());
         assertTrue(d1.equals(d2));
@@ -67,13 +69,13 @@ public class DefaultKeyedValues2DDatasetTest {
      */
     @Test
     public void testSerialization() {
-        DefaultKeyedValues2DDataset d1 = new DefaultKeyedValues2DDataset();
+        DefaultKeyedValues2DDataset<String, String> d1 = new DefaultKeyedValues2DDataset<>();
         d1.addValue(234.2, "Row1", "Col1");
         d1.addValue(null, "Row1", "Col2");
         d1.addValue(345.9, "Row2", "Col1");
         d1.addValue(452.7, "Row2", "Col2");
 
-        DefaultKeyedValues2DDataset d2 = TestUtils.serialised(d1);
+        DefaultKeyedValues2DDataset<String, String> d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 
