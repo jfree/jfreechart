@@ -1335,7 +1335,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
         }
 
         if (plot instanceof CombinedDomainXYPlot) {
-            CombinedDomainXYPlot cp = (CombinedDomainXYPlot) plot;
+            CombinedDomainXYPlot<S> cp = (CombinedDomainXYPlot) plot;
             for (XYPlot<S> subplot : cp.getSubplots()) {
                 if (subplot != null) {
                     applyToPlot(subplot);
@@ -1343,7 +1343,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
             }
         }
         if (plot instanceof CombinedRangeXYPlot) {
-            CombinedRangeXYPlot cp = (CombinedRangeXYPlot) plot;
+            CombinedRangeXYPlot<S> cp = (CombinedRangeXYPlot) plot;
             for (XYPlot subplot : cp.getSubplots()) {
                 if (subplot != null) {
                     applyToPlot(subplot);

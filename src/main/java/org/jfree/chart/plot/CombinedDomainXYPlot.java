@@ -70,7 +70,7 @@ import org.jfree.data.xy.XYDataset;
  * An extension of {@link XYPlot} that contains multiple subplots that share a
  * common domain axis.
  */
-public class CombinedDomainXYPlot extends XYPlot
+public class CombinedDomainXYPlot<S extends Comparable<S>> extends XYPlot<S>
         implements PlotChangeListener {
 
     /** For serialization. */
@@ -721,9 +721,9 @@ public class CombinedDomainXYPlot extends XYPlot
     @Override
     public Object clone() throws CloneNotSupportedException {
 
-        CombinedDomainXYPlot result = (CombinedDomainXYPlot) super.clone();
+        CombinedDomainXYPlot<S> result = (CombinedDomainXYPlot) super.clone();
         result.subplots = CloneUtils.cloneList(this.subplots);
-        for (XYPlot child : result.subplots) {
+        for (XYPlot<S> child : result.subplots) {
             child.setParent(result);
         }
 

@@ -68,7 +68,7 @@ import org.jfree.data.Range;
  * An extension of {@link XYPlot} that contains multiple subplots that share a
  * common range axis.
  */
-public class CombinedRangeXYPlot extends XYPlot
+public class CombinedRangeXYPlot<S extends Comparable<S>> extends XYPlot<S>
         implements PlotChangeListener {
 
     /** For serialization. */
@@ -680,9 +680,9 @@ public class CombinedRangeXYPlot extends XYPlot
     @Override
     public Object clone() throws CloneNotSupportedException {
 
-        CombinedRangeXYPlot result = (CombinedRangeXYPlot) super.clone();
+        CombinedRangeXYPlot<S> result = (CombinedRangeXYPlot) super.clone();
         result.subplots = (List) CloneUtils.cloneList(this.subplots);
-        for (XYPlot child : result.subplots) {
+        for (XYPlot<S> child : result.subplots) {
             child.setParent(result);
         }
 
