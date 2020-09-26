@@ -145,7 +145,7 @@ public class StackedXYAreaRendererTest {
         JFreeChart chart = ChartFactory.createStackedXYAreaChart(
                 "Test Chart", "X", "Y", dataset, PlotOrientation.VERTICAL,
                 false, false, false);
-        XYPlot plot = (XYPlot) chart.getPlot();
+        XYPlot<String> plot = (XYPlot) chart.getPlot();
         NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
         Range bounds = rangeAxis.getRange();
         assertTrue(bounds.contains(6.0));
@@ -174,7 +174,7 @@ public class StackedXYAreaRendererTest {
             s2.add(15.0, 9.5);
             s2.add(20.0, 3.5);
             dataset.addSeries(s2);
-            XYPlot plot = new XYPlot(dataset,
+            XYPlot<String> plot = new XYPlot<>(dataset,
                     new NumberAxis("X"), new NumberAxis("Y"),
                     new StackedXYAreaRenderer());
             JFreeChart chart = new JFreeChart(plot);
@@ -209,7 +209,7 @@ public class StackedXYAreaRendererTest {
             dataset.addSeries(s2);
             StackedXYAreaRenderer renderer = new StackedXYAreaRenderer(
                     XYAreaRenderer.LINES);
-            XYPlot plot = new XYPlot(dataset,
+            XYPlot<String> plot = new XYPlot<>(dataset,
                     new NumberAxis("X"), new NumberAxis("Y"),
                     renderer);
             JFreeChart chart = new JFreeChart(plot);
