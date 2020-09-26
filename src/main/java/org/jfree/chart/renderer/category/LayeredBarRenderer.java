@@ -211,7 +211,7 @@ public class LayeredBarRenderer extends BarRenderer implements Serializable {
 
         // X
         double value = dataValue.doubleValue();
-        double base = 0.0;
+        double base = getBase();
         double lclip = getLowerClip();
         double uclip = getUpperClip();
         if (uclip <= 0.0) {  // cases 1, 2, 3 and 4
@@ -342,7 +342,7 @@ public class LayeredBarRenderer extends BarRenderer implements Serializable {
 
         // BAR Y
         double value = dataValue.doubleValue();
-        double base = 0.0;
+        double base = getBase();
         double lclip = getLowerClip();
         double uclip = getUpperClip();
 
