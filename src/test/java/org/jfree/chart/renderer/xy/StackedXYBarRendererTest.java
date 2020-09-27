@@ -139,7 +139,7 @@ public class StackedXYBarRendererTest {
         JFreeChart chart = ChartFactory.createStackedXYAreaChart(
                 "Test Chart", "X", "Y", dataset,
                 PlotOrientation.VERTICAL, false, false, false);
-        XYPlot<String> plot = (XYPlot) chart.getPlot();
+        XYPlot<?> plot = (XYPlot) chart.getPlot();
         plot.setRenderer(new StackedXYBarRenderer());
         NumberAxis domainAxis = (NumberAxis) plot.getDomainAxis();
         domainAxis.setAutoRangeIncludesZero(false);
@@ -160,7 +160,7 @@ public class StackedXYBarRendererTest {
         JFreeChart chart = ChartFactory.createStackedXYAreaChart(
                 "Test Chart", "X", "Y", dataset,
                 PlotOrientation.VERTICAL, false, false, false);
-        XYPlot<String> plot = (XYPlot) chart.getPlot();
+        XYPlot<?> plot = (XYPlot) chart.getPlot();
         plot.setRenderer(new StackedXYBarRenderer());
         NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
         Range bounds = rangeAxis.getRange();

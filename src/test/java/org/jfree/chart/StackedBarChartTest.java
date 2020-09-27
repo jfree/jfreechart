@@ -105,6 +105,7 @@ public class StackedBarChartTest {
 
         LocalListener l = new LocalListener();
         this.chart.addChangeListener(l);
+        @SuppressWarnings("unchecked")
         CategoryPlot<String, String> plot = (CategoryPlot) this.chart.getPlot();
         plot.setDataset(newData);
         assertEquals(true, l.flag);
@@ -123,7 +124,7 @@ public class StackedBarChartTest {
      */
     @Test
     public void testSetSeriesToolTipGenerator() {
-        CategoryPlot<String, String> plot = (CategoryPlot) this.chart.getPlot();
+        CategoryPlot<?, ?> plot = (CategoryPlot) this.chart.getPlot();
         CategoryItemRenderer renderer = plot.getRenderer();
         StandardCategoryToolTipGenerator tt
                 = new StandardCategoryToolTipGenerator();
@@ -138,7 +139,7 @@ public class StackedBarChartTest {
      */
     @Test
     public void testSetSeriesURLGenerator() {
-        CategoryPlot<String, String> plot = (CategoryPlot) this.chart.getPlot();
+        CategoryPlot<?, ?> plot = (CategoryPlot) this.chart.getPlot();
         CategoryItemRenderer renderer = plot.getRenderer();
         StandardCategoryURLGenerator url1
                 = new StandardCategoryURLGenerator();

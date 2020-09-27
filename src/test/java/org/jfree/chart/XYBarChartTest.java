@@ -111,6 +111,7 @@ public class XYBarChartTest {
         LocalListener l = new LocalListener();
         this.chart.addChangeListener(l);
 
+        @SuppressWarnings("unchecked")
         XYPlot<String> plot = (XYPlot) this.chart.getPlot();
         plot.setDataset(dataset);
         assertEquals(true, l.flag);
@@ -129,7 +130,7 @@ public class XYBarChartTest {
      */
     @Test
     public void testSetSeriesToolTipGenerator() {
-        XYPlot<String> plot = (XYPlot) this.chart.getPlot();
+        XYPlot<?> plot = (XYPlot) this.chart.getPlot();
         XYItemRenderer renderer = plot.getRenderer();
         StandardXYToolTipGenerator tt = new StandardXYToolTipGenerator();
         renderer.setSeriesToolTipGenerator(0, tt);

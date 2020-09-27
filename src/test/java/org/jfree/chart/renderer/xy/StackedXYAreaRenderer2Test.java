@@ -73,7 +73,7 @@ public class StackedXYAreaRenderer2Test {
         JFreeChart chart = ChartFactory.createStackedXYAreaChart("title", "x",
                 "y", new DefaultTableXYDataset<String>(), PlotOrientation.VERTICAL,
                 true, false, false);
-        XYPlot<String> plot = (XYPlot) chart.getPlot();
+        XYPlot<?> plot = (XYPlot) chart.getPlot();
         plot.setRenderer(new StackedXYAreaRenderer2());
         try {
             BufferedImage image = new BufferedImage(200 , 100,
@@ -159,7 +159,7 @@ public class StackedXYAreaRenderer2Test {
         JFreeChart chart = ChartFactory.createStackedXYAreaChart(
                 "Test Chart", "X", "Y", dataset, PlotOrientation.VERTICAL,
                 false, false, false);
-        XYPlot<String> plot = (XYPlot) chart.getPlot();
+        XYPlot<?> plot = (XYPlot) chart.getPlot();
         StackedXYAreaRenderer2 renderer = new StackedXYAreaRenderer2();
         plot.setRenderer(renderer);
         NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
