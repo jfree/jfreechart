@@ -109,6 +109,8 @@ public class XYBlockRendererTest {
 
     /**
      * Confirm that cloning works.
+     * 
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
@@ -155,7 +157,7 @@ public class XYBlockRendererTest {
         XYBlockRenderer r = new XYBlockRenderer();
         Range range = r.findDomainBounds(null);
         assertTrue(range == null);
-        DefaultXYZDataset emptyDataset = new DefaultXYZDataset();
+        DefaultXYZDataset<String> emptyDataset = new DefaultXYZDataset<>();
         range = r.findDomainBounds(emptyDataset);
         assertTrue(range == null);
     }
@@ -168,7 +170,7 @@ public class XYBlockRendererTest {
         XYBlockRenderer r = new XYBlockRenderer();
         Range range = r.findRangeBounds(null);
         assertTrue(range == null);
-        DefaultXYZDataset emptyDataset = new DefaultXYZDataset();
+        DefaultXYZDataset<String> emptyDataset = new DefaultXYZDataset<>();
         range = r.findRangeBounds(emptyDataset);
         assertTrue(range == null);
     }

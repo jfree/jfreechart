@@ -109,6 +109,8 @@ public class XYStepChartTest {
 
         LocalListener l = new LocalListener();
         this.chart.addChangeListener(l);
+
+        @SuppressWarnings("unchecked")
         XYPlot<String> plot = (XYPlot) this.chart.getPlot();
         plot.setDataset(dataset);
         assertEquals(true, l.flag);

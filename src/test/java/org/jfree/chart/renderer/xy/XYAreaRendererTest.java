@@ -196,7 +196,7 @@ public class XYAreaRendererTest {
             s2.add(15.0, 9.5);
             s2.add(20.0, 3.5);
             dataset.addSeries(s2);
-            XYPlot plot = new XYPlot(dataset,
+            XYPlot<String> plot = new XYPlot<>(dataset,
                     new NumberAxis("X"), new NumberAxis("Y"),
                     new XYAreaRenderer());
             JFreeChart chart = new JFreeChart(plot);
@@ -234,10 +234,10 @@ public class XYAreaRendererTest {
         d2.addSeries(s5);
 
         XYAreaRenderer r = new XYAreaRenderer();
-        XYPlot plot = new XYPlot(d1, new NumberAxis("x"),
+        XYPlot<String> plot = new XYPlot<>(d1, new NumberAxis("x"),
                 new NumberAxis("y"), r);
         plot.setDataset(1, d2);
-        /*JFreeChart chart =*/ new JFreeChart(plot);
+        JFreeChart chart = new JFreeChart(plot);
         LegendItem li = r.getLegendItem(1, 2);
         assertEquals("S5", li.getLabel());
         assertEquals(1, li.getDatasetIndex());

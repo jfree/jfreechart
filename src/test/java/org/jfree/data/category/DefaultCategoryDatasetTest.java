@@ -37,6 +37,7 @@
 package org.jfree.data.category;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.UnknownKeyException;
 
@@ -204,8 +205,7 @@ public class DefaultCategoryDatasetTest {
     public void testSerialization() {
         DefaultCategoryDataset<String,String> d1 = new DefaultCategoryDataset<>();
         d1.setValue(23.4, "R1", "C1");
-        DefaultCategoryDataset<String,String> d2 = (DefaultCategoryDataset) 
-                TestUtils.serialised(d1);
+        DefaultCategoryDataset<String, String> d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 
@@ -273,7 +273,7 @@ public class DefaultCategoryDatasetTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         DefaultCategoryDataset<String,String> d1 = new DefaultCategoryDataset<>();
-        DefaultCategoryDataset<String,String> d2 = (DefaultCategoryDataset) d1.clone();
+        DefaultCategoryDataset<String,String> d2 = CloneUtils.clone(d1);
 
         assertTrue(d1 != d2);
         assertTrue(d1.getClass() == d2.getClass());
@@ -282,7 +282,7 @@ public class DefaultCategoryDatasetTest {
         // try a dataset with some content...
         d1.addValue(1.0, "R1", "C1");
         d1.addValue(2.0, "R1", "C2");
-        d2 = (DefaultCategoryDataset) d1.clone();
+        d2 = CloneUtils.clone(d1);
 
         assertTrue(d1 != d2);
         assertTrue(d1.getClass() == d2.getClass());

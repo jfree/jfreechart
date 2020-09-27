@@ -104,6 +104,8 @@ public class SubCategoryAxisTest {
 
     /**
      * Confirm that cloning works.
+     * 
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
@@ -134,7 +136,7 @@ public class SubCategoryAxisTest {
         JFreeChart chart = ChartFactory.createStackedBarChart("Test",
                 "Category", "Value", null, PlotOrientation.VERTICAL,
                 true, false, false);
-        CategoryPlot plot = (CategoryPlot) chart.getPlot();
+        CategoryPlot<?, ?> plot = (CategoryPlot) chart.getPlot();
         plot.setDomainAxis(new SubCategoryAxis("SubCategoryAxis"));
         try {
             BufferedImage image = new BufferedImage(200 , 100,
