@@ -129,7 +129,7 @@ public class XYStepChartTest {
      */
     @Test
     public void testSetSeriesToolTipGenerator() {
-        XYPlot<String> plot = (XYPlot) this.chart.getPlot();
+        XYPlot<?> plot = (XYPlot) this.chart.getPlot();
         XYItemRenderer renderer = plot.getRenderer();
         StandardXYToolTipGenerator tt = new StandardXYToolTipGenerator();
         renderer.setSeriesToolTipGenerator(0, tt);

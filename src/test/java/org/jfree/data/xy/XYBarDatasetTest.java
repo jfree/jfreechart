@@ -75,6 +75,8 @@ public class XYBarDatasetTest {
 
     /**
      * Confirm that cloning works.
+     * 
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {

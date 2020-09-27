@@ -764,7 +764,7 @@ public class XYPlotTest {
         XYSeriesCollection<String> dataset = new XYSeriesCollection<>();
         JFreeChart chart = ChartFactory.createXYLineChart("Test Chart",
                 "Domain Axis", "Range Axis", dataset);
-        XYPlot<String> plot = (XYPlot) chart.getPlot();
+        XYPlot<?> plot = (XYPlot) chart.getPlot();
         plot.addDomainMarker(new ValueMarker(1.0), Layer.FOREGROUND);
         plot.addDomainMarker(new IntervalMarker(2.0, 3.0), Layer.BACKGROUND);
         plot.addRangeMarker(new ValueMarker(4.0), Layer.FOREGROUND);
@@ -806,12 +806,12 @@ public class XYPlotTest {
         // too...
         NumberAxis domainAxisA = (NumberAxis) p2.getDomainAxis(0);
         NumberAxis rangeAxisA = (NumberAxis) p2.getRangeAxis(0);
-        XYSeriesCollection<String> datasetA = (XYSeriesCollection) p2.getDataset(0);
+        XYSeriesCollection<?> datasetA = (XYSeriesCollection) p2.getDataset(0);
         StandardXYItemRenderer rendererA
             = (StandardXYItemRenderer) p2.getRenderer(0);
         NumberAxis domainAxisB = (NumberAxis) p2.getDomainAxis(1);
         NumberAxis rangeAxisB = (NumberAxis) p2.getRangeAxis(1);
-        XYSeriesCollection<String> datasetB = (XYSeriesCollection) p2.getDataset(1);
+        XYSeriesCollection<?> datasetB = (XYSeriesCollection) p2.getDataset(1);
         StandardXYItemRenderer rendererB
             = (StandardXYItemRenderer) p2.getRenderer(1);
         assertTrue(datasetA.hasListener(p2));
@@ -992,7 +992,7 @@ public class XYPlotTest {
         DefaultXYDataset<String> dataset = new DefaultXYDataset<>();
         JFreeChart chart = ChartFactory.createXYLineChart("Title", "X", "Y",
                 dataset, PlotOrientation.VERTICAL, true, false, false);
-        XYPlot<String> plot = (XYPlot) chart.getPlot();
+        XYPlot<?> plot = (XYPlot) chart.getPlot();
         plot.setRenderer(1, new XYLineAndShapeRenderer());
         try {
             BufferedImage image = new BufferedImage(200 , 100,
@@ -1015,7 +1015,7 @@ public class XYPlotTest {
         DefaultXYDataset<String> dataset = new DefaultXYDataset<>();
         JFreeChart chart = ChartFactory.createXYLineChart("Title", "X", "Y",
                 dataset, PlotOrientation.VERTICAL, true, false, false);
-        XYPlot<String> plot = (XYPlot) chart.getPlot();
+        XYPlot<?> plot = (XYPlot) chart.getPlot();
         plot.setRenderer(null);
         try {
             BufferedImage image = new BufferedImage(200 , 100,

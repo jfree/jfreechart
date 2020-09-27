@@ -124,7 +124,7 @@ public class GroupedStackedBarRendererTest {
             dataset.addValue(4.0, "S2", "C2");
             GroupedStackedBarRenderer renderer
                     = new GroupedStackedBarRenderer();
-            CategoryPlot plot = new CategoryPlot(dataset,
+            CategoryPlot<String, String> plot = new CategoryPlot<>(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     renderer);
             JFreeChart chart = new JFreeChart(plot);

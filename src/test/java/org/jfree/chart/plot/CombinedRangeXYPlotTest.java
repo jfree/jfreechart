@@ -102,8 +102,7 @@ public class CombinedRangeXYPlotTest implements ChartChangeListener {
         plot.add(plot2);
         // remove plot2, but plot1 is removed instead
         plot.remove(plot2);
-        List<XYPlot> plots = plot.getSubplots();
-        assertTrue(plots.get(0) == plot1);
+        assertTrue(plot.getSubplots().get(0) == plot1);
     }
 
     /**

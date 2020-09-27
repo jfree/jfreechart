@@ -135,7 +135,7 @@ public class CombinedRangeCategoryPlotTest implements ChartChangeListener {
         CombinedRangeCategoryPlot plot = createPlot();
         JFreeChart chart = new JFreeChart(plot);
         chart.addChangeListener(this);
-        CategoryPlot<?, ?> subplot1 = (CategoryPlot) plot.getSubplots().get(0);
+        CategoryPlot<?, ?> subplot1 = plot.getSubplots().get(0);
         NumberAxis yAxis = (NumberAxis) subplot1.getRangeAxis();
         yAxis.setAutoRangeIncludesZero(!yAxis.getAutoRangeIncludesZero());
         assertEquals(1, this.events.size());

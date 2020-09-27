@@ -234,7 +234,7 @@ public class StandardXYItemRendererTest {
         dataset.addSeries(s1);
         JFreeChart chart = ChartFactory.createXYLineChart("Title", "X", "Y",
                 dataset, PlotOrientation.VERTICAL, false, true, false);
-        XYPlot<String> plot = (XYPlot) chart.getPlot();
+        XYPlot<?> plot = (XYPlot) chart.getPlot();
         plot.setRenderer(new StandardXYItemRenderer());
         NumberAxis xAxis = (NumberAxis) plot.getDomainAxis();
         xAxis.setRange(0.0, 5.0);

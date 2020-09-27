@@ -112,6 +112,8 @@ public class XYStepAreaRendererTest {
 
     /**
      * Confirm that cloning works.
+     * 
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
@@ -163,7 +165,7 @@ public class XYStepAreaRendererTest {
             s2.add(15.0, 9.5);
             s2.add(20.0, 3.5);
             dataset.addSeries(s2);
-            XYPlot plot = new XYPlot(dataset,
+            XYPlot<String> plot = new XYPlot<>(dataset,
                     new NumberAxis("X"), new NumberAxis("Y"),
                     new XYStepAreaRenderer());
             JFreeChart chart = new JFreeChart(plot);
