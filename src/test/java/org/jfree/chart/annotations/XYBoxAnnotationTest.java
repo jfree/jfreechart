@@ -186,7 +186,7 @@ public class XYBoxAnnotationTest {
             s2.add(15.0, 9.5);
             s2.add(20.0, 3.5);
             dataset.addSeries(s2);
-            XYPlot plot = new XYPlot(dataset,
+            XYPlot<String> plot = new XYPlot<>(dataset,
                     new NumberAxis("X"), new NumberAxis("Y"),
                     new XYLineAndShapeRenderer());
             plot.addAnnotation(new XYBoxAnnotation(10.0, 12.0, 3.0, 4.0,

@@ -325,7 +325,7 @@ public class TimeSeriesCollectionTest {
         dataset.addSeries(s2);
         s2.add(new Year(2009), 9.0);
         s2.add(new Year(2010), 10.0);
-        r = DatasetUtils.findDomainBounds(dataset, visibleSeriesKeys, true);
+        r = DatasetUtils.<String>findDomainBounds(dataset, visibleSeriesKeys, true);
         assertEquals(1199142000000.0, r.getLowerBound(), EPSILON);
         assertEquals(1230764399999.0, r.getUpperBound(), EPSILON);
 

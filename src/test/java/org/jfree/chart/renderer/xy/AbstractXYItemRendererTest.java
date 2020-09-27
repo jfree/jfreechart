@@ -61,7 +61,7 @@ public class AbstractXYItemRendererTest {
      *
      * @return A test dataset.
      */
-    private XYDataset createDataset1() {
+    private XYDataset<String> createDataset1() {
         XYSeries<String> series = new XYSeries<>("Series");
         series.add(1.0, 1.0);
         series.add(2.0, 2.0);
@@ -81,7 +81,7 @@ public class AbstractXYItemRendererTest {
         AbstractXYItemRenderer renderer = new StandardXYItemRenderer();
 
         // check the bounds of a simple dataset
-        XYDataset dataset = createDataset1();
+        XYDataset<String> dataset = createDataset1();
         Range r = renderer.findDomainBounds(dataset);
         assertEquals(1.0, r.getLowerBound(), EPSILON);
         assertEquals(3.0, r.getUpperBound(), EPSILON);
