@@ -138,7 +138,7 @@ public class StatisticalLineAndShapeRendererTest {
                 = new DefaultStatisticalCategoryDataset<>();
             dataset.add(1.0, 2.0, "S1", "C1");
             dataset.add(3.0, 4.0, "S1", "C2");
-            CategoryPlot plot = new CategoryPlot(dataset,
+            CategoryPlot<String, String> plot = new CategoryPlot<>(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new StatisticalLineAndShapeRenderer());
             JFreeChart chart = new JFreeChart(plot);

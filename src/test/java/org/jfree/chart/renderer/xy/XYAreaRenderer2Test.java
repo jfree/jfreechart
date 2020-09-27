@@ -151,7 +151,7 @@ public class XYAreaRenderer2Test {
             s2.add(15.0, 9.5);
             s2.add(20.0, 3.5);
             dataset.addSeries(s2);
-            XYPlot plot = new XYPlot(dataset,
+            XYPlot<String> plot = new XYPlot<>(dataset,
                     new NumberAxis("X"), new NumberAxis("Y"),
                     new XYAreaRenderer2());
             JFreeChart chart = new JFreeChart(plot);
@@ -189,7 +189,7 @@ public class XYAreaRenderer2Test {
         d2.addSeries(s5);
 
         XYAreaRenderer2 r = new XYAreaRenderer2();
-        XYPlot plot = new XYPlot(d1, new NumberAxis("x"),
+        XYPlot<String> plot = new XYPlot<>(d1, new NumberAxis("x"),
                 new NumberAxis("y"), r);
         plot.setDataset(1, d2);
         /*JFreeChart chart =*/ new JFreeChart(plot);

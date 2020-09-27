@@ -114,7 +114,7 @@ public class YIntervalSeriesCollectionTest {
         YIntervalSeries<String> s1 = new YIntervalSeries<>("Series");
         s1.add(1.0, 1.1, 1.2, 1.3);
         c1.addSeries(s1);
-        YIntervalSeriesCollection c2 = TestUtils.serialised(c1);
+        YIntervalSeriesCollection<String> c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 

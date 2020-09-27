@@ -43,6 +43,7 @@ import static org.junit.Assert.fail;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import jdk.jfr.Unsigned;
 
 
 import org.jfree.chart.axis.ValueAxis;
@@ -109,7 +110,8 @@ public class XYLineChartTest {
 
         LocalListener l = new LocalListener();
         this.chart.addChangeListener(l);
-        XYPlot plot = (XYPlot) this.chart.getPlot();
+        @SuppressWarnings("unchecked")
+        XYPlot<String> plot = (XYPlot) this.chart.getPlot();
         plot.setDataset(dataset);
         assertEquals(true, l.flag);
         ValueAxis axis = plot.getRangeAxis();
@@ -127,7 +129,7 @@ public class XYLineChartTest {
      */
     @Test
     public void testSetSeriesToolTipGenerator() {
-        XYPlot plot = (XYPlot) this.chart.getPlot();
+        XYPlot<?> plot = (XYPlot) this.chart.getPlot();
         XYItemRenderer renderer = plot.getRenderer();
         StandardXYToolTipGenerator tt = new StandardXYToolTipGenerator();
         renderer.setSeriesToolTipGenerator(0, tt);
