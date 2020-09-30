@@ -43,8 +43,6 @@ import static org.junit.Assert.fail;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-import jdk.jfr.Unsigned;
-
 
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.event.ChartChangeEvent;
