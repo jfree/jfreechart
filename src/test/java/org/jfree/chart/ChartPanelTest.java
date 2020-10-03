@@ -36,6 +36,7 @@
 
 package org.jfree.chart;
 
+import java.awt.GraphicsEnvironment;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
@@ -52,6 +53,7 @@ import org.jfree.chart.event.ChartChangeListener;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.data.xy.DefaultXYDataset;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -60,6 +62,12 @@ import org.junit.Test;
 public class ChartPanelTest implements ChartChangeListener, ChartMouseListener {
 
     private final List<ChartChangeEvent> chartChangeEvents = new ArrayList<>();
+
+    @Before
+    public void beforeMethod() {
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        org.junit.Assume.assumeTrue(ge.isHeadlessInstance() == false);
+    }
 
     /**
      * Receives a chart change event and stores it in a list for later
