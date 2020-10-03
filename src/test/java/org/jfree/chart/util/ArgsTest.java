@@ -36,8 +36,8 @@
 
 package org.jfree.chart.util;
 
-import static org.junit.Assert.assertThrows;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link Args} class.

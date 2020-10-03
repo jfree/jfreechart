@@ -41,10 +41,10 @@
 package org.jfree.chart.block;
 
 import org.jfree.chart.ui.Size2D;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.jfree.data.Range;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link RectangleConstraint} class.

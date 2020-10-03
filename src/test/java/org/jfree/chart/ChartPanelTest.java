@@ -37,9 +37,9 @@
 package org.jfree.chart;
 
 import java.awt.GraphicsEnvironment;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.EventListener;
@@ -53,8 +53,8 @@ import org.jfree.chart.event.ChartChangeListener;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.data.xy.DefaultXYDataset;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link ChartPanel} class.
@@ -63,10 +63,10 @@ public class ChartPanelTest implements ChartChangeListener, ChartMouseListener {
 
     private final List<ChartChangeEvent> chartChangeEvents = new ArrayList<>();
 
-    @Before
-    public void beforeMethod() {
+    @BeforeEach
+    public void checkForHeadlessEnvironment() {
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        org.junit.Assume.assumeTrue(ge.isHeadlessInstance() == false);
+        org.junit.jupiter.api.Assumptions.assumeTrue(ge.isHeadlessInstance() == false);
     }
 
     /**

@@ -36,9 +36,9 @@
 
 package org.jfree.chart;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
@@ -55,8 +55,8 @@ import org.jfree.data.Range;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Some tests for an XY step area chart.
@@ -69,7 +69,7 @@ public class XYStepAreaChartTest {
     /**
      * Common test setup.
      */
-    @Before
+    @BeforeEach
     public void setUp() {
         this.chart = createChart();
     }
@@ -113,11 +113,10 @@ public class XYStepAreaChartTest {
         assertEquals(true, l.flag);
         ValueAxis axis = plot.getRangeAxis();
         Range range = axis.getRange();
-        assertTrue("Expecting the lower bound of the range to be around 10: "
-                   + range.getLowerBound(), range.getLowerBound() <= 10);
-        assertTrue("Expecting the upper bound of the range to be around 30: "
-                   + range.getUpperBound(), range.getUpperBound() >= 30);
-
+        assertTrue(range.getLowerBound() <= 10,
+                "Expecting the lower bound of the range to be around 10: " + range.getLowerBound());
+        assertTrue(range.getUpperBound() >= 30, 
+                "Expecting the upper bound of the range to be around 30: " + range.getUpperBound());
     }
 
     /**
