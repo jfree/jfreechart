@@ -369,9 +369,7 @@ public class TimePeriodValuesCollection extends AbstractIntervalXYDataset
         boolean interval = includeInterval;
         Range result = null;
         Range temp = null;
-        Iterator iterator = this.data.iterator();
-        while (iterator.hasNext()) {
-            TimePeriodValues series = (TimePeriodValues) iterator.next();
+        for (TimePeriodValues series : this.data) {
             int count = series.getItemCount();
             if (count > 0) {
                 TimePeriod start = series.getTimePeriod(

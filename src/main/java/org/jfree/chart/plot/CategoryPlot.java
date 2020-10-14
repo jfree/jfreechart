@@ -2258,18 +2258,14 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>> exte
     public void clearDomainMarkers() {
         if (this.backgroundDomainMarkers != null) {
             Set<Integer> keys = this.backgroundDomainMarkers.keySet();
-            Iterator<Integer> iterator = keys.iterator();
-            while (iterator.hasNext()) {
-                Integer key = iterator.next();
+            for (Integer key : keys) {
                 clearDomainMarkers(key);
             }
             this.backgroundDomainMarkers.clear();
         }
         if (this.foregroundDomainMarkers != null) {
             Set<Integer> keys = this.foregroundDomainMarkers.keySet();
-            Iterator<Integer> iterator = keys.iterator();
-            while (iterator.hasNext()) {
-                Integer key = iterator.next();
+            for (Integer key : keys) {
                 clearDomainMarkers(key);
             }
             this.foregroundDomainMarkers.clear();
@@ -2325,9 +2321,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>> exte
             Collection<Marker> markers
                 = this.backgroundDomainMarkers.get(key);
             if (markers != null) {
-                Iterator<Marker> iterator = markers.iterator();
-                while (iterator.hasNext()) {
-                    Marker m = iterator.next();
+                for (Marker m : markers) {
                     m.removeChangeListener(this);
                 }
                 markers.clear();
@@ -2337,9 +2331,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>> exte
             Collection<Marker> markers
                 = this.foregroundDomainMarkers.get(key);
             if (markers != null) {
-                Iterator<Marker> iterator = markers.iterator();
-                while (iterator.hasNext()) {
-                    Marker m = iterator.next();
+                for (Marker m : markers) {
                     m.removeChangeListener(this);
                 }
                 markers.clear();
@@ -2524,18 +2516,14 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>> exte
     public void clearRangeMarkers() {
         if (this.backgroundRangeMarkers != null) {
             Set<Integer> keys = this.backgroundRangeMarkers.keySet();
-            Iterator<Integer> iterator = keys.iterator();
-            while (iterator.hasNext()) {
-                Integer key = iterator.next();
+            for (Integer key : keys) {
                 clearRangeMarkers(key);
             }
             this.backgroundRangeMarkers.clear();
         }
         if (this.foregroundRangeMarkers != null) {
             Set<Integer> keys = this.foregroundRangeMarkers.keySet();
-            Iterator<Integer> iterator = keys.iterator();
-            while (iterator.hasNext()) {
-                Integer key = iterator.next();
+            for (Integer key : keys) {
                 clearRangeMarkers(key);
             }
             this.foregroundRangeMarkers.clear();
@@ -2593,9 +2581,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>> exte
             Collection<Marker> markers
                 = this.backgroundRangeMarkers.get(key);
             if (markers != null) {
-                Iterator<Marker> iterator = markers.iterator();
-                while (iterator.hasNext()) {
-                    Marker m = iterator.next();
+                for (Marker m : markers) {
                     m.removeChangeListener(this);
                 }
                 markers.clear();
@@ -2605,9 +2591,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>> exte
             Collection<Marker> markers
                 = this.foregroundRangeMarkers.get(key);
             if (markers != null) {
-                Iterator<Marker> iterator = markers.iterator();
-                while (iterator.hasNext()) {
-                    Marker m = iterator.next();
+                for (Marker m : markers) {
                     m.removeChangeListener(this);
                 }
                 markers.clear();
@@ -3896,9 +3880,8 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>> exte
         Collection<Marker> markers = getDomainMarkers(index, layer);
         CategoryAxis axis = getDomainAxisForDataset(index);
         if (markers != null && axis != null) {
-            Iterator<Marker> iterator = markers.iterator();
-            while (iterator.hasNext()) {
-                CategoryMarker marker = (CategoryMarker) iterator.next();
+            for (Marker value : markers) {
+                CategoryMarker marker = (CategoryMarker) value;
                 r.drawDomainMarker(g2, this, axis, marker, dataArea);
             }
         }

@@ -402,9 +402,7 @@ public class KeyedObjects2D<R extends Comparable<R>, C extends Comparable<C>>
             throw new UnknownKeyException("Column key (" + columnKey
                     + ") not recognised.");
         }
-        Iterator iterator = this.rows.iterator();
-        while (iterator.hasNext()) {
-            KeyedObjects rowData = (KeyedObjects) iterator.next();
+        for (KeyedObjects rowData : this.rows) {
             int i = rowData.getIndex(columnKey);
             if (i >= 0) {
                 rowData.removeValue(i);
@@ -502,9 +500,7 @@ public class KeyedObjects2D<R extends Comparable<R>, C extends Comparable<C>>
         clone.columnKeys = new java.util.ArrayList(this.columnKeys);
         clone.rowKeys = new java.util.ArrayList(this.rowKeys);
         clone.rows = new java.util.ArrayList(this.rows.size());
-        Iterator iterator = this.rows.iterator();
-        while (iterator.hasNext()) {
-            KeyedObjects row = (KeyedObjects) iterator.next();
+        for (KeyedObjects row : this.rows) {
             clone.rows.add(row.clone());
         }
         return clone;

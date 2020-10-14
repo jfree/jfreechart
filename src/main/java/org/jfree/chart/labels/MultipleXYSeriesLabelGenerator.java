@@ -173,9 +173,7 @@ public class MultipleXYSeriesLabelGenerator implements XYSeriesLabelGenerator,
                 = (MultipleXYSeriesLabelGenerator) super.clone();
         clone.seriesLabelLists = new HashMap();
         Set keys = this.seriesLabelLists.keySet();
-        Iterator iterator = keys.iterator();
-        while (iterator.hasNext()) {
-            Object key = iterator.next();
+        for (Object key : keys) {
             Object entry = this.seriesLabelLists.get(key);
             Object toAdd = entry;
             if (entry instanceof PublicCloneable) {

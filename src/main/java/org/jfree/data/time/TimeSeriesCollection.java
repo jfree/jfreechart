@@ -572,9 +572,8 @@ public class TimeSeriesCollection<S extends Comparable<S>>
     public Range getDomainBounds(List visibleSeriesKeys,
             boolean includeInterval) {
         Range result = null;
-        Iterator iterator = visibleSeriesKeys.iterator();
-        while (iterator.hasNext()) {
-            Comparable seriesKey = (Comparable) iterator.next();
+        for (Object visibleSeriesKey : visibleSeriesKeys) {
+            Comparable seriesKey = (Comparable) visibleSeriesKey;
             TimeSeries<S> series = getSeries((S) seriesKey);
             int count = series.getItemCount();
             if (count > 0) {
@@ -628,11 +627,10 @@ public class TimeSeriesCollection<S extends Comparable<S>>
     public Range getRangeBounds(List visibleSeriesKeys, Range xRange,
             boolean includeInterval) {
         Range result = null;
-        Iterator iterator = visibleSeriesKeys.iterator();
-        while (iterator.hasNext()) {
-            Comparable seriesKey = (Comparable) iterator.next();
+        for (Object visibleSeriesKey : visibleSeriesKeys) {
+            Comparable seriesKey = (Comparable) visibleSeriesKey;
             TimeSeries<S> series = getSeries((S) seriesKey);
-            Range r = series.findValueRange(xRange, this.xPosition, 
+            Range r = series.findValueRange(xRange, this.xPosition,
                     this.workingCalendar.getTimeZone());
             result = Range.combineIgnoringNaN(result, r);
         }

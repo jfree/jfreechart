@@ -760,9 +760,8 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
     @Override
     public LegendItemCollection getLegendItems() {
         LegendItemCollection result = new LegendItemCollection();
-        Iterator iterator = this.intervals.iterator();
-        while (iterator.hasNext()) {
-            MeterInterval mi = (MeterInterval) iterator.next();
+        for (Object interval : this.intervals) {
+            MeterInterval mi = (MeterInterval) interval;
             Paint color = mi.getBackgroundPaint();
             if (color == null) {
                 color = mi.getOutlinePaint();
@@ -852,9 +851,8 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
             drawArcForInterval(g2, meterArea, new MeterInterval("", this.range,
                     this.dialOutlinePaint, new BasicStroke(1.0f), null));
 
-            Iterator iterator = this.intervals.iterator();
-            while (iterator.hasNext()) {
-                MeterInterval interval = (MeterInterval) iterator.next();
+            for (Object o : this.intervals) {
+                MeterInterval interval = (MeterInterval) o;
                 drawArcForInterval(g2, meterArea, interval);
             }
 

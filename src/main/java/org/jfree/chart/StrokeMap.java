@@ -143,9 +143,7 @@ public class StrokeMap<K extends Comparable<K>> implements Cloneable, Serializab
             return false;
         }
         Set keys = this.store.keySet();
-        Iterator<K> iterator = keys.iterator();
-        while (iterator.hasNext()) {
-            K key = iterator.next();
+        for (K key : (Iterable<K>) keys) {
             Stroke s1 = getStroke(key);
             Stroke s2 = that.getStroke(key);
             if (!Objects.equals(s1, s2)) {

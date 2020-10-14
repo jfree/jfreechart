@@ -88,9 +88,7 @@ public abstract class BoxAndWhiskerCalculator {
         List vlist;
         if (stripNullAndNaNItems) {
             vlist = new ArrayList(values.size());
-            Iterator iterator = values.listIterator();
-            while (iterator.hasNext()) {
-                Object obj = iterator.next();
+            for (Object obj : values) {
                 if (obj instanceof Number) {
                     Number n = (Number) obj;
                     double v = n.doubleValue();
@@ -124,9 +122,8 @@ public abstract class BoxAndWhiskerCalculator {
         double maxOutlier = Double.NEGATIVE_INFINITY;
         List<Number> outliers = new ArrayList<>();
 
-        Iterator iterator = vlist.iterator();
-        while (iterator.hasNext()) {
-            Number number = (Number) iterator.next();
+        for (Object o : vlist) {
+            Number number = (Number) o;
             double value = number.doubleValue();
             if (value > upperOutlierThreshold) {
                 outliers.add(number);

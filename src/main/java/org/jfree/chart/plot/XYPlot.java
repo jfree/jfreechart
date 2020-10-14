@@ -4232,9 +4232,8 @@ public class XYPlot<S extends Comparable<S>> extends Plot
             }
         }
 
-        Iterator<XYAnnotation> it = includedAnnotations.iterator();
-        while (it.hasNext()) {
-            XYAnnotationBoundsInfo xyabi = (XYAnnotationBoundsInfo) it.next();
+        for (XYAnnotation includedAnnotation : includedAnnotations) {
+            XYAnnotationBoundsInfo xyabi = (XYAnnotationBoundsInfo) includedAnnotation;
             if (xyabi.getIncludeInDataBounds()) {
                 if (isDomainAxis) {
                     result = Range.combine(result, xyabi.getXRange());

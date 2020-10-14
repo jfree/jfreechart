@@ -140,9 +140,8 @@ public class CategorySeriesHandler extends DefaultHandler
         if (this.root instanceof CategoryDatasetHandler) {
             CategoryDatasetHandler handler = (CategoryDatasetHandler) this.root;
 
-            Iterator iterator = this.values.getKeys().iterator();
-            while (iterator.hasNext()) {
-                Comparable key = (Comparable) iterator.next();
+            for (Object o : this.values.getKeys()) {
+                Comparable key = (Comparable) o;
                 Number value = this.values.getValue(key);
                 handler.addItem(this.seriesKey, key, value);
             }

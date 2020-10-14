@@ -1449,9 +1449,8 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
             return 0.0;
         }
         double result = 0.0;
-        Iterator iterator = this.dataset.getKeys().iterator();
-        while (iterator.hasNext()) {
-            Comparable key = (Comparable) iterator.next();
+        for (Object o : this.dataset.getKeys()) {
+            Comparable key = (Comparable) o;
             Number explode = (Number) this.explodePercentages.get(key);
             if (explode != null) {
                 result = Math.max(result, explode.doubleValue());
@@ -2514,9 +2513,8 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
         Rectangle2D labelsArea = this.simpleLabelOffset.createInsetRectangle(
                 pieArea);
         double runningTotal = 0.0;
-        Iterator iterator = keys.iterator();
-        while (iterator.hasNext()) {
-            Comparable key = (Comparable) iterator.next();
+        for (Object o : keys) {
+            Comparable key = (Comparable) o;
             boolean include;
             double v = 0.0;
             Number n = getDataset().getValue(key);
@@ -2609,9 +2607,8 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
         DefaultKeyedValues rightKeys = new DefaultKeyedValues();
 
         double runningTotal = 0.0;
-        Iterator iterator = keys.iterator();
-        while (iterator.hasNext()) {
-            Comparable key = (Comparable) iterator.next();
+        for (Object o : keys) {
+            Comparable key = (Comparable) o;
             boolean include;
             double v = 0.0;
             Number n = this.dataset.getValue(key);
@@ -2793,9 +2790,8 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
         List keys = this.dataset.getKeys();
         int section = 0;
         Shape shape = getLegendItemShape();
-        Iterator iterator = keys.iterator();
-        while (iterator.hasNext()) {
-            Comparable key = (Comparable) iterator.next();
+        for (Object o : keys) {
+            Comparable key = (Comparable) o;
             Number n = this.dataset.getValue(key);
             boolean include;
             if (n == null) {
