@@ -140,9 +140,7 @@ public class TextBlock implements Serializable {
     public Size2D calculateDimensions(Graphics2D g2) {
         double width = 0.0;
         double height = 0.0;
-        Iterator<TextLine> iterator = this.lines.iterator();
-        while (iterator.hasNext()) {
-            final TextLine line = iterator.next();
+        for (TextLine line : this.lines) {
             final Size2D dimension = line.calculateDimensions(g2);
             width = Math.max(width, dimension.getWidth());
             height = height + dimension.getHeight();

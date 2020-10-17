@@ -142,11 +142,9 @@ public class TextLine implements Serializable {
         }
         float x = anchorX + xAdj;
         final float yOffset = calculateBaselineOffset(g2, anchor);
-        final Iterator<TextFragment> iterator = this.fragments.iterator();
-        while (iterator.hasNext()) {
-            final TextFragment fragment = iterator.next();
+        for (TextFragment fragment : this.fragments) {
             final Size2D d = fragment.calculateDimensions(g2);
-            fragment.draw(g2, x, anchorY + yOffset, TextAnchor.BASELINE_LEFT, 
+            fragment.draw(g2, x, anchorY + yOffset, TextAnchor.BASELINE_LEFT,
                     rotateX, rotateY, angle);
             x = x + (float) d.getWidth();
         }
@@ -163,9 +161,7 @@ public class TextLine implements Serializable {
     public Size2D calculateDimensions(Graphics2D g2) {
         double width = 0.0;
         double height = 0.0;
-        final Iterator<TextFragment> iterator = this.fragments.iterator();
-        while (iterator.hasNext()) {
-            final TextFragment fragment = iterator.next();
+        for (TextFragment fragment : this.fragments) {
             final Size2D dimension = fragment.calculateDimensions(g2);
             width = width + dimension.getWidth();
             height = Math.max(height, dimension.getHeight());
@@ -211,10 +207,8 @@ public class TextLine implements Serializable {
      */
     private float calculateBaselineOffset(Graphics2D g2, TextAnchor anchor) {
         float result = 0.0f;
-        Iterator<TextFragment> iterator = this.fragments.iterator();
-        while (iterator.hasNext()) {
-            TextFragment fragment = iterator.next();
-            result = Math.max(result, 
+        for (TextFragment fragment : this.fragments) {
+            result = Math.max(result,
                     fragment.calculateBaselineOffset(g2, anchor));
         }
         return result;

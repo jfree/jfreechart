@@ -146,9 +146,7 @@ public class PaintMap<K extends Comparable<K>> implements Cloneable, Serializabl
             return false;
         }
         Set keys = this.store.keySet();
-        Iterator<K> iterator = keys.iterator();
-        while (iterator.hasNext()) {
-            K key = iterator.next();
+        for (K key : (Iterable<K>) keys) {
             Paint p1 = getPaint(key);
             Paint p2 = that.getPaint(key);
             if (!PaintUtils.equal(p1, p2)) {
@@ -193,9 +191,7 @@ public class PaintMap<K extends Comparable<K>> implements Cloneable, Serializabl
         stream.defaultWriteObject();
         stream.writeInt(this.store.size());
         Set keys = this.store.keySet();
-        Iterator<K> iterator = keys.iterator();
-        while (iterator.hasNext()) {
-            K key = iterator.next();
+        for (K key : (Iterable<K>) keys) {
             stream.writeObject(key);
             Paint paint = getPaint(key);
             SerialUtils.writePaint(paint, stream);

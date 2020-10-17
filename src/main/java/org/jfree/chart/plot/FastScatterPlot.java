@@ -628,9 +628,8 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
         Object saved = g2.getRenderingHint(RenderingHints.KEY_STROKE_CONTROL);
         g2.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, 
                 RenderingHints.VALUE_STROKE_NORMALIZE);
-        Iterator iterator = ticks.iterator();
-        while (iterator.hasNext()) {
-            ValueTick tick = (ValueTick) iterator.next();
+        for (Object o : ticks) {
+            ValueTick tick = (ValueTick) o;
             double v = this.domainAxis.valueToJava2D(tick.getValue(),
                     dataArea, RectangleEdge.BOTTOM);
             Line2D line = new Line2D.Double(v, dataArea.getMinY(), v,
@@ -659,9 +658,8 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
         g2.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, 
                 RenderingHints.VALUE_STROKE_NORMALIZE);
 
-        Iterator iterator = ticks.iterator();
-        while (iterator.hasNext()) {
-            ValueTick tick = (ValueTick) iterator.next();
+        for (Object o : ticks) {
+            ValueTick tick = (ValueTick) o;
             double v = this.rangeAxis.valueToJava2D(tick.getValue(),
                     dataArea, RectangleEdge.LEFT);
             Line2D line = new Line2D.Double(dataArea.getMinX(), v,

@@ -567,9 +567,8 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
             return result;
         }
         int section = 0;
-        Iterator iterator = keys.iterator();
-        while (iterator.hasNext()) {
-            Comparable key = (Comparable) iterator.next();
+        for (Object o : keys) {
+            Comparable key = (Comparable) o;
             String label = key.toString();  // TODO: use a generator here
             String description = label;
             Paint paint = (Paint) this.sectionPaints.get(key);

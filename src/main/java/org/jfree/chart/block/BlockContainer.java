@@ -204,9 +204,7 @@ public class BlockContainer extends AbstractBlock
         drawBorder(g2, contentArea);
         contentArea = trimBorder(contentArea);
         contentArea = trimPadding(contentArea);
-        Iterator<Block> iterator = this.blocks.iterator();
-        while (iterator.hasNext()) {
-            Block block = iterator.next();
+        for (Block block : this.blocks) {
             Rectangle2D bounds = block.getBounds();
             Rectangle2D drawArea = new Rectangle2D.Double(bounds.getX()
                     + area.getX(), bounds.getY() + area.getY(),

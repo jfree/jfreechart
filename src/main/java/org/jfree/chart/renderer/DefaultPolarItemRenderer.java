@@ -590,11 +590,10 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
             centerValue = axis.getLowerBound();
         }
         Point center = plot.translateToJava2D(0, centerValue, axis, dataArea);
-        Iterator iterator = ticks.iterator();
-        while (iterator.hasNext()) {
-            NumberTick tick = (NumberTick) iterator.next();
+        for (Object o : ticks) {
+            NumberTick tick = (NumberTick) o;
             double tickVal = tick.getNumber().doubleValue();
-            Point p = plot.translateToJava2D(tickVal, outerValue, axis, 
+            Point p = plot.translateToJava2D(tickVal, outerValue, axis,
                     dataArea);
             g2.setPaint(plot.getAngleGridlinePaint());
             g2.drawLine(center.x, center.y, p.x, p.y);
@@ -634,10 +633,9 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
         }
         Point center = plot.translateToJava2D(0, centerValue, radialAxis, dataArea);
 
-        Iterator iterator = ticks.iterator();
-        while (iterator.hasNext()) {
-            NumberTick tick = (NumberTick) iterator.next();
-            double angleDegrees = plot.isCounterClockwise() 
+        for (Object o : ticks) {
+            NumberTick tick = (NumberTick) o;
+            double angleDegrees = plot.isCounterClockwise()
                     ? plot.getAngleOffset() : -plot.getAngleOffset();
             Point p = plot.translateToJava2D(angleDegrees,
                     tick.getNumber().doubleValue(), radialAxis, dataArea);

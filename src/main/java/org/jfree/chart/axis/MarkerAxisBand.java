@@ -186,29 +186,28 @@ public class MarkerAxisBand implements Serializable {
                      double x, double y) {
 
         double h = getHeight(g2);
-        Iterator iterator = this.markers.iterator();
-        while (iterator.hasNext()) {
-            IntervalMarker marker = (IntervalMarker) iterator.next();
-            double start =  Math.max(
-                marker.getStartValue(), this.axis.getRange().getLowerBound()
+        for (Object o : this.markers) {
+            IntervalMarker marker = (IntervalMarker) o;
+            double start = Math.max(
+                    marker.getStartValue(), this.axis.getRange().getLowerBound()
             );
             double end = Math.min(
-                marker.getEndValue(), this.axis.getRange().getUpperBound()
+                    marker.getEndValue(), this.axis.getRange().getUpperBound()
             );
             double s = this.axis.valueToJava2D(
-                start, dataArea, RectangleEdge.BOTTOM
+                    start, dataArea, RectangleEdge.BOTTOM
             );
             double e = this.axis.valueToJava2D(
-                end, dataArea, RectangleEdge.BOTTOM
+                    end, dataArea, RectangleEdge.BOTTOM
             );
             Rectangle2D r = new Rectangle2D.Double(
-                s, y + this.topOuterGap, e - s,
-                h - this.topOuterGap - this.bottomOuterGap
+                    s, y + this.topOuterGap, e - s,
+                    h - this.topOuterGap - this.bottomOuterGap
             );
 
             Composite originalComposite = g2.getComposite();
             g2.setComposite(AlphaComposite.getInstance(
-                AlphaComposite.SRC_OVER, marker.getAlpha())
+                    AlphaComposite.SRC_OVER, marker.getAlpha())
             );
             g2.setPaint(marker.getPaint());
             g2.fill(r);

@@ -261,9 +261,8 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
         else {
             // if the source point doesn't fall within a subplot, we do the
             // zoom on all subplots...
-            Iterator iterator = getSubplots().iterator();
-            while (iterator.hasNext()) {
-                subplot = (CategoryPlot) iterator.next();
+            for (CategoryPlot categoryPlot : getSubplots()) {
+                subplot = categoryPlot;
                 subplot.zoomRangeAxes(factor, info, source, useAnchor);
             }
         }
@@ -288,9 +287,8 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
         else {
             // if the source point doesn't fall within a subplot, we do the
             // zoom on all subplots...
-            Iterator iterator = getSubplots().iterator();
-            while (iterator.hasNext()) {
-                subplot = (CategoryPlot) iterator.next();
+            for (CategoryPlot categoryPlot : getSubplots()) {
+                subplot = categoryPlot;
                 subplot.zoomRangeAxes(lowerPercent, upperPercent, info, source);
             }
         }
@@ -463,9 +461,7 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
      * @param space  the space ({@code null} permitted).
      */
     protected void setFixedRangeAxisSpaceForSubplots(AxisSpace space) {
-        Iterator iterator = this.subplots.iterator();
-        while (iterator.hasNext()) {
-            CategoryPlot plot = (CategoryPlot) iterator.next();
+        for (CategoryPlot plot : this.subplots) {
             plot.setFixedRangeAxisSpace(space, false);
         }
     }
@@ -478,9 +474,7 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
     @Override
     public void setOrientation(PlotOrientation orientation) {
         super.setOrientation(orientation);
-        Iterator iterator = this.subplots.iterator();
-        while (iterator.hasNext()) {
-            CategoryPlot plot = (CategoryPlot) iterator.next();
+        for (CategoryPlot plot : this.subplots) {
             plot.setOrientation(orientation);
         }
 
@@ -496,9 +490,7 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
     public void setShadowGenerator(ShadowGenerator generator) {
         setNotify(false);
         super.setShadowGenerator(generator);
-        Iterator iterator = this.subplots.iterator();
-        while (iterator.hasNext()) {
-            CategoryPlot plot = (CategoryPlot) iterator.next();
+        for (CategoryPlot plot : this.subplots) {
             plot.setShadowGenerator(generator);
         }
         setNotify(true);
@@ -535,9 +527,7 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
         if (result == null) {
             result = new LegendItemCollection();
             if (this.subplots != null) {
-                Iterator iterator = this.subplots.iterator();
-                while (iterator.hasNext()) {
-                    CategoryPlot plot = (CategoryPlot) iterator.next();
+                for (CategoryPlot plot : this.subplots) {
                     LegendItemCollection more = plot.getLegendItems();
                     result.addAll(more);
                 }
@@ -556,13 +546,10 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
     public List getCategories() {
         List result = new java.util.ArrayList();
         if (this.subplots != null) {
-            Iterator iterator = this.subplots.iterator();
-            while (iterator.hasNext()) {
-                CategoryPlot plot = (CategoryPlot) iterator.next();
+            for (CategoryPlot plot : this.subplots) {
                 List more = plot.getCategories();
-                Iterator moreIterator = more.iterator();
-                while (moreIterator.hasNext()) {
-                    Comparable category = (Comparable) moreIterator.next();
+                for (Object o : more) {
+                    Comparable category = (Comparable) o;
                     if (!result.contains(category)) {
                         result.add(category);
                     }

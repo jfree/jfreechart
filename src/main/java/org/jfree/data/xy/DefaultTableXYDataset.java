@@ -161,9 +161,8 @@ public class DefaultTableXYDataset<S extends Comparable<S>>
                 }
             }
         }
-        Iterator iterator = this.xPoints.iterator();
-        while (iterator.hasNext()) {
-            Number xPoint = (Number) iterator.next();
+        for (Object point : this.xPoints) {
+            Number xPoint = (Number) point;
             if (!seriesXPoints.contains(xPoint)) {
                 series.add(xPoint, null);
             }
@@ -430,9 +429,8 @@ public class DefaultTableXYDataset<S extends Comparable<S>>
      */
     public void prune() {
         HashSet hs = (HashSet) this.xPoints.clone();
-        Iterator iterator = hs.iterator();
-        while (iterator.hasNext()) {
-            Number x = (Number) iterator.next();
+        for (Object h : hs) {
+            Number x = (Number) h;
             if (canPrune(x)) {
                 removeAllValuesForX(x);
             }

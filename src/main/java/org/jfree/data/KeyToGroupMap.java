@@ -300,9 +300,8 @@ public class KeyToGroupMap<K extends Comparable<K>, G extends Comparable<G>>
         if (list != null) {
             try {
                 List clone = (List) list.getClass().newInstance();
-                Iterator iterator = list.iterator();
-                while (iterator.hasNext()) {
-                    clone.add(KeyToGroupMap.clone(iterator.next()));
+                for (Object o : list) {
+                    clone.add(KeyToGroupMap.clone(o));
                 }
                 result = clone;
             }

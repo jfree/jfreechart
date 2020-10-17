@@ -151,9 +151,8 @@ public class GridArrangement implements Arrangement, Serializable {
         double maxW = 0.0;
         double maxH = 0.0;
         List blocks = container.getBlocks();
-        Iterator iterator = blocks.iterator();
-        while (iterator.hasNext()) {
-            Block b = (Block) iterator.next();
+        for (Object block : blocks) {
+            Block b = (Block) block;
             if (b != null) {
                 Size2D s = b.arrange(g2, RectangleConstraint.NONE);
                 maxW = Math.max(maxW, s.width);

@@ -1276,9 +1276,7 @@ public class TimeSeries<S extends Comparable<S>> extends Series<S>
     private void updateMinMaxYByIteration() {
         this.minY = Double.NaN;
         this.maxY = Double.NaN;
-        Iterator iterator = this.data.iterator();
-        while (iterator.hasNext()) {
-            TimeSeriesDataItem item = (TimeSeriesDataItem) iterator.next();
+        for (TimeSeriesDataItem item : this.data) {
             updateBoundsForAddedItem(item);
         }
     }

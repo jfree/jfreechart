@@ -99,9 +99,8 @@ public class JSONUtils {
         Args.nullNotPermitted(writer, "writer");
         writer.write("[");
         boolean first = true;
-        Iterator iterator = data.getKeys().iterator();
-        while (iterator.hasNext()) {
-            Comparable key = (Comparable) iterator.next();
+        for (Object o : data.getKeys()) {
+            Comparable key = (Comparable) o;
             if (!first) {
                 writer.write(", ");
             } else {

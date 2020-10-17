@@ -251,9 +251,7 @@ public class TaskSeriesCollection<R extends Comparable<R>, C extends Comparable<
         series.addChangeListener(this);
 
         // look for any keys that we don't already know about...
-        Iterator iterator = series.getTasks().iterator();
-        while (iterator.hasNext()) {
-            Task task = (Task) iterator.next();
+        for (Task task : series.getTasks()) {
             C key = (C) task.getDescription(); // FIXME
             int index = this.keys.indexOf(key);
             if (index < 0) {
@@ -630,9 +628,7 @@ public class TaskSeriesCollection<R extends Comparable<R>, C extends Comparable<
         for (int i = 0; i < getSeriesCount(); i++) {
             TaskSeries<R> series = this.data.get(i);
             // look for any keys that we don't already know about...
-            Iterator iterator = series.getTasks().iterator();
-            while (iterator.hasNext()) {
-                Task task = (Task) iterator.next();
+            for (Task task : series.getTasks()) {
                 C key = (C) task.getDescription(); // FIXME
                 int index = this.keys.indexOf(key);
                 if (index < 0) {

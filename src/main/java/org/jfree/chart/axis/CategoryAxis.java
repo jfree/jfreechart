@@ -956,9 +956,8 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
         List ticks = refreshTicks(g2, state, plotArea, edge);
         state.setTicks(ticks);
         int categoryIndex = 0;
-        Iterator iterator = ticks.iterator();
-        while (iterator.hasNext()) {
-            CategoryTick tick = (CategoryTick) iterator.next();
+        for (Object o : ticks) {
+            CategoryTick tick = (CategoryTick) o;
             g2.setFont(getTickLabelFont(tick.getCategory()));
             g2.setPaint(getTickLabelPaint(tick.getCategory()));
 
@@ -1092,16 +1091,14 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
                 }
             }
             int categoryIndex = 0;
-            Iterator iterator = categories.iterator();
-            while (iterator.hasNext()) {
-                Comparable category = (Comparable) iterator.next();
+            for (Object o : categories) {
+                Comparable category = (Comparable) o;
                 g2.setFont(getTickLabelFont(category));
                 TextBlock label = createLabel(category, l * r, edge, g2);
                 if (edge == RectangleEdge.TOP || edge == RectangleEdge.BOTTOM) {
                     max = Math.max(max, calculateTextBlockHeight(label,
                             position, g2));
-                }
-                else if (edge == RectangleEdge.LEFT
+                } else if (edge == RectangleEdge.LEFT
                         || edge == RectangleEdge.RIGHT) {
                     max = Math.max(max, calculateTextBlockWidth(label,
                             position, g2));
@@ -1147,9 +1144,8 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
         g2.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, 
                 RenderingHints.VALUE_STROKE_NORMALIZE);
         if (edge.equals(RectangleEdge.TOP)) {
-            Iterator iterator = categories.iterator();
-            while (iterator.hasNext()) {
-                Comparable key = (Comparable) iterator.next();
+            for (Object category : categories) {
+                Comparable key = (Comparable) category;
                 double x = getCategoryMiddle(key, categories, dataArea, edge);
                 line.setLine(x, cursor, x, cursor + il);
                 g2.draw(line);
@@ -1158,9 +1154,8 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
             }
             state.cursorUp(ol);
         } else if (edge.equals(RectangleEdge.BOTTOM)) {
-            Iterator iterator = categories.iterator();
-            while (iterator.hasNext()) {
-                Comparable key = (Comparable) iterator.next();
+            for (Object category : categories) {
+                Comparable key = (Comparable) category;
                 double x = getCategoryMiddle(key, categories, dataArea, edge);
                 line.setLine(x, cursor, x, cursor - il);
                 g2.draw(line);
@@ -1169,9 +1164,8 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
             }
             state.cursorDown(ol);
         } else if (edge.equals(RectangleEdge.LEFT)) {
-            Iterator iterator = categories.iterator();
-            while (iterator.hasNext()) {
-                Comparable key = (Comparable) iterator.next();
+            for (Object category : categories) {
+                Comparable key = (Comparable) category;
                 double y = getCategoryMiddle(key, categories, dataArea, edge);
                 line.setLine(cursor, y, cursor + il, y);
                 g2.draw(line);
@@ -1180,9 +1174,8 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
             }
             state.cursorLeft(ol);
         } else if (edge.equals(RectangleEdge.RIGHT)) {
-            Iterator iterator = categories.iterator();
-            while (iterator.hasNext()) {
-                Comparable key = (Comparable) iterator.next();
+            for (Object category : categories) {
+                Comparable key = (Comparable) category;
                 double y = getCategoryMiddle(key, categories, dataArea, edge);
                 line.setLine(cursor, y, cursor - il, y);
                 g2.draw(line);
@@ -1414,9 +1407,8 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
             Set keys = map.keySet();
             int count = keys.size();
             out.writeInt(count);
-            Iterator iterator = keys.iterator();
-            while (iterator.hasNext()) {
-                Comparable key = (Comparable) iterator.next();
+            for (Object o : keys) {
+                Comparable key = (Comparable) o;
                 out.writeObject(key);
                 SerialUtils.writePaint((Paint) map.get(key), out);
             }
@@ -1437,9 +1429,8 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
             return false;
         }
         Set entries = map1.entrySet();
-        Iterator iterator = entries.iterator();
-        while (iterator.hasNext()) {
-            Map.Entry entry = (Map.Entry) iterator.next();
+        for (Object o : entries) {
+            Map.Entry entry = (Map.Entry) o;
             Paint p1 = (Paint) entry.getValue();
             Paint p2 = (Paint) map2.get(entry.getKey());
             if (!PaintUtils.equal(p1, p2)) {

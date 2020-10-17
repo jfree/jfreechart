@@ -678,9 +678,8 @@ public abstract class ValueAxis extends Axis
         Object saved = g2.getRenderingHint(RenderingHints.KEY_STROKE_CONTROL);
         g2.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, 
                 RenderingHints.VALUE_STROKE_NORMALIZE);
-        Iterator iterator = ticks.iterator();
-        while (iterator.hasNext()) {
-            ValueTick tick = (ValueTick) iterator.next();
+        for (Object o : ticks) {
+            ValueTick tick = (ValueTick) o;
             if (isTickLabelsVisible()) {
                 g2.setPaint(getTickLabelPaint());
                 float[] anchorPoint = calculateAnchorPoint(tick, cursor,
@@ -690,17 +689,17 @@ public abstract class ValueAxis extends Axis
                     if (lt.getAttributedLabel() == null) {
                         continue;
                     }
-                    AttrStringUtils.drawRotatedString(lt.getAttributedLabel(), 
-                            g2, anchorPoint[0], anchorPoint[1], 
-                            tick.getTextAnchor(), tick.getAngle(), 
+                    AttrStringUtils.drawRotatedString(lt.getAttributedLabel(),
+                            g2, anchorPoint[0], anchorPoint[1],
+                            tick.getTextAnchor(), tick.getAngle(),
                             tick.getRotationAnchor());
                 } else {
                     if (tick.getText() == null) {
                         continue;
                     }
                     TextUtils.drawRotatedString(tick.getText(), g2,
-                            anchorPoint[0], anchorPoint[1], 
-                            tick.getTextAnchor(), tick.getAngle(), 
+                            anchorPoint[0], anchorPoint[1],
+                            tick.getTextAnchor(), tick.getAngle(),
                             tick.getRotationAnchor());
                 }
             }
@@ -709,11 +708,11 @@ public abstract class ValueAxis extends Axis
                     TickType.MAJOR)) || (isMinorTickMarksVisible()
                     && tick.getTickType().equals(TickType.MINOR))) {
 
-                double ol = (tick.getTickType().equals(TickType.MINOR)) 
+                double ol = (tick.getTickType().equals(TickType.MINOR))
                         ? getMinorTickMarkOutsideLength()
                         : getTickMarkOutsideLength();
 
-                double il = (tick.getTickType().equals(TickType.MINOR)) 
+                double il = (tick.getTickType().equals(TickType.MINOR))
                         ? getMinorTickMarkInsideLength()
                         : getTickMarkInsideLength();
 
@@ -849,9 +848,8 @@ public abstract class ValueAxis extends Axis
         double maxHeight = 0.0;
         if (vertical) {
             FontMetrics fm = g2.getFontMetrics(font);
-            Iterator iterator = ticks.iterator();
-            while (iterator.hasNext()) {
-                Tick tick = (Tick) iterator.next();
+            for (Object o : ticks) {
+                Tick tick = (Tick) o;
                 Rectangle2D labelBounds = null;
                 if (tick instanceof LogTick) {
                     LogTick lt = (LogTick) tick;
@@ -863,10 +861,10 @@ public abstract class ValueAxis extends Axis
                     labelBounds = TextUtils.getTextBounds(
                             tick.getText(), g2, fm);
                 }
-                if (labelBounds != null && labelBounds.getWidth() 
+                if (labelBounds != null && labelBounds.getWidth()
                         + insets.getTop() + insets.getBottom() > maxHeight) {
                     maxHeight = labelBounds.getWidth()
-                                + insets.getTop() + insets.getBottom();
+                            + insets.getTop() + insets.getBottom();
                 }
             }
         } else {
@@ -898,9 +896,8 @@ public abstract class ValueAxis extends Axis
         double maxWidth = 0.0;
         if (!vertical) {
             FontMetrics fm = g2.getFontMetrics(font);
-            Iterator iterator = ticks.iterator();
-            while (iterator.hasNext()) {
-                Tick tick = (Tick) iterator.next();
+            for (Object o : ticks) {
+                Tick tick = (Tick) o;
                 Rectangle2D labelBounds = null;
                 if (tick instanceof LogTick) {
                     LogTick lt = (LogTick) tick;
@@ -909,14 +906,14 @@ public abstract class ValueAxis extends Axis
                                 lt.getAttributedLabel(), g2);
                     }
                 } else if (tick.getText() != null) {
-                    labelBounds = TextUtils.getTextBounds(tick.getText(), 
+                    labelBounds = TextUtils.getTextBounds(tick.getText(),
                             g2, fm);
                 }
-                if (labelBounds != null 
+                if (labelBounds != null
                         && labelBounds.getWidth() + insets.getLeft()
                         + insets.getRight() > maxWidth) {
                     maxWidth = labelBounds.getWidth()
-                               + insets.getLeft() + insets.getRight();
+                            + insets.getLeft() + insets.getRight();
                 }
             }
         } else {
