@@ -27,10 +27,10 @@
  * --------------------------
  * DeviationStepRendererTest.java
  * --------------------------
- * (C) Copyright 2007-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2020, by Object Refinery Limited and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
+ * Original Author:  https://github.com/phl;
+ * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
  */
 
@@ -38,9 +38,11 @@ package org.jfree.chart.renderer.xy;
 
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Tests for the {@link DeviationStepRenderer} class.
