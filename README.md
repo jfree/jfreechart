@@ -49,6 +49,7 @@ History
 -------
 
 ##### Version 1.5.1 (not yet released)
+- fix for LayeredBarRenderer (bug #169);
 - migrated to JUnit 5.
 
 ##### Version 1.5.0 (5 November 2017)
