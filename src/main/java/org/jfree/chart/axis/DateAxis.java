@@ -27,7 +27,7 @@
  * -------------
  * DateAxis.java
  * -------------
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Jonathan Nash;

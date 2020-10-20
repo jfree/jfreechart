@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * Statistics.java
  * ---------------
- * (C) Copyright 2000-2016, by Matthew Wright and Contributors.
+ * (C) Copyright 2000-2020, by Matthew Wright and Contributors.
  *
  * Original Author:  Matthew Wright;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
