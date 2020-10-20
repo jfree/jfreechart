@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------------
  * TimeSeriesCollectionTest.java
  * -----------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited.
+ * (C) Copyright 2003-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -44,10 +44,10 @@
 
 package org.jfree.data.time;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -61,7 +61,7 @@ import org.jfree.chart.TestUtils;
 
 import org.jfree.data.Range;
 import org.jfree.data.general.DatasetUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * A collection of test cases for the {@link TimeSeriesCollection} class.
@@ -81,29 +81,29 @@ public class TimeSeriesCollectionTest {
 
         // newly created collections should be equal
         boolean b1 = c1.equals(c2);
-        assertTrue("b1", b1);
+        assertTrue(b1, "b1");
 
         // add series to collection 1, should be not equal
         c1.addSeries(s1);
         c1.addSeries(s2);
         boolean b2 = c1.equals(c2);
-        assertFalse("b2", b2);
+        assertFalse(b2, "b2");
 
         // now add the same series to collection 2 to make them equal again...
         c2.addSeries(s1);
         c2.addSeries(s2);
         boolean b3 = c1.equals(c2);
-        assertTrue("b3", b3);
+        assertTrue(b3, "b3");
 
         // now remove series 2 from collection 2
         c2.removeSeries(s2);
         boolean b4 = c1.equals(c2);
-        assertFalse("b4", b4);
+        assertFalse(b4, "b4");
 
         // now remove series 2 from collection 1 to make them equal again
         c1.removeSeries(s2);
         boolean b5 = c1.equals(c2);
-        assertTrue("b5", b5);
+        assertTrue(b5, "b5");
     }
 
     /**

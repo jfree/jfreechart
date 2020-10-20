@@ -1,7 +1,7 @@
 JFreeChart
 ==========
 
-Version 1.5.0, 5 November 2017.
+Version 1.5.1, not yet released.
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.jfree/jfreechart/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.jfree/jfreechart)
 
@@ -47,6 +47,9 @@ at GitHub:
 
 History
 -------
+
+##### Version 1.5.1 (not yet released)
+- migrated to JUnit 5.
 
 ##### Version 1.5.0 (5 November 2017)
 - all JavaFX classes moved to a separate project;

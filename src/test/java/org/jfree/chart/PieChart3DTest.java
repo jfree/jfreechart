@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * PieChart3DTest.java
  * -------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited.
+ * (C) Copyright 2004-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -49,10 +49,11 @@ import org.jfree.chart.event.ChartChangeListener;
 import org.jfree.chart.plot.PiePlot;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
-import org.junit.Before;
-import org.junit.Test;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 /**
  * Tests for a pie chart with a 3D effect.
  */
@@ -64,7 +65,7 @@ public class PieChart3DTest  {
     /**
      * Common test setup.
      */
-    @Before
+    @BeforeEach
     public void setUp() {
         // create a dataset...
         DefaultPieDataset dataset = new DefaultPieDataset();

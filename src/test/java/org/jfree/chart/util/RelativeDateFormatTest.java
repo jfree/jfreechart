@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * RelativeDateFormatTest.java
  * ---------------------------
- * (C) Copyright 2006-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -47,12 +47,12 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Date;
 import java.util.Locale;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertEquals;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Tests for the {@link RelativeDateFormat} class.
@@ -64,7 +64,7 @@ public class RelativeDateFormatTest {
     /**
      * Set a known locale for the tests.
      */
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         this.savedLocale = Locale.getDefault();
         Locale.setDefault(Locale.UK);
@@ -73,7 +73,7 @@ public class RelativeDateFormatTest {
     /**
      * Restore the default locale after the tests complete.
      */
-    @After
+    @AfterEach
     public void tearDown() throws Exception {
         Locale.setDefault(this.savedLocale);
     }

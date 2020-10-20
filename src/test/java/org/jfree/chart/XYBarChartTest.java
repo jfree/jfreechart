@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * XYBarChartTest.java
  * -------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited.
+ * (C) Copyright 2005-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -40,9 +40,9 @@
 
 package org.jfree.chart;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
@@ -61,8 +61,8 @@ import org.jfree.data.xy.XYBarDataset;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Some tests for an XY bar chart.
@@ -75,7 +75,7 @@ public class XYBarChartTest {
     /**
      * Common test setup.
      */
-    @Before
+    @BeforeEach
     public void setUp() {
         this.chart = createChart();
     }
@@ -120,10 +120,12 @@ public class XYBarChartTest {
         assertEquals(true, l.flag);
         ValueAxis axis = plot.getRangeAxis();
         Range range = axis.getRange();
-        assertTrue("Expecting the lower bound of the range to be around 10: "
-                   + range.getLowerBound(), range.getLowerBound() <= 10);
-        assertTrue("Expecting the upper bound of the range to be around 30: "
-                   + range.getUpperBound(), range.getUpperBound() >= 30);
+        assertTrue(range.getLowerBound() <= 10, 
+                "Expecting the lower bound of the range to be around 10: "
+                + range.getLowerBound());
+        assertTrue(range.getUpperBound() >= 30,
+                "Expecting the upper bound of the range to be around 30: "
+                + range.getUpperBound());
 
     }
 
