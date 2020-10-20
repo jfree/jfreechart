@@ -10,7 +10,7 @@
 
     <artifactId>jfreechart</artifactId>
     <groupId>org.jfree</groupId>
-    <version>1.5.0</version>
+    <version>1.5.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <organization>
@@ -167,8 +167,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.source.level>1.6</project.source.level>
-        <project.target.level>1.6</project.target.level>
+        <project.source.level>1.8</project.source.level>
+        <project.target.level>1.8</project.target.level>
     </properties>
 
     <profiles>
