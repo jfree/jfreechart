@@ -58,15 +58,10 @@ public class BoxAndWhiskerItemTest {
      */
     @Test
     public void testEquals() {
-
-        BoxAndWhiskerItem i1 = new BoxAndWhiskerItem(new Double(1.0), 
-                new Double(2.0), new Double(3.0), new Double(4.0),
-                new Double(5.0), new Double(6.0), new Double(7.0), 
-                new Double(8.0), new ArrayList());
-        BoxAndWhiskerItem i2 = new BoxAndWhiskerItem(new Double(1.0), 
-                new Double(2.0), new Double(3.0), new Double(4.0),
-                new Double(5.0), new Double(6.0), new Double(7.0), 
-                new Double(8.0), new ArrayList());
+        BoxAndWhiskerItem i1 = new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0,
+                5.0, 6.0, 7.0, 8.0, new ArrayList<Double>());
+        BoxAndWhiskerItem i2 = new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0,
+                5.0, 6.0, 7.0, 8.0, new ArrayList<Double>());
         assertTrue(i1.equals(i2));
         assertTrue(i2.equals(i1));
     }
@@ -76,10 +71,8 @@ public class BoxAndWhiskerItemTest {
      */
     @Test
     public void testSerialization() {
-        BoxAndWhiskerItem i1 = new BoxAndWhiskerItem(new Double(1.0), 
-                new Double(2.0), new Double(3.0), new Double(4.0),
-                new Double(5.0), new Double(6.0), new Double(7.0), 
-                new Double(8.0), new ArrayList());
+        BoxAndWhiskerItem i1 = new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0,
+                5.0, 6.0, 7.0, 8.0, new ArrayList<Double>());
         BoxAndWhiskerItem i2 = (BoxAndWhiskerItem) TestUtils.serialised(i1);
         assertEquals(i1, i2);
     }
