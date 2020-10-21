@@ -137,31 +137,32 @@ public class ComparableObjectSeriesTest {
         assertTrue(s1.equals(s2));
 
         // add a value
-        s1.add(new Integer(1), "ABC");
+        s1.add(1, "ABC");
         assertNotEquals(s1, s2);
-        s2.add(new Integer(1), "ABC");
+        s2.add(1, "ABC");
         assertTrue(s1.equals(s2));
 
         // add another value
-        s1.add(new Integer(0), "DEF");
+        s1.add(0, "DEF");
         assertNotEquals(s1, s2);
-        s2.add(new Integer(0), "DEF");
+        s2.add(0, "DEF");
         assertTrue(s1.equals(s2));
 
         // remove an item
-        s1.remove(new Integer(1));
+        s1.remove(1);
         assertNotEquals(s1, s2);
-        s2.remove(new Integer(1));
+        s2.remove(1);
         assertTrue(s1.equals(s2));
     }
 
     /**
      * Some checks for the clone() method.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
         MyComparableObjectSeries s1 = new MyComparableObjectSeries("A");
-        s1.add(new Integer(1), "ABC");
+        s1.add(1, "ABC");
         MyComparableObjectSeries s2 = (MyComparableObjectSeries) s1.clone();
         assertTrue(s1 != s2);
         assertTrue(s1.getClass() == s2.getClass());
@@ -174,7 +175,7 @@ public class ComparableObjectSeriesTest {
     @Test
     public void testSerialization() {
         MyComparableObjectSeries s1 = new MyComparableObjectSeries("A");
-        s1.add(new Integer(1), "ABC");
+        s1.add(1, "ABC");
         MyComparableObjectSeries s2 = (MyComparableObjectSeries) 
                 TestUtils.serialised(s1);
         assertEquals(s1, s2);
