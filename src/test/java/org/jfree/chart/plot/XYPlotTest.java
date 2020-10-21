@@ -401,8 +401,7 @@ public class XYPlotTest {
         plot2.setRangeMinorGridlineStroke(new BasicStroke(1.23f));
         assertTrue(plot1.equals(plot2));
 
-        List axisIndices = Arrays.asList(new Integer[] {new Integer(0),
-            new Integer(1)});
+        List<Integer> axisIndices = Arrays.asList(new Integer[] {0, 1});
         plot1.mapDatasetToDomainAxes(0, axisIndices);
         assertFalse(plot1.equals(plot2));
         plot2.mapDatasetToDomainAxes(0, axisIndices);
@@ -508,6 +507,7 @@ public class XYPlotTest {
 
     /**
      * Confirm that basic cloning works.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
@@ -520,14 +520,14 @@ public class XYPlotTest {
 
     /**
      * Tests cloning for a more complex plot.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning2() throws CloneNotSupportedException {
         XYPlot p1 = new XYPlot(null, new NumberAxis("Domain Axis"),
                 new NumberAxis("Range Axis"), new StandardXYItemRenderer());
         p1.setRangeAxis(1, new NumberAxis("Range Axis 2"));
-        List axisIndices = Arrays.asList(new Integer[] {new Integer(0),
-                new Integer(1)});
+        List<Integer> axisIndices = Arrays.asList(new Integer[] {0, 1});
         p1.mapDatasetToDomainAxes(0, axisIndices);
         p1.mapDatasetToRangeAxes(0, axisIndices);
         p1.setRenderer(1, new XYBarRenderer());
@@ -540,6 +540,7 @@ public class XYPlotTest {
     /**
      * Tests cloning for a plot where the fixed legend items have been
      * specified.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning3() throws CloneNotSupportedException {
@@ -560,6 +561,7 @@ public class XYPlotTest {
     /**
      * Tests cloning to ensure that the cloned plot is registered as a listener
      * on the cloned renderer.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning4() throws CloneNotSupportedException {
@@ -578,6 +580,7 @@ public class XYPlotTest {
 
     /**
      * Confirm that cloning captures the quadrantOrigin field.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning_QuadrantOrigin() throws CloneNotSupportedException {
@@ -593,6 +596,7 @@ public class XYPlotTest {
 
     /**
      * Confirm that cloning captures the quadrantOrigin field.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning_QuadrantPaint() throws CloneNotSupportedException {
@@ -614,6 +618,7 @@ public class XYPlotTest {
     /**
      * Renderers that belong to the plot are being cloned but they are
      * retaining a reference to the original plot.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testBug2817504() throws CloneNotSupportedException {
@@ -632,6 +637,7 @@ public class XYPlotTest {
 
     /**
      * Tests the independence of the clones.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloneIndependence() throws CloneNotSupportedException {
@@ -1109,13 +1115,11 @@ public class XYPlotTest {
         plot.mapDatasetToDomainAxis(0, 1);
         assertEquals(xAxis2, plot.getDomainAxisForDataset(0));
 
-        List axisIndices = Arrays.asList(new Integer[] {new Integer(0),
-                new Integer(1)});
+        List<Integer> axisIndices = Arrays.asList(new Integer[] {0, 1});
         plot.mapDatasetToDomainAxes(0, axisIndices);
         assertEquals(xAxis, plot.getDomainAxisForDataset(0));
 
-        axisIndices = Arrays.asList(new Integer[] {new Integer(1),
-                new Integer(2)});
+        axisIndices = Arrays.asList(new Integer[] {1, 2});
         plot.mapDatasetToDomainAxes(0, axisIndices);
         assertEquals(xAxis2, plot.getDomainAxisForDataset(0));
     }
@@ -1151,13 +1155,11 @@ public class XYPlotTest {
         plot.mapDatasetToRangeAxis(0, 1);
         assertEquals(yAxis2, plot.getRangeAxisForDataset(0));
 
-        List axisIndices = Arrays.asList(new Integer[] {new Integer(0),
-                new Integer(1)});
+        List<Integer> axisIndices = Arrays.asList(new Integer[] {0, 1});
         plot.mapDatasetToRangeAxes(0, axisIndices);
         assertEquals(yAxis, plot.getRangeAxisForDataset(0));
 
-        axisIndices = Arrays.asList(new Integer[] {new Integer(1),
-                new Integer(2)});
+        axisIndices = Arrays.asList(new Integer[] {1, 2});
         plot.mapDatasetToRangeAxes(0, axisIndices);
         assertEquals(yAxis2, plot.getRangeAxisForDataset(0));
     }
