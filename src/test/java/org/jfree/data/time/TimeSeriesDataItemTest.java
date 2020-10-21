@@ -76,9 +76,9 @@ public class TimeSeriesDataItemTest {
         assertTrue(item1.equals(item2));
         assertTrue(item2.equals(item1));
 
-        item1.setValue(new Integer(5));
+        item1.setValue(5);
         assertFalse(item1.equals(item2));
-        item2.setValue(new Integer(5));
+        item2.setValue(5);
         assertTrue(item1.equals(item2));
     }
 
