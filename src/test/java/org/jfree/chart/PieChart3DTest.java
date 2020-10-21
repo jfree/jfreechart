@@ -69,9 +69,9 @@ public class PieChart3DTest  {
     public void setUp() {
         // create a dataset...
         DefaultPieDataset dataset = new DefaultPieDataset();
-        dataset.setValue("Java", new Double(43.2));
-        dataset.setValue("Visual Basic", new Double(0.0));
-        dataset.setValue("C/C++", new Double(17.5));
+        dataset.setValue("Java", 43.2);
+        dataset.setValue("Visual Basic", 0.0);
+        dataset.setValue("C/C++", 17.5);
         this.pieChart = createPieChart3D(dataset);
     }
 

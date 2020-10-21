@@ -110,10 +110,7 @@ public class StackedBarChartTest {
     public void testReplaceDataset() {
 
         // create a dataset...
-        Number[][] data = new Integer[][]
-            {{new Integer(-30), new Integer(-20)},
-             {new Integer(-10), new Integer(10)},
-             {new Integer(20), new Integer(30)}};
+        Number[][] data = new Integer[][] {{-30, -20}, {-10, 10}, {20, 30}};
 
         CategoryDataset newData = DatasetUtils.createCategoryDataset("S",
                 "C", data);
@@ -170,10 +167,7 @@ public class StackedBarChartTest {
      * @return The chart.
      */
     private static JFreeChart createChart() {
-        Number[][] data = new Integer[][]
-            {{new Integer(-3), new Integer(-2)},
-             {new Integer(-1), new Integer(1)},
-             {new Integer(2), new Integer(3)}};
+        Number[][] data = new Integer[][] {{-3, -2}, {-1, 1}, {2, 3}};
 
         CategoryDataset dataset = DatasetUtils.createCategoryDataset("S",
                 "C", data);
