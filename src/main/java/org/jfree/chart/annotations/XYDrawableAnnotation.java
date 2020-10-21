@@ -40,6 +40,7 @@ import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
+import java.util.Objects;
 
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.Plot;
@@ -48,7 +49,6 @@ import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.ui.Drawable;
 import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 
@@ -211,7 +211,7 @@ public class XYDrawableAnnotation extends AbstractXYAnnotation
         if (this.drawScaleFactor != that.drawScaleFactor) {
             return false;
         }
-        if (!ObjectUtils.equal(this.drawable, that.drawable)) {
+        if (!Objects.equals(this.drawable, that.drawable)) {
             return false;
         }
         // seem to be the same...

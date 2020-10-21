@@ -36,9 +36,9 @@
 
 package org.jfree.data.time;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.util.Date;
 
@@ -48,8 +48,8 @@ import org.jfree.chart.util.CloneUtils;
 
 import org.jfree.data.general.SeriesChangeEvent;
 import org.jfree.data.general.SeriesChangeListener;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * A collection of test cases for the {@link TimePeriodValues} class.
@@ -68,7 +68,7 @@ public class TimePeriodValuesTest {
     /**
      * Common test setup.
      */
-    @Before
+    @BeforeEach
     public void setUp() {
         this.seriesA = new TimePeriodValues<>("Series A");
         this.seriesA.add(new Year(2000), 102000);
@@ -145,11 +145,11 @@ public class TimePeriodValuesTest {
         TimePeriodValues<String> s1 = new TimePeriodValues<>("Time Series 1");
         TimePeriodValues<String> s2 = new TimePeriodValues<>("Time Series 2");
         boolean b1 = s1.equals(s2);
-        assertFalse("b1", b1);
+        assertFalse(b1, "b1");
 
         s2.setKey("Time Series 1");
         boolean b2 = s1.equals(s2);
-        assertTrue("b2", b2);
+        assertTrue(b2, "b2");
 
         // domain description
         s1.setDomainDescription("XYZ");
@@ -180,12 +180,12 @@ public class TimePeriodValuesTest {
         s1.add(p1, 100.0);
         s1.add(p2, 200.0);
         boolean b3 = s1.equals(s2);
-        assertFalse("b3", b3);
+        assertFalse(b3, "b3");
 
         s2.add(p1, 100.0);
         s2.add(p2, 200.0);
         boolean b4 = s1.equals(s2);
-        assertTrue("b4", b4);
+        assertTrue(b4, "b4");
 
     }
     

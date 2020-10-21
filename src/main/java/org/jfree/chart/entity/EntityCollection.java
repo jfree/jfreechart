@@ -102,6 +102,6 @@ public interface EntityCollection {
      *
      * @return An iterator.
      */
-    public Iterator iterator();
+    public Iterator<ChartEntity> iterator();
 
 }

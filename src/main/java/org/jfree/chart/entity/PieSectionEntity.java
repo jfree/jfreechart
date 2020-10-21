@@ -39,9 +39,9 @@ package org.jfree.chart.entity;
 
 import java.awt.Shape;
 import java.io.Serializable;
+import java.util.Objects;
 
 import org.jfree.chart.HashUtils;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.data.general.PieDataset;
 
 /**
@@ -193,7 +193,7 @@ public class PieSectionEntity<K extends Comparable<K>> extends ChartEntity
             return false;
         }
         PieSectionEntity that = (PieSectionEntity) obj;
-        if (!ObjectUtils.equal(this.dataset, that.dataset)) {
+        if (!Objects.equals(this.dataset, that.dataset)) {
             return false;
         }
         if (this.pieIndex != that.pieIndex) {
@@ -202,7 +202,7 @@ public class PieSectionEntity<K extends Comparable<K>> extends ChartEntity
         if (this.sectionIndex != that.sectionIndex) {
             return false;
         }
-        if (!ObjectUtils.equal(this.sectionKey, that.sectionKey)) {
+        if (!Objects.equals(this.sectionKey, that.sectionKey)) {
             return false;
         }
         return super.equals(obj);

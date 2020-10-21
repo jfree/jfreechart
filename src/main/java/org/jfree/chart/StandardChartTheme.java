@@ -45,8 +45,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.Iterator;
-import java.util.List;
+import java.util.Objects;
 
 import org.jfree.chart.annotations.XYAnnotation;
 import org.jfree.chart.annotations.XYTextAnnotation;
@@ -1113,10 +1112,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
         else if (title instanceof CompositeTitle) {
             CompositeTitle ct = (CompositeTitle) title;
             BlockContainer bc = ct.getContainer();
-            List blocks = bc.getBlocks();
-            Iterator iterator = blocks.iterator();
-            while (iterator.hasNext()) {
-                Block b = (Block) iterator.next();
+            for (Block b: bc.getBlocks()) {
                 if (b instanceof Title) {
                     applyToTitle((Title) b);
                 }
@@ -1130,9 +1126,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
      * @param bc  a block container ({@code null} not permitted).
      */
     protected void applyToBlockContainer(BlockContainer bc) {
-        Iterator iterator = bc.getBlocks().iterator();
-        while (iterator.hasNext()) {
-            Block b = (Block) iterator.next();
+        for (Block b : bc.getBlocks()) {
             applyToBlock(b);
         }
     }
@@ -1156,7 +1150,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Applies the attributes of this theme to a plot.
      *
-     * @param plot  the plot ({@code null}).
+     * @param plot  the plot ({@code null} not permitted).
      */
     protected void applyToPlot(Plot plot) {
         Args.nullNotPermitted(plot, "plot");
@@ -1277,9 +1271,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
 
         if (plot instanceof CombinedDomainCategoryPlot) {
             CombinedDomainCategoryPlot cp = (CombinedDomainCategoryPlot) plot;
-            Iterator iterator = cp.getSubplots().iterator();
-            while (iterator.hasNext()) {
-                CategoryPlot subplot = (CategoryPlot) iterator.next();
+            for (CategoryPlot subplot : cp.getSubplots()) {
                 if (subplot != null) {
                     applyToPlot(subplot);
                 }
@@ -1287,9 +1279,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
         }
         if (plot instanceof CombinedRangeCategoryPlot) {
             CombinedRangeCategoryPlot cp = (CombinedRangeCategoryPlot) plot;
-            Iterator iterator = cp.getSubplots().iterator();
-            while (iterator.hasNext()) {
-                CategoryPlot subplot = (CategoryPlot) iterator.next();
+            for (CategoryPlot subplot : cp.getSubplots()) {
                 if (subplot != null) {
                     applyToPlot(subplot);
                 }
@@ -1302,7 +1292,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
      *
      * @param plot  the plot ({@code null} not permitted).
      */
-    protected <S extends Comparable<S>> void  applyToXYPlot(XYPlot<S> plot) {
+    protected <S extends Comparable<S>> void applyToXYPlot(XYPlot<S> plot) {
         plot.setAxisOffset(this.axisOffset);
         plot.setDomainZeroBaselinePaint(this.baselinePaint);
         plot.setRangeZeroBaselinePaint(this.baselinePaint);
@@ -1345,15 +1335,15 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
         }
 
         if (plot instanceof CombinedDomainXYPlot) {
-            CombinedDomainXYPlot cp = (CombinedDomainXYPlot) plot;
-            for (XYPlot subplot : cp.getSubplots()) {
+            CombinedDomainXYPlot<S> cp = (CombinedDomainXYPlot) plot;
+            for (XYPlot<S> subplot : cp.getSubplots()) {
                 if (subplot != null) {
                     applyToPlot(subplot);
                 }
             }
         }
         if (plot instanceof CombinedRangeXYPlot) {
-            CombinedRangeXYPlot cp = (CombinedRangeXYPlot) plot;
+            CombinedRangeXYPlot<S> cp = (CombinedRangeXYPlot) plot;
             for (XYPlot subplot : cp.getSubplots()) {
                 if (subplot != null) {
                     applyToPlot(subplot);
@@ -1704,6 +1694,41 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 71 * hash + Objects.hashCode(this.name);
+        hash = 71 * hash + Objects.hashCode(this.extraLargeFont);
+        hash = 71 * hash + Objects.hashCode(this.largeFont);
+        hash = 71 * hash + Objects.hashCode(this.regularFont);
+        hash = 71 * hash + Objects.hashCode(this.smallFont);
+        hash = 71 * hash + Objects.hashCode(this.titlePaint);
+        hash = 71 * hash + Objects.hashCode(this.subtitlePaint);
+        hash = 71 * hash + Objects.hashCode(this.chartBackgroundPaint);
+        hash = 71 * hash + Objects.hashCode(this.legendBackgroundPaint);
+        hash = 71 * hash + Objects.hashCode(this.legendItemPaint);
+        hash = 71 * hash + Objects.hashCode(this.plotBackgroundPaint);
+        hash = 71 * hash + Objects.hashCode(this.plotOutlinePaint);
+        hash = 71 * hash + Objects.hashCode(this.labelLinkStyle);
+        hash = 71 * hash + Objects.hashCode(this.labelLinkPaint);
+        hash = 71 * hash + Objects.hashCode(this.domainGridlinePaint);
+        hash = 71 * hash + Objects.hashCode(this.rangeGridlinePaint);
+        hash = 71 * hash + Objects.hashCode(this.crosshairPaint);
+        hash = 71 * hash + Objects.hashCode(this.axisOffset);
+        hash = 71 * hash + Objects.hashCode(this.axisLabelPaint);
+        hash = 71 * hash + Objects.hashCode(this.tickLabelPaint);
+        hash = 71 * hash + Objects.hashCode(this.itemLabelPaint);
+        hash = 71 * hash + (this.shadowVisible ? 1 : 0);
+        hash = 71 * hash + Objects.hashCode(this.shadowPaint);
+        hash = 71 * hash + Objects.hashCode(this.barPainter);
+        hash = 71 * hash + Objects.hashCode(this.xyBarPainter);
+        hash = 71 * hash + Objects.hashCode(this.thermometerPaint);
+        hash = 71 * hash + Objects.hashCode(this.errorIndicatorPaint);
+        hash = 71 * hash + Objects.hashCode(this.gridBandPaint);
+        hash = 71 * hash + Objects.hashCode(this.gridBandAlternatePaint);
+        return hash;
     }
 
     /**

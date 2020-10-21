@@ -56,6 +56,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.LegendItemCollection;
 import org.jfree.chart.axis.CategoryAxis;
@@ -86,7 +88,6 @@ import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.urls.CategoryURLGenerator;
 import org.jfree.chart.util.CloneUtils;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SortOrder;
@@ -1232,40 +1233,31 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
         }
         AbstractCategoryItemRenderer that = (AbstractCategoryItemRenderer) obj;
 
-        if (!ObjectUtils.equal(this.itemLabelGeneratorMap,
-                that.itemLabelGeneratorMap)) {
+        if (!Objects.equals(this.itemLabelGeneratorMap, that.itemLabelGeneratorMap)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.defaultItemLabelGenerator,
-                that.defaultItemLabelGenerator)) {
+        if (!Objects.equals(this.defaultItemLabelGenerator, that.defaultItemLabelGenerator)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.toolTipGeneratorMap,
-                that.toolTipGeneratorMap)) {
+        if (!Objects.equals(this.toolTipGeneratorMap, that.toolTipGeneratorMap)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.defaultToolTipGenerator,
-                that.defaultToolTipGenerator)) {
+        if (!Objects.equals(this.defaultToolTipGenerator, that.defaultToolTipGenerator)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.itemURLGeneratorMap,
-                that.itemURLGeneratorMap)) {
+        if (!Objects.equals(this.itemURLGeneratorMap, that.itemURLGeneratorMap)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.defaultItemURLGenerator,
-                that.defaultItemURLGenerator)) {
+        if (!Objects.equals(this.defaultItemURLGenerator, that.defaultItemURLGenerator)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.legendItemLabelGenerator,
-                that.legendItemLabelGenerator)) {
+        if (!Objects.equals(this.legendItemLabelGenerator, that.legendItemLabelGenerator)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.legendItemToolTipGenerator,
-                that.legendItemToolTipGenerator)) {
+        if (!Objects.equals(this.legendItemToolTipGenerator, that.legendItemToolTipGenerator)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.legendItemURLGenerator,
-                that.legendItemURLGenerator)) {
+        if (!Objects.equals(this.legendItemURLGenerator, that.legendItemURLGenerator)) {
             return false;
         }
         return super.equals(obj);
@@ -1447,15 +1439,15 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
 
         if (this.legendItemLabelGenerator instanceof PublicCloneable) {
             clone.legendItemLabelGenerator = (CategorySeriesLabelGenerator)
-                    ObjectUtils.clone(this.legendItemLabelGenerator);
+                    CloneUtils.clone((Object) this.legendItemLabelGenerator);
         }
         if (this.legendItemToolTipGenerator instanceof PublicCloneable) {
             clone.legendItemToolTipGenerator = (CategorySeriesLabelGenerator)
-                    ObjectUtils.clone(this.legendItemToolTipGenerator);
+                    CloneUtils.clone((Object) this.legendItemToolTipGenerator);
         }
         if (this.legendItemURLGenerator instanceof PublicCloneable) {
             clone.legendItemURLGenerator = (CategorySeriesLabelGenerator)
-                    ObjectUtils.clone(this.legendItemURLGenerator);
+                    CloneUtils.clone((Object) this.legendItemURLGenerator);
         }
         return clone;
     }

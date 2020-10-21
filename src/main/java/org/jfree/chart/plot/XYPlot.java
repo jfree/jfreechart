@@ -69,6 +69,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -109,7 +110,6 @@ import org.jfree.chart.ui.Layer;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.util.CloneUtils;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
@@ -131,6 +131,8 @@ import org.jfree.data.xy.XYDataset;
  * <p>
  * The {@link org.jfree.chart.ChartFactory} class contains static methods for
  * creating pre-configured charts.
+ * 
+ * @param <S>The type for the series keys.
  */
 public class XYPlot<S extends Comparable<S>> extends Plot 
         implements ValueAxisPlot, Pannable, Zoomable,
@@ -4230,9 +4232,8 @@ public class XYPlot<S extends Comparable<S>> extends Plot
             }
         }
 
-        Iterator<XYAnnotation> it = includedAnnotations.iterator();
-        while (it.hasNext()) {
-            XYAnnotationBoundsInfo xyabi = (XYAnnotationBoundsInfo) it.next();
+        for (XYAnnotation includedAnnotation : includedAnnotations) {
+            XYAnnotationBoundsInfo xyabi = (XYAnnotationBoundsInfo) includedAnnotation;
             if (xyabi.getIncludeInDataBounds()) {
                 if (isDomainAxis) {
                     result = Range.combine(result, xyabi.getXRange());
@@ -5111,52 +5112,46 @@ public class XYPlot<S extends Comparable<S>> extends Plot
         if (this.rangeCrosshairValue != that.rangeCrosshairValue) {
             return false;
         }
-        if (!ObjectUtils.equal(this.axisOffset, that.axisOffset)) {
+        if (!Objects.equals(this.axisOffset, that.axisOffset)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.renderers, that.renderers)) {
+        if (!Objects.equals(this.renderers, that.renderers)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.rangeAxes, that.rangeAxes)) {
+        if (!Objects.equals(this.rangeAxes, that.rangeAxes)) {
             return false;
         }
         if (!this.rangeAxisLocations.equals(that.rangeAxisLocations)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.datasetToDomainAxesMap,
-                that.datasetToDomainAxesMap)) {
+        if (!Objects.equals(this.datasetToDomainAxesMap, that.datasetToDomainAxesMap)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.datasetToRangeAxesMap,
-                that.datasetToRangeAxesMap)) {
+        if (!Objects.equals(this.datasetToRangeAxesMap, that.datasetToRangeAxesMap)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.domainGridlineStroke,
-                that.domainGridlineStroke)) {
+        if (!Objects.equals(this.domainGridlineStroke, that.domainGridlineStroke)) {
             return false;
         }
         if (!PaintUtils.equal(this.domainGridlinePaint,
                 that.domainGridlinePaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.rangeGridlineStroke,
-                that.rangeGridlineStroke)) {
+        if (!Objects.equals(this.rangeGridlineStroke, that.rangeGridlineStroke)) {
             return false;
         }
         if (!PaintUtils.equal(this.rangeGridlinePaint,
                 that.rangeGridlinePaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.domainMinorGridlineStroke,
-                that.domainMinorGridlineStroke)) {
+        if (!Objects.equals(this.domainMinorGridlineStroke, that.domainMinorGridlineStroke)) {
             return false;
         }
         if (!PaintUtils.equal(this.domainMinorGridlinePaint,
                 that.domainMinorGridlinePaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.rangeMinorGridlineStroke,
-                that.rangeMinorGridlineStroke)) {
+        if (!Objects.equals(this.rangeMinorGridlineStroke, that.rangeMinorGridlineStroke)) {
             return false;
         }
         if (!PaintUtils.equal(this.rangeMinorGridlinePaint,
@@ -5167,71 +5162,58 @@ public class XYPlot<S extends Comparable<S>> extends Plot
                 that.domainZeroBaselinePaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.domainZeroBaselineStroke,
-                that.domainZeroBaselineStroke)) {
+        if (!Objects.equals(this.domainZeroBaselineStroke, that.domainZeroBaselineStroke)) {
             return false;
         }
         if (!PaintUtils.equal(this.rangeZeroBaselinePaint,
                 that.rangeZeroBaselinePaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.rangeZeroBaselineStroke,
-                that.rangeZeroBaselineStroke)) {
+        if (!Objects.equals(this.rangeZeroBaselineStroke, that.rangeZeroBaselineStroke)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.domainCrosshairStroke,
-                that.domainCrosshairStroke)) {
+        if (!Objects.equals(this.domainCrosshairStroke, that.domainCrosshairStroke)) {
             return false;
         }
         if (!PaintUtils.equal(this.domainCrosshairPaint,
                 that.domainCrosshairPaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.rangeCrosshairStroke,
-                that.rangeCrosshairStroke)) {
+        if (!Objects.equals(this.rangeCrosshairStroke, that.rangeCrosshairStroke)) {
             return false;
         }
         if (!PaintUtils.equal(this.rangeCrosshairPaint,
                 that.rangeCrosshairPaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.foregroundDomainMarkers,
-                that.foregroundDomainMarkers)) {
+        if (!Objects.equals(this.foregroundDomainMarkers, that.foregroundDomainMarkers)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.backgroundDomainMarkers,
-                that.backgroundDomainMarkers)) {
+        if (!Objects.equals(this.backgroundDomainMarkers, that.backgroundDomainMarkers)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.foregroundRangeMarkers,
-                that.foregroundRangeMarkers)) {
+        if (!Objects.equals(this.foregroundRangeMarkers, that.foregroundRangeMarkers)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.backgroundRangeMarkers,
-                that.backgroundRangeMarkers)) {
+        if (!Objects.equals(this.backgroundRangeMarkers, that.backgroundRangeMarkers)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.foregroundDomainMarkers,
-                that.foregroundDomainMarkers)) {
+        if (!Objects.equals(this.foregroundDomainMarkers, that.foregroundDomainMarkers)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.backgroundDomainMarkers,
-                that.backgroundDomainMarkers)) {
+        if (!Objects.equals(this.backgroundDomainMarkers, that.backgroundDomainMarkers)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.foregroundRangeMarkers,
-                that.foregroundRangeMarkers)) {
+        if (!Objects.equals(this.foregroundRangeMarkers, that.foregroundRangeMarkers)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.backgroundRangeMarkers,
-                that.backgroundRangeMarkers)) {
+        if (!Objects.equals(this.backgroundRangeMarkers, that.backgroundRangeMarkers)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.annotations, that.annotations)) {
+        if (!Objects.equals(this.annotations, that.annotations)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.fixedLegendItems,
-                that.fixedLegendItems)) {
+        if (!Objects.equals(this.fixedLegendItems, that.fixedLegendItems)) {
             return false;
         }
         if (!PaintUtils.equal(this.domainTickBandPaint,
@@ -5251,11 +5233,70 @@ public class XYPlot<S extends Comparable<S>> extends Plot
                 return false;
             }
         }
-        if (!ObjectUtils.equal(this.shadowGenerator,
-                that.shadowGenerator)) {
+        if (!Objects.equals(this.shadowGenerator, that.shadowGenerator)) {
             return false;
         }
         return super.equals(obj);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int hash = 7;
+        hash = 43 * hash + Objects.hashCode(this.orientation);
+        hash = 43 * hash + Objects.hashCode(this.axisOffset);
+        hash = 43 * hash + Objects.hashCode(this.domainAxes);
+        hash = 43 * hash + Objects.hashCode(this.domainAxisLocations);
+        hash = 43 * hash + Objects.hashCode(this.rangeAxes);
+        hash = 43 * hash + Objects.hashCode(this.rangeAxisLocations);
+        hash = 43 * hash + Objects.hashCode(this.renderers);
+        hash = 43 * hash + Objects.hashCode(this.datasetToDomainAxesMap);
+        hash = 43 * hash + Objects.hashCode(this.datasetToRangeAxesMap);
+        hash = 43 * hash + Objects.hashCode(this.quadrantOrigin);
+        hash = 43 * hash + Arrays.deepHashCode(this.quadrantPaint);
+        hash = 43 * hash + (this.domainGridlinesVisible ? 1 : 0);
+        hash = 43 * hash + Objects.hashCode(this.domainGridlineStroke);
+        hash = 43 * hash + Objects.hashCode(this.domainGridlinePaint);
+        hash = 43 * hash + (this.rangeGridlinesVisible ? 1 : 0);
+        hash = 43 * hash + Objects.hashCode(this.rangeGridlineStroke);
+        hash = 43 * hash + Objects.hashCode(this.rangeGridlinePaint);
+        hash = 43 * hash + (this.domainMinorGridlinesVisible ? 1 : 0);
+        hash = 43 * hash + Objects.hashCode(this.domainMinorGridlineStroke);
+        hash = 43 * hash + Objects.hashCode(this.domainMinorGridlinePaint);
+        hash = 43 * hash + (this.rangeMinorGridlinesVisible ? 1 : 0);
+        hash = 43 * hash + Objects.hashCode(this.rangeMinorGridlineStroke);
+        hash = 43 * hash + Objects.hashCode(this.rangeMinorGridlinePaint);
+        hash = 43 * hash + (this.domainZeroBaselineVisible ? 1 : 0);
+        hash = 43 * hash + Objects.hashCode(this.domainZeroBaselineStroke);
+        hash = 43 * hash + Objects.hashCode(this.domainZeroBaselinePaint);
+        hash = 43 * hash + (this.rangeZeroBaselineVisible ? 1 : 0);
+        hash = 43 * hash + Objects.hashCode(this.rangeZeroBaselineStroke);
+        hash = 43 * hash + Objects.hashCode(this.rangeZeroBaselinePaint);
+        hash = 43 * hash + (this.domainCrosshairVisible ? 1 : 0);
+        hash = 43 * hash +
+                (int) (Double.doubleToLongBits(this.domainCrosshairValue) ^
+                (Double.doubleToLongBits(this.domainCrosshairValue) >>> 32));
+        hash = 43 * hash + Objects.hashCode(this.domainCrosshairStroke);
+        hash = 43 * hash + Objects.hashCode(this.domainCrosshairPaint);
+        hash = 43 * hash + (this.domainCrosshairLockedOnData ? 1 : 0);
+        hash = 43 * hash + (this.rangeCrosshairVisible ? 1 : 0);
+        hash = 43 * hash +
+                (int) (Double.doubleToLongBits(this.rangeCrosshairValue) ^
+                (Double.doubleToLongBits(this.rangeCrosshairValue) >>> 32));
+        hash = 43 * hash + Objects.hashCode(this.rangeCrosshairStroke);
+        hash = 43 * hash + Objects.hashCode(this.rangeCrosshairPaint);
+        hash = 43 * hash + (this.rangeCrosshairLockedOnData ? 1 : 0);
+        hash = 43 * hash + Objects.hashCode(this.foregroundDomainMarkers);
+        hash = 43 * hash + Objects.hashCode(this.backgroundDomainMarkers);
+        hash = 43 * hash + Objects.hashCode(this.foregroundRangeMarkers);
+        hash = 43 * hash + Objects.hashCode(this.backgroundRangeMarkers);
+        hash = 43 * hash + Objects.hashCode(this.annotations);
+        hash = 43 * hash + Objects.hashCode(this.domainTickBandPaint);
+        hash = 43 * hash + Objects.hashCode(this.rangeTickBandPaint);
+        hash = 43 * hash + this.weight;
+        hash = 43 * hash + Objects.hashCode(this.fixedLegendItems);
+        hash = 43 * hash + Objects.hashCode(this.shadowGenerator);
+        return hash;
     }
 
     /**

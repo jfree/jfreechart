@@ -67,6 +67,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Objects;
 
 import javax.swing.event.EventListenerList;
 
@@ -78,7 +79,6 @@ import org.jfree.chart.ui.HorizontalAlignment;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.VerticalAlignment;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
 
 /**
@@ -427,10 +427,10 @@ public abstract class Title extends AbstractBlock
     @Override
     public int hashCode() {
         int result = 193;
-        result = 37 * result + ObjectUtils.hashCode(this.position);
+        result = 37 * result + Objects.hashCode(this.position);
         result = 37 * result
-                + ObjectUtils.hashCode(this.horizontalAlignment);
-        result = 37 * result + ObjectUtils.hashCode(this.verticalAlignment);
+                + Objects.hashCode(this.horizontalAlignment);
+        result = 37 * result + Objects.hashCode(this.verticalAlignment);
         return result;
     }
 

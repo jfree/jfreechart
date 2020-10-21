@@ -211,7 +211,7 @@ public class LayeredBarRenderer extends BarRenderer implements Serializable {
 
         // X
         double value = dataValue.doubleValue();
-        double base = 0.0;
+        double base = getBase();
         double lclip = getLowerClip();
         double uclip = getUpperClip();
         if (uclip <= 0.0) {  // cases 1, 2, 3 and 4
@@ -300,7 +300,7 @@ public class LayeredBarRenderer extends BarRenderer implements Serializable {
                 column);
         if (generator != null && isItemLabelVisible(row, column)) {
             drawItemLabel(g2, dataset, row, column, plot, generator, bar,
-                    (transX1 > transX2));
+                    value < base);
         }
 
         // collect entity and tool tip information...
@@ -342,7 +342,7 @@ public class LayeredBarRenderer extends BarRenderer implements Serializable {
 
         // BAR Y
         double value = dataValue.doubleValue();
-        double base = 0.0;
+        double base = getBase();
         double lclip = getLowerClip();
         double uclip = getUpperClip();
 
@@ -426,10 +426,8 @@ public class LayeredBarRenderer extends BarRenderer implements Serializable {
         CategoryItemLabelGenerator generator = getItemLabelGenerator(row, 
                 column);
         if (generator != null && isItemLabelVisible(row, column)) {
-            double transX1 = rangeAxis.valueToJava2D(base, dataArea, edge);
-            double transX2 = rangeAxis.valueToJava2D(value, dataArea, edge);
             drawItemLabel(g2, dataset, row, column, plot, generator, bar,
-                    (transX1 > transX2));
+                    value < base);
         }
 
         // collect entity and tool tip information...

@@ -39,7 +39,8 @@ package org.jfree.data.xy;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import org.jfree.chart.util.ObjectUtils;
+import java.util.Objects;
+
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
@@ -49,13 +50,15 @@ import org.jfree.data.general.DatasetChangeEvent;
 /**
  * A collection of {@link XYIntervalSeries} objects.
  *
+ * @param <S> The type for the series keys.
+ * 
  * @since 1.0.3
  *
  * @see XYIntervalSeries
  */
 public class XYIntervalSeriesCollection<S extends Comparable<S>> 
-        extends AbstractIntervalXYDataset
-        implements IntervalXYDataset, PublicCloneable, Serializable {
+        extends AbstractIntervalXYDataset<S>
+        implements IntervalXYDataset<S>, PublicCloneable, Serializable {
 
     /** Storage for the data series. */
     private List<XYIntervalSeries<S>> data;
@@ -362,7 +365,7 @@ public class XYIntervalSeriesCollection<S extends Comparable<S>>
             return false;
         }
         XYIntervalSeriesCollection<S> that = (XYIntervalSeriesCollection) obj;
-        return ObjectUtils.equal(this.data, that.data);
+        return Objects.equals(this.data, that.data);
     }
 
     /**

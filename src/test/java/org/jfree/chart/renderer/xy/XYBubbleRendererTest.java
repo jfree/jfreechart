@@ -36,9 +36,9 @@
 
 package org.jfree.chart.renderer.xy;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.LegendItem;
@@ -48,7 +48,7 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.xy.DefaultXYZDataset;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link XYBubbleRenderer} class.
@@ -120,7 +120,7 @@ public class XYBubbleRendererTest {
      */
     @Test
     public void testGetLegendItemSeriesIndex() {
-        DefaultXYZDataset d1 = new DefaultXYZDataset();
+        DefaultXYZDataset<String> d1 = new DefaultXYZDataset<>();
         double[] x = {2.1, 2.3, 2.3, 2.2, 2.2, 1.8, 1.8, 1.9, 2.3, 3.8};
         double[] y = {14.1, 11.1, 10.0, 8.8, 8.7, 8.4, 5.4, 4.1, 4.1, 25};
         double[] z = {2.4, 2.7, 2.7, 2.2, 2.2, 2.2, 2.1, 2.2, 1.6, 4};
@@ -132,7 +132,7 @@ public class XYBubbleRendererTest {
         double[][] s2 = new double[][] {x, y, z};
         d1.addSeries("S2", s2);
 
-        DefaultXYZDataset d2 = new DefaultXYZDataset();
+        DefaultXYZDataset<String> d2 = new DefaultXYZDataset<>();
         x = new double[] {2.1};
         y = new double[] {14.1};
         z = new double[] {2.4};
@@ -150,10 +150,10 @@ public class XYBubbleRendererTest {
         d2.addSeries("S5", s5);
 
         XYBubbleRenderer r = new XYBubbleRenderer();
-        XYPlot plot = new XYPlot(d1, new NumberAxis("x"),
+        XYPlot<String> plot = new XYPlot<>(d1, new NumberAxis("x"),
                 new NumberAxis("y"), r);
         plot.setDataset(1, d2);
-        /*JFreeChart chart =*/ new JFreeChart(plot);
+        JFreeChart chart = new JFreeChart(plot);
         LegendItem li = r.getLegendItem(1, 2);
         assertEquals("S5", li.getLabel());
         assertEquals(1, li.getDatasetIndex());

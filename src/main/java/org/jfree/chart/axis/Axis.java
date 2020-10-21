@@ -60,6 +60,7 @@ import java.text.AttributedString;
 import java.util.Arrays;
 import java.util.EventListener;
 import java.util.List;
+import java.util.Objects;
 
 import javax.swing.event.EventListenerList;
 
@@ -75,7 +76,6 @@ import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.util.AttrStringUtils;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
@@ -1573,20 +1573,20 @@ public abstract class Axis implements Cloneable, Serializable {
         if (this.visible != that.visible) {
             return false;
         }
-        if (!ObjectUtils.equal(this.label, that.label)) {
+        if (!Objects.equals(this.label, that.label)) {
             return false;
         }
         if (!AttributedStringUtils.equal(this.attributedLabel, 
                 that.attributedLabel)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.labelFont, that.labelFont)) {
+        if (!Objects.equals(this.labelFont, that.labelFont)) {
             return false;
         }
         if (!PaintUtils.equal(this.labelPaint, that.labelPaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.labelInsets, that.labelInsets)) {
+        if (!Objects.equals(this.labelInsets, that.labelInsets)) {
             return false;
         }
         if (this.labelAngle != that.labelAngle) {
@@ -1598,7 +1598,7 @@ public abstract class Axis implements Cloneable, Serializable {
         if (this.axisLineVisible != that.axisLineVisible) {
             return false;
         }
-        if (!ObjectUtils.equal(this.axisLineStroke, that.axisLineStroke)) {
+        if (!Objects.equals(this.axisLineStroke, that.axisLineStroke)) {
             return false;
         }
         if (!PaintUtils.equal(this.axisLinePaint, that.axisLinePaint)) {
@@ -1607,15 +1607,13 @@ public abstract class Axis implements Cloneable, Serializable {
         if (this.tickLabelsVisible != that.tickLabelsVisible) {
             return false;
         }
-        if (!ObjectUtils.equal(this.tickLabelFont, that.tickLabelFont)) {
+        if (!Objects.equals(this.tickLabelFont, that.tickLabelFont)) {
             return false;
         }
         if (!PaintUtils.equal(this.tickLabelPaint, that.tickLabelPaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(
-            this.tickLabelInsets, that.tickLabelInsets
-        )) {
+        if (!Objects.equals(this.tickLabelInsets, that.tickLabelInsets)) {
             return false;
         }
         if (this.tickMarksVisible != that.tickMarksVisible) {
@@ -1630,7 +1628,7 @@ public abstract class Axis implements Cloneable, Serializable {
         if (!PaintUtils.equal(this.tickMarkPaint, that.tickMarkPaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.tickMarkStroke, that.tickMarkStroke)) {
+        if (!Objects.equals(this.tickMarkStroke, that.tickMarkStroke)) {
             return false;
         }
         if (this.minorTickMarksVisible != that.minorTickMarksVisible) {

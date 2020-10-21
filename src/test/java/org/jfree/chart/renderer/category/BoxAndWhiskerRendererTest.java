@@ -36,12 +36,12 @@
 
 package org.jfree.chart.renderer.category;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.awt.Color;
 import java.awt.GradientPaint;
@@ -64,7 +64,7 @@ import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.statistics.BoxAndWhiskerItem;
 import org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link BoxAndWhiskerRenderer} class.
@@ -169,7 +169,7 @@ public class BoxAndWhiskerRendererTest {
                 = new DefaultBoxAndWhiskerCategoryDataset<>();
             dataset.add(new BoxAndWhiskerItem(1.0, 2.0, 0.0, 4.0, 0.5,
                     4.5, -0.5, 5.5, null), "S1", "C1");
-            CategoryPlot plot = new CategoryPlot(dataset,
+            CategoryPlot<String, String> plot = new CategoryPlot<>(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new BoxAndWhiskerRenderer());
             JFreeChart chart = new JFreeChart(plot);
@@ -204,7 +204,7 @@ public class BoxAndWhiskerRendererTest {
         values.add(10.0);
         values.add(100.0);
         dataset.add(values, "row", "column");
-        CategoryPlot plot = new CategoryPlot(dataset, new CategoryAxis("x"),
+        CategoryPlot<String, String> plot = new CategoryPlot<>(dataset, new CategoryAxis("x"),
                 new NumberAxis("y"), new BoxAndWhiskerRenderer());
         JFreeChart chart = new JFreeChart(plot);
         boolean success;
@@ -249,7 +249,7 @@ public class BoxAndWhiskerRendererTest {
         values.add(10.0);
         values.add(100.0);
         dataset.add(values, "row", "column");
-        CategoryPlot plot = new CategoryPlot(dataset, new CategoryAxis("x"),
+        CategoryPlot<String, String> plot = new CategoryPlot<>(dataset, new CategoryAxis("x"),
                 new NumberAxis("y"), new BoxAndWhiskerRenderer());
         plot.setOrientation(PlotOrientation.HORIZONTAL);
         JFreeChart chart = new JFreeChart(plot);
@@ -286,7 +286,7 @@ public class BoxAndWhiskerRendererTest {
         values.add(1.23);
         dataset.add(values, "R1", "C1");
         BoxAndWhiskerRenderer r = new BoxAndWhiskerRenderer();
-        CategoryPlot plot = new CategoryPlot(dataset, new CategoryAxis("x"),
+        CategoryPlot<String, String> plot = new CategoryPlot<>(dataset, new CategoryAxis("x"),
                 new NumberAxis("y"), r);
         /*JFreeChart chart =*/ new JFreeChart(plot);
         LegendItem li = r.getLegendItem(0, 0);
@@ -310,7 +310,7 @@ public class BoxAndWhiskerRendererTest {
         dataset1.addValue(24.0, "R4", "C1");
         dataset1.addValue(25.0, "R5", "C1");
         BoxAndWhiskerRenderer r = new BoxAndWhiskerRenderer();
-        CategoryPlot plot = new CategoryPlot(dataset0, new CategoryAxis("x"),
+        CategoryPlot<String, String> plot = new CategoryPlot<>(dataset0, new CategoryAxis("x"),
                 new NumberAxis("y"), r);
         plot.setDataset(1, dataset1);
         /*JFreeChart chart =*/ new JFreeChart(plot);
@@ -331,7 +331,7 @@ public class BoxAndWhiskerRendererTest {
                     = new DefaultBoxAndWhiskerCategoryDataset<>();
             dataset.add(new BoxAndWhiskerItem(null, 2.0, 0.0, 4.0, 0.5, 4.5, 
                     -0.5, 5.5, null), "S1", "C1");
-            CategoryPlot plot = new CategoryPlot(dataset,
+            CategoryPlot<String, String> plot = new CategoryPlot<>(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new BoxAndWhiskerRenderer());
             ChartRenderingInfo info = new ChartRenderingInfo();
@@ -357,7 +357,7 @@ public class BoxAndWhiskerRendererTest {
                     = new DefaultBoxAndWhiskerCategoryDataset<>();
             dataset.add(new BoxAndWhiskerItem(1.0, null, 0.0, 4.0, 0.5, 4.5, 
                     -0.5, 5.5, null), "S1", "C1");
-            CategoryPlot plot = new CategoryPlot(dataset,
+            CategoryPlot<String, String> plot = new CategoryPlot<>(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new BoxAndWhiskerRenderer());
             ChartRenderingInfo info = new ChartRenderingInfo();
@@ -383,7 +383,7 @@ public class BoxAndWhiskerRendererTest {
                     = new DefaultBoxAndWhiskerCategoryDataset<>();
             dataset.add(new BoxAndWhiskerItem(1.0, 2.0, null, 4.0, 0.5, 4.5, 
                     -0.5, 5.5, null), "S1", "C1");
-            CategoryPlot plot = new CategoryPlot(dataset,
+            CategoryPlot<String, String> plot = new CategoryPlot<>(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new BoxAndWhiskerRenderer());
             ChartRenderingInfo info = new ChartRenderingInfo();
@@ -409,7 +409,7 @@ public class BoxAndWhiskerRendererTest {
                     = new DefaultBoxAndWhiskerCategoryDataset<>();
             dataset.add(new BoxAndWhiskerItem(1.0, 2.0, 3.0, null, 0.5, 4.5, 
                     -0.5, 5.5, null), "S1", "C1");
-            CategoryPlot plot = new CategoryPlot(dataset,
+            CategoryPlot<String, String> plot = new CategoryPlot<>(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new BoxAndWhiskerRenderer());
             ChartRenderingInfo info = new ChartRenderingInfo();
@@ -435,7 +435,7 @@ public class BoxAndWhiskerRendererTest {
                     = new DefaultBoxAndWhiskerCategoryDataset<>();
             dataset.add(new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0, null, 4.5, 
                     -0.5, 5.5, null), "S1", "C1");
-            CategoryPlot plot = new CategoryPlot(dataset,
+            CategoryPlot<String, String> plot = new CategoryPlot<>(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new BoxAndWhiskerRenderer());
             ChartRenderingInfo info = new ChartRenderingInfo();
@@ -460,7 +460,7 @@ public class BoxAndWhiskerRendererTest {
                     = new DefaultBoxAndWhiskerCategoryDataset<>();
             dataset.add(new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0, 0.5, null, 
                     -0.5, 5.5, null), "S1", "C1");
-            CategoryPlot plot = new CategoryPlot(dataset,
+            CategoryPlot<String, String> plot = new CategoryPlot<>(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new BoxAndWhiskerRenderer());
             ChartRenderingInfo info = new ChartRenderingInfo();
@@ -484,7 +484,7 @@ public class BoxAndWhiskerRendererTest {
                     = new DefaultBoxAndWhiskerCategoryDataset<>();
             dataset.add(new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0, 0.5, 4.5, 
                     null, 5.5, null), "S1", "C1");
-            CategoryPlot plot = new CategoryPlot(dataset,
+            CategoryPlot<String, String> plot = new CategoryPlot<>(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new BoxAndWhiskerRenderer());
             ChartRenderingInfo info = new ChartRenderingInfo();
@@ -510,7 +510,7 @@ public class BoxAndWhiskerRendererTest {
                     = new DefaultBoxAndWhiskerCategoryDataset<>();
             dataset.add(new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0, 0.5, 4.5, -0.5, 
                     null, new ArrayList<>()), "S1", "C1");
-            CategoryPlot plot = new CategoryPlot(dataset,
+            CategoryPlot<String, String> plot = new CategoryPlot<>(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new BoxAndWhiskerRenderer());
             ChartRenderingInfo info = new ChartRenderingInfo();

@@ -215,9 +215,8 @@ public class SubCategoryAxis extends CategoryAxis
         double result = 0.0;
         g2.setFont(this.subLabelFont);
         FontMetrics fm = g2.getFontMetrics();
-        Iterator iterator = this.subCategories.iterator();
-        while (iterator.hasNext()) {
-            Comparable subcategory = (Comparable) iterator.next();
+        for (Object subCategory : this.subCategories) {
+            Comparable subcategory = (Comparable) subCategory;
             String label = subcategory.toString();
             Rectangle2D bounds = TextUtils.getTextBounds(label, g2, fm);
             double dim;

@@ -110,7 +110,7 @@ public class DeviationRenderer extends XYLineAndShapeRenderer {
     }
 
     /** The alpha transparency for the interval shading. */
-    private float alpha;
+    protected float alpha;
 
     /**
      * Creates a new renderer that displays lines and shapes for the data

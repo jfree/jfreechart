@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,20 +27,10 @@
  * ------------------------------
  * YIntervalSeriesCollection.java
  * ------------------------------
- * (C) Copyright 2006-2013, by Object Refinery Limited.
+ * (C) Copyright 2006-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 20-Oct-2006 : Version 1 (DG);
- * 27-Nov-2006 : Added clone() override (DG);
- * 20-Feb-2007 : Added getYValue(), getStartYValue() and getEndYValue()
- *               methods (DG);
- * 18-Jan-2008 : Added removeSeries() and removeAllSeries() methods (DG);
- * 22-Apr-2008 : Implemented PublicCloneable (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -49,7 +39,9 @@ package org.jfree.data.xy;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import org.jfree.chart.util.ObjectUtils;
+import java.util.Objects;
+
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 
@@ -58,13 +50,15 @@ import org.jfree.data.general.DatasetChangeEvent;
 /**
  * A collection of {@link YIntervalSeries} objects.
  *
+ * @param <S> The type for the series keys.
+ * 
  * @since 1.0.3
  *
  * @see YIntervalSeries
  */
 public class YIntervalSeriesCollection<S extends Comparable<S>> 
-        extends AbstractIntervalXYDataset
-        implements IntervalXYDataset, PublicCloneable, Serializable {
+        extends AbstractIntervalXYDataset<S>
+        implements IntervalXYDataset<S>, PublicCloneable, Serializable {
 
     /** Storage for the data series. */
     private List<YIntervalSeries> data;
@@ -341,7 +335,7 @@ public class YIntervalSeriesCollection<S extends Comparable<S>>
             return false;
         }
         YIntervalSeriesCollection<S> that = (YIntervalSeriesCollection) obj;
-        return ObjectUtils.equal(this.data, that.data);
+        return Objects.equals(this.data, that.data);
     }
 
     /**
@@ -355,7 +349,7 @@ public class YIntervalSeriesCollection<S extends Comparable<S>>
     public Object clone() throws CloneNotSupportedException {
         YIntervalSeriesCollection<S> clone
                 = (YIntervalSeriesCollection) super.clone();
-        clone.data = (List) ObjectUtils.deepClone(this.data);
+        clone.data = CloneUtils.cloneList(this.data);
         return clone;
     }
 

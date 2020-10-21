@@ -43,6 +43,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 import org.jfree.chart.LegendItemCollection;
 import org.jfree.chart.axis.AxisSpace;
@@ -53,7 +54,7 @@ import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.event.PlotChangeListener;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
-import org.jfree.chart.util.ObjectUtils;
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.ShadowGenerator;
 import org.jfree.data.Range;
@@ -260,9 +261,8 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
         else {
             // if the source point doesn't fall within a subplot, we do the
             // zoom on all subplots...
-            Iterator iterator = getSubplots().iterator();
-            while (iterator.hasNext()) {
-                subplot = (CategoryPlot) iterator.next();
+            for (CategoryPlot categoryPlot : getSubplots()) {
+                subplot = categoryPlot;
                 subplot.zoomRangeAxes(factor, info, source, useAnchor);
             }
         }
@@ -287,9 +287,8 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
         else {
             // if the source point doesn't fall within a subplot, we do the
             // zoom on all subplots...
-            Iterator iterator = getSubplots().iterator();
-            while (iterator.hasNext()) {
-                subplot = (CategoryPlot) iterator.next();
+            for (CategoryPlot categoryPlot : getSubplots()) {
+                subplot = categoryPlot;
                 subplot.zoomRangeAxes(lowerPercent, upperPercent, info, source);
             }
         }
@@ -462,9 +461,7 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
      * @param space  the space ({@code null} permitted).
      */
     protected void setFixedRangeAxisSpaceForSubplots(AxisSpace space) {
-        Iterator iterator = this.subplots.iterator();
-        while (iterator.hasNext()) {
-            CategoryPlot plot = (CategoryPlot) iterator.next();
+        for (CategoryPlot plot : this.subplots) {
             plot.setFixedRangeAxisSpace(space, false);
         }
     }
@@ -477,9 +474,7 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
     @Override
     public void setOrientation(PlotOrientation orientation) {
         super.setOrientation(orientation);
-        Iterator iterator = this.subplots.iterator();
-        while (iterator.hasNext()) {
-            CategoryPlot plot = (CategoryPlot) iterator.next();
+        for (CategoryPlot plot : this.subplots) {
             plot.setOrientation(orientation);
         }
 
@@ -495,9 +490,7 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
     public void setShadowGenerator(ShadowGenerator generator) {
         setNotify(false);
         super.setShadowGenerator(generator);
-        Iterator iterator = this.subplots.iterator();
-        while (iterator.hasNext()) {
-            CategoryPlot plot = (CategoryPlot) iterator.next();
+        for (CategoryPlot plot : this.subplots) {
             plot.setShadowGenerator(generator);
         }
         setNotify(true);
@@ -534,9 +527,7 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
         if (result == null) {
             result = new LegendItemCollection();
             if (this.subplots != null) {
-                Iterator iterator = this.subplots.iterator();
-                while (iterator.hasNext()) {
-                    CategoryPlot plot = (CategoryPlot) iterator.next();
+                for (CategoryPlot plot : this.subplots) {
                     LegendItemCollection more = plot.getLegendItems();
                     result.addAll(more);
                 }
@@ -555,13 +546,10 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
     public List getCategories() {
         List result = new java.util.ArrayList();
         if (this.subplots != null) {
-            Iterator iterator = this.subplots.iterator();
-            while (iterator.hasNext()) {
-                CategoryPlot plot = (CategoryPlot) iterator.next();
+            for (CategoryPlot plot : this.subplots) {
                 List more = plot.getCategories();
-                Iterator moreIterator = more.iterator();
-                while (moreIterator.hasNext()) {
-                    Comparable category = (Comparable) moreIterator.next();
+                for (Object o : more) {
+                    Comparable category = (Comparable) o;
                     if (!result.contains(category)) {
                         result.add(category);
                     }
@@ -639,7 +627,7 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
         if (this.gap != that.gap) {
             return false;
         }
-        if (!ObjectUtils.equal(this.subplots, that.subplots)) {
+        if (!Objects.equals(this.subplots, that.subplots)) {
             return false;
         }
         return super.equals(obj);
@@ -657,7 +645,7 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
     public Object clone() throws CloneNotSupportedException {
         CombinedDomainCategoryPlot result
             = (CombinedDomainCategoryPlot) super.clone();
-        result.subplots = (List<CategoryPlot>) ObjectUtils.deepClone(this.subplots);
+        result.subplots = (List<CategoryPlot>) CloneUtils.cloneList(this.subplots);
         for (Iterator it = result.subplots.iterator(); it.hasNext();) {
             Plot child = (Plot) it.next();
             child.setParent(result);

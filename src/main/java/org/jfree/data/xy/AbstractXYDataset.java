@@ -42,6 +42,8 @@ import org.jfree.data.general.AbstractSeriesDataset;
 /**
  * An base class that you can use to create new implementations of the
  * {@link XYDataset} interface.
+ * 
+ * @param <S> type for the series keys.
  */
 public abstract class AbstractXYDataset<S extends Comparable<S>> 
         extends AbstractSeriesDataset<S> implements XYDataset<S> {

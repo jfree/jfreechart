@@ -41,7 +41,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
-import org.jfree.chart.util.ObjectUtils;
+
 import org.jfree.chart.util.Args;
 
 import org.jfree.data.DomainInfo;
@@ -369,9 +369,7 @@ public class TimePeriodValuesCollection extends AbstractIntervalXYDataset
         boolean interval = includeInterval;
         Range result = null;
         Range temp = null;
-        Iterator iterator = this.data.iterator();
-        while (iterator.hasNext()) {
-            TimePeriodValues series = (TimePeriodValues) iterator.next();
+        for (TimePeriodValues series : this.data) {
             int count = series.getItemCount();
             if (count > 0) {
                 TimePeriod start = series.getTimePeriod(
@@ -432,7 +430,7 @@ public class TimePeriodValuesCollection extends AbstractIntervalXYDataset
         if (this.xPosition != that.xPosition) {
             return false;
         }
-        if (!ObjectUtils.equal(this.data, that.data)) {
+        if (!Objects.equals(this.data, that.data)) {
             return false;
         }
         return true;

@@ -58,11 +58,11 @@ import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 import org.jfree.chart.plot.IntervalMarker;
 import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.util.ObjectUtils;
 
 /**
  * A band that can be added to a number axis to display regions.
@@ -186,29 +186,28 @@ public class MarkerAxisBand implements Serializable {
                      double x, double y) {
 
         double h = getHeight(g2);
-        Iterator iterator = this.markers.iterator();
-        while (iterator.hasNext()) {
-            IntervalMarker marker = (IntervalMarker) iterator.next();
-            double start =  Math.max(
-                marker.getStartValue(), this.axis.getRange().getLowerBound()
+        for (Object o : this.markers) {
+            IntervalMarker marker = (IntervalMarker) o;
+            double start = Math.max(
+                    marker.getStartValue(), this.axis.getRange().getLowerBound()
             );
             double end = Math.min(
-                marker.getEndValue(), this.axis.getRange().getUpperBound()
+                    marker.getEndValue(), this.axis.getRange().getUpperBound()
             );
             double s = this.axis.valueToJava2D(
-                start, dataArea, RectangleEdge.BOTTOM
+                    start, dataArea, RectangleEdge.BOTTOM
             );
             double e = this.axis.valueToJava2D(
-                end, dataArea, RectangleEdge.BOTTOM
+                    end, dataArea, RectangleEdge.BOTTOM
             );
             Rectangle2D r = new Rectangle2D.Double(
-                s, y + this.topOuterGap, e - s,
-                h - this.topOuterGap - this.bottomOuterGap
+                    s, y + this.topOuterGap, e - s,
+                    h - this.topOuterGap - this.bottomOuterGap
             );
 
             Composite originalComposite = g2.getComposite();
             g2.setComposite(AlphaComposite.getInstance(
-                AlphaComposite.SRC_OVER, marker.getAlpha())
+                    AlphaComposite.SRC_OVER, marker.getAlpha())
             );
             g2.setPaint(marker.getPaint());
             g2.fill(r);
@@ -251,10 +250,10 @@ public class MarkerAxisBand implements Serializable {
         if (this.bottomOuterGap != that.bottomOuterGap) {
             return false;
         }
-        if (!ObjectUtils.equal(this.font, that.font)) {
+        if (!Objects.equals(this.font, that.font)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.markers, that.markers)) {
+        if (!Objects.equals(this.markers, that.markers)) {
             return false;
         }
         return true;

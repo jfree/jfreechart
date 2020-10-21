@@ -36,15 +36,15 @@
 
 package org.jfree.data.xy;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link DefaultTableXYDataset}.
@@ -99,7 +99,7 @@ public class TableXYDatasetTest {
     public void testSerialization() {
         DefaultTableXYDataset<String> d1 = new DefaultTableXYDataset<>();
         d1.addSeries(createSeries2());
-        DefaultTableXYDataset d2 = TestUtils.serialised(d1);
+        DefaultTableXYDataset<String> d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 

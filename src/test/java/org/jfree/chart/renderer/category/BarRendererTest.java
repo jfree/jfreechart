@@ -36,11 +36,11 @@
 
 package org.jfree.chart.renderer.category;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.awt.Color;
 
@@ -60,7 +60,7 @@ import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.Range;
 import org.jfree.data.category.DefaultCategoryDataset;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link BarRenderer} class.
@@ -232,8 +232,8 @@ public class BarRendererTest {
         DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         dataset.addValue(21.0, "R1", "C1");
         BarRenderer r = new BarRenderer();
-        CategoryPlot plot = new CategoryPlot(dataset, new CategoryAxis("x"),
-                new NumberAxis("y"), r);
+        CategoryPlot<String, String> plot = new CategoryPlot<>(dataset, 
+                new CategoryAxis("x"), new NumberAxis("y"), r);
         /*JFreeChart chart =*/ new JFreeChart(plot);
         LegendItem li = r.getLegendItem(0, 0);
         assertNotNull(li);
@@ -256,8 +256,8 @@ public class BarRendererTest {
         dataset1.addValue(24.0, "R4", "C1");
         dataset1.addValue(25.0, "R5", "C1");
         BarRenderer r = new BarRenderer();
-        CategoryPlot plot = new CategoryPlot(dataset0, new CategoryAxis("x"),
-                new NumberAxis("y"), r);
+        CategoryPlot<String, String> plot = new CategoryPlot<>(dataset0, 
+                new CategoryAxis("x"), new NumberAxis("y"), r);
         plot.setDataset(1, dataset1);
         /*JFreeChart chart =*/ new JFreeChart(plot);
         LegendItem li = r.getLegendItem(1, 2);

@@ -36,11 +36,11 @@
 
 package org.jfree.chart.renderer.xy;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import org.jfree.chart.labels.StandardXYSeriesLabelGenerator;
 import org.jfree.chart.labels.StandardXYToolTipGenerator;
@@ -61,7 +61,7 @@ public class AbstractXYItemRendererTest {
      *
      * @return A test dataset.
      */
-    private XYDataset createDataset1() {
+    private XYDataset<String> createDataset1() {
         XYSeries<String> series = new XYSeries<>("Series");
         series.add(1.0, 1.0);
         series.add(2.0, 2.0);
@@ -81,7 +81,7 @@ public class AbstractXYItemRendererTest {
         AbstractXYItemRenderer renderer = new StandardXYItemRenderer();
 
         // check the bounds of a simple dataset
-        XYDataset dataset = createDataset1();
+        XYDataset<String> dataset = createDataset1();
         Range r = renderer.findDomainBounds(dataset);
         assertEquals(1.0, r.getLowerBound(), EPSILON);
         assertEquals(3.0, r.getUpperBound(), EPSILON);

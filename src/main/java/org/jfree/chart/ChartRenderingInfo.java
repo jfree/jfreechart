@@ -46,7 +46,6 @@ import java.util.Objects;
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.entity.StandardEntityCollection;
 import org.jfree.chart.plot.PlotRenderingInfo;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 
@@ -184,13 +183,13 @@ public class ChartRenderingInfo implements Cloneable, Serializable {
             return false;
         }
         ChartRenderingInfo that = (ChartRenderingInfo) obj;
-        if (!ObjectUtils.equal(this.chartArea, that.chartArea)) {
+        if (!Objects.equals(this.chartArea, that.chartArea)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.plotInfo, that.plotInfo)) {
+        if (!Objects.equals(this.plotInfo, that.plotInfo)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.entities, that.entities)) {
+        if (!Objects.equals(this.entities, that.entities)) {
             return false;
         }
         return true;

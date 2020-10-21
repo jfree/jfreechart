@@ -44,8 +44,9 @@
 package org.jfree.chart.axis;
 
 import java.util.Date;
+import java.util.Objects;
+
 import org.jfree.chart.ui.TextAnchor;
-import org.jfree.chart.util.ObjectUtils;
 
 import org.jfree.chart.util.Args;
 
@@ -120,7 +121,7 @@ public class DateTick extends ValueTick {
             return false;
         }
         DateTick that = (DateTick) obj;
-        if (!ObjectUtils.equal(this.date, that.date)) {
+        if (!Objects.equals(this.date, that.date)) {
             return false;
         }
         return super.equals(obj);

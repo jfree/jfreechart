@@ -40,35 +40,35 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Date;
 import java.util.Locale;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertEquals;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.BeforeAll;
 
 /**
  * Tests for the {@link RelativeDateFormat} class.
  */
 public class RelativeDateFormatTest {
 
-    private Locale savedLocale;
+    private static Locale savedLocale;
 
     /**
      * Set a known locale for the tests.
      */
-    @Before
-    public void setUp() throws Exception {
-        this.savedLocale = Locale.getDefault();
+    @BeforeAll
+    public static void setUp() throws Exception {
+        savedLocale = Locale.getDefault();
         Locale.setDefault(Locale.UK);
     }
 
     /**
      * Restore the default locale after the tests complete.
      */
-    @After
-    public void tearDown() throws Exception {
-        Locale.setDefault(this.savedLocale);
+    @AfterAll
+    public static void tearDown() throws Exception {
+        Locale.setDefault(savedLocale);
     }
 
     /**

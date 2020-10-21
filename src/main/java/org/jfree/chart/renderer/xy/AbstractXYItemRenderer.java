@@ -94,7 +94,6 @@ import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.urls.XYURLGenerator;
 import org.jfree.chart.util.CloneUtils;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.data.Range;
 import org.jfree.data.general.DatasetUtils;
 import org.jfree.data.xy.XYDataset;
@@ -1376,32 +1375,15 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
     protected Object clone() throws CloneNotSupportedException {
         AbstractXYItemRenderer clone = (AbstractXYItemRenderer) super.clone();
         // 'plot' : just retain reference, not a deep copy
-
-        clone.itemLabelGeneratorMap = CloneUtils.cloneMapValues(
-                this.itemLabelGeneratorMap);
-        clone.defaultItemLabelGenerator = (XYItemLabelGenerator) 
-                CloneUtils.clone(this.defaultItemLabelGenerator);
-
-        clone.toolTipGeneratorMap = CloneUtils.cloneMapValues(
-                this.toolTipGeneratorMap);
-        
-        clone.defaultToolTipGenerator = (XYToolTipGenerator) CloneUtils.clone(
-                this.defaultToolTipGenerator);
-
-        clone.legendItemLabelGenerator = (XYSeriesLabelGenerator)
-                CloneUtils.clone(this.legendItemLabelGenerator);
-        
-        clone.legendItemToolTipGenerator = (XYSeriesLabelGenerator)
-                CloneUtils.clone(this.legendItemToolTipGenerator);
-
-        clone.legendItemURLGenerator = (XYSeriesLabelGenerator)
-                CloneUtils.clone(this.legendItemURLGenerator);
-        
-        clone.foregroundAnnotations = (List) CloneUtils.cloneList(
-                this.foregroundAnnotations);
-        clone.backgroundAnnotations = (List) CloneUtils.cloneList(
-                this.backgroundAnnotations);
-
+        clone.itemLabelGeneratorMap = CloneUtils.cloneMapValues(this.itemLabelGeneratorMap);
+        clone.defaultItemLabelGenerator = CloneUtils.clone(this.defaultItemLabelGenerator);
+        clone.toolTipGeneratorMap = CloneUtils.cloneMapValues(this.toolTipGeneratorMap);
+        clone.defaultToolTipGenerator = CloneUtils.clone(this.defaultToolTipGenerator);
+        clone.legendItemLabelGenerator = CloneUtils.clone(this.legendItemLabelGenerator);
+        clone.legendItemToolTipGenerator = CloneUtils.clone(this.legendItemToolTipGenerator);
+        clone.legendItemURLGenerator = CloneUtils.clone(this.legendItemURLGenerator);
+        clone.foregroundAnnotations = CloneUtils.cloneList(this.foregroundAnnotations);
+        clone.backgroundAnnotations = CloneUtils.cloneList(this.backgroundAnnotations);
         return clone;
     }
 
@@ -1424,18 +1406,16 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
         if (!this.itemLabelGeneratorMap.equals(that.itemLabelGeneratorMap)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.defaultItemLabelGenerator,
-                that.defaultItemLabelGenerator)) {
+        if (!Objects.equals(this.defaultItemLabelGenerator, that.defaultItemLabelGenerator)) {
             return false;
         }
         if (!this.toolTipGeneratorMap.equals(that.toolTipGeneratorMap)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.defaultToolTipGenerator,
-                that.defaultToolTipGenerator)) {
+        if (!Objects.equals(this.defaultToolTipGenerator, that.defaultToolTipGenerator)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.urlGenerator, that.urlGenerator)) {
+        if (!Objects.equals(this.urlGenerator, that.urlGenerator)) {
             return false;
         }
         if (!this.foregroundAnnotations.equals(that.foregroundAnnotations)) {
@@ -1444,16 +1424,13 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
         if (!this.backgroundAnnotations.equals(that.backgroundAnnotations)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.legendItemLabelGenerator,
-                that.legendItemLabelGenerator)) {
+        if (!Objects.equals(this.legendItemLabelGenerator, that.legendItemLabelGenerator)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.legendItemToolTipGenerator,
-                that.legendItemToolTipGenerator)) {
+        if (!Objects.equals(this.legendItemToolTipGenerator, that.legendItemToolTipGenerator)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.legendItemURLGenerator,
-                that.legendItemURLGenerator)) {
+        if (!Objects.equals(this.legendItemURLGenerator, that.legendItemURLGenerator)) {
             return false;
         }
         return super.equals(obj);

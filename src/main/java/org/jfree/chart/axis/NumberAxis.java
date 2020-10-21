@@ -48,6 +48,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 import org.jfree.chart.event.AxisChangeEvent;
 import org.jfree.chart.plot.Plot;
@@ -56,7 +57,6 @@ import org.jfree.chart.plot.ValueAxisPlot;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.TextAnchor;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.data.Range;
 import org.jfree.data.RangeType;
@@ -1100,11 +1100,10 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
         if (this.autoRangeStickyZero != that.autoRangeStickyZero) {
             return false;
         }
-        if (!ObjectUtils.equal(this.tickUnit, that.tickUnit)) {
+        if (!Objects.equals(this.tickUnit, that.tickUnit)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.numberFormatOverride,
-                that.numberFormatOverride)) {
+        if (!Objects.equals(this.numberFormatOverride, that.numberFormatOverride)) {
             return false;
         }
         if (!this.rangeType.equals(that.rangeType)) {

@@ -41,6 +41,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * A list of objects that can grow as required.
@@ -183,7 +184,7 @@ public class AbstractObjectList implements Cloneable, Serializable {
         final AbstractObjectList other = (AbstractObjectList) obj;
         final int listSize = size();
         for (int i = 0; i < listSize; i++) {
-           if (!ObjectUtils.equal(get(i), other.get(i))) {
+            if (!Objects.equals(get(i), other.get(i))) {
                return false;
            }
         }

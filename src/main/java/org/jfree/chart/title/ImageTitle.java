@@ -61,6 +61,7 @@ package org.jfree.chart.title;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.geom.Rectangle2D;
+import java.util.Objects;
 
 import org.jfree.chart.block.RectangleConstraint;
 import org.jfree.chart.event.TitleChangeEvent;
@@ -69,7 +70,6 @@ import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.Size2D;
 import org.jfree.chart.ui.VerticalAlignment;
-import org.jfree.chart.util.ObjectUtils;
 
 /**
  * A chart title that displays an image.  This is useful, for example, if you
@@ -359,7 +359,7 @@ public class ImageTitle extends Title {
             return false;
         }
         ImageTitle that = (ImageTitle) obj;
-        if (!ObjectUtils.equal(this.image, that.image)) {
+        if (!Objects.equals(this.image, that.image)) {
             return false;
         }
         return super.equals(obj);

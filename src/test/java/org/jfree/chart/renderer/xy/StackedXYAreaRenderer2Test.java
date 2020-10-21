@@ -36,10 +36,10 @@
 
 package org.jfree.chart.renderer.xy;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
@@ -56,7 +56,7 @@ import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.Range;
 import org.jfree.data.xy.DefaultTableXYDataset;
 import org.jfree.data.xy.TableXYDataset;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link StackedXYAreaRenderer2} class.
@@ -71,9 +71,9 @@ public class StackedXYAreaRenderer2Test {
     public void testDrawWithEmptyDataset() {
         boolean success;
         JFreeChart chart = ChartFactory.createStackedXYAreaChart("title", "x",
-                "y", new DefaultTableXYDataset(), PlotOrientation.VERTICAL,
+                "y", new DefaultTableXYDataset<String>(), PlotOrientation.VERTICAL,
                 true, false, false);
-        XYPlot plot = (XYPlot) chart.getPlot();
+        XYPlot<?> plot = (XYPlot) chart.getPlot();
         plot.setRenderer(new StackedXYAreaRenderer2());
         try {
             BufferedImage image = new BufferedImage(200 , 100,
@@ -159,7 +159,7 @@ public class StackedXYAreaRenderer2Test {
         JFreeChart chart = ChartFactory.createStackedXYAreaChart(
                 "Test Chart", "X", "Y", dataset, PlotOrientation.VERTICAL,
                 false, false, false);
-        XYPlot plot = (XYPlot) chart.getPlot();
+        XYPlot<?> plot = (XYPlot) chart.getPlot();
         StackedXYAreaRenderer2 renderer = new StackedXYAreaRenderer2();
         plot.setRenderer(renderer);
         NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
@@ -171,7 +171,7 @@ public class StackedXYAreaRenderer2Test {
         assertNull(renderer.findRangeBounds(null));
 
         // try empty dataset
-        assertNull(renderer.findRangeBounds(new DefaultTableXYDataset()));
+        assertNull(renderer.findRangeBounds(new DefaultTableXYDataset<String>()));
     }
 
 }

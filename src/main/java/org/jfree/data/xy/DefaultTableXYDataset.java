@@ -42,7 +42,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import org.jfree.chart.util.ObjectUtils;
+import java.util.Objects;
+
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
@@ -56,6 +57,8 @@ import org.jfree.data.general.SeriesChangeEvent;
 /**
  * An {@link XYDataset} where every series shares the same x-values (required
  * for generating stacked area charts).
+ * 
+ * @param <S> The type for the series keys.
  */
 public class DefaultTableXYDataset<S extends Comparable<S>> 
         extends AbstractIntervalXYDataset<S>
@@ -158,9 +161,8 @@ public class DefaultTableXYDataset<S extends Comparable<S>>
                 }
             }
         }
-        Iterator iterator = this.xPoints.iterator();
-        while (iterator.hasNext()) {
-            Number xPoint = (Number) iterator.next();
+        for (Object point : this.xPoints) {
+            Number xPoint = (Number) point;
             if (!seriesXPoints.contains(xPoint)) {
                 series.add(xPoint, null);
             }
@@ -427,9 +429,8 @@ public class DefaultTableXYDataset<S extends Comparable<S>>
      */
     public void prune() {
         HashSet hs = (HashSet) this.xPoints.clone();
-        Iterator iterator = hs.iterator();
-        while (iterator.hasNext()) {
-            Number x = (Number) iterator.next();
+        for (Object h : hs) {
+            Number x = (Number) h;
             if (canPrune(x)) {
                 removeAllValuesForX(x);
             }
@@ -476,7 +477,7 @@ public class DefaultTableXYDataset<S extends Comparable<S>>
         if (!this.intervalDelegate.equals(that.intervalDelegate)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.data, that.data)) {
+        if (!Objects.equals(this.data, that.data)) {
             return false;
         }
         return true;

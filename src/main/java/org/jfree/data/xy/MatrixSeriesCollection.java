@@ -48,7 +48,8 @@ package org.jfree.data.xy;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import org.jfree.chart.util.ObjectUtils;
+import java.util.Objects;
+
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
@@ -234,7 +235,7 @@ public class MatrixSeriesCollection<S extends Comparable<S>>
         if (obj instanceof MatrixSeriesCollection) {
             MatrixSeriesCollection<S> c = (MatrixSeriesCollection) obj;
 
-            return ObjectUtils.equal(this.seriesList, c.seriesList);
+            return Objects.equals(this.seriesList, c.seriesList);
         }
 
         return false;

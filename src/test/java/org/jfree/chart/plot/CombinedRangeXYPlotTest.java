@@ -36,8 +36,8 @@
 
 package org.jfree.chart.plot;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -59,7 +59,7 @@ import org.jfree.chart.util.CloneUtils;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link CombinedRangeXYPlot} class.
@@ -84,8 +84,8 @@ public class CombinedRangeXYPlotTest implements ChartChangeListener {
      */
     @Test
     public void testEquals() {
-        CombinedRangeXYPlot plot1 = createPlot();
-        CombinedRangeXYPlot plot2 = createPlot();
+        CombinedRangeXYPlot<String> plot1 = createPlot();
+        CombinedRangeXYPlot<String> plot2 = createPlot();
         assertTrue(plot1.equals(plot2));
         assertTrue(plot2.equals(plot1));
     }
@@ -95,24 +95,25 @@ public class CombinedRangeXYPlotTest implements ChartChangeListener {
      */
     @Test
     public void testRemoveSubplot() {
-        CombinedRangeXYPlot plot = new CombinedRangeXYPlot();
-        XYPlot plot1 = new XYPlot();
-        XYPlot plot2 = new XYPlot();
+        CombinedRangeXYPlot<String> plot = new CombinedRangeXYPlot<>();
+        XYPlot<String> plot1 = new XYPlot<>();
+        XYPlot<String> plot2 = new XYPlot<>();
         plot.add(plot1);
         plot.add(plot2);
         // remove plot2, but plot1 is removed instead
         plot.remove(plot2);
-        List<XYPlot> plots = plot.getSubplots();
-        assertTrue(plots.get(0) == plot1);
+        assertTrue(plot.getSubplots().get(0) == plot1);
     }
 
     /**
      * Confirm that cloning works.
+     * 
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        CombinedRangeXYPlot plot1 = createPlot();
-        CombinedRangeXYPlot plot2 = CloneUtils.clone(plot1);
+        CombinedRangeXYPlot<String> plot1 = createPlot();
+        CombinedRangeXYPlot<String> plot2 = CloneUtils.clone(plot1);
         assertTrue(plot1 != plot2);
         assertTrue(plot1.getClass() == plot2.getClass());
         assertTrue(plot1.equals(plot2));
@@ -123,8 +124,8 @@ public class CombinedRangeXYPlotTest implements ChartChangeListener {
      */
     @Test
     public void testSerialization() {
-        CombinedRangeXYPlot plot1 = createPlot();
-        CombinedRangeXYPlot plot2 = TestUtils.serialised(plot1);
+        CombinedRangeXYPlot<String> plot1 = createPlot();
+        CombinedRangeXYPlot<String> plot2 = TestUtils.serialised(plot1);
         assertEquals(plot1, plot2);
     }
 
@@ -134,10 +135,10 @@ public class CombinedRangeXYPlotTest implements ChartChangeListener {
      */
     @Test
     public void testNotification() {
-        CombinedRangeXYPlot plot = createPlot();
+        CombinedRangeXYPlot<String> plot = createPlot();
         JFreeChart chart = new JFreeChart(plot);
         chart.addChangeListener(this);
-        XYPlot subplot1 = plot.getSubplots().get(0);
+        XYPlot<String> subplot1 = plot.getSubplots().get(0);
         NumberAxis xAxis = (NumberAxis) subplot1.getDomainAxis();
         xAxis.setAutoRangeIncludesZero(!xAxis.getAutoRangeIncludesZero());
         assertEquals(1, this.events.size());
@@ -233,12 +234,12 @@ public class CombinedRangeXYPlotTest implements ChartChangeListener {
      *
      * @return A sample plot.
      */
-    private CombinedRangeXYPlot createPlot() {
+    private CombinedRangeXYPlot<String> createPlot() {
         // create subplot 1...
         XYDataset<String> data1 = createDataset1();
         XYItemRenderer renderer1 = new StandardXYItemRenderer();
         NumberAxis xAxis1 = new NumberAxis("X1");
-        XYPlot subplot1 = new XYPlot(data1, xAxis1, null, renderer1);
+        XYPlot<String> subplot1 = new XYPlot<>(data1, xAxis1, null, renderer1);
         subplot1.setRangeAxisLocation(AxisLocation.BOTTOM_OR_LEFT);
 
         XYTextAnnotation annotation
@@ -252,11 +253,11 @@ public class CombinedRangeXYPlotTest implements ChartChangeListener {
         XYItemRenderer renderer2 = new StandardXYItemRenderer();
         NumberAxis xAxis2 = new NumberAxis("X2");
         xAxis2.setAutoRangeIncludesZero(false);
-        XYPlot subplot2 = new XYPlot(data2, xAxis2, null, renderer2);
+        XYPlot<String> subplot2 = new XYPlot<>(data2, xAxis2, null, renderer2);
         subplot2.setRangeAxisLocation(AxisLocation.TOP_OR_LEFT);
 
         // parent plot...
-        CombinedRangeXYPlot plot = new CombinedRangeXYPlot(new NumberAxis(
+        CombinedRangeXYPlot<String> plot = new CombinedRangeXYPlot<>(new NumberAxis(
                 "Range"));
         plot.setGap(10.0);
 

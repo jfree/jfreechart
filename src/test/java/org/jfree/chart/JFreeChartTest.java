@@ -59,16 +59,16 @@ import org.jfree.data.time.Day;
 import org.jfree.data.time.RegularTimePeriod;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.fail;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Tests for the {@link JFreeChart} class.
@@ -81,7 +81,7 @@ public class JFreeChartTest implements ChartChangeListener {
     /**
      * Common test setup.
      */
-    @Before
+    @BeforeEach
     public void setUp() {
         DefaultPieDataset<String> data = new DefaultPieDataset<>();
         data.setValue("Java", 43.2);
@@ -260,20 +260,6 @@ public class JFreeChartTest implements ChartChangeListener {
         assertEquals(c1, c2);
         LegendTitle lt2 = c2.getLegend();
         assertSame(lt2.getSources()[0], c2.getPlot());
-    }
-
-    /**
-     * Serialize a 3D pie chart, restore it, and check for equality.
-     */
-    @Test
-    public void testSerialization2() {
-        DefaultPieDataset<String> data = new DefaultPieDataset<>();
-        data.setValue("Type 1", 54.5);
-        data.setValue("Type 2", 23.9);
-        data.setValue("Type 3", 45.8);
-        JFreeChart c1 = ChartFactory.createPieChart3D("Test", data);
-        JFreeChart c2 = TestUtils.serialised(c1);
-        assertEquals(c1, c2);
     }
 
     /**

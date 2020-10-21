@@ -88,10 +88,8 @@ import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.event.PlotChangeListener;
 import org.jfree.chart.event.TitleChangeEvent;
 import org.jfree.chart.event.TitleChangeListener;
-import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotRenderingInfo;
-import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.title.LegendTitle;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.chart.title.Title;
@@ -102,7 +100,6 @@ import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.Size2D;
 import org.jfree.chart.ui.VerticalAlignment;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.Range;
@@ -1228,38 +1225,47 @@ public class JFreeChart implements Drawable, TitleChangeListener,
         Object retValue = null;
         BlockParams p = new BlockParams();
         p.setGenerateEntities(entities);
-        if (position == RectangleEdge.TOP) {
-            Size2D size = t.arrange(g2, constraint);
-            titleArea = createAlignedRectangle2D(size, area,
-                    t.getHorizontalAlignment(), VerticalAlignment.TOP);
-            retValue = t.draw(g2, titleArea, p);
-            area.setRect(area.getX(), Math.min(area.getY() + size.height,
-                    area.getMaxY()), area.getWidth(), Math.max(area.getHeight()
-                    - size.height, 0));
-        } else if (position == RectangleEdge.BOTTOM) {
-            Size2D size = t.arrange(g2, constraint);
-            titleArea = createAlignedRectangle2D(size, area,
-                    t.getHorizontalAlignment(), VerticalAlignment.BOTTOM);
-            retValue = t.draw(g2, titleArea, p);
-            area.setRect(area.getX(), area.getY(), area.getWidth(),
-                    area.getHeight() - size.height);
-        } else if (position == RectangleEdge.RIGHT) {
-            Size2D size = t.arrange(g2, constraint);
-            titleArea = createAlignedRectangle2D(size, area,
-                    HorizontalAlignment.RIGHT, t.getVerticalAlignment());
-            retValue = t.draw(g2, titleArea, p);
-            area.setRect(area.getX(), area.getY(), area.getWidth()
-                    - size.width, area.getHeight());
-        } else if (position == RectangleEdge.LEFT) {
-            Size2D size = t.arrange(g2, constraint);
-            titleArea = createAlignedRectangle2D(size, area,
-                    HorizontalAlignment.LEFT, t.getVerticalAlignment());
-            retValue = t.draw(g2, titleArea, p);
-            area.setRect(area.getX() + size.width, area.getY(), area.getWidth()
-                    - size.width, area.getHeight());
-        }
-        else {
-            throw new RuntimeException("Unrecognised title position.");
+        switch (position) {
+            case TOP: {
+                Size2D size = t.arrange(g2, constraint);
+                titleArea = createAlignedRectangle2D(size, area,
+                        t.getHorizontalAlignment(), VerticalAlignment.TOP);
+                retValue = t.draw(g2, titleArea, p);
+                area.setRect(area.getX(), Math.min(area.getY() + size.height,
+                        area.getMaxY()), area.getWidth(), Math.max(area.getHeight()
+                        - size.height, 0));
+                break;
+            }
+            case BOTTOM: {
+                Size2D size = t.arrange(g2, constraint);
+                titleArea = createAlignedRectangle2D(size, area,
+                        t.getHorizontalAlignment(), VerticalAlignment.BOTTOM);
+                retValue = t.draw(g2, titleArea, p);
+                area.setRect(area.getX(), area.getY(), area.getWidth(),
+                        area.getHeight() - size.height);
+                break;
+            }
+            case RIGHT: {
+                Size2D size = t.arrange(g2, constraint);
+                titleArea = createAlignedRectangle2D(size, area,
+                        HorizontalAlignment.RIGHT, t.getVerticalAlignment());
+                retValue = t.draw(g2, titleArea, p);
+                area.setRect(area.getX(), area.getY(), area.getWidth()
+                        - size.width, area.getHeight());
+                break;
+            }
+            case LEFT: {
+                Size2D size = t.arrange(g2, constraint);
+                titleArea = createAlignedRectangle2D(size, area,
+                        HorizontalAlignment.LEFT, t.getVerticalAlignment());
+                retValue = t.draw(g2, titleArea, p);
+                area.setRect(area.getX() + size.width, area.getY(), area.getWidth()
+                        - size.width, area.getHeight());
+                break;
+            }
+            default: {
+                throw new RuntimeException("Unrecognised title position.");
+            }
         }
         EntityCollection result = null;
         if (retValue instanceof EntityBlockResult) {
@@ -1504,7 +1510,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
         if (this.borderVisible != that.borderVisible) {
             return false;
         }
-        if (!ObjectUtils.equal(this.borderStroke, that.borderStroke)) {
+        if (!Objects.equals(this.borderStroke, that.borderStroke)) {
             return false;
         }
         if (!PaintUtils.equal(this.borderPaint, that.borderPaint)) {
@@ -1513,13 +1519,13 @@ public class JFreeChart implements Drawable, TitleChangeListener,
         if (!this.padding.equals(that.padding)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.title, that.title)) {
+        if (!Objects.equals(this.title, that.title)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.subtitles, that.subtitles)) {
+        if (!Objects.equals(this.subtitles, that.subtitles)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.plot, that.plot)) {
+        if (!Objects.equals(this.plot, that.plot)) {
             return false;
         }
         if (!PaintUtils.equal(
@@ -1527,8 +1533,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
         )) {
             return false;
         }
-        if (!ObjectUtils.equal(this.backgroundImage,
-                that.backgroundImage)) {
+        if (!Objects.equals(this.backgroundImage, that.backgroundImage)) {
             return false;
         }
         if (this.backgroundImageAlignment != that.backgroundImageAlignment) {
@@ -1541,6 +1546,26 @@ public class JFreeChart implements Drawable, TitleChangeListener,
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int hash = 7;
+        hash = 59 * hash + Objects.hashCode(this.renderingHints);
+        hash = 59 * hash + (this.borderVisible ? 1 : 0);
+        hash = 59 * hash + Objects.hashCode(this.borderStroke);
+        hash = 59 * hash + Objects.hashCode(this.borderPaint);
+        hash = 59 * hash + Objects.hashCode(this.padding);
+        hash = 59 * hash + Objects.hashCode(this.title);
+        hash = 59 * hash + Objects.hashCode(this.subtitles);
+        hash = 59 * hash + Objects.hashCode(this.plot);
+        hash = 59 * hash + Objects.hashCode(this.backgroundPaint);
+        hash = 59 * hash + Objects.hashCode(this.backgroundImage);
+        hash = 59 * hash + this.backgroundImageAlignment;
+        hash = 59 * hash + Float.floatToIntBits(this.backgroundImageAlpha);
+        hash = 59 * hash + (this.notify ? 1 : 0);
+        return hash;
     }
 
     /**

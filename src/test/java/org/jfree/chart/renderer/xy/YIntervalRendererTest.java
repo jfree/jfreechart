@@ -36,9 +36,9 @@
 
 package org.jfree.chart.renderer.xy;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.LegendItem;
@@ -56,7 +56,7 @@ import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.xy.YIntervalSeries;
 import org.jfree.data.xy.YIntervalSeriesCollection;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link YIntervalRenderer} class.
@@ -233,8 +233,7 @@ public class YIntervalRendererTest {
         d2.addSeries(s5);
 
         YIntervalRenderer r = new YIntervalRenderer();
-        XYPlot plot = new XYPlot(d1, new NumberAxis("x"),
-                new NumberAxis("y"), r);
+        XYPlot<String> plot = new XYPlot<>(d1, new NumberAxis("x"), new NumberAxis("y"), r);
         plot.setDataset(1, d2);
         /*JFreeChart chart =*/ new JFreeChart(plot);
         LegendItem li = r.getLegendItem(1, 2);

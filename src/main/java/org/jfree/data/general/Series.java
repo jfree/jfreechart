@@ -42,9 +42,9 @@ import java.beans.PropertyVetoException;
 import java.beans.VetoableChangeListener;
 import java.beans.VetoableChangeSupport;
 import java.io.Serializable;
+import java.util.Objects;
 
 import javax.swing.event.EventListenerList;
-import org.jfree.chart.util.ObjectUtils;
 
 import org.jfree.chart.util.Args;
 
@@ -265,7 +265,7 @@ public abstract class Series<K extends Comparable<K>>
         if (!getKey().equals(that.getKey())) {
             return false;
         }
-        if (!ObjectUtils.equal(getDescription(), that.getDescription())) {
+        if (!Objects.equals(getDescription(), that.getDescription())) {
             return false;
         }
         return true;

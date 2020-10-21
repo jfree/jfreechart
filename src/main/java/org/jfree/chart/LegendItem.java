@@ -57,7 +57,6 @@ import java.util.Objects;
 import org.jfree.chart.text.AttributedStringUtils;
 import org.jfree.chart.ui.GradientPaintTransformer;
 import org.jfree.chart.ui.StandardGradientPaintTransformer;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
@@ -1010,7 +1009,7 @@ public class LegendItem implements Cloneable, Serializable {
                 that.attributedLabel)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.description, that.description)) {
+        if (!Objects.equals(this.description, that.description)) {
             return false;
         }
         if (this.shapeVisible != that.shapeVisible) {
@@ -1025,8 +1024,7 @@ public class LegendItem implements Cloneable, Serializable {
         if (!PaintUtils.equal(this.fillPaint, that.fillPaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.fillPaintTransformer,
-                that.fillPaintTransformer)) {
+        if (!Objects.equals(this.fillPaintTransformer, that.fillPaintTransformer)) {
             return false;
         }
         if (this.shapeOutlineVisible != that.shapeOutlineVisible) {
@@ -1050,13 +1048,39 @@ public class LegendItem implements Cloneable, Serializable {
         if (!PaintUtils.equal(this.linePaint, that.linePaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.labelFont, that.labelFont)) {
+        if (!Objects.equals(this.labelFont, that.labelFont)) {
             return false;
         }
         if (!PaintUtils.equal(this.labelPaint, that.labelPaint)) {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int hash = 7;
+        hash = 79 * hash + this.datasetIndex;
+        hash = 79 * hash + this.series;
+        hash = 79 * hash + Objects.hashCode(this.label);
+        hash = 79 * hash + Objects.hashCode(this.labelFont);
+        hash = 79 * hash + Objects.hashCode(this.labelPaint);
+        hash = 79 * hash + Objects.hashCode(this.attributedLabel);
+        hash = 79 * hash + Objects.hashCode(this.description);
+        hash = 79 * hash + (this.shapeVisible ? 1 : 0);
+        hash = 79 * hash + Objects.hashCode(this.shape);
+        hash = 79 * hash + (this.shapeFilled ? 1 : 0);
+        hash = 79 * hash + Objects.hashCode(this.fillPaint);
+        hash = 79 * hash + Objects.hashCode(this.fillPaintTransformer);
+        hash = 79 * hash + (this.shapeOutlineVisible ? 1 : 0);
+        hash = 79 * hash + Objects.hashCode(this.outlinePaint);
+        hash = 79 * hash + Objects.hashCode(this.outlineStroke);
+        hash = 79 * hash + (this.lineVisible ? 1 : 0);
+        hash = 79 * hash + Objects.hashCode(this.line);
+        hash = 79 * hash + Objects.hashCode(this.lineStroke);
+        hash = 79 * hash + Objects.hashCode(this.linePaint);
+        return hash;
     }
 
     /**

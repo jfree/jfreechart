@@ -580,7 +580,7 @@ public final class DatasetUtils {
      * @param includeInterval  include the x-interval (if any)?
      *
      * @return The bounds (or {@code null} if the dataset contains no
-     *     values.
+     *     values).
      *
      * @since 1.0.13
      */

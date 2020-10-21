@@ -49,7 +49,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-import org.jfree.chart.util.ObjectUtils;
+
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 
@@ -223,17 +223,16 @@ public class Task implements Cloneable, PublicCloneable, Serializable {
             return false;
         }
         Task that = (Task) object;
-        if (!ObjectUtils.equal(this.description, that.description)) {
+        if (!Objects.equals(this.description, that.description)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.duration, that.duration)) {
+        if (!Objects.equals(this.duration, that.duration)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.percentComplete,
-                that.percentComplete)) {
+        if (!Objects.equals(this.percentComplete, that.percentComplete)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.subtasks, that.subtasks)) {
+        if (!Objects.equals(this.subtasks, that.subtasks)) {
             return false;
         }
         return true;

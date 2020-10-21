@@ -41,7 +41,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
-import org.jfree.chart.util.ObjectUtils;
+
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 
@@ -250,9 +251,7 @@ public class TaskSeriesCollection<R extends Comparable<R>, C extends Comparable<
         series.addChangeListener(this);
 
         // look for any keys that we don't already know about...
-        Iterator iterator = series.getTasks().iterator();
-        while (iterator.hasNext()) {
-            Task task = (Task) iterator.next();
+        for (Task task : series.getTasks()) {
             C key = (C) task.getDescription(); // FIXME
             int index = this.keys.indexOf(key);
             if (index < 0) {
@@ -629,9 +628,7 @@ public class TaskSeriesCollection<R extends Comparable<R>, C extends Comparable<
         for (int i = 0; i < getSeriesCount(); i++) {
             TaskSeries<R> series = this.data.get(i);
             // look for any keys that we don't already know about...
-            Iterator iterator = series.getTasks().iterator();
-            while (iterator.hasNext()) {
-                Task task = (Task) iterator.next();
+            for (Task task : series.getTasks()) {
                 C key = (C) task.getDescription(); // FIXME
                 int index = this.keys.indexOf(key);
                 if (index < 0) {
@@ -658,7 +655,7 @@ public class TaskSeriesCollection<R extends Comparable<R>, C extends Comparable<
             return false;
         }
         TaskSeriesCollection that = (TaskSeriesCollection) obj;
-        if (!ObjectUtils.equal(this.data, that.data)) {
+        if (!Objects.equals(this.data, that.data)) {
             return false;
         }
         return true;
@@ -682,7 +679,7 @@ public class TaskSeriesCollection<R extends Comparable<R>, C extends Comparable<
     @Override
     public Object clone() throws CloneNotSupportedException {
         TaskSeriesCollection clone = (TaskSeriesCollection) super.clone();
-        clone.data = (List) ObjectUtils.deepClone(this.data);
+        clone.data = CloneUtils.cloneList(this.data);
         clone.keys = new java.util.ArrayList(this.keys);
         return clone;
     }

@@ -41,7 +41,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-import org.jfree.chart.util.ObjectUtils;
 
 import org.jfree.data.Range;
 import org.jfree.data.RangeInfo;
@@ -526,7 +525,7 @@ public class DefaultBoxAndWhiskerXYDataset<S extends Comparable<S>>
         }
         DefaultBoxAndWhiskerXYDataset that
                 = (DefaultBoxAndWhiskerXYDataset) obj;
-        if (!ObjectUtils.equal(this.seriesKey, that.seriesKey)) {
+        if (!Objects.equals(this.seriesKey, that.seriesKey)) {
             return false;
         }
         if (!this.dates.equals(that.dates)) {

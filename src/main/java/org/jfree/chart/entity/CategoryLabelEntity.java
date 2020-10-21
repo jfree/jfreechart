@@ -42,10 +42,10 @@
 package org.jfree.chart.entity;
 
 import java.awt.Shape;
+import java.util.Objects;
 
 import org.jfree.chart.HashUtils;
 import org.jfree.chart.axis.CategoryAxis;
-import org.jfree.chart.util.ObjectUtils;
 
 /**
  * An entity to represent the labels on a {@link CategoryAxis}.
@@ -96,7 +96,7 @@ public class CategoryLabelEntity<C extends Comparable<C>> extends TickLabelEntit
             return false;
         }
         CategoryLabelEntity<C> that = (CategoryLabelEntity) obj;
-        if (!ObjectUtils.equal(this.key, that.key)) {
+        if (!Objects.equals(this.key, that.key)) {
             return false;
         }
         return super.equals(obj);

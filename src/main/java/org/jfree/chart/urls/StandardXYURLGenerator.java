@@ -37,7 +37,8 @@
 package org.jfree.chart.urls;
 
 import java.io.Serializable;
-import org.jfree.chart.util.ObjectUtils;
+import java.util.Objects;
+
 import org.jfree.chart.util.Args;
 
 import org.jfree.data.xy.XYDataset;
@@ -142,15 +143,13 @@ public class StandardXYURLGenerator implements XYURLGenerator, Serializable {
             return false;
         }
         StandardXYURLGenerator that = (StandardXYURLGenerator) obj;
-        if (!ObjectUtils.equal(that.prefix, this.prefix)) {
+        if (!Objects.equals(that.prefix, this.prefix)) {
             return false;
         }
-        if (!ObjectUtils.equal(that.seriesParameterName,
-                this.seriesParameterName)) {
+        if (!Objects.equals(that.seriesParameterName, this.seriesParameterName)) {
             return false;
         }
-        if (!ObjectUtils.equal(that.itemParameterName,
-                this.itemParameterName)) {
+        if (!Objects.equals(that.itemParameterName, this.itemParameterName)) {
             return false;
         }
         return true;

@@ -67,6 +67,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.TreeMap;
@@ -96,7 +97,6 @@ import org.jfree.chart.ui.Layer;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.util.CloneUtils;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
@@ -2258,18 +2258,14 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>> exte
     public void clearDomainMarkers() {
         if (this.backgroundDomainMarkers != null) {
             Set<Integer> keys = this.backgroundDomainMarkers.keySet();
-            Iterator<Integer> iterator = keys.iterator();
-            while (iterator.hasNext()) {
-                Integer key = iterator.next();
+            for (Integer key : keys) {
                 clearDomainMarkers(key);
             }
             this.backgroundDomainMarkers.clear();
         }
         if (this.foregroundDomainMarkers != null) {
             Set<Integer> keys = this.foregroundDomainMarkers.keySet();
-            Iterator<Integer> iterator = keys.iterator();
-            while (iterator.hasNext()) {
-                Integer key = iterator.next();
+            for (Integer key : keys) {
                 clearDomainMarkers(key);
             }
             this.foregroundDomainMarkers.clear();
@@ -2325,9 +2321,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>> exte
             Collection<Marker> markers
                 = this.backgroundDomainMarkers.get(key);
             if (markers != null) {
-                Iterator<Marker> iterator = markers.iterator();
-                while (iterator.hasNext()) {
-                    Marker m = iterator.next();
+                for (Marker m : markers) {
                     m.removeChangeListener(this);
                 }
                 markers.clear();
@@ -2337,9 +2331,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>> exte
             Collection<Marker> markers
                 = this.foregroundDomainMarkers.get(key);
             if (markers != null) {
-                Iterator<Marker> iterator = markers.iterator();
-                while (iterator.hasNext()) {
-                    Marker m = iterator.next();
+                for (Marker m : markers) {
                     m.removeChangeListener(this);
                 }
                 markers.clear();
@@ -2524,18 +2516,14 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>> exte
     public void clearRangeMarkers() {
         if (this.backgroundRangeMarkers != null) {
             Set<Integer> keys = this.backgroundRangeMarkers.keySet();
-            Iterator<Integer> iterator = keys.iterator();
-            while (iterator.hasNext()) {
-                Integer key = iterator.next();
+            for (Integer key : keys) {
                 clearRangeMarkers(key);
             }
             this.backgroundRangeMarkers.clear();
         }
         if (this.foregroundRangeMarkers != null) {
             Set<Integer> keys = this.foregroundRangeMarkers.keySet();
-            Iterator<Integer> iterator = keys.iterator();
-            while (iterator.hasNext()) {
-                Integer key = iterator.next();
+            for (Integer key : keys) {
                 clearRangeMarkers(key);
             }
             this.foregroundRangeMarkers.clear();
@@ -2593,9 +2581,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>> exte
             Collection<Marker> markers
                 = this.backgroundRangeMarkers.get(key);
             if (markers != null) {
-                Iterator<Marker> iterator = markers.iterator();
-                while (iterator.hasNext()) {
-                    Marker m = iterator.next();
+                for (Marker m : markers) {
                     m.removeChangeListener(this);
                 }
                 markers.clear();
@@ -2605,9 +2591,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>> exte
             Collection<Marker> markers
                 = this.foregroundRangeMarkers.get(key);
             if (markers != null) {
-                Iterator<Marker> iterator = markers.iterator();
-                while (iterator.hasNext()) {
-                    Marker m = iterator.next();
+                for (Marker m : markers) {
                     m.removeChangeListener(this);
                 }
                 markers.clear();
@@ -3896,9 +3880,8 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>> exte
         Collection<Marker> markers = getDomainMarkers(index, layer);
         CategoryAxis axis = getDomainAxisForDataset(index);
         if (markers != null && axis != null) {
-            Iterator<Marker> iterator = markers.iterator();
-            while (iterator.hasNext()) {
-                CategoryMarker marker = (CategoryMarker) iterator.next();
+            for (Marker value : markers) {
+                CategoryMarker marker = (CategoryMarker) value;
                 r.drawDomainMarker(g2, this, axis, marker, dataArea);
             }
         }
@@ -4602,7 +4585,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>> exte
         if (this.orientation != that.orientation) {
             return false;
         }
-        if (!ObjectUtils.equal(this.axisOffset, that.axisOffset)) {
+        if (!Objects.equals(this.axisOffset, that.axisOffset)) {
             return false;
         }
         if (!this.domainAxes.equals(that.domainAxes)) {
@@ -4620,15 +4603,13 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>> exte
         if (!this.rangeAxisLocations.equals(that.rangeAxisLocations)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.datasetToDomainAxesMap,
-                that.datasetToDomainAxesMap)) {
+        if (!Objects.equals(this.datasetToDomainAxesMap, that.datasetToDomainAxesMap)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.datasetToRangeAxesMap,
-                that.datasetToRangeAxesMap)) {
+        if (!Objects.equals(this.datasetToRangeAxesMap, that.datasetToRangeAxesMap)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.renderers, that.renderers)) {
+        if (!Objects.equals(this.renderers, that.renderers)) {
             return false;
         }
         if (this.renderingOrder != that.renderingOrder) {
@@ -4646,8 +4627,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>> exte
         if (this.domainGridlinePosition != that.domainGridlinePosition) {
             return false;
         }
-        if (!ObjectUtils.equal(this.domainGridlineStroke,
-                that.domainGridlineStroke)) {
+        if (!Objects.equals(this.domainGridlineStroke, that.domainGridlineStroke)) {
             return false;
         }
         if (!PaintUtils.equal(this.domainGridlinePaint,
@@ -4657,8 +4637,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>> exte
         if (this.rangeGridlinesVisible != that.rangeGridlinesVisible) {
             return false;
         }
-        if (!ObjectUtils.equal(this.rangeGridlineStroke,
-                that.rangeGridlineStroke)) {
+        if (!Objects.equals(this.rangeGridlineStroke, that.rangeGridlineStroke)) {
             return false;
         }
         if (!PaintUtils.equal(this.rangeGridlinePaint,
@@ -4674,8 +4653,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>> exte
         if (this.rangeCrosshairValue != that.rangeCrosshairValue) {
             return false;
         }
-        if (!ObjectUtils.equal(this.rangeCrosshairStroke,
-                that.rangeCrosshairStroke)) {
+        if (!Objects.equals(this.rangeCrosshairStroke, that.rangeCrosshairStroke)) {
             return false;
         }
         if (!PaintUtils.equal(this.rangeCrosshairPaint,
@@ -4686,41 +4664,34 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>> exte
                 != that.rangeCrosshairLockedOnData) {
             return false;
         }
-        if (!ObjectUtils.equal(this.foregroundDomainMarkers,
-                that.foregroundDomainMarkers)) {
+        if (!Objects.equals(this.foregroundDomainMarkers, that.foregroundDomainMarkers)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.datasets, that.datasets)){
+        if (!Objects.equals(this.datasets, that.datasets)){
             return false;
         }
-        if (!ObjectUtils.equal(this.backgroundDomainMarkers,
-                that.backgroundDomainMarkers)) {
+        if (!Objects.equals(this.backgroundDomainMarkers, that.backgroundDomainMarkers)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.foregroundRangeMarkers,
-                that.foregroundRangeMarkers)) {
+        if (!Objects.equals(this.foregroundRangeMarkers, that.foregroundRangeMarkers)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.backgroundRangeMarkers,
-                that.backgroundRangeMarkers)) {
+        if (!Objects.equals(this.backgroundRangeMarkers, that.backgroundRangeMarkers)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.annotations, that.annotations)) {
+        if (!Objects.equals(this.annotations, that.annotations)) {
             return false;
         }
         if (this.weight != that.weight) {
             return false;
         }
-        if (!ObjectUtils.equal(this.fixedDomainAxisSpace,
-                that.fixedDomainAxisSpace)) {
+        if (!Objects.equals(this.fixedDomainAxisSpace, that.fixedDomainAxisSpace)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.fixedRangeAxisSpace,
-                that.fixedRangeAxisSpace)) {
+        if (!Objects.equals(this.fixedRangeAxisSpace, that.fixedRangeAxisSpace)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.fixedLegendItems,
-                that.fixedLegendItems)) {
+        if (!Objects.equals(this.fixedLegendItems, that.fixedLegendItems)) {
             return false;
         }
         if (this.domainCrosshairVisible != that.domainCrosshairVisible) {
@@ -4729,20 +4700,17 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>> exte
         if (this.crosshairDatasetIndex != that.crosshairDatasetIndex) {
             return false;
         }
-        if (!ObjectUtils.equal(this.domainCrosshairColumnKey,
-                that.domainCrosshairColumnKey)) {
+        if (!Objects.equals(this.domainCrosshairColumnKey, that.domainCrosshairColumnKey)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.domainCrosshairRowKey,
-                that.domainCrosshairRowKey)) {
+        if (!Objects.equals(this.domainCrosshairRowKey, that.domainCrosshairRowKey)) {
             return false;
         }
         if (!PaintUtils.equal(this.domainCrosshairPaint,
                 that.domainCrosshairPaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.domainCrosshairStroke,
-                that.domainCrosshairStroke)) {
+        if (!Objects.equals(this.domainCrosshairStroke, that.domainCrosshairStroke)) {
             return false;
         }
         if (this.rangeMinorGridlinesVisible
@@ -4753,8 +4721,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>> exte
                 that.rangeMinorGridlinePaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.rangeMinorGridlineStroke,
-                that.rangeMinorGridlineStroke)) {
+        if (!Objects.equals(this.rangeMinorGridlineStroke, that.rangeMinorGridlineStroke)) {
             return false;
         }
         if (this.rangeZeroBaselineVisible != that.rangeZeroBaselineVisible) {
@@ -4764,12 +4731,10 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>> exte
                 that.rangeZeroBaselinePaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.rangeZeroBaselineStroke,
-                that.rangeZeroBaselineStroke)) {
+        if (!Objects.equals(this.rangeZeroBaselineStroke, that.rangeZeroBaselineStroke)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.shadowGenerator,
-                that.shadowGenerator)) {
+        if (!Objects.equals(this.shadowGenerator, that.shadowGenerator)) {
             return false;
         }
         return super.equals(obj);

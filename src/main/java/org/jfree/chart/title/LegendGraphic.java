@@ -61,6 +61,7 @@ import java.awt.geom.Rectangle2D;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Objects;
 
 import org.jfree.chart.block.AbstractBlock;
 import org.jfree.chart.block.Block;
@@ -70,7 +71,6 @@ import org.jfree.chart.ui.GradientPaintTransformer;
 import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.ui.Size2D;
 import org.jfree.chart.ui.StandardGradientPaintTransformer;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
@@ -651,8 +651,7 @@ public class LegendGraphic extends AbstractBlock
         if (!PaintUtils.equal(this.fillPaint, that.fillPaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.fillPaintTransformer,
-                that.fillPaintTransformer)) {
+        if (!Objects.equals(this.fillPaintTransformer, that.fillPaintTransformer)) {
             return false;
         }
         if (this.shapeOutlineVisible != that.shapeOutlineVisible) {
@@ -661,7 +660,7 @@ public class LegendGraphic extends AbstractBlock
         if (!PaintUtils.equal(this.outlinePaint, that.outlinePaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.outlineStroke, that.outlineStroke)) {
+        if (!Objects.equals(this.outlineStroke, that.outlineStroke)) {
             return false;
         }
         if (this.shapeAnchor != that.shapeAnchor) {
@@ -679,7 +678,7 @@ public class LegendGraphic extends AbstractBlock
         if (!PaintUtils.equal(this.linePaint, that.linePaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.lineStroke, that.lineStroke)) {
+        if (!Objects.equals(this.lineStroke, that.lineStroke)) {
             return false;
         }
         return super.equals(obj);
@@ -693,7 +692,7 @@ public class LegendGraphic extends AbstractBlock
     @Override
     public int hashCode() {
         int result = 193;
-        result = 37 * result + ObjectUtils.hashCode(this.fillPaint);
+        result = 37 * result + Objects.hashCode(this.fillPaint);
         // FIXME: use other fields too
         return result;
     }

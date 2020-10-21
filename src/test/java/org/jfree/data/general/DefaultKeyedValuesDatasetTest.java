@@ -38,9 +38,9 @@ package org.jfree.data.general;
 
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.CloneUtils;
-import org.junit.Test;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Tests for the {@link DefaultKeyedValuesDataset} class.

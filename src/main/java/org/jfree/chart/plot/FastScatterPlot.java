@@ -86,6 +86,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 import org.jfree.chart.axis.AxisSpace;
@@ -97,7 +98,6 @@ import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.util.ArrayUtils;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.ResourceBundleWrapper;
@@ -628,9 +628,8 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
         Object saved = g2.getRenderingHint(RenderingHints.KEY_STROKE_CONTROL);
         g2.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, 
                 RenderingHints.VALUE_STROKE_NORMALIZE);
-        Iterator iterator = ticks.iterator();
-        while (iterator.hasNext()) {
-            ValueTick tick = (ValueTick) iterator.next();
+        for (Object o : ticks) {
+            ValueTick tick = (ValueTick) o;
             double v = this.domainAxis.valueToJava2D(tick.getValue(),
                     dataArea, RectangleEdge.BOTTOM);
             Line2D line = new Line2D.Double(v, dataArea.getMinY(), v,
@@ -659,9 +658,8 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
         g2.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, 
                 RenderingHints.VALUE_STROKE_NORMALIZE);
 
-        Iterator iterator = ticks.iterator();
-        while (iterator.hasNext()) {
-            ValueTick tick = (ValueTick) iterator.next();
+        for (Object o : ticks) {
+            ValueTick tick = (ValueTick) o;
             double v = this.rangeAxis.valueToJava2D(tick.getValue(),
                     dataArea, RectangleEdge.LEFT);
             Line2D line = new Line2D.Double(dataArea.getMinX(), v,
@@ -1023,10 +1021,10 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
         if (!ArrayUtils.equal(this.data, that.data)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.domainAxis, that.domainAxis)) {
+        if (!Objects.equals(this.domainAxis, that.domainAxis)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.rangeAxis, that.rangeAxis)) {
+        if (!Objects.equals(this.rangeAxis, that.rangeAxis)) {
             return false;
         }
         if (!PaintUtils.equal(this.paint, that.paint)) {
@@ -1039,8 +1037,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
                 that.domainGridlinePaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.domainGridlineStroke,
-                that.domainGridlineStroke)) {
+        if (!Objects.equals(this.domainGridlineStroke, that.domainGridlineStroke)) {
             return false;
         }
         if (!this.rangeGridlinesVisible == that.rangeGridlinesVisible) {
@@ -1050,8 +1047,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
                 that.rangeGridlinePaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.rangeGridlineStroke,
-                that.rangeGridlineStroke)) {
+        if (!Objects.equals(this.rangeGridlineStroke, that.rangeGridlineStroke)) {
             return false;
         }
         return true;

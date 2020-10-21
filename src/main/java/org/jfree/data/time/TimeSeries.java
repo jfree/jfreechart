@@ -48,8 +48,8 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.TimeZone;
-import org.jfree.chart.util.ObjectUtils;
 
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.CloneUtils;
@@ -1067,7 +1067,7 @@ public class TimeSeries<S extends Comparable<S>> extends Series<S>
     @Override
     public Object clone() throws CloneNotSupportedException {
         TimeSeries<S> clone = (TimeSeries) super.clone();
-        clone.data = (List) ObjectUtils.deepClone(this.data);
+        clone.data = CloneUtils.cloneList(this.data);
         return clone;
     }
 
@@ -1173,16 +1173,13 @@ public class TimeSeries<S extends Comparable<S>> extends Series<S>
             return false;
         }
         TimeSeries<S> that = (TimeSeries) obj;
-        if (!ObjectUtils.equal(getDomainDescription(),
-                that.getDomainDescription())) {
+        if (!Objects.equals(getDomainDescription(), that.getDomainDescription())) {
             return false;
         }
-        if (!ObjectUtils.equal(getRangeDescription(),
-                that.getRangeDescription())) {
+        if (!Objects.equals(getRangeDescription(), that.getRangeDescription())) {
             return false;
         }
-        if (!ObjectUtils.equal(this.timePeriodClass,
-                that.timePeriodClass)) {
+        if (!Objects.equals(this.timePeriodClass, that.timePeriodClass)) {
             return false;
         }
         if (getMaximumItemAge() != that.getMaximumItemAge()) {
@@ -1195,7 +1192,7 @@ public class TimeSeries<S extends Comparable<S>> extends Series<S>
         if (count != that.getItemCount()) {
             return false;
         }
-        if (!ObjectUtils.equal(this.data, that.data)) {
+        if (!Objects.equals(this.data, that.data)) {
             return false;
         }
         return super.equals(obj);
@@ -1279,9 +1276,7 @@ public class TimeSeries<S extends Comparable<S>> extends Series<S>
     private void updateMinMaxYByIteration() {
         this.minY = Double.NaN;
         this.maxY = Double.NaN;
-        Iterator iterator = this.data.iterator();
-        while (iterator.hasNext()) {
-            TimeSeriesDataItem item = (TimeSeriesDataItem) iterator.next();
+        for (TimeSeriesDataItem item : this.data) {
             updateBoundsForAddedItem(item);
         }
     }

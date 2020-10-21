@@ -37,7 +37,8 @@
 package org.jfree.data.xy;
 
 import java.io.Serializable;
-import org.jfree.chart.util.ObjectUtils;
+import java.util.Objects;
+
 import org.jfree.chart.util.Args;
 import org.jfree.data.ItemKey;
 
@@ -117,7 +118,7 @@ public class XYItemKey<S extends Comparable<S>> implements ItemKey,
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 41 * hash + ObjectUtils.hashCode(this.seriesKey);
+        hash = 41 * hash + Objects.hashCode(this.seriesKey);
         hash = 41 * hash + this.itemIndex;
         return hash;
     }

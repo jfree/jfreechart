@@ -59,6 +59,9 @@ import org.jfree.data.general.DatasetChangeEvent;
 
 /**
  * A default implementation of the {@link CategoryDataset} interface.
+ * 
+ * @param <R> The type for the row (series) keys.
+ * @param <C> The type for the column (item) keys.
  */
 public class DefaultCategoryDataset<R extends Comparable<R>, C extends Comparable<C>> 
         extends AbstractDataset implements CategoryDataset<R, C>, 

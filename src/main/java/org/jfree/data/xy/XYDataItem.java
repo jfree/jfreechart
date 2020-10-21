@@ -37,7 +37,8 @@
 package org.jfree.data.xy;
 
 import java.io.Serializable;
-import org.jfree.chart.util.ObjectUtils;
+import java.util.Objects;
+
 import org.jfree.chart.util.Args;
 
 /**
@@ -213,7 +214,7 @@ public class XYDataItem implements Cloneable, Comparable<XYDataItem>, Serializab
         if (!this.x.equals(that.x)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.y, that.y)) {
+        if (!Objects.equals(this.y, that.y)) {
             return false;
         }
         return true;

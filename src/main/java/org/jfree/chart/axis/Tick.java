@@ -47,8 +47,9 @@
 package org.jfree.chart.axis;
 
 import java.io.Serializable;
+import java.util.Objects;
+
 import org.jfree.chart.ui.TextAnchor;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
 
 /**
@@ -141,13 +142,13 @@ public abstract class Tick implements Serializable, Cloneable {
         }
         if (obj instanceof Tick) {
             Tick t = (Tick) obj;
-            if (!ObjectUtils.equal(this.text, t.text)) {
+            if (!Objects.equals(this.text, t.text)) {
                 return false;
             }
-            if (!ObjectUtils.equal(this.textAnchor, t.textAnchor)) {
+            if (!Objects.equals(this.textAnchor, t.textAnchor)) {
                 return false;
             }
-            if (!ObjectUtils.equal(this.rotationAnchor, t.rotationAnchor)) {
+            if (!Objects.equals(this.rotationAnchor, t.rotationAnchor)) {
                 return false;
             }
             if (!(this.angle == t.angle)) {

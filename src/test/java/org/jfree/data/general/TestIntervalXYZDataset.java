@@ -43,7 +43,7 @@ import org.jfree.data.xy.IntervalXYZDataset;
  * An implementation of the {@link IntervalXYZDataset} interface that can be
  * used for testing.
  */
-public class TestIntervalXYZDataset implements IntervalXYZDataset {
+public class TestIntervalXYZDataset implements IntervalXYZDataset<Integer> {
 
     private DatasetGroup group;
     
@@ -139,12 +139,12 @@ public class TestIntervalXYZDataset implements IntervalXYZDataset {
     }
 
     @Override
-    public Comparable getSeriesKey(int series) {
+    public Integer getSeriesKey(int series) {
         return series;
     }
 
     @Override
-    public int indexOf(Comparable seriesKey) {
+    public int indexOf(Integer seriesKey) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

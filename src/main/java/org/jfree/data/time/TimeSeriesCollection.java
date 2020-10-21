@@ -45,8 +45,10 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.TimeZone;
-import org.jfree.chart.util.ObjectUtils;
+
+import org.jfree.chart.util.CloneUtils;
 import org.jfree.chart.util.Args;
 
 import org.jfree.data.DomainInfo;
@@ -570,9 +572,8 @@ public class TimeSeriesCollection<S extends Comparable<S>>
     public Range getDomainBounds(List visibleSeriesKeys,
             boolean includeInterval) {
         Range result = null;
-        Iterator iterator = visibleSeriesKeys.iterator();
-        while (iterator.hasNext()) {
-            Comparable seriesKey = (Comparable) iterator.next();
+        for (Object visibleSeriesKey : visibleSeriesKeys) {
+            Comparable seriesKey = (Comparable) visibleSeriesKey;
             TimeSeries<S> series = getSeries((S) seriesKey);
             int count = series.getItemCount();
             if (count > 0) {
@@ -626,11 +627,10 @@ public class TimeSeriesCollection<S extends Comparable<S>>
     public Range getRangeBounds(List visibleSeriesKeys, Range xRange,
             boolean includeInterval) {
         Range result = null;
-        Iterator iterator = visibleSeriesKeys.iterator();
-        while (iterator.hasNext()) {
-            Comparable seriesKey = (Comparable) iterator.next();
+        for (Object visibleSeriesKey : visibleSeriesKeys) {
+            Comparable seriesKey = (Comparable) visibleSeriesKey;
             TimeSeries<S> series = getSeries((S) seriesKey);
-            Range r = series.findValueRange(xRange, this.xPosition, 
+            Range r = series.findValueRange(xRange, this.xPosition,
                     this.workingCalendar.getTimeZone());
             result = Range.combineIgnoringNaN(result, r);
         }
@@ -687,7 +687,7 @@ public class TimeSeriesCollection<S extends Comparable<S>>
         if (this.xPosition != that.xPosition) {
             return false;
         }
-        if (!ObjectUtils.equal(this.data, that.data)) {
+        if (!Objects.equals(this.data, that.data)) {
             return false;
         }
         return true;
@@ -720,7 +720,7 @@ public class TimeSeriesCollection<S extends Comparable<S>>
     @Override
     public Object clone() throws CloneNotSupportedException {
         TimeSeriesCollection clone = (TimeSeriesCollection) super.clone();
-        clone.data = (List) ObjectUtils.deepClone(this.data);
+        clone.data = CloneUtils.cloneList(this.data);
         clone.workingCalendar = (Calendar) this.workingCalendar.clone();
         return clone;
     }

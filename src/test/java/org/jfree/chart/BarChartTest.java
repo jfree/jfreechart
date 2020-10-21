@@ -36,9 +36,9 @@
 
 package org.jfree.chart;
 
-import static org.junit.Assert.fail;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
@@ -57,8 +57,8 @@ import org.jfree.chart.urls.StandardCategoryURLGenerator;
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.general.DatasetUtils;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for a bar chart.
@@ -71,7 +71,7 @@ public class BarChartTest {
     /**
      * Common test setup.
      */
-    @Before
+    @BeforeEach
     public void setUp() {
         this.chart = createBarChart();
     }
@@ -109,16 +109,16 @@ public class BarChartTest {
 
         LocalListener l = new LocalListener();
         this.chart.addChangeListener(l);
-        CategoryPlot plot = (CategoryPlot) this.chart.getPlot();
+        @SuppressWarnings("unchecked")
+        CategoryPlot<String, String> plot = (CategoryPlot) this.chart.getPlot();
         plot.setDataset(newData);
         assertEquals(true, l.flag);
         ValueAxis axis = plot.getRangeAxis();
         Range range = axis.getRange();
-        assertTrue("Expecting the lower bound of the range to be around -30: "
-                   + range.getLowerBound(), range.getLowerBound() <= -30);
-        assertTrue("Expecting the upper bound of the range to be around 30: "
-                   + range.getUpperBound(), range.getUpperBound() >= 30);
-
+        assertTrue(range.getLowerBound() <= -30,
+                "Expecting the lower bound of the range to be around -30: " + range.getLowerBound());
+        assertTrue(range.getUpperBound() >= 30, 
+                "Expecting the upper bound of the range to be around 30: " + range.getUpperBound());
     }
 
     /**
@@ -127,7 +127,7 @@ public class BarChartTest {
      */
     @Test
     public void testSetSeriesToolTipGenerator() {
-        CategoryPlot plot = (CategoryPlot) this.chart.getPlot();
+        CategoryPlot<?, ?> plot = (CategoryPlot) this.chart.getPlot();
         CategoryItemRenderer renderer = plot.getRenderer();
         StandardCategoryToolTipGenerator tt
                 = new StandardCategoryToolTipGenerator();
@@ -142,7 +142,7 @@ public class BarChartTest {
      */
     @Test
     public void testSetSeriesURLGenerator() {
-        CategoryPlot plot = (CategoryPlot) this.chart.getPlot();
+        CategoryPlot<?, ?> plot = (CategoryPlot) this.chart.getPlot();
         CategoryItemRenderer renderer = plot.getRenderer();
         StandardCategoryURLGenerator url1
                 = new StandardCategoryURLGenerator();
@@ -157,7 +157,6 @@ public class BarChartTest {
      * @return The chart.
      */
     private static JFreeChart createBarChart() {
-
         Number[][] data = new Integer[][] {{-3, -2}, {-1, 1}, {2, 3}};
         CategoryDataset<String, String> dataset 
                 = DatasetUtils.createCategoryDataset("S", "C", data);

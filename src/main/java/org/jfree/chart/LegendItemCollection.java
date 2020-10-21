@@ -42,7 +42,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
-import org.jfree.chart.util.ObjectUtils;
+import org.jfree.chart.util.CloneUtils;
 
 /**
  * A collection of legend items.
@@ -150,7 +150,7 @@ public class LegendItemCollection implements Cloneable, Serializable {
     @Override
     public Object clone() throws CloneNotSupportedException {
         LegendItemCollection clone = (LegendItemCollection) super.clone();
-        clone.items = (List) ObjectUtils.deepClone(this.items);
+        clone.items = CloneUtils.cloneList(this.items);
         return clone;
     }
 

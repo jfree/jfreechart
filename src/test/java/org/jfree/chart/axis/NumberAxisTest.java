@@ -36,9 +36,9 @@
 
 package org.jfree.chart.axis;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.geom.Rectangle2D;
 import java.text.DecimalFormat;
@@ -56,7 +56,7 @@ import org.jfree.data.RangeType;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link NumberAxis} class.
@@ -65,6 +65,8 @@ public class NumberAxisTest {
 
     /**
      * Confirm that cloning works.
+     * 
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
@@ -179,7 +181,7 @@ public class NumberAxisTest {
         dataset.setValue(200.0, "Row 1", "Column 2");
         JFreeChart chart = ChartFactory.createBarChart("Test", "Categories",
                 "Value", dataset);
-        CategoryPlot plot = (CategoryPlot) chart.getPlot();
+        CategoryPlot<?, ?> plot = (CategoryPlot) chart.getPlot();
         NumberAxis axis = (NumberAxis) plot.getRangeAxis();
         assertEquals(axis.getLowerBound(), 0.0, EPSILON);
         assertEquals(axis.getUpperBound(), 210.0, EPSILON);
@@ -198,7 +200,7 @@ public class NumberAxisTest {
         JFreeChart chart = ChartFactory.createLineChart("Test", "Categories",
                 "Value", dataset, PlotOrientation.VERTICAL, false, false,
                 false);
-        CategoryPlot plot = (CategoryPlot) chart.getPlot();
+        CategoryPlot<?, ?> plot = (CategoryPlot) chart.getPlot();
         NumberAxis axis = (NumberAxis) plot.getRangeAxis();
         axis.setAutoRangeIncludesZero(false);
         assertEquals(axis.getLowerBound(), 95.0, EPSILON);
@@ -219,7 +221,8 @@ public class NumberAxisTest {
         JFreeChart chart = ChartFactory.createLineChart("Test", "Categories",
                 "Value", dataset, PlotOrientation.VERTICAL, false, false,
                 false);
-        CategoryPlot plot = (CategoryPlot) chart.getPlot();
+        @SuppressWarnings("unchecked")
+        CategoryPlot<String, String> plot = (CategoryPlot) chart.getPlot();
         NumberAxis axis = (NumberAxis) plot.getRangeAxis();
         axis.setAutoRangeIncludesZero(false);
         assertEquals(axis.getLowerBound(), 95.0, EPSILON);
@@ -246,7 +249,8 @@ public class NumberAxisTest {
         JFreeChart chart = ChartFactory.createBarChart("Test", "Categories",
                 "Value", dataset, PlotOrientation.VERTICAL, false, false,
                 false);
-        CategoryPlot plot = (CategoryPlot) chart.getPlot();
+        @SuppressWarnings("unchecked")
+        CategoryPlot<String, String> plot = (CategoryPlot) chart.getPlot(); 
         NumberAxis axis = (NumberAxis) plot.getRangeAxis();
         axis.setAutoRangeIncludesZero(false);
         BarRenderer br = (BarRenderer) plot.getRenderer();
@@ -297,7 +301,7 @@ public class NumberAxisTest {
         dataset.addSeries(series);
         JFreeChart chart = ChartFactory.createScatterPlot("Test", "X", "Y",
                 dataset);
-        XYPlot plot = (XYPlot) chart.getPlot();
+        XYPlot<?> plot = (XYPlot) chart.getPlot();
         NumberAxis axis = (NumberAxis) plot.getDomainAxis();
         axis.setAutoRangeIncludesZero(false);
         assertEquals(0.9, axis.getLowerBound(), EPSILON);
@@ -318,7 +322,7 @@ public class NumberAxisTest {
         dataset.addSeries(series);
         JFreeChart chart = ChartFactory.createScatterPlot("Test", "X", "Y",
                 dataset);
-        XYPlot plot = (XYPlot) chart.getPlot();
+        XYPlot<?> plot = (XYPlot) chart.getPlot();
         NumberAxis axis = (NumberAxis) plot.getRangeAxis();
         axis.setAutoRangeIncludesZero(false);
         assertEquals(0.9, axis.getLowerBound(), EPSILON);

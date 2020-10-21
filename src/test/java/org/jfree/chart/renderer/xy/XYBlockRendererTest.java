@@ -36,10 +36,10 @@
 
 package org.jfree.chart.renderer.xy;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.awt.Color;
 
@@ -53,7 +53,7 @@ import org.jfree.data.Range;
 import org.jfree.data.xy.DefaultXYZDataset;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.data.xy.XYSeries;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link XYBlockRenderer} class.
@@ -109,6 +109,8 @@ public class XYBlockRendererTest {
 
     /**
      * Confirm that cloning works.
+     * 
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
@@ -155,7 +157,7 @@ public class XYBlockRendererTest {
         XYBlockRenderer r = new XYBlockRenderer();
         Range range = r.findDomainBounds(null);
         assertTrue(range == null);
-        DefaultXYZDataset emptyDataset = new DefaultXYZDataset();
+        DefaultXYZDataset<String> emptyDataset = new DefaultXYZDataset<>();
         range = r.findDomainBounds(emptyDataset);
         assertTrue(range == null);
     }
@@ -168,7 +170,7 @@ public class XYBlockRendererTest {
         XYBlockRenderer r = new XYBlockRenderer();
         Range range = r.findRangeBounds(null);
         assertTrue(range == null);
-        DefaultXYZDataset emptyDataset = new DefaultXYZDataset();
+        DefaultXYZDataset<String> emptyDataset = new DefaultXYZDataset<>();
         range = r.findRangeBounds(emptyDataset);
         assertTrue(range == null);
     }

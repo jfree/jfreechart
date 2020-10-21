@@ -55,9 +55,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Objects;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.Size2D;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
@@ -562,7 +562,7 @@ public class AbstractBlock implements Cloneable, Serializable {
             return false;
         }
         AbstractBlock that = (AbstractBlock) obj;
-        if (!ObjectUtils.equal(this.id, that.id)) {
+        if (!Objects.equals(this.id, that.id)) {
             return false;
         }
         if (!this.frame.equals(that.frame)) {
@@ -584,6 +584,24 @@ public class AbstractBlock implements Cloneable, Serializable {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int hash = 5;
+        hash = 41 * hash + Objects.hashCode(this.id);
+        hash = 41 * hash + Objects.hashCode(this.margin);
+        hash = 41 * hash + Objects.hashCode(this.frame);
+        hash = 41 * hash + Objects.hashCode(this.padding);
+        hash = 41 * hash +
+                (int) (Double.doubleToLongBits(this.width) ^
+                (Double.doubleToLongBits(this.width) >>> 32));
+        hash = 41 * hash +
+                (int) (Double.doubleToLongBits(this.height) ^
+                (Double.doubleToLongBits(this.height) >>> 32));
+        hash = 41 * hash + Objects.hashCode(this.bounds);
+        return hash;
     }
 
     /**
