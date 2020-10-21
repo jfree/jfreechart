@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -170,7 +170,6 @@ import org.jfree.chart.plot.CrosshairState;
 import org.jfree.chart.plot.DrawingSupplier;
 import org.jfree.chart.plot.IntervalMarker;
 import org.jfree.chart.plot.Marker;
-import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.ValueMarker;
@@ -347,8 +346,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
     public XYItemLabelGenerator getItemLabelGenerator(int series, int item) {
 
         // otherwise look up the generator table
-        XYItemLabelGenerator generator
-            = (XYItemLabelGenerator) this.itemLabelGeneratorMap.get(series);
+        XYItemLabelGenerator generator = this.itemLabelGeneratorMap.get(series);
         if (generator == null) {
             generator = this.defaultItemLabelGenerator;
         }
@@ -419,8 +417,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
     public XYToolTipGenerator getToolTipGenerator(int series, int item) {
 
         // otherwise look up the generator table
-        XYToolTipGenerator generator
-                = (XYToolTipGenerator) this.toolTipGeneratorMap.get(series);
+        XYToolTipGenerator generator = this.toolTipGeneratorMap.get(series);
         if (generator == null) {
             generator = this.defaultToolTipGenerator;
         }
@@ -466,8 +463,8 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
     }
 
     /**
-     * Sets the default tool tip generator and sends a {@link RendererChangeEvent}
-     * to all registered listeners.
+     * Sets the default tool tip generator and sends a 
+     * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param generator  the generator ({@code null} permitted).
      *
@@ -976,6 +973,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      *
      * @since 1.0.5
      */
+    @Override
     public void drawDomainLine(Graphics2D g2, XYPlot plot, ValueAxis axis,
             Rectangle2D dataArea, double value, Paint paint, Stroke stroke) {
 
@@ -1662,7 +1660,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      * @param dataArea  the data area.
      * @param domainAxis  the domain axis.
      * @param rangeAxis  the range axis.
-     * @param layer  the layer.
+     * @param layer  the layer ({@code null} not permitted).
      * @param info  the plot rendering info.
      */
     @Override
