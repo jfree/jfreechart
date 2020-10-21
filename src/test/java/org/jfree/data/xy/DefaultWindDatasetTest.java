@@ -75,6 +75,7 @@ public class DefaultWindDatasetTest {
 
     /**
      * Confirm that cloning works.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
@@ -186,7 +187,6 @@ public class DefaultWindDatasetTest {
      * @return An array containing the specified items.
      */
     private Object[] createItem(RegularTimePeriod t, int dir, int force) {
-        return new Object[] {new Long(t.getMiddleMillisecond()),
-                new Integer(dir), new Integer(force)};
+        return new Object[] {t.getMiddleMillisecond(), dir, force};
     }
 }
