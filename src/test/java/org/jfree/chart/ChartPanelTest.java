@@ -36,7 +36,8 @@
 
 package org.jfree.chart;
 
-import java.awt.GraphicsEnvironment;
+import java.awt.*;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -363,7 +364,7 @@ public class ChartPanelTest implements ChartChangeListener, ChartMouseListener {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
 
-        DefaultXYDataset dataset = new DefaultXYDataset();
+        DefaultXYDataset<String> dataset = new DefaultXYDataset<>();
         JFreeChart chart = ChartFactory.createXYLineChart("TestChart", "X",
                 "Y", dataset, PlotOrientation.VERTICAL, false, false, false);
         ChartPanel panel = new ChartPanel(chart);
