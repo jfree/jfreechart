@@ -65,6 +65,7 @@ public class YIntervalSeriesTest implements SeriesChangeListener {
      *
      * @param event  the event.
      */
+    @Override
     public void seriesChanged(SeriesChangeEvent event) {
         this.lastEvent = event;
     }
@@ -110,14 +111,15 @@ public class YIntervalSeriesTest implements SeriesChangeListener {
         assertTrue(s2.equals(s1));
 
         // remove a value
-        s1.remove(new Double(1.0));
+        s1.remove(1.0);
         assertFalse(s1.equals(s2));
-        s2.remove(new Double(1.0));
+        s2.remove(1.0);
         assertTrue(s2.equals(s1));
     }
 
     /**
      * Confirm that cloning works.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
@@ -149,7 +151,7 @@ public class YIntervalSeriesTest implements SeriesChangeListener {
         s1.add(1.0, 1.0, 1.0, 2.0);
         s1.add(2.0, 2.0, 2.0, 3.0);
         s1.add(3.0, 3.0, 3.0, 4.0);
-        assertEquals(0, s1.indexOf(new Double(1.0)));
+        assertEquals(0, s1.indexOf(1.0));
     }
 
     /**
@@ -161,9 +163,9 @@ public class YIntervalSeriesTest implements SeriesChangeListener {
         s1.add(1.0, 1.0, 1.0, 2.0);
         s1.add(3.0, 3.0, 3.0, 3.0);
         s1.add(2.0, 2.0, 2.0, 2.0);
-        assertEquals(0, s1.indexOf(new Double(1.0)));
-        assertEquals(1, s1.indexOf(new Double(3.0)));
-        assertEquals(2, s1.indexOf(new Double(2.0)));
+        assertEquals(0, s1.indexOf(1.0));
+        assertEquals(1, s1.indexOf(3.0));
+        assertEquals(2, s1.indexOf(2.0));
     }
 
     /**
@@ -177,11 +179,11 @@ public class YIntervalSeriesTest implements SeriesChangeListener {
         s1.add(3.0, 3.0, 3.0, 3.0);
         assertEquals(3, s1.getItemCount());
 
-        s1.remove(new Double(2.0));
-        assertEquals(new Double(3.0), s1.getX(1));
+        s1.remove(2.0);
+        assertEquals(3.0, s1.getX(1));
 
-        s1.remove(new Double(1.0));
-        assertEquals(new Double(3.0), s1.getX(0));
+        s1.remove(1.0);
+        assertEquals(3.0, s1.getX(0));
     }
 
     private static final double EPSILON = 0.0000000001;
