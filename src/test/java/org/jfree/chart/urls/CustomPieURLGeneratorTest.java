@@ -67,7 +67,7 @@ public class CustomPieURLGeneratorTest {
         CustomPieURLGenerator g2 = new CustomPieURLGenerator();
         assertTrue(g1.equals(g2));
 
-        Map m1 = new HashMap();
+        Map<String, String> m1 = new HashMap<>();
         m1.put("A", "http://www.jfree.org/");
         g1.addURLs(m1);
         assertFalse(g1.equals(g2));
@@ -81,7 +81,7 @@ public class CustomPieURLGeneratorTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         CustomPieURLGenerator g1 = new CustomPieURLGenerator();
-        Map m1 = new HashMap();
+        Map<String, String> m1 = new HashMap<>();
         m1.put("A", "http://www.jfree.org/");
         g1.addURLs(m1);
         CustomPieURLGenerator g2 = (CustomPieURLGenerator) g1.clone();
@@ -90,7 +90,7 @@ public class CustomPieURLGeneratorTest {
         assertTrue(g1.equals(g2));
 
         // check independence
-        Map m2 = new HashMap();
+        Map<String, String> m2 = new HashMap<>();
         m2.put("B", "XYZ");
         g1.addURLs(m2);
         assertFalse(g1.equals(g2));
@@ -111,7 +111,7 @@ public class CustomPieURLGeneratorTest {
     @Test
     public void testSerialization() {
         CustomPieURLGenerator g1 = new CustomPieURLGenerator();
-        Map m1 = new HashMap();
+        Map<String, String> m1 = new HashMap<>();
         m1.put("A", "http://www.jfree.org/");
         g1.addURLs(m1);
         CustomPieURLGenerator g2 = (CustomPieURLGenerator) 
