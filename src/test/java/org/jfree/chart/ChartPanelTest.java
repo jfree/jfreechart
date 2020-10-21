@@ -45,6 +45,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
 import java.util.EventListener;
 import java.util.List;
 
@@ -63,7 +64,7 @@ import org.junit.jupiter.api.Test;
  */
 public class ChartPanelTest implements ChartChangeListener, ChartMouseListener {
 
-    private List chartChangeEvents = new java.util.ArrayList();
+    private List<ChartChangeEvent> chartChangeEvents = new ArrayList<>();
 
     /**
      * Receives a chart change event and stores it in a list for later
