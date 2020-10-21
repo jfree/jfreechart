@@ -62,10 +62,10 @@ public class XYDataItemTest {
         assertTrue(i1.equals(i2));
         assertTrue(i2.equals(i1));
 
-        i1.setY(new Double(9.9));
+        i1.setY(9.9);
         assertFalse(i1.equals(i2));
 
-        i2.setY(new Double(9.9));
+        i2.setY(9.9);
         assertTrue(i1.equals(i2));
     }
 

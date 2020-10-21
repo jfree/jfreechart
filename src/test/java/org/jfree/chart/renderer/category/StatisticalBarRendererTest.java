@@ -104,6 +104,7 @@ public class StatisticalBarRendererTest {
 
     /**
      * Confirm that cloning works.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
@@ -168,7 +169,7 @@ public class StatisticalBarRendererTest {
             DefaultStatisticalCategoryDataset dataset
                     = new DefaultStatisticalCategoryDataset();
             dataset.add(1.0, 2.0, "S1", "C1");
-            dataset.add(null, new Double(4.0), "S1", "C2");
+            dataset.add(null, 4.0, "S1", "C2");
             CategoryPlot plot = new CategoryPlot(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new StatisticalBarRenderer());
@@ -192,7 +193,7 @@ public class StatisticalBarRendererTest {
             DefaultStatisticalCategoryDataset dataset
                     = new DefaultStatisticalCategoryDataset();
             dataset.add(1.0, 2.0, "S1", "C1");
-            dataset.add(null, new Double(4.0), "S1", "C2");
+            dataset.add(null, 4.0, "S1", "C2");
             CategoryPlot plot = new CategoryPlot(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new StatisticalBarRenderer());
@@ -217,7 +218,7 @@ public class StatisticalBarRendererTest {
             DefaultStatisticalCategoryDataset dataset
                     = new DefaultStatisticalCategoryDataset();
             dataset.add(1.0, 2.0, "S1", "C1");
-            dataset.add(new Double(4.0), null, "S1", "C2");
+            dataset.add(4.0, null, "S1", "C2");
             CategoryPlot plot = new CategoryPlot(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new StatisticalBarRenderer());
@@ -241,7 +242,7 @@ public class StatisticalBarRendererTest {
             DefaultStatisticalCategoryDataset dataset
                     = new DefaultStatisticalCategoryDataset();
             dataset.add(1.0, 2.0, "S1", "C1");
-            dataset.add(new Double(4.0), null, "S1", "C2");
+            dataset.add(4.0, null, "S1", "C2");
             CategoryPlot plot = new CategoryPlot(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new StatisticalBarRenderer());
