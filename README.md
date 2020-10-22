@@ -17,7 +17,7 @@ The home page for the project is:
 
 http://www.jfree.org/jfreechart
 
-JFreeChart requires JDK 1.6.0 or later.  If JavaFX support is required, you
+JFreeChart requires JDK 8 or later.  If JavaFX support is required, you
 need to also include the JFreeChart-FX extensions:
 
 https://github.com/jfree/jfreechart-fx
@@ -28,7 +28,7 @@ License (LGPL) version 2.1 or later.
 
 Building JFreeChart
 -------------------
-You can build JFreeChart using Maven.  The build requires JDK 1.6.0 or later.
+You can build JFreeChart using Maven.  The build requires JDK 8 or later.
 
 #### Maven
 Using Maven you can build JFreeChart using the following command (issued from the root directory of the project):
@@ -49,6 +49,7 @@ History
 -------
 
 ##### Version 1.5.1 (not yet released)
+- added Catalan translations (PR #117);
 - fix for LayeredBarRenderer (bug #169);
 - migrated to JUnit 5.
 
