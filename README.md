@@ -74,6 +74,7 @@ History
 
 ##### Version 1.6.0 (not yet released)
 - update required JDK to version 1.8;
+- modify buffer in ChartPanel to handle high DPI displays (bug #170)
 - added generics 
 - DefaultIntervalCategoryDataset no longer allows null keys in constructor (this
   is a consequence of introducing generics)
