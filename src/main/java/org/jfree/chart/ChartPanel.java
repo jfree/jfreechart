@@ -89,6 +89,7 @@ import java.io.Serializable;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.EventListener;
 import java.util.List;
@@ -1358,16 +1359,15 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
             final double globalScaleX = globalTransform.getScaleX();
             final double globalScaleY = globalTransform.getScaleY();
 
-            final double scaledWidth = available.getWidth() * globalScaleX;
-            final double scaledHeight = available.getHeight() * globalScaleY;
+            final int scaledWidth = (int) (available.getWidth() * globalScaleX);
+            final int scaledHeight = (int) (available.getHeight() * globalScaleY);
 
             // do we need to resize the buffer?
             if ((this.chartBuffer == null)
                     || (this.chartBufferWidth != scaledWidth)
                     || (this.chartBufferHeight != scaledHeight)) {
-
-                this.chartBufferWidth = (int) scaledWidth;
-                this.chartBufferHeight = (int) scaledHeight;
+                this.chartBufferWidth = scaledWidth;
+                this.chartBufferHeight = scaledHeight;
                 GraphicsConfiguration gc = g2.getDeviceConfiguration();
                 this.chartBuffer = gc.createCompatibleImage(
                         this.chartBufferWidth, this.chartBufferHeight,
@@ -1380,8 +1380,9 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
 
                 this.refreshBuffer = false; // clear the flag
 
-                // scale graphics of the buffer to the same value as global Swing graphics
-                // this allow to paint all elements as usual but applies all necessary smothing
+                // scale graphics of the buffer to the same value as global 
+                // Swing graphics - this allow to paint all elements as usual 
+                // but applies all necessary smoothing
                 Graphics2D bufferG2 = (Graphics2D) this.chartBuffer.getGraphics();
                 bufferG2.scale(globalScaleX, globalScaleY);
 
