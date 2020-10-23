@@ -97,9 +97,9 @@ public class XYDifferenceRendererTest {
         assertTrue(r1.equals(r2));
 
         // shapesVisible
-        r1 = new XYDifferenceRenderer(Color.green, Color.YELLOW, true);
+        r1 = new XYDifferenceRenderer(Color.GREEN, Color.YELLOW, true);
         assertFalse(r1.equals(r2));
-        r2 = new XYDifferenceRenderer(Color.green, Color.YELLOW, true);
+        r2 = new XYDifferenceRenderer(Color.GREEN, Color.YELLOW, true);
         assertTrue(r1.equals(r2));
 
         // legendLine
@@ -134,6 +134,8 @@ public class XYDifferenceRendererTest {
 
     /**
      * Confirm that cloning works.
+     * 
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {

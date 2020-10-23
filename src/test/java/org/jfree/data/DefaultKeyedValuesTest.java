@@ -140,10 +140,10 @@ public class DefaultKeyedValuesTest {
             // expected
         }
         DefaultKeyedValues v2 = new DefaultKeyedValues();
-        v2.addValue("K1", new Integer(1));
-        v2.addValue("K2", new Integer(2));
-        v2.addValue("K3", new Integer(3));
-        assertEquals(new Integer(3), v2.getValue(2));
+        v2.addValue("K1", Integer.valueOf(1));
+        v2.addValue("K2", Integer.valueOf(2));
+        v2.addValue("K3", Integer.valueOf(3));
+        assertEquals(3, v2.getValue(2));
 
         boolean pass = false;
         try {
@@ -176,9 +176,9 @@ public class DefaultKeyedValuesTest {
             // expected
         }
         DefaultKeyedValues v2 = new DefaultKeyedValues();
-        v2.addValue("K1", new Integer(1));
-        v2.addValue("K2", new Integer(2));
-        v2.addValue("K3", new Integer(3));
+        v2.addValue("K1", 1);
+        v2.addValue("K2", 2);
+        v2.addValue("K3", 3);
         assertEquals("K2", v2.getKey(1));
     }
 
@@ -191,9 +191,9 @@ public class DefaultKeyedValuesTest {
         assertEquals(-1, v1.getIndex("K1"));
 
         DefaultKeyedValues v2 = new DefaultKeyedValues();
-        v2.addValue("K1", new Integer(1));
-        v2.addValue("K2", new Integer(2));
-        v2.addValue("K3", new Integer(3));
+        v2.addValue("K1", 1);
+        v2.addValue("K2", 2);
+        v2.addValue("K3", 3);
         assertEquals(2, v2.getIndex("K3"));
 
         // try null
@@ -226,11 +226,11 @@ public class DefaultKeyedValuesTest {
     public void testAddValue() {
         DefaultKeyedValues v1 = new DefaultKeyedValues();
         v1.addValue("A", 1.0);
-        assertEquals(new Double(1.0), v1.getValue("A"));
+        assertEquals(1.0, v1.getValue("A"));
         v1.addValue("B", 2.0);
-        assertEquals(new Double(2.0), v1.getValue("B"));
+        assertEquals(2.0, v1.getValue("B"));
         v1.addValue("B", 3.0);
-        assertEquals(new Double(3.0), v1.getValue("B"));
+        assertEquals(3.0, v1.getValue("B"));
         assertEquals(2, v1.getItemCount());
         v1.addValue("A", null);
         assertNull(v1.getValue("A"));
@@ -253,40 +253,42 @@ public class DefaultKeyedValuesTest {
     public void testInsertValue() {
         DefaultKeyedValues v1 = new DefaultKeyedValues();
         v1.insertValue(0, "A", 1.0);
-        assertEquals(new Double(1.0), v1.getValue(0));
+        assertEquals(1.0, v1.getValue(0));
         v1.insertValue(0, "B", 2.0);
-        assertEquals(new Double(2.0), v1.getValue(0));
-        assertEquals(new Double(1.0), v1.getValue(1));
+        assertEquals(2.0, v1.getValue(0));
+        assertEquals(1.0, v1.getValue(1));
 
         // it's OK to use an index equal to the size of the list
         v1.insertValue(2, "C", 3.0);
-        assertEquals(new Double(2.0), v1.getValue(0));
-        assertEquals(new Double(1.0), v1.getValue(1));
-        assertEquals(new Double(3.0), v1.getValue(2));
+        assertEquals(2.0, v1.getValue(0));
+        assertEquals(1.0, v1.getValue(1));
+        assertEquals(3.0, v1.getValue(2));
 
         // try replacing an existing value
         v1.insertValue(2, "B", 4.0);
-        assertEquals(new Double(1.0), v1.getValue(0));
-        assertEquals(new Double(3.0), v1.getValue(1));
-        assertEquals(new Double(4.0), v1.getValue(2));
+        assertEquals(1.0, v1.getValue(0));
+        assertEquals(3.0, v1.getValue(1));
+        assertEquals(4.0, v1.getValue(2));
     }
 
     /**
      * Some checks for the clone() method.
+     * 
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
         DefaultKeyedValues v1 = new DefaultKeyedValues();
-        v1.addValue("V1", new Integer(1));
+        v1.addValue("V1", 1);
         v1.addValue("V2", null);
-        v1.addValue("V3", new Integer(3));
+        v1.addValue("V3", 3);
         DefaultKeyedValues v2 = (DefaultKeyedValues) v1.clone();
         assertTrue(v1 != v2);
         assertTrue(v1.getClass() == v2.getClass());
         assertTrue(v1.equals(v2));
 
         // confirm that the clone is independent of the original
-        v2.setValue("V1", new Integer(44));
+        v2.setValue("V1", 44);
         assertFalse(v1.equals(v2));
     }
 
@@ -297,9 +299,9 @@ public class DefaultKeyedValuesTest {
     public void testInsertAndRetrieve() {
 
         DefaultKeyedValues data = new DefaultKeyedValues();
-        data.addValue("A", new Double(1.0));
-        data.addValue("B", new Double(2.0));
-        data.addValue("C", new Double(3.0));
+        data.addValue("A", 1.0);
+        data.addValue("B", 2.0);
+        data.addValue("C", 3.0);
         data.addValue("D", null);
 
         // check key order
@@ -309,17 +311,16 @@ public class DefaultKeyedValuesTest {
         assertEquals(data.getKey(3), "D");
 
         // check retrieve value by key
-        assertEquals(data.getValue("A"), new Double(1.0));
-        assertEquals(data.getValue("B"), new Double(2.0));
-        assertEquals(data.getValue("C"), new Double(3.0));
+        assertEquals(data.getValue("A"), 1.0);
+        assertEquals(data.getValue("B"), 2.0);
+        assertEquals(data.getValue("C"), 3.0);
         assertEquals(data.getValue("D"), null);
 
         // check retrieve value by index
-        assertEquals(data.getValue(0), new Double(1.0));
-        assertEquals(data.getValue(1), new Double(2.0));
-        assertEquals(data.getValue(2), new Double(3.0));
+        assertEquals(data.getValue(0), 1.0);
+        assertEquals(data.getValue(1), 2.0);
+        assertEquals(data.getValue(2), 3.0);
         assertEquals(data.getValue(3), null);
-
     }
 
     /**
@@ -328,10 +329,10 @@ public class DefaultKeyedValuesTest {
     @Test
     public void testRemoveValue() {
         DefaultKeyedValues data = new DefaultKeyedValues();
-        data.addValue("A", new Double(1.0));
+        data.addValue("A", 1.0);
         data.addValue("B", null);
-        data.addValue("C", new Double(3.0));
-        data.addValue("D", new Double(2.0));
+        data.addValue("C", 3.0);
+        data.addValue("D", 2.0);
         assertEquals(1, data.getIndex("B"));
         data.removeValue("B");
         assertEquals(-1, data.getIndex("B"));
@@ -353,10 +354,10 @@ public class DefaultKeyedValuesTest {
     public void testSortByKeyAscending() {
 
         DefaultKeyedValues data = new DefaultKeyedValues();
-        data.addValue("C", new Double(1.0));
+        data.addValue("C", 1.0);
         data.addValue("B", null);
-        data.addValue("D", new Double(3.0));
-        data.addValue("A", new Double(2.0));
+        data.addValue("D", 3.0);
+        data.addValue("A", 2.0);
 
         data.sortByKeys(SortOrder.ASCENDING);
 
@@ -367,16 +368,16 @@ public class DefaultKeyedValuesTest {
         assertEquals(data.getKey(3), "D");
 
         // check retrieve value by key
-        assertEquals(data.getValue("A"), new Double(2.0));
+        assertEquals(data.getValue("A"), 2.0);
         assertEquals(data.getValue("B"), null);
-        assertEquals(data.getValue("C"), new Double(1.0));
-        assertEquals(data.getValue("D"), new Double(3.0));
+        assertEquals(data.getValue("C"), 1.0);
+        assertEquals(data.getValue("D"), 3.0);
 
         // check retrieve value by index
-        assertEquals(data.getValue(0), new Double(2.0));
+        assertEquals(data.getValue(0), 2.0);
         assertEquals(data.getValue(1), null);
-        assertEquals(data.getValue(2), new Double(1.0));
-        assertEquals(data.getValue(3), new Double(3.0));
+        assertEquals(data.getValue(2), 1.0);
+        assertEquals(data.getValue(3), 3.0);
 
     }
 
@@ -387,10 +388,10 @@ public class DefaultKeyedValuesTest {
     public void testSortByKeyDescending() {
 
         DefaultKeyedValues data = new DefaultKeyedValues();
-        data.addValue("C", new Double(1.0));
+        data.addValue("C", 1.0);
         data.addValue("B", null);
-        data.addValue("D", new Double(3.0));
-        data.addValue("A", new Double(2.0));
+        data.addValue("D", 3.0);
+        data.addValue("A", 2.0);
 
         data.sortByKeys(SortOrder.DESCENDING);
 
@@ -401,16 +402,16 @@ public class DefaultKeyedValuesTest {
         assertEquals(data.getKey(3), "A");
 
         // check retrieve value by key
-        assertEquals(data.getValue("A"), new Double(2.0));
+        assertEquals(data.getValue("A"), 2.0);
         assertEquals(data.getValue("B"), null);
-        assertEquals(data.getValue("C"), new Double(1.0));
-        assertEquals(data.getValue("D"), new Double(3.0));
+        assertEquals(data.getValue("C"), 1.0);
+        assertEquals(data.getValue("D"), 3.0);
 
         // check retrieve value by index
-        assertEquals(data.getValue(0), new Double(3.0));
-        assertEquals(data.getValue(1), new Double(1.0));
+        assertEquals(data.getValue(0), 3.0);
+        assertEquals(data.getValue(1), 1.0);
         assertEquals(data.getValue(2), null);
-        assertEquals(data.getValue(3), new Double(2.0));
+        assertEquals(data.getValue(3), 2.0);
 
     }
 
@@ -421,10 +422,10 @@ public class DefaultKeyedValuesTest {
     public void testSortByValueAscending() {
 
         DefaultKeyedValues data = new DefaultKeyedValues();
-        data.addValue("C", new Double(1.0));
+        data.addValue("C", 1.0);
         data.addValue("B", null);
-        data.addValue("D", new Double(3.0));
-        data.addValue("A", new Double(2.0));
+        data.addValue("D", 3.0);
+        data.addValue("A", 2.0);
 
         data.sortByValues(SortOrder.ASCENDING);
 
@@ -435,15 +436,15 @@ public class DefaultKeyedValuesTest {
         assertEquals(data.getKey(3), "B");
 
         // check retrieve value by key
-        assertEquals(data.getValue("A"), new Double(2.0));
+        assertEquals(data.getValue("A"), 2.0);
         assertEquals(data.getValue("B"), null);
-        assertEquals(data.getValue("C"), new Double(1.0));
-        assertEquals(data.getValue("D"), new Double(3.0));
+        assertEquals(data.getValue("C"), 1.0);
+        assertEquals(data.getValue("D"), 3.0);
 
         // check retrieve value by index
-        assertEquals(data.getValue(0), new Double(1.0));
-        assertEquals(data.getValue(1), new Double(2.0));
-        assertEquals(data.getValue(2), new Double(3.0));
+        assertEquals(data.getValue(0), 1.0);
+        assertEquals(data.getValue(1), 2.0);
+        assertEquals(data.getValue(2), 3.0);
         assertEquals(data.getValue(3), null);
 
     }
@@ -455,10 +456,10 @@ public class DefaultKeyedValuesTest {
     public void testSortByValueDescending() {
 
         DefaultKeyedValues data = new DefaultKeyedValues();
-        data.addValue("C", new Double(1.0));
+        data.addValue("C", 1.0);
         data.addValue("B", null);
-        data.addValue("D", new Double(3.0));
-        data.addValue("A", new Double(2.0));
+        data.addValue("D", 3.0);
+        data.addValue("A", 2.0);
 
         data.sortByValues(SortOrder.DESCENDING);
 
@@ -469,15 +470,15 @@ public class DefaultKeyedValuesTest {
         assertEquals(data.getKey(3), "B");
 
         // check retrieve value by key
-        assertEquals(data.getValue("A"), new Double(2.0));
+        assertEquals(data.getValue("A"), 2.0);
         assertEquals(data.getValue("B"), null);
-        assertEquals(data.getValue("C"), new Double(1.0));
-        assertEquals(data.getValue("D"), new Double(3.0));
+        assertEquals(data.getValue("C"), 1.0);
+        assertEquals(data.getValue("D"), 3.0);
 
         // check retrieve value by index
-        assertEquals(data.getValue(0), new Double(3.0));
-        assertEquals(data.getValue(1), new Double(2.0));
-        assertEquals(data.getValue(2), new Double(1.0));
+        assertEquals(data.getValue(0), 3.0);
+        assertEquals(data.getValue(1), 2.0);
+        assertEquals(data.getValue(2), 1.0);
         assertEquals(data.getValue(3), null);
 
     }
@@ -488,9 +489,9 @@ public class DefaultKeyedValuesTest {
     @Test
     public void testSerialization() {
         DefaultKeyedValues v1 = new DefaultKeyedValues();
-        v1.addValue("Key 1", new Double(23));
+        v1.addValue("Key 1", 23);
         v1.addValue("Key 2", null);
-        v1.addValue("Key 3", new Double(42));
+        v1.addValue("Key 3", 42);
 
         DefaultKeyedValues v2 = (DefaultKeyedValues) 
                 TestUtils.serialised(v1);

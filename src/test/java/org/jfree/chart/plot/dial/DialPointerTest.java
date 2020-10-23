@@ -87,9 +87,9 @@ public class DialPointerTest {
         DialPointer.Pin p2 = new DialPointer.Pin();
         assertEquals(p1, p2);
 
-        p1.setPaint(Color.green);
+        p1.setPaint(Color.GREEN);
         assertFalse(p1.equals(p2));
-        p2.setPaint(Color.green);
+        p2.setPaint(Color.GREEN);
         assertTrue(p1.equals(p2));
 
         BasicStroke s = new BasicStroke(4.4f);
@@ -108,14 +108,14 @@ public class DialPointerTest {
         DialPointer.Pointer p2 = new DialPointer.Pointer();
         assertEquals(p1, p2);
 
-        p1.setFillPaint(Color.green);
+        p1.setFillPaint(Color.GREEN);
         assertFalse(p1.equals(p2));
-        p2.setFillPaint(Color.green);
+        p2.setFillPaint(Color.GREEN);
         assertTrue(p1.equals(p2));
 
-        p1.setOutlinePaint(Color.green);
+        p1.setOutlinePaint(Color.GREEN);
         assertFalse(p1.equals(p2));
-        p2.setOutlinePaint(Color.green);
+        p2.setOutlinePaint(Color.GREEN);
         assertTrue(p1.equals(p2));
     }
 

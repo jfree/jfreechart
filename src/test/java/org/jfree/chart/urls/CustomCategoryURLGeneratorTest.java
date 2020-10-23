@@ -40,6 +40,7 @@
 
 package org.jfree.chart.urls;
 
+import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -64,13 +65,13 @@ public class CustomCategoryURLGeneratorTest {
         CustomCategoryURLGenerator g1 = new CustomCategoryURLGenerator();
         CustomCategoryURLGenerator g2 = new CustomCategoryURLGenerator();
         assertTrue(g1.equals(g2));
-        List u1 = new java.util.ArrayList();
+        List<String> u1 = new ArrayList<>();
         u1.add("URL A1");
         u1.add("URL A2");
         u1.add("URL A3");
         g1.addURLSeries(u1);
         assertFalse(g1.equals(g2));
-        List u2 = new java.util.ArrayList();
+        List<String> u2 = new ArrayList<>();
         u2.add("URL A1");
         u2.add("URL A2");
         u2.add("URL A3");
@@ -80,11 +81,13 @@ public class CustomCategoryURLGeneratorTest {
 
     /**
      * Confirm that cloning works.
+     * 
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
         CustomCategoryURLGenerator g1 = new CustomCategoryURLGenerator();
-        List u1 = new java.util.ArrayList();
+        List<String> u1 = new ArrayList<>();
         u1.add("URL A1");
         u1.add("URL A2");
         u1.add("URL A3");
@@ -95,11 +98,11 @@ public class CustomCategoryURLGeneratorTest {
         assertTrue(g1.equals(g2));
 
         // check independence
-        List u2 = new java.util.ArrayList();
+        List<String> u2 = new ArrayList<>();
         u2.add("URL XXX");
         g1.addURLSeries(u2);
         assertFalse(g1.equals(g2));
-        g2.addURLSeries(new java.util.ArrayList(u2));
+        g2.addURLSeries(new ArrayList<>(u2));
         assertTrue(g1.equals(g2));
     }
 
@@ -118,12 +121,12 @@ public class CustomCategoryURLGeneratorTest {
     @Test
     public void testSerialization() {
 
-        List u1 = new java.util.ArrayList();
+        List<String> u1 = new ArrayList<>();
         u1.add("URL A1");
         u1.add("URL A2");
         u1.add("URL A3");
 
-        List u2 = new java.util.ArrayList();
+        List<String> u2 = new ArrayList<>();
         u2.add("URL B1");
         u2.add("URL B2");
         u2.add("URL B3");
@@ -148,7 +151,7 @@ public class CustomCategoryURLGeneratorTest {
         assertEquals(1, g1.getListCount());
         assertEquals(0, g1.getURLCount(0));
 
-        List list1 = new java.util.ArrayList();
+        List<String> list1 = new ArrayList<>();
         list1.add("URL1");
         g1.addURLSeries(list1);
         assertEquals(2, g1.getListCount());

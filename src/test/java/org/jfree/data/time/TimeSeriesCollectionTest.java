@@ -310,7 +310,7 @@ public class TimeSeriesCollectionTest {
     @Test
     public void testFindDomainBounds() {
         TimeSeriesCollection dataset = new TimeSeriesCollection();
-        List visibleSeriesKeys = new java.util.ArrayList();
+        List<String> visibleSeriesKeys = new ArrayList<>();
         Range r = DatasetUtils.findDomainBounds(dataset, visibleSeriesKeys,
                 true);
         assertNull(r);
@@ -349,6 +349,8 @@ public class TimeSeriesCollectionTest {
 
     /**
      * Basic checks for cloning.
+     * 
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
@@ -385,7 +387,7 @@ public class TimeSeriesCollectionTest {
         dataset.addSeries(s1);
         dataset.addSeries(s2);
 
-        List keys = new ArrayList();
+        List<String> keys = new ArrayList<>();
         keys.add("S1");
         keys.add("S2");
         Range r = dataset.getRangeBounds(keys, new Range(

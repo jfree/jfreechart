@@ -68,6 +68,7 @@ import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.Arrays;
+import java.util.EventListener;
 import java.util.List;
 
 import org.jfree.chart.ChartFactory;
@@ -859,7 +860,7 @@ public class CategoryPlotTest {
         CategoryPlot plot = new CategoryPlot();
         CategoryMarker m = new CategoryMarker("C1");
         plot.addDomainMarker(m);
-        List listeners = Arrays.asList(m.getListeners(
+        List<EventListener> listeners = Arrays.asList(m.getListeners(
                 MarkerChangeListener.class));
         assertTrue(listeners.contains(plot));
         plot.clearDomainMarkers();
@@ -875,7 +876,7 @@ public class CategoryPlotTest {
         CategoryPlot plot = new CategoryPlot();
         Marker m = new ValueMarker(1.0);
         plot.addRangeMarker(m);
-        List listeners = Arrays.asList(m.getListeners(
+        List<EventListener> listeners = Arrays.asList(m.getListeners(
                 MarkerChangeListener.class));
         assertTrue(listeners.contains(plot));
         plot.clearRangeMarkers();
@@ -1047,7 +1048,7 @@ public class CategoryPlotTest {
         plot.mapDatasetToRangeAxis(0, 1);
         assertEquals(yAxis2, plot.getRangeAxisForDataset(0));
 
-        List axisIndices = Arrays.asList(new Integer[] {0, 1});
+        List<Integer> axisIndices = Arrays.asList(new Integer[] {0, 1});
         plot.mapDatasetToRangeAxes(0, axisIndices);
         assertEquals(yAxis, plot.getRangeAxisForDataset(0));
 
