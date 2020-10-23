@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -218,8 +218,8 @@ import java.io.Serializable;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.EventListener;
-import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -747,7 +747,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
             this.panMask = InputEvent.ALT_MASK;
         }
 
-        this.overlays = new java.util.ArrayList<Overlay>();
+        this.overlays = new ArrayList<Overlay>();
     }
 
     /**
@@ -1566,12 +1566,21 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         // are we using the chart buffer?
         if (this.useBuffer) {
 
+            // for better rendering on the HiDPI monitors upscaling the buffer to the "native" resoution
+            // instead of using logical one provided by Swing
+            final AffineTransform globalTransform = ((Graphics2D) g).getTransform();
+            final double globalScaleX = globalTransform.getScaleX();
+            final double globalScaleY = globalTransform.getScaleY();
+
+            final int scaledWidth = (int) (available.getWidth() * globalScaleX);
+            final int scaledHeight = (int) (available.getHeight() * globalScaleY);
+
             // do we need to resize the buffer?
             if ((this.chartBuffer == null)
-                    || (this.chartBufferWidth != available.getWidth())
-                    || (this.chartBufferHeight != available.getHeight())) {
-                this.chartBufferWidth = (int) available.getWidth();
-                this.chartBufferHeight = (int) available.getHeight();
+                    || (this.chartBufferWidth != scaledWidth)
+                    || (this.chartBufferHeight != scaledHeight)) {
+                this.chartBufferWidth = scaledWidth;
+                this.chartBufferHeight = scaledHeight;
                 GraphicsConfiguration gc = g2.getDeviceConfiguration();
                 this.chartBuffer = gc.createCompatibleImage(
                         this.chartBufferWidth, this.chartBufferHeight,
@@ -1584,17 +1593,19 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
 
                 this.refreshBuffer = false; // clear the flag
 
+                // scale graphics of the buffer to the same value as global 
+                // Swing graphics - this allow to paint all elements as usual 
+                // but applies all necessary smoothing
+                Graphics2D bufferG2 = (Graphics2D) this.chartBuffer.getGraphics();
+                bufferG2.scale(globalScaleX, globalScaleY);
+
                 Rectangle2D bufferArea = new Rectangle2D.Double(
-                        0, 0, this.chartBufferWidth, this.chartBufferHeight);
+                        0, 0, available.getWidth(), available.getHeight());
 
                 // make the background of the buffer clear and transparent
-                Graphics2D bufferG2 = (Graphics2D)
-                        this.chartBuffer.getGraphics();
                 Composite savedComposite = bufferG2.getComposite();
-                bufferG2.setComposite(AlphaComposite.getInstance(
-                        AlphaComposite.CLEAR, 0.0f));
-                Rectangle r = new Rectangle(0, 0, this.chartBufferWidth,
-                        this.chartBufferHeight);
+                bufferG2.setComposite(AlphaComposite.getInstance(AlphaComposite.CLEAR, 0.0f));
+                Rectangle r = new Rectangle(0, 0, (int) available.getWidth(), (int) available.getHeight());
                 bufferG2.fill(r);
                 bufferG2.setComposite(savedComposite);
                 
@@ -1614,7 +1625,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
             }
 
             // zap the buffer onto the panel...
-            g2.drawImage(this.chartBuffer, insets.left, insets.top, this);
+            g2.drawImage(this.chartBuffer, insets.left, insets.top, (int) available.getWidth(), (int) available.getHeight(), this);
 
         } else { // redrawing the chart every time...
             AffineTransform saved = g2.getTransform();
