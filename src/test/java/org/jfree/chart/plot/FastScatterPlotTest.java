@@ -104,10 +104,10 @@ public class FastScatterPlotTest {
         plot2.setRangeGridlinesVisible(false);
         assertTrue(plot1.equals(plot2));
 
-        plot1.setRangeGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.green,
+        plot1.setRangeGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.GREEN,
                 3.0f, 4.0f, Color.YELLOW));
         assertFalse(plot1.equals(plot2));
-        plot2.setRangeGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.green,
+        plot2.setRangeGridlinePaint(new GradientPaint(1.0f, 2.0f, Color.GREEN,
                 3.0f, 4.0f, Color.YELLOW));
         assertTrue(plot1.equals(plot2));
 
@@ -174,6 +174,8 @@ public class FastScatterPlotTest {
 
     /**
      * Confirm that cloning works.
+     * 
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {

@@ -224,7 +224,7 @@ public class LegendItemTest {
                 "URL", false, new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0),
                 false, Color.BLACK, false, Color.YELLOW, new BasicStroke(2.1f),
                 false, new Line2D.Double(4.0, 3.0, 2.0, 1.0),
-                new BasicStroke(2.1f), Color.green);
+                new BasicStroke(2.1f), Color.GREEN);
         assertFalse(item1.equals(item2));
         item2 = new LegendItem("Label2", "Description2", "ToolTip",
                 "URL", false, new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0),
@@ -341,6 +341,8 @@ public class LegendItemTest {
 
     /**
      * Basic checks for cloning.
+     * 
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {

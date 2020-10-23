@@ -114,10 +114,10 @@ public class PaintMapTest  {
         m2.put("K1", Color.RED);
         assertEquals(m1, m2);
 
-        m1.put("K2", new GradientPaint(1.0f, 2.0f, Color.green, 3.0f, 4.0f,
+        m1.put("K2", new GradientPaint(1.0f, 2.0f, Color.GREEN, 3.0f, 4.0f,
                 Color.YELLOW));
         assertFalse(m1.equals(m2));
-        m2.put("K2", new GradientPaint(1.0f, 2.0f, Color.green, 3.0f, 4.0f,
+        m2.put("K2", new GradientPaint(1.0f, 2.0f, Color.GREEN, 3.0f, 4.0f,
                 Color.YELLOW));
         assertEquals(m1, m2);
 
@@ -139,7 +139,7 @@ public class PaintMapTest  {
         assertEquals(m1, m2);
 
         m1.put("K1", Color.RED);
-        m1.put("K2", new GradientPaint(1.0f, 2.0f, Color.green, 3.0f, 4.0f,
+        m1.put("K2", new GradientPaint(1.0f, 2.0f, Color.GREEN, 3.0f, 4.0f,
                 Color.YELLOW));
         m2 = (PaintMap) m1.clone();
         assertEquals(m1, m2);

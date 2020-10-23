@@ -96,9 +96,9 @@ public class DialValueIndicatorTest {
         assertTrue(i1.equals(i2));
 
         // templateValue
-        i1.setTemplateValue(new Double(1.23));
+        i1.setTemplateValue(1.23);
         assertFalse(i1.equals(i2));
-        i2.setTemplateValue(new Double(1.23));
+        i2.setTemplateValue(1.23);
         assertTrue(i1.equals(i2));
 
         // font
@@ -109,18 +109,18 @@ public class DialValueIndicatorTest {
 
         // paint
         i1.setPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f,
-                Color.green));
+                Color.GREEN));
         assertFalse(i1.equals(i2));
         i2.setPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f,
-                Color.green));
+                Color.GREEN));
         assertTrue(i1.equals(i2));
 
         // backgroundPaint
         i1.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f,
-                4.0f, Color.green));
+                4.0f, Color.GREEN));
         assertFalse(i1.equals(i2));
         i2.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f,
-                4.0f, Color.green));
+                4.0f, Color.GREEN));
         assertTrue(i1.equals(i2));
 
         // outlineStroke
@@ -131,10 +131,10 @@ public class DialValueIndicatorTest {
 
         // outlinePaint
         i1.setOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f,
-                Color.green));
+                Color.GREEN));
         assertFalse(i1.equals(i2));
         i2.setOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f,
-                Color.green));
+                Color.GREEN));
         assertTrue(i1.equals(i2));
 
         // insets
@@ -177,6 +177,8 @@ public class DialValueIndicatorTest {
 
     /**
      * Confirm that cloning works.
+     * 
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {

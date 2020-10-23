@@ -78,10 +78,10 @@ public class XYBoxAndWhiskerRendererTest {
         XYBoxAndWhiskerRenderer r2 = new XYBoxAndWhiskerRenderer();
         assertEquals(r1, r2);
 
-        r1.setArtifactPaint(new GradientPaint(1.0f, 2.0f, Color.green,
+        r1.setArtifactPaint(new GradientPaint(1.0f, 2.0f, Color.GREEN,
                 3.0f, 4.0f, Color.RED));
         assertFalse(r1.equals(r2));
-        r2.setArtifactPaint(new GradientPaint(1.0f, 2.0f, Color.green,
+        r2.setArtifactPaint(new GradientPaint(1.0f, 2.0f, Color.GREEN,
                 3.0f, 4.0f, Color.RED));
         assertEquals(r1, r2);
 
@@ -122,6 +122,8 @@ public class XYBoxAndWhiskerRendererTest {
 
     /**
      * Confirm that cloning works.
+     * 
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
@@ -159,9 +161,8 @@ public class XYBoxAndWhiskerRendererTest {
     public void test2909215() {
         DefaultBoxAndWhiskerXYDataset d1 = new DefaultBoxAndWhiskerXYDataset(
                 "Series");
-        d1.add(new Date(1L), new BoxAndWhiskerItem(new Double(1.0),
-                new Double(2.0), new Double(3.0), new Double(4.0),
-                new Double(5.0), new Double(6.0), null, null, null));
+        d1.add(new Date(1L), new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0, 5.0, 6.0,
+                null, null, null));
         JFreeChart chart = ChartFactory.createBoxAndWhiskerChart("Title", "X",
                 "Y", d1, true);
         try {

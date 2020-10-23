@@ -1007,13 +1007,11 @@ public class CategoryPlotTest {
         plot.mapDatasetToDomainAxis(0, 1);
         assertEquals(xAxis2, plot.getDomainAxisForDataset(0));
 
-        List axisIndices = Arrays.asList(new Integer[] {new Integer(0),
-                new Integer(1)});
+        List<Integer> axisIndices = Arrays.asList(new Integer[] {0, 1});
         plot.mapDatasetToDomainAxes(0, axisIndices);
         assertEquals(xAxis, plot.getDomainAxisForDataset(0));
 
-        axisIndices = Arrays.asList(new Integer[] {new Integer(1),
-                new Integer(2)});
+        axisIndices = Arrays.asList(new Integer[] {1, 2});
         plot.mapDatasetToDomainAxes(0, axisIndices);
         assertEquals(xAxis2, plot.getDomainAxisForDataset(0));
     }
@@ -1049,13 +1047,11 @@ public class CategoryPlotTest {
         plot.mapDatasetToRangeAxis(0, 1);
         assertEquals(yAxis2, plot.getRangeAxisForDataset(0));
 
-        List axisIndices = Arrays.asList(new Integer[] {new Integer(0),
-                new Integer(1)});
+        List axisIndices = Arrays.asList(new Integer[] {0, 1});
         plot.mapDatasetToRangeAxes(0, axisIndices);
         assertEquals(yAxis, plot.getRangeAxisForDataset(0));
 
-        axisIndices = Arrays.asList(new Integer[] {new Integer(1),
-                new Integer(2)});
+        axisIndices = Arrays.asList(new Integer[] {1, 2});
         plot.mapDatasetToRangeAxes(0, axisIndices);
         assertEquals(yAxis2, plot.getRangeAxisForDataset(0));
     }

@@ -138,13 +138,15 @@ public class DefaultPieDatasetTest implements DatasetChangeListener {
 
     /**
      * Confirm that cloning works.
+     * 
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
         DefaultPieDataset d1 = new DefaultPieDataset();
-        d1.setValue("V1", new Integer(1));
+        d1.setValue("V1", 1);
         d1.setValue("V2", null);
-        d1.setValue("V3", new Integer(3));
+        d1.setValue("V3", 3);
         DefaultPieDataset d2 = (DefaultPieDataset) d1.clone();
 
         assertTrue(d1 != d2);
@@ -158,10 +160,10 @@ public class DefaultPieDatasetTest implements DatasetChangeListener {
     @Test
     public void testSerialization() {
         DefaultPieDataset d1 = new DefaultPieDataset();
-        d1.setValue("C1", new Double(234.2));
+        d1.setValue("C1", 234.2);
         d1.setValue("C2", null);
-        d1.setValue("C3", new Double(345.9));
-        d1.setValue("C4", new Double(452.7));
+        d1.setValue("C3", 345.9);
+        d1.setValue("C4", 452.7);
 
         DefaultPieDataset d2 = (DefaultPieDataset) TestUtils.serialised(d1);
         assertEquals(d1, d2);

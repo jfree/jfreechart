@@ -54,7 +54,6 @@ import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.Stroke;
 
-import org.jfree.chart.JFreeChart;
 import org.jfree.chart.ui.Align;
 import org.jfree.chart.ui.RectangleInsets;
 import org.junit.jupiter.api.Test;
@@ -116,18 +115,18 @@ public class PlotTest {
 
         // outlinePaint
         plot1.setOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.YELLOW,
-                3.0f, 4.0f, Color.green));
+                3.0f, 4.0f, Color.GREEN));
         assertFalse(plot1.equals(plot2));
         plot2.setOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.YELLOW,
-                3.0f, 4.0f, Color.green));
+                3.0f, 4.0f, Color.GREEN));
         assertTrue(plot1.equals(plot2));
 
         // backgroundPaint
         plot1.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.cyan,
-                3.0f, 4.0f, Color.green));
+                3.0f, 4.0f, Color.GREEN));
         assertFalse(plot1.equals(plot2));
         plot2.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.cyan,
-                3.0f, 4.0f, Color.green));
+                3.0f, 4.0f, Color.GREEN));
         assertTrue(plot1.equals(plot2));
 
 //        // backgroundImage

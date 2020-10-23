@@ -69,10 +69,10 @@ public class DefaultBoxAndWhiskerXYDatasetTest {
         assertTrue(d1.equals(d2));
 
         d1.add(new Date(1L), new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0, 5.0,
-                6.0, 7.0, 8.0, new ArrayList()));
+                6.0, 7.0, 8.0, new ArrayList<Double>()));
         assertFalse(d1.equals(d2));
         d2.add(new Date(1L), new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0, 5.0,
-                6.0, 7.0, 8.0, new ArrayList()));
+                6.0, 7.0, 8.0, new ArrayList<Double>()));
         assertTrue(d1.equals(d2));
     }
 
@@ -84,26 +84,28 @@ public class DefaultBoxAndWhiskerXYDatasetTest {
         DefaultBoxAndWhiskerXYDataset d1 = new DefaultBoxAndWhiskerXYDataset(
                 "Series");
         d1.add(new Date(1L), new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0, 5.0,
-                6.0, 7.0, 8.0, new ArrayList()));
+                6.0, 7.0, 8.0, new ArrayList<Double>()));
         DefaultBoxAndWhiskerXYDataset d2 = (DefaultBoxAndWhiskerXYDataset) 
                 TestUtils.serialised(d1);
         assertEquals(d1, d2);
 
         // test independence
         d1.add(new Date(2L), new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0, 5.0,
-                6.0, 7.0, 8.0, new ArrayList()));
+                6.0, 7.0, 8.0, new ArrayList<Double>()));
         assertFalse(d1.equals(d2));
     }
 
     /**
      * Confirm that cloning works.
+     * 
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
         DefaultBoxAndWhiskerXYDataset d1 = new DefaultBoxAndWhiskerXYDataset(
                 "Series");
         d1.add(new Date(1L), new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0, 5.0,
-                6.0, 7.0, 8.0, new ArrayList()));
+                6.0, 7.0, 8.0, new ArrayList<Double>()));
         DefaultBoxAndWhiskerXYDataset d2 = (DefaultBoxAndWhiskerXYDataset) 
                 d1.clone();
         assertTrue(d1 != d2);
@@ -112,7 +114,7 @@ public class DefaultBoxAndWhiskerXYDatasetTest {
 
         // test independence
         d1.add(new Date(2L), new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0, 5.0,
-                6.0, 7.0, 8.0, new ArrayList()));
+                6.0, 7.0, 8.0, new ArrayList<Double>()));
         assertFalse(d1.equals(d2));
     }
 
@@ -126,7 +128,7 @@ public class DefaultBoxAndWhiskerXYDatasetTest {
         DefaultBoxAndWhiskerXYDataset dataset
                 = new DefaultBoxAndWhiskerXYDataset("S1");
         BoxAndWhiskerItem item1 = new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0,
-                5.0, 6.0, 7.0, 8.0, new ArrayList());
+                5.0, 6.0, 7.0, 8.0, new ArrayList<Double>());
         dataset.add(new Date(33L), item1);
 
         assertEquals(1.0, dataset.getY(0, 0).doubleValue(), EPSILON);
@@ -164,12 +166,12 @@ public class DefaultBoxAndWhiskerXYDatasetTest {
         DefaultBoxAndWhiskerXYDataset d1
                 = new DefaultBoxAndWhiskerXYDataset("S");
         d1.add(new Date(1L), new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0, 5.0,
-                6.0, 7.0, 8.0, new ArrayList()));
+                6.0, 7.0, 8.0, new ArrayList<Double>()));
         assertEquals(new Range(5.0, 6.0), d1.getRangeBounds(false));
         assertEquals(new Range(5.0, 6.0), d1.getRangeBounds(true));
 
         d1.add(new Date(1L), new BoxAndWhiskerItem(1.5, 2.5, 3.5, 4.5, 5.5,
-                6.5, 7.5, 8.5, new ArrayList()));
+                6.5, 7.5, 8.5, new ArrayList<Double>()));
         assertEquals(new Range(5.0, 6.5), d1.getRangeBounds(false));
         assertEquals(new Range(5.0, 6.5), d1.getRangeBounds(true));
 
@@ -178,6 +180,5 @@ public class DefaultBoxAndWhiskerXYDatasetTest {
         assertEquals(new Range(5.0, 7.5), d1.getRangeBounds(false));
         assertEquals(new Range(5.0, 7.5), d1.getRangeBounds(true));
     }
-
 
 }
