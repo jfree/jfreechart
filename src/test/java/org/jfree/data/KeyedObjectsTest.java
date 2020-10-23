@@ -59,13 +59,15 @@ public class KeyedObjectsTest {
 
     /**
      * Confirm that cloning works.
+     * 
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
         KeyedObjects ko1 = new KeyedObjects();
-        ko1.addObject("V1", new Integer(1));
+        ko1.addObject("V1", 1);
         ko1.addObject("V2", null);
-        ko1.addObject("V3", new Integer(3));
+        ko1.addObject("V3", 3);
         KeyedObjects ko2 = (KeyedObjects) ko1.clone();
         assertTrue(ko1 != ko2);
         assertTrue(ko1.getClass() == ko2.getClass());
@@ -74,6 +76,8 @@ public class KeyedObjectsTest {
 
     /**
      * Confirm special features of cloning.
+     * 
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning2() throws CloneNotSupportedException {
@@ -109,9 +113,9 @@ public class KeyedObjectsTest {
     public void testInsertAndRetrieve() {
 
         KeyedObjects data = new KeyedObjects();
-        data.addObject("A", new Double(1.0));
-        data.addObject("B", new Double(2.0));
-        data.addObject("C", new Double(3.0));
+        data.addObject("A", 1.0);
+        data.addObject("B", 2.0);
+        data.addObject("C", 3.0);
         data.addObject("D", null);
 
         // check key order
@@ -121,9 +125,9 @@ public class KeyedObjectsTest {
         assertEquals(data.getKey(3), "D");
 
         // check retrieve value by key
-        assertEquals(data.getObject("A"), new Double(1.0));
-        assertEquals(data.getObject("B"), new Double(2.0));
-        assertEquals(data.getObject("C"), new Double(3.0));
+        assertEquals(data.getObject("A"), 1.0);
+        assertEquals(data.getObject("B"), 2.0);
+        assertEquals(data.getObject("C"), 3.0);
         assertEquals(data.getObject("D"), null);
 
         boolean pass = false;
@@ -136,9 +140,9 @@ public class KeyedObjectsTest {
         assertTrue(pass);
 
         // check retrieve value by index
-        assertEquals(data.getObject(0), new Double(1.0));
-        assertEquals(data.getObject(1), new Double(2.0));
-        assertEquals(data.getObject(2), new Double(3.0));
+        assertEquals(data.getObject(0), 1.0);
+        assertEquals(data.getObject(1), 2.0);
+        assertEquals(data.getObject(2), 3.0);
         assertEquals(data.getObject(3), null);
 
     }

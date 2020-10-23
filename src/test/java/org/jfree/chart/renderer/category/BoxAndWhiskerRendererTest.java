@@ -139,6 +139,8 @@ public class BoxAndWhiskerRendererTest {
 
     /**
      * Confirm that cloning works.
+     * 
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
@@ -178,10 +180,8 @@ public class BoxAndWhiskerRendererTest {
         try {
             DefaultBoxAndWhiskerCategoryDataset dataset
                 = new DefaultBoxAndWhiskerCategoryDataset();
-            dataset.add(new BoxAndWhiskerItem(new Double(1.0), new Double(2.0),
-                    new Double(0.0), new Double(4.0), new Double(0.5),
-                    new Double(4.5), new Double(-0.5), new Double(5.5),
-                    null), "S1", "C1");
+            dataset.add(new BoxAndWhiskerItem(1.0, 2.0, 0.0, 4.0, 0.5, 4.5, 
+                    -0.5, 5.5, null), "S1", "C1");
             CategoryPlot plot = new CategoryPlot(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new BoxAndWhiskerRenderer());
@@ -212,10 +212,10 @@ public class BoxAndWhiskerRendererTest {
                 return null;
             }
         };
-        List values = new ArrayList();
-        values.add(new Double(1.0));
-        values.add(new Double(10.0));
-        values.add(new Double(100.0));
+        List<Double> values = new ArrayList<>();
+        values.add(1.0);
+        values.add(10.0);
+        values.add(100.0);
         dataset.add(values, "row", "column");
         CategoryPlot plot = new CategoryPlot(dataset, new CategoryAxis("x"),
                 new NumberAxis("y"), new BoxAndWhiskerRenderer());
@@ -257,10 +257,10 @@ public class BoxAndWhiskerRendererTest {
                 return null;
             }
         };
-        List values = new ArrayList();
-        values.add(new Double(1.0));
-        values.add(new Double(10.0));
-        values.add(new Double(100.0));
+        List<Double> values = new ArrayList<>();
+        values.add(1.0);
+        values.add(10.0);
+        values.add(100.0);
         dataset.add(values, "row", "column");
         CategoryPlot plot = new CategoryPlot(dataset, new CategoryAxis("x"),
                 new NumberAxis("y"), new BoxAndWhiskerRenderer());
@@ -292,11 +292,11 @@ public class BoxAndWhiskerRendererTest {
     public void testGetLegendItem() {
         DefaultBoxAndWhiskerCategoryDataset dataset
                 = new DefaultBoxAndWhiskerCategoryDataset();
-        List values = new ArrayList();
-        values.add(new Double(1.10));
-        values.add(new Double(1.45));
-        values.add(new Double(1.33));
-        values.add(new Double(1.23));
+        List<Double> values = new ArrayList<>();
+        values.add(1.10);
+        values.add(1.45);
+        values.add(1.33);
+        values.add(1.23);
         dataset.add(values, "R1", "C1");
         BoxAndWhiskerRenderer r = new BoxAndWhiskerRenderer();
         CategoryPlot plot = new CategoryPlot(dataset, new CategoryAxis("x"),
@@ -342,10 +342,8 @@ public class BoxAndWhiskerRendererTest {
         try {
             DefaultBoxAndWhiskerCategoryDataset dataset
                     = new DefaultBoxAndWhiskerCategoryDataset();
-            dataset.add(new BoxAndWhiskerItem(null, new Double(2.0),
-                    new Double(0.0), new Double(4.0), new Double(0.5),
-                    new Double(4.5), new Double(-0.5), new Double(5.5),
-                    null), "S1", "C1");
+            dataset.add(new BoxAndWhiskerItem(null, 2.0, 0.0, 4.0, 0.5, 4.5, 
+                    -0.5, 5.5, null), "S1", "C1");
             CategoryPlot plot = new CategoryPlot(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new BoxAndWhiskerRenderer());
@@ -370,10 +368,8 @@ public class BoxAndWhiskerRendererTest {
         try {
             DefaultBoxAndWhiskerCategoryDataset dataset
                     = new DefaultBoxAndWhiskerCategoryDataset();
-            dataset.add(new BoxAndWhiskerItem(new Double(1.0), null,
-                    new Double(0.0), new Double(4.0), new Double(0.5),
-                    new Double(4.5), new Double(-0.5), new Double(5.5),
-                    null), "S1", "C1");
+            dataset.add(new BoxAndWhiskerItem(1.0, null, 0.0, 4.0, 0.5, 4.5, 
+                    -0.5, 5.5, null), "S1", "C1");
             CategoryPlot plot = new CategoryPlot(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new BoxAndWhiskerRenderer());
@@ -398,10 +394,8 @@ public class BoxAndWhiskerRendererTest {
         try {
             DefaultBoxAndWhiskerCategoryDataset dataset
                     = new DefaultBoxAndWhiskerCategoryDataset();
-            dataset.add(new BoxAndWhiskerItem(new Double(1.0), new Double(2.0),
-                    null, new Double(4.0), new Double(0.5),
-                    new Double(4.5), new Double(-0.5), new Double(5.5),
-                    null), "S1", "C1");
+            dataset.add(new BoxAndWhiskerItem(1.0, 2.0, null, 4.0, 0.5, 4.5, 
+                    -0.5, 5.5, null), "S1", "C1");
             CategoryPlot plot = new CategoryPlot(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new BoxAndWhiskerRenderer());
@@ -426,10 +420,8 @@ public class BoxAndWhiskerRendererTest {
         try {
             DefaultBoxAndWhiskerCategoryDataset dataset
                     = new DefaultBoxAndWhiskerCategoryDataset();
-            dataset.add(new BoxAndWhiskerItem(new Double(1.0), new Double(2.0),
-                    new Double(3.0), null, new Double(0.5),
-                    new Double(4.5), new Double(-0.5), new Double(5.5),
-                    null), "S1", "C1");
+            dataset.add(new BoxAndWhiskerItem(1.0, 2.0, 3.0, null, 0.5, 4.5, 
+                    -0.5, 5.5, null), "S1", "C1");
             CategoryPlot plot = new CategoryPlot(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new BoxAndWhiskerRenderer());
@@ -454,10 +446,8 @@ public class BoxAndWhiskerRendererTest {
         try {
             DefaultBoxAndWhiskerCategoryDataset dataset
                     = new DefaultBoxAndWhiskerCategoryDataset();
-            dataset.add(new BoxAndWhiskerItem(new Double(1.0), new Double(2.0),
-                    new Double(3.0), new Double(4.0), null,
-                    new Double(4.5), new Double(-0.5), new Double(5.5),
-                    null), "S1", "C1");
+            dataset.add(new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0, null, 4.5, 
+                    -0.5, 5.5, null), "S1", "C1");
             CategoryPlot plot = new CategoryPlot(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new BoxAndWhiskerRenderer());
@@ -481,10 +471,8 @@ public class BoxAndWhiskerRendererTest {
         try {
             DefaultBoxAndWhiskerCategoryDataset dataset
                     = new DefaultBoxAndWhiskerCategoryDataset();
-            dataset.add(new BoxAndWhiskerItem(new Double(1.0), new Double(2.0),
-                    new Double(3.0), new Double(4.0), new Double(0.5),
-                    null, new Double(-0.5), new Double(5.5),
-                    null), "S1", "C1");
+            dataset.add(new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0, 0.5, null, 
+                    -0.5, 5.5, null), "S1", "C1");
             CategoryPlot plot = new CategoryPlot(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new BoxAndWhiskerRenderer());
@@ -507,10 +495,8 @@ public class BoxAndWhiskerRendererTest {
         try {
             DefaultBoxAndWhiskerCategoryDataset dataset
                     = new DefaultBoxAndWhiskerCategoryDataset();
-            dataset.add(new BoxAndWhiskerItem(new Double(1.0), new Double(2.0),
-                    new Double(3.0), new Double(4.0), new Double(0.5),
-                    new Double(4.5), null, new Double(5.5),
-                    null), "S1", "C1");
+            dataset.add(new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0, 0.5, 4.5, 
+                    null, 5.5, null), "S1", "C1");
             CategoryPlot plot = new CategoryPlot(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new BoxAndWhiskerRenderer());
@@ -535,10 +521,8 @@ public class BoxAndWhiskerRendererTest {
         try {
             DefaultBoxAndWhiskerCategoryDataset dataset
                     = new DefaultBoxAndWhiskerCategoryDataset();
-            dataset.add(new BoxAndWhiskerItem(new Double(1.0), new Double(2.0),
-                    new Double(3.0), new Double(4.0), new Double(0.5),
-                    new Double(4.5), new Double(-0.5), null,
-                    new java.util.ArrayList()), "S1", "C1");
+            dataset.add(new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0, 0.5, 4.5, 
+                    -0.5, null, new ArrayList()), "S1", "C1");
             CategoryPlot plot = new CategoryPlot(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new BoxAndWhiskerRenderer());

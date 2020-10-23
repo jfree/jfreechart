@@ -129,6 +129,8 @@ public class PaintMapTest  {
 
     /**
      * Some checks for cloning.
+     * 
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
@@ -160,7 +162,7 @@ public class PaintMapTest  {
     public void testSerialization2() {
         PaintMap m1 = new PaintMap();
         m1.put("K1", Color.RED);
-        m1.put("K2", new GradientPaint(1.0f, 2.0f, Color.green, 3.0f, 4.0f,
+        m1.put("K2", new GradientPaint(1.0f, 2.0f, Color.GREEN, 3.0f, 4.0f,
                 Color.YELLOW));
         PaintMap m2 = (PaintMap) TestUtils.serialised(m1);
         assertEquals(m1, m2);
@@ -175,8 +177,8 @@ public class PaintMapTest  {
     public void testKeysOfDifferentClasses() {
         PaintMap m = new PaintMap();
         m.put("ABC", Color.RED);
-        m.put(new Integer(99), Color.BLUE);
-        assertEquals(Color.BLUE, m.getPaint(new Integer(99)));
+        m.put(99, Color.BLUE);
+        assertEquals(Color.BLUE, m.getPaint(99));
     }
 
 }

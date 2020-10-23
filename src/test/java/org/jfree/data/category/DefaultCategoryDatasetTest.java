@@ -229,7 +229,7 @@ public class DefaultCategoryDatasetTest {
 
         boolean pass = false;
         try {
-            d1.addValue(new Double(1.1), null, "C2");
+            d1.addValue(1.1, null, "C2");
         }
         catch (IllegalArgumentException e) {
             pass = true;
@@ -244,7 +244,7 @@ public class DefaultCategoryDatasetTest {
     public void testRemoveValue() {
         DefaultCategoryDataset d = new DefaultCategoryDataset();
         d.removeValue("R1", "C1");
-        d.addValue(new Double(1.0), "R1", "C1");
+        d.addValue(1.0, "R1", "C1");
         d.removeValue("R1", "C1");
         assertEquals(0, d.getRowCount());
         assertEquals(0, d.getColumnCount());

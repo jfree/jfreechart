@@ -80,8 +80,8 @@ public class CategoryToPieDatasetTest {
         underlying.addValue(2.2, "R1", "C2");
         CategoryToPieDataset d1 = new CategoryToPieDataset(underlying,
                 TableOrder.BY_ROW, 0);
-        assertEquals(d1.getValue("C1"), new Double(1.1));
-        assertEquals(d1.getValue("C2"), new Double(2.2));
+        assertEquals(d1.getValue("C1"), 1.1);
+        assertEquals(d1.getValue("C2"), 2.2);
 
         // check negative index throws exception
         try {
