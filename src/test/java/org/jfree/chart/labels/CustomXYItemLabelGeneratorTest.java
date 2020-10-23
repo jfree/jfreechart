@@ -42,6 +42,7 @@
 
 package org.jfree.chart.labels;
 
+import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -59,6 +60,8 @@ public class CustomXYItemLabelGeneratorTest {
 
     /**
      * Confirm that cloning works.
+     * 
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
@@ -83,12 +86,12 @@ public class CustomXYItemLabelGeneratorTest {
      */
     @Test
     public void testSerialization() {
-        List t1 = new java.util.ArrayList();
+        List<String> t1 = new ArrayList<>();
         t1.add("Tooltip A1");
         t1.add("Tooltip A2");
         t1.add("Tooltip A3");
 
-        List t2 = new java.util.ArrayList();
+        List<String> t2 = new ArrayList<>();
         t2.add("Tooltip B1");
         t2.add("Tooltip B2");
         t2.add("Tooltip B3");

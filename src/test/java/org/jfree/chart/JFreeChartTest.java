@@ -413,7 +413,7 @@ public class JFreeChartTest implements ChartChangeListener {
     public void testGetSubtitles() {
         DefaultPieDataset dataset = new DefaultPieDataset();
         JFreeChart chart = ChartFactory.createPieChart("title", dataset);
-        List subtitles = chart.getSubtitles();
+        List<TextTitle> subtitles = chart.getSubtitles();
 
         assertEquals(1, chart.getSubtitleCount());
 

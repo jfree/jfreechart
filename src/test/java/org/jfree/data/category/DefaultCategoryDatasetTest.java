@@ -65,7 +65,7 @@ public class DefaultCategoryDatasetTest {
     public void testGetValue() {
         DefaultCategoryDataset d = new DefaultCategoryDataset();
         d.addValue(1.0, "R1", "C1");
-        assertEquals(new Double(1.0), d.getValue("R1", "C1"));
+        assertEquals(1.0, d.getValue("R1", "C1"));
         boolean pass = false;
         try {
             d.getValue("XX", "C1");
@@ -109,12 +109,12 @@ public class DefaultCategoryDatasetTest {
         DefaultCategoryDataset d = new DefaultCategoryDataset();
         d.addValue(1.0, "R1", "C1");
         d.incrementValue(2.0, "R1", "C1");
-        assertEquals(new Double(3.0), d.getValue("R1", "C1"));
+        assertEquals(3.0, d.getValue("R1", "C1"));
 
         // increment a null value
         d.addValue(null, "R2", "C1");
         d.incrementValue(2.0, "R2", "C1");
-        assertEquals(new Double(2.0), d.getValue("R2", "C1"));
+        assertEquals(2.0, d.getValue("R2", "C1"));
 
         // increment an unknown row
         boolean pass = false;
@@ -224,8 +224,8 @@ public class DefaultCategoryDatasetTest {
         DefaultCategoryDataset d1 = new DefaultCategoryDataset();
         d1.addValue(null, "R1", "C1");
         assertNull(d1.getValue("R1", "C1"));
-        d1.addValue(new Double(1.0), "R2", "C1");
-        assertEquals(new Double(1.0), d1.getValue("R2", "C1"));
+        d1.addValue(1.0, "R2", "C1");
+        assertEquals(1.0, d1.getValue("R2", "C1"));
 
         boolean pass = false;
         try {
@@ -249,10 +249,10 @@ public class DefaultCategoryDatasetTest {
         assertEquals(0, d.getRowCount());
         assertEquals(0, d.getColumnCount());
 
-        d.addValue(new Double(1.0), "R1", "C1");
-        d.addValue(new Double(2.0), "R2", "C1");
+        d.addValue(1.0, "R1", "C1");
+        d.addValue(2.0, "R2", "C1");
         d.removeValue("R1", "C1");
-        assertEquals(new Double(2.0), d.getValue(0, 0));
+        assertEquals(2.0, d.getValue(0, 0));
 
         boolean pass = false;
         try {
@@ -275,6 +275,8 @@ public class DefaultCategoryDatasetTest {
 
     /**
      * Confirm that cloning works.
+     * 
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
