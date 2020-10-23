@@ -89,6 +89,8 @@ public class SlidingCategoryDatasetTest {
 
     /**
      * Confirm that cloning works.
+     * 
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
@@ -220,8 +222,8 @@ public class SlidingCategoryDatasetTest {
         underlying.addValue(4.0, "R1", "C4");
         SlidingCategoryDataset dataset = new SlidingCategoryDataset(underlying,
                 1, 2);
-        assertEquals(new Double(2.0), dataset.getValue("R1", "C2"));
-        assertEquals(new Double(3.0), dataset.getValue("R1", "C3"));
+        assertEquals(2.0, dataset.getValue("R1", "C2"));
+        assertEquals(3.0, dataset.getValue("R1", "C3"));
         boolean pass = false;
         try {
             dataset.getValue("R1", "C1");

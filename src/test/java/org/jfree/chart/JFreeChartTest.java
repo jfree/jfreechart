@@ -94,9 +94,9 @@ public class JFreeChartTest implements ChartChangeListener {
     @BeforeEach
     public void setUp() {
         DefaultPieDataset data = new DefaultPieDataset();
-        data.setValue("Java", new Double(43.2));
-        data.setValue("Visual Basic", new Double(0.0));
-        data.setValue("C/C++", new Double(17.5));
+        data.setValue("Java", 43.2);
+        data.setValue("Visual Basic", 0.0);
+        data.setValue("C/C++", 17.5);
         this.pieChart = ChartFactory.createPieChart("Pie Chart", data);
     }
 

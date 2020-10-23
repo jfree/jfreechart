@@ -235,21 +235,6 @@ public class TestIntervalCategoryDataset extends AbstractDataset
     }
 
     /**
-     * Adds a value to the table.
-     *
-     * @param value  the value.
-     * @param rowKey  the row key.
-     * @param columnKey  the column key.
-     *
-     * @see #getValue(Comparable, Comparable)
-     */
-    public void addItem(double value, double lower, double upper,
-            Comparable rowKey, Comparable columnKey) {
-        addItem(new Double(value), new Double(lower), new Double(upper),
-                rowKey, columnKey);
-    }
-
-    /**
      * Adds or updates a value in the table and sends a
      * {@link DatasetChangeEvent} to all registered listeners.
      *
@@ -264,22 +249,6 @@ public class TestIntervalCategoryDataset extends AbstractDataset
         IntervalDataItem item = new IntervalDataItem(value, lower, upper);
         this.data.addObject(item, rowKey, columnKey);
         fireDatasetChanged();
-    }
-
-    /**
-     * Adds or updates a value in the table and sends a
-     * {@link DatasetChangeEvent} to all registered listeners.
-     *
-     * @param value  the value.
-     * @param rowKey  the row key ({@code null} not permitted).
-     * @param columnKey  the column key ({@code null} not permitted).
-     *
-     * @see #getValue(Comparable, Comparable)
-     */
-    public void setItem(double value, double lower, double upper,
-            Comparable rowKey, Comparable columnKey) {
-        setItem(new Double(value), new Double(lower), new Double(upper),
-                rowKey, columnKey);
     }
 
     /**

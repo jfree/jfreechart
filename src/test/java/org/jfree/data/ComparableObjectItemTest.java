@@ -75,30 +75,29 @@ public class ComparableObjectItemTest {
      */
     @Test
     public void testEquals() {
-        ComparableObjectItem item1 = new ComparableObjectItem(new Integer(1),
-                "XYZ");
-        ComparableObjectItem item2 = new ComparableObjectItem(new Integer(1),
-                "XYZ");
+        ComparableObjectItem item1 = new ComparableObjectItem(1, "XYZ");
+        ComparableObjectItem item2 = new ComparableObjectItem(1, "XYZ");
         assertEquals(item1, item2);
 
-        item1 = new ComparableObjectItem(new Integer(2), "XYZ");
+        item1 = new ComparableObjectItem(2, "XYZ");
         assertNotEquals(item1, item2);
-        item2 = new ComparableObjectItem(new Integer(2), "XYZ");
+        item2 = new ComparableObjectItem(2, "XYZ");
         assertEquals(item1, item2);
 
-        item1 = new ComparableObjectItem(new Integer(2), null);
+        item1 = new ComparableObjectItem(2, null);
         assertNotEquals(item1, item2);
-        item2 = new ComparableObjectItem(new Integer(2), null);
+        item2 = new ComparableObjectItem(2, null);
         assertEquals(item1, item2);
     }
 
     /**
      * Some checks for the clone() method.
+     * 
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        ComparableObjectItem item1 = new ComparableObjectItem(new Integer(1),
-                "XYZ");
+        ComparableObjectItem item1 = new ComparableObjectItem(1, "XYZ");
         ComparableObjectItem item2 = (ComparableObjectItem) item1.clone();
         assertNotSame(item1, item2);
         assertSame(item1.getClass(), item2.getClass());
@@ -110,8 +109,7 @@ public class ComparableObjectItemTest {
      */
     @Test
     public void testSerialization() {
-        ComparableObjectItem item1 = new ComparableObjectItem(new Integer(1),
-                "XYZ");
+        ComparableObjectItem item1 = new ComparableObjectItem(1, "XYZ");
         ComparableObjectItem item2 = (ComparableObjectItem) 
                 TestUtils.serialised(item1);
         assertEquals(item1, item2);
@@ -122,14 +120,10 @@ public class ComparableObjectItemTest {
      */
     @Test
     public void testCompareTo() {
-        ComparableObjectItem item1 = new ComparableObjectItem(new Integer(1),
-                "XYZ");
-        ComparableObjectItem item2 = new ComparableObjectItem(new Integer(2),
-                "XYZ");
-        ComparableObjectItem item3 = new ComparableObjectItem(new Integer(3),
-                "XYZ");
-        ComparableObjectItem item4 = new ComparableObjectItem(new Integer(1),
-                "XYZ");
+        ComparableObjectItem item1 = new ComparableObjectItem(1, "XYZ");
+        ComparableObjectItem item2 = new ComparableObjectItem(2, "XYZ");
+        ComparableObjectItem item3 = new ComparableObjectItem(3, "XYZ");
+        ComparableObjectItem item4 = new ComparableObjectItem(1, "XYZ");
         assertTrue(item2.compareTo(item1) > 0);
         assertTrue(item3.compareTo(item1) > 0);
         assertTrue(item4.compareTo(item1) == 0);
