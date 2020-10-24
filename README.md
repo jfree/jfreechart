@@ -61,6 +61,7 @@ History
 
 ##### Version 1.5.1 (not yet released)
 - modify buffer in ChartPanel to handle high DPI displays (bug #170);
+- fix for exception on extreme zoom on NumberAxis (bug #64);
 - added Catalan translations (PR #117);
 - fix for LayeredBarRenderer (bug #169);
 - migrated to JUnit 5.

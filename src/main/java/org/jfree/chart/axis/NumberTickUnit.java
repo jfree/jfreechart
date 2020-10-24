@@ -147,7 +147,8 @@ public class NumberTickUnit extends TickUnit implements Serializable {
      */
     @Override
     public String toString() {
-        return "[size=" + this.valueToString(this.getSize()) + "]";
+        return "[NumberTickUnit: size=" + this.valueToString(this.getSize()) 
+                + ", formatter=" + this.formatter + "]";
     }
 
     /**

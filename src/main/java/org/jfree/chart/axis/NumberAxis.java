@@ -844,27 +844,36 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
 
         TickUnit unit = getTickUnit();
         TickUnitSource tickUnitSource = getStandardTickUnits();
-        // we should use the current tick unit if it gives a count in the range
-        // 2 to 40 otherwise just estimate one that will give a count <= 20
+ 
+        // we should start with the current tick unit if it gives a count in 
+        // the range 3 to 40 otherwise estimate one that will give a count <= 10
         double length = getRange().getLength();
         int count = (int) (length / unit.getSize());
-        if (count < 2 || count > 40) {
-            unit = tickUnitSource.getCeilingTickUnit(length / 20);
+        if (count < 3 || count > 40) {
+            unit = tickUnitSource.getCeilingTickUnit(length / 10);
         }
-        double tickLabelWidth = estimateMaximumTickLabelWidth(g2, unit);
 
+        // now consider the label size relative to the width of the tick unit
+        // and make a guess at the ideal size
         TickUnit unit1 = tickUnitSource.getCeilingTickUnit(unit);
-        double unit1Width = lengthToJava2D(unit1.getSize(), dataArea, edge);
-
-        // then extrapolate...
+        double tickLabelWidth = estimateMaximumTickLabelWidth(g2, unit1);
+        double unit1Width = lengthToJava2D(unit1.getSize(), dataArea, edge);       
+        NumberTickUnit unit2 = (NumberTickUnit) unit1;
         double guess = (tickLabelWidth / unit1Width) * unit1.getSize();
-        NumberTickUnit unit2 = (NumberTickUnit) 
-                tickUnitSource.getCeilingTickUnit(guess);
-        double unit2Width = lengthToJava2D(unit2.getSize(), dataArea, edge);
-
-        tickLabelWidth = estimateMaximumTickLabelWidth(g2, unit2);
-        if (tickLabelWidth > unit2Width) {
-            unit2 = (NumberTickUnit) tickUnitSource.getLargerTickUnit(unit2);
+        
+        // due to limitations of double precision, when you zoom very far into
+        // a chart, eventually the visible axis range will get reported as 
+        // having length 0, and then 'guess' above will be infinite ... in that 
+        // case we'll just stick with the tick unit we have, it's better than 
+        // throwing an exception 
+        // https://github.com/jfree/jfreechart/issues/64
+        if (Double.isFinite(guess)) {
+            unit2 = (NumberTickUnit) tickUnitSource.getCeilingTickUnit(guess);
+            double unit2Width = lengthToJava2D(unit2.getSize(), dataArea, edge);
+            tickLabelWidth = estimateMaximumTickLabelWidth(g2, unit2);
+            if (tickLabelWidth > unit2Width) {
+                unit2 = (NumberTickUnit) tickUnitSource.getLargerTickUnit(unit2);
+            }
         }
         setTickUnit(unit2, false, false);
     }
@@ -901,7 +910,6 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
         if (tickLabelHeight > unit2Height) {
             unit2 = (NumberTickUnit) tickUnits.getLargerTickUnit(unit2);
         }
-
         setTickUnit(unit2, false, false);
 
     }
@@ -1006,8 +1014,8 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
                     }
                 }
 
-                Tick tick = new NumberTick(new Double(currentTickValue),
-                        tickLabel, anchor, rotationAnchor, angle);
+                Tick tick = new NumberTick(currentTickValue, tickLabel, anchor, 
+                        rotationAnchor, angle);
                 result.add(tick);
                 double nextTickValue = lowestTickValue + ((i + 1) * size);
                 for (int minorTick = 1; minorTick < minorTickSpaces;
@@ -1106,8 +1114,8 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
                     }
                 }
 
-                Tick tick = new NumberTick(new Double(currentTickValue),
-                        tickLabel, anchor, rotationAnchor, angle);
+                Tick tick = new NumberTick(currentTickValue, tickLabel, anchor,
+                        rotationAnchor, angle);
                 result.add(tick);
 
                 double nextTickValue = lowestTickValue + ((i + 1) * size);
