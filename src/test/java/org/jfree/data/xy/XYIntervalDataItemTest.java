@@ -60,7 +60,7 @@ public class XYIntervalDataItemTest {
     public void testConstructor1() {
         XYIntervalDataItem item1 = new XYIntervalDataItem(1.0, 0.5, 1.5, 2.0,
                 1.9, 2.1);
-        assertEquals(new Double(1.0), item1.getX());
+        assertEquals(1.0, item1.getX(), EPSILON);
         assertEquals(0.5, item1.getXLowValue(), EPSILON);
         assertEquals(1.5, item1.getXHighValue(), EPSILON);
         assertEquals(2.0, item1.getYValue(), EPSILON);
@@ -119,6 +119,8 @@ public class XYIntervalDataItemTest {
 
     /**
      * Some checks for the clone() method.
+     * 
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {

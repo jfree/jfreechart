@@ -67,7 +67,6 @@ public class ScatterRendererTest {
      */
     @Test
     public void testEquals() {
-
         ScatterRenderer r1 = new ScatterRenderer();
         ScatterRenderer r2 = new ScatterRenderer();
         assertEquals(r1, r2);
@@ -101,7 +100,6 @@ public class ScatterRendererTest {
         assertFalse(r1.equals(r2));
         r2.setUseSeriesOffset(false);
         assertTrue(r1.equals(r2));
-
     }
 
     /**
@@ -204,7 +202,7 @@ public class ScatterRendererTest {
                 = new DefaultMultiValueCategoryDataset();
         assertNull(r.findRangeBounds(dataset));
 
-        List values = Arrays.asList(new Double[] {1.0});
+        List<Double> values = Arrays.asList(new Double[] {1.0});
         dataset.add(values, "R1", "C1");
         assertEquals(new Range(1.0, 1.0), r.findRangeBounds(dataset));
 

@@ -123,8 +123,8 @@ public class StandardPieURLGeneratorTest {
     @Test
     public void testURL() {
         DefaultPieDataset dataset = new DefaultPieDataset();
-        dataset.setValue("Alpha '1'", new Double(5.0));
-        dataset.setValue("Beta", new Double(5.5));
+        dataset.setValue("Alpha '1'", 5.0);
+        dataset.setValue("Beta", 5.5);
         StandardPieURLGenerator g1 = new StandardPieURLGenerator(
                 "chart.jsp", "category");
         String url = g1.generateURL(dataset, "Beta", 0);
