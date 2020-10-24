@@ -484,7 +484,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      */
     protected void beginElementGroup(Graphics2D g2, ItemKey key) {
         Args.nullNotPermitted(key, "key");
-        Map m = new HashMap(1);
+        Map<String, String> m = new HashMap<>(1);
         m.put("ref", key.toJSONString());
         g2.setRenderingHint(ChartHints.KEY_BEGIN_ELEMENT, m);        
     }
@@ -2056,8 +2056,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      */
     public ItemLabelPosition getSeriesPositiveItemLabelPosition(int series) {
         // otherwise look up the position table
-        ItemLabelPosition position = (ItemLabelPosition)
-            this.positiveItemLabelPositionMap.get(series);
+        ItemLabelPosition position = this.positiveItemLabelPositionMap.get(series);
         if (position == null) {
             position = this.defaultPositiveItemLabelPosition;
         }
@@ -2834,7 +2833,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @return A boolean.
      */
     public boolean hasListener(EventListener listener) {
-        List list = Arrays.asList(this.listenerList.getListenerList());
+        List<Object> list = Arrays.asList(this.listenerList.getListenerList());
         return list.contains(listener);
     }
 
@@ -2844,16 +2843,6 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @since 1.0.5
      */
     protected void fireChangeEvent() {
-
-        // the commented out code would be better, but only if
-        // RendererChangeEvent is immutable, which it isn't.  See if there is
-        // a way to fix this...
-
-        //if (this.event == null) {
-        //    this.event = new RendererChangeEvent(this);
-        //}
-        //notifyListeners(this.event);
-
         notifyListeners(new RendererChangeEvent(this));
     }
 

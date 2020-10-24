@@ -202,7 +202,7 @@ public abstract class Plot implements AxisChangeListener,
     private static final long serialVersionUID = -8831571430103671324L;
 
     /** Useful constant representing zero. */
-    public static final Number ZERO = new Integer(0);
+    public static final Number ZERO = 0;
 
     /** The default insets. */
     public static final RectangleInsets DEFAULT_INSETS

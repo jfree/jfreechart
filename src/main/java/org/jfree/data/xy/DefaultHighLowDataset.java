@@ -51,6 +51,7 @@ package org.jfree.data.xy;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Objects;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 
@@ -63,7 +64,7 @@ public class DefaultHighLowDataset extends AbstractXYDataset
         implements OHLCDataset, PublicCloneable {
 
     /** The series key. */
-    private Comparable seriesKey;
+    private final Comparable seriesKey;
 
     /** Storage for the dates. */
     private Date[] date;
@@ -111,7 +112,6 @@ public class DefaultHighLowDataset extends AbstractXYDataset
         this.open = createNumberArray(open);
         this.close = createNumberArray(close);
         this.volume = createNumberArray(volume);
-
     }
 
     /**
@@ -143,7 +143,7 @@ public class DefaultHighLowDataset extends AbstractXYDataset
      */
     @Override
     public Number getX(int series, int item) {
-        return new Long(this.date[item].getTime());
+        return this.date[item].getTime();
     }
 
     /**
@@ -424,6 +424,13 @@ public class DefaultHighLowDataset extends AbstractXYDataset
         return true;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 67 * hash + Objects.hashCode(this.seriesKey);
+        return hash;
+    }
+
     /**
      * Constructs an array of Number objects from an array of doubles.
      *
@@ -435,7 +442,7 @@ public class DefaultHighLowDataset extends AbstractXYDataset
     public static Number[] createNumberArray(double[] data) {
         Number[] result = new Number[data.length];
         for (int i = 0; i < data.length; i++) {
-            result[i] = new Double(data[i]);
+            result[i] = data[i];
         }
         return result;
     }
