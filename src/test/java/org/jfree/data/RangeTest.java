@@ -93,7 +93,7 @@ public class RangeTest {
         assertFalse(r1.equals(r2));
 
         // a Range object cannot be equal to a different object type
-        assertFalse(r1.equals(new Double(0.0)));
+        assertFalse(r1.equals(0.0));
     }
 
     /**

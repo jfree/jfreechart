@@ -66,6 +66,7 @@ public class VectorSeriesTest implements SeriesChangeListener {
      *
      * @param event  the event.
      */
+    @Override
     public void seriesChanged(SeriesChangeEvent event) {
         this.lastEvent = event;
     }
@@ -120,6 +121,8 @@ public class VectorSeriesTest implements SeriesChangeListener {
 
     /**
      * Confirm that cloning works.
+     * 
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
