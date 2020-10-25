@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -187,6 +187,7 @@ public class AbstractObjectList implements Cloneable, Serializable {
      *
      * @return the hashcode
      */
+    @Override
     public int hashCode() {
         return super.hashCode();
     }
@@ -200,6 +201,7 @@ public class AbstractObjectList implements Cloneable, Serializable {
      * @throws CloneNotSupportedException if an item in the list does not 
      *         support cloning.
      */
+    @Override
     public Object clone() throws CloneNotSupportedException {
 
         final AbstractObjectList clone = (AbstractObjectList) super.clone();

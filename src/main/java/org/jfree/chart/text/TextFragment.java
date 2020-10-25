@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -233,6 +233,7 @@ public class TextFragment implements Serializable {
      * 
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == null) {
             return false;   
@@ -261,6 +262,7 @@ public class TextFragment implements Serializable {
      * 
      * @return A hash code.
      */
+    @Override
     public int hashCode() {
         int result;
         result = (this.text != null ? this.text.hashCode() : 0);

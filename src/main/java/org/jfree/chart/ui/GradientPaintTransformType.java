@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -75,6 +75,7 @@ public final class GradientPaintTransformType implements Serializable {
      *
      * @return The string.
      */
+    @Override
     public String toString() {
         return this.name;
     }
@@ -87,6 +88,7 @@ public final class GradientPaintTransformType implements Serializable {
      *
      * @return A boolean.
      */
+    @Override
     public boolean equals(Object o) {
 
         if (this == o) {
@@ -109,6 +111,7 @@ public final class GradientPaintTransformType implements Serializable {
      *
      * @return the hashcode
      */
+    @Override
     public int hashCode() {
         return this.name.hashCode();
     }

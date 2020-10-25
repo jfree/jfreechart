@@ -53,7 +53,7 @@ public final class VerticalAlignment implements Serializable {
         = new VerticalAlignment("VerticalAlignment.CENTER");
 
     /** The name. */
-    private String name;
+    private final String name;
 
     /**
      * Private constructor.
@@ -69,6 +69,7 @@ public final class VerticalAlignment implements Serializable {
      *
      * @return the string.
      */
+    @Override
     public String toString() {
         return this.name;
     }
