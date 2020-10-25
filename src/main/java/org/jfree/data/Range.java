@@ -191,7 +191,10 @@ public strictfp class Range implements Serializable {
         if (value > this.upper) {
             return this.upper;
         } 
-        return this.lower;
+        if (value < this.lower) {
+            return this.lower;
+        }
+        return value; // covers Double.NaN
     }
 
     /**
