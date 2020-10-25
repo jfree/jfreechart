@@ -55,8 +55,6 @@ import java.util.Locale;
 import java.util.TimeZone;
 import org.jfree.chart.util.Args;
 
-import org.jfree.data.time.Month;
-
 /**
  * A formatter that formats dates to show the initial letter(s) of the month
  * name and, as an option, the year for the first or last month of each year.
