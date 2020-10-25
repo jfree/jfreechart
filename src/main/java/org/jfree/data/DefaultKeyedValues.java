@@ -156,7 +156,7 @@ public class DefaultKeyedValues implements KeyedValues, Cloneable,
         if (i == null) {
             return -1;  // key not found
         }
-        return i.intValue();
+        return i;
     }
 
     /**
@@ -239,7 +239,7 @@ public class DefaultKeyedValues implements KeyedValues, Cloneable,
         else {
             this.keys.add(key);
             this.values.add(value);
-            this.indexMap.put(key, new Integer(this.keys.size() - 1));
+            this.indexMap.put(key, this.keys.size() - 1);
         }
     }
 
@@ -299,7 +299,7 @@ public class DefaultKeyedValues implements KeyedValues, Cloneable,
         this.indexMap.clear();
         for (int i = 0; i < this.keys.size(); i++) {
             final Object key = this.keys.get(i);
-            this.indexMap.put(key, new Integer(i));
+            this.indexMap.put(key, i);
         }
     }
 

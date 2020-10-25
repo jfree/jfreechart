@@ -219,7 +219,7 @@ public class WaferMapDataset extends AbstractDataset {
      * @return A boolean.
      */
     public boolean isMaxValue(Number check) {
-        if (check.doubleValue() > this.maxValue.doubleValue()) {
+        if (check.doubleValue() > this.maxValue) {
             return true;
         }
         return false;
@@ -233,7 +233,7 @@ public class WaferMapDataset extends AbstractDataset {
      * @return A boolean.
      */
     public boolean isMinValue(Number check) {
-        if (check.doubleValue() < this.minValue.doubleValue()) {
+        if (check.doubleValue() < this.minValue) {
             return true;
         }
         return false;

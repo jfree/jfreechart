@@ -202,8 +202,8 @@ public class HistogramDataset extends AbstractIntervalXYDataset
         Map map = new HashMap();
         map.put("key", key);
         map.put("bins", binList);
-        map.put("values.length", new Integer(values.length));
-        map.put("bin width", new Double(binWidth));
+        map.put("values.length", values.length);
+        map.put("bin width", binWidth);
         this.list.add(map);
         fireDatasetChanged();
     }
@@ -277,7 +277,7 @@ public class HistogramDataset extends AbstractIntervalXYDataset
      */
     private int getTotal(int series) {
         Map map = (Map) this.list.get(series);
-        return ((Integer) map.get("values.length")).intValue();
+        return ((Integer) map.get("values.length"));
     }
 
     /**
@@ -289,7 +289,7 @@ public class HistogramDataset extends AbstractIntervalXYDataset
      */
     private double getBinWidth(int series) {
         Map map = (Map) this.list.get(series);
-        return ((Double) map.get("bin width")).doubleValue();
+        return ((Double) map.get("bin width"));
     }
 
     /**
@@ -355,7 +355,7 @@ public class HistogramDataset extends AbstractIntervalXYDataset
         List bins = getBins(series);
         HistogramBin bin = (HistogramBin) bins.get(item);
         double x = (bin.getStartBoundary() + bin.getEndBoundary()) / 2.;
-        return new Double(x);
+        return x;
     }
 
     /**
@@ -382,10 +382,10 @@ public class HistogramDataset extends AbstractIntervalXYDataset
             return new Double(bin.getCount());
         }
         else if (this.type == HistogramType.RELATIVE_FREQUENCY) {
-            return new Double(bin.getCount() / total);
+            return bin.getCount() / total;
         }
         else if (this.type == HistogramType.SCALE_AREA_TO_1) {
-            return new Double(bin.getCount() / (binWidth * total));
+            return bin.getCount() / (binWidth * total);
         }
         else { // pretty sure this shouldn't ever happen
             throw new IllegalStateException();
@@ -408,7 +408,7 @@ public class HistogramDataset extends AbstractIntervalXYDataset
     public Number getStartX(int series, int item) {
         List bins = getBins(series);
         HistogramBin bin = (HistogramBin) bins.get(item);
-        return new Double(bin.getStartBoundary());
+        return bin.getStartBoundary();
     }
 
     /**
@@ -427,7 +427,7 @@ public class HistogramDataset extends AbstractIntervalXYDataset
     public Number getEndX(int series, int item) {
         List bins = getBins(series);
         HistogramBin bin = (HistogramBin) bins.get(item);
-        return new Double(bin.getEndBoundary());
+        return bin.getEndBoundary();
     }
 
     /**
