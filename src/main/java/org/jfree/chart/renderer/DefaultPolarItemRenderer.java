@@ -370,7 +370,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
         boolean result = false;
         Boolean b = this.seriesFilled.getBoolean(series);
         if (b != null) {
-            result = b.booleanValue();
+            result = b;
         }
         return result;
     }
@@ -382,7 +382,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * @param filled  the flag.
      */
     public void setSeriesFilled(int series, boolean filled) {
-        this.seriesFilled.setBoolean(series, Boolean.valueOf(filled));
+        this.seriesFilled.setBoolean(series, filled);
     }
 
     /**
@@ -685,11 +685,11 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
     @Override
     public LegendItem getLegendItem(int series) {
         LegendItem result;
-        PolarPlot plot = getPlot();
-        if (plot == null) {
+        PolarPlot p = getPlot();
+        if (p == null) {
             return null;
         }
-        XYDataset dataset = plot.getDataset(plot.getIndexOf(this));
+        XYDataset dataset = p.getDataset(p.getIndexOf(this));
         if (dataset == null) {
             return null;
         }

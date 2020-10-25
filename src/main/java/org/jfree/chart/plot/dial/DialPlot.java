@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -677,7 +677,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
      * @param scaleIndex  the scale index (zero-based).
      */
     public void mapDatasetToScale(int index, int scaleIndex) {
-        this.datasetToScaleMap.set(index, new Integer(scaleIndex));
+        this.datasetToScaleMap.set(index, scaleIndex);
         fireChangeEvent();
     }
 
@@ -692,7 +692,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
         DialScale result = (DialScale) this.scales.get(0);
         Integer scaleIndex = (Integer) this.datasetToScaleMap.get(datasetIndex);
         if (scaleIndex != null) {
-            result = getScale(scaleIndex.intValue());
+            result = getScale(scaleIndex);
         }
         return result;
     }

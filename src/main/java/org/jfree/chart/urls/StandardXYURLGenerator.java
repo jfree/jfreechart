@@ -50,6 +50,7 @@
 package org.jfree.chart.urls;
 
 import java.io.Serializable;
+import java.util.Objects;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
 
@@ -132,7 +133,7 @@ public class StandardXYURLGenerator implements XYURLGenerator, Serializable {
     public String generateURL(XYDataset dataset, int series, int item) {
         // TODO: URLEncode?
         String url = this.prefix;
-        boolean firstParameter = url.indexOf("?") == -1;
+        boolean firstParameter = !url.contains("?");
         url += firstParameter ? "?" : "&amp;";
         url += this.seriesParameterName + "=" + series
                 + "&amp;" + this.itemParameterName + "=" + item;
@@ -167,6 +168,15 @@ public class StandardXYURLGenerator implements XYURLGenerator, Serializable {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 79 * hash + Objects.hashCode(this.prefix);
+        hash = 79 * hash + Objects.hashCode(this.seriesParameterName);
+        hash = 79 * hash + Objects.hashCode(this.itemParameterName);
+        return hash;
     }
 
 }

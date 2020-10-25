@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -62,7 +62,7 @@ import org.jfree.chart.plot.WaferMapPlot;
 import org.jfree.data.general.WaferMapDataset;
 
 /**
- * A renderer for wafer map plots.  Provides color managment facilities.
+ * A renderer for wafer map plots.  Provides color management facilities.
  */
 public class WaferMapRenderer extends AbstractRenderer {
 
@@ -119,13 +119,13 @@ public class WaferMapRenderer extends AbstractRenderer {
             this.paintLimit = DEFAULT_PAINT_LIMIT;
         }
         else {
-            this.paintLimit = paintLimit.intValue();
+            this.paintLimit = paintLimit;
         }
 
         this.paintIndexMethod = VALUE_INDEX;
         if (paintIndexMethod != null) {
-            if (isMethodValid(paintIndexMethod.intValue())) {
-                this.paintIndexMethod = paintIndexMethod.intValue();
+            if (isMethodValid(paintIndexMethod)) {
+                this.paintIndexMethod = paintIndexMethod;
             }
         }
     }
@@ -198,7 +198,7 @@ public class WaferMapRenderer extends AbstractRenderer {
      * @return The paint index.
      */
     private int getPaintIndex(Number value) {
-        return ((Integer) this.paintIndex.get(value)).intValue();
+        return ((Integer) this.paintIndex.get(value));
     }
 
     /**
@@ -216,7 +216,7 @@ public class WaferMapRenderer extends AbstractRenderer {
         if (uniqueValues.size() <= this.paintLimit) {
             int count = 0; // assign a color for each unique value
             for (Iterator i = uniqueValues.iterator(); i.hasNext();) {
-                this.paintIndex.put(i.next(), new Integer(count++));
+                this.paintIndex.put(i.next(), count++);
             }
         }
         else {
@@ -248,7 +248,7 @@ public class WaferMapRenderer extends AbstractRenderer {
         int count = 0; // assign a color for each unique value
         int paint = 0;
         for (Iterator i = uniqueValues.iterator(); i.hasNext();) {
-            this.paintIndex.put(i.next(), new Integer(paint));
+            this.paintIndex.put(i.next(), paint);
             if (++count % valuesPerColor == 0) {
                 paint++;
             }
@@ -280,7 +280,7 @@ public class WaferMapRenderer extends AbstractRenderer {
                     paint = this.paintLimit;
                 }
             }
-            this.paintIndex.put(value, new Integer(paint));
+            this.paintIndex.put(value, paint);
         }
     }
 
@@ -301,8 +301,7 @@ public class WaferMapRenderer extends AbstractRenderer {
                     String label = entry.getKey().toString();
                     String description = label;
                     Shape shape = new Rectangle2D.Double(1d, 1d, 1d, 1d);
-                    Paint paint = lookupSeriesPaint(
-                            ((Integer) entry.getValue()).intValue());
+                    Paint paint = lookupSeriesPaint(((Integer) entry.getValue()));
                     Paint outlinePaint = Color.BLACK;
                     Stroke outlineStroke = DEFAULT_STROKE;
 
@@ -324,9 +323,7 @@ public class WaferMapRenderer extends AbstractRenderer {
                                 (Integer) entry.getValue()).toString();
                         String description = label;
                         Shape shape = new Rectangle2D.Double(1d, 1d, 1d, 1d);
-                        Paint paint = getSeriesPaint(
-                            ((Integer) entry.getValue()).intValue()
-                        );
+                        Paint paint = getSeriesPaint(((Integer) entry.getValue()));
                         Paint outlinePaint = Color.BLACK;
                         Stroke outlineStroke = DEFAULT_STROKE;
 
@@ -358,7 +355,7 @@ public class WaferMapRenderer extends AbstractRenderer {
                 }
             }
         }
-        return new Double(minValue);
+        return minValue;
     }
 
     /**
@@ -379,8 +376,8 @@ public class WaferMapRenderer extends AbstractRenderer {
                 }
             }
         }
-        return new Double(maxValue);
+        return maxValue;
     }
 
 
-} // end class wafermaprenderer
+} 

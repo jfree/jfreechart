@@ -1455,12 +1455,11 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     public CategoryAxis getDomainAxisForDataset(int index) {
         Args.requireNonNegative(index, "index");
         CategoryAxis axis;
-        List axisIndices = (List) this.datasetToDomainAxesMap.get(
-                new Integer(index));
+        List axisIndices = (List) this.datasetToDomainAxesMap.get(index);
         if (axisIndices != null) {
             // the first axis in the list is used for data <--> Java2D
             Integer axisIndex = (Integer) axisIndices.get(0);
-            axis = getDomainAxis(axisIndex.intValue());
+            axis = getDomainAxis(axisIndex);
         } else {
             axis = getDomainAxis(0);
         }
@@ -1512,12 +1511,11 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     public ValueAxis getRangeAxisForDataset(int index) {
         Args.requireNonNegative(index, "index");
         ValueAxis axis;
-        List axisIndices = (List) this.datasetToRangeAxesMap.get(
-                new Integer(index));
+        List axisIndices = (List) this.datasetToRangeAxesMap.get(index);
         if (axisIndices != null) {
             // the first axis in the list is used for data <--> Java2D
             Integer axisIndex = (Integer) axisIndices.get(0);
-            axis = getRangeAxis(axisIndex.intValue());
+            axis = getRangeAxis(axisIndex);
         } else {
             axis = getRangeAxis(0);
         }
@@ -2415,7 +2413,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
             Iterator iterator = keys.iterator();
             while (iterator.hasNext()) {
                 Integer key = (Integer) iterator.next();
-                clearDomainMarkers(key.intValue());
+                clearDomainMarkers(key);
             }
             this.backgroundDomainMarkers.clear();
         }
@@ -2424,7 +2422,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
             Iterator iterator = keys.iterator();
             while (iterator.hasNext()) {
                 Integer key = (Integer) iterator.next();
-                clearDomainMarkers(key.intValue());
+                clearDomainMarkers(key);
             }
             this.foregroundDomainMarkers.clear();
         }
@@ -2685,7 +2683,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
             Iterator iterator = keys.iterator();
             while (iterator.hasNext()) {
                 Integer key = (Integer) iterator.next();
-                clearRangeMarkers(key.intValue());
+                clearRangeMarkers(key);
             }
             this.backgroundRangeMarkers.clear();
         }
@@ -2694,7 +2692,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
             Iterator iterator = keys.iterator();
             while (iterator.hasNext()) {
                 Integer key = (Integer) iterator.next();
-                clearRangeMarkers(key.intValue());
+                clearRangeMarkers(key);
             }
             this.foregroundRangeMarkers.clear();
         }

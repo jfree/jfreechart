@@ -278,7 +278,7 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
             interior.add(new JLabel(localizationResources.getString(
                     "Draw_lines")));
             this.drawLinesCheckBox = new JCheckBox();
-            this.drawLinesCheckBox.setSelected(this.drawLines.booleanValue());
+            this.drawLinesCheckBox.setSelected(this.drawLines);
             this.drawLinesCheckBox.setActionCommand("DrawLines");
             this.drawLinesCheckBox.addActionListener(this);
             interior.add(new JPanel());
@@ -289,7 +289,7 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
             interior.add(new JLabel(localizationResources.getString(
                     "Draw_shapes")));
             this.drawShapesCheckBox = new JCheckBox();
-            this.drawShapesCheckBox.setSelected(this.drawShapes.booleanValue());
+            this.drawShapesCheckBox.setSelected(this.drawShapes);
             this.drawShapesCheckBox.setActionCommand("DrawShapes");
             this.drawShapesCheckBox.addActionListener(this);
             interior.add(new JPanel());
@@ -595,16 +595,14 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
                 CategoryPlot p = (CategoryPlot) plot;
                 CategoryItemRenderer r = p.getRenderer();
                 if (r instanceof LineAndShapeRenderer) {
-                    ((LineAndShapeRenderer) r).setDefaultLinesVisible(
-                            this.drawLines.booleanValue());
+                    ((LineAndShapeRenderer) r).setDefaultLinesVisible(this.drawLines);
                 }
             }
             else if (plot instanceof XYPlot) {
                 XYPlot p = (XYPlot) plot;
                 XYItemRenderer r = p.getRenderer();
                 if (r instanceof StandardXYItemRenderer) {
-                    ((StandardXYItemRenderer) r).setPlotLines(
-                            this.drawLines.booleanValue());
+                    ((StandardXYItemRenderer) r).setPlotLines(this.drawLines);
                 }
             }
         }
@@ -614,8 +612,7 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
                 CategoryPlot p = (CategoryPlot) plot;
                 CategoryItemRenderer r = p.getRenderer();
                 if (r instanceof LineAndShapeRenderer) {
-                    ((LineAndShapeRenderer) r).setDefaultShapesVisible(
-                            this.drawShapes.booleanValue());
+                    ((LineAndShapeRenderer) r).setDefaultShapesVisible(this.drawShapes);
                 }
             }
             else if (plot instanceof XYPlot) {
