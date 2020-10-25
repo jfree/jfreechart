@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -89,11 +89,11 @@ public class OHLCDataItem implements Comparable, Serializable {
             double close, double volume) {
         Args.nullNotPermitted(date, "date");
         this.date = date;
-        this.open = new Double(open);
-        this.high = new Double(high);
-        this.low = new Double(low);
-        this.close = new Double(close);
-        this.volume = new Double(volume);
+        this.open = open;
+        this.high = high;
+        this.low = low;
+        this.close = close;
+        this.volume = volume;
     }
 
     /**
