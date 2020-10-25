@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -185,16 +185,13 @@ public strictfp class Range implements Serializable {
      * @return The constrained value.
      */
     public double constrain(double value) {
-        double result = value;
-        if (!contains(value)) {
-            if (value > this.upper) {
-                result = this.upper;
-            }
-            else if (value < this.lower) {
-                result = this.lower;
-            }
+        if (contains(value)) {
+            return value;
         }
-        return result;
+        if (value > this.upper) {
+            return this.upper;
+        }
+        return this.lower;
     }
 
     /**
