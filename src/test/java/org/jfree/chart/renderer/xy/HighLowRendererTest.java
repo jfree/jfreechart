@@ -126,7 +126,7 @@ public class HighLowRendererTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         HighLowRenderer r1 = new HighLowRenderer();
-        r1.setCloseTickPaint(Color.green);
+        r1.setCloseTickPaint(Color.GREEN);
         HighLowRenderer r2 = (HighLowRenderer) r1.clone();
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
@@ -148,7 +148,7 @@ public class HighLowRendererTest {
     @Test
     public void testSerialization() {
         HighLowRenderer r1 = new HighLowRenderer();
-        r1.setCloseTickPaint(Color.green);
+        r1.setCloseTickPaint(Color.GREEN);
         HighLowRenderer r2 = (HighLowRenderer) TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }

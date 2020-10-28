@@ -246,9 +246,9 @@ public class StandardChartThemeTest {
         assertTrue(t1.equals(t2));
 
         //gridBandAlternatePaint
-        t1.setGridBandAlternatePaint(new GradientPaint(1f, 4f, Color.green, 1f, 2f, Color.RED));
+        t1.setGridBandAlternatePaint(new GradientPaint(1f, 4f, Color.GREEN, 1f, 2f, Color.RED));
         assertFalse(t1.equals(t2));
-        t2.setGridBandAlternatePaint(new GradientPaint(1f, 4f, Color.green, 1f, 2f, Color.RED));
+        t2.setGridBandAlternatePaint(new GradientPaint(1f, 4f, Color.GREEN, 1f, 2f, Color.RED));
         assertTrue(t1.equals(t2));
 
     }

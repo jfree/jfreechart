@@ -119,7 +119,7 @@ public class DialBackgroundTest {
         // test a customised instance
         b1 = new DialBackground();
         b1.setPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f,
-                Color.green));
+                Color.GREEN));
         b1.setGradientPaintTransformer(new StandardGradientPaintTransformer(
                 GradientPaintTransformType.CENTER_VERTICAL));
         b2 = (DialBackground) b1.clone();
@@ -147,7 +147,7 @@ public class DialBackgroundTest {
         // test a customised instance
         b1 = new DialBackground();
         b1.setPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f,
-                Color.green));
+                Color.GREEN));
         b1.setGradientPaintTransformer(new StandardGradientPaintTransformer(
                 GradientPaintTransformType.CENTER_VERTICAL));
 

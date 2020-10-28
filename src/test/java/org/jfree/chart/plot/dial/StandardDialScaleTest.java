@@ -150,10 +150,10 @@ public class StandardDialScaleTest {
 
         // tickLabelPaint
         s1.setTickLabelPaint(new GradientPaint(1.0f, 2.0f, Color.WHITE,
-                3.0f, 4.0f, Color.green));
+                3.0f, 4.0f, Color.GREEN));
         assertFalse(s1.equals(s2));
         s2.setTickLabelPaint(new GradientPaint(1.0f, 2.0f, Color.WHITE,
-                3.0f, 4.0f, Color.green));
+                3.0f, 4.0f, Color.GREEN));
         assertTrue(s1.equals(s2));
 
         s1.setTickLabelsVisible(false);

@@ -103,10 +103,10 @@ public class CompassPlotTest {
         assertTrue(plot1.equals(plot2));
 
         // roseHighlightPaint
-        plot1.setRoseHighlightPaint(new GradientPaint(1.0f, 2.0f, Color.green,
+        plot1.setRoseHighlightPaint(new GradientPaint(1.0f, 2.0f, Color.GREEN,
                 3.0f, 4.0f, Color.YELLOW));
         assertFalse(plot1.equals(plot2));
-        plot2.setRoseHighlightPaint(new GradientPaint(1.0f, 2.0f, Color.green,
+        plot2.setRoseHighlightPaint(new GradientPaint(1.0f, 2.0f, Color.GREEN,
                 3.0f, 4.0f, Color.YELLOW));
         assertTrue(plot1.equals(plot2));
     }
@@ -120,9 +120,9 @@ public class CompassPlotTest {
         p1.setRosePaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f,
                 Color.BLUE));
         p1.setRoseCenterPaint(new GradientPaint(4.0f, 3.0f, Color.RED, 2.0f,
-                1.0f, Color.green));
+                1.0f, Color.GREEN));
         p1.setRoseHighlightPaint(new GradientPaint(4.0f, 3.0f, Color.RED, 2.0f,
-                1.0f, Color.green));
+                1.0f, Color.GREEN));
         CompassPlot p2 = (CompassPlot) TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }

@@ -162,7 +162,7 @@ public class WaterfallBarRendererTest {
 //    @Test
 // public void testGetSeriesPaintForDifferentValues() {
 //Color firstPaint = Color.cyan;
-//Color positivePaint = Color.green;
+//Color positivePaint = Color.GREEN;
 //Color negativePaint = Color.RED;
 //Color lastPaint = Color.BLUE;
 //WaterfallBarRenderer waterfallBarRenderer = new WaterfallBarRenderer(firstPaint, positivePaint, negativePaint, lastPaint);

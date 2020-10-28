@@ -73,9 +73,9 @@ public class GanttRendererTest {
         r2.setCompletePaint(Color.YELLOW);
         assertTrue(r1.equals(r2));
 
-        r1.setIncompletePaint(Color.green);
+        r1.setIncompletePaint(Color.GREEN);
         assertFalse(r1.equals(r2));
-        r2.setIncompletePaint(Color.green);
+        r2.setIncompletePaint(Color.GREEN);
         assertTrue(r1.equals(r2));
 
         r1.setStartPercent(0.11);

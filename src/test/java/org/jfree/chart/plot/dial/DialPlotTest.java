@@ -83,9 +83,9 @@ public class DialPlotTest implements PlotChangeListener {
         assertTrue(p1.equals(p2));
 
         // background
-        p1.setBackground(new DialBackground(Color.green));
+        p1.setBackground(new DialBackground(Color.GREEN));
         assertFalse(p1.equals(p2));
-        p2.setBackground(new DialBackground(Color.green));
+        p2.setBackground(new DialBackground(Color.GREEN));
         assertTrue(p1.equals(p2));
 
         p1.setBackground(null);
@@ -182,7 +182,7 @@ public class DialPlotTest implements PlotChangeListener {
         b1.setPaint(Color.BLUE);
         assertNotNull(this.lastEvent);
 
-        DialBackground b2 = new DialBackground(Color.green);
+        DialBackground b2 = new DialBackground(Color.GREEN);
         p.setBackground(b2);
         this.lastEvent = null;
         b1.setPaint(Color.RED);
@@ -209,7 +209,7 @@ public class DialPlotTest implements PlotChangeListener {
         this.lastEvent = null;
         c1.setFillPaint(Color.BLUE);
         assertNull(this.lastEvent);
-        c2.setFillPaint(Color.green);
+        c2.setFillPaint(Color.GREEN);
         assertNotNull(this.lastEvent);
     }
 
@@ -231,7 +231,7 @@ public class DialPlotTest implements PlotChangeListener {
         this.lastEvent = null;
         f1.setBackgroundPaint(Color.BLUE);
         assertNull(this.lastEvent);
-        f2.setBackgroundPaint(Color.green);
+        f2.setBackgroundPaint(Color.GREEN);
         assertNotNull(this.lastEvent);
     }
 
@@ -270,12 +270,12 @@ public class DialPlotTest implements PlotChangeListener {
         b1.setPaint(Color.BLUE);
         assertNotNull(this.lastEvent);
 
-        DialBackground b2 = new DialBackground(Color.green);
+        DialBackground b2 = new DialBackground(Color.GREEN);
         p.addLayer(b2);
         this.lastEvent = null;
         b1.setPaint(Color.RED);
         assertNotNull(this.lastEvent);
-        b2.setPaint(Color.green);
+        b2.setPaint(Color.GREEN);
         assertNotNull(this.lastEvent);
 
         p.removeLayer(b2);

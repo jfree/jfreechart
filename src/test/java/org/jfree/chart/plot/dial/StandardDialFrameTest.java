@@ -82,10 +82,10 @@ public class StandardDialFrameTest {
 
         // foregroundPaint
         f1.setForegroundPaint(new GradientPaint(1.0f, 2.0f, Color.BLUE, 3.0f,
-                4.0f, Color.green));
+                4.0f, Color.GREEN));
         assertFalse(f1.equals(f2));
         f2.setForegroundPaint(new GradientPaint(1.0f, 2.0f, Color.BLUE, 3.0f,
-                4.0f, Color.green));
+                4.0f, Color.GREEN));
         assertTrue(f1.equals(f2));
 
         // stroke

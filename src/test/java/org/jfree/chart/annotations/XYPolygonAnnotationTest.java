@@ -98,9 +98,9 @@ public class XYPolygonAnnotationTest {
                 6.0}, stroke2, gp2, Color.BLUE);
         assertTrue(a1.equals(a2));
 
-        GradientPaint gp3 = new GradientPaint(1.0f, 2.0f, Color.green, 3.0f,
+        GradientPaint gp3 = new GradientPaint(1.0f, 2.0f, Color.GREEN, 3.0f,
                 4.0f, Color.WHITE);
-        GradientPaint gp4 = new GradientPaint(1.0f, 2.0f, Color.green, 3.0f,
+        GradientPaint gp4 = new GradientPaint(1.0f, 2.0f, Color.GREEN, 3.0f,
                 4.0f, Color.WHITE);
         a1 = new XYPolygonAnnotation(new double[] {99.0, 2.0, 3.0, 4.0, 5.0,
                 6.0}, stroke2, gp1, gp3);
