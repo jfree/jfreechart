@@ -171,7 +171,7 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
         seriesTitle.setPosition(RectangleEdge.BOTTOM);
         this.pieChart.setTitle(seriesTitle);
         this.aggregatedItemsKey = "Other";
-        this.aggregatedItemsPaint = Color.lightGray;
+        this.aggregatedItemsPaint = Color.LIGHT_GRAY;
         this.sectionPaints = new HashMap();
         this.legendItemShape = new Ellipse2D.Double(-4.0, -4.0, 8.0, 8.0);
     }
@@ -310,7 +310,7 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
 
     /**
      * Returns the paint used to draw the pie section representing the
-     * aggregated items.  The default value is {code Color.lightGray}.
+     * aggregated items.  The default value is {code Color.LIGHT_GRAY}.
      *
      * @return The paint.
      *

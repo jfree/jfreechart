@@ -185,7 +185,7 @@ public class LookupPaintScale
      * Creates a new paint scale.
      */
     public LookupPaintScale() {
-        this(0.0, 1.0, Color.lightGray);
+        this(0.0, 1.0, Color.LIGHT_GRAY);
     }
 
     /**

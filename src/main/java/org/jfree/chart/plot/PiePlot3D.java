@@ -276,7 +276,7 @@ public class PiePlot3D extends PiePlot implements Serializable {
             double igx2 = plotArea.getMaxX() - hGap;
             double igy1 = plotArea.getY() + vGap;
             double igy2 = plotArea.getMaxY() - vGap;
-            g2.setPaint(Color.lightGray);
+            g2.setPaint(Color.LIGHT_GRAY);
             g2.draw(new Rectangle2D.Double(igx1, igy1, igx2 - igx1,
                     igy2 - igy1));
         }
@@ -494,7 +494,7 @@ public class PiePlot3D extends PiePlot implements Serializable {
             ys = new int[] {(int) arc.getCenterY(), (int) arc.getCenterY()
                     - depth, (int) p1.getY() - depth, (int) p1.getY()};
             Polygon polygon = new Polygon(xs, ys, 4);
-            g2.setPaint(java.awt.Color.lightGray);
+            g2.setPaint(java.awt.Color.LIGHT_GRAY);
             g2.fill(polygon);
             g2.setPaint(outlinePaint);
             g2.setStroke(outlineStroke);

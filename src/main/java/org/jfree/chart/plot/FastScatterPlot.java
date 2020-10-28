@@ -119,7 +119,7 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
             {2.0f, 2.0f}, 0.0f);
 
     /** The default grid line paint. */
-    public static final Paint DEFAULT_GRIDLINE_PAINT = Color.lightGray;
+    public static final Paint DEFAULT_GRIDLINE_PAINT = Color.LIGHT_GRAY;
 
     /** The data. */
     private float[][] data;
