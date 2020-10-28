@@ -1,7 +1,7 @@
 JFreeChart
 ==========
 
-Version 1.5.1, not yet released.
+Version 1.5.1, 28 October 2020.
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.jfree/jfreechart/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.jfree/jfreechart)
 
@@ -59,12 +59,15 @@ at GitHub:
 History
 -------
 
-##### Version 1.5.1 (not yet released)
+##### Version 1.5.1 (28 October 2020)
+- add DeviationStepRenderer (PR #173)
 - modify buffer in ChartPanel to handle high DPI displays (bug #170);
 - fix for exception on extreme zoom on NumberAxis (bug #64);
-- added Catalan translations (PR #117);
 - fix for LayeredBarRenderer (bug #169);
-- migrated to JUnit 5.
+- add Catalan translations (PR #117);
+- add automatic module name `org.jfree.jfreechart`;
+- migrate to JUnit 5;
+- raise minimum requirement to Java 8 or later.
 
 ##### Version 1.5.0 (5 November 2017)
 - all JavaFX classes moved to a separate project;
