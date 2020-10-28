@@ -379,7 +379,7 @@ public class HistogramDataset extends AbstractIntervalXYDataset
         double binWidth = getBinWidth(series);
 
         if (this.type == HistogramType.FREQUENCY) {
-            return new Double(bin.getCount());
+            return bin.getCount();
         }
         else if (this.type == HistogramType.RELATIVE_FREQUENCY) {
             return bin.getCount() / total;

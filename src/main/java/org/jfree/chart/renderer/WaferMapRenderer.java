@@ -101,7 +101,7 @@ public class WaferMapRenderer extends AbstractRenderer {
      * @param paintIndexMethod  the paint index method.
      */
     public WaferMapRenderer(int paintLimit, int paintIndexMethod) {
-        this(new Integer(paintLimit), new Integer(paintIndexMethod));
+        this(Integer.valueOf(paintLimit), Integer.valueOf(paintIndexMethod));
     }
 
     /**

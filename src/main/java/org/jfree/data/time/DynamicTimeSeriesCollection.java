@@ -757,7 +757,7 @@ public class DynamicTimeSeriesCollection extends AbstractIntervalXYDataset
      */
     @Override
     public Number getY(int series, int item) {
-        return new Float(getYValue(series, item));
+        return getYValue(series, item);
     }
 
     /**

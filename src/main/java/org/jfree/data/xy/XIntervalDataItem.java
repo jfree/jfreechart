@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -58,7 +58,7 @@ public class XIntervalDataItem extends ComparableObjectItem {
      * @param y  the y-value.
      */
     public XIntervalDataItem(double x, double xLow, double xHigh, double y) {
-        super(new Double(x), new YWithXInterval(y, xLow, xHigh));
+        super(x, new YWithXInterval(y, xLow, xHigh));
     }
 
     /**

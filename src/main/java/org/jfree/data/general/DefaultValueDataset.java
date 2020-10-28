@@ -75,7 +75,7 @@ public class DefaultValueDataset extends AbstractDataset
      * @param value  the value.
      */
     public DefaultValueDataset(double value) {
-        this(new Double(value));
+        this(Double.valueOf(value));
     }
 
     /**

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2015, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -783,7 +783,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      * @since 1.0.14
      */
     public void update(RegularTimePeriod period, double value) {
-      update(period, new Double(value));
+      update(period, Double.valueOf(value));
     }
 
     /**
@@ -866,7 +866,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      */
     public TimeSeriesDataItem addOrUpdate(RegularTimePeriod period,
                                           double value) {
-        return addOrUpdate(period, new Double(value));
+        return addOrUpdate(period, Double.valueOf(value));
     }
 
     /**

@@ -274,7 +274,7 @@ public abstract class DataUtils {
             if (v != null) {
                 runningTotal = runningTotal + v.doubleValue();
             }
-            result.addValue(data.getKey(i), new Double(runningTotal / total));
+            result.addValue(data.getKey(i), runningTotal / total);
         }
         return result;
     }

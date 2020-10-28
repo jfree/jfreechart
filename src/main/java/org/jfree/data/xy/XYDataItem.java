@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -146,7 +146,7 @@ public class XYDataItem implements Cloneable, Comparable, Serializable {
      * @param y  the new y-value.
      */
     public void setY(double y) {
-        setY(new Double(y));
+        setY(Double.valueOf(y));
     }
 
     /**

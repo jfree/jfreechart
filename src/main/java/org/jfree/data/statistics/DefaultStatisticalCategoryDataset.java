@@ -351,7 +351,7 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
      */
     public void add(double mean, double standardDeviation,
                     Comparable rowKey, Comparable columnKey) {
-        add(new Double(mean), new Double(standardDeviation), rowKey, columnKey);
+        add(Double.valueOf(mean), Double.valueOf(standardDeviation), rowKey, columnKey);
     }
 
     /**
