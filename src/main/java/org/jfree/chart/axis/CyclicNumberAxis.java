@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -528,8 +528,7 @@ public class CyclicNumberAxis extends NumberAxis {
             }
 
             CycleBoundTick tick = new CycleBoundTick(
-                this.boundMappedToLastCycle,
-                new Double(currentTickValue), tickLabel, anchor,
+                this.boundMappedToLastCycle, currentTickValue, tickLabel, anchor,
                 rotationAnchor, angle
             );
             if (currentTickValue == cycleBound) {
@@ -697,7 +696,7 @@ public class CyclicNumberAxis extends NumberAxis {
             }
 
             CycleBoundTick tick = new CycleBoundTick(
-                this.boundMappedToLastCycle, new Double(currentTickValue),
+                this.boundMappedToLastCycle, currentTickValue,
                 tickLabel, anchor, rotationAnchor, angle);
             if (currentTickValue == cycleBound) {
                 this.internalMarkerCycleBoundTick = tick;

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -614,7 +614,7 @@ public class SymbolAxis extends NumberAxis implements Serializable {
                         rotationAnchor = TextAnchor.TOP_CENTER;
                     }
                 }
-                Tick tick = new NumberTick(new Double(currentTickValue),
+                Tick tick = new NumberTick(currentTickValue,
                         tickLabel, anchor, rotationAnchor, angle);
                 ticks.add(tick);
             }
@@ -708,8 +708,8 @@ public class SymbolAxis extends NumberAxis implements Serializable {
                         rotationAnchor = TextAnchor.CENTER_LEFT;
                     }
                 }
-                Tick tick = new NumberTick(new Double(currentTickValue),
-                        tickLabel, anchor, rotationAnchor, angle);
+                Tick tick = new NumberTick(currentTickValue, tickLabel, anchor, 
+                        rotationAnchor, angle);
                 ticks.add(tick);
             }
         }
