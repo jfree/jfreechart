@@ -163,7 +163,7 @@ public class Task implements Cloneable, PublicCloneable, Serializable {
      * @param percent  the percentage.
      */
     public void setPercentComplete(double percent) {
-        setPercentComplete(new Double(percent));
+        setPercentComplete(Double.valueOf(percent));
     }
 
     /**

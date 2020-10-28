@@ -102,10 +102,7 @@ public class MatrixSeries extends Series implements Serializable {
     public Number getItem(int itemIndex) {
         int i = getItemRow(itemIndex);
         int j = getItemColumn(itemIndex);
-
-        Number n = new Double(get(i, j));
-
-        return n;
+        return get(i, j);
     }
 
 

@@ -283,7 +283,7 @@ public class SimpleHistogramDataset extends AbstractIntervalXYDataset
      */
     @Override
     public Number getX(int series, int item) {
-        return new Double(getXValue(series, item));
+        return getXValue(series, item);
     }
 
     /**
@@ -310,7 +310,7 @@ public class SimpleHistogramDataset extends AbstractIntervalXYDataset
      */
     @Override
     public Number getY(int series, int item) {
-        return new Double(getYValue(series, item));
+        return getYValue(series, item);
     }
 
     /**
@@ -345,7 +345,7 @@ public class SimpleHistogramDataset extends AbstractIntervalXYDataset
      */
     @Override
     public Number getStartX(int series, int item) {
-        return new Double(getStartXValue(series, item));
+        return getStartXValue(series, item);
     }
 
     /**
@@ -373,7 +373,7 @@ public class SimpleHistogramDataset extends AbstractIntervalXYDataset
      */
     @Override
     public Number getEndX(int series, int item) {
-        return new Double(getEndXValue(series, item));
+        return getEndXValue(series, item);
     }
 
     /**

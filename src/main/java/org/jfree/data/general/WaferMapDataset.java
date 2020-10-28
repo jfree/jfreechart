@@ -97,8 +97,8 @@ public class WaferMapDataset extends AbstractDataset {
      */
     public WaferMapDataset(int maxChipX, int maxChipY, Number chipSpace) {
 
-        this.maxValue = new Double(Double.NEGATIVE_INFINITY);
-        this.minValue = new Double(Double.POSITIVE_INFINITY);
+        this.maxValue = Double.NEGATIVE_INFINITY;
+        this.minValue = Double.POSITIVE_INFINITY;
         this.data = new DefaultKeyedValues2D();
 
         this.maxChipX = maxChipX;
@@ -131,7 +131,7 @@ public class WaferMapDataset extends AbstractDataset {
      * @param y  the y-index.
      */
     public void addValue(int v, int x, int y) {
-        setValue(new Double(v), new Integer(x), new Integer(y));
+        setValue(v, x, y);
     }
 
     /**
@@ -144,10 +144,10 @@ public class WaferMapDataset extends AbstractDataset {
     public void setValue(Number value, Comparable chipx, Comparable chipy) {
         this.data.setValue(value, chipx, chipy);
         if (isMaxValue(value)) {
-            this.maxValue = (Double) value;
+            this.maxValue = value.doubleValue();
         }
         if (isMinValue(value)) {
-            this.minValue = (Double) value;
+            this.minValue = value.doubleValue();
         }
     }
 

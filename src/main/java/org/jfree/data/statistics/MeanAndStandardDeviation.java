@@ -69,7 +69,7 @@ public class MeanAndStandardDeviation implements Serializable {
      * @param standardDeviation  the standard deviation.
      */
     public MeanAndStandardDeviation(double mean, double standardDeviation) {
-        this(new Double(mean), new Double(standardDeviation));
+        this(Double.valueOf(mean), Double.valueOf(standardDeviation));
     }
 
     /**

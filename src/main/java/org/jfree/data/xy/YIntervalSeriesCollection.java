@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -217,7 +217,7 @@ public class YIntervalSeriesCollection extends AbstractIntervalXYDataset
     @Override
     public Number getY(int series, int item) {
         YIntervalSeries s = (YIntervalSeries) this.data.get(series);
-        return new Double(s.getYValue(item));
+        return s.getYValue(item);
     }
 
     /**
@@ -259,7 +259,7 @@ public class YIntervalSeriesCollection extends AbstractIntervalXYDataset
     @Override
     public Number getStartY(int series, int item) {
         YIntervalSeries s = (YIntervalSeries) this.data.get(series);
-        return new Double(s.getYLowValue(item));
+        return s.getYLowValue(item);
     }
 
     /**
@@ -273,7 +273,7 @@ public class YIntervalSeriesCollection extends AbstractIntervalXYDataset
     @Override
     public Number getEndY(int series, int item) {
         YIntervalSeries s = (YIntervalSeries) this.data.get(series);
-        return new Double(s.getYHighValue(item));
+        return s.getYHighValue(item);
     }
 
     /**

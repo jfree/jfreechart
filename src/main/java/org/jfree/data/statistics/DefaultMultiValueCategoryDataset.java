@@ -134,17 +134,17 @@ public class DefaultMultiValueCategoryDataset extends AbstractDataset
 
             // update the cached range values...
             if (this.maximumRangeValue == null) {
-                this.maximumRangeValue = new Double(maxval);
+                this.maximumRangeValue = maxval;
             }
             else if (maxval > this.maximumRangeValue.doubleValue()) {
-                this.maximumRangeValue = new Double(maxval);
+                this.maximumRangeValue = maxval;
             }
 
             if (this.minimumRangeValue == null) {
-                this.minimumRangeValue = new Double(minval);
+                this.minimumRangeValue = minval;
             }
             else if (minval < this.minimumRangeValue.doubleValue()) {
-                this.minimumRangeValue = new Double(minval);
+                this.minimumRangeValue = minval;
             }
             this.rangeBounds = new Range(this.minimumRangeValue.doubleValue(),
                     this.maximumRangeValue.doubleValue());
@@ -214,7 +214,7 @@ public class DefaultMultiValueCategoryDataset extends AbstractDataset
         if (count == 0) {
             return null;
         }
-        return new Double(average);
+        return average;
     }
 
     /**
@@ -243,7 +243,7 @@ public class DefaultMultiValueCategoryDataset extends AbstractDataset
         if (count == 0) {
             return null;
         }
-        return new Double(average);
+        return average;
     }
 
     /**
