@@ -390,7 +390,7 @@ public class ArcDialFrame extends AbstractDialLayer implements DialFrame,
         Area area1 = new Area(outerWindow);
         Area area2 = new Area(window);
         area1.subtract(area2);
-        g2.setPaint(Color.lightGray);
+        g2.setPaint(Color.LIGHT_GRAY);
         g2.fill(area1);
 
         g2.setStroke(this.stroke);
