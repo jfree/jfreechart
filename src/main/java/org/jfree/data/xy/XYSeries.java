@@ -412,7 +412,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * @param y  the y value.
      */
     public void add(double x, double y) {
-        add(new Double(x), new Double(y), true);
+        add(x, y, true);
     }
 
     /**
@@ -426,7 +426,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      *                listeners.
      */
     public void add(double x, double y, boolean notify) {
-        add(new Double(x), new Double(y), notify);
+        add(Double.valueOf(x), Double.valueOf(y), notify);
     }
 
     /**
@@ -438,7 +438,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * @param y  the y value ({@code null} permitted).
      */
     public void add(double x, Number y) {
-        add(new Double(x), y);
+        add(Double.valueOf(x), y);
     }
 
     /**
@@ -453,7 +453,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      *                listeners.
      */
     public void add(double x, Number y, boolean notify) {
-        add(new Double(x), y, notify);
+        add(Double.valueOf(x), y, notify);
     }
 
     /**

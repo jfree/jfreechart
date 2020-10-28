@@ -374,7 +374,7 @@ public final class DatasetUtils {
             String rowKey = rowKeyPrefix + (r + 1);
             for (int c = 0; c < data[r].length; c++) {
                 String columnKey = columnKeyPrefix + (c + 1);
-                result.addValue(new Double(data[r][c]), rowKey, columnKey);
+                result.addValue(data[r][c], rowKey, columnKey);
             }
         }
         return result;
@@ -455,7 +455,7 @@ public final class DatasetUtils {
             Comparable rowKey = rowKeys[r];
             for (int c = 0; c < data[r].length; c++) {
                 Comparable columnKey = columnKeys[c];
-                result.addValue(new Double(data[r][c]), rowKey, columnKey);
+                result.addValue(data[r][c], rowKey, columnKey);
             }
         }
         return result;
@@ -1606,7 +1606,7 @@ public final class DatasetUtils {
         // if the dataset implements DomainInfo, life is easy
         if (dataset instanceof DomainInfo) {
             DomainInfo info = (DomainInfo) dataset;
-            return new Double(info.getDomainLowerBound(true));
+            return info.getDomainLowerBound(true);
         }
         else {
             double minimum = Double.POSITIVE_INFINITY;
@@ -1634,10 +1634,9 @@ public final class DatasetUtils {
                 result = null;
             }
             else {
-                result = new Double(minimum);
+                result = minimum;
             }
         }
-
         return result;
     }
 
@@ -1659,7 +1658,7 @@ public final class DatasetUtils {
         // if the dataset implements DomainInfo, life is easy
         if (dataset instanceof DomainInfo) {
             DomainInfo info = (DomainInfo) dataset;
-            return new Double(info.getDomainUpperBound(true));
+            return info.getDomainUpperBound(true);
         }
 
         // hasn't implemented DomainInfo, so iterate...
@@ -1688,7 +1687,7 @@ public final class DatasetUtils {
                 result = null;
             }
             else {
-                result = new Double(maximum);
+                result = maximum;
             }
 
         }
@@ -1712,7 +1711,7 @@ public final class DatasetUtils {
         Args.nullNotPermitted(dataset, "dataset");
         if (dataset instanceof RangeInfo) {
             RangeInfo info = (RangeInfo) dataset;
-            return new Double(info.getRangeLowerBound(true));
+            return info.getRangeLowerBound(true);
         }
 
         // hasn't implemented RangeInfo, so we'll have to iterate...
@@ -1740,7 +1739,7 @@ public final class DatasetUtils {
                 return null;
             }
             else {
-                return new Double(minimum);
+                return minimum;
             }
 
         }
@@ -1765,7 +1764,7 @@ public final class DatasetUtils {
         // work out the minimum value...
         if (dataset instanceof RangeInfo) {
             RangeInfo info = (RangeInfo) dataset;
-            return new Double(info.getRangeLowerBound(true));
+            return info.getRangeLowerBound(true);
         }
 
         // hasn't implemented RangeInfo, so we'll have to iterate...
@@ -1799,7 +1798,7 @@ public final class DatasetUtils {
                 return null;
             }
             else {
-                return new Double(minimum);
+                return minimum;
             }
 
         }
@@ -1824,7 +1823,7 @@ public final class DatasetUtils {
         // work out the minimum value...
         if (dataset instanceof RangeInfo) {
             RangeInfo info = (RangeInfo) dataset;
-            return new Double(info.getRangeUpperBound(true));
+            return info.getRangeUpperBound(true);
         }
 
         // hasn't implemented RangeInfo, so we'll have to iterate...
@@ -1853,7 +1852,7 @@ public final class DatasetUtils {
                 return null;
             }
             else {
-                return new Double(maximum);
+                return maximum;
             }
 
         }
@@ -1878,7 +1877,7 @@ public final class DatasetUtils {
         // work out the minimum value...
         if (dataset instanceof RangeInfo) {
             RangeInfo info = (RangeInfo) dataset;
-            return new Double(info.getRangeUpperBound(true));
+            return info.getRangeUpperBound(true);
         }
 
         // hasn't implemented RangeInfo, so we'll have to iterate...
@@ -1911,7 +1910,7 @@ public final class DatasetUtils {
                 return null;
             }
             else {
-                return new Double(maximum);
+                return maximum;
             }
 
         }
@@ -2069,7 +2068,7 @@ public final class DatasetUtils {
             minimum = Math.min(minimum, total);
         }
         if (hasValidData) {
-            result = new Double(minimum);
+            result = minimum;
         }
         return result;
     }
@@ -2106,7 +2105,7 @@ public final class DatasetUtils {
             maximum = Math.max(maximum, total);
         }
         if (hasValidData) {
-            result = new Double(maximum);
+            result = maximum;
         }
         return result;
     }

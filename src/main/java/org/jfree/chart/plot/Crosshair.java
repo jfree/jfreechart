@@ -222,9 +222,9 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
      * @see #getValue()
      */
     public void setValue(double value) {
-        Double oldValue = new Double(this.value);
+        Double oldValue = this.value;
         this.value = value;
-        this.pcs.firePropertyChange("value", oldValue, new Double(value));
+        this.pcs.firePropertyChange("value", oldValue, value);
     }
 
     /**

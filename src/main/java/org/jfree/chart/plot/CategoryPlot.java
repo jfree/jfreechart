@@ -2449,7 +2449,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      */
     public Collection getDomainMarkers(int index, Layer layer) {
         Collection result = null;
-        Integer key = new Integer(index);
+        Integer key = index;
         if (layer == Layer.FOREGROUND) {
             result = (Collection) this.foregroundDomainMarkers.get(key);
         }

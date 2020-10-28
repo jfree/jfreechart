@@ -232,7 +232,7 @@ public class TimePeriodValuesCollection extends AbstractIntervalXYDataset
         TimePeriodValues ts = (TimePeriodValues) this.data.get(series);
         TimePeriodValue dp = ts.getDataItem(item);
         TimePeriod period = dp.getPeriod();
-        return new Long(getX(period));
+        return getX(period);
     }
 
     /**
@@ -272,7 +272,7 @@ public class TimePeriodValuesCollection extends AbstractIntervalXYDataset
     public Number getStartX(int series, int item) {
         TimePeriodValues ts = (TimePeriodValues) this.data.get(series);
         TimePeriodValue dp = ts.getDataItem(item);
-        return new Long(dp.getPeriod().getStart().getTime());
+        return dp.getPeriod().getStart().getTime();
     }
 
     /**
@@ -287,7 +287,7 @@ public class TimePeriodValuesCollection extends AbstractIntervalXYDataset
     public Number getEndX(int series, int item) {
         TimePeriodValues ts = (TimePeriodValues) this.data.get(series);
         TimePeriodValue dp = ts.getDataItem(item);
-        return new Long(dp.getPeriod().getEnd().getTime());
+        return dp.getPeriod().getEnd().getTime();
     }
 
     /**
