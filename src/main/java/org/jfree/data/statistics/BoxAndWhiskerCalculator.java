@@ -159,10 +159,8 @@ public abstract class BoxAndWhiskerCalculator {
             maxOutlier = Math.max(maxOutlier, maxRegularValue);
         }
 
-        return new BoxAndWhiskerItem(new Double(mean), new Double(median),
-                new Double(q1), new Double(q3), new Double(minRegularValue),
-                new Double(maxRegularValue), new Double(minOutlier),
-                new Double(maxOutlier), outliers);
+        return new BoxAndWhiskerItem(mean, median, q1, q3, minRegularValue,
+                maxRegularValue, minOutlier, maxOutlier, outliers);
 
     }
 

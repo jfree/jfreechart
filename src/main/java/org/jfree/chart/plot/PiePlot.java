@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -949,7 +949,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
             }
         }
         if (key == null) {
-            key = new Integer(section);
+            key = section;
         }
         return key;
     }
@@ -1566,7 +1566,7 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
         if (this.explodePercentages == null) {
             this.explodePercentages = new TreeMap();
         }
-        this.explodePercentages.put(key, new Double(percent));
+        this.explodePercentages.put(key, percent);
         fireChangeEvent();
     }
 
@@ -2761,10 +2761,10 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
                 double mid = this.startAngle + (this.direction.getFactor()
                         * ((runningTotal - v / 2.0) * 360) / totalValue);
                 if (Math.cos(Math.toRadians(mid)) < 0.0) {
-                    leftKeys.addValue(key, new Double(mid));
+                    leftKeys.addValue(key, mid);
                 }
                 else {
-                    rightKeys.addValue(key, new Double(mid));
+                    rightKeys.addValue(key, mid);
                 }
             }
         }

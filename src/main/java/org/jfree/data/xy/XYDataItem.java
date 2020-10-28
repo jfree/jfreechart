@@ -85,7 +85,7 @@ public class XYDataItem implements Cloneable, Comparable, Serializable {
      * @param y  the y-value.
      */
     public XYDataItem(double x, double y) {
-        this(new Double(x), new Double(y));
+        this(Double.valueOf(x), Double.valueOf(y));
     }
 
     /**

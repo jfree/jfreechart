@@ -293,7 +293,7 @@ public class DefaultIntervalXYDataset extends AbstractIntervalXYDataset
      */
     @Override
     public Number getEndX(int series, int item) {
-        return new Double(getEndXValue(series, item));
+        return getEndXValue(series, item);
     }
 
     /**
@@ -315,7 +315,7 @@ public class DefaultIntervalXYDataset extends AbstractIntervalXYDataset
      */
     @Override
     public Number getEndY(int series, int item) {
-        return new Double(getEndYValue(series, item));
+        return getEndYValue(series, item);
     }
 
     /**
@@ -337,7 +337,7 @@ public class DefaultIntervalXYDataset extends AbstractIntervalXYDataset
      */
     @Override
     public Number getStartX(int series, int item) {
-        return new Double(getStartXValue(series, item));
+        return getStartXValue(series, item);
     }
 
     /**
@@ -359,7 +359,7 @@ public class DefaultIntervalXYDataset extends AbstractIntervalXYDataset
      */
     @Override
     public Number getStartY(int series, int item) {
-        return new Double(getStartYValue(series, item));
+        return getStartYValue(series, item);
     }
 
     /**
@@ -381,7 +381,7 @@ public class DefaultIntervalXYDataset extends AbstractIntervalXYDataset
      */
     @Override
     public Number getX(int series, int item) {
-        return new Double(getXValue(series, item));
+        return getXValue(series, item);
     }
 
     /**
@@ -403,7 +403,7 @@ public class DefaultIntervalXYDataset extends AbstractIntervalXYDataset
      */
     @Override
     public Number getY(int series, int item) {
-        return new Double(getYValue(series, item));
+        return getYValue(series, item);
     }
 
     /**

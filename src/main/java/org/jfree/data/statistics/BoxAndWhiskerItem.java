@@ -142,10 +142,10 @@ public class BoxAndWhiskerItem implements Serializable {
             double maxOutlier, List outliers) {
 
         // pass values to other constructor
-        this(new Double(mean), new Double(median), new Double(q1),
-                new Double(q3), new Double(minRegularValue),
-                new Double(maxRegularValue), new Double(minOutlier),
-                new Double(maxOutlier), outliers);
+        this(Double.valueOf(mean), Double.valueOf(median), Double.valueOf(q1),
+                Double.valueOf(q3), Double.valueOf(minRegularValue),
+                Double.valueOf(maxRegularValue), Double.valueOf(minOutlier),
+                Double.valueOf(maxOutlier), outliers);
 
     }
 
