@@ -148,10 +148,10 @@ public class DefaultWindDataset extends AbstractXYDataset
                     else {
                         if (xObject instanceof Date) {
                             Date xDate = (Date) xObject;
-                            xNumber = new Long(xDate.getTime());
+                            xNumber = xDate.getTime();
                         }
                         else {
-                            xNumber = new Integer(0);
+                            xNumber = 0;
                         }
                     }
                     Number windDir = (Number) data[seriesIndex][itemIndex][1];

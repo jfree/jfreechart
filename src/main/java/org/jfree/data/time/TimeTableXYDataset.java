@@ -212,7 +212,7 @@ public class TimeTableXYDataset extends AbstractIntervalXYDataset
      * @see #remove(TimePeriod, Comparable)
      */
     public void add(TimePeriod period, double y, Comparable seriesName) {
-        add(period, new Double(y), seriesName, true);
+        add(period, y, seriesName, true);
     }
 
     /**
@@ -360,7 +360,7 @@ public class TimeTableXYDataset extends AbstractIntervalXYDataset
      */
     @Override
     public Number getX(int series, int item) {
-        return new Double(getXValue(series, item));
+        return getXValue(series, item);
     }
 
     /**
@@ -389,7 +389,7 @@ public class TimeTableXYDataset extends AbstractIntervalXYDataset
      */
     @Override
     public Number getStartX(int series, int item) {
-        return new Double(getStartXValue(series, item));
+        return getStartXValue(series, item);
     }
 
     /**
@@ -419,7 +419,7 @@ public class TimeTableXYDataset extends AbstractIntervalXYDataset
      */
     @Override
     public Number getEndX(int series, int item) {
-        return new Double(getEndXValue(series, item));
+        return getEndXValue(series, item);
     }
 
     /**

@@ -287,7 +287,7 @@ public class DefaultBoxAndWhiskerXYDataset extends AbstractXYDataset
      */
     @Override
     public Number getX(int series, int item) {
-        return new Long(((Date) this.dates.get(item)).getTime());
+        return ((Date) this.dates.get(item)).getTime();
     }
 
     /**

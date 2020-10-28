@@ -99,7 +99,7 @@ public class CategoryTableXYDataset extends AbstractIntervalXYDataset
      * @param seriesName  the name of the series to add the data item.
      */
     public void add(double x, double y, String seriesName) {
-        add(new Double(x), new Double(y), seriesName, true);
+        add(x, y, seriesName, true);
     }
 
     /**
@@ -125,7 +125,7 @@ public class CategoryTableXYDataset extends AbstractIntervalXYDataset
      * @param seriesName  the series name.
      */
     public void remove(double x, String seriesName) {
-        remove(new Double(x), seriesName, true);
+        remove(x, seriesName, true);
     }
 
     /**

@@ -456,11 +456,11 @@ public class XYDifferenceRenderer extends AbstractXYItemRenderer
         if (b_impliedZeroSubtrahend) {
             l_subtrahendItem      = 0;
             l_subtrahendItemCount = 2;
-            l_subtrahendCurX      = new Double(x_dataset.getXValue(0, 0));
-            l_subtrahendNextX     = new Double(x_dataset.getXValue(0,
-                    (l_minuendItemCount - 1)));
-            l_subtrahendCurY      = new Double(0.0);
-            l_subtrahendNextY     = new Double(0.0);
+            l_subtrahendCurX      = x_dataset.getXValue(0, 0);
+            l_subtrahendNextX     = x_dataset.getXValue(0,
+                    (l_minuendItemCount - 1));
+            l_subtrahendCurY      = 0.0;
+            l_subtrahendNextY     = 0.0;
             l_subtrahendMaxY      = 0.0;
             l_subtrahendMinY      = 0.0;
 

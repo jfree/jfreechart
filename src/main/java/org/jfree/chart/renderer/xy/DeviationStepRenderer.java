@@ -242,6 +242,7 @@ public class DeviationStepRenderer extends DeviationRenderer {
      * @param rangeAxis  the range axis.
      * @param dataArea  the area within which the data is being drawn.
      */
+    @Override
     protected void drawPrimaryLineAsPath(XYItemRendererState state,
                                          Graphics2D g2, XYPlot plot, XYDataset dataset, int pass,
                                          int series, int item, ValueAxis domainAxis, ValueAxis rangeAxis,

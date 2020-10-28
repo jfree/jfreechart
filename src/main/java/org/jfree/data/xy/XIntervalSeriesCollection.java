@@ -217,7 +217,7 @@ public class XIntervalSeriesCollection extends AbstractIntervalXYDataset
     public Number getY(int series, int item) {
         XIntervalSeries s = (XIntervalSeries) this.data.get(series);
         XIntervalDataItem di = (XIntervalDataItem) s.getDataItem(item);
-        return new Double(di.getYValue());
+        return di.getYValue();
     }
 
     /**
@@ -232,7 +232,7 @@ public class XIntervalSeriesCollection extends AbstractIntervalXYDataset
     public Number getStartX(int series, int item) {
         XIntervalSeries s = (XIntervalSeries) this.data.get(series);
         XIntervalDataItem di = (XIntervalDataItem) s.getDataItem(item);
-        return new Double(di.getXLowValue());
+        return di.getXLowValue();
     }
 
     /**
@@ -247,7 +247,7 @@ public class XIntervalSeriesCollection extends AbstractIntervalXYDataset
     public Number getEndX(int series, int item) {
         XIntervalSeries s = (XIntervalSeries) this.data.get(series);
         XIntervalDataItem di = (XIntervalDataItem) s.getDataItem(item);
-        return new Double(di.getXHighValue());
+        return di.getXHighValue();
     }
 
     /**

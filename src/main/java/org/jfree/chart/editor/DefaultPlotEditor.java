@@ -185,16 +185,16 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
             CategoryItemRenderer renderer = ((CategoryPlot) plot).getRenderer();
             if (renderer instanceof LineAndShapeRenderer) {
                 LineAndShapeRenderer r = (LineAndShapeRenderer) renderer;
-                this.drawLines = Boolean.valueOf(r.getDefaultLinesVisible());
-                this.drawShapes = Boolean.valueOf(r.getDefaultShapesVisible());
+                this.drawLines = r.getDefaultLinesVisible();
+                this.drawShapes = r.getDefaultShapesVisible();
             }
         }
         else if (plot instanceof XYPlot) {
             XYItemRenderer renderer = ((XYPlot) plot).getRenderer();
             if (renderer instanceof StandardXYItemRenderer) {
                 StandardXYItemRenderer r = (StandardXYItemRenderer) renderer;
-                this.drawLines = Boolean.valueOf(r.getPlotLines());
-                this.drawShapes = Boolean.valueOf(r.getBaseShapesVisible());
+                this.drawLines = r.getPlotLines();
+                this.drawShapes = r.getBaseShapesVisible();
             }
         }
 
@@ -520,7 +520,7 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
      * <tt>StandardXYItemRenderer</tt>s.
      */
     private void attemptDrawLinesSelection() {
-        this.drawLines = Boolean.valueOf(this.drawLinesCheckBox.isSelected());
+        this.drawLines = this.drawLinesCheckBox.isSelected();
     }
 
     /**
@@ -528,7 +528,7 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
      * by <tt>LineAndShapeRenderer</tt>s and <tt>StandardXYItemRenderer</tt>s.
      */
     private void attemptDrawShapesSelection() {
-        this.drawShapes = Boolean.valueOf(this.drawShapesCheckBox.isSelected());
+        this.drawShapes = this.drawShapesCheckBox.isSelected();
     }
 
     /**

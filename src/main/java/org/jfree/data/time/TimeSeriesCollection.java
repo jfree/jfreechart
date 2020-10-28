@@ -429,7 +429,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
     public Number getX(int series, int item) {
         TimeSeries ts = (TimeSeries) this.data.get(series);
         RegularTimePeriod period = ts.getTimePeriod(item);
-        return new Long(getX(period));
+        return getX(period);
     }
 
     /**
@@ -464,8 +464,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
     @Override
     public synchronized Number getStartX(int series, int item) {
         TimeSeries ts = (TimeSeries) this.data.get(series);
-        return new Long(ts.getTimePeriod(item).getFirstMillisecond(
-                this.workingCalendar));
+        return ts.getTimePeriod(item).getFirstMillisecond(this.workingCalendar);
     }
 
     /**
@@ -479,8 +478,7 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
     @Override
     public synchronized Number getEndX(int series, int item) {
         TimeSeries ts = (TimeSeries) this.data.get(series);
-        return new Long(ts.getTimePeriod(item).getLastMillisecond(
-                this.workingCalendar));
+        return ts.getTimePeriod(item).getLastMillisecond(this.workingCalendar);
     }
 
     /**
