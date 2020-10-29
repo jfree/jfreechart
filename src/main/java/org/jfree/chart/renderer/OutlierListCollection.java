@@ -61,7 +61,7 @@ import java.util.List;
 public class OutlierListCollection {
 
     /** Storage for the outlier lists. */
-    private List outlierLists;
+    private final List<OutlierList> outlierLists;
 
     /**
      * Unbelievably, outliers which are more than 2 * interquartile range are
@@ -79,7 +79,7 @@ public class OutlierListCollection {
      * Creates a new empty collection.
      */
     public OutlierListCollection() {
-        this.outlierLists = new ArrayList();
+        this.outlierLists = new ArrayList<>();
     }
 
     /**
@@ -130,18 +130,15 @@ public class OutlierListCollection {
      *
      * @param outlier  element to be appended to this list.
      *
-     * @return <tt>true</tt> (as per the general contract of Collection.add).
+     * @return {@code true} (as per the general contract of Collection.add).
      */
     public boolean add(Outlier outlier) {
-
         if (this.outlierLists.isEmpty()) {
             return this.outlierLists.add(new OutlierList(outlier));
         }
         else {
             boolean updated = false;
-            for (Iterator iterator = this.outlierLists.iterator();
-                 iterator.hasNext();) {
-                OutlierList list = (OutlierList) iterator.next();
+            for (OutlierList list : this.outlierLists) {
                 if (list.isOverlapped(outlier)) {
                     updated = updateOutlierList(list, outlier);
                 }
@@ -152,7 +149,6 @@ public class OutlierListCollection {
             }
             return updated;
         }
-
     }
 
     /**
@@ -160,7 +156,7 @@ public class OutlierListCollection {
      *
      * @return An iterator.
      */
-    public Iterator iterator() {
+    public Iterator<OutlierList> iterator() {
         return this.outlierLists.iterator();
     }
 
