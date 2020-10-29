@@ -1,7 +1,7 @@
 JFreeChart
 ==========
 
-Version 1.5.1, 28 October 2020.
+Version 1.5.1, 29 October 2020.
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.jfree/jfreechart/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.jfree/jfreechart)
 
@@ -59,7 +59,7 @@ at GitHub:
 History
 -------
 
-##### Version 1.5.1 (28 October 2020)
+##### Version 1.5.1 (29 October 2020)
 - add DeviationStepRenderer (PR #173)
 - modify buffer in ChartPanel to handle high DPI displays (bug #170);
 - fix for exception on extreme zoom on NumberAxis (bug #64);
