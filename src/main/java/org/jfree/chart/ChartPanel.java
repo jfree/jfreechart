@@ -2839,7 +2839,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
                 result.addSeparator();
             }
             
-            JMenu saveSubMenu = new JMenu(localizationResources.getString("Save_as"));
+            JMenu saveSubMenu = new JMenu(localizationResources.getString("Save_as..."));
             
             // PNG - current res
             {
