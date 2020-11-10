@@ -92,7 +92,9 @@ import java.lang.reflect.Method;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.EventListener;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import javax.swing.JFileChooser;
@@ -223,6 +225,51 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
 
     /** Zoom reset (range axis only) action command. */
     public static final String ZOOM_RESET_RANGE_COMMAND = "ZOOM_RESET_RANGE";
+
+    // default modifiers for zooming, private to avoid constant inlining,
+    // publicly available through getDefaultDragModifiersEx()
+    private static final int DEFAULT_DRAG_MODIFIERS_EX;
+
+    // mask for all modifier keys to check for
+    private static final int MODIFIERS_EX_MASK =
+            InputEvent.SHIFT_DOWN_MASK |
+            InputEvent.CTRL_DOWN_MASK |
+            InputEvent.META_DOWN_MASK |
+            InputEvent.ALT_DOWN_MASK;
+
+    static {
+        int dragModifiers = InputEvent.CTRL_DOWN_MASK;
+        // for MacOSX we can't use the CTRL key for mouse drags, see:
+        // http://developer.apple.com/qa/qa2004/qa1362.html
+        String osName = System.getProperty("os.name").toLowerCase();
+        if (osName.startsWith("mac os x")) {
+            dragModifiers = InputEvent.ALT_DOWN_MASK;
+        }
+        DEFAULT_DRAG_MODIFIERS_EX = dragModifiers;
+    }
+
+    /**
+     * The standard mouse button modifiers for alternative drag operations.
+     * There are two kinds of mouse drag operations: pan and zoom.
+     * To distinguish between them, one needs to require modifier keys
+     * to be held down during the dragging.  However, some modifiers
+     * may not be usable on all platforms.  For example, on Mac OS X
+     * it is impossible to perform Ctrl-drags or right-drags, see
+     * <a href="http://developer.apple.com/qa/qa2004/qa1362.html">http://developer.apple.com/qa/qa2004/qa1362.html</a>.
+     * This function returns a non-zero modifier usable for any platform:
+     * Alt for Mac OS X, Ctrl for other platforms.  It is recommended
+     * to use these modifiers for one operation, and zero modifiers for
+     * the other.
+     *
+     * @return modifiers mask, as in {@link InputEvent#getModifiersEx()}
+     * @see #setPanModifiersEx(int, int)
+     * @see #setZoomModifiersEx(int, int)
+     * @see #setDefaultPanModifiersEx(int)
+     * @see #setDefaultZoomModifiersEx(int)
+     */
+    public static int getDefaultDragModifiersEx() {
+        return DEFAULT_DRAG_MODIFIERS_EX;
+    }
 
     /** The chart that is displayed in the panel. */
     protected JFreeChart chart;
@@ -409,11 +456,36 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     protected Point panLast;
 
     /**
-     * The mask for mouse events to trigger panning.
+     * The default mask for mouse events to trigger panning.
+     * Since 1.6.0, this mask uses extended modifiers, as returned
+     * by {@link InputEvent#getModifiersEx()}.
+     * Only used if no button-specific modifiers were set in
+     * {@link #panButtonMasks}.
      *
      * @since 1.0.13
      */
-    protected int panMask = InputEvent.CTRL_MASK;
+    protected int panMask = getDefaultDragModifiersEx();
+
+    /**
+     * The default mask for mouse events to trigger zooming.
+     *
+     * @since 1.6.0
+     */
+    protected int zoomMask = 0;
+
+    /**
+     * The masks for mouse events to trigger panning, per mouse button.
+     *
+     * @since 1.6.0
+     */
+    protected final Map<Integer, Integer> panButtonMasks = new HashMap<>(3);
+
+    /**
+     * The masks for mouse events to trigger zooming, per mouse button.
+     *
+     * @since 1.6.0
+     */
+    protected final Map<Integer, Integer> zoomButtonMasks = new HashMap<>(3);
 
     /**
      * A list of overlays for the panel.
@@ -601,14 +673,6 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         this.zoomAroundAnchor = false;
         this.zoomOutlinePaint = Color.BLUE;
         this.zoomFillPaint = new Color(0, 0, 255, 63);
-
-        this.panMask = InputEvent.CTRL_MASK;
-        // for MacOSX we can't use the CTRL key for mouse drags, see:
-        // http://developer.apple.com/qa/qa2004/qa1362.html
-        String osName = System.getProperty("os.name").toLowerCase();
-        if (osName.startsWith("mac os x")) {
-            this.panMask = InputEvent.ALT_MASK;
-        }
 
         this.overlays = new ArrayList<>();
     }
@@ -848,6 +912,95 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         setDomainZoomable(flag);
         setRangeZoomable(flag);
         setFillZoomRectangle(fillRectangle);
+    }
+
+    /**
+     * Sets default modifier keys for pan operations for all mouse buttons.
+     * Modifiers for a specific button can be set with
+     * {@link #setPanModifiersEx(int, int)}.  If there are none set for
+     * a certain button, it will use the modifiers passed to this function,
+     * defaulting to {@link #getDefaultDragModifiersEx()} if this function
+     * was never called.
+     * <p>
+     * Only {@link InputEvent#SHIFT_DOWN_MASK}, {@link InputEvent#CTRL_DOWN_MASK},
+     * {@link InputEvent#META_DOWN_MASK} and {@link InputEvent#ALT_DOWN_MASK} are
+     * checked.  To avoid platform-specific problems, it is recommended to use
+     * {@link #getDefaultDragModifiersEx()} for one operation, and zero modifiers
+     * for the other.
+     * <p>
+     * If the same modifiers are set for both zooming and panning,
+     * panning will be performed.
+     *
+     * @param modifiersEx modifier keys, as returned by {@link InputEvent#getModifiersEx()}
+     */
+    public void setDefaultPanModifiersEx(int modifiersEx) {
+        this.panMask = modifiersEx;
+    }
+
+    /**
+     * Sets default modifier keys for zoom operations for all mouse buttons.
+     * Modifiers for a specific button can be set with
+     * {@link #setZoomModifiersEx(int, int)}.  If there are none set for
+     * a certain button, it will use the modifiers passed to this function,
+     * defaulting to zero (no modifiers) if this function was never called.
+     * <p>
+     * Only {@link InputEvent#SHIFT_DOWN_MASK}, {@link InputEvent#CTRL_DOWN_MASK},
+     * {@link InputEvent#META_DOWN_MASK} and {@link InputEvent#ALT_DOWN_MASK} are
+     * checked.  To avoid platform-specific problems, it is recommended to use
+     * {@link #getDefaultDragModifiersEx()} for one operation, and zero modifiers
+     * for the other.
+     * <p>
+     * If the same modifiers are set for both zooming and panning,
+     * panning will be performed.
+     *
+     * @param modifiersEx modifier keys, as returned by {@link InputEvent#getModifiersEx()}
+     */
+    public void setDefaultZoomModifiersEx(int modifiersEx) {
+        this.zoomMask = modifiersEx;
+    }
+
+    /**
+     * Sets modifier keys for panning with a specific mouse button.
+     * If there are none set for a certain button with this function,
+     * default modifiers set with {@link #setDefaultPanModifiersEx(int)}
+     * will be used, defaulting to {@link #getDefaultDragModifiersEx()}
+     * if none were set either.
+     * <p>
+     * Only {@link InputEvent#SHIFT_DOWN_MASK}, {@link InputEvent#CTRL_DOWN_MASK},
+     * {@link InputEvent#META_DOWN_MASK} and {@link InputEvent#ALT_DOWN_MASK} are
+     * checked.  To avoid platform-specific problems, it is recommended to use
+     * {@link #getDefaultDragModifiersEx()} for one operation, and zero modifiers
+     * for the other.
+     * <p>
+     * If the same modifiers are set for both zooming and panning,
+     * panning will be performed.
+     *
+     * @param modifiersEx modifier keys, as returned by {@link InputEvent#getModifiersEx()}
+     */
+    public void setPanModifiersEx(int mouseButton, int modifiersEx) {
+        panButtonMasks.put(mouseButton, modifiersEx);
+    }
+
+    /**
+     * Sets modifier keys for zooming with a specific mouse button.
+     * If there are none set for a certain button with this function,
+     * default modifiers set with {@link #setDefaultZoomModifiersEx(int)}
+     * will be used, defaulting to zero (no modifiers)
+     * if none were set either.
+     * <p>
+     * Only {@link InputEvent#SHIFT_DOWN_MASK}, {@link InputEvent#CTRL_DOWN_MASK},
+     * {@link InputEvent#META_DOWN_MASK} and {@link InputEvent#ALT_DOWN_MASK} are
+     * checked.  To avoid platform-specific problems, it is recommended to use
+     * {@link #getDefaultDragModifiersEx()} for one operation, and zero modifiers
+     * for the other.
+     * <p>
+     * If the same modifiers are set for both zooming and panning,
+     * panning will be performed.
+     *
+     * @param modifiersEx modifier keys, as returned by {@link InputEvent#getModifiersEx()}
+     */
+    public void setZoomModifiersEx(int mouseButton, int modifiersEx) {
+        zoomButtonMasks.put(mouseButton, modifiersEx);
     }
 
     /**
@@ -1617,8 +1770,9 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
             return;
         }
         Plot plot = this.chart.getPlot();
-        int mods = e.getModifiers();
-        if ((mods & this.panMask) == this.panMask) {
+        int button = e.getButton();
+        int mods = e.getModifiersEx();
+        if ((mods & MODIFIERS_EX_MASK) == panButtonMasks.getOrDefault(button, panMask)) {
             // can we pan this plot?
             if (plot instanceof Pannable) {
                 Pannable pannable = (Pannable) plot;
@@ -1639,13 +1793,15 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
             }
         }
         else if (this.zoomRectangle == null) {
-            Rectangle2D screenDataArea = getScreenDataArea(e.getX(), e.getY());
-            if (screenDataArea != null) {
-                this.zoomPoint = getPointInRectangle(e.getX(), e.getY(),
-                        screenDataArea);
-            }
-            else {
-                this.zoomPoint = null;
+            if ((mods & MODIFIERS_EX_MASK) == zoomButtonMasks.getOrDefault(button, zoomMask)) {
+                Rectangle2D screenDataArea = getScreenDataArea(e.getX(), e.getY());
+                if (screenDataArea != null) {
+                    this.zoomPoint = getPointInRectangle(e.getX(), e.getY(),
+                            screenDataArea);
+                }
+                else {
+                    this.zoomPoint = null;
+                }
             }
             if (e.isPopupTrigger()) {
                 if (this.popup != null) {
