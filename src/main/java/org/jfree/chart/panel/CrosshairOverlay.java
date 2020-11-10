@@ -124,11 +124,12 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
 
     /**
      * Clears all the domain crosshairs from the overlay and sends an
-     * {@link OverlayChangeEvent} to all registered listeners.
+     * {@link OverlayChangeEvent} to all registered listeners (unless there
+     * were no crosshairs to begin with).
      */
     public void clearDomainCrosshairs() {
         if (this.xCrosshairs.isEmpty()) {
-            return;  // nothing to do
+            return;  // nothing to do - avoids firing change event
         }
         for (Crosshair c : getDomainCrosshairs()) {
             this.xCrosshairs.remove(c);
@@ -177,11 +178,12 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
 
     /**
      * Clears all the range crosshairs from the overlay and sends an
-     * {@link OverlayChangeEvent} to all registered listeners.
+     * {@link OverlayChangeEvent} to all registered listeners (unless there
+     * were no crosshairs to begin with).
      */
     public void clearRangeCrosshairs() {
         if (this.yCrosshairs.isEmpty()) {
-            return;  // nothing to do
+            return;  // nothing to do - avoids change notification
         }
         for (Crosshair c : getRangeCrosshairs()) {
             this.yCrosshairs.remove(c);

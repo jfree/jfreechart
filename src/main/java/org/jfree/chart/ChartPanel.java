@@ -1566,6 +1566,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
 
             // zap the buffer onto the panel...
             g2.drawImage(this.chartBuffer, insets.left, insets.top, (int) available.getWidth(), (int) available.getHeight(), this);
+            g2.addRenderingHints(this.chart.getRenderingHints()); // bug#187
 
         } else { // redrawing the chart every time...
             AffineTransform saved = g2.getTransform();

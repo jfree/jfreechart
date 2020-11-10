@@ -17,7 +17,7 @@ The home page for the project is:
 
 http://www.jfree.org/jfreechart
 
-JFreeChart requires JDK 1.6.0 or later.  If JavaFX support is required, you
+JFreeChart requires JDK 1.8.0 or later.  If JavaFX support is required, you
 need to also include the JFreeChart-FX extensions:
 
 https://github.com/jfree/jfreechart-fx
@@ -33,7 +33,7 @@ To use JFreeChart in your projects, add the following dependency to your build t
     <dependency>
         <groupId>org.jfree</groupId>
         <artifactId>jfreechart</artifactId>
-        <version>1.5.0</version>
+        <version>1.5.1</version>
     </dependency>
 
 
@@ -77,6 +77,7 @@ History
 - modify buffer in ChartPanel to handle high DPI displays (bug #170);
 - add options to control pan vs zoom in `ChartPanel` (https://github.com/jfree/jfreechart/pull/172)
 - fix for exception on extreme zoom on NumberAxis (bug #64);
+- apply rendering hints to overlays - fixes bug #187;
 - added generics 
 - DefaultIntervalCategoryDataset no longer allows null keys in constructor (this
   is a consequence of introducing generics)
