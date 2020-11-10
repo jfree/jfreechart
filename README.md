@@ -60,7 +60,8 @@ History
 -------
 
 ##### Version 1.5.2 (not yet released)
-- update French translations (https://github.com/jfree/jfreechart/pull/186)
+- update French translations (https://github.com/jfree/jfreechart/pull/186);
+- fix "Save_as" entries in localisation files (https://github.com/jfree/jfreechart/pull/184).
 
 ##### Version 1.5.1 (29 October 2020)
 - add DeviationStepRenderer (PR #173)
