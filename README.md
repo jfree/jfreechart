@@ -73,19 +73,20 @@ History
 -------
 
 ##### Version 1.6.0 (not yet released)
-- update required JDK to version 1.8;
-- modify buffer in ChartPanel to handle high DPI displays (bug #170);
+- modify buffer in `ChartPanel` to handle high DPI displays (bug #170);
 - add options to control pan vs zoom in `ChartPanel` (https://github.com/jfree/jfreechart/pull/172)
-- fix for exception on extreme zoom on NumberAxis (bug #64);
+- fix for exception on extreme zoom on `NumberAxis` (bug #64);
+- remove alpha channel from copy-to-clipboard (fixes bug #182);
 - apply rendering hints to overlays - fixes bug #187;
-- added generics 
-- DefaultIntervalCategoryDataset no longer allows null keys in constructor (this
-  is a consequence of introducing generics)
 - removed ObjectUtils class (https://github.com/jfree/jfreechart/pull/163)
-- removed unused URLUtilities class (https://github.com/jfree/jfreechart/pull/162)
-- fixed LayeredBarRenderer bugs #169 and #175
-- update French translations (https://github.com/jfree/jfreechart/pull/186)
-- fix "Save_as" entries in localisation files (https://github.com/jfree/jfreechart/pull/184).
+- removed unused `URLUtilities` class (PR #162)
+- fixed `LayeredBarRenderer` (bugs #169 and #175);
+- update French translations (bug #186);
+- fix "Save_as" entries in localisation files (bug #184);
+- added generics;
+- `DefaultIntervalCategoryDataset` no longer allows null keys in constructor (this
+  is a consequence of introducing generics);
+- update required JDK to version 1.8.
 
 ##### Version 1.5.0 (5 November 2017)
 - all JavaFX classes moved to a separate project;

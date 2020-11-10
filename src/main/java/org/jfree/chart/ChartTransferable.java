@@ -225,7 +225,7 @@ public class ChartTransferable implements Transferable {
             int minDrawW, int minDrawH, int maxDrawW, int maxDrawH) {
 
         BufferedImage image = new BufferedImage(w, h,
-                BufferedImage.TYPE_INT_ARGB);
+                BufferedImage.TYPE_INT_RGB); // bug #182
         Graphics2D g2 = image.createGraphics();
 
         // work out if scaling is required...
@@ -238,8 +238,7 @@ public class ChartTransferable implements Transferable {
             scaleX = drawWidth / minDrawW;
             drawWidth = minDrawW;
             scale = true;
-        }
-        else if (drawWidth > maxDrawW) {
+        } else if (drawWidth > maxDrawW) {
             scaleX = drawWidth / maxDrawW;
             drawWidth = maxDrawW;
             scale = true;
@@ -248,8 +247,7 @@ public class ChartTransferable implements Transferable {
             scaleY = drawHeight / minDrawH;
             drawHeight = minDrawH;
             scale = true;
-        }
-        else if (drawHeight > maxDrawH) {
+        } else if (drawHeight > maxDrawH) {
             scaleY = drawHeight / maxDrawH;
             drawHeight = maxDrawH;
             scale = true;
