@@ -99,8 +99,8 @@
                     <source>${project.source.level}</source>
                     <target>${project.target.level}</target>
                     <encoding>${project.build.sourceEncoding}</encoding>                
-                    <compilerArgument>-Xlint:all</compilerArgument>
-                    <showWarnings>true</showWarnings>
+                    <compilerArgument>-Xlint:none</compilerArgument>
+                    <showWarnings>false</showWarnings>
                     <showDeprecation>true</showDeprecation>
                 </configuration>
             </plugin>

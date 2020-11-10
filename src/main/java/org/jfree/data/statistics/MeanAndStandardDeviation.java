@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,18 +27,10 @@
  * -----------------------------
  * MeanAndStandardDeviation.java
  * -----------------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited.
+ * (C) Copyright 2003-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 05-Feb-2002 : Version 1 (DG);
- * 05-Feb-2005 : Added equals() method and implemented Serializable (DG);
- * 02-Oct-2007 : Added getMeanValue() and getStandardDeviationValue() methods
- *               for convenience, and toString() method for debugging (DG);
- * 29-Jan-2017 : Added missing hashCode (TH);
  *
  */
 
@@ -70,7 +62,7 @@ public class MeanAndStandardDeviation implements Serializable {
      * @param standardDeviation  the standard deviation.
      */
     public MeanAndStandardDeviation(double mean, double standardDeviation) {
-        this(new Double(mean), new Double(standardDeviation));
+        this(Double.valueOf(mean), Double.valueOf(standardDeviation));
     }
 
     /**
