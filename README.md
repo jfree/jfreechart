@@ -59,6 +59,9 @@ at GitHub:
 History
 -------
 
+##### Version 1.5.2 (not yet released)
+- update French translations (https://github.com/jfree/jfreechart/pull/186)
+
 ##### Version 1.5.1 (29 October 2020)
 - add DeviationStepRenderer (PR #173)
 - modify buffer in ChartPanel to handle high DPI displays (bug #170);
