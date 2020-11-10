@@ -1,7 +1,7 @@
 JFreeChart
 ==========
 
-Version 1.5.0, 5 November 2017.
+Version 1.5.1, 29 October 2020.
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.jfree/jfreechart/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.jfree/jfreechart)
 
@@ -75,6 +75,7 @@ History
 ##### Version 1.6.0 (not yet released)
 - update required JDK to version 1.8;
 - modify buffer in ChartPanel to handle high DPI displays (bug #170);
+- add options to control pan vs zoom in `ChartPanel` (https://github.com/jfree/jfreechart/pull/172)
 - fix for exception on extreme zoom on NumberAxis (bug #64);
 - added generics 
 - DefaultIntervalCategoryDataset no longer allows null keys in constructor (this
