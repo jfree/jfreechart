@@ -83,6 +83,7 @@ History
 - removed unused URLUtilities class (https://github.com/jfree/jfreechart/pull/162)
 - fixed LayeredBarRenderer bugs #169 and #175
 - update French translations (https://github.com/jfree/jfreechart/pull/186)
+- fix "Save_as" entries in localisation files (https://github.com/jfree/jfreechart/pull/184).
 
 ##### Version 1.5.0 (5 November 2017)
 - all JavaFX classes moved to a separate project;
