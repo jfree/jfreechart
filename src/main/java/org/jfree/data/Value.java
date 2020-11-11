@@ -32,11 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * Changes:
- * --------
- * 28-Oct-2002 : Version 1 (DG);
- * 18-Aug-2004 : Moved from org.jfree.data --> org.jfree.data.base (DG);
- *
  */
 
 package org.jfree.data;

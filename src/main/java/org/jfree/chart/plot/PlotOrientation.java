@@ -32,13 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * Changes:
- * --------
- * 02-May-2003 : Version 1 (DG);
- * 17-Jul-2003 : Added readResolve() method (DG);
- * 21-Nov-2007 : Implemented hashCode() (DG);
- * 14-May-2014 : Added isHorizontal() and isVertical() methods (DG);
- *
  */
 
 package org.jfree.chart.plot;

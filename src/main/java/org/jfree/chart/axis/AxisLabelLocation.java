@@ -32,10 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * Changes:
- * --------
- * 01-Aug-2013 : Version 1 (DG);
- *
  */
 
 package org.jfree.chart.axis;

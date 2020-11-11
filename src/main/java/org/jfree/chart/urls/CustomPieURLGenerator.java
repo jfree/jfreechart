@@ -32,12 +32,6 @@
  * Original Author:  David Basten;
  * Contributors:     -;
  *
- * Changes:
- * --------
- * 04-Feb-2004 : Version 1, contributed by David Basten based on
- *               CustomXYURLGenerator by Richard Atkinson (added to main source
- *               tree on 25-May-2004);
- *
  */
 
 package org.jfree.chart.urls;

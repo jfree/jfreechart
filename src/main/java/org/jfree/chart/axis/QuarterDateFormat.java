@@ -27,20 +27,10 @@
  * ----------------------
  * QuarterDateFormat.java
  * ----------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 01-Mar-2005 : Version 1 (DG);
- * 10-May-2005 : Added equals() method, and implemented Cloneable and
- *               Serializable (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 08-Jun-2007 : Added Greek symbols, and support for reversing the date - see
- *               patch 1577221 (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 

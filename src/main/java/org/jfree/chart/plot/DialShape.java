@@ -32,11 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * Changes:
- * --------
- * 20-Aug-2003 : Version 1 (DG);
- * 12-Nov-2007 : Implemented hashCode() (DG);
- *
  */
 
 package org.jfree.chart.plot;

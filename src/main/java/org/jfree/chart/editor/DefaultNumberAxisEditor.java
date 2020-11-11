@@ -32,13 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Arnaud Lelievre;
  *
- * Changes:
- * --------
- * 24-Nov-2005 : Version 1, based on NumberAxisPropertyEditor (DG);
- * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
- *               Jess Thrysoee (DG);
- * 27-Feb-2009 : Fixed bug 2612649, NullPointerException (DG);
- * 03-Nov-2011 : Refactoring to use new DefaultValueAxisEditor (MH);
  */
 
 package org.jfree.chart.editor;

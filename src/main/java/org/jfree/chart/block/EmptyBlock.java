@@ -32,15 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * Changes:
- * --------
- * 22-Oct-2004 : Version 1 (DG);
- * 04-Feb-2005 : Now cloneable and serializable (DG);
- * 20-Apr-2005 : Added new draw() method (DG);
- * 08-Apr-2008 : Added support for margin and border (DG);
- * 08-May-2008 : Updated arrange() method to recognise
- *               incoming constraint (DG);
- *
  */
 
 package org.jfree.chart.block;

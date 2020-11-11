@@ -32,11 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * Changes:
- * --------
- * 02-Oct-2006 : Version 1 (DG);
- * 13-Nov-2007 : Added equals() and hashCode() methods (DG);
- *
  */
 
 package org.jfree.chart.entity;

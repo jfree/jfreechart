@@ -32,11 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * Changes:
- * --------
- * 05-Mar-2003 : Version 1 (DG);
- * 23-Sep-2012 : Make this class serializable (DG);
- *
  */
 
 package org.jfree.data;

@@ -30,14 +30,7 @@
  * (C) Copyright 2011-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   John Matthews;
- *
- * Changes:
- * --------
- * 09-Apr-2009 : Version 1 (DG);
- * 19-May-2009 : Fixed FindBugs warnings, patch by Michal Wozniak (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
- * 05-Mar-2016 : Fix label outline stroke (DG);
+ * Contributor(s):   John Matthews, Michal Wozniak;
  *
  */
 

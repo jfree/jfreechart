@@ -32,21 +32,6 @@
  * Original Author:  Richard Atkinson;
  * Contributors:     David Gilbert (for Object Refinery Limited);
  *
- * Changes:
- * --------
- * 29-Aug-2002 : Initial version (RA);
- * 09-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 23-Mar-2003 : Implemented Serializable (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
- *               getYValue() (DG);
- * 13-Jan-2005 : Modified for XHTML 1.0 compliance (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 06-Jul-2006 : Swap call to dataset's getX() --> getXValue() (DG);
- * 17-Apr-2007 : Added null argument checks to constructor, new accessor
- *               methods, added equals() override and used new URLUtilities
- *               class to encode series key and date (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
- *
  */
 
 package org.jfree.chart.urls;

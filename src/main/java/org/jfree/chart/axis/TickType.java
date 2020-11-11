@@ -27,14 +27,10 @@
  * -------------
  * TickType.java
  * -------------
- * (C) Copyright 2007, 2008, by Object Refinery Limited.
+ * (C) Copyright 2007-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 02-Aug-2007 : Version 1 (DG);
  *
  */
 

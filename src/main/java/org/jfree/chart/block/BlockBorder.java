@@ -27,20 +27,10 @@
  * ----------------
  * BlockBorder.java
  * ----------------
- * (C) Copyright 2004-2017, by Object Refinery Limited.
+ * (C) Copyright 2004-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 22-Oct-2004 : Version 1 (DG);
- * 04-Feb-2005 : Added equals() and implemented Serializable (DG);
- * 23-Feb-2005 : Added attribute for border color (DG);
- * 06-May-2005 : Added new convenience constructors (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 16-Mar-2007 : Implemented BlockFrame (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 

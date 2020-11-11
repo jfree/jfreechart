@@ -32,22 +32,6 @@
  * Original Author:  Richard Atkinson;
  * Contributors:     David Gilbert (for Object Refinery Limited);
  *
- * Changes:
- * --------
- * 05-Aug-2002 : Version 1, contributed by Richard Atkinson;
- * 09-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 10-Apr-2003 : Replaced reference to CategoryDataset with
- *               KeyedValues2DDataset (DG);
- * 23-Apr-2003 : Switched around CategoryDataset and KeyedValues2DDataset
- *               (again) (DG);
- * 13-Aug-2003 : Added clone() method (DG);
- * 14-Jun-2004 : Removed clone() method - classes that implement the interface
- *               should implement the PublicCloneable interface instead,
- *               wherever possible (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 02-Feb-2007 : Removed author tags from all over JFreeChart sources (DG);
- * 13-Dec-2007 : Updated API docs (DG);
- *
  */
 
 package org.jfree.chart.urls;

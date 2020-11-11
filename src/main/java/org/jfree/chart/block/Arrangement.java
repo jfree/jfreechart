@@ -32,12 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * Changes:
- * --------
- * 22-Oct-2004 : Version 1 (DG);
- * 11-Feb-2005 : Modified arrange() method to return Size2D (DG);
- * 22-Apr-2005 : Reordered arguments in arrange() method (DG);
- *
  */
 
 package org.jfree.chart.block;

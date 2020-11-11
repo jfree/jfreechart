@@ -32,11 +32,6 @@
  * Original Author:  Eric Thomas (www.isti.com);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * Changes:
- * --------
- * 21-Apr-2005 : Version 1 contributed by Eric Thomas (ET);
- * 21-Nov-2007 : Implemented hashCode() (DG);
- *
  */
 
 package org.jfree.chart.plot;

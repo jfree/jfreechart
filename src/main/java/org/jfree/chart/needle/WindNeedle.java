@@ -33,12 +33,6 @@
  * Original Author:  Bryan Scott (for the Australian Antarctic Division);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * Changes:
- * --------
- * 25-Sep-2002 : Version 1, contributed by Bryan Scott (DG);
- * 09-Sep-2003 : Added equals() method (DG);
- * 22-Nov-2007 : Implemented hashCode() (DG)
- *
  */
 
 package org.jfree.chart.needle;

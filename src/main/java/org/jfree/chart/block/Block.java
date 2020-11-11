@@ -32,13 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * Changes:
- * --------
- * 22-Oct-2004 : Version 1 (DG);
- * 08-Feb-2005 : Added ID (DG);
- * 20-Apr-2005 : Added a new draw() method that can accept params
- *               and return results (DG);
- *
  */
 
 package org.jfree.chart.block;

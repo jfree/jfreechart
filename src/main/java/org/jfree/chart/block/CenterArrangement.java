@@ -32,12 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * Changes:
- * --------
- * 08-Mar-2005 : Version 1 (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 20-Jul-2006 : Set bounds of contained block when arranging (DG);
- *
  */
 
 package org.jfree.chart.block;

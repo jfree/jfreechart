@@ -33,42 +33,6 @@
  * Contributor(s):   Richard Atkinson;
  *                   Xavier Poinsard;
  *                   Robert Fuller;
- *
- * Changes:
- * --------
- * 23-May-2002 : Version 1 (DG);
- * 12-Jun-2002 : Added Javadoc comments (DG);
- * 26-Jun-2002 : Added methods for image maps (DG);
- * 05-Aug-2002 : Added constructor and accessors for URL support in image maps
- *               Added getImageMapAreaTag() - previously in subclasses (RA);
- * 05-Sep-2002 : Added getImageMapAreaTag(boolean) to support OverLIB for
- *               tooltips http://www.bosrup.com/web/overlib (RA);
- * 03-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 08-Oct-2002 : Changed getImageMapAreaTag to use title instead of alt
- *               attribute so HTML image maps now work in Mozilla and Opera as
- *               well as Internet Explorer (RA);
- * 13-Mar-2003 : Change getImageMapAreaTag to only return a tag when there is a
- *               tooltip or URL, as suggested by Xavier Poinsard (see Feature
- *               Request 688079) (DG);
- * 12-Aug-2003 : Added support for custom image maps using
- *               ToolTipTagFragmentGenerator and URLTagFragmentGenerator (RA);
- * 02-Sep-2003 : Incorporated fix (791901) submitted by Robert Fuller (DG);
- * 19-May-2004 : Added equals() method and implemented Cloneable and
- *               Serializable (DG);
- * 29-Sep-2004 : Implemented PublicCloneable (DG);
- * 13-Jan-2005 : Fixed for compliance with XHTML 1.0 (DG);
- * 18-Apr-2005 : Use StringBuffer (DG);
- * 20-Apr-2005 : Added toString() implementation (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 06-Feb-2007 : API doc update (DG);
- * 13-Nov-2007 : Reorganised equals(), implemented hashCode (DG);
- * 04-Dec-2007 : Added 'nohref' attribute in getImageMapAreaTag() method, to
- *               fix bug 1460195 (DG);
- * 04-Dec-2007 : Escape the toolTipText and urlText in getImageMapAreaTag() to
- *               prevent special characters corrupting the HTML (DG);
- * 05-Dec-2007 : Previous change reverted - let the tool tip and url tag
- *               generators handle filtering / escaping (DG);
- *
  */
 
 package org.jfree.chart.entity;

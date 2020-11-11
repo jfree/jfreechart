@@ -32,17 +32,6 @@
  * Original Author:  Richard Atkinson;
  * Contributors:     David Gilbert (for Object Refinery Limited);
  *
- * Changes:
- * --------
- * 05-Aug-2002 : Version 1, contributed by Richard Atkinson;
- * 09-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 23-Mar-2003 : Implemented Serializable (DG);
- * 20-Jan-2005 : Minor Javadoc update (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 02-Feb-2007 : Removed author tags from all over JFreeChart sources (DG);
- * 11-Apr-2008 : Implemented Cloneable, otherwise charts using this URL
- *               generator will fail to clone (DG);
- *
  */
 
 package org.jfree.chart.urls;

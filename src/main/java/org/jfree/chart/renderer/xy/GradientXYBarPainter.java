@@ -31,12 +31,6 @@
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 19-Jun-2008 : Version 1 (DG);
- * 22-Feb-2009 : Fixed bug drawing outlines (DG);
- *
  */
 
 package org.jfree.chart.renderer.xy;
