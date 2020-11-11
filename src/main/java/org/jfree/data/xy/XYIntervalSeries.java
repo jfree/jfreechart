@@ -27,16 +27,10 @@
  * ---------------------
  * XYIntervalSeries.java
  * ---------------------
- * (C) Copyright 2006-2016, by Object Refinery Limited.
+ * (C) Copyright 2006-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 20-Oct-2006 : Version 1 (DG);
- * 13-Feb-2007 : Added several new accessor methods (DG);
- * 09-Jan-2014 : Added add(XYIntervalDataItem, boolean) method (DG);
  *
  */
 

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,65 +27,13 @@
  * ---------
  * Axis.java
  * ---------
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Bill Kelemen;
  *                   Nicolas Brodu;
  *                   Peter Kolb (patches 1934255 and 2603321);
- *                   Andrew Mickish (patch 1870189);
- *
- * Changes
- * -------
- * 21-Aug-2001 : Added standard header, fixed DOS encoding problem (DG);
- * 18-Sep-2001 : Updated header (DG);
- * 07-Nov-2001 : Allow null axis labels (DG);
- *             : Added default font values (DG);
- * 13-Nov-2001 : Modified the setPlot() method to check compatibility between
- *               the axis and the plot (DG);
- * 30-Nov-2001 : Changed default font from "Arial" --> "SansSerif" (DG);
- * 06-Dec-2001 : Allow null in setPlot() method (BK);
- * 06-Mar-2002 : Added AxisConstants interface (DG);
- * 23-Apr-2002 : Added a visible property.  Moved drawVerticalString to
- *               RefineryUtilities.  Added fixedDimension property for use in
- *               combined plots (DG);
- * 25-Jun-2002 : Removed unnecessary imports (DG);
- * 05-Sep-2002 : Added attribute for tick mark paint (DG);
- * 18-Sep-2002 : Fixed errors reported by Checkstyle (DG);
- * 07-Nov-2002 : Added attributes to control the inside and outside length of
- *               the tick marks (DG);
- * 08-Nov-2002 : Moved to new package com.jrefinery.chart.axis (DG);
- * 18-Nov-2002 : Added axis location to refreshTicks() parameters (DG);
- * 15-Jan-2003 : Removed monolithic constructor (DG);
- * 17-Jan-2003 : Moved plot classes to separate package (DG);
- * 26-Mar-2003 : Implemented Serializable (DG);
- * 03-Jul-2003 : Modified reserveSpace method (DG);
- * 13-Aug-2003 : Implemented Cloneable (DG);
- * 11-Sep-2003 : Took care of listeners while cloning (NB);
- * 29-Oct-2003 : Added workaround for font alignment in PDF output (DG);
- * 06-Nov-2003 : Modified refreshTicks() signature (DG);
- * 06-Jan-2004 : Added axis line attributes (DG);
- * 16-Mar-2004 : Added plot state to draw() method (DG);
- * 07-Apr-2004 : Modified text bounds calculation (DG);
- * 18-May-2004 : Eliminated AxisConstants.java (DG);
- * 30-Sep-2004 : Moved drawRotatedString() from RefineryUtilities -->
- *               TextUtilities (DG);
- * 04-Oct-2004 : Modified getLabelEnclosure() method to treat an empty String
- *               the same way as a null string - see bug 1026521 (DG);
- * 21-Apr-2005 : Replaced Insets with RectangleInsets (DG);
- * 26-Apr-2005 : Removed LOGGER (DG);
- * 01-Jun-2005 : Added hasListener() method for unit testing (DG);
- * 08-Jun-2005 : Fixed equals() method to handle GradientPaint (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 22-Aug-2006 : API doc updates (DG);
- * 06-Jun-2008 : Added setTickLabelInsets(RectangleInsets, boolean) (DG);
- * 25-Sep-2008 : Added minor tick support, see patch 1934255 by Peter Kolb (DG);
- * 26-Sep-2008 : Added fireChangeEvent() method (DG);
- * 19-Mar-2009 : Added entity support - see patch 2603321 by Peter Kolb (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
- * 01-Aug-2013 : Added attributedLabel override to support superscripts,
- *               subscripts and more (DG);
- * 29-Jul-2014 : Add hint to normalise stroke for axis line (DG);
+ *                   Andrew Mickish (patch 1870189); 
  *
  */
 
@@ -1287,6 +1235,14 @@ public abstract class Axis implements Cloneable, Serializable {
         throw new RuntimeException("Unexpected AxisLabelLocation: " + location);
     }
     
+    /**
+     * Returns the y-coordinate for the specified axis location.
+     * 
+     * @param location  the location ({@code null} not permitted).
+     * @param dataArea  the data area ({@code null} not permitted).
+     * 
+     * @return The y-coordinate. 
+     */
     protected double labelLocationY(AxisLabelLocation location, 
             Rectangle2D dataArea) {
         if (location.equals(AxisLabelLocation.HIGH_END)) {
@@ -1301,6 +1257,14 @@ public abstract class Axis implements Cloneable, Serializable {
         throw new RuntimeException("Unexpected AxisLabelLocation: " + location);
     }
     
+    /**
+     * Returns the appropriate horizontal text anchor for the specified axis 
+     * location.
+     * 
+     * @param location  the location ({@code null} not permitted).
+     * 
+     * @return The text anchor (never {@code null}). 
+     */
     protected TextAnchor labelAnchorH(AxisLabelLocation location) {
         if (location.equals(AxisLabelLocation.HIGH_END)) {
             return TextAnchor.CENTER_RIGHT;
@@ -1314,6 +1278,14 @@ public abstract class Axis implements Cloneable, Serializable {
         throw new RuntimeException("Unexpected AxisLabelLocation: " + location);
     }
     
+    /**
+     * Returns the appropriate vertical text anchor for the specified axis 
+     * location.
+     * 
+     * @param location  the location ({@code null} not permitted).
+     * 
+     * @return The text anchor (never {@code null}). 
+     */
     protected TextAnchor labelAnchorV(AxisLabelLocation location) {
         if (location.equals(AxisLabelLocation.HIGH_END)) {
             return TextAnchor.CENTER_RIGHT;

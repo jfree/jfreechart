@@ -32,19 +32,6 @@
  * Original Author:  Anthony Boulestreau;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * Changes
- * -------
- * 29-Mar-2002 : Version 1, contributed by Anthony Boulestreau (DG);
- * 26-Sep-2002 : Fixed errors reported by Checkstyle (DG);
- * 23-Mar-2003 : Implemented Serializable (DG);
- * 13-Aug-2003 : Implemented Cloneable (DG);
- * 17-Nov-2003 : Implemented PublicCloneable (DG);
- * 25-Feb-2004 : Renamed XYToolTipGenerator --> XYItemLabelGenerator (DG);
- * 19-Jan-2005 : Now accesses primitives only from dataset (DG);
- * 20-Apr-2005 : Renamed XYLabelGenerator --> XYItemLabelGenerator (DG);
- * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
- * 31-Mar-2008 : Added hashCode() method to appease FindBugs (DG);
- *
  */
 
 package org.jfree.chart.labels;

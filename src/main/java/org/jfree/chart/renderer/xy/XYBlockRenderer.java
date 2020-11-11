@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2018, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,21 +27,10 @@
  * --------------------
  * XYBlockRenderer.java
  * --------------------
- * (C) Copyright 2006-2017, by Object Refinery Limited.
+ * (C) Copyright 2006-2018, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 05-Jul-2006 : Version 1 (DG);
- * 02-Feb-2007 : Added getPaintScale() method (DG);
- * 09-Mar-2007 : Fixed cloning (DG);
- * 03-Aug-2007 : Fix for bug 1766646 (DG);
- * 07-Apr-2008 : Added entity collection code (DG);
- * 22-Apr-2008 : Implemented PublicCloneable (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
- * 20-Feb-2017 : Add update for crosshairs (DG);
  *
  */
 

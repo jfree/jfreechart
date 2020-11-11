@@ -27,14 +27,10 @@
  * -------------------------
  * StandardXYBarPainter.java
  * -------------------------
- * (C) Copyright 2008, by Object Refinery Limited.
+ * (C) Copyright 2008-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 19-Jun-2008 : Version 1 (DG);
  *
  */
 
@@ -134,7 +130,7 @@ public class StandardXYBarPainter implements XYBarPainter, Serializable {
 
         RectangularShape shadow = createShadow(bar, renderer.getShadowXOffset(),
                 renderer.getShadowYOffset(), base, pegShadow);
-        g2.setPaint(Color.gray);
+        g2.setPaint(Color.GRAY);
         g2.fill(shadow);
 
     }

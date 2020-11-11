@@ -27,18 +27,10 @@
  * ----------------
  * KeyedValues.java
  * ----------------
- * (C) Copyright 2002-2016, by Object Refinery Limited.
+ * (C) Copyright 2002-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 23-Oct-2002 : Version 1 (DG);
- * 12-Jan-2005 : Updated Javadocs to specify new behaviour when key
- *               is not recognised (DG);
- * ------------- JFREECHART 1.0.0 ---------------------------------------------
- * 02-May-2006 : Updated API docs (DG);
  *
  */
 

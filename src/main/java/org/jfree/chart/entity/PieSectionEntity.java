@@ -27,28 +27,11 @@
  * ---------------------
  * PieSectionEntity.java
  * ---------------------
- * (C) Copyright 2002-2008, by Object Refinery Limited.
+ * (C) Copyright 2002-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Richard Atkinson;
  *                   Christian W. Zuckschwerdt;
- *
- * Changes:
- * --------
- * 23-May-2002 : Version 1 (DG);
- * 12-Jun-2002 : Added Javadoc comments (DG);
- * 26-Jun-2002 : Added method to generate AREA tag for image map
- *               generation (DG);
- * 05-Aug-2002 : Added new constructor to populate URLText
- *               Moved getImageMapAreaTag() to ChartEntity (superclass) (RA);
- * 03-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 07-Mar-2003 : Added pie index attribute, since the PiePlot class can create
- *               multiple pie plots within one chart.  Also renamed 'category'
- *               --> 'sectionKey' and changed the class from Object -->
- *               Comparable (DG);
- * 30-Jul-2003 : Added PieDataset reference (CZ);
- * 11-Jan-2005 : Removed deprecated code in preparation for 1.0.0 release (DG);
- * 13-Nov-2007 : Implemented equals() and hashCode() (DG);
  *
  */
 

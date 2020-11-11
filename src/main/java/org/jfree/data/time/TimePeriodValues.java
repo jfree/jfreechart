@@ -27,22 +27,10 @@
  * ---------------------
  * TimePeriodValues.java
  * ---------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited.
+ * (C) Copyright 2003-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 22-Apr-2003 : Version 1 (DG);
- * 30-Jul-2003 : Added clone and equals methods while testing (DG);
- * 11-Mar-2005 : Fixed bug in bounds recalculation - see bug report 
- *               1161329 (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 03-Oct-2006 : Fixed NullPointerException in equals(), fire change event in 
- *               add() method, updated API docs (DG);
- * 07-Apr-2008 : Fixed bug with maxMiddleIndex in updateBounds() (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 

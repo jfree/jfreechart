@@ -27,16 +27,10 @@
  * ---------------
  * ChartFrame.java
  * ---------------
- * (C) Copyright 2001-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2001-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 22-Nov-2001 : Version 1 (DG);
- * 08-Jan-2001 : Added chartPanel attribute (DG);
- * 24-May-2002 : Renamed JFreeChartFrame --> ChartFrame (DG);
  *
  */
 

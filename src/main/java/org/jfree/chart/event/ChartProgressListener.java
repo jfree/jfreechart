@@ -27,14 +27,10 @@
  * --------------------------
  * ChartProgressListener.java
  * --------------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited.
+ * (C) Copyright 2003-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes (from 24-Aug-2001)
- * --------------------------
- * 14-Jan-2003 : Version 1 (DG);
  *
  */
 

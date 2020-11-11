@@ -27,15 +27,10 @@
  * -----------------------
  * ChartProgressEvent.java
  * -----------------------
- * (C) Copyright 2003-2010, by Object Refinery Limited.
+ * (C) Copyright 2003-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 14-Jan-2003 : Version 1 (DG);
- * 20-Jan-2010 : Fixed bug in constructor (DG);
  *
  */
 

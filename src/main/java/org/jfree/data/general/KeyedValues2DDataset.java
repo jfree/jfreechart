@@ -27,16 +27,10 @@
  * -----------------------
  * KeyedValues2DDataset.java
  * -----------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited.
+ * (C) Copyright 2003-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 13-Mar-2003 : Version 1 (DG);
- * 23-Apr-2003 : Switched CategoryDataset and KeyedValues2DDataset so that
- *               CategoryDataset is the super interface (DG);
  *
  */
 

@@ -27,24 +27,11 @@
  * -----------------
  * XYItemEntity.java
  * -----------------
- * (C) Copyright 2002-2008, by Object Refinery Limited.
+ * (C) Copyright 2002-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Richard Atkinson;
  *                   Christian W. Zuckschwerdt;
- *
- * Changes:
- * --------
- * 23-May-2002 : Version 1 (DG);
- * 12-Jun-2002 : Added accessor methods and Javadoc comments (DG);
- * 26-Jun-2002 : Added getImageMapAreaTag() method (DG);
- * 05-Aug-2002 : Added new constructor to populate URLText
- *               Moved getImageMapAreaTag() to ChartEntity (superclass) (RA);
- * 03-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 30-Jun-2003 : Added XYDataset reference (CZ);
- * 20-May-2004 : Added equals() and clone() methods and implemented
- *               Serializable (DG);
- * 11-Jan-2005 : Removed deprecated code in preparation for 1.0.0 release (DG);
  *
  */
 

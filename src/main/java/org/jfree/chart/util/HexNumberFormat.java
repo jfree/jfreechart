@@ -27,14 +27,10 @@
  * --------------------
  * HexNumberFormat.java
  * --------------------
- * (C) Copyright 2007, 2008, by Richard West and Contributors.
+ * (C) Copyright 2007-2020, by Richard West and Contributors.
  *
  * Original Author:  Richard West, Advanced Micro Devices, Inc.;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes:
- * --------
- * 14-Jun-2007 : Version 1 (RW);
  *
  */
 

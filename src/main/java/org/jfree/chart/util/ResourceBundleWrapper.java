@@ -27,14 +27,10 @@
  * --------------------------
  * ResourceBundleWrapper.java
  * --------------------------
- * (C)opyright 2008, 2009, by Jess Thrysoee and Contributors.
+ * (C)opyright 2008-2020, by Jess Thrysoee and Contributors.
  *
  * Original Author:  Jess Thrysoee;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 18-Dec-2008 : Version 1 (JT);
  *
  */
 

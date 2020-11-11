@@ -24,23 +24,13 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * -------------------------------
- * CustomXYItemLabelGenerator.java
- * -------------------------------
- * (C) Copyright 2002-2008, by Richard Atkinson and Contributors.
+ * -----------------------------
+ * CustomXYToolTipGenerator.java
+ * -----------------------------
+ * (C) Copyright 2002-2020, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes:
- * --------
- * 05-Aug-2002 : Version 1, contributed by Richard Atkinson (RA);
- * 26-Sep-2002 : Fixed errors reported by Checkstyle (DG);
- * 21-Mar-2003 : Implemented Serializable (DG);
- * 13-Aug-2003 : Implemented Cloneable (DG);
- * 17-Nov-2003 : Implemented PublicCloneable (DG);
- * 25-Feb-2004 : Renamed XYToolTipGenerator --> XYItemLabelGenerator (DG);
- * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
  *
  */
 

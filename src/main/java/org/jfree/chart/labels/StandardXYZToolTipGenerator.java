@@ -27,16 +27,10 @@
  * --------------------------------
  * StandardXYZToolTipGenerator.java
  * --------------------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited.
+ * (C) Copyright 2004-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 11-May-2003 : Version 1, split from StandardXYZItemLabelGenerator (DG);
- * 15-Jul-2004 : Switched getZ() and getZValue() methods (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 

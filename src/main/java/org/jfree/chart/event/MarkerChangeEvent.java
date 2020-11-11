@@ -27,14 +27,10 @@
  * ----------------------
  * MarkerChangeEvent.java
  * ----------------------
- * (C) Copyright 2006-2008, by Object Refinery Limited.
+ * (C) Copyright 2006-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 05-Sep-2006 : Version 1 (DG);
  *
  */
 
@@ -62,7 +58,7 @@ public class MarkerChangeEvent extends ChartChangeEvent {
      * @since 1.0.3
      */
     public MarkerChangeEvent(Marker marker) {
-        super(marker);
+        super(marker); // null check is in here
         this.marker = marker;
     }
 

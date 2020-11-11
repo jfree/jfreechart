@@ -27,14 +27,10 @@
  * -------------------------
  * LegendRenderingOrder.java
  * -------------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  Angel;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 26-Mar-2004 : Version 1 (DG);
  *
  */
 

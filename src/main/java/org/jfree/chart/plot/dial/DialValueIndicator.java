@@ -27,18 +27,10 @@
  * -----------------------
  * DialValueIndicator.java
  * -----------------------
- * (C) Copyright 2006-2017, by Object Refinery Limited.
+ * (C) Copyright 2006-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 03-Nov-2006 : Version 1 (DG);
- * 17-Oct-2007 : Updated equals() (DG);
- * 24-Oct-2007 : Added default constructor and missing event notification (DG);
- * 09-Jun-2009 : Improved indicator resizing, fixes bug 2802014 (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 

@@ -27,20 +27,10 @@
  * ---------------------
  * SimpleTimePeriod.java
  * ---------------------
- * (C) Copyright 2002-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2002-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 07-Oct-2002 : Added Javadocs (DG);
- * 10-Jan-2003 : Renamed TimeAllocation --> SimpleTimePeriod (DG);
- * 13-Mar-2003 : Added equals() method, and Serializable interface (DG);
- * 21-Oct-2003 : Added hashCode() method (DG);
- * 27-Jan-2005 : Implemented Comparable, to enable this class to be used
- *               in the TimeTableXYDataset class (DG);
- * 02-Jun-2008 : Fixed problem with fields being mutable (DG);
  *
  */
 

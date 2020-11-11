@@ -27,7 +27,7 @@
  * ------------------------
  * CategoryLabelEntity.java
  * ------------------------
- * (C) Copyright 2006-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;

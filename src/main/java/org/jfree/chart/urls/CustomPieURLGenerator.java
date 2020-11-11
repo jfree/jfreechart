@@ -27,7 +27,7 @@
  * --------------------------
  * CustomPieURLGenerator.java
  * --------------------------
- * (C) Copyright 2004-2008, by David Basten and Contributors.
+ * (C) Copyright 2004-2020, by David Basten and Contributors.
  *
  * Original Author:  David Basten;
  * Contributors:     -;

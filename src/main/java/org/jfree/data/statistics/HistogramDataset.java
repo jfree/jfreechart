@@ -27,36 +27,13 @@
  * ---------------------
  * HistogramDataset.java
  * ---------------------
- * (C) Copyright 2003-2016, by Jelai Wang and Contributors.
+ * (C) Copyright 2003-2020, by Jelai Wang and Contributors.
  *
  * Original Author:  Jelai Wang (jelaiw AT mindspring.com);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Cameron Hayne;
  *                   Rikard Bj?rklind;
  *                   Thomas A Caswell (patch 2902842);
- *
- * Changes
- * -------
- * 06-Jul-2003 : Version 1, contributed by Jelai Wang (DG);
- * 07-Jul-2003 : Changed package and added Javadocs (DG);
- * 15-Oct-2003 : Updated Javadocs and removed array sorting (JW);
- * 09-Jan-2004 : Added fix by "Z." posted in the JFreeChart forum (DG);
- * 01-Mar-2004 : Added equals() and clone() methods and implemented
- *               Serializable.  Also added new addSeries() method (DG);
- * 06-May-2004 : Now extends AbstractIntervalXYDataset (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
- *               getYValue() (DG);
- * 20-May-2005 : Speed up binning - see patch 1026151 contributed by Cameron
- *               Hayne (DG);
- * 08-Jun-2005 : Fixed bug in getSeriesKey() method (DG);
- * 22-Nov-2005 : Fixed cast in getSeriesKey() method - see patch 1329287 (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 03-Aug-2006 : Improved precision of bin boundary calculation (DG);
- * 07-Sep-2006 : Fixed bug 1553088 (DG);
- * 22-May-2008 : Implemented clone() method override (DG);
- * 08-Dec-2009 : Fire change event in addSeries() - see patch 2902842
- *               contributed by Thomas A Caswell (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 

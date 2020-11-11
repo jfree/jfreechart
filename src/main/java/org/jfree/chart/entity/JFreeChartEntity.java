@@ -27,15 +27,10 @@
  * ---------------------
  * JFreeChartEntity.java
  * --------------------
- * (C) Copyright 2009-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2009-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  Peter Kolb;
  * Contributor(s):   ;
- *
- * Changes:
- * --------
- * 15-Feb-2009 : Version 1 (PK);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 

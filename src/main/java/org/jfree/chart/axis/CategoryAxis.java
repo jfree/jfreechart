@@ -27,77 +27,11 @@
  * -----------------
  * CategoryAxis.java
  * -----------------
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Pady Srinivasan (patch 1217634);
  *                   Peter Kolb (patches 2497611 and 2603321);
- *
- * Changes
- * -------
- * 21-Aug-2001 : Added standard header. Fixed DOS encoding problem (DG);
- * 18-Sep-2001 : Updated header (DG);
- * 04-Dec-2001 : Changed constructors to protected, and tidied up default
- *               values (DG);
- * 19-Apr-2002 : Updated import statements (DG);
- * 05-Sep-2002 : Updated constructor for changes in Axis class (DG);
- * 06-Nov-2002 : Moved margins from the CategoryPlot class (DG);
- * 08-Nov-2002 : Moved to new package com.jrefinery.chart.axis (DG);
- * 22-Jan-2002 : Removed monolithic constructor (DG);
- * 26-Mar-2003 : Implemented Serializable (DG);
- * 09-May-2003 : Merged HorizontalCategoryAxis and VerticalCategoryAxis into
- *               this class (DG);
- * 13-Aug-2003 : Implemented Cloneable (DG);
- * 29-Oct-2003 : Added workaround for font alignment in PDF output (DG);
- * 05-Nov-2003 : Fixed serialization bug (DG);
- * 26-Nov-2003 : Added category label offset (DG);
- * 06-Jan-2004 : Moved axis line attributes to Axis class, rationalised
- *               category label position attributes (DG);
- * 07-Jan-2004 : Added new implementation for linewrapping of category
- *               labels (DG);
- * 17-Feb-2004 : Moved deprecated code to bottom of source file (DG);
- * 10-Mar-2004 : Changed Dimension --> Dimension2D in text classes (DG);
- * 16-Mar-2004 : Added support for tooltips on category labels (DG);
- * 01-Apr-2004 : Changed java.awt.geom.Dimension2D to org.jfree.ui.Size2D
- *               because of JDK bug 4976448 which persists on JDK 1.3.1 (DG);
- * 03-Sep-2004 : Added 'maxCategoryLabelLines' attribute (DG);
- * 04-Oct-2004 : Renamed ShapeUtils --> ShapeUtilities (DG);
- * 11-Jan-2005 : Removed deprecated methods in preparation for 1.0.0
- *               release (DG);
- * 21-Jan-2005 : Modified return type for RectangleAnchor.coordinates()
- *               method (DG);
- * 21-Apr-2005 : Replaced Insets with RectangleInsets (DG);
- * 26-Apr-2005 : Removed LOGGER (DG);
- * 08-Jun-2005 : Fixed bug in axis layout (DG);
- * 22-Nov-2005 : Added a method to access the tool tip text for a category
- *               label (DG);
- * 23-Nov-2005 : Added per-category font and paint options - see patch
- *               1217634 (DG);
- * ------------- JFreeChart 1.0.x ---------------------------------------------
- * 11-Jan-2006 : Fixed null pointer exception in drawCategoryLabels - see bug
- *               1403043 (DG);
- * 18-Aug-2006 : Fix for bug drawing category labels, thanks to Adriaan
- *               Joubert (1277726) (DG);
- * 02-Oct-2006 : Updated category label entity (DG);
- * 30-Oct-2006 : Updated refreshTicks() method to account for possibility of
- *               multiple domain axes (DG);
- * 07-Mar-2007 : Fixed bug in axis label positioning (DG);
- * 27-Sep-2007 : Added getCategorySeriesMiddle() method (DG);
- * 21-Nov-2007 : Fixed performance bug noted by FindBugs in the
- *               equalPaintMaps() method (DG);
- * 23-Apr-2008 : Fixed bug 1942059, bad use of insets in
- *               calculateTextBlockWidth() (DG);
- * 26-Jun-2008 : Added new getCategoryMiddle() method (DG);
- * 27-Oct-2008 : Set font on Graphics2D when creating category labels (DG);
- * 14-Jan-2009 : Added new variant of getCategorySeriesMiddle() to make it
- *               simpler for renderers with hidden series (PK);
- * 19-Mar-2009 : Added entity support - see patch 2603321 by Peter Kolb (DG);
- * 16-Apr-2009 : Added tick mark drawing (DG);
- * 29-Jun-2009 : Fixed bug where axis entity is hiding label entities (DG);
- * 25-Jul-2013 : Added support for URLs on category labels (DG);
- * 01-Aug-2013 : Added attributedLabel override to support superscripts,
- *               subscripts and more (DG);
- * 29-Jul-2014 : Add hint to normalise stroke for tick marks (DG);
  *
  */
 

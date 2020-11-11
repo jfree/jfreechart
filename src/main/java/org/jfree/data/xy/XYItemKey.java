@@ -27,14 +27,10 @@
  * --------------
  * XYItemKey.java
  * --------------
- * (C) Copyright 2014, by Object Refinery Limited.
+ * (C) Copyright 2014-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 22-Aug-2014 : Version 1 (DG);
  *
  */
 

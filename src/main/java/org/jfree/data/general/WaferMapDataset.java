@@ -27,17 +27,10 @@
  * --------------------
  * WaferMapDataset.java
  * --------------------
- * (C)opyright 2003-2008, by Robert Redburn and Contributors.
+ * (C)opyright 2003-2020, by Robert Redburn and Contributors.
  *
  * Original Author:  Robert Redburn;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 25-Nov-2003 : Version 1 contributed by Robert Redburn (with some
- *               modifications to match style conventions) (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 02-Feb-2007 : Removed author tags from all over JFreeChart sources (DG);
  *
  */
 

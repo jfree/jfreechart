@@ -27,24 +27,10 @@
  * -------------------------------
  * TimePeriodValuesCollection.java
  * -------------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited.
+ * (C) Copyright 2003-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 22-Apr-2003 : Version 1 (DG);
- * 05-May-2004 : Now extends AbstractIntervalXYDataset (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
- *               getYValue() (DG);
- * 06-Oct-2004 : Updated for changes in DomainInfo interface (DG);
- * 11-Jan-2005 : Removed deprecated code in preparation for 1.0.0 release (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 03-Oct-2006 : Deprecated get/setDomainIsPointsInTime() (DG);
- * 11-Jun-2007 : Fixed bug in getDomainBounds() method, and changed default
- *               value for domainIsPointsInTime to false (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 

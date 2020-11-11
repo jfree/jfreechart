@@ -27,19 +27,10 @@
  * --------------
  * LogFormat.java
  * --------------
- * (C) Copyright 2007-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 02-Aug-2007 : Version 1 (DG);
- * 19-Feb-2008 : Implemented equals() and clone(), and added new powerLabel
- *               attribute as per Feature Request 1886036 (DG);
- * 14-Jan-2009 : Added default constructor, and accessor methods for
- *               exponent formatter (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 

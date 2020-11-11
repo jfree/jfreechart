@@ -27,15 +27,10 @@
  * --------------------
  * MonthDateFormat.java
  * --------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 10-May-2005 : Version 1 (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 

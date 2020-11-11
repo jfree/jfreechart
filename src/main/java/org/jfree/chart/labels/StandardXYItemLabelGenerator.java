@@ -27,34 +27,10 @@
  * ---------------------------------
  * StandardXYItemLabelGenerator.java
  * ---------------------------------
- * (C) Copyright 2001-2009, by Object Refinery Limited.
+ * (C) Copyright 2001-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 13-Dec-2001 : Version 1 (DG);
- * 16-Jan-2002 : Completed Javadocs (DG);
- * 02-Apr-2002 : Modified to handle null y-values (DG);
- * 09-Apr-2002 : Added formatting objects for the x and y values (DG);
- * 30-May-2002 : Added series name to standard tool tip (DG);
- * 26-Sep-2002 : Fixed errors reported by Checkstyle (DG);
- * 23-Mar-2003 : Implemented Serializable (DG);
- * 13-Aug-2003 : Implemented Cloneable (DG);
- * 17-Nov-2003 : Implemented PublicCloneable (DG);
- * 25-Feb-2004 : Renamed XYToolTipGenerator --> XYItemLabelGenerator and
- *               StandardXYToolTipGenerator -->
- *               StandardXYItemLabelGenerator (DG);
- * 26-Feb-2004 : Modified to use MessageFormat (DG);
- * 27-Feb-2004 : Added abstract superclass (DG);
- * 11-May-2004 : Split into StandardXYToolTipGenerator and
- *               StandardXYLabelGenerator (DG);
- * 20-Apr-2005 : Renamed StandardXYLabelGenerator
- *               --> StandardXYItemLabelGenerator (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 25-Jan-2007 : Added new constructor - see bug 1624067 (DG);
- * 24-Jun-2009 : Added new constructor (DG);
  * 
  */
 
@@ -72,7 +48,7 @@ import org.jfree.data.xy.XYDataset;
  * {@link org.jfree.data.xy.XYDataset}.
  */
 public class StandardXYItemLabelGenerator extends AbstractXYItemLabelGenerator
-        implements XYItemLabelGenerator, Cloneable, PublicCloneable,
+            implements XYItemLabelGenerator, Cloneable, PublicCloneable,
             Serializable {
 
     /** For serialization. */

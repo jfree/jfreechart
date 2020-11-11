@@ -27,14 +27,10 @@
  * ----------------------------
  * CrosshairLabelGenerator.java
  * ----------------------------
- * (C) Copyright 2009, by Object Refinery Limited.
+ * (C) Copyright 2009-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 13-Feb-2009 : Version 1 (DG);
  *
  */
 

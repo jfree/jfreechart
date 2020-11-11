@@ -27,31 +27,11 @@
  * -----------------------
  * TimeTableXYDataset.java
  * -----------------------
- * (C) Copyright 2004-2016, by Andreas Schroeder and Contributors.
+ * (C) Copyright 2004-2020, by Andreas Schroeder and Contributors.
  *
  * Original Author:  Andreas Schroeder;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Rob Eden;
- *
- * Changes
- * -------
- * 01-Apr-2004 : Version 1 (AS);
- * 05-May-2004 : Now implements AbstractIntervalXYDataset (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
- *               getYValue() (DG);
- * 15-Sep-2004 : Added getXPosition(), setXPosition(), equals() and
- *               clone() (DG);
- * 17-Nov-2004 : Updated methods for changes in DomainInfo interface (DG);
- * 25-Nov-2004 : Added getTimePeriod(int) method (DG);
- * 11-Jan-2005 : Removed deprecated code in preparation for the 1.0.0
- *               release (DG);
- * 27-Jan-2005 : Modified to use TimePeriod rather than RegularTimePeriod (DG);
- * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
- * 25-Jul-2007 : Added clear() method by Rob Eden, see patch 1752205 (DG);
- * 04-Jun-2008 : Updated Javadocs (DG);
- * 26-May-2009 : Peg to time zone if RegularTimePeriod is used (DG);
- * 02-Nov-2009 : Changed String to Comparable in add methods (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 

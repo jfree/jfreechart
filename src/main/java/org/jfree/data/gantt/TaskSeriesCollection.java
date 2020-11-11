@@ -27,25 +27,10 @@
  * -------------------------
  * TaskSeriesCollection.java
  * -------------------------
- * (C) Copyright 2002-2016, by Object Refinery Limited.
+ * (C) Copyright 2002-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Thomas Schuster;
- *
- * Changes
- * -------
- * 06-Jun-2002 : Version 1 (DG);
- * 07-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 24-Oct-2002 : Amendments for changes in CategoryDataset interface and
- *               CategoryToolTipGenerator interface (DG);
- * 10-Jan-2003 : Renamed GanttSeriesCollection --> TaskSeriesCollection (DG);
- * 04-Sep-2003 : Fixed bug 800324 (DG);
- * 16-Sep-2003 : Implemented GanttCategoryDataset (DG);
- * 12-Jan-2005 : Fixed bug 1099331 (DG);
- * 18-Jan-2006 : Added new methods getSeries(int) and
- *               getSeries(Comparable) (DG);
- * 09-May-2008 : Fixed cloning bug (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 

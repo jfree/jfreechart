@@ -27,17 +27,10 @@
  * --------------------
  * TimePeriodValue.java
  * --------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited.
+ * (C) Copyright 2003-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 22-Apr-2003 : Version 1 (DG);
- * 03-Oct-2006 : Added null argument check to constructor (DG);
- * 07-Apr-2008 : Added a toString() override for debugging (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 

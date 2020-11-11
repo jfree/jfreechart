@@ -27,20 +27,10 @@
  * -----------------
  * VectorSeries.java
  * -----------------
- * (C) Copyright 2007-2016, by Object Refinery Limited.
+ * (C) Copyright 2007-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 30-Jan-2007 : Version 1 (DG);
- * 24-May-2007 : Renamed getDeltaXValue() --> getVectorXValue(), and likewise
- *               for getDeltaYValue() (DG);
- * 25-May-2007 : Added remove(int) and clear() methods, and moved from the
- *               experimental to the main source tree (DG);
- * 27-Nov-2007 : Removed redundant clear() method (DG);
- * 09-Jan-2014 : Added add(VectorDataItem, boolean) method (DG);
  *
  */
 

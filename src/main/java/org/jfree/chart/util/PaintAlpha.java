@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,17 +27,10 @@
  * ---------------
  * PaintAlpha.java
  * ---------------
- * (C) Copyright 2011-2016 by DaveLaw and Contributors.
+ * (C) Copyright 2011-2020 by DaveLaw and Contributors.
  *
  * Original Author:  DaveLaw (dave ATT davelaw D0TT de);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 09-Mar-2011 : Written (DaveLaw)
- * 03-Jul-2012 : JDK 1.6 References made reflective for JDK 1.3 compatibility 
- *               (DaveLaw);
- * 16-Sep-2013 : Removed reflection since we are requiring JDK 1.6 now (DG)
  *
  */
 

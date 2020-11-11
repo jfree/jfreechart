@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -39,92 +39,6 @@
  *                   Peter Kolb (patch 2791407);
  *                   Martin Hoeller (patch 2952086);
  *
- * Changes (from 18-Sep-2001)
- * --------------------------
- * 18-Sep-2001 : Added standard header and fixed DOS encoding problem (DG);
- * 22-Oct-2001 : Renamed DataSource.java --> Dataset.java etc. (DG);
- * 15-Nov-2001 : Moved to package com.jrefinery.data.* in the JCommon class
- *               library (DG);
- *               Changed to handle null values from datasets (DG);
- *               Bug fix (thanks to Andrzej Porebski) - initial value now set
- *               to positive or negative infinity when iterating (DG);
- * 22-Nov-2001 : Datasets with containing no data now return null for min and
- *               max calculations (DG);
- * 13-Dec-2001 : Extended to handle HighLowDataset and IntervalXYDataset (DG);
- * 15-Feb-2002 : Added getMinimumStackedRangeValue() and
- *               getMaximumStackedRangeValue() (DG);
- * 28-Feb-2002 : Renamed Datasets.java --> DatasetUtilities.java (DG);
- * 18-Mar-2002 : Fixed bug in min/max domain calculation for datasets that
- *               implement the CategoryDataset interface AND the XYDataset
- *               interface at the same time.  Thanks to Jonathan Nash for the
- *               fix (DG);
- * 23-Apr-2002 : Added getDomainExtent() and getRangeExtent() methods (DG);
- * 13-Jun-2002 : Modified range measurements to handle
- *               IntervalCategoryDataset (DG);
- * 12-Jul-2002 : Method name change in DomainInfo interface (DG);
- * 30-Jul-2002 : Added pie dataset summation method (DG);
- * 01-Oct-2002 : Added a method for constructing an XYDataset from a Function2D
- *               instance (DG);
- * 24-Oct-2002 : Amendments required following changes to the CategoryDataset
- *               interface (DG);
- * 18-Nov-2002 : Changed CategoryDataset to TableDataset (DG);
- * 04-Mar-2003 : Added isEmpty(XYDataset) method (DG);
- * 05-Mar-2003 : Added a method for creating a CategoryDataset from a
- *               KeyedValues instance (DG);
- * 15-May-2003 : Renamed isEmpty --> isEmptyOrNull (DG);
- * 25-Jun-2003 : Added limitPieDataset methods (RA);
- * 26-Jun-2003 : Modified getDomainExtent() method to accept null datasets (DG);
- * 27-Jul-2003 : Added getStackedRangeExtent(TableXYDataset data) (RA);
- * 18-Aug-2003 : getStackedRangeExtent(TableXYDataset data) now handles null
- *               values (RA);
- * 02-Sep-2003 : Added method to check for null or empty PieDataset (DG);
- * 18-Sep-2003 : Fix for bug 803660 (getMaximumRangeValue for
- *               CategoryDataset) (DG);
- * 20-Oct-2003 : Added getCumulativeRangeExtent() method (DG);
- * 09-Jan-2003 : Added argument checking code to the createCategoryDataset()
- *               method (DG);
- * 23-Mar-2004 : Fixed bug in getMaximumStackedRangeValue() method (DG);
- * 31-Mar-2004 : Exposed the extent iteration algorithms to use one of them and
- *               applied noninstantiation pattern (AS);
- * 11-May-2004 : Renamed getPieDatasetTotal --> calculatePieDatasetTotal (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with getYValue();
- * 24-Aug-2004 : Added argument checks to createCategoryDataset() method (DG);
- * 04-Oct-2004 : Renamed ArrayUtils --> ArrayUtilities (DG);
- * 06-Oct-2004 : Renamed findDomainExtent() --> findDomainBounds(),
- *               findRangeExtent() --> findRangeBounds() (DG);
- * 07-Jan-2005 : Renamed findStackedRangeExtent() --> findStackedRangeBounds(),
- *               findCumulativeRangeExtent() --> findCumulativeRangeBounds(),
- *               iterateXYRangeExtent() --> iterateXYRangeBounds(),
- *               removed deprecated methods (DG);
- * 03-Feb-2005 : The findStackedRangeBounds() methods now return null for
- *               empty datasets (DG);
- * 03-Mar-2005 : Moved createNumberArray() and createNumberArray2D() methods
- *               from DatasetUtilities --> DataUtilities (DG);
- * 22-Sep-2005 : Added new findStackedRangeBounds() method that takes base
- *               argument (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 15-Mar-2007 : Added calculateStackTotal() method (DG);
- * 27-Mar-2008 : Fixed bug in findCumulativeRangeBounds() method (DG);
- * 28-Mar-2008 : Fixed sample count in sampleFunction2D() method, renamed
- *               iterateXYRangeBounds() --> iterateRangeBounds(XYDataset), and
- *               fixed a bug in findRangeBounds(XYDataset, false) (DG);
- * 28-Mar-2008 : Applied a variation of patch 1925366 (from Rafal Skalny) for
- *               slightly more efficient iterateRangeBounds() methods (DG);
- * 08-Apr-2008 : Fixed typo in iterateRangeBounds() (DG);
- * 08-Oct-2008 : Applied patch 2131001 by Jerome David, with some modifications
- *               and additions and some new unit tests (DG);
- * 12-Feb-2009 : Added sampleFunction2DToSeries() method (DG);
- * 27-Mar-2009 : Added new methods to find domain and range bounds taking into
- *               account hidden series (DG);
- * 01-Apr-2009 : Handle a StatisticalCategoryDataset in
- *               iterateToFindRangeBounds() (DG);
- * 16-May-2009 : Patch 2791407 - fix iterateToFindRangeBounds for
- *               MultiValueCategoryDataset (PK);
- * 10-Sep-2009 : Fix bug 2849731 for IntervalCategoryDataset (DG);
- * 16-Feb-2010 : Patch 2952086 - find z-bounds (MH);
- * 02-Jul-2013 : Use ParamChecks (DG);
- * 22-Sep-2015 : Fix bugs in iterateToFindDomainBounds() and 
- *               iterateToFindRangeBounds() (DG);
  */
 
 package org.jfree.data.general;

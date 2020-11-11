@@ -27,18 +27,10 @@
  * ----------------------
  * BoxAndWhiskerItem.java
  * ----------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 27-Aug-2003 : Version 1 (DG);
- * 01-Mar-2004 : Added equals() method and implemented Serializable (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 15-Nov-2006 : Added toString() method override (DG);
- * 02-Oct-2007 : Added new constructor (for convenience) (DG);
  *
  */
 

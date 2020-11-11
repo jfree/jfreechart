@@ -27,17 +27,10 @@
  * ----------------------
  * AbstractXYDataset.java
  * ----------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited.
+ * (C) Copyright 2004-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited).
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 05-May-2004 : Version 1 (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
- *               getYValue() (DG);
- * 18-Aug-2004 : Moved from org.jfree.data --> org.jfree.data.xy (DG);
  *
  */
 

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,25 +27,10 @@
  * ---------------------
  * XYLineAnnotation.java
  * ---------------------
- * (C) Copyright 2003-2017, by Object Refinery Limited.
+ * (C) Copyright 2003-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Peter Kolb (see patch 2809117);
- *
- * Changes:
- * --------
- * 02-Apr-2003 : Version 1 (DG);
- * 19-Aug-2003 : Added equals method, implemented Cloneable, and applied
- *               serialization fixes (DG);
- * 21-Jan-2004 : Update for renamed method in ValueAxis (DG);
- * 14-Apr-2004 : Fixed draw() method to handle plot orientation correctly (DG);
- * 29-Sep-2004 : Added support for tool tips and URLS, now extends
- *               AbstractXYAnnotation (DG);
- * 04-Oct-2004 : Renamed ShapeUtils --> ShapeUtilities (DG);
- * 08-Jun-2005 : Fixed equals() method to handle GradientPaint() (DG);
- * 05-Nov-2008 : Added workaround for JRE bug 6574155, see JFreeChart bug
- *               2221495 (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 

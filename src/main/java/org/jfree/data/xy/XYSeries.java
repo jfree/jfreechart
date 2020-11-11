@@ -27,7 +27,7 @@
  * -------------
  * XYSeries.java
  * -------------
- * (C) Copyright 2001-2016, Object Refinery Limited and Contributors.
+ * (C) Copyright 2001-2020, Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Aaron Metzger;
@@ -35,46 +35,6 @@
  *                   Richard Atkinson;
  *                   Michel Santos;
  *                   Ted Schwartz (fix for bug 1955483);
- *
- * Changes
- * -------
- * 15-Nov-2001 : Version 1 (DG);
- * 03-Apr-2002 : Added an add(double, double) method (DG);
- * 29-Apr-2002 : Added a clear() method (ARM);
- * 06-Jun-2002 : Updated Javadoc comments (DG);
- * 29-Aug-2002 : Modified to give user control over whether or not duplicate
- *               x-values are allowed (DG);
- * 07-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 11-Nov-2002 : Added maximum item count, code contributed by Jonathan
- *               Gabbai (DG);
- * 26-Mar-2003 : Implemented Serializable (DG);
- * 04-Aug-2003 : Added getItems() method (DG);
- * 15-Aug-2003 : Changed 'data' from private to protected, added new add()
- *               methods with a 'notify' argument (DG);
- * 22-Sep-2003 : Added getAllowDuplicateXValues() method (RA);
- * 29-Jan-2004 : Added autoSort attribute, based on a contribution by
- *               Michel Santos - see patch 886740 (DG);
- * 03-Feb-2004 : Added indexOf() method (DG);
- * 16-Feb-2004 : Added remove() method (DG);
- * 18-Aug-2004 : Moved from org.jfree.data --> org.jfree.data.xy (DG);
- * 21-Feb-2005 : Added update(Number, Number) and addOrUpdate(Number, Number)
- *               methods (DG);
- * 03-May-2005 : Added a new constructor, fixed the setMaximumItemCount()
- *               method to remove items (and notify listeners) if necessary,
- *               fixed the add() and addOrUpdate() methods to handle unsorted
- *               series (DG);
- * ------------- JFreeChart 1.0.x ---------------------------------------------
- * 11-Jan-2005 : Renamed update(int, Number) --> updateByIndex() (DG);
- * 15-Jan-2007 : Added toArray() method (DG);
- * 31-Oct-2007 : Implemented faster hashCode() (DG);
- * 22-Nov-2007 : Reimplemented clone() (DG);
- * 01-May-2008 : Fixed bug 1955483 in addOrUpdate() method, thanks to
- *               Ted Schwartz (DG);
- * 24-Nov-2008 : Further fix for 1955483 (DG);
- * 06-Mar-2009 : Added minX, maxX, minY and maxY fields (DG);
- * 10-Jun-2009 : Make clones to isolate XYDataItem instances used
- *               for data storage (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  * 
  */
 

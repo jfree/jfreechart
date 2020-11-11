@@ -27,16 +27,10 @@
  * -------------------------------------
  * StandardCategoryToolTipGenerator.java
  * -------------------------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited.
+ * (C) Copyright 2004-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 11-May-2004 : Version 1 (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 03-May-2006 : Added equals() method to fix bug 1481087 (DG);
  *
  */
 

@@ -27,19 +27,10 @@
  * ---------------
  * ChartColor.java
  * ---------------
- * (C) Copyright 2003-2016, by Cameron Riley and Contributors.
+ * (C) Copyright 2003-2020, by Cameron Riley and Contributors.
  *
  * Original Author:  Cameron Riley;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 23-Jan-2003 : Version 1, contributed by Cameron Riley (DG);
- * 25-Nov-2004 : Changed first 7 colors to softer shades (DG);
- * 03-Nov-2005 : Removed orange color, too close to yellow - see bug
- *               report 1328408 (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
  *
  */
 
@@ -51,7 +42,7 @@ import java.awt.Paint;
 /**
  * Class to extend the number of Colors available to the charts. This
  * extends the java.awt.Color object and extends the number of final
- * Colors publically accessible.
+ * Colors publicly accessible.
  */
 public class ChartColor extends Color {
 

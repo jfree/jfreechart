@@ -27,19 +27,10 @@
  * ----------------------------------
  * AbstractPieItemLabelGenerator.java
  * ----------------------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited.
+ * (C) Copyright 2004-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 09-Nov-2004 : Version 1, draws out code from StandardPieItemLabelGenerator
- *               and StandardPieToolTipGenerator (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 03-May-2006 : Fixed bug 1480978, a problem in the clone() method (DG);
- * 23-Nov-2007 : Implemented hashCode() (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 

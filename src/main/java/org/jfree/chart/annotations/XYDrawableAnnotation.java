@@ -27,18 +27,10 @@
  * -------------------------
  * XYDrawableAnnotation.java
  * -------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited.
+ * (C) Copyright 2003-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 21-May-2003 : Version 1 (DG);
- * 21-Jan-2004 : Update for renamed method in ValueAxis (DG);
- * 30-Sep-2004 : Added support for tool tips and URLs (DG);
- * 18-Jun-2008 : Added scaling factor (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 

@@ -27,20 +27,10 @@
  * ------------------------------
  * YIntervalSeriesCollection.java
  * ------------------------------
- * (C) Copyright 2006-2013, by Object Refinery Limited.
+ * (C) Copyright 2006-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 20-Oct-2006 : Version 1 (DG);
- * 27-Nov-2006 : Added clone() override (DG);
- * 20-Feb-2007 : Added getYValue(), getStartYValue() and getEndYValue()
- *               methods (DG);
- * 18-Jan-2008 : Added removeSeries() and removeAllSeries() methods (DG);
- * 22-Apr-2008 : Implemented PublicCloneable (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 

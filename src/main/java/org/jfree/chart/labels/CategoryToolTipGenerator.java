@@ -27,15 +27,10 @@
  * -----------------------------
  * CategoryToolTipGenerator.java
  * -----------------------------
- * (C) Copyright 2001-2008, by Object Refinery Limited.
+ * (C) Copyright 2001-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 15-Apr-2004 : Separated tool tip method from CategoryItemLabelGenerator
- *               interface (DG);
  *
  */
 

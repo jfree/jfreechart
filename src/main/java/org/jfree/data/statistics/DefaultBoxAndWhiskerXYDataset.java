@@ -27,34 +27,11 @@
  * ----------------------------------
  * DefaultBoxAndWhiskerXYDataset.java
  * ----------------------------------
- * (C) Copyright 2003-2008, by David Browning and Contributors.
+ * (C) Copyright 2003-2020, by David Browning and Contributors.
  *
  * Original Author:  David Browning (for Australian Institute of Marine
  *                   Science);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 05-Aug-2003 : Version 1, contributed by David Browning (DG);
- * 08-Aug-2003 : Minor changes to comments (DB)
- *               Allow average to be null  - average is a perculiar AIMS
- *               requirement which probably should be stripped out and overlaid
- *               if required...
- *               Added a number of methods to allow the max and min non-outlier
- *               and non-farout values to be calculated
- * 12-Aug-2003   Changed the getYValue to return the highest outlier value
- *               Added getters and setters for outlier and farout coefficients
- * 27-Aug-2003 : Renamed DefaultBoxAndWhiskerDataset
- *               --> DefaultBoxAndWhiskerXYDataset (DG);
- * 06-May-2004 : Now extends AbstractXYDataset (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
- *               getYValue() (DG);
- * 18-Nov-2004 : Updated for changes in RangeInfo interface (DG);
- * 11-Jan-2005 : Removed deprecated code in preparation for the 1.0.0
- *               release (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 02-Feb-2007 : Removed author tags from all over JFreeChart sources (DG);
- * 12-Nov-2007 : Implemented equals() and clone() (DG);
  *
  */
 

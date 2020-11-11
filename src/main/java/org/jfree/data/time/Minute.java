@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,41 +27,10 @@
  * -----------
  * Minute.java
  * -----------
- * (C) Copyright 2001-2016, by Object Refinery Limited.
+ * (C) Copyright 2001-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 11-Oct-2001 : Version 1 (DG);
- * 18-Dec-2001 : Changed order of parameters in constructor (DG);
- * 19-Dec-2001 : Added a new constructor as suggested by Paul English (DG);
- * 14-Feb-2002 : Fixed bug in Minute(Date) constructor, and changed the range
- *               to start from zero instead of one (DG);
- * 26-Feb-2002 : Changed getStart(), getMiddle() and getEnd() methods to
- *               evaluate with reference to a particular time zone (DG);
- * 13-Mar-2002 : Added parseMinute() method (DG);
- * 19-Mar-2002 : Changed API, the minute is now defined in relation to an
- *               Hour (DG);
- * 10-Sep-2002 : Added getSerialIndex() method (DG);
- * 07-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 10-Jan-2003 : Changed base class and method names (DG);
- * 13-Mar-2003 : Moved to com.jrefinery.data.time package and implemented
- *               Serializable (DG);
- * 21-Oct-2003 : Added hashCode() method, and new constructor for
- *               convenience (DG);
- * 30-Sep-2004 : Replaced getTime().getTime() with getTimeInMillis() (DG);
- * 04-Nov-2004 : Reverted change of 30-Sep-2004, because it won't work for
- *               JDK 1.3 (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 05-Oct-2006 : Updated API docs (DG);
- * 06-Oct-2006 : Refactored to cache first and last millisecond values (DG);
- * 11-Dec-2006 : Fix for previous() - bug 1611872 (DG);
- * 16-Sep-2008 : Deprecated DEFAULT_TIME_ZONE (DG);
- * 02-Mar-2009 : Added new constructor that specifies Locale (DG);
- * 05-Jul-2012 : Replaced getTime().getTime() with getTimeInMillis() (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 

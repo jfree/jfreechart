@@ -27,7 +27,7 @@
  * --------------
  * PolarPlot.java
  * --------------
- * (C) Copyright 2004-2017, by Solution Engineering, Inc. and Contributors.
+ * (C) Copyright 2004-2020, by Solution Engineering, Inc. and Contributors.
  *
  * Original Author:  Daniel Bridenbecker, Solution Engineering, Inc.;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);

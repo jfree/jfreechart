@@ -27,16 +27,10 @@
  * -------------------------
  * GanttCategoryDataset.java
  * -------------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited.
+ * (C) Copyright 2003-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 16-Sep-2003 : Version 1, based on MultiIntervalCategoryDataset (DG);
- * 23-Sep-2003 : Fixed Checkstyle issues (DG);
- * 12-May-2008 : Updated API docs (DG);
  *
  */
 

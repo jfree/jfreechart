@@ -27,20 +27,10 @@
  * -------------
  * DialPlot.java
  * -------------
- * (C) Copyright 2006-2017, by Object Refinery Limited.
+ * (C) Copyright 2006-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 03-Nov-2006 : Version 1 (DG);
- * 08-Mar-2007 : Fix in hashCode() (DG);
- * 17-Oct-2007 : Fixed listener registration/deregistration bugs (DG);
- * 24-Oct-2007 : Maintain pointers in their own list, so they can be
- *               drawn after other layers (DG);
- * 15-Feb-2008 : Fixed clipping bug (1873160) (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 

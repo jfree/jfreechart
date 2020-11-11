@@ -27,20 +27,10 @@
  * --------------------------
  * CategoryLabelPosition.java
  * --------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 31-Oct-2003 : Version 1 (DG);
- * 17-Feb-2004 : Added new constructor (DG);
- * 23-Mar-2004 : Added width calculation parameters (DG);
- * 07-Jan-2005 : Fixed bug in equals() method (DG);
- * 11-Jan-2005 : Removed deprecated constructor in preparation for the 1.0.0
- *               release (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 

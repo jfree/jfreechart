@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * --------------
  * Crosshair.java
  * --------------
- * (C) Copyright 2009-2017, by Object Refinery Limited.
+ * (C) Copyright 2009-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 13-Feb-2009 : Version 1 (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 

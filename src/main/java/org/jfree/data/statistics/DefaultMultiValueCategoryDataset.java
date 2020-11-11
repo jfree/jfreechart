@@ -27,16 +27,10 @@
  * -------------------------------------
  * DefaultMultiValueCategoryDataset.java
  * -------------------------------------
- * (C) Copyright 2007-2016, by David Forslund and Contributors.
+ * (C) Copyright 2007-2020, by David Forslund and Contributors.
  *
  * Original Author:  David Forslund;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 08-Oct-2007 : Version 1, see patch 1780779 (DG);
- * 06-Nov-2007 : Return EMPTY_LIST not null from getValues() (DG);
- * 02-JUL-2013 : Use ParamChecks (DG);
  * 
  */
 

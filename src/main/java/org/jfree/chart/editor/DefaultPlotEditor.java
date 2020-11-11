@@ -27,20 +27,12 @@
  * ----------------------
  * DefaultPlotEditor.java
  * ----------------------
- * (C) Copyright 2005-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Andrzej Porebski;
  *                   Arnaud Lelievre;
  *                   Daniel Gredler;
- *
- * Changes:
- * --------
- * 24-Nov-2005 : Version 1, based on PlotPropertyEditPanel.java (DG);
- * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
- *               Jess Thrysoee (DG);
- * 27-Feb-2009 : Fixed bug 2612649, NullPointerException (DG);
- * 03-Nov-2011 : Added support for DefaultPolarPlotEditor (MH);
  *
  */
 

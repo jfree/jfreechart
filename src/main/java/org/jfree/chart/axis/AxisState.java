@@ -27,15 +27,10 @@
  * --------------
  * AxisState.java
  * --------------
- * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 03-Nov-2003 : Added standard header (DG);
- * 07-Nov-2003 : Added 'max' attribute (DG);
  *
  */
 

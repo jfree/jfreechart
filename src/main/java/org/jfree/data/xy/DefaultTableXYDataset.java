@@ -27,37 +27,12 @@
  * --------------------------
  * DefaultTableXYDataset.java
  * --------------------------
- * (C) Copyright 2003-2016, by Richard Atkinson and Contributors.
+ * (C) Copyright 2003-2020, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributor(s):   Jody Brownell;
  *                   David Gilbert (for Object Refinery Limited);
  *                   Andreas Schroeder;
- *
- * Changes:
- * --------
- * 27-Jul-2003 : XYDataset that forces each series to have a value for every
- *               X-point which is essential for stacked XY area charts (RA);
- * 18-Aug-2003 : Fixed event notification when removing and updating
- *               series (RA);
- * 22-Sep-2003 : Functionality moved from TableXYDataset to
- *               DefaultTableXYDataset (RA);
- * 23-Dec-2003 : Added patch for large datasets, submitted by Jody
- *               Brownell (DG);
- * 16-Feb-2004 : Added pruning methods (DG);
- * 31-Mar-2004 : Provisional implementation of IntervalXYDataset (AS);
- * 01-Apr-2004 : Sound implementation of IntervalXYDataset (AS);
- * 05-May-2004 : Now extends AbstractIntervalXYDataset (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
- *               getYValue() (DG);
- * 18-Aug-2004 : Moved from org.jfree.data --> org.jfree.data.xy (DG);
- * 11-Jan-2005 : Removed deprecated code in preparation for the 1.0.0
- *               release (DG);
- * 05-Oct-2005 : Made the interval delegate a dataset listener (DG);
- * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
- * 22-Apr-2008 : Implemented PublicCloneable (DG);
- * 10-Jun-2009 : Simplified getX() and getY() (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  * 
  */
 

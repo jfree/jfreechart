@@ -27,15 +27,10 @@
  * -----------------------
  * AbstractXYZDataset.java
  * -----------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited.
+ * (C) Copyright 2004-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited).
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 05-May-2004 : Version 1 (DG);
- * 15-Jul-2004 : Switched getZ() and getZValue() (DG);
  *
  */
 

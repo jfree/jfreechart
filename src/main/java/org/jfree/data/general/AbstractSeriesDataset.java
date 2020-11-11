@@ -27,18 +27,10 @@
  * --------------------------
  * AbstractSeriesDataset.java
  * --------------------------
- * (C) Copyright 2001-2008, by Object Refinery Limited.
+ * (C) Copyright 2001-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 17-Nov-2001 : Version 1 (DG);
- * 28-Mar-2002 : Implemented SeriesChangeListener interface (DG);
- * 04-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 04-Feb-2003 : Removed redundant methods (DG);
- * 27-Mar-2003 : Implemented Serializable (DG);
  *
  */
 

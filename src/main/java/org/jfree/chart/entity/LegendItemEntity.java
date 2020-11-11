@@ -27,18 +27,10 @@
  * ---------------------
  * LegendItemEntity.java
  * ---------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 05-Jun-2003 : Version 1 (DG);
- * 20-May-2004 : Added equals() method and implemented Cloneable and
- *               Serializable (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 18-May-2007 : Added dataset and seriesKey fields (DG);
  *
  */
 

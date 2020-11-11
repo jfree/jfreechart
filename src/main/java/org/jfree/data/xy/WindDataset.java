@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * ----------------
  * WindDataset.java
  * ----------------
- * (C) Copyright 2001-2008, by Achilleus Mantzios and Contributors.
+ * (C) Copyright 2001-2020, by Achilleus Mantzios and Contributors.
  *
  * Original Author:  Achilleus Mantzios;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 06-Feb-2002 : Version 1, based on code contributed by Achilleus
- *               Mantzios (DG);
  *
  */
 

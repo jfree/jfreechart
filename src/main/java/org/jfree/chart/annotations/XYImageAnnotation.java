@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,23 +27,11 @@
  * ----------------------
  * XYImageAnnotation.java
  * ----------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Mike Harris;
  *                   Peter Kolb (patch 2809117);
- *
- * Changes:
- * --------
- * 01-Dec-2003 : Version 1 (DG);
- * 21-Jan-2004 : Update for renamed method in ValueAxis (DG);
- * 18-May-2004 : Fixed bug with plot orientation (DG);
- * 29-Sep-2004 : Now extends AbstractXYAnnotation, with modified draw()
- *               method signature and updated equals() method (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 01-Dec-2006 : Added anchor attribute (see patch 1584860 from
- *               Mike Harris) (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 

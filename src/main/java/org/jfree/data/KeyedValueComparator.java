@@ -27,17 +27,10 @@
  * -------------------------
  * KeyedValueComparator.java
  * -------------------------
- * (C) Copyright 2003-2012, by Object Refinery Limited.
+ * (C) Copyright 2003-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 05-Mar-2003 : Version 1 (DG);
- * 27-Aug-2003 : Moved SortOrder from org.jfree.data --> org.jfree.util (DG);
- * 12-Jan-2005 : Added accessor methods (DG);
- * 23-Sep-2012 : Make this class serializable (DG);
  *
  */
 

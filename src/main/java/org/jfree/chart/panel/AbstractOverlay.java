@@ -27,15 +27,10 @@
  * --------------------
  * AbstractOverlay.java
  * --------------------
- * (C) Copyright 2009-2016, by Object Refinery Limited.
+ * (C) Copyright 2009-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 09-Apr-2009 : Version 1 (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 

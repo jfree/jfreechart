@@ -27,30 +27,11 @@
  * ----------------------------------------
  * DefaultBoxAndWhiskerCategoryDataset.java
  * ----------------------------------------
- * (C) Copyright 2003-2008, by David Browning and Contributors.
+ * (C) Copyright 2003-2020, by David Browning and Contributors.
  *
  * Original Author:  David Browning (for Australian Institute of Marine
  *                   Science);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 05-Aug-2003 : Version 1, contributed by David Browning (DG);
- * 27-Aug-2003 : Moved from org.jfree.data --> org.jfree.data.statistics (DG);
- * 12-Nov-2003 : Changed 'data' from private to protected and added a new 'add'
- *               method as proposed by Tim Bardzil.  Also removed old code (DG);
- * 01-Mar-2004 : Added equals() method (DG);
- * 18-Nov-2004 : Updates for changes in RangeInfo interface (DG);
- * 11-Jan-2005 : Removed deprecated code in preparation for the 1.0.0
- *               release (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 02-Feb-2007 : Removed author tags from all over JFreeChart sources (DG);
- * 17-Apr-2007 : Fixed bug 1701822 (DG);
- * 13-Jun-2007 : Fixed error in previous patch (DG);
- * 28-Sep-2007 : Fixed cloning bug (DG);
- * 02-Oct-2007 : Fixed bug in updating cached bounds (DG);
- * 03-Oct-2007 : Fixed another bug in updating cached bounds, added removal
- *               methods (DG);
  *
  */
 

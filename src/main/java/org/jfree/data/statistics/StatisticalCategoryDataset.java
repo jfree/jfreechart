@@ -27,19 +27,10 @@
  * -------------------------------
  * StatisticalCategoryDataset.java
  * -------------------------------
- * (C) Copyright 2002-2009, by Pascal Collet and Contributors.
+ * (C) Copyright 2002-2020, by Pascal Collet and Contributors.
  *
  * Original Author:  Pascal Collet;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 21-Aug-2002 : Version 1, contributed by Pascal Collet (DG);
- * 07-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 24-Oct-2002 : Amendments in line with changes to the CategoryDataset
- *               interface (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 02-Feb-2007 : Removed author tags from all over JFreeChart sources (DG);
  *
  */
 

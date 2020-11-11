@@ -27,21 +27,10 @@
  * -----------------------
  * RelativeDateFormat.java
  * -----------------------
- * (C) Copyright 2006-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Michael Siemer;
- *
- * Changes:
- * --------
- * 01-Nov-2006 : Version 1 (DG);
- * 23-Nov-2006 : Added argument checks, updated equals(), added clone() and
- *               hashCode() (DG);
- * 15-Feb-2008 : Applied patch 1873328 by Michael Siemer, with minor
- *               modifications (DG);
- * 01-Sep-2008 : Added new fields for hour and minute formatting, based on
- *               patch 2033092 (DG);
- * 02-Jul-2013 : Use ParamChecks, and fix NB warnings (DG);
  *
  */
 

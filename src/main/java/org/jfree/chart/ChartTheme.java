@@ -27,14 +27,10 @@
  * ---------------
  * ChartTheme.java
  * ---------------
- * (C) Copyright 2008-2016 by Object Refinery Limited.
+ * (C) Copyright 2008-2020 by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 14-Aug-2008 : Version 1 (DG);
  *
  */
 

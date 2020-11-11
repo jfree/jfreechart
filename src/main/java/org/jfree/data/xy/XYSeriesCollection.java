@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,39 +27,10 @@
  * -----------------------
  * XYSeriesCollection.java
  * -----------------------
- * (C) Copyright 2001-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2001-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Aaron Metzger;
- *
- * Changes
- * -------
- * 15-Nov-2001 : Version 1 (DG);
- * 03-Apr-2002 : Added change listener code (DG);
- * 29-Apr-2002 : Added removeSeries, removeAllSeries methods (ARM);
- * 07-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 26-Mar-2003 : Implemented Serializable (DG);
- * 04-Aug-2003 : Added getSeries() method (DG);
- * 31-Mar-2004 : Modified to use an XYIntervalDelegate.
- * 05-May-2004 : Now extends AbstractIntervalXYDataset (DG);
- * 18-Aug-2004 : Moved from org.jfree.data --> org.jfree.data.xy (DG);
- * 17-Nov-2004 : Updated for changes to DomainInfo interface (DG);
- * 11-Jan-2005 : Removed deprecated code in preparation for 1.0.0 release (DG);
- * 28-Mar-2005 : Fixed bug in getSeries(int) method (1170825) (DG);
- * 05-Oct-2005 : Made the interval delegate a dataset listener (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 27-Nov-2006 : Added clone() override (DG);
- * 08-May-2007 : Added indexOf(XYSeries) method (DG);
- * 03-Dec-2007 : Added getSeries(Comparable) method (DG);
- * 22-Apr-2008 : Implemented PublicCloneable (DG);
- * 27-Feb-2009 : Overridden getDomainOrder() to detect when all series are
- *               sorted in ascending order (DG);
- * 06-Mar-2009 : Implemented RangeInfo (DG);
- * 06-Mar-2009 : Fixed equals() implementation (DG);
- * 10-Jun-2009 : Simplified code in getX() and getY() methods (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
- * 21-Nov-2013 : Fixed bug where removeSeries(int) was not deregistering 
- *               vetoable listener (DG);
  *
  */
 

@@ -27,15 +27,10 @@
  * --------------------
  * AxisChangeEvent.java
  * --------------------
- * (C) Copyright 2000-2008, by Object Refinery Limited.
+ * (C) Copyright 2000-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes (from 24-Aug-2001)
- * --------------------------
- * 24-Aug-2001 : Added standard source header. Fixed DOS encoding problem (DG);
- * 09-Oct-2002 : Fixed errors reported by Checkstyle (DG);
  *
  */
 
