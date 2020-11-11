@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,29 +27,11 @@
  * -------------------
  * TextAnnotation.java
  * -------------------
- * (C) Copyright 2002-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2002-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Peter Kolb (patch 2809117);
  *                   Martin Hoeller;
- *
- * Changes:
- * --------
- * 28-Aug-2002 : Version 1 (DG);
- * 07-Nov-2002 : Fixed errors reported by Checkstyle, added accessor
- *               methods (DG);
- * 13-Jan-2003 : Reviewed Javadocs (DG);
- * 26-Mar-2003 : Implemented Serializable (DG);
- * 02-Jun-2003 : Added anchor and rotation settings (DG);
- * 19-Aug-2003 : Added equals() method and implemented Cloneable (DG);
- * 29-Sep-2004 : Updated equals() method (DG);
- * 06-Jun-2005 : Fixed equals() method to work with GradientPaint (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 16-Jan-2007 : Added argument checks, fixed hashCode() method and updated
- *               API docs (DG);
- * 24-Jun-2009 : Fire change events (see patch 2809117 by PK) (DG);
- * 28-Oct-2011 : Added missing argument check, Bug #3428870 (MH);
- * 01-Jul-2013 : Added missing AnnotationChangeEvent for setText() (DG);
  * 
  */
 
