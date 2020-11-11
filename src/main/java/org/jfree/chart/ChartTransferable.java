@@ -27,16 +27,10 @@
  * ----------------------
  * ChartTransferable.java
  * ----------------------
- * (C) Copyright 2009-2016, by Object Refinery Limited.
+ * (C) Copyright 2009-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 08-Apr-2009 : Version 1, with inspiration from patch 1460845 (DG);
- * 05-May-2009 : Match the scaling options provided by the ChartPanel
- *               class (DG);
  *
  */
 
@@ -231,7 +225,7 @@ public class ChartTransferable implements Transferable {
             int minDrawW, int minDrawH, int maxDrawW, int maxDrawH) {
 
         BufferedImage image = new BufferedImage(w, h,
-                BufferedImage.TYPE_INT_ARGB);
+                BufferedImage.TYPE_INT_RGB); // bug #182
         Graphics2D g2 = image.createGraphics();
 
         // work out if scaling is required...
@@ -244,8 +238,7 @@ public class ChartTransferable implements Transferable {
             scaleX = drawWidth / minDrawW;
             drawWidth = minDrawW;
             scale = true;
-        }
-        else if (drawWidth > maxDrawW) {
+        } else if (drawWidth > maxDrawW) {
             scaleX = drawWidth / maxDrawW;
             drawWidth = maxDrawW;
             scale = true;
@@ -254,8 +247,7 @@ public class ChartTransferable implements Transferable {
             scaleY = drawHeight / minDrawH;
             drawHeight = minDrawH;
             scale = true;
-        }
-        else if (drawHeight > maxDrawH) {
+        } else if (drawHeight > maxDrawH) {
             scaleY = drawHeight / maxDrawH;
             drawHeight = maxDrawH;
             scale = true;

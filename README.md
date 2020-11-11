@@ -61,14 +61,15 @@ History
 
 ##### Version 1.5.2 (not yet released)
 - apply rendering hints to overlays (bug #187);
+- remove alpha channel from copy-to-clipboard (fixes bug #182);
 - update French translations (PR #186);
 - fix "Save_as" entries in localisation files (PR #184).
 
 ##### Version 1.5.1 (29 October 2020)
-- add DeviationStepRenderer (PR #173)
-- modify buffer in ChartPanel to handle high DPI displays (bug #170);
+- add `DeviationStepRenderer` (PR #173)
+- modify buffer in `ChartPanel` to handle high DPI displays (bug #170);
 - fix for exception on extreme zoom on NumberAxis (bug #64);
-- fix for LayeredBarRenderer (bug #169);
+- fix for `LayeredBarRenderer` (bug #169);
 - add Catalan translations (PR #117);
 - add automatic module name `org.jfree.jfreechart`;
 - migrate to JUnit 5;
