@@ -170,8 +170,8 @@ public class Crosshair implements Cloneable, PublicCloneable, Serializable {
         this.labelVisible = false;
         this.labelGenerator = new StandardCrosshairLabelGenerator();
         this.labelAnchor = RectangleAnchor.BOTTOM_LEFT;
-        this.labelXOffset = 3.0;
-        this.labelYOffset = 3.0;
+        this.labelXOffset = 5.0;
+        this.labelYOffset = 5.0;
         this.labelFont = new Font("Tahoma", Font.PLAIN, 12);
         this.labelPaint = Color.BLACK;
         this.labelBackgroundPaint = new Color(0, 0, 255, 63);
