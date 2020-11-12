@@ -61,6 +61,7 @@ History
 
 ##### Version 1.5.2 (not yet released)
 - apply rendering hints to overlays (bug #187);
+- ensure label offsets are used in `CrosshairOverlay` (PR #190);
 - remove alpha channel from copy-to-clipboard (fixes bug #182);
 - update French translations (PR #186);
 - fix "Save_as" entries in localisation files (PR #184).
