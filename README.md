@@ -78,6 +78,7 @@ History
 - fix for exception on extreme zoom on `NumberAxis` (bug #64);
 - remove alpha channel from copy-to-clipboard (fixes bug #182);
 - apply rendering hints to overlays - fixes bug #187;
+- don't draw disabled outlines on crosshair labels ([#189](https://github.com/jfree/jfreechart/pull/189));
 - removed ObjectUtils class (https://github.com/jfree/jfreechart/pull/163)
 - removed unused `URLUtilities` class (PR #162)
 - fixed `LayeredBarRenderer` (bugs #169 and #175);
