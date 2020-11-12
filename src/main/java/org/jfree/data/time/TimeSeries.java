@@ -45,7 +45,6 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -64,6 +63,8 @@ import org.jfree.data.general.SeriesException;
  * The time series will ensure that (a) all data items have the same type of
  * period (for example, {@link Day}) and (b) that each period appears at
  * most one time in the series.
+ * 
+ * @param <S>  the type for the series keys ({@code String} is commonly used).
  */
 public class TimeSeries<S extends Comparable<S>> extends Series<S> 
         implements Cloneable, Serializable {
@@ -731,7 +732,7 @@ public class TimeSeries<S extends Comparable<S>> extends Series<S>
      * @since 1.0.14
      */
     public void update(RegularTimePeriod period, double value) {
-      update(period, new Double(value));
+      update(period, Double.valueOf(value));
     }
 
     /**
@@ -813,7 +814,7 @@ public class TimeSeries<S extends Comparable<S>> extends Series<S>
      */
     public TimeSeriesDataItem addOrUpdate(RegularTimePeriod period,
                                           double value) {
-        return addOrUpdate(period, new Double(value));
+        return addOrUpdate(period, Double.valueOf(value));
     }
 
     /**

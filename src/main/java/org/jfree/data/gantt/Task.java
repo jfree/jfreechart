@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,19 +27,10 @@
  * ---------
  * Task.java
  * ---------
- * (C) Copyright 2003-2016, by Object Refinery Limited.
+ * (C) Copyright 2003-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 10-Jan-2003 : Version 1 (DG);
- * 16-Sep-2003 : Added percentage complete (DG);
- * 30-Jul-2004 : Added clone() and equals() methods and implemented
- *               Serializable (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
- * 19-Jan-2019 : Added missing hashCode (TH);
  *
  */
 
@@ -165,7 +156,7 @@ public class Task implements Cloneable, PublicCloneable, Serializable {
      * @param percent  the percentage.
      */
     public void setPercentComplete(double percent) {
-        setPercentComplete(new Double(percent));
+        setPercentComplete(Double.valueOf(percent));
     }
 
     /**
