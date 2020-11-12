@@ -27,7 +27,7 @@
  * ------------
  * PiePlot.java
  * ------------
- * (C) Copyright 2000-2017, by Andrzej Porebski and Contributors.
+ * (C) Copyright 2000-2020, by Andrzej Porebski and Contributors.
  *
  * Original Author:  Andrzej Porebski;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -2627,10 +2627,10 @@ public class PiePlot extends Plot implements Cloneable, Serializable {
                 double mid = this.startAngle + (this.direction.getFactor()
                         * ((runningTotal - v / 2.0) * 360) / totalValue);
                 if (Math.cos(Math.toRadians(mid)) < 0.0) {
-                    leftKeys.addValue(key, new Double(mid));
+                    leftKeys.addValue(key, mid);
                 }
                 else {
-                    rightKeys.addValue(key, new Double(mid));
+                    rightKeys.addValue(key, mid);
                 }
             }
         }

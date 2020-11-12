@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------
  * JDBCCategoryDataset.java
  * ------------------------
- * (C) Copyright 2002-2008, by Bryan Scott and Contributors.
+ * (C) Copyright 2002-2020, by Bryan Scott and Contributors.
  *
  * Original Author:  Bryan Scott; Andy;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -258,7 +258,7 @@ public class JDBCCategoryDataset extends DefaultCategoryDataset {
                         case Types.TIME:
                         case Types.TIMESTAMP: {
                             Date date = (Date) resultSet.getObject(column);
-                            Number value = new Long(date.getTime());
+                            Number value = date.getTime();
                             if (this.transpose) {
                                 setValue(value, columnKey, rowKey);
                             }
