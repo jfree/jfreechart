@@ -304,8 +304,8 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
                 if (crosshair.isLabelOutlineVisible()) {
                     g2.setPaint(crosshair.getLabelOutlinePaint());
                     g2.setStroke(crosshair.getLabelOutlineStroke());
+                    g2.draw(hotspot);
                 }
-                g2.draw(hotspot);
                 g2.setPaint(crosshair.getLabelPaint());
                 TextUtils.drawAlignedString(label, g2, xx, yy, alignPt);
                 g2.setFont(savedFont);
