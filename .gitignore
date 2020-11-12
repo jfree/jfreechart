@@ -9,3 +9,6 @@
 
 # Intellij Idea
 .idea
+*.iml
+*.ipr
+*.iws
