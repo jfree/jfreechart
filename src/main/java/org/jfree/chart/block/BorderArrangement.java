@@ -32,17 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * Changes:
- * --------
- * 22-Oct-2004 : Version 1 (DG);
- * 08-Feb-2005 : Updated for changes in RectangleConstraint (DG);
- * 24-Feb-2005 : Improved arrangeRR() method (DG);
- * 03-May-2005 : Implemented Serializable and added equals() method (DG);
- * 13-May-2005 : Fixed bugs in the arrange() method (DG);
- * 08-Apr-2008 : Fixed bug in arrangeFF() method where width is too small for
- *               left and right blocks (DG);
- * 21-Nov-2013 : Fixed bug #1084 (DG);
- *
  */
 
 package org.jfree.chart.block;

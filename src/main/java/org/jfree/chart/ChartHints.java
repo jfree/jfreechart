@@ -27,14 +27,10 @@
  * ---------------
  * ChartHints.java
  * ---------------
- * (C) Copyright 2014, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2014-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 27-Jun-2014 : Version 1 (DG);
  *
  */
 

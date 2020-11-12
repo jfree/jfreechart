@@ -31,13 +31,6 @@
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 07-Oct-2003 : Version 1 (DG);
- * 09-Jun-2005 : Added a convenience method to access the entity
- *               collection (DG);
- *
  */
 
 package org.jfree.chart.renderer;

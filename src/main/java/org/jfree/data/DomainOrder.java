@@ -27,14 +27,10 @@
  * ----------------
  * DomainOrder.java
  * ----------------
- * (C) Copyright 2004-2008, by Object Refinery Limited.
+ * (C) Copyright 2004-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 29-Jul-2004 : Version 1 (DG);
  *
  */
 

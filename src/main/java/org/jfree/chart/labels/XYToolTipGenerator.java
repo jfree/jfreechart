@@ -27,16 +27,10 @@
  * -----------------------
  * XYToolTipGenerator.java
  * -----------------------
- * (C) Copyright 2001-2008, by Object Refinery Limited.
+ * (C) Copyright 2001-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 15-Apr-2004 : Extracted the generateToolTip() method from the
- *               XYItemLabelGenerator interface and put it into this new
- *               interface (DG);
  *
  */
 

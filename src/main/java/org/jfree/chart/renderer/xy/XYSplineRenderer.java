@@ -34,17 +34,6 @@
  *                       http://www.wam.umd.edu/~petersd/);
  *                   David Gilbert (for Object Refinery Limited);
  *
- * Changes:
- * --------
- * 25-Jul-2007 : Version 1, contributed by Klaus Rheinwald (DG);
- * 03-Aug-2007 : Added new constructor (KR);
- * 25-Oct-2007 : Prevent duplicate control points (KR);
- * 19-May-2009 : Fixed FindBugs warnings, patch by Michal Wozniak (DG);
- * 14-Sep-2013 : Replaced Vector with List, general cleanup (KR);
- * 15-Sep-2013 : Added support to fill the area 'under' (between '0' and) the 
- *               spline(KR);
- * 15-Sep-2013 : Replaced ControlPoint with Point2D.Float (KR);
- *
  */
 
 package org.jfree.chart.renderer.xy;

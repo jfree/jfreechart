@@ -30,7 +30,7 @@
  * (C) Copyright 2011-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   John Matthews;
+ * Contributor(s):   John Matthews, Michal Wozniak;
  *
  */
 

@@ -27,19 +27,10 @@
  * ------------------
  * KeyToGroupMap.java
  * ------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 29-Apr-2004 : Version 1 (DG);
- * 07-Jul-2004 : Added a group list to ensure group index is consistent, fixed
- *               cloning problem (DG);
- * 18-Aug-2005 : Added casts in clone() method to suppress 1.5 compiler
- *               warnings - see patch 1260587 (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 

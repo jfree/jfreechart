@@ -32,14 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * Changes:
- * --------
- * 22-Oct-2004 : Version 1 (DG);
- * 02-Feb-2005 : Added toString() method (DG);
- * 08-Feb-2005 : Separated height and width constraints (DG);
- * 13-May-2005 : Added convenience constructor and new methods for
- *               transforming constraints (DG);
- *
  */
 
 package org.jfree.chart.block;

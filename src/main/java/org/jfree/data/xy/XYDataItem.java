@@ -27,21 +27,10 @@
  * ---------------
  * XYDataItem.java
  * ---------------
- * (C) Copyright 2003-2013, by Object Refinery Limited.
+ * (C) Copyright 2003-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 05-Aug-2003 : Renamed XYDataPair --> XYDataItem (DG);
- * 03-Feb-2004 : Fixed bug in equals() method (DG);
- * 21-Feb-2005 : Added setY(double) method (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 30-Nov-2007 : Implemented getXValue() and getYValue(), plus toString() for
- *               debugging use (DG);
- * 10-Jun-2009 : Reimplemented cloning (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 

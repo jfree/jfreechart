@@ -27,14 +27,10 @@
  * --------------------
  * ShadowGenerator.java
  * --------------------
- * (C) Copyright 2009, 2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2009-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 10-Jul-2009 : Version 1 (DG);
  *
  */
 

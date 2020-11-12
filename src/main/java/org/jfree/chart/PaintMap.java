@@ -27,17 +27,10 @@
  * -------------
  * PaintMap.java
  * -------------
- * (C) Copyright 2006-2016, by Object Refinery Limited.
+ * (C) Copyright 2006-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 27-Sep-2006 : Version 1 (DG);
- * 17-Jan-2007 : Changed TreeMap to HashMap, so that different classes that
- *               implement Comparable can be used as keys (DG);
- * 02-Jul-2013 : Use ParamChecks class (DG);
  *
  */
 

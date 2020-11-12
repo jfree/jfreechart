@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,20 +27,11 @@
  * ----------------------
  * XYTitleAnnotation.java
  * ----------------------
- * (C) Copyright 2007-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Andrew Mickish;
  *                   Peter Kolb (patch 2809117);
- *
- * Changes:
- * --------
- * 02-Feb-2007 : Version 1 (DG);
- * 30-Apr-2007 : Fixed equals() method (DG);
- * 26-Feb-2008 : Fixed NullPointerException when drawing chart with a null
- *               ChartRenderingInfo - see patch 1901599 by Andrew Mickish (DG);
- * 03-Sep-2008 : Moved from experimental to main (DG);
- * 24-Jun-2009 : Fire change events (see patch 2809117 by PK) (DG);
  *
  */
 

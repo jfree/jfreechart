@@ -27,16 +27,10 @@
  * ---------------
  * TimePeriod.java
  * ---------------
- * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 10-Jan-2003 : Version 1 (DG);
- * 13-Mar-2003 : Moved to com.jrefinery.data.time package (DG);
- * 27-Jan-2005 : Implemented Comparable (DG);
  *
  */
 

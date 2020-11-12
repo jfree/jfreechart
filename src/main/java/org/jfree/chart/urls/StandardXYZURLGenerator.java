@@ -32,10 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributors:     -;
  *
- * Changes:
- * --------
- * 03-Feb-2003 : Version 1 (DG);
- *
  */
 
 package org.jfree.chart.urls;

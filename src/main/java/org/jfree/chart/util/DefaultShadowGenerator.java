@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * ---------------------------
  * DefaultShadowGenerator.java
  * ---------------------------
- * (C) Copyright 2009-2017 by Object Refinery Limited and Contributors.
+ * (C) Copyright 2009-2020 by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 10-Jul-2009 : Version 1 (DG);
- * 29-Oct-2011 : Fixed Eclipse warnings (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 

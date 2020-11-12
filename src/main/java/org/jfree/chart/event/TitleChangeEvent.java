@@ -27,19 +27,10 @@
  * ---------------------
  * TitleChangeEvent.java
  * ---------------------
- * (C) Copyright 2000-2008, by Object Refinery Limited.
+ * (C) Copyright 2000-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes (from 22-Jun-2001)
- * --------------------------
- * 22-Jun-2001 : Changed Title to AbstractTitle while incorporating
- *               David Berry's changes (DG);
- * 24-Aug-2001 : Fixed DOS encoding problem (DG);
- * 07-Nov-2001 : Updated header (DG);
- * 09-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 08-Jan-2004 : Renamed AbstractTitle --> Title and moved to new package (DG);
  *
  */
 

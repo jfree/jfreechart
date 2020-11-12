@@ -27,48 +27,10 @@
  * ---------
  * Week.java
  * ---------
- * (C) Copyright 2001-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2001-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Aimin Han;
- *
- * Changes
- * -------
- * 11-Oct-2001 : Version 1 (DG);
- * 18-Dec-2001 : Changed order of parameters in constructor (DG);
- * 19-Dec-2001 : Added a new constructor as suggested by Paul English (DG);
- * 29-Jan-2002 : Worked on the parseWeek() method (DG);
- * 13-Feb-2002 : Fixed bug in Week(Date) constructor (DG);
- * 26-Feb-2002 : Changed getStart(), getMiddle() and getEnd() methods to
- *               evaluate with reference to a particular time zone (DG);
- * 05-Apr-2002 : Reinstated this class to the JCommon library (DG);
- * 24-Jun-2002 : Removed unnecessary main method (DG);
- * 10-Sep-2002 : Added getSerialIndex() method (DG);
- * 06-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 18-Oct-2002 : Changed to observe 52 or 53 weeks per year, consistent with
- *               GregorianCalendar. Thanks to Aimin Han for the code (DG);
- * 02-Jan-2003 : Removed debug code (DG);
- * 13-Mar-2003 : Moved to com.jrefinery.data.time package, and implemented
- *               Serializable (DG);
- * 21-Oct-2003 : Added hashCode() method (DG);
- * 24-May-2004 : Modified getFirstMillisecond() and getLastMillisecond() to
- *               take account of firstDayOfWeek setting in Java's Calendar
- *               class (DG);
- * 30-Sep-2004 : Replaced getTime().getTime() with getTimeInMillis() (DG);
- * 04-Nov-2004 : Reverted change of 30-Sep-2004, because it won't work for
- *               JDK 1.3 (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 06-Mar-2006 : Fix for bug 1448828, incorrect calculation of week and year
- *               for the first few days of some years (DG);
- * 05-Oct-2006 : Updated API docs (DG);
- * 06-Oct-2006 : Refactored to cache first and last millisecond values (DG);
- * 09-Jan-2007 : Fixed bug in next() (DG);
- * 28-Aug-2007 : Added new constructor to avoid problem in creating new
- *               instances (DG);
- * 19-Dec-2007 : Fixed bug in deprecated constructor (DG);
- * 16-Sep-2008 : Deprecated DEFAULT_TIME_ZONE (DG);
- * 05-Jul-2012 : Replaced getTime().getTime() with getTimeInMillis() (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 

@@ -27,16 +27,10 @@
  * ----------------------
  * AbstractDialLayer.java
  * ----------------------
- * (C) Copyright 2006-2008, by Object Refinery Limited.
+ * (C) Copyright 2006-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 06-Nov-2006 : Version 1 (DG);
- * 17-Nov-2006 : Added visible flag (DG);
- * 16-Oct-2007 : Implemented equals() and clone() (DG);
  *
  */
 

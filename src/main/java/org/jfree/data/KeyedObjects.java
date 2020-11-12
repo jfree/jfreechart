@@ -27,18 +27,10 @@
  * -----------------
  * KeyedObjects.java
  * -----------------
- * (C) Copyright 2003-2016, by Object Refinery Limited.
+ * (C) Copyright 2003-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 31-Oct-2002 : Version 1 (DG);
- * 11-Jan-2005 : Minor tidy up (DG);
- * 28-Sep-2007 : Clean up equals() method (DG);
- * 03-Oct-2007 : Make method behaviour consistent with DefaultKeyedValues (DG);
- * 03-Jul-2016 : Use ParamChecks (DG);
  *
  */
 

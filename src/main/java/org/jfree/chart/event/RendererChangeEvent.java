@@ -27,17 +27,10 @@
  * ------------------------
  * RendererChangeEvent.java
  * ------------------------
- * (C) Copyright 2003-2009, by Object Refinery Limited.
+ * (C) Copyright 2003-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 23-Oct-2003 : Version 1 (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 04-Apr-2007 : Fixed typo in API docs (DG);
- * 26-Mar-2009 : Added flag to signal visible series change (DG);
  *
  */
 

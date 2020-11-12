@@ -27,23 +27,10 @@
  * ----------------------
  * DefaultKeyedValue.java
  * ----------------------
- * (C) Copyright 2002-2016, by Object Refinery Limited.
+ * (C) Copyright 2002-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 31-Oct-2002 : Version 1 (DG);
- * 13-Mar-2003 : Added equals() method, and implemented Serializable (DG);
- * 18-Aug-2003 : Implemented Cloneable (DG);
- * 18-Aug-2004 : Moved from org.jfree.data --> org.jfree.data.base (DG);
- * 15-Sep-2004 : Added PublicCloneable interface (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 11-Jun-2007 : Added toString() method to help with debugging (DG);
- * 15-Feb-2008 : Prevent null key (DG);
- * 07-Apr-2008 : Removed to-do item (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 

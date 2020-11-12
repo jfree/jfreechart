@@ -27,17 +27,10 @@
  * ---------------------------
  * CategoryLabelPositions.java
  * ---------------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 06-Jan-2004 : Version 1 (DG);
- * 17-Feb-2004 : Added equals() method (DG);
- * 05-Nov-2004 : Adjusted settings for UP_90 and DOWN_90 (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 

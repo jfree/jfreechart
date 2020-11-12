@@ -32,21 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Pierre-Marie Le Biot;
  *
- * Changes:
- * --------
- * 22-Oct-2004 : Version 1 (DG);
- * 19-Apr-2005 : Added optional tooltip and URL text items,
- *               draw() method now returns entities if
- *               requested (DG);
- * 13-May-2005 : Added methods to set the font (DG);
- * 01-Sep-2005 : Added paint management (PMLB);
- *               Implemented equals() and clone() (PublicCloneable) (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 20-Jul-2006 : Fixed entity area in draw() method (DG);
- * 16-Mar-2007 : Fixed serialization when using GradientPaint (DG);
- * 10-Feb-2009 : Added alignment fields (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
- *
  */
 
 package org.jfree.chart.block;

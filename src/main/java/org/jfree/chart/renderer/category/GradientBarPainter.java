@@ -32,12 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * Changes:
- * --------
- * 19-Jun-2008 : Version 1 (DG);
- * 15-Aug-2008 : Use outline paint and shadow paint (DG);
- * 17-Sep-2013 : Fix coordinate error in gradient (DG);
- *
  */
 
 package org.jfree.chart.renderer.category;

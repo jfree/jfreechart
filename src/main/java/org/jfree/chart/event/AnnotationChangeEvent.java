@@ -27,14 +27,10 @@
  * --------------------------
  * AnnotationChangeEvent.java
  * --------------------------
- * (C) Copyright 2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2009-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  Peter Kolb (patch 2809117);
  * Contributor(s):   ;
- *
- * Changes:
- * --------
- * 20-Jun-2009 : Version 1 (PK);
  *
  */
 

@@ -32,21 +32,6 @@
  * Original Author:  Richard Atkinson;
  * Contributors:     David Gilbert (for Object Refinery Limited);
  *
- * Changes:
- * --------
- * 05-Aug-2002 : Version 1, contributed by Richard Atkinson;
- * 09-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 07-Mar-2003 : Modified to use KeyedValuesDataset and added pieIndex
- *               parameter (DG);
- * 21-Mar-2003 : Implemented Serializable (DG);
- * 24-Apr-2003 : Switched around PieDataset and KeyedValuesDataset (DG);
- * 31-Mar-2004 : Added an optional 'pieIndex' parameter (DG);
- * 13-Jan-2005 : Fixed for compliance with XHTML 1.0 (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 24-Nov-2006 : Fixed equals() method and added argument checks (DG);
- * 17-Apr-2007 : Encode section key in generateURL() (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
- *
  */
 
 package org.jfree.chart.urls;

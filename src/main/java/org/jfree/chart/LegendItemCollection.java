@@ -27,19 +27,10 @@
  * -------------------------
  * LegendItemCollection.java
  * -------------------------
- * (C) Copyright 2002-2016, by Object Refinery Limited.
+ * (C) Copyright 2002-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 07-Feb-2002 : Version 1 (DG);
- * 24-Sep-2002 : Added get(int) and getItemCount() methods (DG);
- * 02-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 18-Apr-2005 : Added equals() method and implemented Cloneable and
- *               Serializable (DG);
- * 23-Apr-2008 : Fixed clone() method (DG);
  *
  */
 

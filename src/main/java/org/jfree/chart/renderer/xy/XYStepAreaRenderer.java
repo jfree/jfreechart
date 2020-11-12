@@ -32,28 +32,7 @@
  * Original Author:  Matthias Rose (based on XYAreaRenderer.java);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Lukasz Rzeszotarski;
- *
- * Changes:
- * --------
- * 07-Oct-2003 : Version 1, contributed by Matthias Rose (DG);
- * 10-Feb-2004 : Added some getter and setter methods (DG);
- * 25-Feb-2004 : Replaced CrosshairInfo with CrosshairState.  Renamed
- *               XYToolTipGenerator --> XYItemLabelGenerator (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
- *               getYValue() (DG);
- * 11-Nov-2004 : Now uses ShapeUtilities to translate shapes (DG);
- * 06-Jul-2005 : Renamed get/setPlotShapes() --> get/setShapesVisible() (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 06-Jul-2006 : Modified to call dataset methods that return double
- *               primitives only (DG);
- * 06-Feb-2007 : Fixed bug 1086307, crosshairs with multiple axes (DG);
- * 14-Feb-2007 : Added equals() method override (DG);
- * 04-May-2007 : Set processVisibleItemsOnly flag to false (DG);
- * 14-May-2008 : Call addEntity() from within drawItem() (DG);
- * 19-May-2009 : Fixed FindBugs warnings, patch by Michal Wozniak (DG);
- * 05-Dec-2013 : Added setStepPoint() method (LR);
- * 18-Feb-2017 : Updates for crosshairs (bug #36) (DG);
- *
+ *                   Michal Wozniak;
  */
 
 package org.jfree.chart.renderer.xy;

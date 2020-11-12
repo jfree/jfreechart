@@ -31,12 +31,6 @@
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 19-Jun-2008 : Version 1 (DG);
- * 15-Aug-2008 : Use renderer's shadow paint (DG);
- *
  */
 
 package org.jfree.chart.renderer.category;

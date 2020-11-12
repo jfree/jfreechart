@@ -31,11 +31,6 @@
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 25-Nov-2009 : Version 1 (DG);
- *
  */
 
 package org.jfree.chart.plot;

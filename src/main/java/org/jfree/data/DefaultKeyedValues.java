@@ -27,34 +27,10 @@
  * -----------------------
  * DefaultKeyedValues.java
  * -----------------------
- * (C) Copyright 2002-2016, by Object Refinery Limited.
+ * (C) Copyright 2002-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Thomas Morgner;
- *
- * Changes:
- * --------
- * 31-Oct-2002 : Version 1 (DG);
- * 11-Feb-2003 : Fixed bug in getValue(key) method for unrecognised key (DG);
- * 05-Mar-2003 : Added methods to sort stored data 'by key' or 'by value' (DG);
- * 13-Mar-2003 : Implemented Serializable (DG);
- * 08-Apr-2003 : Modified removeValue(Comparable) method to fix bug 717049 (DG);
- * 18-Aug-2003 : Implemented Cloneable (DG);
- * 27-Aug-2003 : Moved SortOrder from org.jfree.data --> org.jfree.util (DG);
- * 09-Feb-2004 : Modified getIndex() method - see bug report 893256 (DG);
- * 15-Sep-2004 : Updated clone() method and added PublicCloneable
- *               interface (DG);
- * 25-Nov-2004 : Small update to the clone() implementation (DG);
- * 24-Feb-2005 : Added methods addValue(Comparable, double) and
- *               setValue(Comparable, double) for convenience (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 31-Jul-2006 : Added a clear() method (DG);
- * 01-Aug-2006 : Added argument check to getIndex() method (DG);
- * 30-Apr-2007 : Added insertValue() methods (DG);
- * 31-Oct-2007 : Performance improvements by using separate lists for keys and
- *               values (TM);
- * 21-Nov-2007 : Fixed bug in removeValue() method from previous patch (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 

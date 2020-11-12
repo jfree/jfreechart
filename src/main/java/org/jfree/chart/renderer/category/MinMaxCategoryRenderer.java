@@ -34,28 +34,6 @@
  *                   Christian W. Zuckschwerdt;
  *                   Nicolas Brodu (for Astrium and EADS Corporate Research
  *                   Center);
- *
- * Changes:
- * --------
- * 29-May-2002 : Version 1 (TP);
- * 02-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 24-Oct-2002 : Amendments for changes in CategoryDataset interface and
- *               CategoryToolTipGenerator interface (DG);
- * 05-Nov-2002 : Base dataset is now TableDataset not CategoryDataset (DG);
- * 17-Jan-2003 : Moved plot classes to a separate package (DG);
- * 10-Apr-2003 : Changed CategoryDataset to KeyedValues2DDataset in drawItem()
- *               method (DG);
- * 30-Jul-2003 : Modified entity constructor (CZ);
- * 08-Sep-2003 : Implemented Serializable (NB);
- * 29-Oct-2003 : Added workaround for font alignment in PDF output (DG);
- * 05-Nov-2004 : Modified drawItem() signature (DG);
- * 17-Nov-2005 : Added change events and argument checks (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
- * 09-Mar-2007 : Fixed problem with horizontal rendering (DG);
- * 28-Sep-2007 : Added equals() method override (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
- *
  */
 
 package org.jfree.chart.renderer.category;

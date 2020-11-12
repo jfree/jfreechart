@@ -27,15 +27,10 @@
  * ---------------
  * KeyedValue.java
  * ---------------
- * (C) Copyright 2002-2008, by Object Refinery Limited.
+ * (C) Copyright 2002-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 31-Oct-2002 : Version 1 (DG);
- * 18-Aug-2004 : Moved from org.jfree.data --> org.jfree.data.base (DG);
  *
  */
 

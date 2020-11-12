@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,27 +27,11 @@
  * -----------------------
  * CategoryItemEntity.java
  * -----------------------
- * (C) Copyright 2002-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2002-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Richard Atkinson;
  *                   Christian W. Zuckschwerdt;
- *
- * Changes:
- * --------
- * 23-May-2002 : Version 1 (DG);
- * 12-Jun-2002 : Added Javadoc comments (DG);
- * 26-Jun-2002 : Added getImageMapAreaTag() method (DG);
- * 05-Aug-2002 : Added new constructor to populate URLText
- *               Moved getImageMapAreaTag() to ChartEntity (superclass) (RA);
- * 03-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 30-Jul-2003 : Added CategoryDataset reference (CZ);
- * 20-May-2004 : Added equals() and clone() methods, and implemented
- *               Serializable (DG);
- * 11-Jan-2005 : Removed deprecated code in preparation for 1.0.0 release (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 18-May-2007 : Updated to use row and column keys to identify item (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 

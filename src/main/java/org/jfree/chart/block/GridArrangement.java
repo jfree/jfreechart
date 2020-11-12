@@ -27,16 +27,10 @@
  * --------------------
  * GridArrangement.java
  * --------------------
- * (C) Copyright 2005-2008, by Object Refinery Limited.
+ * (C) Copyright 2005-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 08-Feb-2005 : Version 1 (DG);
- * 03-Dec-2008 : Implemented missing methods, and fixed bugs reported in
- *               patch 2370487 (DG);
  *
  */
 

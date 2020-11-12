@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,17 +27,10 @@
  * ----------------------
  * IntervalXYDataset.java
  * ----------------------
- * (C) Copyright 2001-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2001-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  Mark Watson (www.markwatson.com);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 18-Oct-2001 : Version 1, thanks to Mark Watson (DG);
- * 22-Oct-2001 : Renamed DataSource.java --> Dataset.java etc (DG);
- * 06-May-2004 : Added methods that return double primitives (DG);
- * 15-Sep-2009 : Added clarifications to API docs (DG);
  *
  */
 

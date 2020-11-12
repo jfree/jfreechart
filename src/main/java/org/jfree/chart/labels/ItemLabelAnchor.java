@@ -27,18 +27,10 @@
  * --------------------
  * ItemLabelAnchor.java
  * --------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited.
+ * (C) Copyright 2003-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 29-Apr-2003 : Version 1 (DG);
- * 19-Feb-2004 : Moved to org.jfree.chart.labels package, added readResolve()
- *               method (DG);
- * 11-Jan-2005 : Removed deprecated code in preparation for the 1.0.0
- *               release (DG);
  *
  */
 

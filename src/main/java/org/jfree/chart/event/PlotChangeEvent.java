@@ -27,17 +27,10 @@
  * --------------------
  * PlotChangeEvent.java
  * --------------------
- * (C) Copyright 2000-2008, by Object Refinery Limited.
+ * (C) Copyright 2000-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes (from 24-Aug-2001)
- * --------------------------
- * 24-Aug-2001 : Added standard source header. Fixed DOS encoding problem (DG);
- * 07-Nov-2001 : Updated header (DG);
- * 09-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 17-Jan-2003 : Moved plot classes to a separate package (DG);
  *
  */
 
@@ -58,7 +51,8 @@ public class PlotChangeEvent extends ChartChangeEvent {
     /**
      * Creates a new PlotChangeEvent.
      *
-     * @param plot  the plot that generated the event.
+     * @param plot the plot that generated the event ({@code null} not 
+     *             permitted).
      */
     public PlotChangeEvent(Plot plot) {
         super(plot);
@@ -66,7 +60,7 @@ public class PlotChangeEvent extends ChartChangeEvent {
     }
 
     /**
-     * Returns the plot that generated the event.
+     * Returns the plot that generated the event (set in the constructor).
      *
      * @return The plot that generated the event.
      */

@@ -27,24 +27,10 @@
  * -----------------------------
  * StandardEntityCollection.java
  * -----------------------------
- * (C) Copyright 2001-2016, by Object Refinery Limited.
+ * (C) Copyright 2001-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 23-May-2002 : Version 1 (DG);
- * 26-Jun-2002 : Added iterator() method (DG);
- * 03-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 19-May-2004 : Implemented Serializable (DG);
- * 29-Sep-2004 : Renamed addEntity() --> add() and addEntities()
- *               --> addAll() (DG);
- * 19-Jan-2005 : Changed storage from Collection --> List (DG);
- * 20-May-2005 : Fixed bug 1113521 - inefficiency in getEntity() method (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 01-Dec-2006 : Implemented PublicCloneable and fixed clone() method (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 

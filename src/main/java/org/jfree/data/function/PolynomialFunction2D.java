@@ -32,12 +32,6 @@
  * Original Author:  Peter Kolb;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * Changes:
- * --------
- * 23-Mar-2009 : Version 1, patch 2795746 (PK);
- * 28-May-2009 : Integrated in JFreeChart with modifications (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
- *
  */
 
 package org.jfree.data.function;

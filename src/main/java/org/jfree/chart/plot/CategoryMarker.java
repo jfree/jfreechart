@@ -27,18 +27,10 @@
  * -------------------
  * CategoryMarker.java
  * -------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited.
+ * (C) Copyright 2005-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Nicolas Brodu;
- *
- * Changes
- * -------
- * 20-May-2005 : Version 1 (DG);
- * 19-Aug-2005 : Implemented equals(), fixed bug in constructor (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 05-Sep-2006 : Added MarkerChangeListener support (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 

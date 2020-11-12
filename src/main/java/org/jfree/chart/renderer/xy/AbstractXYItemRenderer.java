@@ -27,7 +27,7 @@
  * ---------------------------
  * AbstractXYItemRenderer.java
  * ---------------------------
- * (C) Copyright 2002-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2002-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Richard Atkinson;
@@ -36,95 +36,6 @@
  *                   Sergei Ivanov;
  *                   Peter Kolb (patch 2809117);
  *                   Martin Krauskopf;
- *
- * Changes:
- * --------
- * 15-Mar-2002 : Version 1 (DG);
- * 09-Apr-2002 : Added a getToolTipGenerator() method reflecting the change in
- *               the XYItemRenderer interface (DG);
- * 05-Aug-2002 : Added a urlGenerator member variable to support HTML image
- *               maps (RA);
- * 20-Aug-2002 : Added property change events for the tooltip and URL
- *               generators (DG);
- * 22-Aug-2002 : Moved property change support into AbstractRenderer class (DG);
- * 23-Sep-2002 : Fixed errors reported by Checkstyle tool (DG);
- * 18-Nov-2002 : Added methods for drawing grid lines (DG);
- * 17-Jan-2003 : Moved plot classes into a separate package (DG);
- * 25-Mar-2003 : Implemented Serializable (DG);
- * 01-May-2003 : Modified initialise() return type and drawItem() method
- *               signature (DG);
- * 15-May-2003 : Modified to take into account the plot orientation (DG);
- * 21-May-2003 : Added labels to markers (DG);
- * 05-Jun-2003 : Added domain and range grid bands (sponsored by Focus Computer
- *               Services Ltd) (DG);
- * 27-Jul-2003 : Added getRangeType() to support stacked XY area charts (RA);
- * 31-Jul-2003 : Deprecated all but the default constructor (DG);
- * 13-Aug-2003 : Implemented Cloneable (DG);
- * 16-Sep-2003 : Changed ChartRenderingInfo --> PlotRenderingInfo (DG);
- * 29-Oct-2003 : Added workaround for font alignment in PDF output (DG);
- * 05-Nov-2003 : Fixed marker rendering bug (833623) (DG);
- * 11-Feb-2004 : Updated labelling for markers (DG);
- * 25-Feb-2004 : Added updateCrosshairValues() method.  Moved deprecated code
- *               to bottom of source file (DG);
- * 16-Apr-2004 : Added support for IntervalMarker in drawRangeMarker() method
- *               - thanks to Tim Bardzil (DG);
- * 05-May-2004 : Fixed bug (948310) where interval markers extend beyond axis
- *               range (DG);
- * 03-Jun-2004 : Fixed more bugs in drawing interval markers (DG);
- * 26-Aug-2004 : Added the addEntity() method (DG);
- * 29-Sep-2004 : Added annotation support (with layers) (DG);
- * 30-Sep-2004 : Moved drawRotatedString() from RefineryUtilities -->
- *               TextUtilities (DG);
- * 06-Oct-2004 : Added findDomainBounds() method and renamed
- *               getRangeExtent() --> findRangeBounds() (DG);
- * 07-Jan-2005 : Removed deprecated code (DG);
- * 27-Jan-2005 : Modified getLegendItem() to omit hidden series (DG);
- * 24-Feb-2005 : Added getLegendItems() method (DG);
- * 08-Mar-2005 : Fixed positioning of marker labels (DG);
- * 20-Apr-2005 : Renamed XYLabelGenerator --> XYItemLabelGenerator and
- *               added generators for legend labels, tooltips and URLs (DG);
- * 01-Jun-2005 : Handle one dimension of the marker label adjustment
- *               automatically (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 20-Jul-2006 : Set dataset and series indices in LegendItem (DG);
- * 24-Oct-2006 : Respect alpha setting in markers (see patch 1567843 by Sergei
- *               Ivanov) (DG);
- * 24-Oct-2006 : Added code to draw outlines for interval markers (DG);
- * 24-Nov-2006 : Fixed cloning for legend item generators (DG);
- * 06-Feb-2007 : Added new updateCrosshairValues() method that takes into
- *               account multiple axis plots (see bug 1086307) (DG);
- * 20-Feb-2007 : Fixed equals() method implementation (DG);
- * 01-Mar-2007 : Fixed interval marker drawing (patch 1670686 thanks to
- *               Sergei Ivanov) (DG);
- * 22-Mar-2007 : Modified the tool tip generator look up (DG);
- * 23-Mar-2007 : Added drawDomainLine() method (DG);
- * 20-Apr-2007 : Updated getLegendItem() for renderer change, and deprecated
- *               itemLabelGenerator and toolTipGenerator override fields (DG);
- * 18-May-2007 : Set dataset and seriesKey for LegendItem (DG);
- * 12-Nov-2007 : Fixed domain and range band drawing methods (DG);
- * 07-Apr-2008 : Minor API doc update (DG);
- * 14-May-2008 : Updated addEntity() method to take plot orientation into
- *               account when the incoming area is null (DG);
- * 02-Jun-2008 : Added isPointInRect() method (DG);
- * 17-Jun-2008 : Apply legend shape, font and paint attributes (DG);
- * 09-Mar-2009 : Added getAnnotations() method (DG);
- * 27-Mar-2009 : Added new findDomainBounds() and findRangeBounds() methods to
- *               take account of hidden series (DG);
- * 01-Apr-2009 : Moved defaultEntityRadius up to superclass (DG);
- * 28-Apr-2009 : Updated getLegendItem() method to observe new
- *               'treatLegendShapeAsLine' flag (DG);
- * 24-Jun-2009 : Added support for annotation events - see patch 2809117
- *               by PK (DG);
- * 01-Sep-2009 : Bug 2840132 - set renderer index when drawing
- *               annotations (DG);
- * 06-Oct-2011 : Add utility methods to work with 1.4 API in GeneralPath (MK)
- * 03-Jul-2013 : Use ParamChecks (DG);
- * 11-Jan-2014 : Fix error in fillDomainGridBand method (DG);
- * 07-Apr-2014 : Don't use ObjectList anymore (DG);
- * 29-Jul-2014 : Add rendering hint to normalise domain and range lines (DG);
- * 24-Aug-2014 : Add beginElementGroup() method, part of JFreeSVG support (DG);
- * 18-Feb-2017 : Fix for crosshairs with multiple datasets / axes - see 
- *               bug #36 (DG);
  */
 
 package org.jfree.chart.renderer.xy;

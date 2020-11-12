@@ -32,19 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * Changes:
- * --------
- * 22-Oct-2004 : Version 1 (DG);
- * 02-Feb-2005 : Added accessor methods for margin (DG);
- * 04-Feb-2005 : Added equals() method and implemented Serializable (DG);
- * 03-May-2005 : Added null argument checks (DG);
- * 06-May-2005 : Added convenience methods for setting margin, border and
- *               padding (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 16-Mar-2007 : Changed border from BlockBorder to BlockFrame, updated
- *               equals(), and implemented Cloneable (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
- *
  */
 
 package org.jfree.chart.block;

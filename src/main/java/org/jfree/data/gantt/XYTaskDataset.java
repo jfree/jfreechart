@@ -27,15 +27,10 @@
  * ------------------
  * XYTaskDataset.java
  * ------------------
- * (C) Copyright 2008-2016, by Object Refinery Limited.
+ * (C) Copyright 2008-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 17-Sep-2008 : Version 1 (DG);
- * 03-Jul-2016 : Use ParamChecks (DG);
  *
  */
 

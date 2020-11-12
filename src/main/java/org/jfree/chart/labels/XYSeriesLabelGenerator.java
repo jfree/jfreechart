@@ -27,16 +27,10 @@
  * ---------------------------
  * XYSeriesLabelGenerator.java
  * ---------------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited.
+ * (C) Copyright 2004-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 16-Nov-2004 : Version 1 (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 24-Nov-2006 : Updated API docs (DG);
  *
  */
 

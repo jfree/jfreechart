@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,38 +27,13 @@
  * ---------------
  * LegendItem.java
  * ---------------
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Andrzej Porebski;
  *                   David Li;
  *                   Wolfgang Irler;
  *                   Luke Quinane;
- *
- * Changes (from 2-Oct-2002)
- * -------------------------
- * 02-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 17-Jan-2003 : Dropped outlineStroke attribute (DG);
- * 08-Oct-2003 : Applied patch for displaying series line style, contributed by
- *               Luke Quinane (DG);
- * 21-Jan-2004 : Added the shapeFilled flag (DG);
- * 04-Jun-2004 : Added equals() method, implemented Serializable (DG);
- * 25-Nov-2004 : Changes required by new LegendTitle implementation (DG);
- * 11-Jan-2005 : Removed deprecated code in preparation for the 1.0.0
- *               release (DG);
- * 20-Apr-2005 : Added tooltip and URL text (DG);
- * 28-Nov-2005 : Separated constructors for AttributedString labels (DG);
- * 10-Dec-2005 : Fixed serialization bug (1377239) (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 20-Jul-2006 : Added dataset and series index fields (DG);
- * 13-Dec-2006 : Added fillPaintTransformer attribute (DG);
- * 18-May-2007 : Added dataset and seriesKey fields (DG);
- * 03-Aug-2007 : Fixed null pointer exception (DG);
- * 23-Apr-2008 : Added new constructor and implemented Cloneable (DG);
- * 17-Jun-2008 : Added optional labelFont and labelPaint attributes (DG);
- * 15-Oct-2008 : Added new constructor (DG);
- * 28-Apr-2009 : Added various setter methods (DG);
- * 01-Jul-2013 : Use ParamChecks class (DG);
  *
  */
 

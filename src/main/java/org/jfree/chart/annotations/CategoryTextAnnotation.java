@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,25 +27,10 @@
  * ---------------------------
  * CategoryTextAnnotation.java
  * ---------------------------
- * (C) Copyright 2003-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Peter Kolb (patch 2809117);
- *
- * Changes:
- * --------
- * 02-Apr-2003 : Version 1 (DG);
- * 02-Jul-2003 : Added new text alignment and rotation options (DG);
- * 04-Jul-2003 : Added a category anchor option (DG);
- * 19-Aug-2003 : Added equals() method and implemented Cloneable (DG);
- * 21-Jan-2004 : Update for renamed method in ValueAxis (DG);
- * 30-Sep-2004 : Moved drawRotatedString() from RefineryUtilities
- *               --> TextUtilities (DG);
- * ------------- JFREECHART 1.0.x -------------------------------------------
- * 06-Mar-2007 : Implemented hashCode() (DG);
- * 23-Apr-2008 : Implemented PublicCloneable (DG);
- * 24-Jun-2009 : Fire change events (see patch 2809117 by PK) (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 

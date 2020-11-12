@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,21 +27,10 @@
  * --------------
  * DateTitle.java
  * --------------
- * (C) Copyright 2000-2017, by David Berry and Contributors.
+ * (C) Copyright 2000-2020, by David Berry and Contributors.
  *
  * Original Author:  David Berry;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes (from 18-Sep-2001)
- * --------------------------
- * 18-Sep-2001 : Added standard header (DG);
- * 09-Jan-2002 : Updated Javadoc comments (DG);
- * 07-Feb-2002 : Changed blank space around title from Insets --> Spacer, to
- *               allow for relative or absolute spacing (DG);
- * 26-Sep-2002 : Fixed errors reported by Checkstyle (DG);
- * 31-Jan-2005 : Updated for changes to super class (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
  *
  */
 
@@ -55,6 +44,11 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import org.jfree.chart.ui.HorizontalAlignment;
+import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.ui.VerticalAlignment;
+
 /**
  * A chart title that displays the date.
  * <p>
@@ -67,10 +61,6 @@ import java.util.Locale;
  * the given locale. For example, a date would appear as "January 17, 2000" in
  * the US, but "17 January 2000" in most European locales.
  */
-import org.jfree.chart.ui.HorizontalAlignment;
-import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.ui.RectangleInsets;
-import org.jfree.chart.ui.VerticalAlignment;
 public class DateTitle extends TextTitle implements Serializable {
 
     /** For serialization. */

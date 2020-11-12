@@ -27,39 +27,11 @@
  * ------------
  * LogAxis.java
  * ------------
- * (C) Copyright 2006-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Andrew Mickish (patch 1868745);
  *                   Peter Kolb (patches 1934255 and 2603321);
- *
- * Changes
- * -------
- * 24-Aug-2006 : Version 1 (DG);
- * 22-Mar-2007 : Use defaultAutoArrange attribute (DG);
- * 02-Aug-2007 : Fixed zooming bug, added support for margins (DG);
- * 14-Feb-2008 : Changed default minorTickCount to 9 - see bug report
- *               1892419 (DG);
- * 15-Feb-2008 : Applied a variation of patch 1868745 by Andrew Mickish to
- *               fix a labelling bug when the axis appears at the top or
- *               right of the chart (DG);
- * 19-Mar-2008 : Applied patch 1902418 by Andrew Mickish to fix bug in tick
- *               labels for vertical axis (DG);
- * 26-Mar-2008 : Changed createTickLabel() method from private to protected -
- *               see patch 1918209 by Andrew Mickish (DG);
- * 25-Sep-2008 : Moved minor tick fields up to superclass, see patch 1934255
- *               by Peter Kolb (DG);
- * 14-Jan-2009 : Fetch minor ticks from TickUnit, and corrected
- *               createLogTickUnits() (DG);
- * 21-Jan-2009 : No need to call setMinorTickCount() in constructor (DG);
- * 19-Mar-2009 : Added entity support - see patch 2603321 by Peter Kolb (DG);
- * 30-Mar-2009 : Added pan(double) method (DG);
- * 28-Oct-2011 : Fixed endless loop for 0 TickUnit, # 3429707 (MH);
- * 02-Jul-2013 : Use ParamChecks (DG);
- * 01-Aug-2013 : Added attributedLabel override to support superscripts,
- *               subscripts and more (DG);
- * 18-Mar-2014 : Add support for super-scripted tick labels (DG);
- * 
  */
 
 package org.jfree.chart.axis;

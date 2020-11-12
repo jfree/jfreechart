@@ -27,18 +27,11 @@
  * ---------------------------------------
  * StandardCategoryItemLabelGenerator.java
  * ---------------------------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited.
+ * (C) Copyright 2004-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * Changes
- * -------
- * 11-May-2004 : Version 1 (DG);
- * 20-Apr-2005 : Renamed StandardCategoryLabelGenerator
- *               --> StandardCategoryItemLabelGenerator (DG);
- * ------------- JFREECHART 1.0.0 ---------------------------------------------
- * 03-May-2005 : Added equals() implementation, to fix bug 1481087 (DG);
  */
 
 package org.jfree.chart.labels;

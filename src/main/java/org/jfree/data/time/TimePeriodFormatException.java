@@ -27,15 +27,10 @@
  * ------------------------------
  * TimePeriodFormatException.java
  * ------------------------------
- * (C) Copyright 2001-2008, by Object Refinery Limited.
+ * (C) Copyright 2001-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 07-Dec-2001 : Version 1 (DG);
- * 13-Mar-2003 : Moved to com.jrefinery.data.time package (DG);
  */
 
 package org.jfree.data.time;

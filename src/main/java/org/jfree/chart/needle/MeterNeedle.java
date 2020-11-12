@@ -34,16 +34,6 @@
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Nicolas Brodu (for Astrium and EADS Corporate Research
  *                   Center);
- *
- * Changes:
- * --------
- * 25-Sep-2002 : Version 1, contributed by Bryan Scott (DG);
- * 07-Nov-2002 : Fixed errors reported by Checkstyle (DG);
- * 01-Sep-2003 : Implemented Serialization (NB);
- * 16-Mar-2004 : Changed transform from private to protected (BRS);
- * 08-Jun-2005 : Fixed equals() method to handle GradientPaint (DG);
- * 22-Nov-2007 : Implemented hashCode() (DG);
- *
  */
 
 package org.jfree.chart.needle;

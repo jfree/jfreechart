@@ -27,18 +27,10 @@
  * -----------------------------------
  * StandardXYSeriesLabelGenerator.java
  * -----------------------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited.
+ * (C) Copyright 2004-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 16-Nov-2004 : Version 1 (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 24-Nov-2006 : Fixed equals() method and updated API docs (DG);
- * 31-Mar-2008 : Added hashCode() method to appease FindBugs (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 

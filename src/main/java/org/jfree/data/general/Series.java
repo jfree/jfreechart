@@ -27,30 +27,10 @@
  * -----------
  * Series.java
  * -----------
- * (C) Copyright 2001-2016, by Object Refinery Limited.
+ * (C) Copyright 2001-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 15-Nov-2001 : Version 1 (DG);
- * 29-Nov-2001 : Added cloning and property change support (DG);
- * 30-Jan-2002 : Added a description attribute and changed the constructors to
- *               protected (DG);
- * 07-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 13-Mar-2003 : Implemented Serializable (DG);
- * 01-May-2003 : Added equals() method (DG);
- * 26-Jun-2003 : Changed listener list to use EventListenerList - see bug
- *               757027 (DG);
- * 15-Oct-2003 : Added a flag to control whether or not change events are sent
- *               to registered listeners (DG);
- * 19-May-2005 : Made abstract (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 04-May-2006 : Updated API docs (DG);
- * 26-Sep-2007 : Added isEmpty() and getItemCount() methods (DG);
- * 16-Oct-2011 : Added vetoable property change support for series name (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  * 
  */
 

@@ -27,19 +27,10 @@
  * -------------------
  * IntervalMarker.java
  * -------------------
- * (C) Copyright 2002-2008, by Object Refinery Limited.
+ * (C) Copyright 2002-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 20-Aug-2002 : Added stroke to constructor in Marker class (DG);
- * 02-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 26-Mar-2003 : Implemented Serializable (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 05-Sep-2006 : Added MarkerChangeEvent notification (DG);
- * 18-Dec-2007 : Added new constructor (DG);
  *
  */
 

@@ -27,36 +27,10 @@
  * ------------------------------
  * CombinedRangeCategoryPlot.java
  * ------------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited.
+ * (C) Copyright 2003-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Nicolas Brodu;
- *
- * Changes:
- * --------
- * 16-May-2003 : Version 1 (DG);
- * 08-Aug-2003 : Adjusted totalWeight in remove() method (DG);
- * 19-Aug-2003 : Implemented Cloneable (DG);
- * 11-Sep-2003 : Fix cloning support (subplots) (NB);
- * 15-Sep-2003 : Implemented PublicCloneable.  Fixed errors in cloning and
- *               serialization (DG);
- * 16-Sep-2003 : Changed ChartRenderingInfo --> PlotRenderingInfo (DG);
- * 17-Sep-2003 : Updated handling of 'clicks' (DG);
- * 04-May-2004 : Added getter/setter methods for 'gap' attributes (DG);
- * 12-Nov-2004 : Implements the new Zoomable interface (DG);
- * 25-Nov-2004 : Small update to clone() implementation (DG);
- * 21-Feb-2005 : Fixed bug in remove() method (id = 1121172) (DG);
- * 21-Feb-2005 : The getLegendItems() method now returns the fixed legend
- *               items if set (DG);
- * 05-May-2005 : Updated draw() method parameters (DG);
- * 14-Nov-2007 : Updated setFixedDomainAxisSpaceForSubplots() method (DG);
- * 27-Mar-2008 : Add documentation for getDataRange() method (DG);
- * 31-Mar-2008 : Updated getSubplots() to return EMPTY_LIST for null
- *               subplots, as suggested by Richard West (DG);
- * 26-Jun-2008 : Fixed crosshair support (DG);
- * 11-Aug-2008 : Don't store totalWeight of subplots, calculate it as
- *               required (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 

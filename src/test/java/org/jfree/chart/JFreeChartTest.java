@@ -32,16 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * Changes:
- * --------
- * 11-Jun-2002 : Version 1 (DG);
- * 17-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 23-Sep-2003 : Removed null title test, since TM has added code to ensure
- *               null titles cannot be created (DG);
- * 24-Nov-2005 : Removed OldLegend (DG);
- * 16-May-2007 : Added some new tests (DG);
- * 29-Jul-2014 : Added testBug942() (DG);
- *
  */
 
 package org.jfree.chart;

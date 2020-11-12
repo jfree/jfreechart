@@ -27,14 +27,10 @@
  * -------------------------
  * ChartChangeEventType.java
  * -------------------------
- * (C) Copyright 2005-2008, by Object Refinery Limited.
+ * (C) Copyright 2005-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 18-Feb-2005 : Version 1 (DG);
  *
  */
 

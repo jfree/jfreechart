@@ -27,20 +27,10 @@
  * ---------------------------------------
  * AbstractCategoryItemLabelGenerator.java
  * ---------------------------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited.
+ * (C) Copyright 2005-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 11-May-2004 : Version 1, distilled from StandardCategoryLabelGenerator (DG);
- * 31-Jan-2005 : Added methods to return row and column labels (DG);
- * 17-May-2005 : Added percentage to item array (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 03-May-2006 : Added new constructor (DG);
- * 23-Nov-2007 : Implemented hashCode() (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 

@@ -27,18 +27,10 @@
  * ---------------------
  * ChartChangeEvent.java
  * ---------------------
- * (C) Copyright 2000-2008, by Object Refinery Limited.
+ * (C) Copyright 2000-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes (from 24-Aug-2001)
- * --------------------------
- * 24-Aug-2001 : Added standard source header. Fixed DOS encoding problem (DG);
- * 07-Nov-2001 : Updated header (DG);
- *               Change event type names (DG);
- * 09-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 18-Feb-2005 : Changed the type from int to ChartChangeEventType (DG);
  *
  */
 

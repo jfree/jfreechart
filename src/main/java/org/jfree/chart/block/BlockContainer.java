@@ -27,22 +27,10 @@
  * -------------------
  * BlockContainer.java
  * -------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited.
+ * (C) Copyright 2004-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 22-Oct-2004 : Version 1 (DG);
- * 02-Feb-2005 : Added isEmpty() method (DG);
- * 04-Feb-2005 : Added equals(), clone() and implemented Serializable (DG);
- * 08-Feb-2005 : Updated for changes in RectangleConstraint (DG);
- * 20-Apr-2005 : Added new draw() method (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 20-Jul-2006 : Perform translation directly on drawing area, not via
- *               Graphics2D (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 

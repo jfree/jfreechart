@@ -27,36 +27,11 @@
  * --------------------------------
  * DynamicTimeSeriesCollection.java
  * --------------------------------
- * (C) Copyright 2002-2016, by I. H. Thomae and Contributors.
+ * (C) Copyright 2002-2020, by I. H. Thomae and Contributors.
  *
  * Original Author:  I. H. Thomae (ithomae@ists.dartmouth.edu);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Ricardo JL Rufino (patch #310);
- *
- * Changes
- * -------
- * 22-Nov-2002 : Initial version completed
- *    Jan 2003 : Optimized advanceTime(), added implemnt'n of RangeInfo intfc
- *               (using cached values for min, max, and range); also added
- *               getOldestIndex() and getNewestIndex() ftns so client classes
- *               can use this class as the master "index authority".
- * 22-Jan-2003 : Made this class stand on its own, rather than extending
- *               class FastTimeSeriesCollection
- * 31-Jan-2003 : Changed TimePeriod --> RegularTimePeriod (DG);
- * 13-Mar-2003 : Moved to com.jrefinery.data.time package (DG);
- * 29-Apr-2003 : Added small change to appendData method, from Irv Thomae (DG);
- * 19-Sep-2003 : Added new appendData method, from Irv Thomae (DG);
- * 05-May-2004 : Now extends AbstractIntervalXYDataset.  This also required a
- *               change to the return type of the getY() method - I'm slightly
- *               unsure of the implications of this, so it might require some
- *               further amendment (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
- *               getYValue() (DG);
- * 11-Jan-2004 : Removed deprecated code in preparation for the 1.0.0
- *               release (DG);
- * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
- * 01-Jul-2014 : Add millisecond time period - see patch #310 by Ricardo JL
- *               Rufino (DG);
  *
  */
 

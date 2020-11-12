@@ -27,37 +27,12 @@
  * -----------------------------
  * DefaultPolarItemRenderer.java
  * -----------------------------
- * (C) Copyright 2004-2017, by Solution Engineering, Inc. and
+ * (C) Copyright 2004-2020, by Solution Engineering, Inc. and
  *     Contributors.
  *
  * Original Author:  Daniel Bridenbecker, Solution Engineering, Inc.;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Martin Hoeller (patch 2850344);
- *
- * Changes
- * -------
- * 19-Jan-2004 : Version 1, contributed by DB with minor changes by DG (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
- *               getYValue() (DG);
- * 04-Oct-2004 : Renamed BooleanUtils --> BooleanUtilities (DG);
- * 20-Apr-2005 : Update for change to LegendItem class (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 04-Aug-2006 : Implemented equals() and clone() (DG);
- * 02-Feb-2007 : Removed author tags from all over JFreeChart sources (DG);
- * 14-Mar-2007 : Fixed clone() method (DG);
- * 04-May-2007 : Fixed lookup for series paint and stroke (DG);
- * 18-May-2007 : Set dataset for LegendItem (DG);
- * 03-Sep-2009 : Applied patch 2850344 by Martin Hoeller (DG);
- * 27-Nov-2009 : Updated for modification to PolarItemRenderer interface (DG);
- * 03-Oct-2011 : Fixed potential NPE in equals() (MH);
- * 03-Oct-2011 : Added flag to connectFirstAndLastPoint (MH);
- * 03-Oct-2011 : Added tooltip and URL generator support (MH);
- * 03-Oct-2011 : Added some configuration options for the legend (MH);
- * 03-Oct-2011 : Added support for PolarPlot's angleOffset and direction (MH);
- * 16-Oct-2011 : Fixed serialization problems with fillComposite (MH);
- * 18-Sep-2012 : Fixed bug 3508799: seriesKey always null in LegendItem (DG);
- * 01-Jul-2013 : Remove deprecated method calls (DG);
- * 04-Jul-2013 : Fix rendering bug when axis is inverted (DG);
  * 
  */
 

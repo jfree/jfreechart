@@ -32,13 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * Changes:
- * --------
- * 05-Feb-2002 : Version 1 (DG);
- * 05-Feb-2005 : Added equals() method and implemented Serializable (DG);
- * 02-Oct-2007 : Added getMeanValue() and getStandardDeviationValue() methods
- *               for convenience, and toString() method for debugging (DG);
- *
  */
 
 package org.jfree.data.statistics;

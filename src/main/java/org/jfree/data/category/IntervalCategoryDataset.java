@@ -27,20 +27,10 @@
  * ----------------------------
  * IntervalCategoryDataset.java
  * ----------------------------
- * (C) Copyright 2002-2008, by Eduard Martinescu and Contributors.
+ * (C) Copyright 2002-2020, by Eduard Martinescu and Contributors.
  *
  * Original Author:  Eduard Martinescu;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 19-Mar-2002 : Version 1 contributed by Eduard Martinescu.  The interface
- *               name and method names have been renamed to be consistent with
- *               existing interfaces (DG);
- * 06-Jun-2002 : Updated Javadoc comments (DG);
- * 24-Oct-2002 : Categories and series are now indexed by int or Comparable,
- *               following changes made to the CategoryDataset interface (DG);
- * 12-May-2008 : Updated API docs (DG);
  *
  */
 

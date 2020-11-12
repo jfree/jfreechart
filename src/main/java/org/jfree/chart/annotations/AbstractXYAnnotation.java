@@ -27,17 +27,10 @@
  * -------------------------
  * AbstractXYAnnotation.java
  * -------------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited.
+ * (C) Copyright 2004-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Peter Kolb (patch 2809117);
- *
- * Changes:
- * --------
- * 29-Sep-2004 : Version 1 (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 06-Mar-2007 : Implemented hashCode() (DG);
- * 24-Jun-2009 : Now extends AbstractAnnotation (see patch 2809117 by PK) (DG);
  *
  */
 

@@ -27,15 +27,10 @@
  * ---------------------------
  * StandardTickUnitSource.java
  * ---------------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited.
+ * (C) Copyright 2003-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 23-Sep-2003 : Version 1 (DG);
- * 25-Oct-2007 : Implemented Serializable and equals() method (DG);
  *
  */
 

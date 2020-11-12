@@ -27,16 +27,10 @@
  * --------------------------
  * CustomPieURLGenerator.java
  * --------------------------
- * (C) Copyright 2004-2008, by David Basten and Contributors.
+ * (C) Copyright 2004-2020, by David Basten and Contributors.
  *
  * Original Author:  David Basten;
  * Contributors:     -;
- *
- * Changes:
- * --------
- * 04-Feb-2004 : Version 1, contributed by David Basten based on
- *               CustomXYURLGenerator by Richard Atkinson (added to main source
- *               tree on 25-May-2004);
  *
  */
 

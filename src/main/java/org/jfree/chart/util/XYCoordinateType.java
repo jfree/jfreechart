@@ -27,15 +27,10 @@
  * ---------------------
  * XYCoordinateType.java
  * ---------------------
- * (C) Copyright 2007, 2008 by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2020 by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 02-Feb-2007 : Version 1 (DG);
- * 03-Sep-2008 : Moved from experimental to main (DG);
  *
  */
 

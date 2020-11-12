@@ -27,7 +27,7 @@
  * ---------------------------
  * StandardXYItemRenderer.java
  * ---------------------------
- * (C) Copyright 2001-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2001-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Mark Watson (www.markwatson.com);
@@ -38,74 +38,6 @@
  *                   Bill Kelemen;
  *                   Nicolas Brodu (for Astrium and EADS Corporate Research
  *                   Center);
- *
- * Changes:
- * --------
- * 19-Oct-2001 : Version 1, based on code by Mark Watson (DG);
- * 22-Oct-2001 : Renamed DataSource.java --> Dataset.java etc. (DG);
- * 21-Dec-2001 : Added working line instance to improve performance (DG);
- * 22-Jan-2002 : Added code to lock crosshairs to data points.  Based on code
- *               by Jonathan Nash (DG);
- * 23-Jan-2002 : Added DrawInfo parameter to drawItem() method (DG);
- * 28-Mar-2002 : Added a property change listener mechanism so that the
- *               renderer no longer needs to be immutable (DG);
- * 02-Apr-2002 : Modified to handle null values (DG);
- * 09-Apr-2002 : Modified draw method to return void.  Removed the translated
- *               zero from the drawItem method.  Override the initialise()
- *               method to calculate it (DG);
- * 13-May-2002 : Added code from Andreas Schneider to allow changing
- *               shapes/colors per item (DG);
- * 24-May-2002 : Incorporated tooltips into chart entities (DG);
- * 25-Jun-2002 : Removed redundant code (DG);
- * 05-Aug-2002 : Incorporated URLs for HTML image maps into chart entities (RA);
- * 08-Aug-2002 : Added discontinuous lines option contributed by
- *               Norbert Kiesel (DG);
- * 20-Aug-2002 : Added user definable default values to be returned by
- *               protected methods unless overridden by a subclass (DG);
- * 23-Sep-2002 : Updated for changes in the XYItemRenderer interface (DG);
- * 02-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 25-Mar-2003 : Implemented Serializable (DG);
- * 01-May-2003 : Modified drawItem() method signature (DG);
- * 15-May-2003 : Modified to take into account the plot orientation (DG);
- * 29-Jul-2003 : Amended code that doesn't compile with JDK 1.2.2 (DG);
- * 30-Jul-2003 : Modified entity constructor (CZ);
- * 20-Aug-2003 : Implemented Cloneable and PublicCloneable (DG);
- * 24-Aug-2003 : Added null/NaN checks in drawItem (BK);
- * 08-Sep-2003 : Fixed serialization (NB);
- * 16-Sep-2003 : Changed ChartRenderingInfo --> PlotRenderingInfo (DG);
- * 21-Jan-2004 : Override for getLegendItem() method (DG);
- * 27-Jan-2004 : Moved working line into state object (DG);
- * 10-Feb-2004 : Changed drawItem() method to make cut-and-paste overriding
- *               easier (DG);
- * 25-Feb-2004 : Replaced CrosshairInfo with CrosshairState.  Renamed
- *               XYToolTipGenerator --> XYItemLabelGenerator (DG);
- * 08-Jun-2004 : Modified to use getX() and getY() methods (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
- *               getYValue() (DG);
- * 25-Aug-2004 : Created addEntity() method in superclass (DG);
- * 08-Oct-2004 : Added 'gapThresholdType' as suggested by Mike Watts (DG);
- * 11-Nov-2004 : Now uses ShapeUtilities to translate shapes (DG);
- * 23-Feb-2005 : Fixed getLegendItem() method to show lines.  Fixed bug
- *               1077108 (shape not visible for first item in series) (DG);
- * 10-Apr-2005 : Fixed item label positioning with horizontal orientation (DG);
- * 20-Apr-2005 : Use generators for legend tooltips and URLs (DG);
- * 27-Apr-2005 : Use generator for series label in legend (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 15-Jun-2006 : Fixed bug (1380480) for rendering series as path (DG);
- * 06-Feb-2007 : Fixed bug 1086307, crosshairs with multiple axes (DG);
- * 14-Mar-2007 : Fixed problems with the equals() and clone() methods (DG);
- * 23-Mar-2007 : Clean-up of shapesFilled attributes (DG);
- * 20-Apr-2007 : Updated getLegendItem() and drawItem() for renderer
- *               change (DG);
- * 17-May-2007 : Set datasetIndex and seriesIndex in getLegendItem()
- *               method (DG);
- * 18-May-2007 : Set dataset and seriesKey for LegendItem (DG);
- * 08-Jun-2007 : Fixed bug in entity creation (DG);
- * 21-Nov-2007 : Deprecated override flag methods (DG);
- * 02-Jun-2008 : Fixed tooltips for data items at lower edges of data area (DG);
- * 17-Jun-2008 : Apply legend shape, font and paint attributes (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
- * 18-Feb-2017 : Updates for crosshairs (bug #36) (DG);
  *
  */
 

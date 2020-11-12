@@ -31,16 +31,6 @@
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 02-Oct-2008 : Version 1 (DG);
- * 28-Apr-2009 : Fixed bug in legend shape display, and deprecated
- *               getLegendLine() and setLegendLine() - these methods
- *               are unnecessary because a mechanism already exists in the
- *               superclass for specifying a custom legend shape (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
- *
  */
 
 package org.jfree.chart.renderer.xy;

@@ -27,21 +27,10 @@
  * ----------------------------
  * BoxAndWhiskerCalculator.java
  * ----------------------------
- * (C) Copyright 2003-2016,  by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020,  by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 28-Aug-2003 : Version 1 (DG);
- * 17-Nov-2003 : Fixed bug in calculations of outliers and median (DG);
- * 10-Jan-2005 : Removed deprecated methods in preparation for 1.0.0
- *               release (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 15-Nov-2006 : Cleaned up handling of null arguments, and null or NaN items
- *               in the list (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 

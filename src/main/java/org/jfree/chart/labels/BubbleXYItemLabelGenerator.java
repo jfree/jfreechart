@@ -27,19 +27,10 @@
  * -------------------------------
  * BubbleXYItemLabelGenerator.java
  * -------------------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited.
+ * (C) Copyright 2005-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 13-Dec-2005 : Version 1, based on StandardXYZToolTipGenerator (DG);
- * 26-Jan-2006 : Renamed StandardXYZItemLabelGenerator
- *               --> BubbleXYItemLabelGenerator (DG);
- * 23-Nov-2007 : Implemented hashCode() (DG);
- * 23-Apr-2008 : Implemented PublicCloneable (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 

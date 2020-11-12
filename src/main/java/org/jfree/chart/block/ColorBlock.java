@@ -32,16 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * Changes:
- * --------
- * 22-Oct-2004 : Version 1 (DG);
- * 20-Apr-2005 : Added new draw() method (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 16-Mar-2007 : Implemented equals() and fixed serialization (DG);
- * 08-Apr-2008 : Added code for margin, border and padding in draw()
- *               method (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
- *
  */
 
 package org.jfree.chart.block;

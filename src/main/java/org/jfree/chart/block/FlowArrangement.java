@@ -32,12 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * Changes:
- * --------
- * 22-Oct-2004 : Version 1 (DG);
- * 04-Feb-2005 : Implemented equals() and made serializable (DG);
- * 08-Feb-2005 : Updated for changes in RectangleConstraint (DG);
- *
  */
 
 package org.jfree.chart.block;

@@ -33,16 +33,6 @@
  *                       Haumer);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * Changes:
- * --------
- * 17-Sep-2008 : Version 1, based on a contribution from Martin Hoeller with
- *               amendments by David Gilbert (DG);
- * 16-Feb-2010 : Added findZBounds() (patch 2952086) (MH);
- * 19-Oct-2011 : Fixed NPE in findRangeBounds() (bug 3026341) (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
- * 09-Sep-2015 : Add update for crosshair (DG);
- * 18-Feb-2017 : Updates for crosshairs (bug #36) (DG);
- *
  */
 
 package org.jfree.chart.renderer.xy;

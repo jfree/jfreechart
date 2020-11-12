@@ -27,20 +27,10 @@
  * ----------------------
  * PlotRenderingInfo.java
  * ----------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited.
+ * (C) Copyright 2003-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 16-Sep-2003 : Version 1 (DG);
- * 23-Sep-2003 : Added Javadocs (DG);
- * 12-Nov-2004 : Added getSubplotCount() and findSubplot() methods (DG);
- * 01-Nov-2005 : Made 'owner' non-transient to fix bug 1344048 (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 01-Dec-2006 : Implemented clone() method properly (DG);
- * 17-Apr-2007 : Fixed bug 1698965 (NPE in CombinedDomainXYPlot) (DG);
  *
  */
 

@@ -27,21 +27,10 @@
  * --------------------
  * PieURLGenerator.java
  * --------------------
- * (C) Copyright 2002-2008, by Richard Atkinson and Contributors.
+ * (C) Copyright 2002-2020, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributors:     David Gilbert (for Object Refinery Limited);
- *
- * Changes:
- * --------
- * 05-Aug-2002 : Version 1, contributed by Richard Atkinson;
- * 09-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 07-Mar-2003 : Modified to use KeyedValuesDataset and added pieIndex
- *               parameter (DG);
- * 24-Apr-2003 : Switched around PieDataset and KeyedValuesDataset (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 24-Nov-2006 : Updated API docs (DG);
- * 13-Dec-2007 : Updated API docs (DG);
  *
  */
 

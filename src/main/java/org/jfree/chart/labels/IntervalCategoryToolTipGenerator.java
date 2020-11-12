@@ -27,15 +27,10 @@
  * -------------------------------------
  * IntervalCategoryToolTipGenerator.java
  * -------------------------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited.
+ * (C) Copyright 2004-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 11-May-2004 : Version 1, split from IntervalCategoryItemLabelGenerator (DG);
- * 08-Oct-2008 : Override equals() method (DG);
  *
  */
 

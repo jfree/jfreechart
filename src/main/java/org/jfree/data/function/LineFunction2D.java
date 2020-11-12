@@ -32,12 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * Changes:
- * --------
- * 01-Oct-2002 : Version 1 (DG);
- * 28-May-2009 : Added accessor methods for co-efficients, implemented
- *               equals() and hashCode(), and added Serialization support (DG);
- *
  */
 
 package org.jfree.data.function;

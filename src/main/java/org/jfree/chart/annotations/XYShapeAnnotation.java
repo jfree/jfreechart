@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,29 +27,11 @@
  * ----------------------
  * XYShapeAnnotation.java
  * ----------------------
- * (C) Copyright 2003-2017, by Ondax, Inc. and Contributors.
+ * (C) Copyright 2003-2020, by Ondax, Inc. and Contributors.
  *
  * Original Author:  Greg Steckman (for Ondax, Inc.);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Peter Kolb (patch 2809117);
- *
- * Changes:
- * --------
- * 15-Aug-2003 : Version 1, adapted from
- *               org.jfree.chart.annotations.XYLineAnnotation (GS);
- * 21-Jan-2004 : Update for renamed method in ValueAxis (DG);
- * 20-Apr-2004 : Added new constructor and fixed bug 934258 (DG);
- * 29-Sep-2004 : Added 'fillPaint' to allow for colored shapes, now extends
- *               AbstractXYAnnotation to add tool tip and URL support, and
- *               implemented equals() and Cloneable (DG);
- * 21-Jan-2005 : Modified constructor for consistency with other
- *               constructors (DG);
- * 06-Jun-2005 : Fixed equals() method to handle GradientPaint (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 24-Oct-2006 : Calculate AffineTransform on shape's bounding rectangle
- *               rather than sample points (0, 0) and (1, 1) (DG);
- * 06-Mar-2007 : Implemented hashCode() (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 

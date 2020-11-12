@@ -32,10 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * Changes:
- * --------
- * 08-Feb-2004 : Version 1 (DG);
- *
  */
 
 package org.jfree.chart.block;

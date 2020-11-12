@@ -27,14 +27,10 @@
  * ------------------------------
  * MultiValueCategoryDataset.java
  * ------------------------------
- * (C) Copyright 2007, 2008, by David Forslund and Contributors.
+ * (C) Copyright 2007-2020, by David Forslund and Contributors.
  *
  * Original Author:  David Forslund;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 08-Oct-2007 : Version 1, see patch 1780779 (DG);
  *
  */
 

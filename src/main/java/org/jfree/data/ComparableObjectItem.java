@@ -27,15 +27,10 @@
  * -------------------------
  * ComparableObjectItem.java
  * -------------------------
- * (C) Copyright 2006-2016, by Object Refinery Limited.
+ * (C) Copyright 2006-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 19-Oct-2006 : New class, based on XYDataItem (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 

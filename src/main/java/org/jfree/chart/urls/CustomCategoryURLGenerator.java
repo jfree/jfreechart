@@ -27,16 +27,10 @@
  * -------------------------------
  * CustomCategoryURLGenerator.java
  * -------------------------------
- * (C) Copyright 2008, by Diego Pierangeli and Contributors.
+ * (C) Copyright 2008-2020, by Diego Pierangeli and Contributors.
  *
  * Original Author:  Diego Pierangeli;
  * Contributors:     David Gilbert (for Object Refinery Limited);
- *
- * Changes:
- * --------
- * 23-Apr-2008 : Version 1, contributed by Diego Pierangeli based on
- *               CustomXYURLGenerator by Richard Atkinson, with some
- *               modifications by David Gilbert(DG);
  *
  */
 package org.jfree.chart.urls;

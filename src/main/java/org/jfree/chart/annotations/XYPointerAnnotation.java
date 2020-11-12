@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,29 +27,10 @@
  * ------------------------
  * XYPointerAnnotation.java
  * ------------------------
- * (C) Copyright 2003-2017, by Object Refinery Limited.
+ * (C) Copyright 2003-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Peter Kolb (patch 2809117);
- *
- * Changes:
- * --------
- * 21-May-2003 : Version 1 (DG);
- * 10-Jun-2003 : Changed BoundsAnchor to TextAnchor (DG);
- * 02-Jul-2003 : Added accessor methods and simplified constructor (DG);
- * 19-Aug-2003 : Implemented Cloneable (DG);
- * 13-Oct-2003 : Fixed bug where arrow paint is not set correctly (DG);
- * 21-Jan-2004 : Update for renamed method in ValueAxis (DG);
- * 29-Sep-2004 : Changes to draw() method signature (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 20-Feb-2006 : Correction for equals() method (fixes bug 1435160) (DG);
- * 12-Jul-2006 : Fix drawing for PlotOrientation.HORIZONTAL, thanks to
- *               Skunk (DG);
- * 12-Feb-2009 : Added support for rotated label, plus background and
- *               outline (DG);
- * 18-May-2009 : Fixed typo in hashCode() method (DG);
- * 24-Jun-2009 : Fire change events (see patch 2809117 by PK) (DG);
- * 02-Jul-2016 : Use ParamChecks (DG);
  *
  */
 

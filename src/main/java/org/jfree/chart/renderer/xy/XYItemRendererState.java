@@ -33,17 +33,6 @@
  * Contributor(s):   Ulrich Voigt;
  *                   Greg Darke;
  *
- * Changes:
- * --------
- * 07-Oct-2003 : Version 1 (DG);
- * 27-Jan-2004 : Added workingLine attribute (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 04-May-2007 : Added processVisibleItemsOnly flag (DG);
- * 09-Jul-2008 : Added start/endSeriesPass() methods - see patch 1997549 by
- *               Ulrich Voigt (DG);
- * 19-Sep-2008 : Added first and last item indices, based on patch by Greg
- *               Darke (DG);
- *
  */
 
 package org.jfree.chart.renderer.xy;

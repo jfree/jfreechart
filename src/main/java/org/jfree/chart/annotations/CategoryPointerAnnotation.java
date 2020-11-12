@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,18 +27,10 @@
  * ------------------------------
  * CategoryPointerAnnotation.java
  * ------------------------------
- * (C) Copyright 2006-2017, by Object Refinery Limited.
+ * (C) Copyright 2006-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Peter Kolb (patch 2809117);
- *
- * Changes:
- * --------
- * 02-Oct-2006 : Version 1 (DG);
- * 06-Mar-2007 : Implemented hashCode() (DG);
- * 24-Jun-2009 : Fire change events (see patch 2809117 by PK) (DG);
- * 30-Mar-2010 : Correct calculation of pointer line (see patch 2954302) (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 

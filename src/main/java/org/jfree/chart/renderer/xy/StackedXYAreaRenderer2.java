@@ -33,26 +33,6 @@
  *                   the StackedXYAreaRenderer class by Richard Atkinson;
  * Contributor(s):   Ulrich Voigt (patch #312);
  *
- * Changes:
- * --------
- * 30-Apr-2004 : Version 1 (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
- *               getYValue() (DG);
- * 10-Sep-2004 : Removed getRangeType() method (DG);
- * 06-Jan-2004 : Renamed getRangeExtent() --> findRangeBounds (DG);
- * 28-Mar-2005 : Use getXValue() and getYValue() from dataset (DG);
- * 03-Oct-2005 : Add entity generation to drawItem() method (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 22-Aug-2006 : Handle null and empty datasets correctly in the
- *               findRangeBounds() method (DG);
- * 22-Sep-2006 : Added a flag to allow rounding of x-coordinates (after
- *               translation to Java2D space) in order to avoid the striping
- *               that can result from anti-aliasing (thanks to Doug
- *               Clayton) (DG);
- * 30-Nov-2006 : Added accessor methods for the roundXCoordinates flag (DG);
- * 02-Jun-2008 : Fixed bug with PlotOrientation.HORIZONTAL (DG);
- * 04-Aug-2014 : Fix entity hotspot (patch 312) (UV);
- *
  */
 
 package org.jfree.chart.renderer.xy;

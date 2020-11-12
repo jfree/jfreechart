@@ -27,18 +27,10 @@
  * --------------
  * DateRange.java
  * --------------
- * (C) Copyright 2002-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2002-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Bill Kelemen;
- *
- * Changes
- * -------
- * 22-Apr-2002 : Version 1 based on code by Bill Kelemen (DG);
- * 07-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 23-Sep-2003 : Minor Javadoc update (DG);
- * 28-May-2008 : Fixed problem with immutability (DG);
- * 01-Sep-2008 : Added getLowerMillis() and getUpperMillis() (DG);
  *
  */
 
