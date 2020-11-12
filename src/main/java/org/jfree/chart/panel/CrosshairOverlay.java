@@ -32,13 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   John Matthews;
  *
- * Changes:
- * --------
- * 09-Apr-2009 : Version 1 (DG);
- * 19-May-2009 : Fixed FindBugs warnings, patch by Michal Wozniak (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
- * 05-Mar-2016 : Fix label outline stroke (DG);
- *
  */
 
 package org.jfree.chart.panel;
@@ -74,7 +67,9 @@ import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 
 /**
- * An overlay for a {@link ChartPanel} that draws crosshairs on a plot.
+ * An overlay for a {@link ChartPanel} that draws crosshairs on a chart.  If 
+ * you are using the JavaFX extensions for JFreeChart, then you should use
+ * the {@code CrosshairOverlayFX} class.
  *
  * @since 1.0.13
  */
@@ -288,7 +283,7 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
                 String label = crosshair.getLabelGenerator().generateLabel(
                         crosshair);
                 RectangleAnchor anchor = crosshair.getLabelAnchor();
-                Point2D pt = calculateLabelPoint(line, anchor, 5, 5);
+                Point2D pt = calculateLabelPoint(line, anchor, crosshair.getLabelXOffset(), crosshair.getLabelYOffset());
                 float xx = (float) pt.getX();
                 float yy = (float) pt.getY();
                 TextAnchor alignPt = textAlignPtForLabelAnchorH(anchor);
@@ -296,7 +291,7 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
                         label, g2, xx, yy, alignPt, 0.0, TextAnchor.CENTER);
                 if (!dataArea.contains(hotspot.getBounds2D())) {
                     anchor = flipAnchorV(anchor);
-                    pt = calculateLabelPoint(line, anchor, 5, 5);
+                    pt = calculateLabelPoint(line, anchor, crosshair.getLabelXOffset(), crosshair.getLabelYOffset());
                     xx = (float) pt.getX();
                     yy = (float) pt.getY();
                     alignPt = textAlignPtForLabelAnchorH(anchor);
@@ -345,7 +340,7 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
                 String label = crosshair.getLabelGenerator().generateLabel(
                         crosshair);
                 RectangleAnchor anchor = crosshair.getLabelAnchor();
-                Point2D pt = calculateLabelPoint(line, anchor, 5, 5);
+                Point2D pt = calculateLabelPoint(line, anchor, crosshair.getLabelXOffset(), crosshair.getLabelYOffset());
                 float xx = (float) pt.getX();
                 float yy = (float) pt.getY();
                 TextAnchor alignPt = textAlignPtForLabelAnchorV(anchor);
@@ -353,7 +348,7 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
                         label, g2, xx, yy, alignPt, 0.0, TextAnchor.CENTER);
                 if (!dataArea.contains(hotspot.getBounds2D())) {
                     anchor = flipAnchorH(anchor);
-                    pt = calculateLabelPoint(line, anchor, 5, 5);
+                    pt = calculateLabelPoint(line, anchor, crosshair.getLabelXOffset(), crosshair.getLabelYOffset());
                     xx = (float) pt.getX();
                     yy = (float) pt.getY();
                     alignPt = textAlignPtForLabelAnchorV(anchor);
