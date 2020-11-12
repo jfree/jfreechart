@@ -127,6 +127,7 @@ public class PolarChartPanel extends ChartPanel {
      * Creates a popup menu for the panel.
      *
      * @param properties  include a menu item for the chart property editor.
+     * @param copy  include a menu item for copying the chart.
      * @param save  include a menu item for saving the chart.
      * @param print  include a menu item for printing the chart.
      * @param zoom  include menu items for zooming.
@@ -134,10 +135,10 @@ public class PolarChartPanel extends ChartPanel {
      * @return The popup menu.
      */
     @Override
-    protected JPopupMenu createPopupMenu(boolean properties, boolean save,
-            boolean print, boolean zoom) {
+    protected JPopupMenu createPopupMenu(boolean properties, boolean copy, 
+            boolean save, boolean print, boolean zoom) {
 
-       JPopupMenu result = super.createPopupMenu(properties, save, print, zoom);
+       JPopupMenu result = super.createPopupMenu(properties, copy, save, print, zoom);
        int zoomInIndex = getPopupMenuItem(result,
                localizationResources.getString("Zoom_In"));
        int zoomOutIndex = getPopupMenuItem(result,

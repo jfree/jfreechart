@@ -2930,24 +2930,6 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     }
 
     /**
-     * Creates a popup menu for the panel.
-     *
-     * @param properties  include a menu item for the chart property editor.
-     * @param save  include a menu item for saving the chart.
-     * @param print  include a menu item for printing the chart.
-     * @param zoom  include menu items for zooming.
-     *
-     * @return The popup menu.
-     * 
-     * @deprecated Use #createPopupMenu(boolean, boolean, boolean, boolean, boolean) 
-     *     as this includes an explicit flag for the {@code copy} menu item. 
-     */
-    protected JPopupMenu createPopupMenu(boolean properties, boolean save,
-            boolean print, boolean zoom) {
-        return createPopupMenu(properties, false, save, print, zoom);
-    }
-
-    /**
      * Creates a popup menu for the panel.  This method includes code that
      * auto-detects JFreeSVG and OrsonPDF (via reflection) and, if they are
      * present (and the {@code save} argument is {@code true}, adds a menu item
