@@ -27,7 +27,7 @@
  * ---------------
  * ChartPanel.java
  * ---------------
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Andrzej Porebski;
@@ -1582,6 +1582,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
                 this.chartBufferWidth = scaledWidth;
                 this.chartBufferHeight = scaledHeight;
                 GraphicsConfiguration gc = g2.getDeviceConfiguration();
+                
                 this.chartBuffer = gc.createCompatibleImage(
                         this.chartBufferWidth, this.chartBufferHeight,
                         Transparency.TRANSLUCENT);
