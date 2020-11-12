@@ -201,8 +201,7 @@ public class PiePlotState extends RendererState {
 
     /**
      * Returns the y-coordinate (in Java2D space) of the center of the pie
-     * chart.  For the {@link PiePlot3D} class, we derive this from the top of
-     * the pie.
+     * chart.
      *
      * @return The y-coordinate (in Java2D space).
      */
