@@ -60,12 +60,13 @@ History
 -------
 
 ##### Version 1.5.2 (not yet released)
-- apply rendering hints to overlays (bug #187);
+- apply rendering hints to overlays ([#187](https://github.com/jfree/jfreechart/pull/187)));
 - don't draw disabled outlines on crosshair labels ([#189](https://github.com/jfree/jfreechart/pull/189));
 - ensure label offsets are used in `CrosshairOverlay` ([#190](https://github.com/jfree/jfreechart/pull/190));
-- remove alpha channel from copy-to-clipboard (fixes bug #182);
-- update French translations (PR #186);
-- fix "Save_as" entries in localisation files (PR #184).
+- remove alpha channel from copy-to-clipboard ([#182](https://github.com/jfree/jfreechart/pull/182)));
+- set flag in XML parser to avoid XML eXternal Entity injection (XXE) ([#130](https://github.com/jfree/jfreechart/pull/130)));
+- update French translations ([#186](https://github.com/jfree/jfreechart/pull/186)));
+- fix "Save_as" entries in localisation files ([#184](https://github.com/jfree/jfreechart/pull/184))).
 
 ##### Version 1.5.1 (29 October 2020)
 - add `DeviationStepRenderer` (PR #173)
