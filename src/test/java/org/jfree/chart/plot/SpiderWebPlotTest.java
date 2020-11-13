@@ -32,14 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * Changes
- * -------
- * 10-Jun-2005 : Version 1 (DG);
- * 01-Jun-2006 : Added testDrawWithNullInfo() method (DG);
- * 05-Feb-2007 : Added more checks to testCloning (DG);
- * 01-Jun-2009 : Added test for getLegendItems() bug, series key is not
- *               set (DG);
- *
  */
 
 package org.jfree.chart.plot;
