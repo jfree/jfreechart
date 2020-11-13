@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2018, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * ------------------
  * DatasetReader.java
  * ------------------
- * (C) Copyright 2002-2018, by Object Refinery Limited.
+ * (C) Copyright 2002-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 20-Nov-2002 : Version 1 (DG);
- * 25-Nov-2018 : Adjust configuration of SAXParserFactory (DG);
  *
  */
 
@@ -63,7 +58,7 @@ import org.xml.sax.SAXNotSupportedException;
  */
 public class DatasetReader {
 
-	/** A factory for creating new parser instances. */
+    /** A factory for creating new parser instances. */
     static SAXParserFactory factory;
 
     /**
@@ -73,18 +68,15 @@ public class DatasetReader {
      */
     public static SAXParserFactory getSAXParserFactory() {
     	if (factory == null) {
-    		SAXParserFactory f = SAXParserFactory.newInstance();
-			try {
-				f.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
-		        f.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
-		        factory = f;
-			} catch (SAXNotRecognizedException e) {
-				throw new RuntimeException(e);
-			} catch (SAXNotSupportedException e) {
-				throw new RuntimeException(e);
-			} catch (ParserConfigurationException e) {
-				throw new RuntimeException(e);
-			}
+            SAXParserFactory f = SAXParserFactory.newInstance();
+            try {
+                f.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
+                f.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
+                f.setFeature("http://xml.org/sax/features/external-general-entities", false);
+                factory = f;
+            } catch (SAXNotRecognizedException | SAXNotSupportedException | ParserConfigurationException e) {
+                throw new RuntimeException(e);
+            }
     	}
         return factory;
     }
@@ -134,11 +126,8 @@ public class DatasetReader {
             parser.parse(in, handler);
             result = handler.getDataset();
         }
-        catch (SAXException e) {
+        catch (SAXException | ParserConfigurationException e) {
             throw new RuntimeException(e);
-        }
-        catch (ParserConfigurationException e2) {
-            throw new RuntimeException(e2);
         }
         return result;
     }
@@ -176,11 +165,8 @@ public class DatasetReader {
             parser.parse(in, handler);
             result = handler.getDataset();
         }
-        catch (SAXException e) {
+        catch (SAXException | ParserConfigurationException e) {
             throw new RuntimeException(e);
-        }
-        catch (ParserConfigurationException e2) {
-            throw new RuntimeException(e2);
         }
         return result;
     }
