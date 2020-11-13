@@ -32,20 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * Changes
- * -------
- * 05-Apr-2002 : Version 1 (DG);
- * 26-Jun-2002 : Removed unnecessary imports (DG);
- * 17-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 13-Mar-2003 : Added serialization test (DG);
- * 21-Oct-2003 : Added hashCode test (DG);
- * 06-Apr-2006 : Added testBug1448828() method (DG);
- * 01-Jun-2006 : Added testBug1498805() method (DG);
- * 11-Jul-2007 : Fixed bad time zone assumption (DG);
- * 28-Aug-2007 : Added test for constructor problem (DG);
- * 19-Dec-2007 : Set default locale for tests that are sensitive
- *               to the locale (DG);
- *
  */
 
 package org.jfree.data.time;
@@ -62,6 +48,7 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 import org.jfree.chart.TestUtils;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -93,6 +80,29 @@ public class WeekTest {
         this.w52Y9999 = new Week(52, 9999);
     }
 
+    /**
+     * Test for bug reported via pull request #138.
+     */
+    @Test
+    public void testConstructorArgumentChecks() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            new Week(0, 2020);
+        });
+        assertTrue(exception.getMessage().contains("week"));
+        Exception exception2 = assertThrows(IllegalArgumentException.class, () -> {
+             new Week(54, 2020);
+        });
+        assertTrue(exception2.getMessage().contains("week"));
+        Exception exception3 = assertThrows(IllegalArgumentException.class, () -> {
+            new Week(0, new Year(2020));
+        });
+        assertTrue(exception3.getMessage().contains("week"));
+        Exception exception4 = assertThrows(IllegalArgumentException.class, () -> {
+             new Week(54, new Year(2020));
+        });
+        assertTrue(exception2.getMessage().contains("week"));
+    }
+    
     /**
      * Tests the equals method.
      */
