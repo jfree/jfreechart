@@ -72,6 +72,19 @@ public class Args {
     }
     
     /**
+     * Throws an {@code IllegalArgumentException} if {@code value} is negative.
+     * 
+     * @param value  the value.
+     * @param name  the parameter name (for use in the exception message).
+     */
+    public static void requireNonNegative(double value, String name) {
+        if (value < 0) {
+            throw new IllegalArgumentException("Require '" + name + "' (" 
+                    + value + ") to be non-negative.");
+        }
+    }
+    
+    /**
      * Checks that the value falls within the specified range and, if it does
      * not, throws an {@code IllegalArgumentException}.
      * 
