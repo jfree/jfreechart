@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * SpiderWebPlot.java
  * ------------------
- * (C) Copyright 2005-2017, by Heaps of Flavour Pty Ltd and Contributors.
+ * (C) Copyright 2005-2020, by Heaps of Flavour Pty Ltd and Contributors.
  *
  * Company Info:  http://www.i4-talent.com
  *
@@ -425,9 +425,9 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
     }
 
     /**
-     * Returns the head percent.
+     * Returns the head percent (the default value is 0.01).
      *
-     * @return The head percent.
+     * @return The head percent (always > 0).
      *
      * @see #setHeadPercent(double)
      */
@@ -437,17 +437,14 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
 
     /**
      * Sets the head percent and sends a {@link PlotChangeEvent} to all
-     * registered listeners.
+     * registered listeners.  Note that 0.10 is 10 percent.
      *
-     * @param percent  the percent.
+     * @param percent  the percent (must be greater than zero).
      *
      * @see #getHeadPercent()
      */
     public void setHeadPercent(double percent) {
-        if (percent < 0.0) {
-            throw new IllegalArgumentException(
-                    "Percentage outside valid range.");
-        }
+        Args.requireNonNegative(percent, "percent");
         this.headPercent = percent;
         fireChangeEvent();
     }
