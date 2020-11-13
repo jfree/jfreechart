@@ -60,17 +60,17 @@ History
 -------
 
 ##### Version 1.5.2 (not yet released)
-- apply rendering hints to overlays ([#187](https://github.com/jfree/jfreechart/pull/187)));
+- apply rendering hints to overlays ([#187](https://github.com/jfree/jfreechart/issues/187));
 - don't draw disabled outlines on crosshair labels ([#189](https://github.com/jfree/jfreechart/pull/189));
 - ensure label offsets are used in `CrosshairOverlay` ([#190](https://github.com/jfree/jfreechart/pull/190));
-- remove alpha channel from copy-to-clipboard ([#182](https://github.com/jfree/jfreechart/pull/182)));
-- set flag in XML parser to avoid XML eXternal Entity injection (XXE) ([#130](https://github.com/jfree/jfreechart/pull/130)));
-- update French translations ([#186](https://github.com/jfree/jfreechart/pull/186)));
-- fix "Save_as" entries in localisation files ([#184](https://github.com/jfree/jfreechart/pull/184))).
+- remove alpha channel from copy-to-clipboard ([#182](https://github.com/jfree/jfreechart/issues/182));
+- set flag in XML parser to avoid XML eXternal Entity injection (XXE) ([#130](https://github.com/jfree/jfreechart/issues/130));
+- update French translations ([#186](https://github.com/jfree/jfreechart/pull/186));
+- fix "Save_as" entries in localisation files ([#184](https://github.com/jfree/jfreechart/pull/184)).
 
 ##### Version 1.5.1 (29 October 2020)
-- add `DeviationStepRenderer` (PR #173)
-- modify buffer in `ChartPanel` to handle high DPI displays (bug #170);
+- add `DeviationStepRenderer` ([#173](https://github.com/jfree/jfreechart/pull/173))
+- modify buffer in `ChartPanel` to handle high DPI displays ([#170](https://github.com/jfree/jfreechart/issues/170));
 - fix for exception on extreme zoom on NumberAxis (bug #64);
 - fix for `LayeredBarRenderer` (bug #169);
 - add Catalan translations (PR #117);
