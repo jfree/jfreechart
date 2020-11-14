@@ -30,7 +30,7 @@
  * (C) Copyright 2011-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   John Matthews;
+ * Contributor(s):   John Matthews, Michal Wozniak;
  *
  */
 
@@ -236,8 +236,7 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
                 double xx = xAxis.valueToJava2D(x, dataArea, xAxisEdge);
                 if (plot.getOrientation() == PlotOrientation.VERTICAL) {
                     drawVerticalCrosshair(g2, dataArea, xx, ch);
-                }
-                else {
+                } else {
                     drawHorizontalCrosshair(g2, dataArea, xx, ch);
                 }
             }
@@ -250,8 +249,7 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
                 double yy = yAxis.valueToJava2D(y, dataArea, yAxisEdge);
                 if (plot.getOrientation() == PlotOrientation.VERTICAL) {
                     drawHorizontalCrosshair(g2, dataArea, yy, ch);
-                }
-                else {
+                } else {
                     drawVerticalCrosshair(g2, dataArea, yy, ch);
                 }
             }
@@ -279,37 +277,39 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
             g2.setStroke(crosshair.getStroke());
             g2.draw(line);
             if (crosshair.isLabelVisible()) {
-                Font savedFont = g2.getFont();
-                g2.setFont(crosshair.getLabelFont());
                 String label = crosshair.getLabelGenerator().generateLabel(
                         crosshair);
-                RectangleAnchor anchor = crosshair.getLabelAnchor();
-                Point2D pt = calculateLabelPoint(line, anchor, crosshair.getLabelXOffset(), crosshair.getLabelYOffset());
-                float xx = (float) pt.getX();
-                float yy = (float) pt.getY();
-                TextAnchor alignPt = textAlignPtForLabelAnchorH(anchor);
-                Shape hotspot = TextUtils.calculateRotatedStringBounds(
-                        label, g2, xx, yy, alignPt, 0.0, TextAnchor.CENTER);
-                if (!dataArea.contains(hotspot.getBounds2D())) {
-                    anchor = flipAnchorV(anchor);
-                    pt = calculateLabelPoint(line, anchor, crosshair.getLabelXOffset(), crosshair.getLabelYOffset());
-                    xx = (float) pt.getX();
-                    yy = (float) pt.getY();
-                    alignPt = textAlignPtForLabelAnchorH(anchor);
-                    hotspot = TextUtils.calculateRotatedStringBounds(
-                           label, g2, xx, yy, alignPt, 0.0, TextAnchor.CENTER);
-                }
+                if (label != null && !label.isEmpty()) {
+                    Font savedFont = g2.getFont();
+                    g2.setFont(crosshair.getLabelFont());
+                    RectangleAnchor anchor = crosshair.getLabelAnchor();
+                    Point2D pt = calculateLabelPoint(line, anchor, crosshair.getLabelXOffset(), crosshair.getLabelYOffset());
+                    float xx = (float) pt.getX();
+                    float yy = (float) pt.getY();
+                    TextAnchor alignPt = textAlignPtForLabelAnchorH(anchor);
+                    Shape hotspot = TextUtils.calculateRotatedStringBounds(
+                            label, g2, xx, yy, alignPt, 0.0, TextAnchor.CENTER);
+                    if (!dataArea.contains(hotspot.getBounds2D())) {
+                        anchor = flipAnchorV(anchor);
+                        pt = calculateLabelPoint(line, anchor, crosshair.getLabelXOffset(), crosshair.getLabelYOffset());
+                        xx = (float) pt.getX();
+                        yy = (float) pt.getY();
+                        alignPt = textAlignPtForLabelAnchorH(anchor);
+                        hotspot = TextUtils.calculateRotatedStringBounds(
+                               label, g2, xx, yy, alignPt, 0.0, TextAnchor.CENTER);
+                    }
 
-                g2.setPaint(crosshair.getLabelBackgroundPaint());
-                g2.fill(hotspot);
-                if (crosshair.isLabelOutlineVisible()) {
-                    g2.setPaint(crosshair.getLabelOutlinePaint());
-                    g2.setStroke(crosshair.getLabelOutlineStroke());
-                    g2.draw(hotspot);
+                    g2.setPaint(crosshair.getLabelBackgroundPaint());
+                    g2.fill(hotspot);
+                    if (crosshair.isLabelOutlineVisible()) {
+                        g2.setPaint(crosshair.getLabelOutlinePaint());
+                        g2.setStroke(crosshair.getLabelOutlineStroke());
+                        g2.draw(hotspot);
+                    }
+                    g2.setPaint(crosshair.getLabelPaint());
+                    TextUtils.drawAlignedString(label, g2, xx, yy, alignPt);
+                    g2.setFont(savedFont);
                 }
-                g2.setPaint(crosshair.getLabelPaint());
-                TextUtils.drawAlignedString(label, g2, xx, yy, alignPt);
-                g2.setFont(savedFont);
             }
             g2.setPaint(savedPaint);
             g2.setStroke(savedStroke);
@@ -336,36 +336,38 @@ public class CrosshairOverlay extends AbstractOverlay implements Overlay,
             g2.setStroke(crosshair.getStroke());
             g2.draw(line);
             if (crosshair.isLabelVisible()) {
-                Font savedFont = g2.getFont();
-                g2.setFont(crosshair.getLabelFont());
                 String label = crosshair.getLabelGenerator().generateLabel(
                         crosshair);
-                RectangleAnchor anchor = crosshair.getLabelAnchor();
-                Point2D pt = calculateLabelPoint(line, anchor, crosshair.getLabelXOffset(), crosshair.getLabelYOffset());
-                float xx = (float) pt.getX();
-                float yy = (float) pt.getY();
-                TextAnchor alignPt = textAlignPtForLabelAnchorV(anchor);
-                Shape hotspot = TextUtils.calculateRotatedStringBounds(
-                        label, g2, xx, yy, alignPt, 0.0, TextAnchor.CENTER);
-                if (!dataArea.contains(hotspot.getBounds2D())) {
-                    anchor = flipAnchorH(anchor);
-                    pt = calculateLabelPoint(line, anchor, crosshair.getLabelXOffset(), crosshair.getLabelYOffset());
-                    xx = (float) pt.getX();
-                    yy = (float) pt.getY();
-                    alignPt = textAlignPtForLabelAnchorV(anchor);
-                    hotspot = TextUtils.calculateRotatedStringBounds(
-                           label, g2, xx, yy, alignPt, 0.0, TextAnchor.CENTER);
+                if (label != null && !label.isEmpty()) {
+                    Font savedFont = g2.getFont();
+                    g2.setFont(crosshair.getLabelFont());
+                    RectangleAnchor anchor = crosshair.getLabelAnchor();
+                    Point2D pt = calculateLabelPoint(line, anchor, crosshair.getLabelXOffset(), crosshair.getLabelYOffset());
+                    float xx = (float) pt.getX();
+                    float yy = (float) pt.getY();
+                    TextAnchor alignPt = textAlignPtForLabelAnchorV(anchor);
+                    Shape hotspot = TextUtils.calculateRotatedStringBounds(
+                            label, g2, xx, yy, alignPt, 0.0, TextAnchor.CENTER);
+                    if (!dataArea.contains(hotspot.getBounds2D())) {
+                        anchor = flipAnchorH(anchor);
+                        pt = calculateLabelPoint(line, anchor, crosshair.getLabelXOffset(), crosshair.getLabelYOffset());
+                        xx = (float) pt.getX();
+                        yy = (float) pt.getY();
+                        alignPt = textAlignPtForLabelAnchorV(anchor);
+                        hotspot = TextUtils.calculateRotatedStringBounds(
+                               label, g2, xx, yy, alignPt, 0.0, TextAnchor.CENTER);
+                    }
+                    g2.setPaint(crosshair.getLabelBackgroundPaint());
+                    g2.fill(hotspot);
+                    if (crosshair.isLabelOutlineVisible()) {
+                        g2.setPaint(crosshair.getLabelOutlinePaint());
+                        g2.setStroke(crosshair.getLabelOutlineStroke());
+                        g2.draw(hotspot);
+                    }
+                    g2.setPaint(crosshair.getLabelPaint());
+                    TextUtils.drawAlignedString(label, g2, xx, yy, alignPt);
+                    g2.setFont(savedFont);
                 }
-                g2.setPaint(crosshair.getLabelBackgroundPaint());
-                g2.fill(hotspot);
-                if (crosshair.isLabelOutlineVisible()) {
-                    g2.setPaint(crosshair.getLabelOutlinePaint());
-                    g2.setStroke(crosshair.getLabelOutlineStroke());
-                    g2.draw(hotspot);
-                }
-                g2.setPaint(crosshair.getLabelPaint());
-                TextUtils.drawAlignedString(label, g2, xx, yy, alignPt);
-                g2.setFont(savedFont);
             }
             g2.setPaint(savedPaint);
             g2.setStroke(savedStroke);
