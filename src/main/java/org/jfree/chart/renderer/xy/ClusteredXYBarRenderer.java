@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,40 +27,12 @@
  * ---------------------------
  * ClusteredXYBarRenderer.java
  * ---------------------------
- * (C) Copyright 2003-2016, by Paolo Cova and Contributors.
+ * (C) Copyright 2003-2020, by Paolo Cova and Contributors.
  *
  * Original Author:  Paolo Cova;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Christian W. Zuckschwerdt;
  *                   Matthias Rose;
- *
- * Changes
- * -------
- * 24-Jan-2003 : Version 1, contributed by Paolo Cova (DG);
- * 25-Mar-2003 : Implemented Serializable (DG);
- * 01-May-2003 : Modified drawItem() method signature (DG);
- * 30-Jul-2003 : Modified entity constructor (CZ);
- * 20-Aug-2003 : Implemented Cloneable and PublicCloneable (DG);
- * 16-Sep-2003 : Changed ChartRenderingInfo --> PlotRenderingInfo (DG);
- * 07-Oct-2003 : Added renderer state (DG);
- * 03-Nov-2003 : In draw method added state parameter and y==null value
- *               handling (MR);
- * 25-Feb-2004 : Replaced CrosshairInfo with CrosshairState (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
- *               getYValue() (DG);
- * 01-Oct-2004 : Fixed bug where 'drawBarOutline' flag is ignored (DG);
- * 16-May-2005 : Fixed to used outline stroke for bar outlines.  Removed some
- *               redundant code with the result that the renderer now respects
- *               the 'base' setting from the super-class. Added an equals()
- *               method (DG);
- * 19-May-2005 : Added minimal item label implementation - needs improving (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 11-Dec-2006 : Added support for GradientPaint (DG);
- * 12-Jun-2007 : Added override to findDomainBounds() to handle cluster offset,
- *               fixed rendering to handle inverted axes, and simplified
- *               entity generation code (DG);
- * 24-Jun-2008 : Added new barPainter mechanism (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -124,8 +96,8 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
      * @param centerBarAtStartValue  if true, bars will be centered on the
      *         start of the time period.
      */
-    public ClusteredXYBarRenderer(double margin,
-                                  boolean centerBarAtStartValue) {
+    public ClusteredXYBarRenderer(double margin, 
+            boolean centerBarAtStartValue) {
         super(margin);
         this.centerBarAtStartValue = centerBarAtStartValue;
     }
@@ -157,8 +129,7 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
         // need to handle cluster centering as a special case
         if (this.centerBarAtStartValue) {
             return findDomainBoundsWithOffset((IntervalXYDataset) dataset);
-        }
-        else {
+        } else {
             return super.findDomainBounds(dataset);
         }
     }
@@ -194,8 +165,7 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
 
         if (minimum > maximum) {
             return null;
-        }
-        else {
+        } else {
             return new Range(minimum, maximum);
         }
     }
@@ -240,8 +210,7 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
         if (getUseYInterval()) {
             y0 = intervalDataset.getStartYValue(series, item);
             y1 = intervalDataset.getEndYValue(series, item);
-        }
-        else {
+        } else {
             y0 = getBase();
             y1 = intervalDataset.getYValue(series, item);
         }
@@ -298,8 +267,7 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
             double ry = Math.min(barY0, barY1);
             double rh = Math.abs(barY1 - barY0);
             bar = new Rectangle2D.Double(rx, ry, rw, rh);
-        }
-        else if (orientation == PlotOrientation.VERTICAL) {
+        } else if (orientation == PlotOrientation.VERTICAL) {
             double barX0 = baseX + (seriesBarWidth * visibleSeriesIndex);
             double barX1 = barX0 + seriesBarWidth;
             double rx = Math.min(barX0, barX1);
@@ -316,16 +284,13 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
         if (orientation == PlotOrientation.HORIZONTAL) {
             if (positive && inverted || !positive && !inverted) {
                 barBase = RectangleEdge.RIGHT;
-            }
-            else {
+            } else {
                 barBase = RectangleEdge.LEFT;
             }
-        }
-        else {
+        } else {
             if (positive && !inverted || !positive && inverted) {
                 barBase = RectangleEdge.BOTTOM;
-            }
-            else {
+            } else {
                 barBase = RectangleEdge.TOP;
             }
         }
