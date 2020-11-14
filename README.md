@@ -60,6 +60,7 @@ History
 -------
 
 ##### Version 1.5.2 (not yet released)
+- observe series visibility flag in `ClusteredXYBarRenderer` ([#89](https://github.com/jfree/jfreechart/issues/89));
 - apply rendering hints to overlays ([#187](https://github.com/jfree/jfreechart/issues/187));
 - don't draw disabled outlines on crosshair labels ([#189](https://github.com/jfree/jfreechart/pull/189));
 - ensure label offsets are used in `CrosshairOverlay` ([#190](https://github.com/jfree/jfreechart/pull/190));
