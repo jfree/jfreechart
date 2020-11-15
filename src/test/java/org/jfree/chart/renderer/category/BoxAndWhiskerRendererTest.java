@@ -32,18 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * Changes
- * -------
- * 22-Oct-2003 : Version 1 (DG);
- * 23-Apr-2004 : Extended testEquals() method (DG);
- * 12-Oct-2006 : Added new checks for bug 1572478 (DG);
- * 11-May-2007 : Added testGetLegendItem() (DG);
- * 17-May-2007 : Added testGetLegendItemSeriesIndex() (DG);
- * 08-Oct-2007 : Added tests for null items in dataset (DG);
- * 15-Jan-2008 : Updated testEquals() (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG);
- * 21-Jan-2009 : Updated testEquals() for new fields (DG);
- *
  */
 
 package org.jfree.chart.renderer.category;
@@ -121,6 +109,16 @@ public class BoxAndWhiskerRendererTest {
         r1.setMedianVisible(false);
         assertFalse(r1.equals(r2));
         r2.setMedianVisible(false);
+        assertTrue(r1.equals(r2));
+
+        r1.setMinOutlierVisible(false);
+        assertFalse(r1.equals(r2));
+        r2.setMinOutlierVisible(false);
+        assertTrue(r1.equals(r2));
+
+        r1.setMaxOutlierVisible(false);
+        assertFalse(r1.equals(r2));
+        r2.setMaxOutlierVisible(false);
         assertTrue(r1.equals(r2));
     }
 
