@@ -75,6 +75,8 @@ public class Minute extends RegularTimePeriod implements Serializable {
 
     /**
      * Constructs a new Minute, based on the system date/time.
+     * The time zone and locale are determined by the calendar
+     * returned by {@link RegularTimePeriod#getCalendarInstance()}.
      */
     public Minute() {
         this(new Date());
@@ -82,6 +84,8 @@ public class Minute extends RegularTimePeriod implements Serializable {
 
     /**
      * Constructs a new Minute.
+     * The time zone and locale are determined by the calendar
+     * returned by {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @param minute  the minute (0 to 59).
      * @param hour  the hour ({@code null} not permitted).
@@ -91,12 +95,13 @@ public class Minute extends RegularTimePeriod implements Serializable {
         this.minute = (byte) minute;
         this.hour = (byte) hour.getHour();
         this.day = hour.getDay();
-        peg(Calendar.getInstance());
+        peg(getCalendarInstance());
     }
 
     /**
-     * Constructs a new instance, based on the supplied date/time and
-     * the default time zone.
+     * Constructs a new instance, based on the supplied date/time.
+     * The time zone and locale are determined by the calendar
+     * returned by {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @param time  the time ({@code null} not permitted).
      *
@@ -104,7 +109,7 @@ public class Minute extends RegularTimePeriod implements Serializable {
      */
     public Minute(Date time) {
         // defer argument checking
-        this(time, TimeZone.getDefault(), Locale.getDefault());
+        this(time, getCalendarInstance());
     }
 
     /**
@@ -130,7 +135,28 @@ public class Minute extends RegularTimePeriod implements Serializable {
     }
 
     /**
+     * Constructs a new instance, based on a particular date/time.
+     * The time zone and locale are determined by the {@code calendar}
+     * parameter.
+     *
+     * @param time the date/time ({@code null} not permitted).
+     * @param calendar the calendar to use for calculations ({@code null} not permitted).
+     */
+    public Minute(Date time, Calendar calendar) {
+        Args.nullNotPermitted(time, "time");
+        Args.nullNotPermitted(calendar, "calendar");
+        calendar.setTime(time);
+        int min = calendar.get(Calendar.MINUTE);
+        this.minute = (byte) min;
+        this.hour = (byte) calendar.get(Calendar.HOUR_OF_DAY);
+        this.day = new Day(time, calendar);
+        peg(calendar);
+    }
+
+    /**
      * Creates a new minute.
+     * The time zone and locale are determined by the calendar
+     * returned by {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @param minute  the minute (0-59).
      * @param hour  the hour (0-23).
@@ -228,6 +254,9 @@ public class Minute extends RegularTimePeriod implements Serializable {
 
     /**
      * Returns the minute preceding this one.
+     * No matter what time zone and locale this instance was created with,
+     * the returned instance will use the default calendar for time
+     * calculations, obtained with {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @return The minute preceding this one.
      */
@@ -251,6 +280,9 @@ public class Minute extends RegularTimePeriod implements Serializable {
 
     /**
      * Returns the minute following this one.
+     * No matter what time zone and locale this instance was created with,
+     * the returned instance will use the default calendar for time
+     * calculations, obtained with {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @return The minute following this one.
      */

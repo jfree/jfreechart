@@ -41,11 +41,13 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+import java.time.ZoneOffset;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.TimeZone;
+import java.util.function.Consumer;
 
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.date.MonthConstants;
@@ -141,6 +143,121 @@ public class MonthTest {
         assertEquals(MonthConstants.MARCH, m2.getMonth());
         assertEquals(951822000000L, m2.getFirstMillisecond(cal));
 
+    }
+
+    /**
+     * If a thread-local calendar was set, the Date constructor should use it.
+     */
+    @Test
+    public void testDateConstructorWithThreadLocalCalendar() {
+        Consumer<Integer> calendarSetup = hours -> RegularTimePeriod.setThreadLocalCalendarInstance(
+                Calendar.getInstance(TimeZone.getTimeZone(ZoneOffset.ofHours(hours)))
+        );
+        testDateConstructorWithCustomCalendar(3, calendarSetup);
+        testDateConstructorWithCustomCalendar(4, calendarSetup);
+    }
+
+    /**
+     * If a calendar prototype was set, the Date constructor should use it.
+     */
+    @Test
+    public void testDateConstructorWithCalendarPrototype() {
+        Consumer<Integer> calendarSetup = hours -> RegularTimePeriod.setCalendarInstancePrototype(
+                Calendar.getInstance(TimeZone.getTimeZone(ZoneOffset.ofHours(hours)))
+        );
+        testDateConstructorWithCustomCalendar(3, calendarSetup);
+        testDateConstructorWithCustomCalendar(4, calendarSetup);
+    }
+
+    private void testDateConstructorWithCustomCalendar(int hoursOffset, Consumer<Integer> calendarSetup) {
+        try {
+            calendarSetup.accept(hoursOffset);
+            long ms = -3_600_000L * hoursOffset;
+            Month m = new Month(new Date(ms));
+            assertEquals(1970, m.getYear().getYear());
+            assertEquals(1, m.getMonth());
+            assertEquals(ms, m.getFirstMillisecond());
+        } finally {
+            // reset everything, to avoid affecting other tests
+            RegularTimePeriod.setThreadLocalCalendarInstance(null);
+            RegularTimePeriod.setCalendarInstancePrototype(null);
+        }
+    }
+
+    /**
+     * If a thread-local calendar was set, the (int, int) month-year constructor should use it.
+     */
+    @Test
+    public void testMonthIntYearConstructorWithThreadLocalCalendar() {
+        Consumer<Integer> calendarSetup = hours -> RegularTimePeriod.setThreadLocalCalendarInstance(
+                Calendar.getInstance(TimeZone.getTimeZone(ZoneOffset.ofHours(hours)))
+        );
+        testMonthIntYearConstructorWithCustomCalendar(3, calendarSetup);
+        testMonthIntYearConstructorWithCustomCalendar(4, calendarSetup);
+    }
+
+    /**
+     * If a calendar prototype was set, the the (int, int) month-year constructor should use it.
+     */
+    @Test
+    public void testMonthIntYearConstructorWithCalendarPrototype() {
+        Consumer<Integer> calendarSetup = hours -> RegularTimePeriod.setCalendarInstancePrototype(
+                Calendar.getInstance(TimeZone.getTimeZone(ZoneOffset.ofHours(hours)))
+        );
+        testMonthIntYearConstructorWithCustomCalendar(3, calendarSetup);
+        testMonthIntYearConstructorWithCustomCalendar(4, calendarSetup);
+    }
+
+    private void testMonthIntYearConstructorWithCustomCalendar(int hoursOffset, Consumer<Integer> calendarSetup) {
+        try {
+            calendarSetup.accept(hoursOffset);
+            Month m = new Month(1, 1970);
+            assertEquals(1970, m.getYear().getYear());
+            assertEquals(1, m.getMonth());
+            assertEquals(-3_600_000L * hoursOffset, m.getFirstMillisecond());
+        } finally {
+            // reset everything, to avoid affecting other tests
+            RegularTimePeriod.setThreadLocalCalendarInstance(null);
+            RegularTimePeriod.setCalendarInstancePrototype(null);
+        }
+    }
+
+    /**
+     * If a thread-local calendar was set, the (int, Year) month-year constructor should use it.
+     */
+    @Test
+    public void testMonthYearConstructorWithThreadLocalCalendar() {
+        Consumer<Integer> calendarSetup = hours -> RegularTimePeriod.setThreadLocalCalendarInstance(
+                Calendar.getInstance(TimeZone.getTimeZone(ZoneOffset.ofHours(hours)))
+        );
+        testMonthYearConstructorWithCustomCalendar(3, calendarSetup);
+        testMonthYearConstructorWithCustomCalendar(4, calendarSetup);
+    }
+
+    /**
+     * If a calendar prototype was set, the the (int, Year) month-year constructor should use it.
+     */
+    @Test
+    public void testMonthYearConstructorWithCalendarPrototype() {
+        Consumer<Integer> calendarSetup = hours -> RegularTimePeriod.setCalendarInstancePrototype(
+                Calendar.getInstance(TimeZone.getTimeZone(ZoneOffset.ofHours(hours)))
+        );
+        testMonthYearConstructorWithCustomCalendar(3, calendarSetup);
+        testMonthYearConstructorWithCustomCalendar(4, calendarSetup);
+    }
+
+    private void testMonthYearConstructorWithCustomCalendar(int hoursOffset, Consumer<Integer> calendarSetup) {
+        try {
+            calendarSetup.accept(hoursOffset);
+            Month m = new Month(1, new Year(1970));
+            assertEquals(1970, m.getYear().getYear());
+            assertEquals(1, m.getMonth());
+            assertEquals(-3_600_000L * hoursOffset, m.getFirstMillisecond());
+        } finally {
+            // reset everything, to avoid affecting other tests
+            RegularTimePeriod.setThreadLocalCalendarInstance(null);
+            RegularTimePeriod.setCalendarInstancePrototype(null);
+        }
     }
 
     /**
@@ -380,17 +497,61 @@ public class MonthTest {
         assertEquals(22801L, m.getSerialIndex());
     }
 
-    /**
-     * Some checks for the testNext() method.
-     */
     @Test
-    public void testNext() {
+    public void testNextPrevious() {
         Month m = new Month(12, 2000);
         m = (Month) m.next();
         assertEquals(new Year(2001), m.getYear());
         assertEquals(1, m.getMonth());
+        m = (Month) m.previous();
+        assertEquals(new Year(2000), m.getYear());
+        assertEquals(12, m.getMonth());
         m = new Month(12, 9999);
         assertNull(m.next());
+    }
+
+    /**
+     * If a thread-local calendar was set, next() and previous() should use its time zone.
+     */
+    @Test
+    public void testNextPreviousWithThreadLocalCalendar() {
+        Consumer<Integer> calendarSetup = hours -> RegularTimePeriod.setThreadLocalCalendarInstance(
+                Calendar.getInstance(TimeZone.getTimeZone(ZoneOffset.ofHours(hours)))
+        );
+        testNextPreviousWithCustomCalendar(3, calendarSetup);
+        testNextPreviousWithCustomCalendar(4, calendarSetup);
+    }
+
+    /**
+     * If a calendar prototype was set, next() should use its time zone.
+     */
+    @Test
+    public void testNextPreviousWithCalendarPrototype() {
+        Consumer<Integer> calendarSetup = hours -> RegularTimePeriod.setCalendarInstancePrototype(
+                Calendar.getInstance(TimeZone.getTimeZone(ZoneOffset.ofHours(hours)))
+        );
+        testNextPreviousWithCustomCalendar(3, calendarSetup);
+        testNextPreviousWithCustomCalendar(4, calendarSetup);
+    }
+
+    private void testNextPreviousWithCustomCalendar(int hoursOffset, Consumer<Integer> calendarSetup) {
+        try {
+            calendarSetup.accept(hoursOffset);
+            long ms = -hoursOffset * 3_600_000L;
+            Month m = new Month(new Date(ms));
+            m = (Month) m.next();
+            assertEquals(1970, m.getYear().getYear());
+            assertEquals(2, m.getMonth());
+            assertEquals(ms + 86_400_000L * 31, m.getFirstMillisecond());
+            m = (Month) m.previous();
+            assertEquals(1970, m.getYear().getYear());
+            assertEquals(1, m.getMonth());
+            assertEquals(ms, m.getFirstMillisecond());
+        } finally {
+            // reset everything, to avoid affecting other tests
+            RegularTimePeriod.setThreadLocalCalendarInstance(null);
+            RegularTimePeriod.setCalendarInstancePrototype(null);
+        }
     }
 
     /**

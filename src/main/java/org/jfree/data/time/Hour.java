@@ -72,6 +72,8 @@ public class Hour extends RegularTimePeriod implements Serializable {
 
     /**
      * Constructs a new Hour, based on the system date/time.
+     * The time zone and locale are determined by the calendar
+     * returned by {@link RegularTimePeriod#getCalendarInstance()}.
      */
     public Hour() {
         this(new Date());
@@ -79,6 +81,8 @@ public class Hour extends RegularTimePeriod implements Serializable {
 
     /**
      * Constructs a new Hour.
+     * The time zone and locale are determined by the calendar
+     * returned by {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @param hour  the hour (in the range 0 to 23).
      * @param day  the day ({@code null} not permitted).
@@ -87,11 +91,13 @@ public class Hour extends RegularTimePeriod implements Serializable {
         Args.nullNotPermitted(day, "day");
         this.hour = (byte) hour;
         this.day = day;
-        peg(Calendar.getInstance());
+        peg(getCalendarInstance());
     }
 
     /**
      * Creates a new hour.
+     * The time zone and locale are determined by the calendar
+     * returned by {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @param hour  the hour (0-23).
      * @param day  the day (1-31).
@@ -103,8 +109,9 @@ public class Hour extends RegularTimePeriod implements Serializable {
     }
 
     /**
-     * Constructs a new instance, based on the supplied date/time and
-     * the default time zone.
+     * Constructs a new instance, based on the supplied date/time.
+     * The time zone and locale are determined by the calendar
+     * returned by {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @param time  the date-time ({@code null} not permitted).
      *
@@ -112,7 +119,7 @@ public class Hour extends RegularTimePeriod implements Serializable {
      */
     public Hour(Date time) {
         // defer argument checking...
-        this(time, TimeZone.getDefault(), Locale.getDefault());
+        this(time, getCalendarInstance());
     }
 
     /**
@@ -133,6 +140,23 @@ public class Hour extends RegularTimePeriod implements Serializable {
         calendar.setTime(time);
         this.hour = (byte) calendar.get(Calendar.HOUR_OF_DAY);
         this.day = new Day(time, zone, locale);
+        peg(calendar);
+    }
+
+    /**
+     * Constructs a new instance, based on a particular date/time.
+     * The time zone and locale are determined by the {@code calendar}
+     * parameter.
+     *
+     * @param time the date/time ({@code null} not permitted).
+     * @param calendar the calendar to use for calculations ({@code null} not permitted).
+     */
+    public Hour(Date time, Calendar calendar) {
+        Args.nullNotPermitted(time, "time");
+        Args.nullNotPermitted(calendar, "calendar");
+        calendar.setTime(time);
+        this.hour = (byte) calendar.get(Calendar.HOUR_OF_DAY);
+        this.day = new Day(time, calendar);
         peg(calendar);
     }
 
@@ -227,6 +251,9 @@ public class Hour extends RegularTimePeriod implements Serializable {
 
     /**
      * Returns the hour preceding this one.
+     * No matter what time zone and locale this instance was created with,
+     * the returned instance will use the default calendar for time
+     * calculations, obtained with {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @return The hour preceding this one.
      */
@@ -250,6 +277,9 @@ public class Hour extends RegularTimePeriod implements Serializable {
 
     /**
      * Returns the hour following this one.
+     * No matter what time zone and locale this instance was created with,
+     * the returned instance will use the default calendar for time
+     * calculations, obtained with {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @return The hour following this one.
      */
