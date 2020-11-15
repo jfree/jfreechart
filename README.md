@@ -73,8 +73,9 @@ History
 -------
 
 ##### Version 1.6.0 (not yet released)
-- modify buffer in `ChartPanel` to handle high DPI displays (bug #170);
-- add options to control pan vs zoom in `ChartPanel` (https://github.com/jfree/jfreechart/pull/172)
+- use ThreadLocal for calendars in time series datasets ([#171](https://github.com/jfree/jfreechart/pull/171));
+- modify buffer in `ChartPanel` to handle high DPI displays ([#170](https://github.com/jfree/jfreechart/issues/170));
+- add options to control pan vs zoom in `ChartPanel` ([#172](https://github.com/jfree/jfreechart/pull/172));
 - observe series visibility flags in `ClusteredXYBarRenderer` ([#89](https://github.com/jfree/jfreechart/pull/89));
 - fix for exception on extreme zoom on `NumberAxis` (bug #64);
 - remove alpha channel from copy-to-clipboard (fixes bug #182);
