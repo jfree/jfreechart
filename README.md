@@ -73,7 +73,7 @@ History
 -------
 
 ##### Version 1.6.0 (not yet released)
-- use ThreadLocal for calendars in time series datasets ([#171](https://github.com/jfree/jfreechart/pull/171));
+- use `ThreadLocal` for calendars in time series datasets ([#171](https://github.com/jfree/jfreechart/pull/171));
 - modify buffer in `ChartPanel` to handle high DPI displays ([#170](https://github.com/jfree/jfreechart/issues/170));
 - add options to control pan vs zoom in `ChartPanel` ([#172](https://github.com/jfree/jfreechart/pull/172));
 - observe series visibility flags in `ClusteredXYBarRenderer` ([#89](https://github.com/jfree/jfreechart/pull/89));
@@ -81,8 +81,8 @@ History
 - remove alpha channel from copy-to-clipboard (fixes bug #182);
 - apply rendering hints to overlays - fixes bug #187;
 - fix bugs on crosshair labels ([#189](https://github.com/jfree/jfreechart/pull/189), [#194](https://github.com/jfree/jfreechart/pull/194));
-- removed ObjectUtils class (https://github.com/jfree/jfreechart/pull/163)
-- removed unused `URLUtilities` class (PR #162)
+- removed `ObjectUtils` class ([#163](https://github.com/jfree/jfreechart/pull/163));
+- removed unused `URLUtilities` class ([#162](https://github.com/jfree/jfreechart/pull/162))
 - fixed `LayeredBarRenderer` (bugs #169 and #175);
 - update French translations (bug #186);
 - fix "Save_as" entries in localisation files (bug #184);
