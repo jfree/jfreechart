@@ -27,14 +27,10 @@
  * -----------------
  * PiePlotState.java
  * -----------------
- * (C) Copyright 2004-2008, by Object Refinery Limited.
+ * (C) Copyright 2004-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 06-Mar-2004 : Version 1 (DG);
  *
  */
 
@@ -201,8 +197,7 @@ public class PiePlotState extends RendererState {
 
     /**
      * Returns the y-coordinate (in Java2D space) of the center of the pie
-     * chart.  For the {@link PiePlot3D} class, we derive this from the top of
-     * the pie.
+     * chart.
      *
      * @return The y-coordinate (in Java2D space).
      */

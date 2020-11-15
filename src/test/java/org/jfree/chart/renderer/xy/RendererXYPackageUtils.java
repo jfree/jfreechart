@@ -27,23 +27,10 @@
  * ---------------------------
  * RendererXYPackageTests.java
  * ---------------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited.
+ * (C) Copyright 2004-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 23-Aug-2004 : Restructured org.jfree.chart.renderer package (DG);
- * 06-Jan-2005 : Added method to create test dataset (DG);
- * 07-Jan-2005 : Added a second method to create a test dataset (DG);
- * 19-Jan-2005 : Added main() method to run JUnit in text mode (DG);
- * 25-Oct-2006 : Added tests for XYErrorRenderer class (DG);
- * 31-Jan-2007 : Added XYBlockRendererTests (DG);
- * 26-Feb-2007 : Added DeviationRendererTests (DG);
- * 30-Apr-2007 : Added XYLine3DRendererTests (DG);
- * 25-May-2007 : Added VectorRendererTests (DG);
- * 25-Jul-2007 : Added XYSplineAndRendererTests (DG);
  *
  */
 

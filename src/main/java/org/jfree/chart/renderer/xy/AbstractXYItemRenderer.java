@@ -876,8 +876,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      * @param g2  the graphics device.
      * @param plot  the plot.
      * @param axis  the value axis.
-     * @param dataArea  the area for plotting data (not yet adjusted for any 3D
-     *                  effect).
+     * @param dataArea  the area for plotting data.
      * @param value  the value at which the grid line should be drawn.
      * @param paint  the paint ({@code null} not permitted).
      * @param stroke  the stroke ({@code null} not permitted).
@@ -920,8 +919,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      * @param g2  the graphics device.
      * @param plot  the plot.
      * @param axis  the value axis.
-     * @param dataArea  the area for plotting data (not yet adjusted for any 3D
-     *                  effect).
+     * @param dataArea  the area for plotting data.
      * @param value  the value at which the grid line should be drawn.
      * @param paint  the paint.
      * @param stroke  the stroke.
