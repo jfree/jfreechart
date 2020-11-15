@@ -111,6 +111,16 @@ public class BoxAndWhiskerRendererTest {
         assertFalse(r1.equals(r2));
         r2.setMedianVisible(false);
         assertTrue(r1.equals(r2));
+
+        r1.setMinOutlierVisible(false);
+        assertFalse(r1.equals(r2));
+        r2.setMinOutlierVisible(false);
+        assertTrue(r1.equals(r2));
+
+        r1.setMaxOutlierVisible(false);
+        assertFalse(r1.equals(r2));
+        r2.setMaxOutlierVisible(false);
+        assertTrue(r1.equals(r2));
     }
 
     /**
@@ -128,6 +138,7 @@ public class BoxAndWhiskerRendererTest {
 
     /**
      * Confirm that cloning works.
+     * 
      * @throws java.lang.CloneNotSupportedException
      */
     @Test

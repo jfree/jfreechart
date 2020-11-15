@@ -86,6 +86,7 @@ History
 - fixed `LayeredBarRenderer` (bugs #169 and #175);
 - update French translations (bug #186);
 - fix "Save_as" entries in localisation files (bug #184);
+- add flags for visibility of outliers in `BoxAndWhiskerRenderer` ([#79](https://github.com/jfree/jfreechart/pull/79));
 - added generics;
 - `DefaultIntervalCategoryDataset` no longer allows null keys in constructor (this
   is a consequence of introducing generics);
