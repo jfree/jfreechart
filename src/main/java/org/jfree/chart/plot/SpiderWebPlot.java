@@ -427,7 +427,7 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
     /**
      * Returns the head percent (the default value is 0.01).
      *
-     * @return The head percent (always > 0).
+     * @return The head percent (always &gt; 0).
      *
      * @see #setHeadPercent(double)
      */
