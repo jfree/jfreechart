@@ -68,6 +68,7 @@ History
 - set flag in XML parser to avoid XML eXternal Entity injection (XXE) ([#130](https://github.com/jfree/jfreechart/issues/130));
 - update French translations ([#186](https://github.com/jfree/jfreechart/pull/186));
 - fix "Save_as" entries in localisation files ([#184](https://github.com/jfree/jfreechart/pull/184));
+- add flags for visibility of outliers in `BoxAndWhiskerRenderer` ([#79](https://github.com/jfree/jfreechart/pull/79));
 - remove `PiePlot3D` and related code ([#193](https://github.com/jfree/jfreechart/issues/93)).
 
 ##### Version 1.5.1 (29 October 2020)
