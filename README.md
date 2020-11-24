@@ -44,7 +44,7 @@ You can build JFreeChart using Maven.  The build requires JDK 8 or later.
 #### Maven
 Using Maven you can build JFreeChart using the following command (issued from the root directory of the project):
 
-    mvn clean install
+    mvn clean verify
 
 
 Demos
@@ -74,8 +74,8 @@ History
 ##### Version 1.5.1 (29 October 2020)
 - add `DeviationStepRenderer` ([#173](https://github.com/jfree/jfreechart/pull/173))
 - modify buffer in `ChartPanel` to handle high DPI displays ([#170](https://github.com/jfree/jfreechart/issues/170));
-- fix for exception on extreme zoom on NumberAxis (bug #64);
-- fix for `LayeredBarRenderer` (bug #169);
+- fix for exception on extreme zoom on NumberAxis ([#64](https://github.com/jfree/jfreechart/issues/64));
+- fix for `LayeredBarRenderer` ([#169](https://github.com/jfree/jfreechart/issues/169));
 - add Catalan translations (PR #117);
 - add automatic module name `org.jfree.jfreechart`;
 - migrate to JUnit 5;
