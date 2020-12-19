@@ -569,8 +569,7 @@ public class PeriodAxis extends ValueAxis
         double labelHeight, labelWidth;
         double tickLabelBandsDimension = 0.0;
 
-        for (int i = 0; i < this.labelInfo.length; i++) {
-            PeriodAxisLabelInfo info = this.labelInfo[i];
+        for (PeriodAxisLabelInfo info : this.labelInfo) {
             FontMetrics fm = g2.getFontMetrics(info.getLabelFont());
             tickLabelBandsDimension
                 += info.getPadding().extendHeight(fm.getHeight());
