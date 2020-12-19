@@ -120,9 +120,9 @@
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>3.2.0</version>
                 <configuration>
-                    <docfilessubdirs/>
                     <linksource>true</linksource>
                     <source>8</source>
+                    <docfilessubdirs>true</docfilessubdirs>
                 </configuration>
             </plugin>
             
@@ -165,12 +165,6 @@
                         <version>1.0</version>
                     </signature>
                 </configuration>
-            </plugin>
-          
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-site-plugin</artifactId>
-                <version>3.8.2</version>
             </plugin>
         </plugins>
     </build>
@@ -240,9 +234,9 @@
                         <artifactId>maven-javadoc-plugin</artifactId>
                         <version>3.2.0</version>
                         <configuration>
-                            <docfilessubdirs/>
                             <linksource>true</linksource>
                             <source>8</source>
+                            <docfilessubdirs>true</docfilessubdirs>
                         </configuration>
                         <executions>
                             <execution>
