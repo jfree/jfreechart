@@ -617,6 +617,16 @@ public class PeriodAxis extends ValueAxis
             Rectangle2D dataArea, RectangleEdge edge,
             PlotRenderingInfo plotState) {
 
+        // if the axis is not visible, don't draw it... bug#198
+        if (!isVisible()) {
+            AxisState state = new AxisState(cursor);
+            // even though the axis is not visible, we need to refresh ticks in
+            // case the grid is being drawn...
+            List ticks = refreshTicks(g2, state, dataArea, edge);
+            state.setTicks(ticks);
+            return state;
+        }
+
         AxisState axisState = new AxisState(cursor);
         if (isAxisLineVisible()) {
             drawAxisLine(g2, cursor, dataArea, edge);

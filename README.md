@@ -63,6 +63,7 @@ History
 - observe series visibility flag in `ClusteredXYBarRenderer` ([#89](https://github.com/jfree/jfreechart/issues/89));
 - apply rendering hints to overlays ([#187](https://github.com/jfree/jfreechart/issues/187));
 - don't draw disabled outlines on crosshair labels ([#189](https://github.com/jfree/jfreechart/pull/189));
+- observe axis visibility flag in `PeriodAxis` ([#198](https://github.com/jfree/jfreechart/issues/198));
 - ensure label offsets are used in `CrosshairOverlay` ([#190](https://github.com/jfree/jfreechart/pull/190));
 - remove alpha channel from copy-to-clipboard ([#182](https://github.com/jfree/jfreechart/issues/182));
 - set flag in XML parser to avoid XML eXternal Entity injection (XXE) ([#130](https://github.com/jfree/jfreechart/issues/130));
