@@ -631,6 +631,8 @@ public abstract class ChartFactory {
      * @return A pie chart.
      *
      * @since 1.0.7
+     * 
+     * @deprecated For 3D pie charts, use Orson Charts (https://github.com/jfree/orson-charts).  
      */
     public static JFreeChart createPieChart3D(String title, PieDataset dataset,
             boolean legend, boolean tooltips, Locale locale) {
@@ -659,6 +661,7 @@ public abstract class ChartFactory {
      * @return A pie chart.
      * 
      * @since 1.0.16
+     * @deprecated For 3D pie charts, use Orson Charts (https://github.com/jfree/orson-charts).  
      */
     public static JFreeChart createPieChart3D(String title,
             PieDataset dataset) {
@@ -677,6 +680,7 @@ public abstract class ChartFactory {
      * @param urls  configure chart to generate URLs?
      *
      * @return A pie chart.
+     * @deprecated For 3D pie charts, use Orson Charts (https://github.com/jfree/orson-charts).  
      */
     public static JFreeChart createPieChart3D(String title, PieDataset dataset,
             boolean legend, boolean tooltips, boolean urls) {

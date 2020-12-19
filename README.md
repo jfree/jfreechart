@@ -70,7 +70,7 @@ History
 - update French translations ([#186](https://github.com/jfree/jfreechart/pull/186));
 - fix "Save_as" entries in localisation files ([#184](https://github.com/jfree/jfreechart/pull/184));
 - add flags for visibility of outliers in `BoxAndWhiskerRenderer` ([#79](https://github.com/jfree/jfreechart/pull/79));
-- remove `PiePlot3D` and related code ([#193](https://github.com/jfree/jfreechart/issues/93)).
+- deprecated `PiePlot3D` and related methods, for 3D pie charts, use Orson Charts (https://github.com/jfree/orson-charts).  
 
 ##### Version 1.5.1 (29 October 2020)
 - add `DeviationStepRenderer` ([#173](https://github.com/jfree/jfreechart/pull/173))
