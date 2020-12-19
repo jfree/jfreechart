@@ -72,6 +72,7 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.Marker;
 import org.jfree.chart.plot.MultiplePiePlot;
 import org.jfree.chart.plot.PiePlot;
+import org.jfree.chart.plot.PiePlot3D;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PolarPlot;
 import org.jfree.chart.plot.RingPlot;
@@ -107,6 +108,7 @@ import org.jfree.chart.renderer.xy.XYStepAreaRenderer;
 import org.jfree.chart.renderer.xy.XYStepRenderer;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.chart.ui.Layer;
+import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.urls.PieURLGenerator;
@@ -594,6 +596,139 @@ public abstract class ChartFactory {
         plot.setDataExtractOrder(order);
         plot.setBackgroundPaint(null);
         plot.setOutlineStroke(null);
+
+        if (tooltips) {
+            PieToolTipGenerator tooltipGenerator
+                = new StandardPieToolTipGenerator();
+            PiePlot pp = (PiePlot) plot.getPieChart().getPlot();
+            pp.setToolTipGenerator(tooltipGenerator);
+        }
+
+        if (urls) {
+            PieURLGenerator urlGenerator = new StandardPieURLGenerator();
+            PiePlot pp = (PiePlot) plot.getPieChart().getPlot();
+            pp.setURLGenerator(urlGenerator);
+        }
+
+        JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
+                plot, legend);
+        currentTheme.apply(chart);
+        return chart;
+
+    }
+
+    /**
+     * Creates a 3D pie chart using the specified dataset.  The chart object
+     * returned by this method uses a {@link PiePlot3D} instance as the
+     * plot.
+     *
+     * @param title  the chart title ({@code null} permitted).
+     * @param dataset  the dataset for the chart ({@code null} permitted).
+     * @param legend  a flag specifying whether or not a legend is required.
+     * @param tooltips  configure chart to generate tool tips?
+     * @param locale  the locale ({@code null} not permitted).
+     *
+     * @return A pie chart.
+     *
+     * @since 1.0.7
+     */
+    public static JFreeChart createPieChart3D(String title, PieDataset dataset,
+            boolean legend, boolean tooltips, Locale locale) {
+
+        Args.nullNotPermitted(locale, "locale");
+        PiePlot3D plot = new PiePlot3D(dataset);
+        plot.setInsets(new RectangleInsets(0.0, 5.0, 5.0, 5.0));
+        if (tooltips) {
+            plot.setToolTipGenerator(new StandardPieToolTipGenerator(locale));
+        }
+        JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
+                plot, legend);
+        currentTheme.apply(chart);
+        return chart;
+
+    }
+
+    /**
+     * Creates a 3D pie chart using the specified dataset.  The chart object
+     * returned by this method uses a {@link PiePlot3D} instance as the
+     * plot.
+     *
+     * @param title  the chart title ({@code null} permitted).
+     * @param dataset  the dataset for the chart ({@code null} permitted).
+     *
+     * @return A pie chart.
+     * 
+     * @since 1.0.16
+     */
+    public static JFreeChart createPieChart3D(String title,
+            PieDataset dataset) {
+        return createPieChart3D(title, dataset, true, true, false);
+    }
+    
+    /**
+     * Creates a 3D pie chart using the specified dataset.  The chart object
+     * returned by this method uses a {@link PiePlot3D} instance as the
+     * plot.
+     *
+     * @param title  the chart title ({@code null} permitted).
+     * @param dataset  the dataset for the chart ({@code null} permitted).
+     * @param legend  a flag specifying whether or not a legend is required.
+     * @param tooltips  configure chart to generate tool tips?
+     * @param urls  configure chart to generate URLs?
+     *
+     * @return A pie chart.
+     */
+    public static JFreeChart createPieChart3D(String title, PieDataset dataset,
+            boolean legend, boolean tooltips, boolean urls) {
+
+        PiePlot3D plot = new PiePlot3D(dataset);
+        plot.setInsets(new RectangleInsets(0.0, 5.0, 5.0, 5.0));
+        if (tooltips) {
+            plot.setToolTipGenerator(new StandardPieToolTipGenerator());
+        }
+        if (urls) {
+            plot.setURLGenerator(new StandardPieURLGenerator());
+        }
+        JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
+                plot, legend);
+        currentTheme.apply(chart);
+        return chart;
+
+    }
+
+    /**
+     * Creates a chart that displays multiple pie plots.  The chart object
+     * returned by this method uses a {@link MultiplePiePlot} instance as the
+     * plot.
+     *
+     * @param title  the chart title ({@code null} permitted).
+     * @param dataset  the dataset ({@code null} permitted).
+     * @param order  the order that the data is extracted (by row or by column)
+     *               ({@code null} not permitted).
+     * @param legend  include a legend?
+     * @param tooltips  generate tooltips?
+     * @param urls  generate URLs?
+     *
+     * @return A chart.
+     */
+    public static JFreeChart createMultiplePieChart3D(String title,
+            CategoryDataset dataset, TableOrder order, boolean legend,
+            boolean tooltips, boolean urls) {
+
+        Args.nullNotPermitted(order, "order");
+        MultiplePiePlot plot = new MultiplePiePlot(dataset);
+        plot.setDataExtractOrder(order);
+        plot.setBackgroundPaint(null);
+        plot.setOutlineStroke(null);
+
+        JFreeChart pieChart = new JFreeChart(new PiePlot3D(null));
+        TextTitle seriesTitle = new TextTitle("Series Title",
+                new Font("SansSerif", Font.BOLD, 12));
+        seriesTitle.setPosition(RectangleEdge.BOTTOM);
+        pieChart.setTitle(seriesTitle);
+        pieChart.removeLegend();
+        pieChart.setBackgroundPaint(null);
+        plot.setPieChart(pieChart);
 
         if (tooltips) {
             PieToolTipGenerator tooltipGenerator
