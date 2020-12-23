@@ -90,53 +90,53 @@ public abstract class Axis implements Cloneable, Serializable {
     /** For serialization. */
     private static final long serialVersionUID = 7719289504573298271L;
 
-    /** The default axis visibility. */
+    /** The default axis visibility ({@code true}). */
     public static final boolean DEFAULT_AXIS_VISIBLE = true;
 
-    /** The default axis label font. */
+    /** The default axis label font ({@code Font("SansSerif", Font.PLAIN, 12)}). */
     public static final Font DEFAULT_AXIS_LABEL_FONT = new Font(
             "SansSerif", Font.PLAIN, 12);
 
-    /** The default axis label paint. */
+    /** The default axis label paint ({@code Color.BLACK}). */
     public static final Paint DEFAULT_AXIS_LABEL_PAINT = Color.BLACK;
 
-    /** The default axis label insets. */
+    /** The default axis label insets ({@code RectangleInsets(3.0, 3.0, 3.0, 3.0)}). */
     public static final RectangleInsets DEFAULT_AXIS_LABEL_INSETS
             = new RectangleInsets(3.0, 3.0, 3.0, 3.0);
 
-    /** The default axis line paint. */
+    /** The default axis line paint ({@code Color.GRAY}). */
     public static final Paint DEFAULT_AXIS_LINE_PAINT = Color.GRAY;
 
-    /** The default axis line stroke. */
+    /** The default axis line stroke ({@code BasicStroke(0.5f)}). */
     public static final Stroke DEFAULT_AXIS_LINE_STROKE = new BasicStroke(0.5f);
 
-    /** The default tick labels visibility. */
+    /** The default tick labels visibility ({@code true}). */
     public static final boolean DEFAULT_TICK_LABELS_VISIBLE = true;
 
-    /** The default tick label font. */
+    /** The default tick label font ({@code Font("SansSerif", Font.PLAIN, 10)}). */
     public static final Font DEFAULT_TICK_LABEL_FONT = new Font("SansSerif",
             Font.PLAIN, 10);
 
-    /** The default tick label paint. */
+    /** The default tick label paint ({@code Color.BLACK}). */
     public static final Paint DEFAULT_TICK_LABEL_PAINT = Color.BLACK;
 
-    /** The default tick label insets. */
+    /** The default tick label insets ({@code RectangleInsets(2.0, 4.0, 2.0, 4.0)}). */
     public static final RectangleInsets DEFAULT_TICK_LABEL_INSETS
             = new RectangleInsets(2.0, 4.0, 2.0, 4.0);
 
-    /** The default tick marks visible. */
+    /** The default tick marks visible ({@code true}). */
     public static final boolean DEFAULT_TICK_MARKS_VISIBLE = true;
 
-    /** The default tick stroke. */
+    /** The default tick stroke ({@code BasicStroke(0.5f)}). */
     public static final Stroke DEFAULT_TICK_MARK_STROKE = new BasicStroke(0.5f);
 
-    /** The default tick paint. */
+    /** The default tick paint ({@code Color.GRAY}). */
     public static final Paint DEFAULT_TICK_MARK_PAINT = Color.GRAY;
 
-    /** The default tick mark inside length. */
+    /** The default tick mark inside length ({@code 0.0f}). */
     public static final float DEFAULT_TICK_MARK_INSIDE_LENGTH = 0.0f;
 
-    /** The default tick mark outside length. */
+    /** The default tick mark outside length ({@code 2.0f}). */
     public static final float DEFAULT_TICK_MARK_OUTSIDE_LENGTH = 2.0f;
 
     /** A flag indicating whether or not the axis is visible. */
@@ -249,7 +249,8 @@ public abstract class Axis implements Cloneable, Serializable {
     private transient EventListenerList listenerList;
 
     /**
-     * Constructs an axis, using default values where necessary.
+     * Constructs an axis with the specific label and default values for other
+     * attributes.  
      *
      * @param label  the axis label ({@code null} permitted).
      */
@@ -1076,15 +1077,18 @@ public abstract class Axis implements Cloneable, Serializable {
             Rectangle2D dataArea, RectangleEdge edge);
 
     /**
-     * Created an entity for the axis.
-     *
+     * Creates an entity for the axis and adds it to the rendering info.
+     * If {@code plotState} is {@code null}, this means that rendering info
+     * is not being collected so this method simply returns without doing 
+     * anything.
+     * 
      * @param cursor  the initial cursor value.
      * @param state  the axis state after completion of the drawing with a
      *     possibly updated cursor position.
      * @param dataArea  the data area.
      * @param edge  the edge.
      * @param plotState  the PlotRenderingInfo from which a reference to the
-     *     entity collection can be obtained.
+     *     entity collection can be obtained ({@code null} permitted).
      *
      * @since 1.0.13
      */
@@ -1221,8 +1225,18 @@ public abstract class Axis implements Cloneable, Serializable {
         return result;
     }
 
+    /**
+     * Returns the x-coordinate for the point to which the axis label should 
+     * be aligned.
+     * 
+     * @param location  the axis label location ({@code null} not permitted).
+     * @param dataArea  the display area in which the data will be rendered ({@code null} not permitted).
+     * 
+     * @return The x-coordinate. 
+     */
     protected double labelLocationX(AxisLabelLocation location, 
             Rectangle2D dataArea) {
+
         if (location.equals(AxisLabelLocation.HIGH_END)) {
             return dataArea.getMaxX();
         }
@@ -1236,7 +1250,8 @@ public abstract class Axis implements Cloneable, Serializable {
     }
     
     /**
-     * Returns the y-coordinate for the specified axis location.
+     * Returns the y-coordinate for the point to which the axis label should
+     * be aligned.
      * 
      * @param location  the location ({@code null} not permitted).
      * @param dataArea  the data area ({@code null} not permitted).
