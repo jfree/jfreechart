@@ -1357,17 +1357,19 @@ public interface CategoryItemRenderer extends LegendItemSource {
     public boolean getItemCreateEntity(int series, int item);
 
     /**
-     * Returns the flag for the specified series.
+     * Returns a boolean indicating whether or not entities should be created 
+     * for the items in a series.
      * 
      * @param series  the series index (zero-based).
      * 
-     * @return The flag for the series (possibly {@code null}). 
+     * @return The flag for the series (possibly {@code null}).
      */
     public Boolean getSeriesCreateEntities(int series);
 
     /** 
-     * Sets the flag for a series and sends a {@link RendererChangeEvent} to 
-     * all registered listeners.
+     * Sets a flag that indicates whether or not entities should be created during
+     * rendering for the items in the specified series, and sends a 
+     * {@link RendererChangeEvent} to all registered listeners.
      * 
      * @param series  the series index (zero-based).
      * @param create  the new flag value ({@code null} permitted).
@@ -1375,8 +1377,9 @@ public interface CategoryItemRenderer extends LegendItemSource {
     public void setSeriesCreateEntities(int series, Boolean create);
 
     /** 
-     * Sets the flag for a series and, if requested, sends a 
-     * {@link RendererChangeEvent} to all registered listeners.
+     * Sets a flag that indicates whether or not entities should be created during
+     * rendering for the items in the specified series, and sends a 
+     * {@link RendererChangeEvent} to all registered listeners if requested.
      * 
      * @param series  the series index (zero-based).
      * @param create  the new flag value ({@code null} permitted).
