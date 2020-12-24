@@ -161,7 +161,15 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
         JPanel panel = createPlotPanel(plot);
         add(panel);
     }
-    
+
+    /**
+     * Creates and returns a panel for editing the settings of the specified
+     * plot.
+     * 
+     * @param plot  the plot.
+     * 
+     * @return A panel. 
+     */
     protected JPanel createPlotPanel(Plot plot) {
         this.plotInsets = plot.getInsets();
         this.backgroundPaintSample = new PaintSample(plot.getBackgroundPaint());
@@ -301,8 +309,15 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
         return panel;
     }
 
-    protected JTabbedPane createPlotTabs(Plot plot)
-    {
+    /**
+     * Creates and returns a tabbed pane containing controls for setting
+     * the attributes of the specified plot.
+     * 
+     * @param plot  the plot.
+     * 
+     * @return A tabbed pane. 
+     */
+    protected JTabbedPane createPlotTabs(Plot plot) {
         JTabbedPane tabs = new JTabbedPane();
         tabs.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
 

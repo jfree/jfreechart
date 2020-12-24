@@ -33,10 +33,6 @@
  *                                   by David Gilbert);
  * Contributor(s):   -;
  *
- * Changes
- * -------
- * 03-Nov-2011 : Version 1, based on DefaultNumberAxisEditor.java (MH);
- *
  */
 
 package org.jfree.chart.editor;
@@ -68,8 +64,8 @@ import org.jfree.chart.util.ResourceBundleWrapper;
 /**
  * A panel for editing properties of a {@link ValueAxis}.
  */
-class DefaultValueAxisEditor extends DefaultAxisEditor
-    implements FocusListener {
+class DefaultValueAxisEditor extends DefaultAxisEditor 
+        implements FocusListener {
 
     /** A flag that indicates whether or not the axis range is determined
      *  automatically.
@@ -181,6 +177,11 @@ class DefaultValueAxisEditor extends DefaultAxisEditor
                 createTickUnitPanel());
     }
 
+    /**
+     * Creates and returns a panel for displaying tick unit settings.
+     * 
+     * @return A panel.
+     */
     protected JPanel createTickUnitPanel() {
         JPanel tickUnitPanel = new JPanel(new LCBLayout(3));
         tickUnitPanel.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
@@ -360,6 +361,9 @@ class DefaultValueAxisEditor extends DefaultAxisEditor
         }
     }
 
+    /**
+     * Sets the {@code autoTickUnitSelection} flag to match the control.
+     */
     public void toggleAutoTick() {
         this.autoTickUnitSelection = this.autoTickUnitSelectionCheckBox.isSelected();
     }
