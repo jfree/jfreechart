@@ -30,7 +30,7 @@
  * (C) Copyright 2002-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand (generics for bug fix to PiePlot);
  *
  */
 
@@ -44,14 +44,14 @@ import org.jfree.chart.util.PublicCloneable;
  * A (key, value) pair.  This class provides a default implementation
  * of the {@link KeyedValue} interface.
  */
-public class DefaultKeyedValue implements KeyedValue, Cloneable,
+public class DefaultKeyedValue<K extends Comparable<K>> implements KeyedValue, Cloneable,
         PublicCloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -7388924517460437712L;
 
     /** The key. */
-    private Comparable key;
+    private K key;
 
     /** The value. */
     private Number value;
@@ -63,7 +63,7 @@ public class DefaultKeyedValue implements KeyedValue, Cloneable,
      *         permitted).
      * @param value  the value ({@code null} permitted).
      */
-    public DefaultKeyedValue(Comparable key, Number value) {
+    public DefaultKeyedValue(K key, Number value) {
         Args.nullNotPermitted(key, "key");
         this.key = key;
         this.value = value;
@@ -75,7 +75,7 @@ public class DefaultKeyedValue implements KeyedValue, Cloneable,
      * @return The key (never {@code null}).
      */
     @Override
-    public Comparable getKey() {
+    public K getKey() {
         return this.key;
     }
 
@@ -113,7 +113,7 @@ public class DefaultKeyedValue implements KeyedValue, Cloneable,
         if (!(obj instanceof DefaultKeyedValue)) {
             return false;
         }
-        DefaultKeyedValue that = (DefaultKeyedValue) obj;
+        DefaultKeyedValue<K> that = (DefaultKeyedValue) obj;
 
         if (!this.key.equals(that.key)) {
             return false;
