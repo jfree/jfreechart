@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2019, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,21 +27,11 @@
  * --------------------
  * XYShapeRenderer.java
  * --------------------
- * (C) Copyright 2008-2019 by Andreas Haumer, xS+S and Contributors.
+ * (C) Copyright 2008-2020 by Andreas Haumer, xS+S and Contributors.
  *
  * Original Author:  Martin Hoeller (x Software + Systeme  xS+S - Andreas
  *                       Haumer);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes:
- * --------
- * 17-Sep-2008 : Version 1, based on a contribution from Martin Hoeller with
- *               amendments by David Gilbert (DG);
- * 16-Feb-2010 : Added findZBounds() (patch 2952086) (MH);
- * 19-Oct-2011 : Fixed NPE in findRangeBounds() (bug 3026341) (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
- * 09-Sep-2015 : Add update for crosshair (DG);
- * 18-Feb-2017 : Updates for crosshairs (bug #36) (DG);
  *
  */
 
@@ -91,8 +81,7 @@ import org.jfree.data.xy.XYZDataset;
  * {@code XYShapeRendererDemo1.java} program included in the JFreeChart
  * demo collection:
  * <br><br>
- * <img src="../../../../../images/XYShapeRendererSample.png"
- * alt="XYShapeRendererSample.png">
+ * <img src="doc-files/XYShapeRendererSample.png" alt="XYShapeRendererSample.png">
  * <br><br>
  * This renderer has similarities to, but also differences from, the
  * {@link XYLineAndShapeRenderer}.

@@ -70,8 +70,7 @@ import org.jfree.data.statistics.MultiValueCategoryDataset;
  * the {@code ScatterRendererDemo1.java} program included in the
  * JFreeChart Demo Collection:
  * <br><br>
- * <img src="../../../../../images/ScatterRendererSample.png"
- * alt="ScatterRendererSample.png">
+ * <img src="doc-files/ScatterRendererSample.png" alt="ScatterRendererSample.png">
  *
  * @since 1.0.7
  */

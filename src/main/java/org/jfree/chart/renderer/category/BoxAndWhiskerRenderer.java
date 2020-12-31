@@ -27,7 +27,7 @@
  * --------------------------
  * BoxAndWhiskerRenderer.java
  * --------------------------
- * (C) Copyright 2003-2017, by David Browning and Contributors.
+ * (C) Copyright 2003-2020, by David Browning and Contributors.
  *
  * Original Author:  David Browning (for the Australian Institute of Marine
  *                   Science);
@@ -88,7 +88,7 @@ import org.jfree.data.statistics.BoxAndWhiskerCategoryDataset;
  * by the {@code BoxAndWhiskerChartDemo1.java} program included in the
  * JFreeChart Demo Collection:
  * <br><br>
- * <img src="../../../../../images/BoxAndWhiskerRendererSample.png"
+ * <img src="doc-files/BoxAndWhiskerRendererSample.png"
  * alt="BoxAndWhiskerRendererSample.png">
  */
 public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
@@ -632,8 +632,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
         if (orientation == PlotOrientation.HORIZONTAL) {
             drawHorizontalItem(g2, state, dataArea, plot, domainAxis,
                     rangeAxis, dataset, row, column);
-        }
-        else if (orientation == PlotOrientation.VERTICAL) {
+        } else if (orientation == PlotOrientation.VERTICAL) {
             drawVerticalItem(g2, state, dataArea, plot, domainAxis,
                     rangeAxis, dataset, row, column);
         }

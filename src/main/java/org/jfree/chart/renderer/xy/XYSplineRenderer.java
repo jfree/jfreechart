@@ -66,8 +66,7 @@ import org.jfree.data.xy.XYDataset;
  * {@code XYSplineRendererDemo1.java} program included in the JFreeChart
  * demo collection:
  * <br><br>
- * <img src="../../../../../images/XYSplineRendererSample.png"
- * alt="XYSplineRendererSample.png">
+ * <img src="doc-files/XYSplineRendererSample.png" alt="XYSplineRendererSample.png">
  *
  * @since 1.0.7
  */

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * XYBarRenderer.java
  * ------------------
- * (C) Copyright 2001-2017, by Object Refinery Limited.
+ * (C) Copyright 2001-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Richard Atkinson;
@@ -35,72 +35,6 @@
  *                   Bill Kelemen;
  *                   Marc van Glabbeek (bug 1775452);
  *                   Richard West, Advanced Micro Devices, Inc.;
- *
- * Changes
- * -------
- * 13-Dec-2001 : Version 1, makes VerticalXYBarPlot class redundant (DG);
- * 23-Jan-2002 : Added DrawInfo parameter to drawItem() method (DG);
- * 09-Apr-2002 : Removed the translated zero from the drawItem method. Override
- *               the initialise() method to calculate it (DG);
- * 24-May-2002 : Incorporated tooltips into chart entities (DG);
- * 25-Jun-2002 : Removed redundant import (DG);
- * 05-Aug-2002 : Small modification to drawItem method to support URLs for HTML
- *               image maps (RA);
- * 25-Mar-2003 : Implemented Serializable (DG);
- * 01-May-2003 : Modified drawItem() method signature (DG);
- * 30-Jul-2003 : Modified entity constructor (CZ);
- * 20-Aug-2003 : Implemented Cloneable and PublicCloneable (DG);
- * 24-Aug-2003 : Added null checks in drawItem (BK);
- * 16-Sep-2003 : Changed ChartRenderingInfo --> PlotRenderingInfo (DG);
- * 07-Oct-2003 : Added renderer state (DG);
- * 05-Dec-2003 : Changed call to obtain outline paint (DG);
- * 10-Feb-2004 : Added state class, updated drawItem() method to make
- *               cut-and-paste overriding easier, and replaced property change
- *               with RendererChangeEvent (DG);
- * 25-Feb-2004 : Replaced CrosshairInfo with CrosshairState (DG);
- * 26-Apr-2004 : Added gradient paint transformer (DG);
- * 19-May-2004 : Fixed bug (879709) with bar zero value for secondary axis (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
- *               getYValue() (DG);
- * 01-Sep-2004 : Added a flag to control whether or not the bar outlines are
- *               drawn (DG);
- * 03-Sep-2004 : Added option to use y-interval from dataset to determine the
- *               length of the bars (DG);
- * 08-Sep-2004 : Added equals() method and updated clone() method (DG);
- * 26-Jan-2005 : Added override for getLegendItem() method (DG);
- * 20-Apr-2005 : Use generators for label tooltips and URLs (DG);
- * 19-May-2005 : Added minimal item label implementation - needs improving (DG);
- * 14-Oct-2005 : Fixed rendering problem with inverted axes (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 21-Jun-2006 : Improved item label handling - see bug 1501768 (DG);
- * 24-Aug-2006 : Added crosshair support (DG);
- * 13-Dec-2006 : Updated getLegendItems() to return gradient paint
- *               transformer (DG);
- * 02-Feb-2007 : Changed setUseYInterval() to only notify when the flag
- *               changes (DG);
- * 06-Feb-2007 : Fixed bug 1086307, crosshairs with multiple axes (DG);
- * 09-Feb-2007 : Updated getLegendItem() to observe drawBarOutline flag (DG);
- * 05-Mar-2007 : Applied patch 1671126 by Sergei Ivanov, to fix rendering with
- *               LogarithmicAxis (DG);
- * 20-Apr-2007 : Updated getLegendItem() for renderer change (DG);
- * 17-May-2007 : Set datasetIndex and seriesIndex in getLegendItem() (DG);
- * 18-May-2007 : Set dataset and seriesKey for LegendItem (DG);
- * 15-Jun-2007 : Changed default for drawBarOutline to false (DG);
- * 26-Sep-2007 : Fixed bug 1775452, problem with bar margins for inverted
- *               axes, thanks to Marc van Glabbeek (DG);
- * 12-Nov-2007 : Fixed NPE in drawItemLabel() method, thanks to Richard West
- *               (see patch 1827829) (DG);
- * 17-Jun-2008 : Apply legend font and paint attributes (DG);
- * 19-Jun-2008 : Added findRangeBounds() method override to fix bug in default
- *               axis range (DG);
- * 24-Jun-2008 : Added new barPainter mechanism (DG);
- * 03-Feb-2009 : Added defaultShadowsVisible flag (DG);
- * 05-Feb-2009 : Added barAlignmentFactor (DG);
- * 10-May-2012 : Fix findDomainBounds() and findRangeBounds() to account for
- *               non-visible series (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
- * 24-Aug-2014 : Add begin/endElementGroup() (DG);
- * 18-Feb-2017 : Updates for crosshairs (bug #36) (DG);
  *
  */
 
@@ -150,8 +84,7 @@ import org.jfree.data.xy.XYDataset;
  * {@code XYBarChartDemo1.java} program included in the JFreeChart
  * demo collection:
  * <br><br>
- * <img src="../../../../../images/XYBarRendererSample.png"
- * alt="XYBarRendererSample.png">
+ * <img src="doc-files/XYBarRendererSample.png" alt="XYBarRendererSample.png">
  */
 public class XYBarRenderer extends AbstractXYItemRenderer
         implements XYItemRenderer, Cloneable, PublicCloneable, Serializable {

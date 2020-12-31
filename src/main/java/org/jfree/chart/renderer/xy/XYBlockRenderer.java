@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2018, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * XYBlockRenderer.java
  * --------------------
- * (C) Copyright 2006-2018, by Object Refinery Limited.
+ * (C) Copyright 2006-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -65,8 +65,7 @@ import org.jfree.data.xy.XYZDataset;
  * {@code XYBlockChartDemo1.java} program included in the JFreeChart
  * demo collection:
  * <br><br>
- * <img src="../../../../../images/XYBlockRendererSample.png"
- * alt="XYBlockRendererSample.png">
+ * <img src="doc-files/XYBlockRendererSample.png" alt="XYBlockRendererSample.png">
  *
  * @since 1.0.4
  */

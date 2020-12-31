@@ -67,7 +67,7 @@ import org.jfree.data.xy.XYDataset;
  * {@code ClusteredXYBarRendererDemo1.java} program included in the
  * JFreeChart demo collection:
  * <br><br>
- * <img src="../../../../../images/ClusteredXYBarRendererSample.png"
+ * <img src="doc-files/ClusteredXYBarRendererSample.png"
  * alt="ClusteredXYBarRendererSample.png">
  * <P>
  * This renderer does not include code to calculate the crosshair point for the
@@ -245,7 +245,6 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
         double intervalH = Math.abs(yy0 - yy1);  // we don't need the sign
 
         PlotOrientation orientation = plot.getOrientation();
-
 
         List<Integer> visibleSeries = new ArrayList<Integer>();
         for (int i = 0; i < dataset.getSeriesCount(); i++) {

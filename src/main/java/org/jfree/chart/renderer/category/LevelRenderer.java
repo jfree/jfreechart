@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,25 +27,10 @@
  * ------------------
  * LevelRenderer.java
  * ------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited.
+ * (C) Copyright 2004-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Peter Kolb (patch 2511330);
- *
- * Changes
- * -------
- * 09-Jan-2004 : Version 1 (DG);
- * 05-Nov-2004 : Modified drawItem() signature (DG);
- * 20-Apr-2005 : Renamed CategoryLabelGenerator
- *               --> CategoryItemLabelGenerator (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 23-Jan-2006 : Renamed getMaxItemWidth() --> getMaximumItemWidth() (DG);
- * 13-May-2008 : Code clean-up (DG);
- * 26-Jun-2008 : Added crosshair support (DG);
- * 23-Jan-2009 : Set more appropriate default shape in legend (DG);
- * 23-Jan-2009 : Added support for seriesVisible flags - see patch
- *               2511330 (PK)
- * 24-Aug-2014 : Add element hinting for JFreeSVG (DG);
  *
  */
 
@@ -79,8 +64,7 @@ import org.jfree.data.category.CategoryDataset;
  * {@code OverlaidBarChartDemo2.java} program included in the JFreeChart
  * Demo Collection:
  * <br><br>
- * <img src="../../../../../images/LevelRendererSample.png"
- * alt="LevelRendererSample.png">
+ * <img src="doc-files/LevelRendererSample.png" alt="LevelRendererSample.png">
  */
 public class LevelRenderer extends AbstractCategoryItemRenderer
         implements Cloneable, PublicCloneable, Serializable {

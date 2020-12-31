@@ -61,7 +61,7 @@ import org.jfree.data.category.CategoryDataset;
  * {@code LayeredBarChartDemo1.java} program included in the JFreeChart
  * Demo Collection:
  * <br><br>
- * <img src="../../../../../images/LayeredBarRendererSample.png"
+ * <img src="doc-files/LayeredBarRendererSample.png"
  * alt="LayeredBarRendererSample.png">
  */
 public class LayeredBarRenderer extends BarRenderer implements Serializable {
