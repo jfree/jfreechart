@@ -344,7 +344,23 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
         return findValueRange(xRange, xAnchor, calendar);
     }
 
-    public Range findValueRange(Range xRange, TimePeriodAnchor xAnchor, Calendar calendar) {
+    /**
+     * Finds the range of y-values that fall within the specified range of
+     * x-values (where the x-values are interpreted as milliseconds since the
+     * epoch and converted to time periods using the specified calendar).
+     * 
+     * @param xRange  the subset of x-values to use ({@code null} not
+     *     permitted).
+     * @param xAnchor  the anchor point for the x-values ({@code null}
+     *     not permitted).
+     * @param calendar  the calendar ({@code null} not permitted).
+     * 
+     * @return The range of y-values.
+     * 
+     * @since 1.0.18
+     */
+    public Range findValueRange(Range xRange, TimePeriodAnchor xAnchor, 
+            Calendar calendar) {
         // since the items are ordered, we could be more clever here and avoid
         // iterating over all the data
         double lowY = Double.POSITIVE_INFINITY;

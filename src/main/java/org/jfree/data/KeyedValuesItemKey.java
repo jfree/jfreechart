@@ -39,6 +39,9 @@ package org.jfree.data;
 import java.io.Serializable;
 import org.jfree.chart.util.Args;
 
+/**
+ * A reference to a specific item in a {@link KeyedValues} data structure.
+ */
 public class KeyedValuesItemKey implements ItemKey, Serializable {
     
     /** The key for the item. */
