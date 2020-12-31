@@ -365,8 +365,8 @@ public interface CategoryItemRenderer extends LegendItemSource {
     public void setSeriesPaint(int series, Paint paint);
 
     /**
-     * Sets the paint used for a series and sends a {@link RendererChangeEvent}
-     * to all registered listeners if requested.
+     * Sets the paint used for a series and, if requested, sends a 
+     * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param series  the series index (zero-based).
      * @param paint  the paint ({@code null} permitted).
@@ -377,7 +377,9 @@ public interface CategoryItemRenderer extends LegendItemSource {
     public void setSeriesPaint(int series, Paint paint, boolean notify);
 
     /**
-     * Returns the default paint.
+     * Returns the default paint.  During rendering, a renderer will first look
+     * up the series paint and, if this is {@code null}, it will use the
+     * default paint.
      *
      * @return The default paint (never {@code null}).
      *
@@ -506,7 +508,9 @@ public interface CategoryItemRenderer extends LegendItemSource {
     public void setSeriesOutlinePaint(int series, Paint paint, boolean notify);
 
     /**
-     * Returns the default outline paint.
+     * Returns the default outline paint.  During rendering, the renderer
+     * will look up the series outline paint and, if this is {@code null}, it 
+     * will use the default outline paint.
      *
      * @return The paint (never {@code null}).
      *
@@ -980,9 +984,8 @@ public interface CategoryItemRenderer extends LegendItemSource {
             CategoryToolTipGenerator generator);
 
     /**
-     * Sets the tool tip generator for a series and sends a
-     * {@link org.jfree.chart.event.RendererChangeEvent} to all registered
-     * listeners.
+     * Sets the tool tip generator for a series and, if requested, sends a
+     * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param series  the series index (zero-based).
      * @param generator  the generator ({@code null} permitted).
@@ -1015,7 +1018,7 @@ public interface CategoryItemRenderer extends LegendItemSource {
 
     /**
      * Sets the default tool tip generator and sends a
-     * {@link org.jfree.chart.event.RendererChangeEvent} to all registered
+     * {@link RendererChangeEvent} to all registered
      * listeners if requested.
      *
      * @param generator  the generator ({@code null} permitted).
@@ -1344,11 +1347,13 @@ public interface CategoryItemRenderer extends LegendItemSource {
     // CREATE ENTITIES
 
     /**
-     * Returns a boolean indicating whether or not an entity should be created
-     * for the specified data item.
+     * Returns a flag that determines whether or not an entity is generated
+     * for the specified item.  The standard implementation of this method
+     * will typically return the flag for the series or, if that is 
+     * {@code null}, the value returned by {@link #getDefaultCreateEntities()}.
      * 
-     * @param series  the series index.
-     * @param item  the item index.
+     * @param series  the series index (zero-based).
+     * @param item  the item index (zero-based).
      * 
      * @return A boolean. 
      */
@@ -1358,7 +1363,7 @@ public interface CategoryItemRenderer extends LegendItemSource {
      * Returns a boolean indicating whether or not entities should be created 
      * for the items in a series.
      * 
-     * @param series  the series index.
+     * @param series  the series index (zero-based).
      * 
      * @return A boolean (possibly {@code null}).
      */
@@ -1369,7 +1374,7 @@ public interface CategoryItemRenderer extends LegendItemSource {
      * rendering for the items in the specified series, and sends a 
      * {@link RendererChangeEvent} to all registered listeners.
      * 
-     * @param series  the series index.
+     * @param series  the series index (zero-based).
      * @param create  the new flag value ({@code null} permitted).
      */
     public void setSeriesCreateEntities(int series, Boolean create);
@@ -1379,7 +1384,7 @@ public interface CategoryItemRenderer extends LegendItemSource {
      * rendering for the items in the specified series, and sends a 
      * {@link RendererChangeEvent} to all registered listeners if requested.
      * 
-     * @param series  the series index.
+     * @param series  the series index (zero-based).
      * @param create  the new flag value ({@code null} permitted).
      * @param notify  send change event?
      */
@@ -1387,8 +1392,10 @@ public interface CategoryItemRenderer extends LegendItemSource {
             boolean notify);
 
     /**
-     * Returns the default setting for whether or not entities should be created
-     * for items during rendering.
+     * Returns the default value for the flag that controls whether or not
+     * an entity is created for an item during rendering.  
+     * 
+     * @return A boolean. 
      */
     public boolean getDefaultCreateEntities();
 
