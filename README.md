@@ -1,7 +1,7 @@
 JFreeChart
 ==========
 
-Version 1.5.1, 29 October 2020.
+Version 1.5.2, 31 December 2020.
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.jfree/jfreechart/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.jfree/jfreechart)
 
@@ -33,19 +33,17 @@ To use JFreeChart in your projects, add the following dependency to your build t
     <dependency>
         <groupId>org.jfree</groupId>
         <artifactId>jfreechart</artifactId>
-        <version>1.5.1</version>
+        <version>1.5.2</version>
     </dependency>
 
 
 Building JFreeChart
 -------------------
-You can build JFreeChart using Maven.  The build requires JDK 8 or later.
-
-#### Maven
-Using Maven you can build JFreeChart using the following command (issued from the root directory of the project):
+You can build JFreeChart using Maven with the following command (issued from the root directory of the project):
 
     mvn clean verify
 
+The build requires JDK 8 or later.
 
 Demos
 -----
@@ -59,7 +57,7 @@ at GitHub:
 History
 -------
 
-##### Version 1.5.2 (not yet released)
+##### Version 1.5.2 (31 December 2020)
 - observe series visibility flag in `ClusteredXYBarRenderer` ([#89](https://github.com/jfree/jfreechart/issues/89));
 - apply rendering hints to overlays ([#187](https://github.com/jfree/jfreechart/issues/187));
 - don't draw disabled outlines on crosshair labels ([#189](https://github.com/jfree/jfreechart/pull/189));
