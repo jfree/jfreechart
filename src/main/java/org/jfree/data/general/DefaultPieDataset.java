@@ -24,6 +24,14 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
+ * ----------------------
+ * DefaultPieDataset.java
+ * ----------------------
+ * (C) Copyright 2001-2020, by Object Refinery Limited.
+ *
+ * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Contributor(s):   Sam (oldman);
+ *                   Tracy Hiltbrand (generics for bug fix to PiePlot);
  */
 
 package org.jfree.data.general;
@@ -42,6 +50,8 @@ import org.jfree.data.UnknownKeyException;
 
 /**
  * A default implementation of the {@link PieDataset} interface.
+ * 
+ * @param <K> Key type for PieDataset
  */
 public class DefaultPieDataset<K extends Comparable<K>> extends AbstractDataset
         implements PieDataset<K>, Cloneable, PublicCloneable, Serializable {

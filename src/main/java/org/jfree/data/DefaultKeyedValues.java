@@ -31,6 +31,7 @@
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Thomas Morgner;
+ *                   Tracy Hiltbrand (generics for bug fix to PiePlot);
  *
  */
 
@@ -50,6 +51,8 @@ import org.jfree.chart.util.SortOrder;
 /**
  * An ordered list of (key, value) items.  This class provides a default
  * implementation of the {@link KeyedValues} interface.
+ * 
+ * @param <K> the key type ({@code String} is a good default).
  */
 public class DefaultKeyedValues<K extends Comparable<K>> 
         implements KeyedValues<K>, Cloneable, PublicCloneable, Serializable {

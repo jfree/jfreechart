@@ -30,28 +30,31 @@
  * (C) Copyright 2002-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand (generics for bug fix to PiePlot);
  *
  */
 
 package org.jfree.data;
 
 import java.io.Serializable;
+import java.util.Objects;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 
 /**
- * A (key, value) pair.  This class provides a default implementation
- * of the {@link KeyedValue} interface.
+ * A (key, value) pair. This class provides a default implementation of the 
+ * {@link KeyedValue} interface.
+ * 
+ * @param <K> the key type ({@code String} is a good default).
  */
-public class DefaultKeyedValue<K extends Comparable<K>> implements KeyedValue, Cloneable,
-        PublicCloneable, Serializable {
+public class DefaultKeyedValue<K extends Comparable<K>> 
+        implements KeyedValue<K>, Cloneable, PublicCloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -7388924517460437712L;
 
     /** The key. */
-    private K key;
+    private final K key;
 
     /** The value. */
     private Number value;
@@ -59,8 +62,7 @@ public class DefaultKeyedValue<K extends Comparable<K>> implements KeyedValue, C
     /**
      * Creates a new (key, value) item.
      *
-     * @param key  the key (should be immutable, {@code null} not
-     *         permitted).
+     * @param key  the key (should be immutable, {@code null} not permitted).
      * @param value  the value ({@code null} permitted).
      */
     public DefaultKeyedValue(K key, Number value) {
@@ -114,15 +116,10 @@ public class DefaultKeyedValue<K extends Comparable<K>> implements KeyedValue, C
             return false;
         }
         DefaultKeyedValue<K> that = (DefaultKeyedValue) obj;
-
         if (!this.key.equals(that.key)) {
             return false;
         }
-        if (this.value != null
-                ? !this.value.equals(that.value) : that.value != null) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.value, that.value);
     }
 
     /**

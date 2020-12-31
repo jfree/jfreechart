@@ -30,7 +30,7 @@
  * (C) Copyright 2002-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand (generics for bug fix to PiePlot);
  *
  */
 

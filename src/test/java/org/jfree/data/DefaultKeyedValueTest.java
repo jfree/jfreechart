@@ -61,9 +61,8 @@ public class DefaultKeyedValueTest {
         // try null key
         boolean pass = false;
         try {
-            /*v =*/ new DefaultKeyedValue<>(null, 1);
-        }
-        catch (IllegalArgumentException e) {
+            v = new DefaultKeyedValue<>(null, 1);
+        } catch (IllegalArgumentException e) {
             pass = true;
         }
         assertTrue(pass);
@@ -90,6 +89,19 @@ public class DefaultKeyedValueTest {
         v1 = new DefaultKeyedValue<>("Test", 45.5);
         v2 = new DefaultKeyedValue<>("Test", 45.6);
         assertFalse(v1.equals(v2));
+    }
+
+    /**
+     * Confirm that the equals method works correctly for null values.
+     */
+    @Test
+    public void testEqualsForNullValues() {
+        DefaultKeyedValue<String> v1 = new DefaultKeyedValue<>("K1", null);
+        DefaultKeyedValue<String> v2 = new DefaultKeyedValue<>("K1", null);
+        assertTrue(v1.equals(v2));
+        v1.setValue(1);
+        assertFalse(v1.equals(v2));
+        assertFalse(v2.equals(v1));
     }
 
     /**
