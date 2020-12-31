@@ -32,13 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * Changes
- * -------
- * 25-Oct-2006 : Version 1 (DG);
- * 23-Mar-2007 : Check item visibility before drawing error bars - see bug
- *               1686178 (DG);
- * 28-Jan-2009 : Added stroke options for error indicators (DG);
- *
  */
 
 package org.jfree.chart.renderer.xy;
@@ -73,8 +66,7 @@ import org.jfree.data.xy.XYDataset;
  * the {@code XYErrorRendererDemo1.java} program included in the
  * JFreeChart demo collection:
  * <br><br>
- * <img src="../../../../../images/XYErrorRendererSample.png"
- * alt="XYErrorRendererSample.png">
+ * <img src="doc-files/XYErrorRendererSample.png" alt="XYErrorRendererSample.png">
  *
  * @since 1.0.3
  */

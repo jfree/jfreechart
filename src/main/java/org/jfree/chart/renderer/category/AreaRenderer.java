@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------
  * AreaRenderer.java
  * -----------------
- * (C) Copyright 2002-2016, by Jon Iles and Contributors.
+ * (C) Copyright 2002-2020, by Jon Iles and Contributors.
  *
  * Original Author:  Jon Iles;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -64,8 +64,7 @@ import org.jfree.data.category.CategoryDataset;
  * by the {@code AreaChartDemo1.java} program included in the JFreeChart
  * Demo Collection:
  * <br><br>
- * <img src="../../../../../images/AreaRendererSample.png"
- * alt="AreaRendererSample.png">
+ * <img src="doc-files/AreaRendererSample.png" alt="AreaRendererSample.png">
  */
 public class AreaRenderer extends AbstractCategoryItemRenderer
         implements Cloneable, PublicCloneable, Serializable {

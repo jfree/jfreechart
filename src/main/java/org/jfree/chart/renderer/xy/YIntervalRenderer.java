@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,24 +27,10 @@
  * ----------------------
  * YIntervalRenderer.java
  * ----------------------
- * (C) Copyright 2002-2017, by Object Refinery Limited.
+ * (C) Copyright 2002-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 05-Nov-2002 : Version 1 (DG);
- * 25-Mar-2003 : Implemented Serializable (DG);
- * 01-May-2003 : Modified drawItem() method signature (DG);
- * 20-Aug-2003 : Implemented Cloneable and PublicCloneable (DG);
- * 16-Sep-2003 : Changed ChartRenderingInfo --> PlotRenderingInfo (DG);
- * 25-Feb-2004 : Replaced CrosshairInfo with CrosshairState (DG);
- * 27-Sep-2004 : Access double values from dataset (DG);
- * 11-Nov-2004 : Now uses ShapeUtilities to translate shapes (DG);
- * 11-Apr-2008 : New override for findRangeBounds() (DG);
- * 26-May-2008 : Added item label support (DG);
- * 27-Mar-2009 : Updated findRangeBounds() (DG);
  *
  */
 
@@ -84,7 +70,7 @@ import org.jfree.data.xy.XYDataset;
  * {@code YIntervalRendererDemo1.java} program included in the JFreeChart
  * demo collection:
  * <br><br>
- * <img src="../../../../../images/YIntervalRendererSample.png"
+ * <img src="doc-files/YIntervalRendererSample.png"
  * alt="YIntervalRendererSample.png">
  */
 public class YIntervalRenderer extends AbstractXYItemRenderer

@@ -67,7 +67,7 @@ import org.jfree.data.xy.XYDataset;
  * {@code ClusteredXYBarRendererDemo1.java} program included in the
  * JFreeChart demo collection:
  * <br><br>
- * <img src="../../../../../images/ClusteredXYBarRendererSample.png"
+ * <img src="doc-files/ClusteredXYBarRendererSample.png"
  * alt="ClusteredXYBarRendererSample.png">
  * <P>
  * This renderer does not include code to calculate the crosshair point for the

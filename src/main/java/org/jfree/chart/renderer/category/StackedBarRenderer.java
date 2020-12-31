@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -35,61 +35,6 @@
  *                   Christian W. Zuckschwerdt;
  *                   Peter Kolb (patch 2511330);
  *
- * Changes
- * -------
- * 19-Oct-2001 : Version 1 (DG);
- * 22-Oct-2001 : Renamed DataSource.java --> Dataset.java etc. (DG);
- * 23-Oct-2001 : Changed intro and trail gaps on bar plots to use percentage of
- *               available space rather than a fixed number of units (DG);
- * 15-Nov-2001 : Modified to allow for null data values (DG);
- * 22-Nov-2001 : Modified to allow for negative data values (DG);
- * 13-Dec-2001 : Added tooltips (DG);
- * 16-Jan-2002 : Fixed bug for single category datasets (DG);
- * 15-Feb-2002 : Added isStacked() method (DG);
- * 14-Mar-2002 : Modified to implement the CategoryItemRenderer interface (DG);
- * 24-May-2002 : Incorporated tooltips into chart entities (DG);
- * 11-Jun-2002 : Added check for (permitted) null info object, bug and fix
- *               reported by David Basten.  Also updated Javadocs. (DG);
- * 25-Jun-2002 : Removed redundant import (DG);
- * 26-Jun-2002 : Small change to entity (DG);
- * 05-Aug-2002 : Small modification to drawCategoryItem method to support URLs
- *               for HTML image maps (RA);
- * 08-Aug-2002 : Added optional linking lines, contributed by Thierry
- *               Saura (DG);
- * 26-Sep-2002 : Fixed errors reported by Checkstyle (DG);
- * 24-Oct-2002 : Amendments for changes in CategoryDataset interface and
- *               CategoryToolTipGenerator interface (DG);
- * 05-Nov-2002 : Replaced references to CategoryDataset with TableDataset (DG);
- * 26-Nov-2002 : Replaced isStacked() method with getRangeType() method (DG);
- * 17-Jan-2003 : Moved plot classes to a separate package (DG);
- * 25-Mar-2003 : Implemented Serializable (DG);
- * 12-May-2003 : Merged horizontal and vertical stacked bar renderers (DG);
- * 30-Jul-2003 : Modified entity constructor (CZ);
- * 08-Sep-2003 : Fixed bug 799668 (isBarOutlineDrawn() ignored) (DG);
- * 16-Sep-2003 : Changed ChartRenderingInfo --> PlotRenderingInfo (DG);
- * 21-Oct-2003 : Moved bar width into renderer state (DG);
- * 26-Nov-2003 : Added code to respect maxBarWidth attribute (DG);
- * 05-Nov-2004 : Changed to a two-pass renderer so that item labels are not
- *               overwritten by other bars (DG);
- * 07-Jan-2005 : Renamed getRangeExtent() --> findRangeBounds() (DG);
- * 29-Mar-2005 : Modified drawItem() method so that a zero value is handled
- *               within the code for positive rather than negative values (DG);
- * 20-Apr-2005 : Renamed CategoryLabelGenerator
- *               --> CategoryItemLabelGenerator (DG);
- * 17-May-2005 : Added flag to allow rendering values as percentages - inspired
- *               by patch 1200886 submitted by John Xiao (DG);
- * 09-Jun-2005 : Added accessor methods for the renderAsPercentages flag,
- *               provided equals() method, and use addItemEntity from
- *               superclass (DG);
- * 09-Jun-2005 : Added support for GradientPaint - see bug report 1215670 (DG);
- * 22-Sep-2005 : Renamed getMaxBarWidth() --> getMaximumBarWidth() (DG);
- * 29-Sep-2005 : Use outline stroke in drawItem method - see bug report
- *               1304139 (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 11-Oct-2006 : Source reformatting (DG);
- * 24-Jun-2008 : Added new barPainter mechanism (DG);
- * 04-Feb-2009 : Added support for hidden series (PK);
- *
  */
 
 package org.jfree.chart.renderer.category;
@@ -121,7 +66,7 @@ import org.jfree.data.general.DatasetUtils;
  * {@code StackedBarChartDemo1.java} program included in the
  * JFreeChart Demo Collection:
  * <br><br>
- * <img src="../../../../../images/StackedBarRendererSample.png"
+ * <img src="doc-files/StackedBarRendererSample.png"
  * alt="StackedBarRendererSample.png">
  */
 public class StackedBarRenderer extends BarRenderer

@@ -77,7 +77,7 @@ import org.jfree.data.xy.XYDataset;
  * by the {@code CandlestickChartDemo1.java} program included in the
  * JFreeChart demo collection:
  * <br><br>
- * <img src="../../../../../images/CandlestickRendererSample.png"
+ * <img src="doc-files/CandlestickRendererSample.png" 
  * alt="CandlestickRendererSample.png">
  * <P>
  * This renderer does not include code to calculate the crosshair point for the

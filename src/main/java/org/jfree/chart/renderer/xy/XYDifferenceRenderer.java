@@ -79,7 +79,7 @@ import org.jfree.data.xy.XYDataset;
  * {@code DifferenceChartDemo1.java} program included in the JFreeChart
  * demo collection:
  * <br><br>
- * <img src="../../../../../images/XYDifferenceRendererSample.png"
+ * <img src="doc-files/XYDifferenceRendererSample.png"
  * alt="XYDifferenceRendererSample.png">
  */
 public class XYDifferenceRenderer extends AbstractXYItemRenderer

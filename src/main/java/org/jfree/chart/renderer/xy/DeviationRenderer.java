@@ -31,15 +31,6 @@
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 21-Feb-2007 : Version 1 (DG);
- * 04-May-2007 : Set processVisibleItemsOnly flag to false (DG);
- * 11-Apr-2008 : New override for findRangeBounds() (DG);
- * 27-Mar-2009 : Updated findRangeBounds() to call new inherited method (DG);
- * 01-Jul-2012 : Provide initial size for GeneralPath in drawItem(), as 
- *               suggested by Milan Ramaiya in bug 3521736 (DG);
  * 
  */
 
@@ -72,8 +63,7 @@ import org.jfree.data.xy.XYDataset;
  * {@code DeviationRendererDemo1.java} program included in the JFreeChart demo 
  * collection:
  * <br><br>
- * <img src="../../../../../images/DeviationRendererSample.png"
- * alt="DeviationRendererSample.png">
+ * <img src="doc-files/DeviationRendererSample.png" alt="DeviationRendererSample.png">
  *
  * @since 1.0.5
  */

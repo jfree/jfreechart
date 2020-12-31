@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * XYStepAreaRenderer.java
  * -----------------------
- * (C) Copyright 2003-2017, by Matthias Rose and Contributors.
+ * (C) Copyright 2003-2020, by Matthias Rose and Contributors.
  *
  * Original Author:  Matthias Rose (based on XYAreaRenderer.java);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -64,8 +64,7 @@ import org.jfree.data.xy.XYDataset;
  * {@code XYStepAreaRendererDemo1.java} program included in the JFreeChart
  * demo collection:
  * <br><br>
- * <img src="../../../../../images/XYStepAreaRendererSample.png"
- * alt="XYStepAreaRendererSample.png">
+ * <img src="doc-files/XYStepAreaRendererSample.png" alt="XYStepAreaRendererSample.png">
  */
 public class XYStepAreaRenderer extends AbstractXYItemRenderer
         implements XYItemRenderer, Cloneable, PublicCloneable, Serializable {

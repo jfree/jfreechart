@@ -64,7 +64,7 @@ import org.jfree.data.general.DatasetUtils;
  * {@code StackedAreaChartDemo1.java} program included in the
  * JFreeChart Demo Collection:
  * <br><br>
- * <img src="../../../../../images/StackedAreaRendererSample.png"
+ * <img src="doc-files/StackedAreaRendererSample.png"
  * alt="StackedAreaRendererSample.png">
  */
 public class StackedAreaRenderer extends AreaRenderer

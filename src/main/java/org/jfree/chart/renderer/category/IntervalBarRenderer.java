@@ -27,43 +27,12 @@
  * ------------------------
  * IntervalBarRenderer.java
  * ------------------------
- * (C) Copyright 2002-2016, by Jeremy Bowman.
+ * (C) Copyright 2002-2020, by Jeremy Bowman and Contributors.
  *
  * Original Author:  Jeremy Bowman;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Christian W. Zuckschwerdt;
  *                   Peter Kolb (patch 2497611, 2791407);
- *
- * Changes
- * -------
- * 29-Apr-2002 : Version 1, contributed by Jeremy Bowman (DG);
- * 11-May-2002 : Use CategoryPlot.getLabelsVisible() (JB);
- * 29-May-2002 : Added constructors (DG);
- * 26-Jun-2002 : Added axis to initialise method (DG);
- * 20-Sep-2002 : Added basic support for chart entities (DG);
- * 24-Oct-2002 : Amendments for changes in CategoryDataset interface and
- *               CategoryToolTipGenerator interface (DG);
- * 05-Nov-2002 : Base dataset is now TableDataset not CategoryDataset (DG);
- * 25-Mar-2003 : Implemented Serializable (DG);
- * 30-Jul-2003 : Modified entity constructor (CZ);
- * 19-Aug-2003 : Implemented Cloneable and PublicCloneable (DG);
- * 08-Sep-2003 : Added checks for null values (DG);
- * 07-Oct-2003 : Added renderer state (DG);
- * 21-Oct-2003 : Bar width moved into renderer state (DG);
- * 23-Dec-2003 : Removed the deprecated MultiIntervalCategoryDataset
- *               interface (DG);
- * 05-Nov-2004 : Modified drawItem() signature (DG);
- * 20-Apr-2005 : Renamed CategoryLabelGenerator
- *               --> CategoryItemLabelGenerator (DG);
- * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
- * 24-Jun-2008 : Added new barPainter mechanism (DG);
- * 07-Oct-2008 : Override equals() method to fix minor bug (DG);
- * 14-Jan-2009 : Added support for seriesVisible flags (PK);
- * 16-May-2009 : The findRangeBounds() method needs to include the dataset
- *               interval (DG);
- * 19-May-2009 : Fixed FindBugs warnings, patch by Michal Wozniak (DG);
- * 30-Oct-2011 : Fixed alignment when setMaximumBarWidth is applied (DG);
- * 24-Aug-2014 : Add element hinting for JFreeSVG (DG);
  *
  */
 
@@ -90,7 +59,7 @@ import org.jfree.data.category.IntervalCategoryDataset;
  * {@code IntervalBarChartDemo1.java} program included in the JFreeChart
  * Demo Collection:
  * <br><br>
- * <img src="../../../../../images/IntervalBarRendererSample.png"
+ * <img src="doc-files/IntervalBarRendererSample.png"
  * alt="IntervalBarRendererSample.png">
  */
 public class IntervalBarRenderer extends BarRenderer {

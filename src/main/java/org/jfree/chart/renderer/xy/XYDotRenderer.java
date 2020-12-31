@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,29 +27,10 @@
  * ------------------
  * XYDotRenderer.java
  * ------------------
- * (C) Copyright 2002-2017, by Object Refinery Limited.
+ * (C) Copyright 2002-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Christian W. Zuckschwerdt;
- *
- * Changes (from 29-Oct-2002)
- * --------------------------
- * 29-Oct-2002 : Added standard header (DG);
- * 25-Mar-2003 : Implemented Serializable (DG);
- * 01-May-2003 : Modified drawItem() method signature (DG);
- * 30-Jul-2003 : Modified entity constructor (CZ);
- * 20-Aug-2003 : Implemented Cloneable and PublicCloneable (DG);
- * 16-Sep-2003 : Changed ChartRenderingInfo --> PlotRenderingInfo (DG);
- * 25-Feb-2004 : Replaced CrosshairInfo with CrosshairState (DG);
- * 19-Jan-2005 : Now uses only primitives from dataset (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 10-Jul-2006 : Added dotWidth and dotHeight attributes (DG);
- * 06-Feb-2007 : Fixed bug 1086307, crosshairs with multiple axes (DG);
- * 09-Nov-2007 : Added legend shape attribute, plus override for
- *               getLegendItem() (DG);
- * 17-Jun-2008 : Apply legend shape, font and paint attributes (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
- * 18-Feb-2017 : Updates for crosshairs (bug #36) (DG);
  *
  */
 
@@ -83,8 +64,7 @@ import org.jfree.data.xy.XYDataset;
  * {@code ScatterPlotDemo4.java} program included in the JFreeChart
  * demo collection:
  * <br><br>
- * <img src="../../../../../images/XYDotRendererSample.png"
- * alt="XYDotRendererSample.png">
+ * <img src="doc-files/XYDotRendererSample.png" alt="XYDotRendererSample.png">
  */
 public class XYDotRenderer extends AbstractXYItemRenderer
         implements XYItemRenderer, PublicCloneable {

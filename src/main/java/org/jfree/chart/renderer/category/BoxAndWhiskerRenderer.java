@@ -88,7 +88,7 @@ import org.jfree.data.statistics.BoxAndWhiskerCategoryDataset;
  * by the {@code BoxAndWhiskerChartDemo1.java} program included in the
  * JFreeChart Demo Collection:
  * <br><br>
- * <img src="../../../../../images/BoxAndWhiskerRendererSample.png"
+ * <img src="doc-files/BoxAndWhiskerRendererSample.png"
  * alt="BoxAndWhiskerRendererSample.png">
  */
 public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer

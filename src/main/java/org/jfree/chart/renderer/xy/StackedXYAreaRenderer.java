@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------------
  * StackedXYAreaRenderer.java
  * --------------------------
- * (C) Copyright 2003-2017, by Richard Atkinson and Contributors.
+ * (C) Copyright 2003-2020, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributor(s):   Christian W. Zuckschwerdt;
@@ -80,7 +80,7 @@ import org.jfree.data.xy.XYDataset;
  * {@code StackedXYAreaRendererDemo1.java} program included in the
  * JFreeChart demo collection:
  * <br><br>
- * <img src="../../../../../images/StackedXYAreaRendererSample.png"
+ * <img src="doc-files/StackedXYAreaRendererSample.png"
  * alt="StackedXYAreaRendererSample.png">
  * <br><br>
  * SPECIAL NOTE:  This renderer does not currently handle negative data values

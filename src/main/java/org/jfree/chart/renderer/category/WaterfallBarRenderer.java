@@ -32,30 +32,6 @@
  * Original Author:  Darshan Shah;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * Changes
- * -------
- * 20-Oct-2003 : Version 1, contributed by Darshan Shah (DG);
- * 06-Nov-2003 : Changed order of parameters in constructor, and added support
- *               for GradientPaint (DG);
- * 10-Feb-2004 : Updated drawItem() method to make cut-and-paste overriding
- *               easier.  Also fixed a bug that meant the minimum bar length
- *               was being ignored (DG);
- * 04-Oct-2004 : Reworked equals() method and renamed PaintUtils
- *               --> PaintUtilities (DG);
- * 05-Nov-2004 : Modified drawItem() signature (DG);
- * 07-Jan-2005 : Renamed getRangeExtent() --> findRangeBounds (DG);
- * 23-Feb-2005 : Added argument checking (DG);
- * 20-Apr-2005 : Renamed CategoryLabelGenerator
- *               --> CategoryItemLabelGenerator (DG);
- * 09-Jun-2005 : Use addItemEntity() from superclass (DG);
- * 27-Mar-2008 : Fixed error in findRangeBounds() method (DG);
- * 26-Sep-2008 : Fixed bug with bar alignment when maximumBarWidth is
- *               applied (DG);
- * 04-Feb-2009 : Updated findRangeBounds to handle null dataset consistently
- *               with other renderers (DG);
- * 19-May-2009 : Fixed FindBugs warnings, patch by Michal Wozniak (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
- *
  */
 
 package org.jfree.chart.renderer.category;
@@ -102,7 +78,7 @@ import org.jfree.data.category.CategoryDataset;
  * {@code WaterfallChartDemo1.java} program included in the JFreeChart
  * Demo Collection:
  * <br><br>
- * <img src="../../../../../images/WaterfallBarRendererSample.png"
+ * <img src="doc-files/WaterfallBarRendererSample.png"
  * alt="WaterfallBarRendererSample.png">
  */
 public class WaterfallBarRenderer extends BarRenderer {
