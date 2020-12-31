@@ -614,7 +614,7 @@ public class PiePlotTest {
         }
         assertTrue(success);
     }
-    
+
     @Test
     public void testBug1126() throws CloneNotSupportedException {
         DefaultPieDataset dataset1 = new DefaultPieDataset();
