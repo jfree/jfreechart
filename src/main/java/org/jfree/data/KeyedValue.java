@@ -39,9 +39,11 @@ package org.jfree.data;
 /**
  * A (key, value) pair.
  *
+ * @param <K>  the key type.
+ * 
  * @see DefaultKeyedValue
  */
-public interface KeyedValue extends Value {
+public interface KeyedValue<K extends Comparable<K>> extends Value {
 
     /**
      * Returns the key associated with the value.  The key returned by this
@@ -49,6 +51,6 @@ public interface KeyedValue extends Value {
      *
      * @return The key (never {@code null}).
      */
-    public Comparable getKey();
+    public K getKey();
 
 }

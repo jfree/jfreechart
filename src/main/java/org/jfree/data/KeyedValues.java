@@ -42,6 +42,8 @@ import java.util.List;
  * An ordered list of (key, value) items where the keys are unique and
  * non-{@code null}.
  *
+ * @param <K> the key type ({@code String} is a good default).
+ * 
  * @see Values
  * @see DefaultKeyedValues
  */

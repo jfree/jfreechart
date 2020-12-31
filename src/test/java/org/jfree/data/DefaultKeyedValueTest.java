@@ -24,17 +24,13 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ---------------------------
- * DefaultKeyedValueTests.java
- * ---------------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
+ * --------------------------
+ * DefaultKeyedValueTest.java
+ * --------------------------
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 13-Mar-2003 : Version 1 (DG);
  *
  */
 
@@ -64,9 +60,8 @@ public class DefaultKeyedValueTest {
         // try null key
         boolean pass = false;
         try {
-            /*v =*/ new DefaultKeyedValue(null, 1);
-        }
-        catch (IllegalArgumentException e) {
+            v = new DefaultKeyedValue(null, 1);
+        } catch (IllegalArgumentException e) {
             pass = true;
         }
         assertTrue(pass);
@@ -81,7 +76,6 @@ public class DefaultKeyedValueTest {
      */
     @Test
     public void testEquals() {
-
         DefaultKeyedValue v1 = new DefaultKeyedValue("Test", 45.5);
         DefaultKeyedValue v2 = new DefaultKeyedValue("Test", 45.5);
         assertTrue(v1.equals(v2));
@@ -94,7 +88,19 @@ public class DefaultKeyedValueTest {
         v1 = new DefaultKeyedValue("Test", 45.5);
         v2 = new DefaultKeyedValue("Test", 45.6);
         assertFalse(v1.equals(v2));
-
+    }
+    
+    /**
+     * Confirm that the equals method works correctly for null values.
+     */
+    @Test
+    public void testEqualsForNullValues() {
+        DefaultKeyedValue<String> v1 = new DefaultKeyedValue<>("K1", null);
+        DefaultKeyedValue<String> v2 = new DefaultKeyedValue<>("K1", null);
+        assertTrue(v1.equals(v2));
+        v1.setValue(1);
+        assertFalse(v1.equals(v2));
+        assertFalse(v2.equals(v1));
     }
 
     /**
