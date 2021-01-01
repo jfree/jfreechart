@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,59 +27,12 @@
  * --------------
  * TextTitle.java
  * --------------
- * (C) Copyright 2000-2017, by David Berry and Contributors.
+ * (C) Copyright 2000-2021, by David Berry and Contributors.
  *
  * Original Author:  David Berry;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Nicolas Brodu;
  *                   Peter Kolb - patch 2603321;
- *
- * Changes (from 18-Sep-2001)
- * --------------------------
- * 18-Sep-2001 : Added standard header (DG);
- * 07-Nov-2001 : Separated the JCommon Class Library classes, JFreeChart now
- *               requires jcommon.jar (DG);
- * 09-Jan-2002 : Updated Javadoc comments (DG);
- * 07-Feb-2002 : Changed Insets --> Spacer in AbstractTitle.java (DG);
- * 06-Mar-2002 : Updated import statements (DG);
- * 25-Jun-2002 : Removed redundant imports (DG);
- * 18-Sep-2002 : Fixed errors reported by Checkstyle (DG);
- * 28-Oct-2002 : Small modifications while changing JFreeChart class (DG);
- * 13-Mar-2003 : Changed width used for relative spacing to fix bug 703050 (DG);
- * 26-Mar-2003 : Implemented Serializable (DG);
- * 15-Jul-2003 : Fixed null pointer exception (DG);
- * 11-Sep-2003 : Implemented Cloneable (NB)
- * 22-Sep-2003 : Added checks for null values and throw nullpointer
- *               exceptions (TM);
- *               Background paint was not serialized.
- * 07-Oct-2003 : Added fix for exception caused by empty string in title (DG);
- * 29-Oct-2003 : Added workaround for text alignment in PDF output (DG);
- * 03-Feb-2004 : Fixed bug in getPreferredWidth() method (DG);
- * 17-Feb-2004 : Added clone() method and fixed bug in equals() method (DG);
- * 01-Apr-2004 : Changed java.awt.geom.Dimension2D to org.jfree.ui.Size2D
- *               because of JDK bug 4976448 which persists on JDK 1.3.1.  Also
- *               fixed bug in getPreferredHeight() method (DG);
- * 29-Apr-2004 : Fixed bug in getPreferredWidth() method - see bug id
- *               944173 (DG);
- * 11-Jan-2005 : Removed deprecated code in preparation for the 1.0.0
- *               release (DG);
- * 08-Feb-2005 : Updated for changes in RectangleConstraint class (DG);
- * 11-Feb-2005 : Implemented PublicCloneable (DG);
- * 20-Apr-2005 : Added support for tooltips (DG);
- * 26-Apr-2005 : Removed LOGGER (DG);
- * 06-Jun-2005 : Modified equals() to handle GradientPaint (DG);
- * 06-Jul-2005 : Added flag to control whether or not the title expands to
- *               fit the available space (DG);
- * 07-Oct-2005 : Added textAlignment attribute (DG);
- * ------------- JFREECHART 1.0.x RELEASED ------------------------------------
- * 13-Dec-2005 : Fixed bug 1379331 - incorrect drawing with LEFT or RIGHT
- *               title placement (DG);
- * 19-Dec-2007 : Implemented some of the missing arrangement options (DG);
- * 28-Apr-2008 : Added option for maximum lines, and fixed minor bugs in
- *               equals() method (DG);
- * 19-Mar-2009 : Changed ChartEntity to TitleEntity - see patch 2603321 by
- *               Peter Kolb (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -124,15 +77,13 @@ import org.jfree.data.Range;
  * A chart title that displays a text string with automatic wrapping as
  * required.
  */
-public class TextTitle extends Title
-                       implements Serializable, Cloneable, PublicCloneable {
+public class TextTitle extends Title implements Serializable, Cloneable, PublicCloneable {
 
     /** For serialization. */
     private static final long serialVersionUID = 8372008692127477443L;
 
     /** The default font. */
-    public static final Font DEFAULT_FONT = new Font("SansSerif", Font.BOLD,
-            12);
+    public static final Font DEFAULT_FONT = new Font("SansSerif", Font.BOLD, 12);
 
     /** The default text color. */
     public static final Paint DEFAULT_TEXT_PAINT = Color.BLACK;
