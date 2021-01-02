@@ -57,6 +57,9 @@ at GitHub:
 History
 -------
 
+##### Version 1.5.3 (not yet released)
+- remove unused URLUtilities class.
+
 ##### Version 1.5.2 (31 December 2020)
 - observe series visibility flag in `ClusteredXYBarRenderer` ([#89](https://github.com/jfree/jfreechart/issues/89));
 - apply rendering hints to overlays ([#187](https://github.com/jfree/jfreechart/issues/187));
