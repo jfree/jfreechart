@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * KeyedValueComparator.java
  * -------------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited.
+ * (C) Copyright 2003-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -90,8 +90,8 @@ public class KeyedValueComparator implements Comparator<KeyedValue>, Serializabl
      * Compares two {@link KeyedValue} instances and returns an
      * {@code int} that indicates the relative order of the two objects.
      *
-     * @param o1  object 1.
-     * @param o2  object 2.
+     * @param kv1  object 1.
+     * @param kv2  object 2.
      *
      * @return An int indicating the relative order of the objects.
      */

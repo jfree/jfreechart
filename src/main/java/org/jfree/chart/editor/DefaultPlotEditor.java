@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------
  * DefaultPlotEditor.java
  * ----------------------
- * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Andrzej Porebski;
@@ -162,6 +162,13 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
         add(panel);
     }
     
+    /**
+     * Creates a panel for the plot.
+     * 
+     * @param plot  the plot.
+     * 
+     * @return The panel. 
+     */
     protected JPanel createPlotPanel(Plot plot) {
         this.plotInsets = plot.getInsets();
         this.backgroundPaintSample = new PaintSample(plot.getBackgroundPaint());
@@ -301,8 +308,14 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
         return panel;
     }
 
-    protected JTabbedPane createPlotTabs(Plot plot)
-    {
+    /**
+     * Creates a tabbed pane for the plot.
+     * 
+     * @param plot  the plot.
+     * 
+     * @return A tabbed pane. 
+     */
+    protected JTabbedPane createPlotTabs(Plot plot) {
         JTabbedPane tabs = new JTabbedPane();
         tabs.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
 

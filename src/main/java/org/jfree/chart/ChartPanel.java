@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * ChartPanel.java
  * ---------------
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Andrzej Porebski;
@@ -960,12 +960,10 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     }
 
     /**
-     * Sets modifier keys for panning with a specific mouse button.
-     * If there are none set for a certain button with this function,
-     * default modifiers set with {@link #setDefaultPanModifiersEx(int)}
-     * will be used, defaulting to {@link #getDefaultDragModifiersEx()}
-     * if none were set either.
-     * <p>
+     * Sets modifier keys for panning with a specific mouse button. If there are
+     * none set for a certain button with this function, default modifiers set 
+     * with {@link #setDefaultPanModifiersEx(int)} will be used, defaulting to 
+     * {@link #getDefaultDragModifiersEx()} if none were set either.<p>
      * Only {@link InputEvent#SHIFT_DOWN_MASK}, {@link InputEvent#CTRL_DOWN_MASK},
      * {@link InputEvent#META_DOWN_MASK} and {@link InputEvent#ALT_DOWN_MASK} are
      * checked.  To avoid platform-specific problems, it is recommended to use
@@ -975,6 +973,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * If the same modifiers are set for both zooming and panning,
      * panning will be performed.
      *
+     * @param mouseButton  the mouse button
      * @param modifiersEx modifier keys, as returned by {@link InputEvent#getModifiersEx()}
      */
     public void setPanModifiersEx(int mouseButton, int modifiersEx) {
@@ -997,6 +996,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * If the same modifiers are set for both zooming and panning,
      * panning will be performed.
      *
+     * @param mouseButton  the mouse button.
      * @param modifiersEx modifier keys, as returned by {@link InputEvent#getModifiersEx()}
      */
     public void setZoomModifiersEx(int mouseButton, int modifiersEx) {
@@ -2627,6 +2627,10 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * the user can specify the filename).  Note that this method only works
      * if the JFreeSVG library is on the classpath...if this library is not 
      * present, the method will fail.
+     * 
+     * @param f  the file.
+     * 
+     * @throws IOException if there is an exception.
      */
     protected void saveAsSVG(File f) throws IOException {
         File file = f;
@@ -2687,6 +2691,9 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * Generates a string containing a rendering of the chart in SVG format.
      * This feature is only supported if the JFreeSVG library is included on 
      * the classpath.
+     * 
+     * @param width  the width.
+     * @param height  the height.
      * 
      * @return A string containing an SVG element for the current chart, or 
      *     {@code null} if there is a problem with the method invocation
@@ -2756,6 +2763,8 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * the user can specify the filename).  Note that this method only works
      * if the OrsonPDF library is on the classpath...if this library is not
      * present, the method will fail.
+     * 
+     * @param f  the file.
      */
     protected void saveAsPDF(File f) {
         File file = f;

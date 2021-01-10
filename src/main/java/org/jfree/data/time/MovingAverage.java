@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * MovingAverage.java
  * ------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited.
+ * (C) Copyright 2003-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Benoit Xhenseval;
@@ -86,11 +86,13 @@ public class MovingAverage {
      * result is an empty series.
      *
      * @param source  the source series.
-     * @param seriesKey  the series key ({@code null} not permitted).
+     * @param name  the series key ({@code null} not permitted).
      * @param periodCount  the number of periods used in the average
      *                     calculation.
      * @param skip  the number of initial periods to skip.
      *
+     * @param <S>  the type for the series keys.
+     * 
      * @return The moving average series.
      */
     public static <S extends Comparable<S>> TimeSeries<S> createMovingAverage(
@@ -165,9 +167,11 @@ public class MovingAverage {
      * Developed by Benoit Xhenseval (www.ObjectLab.co.uk).
      *
      * @param source  the source series.
-     * @param seriesKey  the series key ({@code null} not permitted).
+     * @param name  the series key ({@code null} not permitted).
      * @param pointCount  the number of POINTS used in the average calculation
      *                    (not periods!)
+     * 
+     * @param <S>  the type for the series keys.
      *
      * @return The moving average series.
      */

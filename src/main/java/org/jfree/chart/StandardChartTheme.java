@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * StandardChartTheme.java
  * -----------------------
- * (C) Copyright 2008-2020, by Object Refinery Limited.
+ * (C) Copyright 2008-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -1291,6 +1291,8 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
      * Applies the attributes of this theme to a {@link XYPlot}.
      *
      * @param plot  the plot ({@code null} not permitted).
+     * 
+     * @param <S> the type for the series keys.
      */
     protected <S extends Comparable<S>> void applyToXYPlot(XYPlot<S> plot) {
         plot.setAxisOffset(this.axisOffset);

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * TimeSeries.java
  * ---------------
- * (C) Copyright 2001-2020, by Object Refinery Limited.
+ * (C) Copyright 2001-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Bryan Scott;
@@ -347,6 +347,19 @@ public class TimeSeries<S extends Comparable<S>> extends Series<S>
         return findValueRange(xRange, xAnchor, calendar);
     }
 
+    /**
+     * Finds the range of y-values that fall within the specified range of
+     * x-values (where the x-values are interpreted as milliseconds since the
+     * epoch and converted to time periods using the specified timezone).
+     * 
+     * @param xRange  the subset of x-values to use ({@code null} not
+     *     permitted).
+     * @param xAnchor  the anchor point for the x-values ({@code null}
+     *     not permitted).
+     * @param calendar  the calendar ({@code null} not permitted).
+     * 
+     * @return The range of y-values.
+     */
     public Range findValueRange(Range xRange, TimePeriodAnchor xAnchor, Calendar calendar) {
         // since the items are ordered, we could be more clever here and avoid
         // iterating over all the data

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * CloneUtils.java
  * ---------------
- * (C) Copyright 2014-2020, by Object Refinery Limited.
+ * (C) Copyright 2014-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -57,6 +57,8 @@ public class CloneUtils {
      * {@code null} this method returns {@code null}.
      *
      * @param object the object to clone ({@code null} permitted).
+     * 
+     * @param <T>  the object type.
      * 
      * @return A clone of the specified object, or {@code null}.
      * 
@@ -93,6 +95,8 @@ public class CloneUtils {
      * 
      * @param source  the source list ({@code null} not permitted).
      * 
+     * @param <T>  the type of the list items.
+     * 
      * @return A new list. 
      */
     public static <T> List<T>cloneList(List<T> source) {
@@ -113,6 +117,9 @@ public class CloneUtils {
      * values from the source map.
      * 
      * @param source  the source map ({@code null} not permitted).
+     * 
+     * @param <K>  the type for the keys.
+     * @param <V>  the type for the values.
      * 
      * @return A new map. 
      * 

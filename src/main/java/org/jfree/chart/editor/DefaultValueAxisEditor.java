@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,11 @@
  * ----------------------
  * DefaultValueAxisEditor.java
  * ----------------------
- * (C) Copyright 2005-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  Martin Hoeller (base on DefaultNumberAxisEditor
  *                                   by David Gilbert);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 03-Nov-2011 : Version 1, based on DefaultNumberAxisEditor.java (MH);
  *
  */
 
@@ -181,6 +177,11 @@ class DefaultValueAxisEditor extends DefaultAxisEditor
                 createTickUnitPanel());
     }
 
+    /**
+     * Creates a panel for the tick units.
+     * 
+     * @return A panel. 
+     */
     protected JPanel createTickUnitPanel() {
         JPanel tickUnitPanel = new JPanel(new LCBLayout(3));
         tickUnitPanel.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
@@ -360,6 +361,9 @@ class DefaultValueAxisEditor extends DefaultAxisEditor
         }
     }
 
+    /**
+     * Sets the auto-tick unit selection field to the value in the check box.
+     */
     public void toggleAutoTick() {
         this.autoTickUnitSelection = this.autoTickUnitSelectionCheckBox.isSelected();
     }
