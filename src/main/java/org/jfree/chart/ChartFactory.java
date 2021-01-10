@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------
  * ChartFactory.java
  * -----------------
- * (C) Copyright 2001-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2001-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Serge V. Grachov;
@@ -107,7 +107,6 @@ import org.jfree.chart.renderer.xy.XYStepAreaRenderer;
 import org.jfree.chart.renderer.xy.XYStepRenderer;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.chart.ui.Layer;
-import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.urls.PieURLGenerator;
@@ -1356,6 +1355,8 @@ public abstract class ChartFactory {
      *
      * @return An XY area chart.
      * 
+     * @param <S> the type for series keys.
+     * 
      * @since 1.0.16
      */
     public static <S extends Comparable<S>> JFreeChart createXYAreaChart(
@@ -1383,6 +1384,8 @@ public abstract class ChartFactory {
      * @param tooltips  configure chart to generate tool tips?
      * @param urls  configure chart to generate URLs?
      *
+     * @param <S> the type for series keys.
+     * 
      * @return An XY area chart.
      */
     public static <S extends Comparable<S>> JFreeChart createXYAreaChart(
@@ -1542,13 +1545,9 @@ public abstract class ChartFactory {
             renderer.setURLGenerator(new StandardXYURLGenerator());
         }
         JFreeChart chart = null;
-try {
         chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
         currentTheme.apply(chart);
-} catch (NullPointerException e) {
-    e.printStackTrace();
-}
         return chart;
 
     }
