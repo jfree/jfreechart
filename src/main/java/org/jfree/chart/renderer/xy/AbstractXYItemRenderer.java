@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * AbstractXYItemRenderer.java
  * ---------------------------
- * (C) Copyright 2002-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2002-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Richard Atkinson;
@@ -93,6 +93,7 @@ import org.jfree.chart.ui.LengthAdjustmentType;
 import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.urls.XYURLGenerator;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.CloneUtils;
 import org.jfree.data.Range;
 import org.jfree.data.general.DatasetUtils;
@@ -436,8 +437,8 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      */
     @Override
     public void addAnnotation(XYAnnotation annotation, Layer layer) {
-        Objects.requireNonNull(annotation, "annotation");
-        Objects.requireNonNull(layer, "layer");
+        Args.nullNotPermitted(annotation, "annotation");
+        Args.nullNotPermitted(layer, "layer");
         switch (layer) {
             case FOREGROUND:
                 this.foregroundAnnotations.add(annotation);
@@ -542,7 +543,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      */
     @Override
     public void setLegendItemLabelGenerator(XYSeriesLabelGenerator generator) {
-        Objects.requireNonNull(generator, "generator");
+        Args.nullNotPermitted(generator, "generator");
         this.legendItemLabelGenerator = generator;
         fireChangeEvent();
     }
@@ -789,8 +790,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
             item.setLine(shape);
             item.setLinePaint(paint);
             item.setShapeVisible(false);
-        }
-        else {
+        } else {
             Paint outlinePaint = lookupSeriesOutlinePaint(series);
             Stroke outlineStroke = lookupSeriesOutlineStroke(series);
             item.setOutlinePaint(outlinePaint);
@@ -1470,7 +1470,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
             double x, double y, int datasetIndex,
             double transX, double transY, PlotOrientation orientation) {
 
-        Objects.requireNonNull(orientation, "orientation");
+        Args.nullNotPermitted(orientation, "orientation");
         if (crosshairState != null) {
             // do we need to update the crosshair values?
             if (this.plot.isDomainCrosshairLockedOnData()) {
@@ -1478,13 +1478,11 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
                     // both axes
                     crosshairState.updateCrosshairPoint(x, y, datasetIndex,
                             transX, transY, orientation);
-                }
-                else {
+                } else {
                     // just the domain axis...
                     crosshairState.updateCrosshairX(x, transX, datasetIndex);
                 }
-            }
-            else {
+            } else {
                 if (this.plot.isRangeCrosshairLockedOnData()) {
                     // just the range axis...
                     crosshairState.updateCrosshairY(y, transY, datasetIndex);
@@ -1553,7 +1551,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
     public void drawAnnotations(Graphics2D g2, Rectangle2D dataArea,
             ValueAxis domainAxis, ValueAxis rangeAxis, Layer layer,
             PlotRenderingInfo info) {
-        Objects.requireNonNull(layer);
+        Args.nullNotPermitted(layer, "layer");
         List<XYAnnotation> toDraw = new ArrayList<>();
         switch (layer) {
             case FOREGROUND:

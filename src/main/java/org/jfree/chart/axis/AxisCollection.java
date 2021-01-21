@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * AxisCollection.java
  * -------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited.
+ * (C) Copyright 2003-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -38,8 +38,8 @@ package org.jfree.chart.axis;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.util.Args;
 
 /**
  * A collection of axes that have been assigned to the TOP, BOTTOM, LEFT or
@@ -118,8 +118,8 @@ public class AxisCollection {
      *              ({@code null} not permitted).
      */
     public void add(Axis axis, RectangleEdge edge) {
-        Objects.requireNonNull(axis, "axis");
-        Objects.requireNonNull(edge, "edge");
+        Args.nullNotPermitted(axis, "axis");
+        Args.nullNotPermitted(edge, "edge");
         switch (edge) {
             case TOP:
                 this.axesAtTop.add(axis);

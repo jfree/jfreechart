@@ -42,7 +42,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * Utilities for cloning.
@@ -100,7 +99,7 @@ public class CloneUtils {
      * @return A new list. 
      */
     public static <T> List<T>cloneList(List<T> source) {
-        Objects.requireNonNull(source, "source");
+        Args.nullNotPermitted(source, "source");
         List<T> result = new ArrayList<>();
         for (Object obj: source) {
             try {
@@ -126,7 +125,7 @@ public class CloneUtils {
      * @since 1.0.18
      */
     public static <K, V> Map<K, V> cloneMapValues(Map<K, V> source) {
-        Objects.requireNonNull(source, "source");
+        Args.nullNotPermitted(source, "source");
         Map<K, V> result = new HashMap<>();
         for (K key : source.keySet()) {
             V value = source.get(key);
