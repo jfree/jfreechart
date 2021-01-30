@@ -38,8 +38,11 @@ package org.jfree.chart;
 
 import java.awt.GraphicsEnvironment;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.EventListener;
@@ -66,7 +69,7 @@ public class ChartPanelTest implements ChartChangeListener, ChartMouseListener {
     @BeforeEach
     public void checkForHeadlessEnvironment() {
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        org.junit.jupiter.api.Assumptions.assumeTrue(ge.isHeadlessInstance() == false);
+        assertFalse(ge.isHeadlessInstance());
     }
 
     /**
@@ -86,7 +89,7 @@ public class ChartPanelTest implements ChartChangeListener, ChartMouseListener {
     @Test
     public void testConstructor1() {
         ChartPanel panel = new ChartPanel(null);
-        assertEquals(null, panel.getChart());
+        assertNull(panel.getChart());
     }
 
     /**
@@ -97,7 +100,7 @@ public class ChartPanelTest implements ChartChangeListener, ChartMouseListener {
         JFreeChart chart = new JFreeChart(new XYPlot<String>());
         ChartPanel panel = new ChartPanel(chart);
         panel.setChart(null);
-        assertEquals(null, panel.getChart());
+        assertNull(panel.getChart());
     }
 
     /**
@@ -116,26 +119,8 @@ public class ChartPanelTest implements ChartChangeListener, ChartMouseListener {
         p.removeChartMouseListener(this);
         listeners = p.getListeners(ChartMouseListener.class);
         assertEquals(0, listeners.length);
-
         // try a null argument
-        boolean pass = false;
-        try {
-            listeners = p.getListeners((Class) null);
-        }
-        catch (NullPointerException e) {
-            pass = true;
-        }
-        assertTrue(pass);
-
-        // try a class that isn't a listener
-        pass = false;
-        try {
-            listeners = p.getListeners(Integer.class);
-        }
-        catch (ClassCastException e) {
-            pass = true;
-        }
-        assertTrue(pass);
+        assertThrows(NullPointerException.class, () -> p.getListeners(null));
     }
 
     /**
@@ -231,7 +216,7 @@ public class ChartPanelTest implements ChartChangeListener, ChartMouseListener {
         DefaultXYDataset<String> dataset = new DefaultXYDataset<>();
         JFreeChart chart = ChartFactory.createXYLineChart("TestChart", "X",
                 "Y", dataset, PlotOrientation.VERTICAL, false, false, false);
-        XYPlot<?> plot = (XYPlot) chart.getPlot();
+        XYPlot<?> plot = (XYPlot<?>) chart.getPlot();
         plot.setDomainAxis(1, new NumberAxis("X2"));
         ChartPanel panel = new ChartPanel(chart);
         chart.addChangeListener(this);
@@ -249,7 +234,7 @@ public class ChartPanelTest implements ChartChangeListener, ChartMouseListener {
         DefaultXYDataset<String> dataset = new DefaultXYDataset<>();
         JFreeChart chart = ChartFactory.createXYLineChart("TestChart", "X",
                 "Y", dataset, PlotOrientation.VERTICAL, false, false, false);
-        XYPlot<?> plot = (XYPlot) chart.getPlot();
+        XYPlot<?> plot = (XYPlot<?>) chart.getPlot();
         plot.setRangeAxis(1, new NumberAxis("X2"));
         ChartPanel panel = new ChartPanel(chart);
         chart.addChangeListener(this);
@@ -267,7 +252,7 @@ public class ChartPanelTest implements ChartChangeListener, ChartMouseListener {
         DefaultXYDataset<String> dataset = new DefaultXYDataset<>();
         JFreeChart chart = ChartFactory.createXYLineChart("TestChart", "X",
                 "Y", dataset, PlotOrientation.VERTICAL, false, false, false);
-        XYPlot<?> plot = (XYPlot) chart.getPlot();
+        XYPlot<?> plot = (XYPlot<?>) chart.getPlot();
         plot.setDomainAxis(1, new NumberAxis("X2"));
         ChartPanel panel = new ChartPanel(chart);
         chart.addChangeListener(this);
@@ -285,7 +270,7 @@ public class ChartPanelTest implements ChartChangeListener, ChartMouseListener {
         DefaultXYDataset<String> dataset = new DefaultXYDataset<>();
         JFreeChart chart = ChartFactory.createXYLineChart("TestChart", "X",
                 "Y", dataset, PlotOrientation.VERTICAL, false, false, false);
-        XYPlot<?> plot = (XYPlot) chart.getPlot();
+        XYPlot<?> plot = (XYPlot<?>) chart.getPlot();
         plot.setRangeAxis(1, new NumberAxis("X2"));
         ChartPanel panel = new ChartPanel(chart);
         chart.addChangeListener(this);
@@ -303,7 +288,7 @@ public class ChartPanelTest implements ChartChangeListener, ChartMouseListener {
         DefaultXYDataset<String> dataset = new DefaultXYDataset<>();
         JFreeChart chart = ChartFactory.createXYLineChart("TestChart", "X",
                 "Y", dataset, PlotOrientation.VERTICAL, false, false, false);
-        XYPlot<?> plot = (XYPlot) chart.getPlot();
+        XYPlot<?> plot = (XYPlot<?>) chart.getPlot();
         plot.setDomainAxis(1, new NumberAxis("X2"));
         ChartPanel panel = new ChartPanel(chart);
         chart.addChangeListener(this);
@@ -321,7 +306,7 @@ public class ChartPanelTest implements ChartChangeListener, ChartMouseListener {
         DefaultXYDataset<String> dataset = new DefaultXYDataset<>();
         JFreeChart chart = ChartFactory.createXYLineChart("TestChart", "X",
                 "Y", dataset, PlotOrientation.VERTICAL, false, false, false);
-        XYPlot<?> plot = (XYPlot) chart.getPlot();
+        XYPlot<?> plot = (XYPlot<?>) chart.getPlot();
         plot.setRangeAxis(1, new NumberAxis("X2"));
         ChartPanel panel = new ChartPanel(chart);
         chart.addChangeListener(this);
