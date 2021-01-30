@@ -2665,21 +2665,25 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
             // use reflection to get the SVG string
             String svg = generateSVG(getWidth(), getHeight());
             BufferedWriter writer = null;
+            Exception originalException = null;
             try {
                 writer = new BufferedWriter(new FileWriter(file));
                 writer.write("<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n");
                 writer.write(svg + "\n");
                 writer.flush();
-            } finally {
-                try {
-                    if (writer != null) {
-                        writer.close();
-                    }
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
+            } catch (Exception e) {
+                originalException = e;
+            }
+            try {
+                if (writer != null) {
+                    writer.close();
                 }
-            } 
-
+            } catch (IOException ex) {
+                RuntimeException th = new RuntimeException(ex);
+                if (originalException != null)
+                    th.addSuppressed(originalException);
+                throw th;
+            }
         }
     }
     
