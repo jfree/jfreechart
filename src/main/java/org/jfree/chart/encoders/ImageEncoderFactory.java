@@ -97,8 +97,8 @@ public class ImageEncoderFactory {
                     + format);
         }
         try {
-            Class imageEncoderClass = Class.forName(className);
-            imageEncoder = (ImageEncoder) imageEncoderClass.newInstance();
+            Class<?> imageEncoderClass = Class.forName(className);
+            imageEncoder = (ImageEncoder) imageEncoderClass.getDeclaredConstructor().newInstance();
         }
         catch (Exception e) {
             throw new IllegalArgumentException(e.toString());
