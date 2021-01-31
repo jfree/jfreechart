@@ -126,19 +126,9 @@ public class ExportUtils {
             Method m2 = svgUtilsClass.getMethod("writeToSVG", File.class, 
                     String.class);
             m2.invoke(svgUtilsClass, file, element);
-        } catch (ClassNotFoundException ex) {
-            throw new RuntimeException(ex);
-        } catch (InstantiationException ex) {
-            throw new RuntimeException(ex);
-        } catch (IllegalAccessException ex) {
-            throw new RuntimeException(ex);
-        } catch (NoSuchMethodException ex) {
-            throw new RuntimeException(ex);
-        } catch (SecurityException ex) {
-            throw new RuntimeException(ex);
-        } catch (IllegalArgumentException ex) {
-            throw new RuntimeException(ex);
-        } catch (InvocationTargetException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
+                NoSuchMethodException | SecurityException | IllegalArgumentException |
+                InvocationTargetException ex) {
             throw new RuntimeException(ex);
         }
     }
@@ -174,19 +164,9 @@ public class ExportUtils {
             drawable.draw(g2, drawArea);
             Method m3 = pdfDocClass.getMethod("writeToFile", File.class);
             m3.invoke(pdfDoc, file);
-        } catch (ClassNotFoundException ex) {
-            throw new RuntimeException(ex);
-        } catch (InstantiationException ex) {
-            throw new RuntimeException(ex);
-        } catch (IllegalAccessException ex) {
-            throw new RuntimeException(ex);
-        } catch (NoSuchMethodException ex) {
-            throw new RuntimeException(ex);
-        } catch (SecurityException ex) {
-            throw new RuntimeException(ex);
-        } catch (IllegalArgumentException ex) {
-            throw new RuntimeException(ex);
-        } catch (InvocationTargetException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
+                NoSuchMethodException | SecurityException | IllegalArgumentException |
+                InvocationTargetException ex) {
             throw new RuntimeException(ex);
         }
     }
@@ -208,12 +188,8 @@ public class ExportUtils {
                 BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2 = image.createGraphics();
         drawable.draw(g2, new Rectangle(w, h));
-        OutputStream out = new BufferedOutputStream(new FileOutputStream(file));
-        try {
+        try (OutputStream out = new BufferedOutputStream(new FileOutputStream(file))) {
             ImageIO.write(image, "png", out);
-        }
-        finally {
-            out.close();
         }
     }
 
@@ -234,12 +210,8 @@ public class ExportUtils {
                 BufferedImage.TYPE_INT_RGB);
         Graphics2D g2 = image.createGraphics();
         drawable.draw(g2, new Rectangle(w, h));
-        OutputStream out = new BufferedOutputStream(new FileOutputStream(file));
-        try {
+        try (OutputStream out = new BufferedOutputStream(new FileOutputStream(file))) {
             ImageIO.write(image, "jpg", out);
-        }
-        finally {
-            out.close();
         }
     }
  

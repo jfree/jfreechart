@@ -95,8 +95,8 @@ public class HashUtils {
         }
         int result = 193;
         long temp;
-        for (int i = 0; i < a.length; i++) {
-            temp = Double.doubleToLongBits(a[i]);
+        for (double v : a) {
+            temp = Double.doubleToLongBits(v);
             result = 29 * result + (int) (temp ^ (temp >>> 32));
         }
         return result;
@@ -203,7 +203,7 @@ public class HashUtils {
      * 
      * @since 1.0.7
      */
-    public static int hashCode(int pre, Comparable c) {
+    public static int hashCode(int pre, Comparable<?> c) {
         int h = (c != null ? c.hashCode() : 0);
         return 37 * pre + h;
     }
