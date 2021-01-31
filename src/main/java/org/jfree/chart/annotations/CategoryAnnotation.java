@@ -60,7 +60,7 @@ public interface CategoryAnnotation extends Annotation {
      * @param domainAxis  the domain axis.
      * @param rangeAxis  the range axis.
      */
-    public void draw(Graphics2D g2, CategoryPlot plot, Rectangle2D dataArea,
+    void draw(Graphics2D g2, CategoryPlot plot, Rectangle2D dataArea,
                      CategoryAxis domainAxis, ValueAxis rangeAxis);
 
 }

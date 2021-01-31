@@ -53,7 +53,7 @@ public interface StatisticalCategoryDataset<R extends Comparable<R>,
      *
      * @return The mean value (possibly {@code null}).
      */
-    public Number getMeanValue(int row, int column);
+    Number getMeanValue(int row, int column);
 
     /**
      * Returns the mean value for an item.
@@ -63,7 +63,7 @@ public interface StatisticalCategoryDataset<R extends Comparable<R>,
      *
      * @return The mean value (possibly {@code null}).
      */
-    public Number getMeanValue(R rowKey, C columnKey);
+    Number getMeanValue(R rowKey, C columnKey);
 
     /**
      * Returns the standard deviation value for an item.
@@ -73,7 +73,7 @@ public interface StatisticalCategoryDataset<R extends Comparable<R>,
      *
      * @return The standard deviation (possibly {@code null}).
      */
-    public Number getStdDevValue(int row, int column);
+    Number getStdDevValue(int row, int column);
 
     /**
      * Returns the standard deviation value for an item.
@@ -83,7 +83,7 @@ public interface StatisticalCategoryDataset<R extends Comparable<R>,
      *
      * @return The standard deviation (possibly {@code null}).
      */
-    public Number getStdDevValue(R rowKey, C columnKey);
+    Number getStdDevValue(R rowKey, C columnKey);
 
 }
 

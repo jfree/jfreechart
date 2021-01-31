@@ -53,7 +53,7 @@ public interface IntervalCategoryDataset<R extends Comparable<R>,
      *
      * @see #getEndValue(int, int)
      */
-    public Number getStartValue(int series, int category);
+    Number getStartValue(int series, int category);
 
     /**
      * Returns the start value for the interval for a given series and category.
@@ -65,7 +65,7 @@ public interface IntervalCategoryDataset<R extends Comparable<R>,
      *
      * @see #getEndValue(Comparable, Comparable)
      */
-    public Number getStartValue(R series, C category);
+    Number getStartValue(R series, C category);
 
     /**
      * Returns the end value for the interval for a given series and category.
@@ -77,7 +77,7 @@ public interface IntervalCategoryDataset<R extends Comparable<R>,
      *
      * @see #getStartValue(int, int)
      */
-    public Number getEndValue(int series, int category);
+    Number getEndValue(int series, int category);
 
     /**
      * Returns the end value for the interval for a given series and category.
@@ -89,6 +89,6 @@ public interface IntervalCategoryDataset<R extends Comparable<R>,
      *
      * @see #getStartValue(Comparable, Comparable)
      */
-    public Number getEndValue(R series, C category);
+    Number getEndValue(R series, C category);
 
 }

@@ -43,7 +43,7 @@ public interface Drawable {
      * @param g2  the graphics device.
      * @param area  the area inside which the object should be drawn.
      */
-    public void draw(Graphics2D g2, Rectangle2D area);
+    void draw(Graphics2D g2, Rectangle2D area);
 
 }
 

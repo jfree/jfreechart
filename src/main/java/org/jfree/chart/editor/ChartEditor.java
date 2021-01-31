@@ -57,6 +57,6 @@ public interface ChartEditor {
      *
      * @param chart  the chart.
      */
-    public void updateChart(JFreeChart chart);
+    void updateChart(JFreeChart chart);
 
 }

@@ -64,7 +64,7 @@ public interface Zoomable {
      *
      * @see #isRangeZoomable()
      */
-    public boolean isDomainZoomable();
+    boolean isDomainZoomable();
 
     /**
      * Returns {@code true} if the plot's range is zoomable, and {@code false} 
@@ -74,14 +74,14 @@ public interface Zoomable {
      *
      * @see #isDomainZoomable()
      */
-    public boolean isRangeZoomable();
+    boolean isRangeZoomable();
 
     /**
      * Returns the orientation of the plot.
      *
      * @return The orientation (never {@code null}).
      */
-    public PlotOrientation getOrientation();
+    PlotOrientation getOrientation();
 
     /**
      * Multiplies the range on the domain axis/axes by the specified factor.
@@ -95,7 +95,7 @@ public interface Zoomable {
      *
      * @see #zoomRangeAxes(double, PlotRenderingInfo, Point2D)
      */
-    public void zoomDomainAxes(double factor, PlotRenderingInfo state,
+    void zoomDomainAxes(double factor, PlotRenderingInfo state,
             Point2D source);
 
     /**
@@ -113,7 +113,7 @@ public interface Zoomable {
      *
      * @since 1.0.7
      */
-    public void zoomDomainAxes(double factor, PlotRenderingInfo state,
+    void zoomDomainAxes(double factor, PlotRenderingInfo state,
             Point2D source, boolean useAnchor);
 
     /**
@@ -127,7 +127,7 @@ public interface Zoomable {
      *
      * @see #zoomRangeAxes(double, double, PlotRenderingInfo, Point2D)
      */
-    public void zoomDomainAxes(double lowerPercent, double upperPercent,
+    void zoomDomainAxes(double lowerPercent, double upperPercent,
             PlotRenderingInfo state, Point2D source);
 
     /**
@@ -142,7 +142,7 @@ public interface Zoomable {
      *
      * @see #zoomDomainAxes(double, PlotRenderingInfo, Point2D)
      */
-    public void zoomRangeAxes(double factor, PlotRenderingInfo state,
+    void zoomRangeAxes(double factor, PlotRenderingInfo state,
             Point2D source);
 
     /**
@@ -160,7 +160,7 @@ public interface Zoomable {
      *
      * @since 1.0.7
      */
-    public void zoomRangeAxes(double factor, PlotRenderingInfo state,
+    void zoomRangeAxes(double factor, PlotRenderingInfo state,
             Point2D source, boolean useAnchor);
 
     /**
@@ -174,7 +174,7 @@ public interface Zoomable {
      *
      * @see #zoomDomainAxes(double, double, PlotRenderingInfo, Point2D)
      */
-    public void zoomRangeAxes(double lowerPercent, double upperPercent,
+    void zoomRangeAxes(double lowerPercent, double upperPercent,
             PlotRenderingInfo state, Point2D source);
 
 }

@@ -55,6 +55,6 @@ public interface AnnotationChangeListener extends EventListener {
      *
      * @since 1.0.14
      */
-    public void annotationChanged(AnnotationChangeEvent event);
+    void annotationChanged(AnnotationChangeEvent event);
 
 }

@@ -63,7 +63,7 @@ public interface Overlay {
      * @param g2  the graphics target (never {@code null}).
      * @param chartPanel  the chart panel (never {@code null}).
      */
-    public void paintOverlay(Graphics2D g2, ChartPanel chartPanel);
+    void paintOverlay(Graphics2D g2, ChartPanel chartPanel);
 
     /**
      * Registers a change listener with the overlay.  Typically this method
@@ -75,7 +75,7 @@ public interface Overlay {
      * 
      * @see #removeChangeListener(org.jfree.chart.event.OverlayChangeListener) 
      */
-    public void addChangeListener(OverlayChangeListener listener);
+    void addChangeListener(OverlayChangeListener listener);
 
     /**
      * Deregisters a listener from the overlay.
@@ -84,6 +84,6 @@ public interface Overlay {
      * 
      * @see #addChangeListener(org.jfree.chart.event.OverlayChangeListener) 
      */
-    public void removeChangeListener(OverlayChangeListener listener);
+    void removeChangeListener(OverlayChangeListener listener);
 
 }

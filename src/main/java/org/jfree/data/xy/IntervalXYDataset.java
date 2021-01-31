@@ -55,7 +55,7 @@ public interface IntervalXYDataset<S extends Comparable<S>> extends XYDataset<S>
      *
      * @return The lower bound of the x-interval ({@code null} permitted).
      */
-    public Number getStartX(int series, int item);
+    Number getStartX(int series, int item);
 
     /**
      * Returns the lower bound of the x-interval (as a double primitive) for
@@ -68,7 +68,7 @@ public interface IntervalXYDataset<S extends Comparable<S>> extends XYDataset<S>
      *
      * @see #getStartX(int, int)
      */
-    public double getStartXValue(int series, int item);
+    double getStartXValue(int series, int item);
 
     /**
      * Returns the upper bound of the x-interval for the specified series and
@@ -80,7 +80,7 @@ public interface IntervalXYDataset<S extends Comparable<S>> extends XYDataset<S>
      *
      * @return The upper bound of the x-interval ({@code null} permitted).
      */
-    public Number getEndX(int series, int item);
+    Number getEndX(int series, int item);
 
     /**
      * Returns the upper bound of the x-interval (as a double primitive) for
@@ -93,7 +93,7 @@ public interface IntervalXYDataset<S extends Comparable<S>> extends XYDataset<S>
      *
      * @see #getEndX(int, int)
      */
-    public double getEndXValue(int series, int item);
+    double getEndXValue(int series, int item);
 
     /**
      * Returns the lower bound of the y-interval for the specified series and
@@ -105,7 +105,7 @@ public interface IntervalXYDataset<S extends Comparable<S>> extends XYDataset<S>
      *
      * @return The lower bound of the y-interval ({@code null} permitted).
      */
-    public Number getStartY(int series, int item);
+    Number getStartY(int series, int item);
 
     /**
      * Returns the lower bound of the y-interval (as a double primitive) for
@@ -118,7 +118,7 @@ public interface IntervalXYDataset<S extends Comparable<S>> extends XYDataset<S>
      *
      * @see #getStartY(int, int)
      */
-    public double getStartYValue(int series, int item);
+    double getStartYValue(int series, int item);
 
     /**
      * Returns the upper bound of the y-interval for the specified series and
@@ -130,7 +130,7 @@ public interface IntervalXYDataset<S extends Comparable<S>> extends XYDataset<S>
      *
      * @return The upper bound of the y-interval ({@code null} permitted).
      */
-    public Number getEndY(int series, int item);
+    Number getEndY(int series, int item);
 
     /**
      * Returns the upper bound of the y-interval (as a double primitive) for
@@ -143,6 +143,6 @@ public interface IntervalXYDataset<S extends Comparable<S>> extends XYDataset<S>
      *
      * @see #getEndY(int, int)
      */
-    public double getEndYValue(int series, int item);
+    double getEndYValue(int series, int item);
 
 }

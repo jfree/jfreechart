@@ -51,7 +51,7 @@ public interface IntervalXYZDataset<S extends Comparable<S>>
      *
      * @return The starting X value for the specified series and item.
      */
-    public Number getStartXValue(int series, int item);
+    Number getStartXValue(int series, int item);
 
     /**
      * Returns the ending X value for the specified series and item.
@@ -61,7 +61,7 @@ public interface IntervalXYZDataset<S extends Comparable<S>>
      *
      * @return The ending X value for the specified series and item.
      */
-    public Number getEndXValue(int series, int item);
+    Number getEndXValue(int series, int item);
 
     /**
      * Returns the starting Y value for the specified series and item.
@@ -71,7 +71,7 @@ public interface IntervalXYZDataset<S extends Comparable<S>>
      *
      * @return The starting Y value for the specified series and item.
      */
-    public Number getStartYValue(int series, int item);
+    Number getStartYValue(int series, int item);
 
     /**
      * Returns the ending Y value for the specified series and item.
@@ -81,7 +81,7 @@ public interface IntervalXYZDataset<S extends Comparable<S>>
      *
      * @return The ending Y value for the specified series and item.
      */
-    public Number getEndYValue(int series, int item);
+    Number getEndYValue(int series, int item);
 
     /**
      * Returns the starting Z value for the specified series and item.
@@ -91,7 +91,7 @@ public interface IntervalXYZDataset<S extends Comparable<S>>
      *
      * @return The starting Z value for the specified series and item.
      */
-    public Number getStartZValue(int series, int item);
+    Number getStartZValue(int series, int item);
 
     /**
      * Returns the ending Z value for the specified series and item.
@@ -101,6 +101,6 @@ public interface IntervalXYZDataset<S extends Comparable<S>>
      *
      * @return The ending Z value for the specified series and item.
      */
-    public Number getEndZValue(int series, int item);
+    Number getEndZValue(int series, int item);
 
 }

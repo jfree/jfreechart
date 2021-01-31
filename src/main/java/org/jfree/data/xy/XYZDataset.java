@@ -50,7 +50,7 @@ public interface XYZDataset<S extends Comparable<S>> extends XYDataset<S> {
      *
      * @return The z-value (possibly {@code null}).
      */
-    public Number getZ(int series, int item);
+    Number getZ(int series, int item);
 
     /**
      * Returns the z-value (as a double primitive) for an item within a series.
@@ -60,6 +60,6 @@ public interface XYZDataset<S extends Comparable<S>> extends XYDataset<S> {
      *
      * @return The z-value.
      */
-    public double getZValue(int series, int item);
+    double getZValue(int series, int item);
 
 }
