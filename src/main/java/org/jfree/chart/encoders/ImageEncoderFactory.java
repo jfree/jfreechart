@@ -55,7 +55,7 @@ import java.util.Map;
 public class ImageEncoderFactory {
 
     /** Storage for the encoders. */
-    private static Map encoders = null;
+    private static Map<String, String> encoders = null;
 
     static {
         init();
@@ -66,7 +66,7 @@ public class ImageEncoderFactory {
      * SunPNGEncoderAdapter class is available).
      */
     private static void init() {
-        encoders = new HashMap();
+        encoders = new HashMap<>();
         encoders.put("jpeg", "org.jfree.chart.encoders.SunJPEGEncoderAdapter");
         encoders.put("png", "org.jfree.chart.encoders.SunPNGEncoderAdapter");
     }
@@ -79,6 +79,10 @@ public class ImageEncoderFactory {
      */
     public static void setImageEncoder(String format,
                                        String imageEncoderClassName) {
+        if (format == null)
+            throw new IllegalArgumentException("Image format must not be null");
+        if (imageEncoderClassName == null)
+            throw new IllegalArgumentException("Image encoder class name must not be null");
         encoders.put(format, imageEncoderClassName);
     }
 
@@ -90,18 +94,14 @@ public class ImageEncoderFactory {
      * @return The ImageEncoder or {@code null} if none available.
      */
     public static ImageEncoder newInstance(String format) {
-        ImageEncoder imageEncoder = null;
-        String className = (String) encoders.get(format);
-        if (className == null) {
-            throw new IllegalArgumentException("Unsupported image format - "
-                    + format);
-        }
+        ImageEncoder imageEncoder;
+        String className = encoders.get(format);
         try {
             Class<?> imageEncoderClass = Class.forName(className);
             imageEncoder = (ImageEncoder) imageEncoderClass.getDeclaredConstructor().newInstance();
         }
         catch (Exception e) {
-            throw new IllegalArgumentException(e.toString());
+            throw new IllegalArgumentException(e.getMessage(), e);
         }
         return imageEncoder;
     }

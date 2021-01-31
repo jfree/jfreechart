@@ -584,7 +584,7 @@ public abstract class Marker implements Cloneable, Serializable {
      *
      * @since 1.0.3
      */
-    public EventListener[] getListeners(Class listenerType) {
+    public <T extends EventListener> T[] getListeners(Class<T> listenerType) {
         return this.listenerList.getListeners(listenerType);
     }
 

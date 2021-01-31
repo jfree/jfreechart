@@ -108,8 +108,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -223,7 +223,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      * A (possibly empty) list of the {@link MeterInterval}s to be highlighted
      * on the dial.
      */
-    private List intervals;
+    private List<MeterInterval> intervals;
 
     /**
      * Creates a new plot with a default range of {@code 0} to {@code 100} and 
@@ -254,7 +254,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
         this.valueFont = MeterPlot.DEFAULT_VALUE_FONT;
         this.valuePaint = MeterPlot.DEFAULT_VALUE_PAINT;
         this.dialBackgroundPaint = MeterPlot.DEFAULT_DIAL_BACKGROUND_PAINT;
-        this.intervals = new java.util.ArrayList();
+        this.intervals = new ArrayList<>();
         setDataset(dataset);
     }
 
@@ -722,8 +722,8 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      *
      * @see #addInterval(MeterInterval)
      */
-    public List getIntervals() {
-        return Collections.unmodifiableList(this.intervals);
+    public List<MeterInterval> getIntervals() {
+        return Collections.unmodifiableList(intervals);
     }
 
     /**
@@ -737,7 +737,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      */
     public void addInterval(MeterInterval interval) {
         Args.nullNotPermitted(interval, "interval");
-        this.intervals.add(interval);
+        intervals.add(interval);
         fireChangeEvent();
     }
 
@@ -748,7 +748,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      * @see #addInterval(MeterInterval)
      */
     public void clearIntervals() {
-        this.intervals.clear();
+        intervals.clear();
         fireChangeEvent();
     }
 
@@ -760,8 +760,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
     @Override
     public LegendItemCollection getLegendItems() {
         LegendItemCollection result = new LegendItemCollection();
-        for (Object interval : this.intervals) {
-            MeterInterval mi = (MeterInterval) interval;
+        for (MeterInterval mi : intervals) {
             Paint color = mi.getBackgroundPaint();
             if (color == null) {
                 color = mi.getOutlinePaint();
@@ -1309,7 +1308,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
         MeterPlot clone = (MeterPlot) super.clone();
         clone.tickLabelFormat = (NumberFormat) this.tickLabelFormat.clone();
         // the following relies on the fact that the intervals are immutable
-        clone.intervals = new java.util.ArrayList(this.intervals);
+        clone.intervals = new ArrayList<>(this.intervals);
         if (clone.dataset != null) {
             clone.dataset.addChangeListener(clone);
         }

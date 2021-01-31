@@ -176,15 +176,14 @@ public class FlowArrangement implements Arrangement, Serializable {
     protected Size2D arrangeFN(BlockContainer container, Graphics2D g2,
                                RectangleConstraint constraint) {
 
-        List blocks = container.getBlocks();
+        List<Block> blocks = container.getBlocks();
         double width = constraint.getWidth();
 
         double x = 0.0;
         double y = 0.0;
         double maxHeight = 0.0;
-        List itemsInRow = new ArrayList();
-        for (int i = 0; i < blocks.size(); i++) {
-            Block block = (Block) blocks.get(i);
+        List<Block> itemsInRow = new ArrayList<>();
+        for (Block block : blocks) {
             Size2D size = block.arrange(g2, RectangleConstraint.NONE);
             if (x + size.width <= width) {
                 itemsInRow.add(block);
@@ -357,12 +356,12 @@ public class FlowArrangement implements Arrangement, Serializable {
         double x = 0.0;
         double width = 0.0;
         double maxHeight = 0.0;
-        List blocks = container.getBlocks();
+        List<Block> blocks = container.getBlocks();
         int blockCount = blocks.size();
         if (blockCount > 0) {
             Size2D[] sizes = new Size2D[blocks.size()];
             for (int i = 0; i < blocks.size(); i++) {
-                Block block = (Block) blocks.get(i);
+                Block block = blocks.get(i);
                 sizes[i] = block.arrange(g2, RectangleConstraint.NONE);
                 width = width + sizes[i].getWidth();
                 maxHeight = Math.max(sizes[i].height, maxHeight);
