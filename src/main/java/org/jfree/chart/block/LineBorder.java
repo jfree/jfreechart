@@ -80,7 +80,7 @@ public class LineBorder implements BlockFrame, Serializable {
     private transient Stroke stroke;
 
     /** The insets. */
-    private RectangleInsets insets;
+    private final RectangleInsets insets;
 
     /**
      * Creates a default border.

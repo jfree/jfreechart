@@ -78,25 +78,25 @@ class DefaultTitleEditor extends JPanel implements ActionListener {
     private boolean showTitle;
 
     /** The checkbox to indicate whether or not to display the title. */
-    private JCheckBox showTitleCheckBox;
+    private final JCheckBox showTitleCheckBox;
 
     /** A field for displaying/editing the title text. */
-    private JTextField titleField;
+    private final JTextField titleField;
 
     /** The font used to draw the title. */
     private Font titleFont;
 
     /** A field for displaying a description of the title font. */
-    private JTextField fontfield;
+    private final JTextField fontfield;
 
     /** The button to use to select a new title font. */
-    private JButton selectFontButton;
+    private final JButton selectFontButton;
 
     /** The paint (color) used to draw the title. */
-    private PaintSample titlePaint;
+    private final PaintSample titlePaint;
 
     /** The button to use to select a new paint (color) to draw the title. */
-    private JButton selectPaintButton;
+    private final JButton selectPaintButton;
 
     /** The resourceBundle for the localization. */
     protected static ResourceBundle localizationResources

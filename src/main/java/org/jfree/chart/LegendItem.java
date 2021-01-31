@@ -94,7 +94,7 @@ public class LegendItem implements Cloneable, Serializable {
     private int series;
 
     /** The label. */
-    private String label;
+    private final String label;
 
     /**
      * The label font ({@code null} is permitted).
@@ -131,7 +131,7 @@ public class LegendItem implements Cloneable, Serializable {
     private transient Shape shape;
 
     /** A flag that controls whether or not the shape is filled. */
-    private boolean shapeFilled;
+    private final boolean shapeFilled;
 
     /** The paint. */
     private transient Paint fillPaint;
@@ -144,7 +144,7 @@ public class LegendItem implements Cloneable, Serializable {
     private GradientPaintTransformer fillPaintTransformer;
 
     /** A flag that controls whether or not the shape outline is visible. */
-    private boolean shapeOutlineVisible;
+    private final boolean shapeOutlineVisible;
 
     /** The outline paint. */
     private transient Paint outlinePaint;

@@ -51,16 +51,16 @@ public class ItemLabelPosition implements Serializable {
     private static final long serialVersionUID = 5845390630157034499L;
 
     /** The item label anchor point. */
-    private ItemLabelAnchor itemLabelAnchor;
+    private final ItemLabelAnchor itemLabelAnchor;
 
     /** The text anchor. */
-    private TextAnchor textAnchor;
+    private final TextAnchor textAnchor;
 
     /** The rotation anchor. */
-    private TextAnchor rotationAnchor;
+    private final TextAnchor rotationAnchor;
 
     /** The rotation angle. */
-    private double angle;
+    private final double angle;
 
     /**
      * Creates a new position record with default settings.

@@ -59,7 +59,7 @@ public class PlotEntity extends ChartEntity {
             //same as for ChartEntity!
 
     /** The plot. */
-    private Plot plot;
+    private final Plot plot;
 
     /**
      * Creates a new plot entity.

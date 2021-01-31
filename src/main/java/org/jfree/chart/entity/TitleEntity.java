@@ -59,7 +59,7 @@ public class TitleEntity extends ChartEntity {
             //same as for ChartEntity!
 
     /** The Title for the entity. */
-    private Title title;
+    private final Title title;
 
     /**
      * Creates a new chart entity.

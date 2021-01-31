@@ -63,10 +63,10 @@ public class MultipleXYSeriesLabelGenerator implements XYSeriesLabelGenerator,
     public static final String DEFAULT_LABEL_FORMAT = "{0}";
 
     /** The format pattern for the initial part of the label. */
-    private String formatPattern;
+    private final String formatPattern;
 
     /** The format pattern for additional labels. */
-    private String additionalFormatPattern;
+    private final String additionalFormatPattern;
 
     /** Storage for the additional series labels. */
     private Map seriesLabelLists;

@@ -52,10 +52,10 @@ public class DateRange extends Range implements Serializable {
     private static final long serialVersionUID = -4705682568375418157L;
 
     /** The lower bound for the range. */
-    private long lowerDate;
+    private final long lowerDate;
 
     /** The upper bound for the range. */
-    private long upperDate;
+    private final long upperDate;
 
     /**
      * Default constructor.

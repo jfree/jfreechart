@@ -60,7 +60,7 @@ public class PlotRenderingInfo implements Cloneable, Serializable {
     private static final long serialVersionUID = 8446720134379617220L;
 
     /** The owner of this info. */
-    private ChartRenderingInfo owner;
+    private final ChartRenderingInfo owner;
 
     /** The plot area. */
     private transient Rectangle2D plotArea;

@@ -109,7 +109,7 @@ public class WaferMapPlot extends Plot implements RendererChangeListener,
      *  vertical = notch down
      *  horizontal = notch right
      */
-    private PlotOrientation orientation;
+    private final PlotOrientation orientation;
 
     /** The dataset. */
     private WaferMapDataset dataset;

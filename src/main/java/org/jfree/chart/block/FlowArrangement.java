@@ -60,16 +60,16 @@ public class FlowArrangement implements Arrangement, Serializable {
     private static final long serialVersionUID = 4543632485478613800L;
 
     /** The horizontal alignment of blocks. */
-    private HorizontalAlignment horizontalAlignment;
+    private final HorizontalAlignment horizontalAlignment;
 
     /** The vertical alignment of blocks within each row. */
-    private VerticalAlignment verticalAlignment;
+    private final VerticalAlignment verticalAlignment;
 
     /** The horizontal gap between items within rows. */
-    private double horizontalGap;
+    private final double horizontalGap;
 
     /** The vertical gap between rows. */
-    private double verticalGap;
+    private final double verticalGap;
 
     /**
      * Creates a new instance.

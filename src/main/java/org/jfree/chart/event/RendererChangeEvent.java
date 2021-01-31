@@ -43,7 +43,7 @@ package org.jfree.chart.event;
 public class RendererChangeEvent extends ChartChangeEvent {
 
     /** The renderer that generated the event. */
-    private Object renderer;
+    private final Object renderer;
 
     /**
      * A flag that indicates whether this event relates to a change in the
@@ -52,7 +52,7 @@ public class RendererChangeEvent extends ChartChangeEvent {
      *
      * @since 1.0.13
      */
-    private boolean seriesVisibilityChanged;
+    private final boolean seriesVisibilityChanged;
 
     /**
      * Creates a new event.

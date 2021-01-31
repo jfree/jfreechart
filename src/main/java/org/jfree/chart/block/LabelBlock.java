@@ -88,7 +88,7 @@ public class LabelBlock extends AbstractBlock
      * The text for the label - retained in case the label needs
      * regenerating (for example, to change the font).
      */
-    private String text;
+    private final String text;
 
     /** The label. */
     private TextBlock label;

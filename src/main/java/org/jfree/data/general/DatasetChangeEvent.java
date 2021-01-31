@@ -55,7 +55,7 @@ public class DatasetChangeEvent extends java.util.EventObject {
     /**
      * The dataset that generated the change event.
      */
-    private Dataset dataset;
+    private final Dataset dataset;
 
     /**
      * Constructs a new event.  The source is either the dataset or the

@@ -125,10 +125,10 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
     private float[][] data;
 
     /** The x data range. */
-    private Range xDataRange;
+    private final Range xDataRange;
 
     /** The y data range. */
-    private Range yDataRange;
+    private final Range yDataRange;
 
     /** The domain axis (used for the x-values). */
     private ValueAxis domainAxis;
