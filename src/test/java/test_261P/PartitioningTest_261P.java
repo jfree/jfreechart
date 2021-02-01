@@ -207,7 +207,7 @@ private JFreeChart pieChart;
         assertEquals(((PiePlot)this.pieChart.getPlot()).getDataset().getKey(2), "C/C++");
     }
     @Test
-    public void testReplaceKeysWithOtherString(){
+    public void testReplaceKeysWithNewline(){
         LocalListener l = new LocalListener();
         this.pieChart.addChangeListener(l);
         DefaultPieDataset<String> data = new DefaultPieDataset<>();
