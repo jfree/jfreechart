@@ -2,12 +2,13 @@ package org.jfree.chart;
 import org.jfree.chart.event.ChartChangeEvent;
 import org.jfree.chart.event.ChartChangeListener;
 import org.jfree.chart.plot.PiePlot;
+import org.jfree.data.UnknownKeyException;
 import org.jfree.data.general.DefaultPieDataset;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import org.junit.jupiter.api.BeforeEach;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PartitioningTest_261P {
 
@@ -131,5 +132,139 @@ private JFreeChart pieChart;
         assertEquals(2,this.pieChart.getPlot().getLegendItems().getItemCount());
 
     }
+    @Test
+    public void testContainsFloatData(){
+        LocalListener l = new LocalListener();
+        this.pieChart.addChangeListener(l);
+        //replacing existing dataset with new dataset
+        DefaultPieDataset<String> data = new DefaultPieDataset<>();
+        data.setValue("Java", 43);
+        data.setValue("Visual Basic", 17f);
+        data.setValue("C/C++", null);
+        ((PiePlot)this.pieChart.getPlot()).setDataset(data);
+        assertEquals(true, l.flag);
+
+        assertEquals(false,((PiePlot)this.pieChart.getPlot()).getIgnoreNullValues());
+        assertEquals(3,this.pieChart.getPlot().getLegendItems().getItemCount());
+        ((PiePlot)this.pieChart.getPlot()).setIgnoreNullValues(true);
+
+        assertEquals(true,((PiePlot)this.pieChart.getPlot()).getIgnoreNullValues());
+        assertEquals(2,this.pieChart.getPlot().getLegendItems().getItemCount());
+
+    }
+    @Test
+    public void testContainsFloatLongData(){
+        LocalListener l = new LocalListener();
+        this.pieChart.addChangeListener(l);
+        //replacing existing dataset with new dataset
+        DefaultPieDataset<String> data = new DefaultPieDataset<>();
+        data.setValue("Java", 43L);
+        data.setValue("Visual Basic", 12f);
+        data.setValue("C/C++", null);
+        ((PiePlot)this.pieChart.getPlot()).setDataset(data);
+        assertEquals(true, l.flag);
+
+        assertEquals(false,((PiePlot)this.pieChart.getPlot()).getIgnoreNullValues());
+        assertEquals(3,this.pieChart.getPlot().getLegendItems().getItemCount());
+        ((PiePlot)this.pieChart.getPlot()).setIgnoreNullValues(true);
+
+        assertEquals(true,((PiePlot)this.pieChart.getPlot()).getIgnoreNullValues());
+        assertEquals(2,this.pieChart.getPlot().getLegendItems().getItemCount());
+
+    }
+    @Test
+    public void testReplaceKeysWithNull(){
+        LocalListener l = new LocalListener();
+        this.pieChart.addChangeListener(l);
+        DefaultPieDataset<String> data = new DefaultPieDataset<>();
+        boolean pass = false;
+        try{
+            data.setValue(null , 43.2);
+            data.setValue("Visual Basic", 0.0);
+            data.setValue("C/C++", 17.5);
+            ((PiePlot)this.pieChart.getPlot()).setDataset(data);
+        }catch (IllegalArgumentException ex) {
+            pass = true;
+        }
+        assertTrue(pass);
+        assertFalse(l.flag);
+
+    }
+    @Test
+    public void testReplaceKeysWithSpace(){
+        LocalListener l = new LocalListener();
+        this.pieChart.addChangeListener(l);
+        DefaultPieDataset<String> data = new DefaultPieDataset<>();
+        data.setValue("" , 43.2);
+        data.setValue("Visual Basic", 0.0);
+        data.setValue("C/C++", 17.5);
+        ((PiePlot)this.pieChart.getPlot()).setDataset(data);
+        assertEquals(((PiePlot)this.pieChart.getPlot()).getDataset().getKey(0), "");
+        assertTrue(l.flag);
+        assertEquals(((PiePlot)this.pieChart.getPlot()).getDataset().getKey(1), "Visual Basic");
+        assertEquals(((PiePlot)this.pieChart.getPlot()).getDataset().getKey(2), "C/C++");
+    }
+    @Test
+    public void testReplaceKeysWithOtherString(){
+        LocalListener l = new LocalListener();
+        this.pieChart.addChangeListener(l);
+        DefaultPieDataset<String> data = new DefaultPieDataset<>();
+        data.setValue("\n" , 43.2);
+        data.setValue("Visual Basic", 0.0);
+        data.setValue("C/C++", 17.5);
+        ((PiePlot)this.pieChart.getPlot()).setDataset(data);
+        assertEquals(((PiePlot)this.pieChart.getPlot()).getDataset().getKey(0), "\n");
+        assertTrue(l.flag);
+        assertEquals(((PiePlot)this.pieChart.getPlot()).getDataset().getKey(1), "Visual Basic");
+        assertEquals(((PiePlot)this.pieChart.getPlot()).getDataset().getKey(2), "C/C++");
+    }
+    @Test
+    public void testReplaceKeysWithInteger(){
+        LocalListener l = new LocalListener();
+        this.pieChart.addChangeListener(l);
+        DefaultPieDataset<String> data = new DefaultPieDataset<>();
+        data.setValue("\n" , 43.2);
+        data.setValue("15", 0.0);
+        data.setValue("C/C++", 17.5);
+        ((PiePlot)this.pieChart.getPlot()).setDataset(data);
+        assertEquals(((PiePlot)this.pieChart.getPlot()).getDataset().getKey(0), "\n");
+        assertTrue(l.flag);
+        assertEquals(((PiePlot)this.pieChart.getPlot()).getDataset().getKey(1), "15");
+        assertEquals(((PiePlot)this.pieChart.getPlot()).getDataset().getKey(2), "C/C++");
+    }
+    @Test
+    public void testNonExistentKey(){
+        LocalListener l = new LocalListener();
+        this.pieChart.addChangeListener(l);
+        DefaultPieDataset<String> emptydata = new DefaultPieDataset<>();
+        ((PiePlot)this.pieChart.getPlot()).setDataset(emptydata);
+        boolean pass = false;
+        try{
+            ((PiePlot)this.pieChart.getPlot()).getDataset().getValue("NonexistentKey");
+        }catch (UnknownKeyException ex){
+            pass = true;
+        }
+        assertTrue(pass);
+        // try to get a key at index 0 with empty dataset
+        pass = false;
+        try{
+            ((PiePlot)this.pieChart.getPlot()).getDataset().getKey(0);
+        }catch(IndexOutOfBoundsException ex){
+            pass = true;
+        }
+        assertTrue(pass);
+        // try to get value at index 0 with an empty dataset
+        pass = false;
+        try{
+            //System.out.println(((PiePlot)this.pieChart.getPlot()).getDataset().getKeys());
+            System.out.println(((PiePlot)this.pieChart.getPlot()).getDataset().getValue(0));
+        }catch(IndexOutOfBoundsException ex){
+            pass = true;
+        }
+        //this test fails. probably a bug. getValue(0) for empty dataset is returning null
+        // When I think it should throw an exception. See https://github.com/jfree/jfreechart/issues/212
+        assertTrue(pass);
+    }
+
 
 }
