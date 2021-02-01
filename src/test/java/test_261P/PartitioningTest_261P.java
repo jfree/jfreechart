@@ -193,7 +193,7 @@ private JFreeChart pieChart;
 
     }
     @Test
-    public void testReplaceKeysWithSpace(){
+    public void testReplaceKeysWithEmptyString(){
         LocalListener l = new LocalListener();
         this.pieChart.addChangeListener(l);
         DefaultPieDataset<String> data = new DefaultPieDataset<>();
