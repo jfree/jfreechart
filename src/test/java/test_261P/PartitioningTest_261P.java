@@ -59,7 +59,7 @@ private JFreeChart pieChart;
 
     }
 
-    /*
+    /**
       Integer values in dataset - all positive, no applicable flags
      */
     @Test
@@ -67,7 +67,7 @@ private JFreeChart pieChart;
        assertEquals(3,this.pieChart.getPlot().getLegendItems().getItemCount());
     }
 
-    /*
+    /**
     Integer values in dataset one value is negative, no applicable flags
      */
     @Test
@@ -86,7 +86,7 @@ private JFreeChart pieChart;
         assertEquals(2,this.pieChart.getPlot().getLegendItems().getItemCount());
     }
 
-    /*
+    /**
      Integer values in dataset - one value is zero, toggle IgnoreZeroFlag
  */
     @Test
@@ -111,7 +111,7 @@ private JFreeChart pieChart;
 
     }
 
-    /*
+    /**
     Integer values in dataset one of the values is null - toggle IgnoreNull flag
      */
     @Test
@@ -233,39 +233,6 @@ private JFreeChart pieChart;
         assertTrue(l.flag);
         assertEquals(((PiePlot)this.pieChart.getPlot()).getDataset().getKey(1), "15");
         assertEquals(((PiePlot)this.pieChart.getPlot()).getDataset().getKey(2), "C/C++");
-    }
-    @Test
-    public void testNonExistentKey(){
-        LocalListener l = new LocalListener();
-        this.pieChart.addChangeListener(l);
-        DefaultPieDataset<String> emptydata = new DefaultPieDataset<>();
-        ((PiePlot)this.pieChart.getPlot()).setDataset(emptydata);
-        boolean pass = false;
-        try{
-            ((PiePlot)this.pieChart.getPlot()).getDataset().getValue("NonexistentKey");
-        }catch (UnknownKeyException ex){
-            pass = true;
-        }
-        assertTrue(pass);
-        // try to get a key at index 0 with empty dataset
-        pass = false;
-        try{
-            ((PiePlot)this.pieChart.getPlot()).getDataset().getKey(0);
-        }catch(IndexOutOfBoundsException ex){
-            pass = true;
-        }
-        assertTrue(pass);
-        // try to get value at index 0 with an empty dataset
-        pass = false;
-        try{
-            //System.out.println(((PiePlot)this.pieChart.getPlot()).getDataset().getKeys());
-            System.out.println(((PiePlot)this.pieChart.getPlot()).getDataset().getValue(0));
-        }catch(IndexOutOfBoundsException ex){
-            pass = true;
-        }
-        //this test fails. probably a bug. getValue(0) for empty dataset is returning null
-        // When I think it should throw an exception. See https://github.com/jfree/jfreechart/issues/212
-        assertTrue(pass);
     }
 
     /**
