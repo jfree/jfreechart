@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * ChartPanelTest.java
  * -------------------
- * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -69,7 +69,7 @@ public class ChartPanelTest implements ChartChangeListener, ChartMouseListener {
     @BeforeEach
     public void checkForHeadlessEnvironment() {
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        assertFalse(ge.isHeadlessInstance());
+        org.junit.jupiter.api.Assumptions.assumeTrue(ge.isHeadlessInstance() == false);
     }
 
     /**
