@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -143,11 +143,7 @@ public class DefaultPieDataset<K extends Comparable<K>> extends AbstractDataset
      */
     @Override
     public Number getValue(int item) {
-        Number result = null;
-        if (getItemCount() > item) {
-            result = this.data.getValue(item);
-        }
-        return result;
+        return this.data.getValue(item);
     }
 
     /**

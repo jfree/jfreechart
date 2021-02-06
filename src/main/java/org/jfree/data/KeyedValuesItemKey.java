@@ -40,7 +40,7 @@ import java.io.Serializable;
 import org.jfree.chart.util.Args;
 
 /**
- * A reference to a specific item in a {@link KeyedValues} data structure.
+ * A key that references one item in a {@link KeyedValues} data structure.
  */
 public class KeyedValuesItemKey implements ItemKey, Serializable {
     
