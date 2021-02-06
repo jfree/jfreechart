@@ -57,7 +57,7 @@ public class DatasetGroup implements Cloneable, Serializable {
     private static final long serialVersionUID = -3640642179674185688L;
 
     /** The group id. */
-    private String id;
+    private final String id;
 
     /**
      * Constructs a new group.

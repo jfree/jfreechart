@@ -169,7 +169,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     private ObjectList axes;
 
     /** The axis locations. */
-    private ObjectList axisLocations;
+    private final ObjectList axisLocations;
 
     /** Storage for the datasets. */
     private ObjectList datasets;
@@ -256,7 +256,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      * entry for a dataset, it is assumed to map to the primary domain axis
      * (index = 0).
      */
-    private Map<Integer, List<Integer>> datasetToAxesMap;
+    private final Map<Integer, List<Integer>> datasetToAxesMap;
 
     /**
      * Default constructor.

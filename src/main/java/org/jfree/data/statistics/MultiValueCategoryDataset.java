@@ -57,7 +57,7 @@ public interface MultiValueCategoryDataset<R extends Comparable<R>, C extends Co
      *
      * @return The list of values.
      */
-    public List<? extends Number> getValues(int row, int column);
+    List<? extends Number> getValues(int row, int column);
 
     /**
      * Returns a list (possibly empty) of the values for the specified item.
@@ -68,6 +68,6 @@ public interface MultiValueCategoryDataset<R extends Comparable<R>, C extends Co
      *
      * @return The list of values.
      */
-    public List<? extends Number> getValues(R rowKey, C columnKey);
+    List<? extends Number> getValues(R rowKey, C columnKey);
 
 }

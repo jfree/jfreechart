@@ -61,7 +61,7 @@ public class StandardXYSeriesLabelGenerator implements XYSeriesLabelGenerator,
     public static final String DEFAULT_LABEL_FORMAT = "{0}";
 
     /** The format pattern. */
-    private String formatPattern;
+    private final String formatPattern;
 
     /**
      * Creates a default series label generator (uses

@@ -54,7 +54,7 @@ public interface TickUnitSource {
      *
      * @return A tick unit that is larger than the supplied unit.
      */
-    public TickUnit getLargerTickUnit(TickUnit unit);
+    TickUnit getLargerTickUnit(TickUnit unit);
 
     /**
      * Returns the tick unit in the collection that is greater than or equal
@@ -64,7 +64,7 @@ public interface TickUnitSource {
      *
      * @return A unit from the collection.
      */
-    public TickUnit getCeilingTickUnit(TickUnit unit);
+    TickUnit getCeilingTickUnit(TickUnit unit);
 
     /**
      * Returns the smallest tick unit available in the source that is greater 
@@ -75,6 +75,6 @@ public interface TickUnitSource {
      *
      * @return A unit from the collection (never {@code null}).
      */
-    public TickUnit getCeilingTickUnit(double size);
+    TickUnit getCeilingTickUnit(double size);
 
 }

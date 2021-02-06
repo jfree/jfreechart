@@ -64,10 +64,10 @@ public abstract class AbstractCategoryItemLabelGenerator
      * combine the standard items:  {0} = series name, {1} = category,
      * {2} = value, {3} = value as a percentage of the column total.
      */
-    private String labelFormat;
+    private final String labelFormat;
 
     /** The string used to represent a null value. */
-    private String nullValueString;
+    private final String nullValueString;
 
     /**
      * A number formatter used to preformat the value before it is passed to
@@ -85,7 +85,7 @@ public abstract class AbstractCategoryItemLabelGenerator
      * A number formatter used to preformat the percentage value before it is
      * passed to the MessageFormat object.
      */
-    private NumberFormat percentFormat;
+    private final NumberFormat percentFormat;
 
     /**
      * Creates a label generator with the specified number formatter.

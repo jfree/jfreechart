@@ -68,19 +68,19 @@ import org.jfree.chart.util.ResourceBundleWrapper;
 class DefaultChartEditor extends JPanel implements ActionListener, ChartEditor {
 
     /** A panel for displaying/editing the properties of the title. */
-    private DefaultTitleEditor titleEditor;
+    private final DefaultTitleEditor titleEditor;
 
     /** A panel for displaying/editing the properties of the plot. */
-    private DefaultPlotEditor plotEditor;
+    private final DefaultPlotEditor plotEditor;
 
     /**
      * A checkbox indicating whether or not the chart is drawn with
      * anti-aliasing.
      */
-    private JCheckBox antialias;
+    private final JCheckBox antialias;
 
     /** The chart background color. */
-    private PaintSample background;
+    private final PaintSample background;
 
     /** The resourceBundle for the localization. */
     protected static ResourceBundle localizationResources

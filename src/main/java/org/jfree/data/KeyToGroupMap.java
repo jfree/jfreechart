@@ -299,7 +299,7 @@ public class KeyToGroupMap<K extends Comparable<K>, G extends Comparable<G>>
         Collection result = null;
         if (list != null) {
             try {
-                List clone = (List) list.getClass().newInstance();
+                Collection clone = list.getClass().getDeclaredConstructor().newInstance();
                 for (Object o : list) {
                     clone.add(KeyToGroupMap.clone(o));
                 }

@@ -58,21 +58,21 @@ public interface Pannable {
      *
      * @return The orientation (never {@code null}).
      */
-    public PlotOrientation getOrientation();
+    PlotOrientation getOrientation();
 
     /**
      * Evaluates if the domain axis can be panned.
      *
      * @return {@code true} if the domain axis is pannable.
      */
-    public boolean isDomainPannable();
+    boolean isDomainPannable();
 
     /**
      * Evaluates if the range axis can be panned.
      *
      * @return {@code true} if the range axis is pannable.
      */
-    public boolean isRangePannable();
+    boolean isRangePannable();
 
     /**
      * Pans the domain axes by the specified percentage.
@@ -81,7 +81,7 @@ public interface Pannable {
      * @param info the plot info
      * @param source the source point where the pan action started.
      */
-    public void panDomainAxes(double percent, PlotRenderingInfo info,
+    void panDomainAxes(double percent, PlotRenderingInfo info,
             Point2D source);
 
     /**
@@ -91,7 +91,7 @@ public interface Pannable {
      * @param info the plot info
      * @param source the source point where the pan action started.
      */
-    public void panRangeAxes(double percent, PlotRenderingInfo info,
+    void panRangeAxes(double percent, PlotRenderingInfo info,
             Point2D source);
 
 }

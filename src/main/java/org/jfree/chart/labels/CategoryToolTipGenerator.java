@@ -61,6 +61,6 @@ public interface CategoryToolTipGenerator {
      *
      * @return The tooltip text (possibly {@code null}).
      */
-    public String generateToolTip(CategoryDataset dataset, int row, int column);
+    String generateToolTip(CategoryDataset dataset, int row, int column);
 
 }

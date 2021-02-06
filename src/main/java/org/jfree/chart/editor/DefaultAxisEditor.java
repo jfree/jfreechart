@@ -77,16 +77,16 @@ import org.jfree.chart.util.ResourceBundleWrapper;
 class DefaultAxisEditor extends JPanel implements ActionListener {
 
     /** The axis label. */
-    private JTextField label;
+    private final JTextField label;
 
     /** The label font. */
     private Font labelFont;
 
     /** The label paint. */
-    private PaintSample labelPaintSample;
+    private final PaintSample labelPaintSample;
 
     /** A field showing a description of the label font. */
-    private JTextField labelFontField;
+    private final JTextField labelFontField;
 
     /** The font for displaying tick labels on the axis. */
     private Font tickLabelFont;
@@ -95,10 +95,10 @@ class DefaultAxisEditor extends JPanel implements ActionListener {
      * A field containing a description of the font for displaying tick labels
      * on the axis.
      */
-    private JTextField tickLabelFontField;
+    private final JTextField tickLabelFontField;
 
     /** The paint (color) for the tick labels. */
-    private PaintSample tickLabelPaintSample;
+    private final PaintSample tickLabelPaintSample;
 
     /**
      * An empty sub-panel for extending the user interface to handle more
@@ -113,10 +113,10 @@ class DefaultAxisEditor extends JPanel implements ActionListener {
     private JPanel slot2;
 
     /** A flag that indicates whether or not the tick labels are visible. */
-    private JCheckBox showTickLabelsCheckBox;
+    private final JCheckBox showTickLabelsCheckBox;
 
     /** A flag that indicates whether or not the tick marks are visible. */
-    private JCheckBox showTickMarksCheckBox;
+    private final JCheckBox showTickMarksCheckBox;
 
 //    /** Insets text field. */
 //    private InsetsTextField tickLabelInsetsTextField;
@@ -125,13 +125,13 @@ class DefaultAxisEditor extends JPanel implements ActionListener {
 //    private InsetsTextField labelInsetsTextField;
 
     /** The tick label insets. */
-    private RectangleInsets tickLabelInsets;
+    private final RectangleInsets tickLabelInsets;
 
     /** The label insets. */
-    private RectangleInsets labelInsets;
+    private final RectangleInsets labelInsets;
 
     /** A tabbed pane for... */
-    private JTabbedPane otherTabs;
+    private final JTabbedPane otherTabs;
 
     /** The resourceBundle for the localization. */
     protected static ResourceBundle localizationResources

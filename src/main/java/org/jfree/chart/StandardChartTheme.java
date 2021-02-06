@@ -111,7 +111,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
         PublicCloneable, Serializable {
 
     /** The name of this theme. */
-    private String name;
+    private final String name;
 
     /**
      * The largest font size.  Use for the main chart title.

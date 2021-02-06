@@ -59,7 +59,7 @@ public class JFreeChartEntity extends ChartEntity {
             //same as for ChartEntity!
 
     /** The chart. */
-    private JFreeChart chart;
+    private final JFreeChart chart;
 
     /**
      * Creates a new chart entity.

@@ -60,7 +60,7 @@ public interface SeriesDataset<S extends Comparable<S>> extends Dataset {
      *
      * @return The series count.
      */
-    public int getSeriesCount();
+    int getSeriesCount();
 
     /**
      * Returns the key for a series.
@@ -70,7 +70,7 @@ public interface SeriesDataset<S extends Comparable<S>> extends Dataset {
      *
      * @return The key for the series.
      */
-    public S getSeriesKey(int series);
+    S getSeriesKey(int series);
 
     /**
      * Returns the index of the series with the specified key, or -1 if there
@@ -80,6 +80,6 @@ public interface SeriesDataset<S extends Comparable<S>> extends Dataset {
      *
      * @return The index, or -1.
      */
-    public int indexOf(S seriesKey);
+    int indexOf(S seriesKey);
 
 }

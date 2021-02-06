@@ -48,6 +48,6 @@ public interface LegendItemSource {
      *
      * @return The legend item collection (never {@code null}).
      */
-    public LegendItemCollection getLegendItems();
+    LegendItemCollection getLegendItems();
 
 }

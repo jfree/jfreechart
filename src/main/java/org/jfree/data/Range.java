@@ -75,10 +75,10 @@ public strictfp class Range implements Serializable {
     private static final long serialVersionUID = -906333695431863380L;
 
     /** The lower bound of the range. */
-    private double lower;
+    private final double lower;
 
     /** The upper bound of the range. */
-    private double upper;
+    private final double upper;
 
     /**
      * Creates a new range.

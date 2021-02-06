@@ -62,14 +62,14 @@ public interface DrawingSupplier {
      *
      * @return The paint.
      */
-    public Paint getNextPaint();
+    Paint getNextPaint();
 
     /**
      * Returns the next outline paint in a sequence maintained by the supplier.
      *
      * @return The paint.
      */
-    public Paint getNextOutlinePaint();
+    Paint getNextOutlinePaint();
 
     /**
      * Returns the next fill paint in a sequence maintained by the supplier.
@@ -78,7 +78,7 @@ public interface DrawingSupplier {
      *
      * @since 1.0.6
      */
-    public Paint getNextFillPaint();
+    Paint getNextFillPaint();
 
     /**
      * Returns the next {@code Stroke} object in a sequence maintained by
@@ -86,7 +86,7 @@ public interface DrawingSupplier {
      *
      * @return The stroke.
      */
-    public Stroke getNextStroke();
+    Stroke getNextStroke();
 
     /**
      * Returns the next {@code Stroke} object in a sequence maintained by
@@ -94,7 +94,7 @@ public interface DrawingSupplier {
      *
      * @return The stroke.
      */
-    public Stroke getNextOutlineStroke();
+    Stroke getNextOutlineStroke();
 
     /**
      * Returns the next {@code Shape} object in a sequence maintained by
@@ -102,6 +102,6 @@ public interface DrawingSupplier {
      *
      * @return The shape.
      */
-    public Shape getNextShape();
+    Shape getNextShape();
 
 }

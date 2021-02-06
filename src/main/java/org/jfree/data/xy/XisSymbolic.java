@@ -53,7 +53,7 @@ public interface XisSymbolic {
      *
      * @return An array of symbolic values.
      */
-    public String[] getXSymbolicValues();
+    String[] getXSymbolicValues();
 
     /**
      * Returns the symbolic value of the data set specified by
@@ -64,7 +64,7 @@ public interface XisSymbolic {
      *
      * @return The symbolic value.
      */
-    public String getXSymbolicValue(int series, int item);
+    String getXSymbolicValue(int series, int item);
 
     /**
      * Returns the symbolic value linked with the specified {@code Integer}.
@@ -73,6 +73,6 @@ public interface XisSymbolic {
      *
      * @return The symbolic value.
      */
-    public String getXSymbolicValue(Integer val);
+    String getXSymbolicValue(Integer val);
 
 }

@@ -71,7 +71,7 @@ public interface XYBarPainter {
      * @param bar  the bounds for the bar.
      * @param base  the base of the bar.
      */
-    public void paintBar(Graphics2D g2, XYBarRenderer renderer,
+    void paintBar(Graphics2D g2, XYBarRenderer renderer,
             int row, int column, RectangularShape bar, RectangleEdge base);
 
     /**
@@ -85,7 +85,7 @@ public interface XYBarPainter {
      * @param base  the base of the bar.
      * @param pegShadow  peg the shadow to the base of the bar?
      */
-    public void paintBarShadow(Graphics2D g2, XYBarRenderer renderer,
+    void paintBarShadow(Graphics2D g2, XYBarRenderer renderer,
             int row, int column, RectangularShape bar, RectangleEdge base,
             boolean pegShadow);
 

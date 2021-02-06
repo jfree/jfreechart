@@ -55,7 +55,7 @@ public interface GanttCategoryDataset<R extends Comparable<R>, C extends Compara
      *
      * @see #getPercentComplete(Comparable, Comparable)
      */
-    public Number getPercentComplete(int row, int column);
+    Number getPercentComplete(int row, int column);
 
     /**
      * Returns the percent complete for a given item.
@@ -67,7 +67,7 @@ public interface GanttCategoryDataset<R extends Comparable<R>, C extends Compara
      *
      * @see #getPercentComplete(int, int)
      */
-    public Number getPercentComplete(R rowKey, C columnKey);
+    Number getPercentComplete(R rowKey, C columnKey);
 
     /**
      * Returns the number of sub-intervals for a given item.
@@ -79,7 +79,7 @@ public interface GanttCategoryDataset<R extends Comparable<R>, C extends Compara
      *
      * @see #getSubIntervalCount(Comparable, Comparable)
      */
-    public int getSubIntervalCount(int row, int column);
+    int getSubIntervalCount(int row, int column);
 
     /**
      * Returns the number of sub-intervals for a given item.
@@ -91,7 +91,7 @@ public interface GanttCategoryDataset<R extends Comparable<R>, C extends Compara
      *
      * @see #getSubIntervalCount(int, int)
      */
-    public int getSubIntervalCount(R rowKey, C columnKey);
+    int getSubIntervalCount(R rowKey, C columnKey);
 
     /**
      * Returns the start value of a sub-interval for a given item.
@@ -104,7 +104,7 @@ public interface GanttCategoryDataset<R extends Comparable<R>, C extends Compara
      *
      * @see #getEndValue(int, int, int)
      */
-    public Number getStartValue(int row, int column, int subinterval);
+    Number getStartValue(int row, int column, int subinterval);
 
     /**
      * Returns the start value of a sub-interval for a given item.
@@ -117,7 +117,7 @@ public interface GanttCategoryDataset<R extends Comparable<R>, C extends Compara
      *
      * @see #getEndValue(Comparable, Comparable, int)
      */
-    public Number getStartValue(R rowKey, C columnKey, int subinterval);
+    Number getStartValue(R rowKey, C columnKey, int subinterval);
 
     /**
      * Returns the end value of a sub-interval for a given item.
@@ -130,7 +130,7 @@ public interface GanttCategoryDataset<R extends Comparable<R>, C extends Compara
      *
      * @see #getStartValue(int, int, int)
      */
-    public Number getEndValue(int row, int column, int subinterval);
+    Number getEndValue(int row, int column, int subinterval);
 
     /**
      * Returns the end value of a sub-interval for a given item.
@@ -143,7 +143,7 @@ public interface GanttCategoryDataset<R extends Comparable<R>, C extends Compara
      *
      * @see #getStartValue(Comparable, Comparable, int)
      */
-    public Number getEndValue(R rowKey, C columnKey, int subinterval);
+    Number getEndValue(R rowKey, C columnKey, int subinterval);
 
     /**
      * Returns the percentage complete value of a sub-interval for a given item.
@@ -156,7 +156,7 @@ public interface GanttCategoryDataset<R extends Comparable<R>, C extends Compara
      *
      * @see #getPercentComplete(Comparable, Comparable, int)
      */
-    public Number getPercentComplete(int row, int column, int subinterval);
+    Number getPercentComplete(int row, int column, int subinterval);
 
     /**
      * Returns the percentage complete value of a sub-interval for a given item.
@@ -169,6 +169,6 @@ public interface GanttCategoryDataset<R extends Comparable<R>, C extends Compara
      *
      * @see #getPercentComplete(int, int, int)
      */
-    public Number getPercentComplete(R rowKey, C columnKey, int subinterval);
+    Number getPercentComplete(R rowKey, C columnKey, int subinterval);
 
 }

@@ -62,7 +62,7 @@ public interface DialLayer {
      *
      * @return A boolean.
      */
-    public boolean isVisible();
+    boolean isVisible();
 
     /**
      * Registers a listener with this layer, so that it receives notification
@@ -70,7 +70,7 @@ public interface DialLayer {
      *
      * @param listener  the listener.
      */
-    public void addChangeListener(DialLayerChangeListener listener);
+    void addChangeListener(DialLayerChangeListener listener);
 
     /**
      * Deregisters a listener, so that it no longer receives notification of
@@ -78,7 +78,7 @@ public interface DialLayer {
      *
      * @param listener  the listener.
      */
-    public void removeChangeListener(DialLayerChangeListener listener);
+    void removeChangeListener(DialLayerChangeListener listener);
 
     /**
      * Returns {@code true} if the specified listener is currently
@@ -88,7 +88,7 @@ public interface DialLayer {
      *
      * @return A boolean.
      */
-    public boolean hasListener(EventListener listener);
+    boolean hasListener(EventListener listener);
 
     /**
      * Returns {@code true} if the drawing should be clipped to the
@@ -97,7 +97,7 @@ public interface DialLayer {
      *
      * @return A boolean.
      */
-    public boolean isClippedToWindow();
+    boolean isClippedToWindow();
 
     /**
      * Draws the content of this layer.
@@ -112,7 +112,7 @@ public interface DialLayer {
      * @param view  the visible area for the dial ({@code null} not
      *     permitted).
      */
-    public void draw(Graphics2D g2, DialPlot plot, Rectangle2D frame,
+    void draw(Graphics2D g2, DialPlot plot, Rectangle2D frame,
             Rectangle2D view);
 
 }

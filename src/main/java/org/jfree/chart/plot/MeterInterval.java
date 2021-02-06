@@ -68,10 +68,10 @@ public class MeterInterval implements Serializable {
     private static final long serialVersionUID = 1530982090622488257L;
 
     /** The interval label. */
-    private String label;
+    private final String label;
 
     /** The interval range. */
-    private Range range;
+    private final Range range;
 
     /** The outline paint (used for the arc marking the interval). */
     private transient Paint outlinePaint;

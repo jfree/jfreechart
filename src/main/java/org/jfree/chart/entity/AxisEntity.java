@@ -60,7 +60,7 @@ public class AxisEntity extends ChartEntity {
                   //same as for ChartEntity!
 
     /** The axis for the entity. */
-    private Axis axis;
+    private final Axis axis;
 
     /**
      * Creates a new axis entity.

@@ -50,10 +50,10 @@ public class StandardCrosshairLabelGenerator implements CrosshairLabelGenerator,
         Serializable {
 
     /** The label format string. */
-    private String labelTemplate;
+    private final String labelTemplate;
 
     /** A number formatter for the value. */
-    private NumberFormat numberFormat;
+    private final NumberFormat numberFormat;
 
     /**
      * Creates a new instance with default attributes.

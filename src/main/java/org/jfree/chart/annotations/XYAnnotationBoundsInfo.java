@@ -52,7 +52,7 @@ public interface XYAnnotationBoundsInfo {
      *
      * @return A boolean.
      */
-    public boolean getIncludeInDataBounds();
+    boolean getIncludeInDataBounds();
 
     /**
      * Returns the range of x-values (in data space) that the annotation
@@ -60,7 +60,7 @@ public interface XYAnnotationBoundsInfo {
      *
      * @return The x-range.
      */
-    public Range getXRange();
+    Range getXRange();
 
     /**
      * Returns the range of y-values (in data space) that the annotation
@@ -68,6 +68,6 @@ public interface XYAnnotationBoundsInfo {
      *
      * @return The y-range.
      */
-    public Range getYRange();
+    Range getYRange();
 
 }

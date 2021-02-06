@@ -62,21 +62,21 @@ public class RectangleConstraint {
             0.0, null, LengthConstraintType.NONE);
 
     /** The width. */
-    private double width;
+    private final double width;
 
     /** The width range. */
-    private Range widthRange;
+    private final Range widthRange;
 
     /** The width constraint type. */
-    private LengthConstraintType widthConstraintType;
+    private final LengthConstraintType widthConstraintType;
 
     /** The fixed or maximum height. */
-    private double height;
+    private final double height;
 
-    private Range heightRange;
+    private final Range heightRange;
 
     /** The constraint type. */
-    private LengthConstraintType heightConstraintType;
+    private final LengthConstraintType heightConstraintType;
 
     /**
      * Creates a new "fixed width and height" instance.

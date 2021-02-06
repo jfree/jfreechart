@@ -117,7 +117,7 @@ public class DefaultDrawingSupplier implements DrawingSupplier, Cloneable,
     private int outlinePaintIndex;
 
     /** The fill paint sequence. */
-    private transient Paint[] fillPaintSequence;
+    private final transient Paint[] fillPaintSequence;
 
     /** The current fill paint index. */
     private int fillPaintIndex;

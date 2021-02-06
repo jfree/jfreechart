@@ -52,6 +52,6 @@ public interface CrosshairLabelGenerator {
      * 
      * @return The label (possibly {@code null}).
      */
-    public String generateLabel(Crosshair crosshair);
+    String generateLabel(Crosshair crosshair);
 
 }

@@ -62,7 +62,7 @@ public class BlockContainer extends AbstractBlock
     private static final long serialVersionUID = 8199508075695195293L;
 
     /** The blocks within the container. */
-    private List<Block> blocks;
+    private final List<Block> blocks;
 
     /** The object responsible for laying out the blocks. */
     private Arrangement arrangement;

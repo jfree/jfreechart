@@ -57,6 +57,6 @@ public interface TableXYDataset<S extends Comparable<S>> extends XYDataset<S> {
      *
      * @return The item count.
      */
-    public int getItemCount();
+    int getItemCount();
 
 }

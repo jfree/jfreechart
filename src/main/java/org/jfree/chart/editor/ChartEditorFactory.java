@@ -54,6 +54,6 @@ public interface ChartEditorFactory {
      *
      * @return A chart editor.
      */
-    public ChartEditor createEditor(JFreeChart chart);
+    ChartEditor createEditor(JFreeChart chart);
 
 }

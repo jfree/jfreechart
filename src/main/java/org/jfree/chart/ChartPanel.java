@@ -89,7 +89,6 @@ import java.io.Serializable;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.EventListener;
 import java.util.HashMap;
@@ -135,6 +134,7 @@ import org.jfree.chart.util.SerialUtils;
  * component of the chart.  The chart is redrawn automatically whenever this
  * notification is received.
  */
+@SuppressWarnings("unused")
 public class ChartPanel extends JPanel implements ChartChangeListener,
         ChartProgressListener, ActionListener, MouseListener,
         MouseMotionListener, OverlayChangeListener, Printable, Serializable {
@@ -1025,7 +1025,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
             Plot plot = this.chart.getPlot();
             if (plot instanceof Zoomable) {
                 Zoomable z = (Zoomable) plot;
-                this.domainZoomable = flag && (z.isDomainZoomable());
+                this.domainZoomable = z.isDomainZoomable();
             }
         }
         else {
@@ -1053,7 +1053,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
             Plot plot = this.chart.getPlot();
             if (plot instanceof Zoomable) {
                 Zoomable z = (Zoomable) plot;
-                this.rangeZoomable = flag && (z.isRangeZoomable());
+                this.rangeZoomable = z.isRangeZoomable();
             }
         }
         else {
@@ -1641,76 +1641,72 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
             screenY = this.zoomPoint.getY();
         }
 
-        if (command.equals(PROPERTIES_COMMAND)) {
+        switch (command) {
+        case PROPERTIES_COMMAND:
             doEditChartProperties();
-        }
-        else if (command.equals(COPY_COMMAND)) {
+            break;
+        case COPY_COMMAND:
             doCopy();
-        }
-        else if (command.equals(SAVE_AS_PNG_COMMAND)) {
+            break;
+        case SAVE_AS_PNG_COMMAND:
             try {
                 doSaveAs();
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 JOptionPane.showMessageDialog(this, "I/O error occurred.",
-                        localizationResources.getString("Save_as_PNG"),
-                        JOptionPane.WARNING_MESSAGE);
+                        localizationResources.getString("Save_as_PNG"), JOptionPane.WARNING_MESSAGE);
             }
-        }
-        else if (command.equals(SAVE_AS_PNG_SIZE_COMMAND)) {
-            try{
-            	final Dimension ss = Toolkit.getDefaultToolkit().getScreenSize();
+            break;
+        case SAVE_AS_PNG_SIZE_COMMAND:
+            try {
+                final Dimension ss = Toolkit.getDefaultToolkit().getScreenSize();
                 doSaveAs(ss.width, ss.height);
-            }
-            catch (IOException e){
+            } catch (IOException e) {
                 JOptionPane.showMessageDialog(ChartPanel.this, "I/O error occurred.",
-                        localizationResources.getString("Save_as_PNG"),
-                        JOptionPane.WARNING_MESSAGE);
+                        localizationResources.getString("Save_as_PNG"), JOptionPane.WARNING_MESSAGE);
             }
-        }
-        else if (command.equals(SAVE_AS_SVG_COMMAND)) {
+            break;
+        case SAVE_AS_SVG_COMMAND:
             try {
                 saveAsSVG(null);
             } catch (IOException e) {
                 JOptionPane.showMessageDialog(this, "I/O error occurred.",
-                        localizationResources.getString("Save_as_SVG"),
-                        JOptionPane.WARNING_MESSAGE);
+                        localizationResources.getString("Save_as_SVG"), JOptionPane.WARNING_MESSAGE);
             }
-        }
-        else if (command.equals(SAVE_AS_PDF_COMMAND)) {
+            break;
+        case SAVE_AS_PDF_COMMAND:
             saveAsPDF(null);
-        }
-        else if (command.equals(PRINT_COMMAND)) {
+            break;
+        case PRINT_COMMAND:
             createChartPrintJob();
-        }
-        else if (command.equals(ZOOM_IN_BOTH_COMMAND)) {
+            break;
+        case ZOOM_IN_BOTH_COMMAND:
             zoomInBoth(screenX, screenY);
-        }
-        else if (command.equals(ZOOM_IN_DOMAIN_COMMAND)) {
+            break;
+        case ZOOM_IN_DOMAIN_COMMAND:
             zoomInDomain(screenX, screenY);
-        }
-        else if (command.equals(ZOOM_IN_RANGE_COMMAND)) {
+            break;
+        case ZOOM_IN_RANGE_COMMAND:
             zoomInRange(screenX, screenY);
-        }
-        else if (command.equals(ZOOM_OUT_BOTH_COMMAND)) {
+            break;
+        case ZOOM_OUT_BOTH_COMMAND:
             zoomOutBoth(screenX, screenY);
-        }
-        else if (command.equals(ZOOM_OUT_DOMAIN_COMMAND)) {
+            break;
+        case ZOOM_OUT_DOMAIN_COMMAND:
             zoomOutDomain(screenX, screenY);
-        }
-        else if (command.equals(ZOOM_OUT_RANGE_COMMAND)) {
+            break;
+        case ZOOM_OUT_RANGE_COMMAND:
             zoomOutRange(screenX, screenY);
-        }
-        else if (command.equals(ZOOM_RESET_BOTH_COMMAND)) {
+            break;
+        case ZOOM_RESET_BOTH_COMMAND:
             restoreAutoBounds();
-        }
-        else if (command.equals(ZOOM_RESET_DOMAIN_COMMAND)) {
+            break;
+        case ZOOM_RESET_DOMAIN_COMMAND:
             restoreAutoDomainBounds();
-        }
-        else if (command.equals(ZOOM_RESET_RANGE_COMMAND)) {
+            break;
+        case ZOOM_RESET_RANGE_COMMAND:
             restoreAutoRangeBounds();
+            break;
         }
-
     }
 
     /**
@@ -2669,21 +2665,25 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
             // use reflection to get the SVG string
             String svg = generateSVG(getWidth(), getHeight());
             BufferedWriter writer = null;
+            Exception originalException = null;
             try {
                 writer = new BufferedWriter(new FileWriter(file));
                 writer.write("<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n");
                 writer.write(svg + "\n");
                 writer.flush();
-            } finally {
-                try {
-                    if (writer != null) {
-                        writer.close();
-                    }
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
+            } catch (Exception e) {
+                originalException = e;
+            }
+            try {
+                if (writer != null) {
+                    writer.close();
                 }
-            } 
-
+            } catch (IOException ex) {
+                RuntimeException th = new RuntimeException(ex);
+                if (originalException != null)
+                    th.addSuppressed(originalException);
+                throw th;
+            }
         }
     }
     
@@ -2713,15 +2713,8 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         try {
             Method m = g2.getClass().getMethod("getSVGElement");
             svg = (String) m.invoke(g2);
-        } catch (NoSuchMethodException e) {
-            // null will be returned
-        } catch (SecurityException e) {
-            // null will be returned
-        } catch (IllegalAccessException e) {
-            // null will be returned
-        } catch (IllegalArgumentException e) {
-            // null will be returned
-        } catch (InvocationTargetException e) {
+        } catch (NoSuchMethodException | SecurityException | IllegalAccessException |
+                IllegalArgumentException | InvocationTargetException e) {
             // null will be returned
         }
         return svg;
@@ -2738,22 +2731,11 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      */
     protected Graphics2D createSVGGraphics2D(int w, int h) {
         try {
-            Class svgGraphics2d = Class.forName("org.jfree.graphics2d.svg.SVGGraphics2D");
-            Constructor ctor = svgGraphics2d.getConstructor(int.class, int.class);
+            Class<?> svgGraphics2d = Class.forName("org.jfree.graphics2d.svg.SVGGraphics2D");
+            Constructor<?> ctor = svgGraphics2d.getConstructor(int.class, int.class);
             return (Graphics2D) ctor.newInstance(w, h);
-        } catch (ClassNotFoundException ex) {
-            return null;
-        } catch (NoSuchMethodException ex) {
-            return null;
-        } catch (SecurityException ex) {
-            return null;
-        } catch (InstantiationException ex) {
-            return null;
-        } catch (IllegalAccessException ex) {
-            return null;
-        } catch (IllegalArgumentException ex) {
-            return null;
-        } catch (InvocationTargetException ex) {
+        } catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException |
+                IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
             return null;
         }
     }
@@ -2821,8 +2803,8 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         }
         Args.nullNotPermitted(file, "file");
         try {
-            Class pdfDocClass = Class.forName("com.orsonpdf.PDFDocument");
-            Object pdfDoc = pdfDocClass.newInstance();
+            Class<?> pdfDocClass = Class.forName("com.orsonpdf.PDFDocument");
+            Object pdfDoc = pdfDocClass.getDeclaredConstructor().newInstance();
             Method m = pdfDocClass.getMethod("createPage", Rectangle2D.class);
             Rectangle2D rect = new Rectangle(w, h);
             Object page = m.invoke(pdfDoc, rect);
@@ -2835,19 +2817,9 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
             this.chart.draw(g2, drawArea);
             Method m3 = pdfDocClass.getMethod("writeToFile", File.class);
             m3.invoke(pdfDoc, file);
-        } catch (ClassNotFoundException ex) {
-            throw new RuntimeException(ex);
-        } catch (InstantiationException ex) {
-            throw new RuntimeException(ex);
-        } catch (IllegalAccessException ex) {
-            throw new RuntimeException(ex);
-        } catch (NoSuchMethodException ex) {
-            throw new RuntimeException(ex);
-        } catch (SecurityException ex) {
-            throw new RuntimeException(ex);
-        } catch (IllegalArgumentException ex) {
-            throw new RuntimeException(ex);
-        } catch (InvocationTargetException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
+                NoSuchMethodException | SecurityException | IllegalArgumentException |
+                InvocationTargetException ex) {
             throw new RuntimeException(ex);
         }
     }
@@ -2928,7 +2900,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * @return An array of listeners.
      */
     @Override
-    public EventListener[] getListeners(Class listenerType) {
+    public <T extends EventListener> T[] getListeners(Class<T> listenerType) {
         if (listenerType == ChartMouseListener.class) {
             // fetch listeners from local storage
             return this.chartMouseListeners.getListeners(listenerType);
