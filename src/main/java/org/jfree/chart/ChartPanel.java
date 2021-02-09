@@ -1523,8 +1523,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
                 this.chartBufferHeight = scaledHeight;
                 GraphicsConfiguration gc = g2.getDeviceConfiguration();
                 this.chartBuffer = gc.createCompatibleImage(
-                        this.chartBufferWidth, this.chartBufferHeight,
-                        Transparency.TRANSLUCENT);
+                        this.chartBufferWidth, this.chartBufferHeight);
                 this.refreshBuffer = true;
             }
 
