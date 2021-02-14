@@ -97,7 +97,7 @@ import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.internal.Args;
 import org.jfree.chart.api.PublicCloneable;
 import org.jfree.chart.util.ResourceBundleWrapper;
-import org.jfree.chart.util.Rotation;
+import org.jfree.chart.api.Rotation;
 import org.jfree.chart.internal.SerialUtils;
 import org.jfree.chart.util.ShadowGenerator;
 import org.jfree.chart.util.ShapeUtils;

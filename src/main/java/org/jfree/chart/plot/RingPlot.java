@@ -65,7 +65,7 @@ import org.jfree.chart.urls.PieURLGenerator;
 import org.jfree.chart.internal.LineUtils;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.internal.Args;
-import org.jfree.chart.util.Rotation;
+import org.jfree.chart.api.Rotation;
 import org.jfree.chart.internal.SerialUtils;
 import org.jfree.chart.util.ShapeUtils;
 import org.jfree.chart.api.UnitType;

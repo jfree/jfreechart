@@ -33,7 +33,7 @@
  * Contributors:     -;
  */
 
-package org.jfree.chart.util;
+package org.jfree.chart.api;
 
 /**
  * Represents a direction of rotation ({@code CLOCKWISE} or 
