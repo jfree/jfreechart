@@ -30,7 +30,7 @@ package org.jfree.chart.ui;
 
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
-import org.jfree.chart.UnitType;
+import org.jfree.chart.api.UnitType;
 
 /**
  * Represents the insets for a rectangle, specified in absolute or relative 

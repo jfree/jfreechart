@@ -60,7 +60,7 @@ import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.Size2D;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
-import org.jfree.chart.XYCoordinateType;
+import org.jfree.chart.api.XYCoordinateType;
 import org.jfree.data.Range;
 
 /**

@@ -74,7 +74,7 @@ import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.chart.util.ShapeUtils;
-import org.jfree.chart.UnitType;
+import org.jfree.chart.api.UnitType;
 import org.jfree.data.xy.XYDataset;
 
 /**
