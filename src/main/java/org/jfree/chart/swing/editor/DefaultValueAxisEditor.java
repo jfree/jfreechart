@@ -55,10 +55,6 @@ import javax.swing.JTextField;
 
 import org.jfree.chart.axis.Axis;
 import org.jfree.chart.axis.ValueAxis;
-import org.jfree.chart.ui.LCBLayout;
-import org.jfree.chart.ui.PaintSample;
-import org.jfree.chart.ui.StrokeChooserPanel;
-import org.jfree.chart.ui.StrokeSample;
 import org.jfree.chart.util.ResourceBundleWrapper;
 
 /**

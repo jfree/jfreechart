@@ -57,8 +57,6 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PolarPlot;
 import org.jfree.chart.title.Title;
-import org.jfree.chart.ui.LCBLayout;
-import org.jfree.chart.ui.PaintSample;
 import org.jfree.chart.util.ResourceBundleWrapper;
 
 /**

@@ -58,10 +58,6 @@ import javax.swing.JTextField;
 import org.jfree.chart.axis.Axis;
 import org.jfree.chart.axis.LogAxis;
 import org.jfree.chart.axis.NumberAxis;
-import org.jfree.chart.ui.FontChooserPanel;
-import org.jfree.chart.ui.FontDisplayField;
-import org.jfree.chart.ui.LCBLayout;
-import org.jfree.chart.ui.PaintSample;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.util.ResourceBundleWrapper;
 
