@@ -87,6 +87,7 @@ History
 - removed unused `URLUtilities` class ([#162](https://github.com/jfree/jfreechart/pull/162))
 - fixed `LayeredBarRenderer` (bugs [#169](https://github.com/jfree/jfreechart/issues/169) and [#175](https://github.com/jfree/jfreechart/issues/175));
 - minor fix for `DefaultPieDataset` (bugs [#212](https://github.com/jfree/jfreechart/issues/212))
+- fix `isJFreeSVGAvailable()` method (bugs [#207](https://github.com/jfree/jfreechart/issues/207))
 - update French translations (bug #186);
 - fix "Save_as" entries in localisation files (bug #184);
 - add flags for visibility of outliers in `BoxAndWhiskerRenderer` ([#79](https://github.com/jfree/jfreechart/pull/79));

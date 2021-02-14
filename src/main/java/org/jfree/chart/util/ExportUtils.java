@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------
  * ExportUtils.java
  * ----------------
- * (C) Copyright 2014-2020 by Object Refinery Limited and Contributors.
+ * (C) Copyright 2014-2021 by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -69,9 +69,14 @@ public class ExportUtils {
     public static boolean isJFreeSVGAvailable() {
         Class<?> svgClass = null;
         try {
-            svgClass = Class.forName("org.jfree.graphics2d.svg.SVGGraphics2D");
+            svgClass = Class.forName("org.jfree.svg.SVGGraphics2D");
         } catch (ClassNotFoundException e) {
-            // svgClass will be null so the function will return false
+            // see if there is maybe an older version of JFreeSVG (different package name)
+            try {
+                svgClass = Class.forName("org.jfree.graphics2d.svg.SVGGraphics2D");
+            } catch (ClassNotFoundException e2) {
+                // svgClass will be null so the function will return false
+            }
         }
         return (svgClass != null);
     }
@@ -104,8 +109,7 @@ public class ExportUtils {
      * @param h  the chart height.
      * @param file  the output file ({@code null} not permitted).
      */
-    public static void writeAsSVG(Drawable drawable, int w, int h, 
-            File file) {
+    public static void writeAsSVG(Drawable drawable, int w, int h, File file) {
         if (!ExportUtils.isJFreeSVGAvailable()) {
             throw new IllegalStateException(
                     "JFreeSVG is not present on the classpath.");
