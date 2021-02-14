@@ -34,8 +34,9 @@
  *
  */
 
-package org.jfree.chart;
+package org.jfree.chart.legend;
 
+import org.jfree.chart.legend.LegendItem;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;

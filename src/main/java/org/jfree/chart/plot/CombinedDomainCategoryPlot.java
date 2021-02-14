@@ -45,7 +45,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
-import org.jfree.chart.LegendItemCollection;
+import org.jfree.chart.legend.LegendItemCollection;
 import org.jfree.chart.axis.AxisSpace;
 import org.jfree.chart.axis.AxisState;
 import org.jfree.chart.axis.CategoryAxis;

@@ -61,7 +61,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import org.jfree.chart.LegendItem;
+import org.jfree.chart.legend.LegendItem;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;

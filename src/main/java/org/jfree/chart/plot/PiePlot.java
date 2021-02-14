@@ -74,8 +74,8 @@ import java.util.ResourceBundle;
 import java.util.TreeMap;
 import org.jfree.chart.JFreeChart;
 
-import org.jfree.chart.LegendItem;
-import org.jfree.chart.LegendItemCollection;
+import org.jfree.chart.legend.LegendItem;
+import org.jfree.chart.legend.LegendItemCollection;
 import org.jfree.chart.internal.PaintMap;
 import org.jfree.chart.internal.StrokeMap;
 import org.jfree.chart.entity.EntityCollection;

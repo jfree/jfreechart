@@ -83,8 +83,8 @@ import java.util.Set;
 import java.util.TreeMap;
 import org.jfree.chart.JFreeChart;
 
-import org.jfree.chart.LegendItem;
-import org.jfree.chart.LegendItemCollection;
+import org.jfree.chart.legend.LegendItem;
+import org.jfree.chart.legend.LegendItemCollection;
 import org.jfree.chart.annotations.Annotation;
 import org.jfree.chart.annotations.XYAnnotation;
 import org.jfree.chart.annotations.XYAnnotationBoundsInfo;

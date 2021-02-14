@@ -34,7 +34,9 @@
  *
  */
 
-package org.jfree.chart;
+package org.jfree.chart.legend;
+
+import org.jfree.chart.legend.LegendItemCollection;
 
 /**
  * A source of legend items.  A {@link org.jfree.chart.title.LegendTitle} will

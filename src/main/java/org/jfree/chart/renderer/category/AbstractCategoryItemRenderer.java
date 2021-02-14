@@ -58,8 +58,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import org.jfree.chart.LegendItem;
-import org.jfree.chart.LegendItemCollection;
+import org.jfree.chart.legend.LegendItem;
+import org.jfree.chart.legend.LegendItemCollection;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.CategoryItemEntity;

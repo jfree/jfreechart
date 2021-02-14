@@ -58,7 +58,7 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-import org.jfree.chart.LegendItemCollection;
+import org.jfree.chart.legend.LegendItemCollection;
 import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.needle.ArrowNeedle;
 import org.jfree.chart.needle.LineNeedle;

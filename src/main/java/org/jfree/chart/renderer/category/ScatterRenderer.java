@@ -50,7 +50,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-import org.jfree.chart.LegendItem;
+import org.jfree.chart.legend.LegendItem;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.event.RendererChangeEvent;

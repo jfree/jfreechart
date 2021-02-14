@@ -65,8 +65,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
-import org.jfree.chart.LegendItem;
-import org.jfree.chart.LegendItemCollection;
+import org.jfree.chart.legend.LegendItem;
+import org.jfree.chart.legend.LegendItemCollection;
 import org.jfree.chart.entity.CategoryItemEntity;
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.event.PlotChangeEvent;

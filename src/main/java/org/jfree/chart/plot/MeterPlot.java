@@ -67,8 +67,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-import org.jfree.chart.LegendItem;
-import org.jfree.chart.LegendItemCollection;
+import org.jfree.chart.legend.LegendItem;
+import org.jfree.chart.legend.LegendItemCollection;
 import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.RectangleInsets;

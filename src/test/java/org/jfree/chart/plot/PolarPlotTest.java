@@ -48,8 +48,8 @@ import java.awt.Point;
 import java.awt.Stroke;
 import java.awt.geom.Rectangle2D;
 
-import org.jfree.chart.LegendItem;
-import org.jfree.chart.LegendItemCollection;
+import org.jfree.chart.legend.LegendItem;
+import org.jfree.chart.legend.LegendItemCollection;
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.LogAxis;
 import org.jfree.chart.axis.NumberAxis;

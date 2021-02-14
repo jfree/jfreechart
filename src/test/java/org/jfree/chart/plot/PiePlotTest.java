@@ -53,7 +53,7 @@ import java.text.AttributedString;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.LegendItemCollection;
+import org.jfree.chart.legend.LegendItemCollection;
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.labels.PieSectionLabelGenerator;
 import org.jfree.chart.labels.StandardPieSectionLabelGenerator;

@@ -46,9 +46,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-import org.jfree.chart.LegendItem;
-import org.jfree.chart.LegendItemCollection;
-import org.jfree.chart.LegendItemSource;
+import org.jfree.chart.legend.LegendItem;
+import org.jfree.chart.legend.LegendItemCollection;
+import org.jfree.chart.legend.LegendItemSource;
 import org.jfree.chart.block.Arrangement;
 import org.jfree.chart.block.Block;
 import org.jfree.chart.block.BlockContainer;

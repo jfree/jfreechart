@@ -41,6 +41,8 @@
 
 package org.jfree.chart;
 
+import org.jfree.chart.legend.LegendItemCollection;
+import org.jfree.chart.legend.LegendItem;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.geom.Line2D;

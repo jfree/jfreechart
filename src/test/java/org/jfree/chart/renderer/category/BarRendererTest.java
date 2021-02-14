@@ -45,7 +45,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import java.awt.Color;
 
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.LegendItem;
+import org.jfree.chart.legend.LegendItem;
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;

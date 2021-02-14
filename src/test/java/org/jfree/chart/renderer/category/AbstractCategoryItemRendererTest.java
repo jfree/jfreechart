@@ -48,7 +48,7 @@ import org.junit.jupiter.api.Test;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
-import org.jfree.chart.LegendItemCollection;
+import org.jfree.chart.legend.LegendItemCollection;
 import org.jfree.chart.labels.IntervalCategoryItemLabelGenerator;
 import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
 import org.jfree.chart.labels.StandardCategorySeriesLabelGenerator;

@@ -63,8 +63,8 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
 
-import org.jfree.chart.LegendItem;
-import org.jfree.chart.LegendItemCollection;
+import org.jfree.chart.legend.LegendItem;
+import org.jfree.chart.legend.LegendItemCollection;
 import org.jfree.chart.axis.Axis;
 import org.jfree.chart.axis.AxisState;
 import org.jfree.chart.axis.NumberTick;

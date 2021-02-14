@@ -67,8 +67,8 @@ import java.util.Objects;
 import javax.swing.event.EventListenerList;
 
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.LegendItemCollection;
-import org.jfree.chart.LegendItemSource;
+import org.jfree.chart.legend.LegendItemCollection;
+import org.jfree.chart.legend.LegendItemSource;
 import org.jfree.chart.annotations.Annotation;
 import org.jfree.chart.axis.AxisLocation;
 import org.jfree.chart.entity.EntityCollection;

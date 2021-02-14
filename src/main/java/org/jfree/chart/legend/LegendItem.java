@@ -37,7 +37,7 @@
  *
  */
 
-package org.jfree.chart;
+package org.jfree.chart.legend;
 
 import java.awt.BasicStroke;
 import java.awt.Color;

@@ -54,7 +54,7 @@ import java.io.ObjectOutputStream;
 import java.util.Collections;
 import java.util.LinkedList;
 
-import org.jfree.chart.LegendItem;
+import org.jfree.chart.legend.LegendItem;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.entity.XYItemEntity;
