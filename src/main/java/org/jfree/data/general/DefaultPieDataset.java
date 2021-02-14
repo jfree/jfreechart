@@ -42,7 +42,7 @@ import java.util.List;
 import org.jfree.chart.internal.Args;
 import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.api.PublicCloneable;
-import org.jfree.chart.util.SortOrder;
+import org.jfree.chart.api.SortOrder;
 
 import org.jfree.data.DefaultKeyedValues;
 import org.jfree.data.KeyedValues;

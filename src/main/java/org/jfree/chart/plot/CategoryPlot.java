@@ -103,7 +103,7 @@ import org.jfree.chart.util.ResourceBundleWrapper;
 import org.jfree.chart.internal.SerialUtils;
 import org.jfree.chart.util.ShadowGenerator;
 import org.jfree.chart.util.ShapeUtils;
-import org.jfree.chart.util.SortOrder;
+import org.jfree.chart.api.SortOrder;
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.general.DatasetChangeEvent;

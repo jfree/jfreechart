@@ -46,7 +46,7 @@ import java.util.List;
 import java.util.Map;
 import org.jfree.chart.internal.Args;
 import org.jfree.chart.api.PublicCloneable;
-import org.jfree.chart.util.SortOrder;
+import org.jfree.chart.api.SortOrder;
 
 /**
  * An ordered list of (key, value) items.  This class provides a default

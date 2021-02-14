@@ -78,7 +78,7 @@ import org.jfree.chart.api.Layer;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.util.DefaultShadowGenerator;
-import org.jfree.chart.util.SortOrder;
+import org.jfree.chart.api.SortOrder;
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;

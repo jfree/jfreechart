@@ -71,7 +71,7 @@ import org.jfree.chart.ui.Size2D;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.internal.Args;
 import org.jfree.chart.title.Title;
-import org.jfree.chart.util.SortOrder;
+import org.jfree.chart.api.SortOrder;
 
 
 /**
