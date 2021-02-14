@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,19 +27,15 @@
  * ----------------------
  * DefaultPolarPlotEditor.java
  * ----------------------
- * (C) Copyright 2005-2011, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  Martin Hoeller;
  * Contributor(s):   -;
  *
- * Changes
- * -------
- * 03-Nov-2011 : Version 1 (MH);
- *
  */
 
 
-package org.jfree.chart.editor;
+package org.jfree.chart.swing.editor;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.FocusEvent;

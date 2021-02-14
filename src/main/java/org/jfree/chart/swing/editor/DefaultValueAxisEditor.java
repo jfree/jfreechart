@@ -24,9 +24,9 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates.
  * Other names may be trademarks of their respective owners.]
  *
- * ----------------------
+ * ---------------------------
  * DefaultValueAxisEditor.java
- * ----------------------
+ * ---------------------------
  * (C) Copyright 2005-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  Martin Hoeller (base on DefaultNumberAxisEditor
@@ -35,7 +35,7 @@
  *
  */
 
-package org.jfree.chart.editor;
+package org.jfree.chart.swing.editor;
 
 import java.awt.BasicStroke;
 import java.awt.Color;

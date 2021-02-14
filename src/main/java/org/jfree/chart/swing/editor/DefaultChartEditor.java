@@ -35,7 +35,7 @@
  *
  */
 
-package org.jfree.chart.editor;
+package org.jfree.chart.swing.editor;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

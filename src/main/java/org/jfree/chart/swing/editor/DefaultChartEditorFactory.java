@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -24,36 +24,41 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * -----------------------
- * ChartEditorFactory.java
- * -----------------------
- * (C) Copyright 2005-2008, by Object Refinery Limited.
+ * ------------------------------
+ * DefaultChartEditorFactory.java
+ * ------------------------------
+ * (C) Copyright 2005-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   ;
  *
- * Changes
- * -------
- * 28-Nov-2005 : Version 1 (DG);
- *
  */
 
-package org.jfree.chart.editor;
+package org.jfree.chart.swing.editor;
 
 import org.jfree.chart.JFreeChart;
 
 /**
- * A factory for creating new {@link ChartEditor} instances.
+ * A default implementation of the {@link ChartEditorFactory} interface.
  */
-public interface ChartEditorFactory {
+public class DefaultChartEditorFactory implements ChartEditorFactory {
 
     /**
-     * Creates an editor for the given chart.
+     * Creates a new instance.
+     */
+    public DefaultChartEditorFactory() {
+    }
+
+    /**
+     * Returns a new instance of a {@link ChartEditor}.
      *
      * @param chart  the chart.
      *
-     * @return A chart editor.
+     * @return A chart editor for the given chart.
      */
-    ChartEditor createEditor(JFreeChart chart);
+    @Override
+    public ChartEditor createEditor(JFreeChart chart) {
+        return new DefaultChartEditor(chart);
+    }
 
 }

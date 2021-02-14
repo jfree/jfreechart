@@ -36,7 +36,7 @@
  *
  */
 
-package org.jfree.chart.editor;
+package org.jfree.chart.swing.editor;
 
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;

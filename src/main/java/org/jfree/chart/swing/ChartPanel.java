@@ -113,8 +113,8 @@ import org.jfree.chart.ChartTransferable;
 import org.jfree.chart.ChartUtils;
 import org.jfree.chart.JFreeChart;
 
-import org.jfree.chart.editor.ChartEditor;
-import org.jfree.chart.editor.ChartEditorManager;
+import org.jfree.chart.swing.editor.ChartEditor;
+import org.jfree.chart.swing.editor.ChartEditorManager;
 import org.jfree.chart.entity.ChartEntity;
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.event.ChartChangeEvent;
