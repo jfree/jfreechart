@@ -34,16 +34,13 @@
  *
  */
 
-package org.jfree.chart.util;
+package org.jfree.chart.internal;
 
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
-import org.jfree.chart.internal.Args;
 
 /**
  * Some utility methods for {@link Line2D} objects.
- *
- * @since 1.0.12
  */
 public class LineUtils {
 
@@ -146,8 +143,6 @@ public class LineUtils {
      * @param endPercent  the amount to extend the line at the end point end.
      *
      * @return A new line.
-     * 
-     * @since 1.0.18
      */
     public static Line2D extendLine(Line2D line, double startPercent,
                               double endPercent) {
