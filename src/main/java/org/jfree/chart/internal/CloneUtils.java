@@ -36,7 +36,6 @@
 package org.jfree.chart.internal;
 
 import org.jfree.chart.api.PublicCloneable;
-import org.jfree.chart.internal.Args;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -44,12 +43,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.jfree.chart.util.Args;
 
 /**
  * Utilities for cloning.
- * 
- * @since 1.0.18
  */
 public class CloneUtils {
     
