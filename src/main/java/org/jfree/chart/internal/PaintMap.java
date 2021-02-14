@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,14 @@
  * -------------
  * PaintMap.java
  * -------------
- * (C) Copyright 2006-2020, by Object Refinery Limited.
+ * (C) Copyright 2006-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
  */
 
-package org.jfree.chart;
+package org.jfree.chart.internal;
 
 import java.awt.Paint;
 import java.io.IOException;
@@ -56,8 +56,6 @@ import org.jfree.chart.util.SerialUtils;
  * To support cloning and serialization, you should only use keys that are
  * cloneable and serializable.  Special handling for the {@code Paint}
  * instances is included in this class.
- *
- * @since 1.0.3
  */
 public class PaintMap<K extends Comparable<K>> implements Cloneable, Serializable {
 

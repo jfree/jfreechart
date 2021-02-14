@@ -76,8 +76,8 @@ import org.jfree.chart.JFreeChart;
 
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.LegendItemCollection;
-import org.jfree.chart.PaintMap;
-import org.jfree.chart.StrokeMap;
+import org.jfree.chart.internal.PaintMap;
+import org.jfree.chart.internal.StrokeMap;
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.entity.PieSectionEntity;
 import org.jfree.chart.event.PlotChangeEvent;
