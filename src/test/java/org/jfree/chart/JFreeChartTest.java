@@ -47,7 +47,7 @@ import org.jfree.chart.event.ChartChangeEvent;
 import org.jfree.chart.event.ChartChangeListener;
 import org.jfree.chart.plot.PiePlot;
 import org.jfree.chart.plot.RingPlot;
-import org.jfree.chart.title.LegendTitle;
+import org.jfree.chart.legend.LegendTitle;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.chart.title.Title;
 import org.jfree.chart.ui.Align;

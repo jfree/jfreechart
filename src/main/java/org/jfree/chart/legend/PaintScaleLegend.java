@@ -34,7 +34,7 @@
  *
  */
 
-package org.jfree.chart.title;
+package org.jfree.chart.legend;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -63,6 +63,7 @@ import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.internal.Args;
 import org.jfree.chart.api.PublicCloneable;
 import org.jfree.chart.internal.SerialUtils;
+import org.jfree.chart.title.Title;
 import org.jfree.data.Range;
 
 /**

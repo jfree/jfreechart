@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,14 @@
  * -------------------------
  * PaintScaleLegendTest.java
  * -------------------------
- * (C) Copyright 2007-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
  */
 
-package org.jfree.chart.title;
+package org.jfree.chart.legend;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -50,6 +50,7 @@ import org.jfree.chart.axis.AxisLocation;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.renderer.GrayPaintScale;
 import org.jfree.chart.renderer.LookupPaintScale;
+import org.jfree.chart.title.PaintScaleLegend;
 import org.jfree.chart.util.CloneUtils;
 import org.junit.jupiter.api.Test;
 

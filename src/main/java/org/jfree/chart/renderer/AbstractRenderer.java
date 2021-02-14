@@ -67,7 +67,7 @@ import org.jfree.chart.labels.ItemLabelAnchor;
 import org.jfree.chart.labels.ItemLabelPosition;
 import org.jfree.chart.plot.DrawingSupplier;
 import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.chart.title.LegendTitle;
+import org.jfree.chart.legend.LegendTitle;
 import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.internal.Args;
 import org.jfree.chart.util.BooleanList;

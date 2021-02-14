@@ -33,7 +33,7 @@
  * Contributor(s):   -;
  */
 
-package org.jfree.chart.title;
+package org.jfree.chart.legend;
 
 import java.awt.GradientPaint;
 import java.awt.Graphics2D;

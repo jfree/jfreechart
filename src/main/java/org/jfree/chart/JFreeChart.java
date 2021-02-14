@@ -90,7 +90,7 @@ import org.jfree.chart.event.TitleChangeEvent;
 import org.jfree.chart.event.TitleChangeListener;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotRenderingInfo;
-import org.jfree.chart.title.LegendTitle;
+import org.jfree.chart.legend.LegendTitle;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.chart.title.Title;
 import org.jfree.chart.ui.Align;

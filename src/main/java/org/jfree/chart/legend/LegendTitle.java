@@ -34,7 +34,7 @@
  * 
  */
 
-package org.jfree.chart.title;
+package org.jfree.chart.legend;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -46,9 +46,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-import org.jfree.chart.legend.LegendItem;
-import org.jfree.chart.legend.LegendItemCollection;
-import org.jfree.chart.legend.LegendItemSource;
 import org.jfree.chart.block.Arrangement;
 import org.jfree.chart.block.Block;
 import org.jfree.chart.block.BlockContainer;
@@ -73,6 +70,7 @@ import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.Size2D;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.internal.Args;
+import org.jfree.chart.title.Title;
 import org.jfree.chart.util.SortOrder;
 
 

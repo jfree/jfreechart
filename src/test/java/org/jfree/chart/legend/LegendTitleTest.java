@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,16 @@
  * --------------------
  * LegendTitleTest.java
  * --------------------
- * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
  */
 
-package org.jfree.chart.title;
+package org.jfree.chart.legend;
 
+import org.jfree.chart.legend.LegendTitle;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
