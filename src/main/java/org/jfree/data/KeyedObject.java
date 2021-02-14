@@ -39,7 +39,7 @@ package org.jfree.data;
 import java.io.Serializable;
 import java.util.Objects;
 
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.api.PublicCloneable;
 
 /**
  * A (key, object) pair.

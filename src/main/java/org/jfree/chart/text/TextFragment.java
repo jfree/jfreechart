@@ -41,8 +41,8 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import org.jfree.chart.ui.Size2D;
 import org.jfree.chart.ui.TextAnchor;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.internal.SerialUtils;
 
 /**
  * A text item, with an associated font, that fits on a single line (see 

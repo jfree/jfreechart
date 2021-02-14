@@ -53,7 +53,7 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.api.Layer;
 import org.jfree.chart.urls.StandardXYURLGenerator;
 import org.jfree.chart.util.CloneUtils;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.api.PublicCloneable;
 import org.jfree.data.xy.YIntervalSeries;
 import org.jfree.data.xy.YIntervalSeriesCollection;
 import org.junit.jupiter.api.Test;

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,23 +27,17 @@
  * --------------------
  * PowerFunction2D.java
  * --------------------
- * (C) Copyright 2002-2009, by Object Refinery Limited.
+ * (C) Copyright 2002-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 01-Oct-2002 : Version 1 (DG);
- * 28-May-2009 : Added accessor methods for co-efficients, implemented
- *               equals() and hashCode(), and added Serialization support (DG);
  *
  */
 
 package org.jfree.data.function;
 
 import java.io.Serializable;
-import org.jfree.chart.HashUtils;
+import org.jfree.chart.internal.HashUtils;
 
 /**
  * A function of the form y = a * x ^ b.

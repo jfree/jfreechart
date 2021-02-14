@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,22 +27,17 @@
  * ---------
  * OHLC.java
  * ---------
- * (C) Copyright 2006, 2009, by Object Refinery Limited.
+ * (C) Copyright 2006-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 04-Dec-2006 : Version 1 (DG);
- * 23-May-2009 : Implemented hashCode() (DG);
  *
  */
 
 package org.jfree.data.time.ohlc;
 
 import java.io.Serializable;
-import org.jfree.chart.HashUtils;
+import org.jfree.chart.internal.HashUtils;
 
 /**
  * A data record containing open-high-low-close data (immutable).  This class 

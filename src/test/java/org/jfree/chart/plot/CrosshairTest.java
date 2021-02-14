@@ -50,7 +50,7 @@ import org.jfree.chart.TestUtils;
 
 import org.jfree.chart.labels.StandardCrosshairLabelGenerator;
 import org.jfree.chart.ui.RectangleAnchor;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.api.PublicCloneable;
 import org.junit.jupiter.api.Test;
 
 /**

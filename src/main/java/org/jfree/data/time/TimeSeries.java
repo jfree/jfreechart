@@ -50,7 +50,7 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.TimeZone;
 
-import org.jfree.chart.util.Args;
+import org.jfree.chart.internal.Args;
 import org.jfree.chart.util.CloneUtils;
 import org.jfree.data.Range;
 import org.jfree.data.general.Series;

@@ -39,7 +39,7 @@ package org.jfree.chart.swing;
 import javax.swing.event.EventListenerList;
 import org.jfree.chart.event.ChartChangeEvent;
 import org.jfree.chart.swing.ChartPanel;
-import org.jfree.chart.util.Args;
+import org.jfree.chart.internal.Args;
 
 /**
  * A base class for implementing overlays for a {@link ChartPanel}.

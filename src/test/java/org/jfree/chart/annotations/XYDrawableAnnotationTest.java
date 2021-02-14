@@ -46,7 +46,7 @@ import java.io.Serializable;
 
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.Drawable;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.api.PublicCloneable;
 
 import org.junit.jupiter.api.Test;
 

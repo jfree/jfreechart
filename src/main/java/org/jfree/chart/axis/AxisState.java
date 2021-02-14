@@ -39,7 +39,7 @@ package org.jfree.chart.axis;
 import java.util.ArrayList;
 import java.util.List;
 import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.util.Args;
+import org.jfree.chart.internal.Args;
 
 /**
  * Instances of this class are used to carry state information for an axis

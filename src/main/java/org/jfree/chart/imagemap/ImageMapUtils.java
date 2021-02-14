@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,25 +27,11 @@
  * ------------------
  * ImageMapUtils.java
  * ------------------
- * (C) Copyright 2004-2017, by Richard Atkinson and Contributors.
+ * (C) Copyright 2004-2021, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Fawad Halim - bug 2690293;
- *
- * Changes
- * -------
- * 02-Aug-2004 : Initial version (RA);
- * 13-Jan-2005 : Renamed ImageMapUtilities (DG);
- * 19-Jan-2005 : Reversed order of tags for chart entities to get correct
- *               layering (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 06-Feb-2006 : API doc updates (DG);
- * 04-Dec-2007 : Added htmlEscape() method, and escape 'name' in
- *               getImageMap() (DG);
- * 19-Mar-2009 : Added javascriptEscape() method - see bug 2690293 by FH (DG);
- * 25-Mar-2009 : Reimplemented javascriptEscape() (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -57,7 +43,7 @@ import java.io.PrintWriter;
 import org.jfree.chart.ChartRenderingInfo;
 import org.jfree.chart.entity.ChartEntity;
 import org.jfree.chart.entity.EntityCollection;
-import org.jfree.chart.util.Args;
+import org.jfree.chart.internal.Args;
 import org.jfree.chart.util.StringUtils;
 
 /**

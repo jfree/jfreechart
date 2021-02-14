@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * -----------------
  * OHLCDataItem.java
  * -----------------
- * (C) Copyright 2003-2013, by Object Refinery Limited.
+ * (C) Copyright 2003-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 03-Dec-2003 : Version 1 (DG);
- * 29-Apr-2005 : Added equals() method (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -44,7 +38,7 @@ package org.jfree.data.xy;
 
 import java.io.Serializable;
 import java.util.Date;
-import org.jfree.chart.util.Args;
+import org.jfree.chart.internal.Args;
 
 /**
  * Represents a single (open-high-low-close) data item in

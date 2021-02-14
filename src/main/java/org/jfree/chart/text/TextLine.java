@@ -36,7 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.jfree.chart.ui.Size2D;
 import org.jfree.chart.ui.TextAnchor;
-import org.jfree.chart.util.Args;
+import org.jfree.chart.internal.Args;
 
 /**
  * A sequence of {@link TextFragment} objects that together form a line of 

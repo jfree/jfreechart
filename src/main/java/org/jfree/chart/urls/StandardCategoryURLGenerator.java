@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,29 +27,11 @@
  * ---------------------------------
  * StandardCategoryURLGenerator.java
  * ---------------------------------
- * (C) Copyright 2002-2016, by Richard Atkinson and Contributors.
+ * (C) Copyright 2002-2021, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributors:     David Gilbert (for Object Refinery Limited);
  *                   Cleland Early;
- *
- * Changes:
- * --------
- * 05-Aug-2002 : Version 1, contributed by Richard Atkinson;
- * 29-Aug-2002 : Reversed seriesParameterName and itemParameterName in
- *               constructor.  Never should have been the other way round.
- *               Also updated JavaDoc (RA);
- * 09-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 05-Nov-2002 : Base dataset is now TableDataset not CategoryDataset (DG);
- * 23-Mar-2003 : Implemented Serializable (DG);
- * 13-Aug-2003 : Implemented Cloneable (DG);
- * 23-Dec-2003 : Added fix for bug 861282 (DG);
- * 21-May-2004 : Added URL encoding - see patch 947854 (DG);
- * 13-Jan-2004 : Fixed for compliance with XHTML 1.0 (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 02-Feb-2007 : Removed author tags from all over JFreeChart sources (DG);
- * 17-Apr-2007 : Use new URLUtilities class to encode URLs (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -60,7 +42,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Objects;
 
-import org.jfree.chart.util.Args;
+import org.jfree.chart.internal.Args;
 
 import org.jfree.data.category.CategoryDataset;
 

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,42 +27,11 @@
  * --------------------
  * FastScatterPlot.java
  * --------------------
- * (C) Copyright 2002-2017, by Object Refinery Limited.
+ * (C) Copyright 2002-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Arnaud Lelievre;
  *                   Ulrich Voigt (patch #307);
- *
- * Changes
- * -------
- * 29-Oct-2002 : Added standard header (DG);
- * 07-Nov-2002 : Fixed errors reported by Checkstyle (DG);
- * 26-Mar-2003 : Implemented Serializable (DG);
- * 19-Aug-2003 : Implemented Cloneable (DG);
- * 08-Sep-2003 : Added internationalization via use of properties
- *               resourceBundle (RFE 690236) (AL);
- * 16-Sep-2003 : Changed ChartRenderingInfo --> PlotRenderingInfo (DG);
- * 12-Nov-2003 : Implemented zooming (DG);
- * 21-Jan-2004 : Update for renamed method in ValueAxis (DG);
- * 26-Jan-2004 : Added domain and range grid lines (DG);
- * 25-Feb-2004 : Replaced CrosshairInfo with CrosshairState (DG);
- * 29-Sep-2004 : Removed hard-coded color (DG);
- * 04-Oct-2004 : Reworked equals() method and renamed ArrayUtils
- *               --> ArrayUtilities (DG);
- * 12-Nov-2004 : Implemented the new Zoomable interface (DG);
- * 05-May-2005 : Updated draw() method parameters (DG);
- * 16-Jun-2005 : Added get/setData() methods (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 10-Nov-2006 : Fixed bug 1593150, by not allowing null axes, and added
- *               setDomainAxis() and setRangeAxis() methods (DG);
- * 24-Sep-2007 : Implemented new zooming methods (DG);
- * 25-Mar-2008 : Make use of new fireChangeEvent() method (DG);
- * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
- *               Jess Thrysoee (DG);
- * 26-Mar-2009 : Implemented Pannable, and fixed bug in zooming (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
- * 21-Jul-2014 : Fix panning (patch #307 by Ulrich Voigt) (DG);
- * 29-Jul-2014 : Add rendering hint to normalise stroke for gridlines (DG);
  *
  */
 
@@ -84,7 +53,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -99,9 +67,9 @@ import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.util.ArrayUtils;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.Args;
+import org.jfree.chart.internal.Args;
 import org.jfree.chart.util.ResourceBundleWrapper;
-import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.internal.SerialUtils;
 import org.jfree.data.Range;
 
 /**

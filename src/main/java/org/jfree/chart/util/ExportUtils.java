@@ -51,6 +51,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import javax.imageio.ImageIO;
 import org.jfree.chart.Drawable;
+import org.jfree.chart.internal.Args;
 
 /**
  * Utility functions for exporting charts to SVG and PDF format.

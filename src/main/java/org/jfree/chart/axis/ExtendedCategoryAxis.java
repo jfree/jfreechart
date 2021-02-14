@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,19 +27,10 @@
  * -------------------------
  * ExtendedCategoryAxis.java
  * -------------------------
- * (C) Copyright 2003-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 07-Nov-2003 : Version 1 (DG);
- * 07-Jan-2004 : Updated the createLabel() method (DG);
- * 29-Jan-2004 : Added paint attribute (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 21-Mar-2007 : Implemented equals(), clone() and fixed serialization (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -61,8 +52,8 @@ import org.jfree.chart.text.TextFragment;
 import org.jfree.chart.text.TextLine;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.internal.SerialUtils;
 
 /**
  * An extended version of the {@link CategoryAxis} class that supports

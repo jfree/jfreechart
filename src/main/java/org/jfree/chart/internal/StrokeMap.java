@@ -46,8 +46,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.TreeMap;
 
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.SerialUtils;
 
 /**
  * A storage structure that maps {@code Comparable} instances with

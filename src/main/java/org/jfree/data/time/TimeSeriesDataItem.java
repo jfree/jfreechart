@@ -39,7 +39,7 @@ package org.jfree.data.time;
 import java.io.Serializable;
 import java.util.Objects;
 
-import org.jfree.chart.util.Args;
+import org.jfree.chart.internal.Args;
 
 /**
  * Represents one data item in a time series.

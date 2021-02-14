@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,25 +27,10 @@
  * ---------------------------
  * TimeSeriesURLGenerator.java
  * ---------------------------
- * (C) Copyright 2002-2016, by Richard Atkinson and Contributors.
+ * (C) Copyright 2002-2021, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributors:     David Gilbert (for Object Refinery Limited);
- *
- * Changes:
- * --------
- * 29-Aug-2002 : Initial version (RA);
- * 09-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 23-Mar-2003 : Implemented Serializable (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
- *               getYValue() (DG);
- * 13-Jan-2005 : Modified for XHTML 1.0 compliance (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 06-Jul-2006 : Swap call to dataset's getX() --> getXValue() (DG);
- * 17-Apr-2007 : Added null argument checks to constructor, new accessor
- *               methods, added equals() override and used new URLUtilities
- *               class to encode series key and date (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -57,7 +42,7 @@ import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.util.Date;
 
-import org.jfree.chart.util.Args;
+import org.jfree.chart.internal.Args;
 import org.jfree.data.xy.XYDataset;
 
 /**

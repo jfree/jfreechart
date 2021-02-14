@@ -47,7 +47,7 @@ package org.jfree.data.general;
 import java.io.Serializable;
 import java.util.Objects;
 
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.api.PublicCloneable;
 
 /**
  * A dataset that stores a single value (that is possibly {@code null}).

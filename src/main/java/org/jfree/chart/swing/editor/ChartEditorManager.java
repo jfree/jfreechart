@@ -37,7 +37,7 @@
 package org.jfree.chart.swing.editor;
 
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.util.Args;
+import org.jfree.chart.internal.Args;
 
 /**
  * The central point for obtaining {@link ChartEditor} instances for editing

@@ -38,7 +38,7 @@ package org.jfree.data;
 
 import java.io.Serializable;
 import java.util.Comparator;
-import org.jfree.chart.util.Args;
+import org.jfree.chart.internal.Args;
 import org.jfree.chart.util.SortOrder;
 
 /**

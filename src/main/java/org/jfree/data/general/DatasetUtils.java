@@ -47,7 +47,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import org.jfree.chart.util.ArrayUtils;
-import org.jfree.chart.util.Args;
+import org.jfree.chart.internal.Args;
 
 import org.jfree.data.DomainInfo;
 import org.jfree.data.DomainOrder;

@@ -55,7 +55,7 @@ import org.jfree.chart.api.HorizontalAlignment;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.api.VerticalAlignment;
-import org.jfree.chart.util.Args;
+import org.jfree.chart.internal.Args;
 
 /**
  * The base class for all chart titles.  A chart can have multiple titles,

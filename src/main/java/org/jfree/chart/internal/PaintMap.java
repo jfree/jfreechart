@@ -46,8 +46,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.SerialUtils;
 
 /**
  * A storage structure that maps {@code Comparable} instances with

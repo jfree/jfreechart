@@ -29,7 +29,7 @@
 package org.jfree.chart.ui;
 
 import java.io.Serializable;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.api.PublicCloneable;
 
 /**
  * A simple class for representing the dimensions of an object.  It would be

@@ -44,7 +44,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 
 import org.jfree.chart.TestUtils;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.api.PublicCloneable;
 
 import org.junit.jupiter.api.Test;
 

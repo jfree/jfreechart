@@ -38,7 +38,7 @@ package org.jfree.data.category;
 
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.CloneUtils;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.api.PublicCloneable;
 import org.jfree.data.UnknownKeyException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

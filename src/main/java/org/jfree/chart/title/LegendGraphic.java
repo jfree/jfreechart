@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,26 +27,10 @@
  * ------------------
  * LegendGraphic.java
  * ------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited.
+ * (C) Copyright 2004-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 26-Oct-2004 : Version 1 (DG);
- * 21-Jan-2005 : Modified return type of RectangleAnchor.coordinates()
- *               method (DG);
- * 20-Apr-2005 : Added new draw() method (DG);
- * 13-May-2005 : Fixed to respect margin, border and padding settings (DG);
- * 01-Sep-2005 : Implemented PublicCloneable (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 13-Dec-2006 : Added fillPaintTransformer attribute, so legend graphics can
- *               display gradient paint correctly, updated equals() and
- *               corrected clone() (DG);
- * 01-Aug-2007 : Updated API docs (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
- *
  */
 
 package org.jfree.chart.title;
@@ -72,9 +56,9 @@ import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.ui.Size2D;
 import org.jfree.chart.ui.StandardGradientPaintTransformer;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.PublicCloneable;
-import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.api.PublicCloneable;
+import org.jfree.chart.internal.SerialUtils;
 import org.jfree.chart.util.ShapeUtils;
 
 /**

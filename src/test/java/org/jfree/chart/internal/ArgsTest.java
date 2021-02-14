@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -21,39 +21,39 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
  * USA.
  *
- * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
+ * [Oracle and Java are registered trademarks of Oracle and/or its affiliates.
  * Other names may be trademarks of their respective owners.]
  *
- * --------------------
- * PublicCloneable.java
- * --------------------
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * -------------
+ * ArgsTest.java
+ * -------------
+ * (C) Copyright 2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributors:     -;
+ * Contributor(s):   -;
+ *
  */
 
-package org.jfree.chart.util;
+package org.jfree.chart.internal;
 
-import org.jfree.chart.JFreeChart;
+import org.jfree.chart.internal.Args;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.Test;
 
 /**
- * An interface that exposes the clone() method.  In order to support the 
- * cloning of {@link JFreeChart} instances, it is advisable to implement this
- * interface for custom plots, renderers and other chart components.  If
- * this interface is not implemented, cloning will still be attempted via 
- * reflection.
+ * Tests for the {@link Args} class.
  */
-public interface PublicCloneable extends Cloneable {
+public class ArgsTest {
     
-    /**
-     * Returns a clone of the object.
-     * 
-     * @return A clone.
-     * 
-     * @throws CloneNotSupportedException if cloning is not supported for some reason.
-     */
-    Object clone() throws CloneNotSupportedException;
-
+    @Test
+    public void testRequireInRange() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Args.requireInRange(-1, "A", 0, 10);
+        });
+        Args.requireInRange(0, "A", 0, 10); 
+        Args.requireInRange(10, "A", 0, 10); 
+        assertThrows(IllegalArgumentException.class, () -> {
+            Args.requireInRange(11, "A", 0, 10);
+        });
+    }
 }
-

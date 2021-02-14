@@ -35,6 +35,8 @@
  */
 package org.jfree.chart.util;
 
+import org.jfree.chart.api.PublicCloneable;
+import org.jfree.chart.internal.Args;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;

@@ -39,7 +39,7 @@ package org.jfree.chart.labels;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.api.PublicCloneable;
 
 import org.jfree.data.xy.XYDataset;
 

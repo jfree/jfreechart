@@ -32,7 +32,7 @@ import java.awt.GradientPaint;
 import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.api.PublicCloneable;
 
 /**
  * Transforms a {@code GradientPaint} to range over the width of a target 
