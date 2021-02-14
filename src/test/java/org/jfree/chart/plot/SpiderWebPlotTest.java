@@ -59,7 +59,7 @@ import org.jfree.chart.labels.StandardCategoryToolTipGenerator;
 import org.jfree.chart.urls.StandardCategoryURLGenerator;
 import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.api.Rotation;
-import org.jfree.chart.util.TableOrder;
+import org.jfree.chart.api.TableOrder;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.junit.jupiter.api.Test;
 

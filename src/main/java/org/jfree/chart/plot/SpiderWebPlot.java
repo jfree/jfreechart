@@ -82,7 +82,7 @@ import org.jfree.chart.api.Rotation;
 import org.jfree.chart.internal.SerialUtils;
 import org.jfree.chart.util.ShapeUtils;
 import org.jfree.chart.util.StrokeList;
-import org.jfree.chart.util.TableOrder;
+import org.jfree.chart.api.TableOrder;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.DatasetUtils;

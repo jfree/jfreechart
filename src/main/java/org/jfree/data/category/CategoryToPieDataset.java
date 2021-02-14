@@ -39,7 +39,7 @@ package org.jfree.data.category;
 import java.util.Collections;
 import java.util.List;
 import org.jfree.chart.internal.Args;
-import org.jfree.chart.util.TableOrder;
+import org.jfree.chart.api.TableOrder;
 
 import org.jfree.data.general.AbstractDataset;
 import org.jfree.data.general.DatasetChangeEvent;
