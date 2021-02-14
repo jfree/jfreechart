@@ -34,12 +34,10 @@
  *
  */
 
-package org.jfree.chart.panel;
+package org.jfree.chart.swing;
 
 import javax.swing.event.EventListenerList;
 import org.jfree.chart.event.ChartChangeEvent;
-import org.jfree.chart.event.OverlayChangeEvent;
-import org.jfree.chart.event.OverlayChangeListener;
 import org.jfree.chart.swing.ChartPanel;
 import org.jfree.chart.util.Args;
 

@@ -34,8 +34,10 @@
  *
  */
 
-package org.jfree.chart.panel;
+package org.jfree.chart.swing;
 
+import org.jfree.chart.swing.AbstractOverlay;
+import org.jfree.chart.swing.Overlay;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Paint;
@@ -52,7 +54,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.ValueAxis;
-import org.jfree.chart.event.OverlayChangeEvent;
 import org.jfree.chart.plot.Crosshair;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;

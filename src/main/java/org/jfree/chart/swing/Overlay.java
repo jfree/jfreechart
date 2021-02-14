@@ -34,10 +34,9 @@
  *
  */
 
-package org.jfree.chart.panel;
+package org.jfree.chart.swing;
 
 import java.awt.Graphics2D;
-import org.jfree.chart.event.OverlayChangeListener;
 import org.jfree.chart.swing.ChartPanel;
 
 /**

@@ -50,7 +50,7 @@ import java.io.Serializable;
 import org.jfree.chart.HashUtils;
 import org.jfree.chart.labels.CrosshairLabelGenerator;
 import org.jfree.chart.labels.StandardCrosshairLabelGenerator;
-import org.jfree.chart.panel.CrosshairOverlay;
+import org.jfree.chart.swing.CrosshairOverlay;
 import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
