@@ -19,6 +19,7 @@ module org.jfree.chart {
     exports org.jfree.chart.renderer;
     exports org.jfree.chart.renderer.category;
     exports org.jfree.chart.renderer.xy;
+    exports org.jfree.chart.swing;
     exports org.jfree.chart.text;
     exports org.jfree.chart.title;
     exports org.jfree.chart.ui;
