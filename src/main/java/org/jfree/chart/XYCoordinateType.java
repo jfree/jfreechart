@@ -34,7 +34,7 @@
  *
  */
 
-package org.jfree.chart.util;
+package org.jfree.chart;
 
 /**
  * Represents several possible interpretations for an (x, y) coordinate.

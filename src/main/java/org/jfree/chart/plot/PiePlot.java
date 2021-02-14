@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------
  * PiePlot.java
  * ------------
- * (C) Copyright 2000-2020, by Andrzej Porebski and Contributors.
+ * (C) Copyright 2000-2021, by Andrzej Porebski and Contributors.
  *
  * Original Author:  Andrzej Porebski;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -101,7 +101,7 @@ import org.jfree.chart.util.Rotation;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.chart.util.ShadowGenerator;
 import org.jfree.chart.util.ShapeUtils;
-import org.jfree.chart.util.UnitType;
+import org.jfree.chart.UnitType;
 import org.jfree.data.DefaultKeyedValues;
 import org.jfree.data.KeyedValues;
 import org.jfree.data.general.DatasetChangeEvent;

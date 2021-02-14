@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -30,7 +30,7 @@ package org.jfree.chart.ui;
 
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
-import org.jfree.chart.util.UnitType;
+import org.jfree.chart.UnitType;
 
 /**
  * Represents the insets for a rectangle, specified in absolute or relative 
