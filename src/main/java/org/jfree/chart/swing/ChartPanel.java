@@ -47,7 +47,7 @@
  *                   Simon Legner - patch from bug 1129;
  */
 
-package org.jfree.chart;
+package org.jfree.chart.swing;
 
 import java.awt.AWTEvent;
 import java.awt.AlphaComposite;
@@ -77,6 +77,8 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
+import static java.awt.print.Printable.NO_SUCH_PAGE;
+import static java.awt.print.Printable.PAGE_EXISTS;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import java.io.BufferedWriter;
@@ -106,6 +108,10 @@ import javax.swing.SwingUtilities;
 import javax.swing.ToolTipManager;
 import javax.swing.event.EventListenerList;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import org.jfree.chart.ChartRenderingInfo;
+import org.jfree.chart.ChartTransferable;
+import org.jfree.chart.ChartUtils;
+import org.jfree.chart.JFreeChart;
 
 import org.jfree.chart.editor.ChartEditor;
 import org.jfree.chart.editor.ChartEditorManager;
@@ -3215,3 +3221,4 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     }
 
 }
+

@@ -34,7 +34,7 @@
  *
  */
 
-package org.jfree.chart;
+package org.jfree.chart.swing;
 
 import java.awt.GraphicsEnvironment;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -49,6 +49,8 @@ import java.util.EventListener;
 import java.util.List;
 
 import javax.swing.event.CaretListener;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.JFreeChart;
 
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.event.ChartChangeEvent;
@@ -333,3 +335,4 @@ public class ChartPanelTest implements ChartChangeListener, ChartMouseListener {
         assertFalse(panel.isMouseWheelEnabled());
     }
 }
+

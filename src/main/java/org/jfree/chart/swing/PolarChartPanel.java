@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * PolarChartPanel.java
  * --------------------
- * (C) Copyright 2004-2020, by Solution Engineering, Inc. and Contributors.
+ * (C) Copyright 2004-2021, by Solution Engineering, Inc. and Contributors.
  *
  * Original Author:  Daniel Bridenbecker, Solution Engineering, Inc.;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -35,13 +35,14 @@
  *
  */
 
-package org.jfree.chart;
+package org.jfree.chart.swing;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
+import org.jfree.chart.JFreeChart;
 
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PolarPlot;
@@ -63,10 +64,6 @@ import org.jfree.chart.plot.PolarPlot;
  */
 public class PolarChartPanel extends ChartPanel {
 
-    // -----------------
-    // --- Constants ---
-    // -----------------
-
     /** Zoom in command string. */
     private static final String POLAR_ZOOM_IN_ACTION_COMMAND = "Polar Zoom In";
 
@@ -78,13 +75,6 @@ public class PolarChartPanel extends ChartPanel {
     private static final String POLAR_AUTO_RANGE_ACTION_COMMAND
         = "Polar Auto Range";
 
-    // ------------------------
-    // --- Member Variables ---
-    // ------------------------
-
-    // --------------------
-    // --- Constructors ---
-    // --------------------
     /**
      * Constructs a JFreeChart panel.
      *
@@ -109,9 +99,6 @@ public class PolarChartPanel extends ChartPanel {
         setMaximumDrawHeight(2000);
     }
 
-    // --------------------------
-    // --- ChartPanel Methods ---
-    // --------------------------
     /**
      * Sets the chart that is displayed in the panel.
      *
@@ -211,14 +198,6 @@ public class PolarChartPanel extends ChartPanel {
            super.actionPerformed(event);
        }
     }
-
-    // ----------------------
-    // --- Public Methods ---
-    // ----------------------
-
-    // -----------------------
-    // --- Private Methods ---
-    // -----------------------
 
     /**
      * Test that the chart is using an xy plot with time as the domain axis.

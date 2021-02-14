@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -28,19 +28,10 @@
  * Zoomable.java
  * -------------
  *
- * (C) Copyright 2004-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Rune Fauske;
- *
- * Changes
- * -------
- * 12-Nov-2004 : Version 1 (DG);
- * 26-Jan-2004 : Added getOrientation() method (DG);
- * 04-Sep-2006 : Added credit for Rune Fauske, see patch 1050659 (DG);
- * 21-Sep-2007 : Added new zooming methods with 'useAnchor' flag.  This breaks
- *               the API, but is the cleanest way I can think of to fix a
- *               long-standing bug (DG);
  *
  */
 
@@ -48,11 +39,9 @@ package org.jfree.chart.plot;
 
 import java.awt.geom.Point2D;
 
-import org.jfree.chart.ChartPanel;
-
 /**
  * A plot that is zoomable must implement this interface to provide a
- * mechanism for the {@link ChartPanel} to control the zooming.
+ * mechanism for user interface components to control the zooming.
  */
 public interface Zoomable {
 

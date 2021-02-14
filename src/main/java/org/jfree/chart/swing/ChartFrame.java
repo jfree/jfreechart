@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,18 +27,19 @@
  * ---------------
  * ChartFrame.java
  * ---------------
- * (C) Copyright 2001-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2001-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
  */
 
-package org.jfree.chart;
+package org.jfree.chart.swing;
 
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.WindowConstants;
+import org.jfree.chart.JFreeChart;
 
 /**
  * A frame for displaying a chart.
