@@ -40,7 +40,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.ArrayList;
 import org.jfree.chart.TestUtils;
 
-import org.jfree.chart.util.CloneUtils;
+import org.jfree.chart.internal.CloneUtils;
 
 import org.jfree.data.general.DefaultPieDataset;
 import static org.junit.jupiter.api.Assertions.assertEquals;

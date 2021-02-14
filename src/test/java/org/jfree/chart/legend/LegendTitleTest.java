@@ -51,7 +51,7 @@ import org.jfree.chart.TestUtils;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.util.CloneUtils;
+import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.util.SortOrder;
 import org.junit.jupiter.api.Test;
 

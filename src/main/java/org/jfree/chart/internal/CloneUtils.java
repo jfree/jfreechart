@@ -33,7 +33,7 @@
  * Contributor(s):   -;
  *
  */
-package org.jfree.chart.util;
+package org.jfree.chart.internal;
 
 import org.jfree.chart.api.PublicCloneable;
 import org.jfree.chart.internal.Args;
@@ -44,6 +44,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.jfree.chart.util.Args;
 
 /**
  * Utilities for cloning.

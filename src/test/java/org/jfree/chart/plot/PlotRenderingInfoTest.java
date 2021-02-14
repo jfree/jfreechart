@@ -45,7 +45,7 @@ import java.awt.geom.Rectangle2D;
 
 import org.jfree.chart.ChartRenderingInfo;
 import org.jfree.chart.TestUtils;
-import org.jfree.chart.util.CloneUtils;
+import org.jfree.chart.internal.CloneUtils;
 import org.junit.jupiter.api.Test;
 
 /**

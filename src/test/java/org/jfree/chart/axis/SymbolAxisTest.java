@@ -43,7 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.awt.Color;
 
 import org.jfree.chart.TestUtils;
-import org.jfree.chart.util.CloneUtils;
+import org.jfree.chart.internal.CloneUtils;
 import org.junit.jupiter.api.Test;
 
 /**

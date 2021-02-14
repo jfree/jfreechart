@@ -39,7 +39,7 @@ package org.jfree.data;
 import java.util.ArrayList;
 
 import org.jfree.chart.TestUtils;
-import org.jfree.chart.util.CloneUtils;
+import org.jfree.chart.internal.CloneUtils;
 
 import org.jfree.data.general.DefaultPieDataset;
 

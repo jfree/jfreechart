@@ -35,6 +35,7 @@
 
 package org.jfree.chart.util;
 
+import org.jfree.chart.internal.CloneUtils;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
 import java.awt.Shape;

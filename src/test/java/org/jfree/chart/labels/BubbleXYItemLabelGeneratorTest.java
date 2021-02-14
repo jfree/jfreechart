@@ -46,7 +46,7 @@ import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 
 import org.jfree.chart.TestUtils;
-import org.jfree.chart.util.CloneUtils;
+import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.api.PublicCloneable;
 
 import org.jfree.data.xy.XYSeries;

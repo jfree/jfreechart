@@ -46,7 +46,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 
 import org.jfree.chart.entity.ChartEntity;
 import org.jfree.chart.entity.StandardEntityCollection;
-import org.jfree.chart.util.CloneUtils;
+import org.jfree.chart.internal.CloneUtils;
 import org.junit.jupiter.api.Test;
 
 /**

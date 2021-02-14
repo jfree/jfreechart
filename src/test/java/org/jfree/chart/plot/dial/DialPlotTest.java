@@ -49,7 +49,7 @@ import org.jfree.chart.TestUtils;
 
 import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.event.PlotChangeListener;
-import org.jfree.chart.util.CloneUtils;
+import org.jfree.chart.internal.CloneUtils;
 import org.junit.jupiter.api.Test;
 
 /**

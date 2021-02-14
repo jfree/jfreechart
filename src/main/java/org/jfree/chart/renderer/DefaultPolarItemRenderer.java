@@ -72,7 +72,7 @@ import org.jfree.chart.plot.PolarPlot;
 import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.urls.XYURLGenerator;
 import org.jfree.chart.util.BooleanList;
-import org.jfree.chart.util.CloneUtils;
+import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.util.ObjectList;
 import org.jfree.chart.internal.Args;
 import org.jfree.chart.api.PublicCloneable;

@@ -41,7 +41,6 @@ import org.junit.jupiter.api.Test;
 import java.awt.Color;
 import java.awt.GradientPaint;
 import org.jfree.chart.TestUtils;
-import org.jfree.chart.util.CloneUtils;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;

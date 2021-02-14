@@ -45,7 +45,7 @@ import java.util.List;
 import java.util.Objects;
 
 import org.jfree.chart.internal.Args;
-import org.jfree.chart.util.CloneUtils;
+import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.api.PublicCloneable;
 
 import org.jfree.data.DomainInfo;

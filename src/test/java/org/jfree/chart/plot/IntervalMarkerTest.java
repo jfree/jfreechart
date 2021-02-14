@@ -47,7 +47,7 @@ import org.jfree.chart.event.MarkerChangeListener;
 import org.jfree.chart.ui.GradientPaintTransformType;
 import org.jfree.chart.ui.GradientPaintTransformer;
 import org.jfree.chart.ui.StandardGradientPaintTransformer;
-import org.jfree.chart.util.CloneUtils;
+import org.jfree.chart.internal.CloneUtils;
 import org.junit.jupiter.api.Test;
 
 /**

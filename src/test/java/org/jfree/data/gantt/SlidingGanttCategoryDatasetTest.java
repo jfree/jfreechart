@@ -39,7 +39,7 @@ package org.jfree.data.gantt;
 import java.util.Date;
 
 import org.jfree.chart.TestUtils;
-import org.jfree.chart.util.CloneUtils;
+import org.jfree.chart.internal.CloneUtils;
 import org.jfree.data.UnknownKeyException;
 import org.junit.jupiter.api.Test;
 

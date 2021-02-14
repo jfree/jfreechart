@@ -49,7 +49,7 @@ import java.util.TimeZone;
 
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.date.MonthConstants;
-import org.jfree.chart.util.CloneUtils;
+import org.jfree.chart.internal.CloneUtils;
 import org.jfree.data.Range;
 import org.jfree.data.general.SeriesChangeEvent;
 import org.jfree.data.general.SeriesChangeListener;

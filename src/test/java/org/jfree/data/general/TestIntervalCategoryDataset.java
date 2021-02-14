@@ -38,7 +38,7 @@ package org.jfree.data.general;
 
 import java.io.Serializable;
 import java.util.List;
-import org.jfree.chart.util.CloneUtils;
+import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.api.PublicCloneable;
 
 import org.jfree.data.KeyedObjects2D;
