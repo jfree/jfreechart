@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,20 +27,21 @@
  * ------------------
  * StrokeMapTest.java
  * ------------------
- * (C) Copyright 2006-2020, by Object Refinery Limited.
+ * (C) Copyright 2006-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
  */
 
-package org.jfree.chart;
+package org.jfree.chart.internal;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.awt.BasicStroke;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.CloneUtils;
 import org.junit.jupiter.api.Test;
 

@@ -34,9 +34,8 @@
  *
  */
 
-package org.jfree.chart.panel;
+package org.jfree.chart.swing;
 
-import org.jfree.chart.swing.CrosshairOverlay;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
