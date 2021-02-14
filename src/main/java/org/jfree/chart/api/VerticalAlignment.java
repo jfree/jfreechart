@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -24,26 +24,32 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * Changes
- * -------
- * 08-Jul-2018 : Made HorizontalAlignment an enum (TH);
+ * ------------------------
+ * VerticalalAlignment.java
+ * ------------------------
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ *
+ * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Contributor(s):   Tracy Hiltbrand;
+ *
  */
 
-package org.jfree.chart.ui;
+package org.jfree.chart.api;
 
 /**
- * An enumeration of the horizontal alignment types ({@code LEFT}, 
- * {@code RIGHT} and {@code CENTER}).
+ * An enumeration of the vertical alignment types ({@code TOP}, 
+ * {@code BOTTOM} and {@code CENTER}).
  */
-public enum HorizontalAlignment {
+public enum VerticalAlignment {
 
-    /** Left alignment. */
-    LEFT,
+    /** Top alignment. */
+    TOP,
 
-    /** Right alignment. */
-    RIGHT,
+    /** Bottom alignment. */
+    BOTTOM,
 
     /** Center alignment. */
     CENTER
     
 }
+
