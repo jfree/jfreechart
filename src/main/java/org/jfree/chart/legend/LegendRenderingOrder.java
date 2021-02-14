@@ -34,7 +34,7 @@
  *
  */
 
-package org.jfree.chart;
+package org.jfree.chart.legend;
 
 /**
  * Represents the order for rendering legend items.
