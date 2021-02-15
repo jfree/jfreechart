@@ -80,7 +80,7 @@ import org.jfree.chart.renderer.PolarItemRenderer;
 import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
-import org.jfree.chart.ui.TextAnchor;
+import org.jfree.chart.text.TextAnchor;
 import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.util.ObjectList;
 import org.jfree.chart.util.PaintUtils;

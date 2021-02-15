@@ -90,7 +90,7 @@ import org.jfree.chart.text.TextBox;
 import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.ui.RectangleInsets;
-import org.jfree.chart.ui.TextAnchor;
+import org.jfree.chart.text.TextAnchor;
 import org.jfree.chart.urls.PieURLGenerator;
 import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.util.PaintUtils;

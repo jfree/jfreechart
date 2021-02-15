@@ -53,7 +53,7 @@ import org.jfree.chart.labels.ItemLabelPosition;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.ui.TextAnchor;
+import org.jfree.chart.text.TextAnchor;
 import org.jfree.chart.api.PublicCloneable;
 import org.jfree.data.DataUtils;
 import org.jfree.data.Range;

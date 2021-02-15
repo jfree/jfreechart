@@ -38,7 +38,7 @@ package org.jfree.chart.labels;
 
 import java.io.Serializable;
 import java.util.Objects;
-import org.jfree.chart.ui.TextAnchor;
+import org.jfree.chart.text.TextAnchor;
 import org.jfree.chart.internal.Args;
 
 /**

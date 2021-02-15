@@ -39,7 +39,7 @@ package org.jfree.chart.axis;
 import java.io.Serializable;
 import java.util.Objects;
 
-import org.jfree.chart.ui.TextAnchor;
+import org.jfree.chart.text.TextAnchor;
 import org.jfree.chart.internal.Args;
 
 /**
