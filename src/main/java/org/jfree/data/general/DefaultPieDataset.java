@@ -76,7 +76,7 @@ public class DefaultPieDataset<K extends Comparable<K>> extends AbstractDataset
      * @param source  the data ({@code null} not permitted).
      */
     public DefaultPieDataset(KeyedValues<K> source) {
-        Args.nullNotPermitted(data, "data");
+        Args.nullNotPermitted(source, "source");
         this.data = new DefaultKeyedValues<>();
         for (int i = 0; i < source.getItemCount(); i++) {
             this.data.addValue(source.getKey(i), source.getValue(i));
