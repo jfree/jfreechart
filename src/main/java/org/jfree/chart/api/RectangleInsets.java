@@ -26,11 +26,12 @@
  *
  */
 
-package org.jfree.chart.ui;
+package org.jfree.chart.api;
 
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 import org.jfree.chart.api.UnitType;
+import org.jfree.chart.ui.LengthAdjustmentType;
 
 /**
  * Represents the insets for a rectangle, specified in absolute or relative 

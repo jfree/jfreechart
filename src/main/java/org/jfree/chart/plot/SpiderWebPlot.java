@@ -73,7 +73,7 @@ import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.labels.CategoryItemLabelGenerator;
 import org.jfree.chart.labels.CategoryToolTipGenerator;
 import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
-import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.api.RectangleInsets;
 import org.jfree.chart.urls.CategoryURLGenerator;
 import org.jfree.chart.util.PaintList;
 import org.jfree.chart.util.PaintUtils;

@@ -65,7 +65,7 @@ import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.event.RendererChangeListener;
 import org.jfree.chart.renderer.WaferMapRenderer;
-import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.api.RectangleInsets;
 import org.jfree.chart.util.ResourceBundleWrapper;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.WaferMapDataset;

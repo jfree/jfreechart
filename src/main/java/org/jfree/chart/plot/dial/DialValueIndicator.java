@@ -57,8 +57,8 @@ import java.util.Objects;
 
 import org.jfree.chart.internal.HashUtils;
 import org.jfree.chart.text.TextUtils;
-import org.jfree.chart.ui.RectangleAnchor;
-import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.api.RectangleAnchor;
+import org.jfree.chart.api.RectangleInsets;
 import org.jfree.chart.ui.Size2D;
 import org.jfree.chart.text.TextAnchor;
 import org.jfree.chart.util.PaintUtils;

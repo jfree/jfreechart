@@ -55,7 +55,7 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.AbstractRenderer;
 import org.jfree.chart.ui.GradientPaintTransformType;
-import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.api.RectangleEdge;
 import org.jfree.chart.ui.StandardGradientPaintTransformer;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.internal.Args;

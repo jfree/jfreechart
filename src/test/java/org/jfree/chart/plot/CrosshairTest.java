@@ -49,7 +49,7 @@ import java.text.NumberFormat;
 import org.jfree.chart.TestUtils;
 
 import org.jfree.chart.labels.StandardCrosshairLabelGenerator;
-import org.jfree.chart.ui.RectangleAnchor;
+import org.jfree.chart.api.RectangleAnchor;
 import org.jfree.chart.api.PublicCloneable;
 import org.junit.jupiter.api.Test;
 

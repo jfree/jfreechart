@@ -45,8 +45,8 @@ import java.util.Date;
 import java.util.Locale;
 
 import org.jfree.chart.api.HorizontalAlignment;
-import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.api.RectangleEdge;
+import org.jfree.chart.api.RectangleInsets;
 import org.jfree.chart.api.VerticalAlignment;
 
 /**

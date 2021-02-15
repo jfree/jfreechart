@@ -58,7 +58,7 @@ import org.jfree.chart.internal.HashUtils;
 import org.jfree.chart.internal.SerialUtils;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.api.RectangleEdge;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.ShapeUtils;
 import org.jfree.data.Range;

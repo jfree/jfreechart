@@ -38,7 +38,7 @@ package org.jfree.chart.axis;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.api.RectangleEdge;
 import org.jfree.chart.internal.Args;
 
 /**

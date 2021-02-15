@@ -38,7 +38,7 @@ package org.jfree.chart.axis;
 
 import java.io.Serializable;
 import org.jfree.chart.text.TextBlockAnchor;
-import org.jfree.chart.ui.RectangleAnchor;
+import org.jfree.chart.api.RectangleAnchor;
 import org.jfree.chart.text.TextAnchor;
 import org.jfree.chart.internal.Args;
 

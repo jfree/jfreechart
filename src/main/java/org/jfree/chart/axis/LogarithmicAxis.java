@@ -47,7 +47,7 @@ import java.util.List;
 
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.ValueAxisPlot;
-import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.api.RectangleEdge;
 import org.jfree.chart.text.TextAnchor;
 import org.jfree.data.Range;
 

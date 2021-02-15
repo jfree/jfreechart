@@ -46,8 +46,8 @@ import java.awt.Font;
 import java.awt.GradientPaint;
 
 import org.jfree.chart.TestUtils;
-import org.jfree.chart.ui.RectangleAnchor;
-import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.api.RectangleAnchor;
+import org.jfree.chart.api.RectangleInsets;
 import org.jfree.chart.text.TextAnchor;
 import org.jfree.chart.internal.CloneUtils;
 

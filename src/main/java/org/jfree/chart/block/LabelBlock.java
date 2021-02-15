@@ -53,7 +53,7 @@ import org.jfree.chart.entity.StandardEntityCollection;
 import org.jfree.chart.text.TextBlock;
 import org.jfree.chart.text.TextBlockAnchor;
 import org.jfree.chart.text.TextUtils;
-import org.jfree.chart.ui.RectangleAnchor;
+import org.jfree.chart.api.RectangleAnchor;
 import org.jfree.chart.ui.Size2D;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.internal.Args;

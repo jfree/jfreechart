@@ -45,7 +45,7 @@ import java.awt.geom.Rectangle2D;
 import java.awt.geom.RectangularShape;
 import java.io.Serializable;
 import org.jfree.chart.ui.GradientPaintTransformer;
-import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.api.RectangleEdge;
 
 /**
  * An implementation of the {@link XYBarPainter} interface that preserves the

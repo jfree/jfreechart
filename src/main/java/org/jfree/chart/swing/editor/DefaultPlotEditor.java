@@ -67,7 +67,7 @@ import org.jfree.chart.renderer.category.CategoryItemRenderer;
 import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.chart.renderer.xy.StandardXYItemRenderer;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
-import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.api.RectangleInsets;
 import org.jfree.chart.util.ResourceBundleWrapper;
 
 /**

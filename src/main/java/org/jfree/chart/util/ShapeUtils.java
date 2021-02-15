@@ -50,7 +50,7 @@ import java.awt.geom.Rectangle2D;
 import java.util.Arrays;
 import java.util.Objects;
 
-import org.jfree.chart.ui.RectangleAnchor;
+import org.jfree.chart.api.RectangleAnchor;
 
 /**
  * Utility methods for {@link Shape} objects.

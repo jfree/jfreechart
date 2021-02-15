@@ -26,11 +26,12 @@
  *
  */
 
-package org.jfree.chart.ui;
+package org.jfree.chart.api;
 
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import org.jfree.chart.internal.Args;
+import org.jfree.chart.ui.Size2D;
 
 /**
  * Used to indicate an anchor point for a rectangle.

@@ -58,7 +58,7 @@ import javax.swing.JTextField;
 import org.jfree.chart.axis.Axis;
 import org.jfree.chart.axis.LogAxis;
 import org.jfree.chart.axis.NumberAxis;
-import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.api.RectangleInsets;
 import org.jfree.chart.util.ResourceBundleWrapper;
 
 /**

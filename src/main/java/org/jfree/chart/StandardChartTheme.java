@@ -91,7 +91,7 @@ import org.jfree.chart.legend.LegendTitle;
 import org.jfree.chart.legend.PaintScaleLegend;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.chart.title.Title;
-import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.api.RectangleInsets;
 import org.jfree.chart.util.DefaultShadowGenerator;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.internal.Args;

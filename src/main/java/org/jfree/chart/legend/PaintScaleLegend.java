@@ -57,7 +57,7 @@ import org.jfree.chart.event.TitleChangeEvent;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.PaintScale;
-import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.api.RectangleEdge;
 import org.jfree.chart.ui.Size2D;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.internal.Args;

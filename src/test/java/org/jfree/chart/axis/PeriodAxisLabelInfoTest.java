@@ -52,7 +52,7 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 import org.jfree.chart.TestUtils;
-import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.api.RectangleInsets;
 
 import org.jfree.data.time.Day;
 import org.jfree.data.time.Month;

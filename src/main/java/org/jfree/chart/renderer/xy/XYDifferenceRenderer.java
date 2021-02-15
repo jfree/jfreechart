@@ -64,7 +64,7 @@ import org.jfree.chart.plot.CrosshairState;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.api.RectangleEdge;
 import org.jfree.chart.urls.XYURLGenerator;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.internal.Args;

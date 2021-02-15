@@ -52,7 +52,7 @@ import org.jfree.chart.block.Block;
 import org.jfree.chart.block.LengthConstraintType;
 import org.jfree.chart.block.RectangleConstraint;
 import org.jfree.chart.ui.GradientPaintTransformer;
-import org.jfree.chart.ui.RectangleAnchor;
+import org.jfree.chart.api.RectangleAnchor;
 import org.jfree.chart.ui.Size2D;
 import org.jfree.chart.ui.StandardGradientPaintTransformer;
 import org.jfree.chart.util.PaintUtils;

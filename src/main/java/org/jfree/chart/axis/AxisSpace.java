@@ -38,7 +38,7 @@ package org.jfree.chart.axis;
 
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
-import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.api.RectangleEdge;
 import org.jfree.chart.internal.Args;
 import org.jfree.chart.api.PublicCloneable;
 

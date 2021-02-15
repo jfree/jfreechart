@@ -37,7 +37,7 @@
 package org.jfree.chart.title;
 
 import org.jfree.chart.api.HorizontalAlignment;
-import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.api.RectangleEdge;
 import org.jfree.chart.api.VerticalAlignment;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;

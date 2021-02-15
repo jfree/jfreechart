@@ -50,7 +50,7 @@ import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.LookupPaintScale;
 import org.jfree.chart.renderer.PaintScale;
-import org.jfree.chart.ui.RectangleAnchor;
+import org.jfree.chart.api.RectangleAnchor;
 import org.jfree.chart.internal.Args;
 import org.jfree.chart.api.PublicCloneable;
 import org.jfree.data.Range;

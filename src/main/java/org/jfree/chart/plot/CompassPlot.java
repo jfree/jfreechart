@@ -70,7 +70,7 @@ import org.jfree.chart.needle.PlumNeedle;
 import org.jfree.chart.needle.PointerNeedle;
 import org.jfree.chart.needle.ShipNeedle;
 import org.jfree.chart.needle.WindNeedle;
-import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.api.RectangleInsets;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.internal.Args;
 import org.jfree.chart.util.ResourceBundleWrapper;

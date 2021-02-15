@@ -42,7 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.text.TextBlockAnchor;
-import org.jfree.chart.ui.RectangleAnchor;
+import org.jfree.chart.api.RectangleAnchor;
 import org.jfree.chart.text.TextAnchor;
 
 import org.junit.jupiter.api.Test;

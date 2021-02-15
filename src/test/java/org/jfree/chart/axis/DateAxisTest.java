@@ -55,7 +55,7 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 import org.jfree.chart.TestUtils;
-import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.api.RectangleEdge;
 
 import org.jfree.data.time.DateRange;
 import org.jfree.data.time.Day;

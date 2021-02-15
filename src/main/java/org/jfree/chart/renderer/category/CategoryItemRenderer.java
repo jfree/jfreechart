@@ -57,7 +57,7 @@ import org.jfree.chart.plot.CategoryMarker;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.Marker;
 import org.jfree.chart.plot.PlotRenderingInfo;
-import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.api.RectangleEdge;
 import org.jfree.chart.urls.CategoryURLGenerator;
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;

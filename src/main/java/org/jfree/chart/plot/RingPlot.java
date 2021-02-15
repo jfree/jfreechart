@@ -59,7 +59,7 @@ import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.entity.PieSectionEntity;
 import org.jfree.chart.labels.PieToolTipGenerator;
 import org.jfree.chart.text.TextUtils;
-import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.api.RectangleInsets;
 import org.jfree.chart.text.TextAnchor;
 import org.jfree.chart.urls.PieURLGenerator;
 import org.jfree.chart.internal.LineUtils;

@@ -61,7 +61,7 @@ import org.jfree.chart.labels.CategoryItemLabelGenerator;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.ui.GradientPaintTransformer;
-import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.api.RectangleEdge;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.api.PublicCloneable;
 import org.jfree.chart.internal.SerialUtils;
