@@ -25,7 +25,7 @@
  * Other names may be trademarks of their respective owners.]
  *
  * --------------
- * ShapeList.java
+ * PaintList.java
  * --------------
  * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
@@ -33,59 +33,47 @@
  * Contributors:     -;
  */
 
-package org.jfree.chart.util;
+package org.jfree.chart.internal;
 
-import java.awt.Shape;
+import java.awt.Paint;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import org.jfree.chart.internal.SerialUtils;
+import org.jfree.chart.util.PaintUtils;
 
 /**
- * A table of {@link Shape} objects.
+ * A table of {@link Paint} objects.
  */
-public class ShapeList extends AbstractObjectList {
+public class PaintList extends AbstractObjectList {
+
+    private static final long serialVersionUID = -708669381577938219L;
 
     /**
      * Creates a new list.
      */
-    public ShapeList() {
+    public PaintList() {
         super();
     }
 
     /**
-     * Returns a {@link Shape} object from the list.
+     * Returns a {@link Paint} object from the list.
      *
      * @param index the index (zero-based).
      *
      * @return The object.
      */
-    public Shape getShape(int index) {
-        return (Shape) get(index);
+    public Paint getPaint(int index) {
+        return (Paint) get(index);
     }
 
     /**
-     * Sets the {@link Shape} for an item in the list.  The list is expanded
-     * if necessary.
+     * Sets the {@link Paint} for an item in the list.  The list is expanded if necessary.
      *
      * @param index  the index (zero-based).
-     * @param shape  the {@link Shape}.
+     * @param paint  the {@link Paint}.
      */
-    public void setShape(int index, Shape shape) {
-        set(index, shape);
-    }
-
-    /**
-     * Returns an independent copy of the list.
-     *
-     * @return A clone.
-     *
-     * @throws CloneNotSupportedException if an item in the list does not
-     *         support cloning.
-     */
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
+    public void setPaint(int index, Paint paint) {
+        set(index, paint);
     }
 
     /**
@@ -97,22 +85,23 @@ public class ShapeList extends AbstractObjectList {
      */
     @Override
     public boolean equals(Object obj) {
-
+        if (obj == null) {
+            return false;
+        }
         if (obj == this) {
             return true;
         }
-        if (!(obj instanceof ShapeList)) {
+        if (!(obj instanceof PaintList)) {
             return false;
         }
-        ShapeList that = (ShapeList) obj;
+        PaintList that = (PaintList) obj;
         int listSize = size();
         for (int i = 0; i < listSize; i++) {
-           if (!ShapeUtils.equal((Shape) get(i), (Shape) that.get(i))) {
+           if (!PaintUtils.equal(getPaint(i), that.getPaint(i))) {
                return false;
            }
         }
         return true;
-
     }
 
     /**
@@ -135,13 +124,13 @@ public class ShapeList extends AbstractObjectList {
     private void writeObject(ObjectOutputStream stream) throws IOException {
 
         stream.defaultWriteObject();
-        final int count = size();
+        int count = size();
         stream.writeInt(count);
         for (int i = 0; i < count; i++) {
-            final Shape shape = getShape(i);
-            if (shape != null) {
+            Paint paint = getPaint(i);
+            if (paint != null) {
                 stream.writeInt(i);
-                SerialUtils.writeShape(shape, stream);
+                SerialUtils.writePaint(paint, stream);
             }
             else {
                 stream.writeInt(-1);
@@ -149,7 +138,7 @@ public class ShapeList extends AbstractObjectList {
         }
 
     }
-
+    
     /**
      * Provides serialization support.
      *
@@ -161,16 +150,15 @@ public class ShapeList extends AbstractObjectList {
     private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
 
         stream.defaultReadObject();
-        final int count = stream.readInt();
+        int count = stream.readInt();
         for (int i = 0; i < count; i++) {
-            final int index = stream.readInt();
+            int index = stream.readInt();
             if (index != -1) {
-                setShape(index, SerialUtils.readShape(stream));
+                setPaint(index, SerialUtils.readPaint(stream));
             }
         }
-
+        
     }
 
 }
-
 

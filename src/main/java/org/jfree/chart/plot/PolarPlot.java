@@ -82,7 +82,7 @@ import org.jfree.chart.api.RectangleEdge;
 import org.jfree.chart.api.RectangleInsets;
 import org.jfree.chart.text.TextAnchor;
 import org.jfree.chart.internal.CloneUtils;
-import org.jfree.chart.util.ObjectList;
+import org.jfree.chart.internal.ObjectList;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.internal.Args;
 import org.jfree.chart.api.PublicCloneable;

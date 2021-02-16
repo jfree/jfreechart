@@ -24,86 +24,93 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * --------------
- * PaintList.java
- * --------------
+ * ---------------
+ * StrokeList.java
+ * ---------------
  * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributors:     -;
  */
 
-package org.jfree.chart.util;
+package org.jfree.chart.internal;
 
-import java.awt.Paint;
+import java.awt.Stroke;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import org.jfree.chart.internal.SerialUtils;
 
 /**
- * A table of {@link Paint} objects.
+ * A table of {@link Stroke} objects.
  */
-public class PaintList extends AbstractObjectList {
-
-    private static final long serialVersionUID = -708669381577938219L;
+public class StrokeList extends AbstractObjectList {
 
     /**
      * Creates a new list.
      */
-    public PaintList() {
+    public StrokeList() {
         super();
     }
 
     /**
-     * Returns a {@link Paint} object from the list.
+     * Returns a {@link Stroke} object from the list.
      *
      * @param index the index (zero-based).
      *
      * @return The object.
      */
-    public Paint getPaint(int index) {
-        return (Paint) get(index);
+    public Stroke getStroke(int index) {
+        return (Stroke) get(index);
     }
 
     /**
-     * Sets the {@link Paint} for an item in the list.  The list is expanded if necessary.
+     * Sets the {@link Stroke} for an item in the list.  The list is expanded if necessary.
      *
      * @param index  the index (zero-based).
-     * @param paint  the {@link Paint}.
+     * @param stroke  the {@link Stroke}.
      */
-    public void setPaint(int index, Paint paint) {
-        set(index, paint);
+    public void setStroke(int index, Stroke stroke) {
+        set(index, stroke);
     }
 
+    /**
+     * Returns an independent copy of the list.
+     * 
+     * @return A clone.
+     * 
+     * @throws CloneNotSupportedException if an item in the list cannot be cloned.
+     */
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+    
     /**
      * Tests the list for equality with another object (typically also a list).
      *
-     * @param obj  the other object ({@code null} permitted).
+     * @param o  the other object.
      *
      * @return A boolean.
      */
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
+    public boolean equals(Object o) {
+
+        if (o == null) {
             return false;
         }
-        if (obj == this) {
+        
+        if (o == this) {
             return true;
         }
-        if (!(obj instanceof PaintList)) {
-            return false;
+        
+        if (o instanceof StrokeList) {
+            return super.equals(o);
         }
-        PaintList that = (PaintList) obj;
-        int listSize = size();
-        for (int i = 0; i < listSize; i++) {
-           if (!PaintUtils.equal(getPaint(i), that.getPaint(i))) {
-               return false;
-           }
-        }
-        return true;
-    }
 
+        return false;
+
+    }
+    
     /**
      * Returns a hash code value for the object.
      *
@@ -124,13 +131,13 @@ public class PaintList extends AbstractObjectList {
     private void writeObject(ObjectOutputStream stream) throws IOException {
 
         stream.defaultWriteObject();
-        int count = size();
+        final int count = size();
         stream.writeInt(count);
         for (int i = 0; i < count; i++) {
-            Paint paint = getPaint(i);
-            if (paint != null) {
+            final Stroke stroke = getStroke(i);
+            if (stroke != null) {
                 stream.writeInt(i);
-                SerialUtils.writePaint(paint, stream);
+                SerialUtils.writeStroke(stroke, stream);
             }
             else {
                 stream.writeInt(-1);
@@ -154,11 +161,12 @@ public class PaintList extends AbstractObjectList {
         for (int i = 0; i < count; i++) {
             int index = stream.readInt();
             if (index != -1) {
-                setPaint(index, SerialUtils.readPaint(stream));
+                setStroke(index, SerialUtils.readStroke(stream));
             }
         }
         
     }
 
 }
+
 

@@ -69,7 +69,7 @@ import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.api.RectangleEdge;
 import org.jfree.chart.urls.XYURLGenerator;
-import org.jfree.chart.util.BooleanList;
+import org.jfree.chart.internal.BooleanList;
 import org.jfree.chart.internal.Args;
 import org.jfree.chart.api.PublicCloneable;
 import org.jfree.chart.internal.SerialUtils;

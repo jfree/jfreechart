@@ -34,7 +34,7 @@
  *
  */
 
-package org.jfree.chart.util;
+package org.jfree.chart.internal;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

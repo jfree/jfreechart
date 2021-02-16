@@ -52,7 +52,7 @@ import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.PlotState;
-import org.jfree.chart.util.ObjectList;
+import org.jfree.chart.internal.ObjectList;
 import org.jfree.chart.internal.Args;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.ValueDataset;

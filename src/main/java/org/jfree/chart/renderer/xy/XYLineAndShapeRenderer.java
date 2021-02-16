@@ -58,7 +58,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.api.RectangleEdge;
-import org.jfree.chart.util.BooleanList;
+import org.jfree.chart.internal.BooleanList;
 import org.jfree.chart.internal.LineUtils;
 import org.jfree.chart.internal.Args;
 import org.jfree.chart.api.PublicCloneable;

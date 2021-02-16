@@ -24,94 +24,97 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ---------------
- * StrokeList.java
- * ---------------
+ * --------------
+ * ShapeList.java
+ * --------------
  * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributors:     -;
  */
 
-package org.jfree.chart.util;
+package org.jfree.chart.internal;
 
-import java.awt.Stroke;
+import java.awt.Shape;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import org.jfree.chart.internal.SerialUtils;
+import org.jfree.chart.util.ShapeUtils;
 
 /**
- * A table of {@link Stroke} objects.
+ * A table of {@link Shape} objects.
  */
-public class StrokeList extends AbstractObjectList {
+public class ShapeList extends AbstractObjectList {
 
     /**
      * Creates a new list.
      */
-    public StrokeList() {
+    public ShapeList() {
         super();
     }
 
     /**
-     * Returns a {@link Stroke} object from the list.
+     * Returns a {@link Shape} object from the list.
      *
      * @param index the index (zero-based).
      *
      * @return The object.
      */
-    public Stroke getStroke(int index) {
-        return (Stroke) get(index);
+    public Shape getShape(int index) {
+        return (Shape) get(index);
     }
 
     /**
-     * Sets the {@link Stroke} for an item in the list.  The list is expanded if necessary.
+     * Sets the {@link Shape} for an item in the list.  The list is expanded
+     * if necessary.
      *
      * @param index  the index (zero-based).
-     * @param stroke  the {@link Stroke}.
+     * @param shape  the {@link Shape}.
      */
-    public void setStroke(int index, Stroke stroke) {
-        set(index, stroke);
+    public void setShape(int index, Shape shape) {
+        set(index, shape);
     }
 
     /**
      * Returns an independent copy of the list.
-     * 
+     *
      * @return A clone.
-     * 
-     * @throws CloneNotSupportedException if an item in the list cannot be cloned.
+     *
+     * @throws CloneNotSupportedException if an item in the list does not
+     *         support cloning.
      */
     @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
-    
+
     /**
      * Tests the list for equality with another object (typically also a list).
      *
-     * @param o  the other object.
+     * @param obj  the other object ({@code null} permitted).
      *
      * @return A boolean.
      */
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(Object obj) {
 
-        if (o == null) {
-            return false;
-        }
-        
-        if (o == this) {
+        if (obj == this) {
             return true;
         }
-        
-        if (o instanceof StrokeList) {
-            return super.equals(o);
+        if (!(obj instanceof ShapeList)) {
+            return false;
         }
-
-        return false;
+        ShapeList that = (ShapeList) obj;
+        int listSize = size();
+        for (int i = 0; i < listSize; i++) {
+           if (!ShapeUtils.equal((Shape) get(i), (Shape) that.get(i))) {
+               return false;
+           }
+        }
+        return true;
 
     }
-    
+
     /**
      * Returns a hash code value for the object.
      *
@@ -135,10 +138,10 @@ public class StrokeList extends AbstractObjectList {
         final int count = size();
         stream.writeInt(count);
         for (int i = 0; i < count; i++) {
-            final Stroke stroke = getStroke(i);
-            if (stroke != null) {
+            final Shape shape = getShape(i);
+            if (shape != null) {
                 stream.writeInt(i);
-                SerialUtils.writeStroke(stroke, stream);
+                SerialUtils.writeShape(shape, stream);
             }
             else {
                 stream.writeInt(-1);
@@ -146,7 +149,7 @@ public class StrokeList extends AbstractObjectList {
         }
 
     }
-    
+
     /**
      * Provides serialization support.
      *
@@ -158,14 +161,14 @@ public class StrokeList extends AbstractObjectList {
     private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
 
         stream.defaultReadObject();
-        int count = stream.readInt();
+        final int count = stream.readInt();
         for (int i = 0; i < count; i++) {
-            int index = stream.readInt();
+            final int index = stream.readInt();
             if (index != -1) {
-                setStroke(index, SerialUtils.readStroke(stream));
+                setShape(index, SerialUtils.readShape(stream));
             }
         }
-        
+
     }
 
 }

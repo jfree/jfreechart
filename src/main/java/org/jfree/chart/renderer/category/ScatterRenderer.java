@@ -56,7 +56,7 @@ import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.chart.util.BooleanList;
+import org.jfree.chart.internal.BooleanList;
 import org.jfree.chart.api.PublicCloneable;
 import org.jfree.chart.util.ShapeUtils;
 import org.jfree.data.Range;

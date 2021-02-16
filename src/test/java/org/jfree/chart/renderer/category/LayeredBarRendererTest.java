@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * LayeredBarRendererTest.java
  * ---------------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -36,7 +36,9 @@
 
 package org.jfree.chart.renderer.category;
 
+import java.awt.Color;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -45,9 +47,9 @@ import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.CategoryPlot;
-import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.api.PublicCloneable;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.chart.internal.CloneUtils;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -62,6 +64,11 @@ public class LayeredBarRendererTest {
     public void testEquals() {
         LayeredBarRenderer r1 = new LayeredBarRenderer();
         LayeredBarRenderer r2 = new LayeredBarRenderer();
+        assertEquals(r1, r2);
+        
+        r1.setSeriesBarWidth(1, 10.0);
+        assertNotEquals(r1, r2);
+        r2.setSeriesBarWidth(1, 10.0);
         assertEquals(r1, r2);
     }
 
@@ -105,6 +112,8 @@ public class LayeredBarRendererTest {
     @Test
     public void testSerialization() {
         LayeredBarRenderer r1 = new LayeredBarRenderer();
+        r1.setDefaultFillPaint(Color.RED);
+        r1.setSeriesBarWidth(1, 9.0);
         LayeredBarRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }

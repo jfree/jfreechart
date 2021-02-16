@@ -70,14 +70,14 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.legend.LegendTitle;
 import org.jfree.chart.text.TextAnchor;
 import org.jfree.chart.internal.Args;
-import org.jfree.chart.util.BooleanList;
-import org.jfree.chart.util.PaintList;
+import org.jfree.chart.internal.BooleanList;
+import org.jfree.chart.internal.PaintList;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.api.PublicCloneable;
 import org.jfree.chart.internal.SerialUtils;
-import org.jfree.chart.util.ShapeList;
+import org.jfree.chart.internal.ShapeList;
 import org.jfree.chart.util.ShapeUtils;
-import org.jfree.chart.util.StrokeList;
+import org.jfree.chart.internal.StrokeList;
 import org.jfree.data.ItemKey;
 
 /**

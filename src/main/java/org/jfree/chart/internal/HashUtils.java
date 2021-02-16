@@ -39,9 +39,6 @@ package org.jfree.chart.internal;
 import java.awt.GradientPaint;
 import java.awt.Paint;
 import java.awt.Stroke;
-import org.jfree.chart.util.BooleanList;
-import org.jfree.chart.util.PaintList;
-import org.jfree.chart.util.StrokeList;
 
 /**
  * Some utility methods for calculating hash codes.  
