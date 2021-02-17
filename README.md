@@ -1,7 +1,7 @@
 JFreeChart
 ==========
 
-Version 1.5.2, 31 December 2020.
+Version 1.5.3, 17 February 2021.
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.jfree/jfreechart/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.jfree/jfreechart)
 
@@ -57,7 +57,8 @@ at GitHub:
 History
 -------
 
-##### Version 1.5.3 (not yet released)
+##### Version 1.5.3 (17 February 2021)
+- add new `FlowPlot` class for drawing Sankey charts;
 - throw exception in `DefaultPieDataset` for invalid index ([#212](https://github.com/jfree/jfreechart/issues/212));
 - remove unused `URLUtilities` class.
 
