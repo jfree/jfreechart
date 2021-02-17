@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -119,7 +119,7 @@ public class CyclicNumberAxis extends NumberAxis {
     public static Stroke DEFAULT_ADVANCE_LINE_STROKE = new BasicStroke(1.0f);
 
     /** The default axis line paint. */
-    public static final Paint DEFAULT_ADVANCE_LINE_PAINT = Color.gray;
+    public static final Paint DEFAULT_ADVANCE_LINE_PAINT = Color.GRAY;
 
     /** The offset. */
     protected double offset;

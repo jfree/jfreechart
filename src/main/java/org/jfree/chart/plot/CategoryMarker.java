@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * CategoryMarker.java
  * -------------------
- * (C) Copyright 2005-2020, by Object Refinery Limited.
+ * (C) Copyright 2005-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Nicolas Brodu;
@@ -70,7 +70,7 @@ public class CategoryMarker extends Marker implements Cloneable, Serializable {
      * @param key  the category key.
      */
     public CategoryMarker(Comparable key) {
-        this(key, Color.gray, new BasicStroke(1.0f));
+        this(key, Color.GRAY, new BasicStroke(1.0f));
     }
 
     /**

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * IntervalMarker.java
  * -------------------
- * (C) Copyright 2002-2020, by Object Refinery Limited.
+ * (C) Copyright 2002-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -71,7 +71,7 @@ public class IntervalMarker extends Marker implements Cloneable, Serializable {
      * @param end  the end of the interval.
      */
     public IntervalMarker(double start, double end) {
-        this(start, end, Color.gray, new BasicStroke(0.5f), Color.gray,
+        this(start, end, Color.GRAY, new BasicStroke(0.5f), Color.GRAY,
                 new BasicStroke(0.5f), 0.8f);
     }
 

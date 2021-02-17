@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * StatisticalBarRenderer.java
  * ---------------------------
- * (C) Copyright 2002-2020, by Pascal Collet and Contributors.
+ * (C) Copyright 2002-2021, by Pascal Collet and Contributors.
  *
  * Original Author:  Pascal Collet;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -100,7 +100,7 @@ public class StatisticalBarRenderer extends BarRenderer
      */
     public StatisticalBarRenderer() {
         super();
-        this.errorIndicatorPaint = Color.gray;
+        this.errorIndicatorPaint = Color.GRAY;
         this.errorIndicatorStroke = new BasicStroke(1.0f);
     }
 
