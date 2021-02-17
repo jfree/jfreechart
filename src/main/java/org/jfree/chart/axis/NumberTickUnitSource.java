@@ -32,10 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * Changes
- * -------
- * 18-Mar-2016 : Version 1 (DG);
- *
  */
 
 package org.jfree.chart.axis;
@@ -177,10 +173,15 @@ public class NumberTickUnitSource implements TickUnitSource, Serializable {
     }
     
     private DecimalFormat dfNeg4 = new DecimalFormat("0.0000");
+
     private DecimalFormat dfNeg3 = new DecimalFormat("0.000");
+
     private DecimalFormat dfNeg2 = new DecimalFormat("0.00");
+
     private DecimalFormat dfNeg1 = new DecimalFormat("0.0");
+
     private DecimalFormat df0 = new DecimalFormat("#,##0");
+
     private DecimalFormat df = new DecimalFormat("#.######E0");
     
     private NumberFormat getTickLabelFormat() {

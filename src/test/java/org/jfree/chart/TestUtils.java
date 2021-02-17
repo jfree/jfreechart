@@ -75,8 +75,17 @@ public class TestUtils {
         return false;
     }
 
-    public static Object serialised(Object original) {
-        Object result = null;
+
+    /**
+     * Serialises an object, deserialises it and returns the deserialised 
+     * version.
+     * 
+     * @param original  the original object.
+     * 
+     * @return A serialised and deserialised version of the original.
+     */
+    public static <K> K serialised(K original) {
+        K result = null;
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
         ObjectOutput out;
         try {
@@ -85,7 +94,7 @@ public class TestUtils {
             out.close();
             ObjectInput in = new ObjectInputStream(
                     new ByteArrayInputStream(buffer.toByteArray()));
-            result = in.readObject();
+            result = (K) in.readObject();
             in.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
