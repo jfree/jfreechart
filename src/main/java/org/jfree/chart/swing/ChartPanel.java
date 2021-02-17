@@ -51,7 +51,6 @@ package org.jfree.chart.swing;
 
 import java.awt.AWTEvent;
 import java.awt.AlphaComposite;
-import java.awt.Color;
 import java.awt.Composite;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -77,8 +76,6 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
-import static java.awt.print.Printable.NO_SUCH_PAGE;
-import static java.awt.print.Printable.PAGE_EXISTS;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import java.io.BufferedWriter;
@@ -128,7 +125,6 @@ import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.Zoomable;
 import org.jfree.chart.internal.Args;
 import org.jfree.chart.util.ResourceBundleWrapper;
-import org.jfree.chart.internal.SerialUtils;
 
 /**
  * A Swing GUI component for displaying a {@link JFreeChart} object.

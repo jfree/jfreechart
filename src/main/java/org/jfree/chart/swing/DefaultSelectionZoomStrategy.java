@@ -1,4 +1,6 @@
-package org.jfree.chart;
+package org.jfree.chart.swing;
+
+import org.jfree.chart.internal.SerialUtils;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -8,9 +10,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.SerialUtils;
 
 /**
  * A strategy for zooming plots on the chart panel by selecting a smaller region on the initial screen.
@@ -157,7 +156,6 @@ public class DefaultSelectionZoomStrategy implements Serializable {
      * @since 1.0.13
      */
     public void setZoomFillPaint(Paint paint) {
-        Args.nullNotPermitted(paint, "paint");
         this.zoomFillPaint = paint;
     }
 
