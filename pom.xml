@@ -10,7 +10,7 @@
 
     <artifactId>jfreechart</artifactId>
     <groupId>org.jfree</groupId>
-    <version>1.5.2</version>
+    <version>1.5.3</version>
     <packaging>jar</packaging>
 
     <organization>
@@ -21,8 +21,9 @@
 
     <description>
         JFreeChart is a class library, written in Java, for generating charts. 
-        Utilising the Java2D APIs, it currently supports bar charts, pie charts, 
-        line charts, XY-plots and time series plots.
+        Utilising the Java2D API, it supports a wide range of chart types including
+        bar charts, pie charts, line charts, XY-plots, time series plots, Sankey charts
+        and more.
     </description>
 
     <url>http://www.jfree.org/jfreechart/</url>
@@ -129,7 +130,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.2</version>
+                <version>3.0.0-M4</version>
                 <configuration>
                     <includes>
                         <include>**/*Test.java</include>
@@ -142,7 +143,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.22.2</version>
+                <version>3.0.0-M4</version>
             </plugin>       
 
             <plugin>
@@ -155,17 +156,11 @@
             </plugin>
 
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>animal-sniffer-maven-plugin</artifactId>
-                <version>1.18</version>
-                <configuration>
-                    <signature>
-                        <groupId>org.codehaus.mojo.signature</groupId>
-                        <artifactId>java16</artifactId>
-                        <version>1.0</version>
-                    </signature>
-                </configuration>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>2.5.2</version>
             </plugin>
+
         </plugins>
     </build>
 
