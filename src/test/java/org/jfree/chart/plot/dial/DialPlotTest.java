@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * -----------------
  * DialPlotTest.java
  * -----------------
- * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 03-Nov-2006 : Version 1 (DG);
  *
  */
 
@@ -223,7 +219,7 @@ public class DialPlotTest implements PlotChangeListener {
         p.setDialFrame(f1);
         p.addChangeListener(this);
         this.lastEvent = null;
-        f1.setBackgroundPaint(Color.gray);
+        f1.setBackgroundPaint(Color.GRAY);
         assertNotNull(this.lastEvent);
 
         ArcDialFrame f2 = new ArcDialFrame();

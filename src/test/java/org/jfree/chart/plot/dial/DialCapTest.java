@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * ----------------
  * DialCapTest.java
  * ----------------
- * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 03-Nov-2006 : Version 1 (DG);
  *
  */
 
@@ -81,10 +77,10 @@ public class DialCapTest {
 
         // outline paint
         c1.setOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.WHITE,
-                3.0f, 4.0f, Color.gray));
+                3.0f, 4.0f, Color.GRAY));
         assertFalse(c1.equals(c2));
         c2.setOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.WHITE,
-                3.0f, 4.0f, Color.gray));
+                3.0f, 4.0f, Color.GRAY));
 
         assertTrue(c1.equals(c2));
 
