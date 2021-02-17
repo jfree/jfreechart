@@ -49,7 +49,7 @@ import java.awt.Shape;
 import java.awt.Stroke;
 
 import org.jfree.chart.ui.Align;
-import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.api.RectangleInsets;
 import org.junit.jupiter.api.Test;
 
 /**

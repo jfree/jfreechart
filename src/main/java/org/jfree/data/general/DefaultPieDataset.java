@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -24,6 +24,14 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
+ * ----------------------
+ * DefaultPieDataset.java
+ * ----------------------
+ * (C) Copyright 2001-2021, by Object Refinery Limited.
+ *
+ * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Contributor(s):   Sam (oldman);
+ *                   Tracy Hiltbrand (generics for bug fix to PiePlot);
  */
 
 package org.jfree.data.general;
@@ -31,10 +39,10 @@ package org.jfree.data.general;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.CloneUtils;
-import org.jfree.chart.util.PublicCloneable;
-import org.jfree.chart.util.SortOrder;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.internal.CloneUtils;
+import org.jfree.chart.api.PublicCloneable;
+import org.jfree.chart.api.SortOrder;
 
 import org.jfree.data.DefaultKeyedValues;
 import org.jfree.data.KeyedValues;
@@ -42,6 +50,8 @@ import org.jfree.data.UnknownKeyException;
 
 /**
  * A default implementation of the {@link PieDataset} interface.
+ * 
+ * @param <K> Key type for PieDataset
  */
 public class DefaultPieDataset<K extends Comparable<K>> extends AbstractDataset
         implements PieDataset<K>, Cloneable, PublicCloneable, Serializable {
@@ -66,7 +76,7 @@ public class DefaultPieDataset<K extends Comparable<K>> extends AbstractDataset
      * @param source  the data ({@code null} not permitted).
      */
     public DefaultPieDataset(KeyedValues<K> source) {
-        Args.nullNotPermitted(data, "data");
+        Args.nullNotPermitted(source, "source");
         this.data = new DefaultKeyedValues<>();
         for (int i = 0; i < source.getItemCount(); i++) {
             this.data.addValue(source.getKey(i), source.getValue(i));
@@ -134,11 +144,7 @@ public class DefaultPieDataset<K extends Comparable<K>> extends AbstractDataset
      */
     @Override
     public Number getValue(int item) {
-        Number result = null;
-        if (getItemCount() > item) {
-            result = this.data.getValue(item);
-        }
-        return result;
+        return this.data.getValue(item);
     }
 
     /**

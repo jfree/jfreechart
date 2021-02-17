@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,45 +27,12 @@
  * --------------------------
  * StackedXYAreaRenderer.java
  * --------------------------
- * (C) Copyright 2003-2017, by Richard Atkinson and Contributors.
+ * (C) Copyright 2003-2021, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributor(s):   Christian W. Zuckschwerdt;
  *                   David Gilbert (for Object Refinery Limited);
  *                   Ulrich Voigt (patch #312);
- *
- * Changes:
- * --------
- * 27-Jul-2003 : Initial version (RA);
- * 30-Jul-2003 : Modified entity constructor (CZ);
- * 18-Aug-2003 : Now handles null values (RA);
- * 20-Aug-2003 : Implemented Cloneable, PublicCloneable and Serializable (DG);
- * 22-Sep-2003 : Changed to be a two pass renderer with optional shape Paint
- *               and Stroke (RA);
- * 07-Oct-2003 : Added renderer state (DG);
- * 10-Feb-2004 : Updated state object and changed drawItem() method to make
- *               overriding easier (DG);
- * 25-Feb-2004 : Replaced CrosshairInfo with CrosshairState.  Renamed
- *               XYToolTipGenerator --> XYItemLabelGenerator (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
- *               getYValue() (DG);
- * 10-Sep-2004 : Removed getRangeType() method (DG);
- * 11-Nov-2004 : Now uses ShapeUtilities to translate shapes (DG);
- * 06-Jan-2005 : Override equals() (DG);
- * 07-Jan-2005 : Update for method name changes in DatasetUtilities (DG);
- * 28-Mar-2005 : Use getXValue() and getYValue() from dataset (DG);
- * 06-Jun-2005 : Fixed null pointer exception, plus problems with equals() and
- *               serialization (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 10-Nov-2006 : Fixed bug 1593156, NullPointerException with line
- *               plotting (DG);
- * 02-Feb-2007 : Fixed bug 1649686, crosshairs don't stack y-values (DG);
- * 06-Feb-2007 : Fixed bug 1086307, crosshairs with multiple axes (DG);
- * 22-Mar-2007 : Fire change events in setShapePaint() and setShapeStroke()
- *               methods (DG);
- * 20-Apr-2007 : Updated getLegendItem() for renderer change (DG);
- * 04-Aug-2014 : Fix entity hotspot (patch #312) (UV);
- * 18-Feb-2017 : Updates for crosshairs (bug #36) (DG);
  *
  */
 
@@ -98,8 +65,8 @@ import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.urls.XYURLGenerator;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.PublicCloneable;
-import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.api.PublicCloneable;
+import org.jfree.chart.internal.SerialUtils;
 import org.jfree.chart.util.ShapeUtils;
 import org.jfree.data.Range;
 import org.jfree.data.general.DatasetUtils;
@@ -113,7 +80,7 @@ import org.jfree.data.xy.XYDataset;
  * {@code StackedXYAreaRendererDemo1.java} program included in the
  * JFreeChart demo collection:
  * <br><br>
- * <img src="../../../../../images/StackedXYAreaRendererSample.png"
+ * <img src="doc-files/StackedXYAreaRendererSample.png"
  * alt="StackedXYAreaRendererSample.png">
  * <br><br>
  * SPECIAL NOTE:  This renderer does not currently handle negative data values

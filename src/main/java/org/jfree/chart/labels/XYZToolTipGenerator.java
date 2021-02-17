@@ -53,6 +53,6 @@ public interface XYZToolTipGenerator extends XYToolTipGenerator {
      *
      * @return The tooltip text (possibly {@code null}).
      */
-    public String generateToolTip(XYZDataset dataset, int series, int item);
+    String generateToolTip(XYZDataset dataset, int series, int item);
 
 }

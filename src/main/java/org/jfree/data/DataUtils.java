@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------
  * DataUtils.java
  * --------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and contributors.
+ * (C) Copyright 2003-2021, by Object Refinery Limited and contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Peter Kolb (patch 2511330);
@@ -37,7 +37,7 @@
 package org.jfree.data;
 
 import java.util.Arrays;
-import org.jfree.chart.util.Args;
+import org.jfree.chart.internal.Args;
 import org.jfree.data.general.DatasetUtils;
 
 /**
@@ -138,8 +138,7 @@ public abstract class DataUtils {
         Args.nullNotPermitted(data, "data");
         double total = 0.0;
         int rowCount = data.getRowCount();
-        for (int v = 0; v < validRows.length; v++) {
-            int row = validRows[v];
+        for (int row : validRows) {
             if (row < rowCount) {
                 Number n = data.getValue(row, column);
                 if (n != null) {
@@ -189,8 +188,7 @@ public abstract class DataUtils {
         Args.nullNotPermitted(data, "data");
         double total = 0.0;
         int colCount = data.getColumnCount();
-        for (int v = 0; v < validCols.length; v++) {
-            int col = validCols[v];
+        for (int col : validCols) {
             if (col < colCount) {
                 Number n = data.getValue(row, col);
                 if (n != null) {
@@ -246,9 +244,9 @@ public abstract class DataUtils {
      *
      * @return The cumulative percentages.
      */
-    public static KeyedValues getCumulativePercentages(KeyedValues data) {
+    public static <K extends Comparable<K>> KeyedValues<K> getCumulativePercentages(KeyedValues<K> data) {
         Args.nullNotPermitted(data, "data");
-        DefaultKeyedValues result = new DefaultKeyedValues();
+        DefaultKeyedValues<K> result = new DefaultKeyedValues<>();
         double total = 0.0;
         for (int i = 0; i < data.getItemCount(); i++) {
             Number v = data.getValue(i);
@@ -262,7 +260,7 @@ public abstract class DataUtils {
             if (v != null) {
                 runningTotal = runningTotal + v.doubleValue();
             }
-            result.addValue(data.getKey(i), new Double(runningTotal / total));
+            result.addValue(data.getKey(i), runningTotal / total);
         }
         return result;
     }

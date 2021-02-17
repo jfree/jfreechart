@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -32,10 +32,10 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Paint;
 import java.io.Serializable;
-import java.util.Iterator;
+import java.util.ArrayList;
 import java.util.List;
 import org.jfree.chart.ui.Size2D;
-import org.jfree.chart.ui.TextAnchor;
+import org.jfree.chart.internal.Args;
 
 /**
  * A sequence of {@link TextFragment} objects that together form a line of 
@@ -53,7 +53,7 @@ public class TextLine implements Serializable {
      * Creates a new empty line.
      */
     public TextLine() {
-        this.fragments = new java.util.ArrayList<>();
+        this.fragments = new ArrayList<>();
     }
     
     /**
@@ -85,16 +85,10 @@ public class TextLine implements Serializable {
      * @param paint  the text color ({@code null} not permitted).
      */
     public TextLine(String text, Font font, Paint paint) {
-        if (text == null) {
-            throw new IllegalArgumentException("Null 'text' argument.");   
-        }
-        if (font == null) {
-            throw new IllegalArgumentException("Null 'font' argument.");   
-        }
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");   
-        }
-        this.fragments = new java.util.ArrayList<>();
+        Args.nullNotPermitted(text, "text");
+        Args.nullNotPermitted(font, "font");
+        Args.nullNotPermitted(paint, "paint");
+        this.fragments = new ArrayList<>();
         final TextFragment fragment = new TextFragment(text, font, paint);
         this.fragments.add(fragment);
     }
@@ -105,6 +99,7 @@ public class TextLine implements Serializable {
      * @param fragment  the text fragment ({@code null} not permitted).
      */
     public void addFragment(TextFragment fragment) {
+        Args.nullNotPermitted(fragment, "fragment");
         this.fragments.add(fragment);        
     }
     
@@ -190,8 +185,7 @@ public class TextLine implements Serializable {
     public TextFragment getLastTextFragment() {
         TextFragment result = null;
         if (this.fragments.size() > 0) {
-            result = this.fragments.get(this.fragments.size() 
-                    - 1);
+            result = this.fragments.get(this.fragments.size() - 1);
         }    
         return result;
     }

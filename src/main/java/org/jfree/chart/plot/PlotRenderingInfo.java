@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------
  * PlotRenderingInfo.java
  * ----------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited.
+ * (C) Copyright 2003-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -47,9 +47,9 @@ import java.util.List;
 import java.util.Objects;
 
 import org.jfree.chart.ChartRenderingInfo;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.CloneUtils;
-import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.internal.CloneUtils;
+import org.jfree.chart.internal.SerialUtils;
 
 /**
  * Stores information about the dimensions of a plot and its subplots.
@@ -60,7 +60,7 @@ public class PlotRenderingInfo implements Cloneable, Serializable {
     private static final long serialVersionUID = 8446720134379617220L;
 
     /** The owner of this info. */
-    private ChartRenderingInfo owner;
+    private final ChartRenderingInfo owner;
 
     /** The plot area. */
     private transient Rectangle2D plotArea;

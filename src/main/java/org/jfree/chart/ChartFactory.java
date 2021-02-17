@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------
  * ChartFactory.java
  * -----------------
- * (C) Copyright 2001-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2001-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Serge V. Grachov;
@@ -106,18 +106,17 @@ import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.chart.renderer.xy.XYStepAreaRenderer;
 import org.jfree.chart.renderer.xy.XYStepRenderer;
 import org.jfree.chart.title.TextTitle;
-import org.jfree.chart.ui.Layer;
-import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.ui.RectangleInsets;
-import org.jfree.chart.ui.TextAnchor;
+import org.jfree.chart.api.Layer;
+import org.jfree.chart.api.RectangleInsets;
+import org.jfree.chart.text.TextAnchor;
 import org.jfree.chart.urls.PieURLGenerator;
 import org.jfree.chart.urls.StandardCategoryURLGenerator;
 import org.jfree.chart.urls.StandardPieURLGenerator;
 import org.jfree.chart.urls.StandardXYURLGenerator;
 import org.jfree.chart.urls.StandardXYZURLGenerator;
 import org.jfree.chart.urls.XYURLGenerator;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.TableOrder;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.api.TableOrder;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.IntervalCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
@@ -1356,6 +1355,8 @@ public abstract class ChartFactory {
      *
      * @return An XY area chart.
      * 
+     * @param <S> the type for series keys.
+     * 
      * @since 1.0.16
      */
     public static <S extends Comparable<S>> JFreeChart createXYAreaChart(
@@ -1383,6 +1384,8 @@ public abstract class ChartFactory {
      * @param tooltips  configure chart to generate tool tips?
      * @param urls  configure chart to generate URLs?
      *
+     * @param <S> the type for series keys.
+     * 
      * @return An XY area chart.
      */
     public static <S extends Comparable<S>> JFreeChart createXYAreaChart(
@@ -1542,13 +1545,9 @@ public abstract class ChartFactory {
             renderer.setURLGenerator(new StandardXYURLGenerator());
         }
         JFreeChart chart = null;
-try {
         chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
         currentTheme.apply(chart);
-} catch (NullPointerException e) {
-    e.printStackTrace();
-}
         return chart;
 
     }

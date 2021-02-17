@@ -60,8 +60,8 @@ package org.jfree.data.statistics;
 
 import java.util.List;
 import java.util.Objects;
-import org.jfree.chart.util.CloneUtils;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.internal.CloneUtils;
+import org.jfree.chart.api.PublicCloneable;
 
 import org.jfree.data.KeyedObjects2D;
 import org.jfree.data.Range;

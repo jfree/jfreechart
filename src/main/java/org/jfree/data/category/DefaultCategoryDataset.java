@@ -50,7 +50,7 @@ package org.jfree.data.category;
 
 import java.io.Serializable;
 import java.util.List;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.api.PublicCloneable;
 
 import org.jfree.data.DefaultKeyedValues2D;
 import org.jfree.data.UnknownKeyException;

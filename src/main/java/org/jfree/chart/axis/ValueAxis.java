@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------
  * ValueAxis.java
  * --------------
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Jonathan Nash;
@@ -35,80 +35,6 @@
  *                   Center);
  *                   Peter Kolb (patch 1934255);
  *                   Andrew Mickish (patch 1870189);
- *
- * Changes
- * -------
- * 18-Sep-2001 : Added standard header and fixed DOS encoding problem (DG);
- * 23-Nov-2001 : Overhauled standard tick unit code (DG);
- * 04-Dec-2001 : Changed constructors to protected, and tidied up default
- *               values (DG);
- * 12-Dec-2001 : Fixed vertical gridlines bug (DG);
- * 16-Jan-2002 : Added an optional crosshair, based on the implementation by
- *               Jonathan Nash (DG);
- * 23-Jan-2002 : Moved the minimum and maximum values to here from NumberAxis,
- *               and changed the type from Number to double (DG);
- * 25-Feb-2002 : Added default value for autoRange. Changed autoAdjustRange
- *               from public to protected. Updated import statements (DG);
- * 23-Apr-2002 : Added setRange() method (DG);
- * 29-Apr-2002 : Added range adjustment methods (DG);
- * 13-Jun-2002 : Modified setCrosshairValue() to notify listeners only when the
- *               crosshairs are visible, to avoid unnecessary repaints, as
- *               suggested by Kees Kuip (DG);
- * 25-Jul-2002 : Moved lower and upper margin attributes from the NumberAxis
- *               class (DG);
- * 05-Sep-2002 : Updated constructor for changes in Axis class (DG);
- * 01-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 04-Oct-2002 : Moved standardTickUnits from NumberAxis --> ValueAxis (DG);
- * 08-Nov-2002 : Moved to new package com.jrefinery.chart.axis (DG);
- * 19-Nov-2002 : Removed grid settings (now controlled by the plot) (DG);
- * 27-Nov-2002 : Moved the 'inverted' attribute from NumberAxis to
- *               ValueAxis (DG);
- * 03-Jan-2003 : Small fix to ensure auto-range minimum is observed
- *               immediately (DG);
- * 14-Jan-2003 : Changed autoRangeMinimumSize from Number --> double (DG);
- * 20-Jan-2003 : Replaced monolithic constructor (DG);
- * 26-Mar-2003 : Implemented Serializable (DG);
- * 09-May-2003 : Added AxisLocation parameter to translation methods (DG);
- * 13-Aug-2003 : Implemented Cloneable (DG);
- * 01-Sep-2003 : Fixed bug 793167 (setMaximumAxisValue exception) (DG);
- * 02-Sep-2003 : Fixed bug 795366 (zooming on inverted axes) (DG);
- * 08-Sep-2003 : Completed Serialization support (NB);
- * 08-Sep-2003 : Renamed get/setMinimumValue --> get/setLowerBound,
- *               and get/setMaximumValue --> get/setUpperBound (DG);
- * 27-Oct-2003 : Changed DEFAULT_AUTO_RANGE_MINIMUM_SIZE value - see bug ID
- *               829606 (DG);
- * 07-Nov-2003 : Changes to tick mechanism (DG);
- * 06-Jan-2004 : Moved axis line attributes to Axis class (DG);
- * 21-Jan-2004 : Removed redundant axisLineVisible attribute.  Renamed
- *               translateJava2DToValue --> java2DToValue, and
- *               translateValueToJava2D --> valueToJava2D (DG);
- * 23-Jan-2004 : Fixed setAxisLinePaint() and setAxisLineStroke() which had no
- *               effect (andreas.gawecki@coremedia.com);
- * 07-Apr-2004 : Changed text bounds calculation (DG);
- * 26-Apr-2004 : Added getter/setter methods for arrow shapes (DG);
- * 18-May-2004 : Added methods to set axis range *including* current
- *               margins (DG);
- * 02-Jun-2004 : Fixed bug in setRangeWithMargins() method (DG);
- * 30-Sep-2004 : Moved drawRotatedString() from RefineryUtilities
- *               --> TextUtilities (DG);
- * 11-Jan-2005 : Removed deprecated methods in preparation for 1.0.0
- *               release (DG);
- * 21-Apr-2005 : Replaced Insets with RectangleInsets (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 10-Oct-2006 : Source reformatting (DG);
- * 22-Mar-2007 : Added new defaultAutoRange attribute (DG);
- * 02-Aug-2007 : Check for major tick when drawing label (DG);
- * 25-Sep-2008 : Added minor tick support, see patch 1934255 by Peter Kolb (DG);
- * 21-Jan-2009 : Updated default behaviour of minor ticks (DG);
- * 18-Mar-2008 : Added resizeRange2() method which provides more natural
- *               anchored zooming for mouse wheel support (DG);
- * 26-Mar-2009 : In equals(), only check current range if autoRange is
- *               false (DG);
- * 30-Mar-2009 : Added pan(double) method (DG);
- * 03-Sep-2012 : Fix reserveSpace() method, bug 3555275 (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
- * 18-Mar-2014 : Updates to support attributed tick labels for LogAxis (DG);
- * 29-Jul-2014 : Add hints to normalise axis line and tick marks (DG);
  *
  */
 
@@ -135,12 +61,12 @@ import java.util.Objects;
 import org.jfree.chart.event.AxisChangeEvent;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.text.TextUtils;
-import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.api.RectangleEdge;
+import org.jfree.chart.api.RectangleInsets;
 import org.jfree.chart.util.AttrStringUtils;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.PublicCloneable;
-import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.api.PublicCloneable;
+import org.jfree.chart.internal.SerialUtils;
 import org.jfree.data.Range;
 
 /**

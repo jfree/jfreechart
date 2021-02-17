@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------
  * DatasetUtils.java
  * -----------------
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Andrzej Porebski (bug fix);
@@ -47,7 +47,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import org.jfree.chart.util.ArrayUtils;
-import org.jfree.chart.util.Args;
+import org.jfree.chart.internal.Args;
 
 import org.jfree.data.DomainInfo;
 import org.jfree.data.DomainOrder;
@@ -95,6 +95,8 @@ public final class DatasetUtils {
      * @param dataset  the dataset ({@code null} not permitted).
      *
      * @return The total.
+     * 
+     * @param <K>  the type for the keys.
      */
     public static <K extends Comparable<K>> double calculatePieDatasetTotal(PieDataset<K> dataset) {
         Args.nullNotPermitted(dataset, "dataset");
@@ -122,6 +124,9 @@ public final class DatasetUtils {
      * @param rowKey  the row key.
      *
      * @return A pie dataset.
+     * 
+     * @param <R>  the type for the row keys.
+     * @param <C>  the type for the column keys.
      */
     public static <R extends Comparable<R>, C extends Comparable<C>> 
             PieDataset<C> createPieDatasetForRow(CategoryDataset<R, C> dataset, R rowKey) {
@@ -136,6 +141,9 @@ public final class DatasetUtils {
      * @param dataset  the dataset ({@code null} not permitted).
      * @param row  the row (zero-based index).
      *
+     * @param <R>  the type for the row keys.
+     * @param <C>  the type for the column keys.
+     * 
      * @return A pie dataset.
      */
     public static <R extends Comparable<R>, C extends Comparable<C>> 
@@ -156,6 +164,9 @@ public final class DatasetUtils {
      * @param dataset  the dataset ({@code null} not permitted).
      * @param columnKey  the column key.
      *
+     * @param <R>  the type for the row keys.
+     * @param <C>  the type for the column keys.
+     * 
      * @return A pie dataset.
      */
     public static <R extends Comparable<R>, C extends Comparable<C>> 
@@ -171,6 +182,9 @@ public final class DatasetUtils {
      * @param dataset  the dataset ({@code null} not permitted).
      * @param column  the column (zero-based index).
      *
+     * @param <R>  the type for the row keys.
+     * @param <C>  the type for the column keys.
+     * 
      * @return A pie dataset.
      */
     public static <R extends Comparable<R>, C extends Comparable<C>> 
@@ -195,6 +209,8 @@ public final class DatasetUtils {
      *             permitted).
      * @param minimumPercent  the percent threshold.
      *
+     * @param <K>  the type for the data keys.
+     * 
      * @return The pie dataset with (possibly) aggregated items.
      */
     public static <K extends Comparable<K>> PieDataset<K> createConsolidatedPieDataset(PieDataset<K> source,
@@ -216,6 +232,8 @@ public final class DatasetUtils {
      * @param minItems  only aggregate low values if there are at least this
      *                  many.
      *
+     * @param <K>  the type for the data keys.
+     * 
      * @return The pie dataset with (possibly) aggregated items.
      */
     public static <K extends Comparable<K>> PieDataset<K> createConsolidatedPieDataset(
@@ -333,6 +351,9 @@ public final class DatasetUtils {
      * @param columnKeys  the column keys ({@code null} not permitted).
      * @param data  the data.
      *
+     * @param <R>  the type for the row keys.
+     * @param <C>  the type for the column keys.
+     * 
      * @return The dataset.
      */
     public static <R extends Comparable<R>, C extends Comparable<C>> 
@@ -383,6 +404,9 @@ public final class DatasetUtils {
      * @param rowKey  the row key ({@code null} not permitted).
      * @param rowData  the row data ({@code null} not permitted).
      *
+     * @param <R>  the type for the row keys.
+     * @param <C>  the type for the column keys.
+     * 
      * @return A dataset.
      */
     public static <R extends Comparable<R>, C extends Comparable<C>> 
@@ -409,6 +433,8 @@ public final class DatasetUtils {
      * @param seriesKey  the key to give the resulting series ({@code null} not
      *     permitted).
      *
+     * @param <S>  the type for the series keys.
+     * 
      * @return A dataset.
      */
     public static <S extends Comparable<S>> XYDataset<S> sampleFunction2D(
@@ -432,6 +458,8 @@ public final class DatasetUtils {
      * @param seriesKey  the key to give the resulting series
      *                   ({@code null} not permitted).
      *
+     * @param <S>  the type for the series keys.
+     * 
      * @return A series.
      *
      * @since 1.0.13
@@ -519,6 +547,8 @@ public final class DatasetUtils {
      *
      * @param dataset  the dataset ({@code null} permitted).
      *
+     * @param <S>  the type for the series keys.
+     * 
      * @return A boolean.
      */
     public static <S extends Comparable<S>> boolean isEmptyOrNull(
@@ -538,6 +568,8 @@ public final class DatasetUtils {
      *
      * @param dataset  the dataset ({@code null} not permitted).
      *
+     * @param <S>  the type for the series keys.
+     * 
      * @return The range of values (possibly {@code null}).
      */
     public static <S extends Comparable<S>> Range findDomainBounds(XYDataset<S> dataset) {
@@ -552,6 +584,8 @@ public final class DatasetUtils {
      *                         into account (only applies if the dataset is an
      *                         {@link IntervalXYDataset}).
      *
+     * @param <S>  the type for the series keys.
+     * 
      * @return The range of values (possibly {@code null}).
      */
     public static <S extends Comparable<S>> Range findDomainBounds(
@@ -582,6 +616,8 @@ public final class DatasetUtils {
      * @return The bounds (or {@code null} if the dataset contains no
      *     values).
      *
+     * @param <S>  the type for the series keys.
+     * 
      * @since 1.0.13
      */
     public static <S extends Comparable<S>> Range findDomainBounds(
@@ -609,6 +645,8 @@ public final class DatasetUtils {
      *
      * @param dataset  the dataset ({@code null} not permitted).
      *
+     * @param <S>  the type for the series keys.
+     * 
      * @return The range (possibly {@code null}).
      */
     public static <S extends Comparable<S>> Range iterateDomainBounds(
@@ -625,6 +663,8 @@ public final class DatasetUtils {
      *          {@link IntervalXYDataset}, whether the x-interval or just the
      *          x-value is used to determine the overall range.
      *
+     * @param <S>  the type for the series keys.
+     * 
      * @return The range (possibly {@code null}).
      */
     public static <S extends Comparable<S>> Range iterateDomainBounds(
@@ -684,6 +724,9 @@ public final class DatasetUtils {
      *
      * @param dataset  the dataset ({@code null} not permitted).
      *
+     * @param <R>  the type for the row keys.
+     * @param <C>  the type for the column keys.
+     * 
      * @return The range (possibly {@code null}).
      */
     public static <R extends Comparable<R>, C extends Comparable<C>> Range 
@@ -698,6 +741,9 @@ public final class DatasetUtils {
      * @param includeInterval  a flag that determines whether or not the
      *                         y-interval is taken into account.
      *
+     * @param <R>  the type for the row keys.
+     * @param <C>  the type for the column keys.
+     * 
      * @return The range (possibly {@code null}).
      */
     public static <R extends Comparable<R>, C extends Comparable<C>> Range 
@@ -725,6 +771,9 @@ public final class DatasetUtils {
      * @param includeInterval  include the y-interval (if the dataset has a
      *     y-interval).
      *
+     * @param <R>  the type for the row keys.
+     * @param <C>  the type for the column keys.
+     * 
      * @return The data bounds.
      *
      * @since 1.0.13
@@ -751,6 +800,8 @@ public final class DatasetUtils {
      *
      * @param dataset  the dataset ({@code null} not permitted).
      *
+     * @param <S>  the type for the series keys.
+     * 
      * @return The range (possibly {@code null}).
      */
     public static <S extends Comparable<S>> Range findRangeBounds(
@@ -767,6 +818,8 @@ public final class DatasetUtils {
      * @param includeInterval  a flag that determines whether or not the
      *                         y-interval is taken into account.
      *
+     * @param <S>  the type for the series keys.
+     * 
      * @return The range (possibly {@code null}).
      */
     public static <S extends Comparable<S>> Range findRangeBounds(
@@ -795,6 +848,8 @@ public final class DatasetUtils {
      * @param includeInterval  include the y-interval (if the dataset has a
      *     y-interval).
      *
+     * @param <S>  the type for the series keys.
+     * 
      * @return The data bounds.
      * 
      * @since 1.0.13
@@ -824,6 +879,9 @@ public final class DatasetUtils {
      *
      * @return The range (possibly {@code null}).
      *
+     * @param <R>  the type for the row keys.
+     * @param <C>  the type for the column keys.
+     * 
      * @since 1.0.10
      */
     public static <R extends Comparable<R>, C extends Comparable<C>> Range 
@@ -841,6 +899,9 @@ public final class DatasetUtils {
      *
      * @return The range (possibly {@code null}).
      *
+     * @param <R>  the type for the row keys.
+     * @param <C>  the type for the column keys.
+     * 
      * @since 1.0.10
      */
     public static <R extends Comparable<R>, C extends Comparable<C>> Range 
@@ -914,6 +975,9 @@ public final class DatasetUtils {
      *
      * @return The range (possibly {@code null}).
      *
+     * @param <R>  the type for the row keys.
+     * @param <C>  the type for the column keys.
+     * 
      * @since 1.0.13
      */
     public static <R extends Comparable<R>, C extends Comparable<C>> 
@@ -1054,6 +1118,8 @@ public final class DatasetUtils {
      *
      * @param dataset  the dataset ({@code null} not permitted).
      *
+     * @param <S>  the type for the series keys.
+     * 
      * @return The range (possibly {@code null}).
      *
      * @since 1.0.10
@@ -1072,6 +1138,8 @@ public final class DatasetUtils {
      *          {@link IntervalXYDataset}, whether the y-interval or just the
      *          y-value is used to determine the overall range.
      *
+     * @param <S>  the type for the series keys.
+     * 
      * @return The range (possibly {@code null}).
      *
      * @since 1.0.10
@@ -1153,6 +1221,8 @@ public final class DatasetUtils {
      *
      * @param dataset  the dataset ({@code null} not permitted).
      *
+     * @param <S>  the type for the series keys.
+     * 
      * @return The range (possibly {@code null}).
      */
     public static <S extends Comparable<S>> Range findZBounds(
@@ -1170,6 +1240,8 @@ public final class DatasetUtils {
      * @param includeInterval  a flag that determines whether or not the
      *                         z-interval is taken into account.
      *
+     * @param <S>  the type for the series keys.
+     * 
      * @return The range (possibly {@code null}).
      */
     public static <S extends Comparable<S>> Range findZBounds(
@@ -1191,6 +1263,8 @@ public final class DatasetUtils {
      * @param includeInterval  include the z-interval (if the dataset has a
      *     z-interval).
      *
+     * @param <S>  the type for the series keys.
+     * 
      * @return The data bounds.
      */
     public static <S extends Comparable<S>> Range findZBounds(
@@ -1208,6 +1282,8 @@ public final class DatasetUtils {
      *
      * @param dataset  the dataset ({@code null} not permitted).
      *
+     * @param <S>  the type for the series keys.
+     * 
      * @return The range (possibly {@code null}).
      */
     public static <S extends Comparable<S>> Range iterateZBounds(
@@ -1223,6 +1299,8 @@ public final class DatasetUtils {
      * @param includeInterval  include the z-interval (if the dataset has a
      *     z-interval.
      *
+     * @param <S>  the type for the series keys.
+     * 
      * @return The range (possibly {@code null}).
      */
     public static <S extends Comparable<S>> Range iterateZBounds(
@@ -1286,6 +1364,8 @@ public final class DatasetUtils {
      * @param includeInterval  a flag that determines whether or not the
      *     y-interval for the dataset is included (this only applies if the
      *     dataset is an instance of IntervalXYDataset).
+     * 
+     * @param <S>  the type for the series keys.
      * 
      * @return The x-range (possibly {@code null}).
      * 
@@ -1358,6 +1438,8 @@ public final class DatasetUtils {
      *     y-interval for the dataset is included (this only applies if the
      *     dataset is an instance of IntervalXYDataset).
      *
+     * @param <S>  the type for the series keys.
+     * 
      * @return The y-range (possibly {@code null}).
      *
      * @since 1.0.13
@@ -1480,6 +1562,8 @@ public final class DatasetUtils {
      *     z-interval for the dataset is included (this only applies if the
      *     dataset has an interval, which is currently not supported).
      *
+     * @param <S>  the type for the series keys.
+     * 
      * @return The y-range (possibly {@code null}).
      */
     public static <S extends Comparable<S>> Range iterateToFindZBounds(
@@ -1525,6 +1609,8 @@ public final class DatasetUtils {
      *
      * @param dataset  the dataset ({@code null} not permitted).
      *
+     * @param <S>  the type for the series keys.
+     * 
      * @return The minimum value (possibly {@code null}).
      */
     public static <S extends Comparable<S>> Number findMinimumDomainValue(
@@ -1580,6 +1666,8 @@ public final class DatasetUtils {
      *
      * @param dataset  the dataset ({@code null} not permitted).
      *
+     * @param <S>  the type for the series keys.
+     * 
      * @return The maximum value (possibly {@code null}).
      */
     public static <S extends Comparable<S>> Number findMaximumDomainValue(
@@ -1635,6 +1723,9 @@ public final class DatasetUtils {
      *
      * @param dataset  the dataset ({@code null} not permitted).
      *
+     * @param <R>  the type for the row keys.
+     * @param <C>  the type for the column keys.
+     * 
      * @return The minimum value (possibly {@code null}).
      */
     public static <R extends Comparable<R>, C extends Comparable<C>> Number 
@@ -1686,6 +1777,8 @@ public final class DatasetUtils {
      *
      * @param dataset  the dataset ({@code null} not permitted).
      *
+     * @param <S>  the type for the series keys.
+     * 
      * @return The minimum value (possibly {@code null}).
      */
     public static <S extends Comparable<S>> Number findMinimumRangeValue(
@@ -1744,6 +1837,9 @@ public final class DatasetUtils {
      *
      * @param dataset  the dataset ({@code null} not permitted).
      *
+     * @param <R>  the type for the row keys.
+     * @param <C>  the type for the column keys.
+     * 
      * @return The maximum value (possibly {@code null}).
      */
     public static <R extends Comparable<R>, C extends Comparable<C>> 
@@ -1800,6 +1896,8 @@ public final class DatasetUtils {
      *
      * @param dataset  the dataset ({@code null} not permitted).
      *
+     * @param <S>  the type for the series keys.
+     * 
      * @return The maximum value (possibly {@code null}).
      */
     public static <S extends Comparable<S>> Number findMaximumRangeValue(
@@ -1855,6 +1953,9 @@ public final class DatasetUtils {
      *
      * @param dataset  the dataset ({@code null} not permitted).
      *
+     * @param <R>  the type for the row keys.
+     * @param <C>  the type for the column keys.
+     * 
      * @return The range ({@code null} if the dataset contains no values).
      */
     public static <R extends Comparable<R>, C extends Comparable<C>> Range 
@@ -1869,6 +1970,9 @@ public final class DatasetUtils {
      * @param dataset  the dataset ({@code null} not permitted).
      * @param base  the base value for the bars.
      *
+     * @param <R>  the type for the row keys.
+     * @param <C>  the type for the column keys.
+     * 
      * @return The range ({@code null} if the dataset contains no values).
      */
     public static <R extends Comparable<R>, C extends Comparable<C>> Range 
@@ -1912,6 +2016,10 @@ public final class DatasetUtils {
      * @param dataset  the dataset.
      * @param map  a structure that maps series to groups.
      *
+     * @param <R>  the type for the row keys.
+     * @param <C>  the type for the column keys.
+     * @param <G>  the type for the group keys.
+     * 
      * @return The value range ({@code null} if the dataset contains no
      *         values).
      */
@@ -1974,6 +2082,9 @@ public final class DatasetUtils {
      *
      * @param dataset  the dataset ({@code null} not permitted).
      *
+     * @param <R>  the type for the row keys.
+     * @param <C>  the type for the column keys.
+     * 
      * @return The minimum value.
      *
      * @see #findMaximumStackedRangeValue(CategoryDataset)
@@ -2013,6 +2124,9 @@ public final class DatasetUtils {
      *
      * @param dataset  the dataset ({@code null} not permitted).
      *
+     * @param <R>  the type for the row keys.
+     * @param <C>  the type for the column keys.
+     * 
      * @return The maximum value (possibly {@code null}).
      *
      * @see #findMinimumStackedRangeValue(CategoryDataset)
@@ -2051,6 +2165,8 @@ public final class DatasetUtils {
      *
      * @param dataset  the dataset ({@code null} not permitted).
      *
+     * @param <S>  the type for the series keys.
+     * 
      * @return The range ([0.0, 0.0] if the dataset contains no values).
      */
     public static <S extends Comparable<S>> Range findStackedRangeBounds(
@@ -2065,6 +2181,8 @@ public final class DatasetUtils {
      * @param dataset  the dataset ({@code null} not permitted).
      * @param base  the base value.
      *
+     * @param <S>  the type for the series keys.
+     * 
      * @return The range ({@code null} if the dataset contains no values).
      */
     public static <S extends Comparable<S>> Range findStackedRangeBounds(
@@ -2109,6 +2227,8 @@ public final class DatasetUtils {
      * @param dataset  the dataset.
      * @param item  the item index.
      *
+     * @param <S>  the type for the series keys.
+     * 
      * @return The total.
      *
      * @since 1.0.5
@@ -2132,6 +2252,9 @@ public final class DatasetUtils {
      *
      * @param dataset  the dataset ({@code null} not permitted).
      *
+     * @param <R>  the type for the row keys.
+     * @param <C>  the type for the column keys.
+     * 
      * @return The range.
      *
      * @see #findRangeBounds(CategoryDataset)
@@ -2176,6 +2299,8 @@ public final class DatasetUtils {
      * @param series  the series index.
      * @param x  the x-value.
      * 
+     * @param <S>  the type for the series keys.
+     * 
      * @return The y value.
      * 
      * @since 1.0.16
@@ -2212,6 +2337,8 @@ public final class DatasetUtils {
      * @param series  the series index.
      * @param x  the x-value.
      *
+     * @param <S>  the type for the series keys.
+     * 
      * @return The indices of the two items that span the x-value.
      *
      * @since 1.0.16

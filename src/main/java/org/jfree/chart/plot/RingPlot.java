@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------
  * RingPlot.java
  * -------------
- * (C) Copyright 2004-2020, by Object Refinery Limited.
+ * (C) Copyright 2004-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limtied);
  * Contributor(s):   Christoph Beck (bug 2121818);
@@ -59,16 +59,16 @@ import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.entity.PieSectionEntity;
 import org.jfree.chart.labels.PieToolTipGenerator;
 import org.jfree.chart.text.TextUtils;
-import org.jfree.chart.ui.RectangleInsets;
-import org.jfree.chart.ui.TextAnchor;
+import org.jfree.chart.api.RectangleInsets;
+import org.jfree.chart.text.TextAnchor;
 import org.jfree.chart.urls.PieURLGenerator;
-import org.jfree.chart.util.LineUtils;
+import org.jfree.chart.internal.LineUtils;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.Rotation;
-import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.api.Rotation;
+import org.jfree.chart.internal.SerialUtils;
 import org.jfree.chart.util.ShapeUtils;
-import org.jfree.chart.util.UnitType;
+import org.jfree.chart.api.UnitType;
 import org.jfree.data.general.PieDataset;
 
 /**

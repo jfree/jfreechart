@@ -50,7 +50,7 @@ public interface TimePeriod extends Comparable {
      *
      * @return The start date/time (never {@code null}).
      */
-    public Date getStart();
+    Date getStart();
 
     /**
      * Returns the end date/time.  This will always be on or after the
@@ -58,6 +58,6 @@ public interface TimePeriod extends Comparable {
      *
      * @return The end date/time (never {@code null}).
      */
-    public Date getEnd();
+    Date getEnd();
 
 }

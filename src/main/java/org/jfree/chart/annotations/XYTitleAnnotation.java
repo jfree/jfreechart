@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------
  * XYTitleAnnotation.java
  * ----------------------
- * (C) Copyright 2007-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Andrew Mickish;
@@ -43,7 +43,7 @@ import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 import java.util.Objects;
 
-import org.jfree.chart.HashUtils;
+import org.jfree.chart.internal.HashUtils;
 import org.jfree.chart.axis.AxisLocation;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.block.BlockParams;
@@ -55,12 +55,12 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.title.Title;
-import org.jfree.chart.ui.RectangleAnchor;
-import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.api.RectangleAnchor;
+import org.jfree.chart.api.RectangleEdge;
 import org.jfree.chart.ui.Size2D;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.PublicCloneable;
-import org.jfree.chart.util.XYCoordinateType;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.api.PublicCloneable;
+import org.jfree.chart.api.XYCoordinateType;
 import org.jfree.data.Range;
 
 /**

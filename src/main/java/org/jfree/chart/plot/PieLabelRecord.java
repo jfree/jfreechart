@@ -55,7 +55,7 @@ public class PieLabelRecord implements Comparable, Serializable {
     private Comparable key;
 
     /** The angle of the centre of the section (in radians). */
-    private double angle;
+    private final double angle;
 
     /** The base y-coordinate. */
     private double baseY;
@@ -64,16 +64,16 @@ public class PieLabelRecord implements Comparable, Serializable {
     private double allocatedY;
 
     /** The label. */
-    private TextBox label;
+    private final TextBox label;
 
     /** The label height. */
-    private double labelHeight;
+    private final double labelHeight;
 
     /** The gap. */
-    private double gap;
+    private final double gap;
 
     /** The link percent. */
-    private double linkPercent;
+    private final double linkPercent;
 
     /**
      * Creates a new record.

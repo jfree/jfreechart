@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,41 +27,13 @@
  * ----------------
  * CompassPlot.java
  * ----------------
- * (C) Copyright 2002-2017, by the Australian Antarctic Division and
+ * (C) Copyright 2002-2021, by the Australian Antarctic Division and
  * Contributors.
  *
  * Original Author:  Bryan Scott (for the Australian Antarctic Division);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Arnaud Lelievre;
  *                   Martin Hoeller;
- *
- * Changes:
- * --------
- * 25-Sep-2002 : Version 1, contributed by Bryan Scott (DG);
- * 23-Jan-2003 : Removed one constructor (DG);
- * 26-Mar-2003 : Implemented Serializable (DG);
- * 27-Mar-2003 : Changed MeterDataset to ValueDataset (DG);
- * 21-Aug-2003 : Implemented Cloneable (DG);
- * 08-Sep-2003 : Added internationalization via use of properties
- *               resourceBundle (RFE 690236) (AL);
- * 09-Sep-2003 : Changed Color --> Paint (DG);
- * 15-Sep-2003 : Added null data value check (bug report 805009) (DG);
- * 16-Sep-2003 : Changed ChartRenderingInfo --> PlotRenderingInfo (DG);
- * 16-Mar-2004 : Added support for revolutionDistance to enable support for
- *               other units than degrees.
- * 16-Mar-2004 : Enabled LongNeedle to rotate about center.
- * 11-Jan-2005 : Removed deprecated code in preparation for 1.0.0 release (DG);
- * 17-Apr-2005 : Fixed bug in clone() method (DG);
- * 05-May-2005 : Updated draw() method parameters (DG);
- * 08-Jun-2005 : Fixed equals() method to handle GradientPaint (DG);
- * 16-Jun-2005 : Renamed getData() --> getDatasets() and
- *               addData() --> addDataset() (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 20-Mar-2007 : Fixed serialization (DG);
- * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
- *               Jess Thrysoee (DG);
- * 10-Oct-2011 : localization fix: bug #3353913 (MH);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -86,7 +58,7 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-import org.jfree.chart.LegendItemCollection;
+import org.jfree.chart.legend.LegendItemCollection;
 import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.needle.ArrowNeedle;
 import org.jfree.chart.needle.LineNeedle;
@@ -98,11 +70,11 @@ import org.jfree.chart.needle.PlumNeedle;
 import org.jfree.chart.needle.PointerNeedle;
 import org.jfree.chart.needle.ShipNeedle;
 import org.jfree.chart.needle.WindNeedle;
-import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.api.RectangleInsets;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.Args;
+import org.jfree.chart.internal.Args;
 import org.jfree.chart.util.ResourceBundleWrapper;
-import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.internal.SerialUtils;
 import org.jfree.data.general.DefaultValueDataset;
 import org.jfree.data.general.ValueDataset;
 

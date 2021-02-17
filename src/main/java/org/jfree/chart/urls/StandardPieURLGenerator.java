@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,25 +27,10 @@
  * ----------------------------
  * StandardPieURLGenerator.java
  * ----------------------------
- * (C) Copyright 2002-2016, by Richard Atkinson and Contributors.
+ * (C) Copyright 2002-2021, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributors:     David Gilbert (for Object Refinery Limited);
- *
- * Changes:
- * --------
- * 05-Aug-2002 : Version 1, contributed by Richard Atkinson;
- * 09-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 07-Mar-2003 : Modified to use KeyedValuesDataset and added pieIndex
- *               parameter (DG);
- * 21-Mar-2003 : Implemented Serializable (DG);
- * 24-Apr-2003 : Switched around PieDataset and KeyedValuesDataset (DG);
- * 31-Mar-2004 : Added an optional 'pieIndex' parameter (DG);
- * 13-Jan-2005 : Fixed for compliance with XHTML 1.0 (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 24-Nov-2006 : Fixed equals() method and added argument checks (DG);
- * 17-Apr-2007 : Encode section key in generateURL() (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -56,7 +41,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Objects;
 
-import org.jfree.chart.util.Args;
+import org.jfree.chart.internal.Args;
 import org.jfree.data.general.PieDataset;
 
 /**

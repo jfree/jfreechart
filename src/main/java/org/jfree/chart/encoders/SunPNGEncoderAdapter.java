@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * -------------------------
  * SunPNGEncoderAdapter.java
  * -------------------------
- * (C) Copyright 2004-2016, by Richard Atkinson and Contributors.
+ * (C) Copyright 2004-2021, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 01-Aug-2004 : Initial version (RA);
- * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -48,7 +42,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 import javax.imageio.ImageIO;
-import org.jfree.chart.util.Args;
+import org.jfree.chart.internal.Args;
 
 /**
  * Adapter class for the Sun PNG Encoder.  The ImageEncoderFactory will only

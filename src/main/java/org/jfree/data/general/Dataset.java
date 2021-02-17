@@ -67,27 +67,27 @@ public interface Dataset {
      *
      * @param listener  the object to register.
      */
-    public void addChangeListener(DatasetChangeListener listener);
+    void addChangeListener(DatasetChangeListener listener);
 
     /**
      * Deregisters an object for notification of changes to the dataset.
      *
      * @param listener  the object to deregister.
      */
-    public void removeChangeListener(DatasetChangeListener listener);
+    void removeChangeListener(DatasetChangeListener listener);
 
     /**
      * Returns the dataset group.
      *
      * @return The dataset group.
      */
-    public DatasetGroup getGroup();
+    DatasetGroup getGroup();
 
     /**
      * Sets the dataset group.
      *
      * @param group  the dataset group.
      */
-    public void setGroup(DatasetGroup group);
+    void setGroup(DatasetGroup group);
 
 }

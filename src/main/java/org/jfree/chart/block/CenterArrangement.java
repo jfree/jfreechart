@@ -144,8 +144,8 @@ public class CenterArrangement implements Arrangement, Serializable {
     protected Size2D arrangeFN(BlockContainer container, Graphics2D g2,
                                RectangleConstraint constraint) {
 
-        List blocks = container.getBlocks();
-        Block b = (Block) blocks.get(0);
+        List<Block> blocks = container.getBlocks();
+        Block b = blocks.get(0);
         Size2D s = b.arrange(g2, RectangleConstraint.NONE);
         double width = constraint.getWidth();
         Rectangle2D bounds = new Rectangle2D.Double((width - s.width) / 2.0,
@@ -280,8 +280,8 @@ public class CenterArrangement implements Arrangement, Serializable {
      * @return The size after the arrangement.
      */
     protected Size2D arrangeNN(BlockContainer container, Graphics2D g2) {
-        List blocks = container.getBlocks();
-        Block b = (Block) blocks.get(0);
+        List<Block> blocks = container.getBlocks();
+        Block b = blocks.get(0);
         Size2D s = b.arrange(g2, RectangleConstraint.NONE);
         b.setBounds(new Rectangle2D.Double(0.0, 0.0, s.width, s.height));
         return new Size2D(s.width, s.height);

@@ -43,7 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.awt.geom.Rectangle2D;
 
 import org.jfree.chart.TestUtils;
-import org.jfree.chart.util.CloneUtils;
+import org.jfree.chart.internal.CloneUtils;
 
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.junit.jupiter.api.Test;

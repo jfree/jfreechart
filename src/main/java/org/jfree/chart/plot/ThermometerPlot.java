@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -28,66 +28,12 @@
  * ThermometerPlot.java
  * --------------------
  *
- * (C) Copyright 2000-2017, by Bryan Scott and Contributors.
+ * (C) Copyright 2000-2021, by Bryan Scott and Contributors.
  *
  * Original Author:  Bryan Scott (based on MeterPlot by Hari).
  * Contributor(s):   David Gilbert (for Object Refinery Limited).
  *                   Arnaud Lelievre;
  *                   Julien Henry (see patch 1769088) (DG);
- *
- * Changes
- * -------
- * 11-Apr-2002 : Version 1, contributed by Bryan Scott;
- * 15-Apr-2002 : Changed to implement VerticalValuePlot;
- * 29-Apr-2002 : Added getVerticalValueAxis() method (DG);
- * 25-Jun-2002 : Removed redundant imports (DG);
- * 17-Sep-2002 : Reviewed with Checkstyle utility (DG);
- * 18-Sep-2002 : Extensive changes made to API, to iron out bugs and
- *               inconsistencies (DG);
- * 13-Oct-2002 : Corrected error datasetChanged which would generate exceptions
- *               when value set to null (BRS).
- * 23-Jan-2003 : Removed one constructor (DG);
- * 26-Mar-2003 : Implemented Serializable (DG);
- * 02-Jun-2003 : Removed test for compatible range axis (DG);
- * 01-Jul-2003 : Added additional check in draw method to ensure value not
- *               null (BRS);
- * 08-Sep-2003 : Added internationalization via use of properties
- *               resourceBundle (RFE 690236) (AL);
- * 16-Sep-2003 : Changed ChartRenderingInfo --> PlotRenderingInfo (DG);
- * 29-Sep-2003 : Updated draw to set value of cursor to non-zero and allow
- *               painting of axis.  An incomplete fix and needs to be set for
- *               left or right drawing (BRS);
- * 19-Nov-2003 : Added support for value labels to be displayed left of the
- *               thermometer
- * 19-Nov-2003 : Improved axis drawing (now default axis does not draw axis line
- *               and is closer to the bulb).  Added support for the positioning
- *               of the axis to the left or right of the bulb. (BRS);
- * 03-Dec-2003 : Directly mapped deprecated setData()/getData() method to
- *               get/setDataset() (TM);
- * 21-Jan-2004 : Update for renamed method in ValueAxis (DG);
- * 07-Apr-2004 : Changed string width calculation (DG);
- * 12-Nov-2004 : Implemented the new Zoomable interface (DG);
- * 06-Jan-2004 : Added getOrientation() method (DG);
- * 11-Jan-2005 : Removed deprecated code in preparation for 1.0.0 release (DG);
- * 29-Mar-2005 : Fixed equals() method (DG);
- * 05-May-2005 : Updated draw() method parameters (DG);
- * 09-Jun-2005 : Fixed more bugs in equals() method (DG);
- * 10-Jun-2005 : Fixed minor bug in setDisplayRange() method (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 14-Nov-2006 : Fixed margin when drawing (DG);
- * 03-May-2007 : Fixed datasetChanged() to handle null dataset, added null
- *               argument check and event notification to setRangeAxis(),
- *               added null argument check to setPadding(), setValueFont(),
- *               setValuePaint(), setValueFormat() and setMercuryPaint(),
- *               deprecated get/setShowValueLines(), deprecated
- *               getMinimum/MaximumVerticalDataValue(), and fixed serialization
- *               bug (DG);
- * 24-Sep-2007 : Implemented new methods in Zoomable interface (DG);
- * 08-Oct-2007 : Added attributes for thermometer dimensions - see patch 1769088
- *               by Julien Henry (DG);
- * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
- *               Jess Thrysoee (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -116,18 +62,18 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-import org.jfree.chart.LegendItemCollection;
+import org.jfree.chart.legend.LegendItemCollection;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.event.PlotChangeEvent;
-import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.ui.RectangleInsets;
-import org.jfree.chart.util.CloneUtils;
+import org.jfree.chart.api.RectangleEdge;
+import org.jfree.chart.api.RectangleInsets;
+import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.Args;
+import org.jfree.chart.internal.Args;
 import org.jfree.chart.util.ResourceBundleWrapper;
-import org.jfree.chart.util.SerialUtils;
-import org.jfree.chart.util.UnitType;
+import org.jfree.chart.internal.SerialUtils;
+import org.jfree.chart.api.UnitType;
 import org.jfree.data.Range;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.DefaultValueDataset;

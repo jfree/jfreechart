@@ -86,6 +86,8 @@ public class Quarter extends RegularTimePeriod implements Serializable {
 
     /**
      * Constructs a new Quarter, based on the current system date/time.
+     * The time zone and locale are determined by the calendar
+     * returned by {@link RegularTimePeriod#getCalendarInstance()}.
      */
     public Quarter() {
         this(new Date());
@@ -93,6 +95,8 @@ public class Quarter extends RegularTimePeriod implements Serializable {
 
     /**
      * Constructs a new quarter.
+     * The time zone and locale are determined by the calendar
+     * returned by {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @param year  the year (1900 to 9999).
      * @param quarter  the quarter (1 to 4).
@@ -103,11 +107,13 @@ public class Quarter extends RegularTimePeriod implements Serializable {
         }
         this.year = (short) year;
         this.quarter = (byte) quarter;
-        peg(Calendar.getInstance());
+        peg(getCalendarInstance());
     }
 
     /**
      * Constructs a new quarter.
+     * The time zone and locale are determined by the calendar
+     * returned by {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @param quarter  the quarter (1 to 4).
      * @param year  the year (1900 to 9999).
@@ -118,19 +124,20 @@ public class Quarter extends RegularTimePeriod implements Serializable {
         }
         this.year = (short) year.getYear();
         this.quarter = (byte) quarter;
-        peg(Calendar.getInstance());
+        peg(getCalendarInstance());
     }
 
     /**
-     * Constructs a new instance, based on a date/time and the default time
-     * zone.
+     * Constructs a new instance, based on a date/time.
+     * The time zone and locale are determined by the calendar
+     * returned by {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @param time  the date/time ({@code null} not permitted).
      *
      * @see #Quarter(Date, TimeZone, Locale)
      */
     public Quarter(Date time) {
-        this(time, TimeZone.getDefault(), Locale.getDefault());
+        this(time, getCalendarInstance());
     }
 
     /**
@@ -145,6 +152,22 @@ public class Quarter extends RegularTimePeriod implements Serializable {
      */
     public Quarter(Date time, TimeZone zone, Locale locale) {
         Calendar calendar = Calendar.getInstance(zone, locale);
+        calendar.setTime(time);
+        int month = calendar.get(Calendar.MONTH) + 1;
+        this.quarter = (byte) SerialDate.monthCodeToQuarter(month);
+        this.year = (short) calendar.get(Calendar.YEAR);
+        peg(calendar);
+    }
+
+    /**
+     * Constructs a new instance, based on a particular date/time.
+     * The time zone and locale are determined by the {@code calendar}
+     * parameter.
+     *
+     * @param time the date/time ({@code null} not permitted).
+     * @param calendar the calendar to use for calculations ({@code null} not permitted).
+     */
+    public Quarter(Date time, Calendar calendar) {
         calendar.setTime(time);
         int month = calendar.get(Calendar.MONTH) + 1;
         this.quarter = (byte) SerialDate.monthCodeToQuarter(month);
@@ -227,6 +250,9 @@ public class Quarter extends RegularTimePeriod implements Serializable {
 
     /**
      * Returns the quarter preceding this one.
+     * No matter what time zone and locale this instance was created with,
+     * the returned instance will use the default calendar for time
+     * calculations, obtained with {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @return The quarter preceding this one (or {@code null} if this is
      *     Q1 1900).
@@ -250,6 +276,9 @@ public class Quarter extends RegularTimePeriod implements Serializable {
 
     /**
      * Returns the quarter following this one.
+     * No matter what time zone and locale this instance was created with,
+     * the returned instance will use the default calendar for time
+     * calculations, obtained with {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @return The quarter following this one (or null if this is Q4 9999).
      */

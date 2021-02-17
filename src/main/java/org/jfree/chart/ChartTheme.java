@@ -52,6 +52,6 @@ public interface ChartTheme {
      *
      * @param chart  the chart ({@code null} not permitted).
      */
-    public void apply(JFreeChart chart);
+    void apply(JFreeChart chart);
 
 }

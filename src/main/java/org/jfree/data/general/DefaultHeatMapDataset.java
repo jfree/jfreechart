@@ -41,7 +41,7 @@
 package org.jfree.data.general;
 
 import java.io.Serializable;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.api.PublicCloneable;
 import org.jfree.data.DataUtils;
 
 /**
@@ -53,22 +53,22 @@ public class DefaultHeatMapDataset extends AbstractDataset
         implements HeatMapDataset, Cloneable, PublicCloneable, Serializable {
 
     /** The number of samples in this dataset for the x-dimension. */
-    private int xSamples;
+    private final int xSamples;
 
     /** The number of samples in this dataset for the y-dimension. */
-    private int ySamples;
+    private final int ySamples;
 
     /** The minimum x-value in the dataset. */
-    private double minX;
+    private final double minX;
 
     /** The maximum x-value in the dataset. */
-    private double maxX;
+    private final double maxX;
 
     /** The minimum y-value in the dataset. */
-    private double minY;
+    private final double minY;
 
     /** The maximum y-value in the dataset. */
-    private double maxY;
+    private final double maxY;
 
     /** Storage for the z-values. */
     private double[][] zValues;
@@ -245,7 +245,7 @@ public class DefaultHeatMapDataset extends AbstractDataset
      */
     @Override
     public Number getZ(int xIndex, int yIndex) {
-        return new Double(getZValue(xIndex, yIndex));
+        return getZValue(xIndex, yIndex);
     }
 
     /**

@@ -67,6 +67,8 @@ public class Month extends RegularTimePeriod implements Serializable {
 
     /**
      * Constructs a new Month, based on the current system time.
+     * The time zone and locale are determined by the calendar
+     * returned by {@link RegularTimePeriod#getCalendarInstance()}.
      */
     public Month() {
         this(new Date());
@@ -74,6 +76,8 @@ public class Month extends RegularTimePeriod implements Serializable {
 
     /**
      * Constructs a new month instance.
+     * The time zone and locale are determined by the calendar
+     * returned by {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @param month  the month (in the range 1 to 12).
      * @param year  the year.
@@ -84,11 +88,13 @@ public class Month extends RegularTimePeriod implements Serializable {
         }
         this.month = month;
         this.year = year;
-        peg(Calendar.getInstance());
+        peg(getCalendarInstance());
     }
 
     /**
      * Constructs a new month instance.
+     * The time zone and locale are determined by the calendar
+     * returned by {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @param month  the month (in the range 1 to 12).
      * @param year  the year.
@@ -99,19 +105,20 @@ public class Month extends RegularTimePeriod implements Serializable {
         }
         this.month = month;
         this.year = year.getYear();
-        peg(Calendar.getInstance());
+        peg(getCalendarInstance());
     }
 
     /**
-     * Constructs a new {@code Month} instance, based on a date/time and
-     * the default time zone.
+     * Constructs a new {@code Month} instance, based on a date/time.
+     * The time zone and locale are determined by the calendar
+     * returned by {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @param time  the date/time ({@code null} not permitted).
      *
      * @see #Month(Date, TimeZone, Locale)
      */
     public Month(Date time) {
-        this(time, TimeZone.getDefault(), Locale.getDefault());
+        this(time, getCalendarInstance());
     }
 
     /**
@@ -126,6 +133,21 @@ public class Month extends RegularTimePeriod implements Serializable {
      */
     public Month(Date time, TimeZone zone, Locale locale) {
         Calendar calendar = Calendar.getInstance(zone, locale);
+        calendar.setTime(time);
+        this.month = calendar.get(Calendar.MONTH) + 1;
+        this.year = calendar.get(Calendar.YEAR);
+        peg(calendar);
+    }
+
+    /**
+     * Constructs a new instance, based on a particular date/time.
+     * The time zone and locale are determined by the {@code calendar}
+     * parameter.
+     *
+     * @param time the date/time ({@code null} not permitted).
+     * @param calendar the calendar to use for calculations ({@code null} not permitted).
+     */
+    public Month(Date time, Calendar calendar) {
         calendar.setTime(time);
         this.month = calendar.get(Calendar.MONTH) + 1;
         this.year = calendar.get(Calendar.YEAR);
@@ -205,7 +227,8 @@ public class Month extends RegularTimePeriod implements Serializable {
 
     /**
      * Returns the month preceding this one.  Note that the returned
-     * {@link Month} is "pegged" using the default time-zone, irrespective of
+     * {@link Month} is "pegged" using the default calendar, obtained
+     * with {@link RegularTimePeriod#getCalendarInstance()}, irrespective of
      * the time-zone used to peg of the current month (which is not recorded
      * anywhere).  See the {@link #peg(Calendar)} method.
      *
@@ -230,7 +253,8 @@ public class Month extends RegularTimePeriod implements Serializable {
 
     /**
      * Returns the month following this one.  Note that the returned
-     * {@link Month} is "pegged" using the default time-zone, irrespective of
+     * {@link Month} is "pegged" using the default calendar, obtained
+     * with {@link RegularTimePeriod#getCalendarInstance()}, irrespective of
      * the time-zone used to peg of the current month (which is not recorded
      * anywhere).  See the {@link #peg(Calendar)} method.
      *

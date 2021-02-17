@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,70 +27,11 @@
  * ----------------
  * BarRenderer.java
  * ----------------
- * (C) Copyright 2002-2017, by Object Refinery Limited.
+ * (C) Copyright 2002-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Christian W. Zuckschwerdt;
  *                   Peter Kolb (patches 2497611, 2791407);
- *
- * Changes
- * -------
- * 14-Mar-2002 : Version 1 (DG);
- * 23-May-2002 : Added tooltip generator to renderer (DG);
- * 29-May-2002 : Moved tooltip generator to abstract super-class (DG);
- * 25-Jun-2002 : Changed constructor to protected and removed redundant
- *               code (DG);
- * 26-Jun-2002 : Added axis to initialise method, and record upper and lower
- *               clip values (DG);
- * 24-Sep-2002 : Added getLegendItem() method (DG);
- * 09-Oct-2002 : Modified constructor to include URL generator (DG);
- * 05-Nov-2002 : Base dataset is now TableDataset not CategoryDataset (DG);
- * 10-Jan-2003 : Moved get/setItemMargin() method up from subclasses (DG);
- * 17-Jan-2003 : Moved plot classes into a separate package (DG);
- * 25-Mar-2003 : Implemented Serializable (DG);
- * 01-May-2003 : Modified clipping to allow for dual axes and datasets (DG);
- * 12-May-2003 : Merged horizontal and vertical bar renderers (DG);
- * 12-Jun-2003 : Updates for item labels (DG);
- * 30-Jul-2003 : Modified entity constructor (CZ);
- * 02-Sep-2003 : Changed initialise method to fix bug 790407 (DG);
- * 16-Sep-2003 : Changed ChartRenderingInfo --> PlotRenderingInfo (DG);
- * 07-Oct-2003 : Added renderer state (DG);
- * 27-Oct-2003 : Merged drawHorizontalItem() and drawVerticalItem()
- *               methods (DG);
- * 28-Oct-2003 : Added support for gradient paint on bars (DG);
- * 14-Nov-2003 : Added 'maxBarWidth' attribute (DG);
- * 10-Feb-2004 : Small changes inside drawItem() method to ease cut-and-paste
- *               overriding (DG);
- * 19-Mar-2004 : Fixed bug introduced with separation of tool tip and item
- *               label generators.  Fixed equals() method (DG);
- * 11-May-2004 : Fix for null pointer exception (bug id 951127) (DG);
- * 05-Nov-2004 : Modified drawItem() signature (DG);
- * 26-Jan-2005 : Provided override for getLegendItem() method (DG);
- * 20-Apr-2005 : Generate legend labels, tooltips and URLs (DG);
- * 18-May-2005 : Added configurable base value (DG);
- * 09-Jun-2005 : Use addItemEntity() method from superclass (DG);
- * 01-Dec-2005 : Update legend item to use/not use outline (DG);
- * ------------: JFreeChart 1.0.x ---------------------------------------------
- * 06-Dec-2005 : Fixed bug 1374222 (JDK 1.4 specific code) (DG);
- * 11-Jan-2006 : Fixed bug 1401856 (bad rendering for non-zero base) (DG);
- * 04-Aug-2006 : Fixed bug 1467706 (missing item labels for zero value
- *               bars) (DG);
- * 04-Dec-2006 : Fixed bug in rendering to non-primary axis (DG);
- * 13-Dec-2006 : Add support for GradientPaint display in legend items (DG);
- * 20-Apr-2007 : Updated getLegendItem() for renderer change (DG);
- * 11-May-2007 : Check for visibility in getLegendItem() (DG);
- * 17-May-2007 : Set datasetIndex and seriesIndex in getLegendItem() (DG);
- * 18-May-2007 : Set dataset and seriesKey for LegendItem (DG);
- * 07-May-2008 : If minimumBarLength is > 0.0, extend the non-base end of the
- *               bar (DG);
- * 17-Jun-2008 : Apply legend shape, font and paint attributes (DG);
- * 24-Jun-2008 : Added barPainter mechanism (DG);
- * 26-Jun-2008 : Added crosshair support (DG);
- * 13-Aug-2008 : Added shadowPaint attribute (DG);
- * 14-Jan-2009 : Added support for seriesVisible flags (PK);
- * 03-Feb-2009 : Added defaultShadowsVisible flag - see patch 2511330 (PK);
- * 03-Jul-2013 : Use ParamChecks (DG);
- * 04-Aug-2014 : Add element hinting for JFreeSVG (DG);
  *
  */
 
@@ -112,7 +53,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Objects;
 
-import org.jfree.chart.LegendItem;
+import org.jfree.chart.legend.LegendItem;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
@@ -125,12 +66,12 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.GradientPaintTransformer;
-import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.api.RectangleEdge;
 import org.jfree.chart.ui.StandardGradientPaintTransformer;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.PublicCloneable;
-import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.api.PublicCloneable;
+import org.jfree.chart.internal.SerialUtils;
 import org.jfree.data.KeyedValues2DItemKey;
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
@@ -140,8 +81,7 @@ import org.jfree.data.category.CategoryDataset;
  * The example shown here is generated by the {@code BarChartDemo1.java}
  * program included in the JFreeChart Demo Collection:
  * <br><br>
- * <img src="../../../../../images/BarRendererSample.png"
- * alt="BarRendererSample.png">
+ * <img src="doc-files/BarChartDemo1.svg" alt="BarChartDemo1.svg">
  */
 public class BarRenderer extends AbstractCategoryItemRenderer
         implements Cloneable, PublicCloneable, Serializable {

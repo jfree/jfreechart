@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * StandardChartTheme.java
  * -----------------------
- * (C) Copyright 2008-2020, by Object Refinery Limited.
+ * (C) Copyright 2008-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -87,16 +87,16 @@ import org.jfree.chart.renderer.xy.XYBarPainter;
 import org.jfree.chart.renderer.xy.XYBarRenderer;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.chart.title.CompositeTitle;
-import org.jfree.chart.title.LegendTitle;
-import org.jfree.chart.title.PaintScaleLegend;
+import org.jfree.chart.legend.LegendTitle;
+import org.jfree.chart.legend.PaintScaleLegend;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.chart.title.Title;
-import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.api.RectangleInsets;
 import org.jfree.chart.util.DefaultShadowGenerator;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.PublicCloneable;
-import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.api.PublicCloneable;
+import org.jfree.chart.internal.SerialUtils;
 import org.jfree.chart.util.ShadowGenerator;
 
 /**
@@ -111,7 +111,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
         PublicCloneable, Serializable {
 
     /** The name of this theme. */
-    private String name;
+    private final String name;
 
     /**
      * The largest font size.  Use for the main chart title.
@@ -1291,6 +1291,8 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
      * Applies the attributes of this theme to a {@link XYPlot}.
      *
      * @param plot  the plot ({@code null} not permitted).
+     * 
+     * @param <S> the type for the series keys.
      */
     protected <S extends Comparable<S>> void applyToXYPlot(XYPlot<S> plot) {
         plot.setAxisOffset(this.axisOffset);

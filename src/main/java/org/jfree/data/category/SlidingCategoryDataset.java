@@ -45,7 +45,7 @@ package org.jfree.data.category;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.api.PublicCloneable;
 
 import org.jfree.data.UnknownKeyException;
 import org.jfree.data.general.AbstractDataset;

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------
  * Plot.java
  * ---------
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Sylvain Vieujot;
@@ -67,8 +67,8 @@ import java.util.Objects;
 import javax.swing.event.EventListenerList;
 
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.LegendItemCollection;
-import org.jfree.chart.LegendItemSource;
+import org.jfree.chart.legend.LegendItemCollection;
+import org.jfree.chart.legend.LegendItemSource;
 import org.jfree.chart.annotations.Annotation;
 import org.jfree.chart.axis.AxisLocation;
 import org.jfree.chart.entity.EntityCollection;
@@ -87,12 +87,13 @@ import org.jfree.chart.text.TextBlock;
 import org.jfree.chart.text.TextBlockAnchor;
 import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.Align;
-import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.ui.RectangleInsets;
-import org.jfree.chart.util.CloneUtils;
+import org.jfree.chart.api.RectangleEdge;
+import org.jfree.chart.api.RectangleInsets;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.PublicCloneable;
-import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.api.PublicCloneable;
+import org.jfree.chart.internal.SerialUtils;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.DatasetChangeListener;
 import org.jfree.data.general.DatasetGroup;
@@ -359,7 +360,7 @@ public abstract class Plot implements AxisChangeListener,
      * @see #getNoDataMessageFont()
      */
     public void setNoDataMessageFont(Font font) {
-        Objects.requireNonNull(font, "font");
+        Args.nullNotPermitted(font, "font");
         this.noDataMessageFont = font;
         fireChangeEvent();
     }
@@ -385,7 +386,7 @@ public abstract class Plot implements AxisChangeListener,
      * @see #getNoDataMessagePaint()
      */
     public void setNoDataMessagePaint(Paint paint) {
-        Objects.requireNonNull(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.noDataMessagePaint = paint;
         fireChangeEvent();
     }
@@ -493,7 +494,7 @@ public abstract class Plot implements AxisChangeListener,
      * @see #setInsets(RectangleInsets)
      */
     public void setInsets(RectangleInsets insets, boolean notify) {
-        Objects.requireNonNull(insets, "insets");
+        Args.nullNotPermitted(insets, "insets");
         if (!this.insets.equals(insets)) {
             this.insets = insets;
             if (notify) {
@@ -1004,7 +1005,7 @@ public abstract class Plot implements AxisChangeListener,
      */
     protected void fillBackground(Graphics2D g2, Rectangle2D area,
             PlotOrientation orientation) {
-        Objects.requireNonNull(orientation, "orientation");
+        Args.nullNotPermitted(orientation, "orientation");
         if (this.backgroundPaint == null) {
             return;
         }
@@ -1392,8 +1393,8 @@ public abstract class Plot implements AxisChangeListener,
     public static RectangleEdge resolveDomainAxisLocation(
             AxisLocation location, PlotOrientation orientation) {
 
-        Objects.requireNonNull(location, "location");
-        Objects.requireNonNull(orientation, "orientation");
+        Args.nullNotPermitted(location, "location");
+        Args.nullNotPermitted(orientation, "orientation");
 
         RectangleEdge result = null;
         switch (location) {
@@ -1447,8 +1448,8 @@ public abstract class Plot implements AxisChangeListener,
     public static RectangleEdge resolveRangeAxisLocation(
             AxisLocation location, PlotOrientation orientation) {
 
-        Objects.requireNonNull(location, "location");
-        Objects.requireNonNull(orientation, "orientation");
+        Args.nullNotPermitted(location, "location");
+        Args.nullNotPermitted(orientation, "orientation");
 
         RectangleEdge result = null;
         switch (location) {

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * ---------------------------
  * NormalizedMatrixSeries.java
  * ---------------------------
- * (C) Copyright 2003-2008, by Barak Naveh and Contributors.
+ * (C) Copyright 2003-2020, by Barak Naveh and Contributors.
  *
  * Original Author:  Barak Naveh;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 10-Jul-2003 : Version 1 contributed by Barak Naveh (DG);
- * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
  *
  */
 
@@ -95,7 +90,7 @@ public class NormalizedMatrixSeries extends MatrixSeries {
         int j = getItemColumn(itemIndex);
 
         double mij = get(i, j) * this.m_scaleFactor;
-        Number n = new Double(mij / this.m_totalSum);
+        Number n = mij / this.m_totalSum;
 
         return n;
     }

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * TimeSeries.java
  * ---------------
- * (C) Copyright 2001-2020, by Object Refinery Limited.
+ * (C) Copyright 2001-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Bryan Scott;
@@ -45,14 +45,13 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.TimeZone;
 
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.CloneUtils;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.internal.CloneUtils;
 import org.jfree.data.Range;
 import org.jfree.data.general.Series;
 import org.jfree.data.general.SeriesChangeEvent;
@@ -64,6 +63,8 @@ import org.jfree.data.general.SeriesException;
  * The time series will ensure that (a) all data items have the same type of
  * period (for example, {@link Day}) and (b) that each period appears at
  * most one time in the series.
+ * 
+ * @param <S>  the type for the series keys ({@code String} is commonly used).
  */
 public class TimeSeries<S extends Comparable<S>> extends Series<S> 
         implements Cloneable, Serializable {
@@ -343,6 +344,23 @@ public class TimeSeries<S extends Comparable<S>> extends Series<S>
             return null;
         }
         Calendar calendar = Calendar.getInstance(zone);
+        return findValueRange(xRange, xAnchor, calendar);
+    }
+
+    /**
+     * Finds the range of y-values that fall within the specified range of
+     * x-values (where the x-values are interpreted as milliseconds since the
+     * epoch and converted to time periods using the specified timezone).
+     * 
+     * @param xRange  the subset of x-values to use ({@code null} not
+     *     permitted).
+     * @param xAnchor  the anchor point for the x-values ({@code null}
+     *     not permitted).
+     * @param calendar  the calendar ({@code null} not permitted).
+     * 
+     * @return The range of y-values.
+     */
+    public Range findValueRange(Range xRange, TimePeriodAnchor xAnchor, Calendar calendar) {
         // since the items are ordered, we could be more clever here and avoid
         // iterating over all the data
         double lowY = Double.POSITIVE_INFINITY;
@@ -731,7 +749,7 @@ public class TimeSeries<S extends Comparable<S>> extends Series<S>
      * @since 1.0.14
      */
     public void update(RegularTimePeriod period, double value) {
-      update(period, new Double(value));
+      update(period, Double.valueOf(value));
     }
 
     /**
@@ -813,7 +831,7 @@ public class TimeSeries<S extends Comparable<S>> extends Series<S>
      */
     public TimeSeriesDataItem addOrUpdate(RegularTimePeriod period,
                                           double value) {
-        return addOrUpdate(period, new Double(value));
+        return addOrUpdate(period, Double.valueOf(value));
     }
 
     /**

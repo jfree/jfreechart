@@ -59,7 +59,7 @@ public interface ImageEncoder {
      *
      * @throws IOException if there is an IO problem.
      */
-    public byte[] encode(BufferedImage bufferedImage) throws IOException;
+    byte[] encode(BufferedImage bufferedImage) throws IOException;
 
     /**
      * Encodes an image in a particular format and writes it to an OutputStream.
@@ -68,7 +68,7 @@ public interface ImageEncoder {
      * @param outputStream  The OutputStream to write the encoded image to.
      * @throws IOException if there is an IO problem.
      */
-    public void encode(BufferedImage bufferedImage, OutputStream outputStream)
+    void encode(BufferedImage bufferedImage, OutputStream outputStream)
         throws IOException;
 
     /**
@@ -76,7 +76,7 @@ public interface ImageEncoder {
      *
      * @return A float representing the quality.
      */
-    public float getQuality();
+    float getQuality();
 
     /**
      * Set the quality of the image encoding (not supported by all
@@ -84,14 +84,14 @@ public interface ImageEncoder {
      *
      * @param quality  A float representing the quality.
      */
-    public void setQuality(float quality);
+    void setQuality(float quality);
 
     /**
      * Get whether the encoder should encode alpha transparency.
      *
      * @return Whether the encoder is encoding alpha transparency.
      */
-    public boolean isEncodingAlpha();
+    boolean isEncodingAlpha();
 
     /**
      * Set whether the encoder should encode alpha transparency (not
@@ -100,6 +100,6 @@ public interface ImageEncoder {
      * @param encodingAlpha  Whether the encoder should encode alpha
      *                       transparency.
      */
-    public void setEncodingAlpha(boolean encodingAlpha);
+    void setEncodingAlpha(boolean encodingAlpha);
 
 }

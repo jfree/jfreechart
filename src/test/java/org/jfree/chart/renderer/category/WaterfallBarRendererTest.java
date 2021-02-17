@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------------
  * WaterfallBarRendererTest.java
  * -----------------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -44,8 +44,8 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import java.awt.Color;
 
 import org.jfree.chart.TestUtils;
-import org.jfree.chart.util.CloneUtils;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.internal.CloneUtils;
+import org.jfree.chart.api.PublicCloneable;
 
 import org.junit.jupiter.api.Test;
 

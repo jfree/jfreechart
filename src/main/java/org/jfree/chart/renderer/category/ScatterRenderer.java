@@ -50,14 +50,14 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-import org.jfree.chart.LegendItem;
+import org.jfree.chart.legend.LegendItem;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.chart.util.BooleanList;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.internal.BooleanList;
+import org.jfree.chart.api.PublicCloneable;
 import org.jfree.chart.util.ShapeUtils;
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
@@ -70,8 +70,7 @@ import org.jfree.data.statistics.MultiValueCategoryDataset;
  * the {@code ScatterRendererDemo1.java} program included in the
  * JFreeChart Demo Collection:
  * <br><br>
- * <img src="../../../../../images/ScatterRendererSample.png"
- * alt="ScatterRendererSample.png">
+ * <img src="doc-files/ScatterRendererSample.png" alt="ScatterRendererSample.png">
  *
  * @since 1.0.7
  */

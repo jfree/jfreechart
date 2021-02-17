@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,25 +27,10 @@
  * ---------------
  * LabelBlock.java
  * ---------------
- * (C) Copyright 2004-2017, by Object Refinery Limited.
+ * (C) Copyright 2004-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Pierre-Marie Le Biot;
- *
- * Changes:
- * --------
- * 22-Oct-2004 : Version 1 (DG);
- * 19-Apr-2005 : Added optional tooltip and URL text items,
- *               draw() method now returns entities if
- *               requested (DG);
- * 13-May-2005 : Added methods to set the font (DG);
- * 01-Sep-2005 : Added paint management (PMLB);
- *               Implemented equals() and clone() (PublicCloneable) (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 20-Jul-2006 : Fixed entity area in draw() method (DG);
- * 16-Mar-2007 : Fixed serialization when using GradientPaint (DG);
- * 10-Feb-2009 : Added alignment fields (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -68,12 +53,12 @@ import org.jfree.chart.entity.StandardEntityCollection;
 import org.jfree.chart.text.TextBlock;
 import org.jfree.chart.text.TextBlockAnchor;
 import org.jfree.chart.text.TextUtils;
-import org.jfree.chart.ui.RectangleAnchor;
+import org.jfree.chart.api.RectangleAnchor;
 import org.jfree.chart.ui.Size2D;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.PublicCloneable;
-import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.api.PublicCloneable;
+import org.jfree.chart.internal.SerialUtils;
 
 /**
  * A block containing a label.
@@ -88,7 +73,7 @@ public class LabelBlock extends AbstractBlock
      * The text for the label - retained in case the label needs
      * regenerating (for example, to change the font).
      */
-    private String text;
+    private final String text;
 
     /** The label. */
     private TextBlock label;

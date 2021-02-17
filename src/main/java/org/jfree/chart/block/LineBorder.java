@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,18 +27,10 @@
  * ---------------
  * LineBorder.java
  * ---------------
- * (C) Copyright 2007-2016, by Christo Zietsman and Contributors.
+ * (C) Copyright 2007-2021, by Christo Zietsman and Contributors.
  *
  * Original Author:  Christo Zietsman;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes:
- * --------
- * 16-Mar-2007 : Version 1, contributed by Christo Zietsman with
- *               modifications by DG (DG);
- * 13-Jun-2007 : Don't draw if area doesn't have positive dimensions (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
- * 29-Jul-2014 : Add rendering hint to normalise stroke for border (DG);
  *
  */
 
@@ -58,10 +50,10 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Objects;
 
-import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.api.RectangleInsets;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.internal.SerialUtils;
 
 /**
  * A line border for any {@link AbstractBlock}.
@@ -80,7 +72,7 @@ public class LineBorder implements BlockFrame, Serializable {
     private transient Stroke stroke;
 
     /** The insets. */
-    private RectangleInsets insets;
+    private final RectangleInsets insets;
 
     /**
      * Creates a default border.

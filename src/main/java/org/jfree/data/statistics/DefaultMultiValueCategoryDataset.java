@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------------------
  * DefaultMultiValueCategoryDataset.java
  * -------------------------------------
- * (C) Copyright 2007-2020, by David Forslund and Contributors.
+ * (C) Copyright 2007-2021, by David Forslund and Contributors.
  *
  * Original Author:  David Forslund;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -40,8 +40,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.api.PublicCloneable;
 
 import org.jfree.data.KeyedObjects2D;
 import org.jfree.data.Range;

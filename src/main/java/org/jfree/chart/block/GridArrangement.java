@@ -150,9 +150,8 @@ public class GridArrangement implements Arrangement, Serializable {
     protected Size2D arrangeNN(BlockContainer container, Graphics2D g2) {
         double maxW = 0.0;
         double maxH = 0.0;
-        List blocks = container.getBlocks();
-        for (Object block : blocks) {
-            Block b = (Block) block;
+        List<Block> blocks = container.getBlocks();
+        for (Block b : blocks) {
             if (b != null) {
                 Size2D s = b.arrange(g2, RectangleConstraint.NONE);
                 maxW = Math.max(maxW, s.width);
@@ -178,14 +177,14 @@ public class GridArrangement implements Arrangement, Serializable {
                                RectangleConstraint constraint) {
         double width = constraint.getWidth() / this.columns;
         double height = constraint.getHeight() / this.rows;
-        List blocks = container.getBlocks();
+        List<Block> blocks = container.getBlocks();
         for (int c = 0; c < this.columns; c++) {
             for (int r = 0; r < this.rows; r++) {
                 int index = r * this.columns + c;
                 if (index >= blocks.size()) {
                     break;
                 }
-                Block b = (Block) blocks.get(index);
+                Block b = blocks.get(index);
                 if (b != null) {
                     b.setBounds(new Rectangle2D.Double(c * width, r * height,
                             width, height));
@@ -357,7 +356,7 @@ public class GridArrangement implements Arrangement, Serializable {
 
         double width = constraint.getWidth() / this.columns;
         RectangleConstraint bc = constraint.toFixedWidth(width);
-        List blocks = container.getBlocks();
+        List<Block> blocks = container.getBlocks();
         double maxH = 0.0;
         for (int r = 0; r < this.rows; r++) {
             for (int c = 0; c < this.columns; c++) {
@@ -365,7 +364,7 @@ public class GridArrangement implements Arrangement, Serializable {
                 if (index >= blocks.size()) {
                     break;
                 }
-                Block b = (Block) blocks.get(index);
+                Block b = blocks.get(index);
                 if (b != null) {
                     Size2D s = b.arrange(g2, bc);
                     maxH = Math.max(maxH, s.getHeight());
@@ -390,7 +389,7 @@ public class GridArrangement implements Arrangement, Serializable {
 
         double height = constraint.getHeight() / this.rows;
         RectangleConstraint bc = constraint.toFixedHeight(height);
-        List blocks = container.getBlocks();
+        List<Block> blocks = container.getBlocks();
         double maxW = 0.0;
         for (int r = 0; r < this.rows; r++) {
             for (int c = 0; c < this.columns; c++) {
@@ -398,7 +397,7 @@ public class GridArrangement implements Arrangement, Serializable {
                 if (index >= blocks.size()) {
                     break;
                 }
-                Block b = (Block) blocks.get(index);
+                Block b = blocks.get(index);
                 if (b != null) {
                     Size2D s = b.arrange(g2, bc);
                     maxW = Math.max(maxW, s.getWidth());

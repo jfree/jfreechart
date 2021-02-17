@@ -36,6 +36,7 @@
 
 package org.jfree.chart.util;
 
+import org.jfree.chart.internal.CloneUtils;
 import java.text.DecimalFormat;
 
 import org.jfree.chart.TestUtils;

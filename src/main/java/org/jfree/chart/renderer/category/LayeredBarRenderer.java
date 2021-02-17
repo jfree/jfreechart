@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * LayeredBarRenderer.java
  * -----------------------
- * (C) Copyright 2003-2020, by Arnaud Lelievre and Contributors.
+ * (C) Copyright 2003-2021, by Arnaud Lelievre and Contributors.
  *
  * Original Author:  Arnaud Lelievre (for Garden);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -43,6 +43,9 @@ import java.awt.Paint;
 import java.awt.Stroke;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;
@@ -51,8 +54,7 @@ import org.jfree.chart.labels.CategoryItemLabelGenerator;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.ui.GradientPaintTransformer;
-import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.util.ObjectList;
+import org.jfree.chart.api.RectangleEdge;
 import org.jfree.data.category.CategoryDataset;
 
 /**
@@ -61,7 +63,7 @@ import org.jfree.data.category.CategoryDataset;
  * {@code LayeredBarChartDemo1.java} program included in the JFreeChart
  * Demo Collection:
  * <br><br>
- * <img src="../../../../../images/LayeredBarRendererSample.png"
+ * <img src="doc-files/LayeredBarRendererSample.png"
  * alt="LayeredBarRendererSample.png">
  */
 public class LayeredBarRenderer extends BarRenderer implements Serializable {
@@ -70,14 +72,14 @@ public class LayeredBarRenderer extends BarRenderer implements Serializable {
     private static final long serialVersionUID = -8716572894780469487L;
 
     /** A list of the width of each series bar. */
-    protected ObjectList seriesBarWidthList;
+    protected Map<Integer, Double> seriesBarWidths;
 
     /**
      * Default constructor.
      */
     public LayeredBarRenderer() {
         super();
-        this.seriesBarWidthList = new ObjectList();
+        this.seriesBarWidths = new HashMap<>();
     }
 
     /**
@@ -90,7 +92,7 @@ public class LayeredBarRenderer extends BarRenderer implements Serializable {
      */
     public double getSeriesBarWidth(int series) {
         double result = Double.NaN;
-        Number n = (Number) this.seriesBarWidthList.get(series);
+        Number n = (Number) this.seriesBarWidths.get(series);
         if (n != null) {
             result = n.doubleValue();
         }
@@ -105,7 +107,7 @@ public class LayeredBarRenderer extends BarRenderer implements Serializable {
      *               the maximum).
      */
     public void setSeriesBarWidth(int series, double width) {
-        this.seriesBarWidthList.set(series, width);
+        this.seriesBarWidths.put(series, width);
     }
 
     /**
@@ -435,6 +437,38 @@ public class LayeredBarRenderer extends BarRenderer implements Serializable {
         if (entities != null) {
             addItemEntity(entities, dataset, row, column, bar);
         }
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 17 * hash + Objects.hashCode(this.seriesBarWidths);
+        return hash;
+    }
+
+    /**
+     * Tests the entity for equality with an arbitrary object.
+     *
+     * @param obj  the object to test against ({@code null} permitted).
+     *
+     * @return A boolean.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final LayeredBarRenderer other = (LayeredBarRenderer) obj;
+        if (!Objects.equals(this.seriesBarWidths, other.seriesBarWidths)) {
+            return false;
+        }
+        return true;
     }
 
 }

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------
  * XYPlot.java
  * -----------
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Craig MacFarlane;
@@ -74,7 +74,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -84,8 +83,8 @@ import java.util.Set;
 import java.util.TreeMap;
 import org.jfree.chart.JFreeChart;
 
-import org.jfree.chart.LegendItem;
-import org.jfree.chart.LegendItemCollection;
+import org.jfree.chart.legend.LegendItem;
+import org.jfree.chart.legend.LegendItemCollection;
 import org.jfree.chart.annotations.Annotation;
 import org.jfree.chart.annotations.XYAnnotation;
 import org.jfree.chart.annotations.XYAnnotationBoundsInfo;
@@ -106,15 +105,15 @@ import org.jfree.chart.renderer.RendererUtils;
 import org.jfree.chart.renderer.xy.AbstractXYItemRenderer;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.chart.renderer.xy.XYItemRendererState;
-import org.jfree.chart.ui.Layer;
-import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.ui.RectangleInsets;
-import org.jfree.chart.util.CloneUtils;
+import org.jfree.chart.api.Layer;
+import org.jfree.chart.api.RectangleEdge;
+import org.jfree.chart.api.RectangleInsets;
+import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.api.PublicCloneable;
 import org.jfree.chart.util.ResourceBundleWrapper;
-import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.internal.SerialUtils;
 import org.jfree.chart.util.ShadowGenerator;
 import org.jfree.data.Range;
 import org.jfree.data.general.DatasetChangeEvent;
@@ -569,7 +568,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
      * @see #getOrientation()
      */
     public void setOrientation(PlotOrientation orientation) {
-        Objects.requireNonNull(orientation, "orientation");
+        Args.nullNotPermitted(orientation, "orientation");
         if (orientation != this.orientation) {
             this.orientation = orientation;
             fireChangeEvent();
@@ -596,7 +595,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
      * @see #getAxisOffset()
      */
     public void setAxisOffset(RectangleInsets offset) {
-        Objects.requireNonNull(offset, "offset");
+        Args.nullNotPermitted(offset, "offset");
         this.axisOffset = offset;
         fireChangeEvent();
     }
@@ -1466,7 +1465,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
      * @see #getDatasetRenderingOrder()
      */
     public void setDatasetRenderingOrder(DatasetRenderingOrder order) {
-        Objects.requireNonNull(order, "order");
+        Args.nullNotPermitted(order, "order");
         this.datasetRenderingOrder = order;
         fireChangeEvent();
     }
@@ -1493,7 +1492,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
      * @see #getSeriesRenderingOrder()
      */
     public void setSeriesRenderingOrder(SeriesRenderingOrder order) {
-        Objects.requireNonNull(order, "order");
+        Args.nullNotPermitted(order, "order");
         this.seriesRenderingOrder = order;
         fireChangeEvent();
     }
@@ -1648,7 +1647,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
      * @see #getDomainGridlineStroke()
      */
     public void setDomainGridlineStroke(Stroke stroke) {
-        Objects.requireNonNull(stroke, "stroke");
+        Args.nullNotPermitted(stroke, "stroke");
         this.domainGridlineStroke = stroke;
         fireChangeEvent();
     }
@@ -1679,7 +1678,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
      * @since 1.0.12
      */
     public void setDomainMinorGridlineStroke(Stroke stroke) {
-        Objects.requireNonNull(stroke, "stroke");
+        Args.nullNotPermitted(stroke, "stroke");
         this.domainMinorGridlineStroke = stroke;
         fireChangeEvent();
     }
@@ -1705,7 +1704,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
      * @see #getDomainGridlinePaint()
      */
     public void setDomainGridlinePaint(Paint paint) {
-        Objects.requireNonNull(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.domainGridlinePaint = paint;
         fireChangeEvent();
     }
@@ -1735,7 +1734,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
      * @since 1.0.12
      */
     public void setDomainMinorGridlinePaint(Paint paint) {
-        Objects.requireNonNull(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.domainMinorGridlinePaint = paint;
         fireChangeEvent();
     }
@@ -1791,7 +1790,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
      * @see #getRangeGridlineStroke()
      */
     public void setRangeGridlineStroke(Stroke stroke) {
-        Objects.requireNonNull(stroke, "stroke");
+        Args.nullNotPermitted(stroke, "stroke");
         this.rangeGridlineStroke = stroke;
         fireChangeEvent();
     }
@@ -1817,7 +1816,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
      * @see #getRangeGridlinePaint()
      */
     public void setRangeGridlinePaint(Paint paint) {
-        Objects.requireNonNull(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.rangeGridlinePaint = paint;
         fireChangeEvent();
     }
@@ -1881,7 +1880,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
      * @since 1.0.12
      */
     public void setRangeMinorGridlineStroke(Stroke stroke) {
-        Objects.requireNonNull(stroke, "stroke");
+        Args.nullNotPermitted(stroke, "stroke");
         this.rangeMinorGridlineStroke = stroke;
         fireChangeEvent();
     }
@@ -1911,7 +1910,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
      * @since 1.0.12
      */
     public void setRangeMinorGridlinePaint(Paint paint) {
-        Objects.requireNonNull(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.rangeMinorGridlinePaint = paint;
         fireChangeEvent();
     }
@@ -1970,7 +1969,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
      * @see #getRangeZeroBaselineStroke()
      */
     public void setDomainZeroBaselineStroke(Stroke stroke) {
-        Objects.requireNonNull(stroke, "stroke");
+        Args.nullNotPermitted(stroke, "stroke");
         this.domainZeroBaselineStroke = stroke;
         fireChangeEvent();
     }
@@ -2000,7 +1999,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
      * @see #getDomainZeroBaselinePaint()
      */
     public void setDomainZeroBaselinePaint(Paint paint) {
-        Objects.requireNonNull(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.domainZeroBaselinePaint = paint;
         fireChangeEvent();
     }
@@ -2051,7 +2050,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
      * @see #getRangeZeroBaselineStroke()
      */
     public void setRangeZeroBaselineStroke(Stroke stroke) {
-        Objects.requireNonNull(stroke, "stroke");
+        Args.nullNotPermitted(stroke, "stroke");
         this.rangeZeroBaselineStroke = stroke;
         fireChangeEvent();
     }
@@ -2077,7 +2076,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
      * @see #getRangeZeroBaselinePaint()
      */
     public void setRangeZeroBaselinePaint(Paint paint) {
-        Objects.requireNonNull(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.rangeZeroBaselinePaint = paint;
         fireChangeEvent();
     }
@@ -2151,7 +2150,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
      * @see #getQuadrantOrigin()
      */
     public void setQuadrantOrigin(Point2D origin) {
-        Objects.requireNonNull(origin, "origin");
+        Args.nullNotPermitted(origin, "origin");
         this.quadrantOrigin = origin;
         fireChangeEvent();
     }
@@ -2314,8 +2313,8 @@ public class XYPlot<S extends Comparable<S>> extends Plot
      */
     public void addDomainMarker(int index, Marker marker, Layer layer,
             boolean notify) {
-        Objects.requireNonNull(marker, "marker");
-        Objects.requireNonNull(layer, "layer");
+        Args.nullNotPermitted(marker, "marker");
+        Args.nullNotPermitted(layer, "layer");
         List<Marker> markers;
         if (layer == Layer.FOREGROUND) {
             markers = this.foregroundDomainMarkers.get(index);
@@ -2623,8 +2622,8 @@ public class XYPlot<S extends Comparable<S>> extends Plot
      */
     public boolean removeRangeMarker(int index, Marker marker, Layer layer,
             boolean notify) {
-        Objects.requireNonNull(marker, "marker");
-        Objects.requireNonNull(layer, "layer");
+        Args.nullNotPermitted(marker, "marker");
+        Args.nullNotPermitted(layer, "layer");
         List<Marker> markers;
         if (layer == Layer.FOREGROUND) {
             markers = this.foregroundRangeMarkers.get(index);
@@ -2664,7 +2663,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
      * @since 1.0.10
      */
     public void addAnnotation(XYAnnotation annotation, boolean notify) {
-        Objects.requireNonNull(annotation, "annotation");
+        Args.nullNotPermitted(annotation, "annotation");
         this.annotations.add(annotation);
         annotation.addChangeListener(this);
         if (notify) {
@@ -2699,7 +2698,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
      * @since 1.0.10
      */
     public boolean removeAnnotation(XYAnnotation annotation, boolean notify) {
-        Objects.requireNonNull(annotation, "annotation");
+        Args.nullNotPermitted(annotation, "annotation");
         boolean removed = this.annotations.remove(annotation);
         annotation.removeChangeListener(this);
         if (removed && notify) {
@@ -4046,7 +4045,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
      * @return A list of datasets.
      */
     private List<XYDataset<S>> getDatasetsMappedToDomainAxis(Integer axisIndex) {
-        Objects.requireNonNull(axisIndex, "axisIndex");
+        Args.nullNotPermitted(axisIndex, "axisIndex");
         List<XYDataset<S>> result = new ArrayList<>();
         for (Entry<Integer, XYDataset<S>> entry : this.datasets.entrySet()) {
             int index = entry.getKey();
@@ -4073,7 +4072,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
      * @return A list of datasets.
      */
     private List<XYDataset<S>> getDatasetsMappedToRangeAxis(Integer axisIndex) {
-        Objects.requireNonNull(axisIndex, "axisIndex");
+        Args.nullNotPermitted(axisIndex, "axisIndex");
         List<XYDataset<S>> result = new ArrayList<>();
         for (Entry<Integer, XYDataset<S>> entry : this.datasets.entrySet()) {
             int index = entry.getKey();
@@ -4414,13 +4413,12 @@ public class XYPlot<S extends Comparable<S>> extends Plot
      * Sets the Stroke used to draw the crosshairs (if visible) and notifies
      * registered listeners that the axis has been modified.
      *
-     * @param stroke  the new crosshair stroke ({@code null} not
-     *     permitted).
+     * @param stroke  the new crosshair stroke ({@code null} not permitted).
      *
      * @see #getDomainCrosshairStroke()
      */
     public void setDomainCrosshairStroke(Stroke stroke) {
-        Objects.requireNonNull(stroke, "stroke");
+        Args.nullNotPermitted(stroke, "stroke");
         this.domainCrosshairStroke = stroke;
         fireChangeEvent();
     }
@@ -4447,7 +4445,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
      * @see #getDomainCrosshairPaint()
      */
     public void setDomainCrosshairPaint(Paint paint) {
-        Objects.requireNonNull(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.domainCrosshairPaint = paint;
         fireChangeEvent();
     }
@@ -4573,7 +4571,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
      * @see #getRangeCrosshairStroke()
      */
     public void setRangeCrosshairStroke(Stroke stroke) {
-        Objects.requireNonNull(stroke, "stroke");
+        Args.nullNotPermitted(stroke, "stroke");
         this.rangeCrosshairStroke = stroke;
         fireChangeEvent();
     }
@@ -4600,7 +4598,7 @@ public class XYPlot<S extends Comparable<S>> extends Plot
      * @see #getRangeCrosshairPaint()
      */
     public void setRangeCrosshairPaint(Paint paint) {
-        Objects.requireNonNull(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.rangeCrosshairPaint = paint;
         fireChangeEvent();
     }

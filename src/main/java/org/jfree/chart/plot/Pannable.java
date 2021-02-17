@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -28,14 +28,10 @@
  * Pannable.java
  * -------------
  *
- * (C) Copyright 2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2009-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  Ulrich Voigt - patch 2686040;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 19-Mar-2009 : Version 1, with modifications from patch by UV (DG);
  *
  */
 
@@ -43,13 +39,9 @@ package org.jfree.chart.plot;
 
 import java.awt.geom.Point2D;
 
-import org.jfree.chart.ChartPanel;
-
 /**
- * An interface that the {@link ChartPanel} class uses to communicate with
- * plots that support panning.
- *
- * @since 1.0.13
+ * An interface that user interface components can make use of to communicate 
+ * with plots that support panning.
  */
 public interface Pannable {
 
@@ -58,21 +50,21 @@ public interface Pannable {
      *
      * @return The orientation (never {@code null}).
      */
-    public PlotOrientation getOrientation();
+    PlotOrientation getOrientation();
 
     /**
      * Evaluates if the domain axis can be panned.
      *
      * @return {@code true} if the domain axis is pannable.
      */
-    public boolean isDomainPannable();
+    boolean isDomainPannable();
 
     /**
      * Evaluates if the range axis can be panned.
      *
      * @return {@code true} if the range axis is pannable.
      */
-    public boolean isRangePannable();
+    boolean isRangePannable();
 
     /**
      * Pans the domain axes by the specified percentage.
@@ -81,7 +73,7 @@ public interface Pannable {
      * @param info the plot info
      * @param source the source point where the pan action started.
      */
-    public void panDomainAxes(double percent, PlotRenderingInfo info,
+    void panDomainAxes(double percent, PlotRenderingInfo info,
             Point2D source);
 
     /**
@@ -91,7 +83,7 @@ public interface Pannable {
      * @param info the plot info
      * @param source the source point where the pan action started.
      */
-    public void panRangeAxes(double percent, PlotRenderingInfo info,
+    void panRangeAxes(double percent, PlotRenderingInfo info,
             Point2D source);
 
 }

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,27 +27,10 @@
  * -----------------------
  * IntervalXYDelegate.java
  * -----------------------
- * (C) Copyright 2004-2013, by Andreas Schroeder and Contributors.
+ * (C) Copyright 2004-2021, by Andreas Schroeder and Contributors.
  *
  * Original Author:  Andreas Schroeder;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 31-Mar-2004 : Version 1 (AS);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
- *               getYValue() (DG);
- * 18-Aug-2004 : Moved from org.jfree.data --> org.jfree.data.xy (DG);
- * 04-Nov-2004 : Added argument check for setIntervalWidth() method (DG);
- * 17-Nov-2004 : New methods to reflect changes in DomainInfo (DG);
- * 11-Jan-2005 : Removed deprecated methods in preparation for the 1.0.0
- *               release (DG);
- * 21-Feb-2005 : Made public and added equals() method (DG);
- * 06-Oct-2005 : Implemented DatasetChangeListener to recalculate
- *               autoIntervalWidth (DG);
- * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
- * 06-Mar-2009 : Implemented hashCode() (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -55,9 +38,9 @@ package org.jfree.data.xy;
 
 import java.io.Serializable;
 
-import org.jfree.chart.HashUtils;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.internal.HashUtils;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.api.PublicCloneable;
 import org.jfree.data.DomainInfo;
 import org.jfree.data.Range;
 import org.jfree.data.RangeInfo;
@@ -261,8 +244,7 @@ public class IntervalXYDelegate implements DatasetChangeListener,
         Number startX = null;
         Number x = this.dataset.getX(series, item);
         if (x != null) {
-            startX = new Double(x.doubleValue()
-                     - (getIntervalPositionFactor() * getIntervalWidth()));
+            startX = x.doubleValue() - (getIntervalPositionFactor() * getIntervalWidth());
         }
         return startX;
     }
@@ -296,8 +278,7 @@ public class IntervalXYDelegate implements DatasetChangeListener,
         Number endX = null;
         Number x = this.dataset.getX(series, item);
         if (x != null) {
-            endX = new Double(x.doubleValue()
-                + ((1.0 - getIntervalPositionFactor()) * getIntervalWidth()));
+            endX = x.doubleValue() + ((1.0 - getIntervalPositionFactor()) * getIntervalWidth());
         }
         return endX;
     }

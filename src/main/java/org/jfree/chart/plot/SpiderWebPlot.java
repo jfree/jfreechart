@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,45 +27,13 @@
  * ------------------
  * SpiderWebPlot.java
  * ------------------
- * (C) Copyright 2005-2017, by Heaps of Flavour Pty Ltd and Contributors.
+ * (C) Copyright 2005-2021, by Heaps of Flavour Pty Ltd and Contributors.
  *
  * Company Info:  http://www.i4-talent.com
  *
  * Original Author:  Don Elliott;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Nina Jeliazkova;
- *
- * Changes
- * -------
- * 28-Jan-2005 : First cut - missing a few features - still to do:
- *                           - needs tooltips/URL/label generator functions
- *                           - ticks on axes / background grid?
- * 31-Jan-2005 : Renamed SpiderWebPlot, added label generator support, and
- *               reformatted for consistency with other source files in
- *               JFreeChart (DG);
- * 20-Apr-2005 : Renamed CategoryLabelGenerator
- *               --> CategoryItemLabelGenerator (DG);
- * 05-May-2005 : Updated draw() method parameters (DG);
- * 10-Jun-2005 : Added equals() method and fixed serialization (DG);
- * 16-Jun-2005 : Added default constructor and get/setDataset()
- *               methods (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 05-Apr-2006 : Fixed bug preventing the display of zero values - see patch
- *               1462727 (DG);
- * 05-Apr-2006 : Added support for mouse clicks, tool tips and URLs - see patch
- *               1463455 (DG);
- * 01-Jun-2006 : Fix bug 1493199, NullPointerException when drawing with null
- *               info (DG);
- * 05-Feb-2007 : Added attributes for axis stroke and paint, while fixing
- *               bug 1651277, and implemented clone() properly (DG);
- * 06-Feb-2007 : Changed getPlotValue() to protected, as suggested in bug
- *               1605202 (DG);
- * 05-Mar-2007 : Restore clip region correctly (see bug 1667750) (DG);
- * 18-May-2007 : Set dataset for LegendItem (DG);
- * 02-Jun-2008 : Fixed bug with chart entities using TableOrder.BY_COLUMN (DG);
- * 02-Jun-2008 : Fixed bug with null dataset (DG);
- * 01-Jun-2009 : Set series key in getLegendItems() (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -97,24 +65,24 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
-import org.jfree.chart.LegendItem;
-import org.jfree.chart.LegendItemCollection;
+import org.jfree.chart.legend.LegendItem;
+import org.jfree.chart.legend.LegendItemCollection;
 import org.jfree.chart.entity.CategoryItemEntity;
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.labels.CategoryItemLabelGenerator;
 import org.jfree.chart.labels.CategoryToolTipGenerator;
 import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
-import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.api.RectangleInsets;
 import org.jfree.chart.urls.CategoryURLGenerator;
-import org.jfree.chart.util.PaintList;
+import org.jfree.chart.internal.PaintList;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.Rotation;
-import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.api.Rotation;
+import org.jfree.chart.internal.SerialUtils;
 import org.jfree.chart.util.ShapeUtils;
-import org.jfree.chart.util.StrokeList;
-import org.jfree.chart.util.TableOrder;
+import org.jfree.chart.internal.StrokeList;
+import org.jfree.chart.api.TableOrder;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.DatasetUtils;
@@ -425,9 +393,9 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
     }
 
     /**
-     * Returns the head percent.
+     * Returns the head percent (the default value is 0.01).
      *
-     * @return The head percent.
+     * @return The head percent (always > 0).
      *
      * @see #setHeadPercent(double)
      */
@@ -437,17 +405,14 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
 
     /**
      * Sets the head percent and sends a {@link PlotChangeEvent} to all
-     * registered listeners.
+     * registered listeners.  Note that 0.10 is 10 percent.
      *
-     * @param percent  the percent.
+     * @param percent  the percent (must be greater than zero).
      *
      * @see #getHeadPercent()
      */
     public void setHeadPercent(double percent) {
-        if (percent < 0.0) {
-            throw new IllegalArgumentException(
-                    "Percentage outside valid range.");
-        }
+        Args.requireNonNegative(percent, "percent");
         this.headPercent = percent;
         fireChangeEvent();
     }

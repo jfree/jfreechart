@@ -53,14 +53,14 @@ import java.util.List;
 
 import org.jfree.chart.ChartRenderingInfo;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.LegendItem;
+import org.jfree.chart.legend.LegendItem;
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.chart.util.CloneUtils;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.internal.CloneUtils;
+import org.jfree.chart.api.PublicCloneable;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.statistics.BoxAndWhiskerItem;
 import org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
@@ -111,6 +111,16 @@ public class BoxAndWhiskerRendererTest {
         assertFalse(r1.equals(r2));
         r2.setMedianVisible(false);
         assertTrue(r1.equals(r2));
+
+        r1.setMinOutlierVisible(false);
+        assertFalse(r1.equals(r2));
+        r2.setMinOutlierVisible(false);
+        assertTrue(r1.equals(r2));
+
+        r1.setMaxOutlierVisible(false);
+        assertFalse(r1.equals(r2));
+        r2.setMaxOutlierVisible(false);
+        assertTrue(r1.equals(r2));
     }
 
     /**
@@ -128,6 +138,7 @@ public class BoxAndWhiskerRendererTest {
 
     /**
      * Confirm that cloning works.
+     * 
      * @throws java.lang.CloneNotSupportedException
      */
     @Test

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * --------------
  * JSONUtils.java
  * --------------
- * (C) Copyright 2014-2016, by Object Refinery Limited.
+ * (C) Copyright 2014-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 04-Aug-2014 : Version 1 (DG);
  *
  */
 
@@ -45,7 +41,7 @@ import java.io.StringWriter;
 import java.io.Writer;
 import java.util.Iterator;
 import java.util.List;
-import org.jfree.chart.util.Args;
+import org.jfree.chart.internal.Args;
 import org.jfree.data.KeyedValues;
 import org.jfree.data.KeyedValues2D;
 import org.jfree.data.category.CategoryDataset;

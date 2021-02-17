@@ -47,7 +47,7 @@ public interface GradientPaintTransformer {
      * 
      * @return A transformed paint.
      */
-    public GradientPaint transform(GradientPaint paint, Shape target);
+    GradientPaint transform(GradientPaint paint, Shape target);
 
 }
 

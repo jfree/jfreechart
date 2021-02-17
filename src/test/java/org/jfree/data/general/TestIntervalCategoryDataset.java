@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------------------
  * TestIntervalCategoryDataset.java
  * --------------------------------
- * (C) Copyright 2009-2020, by Object Refinery Limited.
+ * (C) Copyright 2009-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -38,8 +38,8 @@ package org.jfree.data.general;
 
 import java.io.Serializable;
 import java.util.List;
-import org.jfree.chart.util.CloneUtils;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.internal.CloneUtils;
+import org.jfree.chart.api.PublicCloneable;
 
 import org.jfree.data.KeyedObjects2D;
 import org.jfree.data.UnknownKeyException;

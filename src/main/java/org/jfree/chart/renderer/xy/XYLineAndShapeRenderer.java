@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,47 +27,10 @@
  * ---------------------------
  * XYLineAndShapeRenderer.java
  * ---------------------------
- * (C) Copyright 2004-2017, by Object Refinery Limited.
+ * (C) Copyright 2004-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 27-Jan-2004 : Version 1 (DG);
- * 10-Feb-2004 : Minor change to drawItem() method to make cut-and-paste
- *               overriding easier (DG);
- * 25-Feb-2004 : Replaced CrosshairInfo with CrosshairState (DG);
- * 25-Aug-2004 : Added support for chart entities (required for tooltips) (DG);
- * 24-Sep-2004 : Added flag to allow whole series to be drawn as a path
- *               (necessary when using a dashed stroke with many data
- *               items) (DG);
- * 04-Oct-2004 : Renamed BooleanUtils --> BooleanUtilities (DG);
- * 11-Nov-2004 : Now uses ShapeUtilities to translate shapes (DG);
- * 27-Jan-2005 : The getLegendItem() method now omits hidden series (DG);
- * 28-Jan-2005 : Added new constructor (DG);
- * 09-Mar-2005 : Added fillPaint settings (DG);
- * 20-Apr-2005 : Use generators for legend tooltips and URLs (DG);
- * 22-Jul-2005 : Renamed defaultLinesVisible --> baseLinesVisible,
- *               defaultShapesVisible --> baseShapesVisible and
- *               defaultShapesFilled --> baseShapesFilled (DG);
- * 29-Jul-2005 : Added code to draw item labels (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 20-Jul-2006 : Set dataset and series indices in LegendItem (DG);
- * 06-Feb-2007 : Fixed bug 1086307, crosshairs with multiple axes (DG);
- * 21-Feb-2007 : Fixed bugs in clone() and equals() (DG);
- * 20-Apr-2007 : Updated getLegendItem() for renderer change (DG);
- * 18-May-2007 : Set dataset and seriesKey for LegendItem (DG);
- * 08-Jun-2007 : Fix for bug 1731912 where entities are created even for data
- *               items that are not displayed (DG);
- * 26-Oct-2007 : Deprecated override attributes (DG);
- * 02-Jun-2008 : Fixed tooltips at lower edges of data area (DG);
- * 17-Jun-2008 : Apply legend shape, font and paint attributes (DG);
- * 19-Sep-2008 : Fixed bug with drawSeriesLineAsPath - patch by Greg Darke (DG);
- * 18-May-2009 : Clip lines in drawPrimaryLine() (DG);
- * 05-Jul-2012 : Removed JDK 1.3.1 code (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
- * 18-Feb-2017 : Updates for crosshairs (bug #36) (DG);
  *
  */
 
@@ -86,7 +49,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Objects;
 
-import org.jfree.chart.LegendItem;
+import org.jfree.chart.legend.LegendItem;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.event.RendererChangeEvent;
@@ -94,12 +57,12 @@ import org.jfree.chart.plot.CrosshairState;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.util.BooleanList;
-import org.jfree.chart.util.LineUtils;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.PublicCloneable;
-import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.api.RectangleEdge;
+import org.jfree.chart.internal.BooleanList;
+import org.jfree.chart.internal.LineUtils;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.api.PublicCloneable;
+import org.jfree.chart.internal.SerialUtils;
 import org.jfree.chart.util.ShapeUtils;
 import org.jfree.data.xy.XYDataset;
 
@@ -110,7 +73,7 @@ import org.jfree.data.xy.XYDataset;
  * the {@code XYLineAndShapeRendererDemo2.java} program included in the
  * JFreeChart demo collection:
  * <br><br>
- * <img src="../../../../../images/XYLineAndShapeRendererSample.png"
+ * <img src="doc-files/XYLineAndShapeRendererSample.png"
  * alt="XYLineAndShapeRendererSample.png">
  *
  */

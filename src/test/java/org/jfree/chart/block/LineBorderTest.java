@@ -45,7 +45,7 @@ import java.awt.Color;
 import java.awt.GradientPaint;
 
 import org.jfree.chart.TestUtils;
-import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.api.RectangleInsets;
 
 import org.junit.jupiter.api.Test;
 

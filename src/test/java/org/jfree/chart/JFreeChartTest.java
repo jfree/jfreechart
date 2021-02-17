@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * JFreeChartTest.java
  * -------------------
- * (C) Copyright 2002-2020, by Object Refinery Limited.
+ * (C) Copyright 2002-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -47,12 +47,12 @@ import org.jfree.chart.event.ChartChangeEvent;
 import org.jfree.chart.event.ChartChangeListener;
 import org.jfree.chart.plot.PiePlot;
 import org.jfree.chart.plot.RingPlot;
-import org.jfree.chart.title.LegendTitle;
+import org.jfree.chart.legend.LegendTitle;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.chart.title.Title;
 import org.jfree.chart.ui.Align;
-import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.api.RectangleEdge;
+import org.jfree.chart.api.RectangleInsets;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.time.Day;
@@ -357,10 +357,10 @@ public class JFreeChartTest implements ChartChangeListener {
 
         try {
             chart.addSubtitle(null);
-            fail("Should have thrown a NullPointerException.");
+            fail("Should have thrown an IllegalArgumentException.");
         }
-        catch (NullPointerException e) {
-            assertEquals("subtitle", e.getMessage());
+        catch (IllegalArgumentException e) {
+            assertEquals("Null 'subtitle' argument.", e.getMessage());
         }
 
         try {
@@ -368,7 +368,7 @@ public class JFreeChartTest implements ChartChangeListener {
             fail("Should have thrown an IllegalArgumentException on index out of range");
         }
         catch (IllegalArgumentException e) {
-            assertEquals("The 'index' argument is out of range.", e.getMessage());
+            assertEquals("Require 'index' (-1) to be in the range 0 to 3", e.getMessage());
         }
 
         try {
@@ -376,7 +376,7 @@ public class JFreeChartTest implements ChartChangeListener {
             fail("Should have thrown an IllegalArgumentException on index out of range");
         }
         catch (IllegalArgumentException e) {
-             assertEquals("The 'index' argument is out of range.", e.getMessage());
+             assertEquals("Require 'index' (4) to be in the range 0 to 3", e.getMessage());
         }
 
     }

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * ChartUtils.java
  * ---------------
- * (C) Copyright 2001-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2001-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Wolfgang Irler;
@@ -57,7 +57,7 @@ import org.jfree.chart.imagemap.StandardToolTipTagFragmentGenerator;
 import org.jfree.chart.imagemap.StandardURLTagFragmentGenerator;
 import org.jfree.chart.imagemap.ToolTipTagFragmentGenerator;
 import org.jfree.chart.imagemap.URLTagFragmentGenerator;
-import org.jfree.chart.util.Args;
+import org.jfree.chart.internal.Args;
 
 /**
  * A collection of utility methods for JFreeChart.  Includes methods for
@@ -78,7 +78,7 @@ public abstract class ChartUtils {
      * @since 1.6.0
      */
     public static boolean isJFreeSVGAvailable() {
-        Class svgGraphics2DClass = null;
+        Class<?> svgGraphics2DClass = null;
         try {
             svgGraphics2DClass =  Class.forName("org.jfree.graphics2d.svg.SVGGraphics2D");
         } catch (ClassNotFoundException e) {
@@ -97,7 +97,7 @@ public abstract class ChartUtils {
      * @since 1.6.0
      */
     public static boolean isOrsonPDFAvailable() {
-        Class pdfDocumentClass = null;
+        Class<?> pdfDocumentClass = null;
         try {
             pdfDocumentClass = Class.forName("com.orsonpdf.PDFDocument");
         } catch (ClassNotFoundException e) {
@@ -303,12 +303,8 @@ public abstract class ChartUtils {
         throws IOException {
 
         Args.nullNotPermitted(file, "file");
-        OutputStream out = new BufferedOutputStream(new FileOutputStream(file));
-        try {
+        try (OutputStream out = new BufferedOutputStream(new FileOutputStream(file))) {
             ChartUtils.writeChartAsPNG(out, chart, width, height, info);
-        }
-        finally {
-            out.close();
         }
     }
 
@@ -334,13 +330,8 @@ public abstract class ChartUtils {
 
         Args.nullNotPermitted(file, "file");
         Args.nullNotPermitted(chart, "chart");
-        OutputStream out = new BufferedOutputStream(new FileOutputStream(file));
-        try {
-            writeChartAsPNG(out, chart, width, height, info, encodeAlpha,
-                    compression);
-        }
-        finally {
-            out.close();
+        try (OutputStream out = new BufferedOutputStream(new FileOutputStream(file))) {
+            writeChartAsPNG(out, chart, width, height, info, encodeAlpha, compression);
         }
 
     }
@@ -494,12 +485,8 @@ public abstract class ChartUtils {
 
         Args.nullNotPermitted(file, "file");
         Args.nullNotPermitted(chart, "chart");
-        OutputStream out = new BufferedOutputStream(new FileOutputStream(file));
-        try {
+        try (OutputStream out = new BufferedOutputStream(new FileOutputStream(file))) {
             writeChartAsJPEG(out, chart, width, height, info);
-        }
-        finally {
-            out.close();
         }
 
     }
@@ -525,13 +512,8 @@ public abstract class ChartUtils {
 
         Args.nullNotPermitted(file, "file");
         Args.nullNotPermitted(chart, "chart");
-        OutputStream out = new BufferedOutputStream(new FileOutputStream(
-                file));
-        try {
+        try (OutputStream out = new BufferedOutputStream(new FileOutputStream(file))) {
             writeChartAsJPEG(out, quality, chart, width, height, info);
-        }
-        finally {
-            out.close();
         }
 
     }

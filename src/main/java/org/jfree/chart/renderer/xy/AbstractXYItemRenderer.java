@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * AbstractXYItemRenderer.java
  * ---------------------------
- * (C) Copyright 2002-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2002-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Richard Atkinson;
@@ -62,8 +62,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import org.jfree.chart.LegendItem;
-import org.jfree.chart.LegendItemCollection;
+import org.jfree.chart.legend.LegendItem;
+import org.jfree.chart.legend.LegendItemCollection;
 import org.jfree.chart.annotations.Annotation;
 import org.jfree.chart.annotations.XYAnnotation;
 import org.jfree.chart.axis.ValueAxis;
@@ -88,12 +88,13 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.AbstractRenderer;
 import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.GradientPaintTransformer;
-import org.jfree.chart.ui.Layer;
+import org.jfree.chart.api.Layer;
 import org.jfree.chart.ui.LengthAdjustmentType;
-import org.jfree.chart.ui.RectangleAnchor;
-import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.api.RectangleAnchor;
+import org.jfree.chart.api.RectangleInsets;
 import org.jfree.chart.urls.XYURLGenerator;
-import org.jfree.chart.util.CloneUtils;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.internal.CloneUtils;
 import org.jfree.data.Range;
 import org.jfree.data.general.DatasetUtils;
 import org.jfree.data.xy.XYDataset;
@@ -436,8 +437,8 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      */
     @Override
     public void addAnnotation(XYAnnotation annotation, Layer layer) {
-        Objects.requireNonNull(annotation, "annotation");
-        Objects.requireNonNull(layer, "layer");
+        Args.nullNotPermitted(annotation, "annotation");
+        Args.nullNotPermitted(layer, "layer");
         switch (layer) {
             case FOREGROUND:
                 this.foregroundAnnotations.add(annotation);
@@ -542,7 +543,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      */
     @Override
     public void setLegendItemLabelGenerator(XYSeriesLabelGenerator generator) {
-        Objects.requireNonNull(generator, "generator");
+        Args.nullNotPermitted(generator, "generator");
         this.legendItemLabelGenerator = generator;
         fireChangeEvent();
     }
@@ -789,8 +790,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
             item.setLine(shape);
             item.setLinePaint(paint);
             item.setShapeVisible(false);
-        }
-        else {
+        } else {
             Paint outlinePaint = lookupSeriesOutlinePaint(series);
             Stroke outlineStroke = lookupSeriesOutlineStroke(series);
             item.setOutlinePaint(outlinePaint);
@@ -878,8 +878,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      * @param g2  the graphics device.
      * @param plot  the plot.
      * @param axis  the value axis.
-     * @param dataArea  the area for plotting data (not yet adjusted for any 3D
-     *                  effect).
+     * @param dataArea  the area for plotting data.
      * @param value  the value at which the grid line should be drawn.
      * @param paint  the paint ({@code null} not permitted).
      * @param stroke  the stroke ({@code null} not permitted).
@@ -922,8 +921,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      * @param g2  the graphics device.
      * @param plot  the plot.
      * @param axis  the value axis.
-     * @param dataArea  the area for plotting data (not yet adjusted for any 3D
-     *                  effect).
+     * @param dataArea  the area for plotting data.
      * @param value  the value at which the grid line should be drawn.
      * @param paint  the paint.
      * @param stroke  the stroke.
@@ -1472,7 +1470,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
             double x, double y, int datasetIndex,
             double transX, double transY, PlotOrientation orientation) {
 
-        Objects.requireNonNull(orientation, "orientation");
+        Args.nullNotPermitted(orientation, "orientation");
         if (crosshairState != null) {
             // do we need to update the crosshair values?
             if (this.plot.isDomainCrosshairLockedOnData()) {
@@ -1480,13 +1478,11 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
                     // both axes
                     crosshairState.updateCrosshairPoint(x, y, datasetIndex,
                             transX, transY, orientation);
-                }
-                else {
+                } else {
                     // just the domain axis...
                     crosshairState.updateCrosshairX(x, transX, datasetIndex);
                 }
-            }
-            else {
+            } else {
                 if (this.plot.isRangeCrosshairLockedOnData()) {
                     // just the range axis...
                     crosshairState.updateCrosshairY(y, transY, datasetIndex);
@@ -1555,7 +1551,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
     public void drawAnnotations(Graphics2D g2, Rectangle2D dataArea,
             ValueAxis domainAxis, ValueAxis rangeAxis, Layer layer,
             PlotRenderingInfo info) {
-        Objects.requireNonNull(layer);
+        Args.nullNotPermitted(layer, "layer");
         List<XYAnnotation> toDraw = new ArrayList<>();
         switch (layer) {
             case FOREGROUND:

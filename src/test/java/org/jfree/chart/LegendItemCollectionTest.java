@@ -41,11 +41,13 @@
 
 package org.jfree.chart;
 
+import org.jfree.chart.legend.LegendItemCollection;
+import org.jfree.chart.legend.LegendItem;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
-import org.jfree.chart.util.CloneUtils;
+import org.jfree.chart.internal.CloneUtils;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;

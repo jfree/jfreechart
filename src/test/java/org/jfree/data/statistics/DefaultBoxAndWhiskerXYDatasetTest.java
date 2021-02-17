@@ -44,7 +44,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import org.jfree.chart.TestUtils;
-import org.jfree.chart.util.CloneUtils;
+import org.jfree.chart.internal.CloneUtils;
 
 import org.jfree.data.Range;
 import org.junit.jupiter.api.Test;

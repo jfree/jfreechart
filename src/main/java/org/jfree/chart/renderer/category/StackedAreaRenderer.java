@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -35,35 +35,6 @@
  *                   David Gilbert (for Object Refinery Limited);
  *                   Christian W. Zuckschwerdt;
  *                   Peter Kolb (patch 2511330);
- *
- * Changes:
- * --------
- * 20-Sep-2002 : Version 1, contributed by Dan Rivett;
- * 24-Oct-2002 : Amendments for changes in CategoryDataset interface and
- *               CategoryToolTipGenerator interface (DG);
- * 01-Nov-2002 : Added tooltips (DG);
- * 06-Nov-2002 : Renamed drawCategoryItem() --> drawItem() and now using axis
- *               for category spacing. Renamed StackedAreaCategoryItemRenderer
- *               --> StackedAreaRenderer (DG);
- * 26-Nov-2002 : Switched CategoryDataset --> TableDataset (DG);
- * 26-Nov-2002 : Replaced isStacked() method with getRangeType() method (DG);
- * 17-Jan-2003 : Moved plot classes to a separate package (DG);
- * 25-Mar-2003 : Implemented Serializable (DG);
- * 13-May-2003 : Modified to take into account the plot orientation (DG);
- * 30-Jul-2003 : Modified entity constructor (CZ);
- * 07-Oct-2003 : Added renderer state (DG);
- * 29-Apr-2004 : Added getRangeExtent() override (DG);
- * 05-Nov-2004 : Modified drawItem() signature (DG);
- * 07-Jan-2005 : Renamed getRangeExtent() --> findRangeBounds() (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 11-Oct-2006 : Added support for rendering data values as percentages,
- *               and added a second pass for drawing item labels (DG);
- * 04-Feb-2009 : Fixed support for hidden series, and bug in findRangeBounds()
- *               method for null dataset (PK/DG);
- * 04-Feb-2009 : Added item label support, and generate entities only in first
- *               pass (DG);
- * 04-Feb-2009 : Fixed bug for renderAsPercentages == true (DG);
- *
  */
 
 package org.jfree.chart.renderer.category;
@@ -80,8 +51,8 @@ import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.plot.CategoryPlot;
-import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.api.RectangleEdge;
+import org.jfree.chart.api.PublicCloneable;
 import org.jfree.data.DataUtils;
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
@@ -93,7 +64,7 @@ import org.jfree.data.general.DatasetUtils;
  * {@code StackedAreaChartDemo1.java} program included in the
  * JFreeChart Demo Collection:
  * <br><br>
- * <img src="../../../../../images/StackedAreaRendererSample.png"
+ * <img src="doc-files/StackedAreaRendererSample.png"
  * alt="StackedAreaRendererSample.png">
  */
 public class StackedAreaRenderer extends AreaRenderer

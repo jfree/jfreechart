@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * TimeSeriesCollection.java
  * -------------------------
- * (C) Copyright 2001-2020, by Object Refinery Limited.
+ * (C) Copyright 2001-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -48,8 +48,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.TimeZone;
 
-import org.jfree.chart.util.CloneUtils;
-import org.jfree.chart.util.Args;
+import org.jfree.chart.internal.CloneUtils;
+import org.jfree.chart.internal.Args;
 
 import org.jfree.data.DomainInfo;
 import org.jfree.data.DomainOrder;
@@ -631,7 +631,7 @@ public class TimeSeriesCollection<S extends Comparable<S>>
             Comparable seriesKey = (Comparable) visibleSeriesKey;
             TimeSeries<S> series = getSeries((S) seriesKey);
             Range r = series.findValueRange(xRange, this.xPosition,
-                    this.workingCalendar.getTimeZone());
+                    this.workingCalendar);
             result = Range.combineIgnoringNaN(result, r);
         }
         return result;

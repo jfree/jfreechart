@@ -46,7 +46,7 @@ import java.awt.GradientPaint;
 import java.text.DecimalFormat;
 
 import org.jfree.chart.TestUtils;
-import org.jfree.chart.util.CloneUtils;
+import org.jfree.chart.internal.CloneUtils;
 
 import org.jfree.data.Range;
 import org.jfree.data.general.DefaultValueDataset;

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * TimeTableXYDataset.java
  * -----------------------
- * (C) Copyright 2004-2020, by Andreas Schroeder and Contributors.
+ * (C) Copyright 2004-2021, by Andreas Schroeder and Contributors.
  *
  * Original Author:  Andreas Schroeder;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -42,8 +42,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.TimeZone;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.api.PublicCloneable;
 
 import org.jfree.data.DefaultKeyedValues2D;
 import org.jfree.data.DomainInfo;
@@ -193,7 +193,7 @@ public class TimeTableXYDataset extends AbstractIntervalXYDataset
      * @see #remove(TimePeriod, Comparable)
      */
     public void add(TimePeriod period, double y, Comparable seriesName) {
-        add(period, new Double(y), seriesName, true);
+        add(period, y, seriesName, true);
     }
 
     /**
@@ -341,7 +341,7 @@ public class TimeTableXYDataset extends AbstractIntervalXYDataset
      */
     @Override
     public Number getX(int series, int item) {
-        return new Double(getXValue(series, item));
+        return getXValue(series, item);
     }
 
     /**
@@ -370,7 +370,7 @@ public class TimeTableXYDataset extends AbstractIntervalXYDataset
      */
     @Override
     public Number getStartX(int series, int item) {
-        return new Double(getStartXValue(series, item));
+        return getStartXValue(series, item);
     }
 
     /**
@@ -400,7 +400,7 @@ public class TimeTableXYDataset extends AbstractIntervalXYDataset
      */
     @Override
     public Number getEndX(int series, int item) {
-        return new Double(getEndXValue(series, item));
+        return getEndXValue(series, item);
     }
 
     /**

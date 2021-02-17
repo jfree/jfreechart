@@ -60,12 +60,12 @@ import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 import java.util.ResourceBundle;
 
-import org.jfree.chart.LegendItemCollection;
+import org.jfree.chart.legend.LegendItemCollection;
 import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.event.RendererChangeListener;
 import org.jfree.chart.renderer.WaferMapRenderer;
-import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.api.RectangleInsets;
 import org.jfree.chart.util.ResourceBundleWrapper;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.WaferMapDataset;
@@ -109,7 +109,7 @@ public class WaferMapPlot extends Plot implements RendererChangeListener,
      *  vertical = notch down
      *  horizontal = notch right
      */
-    private PlotOrientation orientation;
+    private final PlotOrientation orientation;
 
     /** The dataset. */
     private WaferMapDataset dataset;

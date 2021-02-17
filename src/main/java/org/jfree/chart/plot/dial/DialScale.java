@@ -59,7 +59,7 @@ public interface DialScale extends DialLayer {
      *
      * @see #angleToValue(double)
      */
-    public double valueToAngle(double value);
+    double valueToAngle(double value);
 
     /**
      * Converts an angle (in degrees) to a data value.
@@ -70,6 +70,6 @@ public interface DialScale extends DialLayer {
      *
      * @see #valueToAngle(double)
      */
-    public double angleToValue(double angle);
+    double angleToValue(double angle);
 
 }

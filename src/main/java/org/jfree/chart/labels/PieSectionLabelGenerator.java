@@ -57,7 +57,7 @@ public interface PieSectionLabelGenerator<K extends Comparable<K>> {
      *
      * @return The label (possibly {@code null}).
      */
-    public String generateSectionLabel(PieDataset<K> dataset, K key);
+    String generateSectionLabel(PieDataset<K> dataset, K key);
 
     /**
      * Generates an attributed label for the specified series, or
@@ -86,7 +86,7 @@ public interface PieSectionLabelGenerator<K extends Comparable<K>> {
      *
      * @return An attributed label (possibly {@code null}).
      */
-    public AttributedString generateAttributedSectionLabel(PieDataset<K> dataset,
+    AttributedString generateAttributedSectionLabel(PieDataset<K> dataset,
             K key);
 
 }

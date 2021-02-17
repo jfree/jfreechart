@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * XYStepRenderer.java
  * -------------------
- * (C) Copyright 2002-2017, by Roger Studner and Contributors.
+ * (C) Copyright 2002-2021, by Roger Studner and Contributors.
  *
  * Original Author:  Roger Studner;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -36,38 +36,6 @@
  *                   Ulrich Voigt (patch 1874890);
  *                   Martin Hoeller (contribution to patch 1874890);
  *                   Matthias Noebl (for Cropster GmbH);
- *
- * Changes
- * -------
- * 13-May-2002 : Version 1, contributed by Roger Studner (DG);
- * 25-Jun-2002 : Updated import statements (DG);
- * 22-Jul-2002 : Added check for null data items (DG);
- * 25-Mar-2003 : Implemented Serializable (DG);
- * 01-May-2003 : Modified drawItem() method signature (DG);
- * 20-Aug-2003 : Implemented Cloneable and PublicCloneable (DG);
- * 16-Sep-2003 : Changed ChartRenderingInfo --> PlotRenderingInfo (DG);
- * 28-Oct-2003 : Added tooltips, code contributed by Matthias Rose
- *               (RFE 824857) (DG);
- * 10-Feb-2004 : Removed working line (use line from state object instead) (DG);
- * 25-Feb-2004 : Replaced CrosshairInfo with CrosshairState.  Renamed
- *               XYToolTipGenerator --> XYItemLabelGenerator (DG);
- * 19-Jan-2005 : Now accesses only primitives from dataset (DG);
- * 15-Mar-2005 : Fix silly bug in drawItem() method (DG);
- * 19-Sep-2005 : Extend XYLineAndShapeRenderer (fixes legend shapes), added
- *               support for series visibility, and use getDefaultEntityRadius()
- *               for entity hotspot size (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 15-Jun-2006 : Added basic support for item labels (DG);
- * 11-Oct-2006 : Fixed rendering with horizontal orientation (see bug 1569094),
- *               thanks to Gerald Struck (DG);
- * 06-Feb-2007 : Fixed bug 1086307, crosshairs with multiple axes (DG);
- * 14-Feb-2008 : Applied patch 1874890 by Ulrich Voigt (with contribution from
- *               Martin Hoeller) (DG);
- * 14-May-2008 : Call addEntity() in drawItem() (DG);
- * 24-Sep-2008 : Fixed bug 2113627 by utilising second pass to draw item
- *               labels (DG);
- * 29-Feb-2016 : Improved performance by only drawing visible lines (MN);
- * 18-Feb-2017 : Updates for crosshairs (bug #36) (DG);
  *
  */
 
@@ -80,7 +48,7 @@ import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 
-import org.jfree.chart.HashUtils;
+import org.jfree.chart.internal.HashUtils;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.event.RendererChangeEvent;
@@ -89,10 +57,10 @@ import org.jfree.chart.plot.CrosshairState;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.api.RectangleEdge;
 import org.jfree.chart.urls.XYURLGenerator;
-import org.jfree.chart.util.LineUtils;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.internal.LineUtils;
+import org.jfree.chart.api.PublicCloneable;
 import org.jfree.data.xy.XYDataset;
 
 /**
@@ -102,8 +70,7 @@ import org.jfree.data.xy.XYDataset;
  * {@code XYStepRendererDemo1.java} program included in the JFreeChart
  * demo collection:
  * <br><br>
- * <img src="../../../../../images/XYStepRendererSample.png"
- * alt="XYStepRendererSample.png">
+ * <img src="doc-files/XYStepRendererSample.png" alt="XYStepRendererSample.png">
  */
 public class XYStepRenderer extends XYLineAndShapeRenderer
         implements XYItemRenderer, Cloneable, PublicCloneable, Serializable {

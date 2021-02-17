@@ -35,6 +35,7 @@
 
 package org.jfree.chart.util;
 
+import org.jfree.chart.internal.CloneUtils;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
 import java.awt.Shape;
@@ -49,7 +50,7 @@ import java.awt.geom.Rectangle2D;
 import java.util.Arrays;
 import java.util.Objects;
 
-import org.jfree.chart.ui.RectangleAnchor;
+import org.jfree.chart.api.RectangleAnchor;
 
 /**
  * Utility methods for {@link Shape} objects.

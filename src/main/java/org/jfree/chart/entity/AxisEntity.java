@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,10 +27,10 @@
  * ----------------
  * AxisEntity.java
  * ----------------
- * (C) Copyright 2009-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2009-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  Peter Kolb;
- * Contributor(s):   ;
+ * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
  */
 
@@ -42,10 +42,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Objects;
 
-import org.jfree.chart.HashUtils;
+import org.jfree.chart.internal.HashUtils;
 import org.jfree.chart.axis.Axis;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.internal.SerialUtils;
 
 /**
  * A class that captures information about an {@link Axis} belonging to a 
@@ -60,7 +60,7 @@ public class AxisEntity extends ChartEntity {
                   //same as for ChartEntity!
 
     /** The axis for the entity. */
-    private Axis axis;
+    private final Axis axis;
 
     /**
      * Creates a new axis entity.

@@ -37,7 +37,7 @@
 package org.jfree.chart.renderer.xy;
 
 import org.jfree.chart.TestUtils;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.api.PublicCloneable;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

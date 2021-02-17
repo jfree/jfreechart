@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,20 +27,10 @@
  * ----------------------
  * QuarterDateFormat.java
  * ----------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 01-Mar-2005 : Version 1 (DG);
- * 10-May-2005 : Added equals() method, and implemented Cloneable and
- *               Serializable (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 08-Jun-2007 : Added Greek symbols, and support for reversing the date - see
- *               patch 1577221 (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -56,7 +46,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
-import org.jfree.chart.util.Args;
+import org.jfree.chart.internal.Args;
 
 /**
  * A formatter that formats dates to show the year and quarter (for example,

@@ -58,7 +58,7 @@ public class YIntervalDataItem extends ComparableObjectItem {
      * @param yHigh  the upper bound of the y-interval.
      */
     public YIntervalDataItem(double x, double y, double yLow, double yHigh) {
-        super(new Double(x), new YInterval(y, yLow, yHigh));
+        super(x, new YInterval(y, yLow, yHigh));
     }
 
     /**

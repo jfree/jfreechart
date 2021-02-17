@@ -42,8 +42,8 @@ package org.jfree.chart.block;
 
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
-import org.jfree.chart.ui.RectangleInsets;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.api.RectangleInsets;
+import org.jfree.chart.api.PublicCloneable;
 
 /**
  * A block frame is a type of border that can be drawn around the outside of
@@ -59,7 +59,7 @@ public interface BlockFrame {
      *
      * @return The space (never {@code null}).
      */
-    public RectangleInsets getInsets();
+    RectangleInsets getInsets();
 
     /**
      * Draws the border by filling in the reserved space (in black).
@@ -67,6 +67,6 @@ public interface BlockFrame {
      * @param g2  the graphics device.
      * @param area  the area.
      */
-    public void draw(Graphics2D g2, Rectangle2D area);
+    void draw(Graphics2D g2, Rectangle2D area);
 
 }

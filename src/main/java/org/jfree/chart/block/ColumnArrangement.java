@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * ----------------------
  * ColumnArrangement.java
  * ----------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited.
+ * (C) Copyright 2004-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 22-Oct-2004 : Version 1 (DG);
- * 04-Feb-2005 : Added equals() and implemented Serializable (DG);
  *
  */
 
@@ -46,9 +41,9 @@ import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import org.jfree.chart.ui.HorizontalAlignment;
+import org.jfree.chart.api.HorizontalAlignment;
 import org.jfree.chart.ui.Size2D;
-import org.jfree.chart.ui.VerticalAlignment;
+import org.jfree.chart.api.VerticalAlignment;
 
 /**
  * Arranges blocks in a column layout.  This class is immutable.
@@ -195,7 +190,7 @@ public class ColumnArrangement implements Arrangement, Serializable {
     protected Size2D arrangeNF(BlockContainer container, Graphics2D g2,
                                RectangleConstraint constraint) {
 
-        List blocks = container.getBlocks();
+        List<Block> blocks = container.getBlocks();
 
         double height = constraint.getHeight();
         if (height <= 0.0) {
@@ -205,9 +200,8 @@ public class ColumnArrangement implements Arrangement, Serializable {
         double x = 0.0;
         double y = 0.0;
         double maxWidth = 0.0;
-        List itemsInColumn = new ArrayList();
-        for (int i = 0; i < blocks.size(); i++) {
-            Block block = (Block) blocks.get(i);
+        List<Block> itemsInColumn = new ArrayList<>();
+        for (Block block : blocks) {
             Size2D size = block.arrange(g2, RectangleConstraint.NONE);
             if (y + size.height <= height) {
                 itemsInColumn.add(block);
@@ -312,12 +306,12 @@ public class ColumnArrangement implements Arrangement, Serializable {
         double y = 0.0;
         double height = 0.0;
         double maxWidth = 0.0;
-        List blocks = container.getBlocks();
+        List<Block> blocks = container.getBlocks();
         int blockCount = blocks.size();
         if (blockCount > 0) {
             Size2D[] sizes = new Size2D[blocks.size()];
             for (int i = 0; i < blocks.size(); i++) {
-                Block block = (Block) blocks.get(i);
+                Block block = blocks.get(i);
                 sizes[i] = block.arrange(g2, RectangleConstraint.NONE);
                 height = height + sizes[i].getHeight();
                 maxWidth = Math.max(sizes[i].width, maxWidth);

@@ -48,7 +48,7 @@ import java.awt.GradientPaint;
 import java.awt.font.TextAttribute;
 import java.text.AttributedString;
 import org.jfree.chart.TestUtils;
-import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.api.RectangleInsets;
 
 import org.junit.jupiter.api.Test;
 

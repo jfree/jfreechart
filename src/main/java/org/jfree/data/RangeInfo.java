@@ -50,7 +50,7 @@ public interface RangeInfo {
      *
      * @return The minimum value.
      */
-    public double getRangeLowerBound(boolean includeInterval);
+    double getRangeLowerBound(boolean includeInterval);
 
     /**
      * Returns the maximum y-value in the dataset.
@@ -60,7 +60,7 @@ public interface RangeInfo {
      *
      * @return The maximum value.
      */
-    public double getRangeUpperBound(boolean includeInterval);
+    double getRangeUpperBound(boolean includeInterval);
 
     /**
      * Returns the range of the values in this dataset's range.
@@ -71,6 +71,6 @@ public interface RangeInfo {
      * @return The range (or {@code null} if the dataset contains no
      *     values).
      */
-    public Range getRangeBounds(boolean includeInterval);
+    Range getRangeBounds(boolean includeInterval);
 
 }

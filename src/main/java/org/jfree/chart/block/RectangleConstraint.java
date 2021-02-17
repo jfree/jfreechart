@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,25 +27,17 @@
  * ------------------------
  * RectangleConstraint.java
  * ------------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited.
+ * (C) Copyright 2004-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 22-Oct-2004 : Version 1 (DG);
- * 02-Feb-2005 : Added toString() method (DG);
- * 08-Feb-2005 : Separated height and width constraints (DG);
- * 13-May-2005 : Added convenience constructor and new methods for
- *               transforming constraints (DG);
  *
  */
 
 package org.jfree.chart.block;
 
 import org.jfree.chart.ui.Size2D;
-import org.jfree.chart.util.Args;
+import org.jfree.chart.internal.Args;
 import org.jfree.data.Range;
 
 /**
@@ -62,21 +54,21 @@ public class RectangleConstraint {
             0.0, null, LengthConstraintType.NONE);
 
     /** The width. */
-    private double width;
+    private final double width;
 
     /** The width range. */
-    private Range widthRange;
+    private final Range widthRange;
 
     /** The width constraint type. */
-    private LengthConstraintType widthConstraintType;
+    private final LengthConstraintType widthConstraintType;
 
     /** The fixed or maximum height. */
-    private double height;
+    private final double height;
 
-    private Range heightRange;
+    private final Range heightRange;
 
     /** The constraint type. */
-    private LengthConstraintType heightConstraintType;
+    private final LengthConstraintType heightConstraintType;
 
     /**
      * Creates a new "fixed width and height" instance.

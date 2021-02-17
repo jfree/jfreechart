@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,19 +27,10 @@
  * -----------------------------
  * DefaultIntervalXYDataset.java
  * -----------------------------
- * (C) Copyright 2006-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 23-Oct-2006 : Version 1 (DG);
- * 02-Nov-2006 : Fixed a problem with adding a new series with the same key
- *               as an existing series (see bug 1589392) (DG);
- * 28-Nov-2006 : New override for clone() (DG);
- * 22-Apr-2008 : Implemented PublicCloneable (DG);
- * 10-Aug-2009 : Fixed typo in Javadocs - see bug 2830419 (DG);
  *
  */
 
@@ -48,8 +39,8 @@ package org.jfree.data.xy;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.api.PublicCloneable;
 
 import org.jfree.data.general.DatasetChangeEvent;
 

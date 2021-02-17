@@ -43,7 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import org.jfree.chart.TestUtils;
 
 import org.jfree.chart.axis.CategoryAnchor;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.api.PublicCloneable;
 import org.junit.jupiter.api.Test;
 
 /**

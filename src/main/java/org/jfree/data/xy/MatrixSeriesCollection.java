@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,20 +27,11 @@
  * ---------------------------
  * MatrixSeriesCollection.java
  * ---------------------------
- * (C) Copyright 2003-2016, by Barak Naveh and Contributors.
+ * (C) Copyright 2003-2021, by Barak Naveh and Contributors.
  *
  * Original Author:  Barak Naveh;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * Changes
- * -------
- * 10-Jul-2003 : Version 1 contributed by Barak Naveh (DG);
- * 05-May-2004 : Now extends AbstractXYZDataset (DG);
- * 15-Jul-2004 : Switched getZ() and getZValue() methods (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 27-Nov-2006 : Added clone() override (DG);
- * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
- * 22-Apr-2008 : Implemented PublicCloneable (DG);
  */
 
 package org.jfree.data.xy;
@@ -50,9 +41,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.CloneUtils;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.internal.CloneUtils;
+import org.jfree.chart.api.PublicCloneable;
 
 /**
  * Represents a collection of {@link MatrixSeries} that can be used as a

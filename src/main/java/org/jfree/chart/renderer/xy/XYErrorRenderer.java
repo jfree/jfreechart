@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,17 +27,10 @@
  * --------------------
  * XYErrorRenderer.java
  * --------------------
- * (C) Copyright 2006-2016, by Object Refinery Limited.
+ * (C) Copyright 2006-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 25-Oct-2006 : Version 1 (DG);
- * 23-Mar-2007 : Check item visibility before drawing error bars - see bug
- *               1686178 (DG);
- * 28-Jan-2009 : Added stroke options for error indicators (DG);
  *
  */
 
@@ -59,9 +52,9 @@ import org.jfree.chart.plot.CrosshairState;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.api.RectangleEdge;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.internal.SerialUtils;
 import org.jfree.data.Range;
 import org.jfree.data.xy.IntervalXYDataset;
 import org.jfree.data.xy.XYDataset;
@@ -73,8 +66,7 @@ import org.jfree.data.xy.XYDataset;
  * the {@code XYErrorRendererDemo1.java} program included in the
  * JFreeChart demo collection:
  * <br><br>
- * <img src="../../../../../images/XYErrorRendererSample.png"
- * alt="XYErrorRendererSample.png">
+ * <img src="doc-files/XYErrorRendererSample.png" alt="XYErrorRendererSample.png">
  *
  * @since 1.0.3
  */

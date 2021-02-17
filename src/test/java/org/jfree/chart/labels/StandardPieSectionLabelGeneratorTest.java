@@ -45,8 +45,8 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
 import org.jfree.chart.TestUtils;
-import org.jfree.chart.util.CloneUtils;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.internal.CloneUtils;
+import org.jfree.chart.api.PublicCloneable;
 
 import org.junit.jupiter.api.Test;
 

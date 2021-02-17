@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,22 +27,10 @@
  * -------------------
  * CompositeTitle.java
  * -------------------
- * (C) Copyright 2005-2016, by David Gilbert and Contributors.
+ * (C) Copyright 2005-2021, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Eric Penfold (patch 2006826);
- *
- * Changes
- * -------
- * 19-Nov-2004 : Version 1 (DG);
- * 11-Jan-2005 : Removed deprecated code in preparation for 1.0.0 release (DG);
- * 04-Feb-2005 : Implemented MAXIMUM_WIDTH in calculateSize (DG);
- * 20-Apr-2005 : Added new draw() method (DG);
- * 03-May-2005 : Implemented equals() method (DG);
- * 02-Jul-2008 : Applied patch 2006826 by Eric Penfold, to enable chart
- *               entities to be generated (DG);
- * 09-Jul-2008 : Added backgroundPaint field (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -62,8 +50,8 @@ import org.jfree.chart.block.RectangleConstraint;
 import org.jfree.chart.event.TitleChangeEvent;
 import org.jfree.chart.ui.Size2D;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.internal.SerialUtils;
 
 /**
  * A title that contains multiple titles within a {@link BlockContainer}.

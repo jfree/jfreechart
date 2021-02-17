@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * DefaultKeyedValues2D.java
  * -------------------------
- * (C) Copyright 2002-2020, by Object Refinery Limited.
+ * (C) Copyright 2002-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Andreas Schroeder;
@@ -41,9 +41,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.jfree.chart.util.CloneUtils;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.internal.CloneUtils;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.api.PublicCloneable;
 
 /**
  * A data structure that stores zero, one or many values, where each value
@@ -66,7 +66,7 @@ public class DefaultKeyedValues2D<R extends Comparable<R>, C extends Comparable<
     private List<DefaultKeyedValues<C>> rows;
 
     /** If the row keys should be sorted by their comparable order. */
-    private boolean sortRowKeys;
+    private final boolean sortRowKeys;
 
     /**
      * Creates a new instance (initially empty).

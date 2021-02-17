@@ -36,6 +36,7 @@
 
 package org.jfree.chart;
 
+import org.jfree.chart.legend.LegendItem;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
@@ -46,7 +47,7 @@ import java.awt.geom.Rectangle2D;
 import java.text.AttributedString;
 import org.jfree.chart.ui.GradientPaintTransformType;
 import org.jfree.chart.ui.StandardGradientPaintTransformer;
-import org.jfree.chart.util.CloneUtils;
+import org.jfree.chart.internal.CloneUtils;
 
 
 import org.junit.jupiter.api.Test;

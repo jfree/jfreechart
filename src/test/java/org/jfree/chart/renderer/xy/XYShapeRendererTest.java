@@ -47,7 +47,7 @@ import java.awt.Color;
 import org.jfree.chart.TestUtils;
 
 import org.jfree.chart.renderer.LookupPaintScale;
-import org.jfree.chart.util.CloneUtils;
+import org.jfree.chart.internal.CloneUtils;
 import org.jfree.data.Range;
 import org.jfree.data.xy.DefaultXYZDataset;
 import org.jfree.data.xy.XYSeries;

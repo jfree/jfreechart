@@ -54,7 +54,7 @@ public interface KeyedValues2D<R extends Comparable<R>, C extends Comparable<C>>
      *
      * @throws IndexOutOfBoundsException if {@code row} is out of bounds.
      */
-    public R getRowKey(int row);
+    R getRowKey(int row);
 
     /**
      * Returns the row index for a given key.
@@ -63,14 +63,14 @@ public interface KeyedValues2D<R extends Comparable<R>, C extends Comparable<C>>
      *
      * @return The row index, or a negative value if the key is unrecognised.
      */
-    public int getRowIndex(R key);
+    int getRowIndex(R key);
 
     /**
      * Returns the row keys.
      *
      * @return The keys.
      */
-    public List<R> getRowKeys();
+    List<R> getRowKeys();
 
     /**
      * Returns the column key for a given index.
@@ -81,7 +81,7 @@ public interface KeyedValues2D<R extends Comparable<R>, C extends Comparable<C>>
      *
      * @throws IndexOutOfBoundsException if {@code row} is out of bounds.
      */
-    public C getColumnKey(int column);
+    C getColumnKey(int column);
 
     /**
      * Returns the column index for a given key.
@@ -90,14 +90,14 @@ public interface KeyedValues2D<R extends Comparable<R>, C extends Comparable<C>>
      *
      * @return The column index, or {@code -1} if the key is unrecognised.
      */
-    public int getColumnIndex(C key);
+    int getColumnIndex(C key);
 
     /**
      * Returns the column keys.
      *
      * @return The keys.
      */
-    public List<C> getColumnKeys();
+    List<C> getColumnKeys();
 
     /**
      * Returns the value associated with the specified keys.
@@ -109,6 +109,6 @@ public interface KeyedValues2D<R extends Comparable<R>, C extends Comparable<C>>
      *
      * @throws UnknownKeyException if either key is not recognised.
      */
-    public Number getValue(R rowKey, C columnKey);
+    Number getValue(R rowKey, C columnKey);
 
 }

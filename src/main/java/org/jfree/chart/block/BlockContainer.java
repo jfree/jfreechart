@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * BlockContainer.java
  * -------------------
- * (C) Copyright 2004-2020, by Object Refinery Limited.
+ * (C) Copyright 2004-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -48,8 +48,8 @@ import java.util.Objects;
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.entity.StandardEntityCollection;
 import org.jfree.chart.ui.Size2D;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.api.PublicCloneable;
 
 /**
  * A container for a collection of {@link Block} objects.  The container uses
@@ -62,7 +62,7 @@ public class BlockContainer extends AbstractBlock
     private static final long serialVersionUID = 8199508075695195293L;
 
     /** The blocks within the container. */
-    private List<Block> blocks;
+    private final List<Block> blocks;
 
     /** The object responsible for laying out the blocks. */
     private Arrangement arrangement;

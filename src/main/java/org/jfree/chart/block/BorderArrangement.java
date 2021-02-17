@@ -52,7 +52,7 @@ import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 import java.util.Objects;
 
-import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.api.RectangleEdge;
 import org.jfree.chart.ui.Size2D;
 
 import org.jfree.data.Range;

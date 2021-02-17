@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,23 +27,10 @@
  * --------------------------
  * DefaultHighLowDataset.java
  * --------------------------
- * (C) Copyright 2002-2016, by Object Refinery Limited.
+ * (C) Copyright 2002-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 21-Mar-2002 : Version 1 (DG);
- * 07-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 06-May-2004 : Now extends AbstractXYDataset and added new methods from
- *               HighLowDataset (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
- *               getYValue() (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 28-Nov-2006 : Added equals() method override (DG);
- * 22-Apr-2008 : Implemented PublicCloneable (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -51,8 +38,8 @@ package org.jfree.data.xy;
 
 import java.util.Arrays;
 import java.util.Date;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.api.PublicCloneable;
 
 /**
  * A simple implementation of the {@link OHLCDataset} interface.  See also
@@ -143,7 +130,7 @@ public class DefaultHighLowDataset extends AbstractXYDataset
      */
     @Override
     public Number getX(int series, int item) {
-        return new Long(this.date[item].getTime());
+        return this.date[item].getTime();
     }
 
     /**
@@ -435,7 +422,7 @@ public class DefaultHighLowDataset extends AbstractXYDataset
     public static Number[] createNumberArray(double[] data) {
         Number[] result = new Number[data.length];
         for (int i = 0; i < data.length; i++) {
-            result[i] = new Double(data[i]);
+            result[i] = data[i];
         }
         return result;
     }
