@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * LegendItem.java
  * ---------------
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Andrzej Porebski;
@@ -53,16 +53,15 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.text.AttributedString;
 import java.text.CharacterIterator;
+import java.util.Objects;
 import org.jfree.chart.text.AttributedStringUtils;
 import org.jfree.chart.ui.GradientPaintTransformer;
 import org.jfree.chart.ui.StandardGradientPaintTransformer;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.chart.util.ShapeUtils;
-
 import org.jfree.data.general.Dataset;
 
 /**
@@ -1010,7 +1009,7 @@ public class LegendItem implements Cloneable, Serializable {
                 that.attributedLabel)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.description, that.description)) {
+        if (!Objects.equals(this.description, that.description)) {
             return false;
         }
         if (this.shapeVisible != that.shapeVisible) {
@@ -1025,7 +1024,7 @@ public class LegendItem implements Cloneable, Serializable {
         if (!PaintUtils.equal(this.fillPaint, that.fillPaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.fillPaintTransformer,
+        if (!Objects.equals(this.fillPaintTransformer,
                 that.fillPaintTransformer)) {
             return false;
         }
@@ -1050,7 +1049,7 @@ public class LegendItem implements Cloneable, Serializable {
         if (!PaintUtils.equal(this.linePaint, that.linePaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.labelFont, that.labelFont)) {
+        if (!Objects.equals(this.labelFont, that.labelFont)) {
             return false;
         }
         if (!PaintUtils.equal(this.labelPaint, that.labelPaint)) {
