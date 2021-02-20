@@ -42,7 +42,8 @@ import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 
 /**
- * A key that identifies a node in a {@link FlowDataset}.
+ * A key that identifies a node in a {@link FlowDataset}.  Instances of this
+ * class are immutable.
  * 
  * @param <K> the type for the keys used to identify sources and destinations 
  *     ({@code String} is a good default choice).
@@ -52,11 +53,17 @@ import org.jfree.chart.util.PublicCloneable;
 public class NodeKey <K extends Comparable<K>> implements PublicCloneable, Serializable {
 
     /** The stage. */
-    private int stage;
+    private final int stage;
     
     /* The source node. */
-    private K node;
+    private final K node;
     
+    /**
+     * Creates a new key referencing a node in a {@link FlowDataset}.
+     * 
+     * @param stage  the stage.
+     * @param node  the node key.
+     */
     public NodeKey(int stage, K node) {
         Args.nullNotPermitted(node, "node");
         this.stage = stage;
