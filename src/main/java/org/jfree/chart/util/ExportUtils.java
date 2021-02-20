@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------
  * ExportUtils.java
  * ----------------
- * (C) Copyright 2014-2020 by Object Refinery Limited and Contributors.
+ * (C) Copyright 2014-2021 by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -69,9 +69,14 @@ public class ExportUtils {
     public static boolean isJFreeSVGAvailable() {
         Class<?> svgClass = null;
         try {
-            svgClass = Class.forName("org.jfree.graphics2d.svg.SVGGraphics2D");
+            svgClass = Class.forName("org.jfree.svg.SVGGraphics2D");
         } catch (ClassNotFoundException e) {
-            // svgClass will be null so the function will return false
+            // see if there is maybe an older version of JFreeSVG (different package name)
+            try {
+                svgClass = Class.forName("org.jfree.graphics2d.svg.SVGGraphics2D");
+            } catch (ClassNotFoundException e2) {
+                // svgClass will be null so the function will return false
+            }
         }
         return (svgClass != null);
     }
@@ -104,8 +109,7 @@ public class ExportUtils {
      * @param h  the chart height.
      * @param file  the output file ({@code null} not permitted).
      */
-    public static void writeAsSVG(Drawable drawable, int w, int h, 
-            File file) {
+    public static void writeAsSVG(Drawable drawable, int w, int h, File file) {
         if (!ExportUtils.isJFreeSVGAvailable()) {
             throw new IllegalStateException(
                     "JFreeSVG is not present on the classpath.");
@@ -126,19 +130,9 @@ public class ExportUtils {
             Method m2 = svgUtilsClass.getMethod("writeToSVG", File.class, 
                     String.class);
             m2.invoke(svgUtilsClass, file, element);
-        } catch (ClassNotFoundException ex) {
-            throw new RuntimeException(ex);
-        } catch (InstantiationException ex) {
-            throw new RuntimeException(ex);
-        } catch (IllegalAccessException ex) {
-            throw new RuntimeException(ex);
-        } catch (NoSuchMethodException ex) {
-            throw new RuntimeException(ex);
-        } catch (SecurityException ex) {
-            throw new RuntimeException(ex);
-        } catch (IllegalArgumentException ex) {
-            throw new RuntimeException(ex);
-        } catch (InvocationTargetException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
+                NoSuchMethodException | SecurityException | IllegalArgumentException |
+                InvocationTargetException ex) {
             throw new RuntimeException(ex);
         }
     }
@@ -164,7 +158,7 @@ public class ExportUtils {
         Args.nullNotPermitted(file, "file");
         try {
             Class<?> pdfDocClass = Class.forName("com.orsonpdf.PDFDocument");
-            Object pdfDoc = pdfDocClass.newInstance();
+            Object pdfDoc = pdfDocClass.getDeclaredConstructor().newInstance();
             Method m = pdfDocClass.getMethod("createPage", Rectangle2D.class);
             Rectangle2D rect = new Rectangle(w, h);
             Object page = m.invoke(pdfDoc, rect);
@@ -174,19 +168,9 @@ public class ExportUtils {
             drawable.draw(g2, drawArea);
             Method m3 = pdfDocClass.getMethod("writeToFile", File.class);
             m3.invoke(pdfDoc, file);
-        } catch (ClassNotFoundException ex) {
-            throw new RuntimeException(ex);
-        } catch (InstantiationException ex) {
-            throw new RuntimeException(ex);
-        } catch (IllegalAccessException ex) {
-            throw new RuntimeException(ex);
-        } catch (NoSuchMethodException ex) {
-            throw new RuntimeException(ex);
-        } catch (SecurityException ex) {
-            throw new RuntimeException(ex);
-        } catch (IllegalArgumentException ex) {
-            throw new RuntimeException(ex);
-        } catch (InvocationTargetException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
+                NoSuchMethodException | SecurityException | IllegalArgumentException |
+                InvocationTargetException ex) {
             throw new RuntimeException(ex);
         }
     }
@@ -208,12 +192,8 @@ public class ExportUtils {
                 BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2 = image.createGraphics();
         drawable.draw(g2, new Rectangle(w, h));
-        OutputStream out = new BufferedOutputStream(new FileOutputStream(file));
-        try {
+        try (OutputStream out = new BufferedOutputStream(new FileOutputStream(file))) {
             ImageIO.write(image, "png", out);
-        }
-        finally {
-            out.close();
         }
     }
 
@@ -234,12 +214,8 @@ public class ExportUtils {
                 BufferedImage.TYPE_INT_RGB);
         Graphics2D g2 = image.createGraphics();
         drawable.draw(g2, new Rectangle(w, h));
-        OutputStream out = new BufferedOutputStream(new FileOutputStream(file));
-        try {
+        try (OutputStream out = new BufferedOutputStream(new FileOutputStream(file))) {
             ImageIO.write(image, "jpg", out);
-        }
-        finally {
-            out.close();
         }
     }
  

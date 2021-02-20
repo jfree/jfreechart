@@ -60,6 +60,7 @@ History
 ##### Version 1.5.3 (20 February 2021)
 - add new `FlowPlot` class for drawing Sankey charts;
 - throw exception in `DefaultPieDataset` for invalid index ([#212](https://github.com/jfree/jfreechart/issues/212));
+- fix `isJFreeSVGAvailable()` method (bugs [#207](https://github.com/jfree/jfreechart/issues/207));
 - replaced some usages of `ObjectUtils` with the JDK `Objects` class;
 - remove unused `URLUtilities` class.
 
