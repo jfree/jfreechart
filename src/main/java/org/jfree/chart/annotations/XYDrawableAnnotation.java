@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * XYDrawableAnnotation.java
  * -------------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited.
+ * (C) Copyright 2003-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -40,6 +40,7 @@ import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
+import java.util.Objects;
 
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.Plot;
@@ -48,7 +49,6 @@ import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.ui.Drawable;
 import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 
@@ -211,7 +211,7 @@ public class XYDrawableAnnotation extends AbstractXYAnnotation
         if (this.drawScaleFactor != that.drawScaleFactor) {
             return false;
         }
-        if (!ObjectUtils.equal(this.drawable, that.drawable)) {
+        if (!Objects.equals(this.drawable, that.drawable)) {
             return false;
         }
         // seem to be the same...

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------------
  * XYDataImageAnnotation.java
  * --------------------------
- * (C) Copyright 2008-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2008-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Peter Kolb (patch 2809117);
@@ -42,6 +42,7 @@ import java.awt.geom.Rectangle2D;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Objects;
 
 import org.jfree.chart.axis.AxisLocation;
 import org.jfree.chart.axis.ValueAxis;
@@ -50,7 +51,6 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.Range;
@@ -316,7 +316,7 @@ public class XYDataImageAnnotation extends AbstractXYAnnotation
         if (this.includeInDataBounds != that.includeInDataBounds) {
             return false;
         }
-        if (!ObjectUtils.equal(this.image, that.image)) {
+        if (!Objects.equals(this.image, that.image)) {
             return false;
         }
         // seems to be the same...

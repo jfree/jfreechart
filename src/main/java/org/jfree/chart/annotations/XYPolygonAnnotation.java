@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------
  * XYPolygonAnnotation.java
  * ------------------------
- * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Peter Kolb (patch 2809117);
@@ -48,6 +48,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.Objects;
 
 import org.jfree.chart.HashUtils;
 import org.jfree.chart.axis.ValueAxis;
@@ -56,7 +57,6 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
@@ -280,7 +280,7 @@ public class XYPolygonAnnotation extends AbstractXYAnnotation
         if (!Arrays.equals(this.polygon, that.polygon)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.stroke, that.stroke)) {
+        if (!Objects.equals(this.stroke, that.stroke)) {
             return false;
         }
         if (!PaintUtils.equal(this.outlinePaint, that.outlinePaint)) {

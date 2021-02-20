@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------------
  * XYIntervalSeriesCollection.java
  * -------------------------------
- * (C) Copyright 2006-2020, by Object Refinery Limited.
+ * (C) Copyright 2006-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -38,7 +38,7 @@ package org.jfree.data.xy;
 
 import java.io.Serializable;
 import java.util.List;
-import org.jfree.chart.util.ObjectUtils;
+import java.util.Objects;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 
@@ -361,7 +361,7 @@ public class XYIntervalSeriesCollection extends AbstractIntervalXYDataset
             return false;
         }
         XYIntervalSeriesCollection that = (XYIntervalSeriesCollection) obj;
-        return ObjectUtils.equal(this.data, that.data);
+        return Objects.equals(this.data, that.data);
     }
 
     /**

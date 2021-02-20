@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * XYBoxAnnotation.java
  * --------------------
- * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Peter Kolb (see patch 2809117);
@@ -46,6 +46,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Objects;
 
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.Plot;
@@ -53,7 +54,6 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
@@ -228,7 +228,7 @@ public class XYBoxAnnotation extends AbstractXYAnnotation
         if (!(this.y1 == that.y1)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.stroke, that.stroke)) {
+        if (!Objects.equals(this.stroke, that.stroke)) {
             return false;
         }
         if (!PaintUtils.equal(this.outlinePaint, that.outlinePaint)) {

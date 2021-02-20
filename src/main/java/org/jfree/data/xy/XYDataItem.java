@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * XYDataItem.java
  * ---------------
- * (C) Copyright 2003-2020, by Object Refinery Limited.
+ * (C) Copyright 2003-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -37,7 +37,7 @@
 package org.jfree.data.xy;
 
 import java.io.Serializable;
-import org.jfree.chart.util.ObjectUtils;
+import java.util.Objects;
 import org.jfree.chart.util.Args;
 
 /**
@@ -232,7 +232,7 @@ public class XYDataItem implements Cloneable, Comparable, Serializable {
         if (!this.x.equals(that.x)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.y, that.y)) {
+        if (!Objects.equals(this.y, that.y)) {
             return false;
         }
         return true;
