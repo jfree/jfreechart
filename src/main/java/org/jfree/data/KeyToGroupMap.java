@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * KeyToGroupMap.java
  * ------------------
- * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -45,7 +45,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import org.jfree.chart.util.ObjectUtils;
+import java.util.Objects;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 
@@ -222,7 +222,7 @@ public class KeyToGroupMap implements Cloneable, PublicCloneable, Serializable {
             return false;
         }
         KeyToGroupMap that = (KeyToGroupMap) obj;
-        if (!ObjectUtils.equal(this.defaultGroup, that.defaultGroup)) {
+        if (!Objects.equals(this.defaultGroup, that.defaultGroup)) {
             return false;
         }
         if (!this.keyToGroupMap.equals(that.keyToGroupMap)) {

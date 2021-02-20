@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------
  * CompassPlot.java
  * ----------------
- * (C) Copyright 2002-2017, by the Australian Antarctic Division and
+ * (C) Copyright 2002-2021, by the Australian Antarctic Division and
  * Contributors.
  *
  * Original Author:  Bryan Scott (for the Australian Antarctic Division);
@@ -55,6 +55,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 import org.jfree.chart.LegendItemCollection;
@@ -70,7 +71,6 @@ import org.jfree.chart.needle.PointerNeedle;
 import org.jfree.chart.needle.ShipNeedle;
 import org.jfree.chart.needle.WindNeedle;
 import org.jfree.chart.ui.RectangleInsets;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.ResourceBundleWrapper;
@@ -734,7 +734,7 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
         if (this.labelType != that.labelType) {
             return false;
         }
-        if (!ObjectUtils.equal(this.labelFont, that.labelFont)) {
+        if (!Objects.equals(this.labelFont, that.labelFont)) {
             return false;
         }
         if (this.drawBorder != that.drawBorder) {
@@ -751,7 +751,7 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
                 that.roseCenterPaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.compassFont, that.compassFont)) {
+        if (!Objects.equals(this.compassFont, that.compassFont)) {
             return false;
         }
         if (!Arrays.equals(this.seriesNeedle, that.seriesNeedle)) {

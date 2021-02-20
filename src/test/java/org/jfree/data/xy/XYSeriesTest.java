@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,20 +27,10 @@
  * -----------------
  * XYSeriesTest.java
  * -----------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 23-Dec-2003 : Version 1 (DG);
- * 15-Jan-2007 : Added tests for new toArray() method (DG);
- * 30-Jan-2007 : Fixed some code that won't compile with Java 1.4 (DG);
- * 31-Oct-2007 : New hashCode() test (DG);
- * 01-May-2008 : Added testAddOrUpdate3() (DG);
- * 24-Nov-2008 : Added testBug1955483() (DG);
- * 06-Mar-2009 : Added tests for cached bounds values (DG);
  *
  */
 
@@ -293,7 +283,7 @@ public class XYSeriesTest {
         XYSeries series = new XYSeries("S1");
         series.add(Integer.valueOf(1), Integer.valueOf(2));
         assertEquals(2, series.getY(0));
-        series.update(Integer.valueOf(1), Integer.valueOf(3));
+        series.update(1, 3);
         assertEquals(3, series.getY(0));
         try {
             series.update(2, 99);

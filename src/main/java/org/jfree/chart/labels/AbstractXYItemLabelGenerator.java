@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------------
  * AbstractXYItemLabelGenerator.java
  * ---------------------------------
- * (C) Copyright 2004-2020, by Object Refinery Limited.
+ * (C) Copyright 2004-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -41,9 +41,9 @@ import java.text.DateFormat;
 import java.text.MessageFormat;
 import java.text.NumberFormat;
 import java.util.Date;
+import java.util.Objects;
 
 import org.jfree.chart.HashUtils;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.data.xy.XYDataset;
 
@@ -290,16 +290,16 @@ public class AbstractXYItemLabelGenerator implements Cloneable, Serializable {
         if (!this.formatString.equals(that.formatString)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.xFormat, that.xFormat)) {
+        if (!Objects.equals(this.xFormat, that.xFormat)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.xDateFormat, that.xDateFormat)) {
+        if (!Objects.equals(this.xDateFormat, that.xDateFormat)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.yFormat, that.yFormat)) {
+        if (!Objects.equals(this.yFormat, that.yFormat)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.yDateFormat, that.yDateFormat)) {
+        if (!Objects.equals(this.yDateFormat, that.yDateFormat)) {
             return false;
         }
         if (!this.nullYString.equals(that.nullYString)) {

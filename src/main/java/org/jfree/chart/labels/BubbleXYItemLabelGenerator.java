@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------------
  * BubbleXYItemLabelGenerator.java
  * -------------------------------
- * (C) Copyright 2005-2020, by Object Refinery Limited.
+ * (C) Copyright 2005-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -40,10 +40,10 @@ import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.MessageFormat;
 import java.text.NumberFormat;
+import java.util.Objects;
 
 import org.jfree.chart.HashUtils;
 import org.jfree.chart.renderer.xy.XYBubbleRenderer;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.xy.XYDataset;
@@ -244,10 +244,10 @@ public class BubbleXYItemLabelGenerator extends AbstractXYItemLabelGenerator
             return false;
         }
         BubbleXYItemLabelGenerator that = (BubbleXYItemLabelGenerator) obj;
-        if (!ObjectUtils.equal(this.zFormat, that.zFormat)) {
+        if (!Objects.equals(this.zFormat, that.zFormat)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.zDateFormat, that.zDateFormat)) {
+        if (!Objects.equals(this.zDateFormat, that.zDateFormat)) {
             return false;
         }
         return true;

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------------
  * OutlierListCollection.java
  * --------------------------
- * (C) Copyright 2003-2020, by David Browning and Contributors.
+ * (C) Copyright 2003-2021, by David Browning and Contributors.
  *
  * Original Author:  David Browning (for Australian Institute of Marine
  *                   Science);
@@ -156,7 +156,7 @@ public class OutlierListCollection {
 
     /**
      * Updates the outlier list by adding the outlier to the end of the list and
-     * setting the averaged outlier to the average x and y coordinnate values
+     * setting the averaged outlier to the average x and y coordinate values
      * of the outliers in the list.
      *
      * @param list  the outlier list to be updated.
@@ -165,8 +165,7 @@ public class OutlierListCollection {
      * @return <tt>true</tt> (as per the general contract of Collection.add).
      */
     private boolean updateOutlierList(OutlierList list, Outlier outlier) {
-        boolean result = false;
-        result = list.add(outlier);
+        boolean result = list.add(outlier);
         list.updateAveragedOutlier();
         list.setMultiple(true);
         return result;

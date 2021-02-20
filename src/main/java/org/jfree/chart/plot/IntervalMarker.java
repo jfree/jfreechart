@@ -41,11 +41,11 @@ import java.awt.Color;
 import java.awt.Paint;
 import java.awt.Stroke;
 import java.io.Serializable;
+import java.util.Objects;
 
 import org.jfree.chart.event.MarkerChangeEvent;
 import org.jfree.chart.ui.GradientPaintTransformer;
 import org.jfree.chart.ui.LengthAdjustmentType;
-import org.jfree.chart.util.ObjectUtils;
 
 /**
  * Represents an interval to be highlighted in some way.
@@ -203,7 +203,7 @@ public class IntervalMarker extends Marker implements Cloneable, Serializable {
         if (this.endValue != that.endValue) {
             return false;
         }
-        if (!ObjectUtils.equal(this.gradientPaintTransformer,
+        if (!Objects.equals(this.gradientPaintTransformer,
                 that.gradientPaintTransformer)) {
             return false;
         }

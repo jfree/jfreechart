@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------
  * MeterPlot.java
  * --------------
- * (C) Copyright 2000-2020, by Hari and Contributors.
+ * (C) Copyright 2000-2021, by Hari and Contributors.
  *
  * Original Author:  Hari (ourhari@hotmail.com);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -64,6 +64,7 @@ import java.text.NumberFormat;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 import org.jfree.chart.LegendItem;
@@ -72,7 +73,6 @@ import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.TextAnchor;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.ResourceBundleWrapper;
@@ -1154,13 +1154,13 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
             return false;
         }
         MeterPlot that = (MeterPlot) obj;
-        if (!ObjectUtils.equal(this.units, that.units)) {
+        if (!Objects.equals(this.units, that.units)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.range, that.range)) {
+        if (!Objects.equals(this.range, that.range)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.intervals, that.intervals)) {
+        if (!Objects.equals(this.intervals, that.intervals)) {
             return false;
         }
         if (!PaintUtils.equal(this.dialOutlinePaint,
@@ -1177,7 +1177,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
         if (!PaintUtils.equal(this.needlePaint, that.needlePaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.valueFont, that.valueFont)) {
+        if (!Objects.equals(this.valueFont, that.valueFont)) {
             return false;
         }
         if (!PaintUtils.equal(this.valuePaint, that.valuePaint)) {
@@ -1192,13 +1192,13 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
         if (this.tickLabelsVisible != that.tickLabelsVisible) {
             return false;
         }
-        if (!ObjectUtils.equal(this.tickLabelFont, that.tickLabelFont)) {
+        if (!Objects.equals(this.tickLabelFont, that.tickLabelFont)) {
             return false;
         }
         if (!PaintUtils.equal(this.tickLabelPaint, that.tickLabelPaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.tickLabelFormat,
+        if (!Objects.equals(this.tickLabelFormat,
                 that.tickLabelFormat)) {
             return false;
         }

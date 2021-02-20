@@ -127,6 +127,11 @@ public class NodeKey <K extends Comparable<K>> implements PublicCloneable, Seria
         return true;
     }
     
+    /**
+     * Returns a hashcode for this instance.
+     * 
+     * @return A hashcode.
+     */
     @Override
     public int hashCode() {
         int hash = 3;

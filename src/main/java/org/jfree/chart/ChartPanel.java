@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * ChartPanel.java
  * ---------------
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Andrzej Porebski;
@@ -45,134 +45,6 @@
  *                   Alessandro Borges - patch 1460845;
  *                   Martin Hoeller;
  *                   Simon Legner - patch from bug 1129;
- *
- * Changes (from 28-Jun-2001)
- * --------------------------
- * 28-Jun-2001 : Integrated buffering code contributed by S???ren
- *               Caspersen (DG);
- * 18-Sep-2001 : Updated header and fixed DOS encoding problem (DG);
- * 22-Nov-2001 : Added scaling to improve display of charts in small sizes (DG);
- * 26-Nov-2001 : Added property editing, saving and printing (DG);
- * 11-Dec-2001 : Transferred saveChartAsPNG method to new ChartUtilities
- *               class (DG);
- * 13-Dec-2001 : Added tooltips (DG);
- * 16-Jan-2002 : Added an optional crosshair, based on the implementation by
- *               Jonathan Nash. Renamed the tooltips class (DG);
- * 23-Jan-2002 : Implemented zooming based on code by Hans-Jurgen Greiner (DG);
- * 05-Feb-2002 : Improved tooltips setup.  Renamed method attemptSaveAs()
- *               --> doSaveAs() and made it public rather than private (DG);
- * 28-Mar-2002 : Added a new constructor (DG);
- * 09-Apr-2002 : Changed initialisation of tooltip generation, as suggested by
- *               Hans-Jurgen Greiner (DG);
- * 27-May-2002 : New interactive zooming methods based on code by Hans-Jurgen
- *               Greiner. Renamed JFreeChartPanel --> ChartPanel, moved
- *               constants to ChartPanelConstants interface (DG);
- * 31-May-2002 : Fixed a bug with interactive zooming and added a way to
- *               control if the zoom rectangle is filled in or drawn as an
- *               outline. A mouse drag gesture towards the top left now causes
- *               an autoRangeBoth() and is a way to undo zooms (AS);
- * 11-Jun-2002 : Reinstated handleClick method call in mouseClicked() to get
- *               crosshairs working again (DG);
- * 13-Jun-2002 : Added check for null popup menu in mouseDragged method (DG);
- * 18-Jun-2002 : Added get/set methods for minimum and maximum chart
- *               dimensions (DG);
- * 25-Jun-2002 : Removed redundant code (DG);
- * 27-Aug-2002 : Added get/set methods for popup menu (DG);
- * 26-Sep-2002 : Fixed errors reported by Checkstyle (DG);
- * 22-Oct-2002 : Added translation methods for screen <--> Java2D, contributed
- *               by Daniel van Enckevort (DG);
- * 05-Nov-2002 : Added a chart reference to the ChartMouseEvent class (DG);
- * 22-Nov-2002 : Added test in zoom method for inverted axes, supplied by
- *               David M O'Donnell (DG);
- * 14-Jan-2003 : Implemented ChartProgressListener interface (DG);
- * 14-Feb-2003 : Removed deprecated setGenerateTooltips method (DG);
- * 12-Mar-2003 : Added option to enforce filename extension (see bug id
- *               643173) (DG);
- * 08-Sep-2003 : Added internationalization via use of properties
- *               resourceBundle (RFE 690236) (AL);
- * 18-Sep-2003 : Added getScaleX() and getScaleY() methods (protected) as
- *               requested by Irv Thomae (DG);
- * 12-Nov-2003 : Added zooming support for the FastScatterPlot class (DG);
- * 24-Nov-2003 : Minor Javadoc updates (DG);
- * 04-Dec-2003 : Added anchor point for crosshair calculation (DG);
- * 17-Jan-2004 : Added new methods to set tooltip delays to be used in this
- *               chart panel. Refer to patch 877565 (MR);
- * 02-Feb-2004 : Fixed bug in zooming trigger and added zoomTriggerDistance
- *               attribute (DG);
- * 08-Apr-2004 : Changed getScaleX() and getScaleY() from protected to
- *               public (DG);
- * 15-Apr-2004 : Added zoomOutFactor and zoomInFactor (DG);
- * 21-Apr-2004 : Fixed zooming bug in mouseReleased() method (DG);
- * 13-Jul-2004 : Added check for null chart (DG);
- * 04-Oct-2004 : Renamed ShapeUtils --> ShapeUtilities (DG);
- * 11-Nov-2004 : Moved constants back in from ChartPanelConstants (DG);
- * 12-Nov-2004 : Modified zooming mechanism to support zooming within
- *               subplots (DG);
- * 26-Jan-2005 : Fixed mouse zooming for horizontal category plots (DG);
- * 11-Apr-2005 : Added getFillZoomRectangle() method, renamed
- *               setHorizontalZoom() --> setDomainZoomable(),
- *               setVerticalZoom() --> setRangeZoomable(), added
- *               isDomainZoomable() and isRangeZoomable(), added
- *               getHorizontalAxisTrace() and getVerticalAxisTrace(),
- *               renamed autoRangeBoth() --> restoreAutoBounds(),
- *               autoRangeHorizontal() --> restoreAutoDomainBounds(),
- *               autoRangeVertical() --> restoreAutoRangeBounds() (DG);
- * 12-Apr-2005 : Removed working areas, added getAnchorPoint() method,
- *               added protected accessors for tracelines (DG);
- * 18-Apr-2005 : Made constants final (DG);
- * 26-Apr-2005 : Removed LOGGER (DG);
- * 01-Jun-2005 : Fixed zooming for combined plots - see bug report
- *               1212039, fix thanks to Onno vd Akker (DG);
- * 25-Nov-2005 : Reworked event listener mechanism (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 01-Aug-2006 : Fixed minor bug in restoreAutoRangeBounds() (DG);
- * 04-Sep-2006 : Renamed attemptEditChartProperties() -->
- *               doEditChartProperties() and made public (DG);
- * 13-Sep-2006 : Don't generate ChartMouseEvents if the panel's chart is null
- *               (fixes bug 1556951) (DG);
- * 05-Mar-2007 : Applied patch 1672561 by Sergei Ivanov, to fix zoom rectangle
- *               drawing for dynamic charts (DG);
- * 17-Apr-2007 : Fix NullPointerExceptions in zooming for combined plots (DG);
- * 24-May-2007 : When the look-and-feel changes, update the popup menu if there
- *               is one (DG);
- * 06-Jun-2007 : Fixed coordinates for drawing buffer image (DG);
- * 24-Sep-2007 : Added zoomAroundAnchor flag, and handle clearing of chart
- *               buffer (DG);
- * 25-Oct-2007 : Added default directory attribute (DG);
- * 07-Nov-2007 : Fixed (rare) bug in refreshing off-screen image (DG);
- * 07-May-2008 : Fixed bug in zooming that triggered zoom for a rectangle
- *               outside of the data area (DG);
- * 08-May-2008 : Fixed serialization bug (DG);
- * 15-Aug-2008 : Increased default maxDrawWidth/Height (DG);
- * 18-Sep-2008 : Modified creation of chart buffer (DG);
- * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
- *               Jess Thrysoee (DG);
- * 13-Jan-2009 : Fixed zooming methods to trigger only one plot
- *               change event (DG);
- * 16-Jan-2009 : Use XOR for zoom rectangle only if useBuffer is false (DG);
- * 18-Mar-2009 : Added mouse wheel support (DG);
- * 19-Mar-2009 : Added panning on mouse drag support - based on Ulrich 
- *               Voigt's patch 2686040 (DG);
- * 26-Mar-2009 : Changed fillZoomRectangle default to true, and only change
- *               cursor for CTRL-mouse-click if panning is enabled (DG);
- * 01-Apr-2009 : Fixed panning, and added different mouse event mask for
- *               MacOSX (DG);
- * 08-Apr-2009 : Added copy to clipboard support, based on patch 1460845
- *               by Alessandro Borges (DG);
- * 09-Apr-2009 : Added overlay support (DG);
- * 10-Apr-2009 : Set chartBuffer background to match ChartPanel (DG);
- * 05-May-2009 : Match scaling (and insets) in doCopy() (DG);
- * 01-Jun-2009 : Check for null chart in mousePressed() method (DG);
- * 08-Jun-2009 : Fixed bug in setMouseWheelEnabled() (DG);
- * 06-Jul-2009 : Clear off-screen buffer to fully transparent (DG);
- * 10-Oct-2011 : localization fix: bug #3353913 (MH);
- * 05-Jul-2012 : Remove reflection for MouseWheelListener - only needed for 
- *               JRE 1.3.1 (DG);
- * 02-Jul-2013 : Use ParamChecks class (DG);
- * 12-Sep-2013 : Provide auto-detection for JFreeSVG and OrsonPDF 
- *               libraries (no compile time dependencies) (DG);
- * 29-Aug-2014 : Localisation updates from patch attached to bug 1129 (SL);
- * 06-Feb-2017 : Add dispose() call for graphics object, see issue #38 (DG);
  */
 
 package org.jfree.chart;
@@ -512,8 +384,6 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     /**
      * A flag that controls whether zoom operations are centred on the
      * current anchor point, or the centre point of the relevant axis.
-     *
-     * @since 1.0.7
      */
     private boolean zoomAroundAnchor;
 
@@ -526,8 +396,6 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
 
     /**
      * The zoom fill paint (should use transparency).
-     *
-     * @since 1.0.13
      */
     private transient Paint zoomFillPaint;
 
@@ -547,15 +415,11 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
 
     /**
      * The mask for mouse events to trigger panning.
-     *
-     * @since 1.0.13
      */
     private int panMask = InputEvent.CTRL_MASK;
 
     /**
      * A list of overlays for the panel.
-     *
-     * @since 1.0.13
      */
     private List<Overlay> overlays;
     
@@ -747,7 +611,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
             this.panMask = InputEvent.ALT_MASK;
         }
 
-        this.overlays = new ArrayList<Overlay>();
+        this.overlays = new ArrayList<>();
     }
 
     /**

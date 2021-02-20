@@ -144,6 +144,11 @@ public class FlowKey<K extends Comparable<K>> implements PublicCloneable, Serial
         return true;
     }
     
+    /**
+     * Returns a hashcode for this instance.
+     * 
+     * @return A hashcode.
+     */
     @Override
     public int hashCode() {
         int hash = 5;

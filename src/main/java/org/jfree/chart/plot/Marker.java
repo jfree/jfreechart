@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,35 +27,10 @@
  * -----------
  * Marker.java
  * -----------
- * (C) Copyright 2002-2017, by Object Refinery Limited.
+ * (C) Copyright 2002-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Nicolas Brodu;
- *
- * Changes
- * -------
- * 02-Jul-2002 : Added extra constructor, standard header and Javadoc
- *               comments (DG);
- * 20-Aug-2002 : Added the outline stroke attribute (DG);
- * 02-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 16-Oct-2002 : Added new constructor (DG);
- * 26-Mar-2003 : Implemented Serializable (DG);
- * 21-May-2003 : Added labels (DG);
- * 11-Sep-2003 : Implemented Cloneable (NB);
- * 05-Nov-2003 : Added checks to ensure some attributes are never null (DG);
- * 11-Feb-2003 : Moved to org.jfree.chart.plot package, plus significant API
- *               changes to support IntervalMarker in plots (DG);
- * 14-Jun-2004 : Updated equals() method (DG);
- * 21-Jan-2005 : Added settings to control direction of horizontal and
- *               vertical label offsets (DG);
- * 01-Jun-2005 : Modified to use only one label offset type - this will be
- *               applied to the domain or range axis as appropriate (DG);
- * 06-Jun-2005 : Fix equals() method to handle GradientPaint (DG);
- * 19-Aug-2005 : Changed constructor from public --> protected (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 05-Sep-2006 : Added MarkerChangeListener support (DG);
- * 26-Sep-2007 : Fix for serialization bug 1802195 (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -71,6 +46,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.EventListener;
+import java.util.Objects;
 
 import javax.swing.event.EventListenerList;
 
@@ -80,7 +56,6 @@ import org.jfree.chart.ui.LengthAdjustmentType;
 import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.TextAnchor;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
@@ -607,22 +582,22 @@ public abstract class Marker implements Cloneable, Serializable {
         if (!PaintUtils.equal(this.paint, that.paint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.stroke, that.stroke)) {
+        if (!Objects.equals(this.stroke, that.stroke)) {
             return false;
         }
         if (!PaintUtils.equal(this.outlinePaint, that.outlinePaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.outlineStroke, that.outlineStroke)) {
+        if (!Objects.equals(this.outlineStroke, that.outlineStroke)) {
             return false;
         }
         if (this.alpha != that.alpha) {
             return false;
         }
-        if (!ObjectUtils.equal(this.label, that.label)) {
+        if (!Objects.equals(this.label, that.label)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.labelFont, that.labelFont)) {
+        if (!Objects.equals(this.labelFont, that.labelFont)) {
             return false;
         }
         if (!PaintUtils.equal(this.labelPaint, that.labelPaint)) {
@@ -637,7 +612,7 @@ public abstract class Marker implements Cloneable, Serializable {
         if (this.labelTextAnchor != that.labelTextAnchor) {
             return false;
         }
-        if (!ObjectUtils.equal(this.labelOffset, that.labelOffset)) {
+        if (!Objects.equals(this.labelOffset, that.labelOffset)) {
             return false;
         }
         if (!this.labelOffsetType.equals(that.labelOffsetType)) {
