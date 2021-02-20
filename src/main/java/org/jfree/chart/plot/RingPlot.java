@@ -53,6 +53,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.text.Format;
+import java.util.Objects;
 
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.entity.PieSectionEntity;
@@ -62,7 +63,6 @@ import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.urls.PieURLGenerator;
 import org.jfree.chart.util.LineUtils;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.Rotation;
@@ -650,7 +650,7 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
         if (!this.centerTextMode.equals(that.centerTextMode)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.centerText, that.centerText)) {
+        if (!Objects.equals(this.centerText, that.centerText)) {
             return false;
         }
         if (!this.centerTextFormatter.equals(that.centerTextFormatter)) {
@@ -665,7 +665,7 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
         if (this.separatorsVisible != that.separatorsVisible) {
             return false;
         }
-        if (!ObjectUtils.equal(this.separatorStroke,
+        if (!Objects.equals(this.separatorStroke,
                 that.separatorStroke)) {
             return false;
         }

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------
  * PiePlot.java
  * ------------
- * (C) Copyright 2000-2020, by Andrzej Porebski and Contributors.
+ * (C) Copyright 2000-2021, by Andrzej Porebski and Contributors.
  *
  * Original Author:  Andrzej Porebski;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -3108,7 +3108,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
         if (this.ignoreNullValues != that.ignoreNullValues) {
             return false;
         }
-        if (!ObjectUtils.equal(this.sectionPaintMap,
+        if (!Objects.equals(this.sectionPaintMap,
                 that.sectionPaintMap)) {
             return false;
         }
@@ -3119,7 +3119,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
         if (this.sectionOutlinesVisible != that.sectionOutlinesVisible) {
             return false;
         }
-        if (!ObjectUtils.equal(this.sectionOutlinePaintMap,
+        if (!Objects.equals(this.sectionOutlinePaintMap,
                 that.sectionOutlinePaintMap)) {
             return false;
         }
@@ -3127,11 +3127,11 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
                 that.defaultSectionOutlinePaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.sectionOutlineStrokeMap,
+        if (!Objects.equals(this.sectionOutlineStrokeMap,
                 that.sectionOutlineStrokeMap)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.defaultSectionOutlineStroke,
+        if (!Objects.equals(this.defaultSectionOutlineStroke,
                 that.defaultSectionOutlineStroke)) {
             return false;
         }
@@ -3144,15 +3144,15 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
         if (!(this.shadowYOffset == that.shadowYOffset)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.explodePercentages,
+        if (!Objects.equals(this.explodePercentages,
                 that.explodePercentages)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.labelGenerator,
+        if (!Objects.equals(this.labelGenerator,
                 that.labelGenerator)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.labelFont, that.labelFont)) {
+        if (!Objects.equals(this.labelFont, that.labelFont)) {
             return false;
         }
         if (!PaintUtils.equal(this.labelPaint, that.labelPaint)) {
@@ -3166,7 +3166,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
                 that.labelOutlinePaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.labelOutlineStroke,
+        if (!Objects.equals(this.labelOutlineStroke,
                 that.labelOutlineStroke)) {
             return false;
         }
@@ -3201,15 +3201,15 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
         if (!PaintUtils.equal(this.labelLinkPaint, that.labelLinkPaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.labelLinkStroke,
+        if (!Objects.equals(this.labelLinkStroke,
                 that.labelLinkStroke)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.toolTipGenerator,
+        if (!Objects.equals(this.toolTipGenerator,
                 that.toolTipGenerator)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.urlGenerator, that.urlGenerator)) {
+        if (!Objects.equals(this.urlGenerator, that.urlGenerator)) {
             return false;
         }
         if (!(this.minimumArcAngleToDraw == that.minimumArcAngleToDraw)) {
@@ -3218,15 +3218,15 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
         if (!ShapeUtils.equal(this.legendItemShape, that.legendItemShape)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.legendLabelGenerator,
+        if (!Objects.equals(this.legendLabelGenerator,
                 that.legendLabelGenerator)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.legendLabelToolTipGenerator,
+        if (!Objects.equals(this.legendLabelToolTipGenerator,
                 that.legendLabelToolTipGenerator)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.legendLabelURLGenerator,
+        if (!Objects.equals(this.legendLabelURLGenerator,
                 that.legendLabelURLGenerator)) {
             return false;
         }
@@ -3241,7 +3241,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
                 != that.autoPopulateSectionOutlineStroke) {
             return false;
         }
-        if (!ObjectUtils.equal(this.shadowGenerator,
+        if (!Objects.equals(this.shadowGenerator,
                 that.shadowGenerator)) {
             return false;
         }

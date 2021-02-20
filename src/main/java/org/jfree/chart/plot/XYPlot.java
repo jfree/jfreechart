@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------
  * XYPlot.java
  * -----------
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Craig MacFarlane;
@@ -77,6 +77,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.TreeMap;
@@ -5172,27 +5173,27 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
         if (this.rangeCrosshairValue != that.rangeCrosshairValue) {
             return false;
         }
-        if (!ObjectUtils.equal(this.axisOffset, that.axisOffset)) {
+        if (!Objects.equals(this.axisOffset, that.axisOffset)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.renderers, that.renderers)) {
+        if (!Objects.equals(this.renderers, that.renderers)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.rangeAxes, that.rangeAxes)) {
+        if (!Objects.equals(this.rangeAxes, that.rangeAxes)) {
             return false;
         }
         if (!this.rangeAxisLocations.equals(that.rangeAxisLocations)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.datasetToDomainAxesMap,
+        if (!Objects.equals(this.datasetToDomainAxesMap,
                 that.datasetToDomainAxesMap)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.datasetToRangeAxesMap,
+        if (!Objects.equals(this.datasetToRangeAxesMap,
                 that.datasetToRangeAxesMap)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.domainGridlineStroke,
+        if (!Objects.equals(this.domainGridlineStroke,
                 that.domainGridlineStroke)) {
             return false;
         }
@@ -5200,7 +5201,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
                 that.domainGridlinePaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.rangeGridlineStroke,
+        if (!Objects.equals(this.rangeGridlineStroke,
                 that.rangeGridlineStroke)) {
             return false;
         }
@@ -5208,7 +5209,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
                 that.rangeGridlinePaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.domainMinorGridlineStroke,
+        if (!Objects.equals(this.domainMinorGridlineStroke,
                 that.domainMinorGridlineStroke)) {
             return false;
         }
@@ -5216,7 +5217,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
                 that.domainMinorGridlinePaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.rangeMinorGridlineStroke,
+        if (!Objects.equals(this.rangeMinorGridlineStroke,
                 that.rangeMinorGridlineStroke)) {
             return false;
         }
@@ -5228,7 +5229,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
                 that.domainZeroBaselinePaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.domainZeroBaselineStroke,
+        if (!Objects.equals(this.domainZeroBaselineStroke,
                 that.domainZeroBaselineStroke)) {
             return false;
         }
@@ -5236,11 +5237,11 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
                 that.rangeZeroBaselinePaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.rangeZeroBaselineStroke,
+        if (!Objects.equals(this.rangeZeroBaselineStroke,
                 that.rangeZeroBaselineStroke)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.domainCrosshairStroke,
+        if (!Objects.equals(this.domainCrosshairStroke,
                 that.domainCrosshairStroke)) {
             return false;
         }
@@ -5248,7 +5249,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
                 that.domainCrosshairPaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.rangeCrosshairStroke,
+        if (!Objects.equals(this.rangeCrosshairStroke,
                 that.rangeCrosshairStroke)) {
             return false;
         }
@@ -5256,42 +5257,42 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
                 that.rangeCrosshairPaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.foregroundDomainMarkers,
+        if (!Objects.equals(this.foregroundDomainMarkers,
                 that.foregroundDomainMarkers)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.backgroundDomainMarkers,
+        if (!Objects.equals(this.backgroundDomainMarkers,
                 that.backgroundDomainMarkers)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.foregroundRangeMarkers,
+        if (!Objects.equals(this.foregroundRangeMarkers,
                 that.foregroundRangeMarkers)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.backgroundRangeMarkers,
+        if (!Objects.equals(this.backgroundRangeMarkers,
                 that.backgroundRangeMarkers)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.foregroundDomainMarkers,
+        if (!Objects.equals(this.foregroundDomainMarkers,
                 that.foregroundDomainMarkers)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.backgroundDomainMarkers,
+        if (!Objects.equals(this.backgroundDomainMarkers,
                 that.backgroundDomainMarkers)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.foregroundRangeMarkers,
+        if (!Objects.equals(this.foregroundRangeMarkers,
                 that.foregroundRangeMarkers)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.backgroundRangeMarkers,
+        if (!Objects.equals(this.backgroundRangeMarkers,
                 that.backgroundRangeMarkers)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.annotations, that.annotations)) {
+        if (!Objects.equals(this.annotations, that.annotations)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.fixedLegendItems,
+        if (!Objects.equals(this.fixedLegendItems,
                 that.fixedLegendItems)) {
             return false;
         }
@@ -5312,7 +5313,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
                 return false;
             }
         }
-        if (!ObjectUtils.equal(this.shadowGenerator,
+        if (!Objects.equals(this.shadowGenerator,
                 that.shadowGenerator)) {
             return false;
         }

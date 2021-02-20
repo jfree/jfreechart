@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,32 +27,10 @@
  * --------------------
  * MultiplePiePlot.java
  * --------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited.
+ * (C) Copyright 2004-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Brian Cabana (patch 1943021);
- *
- * Changes
- * -------
- * 29-Jan-2004 : Version 1 (DG);
- * 31-Mar-2004 : Added setPieIndex() call during drawing (DG);
- * 20-Apr-2005 : Small change for update to LegendItem constructors (DG);
- * 05-May-2005 : Updated draw() method parameters (DG);
- * 16-Jun-2005 : Added get/setDataset() and equals() methods (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 06-Apr-2006 : Fixed bug 1190647 - legend and section colors not consistent
- *               when aggregation limit is specified (DG);
- * 27-Sep-2006 : Updated draw() method for deprecated code (DG);
- * 17-Jan-2007 : Updated prefetchSectionPaints() to check settings in
- *               underlying PiePlot (DG);
- * 17-May-2007 : Added argument check to setPieChart() (DG);
- * 18-May-2007 : Set dataset for LegendItem (DG);
- * 18-Apr-2008 : In the constructor, register the plot as a dataset listener -
- *               see patch 1943021 from Brian Cabana (DG);
- * 30-Dec-2008 : Added legendItemShape field, and fixed cloning bug (DG);
- * 09-Jan-2009 : See ignoreNullValues to true for sub-chart (DG);
- * 01-Jun-2009 : Set series key in getLegendItems() (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -75,6 +53,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.jfree.chart.ChartRenderingInfo;
 import org.jfree.chart.JFreeChart;
@@ -84,7 +63,6 @@ import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
@@ -623,7 +601,7 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
                 that.aggregatedItemsPaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.pieChart, that.pieChart)) {
+        if (!Objects.equals(this.pieChart, that.pieChart)) {
             return false;
         }
         if (!ShapeUtils.equal(this.legendItemShape, that.legendItemShape)) {

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,36 +27,11 @@
  * --------------
  * PolarPlot.java
  * --------------
- * (C) Copyright 2004-2020, by Solution Engineering, Inc. and Contributors.
+ * (C) Copyright 2004-2021, by Solution Engineering, Inc. and Contributors.
  *
  * Original Author:  Daniel Bridenbecker, Solution Engineering, Inc.;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Martin Hoeller (patches 1871902 and 2850344);
- *
- * Changes
- * -------
- * 19-Jan-2004 : Version 1, contributed by DB with minor changes by DG (DG);
- * 07-Apr-2004 : Changed text bounds calculation (DG);
- * 05-May-2005 : Updated draw() method parameters (DG);
- * 09-Jun-2005 : Fixed getDataRange() and equals() methods (DG);
- * 25-Oct-2005 : Implemented Zoomable (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 07-Feb-2007 : Fixed bug 1599761, data value less than axis minimum (DG);
- * 21-Mar-2007 : Fixed serialization bug (DG);
- * 24-Sep-2007 : Implemented new zooming methods (DG);
- * 17-Feb-2007 : Added angle tick unit attribute (see patch 1871902 by
- *               Martin Hoeller) (DG);
- * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
- *               Jess Thrysoee (DG);
- * 03-Sep-2009 : Applied patch 2850344 by Martin Hoeller (DG);
- * 27-Nov-2009 : Added support for multiple datasets, renderers and axes (DG);
- * 09-Dec-2009 : Extended getLegendItems() to handle multiple datasets (DG);
- * 25-Jun-2010 : Better support for multiple axes (MH);
- * 03-Oct-2011 : Added support for angleOffset and direction (MH);
- * 12-Nov-2011 : Fixed bug 3432721, log-axis doesn't work (MH);
- * 12-Dec-2011 : Added support for radiusMinorGridlinesVisible (MH);
- * 02-Jul-2013 : Use ParamChecks (DG);
- * 05-Jul-2013 : Fire change event from setRadiusMinorGridlinesVisible (DG);
  * 
  */
 
@@ -84,6 +59,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
 
@@ -1831,7 +1807,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
         if (!PaintUtils.equal(this.angleLabelPaint, that.angleLabelPaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.angleGridlineStroke,
+        if (!Objects.equals(this.angleGridlineStroke,
                 that.angleGridlineStroke)) {
             return false;
         }
@@ -1843,7 +1819,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
         if (this.radiusGridlinesVisible != that.radiusGridlinesVisible) {
             return false;
         }
-        if (!ObjectUtils.equal(this.radiusGridlineStroke,
+        if (!Objects.equals(this.radiusGridlineStroke,
                 that.radiusGridlineStroke)) {
             return false;
         }
@@ -1861,7 +1837,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
         if (this.margin != that.margin) {
             return false;
         }
-        if (!ObjectUtils.equal(this.fixedLegendItems,
+        if (!Objects.equals(this.fixedLegendItems,
                 that.fixedLegendItems)) {
             return false;
         }
