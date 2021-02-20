@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------
  * CategoryAxis.java
  * -----------------
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Pady Srinivasan (patch 1217634);
@@ -53,6 +53,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import org.jfree.chart.entity.CategoryLabelEntity;
@@ -67,7 +68,6 @@ import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.Size2D;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
@@ -1310,19 +1310,19 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
                 != this.categoryLabelPositionOffset) {
             return false;
         }
-        if (!ObjectUtils.equal(that.categoryLabelPositions,
+        if (!Objects.equals(that.categoryLabelPositions,
                 this.categoryLabelPositions)) {
             return false;
         }
-        if (!ObjectUtils.equal(that.categoryLabelToolTips,
+        if (!Objects.equals(that.categoryLabelToolTips,
                 this.categoryLabelToolTips)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.categoryLabelURLs, 
+        if (!Objects.equals(this.categoryLabelURLs, 
                 that.categoryLabelURLs)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.tickLabelFontMap,
+        if (!Objects.equals(this.tickLabelFontMap,
                 that.tickLabelFontMap)) {
             return false;
         }

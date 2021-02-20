@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,25 +27,19 @@
  * -------------
  * DateTick.java
  * -------------
- * (C) Copyright 2003-2016, by Object Refinery Limited.
+ * (C) Copyright 2003-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Peter Kolb (patch 1934255);
  *                   Andrew Mickish (patch 1870189);
- *
- * Changes
- * -------
- * 07-Nov-2003 : Version 1 (DG);
- * 13-May-2004 : Added equals() method (DG);
- * 25-Sep-2008 : Added minor tick support, see patch 1934255 by Peter Kolb (DG);
  *
  */
 
 package org.jfree.chart.axis;
 
 import java.util.Date;
+import java.util.Objects;
 import org.jfree.chart.ui.TextAnchor;
-import org.jfree.chart.util.ObjectUtils;
 
 import org.jfree.chart.util.Args;
 
@@ -120,7 +114,7 @@ public class DateTick extends ValueTick {
             return false;
         }
         DateTick that = (DateTick) obj;
-        if (!ObjectUtils.equal(this.date, that.date)) {
+        if (!Objects.equals(this.date, that.date)) {
             return false;
         }
         return super.equals(obj);

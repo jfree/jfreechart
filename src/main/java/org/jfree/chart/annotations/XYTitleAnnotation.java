@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------
  * XYTitleAnnotation.java
  * ----------------------
- * (C) Copyright 2007-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Andrew Mickish;
@@ -41,6 +41,7 @@ import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
+import java.util.Objects;
 
 import org.jfree.chart.HashUtils;
 import org.jfree.chart.axis.AxisLocation;
@@ -57,7 +58,6 @@ import org.jfree.chart.title.Title;
 import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.Size2D;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.XYCoordinateType;
@@ -349,7 +349,7 @@ public class XYTitleAnnotation extends AbstractXYAnnotation
         if (this.maxHeight != that.maxHeight) {
             return false;
         }
-        if (!ObjectUtils.equal(this.title, that.title)) {
+        if (!Objects.equals(this.title, that.title)) {
             return false;
         }
         if (!this.anchor.equals(that.anchor)) {

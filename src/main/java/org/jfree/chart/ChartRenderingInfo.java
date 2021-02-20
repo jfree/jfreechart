@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * ChartRenderingInfo.java
  * -----------------------
- * (C) Copyright 2002-2020, by Object Refinery Limited.
+ * (C) Copyright 2002-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -41,11 +41,11 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Objects;
 
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.entity.StandardEntityCollection;
 import org.jfree.chart.plot.PlotRenderingInfo;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 
@@ -183,13 +183,13 @@ public class ChartRenderingInfo implements Cloneable, Serializable {
             return false;
         }
         ChartRenderingInfo that = (ChartRenderingInfo) obj;
-        if (!ObjectUtils.equal(this.chartArea, that.chartArea)) {
+        if (!Objects.equals(this.chartArea, that.chartArea)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.plotInfo, that.plotInfo)) {
+        if (!Objects.equals(this.plotInfo, that.plotInfo)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.entities, that.entities)) {
+        if (!Objects.equals(this.entities, that.entities)) {
             return false;
         }
         return true;

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------
  * XYShapeAnnotation.java
  * ----------------------
- * (C) Copyright 2003-2020, by Ondax, Inc. and Contributors.
+ * (C) Copyright 2003-2021, by Ondax, Inc. and Contributors.
  *
  * Original Author:  Greg Steckman (for Ondax, Inc.);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -49,6 +49,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Objects;
 
 import org.jfree.chart.HashUtils;
 import org.jfree.chart.axis.ValueAxis;
@@ -57,7 +58,6 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
@@ -220,7 +220,7 @@ public class XYShapeAnnotation extends AbstractXYAnnotation
         if (!this.shape.equals(that.shape)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.stroke, that.stroke)) {
+        if (!Objects.equals(this.stroke, that.stroke)) {
             return false;
         }
         if (!PaintUtils.equal(this.outlinePaint, that.outlinePaint)) {

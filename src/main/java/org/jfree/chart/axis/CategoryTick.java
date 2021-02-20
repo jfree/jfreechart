@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------
  * CategoryTick.java
  * -----------------
- * (C) Copyright 2003-2020, by Object Refinery Limited.
+ * (C) Copyright 2003-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -36,10 +36,10 @@
 
 package org.jfree.chart.axis;
 
+import java.util.Objects;
 import org.jfree.chart.text.TextBlock;
 import org.jfree.chart.text.TextBlockAnchor;
 import org.jfree.chart.ui.TextAnchor;
-import org.jfree.chart.util.ObjectUtils;
 
 /**
  * A tick for a {@link CategoryAxis}.
@@ -118,13 +118,13 @@ public class CategoryTick extends Tick {
         }
         if (obj instanceof CategoryTick && super.equals(obj)) {
             CategoryTick that = (CategoryTick) obj;
-            if (!ObjectUtils.equal(this.category, that.category)) {
+            if (!Objects.equals(this.category, that.category)) {
                 return false;
             }
-            if (!ObjectUtils.equal(this.label, that.label)) {
+            if (!Objects.equals(this.label, that.label)) {
                 return false;
             }
-            if (!ObjectUtils.equal(this.labelAnchor, that.labelAnchor)) {
+            if (!Objects.equals(this.labelAnchor, that.labelAnchor)) {
                 return false;
            }
             return true;

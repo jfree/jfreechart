@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * JFreeChart.java
  * ---------------
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Andrzej Porebski;
@@ -70,6 +70,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import javax.swing.UIManager;
 import javax.swing.event.EventListenerList;
 
@@ -1532,7 +1533,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
         if (this.borderVisible != that.borderVisible) {
             return false;
         }
-        if (!ObjectUtils.equal(this.borderStroke, that.borderStroke)) {
+        if (!Objects.equals(this.borderStroke, that.borderStroke)) {
             return false;
         }
         if (!PaintUtils.equal(this.borderPaint, that.borderPaint)) {
@@ -1541,13 +1542,13 @@ public class JFreeChart implements Drawable, TitleChangeListener,
         if (!this.padding.equals(that.padding)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.title, that.title)) {
+        if (!Objects.equals(this.title, that.title)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.subtitles, that.subtitles)) {
+        if (!Objects.equals(this.subtitles, that.subtitles)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.plot, that.plot)) {
+        if (!Objects.equals(this.plot, that.plot)) {
             return false;
         }
         if (!PaintUtils.equal(

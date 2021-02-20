@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,30 +27,10 @@
  * -----------------
  * DateTickUnit.java
  * -----------------
- * (C) Copyright 2000-2020, by Object Refinery Limited.
+ * (C) Copyright 2000-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Chris Boek;
- *
- * Changes
- * -------
- * 08-Nov-2002 : Moved to new package com.jrefinery.chart.axis (DG);
- * 27-Nov-2002 : Added IllegalArgumentException to getMillisecondCount()
- *               method (DG);
- * 26-Mar-2003 : Implemented Serializable (DG);
- * 12-Nov-2003 : Added roll fields that can improve the labelling on segmented
- *               date axes (DG);
- * 03-Dec-2003 : DateFormat constructor argument is now filled with an default
- *               if null (TM);
- * 07-Dec-2003 : Fixed bug (null pointer exception) in constructor (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 21-Mar-2007 : Added toString() for debugging (DG);
- * 04-Apr-2007 : Added new methods addToDate(Date, TimeZone) and rollDate(Date,
- *               TimeZone) (CB);
- * 09-Jun-2008 : Deprecated addToDate(Date) (DG);
- * 09-Jan-2009 : Replaced the unit and rollUnit fields with an enumerated
- *               type (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -60,8 +40,8 @@ import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 import java.util.TimeZone;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
 
 /**
@@ -352,7 +332,7 @@ public class DateTickUnit extends TickUnit implements Serializable {
         if (this.count != that.count) {
             return false;
         }
-        if (!ObjectUtils.equal(this.formatter, that.formatter)) {
+        if (!Objects.equals(this.formatter, that.formatter)) {
             return false;
         }
         return true;
