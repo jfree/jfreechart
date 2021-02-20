@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * TimeSeriesDataItem.java
  * -----------------------
- * (C) Copyright 2001-2020, by Object Refinery Limited.
+ * (C) Copyright 2001-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -37,7 +37,7 @@
 package org.jfree.data.time;
 
 import java.io.Serializable;
-import org.jfree.chart.util.ObjectUtils;
+import java.util.Objects;
 import org.jfree.chart.util.Args;
 
 /**
@@ -145,10 +145,10 @@ public class TimeSeriesDataItem implements Cloneable, Comparable, Serializable {
             return false;
         }
         TimeSeriesDataItem that = (TimeSeriesDataItem) obj;
-        if (!ObjectUtils.equal(this.period, that.period)) {
+        if (!Objects.equals(this.period, that.period)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.value, that.value)) {
+        if (!Objects.equals(this.value, that.value)) {
             return false;
         }
         return true;

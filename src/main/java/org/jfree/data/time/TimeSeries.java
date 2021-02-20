@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * TimeSeries.java
  * ---------------
- * (C) Copyright 2001-2020, by Object Refinery Limited.
+ * (C) Copyright 2001-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Bryan Scott;
@@ -47,6 +47,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.TimeZone;
 import org.jfree.chart.util.ObjectUtils;
 
@@ -1192,15 +1193,15 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
             return false;
         }
         TimeSeries that = (TimeSeries) obj;
-        if (!ObjectUtils.equal(getDomainDescription(),
+        if (!Objects.equals(getDomainDescription(),
                 that.getDomainDescription())) {
             return false;
         }
-        if (!ObjectUtils.equal(getRangeDescription(),
+        if (!Objects.equals(getRangeDescription(),
                 that.getRangeDescription())) {
             return false;
         }
-        if (!ObjectUtils.equal(this.timePeriodClass,
+        if (!Objects.equals(this.timePeriodClass,
                 that.timePeriodClass)) {
             return false;
         }
@@ -1214,7 +1215,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
         if (count != that.getItemCount()) {
             return false;
         }
-        if (!ObjectUtils.equal(this.data, that.data)) {
+        if (!Objects.equals(this.data, that.data)) {
             return false;
         }
         return super.equals(obj);

@@ -52,7 +52,10 @@ public final class ObjectUtils {
      *
      * @param o1 object 1 ({@code null} permitted).
      * @param o2 object 2 ({@code null} permitted).
+     * 
      * @return {@code true} or {@code false}.
+     * 
+     * @deprecated Use Objects.equals() from the JDK.
      */
     public static boolean equal(Object o1, Object o2) {
         if (o1 == o2) {
