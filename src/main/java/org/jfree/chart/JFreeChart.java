@@ -40,7 +40,7 @@
  *
  * NOTE: The above list of contributors lists only the people that have
  * contributed to this source file (JFreeChart.java) - for a list of ALL
- * contributors to the project, please see the README.txt file.
+ * contributors to the project, please see the README.md file.
  *
  */
 
@@ -102,7 +102,6 @@ import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.Size2D;
 import org.jfree.chart.ui.VerticalAlignment;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
@@ -1556,8 +1555,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
         )) {
             return false;
         }
-        if (!ObjectUtils.equal(this.backgroundImage,
-                that.backgroundImage)) {
+        if (!Objects.equals(this.backgroundImage, that.backgroundImage)) {
             return false;
         }
         if (this.backgroundImageAlignment != that.backgroundImageAlignment) {

@@ -50,13 +50,13 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.text.NumberFormat;
 import java.util.List;
+import java.util.Objects;
 
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.TextAnchor;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
@@ -1154,8 +1154,7 @@ public class CyclicNumberAxis extends NumberAxis {
                 that.advanceLinePaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.advanceLineStroke,
-                that.advanceLineStroke)) {
+        if (!Objects.equals(this.advanceLineStroke, that.advanceLineStroke)) {
             return false;
         }
         if (this.advanceLineVisible != that.advanceLineVisible) {
