@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,18 +27,10 @@
  * ---------
  * Task.java
  * ---------
- * (C) Copyright 2003-2016, by Object Refinery Limited.
+ * (C) Copyright 2003-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 10-Jan-2003 : Version 1 (DG);
- * 16-Sep-2003 : Added percentage complete (DG);
- * 30-Jul-2004 : Added clone() and equals() methods and implemented
- *               Serializable (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -47,7 +39,7 @@ package org.jfree.data.gantt;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import org.jfree.chart.util.ObjectUtils;
+import java.util.Objects;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 
@@ -221,17 +213,17 @@ public class Task implements Cloneable, PublicCloneable, Serializable {
             return false;
         }
         Task that = (Task) object;
-        if (!ObjectUtils.equal(this.description, that.description)) {
+        if (!Objects.equals(this.description, that.description)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.duration, that.duration)) {
+        if (!Objects.equals(this.duration, that.duration)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.percentComplete,
+        if (!Objects.equals(this.percentComplete,
                 that.percentComplete)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.subtasks, that.subtasks)) {
+        if (!Objects.equals(this.subtasks, that.subtasks)) {
             return false;
         }
         return true;

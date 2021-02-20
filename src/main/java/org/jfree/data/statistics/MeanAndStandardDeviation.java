@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -37,7 +37,7 @@
 package org.jfree.data.statistics;
 
 import java.io.Serializable;
-import org.jfree.chart.util.ObjectUtils;
+import java.util.Objects;
 
 /**
  * A simple data structure that holds a mean value and a standard deviation
@@ -93,8 +93,6 @@ public class MeanAndStandardDeviation implements Serializable {
      * @return The mean.
      *
      * @see #getMean()
-     *
-     * @since 1.0.7
      */
     public double getMeanValue() {
         double result = Double.NaN;
@@ -119,8 +117,6 @@ public class MeanAndStandardDeviation implements Serializable {
      * {@code Double.NaN}.
      *
      * @return The standard deviation.
-     *
-     * @since 1.0.7
      */
     public double getStandardDeviationValue() {
         double result = Double.NaN;
@@ -146,12 +142,10 @@ public class MeanAndStandardDeviation implements Serializable {
             return false;
         }
         MeanAndStandardDeviation that = (MeanAndStandardDeviation) obj;
-        if (!ObjectUtils.equal(this.mean, that.mean)) {
+        if (!Objects.equals(this.mean, that.mean)) {
             return false;
         }
-        if (!ObjectUtils.equal(
-            this.standardDeviation, that.standardDeviation)
-        ) {
+        if (!Objects.equals(this.standardDeviation, that.standardDeviation)) {
             return false;
         }
         return true;

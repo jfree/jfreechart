@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------
  * BoxAndWhiskerItem.java
  * ----------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -39,7 +39,7 @@ package org.jfree.data.statistics;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
-import org.jfree.chart.util.ObjectUtils;
+import java.util.Objects;
 
 /**
  * Represents one data item within a box-and-whisker dataset.  Instances of
@@ -92,15 +92,9 @@ public class BoxAndWhiskerItem implements Serializable {
      * @param maxOutlier  the maximum outlier ({@code null} permitted).
      * @param outliers  the outliers ({@code null} permitted).
      */
-    public BoxAndWhiskerItem(Number mean,
-                             Number median,
-                             Number q1,
-                             Number q3,
-                             Number minRegularValue,
-                             Number maxRegularValue,
-                             Number minOutlier,
-                             Number maxOutlier,
-                             List outliers) {
+    public BoxAndWhiskerItem(Number mean, Number median, Number q1, Number q3,
+            Number minRegularValue, Number maxRegularValue, Number minOutlier,
+            Number maxOutlier, List outliers) {
 
         this.mean = mean;
         this.median = median;
@@ -254,33 +248,33 @@ public class BoxAndWhiskerItem implements Serializable {
             return false;
         }
         BoxAndWhiskerItem that = (BoxAndWhiskerItem) obj;
-        if (!ObjectUtils.equal(this.mean, that.mean)) {
+        if (!Objects.equals(this.mean, that.mean)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.median, that.median)) {
+        if (!Objects.equals(this.median, that.median)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.q1, that.q1)) {
+        if (!Objects.equals(this.q1, that.q1)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.q3, that.q3)) {
+        if (!Objects.equals(this.q3, that.q3)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.minRegularValue,
+        if (!Objects.equals(this.minRegularValue,
                 that.minRegularValue)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.maxRegularValue,
+        if (!Objects.equals(this.maxRegularValue,
                 that.maxRegularValue)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.minOutlier, that.minOutlier)) {
+        if (!Objects.equals(this.minOutlier, that.minOutlier)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.maxOutlier, that.maxOutlier)) {
+        if (!Objects.equals(this.maxOutlier, that.maxOutlier)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.outliers, that.outliers)) {
+        if (!Objects.equals(this.outliers, that.outliers)) {
             return false;
         }
         return true;

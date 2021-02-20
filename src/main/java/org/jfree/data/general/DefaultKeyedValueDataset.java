@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,22 +27,17 @@
  * -----------------------------
  * DefaultKeyedValueDataset.java
  * -----------------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited.
+ * (C) Copyright 2003-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 27-Mar-2003 : Version 1 (DG);
- * 18-Aug-2003 : Implemented Cloneable (DG);
  *
  */
 
 package org.jfree.data.general;
 
 import java.io.Serializable;
-import org.jfree.chart.util.ObjectUtils;
+import java.util.Objects;
 
 import org.jfree.data.DefaultKeyedValue;
 import org.jfree.data.KeyedValue;
@@ -161,10 +156,10 @@ public class DefaultKeyedValueDataset extends AbstractDataset
             }
             return true;
         }
-        if (!ObjectUtils.equal(this.data.getKey(), that.getKey())) {
+        if (!Objects.equals(this.data.getKey(), that.getKey())) {
             return false;
         }
-        if (!ObjectUtils.equal(this.data.getValue(), that.getValue())) {
+        if (!Objects.equals(this.data.getValue(), that.getValue())) {
             return false;
         }
         return true;

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,25 +27,10 @@
  * ------------------
  * LegendGraphic.java
  * ------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited.
+ * (C) Copyright 2004-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 26-Oct-2004 : Version 1 (DG);
- * 21-Jan-2005 : Modified return type of RectangleAnchor.coordinates()
- *               method (DG);
- * 20-Apr-2005 : Added new draw() method (DG);
- * 13-May-2005 : Fixed to respect margin, border and padding settings (DG);
- * 01-Sep-2005 : Implemented PublicCloneable (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 13-Dec-2006 : Added fillPaintTransformer attribute, so legend graphics can
- *               display gradient paint correctly, updated equals() and
- *               corrected clone() (DG);
- * 01-Aug-2007 : Updated API docs (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -61,6 +46,7 @@ import java.awt.geom.Rectangle2D;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Objects;
 
 import org.jfree.chart.block.AbstractBlock;
 import org.jfree.chart.block.Block;
@@ -651,7 +637,7 @@ public class LegendGraphic extends AbstractBlock
         if (!PaintUtils.equal(this.fillPaint, that.fillPaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.fillPaintTransformer,
+        if (!Objects.equals(this.fillPaintTransformer,
                 that.fillPaintTransformer)) {
             return false;
         }
@@ -661,7 +647,7 @@ public class LegendGraphic extends AbstractBlock
         if (!PaintUtils.equal(this.outlinePaint, that.outlinePaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.outlineStroke, that.outlineStroke)) {
+        if (!Objects.equals(this.outlineStroke, that.outlineStroke)) {
             return false;
         }
         if (this.shapeAnchor != that.shapeAnchor) {
@@ -679,7 +665,7 @@ public class LegendGraphic extends AbstractBlock
         if (!PaintUtils.equal(this.linePaint, that.linePaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.lineStroke, that.lineStroke)) {
+        if (!Objects.equals(this.lineStroke, that.lineStroke)) {
             return false;
         }
         return super.equals(obj);

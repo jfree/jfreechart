@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------------------------
  * DefaultBoxAndWhiskerCategoryDataset.java
  * ----------------------------------------
- * (C) Copyright 2003-2020, by David Browning and Contributors.
+ * (C) Copyright 2003-2021, by David Browning and Contributors.
  *
  * Original Author:  David Browning (for Australian Institute of Marine
  *                   Science);
@@ -38,7 +38,7 @@
 package org.jfree.data.statistics;
 
 import java.util.List;
-import org.jfree.chart.util.ObjectUtils;
+import java.util.Objects;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.jfree.data.KeyedObjects2D;
@@ -907,7 +907,7 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
         if (obj instanceof DefaultBoxAndWhiskerCategoryDataset) {
             DefaultBoxAndWhiskerCategoryDataset dataset
                     = (DefaultBoxAndWhiskerCategoryDataset) obj;
-            return ObjectUtils.equal(this.data, dataset.data);
+            return Objects.equals(this.data, dataset.data);
         }
         return false;
     }

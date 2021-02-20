@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------
  * Series.java
  * -----------
- * (C) Copyright 2001-2020, by Object Refinery Limited.
+ * (C) Copyright 2001-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -42,9 +42,9 @@ import java.beans.PropertyVetoException;
 import java.beans.VetoableChangeListener;
 import java.beans.VetoableChangeSupport;
 import java.io.Serializable;
+import java.util.Objects;
 
 import javax.swing.event.EventListenerList;
-import org.jfree.chart.util.ObjectUtils;
 
 import org.jfree.chart.util.Args;
 
@@ -262,7 +262,7 @@ public abstract class Series implements Cloneable, Serializable {
         if (!getKey().equals(that.getKey())) {
             return false;
         }
-        if (!ObjectUtils.equal(getDescription(), that.getDescription())) {
+        if (!Objects.equals(getDescription(), that.getDescription())) {
             return false;
         }
         return true;

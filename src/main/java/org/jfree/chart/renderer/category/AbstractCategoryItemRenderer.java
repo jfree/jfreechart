@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------------
  * AbstractCategoryItemRenderer.java
  * ---------------------------------
- * (C) Copyright 2002-2020, by Object Refinery Limited.
+ * (C) Copyright 2002-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Richard Atkinson;
@@ -56,6 +56,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.LegendItemCollection;
 import org.jfree.chart.axis.CategoryAxis;
@@ -1233,39 +1234,39 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
         }
         AbstractCategoryItemRenderer that = (AbstractCategoryItemRenderer) obj;
 
-        if (!ObjectUtils.equal(this.itemLabelGeneratorMap,
+        if (!Objects.equals(this.itemLabelGeneratorMap,
                 that.itemLabelGeneratorMap)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.defaultItemLabelGenerator,
+        if (!Objects.equals(this.defaultItemLabelGenerator,
                 that.defaultItemLabelGenerator)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.toolTipGeneratorMap,
+        if (!Objects.equals(this.toolTipGeneratorMap,
                 that.toolTipGeneratorMap)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.defaultToolTipGenerator,
+        if (!Objects.equals(this.defaultToolTipGenerator,
                 that.defaultToolTipGenerator)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.itemURLGeneratorMap,
+        if (!Objects.equals(this.itemURLGeneratorMap,
                 that.itemURLGeneratorMap)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.defaultItemURLGenerator,
+        if (!Objects.equals(this.defaultItemURLGenerator,
                 that.defaultItemURLGenerator)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.legendItemLabelGenerator,
+        if (!Objects.equals(this.legendItemLabelGenerator,
                 that.legendItemLabelGenerator)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.legendItemToolTipGenerator,
+        if (!Objects.equals(this.legendItemToolTipGenerator,
                 that.legendItemToolTipGenerator)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.legendItemURLGenerator,
+        if (!Objects.equals(this.legendItemURLGenerator,
                 that.legendItemURLGenerator)) {
             return false;
         }
