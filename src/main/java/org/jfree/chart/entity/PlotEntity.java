@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * PlotEntity.java
  * ---------------
- * (C) Copyright 2009-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2009-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  Peter Kolb;
  * Contributor(s):   ;
@@ -40,10 +40,10 @@ import java.awt.Shape;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Objects;
 
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.HashUtils;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
 
@@ -142,10 +142,10 @@ public class PlotEntity extends ChartEntity {
         if (!getArea().equals(that.getArea())) {
             return false;
         }
-        if (!ObjectUtils.equal(getToolTipText(), that.getToolTipText())) {
+        if (!Objects.equals(getToolTipText(), that.getToolTipText())) {
             return false;
         }
-        if (!ObjectUtils.equal(getURLText(), that.getURLText())) {
+        if (!Objects.equals(getURLText(), that.getURLText())) {
             return false;
         }
         if (!(this.plot.equals(that.plot))) {

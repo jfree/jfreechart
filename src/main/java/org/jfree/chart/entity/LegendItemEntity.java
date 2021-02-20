@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * LegendItemEntity.java
  * ---------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -38,7 +38,7 @@ package org.jfree.chart.entity;
 
 import java.awt.Shape;
 import java.io.Serializable;
-import org.jfree.chart.util.ObjectUtils;
+import java.util.Objects;
 
 import org.jfree.data.general.Dataset;
 
@@ -144,13 +144,13 @@ public class LegendItemEntity extends ChartEntity
             return false;
         }
         LegendItemEntity that = (LegendItemEntity) obj;
-        if (!ObjectUtils.equal(this.seriesKey, that.seriesKey)) {
+        if (!Objects.equals(this.seriesKey, that.seriesKey)) {
             return false;
         }
         if (this.seriesIndex != that.seriesIndex) {
             return false;
         }
-        if (!ObjectUtils.equal(this.dataset, that.dataset)) {
+        if (!Objects.equals(this.dataset, that.dataset)) {
             return false;
         }
         return super.equals(obj);

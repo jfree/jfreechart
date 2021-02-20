@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------
  * BorderArrangement.java
  * ----------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited.
+ * (C) Copyright 2004-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -39,9 +39,9 @@ package org.jfree.chart.block;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
+import java.util.Objects;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.Size2D;
-import org.jfree.chart.util.ObjectUtils;
 
 import org.jfree.data.Range;
 
@@ -506,19 +506,19 @@ public class BorderArrangement implements Arrangement, Serializable {
             return false;
         }
         BorderArrangement that = (BorderArrangement) obj;
-        if (!ObjectUtils.equal(this.topBlock, that.topBlock)) {
+        if (!Objects.equals(this.topBlock, that.topBlock)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.bottomBlock, that.bottomBlock)) {
+        if (!Objects.equals(this.bottomBlock, that.bottomBlock)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.leftBlock, that.leftBlock)) {
+        if (!Objects.equals(this.leftBlock, that.leftBlock)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.rightBlock, that.rightBlock)) {
+        if (!Objects.equals(this.rightBlock, that.rightBlock)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.centerBlock, that.centerBlock)) {
+        if (!Objects.equals(this.centerBlock, that.centerBlock)) {
             return false;
         }
         return true;

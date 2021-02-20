@@ -40,10 +40,10 @@ import java.awt.Shape;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Objects;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.HashUtils;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
 
@@ -142,10 +142,10 @@ public class JFreeChartEntity extends ChartEntity {
         if (!getArea().equals(that.getArea())) {
             return false;
         }
-        if (!ObjectUtils.equal(getToolTipText(), that.getToolTipText())) {
+        if (!Objects.equals(getToolTipText(), that.getToolTipText())) {
             return false;
         }
-        if (!ObjectUtils.equal(getURLText(), that.getURLText())) {
+        if (!Objects.equals(getURLText(), that.getURLText())) {
             return false;
         }
         if (!(this.chart.equals(that.chart))) {

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------
  * CategoryLabelEntity.java
  * ------------------------
- * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -37,10 +37,10 @@
 package org.jfree.chart.entity;
 
 import java.awt.Shape;
+import java.util.Objects;
 
 import org.jfree.chart.HashUtils;
 import org.jfree.chart.axis.CategoryAxis;
-import org.jfree.chart.util.ObjectUtils;
 
 /**
  * An entity to represent the labels on a {@link CategoryAxis}.
@@ -91,7 +91,7 @@ public class CategoryLabelEntity extends TickLabelEntity {
             return false;
         }
         CategoryLabelEntity that = (CategoryLabelEntity) obj;
-        if (!ObjectUtils.equal(this.key, that.key)) {
+        if (!Objects.equals(this.key, that.key)) {
             return false;
         }
         return super.equals(obj);

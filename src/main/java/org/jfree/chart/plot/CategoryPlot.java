@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------
  * CategoryPlot.java
  * -----------------
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Jeremy Bowman;
@@ -67,6 +67,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.TreeMap;
@@ -4627,7 +4628,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
         if (this.orientation != that.orientation) {
             return false;
         }
-        if (!ObjectUtils.equal(this.axisOffset, that.axisOffset)) {
+        if (!Objects.equals(this.axisOffset, that.axisOffset)) {
             return false;
         }
         if (!this.domainAxes.equals(that.domainAxes)) {
@@ -4645,15 +4646,15 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
         if (!this.rangeAxisLocations.equals(that.rangeAxisLocations)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.datasetToDomainAxesMap,
+        if (!Objects.equals(this.datasetToDomainAxesMap,
                 that.datasetToDomainAxesMap)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.datasetToRangeAxesMap,
+        if (!Objects.equals(this.datasetToRangeAxesMap,
                 that.datasetToRangeAxesMap)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.renderers, that.renderers)) {
+        if (!Objects.equals(this.renderers, that.renderers)) {
             return false;
         }
         if (this.renderingOrder != that.renderingOrder) {
@@ -4671,8 +4672,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
         if (this.domainGridlinePosition != that.domainGridlinePosition) {
             return false;
         }
-        if (!ObjectUtils.equal(this.domainGridlineStroke,
-                that.domainGridlineStroke)) {
+        if (!Objects.equals(this.domainGridlineStroke, that.domainGridlineStroke)) {
             return false;
         }
         if (!PaintUtils.equal(this.domainGridlinePaint,
@@ -4682,7 +4682,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
         if (this.rangeGridlinesVisible != that.rangeGridlinesVisible) {
             return false;
         }
-        if (!ObjectUtils.equal(this.rangeGridlineStroke,
+        if (!Objects.equals(this.rangeGridlineStroke,
                 that.rangeGridlineStroke)) {
             return false;
         }
@@ -4699,49 +4699,42 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
         if (this.rangeCrosshairValue != that.rangeCrosshairValue) {
             return false;
         }
-        if (!ObjectUtils.equal(this.rangeCrosshairStroke,
-                that.rangeCrosshairStroke)) {
+        if (!Objects.equals(this.rangeCrosshairStroke, that.rangeCrosshairStroke)) {
             return false;
         }
         if (!PaintUtils.equal(this.rangeCrosshairPaint,
                 that.rangeCrosshairPaint)) {
             return false;
         }
-        if (this.rangeCrosshairLockedOnData
-                != that.rangeCrosshairLockedOnData) {
+        if (this.rangeCrosshairLockedOnData != that.rangeCrosshairLockedOnData) {
             return false;
         }
-        if (!ObjectUtils.equal(this.foregroundDomainMarkers,
-                that.foregroundDomainMarkers)) {
+        if (!Objects.equals(this.foregroundDomainMarkers, that.foregroundDomainMarkers)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.backgroundDomainMarkers,
-                that.backgroundDomainMarkers)) {
+        if (!Objects.equals(this.backgroundDomainMarkers, that.backgroundDomainMarkers)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.foregroundRangeMarkers,
-                that.foregroundRangeMarkers)) {
+        if (!Objects.equals(this.foregroundRangeMarkers, that.foregroundRangeMarkers)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.backgroundRangeMarkers,
-                that.backgroundRangeMarkers)) {
+        if (!Objects.equals(this.backgroundRangeMarkers, that.backgroundRangeMarkers)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.annotations, that.annotations)) {
+        if (!Objects.equals(this.annotations, that.annotations)) {
             return false;
         }
         if (this.weight != that.weight) {
             return false;
         }
-        if (!ObjectUtils.equal(this.fixedDomainAxisSpace,
-                that.fixedDomainAxisSpace)) {
+        if (!Objects.equals(this.fixedDomainAxisSpace, that.fixedDomainAxisSpace)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.fixedRangeAxisSpace,
+        if (!Objects.equals(this.fixedRangeAxisSpace,
                 that.fixedRangeAxisSpace)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.fixedLegendItems,
+        if (!Objects.equals(this.fixedLegendItems,
                 that.fixedLegendItems)) {
             return false;
         }
@@ -4751,47 +4744,38 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
         if (this.crosshairDatasetIndex != that.crosshairDatasetIndex) {
             return false;
         }
-        if (!ObjectUtils.equal(this.domainCrosshairColumnKey,
-                that.domainCrosshairColumnKey)) {
+        if (!Objects.equals(this.domainCrosshairColumnKey, that.domainCrosshairColumnKey)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.domainCrosshairRowKey,
-                that.domainCrosshairRowKey)) {
+        if (!Objects.equals(this.domainCrosshairRowKey, that.domainCrosshairRowKey)) {
             return false;
         }
-        if (!PaintUtils.equal(this.domainCrosshairPaint,
-                that.domainCrosshairPaint)) {
+        if (!PaintUtils.equal(this.domainCrosshairPaint, that.domainCrosshairPaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.domainCrosshairStroke,
-                that.domainCrosshairStroke)) {
+        if (!Objects.equals(this.domainCrosshairStroke, that.domainCrosshairStroke)) {
             return false;
         }
-        if (this.rangeMinorGridlinesVisible
-                != that.rangeMinorGridlinesVisible) {
+        if (this.rangeMinorGridlinesVisible != that.rangeMinorGridlinesVisible) {
             return false;
         }
-        if (!PaintUtils.equal(this.rangeMinorGridlinePaint,
-                that.rangeMinorGridlinePaint)) {
+        if (!PaintUtils.equal(this.rangeMinorGridlinePaint, that.rangeMinorGridlinePaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.rangeMinorGridlineStroke,
+        if (!Objects.equals(this.rangeMinorGridlineStroke,
                 that.rangeMinorGridlineStroke)) {
             return false;
         }
         if (this.rangeZeroBaselineVisible != that.rangeZeroBaselineVisible) {
             return false;
         }
-        if (!PaintUtils.equal(this.rangeZeroBaselinePaint,
-                that.rangeZeroBaselinePaint)) {
+        if (!PaintUtils.equal(this.rangeZeroBaselinePaint, that.rangeZeroBaselinePaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.rangeZeroBaselineStroke,
-                that.rangeZeroBaselineStroke)) {
+        if (!Objects.equals(this.rangeZeroBaselineStroke, that.rangeZeroBaselineStroke)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.shadowGenerator,
-                that.shadowGenerator)) {
+        if (!Objects.equals(this.shadowGenerator, that.shadowGenerator)) {
             return false;
         }
         return super.equals(obj);
@@ -4823,12 +4807,12 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
         }
 
         // AxisLocation is immutable, so we can just copy the maps
-        clone.domainAxisLocations = new HashMap<Integer, AxisLocation>(
+        clone.domainAxisLocations = new HashMap<>(
                 this.domainAxisLocations);
-        clone.rangeAxisLocations = new HashMap<Integer, AxisLocation>(
+        clone.rangeAxisLocations = new HashMap<>(
                 this.rangeAxisLocations);
 
-        clone.datasets = new HashMap<Integer, CategoryDataset>(this.datasets);
+        clone.datasets = new HashMap<>(this.datasets);
         for (CategoryDataset dataset : clone.datasets.values()) {
             if (dataset != null) {
                 dataset.addChangeListener(clone);

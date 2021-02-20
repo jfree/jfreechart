@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * PieSectionEntity.java
  * ---------------------
- * (C) Copyright 2002-2020, by Object Refinery Limited.
+ * (C) Copyright 2002-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Richard Atkinson;
@@ -39,9 +39,9 @@ package org.jfree.chart.entity;
 
 import java.awt.Shape;
 import java.io.Serializable;
+import java.util.Objects;
 
 import org.jfree.chart.HashUtils;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.data.general.PieDataset;
 
 /**
@@ -196,7 +196,7 @@ public class PieSectionEntity extends ChartEntity
             return false;
         }
         PieSectionEntity that = (PieSectionEntity) obj;
-        if (!ObjectUtils.equal(this.dataset, that.dataset)) {
+        if (!Objects.equals(this.dataset, that.dataset)) {
             return false;
         }
         if (this.pieIndex != that.pieIndex) {
@@ -205,7 +205,7 @@ public class PieSectionEntity extends ChartEntity
         if (this.sectionIndex != that.sectionIndex) {
             return false;
         }
-        if (!ObjectUtils.equal(this.sectionKey, that.sectionKey)) {
+        if (!Objects.equals(this.sectionKey, that.sectionKey)) {
             return false;
         }
         return super.equals(obj);
