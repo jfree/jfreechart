@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * XYBarRenderer.java
  * ------------------
- * (C) Copyright 2001-2020, by Object Refinery Limited.
+ * (C) Copyright 2001-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Richard Atkinson;
@@ -51,6 +51,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Objects;
 
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.axis.ValueAxis;
@@ -1169,18 +1170,18 @@ public class XYBarRenderer extends AbstractXYItemRenderer
         if (this.useYInterval != that.useYInterval) {
             return false;
         }
-        if (!ObjectUtils.equal(this.gradientPaintTransformer,
+        if (!Objects.equals(this.gradientPaintTransformer,
                 that.gradientPaintTransformer)) {
             return false;
         }
         if (!ShapeUtils.equal(this.legendBar, that.legendBar)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.positiveItemLabelPositionFallback,
+        if (!Objects.equals(this.positiveItemLabelPositionFallback,
                 that.positiveItemLabelPositionFallback)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.negativeItemLabelPositionFallback,
+        if (!Objects.equals(this.negativeItemLabelPositionFallback,
                 that.negativeItemLabelPositionFallback)) {
             return false;
         }

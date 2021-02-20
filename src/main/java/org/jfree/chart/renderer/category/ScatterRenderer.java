@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * ScatterRenderer.java
  * --------------------
- * (C) Copyright 2007-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   David Forslund;
@@ -48,6 +48,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.axis.CategoryAxis;
@@ -56,7 +57,6 @@ import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.util.BooleanList;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.ShapeUtils;
 import org.jfree.data.Range;
@@ -518,7 +518,7 @@ public class ScatterRenderer extends AbstractCategoryItemRenderer
             return false;
         }
         ScatterRenderer that = (ScatterRenderer) obj;
-        if (!ObjectUtils.equal(this.seriesShapesFilled,
+        if (!Objects.equals(this.seriesShapesFilled,
                 that.seriesShapesFilled)) {
             return false;
         }

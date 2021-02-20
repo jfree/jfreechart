@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * StandardXYURLGenerator.java
  * ---------------------------
- * (C) Copyright 2002-2020, by Richard Atkinson and Contributors.
+ * (C) Copyright 2002-2021, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributors:     David Gilbert (for Object Refinery Limited);
@@ -38,7 +38,6 @@ package org.jfree.chart.urls;
 
 import java.io.Serializable;
 import java.util.Objects;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
 
 import org.jfree.data.xy.XYDataset;
@@ -143,14 +142,14 @@ public class StandardXYURLGenerator implements XYURLGenerator, Serializable {
             return false;
         }
         StandardXYURLGenerator that = (StandardXYURLGenerator) obj;
-        if (!ObjectUtils.equal(that.prefix, this.prefix)) {
+        if (!Objects.equals(that.prefix, this.prefix)) {
             return false;
         }
-        if (!ObjectUtils.equal(that.seriesParameterName,
+        if (!Objects.equals(that.seriesParameterName,
                 this.seriesParameterName)) {
             return false;
         }
-        if (!ObjectUtils.equal(that.itemParameterName,
+        if (!Objects.equals(that.itemParameterName,
                 this.itemParameterName)) {
             return false;
         }

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * LineAndShapeRenderer.java
  * -------------------------
- * (C) Copyright 2001-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2001-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Mark Watson (www.markwatson.com);
@@ -47,6 +47,7 @@ import java.awt.Stroke;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
+import java.util.Objects;
 
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.axis.CategoryAxis;
@@ -56,7 +57,6 @@ import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.util.BooleanList;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.ShapeUtils;
 import org.jfree.data.category.CategoryDataset;
@@ -813,18 +813,18 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
         if (this.defaultLinesVisible != that.defaultLinesVisible) {
             return false;
         }
-        if (!ObjectUtils.equal(this.seriesLinesVisible,
+        if (!Objects.equals(this.seriesLinesVisible,
                 that.seriesLinesVisible)) {
             return false;
         }
         if (this.defaultShapesVisible != that.defaultShapesVisible) {
             return false;
         }
-        if (!ObjectUtils.equal(this.seriesShapesVisible,
+        if (!Objects.equals(this.seriesShapesVisible,
                 that.seriesShapesVisible)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.seriesShapesFilled,
+        if (!Objects.equals(this.seriesShapesFilled,
                 that.seriesShapesFilled)) {
             return false;
         }

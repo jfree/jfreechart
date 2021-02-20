@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------
  * BarRenderer.java
  * ----------------
- * (C) Copyright 2002-2020, by Object Refinery Limited.
+ * (C) Copyright 2002-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Christian W. Zuckschwerdt;
@@ -51,6 +51,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Objects;
 
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.axis.CategoryAxis;
@@ -67,7 +68,6 @@ import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.GradientPaintTransformer;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.StandardGradientPaintTransformer;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
@@ -1295,15 +1295,15 @@ public class BarRenderer extends AbstractCategoryItemRenderer
         if (this.minimumBarLength != that.minimumBarLength) {
             return false;
         }
-        if (!ObjectUtils.equal(this.gradientPaintTransformer,
+        if (!Objects.equals(this.gradientPaintTransformer,
                 that.gradientPaintTransformer)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.positiveItemLabelPositionFallback,
+        if (!Objects.equals(this.positiveItemLabelPositionFallback,
             that.positiveItemLabelPositionFallback)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.negativeItemLabelPositionFallback,
+        if (!Objects.equals(this.negativeItemLabelPositionFallback,
             that.negativeItemLabelPositionFallback)) {
             return false;
         }

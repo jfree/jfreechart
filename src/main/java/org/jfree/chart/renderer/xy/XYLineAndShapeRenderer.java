@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * XYLineAndShapeRenderer.java
  * ---------------------------
- * (C) Copyright 2004-2020, by Object Refinery Limited.
+ * (C) Copyright 2004-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -47,6 +47,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Objects;
 
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.axis.ValueAxis;
@@ -59,7 +60,6 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.util.BooleanList;
 import org.jfree.chart.util.LineUtils;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
@@ -1105,7 +1105,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
             return false;
         }
         XYLineAndShapeRenderer that = (XYLineAndShapeRenderer) obj;
-        if (!ObjectUtils.equal(
+        if (!Objects.equals(
             this.seriesLinesVisible, that.seriesLinesVisible)
         ) {
             return false;
@@ -1116,7 +1116,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
         if (!ShapeUtils.equal(this.legendLine, that.legendLine)) {
             return false;
         }
-        if (!ObjectUtils.equal(
+        if (!Objects.equals(
             this.seriesShapesVisible, that.seriesShapesVisible)
         ) {
             return false;
@@ -1124,7 +1124,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
         if (this.defaultShapesVisible != that.defaultShapesVisible) {
             return false;
         }
-        if (!ObjectUtils.equal(
+        if (!Objects.equals(
             this.seriesShapesFilled, that.seriesShapesFilled)
         ) {
             return false;

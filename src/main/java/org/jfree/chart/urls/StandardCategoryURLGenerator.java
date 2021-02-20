@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------------
  * StandardCategoryURLGenerator.java
  * ---------------------------------
- * (C) Copyright 2002-2016, by Richard Atkinson and Contributors.
+ * (C) Copyright 2002-2021, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributors:     David Gilbert (for Object Refinery Limited);
@@ -40,7 +40,7 @@ package org.jfree.chart.urls;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import org.jfree.chart.util.ObjectUtils;
+import java.util.Objects;
 import org.jfree.chart.util.Args;
 
 import org.jfree.data.category.CategoryDataset;
@@ -164,15 +164,15 @@ public class StandardCategoryURLGenerator implements CategoryURLGenerator,
             return false;
         }
         StandardCategoryURLGenerator that = (StandardCategoryURLGenerator) obj;
-        if (!ObjectUtils.equal(this.prefix, that.prefix)) {
+        if (!Objects.equals(this.prefix, that.prefix)) {
             return false;
         }
 
-        if (!ObjectUtils.equal(this.seriesParameterName,
+        if (!Objects.equals(this.seriesParameterName,
                 that.seriesParameterName)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.categoryParameterName,
+        if (!Objects.equals(this.categoryParameterName,
                 that.categoryParameterName)) {
             return false;
         }

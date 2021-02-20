@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------------------
  * StatisticalLineAndShapeRenderer.java
  * ------------------------------------
- * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  Mofeed Shahin;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -47,6 +47,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Objects;
 
 import org.jfree.chart.HashUtils;
 import org.jfree.chart.axis.CategoryAxis;
@@ -56,7 +57,6 @@ import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
@@ -420,7 +420,7 @@ public class StatisticalLineAndShapeRenderer extends LineAndShapeRenderer
                 that.errorIndicatorPaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.errorIndicatorStroke,
+        if (!Objects.equals(this.errorIndicatorStroke,
                 that.errorIndicatorStroke)) {
             return false;
         }

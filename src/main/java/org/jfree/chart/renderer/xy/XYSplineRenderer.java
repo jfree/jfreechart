@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * XYSplineRenderer.java
  * ---------------------
- * (C) Copyright 2007-2016, by Klaus Rheinwald and Contributors.
+ * (C) Copyright 2007-2021, by Klaus Rheinwald and Contributors.
  *
  * Original Author:  Klaus Rheinwald;
  * Contributor(s):   Tobias von Petersdorff (tvp@math.umd.edu,
@@ -46,6 +46,7 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.event.RendererChangeEvent;
@@ -55,7 +56,6 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.ui.GradientPaintTransformer;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.StandardGradientPaintTransformer;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.data.xy.XYDataset;
 
@@ -499,7 +499,7 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
         if (this.fillType != that.fillType) {
             return false;
         }
-        if (!ObjectUtils.equal(this.gradientPaintTransformer, 
+        if (!Objects.equals(this.gradientPaintTransformer, 
                 that.gradientPaintTransformer)) {
             return false;
         }

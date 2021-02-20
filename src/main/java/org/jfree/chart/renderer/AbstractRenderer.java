@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * AbstractRenderer.java
  * ---------------------
- * (C) Copyright 2002-2020, by Object Refinery Limited.
+ * (C) Copyright 2002-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Nicolas Brodu;
@@ -54,6 +54,7 @@ import java.util.EventListener;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.swing.event.EventListenerList;
 
@@ -68,7 +69,6 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.title.LegendTitle;
 import org.jfree.chart.ui.TextAnchor;
 import org.jfree.chart.util.BooleanList;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintList;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
@@ -2837,20 +2837,20 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
                 != that.defaultSeriesVisibleInLegend) {
             return false;
         }
-        if (!ObjectUtils.equal(this.paintList, that.paintList)) {
+        if (!Objects.equals(this.paintList, that.paintList)) {
             return false;
         }
         if (!PaintUtils.equal(this.defaultPaint, that.defaultPaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.fillPaintList, that.fillPaintList)) {
+        if (!Objects.equals(this.fillPaintList, that.fillPaintList)) {
             return false;
         }
         if (!PaintUtils.equal(this.defaultFillPaint,
                 that.defaultFillPaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.outlinePaintList,
+        if (!Objects.equals(this.outlinePaintList,
                 that.outlinePaintList)) {
             return false;
         }
@@ -2858,44 +2858,44 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
                 that.defaultOutlinePaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.strokeList, that.strokeList)) {
+        if (!Objects.equals(this.strokeList, that.strokeList)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.defaultStroke, that.defaultStroke)) {
+        if (!Objects.equals(this.defaultStroke, that.defaultStroke)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.outlineStrokeList,
+        if (!Objects.equals(this.outlineStrokeList,
                 that.outlineStrokeList)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.defaultOutlineStroke,
+        if (!Objects.equals(this.defaultOutlineStroke,
                 that.defaultOutlineStroke)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.shapeList, that.shapeList)) {
+        if (!Objects.equals(this.shapeList, that.shapeList)) {
             return false;
         }
         if (!ShapeUtils.equal(this.defaultShape, that.defaultShape)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.itemLabelsVisibleList,
+        if (!Objects.equals(this.itemLabelsVisibleList,
                 that.itemLabelsVisibleList)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.defaultItemLabelsVisible,
+        if (!Objects.equals(this.defaultItemLabelsVisible,
                 that.defaultItemLabelsVisible)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.itemLabelFontMap,
+        if (!Objects.equals(this.itemLabelFontMap,
                 that.itemLabelFontMap)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.defaultItemLabelFont,
+        if (!Objects.equals(this.defaultItemLabelFont,
                 that.defaultItemLabelFont)) {
             return false;
         }
 
-        if (!ObjectUtils.equal(this.itemLabelPaintList,
+        if (!Objects.equals(this.itemLabelPaintList,
                 that.itemLabelPaintList)) {
             return false;
         }
@@ -2904,34 +2904,34 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
             return false;
         }
 
-        if (!ObjectUtils.equal(this.positiveItemLabelPositionMap,
+        if (!Objects.equals(this.positiveItemLabelPositionMap,
                 that.positiveItemLabelPositionMap)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.defaultPositiveItemLabelPosition,
+        if (!Objects.equals(this.defaultPositiveItemLabelPosition,
                 that.defaultPositiveItemLabelPosition)) {
             return false;
         }
 
-        if (!ObjectUtils.equal(this.negativeItemLabelPositionMap,
+        if (!Objects.equals(this.negativeItemLabelPositionMap,
                 that.negativeItemLabelPositionMap)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.defaultNegativeItemLabelPosition,
+        if (!Objects.equals(this.defaultNegativeItemLabelPosition,
                 that.defaultNegativeItemLabelPosition)) {
             return false;
         }
         if (this.itemLabelAnchorOffset != that.itemLabelAnchorOffset) {
             return false;
         }
-        if (!ObjectUtils.equal(this.createEntitiesList,
+        if (!Objects.equals(this.createEntitiesList,
                 that.createEntitiesList)) {
             return false;
         }
         if (this.defaultCreateEntities != that.defaultCreateEntities) {
             return false;
         }
-        if (!ObjectUtils.equal(this.legendShapeList,
+        if (!Objects.equals(this.legendShapeList,
                 that.legendShapeList)) {
             return false;
         }
@@ -2939,15 +2939,15 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
                 that.defaultLegendShape)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.legendTextFontMap, 
+        if (!Objects.equals(this.legendTextFontMap, 
                 that.legendTextFontMap)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.defaultLegendTextFont,
+        if (!Objects.equals(this.defaultLegendTextFont,
                 that.defaultLegendTextFont)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.legendTextPaint,
+        if (!Objects.equals(this.legendTextPaint,
                 that.legendTextPaint)) {
             return false;
         }

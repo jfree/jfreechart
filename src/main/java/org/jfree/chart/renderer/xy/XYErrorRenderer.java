@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * XYErrorRenderer.java
  * --------------------
- * (C) Copyright 2006-2016, by Object Refinery Limited.
+ * (C) Copyright 2006-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -44,6 +44,7 @@ import java.awt.geom.Rectangle2D;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Objects;
 
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.event.RendererChangeEvent;
@@ -52,7 +53,6 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.Range;
@@ -415,7 +415,7 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
         if (!PaintUtils.equal(this.errorPaint, that.errorPaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.errorStroke, that.errorStroke)) {
+        if (!Objects.equals(this.errorStroke, that.errorStroke)) {
             return false;
         }
         return super.equals(obj);

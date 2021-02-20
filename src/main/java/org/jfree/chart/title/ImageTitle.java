@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,32 +27,10 @@
  * ---------------
  * ImageTitle.java
  * ---------------
- * (C) Copyright 2000-2020, by David Berry and Contributors;
+ * (C) Copyright 2000-2021, by David Berry and Contributors;
  *
  * Original Author:  David Berry;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes (from 18-Sep-2001)
- * --------------------------
- * 18-Sep-2001 : Added standard header (DG);
- * 07-Nov-2001 : Separated the JCommon Class Library classes, JFreeChart now
- *               requires jcommon.jar (DG);
- * 09-Jan-2002 : Updated Javadoc comments (DG);
- * 07-Feb-2002 : Changed blank space around title from Insets --> Spacer, to
- *               allow for relative or absolute spacing (DG);
- * 25-Jun-2002 : Updated import statements (DG);
- * 23-Sep-2002 : Fixed errors reported by Checkstyle (DG);
- * 26-Nov-2002 : Added method for drawing images at left or right (DG);
- * 22-Sep-2003 : Added checks that the Image can never be null (TM).
- * 11-Jan-2005 : Removed deprecated code in preparation for the 1.0.0
- *               release (DG);
- * 02-Feb-2005 : Changed padding mechanism for all titles (DG);
- * 20-Apr-2005 : Added new draw() method (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
- * 11-Apr-2008 : Added arrange() method override to account for margin, border
- *               and padding (DG);
- * 21-Apr-2008 : Added equals() method override (DG);
  *
  */
 
@@ -61,6 +39,7 @@ package org.jfree.chart.title;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.geom.Rectangle2D;
+import java.util.Objects;
 
 import org.jfree.chart.block.RectangleConstraint;
 import org.jfree.chart.event.TitleChangeEvent;
@@ -69,7 +48,6 @@ import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.Size2D;
 import org.jfree.chart.ui.VerticalAlignment;
-import org.jfree.chart.util.ObjectUtils;
 
 /**
  * A chart title that displays an image.  This is useful, for example, if you
@@ -359,7 +337,7 @@ public class ImageTitle extends Title {
             return false;
         }
         ImageTitle that = (ImageTitle) obj;
-        if (!ObjectUtils.equal(this.image, that.image)) {
+        if (!Objects.equals(this.image, that.image)) {
             return false;
         }
         return super.equals(obj);

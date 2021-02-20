@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------------
  * StandardPieURLGenerator.java
  * ----------------------------
- * (C) Copyright 2002-2016, by Richard Atkinson and Contributors.
+ * (C) Copyright 2002-2021, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributors:     David Gilbert (for Object Refinery Limited);
@@ -39,7 +39,7 @@ package org.jfree.chart.urls;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import org.jfree.chart.util.ObjectUtils;
+import java.util.Objects;
 
 import org.jfree.chart.util.Args;
 import org.jfree.data.general.PieDataset;
@@ -157,7 +157,7 @@ public class StandardPieURLGenerator implements PieURLGenerator, Serializable {
         if (!this.categoryParamName.equals(that.categoryParamName)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.indexParamName, that.indexParamName)) {
+        if (!Objects.equals(this.indexParamName, that.indexParamName)) {
             return false;
         }
         return true;
