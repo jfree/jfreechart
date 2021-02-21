@@ -46,6 +46,10 @@ import org.jfree.chart.util.Args;
  */
 public class FlowDatasetUtils {
     
+    private FlowDatasetUtils() {
+        // no need for instantiation
+    }
+
     /**
      * Returns the total inflow for the specified destination node.
      * 
