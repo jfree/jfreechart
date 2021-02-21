@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,18 +27,10 @@
  * ---------------------
  * PaintScaleLegend.java
  * ---------------------
- * (C) Copyright 2007-2016, by Object Refinery Limited.
+ * (C) Copyright 2007-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Peter Kolb - see patch 2686872;
- *
- * Changes
- * -------
- * 22-Jan-2007 : Version 1 (DG);
- * 18-Jun-2008 : Fixed bug drawing scale with log axis (DG);
- * 16-Apr-2009 : Patch 2686872 implementing AxisChangeListener, and fix for
- *               ignored stripOutlineVisible flag (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -76,8 +68,6 @@ import org.jfree.data.Range;
 /**
  * A legend that shows a range of values and their associated colors, driven
  * by an underlying {@link PaintScale} implementation.
- *
- * @since 1.0.4
  */
 public class PaintScaleLegend extends Title implements AxisChangeListener,
         PublicCloneable {
@@ -120,8 +110,6 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
 
     /**
      * The number of subdivisions for the scale when rendering.
-     *
-     * @since 1.0.11
      */
     private int subdivisions;
 
@@ -370,8 +358,6 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
      * Returns the number of subdivisions used to draw the scale.
      *
      * @return The subdivision count.
-     *
-     * @since 1.0.11
      */
     public int getSubdivisionCount() {
         return this.subdivisions;
@@ -382,8 +368,6 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
      * all registered listeners.
      *
      * @param count  the count.
-     *
-     * @since 1.0.11
      */
     public void setSubdivisionCount(int count) {
         if (count <= 0) {
@@ -398,8 +382,6 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
      * a title change event.
      *
      * @param event  the event.
-     *
-     * @since 1.0.13
      */
     @Override
     public void axisChanged(AxisChangeEvent event) {

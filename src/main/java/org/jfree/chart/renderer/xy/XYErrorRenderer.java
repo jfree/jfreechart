@@ -67,8 +67,6 @@ import org.jfree.data.xy.XYDataset;
  * JFreeChart demo collection:
  * <br><br>
  * <img src="doc-files/XYErrorRendererSample.png" alt="XYErrorRendererSample.png">
- *
- * @since 1.0.3
  */
 public class XYErrorRenderer extends XYLineAndShapeRenderer {
 
@@ -93,8 +91,6 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
     /**
      * The stroke used to draw the error bars (if {@code null} we use the
      * series outline stroke).
-     *
-     * @since 1.0.13
      */
     private transient Stroke errorStroke;
 
@@ -224,8 +220,6 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
      * @return The stroke (possibly {@code null}).
      *
      * @see #setErrorStroke(Stroke)
-     * 
-     * @since 1.0.13
      */
     public Stroke getErrorStroke() {
         return this.errorStroke;
@@ -238,8 +232,6 @@ public class XYErrorRenderer extends XYLineAndShapeRenderer {
      * @param stroke   the stroke ({@code null} permitted).
      *
      * @see #getErrorStroke()
-     *
-     * @since 1.0.13
      */
     public void setErrorStroke(Stroke stroke) {
         this.errorStroke = stroke;

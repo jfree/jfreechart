@@ -143,8 +143,6 @@ public class LineUtils {
      * @param endPercent  the amount to extend the line at the end point end.
      *
      * @return A new line.
-     * 
-     * @since 1.0.18
      */
     public static Line2D extendLine(Line2D line, double startPercent,
                               double endPercent) {

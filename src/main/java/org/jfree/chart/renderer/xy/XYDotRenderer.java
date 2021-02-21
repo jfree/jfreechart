@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * XYDotRenderer.java
  * ------------------
- * (C) Copyright 2002-2020, by Object Refinery Limited.
+ * (C) Copyright 2002-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Christian W. Zuckschwerdt;
@@ -80,8 +80,6 @@ public class XYDotRenderer extends AbstractXYItemRenderer
 
     /**
      * The shape that is used to represent an item in the legend.
-     *
-     * @since 1.0.7
      */
     private transient Shape legendShape;
 
@@ -100,7 +98,6 @@ public class XYDotRenderer extends AbstractXYItemRenderer
      *
      * @return The dot width.
      *
-     * @since 1.0.2
      * @see #setDotWidth(int)
      */
     public int getDotWidth() {
@@ -114,8 +111,7 @@ public class XYDotRenderer extends AbstractXYItemRenderer
      * @param w  the new width (must be greater than zero).
      *
      * @throws IllegalArgumentException if {@code w} is less than one.
-     *
-     * @since 1.0.2
+     * 
      * @see #getDotWidth()
      */
     public void setDotWidth(int w) {
@@ -130,8 +126,7 @@ public class XYDotRenderer extends AbstractXYItemRenderer
      * Returns the dot height (the default value is 1).
      *
      * @return The dot height.
-     *
-     * @since 1.0.2
+     * 
      * @see #setDotHeight(int)
      */
     public int getDotHeight() {
@@ -146,7 +141,6 @@ public class XYDotRenderer extends AbstractXYItemRenderer
      *
      * @throws IllegalArgumentException if {@code h} is less than one.
      *
-     * @since 1.0.2
      * @see #getDotHeight()
      */
     public void setDotHeight(int h) {
@@ -163,8 +157,6 @@ public class XYDotRenderer extends AbstractXYItemRenderer
      * @return The legend shape (never {@code null}).
      *
      * @see #setLegendShape(Shape)
-     *
-     * @since 1.0.7
      */
     public Shape getLegendShape() {
         return this.legendShape;
@@ -177,8 +169,6 @@ public class XYDotRenderer extends AbstractXYItemRenderer
      * @param shape  the shape ({@code null} not permitted).
      *
      * @see #getLegendShape()
-     *
-     * @since 1.0.7
      */
     public void setLegendShape(Shape shape) {
         Args.nullNotPermitted(shape, "shape");

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------
  * XYItemRendererState.java
  * ------------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Ulrich Voigt;
@@ -51,15 +51,11 @@ public class XYItemRendererState extends RendererState {
 
     /**
      * The first item in the series that will be displayed.
-     *
-     * @since 1.0.11
      */
     private int firstItemIndex;
 
     /**
      * The last item in the current series that will be displayed.
-     *
-     * @since 1.0.11
      */
     private int lastItemIndex;
 
@@ -72,8 +68,6 @@ public class XYItemRendererState extends RendererState {
     /**
      * A flag that controls whether the plot should pass ALL data items to the
      * renderer, or just the items that will be visible.
-     *
-     * @since 1.0.6
      */
     private boolean processVisibleItemsOnly;
 
@@ -95,8 +89,6 @@ public class XYItemRendererState extends RendererState {
      *
      * @return A boolean.
      *
-     * @since 1.0.6
-     *
      * @see #setProcessVisibleItemsOnly(boolean)
      */
     public boolean getProcessVisibleItemsOnly() {
@@ -108,8 +100,6 @@ public class XYItemRendererState extends RendererState {
      * items in each series to the renderer, or just the visible items.
      *
      * @param flag  the new flag value.
-     *
-     * @since 1.0.6
      */
     public void setProcessVisibleItemsOnly(boolean flag) {
         this.processVisibleItemsOnly = flag;
@@ -120,8 +110,6 @@ public class XYItemRendererState extends RendererState {
      * {@link #startSeriesPass(XYDataset, int, int, int, int, int)}.
      *
      * @return The first item index.
-     *
-     * @since 1.0.11
      */
     public int getFirstItemIndex() {
         return this.firstItemIndex;
@@ -132,8 +120,6 @@ public class XYItemRendererState extends RendererState {
      * {@link #startSeriesPass(XYDataset, int, int, int, int, int)}.
      *
      * @return The last item index.
-     *
-     * @since 1.0.11
      */
     public int getLastItemIndex() {
         return this.lastItemIndex;
@@ -153,8 +139,6 @@ public class XYItemRendererState extends RendererState {
      * @param passCount  the number of passes.
      *
      * @see #endSeriesPass(XYDataset, int, int, int, int, int)
-     *
-     * @since 1.0.11
      */
     public void startSeriesPass(XYDataset dataset, int series, int firstItem,
             int lastItem, int pass, int passCount) {
@@ -176,8 +160,6 @@ public class XYItemRendererState extends RendererState {
      * @param passCount  the number of passes.
      *
      * @see #startSeriesPass(XYDataset, int, int, int, int, int)
-     *
-     * @since 1.0.11
      */
     public void endSeriesPass(XYDataset dataset, int series, int firstItem,
             int lastItem, int pass, int passCount) {

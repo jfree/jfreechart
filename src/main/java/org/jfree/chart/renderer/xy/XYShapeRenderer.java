@@ -84,8 +84,6 @@ import org.jfree.data.xy.XYZDataset;
  * <br><br>
  * This renderer has similarities to, but also differences from, the
  * {@link XYLineAndShapeRenderer}.
- *
- * @since 1.0.11
  */
 public class XYShapeRenderer extends AbstractXYItemRenderer
         implements XYItemRenderer, Cloneable, PublicCloneable, Serializable {

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,35 +27,11 @@
  * ----------
  * Title.java
  * ----------
- * (C) Copyright 2000-2020, by David Berry and Contributors.
+ * (C) Copyright 2000-2021, by David Berry and Contributors.
  *
  * Original Author:  David Berry;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Nicolas Brodu;
- *
- * Changes (from 21-Aug-2001)
- * --------------------------
- * 21-Aug-2001 : Added standard header (DG);
- * 18-Sep-2001 : Updated header (DG);
- * 14-Nov-2001 : Package com.jrefinery.common.ui.* changed to
- *               com.jrefinery.ui.* (DG);
- * 07-Feb-2002 : Changed blank space around title from Insets --> Spacer, to
- *               allow for relative or absolute spacing (DG);
- * 25-Jun-2002 : Removed unnecessary imports (DG);
- * 01-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 14-Oct-2002 : Changed the event listener storage structure (DG);
- * 11-Sep-2003 : Took care of listeners while cloning (NB);
- * 22-Sep-2003 : Spacer cannot be null. Added nullpointer checks for this (TM);
- * 08-Jan-2003 : Renamed AbstractTitle --> Title and moved to separate
- *               package (DG);
- * 26-Oct-2004 : Refactored to implement Block interface, and removed redundant
- *               constants (DG);
- * 11-Jan-2005 : Removed deprecated code in preparation for the 1.0.0
- *               release (DG);
- * 02-Feb-2005 : Changed Spacer --> RectangleInsets for padding (DG);
- * 03-May-2005 : Fixed problem in equals() method (DG);
- * 19-Sep-2008 : Added visibility flag (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -111,8 +87,6 @@ public abstract class Title extends AbstractBlock
 
     /**
      * A flag that controls whether or not the title is visible.
-     *
-     * @since 1.0.11
      */
     public boolean visible;
 
@@ -200,8 +174,6 @@ public abstract class Title extends AbstractBlock
      * @return A boolean.
      *
      * @see #setVisible(boolean)
-     *
-     * @since 1.0.11
      */
     public boolean isVisible() {
         return this.visible;
@@ -214,8 +186,6 @@ public abstract class Title extends AbstractBlock
      * @param visible  the new flag value.
      *
      * @see #isVisible()
-     *
-     * @since 1.0.11
      */
     public void setVisible(boolean visible) {
         this.visible = visible;

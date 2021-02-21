@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -64,8 +64,6 @@ public class RectangleInsets implements Serializable {
     
     /**
      * Creates a new instance with all insets initialised to {@code 1.0}.
-     * 
-     * @since 1.0.9
      */
     public RectangleInsets() {
         this(1.0, 1.0, 1.0, 1.0);

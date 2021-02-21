@@ -104,8 +104,6 @@ public class LegendGraphic extends AbstractBlock
     /**
      * The fill paint transformer (used if the fillPaint is an instance of
      * GradientPaint).
-     *
-     * @since 1.0.4
      */
     private GradientPaintTransformer fillPaintTransformer;
 
@@ -250,8 +248,6 @@ public class LegendGraphic extends AbstractBlock
      *
      * @return The transformer (never {@code null}).
      *
-     * @since 1.0.4.
-     *
      * @see #setFillPaintTransformer(GradientPaintTransformer)
      */
     public GradientPaintTransformer getFillPaintTransformer() {
@@ -263,8 +259,6 @@ public class LegendGraphic extends AbstractBlock
      * {@code GradientPaint}.
      *
      * @param transformer  the transformer ({@code null} not permitted).
-     *
-     * @since 1.0.4
      *
      * @see #getFillPaintTransformer()
      */

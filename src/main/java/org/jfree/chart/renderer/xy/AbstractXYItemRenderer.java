@@ -233,8 +233,6 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      * @param seriesKey  the series key that identifies the element 
      *     ({@code null} not permitted).
      * @param itemIndex  the item index. 
-     * 
-     * @since 1.0.20
      */
     protected void beginElementGroup(Graphics2D g2, Comparable seriesKey,
             int itemIndex) {
@@ -496,8 +494,6 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      * this renderer.
      *
      * @param event  information about the event (not used here).
-     *
-     * @since 1.0.14
      */
     @Override
     public void annotationChanged(AnnotationChangeEvent event) {
@@ -510,8 +506,6 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      *
      * @return A collection of annotations (possibly empty but never
      *     {@code null}).
-     * 
-     * @since 1.0.13
      */
     public Collection getAnnotations() {
         List result = new java.util.ArrayList(this.foregroundAnnotations);
@@ -620,8 +614,6 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      *
      * @return The range ({@code null} if the dataset is {@code null}
      *         or empty).
-     *
-     * @since 1.0.13
      */
     protected Range findDomainBounds(XYDataset dataset,
             boolean includeInterval) {
@@ -667,8 +659,6 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      *
      * @return The range ({@code null} if the dataset is {@code null}
      *         or empty).
-     *
-     * @since 1.0.13
      */
     protected Range findRangeBounds(XYDataset dataset,
             boolean includeInterval) {
@@ -881,8 +871,6 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      * @param value  the value at which the grid line should be drawn.
      * @param paint  the paint ({@code null} not permitted).
      * @param stroke  the stroke ({@code null} not permitted).
-     *
-     * @since 1.0.5
      */
     @Override
     public void drawDomainLine(Graphics2D g2, XYPlot plot, ValueAxis axis,
@@ -1487,8 +1475,6 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      * @param transY  the y-value translated to Java2D space.
      * @param orientation  the plot orientation ({@code null} not
      *                     permitted).
-     *
-     * @since 1.0.20
      */
     protected void updateCrosshairValues(CrosshairState crosshairState,
             double x, double y, int datasetIndex,
@@ -1652,8 +1638,6 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      *           permitted);
      * @param x  the x coordinate;
      * @param y  the y coordinate;
-     *
-     * @since 1.0.14
      */
     protected static void moveTo(GeneralPath hotspot, double x, double y) {
         hotspot.moveTo((float) x, (float) y);
@@ -1667,8 +1651,6 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      *           permitted);
      * @param x  the x coordinate;
      * @param y  the y coordinate;
-     *
-     * @since 1.0.14
      */
     protected static void lineTo(GeneralPath hotspot, double x, double y) {
         hotspot.lineTo((float) x, (float) y);

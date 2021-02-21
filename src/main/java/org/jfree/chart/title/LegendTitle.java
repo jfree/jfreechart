@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------
  * LegendTitle.java
  * ----------------
- * (C) Copyright 2002-2020, by Object Refinery Limited.
+ * (C) Copyright 2002-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Pierre-Marie Le Biot;
@@ -148,7 +148,6 @@ public class LegendTitle extends Title
 
     /**
      * Whether to render legend items in ascending or descending order.
-     * @since 1.0.15
      */
     private SortOrder sortOrder;
 
@@ -371,7 +370,6 @@ public class LegendTitle extends Title
      * Gets the order used to display legend items.
      * 
      * @return The order (never {@code null}).
-     * @since 1.0.15
      */
     public SortOrder getSortOrder() {
         return this.sortOrder;
@@ -382,7 +380,6 @@ public class LegendTitle extends Title
      * 
      * @param order Specifies ascending or descending order ({@code null}
      *              not permitted).
-     * @since 1.0.15
      */
     public void setSortOrder(SortOrder order) {
         Args.nullNotPermitted(order, "order");
@@ -578,8 +575,6 @@ public class LegendTitle extends Title
      * Returns the wrapper container, if any.
      *
      * @return The wrapper container (possibly {@code null}).
-     *
-     * @since 1.0.11
      */
     public BlockContainer getWrapper() {
         return this.wrapper;

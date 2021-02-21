@@ -100,8 +100,6 @@ public class BarRenderer extends AbstractCategoryItemRenderer
 
     /**
      * The default bar painter assigned to each new instance of this renderer.
-     *
-     * @since 1.0.11
      */
     private static BarPainter defaultBarPainter = new GradientBarPainter();
 
@@ -109,8 +107,6 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      * Returns the default bar painter.
      *
      * @return The default bar painter.
-     *
-     * @since 1.0.11
      */
     public static BarPainter getDefaultBarPainter() {
         return BarRenderer.defaultBarPainter;
@@ -120,8 +116,6 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      * Sets the default bar painter.
      *
      * @param painter  the painter ({@code null} not permitted).
-     *
-     * @since 1.0.11
      */
     public static void setDefaultBarPainter(BarPainter painter) {
         Args.nullNotPermitted(painter, "painter");
@@ -139,8 +133,6 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      * @return A boolean.
      *
      * @see #setDefaultShadowsVisible(boolean)
-     *
-     * @since 1.0.13
      */
     public static boolean getDefaultShadowsVisible() {
         return BarRenderer.defaultShadowsVisible;
@@ -152,8 +144,6 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      * @param visible  the new value for the default.
      *
      * @see #getDefaultShadowsVisible()
-     *
-     * @since 1.0.13
      */
     public static void setDefaultShadowsVisible(boolean visible) {
         BarRenderer.defaultShadowsVisible = visible;
@@ -208,36 +198,26 @@ public class BarRenderer extends AbstractCategoryItemRenderer
 
     /**
      * The bar painter (never {@code null}).
-     *
-     * @since 1.0.11
      */
     private BarPainter barPainter;
 
     /**
      * The flag that controls whether or not shadows are drawn for the bars.
-     *
-     * @since 1.0.11
      */
     private boolean shadowsVisible;
 
     /**
      * The shadow paint.
-     *
-     * @since 1.0.11
      */
     private transient Paint shadowPaint;
 
     /**
      * The x-offset for the shadow effect.
-     *
-     * @since 1.0.11
      */
     private double shadowXOffset;
 
     /**
      * The y-offset for the shadow effect.
-     *
-     * @since 1.0.11
      */
     private double shadowYOffset;
 
@@ -488,8 +468,6 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      * @return {@code true} if the base is included in the range, and
      *         {@code false} otherwise.
      *
-     * @since 1.0.1
-     *
      * @see #setIncludeBaseInRange(boolean)
      */
     public boolean getIncludeBaseInRange() {
@@ -503,8 +481,6 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      * a {@link RendererChangeEvent} is sent to all registered listeners.
      *
      * @param include  the new value for the flag.
-     *
-     * @since 1.0.1
      *
      * @see #getIncludeBaseInRange()
      */
@@ -521,8 +497,6 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      * @return The bar painter (never {@code null}).
      *
      * @see #setBarPainter(BarPainter)
-     *
-     * @since 1.0.11
      */
     public BarPainter getBarPainter() {
         return this.barPainter;
@@ -535,8 +509,6 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      * @param painter  the painter ({@code null} not permitted).
      *
      * @see #getBarPainter()
-     *
-     * @since 1.0.11
      */
     public void setBarPainter(BarPainter painter) {
         Args.nullNotPermitted(painter, "painter");
@@ -549,8 +521,6 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      * the bars.
      *
      * @return A boolean.
-     *
-     * @since 1.0.11
      */
     public boolean getShadowsVisible() {
         return this.shadowsVisible;
@@ -561,8 +531,6 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      * drawn by the renderer.
      *
      * @param visible  the new flag value.
-     *
-     * @since 1.0.11
      */
     public void setShadowVisible(boolean visible) {
         this.shadowsVisible = visible;
@@ -575,8 +543,6 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      * @return The shadow paint.
      *
      * @see #setShadowPaint(Paint)
-     *
-     * @since 1.0.11
      */
     public Paint getShadowPaint() {
         return this.shadowPaint;
@@ -589,8 +555,6 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getShadowPaint()
-     *
-     * @since 1.0.11
      */
     public void setShadowPaint(Paint paint) {
         Args.nullNotPermitted(paint, "paint");
@@ -602,8 +566,6 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      * Returns the shadow x-offset.
      *
      * @return The shadow x-offset.
-     *
-     * @since 1.0.11
      */
     public double getShadowXOffset() {
         return this.shadowXOffset;
@@ -614,8 +576,6 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param offset  the offset.
-     *
-     * @since 1.0.11
      */
     public void setShadowXOffset(double offset) {
         this.shadowXOffset = offset;
@@ -626,8 +586,6 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      * Returns the shadow y-offset.
      *
      * @return The shadow y-offset.
-     *
-     * @since 1.0.11
      */
     public double getShadowYOffset() {
         return this.shadowYOffset;
@@ -638,8 +596,6 @@ public class BarRenderer extends AbstractCategoryItemRenderer
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param offset  the offset.
-     *
-     * @since 1.0.11
      */
     public void setShadowYOffset(double offset) {
         this.shadowYOffset = offset;

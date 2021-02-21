@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -73,8 +73,6 @@ public class StandardGradientPaintTransformer
      * Returns the type of transform.
      * 
      * @return The type of transform (never {@code null}).
-     * 
-     * @since 1.0.10
      */
     public GradientPaintTransformType getType() {
         return this.type;

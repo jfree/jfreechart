@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,22 +27,10 @@
  * -------------------
  * CompositeTitle.java
  * -------------------
- * (C) Copyright 2005-2016, by David Gilbert and Contributors.
+ * (C) Copyright 2005-2021, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Eric Penfold (patch 2006826);
- *
- * Changes
- * -------
- * 19-Nov-2004 : Version 1 (DG);
- * 11-Jan-2005 : Removed deprecated code in preparation for 1.0.0 release (DG);
- * 04-Feb-2005 : Implemented MAXIMUM_WIDTH in calculateSize (DG);
- * 20-Apr-2005 : Added new draw() method (DG);
- * 03-May-2005 : Implemented equals() method (DG);
- * 02-Jul-2008 : Applied patch 2006826 by Eric Penfold, to enable chart
- *               entities to be generated (DG);
- * 09-Jul-2008 : Added backgroundPaint field (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -75,8 +63,6 @@ public class CompositeTitle extends Title implements Cloneable, Serializable {
 
     /**
      * The background paint.
-     *
-     * @since 1.0.11
      */
     private transient Paint backgroundPaint;
 
@@ -105,8 +91,6 @@ public class CompositeTitle extends Title implements Cloneable, Serializable {
      * Returns the background paint.
      *
      * @return The paint (possibly {@code null}).
-     *
-     * @since 1.0.11
      */
     public Paint getBackgroundPaint() {
         return this.backgroundPaint;
@@ -118,8 +102,6 @@ public class CompositeTitle extends Title implements Cloneable, Serializable {
      * no background is painted (which makes the title background transparent).
      *
      * @param paint  the background paint ({@code null} permitted).
-     *
-     * @since 1.0.11
      */
     public void setBackgroundPaint(Paint paint) {
         this.backgroundPaint = paint;

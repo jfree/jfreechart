@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * -----------------------------
  * LegendItemBlockContainer.java
  * -----------------------------
- * (C) Copyright 2006-2008, by Object Refinery Limited.
+ * (C) Copyright 2006-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 20-Jul-2006 : Version 1 (DG);
- * 06-Oct-2006 : Added tooltip and URL text fields (DG);
- * 18-May-2007 : Added seriesKey and dataset fields (DG);
  *
  */
 
@@ -58,22 +52,16 @@ import org.jfree.data.general.Dataset;
 
 /**
  * A container that holds all the pieces of a single legend item.
- *
- * @since 1.0.2
  */
 public class LegendItemBlockContainer extends BlockContainer {
 
     /**
      * The dataset.
-     *
-     * @since 1.0.6
      */
     private Dataset dataset;
 
     /**
      * The series key.
-     *
-     * @since 1.0.6
      */
     private Comparable seriesKey;
 
@@ -95,8 +83,6 @@ public class LegendItemBlockContainer extends BlockContainer {
      * @param arrangement  the arrangement.
      * @param dataset  the dataset.
      * @param seriesKey  the series key.
-     *
-     * @since 1.0.6
      */
     public LegendItemBlockContainer(Arrangement arrangement, Dataset dataset,
             Comparable seriesKey) {
@@ -109,8 +95,6 @@ public class LegendItemBlockContainer extends BlockContainer {
      * Returns a reference to the dataset for the associated legend item.
      *
      * @return A dataset reference.
-     *
-     * @since 1.0.6
      */
     public Dataset getDataset() {
         return this.dataset;
@@ -120,8 +104,6 @@ public class LegendItemBlockContainer extends BlockContainer {
      * Returns the series key.
      *
      * @return The series key.
-     *
-     * @since 1.0.6
      */
     public Comparable getSeriesKey() {
         return this.seriesKey;
@@ -140,8 +122,6 @@ public class LegendItemBlockContainer extends BlockContainer {
      * Returns the tool tip text.
      *
      * @return The tool tip text (possibly {@code null}).
-     *
-     * @since 1.0.3
      */
     public String getToolTipText() {
         return this.toolTipText;
@@ -151,8 +131,6 @@ public class LegendItemBlockContainer extends BlockContainer {
      * Sets the tool tip text.
      *
      * @param text  the text ({@code null} permitted).
-     *
-     * @since 1.0.3
      */
     public void setToolTipText(String text) {
         this.toolTipText = text;
@@ -162,8 +140,6 @@ public class LegendItemBlockContainer extends BlockContainer {
      * Returns the URL text.
      *
      * @return The URL text (possibly {@code null}).
-     *
-     * @since 1.0.3
      */
     public String getURLText() {
         return this.urlText;
@@ -173,8 +149,6 @@ public class LegendItemBlockContainer extends BlockContainer {
      * Sets the URL text.
      *
      * @param text  the text ({@code null} permitted).
-     *
-     * @since 1.0.3
      */
     public void setURLText(String text) {
         this.urlText = text;

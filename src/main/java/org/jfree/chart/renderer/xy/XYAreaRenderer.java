@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * XYAreaRenderer.java
  * -------------------
- * (C) Copyright 2002-2020, by Hari and Contributors.
+ * (C) Copyright 2002-2021, by Hari and Contributors.
  *
  * Original Author:  Hari (ourhari@hotmail.com);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -152,16 +152,12 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
     /**
      * A flag that can be set to specify that the fill paint should be used
      * to fill the area under the renderer.
-     * 
-     * @since 1.0.14
      */
     private boolean useFillPaint;
 
     /**
      * A transformer that is applied to the paint used to fill under the
      * area *if* it is an instance of GradientPaint.
-     *
-     * @since 1.0.14
      */
     private GradientPaintTransformer gradientTransformer;
 
@@ -305,8 +301,6 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
      * fill the area under the line.
      *
      * @return A boolean.
-     *
-     * @since 1.0.14
      */
     public boolean getUseFillPaint() {
         return this.useFillPaint;
@@ -318,8 +312,6 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
      * {@link RendererChangeEvent} to all listeners.
      *
      * @param use  the new flag value.
-     *
-     * @since 1.0.14
      */
     public void setUseFillPaint(boolean use) {
         this.useFillPaint = use;
@@ -330,8 +322,6 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
      * Returns the gradient paint transformer.
      *
      * @return The gradient paint transformer (never {@code null}).
-     *
-     * @since 1.0.14
      */
     public GradientPaintTransformer getGradientTransformer() {
         return this.gradientTransformer;
@@ -342,8 +332,6 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param transformer  the transformer ({@code null} not permitted).
-     *
-     * @since 1.0.14
      */
     public void setGradientTransformer(GradientPaintTransformer transformer) {
         Args.nullNotPermitted(transformer, "transformer");
