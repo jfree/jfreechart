@@ -52,6 +52,12 @@ import org.jfree.chart.util.PublicCloneable;
  */
 public class NodeKey <K extends Comparable<K>> implements PublicCloneable, Serializable {
 
+    /** 
+     * The key for a node property that, if defined (at the dataset level), 
+     * contains a {@code Boolean} value for the selection status of the node.
+     */
+    public static final String SELECTED_PROPERTY_KEY = "selected";
+    
     /** The stage. */
     private final int stage;
     

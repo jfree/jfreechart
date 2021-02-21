@@ -581,7 +581,7 @@ public class FlowPlot extends Plot implements Cloneable, PublicCloneable,
                 Rectangle2D nodeRect = nodeRects.get(nodeKey);
                 Color ncol = lookupNodeColor(nodeKey);
                 if (hasNodeSelections) {
-                    if (!Boolean.TRUE.equals(dataset.getNodeProperty(nodeKey, "selected"))) {
+                    if (!Boolean.TRUE.equals(dataset.getNodeProperty(nodeKey, NodeKey.SELECTED_PROPERTY_KEY))) {
                         int g = (ncol.getRed() + ncol.getGreen() + ncol.getBlue()) / 3;
                         ncol = new Color(g, g, g, ncol.getAlpha());
                     }
@@ -606,7 +606,7 @@ public class FlowPlot extends Plot implements Cloneable, PublicCloneable,
                     connect.closePath();
                     Color nc = lookupNodeColor(nodeKey);
                     if (hasFlowSelections) {
-                        if (!Boolean.TRUE.equals(dataset.getFlowProperty(flowKey, "selected"))) {
+                        if (!Boolean.TRUE.equals(dataset.getFlowProperty(flowKey, FlowKey.SELECTED_PROPERTY_KEY))) {
                             int g = (ncol.getRed() + ncol.getGreen() + ncol.getBlue()) / 3;
                             nc = new Color(g, g, g, ncol.getAlpha());
                         }
@@ -639,7 +639,7 @@ public class FlowPlot extends Plot implements Cloneable, PublicCloneable,
             if (nodeRect != null) {
                 Color ncol = lookupNodeColor(nodeKey);
                 if (hasNodeSelections) {
-                    if (!Boolean.TRUE.equals(dataset.getNodeProperty(nodeKey, "selected"))) {
+                    if (!Boolean.TRUE.equals(dataset.getNodeProperty(nodeKey, NodeKey.SELECTED_PROPERTY_KEY))) {
                         int g = (ncol.getRed() + ncol.getGreen() + ncol.getBlue()) / 3;
                         ncol = new Color(g, g, g, ncol.getAlpha());
                     }

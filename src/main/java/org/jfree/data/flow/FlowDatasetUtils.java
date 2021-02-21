@@ -51,7 +51,8 @@ public class FlowDatasetUtils {
     }
 
     /**
-     * Returns the total inflow for the specified destination node.
+     * Returns the total inflow for the specified node (a destination node for
+     * the specified stage).
      * 
      * @param <K> the type for the flow identifiers.
      * @param dataset  the dataset ({@code null} not permitted).
@@ -63,6 +64,7 @@ public class FlowDatasetUtils {
     public static <K extends Comparable<K>> double calculateInflow(FlowDataset<K> dataset, K node, int stage) {
         Args.nullNotPermitted(dataset, "dataset");
         Args.nullNotPermitted(node, "node");
+        Args.requireInRange(stage, "stage", 0, dataset.getStageCount());
         if (stage == 0) {
             return 0.0;  // there are no inflows for stage 0
         }
@@ -78,7 +80,8 @@ public class FlowDatasetUtils {
     }
 
     /**
-     * Returns the total outflow for the specified source node.
+     * Returns the total outflow for the specified node (a source node for the
+     * specified stage).
      * 
      * @param <K> the type for the flow identifiers.
      * @param dataset  the dataset ({@code null} not permitted).
@@ -90,7 +93,8 @@ public class FlowDatasetUtils {
     public static <K extends Comparable<K>> double calculateOutflow(FlowDataset<K> dataset, K source, int stage) {
         Args.nullNotPermitted(dataset, "dataset");
         Args.nullNotPermitted(source, "source");
-        if (stage >= dataset.getStageCount()) {
+        Args.requireInRange(stage, "stage", 0, dataset.getStageCount());
+        if (stage == dataset.getStageCount()) {
             return 0.0;  // there are no outflows for the last stage
         }
         double outflow = 0.0;
@@ -143,7 +147,7 @@ public class FlowDatasetUtils {
         for (int stage = 0; stage < dataset.getStageCount() + 1; stage++) { // '+1' to include final destination nodes 
             for (K source : dataset.getSources(stage)) {
                 NodeKey<K> nodeKey = new NodeKey<>(stage, source);
-                if (Boolean.TRUE.equals(dataset.getNodeProperty(nodeKey, "selected"))) {
+                if (Boolean.TRUE.equals(dataset.getNodeProperty(nodeKey, NodeKey.SELECTED_PROPERTY_KEY))) {
                     return true;
                 }
             }
@@ -165,7 +169,7 @@ public class FlowDatasetUtils {
         for (int stage = 0; stage < dataset.getStageCount() + 1; stage++) { // '+1' to include final destination nodes 
             for (K source : dataset.getSources(stage)) {
                 NodeKey<K> nodeKey = new NodeKey<>(stage, source);
-                if (Boolean.TRUE.equals(dataset.getNodeProperty(nodeKey, "selected"))) {
+                if (Boolean.TRUE.equals(dataset.getNodeProperty(nodeKey, NodeKey.SELECTED_PROPERTY_KEY))) {
                     result++;
                 }
             }
@@ -189,7 +193,7 @@ public class FlowDatasetUtils {
             for (K source : dataset.getSources(s)) {
                 for (K destination : dataset.getDestinations(s)) {
                     FlowKey<K> flowKey = new FlowKey<>(s, source, destination);
-                    if (Boolean.TRUE.equals(dataset.getFlowProperty(flowKey, "selected"))) {
+                    if (Boolean.TRUE.equals(dataset.getFlowProperty(flowKey, FlowKey.SELECTED_PROPERTY_KEY))) {
                         return true;
                     }
                 }

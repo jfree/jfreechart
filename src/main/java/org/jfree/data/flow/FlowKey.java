@@ -51,6 +51,12 @@ import org.jfree.chart.util.PublicCloneable;
  */
 public class FlowKey<K extends Comparable<K>> implements PublicCloneable, Serializable  {
 
+    /** 
+     * The key for a flow property that, if defined (at the dataset level), 
+     * contains a {@code Boolean} value for the selection status of the flow.
+     */
+    public static final String SELECTED_PROPERTY_KEY = "selected";
+
     /** The stage. */
     private final int stage;
     

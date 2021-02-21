@@ -57,7 +57,7 @@ import org.jfree.data.general.Dataset;
  * @since 1.5.3
  */
 public interface FlowDataset<K extends Comparable<K>> extends Dataset {
-    
+
     /**
      * Returns the number of flow stages (never less than one).
      * 
