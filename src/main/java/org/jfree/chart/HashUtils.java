@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------
  * HashUtils.java
  * --------------
- * (C) Copyright 2006-2020, by Object Refinery Limited;
+ * (C) Copyright 2006-2021, by Object Refinery Limited;
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -44,9 +44,7 @@ import org.jfree.chart.util.PaintList;
 import org.jfree.chart.util.StrokeList;
 
 /**
- * Some utility methods for calculating hash codes.  
- * 
- * @since 1.0.3
+ * Some utility methods for calculating hash codes.
  */
 public class HashUtils {
     
@@ -110,8 +108,6 @@ public class HashUtils {
      * @param b  the boolean value.
      * 
      * @return A hash value.
-     * 
-     * @since 1.0.7
      */
     public static int hashCode(int pre, boolean b) {
         return 37 * pre + (b ? 0 : 1);
@@ -125,8 +121,6 @@ public class HashUtils {
      * @param i  the int value.
      * 
      * @return A hash value.
-     * 
-     * @since 1.0.8
      */
     public static int hashCode(int pre, int i) {
         return 37 * pre + i;
@@ -140,8 +134,6 @@ public class HashUtils {
      * @param d  the double value.
      * 
      * @return A hash value.
-     * 
-     * @since 1.0.7
      */
     public static int hashCode(int pre, double d) {
         long l = Double.doubleToLongBits(d);
@@ -155,8 +147,6 @@ public class HashUtils {
      * @param p  the paint ({@code null} permitted).
      * 
      * @return A hash value.
-     * 
-     * @since 1.0.7
      */
     public static int hashCode(int pre, Paint p) {
         return 37 * pre + hashCodeForPaint(p);
@@ -169,8 +159,6 @@ public class HashUtils {
      * @param s  the stroke ({@code null} permitted).
      * 
      * @return A hash value.
-     * 
-     * @since 1.0.7
      */
     public static int hashCode(int pre, Stroke s) {
         int h = (s != null ? s.hashCode() : 0);
@@ -184,8 +172,6 @@ public class HashUtils {
      * @param s  the string ({@code null} permitted).
      * 
      * @return A hash value.
-     * 
-     * @since 1.0.7
      */
     public static int hashCode(int pre, String s) {
         int h = (s != null ? s.hashCode() : 0);
@@ -200,8 +186,6 @@ public class HashUtils {
      * @param c  the comparable ({@code null} permitted).
      * 
      * @return A hash value.
-     * 
-     * @since 1.0.7
      */
     public static int hashCode(int pre, Comparable c) {
         int h = (c != null ? c.hashCode() : 0);
@@ -216,8 +200,6 @@ public class HashUtils {
      * @param obj  the object ({@code null} permitted).
      * 
      * @return A hash value.
-     * 
-     * @since 1.0.8
      */
     public static int hashCode(int pre, Object obj) {
         int h = (obj != null ? obj.hashCode() : 0);
@@ -234,8 +216,6 @@ public class HashUtils {
      * @param list  the list ({@code null} permitted).
      * 
      * @return The hash code.
-     * 
-     * @since 1.0.9
      */
     public static int hashCode(int pre, BooleanList list) {
         if (list == null) {
@@ -271,8 +251,6 @@ public class HashUtils {
      * @param list  the list ({@code null} permitted).
      * 
      * @return The hash code.
-     * 
-     * @since 1.0.9
      */
     public static int hashCode(int pre, PaintList list) {
         if (list == null) {
@@ -308,8 +286,6 @@ public class HashUtils {
      * @param list  the list ({@code null} permitted).
      * 
      * @return The hash code.
-     * 
-     * @since 1.0.9
      */
     public static int hashCode(int pre, StrokeList list) {
         if (list == null) {

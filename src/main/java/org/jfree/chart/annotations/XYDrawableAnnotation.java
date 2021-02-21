@@ -105,8 +105,6 @@ public class XYDrawableAnnotation extends AbstractXYAnnotation
      * @param displayHeight  the height of the area.
      * @param drawScaleFactor  the scaling factor for drawing.
      * @param drawable  the drawable object ({@code null} not permitted).
-     *
-     * @since 1.0.11
      */
     public XYDrawableAnnotation(double x, double y, double displayWidth,
             double displayHeight, double drawScaleFactor, Drawable drawable) {

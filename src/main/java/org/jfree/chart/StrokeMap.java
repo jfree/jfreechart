@@ -56,8 +56,6 @@ import org.jfree.chart.util.SerialUtils;
  * To support cloning and serialization, you should only use keys that are
  * cloneable and serializable.  Special handling for the {@code Stroke}
  * instances is included in this class.
- *
- * @since 1.0.3
  */
 public class StrokeMap implements Cloneable, Serializable {
 

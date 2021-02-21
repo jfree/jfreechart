@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------
  * MouseWheelHandler.java
  * ----------------------
- * (C) Copyright 2009-2020 by Object Refinery Limited and Contributors.
+ * (C) Copyright 2009-2021 by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Ulrich Voigt - patch 2686040;
@@ -49,8 +49,6 @@ import org.jfree.chart.plot.Zoomable;
 
 /**
  * A class that handles mouse wheel events for the {@link ChartPanel} class.
- *
- * @since 1.0.13
  */
 public class MouseWheelHandler implements MouseWheelListener, Serializable {
 

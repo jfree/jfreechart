@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * ChartUtils.java
  * ---------------
- * (C) Copyright 2001-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2001-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Wolfgang Irler;
@@ -74,8 +74,6 @@ public abstract class ChartUtils {
      * {@link ChartFactory} class.
      *
      * @param chart  the chart ({@code null} not permitted).
-     *
-     * @since 1.0.11
      */
     public static void applyCurrentTheme(JFreeChart chart) {
         ChartFactory.getChartTheme().apply(chart);

@@ -147,8 +147,6 @@ public class XYPolygonAnnotation extends AbstractXYAnnotation
      * state.
      *
      * @return The coordinates of the polygon's vertices.
-     *
-     * @since 1.0.2
      */
     public double[] getPolygonCoordinates() {
         return (double[]) this.polygon.clone();
@@ -158,8 +156,6 @@ public class XYPolygonAnnotation extends AbstractXYAnnotation
      * Returns the fill paint.
      *
      * @return The fill paint (possibly {@code null}).
-     *
-     * @since 1.0.2
      */
     public Paint getFillPaint() {
         return this.fillPaint;
@@ -169,8 +165,6 @@ public class XYPolygonAnnotation extends AbstractXYAnnotation
      * Returns the outline stroke.
      *
      * @return The outline stroke (possibly {@code null}).
-     *
-     * @since 1.0.2
      */
     public Stroke getOutlineStroke() {
         return this.stroke;
@@ -180,8 +174,6 @@ public class XYPolygonAnnotation extends AbstractXYAnnotation
      * Returns the outline paint.
      *
      * @return The outline paint (possibly {@code null}).
-     *
-     * @since 1.0.2
      */
     public Paint getOutlinePaint() {
         return this.outlinePaint;

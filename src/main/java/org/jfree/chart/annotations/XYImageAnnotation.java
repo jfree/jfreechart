@@ -79,11 +79,7 @@ public class XYImageAnnotation extends AbstractXYAnnotation
     /** The image. */
     private transient Image image;
 
-    /**
-     * The image anchor point.
-     *
-     * @since 1.0.4
-     */
+    /** The image anchor point. */
     private RectangleAnchor anchor;
 
     /**
@@ -106,8 +102,6 @@ public class XYImageAnnotation extends AbstractXYAnnotation
      * @param y  the y-coordinate (in data space).
      * @param image  the image ({@code null} not permitted).
      * @param anchor  the image anchor ({@code null} not permitted).
-     *
-     * @since 1.0.4
      */
     public XYImageAnnotation(double x, double y, Image image,
             RectangleAnchor anchor) {
@@ -124,8 +118,6 @@ public class XYImageAnnotation extends AbstractXYAnnotation
      * Returns the x-coordinate (in data space) for the annotation.
      *
      * @return The x-coordinate.
-     *
-     * @since 1.0.4
      */
     public double getX() {
         return this.x;
@@ -135,8 +127,6 @@ public class XYImageAnnotation extends AbstractXYAnnotation
      * Returns the y-coordinate (in data space) for the annotation.
      *
      * @return The y-coordinate.
-     *
-     * @since 1.0.4
      */
     public double getY() {
         return this.y;
@@ -146,8 +136,6 @@ public class XYImageAnnotation extends AbstractXYAnnotation
      * Returns the image for the annotation.
      *
      * @return The image.
-     *
-     * @since 1.0.4
      */
     public Image getImage() {
         return this.image;
@@ -157,8 +145,6 @@ public class XYImageAnnotation extends AbstractXYAnnotation
      * Returns the image anchor for the annotation.
      *
      * @return The image anchor.
-     *
-     * @since 1.0.4
      */
     public RectangleAnchor getImageAnchor() {
         return this.anchor;

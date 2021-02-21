@@ -60,8 +60,6 @@ import org.jfree.data.Range;
  * in data coordinates on an {@link XYPlot}.  Note that this annotation
  * is not currently serializable, so don't use it if you plan on serializing
  * your chart(s).
- *
- * @since 1.0.11
  */
 public class XYDataImageAnnotation extends AbstractXYAnnotation
         implements Cloneable, PublicCloneable, XYAnnotationBoundsInfo {
@@ -92,8 +90,6 @@ public class XYDataImageAnnotation extends AbstractXYAnnotation
     /**
      * A flag indicating whether or not the annotation should contribute to
      * the data range for a plot/renderer.
-     *
-     * @since 1.0.13
      */
     private boolean includeInDataBounds;
 
@@ -121,8 +117,6 @@ public class XYDataImageAnnotation extends AbstractXYAnnotation
      * @param h  the image display area height.
      * @param includeInDataBounds  a flag that controls whether or not the
      *     annotation is included in the data bounds for the axis autoRange.
-     *
-     * @since 1.0.13
      */
     public XYDataImageAnnotation(Image image, double x, double y, double w,
             double h, boolean includeInDataBounds) {
@@ -189,8 +183,6 @@ public class XYDataImageAnnotation extends AbstractXYAnnotation
      * contribute to the autoRange for the axis it is plotted against.
      *
      * @return A boolean.
-     *
-     * @since 1.0.13
      */
     @Override
     public boolean getIncludeInDataBounds() {
@@ -201,8 +193,6 @@ public class XYDataImageAnnotation extends AbstractXYAnnotation
      * Returns the x-range for the annotation.
      *
      * @return The range.
-     *
-     * @since 1.0.13
      */
     @Override
     public Range getXRange() {
@@ -213,8 +203,6 @@ public class XYDataImageAnnotation extends AbstractXYAnnotation
      * Returns the y-range for the annotation.
      *
      * @return The range.
-     *
-     * @since 1.0.13
      */
     @Override
     public Range getYRange() {

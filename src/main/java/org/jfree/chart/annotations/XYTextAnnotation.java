@@ -114,32 +114,16 @@ public class XYTextAnnotation extends AbstractXYAnnotation
     /** The rotation angle. */
     private double rotationAngle;
 
-    /**
-     * The background paint (possibly null).
-     *
-     * @since 1.0.13
-     */
+    /** The background paint (possibly null). */
     private transient Paint backgroundPaint;
 
-    /**
-     * The flag that controls the visibility of the outline.
-     *
-     * @since 1.0.13
-     */
+    /** The flag that controls the visibility of the outline. */
     private boolean outlineVisible;
 
-    /**
-     * The outline paint (never null).
-     *
-     * @since 1.0.13
-     */
+    /** The outline paint (never null). */
     private transient Paint outlinePaint;
 
-    /**
-     * The outline stroke (never null).
-     *
-     * @since 1.0.13
-     */
+    /** The outline stroke (never null). */
     private transient Stroke outlineStroke;
 
     /**
@@ -377,8 +361,6 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * @return The background paint (possibly {@code null}).
      *
      * @see #setBackgroundPaint(Paint)
-     *
-     * @since 1.0.13
      */
     public Paint getBackgroundPaint() {
         return this.backgroundPaint;
@@ -391,8 +373,6 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * @param paint  the paint ({@code null} permitted).
      *
      * @see #getBackgroundPaint()
-     *
-     * @since 1.0.13
      */
     public void setBackgroundPaint(Paint paint) {
         this.backgroundPaint = paint;
@@ -405,8 +385,6 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * @return The outline paint (never {@code null}).
      *
      * @see #setOutlinePaint(Paint)
-     *
-     * @since 1.0.13
      */
     public Paint getOutlinePaint() {
         return this.outlinePaint;
@@ -419,8 +397,6 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getOutlinePaint()
-     *
-     * @since 1.0.13
      */
     public void setOutlinePaint(Paint paint) {
         Args.nullNotPermitted(paint, "paint");
@@ -434,8 +410,6 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * @return The outline stroke (never {@code null}).
      *
      * @see #setOutlineStroke(Stroke)
-     *
-     * @since 1.0.13
      */
     public Stroke getOutlineStroke() {
         return this.outlineStroke;
@@ -448,8 +422,6 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * @param stroke  the stroke ({@code null} not permitted).
      *
      * @see #getOutlineStroke()
-     *
-     * @since 1.0.13
      */
     public void setOutlineStroke(Stroke stroke) {
         Args.nullNotPermitted(stroke, "stroke");
@@ -461,8 +433,6 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * Returns the flag that controls whether or not the outline is drawn.
      *
      * @return A boolean.
-     *
-     * @since 1.0.13
      */
     public boolean isOutlineVisible() {
         return this.outlineVisible;
@@ -473,8 +443,6 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * sends an {@link AnnotationChangeEvent} to all registered listeners.
      *
      * @param visible  the new flag value.
-     *
-     * @since 1.0.13
      */
     public void setOutlineVisible(boolean visible) {
         this.outlineVisible = visible;
