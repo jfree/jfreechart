@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * ---------------
  * OHLCSeries.java
  * ---------------
- * (C) Copyright 2006-2017, by Object Refinery Limited.
+ * (C) Copyright 2006-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 04-Dec-2006 : Version 1 (DG);
- * 17-Jun-2009 : Added remove(int) method (DG);
- * 21-Nov-2013 : Added add(OHLCItem) method - feature request #385 (DG);
  *
  */
 
@@ -49,8 +43,6 @@ import org.jfree.data.time.RegularTimePeriod;
 
 /**
  * A list of ({@link RegularTimePeriod}, open, high, low, close) data items.
- *
- * @since 1.0.4
  *
  * @see OHLCSeriesCollection
  */
@@ -117,8 +109,6 @@ public class OHLCSeries extends ComparableObjectSeries {
      * this method will be copied into a new object.
      * 
      * @param item  the item ({@code null} not permitted).
-     * 
-     * @since 1.0.17
      */
     public void add(OHLCItem item) {
         Args.nullNotPermitted(item, "item");
@@ -132,8 +122,6 @@ public class OHLCSeries extends ComparableObjectSeries {
      * @param index  the item index.
      * 
      * @return The item removed.
-     *
-     * @since 1.0.14
      */
     @Override
     public ComparableObjectItem remove(int index) {

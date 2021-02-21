@@ -50,8 +50,6 @@ public interface MarkerChangeListener extends EventListener {
      * Receives notification of a marker change event.
      *
      * @param event  the event.
-     *
-     * @since 1.0.3
      */
     public void markerChanged(MarkerChangeEvent event);
 

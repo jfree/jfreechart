@@ -98,15 +98,11 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
 
     /**
      * The minimum y-value in the series.
-     * 
-     * @since 1.0.14
      */
     private double minY;
 
     /**
      * The maximum y-value in the series.
-     *
-     * @since 1.0.14
      */
     private double maxY;
 
@@ -131,8 +127,6 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      * @param name  the name of the series ({@code null} not permitted).
      * @param domain  the domain description ({@code null} permitted).
      * @param range  the range description ({@code null} permitted).
-     *
-     * @since 1.0.13
      */
     public TimeSeries(Comparable name, String domain, String range) {
         super(name);
@@ -291,8 +285,6 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      * series contains no items, this method will return {@code null}.
      * 
      * @return The range of y-values in the time series (possibly {@code null}).
-     * 
-     * @since 1.0.18
      */
     public Range findValueRange() {
         if (this.data.isEmpty()) {
@@ -311,8 +303,6 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      *     ({@code null} not permitted).
      * 
      * @return The range. 
-     * 
-     * @since 1.0.18
      */
     public Range findValueRange(Range xRange, TimeZone timeZone) {
         return findValueRange(xRange, TimePeriodAnchor.MIDDLE, timeZone);
@@ -330,8 +320,6 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      * @param zone  the time zone ({@code null} not permitted).
      * 
      * @return The range of y-values.
-     * 
-     * @since 1.0.18
      */
     public Range findValueRange(Range xRange, TimePeriodAnchor xAnchor, 
             TimeZone zone) {
@@ -357,8 +345,6 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      * @param calendar  the calendar ({@code null} not permitted).
      * 
      * @return The range of y-values.
-     * 
-     * @since 1.0.18
      */
     public Range findValueRange(Range xRange, TimePeriodAnchor xAnchor, 
             Calendar calendar) {
@@ -397,8 +383,6 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      * @return The smallest y-value.
      *
      * @see #getMaxY()
-     *
-     * @since 1.0.14
      */
     public double getMinY() {
         return this.minY;
@@ -413,8 +397,6 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      * @return The largest y-value.
      *
      * @see #getMinY()
-     *
-     * @since 1.0.14
      */
     public double getMaxY() {
         return this.maxY;
@@ -478,8 +460,6 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      * @return The data item.
      *
      * @see #getDataItem(int)
-     *
-     * @since 1.0.14
      */
     TimeSeriesDataItem getRawDataItem(int index) {
         return (TimeSeriesDataItem) this.data.get(index);
@@ -495,8 +475,6 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      * @return The data item.
      *
      * @see #getDataItem(RegularTimePeriod)
-     *
-     * @since 1.0.14
      */
     TimeSeriesDataItem getRawDataItem(RegularTimePeriod period) {
         int index = getIndex(period);
@@ -746,8 +724,6 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      *
      * @param period  the period ({@code null} not permitted).
      * @param value  the value.
-     * 
-     * @since 1.0.14
      */
     public void update(RegularTimePeriod period, double value) {
       update(period, Double.valueOf(value));
@@ -860,8 +836,6 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      *
      * @return A copy of the overwritten data item, or {@code null} if no
      *         item was overwritten.
-     *
-     * @since 1.0.14
      */
     public TimeSeriesDataItem addOrUpdate(TimeSeriesDataItem item) {
 
@@ -1050,8 +1024,6 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      * @param start  the index of the first period to delete.
      * @param end  the index of the last period to delete.
      * @param notify  notify listeners?
-     *
-     * @since 1.0.14
      */
     public void delete(int start, int end, boolean notify) {
         if (end < start) {
@@ -1258,8 +1230,6 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      * Updates the cached values for the minimum and maximum data values.
      *
      * @param item  the item added ({@code null} not permitted).
-     *
-     * @since 1.0.14
      */
     private void updateBoundsForAddedItem(TimeSeriesDataItem item) {
         Number yN = item.getValue();
@@ -1275,8 +1245,6 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
      * the basis that the specified item has just been removed.
      *
      * @param item  the item added ({@code null} not permitted).
-     *
-     * @since 1.0.14
      */
     private void updateBoundsForRemovedItem(TimeSeriesDataItem item) {
         Number yN = item.getValue();
@@ -1293,8 +1261,6 @@ public class TimeSeries extends Series implements Cloneable, Serializable {
     /**
      * Finds the bounds of the x and y values for the series, by iterating
      * through all the data items.
-     *
-     * @since 1.0.14
      */
     private void updateMinMaxYByIteration() {
         this.minY = Double.NaN;

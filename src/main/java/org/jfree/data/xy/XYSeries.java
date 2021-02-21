@@ -148,8 +148,6 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * @return The smallest x-value.
      *
      * @see #getMaxX()
-     *
-     * @since 1.0.13
      */
     public double getMinX() {
         return this.minX;
@@ -163,8 +161,6 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * @return The largest x-value.
      *
      * @see #getMinX()
-     *
-     * @since 1.0.13
      */
     public double getMaxX() {
         return this.maxX;
@@ -178,8 +174,6 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * @return The smallest y-value.
      *
      * @see #getMaxY()
-     *
-     * @since 1.0.13
      */
     public double getMinY() {
         return this.minY;
@@ -193,8 +187,6 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * @return The largest y-value.
      *
      * @see #getMinY()
-     *
-     * @since 1.0.13
      */
     public double getMaxY() {
         return this.maxY;
@@ -204,8 +196,6 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * Updates the cached values for the minimum and maximum data values.
      *
      * @param item  the item added ({@code null} not permitted).
-     *
-     * @since 1.0.13
      */
     private void updateBoundsForAddedItem(XYDataItem item) {
         double x = item.getXValue();
@@ -223,8 +213,6 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * the basis that the specified item has just been removed.
      *
      * @param item  the item added ({@code null} not permitted).
-     *
-     * @since 1.0.13
      */
     private void updateBoundsForRemovedItem(XYDataItem item) {
         boolean itemContributesToXBounds = false;
@@ -260,8 +248,6 @@ public class XYSeries extends Series implements Cloneable, Serializable {
     /**
      * Finds the bounds of the x and y values for the series, by iterating
      * through all the data items.
-     *
-     * @since 1.0.13
      */
     private void findBoundsByIteration() {
         this.minX = Double.NaN;
@@ -588,8 +574,6 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * @param index  the index.
      *
      * @return The data item with the specified index.
-     *
-     * @since 1.0.14
      */
     XYDataItem getRawDataItem(int index) {
         return (XYDataItem) this.data.get(index);
@@ -661,8 +645,6 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      *
      * @param index  the item (zero based index).
      * @param y  the new value ({@code null} permitted).
-     *
-     * @since 1.0.1
      */
     public void updateByIndex(int index, Number y) {
         XYDataItem item = getRawDataItem(index);
@@ -711,8 +693,6 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * @param y  the y-value.
      *
      * @return The item that was overwritten, if any.
-     *
-     * @since 1.0.10
      */
     public XYDataItem addOrUpdate(double x, double y) {
         return addOrUpdate(Double.valueOf(x), Double.valueOf(y));
@@ -741,8 +721,6 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      *
      * @return A copy of the overwritten data item, or {@code null} if no
      *         item was overwritten.
-     *
-     * @since 1.0.14
      */
     public XYDataItem addOrUpdate(XYDataItem item) {
         Args.nullNotPermitted(item, "item");
@@ -827,8 +805,6 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * Returns a new array containing the x and y values from this series.
      *
      * @return A new array containing the x and y values from this series.
-     *
-     * @since 1.0.4
      */
     public double[][] toArray() {
         int itemCount = getItemCount();

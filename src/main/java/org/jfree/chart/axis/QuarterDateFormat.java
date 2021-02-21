@@ -109,8 +109,6 @@ public class QuarterDateFormat extends DateFormat
      * @param quarterSymbols  the quarter symbols.
      * @param quarterFirst  a flag that controls whether the quarter or the
      *         year is displayed first.
-     *
-     * @since 1.0.6
      */
     public QuarterDateFormat(TimeZone zone, String[] quarterSymbols,
             boolean quarterFirst) {

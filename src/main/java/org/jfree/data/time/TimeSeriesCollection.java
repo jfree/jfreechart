@@ -198,8 +198,6 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      * @param series  the series ({@code null} not permitted).
      *
      * @return The series index.
-     *
-     * @since 1.0.6
      */
     public int indexOf(TimeSeries series) {
         Args.nullNotPermitted(series, "series");
@@ -263,8 +261,6 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      * @param key  the key ({@code null} not permitted).
      * 
      * @return The index.
-     * 
-     * @since 1.0.17
      */
     public int getSeriesIndex(Comparable key) {
         Args.nullNotPermitted(key, "key");
@@ -574,8 +570,6 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      * @param includeInterval  include the x-interval?
      *
      * @return A range.
-     *
-     * @since 1.0.13
      */
     @Override
     public Range getDomainBounds(List visibleSeriesKeys,
@@ -610,8 +604,6 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      * @param includeInterval  ignored for this dataset.
      * 
      * @return The range of value in the dataset (possibly {@code null}).
-     *
-     * @since 1.0.15
      */
     public Range getRangeBounds(boolean includeInterval) {
         Range result = null;
@@ -632,8 +624,6 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      * @param includeInterval  ignored.
      *
      * @return The bounds.
-     *
-     * @since 1.0.14
      */
     @Override
     public Range getRangeBounds(List visibleSeriesKeys, Range xRange,
@@ -655,8 +645,6 @@ public class TimeSeriesCollection extends AbstractIntervalXYDataset
      * the collection.
      * 
      * @param e  the event.
-     * 
-     * @since 1.0.17
      */
     @Override
     public void vetoableChange(PropertyChangeEvent e)

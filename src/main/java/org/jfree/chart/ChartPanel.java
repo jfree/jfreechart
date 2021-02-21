@@ -174,8 +174,6 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
 
     /**
      * Copy action command.
-     *
-     * @since 1.0.13
      */
     public static final String COPY_COMMAND = "COPY";
 
@@ -346,8 +344,6 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
 
     /**
      * The default directory for saving charts to file.
-     *
-     * @since 1.0.7
      */
     private File defaultDirectoryForSaveAs;
 
@@ -389,8 +385,6 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
 
     /**
      * The paint used to draw the zoom rectangle outline.
-     *
-     * @since 1.0.13
      */
     private transient Paint zoomOutlinePaint;
 
@@ -556,8 +550,6 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      *              added to the popup menu.
      * @param tooltips  a flag indicating whether or not tooltips should be
      *                  enabled for the chart.
-     *
-     * @since 1.0.13
      */
     public ChartPanel(JFreeChart chart, int width, int height,
            int minimumDrawWidth, int minimumDrawHeight, int maximumDrawWidth,
@@ -1029,8 +1021,6 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * Returns the default directory for the "save as" option.
      *
      * @return The default directory (possibly {@code null}).
-     *
-     * @since 1.0.7
      */
     public File getDefaultDirectoryForSaveAs() {
         return this.defaultDirectoryForSaveAs;
@@ -1041,8 +1031,6 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * to {@code null}, the user's default directory will be used.
      *
      * @param directory  the directory ({@code null} permitted).
-     *
-     * @since 1.0.7
      */
     public void setDefaultDirectoryForSaveAs(File directory) {
         if (directory != null) {
@@ -1083,8 +1071,6 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      *
      * @return A boolean.
      *
-     * @since 1.0.7
-     *
      * @see #setZoomAroundAnchor(boolean)
      */
     public boolean getZoomAroundAnchor() {
@@ -1096,8 +1082,6 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * centered around the current anchor point.
      *
      * @param zoomAroundAnchor  the new flag value.
-     *
-     * @since 1.0.7
      *
      * @see #getZoomAroundAnchor()
      */
@@ -1112,8 +1096,6 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      *
      * @see #setZoomFillPaint(java.awt.Paint)
      * @see #setFillZoomRectangle(boolean)
-     *
-     * @since 1.0.13
      */
     public Paint getZoomFillPaint() {
         return this.zoomFillPaint;
@@ -1126,8 +1108,6 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      *
      * @see #getZoomFillPaint()
      * @see #getFillZoomRectangle()
-     *
-     * @since 1.0.13
      */
     public void setZoomFillPaint(Paint paint) {
         Args.nullNotPermitted(paint, "paint");
@@ -1141,8 +1121,6 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      *
      * @see #setZoomOutlinePaint(java.awt.Paint)
      * @see #setFillZoomRectangle(boolean)
-     *
-     * @since 1.0.13
      */
     public Paint getZoomOutlinePaint() {
         return this.zoomOutlinePaint;
@@ -1155,8 +1133,6 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      *
      * @see #getZoomOutlinePaint()
      * @see #getFillZoomRectangle()
-     *
-     * @since 1.0.13
      */
     public void setZoomOutlinePaint(Paint paint) {
         this.zoomOutlinePaint = paint;
@@ -1172,8 +1148,6 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * {@code false} otherwise.
      *
      * @return A boolean.
-     *
-     * @since 1.0.13
      */
     public boolean isMouseWheelEnabled() {
         return this.mouseWheelHandler != null;
@@ -1183,8 +1157,6 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * Enables or disables mouse wheel support for the panel.
      *
      * @param flag  a boolean.
-     *
-     * @since 1.0.13
      */
     public void setMouseWheelEnabled(boolean flag) {
         if (flag && this.mouseWheelHandler == null) {
@@ -1200,8 +1172,6 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * Add an overlay to the panel.
      *
      * @param overlay  the overlay ({@code null} not permitted).
-     *
-     * @since 1.0.13
      */
     public void addOverlay(Overlay overlay) {
         Args.nullNotPermitted(overlay, "overlay");
@@ -1214,8 +1184,6 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * Removes an overlay from the panel.
      *
      * @param overlay  the overlay to remove ({@code null} not permitted).
-     *
-     * @since 1.0.13
      */
     public void removeOverlay(Overlay overlay) {
         Args.nullNotPermitted(overlay, "overlay");
@@ -1230,8 +1198,6 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * Handles a change to an overlay by repainting the panel.
      *
      * @param event  the event.
-     *
-     * @since 1.0.13
      */
     @Override
     public void overlayChanged(OverlayChangeEvent event) {
@@ -2523,8 +2489,6 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     /**
      * Displays a dialog that allows the user to edit the properties for the
      * current chart.
-     *
-     * @since 1.0.3
      */
     public void doEditChartProperties() {
 
@@ -2540,8 +2504,6 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
 
     /**
      * Copies the current chart to the system clipboard.
-     * 
-     * @since 1.0.13
      */
     public void doCopy() {
         Clipboard systemClipboard
@@ -2922,8 +2884,6 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      * @param zoom  include menu items for zooming.
      *
      * @return The popup menu.
-     *
-     * @since 1.0.13
      */
     protected JPopupMenu createPopupMenu(boolean properties,
             boolean copy, boolean save, boolean print, boolean zoom) {

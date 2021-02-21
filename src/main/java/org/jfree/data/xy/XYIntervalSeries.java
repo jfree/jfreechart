@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * XYIntervalSeries.java
  * ---------------------
- * (C) Copyright 2006-2020, by Object Refinery Limited.
+ * (C) Copyright 2006-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -42,8 +42,6 @@ import org.jfree.data.general.SeriesChangeEvent;
 
 /**
  * A list of (x, x-low, x-high, y, y-low, y-high) data items.
- *
- * @since 1.0.3
  *
  * @see XYIntervalSeriesCollection
  */
@@ -97,8 +95,6 @@ public class XYIntervalSeries extends ComparableObjectSeries {
      * 
      * @param item  the data item ({@code null} not permitted).
      * @param notify  notify listeners?
-     * 
-     * @since 1.0.18
      */
     public void add(XYIntervalDataItem item, boolean notify) {
         super.add(item, notify);
@@ -123,8 +119,6 @@ public class XYIntervalSeries extends ComparableObjectSeries {
      * @param index  the item index.
      *
      * @return The lower bound of the x-interval.
-     *
-     * @since 1.0.5
      */
     public double getXLowValue(int index) {
         XYIntervalDataItem item = (XYIntervalDataItem) getDataItem(index);
@@ -138,8 +132,6 @@ public class XYIntervalSeries extends ComparableObjectSeries {
      * @param index  the item index.
      *
      * @return The upper bound of the x-interval.
-     *
-     * @since 1.0.5
      */
     public double getXHighValue(int index) {
         XYIntervalDataItem item = (XYIntervalDataItem) getDataItem(index);
@@ -165,8 +157,6 @@ public class XYIntervalSeries extends ComparableObjectSeries {
      * @param index  the item index.
      *
      * @return The lower bound of the Y-interval.
-     *
-     * @since 1.0.5
      */
     public double getYLowValue(int index) {
         XYIntervalDataItem item = (XYIntervalDataItem) getDataItem(index);
@@ -180,8 +170,6 @@ public class XYIntervalSeries extends ComparableObjectSeries {
      * @param index  the item index.
      *
      * @return The upper bound of the y-interval.
-     *
-     * @since 1.0.5
      */
     public double getYHighValue(int index) {
         XYIntervalDataItem item = (XYIntervalDataItem) getDataItem(index);

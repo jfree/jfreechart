@@ -230,7 +230,6 @@ public class AbstractBlock implements Cloneable, Serializable {
      *
      * @return The frame.
      *
-     * @since 1.0.5
      * @see #setFrame(BlockFrame)
      */
     public BlockFrame getFrame() {
@@ -242,7 +241,6 @@ public class AbstractBlock implements Cloneable, Serializable {
      *
      * @param frame  the frame ({@code null} not permitted).
      *
-     * @since 1.0.5
      * @see #getFrame()
      */
     public void setFrame(BlockFrame frame) {

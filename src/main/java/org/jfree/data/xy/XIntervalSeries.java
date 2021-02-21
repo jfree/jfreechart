@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * --------------------
  * XIntervalSeries.java
  * --------------------
- * (C) Copyright 2006-2016, by Object Refinery Limited.
+ * (C) Copyright 2006-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 20-Oct-2006 : Version 1 (DG);
- * 11-Apr-2008 : Added getXLowValue() and getXHighValue() methods (DG);
- * 09-Jan-2014 : Added add(XIntervalDataItem, boolean) method (DG);
  *
  */
 
@@ -48,8 +42,6 @@ import org.jfree.data.general.SeriesChangeEvent;
 
 /**
  * A list of (x, x-low, x-high, y) data items.
- *
- * @since 1.0.3
  *
  * @see XIntervalSeriesCollection
  */
@@ -100,8 +92,6 @@ public class XIntervalSeries extends ComparableObjectSeries {
      * 
      * @param item the data item ({@code null} not permitted).
      * @param notify  notify listeners?
-     * 
-     * @since 1.0.18
      */
     public void add(XIntervalDataItem item, boolean notify) {
         super.add(item, notify);
@@ -125,8 +115,6 @@ public class XIntervalSeries extends ComparableObjectSeries {
      * @param index  the item index.
      *
      * @return The lower bound of the x-interval.
-     *
-     * @since 1.0.10
      */
     public double getXLowValue(int index) {
         XIntervalDataItem item = (XIntervalDataItem) getDataItem(index);
@@ -139,8 +127,6 @@ public class XIntervalSeries extends ComparableObjectSeries {
      * @param index  the item index.
      *
      * @return The upper bound of the x-interval.
-     *
-     * @since 1.0.10
      */
     public double getXHighValue(int index) {
         XIntervalDataItem item = (XIntervalDataItem) getDataItem(index);

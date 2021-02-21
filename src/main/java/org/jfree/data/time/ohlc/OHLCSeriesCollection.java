@@ -53,8 +53,6 @@ import org.jfree.data.xy.XYDataset;
 /**
  * A collection of {@link OHLCSeries} objects.
  *
- * @since 1.0.4
- *
  * @see OHLCSeries
  */
 public class OHLCSeriesCollection extends AbstractXYDataset
@@ -77,8 +75,6 @@ public class OHLCSeriesCollection extends AbstractXYDataset
      * value when the collection is used as an {@link XYDataset}.
      *
      * @return The anchor position (never {@code null}).
-     *
-     * @since 1.0.11
      */
     public TimePeriodAnchor getXPosition() {
         return this.xPosition;
@@ -90,8 +86,6 @@ public class OHLCSeriesCollection extends AbstractXYDataset
      * {@link DatasetChangeEvent} is sent to all registered listeners.
      *
      * @param anchor  the anchor position ({@code null} not permitted).
-     *
-     * @since 1.0.11
      */
     public void setXPosition(TimePeriodAnchor anchor) {
         Args.nullNotPermitted(anchor, "anchor");
@@ -382,8 +376,6 @@ public class OHLCSeriesCollection extends AbstractXYDataset
      * {@link DatasetChangeEvent} to all registered listeners.
      *
      * @param index  the series index.
-     *
-     * @since 1.0.14
      */
     public void removeSeries(int index) {
         OHLCSeries series = getSeries(index);
@@ -400,8 +392,6 @@ public class OHLCSeriesCollection extends AbstractXYDataset
      *
      * @return {@code true} if the series was removed, and
      *     {@code false} otherwise.
-     *
-     * @since 1.0.14
      */
     public boolean removeSeries(OHLCSeries series) {
         Args.nullNotPermitted(series, "series");
@@ -416,8 +406,6 @@ public class OHLCSeriesCollection extends AbstractXYDataset
     /**
      * Removes all the series from the collection and sends a
      * {@link DatasetChangeEvent} to all registered listeners.
-     *
-     * @since 1.0.14
      */
     public void removeAllSeries() {
 

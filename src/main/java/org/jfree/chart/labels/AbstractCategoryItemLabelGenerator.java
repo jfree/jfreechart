@@ -107,8 +107,6 @@ public abstract class AbstractCategoryItemLabelGenerator
      * @param formatter  the number formatter ({@code null} not permitted).
      * @param percentFormatter  the percent formatter ({@code null} not
      *     permitted).
-     *
-     * @since 1.0.2
      */
     protected AbstractCategoryItemLabelGenerator(String labelFormat,
             NumberFormat formatter, NumberFormat percentFormatter) {
