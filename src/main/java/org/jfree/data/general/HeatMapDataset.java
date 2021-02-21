@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * HeatMapDataset.java
  * -------------------
- * (C) Copyright 2009-2016, by Object Refinery Limited.
+ * (C) Copyright 2009-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -40,8 +40,6 @@ package org.jfree.data.general;
  * A dataset that represents a rectangular grid of (x, y, z) values.  The x
  * and y values appear at regular intervals in the dataset, while the z-values
  * can take any value (including {@code null} for unknown values).
- *
- * @since 1.0.13
  */
 public interface HeatMapDataset {
 

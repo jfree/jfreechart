@@ -58,15 +58,11 @@ public class CategoryItemEntity extends ChartEntity
 
     /**
      * The row key.
-     *
-     * @since 1.0.6
      */
     private Comparable rowKey;
 
     /**
      * The column key.
-     *
-     * @since 1.0.6
      */
     private Comparable columnKey;
 
@@ -79,8 +75,6 @@ public class CategoryItemEntity extends ChartEntity
      * @param dataset  the dataset ({@code null} not permitted).
      * @param rowKey  the row key ({@code null} not permitted).
      * @param columnKey  the column key ({@code null} not permitted).
-     *
-     * @since 1.0.6
      */
     public CategoryItemEntity(Shape area, String toolTipText, String urlText,
             CategoryDataset dataset, Comparable rowKey, Comparable columnKey) {
@@ -121,8 +115,6 @@ public class CategoryItemEntity extends ChartEntity
      *
      * @return The row key (never {@code null}).
      *
-     * @since 1.0.6
-     *
      * @see #setRowKey(Comparable)
      */
     public Comparable getRowKey() {
@@ -133,8 +125,6 @@ public class CategoryItemEntity extends ChartEntity
      * Sets the row key.
      *
      * @param rowKey  the row key ({@code null} not permitted).
-     *
-     * @since 1.0.6
      *
      * @see #getRowKey()
      */
@@ -147,8 +137,6 @@ public class CategoryItemEntity extends ChartEntity
      *
      * @return The column key (never {@code null}).
      *
-     * @since 1.0.6
-     *
      * @see #setColumnKey(Comparable)
      */
     public Comparable getColumnKey() {
@@ -159,8 +147,6 @@ public class CategoryItemEntity extends ChartEntity
      * Sets the column key.
      *
      * @param columnKey  the column key ({@code null} not permitted).
-     *
-     * @since 1.0.6
      *
      * @see #getColumnKey()
      */

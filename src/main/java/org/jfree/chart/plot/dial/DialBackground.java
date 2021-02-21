@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * -------------------
  * DialBackground.java
  * -------------------
- * (C) Copyright 2006-2017, by Object Refinery Limited.
+ * (C) Copyright 2006-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 03-Nov-2006 : Version 1 (DG);
- * 16-Oct-2007 : The equals() method needs to call super.equals() (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -62,8 +56,6 @@ import org.jfree.chart.util.SerialUtils;
 
 /**
  * A regular dial layer that can be used to draw the background for a dial.
- *
- * @since 1.0.7
  */
 public class DialBackground extends AbstractDialLayer implements DialLayer,
         Cloneable, PublicCloneable, Serializable {

@@ -203,8 +203,6 @@ public abstract class Series implements Cloneable, Serializable {
      * {@code false} otherwise.
      *
      * @return A boolean.
-     *
-     * @since 1.0.7
      */
     public boolean isEmpty() {
         return (getItemCount() == 0);
@@ -368,8 +366,6 @@ public abstract class Series implements Cloneable, Serializable {
      * Adds a vetoable property change listener to the series.
      *
      * @param listener  the listener.
-     * 
-     * @since 1.0.14
      */
     public void addVetoableChangeListener(VetoableChangeListener listener) {
         this.vetoableChangeSupport.addVetoableChangeListener(listener);
@@ -379,8 +375,6 @@ public abstract class Series implements Cloneable, Serializable {
      * Removes a vetoable property change listener from the series.
      *
      * @param listener  the listener.
-     * 
-     * @since 1.0.14 
      */
     public void removeVetoableChangeListener(VetoableChangeListener listener) {
         this.vetoableChangeSupport.removeVetoableChangeListener(listener);

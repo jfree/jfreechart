@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------------
  * StandardXYItemLabelGenerator.java
  * ---------------------------------
- * (C) Copyright 2001-2020, by Object Refinery Limited.
+ * (C) Copyright 2001-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -70,8 +70,6 @@ public class StandardXYItemLabelGenerator extends AbstractXYItemLabelGenerator
      *
      * @param formatString  the item label format string ({@code null} not
      *                      permitted).
-     *
-     * @since 1.0.14
      */
     public StandardXYItemLabelGenerator(String formatString) {
         this(formatString, NumberFormat.getNumberInstance(),
@@ -121,8 +119,6 @@ public class StandardXYItemLabelGenerator extends AbstractXYItemLabelGenerator
      *                 permitted).
      * @param yFormat  the format object for the y values ({@code null}
      *                 not permitted).
-     *
-     * @since 1.0.4
      */
     public StandardXYItemLabelGenerator(String formatString,
             NumberFormat xFormat, DateFormat yFormat) {

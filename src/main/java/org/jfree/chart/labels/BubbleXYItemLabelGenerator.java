@@ -52,8 +52,6 @@ import org.jfree.data.xy.XYZDataset;
 /**
  * An item label generator defined for use with the {@link XYBubbleRenderer}
  * class, or any other class that uses an {@link XYZDataset}.
- *
- * @since 1.0.1
  */
 public class BubbleXYItemLabelGenerator extends AbstractXYItemLabelGenerator
         implements XYItemLabelGenerator, PublicCloneable, Serializable {

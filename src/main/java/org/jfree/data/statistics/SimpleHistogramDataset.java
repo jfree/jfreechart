@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * SimpleHistogramDataset.java
  * ---------------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Sergei Ivanov;
@@ -244,8 +244,6 @@ public class SimpleHistogramDataset extends AbstractIntervalXYDataset
      * Removes all current observation data and sends a
      * {@link DatasetChangeEvent} to all registered listeners.
      *
-     * @since 1.0.6
-     *
      * @see #addObservations(double[])
      * @see #removeAllBins()
      */
@@ -261,8 +259,6 @@ public class SimpleHistogramDataset extends AbstractIntervalXYDataset
     /**
      * Removes all bins and sends a {@link DatasetChangeEvent} to all
      * registered listeners.
-     *
-     * @since 1.0.6
      *
      * @see #addBin(SimpleHistogramBin)
      */

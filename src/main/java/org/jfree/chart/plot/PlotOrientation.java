@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * PlotOrientation.java
  * --------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited.
+ * (C) Copyright 2003-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -74,8 +74,6 @@ public final class PlotOrientation implements Serializable {
      * and {@code false} otherwise.  
      * 
      * @return A boolean.
-     * 
-     * @since 1.0.18
      */
     public boolean isHorizontal() {
         return this.equals(PlotOrientation.HORIZONTAL);
@@ -86,8 +84,6 @@ public final class PlotOrientation implements Serializable {
      * and {@code false} otherwise.
      * 
      * @return A boolean.
-     * 
-     * @since 1.0.18
      */
     public boolean isVertical() {
         return this.equals(PlotOrientation.VERTICAL);

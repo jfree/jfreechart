@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * --------------------------------
  * SlidingGanttCategoryDataset.java
  * --------------------------------
- * (C) Copyright 2008, 2009, by Object Refinery Limited.
+ * (C) Copyright 2008-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 09-May-2008 : Version 1 (DG);
  *
  */
 
@@ -53,8 +49,6 @@ import org.jfree.data.general.DatasetChangeEvent;
  * categories in an underlying dataset.  The index of the first "visible"
  * category can be modified, which provides a means of "sliding" through
  * the categories in the underlying dataset.
- *
- * @since 1.0.10
  */
 public class SlidingGanttCategoryDataset extends AbstractDataset
         implements GanttCategoryDataset {

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * ------------
  * DialCap.java
  * ------------
- * (C) Copyright 2006-2017, by Object Refinery Limited.
+ * (C) Copyright 2006-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 03-Nov-2006 : Version 1 (DG);
- * 17-Oct-2007 : Updated equals() method (DG);
  *
  */
 
@@ -62,8 +57,6 @@ import org.jfree.chart.util.SerialUtils;
 /**
  * A regular dial layer that can be used to draw a cap over the center of
  * the dial (the base of the dial pointer(s)).
- *
- * @since 1.0.7
  */
 public class DialCap extends AbstractDialLayer implements DialLayer, Cloneable,
         PublicCloneable, Serializable {

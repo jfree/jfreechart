@@ -62,7 +62,8 @@ History
 - throw exception in `DefaultPieDataset` for invalid index ([#212](https://github.com/jfree/jfreechart/issues/212));
 - fix `isJFreeSVGAvailable()` method (bug [#207](https://github.com/jfree/jfreechart/issues/207));
 - replaced some usages of `ObjectUtils` with the JDK `Objects` class;
-- remove unused `URLUtilities` class.
+- remove unused `URLUtilities` class;
+- removed @since 1.0.x Javadoc tags since these do not provide useful information anymore.
 
 ##### Version 1.5.2 (31 December 2020)
 - observe series visibility flag in `ClusteredXYBarRenderer` ([#89](https://github.com/jfree/jfreechart/issues/89));

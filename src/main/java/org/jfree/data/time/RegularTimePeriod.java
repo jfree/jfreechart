@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------
  * RegularTimePeriod.java
  * ----------------------
- * (C) Copyright 2001-2020, by Object Refinery Limited.
+ * (C) Copyright 2001-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -246,8 +246,6 @@ public abstract class RegularTimePeriod implements TimePeriod, Comparable,
      * relative to the supplied calendar (which incorporates a time zone).
      *
      * @param calendar  the calendar ({@code null} not permitted).
-     *
-     * @since 1.0.3
      */
     public abstract void peg(Calendar calendar);
 
@@ -361,8 +359,6 @@ public abstract class RegularTimePeriod implements TimePeriod, Comparable,
      * @param calendar  the calendar ({@code null} not permitted).
      * 
      * @return Milliseconds since the epoch.
-     * 
-     * @since 1.0.18
      */
     public long getMillisecond(TimePeriodAnchor anchor, Calendar calendar) {
         if (anchor.equals(TimePeriodAnchor.START)) {

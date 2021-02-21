@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,22 +27,10 @@
  * ---------------------------
  * DefaultDrawingSupplier.java
  * ---------------------------
- * (C) Copyright 2003-2017, by Object Refinery Limited.
+ * (C) Copyright 2003-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Jeremy Bowman;
- *
- * Changes
- * -------
- * 16-Jan-2003 : Version 1 (DG);
- * 17-Jan-2003 : Added stroke method, renamed DefaultPaintSupplier
- *               --> DefaultDrawingSupplier (DG)
- * 27-Jan-2003 : Incorporated code from SeriesShapeFactory, originally
- *               contributed by Jeremy Bowman (DG);
- * 25-Mar-2003 : Implemented Serializable (DG);
- * 20-Aug-2003 : Implemented Cloneable and PublicCloneable (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 13-Jun-2007 : Added fillPaintSequence (DG);
  *
  */
 
@@ -187,8 +175,6 @@ public class DefaultDrawingSupplier implements DrawingSupplier, Cloneable,
      * @param strokeSequence  the stroke sequence.
      * @param outlineStrokeSequence  the outline stroke sequence.
      * @param shapeSequence  the shape sequence.
-     *
-     * @since 1.0.6
      */
     public DefaultDrawingSupplier(Paint[] paintSequence,
             Paint[] fillPaintSequence, Paint[] outlinePaintSequence,
@@ -233,8 +219,6 @@ public class DefaultDrawingSupplier implements DrawingSupplier, Cloneable,
      * Returns the next fill paint in the sequence.
      *
      * @return The paint.
-     *
-     * @since 1.0.6
      */
     @Override
     public Paint getNextFillPaint() {

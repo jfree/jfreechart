@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------
  * HeatMapUtils.java
  * -----------------
- * (C) Copyright 2009-2017, by Object Refinery Limited.
+ * (C) Copyright 2009-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -47,8 +47,6 @@ import org.jfree.data.xy.XYSeriesCollection;
 
 /**
  * A utility class for the {@link HeatMapDataset}.
- *
- * @since 1.0.13
  */
 public abstract class HeatMapUtils {
 

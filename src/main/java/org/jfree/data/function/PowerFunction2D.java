@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * PowerFunction2D.java
  * --------------------
- * (C) Copyright 2002-2009, by Object Refinery Limited.
+ * (C) Copyright 2002-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -65,8 +65,6 @@ public class PowerFunction2D implements Function2D, Serializable {
      * Returns the 'a' coefficient that was specified in the constructor.
      *
      * @return The 'a' coefficient.
-     *
-     * @since 1.0.14
      */
     public double getA() {
         return this.a;
@@ -76,8 +74,6 @@ public class PowerFunction2D implements Function2D, Serializable {
      * Returns the 'b' coefficient that was specified in the constructor.
      *
      * @return The 'b' coefficient.
-     *
-     * @since 1.0.14
      */
     public double getB() {
         return this.b;

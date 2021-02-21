@@ -130,8 +130,6 @@ public class AbstractXYItemLabelGenerator implements Cloneable, Serializable {
      *                 permitted).
      * @param yFormat  the format object for the y values ({@code null}
      *                 not permitted).
-     *
-     * @since 1.0.4
      */
     protected AbstractXYItemLabelGenerator(String formatString,
             NumberFormat xFormat, DateFormat yFormat) {
@@ -225,8 +223,6 @@ public class AbstractXYItemLabelGenerator implements Cloneable, Serializable {
      * Returns the string representing a null value.
      *
      * @return The string representing a null value.
-     *
-     * @since 1.0.10
      */
     public String getNullYString() {
         return this.nullYString;

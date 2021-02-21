@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------
  * Second.java
  * -----------
- * (C) Copyright 2001-2020, by Object Refinery Limited.
+ * (C) Copyright 2001-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -140,8 +140,6 @@ public class Second extends RegularTimePeriod implements Serializable {
      * @param time  the time ({@code null} not permitted).
      * @param zone  the time zone ({@code null} not permitted).
      * @param locale  the locale ({@code null} not permitted).
-     *
-     * @since 1.0.13
      */
     public Second(Date time, TimeZone zone, Locale locale) {
         this(time, Calendar.getInstance(zone, locale));
@@ -217,8 +215,6 @@ public class Second extends RegularTimePeriod implements Serializable {
      * relative to the supplied calendar (which incorporates a time zone).
      *
      * @param calendar  the calendar ({@code null} not permitted).
-     *
-     * @since 1.0.3
      */
     @Override
     public void peg(Calendar calendar) {

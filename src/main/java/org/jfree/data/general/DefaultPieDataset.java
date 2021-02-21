@@ -200,8 +200,6 @@ public class DefaultPieDataset<K extends Comparable<K>> extends AbstractDataset
      * @param position  the position (in the range 0 to getItemCount()).
      * @param key  the key ({@code null} not permitted).
      * @param value  the value ({@code null} permitted).
-     *
-     * @since 1.0.6
      */
     public void insertValue(int position, K key, double value) {
         insertValue(position, key, Double.valueOf(value));
@@ -217,8 +215,6 @@ public class DefaultPieDataset<K extends Comparable<K>> extends AbstractDataset
      * @param position  the position (in the range 0 to getItemCount()).
      * @param key  the key ({@code null} not permitted).
      * @param value  the value ({@code null} permitted).
-     *
-     * @since 1.0.6
      */
     public void insertValue(int position, K key, Number value) {
         this.data.insertValue(position, key, value);
@@ -242,8 +238,6 @@ public class DefaultPieDataset<K extends Comparable<K>> extends AbstractDataset
     /**
      * Clears all data from this dataset and sends a {@link DatasetChangeEvent}
      * to all registered listeners (unless the dataset was already empty).
-     *
-     * @since 1.0.2
      */
     public void clear() {
         if (getItemCount() > 0) {
@@ -257,8 +251,6 @@ public class DefaultPieDataset<K extends Comparable<K>> extends AbstractDataset
      * to all registered listeners.
      *
      * @param order  the sort order ({@code null} not permitted).
-     *
-     * @since 1.0.3
      */
     public void sortByKeys(SortOrder order) {
         this.data.sortByKeys(order);
@@ -270,8 +262,6 @@ public class DefaultPieDataset<K extends Comparable<K>> extends AbstractDataset
      * to all registered listeners.
      *
      * @param order  the sort order ({@code null} not permitted).
-     *
-     * @since 1.0.3
      */
     public void sortByValues(SortOrder order) {
         this.data.sortByValues(order);

@@ -82,8 +82,6 @@ public class TaskSeriesCollection extends AbstractSeriesDataset
      * @param key  the series key ({@code null} not permitted).
      *
      * @return The series.
-     *
-     * @since 1.0.1
      */
     public TaskSeries getSeries(Comparable key) {
         if (key == null) {
@@ -103,8 +101,6 @@ public class TaskSeriesCollection extends AbstractSeriesDataset
      * @param series  the series index (zero-based).
      *
      * @return The series.
-     *
-     * @since 1.0.1
      */
     public TaskSeries getSeries(int series) {
         if ((series < 0) || (series >= getSeriesCount())) {

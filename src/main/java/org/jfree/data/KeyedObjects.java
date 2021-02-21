@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------
  * KeyedObjects.java
  * -----------------
- * (C) Copyright 2003-2020, by Object Refinery Limited.
+ * (C) Copyright 2003-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -208,8 +208,6 @@ public class KeyedObjects implements Cloneable, PublicCloneable, Serializable {
      *                  {@code getItemCount()}).
      * @param key  the key ({@code null} not permitted).
      * @param value  the value ({@code null} permitted).
-     *
-     * @since 1.0.7
      */
     public void insertValue(int position, Comparable key, Object value) {
         if (position < 0 || position > this.data.size()) {
@@ -261,8 +259,6 @@ public class KeyedObjects implements Cloneable, PublicCloneable, Serializable {
 
     /**
      * Clears all values from the collection.
-     *
-     * @since 1.0.7
      */
     public void clear() {
         this.data.clear();

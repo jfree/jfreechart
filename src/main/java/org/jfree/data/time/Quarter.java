@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------
  * Quarter.java
  * ------------
- * (C) Copyright 2001-2020, by Object Refinery Limited.
+ * (C) Copyright 2001-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -147,8 +147,6 @@ public class Quarter extends RegularTimePeriod implements Serializable {
      * @param time  the current time.
      * @param zone  the time zone.
      * @param locale  the locale.
-     *
-     * @since 1.0.12
      */
     public Quarter(Date time, TimeZone zone, Locale locale) {
         Calendar calendar = Calendar.getInstance(zone, locale);
@@ -197,8 +195,6 @@ public class Quarter extends RegularTimePeriod implements Serializable {
      * Returns the year.
      *
      * @return The year.
-     *
-     * @since 1.0.3
      */
     public int getYearValue() {
         return this.year;
@@ -239,8 +235,6 @@ public class Quarter extends RegularTimePeriod implements Serializable {
      * relative to the supplied calendar (which incorporates a time zone).
      *
      * @param calendar  the calendar ({@code null} not permitted).
-     *
-     * @since 1.0.3
      */
     @Override
     public void peg(Calendar calendar) {

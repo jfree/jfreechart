@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,17 +27,10 @@
  * --------------------
  * DrawingSupplier.java
  * --------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited.
+ * (C) Copyright 2003-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 16-Jan-2003 : Version 1 (DG);
- * 17-Jan-2003 : Renamed PaintSupplier --> DrawingSupplier (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 13-Jun-2007 : Added getNextOutlinePaint() method.
  *
  */
 
@@ -75,8 +68,6 @@ public interface DrawingSupplier {
      * Returns the next fill paint in a sequence maintained by the supplier.
      *
      * @return The paint.
-     *
-     * @since 1.0.6
      */
     public Paint getNextFillPaint();
 

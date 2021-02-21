@@ -55,8 +55,6 @@ public class DateTickUnit extends TickUnit implements Serializable {
 
     /**
      * The units.
-     *
-     * @since 1.0.13
      */
     private DateTickUnitType unitType;
 
@@ -65,8 +63,6 @@ public class DateTickUnit extends TickUnit implements Serializable {
 
     /**
      * The roll unit type.
-     *
-     * @since 1.0.13
      */
     private DateTickUnitType rollUnitType;
 
@@ -81,8 +77,6 @@ public class DateTickUnit extends TickUnit implements Serializable {
      *
      * @param unitType  the unit type ({@code null} not permitted).
      * @param multiple  the multiple (of the unit type, must be &gt; 0).
-     *
-     * @since 1.0.13
      */
     public DateTickUnit(DateTickUnitType unitType, int multiple) {
         this(unitType, multiple, DateFormat.getDateInstance(DateFormat.SHORT));
@@ -94,8 +88,6 @@ public class DateTickUnit extends TickUnit implements Serializable {
      * @param unitType  the unit type ({@code null} not permitted).
      * @param multiple  the multiple (of the unit type, must be &gt; 0).
      * @param formatter  the date formatter ({@code null} not permitted).
-     *
-     * @since 1.0.13
      */
     public DateTickUnit(DateTickUnitType unitType, int multiple,
             DateFormat formatter) {
@@ -110,8 +102,6 @@ public class DateTickUnit extends TickUnit implements Serializable {
      * @param rollUnitType  the roll unit.
      * @param rollMultiple  the roll multiple.
      * @param formatter  the date formatter ({@code null} not permitted).
-     *
-     * @since 1.0.13
      */
     public DateTickUnit(DateTickUnitType unitType, int multiple,
             DateTickUnitType rollUnitType, int rollMultiple,
@@ -135,8 +125,6 @@ public class DateTickUnit extends TickUnit implements Serializable {
      * Returns the unit type.
      *
      * @return The unit type (never {@code null}).
-     *
-     * @since 1.0.13
      */
     public DateTickUnitType getUnitType() {
         return this.unitType;
@@ -155,8 +143,6 @@ public class DateTickUnit extends TickUnit implements Serializable {
      * Returns the roll unit type.
      *
      * @return The roll unit type (never {@code null}).
-     *
-     * @since 1.0.13
      */
     public DateTickUnitType getRollUnitType() {
         return this.rollUnitType;
@@ -166,8 +152,6 @@ public class DateTickUnit extends TickUnit implements Serializable {
      * Returns the roll unit multiple.
      *
      * @return The roll unit multiple.
-     *
-     * @since 1.0.13
      */
     public int getRollMultiple() {
         return this.rollCount;
@@ -203,8 +187,6 @@ public class DateTickUnit extends TickUnit implements Serializable {
      * @param zone  the time zone for the date calculation.
      *
      * @return A new date one unit after the base date.
-     *
-     * @since 1.0.6
      */
     public Date addToDate(Date base, TimeZone zone) {
         // as far as I know, the Locale for the calendar only affects week
@@ -239,8 +221,6 @@ public class DateTickUnit extends TickUnit implements Serializable {
      * @param zone  the time zone.
      *
      * @return The rolled date.
-     *
-     * @since 1.0.6
      */
     public Date rollDate(Date base, TimeZone zone) {
         // as far as I know, the Locale for the calendar only affects week
@@ -274,8 +254,6 @@ public class DateTickUnit extends TickUnit implements Serializable {
      * @param count  the unit count.
      *
      * @return The number of milliseconds.
-     *
-     * @since 1.0.13
      */
     private static long getMillisecondCount(DateTickUnitType unit, int count) {
 

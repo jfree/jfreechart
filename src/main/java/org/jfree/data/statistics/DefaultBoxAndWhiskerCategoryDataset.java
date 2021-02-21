@@ -178,8 +178,6 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
      * @param columnKey  the column key ({@code null} not permitted).
      *
      * @see #add(BoxAndWhiskerItem, Comparable, Comparable)
-     *
-     * @since 1.0.7
      */
     public void remove(Comparable rowKey, Comparable columnKey) {
         // defer null argument checks
@@ -205,8 +203,6 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
      * @param rowIndex  the row index.
      *
      * @see #removeColumn(int)
-     *
-     * @since 1.0.7
      */
     public void removeRow(int rowIndex) {
         this.data.removeRow(rowIndex);
@@ -221,8 +217,6 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
      * @param rowKey  the row key.
      *
      * @see #removeColumn(Comparable)
-     *
-     * @since 1.0.7
      */
     public void removeRow(Comparable rowKey) {
         this.data.removeRow(rowKey);
@@ -237,8 +231,6 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
      * @param columnIndex  the column index.
      *
      * @see #removeRow(int)
-     *
-     * @since 1.0.7
      */
     public void removeColumn(int columnIndex) {
         this.data.removeColumn(columnIndex);
@@ -253,8 +245,6 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
      * @param columnKey  the column key.
      *
      * @see #removeRow(Comparable)
-     *
-     * @since 1.0.7
      */
     public void removeColumn(Comparable columnKey) {
         this.data.removeColumn(columnKey);
@@ -265,8 +255,6 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
     /**
      * Clears all data from the dataset and sends a {@link DatasetChangeEvent}
      * to all registered listeners.
-     *
-     * @since 1.0.7
      */
     public void clear() {
         this.data.clear();

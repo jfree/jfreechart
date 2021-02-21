@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,19 +27,10 @@
  * ------------------
  * KeyedObject2D.java
  * ------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited.
+ * (C) Copyright 2003-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 05-Feb-2003 : Version 1 (DG);
- * 01-Mar-2004 : Added equals() and clone() methods and implemented
- *               Serializable (DG);
- * 03-Oct-2007 : Updated getObject() to handle modified behaviour in
- *               KeyedObjects class, added clear() method (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -415,8 +406,6 @@ public class KeyedObjects2D implements Cloneable, Serializable {
 
     /**
      * Clears all the data and associated keys.
-     *
-     * @since 1.0.7
      */
     public void clear() {
         this.rowKeys.clear();

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------
  * DatasetUtils.java
  * -----------------
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Andrzej Porebski (bug fix);
@@ -433,8 +433,6 @@ public final class DatasetUtils {
      *                   ({@code null} not permitted).
      *
      * @return A series.
-     *
-     * @since 1.0.13
      */
     public static XYSeries sampleFunction2DToSeries(Function2D f,
             double start, double end, int samples, Comparable seriesKey) {
@@ -591,10 +589,7 @@ public final class DatasetUtils {
      *     not permitted).
      * @param includeInterval  include the x-interval (if any)?
      *
-     * @return The bounds (or {@code null} if the dataset contains no
-     *     values.
-     *
-     * @since 1.0.13
+     * @return The bounds (or {@code null} if the dataset contains no values.
      */
     public static Range findDomainBounds(XYDataset dataset,
             List visibleSeriesKeys, boolean includeInterval) {
@@ -733,8 +728,6 @@ public final class DatasetUtils {
      *     y-interval).
      *
      * @return The data bounds.
-     *
-     * @since 1.0.13
      */
     public static Range findRangeBounds(CategoryDataset dataset,
             List visibleSeriesKeys, boolean includeInterval) {
@@ -801,8 +794,6 @@ public final class DatasetUtils {
      *     y-interval).
      *
      * @return The data bounds.
-     * 
-     * @since 1.0.13
      */
     public static Range findRangeBounds(XYDataset dataset,
             List visibleSeriesKeys, Range xRange, boolean includeInterval) {
@@ -827,8 +818,6 @@ public final class DatasetUtils {
      * @param dataset  the dataset ({@code null} not permitted).
      *
      * @return The range (possibly {@code null}).
-     *
-     * @since 1.0.10
      */
     public static Range iterateRangeBounds(CategoryDataset dataset) {
         return iterateRangeBounds(dataset, true);
@@ -843,8 +832,6 @@ public final class DatasetUtils {
      *                         y-interval is taken into account.
      *
      * @return The range (possibly {@code null}).
-     *
-     * @since 1.0.10
      */
     public static Range iterateRangeBounds(CategoryDataset dataset,
             boolean includeInterval) {
@@ -914,8 +901,6 @@ public final class DatasetUtils {
      * @param visibleSeriesKeys  the visible series keys.
      *
      * @return The range (possibly {@code null}).
-     *
-     * @since 1.0.13
      */
     public static Range iterateToFindRangeBounds(CategoryDataset dataset,
             List visibleSeriesKeys, boolean includeInterval) {
@@ -1065,8 +1050,6 @@ public final class DatasetUtils {
      * @param dataset  the dataset ({@code null} not permitted).
      *
      * @return The range (possibly {@code null}).
-     *
-     * @since 1.0.10
      */
     public static Range iterateRangeBounds(XYDataset dataset) {
         return iterateRangeBounds(dataset, true);
@@ -1082,8 +1065,6 @@ public final class DatasetUtils {
      *          y-value is used to determine the overall range.
      *
      * @return The range (possibly {@code null}).
-     *
-     * @since 1.0.10
      */
     public static Range iterateRangeBounds(XYDataset dataset,
             boolean includeInterval) {
@@ -1267,8 +1248,6 @@ public final class DatasetUtils {
      *     dataset is an instance of IntervalXYDataset).
      * 
      * @return The x-range (possibly {@code null}).
-     * 
-     * @since 1.0.13
      */
     public static Range iterateToFindDomainBounds(XYDataset dataset,
             List visibleSeriesKeys, boolean includeInterval) {
@@ -1340,8 +1319,6 @@ public final class DatasetUtils {
      *     dataset is an instance of IntervalXYDataset).
      *
      * @return The y-range (possibly {@code null}).
-     *
-     * @since 1.0.13
      */
     public static Range iterateToFindRangeBounds(XYDataset dataset,
             List visibleSeriesKeys, Range xRange, boolean includeInterval) {
@@ -2088,8 +2065,6 @@ public final class DatasetUtils {
      * @param item  the item index.
      *
      * @return The total.
-     *
-     * @since 1.0.5
      */
     public static double calculateStackTotal(TableXYDataset dataset, int item) {
         double total = 0.0;
@@ -2153,8 +2128,6 @@ public final class DatasetUtils {
      * @param x  the x-value.
      * 
      * @return The y value.
-     * 
-     * @since 1.0.16
      */
     public static double findYValue(XYDataset dataset, int series, double x) {
         // delegate null check on dataset
@@ -2188,8 +2161,6 @@ public final class DatasetUtils {
      * @param x  the x-value.
      *
      * @return The indices of the two items that span the x-value.
-     *
-     * @since 1.0.16
      * 
      * @see #findYValue(org.jfree.data.xy.XYDataset, int, double) 
      */

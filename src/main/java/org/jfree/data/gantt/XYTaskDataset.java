@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * XYTaskDataset.java
  * ------------------
- * (C) Copyright 2008-2020, by Object Refinery Limited.
+ * (C) Copyright 2008-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -54,8 +54,6 @@ import org.jfree.data.xy.IntervalXYDataset;
  * {@link SymbolAxis}).  This is a very specialised dataset implementation
  * ---before using it, you should take some time to understand the use-cases
  * that it is designed for.
- *
- * @since 1.0.11
  */
 public class XYTaskDataset extends AbstractXYDataset
         implements IntervalXYDataset, DatasetChangeListener {

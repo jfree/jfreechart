@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * DefaultKeyedValues.java
  * -----------------------
- * (C) Copyright 2002-2020, by Object Refinery Limited.
+ * (C) Copyright 2002-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Thomas Morgner;
@@ -231,8 +231,6 @@ public class DefaultKeyedValues<K extends Comparable<K>>
      * @param position  the position (in the range 0 to getItemCount()).
      * @param key  the key ({@code null} not permitted).
      * @param value  the value.
-     *
-     * @since 1.0.6
      */
     public void insertValue(int position, K key, double value) {
         insertValue(position, key, Double.valueOf(value));
@@ -246,8 +244,6 @@ public class DefaultKeyedValues<K extends Comparable<K>>
      * @param position  the position (in the range 0 to getItemCount()).
      * @param key  the key ({@code null} not permitted).
      * @param value  the value ({@code null} permitted).
-     *
-     * @since 1.0.6
      */
     public void insertValue(int position, K key, Number value) {
         if (position < 0 || position > getItemCount()) {
@@ -318,8 +314,6 @@ public class DefaultKeyedValues<K extends Comparable<K>>
 
     /**
      * Clears all values from the collection.
-     *
-     * @since 1.0.2
      */
     public void clear() {
         this.keys.clear();

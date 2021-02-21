@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * SimpleTimePeriod.java
  * ---------------------
- * (C) Copyright 2002-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2002-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -95,8 +95,6 @@ public class SimpleTimePeriod implements TimePeriod, Comparable, Serializable {
      * Returns the start date/time in milliseconds.
      *
      * @return The start.
-     *
-     * @since 1.0.10.
      */
     public long getStartMillis() {
         return this.start;
@@ -116,8 +114,6 @@ public class SimpleTimePeriod implements TimePeriod, Comparable, Serializable {
      * Returns the end date/time in milliseconds.
      *
      * @return The end.
-     *
-     * @since 1.0.10.
      */
     public long getEndMillis() {
         return this.end;

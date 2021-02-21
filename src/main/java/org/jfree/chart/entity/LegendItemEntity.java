@@ -53,15 +53,11 @@ public class LegendItemEntity extends ChartEntity
 
     /**
      * The dataset.
-     *
-     * @since 1.0.6
      */
     private Dataset dataset;
 
     /**
      * The series key.
-     *
-     * @since 1.0.6
      */
     private Comparable seriesKey;
 
@@ -83,8 +79,6 @@ public class LegendItemEntity extends ChartEntity
      *
      * @return The dataset.
      *
-     * @since 1.0.6
-     *
      * @see #setDataset(Dataset)
      */
     public Dataset getDataset() {
@@ -95,8 +89,6 @@ public class LegendItemEntity extends ChartEntity
      * Sets a reference to the dataset that this legend item is derived from.
      *
      * @param dataset  the dataset.
-     *
-     * @since 1.0.6
      */
     public void setDataset(Dataset dataset) {
         this.dataset = dataset;
@@ -106,8 +98,6 @@ public class LegendItemEntity extends ChartEntity
      * Returns the series key that identifies the legend item.
      *
      * @return The series key.
-     *
-     * @since 1.0.6
      *
      * @see #setSeriesKey(Comparable)
      */
@@ -119,8 +109,6 @@ public class LegendItemEntity extends ChartEntity
      * Sets the key for the series.
      *
      * @param key  the key.
-     *
-     * @since 1.0.6
      *
      * @see #getSeriesKey()
      */

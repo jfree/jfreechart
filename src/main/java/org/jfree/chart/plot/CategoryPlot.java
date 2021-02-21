@@ -148,23 +148,17 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
 
     /**
      * The default crosshair visibility.
-     *
-     * @since 1.0.5
      */
     public static final boolean DEFAULT_CROSSHAIR_VISIBLE = false;
 
     /**
      * The default crosshair stroke.
-     *
-     * @since 1.0.5
      */
     public static final Stroke DEFAULT_CROSSHAIR_STROKE
             = DEFAULT_GRIDLINE_STROKE;
 
     /**
      * The default crosshair paint.
-     *
-     * @since 1.0.5
      */
     public static final Paint DEFAULT_CROSSHAIR_PAINT = Color.BLUE;
 
@@ -251,22 +245,16 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     /**
      * A flag that controls whether or not the zero baseline against the range
      * axis is visible.
-     *
-     * @since 1.0.13
      */
     private boolean rangeZeroBaselineVisible;
 
     /**
      * The stroke used for the zero baseline against the range axis.
-     *
-     * @since 1.0.13
      */
     private transient Stroke rangeZeroBaselineStroke;
 
     /**
      * The paint used for the zero baseline against the range axis.
-     *
-     * @since 1.0.13
      */
     private transient Paint rangeZeroBaselinePaint;
 
@@ -285,22 +273,16 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     /**
      * A flag that controls whether or not gridlines are shown for the minor
      * tick values on the primary range axis.
-     *
-     * @since 1.0.13
      */
     private boolean rangeMinorGridlinesVisible;
 
     /**
      * The stroke used to draw the range minor grid-lines.
-     *
-     * @since 1.0.13
      */
     private transient Stroke rangeMinorGridlineStroke;
 
     /**
      * The paint used to draw the range minor grid-lines.
-     *
-     * @since 1.0.13
      */
     private transient Paint rangeMinorGridlinePaint;
 
@@ -310,43 +292,31 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     /**
      * The index for the dataset that the crosshairs are linked to (this
      * determines which axes the crosshairs are plotted against).
-     *
-     * @since 1.0.11
      */
     private int crosshairDatasetIndex;
 
     /**
      * A flag that controls the visibility of the domain crosshair.
-     *
-     * @since 1.0.11
      */
     private boolean domainCrosshairVisible;
 
     /**
      * The row key for the crosshair point.
-     *
-     * @since 1.0.11
      */
     private Comparable domainCrosshairRowKey;
 
     /**
      * The column key for the crosshair point.
-     *
-     * @since 1.0.11
      */
     private Comparable domainCrosshairColumnKey;
 
     /**
      * The stroke used to draw the domain crosshair if it is visible.
-     *
-     * @since 1.0.11
      */
     private transient Stroke domainCrosshairStroke;
 
     /**
      * The paint used to draw the domain crosshair if it is visible.
-     *
-     * @since 1.0.11
      */
     private transient Paint domainCrosshairPaint;
 
@@ -408,15 +378,11 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     /**
      * A flag that controls whether or not panning is enabled for the
      * range axis/axes.
-     *
-     * @since 1.0.13
      */
     private boolean rangePannable;
 
     /**
      * The shadow generator for the plot ({@code null} permitted).
-     *
-     * @since 1.0.14
      */
     private ShadowGenerator shadowGenerator;
 
@@ -698,8 +664,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @see #getDomainAxis(int)
      * @see #getRangeAxisIndex(ValueAxis)
-     *
-     * @since 1.0.3
      */
     public int getDomainAxisIndex(CategoryAxis axis) {
         Args.nullNotPermitted(axis, "axis");
@@ -787,8 +751,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @param index  the axis index.
      * @param location  the location.
      * @param notify  notify listeners?
-     *
-     * @since 1.0.5
      *
      * @see #getDomainAxisLocation(int)
      * @see #setRangeAxisLocation(int, AxisLocation, boolean)
@@ -969,8 +931,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @see #getRangeAxis(int)
      * @see #getDomainAxisIndex(CategoryAxis)
-     *
-     * @since 1.0.7
      */
     public int getRangeAxisIndex(ValueAxis axis) {
         Args.nullNotPermitted(axis, "axis");
@@ -1206,8 +1166,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * Returns the number of datasets.
      *
      * @return The number of datasets.
-     *
-     * @since 1.0.2
      */
     public int getDatasetCount() {
         return this.datasets.size();
@@ -1220,8 +1178,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @param dataset  the dataset ({@code null} not permitted).
      *
      * @return The index.
-     *
-     * @since 1.0.11
      */
     public int indexOf(CategoryDataset dataset) {
         for (Entry<Integer, CategoryDataset> entry: this.datasets.entrySet()) {
@@ -1253,8 +1209,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @param index  the dataset index (zero-based).
      * @param axisIndices  the axis indices ({@code null} permitted).
-     *
-     * @since 1.0.12
      */
     public void mapDatasetToDomainAxes(int index, List axisIndices) {
         Args.requireNonNegative(index, "index");
@@ -1341,8 +1295,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @param index  the dataset index (zero-based).
      * @param axisIndices  the axis indices ({@code null} permitted).
-     *
-     * @since 1.0.12
      */
     public void mapDatasetToRangeAxes(int index, List axisIndices) {
         Args.requireNonNegative(index, "index");
@@ -1380,8 +1332,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * Returns the number of renderer slots for this plot.
      *
      * @return The number of renderer slots.
-     *
-     * @since 1.0.11
      */
     public int getRendererCount() {
         return this.renderers.size();
@@ -1741,8 +1691,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @return A boolean.
      *
      * @see #setRangeZeroBaselineVisible(boolean)
-     *
-     * @since 1.0.13
      */
     public boolean isRangeZeroBaselineVisible() {
         return this.rangeZeroBaselineVisible;
@@ -1756,8 +1704,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @param visible  the flag.
      *
      * @see #isRangeZeroBaselineVisible()
-     *
-     * @since 1.0.13
      */
     public void setRangeZeroBaselineVisible(boolean visible) {
         this.rangeZeroBaselineVisible = visible;
@@ -1770,8 +1716,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @return The stroke (never {@code null}).
      *
      * @see #setRangeZeroBaselineStroke(Stroke)
-     *
-     * @since 1.0.13
      */
     public Stroke getRangeZeroBaselineStroke() {
         return this.rangeZeroBaselineStroke;
@@ -1784,8 +1728,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @param stroke  the stroke ({@code null} not permitted).
      *
      * @see #getRangeZeroBaselineStroke()
-     *
-     * @since 1.0.13
      */
     public void setRangeZeroBaselineStroke(Stroke stroke) {
         Args.nullNotPermitted(stroke, "stroke");
@@ -1800,8 +1742,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @return The paint (never {@code null}).
      *
      * @see #setRangeZeroBaselinePaint(Paint)
-     *
-     * @since 1.0.13
      */
     public Paint getRangeZeroBaselinePaint() {
         return this.rangeZeroBaselinePaint;
@@ -1814,8 +1754,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getRangeZeroBaselinePaint()
-     *
-     * @since 1.0.13
      */
     public void setRangeZeroBaselinePaint(Paint paint) {
         Args.nullNotPermitted(paint, "paint");
@@ -1907,8 +1845,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @return A boolean.
      *
      * @see #setRangeMinorGridlinesVisible(boolean)
-     *
-     * @since 1.0.13
      */
     public boolean isRangeMinorGridlinesVisible() {
         return this.rangeMinorGridlinesVisible;
@@ -1924,8 +1860,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @param visible  the new value of the flag.
      *
      * @see #isRangeMinorGridlinesVisible()
-     *
-     * @since 1.0.13
      */
     public void setRangeMinorGridlinesVisible(boolean visible) {
         if (this.rangeMinorGridlinesVisible != visible) {
@@ -1941,8 +1875,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @return The stroke (never {@code null}).
      *
      * @see #setRangeMinorGridlineStroke(Stroke)
-     *
-     * @since 1.0.13
      */
     public Stroke getRangeMinorGridlineStroke() {
         return this.rangeMinorGridlineStroke;
@@ -1955,8 +1887,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @param stroke  the stroke ({@code null} not permitted).
      *
      * @see #getRangeMinorGridlineStroke()
-     *
-     * @since 1.0.13
      */
     public void setRangeMinorGridlineStroke(Stroke stroke) {
         Args.nullNotPermitted(stroke, "stroke");
@@ -1971,8 +1901,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @return The paint (never {@code null}).
      *
      * @see #setRangeMinorGridlinePaint(Paint)
-     *
-     * @since 1.0.13
      */
     public Paint getRangeMinorGridlinePaint() {
         return this.rangeMinorGridlinePaint;
@@ -1985,8 +1913,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getRangeMinorGridlinePaint()
-     *
-     * @since 1.0.13
      */
     public void setRangeMinorGridlinePaint(Paint paint) {
         Args.nullNotPermitted(paint, "paint");
@@ -2102,8 +2028,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * this plot.
      *
      * @param event  information about the event (not used here).
-     *
-     * @since 1.0.14
      */
     @Override
     public void annotationChanged(AnnotationChangeEvent event) {
@@ -2222,8 +2146,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @param marker  the marker ({@code null} not permitted).
      * @param layer  the layer ({@code null} not permitted).
      * @param notify  notify listeners?
-     *
-     * @since 1.0.10
      *
      * @see #removeDomainMarker(int, Marker, Layer, boolean)
      */
@@ -2360,8 +2282,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @return A boolean indicating whether or not the marker was actually
      *         removed.
-     *
-     * @since 1.0.7
      */
     public boolean removeDomainMarker(Marker marker) {
         return removeDomainMarker(marker, Layer.FOREGROUND);
@@ -2376,8 +2296,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @return A boolean indicating whether or not the marker was actually
      *         removed.
-     *
-     * @since 1.0.7
      */
     public boolean removeDomainMarker(Marker marker, Layer layer) {
         return removeDomainMarker(0, marker, layer);
@@ -2393,8 +2311,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @return A boolean indicating whether or not the marker was actually
      *         removed.
-     *
-     * @since 1.0.7
      */
     public boolean removeDomainMarker(int index, Marker marker, Layer layer) {
         return removeDomainMarker(index, marker, layer, true);
@@ -2411,8 +2327,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @return A boolean indicating whether or not the marker was actually
      *         removed.
-     *
-     * @since 1.0.10
      */
     public boolean removeDomainMarker(int index, Marker marker, Layer layer,
             boolean notify) {
@@ -2490,8 +2404,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @param marker  the marker.
      * @param layer  the layer.
      * @param notify  notify listeners?
-     *
-     * @since 1.0.10
      *
      * @see #removeRangeMarker(int, Marker, Layer, boolean)
      */
@@ -2629,8 +2541,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @return A boolean indicating whether or not the marker was actually
      *         removed.
      *
-     * @since 1.0.7
-     *
      * @see #addRangeMarker(Marker)
      */
     public boolean removeRangeMarker(Marker marker) {
@@ -2646,8 +2556,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @return A boolean indicating whether or not the marker was actually
      *         removed.
-     *
-     * @since 1.0.7
      *
      * @see #addRangeMarker(Marker, Layer)
      */
@@ -2666,8 +2574,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @return A boolean indicating whether or not the marker was actually
      *         removed.
      *
-     * @since 1.0.7
-     *
      * @see #addRangeMarker(int, Marker, Layer)
      */
     public boolean removeRangeMarker(int index, Marker marker, Layer layer) {
@@ -2685,8 +2591,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @return A boolean indicating whether or not the marker was actually
      *         removed.
-     *
-     * @since 1.0.10
      *
      * @see #addRangeMarker(int, Marker, Layer, boolean)
      */
@@ -2715,8 +2619,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @return A boolean.
      *
-     * @since 1.0.11
-     *
      * @see #setDomainCrosshairVisible(boolean)
      */
     public boolean isDomainCrosshairVisible() {
@@ -2729,8 +2631,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * registered listeners.
      *
      * @param flag  the new flag value.
-     *
-     * @since 1.0.11
      *
      * @see #isDomainCrosshairVisible()
      * @see #setRangeCrosshairVisible(boolean)
@@ -2746,8 +2646,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * Returns the row key for the domain crosshair.
      *
      * @return The row key.
-     *
-     * @since 1.0.11
      */
     public Comparable getDomainCrosshairRowKey() {
         return this.domainCrosshairRowKey;
@@ -2758,8 +2656,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * {PlotChangeEvent} to all registered listeners.
      *
      * @param key  the key.
-     *
-     * @since 1.0.11
      */
     public void setDomainCrosshairRowKey(Comparable key) {
         setDomainCrosshairRowKey(key, true);
@@ -2771,8 +2667,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @param key  the key.
      * @param notify  notify listeners?
-     *
-     * @since 1.0.11
      */
     public void setDomainCrosshairRowKey(Comparable key, boolean notify) {
         this.domainCrosshairRowKey = key;
@@ -2785,8 +2679,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * Returns the column key for the domain crosshair.
      *
      * @return The column key.
-     *
-     * @since 1.0.11
      */
     public Comparable getDomainCrosshairColumnKey() {
         return this.domainCrosshairColumnKey;
@@ -2797,8 +2689,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * a {@link PlotChangeEvent} to all registered listeners.
      *
      * @param key  the key.
-     *
-     * @since 1.0.11
      */
     public void setDomainCrosshairColumnKey(Comparable key) {
         setDomainCrosshairColumnKey(key, true);
@@ -2810,8 +2700,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @param key  the key.
      * @param notify  notify listeners?
-     *
-     * @since 1.0.11
      */
     public void setDomainCrosshairColumnKey(Comparable key, boolean notify) {
         this.domainCrosshairColumnKey = key;
@@ -2824,8 +2712,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * Returns the dataset index for the crosshair.
      *
      * @return The dataset index.
-     *
-     * @since 1.0.11
      */
     public int getCrosshairDatasetIndex() {
         return this.crosshairDatasetIndex;
@@ -2836,8 +2722,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * {@link PlotChangeEvent} to all registered listeners.
      *
      * @param index  the index.
-     *
-     * @since 1.0.11
      */
     public void setCrosshairDatasetIndex(int index) {
         setCrosshairDatasetIndex(index, true);
@@ -2849,8 +2733,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @param index  the index.
      * @param notify  notify listeners?
-     *
-     * @since 1.0.11
      */
     public void setCrosshairDatasetIndex(int index, boolean notify) {
         this.crosshairDatasetIndex = index;
@@ -2864,8 +2746,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @return The paint (never {@code null}).
      *
-     * @since 1.0.11
-     *
      * @see #setDomainCrosshairPaint(Paint)
      * @see #getDomainCrosshairStroke()
      */
@@ -2877,8 +2757,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * Sets the paint used to draw the domain crosshair.
      *
      * @param paint  the paint ({@code null} not permitted).
-     *
-     * @since 1.0.11
      *
      * @see #getDomainCrosshairPaint()
      */
@@ -2893,8 +2771,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @return The stroke (never {@code null}).
      *
-     * @since 1.0.11
-     *
      * @see #setDomainCrosshairStroke(Stroke)
      * @see #getDomainCrosshairPaint()
      */
@@ -2907,8 +2783,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * {@link PlotChangeEvent} to all registered listeners.
      *
      * @param stroke  the stroke ({@code null} not permitted).
-     *
-     * @since 1.0.11
      *
      * @see #getDomainCrosshairStroke()
      */
@@ -3098,8 +2972,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @param annotation  the annotation ({@code null} not permitted).
      * @param notify  notify listeners?
-     *
-     * @since 1.0.10
      */
     public void addAnnotation(CategoryAnnotation annotation, boolean notify) {
         Args.nullNotPermitted(annotation, "annotation");
@@ -3132,8 +3004,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @param notify  notify listeners?
      *
      * @return A boolean (indicates whether or not the annotation was removed).
-     *
-     * @since 1.0.10
      */
     public boolean removeAnnotation(CategoryAnnotation annotation,
             boolean notify) {
@@ -3164,8 +3034,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * Returns the shadow generator for the plot, if any.
      *
      * @return The shadow generator (possibly {@code null}).
-     *
-     * @since 1.0.14
      */
     public ShadowGenerator getShadowGenerator() {
         return this.shadowGenerator;
@@ -3176,8 +3044,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * {@link PlotChangeEvent} to all registered listeners.
      *
      * @param generator  the generator ({@code null} permitted).
-     *
-     * @since 1.0.14
      */
     public void setShadowGenerator(ShadowGenerator generator) {
         this.shadowGenerator = generator;
@@ -3707,8 +3573,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      *        ({@code null} permitted).
      *
      * @return A boolean that indicates whether or not real data was found.
-     *
-     * @since 1.0.11
      */
     public boolean render(Graphics2D g2, Rectangle2D dataArea, int index,
             PlotRenderingInfo info, CategoryCrosshairState crosshairState) {
@@ -3864,8 +3728,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @param area  the data area.
      *
      * @see #setRangeZeroBaselineVisible(boolean)
-     *
-     * @since 1.0.13
      */
     protected void drawZeroRangeBaseline(Graphics2D g2, Rectangle2D area) {
         if (!isRangeZeroBaselineVisible()) {
@@ -4002,8 +3864,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @see #drawRangeCrosshair(Graphics2D, Rectangle2D, PlotOrientation,
      *     double, ValueAxis, Stroke, Paint)
-     *
-     * @since 1.0.11
      */
     protected void drawDomainCrosshair(Graphics2D g2, Rectangle2D dataArea,
             PlotOrientation orientation, int datasetIndex,
@@ -4045,8 +3905,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @see #drawDomainCrosshair(Graphics2D, Rectangle2D, PlotOrientation, int,
      *      Comparable, Comparable, Stroke, Paint)
-     *
-     * @since 1.0.5
      */
     protected void drawRangeCrosshair(Graphics2D g2, Rectangle2D dataArea,
             PlotOrientation orientation, double value, ValueAxis axis,
@@ -4113,11 +3971,9 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @param axisIndex  the axis index.
      *
      * @return The list (possibly empty, but never {@code null}).
-     *
-     * @since 1.0.3
      */
     private List<CategoryDataset> datasetsMappedToDomainAxis(int axisIndex) {
-        List<CategoryDataset> result = new ArrayList<CategoryDataset>();
+        List<CategoryDataset> result = new ArrayList<>();
         for (Entry<Integer, CategoryDataset> entry : this.datasets.entrySet()) {
             CategoryDataset dataset = entry.getValue();
             if (dataset == null) {
@@ -4223,8 +4079,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @param notify  notify listeners?
      *
      * @see #getFixedDomainAxisSpace()
-     *
-     * @since 1.0.7
      */
     public void setFixedDomainAxisSpace(AxisSpace space, boolean notify) {
         this.fixedDomainAxisSpace = space;
@@ -4264,8 +4118,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @param notify  notify listeners?
      *
      * @see #getFixedRangeAxisSpace()
-     *
-     * @since 1.0.7
      */
     public void setFixedRangeAxisSpace(AxisSpace space, boolean notify) {
         this.fixedRangeAxisSpace = space;
@@ -4296,8 +4148,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @param axis  the axis ({@code null} not permitted)
      *
      * @return The categories.
-     *
-     * @since 1.0.3
      */
     public List getCategoriesForAxis(CategoryAxis axis) {
         List result = new ArrayList();
@@ -4346,8 +4196,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @return A boolean.
      *
      * @see #isRangePannable()
-     *
-     * @since 1.0.13
      */
     @Override
     public boolean isDomainPannable() {
@@ -4362,8 +4210,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @see #setRangePannable(boolean)
      * @see #isDomainPannable()
-     *
-     * @since 1.0.13
      */
     @Override
     public boolean isRangePannable() {
@@ -4377,8 +4223,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @param pannable  the new flag value.
      *
      * @see #isRangePannable()
-     *
-     * @since 1.0.13
      */
     public void setRangePannable(boolean pannable) {
         this.rangePannable = pannable;
@@ -4390,8 +4234,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @param percent  the distance to pan (as a percentage of the axis length).
      * @param info the plot info
      * @param source the source point where the pan action started.
-     *
-     * @since 1.0.13
      */
     @Override
     public void panDomainAxes(double percent, PlotRenderingInfo info,
@@ -4405,8 +4247,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @param percent  the distance to pan (as a percentage of the axis length).
      * @param info the plot info
      * @param source the source point where the pan action started.
-     *
-     * @since 1.0.13
      */
     @Override
     public void panRangeAxes(double percent, PlotRenderingInfo info,
@@ -4492,8 +4332,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @param useAnchor  use source point as zoom anchor?
      *
      * @see #zoomRangeAxes(double, PlotRenderingInfo, Point2D, boolean)
-     *
-     * @since 1.0.7
      */
     @Override
     public void zoomDomainAxes(double factor, PlotRenderingInfo info,
@@ -4525,8 +4363,6 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      *         is used for the zoom anchor.
      *
      * @see #zoomDomainAxes(double, PlotRenderingInfo, Point2D, boolean)
-     *
-     * @since 1.0.7
      */
     @Override
     public void zoomRangeAxes(double factor, PlotRenderingInfo info,

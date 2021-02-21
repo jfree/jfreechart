@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * LineFunction2D.java
  * -------------------
- * (C) Copyright 2002-2009, by Object Refinery Limited.
+ * (C) Copyright 2002-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -66,8 +66,6 @@ public class LineFunction2D implements Function2D, Serializable {
      * Returns the 'a' coefficient that was specified in the constructor.
      *
      * @return The 'a' coefficient.
-     *
-     * @since 1.0.14
      */
     public double getIntercept() {
         return this.a;
@@ -77,8 +75,6 @@ public class LineFunction2D implements Function2D, Serializable {
      * Returns the 'b' coefficient that was specified in the constructor.
      *
      * @return The 'b' coefficient.
-     *
-     * @since 1.0.14
      */
     public double getSlope() {
         return this.b;

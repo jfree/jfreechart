@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,17 +27,10 @@
  * ----------------------
  * StandardDialFrame.java
  * ----------------------
- * (C) Copyright 2006-2017, by Object Refinery Limited.
+ * (C) Copyright 2006-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 03-Nov-2006 : Version 1 (DG);
- * 08-Mar-2007 : Fix in hashCode() (DG);
- * 29-Oct-2007 : Renamed StandardDialFrame (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -65,8 +58,6 @@ import org.jfree.chart.util.SerialUtils;
 
 /**
  * A simple circular frame for the {@link DialPlot} class.
- *
- * @since 1.0.7
  */
 public class StandardDialFrame extends AbstractDialLayer implements DialFrame,
         Cloneable, PublicCloneable, Serializable {

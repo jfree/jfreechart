@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------------------
  * StandardPieSectionLabelGenerator.java
  * -------------------------------------
- * (C) Copyright 2004-2020, by Object Refinery Limited.
+ * (C) Copyright 2004-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -89,8 +89,6 @@ public class StandardPieSectionLabelGenerator
      * Creates a new instance for the specified locale.
      *
      * @param locale  the local ({@code null} not permitted).
-     *
-     * @since 1.0.7
      */
     public StandardPieSectionLabelGenerator(Locale locale) {
         this(DEFAULT_SECTION_LABEL_FORMAT, locale);
@@ -112,8 +110,6 @@ public class StandardPieSectionLabelGenerator
      *
      * @param labelFormat  the label format ({@code null} not permitted).
      * @param locale  the local ({@code null} not permitted).
-     *
-     * @since 1.0.7
      */
     public StandardPieSectionLabelGenerator(String labelFormat, Locale locale) {
         this(labelFormat, NumberFormat.getNumberInstance(locale),

@@ -82,8 +82,6 @@ public class IntervalMarker extends Marker implements Cloneable, Serializable {
      * @param start  the lower bound of the interval.
      * @param end  the upper bound of the interval.
      * @param paint  the fill paint ({@code null} not permitted).
-     *
-     * @since 1.0.9
      */
     public IntervalMarker(double start, double end, Paint paint) {
         this(start, end, paint, new BasicStroke(0.5f), null, null, 0.8f);
@@ -127,8 +125,6 @@ public class IntervalMarker extends Marker implements Cloneable, Serializable {
      * {@link MarkerChangeEvent} to all registered listeners.
      *
      * @param value  the value.
-     *
-     * @since 1.0.3
      */
     public void setStartValue(double value) {
         this.startValue = value;
@@ -149,8 +145,6 @@ public class IntervalMarker extends Marker implements Cloneable, Serializable {
      * {@link MarkerChangeEvent} to all registered listeners.
      *
      * @param value  the value.
-     *
-     * @since 1.0.3
      */
     public void setEndValue(double value) {
         this.endValue = value;
