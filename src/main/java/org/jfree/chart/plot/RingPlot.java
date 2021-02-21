@@ -162,8 +162,6 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
      * will be displayed by default.
      * 
      * @return The mode (never {@code null}).
-     * 
-     * @since 1.0.18
      */
     public CenterTextMode getCenterTextMode() {
         return this.centerTextMode;
@@ -178,8 +176,6 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
      * the first section in the dataset.
      * 
      * @param mode  the mode ({@code null} not permitted).
-     * 
-     * @since 1.0.18
      */
     public void setCenterTextMode(CenterTextMode mode) {
         Args.nullNotPermitted(mode, "mode");
@@ -192,8 +188,6 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
      * is {@link CenterTextMode#FIXED}.
      * 
      * @return The text (possibly {@code null}).
-     * 
-     * @since 1.0.18.
      */
     public String getCenterText() {
         return this.centerText;
@@ -205,8 +199,6 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
      * {@code null}, no text will be displayed.
      * 
      * @param text  the text ({@code null} permitted).
-     * 
-     * @since 1.0.18
      */
     public void setCenterText(String text) {
         this.centerText = text;
@@ -219,8 +211,6 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
      * {@code DecimalFormat("0.00")}.
      * 
      * @return The formatter (never {@code null}).
-     * 
-     * @since 1.0.18
      */
     public Format getCenterTextFormatter() {
         return this.centerTextFormatter;
@@ -231,8 +221,6 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
      * change event to all registered listeners.
      * 
      * @param formatter  the formatter ({@code null} not permitted).
-     * 
-     * @since 1.0.18
      */
     public void setCenterTextFormatter(Format formatter) {
         Args.nullNotPermitted(formatter, "formatter");
@@ -244,8 +232,6 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
      * is {@link PiePlot#DEFAULT_LABEL_FONT}.
      * 
      * @return The font (never {@code null}).
-     * 
-     * @since 1.0.18
      */
     public Font getCenterTextFont() {
         return this.centerTextFont;
@@ -256,8 +242,6 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
      * to all registered listeners.
      * 
      * @param font  the font ({@code null} not permitted).
-     * 
-     * @since 1.0.18
      */
     public void setCenterTextFont(Font font) {
         Args.nullNotPermitted(font, "font");
@@ -270,8 +254,6 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
      * {@code Color.BLACK}.
      * 
      * @return The color (never {@code null}). 
-     * 
-     * @since 1.0.18
      */
     public Color getCenterTextColor() {
         return this.centerTextColor;
@@ -282,8 +264,6 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
      * registered listeners.
      * 
      * @param color  the color ({@code null} not permitted).
-     * 
-     * @since 1.0.18
      */
     public void setCenterTextColor(Color color) {
         Args.nullNotPermitted(color, "color");
@@ -429,7 +409,6 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
      * @return The depth of each section.
      *
      * @see #setSectionDepth(double)
-     * @since 1.0.3
      */
     public double getSectionDepth() {
         return this.sectionDepth;
@@ -442,7 +421,6 @@ public class RingPlot extends PiePlot implements Cloneable, Serializable {
      * @param sectionDepth  the section depth.
      *
      * @see #getSectionDepth()
-     * @since 1.0.3
      */
     public void setSectionDepth(double sectionDepth) {
         this.sectionDepth = sectionDepth;

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * HexNumberFormat.java
  * --------------------
- * (C) Copyright 2007-2020, by Richard West and Contributors.
+ * (C) Copyright 2007-2021, by Richard West and Contributors.
  *
  * Original Author:  Richard West, Advanced Micro Devices, Inc.;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -43,8 +43,6 @@ import java.text.ParsePosition;
 /**
  * A custom number formatter that formats numbers as hexadecimal strings.
  * There are some limitations, so be careful using this class.
- *
- * @since 1.0.6
  */
 public class HexNumberFormat extends NumberFormat {
 

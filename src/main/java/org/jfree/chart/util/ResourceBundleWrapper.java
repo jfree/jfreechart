@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------------
  * ResourceBundleWrapper.java
  * --------------------------
- * (C)opyright 2008-2020, by Jess Thrysoee and Contributors.
+ * (C)opyright 2008-2021, by Jess Thrysoee and Contributors.
  *
  * Original Author:  Jess Thrysoee;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -60,8 +60,6 @@ import java.util.ResourceBundle;
  *               Bug ID: 4243379</a>
  * @see <a href="http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4668479">
  *               Bug ID: 4668479</a>
- *
- * @since 1.0.12
  */
 public class ResourceBundleWrapper {
 

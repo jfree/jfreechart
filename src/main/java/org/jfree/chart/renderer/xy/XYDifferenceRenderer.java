@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * XYDifferenceRenderer.java
  * -------------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Richard West, Advanced Micro Devices, Inc. (major rewrite
@@ -106,8 +106,6 @@ public class XYDifferenceRenderer extends AbstractXYItemRenderer
      * striping that anti-aliasing can generate.  However, the rounding may not
      * be appropriate for output in high resolution formats (for example,
      * vector graphics formats such as SVG and PDF).
-     *
-     * @since 1.0.4
      */
     private boolean roundXCoordinates;
 
@@ -244,8 +242,6 @@ public class XYDifferenceRenderer extends AbstractXYItemRenderer
      *
      * @return The flag.
      *
-     * @since 1.0.4
-     *
      * @see #setRoundXCoordinates(boolean)
      */
     public boolean getRoundXCoordinates() {
@@ -258,8 +254,6 @@ public class XYDifferenceRenderer extends AbstractXYItemRenderer
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param round  the new flag value.
-     *
-     * @since 1.0.4
      *
      * @see #getRoundXCoordinates()
      */

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * RelativeDateFormat.java
  * -----------------------
- * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Michael Siemer;
@@ -47,8 +47,6 @@ import java.util.GregorianCalendar;
 /**
  * A formatter that formats dates to show the elapsed time relative to some
  * base date.
- *
- * @since 1.0.3
  */
 public class RelativeDateFormat extends DateFormat {
 
@@ -62,8 +60,6 @@ public class RelativeDateFormat extends DateFormat {
 
     /**
      * A flag that controls whether or not a zero hour count is displayed.
-     *
-     * @since 1.0.10
      */
     private boolean showZeroHours;
 
@@ -76,8 +72,6 @@ public class RelativeDateFormat extends DateFormat {
     /**
      * A prefix prepended to the start of the format if the relative date is
      * positive.
-     *
-     * @since 1.0.10
      */
     private String positivePrefix;
 
@@ -88,8 +82,6 @@ public class RelativeDateFormat extends DateFormat {
 
     /**
      * A formatter for the hours.
-     *
-     * @since 1.0.11
      */
     private NumberFormat hourFormatter;
 
@@ -100,8 +92,6 @@ public class RelativeDateFormat extends DateFormat {
 
     /**
      * A formatter for the minutes.
-     *
-     * @since 1.0.11
      */
     private NumberFormat minuteFormatter;
 
@@ -231,8 +221,6 @@ public class RelativeDateFormat extends DateFormat {
      * @return The flag.
      *
      * @see #setShowZeroHours(boolean)
-     *
-     * @since 1.0.10
      */
     public boolean getShowZeroHours() {
         return this.showZeroHours;
@@ -245,8 +233,6 @@ public class RelativeDateFormat extends DateFormat {
      * @param show  the flag.
      *
      * @see #getShowZeroHours()
-     *
-     * @since 1.0.10
      */
     public void setShowZeroHours(boolean show) {
         this.showZeroHours = show;
@@ -259,8 +245,6 @@ public class RelativeDateFormat extends DateFormat {
      * @return The string (never {@code null}).
      *
      * @see #setPositivePrefix(String)
-     *
-     * @since 1.0.10
      */
     public String getPositivePrefix() {
         return this.positivePrefix;
@@ -273,8 +257,6 @@ public class RelativeDateFormat extends DateFormat {
      * @param prefix  the prefix ({@code null} not permitted).
      *
      * @see #getPositivePrefix()
-     *
-     * @since 1.0.10
      */
     public void setPositivePrefix(String prefix) {
         Args.nullNotPermitted(prefix, "prefix");
@@ -285,8 +267,6 @@ public class RelativeDateFormat extends DateFormat {
      * Sets the formatter for the days.
      *
      * @param formatter  the formatter ({@code null} not permitted).
-     *
-     * @since 1.0.11
      */
     public void setDayFormatter(NumberFormat formatter) {
         Args.nullNotPermitted(formatter, "formatter");
@@ -320,8 +300,6 @@ public class RelativeDateFormat extends DateFormat {
      * Sets the formatter for the hours.
      *
      * @param formatter  the formatter ({@code null} not permitted).
-     *
-     * @since 1.0.11
      */
     public void setHourFormatter(NumberFormat formatter) {
         Args.nullNotPermitted(formatter, "formatter");
@@ -355,8 +333,6 @@ public class RelativeDateFormat extends DateFormat {
      * Sets the formatter for the minutes.
      *
      * @param formatter  the formatter ({@code null} not permitted).
-     *
-     * @since 1.0.11
      */
     public void setMinuteFormatter(NumberFormat formatter) {
         Args.nullNotPermitted(formatter, "formatter");

@@ -182,15 +182,11 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
 
     /**
      * The paint used to draw the axis lines.
-     *
-     * @since 1.0.4
      */
     private transient Paint axisLinePaint;
 
     /**
      * The stroke used to draw the axis lines.
-     *
-     * @since 1.0.4
      */
     private transient Stroke axisLineStroke;
 
@@ -593,7 +589,6 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      *
      * @see #setAxisLinePaint(Paint)
      * @see #getAxisLineStroke()
-     * @since 1.0.4
      */
     public Paint getAxisLinePaint() {
         return this.axisLinePaint;
@@ -606,7 +601,6 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getAxisLinePaint()
-     * @since 1.0.4
      */
     public void setAxisLinePaint(Paint paint) {
         Args.nullNotPermitted(paint, "paint");
@@ -621,7 +615,6 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      *
      * @see #setAxisLineStroke(Stroke)
      * @see #getAxisLinePaint()
-     * @since 1.0.4
      */
     public Stroke getAxisLineStroke() {
         return this.axisLineStroke;
@@ -634,7 +627,6 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      * @param stroke  the stroke ({@code null} not permitted).
      *
      * @see #getAxisLineStroke()
-     * @since 1.0.4
      */
     public void setAxisLineStroke(Stroke stroke) {
         Args.nullNotPermitted(stroke, "stroke");
@@ -1001,8 +993,6 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      * @return The tool tip generator (possibly {@code null}).
      *
      * @see #setToolTipGenerator(CategoryToolTipGenerator)
-     *
-     * @since 1.0.2
      */
     public CategoryToolTipGenerator getToolTipGenerator() {
         return this.toolTipGenerator;
@@ -1015,8 +1005,6 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      * @param generator  the generator ({@code null} permitted).
      *
      * @see #getToolTipGenerator()
-     *
-     * @since 1.0.2
      */
     public void setToolTipGenerator(CategoryToolTipGenerator generator) {
         this.toolTipGenerator = generator;
@@ -1029,8 +1017,6 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      * @return The URL generator (possibly {@code null}).
      *
      * @see #setURLGenerator(CategoryURLGenerator)
-     *
-     * @since 1.0.2
      */
     public CategoryURLGenerator getURLGenerator() {
         return this.urlGenerator;
@@ -1043,8 +1029,6 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      * @param generator  the generator ({@code null} permitted).
      *
      * @see #getURLGenerator()
-     *
-     * @since 1.0.2
      */
     public void setURLGenerator(CategoryURLGenerator generator) {
         this.urlGenerator = generator;

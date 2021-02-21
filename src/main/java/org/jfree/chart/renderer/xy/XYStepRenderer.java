@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * XYStepRenderer.java
  * -------------------
- * (C) Copyright 2002-2020, by Roger Studner and Contributors.
+ * (C) Copyright 2002-2021, by Roger Studner and Contributors.
  *
  * Original Author:  Roger Studner;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -81,8 +81,6 @@ public class XYStepRenderer extends XYLineAndShapeRenderer
     /**
      * The factor (from 0.0 to 1.0) that determines the position of the
      * step.
-     *
-     * @since 1.0.10.
      */
     private double stepPoint = 1.0d;
 
@@ -119,8 +117,6 @@ public class XYStepRenderer extends XYLineAndShapeRenderer
      *         step is drawn.
      *
      * @see #setStepPoint(double)
-     *
-     * @since 1.0.10
      */
     public double getStepPoint() {
         return this.stepPoint;
@@ -133,8 +129,6 @@ public class XYStepRenderer extends XYLineAndShapeRenderer
      * @param stepPoint  the step point (in the range 0.0 to 1.0)
      *
      * @see #getStepPoint()
-     *
-     * @since 1.0.10
      */
     public void setStepPoint(double stepPoint) {
         if (stepPoint < 0.0d || stepPoint > 1.0d) {

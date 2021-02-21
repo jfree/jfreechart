@@ -83,8 +83,6 @@ public class YIntervalRenderer extends AbstractXYItemRenderer
      * An additional item label generator.  If this is non-null, the item
      * label generated will be displayed near the lower y-value at the
      * position given by getNegativeItemLabelPosition().
-     *
-     * @since 1.0.10
      */
     private XYItemLabelGenerator additionalItemLabelGenerator;
 
@@ -103,8 +101,6 @@ public class YIntervalRenderer extends AbstractXYItemRenderer
      * @return The generator (possibly {@code null}).
      *
      * @see #setAdditionalItemLabelGenerator(XYItemLabelGenerator)
-     *
-     * @since 1.0.10
      */
     public XYItemLabelGenerator getAdditionalItemLabelGenerator() {
         return this.additionalItemLabelGenerator;
@@ -119,8 +115,6 @@ public class YIntervalRenderer extends AbstractXYItemRenderer
      * @param generator  the generator ({@code null} permitted).
      *
      * @see #getAdditionalItemLabelGenerator()
-     *
-     * @since 1.0.10
      */
     public void setAdditionalItemLabelGenerator(
             XYItemLabelGenerator generator) {

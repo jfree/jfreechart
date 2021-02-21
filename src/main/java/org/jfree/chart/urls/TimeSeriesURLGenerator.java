@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * TimeSeriesURLGenerator.java
  * ---------------------------
- * (C) Copyright 2002-2016, by Richard Atkinson and Contributors.
+ * (C) Copyright 2002-2021, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributors:     David Gilbert (for Object Refinery Limited);
@@ -100,8 +100,6 @@ public class TimeSeriesURLGenerator implements XYURLGenerator, Serializable {
      * Returns a clone of the date format assigned to this URL generator.
      *
      * @return The date format (never {@code null}).
-     *
-     * @since 1.0.6
      */
     public DateFormat getDateFormat() {
         return (DateFormat) this.dateFormat.clone();
@@ -111,8 +109,6 @@ public class TimeSeriesURLGenerator implements XYURLGenerator, Serializable {
      * Returns the prefix string.
      *
      * @return The prefix string (never {@code null}).
-     *
-     * @since 1.0.6
      */
     public String getPrefix() {
         return this.prefix;
@@ -122,8 +118,6 @@ public class TimeSeriesURLGenerator implements XYURLGenerator, Serializable {
      * Returns the series parameter name.
      *
      * @return The series parameter name (never {@code null}).
-     *
-     * @since 1.0.6
      */
     public String getSeriesParameterName() {
         return this.seriesParameterName;
@@ -133,8 +127,6 @@ public class TimeSeriesURLGenerator implements XYURLGenerator, Serializable {
      * Returns the item parameter name.
      *
      * @return The item parameter name (never {@code null}).
-     *
-     * @since 1.0.6
      */
     public String getItemParameterName() {
         return this.itemParameterName;

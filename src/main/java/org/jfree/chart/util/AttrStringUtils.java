@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * AttrStringUtils.java
  * --------------------
- * (C) Copyright 2013-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2013-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -45,8 +45,6 @@ import org.jfree.chart.ui.TextAnchor;
 
 /**
  * Some {@code AttributedString} utilities.
- * 
- * @since 1.0.16
  */
 public class AttrStringUtils {
    
@@ -61,8 +59,6 @@ public class AttrStringUtils {
      * @param g2  the graphics target ({@code null} not permitted).
      * 
      * @return The bounds (never {@code null}).
-     * 
-     * @since 1.0.18
      */
     public static Rectangle2D getTextBounds(AttributedString text, 
             Graphics2D g2) {
@@ -80,8 +76,6 @@ public class AttrStringUtils {
      * @param angle  the angle.
      * @param x  the x-coordinate.
      * @param y  the y-coordinate.
-     * 
-     * @since 1.0.16
      */
     public static void drawRotatedString(AttributedString text, Graphics2D g2, 
             double angle, float x, float y) {
@@ -99,8 +93,6 @@ public class AttrStringUtils {
      * @param angle  the rotation angle (in radians).
      * @param rotateX  the x-coordinate for the rotation point.
      * @param rotateY  the y-coordinate for the rotation point.
-     * 
-     * @since 1.0.16
      */
     public static void drawRotatedString(AttributedString text, Graphics2D g2, 
             float textX, float textY, double angle, float rotateX, 
@@ -130,8 +122,6 @@ public class AttrStringUtils {
      * @param angle  the rotation (in radians).
      * @param rotationX  the x-coordinate for the rotation point.
      * @param rotationY  the y-coordinate for the rotation point.
-     * 
-     * @since 1.0.16
      */
     public static void drawRotatedString(AttributedString text, Graphics2D g2, 
             float x, float y, TextAnchor textAnchor, 
@@ -153,8 +143,6 @@ public class AttrStringUtils {
      * @param textAnchor  the text anchor point.
      * @param angle  the rotation (in radians).
      * @param rotationAnchor  the rotation anchor point.
-     * 
-     * @since 1.0.16
      */
     public static void drawRotatedString(AttributedString text, Graphics2D g2,
             float x, float y, TextAnchor textAnchor,

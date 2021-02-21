@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------
  * LogFormat.java
  * --------------
- * (C) Copyright 2007-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -44,8 +44,6 @@ import java.text.ParsePosition;
 /**
  * A number formatter for logarithmic values.  This formatter does not support
  * parsing.
- *
- * @since 1.0.7
  */
 public class LogFormat extends NumberFormat {
 
@@ -60,8 +58,6 @@ public class LogFormat extends NumberFormat {
 
     /**
      * The label for the power symbol.
-     *
-     * @since 1.0.10
      */
     private String powerLabel;
 
@@ -73,8 +69,6 @@ public class LogFormat extends NumberFormat {
 
     /**
      * Creates a new instance using base 10.
-     *
-     * @since 1.0.13
      */
     public LogFormat() {
         this(10.0, "10", true);
@@ -100,8 +94,6 @@ public class LogFormat extends NumberFormat {
      * @param powerLabel  the power label ({@code null} not permitted).
      * @param showBase  a flag that controls whether or not the base value is
      *                  shown.
-     *
-     * @since 1.0.10
      */
     public LogFormat(double base, String baseLabel, String powerLabel,
             boolean showBase) {
@@ -118,8 +110,6 @@ public class LogFormat extends NumberFormat {
      * Returns the number format used for the exponent.
      *
      * @return The number format (never {@code null}).
-     *
-     * @since 1.0.13.
      */
     public NumberFormat getExponentFormat() {
         return (NumberFormat) this.formatter.clone();
@@ -129,8 +119,6 @@ public class LogFormat extends NumberFormat {
      * Sets the number format used for the exponent.
      *
      * @param format  the formatter ({@code null} not permitted).
-     *
-     * @since 1.0.13
      */
     public void setExponentFormat(NumberFormat format) {
         Args.nullNotPermitted(format, "format");

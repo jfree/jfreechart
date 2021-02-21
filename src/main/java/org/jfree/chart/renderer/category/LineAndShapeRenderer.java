@@ -124,16 +124,12 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
     /**
      * A flag that controls whether or not the x-position for each item is
      * offset within the category according to the series.
-     *
-     * @since 1.0.7
      */
     private boolean useSeriesOffset;
 
     /**
      * The item margin used for series offsetting - this allows the positioning
      * to match the bar positions of the {@link BarRenderer} class.
-     *
-     * @since 1.0.7
      */
     private double itemMargin;
 
@@ -507,8 +503,6 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
      * @return A boolean.
      *
      * @see #setUseSeriesOffset(boolean)
-     *
-     * @since 1.0.7
      */
     public boolean getUseSeriesOffset() {
         return this.useSeriesOffset;
@@ -522,8 +516,6 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
      * @param offset  the offset.
      *
      * @see #getUseSeriesOffset()
-     *
-     * @since 1.0.7
      */
     public void setUseSeriesOffset(boolean offset) {
         this.useSeriesOffset = offset;
@@ -540,8 +532,6 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
      *
      * @see #setItemMargin(double)
      * @see #getUseSeriesOffset()
-     *
-     * @since 1.0.7
      */
     public double getItemMargin() {
         return this.itemMargin;
@@ -556,8 +546,6 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
      *
      * @see #getItemMargin()
      * @see #getUseSeriesOffset()
-     *
-     * @since 1.0.7
      */
     public void setItemMargin(double margin) {
         if (margin < 0.0 || margin >= 1.0) {

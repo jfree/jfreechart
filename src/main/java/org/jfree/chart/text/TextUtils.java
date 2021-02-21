@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -297,8 +297,6 @@ public class TextUtils {
      *     {@code (x, y)} ({@code null} not permitted).
      * 
      * @return The text bounds (never {@code null}).
-     * 
-     * @since 1.3
      */
     public static Rectangle2D calcAlignedStringBounds(String text,
             Graphics2D g2, float x, float y, TextAnchor anchor) {
@@ -765,9 +763,7 @@ public class TextUtils {
      * the current font attributes (such as underlining, strikethrough etc).
      * The default value is {@code false}.
      * 
-     * @return A boolean. 
-     * 
-     * @since 1.0.21
+     * @return A boolean.
      */
     public static boolean getDrawStringsWithFontAttributes() {
         return TextUtils.drawStringsWithFontAttributes;
@@ -780,8 +776,6 @@ public class TextUtils {
      * http://www.jfree.org/phpBB2/viewtopic.php?p=45459&amp;highlight=#45459
      * 
      * @param b  the new flag value.
-     * 
-     * @since 1.0.21
      */
     public static void setDrawStringsWithFontAttributes(boolean b) {
         TextUtils.drawStringsWithFontAttributes = b;

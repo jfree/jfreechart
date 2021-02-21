@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------
  * SerialUtils.java
  * ----------------
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributors:     -;
@@ -246,8 +246,6 @@ public class SerialUtils {
      *
      * @throws IOException  if there is an I/O problem.
      * @throws ClassNotFoundException  if there is a problem loading a class.
-     * 
-     * @since 1.0.17
      */
     public static Composite readComposite(ObjectInputStream stream)
             throws IOException, ClassNotFoundException {
@@ -279,8 +277,6 @@ public class SerialUtils {
      * @param stream  the output stream ({@code null} not permitted).
      *
      * @throws IOException if there is an I/O error.
-     * 
-     * @since 1.0.17
      */
     public static void writeComposite(Composite composite, 
             ObjectOutputStream stream) throws IOException {

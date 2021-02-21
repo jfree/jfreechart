@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------------------------
  * DirectionalGradientPaintTransformer.java
  * ----------------------------------------
- * (C) Copyright 2013-2020 by Peter Kolb and Contributors.
+ * (C) Copyright 2013-2021 by Peter Kolb and Contributors.
  *
  * Original Author:  Peter Kolb;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -64,7 +64,6 @@ import org.jfree.chart.ui.GradientPaintTransformer;
  * account.</p>
  *
  * @author Peter Kolb
- * @since 1.0.17
  */
 public class DirectionalGradientPaintTransformer 
         implements GradientPaintTransformer {

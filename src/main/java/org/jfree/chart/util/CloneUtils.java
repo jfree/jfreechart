@@ -120,8 +120,6 @@ public class CloneUtils {
      * @param source  the source map ({@code null} not permitted).
      * 
      * @return A new map. 
-     * 
-     * @since 1.0.18
      */
     public static Map cloneMapValues(Map source) {
         Args.nullNotPermitted(source, "source");
