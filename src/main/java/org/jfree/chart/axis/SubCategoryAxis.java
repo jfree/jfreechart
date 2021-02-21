@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,27 +27,11 @@
  * --------------------
  * SubCategoryAxis.java
  * --------------------
- * (C) Copyright 2004-2017, by Object Refinery Limited.
+ * (C) Copyright 2004-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Adriaan Joubert;
  *
- * Changes
- * -------
- * 12-May-2004 : Version 1 (DG);
- * 30-Sep-2004 : Moved drawRotatedString() from RefineryUtilities
- *               --> TextUtilities (DG);
- * 26-Apr-2005 : Removed logger (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 18-Aug-2006 : Fix for bug drawing category labels, thanks to Adriaan
- *               Joubert (1277726) (DG);
- * 30-May-2007 : Added argument check and event notification to
- *               addSubCategory() (DG);
- * 13-Nov-2008 : Fix NullPointerException when dataset is null - see bug
- *               report 2275695 (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
- * 01-Aug-2013 : Added attributedLabel override to support superscripts,
- *               subscripts and more (DG);
  */
 
 package org.jfree.chart.axis;

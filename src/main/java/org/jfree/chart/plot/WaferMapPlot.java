@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -28,20 +28,10 @@
  * WaferMapPlot.java
  * -----------------
  *
- * (C) Copyright 2003-2017, by Robert Redburn and Contributors.
+ * (C) Copyright 2003-2021, by Robert Redburn and Contributors.
  *
  * Original Author:  Robert Redburn;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 25-Nov-2003 : Version 1 contributed by Robert Redburn (DG);
- * 05-May-2005 : Updated draw() method parameters (DG);
- * 10-Jun-2005 : Changed private --> protected for drawChipGrid(),
- *               drawWaferEdge() and getWafterEdge() (DG);
- * 16-Jun-2005 : Added default constructor and setDataset() method (DG);
- * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
- *               Jess Thrysoee (DG);
  *
  */
 
