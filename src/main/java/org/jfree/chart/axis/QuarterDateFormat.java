@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------
  * QuarterDateFormat.java
  * ----------------------
- * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -66,11 +66,7 @@ public class QuarterDateFormat extends DateFormat
     public static final String[] ROMAN_QUARTERS  = new String[] {"I", "II",
             "III", "IV"};
 
-    /**
-     * Symbols for greek numbered quarters.
-     *
-     * @since 1.0.6
-     */
+    /** Symbols for greek numbered quarters. */
     public static final String[] GREEK_QUARTERS = new String[] {"\u0391",
             "\u0392", "\u0393", "\u0394"};
 

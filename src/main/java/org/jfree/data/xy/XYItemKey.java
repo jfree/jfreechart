@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------
  * XYItemKey.java
  * --------------
- * (C) Copyright 2014-2020, by Object Refinery Limited.
+ * (C) Copyright 2014-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -48,7 +48,6 @@ import org.jfree.data.ItemKey;
  * this class are immutable.
  * 
  * @param <S> the series key type.
- * @since 1.0.20
  */
 public class XYItemKey<S extends Comparable<S>> implements ItemKey, 
         Comparable<XYItemKey<S>>, Serializable {

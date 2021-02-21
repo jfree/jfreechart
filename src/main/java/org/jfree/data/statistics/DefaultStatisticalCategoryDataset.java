@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,31 +27,10 @@
  * --------------------------------------
  * DefaultStatisticalCategoryDataset.java
  * --------------------------------------
- * (C) Copyright 2002-2011, by Pascal Collet and Contributors.
+ * (C) Copyright 2002-2021, by Pascal Collet and Contributors.
  *
  * Original Author:  Pascal Collet;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 21-Aug-2002 : Version 1, contributed by Pascal Collet (DG);
- * 07-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 05-Feb-2003 : Revised implementation to use KeyedObjects2D (DG);
- * 28-Aug-2003 : Moved from org.jfree.data --> org.jfree.data.statistics (DG);
- * 06-Oct-2003 : Removed incorrect Javadoc text (DG);
- * 18-Nov-2004 : Updated for changes in RangeInfo interface (DG);
- * 11-Jan-2005 : Removed deprecated code in preparation for the 1.0.0
- *               release (DG);
- * 01-Feb-2005 : Changed minimumRangeValue and maximumRangeValue from Double
- *               to double (DG);
- * 05-Feb-2005 : Implemented equals() method (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 08-Aug-2006 : Reworked implementation of RangeInfo methods (DG);
- * 02-Feb-2007 : Removed author tags from all over JFreeChart sources (DG);
- * 28-Sep-2007 : Fixed cloning bug (DG);
- * 02-Oct-2007 : Fixed bug updating cached range values (DG);
- * 19-May-2009 : Fixed FindBugs warnings, patch by Michal Wozniak (DG);
- * 20-Oct-2011 : Fixed getRangeBounds() bug 3072674 (DG);
  *
  */
 
@@ -440,8 +419,6 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
      * @param columnKey  the column key ({@code null} not permitted).
      *
      * @see #add(double, double, Comparable, Comparable)
-     *
-     * @since 1.0.7
      */
     public void remove(Comparable rowKey, Comparable columnKey) {
         // defer null argument checks
@@ -475,8 +452,6 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
      * @param rowIndex  the row index.
      *
      * @see #removeColumn(int)
-     *
-     * @since 1.0.7
      */
     public void removeRow(int rowIndex) {
         this.data.removeRow(rowIndex);
@@ -491,8 +466,6 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
      * @param rowKey  the row key ({@code null} not permitted).
      *
      * @see #removeColumn(Comparable)
-     *
-     * @since 1.0.7
      */
     public void removeRow(Comparable rowKey) {
         this.data.removeRow(rowKey);
@@ -507,8 +480,6 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
      * @param columnIndex  the column index.
      *
      * @see #removeRow(int)
-     *
-     * @since 1.0.7
      */
     public void removeColumn(int columnIndex) {
         this.data.removeColumn(columnIndex);
@@ -523,8 +494,6 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
      * @param columnKey  the column key ({@code null} not permitted).
      *
      * @see #removeRow(Comparable)
-     *
-     * @since 1.0.7
      */
     public void removeColumn(Comparable columnKey) {
         this.data.removeColumn(columnKey);
@@ -535,8 +504,6 @@ public class DefaultStatisticalCategoryDataset extends AbstractDataset
     /**
      * Clears all data from the dataset and sends a {@link DatasetChangeEvent}
      * to all registered listeners.
-     *
-     * @since 1.0.7
      */
     public void clear() {
         this.data.clear();

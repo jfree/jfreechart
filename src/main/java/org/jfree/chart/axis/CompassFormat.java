@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,11 @@
  * ------------------
  * CompassFormat.java
  * ------------------
- * (C) Copyright 2003-2016, by Sylvain Vieujot and Contributors.
+ * (C) Copyright 2003-2021, by Sylvain Vieujot and Contributors.
  *
  * Original Author:  Sylvain Vieujot;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Simon Legner (GitHub #298);
- *
- * Changes
- * -------
- * 18-Feb-2004 : Version 1 contributed by Sylvain Vieujot (DG);
- * 04-Feb-2014 : Make direction strings user-definable (SL);
  * 
  */
 
@@ -70,8 +65,6 @@ public class CompassFormat extends NumberFormat {
      * @param e  the code for EAST.
      * @param s  the code for SOUTH.
      * @param w  the code for WEST.
-     * 
-     * @since 1.0.18
      */
     public CompassFormat(String n, String e, String s, String w) {
         this(new String[] {
@@ -85,8 +78,6 @@ public class CompassFormat extends NumberFormat {
      * 
      * @param directions  an array containing 16 strings representing
      *     the directions of a compass.
-     * 
-     * @since 1.0.18
      */
     public CompassFormat(String[] directions) {
         super();

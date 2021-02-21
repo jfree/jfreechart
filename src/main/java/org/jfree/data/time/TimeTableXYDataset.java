@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * TimeTableXYDataset.java
  * -----------------------
- * (C) Copyright 2004-2020, by Andreas Schroeder and Contributors.
+ * (C) Copyright 2004-2021, by Andreas Schroeder and Contributors.
  *
  * Original Author:  Andreas Schroeder;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -260,8 +260,6 @@ public class TimeTableXYDataset extends AbstractIntervalXYDataset
     /**
      * Removes all data items from the dataset and sends a
      * {@link DatasetChangeEvent} to all registered listeners.
-     *
-     * @since 1.0.7
      */
     public void clear() {
         if (this.values.getRowCount() > 0) {

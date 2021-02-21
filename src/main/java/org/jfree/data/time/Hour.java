@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------
  * Hour.java
  * ---------
- * (C) Copyright 2001-2020, by Object Refinery Limited.
+ * (C) Copyright 2001-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -129,8 +129,6 @@ public class Hour extends RegularTimePeriod implements Serializable {
      * @param time  the date-time ({@code null} not permitted).
      * @param zone  the time zone ({@code null} not permitted).
      * @param locale  the locale ({@code null} not permitted).
-     *
-     * @since 1.0.13
      */
     public Hour(Date time, TimeZone zone, Locale locale) {
         Args.nullNotPermitted(time, "time");
@@ -240,8 +238,6 @@ public class Hour extends RegularTimePeriod implements Serializable {
      * relative to the supplied calendar (which incorporates a time zone).
      *
      * @param calendar  the calendar ({@code null} not permitted).
-     *
-     * @since 1.0.3
      */
     @Override
     public void peg(Calendar calendar) {

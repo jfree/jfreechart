@@ -56,8 +56,6 @@ import org.jfree.chart.util.SerialUtils;
 
 /**
  * A line border for any {@link AbstractBlock}.
- *
- * @since 1.0.5
  */
 public class LineBorder implements BlockFrame, Serializable {
 

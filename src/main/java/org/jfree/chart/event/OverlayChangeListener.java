@@ -27,7 +27,7 @@
  * --------------------------
  * OverlayChangeListener.java
  * --------------------------
- * (C) Copyright 2009-2020, by Object Refinery Limited.
+ * (C) Copyright 2009-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -41,8 +41,6 @@ import org.jfree.chart.panel.Overlay;
 
 /**
  * A listener for changes to an {@link Overlay}.
- *
- * @since 1.0.13
  */
 public interface OverlayChangeListener extends EventListener {
 

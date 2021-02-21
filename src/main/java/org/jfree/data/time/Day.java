@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------
  * Day.java
  * --------
- * (C) Copyright 2001-2020, by Object Refinery Limited.
+ * (C) Copyright 2001-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -245,8 +245,6 @@ public class Day extends RegularTimePeriod implements Serializable {
      * relative to the supplied calendar (which incorporates a time zone).
      *
      * @param calendar  the calendar ({@code null} not permitted).
-     *
-     * @since 1.0.3
      */
     @Override
     public void peg(Calendar calendar) {

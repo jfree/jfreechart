@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,20 +27,10 @@
  * -------------
  * TickUnit.java
  * -------------
- * (C) Copyright 2001-2008, by Object Refinery Limited.
+ * (C) Copyright 2001-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 19-Dec-2001 : Added standard header (DG);
- * 01-May-2002 : Changed the unit size from Number to double (DG);
- * 26-Sep-2002 : Fixed errors reported by Checkstyle (DG);
- * 08-Nov-2002 : Moved to new package com.jrefinery.chart.axis (DG);
- * 26-Mar-2003 : Implemented Serializable (DG);
- * 05-Sep-2005 : Implemented hashCode(), thanks to Thomas Morgner (DG);
- * 02-Aug-2007 : Added minorTickCount attribute (DG);
  *
  */
 
@@ -68,11 +58,7 @@ public abstract class TickUnit implements Comparable, Serializable {
     /** The size of the tick unit. */
     private double size;
 
-    /**
-     * The number of minor ticks.
-     *
-     * @since 1.0.7
-     */
+    /** The number of minor ticks. */
     private int minorTickCount;
 
     /**
@@ -89,8 +75,6 @@ public abstract class TickUnit implements Comparable, Serializable {
      *
      * @param size  the tick unit size.
      * @param minorTickCount  the minor tick count.
-     *
-     * @since 1.0.7
      */
     public TickUnit(double size, int minorTickCount) {
         this.size = size;
@@ -110,8 +94,6 @@ public abstract class TickUnit implements Comparable, Serializable {
      * Returns the minor tick count.
      *
      * @return The minor tick count.
-     *
-     * @since 1.0.7
      */
     public int getMinorTickCount() {
         return this.minorTickCount;

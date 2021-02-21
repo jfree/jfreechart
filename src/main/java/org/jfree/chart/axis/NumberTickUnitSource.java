@@ -44,8 +44,6 @@ import java.util.Objects;
 /**
  * A tick unit source implementation that returns NumberTickUnit instances 
  * that are multiples of 1, 2 or 5 times some power of 10.
- * 
- * @since 1.0.18
  */
 public class NumberTickUnitSource implements TickUnitSource, Serializable {
 

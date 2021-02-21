@@ -47,8 +47,6 @@ import org.jfree.data.general.DatasetChangeEvent;
 
 /**
  * A collection of {@link VectorSeries} objects.
- *
- * @since 1.0.6
  */
 public class VectorSeriesCollection extends AbstractXYDataset
         implements VectorXYDataset, PublicCloneable, Serializable {

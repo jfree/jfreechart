@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------
  * XYBarDataset.java
  * -----------------
- * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -70,8 +70,6 @@ public class XYBarDataset extends AbstractIntervalXYDataset
      * Returns the underlying dataset that was specified via the constructor.
      *
      * @return The underlying dataset (never {@code null}).
-     *
-     * @since 1.0.4
      */
     public XYDataset getUnderlyingDataset() {
         return this.underlying;
@@ -83,7 +81,6 @@ public class XYBarDataset extends AbstractIntervalXYDataset
      * @return The bar width.
      *
      * @see #setBarWidth(double)
-     * @since 1.0.4
      */
     public double getBarWidth() {
         return this.barWidth;
@@ -96,7 +93,6 @@ public class XYBarDataset extends AbstractIntervalXYDataset
      * @param barWidth  the bar width.
      *
      * @see #getBarWidth()
-     * @since 1.0.4
      */
     public void setBarWidth(double barWidth) {
         this.barWidth = barWidth;

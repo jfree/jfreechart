@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,17 +27,10 @@
  * -----------
  * Vector.java
  * -----------
- * (C) Copyright 2007, 2008, by Object Refinery Limited.
+ * (C) Copyright 2007-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 30-Jan-2007 : Version 1 (DG);
- * 24-May-2007 : Added getLength() and getAngle() methods, thanks to
- *               matinh (DG);
- * 25-May-2007 : Moved from experimental to the main source tree (DG);
  *
  */
 
@@ -47,8 +40,6 @@ import java.io.Serializable;
 
 /**
  * A vector.
- *
- * @since 1.0.6
  */
 public class Vector implements Serializable {
 

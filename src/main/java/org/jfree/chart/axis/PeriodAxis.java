@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * PeriodAxis.java
  * ---------------
- * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -100,11 +100,7 @@ public class PeriodAxis extends ValueAxis
      */
     private TimeZone timeZone;
 
-    /**
-     * The locale (never {@code null}).
-     * 
-     * @since 1.0.13
-     */
+    /** The locale (never {@code null}). */
     private Locale locale;
 
     /**
@@ -185,8 +181,6 @@ public class PeriodAxis extends ValueAxis
      *              ({@code null} not permitted).
      * @param timeZone  the time zone ({@code null} not permitted).
      * @param locale  the locale ({@code null} not permitted).
-     *
-     * @since 1.0.13
      */
     public PeriodAxis(String label, RegularTimePeriod first,
             RegularTimePeriod last, TimeZone timeZone, Locale locale) {
@@ -288,8 +282,6 @@ public class PeriodAxis extends ValueAxis
      * Returns the locale for this axis.
      *
      * @return The locale (never ({@code null}).
-     *
-     * @since 1.0.13
      */
     public Locale getLocale() {
         return this.locale;

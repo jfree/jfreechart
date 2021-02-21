@@ -92,11 +92,8 @@ public class PiePlot3D extends PiePlot implements Serializable {
     /**
      * A flag that controls whether or not the sides of the pie chart
      * are rendered using a darker colour.
-     *
-     *  @since 1.0.7.
      */
-    private boolean darkerSides = false;  // default preserves previous
-                                          // behaviour
+    private boolean darkerSides = false;  // default preserves previous behaviour
 
     /**
      * Creates a new instance with no dataset.
@@ -147,8 +144,6 @@ public class PiePlot3D extends PiePlot implements Serializable {
      * @return A boolean.
      *
      * @see #setDarkerSides(boolean)
-     *
-     * @since 1.0.7
      */
     public boolean getDarkerSides() {
         return this.darkerSides;
@@ -163,8 +158,6 @@ public class PiePlot3D extends PiePlot implements Serializable {
      *         behaviour.
      *
      * @see #getDarkerSides()
-     *
-     * @since 1.0.7.
      */
     public void setDarkerSides(boolean darker) {
         this.darkerSides = darker;

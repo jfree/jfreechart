@@ -120,8 +120,6 @@ public class BoxAndWhiskerItem implements Serializable {
      * @param minOutlier  the minimum outlier value.
      * @param maxOutlier  the maximum outlier value.
      * @param outliers  a list of the outliers.
-     *
-     * @since 1.0.7
      */
     public BoxAndWhiskerItem(double mean, double median, double q1, double q3,
             double minRegularValue, double maxRegularValue, double minOutlier,

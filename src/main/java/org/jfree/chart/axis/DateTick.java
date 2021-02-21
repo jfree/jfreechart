@@ -77,8 +77,6 @@ public class DateTick extends ValueTick {
      *                    point.
      * @param rotationAnchor  defines the rotation point relative to the text.
      * @param angle  the rotation angle (in radians).
-     *
-     * @since 1.0.12
      */
     public DateTick(TickType tickType, Date date, String label,
                     TextAnchor textAnchor, TextAnchor rotationAnchor,

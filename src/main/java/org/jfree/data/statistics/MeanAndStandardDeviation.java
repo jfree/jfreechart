@@ -27,7 +27,7 @@
  * -----------------------------
  * MeanAndStandardDeviation.java
  * -----------------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited.
+ * (C) Copyright 2003-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -155,8 +155,6 @@ public class MeanAndStandardDeviation implements Serializable {
      * Returns a string representing this instance.
      *
      * @return A string.
-     *
-     * @since 1.0.7
      */
     @Override
     public String toString() {

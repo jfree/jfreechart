@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,17 +27,10 @@
  * ---------------------
  * DefaultXYDataset.java
  * ---------------------
- * (C) Copyright 2006-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 06-Jul-2006 : Version 1 (DG);
- * 02-Nov-2006 : Fixed a problem with adding a new series with the same key
- *               as an existing series (see bug 1589392) (DG);
- * 25-Jan-2007 : Implemented PublicCloneable (DG);
  *
  */
 
@@ -54,8 +47,6 @@ import org.jfree.data.general.DatasetChangeEvent;
 /**
  * A default implementation of the {@link XYDataset} interface that stores
  * data values in arrays of double primitives.
- *
- * @since 1.0.2
  */
 public class DefaultXYDataset extends AbstractXYDataset
         implements XYDataset, PublicCloneable {

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------------
  * MultiValueCategoryDataset.java
  * ------------------------------
- * (C) Copyright 2007-2020, by David Forslund and Contributors.
+ * (C) Copyright 2007-2021, by David Forslund and Contributors.
  *
  * Original Author:  David Forslund;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -42,8 +42,6 @@ import org.jfree.data.category.CategoryDataset;
 
 /**
  * A category dataset that defines multiple values for each item.
- *
- * @since 1.0.7
  */
 public interface MultiValueCategoryDataset extends CategoryDataset {
 

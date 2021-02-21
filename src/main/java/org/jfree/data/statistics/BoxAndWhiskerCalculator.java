@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------------
  * BoxAndWhiskerCalculator.java
  * ----------------------------
- * (C) Copyright 2003-2020,  by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2021,  by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -77,8 +77,6 @@ public abstract class BoxAndWhiskerCalculator {
      *     and NaN items.
      *
      * @return A box-and-whisker item.
-     *
-     * @since 1.0.3
      */
     public static BoxAndWhiskerItem calculateBoxAndWhiskerStatistics(
             List values, boolean stripNullAndNaNItems) {

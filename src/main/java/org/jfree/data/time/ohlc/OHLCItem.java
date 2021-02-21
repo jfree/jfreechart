@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * -------------
  * OHLCItem.java
  * -------------
- * (C) Copyright 2006, 2007, by Object Refinery Limited.
+ * (C) Copyright 2006-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 04-Dec-2006 : Version 1 (DG);
  *
  */
 
@@ -46,8 +42,6 @@ import org.jfree.data.time.RegularTimePeriod;
 /**
  * An item representing data in the form {@code (time-period, open, high, low, 
  * close)}.
- *
- * @since 1.0.4
  */
 public class OHLCItem extends ComparableObjectItem {
 

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------
  * VectorSeries.java
  * -----------------
- * (C) Copyright 2007-2020, by Object Refinery Limited.
+ * (C) Copyright 2007-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -42,8 +42,6 @@ import org.jfree.data.general.SeriesChangeEvent;
 
 /**
  * A list of (x,y, deltaX, deltaY) data items.
- *
- * @since 1.0.6
  *
  * @see VectorSeriesCollection
  */
@@ -91,8 +89,6 @@ public class VectorSeries extends ComparableObjectSeries {
      * 
      * @param item  the data item ({@code null} not permitted).
      * @param notify  notify listeners?
-     * 
-     * @since 1.0.18
      */
     public void add(VectorDataItem item, boolean notify) {
         super.add(item, notify);

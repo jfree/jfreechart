@@ -49,8 +49,6 @@ import org.jfree.chart.util.SerialUtils;
 
 /**
  * A class that captures information about a plot.
- *
- * @since 1.0.13
  */
 public class PlotEntity extends ChartEntity {
 
