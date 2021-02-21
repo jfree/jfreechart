@@ -48,8 +48,6 @@ import org.jfree.data.general.DatasetChangeEvent;
 /**
  * A collection of {@link YIntervalSeries} objects.
  *
- * @since 1.0.3
- *
  * @see YIntervalSeries
  */
 public class YIntervalSeriesCollection extends AbstractIntervalXYDataset
@@ -272,8 +270,6 @@ public class YIntervalSeriesCollection extends AbstractIntervalXYDataset
      * {@link DatasetChangeEvent} to all registered listeners.
      *
      * @param series  the series index (zero-based).
-     *
-     * @since 1.0.10
      */
     public void removeSeries(int series) {
         if ((series < 0) || (series >= getSeriesCount())) {
@@ -290,8 +286,6 @@ public class YIntervalSeriesCollection extends AbstractIntervalXYDataset
      * {@link DatasetChangeEvent} to all registered listeners.
      *
      * @param series  the series ({@code null} not permitted).
-     *
-     * @since 1.0.10
      */
     public void removeSeries(YIntervalSeries series) {
         Args.nullNotPermitted(series, "series");
@@ -305,8 +299,6 @@ public class YIntervalSeriesCollection extends AbstractIntervalXYDataset
     /**
      * Removes all the series from the collection and sends a
      * {@link DatasetChangeEvent} to all registered listeners.
-     *
-     * @since 1.0.10
      */
     public void removeAllSeries() {
         // Unregister the collection as a change listener to each series in

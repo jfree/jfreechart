@@ -116,8 +116,6 @@ public class CategoryMarker extends Marker implements Cloneable, Serializable {
      * listeners.
      *
      * @param key  the key ({@code null} not permitted).
-     *
-     * @since 1.0.3
      */
     public void setKey(Comparable key) {
         Args.nullNotPermitted(key, "key");

@@ -212,8 +212,6 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
      * @param series  the series ({@code null} not permitted).
      *
      * @return The series index.
-     *
-     * @since 1.0.6
      */
     public int indexOf(XYSeries series) {
         Args.nullNotPermitted(series, "series");
@@ -246,8 +244,6 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
      *
      * @throws UnknownKeyException if {@code key} is not found in the
      *         collection.
-     *
-     * @since 1.0.9
      */
     public XYSeries getSeries(Comparable key) {
         Args.nullNotPermitted(key, "key");
@@ -285,8 +281,6 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
      * @param key  the key ({@code null} not permitted).
      * 
      * @return The index.
-     * 
-     * @since 1.0.14
      */
     public int getSeriesIndex(Comparable key) {
         Args.nullNotPermitted(key, "key");
@@ -705,11 +699,11 @@ public class XYSeriesCollection extends AbstractIntervalXYDataset
      * 
      * @param e  the event.
      * 
-     * @since 1.0.14
+     * @throws PropertyVetoException  if the series name is already present in 
+     *     the collection.
      */
     @Override
-    public void vetoableChange(PropertyChangeEvent e)
-            throws PropertyVetoException {
+    public void vetoableChange(PropertyChangeEvent e) throws PropertyVetoException {
         // if it is not the series name, then we have no interest
         if (!"Key".equals(e.getPropertyName())) {
             return;

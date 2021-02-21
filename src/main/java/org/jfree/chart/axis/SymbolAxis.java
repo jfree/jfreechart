@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * SymbolAxis.java
  * ---------------
- * (C) Copyright 2002-2020, by Anthony Boulestreau and Contributors.
+ * (C) Copyright 2002-2021, by Anthony Boulestreau and Contributors.
  *
  * Original Author:  Anthony Boulestreau;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -78,8 +78,6 @@ public class SymbolAxis extends NumberAxis implements Serializable {
 
     /**
      * The default paint for alternate grid bands.
-     *
-     * @since 1.0.7
      */
     public static final Paint DEFAULT_GRID_BAND_ALTERNATE_PAINT
             = new Color(0, 0, 0, 0);  // transparent
@@ -95,8 +93,6 @@ public class SymbolAxis extends NumberAxis implements Serializable {
 
     /**
      * The paint used to fill the alternate grid bands.
-     *
-     * @since 1.0.7
      */
     private transient Paint gridBandAlternatePaint;
 
@@ -197,8 +193,6 @@ public class SymbolAxis extends NumberAxis implements Serializable {
      * @return The paint (never {@code null}).
      *
      * @see #setGridBandAlternatePaint(Paint)
-     *
-     * @since 1.0.7
      */
     public Paint getGridBandAlternatePaint() {
         return this.gridBandAlternatePaint;
@@ -213,8 +207,6 @@ public class SymbolAxis extends NumberAxis implements Serializable {
      *
      * @see #getGridBandAlternatePaint()
      * @see #setGridBandPaint(Paint)
-     *
-     * @since 1.0.7
      */
     public void setGridBandAlternatePaint(Paint paint) {
         Args.nullNotPermitted(paint, "paint");
