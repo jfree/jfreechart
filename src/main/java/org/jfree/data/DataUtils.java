@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------
  * DataUtils.java
  * --------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and contributors.
+ * (C) Copyright 2003-2021, by Object Refinery Limited and contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Peter Kolb (patch 2511330);
@@ -56,8 +56,6 @@ public abstract class DataUtils {
      * @param b  the second array ({@code null} permitted).
      *
      * @return A boolean.
-     *
-     * @since 1.0.13
      */
     public static boolean equal(double[][] a, double[][] b) {
         if (a == null) {
@@ -83,8 +81,6 @@ public abstract class DataUtils {
      * @param source  the source array ({@code null} not permitted).
      *
      * @return A clone of the array.
-     *
-     * @since 1.0.13
      */
     public static double[][] clone(double[][] source) {
         Args.nullNotPermitted(source, "source");
@@ -130,8 +126,6 @@ public abstract class DataUtils {
      * @param validRows the array with valid rows (zero-based).
      *
      * @return The total of the valid values in the specified column.
-     *
-     * @since 1.0.13
      */
     public static double calculateColumnTotal(Values2D data, int column,
              int[] validRows) {
@@ -181,8 +175,6 @@ public abstract class DataUtils {
      * @param validCols the array with valid cols (zero-based).
      *
      * @return The total of the valid values in the specified row.
-     *
-     * @since 1.0.13
      */
     public static double calculateRowTotal(Values2D data, int row,
              int[] validCols) {

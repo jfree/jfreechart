@@ -48,8 +48,6 @@ import org.jfree.data.general.SeriesException;
 
 /**
  * A (possibly ordered) list of (Comparable, Object) data items.
- *
- * @since 1.0.3
  */
 public class ComparableObjectSeries extends Series
         implements Cloneable, Serializable {

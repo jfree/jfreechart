@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * GradientXYBarPainter.java
  * -------------------------
- * (C) Copyright 2008-2017, by Object Refinery Limited.
+ * (C) Copyright 2008-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -50,8 +50,6 @@ import org.jfree.chart.ui.RectangleEdge;
 /**
  * An implementation of the {@link XYBarPainter} interface that uses several
  * gradient fills to enrich the appearance of the bars.
- *
- * @since 1.0.11
  */
 public class GradientXYBarPainter implements XYBarPainter, Serializable {
 

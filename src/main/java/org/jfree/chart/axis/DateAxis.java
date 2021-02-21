@@ -241,8 +241,6 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
 
     /**
      * The locale for the axis ({@code null} is not permitted).
-     *
-     * @since 1.0.11
      */
     private Locale locale;
 
@@ -271,8 +269,6 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      * @param label  the axis label ({@code null} permitted).
      * @param zone  the time zone.
      * @param locale  the locale ({@code null} not permitted).
-     *
-     * @since 1.0.11
      */
     public DateAxis(String label, TimeZone zone, Locale locale) {
         super(label, DateAxis.createStandardDateTickUnits(zone, locale));
@@ -292,8 +288,6 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      *
      * @return The time zone (never {@code null}).
      *
-     * @since 1.0.4
-     *
      * @see #setTimeZone(TimeZone)
      */
     public TimeZone getTimeZone() {
@@ -305,8 +299,6 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      * all registered listeners.
      *
      * @param zone  the time zone ({@code null} not permitted).
-     *
-     * @since 1.0.4
      *
      * @see #getTimeZone()
      */
@@ -321,8 +313,6 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      * Returns the locale for this axis.
      * 
      * @return The locale (never {@code null}).
-     * 
-     * @since 1.0.18
      */
     public Locale getLocale() {
         return this.locale;
@@ -1025,8 +1015,6 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      * @param locale  the locale ({@code null} not permitted).
      *
      * @return A collection of standard date tick units.
-     *
-     * @since 1.0.11
      */
     public static TickUnitSource createStandardDateTickUnits(TimeZone zone,
             Locale locale) {

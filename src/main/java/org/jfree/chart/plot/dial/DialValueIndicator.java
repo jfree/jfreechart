@@ -68,8 +68,6 @@ import org.jfree.chart.util.SerialUtils;
 
 /**
  * A value indicator for a {@link DialPlot}.
- *
- * @since 1.0.7
  */
 public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
         Cloneable, PublicCloneable, Serializable {
@@ -96,8 +94,6 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
      * A data value that will be formatted to determine the maximum size of
      * the indicator bounds.  If this is null, the indicator bounds can grow
      * as large as necessary to contain the actual data value.
-     *
-     * @since 1.0.14
      */
     private Number maxTemplateValue;
 
@@ -288,8 +284,6 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
      *
      * @return The template value (possibly {@code null}).
      *
-     * @since 1.0.14
-     *
      * @see #setMaxTemplateValue(java.lang.Number)
      */
     public Number getMaxTemplateValue() {
@@ -301,8 +295,6 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
      * and sends a {@link DialLayerChangeEvent} to all registered listeners.
      *
      * @param value  the value ({@code null} permitted).
-     *
-     * @since 1.0.14
      *
      * @see #getMaxTemplateValue()
      */

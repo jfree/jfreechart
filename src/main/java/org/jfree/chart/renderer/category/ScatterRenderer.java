@@ -71,8 +71,6 @@ import org.jfree.data.statistics.MultiValueCategoryDataset;
  * JFreeChart Demo Collection:
  * <br><br>
  * <img src="doc-files/ScatterRendererSample.png" alt="ScatterRendererSample.png">
- *
- * @since 1.0.7
  */
 public class ScatterRenderer extends AbstractCategoryItemRenderer
         implements Cloneable, PublicCloneable, Serializable {

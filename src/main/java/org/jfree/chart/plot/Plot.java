@@ -151,8 +151,6 @@ public abstract class Plot implements AxisChangeListener,
      * The chart that the plot is assigned to.  It can be {@code null} if the
      * plot is not assigned to a chart yet, or if the plot is a subplot of a
      * another plot.
-     * 
-     * @since 1.0.20
      */
     private JFreeChart chart;
     
@@ -176,8 +174,6 @@ public abstract class Plot implements AxisChangeListener,
 
     /**
      * A flag that controls whether or not the plot outline is drawn.
-     *
-     * @since 1.0.6
      */
     private boolean outlineVisible;
 
@@ -215,8 +211,6 @@ public abstract class Plot implements AxisChangeListener,
      * A flag that controls whether or not the plot will notify listeners
      * of changes (defaults to true, but sometimes it is useful to disable
      * this).
-     *
-     * @since 1.0.13
      */
     private boolean notify;
 
@@ -251,8 +245,6 @@ public abstract class Plot implements AxisChangeListener,
      * plot is a subplot of another plot.
      * 
      * @return The chart (possibly {@code null}).
-     * 
-     * @since 1.0.20
      */
     public JFreeChart getChart() {
         return this.chart;
@@ -263,8 +255,6 @@ public abstract class Plot implements AxisChangeListener,
      * intended for external use.
      * 
      * @param chart  the chart ({@code null} permitted).
-     * 
-     * @since 1.0.20
      */
     public void setChart(JFreeChart chart) {
         this.chart = chart;
@@ -276,8 +266,6 @@ public abstract class Plot implements AxisChangeListener,
      * a chart instance, this method will return {@code false}.
      * 
      * @return A boolean.
-     * 
-     * @since 1.0.20
      */
     public boolean fetchElementHintingFlag() {
         if (this.parent != null) {
@@ -617,8 +605,6 @@ public abstract class Plot implements AxisChangeListener,
      * @param notify  notify listeners?
      *
      * @see #getDrawingSupplier()
-     *
-     * @since 1.0.11
      */
     public void setDrawingSupplier(DrawingSupplier supplier, boolean notify) {
         this.drawingSupplier = supplier;
@@ -724,8 +710,6 @@ public abstract class Plot implements AxisChangeListener,
      *
      * @return The outline visibility flag.
      *
-     * @since 1.0.6
-     *
      * @see #setOutlineVisible(boolean)
      */
     public boolean isOutlineVisible() {
@@ -737,8 +721,6 @@ public abstract class Plot implements AxisChangeListener,
      * drawn, and sends a {@link PlotChangeEvent} to all registered listeners.
      *
      * @param visible  the new flag value.
-     *
-     * @since 1.0.6
      *
      * @see #isOutlineVisible()
      */
@@ -868,8 +850,6 @@ public abstract class Plot implements AxisChangeListener,
      * @return A boolean.
      *
      * @see #setNotify(boolean)
-     *
-     * @since 1.0.13
      */
     public boolean isNotify() {
         return this.notify;
@@ -882,8 +862,6 @@ public abstract class Plot implements AxisChangeListener,
      * @param notify  a boolean.
      *
      * @see #isNotify()
-     *
-     * @since 1.0.13
      */
     public void setNotify(boolean notify) {
         this.notify = notify;
@@ -936,8 +914,6 @@ public abstract class Plot implements AxisChangeListener,
 
     /**
      * Sends a {@link PlotChangeEvent} to all registered listeners.
-     *
-     * @since 1.0.10
      */
     protected void fireChangeEvent() {
         notifyListeners(new PlotChangeEvent(this));
@@ -1000,8 +976,6 @@ public abstract class Plot implements AxisChangeListener,
      * @param area  the plot area.
      * @param orientation  the plot orientation ({@code null} not
      *         permitted).
-     *
-     * @since 1.0.6
      */
     protected void fillBackground(Graphics2D g2, Rectangle2D area,
             PlotOrientation orientation) {
@@ -1121,8 +1095,6 @@ public abstract class Plot implements AxisChangeListener,
      *     subclass) ({@code null} permitted).
      * @param urlText  the url (defined in the respective Plot subclass)
      *     ({@code null} permitted).
-     *
-     *  @since 1.0.13
      */
     protected void createAndAddEntity(Rectangle2D dataArea,
             PlotRenderingInfo plotState, String toolTip, String urlText) {
@@ -1163,8 +1135,6 @@ public abstract class Plot implements AxisChangeListener,
      * this plot.
      *
      * @param event  information about the event (not used here).
-     *
-     * @since 1.0.14
      */
     @Override
     public void annotationChanged(AnnotationChangeEvent event) {
@@ -1201,8 +1171,6 @@ public abstract class Plot implements AxisChangeListener,
      * plot.
      *
      * @param event  the event.
-     *
-     * @since 1.0.3
      */
     @Override
     public void markerChanged(MarkerChangeEvent event) {

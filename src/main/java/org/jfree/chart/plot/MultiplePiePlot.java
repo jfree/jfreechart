@@ -97,29 +97,21 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
 
     /**
      * The key for the aggregated items.
-     *
-     * @since 1.0.2
      */
     private Comparable aggregatedItemsKey;
 
     /**
      * The paint for the aggregated items.
-     *
-     * @since 1.0.2
      */
     private transient Paint aggregatedItemsPaint;
 
     /**
      * The colors to use for each section.
-     *
-     * @since 1.0.2
      */
     private transient Map sectionPaints;
 
     /**
      * The legend item shape (never null).
-     *
-     * @since 1.0.12
      */
     private transient Shape legendItemShape;
 
@@ -265,8 +257,6 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
      * The default value is "Other".
      *
      * @return The aggregated items key.
-     *
-     * @since 1.0.2
      */
     public Comparable getAggregatedItemsKey() {
         return this.aggregatedItemsKey;
@@ -277,8 +267,6 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
      * that this doesn't clash with any keys in the dataset.
      *
      * @param key  the key ({@code null} not permitted).
-     *
-     * @since 1.0.2
      */
     public void setAggregatedItemsKey(Comparable key) {
         Args.nullNotPermitted(key, "key");
@@ -291,8 +279,6 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
      * aggregated items.  The default value is {code Color.LIGHT_GRAY}.
      *
      * @return The paint.
-     *
-     * @since 1.0.2
      */
     public Paint getAggregatedItemsPaint() {
         return this.aggregatedItemsPaint;
@@ -303,8 +289,6 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
      * items and sends a {@link PlotChangeEvent} to all registered listeners.
      *
      * @param paint  the paint ({@code null} not permitted).
-     *
-     * @since 1.0.2
      */
     public void setAggregatedItemsPaint(Paint paint) {
         Args.nullNotPermitted(paint, "paint");
@@ -329,8 +313,6 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
      * @return The shape (never {@code null}).
      *
      * @see #setLegendItemShape(Shape)
-     *
-     * @since 1.0.12
      */
     public Shape getLegendItemShape() {
         return this.legendItemShape;
@@ -343,8 +325,6 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
      * @param shape  the shape ({@code null} not permitted).
      *
      * @see #getLegendItemShape()
-     *
-     * @since 1.0.12
      */
     public void setLegendItemShape(Shape shape) {
         Args.nullNotPermitted(shape, "shape");

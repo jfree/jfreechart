@@ -199,8 +199,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     /**
      * A flag that controls whether or not the section paint is auto-populated
      * from the drawing supplier.
-     *
-     * @since 1.0.11
      */
     private boolean autoPopulateSectionPaint;
 
@@ -219,8 +217,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     /**
      * A flag that controls whether or not the section outline paint is
      * auto-populated from the drawing supplier.
-     *
-     * @since 1.0.11
      */
     private boolean autoPopulateSectionOutlinePaint;
 
@@ -233,8 +229,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     /**
      * A flag that controls whether or not the section outline stroke is
      * auto-populated from the drawing supplier.
-     *
-     * @since 1.0.11
      */
     private boolean autoPopulateSectionOutlineStroke;
 
@@ -285,23 +279,17 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
 
     /**
      * A flag that controls whether simple or extended labels are used.
-     *
-     * @since 1.0.7
      */
     private boolean simpleLabels = true;
 
     /**
      * The padding between the labels and the label outlines.  This is not
      * allowed to be {@code null}.
-     *
-     * @since 1.0.7
      */
     private RectangleInsets labelPadding;
 
     /**
      * The simple label offset.
-     *
-     * @since 1.0.7
      */
     private RectangleInsets simpleLabelOffset;
 
@@ -319,8 +307,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
 
     /**
      * The label link style.
-     *
-     * @since 1.0.10
      */
     private PieLabelLinkStyle labelLinkStyle = PieLabelLinkStyle.STANDARD;
 
@@ -335,8 +321,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
 
     /**
      * The pie section label distributor.
-     *
-     * @since 1.0.6
      */
     private AbstractPieLabelDistributor labelDistributor;
 
@@ -354,8 +338,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
 
     /**
      * A URL generator for the legend items (optional).
-     *
-     * @since 1.0.4.
      */
     private PieURLGenerator legendLabelURLGenerator;
 
@@ -387,8 +369,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
 
     /**
      * The shadow generator for the plot ({@code null} permitted).
-     * 
-     * @since 1.0.14
      */
     private ShadowGenerator shadowGenerator;
 
@@ -744,8 +724,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      *
      * @return The paint for the specified section.
      *
-     * @since 1.0.3
-     *
      * @see #lookupSectionPaint(Comparable, boolean)
      */
     protected Paint lookupSectionPaint(Comparable key) {
@@ -770,8 +748,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      *     is used to auto-populate the section paint settings.
      *
      * @return The paint.
-     *
-     * @since 1.0.3
      */
     protected Paint lookupSectionPaint(Comparable key, boolean autoPopulate) { 
 
@@ -806,8 +782,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      * @param section  the section index.
      *
      * @return The key.
-     *
-     * @since 1.0.3
      */
     protected K getSectionKey(int section) {
         K key = null;
@@ -832,8 +806,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      *     {@code null}.
      *
      * @see #setSectionPaint(Comparable, Paint)
-     *
-     * @since 1.0.3
      */
     public Paint getSectionPaint(Comparable key) {
         // null argument check delegated...
@@ -851,8 +823,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      *     {@code null}.
      *
      * @see #getSectionPaint(Comparable)
-     *
-     * @since 1.0.3
      */
     public void setSectionPaint(Comparable key, Paint paint) {
         // null argument check delegated...
@@ -867,8 +837,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      * paints may be repopulated using the same colours as before.
      *
      * @param notify  notify listeners?
-     *
-     * @since 1.0.11
      *
      * @see #autoPopulateSectionPaint
      */
@@ -910,8 +878,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      * auto-populated by the {@link #lookupSectionPaint(Comparable)} method.
      *
      * @return A boolean.
-     *
-     * @since 1.0.11
      */
     public boolean getAutoPopulateSectionPaint() {
         return this.autoPopulateSectionPaint;
@@ -923,8 +889,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      * and sends a {@link PlotChangeEvent} to all registered listeners.
      *
      * @param auto  auto-populate?
-     *
-     * @since 1.0.11
      */
     public void setAutoPopulateSectionPaint(boolean auto) {
         this.autoPopulateSectionPaint = auto;
@@ -969,8 +933,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      *
      * @return The paint for the specified section.
      *
-     * @since 1.0.3
-     *
      * @see #lookupSectionOutlinePaint(Comparable, boolean)
      */
     protected Paint lookupSectionOutlinePaint(Comparable key) {
@@ -996,8 +958,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      *     is used to auto-populate the section outline paint settings.
      *
      * @return The paint.
-     *
-     * @since 1.0.3
      */
     protected Paint lookupSectionOutlinePaint(Comparable key,
             boolean autoPopulate) {
@@ -1038,8 +998,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      *     {@code null}.
      *
      * @see #setSectionOutlinePaint(Comparable, Paint)
-     *
-     * @since 1.0.3
      */
     public Paint getSectionOutlinePaint(Comparable key) {
         // null argument check delegated...
@@ -1057,8 +1015,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      *     {@code null}.
      *
      * @see #getSectionOutlinePaint(Comparable)
-     *
-     * @since 1.0.3
      */
     public void setSectionOutlinePaint(Comparable key, Paint paint) {
         // null argument check delegated...
@@ -1073,8 +1029,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      * the section paints may be repopulated using the same colours as before.
      *
      * @param notify  notify listeners?
-     *
-     * @since 1.0.11
      *
      * @see #autoPopulateSectionOutlinePaint
      */
@@ -1116,8 +1070,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      * method.
      *
      * @return A boolean.
-     *
-     * @since 1.0.11
      */
     public boolean getAutoPopulateSectionOutlinePaint() {
         return this.autoPopulateSectionOutlinePaint;
@@ -1129,8 +1081,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      * method, and sends a {@link PlotChangeEvent} to all registered listeners.
      *
      * @param auto  auto-populate?
-     *
-     * @since 1.0.11
      */
     public void setAutoPopulateSectionOutlinePaint(boolean auto) {
         this.autoPopulateSectionOutlinePaint = auto;
@@ -1147,8 +1097,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      * @param key  the section key.
      *
      * @return The stroke for the specified section.
-     *
-     * @since 1.0.3
      *
      * @see #lookupSectionOutlineStroke(Comparable, boolean)
      */
@@ -1175,8 +1123,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      *     is used to auto-populate the section outline stroke settings.
      *
      * @return The stroke.
-     *
-     * @since 1.0.3
      */
     protected Stroke lookupSectionOutlineStroke(Comparable key,
             boolean autoPopulate) {
@@ -1217,8 +1163,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      *     {@code null}.
      *
      * @see #setSectionOutlineStroke(Comparable, Stroke)
-     *
-     * @since 1.0.3
      */
     public Stroke getSectionOutlineStroke(Comparable key) {
         // null argument check delegated...
@@ -1236,8 +1180,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      *     {@code null}.
      *
      * @see #getSectionOutlineStroke(Comparable)
-     *
-     * @since 1.0.3
      */
     public void setSectionOutlineStroke(Comparable key, Stroke stroke) {
         // null argument check delegated...
@@ -1252,8 +1194,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      * the section paints may be repopulated using the same colours as before.
      *
      * @param notify  notify listeners?
-     *
-     * @since 1.0.11
      *
      * @see #autoPopulateSectionOutlineStroke
      */
@@ -1295,8 +1235,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      * method.
      *
      * @return A boolean.
-     *
-     * @since 1.0.11
      */
     public boolean getAutoPopulateSectionOutlineStroke() {
         return this.autoPopulateSectionOutlineStroke;
@@ -1308,8 +1246,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      * method, and sends a {@link PlotChangeEvent} to all registered listeners.
      *
      * @param auto  auto-populate?
-     *
-     * @since 1.0.11
      */
     public void setAutoPopulateSectionOutlineStroke(boolean auto) {
         this.autoPopulateSectionOutlineStroke = auto;
@@ -1400,8 +1336,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      * @throws IllegalArgumentException if {@code key} is
      *     {@code null}.
      *
-     * @since 1.0.3
-     *
      * @see #setExplodePercent(Comparable, double)
      */
     public double getExplodePercent(K key) {
@@ -1421,8 +1355,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      *
      * @param key  the section key ({@code null} not permitted).
      * @param percent  the explode percentage (0.30 = 30 percent).
-     *
-     * @since 1.0.3
      *
      * @see #getExplodePercent(Comparable)
      */
@@ -1562,8 +1494,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      * @return The label link style (never {@code null}).
      *
      * @see #setLabelLinkStyle(PieLabelLinkStyle)
-     *
-     * @since 1.0.10
      */
     public PieLabelLinkStyle getLabelLinkStyle() {
         return this.labelLinkStyle;
@@ -1576,8 +1506,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      * @param style  the new style ({@code null} not permitted).
      *
      * @see #getLabelLinkStyle()
-     *
-     * @since 1.0.10
      */
     public void setLabelLinkStyle(PieLabelLinkStyle style) {
         Args.nullNotPermitted(style, "style");
@@ -1670,8 +1598,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      * bug 2121818.
      *
      * @return {@code 0.10}.
-     *
-     * @since 1.0.12
      */
     protected double getLabelLinkDepth() {
         return 0.1;
@@ -1828,8 +1754,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      *
      * @return The label padding (never {@code null}).
      *
-     * @since 1.0.7
-     *
      * @see #setLabelPadding(RectangleInsets)
      */
     public RectangleInsets getLabelPadding() {
@@ -1841,8 +1765,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      * {@link PlotChangeEvent} to all registered listeners.
      *
      * @param padding  the padding ({@code null} not permitted).
-     *
-     * @since 1.0.7
      *
      * @see #getLabelPadding()
      */
@@ -1857,8 +1779,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      * displayed on the plot.
      *
      * @return A boolean.
-     *
-     * @since 1.0.7
      */
     public boolean getSimpleLabels() {
         return this.simpleLabels;
@@ -1870,8 +1790,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      * registered listeners.
      *
      * @param simple  the new flag value.
-     *
-     * @since 1.0.7
      */
     public void setSimpleLabels(boolean simple) {
         this.simpleLabels = simple;
@@ -1882,8 +1800,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      * Returns the offset used for the simple labels, if they are displayed.
      *
      * @return The offset (never {@code null}).
-     *
-     * @since 1.0.7
      *
      * @see #setSimpleLabelOffset(RectangleInsets)
      */
@@ -1896,8 +1812,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      * {@link PlotChangeEvent} to all registered listeners.
      *
      * @param offset  the offset ({@code null} not permitted).
-     *
-     * @since 1.0.7
      *
      * @see #getSimpleLabelOffset()
      */
@@ -1912,8 +1826,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      * section labels.
      *
      * @return The label distributor (never {@code null}).
-     *
-     * @since 1.0.6
      */
     public AbstractPieLabelDistributor getLabelDistributor() {
         return this.labelDistributor;
@@ -1924,8 +1836,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      * registered listeners.
      *
      * @param distributor  the distributor ({@code null} not permitted).
-     *
-     * @since 1.0.6
      */
     public void setLabelDistributor(AbstractPieLabelDistributor distributor) {
         Args.nullNotPermitted(distributor, "distributor");
@@ -2099,8 +2009,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      * @return The legend label URL generator (possibly {@code null}).
      *
      * @see #setLegendLabelURLGenerator(PieURLGenerator)
-     *
-     * @since 1.0.4
      */
     public PieURLGenerator getLegendLabelURLGenerator() {
         return this.legendLabelURLGenerator;
@@ -2113,8 +2021,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      * @param generator  the generator ({@code null} permitted).
      *
      * @see #getLegendLabelURLGenerator()
-     *
-     * @since 1.0.4
      */
     public void setLegendLabelURLGenerator(PieURLGenerator generator) {
         this.legendLabelURLGenerator = generator;
@@ -2125,8 +2031,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      * Returns the shadow generator for the plot, if any.
      * 
      * @return The shadow generator (possibly {@code null}).
-     * 
-     * @since 1.0.14
      */
     public ShadowGenerator getShadowGenerator() {
         return this.shadowGenerator;
@@ -2140,8 +2044,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      * {@link #setShadowPaint(java.awt.Paint)} method.
      *
      * @param generator  the generator ({@code null} permitted).
-     *
-     * @since 1.0.14
      */
     public void setShadowGenerator(ShadowGenerator generator) {
         this.shadowGenerator = generator;
@@ -2153,8 +2055,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      * {@code MouseWheelHandler} class).
      *
      * @param rotateClicks  the number of rotate clicks on the the mouse wheel.
-     *
-     * @since 1.0.14
      */
     public void handleMouseWheelRotation(int rotateClicks) {
         setStartAngle(this.startAngle + rotateClicks * 4.0);
@@ -2494,8 +2394,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      * @param plotArea  the plot area.
      * @param pieArea  the area containing the pie.
      * @param state  the plot state.
-     *
-     * @since 1.0.7
      */
     protected void drawSimpleLabels(Graphics2D g2, List<K> keys,
             double totalValue, Rectangle2D plotArea, Rectangle2D pieArea,
@@ -2992,8 +2890,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      * @param key  section key.
      *
      * @return The center for the specified section.
-     *
-     * @since 1.0.14
      */
     protected Point2D getArcCenter(PiePlotState state, K key) {
         Point2D center = new Point2D.Double(state.getPieCenterX(), state
@@ -3048,8 +2944,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      * @param state  PiePlotState.
      *
      * @return The paint for the specified section.
-     *
-     * @since 1.0.14
      */
     protected Paint lookupSectionPaint(K key, PiePlotState state) {
         Paint paint = lookupSectionPaint(key, getAutoPopulateSectionPaint());

@@ -169,8 +169,6 @@ public strictfp class Range implements Serializable {
      * @param range  another range ({@code null} not permitted).
      *
      * @return A boolean.
-     *
-     * @since 1.0.9
      */
     public boolean intersects(Range range) {
         return intersects(range.getLowerBound(), range.getUpperBound());
@@ -234,8 +232,6 @@ public strictfp class Range implements Serializable {
      * @param range2  the second range ({@code null} permitted).
      *
      * @return A new range (possibly {@code null}).
-     *
-     * @since 1.0.15
      */
     public static Range combineIgnoringNaN(Range range1, Range range2) {
         if (range1 == null) {
@@ -295,8 +291,6 @@ public strictfp class Range implements Serializable {
      * @param value  the value that must be included.
      *
      * @return A range.
-     *
-     * @since 1.0.1
      */
     public static Range expandToInclude(Range range, double value) {
         if (range == null) {
@@ -402,8 +396,6 @@ public strictfp class Range implements Serializable {
      * @param factor the scaling factor (must be non-negative).
      *
      * @return A new range.
-     *
-     * @since 1.0.9
      */
     public static Range scale(Range base, double factor) {
         Args.nullNotPermitted(base, "base");
@@ -441,8 +433,6 @@ public strictfp class Range implements Serializable {
      * {@code Double.NaN}, and {@code false} otherwise.
      * 
      * @return A boolean.
-     * 
-     * @since 1.0.18
      */
     public boolean isNaNRange() {
         return Double.isNaN(this.lower) && Double.isNaN(this.upper);

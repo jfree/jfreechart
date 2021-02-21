@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------
  * StackedAreaRenderer.java
  * ------------------------
- * (C) Copyright 2002-2016, by Dan Rivett (d.rivett@ukonline.co.uk) and
+ * (C) Copyright 2002-2021, by Dan Rivett (d.rivett@ukonline.co.uk) and
  *                          Contributors.
  *
  * Original Author:  Dan Rivett (adapted from AreaRenderer);
@@ -100,8 +100,6 @@ public class StackedAreaRenderer extends AreaRenderer
      * {@code false} otherwise.
      *
      * @return A boolean.
-     *
-     * @since 1.0.3
      */
     public boolean getRenderAsPercentages() {
         return this.renderAsPercentages;
@@ -113,8 +111,6 @@ public class StackedAreaRenderer extends AreaRenderer
      * a {@link RendererChangeEvent} to all registered listeners.
      *
      * @param asPercentages  the flag.
-     *
-     * @since 1.0.3
      */
     public void setRenderAsPercentages(boolean asPercentages) {
         this.renderAsPercentages = asPercentages;

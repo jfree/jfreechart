@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,18 +27,10 @@
  * ------------------
  * RendererUtils.java
  * ------------------
- * (C) Copyright 2007-2017, by Object Refinery Limited.
+ * (C) Copyright 2007-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 19-Apr-2007 : Version 1 (DG);
- * 27-Mar-2009 : Fixed results for unsorted datasets (DG);
- * 19-May-2009 : Fixed FindBugs warnings, patch by Michal Wozniak (DG);
- * 23-Aug-2012 : Fixed rendering anomaly bug 3561093 (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -50,8 +42,6 @@ import org.jfree.data.xy.XYDataset;
 
 /**
  * Utility methods related to the rendering process.
- *
- * @since 1.0.6
  */
 public class RendererUtils {
 
@@ -65,8 +55,6 @@ public class RendererUtils {
      * @param xHigh  the highest x-value in the live range.
      *
      * @return The index of the required item.
-     *
-     * @since 1.0.6
      *
      * @see #findLiveItemsUpperBound(XYDataset, int, double, double)
      */
@@ -159,8 +147,6 @@ public class RendererUtils {
      * @param xHigh  the highest x-value in the live range.
      *
      * @return The index of the required item.
-     *
-     * @since 1.0.6
      *
      * @see #findLiveItemsLowerBound(XYDataset, int, double, double)
      */

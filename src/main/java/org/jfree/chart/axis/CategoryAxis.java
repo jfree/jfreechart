@@ -485,8 +485,6 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * @param url  the URL text ({@code null} permitted).
      *
      * @see #removeCategoryLabelURL(Comparable)
-     * 
-     * @since 1.0.16
      */
     public void addCategoryLabelURL(Comparable category, String url) {
         Args.nullNotPermitted(category, "category");
@@ -503,8 +501,6 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * 
      * @see #addCategoryLabelURL(Comparable, String)
      * @see #removeCategoryLabelURL(Comparable)
-     * 
-     * @since 1.0.16
      */
     public String getCategoryLabelURL(Comparable category) {
         Args.nullNotPermitted(category, "category");
@@ -520,8 +516,6 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      *
      * @see #addCategoryLabelURL(Comparable, String)
      * @see #clearCategoryLabelURLs()
-     * 
-     * @since 1.0.16
      */
     public void removeCategoryLabelURL(Comparable category) {
         Args.nullNotPermitted(category, "category");
@@ -536,8 +530,6 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      *
      * @see #addCategoryLabelURL(Comparable, String)
      * @see #removeCategoryLabelURL(Comparable)
-     * 
-     * @since 1.0.16
      */
     public void clearCategoryLabelURLs() {
         this.categoryLabelURLs.clear();
@@ -662,8 +654,6 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      *
      * @return The centre coordinate.
      *
-     * @since 1.0.11
-     *
      * @see #getCategorySeriesMiddle(Comparable, Comparable, CategoryDataset,
      *     double, Rectangle2D, RectangleEdge)
      */
@@ -687,8 +677,6 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * @param edge  the edge ({@code null} not permitted).
      *
      * @return The coordinate in Java2D space.
-     *
-     * @since 1.0.7
      */
     public double getCategorySeriesMiddle(Comparable category,
             Comparable seriesKey, CategoryDataset dataset, double itemMargin,
@@ -725,8 +713,6 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * @param edge  the edge ({@code null} not permitted).
      *
      * @return The coordinate in Java2D space.
-     *
-     * @since 1.0.13
      */
     public double getCategorySeriesMiddle(int categoryIndex, int categoryCount,
             int seriesIndex, int seriesCount, double itemMargin,
@@ -1126,8 +1112,6 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
      * @param dataArea  the area for plotting the data.
      * @param edge  the location of the axis.
      * @param state  the axis state.
-     *
-     * @since 1.0.13
      */
     public void drawTickMarks(Graphics2D g2, double cursor,
             Rectangle2D dataArea, RectangleEdge edge, AxisState state) {

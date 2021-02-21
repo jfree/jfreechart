@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------
  * DeviationRenderer.java
  * ----------------------
- * (C) Copyright 2007-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -64,8 +64,6 @@ import org.jfree.data.xy.XYDataset;
  * collection:
  * <br><br>
  * <img src="doc-files/DeviationRendererSample.png" alt="DeviationRendererSample.png">
- *
- * @since 1.0.5
  */
 public class DeviationRenderer extends XYLineAndShapeRenderer {
 

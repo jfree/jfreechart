@@ -146,8 +146,6 @@ public abstract class ValueAxis extends Axis
     /**
      * The default range is used when the dataset is empty and the axis needs
      * to determine the auto range.
-     *
-     * @since 1.0.5
      */
     private Range defaultAutoRange;
 
@@ -986,8 +984,6 @@ public abstract class ValueAxis extends Axis
      * @return The default auto range (never {@code null}).
      *
      * @see #setDefaultAutoRange(Range)
-     *
-     * @since 1.0.5
      */
     public Range getDefaultAutoRange() {
         return this.defaultAutoRange;
@@ -1000,8 +996,6 @@ public abstract class ValueAxis extends Axis
      * @param range  the range ({@code null} not permitted).
      *
      * @see #getDefaultAutoRange()
-     *
-     * @since 1.0.5
      */
     public void setDefaultAutoRange(Range range) {
         Args.nullNotPermitted(range, "range");
@@ -1361,8 +1355,6 @@ public abstract class ValueAxis extends Axis
      * @return The number of minor tick marks to display.
      *
      * @see #setMinorTickCount(int)
-     *
-     * @since 1.0.12
      */
     public int getMinorTickCount() {
         return this.minorTickCount;
@@ -1375,8 +1367,6 @@ public abstract class ValueAxis extends Axis
      * @param count  the count.
      *
      * @see #getMinorTickCount()
-     *
-     * @since 1.0.12
      */
     public void setMinorTickCount(int count) {
         this.minorTickCount = count;
@@ -1506,8 +1496,6 @@ public abstract class ValueAxis extends Axis
      * @param anchorValue  the new central value after the resize.
      *
      * @see #resizeRange(double)
-     *
-     * @since 1.0.13
      */
     public void resizeRange2(double percent, double anchorValue) {
         if (percent > 0.0) {
@@ -1549,8 +1537,6 @@ public abstract class ValueAxis extends Axis
      * Slides the axis range by the specified percentage.
      *
      * @param percent  the percentage.
-     *
-     * @since 1.0.13
      */
     public void pan(double percent) {
         Range r = getRange();
