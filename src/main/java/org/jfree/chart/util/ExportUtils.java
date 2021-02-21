@@ -54,8 +54,6 @@ import org.jfree.chart.ui.Drawable;
 
 /**
  * Utility functions for exporting charts to SVG and PDF format.
- * 
- * @since 1.0.18
  */
 public class ExportUtils {
 
@@ -82,9 +80,12 @@ public class ExportUtils {
     }
 
     /**
-     * Returns {@code true} if OrsonPDF is on the classpath, and 
+     * Returns {@code true} if OrsonPDF (or JFreePDF) is on the classpath, and 
      * {@code false} otherwise.  The OrsonPDF library can be found at
-     * http://www.object-refinery.com/orsonpdf/
+     * https://github.com/jfree/orsonpdf.  JFreePDF is a modular version of
+     * the same library, requiring Java 11 or later.  Since JFreeChart might
+     * be used in a modular context, this function has been modified (in version
+     * 1.5.3) to detect JFreePDF also.
      * 
      * @return A boolean.
      */
@@ -93,7 +94,12 @@ public class ExportUtils {
         try {
             pdfDocumentClass = Class.forName("com.orsonpdf.PDFDocument");
         } catch (ClassNotFoundException e) {
-            // pdfDocumentClass will be null so the function will return false
+            // check also for JFreePDF, which is the new modular version of OrsonPDF
+            try {
+                pdfDocumentClass = Class.forName("org.jfree.pdf.PDFDocument");
+            } catch (ClassNotFoundException e2) {
+                // pdfDocumentClass will be null so the function will return false
+            }
         }
         return (pdfDocumentClass != null);
     }
@@ -159,13 +165,17 @@ public class ExportUtils {
     public static final void writeAsPDF(Drawable drawable, 
             int w, int h, File file) {
         if (!ExportUtils.isOrsonPDFAvailable()) {
-            throw new IllegalStateException(
-                    "OrsonPDF is not present on the classpath.");
+            throw new IllegalStateException("Neither OrsonPDF nor JFreePDF is present on the classpath.");
         }
         Args.nullNotPermitted(drawable, "drawable");
         Args.nullNotPermitted(file, "file");
         try {
-            Class<?> pdfDocClass = Class.forName("com.orsonpdf.PDFDocument");
+            Class<?> pdfDocClass;
+            try {
+                pdfDocClass = Class.forName("com.orsonpdf.PDFDocument");
+            } catch (ClassNotFoundException e) {                
+                pdfDocClass = Class.forName("org.jfree.pdf.PDFDocument");
+            }
             Object pdfDoc = pdfDocClass.getDeclaredConstructor().newInstance();
             Method m = pdfDocClass.getMethod("createPage", Rectangle2D.class);
             Rectangle2D rect = new Rectangle(w, h);
