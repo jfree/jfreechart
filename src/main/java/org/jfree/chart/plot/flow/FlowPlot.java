@@ -73,7 +73,11 @@ import org.jfree.data.flow.FlowKey;
 import org.jfree.data.flow.NodeKey;
 
 /**
- * A plot for visualising flows.
+ * A plot for visualising flows defined in a {@link FlowDataset}.  This enables
+ * the production of a type of Sankey chart.  The example shown here is 
+ * produced by the {@code FlowPlotDemo1.java} program included in the JFreeChart 
+ * Demo Collection:
+ * <img src="doc-files/FlowPlotDemo1.svg" width="600" height="400" alt="FlowPlotDemo1.svg">
  * 
  * @since 1.5.3
  */
@@ -161,7 +165,7 @@ public class FlowPlot extends Plot implements Cloneable, PublicCloneable,
     /**
      * Returns a reference to the dataset.
      * 
-     * @return A reference to the dataset (possibly {@code null}). 
+     * @return A reference to the dataset (possibly {@code null}).
      */
     public FlowDataset getDataset() {
         return this.dataset;
@@ -181,6 +185,7 @@ public class FlowPlot extends Plot implements Cloneable, PublicCloneable,
     /**
      * Returns the node margin (expressed as a percentage of the available
      * plotting space) which is the gap between nodes (sources or destinations).
+     * The initial (default) value is {@code 0.01} (1 percent).
      * 
      * @return The node margin. 
      */
@@ -205,7 +210,8 @@ public class FlowPlot extends Plot implements Cloneable, PublicCloneable,
      * Returns the flow margin.  This determines the gap between the graphic 
      * representation of the nodes (sources and destinations) and the curved
      * flow representation.  This is expressed as a percentage of the plot 
-     * width so that it remains proportional as the plot is resized.
+     * width so that it remains proportional as the plot is resized.  The
+     * initial (default) value is {@code 0.005} (0.5 percent).
      * 
      * @return The flow margin. 
      */
@@ -227,7 +233,7 @@ public class FlowPlot extends Plot implements Cloneable, PublicCloneable,
 
     /**
      * Returns the width of the source and destination nodes, expressed in 
-     * Java2D user-space units.  The default value is {@code 20.0}.
+     * Java2D user-space units.  The initial (default) value is {@code 20.0}.
      * 
      * @return The width. 
      */
@@ -295,7 +301,7 @@ public class FlowPlot extends Plot implements Cloneable, PublicCloneable,
     
     /**
      * Returns the default node color.  This is used when no specific node color
-     * has been specified.  The default value is {@code Color.GRAY}.
+     * has been specified.  The initial (default) value is {@code Color.GRAY}.
      * 
      * @return The default node color (never {@code null}). 
      */
@@ -317,7 +323,7 @@ public class FlowPlot extends Plot implements Cloneable, PublicCloneable,
 
     /**
      * Returns the default font used to display labels for the source and
-     * destination nodes.  The initial value is 
+     * destination nodes.  The initial (default) value is 
      * {@code Font(Font.DIALOG, Font.BOLD, 12)}.
      * 
      * @return The default font (never {@code null}). 
@@ -341,7 +347,7 @@ public class FlowPlot extends Plot implements Cloneable, PublicCloneable,
 
     /**
      * Returns the default paint used to display labels for the source and
-     * destination nodes.  The initial value is {@code Color.BLACK}.
+     * destination nodes.  The initial (default) value is {@code Color.BLACK}.
      * 
      * @return The default paint (never {@code null}). 
      */
@@ -364,6 +370,7 @@ public class FlowPlot extends Plot implements Cloneable, PublicCloneable,
 
     /**
      * Returns the vertical alignment of the node labels relative to the node.
+     * The initial (default) value is {@link VerticalAlignment#CENTER}.
      * 
      * @return The alignment (never {@code null}). 
      */
@@ -372,8 +379,8 @@ public class FlowPlot extends Plot implements Cloneable, PublicCloneable,
     }
     
     /**
-     * Sets the alignment of the node labels and sends a change notification
-     * to all registered listeners.
+     * Sets the vertical alignment of the node labels and sends a change 
+     * notification to all registered listeners.
      * 
      * @param alignment  the new alignment ({@code null} not permitted). 
      */
@@ -413,7 +420,7 @@ public class FlowPlot extends Plot implements Cloneable, PublicCloneable,
     }
 
     /**
-     * Sets the x-offset for the node labels and sends a change notification
+     * Sets the y-offset for the node labels and sends a change notification
      * to all registered listeners.
      * 
      * @param offsetY  the node label y-offset in Java2D units.
@@ -422,10 +429,10 @@ public class FlowPlot extends Plot implements Cloneable, PublicCloneable,
         this.nodeLabelOffsetY = offsetY;
         fireChangeEvent();
     }
-    
 
     /**
-     * Returns the tool tip generator.
+     * Returns the tool tip generator that creates the strings that are 
+     * displayed as tool tips for the flows displayed in the plot.
      * 
      * @return The tool tip generator (possibly {@code null}). 
      */
@@ -446,7 +453,8 @@ public class FlowPlot extends Plot implements Cloneable, PublicCloneable,
     }
 
     /**
-     * Render the plot graphics within the specified area.
+     * Draws the flow plot within the specified area of the supplied graphics
+     * target {@code g2}.
      * 
      * @param g2  the graphics target ({@code null} not permitted).
      * @param area  the plot area ({@code null} not permitted).
@@ -778,6 +786,11 @@ public class FlowPlot extends Plot implements Cloneable, PublicCloneable,
         return super.equals(obj);
     }
 
+    /**
+     * Returns a hashcode for this instance.
+     * 
+     * @return A hashcode. 
+     */
     @Override
     public int hashCode() {
         int hash = 3;
@@ -796,6 +809,14 @@ public class FlowPlot extends Plot implements Cloneable, PublicCloneable,
         return hash;
     }
 
+    /**
+     * Returns an independent copy of this {@code FlowPlot} instance (note, 
+     * however, that the dataset is NOT cloned).
+     * 
+     * @return A close of this instance.
+     * 
+     * @throws CloneNotSupportedException 
+     */
     @Override
     public Object clone() throws CloneNotSupportedException {
         FlowPlot clone = (FlowPlot) super.clone();
