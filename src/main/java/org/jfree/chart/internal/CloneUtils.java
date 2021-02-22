@@ -50,6 +50,45 @@ import java.util.Map;
 public class CloneUtils {
     
     /**
+     * Returns a copy of the specified object, which should be a clone if the
+     * object is cloneable otherwise a reference to the specified object is
+     * returned.  If the object is {@code null} this method returns {@code null}.
+     *
+     * @param object the object to copy ({@code null} permitted).
+     * 
+     * @param <T>  the object type.
+     * 
+     * @return A clone of the specified object, or {@code null}.
+     * 
+     * @throws CloneNotSupportedException if the object cannot be cloned.
+     */
+    public static <T> T copy(T object) throws CloneNotSupportedException {
+        if (object == null) {
+            return null;
+        }
+        if (object instanceof PublicCloneable) {
+            PublicCloneable pc = (PublicCloneable) object;
+            return (T) pc.clone();
+        } else {
+            try {
+                Method method = object.getClass().getMethod("clone",
+                        (Class[]) null);
+                if (Modifier.isPublic(method.getModifiers())) {
+                    return (T) method.invoke(object, (Object[]) null);
+                } else {
+                    return object;
+                }
+            } catch (NoSuchMethodException e) {
+                return object;
+            } catch (IllegalAccessException e) {
+                throw new CloneNotSupportedException("Object.clone(): unable to call method.");
+            } catch (InvocationTargetException e) {
+                throw new CloneNotSupportedException("Object without clone() method is impossible.");
+            }
+        }
+    }
+
+    /**
      * Returns a clone of the specified object, if it can be cloned, otherwise
      * throws a {@code CloneNotSupportedException}.  If the object is 
      * {@code null} this method returns {@code null}.
@@ -88,8 +127,8 @@ public class CloneUtils {
     }
 
     /**
-     * Returns a list containing cloned copies of the items in the source
-     * list.
+     * Returns a list containing copies (clones if possible) of the items in 
+     * the source list.
      * 
      * @param source  the source list ({@code null} not permitted).
      * 
@@ -102,7 +141,7 @@ public class CloneUtils {
         List<T> result = new ArrayList<>();
         for (Object obj: source) {
             try {
-                result.add((T) clone(obj));
+                result.add((T) copy(obj));
             } catch (CloneNotSupportedException ex) {
                 throw new RuntimeException(ex);
             }

@@ -14,6 +14,7 @@ module org.jfree.chart {
     exports org.jfree.chart.needle;
     exports org.jfree.chart.plot;
     exports org.jfree.chart.plot.dial;
+    exports org.jfree.chart.plot.flow;
     exports org.jfree.chart.renderer;
     exports org.jfree.chart.renderer.category;
     exports org.jfree.chart.renderer.xy;
@@ -26,6 +27,7 @@ module org.jfree.chart {
     exports org.jfree.chart.util;
     exports org.jfree.data;
     exports org.jfree.data.category;
+    exports org.jfree.data.flow;    
     exports org.jfree.data.function;    
     exports org.jfree.data.gantt;
     exports org.jfree.data.general;
