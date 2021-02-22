@@ -9,14 +9,13 @@ import java.awt.geom.Rectangle2D;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 
 /**
- * A strategy for zooming plots on the chart panel by selecting a smaller region on the initial screen.
+ * {@inheritDoc}
+ *
  * This implementation can be extended to override default behavior.
- * See {@link ChartPanel#setSelectionZoomStrategy(DefaultSelectionZoomStrategy)}
  */
-public class DefaultSelectionZoomStrategy implements Serializable {
+public class DefaultSelectionZoomStrategy implements SelectionZoomStrategy {
 
     private static final long serialVersionUID = -8042265475645652131L;
 
@@ -65,128 +64,62 @@ public class DefaultSelectionZoomStrategy implements Serializable {
         this.zoomFillPaint = new Color(0, 0, 255, 63);
     }
 
-    /**
-     * If controller currently tracking zoom rectangle
-     *
-     * @return {@code true} if zoomRectangle exists for this controller
-     *          and {@code false} otherwise
-     */
+    @Override
     public boolean isActivated() {
         return zoomRectangle != null;
     }
 
+    @Override
     public Point2D getZoomPoint() {
         return zoomPoint;
     }
 
+    @Override
     public void setZoomPoint(Point2D zoomPoint) {
         this.zoomPoint = zoomPoint;
     }
 
-    /**
-     * Sets the zoom trigger distance.  This controls how far the mouse must
-     * move before a zoom action is triggered.
-     *
-     * @param distance  the distance (in Java2D units).
-     */
+    @Override
     public void setZoomTriggerDistance(int distance) {
         this.zoomTriggerDistance = distance;
     }
 
-    /**
-     * Returns the zoom trigger distance.  This controls how far the mouse must
-     * move before a zoom action is triggered.
-     *
-     * @return The distance (in Java2D units).
-     */
+    @Override
     public int getZoomTriggerDistance() {
         return zoomTriggerDistance;
     }
 
-    /**
-     * Returns the zoom rectangle outline paint.
-     *
-     * @return The zoom rectangle outline paint (never {@code null}).
-     *
-     * @see #setZoomOutlinePaint(java.awt.Paint)
-     * @see #setFillZoomRectangle(boolean)
-     *
-     * @since 1.0.13
-     */
+    @Override
     public Paint getZoomOutlinePaint() {
         return zoomOutlinePaint;
     }
 
-    /**
-     * Sets the zoom rectangle outline paint.
-     *
-     * @param paint  the paint ({@code null} not permitted).
-     *
-     * @see #getZoomOutlinePaint()
-     * @see #getFillZoomRectangle()
-     *
-     * @since 1.0.13
-     */
+    @Override
     public void setZoomOutlinePaint(Paint paint) {
         this.zoomOutlinePaint = paint;
     }
 
-    /**
-     * Returns the zoom rectangle fill paint.
-     *
-     * @return The zoom rectangle fill paint (never {@code null}).
-     *
-     * @see #setZoomFillPaint(java.awt.Paint)
-     * @see #setFillZoomRectangle(boolean)
-     *
-     * @since 1.0.13
-     */
+    @Override
     public Paint getZoomFillPaint() {
         return zoomFillPaint;
     }
 
-    /**
-     * Sets the zoom rectangle fill paint.
-     *
-     * @param paint  the paint ({@code null} not permitted).
-     *
-     * @see #getZoomFillPaint()
-     * @see #getFillZoomRectangle()
-     *
-     * @since 1.0.13
-     */
+    @Override
     public void setZoomFillPaint(Paint paint) {
         this.zoomFillPaint = paint;
     }
 
-    /**
-     * Returns the flag that controls whether or not the zoom rectangle is
-     * filled when drawn.
-     *
-     * @return A boolean.
-     */
+    @Override
     public boolean getFillZoomRectangle() {
         return this.fillZoomRectangle;
     }
 
-    /**
-     * A flag that controls how the zoom rectangle is drawn.
-     *
-     * @param flag  {@code true} instructs to fill the rectangle on
-     *              zoom, otherwise it will be outlined.
-     */
+    @Override
     public void setFillZoomRectangle(boolean flag) {
         this.fillZoomRectangle = flag;
     }
 
-    /**
-     * Updates zoom rectangle with new mouse position
-
-     * @param e mouse event
-     * @param hZoom if horizontal zoom allowed
-     * @param vZoom if vertical zoom allowed
-     * @param scaledDataArea plot area in screen coordinates
-     */
+    @Override
     public void updateZoomRectangleSelection(MouseEvent e, boolean hZoom, boolean vZoom, Rectangle2D scaledDataArea) {
         if (hZoom && vZoom) {
             // selected rectangle shouldn't extend outside the data area...
@@ -210,15 +143,7 @@ public class DefaultSelectionZoomStrategy implements Serializable {
         }
     }
 
-    /**
-     * Creates and returns current zoom rectangle
-     *
-     * @param hZoom if horizontal zoom acceptable
-     * @param vZoom if vertical zoom acceptable
-     * @param screenDataArea rectangle that describes plot on the screen
-     *
-     * @return rectangle in java2d screen coordinates selected by user
-     */
+    @Override
     public Rectangle2D getZoomRectangle(boolean hZoom, boolean vZoom, Rectangle2D screenDataArea) {
         double x, y, w, h;
         double maxX = screenDataArea.getMaxX();
@@ -251,24 +176,13 @@ public class DefaultSelectionZoomStrategy implements Serializable {
         return new Rectangle2D.Double(x, y, w, h);
     }
 
-    /**
-     * Removes zoom rectangle
-     */
+    @Override
     public void reset() {
         zoomPoint = null;
         zoomRectangle = null;
     }
 
-    /**
-     * Draws zoom rectangle (if present).
-     * The drawing is performed in XOR mode, therefore
-     * when this method is called twice in a row,
-     * the second call will completely restore the state
-     * of the canvas.
-     *
-     *  @param g2 the graphics device.
-     * @param xor  use XOR for drawing?
-     */
+    @Override
     public void drawZoomRectangle(Graphics2D g2, boolean xor) {
         if (zoomRectangle != null) {
             if (xor) {

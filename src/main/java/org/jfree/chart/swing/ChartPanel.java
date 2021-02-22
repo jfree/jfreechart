@@ -336,7 +336,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     protected boolean rangeZoomable = false;
 
     /** A strategy to handle zoom rectangle processing and painting. */
-    private DefaultSelectionZoomStrategy selectionZoomStrategy = new DefaultSelectionZoomStrategy();
+    private SelectionZoomStrategy selectionZoomStrategy = new DefaultSelectionZoomStrategy();
 
     /** Menu item for zooming in on a chart (both axes). */
     protected JMenuItem zoomInBothMenuItem;
@@ -1032,7 +1032,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      *
      * @return A zoom rectangle strategy.
      */
-    public DefaultSelectionZoomStrategy getSelectionZoomStrategy() {
+    public SelectionZoomStrategy getSelectionZoomStrategy() {
         return selectionZoomStrategy;
     }
 
@@ -1041,7 +1041,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      *
      * @param selectionZoomStrategy  A zoom rectangle strategy.
      */
-    public void setSelectionZoomStrategy(DefaultSelectionZoomStrategy selectionZoomStrategy) {
+    public void setSelectionZoomStrategy(SelectionZoomStrategy selectionZoomStrategy) {
         this.selectionZoomStrategy = selectionZoomStrategy;
     }
 
