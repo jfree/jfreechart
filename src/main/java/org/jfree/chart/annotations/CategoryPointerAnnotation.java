@@ -76,8 +76,6 @@ import org.jfree.data.category.CategoryDataset;
  * the arrow starting at some point on the outer circle (the point is
  * determined by the angle), with the arrow tip being drawn at a corresponding
  * point on the inner circle.
- *
- * @since 1.0.3
  */
 public class CategoryPointerAnnotation extends CategoryTextAnnotation
         implements Cloneable, PublicCloneable, Serializable {

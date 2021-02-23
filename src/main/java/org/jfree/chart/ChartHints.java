@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * ChartHints.java
  * ---------------
- * (C) Copyright 2014-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2014-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -44,8 +44,6 @@ import java.util.Map;
  * JFreeSVG's {@code SVGGraphics2D} class, will use the 
  * {@code KEY_BEGIN_ELEMENT} and {@code KEY_END_ELEMENT} hints to drive the 
  * output content.
- * 
- * @since 1.0.18
  */
 public final class ChartHints {
 
