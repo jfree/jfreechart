@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -24,28 +24,30 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * Changes
- * -------
- * 08-Jul-2018 : Made GradientPaintTransformType an enum (TH);
  */
 
-package org.jfree.chart.ui;
+package org.jfree.chart.util;
+
+import java.awt.GradientPaint;
+import java.awt.Shape;
 
 /**
- * Represents a type of transform for a {@code GradientPaint}.
+ * The interface for a class that can transform a {@code GradientPaint} to
+ * fit an arbitrary shape.
  */
-public enum GradientPaintTransformType {
-
-    /** Vertical. */
-    VERTICAL,
-
-    /** Horizontal. */
-    HORIZONTAL,
-
-    /** Center/vertical. */
-    CENTER_VERTICAL,
-
-    /** Center/horizontal. */
-    CENTER_HORIZONTAL
+public interface GradientPaintTransformer {
+    
+    /**
+     * Transforms a {@code GradientPaint} instance to fit some target 
+     * shape.  Classes that implement this method typically return a new
+     * instance of {@code GradientPaint}.
+     * 
+     * @param paint  the original paint (not {@code null}).
+     * @param target  the reference area (not {@code null}).
+     * 
+     * @return A transformed paint.
+     */
+    GradientPaint transform(GradientPaint paint, Shape target);
 
 }
+

@@ -48,9 +48,9 @@ import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 
 import org.jfree.chart.TestUtils;
-import org.jfree.chart.ui.GradientPaintTransformType;
+import org.jfree.chart.util.GradientPaintTransformType;
 import org.jfree.chart.api.RectangleAnchor;
-import org.jfree.chart.ui.StandardGradientPaintTransformer;
+import org.jfree.chart.util.StandardGradientPaintTransformer;
 import org.jfree.chart.internal.CloneUtils;
 
 import org.junit.jupiter.api.Test;
