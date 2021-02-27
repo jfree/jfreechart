@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -24,12 +24,16 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * Changes
- * -------
- * 08-Jul-2018 : Made LengthAdjustmentType an enum (TH);
+ * -------------------------
+ * LengthAdjustmentType.java
+ * -------------------------
+ * (C) Copyright 2001-2021, by Object Refinery Limited and Contributors.
+ *
+ * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Contributor(s):   Tracy Hiltbrand;
  */
 
-package org.jfree.chart.ui;
+package org.jfree.chart.api;
 
 /**
  * Represents the three options for adjusting a length:  expand, contract, and

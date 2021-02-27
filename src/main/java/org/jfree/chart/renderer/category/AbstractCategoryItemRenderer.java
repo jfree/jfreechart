@@ -82,7 +82,7 @@ import org.jfree.chart.plot.ValueMarker;
 import org.jfree.chart.renderer.AbstractRenderer;
 import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.util.GradientPaintTransformer;
-import org.jfree.chart.ui.LengthAdjustmentType;
+import org.jfree.chart.api.LengthAdjustmentType;
 import org.jfree.chart.api.RectangleAnchor;
 import org.jfree.chart.api.RectangleEdge;
 import org.jfree.chart.api.RectangleInsets;

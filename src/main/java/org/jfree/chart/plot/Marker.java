@@ -52,7 +52,7 @@ import javax.swing.event.EventListenerList;
 
 import org.jfree.chart.event.MarkerChangeEvent;
 import org.jfree.chart.event.MarkerChangeListener;
-import org.jfree.chart.ui.LengthAdjustmentType;
+import org.jfree.chart.api.LengthAdjustmentType;
 import org.jfree.chart.api.RectangleAnchor;
 import org.jfree.chart.api.RectangleInsets;
 import org.jfree.chart.text.TextAnchor;
@@ -63,9 +63,6 @@ import org.jfree.chart.internal.SerialUtils;
 /**
  * The base class for markers that can be added to plots to highlight a value
  * or range of values.
- * <br><br>
- * An event notification mechanism was added to this class in JFreeChart
- * version 1.0.3.
  */
 public abstract class Marker implements Cloneable, Serializable {
 
@@ -105,12 +102,10 @@ public abstract class Marker implements Cloneable, Serializable {
     /** The text anchor for the label. */
     private TextAnchor labelTextAnchor;
 
-    /** The label offset from the marker rectangle. */
+    /** The label offset from the marker rectangle (see also labelOffsetType). */
     private RectangleInsets labelOffset;
 
-    /**
-     * The offset type for the domain or range axis (never {@code null}).
-     */
+    /** The offset type for the label (see also labelOffset). */
     private LengthAdjustmentType labelOffsetType;
 
     /** Storage for registered change listeners. */
@@ -385,8 +380,6 @@ public abstract class Marker implements Cloneable, Serializable {
      * {@code Color(100, 100, 100, 100)}..
      * 
      * @return The label background color (never {@code null}).
-     * 
-     * @since 1.0.18
      */
     public Color getLabelBackgroundColor() {
         return this.labelBackgroundColor;
@@ -396,8 +389,6 @@ public abstract class Marker implements Cloneable, Serializable {
      * Sets the label background color.
      * 
      * @param color  the color ({@code null} not permitted).
-     * 
-     * @since 1.0.18
      */
     public void setLabelBackgroundColor(Color color) {
         Args.nullNotPermitted(color, "color");
@@ -457,7 +448,7 @@ public abstract class Marker implements Cloneable, Serializable {
     }
 
     /**
-     * Returns the label offset type.
+     * Returns the label offset type.  
      *
      * @return The type (never {@code null}).
      *
@@ -619,6 +610,20 @@ public abstract class Marker implements Cloneable, Serializable {
             return false;
         }
         return true;
+    }
+
+    /**
+     * Returns a hash code for this instance.
+     * 
+     * @return A hash code. 
+     */
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 29 * hash + Objects.hashCode(this.label);
+        hash = 29 * hash + Objects.hashCode(this.labelAnchor);
+        hash = 29 * hash + Objects.hashCode(this.labelTextAnchor);
+        return hash;
     }
 
     /**

@@ -49,7 +49,7 @@ import java.util.EventListener;
 
 import org.jfree.chart.event.MarkerChangeEvent;
 import org.jfree.chart.event.MarkerChangeListener;
-import org.jfree.chart.ui.LengthAdjustmentType;
+import org.jfree.chart.api.LengthAdjustmentType;
 import org.jfree.chart.api.RectangleAnchor;
 import org.jfree.chart.api.RectangleInsets;
 import org.jfree.chart.text.TextAnchor;

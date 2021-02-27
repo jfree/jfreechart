@@ -42,10 +42,10 @@ import java.awt.Paint;
 import java.awt.Stroke;
 import java.io.Serializable;
 import java.util.Objects;
+import org.jfree.chart.api.LengthAdjustmentType;
 
 import org.jfree.chart.event.MarkerChangeEvent;
 import org.jfree.chart.util.GradientPaintTransformer;
-import org.jfree.chart.ui.LengthAdjustmentType;
 
 /**
  * Represents an interval to be highlighted in some way.
@@ -126,8 +126,6 @@ public class IntervalMarker extends Marker implements Cloneable, Serializable {
      * {@link MarkerChangeEvent} to all registered listeners.
      *
      * @param value  the value.
-     *
-     * @since 1.0.3
      */
     public void setStartValue(double value) {
         this.startValue = value;
@@ -148,8 +146,6 @@ public class IntervalMarker extends Marker implements Cloneable, Serializable {
      * {@link MarkerChangeEvent} to all registered listeners.
      *
      * @param value  the value.
-     *
-     * @since 1.0.3
      */
     public void setEndValue(double value) {
         this.endValue = value;

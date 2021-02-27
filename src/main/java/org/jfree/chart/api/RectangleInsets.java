@@ -30,8 +30,7 @@ package org.jfree.chart.api;
 
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
-import org.jfree.chart.api.UnitType;
-import org.jfree.chart.ui.LengthAdjustmentType;
+import org.jfree.chart.util.Args;
 
 /**
  * Represents the insets for a rectangle, specified in absolute or relative 
@@ -86,8 +85,7 @@ public class RectangleInsets implements Serializable {
     /**
      * Creates a new instance.
      * 
-     * @param unitType  absolute or relative units ({@code null} not 
-     *                  permitted).
+     * @param unitType  absolute or relative units ({@code null} not permitted).
      * @param top  the top insets.
      * @param left  the left insets.
      * @param bottom  the bottom insets.
@@ -95,9 +93,7 @@ public class RectangleInsets implements Serializable {
      */
     public RectangleInsets(UnitType unitType, double top, double left, 
             double bottom, double right) {
-        if (unitType == null) {
-            throw new IllegalArgumentException("Null 'unitType' argument.");
-        }
+        Args.nullNotPermitted(unitType, "unitType");
         this.unitType = unitType;
         this.top = top;
         this.bottom = bottom;
@@ -233,9 +229,7 @@ public class RectangleInsets implements Serializable {
      */
     public Rectangle2D createAdjustedRectangle(Rectangle2D base,
             LengthAdjustmentType horizontal, LengthAdjustmentType vertical) {
-        if (base == null) {
-            throw new IllegalArgumentException("Null 'base' argument.");
-        }
+        Args.nullNotPermitted(base, "base");
         double x = base.getX();
         double y = base.getY();
         double w = base.getWidth();
@@ -285,9 +279,7 @@ public class RectangleInsets implements Serializable {
      */
     public Rectangle2D createInsetRectangle(Rectangle2D base,
             boolean horizontal, boolean vertical) {
-        if (base == null) {
-            throw new IllegalArgumentException("Null 'base' argument.");
-        }
+        Args.nullNotPermitted(base, "base");
         double topMargin = 0.0;
         double bottomMargin = 0.0;
         if (vertical) {
@@ -328,9 +320,7 @@ public class RectangleInsets implements Serializable {
      */
     public Rectangle2D createOutsetRectangle(Rectangle2D base,
             boolean horizontal, boolean vertical) {
-        if (base == null) {
-            throw new IllegalArgumentException("Null 'base' argument.");
-        }
+        Args.nullNotPermitted(base, "base");
         double topMargin = 0.0;
         double bottomMargin = 0.0;
         if (vertical) {
