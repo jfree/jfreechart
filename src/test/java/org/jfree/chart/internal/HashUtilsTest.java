@@ -34,9 +34,8 @@
  *
  */
 
-package org.jfree.chart;
+package org.jfree.chart.internal;
 
-import org.jfree.chart.internal.HashUtils;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
