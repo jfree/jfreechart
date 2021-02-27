@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * -------------
  * TickType.java
  * -------------
- * (C) Copyright 2007, 2008, by Object Refinery Limited.
+ * (C) Copyright 2007-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 02-Aug-2007 : Version 1 (DG);
- * 08-Jul-2018 : Made TickType an enum (TH);
  *
  */
 
@@ -43,8 +38,6 @@ package org.jfree.chart.axis;
 
 /**
  * Used to indicate the tick type (MAJOR or MINOR).
- *
- * @since 1.0.7
  */
 public enum TickType {
 

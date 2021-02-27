@@ -60,8 +60,6 @@ public enum AxisLocation {
      * Returns the location that is opposite to this location.
      *
      * @return The opposite location.
-     *
-     * @since 1.0.5
      */
     public AxisLocation getOpposite() {
         return getOpposite(this);

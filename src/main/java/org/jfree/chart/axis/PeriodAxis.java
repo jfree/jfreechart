@@ -102,8 +102,6 @@ public class PeriodAxis extends ValueAxis
 
     /**
      * The locale (never {@code null}).
-     * 
-     * @since 1.0.13
      */
     private Locale locale;
 
@@ -185,8 +183,6 @@ public class PeriodAxis extends ValueAxis
      *              ({@code null} not permitted).
      * @param timeZone  the time zone ({@code null} not permitted).
      * @param locale  the locale ({@code null} not permitted).
-     *
-     * @since 1.0.13
      */
     public PeriodAxis(String label, RegularTimePeriod first,
             RegularTimePeriod last, TimeZone timeZone, Locale locale) {
@@ -288,8 +284,6 @@ public class PeriodAxis extends ValueAxis
      * Returns the locale for this axis.
      *
      * @return The locale (never ({@code null}).
-     *
-     * @since 1.0.13
      */
     public Locale getLocale() {
         return this.locale;

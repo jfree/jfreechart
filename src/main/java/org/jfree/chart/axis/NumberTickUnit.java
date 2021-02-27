@@ -80,8 +80,6 @@ public class NumberTickUnit extends TickUnit implements Serializable {
      * @param formatter  a number formatter for the tick unit ({@code null}
      *                   not permitted).
      * @param minorTickCount  the number of minor ticks.
-     *
-     * @since 1.0.7
      */
     public NumberTickUnit(double size, NumberFormat formatter,
             int minorTickCount) {

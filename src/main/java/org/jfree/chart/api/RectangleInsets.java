@@ -65,8 +65,6 @@ public class RectangleInsets implements Serializable {
     
     /**
      * Creates a new instance with all insets initialised to {@code 1.0}.
-     * 
-     * @since 1.0.9
      */
     public RectangleInsets() {
         this(1.0, 1.0, 1.0, 1.0);

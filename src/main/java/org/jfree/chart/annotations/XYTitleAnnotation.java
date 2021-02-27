@@ -66,8 +66,6 @@ import org.jfree.data.Range;
 /**
  * An annotation that allows any {@link Title} to be placed at a location on
  * an {@link XYPlot}.
- *
- * @since 1.0.11
  */
 public class XYTitleAnnotation extends AbstractXYAnnotation
         implements Cloneable, PublicCloneable, Serializable {

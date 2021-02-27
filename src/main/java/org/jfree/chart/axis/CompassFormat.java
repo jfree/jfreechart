@@ -65,8 +65,6 @@ public class CompassFormat extends NumberFormat {
      * @param e  the code for EAST.
      * @param s  the code for SOUTH.
      * @param w  the code for WEST.
-     * 
-     * @since 1.0.18
      */
     public CompassFormat(String n, String e, String s, String w) {
         this(new String[] {
@@ -80,8 +78,6 @@ public class CompassFormat extends NumberFormat {
      * 
      * @param directions  an array containing 16 strings representing
      *     the directions of a compass.
-     * 
-     * @since 1.0.18
      */
     public CompassFormat(String[] directions) {
         super();
