@@ -37,7 +37,6 @@
 package org.jfree.chart.swing;
 
 import java.awt.Graphics2D;
-import org.jfree.chart.swing.ChartPanel;
 
 /**
  * An {@code Overlay} is anything that can be drawn over top of a chart to add
@@ -47,8 +46,6 @@ import org.jfree.chart.swing.ChartPanel;
  * <br><br>
  * Note: if you are using JavaFX rather than Swing, then you need to look at 
  * the {@code OverlayFX} interface in the <b>JFreeChart-FX</b> project.
- *
- * @since 1.0.13
  */
 public interface Overlay {
 

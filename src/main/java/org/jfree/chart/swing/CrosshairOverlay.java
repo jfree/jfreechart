@@ -36,8 +36,6 @@
 
 package org.jfree.chart.swing;
 
-import org.jfree.chart.swing.AbstractOverlay;
-import org.jfree.chart.swing.Overlay;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Paint;
@@ -57,7 +55,6 @@ import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.Crosshair;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.swing.ChartPanel;
 import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.api.RectangleAnchor;
 import org.jfree.chart.api.RectangleEdge;
