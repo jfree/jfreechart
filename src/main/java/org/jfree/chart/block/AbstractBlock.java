@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,23 +27,10 @@
  * ------------------
  * AbstractBlock.java
  * ------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited.
+ * (C) Copyright 2004-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 22-Oct-2004 : Version 1 (DG);
- * 02-Feb-2005 : Added accessor methods for margin (DG);
- * 04-Feb-2005 : Added equals() method and implemented Serializable (DG);
- * 03-May-2005 : Added null argument checks (DG);
- * 06-May-2005 : Added convenience methods for setting margin, border and
- *               padding (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 16-Mar-2007 : Changed border from BlockBorder to BlockFrame, updated
- *               equals(), and implemented Cloneable (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -242,8 +229,7 @@ public class AbstractBlock implements Cloneable, Serializable {
      * Returns the current frame (border).
      *
      * @return The frame.
-     *
-     * @since 1.0.5
+     * 
      * @see #setFrame(BlockFrame)
      */
     public BlockFrame getFrame() {
@@ -255,7 +241,6 @@ public class AbstractBlock implements Cloneable, Serializable {
      *
      * @param frame  the frame ({@code null} not permitted).
      *
-     * @since 1.0.5
      * @see #getFrame()
      */
     public void setFrame(BlockFrame frame) {

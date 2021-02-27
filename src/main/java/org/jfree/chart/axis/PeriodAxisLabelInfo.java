@@ -237,8 +237,6 @@ public class PeriodAxisLabelInfo implements Cloneable, Serializable {
      * @param locale  the locale.
      *
      * @return The time period.
-     *
-     * @since 1.0.13.
      */
     public RegularTimePeriod createInstance(Date millisecond, TimeZone zone,
             Locale locale) {

@@ -68,8 +68,6 @@ public class QuarterDateFormat extends DateFormat
 
     /**
      * Symbols for greek numbered quarters.
-     *
-     * @since 1.0.6
      */
     public static final String[] GREEK_QUARTERS = new String[] {"\u0391",
             "\u0392", "\u0393", "\u0394"};
@@ -113,8 +111,6 @@ public class QuarterDateFormat extends DateFormat
      * @param quarterSymbols  the quarter symbols.
      * @param quarterFirst  a flag that controls whether the quarter or the
      *         year is displayed first.
-     *
-     * @since 1.0.6
      */
     public QuarterDateFormat(TimeZone zone, String[] quarterSymbols,
             boolean quarterFirst) {
