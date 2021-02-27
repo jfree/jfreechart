@@ -31,7 +31,6 @@ package org.jfree.chart.swing.editor;
 import java.awt.Font;
 import java.util.ResourceBundle;
 import javax.swing.JTextField;
-import org.jfree.chart.util.ResourceBundleWrapper;
 
 /**
  * A field for displaying a font selection.  The display field itself is
@@ -45,7 +44,7 @@ public class FontDisplayField extends JTextField {
 
     /** The resourceBundle for the localization. */
     protected static final ResourceBundle localizationResources =
-            ResourceBundleWrapper.getBundle("org.jfree.chart.ui.LocalizationBundle");
+            ResourceBundle.getBundle("org.jfree.chart.ui.LocalizationBundle");
 
     /**
      * Standard constructor - builds a FontDescriptionField initialised with

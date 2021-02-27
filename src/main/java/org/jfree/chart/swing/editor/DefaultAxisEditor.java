@@ -59,7 +59,6 @@ import org.jfree.chart.axis.Axis;
 import org.jfree.chart.axis.LogAxis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.api.RectangleInsets;
-import org.jfree.chart.util.ResourceBundleWrapper;
 
 /**
  * A panel for editing the properties of an axis.
@@ -125,8 +124,7 @@ class DefaultAxisEditor extends JPanel implements ActionListener {
 
     /** The resourceBundle for the localization. */
     protected static ResourceBundle localizationResources
-            = ResourceBundleWrapper.getBundle(
-                    "org.jfree.chart.editor.LocalizationBundle");
+            = ResourceBundle.getBundle("org.jfree.chart.editor.LocalizationBundle");
 
     /**
      * A static method that returns a panel that is appropriate for the axis

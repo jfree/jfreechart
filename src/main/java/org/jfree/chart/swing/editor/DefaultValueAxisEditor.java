@@ -55,7 +55,6 @@ import javax.swing.JTextField;
 
 import org.jfree.chart.axis.Axis;
 import org.jfree.chart.axis.ValueAxis;
-import org.jfree.chart.util.ResourceBundleWrapper;
 
 /**
  * A panel for editing properties of a {@link ValueAxis}.
@@ -104,8 +103,7 @@ class DefaultValueAxisEditor extends DefaultAxisEditor
 
     /** The resourceBundle for the localization. */
     protected static ResourceBundle localizationResources
-            = ResourceBundleWrapper.getBundle(
-                "org.jfree.chart.editor.LocalizationBundle");
+            = ResourceBundle.getBundle("org.jfree.chart.editor.LocalizationBundle");
 
     /**
      * Standard constructor: builds a property panel for the specified axis.

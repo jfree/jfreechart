@@ -43,7 +43,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 import org.jfree.chart.internal.Args;
 
-import org.jfree.chart.util.ResourceBundleWrapper;
 import org.jfree.data.DataUtils;
 import org.jfree.data.UnknownKeyException;
 import org.jfree.data.general.AbstractSeriesDataset;
@@ -112,11 +111,8 @@ public class DefaultIntervalCategoryDataset extends AbstractSeriesDataset
      * @param ends  the end values data, indexed as data[series][category].
      */
     public DefaultIntervalCategoryDataset(String[] seriesNames,
-                                          Number[][] starts,
-                                          Number[][] ends) {
-
+            Number[][] starts, Number[][] ends) {
         this(seriesNames, null, starts, ends);
-
     }
 
     /**
@@ -132,18 +128,13 @@ public class DefaultIntervalCategoryDataset extends AbstractSeriesDataset
      * @param ends  the end values data, indexed as data[series][category].
      */
     public DefaultIntervalCategoryDataset(Comparable[] seriesKeys,
-                                          Comparable[] categoryKeys,
-                                          Number[][] starts,
-                                          Number[][] ends) {
+            Comparable[] categoryKeys, Number[][] starts, Number[][] ends) {
 
         this.startData = starts;
         this.endData = ends;
 
         if (starts != null && ends != null) {
-
-            String baseName = "org.jfree.data.resources.DataPackageResources";
-            ResourceBundle resources = ResourceBundleWrapper.getBundle(
-                    baseName);
+            ResourceBundle resources = ResourceBundle.getBundle("org.jfree.data.resources.DataPackageResources");
 
             int seriesCount = starts.length;
             if (seriesCount != ends.length) {

@@ -39,7 +39,6 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListModel;
-import org.jfree.chart.util.ResourceBundleWrapper;
 
 /**
  * A panel for choosing a font from the available system fonts - still a bit of
@@ -64,8 +63,8 @@ public class FontChooserPanel extends JPanel {
     private JCheckBox italic;
 
     /** The resourceBundle for the localization. */
-    protected static ResourceBundle localizationResources =
-        ResourceBundleWrapper.getBundle("org.jfree.chart.ui.LocalizationBundle");
+    protected static ResourceBundle localizationResources 
+            = ResourceBundle.getBundle("org.jfree.chart.ui.LocalizationBundle");
 
     /**
      * Standard constructor - builds a FontChooserPanel initialised with the

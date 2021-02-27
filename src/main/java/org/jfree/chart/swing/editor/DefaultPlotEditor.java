@@ -68,7 +68,6 @@ import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.chart.renderer.xy.StandardXYItemRenderer;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.chart.api.RectangleInsets;
-import org.jfree.chart.util.ResourceBundleWrapper;
 
 /**
  * A panel for editing the properties of a {@link Plot}.
@@ -139,8 +138,7 @@ class DefaultPlotEditor extends JPanel implements ActionListener {
 
     /** The resourceBundle for the localization. */
     protected static ResourceBundle localizationResources
-            = ResourceBundleWrapper.getBundle(
-                    "org.jfree.chart.editor.LocalizationBundle");
+            = ResourceBundle.getBundle("org.jfree.chart.editor.LocalizationBundle");
 
     /**
      * Standard constructor - constructs a panel for editing the properties of

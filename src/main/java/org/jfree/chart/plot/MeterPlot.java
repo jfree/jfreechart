@@ -75,7 +75,6 @@ import org.jfree.chart.api.RectangleInsets;
 import org.jfree.chart.text.TextAnchor;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.internal.Args;
-import org.jfree.chart.util.ResourceBundleWrapper;
 import org.jfree.chart.internal.SerialUtils;
 import org.jfree.data.Range;
 import org.jfree.data.general.DatasetChangeEvent;
@@ -169,8 +168,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
 
     /** The resourceBundle for the localization. */
     protected static ResourceBundle localizationResources
-            = ResourceBundleWrapper.getBundle(
-                    "org.jfree.chart.plot.LocalizationBundle");
+            = ResourceBundle.getBundle("org.jfree.chart.plot.LocalizationBundle");
 
     /**
      * A (possibly empty) list of the {@link MeterInterval}s to be highlighted

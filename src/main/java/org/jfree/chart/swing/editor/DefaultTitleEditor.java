@@ -57,7 +57,6 @@ import javax.swing.JTextField;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.chart.title.Title;
-import org.jfree.chart.util.ResourceBundleWrapper;
 
 /**
  * A panel for editing the properties of a chart title.
@@ -90,8 +89,7 @@ class DefaultTitleEditor extends JPanel implements ActionListener {
 
     /** The resourceBundle for the localization. */
     protected static ResourceBundle localizationResources
-            = ResourceBundleWrapper.getBundle(
-                    "org.jfree.chart.editor.LocalizationBundle");
+            = ResourceBundle.getBundle("org.jfree.chart.editor.LocalizationBundle");
 
     /**
      * Standard constructor: builds a panel for displaying/editing the

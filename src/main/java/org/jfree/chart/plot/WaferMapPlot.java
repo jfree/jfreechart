@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -28,20 +28,10 @@
  * WaferMapPlot.java
  * -----------------
  *
- * (C) Copyright 2003-2017, by Robert Redburn and Contributors.
+ * (C) Copyright 2003-2021, by Robert Redburn and Contributors.
  *
  * Original Author:  Robert Redburn;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 25-Nov-2003 : Version 1 contributed by Robert Redburn (DG);
- * 05-May-2005 : Updated draw() method parameters (DG);
- * 10-Jun-2005 : Changed private --> protected for drawChipGrid(),
- *               drawWaferEdge() and getWafterEdge() (DG);
- * 16-Jun-2005 : Added default constructor and setDataset() method (DG);
- * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
- *               Jess Thrysoee (DG);
  *
  */
 
@@ -66,7 +56,6 @@ import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.event.RendererChangeListener;
 import org.jfree.chart.renderer.WaferMapRenderer;
 import org.jfree.chart.api.RectangleInsets;
-import org.jfree.chart.util.ResourceBundleWrapper;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.WaferMapDataset;
 
@@ -102,8 +91,7 @@ public class WaferMapPlot extends Plot implements RendererChangeListener,
 
     /** The resourceBundle for the localization. */
     protected static ResourceBundle localizationResources
-            = ResourceBundleWrapper.getBundle(
-                    "org.jfree.chart.plot.LocalizationBundle");
+            = ResourceBundle.getBundle("org.jfree.chart.plot.LocalizationBundle");
 
     /** The plot orientation.
      *  vertical = notch down

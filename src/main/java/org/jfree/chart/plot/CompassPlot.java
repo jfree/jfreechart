@@ -73,7 +73,6 @@ import org.jfree.chart.needle.WindNeedle;
 import org.jfree.chart.api.RectangleInsets;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.internal.Args;
-import org.jfree.chart.util.ResourceBundleWrapper;
 import org.jfree.chart.internal.SerialUtils;
 import org.jfree.data.general.DefaultValueDataset;
 import org.jfree.data.general.ValueDataset;
@@ -141,8 +140,7 @@ public class CompassPlot extends Plot implements Cloneable, Serializable {
 
     /** The resourceBundle for the localization. */
     protected static ResourceBundle localizationResources
-            = ResourceBundleWrapper.getBundle(
-                    "org.jfree.chart.plot.LocalizationBundle");
+            = ResourceBundle.getBundle("org.jfree.chart.plot.LocalizationBundle");
 
     /**
      * The count to complete one revolution.  Can be arbitrarily set

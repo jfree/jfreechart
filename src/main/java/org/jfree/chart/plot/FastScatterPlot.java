@@ -68,7 +68,6 @@ import org.jfree.chart.api.RectangleInsets;
 import org.jfree.chart.util.ArrayUtils;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.internal.Args;
-import org.jfree.chart.util.ResourceBundleWrapper;
 import org.jfree.chart.internal.SerialUtils;
 import org.jfree.data.Range;
 
@@ -128,23 +127,18 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
     /**
      * A flag that controls whether or not panning is enabled for the domain
      * axis.
-     *
-     * @since 1.0.13
      */
     private boolean domainPannable;
 
     /**
      * A flag that controls whether or not panning is enabled for the range
      * axis.
-     *
-     * @since 1.0.13
      */
     private boolean rangePannable;
 
     /** The resourceBundle for the localization. */
     protected static ResourceBundle localizationResources
-            = ResourceBundleWrapper.getBundle(
-            "org.jfree.chart.plot.LocalizationBundle");
+            = ResourceBundle.getBundle("org.jfree.chart.plot.LocalizationBundle");
 
     /**
      * Creates a new instance of {@code FastScatterPlot} with default
@@ -252,8 +246,6 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @param axis  the axis ({@code null} not permitted).
      *
-     * @since 1.0.3
-     *
      * @see #getDomainAxis()
      */
     public void setDomainAxis(ValueAxis axis) {
@@ -278,8 +270,6 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
      * registered listeners.
      *
      * @param axis  the axis ({@code null} not permitted).
-     *
-     * @since 1.0.3
      *
      * @see #getRangeAxis()
      */
@@ -744,8 +734,6 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
      * @param useAnchor  use source point as zoom anchor?
      *
      * @see #zoomRangeAxes(double, PlotRenderingInfo, Point2D, boolean)
-     *
-     * @since 1.0.7
      */
     @Override
     public void zoomDomainAxes(double factor, PlotRenderingInfo info,
@@ -803,8 +791,6 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
      * @param useAnchor  use source point as zoom anchor?
      *
      * @see #zoomDomainAxes(double, PlotRenderingInfo, Point2D, boolean)
-     *
-     * @since 1.0.7
      */
     @Override
     public void zoomRangeAxes(double factor, PlotRenderingInfo info,
@@ -865,8 +851,6 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
      * and {@code false} otherwise.
      *
      * @return A boolean.
-     *
-     * @since 1.0.13
      */
     @Override
     public boolean isDomainPannable() {
@@ -878,8 +862,6 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
      * domain axes.
      *
      * @param pannable  the new flag value.
-     *
-     * @since 1.0.13
      */
     public void setDomainPannable(boolean pannable) {
         this.domainPannable = pannable;
@@ -890,8 +872,6 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
      * and {@code false} otherwise.
      *
      * @return A boolean.
-     *
-     * @since 1.0.13
      */
     @Override
     public boolean isRangePannable() {
@@ -903,8 +883,6 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
      * the range axes.
      *
      * @param pannable  the new flag value.
-     *
-     * @since 1.0.13
      */
     public void setRangePannable(boolean pannable) {
         this.rangePannable = pannable;
@@ -916,8 +894,6 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
      * @param percent  the distance to pan (as a percentage of the axis length).
      * @param info the plot info
      * @param source the source point where the pan action started.
-     *
-     * @since 1.0.13
      */
     @Override
     public void panDomainAxes(double percent, PlotRenderingInfo info,
@@ -940,8 +916,6 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
      * @param percent  the distance to pan (as a percentage of the axis length).
      * @param info the plot info
      * @param source the source point where the pan action started.
-     *
-     * @since 1.0.13
      */
     @Override
     public void panRangeAxes(double percent, PlotRenderingInfo info,
