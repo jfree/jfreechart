@@ -42,7 +42,7 @@ import java.awt.geom.Rectangle2D;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import org.jfree.chart.ui.Size2D;
+import java.util.Objects;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.internal.Args;
 import org.jfree.chart.internal.SerialUtils;
@@ -76,8 +76,6 @@ public class ColorBlock extends AbstractBlock implements Block {
      * Returns the paint.
      *
      * @return The paint (never {@code null}).
-     *
-     * @since 1.0.5
      */
     public Paint getPaint() {
         return this.paint;
@@ -149,6 +147,18 @@ public class ColorBlock extends AbstractBlock implements Block {
             return false;
         }
         return super.equals(obj);
+    }
+
+    /**
+     * Returns a hash code for this instance.
+     * 
+     * @return A hash code. 
+     */
+    @Override
+    public int hashCode() {
+        int hash = super.hashCode();
+        hash = 79 * hash + Objects.hashCode(this.paint);
+        return hash;
     }
 
     /**

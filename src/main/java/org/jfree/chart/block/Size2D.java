@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -26,7 +26,7 @@
  *
  */
 
-package org.jfree.chart.ui;
+package org.jfree.chart.block;
 
 import java.io.Serializable;
 import org.jfree.chart.api.PublicCloneable;
@@ -138,16 +138,16 @@ public class Size2D implements Cloneable, PublicCloneable, Serializable {
         return true;
     }
 
+    /**
+     * Returns a hash code for this instance.
+     * 
+     * @return A hash code. 
+     */
     @Override
-    public int hashCode()
-    {
-        int hash = 7;
-        hash = 79 * hash +
-                (int) (Double.doubleToLongBits(this.width) ^
-                (Double.doubleToLongBits(this.width) >>> 32));
-        hash = 79 * hash +
-                (int) (Double.doubleToLongBits(this.height) ^
-                (Double.doubleToLongBits(this.height) >>> 32));
+    public int hashCode() {
+        int hash = 3;
+        hash = 17 * hash + (int) (Double.doubleToLongBits(this.width) ^ (Double.doubleToLongBits(this.width) >>> 32));
+        hash = 17 * hash + (int) (Double.doubleToLongBits(this.height) ^ (Double.doubleToLongBits(this.height) >>> 32));
         return hash;
     }
     

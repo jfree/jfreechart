@@ -38,7 +38,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import org.jfree.chart.api.HorizontalAlignment;
-import org.jfree.chart.ui.Size2D;
+import org.jfree.chart.block.Size2D;
 import org.jfree.chart.util.ShapeUtils;
 
 /**

@@ -58,7 +58,7 @@ import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.PaintScale;
 import org.jfree.chart.api.RectangleEdge;
-import org.jfree.chart.ui.Size2D;
+import org.jfree.chart.block.Size2D;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.internal.Args;
 import org.jfree.chart.api.PublicCloneable;
@@ -69,8 +69,6 @@ import org.jfree.data.Range;
 /**
  * A legend that shows a range of values and their associated colors, driven
  * by an underlying {@link PaintScale} implementation.
- *
- * @since 1.0.4
  */
 public class PaintScaleLegend extends Title implements AxisChangeListener,
         PublicCloneable {
@@ -113,8 +111,6 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
 
     /**
      * The number of subdivisions for the scale when rendering.
-     *
-     * @since 1.0.11
      */
     private int subdivisions;
 
@@ -363,8 +359,6 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
      * Returns the number of subdivisions used to draw the scale.
      *
      * @return The subdivision count.
-     *
-     * @since 1.0.11
      */
     public int getSubdivisionCount() {
         return this.subdivisions;
@@ -375,8 +369,6 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
      * all registered listeners.
      *
      * @param count  the count.
-     *
-     * @since 1.0.11
      */
     public void setSubdivisionCount(int count) {
         if (count <= 0) {
@@ -391,8 +383,6 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
      * a title change event.
      *
      * @param event  the event.
-     *
-     * @since 1.0.13
      */
     @Override
     public void axisChanged(AxisChangeEvent event) {

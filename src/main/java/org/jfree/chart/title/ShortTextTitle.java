@@ -43,7 +43,7 @@ import java.awt.geom.Rectangle2D;
 import org.jfree.chart.block.LengthConstraintType;
 import org.jfree.chart.block.RectangleConstraint;
 import org.jfree.chart.text.TextUtils;
-import org.jfree.chart.ui.Size2D;
+import org.jfree.chart.block.Size2D;
 import org.jfree.chart.text.TextAnchor;
 import org.jfree.data.Range;
 
@@ -51,8 +51,6 @@ import org.jfree.data.Range;
  * A text title that is only displayed if the entire text will be visible
  * without line wrapping.  It is only intended for use with short titles - for
  * general purpose titles, you should use the {@link TextTitle} class.
- *
- * @since 1.0.10
  *
  * @see TextTitle
  */

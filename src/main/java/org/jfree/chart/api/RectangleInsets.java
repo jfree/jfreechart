@@ -30,7 +30,7 @@ package org.jfree.chart.api;
 
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
-import org.jfree.chart.util.Args;
+import org.jfree.chart.internal.Args;
 
 /**
  * Represents the insets for a rectangle, specified in absolute or relative 

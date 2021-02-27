@@ -41,13 +41,11 @@ import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.entity.StandardEntityCollection;
-import org.jfree.chart.ui.Size2D;
 import org.jfree.chart.internal.Args;
 import org.jfree.chart.api.PublicCloneable;
 

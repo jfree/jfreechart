@@ -64,7 +64,7 @@ import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.api.HorizontalAlignment;
 import org.jfree.chart.api.RectangleEdge;
 import org.jfree.chart.api.RectangleInsets;
-import org.jfree.chart.ui.Size2D;
+import org.jfree.chart.block.Size2D;
 import org.jfree.chart.api.VerticalAlignment;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.internal.Args;
@@ -121,8 +121,6 @@ public class TextTitle extends Title implements Serializable, Cloneable,
 
     /**
      * The maximum number of lines to display.
-     *
-     * @since 1.0.10
      */
     private int maximumLinesToDisplay = Integer.MAX_VALUE;
 
@@ -383,8 +381,6 @@ public class TextTitle extends Title implements Serializable, Cloneable,
      *
      * @return The maximum.
      *
-     * @since 1.0.10
-     *
      * @see #setMaximumLinesToDisplay(int)
      */
     public int getMaximumLinesToDisplay() {
@@ -396,8 +392,6 @@ public class TextTitle extends Title implements Serializable, Cloneable,
      * {@link TitleChangeEvent} to all registered listeners.
      *
      * @param max  the maximum.
-     *
-     * @since 1.0.10.
      *
      * @see #getMaximumLinesToDisplay()
      */
@@ -469,8 +463,6 @@ public class TextTitle extends Title implements Serializable, Cloneable,
      * @param g2  the graphics target.
      *
      * @return The content size.
-     *
-     * @since 1.0.9
      */
     protected Size2D arrangeNN(Graphics2D g2) {
         Range max = new Range(0.0, Float.MAX_VALUE);
@@ -487,8 +479,6 @@ public class TextTitle extends Title implements Serializable, Cloneable,
      * @param w  the width.
      *
      * @return The content size.
-     *
-     * @since 1.0.9
      */
     protected Size2D arrangeFN(Graphics2D g2, double w) {
         RectangleEdge position = getPosition();
@@ -540,8 +530,6 @@ public class TextTitle extends Title implements Serializable, Cloneable,
      * @param widthRange  the range for the width.
      *
      * @return The content size.
-     *
-     * @since 1.0.9
      */
     protected Size2D arrangeRN(Graphics2D g2, Range widthRange) {
         Size2D s = arrangeNN(g2);

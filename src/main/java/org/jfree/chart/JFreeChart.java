@@ -97,7 +97,7 @@ import org.jfree.chart.ui.Align;
 import org.jfree.chart.api.HorizontalAlignment;
 import org.jfree.chart.api.RectangleEdge;
 import org.jfree.chart.api.RectangleInsets;
-import org.jfree.chart.ui.Size2D;
+import org.jfree.chart.block.Size2D;
 import org.jfree.chart.api.VerticalAlignment;
 import org.jfree.chart.internal.Args;
 import org.jfree.chart.util.PaintUtils;
@@ -152,8 +152,6 @@ public class JFreeChart implements Drawable, TitleChangeListener,
      * The key for a rendering hint that can suppress the generation of a 
      * shadow effect when drawing the chart.  The hint value must be a 
      * Boolean.
-     * 
-     * @since 1.0.16
      */
     public static final RenderingHints.Key KEY_SUPPRESS_SHADOW_GENERATION
             = new RenderingHints.Key(0) {
@@ -338,8 +336,6 @@ public class JFreeChart implements Drawable, TitleChangeListener,
      * Returns the ID for the chart.
      * 
      * @return The ID for the chart (possibly {@code null}).
-     * 
-     * @since 1.0.20
      */
     public String getID() {
         return this.id;
@@ -348,9 +344,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
     /**
      * Sets the ID for the chart.
      * 
-     * @param id  the id ({@code null} permitted). 
-     * 
-     * @since 1.0.20
+     * @param id  the id ({@code null} permitted).
      */
     public void setID(String id) {
         this.id = id;
@@ -365,7 +359,6 @@ public class JFreeChart implements Drawable, TitleChangeListener,
      * @return A boolean.
      * 
      * @see #setElementHinting(boolean) 
-     * @since 1.0.20
      */
     public boolean getElementHinting() {
         return this.elementHinting;
@@ -380,7 +373,6 @@ public class JFreeChart implements Drawable, TitleChangeListener,
      * @param hinting  the new flag value.
      * 
      * @see #getElementHinting() 
-     * @since 1.0.20
      */
     public void setElementHinting(boolean hinting) {
         this.elementHinting = hinting;
@@ -707,8 +699,6 @@ public class JFreeChart implements Drawable, TitleChangeListener,
      *
      * @param index  the index (in the range 0 to {@link #getSubtitleCount()}).
      * @param subtitle  the subtitle to add ({@code null} not permitted).
-     *
-     * @since 1.0.6
      */
     public void addSubtitle(int index, Title subtitle) {
         Args.requireInRange(index, "index", 0, getSubtitleCount());
@@ -792,8 +782,6 @@ public class JFreeChart implements Drawable, TitleChangeListener,
      *
      * @return The hint value (possibly {@code null}).
      *
-     * @since 1.0.5
-     *
      * @see #setTextAntiAlias(Object)
      */
     public Object getTextAntiAlias() {
@@ -808,8 +796,6 @@ public class JFreeChart implements Drawable, TitleChangeListener,
      * {@link ChartChangeEvent} to all registered listeners.
      *
      * @param flag  the new value of the flag.
-     *
-     * @since 1.0.5
      *
      * @see #getTextAntiAlias()
      * @see #setTextAntiAlias(Object)
@@ -829,8 +815,6 @@ public class JFreeChart implements Drawable, TitleChangeListener,
      * {@link ChartChangeEvent} to all registered listeners.
      *
      * @param val  the new value ({@code null} permitted).
-     *
-     * @since 1.0.5
      *
      * @see #getTextAntiAlias()
      * @see #setTextAntiAlias(boolean)

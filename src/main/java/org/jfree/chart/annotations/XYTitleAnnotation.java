@@ -57,7 +57,7 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.title.Title;
 import org.jfree.chart.api.RectangleAnchor;
 import org.jfree.chart.api.RectangleEdge;
-import org.jfree.chart.ui.Size2D;
+import org.jfree.chart.block.Size2D;
 import org.jfree.chart.internal.Args;
 import org.jfree.chart.api.PublicCloneable;
 import org.jfree.chart.api.XYCoordinateType;

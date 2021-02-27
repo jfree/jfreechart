@@ -54,7 +54,6 @@ import org.jfree.chart.text.TextBlock;
 import org.jfree.chart.text.TextBlockAnchor;
 import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.api.RectangleAnchor;
-import org.jfree.chart.ui.Size2D;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.internal.Args;
 import org.jfree.chart.api.PublicCloneable;
@@ -95,15 +94,11 @@ public class LabelBlock extends AbstractBlock
 
     /**
      * The content alignment point.
-     *
-     * @since 1.0.13
      */
     private TextBlockAnchor contentAlignmentPoint;
 
     /**
      * The anchor point for the text.
-     *
-     * @since 1.0.13
      */
     private RectangleAnchor textAnchor;
 
@@ -241,8 +236,6 @@ public class LabelBlock extends AbstractBlock
      * Returns the content alignment point.
      *
      * @return The content alignment point (never {@code null}).
-     *
-     * @since 1.0.13
      */
     public TextBlockAnchor getContentAlignmentPoint() {
         return this.contentAlignmentPoint;
@@ -253,8 +246,6 @@ public class LabelBlock extends AbstractBlock
      *
      * @param anchor  the anchor used to determine the alignment point (never
      *         {@code null}).
-     *
-     * @since 1.0.13
      */
     public void setContentAlignmentPoint(TextBlockAnchor anchor) {
         Args.nullNotPermitted(anchor, "anchor");
@@ -265,8 +256,6 @@ public class LabelBlock extends AbstractBlock
      * Returns the text anchor (never {@code null}).
      *
      * @return The text anchor.
-     *
-     * @since 1.0.13
      */
     public RectangleAnchor getTextAnchor() {
         return this.textAnchor;
@@ -276,8 +265,6 @@ public class LabelBlock extends AbstractBlock
      * Sets the text anchor.
      *
      * @param anchor  the anchor ({@code null} not permitted).
-     *
-     * @since 1.0.13
      */
     public void setTextAnchor(RectangleAnchor anchor) {
         this.textAnchor = anchor;

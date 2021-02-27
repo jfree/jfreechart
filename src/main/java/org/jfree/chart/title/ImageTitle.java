@@ -46,7 +46,7 @@ import org.jfree.chart.event.TitleChangeEvent;
 import org.jfree.chart.api.HorizontalAlignment;
 import org.jfree.chart.api.RectangleEdge;
 import org.jfree.chart.api.RectangleInsets;
-import org.jfree.chart.ui.Size2D;
+import org.jfree.chart.block.Size2D;
 import org.jfree.chart.api.VerticalAlignment;
 
 /**
@@ -221,17 +221,20 @@ public class ImageTitle extends Title {
         }
 
         // what is our alignment?
-        HorizontalAlignment horizontalAlignment = getHorizontalAlignment();
         double startX = 0.0;
-        if (horizontalAlignment == HorizontalAlignment.CENTER) {
-            startX = chartArea.getX() + leftSpace + chartArea.getWidth() / 2.0
-                     - w / 2.0;
-        }
-        else if (horizontalAlignment == HorizontalAlignment.LEFT) {
-            startX = chartArea.getX() + leftSpace;
-        }
-        else if (horizontalAlignment == HorizontalAlignment.RIGHT) {
-            startX = chartArea.getX() + chartArea.getWidth() - rightSpace - w;
+        switch (getHorizontalAlignment()) {
+            case CENTER:
+                startX = chartArea.getX() + leftSpace + chartArea.getWidth() / 2.0
+                        - w / 2.0;
+                break;
+            case LEFT:
+                startX = chartArea.getX() + leftSpace;
+                break;
+            case RIGHT:
+                startX = chartArea.getX() + chartArea.getWidth() - rightSpace - w;
+                break;
+            default:
+                throw new IllegalStateException("Unexpected horizontal alignment.");
         }
         g2.drawImage(this.image, (int) startX, (int) startY, (int) w, (int) h,
                 null);
@@ -278,17 +281,20 @@ public class ImageTitle extends Title {
         }
 
         // what is our alignment?
-        VerticalAlignment alignment = getVerticalAlignment();
         double startY = 0.0;
-        if (alignment == VerticalAlignment.CENTER) {
-            startY = chartArea.getMinY() + topSpace
-                     + chartArea.getHeight() / 2.0 - h / 2.0;
-        }
-        else if (alignment == VerticalAlignment.TOP) {
-            startY = chartArea.getMinY() + topSpace;
-        }
-        else if (alignment == VerticalAlignment.BOTTOM) {
-            startY = chartArea.getMaxY() - bottomSpace - h;
+        switch (getVerticalAlignment()) {
+            case CENTER:
+                startY = chartArea.getMinY() + topSpace
+                        + chartArea.getHeight() / 2.0 - h / 2.0;
+                break;
+            case TOP:
+                startY = chartArea.getMinY() + topSpace;
+                break;
+            case BOTTOM:
+                startY = chartArea.getMaxY() - bottomSpace - h;
+                break;
+            default:
+                throw new IllegalStateException("Unexpected vertical alignment.");
         }
 
         g2.drawImage(this.image, (int) startX, (int) startY, (int) w, (int) h,
@@ -341,6 +347,18 @@ public class ImageTitle extends Title {
             return false;
         }
         return super.equals(obj);
+    }
+
+    /**
+     * Returns a hash code for this instance.
+     * 
+     * @return A has code.
+     */
+    @Override
+    public int hashCode() {
+        int hash = super.hashCode();
+        hash = 83 * hash + Objects.hashCode(this.image);
+        return hash;
     }
 
 }

@@ -67,7 +67,7 @@ import org.jfree.chart.api.RectangleEdge;
 import org.jfree.chart.api.PublicCloneable;
 import org.jfree.chart.internal.SerialUtils;
 import org.jfree.chart.api.RectangleInsets;
-import org.jfree.chart.ui.Size2D;
+import org.jfree.chart.block.Size2D;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.internal.Args;
 import org.jfree.chart.title.Title;
@@ -146,7 +146,6 @@ public class LegendTitle extends Title
 
     /**
      * Whether to render legend items in ascending or descending order.
-     * @since 1.0.15
      */
     private SortOrder sortOrder;
 
@@ -369,7 +368,6 @@ public class LegendTitle extends Title
      * Gets the order used to display legend items.
      * 
      * @return The order (never {@code null}).
-     * @since 1.0.15
      */
     public SortOrder getSortOrder() {
         return this.sortOrder;
@@ -380,7 +378,6 @@ public class LegendTitle extends Title
      * 
      * @param order Specifies ascending or descending order ({@code null}
      *              not permitted).
-     * @since 1.0.15
      */
     public void setSortOrder(SortOrder order) {
         Args.nullNotPermitted(order, "order");
@@ -576,8 +573,6 @@ public class LegendTitle extends Title
      * Returns the wrapper container, if any.
      *
      * @return The wrapper container (possibly {@code null}).
-     *
-     * @since 1.0.11
      */
     public BlockContainer getWrapper() {
         return this.wrapper;

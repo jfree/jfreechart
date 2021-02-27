@@ -43,7 +43,7 @@ import java.util.Objects;
 
 import org.jfree.chart.api.RectangleAnchor;
 import org.jfree.chart.api.RectangleInsets;
-import org.jfree.chart.ui.Size2D;
+import org.jfree.chart.block.Size2D;
 import org.jfree.chart.internal.SerialUtils;
 
 /**

@@ -48,7 +48,7 @@ import org.jfree.chart.block.BlockContainer;
 import org.jfree.chart.block.BorderArrangement;
 import org.jfree.chart.block.RectangleConstraint;
 import org.jfree.chart.event.TitleChangeEvent;
-import org.jfree.chart.ui.Size2D;
+import org.jfree.chart.block.Size2D;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.internal.Args;
 import org.jfree.chart.internal.SerialUtils;
@@ -63,8 +63,6 @@ public class CompositeTitle extends Title implements Cloneable, Serializable {
 
     /**
      * The background paint.
-     *
-     * @since 1.0.11
      */
     private transient Paint backgroundPaint;
 
@@ -93,8 +91,6 @@ public class CompositeTitle extends Title implements Cloneable, Serializable {
      * Returns the background paint.
      *
      * @return The paint (possibly {@code null}).
-     *
-     * @since 1.0.11
      */
     public Paint getBackgroundPaint() {
         return this.backgroundPaint;
@@ -106,8 +102,6 @@ public class CompositeTitle extends Title implements Cloneable, Serializable {
      * no background is painted (which makes the title background transparent).
      *
      * @param paint  the background paint ({@code null} permitted).
-     *
-     * @since 1.0.11
      */
     public void setBackgroundPaint(Paint paint) {
         this.backgroundPaint = paint;

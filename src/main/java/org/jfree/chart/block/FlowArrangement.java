@@ -42,7 +42,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import org.jfree.chart.api.HorizontalAlignment;
-import org.jfree.chart.ui.Size2D;
 import org.jfree.chart.api.VerticalAlignment;
 
 /**
