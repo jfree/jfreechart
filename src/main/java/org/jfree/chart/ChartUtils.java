@@ -75,12 +75,12 @@ public abstract class ChartUtils {
      * 
      * @return A boolean.
      * 
-     * @since 1.6.0
+     * @since 2.0.0
      */
     public static boolean isJFreeSVGAvailable() {
         Class<?> svgGraphics2DClass = null;
         try {
-            svgGraphics2DClass =  Class.forName("org.jfree.graphics2d.svg.SVGGraphics2D");
+            svgGraphics2DClass =  Class.forName("org.jfree.svg.SVGGraphics2D");
         } catch (ClassNotFoundException e) {
             // svgGraphics2DClass will be null so the function will return false
         }
@@ -94,7 +94,7 @@ public abstract class ChartUtils {
      * 
      * @return A boolean.
      * 
-     * @since 1.6.0
+     * @since 2.0.0
      */
     public static boolean isOrsonPDFAvailable() {
         Class<?> pdfDocumentClass = null;
@@ -112,8 +112,6 @@ public abstract class ChartUtils {
      * {@link ChartFactory} class.
      *
      * @param chart  the chart ({@code null} not permitted).
-     *
-     * @since 1.0.11
      */
     public static void applyCurrentTheme(JFreeChart chart) {
         ChartFactory.getChartTheme().apply(chart);

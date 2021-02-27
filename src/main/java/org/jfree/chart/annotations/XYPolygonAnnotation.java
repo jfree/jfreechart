@@ -174,8 +174,6 @@ public class XYPolygonAnnotation extends AbstractXYAnnotation
      * Returns the outline paint.
      *
      * @return The outline paint (possibly {@code null}).
-     *
-     * @since 1.0.2
      */
     public Paint getOutlinePaint() {
         return this.outlinePaint;

@@ -104,8 +104,6 @@ import org.jfree.chart.util.ShadowGenerator;
  * implementation just collects a whole bunch of chart attributes and mimics
  * the manual process of applying each attribute to the right sub-object
  * within the JFreeChart instance.  It's not elegant code, but it works.
- *
- * @since 1.0.11
  */
 public class StandardChartTheme implements ChartTheme, Cloneable,
         PublicCloneable, Serializable {
@@ -171,8 +169,6 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
 
     /**
      * The baseline paint (used for domain and range zero baselines)
-     *
-     * @since 1.0.13
      */
     private transient Paint baselinePaint;
 
@@ -221,8 +217,6 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
 
     /**
      * The shadow generator (can be null).
-     * 
-     * @since 1.0.14
      */
     private ShadowGenerator shadowGenerator;
 
@@ -308,8 +302,6 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
      * @param name  the name of the theme ({@code null} not permitted).
      * @param shadow  a flag that controls whether a shadow generator is 
      *                included.
-     *
-     * @since 1.0.14
      */
     public StandardChartTheme(String name, boolean shadow) {
         Args.nullNotPermitted(name, "name");
@@ -420,8 +412,6 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
      * @return The small font (never {@code null}).
      *
      * @see #setSmallFont(Font)
-     *
-     * @since 1.0.13
      */
     public Font getSmallFont() {
         return this.smallFont;
@@ -433,8 +423,6 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
      * @param font  the font ({@code null} not permitted).
      *
      * @see #getSmallFont()
-     *
-     * @since 1.0.13
      */
     public void setSmallFont(Font font) {
         Args.nullNotPermitted(font, "font");
@@ -698,8 +686,6 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
      * Returns the baseline paint.
      *
      * @return The baseline paint.
-     *
-     * @since 1.0.13
      */
     public Paint getBaselinePaint() {
         return this.baselinePaint;
@@ -709,8 +695,6 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
      * Sets the baseline paint.
      *
      * @param paint  the paint ({@code null} not permitted).
-     *
-     * @since 1.0.13
      */
     public void setBaselinePaint(Paint paint) {
         Args.nullNotPermitted(paint, "paint");
