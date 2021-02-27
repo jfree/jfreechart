@@ -21,8 +21,9 @@
 
     <description>
         JFreeChart is a class library, written in Java, for generating charts. 
-        Utilising the Java2D APIs, it currently supports bar charts, pie charts, 
-        line charts, XY-plots and time series plots.
+        Utilising the Java2D API, it supports a wide range of chart types including
+        bar charts, pie charts, line charts, XY-plots, time series plots, Sankey charts
+        and more.
     </description>
 
     <url>http://www.jfree.org/jfreechart/</url>
@@ -82,9 +83,7 @@
     
     <build>
         <testSourceDirectory>src/test/java</testSourceDirectory>
-
         <plugins>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-clean-plugin</artifactId>
@@ -99,8 +98,7 @@
                     <source>${project.source.level}</source>
                     <target>${project.target.level}</target>
                     <encoding>${project.build.sourceEncoding}</encoding>                
-                    <compilerArgument>-Xlint:none</compilerArgument>
-                    <showWarnings>false</showWarnings>
+                    <showWarnings>true</showWarnings>
                     <showDeprecation>true</showDeprecation>
                 </configuration>
             </plugin>
@@ -112,6 +110,18 @@
             </plugin>
 
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <linksource>true</linksource>
+                    <source>11</source>
+                    <docfilessubdirs>true</docfilessubdirs>
+                </configuration>
+            </plugin>
+            
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.2</version>
             </plugin>
@@ -130,16 +140,9 @@
             </plugin>
 
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>animal-sniffer-maven-plugin</artifactId>
-                <version>1.18</version>
-                <configuration>
-                    <signature>
-                        <groupId>org.codehaus.mojo.signature</groupId>
-                        <artifactId>java18</artifactId>
-                        <version>1.0</version>
-                    </signature>
-                </configuration>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>2.5.2</version>
             </plugin>
           
             <plugin>
@@ -152,7 +155,6 @@
 
     <reporting>
         <plugins>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-report-plugin</artifactId>
@@ -222,7 +224,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-source-plugin</artifactId>
-                        <version>2.2.1</version>
+                        <version>3.2.0</version>
                         <executions>
                             <execution>
                                 <id>attach-sources</id>
@@ -232,7 +234,6 @@
                             </execution>
                         </executions>
                     </plugin>
-
                 </plugins>
             </build>
         </profile>
