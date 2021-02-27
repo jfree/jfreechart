@@ -50,7 +50,7 @@ import org.jfree.chart.plot.RingPlot;
 import org.jfree.chart.legend.LegendTitle;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.chart.title.Title;
-import org.jfree.chart.ui.Align;
+import org.jfree.chart.api.RectangleAlignment;
 import org.jfree.chart.api.RectangleEdge;
 import org.jfree.chart.api.RectangleInsets;
 import org.jfree.data.category.DefaultCategoryDataset;
@@ -174,9 +174,9 @@ public class JFreeChartTest implements ChartChangeListener {
 //        assertEquals(chart1, chart2);
 
         // backgroundImageAlignment
-        chart1.setBackgroundImageAlignment(Align.BOTTOM_LEFT);
+        chart1.setBackgroundImageAlignment(RectangleAlignment.BOTTOM_LEFT);
         assertFalse(chart1.equals(chart2));
-        chart2.setBackgroundImageAlignment(Align.BOTTOM_LEFT);
+        chart2.setBackgroundImageAlignment(RectangleAlignment.BOTTOM_LEFT);
         assertEquals(chart1, chart2);
 
         // backgroundImageAlpha

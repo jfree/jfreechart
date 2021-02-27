@@ -23,7 +23,6 @@ module org.jfree.chart {
     exports org.jfree.chart.text;
     exports org.jfree.chart.text.format;
     exports org.jfree.chart.title;
-    exports org.jfree.chart.ui;
     exports org.jfree.chart.urls;
     exports org.jfree.chart.util;
     exports org.jfree.data;

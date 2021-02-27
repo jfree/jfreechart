@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------
  * PlotTest.java
  * -------------
- * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -48,7 +48,7 @@ import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.Stroke;
 
-import org.jfree.chart.ui.Align;
+import org.jfree.chart.api.RectangleAlignment;
 import org.jfree.chart.api.RectangleInsets;
 import org.junit.jupiter.api.Test;
 
@@ -130,9 +130,9 @@ public class PlotTest {
 //        assertTrue(plot1.equals(plot2));
 
         // backgroundImageAlignment
-        plot1.setBackgroundImageAlignment(Align.BOTTOM_RIGHT);
+        plot1.setBackgroundImageAlignment(RectangleAlignment.BOTTOM_RIGHT);
         assertFalse(plot1.equals(plot2));
-        plot2.setBackgroundImageAlignment(Align.BOTTOM_RIGHT);
+        plot2.setBackgroundImageAlignment(RectangleAlignment.BOTTOM_RIGHT);
         assertTrue(plot1.equals(plot2));
 
         // backgroundImageAlpha

@@ -93,8 +93,8 @@ import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.legend.LegendTitle;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.chart.title.Title;
-import org.jfree.chart.ui.Align;
 import org.jfree.chart.api.HorizontalAlignment;
+import org.jfree.chart.api.RectangleAlignment;
 import org.jfree.chart.api.RectangleEdge;
 import org.jfree.chart.api.RectangleInsets;
 import org.jfree.chart.block.Size2D;
@@ -102,6 +102,7 @@ import org.jfree.chart.api.VerticalAlignment;
 import org.jfree.chart.internal.Args;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.internal.SerialUtils;
+import org.jfree.chart.swing.ChartPanel;
 import org.jfree.data.Range;
 
 /**
@@ -143,7 +144,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
     public static final Image DEFAULT_BACKGROUND_IMAGE = null;
 
     /** The default background image alignment. */
-    public static final int DEFAULT_BACKGROUND_IMAGE_ALIGNMENT = Align.FIT;
+    public static final RectangleAlignment DEFAULT_BACKGROUND_IMAGE_ALIGNMENT = RectangleAlignment.FILL;
 
     /** The default background image alpha. */
     public static final float DEFAULT_BACKGROUND_IMAGE_ALPHA = 0.5f;
@@ -201,7 +202,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
     private transient Image backgroundImage;  // todo: not serialized yet
 
     /** The alignment for the background image. */
-    private int backgroundImageAlignment = Align.FIT;
+    private RectangleAlignment backgroundImageAlignment = RectangleAlignment.FILL;
 
     /** The alpha transparency for the background image. */
     private float backgroundImageAlpha = 0.5f;
@@ -898,26 +899,26 @@ public class JFreeChart implements Drawable, TitleChangeListener,
     }
 
     /**
-     * Returns the background image alignment. Alignment constants are defined
-     * in the {@link Align} class.
+     * Returns the background image alignment. 
      *
-     * @return The alignment.
+     * @return The alignment (never {@code null}).
      *
-     * @see #setBackgroundImageAlignment(int)
+     * @see #setBackgroundImageAlignment(RectangleAlignment)
      */
-    public int getBackgroundImageAlignment() {
+    public RectangleAlignment getBackgroundImageAlignment() {
         return this.backgroundImageAlignment;
     }
 
     /**
-     * Sets the background alignment.  Alignment options are defined by the
-     * {@link org.jfree.chart.ui.Align} class.
+     * Sets the background alignment and sends a change notification to all
+     * registered listeners.
      *
-     * @param alignment  the alignment.
+     * @param alignment  the alignment ({@code null} not permitted).
      *
      * @see #getBackgroundImageAlignment()
      */
-    public void setBackgroundImageAlignment(int alignment) {
+    public void setBackgroundImageAlignment(RectangleAlignment alignment) {
+        Args.nullNotPermitted(alignment, "alignment");
         if (this.backgroundImageAlignment != alignment) {
             this.backgroundImageAlignment = alignment;
             fireChartChanged();
@@ -1062,7 +1063,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
             Rectangle2D dest = new Rectangle2D.Double(0.0, 0.0,
                     this.backgroundImage.getWidth(null),
                     this.backgroundImage.getHeight(null));
-            Align.align(dest, chartArea, this.backgroundImageAlignment);
+            this.backgroundImageAlignment.align(dest, chartArea);
             g2.drawImage(this.backgroundImage, (int) dest.getX(),
                     (int) dest.getY(), (int) dest.getWidth(),
                     (int) dest.getHeight(), null);
@@ -1530,8 +1531,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         int hash = 7;
         hash = 59 * hash + Objects.hashCode(this.renderingHints);
         hash = 59 * hash + (this.borderVisible ? 1 : 0);
@@ -1543,7 +1543,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
         hash = 59 * hash + Objects.hashCode(this.plot);
         hash = 59 * hash + Objects.hashCode(this.backgroundPaint);
         hash = 59 * hash + Objects.hashCode(this.backgroundImage);
-        hash = 59 * hash + this.backgroundImageAlignment;
+        hash = 59 * hash + Objects.hashCode(this.backgroundImageAlignment);
         hash = 59 * hash + Float.floatToIntBits(this.backgroundImageAlpha);
         hash = 59 * hash + (this.notify ? 1 : 0);
         return hash;

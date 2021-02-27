@@ -86,13 +86,13 @@ import org.jfree.chart.text.G2TextMeasurer;
 import org.jfree.chart.text.TextBlock;
 import org.jfree.chart.text.TextBlockAnchor;
 import org.jfree.chart.text.TextUtils;
-import org.jfree.chart.ui.Align;
 import org.jfree.chart.api.RectangleEdge;
 import org.jfree.chart.api.RectangleInsets;
 import org.jfree.chart.internal.Args;
 import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.api.PublicCloneable;
+import org.jfree.chart.api.RectangleAlignment;
 import org.jfree.chart.internal.SerialUtils;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.DatasetChangeListener;
@@ -194,7 +194,7 @@ public abstract class Plot implements AxisChangeListener,
     private transient Image backgroundImage;  // not currently serialized
 
     /** The alignment for the background image. */
-    private int backgroundImageAlignment = Align.FIT;
+    private RectangleAlignment backgroundImageAlignment = RectangleAlignment.FILL;
 
     /** The alpha value used to draw the background image. */
     private float backgroundImageAlpha = 0.5f;
@@ -653,27 +653,27 @@ public abstract class Plot implements AxisChangeListener,
     }
 
     /**
-     * Returns the background image alignment. Alignment constants are defined
-     * in the {@code Align} class.
+     * Returns the background image alignment. The default value is 
+     * {@code RectangleAlignment.FILL}.
      *
-     * @return The alignment.
+     * @return The alignment (never {@code null}).
      *
-     * @see #setBackgroundImageAlignment(int)
+     * @see #setBackgroundImageAlignment(RectangleAlignment)
      */
-    public int getBackgroundImageAlignment() {
+    public RectangleAlignment getBackgroundImageAlignment() {
         return this.backgroundImageAlignment;
     }
 
     /**
      * Sets the alignment for the background image and sends a
-     * {@link PlotChangeEvent} to all registered listeners.  Alignment options
-     * are defined by the {@link org.jfree.chart.ui.Align} class.
+     * {@link PlotChangeEvent} to all registered listeners.  
      *
-     * @param alignment  the alignment.
+     * @param alignment  the alignment ({@code null} not permitted).
      *
      * @see #getBackgroundImageAlignment()
      */
-    public void setBackgroundImageAlignment(int alignment) {
+    public void setBackgroundImageAlignment(RectangleAlignment alignment) {
+        Args.nullNotPermitted(alignment, "alignment");
         if (this.backgroundImageAlignment != alignment) {
             this.backgroundImageAlignment = alignment;
             fireChangeEvent();
@@ -1054,7 +1054,7 @@ public abstract class Plot implements AxisChangeListener,
         Rectangle2D dest = new Rectangle2D.Double(0.0, 0.0,
                 this.backgroundImage.getWidth(null),
                 this.backgroundImage.getHeight(null));
-        Align.align(dest, area, this.backgroundImageAlignment);
+        this.backgroundImageAlignment.align(dest, area);
         Shape savedClip = g2.getClip();
         g2.clip(area);
         g2.drawImage(this.backgroundImage, (int) dest.getX(),
