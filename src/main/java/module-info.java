@@ -21,6 +21,7 @@ module org.jfree.chart {
     exports org.jfree.chart.swing;
     exports org.jfree.chart.swing.editor;
     exports org.jfree.chart.text;
+    exports org.jfree.chart.text.format;
     exports org.jfree.chart.title;
     exports org.jfree.chart.ui;
     exports org.jfree.chart.urls;
