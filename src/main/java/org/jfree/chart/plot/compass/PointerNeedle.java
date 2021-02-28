@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -24,49 +24,34 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ---------------
- * LongNeedle.java
- * ---------------
- * (C) Copyright 2002-2016, by the Australian Antarctic Division and
+ * ------------------
+ * PointerNeedle.java
+ * ------------------
+ * (C) Copyright 2002-2021, by the Australian Antarctic Division and
  *                          Contributors.
  *
  * Original Author:  Bryan Scott (for the Australian Antarctic Division);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * Changes:
- * --------
- * 25-Sep-2002 : Version 1, contributed by Bryan Scott (DG);
- * 27-Mar-2003 : Implemented Serializable (DG);
- * 09-Sep-2003 : Added equals() method (DG);
- * 16-Mar-2004 : Implemented Rotation;
- * 22-Nov-2007 : Implemented hashCode() (DG);
- *
  */
 
-package org.jfree.chart.needle;
+package org.jfree.chart.plot.compass;
 
 import java.awt.Graphics2D;
-import java.awt.Shape;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 
 /**
- * A needle that is represented by a long line.
+ * A needle in the shape of a pointer, for use with the
+ * {@link org.jfree.chart.plot.CompassPlot} class.
  */
-public class LongNeedle extends MeterNeedle implements Cloneable, Serializable {
+public class PointerNeedle extends MeterNeedle implements Cloneable, 
+        Serializable {
 
     /** For serialization. */
-    private static final long serialVersionUID = -4319985779783688159L;
-
-    /**
-     * Default constructor.
-     */
-    public LongNeedle() {
-        super();
-        setRotateY(0.8);
-    }
+    private static final long serialVersionUID = -4744677345334729606L;
 
     /**
      * Draws the needle.
@@ -82,65 +67,45 @@ public class LongNeedle extends MeterNeedle implements Cloneable, Serializable {
 
         GeneralPath shape1 = new GeneralPath();
         GeneralPath shape2 = new GeneralPath();
-        GeneralPath shape3 = new GeneralPath();
-
         float minX = (float) plotArea.getMinX();
         float minY = (float) plotArea.getMinY();
         float maxX = (float) plotArea.getMaxX();
         float maxY = (float) plotArea.getMaxY();
-        //float midX = (float) (minX + (plotArea.getWidth() * getRotateX()));
-        //float midY = (float) (minY + (plotArea.getHeight() * getRotateY()));
-        float midX = (float) (minX + (plotArea.getWidth() * 0.5));
-        float midY = (float) (minY + (plotArea.getHeight() * 0.8));
-        float y = maxY - (2 * (maxY - midY));
-        if (y < minY) {
-            y = minY;
-        }
+        float midX = (float) (minX + (plotArea.getWidth() / 2));
+        float midY = (float) (minY + (plotArea.getHeight() / 2));
+
         shape1.moveTo(minX, midY);
         shape1.lineTo(midX, minY);
-        shape1.lineTo(midX, y);
+        shape1.lineTo(maxX, midY);
         shape1.closePath();
 
-        shape2.moveTo(maxX, midY);
-        shape2.lineTo(midX, minY);
-        shape2.lineTo(midX, y);
+        shape2.moveTo(minX, midY);
+        shape2.lineTo(midX, maxY);
+        shape2.lineTo(maxX, midY);
         shape2.closePath();
-
-        shape3.moveTo(minX, midY);
-        shape3.lineTo(midX, maxY);
-        shape3.lineTo(maxX, midY);
-        shape3.lineTo(midX, y);
-        shape3.closePath();
-
-        Shape s1 = shape1;
-        Shape s2 = shape2;
-        Shape s3 = shape3;
 
         if ((rotate != null) && (angle != 0)) {
             /// we have rotation huston, please spin me
             getTransform().setToRotation(angle, rotate.getX(), rotate.getY());
-            s1 = shape1.createTransformedShape(transform);
-            s2 = shape2.createTransformedShape(transform);
-            s3 = shape3.createTransformedShape(transform);
-        }
-
-        if (getHighlightPaint() != null) {
-            g2.setPaint(getHighlightPaint());
-            g2.fill(s3);
+            shape1.transform(getTransform());
+            shape2.transform(getTransform());
         }
 
         if (getFillPaint() != null) {
             g2.setPaint(getFillPaint());
-            g2.fill(s1);
-            g2.fill(s2);
+            g2.fill(shape1);
+        }
+
+        if (getHighlightPaint() != null) {
+            g2.setPaint(getHighlightPaint());
+            g2.fill(shape2);
         }
 
         if (getOutlinePaint() != null) {
             g2.setStroke(getOutlineStroke());
             g2.setPaint(getOutlinePaint());
-            g2.draw(s1);
-            g2.draw(s2);
-            g2.draw(s3);
+            g2.draw(shape1);
+            g2.draw(shape2);
         }
     }
 
@@ -156,10 +121,13 @@ public class LongNeedle extends MeterNeedle implements Cloneable, Serializable {
         if (obj == this) {
             return true;
         }
-        if (!(obj instanceof LongNeedle)) {
+        if (!(obj instanceof PointerNeedle)) {
             return false;
         }
-        return super.equals(obj);
+        if (!super.equals(obj)) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -177,7 +145,7 @@ public class LongNeedle extends MeterNeedle implements Cloneable, Serializable {
      *
      * @return A clone.
      *
-     * @throws CloneNotSupportedException if the {@code LongNeedle}
+     * @throws CloneNotSupportedException if the {@code PointerNeedle}
      *     cannot be cloned (in theory, this should not happen).
      */
     @Override

@@ -11,7 +11,7 @@ module org.jfree.chart {
     exports org.jfree.chart.event;
     exports org.jfree.chart.imagemap;
     exports org.jfree.chart.labels;
-    exports org.jfree.chart.needle;
+    exports org.jfree.chart.plot.compass;
     exports org.jfree.chart.plot;
     exports org.jfree.chart.plot.dial;
     exports org.jfree.chart.plot.flow;

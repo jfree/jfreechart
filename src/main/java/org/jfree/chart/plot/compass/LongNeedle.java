@@ -24,9 +24,9 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ----------------
- * ArrowNeedle.java
- * ----------------
+ * ---------------
+ * LongNeedle.java
+ * ---------------
  * (C) Copyright 2002-2021, by the Australian Antarctic Division and
  *                          Contributors.
  *
@@ -35,41 +35,29 @@
  *
  */
 
-package org.jfree.chart.needle;
+package org.jfree.chart.plot.compass;
 
 import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.geom.GeneralPath;
-import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 
-import org.jfree.chart.internal.HashUtils;
-
 /**
- * A needle in the shape of an arrow.
+ * A needle that is represented by a long line.
  */
-public class ArrowNeedle extends MeterNeedle implements Cloneable, 
-        Serializable {
+public class LongNeedle extends MeterNeedle implements Cloneable, Serializable {
 
     /** For serialization. */
-    private static final long serialVersionUID = -5334056511213782357L;
+    private static final long serialVersionUID = -4319985779783688159L;
 
     /**
-     * A flag controlling whether or not there is an arrow at the top of the
-     * needle.
+     * Default constructor.
      */
-    private boolean isArrowAtTop = true;
-
-    /**
-     * Constructs a new arrow needle.
-     *
-     * @param isArrowAtTop  a flag that controls whether or not there is an
-     *     arrow at the top of the needle.
-     */
-    public ArrowNeedle(boolean isArrowAtTop) {
-        this.isArrowAtTop = isArrowAtTop;
+    public LongNeedle() {
+        super();
+        setRotateY(0.8);
     }
 
     /**
@@ -84,41 +72,68 @@ public class ArrowNeedle extends MeterNeedle implements Cloneable,
     protected void drawNeedle(Graphics2D g2, Rectangle2D plotArea,
             Point2D rotate, double angle) {
 
-        Line2D shape = new Line2D.Float();
-        Shape d;
-
-        float x = (float) (plotArea.getMinX() + (plotArea.getWidth() / 2));
-        float minY = (float) plotArea.getMinY();
-        float maxY = (float) plotArea.getMaxY();
-        shape.setLine(x, minY, x, maxY);
-
         GeneralPath shape1 = new GeneralPath();
-        if (this.isArrowAtTop) {
-            shape1.moveTo(x, minY);
-            minY += 4 * getSize();
-        } else {
-            shape1.moveTo(x, maxY);
-            minY = maxY - 4 * getSize();
+        GeneralPath shape2 = new GeneralPath();
+        GeneralPath shape3 = new GeneralPath();
+
+        float minX = (float) plotArea.getMinX();
+        float minY = (float) plotArea.getMinY();
+        float maxX = (float) plotArea.getMaxX();
+        float maxY = (float) plotArea.getMaxY();
+        //float midX = (float) (minX + (plotArea.getWidth() * getRotateX()));
+        //float midY = (float) (minY + (plotArea.getHeight() * getRotateY()));
+        float midX = (float) (minX + (plotArea.getWidth() * 0.5));
+        float midY = (float) (minY + (plotArea.getHeight() * 0.8));
+        float y = maxY - (2 * (maxY - midY));
+        if (y < minY) {
+            y = minY;
         }
-        shape1.lineTo(x + getSize(), minY);
-        shape1.lineTo(x - getSize(), minY);
+        shape1.moveTo(minX, midY);
+        shape1.lineTo(midX, minY);
+        shape1.lineTo(midX, y);
         shape1.closePath();
 
+        shape2.moveTo(maxX, midY);
+        shape2.lineTo(midX, minY);
+        shape2.lineTo(midX, y);
+        shape2.closePath();
+
+        shape3.moveTo(minX, midY);
+        shape3.lineTo(midX, maxY);
+        shape3.lineTo(maxX, midY);
+        shape3.lineTo(midX, y);
+        shape3.closePath();
+
+        Shape s1 = shape1;
+        Shape s2 = shape2;
+        Shape s3 = shape3;
+
         if ((rotate != null) && (angle != 0)) {
+            /// we have rotation huston, please spin me
             getTransform().setToRotation(angle, rotate.getX(), rotate.getY());
-            d = getTransform().createTransformedShape(shape);
-        } else {
-            d = shape;
+            s1 = shape1.createTransformedShape(transform);
+            s2 = shape2.createTransformedShape(transform);
+            s3 = shape3.createTransformedShape(transform);
         }
-        defaultDisplay(g2, d);
 
-        if ((rotate != null) && (angle != 0)) {
-            d = getTransform().createTransformedShape(shape1);
-        } else {
-            d = shape1;
+        if (getHighlightPaint() != null) {
+            g2.setPaint(getHighlightPaint());
+            g2.fill(s3);
         }
-        defaultDisplay(g2, d);
 
+        if (getFillPaint() != null) {
+            g2.setPaint(getFillPaint());
+            g2.fill(s1);
+            g2.fill(s2);
+        }
+
+        if (getOutlinePaint() != null) {
+            g2.setStroke(getOutlineStroke());
+            g2.setPaint(getOutlinePaint());
+            g2.draw(s1);
+            g2.draw(s2);
+            g2.draw(s3);
+        }
     }
 
     /**
@@ -133,17 +148,10 @@ public class ArrowNeedle extends MeterNeedle implements Cloneable,
         if (obj == this) {
             return true;
         }
-        if (!(obj instanceof ArrowNeedle)) {
+        if (!(obj instanceof LongNeedle)) {
             return false;
         }
-        if (!super.equals(obj)) {
-            return false;
-        }
-        ArrowNeedle that = (ArrowNeedle) obj;
-        if (this.isArrowAtTop != that.isArrowAtTop) {
-            return false;
-        }
-        return true;
+        return super.equals(obj);
     }
 
     /**
@@ -153,9 +161,7 @@ public class ArrowNeedle extends MeterNeedle implements Cloneable,
      */
     @Override
     public int hashCode() {
-        int result = super.hashCode();
-        result = HashUtils.hashCode(result, this.isArrowAtTop);
-        return result;
+        return super.hashCode();
     }
 
     /**
@@ -163,7 +169,7 @@ public class ArrowNeedle extends MeterNeedle implements Cloneable,
      *
      * @return A clone.
      *
-     * @throws CloneNotSupportedException if the {@code ArrowNeedle}
+     * @throws CloneNotSupportedException if the {@code LongNeedle}
      *     cannot be cloned (in theory, this should not happen).
      */
     @Override

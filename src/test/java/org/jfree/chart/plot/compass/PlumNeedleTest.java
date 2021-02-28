@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -24,17 +24,17 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ----------------------
- * PointerNeedleTest.java
- * ----------------------
- * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
+ * -------------------
+ * PlumNeedleTest.java
+ * -------------------
+ * (C) Copyright 2005-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
  */
 
-package org.jfree.chart.needle;
+package org.jfree.chart.plot.compass;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -43,17 +43,17 @@ import org.jfree.chart.internal.CloneUtils;
 import org.junit.jupiter.api.Test;
 
 /**
- * Tests for the {@link PointerNeedle} class.
+ * Tests for the {@link PlumNeedle} class.
  */
-public class PointerNeedleTest {
+public class PlumNeedleTest {
 
     /**
      * Check that the equals() method can distinguish all fields.
      */
     @Test
     public void testEquals() {
-       PointerNeedle n1 = new PointerNeedle();
-       PointerNeedle n2 = new PointerNeedle();
+       PlumNeedle n1 = new PlumNeedle();
+       PlumNeedle n2 = new PlumNeedle();
        assertTrue(n1.equals(n2));
        assertTrue(n2.equals(n1));
     }
@@ -63,8 +63,8 @@ public class PointerNeedleTest {
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        PointerNeedle n1 = new PointerNeedle();
-        PointerNeedle n2 = CloneUtils.clone(n1);
+        PlumNeedle n1 = new PlumNeedle();
+        PlumNeedle n2 = CloneUtils.clone(n1);
         assertTrue(n1 != n2);
         assertTrue(n1.getClass() == n2.getClass());
         assertTrue(n1.equals(n2));
@@ -75,8 +75,8 @@ public class PointerNeedleTest {
      */
     @Test
     public void testSerialization() {
-        PointerNeedle n1 = new PointerNeedle();
-        PointerNeedle n2 = TestUtils.serialised(n1);
+        PlumNeedle n1 = new PlumNeedle();
+        PlumNeedle n2 = TestUtils.serialised(n1);
         assertTrue(n1.equals(n2));
     }
 

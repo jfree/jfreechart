@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -24,43 +24,33 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * --------------------
- * MiddlePinNeedle.java
- * --------------------
- * (C) Copyright 2002-2016, by the Australian Antarctic Division and
- *                          Contributors.
+ * ---------------
+ * LineNeedle.java
+ * ---------------
+ * (C) Copyright 2002-2021, by the Australian Antarctic Division and
+ *                           Contributors.
  *
  * Original Author:  Bryan Scott (for the Australian Antarctic Division);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * Changes:
- * --------
- * 25-Sep-2002 : Version 1, contributed by Bryan Scott (DG);
- * 27-Mar-2003 : Implemented Serializable (DG);
- * 09-Sep-2003 : Added equals() method (DG);
- * 08-Jun-2005 : Implemented Cloneable (DG);
- * 22-Nov-2007 : Implemented hashCode() (DG);
- *
  */
 
-package org.jfree.chart.needle;
+package org.jfree.chart.plot.compass;
 
 import java.awt.Graphics2D;
-import java.awt.geom.Area;
-import java.awt.geom.Ellipse2D;
-import java.awt.geom.GeneralPath;
+import java.awt.Shape;
+import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 
 /**
- * A needle that is drawn as a pin shape.
+ * A needle that is represented by a line.
  */
-public class MiddlePinNeedle extends MeterNeedle implements Cloneable, 
-        Serializable {
+public class LineNeedle extends MeterNeedle implements Cloneable, Serializable {
 
     /** For serialization. */
-    private static final long serialVersionUID = 6237073996403125310L;
+    private static final long serialVersionUID = 6215321387896748945L;
 
     /**
      * Draws the needle.
@@ -74,61 +64,39 @@ public class MiddlePinNeedle extends MeterNeedle implements Cloneable,
     protected void drawNeedle(Graphics2D g2, Rectangle2D plotArea,
             Point2D rotate, double angle) {
 
-        Area shape;
-        GeneralPath pointer = new GeneralPath();
+        Line2D shape = new Line2D.Double();
 
-        int minY = (int) (plotArea.getMinY());
-        //int maxX = (int) (plotArea.getMaxX());
-        int maxY = (int) (plotArea.getMaxY());
-        int midY = ((maxY - minY) / 2) + minY;
+        double x = plotArea.getMinX() + (plotArea.getWidth() / 2);
+        shape.setLine(x, plotArea.getMinY(), x, plotArea.getMaxY());
 
-        int midX = (int) (plotArea.getMinX() + (plotArea.getWidth() / 2));
-        //int midY = (int) (plotArea.getMinY() + (plotArea.getHeight() / 2));
-        int lenX = (int) (plotArea.getWidth() / 10);
-        if (lenX < 2) {
-            lenX = 2;
-        }
+        Shape s = shape;
 
-        pointer.moveTo(midX - lenX, midY - lenX);
-        pointer.lineTo(midX + lenX, midY - lenX);
-        pointer.lineTo(midX, minY);
-        pointer.closePath();
-
-        lenX = 4 * lenX;
-        Ellipse2D circle = new Ellipse2D.Double(midX - lenX / 2,
-                                                midY - lenX, lenX, lenX);
-
-        shape = new Area(circle);
-        shape.add(new Area(pointer));
         if ((rotate != null) && (angle != 0)) {
             /// we have rotation
             getTransform().setToRotation(angle, rotate.getX(), rotate.getY());
-            shape.transform(getTransform());
+            s = getTransform().createTransformedShape(s);
         }
 
-        defaultDisplay(g2, shape);
+        defaultDisplay(g2, s);
 
     }
 
     /**
      * Tests another object for equality with this object.
      *
-     * @param object  the object to test.
+     * @param obj  the object to test ({@code null} permitted).
      *
      * @return A boolean.
      */
     @Override
-    public boolean equals(Object object) {
-        if (object == null) {
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof LineNeedle)) {
             return false;
         }
-        if (object == this) {
-            return true;
-        }
-        if (super.equals(object) && object instanceof MiddlePinNeedle) {
-            return true;
-        }
-        return false;
+        return super.equals(obj);
     }
 
     /**
@@ -146,7 +114,7 @@ public class MiddlePinNeedle extends MeterNeedle implements Cloneable,
      *
      * @return A clone.
      *
-     * @throws CloneNotSupportedException if the {@code MiddlePinNeedle}
+     * @throws CloneNotSupportedException if the {@code LineNeedle}
      *     cannot be cloned (in theory, this should not happen).
      */
     @Override

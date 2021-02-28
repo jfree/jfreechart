@@ -37,7 +37,7 @@
  *
  */
 
-package org.jfree.chart.needle;
+package org.jfree.chart.plot.compass;
 
 import java.awt.BasicStroke;
 import java.awt.Color;

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -24,42 +24,35 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ---------------
- * ShipNeedle.java
- * ---------------
- * (C) Copyright 2002-2016, by the Australian Antarctic Division and
+ * --------------------
+ * MiddlePinNeedle.java
+ * --------------------
+ * (C) Copyright 2002-2021, by the Australian Antarctic Division and
  *                          Contributors.
  *
  * Original Author:  Bryan Scott (for the Australian Antarctic Division);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * Changes:
- * --------
- * 25-Sep-2002 : Version 1, contributed by Bryan Scott (DG);
- * 27-Mar-2003 : Implemented Serializable (DG);
- * 09-Sep-2003 : Added equals() method (DG);
- * 08-Jun-2005 : Implemented Cloneable (DG);
- * 22-Nov-2007 : Implemented hashCode() (DG);
- *
  */
 
-package org.jfree.chart.needle;
+package org.jfree.chart.plot.compass;
 
 import java.awt.Graphics2D;
-import java.awt.geom.Arc2D;
+import java.awt.geom.Area;
+import java.awt.geom.Ellipse2D;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 
 /**
- * A needle in the shape of a ship, for use with the
- * {@link org.jfree.chart.plot.CompassPlot} class.
+ * A needle that is drawn as a pin shape.
  */
-public class ShipNeedle extends MeterNeedle implements Cloneable, Serializable {
+public class MiddlePinNeedle extends MeterNeedle implements Cloneable, 
+        Serializable {
 
     /** For serialization. */
-    private static final long serialVersionUID = 149554868169435612L;
+    private static final long serialVersionUID = 6237073996403125310L;
 
     /**
      * Draws the needle.
@@ -73,16 +66,32 @@ public class ShipNeedle extends MeterNeedle implements Cloneable, Serializable {
     protected void drawNeedle(Graphics2D g2, Rectangle2D plotArea,
             Point2D rotate, double angle) {
 
-        GeneralPath shape = new GeneralPath();
-        shape.append(new Arc2D.Double(-9.0, -7.0, 10, 14, 0.0, 25.5,
-                Arc2D.OPEN), true);
-        shape.append(new Arc2D.Double(0.0, -7.0, 10, 14, 154.5, 25.5,
-                Arc2D.OPEN), true);
-        shape.closePath();
-        getTransform().setToTranslation(plotArea.getMinX(), plotArea.getMaxY());
-        getTransform().scale(plotArea.getWidth(), plotArea.getHeight() / 3);
-        shape.transform(getTransform());
+        Area shape;
+        GeneralPath pointer = new GeneralPath();
 
+        int minY = (int) (plotArea.getMinY());
+        //int maxX = (int) (plotArea.getMaxX());
+        int maxY = (int) (plotArea.getMaxY());
+        int midY = ((maxY - minY) / 2) + minY;
+
+        int midX = (int) (plotArea.getMinX() + (plotArea.getWidth() / 2));
+        //int midY = (int) (plotArea.getMinY() + (plotArea.getHeight() / 2));
+        int lenX = (int) (plotArea.getWidth() / 10);
+        if (lenX < 2) {
+            lenX = 2;
+        }
+
+        pointer.moveTo(midX - lenX, midY - lenX);
+        pointer.lineTo(midX + lenX, midY - lenX);
+        pointer.lineTo(midX, minY);
+        pointer.closePath();
+
+        lenX = 4 * lenX;
+        Ellipse2D circle = new Ellipse2D.Double(midX - lenX / 2,
+                                                midY - lenX, lenX, lenX);
+
+        shape = new Area(circle);
+        shape.add(new Area(pointer));
         if ((rotate != null) && (angle != 0)) {
             /// we have rotation
             getTransform().setToRotation(angle, rotate.getX(), rotate.getY());
@@ -90,6 +99,7 @@ public class ShipNeedle extends MeterNeedle implements Cloneable, Serializable {
         }
 
         defaultDisplay(g2, shape);
+
     }
 
     /**
@@ -107,7 +117,7 @@ public class ShipNeedle extends MeterNeedle implements Cloneable, Serializable {
         if (object == this) {
             return true;
         }
-        if (super.equals(object) && object instanceof ShipNeedle) {
+        if (super.equals(object) && object instanceof MiddlePinNeedle) {
             return true;
         }
         return false;
@@ -128,7 +138,7 @@ public class ShipNeedle extends MeterNeedle implements Cloneable, Serializable {
      *
      * @return A clone.
      *
-     * @throws CloneNotSupportedException if the {@code ShipNeedle}
+     * @throws CloneNotSupportedException if the {@code MiddlePinNeedle}
      *     cannot be cloned (in theory, this should not happen).
      */
     @Override
@@ -137,4 +147,3 @@ public class ShipNeedle extends MeterNeedle implements Cloneable, Serializable {
     }
 
 }
-

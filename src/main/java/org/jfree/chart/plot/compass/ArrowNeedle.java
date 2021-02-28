@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -24,42 +24,53 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * --------------
- * PinNeedle.java
- * --------------
- * (C) Copyright 2002-2016, by the Australian Antarctic Division and
+ * ----------------
+ * ArrowNeedle.java
+ * ----------------
+ * (C) Copyright 2002-2021, by the Australian Antarctic Division and
  *                          Contributors.
  *
  * Original Author:  Bryan Scott (for the Australian Antarctic Division);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * Changes:
- * --------
- * 25-Sep-2002 : Version 1, contributed by Bryan Scott (DG);
- * 27-Mar-2003 : Implemented Serializable (DG);
- * 09-Sep-2003 : Added equals() method (DG);
- * 08-Jun-2005 : Implemented Cloneable (DG);
- * 22-Nov-2007 : Implemented hashCode() (DG);
- *
  */
 
-package org.jfree.chart.needle;
+package org.jfree.chart.plot.compass;
 
 import java.awt.Graphics2D;
-import java.awt.geom.Area;
-import java.awt.geom.Ellipse2D;
+import java.awt.Shape;
 import java.awt.geom.GeneralPath;
+import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 
+import org.jfree.chart.internal.HashUtils;
+
 /**
- * A needle that is drawn as a pin shape.
+ * A needle in the shape of an arrow.
  */
-public class PinNeedle extends MeterNeedle implements Cloneable, Serializable {
+public class ArrowNeedle extends MeterNeedle implements Cloneable, 
+        Serializable {
 
     /** For serialization. */
-    private static final long serialVersionUID = -3787089953079863373L;
+    private static final long serialVersionUID = -5334056511213782357L;
+
+    /**
+     * A flag controlling whether or not there is an arrow at the top of the
+     * needle.
+     */
+    private boolean isArrowAtTop = true;
+
+    /**
+     * Constructs a new arrow needle.
+     *
+     * @param isArrowAtTop  a flag that controls whether or not there is an
+     *     arrow at the top of the needle.
+     */
+    public ArrowNeedle(boolean isArrowAtTop) {
+        this.isArrowAtTop = isArrowAtTop;
+    }
 
     /**
      * Draws the needle.
@@ -73,37 +84,40 @@ public class PinNeedle extends MeterNeedle implements Cloneable, Serializable {
     protected void drawNeedle(Graphics2D g2, Rectangle2D plotArea,
             Point2D rotate, double angle) {
 
-        Area shape;
-        GeneralPath pointer = new GeneralPath();
+        Line2D shape = new Line2D.Float();
+        Shape d;
 
-        int minY = (int) (plotArea.getMinY());
-        //int maxX = (int) (plotArea.getMaxX());
-        int maxY = (int) (plotArea.getMaxY());
-        int midX = (int) (plotArea.getMinX() + (plotArea.getWidth() / 2));
-        //int midY = (int) (plotArea.getMinY() + (plotArea.getHeight() / 2));
-        int lenX = (int) (plotArea.getWidth() / 10);
-        if (lenX < 2) {
-            lenX = 2;
+        float x = (float) (plotArea.getMinX() + (plotArea.getWidth() / 2));
+        float minY = (float) plotArea.getMinY();
+        float maxY = (float) plotArea.getMaxY();
+        shape.setLine(x, minY, x, maxY);
+
+        GeneralPath shape1 = new GeneralPath();
+        if (this.isArrowAtTop) {
+            shape1.moveTo(x, minY);
+            minY += 4 * getSize();
+        } else {
+            shape1.moveTo(x, maxY);
+            minY = maxY - 4 * getSize();
         }
+        shape1.lineTo(x + getSize(), minY);
+        shape1.lineTo(x - getSize(), minY);
+        shape1.closePath();
 
-        pointer.moveTo(midX - lenX, maxY - lenX);
-        pointer.lineTo(midX + lenX, maxY - lenX);
-        pointer.lineTo(midX, minY + lenX);
-        pointer.closePath();
-
-        lenX = 4 * lenX;
-        Ellipse2D circle = new Ellipse2D.Double(midX - lenX / 2,
-                plotArea.getMaxY() - lenX, lenX, lenX);
-
-        shape = new Area(circle);
-        shape.add(new Area(pointer));
         if ((rotate != null) && (angle != 0)) {
-            /// we have rotation
             getTransform().setToRotation(angle, rotate.getX(), rotate.getY());
-            shape.transform(getTransform());
+            d = getTransform().createTransformedShape(shape);
+        } else {
+            d = shape;
         }
+        defaultDisplay(g2, d);
 
-        defaultDisplay(g2, shape);
+        if ((rotate != null) && (angle != 0)) {
+            d = getTransform().createTransformedShape(shape1);
+        } else {
+            d = shape1;
+        }
+        defaultDisplay(g2, d);
 
     }
 
@@ -119,10 +133,14 @@ public class PinNeedle extends MeterNeedle implements Cloneable, Serializable {
         if (obj == this) {
             return true;
         }
-        if (!(obj instanceof PinNeedle)) {
+        if (!(obj instanceof ArrowNeedle)) {
             return false;
         }
         if (!super.equals(obj)) {
+            return false;
+        }
+        ArrowNeedle that = (ArrowNeedle) obj;
+        if (this.isArrowAtTop != that.isArrowAtTop) {
             return false;
         }
         return true;
@@ -135,7 +153,9 @@ public class PinNeedle extends MeterNeedle implements Cloneable, Serializable {
      */
     @Override
     public int hashCode() {
-        return super.hashCode();
+        int result = super.hashCode();
+        result = HashUtils.hashCode(result, this.isArrowAtTop);
+        return result;
     }
 
     /**
@@ -143,7 +163,7 @@ public class PinNeedle extends MeterNeedle implements Cloneable, Serializable {
      *
      * @return A clone.
      *
-     * @throws CloneNotSupportedException if the {@code PinNeedle}
+     * @throws CloneNotSupportedException if the {@code ArrowNeedle}
      *     cannot be cloned (in theory, this should not happen).
      */
     @Override

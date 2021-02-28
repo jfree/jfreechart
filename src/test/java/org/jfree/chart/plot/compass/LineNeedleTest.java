@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -25,16 +25,16 @@
  * Other names may be trademarks of their respective owners.]
  *
  * -------------------
- * PlumNeedleTest.java
+ * LineNeedleTest.java
  * -------------------
- * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
  */
 
-package org.jfree.chart.needle;
+package org.jfree.chart.plot.compass;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -43,17 +43,17 @@ import org.jfree.chart.internal.CloneUtils;
 import org.junit.jupiter.api.Test;
 
 /**
- * Tests for the {@link PlumNeedle} class.
+ * Tests for the {@link LineNeedle} class.
  */
-public class PlumNeedleTest {
+public class LineNeedleTest {
 
     /**
      * Check that the equals() method can distinguish all fields.
      */
     @Test
     public void testEquals() {
-       PlumNeedle n1 = new PlumNeedle();
-       PlumNeedle n2 = new PlumNeedle();
+       LineNeedle n1 = new LineNeedle();
+       LineNeedle n2 = new LineNeedle();
        assertTrue(n1.equals(n2));
        assertTrue(n2.equals(n1));
     }
@@ -63,8 +63,8 @@ public class PlumNeedleTest {
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        PlumNeedle n1 = new PlumNeedle();
-        PlumNeedle n2 = CloneUtils.clone(n1);
+        LineNeedle n1 = new LineNeedle();
+        LineNeedle n2 = CloneUtils.clone(n1);
         assertTrue(n1 != n2);
         assertTrue(n1.getClass() == n2.getClass());
         assertTrue(n1.equals(n2));
@@ -75,8 +75,8 @@ public class PlumNeedleTest {
      */
     @Test
     public void testSerialization() {
-        PlumNeedle n1 = new PlumNeedle();
-        PlumNeedle n2 = TestUtils.serialised(n1);
+        LineNeedle n1 = new LineNeedle();
+        LineNeedle n2 = TestUtils.serialised(n1);
         assertTrue(n1.equals(n2));
     }
 

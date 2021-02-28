@@ -37,7 +37,7 @@
  *
  */
 
-package org.jfree.chart.plot;
+package org.jfree.chart.plot.compass;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -60,20 +60,23 @@ import java.util.ResourceBundle;
 
 import org.jfree.chart.legend.LegendItemCollection;
 import org.jfree.chart.event.PlotChangeEvent;
-import org.jfree.chart.needle.ArrowNeedle;
-import org.jfree.chart.needle.LineNeedle;
-import org.jfree.chart.needle.LongNeedle;
-import org.jfree.chart.needle.MeterNeedle;
-import org.jfree.chart.needle.MiddlePinNeedle;
-import org.jfree.chart.needle.PinNeedle;
-import org.jfree.chart.needle.PlumNeedle;
-import org.jfree.chart.needle.PointerNeedle;
-import org.jfree.chart.needle.ShipNeedle;
-import org.jfree.chart.needle.WindNeedle;
+import org.jfree.chart.plot.compass.ArrowNeedle;
+import org.jfree.chart.plot.compass.LineNeedle;
+import org.jfree.chart.plot.compass.LongNeedle;
+import org.jfree.chart.plot.compass.MeterNeedle;
+import org.jfree.chart.plot.compass.MiddlePinNeedle;
+import org.jfree.chart.plot.compass.PinNeedle;
+import org.jfree.chart.plot.compass.PlumNeedle;
+import org.jfree.chart.plot.compass.PointerNeedle;
+import org.jfree.chart.plot.compass.ShipNeedle;
+import org.jfree.chart.plot.compass.WindNeedle;
 import org.jfree.chart.api.RectangleInsets;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.internal.Args;
 import org.jfree.chart.internal.SerialUtils;
+import org.jfree.chart.plot.Plot;
+import org.jfree.chart.plot.PlotRenderingInfo;
+import org.jfree.chart.plot.PlotState;
 import org.jfree.data.general.DefaultValueDataset;
 import org.jfree.data.general.ValueDataset;
 

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -24,19 +24,18 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * --------------------
- * ArrowNeedleTest.java
- * --------------------
- * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
+ * -------------------
+ * WindNeedleTest.java
+ * -------------------
+ * (C) Copyright 2005-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
  */
 
-package org.jfree.chart.needle;
+package org.jfree.chart.plot.compass;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.jfree.chart.TestUtils;
@@ -44,24 +43,19 @@ import org.jfree.chart.internal.CloneUtils;
 import org.junit.jupiter.api.Test;
 
 /**
- * Tests for the {@link ArrowNeedle} class.
+ * Tests for the {@link WindNeedle} class.
  */
-public class ArrowNeedleTest {
+public class WindNeedleTest {
 
     /**
      * Check that the equals() method can distinguish all fields.
      */
     @Test
     public void testEquals() {
-       ArrowNeedle n1 = new ArrowNeedle(false);
-       ArrowNeedle n2 = new ArrowNeedle(false);
+       WindNeedle n1 = new WindNeedle();
+       WindNeedle n2 = new WindNeedle();
        assertTrue(n1.equals(n2));
        assertTrue(n2.equals(n1));
-
-       n1 = new ArrowNeedle(true);
-       assertFalse(n1.equals(n2));
-       n2 = new ArrowNeedle(true);
-       assertTrue(n1.equals(n2));
     }
 
     /**
@@ -69,8 +63,8 @@ public class ArrowNeedleTest {
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        ArrowNeedle n1 = new ArrowNeedle(false);
-        ArrowNeedle n2 = CloneUtils.clone(n1);
+        WindNeedle n1 = new WindNeedle();
+        WindNeedle n2 = CloneUtils.clone(n1);
         assertTrue(n1 != n2);
         assertTrue(n1.getClass() == n2.getClass());
         assertTrue(n1.equals(n2));
@@ -81,8 +75,8 @@ public class ArrowNeedleTest {
      */
     @Test
     public void testSerialization() {
-        ArrowNeedle n1 = new ArrowNeedle(false);
-        ArrowNeedle n2 = TestUtils.serialised(n1);
+        WindNeedle n1 = new WindNeedle();
+        WindNeedle n2 = TestUtils.serialised(n1);
         assertTrue(n1.equals(n2));
     }
 

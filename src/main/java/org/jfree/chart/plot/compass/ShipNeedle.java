@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -24,42 +24,34 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ------------------
- * PointerNeedle.java
- * ------------------
- * (C) Copyright 2002-2016, by the Australian Antarctic Division and
+ * ---------------
+ * ShipNeedle.java
+ * ---------------
+ * (C) Copyright 2002-2021, by the Australian Antarctic Division and
  *                          Contributors.
  *
  * Original Author:  Bryan Scott (for the Australian Antarctic Division);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * Changes:
- * --------
- * 25-Sep-2002 : Version 1, contributed by Bryan Scott (DG);
- * 26-Mar-2003 : Implemented Serializable (DG);
- * 09-Sep-2003 : Added equals() method (DG);
- * 08-Jun-2005 : Implemented Cloneable (DG);
- * 22-Nov-2007 : Implemented hashCode() (DG);
- *
  */
 
-package org.jfree.chart.needle;
+package org.jfree.chart.plot.compass;
 
 import java.awt.Graphics2D;
+import java.awt.geom.Arc2D;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 
 /**
- * A needle in the shape of a pointer, for use with the
+ * A needle in the shape of a ship, for use with the
  * {@link org.jfree.chart.plot.CompassPlot} class.
  */
-public class PointerNeedle extends MeterNeedle implements Cloneable, 
-        Serializable {
+public class ShipNeedle extends MeterNeedle implements Cloneable, Serializable {
 
     /** For serialization. */
-    private static final long serialVersionUID = -4744677345334729606L;
+    private static final long serialVersionUID = 149554868169435612L;
 
     /**
      * Draws the needle.
@@ -73,69 +65,44 @@ public class PointerNeedle extends MeterNeedle implements Cloneable,
     protected void drawNeedle(Graphics2D g2, Rectangle2D plotArea,
             Point2D rotate, double angle) {
 
-        GeneralPath shape1 = new GeneralPath();
-        GeneralPath shape2 = new GeneralPath();
-        float minX = (float) plotArea.getMinX();
-        float minY = (float) plotArea.getMinY();
-        float maxX = (float) plotArea.getMaxX();
-        float maxY = (float) plotArea.getMaxY();
-        float midX = (float) (minX + (plotArea.getWidth() / 2));
-        float midY = (float) (minY + (plotArea.getHeight() / 2));
-
-        shape1.moveTo(minX, midY);
-        shape1.lineTo(midX, minY);
-        shape1.lineTo(maxX, midY);
-        shape1.closePath();
-
-        shape2.moveTo(minX, midY);
-        shape2.lineTo(midX, maxY);
-        shape2.lineTo(maxX, midY);
-        shape2.closePath();
+        GeneralPath shape = new GeneralPath();
+        shape.append(new Arc2D.Double(-9.0, -7.0, 10, 14, 0.0, 25.5,
+                Arc2D.OPEN), true);
+        shape.append(new Arc2D.Double(0.0, -7.0, 10, 14, 154.5, 25.5,
+                Arc2D.OPEN), true);
+        shape.closePath();
+        getTransform().setToTranslation(plotArea.getMinX(), plotArea.getMaxY());
+        getTransform().scale(plotArea.getWidth(), plotArea.getHeight() / 3);
+        shape.transform(getTransform());
 
         if ((rotate != null) && (angle != 0)) {
-            /// we have rotation huston, please spin me
+            /// we have rotation
             getTransform().setToRotation(angle, rotate.getX(), rotate.getY());
-            shape1.transform(getTransform());
-            shape2.transform(getTransform());
+            shape.transform(getTransform());
         }
 
-        if (getFillPaint() != null) {
-            g2.setPaint(getFillPaint());
-            g2.fill(shape1);
-        }
-
-        if (getHighlightPaint() != null) {
-            g2.setPaint(getHighlightPaint());
-            g2.fill(shape2);
-        }
-
-        if (getOutlinePaint() != null) {
-            g2.setStroke(getOutlineStroke());
-            g2.setPaint(getOutlinePaint());
-            g2.draw(shape1);
-            g2.draw(shape2);
-        }
+        defaultDisplay(g2, shape);
     }
 
     /**
      * Tests another object for equality with this object.
      *
-     * @param obj  the object to test ({@code null} permitted).
+     * @param object  the object to test.
      *
      * @return A boolean.
      */
     @Override
-    public boolean equals(Object obj) {
-        if (obj == this) {
+    public boolean equals(Object object) {
+        if (object == null) {
+            return false;
+        }
+        if (object == this) {
             return true;
         }
-        if (!(obj instanceof PointerNeedle)) {
-            return false;
+        if (super.equals(object) && object instanceof ShipNeedle) {
+            return true;
         }
-        if (!super.equals(obj)) {
-            return false;
-        }
-        return true;
+        return false;
     }
 
     /**
@@ -153,7 +120,7 @@ public class PointerNeedle extends MeterNeedle implements Cloneable,
      *
      * @return A clone.
      *
-     * @throws CloneNotSupportedException if the {@code PointerNeedle}
+     * @throws CloneNotSupportedException if the {@code ShipNeedle}
      *     cannot be cloned (in theory, this should not happen).
      */
     @Override
@@ -162,3 +129,4 @@ public class PointerNeedle extends MeterNeedle implements Cloneable,
     }
 
 }
+

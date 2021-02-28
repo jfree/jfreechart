@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -24,41 +24,34 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ---------------
- * LineNeedle.java
- * ---------------
- * (C) Copyright 2002-2016, by the Australian Antarctic Division and
- *                           Contributors.
+ * --------------
+ * PinNeedle.java
+ * --------------
+ * (C) Copyright 2002-2021, by the Australian Antarctic Division and
+ *                          Contributors.
  *
  * Original Author:  Bryan Scott (for the Australian Antarctic Division);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * Changes:
- * --------
- * 25-Sep-2002 : Version 1, contributed by Bryan Scott (DG);
- * 27-Mar-2003 : Implemented Serializable (DG);
- * 09-Sep-2003 : Added equals() method (DG);
- * 08-Jun-2005 : Implemented Cloneable (DG);
- * 22-Nov-2007 : Added hashCode() implementation (DG);
- *
  */
 
-package org.jfree.chart.needle;
+package org.jfree.chart.plot.compass;
 
 import java.awt.Graphics2D;
-import java.awt.Shape;
-import java.awt.geom.Line2D;
+import java.awt.geom.Area;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.GeneralPath;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 
 /**
- * A needle that is represented by a line.
+ * A needle that is drawn as a pin shape.
  */
-public class LineNeedle extends MeterNeedle implements Cloneable, Serializable {
+public class PinNeedle extends MeterNeedle implements Cloneable, Serializable {
 
     /** For serialization. */
-    private static final long serialVersionUID = 6215321387896748945L;
+    private static final long serialVersionUID = -3787089953079863373L;
 
     /**
      * Draws the needle.
@@ -72,20 +65,37 @@ public class LineNeedle extends MeterNeedle implements Cloneable, Serializable {
     protected void drawNeedle(Graphics2D g2, Rectangle2D plotArea,
             Point2D rotate, double angle) {
 
-        Line2D shape = new Line2D.Double();
+        Area shape;
+        GeneralPath pointer = new GeneralPath();
 
-        double x = plotArea.getMinX() + (plotArea.getWidth() / 2);
-        shape.setLine(x, plotArea.getMinY(), x, plotArea.getMaxY());
+        int minY = (int) (plotArea.getMinY());
+        //int maxX = (int) (plotArea.getMaxX());
+        int maxY = (int) (plotArea.getMaxY());
+        int midX = (int) (plotArea.getMinX() + (plotArea.getWidth() / 2));
+        //int midY = (int) (plotArea.getMinY() + (plotArea.getHeight() / 2));
+        int lenX = (int) (plotArea.getWidth() / 10);
+        if (lenX < 2) {
+            lenX = 2;
+        }
 
-        Shape s = shape;
+        pointer.moveTo(midX - lenX, maxY - lenX);
+        pointer.lineTo(midX + lenX, maxY - lenX);
+        pointer.lineTo(midX, minY + lenX);
+        pointer.closePath();
 
+        lenX = 4 * lenX;
+        Ellipse2D circle = new Ellipse2D.Double(midX - lenX / 2,
+                plotArea.getMaxY() - lenX, lenX, lenX);
+
+        shape = new Area(circle);
+        shape.add(new Area(pointer));
         if ((rotate != null) && (angle != 0)) {
             /// we have rotation
             getTransform().setToRotation(angle, rotate.getX(), rotate.getY());
-            s = getTransform().createTransformedShape(s);
+            shape.transform(getTransform());
         }
 
-        defaultDisplay(g2, s);
+        defaultDisplay(g2, shape);
 
     }
 
@@ -101,10 +111,13 @@ public class LineNeedle extends MeterNeedle implements Cloneable, Serializable {
         if (obj == this) {
             return true;
         }
-        if (!(obj instanceof LineNeedle)) {
+        if (!(obj instanceof PinNeedle)) {
             return false;
         }
-        return super.equals(obj);
+        if (!super.equals(obj)) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -122,7 +135,7 @@ public class LineNeedle extends MeterNeedle implements Cloneable, Serializable {
      *
      * @return A clone.
      *
-     * @throws CloneNotSupportedException if the {@code LineNeedle}
+     * @throws CloneNotSupportedException if the {@code PinNeedle}
      *     cannot be cloned (in theory, this should not happen).
      */
     @Override

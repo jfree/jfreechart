@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -24,17 +24,17 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * -------------------
- * ShipNeedleTest.java
- * -------------------
- * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
+ * ------------------------
+ * MiddlePinNeedleTest.java
+ * ------------------------
+ * (C) Copyright 2005-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
  */
 
-package org.jfree.chart.needle;
+package org.jfree.chart.plot.compass;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -43,17 +43,17 @@ import org.jfree.chart.internal.CloneUtils;
 import org.junit.jupiter.api.Test;
 
 /**
- * Tests for the {@link ShipNeedle} class.
+ * Tests for the {@link MiddlePinNeedle} class.
  */
-public class ShipNeedleTest {
+public class MiddlePinNeedleTest {
 
     /**
      * Check that the equals() method can distinguish all fields.
      */
     @Test
     public void testEquals() {
-       ShipNeedle n1 = new ShipNeedle();
-       ShipNeedle n2 = new ShipNeedle();
+       MiddlePinNeedle n1 = new MiddlePinNeedle();
+       MiddlePinNeedle n2 = new MiddlePinNeedle();
        assertTrue(n1.equals(n2));
        assertTrue(n2.equals(n1));
     }
@@ -63,8 +63,8 @@ public class ShipNeedleTest {
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        ShipNeedle n1 = new ShipNeedle();
-        ShipNeedle n2 = CloneUtils.clone(n1);
+        MiddlePinNeedle n1 = new MiddlePinNeedle();
+        MiddlePinNeedle n2 = CloneUtils.clone(n1);
         assertTrue(n1 != n2);
         assertTrue(n1.getClass() == n2.getClass());
         assertTrue(n1.equals(n2));
@@ -75,8 +75,8 @@ public class ShipNeedleTest {
      */
     @Test
     public void testSerialization() {
-        ShipNeedle n1 = new ShipNeedle();
-        ShipNeedle n2 = TestUtils.serialised(n1);
+        MiddlePinNeedle n1 = new MiddlePinNeedle();
+        MiddlePinNeedle n2 = TestUtils.serialised(n1);
         assertTrue(n1.equals(n2));
     }
 
