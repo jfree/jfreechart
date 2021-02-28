@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------
  * ChartChangeListener.java
  * ------------------------
- * (C) Copyright 2000-2020, by Object Refinery Limited.
+ * (C) Copyright 2000-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -42,9 +42,8 @@ import java.util.EventListener;
  * The interface that must be supported by classes that wish to receive
  * notification of chart events.
  * <P>
- * The {@link org.jfree.chart.ChartPanel} class registers itself with the
+ * The {@link org.jfree.chart.swing.ChartPanel} class registers itself with the
  * chart it displays, and whenever the chart changes, the panel redraws itself.
- *
  */
 public interface ChartChangeListener extends EventListener {
 

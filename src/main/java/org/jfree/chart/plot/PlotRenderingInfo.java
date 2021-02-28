@@ -175,7 +175,7 @@ public class PlotRenderingInfo implements Cloneable, Serializable {
     /**
      * Returns the index of the subplot that contains the specified
      * (x, y) point (the "source" point).  The source point will usually
-     * come from a mouse click on a {@link org.jfree.chart.ChartPanel},
+     * come from a mouse click on a {@link org.jfree.chart.swing.ChartPanel},
      * and this method is then used to determine the subplot that
      * contains the source point.
      *
