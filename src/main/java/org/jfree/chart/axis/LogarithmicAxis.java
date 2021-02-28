@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * LogarithmicAxis.java
  * --------------------
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  Michael Duffy / Eric Thomas;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -278,8 +278,7 @@ public class LogarithmicAxis extends NumberAxis {
      * @param val the value.
      *
      * @return 10<sup>val</sup>.
-     *
-     * @since 1.0.5
+     * 
      * @see #switchedLog10(double)
      */
     public double switchedPow10(double val) {
@@ -323,8 +322,7 @@ public class LogarithmicAxis extends NumberAxis {
      * @param val  value for which power of 10 should be calculated.
      *
      * @return An adjusted 10<sup>val</sup>.
-     *
-     * @since 1.0.5
+     * 
      * @see #adjustedLog10(double)
      */
     public double adjustedPow10(double val) {

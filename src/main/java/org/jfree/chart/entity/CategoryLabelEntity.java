@@ -44,8 +44,8 @@ import org.jfree.chart.axis.CategoryAxis;
 
 /**
  * An entity to represent the labels on a {@link CategoryAxis}.
- *
- * @since 1.0.3
+ * 
+ * @param <C> the type for the category keys.
  */
 public class CategoryLabelEntity<C extends Comparable<C>> extends TickLabelEntity {
 

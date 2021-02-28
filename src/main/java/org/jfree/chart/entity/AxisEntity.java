@@ -50,8 +50,6 @@ import org.jfree.chart.internal.SerialUtils;
 /**
  * A class that captures information about an {@link Axis} belonging to a 
  * chart.
- *
- * @since 1.0.13
  */
 public class AxisEntity extends ChartEntity {
 
