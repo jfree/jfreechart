@@ -50,7 +50,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -121,7 +120,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
     private CategoryLabelPositions categoryLabelPositions;
 
     /** Storage for tick label font overrides (if any). */
-    private Map tickLabelFontMap;
+    private Map tickLabelFontMap; 
 
     /** Storage for tick label paint overrides (if any). */
     private transient Map tickLabelPaintMap;
@@ -155,7 +154,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
 
         this.categoryLabelPositionOffset = 4;
         this.categoryLabelPositions = CategoryLabelPositions.STANDARD;
-        this.tickLabelFontMap = new HashMap();
+        this.tickLabelFontMap = new HashMap(); // FIXME generics
         this.tickLabelPaintMap = new HashMap();
         this.categoryLabelToolTips = new HashMap();
         this.categoryLabelURLs = new HashMap();
@@ -1044,7 +1043,7 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
     public List refreshTicks(Graphics2D g2, AxisState state, 
             Rectangle2D dataArea, RectangleEdge edge) {
 
-        List ticks = new java.util.ArrayList();
+        List ticks = new java.util.ArrayList(); // FIXME generics
 
         // sanity check for data area...
         if (dataArea.getHeight() <= 0.0 || dataArea.getWidth() < 0.0) {
@@ -1082,12 +1081,12 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
                 g2.setFont(getTickLabelFont(category));
                 TextBlock label = createLabel(category, l * r, edge, g2);
                 if (edge == RectangleEdge.TOP || edge == RectangleEdge.BOTTOM) {
-                    max = Math.max(max, calculateTextBlockHeight(label,
-                            position, g2));
+                    max = Math.max(max, calculateCategoryLabelHeight(label,
+                            position, getTickLabelInsets(), g2));
                 } else if (edge == RectangleEdge.LEFT
                         || edge == RectangleEdge.RIGHT) {
-                    max = Math.max(max, calculateTextBlockWidth(label,
-                            position, g2));
+                    max = Math.max(max, calculateCategoryLabelWidth(label,
+                            position, getTickLabelInsets(), g2));
                 }
                 Tick tick = new CategoryTick(category, label,
                         position.getLabelAnchor(),
@@ -1190,18 +1189,18 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
     }
 
     /**
-     * A utility method for determining the width of a text block.
+     * Calculates the width of a category label when rendered.
      *
-     * @param block  the text block.
+     * @param label  the text block ({@code null} not permitted).
      * @param position  the position.
+     * @param insets  the label insets.
      * @param g2  the graphics device.
      *
      * @return The width.
      */
-    protected double calculateTextBlockWidth(TextBlock block,
-            CategoryLabelPosition position, Graphics2D g2) {
-        RectangleInsets insets = getTickLabelInsets();
-        Size2D size = block.calculateDimensions(g2);
+    protected double calculateCategoryLabelWidth(TextBlock label, 
+            CategoryLabelPosition position, RectangleInsets insets, Graphics2D g2) {
+        Size2D size = label.calculateDimensions(g2);
         Rectangle2D box = new Rectangle2D.Double(0.0, 0.0, size.getWidth(),
                 size.getHeight());
         Shape rotatedBox = ShapeUtils.rotateShape(box, position.getAngle(),
@@ -1212,17 +1211,17 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
     }
 
     /**
-     * A utility method for determining the height of a text block.
+     * Calculates the height of a category label when rendered.
      *
-     * @param block  the text block.
-     * @param position  the label position.
-     * @param g2  the graphics device.
+     * @param block  the text block ({@code null} not permitted).
+     * @param position  the label position ({@code null} not permitted).
+     * @param insets  the label insets ({@code null} not permitted).
+     * @param g2  the graphics device ({@code null} not permitted).
      *
      * @return The height.
      */
-    protected double calculateTextBlockHeight(TextBlock block,
-            CategoryLabelPosition position, Graphics2D g2) {
-        RectangleInsets insets = getTickLabelInsets();
+    protected double calculateCategoryLabelHeight(TextBlock block,
+            CategoryLabelPosition position, RectangleInsets insets, Graphics2D g2) {
         Size2D size = block.calculateDimensions(g2);
         Rectangle2D box = new Rectangle2D.Double(0.0, 0.0, size.getWidth(),
                 size.getHeight());
