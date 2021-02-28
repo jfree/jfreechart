@@ -67,6 +67,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -77,7 +78,6 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.legend.LegendItem;
 import org.jfree.chart.legend.LegendItemCollection;
 import org.jfree.chart.internal.PaintMap;
-import org.jfree.chart.internal.StrokeMap;
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.entity.PieSectionEntity;
 import org.jfree.chart.event.PlotChangeEvent;
@@ -220,7 +220,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     private boolean autoPopulateSectionOutlinePaint;
 
     /** The section outline stroke map. */
-    private StrokeMap sectionOutlineStrokeMap;
+    private Map<K, Stroke> sectionOutlineStrokeMap;
 
     /** The default section outline stroke (fallback). */
     private transient Stroke defaultSectionOutlineStroke;
@@ -430,7 +430,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
         this.defaultSectionOutlinePaint = DEFAULT_OUTLINE_PAINT;
         this.autoPopulateSectionOutlinePaint = false;
 
-        this.sectionOutlineStrokeMap = new StrokeMap();
+        this.sectionOutlineStrokeMap = new HashMap<>();
         this.defaultSectionOutlineStroke = DEFAULT_OUTLINE_STROKE;
         this.autoPopulateSectionOutlineStroke = false;
 
@@ -1098,9 +1098,8 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      *
      * @see #lookupSectionOutlineStroke(Comparable, boolean)
      */
-    protected Stroke lookupSectionOutlineStroke(Comparable key) {
-        return lookupSectionOutlineStroke(key,
-                getAutoPopulateSectionOutlineStroke());
+    protected Stroke lookupSectionOutlineStroke(K key) {
+        return lookupSectionOutlineStroke(key, getAutoPopulateSectionOutlineStroke());
     }
 
     /**
@@ -1122,11 +1121,10 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      *
      * @return The stroke.
      */
-    protected Stroke lookupSectionOutlineStroke(Comparable key,
-            boolean autoPopulate) {
+    protected Stroke lookupSectionOutlineStroke(K key, boolean autoPopulate) {
 
         // if not, check if there is a stroke defined for the specified key
-        Stroke result = this.sectionOutlineStrokeMap.getStroke(key);
+        Stroke result = this.sectionOutlineStrokeMap.get(key);
         if (result != null) {
             return result;
         }
@@ -1137,12 +1135,10 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
             if (ds != null) {
                 result = ds.getNextOutlineStroke();
                 this.sectionOutlineStrokeMap.put(key, result);
-            }
-            else {
+            } else {
                 result = this.defaultSectionOutlineStroke;
             }
-        }
-        else {
+        } else {
             result = this.defaultSectionOutlineStroke;
         }
         return result;
@@ -1154,17 +1150,16 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      *
      * @param key  the key ({@code null} not permitted).
      *
-     * @return The stroke associated with the specified key, or
-     *     {@code null}.
+     * @return The stroke associated with the specified key, or {@code null}.
      *
      * @throws IllegalArgumentException if {@code key} is
      *     {@code null}.
      *
      * @see #setSectionOutlineStroke(Comparable, Stroke)
      */
-    public Stroke getSectionOutlineStroke(Comparable key) {
+    public Stroke getSectionOutlineStroke(K key) {
         // null argument check delegated...
-        return this.sectionOutlineStrokeMap.getStroke(key);
+        return this.sectionOutlineStrokeMap.get(key);
     }
 
     /**
@@ -1179,7 +1174,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      *
      * @see #getSectionOutlineStroke(Comparable)
      */
-    public void setSectionOutlineStroke(Comparable key, Stroke stroke) {
+    public void setSectionOutlineStroke(K key, Stroke stroke) {
         // null argument check delegated...
         this.sectionOutlineStrokeMap.put(key, stroke);
         fireChangeEvent();
@@ -3199,8 +3194,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
         clone.sectionPaintMap = (PaintMap) this.sectionPaintMap.clone();
         clone.sectionOutlinePaintMap 
                 = (PaintMap) this.sectionOutlinePaintMap.clone();
-        clone.sectionOutlineStrokeMap 
-                = (StrokeMap) this.sectionOutlineStrokeMap.clone();
+        clone.sectionOutlineStrokeMap = new HashMap<>(this.sectionOutlineStrokeMap);
         clone.explodePercentages = new TreeMap<>(this.explodePercentages);
         if (this.labelGenerator != null) {
             clone.labelGenerator = CloneUtils.clone(this.labelGenerator);
