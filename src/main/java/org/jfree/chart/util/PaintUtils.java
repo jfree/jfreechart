@@ -43,6 +43,7 @@ import java.awt.RadialGradientPaint;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.Arrays;
+import java.util.Map;
 
 /**
  * Utility code that relates to {@code Paint} objects.
@@ -118,6 +119,30 @@ public class PaintUtils {
         }
     }
 
+    /**
+     * Returns {@code true} if the two maps contain the same set of entries and 
+     * {@code false} otherwise.
+     * 
+     * @param <K>  the key type.
+     * @param map1  the first map.
+     * @param map2  the second map.
+     * 
+     * @return A boolean.
+     */
+    public static <K extends Comparable<K>> boolean equal(Map<K, Paint> map1, Map<K, Paint> map2) {
+        if (!map1.keySet().equals(map2.keySet())) {
+            return false;
+        }
+        for (K key : map1.keySet()) {
+            Paint p1 = map1.get(key);
+            Paint p2 = map2.get(key);
+            if (!PaintUtils.equal(p1, p2)) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
     /**
      * Converts a color into a string. If the color is equal to one of the
      * defined constant colors, that name is returned instead. Otherwise the

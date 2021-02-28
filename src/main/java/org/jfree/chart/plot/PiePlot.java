@@ -73,14 +73,21 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
-import org.jfree.chart.JFreeChart;
 
-import org.jfree.chart.legend.LegendItem;
-import org.jfree.chart.legend.LegendItemCollection;
-import org.jfree.chart.internal.PaintMap;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.api.PublicCloneable;
+import org.jfree.chart.api.Rotation;
+import org.jfree.chart.api.RectangleAnchor;
+import org.jfree.chart.api.RectangleInsets;
+import org.jfree.chart.api.UnitType;
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.entity.PieSectionEntity;
 import org.jfree.chart.event.PlotChangeEvent;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.internal.CloneUtils;
+import org.jfree.chart.internal.SerialUtils;
+import org.jfree.chart.legend.LegendItem;
+import org.jfree.chart.legend.LegendItemCollection;
 import org.jfree.chart.labels.PieSectionLabelGenerator;
 import org.jfree.chart.labels.PieToolTipGenerator;
 import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
@@ -88,19 +95,11 @@ import org.jfree.chart.text.G2TextMeasurer;
 import org.jfree.chart.text.TextBlock;
 import org.jfree.chart.text.TextBox;
 import org.jfree.chart.text.TextUtils;
-import org.jfree.chart.api.RectangleAnchor;
-import org.jfree.chart.api.RectangleInsets;
 import org.jfree.chart.text.TextAnchor;
 import org.jfree.chart.urls.PieURLGenerator;
-import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.internal.Args;
-import org.jfree.chart.api.PublicCloneable;
-import org.jfree.chart.api.Rotation;
-import org.jfree.chart.internal.SerialUtils;
 import org.jfree.chart.util.ShadowGenerator;
 import org.jfree.chart.util.ShapeUtils;
-import org.jfree.chart.api.UnitType;
 import org.jfree.data.DefaultKeyedValues;
 import org.jfree.data.KeyedValues;
 import org.jfree.data.general.DatasetChangeEvent;
@@ -190,7 +189,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     private Rotation direction;
 
     /** The section paint map. */
-    private PaintMap sectionPaintMap;
+    private Map<K, Paint> sectionPaintMap;
 
     /** The default section paint (fallback). */
     private transient Paint defaultSectionPaint;
@@ -208,7 +207,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     private boolean sectionOutlinesVisible;
 
     /** The section outline paint map. */
-    private PaintMap sectionOutlinePaintMap;
+    private Map<K, Paint> sectionOutlinePaintMap;
 
     /** The default section outline paint (fallback). */
     private transient Paint defaultSectionOutlinePaint;
@@ -421,12 +420,12 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
         this.direction = Rotation.CLOCKWISE;
         this.minimumArcAngleToDraw = DEFAULT_MINIMUM_ARC_ANGLE_TO_DRAW;
 
-        this.sectionPaintMap = new PaintMap();
+        this.sectionPaintMap = new HashMap<>();
         this.defaultSectionPaint = Color.GRAY;
         this.autoPopulateSectionPaint = true;
 
         this.sectionOutlinesVisible = true;
-        this.sectionOutlinePaintMap = new PaintMap();
+        this.sectionOutlinePaintMap = new HashMap<>();
         this.defaultSectionOutlinePaint = DEFAULT_OUTLINE_PAINT;
         this.autoPopulateSectionOutlinePaint = false;
 
@@ -722,9 +721,9 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      *
      * @return The paint for the specified section.
      *
-     * @see #lookupSectionPaint(Comparable, boolean)
+     * @see #lookupSectionPaint(K, boolean)
      */
-    protected Paint lookupSectionPaint(Comparable key) {
+    protected Paint lookupSectionPaint(K key) {
         return lookupSectionPaint(key, getAutoPopulateSectionPaint());
     }
 
@@ -732,9 +731,8 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      * Returns the paint for the specified section.  The lookup involves these
      * steps:
      * <ul>
-     * <li>if {@link #getSectionPaint(Comparable)} is non-{@code null} return
-     *         it;</li>
-     * <li>if {@link #getSectionPaint(Comparable)} is {@code null} but
+     * <li>if {@link #getSectionPaint(K)} is non-{@code null} return it;</li>
+     * <li>if {@link #getSectionPaint(K)} is {@code null} but
      *         {@code autoPopulate} is {@code true}, attempt to fetch
      *         a new paint from the drawing supplier
      *         ({@link #getDrawingSupplier()});
@@ -747,10 +745,10 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      *
      * @return The paint.
      */
-    protected Paint lookupSectionPaint(Comparable key, boolean autoPopulate) { 
+    protected Paint lookupSectionPaint(K key, boolean autoPopulate) { 
 
         // if not, check if there is a paint defined for the specified key
-        Paint result = this.sectionPaintMap.getPaint(key);
+        Paint result = this.sectionPaintMap.get(key);
         if (result != null) {
             return result;
         }
@@ -761,12 +759,10 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
             if (ds != null) {
                 result = ds.getNextPaint();
                 this.sectionPaintMap.put(key, result);
-            }
-            else {
+            } else {
                 result = this.defaultSectionPaint;
             }
-        }
-        else {
+        } else {
             result = this.defaultSectionPaint;
         }
         return result;
@@ -803,11 +799,11 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      * @throws IllegalArgumentException if {@code key} is
      *     {@code null}.
      *
-     * @see #setSectionPaint(Comparable, Paint)
+     * @see #setSectionPaint(K, Paint)
      */
-    public Paint getSectionPaint(Comparable key) {
+    public Paint getSectionPaint(K key) {
         // null argument check delegated...
-        return this.sectionPaintMap.getPaint(key);
+        return this.sectionPaintMap.get(key);
     }
 
     /**
@@ -820,9 +816,9 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      * @throws IllegalArgumentException if {@code key} is
      *     {@code null}.
      *
-     * @see #getSectionPaint(Comparable)
+     * @see #getSectionPaint(K)
      */
-    public void setSectionPaint(Comparable key, Paint paint) {
+    public void setSectionPaint(K key, Paint paint) {
         // null argument check delegated...
         this.sectionPaintMap.put(key, paint);
         fireChangeEvent();
@@ -873,7 +869,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
 
     /**
      * Returns the flag that controls whether or not the section paint is
-     * auto-populated by the {@link #lookupSectionPaint(Comparable)} method.
+     * auto-populated by the {@link #lookupSectionPaint(K)} method.
      *
      * @return A boolean.
      */
@@ -883,7 +879,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
 
     /**
      * Sets the flag that controls whether or not the section paint is
-     * auto-populated by the {@link #lookupSectionPaint(Comparable)} method,
+     * auto-populated by the {@link #lookupSectionPaint(K)} method,
      * and sends a {@link PlotChangeEvent} to all registered listeners.
      *
      * @param auto  auto-populate?
@@ -931,20 +927,18 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      *
      * @return The paint for the specified section.
      *
-     * @see #lookupSectionOutlinePaint(Comparable, boolean)
+     * @see #lookupSectionOutlinePaint(K, boolean)
      */
-    protected Paint lookupSectionOutlinePaint(Comparable key) {
-        return lookupSectionOutlinePaint(key,
-                getAutoPopulateSectionOutlinePaint());
+    protected Paint lookupSectionOutlinePaint(K key) {
+        return lookupSectionOutlinePaint(key, getAutoPopulateSectionOutlinePaint());
     }
 
     /**
      * Returns the outline paint for the specified section.  The lookup
      * involves these steps:
      * <ul>
-     * <li>if {@link #getSectionOutlinePaint(Comparable)} is
-     *         non-{@code null} return it;</li>
-     * <li>if {@link #getSectionOutlinePaint(Comparable)} is {@code null} but
+     * <li>if {@link #getSectionOutlinePaint(K)} is non-{@code null} return it;</li>
+     * <li>if {@link #getSectionOutlinePaint(K)} is {@code null} but
      *         {@code autoPopulate} is {@code true}, attempt to fetch
      *         a new outline paint from the drawing supplier
      *         ({@link #getDrawingSupplier()});
@@ -957,11 +951,10 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      *
      * @return The paint.
      */
-    protected Paint lookupSectionOutlinePaint(Comparable key,
-            boolean autoPopulate) {
+    protected Paint lookupSectionOutlinePaint(K key, boolean autoPopulate) {
 
         // if not, check if there is a paint defined for the specified key
-        Paint result = this.sectionOutlinePaintMap.getPaint(key);
+        Paint result = this.sectionOutlinePaintMap.get(key);
         if (result != null) {
             return result;
         }
@@ -972,12 +965,10 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
             if (ds != null) {
                 result = ds.getNextOutlinePaint();
                 this.sectionOutlinePaintMap.put(key, result);
-            }
-            else {
+            } else {
                 result = this.defaultSectionOutlinePaint;
             }
-        }
-        else {
+        } else {
             result = this.defaultSectionOutlinePaint;
         }
         return result;
@@ -989,17 +980,15 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      *
      * @param key  the key ({@code null} not permitted).
      *
-     * @return The paint associated with the specified key, or
-     *     {@code null}.
+     * @return The paint associated with the specified key, or {@code null}.
      *
-     * @throws IllegalArgumentException if {@code key} is
-     *     {@code null}.
+     * @throws IllegalArgumentException if {@code key} is {@code null}.
      *
-     * @see #setSectionOutlinePaint(Comparable, Paint)
+     * @see #setSectionOutlinePaint(K, Paint)
      */
-    public Paint getSectionOutlinePaint(Comparable key) {
+    public Paint getSectionOutlinePaint(K key) {
         // null argument check delegated...
-        return this.sectionOutlinePaintMap.getPaint(key);
+        return this.sectionOutlinePaintMap.get(key);
     }
 
     /**
@@ -1009,12 +998,11 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      * @param key  the key ({@code null} not permitted).
      * @param paint  the paint.
      *
-     * @throws IllegalArgumentException if {@code key} is
-     *     {@code null}.
+     * @throws IllegalArgumentException if {@code key} is {@code null}.
      *
-     * @see #getSectionOutlinePaint(Comparable)
+     * @see #getSectionOutlinePaint(K)
      */
-    public void setSectionOutlinePaint(Comparable key, Paint paint) {
+    public void setSectionOutlinePaint(K key, Paint paint) {
         // null argument check delegated...
         this.sectionOutlinePaintMap.put(key, paint);
         fireChangeEvent();
@@ -1064,7 +1052,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
 
     /**
      * Returns the flag that controls whether or not the section outline paint
-     * is auto-populated by the {@link #lookupSectionOutlinePaint(Comparable)}
+     * is auto-populated by the {@link #lookupSectionOutlinePaint(K)}
      * method.
      *
      * @return A boolean.
@@ -1075,7 +1063,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
 
     /**
      * Sets the flag that controls whether or not the section outline paint is
-     * auto-populated by the {@link #lookupSectionOutlinePaint(Comparable)}
+     * auto-populated by the {@link #lookupSectionOutlinePaint(K)}
      * method, and sends a {@link PlotChangeEvent} to all registered listeners.
      *
      * @param auto  auto-populate?
@@ -1096,7 +1084,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      *
      * @return The stroke for the specified section.
      *
-     * @see #lookupSectionOutlineStroke(Comparable, boolean)
+     * @see #lookupSectionOutlineStroke(K, boolean)
      */
     protected Stroke lookupSectionOutlineStroke(K key) {
         return lookupSectionOutlineStroke(key, getAutoPopulateSectionOutlineStroke());
@@ -1106,9 +1094,8 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      * Returns the outline stroke for the specified section.  The lookup
      * involves these steps:
      * <ul>
-     * <li>if {@link #getSectionOutlineStroke(Comparable)} is
-     *         non-{@code null} return it;</li>
-     * <li>if {@link #getSectionOutlineStroke(Comparable)} is {@code null} but
+     * <li>if {@link #getSectionOutlineStroke(K)} is non-{@code null} return it;</li>
+     * <li>if {@link #getSectionOutlineStroke(K)} is {@code null} but
      *         {@code autoPopulate} is {@code true}, attempt to fetch
      *         a new outline stroke from the drawing supplier
      *         ({@link #getDrawingSupplier()});
@@ -1155,7 +1142,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      * @throws IllegalArgumentException if {@code key} is
      *     {@code null}.
      *
-     * @see #setSectionOutlineStroke(Comparable, Stroke)
+     * @see #setSectionOutlineStroke(K, Stroke)
      */
     public Stroke getSectionOutlineStroke(K key) {
         // null argument check delegated...
@@ -1172,7 +1159,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      * @throws IllegalArgumentException if {@code key} is
      *     {@code null}.
      *
-     * @see #getSectionOutlineStroke(Comparable)
+     * @see #getSectionOutlineStroke(K)
      */
     public void setSectionOutlineStroke(K key, Stroke stroke) {
         // null argument check delegated...
@@ -1224,7 +1211,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
 
     /**
      * Returns the flag that controls whether or not the section outline stroke
-     * is auto-populated by the {@link #lookupSectionOutlinePaint(Comparable)}
+     * is auto-populated by the {@link #lookupSectionOutlinePaint(K)}
      * method.
      *
      * @return A boolean.
@@ -1235,7 +1222,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
 
     /**
      * Sets the flag that controls whether or not the section outline stroke is
-     * auto-populated by the {@link #lookupSectionOutlineStroke(Comparable)}
+     * auto-populated by the {@link #lookupSectionOutlineStroke(K)}
      * method, and sends a {@link PlotChangeEvent} to all registered listeners.
      *
      * @param auto  auto-populate?
@@ -1328,7 +1315,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      *
      * @throws IllegalArgumentException if {@code key} is {@code null}.
      *
-     * @see #setExplodePercent(Comparable, double)
+     * @see #setExplodePercent(K, double)
      */
     public double getExplodePercent(K key) {
         double result = 0.0;
@@ -1348,7 +1335,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      * @param key  the section key ({@code null} not permitted).
      * @param percent  the explode percentage (0.30 = 30 percent).
      *
-     * @see #getExplodePercent(Comparable)
+     * @see #getExplodePercent(K)
      */
     public void setExplodePercent(K key, double percent) {
         Args.nullNotPermitted(key, "key");
@@ -2994,7 +2981,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
         if (this.ignoreNullValues != that.ignoreNullValues) {
             return false;
         }
-        if (!Objects.equals(this.sectionPaintMap, that.sectionPaintMap)) {
+        if (!PaintUtils.equal(this.sectionPaintMap, that.sectionPaintMap)) {
             return false;
         }
         if (!PaintUtils.equal(this.defaultSectionPaint,
@@ -3004,7 +2991,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
         if (this.sectionOutlinesVisible != that.sectionOutlinesVisible) {
             return false;
         }
-        if (!Objects.equals(this.sectionOutlinePaintMap, that.sectionOutlinePaintMap)) {
+        if (!PaintUtils.equal(this.sectionOutlinePaintMap, that.sectionOutlinePaintMap)) {
             return false;
         }
         if (!PaintUtils.equal(this.defaultSectionOutlinePaint,
@@ -3191,9 +3178,8 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
     @Override
     public Object clone() throws CloneNotSupportedException {
         PiePlot clone = (PiePlot) super.clone();
-        clone.sectionPaintMap = (PaintMap) this.sectionPaintMap.clone();
-        clone.sectionOutlinePaintMap 
-                = (PaintMap) this.sectionOutlinePaintMap.clone();
+        clone.sectionPaintMap = new HashMap<>(this.sectionPaintMap);
+        clone.sectionOutlinePaintMap = new HashMap<>(this.sectionOutlinePaintMap);
         clone.sectionOutlineStrokeMap = new HashMap<>(this.sectionOutlineStrokeMap);
         clone.explodePercentages = new TreeMap<>(this.explodePercentages);
         if (this.labelGenerator != null) {
