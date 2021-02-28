@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * ShapeUtils.java
  * ---------------
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributors:     -;
@@ -50,6 +50,7 @@ import java.awt.geom.Rectangle2D;
 import java.util.Arrays;
 import java.util.Objects;
 
+import org.jfree.chart.internal.Args;
 import org.jfree.chart.api.RectangleAnchor;
 
 /**
@@ -86,7 +87,7 @@ public class ShapeUtils {
             catch (CloneNotSupportedException cnse) {
             }
         }
-        final Shape result = null;
+        final Shape result = null; // FIXME
         return result;
     }
 
@@ -106,20 +107,15 @@ public class ShapeUtils {
     public static boolean equal(Shape s1, Shape s2) {
         if (s1 instanceof Line2D && s2 instanceof Line2D) {
             return equal((Line2D) s1, (Line2D) s2);
-        }
-        else if (s1 instanceof Ellipse2D && s2 instanceof Ellipse2D) {
+        } else if (s1 instanceof Ellipse2D && s2 instanceof Ellipse2D) {
             return equal((Ellipse2D) s1, (Ellipse2D) s2);
-        }
-        else if (s1 instanceof Arc2D && s2 instanceof Arc2D) {
+        } else if (s1 instanceof Arc2D && s2 instanceof Arc2D) {
             return equal((Arc2D) s1, (Arc2D) s2);
-        }
-        else if (s1 instanceof Polygon && s2 instanceof Polygon) {
+        } else if (s1 instanceof Polygon && s2 instanceof Polygon) {
             return equal((Polygon) s1, (Polygon) s2);
-        }
-        else if (s1 instanceof GeneralPath && s2 instanceof GeneralPath) {
+        } else if (s1 instanceof GeneralPath && s2 instanceof GeneralPath) {
             return equal((GeneralPath) s1, (GeneralPath) s2);
-        }
-        else {
+        } else {
             // this will handle Rectangle2D...
             return Objects.equals(s1, s2);
         }
@@ -285,9 +281,7 @@ public class ShapeUtils {
      */
     public static Shape createTranslatedShape(Shape shape, double transX,
             double transY) {
-        if (shape == null) {
-            throw new IllegalArgumentException("Null 'shape' argument.");
-        }
+        Args.nullNotPermitted(shape, "shape");
         final AffineTransform transform = AffineTransform.getTranslateInstance(
                 transX, transY);
         return transform.createTransformedShape(shape);
@@ -307,12 +301,8 @@ public class ShapeUtils {
      */
     public static Shape createTranslatedShape(Shape shape, 
             RectangleAnchor anchor, double locationX, double locationY) {
-        if (shape == null) {
-            throw new IllegalArgumentException("Null 'shape' argument.");
-        }
-        if (anchor == null) {
-            throw new IllegalArgumentException("Null 'anchor' argument.");
-        }
+        Args.nullNotPermitted(shape, "shape");
+        Args.nullNotPermitted(anchor, "anchor");
         Point2D anchorPoint = anchor.getAnchorPoint(shape.getBounds2D());
         final AffineTransform transform = AffineTransform.getTranslateInstance(
                 locationX - anchorPoint.getX(), locationY - anchorPoint.getY());
@@ -322,8 +312,7 @@ public class ShapeUtils {
     /**
      * Rotates a shape about the specified coordinates.
      *
-     * @param base  the shape ({@code null} permitted, returns
-     *              {@code null}).
+     * @param base  the shape ({@code null} permitted, returns {@code null}).
      * @param angle  the angle (in radians).
      * @param x  the x coordinate for the rotation point (in Java2D space).
      * @param y  the y coordinate for the rotation point (in Java2D space).
@@ -334,10 +323,8 @@ public class ShapeUtils {
         if (base == null) {
             return null;
         }
-        final AffineTransform rotate = AffineTransform.getRotateInstance(
-                angle, x, y);
-        final Shape result = rotate.createTransformedShape(base);
-        return result;
+        AffineTransform rotate = AffineTransform.getRotateInstance(angle, x, y);
+        return rotate.createTransformedShape(base);
     }
 
     /**
@@ -351,7 +338,8 @@ public class ShapeUtils {
      */
     public static void drawRotatedShape(Graphics2D g2, Shape shape, double angle,
             float x, float y) {
-
+        Args.nullNotPermitted(g2, "g2");
+        Args.nullNotPermitted(shape, "shape");
         AffineTransform saved = g2.getTransform();
         AffineTransform rotate = AffineTransform.getRotateInstance(angle, x, y);
         g2.transform(rotate);
@@ -475,6 +463,7 @@ public class ShapeUtils {
      * @return A region that surrounds the line.
      */
     public static Shape createLineRegion(Line2D line, float width) {
+        Args.nullNotPermitted(line, "line");
         final GeneralPath result = new GeneralPath();
         final float x1 = (float) line.getX1();
         final float x2 = (float) line.getX2();
@@ -489,8 +478,7 @@ public class ShapeUtils {
             result.lineTo(x2 + dx, y2 - dy);
             result.lineTo(x2 - dx, y2 + dy);
             result.closePath();
-        }
-        else {
+        } else {
             // special case, vertical line
             result.moveTo(x1 - width / 2.0f, y1);
             result.lineTo(x1 + width / 2.0f, y1);
@@ -507,8 +495,7 @@ public class ShapeUtils {
      *
      * @param x  the x-coordinate.
      * @param y  the y-coordinate.
-     * @param area  the constraining rectangle ({@code null} not
-     *              permitted).
+     * @param area  the constraining rectangle ({@code null} not permitted).
      *
      * @return A point within the rectangle.
      *
@@ -516,35 +503,32 @@ public class ShapeUtils {
      */
     public static Point2D getPointInRectangle(double x, double y,
             Rectangle2D area) {
-
         x = Math.max(area.getMinX(), Math.min(x, area.getMaxX()));
         y = Math.max(area.getMinY(), Math.min(y, area.getMaxY()));
         return new Point2D.Double(x, y);
-
     }
 
     /**
      * Checks, whether the given rectangle1 fully contains rectangle 2
      * (even if rectangle 2 has a height or width of zero!).
      *
-     * @param rect1  the first rectangle.
-     * @param rect2  the second rectangle.
+     * @param rect1  the first rectangle ({@code null} not permitted).
+     * @param rect2  the second rectangle ({@code null} not permitted).
      *
      * @return A boolean.
      */
     public static boolean contains(Rectangle2D rect1, Rectangle2D rect2) {
-
+        Args.nullNotPermitted(rect1, "rect1");
+        Args.nullNotPermitted(rect2, "rect2");
         final double x0 = rect1.getX();
         final double y0 = rect1.getY();
         final double x = rect2.getX();
         final double y = rect2.getY();
         final double w = rect2.getWidth();
         final double h = rect2.getHeight();
-
         return ((x >= x0) && (y >= y0)
                 && ((x + w) <= (x0 + rect1.getWidth()))
                 && ((y + h) <= (y0 + rect1.getHeight())));
-
     }
 
     /**
@@ -557,15 +541,16 @@ public class ShapeUtils {
      * @return A boolean.
      */
     public static boolean intersects(Rectangle2D rect1, Rectangle2D rect2) {
+        Args.nullNotPermitted(rect1, "rect1");
+        Args.nullNotPermitted(rect2, "rect2");
+        final double x0 = rect1.getX();
+        final double y0 = rect1.getY();
 
-      final double x0 = rect1.getX();
-      final double y0 = rect1.getY();
-
-      final double x = rect2.getX();
-      final double width = rect2.getWidth();
-      final double y = rect2.getY();
-      final double height = rect2.getHeight();
-      return (x + width >= x0 && y + height >= y0 && x <= x0 + rect1.getWidth()
+        final double x = rect2.getX();
+        final double width = rect2.getWidth();
+        final double y = rect2.getY();
+        final double height = rect2.getHeight();
+        return (x + width >= x0 && y + height >= y0 && x <= x0 + rect1.getWidth()
               && y <= y0 + rect1.getHeight());
     }
     
