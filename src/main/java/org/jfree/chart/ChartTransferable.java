@@ -115,7 +115,7 @@ public class ChartTransferable implements Transferable {
     /**
      * Creates a new chart selection.  The minimum and maximum drawing
      * dimensions are used to match the scaling behaviour in the
-     * {@link ChartPanel} class.
+     * {@link org.jfree.chart.swing.ChartPanel} class.
      *
      * @param chart  the chart.
      * @param width  the chart width.
