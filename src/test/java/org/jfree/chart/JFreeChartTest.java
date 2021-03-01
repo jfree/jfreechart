@@ -45,7 +45,7 @@ import java.util.List;
 
 import org.jfree.chart.event.ChartChangeEvent;
 import org.jfree.chart.event.ChartChangeListener;
-import org.jfree.chart.plot.PiePlot;
+import org.jfree.chart.plot.pie.PiePlot;
 import org.jfree.chart.plot.RingPlot;
 import org.jfree.chart.legend.LegendTitle;
 import org.jfree.chart.title.TextTitle;

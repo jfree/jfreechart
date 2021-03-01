@@ -1418,8 +1418,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      *
      * @see #getSeriesOutlineStroke(int)
      */
-    public void setSeriesOutlineStroke(int series, Stroke stroke,
-                                       boolean notify) {
+    public void setSeriesOutlineStroke(int series, Stroke stroke, boolean notify) {
         this.outlineStrokeList.setStroke(series, stroke);
         if (notify) {
             fireChangeEvent();

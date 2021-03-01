@@ -34,7 +34,7 @@
  *
  */
 
-package org.jfree.chart.plot;
+package org.jfree.chart.plot.pie;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -50,7 +50,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -68,6 +67,9 @@ import org.jfree.chart.internal.Args;
 import org.jfree.chart.internal.SerialUtils;
 import org.jfree.chart.util.ShapeUtils;
 import org.jfree.chart.api.TableOrder;
+import org.jfree.chart.plot.Plot;
+import org.jfree.chart.plot.PlotRenderingInfo;
+import org.jfree.chart.plot.PlotState;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.CategoryToPieDataset;
 import org.jfree.data.general.DatasetChangeEvent;
@@ -95,32 +97,16 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
     /** The pie section limit percentage. */
     private double limit = 0.0;
 
-    /**
-     * The key for the aggregated items.
-     *
-     * @since 1.0.2
-     */
+    /** The key for the aggregated items. */
     private Comparable aggregatedItemsKey;
 
-    /**
-     * The paint for the aggregated items.
-     *
-     * @since 1.0.2
-     */
+    /** The paint for the aggregated items. */
     private transient Paint aggregatedItemsPaint;
 
-    /**
-     * The colors to use for each section.
-     *
-     * @since 1.0.2
-     */
+    /** The colors to use for each section. */
     private transient Map sectionPaints;
 
-    /**
-     * The legend item shape (never null).
-     *
-     * @since 1.0.12
-     */
+    /** The legend item shape (never null). */
     private transient Shape legendItemShape;
 
     /**
@@ -265,8 +251,6 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
      * The default value is "Other".
      *
      * @return The aggregated items key.
-     *
-     * @since 1.0.2
      */
     public Comparable getAggregatedItemsKey() {
         return this.aggregatedItemsKey;
@@ -277,8 +261,6 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
      * that this doesn't clash with any keys in the dataset.
      *
      * @param key  the key ({@code null} not permitted).
-     *
-     * @since 1.0.2
      */
     public void setAggregatedItemsKey(Comparable key) {
         Args.nullNotPermitted(key, "key");
@@ -291,8 +273,6 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
      * aggregated items.  The default value is {code Color.lightGray}.
      *
      * @return The paint.
-     *
-     * @since 1.0.2
      */
     public Paint getAggregatedItemsPaint() {
         return this.aggregatedItemsPaint;
@@ -303,8 +283,6 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
      * items and sends a {@link PlotChangeEvent} to all registered listeners.
      *
      * @param paint  the paint ({@code null} not permitted).
-     *
-     * @since 1.0.2
      */
     public void setAggregatedItemsPaint(Paint paint) {
         Args.nullNotPermitted(paint, "paint");
@@ -329,8 +307,6 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
      * @return The shape (never {@code null}).
      *
      * @see #setLegendItemShape(Shape)
-     *
-     * @since 1.0.12
      */
     public Shape getLegendItemShape() {
         return this.legendItemShape;
@@ -343,8 +319,6 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
      * @param shape  the shape ({@code null} not permitted).
      *
      * @see #getLegendItemShape()
-     *
-     * @since 1.0.12
      */
     public void setLegendItemShape(Shape shape) {
         Args.nullNotPermitted(shape, "shape");

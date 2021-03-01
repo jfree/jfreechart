@@ -27,16 +27,10 @@
  * --------------------------
  * CustomPieURLGenerator.java
  * --------------------------
- * (C) Copyright 2004-2020, by David Basten and Contributors.
+ * (C) Copyright 2004-2021, by David Basten and Contributors.
  *
  * Original Author:  David Basten;
  * Contributors:     -;
- *
- * Changes:
- * --------
- * 04-Feb-2004 : Version 1, contributed by David Basten based on
- *               CustomXYURLGenerator by Richard Atkinson (added to main source
- *               tree on 25-May-2004);
  *
  */
 
@@ -50,8 +44,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.jfree.chart.plot.MultiplePiePlot;
-import org.jfree.chart.plot.PiePlot;
+import org.jfree.chart.plot.pie.MultiplePiePlot;
+import org.jfree.chart.plot.pie.PiePlot;
 import org.jfree.chart.api.PublicCloneable;
 import org.jfree.data.general.PieDataset;
 

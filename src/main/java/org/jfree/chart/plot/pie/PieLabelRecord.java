@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,20 +27,14 @@
  * -------------------
  * PieLabelRecord.java
  * -------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * Changes
- * -------
- * 08-Mar-2004 : Version 1 (DG);
- * 14-Jun-2007 : Implemented Serializable, updated API docs (DG);
- * 21-Nov-2007 : Implemented equals() to shut up FindBugs (DG);
- *
  */
 
-package org.jfree.chart.plot;
+package org.jfree.chart.plot.pie;
 
 import java.io.Serializable;
 import org.jfree.chart.text.TextBox;

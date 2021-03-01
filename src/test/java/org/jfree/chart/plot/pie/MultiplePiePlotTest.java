@@ -34,7 +34,7 @@
  *
  */
 
-package org.jfree.chart.plot;
+package org.jfree.chart.plot.pie;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;

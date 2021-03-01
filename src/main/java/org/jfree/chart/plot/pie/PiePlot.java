@@ -42,7 +42,7 @@
  * 
  */
 
-package org.jfree.chart.plot;
+package org.jfree.chart.plot.pie;
 
 import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
@@ -91,6 +91,11 @@ import org.jfree.chart.legend.LegendItemCollection;
 import org.jfree.chart.labels.PieSectionLabelGenerator;
 import org.jfree.chart.labels.PieToolTipGenerator;
 import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
+import org.jfree.chart.plot.DrawingSupplier;
+import org.jfree.chart.plot.Plot;
+import org.jfree.chart.plot.PlotRenderingInfo;
+import org.jfree.chart.plot.PlotState;
+import org.jfree.chart.plot.RingPlot;
 import org.jfree.chart.text.G2TextMeasurer;
 import org.jfree.chart.text.TextBlock;
 import org.jfree.chart.text.TextBox;

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,21 +27,14 @@
  * ------------------------
  * PieLabelDistributor.java
  * ------------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * Changes
- * -------
- * 08-Mar-2004 : Version 1 (DG);
- * 18-Apr-2005 : Use StringBuffer (DG);
- * 14-Jun-2007 : Now extends AbstractPieLabelDistributor (DG);
- * 31-Mar-2008 : Fix bugs in label distribution (DG);
- *
  */
 
-package org.jfree.chart.plot;
+package org.jfree.chart.plot.pie;
 
 import java.util.Collections;
 
@@ -72,14 +65,12 @@ public class PieLabelDistributor extends AbstractPieLabelDistributor {
     @Override
     public void distributeLabels(double minY, double height) {
         sort();  // sorts the label records into ascending order by baseY
-//        if (isOverlap()) {
-//            adjustInwards();
-//        }
-        // if still overlapping, do something else...
+        
         if (isOverlap()) {
             adjustDownwards(minY, height);
         }
 
+        // if still overlapping, do something else...
         if (isOverlap()) {
             adjustUpwards(minY, height);
         }

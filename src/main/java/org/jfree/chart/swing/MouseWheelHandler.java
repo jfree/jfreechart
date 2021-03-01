@@ -44,7 +44,7 @@ import java.io.Serializable;
 import org.jfree.chart.ChartRenderingInfo;
 import org.jfree.chart.JFreeChart;
 
-import org.jfree.chart.plot.PiePlot;
+import org.jfree.chart.plot.pie.PiePlot;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.Zoomable;

@@ -34,7 +34,7 @@
  * 
  */
 
-package org.jfree.chart.plot;
+package org.jfree.chart.plot.pie;
 
 import java.io.Serializable;
 import java.util.List;

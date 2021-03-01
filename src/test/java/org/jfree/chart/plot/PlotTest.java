@@ -50,6 +50,7 @@ import java.awt.Stroke;
 
 import org.jfree.chart.api.RectangleAlignment;
 import org.jfree.chart.api.RectangleInsets;
+import org.jfree.chart.plot.pie.PiePlot;
 import org.junit.jupiter.api.Test;
 
 /**

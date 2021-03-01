@@ -43,7 +43,7 @@ package org.jfree.chart;
 
 import org.jfree.chart.event.ChartChangeEvent;
 import org.jfree.chart.event.ChartChangeListener;
-import org.jfree.chart.plot.PiePlot;
+import org.jfree.chart.plot.pie.PiePlot;
 import org.jfree.data.general.DefaultPieDataset;
 import org.junit.jupiter.api.Test;
 

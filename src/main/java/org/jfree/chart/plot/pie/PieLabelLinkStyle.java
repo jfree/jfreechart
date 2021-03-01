@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,25 +27,18 @@
  * ----------------------
  * PieLabelLinkStyle.java
  * ----------------------
- * (C) Copyright 2008, by Object Refinery Limited.
+ * (C) Copyright 2008-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 31-Mar-2008 : Version 1 (DG);
- * 08-Jul-2018 : Made PieLabelLinkStyle an enum (TH);
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
-package org.jfree.chart.plot;
+package org.jfree.chart.plot.pie;
 
 /**
  * Used to indicate the style for the lines linking pie sections to their
  * corresponding labels.
- *
- * @since 1.0.10
  */
 public enum PieLabelLinkStyle {
 

@@ -36,6 +36,8 @@
 
 package org.jfree.chart.plot;
 
+import org.jfree.chart.plot.pie.PiePlotState;
+import org.jfree.chart.plot.pie.PiePlot;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
