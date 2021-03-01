@@ -65,7 +65,7 @@ import org.jfree.chart.axis.ValueTick;
 import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.api.RectangleEdge;
 import org.jfree.chart.api.RectangleInsets;
-import org.jfree.chart.util.ArrayUtils;
+import org.jfree.chart.internal.ArrayUtils;
 import org.jfree.chart.internal.PaintUtils;
 import org.jfree.chart.internal.Args;
 import org.jfree.chart.internal.SerialUtils;

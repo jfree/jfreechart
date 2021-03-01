@@ -46,7 +46,7 @@ package org.jfree.data.general;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import org.jfree.chart.util.ArrayUtils;
+import org.jfree.chart.internal.ArrayUtils;
 import org.jfree.chart.internal.Args;
 
 import org.jfree.data.DomainInfo;
