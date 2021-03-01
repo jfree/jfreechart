@@ -63,7 +63,7 @@ import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.chart.util.PaintUtils;
+import org.jfree.chart.internal.PaintUtils;
 import org.jfree.chart.internal.Args;
 import org.jfree.chart.internal.SerialUtils;
 import org.jfree.data.category.CategoryDataset;

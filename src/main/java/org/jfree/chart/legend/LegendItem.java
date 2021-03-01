@@ -58,10 +58,10 @@ import org.jfree.chart.text.AttributedStringUtils;
 import org.jfree.chart.util.GradientPaintTransformer;
 import org.jfree.chart.util.StandardGradientPaintTransformer;
 import org.jfree.chart.internal.Args;
-import org.jfree.chart.util.PaintUtils;
+import org.jfree.chart.internal.PaintUtils;
 import org.jfree.chart.api.PublicCloneable;
 import org.jfree.chart.internal.SerialUtils;
-import org.jfree.chart.util.ShapeUtils;
+import org.jfree.chart.internal.ShapeUtils;
 
 import org.jfree.data.general.Dataset;
 

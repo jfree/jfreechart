@@ -49,7 +49,7 @@ import org.jfree.chart.block.BorderArrangement;
 import org.jfree.chart.block.RectangleConstraint;
 import org.jfree.chart.event.TitleChangeEvent;
 import org.jfree.chart.block.Size2D;
-import org.jfree.chart.util.PaintUtils;
+import org.jfree.chart.internal.PaintUtils;
 import org.jfree.chart.internal.Args;
 import org.jfree.chart.internal.SerialUtils;
 

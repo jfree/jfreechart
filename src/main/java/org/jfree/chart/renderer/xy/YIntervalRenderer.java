@@ -59,7 +59,7 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.api.RectangleEdge;
 import org.jfree.chart.api.PublicCloneable;
-import org.jfree.chart.util.ShapeUtils;
+import org.jfree.chart.internal.ShapeUtils;
 import org.jfree.data.Range;
 import org.jfree.data.xy.IntervalXYDataset;
 import org.jfree.data.xy.XYDataset;

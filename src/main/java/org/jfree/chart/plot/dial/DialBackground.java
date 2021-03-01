@@ -49,7 +49,7 @@ import java.io.Serializable;
 import org.jfree.chart.internal.HashUtils;
 import org.jfree.chart.util.GradientPaintTransformer;
 import org.jfree.chart.util.StandardGradientPaintTransformer;
-import org.jfree.chart.util.PaintUtils;
+import org.jfree.chart.internal.PaintUtils;
 import org.jfree.chart.internal.Args;
 import org.jfree.chart.api.PublicCloneable;
 import org.jfree.chart.internal.SerialUtils;

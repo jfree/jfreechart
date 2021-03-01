@@ -55,11 +55,11 @@ import org.jfree.chart.util.GradientPaintTransformer;
 import org.jfree.chart.api.RectangleAnchor;
 import org.jfree.chart.block.Size2D;
 import org.jfree.chart.util.StandardGradientPaintTransformer;
-import org.jfree.chart.util.PaintUtils;
+import org.jfree.chart.internal.PaintUtils;
 import org.jfree.chart.internal.Args;
 import org.jfree.chart.api.PublicCloneable;
 import org.jfree.chart.internal.SerialUtils;
-import org.jfree.chart.util.ShapeUtils;
+import org.jfree.chart.internal.ShapeUtils;
 
 /**
  * The graphical item within a legend item.

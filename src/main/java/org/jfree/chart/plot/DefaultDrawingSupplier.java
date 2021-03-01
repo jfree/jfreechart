@@ -64,7 +64,7 @@ import java.util.Arrays;
 import org.jfree.chart.ChartColor;
 import org.jfree.chart.api.PublicCloneable;
 import org.jfree.chart.internal.SerialUtils;
-import org.jfree.chart.util.ShapeUtils;
+import org.jfree.chart.internal.ShapeUtils;
 
 
 /**

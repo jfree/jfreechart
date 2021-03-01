@@ -33,7 +33,7 @@
  * Contributors:     -;
  */
 
-package org.jfree.chart.util;
+package org.jfree.chart.internal;
 
 import org.jfree.chart.internal.CloneUtils;
 import java.awt.Graphics2D;
@@ -578,9 +578,9 @@ public class ShapeUtils {
      * 
      * @return A new map containing cloned shapes.
      */
-    public static Map<Integer, Shape> cloneMap(Map<Integer, Shape> source) {
-        Map<Integer, Shape> result = new HashMap<>();
-        for (Integer key : source.keySet()) {
+    public static <K extends Comparable<K>> Map<K, Shape> cloneMap(Map<K, Shape> source) {
+        Map<K, Shape> result = new HashMap<>();
+        for (K key : source.keySet()) {
             result.put(key, source.get(key));
         }
         return result;

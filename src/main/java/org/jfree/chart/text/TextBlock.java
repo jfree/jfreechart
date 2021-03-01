@@ -40,7 +40,7 @@ import java.util.List;
 import org.jfree.chart.api.HorizontalAlignment;
 import org.jfree.chart.block.Size2D;
 import org.jfree.chart.internal.Args;
-import org.jfree.chart.util.ShapeUtils;
+import org.jfree.chart.internal.ShapeUtils;
 
 /**
  * A list of {@link TextLine} objects that form a block of text.

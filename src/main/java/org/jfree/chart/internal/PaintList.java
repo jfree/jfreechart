@@ -39,7 +39,6 @@ import java.awt.Paint;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import org.jfree.chart.util.PaintUtils;
 
 /**
  * A table of {@link Paint} objects.

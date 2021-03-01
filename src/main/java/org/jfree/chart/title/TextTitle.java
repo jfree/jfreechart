@@ -66,7 +66,7 @@ import org.jfree.chart.api.RectangleEdge;
 import org.jfree.chart.api.RectangleInsets;
 import org.jfree.chart.block.Size2D;
 import org.jfree.chart.api.VerticalAlignment;
-import org.jfree.chart.util.PaintUtils;
+import org.jfree.chart.internal.PaintUtils;
 import org.jfree.chart.internal.Args;
 import org.jfree.chart.api.PublicCloneable;
 import org.jfree.chart.internal.SerialUtils;

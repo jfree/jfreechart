@@ -75,8 +75,8 @@ import org.jfree.chart.internal.PaintList;
 import org.jfree.chart.internal.SerialUtils;
 import org.jfree.chart.internal.StrokeList;
 import org.jfree.chart.text.TextAnchor;
-import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.ShapeUtils;
+import org.jfree.chart.internal.PaintUtils;
+import org.jfree.chart.internal.ShapeUtils;
 import org.jfree.data.ItemKey;
 
 /**

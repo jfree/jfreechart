@@ -51,7 +51,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import org.jfree.chart.api.RectangleInsets;
-import org.jfree.chart.util.PaintUtils;
+import org.jfree.chart.internal.PaintUtils;
 import org.jfree.chart.internal.Args;
 import org.jfree.chart.internal.SerialUtils;
 

@@ -57,7 +57,7 @@ import org.jfree.chart.renderer.AbstractRenderer;
 import org.jfree.chart.util.GradientPaintTransformType;
 import org.jfree.chart.api.RectangleEdge;
 import org.jfree.chart.util.StandardGradientPaintTransformer;
-import org.jfree.chart.util.PaintUtils;
+import org.jfree.chart.internal.PaintUtils;
 import org.jfree.chart.internal.Args;
 import org.jfree.chart.internal.SerialUtils;
 import org.jfree.data.Range;

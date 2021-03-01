@@ -66,7 +66,7 @@ import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.PlotState;
 import org.jfree.chart.text.TextAnchor;
 import org.jfree.chart.text.TextUtils;
-import org.jfree.chart.util.PaintUtils;
+import org.jfree.chart.internal.PaintUtils;
 import org.jfree.data.flow.FlowDataset;
 import org.jfree.data.flow.FlowDatasetUtils;
 import org.jfree.data.flow.FlowKey;

@@ -76,7 +76,7 @@ import org.jfree.chart.api.RectangleEdge;
 import org.jfree.chart.api.RectangleInsets;
 import org.jfree.chart.text.TextAnchor;
 import org.jfree.chart.util.AttrStringUtils;
-import org.jfree.chart.util.PaintUtils;
+import org.jfree.chart.internal.PaintUtils;
 import org.jfree.chart.internal.Args;
 import org.jfree.chart.internal.SerialUtils;
 
