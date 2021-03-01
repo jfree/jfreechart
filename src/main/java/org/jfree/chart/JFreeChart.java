@@ -100,7 +100,7 @@ import org.jfree.chart.api.RectangleInsets;
 import org.jfree.chart.block.Size2D;
 import org.jfree.chart.api.VerticalAlignment;
 import org.jfree.chart.internal.Args;
-import org.jfree.chart.util.PaintUtils;
+import org.jfree.chart.internal.PaintUtils;
 import org.jfree.chart.internal.SerialUtils;
 import org.jfree.chart.swing.ChartPanel;
 import org.jfree.data.Range;
@@ -804,8 +804,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
     public void setTextAntiAlias(boolean flag) {
         if (flag) {
             setTextAntiAlias(RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        }
-        else {
+        } else {
             setTextAntiAlias(RenderingHints.VALUE_TEXT_ANTIALIAS_OFF);
         }
     }
@@ -845,20 +844,17 @@ public class JFreeChart implements Drawable, TitleChangeListener,
      * @see #getBackgroundPaint()
      */
     public void setBackgroundPaint(Paint paint) {
-
         if (this.backgroundPaint != null) {
             if (!this.backgroundPaint.equals(paint)) {
                 this.backgroundPaint = paint;
                 fireChartChanged();
             }
-        }
-        else {
+        } else {
             if (paint != null) {
                 this.backgroundPaint = paint;
                 fireChartChanged();
             }
         }
-
     }
 
     /**
@@ -882,20 +878,17 @@ public class JFreeChart implements Drawable, TitleChangeListener,
      * @see #getBackgroundImage()
      */
     public void setBackgroundImage(Image image) {
-
         if (this.backgroundImage != null) {
             if (!this.backgroundImage.equals(image)) {
                 this.backgroundImage = image;
                 fireChartChanged();
             }
-        }
-        else {
+        } else {
             if (image != null) {
                 this.backgroundImage = image;
                 fireChartChanged();
             }
         }
-
     }
 
     /**
