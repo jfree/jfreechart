@@ -60,16 +60,6 @@ import java.util.ResourceBundle;
 
 import org.jfree.chart.legend.LegendItemCollection;
 import org.jfree.chart.event.PlotChangeEvent;
-import org.jfree.chart.plot.compass.ArrowNeedle;
-import org.jfree.chart.plot.compass.LineNeedle;
-import org.jfree.chart.plot.compass.LongNeedle;
-import org.jfree.chart.plot.compass.MeterNeedle;
-import org.jfree.chart.plot.compass.MiddlePinNeedle;
-import org.jfree.chart.plot.compass.PinNeedle;
-import org.jfree.chart.plot.compass.PlumNeedle;
-import org.jfree.chart.plot.compass.PointerNeedle;
-import org.jfree.chart.plot.compass.ShipNeedle;
-import org.jfree.chart.plot.compass.WindNeedle;
 import org.jfree.chart.api.RectangleInsets;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.internal.Args;
