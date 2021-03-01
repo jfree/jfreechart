@@ -48,6 +48,8 @@ import java.awt.geom.PathIterator;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import org.jfree.chart.internal.Args;
@@ -567,6 +569,45 @@ public class ShapeUtils {
     public static boolean isPointInRect(Rectangle2D rect, double x, double y) {
         return (x >= rect.getMinX() && x <= rect.getMaxX()
                 && y >= rect.getMinY() && y <= rect.getMaxY());
+    }
+    
+    /**
+     * Clones a map containing shapes.
+     * 
+     * @param source  the source map.
+     * 
+     * @return A new map containing cloned shapes.
+     */
+    public static Map<Integer, Shape> cloneMap(Map<Integer, Shape> source) {
+        Map<Integer, Shape> result = new HashMap<>();
+        for (Integer key : source.keySet()) {
+            result.put(key, source.get(key));
+        }
+        return result;
+    }
+    
+    /**
+     * Returns {@code true} if the two maps contain the same set of entries and 
+     * {@code false} otherwise.
+     * 
+     * @param <K>  the key type.
+     * @param map1  the first map.
+     * @param map2  the second map.
+     * 
+     * @return A boolean.
+     */
+    public static <K extends Comparable<K>> boolean equal(Map<K, Shape> map1, Map<K, Shape> map2) {
+        if (!map1.keySet().equals(map2.keySet())) {
+            return false;
+        }
+        for (K key : map1.keySet()) {
+            Shape p1 = map1.get(key);
+            Shape p2 = map2.get(key);
+            if (!ShapeUtils.equal(p1, p2)) {
+                return false;
+            }
+        }
+        return true;
     }
  
 }
