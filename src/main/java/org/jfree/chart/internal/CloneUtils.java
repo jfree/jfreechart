@@ -159,8 +159,6 @@ public class CloneUtils {
      * @param <V>  the type for the values.
      * 
      * @return A new map. 
-     * 
-     * @since 1.0.18
      */
     public static <K, V> Map<K, V> cloneMapValues(Map<K, V> source) {
         Args.nullNotPermitted(source, "source");

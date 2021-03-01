@@ -81,8 +81,6 @@ public abstract class ValueTick extends Tick {
      *                    point.
      * @param rotationAnchor  defines the rotation point relative to the label.
      * @param angle  the rotation angle (in radians).
-     *
-     * @since 1.0.7
      */
     public ValueTick(TickType tickType, double value, String label,
                      TextAnchor textAnchor, TextAnchor rotationAnchor,
@@ -106,8 +104,6 @@ public abstract class ValueTick extends Tick {
      * Returns the tick type (major or minor).
      *
      * @return The tick type.
-     *
-     * @since 1.0.7
      */
     public TickType getTickType() {
         return this.tickType;

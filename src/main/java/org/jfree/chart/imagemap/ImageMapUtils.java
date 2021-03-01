@@ -193,8 +193,6 @@ public class ImageMapUtils {
      * @param input  the string to escape ({@code null} not permitted).
      *
      * @return A string with characters escaped.
-     *
-     * @since 1.0.9
      */
     public static String htmlEscape(String input) {
         Args.nullNotPermitted(input, "input");
@@ -234,8 +232,6 @@ public class ImageMapUtils {
      * @param input  the string to escape ({@code null} not permitted).
      *
      * @return A string with characters escaped.
-     *
-     * @since 1.0.13
      */
     public static String javascriptEscape(String input) {
         Args.nullNotPermitted(input, "input");

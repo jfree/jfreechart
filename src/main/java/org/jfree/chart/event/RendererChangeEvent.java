@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------
  * RendererChangeEvent.java
  * ------------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited.
+ * (C) Copyright 2003-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -49,8 +49,6 @@ public class RendererChangeEvent extends ChartChangeEvent {
      * A flag that indicates whether this event relates to a change in the
      * series visibility.  If so, the receiver (if it is a plot) may want to
      * update the axis bounds.
-     *
-     * @since 1.0.13
      */
     private final boolean seriesVisibilityChanged;
 
@@ -90,8 +88,6 @@ public class RendererChangeEvent extends ChartChangeEvent {
      * a change in series visibility.
      *
      * @return A boolean.
-     *
-     * @since 1.0.13
      */
     public boolean getSeriesVisibilityChanged() {
         return this.seriesVisibilityChanged;

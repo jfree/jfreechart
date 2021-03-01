@@ -54,8 +54,6 @@ public class AnnotationChangeEvent extends ChartChangeEvent {
      * @param source  the event source.
      * @param annotation  the annotation that triggered the event
      *     ({@code null} not permitted).
-     *
-     * @since 1.0.14
      */
     public AnnotationChangeEvent(Object source, Annotation annotation) {
         super(source);
@@ -67,8 +65,6 @@ public class AnnotationChangeEvent extends ChartChangeEvent {
      * Returns the annotation that triggered the event.
      *
      * @return The annotation that triggered the event (never {@code null}).
-     *
-     * @since 1.0.14
      */
     public Annotation getAnnotation() {
         return this.annotation;
