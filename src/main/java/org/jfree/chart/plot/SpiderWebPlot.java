@@ -185,32 +185,23 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
     /** The legend item shape. */
     private transient Shape legendItemShape;
 
-    /** The paint for ALL series (overrides list). */
-    private transient Paint seriesPaint;
-
     /** The series paint list. */
     private PaintList seriesPaintList;
 
-    /** The base series paint (fallback). */
-    private transient Paint baseSeriesPaint;
-
-    /** The outline paint for ALL series (overrides list). */
-    private transient Paint seriesOutlinePaint;
+    /** The default series paint. */
+    private transient Paint defaultSeriesPaint;
 
     /** The series outline paint list. */
     private PaintList seriesOutlinePaintList;
 
-    /** The base series outline paint (fallback). */
-    private transient Paint baseSeriesOutlinePaint;
-
-    /** The outline stroke for ALL series (overrides list). */
-    private transient Stroke seriesOutlineStroke;
+    /** The default series outline paint. */
+    private transient Paint defaultSeriesOutlinePaint;
 
     /** The series outline stroke list. */
     private StrokeList seriesOutlineStrokeList;
 
-    /** The base series outline stroke (fallback). */
-    private transient Stroke baseSeriesOutlineStroke;
+    /** The default series outline stroke. */
+    private transient Stroke defaultSeriesOutlineStroke;
 
     /** The font used to display the category labels. */
     private Font labelFont;
@@ -273,17 +264,14 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
         this.direction = Rotation.CLOCKWISE;
         this.maxValue = DEFAULT_MAX_VALUE;
 
-        this.seriesPaint = null;
         this.seriesPaintList = new PaintList();
-        this.baseSeriesPaint = null;
+        this.defaultSeriesPaint = null;
 
-        this.seriesOutlinePaint = null;
         this.seriesOutlinePaintList = new PaintList();
-        this.baseSeriesOutlinePaint = DEFAULT_OUTLINE_PAINT;
+        this.defaultSeriesOutlinePaint = DEFAULT_OUTLINE_PAINT;
 
-        this.seriesOutlineStroke = null;
         this.seriesOutlineStrokeList = new StrokeList();
-        this.baseSeriesOutlineStroke = DEFAULT_OUTLINE_STROKE;
+        this.defaultSeriesOutlineStroke = DEFAULT_OUTLINE_STROKE;
 
         this.labelFont = DEFAULT_LABEL_FONT;
         this.labelPaint = DEFAULT_LABEL_PAINT;
@@ -613,31 +601,6 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
     //// SERIES PAINT /////////////////////////
 
     /**
-     * Returns the paint for ALL series in the plot.
-     *
-     * @return The paint (possibly {@code null}).
-     *
-     * @see #setSeriesPaint(Paint)
-     */
-    public Paint getSeriesPaint() {
-        return this.seriesPaint;
-    }
-
-    /**
-     * Sets the paint for ALL series in the plot.  If this is set to 
-     * {@code null}, then a list of paints is used instead (to allow different 
-     * colors to be used for each series of the radar group).
-     *
-     * @param paint the paint ({@code null} permitted).
-     *
-     * @see #getSeriesPaint()
-     */
-    public void setSeriesPaint(Paint paint) {
-        this.seriesPaint = paint;
-        fireChangeEvent();
-    }
-
-    /**
      * Returns the paint for the specified series.
      *
      * @param series  the series index (zero-based).
@@ -647,13 +610,7 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      * @see #setSeriesPaint(int, Paint)
      */
     public Paint getSeriesPaint(int series) {
-
-        // return the override, if there is one...
-        if (this.seriesPaint != null) {
-            return this.seriesPaint;
-        }
-
-        // otherwise look up the paint list
+        // look up the paint list
         Paint result = this.seriesPaintList.getPaint(series);
         if (result == null) {
             DrawingSupplier supplier = getDrawingSupplier();
@@ -661,13 +618,11 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
                 Paint p = supplier.getNextPaint();
                 this.seriesPaintList.setPaint(series, p);
                 result = p;
-            }
-            else {
-                result = this.baseSeriesPaint;
+            } else {
+                result = this.defaultSeriesPaint;
             }
         }
         return result;
-
     }
 
     /**
@@ -685,52 +640,31 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
     }
 
     /**
-     * Returns the base series paint. This is used when no other paint is
+     * Returns the default series paint, used when no other paint is
      * available.
      *
      * @return The paint (never {@code null}).
      *
-     * @see #setBaseSeriesPaint(Paint)
+     * @see #setDefaultSeriesPaint(Paint)
      */
-    public Paint getBaseSeriesPaint() {
-      return this.baseSeriesPaint;
+    public Paint getDefaultSeriesPaint() {
+      return this.defaultSeriesPaint;
     }
 
     /**
-     * Sets the base series paint.
+     * Sets the default series paint.
      *
      * @param paint  the paint ({@code null} not permitted).
      *
-     * @see #getBaseSeriesPaint()
+     * @see #getDefaultSeriesPaint()
      */
-    public void setBaseSeriesPaint(Paint paint) {
+    public void setDefaultSeriesPaint(Paint paint) {
         Args.nullNotPermitted(paint, "paint");
-        this.baseSeriesPaint = paint;
+        this.defaultSeriesPaint = paint;
         fireChangeEvent();
     }
 
     //// SERIES OUTLINE PAINT ////////////////////////////
-
-    /**
-     * Returns the outline paint for ALL series in the plot.
-     *
-     * @return The paint (possibly {@code null}).
-     */
-    public Paint getSeriesOutlinePaint() {
-        return this.seriesOutlinePaint;
-    }
-
-    /**
-     * Sets the outline paint for ALL series in the plot. If this is set to
-     * {@code null}, then a list of paints is used instead (to allow
-     * different colors to be used for each series).
-     *
-     * @param paint  the paint ({@code null} permitted).
-     */
-    public void setSeriesOutlinePaint(Paint paint) {
-        this.seriesOutlinePaint = paint;
-        fireChangeEvent();
-    }
 
     /**
      * Returns the paint for the specified series.
@@ -740,14 +674,10 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      * @return The paint (never {@code null}).
      */
     public Paint getSeriesOutlinePaint(int series) {
-        // return the override, if there is one...
-        if (this.seriesOutlinePaint != null) {
-            return this.seriesOutlinePaint;
-        }
         // otherwise look up the paint list
         Paint result = this.seriesOutlinePaintList.getPaint(series);
         if (result == null) {
-            result = this.baseSeriesOutlinePaint;
+            result = this.defaultSeriesOutlinePaint;
         }
         return result;
     }
@@ -770,43 +700,23 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      *
      * @return The paint (never {@code null}).
      */
-    public Paint getBaseSeriesOutlinePaint() {
-        return this.baseSeriesOutlinePaint;
+    public Paint getDefaultSeriesOutlinePaint() {
+        return this.defaultSeriesOutlinePaint;
     }
 
     /**
-     * Sets the base series paint.
+     * Sets the base series paint and sends a change event to all registered
+     * listeners.
      *
      * @param paint  the paint ({@code null} not permitted).
      */
-    public void setBaseSeriesOutlinePaint(Paint paint) {
+    public void setDefaultSeriesOutlinePaint(Paint paint) {
         Args.nullNotPermitted(paint, "paint");
-        this.baseSeriesOutlinePaint = paint;
+        this.defaultSeriesOutlinePaint = paint;
         fireChangeEvent();
     }
 
     //// SERIES OUTLINE STROKE /////////////////////
-
-    /**
-     * Returns the outline stroke for ALL series in the plot.
-     *
-     * @return The stroke (possibly {@code null}).
-     */
-    public Stroke getSeriesOutlineStroke() {
-        return this.seriesOutlineStroke;
-    }
-
-    /**
-     * Sets the outline stroke for ALL series in the plot. If this is set to
-     * {@code null}, then a list of paints is used instead (to allow
-     * different colors to be used for each series).
-     *
-     * @param stroke  the stroke ({@code null} permitted).
-     */
-    public void setSeriesOutlineStroke(Stroke stroke) {
-        this.seriesOutlineStroke = stroke;
-        fireChangeEvent();
-    }
 
     /**
      * Returns the stroke for the specified series.
@@ -816,16 +726,10 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      * @return The stroke (never {@code null}).
      */
     public Stroke getSeriesOutlineStroke(int series) {
-
-        // return the override, if there is one...
-        if (this.seriesOutlineStroke != null) {
-            return this.seriesOutlineStroke;
-        }
-
         // otherwise look up the paint list
         Stroke result = this.seriesOutlineStrokeList.getStroke(series);
         if (result == null) {
-            result = this.baseSeriesOutlineStroke;
+            result = this.defaultSeriesOutlineStroke;
         }
         return result;
 
@@ -844,23 +748,24 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
     }
 
     /**
-     * Returns the base series stroke. This is used when no other stroke is
+     * Returns the default series stroke. This is used when no other stroke is
      * available.
      *
      * @return The stroke (never {@code null}).
      */
-    public Stroke getBaseSeriesOutlineStroke() {
-        return this.baseSeriesOutlineStroke;
+    public Stroke getDefaultSeriesOutlineStroke() {
+        return this.defaultSeriesOutlineStroke;
     }
 
     /**
-     * Sets the base series stroke.
+     * Sets the default series stroke and sends a change event to all 
+     * registered listeners.
      *
      * @param stroke  the stroke ({@code null} not permitted).
      */
-    public void setBaseSeriesOutlineStroke(Stroke stroke) {
+    public void setDefaultSeriesOutlineStroke(Stroke stroke) {
         Args.nullNotPermitted(stroke, "stroke");
-        this.baseSeriesOutlineStroke = stroke;
+        this.defaultSeriesOutlineStroke = stroke;
         fireChangeEvent();
     }
 
@@ -1494,35 +1399,25 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
         if (!ShapeUtils.equal(this.legendItemShape, that.legendItemShape)) {
             return false;
         }
-        if (!PaintUtils.equal(this.seriesPaint, that.seriesPaint)) {
-            return false;
-        }
         if (!this.seriesPaintList.equals(that.seriesPaintList)) {
             return false;
         }
-        if (!PaintUtils.equal(this.baseSeriesPaint, that.baseSeriesPaint)) {
-            return false;
-        }
-        if (!PaintUtils.equal(this.seriesOutlinePaint,
-                that.seriesOutlinePaint)) {
+        if (!PaintUtils.equal(this.defaultSeriesPaint, that.defaultSeriesPaint)) {
             return false;
         }
         if (!this.seriesOutlinePaintList.equals(that.seriesOutlinePaintList)) {
             return false;
         }
-        if (!PaintUtils.equal(this.baseSeriesOutlinePaint,
-                that.baseSeriesOutlinePaint)) {
+        if (!PaintUtils.equal(this.defaultSeriesOutlinePaint,
+                that.defaultSeriesOutlinePaint)) {
             return false;
         }
-        if (!Objects.equals(this.seriesOutlineStroke, that.seriesOutlineStroke)) {
-            return false;
-        }
+
         if (!this.seriesOutlineStrokeList.equals(
                 that.seriesOutlineStrokeList)) {
             return false;
         }
-        if (!this.baseSeriesOutlineStroke.equals(
-                that.baseSeriesOutlineStroke)) {
+        if (!this.defaultSeriesOutlineStroke.equals(that.defaultSeriesOutlineStroke)) {
             return false;
         }
         if (!this.labelFont.equals(that.labelFont)) {
@@ -1574,12 +1469,9 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
         stream.defaultWriteObject();
 
         SerialUtils.writeShape(this.legendItemShape, stream);
-        SerialUtils.writePaint(this.seriesPaint, stream);
-        SerialUtils.writePaint(this.baseSeriesPaint, stream);
-        SerialUtils.writePaint(this.seriesOutlinePaint, stream);
-        SerialUtils.writePaint(this.baseSeriesOutlinePaint, stream);
-        SerialUtils.writeStroke(this.seriesOutlineStroke, stream);
-        SerialUtils.writeStroke(this.baseSeriesOutlineStroke, stream);
+        SerialUtils.writePaint(this.defaultSeriesPaint, stream);
+        SerialUtils.writePaint(this.defaultSeriesOutlinePaint, stream);
+        SerialUtils.writeStroke(this.defaultSeriesOutlineStroke, stream);
         SerialUtils.writePaint(this.labelPaint, stream);
         SerialUtils.writePaint(this.axisLinePaint, stream);
         SerialUtils.writeStroke(this.axisLineStroke, stream);
@@ -1598,12 +1490,9 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
         stream.defaultReadObject();
 
         this.legendItemShape = SerialUtils.readShape(stream);
-        this.seriesPaint = SerialUtils.readPaint(stream);
-        this.baseSeriesPaint = SerialUtils.readPaint(stream);
-        this.seriesOutlinePaint = SerialUtils.readPaint(stream);
-        this.baseSeriesOutlinePaint = SerialUtils.readPaint(stream);
-        this.seriesOutlineStroke = SerialUtils.readStroke(stream);
-        this.baseSeriesOutlineStroke = SerialUtils.readStroke(stream);
+        this.defaultSeriesPaint = SerialUtils.readPaint(stream);
+        this.defaultSeriesOutlinePaint = SerialUtils.readPaint(stream);
+        this.defaultSeriesOutlineStroke = SerialUtils.readStroke(stream);
         this.labelPaint = SerialUtils.readPaint(stream);
         this.axisLinePaint = SerialUtils.readPaint(stream);
         this.axisLineStroke = SerialUtils.readStroke(stream);

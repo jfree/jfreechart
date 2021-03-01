@@ -120,14 +120,6 @@ public class SpiderWebPlotTest {
         p2.setLegendItemShape(new Rectangle(1, 2, 3, 4));
         assertTrue(p1.equals(p2));
 
-        // seriesPaint
-        p1.setSeriesPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
-                3.0f, 4.0f, Color.WHITE));
-        assertFalse(p1.equals(p2));
-        p2.setSeriesPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
-                3.0f, 4.0f, Color.WHITE));
-        assertTrue(p1.equals(p2));
-
         // seriesPaintList
         p1.setSeriesPaint(1, new GradientPaint(1.0f, 2.0f, Color.YELLOW,
                 3.0f, 4.0f, Color.WHITE));
@@ -136,19 +128,11 @@ public class SpiderWebPlotTest {
                 3.0f, 4.0f, Color.WHITE));
         assertTrue(p1.equals(p2));
 
-        // baseSeriesPaint
-        p1.setBaseSeriesPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
+        // defaultSeriesPaint
+        p1.setDefaultSeriesPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.BLACK));
         assertFalse(p1.equals(p2));
-        p2.setBaseSeriesPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
-                3.0f, 4.0f, Color.BLACK));
-        assertTrue(p1.equals(p2));
-
-        // seriesOutlinePaint
-        p1.setSeriesOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
-                3.0f, 4.0f, Color.BLACK));
-        assertFalse(p1.equals(p2));
-        p2.setSeriesOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
+        p2.setDefaultSeriesPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.BLACK));
         assertTrue(p1.equals(p2));
 
@@ -160,20 +144,15 @@ public class SpiderWebPlotTest {
                 3.0f, 4.0f, Color.GREEN));
         assertTrue(p1.equals(p2));
 
-        // baseSeriesOutlinePaint
-        p1.setBaseSeriesOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.CYAN,
+        // defaultSeriesOutlinePaint
+        p1.setDefaultSeriesOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.CYAN,
                 3.0f, 4.0f, Color.GREEN));
         assertFalse(p1.equals(p2));
-        p2.setBaseSeriesOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.CYAN,
+        p2.setDefaultSeriesOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.CYAN,
                 3.0f, 4.0f, Color.GREEN));
         assertTrue(p1.equals(p2));
 
-        // seriesOutlineStroke
         BasicStroke s = new BasicStroke(1.23f);
-        p1.setSeriesOutlineStroke(s);
-        assertFalse(p1.equals(p2));
-        p2.setSeriesOutlineStroke(s);
-        assertTrue(p1.equals(p2));
 
         // seriesOutlineStrokeList
         p1.setSeriesOutlineStroke(1, s);
@@ -181,10 +160,10 @@ public class SpiderWebPlotTest {
         p2.setSeriesOutlineStroke(1, s);
         assertTrue(p1.equals(p2));
 
-        // baseSeriesOutlineStroke
-        p1.setBaseSeriesOutlineStroke(s);
+        // defaultSeriesOutlineStroke
+        p1.setDefaultSeriesOutlineStroke(s);
         assertFalse(p1.equals(p2));
-        p2.setBaseSeriesOutlineStroke(s);
+        p2.setDefaultSeriesOutlineStroke(s);
         assertTrue(p1.equals(p2));
 
         // webFilled
