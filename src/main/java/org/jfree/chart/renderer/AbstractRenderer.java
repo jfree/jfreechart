@@ -70,10 +70,10 @@ import org.jfree.chart.plot.DrawingSupplier;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.internal.Args;
 import org.jfree.chart.internal.BooleanList;
+import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.internal.HashUtils;
 import org.jfree.chart.internal.PaintList;
 import org.jfree.chart.internal.SerialUtils;
-import org.jfree.chart.internal.StrokeList;
 import org.jfree.chart.text.TextAnchor;
 import org.jfree.chart.internal.PaintUtils;
 import org.jfree.chart.internal.ShapeUtils;
@@ -176,7 +176,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     private transient Paint defaultOutlinePaint;
 
     /** The stroke list. */
-    private StrokeList strokeList;
+    private Map<Integer, Stroke> seriesStrokes;
 
     /**
      * A flag that controls whether or not the strokeList is auto-populated
@@ -188,7 +188,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     private transient Stroke defaultStroke;
 
     /** The outline stroke list. */
-    private StrokeList outlineStrokeList;
+    private Map<Integer, Stroke> seriesOutlineStrokes;
 
     /** The base outline stroke. */
     private transient Stroke defaultOutlineStroke;
@@ -326,11 +326,11 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
         this.defaultOutlinePaint = DEFAULT_OUTLINE_PAINT;
         this.autoPopulateSeriesOutlinePaint = false;
 
-        this.strokeList = new StrokeList();
+        this.seriesStrokes = new HashMap<>();
         this.defaultStroke = DEFAULT_STROKE;
         this.autoPopulateSeriesStroke = true;
 
-        this.outlineStrokeList = new StrokeList();
+        this.seriesOutlineStrokes = new HashMap<>();
         this.defaultOutlineStroke = DEFAULT_OUTLINE_STROKE;
         this.autoPopulateSeriesOutlineStroke = false;
 
@@ -1163,7 +1163,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #setSeriesStroke(int, Stroke)
      */
     public Stroke getSeriesStroke(int series) {
-        return this.strokeList.getStroke(series);
+        return this.seriesStrokes.get(series);
     }
 
     /**
@@ -1190,7 +1190,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #getSeriesStroke(int)
      */
     public void setSeriesStroke(int series, Stroke stroke, boolean notify) {
-        this.strokeList.setStroke(series, stroke);
+        this.seriesStrokes.put(series, stroke);
         if (notify) {
             fireChangeEvent();
         }
@@ -1203,7 +1203,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @param notify  notify listeners?
      */
     public void clearSeriesStrokes(boolean notify) {
-        this.strokeList.clear();
+        this.seriesStrokes.clear();
         if (notify) {
             fireChangeEvent();
         }
@@ -1325,7 +1325,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #setSeriesOutlineStroke(int, Stroke)
      */
     public Stroke getSeriesOutlineStroke(int series) {
-        return this.outlineStrokeList.getStroke(series);
+        return this.seriesOutlineStrokes.get(series);
     }
 
     /**
@@ -1352,7 +1352,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #getSeriesOutlineStroke(int)
      */
     public void setSeriesOutlineStroke(int series, Stroke stroke, boolean notify) {
-        this.outlineStrokeList.setStroke(series, stroke);
+        this.seriesOutlineStrokes.put(series, stroke);
         if (notify) {
             fireChangeEvent();
         }
@@ -2747,13 +2747,13 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
                 that.defaultOutlinePaint)) {
             return false;
         }
-        if (!Objects.equals(this.strokeList, that.strokeList)) {
+        if (!Objects.equals(this.seriesStrokes, that.seriesStrokes)) {
             return false;
         }
         if (!Objects.equals(this.defaultStroke, that.defaultStroke)) {
             return false;
         }
-        if (!Objects.equals(this.outlineStrokeList, that.outlineStrokeList)) {
+        if (!Objects.equals(this.seriesOutlineStrokes, that.seriesOutlineStrokes)) {
             return false;
         }
         if (!Objects.equals(this.defaultOutlineStroke, that.defaultOutlineStroke)) {
@@ -2849,9 +2849,9 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
         result = HashUtils.hashCode(result, this.defaultFillPaint);
         result = HashUtils.hashCode(result, this.outlinePaintList);
         result = HashUtils.hashCode(result, this.defaultOutlinePaint);
-        result = HashUtils.hashCode(result, this.strokeList);
+        result = HashUtils.hashCode(result, this.seriesStrokes);
         result = HashUtils.hashCode(result, this.defaultStroke);
-        result = HashUtils.hashCode(result, this.outlineStrokeList);
+        result = HashUtils.hashCode(result, this.seriesOutlineStrokes);
         result = HashUtils.hashCode(result, this.defaultOutlineStroke);
         // shapeList
         // baseShape
@@ -2909,15 +2909,14 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
         // 'baseOutlinePaint' : immutable, no need to clone reference
 
         // 'stroke' : immutable, no need to clone reference
-        if (this.strokeList != null) {
-            clone.strokeList = (StrokeList) this.strokeList.clone();
+        if (this.seriesStrokes != null) {
+            clone.seriesStrokes = CloneUtils.cloneMapValues(this.seriesStrokes);
         }
         // 'baseStroke' : immutable, no need to clone reference
 
         // 'outlineStroke' : immutable, no need to clone reference
-        if (this.outlineStrokeList != null) {
-            clone.outlineStrokeList
-                = (StrokeList) this.outlineStrokeList.clone();
+        if (this.seriesOutlineStrokes != null) {
+            clone.seriesOutlineStrokes = CloneUtils.cloneMapValues(this.seriesOutlineStrokes);
         }
         // 'baseOutlineStroke' : immutable, no need to clone reference
 

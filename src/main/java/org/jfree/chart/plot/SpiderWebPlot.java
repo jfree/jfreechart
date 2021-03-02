@@ -61,8 +61,10 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import org.jfree.chart.legend.LegendItem;
@@ -81,8 +83,8 @@ import org.jfree.chart.internal.Args;
 import org.jfree.chart.api.Rotation;
 import org.jfree.chart.internal.SerialUtils;
 import org.jfree.chart.internal.ShapeUtils;
-import org.jfree.chart.internal.StrokeList;
 import org.jfree.chart.api.TableOrder;
+import org.jfree.chart.internal.CloneUtils;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.DatasetUtils;
@@ -198,7 +200,7 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
     private transient Paint defaultSeriesOutlinePaint;
 
     /** The series outline stroke list. */
-    private StrokeList seriesOutlineStrokeList;
+    private Map<Integer, Stroke> seriesOutlineStrokes;
 
     /** The default series outline stroke. */
     private transient Stroke defaultSeriesOutlineStroke;
@@ -270,7 +272,7 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
         this.seriesOutlinePaintList = new PaintList();
         this.defaultSeriesOutlinePaint = DEFAULT_OUTLINE_PAINT;
 
-        this.seriesOutlineStrokeList = new StrokeList();
+        this.seriesOutlineStrokes = new HashMap<>();
         this.defaultSeriesOutlineStroke = DEFAULT_OUTLINE_STROKE;
 
         this.labelFont = DEFAULT_LABEL_FONT;
@@ -726,8 +728,7 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      * @return The stroke (never {@code null}).
      */
     public Stroke getSeriesOutlineStroke(int series) {
-        // otherwise look up the paint list
-        Stroke result = this.seriesOutlineStrokeList.getStroke(series);
+        Stroke result = this.seriesOutlineStrokes.get(series);
         if (result == null) {
             result = this.defaultSeriesOutlineStroke;
         }
@@ -743,7 +744,7 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      * @param stroke  the stroke ({@code null} permitted).
      */
     public void setSeriesOutlineStroke(int series, Stroke stroke) {
-        this.seriesOutlineStrokeList.setStroke(series, stroke);
+        this.seriesOutlineStrokes.put(series, stroke);
         fireChangeEvent();
     }
 
@@ -1413,8 +1414,7 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
             return false;
         }
 
-        if (!this.seriesOutlineStrokeList.equals(
-                that.seriesOutlineStrokeList)) {
+        if (!this.seriesOutlineStrokes.equals(that.seriesOutlineStrokes)) {
             return false;
         }
         if (!this.defaultSeriesOutlineStroke.equals(that.defaultSeriesOutlineStroke)) {
@@ -1453,8 +1453,7 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
         clone.seriesPaintList = (PaintList) this.seriesPaintList.clone();
         clone.seriesOutlinePaintList
                 = (PaintList) this.seriesOutlinePaintList.clone();
-        clone.seriesOutlineStrokeList
-                = (StrokeList) this.seriesOutlineStrokeList.clone();
+        clone.seriesOutlineStrokes = CloneUtils.cloneMapValues(this.seriesOutlineStrokes);
         return clone;
     }
 
