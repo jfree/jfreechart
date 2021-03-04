@@ -272,6 +272,9 @@ public class SpiderWebPlotTest {
     @Test
     public void testSerialization() {
         SpiderWebPlot p1 = new SpiderWebPlot(new DefaultCategoryDataset<String, String>());
+        p1.setSeriesPaint(1, new GradientPaint(1.0f, 2.0f, Color.BLUE, 3.0f, 4.0f, Color.RED));
+        p1.setSeriesOutlinePaint(1, new GradientPaint(4.0f, 3.0f, Color.BLUE, 2.0f, 1.0f, Color.RED));
+        p1.setSeriesOutlineStroke(1, new BasicStroke(9.0f));
         SpiderWebPlot p2 = TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }

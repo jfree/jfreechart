@@ -77,7 +77,6 @@ import org.jfree.chart.labels.CategoryToolTipGenerator;
 import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
 import org.jfree.chart.api.RectangleInsets;
 import org.jfree.chart.urls.CategoryURLGenerator;
-import org.jfree.chart.internal.PaintList;
 import org.jfree.chart.internal.PaintUtils;
 import org.jfree.chart.internal.Args;
 import org.jfree.chart.api.Rotation;
@@ -188,19 +187,19 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
     private transient Shape legendItemShape;
 
     /** The series paint list. */
-    private PaintList seriesPaintList;
+    private transient Map<Integer, Paint> seriesPaints;
 
     /** The default series paint. */
     private transient Paint defaultSeriesPaint;
 
     /** The series outline paint list. */
-    private PaintList seriesOutlinePaintList;
+    private transient Map<Integer, Paint> seriesOutlinePaints;
 
     /** The default series outline paint. */
     private transient Paint defaultSeriesOutlinePaint;
 
     /** The series outline stroke list. */
-    private Map<Integer, Stroke> seriesOutlineStrokes;
+    private transient Map<Integer, Stroke> seriesOutlineStrokes;
 
     /** The default series outline stroke. */
     private transient Stroke defaultSeriesOutlineStroke;
@@ -266,10 +265,10 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
         this.direction = Rotation.CLOCKWISE;
         this.maxValue = DEFAULT_MAX_VALUE;
 
-        this.seriesPaintList = new PaintList();
+        this.seriesPaints = new HashMap<>();
         this.defaultSeriesPaint = null;
 
-        this.seriesOutlinePaintList = new PaintList();
+        this.seriesOutlinePaints = new HashMap<>();
         this.defaultSeriesOutlinePaint = DEFAULT_OUTLINE_PAINT;
 
         this.seriesOutlineStrokes = new HashMap<>();
@@ -613,12 +612,12 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      */
     public Paint getSeriesPaint(int series) {
         // look up the paint list
-        Paint result = this.seriesPaintList.getPaint(series);
+        Paint result = this.seriesPaints.get(series);
         if (result == null) {
             DrawingSupplier supplier = getDrawingSupplier();
             if (supplier != null) {
                 Paint p = supplier.getNextPaint();
-                this.seriesPaintList.setPaint(series, p);
+                this.seriesPaints.put(series, p);
                 result = p;
             } else {
                 result = this.defaultSeriesPaint;
@@ -637,7 +636,7 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      * @see #getSeriesPaint(int)
      */
     public void setSeriesPaint(int series, Paint paint) {
-        this.seriesPaintList.setPaint(series, paint);
+        this.seriesPaints.put(series, paint);
         fireChangeEvent();
     }
 
@@ -677,7 +676,7 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      */
     public Paint getSeriesOutlinePaint(int series) {
         // otherwise look up the paint list
-        Paint result = this.seriesOutlinePaintList.getPaint(series);
+        Paint result = this.seriesOutlinePaints.get(series);
         if (result == null) {
             result = this.defaultSeriesOutlinePaint;
         }
@@ -692,7 +691,7 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      * @param paint  the paint ({@code null} permitted).
      */
     public void setSeriesOutlinePaint(int series, Paint paint) {
-        this.seriesOutlinePaintList.setPaint(series, paint);
+        this.seriesOutlinePaints.put(series, paint);
         fireChangeEvent();
     }
 
@@ -1082,8 +1081,7 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
                 drawRadarPoly(g2, radarArea, centre, info, series, catCount,
                         headH, headW);
             }
-        }
-        else {
+        } else {
             drawNoDataMessage(g2, area);
         }
         g2.setClip(savedClip);
@@ -1127,12 +1125,9 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      * @param headH the data point height
      * @param headW the data point width
      */
-    protected void drawRadarPoly(Graphics2D g2,
-                                 Rectangle2D plotArea,
-                                 Point2D centre,
-                                 PlotRenderingInfo info,
-                                 int series, int catCount,
-                                 double headH, double headW) {
+    protected void drawRadarPoly(Graphics2D g2, Rectangle2D plotArea,
+            Point2D centre, PlotRenderingInfo info, int series, int catCount,
+            double headH, double headW) {
 
         Polygon polygon = new Polygon();
 
@@ -1191,8 +1186,7 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
                         if (this.dataExtractOrder == TableOrder.BY_ROW) {
                             row = series;
                             col = cat;
-                        }
-                        else {
+                        } else {
                             row = cat;
                             col = series;
                         }
@@ -1258,8 +1252,7 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
         Number value = null;
         if (this.dataExtractOrder == TableOrder.BY_ROW) {
             value = this.dataset.getValue(series, cat);
-        }
-        else if (this.dataExtractOrder == TableOrder.BY_COLUMN) {
+        } else if (this.dataExtractOrder == TableOrder.BY_COLUMN) {
             value = this.dataset.getValue(cat, series);
         }
         return value;
@@ -1283,8 +1276,7 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
         if (this.dataExtractOrder == TableOrder.BY_ROW) {
             // if series are in rows, then the categories are the column keys
             label = this.labelGenerator.generateColumnLabel(this.dataset, cat);
-        }
-        else {
+        } else {
             // if series are in columns, then the categories are the row keys
             label = this.labelGenerator.generateRowLabel(this.dataset, cat);
         }
@@ -1298,8 +1290,7 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
 
         Composite saveComposite = g2.getComposite();
 
-        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,
-                1.0f));
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
         g2.setPaint(getLabelPaint());
         g2.setFont(getLabelFont());
         g2.drawString(label, (float) labelLocation.getX(),
@@ -1318,10 +1309,7 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
      * @return The location for a label.
      */
     protected Point2D calculateLabelLocation(Rectangle2D labelBounds,
-                                             double ascent,
-                                             Rectangle2D plotArea,
-                                             double startAngle)
-    {
+            double ascent, Rectangle2D plotArea, double startAngle) {
         Arc2D arc1 = new Arc2D.Double(plotArea, startAngle, 0, Arc2D.OPEN);
         Point2D point1 = arc1.getEndPoint();
 
@@ -1400,13 +1388,13 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
         if (!ShapeUtils.equal(this.legendItemShape, that.legendItemShape)) {
             return false;
         }
-        if (!this.seriesPaintList.equals(that.seriesPaintList)) {
+        if (!PaintUtils.equal(this.seriesPaints, that.seriesPaints)) {
             return false;
         }
         if (!PaintUtils.equal(this.defaultSeriesPaint, that.defaultSeriesPaint)) {
             return false;
         }
-        if (!this.seriesOutlinePaintList.equals(that.seriesOutlinePaintList)) {
+        if (!PaintUtils.equal(this.seriesOutlinePaints, that.seriesOutlinePaints)) {
             return false;
         }
         if (!PaintUtils.equal(this.defaultSeriesOutlinePaint,
@@ -1450,9 +1438,8 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
     public Object clone() throws CloneNotSupportedException {
         SpiderWebPlot clone = (SpiderWebPlot) super.clone();
         clone.legendItemShape = ShapeUtils.clone(this.legendItemShape);
-        clone.seriesPaintList = (PaintList) this.seriesPaintList.clone();
-        clone.seriesOutlinePaintList
-                = (PaintList) this.seriesOutlinePaintList.clone();
+        clone.seriesPaints = CloneUtils.cloneMapValues(this.seriesPaints);
+        clone.seriesOutlinePaints = CloneUtils.cloneMapValues(this.seriesOutlinePaints);
         clone.seriesOutlineStrokes = CloneUtils.cloneMapValues(this.seriesOutlineStrokes);
         return clone;
     }
@@ -1468,8 +1455,11 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
         stream.defaultWriteObject();
 
         SerialUtils.writeShape(this.legendItemShape, stream);
+        SerialUtils.writeMapOfPaint(this.seriesPaints, stream);
         SerialUtils.writePaint(this.defaultSeriesPaint, stream);
+        SerialUtils.writeMapOfPaint(this.seriesOutlinePaints, stream);
         SerialUtils.writePaint(this.defaultSeriesOutlinePaint, stream);
+        SerialUtils.writeMapOfStroke(this.seriesOutlineStrokes, stream);
         SerialUtils.writeStroke(this.defaultSeriesOutlineStroke, stream);
         SerialUtils.writePaint(this.labelPaint, stream);
         SerialUtils.writePaint(this.axisLinePaint, stream);
@@ -1489,8 +1479,11 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
         stream.defaultReadObject();
 
         this.legendItemShape = SerialUtils.readShape(stream);
+        this.seriesPaints = SerialUtils.readMapOfPaint(stream);
         this.defaultSeriesPaint = SerialUtils.readPaint(stream);
+        this.seriesOutlinePaints = SerialUtils.readMapOfPaint(stream);
         this.defaultSeriesOutlinePaint = SerialUtils.readPaint(stream);
+        this.seriesOutlineStrokes = SerialUtils.readMapOfStroke(stream);
         this.defaultSeriesOutlineStroke = SerialUtils.readStroke(stream);
         this.labelPaint = SerialUtils.readPaint(stream);
         this.axisLinePaint = SerialUtils.readPaint(stream);

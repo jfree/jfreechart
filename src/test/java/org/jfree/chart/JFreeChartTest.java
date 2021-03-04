@@ -266,7 +266,7 @@ public class JFreeChartTest implements ChartChangeListener {
      * Serialize a bar chart, restore it, and check for equality.
      */
     @Test
-    public void testSerialization3() {
+    public void testSerialization2() {
 
         // row keys...
         String series1 = "First";
@@ -321,10 +321,10 @@ public class JFreeChartTest implements ChartChangeListener {
     }
 
     /**
-     * Serialize a time seroes chart, restore it, and check for equality.
+     * Serialize a time series chart, restore it, and check for equality.
      */
     @Test
-    public void testSerialization4() {
+    public void testSerialization3() {
         RegularTimePeriod t = new Day();
         TimeSeries<String> series = new TimeSeries<>("Series 1");
         series.add(t, 36.4);

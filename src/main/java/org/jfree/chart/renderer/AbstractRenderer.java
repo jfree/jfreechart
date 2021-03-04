@@ -72,7 +72,6 @@ import org.jfree.chart.internal.Args;
 import org.jfree.chart.internal.BooleanList;
 import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.internal.HashUtils;
-import org.jfree.chart.internal.PaintList;
 import org.jfree.chart.internal.SerialUtils;
 import org.jfree.chart.text.TextAnchor;
 import org.jfree.chart.internal.PaintUtils;
@@ -139,8 +138,8 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     /** The default visibility for each series in the legend. */
     private boolean defaultSeriesVisibleInLegend;
 
-    /** The paint list. */
-    private PaintList paintList;
+    /** The paint for each series. */
+    private transient Map<Integer, Paint> seriesPaints;
 
     /**
      * A flag that controls whether or not the paintList is auto-populated
@@ -152,7 +151,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     private transient Paint defaultPaint;
 
     /** The fill paint list. */
-    private PaintList fillPaintList;
+    private transient Map<Integer, Paint> seriesFillPaints;
 
     /**
      * A flag that controls whether or not the fillPaintList is auto-populated
@@ -164,7 +163,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     private transient Paint defaultFillPaint;
 
     /** The outline paint list. */
-    private PaintList outlinePaintList;
+    private transient Map<Integer, Paint> outlinePaints;
 
     /**
      * A flag that controls whether or not the outlinePaintList is
@@ -224,7 +223,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     private Font defaultItemLabelFont;
 
     /** The item label paint list (one paint per series). */
-    private PaintList itemLabelPaintList;
+    private transient Map<Integer, Paint> itemLabelPaints;
 
     /** The base item label paint. */
     private transient Paint defaultItemLabelPaint;
@@ -280,7 +279,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     /**
      * The per series legend text paint settings.
      */
-    private PaintList legendTextPaint;
+    private transient Map<Integer, Paint> legendTextPaints;
 
     /**
      * The default paint for the legend text items (if this is
@@ -314,15 +313,15 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
         this.seriesVisibleInLegendList = new BooleanList();
         this.defaultSeriesVisibleInLegend = true;
 
-        this.paintList = new PaintList();
+        this.seriesPaints = new HashMap<>();
         this.defaultPaint = DEFAULT_PAINT;
         this.autoPopulateSeriesPaint = true;
 
-        this.fillPaintList = new PaintList();
+        this.seriesFillPaints = new HashMap<>();
         this.defaultFillPaint = Color.WHITE;
         this.autoPopulateSeriesFillPaint = false;
 
-        this.outlinePaintList = new PaintList();
+        this.outlinePaints = new HashMap<>();
         this.defaultOutlinePaint = DEFAULT_OUTLINE_PAINT;
         this.autoPopulateSeriesOutlinePaint = false;
 
@@ -344,7 +343,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
         this.itemLabelFontMap = new HashMap<>();
         this.defaultItemLabelFont = new Font("SansSerif", Font.PLAIN, 10);
 
-        this.itemLabelPaintList = new PaintList();
+        this.itemLabelPaints = new HashMap<>();
         this.defaultItemLabelPaint = Color.BLACK;
 
         this.positiveItemLabelPositionMap = new HashMap<>();
@@ -368,7 +367,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
         this.legendTextFontMap = new HashMap<>();
         this.defaultLegendTextFont = null;
 
-        this.legendTextPaint = new PaintList();
+        this.legendTextPaints = new HashMap<>();
         this.defaultLegendTextPaint = null;
 
         this.listenerList = new EventListenerList();
@@ -698,7 +697,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #setSeriesPaint(int, Paint)
      */
     public Paint getSeriesPaint(int series) {
-        return this.paintList.getPaint(series);
+        return this.seriesPaints.get(series);
     }
 
     /**
@@ -725,7 +724,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #getSeriesPaint(int)
      */
     public void setSeriesPaint(int series, Paint paint, boolean notify) {
-        this.paintList.setPaint(series, paint);
+        this.seriesPaints.put(series, paint);
         if (notify) {
             fireChangeEvent();
         }
@@ -738,7 +737,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @param notify  notify listeners?
      */
     public void clearSeriesPaints(boolean notify) {
-        this.paintList.clear();
+        this.seriesPaints.clear();
         if (notify) {
             fireChangeEvent();
         }
@@ -769,7 +768,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     }
 
     /**
-     * Sets the default paint and, if requested, sends a
+     * Sets the default series paint and, if requested, sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param paint  the paint ({@code null} not permitted).
@@ -859,7 +858,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #setSeriesFillPaint(int, Paint)
      */
     public Paint getSeriesFillPaint(int series) {
-        return this.fillPaintList.getPaint(series);
+        return this.seriesFillPaints.get(series);
     }
 
     /**
@@ -886,7 +885,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #getSeriesFillPaint(int)
      */
     public void setSeriesFillPaint(int series, Paint paint, boolean notify) {
-        this.fillPaintList.setPaint(series, paint);
+        this.seriesFillPaints.put(series, paint);
         if (notify) {
             fireChangeEvent();
         }
@@ -1012,7 +1011,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #setSeriesOutlinePaint(int, Paint)
      */
     public Paint getSeriesOutlinePaint(int series) {
-        return this.outlinePaintList.getPaint(series);
+        return this.outlinePaints.get(series);
     }
 
     /**
@@ -1039,7 +1038,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #getSeriesOutlinePaint(int)
      */
     public void setSeriesOutlinePaint(int series, Paint paint, boolean notify) {
-        this.outlinePaintList.setPaint(series, paint);
+        this.outlinePaints.put(series, paint);
         if (notify) {
             fireChangeEvent();
         }
@@ -1819,7 +1818,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #setSeriesItemLabelPaint(int, Paint)
      */
     public Paint getSeriesItemLabelPaint(int series) {
-        return this.itemLabelPaintList.getPaint(series);
+        return this.itemLabelPaints.get(series);
     }
 
     /**
@@ -1846,9 +1845,8 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      *
      * @see #getSeriesItemLabelPaint(int)
      */
-    public void setSeriesItemLabelPaint(int series, Paint paint,
-                                        boolean notify) {
-        this.itemLabelPaintList.setPaint(series, paint);
+    public void setSeriesItemLabelPaint(int series, Paint paint, boolean notify) {
+        this.itemLabelPaints.put(series, paint);
         if (notify) {
             fireChangeEvent();
         }
@@ -2445,7 +2443,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #lookupLegendTextPaint(int)
      */
     public Paint getLegendTextPaint(int series) {
-        return this.legendTextPaint.getPaint(series);
+        return this.legendTextPaints.get(series);
     }
 
     /**
@@ -2456,7 +2454,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @param paint  the paint ({@code null} permitted).
      */
     public void setLegendTextPaint(int series, Paint paint) {
-        this.legendTextPaint.setPaint(series, paint);
+        this.legendTextPaints.put(series, paint);
         fireChangeEvent();
     }
 
@@ -2520,109 +2518,114 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      */
     protected Point2D calculateLabelAnchorPoint(ItemLabelAnchor anchor,
             double x, double y, PlotOrientation orientation) {
+        Args.nullNotPermitted(anchor, "anchor");
         Point2D result = null;
-        if (anchor == ItemLabelAnchor.CENTER) {
-            result = new Point2D.Double(x, y);
-        }
-        else if (anchor == ItemLabelAnchor.INSIDE1) {
-            result = new Point2D.Double(x + OPP * this.itemLabelAnchorOffset,
-                    y - ADJ * this.itemLabelAnchorOffset);
-        }
-        else if (anchor == ItemLabelAnchor.INSIDE2) {
-            result = new Point2D.Double(x + ADJ * this.itemLabelAnchorOffset,
-                    y - OPP * this.itemLabelAnchorOffset);
-        }
-        else if (anchor == ItemLabelAnchor.INSIDE3) {
-            result = new Point2D.Double(x + this.itemLabelAnchorOffset, y);
-        }
-        else if (anchor == ItemLabelAnchor.INSIDE4) {
-            result = new Point2D.Double(x + ADJ * this.itemLabelAnchorOffset,
-                    y + OPP * this.itemLabelAnchorOffset);
-        }
-        else if (anchor == ItemLabelAnchor.INSIDE5) {
-            result = new Point2D.Double(x + OPP * this.itemLabelAnchorOffset,
-                    y + ADJ * this.itemLabelAnchorOffset);
-        }
-        else if (anchor == ItemLabelAnchor.INSIDE6) {
-            result = new Point2D.Double(x, y + this.itemLabelAnchorOffset);
-        }
-        else if (anchor == ItemLabelAnchor.INSIDE7) {
-            result = new Point2D.Double(x - OPP * this.itemLabelAnchorOffset,
-                    y + ADJ * this.itemLabelAnchorOffset);
-        }
-        else if (anchor == ItemLabelAnchor.INSIDE8) {
-            result = new Point2D.Double(x - ADJ * this.itemLabelAnchorOffset,
-                    y + OPP * this.itemLabelAnchorOffset);
-        }
-        else if (anchor == ItemLabelAnchor.INSIDE9) {
-            result = new Point2D.Double(x - this.itemLabelAnchorOffset, y);
-        }
-        else if (anchor == ItemLabelAnchor.INSIDE10) {
-            result = new Point2D.Double(x - ADJ * this.itemLabelAnchorOffset,
-                    y - OPP * this.itemLabelAnchorOffset);
-        }
-        else if (anchor == ItemLabelAnchor.INSIDE11) {
-            result = new Point2D.Double(x - OPP * this.itemLabelAnchorOffset,
-                    y - ADJ * this.itemLabelAnchorOffset);
-        }
-        else if (anchor == ItemLabelAnchor.INSIDE12) {
-            result = new Point2D.Double(x, y - this.itemLabelAnchorOffset);
-        }
-        else if (anchor == ItemLabelAnchor.OUTSIDE1) {
-            result = new Point2D.Double(
-                    x + 2.0 * OPP * this.itemLabelAnchorOffset,
-                    y - 2.0 * ADJ * this.itemLabelAnchorOffset);
-        }
-        else if (anchor == ItemLabelAnchor.OUTSIDE2) {
-            result = new Point2D.Double(
-                    x + 2.0 * ADJ * this.itemLabelAnchorOffset,
-                    y - 2.0 * OPP * this.itemLabelAnchorOffset);
-        }
-        else if (anchor == ItemLabelAnchor.OUTSIDE3) {
-            result = new Point2D.Double(x + 2.0 * this.itemLabelAnchorOffset,
-                    y);
-        }
-        else if (anchor == ItemLabelAnchor.OUTSIDE4) {
-            result = new Point2D.Double(
-                    x + 2.0 * ADJ * this.itemLabelAnchorOffset,
-                    y + 2.0 * OPP * this.itemLabelAnchorOffset);
-        }
-        else if (anchor == ItemLabelAnchor.OUTSIDE5) {
-            result = new Point2D.Double(
-                    x + 2.0 * OPP * this.itemLabelAnchorOffset,
-                    y + 2.0 * ADJ * this.itemLabelAnchorOffset);
-        }
-        else if (anchor == ItemLabelAnchor.OUTSIDE6) {
-            result = new Point2D.Double(x,
-                    y + 2.0 * this.itemLabelAnchorOffset);
-        }
-        else if (anchor == ItemLabelAnchor.OUTSIDE7) {
-            result = new Point2D.Double(
-                    x - 2.0 * OPP * this.itemLabelAnchorOffset,
-                    y + 2.0 * ADJ * this.itemLabelAnchorOffset);
-        }
-        else if (anchor == ItemLabelAnchor.OUTSIDE8) {
-            result = new Point2D.Double(
-                    x - 2.0 * ADJ * this.itemLabelAnchorOffset,
-                    y + 2.0 * OPP * this.itemLabelAnchorOffset);
-        }
-        else if (anchor == ItemLabelAnchor.OUTSIDE9) {
-            result = new Point2D.Double(x - 2.0 * this.itemLabelAnchorOffset,
-                    y);
-        }
-        else if (anchor == ItemLabelAnchor.OUTSIDE10) {
-            result = new Point2D.Double(
-                    x - 2.0 * ADJ * this.itemLabelAnchorOffset,
-                    y - 2.0 * OPP * this.itemLabelAnchorOffset);
-        }
-        else if (anchor == ItemLabelAnchor.OUTSIDE11) {
-            result = new Point2D.Double(
-                x - 2.0 * OPP * this.itemLabelAnchorOffset,
-                y - 2.0 * ADJ * this.itemLabelAnchorOffset);
-        }
-        else if (anchor == ItemLabelAnchor.OUTSIDE12) {
-            result = new Point2D.Double(x,
-                    y - 2.0 * this.itemLabelAnchorOffset);
+        switch (anchor) {
+            case CENTER:
+                result = new Point2D.Double(x, y);
+                break;
+            case INSIDE1:
+                result = new Point2D.Double(x + OPP * this.itemLabelAnchorOffset,
+                        y - ADJ * this.itemLabelAnchorOffset);
+                break;
+            case INSIDE2:
+                result = new Point2D.Double(x + ADJ * this.itemLabelAnchorOffset,
+                        y - OPP * this.itemLabelAnchorOffset);
+                break;
+            case INSIDE3:
+                result = new Point2D.Double(x + this.itemLabelAnchorOffset, y);
+                break;
+            case INSIDE4:
+                result = new Point2D.Double(x + ADJ * this.itemLabelAnchorOffset,
+                        y + OPP * this.itemLabelAnchorOffset);
+                break;
+            case INSIDE5:
+                result = new Point2D.Double(x + OPP * this.itemLabelAnchorOffset,
+                        y + ADJ * this.itemLabelAnchorOffset);
+                break;
+            case INSIDE6:
+                result = new Point2D.Double(x, y + this.itemLabelAnchorOffset);
+                break;
+            case INSIDE7:
+                result = new Point2D.Double(x - OPP * this.itemLabelAnchorOffset,
+                        y + ADJ * this.itemLabelAnchorOffset);
+                break;
+            case INSIDE8:
+                result = new Point2D.Double(x - ADJ * this.itemLabelAnchorOffset,
+                        y + OPP * this.itemLabelAnchorOffset);
+                break;
+            case INSIDE9:
+                result = new Point2D.Double(x - this.itemLabelAnchorOffset, y);
+                break;
+            case INSIDE10:
+                result = new Point2D.Double(x - ADJ * this.itemLabelAnchorOffset,
+                        y - OPP * this.itemLabelAnchorOffset);
+                break;
+            case INSIDE11:
+                result = new Point2D.Double(x - OPP * this.itemLabelAnchorOffset,
+                        y - ADJ * this.itemLabelAnchorOffset);
+                break;
+            case INSIDE12:
+                result = new Point2D.Double(x, y - this.itemLabelAnchorOffset);
+                break;
+            case OUTSIDE1:
+                result = new Point2D.Double(
+                        x + 2.0 * OPP * this.itemLabelAnchorOffset,
+                        y - 2.0 * ADJ * this.itemLabelAnchorOffset);
+                break;
+            case OUTSIDE2:
+                result = new Point2D.Double(
+                        x + 2.0 * ADJ * this.itemLabelAnchorOffset,
+                        y - 2.0 * OPP * this.itemLabelAnchorOffset);
+                break;
+            case OUTSIDE3:
+                result = new Point2D.Double(x + 2.0 * this.itemLabelAnchorOffset,
+                        y);
+                break;
+            case OUTSIDE4:
+                result = new Point2D.Double(
+                        x + 2.0 * ADJ * this.itemLabelAnchorOffset,
+                        y + 2.0 * OPP * this.itemLabelAnchorOffset);
+                break;
+            case OUTSIDE5:
+                result = new Point2D.Double(
+                        x + 2.0 * OPP * this.itemLabelAnchorOffset,
+                        y + 2.0 * ADJ * this.itemLabelAnchorOffset);
+                break;
+            case OUTSIDE6:
+                result = new Point2D.Double(x,
+                        y + 2.0 * this.itemLabelAnchorOffset);
+                break;
+            case OUTSIDE7:
+                result = new Point2D.Double(
+                        x - 2.0 * OPP * this.itemLabelAnchorOffset,
+                        y + 2.0 * ADJ * this.itemLabelAnchorOffset);
+                break;
+            case OUTSIDE8:
+                result = new Point2D.Double(
+                        x - 2.0 * ADJ * this.itemLabelAnchorOffset,
+                        y + 2.0 * OPP * this.itemLabelAnchorOffset);
+                break;
+            case OUTSIDE9:
+                result = new Point2D.Double(x - 2.0 * this.itemLabelAnchorOffset,
+                        y);
+                break;
+            case OUTSIDE10:
+                result = new Point2D.Double(
+                        x - 2.0 * ADJ * this.itemLabelAnchorOffset,
+                        y - 2.0 * OPP * this.itemLabelAnchorOffset);
+                break;
+            case OUTSIDE11:
+                result = new Point2D.Double(
+                        x - 2.0 * OPP * this.itemLabelAnchorOffset,
+                        y - 2.0 * ADJ * this.itemLabelAnchorOffset);
+                break;
+            case OUTSIDE12:
+                result = new Point2D.Double(x,
+                        y - 2.0 * this.itemLabelAnchorOffset);
+                break;
+            default:
+                throw new IllegalStateException("Unexpected anchor value.");
         }
         return result;
     }
@@ -2727,20 +2730,20 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
                 != that.defaultSeriesVisibleInLegend) {
             return false;
         }
-        if (!Objects.equals(this.paintList, that.paintList)) {
+        if (!PaintUtils.equal(this.seriesPaints, that.seriesPaints)) {
             return false;
         }
         if (!PaintUtils.equal(this.defaultPaint, that.defaultPaint)) {
             return false;
         }
-        if (!Objects.equals(this.fillPaintList, that.fillPaintList)) {
+        if (!PaintUtils.equal(this.seriesFillPaints, that.seriesFillPaints)) {
             return false;
         }
         if (!PaintUtils.equal(this.defaultFillPaint,
                 that.defaultFillPaint)) {
             return false;
         }
-        if (!Objects.equals(this.outlinePaintList, that.outlinePaintList)) {
+        if (!PaintUtils.equal(this.outlinePaints, that.outlinePaints)) {
             return false;
         }
         if (!PaintUtils.equal(this.defaultOutlinePaint,
@@ -2778,7 +2781,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
             return false;
         }
 
-        if (!Objects.equals(this.itemLabelPaintList, that.itemLabelPaintList)) {
+        if (!PaintUtils.equal(this.itemLabelPaints, that.itemLabelPaints)) {
             return false;
         }
         if (!PaintUtils.equal(this.defaultItemLabelPaint,
@@ -2821,7 +2824,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
         if (!Objects.equals(this.defaultLegendTextFont, that.defaultLegendTextFont)) {
             return false;
         }
-        if (!Objects.equals(this.legendTextPaint, that.legendTextPaint)) {
+        if (!PaintUtils.equal(this.legendTextPaints, that.legendTextPaints)) {
             return false;
         }
         if (!PaintUtils.equal(this.defaultLegendTextPaint,
@@ -2843,11 +2846,11 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
         result = HashUtils.hashCode(result, this.defaultSeriesVisible);
         result = HashUtils.hashCode(result, this.seriesVisibleInLegendList);
         result = HashUtils.hashCode(result, this.defaultSeriesVisibleInLegend);
-        result = HashUtils.hashCode(result, this.paintList);
+        result = HashUtils.hashCode(result, this.seriesPaints);
         result = HashUtils.hashCode(result, this.defaultPaint);
-        result = HashUtils.hashCode(result, this.fillPaintList);
+        result = HashUtils.hashCode(result, this.seriesFillPaints);
         result = HashUtils.hashCode(result, this.defaultFillPaint);
-        result = HashUtils.hashCode(result, this.outlinePaintList);
+        result = HashUtils.hashCode(result, this.outlinePaints);
         result = HashUtils.hashCode(result, this.defaultOutlinePaint);
         result = HashUtils.hashCode(result, this.seriesStrokes);
         result = HashUtils.hashCode(result, this.defaultStroke);
@@ -2894,17 +2897,17 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
         }
 
         // 'paint' : immutable, no need to clone reference
-        if (this.paintList != null) {
-            clone.paintList = (PaintList) this.paintList.clone();
+        if (this.seriesPaints != null) {
+            clone.seriesPaints = new HashMap<>(this.seriesPaints);
         }
         // 'basePaint' : immutable, no need to clone reference
 
-        if (this.fillPaintList != null) {
-            clone.fillPaintList = (PaintList) this.fillPaintList.clone();
+        if (this.seriesFillPaints != null) {
+            clone.seriesFillPaints = new HashMap<>(this.seriesFillPaints);
         }
         // 'outlinePaint' : immutable, no need to clone reference
-        if (this.outlinePaintList != null) {
-            clone.outlinePaintList = (PaintList) this.outlinePaintList.clone();
+        if (this.outlinePaints != null) {
+            clone.outlinePaints = new HashMap<>(this.outlinePaints);
         }
         // 'baseOutlinePaint' : immutable, no need to clone reference
 
@@ -2941,9 +2944,8 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
         // 'baseItemLabelFont' : immutable, no need to clone reference
 
         // 'itemLabelPaint' : immutable, no need to clone reference
-        if (this.itemLabelPaintList != null) {
-            clone.itemLabelPaintList
-                = (PaintList) this.itemLabelPaintList.clone();
+        if (this.itemLabelPaints != null) {
+            clone.itemLabelPaints  = new HashMap<>(this.itemLabelPaints);
         }
         // 'baseItemLabelPaint' : immutable, no need to clone reference
 
@@ -2969,8 +2971,8 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
             // Font objects are immutable so just shallow copy the map
             clone.legendTextFontMap = new HashMap<>(this.legendTextFontMap);
         }
-        if (this.legendTextPaint != null) {
-            clone.legendTextPaint = (PaintList) this.legendTextPaint.clone();
+        if (this.legendTextPaints != null) {
+            clone.legendTextPaints = new HashMap<>(this.legendTextPaints);
         }
         clone.listenerList = new EventListenerList();
         clone.event = null;
@@ -2986,14 +2988,19 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      */
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
+        SerialUtils.writeMapOfPaint(this.seriesPaints, stream);
         SerialUtils.writePaint(this.defaultPaint, stream);
+        SerialUtils.writeMapOfPaint(this.seriesFillPaints, stream);
         SerialUtils.writePaint(this.defaultFillPaint, stream);
+        SerialUtils.writeMapOfPaint(this.outlinePaints, stream);
         SerialUtils.writePaint(this.defaultOutlinePaint, stream);
         SerialUtils.writeStroke(this.defaultStroke, stream);
         SerialUtils.writeStroke(this.defaultOutlineStroke, stream);
         SerialUtils.writeShape(this.defaultShape, stream);
+        SerialUtils.writeMapOfPaint(this.itemLabelPaints, stream);        
         SerialUtils.writePaint(this.defaultItemLabelPaint, stream);
         SerialUtils.writeShape(this.defaultLegendShape, stream);
+        SerialUtils.writeMapOfPaint(this.legendTextPaints, stream);        
         SerialUtils.writePaint(this.defaultLegendTextPaint, stream);
     }
 
@@ -3008,14 +3015,19 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     private void readObject(ObjectInputStream stream)
         throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
+        this.seriesPaints = SerialUtils.readMapOfPaint(stream);
         this.defaultPaint = SerialUtils.readPaint(stream);
+        this.seriesFillPaints = SerialUtils.readMapOfPaint(stream);
         this.defaultFillPaint = SerialUtils.readPaint(stream);
+        this.outlinePaints = SerialUtils.readMapOfPaint(stream);
         this.defaultOutlinePaint = SerialUtils.readPaint(stream);
         this.defaultStroke = SerialUtils.readStroke(stream);
         this.defaultOutlineStroke = SerialUtils.readStroke(stream);
         this.defaultShape = SerialUtils.readShape(stream);
+        this.itemLabelPaints = SerialUtils.readMapOfPaint(stream);
         this.defaultItemLabelPaint = SerialUtils.readPaint(stream);
         this.defaultLegendShape = SerialUtils.readShape(stream);
+        this.legendTextPaints = SerialUtils.readMapOfPaint(stream);
         this.defaultLegendTextPaint = SerialUtils.readPaint(stream);
 
         // listeners are not restored automatically, but storage must be
