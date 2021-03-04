@@ -175,7 +175,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     private transient Paint defaultOutlinePaint;
 
     /** The stroke list. */
-    private Map<Integer, Stroke> seriesStrokes;
+    private transient Map<Integer, Stroke> seriesStrokes;
 
     /**
      * A flag that controls whether or not the strokeList is auto-populated
@@ -187,7 +187,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     private transient Stroke defaultStroke;
 
     /** The outline stroke list. */
-    private Map<Integer, Stroke> seriesOutlineStrokes;
+    private transient Map<Integer, Stroke> seriesOutlineStrokes;
 
     /** The base outline stroke. */
     private transient Stroke defaultOutlineStroke;
@@ -2994,7 +2994,9 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
         SerialUtils.writePaint(this.defaultFillPaint, stream);
         SerialUtils.writeMapOfPaint(this.outlinePaints, stream);
         SerialUtils.writePaint(this.defaultOutlinePaint, stream);
+        SerialUtils.writeMapOfStroke(this.seriesStrokes, stream);
         SerialUtils.writeStroke(this.defaultStroke, stream);
+        SerialUtils.writeMapOfStroke(this.seriesOutlineStrokes, stream);
         SerialUtils.writeStroke(this.defaultOutlineStroke, stream);
         SerialUtils.writeShape(this.defaultShape, stream);
         SerialUtils.writeMapOfPaint(this.itemLabelPaints, stream);        
@@ -3021,7 +3023,9 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
         this.defaultFillPaint = SerialUtils.readPaint(stream);
         this.outlinePaints = SerialUtils.readMapOfPaint(stream);
         this.defaultOutlinePaint = SerialUtils.readPaint(stream);
+        this.seriesStrokes = SerialUtils.readMapOfStroke(stream);
         this.defaultStroke = SerialUtils.readStroke(stream);
+        this.seriesOutlineStrokes = SerialUtils.readMapOfStroke(stream);
         this.defaultOutlineStroke = SerialUtils.readStroke(stream);
         this.defaultShape = SerialUtils.readShape(stream);
         this.itemLabelPaints = SerialUtils.readMapOfPaint(stream);

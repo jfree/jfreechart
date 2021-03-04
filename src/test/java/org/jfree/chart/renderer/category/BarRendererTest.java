@@ -36,6 +36,7 @@
 
 package org.jfree.chart.renderer.category;
 
+import java.awt.BasicStroke;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -204,6 +205,8 @@ public class BarRendererTest {
     @Test
     public void testSerialization() {
         BarRenderer r1 = new BarRenderer();
+        r1.setSeriesOutlineStroke(1, new BasicStroke(9.0f));
+        r1.setDefaultOutlineStroke(new BasicStroke(4.5f));
         BarRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
