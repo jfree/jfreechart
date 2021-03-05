@@ -202,40 +202,5 @@ public class HashUtils {
         int h = (obj != null ? obj.hashCode() : 0);
         return 37 * pre + h;
     }
-    
-    /**
-     * Computes a hash code for a {@link BooleanList}.  In the latest version
-     * of JCommon, the {@link BooleanList} class should implement the hashCode()
-     * method correctly, but we compute it here anyway so that we can work with 
-     * older versions of JCommon (back to 1.0.0).
-     * 
-     * @param pre  the seed value.
-     * @param list  the list ({@code null} permitted).
-     * 
-     * @return The hash code.
-     */
-    public static int hashCode(int pre, BooleanList list) {
-        if (list == null) {
-            return pre;
-        }
-        int result = 127;
-        int size = list.size();
-        result = HashUtils.hashCode(result, size);
-        
-        // for efficiency, we just use the first, last and middle items to
-        // compute a hashCode...
-        if (size > 0) {
-            result = HashUtils.hashCode(result, list.getBoolean(0));
-            if (size > 1) {
-                result = HashUtils.hashCode(result, 
-                        list.getBoolean(size - 1));
-                if (size > 2) {
-                    result = HashUtils.hashCode(result, 
-                            list.getBoolean(size / 2));
-                }
-            }
-        }
-        return 37 * pre + result;
-    }
 
 }

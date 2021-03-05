@@ -53,8 +53,9 @@ import java.awt.geom.Rectangle2D;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import org.jfree.chart.legend.LegendItem;
@@ -71,7 +72,6 @@ import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.PolarPlot;
 import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.urls.XYURLGenerator;
-import org.jfree.chart.internal.BooleanList;
 import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.internal.ObjectList;
 import org.jfree.chart.internal.Args;
@@ -90,7 +90,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
     private PolarPlot plot;
 
     /** Flags that control whether the renderer fills each series or not. */
-    private BooleanList seriesFilled;
+    private Map<Integer, Boolean> seriesFilledMap;
 
     /**
      * Flag that controls whether an outline is drawn for filled series or
@@ -176,7 +176,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * Creates a new instance of DefaultPolarItemRenderer
      */
     public DefaultPolarItemRenderer() {
-        this.seriesFilled = new BooleanList();
+        this.seriesFilledMap = new HashMap<>();
         this.drawOutlineWhenFilled = true;
         this.fillComposite = AlphaComposite.getInstance(
                 AlphaComposite.SRC_OVER, 0.3f);
@@ -344,7 +344,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      */
     public boolean isSeriesFilled(int series) {
         boolean result = false;
-        Boolean b = this.seriesFilled.getBoolean(series);
+        Boolean b = this.seriesFilledMap.get(series);
         if (b != null) {
             result = b;
         }
@@ -358,7 +358,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * @param filled  the flag.
      */
     public void setSeriesFilled(int series, boolean filled) {
-        this.seriesFilled.setBoolean(series, filled);
+        this.seriesFilledMap.put(series, filled);
     }
 
     /**
@@ -876,7 +876,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
             return false;
         }
         DefaultPolarItemRenderer that = (DefaultPolarItemRenderer) obj;
-        if (!this.seriesFilled.equals(that.seriesFilled)) {
+        if (!this.seriesFilledMap.equals(that.seriesFilledMap)) {
             return false;
         }
         if (this.drawOutlineWhenFilled != that.drawOutlineWhenFilled) {
@@ -929,7 +929,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
         if (this.legendLine != null) {
             clone.legendLine = ShapeUtils.clone(this.legendLine);
         }
-        clone.seriesFilled = (BooleanList) this.seriesFilled.clone();
+        clone.seriesFilledMap = new HashMap<>(this.seriesFilledMap);
         clone.toolTipGeneratorList
                 = (ObjectList) this.toolTipGeneratorList.clone();
         if (clone.baseToolTipGenerator instanceof PublicCloneable) {

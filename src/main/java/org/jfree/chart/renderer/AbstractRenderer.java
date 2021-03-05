@@ -69,7 +69,6 @@ import org.jfree.chart.legend.LegendTitle;
 import org.jfree.chart.plot.DrawingSupplier;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.internal.Args;
-import org.jfree.chart.internal.BooleanList;
 import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.internal.HashUtils;
 import org.jfree.chart.internal.SerialUtils;
@@ -124,7 +123,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     public static final Paint DEFAULT_VALUE_LABEL_PAINT = Color.BLACK;
 
     /** A list of flags that controls whether or not each series is visible. */
-    private BooleanList seriesVisibleList;
+    private Map<Integer, Boolean> seriesVisibleMap;
 
     /** The default visibility for all series. */
     private boolean defaultSeriesVisible;
@@ -133,7 +132,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * A list of flags that controls whether or not each series is visible in
      * the legend.
      */
-    private BooleanList seriesVisibleInLegendList;
+    private Map<Integer, Boolean> seriesVisibleInLegendMap;
 
     /** The default visibility for each series in the legend. */
     private boolean defaultSeriesVisibleInLegend;
@@ -211,7 +210,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     private transient Shape defaultShape;
 
     /** Visibility of the item labels PER series. */
-    private BooleanList itemLabelsVisibleList;
+    private Map<Integer, Boolean> seriesItemLabelsVisibleMap;
 
     /** The base item labels visible. */
     private boolean defaultItemLabelsVisible;
@@ -247,7 +246,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * Flags that control whether or not entities are generated for each
      * series.  This will be overridden by 'createEntities'.
      */
-    private BooleanList createEntitiesList;
+    private Map<Integer, Boolean> seriesCreateEntitiesMap;
 
     /**
      * The default flag that controls whether or not entities are generated.
@@ -307,10 +306,10 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * Default constructor.
      */
     public AbstractRenderer() {
-        this.seriesVisibleList = new BooleanList();
+        this.seriesVisibleMap = new HashMap<>();
         this.defaultSeriesVisible = true;
 
-        this.seriesVisibleInLegendList = new BooleanList();
+        this.seriesVisibleInLegendMap = new HashMap<>();
         this.defaultSeriesVisibleInLegend = true;
 
         this.seriesPaintMap = new HashMap<>();
@@ -337,7 +336,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
         this.defaultShape = DEFAULT_SHAPE;
         this.autoPopulateSeriesShape = true;
 
-        this.itemLabelsVisibleList = new BooleanList();
+        this.seriesItemLabelsVisibleMap = new HashMap<>();
         this.defaultItemLabelsVisible = false;
 
         this.itemLabelFontMap = new HashMap<>();
@@ -354,7 +353,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
         this.defaultNegativeItemLabelPosition = new ItemLabelPosition(
                 ItemLabelAnchor.OUTSIDE6, TextAnchor.TOP_CENTER);
 
-        this.createEntitiesList = new BooleanList();
+        this.seriesCreateEntitiesMap = new HashMap<>();
         this.defaultCreateEntities = true;
 
         this.defaultEntityRadius = 3;
@@ -435,7 +434,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      */
     public boolean isSeriesVisible(int series) {
         boolean result = this.defaultSeriesVisible;
-        Boolean b = this.seriesVisibleList.getBoolean(series);
+        Boolean b = this.seriesVisibleMap.get(series);
         if (b != null) {
             result = b;
         }
@@ -452,7 +451,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #setSeriesVisible(int, Boolean)
      */
     public Boolean getSeriesVisible(int series) {
-        return this.seriesVisibleList.getBoolean(series);
+        return this.seriesVisibleMap.get(series);
     }
 
     /**
@@ -480,7 +479,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #getSeriesVisible(int)
      */
     public void setSeriesVisible(int series, Boolean visible, boolean notify) {
-        this.seriesVisibleList.setBoolean(series, visible);
+        this.seriesVisibleMap.put(series, visible);
         if (notify) {
             // we create an event with a special flag set...the purpose of
             // this is to communicate to the plot (the default receiver of
@@ -548,7 +547,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      */
     public boolean isSeriesVisibleInLegend(int series) {
         boolean result = this.defaultSeriesVisibleInLegend;
-        Boolean b = this.seriesVisibleInLegendList.getBoolean(series);
+        Boolean b = this.seriesVisibleInLegendMap.get(series);
         if (b != null) {
             result = b;
         }
@@ -568,7 +567,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #setSeriesVisibleInLegend(int, Boolean)
      */
     public Boolean getSeriesVisibleInLegend(int series) {
-        return this.seriesVisibleInLegendList.getBoolean(series);
+        return this.seriesVisibleInLegendMap.get(series);
     }
 
     /**
@@ -595,9 +594,8 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      *
      * @see #getSeriesVisibleInLegend(int)
      */
-    public void setSeriesVisibleInLegend(int series, Boolean visible,
-                                         boolean notify) {
-        this.seriesVisibleInLegendList.setBoolean(series, visible);
+    public void setSeriesVisibleInLegend(int series, Boolean visible, boolean notify) {
+        this.seriesVisibleInLegendMap.put(series, visible);
         if (notify) {
             fireChangeEvent();
         }
@@ -1598,7 +1596,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @return A boolean.
      */
     public boolean isSeriesItemLabelsVisible(int series) {
-        Boolean b = this.itemLabelsVisibleList.getBoolean(series);
+        Boolean b = this.seriesItemLabelsVisibleMap.get(series);
         if (b == null) {
             return this.defaultItemLabelsVisible;
         }
@@ -1636,9 +1634,8 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @param notify  a flag that controls whether or not listeners are
      *                notified.
      */
-    public void setSeriesItemLabelsVisible(int series, Boolean visible,
-                                           boolean notify) {
-        this.itemLabelsVisibleList.setBoolean(series, visible);
+    public void setSeriesItemLabelsVisible(int series, Boolean visible, boolean notify) {
+        this.seriesItemLabelsVisibleMap.put(series, visible);
         if (notify) {
             fireChangeEvent();
         }
@@ -2167,7 +2164,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #setSeriesCreateEntities(int, Boolean)
      */
     public Boolean getSeriesCreateEntities(int series) {
-        return this.createEntitiesList.getBoolean(series);
+        return this.seriesCreateEntitiesMap.get(series);
     }
 
     /**
@@ -2196,7 +2193,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      */
     public void setSeriesCreateEntities(int series, Boolean create,
                                         boolean notify) {
-        this.createEntitiesList.setBoolean(series, create);
+        this.seriesCreateEntitiesMap.put(series, create);
         if (notify) {
             fireChangeEvent();
         }
@@ -2716,14 +2713,13 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
         if (this.defaultEntityRadius != that.defaultEntityRadius) {
             return false;
         }
-        if (!this.seriesVisibleList.equals(that.seriesVisibleList)) {
+        if (!this.seriesVisibleMap.equals(that.seriesVisibleMap)) {
             return false;
         }
         if (this.defaultSeriesVisible != that.defaultSeriesVisible) {
             return false;
         }
-        if (!this.seriesVisibleInLegendList.equals(
-                that.seriesVisibleInLegendList)) {
+        if (!this.seriesVisibleInLegendMap.equals(that.seriesVisibleInLegendMap)) {
             return false;
         }
         if (this.defaultSeriesVisibleInLegend
@@ -2784,7 +2780,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
         if (!ShapeUtils.equal(this.defaultShape, that.defaultShape)) {
             return false;
         }
-        if (!Objects.equals(this.itemLabelsVisibleList, that.itemLabelsVisibleList)) {
+        if (!Objects.equals(this.seriesItemLabelsVisibleMap, that.seriesItemLabelsVisibleMap)) {
             return false;
         }
         if (!Objects.equals(this.defaultItemLabelsVisible, that.defaultItemLabelsVisible)) {
@@ -2821,7 +2817,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
         if (this.itemLabelAnchorOffset != that.itemLabelAnchorOffset) {
             return false;
         }
-        if (!Objects.equals(this.createEntitiesList, that.createEntitiesList)) {
+        if (!Objects.equals(this.seriesCreateEntitiesMap, that.seriesCreateEntitiesMap)) {
             return false;
         }
         if (this.defaultCreateEntities != that.defaultCreateEntities) {
@@ -2857,9 +2853,9 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     @Override
     public int hashCode() {
         int result = 193;
-        result = HashUtils.hashCode(result, this.seriesVisibleList);
+        result = HashUtils.hashCode(result, this.seriesVisibleMap);
         result = HashUtils.hashCode(result, this.defaultSeriesVisible);
-        result = HashUtils.hashCode(result, this.seriesVisibleInLegendList);
+        result = HashUtils.hashCode(result, this.seriesVisibleInLegendMap);
         result = HashUtils.hashCode(result, this.defaultSeriesVisibleInLegend);
         result = HashUtils.hashCode(result, this.seriesPaintMap);
         result = HashUtils.hashCode(result, this.defaultPaint);
@@ -2873,7 +2869,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
         result = HashUtils.hashCode(result, this.defaultOutlineStroke);
         // shapeList
         // baseShape
-        result = HashUtils.hashCode(result, this.itemLabelsVisibleList);
+        result = HashUtils.hashCode(result, this.seriesItemLabelsVisibleMap);
         result = HashUtils.hashCode(result, this.defaultItemLabelsVisible);
         // itemLabelFontList
         // baseItemLabelFont
@@ -2901,14 +2897,12 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     protected Object clone() throws CloneNotSupportedException {
         AbstractRenderer clone = (AbstractRenderer) super.clone();
 
-        if (this.seriesVisibleList != null) {
-            clone.seriesVisibleList
-                    = (BooleanList) this.seriesVisibleList.clone();
+        if (this.seriesVisibleMap != null) {
+            clone.seriesVisibleMap = new HashMap<>(this.seriesVisibleMap);
         }
 
-        if (this.seriesVisibleInLegendList != null) {
-            clone.seriesVisibleInLegendList
-                    = (BooleanList) this.seriesVisibleInLegendList.clone();
+        if (this.seriesVisibleInLegendMap != null) {
+            clone.seriesVisibleInLegendMap = new HashMap<>(this.seriesVisibleInLegendMap);
         }
 
         // 'paint' : immutable, no need to clone reference
@@ -2945,10 +2939,9 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
             clone.defaultShape = ShapeUtils.clone(this.defaultShape);
         }
 
-        // 'itemLabelsVisible' : immutable, no need to clone reference
-        if (this.itemLabelsVisibleList != null) {
-            clone.itemLabelsVisibleList
-                = (BooleanList) this.itemLabelsVisibleList.clone();
+        // 'seriesItemLabelsVisibleMap' : immutable, no need to clone reference
+        if (this.seriesItemLabelsVisibleMap != null) {
+            clone.seriesItemLabelsVisibleMap = new HashMap<>(this.seriesItemLabelsVisibleMap);
         }
         // 'basePaint' : immutable, no need to clone reference
 
@@ -2974,9 +2967,8 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
                     = new HashMap<>(this.negativeItemLabelPositionMap);
         }
 
-        if (this.createEntitiesList != null) {
-            clone.createEntitiesList
-                    = (BooleanList) this.createEntitiesList.clone();
+        if (this.seriesCreateEntitiesMap != null) {
+            clone.seriesCreateEntitiesMap = new HashMap<>(this.seriesCreateEntitiesMap);
         }
 
         if (this.seriesLegendShapes != null) {

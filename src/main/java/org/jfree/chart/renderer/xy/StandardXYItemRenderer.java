@@ -56,6 +56,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.jfree.chart.legend.LegendItem;
 import org.jfree.chart.axis.ValueAxis;
@@ -69,7 +71,6 @@ import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.api.RectangleEdge;
 import org.jfree.chart.urls.XYURLGenerator;
-import org.jfree.chart.internal.BooleanList;
 import org.jfree.chart.internal.Args;
 import org.jfree.chart.api.PublicCloneable;
 import org.jfree.chart.internal.SerialUtils;
@@ -131,7 +132,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
      * A table of flags that control (per series) whether or not shapes are
      * filled.
      */
-    private BooleanList seriesShapesFilled;
+    private Map<Integer, Boolean> seriesShapesFilledMap;
 
     /** The default value returned by the getShapeFilled() method. */
     private boolean baseShapesFilled;
@@ -209,7 +210,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
             this.plotDiscontinuous = true;
         }
 
-        this.seriesShapesFilled = new BooleanList();
+        this.seriesShapesFilledMap = new HashMap<>();
         this.baseShapesFilled = true;
         this.legendLine = new Line2D.Double(-7.0, 0.0, 7.0, 0.0);
         this.drawSeriesLineAsPath = false;
@@ -261,11 +262,10 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
     public boolean getItemShapeFilled(int series, int item) {
 
         // otherwise look up the paint table
-        Boolean flag = this.seriesShapesFilled.getBoolean(series);
+        Boolean flag = this.seriesShapesFilledMap.get(series);
         if (flag != null) {
             return flag;
-        }
-        else {
+        } else {
             return this.baseShapesFilled;
         }
     }
@@ -279,7 +279,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
      * @return A boolean.
      */
     public Boolean getSeriesShapesFilled(int series) {
-        return this.seriesShapesFilled.getBoolean(series);
+        return this.seriesShapesFilledMap.get(series);
     }
 
     /**
@@ -292,7 +292,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
      * @see #getSeriesShapesFilled(int)
      */
     public void setSeriesShapesFilled(int series, Boolean flag) {
-        this.seriesShapesFilled.setBoolean(series, flag);
+        this.seriesShapesFilledMap.put(series, flag);
         fireChangeEvent();
     }
 
@@ -889,7 +889,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
         if (this.gapThreshold != that.gapThreshold) {
             return false;
         }
-        if (!this.seriesShapesFilled.equals(that.seriesShapesFilled)) {
+        if (!this.seriesShapesFilledMap.equals(that.seriesShapesFilledMap)) {
             return false;
         }
         if (this.baseShapesFilled != that.baseShapesFilled) {
@@ -915,8 +915,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
     @Override
     public Object clone() throws CloneNotSupportedException {
         StandardXYItemRenderer clone = (StandardXYItemRenderer) super.clone();
-        clone.seriesShapesFilled
-                = (BooleanList) this.seriesShapesFilled.clone();
+        clone.seriesShapesFilledMap = new HashMap<>(this.seriesShapesFilledMap);
         clone.legendLine = ShapeUtils.clone(this.legendLine);
         return clone;
     }

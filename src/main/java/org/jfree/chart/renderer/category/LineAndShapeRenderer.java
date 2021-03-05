@@ -47,6 +47,8 @@ import java.awt.Stroke;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import org.jfree.chart.legend.LegendItem;
@@ -56,7 +58,6 @@ import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.chart.internal.BooleanList;
 import org.jfree.chart.api.PublicCloneable;
 import org.jfree.chart.internal.ShapeUtils;
 import org.jfree.data.category.CategoryDataset;
@@ -80,7 +81,7 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
      * A table of flags that control (per series) whether or not lines are
      * visible.
      */
-    private BooleanList seriesLinesVisible;
+    private Map<Integer, Boolean> seriesLinesVisibleMap;
 
     /**
      * A flag indicating whether or not lines are drawn between non-null
@@ -92,7 +93,7 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
      * A table of flags that control (per series) whether or not shapes are
      * visible.
      */
-    private BooleanList seriesShapesVisible;
+    private Map<Integer, Boolean> seriesShapesVisibleMap;
 
     /** The default value returned by the getShapeVisible() method. */
     private boolean defaultShapesVisible;
@@ -101,7 +102,7 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
      * A table of flags that control (per series) whether or not shapes are
      * filled.
      */
-    private BooleanList seriesShapesFilled;
+    private Map<Integer, Boolean> seriesShapesFilledMap;
 
     /** The default value returned by the getShapeFilled() method. */
     private boolean defaultShapesFilled;
@@ -152,11 +153,11 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
      */
     public LineAndShapeRenderer(boolean lines, boolean shapes) {
         super();
-        this.seriesLinesVisible = new BooleanList();
+        this.seriesLinesVisibleMap = new HashMap<>();
         this.defaultLinesVisible = lines;
-        this.seriesShapesVisible = new BooleanList();
+        this.seriesShapesVisibleMap = new HashMap<>();
         this.defaultShapesVisible = shapes;
-        this.seriesShapesFilled = new BooleanList();
+        this.seriesShapesFilledMap = new HashMap<>();
         this.defaultShapesFilled = true;
         this.useFillPaint = false;
         this.drawOutlines = true;
@@ -195,7 +196,7 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
      * @see #setSeriesLinesVisible(int, Boolean)
      */
     public Boolean getSeriesLinesVisible(int series) {
-        return this.seriesLinesVisible.getBoolean(series);
+        return this.seriesLinesVisibleMap.get(series);
     }
 
     /**
@@ -208,7 +209,7 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
      * @see #getSeriesLinesVisible(int)
      */
     public void setSeriesLinesVisible(int series, Boolean flag) {
-        this.seriesLinesVisible.setBoolean(series, flag);
+        this.seriesLinesVisibleMap.put(series, flag);
         fireChangeEvent();
     }
 
@@ -279,7 +280,7 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
      * @see #setSeriesShapesVisible(int, Boolean)
      */
     public Boolean getSeriesShapesVisible(int series) {
-        return this.seriesShapesVisible.getBoolean(series);
+        return this.seriesShapesVisibleMap.get(series);
     }
 
     /**
@@ -305,7 +306,7 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
      * @see #getSeriesShapesVisible(int)
      */
     public void setSeriesShapesVisible(int series, Boolean flag) {
-        this.seriesShapesVisible.setBoolean(series, flag);
+        this.seriesShapesVisibleMap.put(series, flag);
         fireChangeEvent();
     }
 
@@ -414,7 +415,7 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
      * @return A boolean.
      */
     public boolean getSeriesShapesFilled(int series) {
-        Boolean flag = this.seriesShapesFilled.getBoolean(series);
+        Boolean flag = this.seriesShapesFilledMap.get(series);
         if (flag != null) {
             return flag;
         }
@@ -431,7 +432,7 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
      * @see #getSeriesShapesFilled(int)
      */
     public void setSeriesShapesFilled(int series, Boolean filled) {
-        this.seriesShapesFilled.setBoolean(series, filled);
+        this.seriesShapesFilledMap.put(series, filled);
         fireChangeEvent();
     }
 
@@ -813,16 +814,16 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
         if (this.defaultLinesVisible != that.defaultLinesVisible) {
             return false;
         }
-        if (!Objects.equals(this.seriesLinesVisible, that.seriesLinesVisible)) {
+        if (!Objects.equals(this.seriesLinesVisibleMap, that.seriesLinesVisibleMap)) {
             return false;
         }
         if (this.defaultShapesVisible != that.defaultShapesVisible) {
             return false;
         }
-        if (!Objects.equals(this.seriesShapesVisible, that.seriesShapesVisible)) {
+        if (!Objects.equals(this.seriesShapesVisibleMap, that.seriesShapesVisibleMap)) {
             return false;
         }
-        if (!Objects.equals(this.seriesShapesFilled, that.seriesShapesFilled)) {
+        if (!Objects.equals(this.seriesShapesFilledMap, that.seriesShapesFilledMap)) {
             return false;
         }
         if (this.defaultShapesFilled != that.defaultShapesFilled) {
@@ -850,12 +851,9 @@ public class LineAndShapeRenderer extends AbstractCategoryItemRenderer
     @Override
     public Object clone() throws CloneNotSupportedException {
         LineAndShapeRenderer clone = (LineAndShapeRenderer) super.clone();
-        clone.seriesLinesVisible
-                = (BooleanList) this.seriesLinesVisible.clone();
-        clone.seriesShapesVisible
-                = (BooleanList) this.seriesShapesVisible.clone();
-        clone.seriesShapesFilled
-                = (BooleanList) this.seriesShapesFilled.clone();
+        clone.seriesLinesVisibleMap = new HashMap<>(this.seriesLinesVisibleMap);
+        clone.seriesShapesVisibleMap = new HashMap<>(this.seriesShapesVisibleMap);
+        clone.seriesShapesFilledMap = new HashMap<>(this.seriesShapesFilledMap);
         return clone;
     }
 
