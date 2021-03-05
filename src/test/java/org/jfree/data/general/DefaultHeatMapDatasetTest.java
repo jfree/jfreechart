@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------------
  * DefaultHeatMapDatasetTest.java
  * ------------------------------
- * (C) Copyright 2009-2020, by Object Refinery Limited.
+ * (C) Copyright 2009-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -47,8 +47,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Somes tests for the {@link DefaultHeatMapDataset} class.
- *
- * @since 1.0.13
  */
 public class DefaultHeatMapDatasetTest implements DatasetChangeListener {
 

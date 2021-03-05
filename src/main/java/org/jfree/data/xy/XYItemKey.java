@@ -49,7 +49,6 @@ import org.jfree.data.ItemKey;
  * this class are immutable.
  * 
  * @param <S> the series key type.
- * @since 1.0.20
  */
 public class XYItemKey<S extends Comparable<S>> implements ItemKey, 
         Comparable<XYItemKey<S>>, Serializable {

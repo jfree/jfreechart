@@ -71,8 +71,6 @@ public class XYBarDataset<S extends Comparable<S>>
      * Returns the underlying dataset that was specified via the constructor.
      *
      * @return The underlying dataset (never {@code null}).
-     *
-     * @since 1.0.4
      */
     public XYDataset<S> getUnderlyingDataset() {
         return this.underlying;
@@ -84,7 +82,6 @@ public class XYBarDataset<S extends Comparable<S>>
      * @return The bar width.
      *
      * @see #setBarWidth(double)
-     * @since 1.0.4
      */
     public double getBarWidth() {
         return this.barWidth;
@@ -97,7 +94,6 @@ public class XYBarDataset<S extends Comparable<S>>
      * @param barWidth  the bar width.
      *
      * @see #getBarWidth()
-     * @since 1.0.4
      */
     public void setBarWidth(double barWidth) {
         this.barWidth = barWidth;

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * -------------------
  * YWithXInterval.java
  * -------------------
- * (C) Copyright 2006-2008, by Object Refinery Limited.
+ * (C) Copyright 2006-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 20-Oct-2006 : Version 1 (DG);
  *
  */
 
@@ -49,8 +45,6 @@ import java.io.Serializable;
  * simply reuse the {@link YInterval} class by assuming that the y-interval
  * in fact represents the x-interval, however I decided it was better to
  * duplicate some code in order to document the real intent.
- *
- * @since 1.0.3
  */
 public class YWithXInterval implements Serializable {
 

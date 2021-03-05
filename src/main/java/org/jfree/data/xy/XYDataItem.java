@@ -94,8 +94,6 @@ public class XYDataItem implements Cloneable, Comparable<XYDataItem>, Serializab
      *
      * @see #getX()
      * @see #getYValue()
-     *
-     * @since 1.0.9
      */
     public double getXValue() {
         // this.x is not allowed to be null...
@@ -118,8 +116,6 @@ public class XYDataItem implements Cloneable, Comparable<XYDataItem>, Serializab
      *
      * @see #getY()
      * @see #getXValue()
-     *
-     * @since 1.0.9
      */
     public double getYValue() {
         double result = Double.NaN;
