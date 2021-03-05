@@ -117,10 +117,10 @@ public class PlotTest {
         assertTrue(plot1.equals(plot2));
 
         // backgroundPaint
-        plot1.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.cyan,
+        plot1.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.CYAN,
                 3.0f, 4.0f, Color.GREEN));
         assertFalse(plot1.equals(plot2));
-        plot2.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.cyan,
+        plot2.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.CYAN,
                 3.0f, 4.0f, Color.GREEN));
         assertTrue(plot1.equals(plot2));
 

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------
  * GanttRendererTest.java
  * ----------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -67,9 +67,9 @@ public class GanttRendererTest {
         r2.setCompletePaint(Color.YELLOW);
         assertTrue(r1.equals(r2));
 
-        r1.setIncompletePaint(Color.green);
+        r1.setIncompletePaint(Color.GREEN);
         assertFalse(r1.equals(r2));
-        r2.setIncompletePaint(Color.green);
+        r2.setIncompletePaint(Color.GREEN);
         assertTrue(r1.equals(r2));
 
         r1.setStartPercent(0.11);
@@ -102,10 +102,13 @@ public class GanttRendererTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         GanttRenderer r1 = new GanttRenderer();
+        r1.setCompletePaint(new GradientPaint(1.0f, 2.0f, Color.BLUE, 4.0f, 3.0f, Color.CYAN));
+        r1.setIncompletePaint(new GradientPaint(1.0f, 2.0f, Color.RED, 4.0f, 3.0f, Color.GREEN));
         GanttRenderer r2 = (GanttRenderer) r1.clone();
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
+        TestUtils.checkIndependence(r1, r2);
     }
 
     /**
@@ -129,6 +132,7 @@ public class GanttRendererTest {
                 1.0f, Color.BLUE));
         GanttRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
+        TestUtils.checkIndependence(r1, r2);
     }
 
 }

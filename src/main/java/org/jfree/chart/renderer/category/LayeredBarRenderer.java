@@ -468,7 +468,7 @@ public class LayeredBarRenderer extends BarRenderer implements Serializable {
         if (!Objects.equals(this.seriesBarWidths, other.seriesBarWidths)) {
             return false;
         }
-        return true;
+        return super.equals(obj);
     }
 
 }

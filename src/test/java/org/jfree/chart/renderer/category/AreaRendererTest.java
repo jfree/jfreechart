@@ -98,6 +98,7 @@ public class AreaRendererTest {
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
+        TestUtils.checkIndependence(r1, r2);
     }
 
     /**
@@ -121,6 +122,7 @@ public class AreaRendererTest {
         r1.setSeriesStroke(0, new BasicStroke(2.0f));
         AreaRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
+        TestUtils.checkIndependence(r1, r2);
     }
 
     /**

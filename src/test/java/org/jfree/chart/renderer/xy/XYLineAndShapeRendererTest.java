@@ -36,6 +36,8 @@
 
 package org.jfree.chart.renderer.xy;
 
+import java.awt.Rectangle;
+import java.awt.geom.Ellipse2D;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -210,6 +212,10 @@ public class XYLineAndShapeRendererTest {
     @Test
     public void testSerialization() {
         XYLineAndShapeRenderer r1 = new XYLineAndShapeRenderer();
+        r1.setSeriesShape(1, new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0));
+        r1.setDefaultShape(new Line2D.Double(1.0, 2.0, 3.0, 4.0));
+        r1.setLegendLine(new Rectangle(1, 2, 3, 4));
+        r1.setDefaultLegendShape(new Ellipse2D.Double(1.0, 2.0, 3.0, 4.0));
         XYLineAndShapeRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }

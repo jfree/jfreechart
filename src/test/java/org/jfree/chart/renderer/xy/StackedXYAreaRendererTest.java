@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------------
  * StackedXYAreaRendererTest.java
  * ------------------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -76,10 +76,10 @@ public class StackedXYAreaRendererTest {
         assertEquals(r2, r1);
 
         r1.setShapePaint(new GradientPaint(1.0f, 2.0f, Color.YELLOW,
-                3.0f, 4.0f, Color.green));
+                3.0f, 4.0f, Color.GREEN));
         assertFalse(r1.equals(r2));
         r2.setShapePaint(new GradientPaint(1.0f, 2.0f, Color.YELLOW,
-                3.0f, 4.0f, Color.green));
+                3.0f, 4.0f, Color.GREEN));
         assertTrue(r1.equals(r2));
 
         Stroke s = new BasicStroke(1.23f);

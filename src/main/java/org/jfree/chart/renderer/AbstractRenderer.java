@@ -139,7 +139,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     private boolean defaultSeriesVisibleInLegend;
 
     /** The paint for each series. */
-    private transient Map<Integer, Paint> seriesPaints;
+    private transient Map<Integer, Paint> seriesPaintMap;
 
     /**
      * A flag that controls whether or not the paintList is auto-populated
@@ -151,7 +151,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     private transient Paint defaultPaint;
 
     /** The fill paint list. */
-    private transient Map<Integer, Paint> seriesFillPaints;
+    private transient Map<Integer, Paint> seriesFillPaintMap;
 
     /**
      * A flag that controls whether or not the fillPaintList is auto-populated
@@ -163,7 +163,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     private transient Paint defaultFillPaint;
 
     /** The outline paint list. */
-    private transient Map<Integer, Paint> outlinePaints;
+    private transient Map<Integer, Paint> seriesOutlinePaintMap;
 
     /**
      * A flag that controls whether or not the outlinePaintList is
@@ -175,7 +175,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     private transient Paint defaultOutlinePaint;
 
     /** The stroke list. */
-    private transient Map<Integer, Stroke> seriesStrokes;
+    private transient Map<Integer, Stroke> seriesStrokeMap;
 
     /**
      * A flag that controls whether or not the strokeList is auto-populated
@@ -187,7 +187,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     private transient Stroke defaultStroke;
 
     /** The outline stroke list. */
-    private transient Map<Integer, Stroke> seriesOutlineStrokes;
+    private transient Map<Integer, Stroke> seriesOutlineStrokeMap;
 
     /** The base outline stroke. */
     private transient Stroke defaultOutlineStroke;
@@ -199,7 +199,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
     private boolean autoPopulateSeriesOutlineStroke;
 
     /** The shapes to use for specific series. */
-    private Map<Integer, Shape> seriesShapes;
+    private Map<Integer, Shape> seriesShapeMap;
 
     /**
      * A flag that controls whether or not the series shapes are auto-populated
@@ -313,27 +313,27 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
         this.seriesVisibleInLegendList = new BooleanList();
         this.defaultSeriesVisibleInLegend = true;
 
-        this.seriesPaints = new HashMap<>();
+        this.seriesPaintMap = new HashMap<>();
         this.defaultPaint = DEFAULT_PAINT;
         this.autoPopulateSeriesPaint = true;
 
-        this.seriesFillPaints = new HashMap<>();
+        this.seriesFillPaintMap = new HashMap<>();
         this.defaultFillPaint = Color.WHITE;
         this.autoPopulateSeriesFillPaint = false;
 
-        this.outlinePaints = new HashMap<>();
+        this.seriesOutlinePaintMap = new HashMap<>();
         this.defaultOutlinePaint = DEFAULT_OUTLINE_PAINT;
         this.autoPopulateSeriesOutlinePaint = false;
 
-        this.seriesStrokes = new HashMap<>();
+        this.seriesStrokeMap = new HashMap<>();
         this.defaultStroke = DEFAULT_STROKE;
         this.autoPopulateSeriesStroke = true;
 
-        this.seriesOutlineStrokes = new HashMap<>();
+        this.seriesOutlineStrokeMap = new HashMap<>();
         this.defaultOutlineStroke = DEFAULT_OUTLINE_STROKE;
         this.autoPopulateSeriesOutlineStroke = false;
 
-        this.seriesShapes = new HashMap<>();
+        this.seriesShapeMap = new HashMap<>();
         this.defaultShape = DEFAULT_SHAPE;
         this.autoPopulateSeriesShape = true;
 
@@ -697,7 +697,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #setSeriesPaint(int, Paint)
      */
     public Paint getSeriesPaint(int series) {
-        return this.seriesPaints.get(series);
+        return this.seriesPaintMap.get(series);
     }
 
     /**
@@ -724,7 +724,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #getSeriesPaint(int)
      */
     public void setSeriesPaint(int series, Paint paint, boolean notify) {
-        this.seriesPaints.put(series, paint);
+        this.seriesPaintMap.put(series, paint);
         if (notify) {
             fireChangeEvent();
         }
@@ -737,7 +737,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @param notify  notify listeners?
      */
     public void clearSeriesPaints(boolean notify) {
-        this.seriesPaints.clear();
+        this.seriesPaintMap.clear();
         if (notify) {
             fireChangeEvent();
         }
@@ -858,7 +858,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #setSeriesFillPaint(int, Paint)
      */
     public Paint getSeriesFillPaint(int series) {
-        return this.seriesFillPaints.get(series);
+        return this.seriesFillPaintMap.get(series);
     }
 
     /**
@@ -885,7 +885,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #getSeriesFillPaint(int)
      */
     public void setSeriesFillPaint(int series, Paint paint, boolean notify) {
-        this.seriesFillPaints.put(series, paint);
+        this.seriesFillPaintMap.put(series, paint);
         if (notify) {
             fireChangeEvent();
         }
@@ -1011,7 +1011,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #setSeriesOutlinePaint(int, Paint)
      */
     public Paint getSeriesOutlinePaint(int series) {
-        return this.outlinePaints.get(series);
+        return this.seriesOutlinePaintMap.get(series);
     }
 
     /**
@@ -1038,7 +1038,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #getSeriesOutlinePaint(int)
      */
     public void setSeriesOutlinePaint(int series, Paint paint, boolean notify) {
-        this.outlinePaints.put(series, paint);
+        this.seriesOutlinePaintMap.put(series, paint);
         if (notify) {
             fireChangeEvent();
         }
@@ -1162,7 +1162,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #setSeriesStroke(int, Stroke)
      */
     public Stroke getSeriesStroke(int series) {
-        return this.seriesStrokes.get(series);
+        return this.seriesStrokeMap.get(series);
     }
 
     /**
@@ -1189,7 +1189,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #getSeriesStroke(int)
      */
     public void setSeriesStroke(int series, Stroke stroke, boolean notify) {
-        this.seriesStrokes.put(series, stroke);
+        this.seriesStrokeMap.put(series, stroke);
         if (notify) {
             fireChangeEvent();
         }
@@ -1202,7 +1202,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @param notify  notify listeners?
      */
     public void clearSeriesStrokes(boolean notify) {
-        this.seriesStrokes.clear();
+        this.seriesStrokeMap.clear();
         if (notify) {
             fireChangeEvent();
         }
@@ -1324,7 +1324,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #setSeriesOutlineStroke(int, Stroke)
      */
     public Stroke getSeriesOutlineStroke(int series) {
-        return this.seriesOutlineStrokes.get(series);
+        return this.seriesOutlineStrokeMap.get(series);
     }
 
     /**
@@ -1351,7 +1351,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #getSeriesOutlineStroke(int)
      */
     public void setSeriesOutlineStroke(int series, Stroke stroke, boolean notify) {
-        this.seriesOutlineStrokes.put(series, stroke);
+        this.seriesOutlineStrokeMap.put(series, stroke);
         if (notify) {
             fireChangeEvent();
         }
@@ -1476,7 +1476,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #setSeriesShape(int, Shape)
      */
     public Shape getSeriesShape(int series) {
-        return this.seriesShapes.get(series);
+        return this.seriesShapeMap.get(series);
     }
 
     /**
@@ -1503,7 +1503,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @see #getSeriesShape(int)
      */
     public void setSeriesShape(int series, Shape shape, boolean notify) {
-        this.seriesShapes.put(series, shape);
+        this.seriesShapeMap.put(series, shape);
         if (notify) {
             fireChangeEvent();
         }
@@ -2730,39 +2730,55 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
                 != that.defaultSeriesVisibleInLegend) {
             return false;
         }
-        if (!PaintUtils.equal(this.seriesPaints, that.seriesPaints)) {
+        if (!PaintUtils.equal(this.seriesPaintMap, that.seriesPaintMap)) {
+            return false;
+        }
+        if (this.autoPopulateSeriesPaint != that.autoPopulateSeriesPaint) {
             return false;
         }
         if (!PaintUtils.equal(this.defaultPaint, that.defaultPaint)) {
             return false;
         }
-        if (!PaintUtils.equal(this.seriesFillPaints, that.seriesFillPaints)) {
+        if (!PaintUtils.equal(this.seriesFillPaintMap, that.seriesFillPaintMap)) {
             return false;
         }
-        if (!PaintUtils.equal(this.defaultFillPaint,
-                that.defaultFillPaint)) {
+        if (this.autoPopulateSeriesFillPaint != that.autoPopulateSeriesFillPaint) {
             return false;
         }
-        if (!PaintUtils.equal(this.outlinePaints, that.outlinePaints)) {
+        if (!PaintUtils.equal(this.defaultFillPaint, that.defaultFillPaint)) {
             return false;
         }
-        if (!PaintUtils.equal(this.defaultOutlinePaint,
-                that.defaultOutlinePaint)) {
+        if (!PaintUtils.equal(this.seriesOutlinePaintMap, that.seriesOutlinePaintMap)) {
             return false;
         }
-        if (!Objects.equals(this.seriesStrokes, that.seriesStrokes)) {
+        if (this.autoPopulateSeriesOutlinePaint != that.autoPopulateSeriesOutlinePaint) {
+            return false;
+        }
+        if (!PaintUtils.equal(this.defaultOutlinePaint, that.defaultOutlinePaint)) {
+            return false;
+        }
+        if (!Objects.equals(this.seriesStrokeMap, that.seriesStrokeMap)) {
+            return false;
+        }
+        if (this.autoPopulateSeriesStroke != that.autoPopulateSeriesStroke) {
             return false;
         }
         if (!Objects.equals(this.defaultStroke, that.defaultStroke)) {
             return false;
         }
-        if (!Objects.equals(this.seriesOutlineStrokes, that.seriesOutlineStrokes)) {
+        if (!Objects.equals(this.seriesOutlineStrokeMap, that.seriesOutlineStrokeMap)) {
+            return false;
+        }
+        if (this.autoPopulateSeriesOutlineStroke != that.autoPopulateSeriesOutlineStroke) {
             return false;
         }
         if (!Objects.equals(this.defaultOutlineStroke, that.defaultOutlineStroke)) {
             return false;
         }
-        if (!ShapeUtils.equal(this.seriesShapes, that.seriesShapes)) {
+        if (!ShapeUtils.equal(this.seriesShapeMap, that.seriesShapeMap)) {
+            return false;
+        }
+        if (this.autoPopulateSeriesShape != that.autoPopulateSeriesShape) {
             return false;
         }
         if (!ShapeUtils.equal(this.defaultShape, that.defaultShape)) {
@@ -2814,8 +2830,7 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
         if (!ShapeUtils.equal(this.seriesLegendShapes, that.seriesLegendShapes)) {
             return false;
         }
-        if (!ShapeUtils.equal(this.defaultLegendShape,
-                that.defaultLegendShape)) {
+        if (!ShapeUtils.equal(this.defaultLegendShape, that.defaultLegendShape)) {
             return false;
         }
         if (!Objects.equals(this.legendTextFontMap, that.legendTextFontMap)) {
@@ -2846,15 +2861,15 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
         result = HashUtils.hashCode(result, this.defaultSeriesVisible);
         result = HashUtils.hashCode(result, this.seriesVisibleInLegendList);
         result = HashUtils.hashCode(result, this.defaultSeriesVisibleInLegend);
-        result = HashUtils.hashCode(result, this.seriesPaints);
+        result = HashUtils.hashCode(result, this.seriesPaintMap);
         result = HashUtils.hashCode(result, this.defaultPaint);
-        result = HashUtils.hashCode(result, this.seriesFillPaints);
+        result = HashUtils.hashCode(result, this.seriesFillPaintMap);
         result = HashUtils.hashCode(result, this.defaultFillPaint);
-        result = HashUtils.hashCode(result, this.outlinePaints);
+        result = HashUtils.hashCode(result, this.seriesOutlinePaintMap);
         result = HashUtils.hashCode(result, this.defaultOutlinePaint);
-        result = HashUtils.hashCode(result, this.seriesStrokes);
+        result = HashUtils.hashCode(result, this.seriesStrokeMap);
         result = HashUtils.hashCode(result, this.defaultStroke);
-        result = HashUtils.hashCode(result, this.seriesOutlineStrokes);
+        result = HashUtils.hashCode(result, this.seriesOutlineStrokeMap);
         result = HashUtils.hashCode(result, this.defaultOutlineStroke);
         // shapeList
         // baseShape
@@ -2897,34 +2912,34 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
         }
 
         // 'paint' : immutable, no need to clone reference
-        if (this.seriesPaints != null) {
-            clone.seriesPaints = new HashMap<>(this.seriesPaints);
+        if (this.seriesPaintMap != null) {
+            clone.seriesPaintMap = new HashMap<>(this.seriesPaintMap);
         }
         // 'basePaint' : immutable, no need to clone reference
 
-        if (this.seriesFillPaints != null) {
-            clone.seriesFillPaints = new HashMap<>(this.seriesFillPaints);
+        if (this.seriesFillPaintMap != null) {
+            clone.seriesFillPaintMap = new HashMap<>(this.seriesFillPaintMap);
         }
         // 'outlinePaint' : immutable, no need to clone reference
-        if (this.outlinePaints != null) {
-            clone.outlinePaints = new HashMap<>(this.outlinePaints);
+        if (this.seriesOutlinePaintMap != null) {
+            clone.seriesOutlinePaintMap = new HashMap<>(this.seriesOutlinePaintMap);
         }
         // 'baseOutlinePaint' : immutable, no need to clone reference
 
         // 'stroke' : immutable, no need to clone reference
-        if (this.seriesStrokes != null) {
-            clone.seriesStrokes = CloneUtils.cloneMapValues(this.seriesStrokes);
+        if (this.seriesStrokeMap != null) {
+            clone.seriesStrokeMap = CloneUtils.cloneMapValues(this.seriesStrokeMap);
         }
         // 'baseStroke' : immutable, no need to clone reference
 
         // 'outlineStroke' : immutable, no need to clone reference
-        if (this.seriesOutlineStrokes != null) {
-            clone.seriesOutlineStrokes = CloneUtils.cloneMapValues(this.seriesOutlineStrokes);
+        if (this.seriesOutlineStrokeMap != null) {
+            clone.seriesOutlineStrokeMap = CloneUtils.cloneMapValues(this.seriesOutlineStrokeMap);
         }
         // 'baseOutlineStroke' : immutable, no need to clone reference
 
-        if (this.seriesShapes != null) {
-            clone.seriesShapes = ShapeUtils.cloneMap(this.seriesShapes);
+        if (this.seriesShapeMap != null) {
+            clone.seriesShapeMap = ShapeUtils.cloneMap(this.seriesShapeMap);
         }
         if (this.defaultShape != null) {
             clone.defaultShape = ShapeUtils.clone(this.defaultShape);
@@ -2988,15 +3003,15 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      */
     private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.defaultWriteObject();
-        SerialUtils.writeMapOfPaint(this.seriesPaints, stream);
+        SerialUtils.writeMapOfPaint(this.seriesPaintMap, stream);
         SerialUtils.writePaint(this.defaultPaint, stream);
-        SerialUtils.writeMapOfPaint(this.seriesFillPaints, stream);
+        SerialUtils.writeMapOfPaint(this.seriesFillPaintMap, stream);
         SerialUtils.writePaint(this.defaultFillPaint, stream);
-        SerialUtils.writeMapOfPaint(this.outlinePaints, stream);
+        SerialUtils.writeMapOfPaint(this.seriesOutlinePaintMap, stream);
         SerialUtils.writePaint(this.defaultOutlinePaint, stream);
-        SerialUtils.writeMapOfStroke(this.seriesStrokes, stream);
+        SerialUtils.writeMapOfStroke(this.seriesStrokeMap, stream);
         SerialUtils.writeStroke(this.defaultStroke, stream);
-        SerialUtils.writeMapOfStroke(this.seriesOutlineStrokes, stream);
+        SerialUtils.writeMapOfStroke(this.seriesOutlineStrokeMap, stream);
         SerialUtils.writeStroke(this.defaultOutlineStroke, stream);
         SerialUtils.writeShape(this.defaultShape, stream);
         SerialUtils.writeMapOfPaint(this.itemLabelPaints, stream);        
@@ -3014,18 +3029,17 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
      * @throws IOException  if there is an I/O error.
      * @throws ClassNotFoundException  if there is a classpath problem.
      */
-    private void readObject(ObjectInputStream stream)
-        throws IOException, ClassNotFoundException {
+    private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
-        this.seriesPaints = SerialUtils.readMapOfPaint(stream);
+        this.seriesPaintMap = SerialUtils.readMapOfPaint(stream);
         this.defaultPaint = SerialUtils.readPaint(stream);
-        this.seriesFillPaints = SerialUtils.readMapOfPaint(stream);
+        this.seriesFillPaintMap = SerialUtils.readMapOfPaint(stream);
         this.defaultFillPaint = SerialUtils.readPaint(stream);
-        this.outlinePaints = SerialUtils.readMapOfPaint(stream);
+        this.seriesOutlinePaintMap = SerialUtils.readMapOfPaint(stream);
         this.defaultOutlinePaint = SerialUtils.readPaint(stream);
-        this.seriesStrokes = SerialUtils.readMapOfStroke(stream);
+        this.seriesStrokeMap = SerialUtils.readMapOfStroke(stream);
         this.defaultStroke = SerialUtils.readStroke(stream);
-        this.seriesOutlineStrokes = SerialUtils.readMapOfStroke(stream);
+        this.seriesOutlineStrokeMap = SerialUtils.readMapOfStroke(stream);
         this.defaultOutlineStroke = SerialUtils.readStroke(stream);
         this.defaultShape = SerialUtils.readShape(stream);
         this.itemLabelPaints = SerialUtils.readMapOfPaint(stream);

@@ -70,6 +70,12 @@ public class LayeredBarRendererTest {
         assertNotEquals(r1, r2);
         r2.setSeriesBarWidth(1, 10.0);
         assertEquals(r1, r2);
+        
+        // try an inherited attribute 
+        r1.setBase(3.0);
+        assertNotEquals(r1, r2);
+        r2.setBase(3.0);
+        assertEquals(r1, r2);        
     }
 
     /**
@@ -87,6 +93,8 @@ public class LayeredBarRendererTest {
 
     /**
      * Confirm that cloning works.
+     * 
+     * @throws CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
@@ -95,6 +103,7 @@ public class LayeredBarRendererTest {
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
+        TestUtils.checkIndependence(r1, r2);
     }
 
     /**
@@ -116,6 +125,7 @@ public class LayeredBarRendererTest {
         r1.setSeriesBarWidth(1, 9.0);
         LayeredBarRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
+        TestUtils.checkIndependence(r1, r2);
     }
 
     /**

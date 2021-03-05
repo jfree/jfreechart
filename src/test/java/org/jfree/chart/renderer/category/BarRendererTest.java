@@ -188,6 +188,7 @@ public class BarRendererTest {
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
+        TestUtils.checkIndependence(r1, r2);
     }
 
     /**
@@ -209,6 +210,8 @@ public class BarRendererTest {
         r1.setDefaultOutlineStroke(new BasicStroke(4.5f));
         BarRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
+        assertTrue(r1 != r2);        
+        TestUtils.checkIndependence(r1, r2);
     }
 
     /**

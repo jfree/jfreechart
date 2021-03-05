@@ -111,12 +111,18 @@ public class AbstractRendererTest {
         r2.setDefaultSeriesVisibleInLegend(false);
         assertTrue(r1.equals(r2));
 
-        // paintList
+        // seriesPaintMap
         r1.setSeriesPaint(0, new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.WHITE));
         assertFalse(r1.equals(r2));
         r2.setSeriesPaint(0, new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.WHITE));
+        assertTrue(r1.equals(r2));
+
+        // autoPopulateSeriesPaint
+        r1.setAutoPopulateSeriesPaint(!r1.getAutoPopulateSeriesPaint());
+        assertFalse(r1.equals(r2));
+        r2.setAutoPopulateSeriesPaint(r1.getAutoPopulateSeriesPaint());
         assertTrue(r1.equals(r2));
 
         // defaultPaint
@@ -127,7 +133,7 @@ public class AbstractRendererTest {
                 3.0f, 4.0f, Color.RED));
         assertTrue(r1.equals(r2));
 
-        // fillPaintList
+        // seriesFillPaintMap
         r1.setSeriesFillPaint(0, new GradientPaint(1.0f, 2.0f, Color.BLUE,
                 3.0f, 4.0f, Color.RED));
         assertFalse(r1.equals(r2));
@@ -135,6 +141,12 @@ public class AbstractRendererTest {
                 3.0f, 4.0f, Color.RED));
         assertTrue(r1.equals(r2));
 
+        // autoPopulateSeriesFillPaint
+        r1.setAutoPopulateSeriesFillPaint(!r1.getAutoPopulateSeriesFillPaint());
+        assertFalse(r1.equals(r2));
+        r2.setAutoPopulateSeriesFillPaint(r1.getAutoPopulateSeriesFillPaint());
+        assertTrue(r1.equals(r2));
+        
         // defaultFillPaint
         r1.setDefaultFillPaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
                 3.0f, 4.0f, Color.RED));
@@ -143,12 +155,18 @@ public class AbstractRendererTest {
                 3.0f, 4.0f, Color.RED));
         assertTrue(r1.equals(r2));
 
-        // outlinePaintList
+        // outlinePaintMap
         r1.setSeriesOutlinePaint(0, new GradientPaint(1.0f, 2.0f, Color.BLUE,
                 3.0f, 4.0f, Color.RED));
         assertFalse(r1.equals(r2));
         r2.setSeriesOutlinePaint(0, new GradientPaint(1.0f, 2.0f, Color.BLUE,
                 3.0f, 4.0f, Color.RED));
+        assertTrue(r1.equals(r2));
+        
+        // autoPopulateSeriesOutlinePaint
+        r1.setAutoPopulateSeriesOutlinePaint(!r1.getAutoPopulateSeriesOutlinePaint());
+        assertFalse(r1.equals(r2));
+        r2.setAutoPopulateSeriesOutlinePaint(r1.getAutoPopulateSeriesOutlinePaint());
         assertTrue(r1.equals(r2));
 
         // defaultOutlinePaint
@@ -162,36 +180,54 @@ public class AbstractRendererTest {
         // stroke
         Stroke s = new BasicStroke(3.21f);
 
-        // strokeList
+        // strokeMap
         r1.setSeriesStroke(1, s);
         assertFalse(r1.equals(r2));
         r2.setSeriesStroke(1, s);
         assertTrue(r1.equals(r2));
 
+        // autoPopulateSeriesStroke
+        r1.setAutoPopulateSeriesStroke(!r1.getAutoPopulateSeriesStroke());
+        assertFalse(r1.equals(r2));
+        r2.setAutoPopulateSeriesStroke(r1.getAutoPopulateSeriesStroke());
+        assertTrue(r1.equals(r2));
+        
         // defaultStroke
         r1.setDefaultStroke(s);
         assertFalse(r1.equals(r2));
         r2.setDefaultStroke(s);
         assertTrue(r1.equals(r2));
 
-        // outlineStrokeList
+        // outlineStrokeMap
         r1.setSeriesOutlineStroke(0, s);
         assertFalse(r1.equals(r2));
         r2.setSeriesOutlineStroke(0, s);
         assertTrue(r1.equals(r2));
 
+        // autoPopulateSeriesOutlineStroke
+        r1.setAutoPopulateSeriesOutlineStroke(!r1.getAutoPopulateSeriesOutlineStroke());
+        assertFalse(r1.equals(r2));
+        r2.setAutoPopulateSeriesOutlineStroke(r1.getAutoPopulateSeriesOutlineStroke());
+        assertTrue(r1.equals(r2));
+        
         // defaultOutlineStroke
         r1.setDefaultOutlineStroke(s);
         assertFalse(r1.equals(r2));
         r2.setDefaultOutlineStroke(s);
         assertTrue(r1.equals(r2));
 
-        // shapeList
+        // seriesShapeMap
         r1.setSeriesShape(1, new Ellipse2D.Double(1, 2, 3, 4));
         assertFalse(r1.equals(r2));
         r2.setSeriesShape(1, new Ellipse2D.Double(1, 2, 3, 4));
         assertTrue(r1.equals(r2));
 
+        // autoPopulateSeriesShape
+        r1.setAutoPopulateSeriesShape(!r1.getAutoPopulateSeriesShape());
+        assertFalse(r1.equals(r2));
+        r2.setAutoPopulateSeriesShape(r1.getAutoPopulateSeriesShape());
+        assertTrue(r1.equals(r2));
+        
         // defaultShape
         r1.setDefaultShape(new Ellipse2D.Double(1, 2, 3, 4));
         assertFalse(r1.equals(r2));

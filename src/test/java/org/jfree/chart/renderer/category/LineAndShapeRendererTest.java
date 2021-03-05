@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------------
  * LineAndShapeRendererTest.java
  * -----------------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -139,6 +139,7 @@ public class LineAndShapeRendererTest {
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
         assertTrue(checkIndependence(r1, r2));
+        TestUtils.checkIndependence(r1, r2);
     }
 
     /**
@@ -158,8 +159,7 @@ public class LineAndShapeRendererTest {
      *
      * @return A boolean.
      */
-    private boolean checkIndependence(LineAndShapeRenderer r1,
-            LineAndShapeRenderer r2) {
+    private boolean checkIndependence(LineAndShapeRenderer r1, LineAndShapeRenderer r2) {
 
         // should be equal...
         if (!r1.equals(r2)) {
@@ -230,6 +230,7 @@ public class LineAndShapeRendererTest {
         LineAndShapeRenderer r1 = new LineAndShapeRenderer();
         LineAndShapeRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
+        TestUtils.checkIndependence(r1, r2);
     }
 
     /**

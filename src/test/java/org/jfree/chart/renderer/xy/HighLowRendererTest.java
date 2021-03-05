@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------
  * HighLowRendererTest.java
  * ------------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -42,6 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.awt.Color;
+import java.awt.GradientPaint;
 import java.util.Date;
 
 import org.jfree.chart.TestUtils;
@@ -118,11 +119,12 @@ public class HighLowRendererTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         HighLowRenderer r1 = new HighLowRenderer();
-        r1.setCloseTickPaint(Color.green);
+        r1.setCloseTickPaint(Color.GREEN);
         HighLowRenderer r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
+        TestUtils.checkIndependence(r1, r2);
     }
 
     /**
@@ -140,9 +142,10 @@ public class HighLowRendererTest {
     @Test
     public void testSerialization() {
         HighLowRenderer r1 = new HighLowRenderer();
-        r1.setCloseTickPaint(Color.green);
+        r1.setCloseTickPaint(new GradientPaint(1.0f, 2.0f, Color.WHITE, 3.0f, 4.0f, Color.BLACK));
         HighLowRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
+        TestUtils.checkIndependence(r1, r2);
     }
 
     /**

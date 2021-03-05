@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------------------
  * GroupedStackedBarRendererTest.java
  * ----------------------------------
- * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -77,18 +77,26 @@ public class GroupedStackedBarRendererTest {
         m2.mapKeyToGroup("S1", "G2");
         r2.setSeriesToGroupMap(m2);
         assertTrue(r1.equals(r2));
+        TestUtils.checkIndependence(r1, r2);
     }
 
     /**
      * Confirm that cloning works.
+     * 
+     * @throws CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
         GroupedStackedBarRenderer r1 = new GroupedStackedBarRenderer();
+        KeyToGroupMap map = new KeyToGroupMap();
+        map.mapKeyToGroup("A", "X");
+        map.mapKeyToGroup("B", "Y");
+        r1.setSeriesToGroupMap(map);
         GroupedStackedBarRenderer r2 = (GroupedStackedBarRenderer) r1.clone();
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
+        TestUtils.checkIndependence(r1, r2);
     }
 
     /**

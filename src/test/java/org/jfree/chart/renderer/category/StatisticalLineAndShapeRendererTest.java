@@ -95,15 +95,17 @@ public class StatisticalLineAndShapeRendererTest {
 
     /**
      * Confirm that cloning works.
+     * 
+     * @throws CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        StatisticalLineAndShapeRenderer r1
-                = new StatisticalLineAndShapeRenderer();
+        StatisticalLineAndShapeRenderer r1 = new StatisticalLineAndShapeRenderer();
         StatisticalLineAndShapeRenderer r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
+        TestUtils.checkIndependence(r1, r2);
     }
 
     /**
@@ -125,6 +127,7 @@ public class StatisticalLineAndShapeRendererTest {
                 = new StatisticalLineAndShapeRenderer();
         StatisticalLineAndShapeRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
+        TestUtils.checkIndependence(r1, r2);
     }
 
     /**

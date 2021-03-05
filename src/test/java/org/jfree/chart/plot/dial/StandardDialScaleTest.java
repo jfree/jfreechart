@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------------
  * StandardDialScaleTest.java
  * --------------------------
- * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -145,10 +145,10 @@ public class StandardDialScaleTest {
 
         // tickLabelPaint
         s1.setTickLabelPaint(new GradientPaint(1.0f, 2.0f, Color.WHITE,
-                3.0f, 4.0f, Color.green));
+                3.0f, 4.0f, Color.GREEN));
         assertFalse(s1.equals(s2));
         s2.setTickLabelPaint(new GradientPaint(1.0f, 2.0f, Color.WHITE,
-                3.0f, 4.0f, Color.green));
+                3.0f, 4.0f, Color.GREEN));
         assertTrue(s1.equals(s2));
 
         s1.setTickLabelsVisible(false);
