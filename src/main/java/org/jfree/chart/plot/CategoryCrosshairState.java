@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * CategoryCrosshairState.java
  * ---------------------------
- * (C) Copyright 2008-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2008-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -46,8 +46,6 @@ import org.jfree.chart.renderer.category.CategoryItemRenderer;
  * and updated as each data item is rendered.  At the end of the rendering
  * process, this class holds the row key, column key and value for the
  * crosshair location.
- *
- * @since 1.0.11
  */
 public class CategoryCrosshairState<R extends Comparable<R>, C extends Comparable<C>> 
         extends CrosshairState {

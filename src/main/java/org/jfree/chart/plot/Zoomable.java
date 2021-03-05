@@ -84,8 +84,7 @@ public interface Zoomable {
      *
      * @see #zoomRangeAxes(double, PlotRenderingInfo, Point2D)
      */
-    void zoomDomainAxes(double factor, PlotRenderingInfo state,
-            Point2D source);
+    void zoomDomainAxes(double factor, PlotRenderingInfo state, Point2D source);
 
     /**
      * Multiplies the range on the domain axis/axes by the specified factor.
@@ -99,8 +98,6 @@ public interface Zoomable {
      * @param useAnchor  use source point as zoom anchor?
      *
      * @see #zoomRangeAxes(double, PlotRenderingInfo, Point2D, boolean)
-     *
-     * @since 1.0.7
      */
     void zoomDomainAxes(double factor, PlotRenderingInfo state,
             Point2D source, boolean useAnchor);
@@ -146,8 +143,6 @@ public interface Zoomable {
      * @param useAnchor  use source point as zoom anchor?
      *
      * @see #zoomDomainAxes(double, PlotRenderingInfo, Point2D)
-     *
-     * @since 1.0.7
      */
     void zoomRangeAxes(double factor, PlotRenderingInfo state,
             Point2D source, boolean useAnchor);

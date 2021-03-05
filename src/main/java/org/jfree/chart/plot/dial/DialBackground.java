@@ -56,8 +56,6 @@ import org.jfree.chart.internal.SerialUtils;
 
 /**
  * A regular dial layer that can be used to draw the background for a dial.
- *
- * @since 1.0.7
  */
 public class DialBackground extends AbstractDialLayer implements DialLayer,
         Cloneable, PublicCloneable, Serializable {

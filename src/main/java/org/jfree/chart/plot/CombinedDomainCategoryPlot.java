@@ -565,8 +565,6 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
      * @param axis  ignored.
      *
      * @return A list of the categories in the subplots.
-     *
-     * @since 1.0.3
      */
     @Override
     public List getCategoriesForAxis(CategoryAxis axis) {

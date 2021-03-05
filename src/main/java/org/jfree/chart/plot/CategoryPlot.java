@@ -3539,8 +3539,6 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>> exte
      *        ({@code null} permitted).
      *
      * @return A boolean that indicates whether or not real data was found.
-     *
-     * @since 1.0.11
      */
     public boolean render(Graphics2D g2, Rectangle2D dataArea, int index,
             PlotRenderingInfo info, CategoryCrosshairState<R, C> crosshairState) {
@@ -3694,8 +3692,6 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>> exte
      * @param area  the data area.
      *
      * @see #setRangeZeroBaselineVisible(boolean)
-     *
-     * @since 1.0.13
      */
     protected void drawZeroRangeBaseline(Graphics2D g2, Rectangle2D area) {
         if (!isRangeZeroBaselineVisible()) {
@@ -3824,8 +3820,6 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>> exte
      *
      * @see #drawRangeCrosshair(Graphics2D, Rectangle2D, PlotOrientation,
      *     double, ValueAxis, Stroke, Paint)
-     *
-     * @since 1.0.11
      */
     protected void drawDomainCrosshair(Graphics2D g2, Rectangle2D dataArea,
             PlotOrientation orientation, int datasetIndex, R rowKey, C columnKey,
@@ -3865,8 +3859,6 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>> exte
      *
      * @see #drawDomainCrosshair(Graphics2D, Rectangle2D, PlotOrientation, int,
      *      Comparable, Comparable, Stroke, Paint)
-     *
-     * @since 1.0.5
      */
     protected void drawRangeCrosshair(Graphics2D g2, Rectangle2D dataArea,
             PlotOrientation orientation, double value, ValueAxis axis,
@@ -3933,8 +3925,6 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>> exte
      * @param axisIndex  the axis index.
      *
      * @return The list (possibly empty, but never {@code null}).
-     *
-     * @since 1.0.3
      */
     private List<CategoryDataset<R, C>> datasetsMappedToDomainAxis(int axisIndex) {
         List<CategoryDataset<R, C>> result = new ArrayList<>();
@@ -4042,8 +4032,6 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>> exte
      * @param notify  notify listeners?
      *
      * @see #getFixedDomainAxisSpace()
-     *
-     * @since 1.0.7
      */
     public void setFixedDomainAxisSpace(AxisSpace space, boolean notify) {
         this.fixedDomainAxisSpace = space;
@@ -4083,8 +4071,6 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>> exte
      * @param notify  notify listeners?
      *
      * @see #getFixedRangeAxisSpace()
-     *
-     * @since 1.0.7
      */
     public void setFixedRangeAxisSpace(AxisSpace space, boolean notify) {
         this.fixedRangeAxisSpace = space;
@@ -4115,8 +4101,6 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>> exte
      * @param axis  the axis ({@code null} not permitted)
      *
      * @return The categories.
-     *
-     * @since 1.0.3
      */
     public List<C> getCategoriesForAxis(CategoryAxis axis) {
         List<C> result = new ArrayList<>();
@@ -4165,8 +4149,6 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>> exte
      * @return A boolean.
      *
      * @see #isRangePannable()
-     *
-     * @since 1.0.13
      */
     @Override
     public boolean isDomainPannable() {
@@ -4181,8 +4163,6 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>> exte
      *
      * @see #setRangePannable(boolean)
      * @see #isDomainPannable()
-     *
-     * @since 1.0.13
      */
     @Override
     public boolean isRangePannable() {
@@ -4196,8 +4176,6 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>> exte
      * @param pannable  the new flag value.
      *
      * @see #isRangePannable()
-     *
-     * @since 1.0.13
      */
     public void setRangePannable(boolean pannable) {
         this.rangePannable = pannable;
@@ -4209,8 +4187,6 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>> exte
      * @param percent  the distance to pan (as a percentage of the axis length).
      * @param info the plot info
      * @param source the source point where the pan action started.
-     *
-     * @since 1.0.13
      */
     @Override
     public void panDomainAxes(double percent, PlotRenderingInfo info,
@@ -4224,8 +4200,6 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>> exte
      * @param percent  the distance to pan (as a percentage of the axis length).
      * @param info the plot info
      * @param source the source point where the pan action started.
-     *
-     * @since 1.0.13
      */
     @Override
     public void panRangeAxes(double percent, PlotRenderingInfo info,

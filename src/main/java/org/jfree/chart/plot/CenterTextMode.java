@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * -------------------
  * CenterTextMode.java
  * -------------------
- * (C) Copyright 2014, by Object Refinery Limited.
+ * (C) Copyright 2014-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 28-Feb-2014 : Version 1 (DG);
  * 
  */
 
@@ -42,8 +38,6 @@ package org.jfree.chart.plot;
 
 /**
  * The mode for the center text on a {@link RingPlot}.
- * 
- * @since 1.0.18
  */
 public enum CenterTextMode {
     

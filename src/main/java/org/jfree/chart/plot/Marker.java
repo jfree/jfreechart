@@ -503,8 +503,6 @@ public abstract class Marker implements Cloneable, Serializable {
      * @param listener  the object to be registered.
      *
      * @see #removeChangeListener(MarkerChangeListener)
-     *
-     * @since 1.0.3
      */
     public void addChangeListener(MarkerChangeListener listener) {
         this.listenerList.add(MarkerChangeListener.class, listener);
@@ -516,8 +514,6 @@ public abstract class Marker implements Cloneable, Serializable {
      * @param listener  the object to be unregistered.
      *
      * @see #addChangeListener(MarkerChangeListener)
-     *
-     * @since 1.0.3
      */
     public void removeChangeListener(MarkerChangeListener listener) {
         this.listenerList.remove(MarkerChangeListener.class, listener);
@@ -527,8 +523,6 @@ public abstract class Marker implements Cloneable, Serializable {
      * Notifies all registered listeners that the marker has been modified.
      *
      * @param event  information about the change event.
-     *
-     * @since 1.0.3
      */
     public void notifyListeners(MarkerChangeEvent event) {
 
@@ -547,8 +541,6 @@ public abstract class Marker implements Cloneable, Serializable {
      * @param listenerType  the listener type.
      *
      * @return The array of listeners.
-     *
-     * @since 1.0.3
      */
     public <T extends EventListener> T[] getListeners(Class<T> listenerType) {
         return this.listenerList.getListeners(listenerType);

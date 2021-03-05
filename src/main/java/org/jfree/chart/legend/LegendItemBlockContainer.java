@@ -95,8 +95,6 @@ public class LegendItemBlockContainer extends BlockContainer {
      * Returns a reference to the dataset for the associated legend item.
      *
      * @return A dataset reference.
-     *
-     * @since 1.0.6
      */
     public Dataset getDataset() {
         return this.dataset;

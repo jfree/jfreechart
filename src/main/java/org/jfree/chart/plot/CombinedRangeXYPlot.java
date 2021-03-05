@@ -481,8 +481,6 @@ public class CombinedRangeXYPlot<S extends Comparable<S>> extends XYPlot<S>
      * @param panRange the distance to pan (as a percentage of the axis length).
      * @param info the plot info
      * @param source the source point where the pan action started.
-     *
-     * @since 1.0.15
      */
     @Override
     public void panDomainAxes(double panRange, PlotRenderingInfo info,

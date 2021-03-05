@@ -74,18 +74,10 @@ public class LegendItem implements Cloneable, Serializable {
     /** For serialization. */
     private static final long serialVersionUID = -797214582948827144L;
 
-    /**
-     * The dataset.
-     *
-     * @since 1.0.6
-     */
+    /** The dataset. */
     private Dataset dataset;
 
-    /**
-     * The series key.
-     *
-     * @since 1.0.6
-     */
+    /** The series key. */
     private Comparable seriesKey;
 
     /** The dataset index. */
@@ -97,18 +89,10 @@ public class LegendItem implements Cloneable, Serializable {
     /** The label. */
     private final String label;
 
-    /**
-     * The label font ({@code null} is permitted).
-     *
-     * @since 1.0.11
-     */
+    /** The label font ({@code null} is permitted). */
     private Font labelFont;
 
-    /**
-     * The label paint ({@code null} is permitted).
-     *
-     * @since 1.0.11
-     */
+    /** The label paint ({@code null} is permitted). */
     private transient Paint labelPaint;
 
     /** The attributed label (if null, fall back to the regular label). */
@@ -137,11 +121,7 @@ public class LegendItem implements Cloneable, Serializable {
     /** The paint. */
     private transient Paint fillPaint;
 
-    /**
-     * A gradient paint transformer.
-     *
-     * @since 1.0.4
-     */
+    /** A gradient paint transformer. */
     private GradientPaintTransformer fillPaintTransformer;
 
     /** A flag that controls whether or not the shape outline is visible. */
@@ -182,8 +162,6 @@ public class LegendItem implements Cloneable, Serializable {
      * attributes take default values.
      *
      * @param label  the label ({@code null} not permitted).
-     *
-     * @since 1.0.10
      */
     public LegendItem(String label) {
         this(label, Color.BLACK);
@@ -195,8 +173,6 @@ public class LegendItem implements Cloneable, Serializable {
      *
      * @param label  the label ({@code null} not permitted).
      * @param paint  the paint ({@code null} not permitted).
-     *
-     * @since 1.0.12
      */
     public LegendItem(String label, Paint paint) {
         this(label, null, null, null, new Rectangle2D.Double(-4.0, -4.0, 8.0,
@@ -501,8 +477,6 @@ public class LegendItem implements Cloneable, Serializable {
      *
      * @return The dataset.
      *
-     * @since 1.0.6
-     *
      * @see #setDatasetIndex(int)
      */
     public Dataset getDataset() {
@@ -513,8 +487,6 @@ public class LegendItem implements Cloneable, Serializable {
      * Sets the dataset.
      *
      * @param dataset  the dataset.
-     *
-     * @since 1.0.6
      */
     public void setDataset(Dataset dataset) {
         this.dataset = dataset;
@@ -524,8 +496,6 @@ public class LegendItem implements Cloneable, Serializable {
      * Returns the dataset index for this legend item.
      *
      * @return The dataset index.
-     *
-     * @since 1.0.2
      *
      * @see #setDatasetIndex(int)
      * @see #getDataset()
@@ -539,8 +509,6 @@ public class LegendItem implements Cloneable, Serializable {
      *
      * @param index  the index.
      *
-     * @since 1.0.2
-     *
      * @see #getDatasetIndex()
      */
     public void setDatasetIndex(int index) {
@@ -552,8 +520,6 @@ public class LegendItem implements Cloneable, Serializable {
      *
      * @return The series key.
      *
-     * @since 1.0.6
-     *
      * @see #setSeriesKey(Comparable)
      */
     public Comparable getSeriesKey() {
@@ -564,8 +530,6 @@ public class LegendItem implements Cloneable, Serializable {
      * Sets the series key.
      *
      * @param key  the series key.
-     *
-     * @since 1.0.6
      */
     public void setSeriesKey(Comparable key) {
         this.seriesKey = key;
@@ -575,8 +539,6 @@ public class LegendItem implements Cloneable, Serializable {
      * Returns the series index for this legend item.
      *
      * @return The series index.
-     *
-     * @since 1.0.2
      */
     public int getSeriesIndex() {
         return this.series;
@@ -586,8 +548,6 @@ public class LegendItem implements Cloneable, Serializable {
      * Sets the series index for this legend item.
      *
      * @param index  the index.
-     *
-     * @since 1.0.2
      */
     public void setSeriesIndex(int index) {
         this.series = index;
@@ -606,8 +566,6 @@ public class LegendItem implements Cloneable, Serializable {
      * Returns the label font.
      *
      * @return The label font (possibly {@code null}).
-     *
-     * @since 1.0.11
      */
     public Font getLabelFont() {
         return this.labelFont;
@@ -617,8 +575,6 @@ public class LegendItem implements Cloneable, Serializable {
      * Sets the label font.
      *
      * @param font  the font ({@code null} permitted).
-     *
-     * @since 1.0.11
      */
     public void setLabelFont(Font font) {
         this.labelFont = font;
@@ -628,8 +584,6 @@ public class LegendItem implements Cloneable, Serializable {
      * Returns the paint used to draw the label.
      *
      * @return The paint (possibly {@code null}).
-     *
-     * @since 1.0.11
      */
     public Paint getLabelPaint() {
         return this.labelPaint;
@@ -639,8 +593,6 @@ public class LegendItem implements Cloneable, Serializable {
      * Sets the paint used to draw the label.
      *
      * @param paint  the paint ({@code null} permitted).
-     *
-     * @since 1.0.11
      */
     public void setLabelPaint(Paint paint) {
         this.labelPaint = paint;
@@ -672,7 +624,6 @@ public class LegendItem implements Cloneable, Serializable {
      * @param text  the description ({@code null} permitted).
      *
      * @see #getDescription()
-     * @since 1.0.14
      */
     public void setDescription(String text) {
         this.description = text;
@@ -695,7 +646,6 @@ public class LegendItem implements Cloneable, Serializable {
      * @param text  the text ({@code null} permitted).
      *
      * @see #getToolTipText()
-     * @since 1.0.14
      */
     public void setToolTipText(String text) {
         this.toolTipText = text;
@@ -718,8 +668,6 @@ public class LegendItem implements Cloneable, Serializable {
      * @param text  the text ({@code null} permitted).
      *
      * @see #getURLText()
-     *
-     * @since 1.0.14
      */
     public void setURLText(String text) {
         this.urlText = text;
@@ -743,8 +691,6 @@ public class LegendItem implements Cloneable, Serializable {
      *
      * @see #isShapeVisible()
      * @see #isLineVisible()
-     *
-     * @since 1.0.14
      */
     public void setShapeVisible(boolean visible) {
         this.shapeVisible = visible;
@@ -768,7 +714,6 @@ public class LegendItem implements Cloneable, Serializable {
      * @param shape  the shape ({@code null} not permitted).
      *
      * @see #getShape()
-     * @since 1.0.14
      */
     public void setShape(Shape shape) {
         Args.nullNotPermitted(shape, "shape");
@@ -797,8 +742,6 @@ public class LegendItem implements Cloneable, Serializable {
      * Sets the fill paint.
      *
      * @param paint  the paint ({@code null} not permitted).
-     *
-     * @since 1.0.11
      */
     public void setFillPaint(Paint paint) {
         Args.nullNotPermitted(paint, "paint");
@@ -828,8 +771,6 @@ public class LegendItem implements Cloneable, Serializable {
      * Sets the line stroke.
      * 
      * @param stroke  the stroke ({@code null} not permitted).
-     * 
-     * @since 1.0.18
      */
     public void setLineStroke(Stroke stroke) {
         Args.nullNotPermitted(stroke, "stroke");
@@ -849,8 +790,6 @@ public class LegendItem implements Cloneable, Serializable {
      * Sets the line paint.
      *
      * @param paint  the paint ({@code null} not permitted).
-     *
-     * @since 1.0.11
      */
     public void setLinePaint(Paint paint) {
         Args.nullNotPermitted(paint, "paint");
@@ -870,8 +809,6 @@ public class LegendItem implements Cloneable, Serializable {
      * Sets the outline paint.
      *
      * @param paint  the paint ({@code null} not permitted).
-     *
-     * @since 1.0.11
      */
     public void setOutlinePaint(Paint paint) {
         Args.nullNotPermitted(paint, "paint");
@@ -895,8 +832,6 @@ public class LegendItem implements Cloneable, Serializable {
      * @param stroke  the stroke ({@code null} not permitted).
      *
      * @see #getOutlineStroke()
-     *
-     * @since 1.0.14
      */
     public void setOutlineStroke(Stroke stroke) {
         Args.nullNotPermitted(stroke, "stroke");
@@ -921,7 +856,6 @@ public class LegendItem implements Cloneable, Serializable {
      * @param visible  the new flag value.
      *
      * @see #isLineVisible()
-     * @since 1.0.14
      */
     public void setLineVisible(boolean visible) {
         this.lineVisible = visible;
@@ -945,7 +879,6 @@ public class LegendItem implements Cloneable, Serializable {
      * @param line  the line ({@code null} not permitted).
      *
      * @see #getLine()
-     * @since 1.0.14
      */
     public void setLine(Shape line) {
         Args.nullNotPermitted(line, "line");
@@ -958,8 +891,6 @@ public class LegendItem implements Cloneable, Serializable {
      *
      * @return The transformer (never {@code null}).
      *
-     * @since 1.0.4
-     *
      * @see #setFillPaintTransformer(GradientPaintTransformer)
      */
     public GradientPaintTransformer getFillPaintTransformer() {
@@ -971,8 +902,6 @@ public class LegendItem implements Cloneable, Serializable {
      * {@code GradientPaint}.
      *
      * @param transformer  the transformer ({@code null} not permitted).
-     *
-     * @since 1.0.4
      *
      * @see #getFillPaintTransformer()
      */
@@ -1090,8 +1019,6 @@ public class LegendItem implements Cloneable, Serializable {
      * @return A clone.
      *
      * @throws CloneNotSupportedException if the legend item cannot be cloned.
-     *
-     * @since 1.0.10
      */
     @Override
     public Object clone() throws CloneNotSupportedException {
