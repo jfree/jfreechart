@@ -100,8 +100,6 @@ public class StackedAreaRenderer extends AreaRenderer
      * {@code false} otherwise.
      *
      * @return A boolean.
-     *
-     * @since 1.0.3
      */
     public boolean getRenderAsPercentages() {
         return this.renderAsPercentages;
@@ -113,8 +111,6 @@ public class StackedAreaRenderer extends AreaRenderer
      * a {@link RendererChangeEvent} to all registered listeners.
      *
      * @param asPercentages  the flag.
-     *
-     * @since 1.0.3
      */
     public void setRenderAsPercentages(boolean asPercentages) {
         this.renderAsPercentages = asPercentages;

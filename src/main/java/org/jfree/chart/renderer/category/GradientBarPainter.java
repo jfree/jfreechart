@@ -51,8 +51,6 @@ import org.jfree.chart.api.RectangleEdge;
 /**
  * An implementation of the {@link BarPainter} interface that uses several
  * gradient fills to enrich the appearance of the bars.
- *
- * @since 1.0.11
  */
 public class GradientBarPainter implements BarPainter, Serializable {
 

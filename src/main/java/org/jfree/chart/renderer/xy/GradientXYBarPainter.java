@@ -51,8 +51,6 @@ import org.jfree.chart.api.RectangleEdge;
 /**
  * An implementation of the {@link XYBarPainter} interface that uses several
  * gradient fills to enrich the appearance of the bars.
- *
- * @since 1.0.11
  */
 public class GradientXYBarPainter implements XYBarPainter, Serializable {
 

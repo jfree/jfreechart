@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * BarPainter.java
  * ---------------
- * (C) Copyright 2008, by Object Refinery Limited.
+ * (C) Copyright 2008-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -56,8 +56,6 @@ import org.jfree.chart.api.RectangleEdge;
  * <li>the class should be {@code Serializable}, otherwise chart
  *     serialization will not be supported.</li>
  * </ul>
- *
- * @since 1.0.11
  */
 public interface BarPainter {
 

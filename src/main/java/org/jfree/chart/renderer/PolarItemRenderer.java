@@ -141,8 +141,6 @@ public interface PolarItemRenderer {
      * @param column  the column index (zero based).
      *
      * @return The generator (possibly {@code null}).
-     *
-     * @since 1.0.14
      */
     XYToolTipGenerator getToolTipGenerator(int row, int column);
 

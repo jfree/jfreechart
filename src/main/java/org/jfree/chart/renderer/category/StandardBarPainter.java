@@ -53,8 +53,6 @@ import org.jfree.chart.api.RectangleEdge;
  * {@link BarPainter} interface.
  *
  * @see GradientBarPainter
- *
- * @since 1.0.11
  */
 public class StandardBarPainter implements BarPainter, Serializable {
 

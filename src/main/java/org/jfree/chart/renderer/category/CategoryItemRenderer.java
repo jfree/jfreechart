@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -28,7 +28,7 @@
  * CategoryItemRenderer.java
  * -------------------------
  *
- * (C) Copyright 2001-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2001-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Mark Watson (www.markwatson.com);
@@ -1592,10 +1592,9 @@ public interface CategoryItemRenderer extends ChartElement, LegendItemSource {
      * @param edge  the edge along which the axis lies.
      *
      * @return The Java2D coordinate for the middle of the item.
-     *
-     * @since 1.0.11
      */
-    double getItemMiddle(Comparable rowKey, Comparable columnKey, CategoryDataset dataset, CategoryAxis axis,
+    double getItemMiddle(Comparable rowKey, Comparable columnKey, 
+            CategoryDataset dataset, CategoryAxis axis,
             Rectangle2D area, RectangleEdge edge);
 
 }

@@ -540,8 +540,6 @@ public class GanttRenderer extends IntervalBarRenderer implements Serializable {
      * @param edge  the edge along which the axis lies.
      *
      * @return The Java2D coordinate.
-     *
-     * @since 1.0.11
      */
     @Override
     public double getItemMiddle(Comparable rowKey, Comparable columnKey,

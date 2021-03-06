@@ -64,8 +64,6 @@ import org.jfree.data.xy.XYDataset;
  * collection:
  * <br><br>
  * <img src="doc-files/DeviationRendererSample.png" alt="DeviationRendererSample.png">
- *
- * @since 1.0.5
  */
 public class DeviationRenderer extends XYLineAndShapeRenderer {
 

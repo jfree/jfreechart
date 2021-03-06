@@ -87,8 +87,6 @@ public class StatisticalLineAndShapeRenderer extends LineAndShapeRenderer
     /** 
      * The stroke used to draw the error indicators.  If null, the renderer
      * will use the itemOutlineStroke.
-     * 
-     * @since 1.0.13
      */
     private transient Stroke errorIndicatorStroke;
 
@@ -145,8 +143,6 @@ public class StatisticalLineAndShapeRenderer extends LineAndShapeRenderer
      *         {@code null}).
      *
      * @see #setErrorIndicatorStroke(Stroke)
-     *
-     * @since 1.0.13
      */
     public Stroke getErrorIndicatorStroke() {
         return this.errorIndicatorStroke;
@@ -160,8 +156,6 @@ public class StatisticalLineAndShapeRenderer extends LineAndShapeRenderer
      * @param stroke  the stroke ({@code null} permitted).
      *
      * @see #getErrorIndicatorStroke()
-     *
-     * @since 1.0.13
      */
     public void setErrorIndicatorStroke(Stroke stroke) {
         this.errorIndicatorStroke = stroke;

@@ -90,8 +90,6 @@ public class StatisticalBarRenderer extends BarRenderer
 
     /**
      * The stroke used to draw the error indicators.
-     *
-     * @since 1.0.8
      */
     private transient Stroke errorIndicatorStroke;
 
@@ -137,8 +135,6 @@ public class StatisticalBarRenderer extends BarRenderer
      * @return The stroke (possibly {@code null}).
      *
      * @see #setErrorIndicatorStroke(Stroke)
-     *
-     * @since 1.0.8
      */
     public Stroke getErrorIndicatorStroke() {
         return this.errorIndicatorStroke;
@@ -153,8 +149,6 @@ public class StatisticalBarRenderer extends BarRenderer
      * @param stroke  the stroke ({@code null} permitted).
      *
      * @see #getErrorIndicatorStroke()
-     *
-     * @since 1.0.8
      */
     public void setErrorIndicatorStroke(Stroke stroke) {
         this.errorIndicatorStroke = stroke;

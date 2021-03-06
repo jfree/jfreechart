@@ -402,8 +402,6 @@ public class MinMaxCategoryRenderer extends AbstractCategoryItemRenderer {
      * @param obj  the object ({@code null} permitted).
      *
      * @return A boolean.
-     *
-     * @since 1.0.7
      */
     @Override
     public boolean equals(Object obj) {
