@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * HighLowRenderer.java
  * --------------------
- * (C) Copyright 2001-2016, by Object Refinery Limited.
+ * (C) Copyright 2001-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Richard Atkinson;
@@ -100,8 +100,6 @@ public class HighLowRenderer extends AbstractXYItemRenderer
 
     /**
      * The tick length (in Java2D units).
-     *
-     * @since 1.0.10
      */
     private double tickLength;
 
@@ -224,8 +222,6 @@ public class HighLowRenderer extends AbstractXYItemRenderer
      *
      * @return The tick length.
      *
-     * @since 1.0.10
-     *
      * @see #setTickLength(double)
      */
     public double getTickLength() {
@@ -237,8 +233,6 @@ public class HighLowRenderer extends AbstractXYItemRenderer
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param length  the length.
-     *
-     * @since 1.0.10
      *
      * @see #getTickLength()
      */

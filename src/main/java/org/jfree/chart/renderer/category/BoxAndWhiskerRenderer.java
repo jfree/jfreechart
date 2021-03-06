@@ -114,15 +114,11 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
 
     /**
      * A flag that controls whether or not the median indicator is drawn.
-     * 
-     * @since 1.0.13
      */
     private boolean medianVisible;
 
     /**
      * A flag that controls whether or not the mean indicator is drawn.
-     *
-     * @since 1.0.13
      */
     private boolean meanVisible;
 
@@ -140,15 +136,11 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      * A flag that, if {@code true}, causes the whiskers to be drawn
      * using the outline paint for the series.  The default value is
      * {@code false} and in that case the regular series paint is used.
-     *
-     * @since 1.0.14
      */
     private boolean useOutlinePaintForWhiskers;
 
     /**
      * The width of the whiskers as fraction of the bar width.
-     *
-     * @since 1.0.14
      */
     private double whiskerWidth;
 
@@ -251,8 +243,6 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      * @return The maximum bar width.
      *
      * @see #setMaximumBarWidth(double)
-     *
-     * @since 1.0.10
      */
     public double getMaximumBarWidth() {
         return this.maximumBarWidth;
@@ -267,8 +257,6 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      *     percent).
      *
      * @see #getMaximumBarWidth()
-     *
-     * @since 1.0.10
      */
     public void setMaximumBarWidth(double percent) {
         this.maximumBarWidth = percent;
@@ -282,8 +270,6 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      * @return A boolean.
      *
      * @see #setMeanVisible(boolean)
-     *
-     * @since 1.0.13
      */
     public boolean isMeanVisible() {
         return this.meanVisible;
@@ -297,8 +283,6 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      * @param visible  the new flag value.
      *
      * @see #isMeanVisible()
-     *
-     * @since 1.0.13
      */
     public void setMeanVisible(boolean visible) {
         if (this.meanVisible == visible) {
@@ -315,8 +299,6 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      * @return A boolean.
      *
      * @see #setMedianVisible(boolean)
-     *
-     * @since 1.0.13
      */
     public boolean isMedianVisible() {
         return this.medianVisible;
@@ -330,8 +312,6 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      * @param visible  the new flag value.
      *
      * @see #isMedianVisible()
-     *
-     * @since 1.0.13
      */
     public void setMedianVisible(boolean visible) {
         if (this.medianVisible == visible) {
@@ -412,8 +392,6 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      * be drawn using the series outline paint.
      *
      * @return A boolean.
-     *
-     * @since 1.0.14
      */
     public boolean getUseOutlinePaintForWhiskers() {
         return this.useOutlinePaintForWhiskers;
@@ -425,8 +403,6 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param flag  the new flag value.
-     *
-     * @since 1.0.14
      */
     public void setUseOutlinePaintForWhiskers(boolean flag) {
         if (this.useOutlinePaintForWhiskers == flag) {
@@ -442,8 +418,6 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      * @return The width of the whiskers.
      *
      * @see #setWhiskerWidth(double)
-     *
-     * @since 1.0.14
      */
     public double getWhiskerWidth() {
         return this.whiskerWidth;
@@ -457,8 +431,6 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      *     whisker is supposed to be compared to the bar.
      * @see #getWhiskerWidth()
      * @see CategoryItemRendererState#getBarWidth()
-     *
-     * @since 1.0.14
      */
     public void setWhiskerWidth(double width) {
         if (width < 0 || width > 1) {

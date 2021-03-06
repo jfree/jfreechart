@@ -44,8 +44,6 @@ import org.jfree.chart.internal.Args;
 /**
  * Represents one (Comparable, Object) data item for use in a
  * {@link ComparableObjectSeries}.
- *
- * @since 1.0.3
  */
 public class ComparableObjectItem implements Comparable<ComparableObjectItem>, 
         Cloneable, Serializable {

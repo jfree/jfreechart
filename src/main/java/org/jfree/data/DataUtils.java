@@ -56,8 +56,6 @@ public abstract class DataUtils {
      * @param b  the second array ({@code null} permitted).
      *
      * @return A boolean.
-     *
-     * @since 1.0.13
      */
     public static boolean equal(double[][] a, double[][] b) {
         if (a == null) {
@@ -83,8 +81,6 @@ public abstract class DataUtils {
      * @param source  the source array ({@code null} not permitted).
      *
      * @return A clone of the array.
-     *
-     * @since 1.0.13
      */
     public static double[][] clone(double[][] source) {
         Args.nullNotPermitted(source, "source");
@@ -130,8 +126,6 @@ public abstract class DataUtils {
      * @param validRows the array with valid rows (zero-based).
      *
      * @return The total of the valid values in the specified column.
-     *
-     * @since 1.0.13
      */
     public static double calculateColumnTotal(Values2D data, int column,
              int[] validRows) {
@@ -180,8 +174,6 @@ public abstract class DataUtils {
      * @param validCols the array with valid cols (zero-based).
      *
      * @return The total of the valid values in the specified row.
-     *
-     * @since 1.0.13
      */
     public static double calculateRowTotal(Values2D data, int row,
              int[] validCols) {

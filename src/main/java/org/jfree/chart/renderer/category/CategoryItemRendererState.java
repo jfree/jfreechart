@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,19 +27,10 @@
  * ------------------------------
  * CategoryItemRendererState.java
  * ------------------------------
- * (C) Copyright 2003-2009, by Object Refinery Limited.
+ * (C) Copyright 2003-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Peter Kolb (patch 2497611);
- *
- * Changes (since 20-Oct-2003):
- * ----------------------------
- * 20-Oct-2003 : Added series running total (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 01-Dec-2006 : Updated API docs (DG);
- * 26-Jun-2008 : Added CrosshairState (DG);
- * 14-Jan-2009 : Added visibleSeries[] array (PK);
- * 04-Feb-2009 : Added getVisibleSeriesArray() method (DG);
  *
  */
 
@@ -67,8 +58,6 @@ public class CategoryItemRendererState extends RendererState {
     /**
      * State information for crosshairs in the plot (this is updated by the
      * renderer, but may be passed to several renderers in one chart).
-     *
-     * @since 1.0.11
      */
     private CategoryCrosshairState crosshairState;
 
@@ -135,8 +124,6 @@ public class CategoryItemRendererState extends RendererState {
      *
      * @return The crosshair state (possibly {@code null}).
      *
-     * @since 1.0.11
-     *
      * @see #setCrosshairState(CategoryCrosshairState)
      */
     public CategoryCrosshairState getCrosshairState() {
@@ -147,8 +134,6 @@ public class CategoryItemRendererState extends RendererState {
      * Sets the crosshair state.
      *
      * @param state  the new state ({@code null} permitted).
-     *
-     * @since 1.0.11
      *
      * @see #getCrosshairState()
      */
@@ -165,8 +150,6 @@ public class CategoryItemRendererState extends RendererState {
      * @param rowIndex  the row index.
      *
      * @return The new row index or -1.
-     *
-     * @since 1.0.13
      */
     public int getVisibleSeriesIndex(int rowIndex) {
         if (this.visibleSeries == null) {
@@ -187,8 +170,6 @@ public class CategoryItemRendererState extends RendererState {
      * been specified.
      *
      * @return The number or -1.
-     *
-     * @since 1.0.13
      */
     public int getVisibleSeriesCount() {
         if (this.visibleSeries == null) {
@@ -201,8 +182,6 @@ public class CategoryItemRendererState extends RendererState {
      * Returns a copy of the visible series array.
      * 
      * @return The visible series array (possibly {@code null}).
-     * 
-     * @since 1.0.13
      */
     public int[] getVisibleSeriesArray() {
         if (this.visibleSeries == null) {
@@ -218,8 +197,6 @@ public class CategoryItemRendererState extends RendererState {
      * Sets an array with the indices of the visible rows.
      *
      * @param visibleSeries the array ({@code null} permitted).
-     *
-     * @since 1.0.13
      */
     public void setVisibleSeriesArray(int[] visibleSeries) {
         this.visibleSeries = visibleSeries;

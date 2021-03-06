@@ -51,8 +51,6 @@ import org.jfree.chart.plot.Zoomable;
 
 /**
  * A class that handles mouse wheel events for the {@link ChartPanel} class.
- *
- * @since 1.0.13
  */
 public class MouseWheelHandler implements MouseWheelListener, Serializable {
 

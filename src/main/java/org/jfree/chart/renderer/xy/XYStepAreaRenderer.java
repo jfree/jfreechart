@@ -107,8 +107,6 @@ public class XYStepAreaRenderer extends AbstractXYItemRenderer
     /**
      * The factor (from 0.0 to 1.0) that determines the position of the
      * step.
-     *
-     * @since 1.0.18.
      */
     private double stepPoint;
 
@@ -298,8 +296,6 @@ public class XYStepAreaRenderer extends AbstractXYItemRenderer
      *         step is drawn.
      *
      * @see #setStepPoint(double)
-     *
-     * @since 1.0.18
      */
     public double getStepPoint() {
         return stepPoint;
@@ -312,8 +308,6 @@ public class XYStepAreaRenderer extends AbstractXYItemRenderer
      * @param stepPoint  the step point (in the range 0.0 to 1.0)
      *
      * @see #getStepPoint()
-     *
-     * @since 1.0.18
      */
     public void setStepPoint(double stepPoint) {
         if (stepPoint < 0.0d || stepPoint > 1.0d) {
