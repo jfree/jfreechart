@@ -96,8 +96,8 @@ import org.jfree.data.general.DatasetUtils;
 import org.jfree.data.xy.XYDataset;
 
 /**
- * Plots data that is in (theta, radius) pairs where
- * theta equal to zero is due north and increases clockwise.
+ * Plots data that is in (theta, radius) pairs where theta equal to zero is 
+ * due north and increases clockwise.
  */
 public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
         RendererChangeListener, Cloneable, Serializable {
@@ -111,14 +111,10 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     /** The annotation margin. */
     private static final double ANNOTATION_MARGIN = 7.0;
 
-    /**
-     * The default angle tick unit size.
-     */
+    /** The default angle tick unit size. */
     public static final double DEFAULT_ANGLE_TICK_UNIT_SIZE = 45.0;
 
-    /**
-     * The default angle offset.
-     */
+    /** The default angle offset. */
     public static final double DEFAULT_ANGLE_OFFSET = -90.0;
 
     /** The default grid line stroke. */

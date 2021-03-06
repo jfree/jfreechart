@@ -39,6 +39,7 @@ package org.jfree.chart.renderer;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.util.List;
+import org.jfree.chart.axis.NumberTick;
 
 import org.jfree.chart.legend.LegendItem;
 import org.jfree.chart.axis.ValueAxis;
@@ -79,7 +80,7 @@ public interface PolarItemRenderer {
      * @param dataArea  the data area.
      */
     void drawAngularGridLines(Graphics2D g2, PolarPlot plot,
-            List ticks, Rectangle2D dataArea);
+            List<NumberTick> ticks, Rectangle2D dataArea);
 
     /**
      * Draw the radial gridlines - the rings.
@@ -167,23 +168,23 @@ public interface PolarItemRenderer {
     void setSeriesToolTipGenerator(int series, XYToolTipGenerator generator);
 
     /**
-     * Returns the base tool tip generator.
+     * Returns the default tool tip generator.
      *
      * @return The generator (possibly {@code null}).
      *
-     * @see #setBaseToolTipGenerator(XYToolTipGenerator)
+     * @see #setDefaultToolTipGenerator(XYToolTipGenerator)
      */
-    XYToolTipGenerator getBaseToolTipGenerator();
+    XYToolTipGenerator getDefaultToolTipGenerator();
 
     /**
-     * Sets the base tool tip generator and sends a {@link RendererChangeEvent}
+     * Sets the default tool tip generator and sends a {@link RendererChangeEvent}
      * to all registered listeners.
      *
      * @param generator  the generator ({@code null} permitted).
      *
-     * @see #getBaseToolTipGenerator()
+     * @see #getDefaultToolTipGenerator()
      */
-    void setBaseToolTipGenerator(XYToolTipGenerator generator);
+    void setDefaultToolTipGenerator(XYToolTipGenerator generator);
 
 
     //// URL GENERATOR ////////////////////////////////////////////////////////

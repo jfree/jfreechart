@@ -129,14 +129,10 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      */
     private Map<Integer, XYToolTipGenerator> toolTipGeneratorMap;
 
-    /**
-     * The base tool tip generator.
-     */
-    private XYToolTipGenerator baseToolTipGenerator;
+    /** The default tool tip generator. */
+    private XYToolTipGenerator defaultToolTipGenerator;
 
-    /**
-     * The URL text generator.
-     */
+    /** The URL text generator. */
     private XYURLGenerator urlGenerator;
 
     /**
@@ -677,7 +673,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
     public XYToolTipGenerator getToolTipGenerator(int series, int item) {
         XYToolTipGenerator generator = this.toolTipGeneratorMap.get(series);
         if (generator == null) {
-            generator = this.baseToolTipGenerator;
+            generator = this.defaultToolTipGenerator;
         }
         return generator;
     }
@@ -710,8 +706,8 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * @return The default tool tip generator (possibly {@code null}).
      */
     @Override
-    public XYToolTipGenerator getBaseToolTipGenerator() {
-        return this.baseToolTipGenerator;
+    public XYToolTipGenerator getDefaultToolTipGenerator() {
+        return this.defaultToolTipGenerator;
     }
 
     /**
@@ -721,8 +717,8 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * @param generator  the generator ({@code null} permitted).
      */
     @Override
-    public void setBaseToolTipGenerator(XYToolTipGenerator generator) {
-        this.baseToolTipGenerator = generator;
+    public void setDefaultToolTipGenerator(XYToolTipGenerator generator) {
+        this.defaultToolTipGenerator = generator;
         fireChangeEvent();
     }
 
@@ -837,7 +833,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
         if (!this.toolTipGeneratorMap.equals(that.toolTipGeneratorMap)) {
             return false;
         }
-        if (!Objects.equals(this.baseToolTipGenerator, that.baseToolTipGenerator)) {
+        if (!Objects.equals(this.defaultToolTipGenerator, that.defaultToolTipGenerator)) {
             return false;
         }
         if (!Objects.equals(this.urlGenerator, that.urlGenerator)) {
@@ -861,13 +857,12 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      */
     @Override
     public Object clone() throws CloneNotSupportedException {
-        DefaultPolarItemRenderer clone
-                = (DefaultPolarItemRenderer) super.clone();
+        DefaultPolarItemRenderer clone = (DefaultPolarItemRenderer) super.clone();
         clone.legendLine = CloneUtils.clone(this.legendLine);
         clone.seriesFilledMap = new HashMap<>(this.seriesFilledMap);
         clone.toolTipGeneratorMap = CloneUtils.cloneMapValues(this.toolTipGeneratorMap);
-        if (clone.baseToolTipGenerator instanceof PublicCloneable) {
-            clone.baseToolTipGenerator = CloneUtils.clone(this.baseToolTipGenerator);
+        if (clone.defaultToolTipGenerator instanceof PublicCloneable) {
+            clone.defaultToolTipGenerator = CloneUtils.clone(this.defaultToolTipGenerator);
         }
         if (clone.urlGenerator instanceof PublicCloneable) {
             clone.urlGenerator = CloneUtils.clone(this.urlGenerator);
@@ -878,6 +873,10 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
         if (clone.legendItemURLGenerator instanceof PublicCloneable) {
             clone.legendItemURLGenerator = CloneUtils.clone(this.legendItemURLGenerator);
         }
+//        clone.defaultToolTipGenerator = CloneUtils.copy(this.defaultToolTipGenerator);
+//        clone.urlGenerator = CloneUtils.copy(this.urlGenerator);
+//        clone.legendItemToolTipGenerator = CloneUtils.copy(this.legendItemToolTipGenerator);
+//        clone.legendItemURLGenerator = CloneUtils.copy(this.legendItemURLGenerator);
         return clone;
     }
 
