@@ -484,39 +484,40 @@ public class LegendGraphic extends AbstractBlock
         LengthConstraintType w = contentConstraint.getWidthConstraintType();
         LengthConstraintType h = contentConstraint.getHeightConstraintType();
         Size2D contentSize = null;
-        if (w == LengthConstraintType.NONE) {
-            if (h == LengthConstraintType.NONE) {
-                contentSize = arrangeNN(g2);
-            }
-            else if (h == LengthConstraintType.RANGE) {
-                throw new RuntimeException("Not yet implemented.");
-            }
-            else if (h == LengthConstraintType.FIXED) {
-                throw new RuntimeException("Not yet implemented.");
-            }
-        }
-        else if (w == LengthConstraintType.RANGE) {
-            if (h == LengthConstraintType.NONE) {
-                throw new RuntimeException("Not yet implemented.");
-            }
-            else if (h == LengthConstraintType.RANGE) {
-                throw new RuntimeException("Not yet implemented.");
-            }
-            else if (h == LengthConstraintType.FIXED) {
-                throw new RuntimeException("Not yet implemented.");
-            }
-        }
-        else if (w == LengthConstraintType.FIXED) {
-            if (h == LengthConstraintType.NONE) {
-                throw new RuntimeException("Not yet implemented.");
-            }
-            else if (h == LengthConstraintType.RANGE) {
-                throw new RuntimeException("Not yet implemented.");
-            }
-            else if (h == LengthConstraintType.FIXED) {
-                contentSize = new Size2D(contentConstraint.getWidth(),
-                        contentConstraint.getHeight());
-            }
+        switch (w) {
+            case NONE:
+                if (h == LengthConstraintType.NONE) {
+                    contentSize = arrangeNN(g2);
+                }
+                else if (h == LengthConstraintType.RANGE) {
+                    throw new RuntimeException("Not yet implemented.");
+                }
+                else if (h == LengthConstraintType.FIXED) {
+                    throw new RuntimeException("Not yet implemented.");
+                }   break;
+            case RANGE:
+                if (h == LengthConstraintType.NONE) {
+                    throw new RuntimeException("Not yet implemented.");
+                }
+                else if (h == LengthConstraintType.RANGE) {
+                    throw new RuntimeException("Not yet implemented.");
+                }
+                else if (h == LengthConstraintType.FIXED) {
+                    throw new RuntimeException("Not yet implemented.");
+                }   break;
+            case FIXED:
+                if (h == LengthConstraintType.NONE) {
+                    throw new RuntimeException("Not yet implemented.");
+                }
+                else if (h == LengthConstraintType.RANGE) {
+                    throw new RuntimeException("Not yet implemented.");
+                }
+                else if (h == LengthConstraintType.FIXED) {
+                    contentSize = new Size2D(contentConstraint.getWidth(),
+                            contentConstraint.getHeight());
+                }   break;
+            default:
+                throw new IllegalStateException("Unrecognised widthConstraintType.");
         }
         assert contentSize != null;
         return new Size2D(calculateTotalWidth(contentSize.getWidth()),
@@ -669,10 +670,22 @@ public class LegendGraphic extends AbstractBlock
      */
     @Override
     public int hashCode() {
-        int result = 193;
-        result = 37 * result + Objects.hashCode(this.fillPaint);
-        // FIXME: use other fields too
-        return result;
+        int hash = 7;
+        hash = 89 * hash + (this.shapeVisible ? 1 : 0);
+        hash = 89 * hash + Objects.hashCode(this.shape);
+        hash = 89 * hash + Objects.hashCode(this.shapeLocation);
+        hash = 89 * hash + Objects.hashCode(this.shapeAnchor);
+        hash = 89 * hash + (this.shapeFilled ? 1 : 0);
+        hash = 89 * hash + Objects.hashCode(this.fillPaint);
+        hash = 89 * hash + Objects.hashCode(this.fillPaintTransformer);
+        hash = 89 * hash + (this.shapeOutlineVisible ? 1 : 0);
+        hash = 89 * hash + Objects.hashCode(this.outlinePaint);
+        hash = 89 * hash + Objects.hashCode(this.outlineStroke);
+        hash = 89 * hash + (this.lineVisible ? 1 : 0);
+        hash = 89 * hash + Objects.hashCode(this.line);
+        hash = 89 * hash + Objects.hashCode(this.lineStroke);
+        hash = 89 * hash + Objects.hashCode(this.linePaint);
+        return hash;
     }
 
     /**
