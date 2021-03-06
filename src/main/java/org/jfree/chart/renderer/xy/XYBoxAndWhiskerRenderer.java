@@ -259,8 +259,6 @@ public class XYBoxAndWhiskerRenderer extends AbstractXYItemRenderer
      *
      * @return The paint used to fill the box for the specified item (never
      *         {@code null}).
-     *
-     * @since 1.0.10
      */
     protected Paint lookupBoxPaint(int series, int item) {
         Paint p = getBoxPaint();

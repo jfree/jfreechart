@@ -45,8 +45,6 @@ import org.jfree.chart.api.PublicCloneable;
 
 /**
  * A paint scale that returns shades of gray.
- *
- * @since 1.0.4
  */
 public class GrayPaintScale
         implements PaintScale, PublicCloneable, Serializable {
@@ -59,8 +57,6 @@ public class GrayPaintScale
 
     /**
      * The alpha transparency (0-255).
-     *
-     * @since 1.0.13
      */
     private int alpha;
 
@@ -94,8 +90,6 @@ public class GrayPaintScale
      * @throws IllegalArgumentException if {@code lowerBound} is not
      *       less than {@code upperBound}, or {@code alpha} is not in
      *       the range 0 to 255.
-     *
-     * @since 1.0.13
      */
     public GrayPaintScale(double lowerBound, double upperBound, int alpha) {
         if (lowerBound >= upperBound) {
@@ -140,8 +134,6 @@ public class GrayPaintScale
      * Returns the alpha transparency that was specified in the constructor.
      * 
      * @return The alpha transparency (in the range 0 to 255).
-     * 
-     * @since 1.0.13
      */
     public int getAlpha() {
         return this.alpha;

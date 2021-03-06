@@ -1486,7 +1486,7 @@ public interface XYItemRenderer extends ChartElement, LegendItemSource {
      * 
      * @return The annotations (possibly empty, but never {@code null}).
      * 
-     * @since 1.6.0
+     * @since 2.0.0
      */
     Collection<XYAnnotation> getAnnotations();
 }

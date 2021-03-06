@@ -66,8 +66,6 @@ import org.jfree.data.xy.XYZDataset;
  * demo collection:
  * <br><br>
  * <img src="doc-files/XYBlockRendererSample.png" alt="XYBlockRendererSample.png">
- *
- * @since 1.0.4
  */
 public class XYBlockRenderer extends AbstractXYItemRenderer
         implements XYItemRenderer, Cloneable, PublicCloneable, Serializable {
@@ -211,7 +209,6 @@ public class XYBlockRenderer extends AbstractXYItemRenderer
      * @return The paint scale (never {@code null}).
      *
      * @see #setPaintScale(PaintScale)
-     * @since 1.0.4
      */
     public PaintScale getPaintScale() {
         return this.paintScale;
@@ -224,7 +221,6 @@ public class XYBlockRenderer extends AbstractXYItemRenderer
      * @param scale  the scale ({@code null} not permitted).
      *
      * @see #getPaintScale()
-     * @since 1.0.4
      */
     public void setPaintScale(PaintScale scale) {
         Args.nullNotPermitted(scale, "scale");

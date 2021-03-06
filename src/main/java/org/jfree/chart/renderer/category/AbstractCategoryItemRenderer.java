@@ -575,8 +575,6 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      * @param info  collects plot rendering info ({@code null} permitted).
      *
      * @return The new state instance (never {@code null}).
-     *
-     * @since 1.0.5
      */
     protected CategoryItemRendererState createState(PlotRenderingInfo info) {
         return new CategoryItemRendererState(info);
@@ -638,8 +636,6 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      *     permitted).
      * @param columnKey  the column key that identifies the element 
      *     ({@code null} not permitted). 
-     * 
-     * @since 1.0.20
      */
     protected void beginElementGroup(Graphics2D g2, Comparable rowKey,
             Comparable columnKey) {
@@ -667,10 +663,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      * @param dataset  the dataset ({@code null} permitted).
      * @param includeInterval  include the y-interval if the dataset has one.
      *
-     * @return The range ({@code null} if the dataset is {@code null}
-     *         or empty).
-     *
-     * @since 1.0.13
+     * @return The range ({@code null} if the dataset is {@code null} or empty).
      */
     protected Range findRangeBounds(CategoryDataset dataset,
             boolean includeInterval) {
@@ -704,8 +697,6 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      * @param edge  the edge along which the axis lies.
      *
      * @return The Java2D coordinate for the middle of the item.
-     *
-     * @since 1.0.11
      */
     @Override
     public double getItemMiddle(Comparable rowKey, Comparable columnKey,
@@ -802,8 +793,6 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      * @param value  the value at which the grid line should be drawn.
      * @param paint  the paint ({@code null} not permitted).
      * @param stroke  the stroke ({@code null} not permitted).
-     *
-     * @since 1.0.13
      */
     @Override
     public void drawRangeLine(Graphics2D g2, CategoryPlot plot, ValueAxis axis,
@@ -1301,10 +1290,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      * @param datasetIndex  the dataset index.
      * @param transX  the x-value translated to Java2D space.
      * @param transY  the y-value translated to Java2D space.
-     * @param orientation  the plot orientation ({@code null} not
-     *                     permitted).
-     *
-     * @since 1.0.11
+     * @param orientation  the plot orientation ({@code null} not permitted).
      */
     protected void updateCrosshairValues(CategoryCrosshairState crosshairState,
             Comparable rowKey, Comparable columnKey, double value,
@@ -1645,8 +1631,6 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      *                 used if {@code area} is {@code null}).
      * @param entityY  the entity's center y-coordinate in user space (only
      *                 used if {@code area} is {@code null}).
-     *
-     * @since 1.0.13
      */
     protected void addEntity(EntityCollection entities, Shape hotspot,
                              CategoryDataset dataset, int row, int column,

@@ -107,8 +107,6 @@ public class XYDifferenceRenderer extends AbstractXYItemRenderer
      * striping that anti-aliasing can generate.  However, the rounding may not
      * be appropriate for output in high resolution formats (for example,
      * vector graphics formats such as SVG and PDF).
-     *
-     * @since 1.0.4
      */
     private boolean roundXCoordinates;
 
@@ -245,8 +243,6 @@ public class XYDifferenceRenderer extends AbstractXYItemRenderer
      *
      * @return The flag.
      *
-     * @since 1.0.4
-     *
      * @see #setRoundXCoordinates(boolean)
      */
     public boolean getRoundXCoordinates() {
@@ -259,8 +255,6 @@ public class XYDifferenceRenderer extends AbstractXYItemRenderer
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param round  the new flag value.
-     *
-     * @since 1.0.4
      *
      * @see #getRoundXCoordinates()
      */

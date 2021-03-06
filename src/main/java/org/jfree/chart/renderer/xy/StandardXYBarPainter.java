@@ -53,8 +53,6 @@ import org.jfree.chart.api.RectangleEdge;
  * {@link XYBarPainter} interface.
  *
  * @see GradientXYBarPainter
- *
- * @since 1.0.11
  */
 public class StandardXYBarPainter implements XYBarPainter, Serializable {
 

@@ -64,8 +64,6 @@ import org.jfree.data.xy.XYDataset;
  * every data item - instead, it tries to plot only those data items that
  * make a difference to the visual output (the other data items are skipped).  
  * This renderer is designed for use with the {@link XYPlot} class.
- *
- * @since 1.0.13
  */
 public class SamplingXYLineRenderer extends AbstractXYItemRenderer
         implements XYItemRenderer, Cloneable, PublicCloneable, Serializable {

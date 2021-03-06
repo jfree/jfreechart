@@ -439,8 +439,6 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
      * registered listeners.
      *
      * @param flag  the new flag value.
-     *
-     * @since 1.0.5
      */
     public void setPlotDiscontinuous(boolean flag) {
         if (this.plotDiscontinuous != flag) {

@@ -61,8 +61,6 @@ import org.jfree.data.xy.XYDataset;
  * program included in the JFreeChart demo collection:
  * <br><br>
  * <img src="doc-files/VectorRendererSample.png" alt="VectorRendererSample.png">
- *
- * @since 1.0.6
  */
 public class VectorRenderer extends AbstractXYItemRenderer
         implements XYItemRenderer, Cloneable, PublicCloneable, Serializable {

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * StackedXYAreaRenderer2.java
  * ---------------------------
- * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited), based on
  *                   the StackedXYAreaRenderer class by Richard Atkinson;
@@ -80,8 +80,6 @@ public class StackedXYAreaRenderer2 extends XYAreaRenderer2
      * striping that anti-aliasing can generate.  However, the rounding may not
      * be appropriate for output in high resolution formats (for example,
      * vector graphics formats such as SVG and PDF).
-     *
-     * @since 1.0.3
      */
     private boolean roundXCoordinates;
 
@@ -111,8 +109,6 @@ public class StackedXYAreaRenderer2 extends XYAreaRenderer2
      *
      * @return The flag.
      *
-     * @since 1.0.4
-     *
      * @see #setRoundXCoordinates(boolean)
      */
     public boolean getRoundXCoordinates() {
@@ -125,8 +121,6 @@ public class StackedXYAreaRenderer2 extends XYAreaRenderer2
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param round  the new flag value.
-     *
-     * @since 1.0.4
      *
      * @see #getRoundXCoordinates()
      */
