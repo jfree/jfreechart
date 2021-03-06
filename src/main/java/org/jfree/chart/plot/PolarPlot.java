@@ -57,12 +57,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.Set;
 import java.util.TreeMap;
 import org.jfree.chart.ChartElementVisitor;
 
@@ -130,7 +130,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
             = ResourceBundle.getBundle("org.jfree.chart.plot.LocalizationBundle");
 
     /** The angles that are marked with gridlines. */
-    private List<NumberTick> angleTicks;
+    private List<ValueTick> angleTicks;
 
     /** The range axis (used for the y-values). */
     private Map<Integer, ValueAxis> axes;
@@ -193,7 +193,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
     private boolean radiusMinorGridlinesVisible;
 
     /** The annotations for the plot. */
-    private List cornerTextItems = new ArrayList();
+    private List<String> cornerTextItems = new ArrayList<>();
 
     /**
      * The actual margin in pixels.
@@ -1031,7 +1031,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      * @see #removeCornerTextItem(String)
      */
     public void clearCornerTextItems() {
-        if (this.cornerTextItems.size() > 0) {
+        if (!this.cornerTextItems.isEmpty()) {
             this.cornerTextItems.clear();
             fireChangeEvent();
         }
@@ -1042,11 +1042,10 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      *
      * @return A list of {@link NumberTick} instances.
      */
-    protected List<NumberTick> refreshAngleTicks() {
-        List<NumberTick> ticks = new ArrayList<>();
+    protected List<ValueTick> refreshAngleTicks() {
+        List<ValueTick> ticks = new ArrayList<>();
         for (double currentTickVal = 0.0; currentTickVal < 360.0;
                 currentTickVal += this.angleTickUnit.getSize()) {
-
             TextAnchor ta = calculateTextAnchor(currentTickVal);
             NumberTick tick = new NumberTick(currentTickVal,
                 this.angleTickUnit.valueToString(currentTickVal),
@@ -1079,26 +1078,19 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
 
         if (normalizedAngle == 0.0) {
             ta = TextAnchor.CENTER_LEFT;
-        }
-        else if (normalizedAngle > 0.0 && normalizedAngle < 90.0) {
+        } else if (normalizedAngle > 0.0 && normalizedAngle < 90.0) {
             ta = TextAnchor.TOP_LEFT;
-        }
-        else if (normalizedAngle == 90.0) {
+        } else if (normalizedAngle == 90.0) {
             ta = TextAnchor.TOP_CENTER;
-        }
-        else if (normalizedAngle > 90.0 && normalizedAngle < 180.0) {
+        } else if (normalizedAngle > 90.0 && normalizedAngle < 180.0) {
             ta = TextAnchor.TOP_RIGHT;
-        }
-        else if (normalizedAngle == 180) {
+        } else if (normalizedAngle == 180) {
             ta = TextAnchor.CENTER_RIGHT;
-        }
-        else if (normalizedAngle > 180.0 && normalizedAngle < 270.0) {
+        } else if (normalizedAngle > 180.0 && normalizedAngle < 270.0) {
             ta = TextAnchor.BOTTOM_RIGHT;
-        }
-        else if (normalizedAngle == 270) {
+        } else if (normalizedAngle == 270) {
             ta = TextAnchor.BOTTOM_CENTER;
-        }
-        else if (normalizedAngle > 270.0 && normalizedAngle < 360.0) {
+        } else if (normalizedAngle > 270.0 && normalizedAngle < 360.0) {
             ta = TextAnchor.BOTTOM_LEFT;
         }
         return ta;
@@ -1142,28 +1134,22 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      *
      * @param indices  the list of indices ({@code null} permitted).
      */
-    private void checkAxisIndices(List indices) {
+    private void checkAxisIndices(List<Integer> indices) {
         // axisIndices can be:
         // 1.  null;
         // 2.  non-empty, containing only Integer objects that are unique.
         if (indices == null) {
             return;  // OK
         }
-        int count = indices.size();
-        if (count == 0) {
+        if (indices.isEmpty()) {
             throw new IllegalArgumentException("Empty list not permitted.");
         }
-        HashSet set = new HashSet();
-        for (int i = 0; i < count; i++) {
-            Object item = indices.get(i);
-            if (!(item instanceof Integer)) {
-                throw new IllegalArgumentException(
-                        "Indices must be Integer instances.");
-            }
-            if (set.contains(item)) {
+        Set<Integer> set = new HashSet<>();
+        for (Integer i : indices) {
+            if (set.contains(i)) {
                 throw new IllegalArgumentException("Indices must be unique.");
             }
-            set.add(item);
+            set.add(i);
         }
     }
 
@@ -1331,8 +1317,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
         g2.setColor(Color.BLACK);
         double width = 0.0;
         double height = 0.0;
-        for (Iterator it = this.cornerTextItems.iterator(); it.hasNext();) {
-            String msg = (String) it.next();
+        for (String msg : this.cornerTextItems) {
             FontMetrics fm = g2.getFontMetrics();
             Rectangle2D bounds = TextUtils.getTextBounds(msg, g2, fm);
             width = Math.max(width, bounds.getWidth());
@@ -1348,8 +1333,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
         double y = area.getMaxY() - height;
         g2.drawRect((int) x, (int) y, (int) width, (int) height);
         x += ANNOTATION_MARGIN;
-        for (Iterator it = this.cornerTextItems.iterator(); it.hasNext();) {
-            String msg = (String) it.next();
+        for (String msg : this.cornerTextItems) {
             Rectangle2D bounds = TextUtils.getTextBounds(msg, g2,
                     g2.getFontMetrics());
             y += bounds.getHeight();
@@ -1471,7 +1455,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      * @param radialTicks  the ticks for the radial axis.
      */
     protected void drawGridlines(Graphics2D g2, Rectangle2D dataArea,
-                                 List<NumberTick> angularTicks, List radialTicks) {
+            List<ValueTick> angularTicks, List<ValueTick> radialTicks) {
 
         PolarItemRenderer renderer = getRenderer();
         // no renderer, no gridlines...
@@ -1494,9 +1478,8 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
             Stroke gridStroke = getRadiusGridlineStroke();
             Paint gridPaint = getRadiusGridlinePaint();
             if ((gridStroke != null) && (gridPaint != null)) {
-                List ticks = buildRadialTicks(radialTicks);
-                renderer.drawRadialGridLines(g2, this, getAxis(),
-                        ticks, dataArea);
+                List<ValueTick> ticks = buildRadialTicks(radialTicks);
+                renderer.drawRadialGridLines(g2, this, getAxis(), ticks, dataArea);
             }
         }
     }
@@ -1509,12 +1492,10 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      *        {@code null} not permitted.
      * @return Ticks to use for radial gridlines.
      */
-    protected List buildRadialTicks(List allTicks) {  //FIXME generics
-        List ticks = new ArrayList();
-        for (Object allTick : allTicks) {
-            ValueTick tick = (ValueTick) allTick;
-            if (isRadiusMinorGridlinesVisible() ||
-                    TickType.MAJOR.equals(tick.getTickType())) {
+    protected List<ValueTick> buildRadialTicks(List<ValueTick> allTicks) {
+        List<ValueTick> ticks = new ArrayList<>();
+        for (ValueTick tick : allTicks) {
+            if (isRadiusMinorGridlinesVisible() || TickType.MAJOR.equals(tick.getTickType())) {
                 ticks.add(tick);
             }
         }
@@ -1785,7 +1766,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
             }
         }
 
-        clone.cornerTextItems = new ArrayList(this.cornerTextItems);
+        clone.cornerTextItems = new ArrayList<>(this.cornerTextItems);
 
         return clone;
     }

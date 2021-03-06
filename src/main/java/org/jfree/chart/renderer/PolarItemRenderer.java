@@ -39,10 +39,10 @@ package org.jfree.chart.renderer;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.util.List;
-import org.jfree.chart.axis.NumberTick;
 
 import org.jfree.chart.legend.LegendItem;
 import org.jfree.chart.axis.ValueAxis;
+import org.jfree.chart.axis.ValueTick;
 import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.event.RendererChangeListener;
 import org.jfree.chart.labels.XYToolTipGenerator;
@@ -80,7 +80,7 @@ public interface PolarItemRenderer {
      * @param dataArea  the data area.
      */
     void drawAngularGridLines(Graphics2D g2, PolarPlot plot,
-            List<NumberTick> ticks, Rectangle2D dataArea);
+            List<ValueTick> ticks, Rectangle2D dataArea);
 
     /**
      * Draw the radial gridlines - the rings.
@@ -92,7 +92,7 @@ public interface PolarItemRenderer {
      * @param dataArea  the data area.
      */
     void drawRadialGridLines(Graphics2D g2, PolarPlot plot,
-            ValueAxis radialAxis, List ticks, Rectangle2D dataArea);
+            ValueAxis radialAxis, List<ValueTick> ticks, Rectangle2D dataArea);
 
     /**
      * Return the legend for the given series.
