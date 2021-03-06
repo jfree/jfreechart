@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * -------------------------
  * DialLayerChangeEvent.java
  * -------------------------
- * (C) Copyright 2006-2008, by Object Refinery Limited.
+ * (C) Copyright 2006-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 06-Nov-2006 : Version 1 (DG);
  *
  */
 
@@ -45,8 +41,6 @@ import org.jfree.chart.event.ChartChangeEvent;
 /**
  * An event that can be forwarded to any {@link DialLayerChangeListener} to
  * signal a change to a {@link DialLayer}.
- *
- * @since 1.0.7
  */
 public class DialLayerChangeEvent extends ChartChangeEvent {
 

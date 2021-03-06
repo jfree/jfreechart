@@ -63,8 +63,6 @@ import org.jfree.data.general.ValueDataset;
  * program included in the JFreeChart Demo Collection:
  * <br><br>
  * <img src="doc-files/DialPlotSample.png" alt="DialPlotSample.png">
- *
- * @since 1.0.7
  */
 public class DialPlot extends Plot implements DialLayerChangeListener {
 

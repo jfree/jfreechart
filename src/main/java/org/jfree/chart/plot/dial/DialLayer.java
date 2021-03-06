@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -32,10 +32,6 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * Changes
- * -------
- * 03-Nov-2006 : Version 1 (DG);
- *
  */
 
 package org.jfree.chart.plot.dial;
@@ -52,8 +48,6 @@ import java.util.EventListener;
  * <br><br>
  * Classes that implement this interface should be {@link Serializable},
  * otherwise chart serialization may fail.
- *
- * @since 1.0.7
  */
 public interface DialLayer {
 

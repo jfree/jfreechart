@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,27 +27,10 @@
  * -------------------
  * CrosshairState.java
  * -------------------
- * (C) Copyright 2002-2017, by Object Refinery Limited.
+ * (C) Copyright 2002-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 24-Jan-2002 : Version 1 (DG);
- * 05-Mar-2002 : Added Javadoc comments (DG);
- * 26-Sep-2002 : Fixed errors reported by Checkstyle (DG);
- * 19-Sep-2003 : Modified crosshair distance calculation (DG);
- * 04-Dec-2003 : Crosshair anchor point now stored outside chart since it is
- *               dependent on the display target (DG);
- * 25-Feb-2004 : Replaced CrosshairInfo --> CrosshairState (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 13-Oct-2006 : Fixed initialisation of CrosshairState - see bug report
- *               1565168 (DG);
- * 06-Feb-2007 : Added new fields and methods to fix bug 1086307 (DG);
- * 26-Jun-2008 : Now tracks dataset index (DG);
- * 18-Feb-2017 : Fix for crosshairs with multiple datasets / axes - see 
- *               bug #36 (DG);
  *
  */
 
@@ -86,8 +69,6 @@ public class CrosshairState {
     /**
      * The dataset index that the crosshair point relates to (this determines
      * the axes that the crosshairs will be plotted against).
-     *
-     * @since 1.0.11
      */
     private int datasetIndex;
 
@@ -126,7 +107,6 @@ public class CrosshairState {
      * @return The distance.
      *
      * @see #setCrosshairDistance(double)
-     * @since 1.0.3
      */
     public double getCrosshairDistance() {
         return this.distance;
@@ -195,8 +175,6 @@ public class CrosshairState {
      * @param x  the x-value.
      * @param transX  the x-value in Java2D space.
      * @param datasetIndex  the dataset index.
-     * 
-     * @since 1.0.20
      */
     public void updateCrosshairX(double x, double transX, int datasetIndex) {
         if (this.anchor == null) {
@@ -220,8 +198,6 @@ public class CrosshairState {
      *                    point.
      * @param transY  the y-value in Java2D space.
      * @param datasetIndex  the index of the range axis for this y-value.
-     *
-     * @since 1.0.20
      */
     public void updateCrosshairY(double candidateY, double transY, int datasetIndex) {
         if (this.anchor == null) {
@@ -242,8 +218,6 @@ public class CrosshairState {
      * @return The anchor point.
      *
      * @see #setAnchor(Point2D)
-     *
-     * @since 1.0.3
      */
     public Point2D getAnchor() {
         return this.anchor;
@@ -270,8 +244,6 @@ public class CrosshairState {
      * Returns the x-coordinate (in data space) for the anchor point.
      *
      * @return The x-coordinate of the anchor point.
-     *
-     * @since 1.0.3
      */
     public double getAnchorX() {
         return this.anchorX;
@@ -283,8 +255,6 @@ public class CrosshairState {
      * ensuring this is done in sync.
      *
      * @param x  the x-coordinate.
-     *
-     * @since 1.0.3
      */
     public void setAnchorX(double x) {
         this.anchorX = x;
@@ -294,8 +264,6 @@ public class CrosshairState {
      * Returns the y-coordinate (in data space) for the anchor point.
      *
      * @return The y-coordinate of teh anchor point.
-     *
-     * @since 1.0.3
      */
     public double getAnchorY() {
         return this.anchorY;
@@ -307,8 +275,6 @@ public class CrosshairState {
      * ensuring this is done in sync.
      *
      * @param y  the y-coordinate.
-     *
-     * @since 1.0.3
      */
     public void setAnchorY(double y) {
         this.anchorY = y;
@@ -374,8 +340,6 @@ public class CrosshairState {
      * @return The dataset index.
      *
      * @see #setDatasetIndex(int)
-     *
-     * @since 1.0.11
      */
     public int getDatasetIndex() {
         return this.datasetIndex;
@@ -387,8 +351,6 @@ public class CrosshairState {
      * @param index  the dataset index.
      *
      * @see #getDatasetIndex()
-     *
-     * @since 1.0.11
      */
     public void setDatasetIndex(int index) {
         this.datasetIndex = index;

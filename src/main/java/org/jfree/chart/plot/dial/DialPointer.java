@@ -58,8 +58,6 @@ import org.jfree.chart.internal.SerialUtils;
 
 /**
  * A base class for the pointer in a {@link DialPlot}.
- *
- * @since 1.0.7
  */
 public abstract class DialPointer extends AbstractDialLayer
         implements DialLayer, Cloneable, PublicCloneable, Serializable {
@@ -392,18 +390,10 @@ public abstract class DialPointer extends AbstractDialLayer
          */
         private double widthRadius;
 
-        /**
-         * The fill paint.
-         *
-         * @since 1.0.8
-         */
+        /** The fill paint. */
         private transient Paint fillPaint;
 
-        /**
-         * The outline paint.
-         *
-         * @since 1.0.8
-         */
+        /** The outline paint. */
         private transient Paint outlinePaint;
 
         /**
@@ -455,8 +445,6 @@ public abstract class DialPointer extends AbstractDialLayer
          * @return The paint (never {@code null}).
          *
          * @see #setFillPaint(Paint)
-         *
-         * @since 1.0.8
          */
         public Paint getFillPaint() {
             return this.fillPaint;
@@ -469,8 +457,6 @@ public abstract class DialPointer extends AbstractDialLayer
          * @param paint  the paint ({@code null} not permitted).
          *
          * @see #getFillPaint()
-         *
-         * @since 1.0.8
          */
         public void setFillPaint(Paint paint) {
             Args.nullNotPermitted(paint, "paint");
@@ -484,8 +470,6 @@ public abstract class DialPointer extends AbstractDialLayer
          * @return The paint (never {@code null}).
          *
          * @see #setOutlinePaint(Paint)
-         *
-         * @since 1.0.8
          */
         public Paint getOutlinePaint() {
             return this.outlinePaint;
@@ -498,8 +482,6 @@ public abstract class DialPointer extends AbstractDialLayer
          * @param paint  the paint ({@code null} not permitted).
          *
          * @see #getOutlinePaint()
-         *
-         * @since 1.0.8
          */
         public void setOutlinePaint(Paint paint) {
             Args.nullNotPermitted(paint, "paint");
