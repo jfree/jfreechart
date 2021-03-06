@@ -73,7 +73,6 @@ import org.jfree.chart.plot.PolarPlot;
 import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.urls.XYURLGenerator;
 import org.jfree.chart.internal.CloneUtils;
-import org.jfree.chart.internal.ObjectList;
 import org.jfree.chart.internal.Args;
 import org.jfree.chart.api.PublicCloneable;
 import org.jfree.chart.internal.SerialUtils;
@@ -95,80 +94,58 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
     /**
      * Flag that controls whether an outline is drawn for filled series or
      * not.
-     *
-     * @since 1.0.14
      */
     private boolean drawOutlineWhenFilled;
 
     /**
      * The composite to use when filling series.
-     * 
-     * @since 1.0.14
      */
     private transient Composite fillComposite;
 
     /**
      * A flag that controls whether the fill paint is used for filling
      * shapes.
-     * 
-     * @since 1.0.14
      */
     private boolean useFillPaint;
 
     /**
      * The shape that is used to represent a line in the legend.
-     * 
-     * @since 1.0.14
      */
     private transient Shape legendLine;
 
     /**
      * Flag that controls whether item shapes are visible or not.
-     * 
-     * @since 1.0.14
      */
     private boolean shapesVisible;
 
     /**
      * Flag that controls if the first and last point of the dataset should be
      * connected or not.
-     * 
-     *  @since 1.0.14
      */
     private boolean connectFirstAndLastPoint;
     
     /**
      * A list of tool tip generators (one per series).
-     * 
-     * @since 1.0.14
      */
-    private ObjectList toolTipGeneratorList;
+    private Map<Integer, XYToolTipGenerator> toolTipGeneratorMap;
 
     /**
      * The base tool tip generator.
-     * 
-     * @since 1.0.14
      */
     private XYToolTipGenerator baseToolTipGenerator;
 
     /**
      * The URL text generator.
-     * 
-     * @since 1.0.14
      */
     private XYURLGenerator urlGenerator;
 
     /**
      * The legend item tool tip generator.
-     * 
-     * @since 1.0.14
      */
     private XYSeriesLabelGenerator legendItemToolTipGenerator;
 
     /**
      * The legend item URL generator.
-     * 
-     * @since 1.0.14
      */
     private XYSeriesLabelGenerator legendItemURLGenerator;
 
@@ -178,14 +155,13 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
     public DefaultPolarItemRenderer() {
         this.seriesFilledMap = new HashMap<>();
         this.drawOutlineWhenFilled = true;
-        this.fillComposite = AlphaComposite.getInstance(
-                AlphaComposite.SRC_OVER, 0.3f);
+        this.fillComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f);
         this.useFillPaint = false;     // use item paint for fills by default
         this.legendLine = new Line2D.Double(-7.0, 0.0, 7.0, 0.0);
         this.shapesVisible = true;
         this.connectFirstAndLastPoint = true;
         
-        this.toolTipGeneratorList = new ObjectList();
+        this.toolTipGeneratorMap = new HashMap<>();
         this.urlGenerator = null;
         this.legendItemToolTipGenerator = null;
         this.legendItemURLGenerator = null;
@@ -220,8 +196,6 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * a filled polygon, {@code false} otherwise.
      *
      * @return A boolean.
-     *
-     * @since 1.0.14
      */
     public boolean getDrawOutlineWhenFilled() {
         return this.drawOutlineWhenFilled;
@@ -233,8 +207,6 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * to all registered listeners.
      *
      * @param drawOutlineWhenFilled  the flag.
-     *
-     * @since 1.0.14
      */
     public void setDrawOutlineWhenFilled(boolean drawOutlineWhenFilled) {
         this.drawOutlineWhenFilled = drawOutlineWhenFilled;
@@ -245,8 +217,6 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * Get the composite that is used for filling.
      *
      * @return The composite (never {@code null}).
-     *
-     * @since 1.0.14
      */
     public Composite getFillComposite() {
         return this.fillComposite;
@@ -256,10 +226,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * Sets the composite which will be used for filling polygons and sends a
      * {@link RendererChangeEvent} to all registered listeners.
      *
-     * @param composite  the composite to use ({@code null} not
-     *         permitted).
-     *
-     * @since 1.0.14
+     * @param composite  the composite to use ({@code null} not permitted).
      */
     public void setFillComposite(Composite composite) {
         Args.nullNotPermitted(composite, "composite");
@@ -272,8 +239,6 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * {@code false} if not.
      *
      * @return A boolean.
-     *
-     * @since 1.0.14
      */
     public boolean getShapesVisible() {
         return this.shapesVisible;
@@ -285,8 +250,6 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * listeners.
      *
      * @param visible  the flag.
-     *
-     * @since 1.0.14
      */
     public void setShapesVisible(boolean visible) {
         this.shapesVisible = visible;
@@ -298,8 +261,6 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * connected, {@code false} otherwise.
      * 
      * @return The current status of the flag.
-     * 
-     * @since 1.0.14
      */
     public boolean getConnectFirstAndLastPoint() {
         return this.connectFirstAndLastPoint;
@@ -311,8 +272,6 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * registered listeners.
      * 
      * @param connect the flag.
-     * 
-     * @since 1.0.14
      */
     public void setConnectFirstAndLastPoint(boolean connect) {
         this.connectFirstAndLastPoint = connect;
@@ -369,7 +328,6 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * @return A boolean.
      *
      * @see #setUseFillPaint(boolean)
-     * @since 1.0.14
      */
     public boolean getUseFillPaint() {
         return this.useFillPaint;
@@ -383,7 +341,6 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * @param flag  the flag.
      *
      * @see #getUseFillPaint()
-     * @since 1.0.14
      */
     public void setUseFillPaint(boolean flag) {
         this.useFillPaint = flag;
@@ -715,13 +672,10 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * @param item  the item index.
      * 
      * @return The tooltip generator (possibly {@code null}).
-     * 
-     * @since 1.0.14
      */
     @Override
     public XYToolTipGenerator getToolTipGenerator(int series, int item) {
-        XYToolTipGenerator generator
-            = (XYToolTipGenerator) this.toolTipGeneratorList.get(series);
+        XYToolTipGenerator generator = this.toolTipGeneratorMap.get(series);
         if (generator == null) {
             generator = this.baseToolTipGenerator;
         }
@@ -732,12 +686,10 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * Returns the tool tip generator for the specified series.
      * 
      * @return The tooltip generator (possibly {@code null}).
-     *
-     * @since 1.0.14
      */
     @Override
     public XYToolTipGenerator getSeriesToolTipGenerator(int series) {
-        return (XYToolTipGenerator) this.toolTipGeneratorList.get(series);
+        return this.toolTipGeneratorMap.get(series);
     }
 
     /**
@@ -745,13 +697,10 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * 
      * @param series  the series index.
      * @param generator  the tool tip generator ({@code null} permitted).
-     * 
-     * @since 1.0.14
      */
     @Override
-    public void setSeriesToolTipGenerator(int series,
-            XYToolTipGenerator generator) {
-        this.toolTipGeneratorList.set(series, generator);
+    public void setSeriesToolTipGenerator(int series, XYToolTipGenerator generator) {
+        this.toolTipGeneratorMap.put(series, generator);
         fireChangeEvent();
     }
 
@@ -759,8 +708,6 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * Returns the default tool tip generator.
      * 
      * @return The default tool tip generator (possibly {@code null}).
-     * 
-     * @since 1.0.14
      */
     @Override
     public XYToolTipGenerator getBaseToolTipGenerator() {
@@ -772,8 +719,6 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * {@link RendererChangeEvent} to all registered listeners.
      * 
      * @param generator  the generator ({@code null} permitted).
-     * 
-     * @since 1.0.14
      */
     @Override
     public void setBaseToolTipGenerator(XYToolTipGenerator generator) {
@@ -785,8 +730,6 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * Returns the URL generator.
      * 
      * @return The URL generator (possibly {@code null}).
-     * 
-     * @since 1.0.14
      */
     @Override
     public XYURLGenerator getURLGenerator() {
@@ -797,8 +740,6 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * Sets the URL generator.
      * 
      * @param urlGenerator  the generator ({@code null} permitted)
-     * 
-     * @since 1.0.14
      */
     @Override
     public void setURLGenerator(XYURLGenerator urlGenerator) {
@@ -812,7 +753,6 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * @return The tool tip generator (possibly {@code null}).
      *
      * @see #setLegendItemToolTipGenerator(XYSeriesLabelGenerator)
-     * @since 1.0.14
      */
     public XYSeriesLabelGenerator getLegendItemToolTipGenerator() {
         return this.legendItemToolTipGenerator;
@@ -825,7 +765,6 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * @param generator  the generator ({@code null} permitted).
      *
      * @see #getLegendItemToolTipGenerator()
-     * @since 1.0.14
      */
     public void setLegendItemToolTipGenerator(
             XYSeriesLabelGenerator generator) {
@@ -839,7 +778,6 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * @return The URL generator (possibly {@code null}).
      *
      * @see #setLegendItemURLGenerator(XYSeriesLabelGenerator)
-     * @since 1.0.14
      */
     public XYSeriesLabelGenerator getLegendItemURLGenerator() {
         return this.legendItemURLGenerator;
@@ -852,7 +790,6 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
      * @param generator  the generator ({@code null} permitted).
      *
      * @see #getLegendItemURLGenerator()
-     * @since 1.0.14
      */
     public void setLegendItemURLGenerator(XYSeriesLabelGenerator generator) {
         this.legendItemURLGenerator = generator;
@@ -897,7 +834,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
         if (this.connectFirstAndLastPoint != that.connectFirstAndLastPoint) {
             return false;
         }
-        if (!this.toolTipGeneratorList.equals(that.toolTipGeneratorList)) {
+        if (!this.toolTipGeneratorMap.equals(that.toolTipGeneratorMap)) {
             return false;
         }
         if (!Objects.equals(this.baseToolTipGenerator, that.baseToolTipGenerator)) {
@@ -928,8 +865,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
                 = (DefaultPolarItemRenderer) super.clone();
         clone.legendLine = CloneUtils.clone(this.legendLine);
         clone.seriesFilledMap = new HashMap<>(this.seriesFilledMap);
-        clone.toolTipGeneratorList
-                = (ObjectList) this.toolTipGeneratorList.clone();
+        clone.toolTipGeneratorMap = CloneUtils.cloneMapValues(this.toolTipGeneratorMap);
         if (clone.baseToolTipGenerator instanceof PublicCloneable) {
             clone.baseToolTipGenerator = CloneUtils.clone(this.baseToolTipGenerator);
         }
