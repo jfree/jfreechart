@@ -54,6 +54,7 @@ import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.api.RectangleEdge;
 import org.jfree.chart.api.PublicCloneable;
+import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.internal.SerialUtils;
 import org.jfree.chart.internal.ShapeUtils;
 import org.jfree.data.xy.XYDataset;
@@ -308,9 +309,7 @@ public class SamplingXYLineRenderer extends AbstractXYItemRenderer
     @Override
     public Object clone() throws CloneNotSupportedException {
         SamplingXYLineRenderer clone = (SamplingXYLineRenderer) super.clone();
-        if (this.legendLine != null) {
-            clone.legendLine = ShapeUtils.clone(this.legendLine);
-        }
+        clone.legendLine = CloneUtils.clone(this.legendLine);
         return clone;
     }
 

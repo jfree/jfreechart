@@ -63,6 +63,7 @@ import org.jfree.chart.api.RectangleEdge;
 import org.jfree.chart.internal.LineUtils;
 import org.jfree.chart.internal.Args;
 import org.jfree.chart.api.PublicCloneable;
+import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.internal.SerialUtils;
 import org.jfree.chart.internal.ShapeUtils;
 import org.jfree.data.xy.XYDataset;
@@ -1076,9 +1077,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     public Object clone() throws CloneNotSupportedException {
         XYLineAndShapeRenderer clone = (XYLineAndShapeRenderer) super.clone();
         clone.seriesLinesVisibleMap = new HashMap<>(this.seriesLinesVisibleMap);
-        if (this.legendLine != null) {
-            clone.legendLine = ShapeUtils.clone(this.legendLine);
-        }
+        clone.legendLine = CloneUtils.clone(this.legendLine);
         clone.seriesShapesVisibleMap = new HashMap<>(this.seriesShapesVisibleMap);
         clone.seriesShapesFilledMap = new HashMap<>(this.seriesShapesFilledMap);
         return clone;

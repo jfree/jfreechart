@@ -76,6 +76,7 @@ import org.jfree.chart.api.PublicCloneable;
 import org.jfree.chart.internal.SerialUtils;
 import org.jfree.chart.internal.ShapeUtils;
 import org.jfree.chart.api.UnitType;
+import org.jfree.chart.internal.CloneUtils;
 import org.jfree.data.xy.XYDataset;
 
 /**
@@ -916,7 +917,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
     public Object clone() throws CloneNotSupportedException {
         StandardXYItemRenderer clone = (StandardXYItemRenderer) super.clone();
         clone.seriesShapesFilledMap = new HashMap<>(this.seriesShapesFilledMap);
-        clone.legendLine = ShapeUtils.clone(this.legendLine);
+        clone.legendLine = CloneUtils.clone(this.legendLine);
         return clone;
     }
 

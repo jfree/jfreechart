@@ -46,8 +46,8 @@ import java.util.Objects;
 import org.jfree.chart.api.RectangleInsets;
 import org.jfree.chart.internal.Args;
 import org.jfree.chart.api.PublicCloneable;
+import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.internal.SerialUtils;
-import org.jfree.chart.internal.ShapeUtils;
 
 import org.jfree.data.Range;
 
@@ -599,7 +599,7 @@ public class AbstractBlock implements Cloneable, Serializable {
     @Override
     public Object clone() throws CloneNotSupportedException {
         AbstractBlock clone = (AbstractBlock) super.clone();
-        clone.bounds = (Rectangle2D) ShapeUtils.clone(this.bounds);
+        clone.bounds = (Rectangle2D) CloneUtils.clone(this.bounds);
         if (this.frame instanceof PublicCloneable) {
             PublicCloneable pc = (PublicCloneable) this.frame;
             clone.frame = (BlockFrame) pc.clone();

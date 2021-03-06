@@ -35,7 +35,6 @@
 
 package org.jfree.chart.internal;
 
-import org.jfree.chart.internal.CloneUtils;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
 import java.awt.Shape;
@@ -44,6 +43,7 @@ import java.awt.geom.Arc2D;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Line2D;
+import java.awt.geom.Path2D;
 import java.awt.geom.PathIterator;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
@@ -52,7 +52,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import org.jfree.chart.internal.Args;
 import org.jfree.chart.api.RectangleAnchor;
 
 /**
@@ -64,33 +63,6 @@ public class ShapeUtils {
      * Prevents instantiation.
      */
     private ShapeUtils() {
-    }
-
-    /**
-     * Returns a clone of the specified shape, or {@code null}.  At the
-     * current time, this method supports cloning for instances of
-     * {@code Line2D}, {@code RectangularShape}, {@code Area}
-     * and {@code GeneralPath}.
-     * <p>
-     * {@code RectangularShape} includes {@code Arc2D},
-     * {@code Ellipse2D}, {@code Rectangle2D},
-     * {@code RoundRectangle2D}.
-     *
-     * @param shape  the shape to clone ({@code null} permitted,
-     *               returns {@code null}).
-     *
-     * @return A clone or {@code null}.
-     */
-    public static Shape clone(Shape shape) {
-        if (shape instanceof Cloneable) {
-            try {
-                return CloneUtils.clone(shape);
-            }
-            catch (CloneNotSupportedException cnse) {
-            }
-        }
-        final Shape result = null; // FIXME
-        return result;
     }
 
     /**
@@ -115,8 +87,8 @@ public class ShapeUtils {
             return equal((Arc2D) s1, (Arc2D) s2);
         } else if (s1 instanceof Polygon && s2 instanceof Polygon) {
             return equal((Polygon) s1, (Polygon) s2);
-        } else if (s1 instanceof GeneralPath && s2 instanceof GeneralPath) {
-            return equal((GeneralPath) s1, (GeneralPath) s2);
+        } else if (s1 instanceof Path2D && s2 instanceof Path2D) {
+            return equal((Path2D) s1, (Path2D) s2);
         } else {
             // this will handle Rectangle2D...
             return Objects.equals(s1, s2);
@@ -124,7 +96,7 @@ public class ShapeUtils {
     }
 
     /**
-     * Compares two lines are returns {@code true} if they are equal or
+     * Compares two lines and returns {@code true} if they are equal or
      * both {@code null}.
      *
      * @param l1  the first line ({@code null} permitted).
@@ -230,15 +202,15 @@ public class ShapeUtils {
     }
 
     /**
-     * Tests two polygons for equality.  If both are {@code null} this
-     * method returns {@code true}.
+     * Tests two {@code GeneralPath} instances for equality.  If both are 
+     * {@code null} this method returns {@code true}.
      *
      * @param p1  path 1 ({@code null} permitted).
      * @param p2  path 2 ({@code null} permitted).
      *
      * @return A boolean.
      */
-    public static boolean equal(GeneralPath p1, GeneralPath p2) {
+    public static boolean equal(Path2D p1, Path2D p2) {
         if (p1 == null) {
             return (p2 == null);
         }

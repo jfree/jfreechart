@@ -1093,7 +1093,7 @@ public class XYBarRenderer extends AbstractXYItemRenderer
         if (this.gradientPaintTransformer != null) {
             result.gradientPaintTransformer = CloneUtils.clone(this.gradientPaintTransformer);
         }
-        result.legendBar = ShapeUtils.clone(this.legendBar);
+        result.legendBar = CloneUtils.clone(this.legendBar);
         return result;
     }
 

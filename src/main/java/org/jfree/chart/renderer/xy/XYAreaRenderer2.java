@@ -64,6 +64,7 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.urls.XYURLGenerator;
 import org.jfree.chart.internal.Args;
 import org.jfree.chart.api.PublicCloneable;
+import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.internal.SerialUtils;
 import org.jfree.chart.internal.ShapeUtils;
 import org.jfree.data.xy.XYDataset;
@@ -388,7 +389,7 @@ public class XYAreaRenderer2 extends AbstractXYItemRenderer
     @Override
     public Object clone() throws CloneNotSupportedException {
         XYAreaRenderer2 clone = (XYAreaRenderer2) super.clone();
-        clone.legendArea = ShapeUtils.clone(this.legendArea);
+        clone.legendArea = CloneUtils.clone(this.legendArea);
         return clone;
     }
 

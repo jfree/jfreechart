@@ -69,6 +69,7 @@ import org.jfree.chart.urls.XYURLGenerator;
 import org.jfree.chart.internal.PaintUtils;
 import org.jfree.chart.internal.Args;
 import org.jfree.chart.api.PublicCloneable;
+import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.internal.SerialUtils;
 import org.jfree.chart.internal.ShapeUtils;
 import org.jfree.data.xy.XYDataset;
@@ -1159,7 +1160,7 @@ public class XYDifferenceRenderer extends AbstractXYItemRenderer
     @Override
     public Object clone() throws CloneNotSupportedException {
         XYDifferenceRenderer clone = (XYDifferenceRenderer) super.clone();
-        clone.legendLine = ShapeUtils.clone(this.legendLine);
+        clone.legendLine = CloneUtils.clone(this.legendLine);
         return clone;
     }
 

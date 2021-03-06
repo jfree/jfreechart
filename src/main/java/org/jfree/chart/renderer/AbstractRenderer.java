@@ -2947,9 +2947,8 @@ public abstract class AbstractRenderer implements ChartElement, Cloneable, Seria
         if (this.seriesShapeMap != null) {
             clone.seriesShapeMap = ShapeUtils.cloneMap(this.seriesShapeMap);
         }
-        if (this.defaultShape != null) {
-            clone.defaultShape = ShapeUtils.clone(this.defaultShape);
-        }
+        clone.defaultShape = CloneUtils.clone(this.defaultShape);
+
 
         // 'seriesItemLabelsVisibleMap' : immutable, no need to clone reference
         if (this.seriesItemLabelsVisibleMap != null) {

@@ -67,6 +67,7 @@ import org.jfree.chart.internal.Args;
 import org.jfree.chart.internal.SerialUtils;
 import org.jfree.chart.internal.ShapeUtils;
 import org.jfree.chart.api.TableOrder;
+import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.PlotState;
@@ -598,7 +599,7 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {
         MultiplePiePlot clone = (MultiplePiePlot) super.clone();
         clone.pieChart = (JFreeChart) this.pieChart.clone();
         clone.sectionPaints = new HashMap(this.sectionPaints);
-        clone.legendItemShape = ShapeUtils.clone(this.legendItemShape);
+        clone.legendItemShape = CloneUtils.clone(this.legendItemShape);
         return clone;
     }
 

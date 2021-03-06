@@ -3192,19 +3192,11 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
         if (clone.dataset != null) {
             clone.dataset.addChangeListener(clone);
         }
-        if (this.urlGenerator instanceof PublicCloneable) {
-            clone.urlGenerator = CloneUtils.clone(this.urlGenerator);
-        }
-        clone.legendItemShape = ShapeUtils.clone(this.legendItemShape);
-        if (this.legendLabelGenerator != null) {
-            clone.legendLabelGenerator = CloneUtils.clone(this.legendLabelGenerator);
-        }
-        if (this.legendLabelToolTipGenerator != null) {
-            clone.legendLabelToolTipGenerator = CloneUtils.clone(this.legendLabelToolTipGenerator);
-        }
-        if (this.legendLabelURLGenerator instanceof PublicCloneable) {
-            clone.legendLabelURLGenerator = CloneUtils.clone(this.legendLabelURLGenerator);
-        }
+        clone.urlGenerator = CloneUtils.copy(this.urlGenerator);
+        clone.legendItemShape = CloneUtils.clone(this.legendItemShape);
+        clone.legendLabelGenerator = CloneUtils.copy(this.legendLabelGenerator);
+        clone.legendLabelToolTipGenerator = CloneUtils.clone(this.legendLabelToolTipGenerator);
+        clone.legendLabelURLGenerator = CloneUtils.copy(this.legendLabelURLGenerator);
         return clone;
     }
 

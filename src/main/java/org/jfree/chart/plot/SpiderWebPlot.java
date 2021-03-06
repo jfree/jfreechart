@@ -1417,7 +1417,7 @@ public class SpiderWebPlot extends Plot implements Cloneable, Serializable {
     @Override
     public Object clone() throws CloneNotSupportedException {
         SpiderWebPlot clone = (SpiderWebPlot) super.clone();
-        clone.legendItemShape = ShapeUtils.clone(this.legendItemShape);
+        clone.legendItemShape = CloneUtils.clone(this.legendItemShape);
         clone.seriesPaints = CloneUtils.cloneMapValues(this.seriesPaints);
         clone.seriesOutlinePaints = CloneUtils.cloneMapValues(this.seriesOutlinePaints);
         clone.seriesOutlineStrokes = CloneUtils.cloneMapValues(this.seriesOutlineStrokes);

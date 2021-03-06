@@ -60,6 +60,7 @@ import org.jfree.chart.util.StandardGradientPaintTransformer;
 import org.jfree.chart.internal.Args;
 import org.jfree.chart.internal.PaintUtils;
 import org.jfree.chart.api.PublicCloneable;
+import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.internal.SerialUtils;
 import org.jfree.chart.internal.ShapeUtils;
 
@@ -1028,13 +1029,13 @@ public class LegendItem implements Cloneable, Serializable {
             clone.seriesKey = (Comparable) pc.clone();
         }
         // FIXME: Clone the attributed string if it is not null
-        clone.shape = ShapeUtils.clone(this.shape);
+        clone.shape = CloneUtils.clone(this.shape);
         if (this.fillPaintTransformer instanceof PublicCloneable) {
             PublicCloneable pc = (PublicCloneable) this.fillPaintTransformer;
             clone.fillPaintTransformer = (GradientPaintTransformer) pc.clone();
 
         }
-        clone.line = ShapeUtils.clone(this.line);
+        clone.line = CloneUtils.clone(this.line);
         return clone;
     }
 

@@ -926,9 +926,7 @@ public class DefaultPolarItemRenderer extends AbstractRenderer
     public Object clone() throws CloneNotSupportedException {
         DefaultPolarItemRenderer clone
                 = (DefaultPolarItemRenderer) super.clone();
-        if (this.legendLine != null) {
-            clone.legendLine = ShapeUtils.clone(this.legendLine);
-        }
+        clone.legendLine = CloneUtils.clone(this.legendLine);
         clone.seriesFilledMap = new HashMap<>(this.seriesFilledMap);
         clone.toolTipGeneratorList
                 = (ObjectList) this.toolTipGeneratorList.clone();

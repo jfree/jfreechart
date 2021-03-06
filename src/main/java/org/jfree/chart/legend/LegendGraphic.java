@@ -58,6 +58,7 @@ import org.jfree.chart.util.StandardGradientPaintTransformer;
 import org.jfree.chart.internal.PaintUtils;
 import org.jfree.chart.internal.Args;
 import org.jfree.chart.api.PublicCloneable;
+import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.internal.SerialUtils;
 import org.jfree.chart.internal.ShapeUtils;
 
@@ -698,8 +699,8 @@ public class LegendGraphic extends AbstractBlock
     @Override
     public Object clone() throws CloneNotSupportedException {
         LegendGraphic clone = (LegendGraphic) super.clone();
-        clone.shape = ShapeUtils.clone(this.shape);
-        clone.line = ShapeUtils.clone(this.line);
+        clone.shape = CloneUtils.clone(this.shape);
+        clone.line = CloneUtils.clone(this.line);
         return clone;
     }
 
