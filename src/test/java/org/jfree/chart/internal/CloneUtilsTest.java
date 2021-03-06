@@ -36,6 +36,7 @@
 
 package org.jfree.chart.internal;
 
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -52,15 +53,23 @@ public class CloneUtilsTest {
      * String is immutable so we expect to get back the same object.
      */
     @Test
-    public void testCloneString() throws CloneNotSupportedException {
+    public void testCopyString() throws CloneNotSupportedException {
         String s1 = "ABC";
         String s2 = CloneUtils.copy(s1);
         assertTrue(s1 == s2);
     }
     
+    /**
+     * The goal of this test is to verify that we can make a clone of a list
+     * whether it contains Strings (which are immutable therefore do not 
+     * support cloning) or some mutable object like Rectangle.
+     * 
+     * @throws CloneNotSupportedException 
+     */
     @Test
     public void testCloneListOfStrings() throws CloneNotSupportedException {
         List<String> l1 = new ArrayList<>();
+        l1.add("ABC");
         List<String> l2 = CloneUtils.clone(l1);
         assertEquals(l1, l2);
         
@@ -68,6 +77,12 @@ public class CloneUtilsTest {
         assertNotEquals(l1, l2);
         l2 = CloneUtils.cloneList(l1);
         assertEquals(l1, l2);
+        
+        List<Rectangle> rList1 = new ArrayList<>();
+        Rectangle r1 = new Rectangle(1, 2, 3, 4);
+        rList1.add(r1);
+        List<Rectangle> rList2 = CloneUtils.clone(rList1);
+        assertEquals(rList1, rList2);
     }
 
 }

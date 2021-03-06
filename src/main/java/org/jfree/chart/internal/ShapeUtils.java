@@ -81,16 +81,12 @@ public class ShapeUtils {
     public static boolean equal(Shape s1, Shape s2) {
         if (s1 instanceof Line2D && s2 instanceof Line2D) {
             return equal((Line2D) s1, (Line2D) s2);
-        } else if (s1 instanceof Ellipse2D && s2 instanceof Ellipse2D) {
-            return equal((Ellipse2D) s1, (Ellipse2D) s2);
-        } else if (s1 instanceof Arc2D && s2 instanceof Arc2D) {
-            return equal((Arc2D) s1, (Arc2D) s2);
         } else if (s1 instanceof Polygon && s2 instanceof Polygon) {
             return equal((Polygon) s1, (Polygon) s2);
         } else if (s1 instanceof Path2D && s2 instanceof Path2D) {
             return equal((Path2D) s1, (Path2D) s2);
         } else {
-            // this will handle Rectangle2D...
+            // this will handle Arc2D, Ellipse2D, Rectangle2D...
             return Objects.equals(s1, s2);
         }
     }
@@ -115,59 +111,6 @@ public class ShapeUtils {
             return false;
         }
         if (!l1.getP2().equals(l2.getP2())) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * Compares two ellipses and returns {@code true} if they are equal or
-     * both {@code null}.
-     *
-     * @param e1  the first ellipse ({@code null} permitted).
-     * @param e2  the second ellipse ({@code null} permitted).
-     *
-     * @return A boolean.
-     */
-    public static boolean equal(Ellipse2D e1, Ellipse2D e2) {
-        if (e1 == null) {
-            return (e2 == null);
-        }
-        if (e2 == null) {
-            return false;
-        }
-        if (!e1.getFrame().equals(e2.getFrame())) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * Compares two arcs and returns {@code true} if they are equal or
-     * both {@code null}.
-     *
-     * @param a1  the first arc ({@code null} permitted).
-     * @param a2  the second arc ({@code null} permitted).
-     *
-     * @return A boolean.
-     */
-    public static boolean equal(Arc2D a1, Arc2D a2) {
-        if (a1 == null) {
-            return (a2 == null);
-        }
-        if (a2 == null) {
-            return false;
-        }
-        if (!a1.getFrame().equals(a2.getFrame())) {
-            return false;
-        }
-        if (a1.getAngleStart() != a2.getAngleStart()) {
-            return false;
-        }
-        if (a1.getAngleExtent() != a2.getAngleExtent()) {
-            return false;
-        }
-        if (a1.getArcType() != a2.getArcType()) {
             return false;
         }
         return true;

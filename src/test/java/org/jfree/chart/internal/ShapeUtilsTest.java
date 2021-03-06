@@ -37,6 +37,7 @@
 package org.jfree.chart.internal;
 
 import java.awt.Rectangle;
+import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.Path2D;
 import org.junit.jupiter.api.Test;
@@ -49,6 +50,22 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
  * Tests for the {@link ShapeUtils} class.
  */
 public class ShapeUtilsTest {
+
+    @Test
+    public void testEqualsLine2D() {
+        Line2D.Double line1 = new Line2D.Double(1.0, 2.0, 3.0, 4.0);
+        Line2D.Double line2 = new Line2D.Double(1.0, 2.0, 3.0, 4.0);
+        assertNotEquals(line1, line2); // Object.equals
+        assertTrue(ShapeUtils.equal(line1, line2));
+    }
+    
+    @Test
+    public void testEqualsEllipse2D() {
+        Ellipse2D.Double line1 = new Ellipse2D.Double(1.0, 2.0, 3.0, 4.0);
+        Ellipse2D.Double line2 = new Ellipse2D.Double(1.0, 2.0, 3.0, 4.0);
+        assertEquals(line1, line2); // don't need special handling in ShapeUtils
+        assertTrue(ShapeUtils.equal(line1, line2));
+    }
 
     /**
      * String is immutable so we expect to get back the same object.

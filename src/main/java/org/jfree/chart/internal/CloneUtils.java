@@ -150,7 +150,7 @@ public class CloneUtils {
     }
     
     /**
-     * Returns a new map that contains the same keys and cloned copied of the
+     * Returns a new map that contains the same keys and copies of the
      * values from the source map.
      * 
      * @param source  the source map ({@code null} not permitted).
@@ -167,7 +167,7 @@ public class CloneUtils {
             V value = source.get(key);
             if (value != null) {
                 try {
-                    result.put(key, clone(value));
+                    result.put(key, copy(value));
                 } catch (CloneNotSupportedException ex) {
                     throw new RuntimeException(ex);
                 }
