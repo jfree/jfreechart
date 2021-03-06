@@ -44,7 +44,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import org.jfree.chart.ChartElementVisitor;
 
@@ -53,7 +55,6 @@ import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.PlotState;
-import org.jfree.chart.internal.ObjectList;
 import org.jfree.chart.internal.Args;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.ValueDataset;
@@ -85,15 +86,15 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
     /**
      * The dataset(s) for the dial plot.
      */
-    private ObjectList datasets;
+    private Map<Integer, ValueDataset> datasets;
 
     /**
      * The scale(s) for the dial plot.
      */
-    private ObjectList scales;
+    private Map<Integer, DialScale> scales;
 
     /** Storage for keys that map datasets to scales. */
-    private ObjectList datasetToScaleMap;
+    private Map<Integer, Integer> datasetToScaleMap;
 
     /**
      * The drawing layers for the dial plot.
@@ -141,12 +142,12 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
         this.background = null;
         this.cap = null;
         this.dialFrame = new ArcDialFrame();
-        this.datasets = new ObjectList();
+        this.datasets = new HashMap<>();
         if (dataset != null) {
             setDataset(dataset);
         }
-        this.scales = new ObjectList();
-        this.datasetToScaleMap = new ObjectList();
+        this.scales = new HashMap<>();
+        this.datasetToScaleMap = new HashMap<>();
         this.layers = new ArrayList<>();
         this.pointers = new ArrayList<>();
         this.viewX = 0.0;
@@ -474,12 +475,11 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
      * @param dataset  the dataset ({@code null} permitted).
      */
     public void setDataset(int index, ValueDataset dataset) {
-
-        ValueDataset existing = (ValueDataset) this.datasets.get(index);
+        ValueDataset existing = this.datasets.get(index);
         if (existing != null) {
             existing.removeChangeListener(this);
         }
-        this.datasets.set(index, dataset);
+        this.datasets.put(index, dataset);
         if (dataset != null) {
             dataset.addChangeListener(this);
         }
@@ -487,7 +487,6 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
         // send a dataset change event to self...
         DatasetChangeEvent event = new DatasetChangeEvent(this, dataset);
         datasetChanged(event);
-
     }
 
     /**
@@ -569,8 +568,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
                     g2.clip(this.dialFrame.getWindow(frame));
                     current.draw(g2, this, frame, area);
                     g2.setClip(savedClip);
-                }
-                else {
+                } else {
                     current.draw(g2, this, frame, area);
                 }
             }
@@ -583,8 +581,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
                 g2.clip(this.dialFrame.getWindow(frame));
                 this.cap.draw(g2, this, frame, area);
                 g2.setClip(savedClip);
-            }
-            else {
+            } else {
                 this.cap.draw(g2, this, frame, area);
             }
         }
@@ -640,12 +637,12 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
      */
     public void addScale(int index, DialScale scale) {
         Args.nullNotPermitted(scale, "scale");
-        DialScale existing = (DialScale) this.scales.get(index);
+        DialScale existing = this.scales.get(index);
         if (existing != null) {
             removeLayer(existing);
         }
         this.layers.add(scale);
-        this.scales.set(index, scale);
+        this.scales.put(index, scale);
         scale.addChangeListener(this);
         fireChangeEvent();
     }
@@ -658,11 +655,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
      * @return The scale (possibly {@code null}).
      */
     public DialScale getScale(int index) {
-        DialScale result = null;
-        if (this.scales.size() > index) {
-            result = (DialScale) this.scales.get(index);
-        }
-        return result;
+        return this.scales.get(index);
     }
 
     /**
@@ -672,7 +665,7 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
      * @param scaleIndex  the scale index (zero-based).
      */
     public void mapDatasetToScale(int index, int scaleIndex) {
-        this.datasetToScaleMap.set(index, scaleIndex);
+        this.datasetToScaleMap.put(index, scaleIndex);
         fireChangeEvent();
     }
 
@@ -684,8 +677,8 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
      * @return The dial scale.
      */
     public DialScale getScaleForDataset(int datasetIndex) {
-        DialScale result = (DialScale) this.scales.get(0);
-        Integer scaleIndex = (Integer) this.datasetToScaleMap.get(datasetIndex);
+        DialScale result = this.scales.get(0);
+        Integer scaleIndex = this.datasetToScaleMap.get(datasetIndex);
         if (scaleIndex != null) {
             result = getScale(scaleIndex);
         }
@@ -825,6 +818,5 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
             throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
     }
-
 
 }
