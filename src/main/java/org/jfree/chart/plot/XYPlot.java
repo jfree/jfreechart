@@ -81,6 +81,7 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.TreeMap;
+import org.jfree.chart.ChartElementVisitor;
 import org.jfree.chart.JFreeChart;
 
 import org.jfree.chart.legend.LegendItem;
@@ -112,7 +113,9 @@ import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.internal.PaintUtils;
 import org.jfree.chart.internal.Args;
 import org.jfree.chart.api.PublicCloneable;
+import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.internal.SerialUtils;
+import org.jfree.chart.renderer.category.CategoryItemRenderer;
 import org.jfree.chart.util.ShadowGenerator;
 import org.jfree.data.Range;
 import org.jfree.data.general.DatasetChangeEvent;
@@ -2877,6 +2880,34 @@ public class XYPlot<S extends Comparable<S>> extends Plot
         int x1 = (int) Math.floor(rect.getMaxX());
         int y1 = (int) Math.floor(rect.getMaxY());
         return new Rectangle(x0, y0, (x1 - x0), (y1 - y0));
+    }
+
+    /**
+     * Receives a chart element visitor.  Many plot subclasses will override
+     * this method to handle their subcomponents.
+     * 
+     * @param visitor  the visitor ({@code null} not permitted).
+     */
+    @Override
+    public void receive(ChartElementVisitor visitor) {
+        for (Entry<Integer, ValueAxis> entry : this.domainAxes.entrySet()) {
+            if (entry.getValue() != null) {
+                entry.getValue().receive(visitor);
+            }
+        }
+        for (Entry<Integer, ValueAxis> entry : this.rangeAxes.entrySet()) {
+            if (entry.getValue() != null) {
+                entry.getValue().receive(visitor);
+            }
+        }
+        // visit the renderers
+        for (Entry<Integer, XYItemRenderer> entry : this.renderers.entrySet()) {
+            if (entry.getValue() != null) {
+                entry.getValue().receive(visitor);
+            }            
+        }
+
+        visitor.visit(this);
     }
 
     /**

@@ -43,6 +43,7 @@ import java.awt.Paint;
 import java.awt.Shape;
 import java.awt.Stroke;
 import java.awt.geom.Rectangle2D;
+import org.jfree.chart.ChartElement;
 
 import org.jfree.chart.legend.LegendItem;
 import org.jfree.chart.legend.LegendItemSource;
@@ -78,7 +79,7 @@ import org.jfree.data.category.CategoryDataset;
  * allow the base setting to be {@code null}, while other attributes enforce
  * non-{@code null} values.
  */
-public interface CategoryItemRenderer extends LegendItemSource {
+public interface CategoryItemRenderer extends ChartElement, LegendItemSource {
 
     /**
      * Returns the number of passes through the dataset required by the

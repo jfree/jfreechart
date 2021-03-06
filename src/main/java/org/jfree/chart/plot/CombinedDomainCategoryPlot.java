@@ -44,6 +44,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
+import org.jfree.chart.ChartElementVisitor;
 
 import org.jfree.chart.legend.LegendItemCollection;
 import org.jfree.chart.axis.AxisSpace;
@@ -76,7 +77,7 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
 
     /** Temporary storage for the subplot areas. */
     private transient Rectangle2D[] subplotAreas;
-    // TODO:  move the above to the plot state
+    // FIXME:  move the above to the plot state
 
     /**
      * Default constructor.
@@ -381,6 +382,20 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
         }
 
         return space;
+    }
+
+    /**
+     * Receives a chart element visitor.  Many plot subclasses will override
+     * this method to handle their subcomponents.
+     * 
+     * @param visitor  the visitor ({@code null} not permitted).
+     */
+    @Override
+    public void receive(ChartElementVisitor visitor) {
+        subplots.forEach(subplot -> {
+            subplot.receive(visitor);
+        });
+        super.receive(visitor);
     }
 
     /**

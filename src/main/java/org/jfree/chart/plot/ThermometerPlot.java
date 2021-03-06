@@ -61,6 +61,7 @@ import java.text.NumberFormat;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.ResourceBundle;
+import org.jfree.chart.ChartElementVisitor;
 
 import org.jfree.chart.legend.LegendItemCollection;
 import org.jfree.chart.axis.NumberAxis;
@@ -953,6 +954,17 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
     }
 
     /**
+     * Receives a chart element visitor.
+     * 
+     * @param visitor  the visitor ({@code null} not permitted).
+     */
+    @Override
+    public void receive(ChartElementVisitor visitor) {
+        this.rangeAxis.receive(visitor);
+        super.receive(visitor);
+    }
+
+    /**
      * Draws the plot on a Java 2D graphics device (such as the screen or a
      * printer).
      *
@@ -964,8 +976,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      */
     @Override
     public void draw(Graphics2D g2, Rectangle2D area, Point2D anchor,
-                     PlotState parentState,
-                     PlotRenderingInfo info) {
+            PlotState parentState, PlotRenderingInfo info) {
 
         RoundRectangle2D outerStem = new RoundRectangle2D.Double();
         RoundRectangle2D innerStem = new RoundRectangle2D.Double();

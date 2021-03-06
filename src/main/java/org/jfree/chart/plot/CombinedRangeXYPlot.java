@@ -48,6 +48,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import org.jfree.chart.ChartElementVisitor;
 
 import org.jfree.chart.legend.LegendItemCollection;
 import org.jfree.chart.axis.AxisSpace;
@@ -329,14 +330,28 @@ public class CombinedRangeXYPlot<S extends Comparable<S>> extends XYPlot<S>
 
         return space;
     }
+   
+    /**
+     * Receives a chart element visitor.  Many plot subclasses will override
+     * this method to handle their subcomponents.
+     * 
+     * @param visitor  the visitor ({@code null} not permitted).
+     */
+    @Override
+    public void receive(ChartElementVisitor visitor) {
+        subplots.forEach(subplot -> {
+            subplot.receive(visitor);
+        });
+        super.receive(visitor);
+
+    }
 
     /**
      * Draws the plot within the specified area on a graphics device.
      *
      * @param g2  the graphics device.
      * @param area  the plot area (in Java2D space).
-     * @param anchor  an anchor point in Java2D space ({@code null}
-     *                permitted).
+     * @param anchor  an anchor point in Java2D space ({@code null} permitted).
      * @param parentState  the state from the parent plot, if there is one
      *                     ({@code null} permitted).
      * @param info  collects chart drawing information ({@code null}

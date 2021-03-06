@@ -62,6 +62,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
+import org.jfree.chart.ChartElementVisitor;
 
 import org.jfree.chart.legend.LegendItem;
 import org.jfree.chart.legend.LegendItemCollection;
@@ -1241,6 +1242,18 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      */
     public int getIndexOf(PolarItemRenderer renderer) {
         return this.renderers.indexOf(renderer);
+    }
+
+    /**
+     * Receives a chart element visitor.  Many plot subclasses will override
+     * this method to handle their subcomponents.
+     * 
+     * @param visitor  the visitor ({@code null} not permitted).
+     */
+    @Override
+    public void receive(ChartElementVisitor visitor) {
+        // FIXME: handle axes and renderers
+        visitor.visit(this);
     }
 
     /**

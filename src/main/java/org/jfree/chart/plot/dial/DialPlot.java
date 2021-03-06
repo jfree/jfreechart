@@ -46,6 +46,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import org.jfree.chart.ChartElementVisitor;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.event.PlotChangeEvent;
@@ -497,6 +498,19 @@ public class DialPlot extends Plot implements DialLayerChangeListener {
     public int getDatasetCount() {
         return this.datasets.size();
     }
+
+    /**
+     * Receives a chart element visitor.  Many plot subclasses will override
+     * this method to handle their subcomponents.
+     * 
+     * @param visitor  the visitor ({@code null} not permitted).
+     */
+    @Override
+    public void receive(ChartElementVisitor visitor) {
+        // FIXME : handle the subcomponents
+        super.receive(visitor);
+    }
+
 
     /**
      * Draws the plot.  This method is usually called by the {@link JFreeChart}

@@ -49,6 +49,7 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 import java.util.ResourceBundle;
+import org.jfree.chart.ChartElementVisitor;
 
 import org.jfree.chart.legend.LegendItemCollection;
 import org.jfree.chart.event.PlotChangeEvent;
@@ -210,6 +211,18 @@ public class WaferMapPlot extends Plot implements RendererChangeListener,
     }
 
     /**
+     * Receives a chart element visitor.  Many plot subclasses will override
+     * this method to handle their subcomponents.
+     * 
+     * @param visitor  the visitor ({@code null} not permitted).
+     */
+    @Override
+    public void receive(ChartElementVisitor visitor) {
+        // FIXME : handle the renderer
+        super.receive(visitor);
+    }
+
+    /**
      * Draws the wafermap view.
      *
      * @param g2  the graphics device.
@@ -220,8 +233,7 @@ public class WaferMapPlot extends Plot implements RendererChangeListener,
      */
     @Override
     public void draw(Graphics2D g2, Rectangle2D area, Point2D anchor,
-                     PlotState state,
-                     PlotRenderingInfo info) {
+            PlotState state, PlotRenderingInfo info) {
 
         // if the plot area is too small, just return...
         boolean b1 = (area.getWidth() <= MINIMUM_WIDTH_TO_DRAW);

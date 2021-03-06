@@ -56,6 +56,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
+import org.jfree.chart.ChartElementVisitor;
 
 import org.jfree.chart.axis.AxisSpace;
 import org.jfree.chart.axis.AxisState;
@@ -464,6 +465,18 @@ public class FastScatterPlot extends Plot implements ValueAxisPlot, Pannable,
         Args.nullNotPermitted(paint, "paint");
         this.rangeGridlinePaint = paint;
         fireChangeEvent();
+    }
+
+    /**
+     * Receives a chart element visitor.
+     * 
+     * @param visitor  the visitor ({@code null} not permitted).
+     */
+    @Override
+    public void receive(ChartElementVisitor visitor) {
+        this.domainAxis.receive(visitor);
+        this.rangeAxis.receive(visitor);
+        super.receive(visitor);
     }
 
     /**

@@ -70,6 +70,7 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.TreeMap;
+import org.jfree.chart.ChartElementVisitor;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.legend.LegendItemCollection;
 import org.jfree.chart.annotations.Annotation;
@@ -112,7 +113,8 @@ import org.jfree.data.general.DatasetUtils;
  * A general plotting class that uses data from a {@link CategoryDataset} and
  * renders each data item using a {@link CategoryItemRenderer}.
  */
-public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>> extends Plot implements ValueAxisPlot, Pannable,
+public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>> 
+        extends Plot implements ValueAxisPlot, Pannable,
         Zoomable, AnnotationChangeListener, RendererChangeListener,
         Cloneable, PublicCloneable, Serializable {
 
@@ -3151,6 +3153,36 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>> exte
         space = calculateRangeAxisSpace(g2, plotArea, space);
         space = calculateDomainAxisSpace(g2, plotArea, space);
         return space;
+    }
+
+    /**
+     * Receives a chart element visitor.  Many plot subclasses will override
+     * this method to handle their subcomponents.
+     * 
+     * @param visitor  the visitor ({@code null} not permitted).
+     */
+    @Override
+    public void receive(ChartElementVisitor visitor) {
+        // visit the domain axes
+        for (Entry<Integer, CategoryAxis> entry : this.domainAxes.entrySet()) {
+            if (entry.getValue() != null) {
+                entry.getValue().receive(visitor);
+            }
+        }
+        // visit the range axes
+        for (Entry<Integer, ValueAxis> entry : this.rangeAxes.entrySet()) {
+            if (entry.getValue() != null) {
+                entry.getValue().receive(visitor);
+            }
+        }
+        // visit the renderers
+        for (Entry<Integer, CategoryItemRenderer> entry : this.renderers.entrySet()) {
+            if (entry.getValue() != null) {
+                entry.getValue().receive(visitor);
+            }            
+        }
+        // and finally this plot
+        visitor.visit(this);
     }
 
     /**

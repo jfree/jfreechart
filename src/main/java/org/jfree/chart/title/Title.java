@@ -46,6 +46,8 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import javax.swing.event.EventListenerList;
+import org.jfree.chart.ChartElement;
+import org.jfree.chart.ChartElementVisitor;
 
 import org.jfree.chart.block.AbstractBlock;
 import org.jfree.chart.block.Block;
@@ -65,7 +67,7 @@ import org.jfree.chart.internal.Args;
  * hence do the actual work of drawing titles.
  */
 public abstract class Title extends AbstractBlock
-            implements Block, Cloneable, Serializable {
+            implements ChartElement, Block, Cloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -6675162505277817221L;
@@ -85,11 +87,7 @@ public abstract class Title extends AbstractBlock
     public static final RectangleInsets DEFAULT_PADDING = new RectangleInsets(
             1, 1, 1, 1);
 
-    /**
-     * A flag that controls whether or not the title is visible.
-     *
-     * @since 1.0.11
-     */
+    /** A flag that controls whether or not the title is visible. */
     public boolean visible;
 
     /** The title position. */
@@ -113,28 +111,24 @@ public abstract class Title extends AbstractBlock
      * Creates a new title, using default attributes where necessary.
      */
     protected Title() {
-        this(Title.DEFAULT_POSITION,
-                Title.DEFAULT_HORIZONTAL_ALIGNMENT,
+        this(Title.DEFAULT_POSITION, Title.DEFAULT_HORIZONTAL_ALIGNMENT,
                 Title.DEFAULT_VERTICAL_ALIGNMENT, Title.DEFAULT_PADDING);
     }
 
     /**
      * Creates a new title, using default attributes where necessary.
      *
-     * @param position  the position of the title ({@code null} not
-     *                  permitted).
+     * @param position  the position of the title ({@code null} not permitted).
      * @param horizontalAlignment  the horizontal alignment of the title
      *                             ({@code null} not permitted).
      * @param verticalAlignment  the vertical alignment of the title
      *                           ({@code null} not permitted).
      */
     protected Title(RectangleEdge position,
-                    HorizontalAlignment horizontalAlignment,
-                    VerticalAlignment verticalAlignment) {
-
+            HorizontalAlignment horizontalAlignment,
+            VerticalAlignment verticalAlignment) {
         this(position, horizontalAlignment, verticalAlignment,
                 Title.DEFAULT_PADDING);
-
     }
 
     /**
@@ -176,8 +170,6 @@ public abstract class Title extends AbstractBlock
      * @return A boolean.
      *
      * @see #setVisible(boolean)
-     *
-     * @since 1.0.11
      */
     public boolean isVisible() {
         return this.visible;
@@ -190,8 +182,6 @@ public abstract class Title extends AbstractBlock
      * @param visible  the new flag value.
      *
      * @see #isVisible()
-     *
-     * @since 1.0.11
      */
     public void setVisible(boolean visible) {
         this.visible = visible;
@@ -291,6 +281,16 @@ public abstract class Title extends AbstractBlock
         if (flag) {
             notifyListeners(new TitleChangeEvent(this));
         }
+    }
+
+    /**
+     * Receives a chart element visitor.
+     * 
+     * @param visitor  the visitor ({@code null} not permitted).
+     */
+    @Override
+    public void receive(ChartElementVisitor visitor) {
+        visitor.visit(this);
     }
 
     /**

@@ -45,6 +45,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import org.jfree.chart.ChartElementVisitor;
 
 import org.jfree.chart.block.Arrangement;
 import org.jfree.chart.block.Block;
@@ -511,6 +512,17 @@ public class LegendTitle extends Title
         result.height = calculateTotalHeight(size.height);
         result.width = calculateTotalWidth(size.width);
         return result;
+    }
+
+    /**
+     * Receives a chart element visitor. 
+     * 
+     * @param visitor  the visitor ({@code null} not permitted).
+     */
+    @Override
+    public void receive(ChartElementVisitor visitor) {
+        // FIXME : visit the legend components
+        super.receive(visitor);
     }
 
     /**

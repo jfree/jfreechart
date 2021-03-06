@@ -57,6 +57,8 @@ import java.util.Map;
 import java.util.Objects;
 
 import javax.swing.event.EventListenerList;
+import org.jfree.chart.ChartElement;
+import org.jfree.chart.ChartElementVisitor;
 
 import org.jfree.chart.ChartHints;
 import org.jfree.chart.JFreeChart;
@@ -91,7 +93,7 @@ import org.jfree.data.ItemKey;
  * {@link PublicCloneable} interface to provide simple access to the clone 
  * method.
  */
-public abstract class AbstractRenderer implements Cloneable, Serializable {
+public abstract class AbstractRenderer implements ChartElement, Cloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -828267569428206075L;
@@ -372,6 +374,16 @@ public abstract class AbstractRenderer implements Cloneable, Serializable {
         this.listenerList = new EventListenerList();
     }
 
+    /**
+     * Receives a chart element visitor.
+     * 
+     * @param visitor  the visitor ({@code null} not permitted).
+     */
+    @Override
+    public void receive(ChartElementVisitor visitor) {
+        visitor.visit(this);
+    }
+    
     /**
      * Returns the drawing supplier from the plot.
      *

@@ -63,6 +63,8 @@ import java.util.List;
 import java.util.Objects;
 
 import javax.swing.event.EventListenerList;
+import org.jfree.chart.ChartElement;
+import org.jfree.chart.ChartElementVisitor;
 
 import org.jfree.chart.entity.AxisEntity;
 import org.jfree.chart.entity.EntityCollection;
@@ -85,7 +87,7 @@ import org.jfree.chart.internal.SerialUtils;
  * those that display values ({@link ValueAxis}) and those that display
  * categories ({@link CategoryAxis}).
  */
-public abstract class Axis implements Cloneable, Serializable {
+public abstract class Axis implements ChartElement, Cloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 7719289504573298271L;
@@ -1008,9 +1010,18 @@ public abstract class Axis implements Cloneable, Serializable {
      *         space).
      */
     public abstract AxisSpace reserveSpace(Graphics2D g2, Plot plot,
-                                           Rectangle2D plotArea,
-                                           RectangleEdge edge,
-                                           AxisSpace space);
+            Rectangle2D plotArea, RectangleEdge edge, AxisSpace space);
+
+    /**
+     * Receives a chart element visitor.  Many plot subclasses will override
+     * this method to handle their subcomponents.
+     * 
+     * @param visitor  the visitor ({@code null} not permitted).
+     */
+    @Override
+    public void receive(ChartElementVisitor visitor) {
+        visitor.visit(this);
+    }
 
     /**
      * Draws the axis on a Java 2D graphics device (such as the screen or a

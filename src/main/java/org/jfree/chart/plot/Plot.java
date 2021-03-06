@@ -66,6 +66,7 @@ import java.util.Objects;
 
 import javax.swing.event.EventListenerList;
 import org.jfree.chart.ChartElement;
+import org.jfree.chart.ChartElementVisitor;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.legend.LegendItemCollection;
@@ -103,7 +104,7 @@ import org.jfree.data.general.DatasetChangeListener;
  * delegates the drawing of axes and data to the plot.  This base class
  * provides facilities common to most plot types.
  */
-public abstract class Plot implements AxisChangeListener,
+public abstract class Plot implements ChartElement, AxisChangeListener,
         DatasetChangeListener, AnnotationChangeListener, MarkerChangeListener,
         LegendItemSource, PublicCloneable, Cloneable, Serializable {
 
@@ -892,6 +893,17 @@ public abstract class Plot implements AxisChangeListener,
      */
     protected void fireChangeEvent() {
         notifyListeners(new PlotChangeEvent(this));
+    }
+
+    /**
+     * Receives a chart element visitor.  Many plot subclasses will override
+     * this method to handle their subcomponents.
+     * 
+     * @param visitor  the visitor ({@code null} not permitted).
+     */
+    @Override
+    public void receive(ChartElementVisitor visitor) {
+        visitor.visit(this);
     }
 
     /**

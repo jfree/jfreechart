@@ -46,6 +46,7 @@ import java.awt.Shape;
 import java.awt.Stroke;
 import java.awt.geom.Rectangle2D;
 import java.util.Collection;
+import org.jfree.chart.ChartElement;
 
 import org.jfree.chart.legend.LegendItem;
 import org.jfree.chart.legend.LegendItemSource;
@@ -73,7 +74,7 @@ import org.jfree.data.xy.XYDataset;
  * To support cloning charts, it is recommended that renderers implement both
  * the {@link Cloneable} and {@code PublicCloneable} interfaces.
  */
-public interface XYItemRenderer extends LegendItemSource {
+public interface XYItemRenderer extends ChartElement, LegendItemSource {
 
     /**
      * Returns the plot that this renderer has been assigned to.

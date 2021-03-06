@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -28,16 +28,10 @@
  * ValueAxisPlot.java
  * ------------------
  *
- * (C) Copyright 2003-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 07-May-2003 : Version 1 (DG);
- * 11-Nov-2004 : Changed Horizontal --> Domain and Vertical --> Range (DG);
- * 12-Nov-2004 : Moved zooming methods to new Zoomable interface (DG);
  *
  */
 
