@@ -132,7 +132,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
             = ResourceBundle.getBundle("org.jfree.chart.plot.LocalizationBundle");
 
     /** The angles that are marked with gridlines. */
-    private List angleTicks;
+    private List<NumberTick> angleTicks;
 
     /** The range axis (used for the y-values). */
     private ObjectList axes;
@@ -1065,8 +1065,8 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      *
      * @return A list of {@link NumberTick} instances.
      */
-    protected List refreshAngleTicks() {
-        List ticks = new ArrayList();
+    protected List<NumberTick> refreshAngleTicks() {
+        List<NumberTick> ticks = new ArrayList<>();
         for (double currentTickVal = 0.0; currentTickVal < 360.0;
                 currentTickVal += this.angleTickUnit.getSize()) {
 
@@ -1475,7 +1475,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      * @param radialTicks  the ticks for the radial axis.
      */
     protected void drawGridlines(Graphics2D g2, Rectangle2D dataArea,
-                                 List angularTicks, List radialTicks) {
+                                 List<NumberTick> angularTicks, List radialTicks) {
 
         PolarItemRenderer renderer = getRenderer();
         // no renderer, no gridlines...
