@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * ---------------
  * PaintScale.java
  * ---------------
- * (C) Copyright 2006-2008, by Object Refinery Limited.
+ * (C) Copyright 2006-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 05-Jul-2006 : Version 1 (DG);
- * 31-Jan-2007 : Added getLowerBound() and getUpperBound() methods (DG);
  *
  */
 
@@ -53,8 +48,6 @@ import org.jfree.chart.renderer.xy.XYBlockRenderer;
  * {@code PublicCloneable} and {@code Serializable}, so
  * that any renderer (or other object instance) that references an instance of
  * this interface can still be cloned or serialized.
- *
- * @since 1.0.4
  */
 public interface PaintScale {
 

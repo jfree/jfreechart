@@ -58,8 +58,6 @@ import org.jfree.chart.internal.SerialUtils;
 
 /**
  * A simple circular frame for the {@link DialPlot} class.
- *
- * @since 1.0.7
  */
 public class StandardDialFrame extends AbstractDialLayer implements DialFrame,
         Cloneable, PublicCloneable, Serializable {

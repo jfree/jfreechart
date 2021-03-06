@@ -61,8 +61,6 @@ import org.jfree.chart.internal.SerialUtils;
 
 /**
  * A scale for a {@link DialPlot}.
- *
- * @since 1.0.7
  */
 public class StandardDialScale extends AbstractDialLayer implements DialScale,
         Cloneable, PublicCloneable, Serializable {
@@ -224,8 +222,6 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
      * @return The lower bound for the scale.
      *
      * @see #setLowerBound(double)
-     *
-     * @since 1.0.8
      */
     public double getLowerBound() {
         return this.lowerBound;
@@ -238,8 +234,6 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
      * @param lower  the lower bound.
      *
      * @see #getLowerBound()
-     *
-     * @since 1.0.8
      */
     public void setLowerBound(double lower) {
         this.lowerBound = lower;
@@ -252,8 +246,6 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
      * @return The upper bound for the scale.
      *
      * @see #setUpperBound(double)
-     *
-     * @since 1.0.8
      */
     public double getUpperBound() {
         return this.upperBound;
@@ -266,8 +258,6 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
      * @param upper  the upper bound.
      *
      * @see #getUpperBound()
-     *
-     * @since 1.0.8
      */
     public void setUpperBound(double upper) {
         this.upperBound = upper;
@@ -547,8 +537,6 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
      * @return The paint (never {@code null}).
      *
      * @see #setMinorTickStroke(Stroke)
-     *
-     * @since 1.0.8
      */
     public Stroke getMinorTickStroke() {
         return this.minorTickStroke;
@@ -561,8 +549,6 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
      * @param stroke  the stroke ({@code null} not permitted).
      *
      * @see #getMinorTickStroke()
-     *
-     * @since 1.0.8
      */
     public void setMinorTickStroke(Stroke stroke) {
         Args.nullNotPermitted(stroke, "stroke");

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * ----------------------
  * PolarItemRenderer.java
  * ----------------------
- * (C) Copyright 2004-2011, by Solution Engineering, Inc. and Contributors.
+ * (C) Copyright 2004-2021, by Solution Engineering, Inc. and Contributors.
  *
  * Original Author:  Daniel Bridenbecker, Solution Engineering, Inc.;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 19-Jan-2004 : Version 1, contributed by DB with minor changes by DG (DG);
- * 03-Oct-2011 : Added tooltip and URL generator support (MH);
  *
  */
 
@@ -159,8 +154,6 @@ public interface PolarItemRenderer {
      * @return The generator (possibly {@code null}).
      *
      * @see #setSeriesToolTipGenerator(int, XYToolTipGenerator)
-     *
-     * @since 1.0.14
      */
     XYToolTipGenerator getSeriesToolTipGenerator(int series);
 
@@ -172,11 +165,8 @@ public interface PolarItemRenderer {
      * @param generator  the generator ({@code null} permitted).
      *
      * @see #getSeriesToolTipGenerator(int)
-     *
-     * @since 1.0.14
      */
-    void setSeriesToolTipGenerator(int series,
-                                          XYToolTipGenerator generator);
+    void setSeriesToolTipGenerator(int series, XYToolTipGenerator generator);
 
     /**
      * Returns the base tool tip generator.
@@ -184,8 +174,6 @@ public interface PolarItemRenderer {
      * @return The generator (possibly {@code null}).
      *
      * @see #setBaseToolTipGenerator(XYToolTipGenerator)
-     *
-     * @since 1.0.14
      */
     XYToolTipGenerator getBaseToolTipGenerator();
 
@@ -196,8 +184,6 @@ public interface PolarItemRenderer {
      * @param generator  the generator ({@code null} permitted).
      *
      * @see #getBaseToolTipGenerator()
-     *
-     * @since 1.0.14
      */
     void setBaseToolTipGenerator(XYToolTipGenerator generator);
 
@@ -207,18 +193,14 @@ public interface PolarItemRenderer {
     /**
      * Returns the URL generator for HTML image maps.
      *
-     * @return The URL generator (possibly null).
-     *
-     * @since 1.0.14
+     * @return The URL generator (possibly {@code null}).
      */
     XYURLGenerator getURLGenerator();
 
     /**
      * Sets the URL generator for HTML image maps.
      *
-     * @param urlGenerator the URL generator (null permitted).
-     *
-     * @since 1.0.14
+     * @param urlGenerator the URL generator ({@code null} permitted).
      */
     void setURLGenerator(XYURLGenerator urlGenerator);
 

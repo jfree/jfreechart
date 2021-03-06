@@ -52,8 +52,6 @@ import org.jfree.chart.internal.SerialUtils;
 /**
  * A paint scale that uses a lookup table to associate paint instances
  * with data value ranges.
- *
- * @since 1.0.4
  */
 public class LookupPaintScale
         implements PaintScale, PublicCloneable, Serializable {
@@ -240,8 +238,6 @@ public class LookupPaintScale
      *
      * @param value  the data value.
      * @param paint  the paint.
-     *
-     * @since 1.0.6
      */
     public void add(double value, Paint paint) {
         PaintItem item = new PaintItem(value, paint);
