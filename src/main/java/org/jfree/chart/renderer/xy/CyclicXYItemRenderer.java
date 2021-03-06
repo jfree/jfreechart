@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * CyclicXYItemRenderer.java
  * ---------------------------
- * (C) Copyright 2003-2020, by Nicolas Brodu and Contributors.
+ * (C) Copyright 2003-2021, by Nicolas Brodu and Contributors.
  *
  * Original Author:  Nicolas Brodu;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -49,7 +49,6 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.urls.XYURLGenerator;
 import org.jfree.data.DomainOrder;
 import org.jfree.data.general.DatasetChangeListener;
-import org.jfree.data.general.DatasetGroup;
 import org.jfree.data.xy.XYDataset;
 
 /**
@@ -470,27 +469,6 @@ public class CyclicXYItemRenderer extends StandardXYItemRenderer
          */
         @Override
         public void removeChangeListener(DatasetChangeListener listener) {
-            // unused in parent
-        }
-
-        /**
-         * Returns the dataset group.
-         *
-         * @return The dataset group.
-         */
-        @Override
-        public DatasetGroup getGroup() {
-            // unused but must return something, so while we are at it...
-            return this.delegateSet.getGroup();
-        }
-
-        /**
-         * Does nothing.
-         *
-         * @param group  ignored.
-         */
-        @Override
-        public void setGroup(DatasetGroup group) {
             // unused in parent
         }
 

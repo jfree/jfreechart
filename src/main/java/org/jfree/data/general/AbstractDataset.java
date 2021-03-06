@@ -60,9 +60,6 @@ public abstract class AbstractDataset implements Dataset, Cloneable,
     /** For serialization. */
     private static final long serialVersionUID = 1918768939869230744L;
 
-    /** The group that the dataset belongs to. */
-    private DatasetGroup group;
-
     /** Storage for registered change listeners. */
     private transient EventListenerList listenerList;
     
@@ -73,38 +70,11 @@ public abstract class AbstractDataset implements Dataset, Cloneable,
     private boolean notify;
 
     /**
-     * Constructs a dataset. By default, the dataset is assigned to its own
-     * group.
+     * Constructs a dataset.
      */
     protected AbstractDataset() {
-        this.group = new DatasetGroup();
         this.listenerList = new EventListenerList();
         this.notify = true;
-    }
-
-    /**
-     * Returns the dataset group for the dataset.
-     *
-     * @return The group (never {@code null}).
-     *
-     * @see #setGroup(DatasetGroup)
-     */
-    @Override
-    public DatasetGroup getGroup() {
-        return this.group;
-    }
-
-    /**
-     * Sets the dataset group for the dataset.
-     *
-     * @param group  the group ({@code null} not permitted).
-     *
-     * @see #getGroup()
-     */
-    @Override
-    public void setGroup(DatasetGroup group) {
-        Args.nullNotPermitted(group, "group");
-        this.group = group;
     }
 
     /**
@@ -114,8 +84,6 @@ public abstract class AbstractDataset implements Dataset, Cloneable,
      * change event.
      * 
      * @return A boolean.
-     * 
-     * @since 1.0.17
      */
     public boolean getNotify() {
         return this.notify;
@@ -128,8 +96,6 @@ public abstract class AbstractDataset implements Dataset, Cloneable,
      * queued up changes.
      * 
      * @param notify  the new flag value.
-     * 
-     * @since 1.0.17
      */
     public void setNotify(boolean notify) {
         this.notify = notify;

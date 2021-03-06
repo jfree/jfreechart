@@ -127,7 +127,7 @@ import org.jfree.data.Range;
  * @see Plot
  */
 public class JFreeChart implements Drawable, TitleChangeListener,
-        PlotChangeListener, Serializable, Cloneable {
+        PlotChangeListener, ChartElement, Serializable, Cloneable {
 
     /** For serialization. */
     private static final long serialVersionUID = -3470703747817429120L;
@@ -972,6 +972,12 @@ public class JFreeChart implements Drawable, TitleChangeListener,
         }
     }
 
+
+    @Override
+    public void receive(ChartElementVisitor visitor) {
+        // FIXME : pass elements of the chart to the visitor
+    }
+    
     /**
      * Draws the chart on a Java 2D graphics device (such as the screen or a
      * printer).
@@ -1627,5 +1633,6 @@ public class JFreeChart implements Drawable, TitleChangeListener,
         chart.changeListeners = new EventListenerList();
         return chart;
     }
+
 
 }

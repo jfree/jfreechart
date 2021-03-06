@@ -497,7 +497,6 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
         // set the new dataset, and register the chart as a change listener...
         this.dataset = dataset;
         if (dataset != null) {
-            setDatasetGroup(dataset.getGroup());
             dataset.addChangeListener(this);
         }
 

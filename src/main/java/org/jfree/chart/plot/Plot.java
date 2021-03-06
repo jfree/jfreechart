@@ -65,6 +65,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import javax.swing.event.EventListenerList;
+import org.jfree.chart.ChartElement;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.legend.LegendItemCollection;
@@ -96,7 +97,6 @@ import org.jfree.chart.api.RectangleAlignment;
 import org.jfree.chart.internal.SerialUtils;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.DatasetChangeListener;
-import org.jfree.data.general.DatasetGroup;
 
 /**
  * The base class for all plots in JFreeChart.  The {@link JFreeChart} class
@@ -156,9 +156,6 @@ public abstract class Plot implements AxisChangeListener,
     
     /** The parent plot ({@code null} if this is the root plot). */
     private Plot parent;
-
-    /** The dataset group (to be used for thread synchronisation). */
-    private DatasetGroup datasetGroup;
 
     /** The message to display if no data is available. */
     private String noDataMessage;
@@ -275,28 +272,6 @@ public abstract class Plot implements AxisChangeListener,
             return this.chart.getElementHinting();
         }
         return false;
-    }
-
-    /**
-     * Returns the dataset group for the plot (not currently used).
-     *
-     * @return The dataset group.
-     *
-     * @see #setDatasetGroup(DatasetGroup)
-     */
-    public DatasetGroup getDatasetGroup() {
-        return this.datasetGroup;
-    }
-
-    /**
-     * Sets the dataset group (not currently used).
-     *
-     * @param group  the dataset group ({@code null} permitted).
-     *
-     * @see #getDatasetGroup()
-     */
-    protected void setDatasetGroup(DatasetGroup group) {
-        this.datasetGroup = group;
     }
 
     /**
@@ -1299,17 +1274,12 @@ public abstract class Plot implements AxisChangeListener,
      */
     @Override
     public Object clone() throws CloneNotSupportedException {
-
         Plot clone = (Plot) super.clone();
         // private Plot parent <-- don't clone the parent plot, but take care
         // childs in combined plots instead
-        if (this.datasetGroup != null) {
-            clone.datasetGroup = CloneUtils.clone(this.datasetGroup);
-        }
         clone.drawingSupplier = CloneUtils.clone(this.drawingSupplier);
         clone.listenerList = new EventListenerList();
         return clone;
-
     }
 
     /**
