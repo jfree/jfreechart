@@ -91,8 +91,6 @@ public interface SelectionZoomStrategy extends Serializable {
      *
      * @see #setZoomOutlinePaint(java.awt.Paint)
      * @see #setFillZoomRectangle(boolean)
-     *
-     * @since 1.0.13
      */
     Paint getZoomOutlinePaint();
 
@@ -103,8 +101,6 @@ public interface SelectionZoomStrategy extends Serializable {
      *
      * @see #getZoomOutlinePaint()
      * @see #getFillZoomRectangle()
-     *
-     * @since 1.0.13
      */
     void setZoomOutlinePaint(Paint paint);
 
@@ -115,8 +111,6 @@ public interface SelectionZoomStrategy extends Serializable {
      *
      * @see #setZoomFillPaint(Paint)
      * @see #setFillZoomRectangle(boolean)
-     *
-     * @since 1.0.13
      */
     Paint getZoomFillPaint();
 
@@ -127,8 +121,6 @@ public interface SelectionZoomStrategy extends Serializable {
      *
      * @see #getZoomFillPaint()
      * @see #getFillZoomRectangle()
-     *
-     * @since 1.0.13
      */
     void setZoomFillPaint(Paint paint);
 

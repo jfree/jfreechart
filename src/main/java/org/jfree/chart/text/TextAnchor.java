@@ -84,8 +84,6 @@ public enum TextAnchor {
      * {@code false} otherwise.
      * 
      * @return A boolean.
-     * 
-     * @since 1.0.20
      */
     public boolean isLeft() {
         return this == BASELINE_LEFT || this == BOTTOM_LEFT 
@@ -98,8 +96,6 @@ public enum TextAnchor {
      * {@code false} otherwise.
      * 
      * @return A boolean.
-     * 
-     * @since 1.0.20
      */
     public boolean isRight() {
         return this == BASELINE_RIGHT || this == BOTTOM_RIGHT 
@@ -112,8 +108,6 @@ public enum TextAnchor {
      * {@code false} otherwise.
      * 
      * @return A boolean.
-     * 
-     * @since 1.0.20
      */
     public boolean isHorizontalCenter() {
         return this == BASELINE_CENTER || this == BOTTOM_CENTER 
@@ -126,8 +120,6 @@ public enum TextAnchor {
      * {@code false} otherwise.
      * 
      * @return A boolean.
-     * 
-     * @since 1.0.20
      */
     public boolean isTop() {
         return this == TOP_LEFT || this == TOP_CENTER || this == TOP_RIGHT;
@@ -138,8 +130,6 @@ public enum TextAnchor {
      * {@code false} otherwise.
      * 
      * @return A boolean.
-     * 
-     * @since 1.0.20
      */
     public boolean isBottom() {
         return this == BOTTOM_LEFT || this == BOTTOM_CENTER 
@@ -151,8 +141,6 @@ public enum TextAnchor {
      * {@code false} otherwise.
      * 
      * @return A boolean.
-     * 
-     * @since 1.0.20
      */
     public boolean isBaseline() {
         return this == BASELINE_LEFT || this == BASELINE_CENTER 
@@ -164,8 +152,6 @@ public enum TextAnchor {
      * {@code false} otherwise.
      * 
      * @return A boolean.
-     * 
-     * @since 1.0.20
      */
     public boolean isHalfAscent() {
         return this == HALF_ASCENT_LEFT || this == HALF_ASCENT_CENTER 
@@ -177,8 +163,6 @@ public enum TextAnchor {
      * {@code false} otherwise.
      * 
      * @return A boolean.
-     * 
-     * @since 1.0.20
      */
     public boolean isVerticalCenter() {
         return this == CENTER_LEFT || this == CENTER  || this == CENTER_RIGHT;

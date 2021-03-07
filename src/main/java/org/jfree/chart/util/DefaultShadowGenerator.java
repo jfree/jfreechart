@@ -49,8 +49,6 @@ import org.jfree.chart.internal.HashUtils;
  * code in a 
  * <a href="http://www.jroller.com/gfx/entry/fast_or_good_drop_shadows">blog
  * post by Romain Guy</a>.
- *
- * @since 1.0.14
  */
 public class DefaultShadowGenerator implements ShadowGenerator, Serializable {
 

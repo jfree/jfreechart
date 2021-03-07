@@ -67,8 +67,6 @@ import org.jfree.chart.api.PublicCloneable;
  * An overlay for a {@link ChartPanel} that draws crosshairs on a chart.  If 
  * you are using the JavaFX extensions for JFreeChart, then you should use
  * the {@code CrosshairOverlayFX} class.
- *
- * @since 1.0.13
  */
 public class CrosshairOverlay extends AbstractOverlay implements Overlay,
         PropertyChangeListener, PublicCloneable, Cloneable, Serializable {

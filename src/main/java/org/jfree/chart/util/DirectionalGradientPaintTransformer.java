@@ -61,12 +61,8 @@ import java.awt.Shape;
  * </ul>
  * <p>In all cases, the cyclic flag of the original paint will be taken into 
  * account.</p>
- *
- * @author Peter Kolb
- * @since 1.0.17
  */
-public class DirectionalGradientPaintTransformer 
-        implements GradientPaintTransformer {
+public class DirectionalGradientPaintTransformer implements GradientPaintTransformer {
     
     /**
      * Default constructor.

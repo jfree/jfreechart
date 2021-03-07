@@ -396,7 +396,7 @@ public class PolarPlot extends Plot implements ValueAxisPlot, Zoomable,
      * @see #getAxisLocation()
      */
     public void setAxisLocation(PolarAxisLocation location) {
-        // delegate...
+        // delegate argument checks...
         setAxisLocation(0, location, true);
     }
 

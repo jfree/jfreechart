@@ -55,8 +55,6 @@ import org.jfree.chart.internal.Args;
 
 /**
  * Utility functions for exporting charts to SVG and PDF format.
- * 
- * @since 1.0.18
  */
 public class ExportUtils {
 
