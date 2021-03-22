@@ -1154,6 +1154,19 @@ public class XYPlot<S extends Comparable<S>> extends Plot
     }
 
     /**
+     * Returns a map containing the datasets that are assigned to this plot.
+     * The map is unmodifiable.
+     * 
+     * @return A map containing the datasets that are assigned to the plot 
+     *     (never {@code null}).
+     * 
+     * @since 1.5.4
+     */
+    public Map<Integer, XYDataset> getDatasets() {
+        return Collections.unmodifiableMap(this.datasets);
+    }
+
+    /**
      * Sets the primary dataset for the plot, replacing the existing dataset if
      * there is one.
      *
@@ -1336,6 +1349,19 @@ public class XYPlot<S extends Comparable<S>> extends Plot
      */
     public XYItemRenderer getRenderer(int index) {
         return this.renderers.get(index);
+    }
+
+    /**
+     * Returns a map containing the renderers that are assigned to this plot.
+     * The map is unmodifiable.
+     * 
+     * @return A map containing the renderers that are assigned to the plot 
+     *     (never {@code null}).
+     * 
+     * @since 1.5.4
+     */
+    public Map<Integer, XYItemRenderer> getRenderers() {
+        return Collections.unmodifiableMap(this.renderers);
     }
 
     /**

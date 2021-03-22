@@ -1125,6 +1125,19 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
     }
 
     /**
+     * Returns a map containing the datasets that are assigned to this plot.
+     * The map is unmodifiable.
+     * 
+     * @return A map containing the datasets that are assigned to the plot 
+     *     (never {@code null}).
+     * 
+     * @since 1.5.4
+     */
+    public Map<Integer, CategoryDataset> getDatasets() {
+        return Collections.unmodifiableMap(this.datasets);
+    }
+
+    /**
      * Sets the dataset for the plot, replacing the existing dataset, if there
      * is one.  This method also calls the
      * {@link #datasetChanged(DatasetChangeEvent)} method, which adjusts the
@@ -1358,6 +1371,19 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
             return this.renderers.get(0);
         }
         return renderer;
+    }
+
+    /**
+     * Returns a map containing the renderers that are assigned to this plot.
+     * The map is unmodifiable.
+     * 
+     * @return A map containing the renderers that are assigned to the plot 
+     *     (never {@code null}).
+     * 
+     * @since 1.5.4
+     */
+    public Map<Integer, CategoryItemRenderer> getRenderers() {
+        return Collections.unmodifiableMap(this.renderers);
     }
 
     /**
