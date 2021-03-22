@@ -435,8 +435,8 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
         this.foregroundRangeMarkers = new HashMap();
         this.backgroundRangeMarkers = new HashMap();
 
-        this.datasets = new HashMap<Integer, XYDataset>();
-        this.renderers = new HashMap<Integer, XYItemRenderer>();
+        this.datasets = new HashMap<>();
+        this.renderers = new HashMap<>();
 
         this.datasetToDomainAxesMap = new TreeMap();
         this.datasetToRangeAxesMap = new TreeMap();
@@ -1144,7 +1144,20 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      * @see #setDataset(int, XYDataset)
      */
     public XYDataset getDataset(int index) {
-        return (XYDataset) this.datasets.get(index);
+        return this.datasets.get(index);
+    }
+    
+    /**
+     * Returns a map containing the datasets that are assigned to this plot.
+     * The map is unmodifiable.
+     * 
+     * @return A map containing the datasets that are assigned to the plot 
+     *     (never {@code null}).
+     * 
+     * @since 1.5.4
+     */
+    public Map<Integer, XYDataset> getDatasets() {
+        return Collections.unmodifiableMap(this.datasets);
     }
 
     /**
@@ -1332,6 +1345,19 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      */
     public XYItemRenderer getRenderer(int index) {
         return this.renderers.get(index);
+    }
+
+    /**
+     * Returns a map containing the renderers that are assigned to this plot.
+     * The map is unmodifiable.
+     * 
+     * @return A map containing the renderers that are assigned to the plot 
+     *     (never {@code null}).
+     * 
+     * @since 1.5.4
+     */
+    public Map<Integer, XYItemRenderer> getRenderers() {
+        return Collections.unmodifiableMap(this.renderers);
     }
 
     /**
