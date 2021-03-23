@@ -615,6 +615,19 @@ public class XYPlot<S extends Comparable<S>> extends Plot
     }
 
     /**
+     * Returns a map containing the domain axes that are assigned to this plot.
+     * The map is unmodifiable.
+     * 
+     * @return A map containing the domain axes that are assigned to the plot 
+     *     (never {@code null}).
+     * 
+     * @since 1.5.4
+     */
+    public Map<Integer, ValueAxis> getDomainAxes() {
+        return Collections.unmodifiableMap(this.domainAxes);
+    }
+    
+    /**
      * Sets the domain axis for the plot and sends a {@link PlotChangeEvent}
      * to all registered listeners.
      *
@@ -958,6 +971,19 @@ public class XYPlot<S extends Comparable<S>> extends Plot
             }
         }
         return result;
+    }
+
+    /**
+     * Returns a map containing the range axes that are assigned to this plot.
+     * The map is unmodifiable.
+     * 
+     * @return A map containing the range axes that are assigned to the plot 
+     *     (never {@code null}).
+     * 
+     * @since 1.5.4
+     */
+    public Map<Integer, ValueAxis> getRangeAxes() {
+        return Collections.unmodifiableMap(this.rangeAxes);
     }
 
     /**
