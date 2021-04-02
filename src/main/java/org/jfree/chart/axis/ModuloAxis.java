@@ -30,7 +30,7 @@
  * (C) Copyright 2004-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
+ * Contributor(s):   Yuri Blankenstein;
  *
  */
 
@@ -121,8 +121,8 @@ public class ModuloAxis extends NumberAxis {
      * For now, it just sets the axis range to the fixedRange.
      */
     @Override
-    protected void autoAdjustRange() {
-        setRange(this.fixedRange, false, false);
+    public Range calculateAutoRange(boolean adhereToMax) {
+        return this.fixedRange;
     }
 
     /**

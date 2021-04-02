@@ -30,7 +30,7 @@
  * (C) Copyright 2004-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
+ * Contributor(s):   Yuri Blankenstein;
  *
  */
 
@@ -1011,11 +1011,11 @@ public class PeriodAxis extends ValueAxis
      * Rescales the axis to ensure that all data is visible.
      */
     @Override
-    protected void autoAdjustRange() {
+    public Range calculateAutoRange(boolean adhereToMax) {
 
         Plot plot = getPlot();
         if (plot == null) {
-            return;  // no plot, no data
+            return null;  // no plot, no data
         }
 
         if (plot instanceof ValueAxisPlot) {
@@ -1032,9 +1032,9 @@ public class PeriodAxis extends ValueAxis
                     new Date(lower), this.timeZone, this.locale);
             this.last = createInstance(this.autoRangeTimePeriodClass,
                     new Date(upper), this.timeZone, this.locale);
-            setRange(r, false, false);
+            return r;
         }
-
+        return null;
     }
 
     /**
