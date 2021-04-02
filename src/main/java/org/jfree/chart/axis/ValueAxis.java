@@ -1035,7 +1035,7 @@ public abstract class ValueAxis extends Axis
      * listeners.
      * <p>
      * 
-     * @param range  the range (<code>null</code> not permitted).
+     * @param range  the range ({@code null} not permitted).
      * @param notify notify listeners?
      */
     public void setDefaultAutoRange(Range range, boolean notify) {
