@@ -45,6 +45,7 @@
  *                   Alessandro Borges - patch 1460845;
  *                   Martin Hoeller;
  *                   Simon Legner - patch from bug 1129;
+ *                   Yuri Blankenstein;
  */
 
 package org.jfree.chart;
@@ -218,6 +219,9 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
 
     /** Zoom reset (range axis only) action command. */
     public static final String ZOOM_RESET_RANGE_COMMAND = "ZOOM_RESET_RANGE";
+
+    /** Chart property to notify {@link java.beans.PropertyChangeListener}*/
+    public static final String PROPERTY_CHART = "Chart";
 
     /** The chart that is displayed in the panel. */
     private JFreeChart chart;
@@ -622,10 +626,11 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      */
     public void setChart(JFreeChart chart) {
 
+        final JFreeChart oldChart = this.chart;
         // stop listening for changes to the existing chart
-        if (this.chart != null) {
-            this.chart.removeChangeListener(this);
-            this.chart.removeProgressListener(this);
+        if (oldChart != null) {
+            oldChart.removeChangeListener(this);
+            oldChart.removeProgressListener(this);
         }
 
         // add the new chart
@@ -650,6 +655,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         if (this.useBuffer) {
             this.refreshBuffer = true;
         }
+        firePropertyChange(PROPERTY_CHART, oldChart, chart);
         repaint();
 
     }
