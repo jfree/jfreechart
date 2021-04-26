@@ -45,6 +45,7 @@ import java.awt.Paint;
 import java.awt.Shape;
 import java.awt.Stroke;
 import java.awt.geom.Rectangle2D;
+import java.util.Collection;
 
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.LegendItemSource;
@@ -1335,6 +1336,13 @@ public interface XYItemRenderer extends LegendItemSource {
      */
     public void addAnnotation(XYAnnotation annotation, Layer layer);
 
+    /**
+     * Returns all annotations of all layers currently added to this renderer.
+     * 
+     * @return all annotations for this renderer
+     */
+    public Collection getAnnotations();
+    
     /**
      * Removes the specified annotation and sends a {@link RendererChangeEvent}
      * to all registered listeners.
