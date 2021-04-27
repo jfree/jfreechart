@@ -79,6 +79,7 @@ History
 - observe series visibility flags in `ClusteredXYBarRenderer` ([#89](https://github.com/jfree/jfreechart/pull/89));
 - observe axis visibility flag in `PeriodAxis` ([#198](https://github.com/jfree/jfreechart/issues/198));
 - fix for exception on extreme zoom on `NumberAxis` (bug #64);
+- fix tick label font for `LogAxis` with number format override ([#90](https://github.com/jfree/jfreechart/issues/90));
 - remove alpha channel from copy-to-clipboard (fixes bug #182);
 - apply rendering hints to overlays - fixes bug #187;
 - modify `TextTitle` to throw `IllegalArgumentException` rather than `NullPointerException` ([#205](https://github.com/jfree/jfreechart/issues/205));

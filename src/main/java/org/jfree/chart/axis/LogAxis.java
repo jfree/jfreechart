@@ -793,8 +793,10 @@ public class LogAxis extends ValueAxis {
      */
     protected AttributedString createTickLabel(double value) {
         if (this.numberFormatOverride != null) {
-            return new AttributedString(
-                    this.numberFormatOverride.format(value));
+            String text = this.numberFormatOverride.format(value);
+            AttributedString as = new AttributedString(text);
+            as.addAttribute(TextAttribute.FONT, getTickLabelFont());
+            return as;
         } else {
             String baseStr = this.baseSymbol;
             if (baseStr == null) {
