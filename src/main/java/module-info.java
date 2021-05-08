@@ -5,6 +5,7 @@ module org.jfree.chart {
     requires java.desktop;
     exports org.jfree.chart;
     exports org.jfree.chart.annotations;
+    exports org.jfree.chart.api;
     exports org.jfree.chart.axis;
     exports org.jfree.chart.date;
     exports org.jfree.chart.entity;
@@ -15,6 +16,7 @@ module org.jfree.chart {
     exports org.jfree.chart.plot;
     exports org.jfree.chart.plot.dial;
     exports org.jfree.chart.plot.flow;
+    exports org.jfree.chart.plot.pie;
     exports org.jfree.chart.renderer;
     exports org.jfree.chart.renderer.category;
     exports org.jfree.chart.renderer.xy;
