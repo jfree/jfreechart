@@ -45,11 +45,13 @@
  *                   Alessandro Borges - patch 1460845;
  *                   Martin Hoeller;
  *                   Simon Legner - patch from bug 1129;
+ *                   Yuri Blankenstein;
  */
 
 package org.jfree.chart;
 
 import java.awt.AWTEvent;
+import java.awt.AWTException;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Composite;
@@ -58,6 +60,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GraphicsConfiguration;
+import java.awt.HeadlessException;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Paint;
@@ -93,7 +96,9 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.EventListener;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
 
 import javax.swing.JFileChooser;
 import javax.swing.JMenu;
@@ -110,13 +115,14 @@ import org.jfree.chart.editor.ChartEditor;
 import org.jfree.chart.editor.ChartEditorManager;
 import org.jfree.chart.entity.ChartEntity;
 import org.jfree.chart.entity.EntityCollection;
+import org.jfree.chart.entity.MovableChartEntity;
 import org.jfree.chart.event.ChartChangeEvent;
 import org.jfree.chart.event.ChartChangeListener;
 import org.jfree.chart.event.ChartProgressEvent;
 import org.jfree.chart.event.ChartProgressListener;
-import org.jfree.chart.panel.Overlay;
 import org.jfree.chart.event.OverlayChangeEvent;
 import org.jfree.chart.event.OverlayChangeListener;
+import org.jfree.chart.panel.Overlay;
 import org.jfree.chart.plot.Pannable;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
@@ -218,6 +224,19 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
 
     /** Zoom reset (range axis only) action command. */
     public static final String ZOOM_RESET_RANGE_COMMAND = "ZOOM_RESET_RANGE";
+
+    /** Illustrates that move is not allowed */
+    private static final Cursor INVALID_MOVE_CURSOR;
+
+    static {
+        Cursor invalidMoveCursor = Cursor.getDefaultCursor();
+        try {
+            invalidMoveCursor = Cursor.getSystemCustomCursor("Invalid.32x32");
+        } catch (HeadlessException | AWTException e1) {
+            // Ignore
+        }
+        INVALID_MOVE_CURSOR = invalidMoveCursor;
+    }
 
     /** The chart that is displayed in the panel. */
     private JFreeChart chart;
@@ -412,6 +431,30 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      */
     private int panMask = InputEvent.CTRL_MASK;
 
+    /** The movable chart entity (selected by the user by dragging the mouse). */
+    private transient MovableChartEntity movableChartEntity;
+
+    /** The predicate that enables dragging a movable chart entity */ 
+    private Predicate<MouseEvent> moveChartEntityPredicate = 
+            e -> e.getButton() == MouseEvent.BUTTON1;
+    
+    /**
+     * The move starting point (selected by the user with a mouse
+     * click). This is a point on the screen, not the chart (which may have been
+     * scaled up or down to fit the panel).
+     */
+    private transient Point2D moveChartEntityFrom;
+    
+    /**
+     * The move end point (selected by the user by dragging the mouse). This is
+     * a point on the screen, not the chart (which may have been scaled up or
+     * down to fit the panel).
+     */
+    private transient Point2D moveChartEntityTo;
+    
+    /** The paint to use to illustrate where the chart entity will be moved to */
+    private transient Paint moveChartEntityFillPaint;
+
     /**
      * A list of overlays for the panel.
      */
@@ -594,6 +637,8 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         this.zoomAroundAnchor = false;
         this.zoomOutlinePaint = Color.BLUE;
         this.zoomFillPaint = new Color(0, 0, 255, 63);
+
+        this.moveChartEntityFillPaint = new Color(0, 0, 0, 63);
 
         this.panMask = InputEvent.CTRL_MASK;
         // for MacOSX we can't use the CTRL key for mouse drags, see:
@@ -1065,6 +1110,20 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         this.enforceFileExtensions = enforce;
     }
 
+    public void setMoveChartEntityPredicate(
+            Predicate<MouseEvent> moveChartEntityPredicate) {
+        this.moveChartEntityPredicate = moveChartEntityPredicate;
+    }
+
+    public Paint getMoveChartEntityFillPaint() {
+        return moveChartEntityFillPaint;
+    }
+    
+    public void setMoveChartEntityFillPaint(Paint moveChartEntityFillPaint) {
+        this.moveChartEntityFillPaint = moveChartEntityFillPaint;
+    }
+    
+    
     /**
      * Returns the flag that controls whether or not zoom operations are
      * centered around the current anchor point.
@@ -1480,6 +1539,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         // we use XOR so we can XOR the rectangle away again without redrawing
         // the chart
         drawZoomRectangle(g2, !this.useBuffer);
+        drawMovableChartEntity(g2, !this.useBuffer);
 
         g2.dispose();
 
@@ -1673,8 +1733,31 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
                 // the actual panning occurs later in the mouseDragged() 
                 // method
             }
+            return;
         }
-        else if (this.zoomRectangle == null) {
+        
+        if (moveChartEntityPredicate.test(e)) {
+            Insets insets = getInsets();
+            int x = (int) ((e.getX() - insets.left) / this.scaleX);
+            int y = (int) ((e.getY() - insets.top) / this.scaleY);
+
+            ChartEntity entity = null;
+            if (this.info != null) {
+                EntityCollection entities = this.info.getEntityCollection();
+                if (entities != null) {
+                    entity = entities.getEntity(x, y);
+                }
+            }
+            if (entity instanceof MovableChartEntity) {
+                this.movableChartEntity = (MovableChartEntity) entity;
+                this.moveChartEntityFrom = new Point(x, y);
+                setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
+                e.consume();
+                return;
+            }
+        }
+        
+        if (this.zoomRectangle == null) {
             Rectangle2D screenDataArea = getScreenDataArea(e.getX(), e.getY());
             if (screenDataArea != null) {
                 this.zoomPoint = getPointInRectangle(e.getX(), e.getY(),
@@ -1746,6 +1829,38 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
             }
             this.panLast = e.getPoint();
             this.chart.getPlot().setNotify(old);
+            return;
+        }
+
+        if (this.movableChartEntity != null) {
+            Graphics2D g2 = (Graphics2D) getGraphics();
+            // Erase the previous movable chart entity (if any). We only need to
+            // do this is we are using XOR mode, which we do when we're not
+            // using the buffer (if there is a buffer, then at the end of this
+            // method we just trigger a repaint)
+            if (!this.useBuffer) {
+                drawMovableChartEntity(g2, true);
+            }
+
+            Insets insets = getInsets();
+            int x = (int) ((e.getX() - insets.left) / this.scaleX);
+            int y = (int) ((e.getY() - insets.top) / this.scaleY);
+            this.moveChartEntityTo = this.movableChartEntity
+                    .tryMove(this.moveChartEntityFrom, new Point(x, y));
+
+            setCursor(null == moveChartEntityTo ? INVALID_MOVE_CURSOR
+                    : Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
+
+            // Draw the new movable chart entity...
+            if (this.useBuffer) {
+                repaint();
+            } else {
+                // with no buffer, we use XOR to draw the rectangle "over" the
+                // chart...
+                drawMovableChartEntity(g2, true);
+            }
+            g2.dispose();
+            e.consume();
             return;
         }
 
@@ -1822,6 +1937,25 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         // released...
         if (this.panLast != null) {
             this.panLast = null;
+            setCursor(Cursor.getDefaultCursor());
+        }
+
+        else if (this.movableChartEntity != null) {
+            Insets insets = getInsets();
+            int x = (int) ((e.getX() - insets.left) / this.scaleX);
+            int y = (int) ((e.getY() - insets.top) / this.scaleY);
+            this.moveChartEntityTo = this.movableChartEntity
+                    .tryMove(this.moveChartEntityFrom, new Point(x, y));
+
+            if (null != this.moveChartEntityTo && !Objects
+                    .equals(this.moveChartEntityFrom, this.moveChartEntityTo)) {
+                this.movableChartEntity.move(this.moveChartEntityFrom,
+                        this.moveChartEntityTo);
+            }
+
+            this.movableChartEntity = null;
+            this.moveChartEntityFrom = null;
+            this.moveChartEntityTo = null;
             setCursor(Cursor.getDefaultCursor());
         }
 
@@ -2392,6 +2526,35 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
      */
     public void setZoomOutFactor(double factor) {
         this.zoomOutFactor = factor;
+    }
+
+    /**
+     * Draws a rectangle (if present) to show where the movable chart entity
+     * will move to.
+     * 
+     * @param g2  the graphics device.
+     * @param xor use XOR for drawing?
+     */
+    private void drawMovableChartEntity(Graphics2D g2, boolean xor) {
+        if (this.movableChartEntity != null && this.moveChartEntityFrom != null
+                && this.moveChartEntityTo != null) {
+            Graphics2D g = (Graphics2D) g2.create();
+            if (xor) {
+                // Set XOR mode to draw the zoom rectangle
+                g.setXORMode(Color.GRAY);
+            }
+            Insets insets = getInsets();
+            double scaledMoveX = (this.moveChartEntityTo.getX()
+                    - this.moveChartEntityFrom.getX()) * this.scaleX;
+            double scaledMoveY = (this.moveChartEntityTo.getY()
+                    - this.moveChartEntityFrom.getY()) * this.scaleY;
+
+            g.setPaint(this.moveChartEntityFillPaint);
+            g.translate(insets.left + scaledMoveX, insets.top + scaledMoveY);
+            g.scale(this.scaleX, this.scaleY);
+            g.fill(this.movableChartEntity.getArea());
+            g.dispose();
+        }
     }
 
     /**
