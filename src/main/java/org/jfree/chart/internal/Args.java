@@ -101,4 +101,21 @@ public class Args {
                     + upperBound);
         }
     }
+    
+    /**
+     * Checks the supplied value is finite (neither infinite nor NaN) and 
+     * throws an {@code IllegalArgumentException} if the requirement is not
+     * met.
+     * 
+     * @param value  the value.
+     * @param name  the parameter name (for use in the exception message).
+     * 
+     * @since 1.5.4
+     */
+    public static void requireFinite(double value, String name) {
+        if (!Double.isFinite(value)) {
+            throw new IllegalArgumentException("Require '" + name + "' (" 
+                    + value + ") to be finite.");
+        }
+    }
 }

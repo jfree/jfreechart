@@ -44,22 +44,45 @@ import static org.junit.jupiter.api.Assertions.fail;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.GradientPaint;
+import java.awt.Stroke;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.api.PublicCloneable;
+import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.data.xy.DefaultTableXYDataset;
 import org.jfree.data.xy.XYSeries;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 
 /**
  * Some tests for the {@link XYBoxAnnotation} class.
  */
 public class XYBoxAnnotationTest {
+
+    @Test
+    public void testConstructorExceptions() {
+        Stroke stroke = new BasicStroke(2.0f);
+        assertThrows(IllegalArgumentException.class, () -> {
+            XYBoxAnnotation a1 = new XYBoxAnnotation(Double.NaN, 20.0, 100.0, 200.0,
+                stroke, Color.BLUE, Color.RED);
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            XYBoxAnnotation a1 = new XYBoxAnnotation(10.0, Double.NaN, 100.0, 200.0,
+                stroke, Color.BLUE, Color.RED);
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            XYBoxAnnotation a1 = new XYBoxAnnotation(10.0, 20.0, Double.NaN, 200.0,
+                stroke, Color.BLUE, Color.RED);
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            XYBoxAnnotation a1 = new XYBoxAnnotation(10.0, 20.0, 100.0, Double.NaN,
+                stroke, Color.BLUE, Color.RED);
+        });
+    }
 
     /**
      * Confirm that the equals method can distinguish all the required fields.

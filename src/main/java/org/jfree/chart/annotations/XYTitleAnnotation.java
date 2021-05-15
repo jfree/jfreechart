@@ -120,6 +120,8 @@ public class XYTitleAnnotation extends AbstractXYAnnotation
     public XYTitleAnnotation(double x, double y, Title title,
             RectangleAnchor anchor) {
         super();
+        Args.requireFinite(x, "x");
+        Args.requireFinite(y, "y");
         Args.nullNotPermitted(title, "title");
         Args.nullNotPermitted(anchor, "anchor");
         this.coordinateType = XYCoordinateType.RELATIVE;
