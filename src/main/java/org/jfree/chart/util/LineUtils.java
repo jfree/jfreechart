@@ -45,7 +45,9 @@ import java.awt.geom.Rectangle2D;
 public class LineUtils {
 
     /**
-     * Clips the specified line to the given rectangle.
+     * Clips the specified line to the given rectangle.  If any of the line
+     * coordinates is not finite, then the method returns {@code false} and
+     * the line is not modified.
      *
      * @param line  the line ({@code null} not permitted).
      * @param rect  the clipping rectangle ({@code null} not permitted).
@@ -59,6 +61,12 @@ public class LineUtils {
         double y1 = line.getY1();
         double x2 = line.getX2();
         double y2 = line.getY2();
+
+        // check that the line can be worked with (bug#223)
+        if ((!Double.isFinite(x1) || !Double.isFinite(y1)) 
+                || !Double.isFinite(x2) || !Double.isFinite(y2)) {
+            return false;
+        }
 
         double minX = rect.getMinX();
         double maxX = rect.getMaxX();
@@ -83,43 +91,36 @@ public class LineUtils {
                         && dx != 0.0) {
                     y1 = y1 + (minX - x1) * dy / dx;
                     x1 = minX;
-                }
-                else if ((f1 & Rectangle2D.OUT_RIGHT) == Rectangle2D.OUT_RIGHT
+                } else if ((f1 & Rectangle2D.OUT_RIGHT) == Rectangle2D.OUT_RIGHT
                         && dx != 0.0) {
                     y1 = y1 + (maxX - x1) * dy / dx;
                     x1 = maxX;
-                }
-                else if ((f1 & Rectangle2D.OUT_BOTTOM) == Rectangle2D.OUT_BOTTOM
+                } else if ((f1 & Rectangle2D.OUT_BOTTOM) == Rectangle2D.OUT_BOTTOM
                         && dy != 0.0) {
                     x1 = x1 + (maxY - y1) * dx / dy;
                     y1 = maxY;
-                }
-                else if ((f1 & Rectangle2D.OUT_TOP) == Rectangle2D.OUT_TOP
+                } else if ((f1 & Rectangle2D.OUT_TOP) == Rectangle2D.OUT_TOP
                         && dy != 0.0) {
                     x1 = x1 + (minY - y1) * dx / dy;
                     y1 = minY;
                 }
                 f1 = rect.outcode(x1, y1);
-            }
-            else if (f2 != 0) {
+            } else if (f2 != 0) {
                 // second point is outside, so we update it against one of the
                 // four sides then continue
                 if ((f2 & Rectangle2D.OUT_LEFT) == Rectangle2D.OUT_LEFT
                         && dx != 0.0) {
                     y2 = y2 + (minX - x2) * dy / dx;
                     x2 = minX;
-                }
-                else if ((f2 & Rectangle2D.OUT_RIGHT) == Rectangle2D.OUT_RIGHT
+                } else if ((f2 & Rectangle2D.OUT_RIGHT) == Rectangle2D.OUT_RIGHT
                         && dx != 0.0) {
                     y2 = y2 + (maxX - x2) * dy / dx;
                     x2 = maxX;
-                }
-                else if ((f2 & Rectangle2D.OUT_BOTTOM) == Rectangle2D.OUT_BOTTOM
+                } else if ((f2 & Rectangle2D.OUT_BOTTOM) == Rectangle2D.OUT_BOTTOM
                         && dy != 0.0) {
                     x2 = x2 + (maxY - y2) * dx / dy;
                     y2 = maxY;
-                }
-                else if ((f2 & Rectangle2D.OUT_TOP) == Rectangle2D.OUT_TOP
+                } else if ((f2 & Rectangle2D.OUT_TOP) == Rectangle2D.OUT_TOP
                         && dy != 0.0) {
                     x2 = x2 + (minY - y2) * dx / dy;
                     y2 = minY;
@@ -145,7 +146,7 @@ public class LineUtils {
      * @return A new line.
      */
     public static Line2D extendLine(Line2D line, double startPercent,
-                              double endPercent) {
+            double endPercent) {
         Args.nullNotPermitted(line, "line");
         double x1 = line.getX1();
         double x2 = line.getX2();

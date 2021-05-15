@@ -82,10 +82,10 @@ public class XYDrawableAnnotation extends AbstractXYAnnotation
     /**
      * Creates a new annotation to be displayed within the given area.
      *
-     * @param x  the x-coordinate for the area.
-     * @param y  the y-coordinate for the area.
-     * @param width  the width of the area.
-     * @param height  the height of the area.
+     * @param x  the x-coordinate for the area (must be finite).
+     * @param y  the y-coordinate for the area (must be finite).
+     * @param width  the width of the area (must be finite).
+     * @param height  the height of the area (must be finite).
      * @param drawable  the drawable object ({@code null} not permitted).
      */
     public XYDrawableAnnotation(double x, double y, double width, double height,
@@ -99,25 +99,73 @@ public class XYDrawableAnnotation extends AbstractXYAnnotation
      * will be drawn at twice the requested display size then scaled down to
      * fit the space.
      *
-     * @param x  the x-coordinate for the area.
-     * @param y  the y-coordinate for the area.
-     * @param displayWidth  the width of the area.
-     * @param displayHeight  the height of the area.
-     * @param drawScaleFactor  the scaling factor for drawing.
+     * @param x  the x-coordinate for the area (must be finite).
+     * @param y  the y-coordinate for the area (must be finite).
+     * @param displayWidth  the width of the area (must be finite).
+     * @param displayHeight  the height of the area (must be finite).
+     * @param drawScaleFactor  the scaling factor for drawing (must be finite).
      * @param drawable  the drawable object ({@code null} not permitted).
      */
     public XYDrawableAnnotation(double x, double y, double displayWidth,
             double displayHeight, double drawScaleFactor, Drawable drawable) {
-
         super();
         Args.nullNotPermitted(drawable, "drawable");
+        Args.requireFinite(x, "x");
+        Args.requireFinite(y, "y");
+        Args.requireFinite(displayWidth, "displayWidth");
+        Args.requireFinite(displayHeight, "displayHeight");
+        Args.requireFinite(drawScaleFactor, "drawScaleFactor");
         this.x = x;
         this.y = y;
         this.displayWidth = displayWidth;
         this.displayHeight = displayHeight;
         this.drawScaleFactor = drawScaleFactor;
         this.drawable = drawable;
+    }
 
+    /**
+     * Returns the x-coordinate (set in the constructor).
+     * 
+     * @return The x-coordinate.
+     */
+    public double getX() {
+        return x;
+    }
+
+    /**
+     * Returns the y-coordinate (set in the constructor).
+     * 
+     * @return The y-coordinate.
+     */
+    public double getY() {
+        return y;
+    }
+
+    /**
+     * Returns the display width (set in the constructor).
+     * 
+     * @return The display width.
+     */
+    public double getDisplayWidth() {
+        return displayWidth;
+    }
+
+    /**
+     * Returns the display height (set in the constructor).
+     * 
+     * @return The display height.
+     */
+    public double getDisplayHeight() {
+        return displayHeight;
+    }
+
+    /**
+     * Returns the scale factor (set in the constructor).
+     * 
+     * @return The scale factor.
+     */
+    public double getDrawScaleFactor() {
+        return drawScaleFactor;
     }
 
     /**
@@ -182,7 +230,6 @@ public class XYDrawableAnnotation extends AbstractXYAnnotation
      */
     @Override
     public boolean equals(Object obj) {
-
         if (obj == this) { // simple case
             return true;
         }
@@ -212,9 +259,7 @@ public class XYDrawableAnnotation extends AbstractXYAnnotation
         if (!Objects.equals(this.drawable, that.drawable)) {
             return false;
         }
-        // seem to be the same...
         return true;
-
     }
 
     /**

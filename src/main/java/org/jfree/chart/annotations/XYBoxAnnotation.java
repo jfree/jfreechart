@@ -54,6 +54,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
@@ -121,10 +122,10 @@ public class XYBoxAnnotation extends AbstractXYAnnotation
     /**
      * Creates a new annotation.
      *
-     * @param x0  the lower x-coordinate of the box (in data space).
-     * @param y0  the lower y-coordinate of the box (in data space).
-     * @param x1  the upper x-coordinate of the box (in data space).
-     * @param y1  the upper y-coordinate of the box (in data space).
+     * @param x0  the lower x-coordinate of the box (in data space, must be finite).
+     * @param y0  the lower y-coordinate of the box (in data space, must be finite).
+     * @param x1  the upper x-coordinate of the box (in data space, must be finite).
+     * @param y1  the upper y-coordinate of the box (in data space, must be finite).
      * @param stroke  the shape stroke ({@code null} permitted).
      * @param outlinePaint  the shape color ({@code null} permitted).
      * @param fillPaint  the paint used to fill the shape ({@code null}
@@ -133,6 +134,10 @@ public class XYBoxAnnotation extends AbstractXYAnnotation
     public XYBoxAnnotation(double x0, double y0, double x1, double y1,
                            Stroke stroke, Paint outlinePaint, Paint fillPaint) {
         super();
+        Args.requireFinite(x0, "x0");
+        Args.requireFinite(y0, "y0");
+        Args.requireFinite(x1, "x1");
+        Args.requireFinite(y1, "y1");
         this.x0 = x0;
         this.y0 = y0;
         this.x1 = x1;
@@ -140,6 +145,73 @@ public class XYBoxAnnotation extends AbstractXYAnnotation
         this.stroke = stroke;
         this.outlinePaint = outlinePaint;
         this.fillPaint = fillPaint;
+    }
+
+    /**
+     * Returns the x-coordinate for the bottom left corner of the box (set in the
+     * constructor).
+     * 
+     * @return The x-coordinate for the bottom left corner of the box.
+     */
+    public double getX0() {
+        return x0;
+    }
+
+    /**
+     * Returns the y-coordinate for the bottom left corner of the box (set in the
+     * constructor).
+     * 
+     * @return The y-coordinate for the bottom left corner of the box.
+     */
+    public double getY0() {
+        return y0;
+    }
+
+    /**
+     * Returns the x-coordinate for the top right corner of the box (set in the
+     * constructor).
+     * 
+     * @return The x-coordinate for the top right corner of the box.
+     */
+    public double getX1() {
+        return x1;
+    }
+
+    /**
+     * Returns the y-coordinate for the top right corner of the box (set in the
+     * constructor).
+     * 
+     * @return The y-coordinate for the top right corner of the box.
+     */
+    public double getY1() {
+        return y1;
+    }
+
+    /**
+     * Returns the stroke used for the box outline.
+     * 
+     * @return The stroke (possibly {@code null}). 
+     */
+    public Stroke getStroke() {
+        return stroke;
+    }
+
+    /**
+     * Returns the paint used for the box outline.
+     * 
+     * @return The paint (possibly {@code null}). 
+     */
+    public Paint getOutlinePaint() {
+        return outlinePaint;
+    }
+
+    /**
+     * Returns the paint used for the box fill.
+     * 
+     * @return The paint (possibly {@code null}). 
+     */
+    public Paint getFillPaint() {
+        return fillPaint;
     }
 
     /**
@@ -176,8 +248,7 @@ public class XYBoxAnnotation extends AbstractXYAnnotation
         if (orientation == PlotOrientation.HORIZONTAL) {
             box = new Rectangle2D.Double(transY0, transX1, transY1 - transY0,
                     transX0 - transX1);
-        }
-        else if (orientation == PlotOrientation.VERTICAL) {
+        } else if (orientation == PlotOrientation.VERTICAL) {
             box = new Rectangle2D.Double(transX0, transY1, transX1 - transX0,
                     transY0 - transY1);
         }
@@ -193,7 +264,6 @@ public class XYBoxAnnotation extends AbstractXYAnnotation
             g2.draw(box);
         }
         addEntity(info, box, rendererIndex, getToolTipText(), getURL());
-
     }
 
     /**
@@ -237,7 +307,6 @@ public class XYBoxAnnotation extends AbstractXYAnnotation
         if (!PaintUtils.equal(this.fillPaint, that.fillPaint)) {
             return false;
         }
-        // seem to be the same
         return true;
     }
 

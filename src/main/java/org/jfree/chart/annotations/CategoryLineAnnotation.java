@@ -96,9 +96,9 @@ public class CategoryLineAnnotation extends AbstractAnnotation
      * and (category2, value2).
      *
      * @param category1  the category ({@code null} not permitted).
-     * @param value1  the value.
+     * @param value1  the value (must be finite).
      * @param category2  the category ({@code null} not permitted).
-     * @param value2  the value.
+     * @param value2  the value (must be finite).
      * @param paint  the line color ({@code null} not permitted).
      * @param stroke  the line stroke ({@code null} not permitted).
      */
@@ -107,7 +107,9 @@ public class CategoryLineAnnotation extends AbstractAnnotation
                                   Paint paint, Stroke stroke) {
         super();
         Args.nullNotPermitted(category1, "category1");
+        Args.requireFinite(value1, "value1");
         Args.nullNotPermitted(category2, "category2");
+        Args.requireFinite(value2, "value2");
         Args.nullNotPermitted(paint, "paint");
         Args.nullNotPermitted(stroke, "stroke");
         this.category1 = category1;
@@ -158,11 +160,12 @@ public class CategoryLineAnnotation extends AbstractAnnotation
      * Sets the y-value for the start of the line and sends an
      * {@link AnnotationChangeEvent} to all registered listeners.
      *
-     * @param value  the value.
+     * @param value  the value (must be finite).
      *
      * @see #getValue1()
      */
     public void setValue1(double value) {
+        Args.requireFinite(value, "value");
         this.value1 = value;
         fireAnnotationChanged();
     }
@@ -207,11 +210,12 @@ public class CategoryLineAnnotation extends AbstractAnnotation
      * Sets the y-value for the end of the line and sends an
      * {@link AnnotationChangeEvent} to all registered listeners.
      *
-     * @param value  the value.
+     * @param value  the value (must be finite).
      *
      * @see #getValue2()
      */
     public void setValue2(double value) {
+        Args.requireFinite(value, "value");
         this.value2 = value;
         fireAnnotationChanged();
     }
@@ -303,8 +307,7 @@ public class CategoryLineAnnotation extends AbstractAnnotation
                 CategoryAnchor.MIDDLE, catIndex2, catCount, dataArea,
                 domainEdge);
             lineX2 = rangeAxis.valueToJava2D(this.value2, dataArea, rangeEdge);
-        }
-        else if (orientation == PlotOrientation.VERTICAL) {
+        } else if (orientation == PlotOrientation.VERTICAL) {
             lineX1 = domainAxis.getCategoryJava2DCoordinate(
                 CategoryAnchor.MIDDLE, catIndex1, catCount, dataArea,
                 domainEdge);

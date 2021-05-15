@@ -60,6 +60,7 @@ History
 ##### Version 1.5.4 (not-yet-released)
 - add new methods to access maps for datasets, renderers and axes in plots ([#201](https://github.com/jfree/jfreechart/issues/201));
 - fix tick label font for `LogAxis` with number format override ([#98](https://github.com/jfree/jfreechart/issues/98));
+- add argument checks for annotations ([#223](https://github.com/jfree/jfreechart/issues/223));
 
 
 ##### Version 1.5.3 (21 February 2021)
