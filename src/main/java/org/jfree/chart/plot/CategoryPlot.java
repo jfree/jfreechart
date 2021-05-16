@@ -339,10 +339,10 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     private boolean rangeCrosshairLockedOnData = true;
 
     /** A map containing lists of markers for the domain axes. */
-    private Map<Integer, Collection<Marker>> foregroundDomainMarkers;
+    private Map<Integer, Collection<CategoryMarker>> foregroundDomainMarkers;
 
     /** A map containing lists of markers for the domain axes. */
-    private Map<Integer, Collection<Marker>> backgroundDomainMarkers;
+    private Map<Integer, Collection<CategoryMarker>> backgroundDomainMarkers;
 
     /** A map containing lists of markers for the range axes. */
     private Map<Integer, Collection<Marker>> foregroundRangeMarkers;
@@ -2270,14 +2270,14 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @return A collection of markers (possibly {@code null}).
      */
-    public Collection getDomainMarkers(int index, Layer layer) {
-        Collection result = null;
+    public Collection<CategoryMarker> getDomainMarkers(int index, Layer layer) {
+        Collection<CategoryMarker> result = null;
         Integer key = index;
         if (layer == Layer.FOREGROUND) {
-            result = (Collection) this.foregroundDomainMarkers.get(key);
+            result = this.foregroundDomainMarkers.get(key);
         }
         else if (layer == Layer.BACKGROUND) {
-            result = (Collection) this.backgroundDomainMarkers.get(key);
+            result = this.backgroundDomainMarkers.get(key);
         }
         if (result != null) {
             result = Collections.unmodifiableCollection(result);
@@ -2528,14 +2528,13 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      *
      * @return A collection of markers (possibly {@code null}).
      */
-    public Collection getRangeMarkers(int index, Layer layer) {
-        Collection result = null;
-        Integer key = index;
+    public Collection<Marker> getRangeMarkers(int index, Layer layer) {
+        Collection<Marker> result = null;
         if (layer == Layer.FOREGROUND) {
-            result = (Collection) this.foregroundRangeMarkers.get(key);
+            result = this.foregroundRangeMarkers.get(index);
         }
         else if (layer == Layer.BACKGROUND) {
-            result = (Collection) this.backgroundRangeMarkers.get(key);
+            result = this.backgroundRangeMarkers.get(index);
         }
         if (result != null) {
             result = Collections.unmodifiableCollection(result);
@@ -3817,19 +3816,17 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @see #drawRangeMarkers(Graphics2D, Rectangle2D, int, Layer)
      */
     protected void drawDomainMarkers(Graphics2D g2, Rectangle2D dataArea,
-                                     int index, Layer layer) {
+            int index, Layer layer) {
 
         CategoryItemRenderer r = getRenderer(index);
         if (r == null) {
             return;
         }
 
-        Collection markers = getDomainMarkers(index, layer);
+        Collection<CategoryMarker> markers = getDomainMarkers(index, layer);
         CategoryAxis axis = getDomainAxisForDataset(index);
         if (markers != null && axis != null) {
-            Iterator iterator = markers.iterator();
-            while (iterator.hasNext()) {
-                CategoryMarker marker = (CategoryMarker) iterator.next();
+            for (CategoryMarker marker : markers) {
                 r.drawDomainMarker(g2, this, axis, marker, dataArea);
             }
         }
@@ -3848,19 +3845,17 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @see #drawDomainMarkers(Graphics2D, Rectangle2D, int, Layer)
      */
     protected void drawRangeMarkers(Graphics2D g2, Rectangle2D dataArea,
-                                    int index, Layer layer) {
+            int index, Layer layer) {
 
         CategoryItemRenderer r = getRenderer(index);
         if (r == null) {
             return;
         }
 
-        Collection markers = getRangeMarkers(index, layer);
+        Collection<Marker> markers = getRangeMarkers(index, layer);
         ValueAxis axis = getRangeAxisForDataset(index);
         if (markers != null && axis != null) {
-            Iterator iterator = markers.iterator();
-            while (iterator.hasNext()) {
-                Marker marker = (Marker) iterator.next();
+            for (Marker marker : markers) {
                 r.drawRangeMarker(g2, this, axis, marker, dataArea);
             }
         }
