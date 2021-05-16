@@ -778,8 +778,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
             item.setLine(shape);
             item.setLinePaint(paint);
             item.setShapeVisible(false);
-        }
-        else {
+        } else {
             Paint outlinePaint = lookupSeriesOutlinePaint(series);
             Stroke outlineStroke = lookupSeriesOutlineStroke(series);
             item.setOutlinePaint(outlinePaint);

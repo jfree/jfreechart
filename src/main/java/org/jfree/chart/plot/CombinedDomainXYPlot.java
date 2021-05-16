@@ -308,7 +308,7 @@ public class CombinedDomainXYPlot extends XYPlot
      *
      * @return An unmodifiable list of subplots.
      */
-    public List getSubplots() {
+    public List<XYPlot> getSubplots() {
         return Collections.unmodifiableList(this.subplots);
     }
 

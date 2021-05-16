@@ -237,7 +237,7 @@ public class CombinedRangeXYPlot extends XYPlot
      *
      * @return An unmodifiable list of subplots.
      */
-    public List getSubplots() {
+    public List<XYPlot> getSubplots() {
         if (this.subplots != null) {
             return Collections.unmodifiableList(this.subplots);
         }

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * StandardChartTheme.java
  * -----------------------
- * (C) Copyright 2008-2020, by Object Refinery Limited.
+ * (C) Copyright 2008-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -1293,54 +1293,42 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
         plot.setShadowGenerator(this.shadowGenerator);
 
         // process all domain axes
-        int domainAxisCount = plot.getDomainAxisCount();
-        for (int i = 0; i < domainAxisCount; i++) {
-            ValueAxis axis = plot.getDomainAxis(i);
-            if (axis != null) {
-                applyToValueAxis(axis);
+        for (ValueAxis xAxis : plot.getDomainAxes().values()) {
+            if (xAxis != null) {
+                applyToValueAxis(xAxis);
             }
         }
 
         // process all range axes
-        int rangeAxisCount = plot.getRangeAxisCount();
-        for (int i = 0; i < rangeAxisCount; i++) {
-            ValueAxis axis = plot.getRangeAxis(i);
-            if (axis != null) {
-                applyToValueAxis(axis);
+        for (ValueAxis yAxis : plot.getRangeAxes().values()) {
+            if (yAxis != null) {
+                applyToValueAxis(yAxis);
             }
         }
 
         // process all renderers
-        int rendererCount = plot.getRendererCount();
-        for (int i = 0; i < rendererCount; i++) {
-            XYItemRenderer r = plot.getRenderer(i);
+        for (XYItemRenderer r : plot.getRenderers().values()) {
             if (r != null) {
                 applyToXYItemRenderer(r);
             }
         }
 
         // process all annotations
-        Iterator iter = plot.getAnnotations().iterator();
-        while (iter.hasNext()) {
-            XYAnnotation a = (XYAnnotation) iter.next();
+        for (XYAnnotation a : plot.getAnnotations()) {
             applyToXYAnnotation(a);
         }
 
         if (plot instanceof CombinedDomainXYPlot) {
             CombinedDomainXYPlot cp = (CombinedDomainXYPlot) plot;
-            Iterator iterator = cp.getSubplots().iterator();
-            while (iterator.hasNext()) {
-                XYPlot subplot = (XYPlot) iterator.next();
+            for (XYPlot subplot : cp.getSubplots()) {
                 if (subplot != null) {
                     applyToPlot(subplot);
-                }
+                }                
             }
         }
         if (plot instanceof CombinedRangeXYPlot) {
             CombinedRangeXYPlot cp = (CombinedRangeXYPlot) plot;
-            Iterator iterator = cp.getSubplots().iterator();
-            while (iterator.hasNext()) {
-                XYPlot subplot = (XYPlot) iterator.next();
+            for (XYPlot subplot : cp.getSubplots()) {
                 if (subplot != null) {
                     applyToPlot(subplot);
                 }
