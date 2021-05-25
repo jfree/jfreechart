@@ -31,6 +31,7 @@
  *
  * Original Author:  Cameron Riley;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
+ *                   Yuri Blankenstein;
  *
  */
 
@@ -136,10 +137,21 @@ public class ChartColor extends Color {
      * {@code ChartColor} objects.
      *
      * @return An array of objects with the {@code Paint} interface.
+     * @see #createDefaultColorArray()
      */
     public static Paint[] createDefaultPaintArray() {
-
-        return new Paint[] {
+        return createDefaultColorArray();
+    }
+    
+    /**
+     * Convenience method to return an array of {@code Color} objects that
+     * represent the pre-defined colors in the {@code Color} and
+     * {@code ChartColor} objects.
+     *
+     * @return An array of objects with the {@code Color} interface.
+     */
+    public static Color[] createDefaultColorArray() {
+        return new Color[] {
             new Color(0xFF, 0x55, 0x55),
             new Color(0x55, 0x55, 0xFF),
             new Color(0x55, 0xFF, 0x55),
@@ -177,4 +189,41 @@ public class ChartColor extends Color {
         };
     }
 
+    /**
+     * Creates an array of {@link Color#darker() darker} {@code colors} to use
+     * for e.g. borders.
+     * 
+     * @param colors original colors
+     * @return a new array containing {@link Color#darker() darker} instances of
+     *         the original colors.
+     */
+    public static Color[] createDarkerColorArray(Color[] colors) {
+        final Color[] result = new Color[colors.length];
+        for (int i = 0; i < colors.length; i++) {
+            result[i] = colors[i].darker();
+        }
+        return result;
+    }
+
+    /**
+     * Returns either {@link Color#BLACK black} or {@link Color#WHITE white},
+     * depending on the provided {@code color} to achieve the best contrast for
+     * e.g. text labels.<br>
+     * The {@code color} is
+     * <a href="https://en.wikipedia.org/wiki/YIQ#From_RGB_to_YIQ">converted
+     * from RGB to YIQ</a> and the luminance value (Y; &#8776;[0 .. 255]) is
+     * used to determine if {@code color} is closer to either {@link Color#BLACK
+     * black} or {@link Color#WHITE white}.
+     * 
+     * @param color the color for which the contrasted color is computed
+     * @return either {@link Color#BLACK black} or {@link Color#WHITE white},
+     *         depending on {@code color}
+     */
+    public static Color getContrastColor(Color color) {
+        // From Wikipedia: The Y component represents the luma information, and
+        // is the only component used by black-and-white television receivers.
+        final double luminanceY = 0.299 * color.getRed()
+                + 0.587 * color.getGreen() + 0.114 * color.getBlue();
+        return luminanceY >= 128 ? Color.BLACK : Color.WHITE;
+    }
 }
