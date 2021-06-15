@@ -142,6 +142,9 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
     /** The paint for the value displayed in the center of the dial. */
     private transient Paint valuePaint;
 
+    /** A flag that indicates whether the value is visible. */
+    private boolean valueVisible = true;
+
     /** A flag that controls whether or not the border is drawn. */
     private boolean drawBorder;
 
@@ -473,6 +476,29 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
             this.tickLabelPaint = paint;
             fireChangeEvent();
         }
+    }
+
+    /**
+     * Returns the flag that controls whether or not the value is visible.
+     * 
+     * @return A flag.
+     * 
+     * @see #setValueVisible
+     */
+    public boolean isValueVisible() {
+        return valueVisible;
+    }
+    
+    /**
+     *  Sets the flag that controls whether or not the value is visible.
+     * 
+     * @param valueVisible
+     * 
+     * @see #isValueVisible()
+     */
+    public void setValueVisible(boolean valueVisible) {
+        this.valueVisible = valueVisible;
+        fireChangeEvent();
     }
 
     /**
@@ -1090,20 +1116,22 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      * @param area  the plot area.
      */
     protected void drawValueLabel(Graphics2D g2, Rectangle2D area) {
-        g2.setFont(this.valueFont);
-        g2.setPaint(this.valuePaint);
-        String valueStr = "No value";
-        if (this.dataset != null) {
-            Number n = this.dataset.getValue();
-            if (n != null) {
-                valueStr = this.tickLabelFormat.format(n.doubleValue()) + " "
-                         + this.units;
+        if (valueVisible) {
+            g2.setFont(this.valueFont);
+            g2.setPaint(this.valuePaint);
+            String valueStr = "No value";
+            if (this.dataset != null) {
+                Number n = this.dataset.getValue();
+                if (n != null) {
+                    valueStr = this.tickLabelFormat.format(n.doubleValue()) + " "
+                        + this.units;
+                }
             }
-        }
-        float x = (float) area.getCenterX();
-        float y = (float) area.getCenterY() + DEFAULT_CIRCLE_SIZE;
-        TextUtils.drawAlignedString(valueStr, g2, x, y,
+            float x = (float) area.getCenterX();
+            float y = (float) area.getCenterY() + DEFAULT_CIRCLE_SIZE;
+            TextUtils.drawAlignedString(valueStr, g2, x, y,
                 TextAnchor.TOP_CENTER);
+        }
     }
 
     /**
