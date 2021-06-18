@@ -10,7 +10,7 @@
 
     <artifactId>jfreechart</artifactId>
     <groupId>org.jfree</groupId>
-    <version>1.5.3</version>
+    <version>1.5.4-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <organization>

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,18 +27,10 @@
  * ------------------
  * MeterPlotTest.java
  * ------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 27-Mar-2003 : Version 1 (DG);
- * 12-May-2004 : Updated testEquals() (DG);
- * 29-Nov-2007 : Updated testEquals() and testSerialization1() for
- *               dialOutlinePaint (DG)
- *
  */
 
 package org.jfree.chart.plot;
@@ -127,6 +119,12 @@ public class MeterPlotTest {
         assertFalse(plot1.equals(plot2));
         plot2.setNeedlePaint(new GradientPaint(9.0f, 8.0f, Color.RED,
                 7.0f, 6.0f, Color.BLUE));
+        assertTrue(plot1.equals(plot2));
+
+        // value visible
+        plot1.setValueVisible(false);
+        assertFalse(plot1.equals(plot2));
+        plot2.setValueVisible(false);
         assertTrue(plot1.equals(plot2));
 
         // value font
