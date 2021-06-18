@@ -480,21 +480,25 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
 
     /**
      * Returns the flag that controls whether or not the value is visible.
-     * 
+     * The default value is {@code true}.
+     *
      * @return A flag.
-     * 
+     *
      * @see #setValueVisible
+     * @since 1.5.4
      */
     public boolean isValueVisible() {
         return valueVisible;
     }
-    
+
     /**
-     *  Sets the flag that controls whether or not the value is visible.
-     * 
-     * @param valueVisible
-     * 
+     *  Sets the flag that controls whether or not the value is visible
+     *  and sends a change event to all registered listeners.
+     *
+     * @param valueVisible  the new flag value.
+     *
      * @see #isValueVisible()
+     * @since 1.5.4
      */
     public void setValueVisible(boolean valueVisible) {
         this.valueVisible = valueVisible;
@@ -826,8 +830,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
             drawArcForInterval(g2, meterArea, new MeterInterval("", this.range,
                     this.dialOutlinePaint, new BasicStroke(1.0f), null));
 
-            for (Object o : this.intervals) {
-                MeterInterval interval = (MeterInterval) o;
+            for (MeterInterval interval : this.intervals) {
                 drawArcForInterval(g2, meterArea, interval);
             }
 
@@ -1010,7 +1013,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      */
     public double valueToAngle(double value) {
         value = value - this.range.getLowerBound();
-        double baseAngle = 180 + ((this.meterAngle - 180) / 2);
+        double baseAngle = 180 + ((this.meterAngle - 180) / 2.0);
         return baseAngle - ((value / this.range.getLength()) * this.meterAngle);
     }
 
@@ -1197,6 +1200,9 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
             return false;
         }
         if (!PaintUtils.equal(this.needlePaint, that.needlePaint)) {
+            return false;
+        }
+        if (this.valueVisible != that.valueVisible) {
             return false;
         }
         if (!Objects.equals(this.valueFont, that.valueFont)) {
