@@ -337,10 +337,10 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
     private boolean rangeCrosshairLockedOnData = true;
 
     /** A map containing lists of markers for the domain axes. */
-    private Map<Integer, Collection<Marker>> foregroundDomainMarkers;
+    private Map<Integer, Collection<CategoryMarker>> foregroundDomainMarkers;
 
     /** A map containing lists of markers for the domain axes. */
-    private Map<Integer, Collection<Marker>> backgroundDomainMarkers;
+    private Map<Integer, Collection<CategoryMarker>> backgroundDomainMarkers;
 
     /** A map containing lists of markers for the range axes. */
     private Map<Integer, Collection<Marker>> foregroundRangeMarkers;
@@ -2143,7 +2143,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
      *
      * @param marker  the marker ({@code null} not permitted).
      *
-     * @see #removeDomainMarker(Marker)
+     * @see #removeDomainMarker(CategoryMarker)
      */
     public void addDomainMarker(CategoryMarker marker) {
         addDomainMarker(marker, Layer.FOREGROUND);
@@ -2159,7 +2159,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
      * @param layer  the layer (foreground or background) ({@code null}
      *               not permitted).
      *
-     * @see #removeDomainMarker(Marker, Layer)
+     * @see #removeDomainMarker(CategoryMarker, Layer)
      */
     public void addDomainMarker(CategoryMarker marker, Layer layer) {
         addDomainMarker(0, marker, layer);
@@ -2176,7 +2176,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
      * @param marker  the marker ({@code null} not permitted).
      * @param layer  the layer ({@code null} not permitted).
      *
-     * @see #removeDomainMarker(int, Marker, Layer)
+     * @see #removeDomainMarker(int, CategoryMarker, Layer)
      */
     public void addDomainMarker(int index, CategoryMarker marker, Layer layer) {
         addDomainMarker(index, marker, layer, true);
@@ -2194,13 +2194,13 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
      * @param layer  the layer ({@code null} not permitted).
      * @param notify  notify listeners?
      *
-     * @see #removeDomainMarker(int, Marker, Layer, boolean)
+     * @see #removeDomainMarker(int, CategoryMarker, Layer, boolean)
      */
     public void addDomainMarker(int index, CategoryMarker marker, Layer layer,
             boolean notify) {
         Args.nullNotPermitted(marker, "marker");
         Args.nullNotPermitted(layer, "layer");
-        Collection<Marker> markers;
+        Collection<CategoryMarker> markers;
         if (layer == Layer.FOREGROUND) {
             markers = this.foregroundDomainMarkers.get(index);
             if (markers == null) {
@@ -2253,7 +2253,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
      *
      * @return The list of domain markers.
      */
-    public Collection<Marker> getDomainMarkers(Layer layer) {
+    public Collection<CategoryMarker> getDomainMarkers(Layer layer) {
         return getDomainMarkers(0, layer);
     }
 
@@ -2266,8 +2266,8 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
      *
      * @return A collection of markers (possibly {@code null}).
      */
-    public Collection<Marker> getDomainMarkers(int index, Layer layer) {
-        Collection<Marker> result = null;
+    public Collection<CategoryMarker> getDomainMarkers(int index, Layer layer) {
+        Collection<CategoryMarker> result = null;
         Integer key = index;
         if (layer == Layer.FOREGROUND) {
             result = this.foregroundDomainMarkers.get(key);
@@ -2291,17 +2291,17 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
     public void clearDomainMarkers(int index) {
         Integer key = index;
         if (this.backgroundDomainMarkers != null) {
-            Collection<Marker> markers
+            Collection<CategoryMarker> markers
                 = this.backgroundDomainMarkers.get(key);
             if (markers != null) {
-                for (Marker m : markers) {
+                for (CategoryMarker m : markers) {
                     m.removeChangeListener(this);
                 }
                 markers.clear();
             }
         }
         if (this.foregroundDomainMarkers != null) {
-            Collection<Marker> markers
+            Collection<CategoryMarker> markers
                 = this.foregroundDomainMarkers.get(key);
             if (markers != null) {
                 for (Marker m : markers) {
@@ -2322,7 +2322,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
      * @return A boolean indicating whether or not the marker was actually
      *         removed.
      */
-    public boolean removeDomainMarker(Marker marker) {
+    public boolean removeDomainMarker(CategoryMarker marker) {
         return removeDomainMarker(marker, Layer.FOREGROUND);
     }
 
@@ -2336,7 +2336,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
      * @return A boolean indicating whether or not the marker was actually
      *         removed.
      */
-    public boolean removeDomainMarker(Marker marker, Layer layer) {
+    public boolean removeDomainMarker(CategoryMarker marker, Layer layer) {
         return removeDomainMarker(0, marker, layer);
     }
 
@@ -2351,7 +2351,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
      * @return A boolean indicating whether or not the marker was actually
      *         removed.
      */
-    public boolean removeDomainMarker(int index, Marker marker, Layer layer) {
+    public boolean removeDomainMarker(int index, CategoryMarker marker, Layer layer) {
         return removeDomainMarker(index, marker, layer, true);
     }
 
@@ -2367,13 +2367,13 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
      * @return A boolean indicating whether or not the marker was actually
      *         removed.
      */
-    public boolean removeDomainMarker(int index, Marker marker, Layer layer,
+    public boolean removeDomainMarker(int index, CategoryMarker marker, Layer layer,
             boolean notify) {
-        ArrayList<Marker> markers;
+        Collection<CategoryMarker> markers;
         if (layer == Layer.FOREGROUND) {
-            markers = (ArrayList<Marker>) this.foregroundDomainMarkers.get(index);
+            markers = this.foregroundDomainMarkers.get(index);
         } else {
-            markers = (ArrayList<Marker>) this.backgroundDomainMarkers.get(index);
+            markers = this.backgroundDomainMarkers.get(index);
         }
         if (markers == null) {
             return false;
@@ -2518,12 +2518,11 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
      */
     public Collection<Marker> getRangeMarkers(int index, Layer layer) {
         Collection<Marker> result = null;
-        Integer key = index;
         if (layer == Layer.FOREGROUND) {
-            result = this.foregroundRangeMarkers.get(key);
+            result = this.foregroundRangeMarkers.get(index);
         }
         else if (layer == Layer.BACKGROUND) {
-            result = this.backgroundRangeMarkers.get(key);
+            result = this.backgroundRangeMarkers.get(index);
         }
         if (result != null) {
             result = Collections.unmodifiableCollection(result);
@@ -2628,11 +2627,11 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
     public boolean removeRangeMarker(int index, Marker marker, Layer layer,
             boolean notify) {
         Args.nullNotPermitted(marker, "marker");
-        ArrayList<Marker> markers;
+        Collection<Marker> markers;
         if (layer == Layer.FOREGROUND) {
-            markers = (ArrayList<Marker>) this.foregroundRangeMarkers.get(index);
+            markers = this.foregroundRangeMarkers.get(index);
         } else {
-            markers = (ArrayList<Marker>) this.backgroundRangeMarkers.get(index);
+            markers = this.backgroundRangeMarkers.get(index);
         }
         if (markers == null) {
             return false;
@@ -3820,11 +3819,10 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
             return;
         }
 
-        Collection<Marker> markers = getDomainMarkers(index, layer);
+        Collection<CategoryMarker> markers = getDomainMarkers(index, layer);
         CategoryAxis axis = getDomainAxisForDataset(index);
         if (markers != null && axis != null) {
-            for (Marker value : markers) {
-                CategoryMarker marker = (CategoryMarker) value;
+            for (CategoryMarker marker : markers) {
                 r.drawDomainMarker(g2, this, axis, marker, dataArea);
             }
         }
@@ -3843,7 +3841,7 @@ public class CategoryPlot<R extends Comparable<R>, C extends Comparable<C>>
      * @see #drawDomainMarkers(Graphics2D, Rectangle2D, int, Layer)
      */
     protected void drawRangeMarkers(Graphics2D g2, Rectangle2D dataArea,
-                                    int index, Layer layer) {
+            int index, Layer layer) {
 
         CategoryItemRenderer r = getRenderer(index);
         if (r == null) {
