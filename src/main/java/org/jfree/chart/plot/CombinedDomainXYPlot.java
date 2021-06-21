@@ -516,7 +516,8 @@ public class CombinedDomainXYPlot<S extends Comparable<S>> extends XYPlot<S>
         // delegate 'state' and 'source' argument checks...
         XYPlot subplot = findSubplot(state, source);
         if (subplot != null) {
-            subplot.zoomRangeAxes(factor, state, source, useAnchor);
+            int subplotIndex = state.getSubplotIndex(source);
+            subplot.zoomRangeAxes(factor, state.getSubplotInfo(subplotIndex), source, useAnchor);
         } else {
             // if the source point doesn't fall within a subplot, we do the
             // zoom on all subplots...
