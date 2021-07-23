@@ -35,6 +35,7 @@
  *                   Center);
  *                   Peter Kolb (patch 1934255);
  *                   Andrew Mickish (patch 1870189);
+ *                   Yuri Blankenstein;
  *
  */
 
@@ -68,6 +69,7 @@ import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.Range;
+import org.jfree.data.RangeAlign;
 
 /**
  * The base class for axes that display value data, where values are measured
@@ -98,11 +100,17 @@ public abstract class ValueAxis extends Axis
     /** The default value for the upper margin (0.05 = 5%). */
     public static final double DEFAULT_UPPER_MARGIN = 0.05;
 
+    /** The default value for the range alignment. */
+    public static final RangeAlign DEFAULT_AUTO_RANGE_ALIGN = RangeAlign.UPPER;
+
     /** The default auto-tick-unit-selection value. */
     public static final boolean DEFAULT_AUTO_TICK_UNIT_SELECTION = true;
 
     /** The maximum tick count. */
     public static final int MAXIMUM_TICK_COUNT = 500;
+
+    /** The minimum range minimum size. */
+    public static final double MINIMUM_RANGE_MINIMUM_SIZE = Double.MIN_VALUE * 2;
 
     /**
      * A flag that controls whether an arrow is drawn at the positive end of
@@ -133,6 +141,12 @@ public abstract class ValueAxis extends Axis
 
     /** The axis range. */
     private Range range;
+
+    /**
+     * Flag that indicates how the auto range should be aligned when it differs
+     * from the preferred range.
+     */
+    private RangeAlign autoRangeAlign;
 
     /**
      * Flag that indicates whether the axis automatically scales to fit the
@@ -193,11 +207,21 @@ public abstract class ValueAxis extends Axis
     private boolean verticalTickLabels;
 
     /**
+     * The minimum size for the axis range (i.e. limit maximum zoom)
+     */
+    private double rangeMinimumSize;
+
+    /**
+     * state: current range is minimum range
+     */
+    private boolean minimumRange;
+
+    /**
      * Constructs a value axis.
      *
-     * @param label  the axis label ({@code null} permitted).
-     * @param standardTickUnits  the source for standard tick units
-     *                           ({@code null} permitted).
+     * @param label             the axis label ({@code null} permitted).
+     * @param standardTickUnits the source for standard tick units ({@code null}
+     *                          permitted).
      */
     protected ValueAxis(String label, TickUnitSource standardTickUnits) {
 
@@ -209,6 +233,9 @@ public abstract class ValueAxis extends Axis
         this.range = DEFAULT_RANGE;
         this.autoRange = DEFAULT_AUTO_RANGE;
         this.defaultAutoRange = DEFAULT_RANGE;
+        this.autoRangeAlign = DEFAULT_AUTO_RANGE_ALIGN;
+        this.rangeMinimumSize = MINIMUM_RANGE_MINIMUM_SIZE;
+        this.minimumRange = false;
 
         this.inverted = DEFAULT_INVERTED;
         this.autoRangeMinimumSize = DEFAULT_AUTO_RANGE_MINIMUM_SIZE;
@@ -917,7 +944,7 @@ public abstract class ValueAxis extends Axis
      *
      * @see #isAutoRange()
      */
-    protected void setAutoRange(boolean auto, boolean notify) {
+    public void setAutoRange(boolean auto, boolean notify) {
         this.autoRange = auto;
         if (this.autoRange) {
             autoAdjustRange();
@@ -998,14 +1025,59 @@ public abstract class ValueAxis extends Axis
      * @see #getDefaultAutoRange()
      */
     public void setDefaultAutoRange(Range range) {
+        setDefaultAutoRange(range, true);
+    }
+
+    /**
+     * Sets the default auto range.
+     * <p>
+     * If requested, an {@link AxisChangeEvent} is forwarded to all registered
+     * listeners.
+     * <p>
+     * 
+     * @param range  the range ({@code null} not permitted).
+     * @param notify notify listeners?
+     */
+    public void setDefaultAutoRange(Range range, boolean notify) {
         Args.nullNotPermitted(range, "range");
-        this.defaultAutoRange = range;
-        fireChangeEvent();
+        if (!range.equals(this.defaultAutoRange)) {
+            this.defaultAutoRange = range;
+            if (this.autoRange) {
+                autoAdjustRange();
+            }
+            if (notify) {
+                fireChangeEvent();
+            }
+        }
+    }
+
+    /**
+     * Returns the auto-range-align.
+     * 
+     * @return The auto-range-align (never {@code null}).
+     * @see #setAutoRangeAlign(RangeAlign)
+     */
+    public RangeAlign getAutoRangeAlign() {
+        return autoRangeAlign;
+    }
+
+    /**
+     * Sets the default auto-range-align and sends an {@link AxisChangeEvent} to
+     * all registered listeners.
+     * 
+     * @param autoRangeAlign the auto-range-align ({@code null} not permitted).
+     */
+    public void setAutoRangeAlign(RangeAlign autoRangeAlign) {
+        Args.nullNotPermitted(autoRangeAlign, "autoRangeAlign");
+        if (autoRangeAlign != this.autoRangeAlign) {
+            this.autoRangeAlign = autoRangeAlign;
+            fireChangeEvent();
+        }
     }
 
     /**
      * Returns the lower margin for the axis, expressed as a percentage of the
-     * axis range.  This controls the space added to the lower end of the axis
+     * axis range. This controls the space added to the lower end of the axis
      * when the axis range is automatically calculated (it is ignored when the
      * axis range is set explicitly). The default value is 0.05 (five percent).
      *
@@ -1201,7 +1273,23 @@ public abstract class ValueAxis extends Axis
         if (turnOffAutoRange) {
             this.autoRange = false;
         }
-        this.range = range;
+        final double rangeNewSize = range.getLength();
+        if (rangeNewSize < this.rangeMinimumSize) {
+            if (!this.minimumRange || !this.range.contains(range)) {
+                // Only if we're not zoomed into maximum yet, we'll zoom in as
+                // much as possible
+                final double centralValue = range.getCentralValue();
+                final double halfLength = this.rangeMinimumSize / 2;
+                this.range = new Range(centralValue - halfLength,
+                        centralValue + halfLength);
+                this.minimumRange = true;
+            } else {
+                return;
+            }
+        } else {
+            this.minimumRange = rangeNewSize == this.rangeMinimumSize;
+            this.range = range;
+        }
         if (notify) {
             fireChangeEvent();
         }
@@ -1274,6 +1362,34 @@ public abstract class ValueAxis extends Axis
      */
     public void setRangeAboutValue(double value, double length) {
         setRange(new Range(value - length / 2, value + length / 2));
+    }
+
+    /**
+     * @param rangeMinimumSize the minimum range size for this axis
+     */
+    public void setRangeMinimumSize(double rangeMinimumSize) {
+        if (Double.isNaN(rangeMinimumSize)
+                || rangeMinimumSize < MINIMUM_RANGE_MINIMUM_SIZE) {
+            throw new IllegalArgumentException(
+                    "A positive range minimum size is required: "
+                            + rangeMinimumSize);
+        }
+        this.rangeMinimumSize = rangeMinimumSize;
+        final double rangeCurrentSize = this.range.getLength();
+        if (rangeCurrentSize < rangeMinimumSize) {
+            setRange(this.range);
+        } else if (rangeCurrentSize > rangeMinimumSize) {
+            this.minimumRange = false;
+        } else {
+            this.minimumRange = true;
+        }
+    }
+
+    /**
+     * @return the minimum range size for this axis
+     */
+    public double getRangeMinimumSize() {
+        return rangeMinimumSize;
     }
 
     /**
@@ -1428,7 +1544,21 @@ public abstract class ValueAxis extends Axis
      * example, the renderer may "stack" values, requiring an axis range
      * greater than otherwise necessary).
      */
-    protected abstract void autoAdjustRange();
+    protected final void autoAdjustRange() {
+        Range range = calculateAutoRange(true);
+        if (null != range) {
+            setRange(range, false, false);
+        }
+    }
+
+    /**
+     * @return the calculated axis range to fit the range of values in the
+     *         dataset. <tt>null</tt> if range could not be calculated.
+     * @param adhereToMax specifies whether range should adhere to its maximum
+     *                    boundaries (e.g. {@link #getFixedAutoRange()})
+     * @see #autoAdjustRange()
+     */
+    public abstract Range calculateAutoRange(boolean adhereToMax);
 
     /**
      * Centers the axis range about the specified value and sends an
@@ -1626,6 +1756,9 @@ public abstract class ValueAxis extends Axis
             return false;
         }
         if (this.minorTickCount != that.minorTickCount) {
+            return false;
+        }
+        if (this.rangeMinimumSize != that.rangeMinimumSize) {
             return false;
         }
         return super.equals(obj);

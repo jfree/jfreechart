@@ -32,6 +32,7 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Andrew Mickish (patch 1868745);
  *                   Peter Kolb (patches 1934255 and 2603321);
+ *                   Yuri Blankenstein;
  */
 
 package org.jfree.chart.axis;
@@ -426,10 +427,10 @@ public class LogAxis extends ValueAxis {
      * required to display.
      */
     @Override
-    protected void autoAdjustRange() {
+    public Range calculateAutoRange(boolean adhereToMax) {
         Plot plot = getPlot();
         if (plot == null) {
-            return;  // no plot, no data
+            return null;  // no plot, no data
         }
 
         if (plot instanceof ValueAxisPlot) {
@@ -446,8 +447,11 @@ public class LogAxis extends ValueAxis {
 
             // if fixed auto range, then derive lower bound...
             double fixedAutoRange = getFixedAutoRange();
-            if (fixedAutoRange > 0.0) {
-                lower = Math.max(upper - fixedAutoRange, this.smallestValue);
+            if (adhereToMax && fixedAutoRange > 0.0) {
+                Range aligned = getAutoRangeAlign().align(
+                        new Range(lower, upper), fixedAutoRange);
+                lower = Math.max(aligned.getLowerBound(), this.smallestValue);
+                upper = aligned.getUpperBound();
             }
             else {
                 // ensure the autorange is at least <minRange> in size...
@@ -467,9 +471,9 @@ public class LogAxis extends ValueAxis {
                 upper = calculateValueNoINF(logUpper);
                 lower = calculateValueNoINF(logLower);
             }
-            setRange(new Range(lower, upper), false, false);
+            return new Range(lower, upper);
         }
-
+        return null;
     }
 
     /**

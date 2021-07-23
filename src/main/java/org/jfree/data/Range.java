@@ -145,6 +145,18 @@ public strictfp class Range implements Serializable {
     }
 
     /**
+     * Returns {@code true} if the range contains the specified range and
+     * {@code false} otherwise.
+     *
+     * @param range the range to lookup.
+     *
+     * @return {@code true} if the range contains the specified range.
+     */
+    public boolean contains(Range range) {
+        return (range.lower >= this.lower && range.upper <= this.upper);
+    }
+
+    /**
      * Returns {@code true} if the range intersects with the specified
      * range, and {@code false} otherwise.
      *
