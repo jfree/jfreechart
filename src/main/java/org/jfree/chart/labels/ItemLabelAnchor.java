@@ -161,6 +161,28 @@ public final class ItemLabelAnchor implements Serializable {
     }
 
     /**
+     * Returns {@code true} if this anchor point is inside an area.
+     *
+     * @return {@code true} if this anchor point is inside an area,
+     *         {@code false} otherwise.
+     */
+    public boolean isInternal() {
+        return this == ItemLabelAnchor.CENTER
+               || this == ItemLabelAnchor.INSIDE1
+               || this == ItemLabelAnchor.INSIDE2
+               || this == ItemLabelAnchor.INSIDE3
+               || this == ItemLabelAnchor.INSIDE4
+               || this == ItemLabelAnchor.INSIDE5
+               || this == ItemLabelAnchor.INSIDE6
+               || this == ItemLabelAnchor.INSIDE7
+               || this == ItemLabelAnchor.INSIDE8
+               || this == ItemLabelAnchor.INSIDE9
+               || this == ItemLabelAnchor.INSIDE10
+               || this == ItemLabelAnchor.INSIDE11
+               || this == ItemLabelAnchor.INSIDE12;
+    }
+
+    /**
      * Returns a string representing the object.
      *
      * @return The string.
