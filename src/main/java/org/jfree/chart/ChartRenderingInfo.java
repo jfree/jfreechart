@@ -203,7 +203,7 @@ public class ChartRenderingInfo implements Cloneable, Serializable {
      * @throws CloneNotSupportedException if the object cannot be cloned.
      */
     @Override
-    public Object clone() throws CloneNotSupportedException {
+    public ChartRenderingInfo clone() throws CloneNotSupportedException {
         ChartRenderingInfo clone = (ChartRenderingInfo) super.clone();
         if (this.chartArea != null) {
             clone.chartArea = (Rectangle2D) this.chartArea.clone();
