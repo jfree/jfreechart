@@ -39,6 +39,8 @@ package org.jfree.chart.entity;
 import java.awt.Shape;
 import java.io.Serializable;
 
+import org.jfree.chart.annotations.XYAnnotation;
+
 /**
  * A chart entity that represents an annotation on an
  * {@link org.jfree.chart.plot.XYPlot}.
@@ -49,6 +51,9 @@ public class XYAnnotationEntity extends ChartEntity
     /** For serialization. */
     private static final long serialVersionUID = 2340334068383660799L;
 
+    /** The annotation */
+    private transient XYAnnotation annotation;
+    
     /** The renderer index. */
     private int rendererIndex;
 
@@ -56,14 +61,25 @@ public class XYAnnotationEntity extends ChartEntity
      * Creates a new entity.
      *
      * @param hotspot  the area.
+     * @param annotation  the annotation.
      * @param rendererIndex  the rendererIndex (zero-based index).
      * @param toolTipText  the tool tip text.
      * @param urlText  the URL text for HTML image maps.
      */
-    public XYAnnotationEntity(Shape hotspot, int rendererIndex,
-                              String toolTipText, String urlText) {
+    public XYAnnotationEntity(Shape hotspot, XYAnnotation annotation,
+            int rendererIndex, String toolTipText, String urlText) {
         super(hotspot, toolTipText, urlText);
+        this.annotation = annotation;
         this.rendererIndex = rendererIndex;
+    }
+    
+    /**
+     * Returns the annotation this entity refers to.
+     *
+     * @return The annotation.
+     */
+    public XYAnnotation getAnnotation() {
+        return annotation;
     }
 
     /**
