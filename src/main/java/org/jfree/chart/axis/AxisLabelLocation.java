@@ -30,111 +30,21 @@
  * (C) Copyright 2013-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
- *
+ * Contributor(s):   Tracy Hiltbrand;
  */
-
 package org.jfree.chart.axis;
-
-import java.io.ObjectStreamException;
-import java.io.Serializable;
 
 /**
  * Used to indicate the location of an axis label.
  */
-public final class AxisLabelLocation implements Serializable {
-
-    /** For serialization. */
-    private static final long serialVersionUID = 1L;
+public enum AxisLabelLocation {
 
     /** Axis label at the top. */
-    public static final AxisLabelLocation HIGH_END = new AxisLabelLocation(
-            "HIGH_END");
+    HIGH_END,
     
     /** Axis label at the middle. */
-    public static final AxisLabelLocation MIDDLE = new AxisLabelLocation(
-            "MIDDLE");
+    MIDDLE,
     
     /** Axis label at the bottom. */
-    public static final AxisLabelLocation LOW_END = new AxisLabelLocation(
-            "LOW_END");
-
-    /** The name. */
-    private String name;
-
-    /**
-     * Private constructor.
-     *
-     * @param name  the name.
-     */
-    private AxisLabelLocation(String name) {
-        this.name = name;
-    }
-
-    /**
-     * Returns a string representing the object.
-     *
-     * @return The string.
-     */
-    @Override
-    public String toString() {
-        return this.name;
-    }
-
-    /**
-     * Returns {@code true} if this object is equal to the specified
-     * object, and {@code false} otherwise.
-     *
-     * @param obj  the other object ({@code null} permitted).
-     *
-     * @return A boolean.
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (!(obj instanceof AxisLabelLocation)) {
-            return false;
-        }
-        AxisLabelLocation location = (AxisLabelLocation) obj;
-        if (!this.name.equals(location.toString())) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * Returns a hash code for this instance.
-     * 
-     * @return A hash code. 
-     */
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 83 * hash + this.name.hashCode();
-        return hash;
-    }
-
-    /**
-     * Ensures that serialization returns the unique instances.
-     *
-     * @return The object.
-     *
-     * @throws ObjectStreamException if there is a problem.
-     */
-    private Object readResolve() throws ObjectStreamException {
-        if (this.equals(AxisLabelLocation.HIGH_END)) {
-            return AxisLabelLocation.HIGH_END;
-        }
-        if (this.equals(AxisLabelLocation.MIDDLE)) {
-            return AxisLabelLocation.MIDDLE;
-        }
-        if (this.equals(AxisLabelLocation.LOW_END)) {
-            return AxisLabelLocation.LOW_END;
-        }
-
-        return null;
-    }
-
+    LOW_END
 }
