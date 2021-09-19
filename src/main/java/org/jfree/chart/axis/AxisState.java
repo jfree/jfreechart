@@ -38,7 +38,6 @@ package org.jfree.chart.axis;
 
 import java.util.List;
 import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.util.Args;
 
 /**
  * Instances of this class are used to carry state information for an axis
@@ -97,25 +96,20 @@ public class AxisState {
      * Moves the cursor outwards by the specified number of units.
      *
      * @param units  the units.
-     * @param edge  the edge ({@code null} not permitted).
+     * @param edge  the edge.
      */
     public void moveCursor(double units, RectangleEdge edge) {
-        Args.nullNotPermitted(edge, "edge");
-        switch (edge) {
-            case TOP:
-                cursorUp(units);
-                break;
-            case BOTTOM:
-                cursorDown(units);
-                break;
-            case LEFT:
-                cursorLeft(units);
-                break;
-            case RIGHT:
-                cursorRight(units);
-                break;
-            default:
-                throw new IllegalStateException("Unexpected enum value " + edge);
+        if (edge == RectangleEdge.TOP) {
+            cursorUp(units);
+        }
+        else if (edge == RectangleEdge.BOTTOM) {
+            cursorDown(units);
+        }
+        else if (edge == RectangleEdge.LEFT) {
+            cursorLeft(units);
+        }
+        else if (edge == RectangleEdge.RIGHT) {
+            cursorRight(units);
         }
     }
 

@@ -24,32 +24,113 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ------------------------
- * VerticalalAlignment.java
- * ------------------------
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
- *
- * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   Tracy Hiltbrand;
- *
  */
 
 package org.jfree.chart.ui;
+
+import java.io.ObjectStreamException;
+import java.io.Serializable;
 
 /**
  * An enumeration of the vertical alignment types ({@code TOP}, 
  * {@code BOTTOM} and {@code CENTER}).
  */
-public enum VerticalAlignment {
+public final class VerticalAlignment implements Serializable {
 
+    /** For serialization. */
+    private static final long serialVersionUID = 7272397034325429853L;
+    
     /** Top alignment. */
-    TOP,
+    public static final VerticalAlignment TOP 
+        = new VerticalAlignment("VerticalAlignment.TOP");
 
     /** Bottom alignment. */
-    BOTTOM,
+    public static final VerticalAlignment BOTTOM 
+        = new VerticalAlignment("VerticalAlignment.BOTTOM");
 
     /** Center alignment. */
-    CENTER
+    public static final VerticalAlignment CENTER 
+        = new VerticalAlignment("VerticalAlignment.CENTER");
+
+    /** The name. */
+    private final String name;
+
+    /**
+     * Private constructor.
+     *
+     * @param name  the name.
+     */
+    private VerticalAlignment(String name) {
+        this.name = name;
+    }
+
+    /**
+     * Returns a string representing the object.
+     *
+     * @return the string.
+     */
+    @Override
+    public String toString() {
+        return this.name;
+    }
+
+    /**
+     * Returns {@code true} if this object is equal to the specified 
+     * object, and {@code false} otherwise.
+     *
+     * @param o  the other object.
+     *
+     * @return a boolean.
+     */
+    @Override
+    public boolean equals(Object o) {
+
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof VerticalAlignment)) {
+            return false;
+        }
+
+        VerticalAlignment alignment = (VerticalAlignment) o;
+        if (!this.name.equals(alignment.name)) {
+            return false;
+        }
+
+        return true;
+    }
+    
+    /**
+     * Returns a hash code value for the object.
+     *
+     * @return the hashcode
+     */
+    @Override
+    public int hashCode() {
+        return this.name.hashCode();
+    }
+
+    /**
+     * Ensures that serialization returns the unique instances.
+     * 
+     * @return The object.
+     * 
+     * @throws ObjectStreamException if there is a problem.
+     */
+    private Object readResolve() throws ObjectStreamException {
+        if (this.equals(VerticalAlignment.TOP)) {
+            return VerticalAlignment.TOP;
+        }
+        else if (this.equals(VerticalAlignment.BOTTOM)) {
+            return VerticalAlignment.BOTTOM;
+        }
+        else if (this.equals(VerticalAlignment.CENTER)) {
+            return VerticalAlignment.CENTER;
+        }
+        else {
+            return null;  // this should never happen
+        }
+    }
     
 }
 

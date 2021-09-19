@@ -27,32 +27,108 @@
  * ------------------------
  * AreaRendererEndType.java
  * ------------------------
- * (C) Copyright 2004-2018, by Object Refinery Limited.
+ * (C) Copyright 2004-2008, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   Tracy Hiltbrand;
+ * Contributor(s):   -;
  *
  */
 
 package org.jfree.chart.renderer;
 
+import java.io.ObjectStreamException;
+import java.io.Serializable;
+
 /**
  * An enumeration of the 'end types' for an area renderer.
  */
-public enum AreaRendererEndType {
+public final class AreaRendererEndType implements Serializable {
+
+    /** For serialization. */
+    private static final long serialVersionUID = -1774146392916359839L;
 
     /**
      * The area tapers from the first or last value down to zero.
      */
-    TAPER,
+    public static final AreaRendererEndType TAPER = new AreaRendererEndType(
+            "AreaRendererEndType.TAPER");
 
     /**
      * The area is truncated at the first or last value.
      */
-    TRUNCATE,
+    public static final AreaRendererEndType TRUNCATE = new AreaRendererEndType(
+            "AreaRendererEndType.TRUNCATE");
 
     /**
-     * The area is leveled at the first or last value.
+     * The area is levelled at the first or last value.
      */
-    LEVEL
+    public static final AreaRendererEndType LEVEL = new AreaRendererEndType(
+            "AreaRendererEndType.LEVEL");
+
+    /** The name. */
+    private String name;
+
+    /**
+     * Private constructor.
+     *
+     * @param name  the name.
+     */
+    private AreaRendererEndType(String name) {
+        this.name = name;
+    }
+
+    /**
+     * Returns a string representing the object.
+     *
+     * @return The string.
+     */
+    @Override
+    public String toString() {
+        return this.name;
+    }
+
+    /**
+     * Returns {@code true} if this object is equal to the specified
+     * object, and {@code false} otherwise.
+     *
+     * @param obj  the object ({@code null} permitted).
+     *
+     * @return A boolean.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof AreaRendererEndType)) {
+            return false;
+        }
+        AreaRendererEndType that = (AreaRendererEndType) obj;
+        if (!this.name.equals(that.toString())) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Ensures that serialization returns the unique instances.
+     *
+     * @return The object.
+     *
+     * @throws ObjectStreamException if there is a problem.
+     */
+    private Object readResolve() throws ObjectStreamException {
+        Object result = null;
+        if (this.equals(AreaRendererEndType.LEVEL)) {
+            result = AreaRendererEndType.LEVEL;
+        }
+        else if (this.equals(AreaRendererEndType.TAPER)) {
+            result = AreaRendererEndType.TAPER;
+        }
+        else if (this.equals(AreaRendererEndType.TRUNCATE)) {
+            result = AreaRendererEndType.TRUNCATE;
+        }
+        return result;
+    }
+
 }
