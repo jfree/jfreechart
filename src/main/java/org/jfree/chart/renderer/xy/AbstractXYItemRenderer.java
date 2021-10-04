@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,9 +27,9 @@
  * ---------------------------
  * AbstractXYItemRenderer.java
  * ---------------------------
- * (C) Copyright 2002-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2002-2021, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   Richard Atkinson;
  *                   Focus Computer Services Limited;
  *                   Tim Bardzil;
@@ -1443,6 +1443,22 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
             return false;
         }
         return super.equals(obj);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + itemLabelGeneratorMap.hashCode();
+        result = 31 * result + (defaultItemLabelGenerator != null ? defaultItemLabelGenerator.hashCode() : 0);
+        result = 31 * result + toolTipGeneratorMap.hashCode();
+        result = 31 * result + (defaultToolTipGenerator != null ? defaultToolTipGenerator.hashCode() : 0);
+        result = 31 * result + (urlGenerator != null ? urlGenerator.hashCode() : 0);
+        result = 31 * result + (backgroundAnnotations != null ? backgroundAnnotations.hashCode() : 0);
+        result = 31 * result + (foregroundAnnotations != null ? foregroundAnnotations.hashCode() : 0);
+        result = 31 * result + (legendItemLabelGenerator != null ? legendItemLabelGenerator.hashCode() : 0);
+        result = 31 * result + (legendItemToolTipGenerator != null ? legendItemToolTipGenerator.hashCode() : 0);
+        result = 31 * result + (legendItemURLGenerator != null ? legendItemURLGenerator.hashCode() : 0);
+        return result;
     }
 
     /**
