@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,9 +27,9 @@
  * ---------------------------
  * XYLineAndShapeRenderer.java
  * ---------------------------
- * (C) Copyright 2004-2021, by Object Refinery Limited.
+ * (C) Copyright 2004-2021, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
  *
  */
@@ -1136,6 +1136,22 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + seriesLinesVisibleMap.hashCode();
+        result = 31 * result + (defaultLinesVisible ? 1 : 0);
+        result = 31 * result + seriesShapesVisibleMap.hashCode();
+        result = 31 * result + (defaultShapesVisible ? 1 : 0);
+        result = 31 * result + seriesShapesFilledMap.hashCode();
+        result = 31 * result + (defaultShapesFilled ? 1 : 0);
+        result = 31 * result + (drawOutlines ? 1 : 0);
+        result = 31 * result + (useFillPaint ? 1 : 0);
+        result = 31 * result + (useOutlinePaint ? 1 : 0);
+        result = 31 * result + (drawSeriesLineAsPath ? 1 : 0);
+        return result;
     }
 
     /**
