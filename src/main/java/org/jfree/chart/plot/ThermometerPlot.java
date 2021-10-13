@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -28,66 +28,12 @@
  * ThermometerPlot.java
  * --------------------
  *
- * (C) Copyright 2000-2017, by Bryan Scott and Contributors.
+ * (C) Copyright 2000-2021, by Bryan Scott and Contributors.
  *
  * Original Author:  Bryan Scott (based on MeterPlot by Hari).
  * Contributor(s):   David Gilbert (for Object Refinery Limited).
  *                   Arnaud Lelievre;
  *                   Julien Henry (see patch 1769088) (DG);
- *
- * Changes
- * -------
- * 11-Apr-2002 : Version 1, contributed by Bryan Scott;
- * 15-Apr-2002 : Changed to implement VerticalValuePlot;
- * 29-Apr-2002 : Added getVerticalValueAxis() method (DG);
- * 25-Jun-2002 : Removed redundant imports (DG);
- * 17-Sep-2002 : Reviewed with Checkstyle utility (DG);
- * 18-Sep-2002 : Extensive changes made to API, to iron out bugs and
- *               inconsistencies (DG);
- * 13-Oct-2002 : Corrected error datasetChanged which would generate exceptions
- *               when value set to null (BRS).
- * 23-Jan-2003 : Removed one constructor (DG);
- * 26-Mar-2003 : Implemented Serializable (DG);
- * 02-Jun-2003 : Removed test for compatible range axis (DG);
- * 01-Jul-2003 : Added additional check in draw method to ensure value not
- *               null (BRS);
- * 08-Sep-2003 : Added internationalization via use of properties
- *               resourceBundle (RFE 690236) (AL);
- * 16-Sep-2003 : Changed ChartRenderingInfo --> PlotRenderingInfo (DG);
- * 29-Sep-2003 : Updated draw to set value of cursor to non-zero and allow
- *               painting of axis.  An incomplete fix and needs to be set for
- *               left or right drawing (BRS);
- * 19-Nov-2003 : Added support for value labels to be displayed left of the
- *               thermometer
- * 19-Nov-2003 : Improved axis drawing (now default axis does not draw axis line
- *               and is closer to the bulb).  Added support for the positioning
- *               of the axis to the left or right of the bulb. (BRS);
- * 03-Dec-2003 : Directly mapped deprecated setData()/getData() method to
- *               get/setDataset() (TM);
- * 21-Jan-2004 : Update for renamed method in ValueAxis (DG);
- * 07-Apr-2004 : Changed string width calculation (DG);
- * 12-Nov-2004 : Implemented the new Zoomable interface (DG);
- * 06-Jan-2004 : Added getOrientation() method (DG);
- * 11-Jan-2005 : Removed deprecated code in preparation for 1.0.0 release (DG);
- * 29-Mar-2005 : Fixed equals() method (DG);
- * 05-May-2005 : Updated draw() method parameters (DG);
- * 09-Jun-2005 : Fixed more bugs in equals() method (DG);
- * 10-Jun-2005 : Fixed minor bug in setDisplayRange() method (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 14-Nov-2006 : Fixed margin when drawing (DG);
- * 03-May-2007 : Fixed datasetChanged() to handle null dataset, added null
- *               argument check and event notification to setRangeAxis(),
- *               added null argument check to setPadding(), setValueFont(),
- *               setValuePaint(), setValueFormat() and setMercuryPaint(),
- *               deprecated get/setShowValueLines(), deprecated
- *               getMinimum/MaximumVerticalDataValue(), and fixed serialization
- *               bug (DG);
- * 24-Sep-2007 : Implemented new methods in Zoomable interface (DG);
- * 08-Oct-2007 : Added attributes for thermometer dimensions - see patch 1769088
- *               by Julien Henry (DG);
- * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
- *               Jess Thrysoee (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -113,20 +59,21 @@ import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.ResourceBundle;
+import org.jfree.chart.ChartElementVisitor;
 
-import org.jfree.chart.LegendItemCollection;
+import org.jfree.chart.legend.LegendItemCollection;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.event.PlotChangeEvent;
-import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.ui.RectangleInsets;
-import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.ResourceBundleWrapper;
-import org.jfree.chart.util.SerialUtils;
-import org.jfree.chart.util.UnitType;
+import org.jfree.chart.api.RectangleEdge;
+import org.jfree.chart.api.RectangleInsets;
+import org.jfree.chart.internal.CloneUtils;
+import org.jfree.chart.internal.PaintUtils;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.internal.SerialUtils;
+import org.jfree.chart.api.UnitType;
 import org.jfree.data.Range;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.DefaultValueDataset;
@@ -216,22 +163,16 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
 
     /**
      * The default bulb radius.
-     *
-     * @since 1.0.7
      */
     protected static final int DEFAULT_BULB_RADIUS = 40;
 
     /**
      * The default column radius.
-     *
-     * @since 1.0.7
      */
     protected static final int DEFAULT_COLUMN_RADIUS = 20;
 
     /**
      * The default gap between the outlines representing the thermometer.
-     *
-     * @since 1.0.7
      */
     protected static final int DEFAULT_GAP = 5;
 
@@ -249,22 +190,16 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
 
     /**
      * The value label position.
-     *
-     * @since 1.0.7
      */
     private int bulbRadius = DEFAULT_BULB_RADIUS;
 
     /**
      * The column radius.
-     *
-     * @since 1.0.7
      */
     private int columnRadius = DEFAULT_COLUMN_RADIUS;
 
     /**
      * The gap between the two outlines the represent the thermometer.
-     *
-     * @since 1.0.7
      */
     private int gap = DEFAULT_GAP;
 
@@ -340,8 +275,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
 
     /** The resourceBundle for the localization. */
     protected static ResourceBundle localizationResources
-            = ResourceBundleWrapper.getBundle(
-                    "org.jfree.chart.plot.LocalizationBundle");
+            = ResourceBundle.getBundle("org.jfree.chart.plot.LocalizationBundle");
 
     /**
      * Creates a new thermometer plot.
@@ -405,7 +339,6 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
         // set the new dataset, and register the chart as a change listener...
         this.dataset = dataset;
         if (dataset != null) {
-            setDatasetGroup(dataset.getGroup());
             dataset.addChangeListener(this);
         }
 
@@ -932,8 +865,6 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      * Returns the bulb radius, in Java2D units.
 
      * @return The bulb radius.
-     *
-     * @since 1.0.7
      */
     public int getBulbRadius() {
         return this.bulbRadius;
@@ -946,8 +877,6 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      * @param r  the new radius (in Java2D units).
      *
      * @see #getBulbRadius()
-     *
-     * @since 1.0.7
      */
     public void setBulbRadius(int r) {
         this.bulbRadius = r;
@@ -959,8 +888,6 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      * by {@link #getBulbRadius()}.
      *
      * @return The bulb diameter.
-     *
-     * @since 1.0.7
      */
     public int getBulbDiameter() {
         return getBulbRadius() * 2;
@@ -972,8 +899,6 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      * @return The column radius.
      *
      * @see #setColumnRadius(int)
-     *
-     * @since 1.0.7
      */
     public int getColumnRadius() {
         return this.columnRadius;
@@ -986,8 +911,6 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      * @param r  the new radius.
      *
      * @see #getColumnRadius()
-     *
-     * @since 1.0.7
      */
     public void setColumnRadius(int r) {
         this.columnRadius = r;
@@ -999,8 +922,6 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      * by {@link #getColumnRadius()}.
      *
      * @return The column diameter.
-     *
-     * @since 1.0.7
      */
     public int getColumnDiameter() {
         return getColumnRadius() * 2;
@@ -1013,8 +934,6 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      * @return The gap.
      *
      * @see #setGap(int)
-     *
-     * @since 1.0.7
      */
     public int getGap() {
         return this.gap;
@@ -1028,12 +947,21 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      * @param gap  the new gap.
      *
      * @see #getGap()
-     *
-     * @since 1.0.7
      */
     public void setGap(int gap) {
         this.gap = gap;
         fireChangeEvent();
+    }
+
+    /**
+     * Receives a chart element visitor.
+     * 
+     * @param visitor  the visitor ({@code null} not permitted).
+     */
+    @Override
+    public void receive(ChartElementVisitor visitor) {
+        this.rangeAxis.receive(visitor);
+        super.receive(visitor);
     }
 
     /**
@@ -1048,8 +976,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      */
     @Override
     public void draw(Graphics2D g2, Rectangle2D area, Point2D anchor,
-                     PlotState parentState,
-                     PlotRenderingInfo info) {
+            PlotState parentState, PlotRenderingInfo info) {
 
         RoundRectangle2D outerStem = new RoundRectangle2D.Double();
         RoundRectangle2D innerStem = new RoundRectangle2D.Double();
@@ -1410,7 +1337,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
         if (!super.equals(obj)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.rangeAxis, that.rangeAxis)) {
+        if (!Objects.equals(this.rangeAxis, that.rangeAxis)) {
             return false;
         }
         if (this.axisLocation != that.axisLocation) {
@@ -1422,11 +1349,10 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
         if (this.upperBound != that.upperBound) {
             return false;
         }
-        if (!ObjectUtils.equal(this.padding, that.padding)) {
+        if (!Objects.equals(this.padding, that.padding)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.thermometerStroke,
-                that.thermometerStroke)) {
+        if (!Objects.equals(this.thermometerStroke, that.thermometerStroke)) {
             return false;
         }
         if (!PaintUtils.equal(this.thermometerPaint,
@@ -1439,13 +1365,13 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
         if (this.valueLocation != that.valueLocation) {
             return false;
         }
-        if (!ObjectUtils.equal(this.valueFont, that.valueFont)) {
+        if (!Objects.equals(this.valueFont, that.valueFont)) {
             return false;
         }
         if (!PaintUtils.equal(this.valuePaint, that.valuePaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.valueFormat, that.valueFormat)) {
+        if (!Objects.equals(this.valueFormat, that.valueFormat)) {
             return false;
         }
         if (!PaintUtils.equal(this.mercuryPaint, that.mercuryPaint)) {
@@ -1525,7 +1451,7 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
         if (clone.dataset != null) {
             clone.dataset.addChangeListener(clone);
         }
-        clone.rangeAxis = (ValueAxis) ObjectUtils.clone(this.rangeAxis);
+        clone.rangeAxis = CloneUtils.clone(this.rangeAxis);
         if (clone.rangeAxis != null) {
             clone.rangeAxis.setPlot(clone);
             clone.rangeAxis.addChangeListener(clone);
@@ -1604,8 +1530,6 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      * @param source  the source point.
      * @param useAnchor  a flag that controls whether or not the source point
      *         is used for the zoom anchor.
-     *
-     * @since 1.0.7
      */
     @Override
     public void zoomDomainAxes(double factor, PlotRenderingInfo state,
@@ -1634,8 +1558,6 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
      * @param source  the source point.
      * @param useAnchor  a flag that controls whether or not the source point
      *         is used for the zoom anchor.
-     *
-     * @since 1.0.7
      */
     @Override
     public void zoomRangeAxes(double factor, PlotRenderingInfo state,

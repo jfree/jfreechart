@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,19 +27,10 @@
  * -------------------------------
  * StatisticalCategoryDataset.java
  * -------------------------------
- * (C) Copyright 2002-2009, by Pascal Collet and Contributors.
+ * (C) Copyright 2002-2020, by Pascal Collet and Contributors.
  *
  * Original Author:  Pascal Collet;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 21-Aug-2002 : Version 1, contributed by Pascal Collet (DG);
- * 07-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 24-Oct-2002 : Amendments in line with changes to the CategoryDataset
- *               interface (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 02-Feb-2007 : Removed author tags from all over JFreeChart sources (DG);
  *
  */
 
@@ -51,7 +42,8 @@ import org.jfree.data.category.CategoryDataset;
  * A category dataset that defines a mean and standard deviation value for
  * each item.
  */
-public interface StatisticalCategoryDataset extends CategoryDataset {
+public interface StatisticalCategoryDataset<R extends Comparable<R>, 
+        C extends Comparable<C>> extends CategoryDataset<R, C> {
 
     /**
      * Returns the mean value for an item.
@@ -61,7 +53,7 @@ public interface StatisticalCategoryDataset extends CategoryDataset {
      *
      * @return The mean value (possibly {@code null}).
      */
-    public Number getMeanValue(int row, int column);
+    Number getMeanValue(int row, int column);
 
     /**
      * Returns the mean value for an item.
@@ -71,7 +63,7 @@ public interface StatisticalCategoryDataset extends CategoryDataset {
      *
      * @return The mean value (possibly {@code null}).
      */
-    public Number getMeanValue(Comparable rowKey, Comparable columnKey);
+    Number getMeanValue(R rowKey, C columnKey);
 
     /**
      * Returns the standard deviation value for an item.
@@ -81,7 +73,7 @@ public interface StatisticalCategoryDataset extends CategoryDataset {
      *
      * @return The standard deviation (possibly {@code null}).
      */
-    public Number getStdDevValue(int row, int column);
+    Number getStdDevValue(int row, int column);
 
     /**
      * Returns the standard deviation value for an item.
@@ -91,7 +83,7 @@ public interface StatisticalCategoryDataset extends CategoryDataset {
      *
      * @return The standard deviation (possibly {@code null}).
      */
-    public Number getStdDevValue(Comparable rowKey, Comparable columnKey);
+    Number getStdDevValue(R rowKey, C columnKey);
 
 }
 

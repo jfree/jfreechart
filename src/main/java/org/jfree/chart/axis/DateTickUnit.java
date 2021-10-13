@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,30 +27,10 @@
  * -----------------
  * DateTickUnit.java
  * -----------------
- * (C) Copyright 2000-2016, by Object Refinery Limited.
+ * (C) Copyright 2000-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Chris Boek;
- *
- * Changes
- * -------
- * 08-Nov-2002 : Moved to new package com.jrefinery.chart.axis (DG);
- * 27-Nov-2002 : Added IllegalArgumentException to getMillisecondCount()
- *               method (DG);
- * 26-Mar-2003 : Implemented Serializable (DG);
- * 12-Nov-2003 : Added roll fields that can improve the labelling on segmented
- *               date axes (DG);
- * 03-Dec-2003 : DateFormat constructor argument is now filled with an default
- *               if null (TM);
- * 07-Dec-2003 : Fixed bug (null pointer exception) in constructor (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 21-Mar-2007 : Added toString() for debugging (DG);
- * 04-Apr-2007 : Added new methods addToDate(Date, TimeZone) and rollDate(Date,
- *               TimeZone) (CB);
- * 09-Jun-2008 : Deprecated addToDate(Date) (DG);
- * 09-Jan-2009 : Replaced the unit and rollUnit fields with an enumerated
- *               type (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -60,9 +40,10 @@ import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 import java.util.TimeZone;
-import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.Args;
+
+import org.jfree.chart.internal.Args;
 
 /**
  * A tick unit for use by subclasses of {@link DateAxis}.  Instances of this
@@ -75,8 +56,6 @@ public class DateTickUnit extends TickUnit implements Serializable {
 
     /**
      * The units.
-     *
-     * @since 1.0.13
      */
     private DateTickUnitType unitType;
 
@@ -85,8 +64,6 @@ public class DateTickUnit extends TickUnit implements Serializable {
 
     /**
      * The roll unit type.
-     *
-     * @since 1.0.13
      */
     private DateTickUnitType rollUnitType;
 
@@ -101,8 +78,6 @@ public class DateTickUnit extends TickUnit implements Serializable {
      *
      * @param unitType  the unit type ({@code null} not permitted).
      * @param multiple  the multiple (of the unit type, must be &gt; 0).
-     *
-     * @since 1.0.13
      */
     public DateTickUnit(DateTickUnitType unitType, int multiple) {
         this(unitType, multiple, DateFormat.getDateInstance(DateFormat.SHORT));
@@ -114,8 +89,6 @@ public class DateTickUnit extends TickUnit implements Serializable {
      * @param unitType  the unit type ({@code null} not permitted).
      * @param multiple  the multiple (of the unit type, must be &gt; 0).
      * @param formatter  the date formatter ({@code null} not permitted).
-     *
-     * @since 1.0.13
      */
     public DateTickUnit(DateTickUnitType unitType, int multiple,
             DateFormat formatter) {
@@ -132,8 +105,6 @@ public class DateTickUnit extends TickUnit implements Serializable {
      * @param rollUnitType  the roll unit.
      * @param rollMultiple  the roll multiple.
      * @param formatter  the date formatter ({@code null} not permitted).
-     *
-     * @since 1.0.13
      */
     public DateTickUnit(DateTickUnitType unitType, int multiple,
             DateTickUnitType rollUnitType, int rollMultiple,
@@ -157,8 +128,6 @@ public class DateTickUnit extends TickUnit implements Serializable {
      * Returns the unit type.
      *
      * @return The unit type (never {@code null}).
-     *
-     * @since 1.0.13
      */
     public DateTickUnitType getUnitType() {
         return this.unitType;
@@ -177,8 +146,6 @@ public class DateTickUnit extends TickUnit implements Serializable {
      * Returns the roll unit type.
      *
      * @return The roll unit type (never {@code null}).
-     *
-     * @since 1.0.13
      */
     public DateTickUnitType getRollUnitType() {
         return this.rollUnitType;
@@ -188,8 +155,6 @@ public class DateTickUnit extends TickUnit implements Serializable {
      * Returns the roll unit multiple.
      *
      * @return The roll unit multiple.
-     *
-     * @since 1.0.13
      */
     public int getRollMultiple() {
         return this.rollCount;
@@ -225,8 +190,6 @@ public class DateTickUnit extends TickUnit implements Serializable {
      * @param zone  the time zone for the date calculation.
      *
      * @return A new date one unit after the base date.
-     *
-     * @since 1.0.6
      */
     public Date addToDate(Date base, TimeZone zone) {
         // as far as I know, the Locale for the calendar only affects week
@@ -261,8 +224,6 @@ public class DateTickUnit extends TickUnit implements Serializable {
      * @param zone  the time zone.
      *
      * @return The rolled date.
-     *
-     * @since 1.0.6
      */
     public Date rollDate(Date base, TimeZone zone) {
         // as far as I know, the Locale for the calendar only affects week
@@ -296,8 +257,6 @@ public class DateTickUnit extends TickUnit implements Serializable {
      * @param count  the unit count.
      *
      * @return The number of milliseconds.
-     *
-     * @since 1.0.13
      */
     private static long getMillisecondCount(DateTickUnitType unit, int count) {
 
@@ -354,7 +313,7 @@ public class DateTickUnit extends TickUnit implements Serializable {
         if (this.count != that.count) {
             return false;
         }
-        if (!ObjectUtils.equal(this.formatter, that.formatter)) {
+        if (!Objects.equals(this.formatter, that.formatter)) {
             return false;
         }
         return true;

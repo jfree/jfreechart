@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * PieDatasetTest.java
  * -------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -37,11 +37,13 @@
 package org.jfree.data.general;
 
 import org.jfree.chart.TestUtils;
-import org.junit.Test;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertNotNull;
+import org.jfree.chart.internal.CloneUtils;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for the {@link org.jfree.data.general.PieDataset} class.
@@ -140,7 +142,7 @@ public class DefaultPieDatasetTest implements DatasetChangeListener {
         d1.setValue("V1", 1);
         d1.setValue("V2", null);
         d1.setValue("V3", 3);
-        DefaultPieDataset<String> d2 = (DefaultPieDataset) d1.clone();
+        DefaultPieDataset<String> d2 = CloneUtils.clone(d1);
 
         assertTrue(d1 != d2);
         assertTrue(d1.getClass() == d2.getClass());
@@ -158,8 +160,20 @@ public class DefaultPieDatasetTest implements DatasetChangeListener {
         d1.setValue("C3", 345.9);
         d1.setValue("C4", 452.7);
 
-        DefaultPieDataset<String> d2 = (DefaultPieDataset) TestUtils.serialised(d1);
+        DefaultPieDataset<String> d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 
+    /**
+     * A test for bug report https://github.com/jfree/jfreechart/issues/212
+     */
+    @Test
+    public void testBug212() {
+        DefaultPieDataset<String> d = new DefaultPieDataset<>();
+        assertThrows(IndexOutOfBoundsException.class, () ->  d.getValue(-1));
+        assertThrows(IndexOutOfBoundsException.class, () ->  d.getValue(0));
+        d.setValue("A", 1.0);
+        assertEquals(1.0, d.getValue(0));
+        assertThrows(IndexOutOfBoundsException.class, () ->  d.getValue(1));        
+    }
 }

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * ---------------------------
  * CategoryCrosshairState.java
  * ---------------------------
- * (C) Copyright 2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2008-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 26-Jun-2008 : Version 1 (DG);
  *
  */
 
@@ -50,20 +46,19 @@ import org.jfree.chart.renderer.category.CategoryItemRenderer;
  * and updated as each data item is rendered.  At the end of the rendering
  * process, this class holds the row key, column key and value for the
  * crosshair location.
- *
- * @since 1.0.11
  */
-public class CategoryCrosshairState extends CrosshairState {
+public class CategoryCrosshairState<R extends Comparable<R>, C extends Comparable<C>> 
+        extends CrosshairState {
 
     /**
      * The row key for the crosshair point.
      */
-    private Comparable rowKey;
+    private R rowKey;
 
     /**
      * The column key for the crosshair point.
      */
-    private Comparable columnKey;
+    private C columnKey;
 
     /**
      * Creates a new instance.
@@ -78,7 +73,7 @@ public class CategoryCrosshairState extends CrosshairState {
      *
      * @return The row key.
      */
-    public Comparable getRowKey() {
+    public R getRowKey() {
         return this.rowKey;
     }
 
@@ -87,7 +82,7 @@ public class CategoryCrosshairState extends CrosshairState {
      *
      * @param key  the row key.
      */
-    public void setRowKey(Comparable key) {
+    public void setRowKey(R key) {
         this.rowKey = key;
     }
 
@@ -96,7 +91,7 @@ public class CategoryCrosshairState extends CrosshairState {
      *
      * @return The column key.
      */
-    public Comparable getColumnKey() {
+    public C getColumnKey() {
         return this.columnKey;
     }
 
@@ -105,7 +100,7 @@ public class CategoryCrosshairState extends CrosshairState {
      *
      * @param key  the key.
      */
-    public void setColumnKey(Comparable key) {
+    public void setColumnKey(C key) {
         this.columnKey = key;
     }
 
@@ -121,7 +116,7 @@ public class CategoryCrosshairState extends CrosshairState {
      * @param transY  y translated into Java2D space.
      * @param orientation  the plot orientation.
      */
-    public void updateCrosshairPoint(Comparable rowKey, Comparable columnKey,
+    public void updateCrosshairPoint(R rowKey, C columnKey,
             double value, int datasetIndex, double transX, double transY,
             PlotOrientation orientation) {
 
@@ -158,7 +153,7 @@ public class CategoryCrosshairState extends CrosshairState {
      * @param transX  the translated x-value.
      * @param orientation  the plot orientation.
      */
-    public void updateCrosshairX(Comparable rowKey, Comparable columnKey,
+    public void updateCrosshairX(R rowKey, C columnKey,
             int datasetIndex, double transX, PlotOrientation orientation) {
 
         Point2D anchor = getAnchor();

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,19 +27,10 @@
  * -----------------------
  * DefaultOHLCDataset.java
  * -----------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited.
+ * (C) Copyright 2003-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 03-Dec-2003 : Version 1 (DG);
- * 05-May-2004 : Now extends AbstractXYDataset (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
- *               getYValue() (DG);
- * 29-Apr-2005 : Added equals() method (DG);
- * 22-Apr-2008 : Implemented PublicCloneable, and fixed cloning bug (DG);
  *
  */
 
@@ -47,7 +38,7 @@ package org.jfree.data.xy;
 
 import java.util.Arrays;
 import java.util.Date;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.api.PublicCloneable;
 
 /**
  * A simple implementation of the {@link OHLCDataset} interface.  This
@@ -95,7 +86,7 @@ public class DefaultOHLCDataset extends AbstractXYDataset
      */
     @Override
     public Number getX(int series, int item) {
-        return new Long(this.data[item].getDate().getTime());
+        return Long.valueOf(this.data[item].getDate().getTime());
     }
 
     /**

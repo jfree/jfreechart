@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------------
  * CategoryPointerAnnotation.java
  * ------------------------------
- * (C) Copyright 2006-2020, by Object Refinery Limited.
+ * (C) Copyright 2006-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Peter Kolb (patch 2809117);
@@ -48,8 +48,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Objects;
 
-import org.jfree.chart.HashUtils;
+import org.jfree.chart.internal.HashUtils;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.event.AnnotationChangeEvent;
@@ -57,11 +58,10 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.text.TextUtils;
-import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.PublicCloneable;
-import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.api.RectangleEdge;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.api.PublicCloneable;
+import org.jfree.chart.internal.SerialUtils;
 import org.jfree.data.category.CategoryDataset;
 
 /**
@@ -76,8 +76,6 @@ import org.jfree.data.category.CategoryDataset;
  * the arrow starting at some point on the outer circle (the point is
  * determined by the angle), with the arrow tip being drawn at a corresponding
  * point on the inner circle.
- *
- * @since 1.0.3
  */
 public class CategoryPointerAnnotation extends CategoryTextAnnotation
         implements Cloneable, PublicCloneable, Serializable {
@@ -459,7 +457,7 @@ public class CategoryPointerAnnotation extends CategoryTextAnnotation
         if (!this.arrowPaint.equals(that.arrowPaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.arrowStroke, that.arrowStroke)) {
+        if (!Objects.equals(this.arrowStroke, that.arrowStroke)) {
             return false;
         }
         if (this.labelOffset != that.labelOffset) {

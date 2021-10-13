@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * ---------------
  * BlockFrame.java
  * ---------------
- * (C) Copyright 2007, 2008, by Object Refinery Limited.
+ * (C) Copyright 2007-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 16-Mar-2007 : Version 1 (DG);
  *
  */
 
@@ -42,15 +38,13 @@ package org.jfree.chart.block;
 
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
-import org.jfree.chart.ui.RectangleInsets;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.api.RectangleInsets;
+import org.jfree.chart.api.PublicCloneable;
 
 /**
  * A block frame is a type of border that can be drawn around the outside of
  * any {@link AbstractBlock}.  Classes that implement this interface should
  * implement {@link PublicCloneable} OR be immutable.
- *
- * @since 1.0.5
  */
 public interface BlockFrame {
 
@@ -59,7 +53,7 @@ public interface BlockFrame {
      *
      * @return The space (never {@code null}).
      */
-    public RectangleInsets getInsets();
+    RectangleInsets getInsets();
 
     /**
      * Draws the border by filling in the reserved space (in black).
@@ -67,6 +61,6 @@ public interface BlockFrame {
      * @param g2  the graphics device.
      * @param area  the area.
      */
-    public void draw(Graphics2D g2, Rectangle2D area);
+    void draw(Graphics2D g2, Rectangle2D area);
 
 }

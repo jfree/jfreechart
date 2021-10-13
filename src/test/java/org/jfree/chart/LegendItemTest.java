@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,24 +27,16 @@
  * -------------------
  * LegendItemTest.java
  * -------------------
- * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 04-Jun-2004 : Version 1 (DG);
- * 10-Dec-2005 : Addded new test to cover bug report 1374328 (DG);
- * 13-Dec-2006 : Extended testEquals() for new fillPaintTransformer
- *               attribute (DG);
- * 23-Apr-2008 : Implemented Cloneable (DG);
- * 17-Jun-2008 : Included new fields in existing tests (DG);
  *
  */
 
 package org.jfree.chart;
 
+import org.jfree.chart.legend.LegendItem;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
@@ -53,15 +45,16 @@ import java.awt.font.TextAttribute;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 import java.text.AttributedString;
-import org.jfree.chart.ui.GradientPaintTransformType;
-import org.jfree.chart.ui.StandardGradientPaintTransformer;
+import org.jfree.chart.util.GradientPaintTransformType;
+import org.jfree.chart.util.StandardGradientPaintTransformer;
+import org.jfree.chart.internal.CloneUtils;
 
 
-import org.junit.Test;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertNotSame;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 
 
 /**
@@ -321,8 +314,7 @@ public class LegendItemTest {
                 1.0f, Color.RED));
         item1.setLinePaint(new GradientPaint(1.0f, 2.0f, Color.WHITE, 3.0f,
                 4.0f, Color.RED));
-        LegendItem item2;
-        item2 = (LegendItem) TestUtils.serialised(item1);
+        LegendItem item2 = TestUtils.serialised(item1);
         assertEquals(item1, item2);
     }
 
@@ -335,7 +327,7 @@ public class LegendItemTest {
         as.addAttribute(TextAttribute.FONT, new Font("Dialog", Font.PLAIN, 12));
         LegendItem item1 = new LegendItem(as, "Description", "ToolTip", "URL",
                 new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), Color.RED);
-        LegendItem item2 = (LegendItem) TestUtils.serialised(item1);
+        LegendItem item2 = TestUtils.serialised(item1);
         assertEquals(item1, item2);
     }
 
@@ -346,7 +338,7 @@ public class LegendItemTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         LegendItem item1 = new LegendItem("Item");
-        LegendItem item2 = (LegendItem) item1.clone();
+        LegendItem item2 = CloneUtils.clone(item1);
 
         assertNotSame(item1, item2);
         assertSame(item1.getClass(), item2.getClass());

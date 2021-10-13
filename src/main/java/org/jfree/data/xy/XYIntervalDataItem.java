@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * -----------------------
  * XYIntervalDataItem.java
  * -----------------------
- * (C) Copyright 2006-2008, by Object Refinery Limited.
+ * (C) Copyright 2006-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 20-Oct-2006 : Version 1 (DG);
  *
  */
 
@@ -44,8 +40,6 @@ import org.jfree.data.ComparableObjectItem;
 
 /**
  * An item representing data in the form (x, x-low, x-high, y, y-low, y-high).
- *
- * @since 1.0.3
  */
 public class XYIntervalDataItem extends ComparableObjectItem {
 
@@ -61,7 +55,7 @@ public class XYIntervalDataItem extends ComparableObjectItem {
      */
     public XYIntervalDataItem(double x, double xLow, double xHigh, double y,
             double yLow, double yHigh) {
-        super(new Double(x), new XYInterval(xLow, xHigh, y, yLow, yHigh));
+        super(x, new XYInterval(xLow, xHigh, y, yLow, yHigh));
     }
 
     /**

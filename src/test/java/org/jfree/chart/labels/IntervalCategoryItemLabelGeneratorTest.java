@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,33 +27,27 @@
  * -------------------------------------------
  * IntervalCategoryItemLabelGeneratorTest.java
  * -------------------------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 21-Mar-2003 : Version 1 (DG);
- * 13-Aug-2003 : Added cloning tests, and renamed class (DG);
- * 23-Apr-2008 : Added testPublicCloneble() (DG);
  *
  */
 
 package org.jfree.chart.labels;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 
 import org.jfree.chart.TestUtils;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.api.PublicCloneable;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link IntervalCategoryItemLabelGenerator} class.
@@ -132,7 +126,7 @@ public class IntervalCategoryItemLabelGeneratorTest {
         IntervalCategoryItemLabelGenerator g1
                 = new IntervalCategoryItemLabelGenerator("{3} - {4}",
                 DateFormat.getInstance());
-        IntervalCategoryItemLabelGenerator g2 = (IntervalCategoryItemLabelGenerator) TestUtils.serialised(g1);
+        IntervalCategoryItemLabelGenerator g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

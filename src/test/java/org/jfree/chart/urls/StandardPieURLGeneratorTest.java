@@ -36,15 +36,15 @@
 
 package org.jfree.chart.urls;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.jfree.chart.TestUtils;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.api.PublicCloneable;
 
 import org.jfree.data.general.DefaultPieDataset;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link StandardPieURLGenerator} class.
@@ -104,8 +104,7 @@ public class StandardPieURLGeneratorTest {
     public void testSerialization() {
         StandardPieURLGenerator g1 = new StandardPieURLGenerator(
                 "index.html?", "cat");
-        StandardPieURLGenerator g2 = (StandardPieURLGenerator) 
-                TestUtils.serialised(g1);
+        StandardPieURLGenerator g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

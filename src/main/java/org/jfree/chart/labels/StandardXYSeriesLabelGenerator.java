@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------------------
  * StandardXYSeriesLabelGenerator.java
  * -----------------------------------
- * (C) Copyright 2004-2020, by Object Refinery Limited.
+ * (C) Copyright 2004-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -39,9 +39,9 @@ package org.jfree.chart.labels;
 import java.io.Serializable;
 import java.text.MessageFormat;
 
-import org.jfree.chart.HashUtils;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.internal.HashUtils;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.api.PublicCloneable;
 import org.jfree.data.xy.XYDataset;
 
 /**
@@ -61,7 +61,7 @@ public class StandardXYSeriesLabelGenerator implements XYSeriesLabelGenerator,
     public static final String DEFAULT_LABEL_FORMAT = "{0}";
 
     /** The format pattern. */
-    private String formatPattern;
+    private final String formatPattern;
 
     /**
      * Creates a default series label generator (uses

@@ -39,13 +39,14 @@ package org.jfree.data;
 import java.util.ArrayList;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.internal.CloneUtils;
 
 import org.jfree.data.general.DefaultPieDataset;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link KeyedObject} class.
@@ -78,7 +79,7 @@ public class KeyedObjectTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         KeyedObject<String> ko1 = new KeyedObject<>("Test", "Object");
-        KeyedObject<String> ko2 = (KeyedObject) ko1.clone();
+        KeyedObject<String> ko2 = CloneUtils.clone(ko1);
         assertTrue(ko1 != ko2);
         assertTrue(ko1.getClass() == ko2.getClass());
         assertTrue(ko1.equals(ko2));
@@ -92,7 +93,7 @@ public class KeyedObjectTest {
         // case 1 - object is mutable but not PublicCloneable
         Object obj1 = new ArrayList<String>();
         KeyedObject<String> ko1 = new KeyedObject<>("Test", obj1);
-        KeyedObject<String> ko2 = (KeyedObject) ko1.clone();
+        KeyedObject<String> ko2 = CloneUtils.clone(ko1);
         assertTrue(ko1 != ko2);
         assertTrue(ko1.getClass() == ko2.getClass());
         assertTrue(ko1.equals(ko2));
@@ -103,7 +104,7 @@ public class KeyedObjectTest {
         // CASE 2 - object is mutable AND PublicCloneable
         obj1 = new DefaultPieDataset<String>();
         ko1 = new KeyedObject<>("Test", obj1);
-        ko2 = (KeyedObject) ko1.clone();
+        ko2 = CloneUtils.clone(ko1);
         assertTrue(ko1 != ko2);
         assertTrue(ko1.getClass() == ko2.getClass());
         assertTrue(ko1.equals(ko2));
@@ -118,7 +119,7 @@ public class KeyedObjectTest {
     @Test
     public void testSerialization() {
         KeyedObject<String> ko1 = new KeyedObject<>("Test", "Object");
-        KeyedObject<String> ko2 = (KeyedObject<String>) TestUtils.serialised(ko1);
+        KeyedObject<String> ko2 = TestUtils.serialised(ko1);
         assertEquals(ko1, ko2);
     }
 

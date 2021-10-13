@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,32 +27,28 @@
  * -----------------------------
  * WaterfallBarRendererTest.java
  * -----------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 21-Oct-2003 : Version 1 (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG);
- * 04-Feb-2009 : Added testFindRangeBounds() (DG);
  *
  */
 
 package org.jfree.chart.renderer.category;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.awt.Color;
+import java.awt.GradientPaint;
 
 import org.jfree.chart.TestUtils;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.internal.CloneUtils;
+import org.jfree.chart.api.PublicCloneable;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link WaterfallBarRenderer} class.
@@ -78,27 +74,27 @@ public class WaterfallBarRendererTest {
         assertEquals(r1, r2);
 
         // firstBarPaint;
-        r1.setFirstBarPaint(Color.cyan);
+        r1.setFirstBarPaint(Color.CYAN);
         assertFalse(r1.equals(r2));
-        r2.setFirstBarPaint(Color.cyan);
+        r2.setFirstBarPaint(Color.CYAN);
         assertTrue(r1.equals(r2));
 
         // lastBarPaint;
-        r1.setLastBarPaint(Color.cyan);
+        r1.setLastBarPaint(Color.GREEN);
         assertFalse(r1.equals(r2));
-        r2.setLastBarPaint(Color.cyan);
+        r2.setLastBarPaint(Color.GREEN);
         assertTrue(r1.equals(r2));
 
         // positiveBarPaint;
-        r1.setPositiveBarPaint(Color.cyan);
+        r1.setPositiveBarPaint(Color.BLUE);
         assertFalse(r1.equals(r2));
-        r2.setPositiveBarPaint(Color.cyan);
+        r2.setPositiveBarPaint(Color.BLUE);
         assertTrue(r1.equals(r2));
 
-        //private Paint negativeBarPaint;
-        r1.setNegativeBarPaint(Color.cyan);
+        // negativeBarPaint;
+        r1.setNegativeBarPaint(Color.RED);
         assertFalse(r1.equals(r2));
-        r2.setNegativeBarPaint(Color.cyan);
+        r2.setNegativeBarPaint(Color.RED);
         assertTrue(r1.equals(r2));
 
     }
@@ -122,7 +118,8 @@ public class WaterfallBarRendererTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         WaterfallBarRenderer r1 = new WaterfallBarRenderer();
-        WaterfallBarRenderer r2 = (WaterfallBarRenderer) r1.clone();
+        r1.setFirstBarPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f, Color.DARK_GRAY));
+        WaterfallBarRenderer r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -133,6 +130,7 @@ public class WaterfallBarRendererTest {
         r2.setFirstBarPaint(Color.YELLOW);
         assertTrue(r1.equals(r2));
 
+        TestUtils.checkIndependence(r1, r2);
     }
 
     /**
@@ -150,9 +148,9 @@ public class WaterfallBarRendererTest {
     @Test
     public void testSerialization() {
         WaterfallBarRenderer r1 = new WaterfallBarRenderer();
-        WaterfallBarRenderer r2 = (WaterfallBarRenderer) 
-                TestUtils.serialised(r1);
+        WaterfallBarRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
+        TestUtils.checkIndependence(r1, r2);
     }
 
 //    /**
@@ -161,8 +159,8 @@ public class WaterfallBarRendererTest {
 //     */
 //    @Test
 // public void testGetSeriesPaintForDifferentValues() {
-//Color firstPaint = Color.cyan;
-//Color positivePaint = Color.green;
+//Color firstPaint = Color.CYAN;
+//Color positivePaint = Color.GREEN;
 //Color negativePaint = Color.RED;
 //Color lastPaint = Color.BLUE;
 //WaterfallBarRenderer waterfallBarRenderer = new WaterfallBarRenderer(firstPaint, positivePaint, negativePaint, lastPaint);

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * XYTextAnnotation.java
  * ---------------------
- * (C) Copyright 2002-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2002-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Peter Kolb (patch 2809117);
@@ -49,7 +49,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-import org.jfree.chart.HashUtils;
+import org.jfree.chart.internal.HashUtils;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.event.AnnotationChangeEvent;
 import org.jfree.chart.plot.Plot;
@@ -57,12 +57,12 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.text.TextUtils;
-import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.ui.TextAnchor;
-import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.PublicCloneable;
-import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.api.RectangleEdge;
+import org.jfree.chart.text.TextAnchor;
+import org.jfree.chart.internal.PaintUtils;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.api.PublicCloneable;
+import org.jfree.chart.internal.SerialUtils;
 
 /**
  * A text annotation that can be placed at a particular (x, y) location on an
@@ -116,29 +116,21 @@ public class XYTextAnnotation extends AbstractXYAnnotation
 
     /**
      * The background paint (possibly null).
-     *
-     * @since 1.0.13
      */
     private transient Paint backgroundPaint;
 
     /**
      * The flag that controls the visibility of the outline.
-     *
-     * @since 1.0.13
      */
     private boolean outlineVisible;
 
     /**
      * The outline paint (never null).
-     *
-     * @since 1.0.13
      */
     private transient Paint outlinePaint;
 
     /**
      * The outline stroke (never null).
-     *
-     * @since 1.0.13
      */
     private transient Stroke outlineStroke;
 
@@ -148,12 +140,14 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * Java2D space for display).
      *
      * @param text  the text ({@code null} not permitted).
-     * @param x  the x-coordinate (in data space).
-     * @param y  the y-coordinate (in data space).
+     * @param x  the x-coordinate (in data space, must be finite).
+     * @param y  the y-coordinate (in data space, must be finite).
      */
     public XYTextAnnotation(String text, double x, double y) {
         super();
         Args.nullNotPermitted(text, "text");
+        Args.requireFinite(x, "x");
+        Args.requireFinite(y, "y");
         this.text = text;
         this.font = DEFAULT_FONT;
         this.paint = DEFAULT_PAINT;
@@ -341,6 +335,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * @see #getX()
      */
     public void setX(double x) {
+        Args.requireFinite(x, "x");
         this.x = x;
         fireAnnotationChanged();
     }
@@ -367,6 +362,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * @see #getY()
      */
     public void setY(double y) {
+        Args.requireFinite(y, "y");
         this.y = y;
         fireAnnotationChanged();
     }
@@ -377,8 +373,6 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * @return The background paint (possibly {@code null}).
      *
      * @see #setBackgroundPaint(Paint)
-     *
-     * @since 1.0.13
      */
     public Paint getBackgroundPaint() {
         return this.backgroundPaint;
@@ -391,8 +385,6 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * @param paint  the paint ({@code null} permitted).
      *
      * @see #getBackgroundPaint()
-     *
-     * @since 1.0.13
      */
     public void setBackgroundPaint(Paint paint) {
         this.backgroundPaint = paint;
@@ -405,8 +397,6 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * @return The outline paint (never {@code null}).
      *
      * @see #setOutlinePaint(Paint)
-     *
-     * @since 1.0.13
      */
     public Paint getOutlinePaint() {
         return this.outlinePaint;
@@ -419,8 +409,6 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * @param paint  the paint ({@code null} not permitted).
      *
      * @see #getOutlinePaint()
-     *
-     * @since 1.0.13
      */
     public void setOutlinePaint(Paint paint) {
         Args.nullNotPermitted(paint, "paint");
@@ -434,8 +422,6 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * @return The outline stroke (never {@code null}).
      *
      * @see #setOutlineStroke(Stroke)
-     *
-     * @since 1.0.13
      */
     public Stroke getOutlineStroke() {
         return this.outlineStroke;
@@ -448,8 +434,6 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * @param stroke  the stroke ({@code null} not permitted).
      *
      * @see #getOutlineStroke()
-     *
-     * @since 1.0.13
      */
     public void setOutlineStroke(Stroke stroke) {
         Args.nullNotPermitted(stroke, "stroke");
@@ -461,8 +445,6 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * Returns the flag that controls whether or not the outline is drawn.
      *
      * @return A boolean.
-     *
-     * @since 1.0.13
      */
     public boolean isOutlineVisible() {
         return this.outlineVisible;
@@ -473,8 +455,6 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * sends an {@link AnnotationChangeEvent} to all registered listeners.
      *
      * @param visible  the new flag value.
-     *
-     * @since 1.0.13
      */
     public void setOutlineVisible(boolean visible) {
         this.outlineVisible = visible;

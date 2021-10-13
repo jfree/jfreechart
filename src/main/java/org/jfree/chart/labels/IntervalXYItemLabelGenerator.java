@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------------
  * IntervalXYItemLabelGenerator.java
  * ---------------------------------
- * (C) Copyright 2008-2020, by Object Refinery Limited.
+ * (C) Copyright 2008-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -41,7 +41,7 @@ import java.text.DateFormat;
 import java.text.MessageFormat;
 import java.text.NumberFormat;
 import java.util.Date;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.api.PublicCloneable;
 
 import org.jfree.data.xy.IntervalXYDataset;
 import org.jfree.data.xy.XYDataset;
@@ -49,8 +49,6 @@ import org.jfree.data.xy.XYDataset;
 /**
  * An item label generator for datasets that implement the
  * {@link IntervalXYDataset} interface.
- *
- * @since 1.0.10
  */
 public class IntervalXYItemLabelGenerator extends AbstractXYItemLabelGenerator
         implements XYItemLabelGenerator, Cloneable, PublicCloneable,

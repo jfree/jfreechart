@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * XYAnnotationBoundsInfo.java
  * ---------------------------
- * (C) Copyright 2009-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2009-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -40,8 +40,6 @@ import org.jfree.data.Range;
 
 /**
  * An interface that supplies information about the bounds of the annotation.
- *
- * @since 1.0.13
  */
 public interface XYAnnotationBoundsInfo {
 
@@ -52,7 +50,7 @@ public interface XYAnnotationBoundsInfo {
      *
      * @return A boolean.
      */
-    public boolean getIncludeInDataBounds();
+    boolean getIncludeInDataBounds();
 
     /**
      * Returns the range of x-values (in data space) that the annotation
@@ -60,7 +58,7 @@ public interface XYAnnotationBoundsInfo {
      *
      * @return The x-range.
      */
-    public Range getXRange();
+    Range getXRange();
 
     /**
      * Returns the range of y-values (in data space) that the annotation
@@ -68,6 +66,6 @@ public interface XYAnnotationBoundsInfo {
      *
      * @return The y-range.
      */
-    public Range getYRange();
+    Range getYRange();
 
 }

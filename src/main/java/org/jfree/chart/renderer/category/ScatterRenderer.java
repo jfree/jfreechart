@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * ScatterRenderer.java
  * --------------------
- * (C) Copyright 2007-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   David Forslund;
@@ -47,18 +47,19 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
-import org.jfree.chart.LegendItem;
+import org.jfree.chart.legend.LegendItem;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.chart.util.BooleanList;
-import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.PublicCloneable;
-import org.jfree.chart.util.ShapeUtils;
+import org.jfree.chart.api.PublicCloneable;
+import org.jfree.chart.internal.ShapeUtils;
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.statistics.MultiValueCategoryDataset;
@@ -70,10 +71,7 @@ import org.jfree.data.statistics.MultiValueCategoryDataset;
  * the {@code ScatterRendererDemo1.java} program included in the
  * JFreeChart Demo Collection:
  * <br><br>
- * <img src="../../../../../images/ScatterRendererSample.png"
- * alt="ScatterRendererSample.png">
- *
- * @since 1.0.7
+ * <img src="doc-files/ScatterRendererSample.png" alt="ScatterRendererSample.png">
  */
 public class ScatterRenderer extends AbstractCategoryItemRenderer
         implements Cloneable, PublicCloneable, Serializable {
@@ -82,7 +80,7 @@ public class ScatterRenderer extends AbstractCategoryItemRenderer
      * A table of flags that control (per series) whether or not shapes are
      * filled.
      */
-    private BooleanList seriesShapesFilled;
+    private Map<Integer, Boolean> seriesShapesFilledMap;
 
     /**
      * The default value returned by the getShapeFilled() method.
@@ -122,7 +120,7 @@ public class ScatterRenderer extends AbstractCategoryItemRenderer
      * Constructs a new renderer.
      */
     public ScatterRenderer() {
-        this.seriesShapesFilled = new BooleanList();
+        this.seriesShapesFilledMap = new HashMap<>();
         this.baseShapesFilled = true;
         this.useFillPaint = false;
         this.drawOutlines = false;
@@ -268,7 +266,7 @@ public class ScatterRenderer extends AbstractCategoryItemRenderer
      * @return A boolean.
      */
     public boolean getSeriesShapesFilled(int series) {
-        Boolean flag = this.seriesShapesFilled.getBoolean(series);
+        Boolean flag = this.seriesShapesFilledMap.get(series);
         if (flag != null) {
             return flag;
         }
@@ -286,7 +284,7 @@ public class ScatterRenderer extends AbstractCategoryItemRenderer
      * @param filled the flag.
      */
     public void setSeriesShapesFilled(int series, Boolean filled) {
-        this.seriesShapesFilled.setBoolean(series, filled);
+        this.seriesShapesFilledMap.put(series, filled);
         fireChangeEvent();
     }
 
@@ -298,7 +296,7 @@ public class ScatterRenderer extends AbstractCategoryItemRenderer
      * @param filled the flag.
      */
     public void setSeriesShapesFilled(int series, boolean filled) {
-        this.seriesShapesFilled.setBoolean(series, filled);
+        this.seriesShapesFilledMap.put(series, filled);
         fireChangeEvent();
     }
 
@@ -519,8 +517,7 @@ public class ScatterRenderer extends AbstractCategoryItemRenderer
             return false;
         }
         ScatterRenderer that = (ScatterRenderer) obj;
-        if (!ObjectUtils.equal(this.seriesShapesFilled,
-                that.seriesShapesFilled)) {
+        if (!Objects.equals(this.seriesShapesFilledMap, that.seriesShapesFilledMap)) {
             return false;
         }
         if (this.baseShapesFilled != that.baseShapesFilled) {
@@ -554,8 +551,7 @@ public class ScatterRenderer extends AbstractCategoryItemRenderer
     @Override
     public Object clone() throws CloneNotSupportedException {
         ScatterRenderer clone = (ScatterRenderer) super.clone();
-        clone.seriesShapesFilled
-                = (BooleanList) this.seriesShapesFilled.clone();
+        clone.seriesShapesFilledMap = new HashMap<>(this.seriesShapesFilledMap);
         return clone;
     }
 

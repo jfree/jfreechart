@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,30 +27,26 @@
  * ---------------------
  * ArcDialFrameTest.java
  * ---------------------
- * (C) Copyright 2006-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 03-Nov-2006 : Version 1 (DG);
- * 24-Oct-2007 : Renamed (DG);
  *
  */
 
 package org.jfree.chart.plot.dial;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.GradientPaint;
 
 import org.jfree.chart.TestUtils;
-import org.junit.Test;
+import org.jfree.chart.internal.CloneUtils;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link ArcDialFrame} class.
@@ -138,7 +134,7 @@ public class ArcDialFrameTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         ArcDialFrame f1 = new ArcDialFrame();
-        ArcDialFrame f2 = (ArcDialFrame) f1.clone();
+        ArcDialFrame f2 = CloneUtils.clone(f1);
         assertTrue(f1 != f2);
         assertTrue(f1.getClass() == f2.getClass());
         assertTrue(f1.equals(f2));
@@ -156,7 +152,7 @@ public class ArcDialFrameTest {
     @Test
     public void testSerialization() {
         ArcDialFrame f1 = new ArcDialFrame();
-        ArcDialFrame f2 = (ArcDialFrame) TestUtils.serialised(f1);
+        ArcDialFrame f2 = TestUtils.serialised(f1);
         assertEquals(f1, f2);
     }
 

@@ -53,7 +53,8 @@ import org.jfree.data.category.CategoryDataset;
  * A category dataset that defines various medians, outliers and an average
  * value for each item.
  */
-public interface BoxAndWhiskerCategoryDataset extends CategoryDataset {
+public interface BoxAndWhiskerCategoryDataset<R extends Comparable<R>, 
+        C extends Comparable<C>> extends CategoryDataset<R, C> {
 
     /**
      * Returns the mean value for an item.
@@ -63,7 +64,7 @@ public interface BoxAndWhiskerCategoryDataset extends CategoryDataset {
      *
      * @return The mean value.
      */
-    public Number getMeanValue(int row, int column);
+    Number getMeanValue(int row, int column);
 
     /**
      * Returns the average value for an item.
@@ -73,7 +74,7 @@ public interface BoxAndWhiskerCategoryDataset extends CategoryDataset {
      *
      * @return The average value.
      */
-    public Number getMeanValue(Comparable rowKey, Comparable columnKey);
+    Number getMeanValue(R rowKey, C columnKey);
 
     /**
      * Returns the median value for an item.
@@ -83,7 +84,7 @@ public interface BoxAndWhiskerCategoryDataset extends CategoryDataset {
      *
      * @return The median value.
      */
-    public Number getMedianValue(int row, int column);
+    Number getMedianValue(int row, int column);
 
     /**
      * Returns the median value for an item.
@@ -93,7 +94,7 @@ public interface BoxAndWhiskerCategoryDataset extends CategoryDataset {
      *
      * @return The median value.
      */
-    public Number getMedianValue(Comparable rowKey, Comparable columnKey);
+    Number getMedianValue(R rowKey, C columnKey);
 
     /**
      * Returns the q1median value for an item.
@@ -103,7 +104,7 @@ public interface BoxAndWhiskerCategoryDataset extends CategoryDataset {
      *
      * @return The q1median value.
      */
-    public Number getQ1Value(int row, int column);
+    Number getQ1Value(int row, int column);
 
     /**
      * Returns the q1median value for an item.
@@ -113,7 +114,7 @@ public interface BoxAndWhiskerCategoryDataset extends CategoryDataset {
      *
      * @return The q1median value.
      */
-    public Number getQ1Value(Comparable rowKey, Comparable columnKey);
+    Number getQ1Value(R rowKey, C columnKey);
 
     /**
      * Returns the q3median value for an item.
@@ -123,7 +124,7 @@ public interface BoxAndWhiskerCategoryDataset extends CategoryDataset {
      *
      * @return The q3median value.
      */
-    public Number getQ3Value(int row, int column);
+    Number getQ3Value(int row, int column);
 
     /**
      * Returns the q3median value for an item.
@@ -133,7 +134,7 @@ public interface BoxAndWhiskerCategoryDataset extends CategoryDataset {
      *
      * @return The q3median value.
      */
-    public Number getQ3Value(Comparable rowKey, Comparable columnKey);
+    Number getQ3Value(R rowKey, C columnKey);
 
     /**
      * Returns the minimum regular (non-outlier) value for an item.
@@ -143,7 +144,7 @@ public interface BoxAndWhiskerCategoryDataset extends CategoryDataset {
      *
      * @return The minimum regular value.
      */
-    public Number getMinRegularValue(int row, int column);
+    Number getMinRegularValue(int row, int column);
 
     /**
      * Returns the minimum regular (non-outlier) value for an item.
@@ -153,7 +154,7 @@ public interface BoxAndWhiskerCategoryDataset extends CategoryDataset {
      *
      * @return The minimum regular value.
      */
-    public Number getMinRegularValue(Comparable rowKey, Comparable columnKey);
+    Number getMinRegularValue(R rowKey, C columnKey);
 
     /**
      * Returns the maximum regular (non-outlier) value for an item.
@@ -163,7 +164,7 @@ public interface BoxAndWhiskerCategoryDataset extends CategoryDataset {
      *
      * @return The maximum regular value.
      */
-    public Number getMaxRegularValue(int row, int column);
+    Number getMaxRegularValue(int row, int column);
 
     /**
      * Returns the maximum regular (non-outlier) value for an item.
@@ -173,7 +174,7 @@ public interface BoxAndWhiskerCategoryDataset extends CategoryDataset {
      *
      * @return The maximum regular value.
      */
-    public Number getMaxRegularValue(Comparable rowKey, Comparable columnKey);
+    Number getMaxRegularValue(R rowKey, C columnKey);
 
     /**
      * Returns the minimum outlier (non-farout) for an item.
@@ -183,7 +184,7 @@ public interface BoxAndWhiskerCategoryDataset extends CategoryDataset {
      *
      * @return The minimum outlier.
      */
-    public Number getMinOutlier(int row, int column);
+    Number getMinOutlier(int row, int column);
 
     /**
      * Returns the minimum outlier (non-farout) for an item.
@@ -193,7 +194,7 @@ public interface BoxAndWhiskerCategoryDataset extends CategoryDataset {
      *
      * @return The minimum outlier.
      */
-    public Number getMinOutlier(Comparable rowKey, Comparable columnKey);
+    Number getMinOutlier(R rowKey, C columnKey);
 
     /**
      * Returns the maximum outlier (non-farout) for an item.
@@ -203,7 +204,7 @@ public interface BoxAndWhiskerCategoryDataset extends CategoryDataset {
      *
      * @return The maximum outlier.
      */
-    public Number getMaxOutlier(int row, int column);
+    Number getMaxOutlier(int row, int column);
 
     /**
      * Returns the maximum outlier (non-farout) for an item.
@@ -213,7 +214,7 @@ public interface BoxAndWhiskerCategoryDataset extends CategoryDataset {
      *
      * @return The maximum outlier.
      */
-    public Number getMaxOutlier(Comparable rowKey, Comparable columnKey);
+    Number getMaxOutlier(R rowKey, C columnKey);
 
     /**
      * Returns a list of outlier values for an item.  The list may be empty,
@@ -224,7 +225,7 @@ public interface BoxAndWhiskerCategoryDataset extends CategoryDataset {
      *
      * @return A list of outliers for an item.
      */
-    public List getOutliers(int row, int column);
+    List<? extends Number> getOutliers(int row, int column);
 
     /**
      * Returns a list of outlier values for an item.  The list may be empty,
@@ -235,6 +236,6 @@ public interface BoxAndWhiskerCategoryDataset extends CategoryDataset {
      *
      * @return A list of outlier values for an item.
      */
-    public List getOutliers(Comparable rowKey, Comparable columnKey);
+    List<? extends Number> getOutliers(R rowKey, C columnKey);
 
 }

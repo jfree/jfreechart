@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,25 +27,18 @@
  * -------------------
  * CyclicAxisTest.java
  * -------------------
- * (C) Copyright 2003-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  Nicolas Brodu
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 19-Nov-2003 : First version (NB);
- * 05-Oct-2004 : Removed extension of NumberAxisTests (DG);
- * 07-Jan-2004 : Added test for hashCode() (DG);
- * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
  *
  */
 
 package org.jfree.chart.axis;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -53,7 +46,7 @@ import java.awt.GradientPaint;
 import java.awt.Stroke;
 
 import org.jfree.chart.TestUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link CyclicNumberAxis} class.
@@ -142,7 +135,7 @@ public class CyclicNumberAxisTest  {
     @Test
     public void testSerialization() {
         CyclicNumberAxis a1 = new CyclicNumberAxis(10, 0, "Test Axis");
-        CyclicNumberAxis a2 = (CyclicNumberAxis) TestUtils.serialised(a1);
+        CyclicNumberAxis a2 = TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 

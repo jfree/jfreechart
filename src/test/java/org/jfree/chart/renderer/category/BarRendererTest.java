@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,37 +27,26 @@
  * --------------------
  * BarRendererTest.java
  * --------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 25-Mar-2003 : Version 1 (DG);
- * 19-Aug-2003 : Renamed HorizontalBarRendererTests --> BarRendererTests (DG);
- * 22-Oct-2003 : Added hashCode test (DG);
- * 18-May-2005 : Added field to equals() test (DG);
- * 22-Sep-2005 : Renamed getMaxBarWidth() --> getMaximumBarWidth() (DG);
- * 11-May-2007 : Added testGetLegendItem() (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG);
- * 25-Nov-2008 : Added testFindRangeBounds (DG);
- * 16-May-2009 : Added series visibility check in testFindRangeBounds() (DG);
  *
  */
 
 package org.jfree.chart.renderer.category;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertNotNull;
+import java.awt.BasicStroke;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.awt.Color;
 
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.LegendItem;
+import org.jfree.chart.legend.LegendItem;
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
@@ -66,13 +55,13 @@ import org.jfree.chart.labels.ItemLabelPosition;
 import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.renderer.RendererChangeDetector;
-import org.jfree.chart.ui.GradientPaintTransformType;
-import org.jfree.chart.ui.StandardGradientPaintTransformer;
-import org.jfree.chart.ui.TextAnchor;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.util.GradientPaintTransformType;
+import org.jfree.chart.util.StandardGradientPaintTransformer;
+import org.jfree.chart.text.TextAnchor;
+import org.jfree.chart.api.PublicCloneable;
 import org.jfree.data.Range;
 import org.jfree.data.category.DefaultCategoryDataset;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link BarRenderer} class.
@@ -199,6 +188,7 @@ public class BarRendererTest {
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
+        TestUtils.checkIndependence(r1, r2);
     }
 
     /**
@@ -216,8 +206,12 @@ public class BarRendererTest {
     @Test
     public void testSerialization() {
         BarRenderer r1 = new BarRenderer();
-        BarRenderer r2 = (BarRenderer) TestUtils.serialised(r1);
+        r1.setSeriesOutlineStroke(1, new BasicStroke(9.0f));
+        r1.setDefaultOutlineStroke(new BasicStroke(4.5f));
+        BarRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
+        assertTrue(r1 != r2);        
+        TestUtils.checkIndependence(r1, r2);
     }
 
     /**
@@ -244,8 +238,8 @@ public class BarRendererTest {
         DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         dataset.addValue(21.0, "R1", "C1");
         BarRenderer r = new BarRenderer();
-        CategoryPlot plot = new CategoryPlot(dataset, new CategoryAxis("x"),
-                new NumberAxis("y"), r);
+        CategoryPlot<String, String> plot = new CategoryPlot<>(dataset, 
+                new CategoryAxis("x"), new NumberAxis("y"), r);
         /*JFreeChart chart =*/ new JFreeChart(plot);
         LegendItem li = r.getLegendItem(0, 0);
         assertNotNull(li);
@@ -268,8 +262,8 @@ public class BarRendererTest {
         dataset1.addValue(24.0, "R4", "C1");
         dataset1.addValue(25.0, "R5", "C1");
         BarRenderer r = new BarRenderer();
-        CategoryPlot plot = new CategoryPlot(dataset0, new CategoryAxis("x"),
-                new NumberAxis("y"), r);
+        CategoryPlot<String, String> plot = new CategoryPlot<>(dataset0, 
+                new CategoryAxis("x"), new NumberAxis("y"), r);
         plot.setDataset(1, dataset1);
         /*JFreeChart chart =*/ new JFreeChart(plot);
         LegendItem li = r.getLegendItem(1, 2);

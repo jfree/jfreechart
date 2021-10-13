@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,26 +27,16 @@
  * ---------------
  * Regression.java
  * ---------------
- * (C) Copyright 2002-2016, by Object Refinery Limited.
+ * (C) Copyright 2002-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Peter Kolb (patch 2795746);
- *
- * Changes
- * -------
- * 30-Sep-2002 : Version 1 (DG);
- * 18-Aug-2003 : Added 'abstract' (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
- *               getYValue() (DG);
- * 29-May-2009 : Added support for polynomial regression, see patch 2795746
- *               by Peter Kolb (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
 package org.jfree.data.statistics;
 
-import org.jfree.chart.util.Args;
+import org.jfree.chart.internal.Args;
 import org.jfree.data.xy.XYDataset;
 
 /**

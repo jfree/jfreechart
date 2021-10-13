@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------------
  * AbstractCategoryItemRenderer.java
  * ---------------------------------
- * (C) Copyright 2002-2020, by Object Refinery Limited.
+ * (C) Copyright 2002-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Richard Atkinson;
@@ -56,8 +56,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.jfree.chart.LegendItem;
-import org.jfree.chart.LegendItemCollection;
+import java.util.Objects;
+
+import org.jfree.chart.legend.LegendItem;
+import org.jfree.chart.legend.LegendItemCollection;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.CategoryItemEntity;
@@ -79,17 +81,16 @@ import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.ValueMarker;
 import org.jfree.chart.renderer.AbstractRenderer;
 import org.jfree.chart.text.TextUtils;
-import org.jfree.chart.ui.GradientPaintTransformer;
-import org.jfree.chart.ui.LengthAdjustmentType;
-import org.jfree.chart.ui.RectangleAnchor;
-import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.util.GradientPaintTransformer;
+import org.jfree.chart.api.LengthAdjustmentType;
+import org.jfree.chart.api.RectangleAnchor;
+import org.jfree.chart.api.RectangleEdge;
+import org.jfree.chart.api.RectangleInsets;
 import org.jfree.chart.urls.CategoryURLGenerator;
-import org.jfree.chart.util.CloneUtils;
-import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.PublicCloneable;
-import org.jfree.chart.util.SortOrder;
+import org.jfree.chart.internal.CloneUtils;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.api.PublicCloneable;
+import org.jfree.chart.api.SortOrder;
 import org.jfree.data.KeyedValues2DItemKey;
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
@@ -574,8 +575,6 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      * @param info  collects plot rendering info ({@code null} permitted).
      *
      * @return The new state instance (never {@code null}).
-     *
-     * @since 1.0.5
      */
     protected CategoryItemRendererState createState(PlotRenderingInfo info) {
         return new CategoryItemRendererState(info);
@@ -637,8 +636,6 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      *     permitted).
      * @param columnKey  the column key that identifies the element 
      *     ({@code null} not permitted). 
-     * 
-     * @since 1.0.20
      */
     protected void beginElementGroup(Graphics2D g2, Comparable rowKey,
             Comparable columnKey) {
@@ -666,10 +663,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      * @param dataset  the dataset ({@code null} permitted).
      * @param includeInterval  include the y-interval if the dataset has one.
      *
-     * @return The range ({@code null} if the dataset is {@code null}
-     *         or empty).
-     *
-     * @since 1.0.13
+     * @return The range ({@code null} if the dataset is {@code null} or empty).
      */
     protected Range findRangeBounds(CategoryDataset dataset,
             boolean includeInterval) {
@@ -703,8 +697,6 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      * @param edge  the edge along which the axis lies.
      *
      * @return The Java2D coordinate for the middle of the item.
-     *
-     * @since 1.0.11
      */
     @Override
     public double getItemMiddle(Comparable rowKey, Comparable columnKey,
@@ -797,13 +789,10 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      * @param g2  the graphics device.
      * @param plot  the plot.
      * @param axis  the value axis.
-     * @param dataArea  the area for plotting data (not yet adjusted for any 3D
-     *                  effect).
+     * @param dataArea  the area for plotting data.
      * @param value  the value at which the grid line should be drawn.
      * @param paint  the paint ({@code null} not permitted).
      * @param stroke  the stroke ({@code null} not permitted).
-     *
-     * @since 1.0.13
      */
     @Override
     public void drawRangeLine(Graphics2D g2, CategoryPlot plot, ValueAxis axis,
@@ -1232,40 +1221,31 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
         }
         AbstractCategoryItemRenderer that = (AbstractCategoryItemRenderer) obj;
 
-        if (!ObjectUtils.equal(this.itemLabelGeneratorMap,
-                that.itemLabelGeneratorMap)) {
+        if (!Objects.equals(this.itemLabelGeneratorMap, that.itemLabelGeneratorMap)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.defaultItemLabelGenerator,
-                that.defaultItemLabelGenerator)) {
+        if (!Objects.equals(this.defaultItemLabelGenerator, that.defaultItemLabelGenerator)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.toolTipGeneratorMap,
-                that.toolTipGeneratorMap)) {
+        if (!Objects.equals(this.toolTipGeneratorMap, that.toolTipGeneratorMap)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.defaultToolTipGenerator,
-                that.defaultToolTipGenerator)) {
+        if (!Objects.equals(this.defaultToolTipGenerator, that.defaultToolTipGenerator)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.itemURLGeneratorMap,
-                that.itemURLGeneratorMap)) {
+        if (!Objects.equals(this.itemURLGeneratorMap, that.itemURLGeneratorMap)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.defaultItemURLGenerator,
-                that.defaultItemURLGenerator)) {
+        if (!Objects.equals(this.defaultItemURLGenerator, that.defaultItemURLGenerator)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.legendItemLabelGenerator,
-                that.legendItemLabelGenerator)) {
+        if (!Objects.equals(this.legendItemLabelGenerator, that.legendItemLabelGenerator)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.legendItemToolTipGenerator,
-                that.legendItemToolTipGenerator)) {
+        if (!Objects.equals(this.legendItemToolTipGenerator, that.legendItemToolTipGenerator)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.legendItemURLGenerator,
-                that.legendItemURLGenerator)) {
+        if (!Objects.equals(this.legendItemURLGenerator, that.legendItemURLGenerator)) {
             return false;
         }
         return super.equals(obj);
@@ -1310,10 +1290,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      * @param datasetIndex  the dataset index.
      * @param transX  the x-value translated to Java2D space.
      * @param transY  the y-value translated to Java2D space.
-     * @param orientation  the plot orientation ({@code null} not
-     *                     permitted).
-     *
-     * @since 1.0.11
+     * @param orientation  the plot orientation ({@code null} not permitted).
      */
     protected void updateCrosshairValues(CategoryCrosshairState crosshairState,
             Comparable rowKey, Comparable columnKey, double value,
@@ -1447,15 +1424,15 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
 
         if (this.legendItemLabelGenerator instanceof PublicCloneable) {
             clone.legendItemLabelGenerator = (CategorySeriesLabelGenerator)
-                    ObjectUtils.clone(this.legendItemLabelGenerator);
+                    CloneUtils.clone((Object) this.legendItemLabelGenerator);
         }
         if (this.legendItemToolTipGenerator instanceof PublicCloneable) {
             clone.legendItemToolTipGenerator = (CategorySeriesLabelGenerator)
-                    ObjectUtils.clone(this.legendItemToolTipGenerator);
+                    CloneUtils.clone((Object) this.legendItemToolTipGenerator);
         }
         if (this.legendItemURLGenerator instanceof PublicCloneable) {
             clone.legendItemURLGenerator = (CategorySeriesLabelGenerator)
-                    ObjectUtils.clone(this.legendItemURLGenerator);
+                    CloneUtils.clone((Object) this.legendItemURLGenerator);
         }
         return clone;
     }
@@ -1654,8 +1631,6 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      *                 used if {@code area} is {@code null}).
      * @param entityY  the entity's center y-coordinate in user space (only
      *                 used if {@code area} is {@code null}).
-     *
-     * @since 1.0.13
      */
     protected void addEntity(EntityCollection entities, Shape hotspot,
                              CategoryDataset dataset, int row, int column,

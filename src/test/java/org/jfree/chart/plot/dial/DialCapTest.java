@@ -32,24 +32,21 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * Changes
- * -------
- * 03-Nov-2006 : Version 1 (DG);
- *
  */
 
 package org.jfree.chart.plot.dial;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.GradientPaint;
 
 import org.jfree.chart.TestUtils;
-import org.junit.Test;
+import org.jfree.chart.internal.CloneUtils;
+import org.junit.jupiter.api.Test;
 
 
 /**
@@ -121,7 +118,7 @@ public class DialCapTest {
     public void testCloning() throws CloneNotSupportedException {
         // test a default instance
         DialCap c1 = new DialCap();
-        DialCap c2 = (DialCap) c1.clone();
+        DialCap c2 = CloneUtils.clone(c1);
 
         assertTrue(c1 != c2);
         assertTrue(c1.getClass() == c2.getClass());
@@ -154,7 +151,7 @@ public class DialCapTest {
     public void testSerialization() {
         // test a default instance
         DialCap c1 = new DialCap();
-        DialCap c2 = (DialCap) TestUtils.serialised(c1);
+        DialCap c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
 
         // test a custom instance
@@ -165,7 +162,7 @@ public class DialCapTest {
                 3.0f, 4.0f, Color.GRAY));
         c1.setOutlineStroke(new BasicStroke(2.0f));
 
-        c2 = (DialCap) TestUtils.serialised(c1);
+        c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,17 +27,10 @@
  * -----------
  * Values.java
  * -----------
- * (C) Copyright 2001-2008, by Object Refinery Limited.
+ * (C) Copyright 2001-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 08-Nov-2001 : Version 1 (DG);
- * 23-Oct-2002 : Renamed getValueCount --> getItemCount (DG);#
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 02-May-2006 : Updated API docs (DG);
  *
  */
 
@@ -53,7 +46,7 @@ public interface Values {
      *
      * @return The item count (possibly zero).
      */
-    public int getItemCount();
+    int getItemCount();
 
     /**
      * Returns the value with the specified index.
@@ -66,6 +59,6 @@ public interface Values {
      * @throws IndexOutOfBoundsException if {@code index} is not in the
      *     specified range.
      */
-    public Number getValue(int index);
+    Number getValue(int index);
 
 }

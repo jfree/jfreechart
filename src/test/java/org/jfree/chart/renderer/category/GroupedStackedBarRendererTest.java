@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------------------
  * GroupedStackedBarRendererTest.java
  * ----------------------------------
- * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -36,22 +36,22 @@
 
 package org.jfree.chart.renderer.category;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.CategoryPlot;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.api.PublicCloneable;
 import org.jfree.data.KeyToGroupMap;
 import org.jfree.data.Range;
 import org.jfree.data.category.DefaultCategoryDataset;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link GroupedStackedBarRenderer} class.
@@ -77,18 +77,26 @@ public class GroupedStackedBarRendererTest {
         m2.mapKeyToGroup("S1", "G2");
         r2.setSeriesToGroupMap(m2);
         assertTrue(r1.equals(r2));
+        TestUtils.checkIndependence(r1, r2);
     }
 
     /**
      * Confirm that cloning works.
+     * 
+     * @throws CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
         GroupedStackedBarRenderer r1 = new GroupedStackedBarRenderer();
+        KeyToGroupMap map = new KeyToGroupMap();
+        map.mapKeyToGroup("A", "X");
+        map.mapKeyToGroup("B", "Y");
+        r1.setSeriesToGroupMap(map);
         GroupedStackedBarRenderer r2 = (GroupedStackedBarRenderer) r1.clone();
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
+        TestUtils.checkIndependence(r1, r2);
     }
 
     /**
@@ -106,8 +114,7 @@ public class GroupedStackedBarRendererTest {
     @Test
     public void testSerialization() {
         GroupedStackedBarRenderer r1 = new GroupedStackedBarRenderer();
-        GroupedStackedBarRenderer r2 = (GroupedStackedBarRenderer) 
-                TestUtils.serialised(r1);
+        GroupedStackedBarRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 
@@ -125,7 +132,7 @@ public class GroupedStackedBarRendererTest {
             dataset.addValue(4.0, "S2", "C2");
             GroupedStackedBarRenderer renderer
                     = new GroupedStackedBarRenderer();
-            CategoryPlot plot = new CategoryPlot(dataset,
+            CategoryPlot<String, String> plot = new CategoryPlot<>(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     renderer);
             JFreeChart chart = new JFreeChart(plot);

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * BarPainter.java
  * ---------------
- * (C) Copyright 2008, by Object Refinery Limited.
+ * (C) Copyright 2008-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -42,7 +42,7 @@ package org.jfree.chart.renderer.category;
 
 import java.awt.Graphics2D;
 import java.awt.geom.RectangularShape;
-import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.api.RectangleEdge;
 
 /**
  * The interface for plugin painter for the {@link BarRenderer} class.  When
@@ -56,8 +56,6 @@ import org.jfree.chart.ui.RectangleEdge;
  * <li>the class should be {@code Serializable}, otherwise chart
  *     serialization will not be supported.</li>
  * </ul>
- *
- * @since 1.0.11
  */
 public interface BarPainter {
 
@@ -71,7 +69,7 @@ public interface BarPainter {
      * @param bar  the bounds for the bar.
      * @param base  the base of the bar.
      */
-    public void paintBar(Graphics2D g2, BarRenderer renderer,
+    void paintBar(Graphics2D g2, BarRenderer renderer,
             int row, int column, RectangularShape bar, RectangleEdge base);
 
     /**
@@ -85,7 +83,7 @@ public interface BarPainter {
      * @param base  the base of the bar.
      * @param pegShadow  peg the shadow to the base of the bar?
      */
-    public void paintBarShadow(Graphics2D g2, BarRenderer renderer,
+    void paintBarShadow(Graphics2D g2, BarRenderer renderer,
             int row, int column, RectangularShape bar, RectangleEdge base,
             boolean pegShadow);
 

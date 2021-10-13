@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,27 +27,19 @@
  * ----------------------
  * SpiderWebPlotTest.java
  * ----------------------
- * (C) Copyright 2005-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 10-Jun-2005 : Version 1 (DG);
- * 01-Jun-2006 : Added testDrawWithNullInfo() method (DG);
- * 05-Feb-2007 : Added more checks to testCloning (DG);
- * 01-Jun-2009 : Added test for getLegendItems() bug, series key is not
- *               set (DG);
  *
  */
 
 package org.jfree.chart.plot;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -59,16 +51,17 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.text.DecimalFormat;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.LegendItem;
-import org.jfree.chart.LegendItemCollection;
+import org.jfree.chart.legend.LegendItem;
+import org.jfree.chart.legend.LegendItemCollection;
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
 import org.jfree.chart.labels.StandardCategoryToolTipGenerator;
 import org.jfree.chart.urls.StandardCategoryURLGenerator;
-import org.jfree.chart.util.Rotation;
-import org.jfree.chart.util.TableOrder;
+import org.jfree.chart.internal.CloneUtils;
+import org.jfree.chart.api.Rotation;
+import org.jfree.chart.api.TableOrder;
 import org.jfree.data.category.DefaultCategoryDataset;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link SpiderWebPlot} class.
@@ -80,8 +73,8 @@ public class SpiderWebPlotTest {
      */
     @Test
     public void testEquals() {
-        SpiderWebPlot p1 = new SpiderWebPlot(new DefaultCategoryDataset());
-        SpiderWebPlot p2 = new SpiderWebPlot(new DefaultCategoryDataset());
+        SpiderWebPlot p1 = new SpiderWebPlot(new DefaultCategoryDataset<String, String>());
+        SpiderWebPlot p2 = new SpiderWebPlot(new DefaultCategoryDataset<String, String>());
         assertTrue(p1.equals(p2));
         assertTrue(p2.equals(p1));
 
@@ -127,14 +120,6 @@ public class SpiderWebPlotTest {
         p2.setLegendItemShape(new Rectangle(1, 2, 3, 4));
         assertTrue(p1.equals(p2));
 
-        // seriesPaint
-        p1.setSeriesPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
-                3.0f, 4.0f, Color.WHITE));
-        assertFalse(p1.equals(p2));
-        p2.setSeriesPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
-                3.0f, 4.0f, Color.WHITE));
-        assertTrue(p1.equals(p2));
-
         // seriesPaintList
         p1.setSeriesPaint(1, new GradientPaint(1.0f, 2.0f, Color.YELLOW,
                 3.0f, 4.0f, Color.WHITE));
@@ -143,19 +128,11 @@ public class SpiderWebPlotTest {
                 3.0f, 4.0f, Color.WHITE));
         assertTrue(p1.equals(p2));
 
-        // baseSeriesPaint
-        p1.setBaseSeriesPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
+        // defaultSeriesPaint
+        p1.setDefaultSeriesPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.BLACK));
         assertFalse(p1.equals(p2));
-        p2.setBaseSeriesPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
-                3.0f, 4.0f, Color.BLACK));
-        assertTrue(p1.equals(p2));
-
-        // seriesOutlinePaint
-        p1.setSeriesOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
-                3.0f, 4.0f, Color.BLACK));
-        assertFalse(p1.equals(p2));
-        p2.setSeriesOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
+        p2.setDefaultSeriesPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.BLACK));
         assertTrue(p1.equals(p2));
 
@@ -167,20 +144,15 @@ public class SpiderWebPlotTest {
                 3.0f, 4.0f, Color.GREEN));
         assertTrue(p1.equals(p2));
 
-        // baseSeriesOutlinePaint
-        p1.setBaseSeriesOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.CYAN,
+        // defaultSeriesOutlinePaint
+        p1.setDefaultSeriesOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.CYAN,
                 3.0f, 4.0f, Color.GREEN));
         assertFalse(p1.equals(p2));
-        p2.setBaseSeriesOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.CYAN,
+        p2.setDefaultSeriesOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.CYAN,
                 3.0f, 4.0f, Color.GREEN));
         assertTrue(p1.equals(p2));
 
-        // seriesOutlineStroke
         BasicStroke s = new BasicStroke(1.23f);
-        p1.setSeriesOutlineStroke(s);
-        assertFalse(p1.equals(p2));
-        p2.setSeriesOutlineStroke(s);
-        assertTrue(p1.equals(p2));
 
         // seriesOutlineStrokeList
         p1.setSeriesOutlineStroke(1, s);
@@ -188,10 +160,10 @@ public class SpiderWebPlotTest {
         p2.setSeriesOutlineStroke(1, s);
         assertTrue(p1.equals(p2));
 
-        // baseSeriesOutlineStroke
-        p1.setBaseSeriesOutlineStroke(s);
+        // defaultSeriesOutlineStroke
+        p1.setDefaultSeriesOutlineStroke(s);
         assertFalse(p1.equals(p2));
-        p2.setBaseSeriesOutlineStroke(s);
+        p2.setDefaultSeriesOutlineStroke(s);
         assertTrue(p1.equals(p2));
 
         // webFilled
@@ -255,13 +227,15 @@ public class SpiderWebPlotTest {
 
     /**
      * Confirm that cloning works.
+     * 
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        SpiderWebPlot p1 = new SpiderWebPlot(new DefaultCategoryDataset());
+        SpiderWebPlot p1 = new SpiderWebPlot(new DefaultCategoryDataset<String, String>());
         Rectangle2D legendShape = new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0);
         p1.setLegendItemShape(legendShape);
-        SpiderWebPlot p2 = (SpiderWebPlot) p1.clone();
+        SpiderWebPlot p2 = CloneUtils.clone(p1);
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
@@ -297,8 +271,11 @@ public class SpiderWebPlotTest {
      */
     @Test
     public void testSerialization() {
-        SpiderWebPlot p1 = new SpiderWebPlot(new DefaultCategoryDataset());
-        SpiderWebPlot p2 = (SpiderWebPlot) TestUtils.serialised(p1);
+        SpiderWebPlot p1 = new SpiderWebPlot(new DefaultCategoryDataset<String, String>());
+        p1.setSeriesPaint(1, new GradientPaint(1.0f, 2.0f, Color.BLUE, 3.0f, 4.0f, Color.RED));
+        p1.setSeriesOutlinePaint(1, new GradientPaint(4.0f, 3.0f, Color.BLUE, 2.0f, 1.0f, Color.RED));
+        p1.setSeriesOutlineStroke(1, new BasicStroke(9.0f));
+        SpiderWebPlot p2 = TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 
@@ -308,7 +285,7 @@ public class SpiderWebPlotTest {
      */
     @Test
     public void testDrawWithNullInfo() {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         dataset.addValue(35.0, "S1", "C1");
         dataset.addValue(45.0, "S1", "C2");
         dataset.addValue(55.0, "S1", "C3");
@@ -333,7 +310,7 @@ public class SpiderWebPlotTest {
      */
     @Test
     public void testGetLegendItems() {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         dataset.addValue(35.0, "S1", "C1");
         dataset.addValue(45.0, "S1", "C2");
         dataset.addValue(55.0, "S2", "C1");

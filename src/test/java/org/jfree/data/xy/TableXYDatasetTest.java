@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * TableXYDatasetTest.java
  * -----------------------
- * (C) Copyright 2003-2020, by Richard Atkinson and Contributors.
+ * (C) Copyright 2003-2021, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -36,14 +36,15 @@
 
 package org.jfree.data.xy;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.jfree.chart.TestUtils;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.internal.CloneUtils;
+import org.jfree.chart.api.PublicCloneable;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link DefaultTableXYDataset}.
@@ -55,8 +56,8 @@ public class TableXYDatasetTest {
      */
     @Test
     public void testEquals() {
-        DefaultTableXYDataset d1 = new DefaultTableXYDataset();
-        DefaultTableXYDataset d2 = new DefaultTableXYDataset();
+        DefaultTableXYDataset<String> d1 = new DefaultTableXYDataset<>();
+        DefaultTableXYDataset<String> d2 = new DefaultTableXYDataset<>();
         assertTrue(d1.equals(d2));
         assertTrue(d2.equals(d1));
 
@@ -74,9 +75,9 @@ public class TableXYDatasetTest {
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        DefaultTableXYDataset d1 = new DefaultTableXYDataset();
+        DefaultTableXYDataset<String> d1 = new DefaultTableXYDataset<>();
         d1.addSeries(createSeries1());
-        DefaultTableXYDataset d2 = (DefaultTableXYDataset) d1.clone();
+        DefaultTableXYDataset<String> d2 = CloneUtils.clone(d1);
         assertTrue(d1 != d2);
         assertTrue(d1.getClass() == d2.getClass());
         assertTrue(d1.equals(d2));
@@ -87,7 +88,7 @@ public class TableXYDatasetTest {
      */
     @Test
     public void testPublicCloneable() {
-        DefaultTableXYDataset d1 = new DefaultTableXYDataset();
+        DefaultTableXYDataset<String> d1 = new DefaultTableXYDataset<>();
         assertTrue(d1 instanceof PublicCloneable);
     }
 
@@ -96,10 +97,9 @@ public class TableXYDatasetTest {
      */
     @Test
     public void testSerialization() {
-        DefaultTableXYDataset d1 = new DefaultTableXYDataset();
+        DefaultTableXYDataset<String> d1 = new DefaultTableXYDataset<>();
         d1.addSeries(createSeries2());
-        DefaultTableXYDataset d2 = (DefaultTableXYDataset) 
-                TestUtils.serialised(d1);
+        DefaultTableXYDataset<String> d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 
@@ -108,10 +108,10 @@ public class TableXYDatasetTest {
      */
     @Test
     public void testTableXYDataset() {
-        XYSeries series1 = createSeries1();
-        XYSeries series2 = createSeries2();
+        XYSeries<String> series1 = createSeries1();
+        XYSeries<String> series2 = createSeries2();
 
-        DefaultTableXYDataset dataset = new DefaultTableXYDataset();
+        DefaultTableXYDataset<String> dataset = new DefaultTableXYDataset<>();
         dataset.addSeries(series1);
         dataset.addSeries(series2);
 
@@ -148,7 +148,7 @@ public class TableXYDatasetTest {
      */
     @Test
     public void test788597() {
-        DefaultTableXYDataset dataset = new DefaultTableXYDataset();
+        DefaultTableXYDataset<String> dataset = new DefaultTableXYDataset<>();
         dataset.addSeries(createSeries1());
         assertEquals(4, dataset.getItemCount());
         dataset.removeAllSeries();
@@ -160,7 +160,7 @@ public class TableXYDatasetTest {
      */
     @Test
     public void testRemoveAllValuesForX() {
-        DefaultTableXYDataset dataset = new DefaultTableXYDataset();
+        DefaultTableXYDataset<String> dataset = new DefaultTableXYDataset<>();
         dataset.addSeries(createSeries1());
         dataset.addSeries(createSeries2());
         dataset.removeAllValuesForX(2.0);
@@ -177,7 +177,7 @@ public class TableXYDatasetTest {
      */
     @Test
     public void testPrune() {
-        DefaultTableXYDataset dataset = new DefaultTableXYDataset();
+        DefaultTableXYDataset<String> dataset = new DefaultTableXYDataset<>();
         dataset.addSeries(createSeries1());
         dataset.addSeries(createSeries2());
         dataset.removeSeries(1);
@@ -192,7 +192,7 @@ public class TableXYDatasetTest {
     public void testAutoPrune() {
 
         // WITH AUTOPRUNING
-        DefaultTableXYDataset dataset = new DefaultTableXYDataset(true);
+        DefaultTableXYDataset<String> dataset = new DefaultTableXYDataset<>(true);
         dataset.addSeries(createSeriesA());
         assertEquals(2, dataset.getItemCount());  // should be 2 items
         dataset.addSeries(createSeriesB());
@@ -201,7 +201,7 @@ public class TableXYDatasetTest {
         assertEquals(1, dataset.getItemCount());  // 1 value pruned.
 
         // WITHOUT AUTOPRUNING
-        DefaultTableXYDataset dataset2 = new DefaultTableXYDataset(true);
+        DefaultTableXYDataset<String> dataset2 = new DefaultTableXYDataset<>(true);
         dataset2.addSeries(createSeriesA());
         assertEquals(2, dataset2.getItemCount());  // should be 2 items
         dataset2.addSeries(createSeriesB());
@@ -216,8 +216,8 @@ public class TableXYDatasetTest {
      *
      * @return A series.
      */
-    private XYSeries createSeriesA() {
-        XYSeries s = new XYSeries("A", true, false);
+    private XYSeries<String> createSeriesA() {
+        XYSeries<String> s = new XYSeries<>("A", true, false);
         s.add(1.0, 1.1);
         s.add(2.0, null);
         return s;
@@ -228,8 +228,8 @@ public class TableXYDatasetTest {
      *
      * @return A series.
      */
-    private XYSeries createSeriesB() {
-        XYSeries s = new XYSeries("B", true, false);
+    private XYSeries<String> createSeriesB() {
+        XYSeries<String> s = new XYSeries<>("B", true, false);
         s.add(1.0, null);
         s.add(2.0, 2.2);
         return s;
@@ -240,8 +240,8 @@ public class TableXYDatasetTest {
      *
      * @return A series.
      */
-    private XYSeries createSeries1() {
-        XYSeries series1 = new XYSeries("Series 1", true, false);
+    private XYSeries<String> createSeries1() {
+        XYSeries<String> series1 = new XYSeries<>("Series 1", true, false);
         series1.add(1.0, 1.0);
         series1.add(2.0, 1.0);
         series1.add(4.0, 1.0);
@@ -254,8 +254,8 @@ public class TableXYDatasetTest {
      *
      * @return A series.
      */
-    private XYSeries createSeries2() {
-        XYSeries series2 = new XYSeries("Series 2", true, false);
+    private XYSeries<String> createSeries2() {
+        XYSeries<String> series2 = new XYSeries<>("Series 2", true, false);
         series2.add(2.0, 2.0);
         series2.add(3.0, 2.0);
         series2.add(4.0, 2.0);

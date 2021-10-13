@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * DialValueIndicatorTest.java
  * ---------------------------
- * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -36,9 +36,9 @@
 
 package org.jfree.chart.plot.dial;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -46,11 +46,12 @@ import java.awt.Font;
 import java.awt.GradientPaint;
 
 import org.jfree.chart.TestUtils;
-import org.jfree.chart.ui.RectangleAnchor;
-import org.jfree.chart.ui.RectangleInsets;
-import org.jfree.chart.ui.TextAnchor;
+import org.jfree.chart.api.RectangleAnchor;
+import org.jfree.chart.api.RectangleInsets;
+import org.jfree.chart.text.TextAnchor;
+import org.jfree.chart.internal.CloneUtils;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link DialValueIndicator} class.
@@ -178,7 +179,7 @@ public class DialValueIndicatorTest {
     public void testCloning() throws CloneNotSupportedException {
         // test a default instance
         DialValueIndicator i1 = new DialValueIndicator(0);
-        DialValueIndicator i2 = (DialValueIndicator) i1.clone();
+        DialValueIndicator i2 = CloneUtils.clone(i1);
         assertTrue(i1 != i2);
         assertTrue(i1.getClass() == i2.getClass());
         assertTrue(i1.equals(i2));
@@ -197,8 +198,7 @@ public class DialValueIndicatorTest {
     @Test
     public void testSerialization() {
         DialValueIndicator i1 = new DialValueIndicator(0);
-        DialValueIndicator i2 = (DialValueIndicator) 
-                TestUtils.serialised(i1);
+        DialValueIndicator i2 = TestUtils.serialised(i1);
         assertEquals(i1, i2);
     }
 

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,21 +27,10 @@
  * ----------------------
  * BorderArrangement.java
  * ----------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited.
+ * (C) Copyright 2004-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 22-Oct-2004 : Version 1 (DG);
- * 08-Feb-2005 : Updated for changes in RectangleConstraint (DG);
- * 24-Feb-2005 : Improved arrangeRR() method (DG);
- * 03-May-2005 : Implemented Serializable and added equals() method (DG);
- * 13-May-2005 : Fixed bugs in the arrange() method (DG);
- * 08-Apr-2008 : Fixed bug in arrangeFF() method where width is too small for
- *               left and right blocks (DG);
- * 21-Nov-2013 : Fixed bug #1084 (DG);
  *
  */
 
@@ -50,9 +39,9 @@ package org.jfree.chart.block;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
-import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.ui.Size2D;
-import org.jfree.chart.util.ObjectUtils;
+import java.util.Objects;
+
+import org.jfree.chart.api.RectangleEdge;
 
 import org.jfree.data.Range;
 
@@ -517,21 +506,37 @@ public class BorderArrangement implements Arrangement, Serializable {
             return false;
         }
         BorderArrangement that = (BorderArrangement) obj;
-        if (!ObjectUtils.equal(this.topBlock, that.topBlock)) {
+        if (!Objects.equals(this.topBlock, that.topBlock)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.bottomBlock, that.bottomBlock)) {
+        if (!Objects.equals(this.bottomBlock, that.bottomBlock)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.leftBlock, that.leftBlock)) {
+        if (!Objects.equals(this.leftBlock, that.leftBlock)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.rightBlock, that.rightBlock)) {
+        if (!Objects.equals(this.rightBlock, that.rightBlock)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.centerBlock, that.centerBlock)) {
+        if (!Objects.equals(this.centerBlock, that.centerBlock)) {
             return false;
         }
         return true;
+    }
+
+    /**
+     * Returns a hash code for this instance.
+     * 
+     * @return A hash code. 
+     */
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 31 * hash + Objects.hashCode(this.centerBlock);
+        hash = 31 * hash + Objects.hashCode(this.topBlock);
+        hash = 31 * hash + Objects.hashCode(this.bottomBlock);
+        hash = 31 * hash + Objects.hashCode(this.leftBlock);
+        hash = 31 * hash + Objects.hashCode(this.rightBlock);
+        return hash;
     }
 }

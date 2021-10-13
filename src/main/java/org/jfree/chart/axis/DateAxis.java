@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------
  * DateAxis.java
  * -------------
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Jonathan Nash;
@@ -53,21 +53,22 @@ import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.TimeZone;
 
 import org.jfree.chart.event.AxisChangeEvent;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.ValueAxisPlot;
-import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.ui.RectangleInsets;
-import org.jfree.chart.ui.TextAnchor;
-import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.Args;
+import org.jfree.chart.api.RectangleEdge;
+import org.jfree.chart.api.RectangleInsets;
+import org.jfree.chart.text.TextAnchor;
+import org.jfree.chart.internal.Args;
 import org.jfree.data.Range;
 import org.jfree.data.time.DateRange;
 import org.jfree.data.time.Month;
@@ -241,8 +242,6 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
 
     /**
      * The locale for the axis ({@code null} is not permitted).
-     *
-     * @since 1.0.11
      */
     private Locale locale;
 
@@ -271,8 +270,6 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      * @param label  the axis label ({@code null} permitted).
      * @param zone  the time zone.
      * @param locale  the locale ({@code null} not permitted).
-     *
-     * @since 1.0.11
      */
     public DateAxis(String label, TimeZone zone, Locale locale) {
         super(label, DateAxis.createStandardDateTickUnits(zone, locale));
@@ -292,8 +289,6 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      *
      * @return The time zone (never {@code null}).
      *
-     * @since 1.0.4
-     *
      * @see #setTimeZone(TimeZone)
      */
     public TimeZone getTimeZone() {
@@ -305,8 +300,6 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      * all registered listeners.
      *
      * @param zone  the time zone ({@code null} not permitted).
-     *
-     * @since 1.0.4
      *
      * @see #getTimeZone()
      */
@@ -321,8 +314,6 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      * Returns the locale for this axis.
      * 
      * @return The locale (never {@code null}).
-     * 
-     * @since 1.0.18
      */
     public Locale getLocale() {
         return this.locale;
@@ -1025,8 +1016,6 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      * @param locale  the locale ({@code null} not permitted).
      *
      * @return A collection of standard date tick units.
-     *
-     * @since 1.0.11
      */
     public static TickUnitSource createStandardDateTickUnits(TimeZone zone,
             Locale locale) {
@@ -1413,10 +1402,10 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      * @return A list of ticks.
      */
     @Override
-    public List refreshTicks(Graphics2D g2, AxisState state, 
+    public List<? extends Tick> refreshTicks(Graphics2D g2, AxisState state, 
             Rectangle2D dataArea, RectangleEdge edge) {
 
-        List result = null;
+        List<? extends Tick> result = null;
         if (RectangleEdge.isTopOrBottom(edge)) {
             result = refreshTicksHorizontal(g2, dataArea, edge);
         }
@@ -1458,10 +1447,10 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      *
      * @return A list of ticks.
      */
-    protected List refreshTicksHorizontal(Graphics2D g2,
+    protected List<? extends Tick> refreshTicksHorizontal(Graphics2D g2,
                 Rectangle2D dataArea, RectangleEdge edge) {
 
-        List result = new java.util.ArrayList();
+        List<DateTick> result = new ArrayList<>();
 
         Font tickLabelFont = getTickLabelFont();
         g2.setFont(tickLabelFont);
@@ -1533,7 +1522,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
                     }
                 }
 
-                Tick tick = new DateTick(tickDate, tickLabel, anchor,
+                DateTick tick = new DateTick(tickDate, tickLabel, anchor,
                         rotationAnchor, angle);
                 result.add(tick);
                 hasRolled = false;
@@ -1574,10 +1563,10 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
      *
      * @return A list of ticks.
      */
-    protected List refreshTicksVertical(Graphics2D g2,
+    protected List<? extends Tick> refreshTicksVertical(Graphics2D g2,
             Rectangle2D dataArea, RectangleEdge edge) {
 
-        List result = new java.util.ArrayList();
+        List<DateTick> result = new ArrayList<>();
 
         Font tickLabelFont = getTickLabelFont();
         g2.setFont(tickLabelFont);
@@ -1648,7 +1637,7 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
                     }
                 }
 
-                Tick tick = new DateTick(tickDate, tickLabel, anchor,
+                DateTick tick = new DateTick(tickDate, tickLabel, anchor,
                         rotationAnchor, angle);
                 result.add(tick);
                 hasRolled = false;
@@ -1778,24 +1767,22 @@ public class DateAxis extends ValueAxis implements Cloneable, Serializable {
             return false;
         }
         DateAxis that = (DateAxis) obj;
-        if (!ObjectUtils.equal(this.timeZone, that.timeZone)) {
+        if (!Objects.equals(this.timeZone, that.timeZone)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.locale, that.locale)) {
+        if (!Objects.equals(this.locale, that.locale)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.tickUnit, that.tickUnit)) {
+        if (!Objects.equals(this.tickUnit, that.tickUnit)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.dateFormatOverride,
-                that.dateFormatOverride)) {
+        if (!Objects.equals(this.dateFormatOverride, that.dateFormatOverride)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.tickMarkPosition,
-                that.tickMarkPosition)) {
+        if (!Objects.equals(this.tickMarkPosition, that.tickMarkPosition)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.timeline, that.timeline)) {
+        if (!Objects.equals(this.timeline, that.timeline)) {
             return false;
         }
         return super.equals(obj);

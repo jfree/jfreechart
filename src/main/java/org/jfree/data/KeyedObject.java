@@ -39,8 +39,7 @@ package org.jfree.data;
 import java.io.Serializable;
 import java.util.Objects;
 
-import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.api.PublicCloneable;
 
 /**
  * A (key, object) pair.
@@ -133,11 +132,11 @@ public class KeyedObject<K extends Comparable<K>> implements Cloneable,
             return false;
         }
         KeyedObject that = (KeyedObject) obj;
-        if (!ObjectUtils.equal(this.key, that.key)) {
+        if (!Objects.equals(this.key, that.key)) {
             return false;
         }
 
-        if (!ObjectUtils.equal(this.object, that.object)) {
+        if (!Objects.equals(this.object, that.object)) {
             return false;
         }
 

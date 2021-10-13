@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * ----------------------
  * CenterArrangement.java
  * ----------------------
- * (C) Copyright 2005-2008, by Object Refinery Limited.
+ * (C) Copyright 2005-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 08-Mar-2005 : Version 1 (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 20-Jul-2006 : Set bounds of contained block when arranging (DG);
  *
  */
 
@@ -46,7 +40,6 @@ import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 import java.util.List;
-import org.jfree.chart.ui.Size2D;
 
 /**
  * Arranges a block in the center of its container.  This class is immutable.
@@ -144,8 +137,8 @@ public class CenterArrangement implements Arrangement, Serializable {
     protected Size2D arrangeFN(BlockContainer container, Graphics2D g2,
                                RectangleConstraint constraint) {
 
-        List blocks = container.getBlocks();
-        Block b = (Block) blocks.get(0);
+        List<Block> blocks = container.getBlocks();
+        Block b = blocks.get(0);
         Size2D s = b.arrange(g2, RectangleConstraint.NONE);
         double width = constraint.getWidth();
         Rectangle2D bounds = new Rectangle2D.Double((width - s.width) / 2.0,
@@ -280,8 +273,8 @@ public class CenterArrangement implements Arrangement, Serializable {
      * @return The size after the arrangement.
      */
     protected Size2D arrangeNN(BlockContainer container, Graphics2D g2) {
-        List blocks = container.getBlocks();
-        Block b = (Block) blocks.get(0);
+        List<Block> blocks = container.getBlocks();
+        Block b = blocks.get(0);
         Size2D s = b.arrange(g2, RectangleConstraint.NONE);
         b.setBounds(new Rectangle2D.Double(0.0, 0.0, s.width, s.height));
         return new Size2D(s.width, s.height);

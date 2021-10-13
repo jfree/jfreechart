@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,17 +27,10 @@
  * -------------------
  * GrayPaintScale.java
  * -------------------
- * (C) Copyright 2006-2009, by Object Refinery Limited.
+ * (C) Copyright 2006-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 05-Jul-2006 : Version 1 (DG);
- * 31-Jan-2007 : Renamed min and max to lowerBound and upperBound (DG);
- * 26-Sep-2007 : Fixed bug 1767315, problem in getPaint() method (DG);
- * 29-Jan-2009 : Added alpha transparency field and hashCode() method (DG);
  *
  */
 
@@ -47,13 +40,11 @@ import java.awt.Color;
 import java.awt.Paint;
 import java.io.Serializable;
 
-import org.jfree.chart.HashUtils;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.internal.HashUtils;
+import org.jfree.chart.api.PublicCloneable;
 
 /**
  * A paint scale that returns shades of gray.
- *
- * @since 1.0.4
  */
 public class GrayPaintScale
         implements PaintScale, PublicCloneable, Serializable {
@@ -66,8 +57,6 @@ public class GrayPaintScale
 
     /**
      * The alpha transparency (0-255).
-     *
-     * @since 1.0.13
      */
     private int alpha;
 
@@ -101,8 +90,6 @@ public class GrayPaintScale
      * @throws IllegalArgumentException if {@code lowerBound} is not
      *       less than {@code upperBound}, or {@code alpha} is not in
      *       the range 0 to 255.
-     *
-     * @since 1.0.13
      */
     public GrayPaintScale(double lowerBound, double upperBound, int alpha) {
         if (lowerBound >= upperBound) {
@@ -147,8 +134,6 @@ public class GrayPaintScale
      * Returns the alpha transparency that was specified in the constructor.
      * 
      * @return The alpha transparency (in the range 0 to 255).
-     * 
-     * @since 1.0.13
      */
     public int getAlpha() {
         return this.alpha;

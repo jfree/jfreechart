@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,35 +27,10 @@
  * -----------
  * Marker.java
  * -----------
- * (C) Copyright 2002-2017, by Object Refinery Limited.
+ * (C) Copyright 2002-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Nicolas Brodu;
- *
- * Changes
- * -------
- * 02-Jul-2002 : Added extra constructor, standard header and Javadoc
- *               comments (DG);
- * 20-Aug-2002 : Added the outline stroke attribute (DG);
- * 02-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 16-Oct-2002 : Added new constructor (DG);
- * 26-Mar-2003 : Implemented Serializable (DG);
- * 21-May-2003 : Added labels (DG);
- * 11-Sep-2003 : Implemented Cloneable (NB);
- * 05-Nov-2003 : Added checks to ensure some attributes are never null (DG);
- * 11-Feb-2003 : Moved to org.jfree.chart.plot package, plus significant API
- *               changes to support IntervalMarker in plots (DG);
- * 14-Jun-2004 : Updated equals() method (DG);
- * 21-Jan-2005 : Added settings to control direction of horizontal and
- *               vertical label offsets (DG);
- * 01-Jun-2005 : Modified to use only one label offset type - this will be
- *               applied to the domain or range axis as appropriate (DG);
- * 06-Jun-2005 : Fix equals() method to handle GradientPaint (DG);
- * 19-Aug-2005 : Changed constructor from public --> protected (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 05-Sep-2006 : Added MarkerChangeListener support (DG);
- * 26-Sep-2007 : Fix for serialization bug 1802195 (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -71,26 +46,23 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.EventListener;
+import java.util.Objects;
 
 import javax.swing.event.EventListenerList;
 
 import org.jfree.chart.event.MarkerChangeEvent;
 import org.jfree.chart.event.MarkerChangeListener;
-import org.jfree.chart.ui.LengthAdjustmentType;
-import org.jfree.chart.ui.RectangleAnchor;
-import org.jfree.chart.ui.RectangleInsets;
-import org.jfree.chart.ui.TextAnchor;
-import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.api.LengthAdjustmentType;
+import org.jfree.chart.api.RectangleAnchor;
+import org.jfree.chart.api.RectangleInsets;
+import org.jfree.chart.text.TextAnchor;
+import org.jfree.chart.internal.PaintUtils;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.internal.SerialUtils;
 
 /**
  * The base class for markers that can be added to plots to highlight a value
  * or range of values.
- * <br><br>
- * An event notification mechanism was added to this class in JFreeChart
- * version 1.0.3.
  */
 public abstract class Marker implements Cloneable, Serializable {
 
@@ -130,12 +102,10 @@ public abstract class Marker implements Cloneable, Serializable {
     /** The text anchor for the label. */
     private TextAnchor labelTextAnchor;
 
-    /** The label offset from the marker rectangle. */
+    /** The label offset from the marker rectangle (see also labelOffsetType). */
     private RectangleInsets labelOffset;
 
-    /**
-     * The offset type for the domain or range axis (never {@code null}).
-     */
+    /** The offset type for the label (see also labelOffset). */
     private LengthAdjustmentType labelOffsetType;
 
     /** Storage for registered change listeners. */
@@ -410,8 +380,6 @@ public abstract class Marker implements Cloneable, Serializable {
      * {@code Color(100, 100, 100, 100)}..
      * 
      * @return The label background color (never {@code null}).
-     * 
-     * @since 1.0.18
      */
     public Color getLabelBackgroundColor() {
         return this.labelBackgroundColor;
@@ -421,8 +389,6 @@ public abstract class Marker implements Cloneable, Serializable {
      * Sets the label background color.
      * 
      * @param color  the color ({@code null} not permitted).
-     * 
-     * @since 1.0.18
      */
     public void setLabelBackgroundColor(Color color) {
         Args.nullNotPermitted(color, "color");
@@ -482,7 +448,7 @@ public abstract class Marker implements Cloneable, Serializable {
     }
 
     /**
-     * Returns the label offset type.
+     * Returns the label offset type.  
      *
      * @return The type (never {@code null}).
      *
@@ -537,8 +503,6 @@ public abstract class Marker implements Cloneable, Serializable {
      * @param listener  the object to be registered.
      *
      * @see #removeChangeListener(MarkerChangeListener)
-     *
-     * @since 1.0.3
      */
     public void addChangeListener(MarkerChangeListener listener) {
         this.listenerList.add(MarkerChangeListener.class, listener);
@@ -550,8 +514,6 @@ public abstract class Marker implements Cloneable, Serializable {
      * @param listener  the object to be unregistered.
      *
      * @see #addChangeListener(MarkerChangeListener)
-     *
-     * @since 1.0.3
      */
     public void removeChangeListener(MarkerChangeListener listener) {
         this.listenerList.remove(MarkerChangeListener.class, listener);
@@ -561,8 +523,6 @@ public abstract class Marker implements Cloneable, Serializable {
      * Notifies all registered listeners that the marker has been modified.
      *
      * @param event  information about the change event.
-     *
-     * @since 1.0.3
      */
     public void notifyListeners(MarkerChangeEvent event) {
 
@@ -581,10 +541,8 @@ public abstract class Marker implements Cloneable, Serializable {
      * @param listenerType  the listener type.
      *
      * @return The array of listeners.
-     *
-     * @since 1.0.3
      */
-    public EventListener[] getListeners(Class listenerType) {
+    public <T extends EventListener> T[] getListeners(Class<T> listenerType) {
         return this.listenerList.getListeners(listenerType);
     }
 
@@ -607,22 +565,22 @@ public abstract class Marker implements Cloneable, Serializable {
         if (!PaintUtils.equal(this.paint, that.paint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.stroke, that.stroke)) {
+        if (!Objects.equals(this.stroke, that.stroke)) {
             return false;
         }
         if (!PaintUtils.equal(this.outlinePaint, that.outlinePaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.outlineStroke, that.outlineStroke)) {
+        if (!Objects.equals(this.outlineStroke, that.outlineStroke)) {
             return false;
         }
         if (this.alpha != that.alpha) {
             return false;
         }
-        if (!ObjectUtils.equal(this.label, that.label)) {
+        if (!Objects.equals(this.label, that.label)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.labelFont, that.labelFont)) {
+        if (!Objects.equals(this.labelFont, that.labelFont)) {
             return false;
         }
         if (!PaintUtils.equal(this.labelPaint, that.labelPaint)) {
@@ -637,13 +595,27 @@ public abstract class Marker implements Cloneable, Serializable {
         if (this.labelTextAnchor != that.labelTextAnchor) {
             return false;
         }
-        if (!ObjectUtils.equal(this.labelOffset, that.labelOffset)) {
+        if (!Objects.equals(this.labelOffset, that.labelOffset)) {
             return false;
         }
         if (!this.labelOffsetType.equals(that.labelOffsetType)) {
             return false;
         }
         return true;
+    }
+
+    /**
+     * Returns a hash code for this instance.
+     * 
+     * @return A hash code. 
+     */
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 29 * hash + Objects.hashCode(this.label);
+        hash = 29 * hash + Objects.hashCode(this.labelAnchor);
+        hash = 29 * hash + Objects.hashCode(this.labelTextAnchor);
+        return hash;
     }
 
     /**

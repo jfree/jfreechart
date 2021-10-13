@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * SamplingXYLineRenderer.java
  * ---------------------------
- * (C) Copyright 2008-2020, by Object Refinery Limited.
+ * (C) Copyright 2008-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -52,10 +52,11 @@ import org.jfree.chart.plot.CrosshairState;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.util.PublicCloneable;
-import org.jfree.chart.util.SerialUtils;
-import org.jfree.chart.util.ShapeUtils;
+import org.jfree.chart.api.RectangleEdge;
+import org.jfree.chart.api.PublicCloneable;
+import org.jfree.chart.internal.CloneUtils;
+import org.jfree.chart.internal.SerialUtils;
+import org.jfree.chart.internal.ShapeUtils;
 import org.jfree.data.xy.XYDataset;
 
 /**
@@ -63,8 +64,6 @@ import org.jfree.data.xy.XYDataset;
  * every data item - instead, it tries to plot only those data items that
  * make a difference to the visual output (the other data items are skipped).  
  * This renderer is designed for use with the {@link XYPlot} class.
- *
- * @since 1.0.13
  */
 public class SamplingXYLineRenderer extends AbstractXYItemRenderer
         implements XYItemRenderer, Cloneable, PublicCloneable, Serializable {
@@ -308,9 +307,7 @@ public class SamplingXYLineRenderer extends AbstractXYItemRenderer
     @Override
     public Object clone() throws CloneNotSupportedException {
         SamplingXYLineRenderer clone = (SamplingXYLineRenderer) super.clone();
-        if (this.legendLine != null) {
-            clone.legendLine = ShapeUtils.clone(this.legendLine);
-        }
+        clone.legendLine = CloneUtils.clone(this.legendLine);
         return clone;
     }
 

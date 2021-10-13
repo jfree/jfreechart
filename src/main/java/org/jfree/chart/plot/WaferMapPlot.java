@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -28,20 +28,10 @@
  * WaferMapPlot.java
  * -----------------
  *
- * (C) Copyright 2003-2017, by Robert Redburn and Contributors.
+ * (C) Copyright 2003-2021, by Robert Redburn and Contributors.
  *
  * Original Author:  Robert Redburn;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 25-Nov-2003 : Version 1 contributed by Robert Redburn (DG);
- * 05-May-2005 : Updated draw() method parameters (DG);
- * 10-Jun-2005 : Changed private --> protected for drawChipGrid(),
- *               drawWaferEdge() and getWafterEdge() (DG);
- * 16-Jun-2005 : Added default constructor and setDataset() method (DG);
- * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
- *               Jess Thrysoee (DG);
  *
  */
 
@@ -59,14 +49,14 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 import java.util.ResourceBundle;
+import org.jfree.chart.ChartElementVisitor;
 
-import org.jfree.chart.LegendItemCollection;
+import org.jfree.chart.legend.LegendItemCollection;
 import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.event.RendererChangeListener;
 import org.jfree.chart.renderer.WaferMapRenderer;
-import org.jfree.chart.ui.RectangleInsets;
-import org.jfree.chart.util.ResourceBundleWrapper;
+import org.jfree.chart.api.RectangleInsets;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.WaferMapDataset;
 
@@ -102,14 +92,13 @@ public class WaferMapPlot extends Plot implements RendererChangeListener,
 
     /** The resourceBundle for the localization. */
     protected static ResourceBundle localizationResources
-            = ResourceBundleWrapper.getBundle(
-                    "org.jfree.chart.plot.LocalizationBundle");
+            = ResourceBundle.getBundle("org.jfree.chart.plot.LocalizationBundle");
 
     /** The plot orientation.
      *  vertical = notch down
      *  horizontal = notch right
      */
-    private PlotOrientation orientation;
+    private final PlotOrientation orientation;
 
     /** The dataset. */
     private WaferMapDataset dataset;
@@ -196,7 +185,6 @@ public class WaferMapPlot extends Plot implements RendererChangeListener,
         // set the new dataset, and register the chart as a change listener...
         this.dataset = dataset;
         if (dataset != null) {
-            setDatasetGroup(dataset.getGroup());
             dataset.addChangeListener(this);
         }
 
@@ -223,6 +211,18 @@ public class WaferMapPlot extends Plot implements RendererChangeListener,
     }
 
     /**
+     * Receives a chart element visitor.  Many plot subclasses will override
+     * this method to handle their subcomponents.
+     * 
+     * @param visitor  the visitor ({@code null} not permitted).
+     */
+    @Override
+    public void receive(ChartElementVisitor visitor) {
+        // FIXME : handle the renderer
+        super.receive(visitor);
+    }
+
+    /**
      * Draws the wafermap view.
      *
      * @param g2  the graphics device.
@@ -233,8 +233,7 @@ public class WaferMapPlot extends Plot implements RendererChangeListener,
      */
     @Override
     public void draw(Graphics2D g2, Rectangle2D area, Point2D anchor,
-                     PlotState state,
-                     PlotRenderingInfo info) {
+            PlotState state, PlotRenderingInfo info) {
 
         // if the plot area is too small, just return...
         boolean b1 = (area.getWidth() <= MINIMUM_WIDTH_TO_DRAW);

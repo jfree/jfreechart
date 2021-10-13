@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,35 +27,27 @@
  * ----------------------------
  * XYPointerAnnotationTest.java
  * ----------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 19-Aug-2003 : Version 1 (DG);
- * 13-Oct-2003 : Expanded test for equals() method (DG);
- * 07-Jan-2005 : Added hashCode() test (DG);
- * 20-Feb-2006 : Added 'x' and 'y' checks to testEquals() (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG);
  *
  */
 
 package org.jfree.chart.annotations;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Stroke;
 
 import org.jfree.chart.TestUtils;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.api.PublicCloneable;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link XYPointerAnnotation} class.
@@ -183,7 +175,7 @@ public class XYPointerAnnotationTest {
     public void testSerialization() {
         XYPointerAnnotation a1 = new XYPointerAnnotation("Label", 10.0, 20.0,
                 Math.PI);
-        XYPointerAnnotation a2 = (XYPointerAnnotation) TestUtils.serialised(a1);
+        XYPointerAnnotation a2 = TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 

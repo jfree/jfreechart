@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,25 +27,20 @@
  * -----------------------
  * CompositeTitleTest.java
  * -----------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 04-Feb-2005 : Version 1 (DG);
- * 09-Jul-2008 : Added new field into testEquals() (DG);
  *
  */
 
 package org.jfree.chart.title;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.fail;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.awt.Color;
 import java.awt.GradientPaint;
@@ -54,8 +49,9 @@ import org.jfree.chart.TestUtils;
 
 import org.jfree.chart.block.BlockBorder;
 import org.jfree.chart.block.BlockContainer;
-import org.jfree.chart.ui.RectangleInsets;
-import org.junit.Test;
+import org.jfree.chart.api.RectangleInsets;
+import org.jfree.chart.internal.CloneUtils;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link CompositeTitle} class.
@@ -140,7 +136,7 @@ public class CompositeTitleTest {
                 3.0f, 4.0f, Color.YELLOW));
         CompositeTitle t2 = null;
         try {
-            t2 = (CompositeTitle) t1.clone();
+            t2 = CloneUtils.clone(t1);
         }
         catch (CloneNotSupportedException e) {
             fail(e.toString());
@@ -159,7 +155,7 @@ public class CompositeTitleTest {
         t1.getContainer().add(new TextTitle("T1"));
         t1.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.BLUE));
-        CompositeTitle t2 = (CompositeTitle) TestUtils.serialised(t1);
+        CompositeTitle t2 = TestUtils.serialised(t1);
         assertEquals(t1, t2);
     }
 

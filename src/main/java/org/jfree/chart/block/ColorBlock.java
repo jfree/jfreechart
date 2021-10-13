@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,20 +27,10 @@
  * ---------------
  * ColorBlock.java
  * ---------------
- * (C) Copyright 2004-2016, by Object Refinery Limited.
+ * (C) Copyright 2004-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 22-Oct-2004 : Version 1 (DG);
- * 20-Apr-2005 : Added new draw() method (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 16-Mar-2007 : Implemented equals() and fixed serialization (DG);
- * 08-Apr-2008 : Added code for margin, border and padding in draw()
- *               method (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -52,10 +42,10 @@ import java.awt.geom.Rectangle2D;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import org.jfree.chart.ui.Size2D;
-import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.SerialUtils;
+import java.util.Objects;
+import org.jfree.chart.internal.PaintUtils;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.internal.SerialUtils;
 
 /**
  * A block that is filled with a single color.
@@ -86,8 +76,6 @@ public class ColorBlock extends AbstractBlock implements Block {
      * Returns the paint.
      *
      * @return The paint (never {@code null}).
-     *
-     * @since 1.0.5
      */
     public Paint getPaint() {
         return this.paint;
@@ -159,6 +147,18 @@ public class ColorBlock extends AbstractBlock implements Block {
             return false;
         }
         return super.equals(obj);
+    }
+
+    /**
+     * Returns a hash code for this instance.
+     * 
+     * @return A hash code. 
+     */
+    @Override
+    public int hashCode() {
+        int hash = super.hashCode();
+        hash = 79 * hash + Objects.hashCode(this.paint);
+        return hash;
     }
 
     /**

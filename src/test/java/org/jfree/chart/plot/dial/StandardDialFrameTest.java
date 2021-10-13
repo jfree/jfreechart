@@ -32,25 +32,21 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * Changes
- * -------
- * 03-Nov-2006 : Version 1 (DG);
- * 29-Oct-2007 : Renamed StandardDialFrameTests (DG);
- *
  */
 
 package org.jfree.chart.plot.dial;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.GradientPaint;
 
 import org.jfree.chart.TestUtils;
-import org.junit.Test;
+import org.jfree.chart.internal.CloneUtils;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link StandardDialFrame} class.
@@ -120,7 +116,7 @@ public class StandardDialFrameTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         StandardDialFrame f1 = new StandardDialFrame();
-        StandardDialFrame f2 = (StandardDialFrame) f1.clone();
+        StandardDialFrame f2 = CloneUtils.clone(f1);
         assertTrue(f1 != f2);
         assertTrue(f1.getClass() == f2.getClass());
         assertTrue(f1.equals(f2));
@@ -138,7 +134,7 @@ public class StandardDialFrameTest {
     @Test
     public void testSerialization() {
         StandardDialFrame f1 = new StandardDialFrame();
-        StandardDialFrame f2 = (StandardDialFrame) TestUtils.serialised(f1);
+        StandardDialFrame f2 = TestUtils.serialised(f1);
         assertEquals(f1, f2);
     }
 

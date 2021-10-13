@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,29 +27,20 @@
  * ---------
  * Tick.java
  * ---------
- * (C) Copyright 2000-2016, by Object Refinery Limited.
+ * (C) Copyright 2000-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Nicolas Brodu;
- *
- * Changes
- * -------
- * 18-Sep-2001 : Added standard header and fixed DOS encoding problem (DG);
- * 26-Sep-2002 : Fixed errors reported by Checkstyle (DG);
- * 08-Nov-2002 : Moved to new package com.jrefinery.chart.axis (DG);
- * 26-Mar-2003 : Implemented Serializable (DG);
- * 12-Sep-2003 : Implemented Cloneable (NB);
- * 07-Nov-2003 : Added subclasses for particular types of ticks (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
 package org.jfree.chart.axis;
 
 import java.io.Serializable;
-import org.jfree.chart.ui.TextAnchor;
-import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.Args;
+import java.util.Objects;
+
+import org.jfree.chart.text.TextAnchor;
+import org.jfree.chart.internal.Args;
 
 /**
  * The base class used to represent labeled ticks along an axis.
@@ -141,13 +132,13 @@ public abstract class Tick implements Serializable, Cloneable {
         }
         if (obj instanceof Tick) {
             Tick t = (Tick) obj;
-            if (!ObjectUtils.equal(this.text, t.text)) {
+            if (!Objects.equals(this.text, t.text)) {
                 return false;
             }
-            if (!ObjectUtils.equal(this.textAnchor, t.textAnchor)) {
+            if (!Objects.equals(this.textAnchor, t.textAnchor)) {
                 return false;
             }
-            if (!ObjectUtils.equal(this.rotationAnchor, t.rotationAnchor)) {
+            if (!Objects.equals(this.rotationAnchor, t.rotationAnchor)) {
                 return false;
             }
             if (!(this.angle == t.angle)) {

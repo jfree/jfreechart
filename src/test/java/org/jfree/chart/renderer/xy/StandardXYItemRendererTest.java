@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,28 +27,18 @@
  * -------------------------------
  * StandardXYItemRendererTest.java
  * -------------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 25-Mar-2003 : Version 1 (DG);
- * 22-Oct-2003 : Added hashCode test (DG);
- * 08-Oct-2004 : Strengthened test for equals() method (DG);
- * 14-Mar-2007 : Added new checks in testEquals() and testCloning() (DG);
- * 17-May-2007 : Added testGetLegendItemSeriesIndex() (DG);
- * 08-Jun-2007 : Added testNoDisplayedItem() (DG);
- * 22-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
 package org.jfree.chart.renderer.xy;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.awt.Graphics2D;
 import java.awt.geom.Line2D;
@@ -58,18 +48,19 @@ import java.awt.image.BufferedImage;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartRenderingInfo;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.LegendItem;
+import org.jfree.chart.legend.LegendItem;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.entity.XYItemEntity;
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.util.PublicCloneable;
-import org.jfree.chart.util.UnitType;
+import org.jfree.chart.internal.CloneUtils;
+import org.jfree.chart.api.PublicCloneable;
+import org.jfree.chart.api.UnitType;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link StandardXYItemRenderer} class.
@@ -151,13 +142,15 @@ public class StandardXYItemRendererTest {
 
     /**
      * Confirm that cloning works.
+     * 
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
         StandardXYItemRenderer r1 = new StandardXYItemRenderer();
         Rectangle2D rect1 = new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0);
         r1.setLegendLine(rect1);
-        StandardXYItemRenderer r2 = (StandardXYItemRenderer) r1.clone();
+        StandardXYItemRenderer r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -189,8 +182,7 @@ public class StandardXYItemRendererTest {
     @Test
     public void testSerialization() {
         StandardXYItemRenderer r1 = new StandardXYItemRenderer();
-        StandardXYItemRenderer r2 = (StandardXYItemRenderer) 
-                TestUtils.serialised(r1);
+        StandardXYItemRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 
@@ -200,30 +192,30 @@ public class StandardXYItemRendererTest {
      */
     @Test
     public void testGetLegendItemSeriesIndex() {
-        XYSeriesCollection d1 = new XYSeriesCollection();
-        XYSeries s1 = new XYSeries("S1");
+        XYSeriesCollection<String> d1 = new XYSeriesCollection<>();
+        XYSeries<String> s1 = new XYSeries<>("S1");
         s1.add(1.0, 1.1);
-        XYSeries s2 = new XYSeries("S2");
+        XYSeries<String> s2 = new XYSeries<>("S2");
         s2.add(1.0, 1.1);
         d1.addSeries(s1);
         d1.addSeries(s2);
 
-        XYSeriesCollection d2 = new XYSeriesCollection();
-        XYSeries s3 = new XYSeries("S3");
+        XYSeriesCollection<String> d2 = new XYSeriesCollection<>();
+        XYSeries<String> s3 = new XYSeries<>("S3");
         s3.add(1.0, 1.1);
-        XYSeries s4 = new XYSeries("S4");
+        XYSeries<String> s4 = new XYSeries<>("S4");
         s4.add(1.0, 1.1);
-        XYSeries s5 = new XYSeries("S5");
+        XYSeries<String> s5 = new XYSeries<>("S5");
         s5.add(1.0, 1.1);
         d2.addSeries(s3);
         d2.addSeries(s4);
         d2.addSeries(s5);
 
         StandardXYItemRenderer r = new StandardXYItemRenderer();
-        XYPlot plot = new XYPlot(d1, new NumberAxis("x"),
+        XYPlot<String> plot = new XYPlot<>(d1, new NumberAxis("x"),
                 new NumberAxis("y"), r);
         plot.setDataset(1, d2);
-        /*JFreeChart chart =*/ new JFreeChart(plot);
+        JFreeChart chart = new JFreeChart(plot);
         LegendItem li = r.getLegendItem(1, 2);
         assertEquals("S5", li.getLabel());
         assertEquals(1, li.getDatasetIndex());
@@ -236,13 +228,13 @@ public class StandardXYItemRendererTest {
      */
     @Test
     public void testNoDisplayedItem() {
-        XYSeriesCollection dataset = new XYSeriesCollection();
-        XYSeries s1 = new XYSeries("S1");
+        XYSeriesCollection<String> dataset = new XYSeriesCollection<>();
+        XYSeries<String> s1 = new XYSeries<>("S1");
         s1.add(10.0, 10.0);
         dataset.addSeries(s1);
         JFreeChart chart = ChartFactory.createXYLineChart("Title", "X", "Y",
                 dataset, PlotOrientation.VERTICAL, false, true, false);
-        XYPlot plot = (XYPlot) chart.getPlot();
+        XYPlot<?> plot = (XYPlot) chart.getPlot();
         plot.setRenderer(new StandardXYItemRenderer());
         NumberAxis xAxis = (NumberAxis) plot.getDomainAxis();
         xAxis.setRange(0.0, 5.0);
@@ -255,8 +247,7 @@ public class StandardXYItemRendererTest {
         chart.draw(g2, new Rectangle2D.Double(0, 0, 200, 100), null, info);
         g2.dispose();
         EntityCollection ec = info.getEntityCollection();
-        assertFalse(TestUtils.containsInstanceOf(ec.getEntities(),
-                XYItemEntity.class));
+        assertFalse(TestUtils.containsInstanceOf(ec.getEntities(), XYItemEntity.class));
     }
 
 }

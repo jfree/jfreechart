@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,20 +27,10 @@
  * ----------------
  * DialPointer.java
  * ----------------
- * (C) Copyright 2006-2017, by Object Refinery Limited.
+ * (C) Copyright 2006-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 03-Nov-2006 : Version 1 (DG);
- * 17-Oct-2007 : Added equals() overrides (DG);
- * 24-Oct-2007 : Implemented PublicCloneable, changed default radius,
- *               and added argument checks (DG);
- * 23-Nov-2007 : Added fillPaint and outlinePaint attributes to
- *               DialPointer.Pointer (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -60,16 +50,14 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import org.jfree.chart.HashUtils;
-import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.PublicCloneable;
-import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.internal.HashUtils;
+import org.jfree.chart.internal.PaintUtils;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.api.PublicCloneable;
+import org.jfree.chart.internal.SerialUtils;
 
 /**
  * A base class for the pointer in a {@link DialPlot}.
- *
- * @since 1.0.7
  */
 public abstract class DialPointer extends AbstractDialLayer
         implements DialLayer, Cloneable, PublicCloneable, Serializable {
@@ -402,18 +390,10 @@ public abstract class DialPointer extends AbstractDialLayer
          */
         private double widthRadius;
 
-        /**
-         * The fill paint.
-         *
-         * @since 1.0.8
-         */
+        /** The fill paint. */
         private transient Paint fillPaint;
 
-        /**
-         * The outline paint.
-         *
-         * @since 1.0.8
-         */
+        /** The outline paint. */
         private transient Paint outlinePaint;
 
         /**
@@ -465,8 +445,6 @@ public abstract class DialPointer extends AbstractDialLayer
          * @return The paint (never {@code null}).
          *
          * @see #setFillPaint(Paint)
-         *
-         * @since 1.0.8
          */
         public Paint getFillPaint() {
             return this.fillPaint;
@@ -479,8 +457,6 @@ public abstract class DialPointer extends AbstractDialLayer
          * @param paint  the paint ({@code null} not permitted).
          *
          * @see #getFillPaint()
-         *
-         * @since 1.0.8
          */
         public void setFillPaint(Paint paint) {
             Args.nullNotPermitted(paint, "paint");
@@ -494,8 +470,6 @@ public abstract class DialPointer extends AbstractDialLayer
          * @return The paint (never {@code null}).
          *
          * @see #setOutlinePaint(Paint)
-         *
-         * @since 1.0.8
          */
         public Paint getOutlinePaint() {
             return this.outlinePaint;
@@ -508,8 +482,6 @@ public abstract class DialPointer extends AbstractDialLayer
          * @param paint  the paint ({@code null} not permitted).
          *
          * @see #getOutlinePaint()
-         *
-         * @since 1.0.8
          */
         public void setOutlinePaint(Paint paint) {
             Args.nullNotPermitted(paint, "paint");

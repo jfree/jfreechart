@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,37 +27,29 @@
  * ---------------------------
  * XYStepAreaRendererTest.java
  * ---------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Matthias Rose;
- *
- * Changes
- * -------
- * 25-Mar-2003 : Version 1 (DG);
- * 26-Sep-2003 : copied XYStepRendererTests.java and used for
- *               testing XYStepAreaRenderer (MR);
- * 14-Feb-2007 : Extended testEquals() (DG);
- * 22-Apr-2008 : Added testPublicCloneable (DG);
- * 05-Dec-2013 : Add stepPoint to equals() test (DG);
  *
  */
 
 package org.jfree.chart.renderer.xy;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.internal.CloneUtils;
+import org.jfree.chart.api.PublicCloneable;
 import org.jfree.data.xy.DefaultTableXYDataset;
 import org.jfree.data.xy.XYSeries;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link XYStepAreaRenderer} class.
@@ -120,11 +112,13 @@ public class XYStepAreaRendererTest {
 
     /**
      * Confirm that cloning works.
+     * 
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
         XYStepAreaRenderer r1 = new XYStepAreaRenderer();
-        XYStepAreaRenderer r2 = (XYStepAreaRenderer) r1.clone();
+        XYStepAreaRenderer r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -145,8 +139,7 @@ public class XYStepAreaRendererTest {
     @Test
     public void testSerialization() {
         XYStepAreaRenderer r1 = new XYStepAreaRenderer();
-        XYStepAreaRenderer r2 = (XYStepAreaRenderer) 
-                TestUtils.serialised(r1);
+        XYStepAreaRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 
@@ -157,22 +150,22 @@ public class XYStepAreaRendererTest {
     @Test
     public void testDrawWithNullInfo() {
         try {
-            DefaultTableXYDataset dataset = new DefaultTableXYDataset();
+            DefaultTableXYDataset<String> dataset = new DefaultTableXYDataset<>();
 
-            XYSeries s1 = new XYSeries("Series 1", true, false);
+            XYSeries<String> s1 = new XYSeries<>("Series 1", true, false);
             s1.add(5.0, 5.0);
             s1.add(10.0, 15.5);
             s1.add(15.0, 9.5);
             s1.add(20.0, 7.5);
             dataset.addSeries(s1);
 
-            XYSeries s2 = new XYSeries("Series 2", true, false);
+            XYSeries<String> s2 = new XYSeries<>("Series 2", true, false);
             s2.add(5.0, 5.0);
             s2.add(10.0, 15.5);
             s2.add(15.0, 9.5);
             s2.add(20.0, 3.5);
             dataset.addSeries(s2);
-            XYPlot plot = new XYPlot(dataset,
+            XYPlot<String> plot = new XYPlot<>(dataset,
                     new NumberAxis("X"), new NumberAxis("Y"),
                     new XYStepAreaRenderer());
             JFreeChart chart = new JFreeChart(plot);

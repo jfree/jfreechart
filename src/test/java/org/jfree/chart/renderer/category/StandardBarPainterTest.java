@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,27 +27,23 @@
  * ---------------------------
  * StandardBarPainterTest.java
  * ---------------------------
- * (C) Copyright 2008-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2008-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 20-Jun-2008 : Version 1 (DG);
  *
  */
 
 package org.jfree.chart.renderer.category;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.jfree.chart.TestUtils;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.api.PublicCloneable;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link StandardBarPainter} class.
@@ -94,8 +90,7 @@ public class StandardBarPainterTest {
     @Test
     public void testSerialization() {
         StandardBarPainter p1 = new StandardBarPainter();
-        StandardBarPainter p2 = (StandardBarPainter) 
-                TestUtils.serialised(p1);
+        StandardBarPainter p2 = TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 

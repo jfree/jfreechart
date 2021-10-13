@@ -36,12 +36,13 @@
 
 package org.jfree.data;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import org.jfree.chart.TestUtils;
-import org.junit.Test;
+import org.jfree.chart.internal.CloneUtils;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link DefaultKeyedValues2D} class.
@@ -85,7 +86,7 @@ public class DefaultKeyedValues2DTest {
         v1.setValue(1, "V1", "C1");
         v1.setValue(null, "V2", "C1");
         v1.setValue(3, "V3", "C2");
-        DefaultKeyedValues2D<String, String> v2 = (DefaultKeyedValues2D) v1.clone();
+        DefaultKeyedValues2D<String, String> v2 = CloneUtils.clone(v1);
         assertTrue(v1 != v2);
         assertTrue(v1.getClass() == v2.getClass());
         assertTrue(v1.equals(v2));
@@ -106,8 +107,7 @@ public class DefaultKeyedValues2DTest {
         kv2D1.addValue(345.9, "Row2", "Col1");
         kv2D1.addValue(452.7, "Row2", "Col2");
 
-        DefaultKeyedValues2D<String, String> kv2D2 = (DefaultKeyedValues2D) 
-                TestUtils.serialised(kv2D1);
+        DefaultKeyedValues2D<String, String> kv2D2 = TestUtils.serialised(kv2D1);
         assertEquals(kv2D1, kv2D2);
     }
 

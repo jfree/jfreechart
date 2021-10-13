@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * NumberTick.java
  * ---------------
- * (C) Copyright 2003-2020, by Object Refinery Limited.
+ * (C) Copyright 2003-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -36,7 +36,7 @@
 
 package org.jfree.chart.axis;
 
-import org.jfree.chart.ui.TextAnchor;
+import org.jfree.chart.text.TextAnchor;
 
 /**
  * A numerical tick.
@@ -75,8 +75,6 @@ public class NumberTick extends ValueTick {
      *                    point.
      * @param rotationAnchor  defines the rotation point relative to the text.
      * @param angle  the rotation angle (in radians).
-     *
-     * @since 1.0.7
      */
     public NumberTick(TickType tickType, double value, String label,
             TextAnchor textAnchor, TextAnchor rotationAnchor, double angle) {

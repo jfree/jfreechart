@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * -------------
  * TaskTest.java
  * -------------
- * (C) Copyright 2004-2016, by Object Refinery Limited.
+ * (C) Copyright 2004-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 30-Jul-2004 : Version 1 (DG);
  *
  */
 
@@ -43,12 +39,13 @@ package org.jfree.data.gantt;
 import java.util.Date;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.internal.CloneUtils;
 
 import org.jfree.data.time.SimpleTimePeriod;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link Task} class.
@@ -94,7 +91,7 @@ public class TaskTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         Task t1 = new Task("T", new Date(1), new Date(2));
-        Task t2 = (Task) t1.clone();
+        Task t2 = CloneUtils.clone(t1);
         assertTrue(t1 != t2);
         assertTrue(t1.getClass() == t2.getClass());
         assertTrue(t1.equals(t2));
@@ -106,7 +103,7 @@ public class TaskTest {
     @Test
     public void testSerialization() {
         Task t1 = new Task("T", new Date(1), new Date(2));
-        Task t2 = (Task) TestUtils.serialised(t1);
+        Task t2 = TestUtils.serialised(t1);
         assertEquals(t1, t2);
     }
 

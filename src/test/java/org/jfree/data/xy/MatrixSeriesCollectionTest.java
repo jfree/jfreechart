@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,28 +27,24 @@
  * -------------------------------
  * MatrixSeriesCollectionTest.java
  * -------------------------------
- * (C) Copyright 2006-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 27-Nov-2006 : Version 1 (DG);
- * 22-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
 package org.jfree.data.xy;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.jfree.chart.TestUtils;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.internal.CloneUtils;
+import org.jfree.chart.api.PublicCloneable;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link MatrixSeriesCollection} class.
@@ -60,21 +56,21 @@ public class MatrixSeriesCollectionTest {
      */
     @Test
     public void testEquals() {
-        MatrixSeries s1 = new MatrixSeries("Series", 2, 3);
+        MatrixSeries<String> s1 = new MatrixSeries<>("Series", 2, 3);
         s1.update(0, 0, 1.1);
-        MatrixSeriesCollection c1 = new MatrixSeriesCollection();
+        MatrixSeriesCollection<String> c1 = new MatrixSeriesCollection<>();
         c1.addSeries(s1);
-        MatrixSeries s2 = new MatrixSeries("Series", 2, 3);
+        MatrixSeries<String> s2 = new MatrixSeries<>("Series", 2, 3);
         s2.update(0, 0, 1.1);
-        MatrixSeriesCollection c2 = new MatrixSeriesCollection();
+        MatrixSeriesCollection<String> c2 = new MatrixSeriesCollection<>();
         c2.addSeries(s2);
         assertTrue(c1.equals(c2));
         assertTrue(c2.equals(c1));
 
-        c1.addSeries(new MatrixSeries("Empty Series", 1, 1));
+        c1.addSeries(new MatrixSeries<>("Empty Series", 1, 1));
         assertFalse(c1.equals(c2));
 
-        c2.addSeries(new MatrixSeries("Empty Series", 1, 1));
+        c2.addSeries(new MatrixSeries<>("Empty Series", 1, 1));
         assertTrue(c1.equals(c2));
     }
 
@@ -83,11 +79,11 @@ public class MatrixSeriesCollectionTest {
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        MatrixSeries s1 = new MatrixSeries("Series", 2, 3);
+        MatrixSeries<String> s1 = new MatrixSeries<>("Series", 2, 3);
         s1.update(0, 0, 1.1);
-        MatrixSeriesCollection c1 = new MatrixSeriesCollection();
+        MatrixSeriesCollection<String> c1 = new MatrixSeriesCollection<>();
         c1.addSeries(s1);
-        MatrixSeriesCollection c2 = (MatrixSeriesCollection) c1.clone();
+        MatrixSeriesCollection<String> c2 = CloneUtils.clone(c1);
 
         assertTrue(c1 != c2);
         assertTrue(c1.getClass() == c2.getClass());
@@ -103,7 +99,7 @@ public class MatrixSeriesCollectionTest {
      */
     @Test
     public void testPublicCloneable() {
-        MatrixSeriesCollection c1 = new MatrixSeriesCollection();
+        MatrixSeriesCollection<String> c1 = new MatrixSeriesCollection<>();
         assertTrue(c1 instanceof PublicCloneable);
     }
 
@@ -112,12 +108,11 @@ public class MatrixSeriesCollectionTest {
      */
     @Test
     public void testSerialization() {
-        MatrixSeries s1 = new MatrixSeries("Series", 2, 3);
+        MatrixSeries<String> s1 = new MatrixSeries<>("Series", 2, 3);
         s1.update(0, 0, 1.1);
-        MatrixSeriesCollection c1 = new MatrixSeriesCollection();
+        MatrixSeriesCollection<String> c1 = new MatrixSeriesCollection<>();
         c1.addSeries(s1);
-        MatrixSeriesCollection c2 = (MatrixSeriesCollection) 
-                TestUtils.serialised(c1);
+        MatrixSeriesCollection<String> c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 

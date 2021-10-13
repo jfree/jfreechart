@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * NumberAxis.java
  * ---------------
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Laurence Vanhelsuwe;
@@ -48,16 +48,16 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 import org.jfree.chart.event.AxisChangeEvent;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.ValueAxisPlot;
-import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.ui.RectangleInsets;
-import org.jfree.chart.ui.TextAnchor;
-import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.Args;
+import org.jfree.chart.api.RectangleEdge;
+import org.jfree.chart.api.RectangleInsets;
+import org.jfree.chart.text.TextAnchor;
+import org.jfree.chart.internal.Args;
 import org.jfree.data.Range;
 import org.jfree.data.RangeType;
 
@@ -776,27 +776,36 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
 
         TickUnit unit = getTickUnit();
         TickUnitSource tickUnitSource = getStandardTickUnits();
-        // we should use the current tick unit if it gives a count in the range
-        // 2 to 40 otherwise just estimate one that will give a count <= 20
+ 
+        // we should start with the current tick unit if it gives a count in 
+        // the range 3 to 40 otherwise estimate one that will give a count <= 10
         double length = getRange().getLength();
         int count = (int) (length / unit.getSize());
-        if (count < 2 || count > 40) {
-            unit = tickUnitSource.getCeilingTickUnit(length / 20);
+        if (count < 3 || count > 40) {
+            unit = tickUnitSource.getCeilingTickUnit(length / 10);
         }
-        double tickLabelWidth = estimateMaximumTickLabelWidth(g2, unit);
 
+        // now consider the label size relative to the width of the tick unit
+        // and make a guess at the ideal size
         TickUnit unit1 = tickUnitSource.getCeilingTickUnit(unit);
+        double tickLabelWidth = estimateMaximumTickLabelWidth(g2, unit1);
         double unit1Width = lengthToJava2D(unit1.getSize(), dataArea, edge);
-
-        // then extrapolate...
+        NumberTickUnit unit2 = (NumberTickUnit) unit1;
         double guess = (tickLabelWidth / unit1Width) * unit1.getSize();
-        NumberTickUnit unit2 = (NumberTickUnit) 
-                tickUnitSource.getCeilingTickUnit(guess);
-        double unit2Width = lengthToJava2D(unit2.getSize(), dataArea, edge);
 
-        tickLabelWidth = estimateMaximumTickLabelWidth(g2, unit2);
-        if (tickLabelWidth > unit2Width) {
-            unit2 = (NumberTickUnit) tickUnitSource.getLargerTickUnit(unit2);
+        // due to limitations of double precision, when you zoom very far into
+        // a chart, eventually the visible axis range will get reported as 
+        // having length 0, and then 'guess' above will be infinite ... in that 
+        // case we'll just stick with the tick unit we have, it's better than 
+        // throwing an exception 
+        // https://github.com/jfree/jfreechart/issues/64
+        if (Double.isFinite(guess)) {
+            unit2 = (NumberTickUnit) tickUnitSource.getCeilingTickUnit(guess);
+            double unit2Width = lengthToJava2D(unit2.getSize(), dataArea, edge);
+            tickLabelWidth = estimateMaximumTickLabelWidth(g2, unit2);
+            if (tickLabelWidth > unit2Width) {
+                unit2 = (NumberTickUnit) tickUnitSource.getLargerTickUnit(unit2);
+            }
         }
         setTickUnit(unit2, false, false);
     }
@@ -833,7 +842,6 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
         if (tickLabelHeight > unit2Height) {
             unit2 = (NumberTickUnit) tickUnits.getLargerTickUnit(unit2);
         }
-
         setTickUnit(unit2, false, false);
 
     }
@@ -1100,11 +1108,10 @@ public class NumberAxis extends ValueAxis implements Cloneable, Serializable {
         if (this.autoRangeStickyZero != that.autoRangeStickyZero) {
             return false;
         }
-        if (!ObjectUtils.equal(this.tickUnit, that.tickUnit)) {
+        if (!Objects.equals(this.tickUnit, that.tickUnit)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.numberFormatOverride,
-                that.numberFormatOverride)) {
+        if (!Objects.equals(this.numberFormatOverride, that.numberFormatOverride)) {
             return false;
         }
         if (!this.rangeType.equals(that.rangeType)) {

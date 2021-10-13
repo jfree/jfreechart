@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,32 +27,28 @@
  * -----------------------
  * IntervalMarkerTest.java
  * -----------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 14-Jun-2004 : Version 1 (DG);
- * 05-Sep-2006 : Added checks for MarkerChangeEvents (DG);
  *
  */
 
 package org.jfree.chart.plot;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.jfree.chart.TestUtils;
 
 import org.jfree.chart.event.MarkerChangeEvent;
 import org.jfree.chart.event.MarkerChangeListener;
-import org.jfree.chart.ui.GradientPaintTransformType;
-import org.jfree.chart.ui.GradientPaintTransformer;
-import org.jfree.chart.ui.StandardGradientPaintTransformer;
-import org.junit.Test;
+import org.jfree.chart.util.GradientPaintTransformType;
+import org.jfree.chart.util.GradientPaintTransformer;
+import org.jfree.chart.util.StandardGradientPaintTransformer;
+import org.jfree.chart.internal.CloneUtils;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link IntervalMarker} class.
@@ -107,7 +103,7 @@ public class IntervalMarkerTest implements MarkerChangeListener {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         IntervalMarker m1 = new IntervalMarker(45.0, 50.0);
-        IntervalMarker m2 = (IntervalMarker) m1.clone();
+        IntervalMarker m2 = CloneUtils.clone(m1);
         assertTrue(m1 != m2);
         assertTrue(m1.getClass() == m2.getClass());
         assertTrue(m1.equals(m2));
@@ -119,7 +115,7 @@ public class IntervalMarkerTest implements MarkerChangeListener {
     @Test
     public void testSerialization() {
         IntervalMarker m1 = new IntervalMarker(45.0, 50.0);
-        IntervalMarker m2 = (IntervalMarker) TestUtils.serialised(m1);
+        IntervalMarker m2 = TestUtils.serialised(m1);
         assertEquals(m1, m2);
     }
 

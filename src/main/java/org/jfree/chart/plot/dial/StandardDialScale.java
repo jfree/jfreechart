@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,21 +27,10 @@
  * ----------------------
  * StandardDialScale.java
  * ----------------------
- * (C) Copyright 2006-2017, by Object Refinery Limited.
+ * (C) Copyright 2006-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 03-Nov-2006 : Version 1 (DG);
- * 17-Nov-2006 : Added flags for tick label visibility (DG);
- * 24-Oct-2007 : Added tick label formatter (DG);
- * 19-Nov-2007 : Added some missing accessor methods (DG);
- * 27-Feb-2009 : Fixed bug 2617557: tickLabelPaint ignored (DG);
- * 09-Feb-2010 : Fixed bug 2946521 (DG);
- * 08-Jan-2012 : Added missing angleToValue() implementation (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -64,16 +53,14 @@ import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import org.jfree.chart.text.TextUtils;
-import org.jfree.chart.ui.TextAnchor;
-import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.PublicCloneable;
-import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.text.TextAnchor;
+import org.jfree.chart.internal.PaintUtils;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.api.PublicCloneable;
+import org.jfree.chart.internal.SerialUtils;
 
 /**
  * A scale for a {@link DialPlot}.
- *
- * @since 1.0.7
  */
 public class StandardDialScale extends AbstractDialLayer implements DialScale,
         Cloneable, PublicCloneable, Serializable {
@@ -235,8 +222,6 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
      * @return The lower bound for the scale.
      *
      * @see #setLowerBound(double)
-     *
-     * @since 1.0.8
      */
     public double getLowerBound() {
         return this.lowerBound;
@@ -249,8 +234,6 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
      * @param lower  the lower bound.
      *
      * @see #getLowerBound()
-     *
-     * @since 1.0.8
      */
     public void setLowerBound(double lower) {
         this.lowerBound = lower;
@@ -263,8 +246,6 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
      * @return The upper bound for the scale.
      *
      * @see #setUpperBound(double)
-     *
-     * @since 1.0.8
      */
     public double getUpperBound() {
         return this.upperBound;
@@ -277,8 +258,6 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
      * @param upper  the upper bound.
      *
      * @see #getUpperBound()
-     *
-     * @since 1.0.8
      */
     public void setUpperBound(double upper) {
         this.upperBound = upper;
@@ -558,8 +537,6 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
      * @return The paint (never {@code null}).
      *
      * @see #setMinorTickStroke(Stroke)
-     *
-     * @since 1.0.8
      */
     public Stroke getMinorTickStroke() {
         return this.minorTickStroke;
@@ -572,8 +549,6 @@ public class StandardDialScale extends AbstractDialLayer implements DialScale,
      * @param stroke  the stroke ({@code null} not permitted).
      *
      * @see #getMinorTickStroke()
-     *
-     * @since 1.0.8
      */
     public void setMinorTickStroke(Stroke stroke) {
         Args.nullNotPermitted(stroke, "stroke");

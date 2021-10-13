@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * CategoryItemEntity.java
  * -----------------------
- * (C) Copyright 2002-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2002-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Richard Atkinson;
@@ -39,8 +39,9 @@ package org.jfree.chart.entity;
 
 import java.awt.Shape;
 import java.io.Serializable;
-import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.Args;
+import java.util.Objects;
+
+import org.jfree.chart.internal.Args;
 
 import org.jfree.data.category.CategoryDataset;
 
@@ -56,18 +57,10 @@ public class CategoryItemEntity<R extends Comparable<R>, C extends Comparable<C>
     /** The dataset. */
     private CategoryDataset<R, C> dataset;
 
-    /**
-     * The row key.
-     *
-     * @since 1.0.6
-     */
+    /** The row key. */
     private R rowKey;
 
-    /**
-     * The column key.
-     *
-     * @since 1.0.6
-     */
+    /** The column key. */
     private C columnKey;
 
     /**
@@ -79,8 +72,6 @@ public class CategoryItemEntity<R extends Comparable<R>, C extends Comparable<C>
      * @param dataset  the dataset ({@code null} not permitted).
      * @param rowKey  the row key ({@code null} not permitted).
      * @param columnKey  the column key ({@code null} not permitted).
-     *
-     * @since 1.0.6
      */
     public CategoryItemEntity(Shape area, String toolTipText, String urlText,
             CategoryDataset dataset, R rowKey, C columnKey) {
@@ -121,8 +112,6 @@ public class CategoryItemEntity<R extends Comparable<R>, C extends Comparable<C>
      *
      * @return The row key (never {@code null}).
      *
-     * @since 1.0.6
-     *
      * @see #setRowKey(Comparable)
      */
     public R getRowKey() {
@@ -133,8 +122,6 @@ public class CategoryItemEntity<R extends Comparable<R>, C extends Comparable<C>
      * Sets the row key.
      *
      * @param rowKey  the row key ({@code null} not permitted).
-     *
-     * @since 1.0.6
      *
      * @see #getRowKey()
      */
@@ -147,8 +134,6 @@ public class CategoryItemEntity<R extends Comparable<R>, C extends Comparable<C>
      *
      * @return The column key (never {@code null}).
      *
-     * @since 1.0.6
-     *
      * @see #setColumnKey(Comparable)
      */
     public C getColumnKey() {
@@ -159,8 +144,6 @@ public class CategoryItemEntity<R extends Comparable<R>, C extends Comparable<C>
      * Sets the column key.
      *
      * @param columnKey  the column key ({@code null} not permitted).
-     *
-     * @since 1.0.6
      *
      * @see #getColumnKey()
      */
@@ -202,7 +185,7 @@ public class CategoryItemEntity<R extends Comparable<R>, C extends Comparable<C>
         if (!this.columnKey.equals(that.columnKey)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.dataset, that.dataset)) {
+        if (!Objects.equals(this.dataset, that.dataset)) {
             return false;
         }
 

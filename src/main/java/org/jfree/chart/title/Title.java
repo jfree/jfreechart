@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,35 +27,11 @@
  * ----------
  * Title.java
  * ----------
- * (C) Copyright 2000-2016, by David Berry and Contributors.
+ * (C) Copyright 2000-2021, by David Berry and Contributors.
  *
  * Original Author:  David Berry;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Nicolas Brodu;
- *
- * Changes (from 21-Aug-2001)
- * --------------------------
- * 21-Aug-2001 : Added standard header (DG);
- * 18-Sep-2001 : Updated header (DG);
- * 14-Nov-2001 : Package com.jrefinery.common.ui.* changed to
- *               com.jrefinery.ui.* (DG);
- * 07-Feb-2002 : Changed blank space around title from Insets --> Spacer, to
- *               allow for relative or absolute spacing (DG);
- * 25-Jun-2002 : Removed unnecessary imports (DG);
- * 01-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 14-Oct-2002 : Changed the event listener storage structure (DG);
- * 11-Sep-2003 : Took care of listeners while cloning (NB);
- * 22-Sep-2003 : Spacer cannot be null. Added nullpointer checks for this (TM);
- * 08-Jan-2003 : Renamed AbstractTitle --> Title and moved to separate
- *               package (DG);
- * 26-Oct-2004 : Refactored to implement Block interface, and removed redundant
- *               constants (DG);
- * 11-Jan-2005 : Removed deprecated code in preparation for the 1.0.0
- *               release (DG);
- * 02-Feb-2005 : Changed Spacer --> RectangleInsets for padding (DG);
- * 03-May-2005 : Fixed problem in equals() method (DG);
- * 19-Sep-2008 : Added visibility flag (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -67,19 +43,21 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Objects;
 
 import javax.swing.event.EventListenerList;
+import org.jfree.chart.ChartElement;
+import org.jfree.chart.ChartElementVisitor;
 
 import org.jfree.chart.block.AbstractBlock;
 import org.jfree.chart.block.Block;
 import org.jfree.chart.event.TitleChangeEvent;
 import org.jfree.chart.event.TitleChangeListener;
-import org.jfree.chart.ui.HorizontalAlignment;
-import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.ui.RectangleInsets;
-import org.jfree.chart.ui.VerticalAlignment;
-import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.Args;
+import org.jfree.chart.api.HorizontalAlignment;
+import org.jfree.chart.api.RectangleEdge;
+import org.jfree.chart.api.RectangleInsets;
+import org.jfree.chart.api.VerticalAlignment;
+import org.jfree.chart.internal.Args;
 
 /**
  * The base class for all chart titles.  A chart can have multiple titles,
@@ -89,7 +67,7 @@ import org.jfree.chart.util.Args;
  * hence do the actual work of drawing titles.
  */
 public abstract class Title extends AbstractBlock
-            implements Block, Cloneable, Serializable {
+            implements ChartElement, Block, Cloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -6675162505277817221L;
@@ -109,11 +87,7 @@ public abstract class Title extends AbstractBlock
     public static final RectangleInsets DEFAULT_PADDING = new RectangleInsets(
             1, 1, 1, 1);
 
-    /**
-     * A flag that controls whether or not the title is visible.
-     *
-     * @since 1.0.11
-     */
+    /** A flag that controls whether or not the title is visible. */
     public boolean visible;
 
     /** The title position. */
@@ -137,28 +111,24 @@ public abstract class Title extends AbstractBlock
      * Creates a new title, using default attributes where necessary.
      */
     protected Title() {
-        this(Title.DEFAULT_POSITION,
-                Title.DEFAULT_HORIZONTAL_ALIGNMENT,
+        this(Title.DEFAULT_POSITION, Title.DEFAULT_HORIZONTAL_ALIGNMENT,
                 Title.DEFAULT_VERTICAL_ALIGNMENT, Title.DEFAULT_PADDING);
     }
 
     /**
      * Creates a new title, using default attributes where necessary.
      *
-     * @param position  the position of the title ({@code null} not
-     *                  permitted).
+     * @param position  the position of the title ({@code null} not permitted).
      * @param horizontalAlignment  the horizontal alignment of the title
      *                             ({@code null} not permitted).
      * @param verticalAlignment  the vertical alignment of the title
      *                           ({@code null} not permitted).
      */
     protected Title(RectangleEdge position,
-                    HorizontalAlignment horizontalAlignment,
-                    VerticalAlignment verticalAlignment) {
-
+            HorizontalAlignment horizontalAlignment,
+            VerticalAlignment verticalAlignment) {
         this(position, horizontalAlignment, verticalAlignment,
                 Title.DEFAULT_PADDING);
-
     }
 
     /**
@@ -200,8 +170,6 @@ public abstract class Title extends AbstractBlock
      * @return A boolean.
      *
      * @see #setVisible(boolean)
-     *
-     * @since 1.0.11
      */
     public boolean isVisible() {
         return this.visible;
@@ -214,8 +182,6 @@ public abstract class Title extends AbstractBlock
      * @param visible  the new flag value.
      *
      * @see #isVisible()
-     *
-     * @since 1.0.11
      */
     public void setVisible(boolean visible) {
         this.visible = visible;
@@ -315,6 +281,16 @@ public abstract class Title extends AbstractBlock
         if (flag) {
             notifyListeners(new TitleChangeEvent(this));
         }
+    }
+
+    /**
+     * Receives a chart element visitor.
+     * 
+     * @param visitor  the visitor ({@code null} not permitted).
+     */
+    @Override
+    public void receive(ChartElementVisitor visitor) {
+        visitor.visit(this);
     }
 
     /**
@@ -427,10 +403,10 @@ public abstract class Title extends AbstractBlock
     @Override
     public int hashCode() {
         int result = 193;
-        result = 37 * result + ObjectUtils.hashCode(this.position);
+        result = 37 * result + Objects.hashCode(this.position);
         result = 37 * result
-                + ObjectUtils.hashCode(this.horizontalAlignment);
-        result = 37 * result + ObjectUtils.hashCode(this.verticalAlignment);
+                + Objects.hashCode(this.horizontalAlignment);
+        result = 37 * result + Objects.hashCode(this.verticalAlignment);
         return result;
     }
 

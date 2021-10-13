@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * CyclicNumberAxis.java
  * ---------------------
- * (C) Copyright 2003-2020, by Nicolas Brodu and Contributors.
+ * (C) Copyright 2003-2021, by Nicolas Brodu and Contributors.
  *
  * Original Author:  Nicolas Brodu;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -50,16 +50,16 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.text.NumberFormat;
 import java.util.List;
+import java.util.Objects;
 
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.text.TextUtils;
-import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.ui.TextAnchor;
-import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.api.RectangleEdge;
+import org.jfree.chart.text.TextAnchor;
+import org.jfree.chart.internal.PaintUtils;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.internal.SerialUtils;
 import org.jfree.data.Range;
 /**
 This class extends NumberAxis and handles cycling.
@@ -1151,8 +1151,7 @@ public class CyclicNumberAxis extends NumberAxis {
                 that.advanceLinePaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.advanceLineStroke,
-                that.advanceLineStroke)) {
+        if (!Objects.equals(this.advanceLineStroke, that.advanceLineStroke)) {
             return false;
         }
         if (this.advanceLineVisible != that.advanceLineVisible) {

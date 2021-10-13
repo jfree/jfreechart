@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,42 +27,33 @@
  * ----------------------------
  * CandlestickRendererTest.java
  * ----------------------------
- * (C) Copyright 2003-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 25-Mar-2003 : Version 1 (DG);
- * 22-Oct-2003 : Added hashCode test (DG);
- * 17-Aug-2006 : Strengthened testEquals() and added testFindRangeBounds()
- *               method (DG);
- * 05-Mar-2007 : Added new field to testEquals() (DG);
- * 08-Oct-2007 : Added tests for new volumePaint field (DG);
- * 22-Apr-2008 : Added testPublicCloneable() (DG);
  *
  */
 
 package org.jfree.chart.renderer.xy;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.util.Date;
 
 import org.jfree.chart.TestUtils;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.internal.CloneUtils;
+import org.jfree.chart.api.PublicCloneable;
 
 import org.jfree.data.Range;
 import org.jfree.data.xy.DefaultOHLCDataset;
 import org.jfree.data.xy.OHLCDataItem;
 import org.jfree.data.xy.OHLCDataset;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link CandlestickRenderer} class.
@@ -178,7 +169,7 @@ public class CandlestickRendererTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         CandlestickRenderer r1 = new CandlestickRenderer();
-        CandlestickRenderer r2 = (CandlestickRenderer) r1.clone();
+        CandlestickRenderer r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -199,8 +190,7 @@ public class CandlestickRendererTest {
     @Test
     public void testSerialization() {
         CandlestickRenderer r1 = new CandlestickRenderer();
-        CandlestickRenderer r2 = (CandlestickRenderer) 
-                TestUtils.serialised(r1);
+        CandlestickRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

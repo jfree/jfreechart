@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * StandardChartTheme.java
  * -----------------------
- * (C) Copyright 2008-2020, by Object Refinery Limited.
+ * (C) Copyright 2008-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -45,8 +45,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.Iterator;
-import java.util.List;
+import java.util.Objects;
 
 import org.jfree.chart.annotations.XYAnnotation;
 import org.jfree.chart.annotations.XYTextAnnotation;
@@ -68,9 +67,9 @@ import org.jfree.chart.plot.DefaultDrawingSupplier;
 import org.jfree.chart.plot.DrawingSupplier;
 import org.jfree.chart.plot.FastScatterPlot;
 import org.jfree.chart.plot.MeterPlot;
-import org.jfree.chart.plot.MultiplePiePlot;
-import org.jfree.chart.plot.PieLabelLinkStyle;
-import org.jfree.chart.plot.PiePlot;
+import org.jfree.chart.plot.pie.MultiplePiePlot;
+import org.jfree.chart.plot.pie.PieLabelLinkStyle;
+import org.jfree.chart.plot.pie.PiePlot;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PolarPlot;
 import org.jfree.chart.plot.SpiderWebPlot;
@@ -88,16 +87,16 @@ import org.jfree.chart.renderer.xy.XYBarPainter;
 import org.jfree.chart.renderer.xy.XYBarRenderer;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.chart.title.CompositeTitle;
-import org.jfree.chart.title.LegendTitle;
-import org.jfree.chart.title.PaintScaleLegend;
+import org.jfree.chart.legend.LegendTitle;
+import org.jfree.chart.legend.PaintScaleLegend;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.chart.title.Title;
-import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.api.RectangleInsets;
 import org.jfree.chart.util.DefaultShadowGenerator;
-import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.PublicCloneable;
-import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.internal.PaintUtils;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.api.PublicCloneable;
+import org.jfree.chart.internal.SerialUtils;
 import org.jfree.chart.util.ShadowGenerator;
 
 /**
@@ -105,14 +104,12 @@ import org.jfree.chart.util.ShadowGenerator;
  * implementation just collects a whole bunch of chart attributes and mimics
  * the manual process of applying each attribute to the right sub-object
  * within the JFreeChart instance.  It's not elegant code, but it works.
- *
- * @since 1.0.11
  */
 public class StandardChartTheme implements ChartTheme, Cloneable,
         PublicCloneable, Serializable {
 
     /** The name of this theme. */
-    private String name;
+    private final String name;
 
     /**
      * The largest font size.  Use for the main chart title.
@@ -172,8 +169,6 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
 
     /**
      * The baseline paint (used for domain and range zero baselines)
-     *
-     * @since 1.0.13
      */
     private transient Paint baselinePaint;
 
@@ -222,8 +217,6 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
 
     /**
      * The shadow generator (can be null).
-     * 
-     * @since 1.0.14
      */
     private ShadowGenerator shadowGenerator;
 
@@ -309,8 +302,6 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
      * @param name  the name of the theme ({@code null} not permitted).
      * @param shadow  a flag that controls whether a shadow generator is 
      *                included.
-     *
-     * @since 1.0.14
      */
     public StandardChartTheme(String name, boolean shadow) {
         Args.nullNotPermitted(name, "name");
@@ -421,8 +412,6 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
      * @return The small font (never {@code null}).
      *
      * @see #setSmallFont(Font)
-     *
-     * @since 1.0.13
      */
     public Font getSmallFont() {
         return this.smallFont;
@@ -434,8 +423,6 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
      * @param font  the font ({@code null} not permitted).
      *
      * @see #getSmallFont()
-     *
-     * @since 1.0.13
      */
     public void setSmallFont(Font font) {
         Args.nullNotPermitted(font, "font");
@@ -699,8 +686,6 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
      * Returns the baseline paint.
      *
      * @return The baseline paint.
-     *
-     * @since 1.0.13
      */
     public Paint getBaselinePaint() {
         return this.baselinePaint;
@@ -710,8 +695,6 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
      * Sets the baseline paint.
      *
      * @param paint  the paint ({@code null} not permitted).
-     *
-     * @since 1.0.13
      */
     public void setBaselinePaint(Paint paint) {
         Args.nullNotPermitted(paint, "paint");
@@ -1113,10 +1096,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
         else if (title instanceof CompositeTitle) {
             CompositeTitle ct = (CompositeTitle) title;
             BlockContainer bc = ct.getContainer();
-            List blocks = bc.getBlocks();
-            Iterator iterator = blocks.iterator();
-            while (iterator.hasNext()) {
-                Block b = (Block) iterator.next();
+            for (Block b: bc.getBlocks()) {
                 if (b instanceof Title) {
                     applyToTitle((Title) b);
                 }
@@ -1130,9 +1110,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
      * @param bc  a block container ({@code null} not permitted).
      */
     protected void applyToBlockContainer(BlockContainer bc) {
-        Iterator iterator = bc.getBlocks().iterator();
-        while (iterator.hasNext()) {
-            Block b = (Block) iterator.next();
+        for (Block b : bc.getBlocks()) {
             applyToBlock(b);
         }
     }
@@ -1156,7 +1134,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
     /**
      * Applies the attributes of this theme to a plot.
      *
-     * @param plot  the plot ({@code null}).
+     * @param plot  the plot ({@code null} not permitted).
      */
     protected void applyToPlot(Plot plot) {
         Args.nullNotPermitted(plot, "plot");
@@ -1277,9 +1255,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
 
         if (plot instanceof CombinedDomainCategoryPlot) {
             CombinedDomainCategoryPlot cp = (CombinedDomainCategoryPlot) plot;
-            Iterator iterator = cp.getSubplots().iterator();
-            while (iterator.hasNext()) {
-                CategoryPlot subplot = (CategoryPlot) iterator.next();
+            for (CategoryPlot subplot : cp.getSubplots()) {
                 if (subplot != null) {
                     applyToPlot(subplot);
                 }
@@ -1287,9 +1263,7 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
         }
         if (plot instanceof CombinedRangeCategoryPlot) {
             CombinedRangeCategoryPlot cp = (CombinedRangeCategoryPlot) plot;
-            Iterator iterator = cp.getSubplots().iterator();
-            while (iterator.hasNext()) {
-                CategoryPlot subplot = (CategoryPlot) iterator.next();
+            for (CategoryPlot subplot : cp.getSubplots()) {
                 if (subplot != null) {
                     applyToPlot(subplot);
                 }
@@ -1301,8 +1275,10 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
      * Applies the attributes of this theme to a {@link XYPlot}.
      *
      * @param plot  the plot ({@code null} not permitted).
+     * 
+     * @param <S> the type for the series keys.
      */
-    protected void applyToXYPlot(XYPlot plot) {
+    protected <S extends Comparable<S>> void applyToXYPlot(XYPlot<S> plot) {
         plot.setAxisOffset(this.axisOffset);
         plot.setDomainZeroBaselinePaint(this.baselinePaint);
         plot.setRangeZeroBaselinePaint(this.baselinePaint);
@@ -1345,15 +1321,15 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
         }
 
         if (plot instanceof CombinedDomainXYPlot) {
-            CombinedDomainXYPlot cp = (CombinedDomainXYPlot) plot;
-            for (XYPlot subplot : cp.getSubplots()) {
+            CombinedDomainXYPlot<S> cp = (CombinedDomainXYPlot) plot;
+            for (XYPlot<S> subplot : cp.getSubplots()) {
                 if (subplot != null) {
                     applyToPlot(subplot);
                 }
             }
         }
         if (plot instanceof CombinedRangeXYPlot) {
-            CombinedRangeXYPlot cp = (CombinedRangeXYPlot) plot;
+            CombinedRangeXYPlot<S> cp = (CombinedRangeXYPlot) plot;
             for (XYPlot subplot : cp.getSubplots()) {
                 if (subplot != null) {
                     applyToPlot(subplot);
@@ -1704,6 +1680,41 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 71 * hash + Objects.hashCode(this.name);
+        hash = 71 * hash + Objects.hashCode(this.extraLargeFont);
+        hash = 71 * hash + Objects.hashCode(this.largeFont);
+        hash = 71 * hash + Objects.hashCode(this.regularFont);
+        hash = 71 * hash + Objects.hashCode(this.smallFont);
+        hash = 71 * hash + Objects.hashCode(this.titlePaint);
+        hash = 71 * hash + Objects.hashCode(this.subtitlePaint);
+        hash = 71 * hash + Objects.hashCode(this.chartBackgroundPaint);
+        hash = 71 * hash + Objects.hashCode(this.legendBackgroundPaint);
+        hash = 71 * hash + Objects.hashCode(this.legendItemPaint);
+        hash = 71 * hash + Objects.hashCode(this.plotBackgroundPaint);
+        hash = 71 * hash + Objects.hashCode(this.plotOutlinePaint);
+        hash = 71 * hash + Objects.hashCode(this.labelLinkStyle);
+        hash = 71 * hash + Objects.hashCode(this.labelLinkPaint);
+        hash = 71 * hash + Objects.hashCode(this.domainGridlinePaint);
+        hash = 71 * hash + Objects.hashCode(this.rangeGridlinePaint);
+        hash = 71 * hash + Objects.hashCode(this.crosshairPaint);
+        hash = 71 * hash + Objects.hashCode(this.axisOffset);
+        hash = 71 * hash + Objects.hashCode(this.axisLabelPaint);
+        hash = 71 * hash + Objects.hashCode(this.tickLabelPaint);
+        hash = 71 * hash + Objects.hashCode(this.itemLabelPaint);
+        hash = 71 * hash + (this.shadowVisible ? 1 : 0);
+        hash = 71 * hash + Objects.hashCode(this.shadowPaint);
+        hash = 71 * hash + Objects.hashCode(this.barPainter);
+        hash = 71 * hash + Objects.hashCode(this.xyBarPainter);
+        hash = 71 * hash + Objects.hashCode(this.thermometerPaint);
+        hash = 71 * hash + Objects.hashCode(this.errorIndicatorPaint);
+        hash = 71 * hash + Objects.hashCode(this.gridBandPaint);
+        hash = 71 * hash + Objects.hashCode(this.gridBandAlternatePaint);
+        return hash;
     }
 
     /**

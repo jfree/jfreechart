@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,29 +27,23 @@
  * ---------------------------
  * MatrixSeriesCollection.java
  * ---------------------------
- * (C) Copyright 2003-2016, by Barak Naveh and Contributors.
+ * (C) Copyright 2003-2021, by Barak Naveh and Contributors.
  *
  * Original Author:  Barak Naveh;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * Changes
- * -------
- * 10-Jul-2003 : Version 1 contributed by Barak Naveh (DG);
- * 05-May-2004 : Now extends AbstractXYZDataset (DG);
- * 15-Jul-2004 : Switched getZ() and getZValue() methods (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 27-Nov-2006 : Added clone() override (DG);
- * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
- * 22-Apr-2008 : Implemented PublicCloneable (DG);
  */
 
 package org.jfree.data.xy;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
-import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.PublicCloneable;
+import java.util.Objects;
+
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.internal.CloneUtils;
+import org.jfree.chart.api.PublicCloneable;
 
 /**
  * Represents a collection of {@link MatrixSeries} that can be used as a
@@ -57,14 +51,15 @@ import org.jfree.chart.util.PublicCloneable;
  *
  * @see org.jfree.data.xy.MatrixSeries
  */
-public class MatrixSeriesCollection extends AbstractXYZDataset
+public class MatrixSeriesCollection<S extends Comparable<S>> 
+        extends AbstractXYZDataset
         implements XYZDataset, PublicCloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -3197705779242543945L;
 
     /** The series that are included in the collection. */
-    private List seriesList;
+    private List<MatrixSeries<S>> seriesList;
 
     /**
      * Constructs an empty dataset.
@@ -79,8 +74,8 @@ public class MatrixSeriesCollection extends AbstractXYZDataset
      *
      * @param series the time series.
      */
-    public MatrixSeriesCollection(MatrixSeries series) {
-        this.seriesList = new java.util.ArrayList();
+    public MatrixSeriesCollection(MatrixSeries<S> series) {
+        this.seriesList = new ArrayList<>();
 
         if (series != null) {
             this.seriesList.add(series);
@@ -108,11 +103,9 @@ public class MatrixSeriesCollection extends AbstractXYZDataset
      *
      * @return The series.
      */
-    public MatrixSeries getSeries(int seriesIndex) {
-        if ((seriesIndex < 0) || (seriesIndex > getSeriesCount())) {
-            throw new IllegalArgumentException("Index outside valid range.");
-        }
-        MatrixSeries series = (MatrixSeries) this.seriesList.get(seriesIndex);
+    public MatrixSeries<S> getSeries(int seriesIndex) {
+        Args.requireInRange(seriesIndex, "seriesIndex", 0, this.seriesList.size() - 1);
+        MatrixSeries<S> series = this.seriesList.get(seriesIndex);
         return series;
     }
 
@@ -136,7 +129,7 @@ public class MatrixSeriesCollection extends AbstractXYZDataset
      * @return The key for a series.
      */
     @Override
-    public Comparable getSeriesKey(int seriesIndex) {
+    public S getSeriesKey(int seriesIndex) {
         return getSeries(seriesIndex).getKey();
     }
 
@@ -154,10 +147,8 @@ public class MatrixSeriesCollection extends AbstractXYZDataset
      */
     @Override
     public Number getX(int seriesIndex, int itemIndex) {
-        MatrixSeries series = (MatrixSeries) this.seriesList.get(seriesIndex);
-        int x = series.getItemColumn(itemIndex);
-
-        return new Integer(x); // I know it's bad to create object. better idea?
+        MatrixSeries series = this.seriesList.get(seriesIndex);
+        return series.getItemColumn(itemIndex);
     }
 
 
@@ -174,10 +165,8 @@ public class MatrixSeriesCollection extends AbstractXYZDataset
      */
     @Override
     public Number getY(int seriesIndex, int itemIndex) {
-        MatrixSeries series = (MatrixSeries) this.seriesList.get(seriesIndex);
-        int y = series.getItemRow(itemIndex);
-
-        return new Integer(y); // I know it's bad to create object. better idea?
+        MatrixSeries series = this.seriesList.get(seriesIndex);
+        return series.getItemRow(itemIndex);
     }
 
 
@@ -194,11 +183,9 @@ public class MatrixSeriesCollection extends AbstractXYZDataset
      */
     @Override
     public Number getZ(int seriesIndex, int itemIndex) {
-        MatrixSeries series = (MatrixSeries) this.seriesList.get(seriesIndex);
-        Number z = series.getItem(itemIndex);
-        return z;
+        MatrixSeries series = this.seriesList.get(seriesIndex);
+        return series.getItem(itemIndex);
     }
-
 
     /**
      * Adds a series to the collection.
@@ -208,7 +195,7 @@ public class MatrixSeriesCollection extends AbstractXYZDataset
      *
      * @param series the series ({@code null} not permitted).
      */
-    public void addSeries(MatrixSeries series) {
+    public void addSeries(MatrixSeries<S> series) {
         Args.nullNotPermitted(series, "series");
         // FIXME: Check that there isn't already a series with the same key
 
@@ -237,9 +224,9 @@ public class MatrixSeriesCollection extends AbstractXYZDataset
         }
 
         if (obj instanceof MatrixSeriesCollection) {
-            MatrixSeriesCollection c = (MatrixSeriesCollection) obj;
+            MatrixSeriesCollection<S> c = (MatrixSeriesCollection) obj;
 
-            return ObjectUtils.equal(this.seriesList, c.seriesList);
+            return Objects.equals(this.seriesList, c.seriesList);
         }
 
         return false;
@@ -264,8 +251,8 @@ public class MatrixSeriesCollection extends AbstractXYZDataset
      */
     @Override
     public Object clone() throws CloneNotSupportedException {
-        MatrixSeriesCollection clone = (MatrixSeriesCollection) super.clone();
-        clone.seriesList = (List) ObjectUtils.deepClone(this.seriesList);
+        MatrixSeriesCollection<S> clone = (MatrixSeriesCollection) super.clone();
+        clone.seriesList = CloneUtils.cloneList(this.seriesList);
         return clone;
     }
 
@@ -278,8 +265,7 @@ public class MatrixSeriesCollection extends AbstractXYZDataset
     public void removeAllSeries() {
         // Unregister the collection as a change listener to each series in
         // the collection.
-        for (int i = 0; i < this.seriesList.size(); i++) {
-            MatrixSeries series = (MatrixSeries) this.seriesList.get(i);
+        for (MatrixSeries series : this.seriesList) {
             series.removeChangeListener(this);
         }
 
@@ -297,7 +283,7 @@ public class MatrixSeriesCollection extends AbstractXYZDataset
      *
      * @param series the series ({@code null}).
      */
-    public void removeSeries(MatrixSeries series) {
+    public void removeSeries(MatrixSeries<S> series) {
         Args.nullNotPermitted(series, "series");
         if (this.seriesList.contains(series)) {
             series.removeChangeListener(this);
@@ -315,13 +301,10 @@ public class MatrixSeriesCollection extends AbstractXYZDataset
      * @param seriesIndex the series (zero based index).
      */
     public void removeSeries(int seriesIndex) {
-        // check arguments...
-        if ((seriesIndex < 0) || (seriesIndex > getSeriesCount())) {
-            throw new IllegalArgumentException("Index outside valid range.");
-        }
+        Args.requireInRange(seriesIndex, "seriesIndex", 0, this.seriesList.size() -1);
 
         // fetch the series, remove the change listener, then remove the series.
-        MatrixSeries series = (MatrixSeries) this.seriesList.get(seriesIndex);
+        MatrixSeries series = this.seriesList.get(seriesIndex);
         series.removeChangeListener(this);
         this.seriesList.remove(seriesIndex);
         fireDatasetChanged();

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * ------------------
  * MeterInterval.java
  * ------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 22-Mar-2005 : Version 1 (DG);
- * 29-Mar-2005 : Fixed serialization (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -50,10 +44,11 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.SerialUtils;
+import java.util.Objects;
+
+import org.jfree.chart.internal.PaintUtils;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.internal.SerialUtils;
 
 import org.jfree.data.Range;
 
@@ -67,10 +62,10 @@ public class MeterInterval implements Serializable {
     private static final long serialVersionUID = 1530982090622488257L;
 
     /** The interval label. */
-    private String label;
+    private final String label;
 
     /** The interval range. */
-    private Range range;
+    private final Range range;
 
     /** The outline paint (used for the arc marking the interval). */
     private transient Paint outlinePaint;
@@ -183,7 +178,7 @@ public class MeterInterval implements Serializable {
         if (!PaintUtils.equal(this.outlinePaint, that.outlinePaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.outlineStroke, that.outlineStroke)) {
+        if (!Objects.equals(this.outlineStroke, that.outlineStroke)) {
             return false;
         }
         if (!PaintUtils.equal(this.backgroundPaint, that.backgroundPaint)) {

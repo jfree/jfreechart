@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -34,13 +34,13 @@ import java.awt.Paint;
 import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
-import org.jfree.chart.ui.HorizontalAlignment;
-import org.jfree.chart.ui.Size2D;
-import org.jfree.chart.ui.TextAnchor;
-import org.jfree.chart.util.ShapeUtils;
+import org.jfree.chart.api.HorizontalAlignment;
+import org.jfree.chart.block.Size2D;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.internal.ShapeUtils;
 
 /**
  * A list of {@link TextLine} objects that form a block of text.
@@ -53,7 +53,7 @@ public class TextBlock implements Serializable {
     private static final long serialVersionUID = -4333175719424385526L;
     
     /** Storage for the lines of text. */
-    private List lines;
+    private List<TextLine> lines;
     
     /** The alignment of the lines. */
     private HorizontalAlignment lineAlignment;
@@ -62,7 +62,7 @@ public class TextBlock implements Serializable {
      * Creates a new empty text block.
      */
     public TextBlock() {
-        this.lines = new java.util.ArrayList();
+        this.lines = new ArrayList<>();
         this.lineAlignment = HorizontalAlignment.CENTER;
     }
     
@@ -81,18 +81,17 @@ public class TextBlock implements Serializable {
      * @param alignment  the alignment ({@code null} not permitted).
      */
     public void setLineAlignment(HorizontalAlignment alignment) {
-        if (alignment == null) {
-            throw new IllegalArgumentException("Null 'alignment' argument.");
-        }
+        Args.nullNotPermitted(alignment, "alignment");
         this.lineAlignment = alignment;   
     }
     
     /**
-     * Adds a line of text that will be displayed using the specified font.
+     * Adds a line of text that will be displayed using the specified font and
+     * color.
      * 
-     * @param text  the text.
-     * @param font  the font.
-     * @param paint  the paint.
+     * @param text  the text ({@code null} not permitted).
+     * @param font  the font ({@code null} not permitted).
+     * @param paint  the paint ({@code null} not permitted).
      */
     public void addLine(String text, Font font, Paint paint) {
         addLine(new TextLine(text, font, paint));
@@ -116,7 +115,7 @@ public class TextBlock implements Serializable {
         TextLine last = null;
         final int index = this.lines.size() - 1;
         if (index >= 0) {
-            last = (TextLine) this.lines.get(index);
+            last = this.lines.get(index);
         }
         return last;
     }
@@ -126,7 +125,7 @@ public class TextBlock implements Serializable {
      *
      * @return A list of {@link TextLine} objects.
      */
-    public List getLines() {
+    public List<TextLine> getLines() {
         return Collections.unmodifiableList(this.lines);
     }
     
@@ -140,9 +139,7 @@ public class TextBlock implements Serializable {
     public Size2D calculateDimensions(Graphics2D g2) {
         double width = 0.0;
         double height = 0.0;
-        Iterator iterator = this.lines.iterator();
-        while (iterator.hasNext()) {
-            final TextLine line = (TextLine) iterator.next();
+        for (TextLine line : this.lines) {
             final Size2D dimension = line.calculateDimensions(g2);
             width = Math.max(width, dimension.getWidth());
             height = height + dimension.getHeight();
@@ -165,15 +162,13 @@ public class TextBlock implements Serializable {
      */
     public Shape calculateBounds(Graphics2D g2, float anchorX, float anchorY, 
             TextBlockAnchor anchor, float rotateX, float rotateY, double angle) {
-        
         Size2D d = calculateDimensions(g2);
         float[] offsets = calculateOffsets(anchor, d.getWidth(), d.getHeight());
         Rectangle2D bounds = new Rectangle2D.Double(anchorX + offsets[0], 
                 anchorY + offsets[1], d.getWidth(), d.getHeight());
         Shape rotatedBounds = ShapeUtils.rotateShape(bounds, angle, rotateX, 
                 rotateY);
-        return rotatedBounds;   
-        
+        return rotatedBounds;
     }
     
     /**
@@ -207,17 +202,14 @@ public class TextBlock implements Serializable {
         Size2D d = calculateDimensions(g2);
         float[] offsets = calculateOffsets(anchor, d.getWidth(), 
                 d.getHeight());
-        Iterator iterator = this.lines.iterator();
         float yCursor = 0.0f;
-        while (iterator.hasNext()) {
-            TextLine line = (TextLine) iterator.next();
+        for (TextLine line : this.lines) {
             Size2D dimension = line.calculateDimensions(g2);
             float lineOffset = 0.0f;
             if (this.lineAlignment == HorizontalAlignment.CENTER) {
                 lineOffset = (float) (d.getWidth() - dimension.getWidth()) 
                     / 2.0f;   
-            }
-            else if (this.lineAlignment == HorizontalAlignment.RIGHT) {
+            } else if (this.lineAlignment == HorizontalAlignment.RIGHT) {
                 lineOffset = (float) (d.getWidth() - dimension.getWidth());   
             }
             line.draw(g2, anchorX + offsets[0] + lineOffset, 
@@ -251,8 +243,7 @@ public class TextBlock implements Serializable {
                     
             xAdj = (float) -width / 2.0f;
             
-        }
-        else if (anchor == TextBlockAnchor.TOP_RIGHT
+        } else if (anchor == TextBlockAnchor.TOP_RIGHT
                 || anchor == TextBlockAnchor.CENTER_RIGHT
                 || anchor == TextBlockAnchor.BOTTOM_RIGHT) {
                     
@@ -266,15 +257,13 @@ public class TextBlock implements Serializable {
                     
             yAdj = 0.0f;
             
-        }
-        else if (anchor == TextBlockAnchor.CENTER_LEFT
+        } else if (anchor == TextBlockAnchor.CENTER_LEFT
                 || anchor == TextBlockAnchor.CENTER
                 || anchor == TextBlockAnchor.CENTER_RIGHT) {
                     
             yAdj = (float) -height / 2.0f;
             
-        }
-        else if (anchor == TextBlockAnchor.BOTTOM_LEFT
+        } else if (anchor == TextBlockAnchor.BOTTOM_LEFT
                 || anchor == TextBlockAnchor.BOTTOM_CENTER
                 || anchor == TextBlockAnchor.BOTTOM_RIGHT) {
                     

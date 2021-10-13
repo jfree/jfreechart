@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,25 +27,21 @@
  * --------------------
  * DomainOrderTest.java
  * --------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 19-May-2005 : Version 1 (DG);
  *
  */
 
 package org.jfree.data;
 
 import org.jfree.chart.TestUtils;
-import org.junit.Test;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertSame;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 /**
  * Tests for the {@link DomainOrder} class.
@@ -90,7 +86,7 @@ public class DomainOrderTest {
     @Test
     public void testSerialization() {
         DomainOrder d1 = DomainOrder.ASCENDING;
-        DomainOrder d2 = (DomainOrder) TestUtils.serialised(d1);
+        DomainOrder d2 = TestUtils.serialised(d1);
         assertSame(d1, d2);
     }
 

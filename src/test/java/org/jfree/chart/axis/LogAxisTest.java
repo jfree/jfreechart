@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,23 +27,17 @@
  * ----------------
  * LogAxisTest.java
  * ----------------
- * (C) Copyright 2007-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 11-Jul-2007 : Version 1 (DG);
- * 08-Apr-2008 : Fixed incorrect testEquals() method (DG);
- * 28-Oct-2011 : Cdded test for endless loop, # 3429707 (MH);
  */
 
 package org.jfree.chart.axis;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
@@ -55,11 +49,11 @@ import org.jfree.chart.TestUtils;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.api.RectangleEdge;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link LogAxis} class.
@@ -151,7 +145,7 @@ public class LogAxisTest {
     @Test
     public void testSerialization() {
         LogAxis a1 = new LogAxis("Test Axis");
-        LogAxis a2 = (LogAxis) TestUtils.serialised(a1);
+        LogAxis a2 = TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 
@@ -166,7 +160,7 @@ public class LogAxisTest {
         dataset.setValue(200.0, "Row 1", "Column 2");
         JFreeChart chart = ChartFactory.createBarChart("Test", "Categories",
                 "Value", dataset);
-        CategoryPlot plot = (CategoryPlot) chart.getPlot();
+        CategoryPlot<?, ?> plot = (CategoryPlot) chart.getPlot();
         LogAxis axis = new LogAxis("Log(Y)");
         plot.setRangeAxis(axis);
         assertEquals(0.0, axis.getLowerBound(), EPSILON);
@@ -186,7 +180,8 @@ public class LogAxisTest {
         JFreeChart chart = ChartFactory.createLineChart("Test", "Categories",
                 "Value", dataset, PlotOrientation.VERTICAL, false, false,
                 false);
-        CategoryPlot plot = (CategoryPlot) chart.getPlot();
+        @SuppressWarnings("unchecked")
+        CategoryPlot<String, String> plot = (CategoryPlot) chart.getPlot();
         LogAxis axis = new LogAxis("Log(Y)");
         plot.setRangeAxis(axis);
         assertEquals(96.59363289248458, axis.getLowerBound(), EPSILON);
@@ -207,15 +202,15 @@ public class LogAxisTest {
      */
     @Test
     public void testXYAutoRange1() {
-        XYSeries series = new XYSeries("Series 1");
+        XYSeries<String> series = new XYSeries<>("Series 1");
         series.add(1.0, 1.0);
         series.add(2.0, 2.0);
         series.add(3.0, 3.0);
-        XYSeriesCollection dataset = new XYSeriesCollection();
+        XYSeriesCollection<String> dataset = new XYSeriesCollection<>();
         dataset.addSeries(series);
         JFreeChart chart = ChartFactory.createScatterPlot("Test", "X", "Y",
                 dataset);
-        XYPlot plot = (XYPlot) chart.getPlot();
+        XYPlot<?> plot = (XYPlot) chart.getPlot();
         LogAxis axis = new LogAxis("Log(Y)");
         plot.setRangeAxis(axis);
         assertEquals(0.9465508226401592, axis.getLowerBound(), EPSILON);
@@ -228,15 +223,15 @@ public class LogAxisTest {
      */
     @Test
     public void testXYAutoRange2() {
-        XYSeries series = new XYSeries("Series 1");
+        XYSeries<String> series = new XYSeries<>("Series 1");
         series.add(1.0, 1.0);
         series.add(2.0, 2.0);
         series.add(3.0, 3.0);
-        XYSeriesCollection dataset = new XYSeriesCollection();
+        XYSeriesCollection<String> dataset = new XYSeriesCollection<>();
         dataset.addSeries(series);
         JFreeChart chart = ChartFactory.createScatterPlot("Test", "X", "Y",
                 dataset);
-        XYPlot plot = (XYPlot) chart.getPlot();
+        XYPlot<?> plot = (XYPlot) chart.getPlot();
         LogAxis axis = new LogAxis("Log(Y)");
         plot.setRangeAxis(axis);
         assertEquals(0.9465508226401592, axis.getLowerBound(), EPSILON);

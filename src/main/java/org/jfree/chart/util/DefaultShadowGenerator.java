@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * DefaultShadowGenerator.java
  * ---------------------------
- * (C) Copyright 2009-2020 by Object Refinery Limited and Contributors.
+ * (C) Copyright 2009-2021 by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -41,15 +41,14 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 import java.io.Serializable;
-import org.jfree.chart.HashUtils;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.internal.HashUtils;
 
 /**
  * A default implementation of the {@link ShadowGenerator} interface, based on
  * code in a 
  * <a href="http://www.jroller.com/gfx/entry/fast_or_good_drop_shadows">blog
  * post by Romain Guy</a>.
- *
- * @since 1.0.14
  */
 public class DefaultShadowGenerator implements ShadowGenerator, Serializable {
 

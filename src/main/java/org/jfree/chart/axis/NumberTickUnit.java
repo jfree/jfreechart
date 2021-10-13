@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,23 +27,10 @@
  * -------------------
  * NumberTickUnit.java
  * -------------------
- * (C) Copyright 2001-2016, by Object Refinery Limited.
+ * (C) Copyright 2001-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 19-Dec-2001 : Added standard header (DG);
- * 01-May-2002 : Updated for changed to TickUnit class (DG);
- * 01-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 08-Nov-2002 : Moved to new package com.jrefinery.chart.axis (DG);
- * 09-Jan-2002 : Added a new constructor (DG);
- * 26-Mar-2003 : Implemented Serializable (DG);
- * 05-Jul-2005 : Added equals() implementation (DG);
- * 05-Sep-2005 : Implemented hashCode(), thanks to Thomas Morgner (DG);
- * 02-Aug-2007 : Added new constructor with minorTickCount (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -51,7 +38,7 @@ package org.jfree.chart.axis;
 
 import java.io.Serializable;
 import java.text.NumberFormat;
-import org.jfree.chart.util.Args;
+import org.jfree.chart.internal.Args;
 
 /**
  * A numerical tick unit.
@@ -93,8 +80,6 @@ public class NumberTickUnit extends TickUnit implements Serializable {
      * @param formatter  a number formatter for the tick unit ({@code null}
      *                   not permitted).
      * @param minorTickCount  the number of minor ticks.
-     *
-     * @since 1.0.7
      */
     public NumberTickUnit(double size, NumberFormat formatter,
             int minorTickCount) {
@@ -147,7 +132,8 @@ public class NumberTickUnit extends TickUnit implements Serializable {
      */
     @Override
     public String toString() {
-        return "[size=" + this.valueToString(this.getSize()) + "]";
+        return "[NumberTickUnit: size=" + this.valueToString(this.getSize()) 
+                + ", formatter=" + this.formatter + "]";
     }
 
     /**

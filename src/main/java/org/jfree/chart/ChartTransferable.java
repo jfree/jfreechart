@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------
  * ChartTransferable.java
  * ----------------------
- * (C) Copyright 2009-2020, by Object Refinery Limited.
+ * (C) Copyright 2009-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -47,8 +47,6 @@ import java.io.IOException;
 
 /**
  * A class used to represent a chart on the clipboard.
- *
- * @since 1.0.13
  */
 public class ChartTransferable implements Transferable {
 
@@ -60,42 +58,34 @@ public class ChartTransferable implements Transferable {
     private JFreeChart chart;
 
     /** The width of the chart on the clipboard. */
-    private int width;
+    private final int width;
 
     /** The height of the chart on the clipboard. */
-    private int height;
+    private final int height;
 
     /**
      * The smallest width at which the chart will be drawn (if necessary, the
      * chart will then be scaled down to fit the requested width).
-     *
-     * @since 1.0.14
      */
-    private int minDrawWidth;
+    private final int minDrawWidth;
 
     /**
      * The smallest height at which the chart will be drawn (if necessary, the
      * chart will then be scaled down to fit the requested height).
-     *
-     * @since 1.0.14
      */
-    private int minDrawHeight;
+    private final int minDrawHeight;
 
     /**
      * The largest width at which the chart will be drawn (if necessary, the 
      * chart will then be scaled up to fit the requested width). 
-     * 
-     * @since 1.0.14
      */
-    private int maxDrawWidth;
+    private final int maxDrawWidth;
 
     /**
      * The largest height at which the chart will be drawn (if necessary, the
      * chart will then be scaled up to fit the requested height).
-     *
-     * @since 1.0.14
      */
-    private int maxDrawHeight;
+    private final int maxDrawHeight;
 
     /**
      * Creates a new chart selection.
@@ -125,7 +115,7 @@ public class ChartTransferable implements Transferable {
     /**
      * Creates a new chart selection.  The minimum and maximum drawing
      * dimensions are used to match the scaling behaviour in the
-     * {@link ChartPanel} class.
+     * {@link org.jfree.chart.swing.ChartPanel} class.
      *
      * @param chart  the chart.
      * @param width  the chart width.
@@ -135,8 +125,6 @@ public class ChartTransferable implements Transferable {
      * @param maxDrawW  the maximum drawing width.
      * @param maxDrawH  the maximum drawing height.
      * @param cloneData  clone the dataset(s)?
-     *
-     * @since 1.0.14
      */
     public ChartTransferable(JFreeChart chart, int width, int height,
             int minDrawW, int minDrawH, int maxDrawW, int maxDrawH,
@@ -218,14 +206,12 @@ public class ChartTransferable implements Transferable {
      * @param maxDrawH  the maximum height for chart drawing.
      *
      * @return  A chart image.
-     *
-     * @since 1.0.14
      */
     private BufferedImage createBufferedImage(JFreeChart chart, int w, int h,
             int minDrawW, int minDrawH, int maxDrawW, int maxDrawH) {
 
         BufferedImage image = new BufferedImage(w, h,
-                BufferedImage.TYPE_INT_ARGB);
+                BufferedImage.TYPE_INT_RGB); // bug #182
         Graphics2D g2 = image.createGraphics();
 
         // work out if scaling is required...
@@ -238,8 +224,7 @@ public class ChartTransferable implements Transferable {
             scaleX = drawWidth / minDrawW;
             drawWidth = minDrawW;
             scale = true;
-        }
-        else if (drawWidth > maxDrawW) {
+        } else if (drawWidth > maxDrawW) {
             scaleX = drawWidth / maxDrawW;
             drawWidth = maxDrawW;
             scale = true;
@@ -248,8 +233,7 @@ public class ChartTransferable implements Transferable {
             scaleY = drawHeight / minDrawH;
             drawHeight = minDrawH;
             scale = true;
-        }
-        else if (drawHeight > maxDrawH) {
+        } else if (drawHeight > maxDrawH) {
             scaleY = drawHeight / maxDrawH;
             drawHeight = maxDrawH;
             scale = true;

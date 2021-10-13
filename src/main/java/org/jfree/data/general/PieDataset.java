@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,20 +27,11 @@
  * ---------------
  * PieDataset.java
  * ---------------
- * (C) Copyright 2001-2020, by Object Refinery Limited.
+ * (C) Copyright 2001-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Sam (oldman);
- *
- * Changes
- * -------
- * 17-Nov-2001 : Version 1 (DG);
- * 22-Jan-2002 : Removed the getCategoryCount() method, updated Javadoc
- *               comments (DG);
- * 18-Apr-2002 : getCategories() now returns List instead of Set (oldman);
- * 23-Oct-2002 : Reorganised the code: PieDataset now extends KeyedValues
- *               interface (DG);
- * 04-Mar-2003 : Now just replicates the KeyedValuesDataset interface (DG);
+ *                   Tracy Hiltbrand (generics for bug fix to PiePlot);
  *
  */
 
@@ -52,10 +43,10 @@ import org.jfree.data.KeyedValues;
  * A general purpose dataset where values are associated with keys.  As the
  * name suggests, you can use this dataset to supply data for pie charts (refer
  * to the {@link org.jfree.chart.plot.PiePlot} class).
+ * 
+ * @param <K> Key type for KeyedValues
  */
 public interface PieDataset<K extends Comparable<K>> extends KeyedValues<K>, 
         Dataset {
-
     // no new methods added.
-
 }

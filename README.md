@@ -1,7 +1,7 @@
 JFreeChart
 ==========
 
-Version 1.5.0, 5 November 2017.
+Version 2.0.0, not yet released.
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.jfree/jfreechart/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.jfree/jfreechart)
 
@@ -17,8 +17,8 @@ The home page for the project is:
 
 http://www.jfree.org/jfreechart
 
-JFreeChart requires JDK 1.6.0 or later.  If JavaFX support is required, you
-need to also include the JFreeChart-FX extensions:
+JFreeChart requires JDK 11 or later (check the 1.5.x branch for Java 8 support).  
+If JavaFX support is required, you need to also include the JFreeChart-FX extensions:
 
 https://github.com/jfree/jfreechart-fx
 
@@ -33,7 +33,7 @@ To use JFreeChart in your projects, add the following dependency to your build t
     <dependency>
         <groupId>org.jfree</groupId>
         <artifactId>jfreechart</artifactId>
-        <version>1.5.0</version>
+        <version>1.5.3</version>
     </dependency>
 
 
@@ -43,7 +43,7 @@ You can build JFreeChart using Maven by issuing the following command from the r
 
     mvn clean install
 
-The build requires JDK 1.8.0 or later.
+The build requires JDK 11 or later.
 
 
 Migration from JFreeChart 1.0.x
@@ -72,8 +72,32 @@ at GitHub:
 History
 -------
 
-##### Version 1.6.0 (not yet released)
-- update required JDK to version 1.8;
+##### Version 2.0 (not yet released)
+- use `ThreadLocal` for calendars in time series datasets ([#171](https://github.com/jfree/jfreechart/pull/171));
+- added `valueVisible` flag to `MeterPlot` ([#231](https://github.com/jfree/jfreechart/pull/231));
+- modify buffer in `ChartPanel` to handle high DPI displays ([#170](https://github.com/jfree/jfreechart/issues/170));
+- add options to control pan vs zoom in `ChartPanel` ([#172](https://github.com/jfree/jfreechart/pull/172));
+- observe series visibility flags in `ClusteredXYBarRenderer` ([#89](https://github.com/jfree/jfreechart/pull/89));
+- observe axis visibility flag in `PeriodAxis` ([#198](https://github.com/jfree/jfreechart/issues/198));
+- fix for exception on extreme zoom on `NumberAxis` (bug #64);
+- fix tick label font for `LogAxis` with number format override ([#98](https://github.com/jfree/jfreechart/issues/98));
+- remove alpha channel from copy-to-clipboard (fixes bug #182);
+- apply rendering hints to overlays - fixes bug #187;
+- modify `TextTitle` to throw `IllegalArgumentException` rather than `NullPointerException` ([#205](https://github.com/jfree/jfreechart/issues/205));
+- fix bugs on crosshair labels ([#189](https://github.com/jfree/jfreechart/pull/189), [#194](https://github.com/jfree/jfreechart/pull/194));
+- removed `ObjectUtils` class ([#163](https://github.com/jfree/jfreechart/pull/163));
+- removed unused `URLUtilities` class ([#162](https://github.com/jfree/jfreechart/pull/162))
+- fixed `LayeredBarRenderer` (bugs [#169](https://github.com/jfree/jfreechart/issues/169) and [#175](https://github.com/jfree/jfreechart/issues/175));
+- minor fix for `DefaultPieDataset` (bugs [#212](https://github.com/jfree/jfreechart/issues/212))
+- fix `isJFreeSVGAvailable()` method (bugs [#207](https://github.com/jfree/jfreechart/issues/207))
+- add new methods to access maps for datasets, renderers and axes in plots ([#201](https://github.com/jfree/jfreechart/issues/201));
+- update French translations (bug #186);
+- fix "Save_as" entries in localisation files (bug #184);
+- add flags for visibility of outliers in `BoxAndWhiskerRenderer` ([#79](https://github.com/jfree/jfreechart/pull/79));
+- added generics;
+- `DefaultIntervalCategoryDataset` no longer allows null keys in constructor (this
+  is a consequence of introducing generics);
+- update required JDK to version 11.
 
 ##### Version 1.5.0 (5 November 2017)
 - all JavaFX classes moved to a separate project;

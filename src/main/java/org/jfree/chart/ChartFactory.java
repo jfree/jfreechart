@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------
  * ChartFactory.java
  * -----------------
- * (C) Copyright 2001-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2001-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Serge V. Grachov;
@@ -70,9 +70,8 @@ import org.jfree.chart.labels.StandardXYZToolTipGenerator;
 import org.jfree.chart.labels.XYToolTipGenerator;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.Marker;
-import org.jfree.chart.plot.MultiplePiePlot;
-import org.jfree.chart.plot.PiePlot;
-import org.jfree.chart.plot.PiePlot3D;
+import org.jfree.chart.plot.pie.MultiplePiePlot;
+import org.jfree.chart.plot.pie.PiePlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PolarPlot;
 import org.jfree.chart.plot.RingPlot;
@@ -107,18 +106,17 @@ import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.chart.renderer.xy.XYStepAreaRenderer;
 import org.jfree.chart.renderer.xy.XYStepRenderer;
 import org.jfree.chart.title.TextTitle;
-import org.jfree.chart.ui.Layer;
-import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.ui.RectangleInsets;
-import org.jfree.chart.ui.TextAnchor;
+import org.jfree.chart.api.Layer;
+import org.jfree.chart.api.RectangleInsets;
+import org.jfree.chart.text.TextAnchor;
 import org.jfree.chart.urls.PieURLGenerator;
 import org.jfree.chart.urls.StandardCategoryURLGenerator;
 import org.jfree.chart.urls.StandardPieURLGenerator;
 import org.jfree.chart.urls.StandardXYURLGenerator;
 import org.jfree.chart.urls.StandardXYZURLGenerator;
 import org.jfree.chart.urls.XYURLGenerator;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.TableOrder;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.api.TableOrder;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.IntervalCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
@@ -149,8 +147,6 @@ public abstract class ChartFactory {
      *
      * @see #setChartTheme(ChartTheme)
      * @see ChartUtils#applyCurrentTheme(JFreeChart)
-     *
-     * @since 1.0.11
      */
     public static ChartTheme getChartTheme() {
         return currentTheme;
@@ -164,8 +160,6 @@ public abstract class ChartFactory {
      *
      * @see #getChartTheme()
      * @see ChartUtils#applyCurrentTheme(JFreeChart)
-     *
-     * @since 1.0.11
      */
     public static void setChartTheme(ChartTheme theme) {
         Args.nullNotPermitted(theme, "theme");
@@ -199,8 +193,6 @@ public abstract class ChartFactory {
      * @param locale  the locale ({@code null} not permitted).
      *
      * @return A pie chart.
-     *
-     * @since 1.0.7
      */
     public static JFreeChart createPieChart(String title, PieDataset dataset,
             boolean legend, boolean tooltips, Locale locale) {
@@ -228,8 +220,6 @@ public abstract class ChartFactory {
      * @param dataset  the dataset for the chart ({@code null} permitted).
      *
      * @return A pie chart.
-     * 
-     * @since 1.0.16
      */
     public static JFreeChart createPieChart(String title, PieDataset dataset) {
         return createPieChart(title, dataset, true, true, false);
@@ -304,8 +294,6 @@ public abstract class ChartFactory {
      *                        difference between the two datasets.
      *
      * @return A pie chart.
-     *
-     * @since 1.0.7
      */
     public static JFreeChart createPieChart(String title, PieDataset dataset,
             PieDataset previousDataset, int percentDiffForMaxScale,
@@ -521,8 +509,6 @@ public abstract class ChartFactory {
      * @param locale  the locale ({@code null} not permitted).
      *
      * @return A ring chart.
-     *
-     * @since 1.0.7
      */
     public static JFreeChart createRingChart(String title, PieDataset dataset,
             boolean legend, boolean tooltips, Locale locale) {
@@ -618,139 +604,6 @@ public abstract class ChartFactory {
     }
 
     /**
-     * Creates a 3D pie chart using the specified dataset.  The chart object
-     * returned by this method uses a {@link PiePlot3D} instance as the
-     * plot.
-     *
-     * @param title  the chart title ({@code null} permitted).
-     * @param dataset  the dataset for the chart ({@code null} permitted).
-     * @param legend  a flag specifying whether or not a legend is required.
-     * @param tooltips  configure chart to generate tool tips?
-     * @param locale  the locale ({@code null} not permitted).
-     *
-     * @return A pie chart.
-     *
-     * @since 1.0.7
-     */
-    public static JFreeChart createPieChart3D(String title, PieDataset dataset,
-            boolean legend, boolean tooltips, Locale locale) {
-
-        Args.nullNotPermitted(locale, "locale");
-        PiePlot3D plot = new PiePlot3D(dataset);
-        plot.setInsets(new RectangleInsets(0.0, 5.0, 5.0, 5.0));
-        if (tooltips) {
-            plot.setToolTipGenerator(new StandardPieToolTipGenerator(locale));
-        }
-        JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
-                plot, legend);
-        currentTheme.apply(chart);
-        return chart;
-
-    }
-
-    /**
-     * Creates a 3D pie chart using the specified dataset.  The chart object
-     * returned by this method uses a {@link PiePlot3D} instance as the
-     * plot.
-     *
-     * @param title  the chart title ({@code null} permitted).
-     * @param dataset  the dataset for the chart ({@code null} permitted).
-     *
-     * @return A pie chart.
-     * 
-     * @since 1.0.16
-     */
-    public static JFreeChart createPieChart3D(String title,
-            PieDataset dataset) {
-        return createPieChart3D(title, dataset, true, true, false);
-    }
-    
-    /**
-     * Creates a 3D pie chart using the specified dataset.  The chart object
-     * returned by this method uses a {@link PiePlot3D} instance as the
-     * plot.
-     *
-     * @param title  the chart title ({@code null} permitted).
-     * @param dataset  the dataset for the chart ({@code null} permitted).
-     * @param legend  a flag specifying whether or not a legend is required.
-     * @param tooltips  configure chart to generate tool tips?
-     * @param urls  configure chart to generate URLs?
-     *
-     * @return A pie chart.
-     */
-    public static JFreeChart createPieChart3D(String title, PieDataset dataset,
-            boolean legend, boolean tooltips, boolean urls) {
-
-        PiePlot3D plot = new PiePlot3D(dataset);
-        plot.setInsets(new RectangleInsets(0.0, 5.0, 5.0, 5.0));
-        if (tooltips) {
-            plot.setToolTipGenerator(new StandardPieToolTipGenerator());
-        }
-        if (urls) {
-            plot.setURLGenerator(new StandardPieURLGenerator());
-        }
-        JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
-                plot, legend);
-        currentTheme.apply(chart);
-        return chart;
-
-    }
-
-    /**
-     * Creates a chart that displays multiple pie plots.  The chart object
-     * returned by this method uses a {@link MultiplePiePlot} instance as the
-     * plot.
-     *
-     * @param title  the chart title ({@code null} permitted).
-     * @param dataset  the dataset ({@code null} permitted).
-     * @param order  the order that the data is extracted (by row or by column)
-     *               ({@code null} not permitted).
-     * @param legend  include a legend?
-     * @param tooltips  generate tooltips?
-     * @param urls  generate URLs?
-     *
-     * @return A chart.
-     */
-    public static JFreeChart createMultiplePieChart3D(String title,
-            CategoryDataset dataset, TableOrder order, boolean legend,
-            boolean tooltips, boolean urls) {
-
-        Args.nullNotPermitted(order, "order");
-        MultiplePiePlot plot = new MultiplePiePlot(dataset);
-        plot.setDataExtractOrder(order);
-        plot.setBackgroundPaint(null);
-        plot.setOutlineStroke(null);
-
-        JFreeChart pieChart = new JFreeChart(new PiePlot3D(null));
-        TextTitle seriesTitle = new TextTitle("Series Title",
-                new Font("SansSerif", Font.BOLD, 12));
-        seriesTitle.setPosition(RectangleEdge.BOTTOM);
-        pieChart.setTitle(seriesTitle);
-        pieChart.removeLegend();
-        pieChart.setBackgroundPaint(null);
-        plot.setPieChart(pieChart);
-
-        if (tooltips) {
-            PieToolTipGenerator tooltipGenerator
-                = new StandardPieToolTipGenerator();
-            PiePlot pp = (PiePlot) plot.getPieChart().getPlot();
-            pp.setToolTipGenerator(tooltipGenerator);
-        }
-
-        if (urls) {
-            PieURLGenerator urlGenerator = new StandardPieURLGenerator();
-            PiePlot pp = (PiePlot) plot.getPieChart().getPlot();
-            pp.setURLGenerator(urlGenerator);
-        }
-
-        JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
-                plot, legend);
-        currentTheme.apply(chart);
-        return chart;
-
-    }
-
-    /**
      * Creates a bar chart with a vertical orientation.  The chart object
      * returned by this method uses a {@link CategoryPlot} instance as the
      * plot, with a {@link CategoryAxis} for the domain axis, a
@@ -765,8 +618,6 @@ public abstract class ChartFactory {
      * @param dataset  the dataset for the chart ({@code null} permitted).
      *
      * @return A bar chart.
-     * 
-     * @since 1.0.16
      */
     public static JFreeChart createBarChart(String title,
             String categoryAxisLabel, String valueAxisLabel,
@@ -854,8 +705,6 @@ public abstract class ChartFactory {
      * @param dataset  the dataset for the chart ({@code null} permitted).
      *
      * @return A stacked bar chart.
-     * 
-     * @since 1.0.16
      */
     public static JFreeChart createStackedBarChart(String title,
             String domainAxisLabel, String rangeAxisLabel,
@@ -929,8 +778,6 @@ public abstract class ChartFactory {
      * @param dataset  the dataset for the chart ({@code null} permitted).
      *
      * @return An area chart.
-     * 
-     * @since 1.0.16
      */
     public static JFreeChart createAreaChart(String title,
             String categoryAxisLabel, String valueAxisLabel,
@@ -1005,8 +852,6 @@ public abstract class ChartFactory {
      * @param dataset  the dataset for the chart ({@code null} permitted).
      *
      * @return A stacked area chart.
-     * 
-     * @since 1.0.16
      */
     public static JFreeChart createStackedAreaChart(String title,
             String categoryAxisLabel, String valueAxisLabel,
@@ -1080,8 +925,6 @@ public abstract class ChartFactory {
      * @param dataset  the dataset for the chart ({@code null} permitted).
      *
      * @return A line chart.
-     * 
-     * @since 1.0.16
      */
     public static JFreeChart createLineChart(String title,
             String categoryAxisLabel, String valueAxisLabel,
@@ -1153,8 +996,6 @@ public abstract class ChartFactory {
      * @param dataset  the dataset for the chart ({@code null} permitted).
      *
      * @return A Gantt chart.
-     * 
-     * @since 1.0.16
      */
     public static JFreeChart createGanttChart(String title,
             String categoryAxisLabel, String dateAxisLabel,
@@ -1326,8 +1167,6 @@ public abstract class ChartFactory {
      * @param dataset  the dataset for the chart ({@code null} permitted).
      *
      * @return A scatter plot.
-     * 
-     * @since 1.0.16
      */
     public static JFreeChart createScatterPlot(String title, String xAxisLabel,
             String yAxisLabel, XYDataset dataset) {
@@ -1403,8 +1242,6 @@ public abstract class ChartFactory {
      * @param dataset  the dataset for the chart ({@code null} permitted).
      *
      * @return An XY bar chart.
-     * 
-     * @since 1.0.16
      */
     public static JFreeChart createXYBarChart(String title, String xAxisLabel,
             boolean dateAxis, String yAxisLabel, IntervalXYDataset dataset) {
@@ -1490,10 +1327,11 @@ public abstract class ChartFactory {
      *
      * @return An XY area chart.
      * 
-     * @since 1.0.16
+     * @param <S> the type for series keys.
      */
-    public static JFreeChart createXYAreaChart(String title,String xAxisLabel,
-            String yAxisLabel, XYDataset dataset) {
+    public static <S extends Comparable<S>> JFreeChart createXYAreaChart(
+            String title,String xAxisLabel, String yAxisLabel, 
+            XYDataset<S> dataset) {
         return createXYAreaChart(title, xAxisLabel, yAxisLabel, dataset, 
                 PlotOrientation.VERTICAL, true, true, false);
     }
@@ -1516,17 +1354,20 @@ public abstract class ChartFactory {
      * @param tooltips  configure chart to generate tool tips?
      * @param urls  configure chart to generate URLs?
      *
+     * @param <S> the type for series keys.
+     * 
      * @return An XY area chart.
      */
-    public static JFreeChart createXYAreaChart(String title, String xAxisLabel,
-            String yAxisLabel, XYDataset dataset, PlotOrientation orientation,
+    public static <S extends Comparable<S>> JFreeChart createXYAreaChart(
+            String title, String xAxisLabel,
+            String yAxisLabel, XYDataset<S> dataset, PlotOrientation orientation,
             boolean legend, boolean tooltips, boolean urls) {
 
         Args.nullNotPermitted(orientation, "orientation");
         NumberAxis xAxis = new NumberAxis(xAxisLabel);
         xAxis.setAutoRangeIncludesZero(false);
         NumberAxis yAxis = new NumberAxis(yAxisLabel);
-        XYPlot plot = new XYPlot(dataset, xAxis, yAxis, null);
+        XYPlot<S> plot = new XYPlot<>(dataset, xAxis, yAxis, null);
         plot.setOrientation(orientation);
         plot.setForegroundAlpha(0.5f);
 
@@ -1561,8 +1402,6 @@ public abstract class ChartFactory {
      * @param dataset  the dataset for the chart ({@code null} permitted).
      *
      * @return A stacked XY area chart.
-     * 
-     * @since 1.0.16
      */
     public static JFreeChart createStackedXYAreaChart(String title,
             String xAxisLabel, String yAxisLabel, TableXYDataset dataset) {
@@ -1673,8 +1512,8 @@ public abstract class ChartFactory {
         if (urls) {
             renderer.setURLGenerator(new StandardXYURLGenerator());
         }
-
-        JFreeChart chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
+        JFreeChart chart = null;
+        chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT,
                 plot, legend);
         currentTheme.apply(chart);
         return chart;
@@ -1690,8 +1529,6 @@ public abstract class ChartFactory {
      * @param dataset  the dataset for the chart ({@code null} permitted).
      *
      * @return A chart.
-     * 
-     * @since 1.0.16
      */
     public static JFreeChart createXYStepChart(String title, String xAxisLabel,
             String yAxisLabel, XYDataset dataset) {
@@ -1756,8 +1593,6 @@ public abstract class ChartFactory {
      * @param dataset  the dataset for the chart ({@code null} permitted).
      *
      * @return A chart.
-     * 
-     * @since 1.0.16
      */
     public static JFreeChart createXYStepAreaChart(String title,
             String xAxisLabel, String yAxisLabel, XYDataset dataset) {
@@ -1831,8 +1666,6 @@ public abstract class ChartFactory {
      * @param dataset  the dataset for the chart ({@code null} permitted).
      *
      * @return A time series chart.
-     * 
-     * @since 1.0.16
      */
     public static JFreeChart createTimeSeriesChart(String title, 
             String timeAxisLabel, String valueAxisLabel, XYDataset dataset) {
@@ -1965,8 +1798,6 @@ public abstract class ChartFactory {
      * @param dataset  the dataset for the chart ({@code null} permitted).
      *
      * @return A bubble chart.
-     * 
-     * @since 1.0.16
      */
     public static JFreeChart createBubbleChart(String title, String xAxisLabel,
             String yAxisLabel, XYZDataset dataset) {
@@ -2031,9 +1862,8 @@ public abstract class ChartFactory {
      * @param xAxisLabel  the x axis label ({@code null} permitted).
      * @param yAxisLabel  the y axis label ({@code null} permitted).
      * @param dataset  the dataset ({@code null} permitted).
-     * @return A chart.
      * 
-     * @since 1.0.20
+     * @return A chart.
      */
     public static JFreeChart createHistogram(String title,
             String xAxisLabel, String yAxisLabel, IntervalXYDataset dataset) {
@@ -2100,8 +1930,6 @@ public abstract class ChartFactory {
      * @param legend  a flag specifying whether or not a legend is required.
      *
      * @return A box and whisker chart.
-     *
-     * @since 1.0.4
      */
     public static JFreeChart createBoxAndWhiskerChart(String title,
             String categoryAxisLabel, String valueAxisLabel,

@@ -48,7 +48,7 @@ import org.jfree.chart.plot.MeterInterval;
 import org.jfree.chart.plot.MeterPlot;
 import org.jfree.data.Range;
 import org.jfree.data.general.DefaultValueDataset;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Miscellaneous checks for meter charts.

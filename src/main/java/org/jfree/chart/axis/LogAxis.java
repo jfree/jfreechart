@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------
  * LogAxis.java
  * ------------
- * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Andrew Mickish (patch 1868745);
@@ -48,24 +48,22 @@ import java.text.Format;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.jfree.chart.event.AxisChangeEvent;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.ValueAxisPlot;
-import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.ui.RectangleInsets;
-import org.jfree.chart.ui.TextAnchor;
+import org.jfree.chart.api.RectangleEdge;
+import org.jfree.chart.api.RectangleInsets;
+import org.jfree.chart.text.TextAnchor;
 import org.jfree.chart.util.AttrStringUtils;
-import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.Args;
+import org.jfree.chart.internal.Args;
 import org.jfree.data.Range;
 
 /**
  * A numerical axis that uses a logarithmic scale.  The class is an
  * alternative to the {@link LogarithmicAxis} class.
- *
- * @since 1.0.7
  */
 public class LogAxis extends ValueAxis {
 
@@ -149,8 +147,6 @@ public class LogAxis extends ValueAxis {
      * numerical value of the base is displayed.
      * 
      * @return The base symbol (possibly {@code null}).
-     * 
-     * @since 1.0.18
      */
     public String getBaseSymbol() {
         return this.baseSymbol;
@@ -161,8 +157,6 @@ public class LogAxis extends ValueAxis {
      * scale and sends a change event to all registered listeners.
      * 
      * @param symbol  the symbol ({@code null} permitted).
-     * 
-     * @since 1.0.18
      */
     public void setBaseSymbol(String symbol) {
         this.baseSymbol = symbol;
@@ -175,8 +169,6 @@ public class LogAxis extends ValueAxis {
      * {@code new DecimalFormat("0")}.
      * 
      * @return The base formatter (never {@code null}).
-     * 
-     * @since 1.0.18
      */
     public Format getBaseFormatter() {
         return this.baseFormatter;
@@ -188,8 +180,6 @@ public class LogAxis extends ValueAxis {
      * registered listeners.
      * 
      * @param formatter  the formatter ({@code null} not permitted).
-     * 
-     * @since 1.0.18
      */
     public void setBaseFormatter(Format formatter) {
         Args.nullNotPermitted(formatter, "formatter");
@@ -671,8 +661,6 @@ public class LogAxis extends ValueAxis {
      * @param dataArea  the area defined by the axes ({@code null} not 
      *     permitted).
      * @param edge  the axis location ({@code null} not permitted).
-     *
-     * @since 1.0.7
      */
     protected void selectAutoTickUnit(Graphics2D g2, Rectangle2D dataArea,
             RectangleEdge edge) {
@@ -692,8 +680,6 @@ public class LogAxis extends ValueAxis {
      * @param g2  the graphics device.
      * @param dataArea  the area defined by the axes.
      * @param edge  the axis location.
-     *
-     * @since 1.0.7
      */
     protected void selectHorizontalAutoTickUnit(Graphics2D g2,
             Rectangle2D dataArea, RectangleEdge edge) {
@@ -743,8 +729,6 @@ public class LogAxis extends ValueAxis {
      * @param edge  the edge along which the axis lies.
      *
      * @return The length in Java2D coordinates.
-     *
-     * @since 1.0.7
      */
     public double exponentLengthToJava2D(double length, Rectangle2D area,
                                 RectangleEdge edge) {
@@ -761,8 +745,6 @@ public class LogAxis extends ValueAxis {
      * @param g2  the graphics device.
      * @param dataArea  the area in which the plot should be drawn.
      * @param edge  the axis location.
-     *
-     * @since 1.0.7
      */
     protected void selectVerticalAutoTickUnit(Graphics2D g2, 
             Rectangle2D dataArea, RectangleEdge edge) {
@@ -808,13 +790,13 @@ public class LogAxis extends ValueAxis {
      * @param value  the value.
      *
      * @return The label.
-     *
-     * @since 1.0.18
      */
     protected AttributedString createTickLabel(double value) {
         if (this.numberFormatOverride != null) {
-            return new AttributedString(
-                    this.numberFormatOverride.format(value));
+            String text = this.numberFormatOverride.format(value);
+            AttributedString as = new AttributedString(text);
+            as.addAttribute(TextAttribute.FONT, getTickLabelFont());
+            return as;
         } else {
             String baseStr = this.baseSymbol;
             if (baseStr == null) {
@@ -838,8 +820,6 @@ public class LogAxis extends ValueAxis {
      * @param g2  the graphics device.
      *
      * @return The maximum height.
-     *
-     * @since 1.0.7
      */
     protected double estimateMaximumTickLabelHeight(Graphics2D g2) {
         RectangleInsets tickLabelInsets = getTickLabelInsets();
@@ -863,8 +843,6 @@ public class LogAxis extends ValueAxis {
      * @param unit  the tick unit to use for calculation.
      *
      * @return The estimated maximum width of the tick labels.
-     *
-     * @since 1.0.7
      */
     protected double estimateMaximumTickLabelWidth(Graphics2D g2, 
             TickUnit unit) {
@@ -927,8 +905,6 @@ public class LogAxis extends ValueAxis {
      * Slides the axis range by the specified percentage.
      *
      * @param percent  the percentage.
-     *
-     * @since 1.0.13
      */
     @Override
     public void pan(double percent) {
@@ -1026,7 +1002,7 @@ public class LogAxis extends ValueAxis {
         if (this.base != that.base) {
             return false;
         }
-        if (!ObjectUtils.equal(this.baseSymbol, that.baseSymbol)) {
+        if (!Objects.equals(this.baseSymbol, that.baseSymbol)) {
             return false;
         }
         if (!this.baseFormatter.equals(that.baseFormatter)) {
@@ -1035,8 +1011,7 @@ public class LogAxis extends ValueAxis {
         if (this.smallestValue != that.smallestValue) {
             return false;
         }
-        if (!ObjectUtils.equal(this.numberFormatOverride, 
-                that.numberFormatOverride)) {
+        if (!Objects.equals(this.numberFormatOverride, that.numberFormatOverride)) {
             return false;
         }
         return super.equals(obj);

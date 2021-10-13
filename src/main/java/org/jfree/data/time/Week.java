@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,48 +27,10 @@
  * ---------
  * Week.java
  * ---------
- * (C) Copyright 2001-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2001-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Aimin Han;
- *
- * Changes
- * -------
- * 11-Oct-2001 : Version 1 (DG);
- * 18-Dec-2001 : Changed order of parameters in constructor (DG);
- * 19-Dec-2001 : Added a new constructor as suggested by Paul English (DG);
- * 29-Jan-2002 : Worked on the parseWeek() method (DG);
- * 13-Feb-2002 : Fixed bug in Week(Date) constructor (DG);
- * 26-Feb-2002 : Changed getStart(), getMiddle() and getEnd() methods to
- *               evaluate with reference to a particular time zone (DG);
- * 05-Apr-2002 : Reinstated this class to the JCommon library (DG);
- * 24-Jun-2002 : Removed unnecessary main method (DG);
- * 10-Sep-2002 : Added getSerialIndex() method (DG);
- * 06-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 18-Oct-2002 : Changed to observe 52 or 53 weeks per year, consistent with
- *               GregorianCalendar. Thanks to Aimin Han for the code (DG);
- * 02-Jan-2003 : Removed debug code (DG);
- * 13-Mar-2003 : Moved to com.jrefinery.data.time package, and implemented
- *               Serializable (DG);
- * 21-Oct-2003 : Added hashCode() method (DG);
- * 24-May-2004 : Modified getFirstMillisecond() and getLastMillisecond() to
- *               take account of firstDayOfWeek setting in Java's Calendar
- *               class (DG);
- * 30-Sep-2004 : Replaced getTime().getTime() with getTimeInMillis() (DG);
- * 04-Nov-2004 : Reverted change of 30-Sep-2004, because it won't work for
- *               JDK 1.3 (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 06-Mar-2006 : Fix for bug 1448828, incorrect calculation of week and year
- *               for the first few days of some years (DG);
- * 05-Oct-2006 : Updated API docs (DG);
- * 06-Oct-2006 : Refactored to cache first and last millisecond values (DG);
- * 09-Jan-2007 : Fixed bug in next() (DG);
- * 28-Aug-2007 : Added new constructor to avoid problem in creating new
- *               instances (DG);
- * 19-Dec-2007 : Fixed bug in deprecated constructor (DG);
- * 16-Sep-2008 : Deprecated DEFAULT_TIME_ZONE (DG);
- * 05-Jul-2012 : Replaced getTime().getTime() with getTimeInMillis() (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -79,7 +41,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
-import org.jfree.chart.util.Args;
+import org.jfree.chart.internal.Args;
 
 /**
  * A calendar week.  All years are considered to have 53 weeks, numbered from 1
@@ -117,6 +79,8 @@ public class Week extends RegularTimePeriod implements Serializable {
     /**
      * Creates a new time period for the week in which the current system
      * date/time falls.
+     * The time zone and locale are determined by the calendar
+     * returned by {@link RegularTimePeriod#getCalendarInstance()}.
      */
     public Week() {
         this(new Date());
@@ -124,6 +88,8 @@ public class Week extends RegularTimePeriod implements Serializable {
 
     /**
      * Creates a time period representing the week in the specified year.
+     * The time zone and locale are determined by the calendar
+     * returned by {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @param week  the week (1 to 53).
      * @param year  the year (1900 to 9999).
@@ -135,11 +101,13 @@ public class Week extends RegularTimePeriod implements Serializable {
         }
         this.week = (byte) week;
         this.year = (short) year;
-        peg(Calendar.getInstance());
+        peg(getCalendarInstance());
     }
 
     /**
      * Creates a time period representing the week in the specified year.
+     * The time zone and locale are determined by the calendar
+     * returned by {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @param week  the week (1 to 53).
      * @param year  the year (1900 to 9999).
@@ -151,14 +119,17 @@ public class Week extends RegularTimePeriod implements Serializable {
         }
         this.week = (byte) week;
         this.year = (short) year.getYear();
-        peg(Calendar.getInstance());
+        peg(getCalendarInstance());
    }
 
     /**
      * Creates a time period for the week in which the specified date/time
-     * falls, using the default time zone and locale (the locale can affect the
-     * day-of-the-week that marks the beginning of the week, as well as the
-     * minimal number of days in the first week of the year).
+     * falls.
+     * The time zone and locale are determined by the calendar
+     * returned by {@link RegularTimePeriod#getCalendarInstance()}.
+     * The locale can affect the day-of-the-week that marks the beginning
+     * of the week, as well as the minimal number of days in the first week
+     * of the year.
      *
      * @param time  the time ({@code null} not permitted).
      *
@@ -166,7 +137,7 @@ public class Week extends RegularTimePeriod implements Serializable {
      */
     public Week(Date time) {
         // defer argument checking...
-        this(time, TimeZone.getDefault(), Locale.getDefault());
+        this(time, getCalendarInstance());
     }
 
     /**
@@ -184,6 +155,40 @@ public class Week extends RegularTimePeriod implements Serializable {
         Args.nullNotPermitted(zone, "zone");
         Args.nullNotPermitted(locale, "locale");
         Calendar calendar = Calendar.getInstance(zone, locale);
+        calendar.setTime(time);
+
+        // sometimes the last few days of the year are considered to fall in
+        // the *first* week of the following year.  Refer to the Javadocs for
+        // GregorianCalendar.
+        int tempWeek = calendar.get(Calendar.WEEK_OF_YEAR);
+        if (tempWeek == 1
+                && calendar.get(Calendar.MONTH) == Calendar.DECEMBER) {
+            this.week = 1;
+            this.year = (short) (calendar.get(Calendar.YEAR) + 1);
+        }
+        else {
+            this.week = (byte) Math.min(tempWeek, LAST_WEEK_IN_YEAR);
+            int yyyy = calendar.get(Calendar.YEAR);
+            // alternatively, sometimes the first few days of the year are
+            // considered to fall in the *last* week of the previous year...
+            if (calendar.get(Calendar.MONTH) == Calendar.JANUARY
+                    && this.week >= 52) {
+                yyyy--;
+            }
+            this.year = (short) yyyy;
+        }
+        peg(calendar);
+    }
+
+    /**
+     * Constructs a new instance, based on a particular date/time.
+     * The time zone and locale are determined by the {@code calendar}
+     * parameter.
+     *
+     * @param time the date/time ({@code null} not permitted).
+     * @param calendar the calendar to use for calculations ({@code null} not permitted).
+     */
+    public Week(Date time, Calendar calendar) {
         calendar.setTime(time);
 
         // sometimes the last few days of the year are considered to fall in
@@ -268,7 +273,8 @@ public class Week extends RegularTimePeriod implements Serializable {
 
     /**
      * Recalculates the start date/time and end date/time for this time period
-     * relative to the supplied calendar (which incorporates a time zone).
+     * relative to the supplied calendar (which incorporates a time zone
+     * and information about what day is the first day of the week).
      *
      * @param calendar  the calendar ({@code null} not permitted).
      *
@@ -285,6 +291,9 @@ public class Week extends RegularTimePeriod implements Serializable {
      * {@code null} for some lower limit on the range of weeks (currently
      * week 1, 1900).  For week 1 of any year, the previous week is always week
      * 53, but week 53 may not contain any days (you should check for this).
+     * No matter what time zone and locale this instance was created with,
+     * the returned instance will use the default calendar for time
+     * calculations, obtained with {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @return The preceding week (possibly {@code null}).
      */
@@ -299,7 +308,7 @@ public class Week extends RegularTimePeriod implements Serializable {
             // we need to work out if the previous year has 52 or 53 weeks...
             if (this.year > 1900) {
                 int yy = this.year - 1;
-                Calendar prevYearCalendar = Calendar.getInstance();
+                Calendar prevYearCalendar = getCalendarInstance();
                 prevYearCalendar.set(yy, Calendar.DECEMBER, 31);
                 result = new Week(prevYearCalendar.getActualMaximum(
                         Calendar.WEEK_OF_YEAR), yy);
@@ -318,6 +327,9 @@ public class Week extends RegularTimePeriod implements Serializable {
      * week 53, 9999).  For week 52 of any year, the following week is always
      * week 53, but week 53 may not contain any days (you should check for
      * this).
+     * No matter what time zone and locale this instance was created with,
+     * the returned instance will use the default calendar for time
+     * calculations, obtained with {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @return The following week (possibly {@code null}).
      */
@@ -329,7 +341,7 @@ public class Week extends RegularTimePeriod implements Serializable {
             result = new Week(this.week + 1, this.year);
         }
         else {
-            Calendar calendar = Calendar.getInstance();
+            Calendar calendar = getCalendarInstance();
             calendar.set(this.year, Calendar.DECEMBER, 31);
             int actualMaxWeek
                 = calendar.getActualMaximum(Calendar.WEEK_OF_YEAR);

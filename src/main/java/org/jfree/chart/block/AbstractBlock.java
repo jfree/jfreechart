@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,23 +27,10 @@
  * ------------------
  * AbstractBlock.java
  * ------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited.
+ * (C) Copyright 2004-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 22-Oct-2004 : Version 1 (DG);
- * 02-Feb-2005 : Added accessor methods for margin (DG);
- * 04-Feb-2005 : Added equals() method and implemented Serializable (DG);
- * 03-May-2005 : Added null argument checks (DG);
- * 06-May-2005 : Added convenience methods for setting margin, border and
- *               padding (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 16-Mar-2007 : Changed border from BlockBorder to BlockFrame, updated
- *               equals(), and implemented Cloneable (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -55,13 +42,12 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import org.jfree.chart.ui.RectangleInsets;
-import org.jfree.chart.ui.Size2D;
-import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.PublicCloneable;
-import org.jfree.chart.util.SerialUtils;
-import org.jfree.chart.util.ShapeUtils;
+import java.util.Objects;
+import org.jfree.chart.api.RectangleInsets;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.api.PublicCloneable;
+import org.jfree.chart.internal.CloneUtils;
+import org.jfree.chart.internal.SerialUtils;
 
 import org.jfree.data.Range;
 
@@ -242,8 +228,7 @@ public class AbstractBlock implements Cloneable, Serializable {
      * Returns the current frame (border).
      *
      * @return The frame.
-     *
-     * @since 1.0.5
+     * 
      * @see #setFrame(BlockFrame)
      */
     public BlockFrame getFrame() {
@@ -255,7 +240,6 @@ public class AbstractBlock implements Cloneable, Serializable {
      *
      * @param frame  the frame ({@code null} not permitted).
      *
-     * @since 1.0.5
      * @see #getFrame()
      */
     public void setFrame(BlockFrame frame) {
@@ -562,7 +546,7 @@ public class AbstractBlock implements Cloneable, Serializable {
             return false;
         }
         AbstractBlock that = (AbstractBlock) obj;
-        if (!ObjectUtils.equal(this.id, that.id)) {
+        if (!Objects.equals(this.id, that.id)) {
             return false;
         }
         if (!this.frame.equals(that.frame)) {
@@ -586,6 +570,24 @@ public class AbstractBlock implements Cloneable, Serializable {
         return true;
     }
 
+    @Override
+    public int hashCode()
+    {
+        int hash = 5;
+        hash = 41 * hash + Objects.hashCode(this.id);
+        hash = 41 * hash + Objects.hashCode(this.margin);
+        hash = 41 * hash + Objects.hashCode(this.frame);
+        hash = 41 * hash + Objects.hashCode(this.padding);
+        hash = 41 * hash +
+                (int) (Double.doubleToLongBits(this.width) ^
+                (Double.doubleToLongBits(this.width) >>> 32));
+        hash = 41 * hash +
+                (int) (Double.doubleToLongBits(this.height) ^
+                (Double.doubleToLongBits(this.height) >>> 32));
+        hash = 41 * hash + Objects.hashCode(this.bounds);
+        return hash;
+    }
+
     /**
      * Returns a clone of this block.
      *
@@ -597,7 +599,7 @@ public class AbstractBlock implements Cloneable, Serializable {
     @Override
     public Object clone() throws CloneNotSupportedException {
         AbstractBlock clone = (AbstractBlock) super.clone();
-        clone.bounds = (Rectangle2D) ShapeUtils.clone(this.bounds);
+        clone.bounds = (Rectangle2D) CloneUtils.clone(this.bounds);
         if (this.frame instanceof PublicCloneable) {
             PublicCloneable pc = (PublicCloneable) this.frame;
             clone.frame = (BlockFrame) pc.clone();

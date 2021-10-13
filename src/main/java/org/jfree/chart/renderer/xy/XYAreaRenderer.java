@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * XYAreaRenderer.java
  * -------------------
- * (C) Copyright 2002-2017, by Hari and Contributors.
+ * (C) Copyright 2002-2021, by Hari and Contributors.
  *
  * Original Author:  Hari (ourhari@hotmail.com);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -35,55 +35,6 @@
  *                   Christian W. Zuckschwerdt;
  *                   Martin Krauskopf;
  *                   Ulrich Voigt (patch #312);
- *
- * Changes:
- * --------
- * 03-Apr-2002 : Version 1, contributed by Hari.  This class is based on the
- *               StandardXYItemRenderer class (DG);
- * 09-Apr-2002 : Removed the translated zero from the drawItem method -
- *               overridden the initialise() method to calculate it (DG);
- * 30-May-2002 : Added tool tip generator to constructor to match super
- *               class (DG);
- * 25-Jun-2002 : Removed unnecessary local variable (DG);
- * 05-Aug-2002 : Small modification to drawItem method to support URLs for HTML
- *               image maps (RA);
- * 01-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 07-Nov-2002 : Renamed AreaXYItemRenderer --> XYAreaRenderer (DG);
- * 25-Mar-2003 : Implemented Serializable (DG);
- * 01-May-2003 : Modified drawItem() method signature (DG);
- * 27-Jul-2003 : Made line and polygon properties protected rather than
- *               private (RA);
- * 30-Jul-2003 : Modified entity constructor (CZ);
- * 20-Aug-2003 : Implemented Cloneable and PublicCloneable (DG);
- * 16-Sep-2003 : Changed ChartRenderingInfo --> PlotRenderingInfo (DG);
- * 07-Oct-2003 : Added renderer state (DG);
- * 08-Dec-2003 : Modified hotspot for chart entity (DG);
- * 10-Feb-2004 : Changed the drawItem() method to make cut-and-paste overriding
- *               easier.  Also moved state class into this class (DG);
- * 25-Feb-2004 : Replaced CrosshairInfo with CrosshairState.  Renamed
- *               XYToolTipGenerator --> XYItemLabelGenerator (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
- *               getYValue() (DG);
- * 11-Nov-2004 : Now uses ShapeUtilities to translate shapes (DG);
- * 19-Jan-2005 : Now accesses primitives only from dataset (DG);
- * 21-Mar-2005 : Override getLegendItem() and equals() methods (DG);
- * 20-Apr-2005 : Use generators for legend tooltips and URLs (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 06-Feb-2007 : Fixed bug 1086307, crosshairs with multiple axes (DG);
- * 14-Feb-2007 : Fixed bug in clone() (DG);
- * 20-Apr-2007 : Updated getLegendItem() for renderer change (DG);
- * 04-May-2007 : Set processVisibleItemsOnly flag to false (DG);
- * 17-May-2007 : Set datasetIndex and seriesIndex in getLegendItem() (DG);
- * 18-May-2007 : Set dataset and seriesKey for LegendItem (DG);
- * 17-Jun-2008 : Apply legend font and paint attributes (DG);
- * 31-Dec-2008 : Fix for bug 2471906 - dashed outlines performance issue (DG);
- * 11-Jun-2009 : Added a useFillPaint flag and a GradientPaintTransformer for
- *               the paint under the series (DG);
- * 06-Oct-2011 : Avoid GeneralPath methods requiring Java 1.5 (MK);
- * 03-Jul-2013 : Use ParamChecks (DG);
- * 04-Aug-2014 : Restrict entity hotspot to plot area (patch #312) (UV);
- * 18-Feb-2017 : Updates for crosshairs (bug #36) (DG);
- *
  */
 
 package org.jfree.chart.renderer.xy;
@@ -102,8 +53,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import org.jfree.chart.HashUtils;
-import org.jfree.chart.LegendItem;
+import org.jfree.chart.internal.HashUtils;
+import org.jfree.chart.legend.LegendItem;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.event.RendererChangeEvent;
@@ -113,13 +64,14 @@ import org.jfree.chart.plot.CrosshairState;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.ui.GradientPaintTransformer;
-import org.jfree.chart.ui.StandardGradientPaintTransformer;
+import org.jfree.chart.util.GradientPaintTransformer;
+import org.jfree.chart.util.StandardGradientPaintTransformer;
 import org.jfree.chart.urls.XYURLGenerator;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.PublicCloneable;
-import org.jfree.chart.util.SerialUtils;
-import org.jfree.chart.util.ShapeUtils;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.api.PublicCloneable;
+import org.jfree.chart.internal.CloneUtils;
+import org.jfree.chart.internal.SerialUtils;
+import org.jfree.chart.internal.ShapeUtils;
 import org.jfree.data.xy.XYDataset;
 
 /**
@@ -129,8 +81,7 @@ import org.jfree.data.xy.XYDataset;
  * is generated by the {@code XYAreaRendererDemo1.java} program included
  * in the JFreeChart demo collection:
  * <br><br>
- * <img src="../../../../../images/XYAreaRendererSample.png"
- * alt="XYAreaRendererSample.png">
+ * <img src="doc-files/XYAreaRendererSample.png" alt="XYAreaRendererSample.png">
  */
 public class XYAreaRenderer extends AbstractXYItemRenderer
         implements XYItemRenderer, PublicCloneable {
@@ -202,16 +153,12 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
     /**
      * A flag that can be set to specify that the fill paint should be used
      * to fill the area under the renderer.
-     * 
-     * @since 1.0.14
      */
     private boolean useFillPaint;
 
     /**
      * A transformer that is applied to the paint used to fill under the
      * area *if* it is an instance of GradientPaint.
-     *
-     * @since 1.0.14
      */
     private GradientPaintTransformer gradientTransformer;
 
@@ -355,8 +302,6 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
      * fill the area under the line.
      *
      * @return A boolean.
-     *
-     * @since 1.0.14
      */
     public boolean getUseFillPaint() {
         return this.useFillPaint;
@@ -368,8 +313,6 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
      * {@link RendererChangeEvent} to all listeners.
      *
      * @param use  the new flag value.
-     *
-     * @since 1.0.14
      */
     public void setUseFillPaint(boolean use) {
         this.useFillPaint = use;
@@ -380,8 +323,6 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
      * Returns the gradient paint transformer.
      *
      * @return The gradient paint transformer (never {@code null}).
-     *
-     * @since 1.0.14
      */
     public GradientPaintTransformer getGradientTransformer() {
         return this.gradientTransformer;
@@ -392,8 +333,6 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param transformer  the transformer ({@code null} not permitted).
-     *
-     * @since 1.0.14
      */
     public void setGradientTransformer(GradientPaintTransformer transformer) {
         Args.nullNotPermitted(transformer, "transformer");
@@ -691,7 +630,7 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
     @Override
     public Object clone() throws CloneNotSupportedException {
         XYAreaRenderer clone = (XYAreaRenderer) super.clone();
-        clone.legendArea = ShapeUtils.clone(this.legendArea);
+        clone.legendArea = CloneUtils.clone(this.legendArea);
         return clone;
     }
 

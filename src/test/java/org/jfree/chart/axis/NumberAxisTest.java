@@ -36,9 +36,9 @@
 
 package org.jfree.chart.axis;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.geom.Rectangle2D;
 import java.text.DecimalFormat;
@@ -50,12 +50,13 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.category.BarRenderer;
-import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.api.RectangleEdge;
+import org.jfree.chart.internal.CloneUtils;
 import org.jfree.data.RangeType;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link NumberAxis} class.
@@ -64,11 +65,13 @@ public class NumberAxisTest {
 
     /**
      * Confirm that cloning works.
+     * 
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
         NumberAxis a1 = new NumberAxis("Test");
-        NumberAxis a2 = (NumberAxis) a1.clone();
+        NumberAxis a2 = CloneUtils.clone(a1);
         assertTrue(a1 != a2);
         assertTrue(a1.getClass() == a2.getClass());
         assertTrue(a1.equals(a2));
@@ -163,7 +166,7 @@ public class NumberAxisTest {
     @Test
     public void testSerialization() {
         NumberAxis a1 = new NumberAxis("Test Axis");
-        NumberAxis a2 = (NumberAxis) TestUtils.serialised(a1);
+        NumberAxis a2 = TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 
@@ -178,7 +181,7 @@ public class NumberAxisTest {
         dataset.setValue(200.0, "Row 1", "Column 2");
         JFreeChart chart = ChartFactory.createBarChart("Test", "Categories",
                 "Value", dataset);
-        CategoryPlot plot = (CategoryPlot) chart.getPlot();
+        CategoryPlot<?, ?> plot = (CategoryPlot) chart.getPlot();
         NumberAxis axis = (NumberAxis) plot.getRangeAxis();
         assertEquals(axis.getLowerBound(), 0.0, EPSILON);
         assertEquals(axis.getUpperBound(), 210.0, EPSILON);
@@ -197,7 +200,7 @@ public class NumberAxisTest {
         JFreeChart chart = ChartFactory.createLineChart("Test", "Categories",
                 "Value", dataset, PlotOrientation.VERTICAL, false, false,
                 false);
-        CategoryPlot plot = (CategoryPlot) chart.getPlot();
+        CategoryPlot<?, ?> plot = (CategoryPlot) chart.getPlot();
         NumberAxis axis = (NumberAxis) plot.getRangeAxis();
         axis.setAutoRangeIncludesZero(false);
         assertEquals(axis.getLowerBound(), 95.0, EPSILON);
@@ -218,7 +221,8 @@ public class NumberAxisTest {
         JFreeChart chart = ChartFactory.createLineChart("Test", "Categories",
                 "Value", dataset, PlotOrientation.VERTICAL, false, false,
                 false);
-        CategoryPlot plot = (CategoryPlot) chart.getPlot();
+        @SuppressWarnings("unchecked")
+        CategoryPlot<String, String> plot = (CategoryPlot) chart.getPlot();
         NumberAxis axis = (NumberAxis) plot.getRangeAxis();
         axis.setAutoRangeIncludesZero(false);
         assertEquals(axis.getLowerBound(), 95.0, EPSILON);
@@ -245,7 +249,8 @@ public class NumberAxisTest {
         JFreeChart chart = ChartFactory.createBarChart("Test", "Categories",
                 "Value", dataset, PlotOrientation.VERTICAL, false, false,
                 false);
-        CategoryPlot plot = (CategoryPlot) chart.getPlot();
+        @SuppressWarnings("unchecked")
+        CategoryPlot<String, String> plot = (CategoryPlot) chart.getPlot(); 
         NumberAxis axis = (NumberAxis) plot.getRangeAxis();
         axis.setAutoRangeIncludesZero(false);
         BarRenderer br = (BarRenderer) plot.getRenderer();
@@ -288,15 +293,15 @@ public class NumberAxisTest {
      */
     @Test
     public void testXYAutoRange1() {
-        XYSeries series = new XYSeries("Series 1");
+        XYSeries<String> series = new XYSeries<>("Series 1");
         series.add(1.0, 1.0);
         series.add(2.0, 2.0);
         series.add(3.0, 3.0);
-        XYSeriesCollection dataset = new XYSeriesCollection();
+        XYSeriesCollection<String> dataset = new XYSeriesCollection<>();
         dataset.addSeries(series);
         JFreeChart chart = ChartFactory.createScatterPlot("Test", "X", "Y",
                 dataset);
-        XYPlot plot = (XYPlot) chart.getPlot();
+        XYPlot<?> plot = (XYPlot) chart.getPlot();
         NumberAxis axis = (NumberAxis) plot.getDomainAxis();
         axis.setAutoRangeIncludesZero(false);
         assertEquals(0.9, axis.getLowerBound(), EPSILON);
@@ -309,15 +314,15 @@ public class NumberAxisTest {
      */
     @Test
     public void testXYAutoRange2() {
-        XYSeries series = new XYSeries("Series 1");
+        XYSeries<String> series = new XYSeries<>("Series 1");
         series.add(1.0, 1.0);
         series.add(2.0, 2.0);
         series.add(3.0, 3.0);
-        XYSeriesCollection dataset = new XYSeriesCollection();
+        XYSeriesCollection<String> dataset = new XYSeriesCollection<>();
         dataset.addSeries(series);
         JFreeChart chart = ChartFactory.createScatterPlot("Test", "X", "Y",
                 dataset);
-        XYPlot plot = (XYPlot) chart.getPlot();
+        XYPlot<?> plot = (XYPlot) chart.getPlot();
         NumberAxis axis = (NumberAxis) plot.getRangeAxis();
         axis.setAutoRangeIncludesZero(false);
         assertEquals(0.9, axis.getLowerBound(), EPSILON);

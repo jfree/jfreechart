@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------
  * XYSeries.java
  * -------------
- * (C) Copyright 2001-2020, Object Refinery Limited and Contributors.
+ * (C) Copyright 2001-2021, Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Aaron Metzger;
@@ -44,8 +44,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.Args;
+import java.util.Objects;
+
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.internal.CloneUtils;
 
 import org.jfree.data.general.Series;
 import org.jfree.data.general.SeriesChangeEvent;
@@ -58,7 +60,8 @@ import org.jfree.data.general.SeriesException;
  * defaults can be changed in the constructor.  Y-values can be
  * {@code null} to represent missing values.
  */
-public class XYSeries extends Series implements Cloneable, Serializable {
+public class XYSeries<K extends Comparable<K>> extends Series<K> 
+        implements Cloneable, Serializable {
 
     /** For serialization. */
     static final long serialVersionUID = -5908509288197150436L;
@@ -101,7 +104,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      *
      * @param key  the series key ({@code null} not permitted).
      */
-    public XYSeries(Comparable<?> key) {
+    public XYSeries(K key) {
         this(key, true, true);
     }
 
@@ -113,7 +116,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * @param autoSort  a flag that controls whether or not the items in the
      *                  series are sorted.
      */
-    public XYSeries(Comparable<?> key, boolean autoSort) {
+    public XYSeries(K key, boolean autoSort) {
         this(key, autoSort, true);
     }
 
@@ -127,8 +130,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * @param allowDuplicateXValues  a flag that controls whether duplicate
      *                               x-values are allowed.
      */
-    public XYSeries(Comparable<?> key, boolean autoSort,
-            boolean allowDuplicateXValues) {
+    public XYSeries(K key, boolean autoSort, boolean allowDuplicateXValues) {
         super(key);
         this.data = new java.util.ArrayList<>();
         this.autoSort = autoSort;
@@ -850,10 +852,11 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      *
      * @throws CloneNotSupportedException if there is a cloning problem.
      */
-    @Override
+    @Override 
+    @SuppressWarnings("unchecked")
     public Object clone() throws CloneNotSupportedException {
-        XYSeries clone = (XYSeries) super.clone();
-        clone.data = (List<XYDataItem>) ObjectUtils.deepClone(this.data);
+        XYSeries<K> clone = (XYSeries) super.clone();
+        clone.data = CloneUtils.cloneList(this.data);
         return clone;
     }
 
@@ -867,15 +870,16 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      *
      * @throws CloneNotSupportedException if there is a cloning problem.
      */
-    public XYSeries createCopy(int start, int end)
+    @SuppressWarnings("unchecked")
+    public XYSeries<K> createCopy(int start, int end)
             throws CloneNotSupportedException {
 
-        XYSeries copy = (XYSeries) super.clone();
+        XYSeries<K> copy = (XYSeries) super.clone();
         copy.data = new ArrayList<>();
-        if (this.data.size() > 0) {
+        if (!this.data.isEmpty()) {
             for (int index = start; index <= end; index++) {
                 XYDataItem item = this.data.get(index);
-                XYDataItem clone = (XYDataItem) item.clone();
+                XYDataItem clone = CloneUtils.clone(item);
                 try {
                     copy.add(clone);
                 }
@@ -898,6 +902,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
      * @return A boolean.
      */
     @Override
+    @SuppressWarnings("unchecked")
     public boolean equals(Object obj) {
         if (obj == this) {
             return true;
@@ -908,7 +913,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
         if (!super.equals(obj)) {
             return false;
         }
-        XYSeries that = (XYSeries) obj;
+        XYSeries<K> that = (XYSeries) obj;
         if (this.maximumItemCount != that.maximumItemCount) {
             return false;
         }
@@ -918,7 +923,7 @@ public class XYSeries extends Series implements Cloneable, Serializable {
         if (this.allowDuplicateXValues != that.allowDuplicateXValues) {
             return false;
         }
-        if (!ObjectUtils.equal(this.data, that.data)) {
+        if (!Objects.equals(this.data, that.data)) {
             return false;
         }
         return true;

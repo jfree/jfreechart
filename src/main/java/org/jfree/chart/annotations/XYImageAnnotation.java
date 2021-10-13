@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------
  * XYImageAnnotation.java
  * ----------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Mike Harris;
@@ -45,6 +45,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Objects;
 
 import org.jfree.chart.axis.AxisLocation;
 import org.jfree.chart.axis.ValueAxis;
@@ -52,11 +53,10 @@ import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.ui.RectangleAnchor;
-import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.api.RectangleAnchor;
+import org.jfree.chart.api.RectangleEdge;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.api.PublicCloneable;
 
 /**
  * An annotation that allows an image to be placed at some location on
@@ -81,8 +81,6 @@ public class XYImageAnnotation extends AbstractXYAnnotation
 
     /**
      * The image anchor point.
-     *
-     * @since 1.0.4
      */
     private RectangleAnchor anchor;
 
@@ -90,8 +88,8 @@ public class XYImageAnnotation extends AbstractXYAnnotation
      * Creates a new annotation to be displayed at the specified (x, y)
      * location.
      *
-     * @param x  the x-coordinate (in data space).
-     * @param y  the y-coordinate (in data space).
+     * @param x  the x-coordinate (in data space, must be finite).
+     * @param y  the y-coordinate (in data space, must be finite).
      * @param image  the image ({@code null} not permitted).
      */
     public XYImageAnnotation(double x, double y, Image image) {
@@ -106,14 +104,14 @@ public class XYImageAnnotation extends AbstractXYAnnotation
      * @param y  the y-coordinate (in data space).
      * @param image  the image ({@code null} not permitted).
      * @param anchor  the image anchor ({@code null} not permitted).
-     *
-     * @since 1.0.4
      */
     public XYImageAnnotation(double x, double y, Image image,
             RectangleAnchor anchor) {
         super();
         Args.nullNotPermitted(image, "image");
         Args.nullNotPermitted(anchor, "anchor");
+        Args.requireFinite(x, "x");
+        Args.requireFinite(y, "y");
         this.x = x;
         this.y = y;
         this.image = image;
@@ -124,8 +122,6 @@ public class XYImageAnnotation extends AbstractXYAnnotation
      * Returns the x-coordinate (in data space) for the annotation.
      *
      * @return The x-coordinate.
-     *
-     * @since 1.0.4
      */
     public double getX() {
         return this.x;
@@ -135,8 +131,6 @@ public class XYImageAnnotation extends AbstractXYAnnotation
      * Returns the y-coordinate (in data space) for the annotation.
      *
      * @return The y-coordinate.
-     *
-     * @since 1.0.4
      */
     public double getY() {
         return this.y;
@@ -146,8 +140,6 @@ public class XYImageAnnotation extends AbstractXYAnnotation
      * Returns the image for the annotation.
      *
      * @return The image.
-     *
-     * @since 1.0.4
      */
     public Image getImage() {
         return this.image;
@@ -157,8 +149,6 @@ public class XYImageAnnotation extends AbstractXYAnnotation
      * Returns the image anchor for the annotation.
      *
      * @return The image anchor.
-     *
-     * @since 1.0.4
      */
     public RectangleAnchor getImageAnchor() {
         return this.anchor;
@@ -180,10 +170,8 @@ public class XYImageAnnotation extends AbstractXYAnnotation
      */
     @Override
     public void draw(Graphics2D g2, XYPlot plot, Rectangle2D dataArea,
-                     ValueAxis domainAxis, ValueAxis rangeAxis,
-                     int rendererIndex,
-                     PlotRenderingInfo info) {
-
+            ValueAxis domainAxis, ValueAxis rangeAxis,
+            int rendererIndex, PlotRenderingInfo info) {
         PlotOrientation orientation = plot.getOrientation();
         AxisLocation domainAxisLocation = plot.getDomainAxisLocation();
         AxisLocation rangeAxisLocation = plot.getRangeAxisLocation();
@@ -200,8 +188,7 @@ public class XYImageAnnotation extends AbstractXYAnnotation
         if (orientation == PlotOrientation.HORIZONTAL) {
             xx = j2DY;
             yy = j2DX;
-        }
-        else if (orientation == PlotOrientation.VERTICAL) {
+        } else if (orientation == PlotOrientation.VERTICAL) {
             xx = j2DX;
             yy = j2DY;
         }
@@ -248,7 +235,7 @@ public class XYImageAnnotation extends AbstractXYAnnotation
         if (this.y != that.y) {
             return false;
         }
-        if (!ObjectUtils.equal(this.image, that.image)) {
+        if (!Objects.equals(this.image, that.image)) {
             return false;
         }
         if (!this.anchor.equals(that.anchor)) {

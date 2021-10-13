@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,24 +27,18 @@
  * ------------------
  * ValueAxisTest.java
  * ------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 13-Aug-2003 : Version 1 (DG);
- * 22-Mar-2007 : Extended testEquals() for new field (DG);
- * 04-Sep-2012 : Added test3555275() (DG);
  *
  */
 
 package org.jfree.chart.axis;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -59,12 +53,12 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.api.RectangleInsets;
 import org.jfree.data.Range;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link ValueAxis} class.
@@ -212,10 +206,10 @@ public class ValueAxisTest {
      */
     @Test
     public void testAxisMargins() {
-        XYSeries series = new XYSeries("S1");
+        XYSeries<String> series = new XYSeries<>("S1");
         series.add(100.0, 1.1);
         series.add(200.0, 2.2);
-        XYSeriesCollection dataset = new XYSeriesCollection(series);
+        XYSeriesCollection<String> dataset = new XYSeriesCollection<>(series);
         dataset.setIntervalWidth(0.0);
         JFreeChart chart = ChartFactory.createScatterPlot("Title", "X", "Y", 
                 dataset);
@@ -234,10 +228,10 @@ public class ValueAxisTest {
      */
     @Test
     public void test3555275() {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
         JFreeChart chart = ChartFactory.createLineChart("Title", "X", "Y",
                 dataset, PlotOrientation.VERTICAL, true, false, false);
-        CategoryPlot plot = (CategoryPlot) chart.getPlot();
+        CategoryPlot<String, String> plot = (CategoryPlot) chart.getPlot();
         plot.setInsets(RectangleInsets.ZERO_INSETS);
         plot.setAxisOffset(RectangleInsets.ZERO_INSETS);
         ValueAxis yAxis = plot.getRangeAxis();

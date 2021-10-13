@@ -45,8 +45,9 @@
 package org.jfree.data.general;
 
 import java.io.Serializable;
-import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.PublicCloneable;
+import java.util.Objects;
+
+import org.jfree.chart.api.PublicCloneable;
 
 /**
  * A dataset that stores a single value (that is possibly {@code null}).
@@ -75,7 +76,7 @@ public class DefaultValueDataset extends AbstractDataset
      * @param value  the value.
      */
     public DefaultValueDataset(double value) {
-        this(new Double(value));
+        this(Double.valueOf(value));
     }
 
     /**
@@ -123,7 +124,7 @@ public class DefaultValueDataset extends AbstractDataset
         }
         if (obj instanceof ValueDataset) {
             ValueDataset vd = (ValueDataset) obj;
-            return ObjectUtils.equal(this.value, vd.getValue());
+            return Objects.equals(this.value, vd.getValue());
         }
         return false;
     }

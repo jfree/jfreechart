@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,25 +27,19 @@
  * ------------------------
  * SubCategoryAxisTest.java
  * ------------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 12-May-2004 : Version 1 (DG);
- * 07-Jan-2005 : Added test for hashCode() (DG);
- * 13-Nov-2008 : Added test2275695() (DG);
  *
  */
 
 package org.jfree.chart.axis;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -58,7 +52,8 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
-import org.junit.Test;
+import org.jfree.chart.internal.CloneUtils;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link SubCategoryAxis} class.
@@ -109,12 +104,14 @@ public class SubCategoryAxisTest {
 
     /**
      * Confirm that cloning works.
+     * 
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
         SubCategoryAxis a1 = new SubCategoryAxis("Test");
         a1.addSubCategory("SubCategoryA");
-        SubCategoryAxis a2 = (SubCategoryAxis) a1.clone();
+        SubCategoryAxis a2 = CloneUtils.clone(a1);
         assertTrue(a1 != a2);
         assertTrue(a1.getClass() == a2.getClass());
         assertTrue(a1.equals(a2));
@@ -127,7 +124,7 @@ public class SubCategoryAxisTest {
     public void testSerialization() {
         SubCategoryAxis a1 = new SubCategoryAxis("Test Axis");
         a1.addSubCategory("SubCategoryA");
-        SubCategoryAxis a2 = (SubCategoryAxis) TestUtils.serialised(a1);
+        SubCategoryAxis a2 = TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 
@@ -139,7 +136,7 @@ public class SubCategoryAxisTest {
         JFreeChart chart = ChartFactory.createStackedBarChart("Test",
                 "Category", "Value", null, PlotOrientation.VERTICAL,
                 true, false, false);
-        CategoryPlot plot = (CategoryPlot) chart.getPlot();
+        CategoryPlot<?, ?> plot = (CategoryPlot) chart.getPlot();
         plot.setDomainAxis(new SubCategoryAxis("SubCategoryAxis"));
         try {
             BufferedImage image = new BufferedImage(200 , 100,

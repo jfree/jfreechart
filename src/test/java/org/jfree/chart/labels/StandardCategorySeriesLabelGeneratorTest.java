@@ -36,15 +36,16 @@
 
 package org.jfree.chart.labels;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.jfree.chart.TestUtils;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.internal.CloneUtils;
+import org.jfree.chart.api.PublicCloneable;
 
 import org.jfree.data.category.DefaultCategoryDataset;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link StandardCategorySeriesLabelGenerator} class.
@@ -105,8 +106,7 @@ public class StandardCategorySeriesLabelGeneratorTest {
     public void testCloning() throws CloneNotSupportedException {
         StandardCategorySeriesLabelGenerator g1
                 = new StandardCategorySeriesLabelGenerator("{1}");
-        StandardCategorySeriesLabelGenerator g2 
-                = (StandardCategorySeriesLabelGenerator) g1.clone();
+        StandardCategorySeriesLabelGenerator g2 = CloneUtils.clone(g1);
         assertTrue(g1 != g2);
         assertTrue(g1.getClass() == g2.getClass());
         assertTrue(g1.equals(g2));
@@ -129,8 +129,7 @@ public class StandardCategorySeriesLabelGeneratorTest {
     public void testSerialization() {
         StandardCategorySeriesLabelGenerator g1
                 = new StandardCategorySeriesLabelGenerator("{2}");
-        StandardCategorySeriesLabelGenerator g2 = (StandardCategorySeriesLabelGenerator) 
-                TestUtils.serialised(g1);
+        StandardCategorySeriesLabelGenerator g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

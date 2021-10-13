@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,32 +27,27 @@
  * --------------------
  * BlockBorderTest.java
  * --------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 04-Feb-2005 : Version 1 (DG);
- * 23-Feb-2005 : Extended equals() test (DG);
  *
  */
 
 package org.jfree.chart.block;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.Color;
 import java.awt.GradientPaint;
 
 import org.jfree.chart.TestUtils;
-import org.jfree.chart.ui.RectangleInsets;
-import org.jfree.chart.util.UnitType;
+import org.jfree.chart.api.RectangleInsets;
+import org.jfree.chart.api.UnitType;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link BlockBorder} class.
@@ -105,7 +100,7 @@ public class BlockBorderTest {
         BlockBorder b1 = new BlockBorder(new RectangleInsets(1.0, 2.0, 3.0,
                 4.0), new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f,
                 Color.YELLOW));
-        BlockBorder b2 = (BlockBorder) TestUtils.serialised(b1);
+        BlockBorder b2 = TestUtils.serialised(b1);
         assertEquals(b1, b2);
     }
 

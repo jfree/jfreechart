@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,10 +27,11 @@
  * -----------------------
  * DefaultKeyedValues.java
  * -----------------------
- * (C) Copyright 2002-2020, by Object Refinery Limited.
+ * (C) Copyright 2002-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Thomas Morgner;
+ *                   Tracy Hiltbrand (generics for bug fix to PiePlot);
  *
  */
 
@@ -43,13 +44,15 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.PublicCloneable;
-import org.jfree.chart.util.SortOrder;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.api.PublicCloneable;
+import org.jfree.chart.api.SortOrder;
 
 /**
  * An ordered list of (key, value) items.  This class provides a default
  * implementation of the {@link KeyedValues} interface.
+ * 
+ * @param <K> the key type ({@code String} is a good default).
  */
 public class DefaultKeyedValues<K extends Comparable<K>> 
         implements KeyedValues<K>, Cloneable, PublicCloneable, Serializable {

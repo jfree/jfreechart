@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,24 +27,18 @@
  * --------------------------
  * StandardDialScaleTest.java
  * --------------------------
- * (C) Copyright 2006-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 03-Nov-2006 : Version 1 (DG);
- * 24-Oct-2007 : Updated for API changes (DG);
- * 08-Jan-2012 : Added tests for valueToAngle() and angleToValue();
  *
  */
 
 package org.jfree.chart.plot.dial;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -52,7 +46,8 @@ import java.awt.Font;
 import java.awt.GradientPaint;
 
 import org.jfree.chart.TestUtils;
-import org.junit.Test;
+import org.jfree.chart.internal.CloneUtils;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link StandardDialScale} class.
@@ -150,10 +145,10 @@ public class StandardDialScaleTest {
 
         // tickLabelPaint
         s1.setTickLabelPaint(new GradientPaint(1.0f, 2.0f, Color.WHITE,
-                3.0f, 4.0f, Color.green));
+                3.0f, 4.0f, Color.GREEN));
         assertFalse(s1.equals(s2));
         s2.setTickLabelPaint(new GradientPaint(1.0f, 2.0f, Color.WHITE,
-                3.0f, 4.0f, Color.green));
+                3.0f, 4.0f, Color.GREEN));
         assertTrue(s1.equals(s2));
 
         s1.setTickLabelsVisible(false);
@@ -188,7 +183,7 @@ public class StandardDialScaleTest {
     public void testCloning() throws CloneNotSupportedException {
         // try a default instance
         StandardDialScale s1 = new StandardDialScale();
-        StandardDialScale s2 = (StandardDialScale) s1.clone();
+        StandardDialScale s2 = CloneUtils.clone(s1);
         assertTrue(s1 != s2);
         assertTrue(s1.getClass() == s2.getClass());
         assertTrue(s1.equals(s2));
@@ -218,7 +213,7 @@ public class StandardDialScaleTest {
     public void testSerialization() {
         // try a default instance
         StandardDialScale s1 = new StandardDialScale();
-        StandardDialScale s2 = (StandardDialScale) TestUtils.serialised(s1);
+        StandardDialScale s2 = TestUtils.serialised(s1);
         assertEquals(s1, s2);
 
         // try a customised instance
@@ -228,7 +223,7 @@ public class StandardDialScaleTest {
                 4.0f, Color.WHITE));
         s1.setMajorTickStroke(new BasicStroke(2.0f));
 
-        s2 = (StandardDialScale) TestUtils.serialised(s1);
+        s2 = TestUtils.serialised(s1);
         assertEquals(s1, s2);
     }
 

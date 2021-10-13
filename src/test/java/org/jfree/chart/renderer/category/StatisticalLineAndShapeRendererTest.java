@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,27 +27,20 @@
  * ----------------------------------------
  * StatisticalLineAndShapeRendererTest.java
  * ----------------------------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 15-Jun-2005 : Version 1 (DG);
- * 25-Sep-2006 : Added test1562759() (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG);
- * 16-May-2009 : Added testFindRangeBounds() (DG);
  *
  */
 
 package org.jfree.chart.renderer.category;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.awt.Color;
 
@@ -56,10 +49,11 @@ import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.CategoryPlot;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.internal.CloneUtils;
+import org.jfree.chart.api.PublicCloneable;
 import org.jfree.data.Range;
 import org.jfree.data.statistics.DefaultStatisticalCategoryDataset;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link StatisticalLineAndShapeRenderer} class.
@@ -101,16 +95,17 @@ public class StatisticalLineAndShapeRendererTest {
 
     /**
      * Confirm that cloning works.
+     * 
+     * @throws CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        StatisticalLineAndShapeRenderer r1
-                = new StatisticalLineAndShapeRenderer();
-        StatisticalLineAndShapeRenderer r2 = (StatisticalLineAndShapeRenderer) 
-                r1.clone();
+        StatisticalLineAndShapeRenderer r1 = new StatisticalLineAndShapeRenderer();
+        StatisticalLineAndShapeRenderer r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
+        TestUtils.checkIndependence(r1, r2);
     }
 
     /**
@@ -130,9 +125,9 @@ public class StatisticalLineAndShapeRendererTest {
     public void testSerialization() {
         StatisticalLineAndShapeRenderer r1
                 = new StatisticalLineAndShapeRenderer();
-        StatisticalLineAndShapeRenderer r2 = (StatisticalLineAndShapeRenderer) 
-                TestUtils.serialised(r1);
+        StatisticalLineAndShapeRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
+        TestUtils.checkIndependence(r1, r2);
     }
 
     /**
@@ -142,11 +137,11 @@ public class StatisticalLineAndShapeRendererTest {
     @Test
     public void testDrawWithNullInfo() {
         try {
-            DefaultStatisticalCategoryDataset dataset
-                = new DefaultStatisticalCategoryDataset();
+            DefaultStatisticalCategoryDataset<String, String> dataset
+                = new DefaultStatisticalCategoryDataset<>();
             dataset.add(1.0, 2.0, "S1", "C1");
             dataset.add(3.0, 4.0, "S1", "C2");
-            CategoryPlot plot = new CategoryPlot(dataset,
+            CategoryPlot<String, String> plot = new CategoryPlot<>(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new StatisticalLineAndShapeRenderer());
             JFreeChart chart = new JFreeChart(plot);
@@ -183,8 +178,8 @@ public class StatisticalLineAndShapeRendererTest {
         assertNull(r.findRangeBounds(null));
 
         // an empty dataset should return a null range
-        DefaultStatisticalCategoryDataset dataset
-                = new DefaultStatisticalCategoryDataset();
+        DefaultStatisticalCategoryDataset<String, String> dataset
+                = new DefaultStatisticalCategoryDataset<>();
         assertNull(r.findRangeBounds(dataset));
 
         dataset.add(1.0, 0.5, "R1", "C1");

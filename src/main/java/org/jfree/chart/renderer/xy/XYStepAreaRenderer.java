@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,33 +27,12 @@
  * -----------------------
  * XYStepAreaRenderer.java
  * -----------------------
- * (C) Copyright 2003-2017, by Matthias Rose and Contributors.
+ * (C) Copyright 2003-2021, by Matthias Rose and Contributors.
  *
  * Original Author:  Matthias Rose (based on XYAreaRenderer.java);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Lukasz Rzeszotarski;
- *
- * Changes:
- * --------
- * 07-Oct-2003 : Version 1, contributed by Matthias Rose (DG);
- * 10-Feb-2004 : Added some getter and setter methods (DG);
- * 25-Feb-2004 : Replaced CrosshairInfo with CrosshairState.  Renamed
- *               XYToolTipGenerator --> XYItemLabelGenerator (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
- *               getYValue() (DG);
- * 11-Nov-2004 : Now uses ShapeUtilities to translate shapes (DG);
- * 06-Jul-2005 : Renamed get/setPlotShapes() --> get/setShapesVisible() (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 06-Jul-2006 : Modified to call dataset methods that return double
- *               primitives only (DG);
- * 06-Feb-2007 : Fixed bug 1086307, crosshairs with multiple axes (DG);
- * 14-Feb-2007 : Added equals() method override (DG);
- * 04-May-2007 : Set processVisibleItemsOnly flag to false (DG);
- * 14-May-2008 : Call addEntity() from within drawItem() (DG);
- * 19-May-2009 : Fixed FindBugs warnings, patch by Michal Wozniak (DG);
- * 05-Dec-2013 : Added setStepPoint() method (LR);
- * 18-Feb-2017 : Updates for crosshairs (bug #36) (DG);
- *
+ *                   Michal Wozniak;
  */
 
 package org.jfree.chart.renderer.xy;
@@ -75,8 +54,8 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.urls.XYURLGenerator;
-import org.jfree.chart.util.PublicCloneable;
-import org.jfree.chart.util.ShapeUtils;
+import org.jfree.chart.api.PublicCloneable;
+import org.jfree.chart.internal.ShapeUtils;
 import org.jfree.data.xy.XYDataset;
 
 /**
@@ -85,8 +64,7 @@ import org.jfree.data.xy.XYDataset;
  * {@code XYStepAreaRendererDemo1.java} program included in the JFreeChart
  * demo collection:
  * <br><br>
- * <img src="../../../../../images/XYStepAreaRendererSample.png"
- * alt="XYStepAreaRendererSample.png">
+ * <img src="doc-files/XYStepAreaRendererSample.png" alt="XYStepAreaRendererSample.png">
  */
 public class XYStepAreaRenderer extends AbstractXYItemRenderer
         implements XYItemRenderer, Cloneable, PublicCloneable, Serializable {
@@ -129,8 +107,6 @@ public class XYStepAreaRenderer extends AbstractXYItemRenderer
     /**
      * The factor (from 0.0 to 1.0) that determines the position of the
      * step.
-     *
-     * @since 1.0.18.
      */
     private double stepPoint;
 
@@ -320,8 +296,6 @@ public class XYStepAreaRenderer extends AbstractXYItemRenderer
      *         step is drawn.
      *
      * @see #setStepPoint(double)
-     *
-     * @since 1.0.18
      */
     public double getStepPoint() {
         return stepPoint;
@@ -334,8 +308,6 @@ public class XYStepAreaRenderer extends AbstractXYItemRenderer
      * @param stepPoint  the step point (in the range 0.0 to 1.0)
      *
      * @see #getStepPoint()
-     *
-     * @since 1.0.18
      */
     public void setStepPoint(double stepPoint) {
         if (stepPoint < 0.0d || stepPoint > 1.0d) {

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,38 +27,16 @@
  * ----------------
  * Millisecond.java
  * ----------------
- * (C) Copyright 2001-2012, by Object Refinery Limited.
+ * (C) Copyright 2001-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * Changes
- * -------
- * 11-Oct-2001 : Version 1 (DG);
- * 19-Dec-2001 : Added new constructors as suggested by Paul English (DG);
- * 26-Feb-2002 : Added new getStart() and getEnd() methods (DG);
- * 29-Mar-2002 : Fixed bug in getStart(), getEnd() and compareTo() methods (DG);
- * 10-Sep-2002 : Added getSerialIndex() method (DG);
- * 07-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 10-Jan-2003 : Changed base class and method names (DG);
- * 13-Mar-2003 : Moved to com.jrefinery.data.time package and implemented
- *               Serializable (DG);
- * 21-Oct-2003 : Added hashCode() method (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 05-Oct-2006 : Updated API docs (DG);
- * 06-Oct-2006 : Refactored to cache first and last millisecond values (DG);
- * 04-Apr-2007 : In Millisecond(Date, TimeZone), peg milliseconds to the
- *               specified zone (DG);
- * 06-Jun-2008 : Added handling for general RegularTimePeriod in compareTo()
- *               method:
- *               see http://www.jfree.org/phpBB2/viewtopic.php?t=24805 (DG);
- * 16-Sep-2008 : Deprecated DEFAULT_TIME_ZONE (DG);
- * 02-Mar-2009 : Added new constructor with Locale (DG);
- * 05-Jul-2012 : Replaced getTime().getTime() with getTimeInMillis() (DG);
- *
  */
 
 package org.jfree.data.time;
+
+import org.jfree.chart.internal.Args;
 
 import java.io.Serializable;
 import java.util.Calendar;
@@ -103,6 +81,8 @@ public class Millisecond extends RegularTimePeriod implements Serializable {
 
     /**
      * Constructs a millisecond based on the current system time.
+     * The time zone and locale are determined by the calendar
+     * returned by {@link RegularTimePeriod#getCalendarInstance()}.
      */
     public Millisecond() {
         this(new Date());
@@ -110,21 +90,26 @@ public class Millisecond extends RegularTimePeriod implements Serializable {
 
     /**
      * Constructs a millisecond.
+     * The time zone and locale are determined by the calendar
+     * returned by {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @param millisecond  the millisecond (0-999).
-     * @param second  the second.
+     * @param second  the second ({@code null} not permitted).
      */
     public Millisecond(int millisecond, Second second) {
+        Args.nullNotPermitted(second, "second");
         this.millisecond = millisecond;
         this.second = (byte) second.getSecond();
         this.minute = (byte) second.getMinute().getMinute();
         this.hour = (byte) second.getMinute().getHourValue();
         this.day = second.getMinute().getDay();
-        peg(Calendar.getInstance());
+        peg(getCalendarInstance());
     }
 
     /**
      * Creates a new millisecond.
+     * The time zone and locale are determined by the calendar
+     * returned by {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @param millisecond  the millisecond (0-999).
      * @param second  the second (0-59).
@@ -142,14 +127,16 @@ public class Millisecond extends RegularTimePeriod implements Serializable {
     }
 
     /**
-     * Constructs a new millisecond using the default time zone.
+     * Constructs a new millisecond.
+     * The time zone and locale are determined by the calendar
+     * returned by {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @param time  the time.
      *
      * @see #Millisecond(Date, TimeZone, Locale)
      */
     public Millisecond(Date time) {
-        this(time, TimeZone.getDefault(), Locale.getDefault());
+        this(time, getCalendarInstance());
     }
 
     /**
@@ -162,6 +149,9 @@ public class Millisecond extends RegularTimePeriod implements Serializable {
      * @since 1.0.13
      */
     public Millisecond(Date time, TimeZone zone, Locale locale) {
+        Args.nullNotPermitted(time, "time");
+        Args.nullNotPermitted(zone, "zone");
+        Args.nullNotPermitted(locale, "locale");
         Calendar calendar = Calendar.getInstance(zone, locale);
         calendar.setTime(time);
         this.millisecond = calendar.get(Calendar.MILLISECOND);
@@ -169,6 +159,26 @@ public class Millisecond extends RegularTimePeriod implements Serializable {
         this.minute = (byte) calendar.get(Calendar.MINUTE);
         this.hour = (byte) calendar.get(Calendar.HOUR_OF_DAY);
         this.day = new Day(time, zone, locale);
+        peg(calendar);
+    }
+
+    /**
+     * Constructs a new instance, based on a particular date/time.
+     * The time zone and locale are determined by the {@code calendar}
+     * parameter.
+     *
+     * @param time the date/time ({@code null} not permitted).
+     * @param calendar the calendar to use for calculations ({@code null} not permitted).
+     */
+    public Millisecond(Date time, Calendar calendar) {
+        Args.nullNotPermitted(time, "time");
+        Args.nullNotPermitted(calendar, "calendar");
+        calendar.setTime(time);
+        this.millisecond = calendar.get(Calendar.MILLISECOND);
+        this.second = (byte) calendar.get(Calendar.SECOND);
+        this.minute = (byte) calendar.get(Calendar.MINUTE);
+        this.hour = (byte) calendar.get(Calendar.HOUR_OF_DAY);
+        this.day = new Day(time, calendar);
         peg(calendar);
     }
 
@@ -237,6 +247,9 @@ public class Millisecond extends RegularTimePeriod implements Serializable {
 
     /**
      * Returns the millisecond preceding this one.
+     * No matter what time zone and locale this instance was created with,
+     * the returned instance will use the default calendar for time
+     * calculations, obtained with {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @return The millisecond preceding this one.
      */
@@ -257,6 +270,9 @@ public class Millisecond extends RegularTimePeriod implements Serializable {
 
     /**
      * Returns the millisecond following this one.
+     * No matter what time zone and locale this instance was created with,
+     * the returned instance will use the default calendar for time
+     * calculations, obtained with {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @return The millisecond following this one.
      */

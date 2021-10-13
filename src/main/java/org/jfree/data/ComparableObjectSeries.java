@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * ComparableObjectSeries.java
  * ---------------------------
- * (C) Copyright 2006-2020, by Object Refinery Limited.
+ * (C) Copyright 2006-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -40,8 +40,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.Args;
+import java.util.Objects;
+
+import org.jfree.chart.internal.Args;
 
 import org.jfree.data.general.Series;
 import org.jfree.data.general.SeriesChangeEvent;
@@ -49,10 +50,8 @@ import org.jfree.data.general.SeriesException;
 
 /**
  * A (possibly ordered) list of (Comparable, Object) data items.
- *
- * @since 1.0.3
  */
-public class ComparableObjectSeries extends Series
+public class ComparableObjectSeries<K extends Comparable<K>> extends Series<K>
         implements Cloneable, Serializable {
 
     /** Storage for the data items in the series. */
@@ -74,7 +73,7 @@ public class ComparableObjectSeries extends Series
      *
      * @param key  the series key ({@code null} not permitted).
      */
-    public ComparableObjectSeries(Comparable<?> key) {
+    public ComparableObjectSeries(K key) {
         this(key, true, true);
     }
 
@@ -88,7 +87,7 @@ public class ComparableObjectSeries extends Series
      * @param allowDuplicateXValues  a flag that controls whether duplicate
      *                               x-values are allowed.
      */
-    public ComparableObjectSeries(Comparable<?> key, boolean autoSort,
+    public ComparableObjectSeries(K key, boolean autoSort,
             boolean allowDuplicateXValues) {
         super(key);
         this.data = new ArrayList<>();
@@ -406,7 +405,7 @@ public class ComparableObjectSeries extends Series
         if (this.allowDuplicateXValues != that.allowDuplicateXValues) {
             return false;
         }
-        if (!ObjectUtils.equal(this.data, that.data)) {
+        if (!Objects.equals(this.data, that.data)) {
             return false;
         }
         return true;

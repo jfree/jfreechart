@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,30 +27,26 @@
  * ---------------------------------------
  * StandardXYSeriesLabelGeneratorTest.java
  * ---------------------------------------
- * (C) Copyright 2006-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 24-Nov-2006 : Version 1 (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG)
  *
  */
 
 package org.jfree.chart.labels;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.jfree.chart.TestUtils;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.internal.CloneUtils;
+import org.jfree.chart.api.PublicCloneable;
 
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link StandardXYSeriesLabelGenerator} class.
@@ -64,9 +60,9 @@ public class StandardXYSeriesLabelGeneratorTest {
     public void testGenerateLabel() {
         StandardXYSeriesLabelGenerator g
                 = new StandardXYSeriesLabelGenerator("Series {0}");
-        XYSeriesCollection dataset = new XYSeriesCollection();
-        dataset.addSeries(new XYSeries("1"));
-        dataset.addSeries(new XYSeries("2"));
+        XYSeriesCollection<String> dataset = new XYSeriesCollection<>();
+        dataset.addSeries(new XYSeries<>("1"));
+        dataset.addSeries(new XYSeries<>("2"));
         assertEquals("Series 1", g.generateLabel(dataset, 0));
         assertEquals("Series 2", g.generateLabel(dataset, 1));
     }
@@ -109,8 +105,7 @@ public class StandardXYSeriesLabelGeneratorTest {
     public void testCloning() throws CloneNotSupportedException {
         StandardXYSeriesLabelGenerator g1
                 = new StandardXYSeriesLabelGenerator("Series {0}");
-        StandardXYSeriesLabelGenerator g2 = (StandardXYSeriesLabelGenerator) 
-                g1.clone();
+        StandardXYSeriesLabelGenerator g2 = CloneUtils.clone(g1);
         assertTrue(g1 != g2);
         assertTrue(g1.getClass() == g2.getClass());
         assertTrue(g1.equals(g2));
@@ -133,8 +128,7 @@ public class StandardXYSeriesLabelGeneratorTest {
     public void testSerialization() {
         StandardXYSeriesLabelGenerator g1
                 = new StandardXYSeriesLabelGenerator("Series {0}");
-        StandardXYSeriesLabelGenerator g2 = (StandardXYSeriesLabelGenerator) 
-                TestUtils.serialised(g1);
+        StandardXYSeriesLabelGenerator g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 }

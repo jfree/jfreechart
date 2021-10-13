@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,20 +27,10 @@
  * ----------------
  * BlockBorder.java
  * ----------------
- * (C) Copyright 2004-2017, by Object Refinery Limited.
+ * (C) Copyright 2004-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 22-Oct-2004 : Version 1 (DG);
- * 04-Feb-2005 : Added equals() and implemented Serializable (DG);
- * 23-Feb-2005 : Added attribute for border color (DG);
- * 06-May-2005 : Added new convenience constructors (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 16-Mar-2007 : Implemented BlockFrame (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -54,10 +44,10 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import org.jfree.chart.ui.RectangleInsets;
-import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.api.RectangleInsets;
+import org.jfree.chart.internal.PaintUtils;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.internal.SerialUtils;
 
 /**
  * A border for a block.  This class is immutable.
@@ -72,7 +62,7 @@ public class BlockBorder implements BlockFrame, Serializable {
             RectangleInsets.ZERO_INSETS, Color.WHITE);
 
     /** The space reserved for the border. */
-    private RectangleInsets insets;
+    private final RectangleInsets insets;
 
     /** The border color. */
     private transient Paint paint;

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,23 +27,19 @@
  * ----------------------------
  * AreaRendererEndTypeTest.java
  * ----------------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 29-Apr-2004 : Version 1 (DG);
  *
  */
 
 package org.jfree.chart.renderer;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.jfree.chart.TestUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link AreaRendererEndType} class.
@@ -57,9 +53,7 @@ public class AreaRendererEndTypeTest {
     public void testEquals() {
         assertEquals(AreaRendererEndType.LEVEL, AreaRendererEndType.LEVEL);
         assertEquals(AreaRendererEndType.TAPER, AreaRendererEndType.TAPER);
-        assertEquals(
-            AreaRendererEndType.TRUNCATE, AreaRendererEndType.TRUNCATE
-        );
+        assertEquals(AreaRendererEndType.TRUNCATE, AreaRendererEndType.TRUNCATE);
     }
 
     /**
@@ -68,7 +62,7 @@ public class AreaRendererEndTypeTest {
     @Test
     public void testSerialization() {
         AreaRendererEndType t1 = AreaRendererEndType.TAPER;
-        AreaRendererEndType t2 = (AreaRendererEndType) TestUtils.serialised(t1);
+        AreaRendererEndType t2 = TestUtils.serialised(t1);
         assertEquals(t1, t2);
         boolean same = t1 == t2;
         assertEquals(true, same);

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,18 +27,10 @@
  * ---------------------
  * WaferMapRenderer.java
  * ---------------------
- * (C) Copyright 2003-2008, by Robert Redburn and Contributors.
+ * (C) Copyright 2003-2020, by Robert Redburn and Contributors.
  *
  * Original Author:  Robert Redburn;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 25-Nov-2003 : Version 1, contributed by Robert Redburn.  Changes have been
- *               made to fit the JFreeChart coding style (DG);
- * 20-Apr-2005 : Small update for changes to LegendItem class (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 02-Feb-2007 : Removed author tags from all over JFreeChart sources (DG);
  *
  */
 
@@ -55,14 +47,14 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-import org.jfree.chart.LegendItem;
-import org.jfree.chart.LegendItemCollection;
+import org.jfree.chart.legend.LegendItem;
+import org.jfree.chart.legend.LegendItemCollection;
 import org.jfree.chart.plot.DrawingSupplier;
 import org.jfree.chart.plot.WaferMapPlot;
 import org.jfree.data.general.WaferMapDataset;
 
 /**
- * A renderer for wafer map plots.  Provides color managment facilities.
+ * A renderer for wafer map plots.  Provides color management facilities.
  */
 public class WaferMapRenderer extends AbstractRenderer {
 
@@ -101,7 +93,7 @@ public class WaferMapRenderer extends AbstractRenderer {
      * @param paintIndexMethod  the paint index method.
      */
     public WaferMapRenderer(int paintLimit, int paintIndexMethod) {
-        this(new Integer(paintLimit), new Integer(paintIndexMethod));
+        this(Integer.valueOf(paintLimit), Integer.valueOf(paintIndexMethod));
     }
 
     /**
@@ -216,7 +208,7 @@ public class WaferMapRenderer extends AbstractRenderer {
         if (uniqueValues.size() <= this.paintLimit) {
             int count = 0; // assign a color for each unique value
             for (Iterator i = uniqueValues.iterator(); i.hasNext();) {
-                this.paintIndex.put(i.next(), new Integer(count++));
+                this.paintIndex.put(i.next(), count++);
             }
         }
         else {
@@ -248,7 +240,7 @@ public class WaferMapRenderer extends AbstractRenderer {
         int count = 0; // assign a color for each unique value
         int paint = 0;
         for (Iterator i = uniqueValues.iterator(); i.hasNext();) {
-            this.paintIndex.put(i.next(), new Integer(paint));
+            this.paintIndex.put(i.next(), paint);
             if (++count % valuesPerColor == 0) {
                 paint++;
             }
@@ -280,7 +272,7 @@ public class WaferMapRenderer extends AbstractRenderer {
                     paint = this.paintLimit;
                 }
             }
-            this.paintIndex.put(value, new Integer(paint));
+            this.paintIndex.put(value, paint);
         }
     }
 
@@ -358,7 +350,7 @@ public class WaferMapRenderer extends AbstractRenderer {
                 }
             }
         }
-        return new Double(minValue);
+        return minValue;
     }
 
     /**
@@ -379,7 +371,7 @@ public class WaferMapRenderer extends AbstractRenderer {
                 }
             }
         }
-        return new Double(maxValue);
+        return maxValue;
     }
 
 

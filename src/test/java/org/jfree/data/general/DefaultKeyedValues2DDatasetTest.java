@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,23 +27,20 @@
  * ------------------------------------
  * DefaultKeyedValues2DDatasetTest.java
  * ------------------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 13-Mar-2003 : Version 1 (DG);
  *
  */
 
 package org.jfree.data.general;
 
 import org.jfree.chart.TestUtils;
-import org.junit.Test;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
+import org.jfree.chart.internal.CloneUtils;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Tests for the {@link DefaultKeyedValues2DDataset} class.
@@ -52,15 +49,16 @@ public class DefaultKeyedValues2DDatasetTest {
 
     /**
      * Confirm that cloning works.
+     * 
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        DefaultKeyedValues2DDataset d1 = new DefaultKeyedValues2DDataset();
-        d1.setValue(new Integer(1), "V1", "C1");
+        DefaultKeyedValues2DDataset<String, String> d1 = new DefaultKeyedValues2DDataset<>();
+        d1.setValue(Integer.valueOf(1), "V1", "C1");
         d1.setValue(null, "V2", "C1");
-        d1.setValue(new Integer(3), "V3", "C2");
-        DefaultKeyedValues2DDataset d2 = (DefaultKeyedValues2DDataset) 
-                d1.clone();
+        d1.setValue(Integer.valueOf(3), "V3", "C2");
+        DefaultKeyedValues2DDataset<String, String> d2 = CloneUtils.clone(d1);
         assertTrue(d1 != d2);
         assertTrue(d1.getClass() == d2.getClass());
         assertTrue(d1.equals(d2));
@@ -71,14 +69,13 @@ public class DefaultKeyedValues2DDatasetTest {
      */
     @Test
     public void testSerialization() {
-        DefaultKeyedValues2DDataset d1 = new DefaultKeyedValues2DDataset();
-        d1.addValue(new Double(234.2), "Row1", "Col1");
+        DefaultKeyedValues2DDataset<String, String> d1 = new DefaultKeyedValues2DDataset<>();
+        d1.addValue(234.2, "Row1", "Col1");
         d1.addValue(null, "Row1", "Col2");
-        d1.addValue(new Double(345.9), "Row2", "Col1");
-        d1.addValue(new Double(452.7), "Row2", "Col2");
+        d1.addValue(345.9, "Row2", "Col1");
+        d1.addValue(452.7, "Row2", "Col2");
 
-        DefaultKeyedValues2DDataset d2 = (DefaultKeyedValues2DDataset) 
-                TestUtils.serialised(d1);
+        DefaultKeyedValues2DDataset<String, String> d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 

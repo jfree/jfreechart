@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,28 +27,25 @@
  * ------------------
  * DateTitleTest.java
  * ------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 17-Feb-2004 : Version 1 (DG);
  *
  */
 
 package org.jfree.chart.title;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.Color;
 import java.awt.Font;
 
 import org.jfree.chart.TestUtils;
-import org.junit.Test;
+import org.jfree.chart.internal.CloneUtils;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link DateTitle} class.
@@ -106,7 +103,7 @@ public class DateTitleTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         DateTitle t1 = new DateTitle();
-        DateTitle t2 = (DateTitle) t1.clone();
+        DateTitle t2 = CloneUtils.clone(t1);
         assertTrue(t1 != t2);
         assertTrue(t1.getClass() == t2.getClass());
         assertTrue(t1.equals(t2));
@@ -118,7 +115,7 @@ public class DateTitleTest {
     @Test
     public void testSerialization() {
         DateTitle t1 = new DateTitle();
-        DateTitle t2 = (DateTitle) TestUtils.serialised(t1);
+        DateTitle t2 = TestUtils.serialised(t1);
         assertEquals(t1, t2);
     }
 

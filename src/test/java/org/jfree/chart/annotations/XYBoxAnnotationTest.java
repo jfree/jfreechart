@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,44 +27,62 @@
  * ------------------------
  * XYBoxAnnotationTest.java
  * ------------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 19-Jan-2005 : Version 1 (DG);
- * 26-Feb-2008 : Added testDrawWithNullInfo() method (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG);
  *
  */
 
 package org.jfree.chart.annotations;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.GradientPaint;
+import java.awt.Stroke;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.internal.CloneUtils;
+import org.jfree.chart.api.PublicCloneable;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
-import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.xy.DefaultTableXYDataset;
 import org.jfree.data.xy.XYSeries;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.Test;
 
 /**
  * Some tests for the {@link XYBoxAnnotation} class.
  */
 public class XYBoxAnnotationTest {
+
+    @Test
+    public void testConstructorExceptions() {
+        Stroke stroke = new BasicStroke(2.0f);
+        assertThrows(IllegalArgumentException.class, () -> {
+            XYBoxAnnotation a1 = new XYBoxAnnotation(Double.NaN, 20.0, 100.0, 200.0,
+                stroke, Color.BLUE, Color.RED);
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            XYBoxAnnotation a1 = new XYBoxAnnotation(10.0, Double.NaN, 100.0, 200.0,
+                stroke, Color.BLUE, Color.RED);
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            XYBoxAnnotation a1 = new XYBoxAnnotation(10.0, 20.0, Double.NaN, 200.0,
+                stroke, Color.BLUE, Color.RED);
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            XYBoxAnnotation a1 = new XYBoxAnnotation(10.0, 20.0, 100.0, Double.NaN,
+                stroke, Color.BLUE, Color.RED);
+        });
+    }
 
     /**
      * Confirm that the equals method can distinguish all the required fields.
@@ -142,7 +160,7 @@ public class XYBoxAnnotationTest {
     public void testCloning() throws CloneNotSupportedException {
         XYBoxAnnotation a1 = new XYBoxAnnotation(1.0, 2.0, 3.0, 4.0,
                 new BasicStroke(1.2f), Color.RED, Color.BLUE);
-        XYBoxAnnotation a2 = (XYBoxAnnotation) a1.clone();
+        XYBoxAnnotation a2 = CloneUtils.clone(a1);
         assertTrue(a1 != a2);
         assertTrue(a1.getClass() == a2.getClass());
         assertTrue(a1.equals(a2));
@@ -165,7 +183,7 @@ public class XYBoxAnnotationTest {
     public void testSerialization() {
         XYBoxAnnotation a1 = new XYBoxAnnotation(1.0, 2.0, 3.0, 4.0,
                 new BasicStroke(1.2f), Color.RED, Color.BLUE);
-        XYBoxAnnotation a2 = (XYBoxAnnotation) TestUtils.serialised(a1);
+        XYBoxAnnotation a2 = TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 
@@ -176,22 +194,22 @@ public class XYBoxAnnotationTest {
     @Test
     public void testDrawWithNullInfo() {
         try {
-            DefaultTableXYDataset dataset = new DefaultTableXYDataset();
+            DefaultTableXYDataset<String> dataset = new DefaultTableXYDataset<>();
 
-            XYSeries s1 = new XYSeries("Series 1", true, false);
+            XYSeries<String> s1 = new XYSeries<>("Series 1", true, false);
             s1.add(5.0, 5.0);
             s1.add(10.0, 15.5);
             s1.add(15.0, 9.5);
             s1.add(20.0, 7.5);
             dataset.addSeries(s1);
 
-            XYSeries s2 = new XYSeries("Series 2", true, false);
+            XYSeries<String> s2 = new XYSeries<>("Series 2", true, false);
             s2.add(5.0, 5.0);
             s2.add(10.0, 15.5);
             s2.add(15.0, 9.5);
             s2.add(20.0, 3.5);
             dataset.addSeries(s2);
-            XYPlot plot = new XYPlot(dataset,
+            XYPlot<String> plot = new XYPlot<>(dataset,
                     new NumberAxis("X"), new NumberAxis("Y"),
                     new XYLineAndShapeRenderer());
             plot.addAnnotation(new XYBoxAnnotation(10.0, 12.0, 3.0, 4.0,

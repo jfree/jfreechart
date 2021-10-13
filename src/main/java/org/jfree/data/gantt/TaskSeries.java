@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,31 +27,21 @@
  * ---------------
  * TaskSeries.java
  * ---------------
- * (C) Copyright 2002-2016, by Object Refinery Limited.
+ * (C) Copyright 2002-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
- *
- * Changes
- * -------
- * 06-Jun-2002 : Version 1 (DG);
- * 07-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 24-Oct-2002 : Added methods to get TimeAllocation by task index (DG);
- * 10-Jan-2003 : Renamed GanttSeries --> TaskSeries (DG);
- * 30-Jul-2004 : Added equals() method (DG);
- * 09-May-2008 : Fixed cloning bug (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
- * 19-Jan-2019 : Added missing hashCode (TH);
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
 package org.jfree.data.gantt;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.Args;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.internal.CloneUtils;
 
 import org.jfree.data.general.Series;
 
@@ -61,19 +51,19 @@ import org.jfree.data.general.Series;
  * This class is used as a building block for the {@link TaskSeriesCollection}
  * class that can be used to construct basic Gantt charts.
  */
-public class TaskSeries extends Series {
+public class TaskSeries<K extends Comparable<K>> extends Series<K> {
 
     /** Storage for the tasks in the series. */
-    private List tasks;
+    private List<Task> tasks;
 
     /**
      * Constructs a new series with the specified name.
      *
      * @param name  the series name ({@code null} not permitted).
      */
-    public TaskSeries(String name) {
+    public TaskSeries(K name) {
         super(name);
-        this.tasks = new java.util.ArrayList();
+        this.tasks = new ArrayList<>();
     }
 
     /**
@@ -129,7 +119,7 @@ public class TaskSeries extends Series {
      * @return The task.
      */
     public Task get(int index) {
-        return (Task) this.tasks.get(index);
+        return this.tasks.get(index);
     }
 
     /**
@@ -143,7 +133,7 @@ public class TaskSeries extends Series {
         Task result = null;
         int count = this.tasks.size();
         for (int i = 0; i < count; i++) {
-            Task t = (Task) this.tasks.get(i);
+            Task t = this.tasks.get(i);
             if (t.getDescription().equals(description)) {
                 result = t;
                 break;
@@ -157,7 +147,7 @@ public class TaskSeries extends Series {
      *
      * @return The tasks.
      */
-    public List getTasks() {
+    public List<Task> getTasks() {
         return Collections.unmodifiableList(this.tasks);
     }
 
@@ -204,7 +194,7 @@ public class TaskSeries extends Series {
     @Override
     public Object clone() throws CloneNotSupportedException {
         TaskSeries clone = (TaskSeries) super.clone();
-        clone.tasks = (List) ObjectUtils.deepClone(this.tasks);
+        clone.tasks = CloneUtils.cloneList(this.tasks);
         return clone;
     }
 

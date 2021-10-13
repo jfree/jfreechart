@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * ----------------------
  * PolarItemRenderer.java
  * ----------------------
- * (C) Copyright 2004-2011, by Solution Engineering, Inc. and Contributors.
+ * (C) Copyright 2004-2021, by Solution Engineering, Inc. and Contributors.
  *
  * Original Author:  Daniel Bridenbecker, Solution Engineering, Inc.;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 19-Jan-2004 : Version 1, contributed by DB with minor changes by DG (DG);
- * 03-Oct-2011 : Added tooltip and URL generator support (MH);
  *
  */
 
@@ -45,8 +40,9 @@ import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.util.List;
 
-import org.jfree.chart.LegendItem;
+import org.jfree.chart.legend.LegendItem;
 import org.jfree.chart.axis.ValueAxis;
+import org.jfree.chart.axis.ValueTick;
 import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.event.RendererChangeListener;
 import org.jfree.chart.labels.XYToolTipGenerator;
@@ -71,7 +67,7 @@ public interface PolarItemRenderer {
      * @param dataset  the dataset.
      * @param seriesIndex  the series index.
      */
-    public void drawSeries(Graphics2D g2, Rectangle2D dataArea,
+    void drawSeries(Graphics2D g2, Rectangle2D dataArea,
             PlotRenderingInfo info, PolarPlot plot, XYDataset dataset,
             int seriesIndex);
 
@@ -83,8 +79,8 @@ public interface PolarItemRenderer {
      * @param ticks  the ticks.
      * @param dataArea  the data area.
      */
-    public void drawAngularGridLines(Graphics2D g2, PolarPlot plot,
-            List ticks, Rectangle2D dataArea);
+    void drawAngularGridLines(Graphics2D g2, PolarPlot plot,
+            List<ValueTick> ticks, Rectangle2D dataArea);
 
     /**
      * Draw the radial gridlines - the rings.
@@ -95,8 +91,8 @@ public interface PolarItemRenderer {
      * @param ticks  the ticks.
      * @param dataArea  the data area.
      */
-    public void drawRadialGridLines(Graphics2D g2, PolarPlot plot,
-            ValueAxis radialAxis, List ticks, Rectangle2D dataArea);
+    void drawRadialGridLines(Graphics2D g2, PolarPlot plot,
+            ValueAxis radialAxis, List<ValueTick> ticks, Rectangle2D dataArea);
 
     /**
      * Return the legend for the given series.
@@ -105,14 +101,14 @@ public interface PolarItemRenderer {
      *
      * @return The legend item.
      */
-    public LegendItem getLegendItem(int series);
+    LegendItem getLegendItem(int series);
 
     /**
      * Returns the plot that this renderer has been assigned to.
      *
      * @return The plot.
      */
-    public PolarPlot getPlot();
+    PolarPlot getPlot();
 
     /**
      * Sets the plot that this renderer is assigned to.  This method will be
@@ -120,21 +116,21 @@ public interface PolarItemRenderer {
      *
      * @param plot  the plot.
      */
-    public void setPlot(PolarPlot plot);
+    void setPlot(PolarPlot plot);
 
     /**
      * Adds a change listener.
      *
      * @param listener  the listener.
      */
-    public void addChangeListener(RendererChangeListener listener);
+    void addChangeListener(RendererChangeListener listener);
 
     /**
      * Removes a change listener.
      *
      * @param listener  the listener.
      */
-    public void removeChangeListener(RendererChangeListener listener);
+    void removeChangeListener(RendererChangeListener listener);
 
 
     //// TOOL TIP GENERATOR ///////////////////////////////////////////////////
@@ -146,10 +142,8 @@ public interface PolarItemRenderer {
      * @param column  the column index (zero based).
      *
      * @return The generator (possibly {@code null}).
-     *
-     * @since 1.0.14
      */
-    public XYToolTipGenerator getToolTipGenerator(int row, int column);
+    XYToolTipGenerator getToolTipGenerator(int row, int column);
 
     /**
      * Returns the tool tip generator for a series.
@@ -159,10 +153,8 @@ public interface PolarItemRenderer {
      * @return The generator (possibly {@code null}).
      *
      * @see #setSeriesToolTipGenerator(int, XYToolTipGenerator)
-     *
-     * @since 1.0.14
      */
-    public XYToolTipGenerator getSeriesToolTipGenerator(int series);
+    XYToolTipGenerator getSeriesToolTipGenerator(int series);
 
     /**
      * Sets the tool tip generator for a series and sends a
@@ -172,34 +164,27 @@ public interface PolarItemRenderer {
      * @param generator  the generator ({@code null} permitted).
      *
      * @see #getSeriesToolTipGenerator(int)
-     *
-     * @since 1.0.14
      */
-    public void setSeriesToolTipGenerator(int series,
-                                          XYToolTipGenerator generator);
+    void setSeriesToolTipGenerator(int series, XYToolTipGenerator generator);
 
     /**
-     * Returns the base tool tip generator.
+     * Returns the default tool tip generator.
      *
      * @return The generator (possibly {@code null}).
      *
-     * @see #setBaseToolTipGenerator(XYToolTipGenerator)
-     *
-     * @since 1.0.14
+     * @see #setDefaultToolTipGenerator(XYToolTipGenerator)
      */
-    public XYToolTipGenerator getBaseToolTipGenerator();
+    XYToolTipGenerator getDefaultToolTipGenerator();
 
     /**
-     * Sets the base tool tip generator and sends a {@link RendererChangeEvent}
+     * Sets the default tool tip generator and sends a {@link RendererChangeEvent}
      * to all registered listeners.
      *
      * @param generator  the generator ({@code null} permitted).
      *
-     * @see #getBaseToolTipGenerator()
-     *
-     * @since 1.0.14
+     * @see #getDefaultToolTipGenerator()
      */
-    public void setBaseToolTipGenerator(XYToolTipGenerator generator);
+    void setDefaultToolTipGenerator(XYToolTipGenerator generator);
 
 
     //// URL GENERATOR ////////////////////////////////////////////////////////
@@ -207,19 +192,15 @@ public interface PolarItemRenderer {
     /**
      * Returns the URL generator for HTML image maps.
      *
-     * @return The URL generator (possibly null).
-     *
-     * @since 1.0.14
+     * @return The URL generator (possibly {@code null}).
      */
-    public XYURLGenerator getURLGenerator();
+    XYURLGenerator getURLGenerator();
 
     /**
      * Sets the URL generator for HTML image maps.
      *
-     * @param urlGenerator the URL generator (null permitted).
-     *
-     * @since 1.0.14
+     * @param urlGenerator the URL generator ({@code null} permitted).
      */
-    public void setURLGenerator(XYURLGenerator urlGenerator);
+    void setURLGenerator(XYURLGenerator urlGenerator);
 
 }

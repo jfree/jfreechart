@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,20 +27,10 @@
  * --------------------------
  * CategoryLabelPosition.java
  * --------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 31-Oct-2003 : Version 1 (DG);
- * 17-Feb-2004 : Added new constructor (DG);
- * 23-Mar-2004 : Added width calculation parameters (DG);
- * 07-Jan-2005 : Fixed bug in equals() method (DG);
- * 11-Jan-2005 : Removed deprecated constructor in preparation for the 1.0.0
- *               release (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -48,9 +38,9 @@ package org.jfree.chart.axis;
 
 import java.io.Serializable;
 import org.jfree.chart.text.TextBlockAnchor;
-import org.jfree.chart.ui.RectangleAnchor;
-import org.jfree.chart.ui.TextAnchor;
-import org.jfree.chart.util.Args;
+import org.jfree.chart.api.RectangleAnchor;
+import org.jfree.chart.text.TextAnchor;
+import org.jfree.chart.internal.Args;
 
 /**
  * The attributes that control the position of the labels for the categories on

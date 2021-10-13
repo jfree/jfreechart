@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,18 +27,10 @@
  * -------------------------
  * OHLCSeriesCollection.java
  * -------------------------
- * (C) Copyright 2006-2016, by Object Refinery Limited.
+ * (C) Copyright 2006-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 04-Dec-2006 : Version 1 (DG);
- * 10-Jul-2008 : Added accessor methods for xPosition attribute (DG);
- * 23-May-2009 : Added hashCode() implementation (DG);
- * 26-Jun-2009 : Added removeSeries() methods (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -46,10 +38,11 @@ package org.jfree.data.time.ohlc;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
-import org.jfree.chart.HashUtils;
-import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.Args;
+import org.jfree.chart.internal.HashUtils;
+import org.jfree.chart.internal.CloneUtils;
+import org.jfree.chart.internal.Args;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.time.RegularTimePeriod;
 import org.jfree.data.time.TimePeriodAnchor;
@@ -226,7 +219,7 @@ public class OHLCSeriesCollection extends AbstractXYDataset
      */
     @Override
     public Number getX(int series, int item) {
-        return new Double(getXValue(series, item));
+        return Double.valueOf(getXValue(series, item));
     }
 
     /**
@@ -241,7 +234,7 @@ public class OHLCSeriesCollection extends AbstractXYDataset
     public Number getY(int series, int item) {
         OHLCSeries s = (OHLCSeries) this.data.get(series);
         OHLCItem di = (OHLCItem) s.getDataItem(item);
-        return new Double(di.getYValue());
+        return Double.valueOf(di.getYValue());
     }
 
     /**
@@ -269,7 +262,7 @@ public class OHLCSeriesCollection extends AbstractXYDataset
      */
     @Override
     public Number getOpen(int series, int item) {
-        return new Double(getOpenValue(series, item));
+        return Double.valueOf(getOpenValue(series, item));
     }
 
     /**
@@ -297,7 +290,7 @@ public class OHLCSeriesCollection extends AbstractXYDataset
      */
     @Override
     public Number getClose(int series, int item) {
-        return new Double(getCloseValue(series, item));
+        return Double.valueOf(getCloseValue(series, item));
     }
 
     /**
@@ -325,7 +318,7 @@ public class OHLCSeriesCollection extends AbstractXYDataset
      */
     @Override
     public Number getHigh(int series, int item) {
-        return new Double(getHighValue(series, item));
+        return Double.valueOf(getHighValue(series, item));
     }
 
     /**
@@ -353,7 +346,7 @@ public class OHLCSeriesCollection extends AbstractXYDataset
      */
     @Override
     public Number getLow(int series, int item) {
-        return new Double(getLowValue(series, item));
+        return Double.valueOf(getLowValue(series, item));
     }
 
     /**
@@ -464,7 +457,7 @@ public class OHLCSeriesCollection extends AbstractXYDataset
         if (!this.xPosition.equals(that.xPosition)) {
             return false;
         }
-        return ObjectUtils.equal(this.data, that.data);
+        return Objects.equals(this.data, that.data);
     }
 
     /**
@@ -493,7 +486,7 @@ public class OHLCSeriesCollection extends AbstractXYDataset
     public Object clone() throws CloneNotSupportedException {
         OHLCSeriesCollection clone
                 = (OHLCSeriesCollection) super.clone();
-        clone.data = (List) ObjectUtils.deepClone(this.data);
+        clone.data = CloneUtils.cloneList(this.data);
         return clone;
     }
 

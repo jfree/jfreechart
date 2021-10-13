@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,24 +27,19 @@
  * --------------------------
  * XYTitleAnnotationTest.java
  * --------------------------
- * (C) Copyright 2007-2016, by Object Refinery Limited.
+ * (C) Copyright 2007-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 30-Apr-2007 : Version 1 (DG);
- * 26-Feb-2008 : Added testDrawWithNullInfo() (DG);
  *
  */
 
 package org.jfree.chart.annotations;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.TestUtils;
@@ -52,9 +47,10 @@ import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.chart.title.TextTitle;
+import org.jfree.chart.internal.CloneUtils;
 import org.jfree.data.xy.DefaultTableXYDataset;
 import org.jfree.data.xy.XYSeries;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link XYTitleAnnotation} class.
@@ -109,7 +105,7 @@ public class XYTitleAnnotationTest {
     public void testCloning() throws CloneNotSupportedException {
         TextTitle t = new TextTitle("Title");
         XYTitleAnnotation a1 = new XYTitleAnnotation(1.0, 2.0, t);
-        XYTitleAnnotation a2 = (XYTitleAnnotation) a1.clone();
+        XYTitleAnnotation a2 = CloneUtils.clone(a1);
         assertTrue(a1 != a2);
         assertTrue(a1.getClass() == a2.getClass());
         assertTrue(a1.equals(a2));
@@ -122,7 +118,7 @@ public class XYTitleAnnotationTest {
     public void testSerialization() {
         TextTitle t = new TextTitle("Title");
         XYTitleAnnotation a1 = new XYTitleAnnotation(1.0, 2.0, t);
-        XYTitleAnnotation a2 = (XYTitleAnnotation) TestUtils.serialised(a1);
+        XYTitleAnnotation a2 = TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
     
@@ -133,29 +129,28 @@ public class XYTitleAnnotationTest {
     @Test
     public void testDrawWithNullInfo() {
         try {
-            DefaultTableXYDataset dataset = new DefaultTableXYDataset();
+            DefaultTableXYDataset<String> dataset = new DefaultTableXYDataset<>();
         
-            XYSeries s1 = new XYSeries("Series 1", true, false);
+            XYSeries<String> s1 = new XYSeries<>("Series 1", true, false);
             s1.add(5.0, 5.0);
             s1.add(10.0, 15.5);
             s1.add(15.0, 9.5);
             s1.add(20.0, 7.5);
             dataset.addSeries(s1);
         
-            XYSeries s2 = new XYSeries("Series 2", true, false);
+            XYSeries<String> s2 = new XYSeries<>("Series 2", true, false);
             s2.add(5.0, 5.0);
             s2.add(10.0, 15.5);
             s2.add(15.0, 9.5);
             s2.add(20.0, 3.5);
             dataset.addSeries(s2);
-            XYPlot plot = new XYPlot(dataset, 
+            XYPlot<String> plot = new XYPlot<>(dataset, 
                     new NumberAxis("X"), new NumberAxis("Y"), 
                     new XYLineAndShapeRenderer());
             plot.addAnnotation(new XYTitleAnnotation(5.0, 6.0, 
                     new TextTitle("Hello World!")));
             JFreeChart chart = new JFreeChart(plot);
-            /* BufferedImage image = */ chart.createBufferedImage(300, 200, 
-                    null);
+            /* BufferedImage image = */ chart.createBufferedImage(300, 200, null);
         }
         catch (NullPointerException e) {
             fail("There should be no exception.");

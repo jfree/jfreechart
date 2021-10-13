@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,30 +27,10 @@
  * -------------------------
  * StackedXYBarRenderer.java
  * -------------------------
- * (C) Copyright 2004-2017, by Andreas Schroeder and Contributors.
+ * (C) Copyright 2004-2021, by Andreas Schroeder and Contributors.
  *
  * Original Author:  Andreas Schroeder;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 01-Apr-2004 : Version 1 (AS);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
- *               getYValue() (DG);
- * 15-Aug-2004 : Added drawBarOutline to control draw/don't-draw bar
- *               outlines (BN);
- * 10-Sep-2004 : drawBarOutline attribute is now inherited from XYBarRenderer
- *               and double primitives are retrieved from the dataset rather
- *               than Number objects (DG);
- * 07-Jan-2005 : Updated for method name change in DatasetUtilities (DG);
- * 25-Jan-2005 : Modified to handle negative values correctly (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 06-Dec-2006 : Added support for GradientPaint (DG);
- * 15-Mar-2007 : Added renderAsPercentages option (DG);
- * 24-Jun-2008 : Added new barPainter mechanism (DG);
- * 23-Sep-2008 : Check shadow visibility before drawing shadow (DG);
- * 28-May-2009 : Fixed bar positioning with inverted domain axis (DG);
- * 07-Act-2011 : Fix for Bug #3035289: Patch #3035325 (MH);
  */
 
 package org.jfree.chart.renderer.xy;
@@ -68,8 +48,8 @@ import org.jfree.chart.plot.CrosshairState;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.ui.TextAnchor;
+import org.jfree.chart.api.RectangleEdge;
+import org.jfree.chart.text.TextAnchor;
 import org.jfree.data.Range;
 import org.jfree.data.general.DatasetUtils;
 import org.jfree.data.xy.IntervalXYDataset;
@@ -88,9 +68,8 @@ import org.jfree.data.xy.XYDataset;
  * {@code StackedXYBarChartDemo2.java} program included in the
  * JFreeChart demo collection:
  * <br><br>
- * <img src="../../../../../images/StackedXYBarRendererSample.png"
+ * <img src="doc-files/StackedXYBarRendererSample.png"
  * alt="StackedXYBarRendererSample.png">
-
  */
 public class StackedXYBarRenderer extends XYBarRenderer {
 
@@ -134,8 +113,6 @@ public class StackedXYBarRenderer extends XYBarRenderer {
      * @return A boolean.
      *
      * @see #setRenderAsPercentages(boolean)
-     *
-     * @since 1.0.5
      */
     public boolean getRenderAsPercentages() {
         return this.renderAsPercentages;
@@ -149,8 +126,6 @@ public class StackedXYBarRenderer extends XYBarRenderer {
      * @param asPercentages  the flag.
      *
      * @see #getRenderAsPercentages()
-     *
-     * @since 1.0.5
      */
     public void setRenderAsPercentages(boolean asPercentages) {
         this.renderAsPercentages = asPercentages;
@@ -204,13 +179,11 @@ public class StackedXYBarRenderer extends XYBarRenderer {
         if (dataset != null) {
             if (this.renderAsPercentages) {
                 return new Range(0.0, 1.0);
-            }
-            else {
+            } else {
                 return DatasetUtils.findStackedRangeBounds(
                         (TableXYDataset) dataset);
             }
-        }
-        else {
+        } else {
             return null;
         }
     }
@@ -293,8 +266,7 @@ public class StackedXYBarRenderer extends XYBarRenderer {
                 }
                 if (v > 0) {
                     positiveBase = positiveBase + v;
-                }
-                else {
+                } else {
                     negativeBase = negativeBase + v;
                 }
             }
@@ -308,8 +280,7 @@ public class StackedXYBarRenderer extends XYBarRenderer {
                     edgeR);
             translatedValue = rangeAxis.valueToJava2D(positiveBase + value,
                     dataArea, edgeR);
-        }
-        else {
+        } else {
             translatedBase = rangeAxis.valueToJava2D(negativeBase, dataArea,
                     edgeR);
             translatedValue = rangeAxis.valueToJava2D(negativeBase + value,
@@ -345,8 +316,7 @@ public class StackedXYBarRenderer extends XYBarRenderer {
             bar = new Rectangle2D.Double(Math.min(translatedBase,
                     translatedValue), Math.min(translatedEndX,
                     translatedStartX), translatedHeight, translatedWidth);
-        }
-        else if (orientation == PlotOrientation.VERTICAL) {
+        } else if (orientation == PlotOrientation.VERTICAL) {
             bar = new Rectangle2D.Double(Math.min(translatedStartX,
                     translatedEndX), Math.min(translatedBase, translatedValue),
                     translatedWidth, translatedHeight);
@@ -359,16 +329,13 @@ public class StackedXYBarRenderer extends XYBarRenderer {
         if (orientation == PlotOrientation.HORIZONTAL) {
             if (positive && inverted || !positive && !inverted) {
                 barBase = RectangleEdge.RIGHT;
-            }
-            else {
+            } else {
                 barBase = RectangleEdge.LEFT;
             }
-        }
-        else {
+        } else {
             if (positive && !inverted || !positive && inverted) {
                 barBase = RectangleEdge.BOTTOM;
-            }
-            else {
+            } else {
                 barBase = RectangleEdge.TOP;
             }
         }
@@ -378,8 +345,7 @@ public class StackedXYBarRenderer extends XYBarRenderer {
                 getBarPainter().paintBarShadow(g2, this, series, item, bar,
                         barBase, false);
             }
-        }
-        else if (pass == 1) {
+        } else if (pass == 1) {
             getBarPainter().paintBar(g2, this, series, item, bar, barBase);
 
             // add an entity for the item...
@@ -391,8 +357,7 @@ public class StackedXYBarRenderer extends XYBarRenderer {
                             bar.getCenterX(), bar.getCenterY());
                 }
             }
-        }
-        else if (pass == 2) {
+        } else if (pass == 2) {
             // handle item label drawing, now that we know all the bars have
             // been drawn...
             if (isItemLabelVisible(series, item)) {

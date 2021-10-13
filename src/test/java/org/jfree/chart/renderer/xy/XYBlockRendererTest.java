@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,26 +27,19 @@
  * ------------------------
  * XYBlockRendererTest.java
  * ------------------------
- * (C) Copyright 2006-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 05-Jul-2006 : Version 1 (DG);
- * 09-Mar-2007 : Added independence check to testCloning (DG);
- * 22-Apr-2008 : Added testPublicCloneable (DG);
- * 20-Oct-2011 : Added testFindDomainBounds() and testFindRangeBounds() (DG);
  *
  */
 
 package org.jfree.chart.renderer.xy;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.awt.Color;
 
@@ -54,12 +47,13 @@ import org.jfree.chart.TestUtils;
 
 import org.jfree.chart.renderer.GrayPaintScale;
 import org.jfree.chart.renderer.LookupPaintScale;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.internal.CloneUtils;
+import org.jfree.chart.api.PublicCloneable;
 import org.jfree.data.Range;
 import org.jfree.data.xy.DefaultXYZDataset;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.data.xy.XYSeries;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link XYBlockRenderer} class.
@@ -115,13 +109,15 @@ public class XYBlockRendererTest {
 
     /**
      * Confirm that cloning works.
+     * 
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
         XYBlockRenderer r1 = new XYBlockRenderer();
         LookupPaintScale scale1 = new LookupPaintScale();
         r1.setPaintScale(scale1);
-        XYBlockRenderer r2 = (XYBlockRenderer) r1.clone();
+        XYBlockRenderer r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -149,7 +145,7 @@ public class XYBlockRendererTest {
     @Test
     public void testSerialization() {
         XYBlockRenderer r1 = new XYBlockRenderer();
-        XYBlockRenderer r2 = (XYBlockRenderer) TestUtils.serialised(r1);
+        XYBlockRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 
@@ -161,7 +157,7 @@ public class XYBlockRendererTest {
         XYBlockRenderer r = new XYBlockRenderer();
         Range range = r.findDomainBounds(null);
         assertTrue(range == null);
-        DefaultXYZDataset emptyDataset = new DefaultXYZDataset();
+        DefaultXYZDataset<String> emptyDataset = new DefaultXYZDataset<>();
         range = r.findDomainBounds(emptyDataset);
         assertTrue(range == null);
     }
@@ -174,7 +170,7 @@ public class XYBlockRendererTest {
         XYBlockRenderer r = new XYBlockRenderer();
         Range range = r.findRangeBounds(null);
         assertTrue(range == null);
-        DefaultXYZDataset emptyDataset = new DefaultXYZDataset();
+        DefaultXYZDataset<String> emptyDataset = new DefaultXYZDataset<>();
         range = r.findRangeBounds(emptyDataset);
         assertTrue(range == null);
     }
@@ -187,8 +183,8 @@ public class XYBlockRendererTest {
         XYBlockRenderer renderer = new XYBlockRenderer();
         assertNull(renderer.findRangeBounds(null));
 
-        XYSeriesCollection dataset = new XYSeriesCollection();
-        XYSeries series = new XYSeries("S1");
+        XYSeriesCollection<String> dataset = new XYSeriesCollection<>();
+        XYSeries<String> series = new XYSeries<>("S1");
         series.add(1.0, null);
         dataset.addSeries(series);
         Range r = renderer.findRangeBounds(dataset);
@@ -203,8 +199,8 @@ public class XYBlockRendererTest {
         XYBlockRenderer renderer = new XYBlockRenderer();
         assertNull(renderer.findRangeBounds(null));
 
-        XYSeriesCollection dataset = new XYSeriesCollection();
-        XYSeries series = new XYSeries("S1");
+        XYSeriesCollection<String> dataset = new XYSeriesCollection<>();
+        XYSeries<String> series = new XYSeries<>("S1");
         series.add(1.0, null);
         dataset.addSeries(series);
         Range r = renderer.findDomainBounds(dataset);

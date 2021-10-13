@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * -----------------------
  * KeyedValues2DDataset.java
  * -----------------------
- * (C) Copyright 2003-2008, by Object Refinery Limited.
+ * (C) Copyright 2003-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 13-Mar-2003 : Version 1 (DG);
- * 23-Apr-2003 : Switched CategoryDataset and KeyedValues2DDataset so that
- *               CategoryDataset is the super interface (DG);
  *
  */
 
@@ -45,10 +39,13 @@ package org.jfree.data.general;
 import org.jfree.data.category.CategoryDataset;
 
 /**
- * A dataset containing (key, value) data items.  This dataset is equivalent
- * to a {@link CategoryDataset} and is included for completeness only.
+ * A dataset containing (key, value) data items.This dataset is equivalent
+ to a {@link CategoryDataset} and is included for completeness only.
+ * 
+ * @param <R> The type for the row (series) keys.
+ * @param <C> The type for the column (item) keys.
  */
-public interface KeyedValues2DDataset extends CategoryDataset {
+public interface KeyedValues2DDataset<R extends Comparable<R>, C extends Comparable<C>> extends CategoryDataset<R, C> {
 
     // no new methods required
 

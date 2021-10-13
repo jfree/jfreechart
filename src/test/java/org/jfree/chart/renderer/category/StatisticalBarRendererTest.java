@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------------
  * StatisticalBarRendererTest.java
  * -------------------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -36,11 +36,11 @@
 
 package org.jfree.chart.renderer.category;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -51,10 +51,11 @@ import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.internal.CloneUtils;
+import org.jfree.chart.api.PublicCloneable;
 import org.jfree.data.Range;
 import org.jfree.data.statistics.DefaultStatisticalCategoryDataset;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link StatisticalBarRenderer} class.
@@ -96,14 +97,17 @@ public class StatisticalBarRendererTest {
 
     /**
      * Confirm that cloning works.
+     * 
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
         StatisticalBarRenderer r1 = new StatisticalBarRenderer();
-        StatisticalBarRenderer r2 = (StatisticalBarRenderer) r1.clone();
+        StatisticalBarRenderer r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
+        TestUtils.checkIndependence(r1, r2);
     }
 
     /**
@@ -121,9 +125,9 @@ public class StatisticalBarRendererTest {
     @Test
     public void testSerialization() {
         StatisticalBarRenderer r1 = new StatisticalBarRenderer();
-        StatisticalBarRenderer r2 = (StatisticalBarRenderer) 
-                TestUtils.serialised(r1);
+        StatisticalBarRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
+        TestUtils.checkIndependence(r1, r2);
     }
 
     /**
@@ -133,11 +137,11 @@ public class StatisticalBarRendererTest {
     @Test
     public void testDrawWithNullInfo() {
         try {
-            DefaultStatisticalCategoryDataset dataset
-                    = new DefaultStatisticalCategoryDataset();
+            DefaultStatisticalCategoryDataset<String, String> dataset
+                    = new DefaultStatisticalCategoryDataset<>();
             dataset.add(1.0, 2.0, "S1", "C1");
             dataset.add(3.0, 4.0, "S1", "C2");
-            CategoryPlot plot = new CategoryPlot(dataset,
+            CategoryPlot<String, String> plot = new CategoryPlot<>(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new StatisticalBarRenderer());
             JFreeChart chart = new JFreeChart(plot);
@@ -157,11 +161,11 @@ public class StatisticalBarRendererTest {
     @Test
     public void testDrawWithNullMeanVertical() {
         try {
-            DefaultStatisticalCategoryDataset dataset
-                    = new DefaultStatisticalCategoryDataset();
+            DefaultStatisticalCategoryDataset<String, String> dataset
+                    = new DefaultStatisticalCategoryDataset<>();
             dataset.add(1.0, 2.0, "S1", "C1");
             dataset.add(null, 4.0, "S1", "C2");
-            CategoryPlot plot = new CategoryPlot(dataset,
+            CategoryPlot<String, String> plot = new CategoryPlot<>(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new StatisticalBarRenderer());
             JFreeChart chart = new JFreeChart(plot);
@@ -181,11 +185,11 @@ public class StatisticalBarRendererTest {
     @Test
     public void testDrawWithNullMeanHorizontal() {
         try {
-            DefaultStatisticalCategoryDataset dataset
-                    = new DefaultStatisticalCategoryDataset();
+            DefaultStatisticalCategoryDataset<String, String> dataset
+                    = new DefaultStatisticalCategoryDataset<>();
             dataset.add(1.0, 2.0, "S1", "C1");
             dataset.add(null, 4.0, "S1", "C2");
-            CategoryPlot plot = new CategoryPlot(dataset,
+            CategoryPlot<String, String> plot = new CategoryPlot<>(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new StatisticalBarRenderer());
             plot.setOrientation(PlotOrientation.HORIZONTAL);
@@ -206,11 +210,11 @@ public class StatisticalBarRendererTest {
     @Test
     public void testDrawWithNullDeviationVertical() {
         try {
-            DefaultStatisticalCategoryDataset dataset
-                    = new DefaultStatisticalCategoryDataset();
+            DefaultStatisticalCategoryDataset<String, String> dataset
+                    = new DefaultStatisticalCategoryDataset<>();
             dataset.add(1.0, 2.0, "S1", "C1");
             dataset.add(4.0, null, "S1", "C2");
-            CategoryPlot plot = new CategoryPlot(dataset,
+            CategoryPlot<String, String> plot = new CategoryPlot<>(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new StatisticalBarRenderer());
             JFreeChart chart = new JFreeChart(plot);
@@ -230,11 +234,11 @@ public class StatisticalBarRendererTest {
     @Test
     public void testDrawWithNullDeviationHorizontal() {
         try {
-            DefaultStatisticalCategoryDataset dataset
-                    = new DefaultStatisticalCategoryDataset();
+            DefaultStatisticalCategoryDataset<String, String> dataset
+                    = new DefaultStatisticalCategoryDataset<>();
             dataset.add(1.0, 2.0, "S1", "C1");
             dataset.add(4.0, null, "S1", "C2");
-            CategoryPlot plot = new CategoryPlot(dataset,
+            CategoryPlot<String, String> plot = new CategoryPlot<>(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new StatisticalBarRenderer());
             plot.setOrientation(PlotOrientation.HORIZONTAL);
@@ -256,8 +260,8 @@ public class StatisticalBarRendererTest {
         assertNull(r.findRangeBounds(null));
 
         // an empty dataset should return a null range
-        DefaultStatisticalCategoryDataset dataset
-                = new DefaultStatisticalCategoryDataset();
+        DefaultStatisticalCategoryDataset<String, String> dataset
+                = new DefaultStatisticalCategoryDataset<>();
         assertNull(r.findRangeBounds(dataset));
 
         dataset.add(1.0, 0.5, "R1", "C1");

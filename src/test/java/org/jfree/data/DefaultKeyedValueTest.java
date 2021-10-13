@@ -37,11 +37,12 @@
 package org.jfree.data;
 
 import org.jfree.chart.TestUtils;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import org.junit.Test;
+import org.jfree.chart.internal.CloneUtils;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link DefaultKeyedValue} class.
@@ -60,9 +61,8 @@ public class DefaultKeyedValueTest {
         // try null key
         boolean pass = false;
         try {
-            /*v =*/ new DefaultKeyedValue<>(null, 1);
-        }
-        catch (IllegalArgumentException e) {
+            v = new DefaultKeyedValue<>(null, 1);
+        } catch (IllegalArgumentException e) {
             pass = true;
         }
         assertTrue(pass);
@@ -77,7 +77,6 @@ public class DefaultKeyedValueTest {
      */
     @Test
     public void testEquals() {
-
         DefaultKeyedValue<String> v1 = new DefaultKeyedValue<>("Test", 45.5);
         DefaultKeyedValue<String> v2 = new DefaultKeyedValue<>("Test", 45.5);
         assertTrue(v1.equals(v2));
@@ -90,7 +89,19 @@ public class DefaultKeyedValueTest {
         v1 = new DefaultKeyedValue<>("Test", 45.5);
         v2 = new DefaultKeyedValue<>("Test", 45.6);
         assertFalse(v1.equals(v2));
+    }
 
+    /**
+     * Confirm that the equals method works correctly for null values.
+     */
+    @Test
+    public void testEqualsForNullValues() {
+        DefaultKeyedValue<String> v1 = new DefaultKeyedValue<>("K1", null);
+        DefaultKeyedValue<String> v2 = new DefaultKeyedValue<>("K1", null);
+        assertTrue(v1.equals(v2));
+        v1.setValue(1);
+        assertFalse(v1.equals(v2));
+        assertFalse(v2.equals(v1));
     }
 
     /**
@@ -100,7 +111,7 @@ public class DefaultKeyedValueTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         DefaultKeyedValue<String> v1 = new DefaultKeyedValue<>("Test", 45.5);
-        DefaultKeyedValue<String> v2 = (DefaultKeyedValue) v1.clone();
+        DefaultKeyedValue<String> v2 = CloneUtils.clone(v1);
         assertTrue(v1 != v2);
         assertTrue(v1.getClass() == v2.getClass());
         assertTrue(v1.equals(v2));
@@ -116,7 +127,7 @@ public class DefaultKeyedValueTest {
     @Test
     public void testSerialization() {
         DefaultKeyedValue<String> v1 = new DefaultKeyedValue<>("Test", 25.3);
-        DefaultKeyedValue<String> v2 = (DefaultKeyedValue) TestUtils.serialised(v1);
+        DefaultKeyedValue<String> v2 = TestUtils.serialised(v1);
         assertEquals(v1, v2);
     }
 

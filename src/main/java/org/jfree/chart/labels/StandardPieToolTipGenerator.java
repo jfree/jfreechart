@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------------------
  * StandardPieToolTipGenerator.java
  * --------------------------------
- * (C) Copyright 2001-2020, by Object Refinery Limited.
+ * (C) Copyright 2001-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Richard Atkinson;
@@ -40,7 +40,7 @@ package org.jfree.chart.labels;
 import java.io.Serializable;
 import java.text.NumberFormat;
 import java.util.Locale;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.api.PublicCloneable;
 
 import org.jfree.data.general.PieDataset;
 
@@ -75,8 +75,6 @@ public class StandardPieToolTipGenerator extends AbstractPieItemLabelGenerator
      * default format string.
      *
      * @param locale  the locale ({@code null} not permitted).
-     *
-     * @since 1.0.7
      */
     public StandardPieToolTipGenerator(Locale locale) {
         this(DEFAULT_TOOLTIP_FORMAT, locale);
@@ -96,8 +94,6 @@ public class StandardPieToolTipGenerator extends AbstractPieItemLabelGenerator
      *
      * @param labelFormat  the label format ({@code null} not permitted).
      * @param locale  the locale ({@code null} not permitted).
-     *
-     * @since 1.0.7
      */
     public StandardPieToolTipGenerator(String labelFormat, Locale locale) {
         this(labelFormat, NumberFormat.getNumberInstance(locale),

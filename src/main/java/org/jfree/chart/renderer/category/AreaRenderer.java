@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,49 +27,12 @@
  * -----------------
  * AreaRenderer.java
  * -----------------
- * (C) Copyright 2002-2016, by Jon Iles and Contributors.
+ * (C) Copyright 2002-2021, by Jon Iles and Contributors.
  *
  * Original Author:  Jon Iles;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Christian W. Zuckschwerdt;
  *
- * Changes:
- * --------
- * 21-May-2002 : Version 1, contributed by John Iles (DG);
- * 29-May-2002 : Now extends AbstractCategoryItemRenderer (DG);
- * 11-Jun-2002 : Updated Javadoc comments (DG);
- * 25-Jun-2002 : Removed unnecessary imports (DG);
- * 01-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 10-Oct-2002 : Added constructors and basic entity support (DG);
- * 24-Oct-2002 : Amendments for changes in CategoryDataset interface and
- *               CategoryToolTipGenerator interface (DG);
- * 05-Nov-2002 : Replaced references to CategoryDataset with TableDataset (DG);
- * 06-Nov-2002 : Renamed drawCategoryItem() --> drawItem() and now using axis
- *               for category spacing.  Renamed AreaCategoryItemRenderer
- *               --> AreaRenderer (DG);
- * 17-Jan-2003 : Moved plot classes into a separate package (DG);
- * 25-Mar-2003 : Implemented Serializable (DG);
- * 10-Apr-2003 : Changed CategoryDataset to KeyedValues2DDataset in
- *               drawItem() method (DG);
- * 12-May-2003 : Modified to take into account the plot orientation (DG);
- * 30-Jul-2003 : Modified entity constructor (CZ);
- * 13-Aug-2003 : Implemented Cloneable (DG);
- * 07-Oct-2003 : Added renderer state (DG);
- * 05-Nov-2004 : Modified drawItem() signature (DG);
- * 20-Apr-2005 : Apply tooltips and URLs to legend items (DG);
- * 09-Jun-2005 : Use addItemEntity() method from superclass (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 11-Oct-2006 : Fixed bug in equals() method (DG);
- * 30-Nov-2006 : Added checks for series visibility (DG);
- * 20-Apr-2007 : Updated getLegendItem() for renderer change (DG);
- * 17-May-2007 : Set datasetIndex and seriesIndex in getLegendItem() (DG);
- * 18-May-2007 : Set dataset and seriesKey for LegendItem (DG);
- * 17-Jun-2008 : Apply legend shape, font and paint attributes (DG);
- * 26-Jun-2008 : Added crosshair support (DG);
- * 26-May-2009 : Support AreaRendererEndType.LEVEL (DG);
- * 27-May-2009 : Fixed item label anchor for horizontal orientation (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
- * 
  */
 
 package org.jfree.chart.renderer.category;
@@ -82,7 +45,7 @@ import java.awt.geom.GeneralPath;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 
-import org.jfree.chart.LegendItem;
+import org.jfree.chart.legend.LegendItem;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
@@ -90,9 +53,9 @@ import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.AreaRendererEndType;
-import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.api.RectangleEdge;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.api.PublicCloneable;
 import org.jfree.data.category.CategoryDataset;
 
 /**
@@ -101,8 +64,7 @@ import org.jfree.data.category.CategoryDataset;
  * by the {@code AreaChartDemo1.java} program included in the JFreeChart
  * Demo Collection:
  * <br><br>
- * <img src="../../../../../images/AreaRendererSample.png"
- * alt="AreaRendererSample.png">
+ * <img src="doc-files/AreaRendererSample.png" alt="AreaRendererSample.png">
  */
 public class AreaRenderer extends AbstractCategoryItemRenderer
         implements Cloneable, PublicCloneable, Serializable {

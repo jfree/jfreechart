@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,21 +27,10 @@
  * -----------------------
  * DefaultWindDataset.java
  * -----------------------
- * (C) Copyright 2001-2016, by Achilleus Mantzios and Contributors.
+ * (C) Copyright 2001-2021, by Achilleus Mantzios and Contributors.
  *
  * Original Author:  Achilleus Mantzios;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 06-Feb-2002 : Version 1, based on code contributed by Achilleus
- *               Mantzios (DG);
- * 05-May-2004 : Now extends AbstractXYDataset (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
- *               getYValue() (DG);
- * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
- * 22-Apr-2008 : Implemented PublicCloneable (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -52,8 +41,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.api.PublicCloneable;
 
 /**
  * A default implementation of the {@link WindDataset} interface.
@@ -148,10 +137,10 @@ public class DefaultWindDataset extends AbstractXYDataset
                     else {
                         if (xObject instanceof Date) {
                             Date xDate = (Date) xObject;
-                            xNumber = new Long(xDate.getTime());
+                            xNumber = xDate.getTime();
                         }
                         else {
-                            xNumber = new Integer(0);
+                            xNumber = 0;
                         }
                     }
                     Number windDir = (Number) data[seriesIndex][itemIndex][1];

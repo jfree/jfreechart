@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * ComparableObjectItem.java
  * -------------------------
- * (C) Copyright 2006-2020, by Object Refinery Limited.
+ * (C) Copyright 2006-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -37,14 +37,13 @@
 package org.jfree.data;
 
 import java.io.Serializable;
-import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.Args;
+import java.util.Objects;
+
+import org.jfree.chart.internal.Args;
 
 /**
  * Represents one (Comparable, Object) data item for use in a
  * {@link ComparableObjectSeries}.
- *
- * @since 1.0.3
  */
 public class ComparableObjectItem implements Comparable<ComparableObjectItem>, 
         Cloneable, Serializable {
@@ -148,7 +147,7 @@ public class ComparableObjectItem implements Comparable<ComparableObjectItem>,
         if (!this.x.equals(that.x)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.obj, that.obj)) {
+        if (!Objects.equals(this.obj, that.obj)) {
             return false;
         }
         return true;

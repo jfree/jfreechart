@@ -36,16 +36,17 @@
 
 package org.jfree.chart.entity;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.geom.Rectangle2D;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.internal.CloneUtils;
 
 import org.jfree.data.category.DefaultCategoryDataset;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link LegendItemEntity} class.
@@ -57,10 +58,10 @@ public class LegendItemEntityTest {
      */
     @Test
     public void testEquals() {
-        LegendItemEntity e1 = new LegendItemEntity(new Rectangle2D.Double(1.0,
-                2.0, 3.0, 4.0));
-        LegendItemEntity e2 = new LegendItemEntity(new Rectangle2D.Double(1.0,
-                2.0, 3.0, 4.0));
+        LegendItemEntity<String> e1 = new LegendItemEntity<>(
+                new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0));
+        LegendItemEntity<String> e2 = new LegendItemEntity<>(
+                new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0));
         assertTrue(e1.equals(e2));
 
         e1.setArea(new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0));
@@ -95,9 +96,9 @@ public class LegendItemEntityTest {
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        LegendItemEntity e1 = new LegendItemEntity(new Rectangle2D.Double(1.0,
-                2.0, 3.0, 4.0));
-        LegendItemEntity e2 = (LegendItemEntity) e1.clone();
+        LegendItemEntity<String> e1 = new LegendItemEntity<>(
+                new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0));
+        LegendItemEntity<String> e2 = CloneUtils.clone(e1);
         assertTrue(e1 != e2);
         assertTrue(e1.getClass() == e2.getClass());
         assertTrue(e1.equals(e2));
@@ -108,9 +109,9 @@ public class LegendItemEntityTest {
      */
     @Test
     public void testSerialization() {
-        LegendItemEntity e1 = new LegendItemEntity(new Rectangle2D.Double(1.0,
-                2.0, 3.0, 4.0));
-        LegendItemEntity e2 = (LegendItemEntity) TestUtils.serialised(e1);
+        LegendItemEntity<String> e1 = new LegendItemEntity<>(
+                new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0));
+        LegendItemEntity<String> e2 = TestUtils.serialised(e1);
         assertEquals(e1, e2);
     }
 

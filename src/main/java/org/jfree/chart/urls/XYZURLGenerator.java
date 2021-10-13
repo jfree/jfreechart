@@ -61,6 +61,6 @@ public interface XYZURLGenerator extends XYURLGenerator {
      *
      * @return A string containing the generated URL.
      */
-    public String generateURL(XYZDataset dataset, int series, int item);
+    String generateURL(XYZDataset dataset, int series, int item);
 
 }

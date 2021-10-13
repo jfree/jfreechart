@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * LegendItemEntity.java
  * ---------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -38,12 +38,15 @@ package org.jfree.chart.entity;
 
 import java.awt.Shape;
 import java.io.Serializable;
-import org.jfree.chart.util.ObjectUtils;
+import java.util.Objects;
 
 import org.jfree.data.general.Dataset;
 
 /**
- * An entity that represents an item within a legend.
+ * An entity that represents an item (the identifier for a series) within a 
+ * legend.
+ * 
+ * @param <S> the type for the series keys.
  */
 public class LegendItemEntity<S extends Comparable<S>> extends ChartEntity 
         implements Cloneable, Serializable {
@@ -51,18 +54,10 @@ public class LegendItemEntity<S extends Comparable<S>> extends ChartEntity
     /** For serialization. */
     private static final long serialVersionUID = -7435683933545666702L;
 
-    /**
-     * The dataset.
-     *
-     * @since 1.0.6
-     */
+    /** The dataset. */
     private Dataset dataset;
 
-    /**
-     * The series key.
-     *
-     * @since 1.0.6
-     */
+    /** The series key. */
     private S seriesKey;
 
     /** The series index. */
@@ -83,8 +78,6 @@ public class LegendItemEntity<S extends Comparable<S>> extends ChartEntity
      *
      * @return The dataset.
      *
-     * @since 1.0.6
-     *
      * @see #setDataset(Dataset)
      */
     public Dataset getDataset() {
@@ -95,8 +88,6 @@ public class LegendItemEntity<S extends Comparable<S>> extends ChartEntity
      * Sets a reference to the dataset that this legend item is derived from.
      *
      * @param dataset  the dataset.
-     *
-     * @since 1.0.6
      */
     public void setDataset(Dataset dataset) {
         this.dataset = dataset;
@@ -106,8 +97,6 @@ public class LegendItemEntity<S extends Comparable<S>> extends ChartEntity
      * Returns the series key that identifies the legend item.
      *
      * @return The series key.
-     *
-     * @since 1.0.6
      *
      * @see #setSeriesKey(Comparable)
      */
@@ -119,8 +108,6 @@ public class LegendItemEntity<S extends Comparable<S>> extends ChartEntity
      * Sets the key for the series.
      *
      * @param key  the key.
-     *
-     * @since 1.0.6
      *
      * @see #getSeriesKey()
      */
@@ -144,13 +131,13 @@ public class LegendItemEntity<S extends Comparable<S>> extends ChartEntity
             return false;
         }
         LegendItemEntity<?> that = (LegendItemEntity) obj;
-        if (!ObjectUtils.equal(this.seriesKey, that.seriesKey)) {
+        if (!Objects.equals(this.seriesKey, that.seriesKey)) {
             return false;
         }
         if (this.seriesIndex != that.seriesIndex) {
             return false;
         }
-        if (!ObjectUtils.equal(this.dataset, that.dataset)) {
+        if (!Objects.equals(this.dataset, that.dataset)) {
             return false;
         }
         return super.equals(obj);

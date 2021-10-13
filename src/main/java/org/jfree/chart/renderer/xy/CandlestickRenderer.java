@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------
  * CandlestickRenderer.java
  * ------------------------
- * (C) Copyright 2001-2020, by Object Refinery Limited.
+ * (C) Copyright 2001-2021, by Object Refinery Limited.
  *
  * Original Authors:  David Gilbert (for Object Refinery Limited);
  *                    Sylvain Vieujot;
@@ -61,11 +61,11 @@ import org.jfree.chart.plot.CrosshairState;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.PublicCloneable;
-import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.api.RectangleEdge;
+import org.jfree.chart.internal.PaintUtils;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.api.PublicCloneable;
+import org.jfree.chart.internal.SerialUtils;
 import org.jfree.data.Range;
 import org.jfree.data.xy.IntervalXYDataset;
 import org.jfree.data.xy.OHLCDataset;
@@ -77,7 +77,7 @@ import org.jfree.data.xy.XYDataset;
  * by the {@code CandlestickChartDemo1.java} program included in the
  * JFreeChart demo collection:
  * <br><br>
- * <img src="../../../../../images/CandlestickRendererSample.png"
+ * <img src="doc-files/CandlestickRendererSample.png" 
  * alt="CandlestickRendererSample.png">
  * <P>
  * This renderer does not include code to calculate the crosshair point for the
@@ -138,8 +138,6 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
     /**
      * The paint used to fill the volume bars (if they are visible).  Once
      * initialised, this field should never be set to {@code null}.
-     *
-     * @since 1.0.7
      */
     private transient Paint volumePaint;
 
@@ -150,8 +148,6 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
      * A flag that controls whether or not the renderer's outline paint is
      * used to draw the outline of the candlestick.  The default value is
      * {@code false} to avoid a change of behaviour for existing code.
-     *
-     * @since 1.0.5
      */
     private boolean useOutlinePaint;
 
@@ -422,8 +418,6 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
      *
      * @return A boolean.
      *
-     * @since 1.0.5
-     *
      * @see #setDrawVolume(boolean)
      */
     public boolean getDrawVolume() {
@@ -453,8 +447,6 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
      * @return The paint (never {@code null}).
      *
      * @see #setVolumePaint(Paint)
-     *
-     * @since 1.0.7
      */
     public Paint getVolumePaint() {
         return this.volumePaint;
@@ -468,8 +460,6 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
      *
      * @see #getVolumePaint()
      * @see #getDrawVolume()
-     *
-     * @since 1.0.7
      */
     public void setVolumePaint(Paint paint) {
         Args.nullNotPermitted(paint, "paint");
@@ -484,8 +474,6 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
      *
      * @return A boolean.
      *
-     * @since 1.0.5
-     *
      * @see #setUseOutlinePaint(boolean)
      */
     public boolean getUseOutlinePaint() {
@@ -498,8 +486,6 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param use  the new flag value.
-     *
-     * @since 1.0.5
      *
      * @see #getUseOutlinePaint()
      */

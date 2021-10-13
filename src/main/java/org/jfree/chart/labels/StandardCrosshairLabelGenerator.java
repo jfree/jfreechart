@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------------------
  * StandardCrosshairLabelGenerator.java
  * ------------------------------------
- * (C) Copyright 2009-2020, by Object Refinery Limited.
+ * (C) Copyright 2009-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -39,21 +39,20 @@ package org.jfree.chart.labels;
 import java.io.Serializable;
 import java.text.MessageFormat;
 import java.text.NumberFormat;
+import org.jfree.chart.internal.Args;
 import org.jfree.chart.plot.Crosshair;
 
 /**
  * A default label generator.
- *
- * @since 1.0.13
  */
 public class StandardCrosshairLabelGenerator implements CrosshairLabelGenerator,
         Serializable {
 
     /** The label format string. */
-    private String labelTemplate;
+    private final String labelTemplate;
 
     /** A number formatter for the value. */
-    private NumberFormat numberFormat;
+    private final NumberFormat numberFormat;
 
     /**
      * Creates a new instance with default attributes.
@@ -73,14 +72,8 @@ public class StandardCrosshairLabelGenerator implements CrosshairLabelGenerator,
     public StandardCrosshairLabelGenerator(String labelTemplate,
             NumberFormat numberFormat) {
         super();
-        if (labelTemplate == null) {
-            throw new IllegalArgumentException(
-                    "Null 'labelTemplate' argument.");
-        }
-        if (numberFormat == null) {
-            throw new IllegalArgumentException(
-                    "Null 'numberFormat' argument.");
-        }
+        Args.nullNotPermitted(labelTemplate, "labelTemplate");
+        Args.nullNotPermitted(numberFormat, "numberFormat");
         this.labelTemplate = labelTemplate;
         this.numberFormat = numberFormat;
     }

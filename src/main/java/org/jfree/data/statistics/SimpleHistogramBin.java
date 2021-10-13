@@ -42,7 +42,7 @@
 package org.jfree.data.statistics;
 
 import java.io.Serializable;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.api.PublicCloneable;
 
 /**
  * A bin for the {@link SimpleHistogramDataset}.

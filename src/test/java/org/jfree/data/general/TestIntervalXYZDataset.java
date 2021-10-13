@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * TestIntervalXYZDataset.java
  * ---------------------------
- * (C) Copyright 2020, by Object Refinery Limited.
+ * (C) Copyright 2020-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -43,9 +43,7 @@ import org.jfree.data.xy.IntervalXYZDataset;
  * An implementation of the {@link IntervalXYZDataset} interface that can be
  * used for testing.
  */
-public class TestIntervalXYZDataset implements IntervalXYZDataset {
-
-    private DatasetGroup group;
+public class TestIntervalXYZDataset implements IntervalXYZDataset<Integer> {
     
     private final int seriesCount;
     
@@ -139,12 +137,12 @@ public class TestIntervalXYZDataset implements IntervalXYZDataset {
     }
 
     @Override
-    public Comparable getSeriesKey(int series) {
+    public Integer getSeriesKey(int series) {
         return series;
     }
 
     @Override
-    public int indexOf(Comparable seriesKey) {
+    public int indexOf(Integer seriesKey) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -156,17 +154,6 @@ public class TestIntervalXYZDataset implements IntervalXYZDataset {
     @Override
     public void removeChangeListener(DatasetChangeListener listener) {
         throw new UnsupportedOperationException("Not supported yet."); 
-    }
-
-    
-    @Override
-    public DatasetGroup getGroup() {
-        return this.group;
-    }
-
-    @Override
-    public void setGroup(DatasetGroup group) {
-        this.group = group;
     }
     
 }

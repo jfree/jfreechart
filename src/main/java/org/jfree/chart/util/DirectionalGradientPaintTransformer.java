@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------------------------
  * DirectionalGradientPaintTransformer.java
  * ----------------------------------------
- * (C) Copyright 2013-2020 by Peter Kolb and Contributors.
+ * (C) Copyright 2013-2021 by Peter Kolb and Contributors.
  *
  * Original Author:  Peter Kolb;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -39,7 +39,6 @@ package org.jfree.chart.util;
 import java.awt.GradientPaint;
 import java.awt.geom.Rectangle2D;
 import java.awt.Shape;
-import org.jfree.chart.ui.GradientPaintTransformer;
 
 /**
  * Transforms a {@code GradientPaint} to range over the width of a target 
@@ -62,12 +61,8 @@ import org.jfree.chart.ui.GradientPaintTransformer;
  * </ul>
  * <p>In all cases, the cyclic flag of the original paint will be taken into 
  * account.</p>
- *
- * @author Peter Kolb
- * @since 1.0.17
  */
-public class DirectionalGradientPaintTransformer 
-        implements GradientPaintTransformer {
+public class DirectionalGradientPaintTransformer implements GradientPaintTransformer {
     
     /**
      * Default constructor.

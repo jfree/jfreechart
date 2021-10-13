@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,31 +27,26 @@
  * ------------------------------
  * DefaultHeatMapDatasetTest.java
  * ------------------------------
- * (C) Copyright 2009-2016, by Object Refinery Limited.
+ * (C) Copyright 2009-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 28-Jan-2009 : Version 1 (DG);
  *
  */
 
 package org.jfree.data.general;
 
 import org.jfree.chart.TestUtils;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertNotNull;
-import org.junit.Test;
+import org.jfree.chart.internal.CloneUtils;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import org.junit.jupiter.api.Test;
 
 /**
  * Somes tests for the {@link DefaultHeatMapDataset} class.
- *
- * @since 1.0.13
  */
 public class DefaultHeatMapDatasetTest implements DatasetChangeListener {
 
@@ -166,7 +161,7 @@ public class DefaultHeatMapDatasetTest implements DatasetChangeListener {
         d1.setZValue(0, 1, Double.NEGATIVE_INFINITY);
         d1.setZValue(0, 2, Double.POSITIVE_INFINITY);
         d1.setZValue(1, 0, Double.NaN);
-        DefaultHeatMapDataset d2 = (DefaultHeatMapDataset) d1.clone();
+        DefaultHeatMapDataset d2 = CloneUtils.clone(d1);
         assertTrue(d1 != d2);
         assertTrue(d1.getClass() == d2.getClass());
         assertTrue(d1.equals(d2));
@@ -189,8 +184,7 @@ public class DefaultHeatMapDatasetTest implements DatasetChangeListener {
         d1.setZValue(0, 1, Double.NEGATIVE_INFINITY);
         d1.setZValue(0, 2, Double.POSITIVE_INFINITY);
         d1.setZValue(1, 0, Double.NaN);
-        DefaultHeatMapDataset d2 = (DefaultHeatMapDataset) 
-                TestUtils.serialised(d1);
+        DefaultHeatMapDataset d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------------
  * BoxAndWhiskerCalculator.java
  * ----------------------------
- * (C) Copyright 2003-2020,  by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2021,  by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -40,7 +40,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import org.jfree.chart.util.Args;
+import org.jfree.chart.internal.Args;
 
 /**
  * A utility class that calculates the mean, median, quartiles Q1 and Q3, plus
@@ -88,9 +88,7 @@ public abstract class BoxAndWhiskerCalculator {
         List vlist;
         if (stripNullAndNaNItems) {
             vlist = new ArrayList(values.size());
-            Iterator iterator = values.listIterator();
-            while (iterator.hasNext()) {
-                Object obj = iterator.next();
+            for (Object obj : values) {
                 if (obj instanceof Number) {
                     Number n = (Number) obj;
                     double v = n.doubleValue();
@@ -124,9 +122,8 @@ public abstract class BoxAndWhiskerCalculator {
         double maxOutlier = Double.NEGATIVE_INFINITY;
         List<Number> outliers = new ArrayList<>();
 
-        Iterator iterator = vlist.iterator();
-        while (iterator.hasNext()) {
-            Number number = (Number) iterator.next();
+        for (Object o : vlist) {
+            Number number = (Number) o;
             double value = number.doubleValue();
             if (value > upperOutlierThreshold) {
                 outliers.add(number);

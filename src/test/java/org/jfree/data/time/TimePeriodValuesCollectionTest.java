@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,33 +27,24 @@
  * ------------------------------------
  * TimePeriodValuesCollectionTests.java
  * ------------------------------------
- * (C) Copyright 2005-2008, by Object Refinery Limited.
+ * (C) Copyright 2005-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 11-Mar-2005 : Version 1 (DG);
- * 08-Mar-2007 : Added testGetSeries() (DG);
- * 11-Jun-2007 : Added tests for getDomainBounds() (DG);
- * 10-Jul-2007 : Fixed compile errors (DG);
- * 07-Apr-2008 : Added more checks to 
- *               testGetDomainBoundsWithInterval() (DG);
  *
  */
 
 package org.jfree.data.time;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.jfree.chart.TestUtils;
 
 import org.jfree.data.Range;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Some tests for the {@link TimePeriodValuesCollection} class.
@@ -67,7 +58,7 @@ public class TimePeriodValuesCollectionTest {
     @Test
     public void test1161340() {
         TimePeriodValuesCollection dataset = new TimePeriodValuesCollection();
-        TimePeriodValues v1 = new TimePeriodValues("V1");
+        TimePeriodValues<String> v1 = new TimePeriodValues<>("V1");
         v1.add(new Day(11, 3, 2005), 1.2);
         v1.add(new Day(12, 3, 2005), 3.4);
         dataset.addSeries(v1);
@@ -75,7 +66,7 @@ public class TimePeriodValuesCollectionTest {
         dataset.removeSeries(v1);
         assertEquals(0, dataset.getSeriesCount());
         
-        TimePeriodValues v2 = new TimePeriodValues("V2");
+        TimePeriodValues<String> v2 = new TimePeriodValues<>("V2");
         v1.add(new Day(5, 3, 2005), 1.2);
         v1.add(new Day(6, 3, 2005), 3.4);
         dataset.addSeries(v2);
@@ -97,8 +88,8 @@ public class TimePeriodValuesCollectionTest {
         c2.setXPosition(TimePeriodAnchor.END);
         assertTrue(c1.equals(c2));
         
-        TimePeriodValues v1 = new TimePeriodValues("Test");
-        TimePeriodValues v2 = new TimePeriodValues("Test");
+        TimePeriodValues<String> v1 = new TimePeriodValues<>("Test");
+        TimePeriodValues<String> v2 = new TimePeriodValues<>("Test");
         
         c1.addSeries(v1);
         assertFalse(c1.equals(c2));
@@ -112,8 +103,7 @@ public class TimePeriodValuesCollectionTest {
     @Test
     public void testSerialization() {
         TimePeriodValuesCollection c1 = new TimePeriodValuesCollection();
-        TimePeriodValuesCollection c2 = (TimePeriodValuesCollection) 
-                TestUtils.serialised(c1);
+        TimePeriodValuesCollection c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 
@@ -123,7 +113,7 @@ public class TimePeriodValuesCollectionTest {
     @Test
     public void testGetSeries() {
         TimePeriodValuesCollection c1 = new TimePeriodValuesCollection();
-        TimePeriodValues s1 = new TimePeriodValues("Series 1");
+        TimePeriodValues<String> s1 = new TimePeriodValues<>("Series 1");
         c1.addSeries(s1);
         assertEquals("Series 1", c1.getSeries(0).getKey());
         
@@ -159,7 +149,7 @@ public class TimePeriodValuesCollectionTest {
         assertNull(r);
         
         // check dataset with one time period
-        TimePeriodValues s1 = new TimePeriodValues("S1");
+        TimePeriodValues<String> s1 = new TimePeriodValues<>("S1");
         s1.add(new SimpleTimePeriod(1000L, 2000L), 1.0);
         dataset.addSeries(s1);
         r = dataset.getDomainBounds(false);
@@ -186,7 +176,7 @@ public class TimePeriodValuesCollectionTest {
         assertNull(r);
         
         // check dataset with one time period
-        TimePeriodValues s1 = new TimePeriodValues("S1");
+        TimePeriodValues<String> s1 = new TimePeriodValues<>("S1");
         s1.add(new SimpleTimePeriod(1000L, 2000L), 1.0);
         dataset.addSeries(s1);
         r = dataset.getDomainBounds(true);

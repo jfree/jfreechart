@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,24 +27,20 @@
  * ------------------------
  * PowerFunction2DTest.java
  * ------------------------
- * (C) Copyright 2009-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2009-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 28-May-2009 : Version 1 (DG);
  *
  */
 
 package org.jfree.data.function;
 
 import org.jfree.chart.TestUtils;
-import org.junit.Test;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Tests for the {@link PowerFunction2D} class.
@@ -83,7 +79,7 @@ public class PowerFunction2DTest {
     @Test
     public void testSerialization() {
         PowerFunction2D f1 = new PowerFunction2D(1.0, 2.0);
-        PowerFunction2D f2 = (PowerFunction2D) TestUtils.serialised(f1);
+        PowerFunction2D f2 = TestUtils.serialised(f1);
         assertEquals(f1, f2);
     }
 

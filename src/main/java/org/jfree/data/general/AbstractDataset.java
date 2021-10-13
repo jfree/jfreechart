@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,34 +27,11 @@
  * --------------------
  * AbstractDataset.java
  * --------------------
- * (C)opyright 2000-2016, by Object Refinery Limited.
+ * (C)opyright 2000-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Nicolas Brodu (for Astrium and EADS Corporate Research
  *                   Center);
- *
- * Changes (from 21-Aug-2001)
- * --------------------------
- * 21-Aug-2001 : Added standard header. Fixed DOS encoding problem (DG);
- * 18-Sep-2001 : Updated e-mail address in header (DG);
- * 15-Oct-2001 : Moved to new package (com.jrefinery.data.*) (DG);
- * 22-Oct-2001 : Renamed DataSource.java --> Dataset.java etc. (DG);
- * 17-Nov-2001 : Changed constructor from public to protected, created new
- *               AbstractSeriesDataset class and transferred series-related
- *               methods, updated Javadoc comments (DG);
- * 04-Mar-2002 : Updated import statements (DG);
- * 11-Jun-2002 : Updated for change in the event constructor (DG);
- * 07-Aug-2002 : Changed listener list to use
- *               javax.swing.event.EventListenerList (DG);
- * 04-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 27-Mar-2003 : Implemented Serializable (DG);
- * 18-Aug-2003 : Implemented Cloneable (DG);
- * 08-Sep-2003 : Serialization fixes (NB);
- * 11-Sep-2003 : Cloning Fixes (NB);
- * 01-Jun-2005 : Added hasListener() method for unit testing (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
- * 21-Nov-2013 : Added notify flag to allow suppressing change events 
- *               temporarily (DG);
  *
  */
 
@@ -71,7 +48,7 @@ import java.util.EventListener;
 import java.util.List;
 
 import javax.swing.event.EventListenerList;
-import org.jfree.chart.util.Args;
+import org.jfree.chart.internal.Args;
 
 /**
  * An abstract implementation of the {@link Dataset} interface, containing a
@@ -83,9 +60,6 @@ public abstract class AbstractDataset implements Dataset, Cloneable,
     /** For serialization. */
     private static final long serialVersionUID = 1918768939869230744L;
 
-    /** The group that the dataset belongs to. */
-    private DatasetGroup group;
-
     /** Storage for registered change listeners. */
     private transient EventListenerList listenerList;
     
@@ -96,38 +70,11 @@ public abstract class AbstractDataset implements Dataset, Cloneable,
     private boolean notify;
 
     /**
-     * Constructs a dataset. By default, the dataset is assigned to its own
-     * group.
+     * Constructs a dataset.
      */
     protected AbstractDataset() {
-        this.group = new DatasetGroup();
         this.listenerList = new EventListenerList();
         this.notify = true;
-    }
-
-    /**
-     * Returns the dataset group for the dataset.
-     *
-     * @return The group (never {@code null}).
-     *
-     * @see #setGroup(DatasetGroup)
-     */
-    @Override
-    public DatasetGroup getGroup() {
-        return this.group;
-    }
-
-    /**
-     * Sets the dataset group for the dataset.
-     *
-     * @param group  the group ({@code null} not permitted).
-     *
-     * @see #getGroup()
-     */
-    @Override
-    public void setGroup(DatasetGroup group) {
-        Args.nullNotPermitted(group, "group");
-        this.group = group;
     }
 
     /**
@@ -137,8 +84,6 @@ public abstract class AbstractDataset implements Dataset, Cloneable,
      * change event.
      * 
      * @return A boolean.
-     * 
-     * @since 1.0.17
      */
     public boolean getNotify() {
         return this.notify;
@@ -151,8 +96,6 @@ public abstract class AbstractDataset implements Dataset, Cloneable,
      * queued up changes.
      * 
      * @param notify  the new flag value.
-     * 
-     * @since 1.0.17
      */
     public void setNotify(boolean notify) {
         this.notify = notify;

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * CategoryMarker.java
  * -------------------
- * (C) Copyright 2005-2020, by Object Refinery Limited.
+ * (C) Copyright 2005-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Nicolas Brodu;
@@ -41,10 +41,11 @@ import java.awt.Color;
 import java.awt.Paint;
 import java.awt.Stroke;
 import java.io.Serializable;
+import java.util.Objects;
 
 import org.jfree.chart.event.MarkerChangeEvent;
-import org.jfree.chart.ui.LengthAdjustmentType;
-import org.jfree.chart.util.Args;
+import org.jfree.chart.api.LengthAdjustmentType;
+import org.jfree.chart.internal.Args;
 
 /**
  * A marker for a category.
@@ -116,8 +117,6 @@ public class CategoryMarker extends Marker implements Cloneable, Serializable {
      * listeners.
      *
      * @param key  the key ({@code null} not permitted).
-     *
-     * @since 1.0.3
      */
     public void setKey(Comparable<?> key) {
         Args.nullNotPermitted(key, "key");
@@ -173,6 +172,19 @@ public class CategoryMarker extends Marker implements Cloneable, Serializable {
             return false;
         }
         return true;
+    }
+
+    /**
+     * Returns a hash code for this instance.
+     * 
+     * @return A hash code. 
+     */
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 89 * hash + Objects.hashCode(this.key);
+        hash = 89 * hash + (this.drawAsLine ? 1 : 0);
+        return hash;
     }
 
 }

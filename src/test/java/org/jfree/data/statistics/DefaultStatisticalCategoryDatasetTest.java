@@ -35,17 +35,18 @@
  */
 
 package org.jfree.data.statistics;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.internal.CloneUtils;
 
 import org.jfree.data.Range;
 import org.jfree.data.UnknownKeyException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link DefaultStatisticalCategoryDataset} class.
@@ -57,8 +58,8 @@ public class DefaultStatisticalCategoryDatasetTest {
      */
     @Test
     public void testGetRangeBounds() {
-        DefaultStatisticalCategoryDataset d
-                = new DefaultStatisticalCategoryDataset();
+        DefaultStatisticalCategoryDataset<String, String> d
+                = new DefaultStatisticalCategoryDataset<>();
 
         // an empty dataset should return null for bounds
         assertNull(d.getRangeBounds(true));
@@ -98,10 +99,10 @@ public class DefaultStatisticalCategoryDatasetTest {
      */
     @Test
     public void testEquals() {
-        DefaultStatisticalCategoryDataset d1
-                = new DefaultStatisticalCategoryDataset();
-        DefaultStatisticalCategoryDataset d2
-                = new DefaultStatisticalCategoryDataset();
+        DefaultStatisticalCategoryDataset<String, String> d1
+                = new DefaultStatisticalCategoryDataset<>();
+        DefaultStatisticalCategoryDataset<String, String> d2
+                = new DefaultStatisticalCategoryDataset<>();
         assertTrue(d1.equals(d2));
         assertTrue(d2.equals(d1));
 
@@ -112,15 +113,15 @@ public class DefaultStatisticalCategoryDatasetTest {
      */
     @Test
     public void testCloning() {
-        DefaultStatisticalCategoryDataset d1
-                = new DefaultStatisticalCategoryDataset();
+        DefaultStatisticalCategoryDataset<String, String> d1
+                = new DefaultStatisticalCategoryDataset<>();
         d1.add(1.1, 2.2, "R1", "C1");
         d1.add(3.3, 4.4, "R1", "C2");
         d1.add(null, 5.5, "R1", "C3");
         d1.add(6.6, null, "R2", "C3");
-        DefaultStatisticalCategoryDataset d2 = null;
+        DefaultStatisticalCategoryDataset<String, String> d2 = null;
         try {
-            d2 = (DefaultStatisticalCategoryDataset) d1.clone();
+            d2 = CloneUtils.clone(d1);
         }
         catch (CloneNotSupportedException e) {
             fail(e.toString());
@@ -139,14 +140,13 @@ public class DefaultStatisticalCategoryDatasetTest {
      */
     @Test
     public void testSerialization1() {
-        DefaultStatisticalCategoryDataset d1
-            = new DefaultStatisticalCategoryDataset();
+        DefaultStatisticalCategoryDataset<String, String> d1
+            = new DefaultStatisticalCategoryDataset<>();
         d1.add(1.1, 2.2, "R1", "C1");
         d1.add(3.3, 4.4, "R1", "C2");
         d1.add(null, 5.5, "R1", "C3");
         d1.add(6.6, null, "R2", "C3");
-        DefaultStatisticalCategoryDataset d2 = 
-                (DefaultStatisticalCategoryDataset) TestUtils.serialised(d1);
+        DefaultStatisticalCategoryDataset<String, String> d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 
@@ -155,11 +155,10 @@ public class DefaultStatisticalCategoryDatasetTest {
      */
     @Test
     public void testSerialization2() {
-        DefaultStatisticalCategoryDataset d1
-            = new DefaultStatisticalCategoryDataset();
+        DefaultStatisticalCategoryDataset<String, String> d1
+            = new DefaultStatisticalCategoryDataset<>();
         d1.add(1.2, 3.4, "Row 1", "Column 1");
-        DefaultStatisticalCategoryDataset d2 = 
-                (DefaultStatisticalCategoryDataset) TestUtils.serialised(d1);
+        DefaultStatisticalCategoryDataset<String, String> d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 
@@ -170,8 +169,8 @@ public class DefaultStatisticalCategoryDatasetTest {
      */
     @Test
     public void testAdd() {
-        DefaultStatisticalCategoryDataset d1
-                = new DefaultStatisticalCategoryDataset();
+        DefaultStatisticalCategoryDataset<String, String> d1
+                = new DefaultStatisticalCategoryDataset<>();
         d1.add(1.0, 2.0, "R1", "C1");
         assertEquals(1.0, d1.getValue("R1", "C1").doubleValue(), EPSILON);
         assertEquals(2.0, d1.getStdDevValue("R1", "C1").doubleValue(), EPSILON);
@@ -187,8 +186,8 @@ public class DefaultStatisticalCategoryDatasetTest {
      */
     @Test
     public void testGetRangeLowerBound() {
-        DefaultStatisticalCategoryDataset d1
-                = new DefaultStatisticalCategoryDataset();
+        DefaultStatisticalCategoryDataset<String, String> d1
+                = new DefaultStatisticalCategoryDataset<>();
         d1.add(1.0, 2.0, "R1", "C1");
         assertEquals(1.0, d1.getRangeLowerBound(false), EPSILON);
         assertEquals(-1.0, d1.getRangeLowerBound(true), EPSILON);
@@ -199,8 +198,8 @@ public class DefaultStatisticalCategoryDatasetTest {
      */
     @Test
     public void testGetRangeUpperBound() {
-        DefaultStatisticalCategoryDataset d1
-                = new DefaultStatisticalCategoryDataset();
+        DefaultStatisticalCategoryDataset<String, String> d1
+                = new DefaultStatisticalCategoryDataset<>();
         d1.add(1.0, 2.0, "R1", "C1");
         assertEquals(1.0, d1.getRangeUpperBound(false), EPSILON);
         assertEquals(3.0, d1.getRangeUpperBound(true), EPSILON);
@@ -211,8 +210,8 @@ public class DefaultStatisticalCategoryDatasetTest {
      */
     @Test
     public void testGetRangeBounds2() {
-        DefaultStatisticalCategoryDataset d1
-                = new DefaultStatisticalCategoryDataset();
+        DefaultStatisticalCategoryDataset<String, String> d1
+                = new DefaultStatisticalCategoryDataset<>();
         d1.add(1.0, 2.0, "R1", "C1");
         assertEquals(new Range(1.0, 1.0), d1.getRangeBounds(false));
         assertEquals(new Range(-1.0, 3.0), d1.getRangeBounds(true));
@@ -227,8 +226,8 @@ public class DefaultStatisticalCategoryDatasetTest {
      */
     @Test
     public void testRemove() {
-        DefaultStatisticalCategoryDataset data
-                = new DefaultStatisticalCategoryDataset();
+        DefaultStatisticalCategoryDataset<String, String> data
+                = new DefaultStatisticalCategoryDataset<>();
 
         boolean pass = false;
         try {
@@ -262,8 +261,8 @@ public class DefaultStatisticalCategoryDatasetTest {
      */
     @Test
     public void test3072674() {
-        DefaultStatisticalCategoryDataset dataset
-                = new DefaultStatisticalCategoryDataset();
+        DefaultStatisticalCategoryDataset<String, String> dataset
+                = new DefaultStatisticalCategoryDataset<>();
         dataset.add(1.0, Double.NaN, "R1", "C1");
         assertEquals(1.0, dataset.getRangeLowerBound(true), EPSILON);
         assertEquals(1.0, dataset.getRangeUpperBound(true), EPSILON);

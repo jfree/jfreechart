@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,25 +27,22 @@
  * ---------------------------
  * XYIntervalDataItemTest.java
  * ---------------------------
- * (C) Copyright 2006-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 20-Oct-2006 : Version 1 (DG);
  *
  */
 
 package org.jfree.data.xy;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.jfree.chart.TestUtils;
-import org.junit.Test;
+import org.jfree.chart.internal.CloneUtils;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link XYIntervalDataItem} class.
@@ -60,7 +57,7 @@ public class XYIntervalDataItemTest {
     public void testConstructor1() {
         XYIntervalDataItem item1 = new XYIntervalDataItem(1.0, 0.5, 1.5, 2.0,
                 1.9, 2.1);
-        assertEquals(new Double(1.0), item1.getX());
+        assertEquals(Double.valueOf(1.0), item1.getX());
         assertEquals(0.5, item1.getXLowValue(), EPSILON);
         assertEquals(1.5, item1.getXHighValue(), EPSILON);
         assertEquals(2.0, item1.getYValue(), EPSILON);
@@ -124,7 +121,7 @@ public class XYIntervalDataItemTest {
     public void testCloning() throws CloneNotSupportedException {
         XYIntervalDataItem item1 = new XYIntervalDataItem(1.0, 0.5, 1.5, 2.0,
                 1.9, 2.1);
-        XYIntervalDataItem item2 = (XYIntervalDataItem) item1.clone();
+        XYIntervalDataItem item2 = CloneUtils.clone(item1);
         assertTrue(item1 != item2);
         assertTrue(item1.getClass() == item2.getClass());
         assertTrue(item1.equals(item2));
@@ -137,8 +134,7 @@ public class XYIntervalDataItemTest {
     public void testSerialization() {
         XYIntervalDataItem item1 = new XYIntervalDataItem(1.0, 0.5, 1.5, 2.0,
                 1.9, 2.1);
-        XYIntervalDataItem item2 = (XYIntervalDataItem) 
-                TestUtils.serialised(item1);
+        XYIntervalDataItem item2 = TestUtils.serialised(item1);
         assertEquals(item1, item2);
     }
 

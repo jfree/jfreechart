@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,25 +27,22 @@
  * --------------------------
  * AbstractDialLayerTest.java
  * --------------------------
- * (C) Copyright 2007-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 16-Oct-2007 : Version 1 (DG);
  *
  */
 
 package org.jfree.chart.plot.dial;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.jfree.chart.TestUtils;
-import org.junit.Test;
+import org.jfree.chart.internal.CloneUtils;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link AbstractDialLayer} class.
@@ -75,7 +72,7 @@ public class AbstractDialLayerTest {
     public void testCloning() throws CloneNotSupportedException {
         // test a default instance
         DialCap c1 = new DialCap();
-        DialCap c2 = (DialCap) c1.clone();
+        DialCap c2 = CloneUtils.clone(c1);
         assertTrue(c1 != c2);
         assertTrue(c1.getClass() == c2.getClass());
         assertTrue(c1.equals(c2));
@@ -94,7 +91,7 @@ public class AbstractDialLayerTest {
     public void testSerialization() {
         // test a default instance
         DialCap c1 = new DialCap();
-        DialCap c2 = (DialCap) TestUtils.serialised(c1);
+        DialCap c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
 
         // check that the listener lists are independent

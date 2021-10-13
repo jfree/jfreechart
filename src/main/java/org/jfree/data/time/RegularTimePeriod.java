@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,28 +27,10 @@
  * ----------------------
  * RegularTimePeriod.java
  * ----------------------
- * (C) Copyright 2001-2016, by Object Refinery Limited.
+ * (C) Copyright 2001-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 11-Oct-2001 : Version 1 (DG);
- * 26-Feb-2002 : Changed getStart(), getMiddle() and getEnd() methods to
- *               evaluate with reference to a particular time zone (DG);
- * 29-May-2002 : Implemented MonthConstants interface, so that these constants
- *               are conveniently available (DG);
- * 10-Sep-2002 : Added getSerialIndex() method (DG);
- * 10-Jan-2003 : Renamed TimePeriod --> RegularTimePeriod (DG);
- * 13-Mar-2003 : Moved to com.jrefinery.data.time package (DG);
- * 29-Apr-2004 : Changed getMiddleMillisecond() methods to fix bug 943985 (DG);
- * 25-Nov-2004 : Added utility methods (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 06-Oct-2006 : Deprecated the WORKING_CALENDAR field and several methods,
- *               added new peg() method (DG);
- * 16-Sep-2008 : Deprecated DEFAULT_TIME_ZONE (DG);
- * 23-Feb-2014 : Added getMillisecond() method (DG);
  * 
  */
 
@@ -59,6 +41,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
+import java.util.concurrent.atomic.AtomicReference;
+
 import org.jfree.chart.date.MonthConstants;
 
 /**
@@ -71,6 +55,10 @@ import org.jfree.chart.date.MonthConstants;
  */
 public abstract class RegularTimePeriod implements TimePeriod, Comparable,
         MonthConstants {
+
+    private static final AtomicReference<Calendar> calendarPrototype = new AtomicReference<>();
+
+    private static final ThreadLocal<Calendar> threadLocalCalendar = new ThreadLocal<>();
 
     /**
      * Creates a time period that includes the specified millisecond, assuming
@@ -131,6 +119,101 @@ public abstract class RegularTimePeriod implements TimePeriod, Comparable,
         else {
             return Millisecond.class;
         }
+    }
+
+    /**
+     * Creates or returns a thread-local Calendar instance.
+     * This function is used by the various subclasses to obtain a calendar for
+     * date-time to/from ms-since-epoch conversions (and to determine
+     * the first day of the week, in case of {@link Week}).
+     * <p>
+     * If a thread-local calendar was set with {@link #setThreadLocalCalendarInstance(Calendar)},
+     * then it is simply returned.
+     * <p>
+     * Otherwise, If a global calendar prototype was set with {@link #setCalendarInstancePrototype(Calendar)},
+     * then it is cloned and set as the thread-local calendar instance for future use,
+     * as if it was set with {@link #setThreadLocalCalendarInstance(Calendar)}.
+     * <p>
+     * Otherwise, if neither is set, a new instance will be created every
+     * time with {@link Calendar#getInstance()}, resorting to JFreeChart 1.5.0
+     * behavior (leading to huge load on GC and high memory consumption
+     * if many instances are created).
+     *
+     * @return a thread-local Calendar instance
+     */
+    protected static Calendar getCalendarInstance() {
+        Calendar calendar = threadLocalCalendar.get();
+        if (calendar == null) {
+            Calendar prototype = calendarPrototype.get();
+            if (prototype != null) {
+                calendar = (Calendar) prototype.clone();
+                threadLocalCalendar.set(calendar);
+            }
+        }
+        return calendar != null ? calendar : Calendar.getInstance();
+    }
+
+    /**
+     * Sets the thread-local calendar instance for time calculations.
+     * <p>
+     * {@code RegularTimePeriod} instances sometimes need a {@link Calendar}
+     * to perform time calculations (date-time from/to milliseconds-since-epoch).
+     * In JFreeChart 1.5.0, they created a new {@code Calendar} instance
+     * every time they needed one.  This created a huge load on GC and lead
+     * to high memory consumption.  To avoid this, a thread-local {@code Calendar}
+     * instance can be set, which will then be used for time calculations
+     * every time, unless the caller passes a specific {@code Calendar}
+     * instance in places where the API allows it.
+     * <p>
+     * If the specified calendar is {@code null}, or if this method was never called,
+     * then the next time a calendar instance is needed, a new one will be created by cloning
+     * the global prototype set with {@link #setCalendarInstancePrototype(Calendar)}.
+     * If none was set either, then a new instance will be created every time
+     * with {@link Calendar#getInstance()}, resorting to JFreeChart 1.5.0 behavior.
+     *
+     * @param calendar the new thread-local calendar instance
+     */
+    public static void setThreadLocalCalendarInstance(Calendar calendar) {
+        threadLocalCalendar.set(calendar);
+    }
+
+
+    /**
+     * Sets a global calendar prototype for time calculations.
+     * <p>
+     * {@code RegularTimePeriod} instances sometimes need a {@link Calendar}
+     * to perform time calculations (date-time from/to milliseconds-since-epoch).
+     * In JFreeChart 1.5.0, they created a new {@code Calendar} instance
+     * every time they needed one.  This created a huge load on GC and lead
+     * to high memory consumption.  To avoid this, a prototype {@code Calendar}
+     * can be set, which will be then cloned by every thread that needs
+     * a {@code Calendar} instance.  The prototype is not cloned right away,
+     * and stored instead for later cloning, therefore the caller must not
+     * alter the prototype after it has been passed to this method.
+     * <p>
+     * If the prototype is {@code null}, then thread-local calendars
+     * set with {@link #setThreadLocalCalendarInstance(Calendar)} will be
+     * used instead.  If none was set for some thread, then a new instance will be
+     * created with {@link Calendar#getInstance()} every time one is needed.
+     * However, if the prototype was already cloned by some thread,
+     * then setting it to {@code null} has no effect, and that thread must
+     * explicitly set its own instance to {@code null} or something else to get
+     * rid of the cloned calendar.
+     * <p>
+     * Calling {@code setCalendarInstancePrototype(Calendar.getInstance())}
+     * somewhere early in an application will effectively mimic JFreeChart
+     * 1.5.0 behavior (using the default calendar everywhere unless explicitly
+     * specified), while preventing the many-allocations problem.  There is one
+     * important caveat, however: once a prototype is cloned by some
+     * thread, calling {@link TimeZone#setDefault(TimeZone)}
+     * or {@link Locale#setDefault(Locale)}} will have no
+     * effect on future calculations.  To avoid this problem, simply set
+     * the default time zone and locale before setting the prototype.
+     *
+     * @param calendar the new thread-local calendar instance
+     */
+    public static void setCalendarInstancePrototype(Calendar calendar) {
+        calendarPrototype.set(calendar);
     }
 
     /**

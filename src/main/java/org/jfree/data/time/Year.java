@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,36 +27,10 @@
  * ---------
  * Year.java
  * ---------
- * (C) Copyright 2001-2012, by Object Refinery Limited.
+ * (C) Copyright 2001-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 11-Oct-2001 : Version 1 (DG);
- * 14-Nov-2001 : Override for toString() method (DG);
- * 19-Dec-2001 : Added a new constructor as suggested by Paul English (DG);
- * 29-Jan-2002 : Worked on parseYear() method (DG);
- * 14-Feb-2002 : Fixed bug in Year(Date) constructor (DG);
- * 26-Feb-2002 : Changed getStart(), getMiddle() and getEnd() methods to
- *               evaluate with reference to a particular time zone (DG);
- * 19-Mar-2002 : Changed API for TimePeriod classes (DG);
- * 10-Sep-2002 : Added getSerialIndex() method (DG);
- * 04-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 10-Jan-2003 : Changed base class and method names (DG);
- * 05-Mar-2003 : Fixed bug in getFirstMillisecond() picked up in JUnit
- *               tests (DG);
- * 13-Mar-2003 : Moved to com.jrefinery.data.time package, and implemented
- *               Serializable (DG);
- * 21-Oct-2003 : Added hashCode() method (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 05-Oct-2006 : Updated API docs (DG);
- * 06-Oct-2006 : Refactored to cache first and last millisecond values (DG);
- * 16-Sep-2008 : Extended range of valid years, and deprecated
- *               DEFAULT_TIME_ZONE (DG);
- * 25-Nov-2008 : Added new constructor with Locale (DG);
- * 05-Jul-2012 : Removed JRE 1.3.1 code (DG);
  *
  */
 
@@ -102,6 +76,8 @@ public class Year extends RegularTimePeriod implements Serializable {
 
     /**
      * Creates a new {@code Year}, based on the current system date/time.
+     * The time zone and locale are determined by the calendar
+     * returned by {@link RegularTimePeriod#getCalendarInstance()}.
      */
     public Year() {
         this(new Date());
@@ -109,6 +85,8 @@ public class Year extends RegularTimePeriod implements Serializable {
 
     /**
      * Creates a time period representing a single year.
+     * The time zone and locale are determined by the calendar
+     * returned by {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @param year  the year.
      */
@@ -118,19 +96,20 @@ public class Year extends RegularTimePeriod implements Serializable {
                 "Year constructor: year (" + year + ") outside valid range.");
         }
         this.year = (short) year;
-        peg(Calendar.getInstance());
+        peg(getCalendarInstance());
     }
 
     /**
-     * Creates a new {@code Year}, based on a particular instant in time,
-     * using the default time zone.
+     * Creates a new {@code Year}, based on a particular instant in time.
+     * The time zone and locale are determined by the calendar
+     * returned by {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @param time  the time ({@code null} not permitted).
      *
      * @see #Year(Date, TimeZone, Locale)
      */
     public Year(Date time) {
-        this(time, TimeZone.getDefault(), Locale.getDefault());
+        this(time, getCalendarInstance());
     }
 
     /**
@@ -145,6 +124,20 @@ public class Year extends RegularTimePeriod implements Serializable {
      */
     public Year(Date time, TimeZone zone, Locale locale) {
         Calendar calendar = Calendar.getInstance(zone, locale);
+        calendar.setTime(time);
+        this.year = (short) calendar.get(Calendar.YEAR);
+        peg(calendar);
+    }
+
+    /**
+     * Constructs a new instance, based on a particular date/time.
+     * The time zone and locale are determined by the {@code calendar}
+     * parameter.
+     *
+     * @param time the date/time ({@code null} not permitted).
+     * @param calendar the calendar to use for calculations ({@code null} not permitted).
+     */
+    public Year(Date time, Calendar calendar) {
         calendar.setTime(time);
         this.year = (short) calendar.get(Calendar.YEAR);
         peg(calendar);
@@ -205,6 +198,9 @@ public class Year extends RegularTimePeriod implements Serializable {
 
     /**
      * Returns the year preceding this one.
+     * No matter what time zone and locale this instance was created with,
+     * the returned instance will use the default calendar for time
+     * calculations, obtained with {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @return The year preceding this one (or {@code null} if the
      *         current year is -9999).
@@ -221,6 +217,9 @@ public class Year extends RegularTimePeriod implements Serializable {
 
     /**
      * Returns the year following this one.
+     * No matter what time zone and locale this instance was created with,
+     * the returned instance will use the default calendar for time
+     * calculations, obtained with {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @return The year following this one (or {@code null} if the current
      *         year is 9999).

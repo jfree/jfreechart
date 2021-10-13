@@ -36,12 +36,13 @@
 
 package org.jfree.data.xy;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.jfree.chart.TestUtils;
-import org.junit.Test;
+import org.jfree.chart.internal.CloneUtils;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link XIntervalDataItem} class.
@@ -104,7 +105,7 @@ public class XIntervalDataItemTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         XIntervalDataItem item1 = new XIntervalDataItem(1.0, 2.0, 3.0, 4.0);
-        XIntervalDataItem item2 = (XIntervalDataItem) item1.clone();
+        XIntervalDataItem item2 = CloneUtils.clone(item1);
         assertTrue(item1 != item2);
         assertTrue(item1.getClass() == item2.getClass());
         assertTrue(item1.equals(item2));
@@ -116,7 +117,7 @@ public class XIntervalDataItemTest {
     @Test
     public void testSerialization() {
         XIntervalDataItem item1 = new XIntervalDataItem(1.0, 2.0, 3.0, 4.0);
-        XIntervalDataItem item2 = (XIntervalDataItem) TestUtils.serialised(item1);
+        XIntervalDataItem item2 = TestUtils.serialised(item1);
         assertEquals(item1, item2);
     }
 

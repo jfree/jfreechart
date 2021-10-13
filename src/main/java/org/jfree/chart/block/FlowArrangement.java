@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * --------------------
  * FlowArrangement.java
  * --------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited.
+ * (C) Copyright 2004-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 22-Oct-2004 : Version 1 (DG);
- * 04-Feb-2005 : Implemented equals() and made serializable (DG);
- * 08-Feb-2005 : Updated for changes in RectangleConstraint (DG);
  *
  */
 
@@ -47,9 +41,8 @@ import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import org.jfree.chart.ui.HorizontalAlignment;
-import org.jfree.chart.ui.Size2D;
-import org.jfree.chart.ui.VerticalAlignment;
+import org.jfree.chart.api.HorizontalAlignment;
+import org.jfree.chart.api.VerticalAlignment;
 
 /**
  * Arranges blocks in a flow layout.  This class is immutable.
@@ -60,16 +53,16 @@ public class FlowArrangement implements Arrangement, Serializable {
     private static final long serialVersionUID = 4543632485478613800L;
 
     /** The horizontal alignment of blocks. */
-    private HorizontalAlignment horizontalAlignment;
+    private final HorizontalAlignment horizontalAlignment;
 
     /** The vertical alignment of blocks within each row. */
-    private VerticalAlignment verticalAlignment;
+    private final VerticalAlignment verticalAlignment;
 
     /** The horizontal gap between items within rows. */
-    private double horizontalGap;
+    private final double horizontalGap;
 
     /** The vertical gap between rows. */
-    private double verticalGap;
+    private final double verticalGap;
 
     /**
      * Creates a new instance.
@@ -176,15 +169,14 @@ public class FlowArrangement implements Arrangement, Serializable {
     protected Size2D arrangeFN(BlockContainer container, Graphics2D g2,
                                RectangleConstraint constraint) {
 
-        List blocks = container.getBlocks();
+        List<Block> blocks = container.getBlocks();
         double width = constraint.getWidth();
 
         double x = 0.0;
         double y = 0.0;
         double maxHeight = 0.0;
-        List itemsInRow = new ArrayList();
-        for (int i = 0; i < blocks.size(); i++) {
-            Block block = (Block) blocks.get(i);
+        List<Block> itemsInRow = new ArrayList<>();
+        for (Block block : blocks) {
             Size2D size = block.arrange(g2, RectangleConstraint.NONE);
             if (x + size.width <= width) {
                 itemsInRow.add(block);
@@ -357,12 +349,12 @@ public class FlowArrangement implements Arrangement, Serializable {
         double x = 0.0;
         double width = 0.0;
         double maxHeight = 0.0;
-        List blocks = container.getBlocks();
+        List<Block> blocks = container.getBlocks();
         int blockCount = blocks.size();
         if (blockCount > 0) {
             Size2D[] sizes = new Size2D[blocks.size()];
             for (int i = 0; i < blocks.size(); i++) {
-                Block block = (Block) blocks.get(i);
+                Block block = blocks.get(i);
                 sizes[i] = block.arrange(g2, RectangleConstraint.NONE);
                 width = width + sizes[i].getWidth();
                 maxHeight = Math.max(sizes[i].height, maxHeight);

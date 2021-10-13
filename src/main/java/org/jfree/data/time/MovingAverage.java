@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,30 +27,16 @@
  * ------------------
  * MovingAverage.java
  * ------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited.
+ * (C) Copyright 2003-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Benoit Xhenseval;
- *
- * Changes
- * -------
- * 28-Jan-2003 : Version 1 (DG);
- * 10-Mar-2003 : Added createPointMovingAverage() method contributed by Benoit
- *               Xhenseval (DG);
- * 01-Aug-2003 : Added new method for TimeSeriesCollection, and fixed bug in
- *               XYDataset method (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
- *               getYValue() (DG);
- * 11-Jan-2005 : Removed deprecated code in preparation for the 1.0.0
- *               release (DG);
- * 09-Jun-2009 : Tidied up some calls to TimeSeries (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
 package org.jfree.data.time;
 
-import org.jfree.chart.util.Args;
+import org.jfree.chart.internal.Args;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
@@ -100,15 +86,17 @@ public class MovingAverage {
      * result is an empty series.
      *
      * @param source  the source series.
-     * @param name  the name of the new series.
+     * @param name  the series key ({@code null} not permitted).
      * @param periodCount  the number of periods used in the average
      *                     calculation.
      * @param skip  the number of initial periods to skip.
      *
+     * @param <S>  the type for the series keys.
+     * 
      * @return The moving average series.
      */
-    public static TimeSeries createMovingAverage(TimeSeries source,
-            String name, int periodCount, int skip) {
+    public static <S extends Comparable<S>> TimeSeries<S> createMovingAverage(
+            TimeSeries<S> source, S name, int periodCount, int skip) {
 
         Args.nullNotPermitted(source, "source");
         if (periodCount < 1) {
@@ -116,8 +104,7 @@ public class MovingAverage {
                     + "than or equal to 1.");
         }
 
-        TimeSeries result = new TimeSeries(name);
-
+        TimeSeries<S> result = new TimeSeries<>(name);
         if (source.getItemCount() > 0) {
 
             // if the initial averaging period is to be excluded, then
@@ -168,9 +155,7 @@ public class MovingAverage {
 
             }
         }
-
         return result;
-
     }
 
     /**
@@ -182,14 +167,16 @@ public class MovingAverage {
      * Developed by Benoit Xhenseval (www.ObjectLab.co.uk).
      *
      * @param source  the source series.
-     * @param name  the name of the new series.
+     * @param name  the series key ({@code null} not permitted).
      * @param pointCount  the number of POINTS used in the average calculation
      *                    (not periods!)
+     * 
+     * @param <S>  the type for the series keys.
      *
      * @return The moving average series.
      */
-    public static TimeSeries createPointMovingAverage(TimeSeries source,
-            String name, int pointCount) {
+    public static <S extends Comparable<S>> TimeSeries<S> createPointMovingAverage(
+            TimeSeries<S> source, S name, int pointCount) {
 
         Args.nullNotPermitted(source, "source");
         if (pointCount < 2) {
@@ -197,7 +184,7 @@ public class MovingAverage {
                     + "than or equal to 2.");
         }
 
-        TimeSeries result = new TimeSeries(name);
+        TimeSeries<S> result = new TimeSeries<>(name);
         double rollingSumForPeriod = 0.0;
         for (int i = 0; i < source.getItemCount(); i++) {
             // get the current data item...

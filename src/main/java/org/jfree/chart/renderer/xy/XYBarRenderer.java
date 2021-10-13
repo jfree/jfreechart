@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------
  * XYBarRenderer.java
  * ------------------
- * (C) Copyright 2001-2017, by Object Refinery Limited.
+ * (C) Copyright 2001-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Richard Atkinson;
@@ -35,72 +35,6 @@
  *                   Bill Kelemen;
  *                   Marc van Glabbeek (bug 1775452);
  *                   Richard West, Advanced Micro Devices, Inc.;
- *
- * Changes
- * -------
- * 13-Dec-2001 : Version 1, makes VerticalXYBarPlot class redundant (DG);
- * 23-Jan-2002 : Added DrawInfo parameter to drawItem() method (DG);
- * 09-Apr-2002 : Removed the translated zero from the drawItem method. Override
- *               the initialise() method to calculate it (DG);
- * 24-May-2002 : Incorporated tooltips into chart entities (DG);
- * 25-Jun-2002 : Removed redundant import (DG);
- * 05-Aug-2002 : Small modification to drawItem method to support URLs for HTML
- *               image maps (RA);
- * 25-Mar-2003 : Implemented Serializable (DG);
- * 01-May-2003 : Modified drawItem() method signature (DG);
- * 30-Jul-2003 : Modified entity constructor (CZ);
- * 20-Aug-2003 : Implemented Cloneable and PublicCloneable (DG);
- * 24-Aug-2003 : Added null checks in drawItem (BK);
- * 16-Sep-2003 : Changed ChartRenderingInfo --> PlotRenderingInfo (DG);
- * 07-Oct-2003 : Added renderer state (DG);
- * 05-Dec-2003 : Changed call to obtain outline paint (DG);
- * 10-Feb-2004 : Added state class, updated drawItem() method to make
- *               cut-and-paste overriding easier, and replaced property change
- *               with RendererChangeEvent (DG);
- * 25-Feb-2004 : Replaced CrosshairInfo with CrosshairState (DG);
- * 26-Apr-2004 : Added gradient paint transformer (DG);
- * 19-May-2004 : Fixed bug (879709) with bar zero value for secondary axis (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
- *               getYValue() (DG);
- * 01-Sep-2004 : Added a flag to control whether or not the bar outlines are
- *               drawn (DG);
- * 03-Sep-2004 : Added option to use y-interval from dataset to determine the
- *               length of the bars (DG);
- * 08-Sep-2004 : Added equals() method and updated clone() method (DG);
- * 26-Jan-2005 : Added override for getLegendItem() method (DG);
- * 20-Apr-2005 : Use generators for label tooltips and URLs (DG);
- * 19-May-2005 : Added minimal item label implementation - needs improving (DG);
- * 14-Oct-2005 : Fixed rendering problem with inverted axes (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 21-Jun-2006 : Improved item label handling - see bug 1501768 (DG);
- * 24-Aug-2006 : Added crosshair support (DG);
- * 13-Dec-2006 : Updated getLegendItems() to return gradient paint
- *               transformer (DG);
- * 02-Feb-2007 : Changed setUseYInterval() to only notify when the flag
- *               changes (DG);
- * 06-Feb-2007 : Fixed bug 1086307, crosshairs with multiple axes (DG);
- * 09-Feb-2007 : Updated getLegendItem() to observe drawBarOutline flag (DG);
- * 05-Mar-2007 : Applied patch 1671126 by Sergei Ivanov, to fix rendering with
- *               LogarithmicAxis (DG);
- * 20-Apr-2007 : Updated getLegendItem() for renderer change (DG);
- * 17-May-2007 : Set datasetIndex and seriesIndex in getLegendItem() (DG);
- * 18-May-2007 : Set dataset and seriesKey for LegendItem (DG);
- * 15-Jun-2007 : Changed default for drawBarOutline to false (DG);
- * 26-Sep-2007 : Fixed bug 1775452, problem with bar margins for inverted
- *               axes, thanks to Marc van Glabbeek (DG);
- * 12-Nov-2007 : Fixed NPE in drawItemLabel() method, thanks to Richard West
- *               (see patch 1827829) (DG);
- * 17-Jun-2008 : Apply legend font and paint attributes (DG);
- * 19-Jun-2008 : Added findRangeBounds() method override to fix bug in default
- *               axis range (DG);
- * 24-Jun-2008 : Added new barPainter mechanism (DG);
- * 03-Feb-2009 : Added defaultShadowsVisible flag (DG);
- * 05-Feb-2009 : Added barAlignmentFactor (DG);
- * 10-May-2012 : Fix findDomainBounds() and findRangeBounds() to account for
- *               non-visible series (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
- * 24-Aug-2014 : Add begin/endElementGroup() (DG);
- * 18-Feb-2017 : Updates for crosshairs (bug #36) (DG);
  *
  */
 
@@ -117,8 +51,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Objects;
 
-import org.jfree.chart.LegendItem;
+import org.jfree.chart.legend.LegendItem;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.event.RendererChangeEvent;
@@ -131,14 +66,14 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.text.TextUtils;
-import org.jfree.chart.ui.GradientPaintTransformer;
-import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.ui.StandardGradientPaintTransformer;
-import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.PublicCloneable;
-import org.jfree.chart.util.SerialUtils;
-import org.jfree.chart.util.ShapeUtils;
+import org.jfree.chart.util.GradientPaintTransformer;
+import org.jfree.chart.api.RectangleEdge;
+import org.jfree.chart.util.StandardGradientPaintTransformer;
+import org.jfree.chart.internal.CloneUtils;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.api.PublicCloneable;
+import org.jfree.chart.internal.SerialUtils;
+import org.jfree.chart.internal.ShapeUtils;
 import org.jfree.data.Range;
 import org.jfree.data.xy.IntervalXYDataset;
 import org.jfree.data.xy.XYDataset;
@@ -149,8 +84,7 @@ import org.jfree.data.xy.XYDataset;
  * {@code XYBarChartDemo1.java} program included in the JFreeChart
  * demo collection:
  * <br><br>
- * <img src="../../../../../images/XYBarRendererSample.png"
- * alt="XYBarRendererSample.png">
+ * <img src="doc-files/XYBarRendererSample.png" alt="XYBarRendererSample.png">
  */
 public class XYBarRenderer extends AbstractXYItemRenderer
         implements XYItemRenderer, Cloneable, PublicCloneable, Serializable {
@@ -160,8 +94,6 @@ public class XYBarRenderer extends AbstractXYItemRenderer
 
     /**
      * The default bar painter assigned to each new instance of this renderer.
-     *
-     * @since 1.0.11
      */
     private static XYBarPainter defaultBarPainter = new GradientXYBarPainter();
 
@@ -169,8 +101,6 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      * Returns the default bar painter.
      *
      * @return The default bar painter.
-     *
-     * @since 1.0.11
      */
     public static XYBarPainter getDefaultBarPainter() {
         return XYBarRenderer.defaultBarPainter;
@@ -180,8 +110,6 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      * Sets the default bar painter.
      *
      * @param painter  the painter ({@code null} not permitted).
-     *
-     * @since 1.0.11
      */
     public static void setDefaultBarPainter(XYBarPainter painter) {
         Args.nullNotPermitted(painter, "painter");
@@ -199,8 +127,6 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      * @return A boolean.
      *
      * @see #setDefaultShadowsVisible(boolean)
-     *
-     * @since 1.0.13
      */
     public static boolean getDefaultShadowsVisible() {
         return XYBarRenderer.defaultShadowsVisible;
@@ -212,8 +138,6 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      * @param visible  the new value for the default.
      *
      * @see #getDefaultShadowsVisible()
-     *
-     * @since 1.0.13
      */
     public static void setDefaultShadowsVisible(boolean visible) {
         XYBarRenderer.defaultShadowsVisible = visible;
@@ -296,36 +220,26 @@ public class XYBarRenderer extends AbstractXYItemRenderer
 
     /**
      * The bar painter (never {@code null}).
-     *
-     * @since 1.0.11
      */
     private XYBarPainter barPainter;
 
     /**
      * The flag that controls whether or not shadows are drawn for the bars.
-     *
-     * @since 1.0.11
      */
     private boolean shadowsVisible;
 
     /**
      * The x-offset for the shadow effect.
-     *
-     * @since 1.0.11
      */
     private double shadowXOffset;
 
     /**
      * The y-offset for the shadow effect.
-     *
-     * @since 1.0.11
      */
     private double shadowYOffset;
 
     /**
      * A factor used to align the bars about the x-value.
-     * 
-     * @since 1.0.13
      */
     private double barAlignmentFactor;
 
@@ -518,7 +432,6 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      * @return The fallback position ({@code null} possible).
      *
      * @see #setPositiveItemLabelPositionFallback(ItemLabelPosition)
-     * @since 1.0.2
      */
     public ItemLabelPosition getPositiveItemLabelPositionFallback() {
         return this.positiveItemLabelPositionFallback;
@@ -532,7 +445,6 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      * @param position  the position ({@code null} permitted).
      *
      * @see #getPositiveItemLabelPositionFallback()
-     * @since 1.0.2
      */
     public void setPositiveItemLabelPositionFallback(
             ItemLabelPosition position) {
@@ -547,7 +459,6 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      * @return The fallback position ({@code null} possible).
      *
      * @see #setNegativeItemLabelPositionFallback(ItemLabelPosition)
-     * @since 1.0.2
      */
     public ItemLabelPosition getNegativeItemLabelPositionFallback() {
         return this.negativeItemLabelPositionFallback;
@@ -561,7 +472,6 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      * @param position  the position ({@code null} permitted).
      *
      * @see #getNegativeItemLabelPositionFallback()
-     * @since 1.0.2
      */
     public void setNegativeItemLabelPositionFallback(
             ItemLabelPosition position) {
@@ -573,8 +483,6 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      * Returns the bar painter.
      *
      * @return The bar painter (never {@code null}).
-     *
-     * @since 1.0.11
      */
     public XYBarPainter getBarPainter() {
         return this.barPainter;
@@ -585,8 +493,6 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      * registered listeners.
      *
      * @param painter  the painter ({@code null} not permitted).
-     *
-     * @since 1.0.11
      */
     public void setBarPainter(XYBarPainter painter) {
         Args.nullNotPermitted(painter, "painter");
@@ -599,8 +505,6 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      * the bars.
      *
      * @return A boolean.
-     *
-     * @since 1.0.11
      */
     public boolean getShadowsVisible() {
         return this.shadowsVisible;
@@ -612,8 +516,6 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param visible  the new flag value.
-     *
-     * @since 1.0.11
      */
     public void setShadowVisible(boolean visible) {
         this.shadowsVisible = visible;
@@ -624,8 +526,6 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      * Returns the shadow x-offset.
      *
      * @return The shadow x-offset.
-     *
-     * @since 1.0.11
      */
     public double getShadowXOffset() {
         return this.shadowXOffset;
@@ -636,8 +536,6 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param offset  the offset.
-     *
-     * @since 1.0.11
      */
     public void setShadowXOffset(double offset) {
         this.shadowXOffset = offset;
@@ -648,8 +546,6 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      * Returns the shadow y-offset.
      *
      * @return The shadow y-offset.
-     *
-     * @since 1.0.11
      */
     public double getShadowYOffset() {
         return this.shadowYOffset;
@@ -660,8 +556,6 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param offset  the offset.
-     *
-     * @since 1.0.11
      */
     public void setShadowYOffset(double offset) {
         this.shadowYOffset = offset;
@@ -672,8 +566,6 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      * Returns the bar alignment factor. 
      * 
      * @return The bar alignment factor.
-     * 
-     * @since 1.0.13
      */
     public double getBarAlignmentFactor() {
         return this.barAlignmentFactor;
@@ -685,8 +577,6 @@ public class XYBarRenderer extends AbstractXYItemRenderer
      * range 0.0 to 1.0, no alignment will be performed by the renderer.
      *
      * @param factor  the factor.
-     *
-     * @since 1.0.13
      */
     public void setBarAlignmentFactor(double factor) {
         this.barAlignmentFactor = factor;
@@ -1201,10 +1091,9 @@ public class XYBarRenderer extends AbstractXYItemRenderer
     public Object clone() throws CloneNotSupportedException {
         XYBarRenderer result = (XYBarRenderer) super.clone();
         if (this.gradientPaintTransformer != null) {
-            result.gradientPaintTransformer = (GradientPaintTransformer)
-                ObjectUtils.clone(this.gradientPaintTransformer);
+            result.gradientPaintTransformer = CloneUtils.clone(this.gradientPaintTransformer);
         }
-        result.legendBar = ShapeUtils.clone(this.legendBar);
+        result.legendBar = CloneUtils.clone(this.legendBar);
         return result;
     }
 
@@ -1236,19 +1125,16 @@ public class XYBarRenderer extends AbstractXYItemRenderer
         if (this.useYInterval != that.useYInterval) {
             return false;
         }
-        if (!ObjectUtils.equal(this.gradientPaintTransformer,
-                that.gradientPaintTransformer)) {
+        if (!Objects.equals(this.gradientPaintTransformer, that.gradientPaintTransformer)) {
             return false;
         }
         if (!ShapeUtils.equal(this.legendBar, that.legendBar)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.positiveItemLabelPositionFallback,
-                that.positiveItemLabelPositionFallback)) {
+        if (!Objects.equals(this.positiveItemLabelPositionFallback, that.positiveItemLabelPositionFallback)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.negativeItemLabelPositionFallback,
-                that.negativeItemLabelPositionFallback)) {
+        if (!Objects.equals(this.negativeItemLabelPositionFallback, that.negativeItemLabelPositionFallback)) {
             return false;
         }
         if (!this.barPainter.equals(that.barPainter)) {

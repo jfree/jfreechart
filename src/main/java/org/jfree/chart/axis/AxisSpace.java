@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,21 +27,10 @@
  * --------------
  * AxisSpace.java
  * --------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 03-Jul-2003 : Version 1 (DG);
- * 14-Aug-2003 : Implemented Cloneable (DG);
- * 18-Aug-2003 : Implemented Serializable (DG);
- * 17-Mar-2004 : Added a toString() method for debugging (DG);
- * 07-Jan-2005 : Updated equals() method (DG);
- * 11-Jan-2005 : Removed deprecated methods in preparation for 1.0.0
- *               release (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -49,9 +38,9 @@ package org.jfree.chart.axis;
 
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
-import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.api.RectangleEdge;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.api.PublicCloneable;
 
 /**
  * A record that contains the space required at each edge of a plot.

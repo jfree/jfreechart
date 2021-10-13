@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,37 +27,27 @@
  * ------------------------------------
  * StandardPieToolTipGeneratorTest.java
  * ------------------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 18-Mar-2003 : Version 1 (DG);
- * 13-Aug-2003 : Added clone tests (DG);
- * 04-Mar-2004 : Added test for equals() method (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 03-May-2006 : Extended test for clone() method (DG);
- * 03-May-2006 : Renamed StandardPieItemLabelGeneratorTests
- *               --> StandardPieToolTipGeneratorTests (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG);
  *
  */
 
 package org.jfree.chart.labels;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
 import org.jfree.chart.TestUtils;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.internal.CloneUtils;
+import org.jfree.chart.api.PublicCloneable;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link StandardPieToolTipGenerator} class.
@@ -126,8 +116,7 @@ public class StandardPieToolTipGeneratorTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         StandardPieToolTipGenerator g1 = new StandardPieToolTipGenerator();
-        StandardPieToolTipGenerator g2 = (StandardPieToolTipGenerator) 
-                g1.clone();
+        StandardPieToolTipGenerator g2 = CloneUtils.clone(g1);
         assertTrue(g1 != g2);
         assertTrue(g1.getClass() == g2.getClass());
         assertTrue(g1.equals(g2));
@@ -150,8 +139,7 @@ public class StandardPieToolTipGeneratorTest {
     @Test
     public void testSerialization() {
         StandardPieToolTipGenerator g1 = new StandardPieToolTipGenerator();
-        StandardPieToolTipGenerator g2 = (StandardPieToolTipGenerator)
-                TestUtils.serialised(g1);
+        StandardPieToolTipGenerator g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

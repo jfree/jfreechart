@@ -39,12 +39,13 @@ package org.jfree.data.category;
 import java.util.List;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.internal.CloneUtils;
 
 import org.jfree.data.UnknownKeyException;
-import org.junit.Test;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * Tests for the {@link SlidingCategoryDataset} class.
@@ -93,7 +94,7 @@ public class SlidingCategoryDatasetTest {
         u1.addValue(2.0, "R1", "C2");
         SlidingCategoryDataset<String, String> d1 = new SlidingCategoryDataset<>(u1, 0, 5);
         SlidingCategoryDataset<String, String> d2;
-        d2 = (SlidingCategoryDataset) d1.clone();
+        d2 = CloneUtils.clone(d1);
         assertTrue(d1 != d2);
         assertTrue(d1.getClass() == d2.getClass());
         assertTrue(d1.equals(d2));
@@ -101,7 +102,8 @@ public class SlidingCategoryDatasetTest {
         // basic check for independence
         u1.addValue(3.0, "R1", "C3");
         assertFalse(d1.equals(d2));
-        DefaultCategoryDataset<String, String> u2 = (DefaultCategoryDataset) d2.getUnderlyingDataset();
+        DefaultCategoryDataset<String, String> u2 
+                = (DefaultCategoryDataset<String, String>) d2.getUnderlyingDataset();
         u2.addValue(3.0, "R1", "C3");
         assertTrue(d1.equals(d2));
     }
@@ -115,8 +117,7 @@ public class SlidingCategoryDatasetTest {
         u1.addValue(1.0, "R1", "C1");
         u1.addValue(2.0, "R1", "C2");
         SlidingCategoryDataset<String, String> d1 = new SlidingCategoryDataset<>(u1, 0, 5);
-        SlidingCategoryDataset<String, String> d2 = (SlidingCategoryDataset) 
-                TestUtils.serialised(d1);
+        SlidingCategoryDataset<String, String> d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
 
         // basic check for independence

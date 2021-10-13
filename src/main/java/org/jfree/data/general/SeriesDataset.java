@@ -45,20 +45,22 @@ import org.jfree.data.xy.XYZDataset;
 /**
  * The interface for a dataset consisting of one or many series of data.
  *
+ * @param <S> The type for the series keys.
+ * 
  * @see CategoryDataset
  * @see IntervalXYDataset
  * @see IntervalXYZDataset
  * @see XYDataset
  * @see XYZDataset
  */
-public interface SeriesDataset extends Dataset {
+public interface SeriesDataset<S extends Comparable<S>> extends Dataset {
 
     /**
      * Returns the number of series in the dataset.
      *
      * @return The series count.
      */
-    public int getSeriesCount();
+    int getSeriesCount();
 
     /**
      * Returns the key for a series.
@@ -68,7 +70,7 @@ public interface SeriesDataset extends Dataset {
      *
      * @return The key for the series.
      */
-    public Comparable<?> getSeriesKey(int series);
+    S getSeriesKey(int series);
 
     /**
      * Returns the index of the series with the specified key, or -1 if there
@@ -78,6 +80,6 @@ public interface SeriesDataset extends Dataset {
      *
      * @return The index, or -1.
      */
-    public int indexOf(Comparable<?> seriesKey);
+    int indexOf(S seriesKey);
 
 }

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------
  * HistogramDataset.java
  * ---------------------
- * (C) Copyright 2003-2020, by Jelai Wang and Contributors.
+ * (C) Copyright 2003-2021, by Jelai Wang and Contributors.
  *
  * Original Author:  Jelai Wang (jelaiw AT mindspring.com);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -45,9 +45,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.PublicCloneable;
+
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.api.PublicCloneable;
 
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.xy.AbstractIntervalXYDataset;
@@ -461,10 +461,10 @@ public class HistogramDataset extends AbstractIntervalXYDataset
             return false;
         }
         HistogramDataset that = (HistogramDataset) obj;
-        if (!ObjectUtils.equal(this.type, that.type)) {
+        if (!Objects.equals(this.type, that.type)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.list, that.list)) {
+        if (!Objects.equals(this.list, that.list)) {
             return false;
         }
         return true;

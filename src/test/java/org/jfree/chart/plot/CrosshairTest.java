@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,22 +27,18 @@
  * ------------------
  * CrosshairTest.java
  * ------------------
- * (C) Copyright 2009-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2009-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 09-Apr-2009 : Version 1 (DG);
  *
  */
 
 package org.jfree.chart.plot;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -53,9 +49,9 @@ import java.text.NumberFormat;
 import org.jfree.chart.TestUtils;
 
 import org.jfree.chart.labels.StandardCrosshairLabelGenerator;
-import org.jfree.chart.ui.RectangleAnchor;
-import org.jfree.chart.util.PublicCloneable;
-import org.junit.Test;
+import org.jfree.chart.api.RectangleAnchor;
+import org.jfree.chart.api.PublicCloneable;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link Crosshair} class.
@@ -191,7 +187,7 @@ public class CrosshairTest {
     public void testSerialization() {
         Crosshair c1 = new Crosshair(1.0, new GradientPaint(1.0f, 2.0f,
                 Color.RED, 3.0f, 4.0f, Color.BLUE), new BasicStroke(1.0f));
-        Crosshair c2 = (Crosshair) TestUtils.serialised(c1);
+        Crosshair c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * DialBackgroundTest.java
  * -----------------------
- * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -36,18 +36,19 @@
 
 package org.jfree.chart.plot.dial;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.Color;
 import java.awt.GradientPaint;
 
 import org.jfree.chart.TestUtils;
-import org.jfree.chart.ui.GradientPaintTransformType;
-import org.jfree.chart.ui.StandardGradientPaintTransformer;
+import org.jfree.chart.util.GradientPaintTransformType;
+import org.jfree.chart.util.StandardGradientPaintTransformer;
+import org.jfree.chart.internal.CloneUtils;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link DialBackground} class.
@@ -108,7 +109,7 @@ public class DialBackgroundTest {
     public void testCloning() throws CloneNotSupportedException {
         // test default instance
         DialBackground b1 = new DialBackground();
-        DialBackground b2 = (DialBackground) b1.clone();
+        DialBackground b2 = CloneUtils.clone(b1);
         assertTrue(b1 != b2);
         assertTrue(b1.getClass() == b2.getClass());
         assertTrue(b1.equals(b2));
@@ -138,17 +139,16 @@ public class DialBackgroundTest {
     public void testSerialization() {
         // test a default instance
         DialBackground b1 = new DialBackground();
-        DialBackground b2 = (DialBackground) TestUtils.serialised(b1);
+        DialBackground b2 = TestUtils.serialised(b1);
         assertEquals(b1, b2);
 
         // test a customised instance
         b1 = new DialBackground();
-        b1.setPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f,
-                Color.green));
+        b1.setPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f, Color.GREEN));
         b1.setGradientPaintTransformer(new StandardGradientPaintTransformer(
                 GradientPaintTransformType.CENTER_VERTICAL));
 
-        b2 = (DialBackground) TestUtils.serialised(b1);
+        b2 = TestUtils.serialised(b1);
         assertEquals(b1, b2);
     }
 

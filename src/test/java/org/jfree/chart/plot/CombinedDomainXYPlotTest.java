@@ -36,8 +36,8 @@
 
 package org.jfree.chart.plot;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -55,10 +55,11 @@ import org.jfree.chart.event.ChartChangeEvent;
 import org.jfree.chart.event.ChartChangeListener;
 import org.jfree.chart.renderer.xy.StandardXYItemRenderer;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
+import org.jfree.chart.internal.CloneUtils;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link CombinedDomainXYPlot} class.
@@ -83,7 +84,7 @@ public class CombinedDomainXYPlotTest implements ChartChangeListener {
      */
     @Test
     public void testConstructor1() {
-        CombinedDomainXYPlot plot = new CombinedDomainXYPlot(null);
+        CombinedDomainXYPlot<String> plot = new CombinedDomainXYPlot<>(null);
         assertEquals(null, plot.getDomainAxis());
     }
 
@@ -92,9 +93,9 @@ public class CombinedDomainXYPlotTest implements ChartChangeListener {
      */
     @Test
     public void testRemoveSubplot() {
-        CombinedDomainXYPlot plot = new CombinedDomainXYPlot();
-        XYPlot plot1 = new XYPlot();
-        XYPlot plot2 = new XYPlot();
+        CombinedDomainXYPlot<String> plot = new CombinedDomainXYPlot<>();
+        XYPlot<String> plot1 = new XYPlot<>();
+        XYPlot<String> plot2 = new XYPlot<>();
         plot.add(plot1);
         plot.add(plot2);
         // remove plot2, but plot1 is removed instead
@@ -108,8 +109,8 @@ public class CombinedDomainXYPlotTest implements ChartChangeListener {
      */
     @Test
     public void testEquals() {
-        CombinedDomainXYPlot plot1 = createPlot();
-        CombinedDomainXYPlot plot2 = createPlot();
+        CombinedDomainXYPlot<String> plot1 = createPlot();
+        CombinedDomainXYPlot<String> plot2 = createPlot();
         assertTrue(plot1.equals(plot2));
         assertTrue(plot2.equals(plot1));
     }
@@ -120,8 +121,8 @@ public class CombinedDomainXYPlotTest implements ChartChangeListener {
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        CombinedDomainXYPlot plot1 = createPlot();
-        CombinedDomainXYPlot plot2 = (CombinedDomainXYPlot) plot1.clone();
+        CombinedDomainXYPlot<String> plot1 = createPlot();
+        CombinedDomainXYPlot<String> plot2 = CloneUtils.clone(plot1);
         assertTrue(plot1 != plot2);
         assertTrue(plot1.getClass() == plot2.getClass());
         assertTrue(plot1.equals(plot2));
@@ -132,9 +133,8 @@ public class CombinedDomainXYPlotTest implements ChartChangeListener {
      */
     @Test
     public void testSerialization() {
-        CombinedDomainXYPlot plot1 = createPlot();
-        CombinedDomainXYPlot plot2 = (CombinedDomainXYPlot) 
-                TestUtils.serialised(plot1);
+        CombinedDomainXYPlot<String> plot1 = createPlot();
+        CombinedDomainXYPlot<String> plot2 = TestUtils.serialised(plot1);
         assertEquals(plot1, plot2);
     }
 
@@ -144,10 +144,10 @@ public class CombinedDomainXYPlotTest implements ChartChangeListener {
      */
     @Test
     public void testNotification() {
-        CombinedDomainXYPlot plot = createPlot();
+        CombinedDomainXYPlot<String> plot = createPlot();
         JFreeChart chart = new JFreeChart(plot);
         chart.addChangeListener(this);
-        XYPlot subplot1 = plot.getSubplots().get(0);
+        XYPlot<String> subplot1 = plot.getSubplots().get(0);
         NumberAxis yAxis = (NumberAxis) subplot1.getRangeAxis();
         yAxis.setAutoRangeIncludesZero(!yAxis.getAutoRangeIncludesZero());
         assertEquals(1, this.events.size());
@@ -166,10 +166,10 @@ public class CombinedDomainXYPlotTest implements ChartChangeListener {
      *
      * @return Series 1.
      */
-    private XYDataset createDataset1() {
+    private XYDataset<String> createDataset1() {
 
         // create dataset 1...
-        XYSeries series1 = new XYSeries("Series 1");
+        XYSeries<String> series1 = new XYSeries<>("Series 1");
         series1.add(10.0, 12353.3);
         series1.add(20.0, 13734.4);
         series1.add(30.0, 14525.3);
@@ -186,7 +186,7 @@ public class CombinedDomainXYPlotTest implements ChartChangeListener {
         series1.add(140.0, 14230.2);
         series1.add(150.0, 11235.2);
 
-        XYSeries series2 = new XYSeries("Series 2");
+        XYSeries<String> series2 = new XYSeries<>("Series 2");
         series2.add(10.0, 15000.3);
         series2.add(20.0, 11000.4);
         series2.add(30.0, 17000.3);
@@ -203,7 +203,7 @@ public class CombinedDomainXYPlotTest implements ChartChangeListener {
         series2.add(140.0, 16000.2);
         series2.add(150.0, 17000.2);
 
-        XYSeriesCollection collection = new XYSeriesCollection();
+        XYSeriesCollection<String> collection = new XYSeriesCollection<>();
         collection.addSeries(series1);
         collection.addSeries(series2);
         return collection;
@@ -215,9 +215,9 @@ public class CombinedDomainXYPlotTest implements ChartChangeListener {
      *
      * @return Series 2.
      */
-    private XYDataset createDataset2() {
+    private XYDataset<String> createDataset2() {
 
-        XYSeries series2 = new XYSeries("Series 3");
+        XYSeries<String> series2 = new XYSeries<>("Series 3");
 
         series2.add(10.0, 16853.2);
         series2.add(20.0, 19642.3);
@@ -234,7 +234,7 @@ public class CombinedDomainXYPlotTest implements ChartChangeListener {
         series2.add(170.0, 18500.7);
         series2.add(180.0, 19595.9);
 
-        return new XYSeriesCollection(series2);
+        return new XYSeriesCollection<>(series2);
 
     }
 
@@ -243,12 +243,12 @@ public class CombinedDomainXYPlotTest implements ChartChangeListener {
      *
      * @return A sample plot.
      */
-    private CombinedDomainXYPlot createPlot() {
+    private CombinedDomainXYPlot<String> createPlot() {
         // create subplot 1...
-        XYDataset data1 = createDataset1();
+        XYDataset<String> data1 = createDataset1();
         XYItemRenderer renderer1 = new StandardXYItemRenderer();
         NumberAxis rangeAxis1 = new NumberAxis("Range 1");
-        XYPlot subplot1 = new XYPlot(data1, null, rangeAxis1, renderer1);
+        XYPlot<String> subplot1 = new XYPlot<>(data1, null, rangeAxis1, renderer1);
         subplot1.setRangeAxisLocation(AxisLocation.BOTTOM_OR_LEFT);
 
         XYTextAnnotation annotation = new XYTextAnnotation("Hello!", 50.0,
@@ -258,15 +258,15 @@ public class CombinedDomainXYPlotTest implements ChartChangeListener {
         subplot1.addAnnotation(annotation);
 
         // create subplot 2...
-        XYDataset data2 = createDataset2();
+        XYDataset<String> data2 = createDataset2();
         XYItemRenderer renderer2 = new StandardXYItemRenderer();
         NumberAxis rangeAxis2 = new NumberAxis("Range 2");
         rangeAxis2.setAutoRangeIncludesZero(false);
-        XYPlot subplot2 = new XYPlot(data2, null, rangeAxis2, renderer2);
+        XYPlot<String> subplot2 = new XYPlot<>(data2, null, rangeAxis2, renderer2);
         subplot2.setRangeAxisLocation(AxisLocation.TOP_OR_LEFT);
 
         // parent plot...
-        CombinedDomainXYPlot plot = new CombinedDomainXYPlot(
+        CombinedDomainXYPlot<String> plot = new CombinedDomainXYPlot<> (
                 new NumberAxis("Domain"));
         plot.setGap(10.0);
 

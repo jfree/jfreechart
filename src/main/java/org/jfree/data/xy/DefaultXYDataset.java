@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,17 +27,10 @@
  * ---------------------
  * DefaultXYDataset.java
  * ---------------------
- * (C) Copyright 2006-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 06-Jul-2006 : Version 1 (DG);
- * 02-Nov-2006 : Fixed a problem with adding a new series with the same key
- *               as an existing series (see bug 1589392) (DG);
- * 25-Jan-2007 : Implemented PublicCloneable (DG);
  *
  */
 
@@ -46,7 +39,8 @@ package org.jfree.data.xy;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.api.PublicCloneable;
 
 import org.jfree.data.DomainOrder;
 import org.jfree.data.general.DatasetChangeEvent;
@@ -55,31 +49,34 @@ import org.jfree.data.general.DatasetChangeEvent;
  * A default implementation of the {@link XYDataset} interface that stores
  * data values in arrays of double primitives.
  *
+ * @param <S> the type of the series keys ({@code String} is commonly used).
+ * 
  * @since 1.0.2
  */
-public class DefaultXYDataset extends AbstractXYDataset
-        implements XYDataset, PublicCloneable {
+public class DefaultXYDataset<S extends Comparable<S>> 
+        extends AbstractXYDataset<S>
+        implements XYDataset<S>, PublicCloneable {
 
     /**
      * Storage for the series keys.  This list must be kept in sync with the
      * seriesList.
      */
-    private List seriesKeys;
+    private List<S> seriesKeys;
 
     /**
      * Storage for the series in the dataset.  We use a list because the
      * order of the series is significant.  This list must be kept in sync
      * with the seriesKeys list.
      */
-    private List seriesList;
+    private List<double[][]> seriesList;
 
     /**
      * Creates a new {@code DefaultXYDataset} instance, initially
      * containing no data.
      */
     public DefaultXYDataset() {
-        this.seriesKeys = new java.util.ArrayList();
-        this.seriesList = new java.util.ArrayList();
+        this.seriesKeys = new ArrayList<>();
+        this.seriesList = new ArrayList<>();
     }
 
     /**
@@ -104,11 +101,9 @@ public class DefaultXYDataset extends AbstractXYDataset
      *     specified range.
      */
     @Override
-    public Comparable getSeriesKey(int series) {
-        if ((series < 0) || (series >= getSeriesCount())) {
-            throw new IllegalArgumentException("Series index out of bounds");
-        }
-        return (Comparable) this.seriesKeys.get(series);
+    public S getSeriesKey(int series) {
+        Args.requireInRange(series, "series", 0, this.seriesKeys.size() - 1);
+        return this.seriesKeys.get(series);
     }
 
     /**
@@ -120,7 +115,7 @@ public class DefaultXYDataset extends AbstractXYDataset
      * @return The index, or -1.
      */
     @Override
-    public int indexOf(Comparable seriesKey) {
+    public int indexOf(S seriesKey) {
         return this.seriesKeys.indexOf(seriesKey);
     }
 
@@ -152,7 +147,7 @@ public class DefaultXYDataset extends AbstractXYDataset
         if ((series < 0) || (series >= getSeriesCount())) {
             throw new IllegalArgumentException("Series index out of bounds");
         }
-        double[][] seriesArray = (double[][]) this.seriesList.get(series);
+        double[][] seriesArray = this.seriesList.get(series);
         return seriesArray[0].length;
     }
 
@@ -175,7 +170,7 @@ public class DefaultXYDataset extends AbstractXYDataset
      */
     @Override
     public double getXValue(int series, int item) {
-        double[][] seriesData = (double[][]) this.seriesList.get(series);
+        double[][] seriesData = this.seriesList.get(series);
         return seriesData[0][item];
     }
 
@@ -198,7 +193,7 @@ public class DefaultXYDataset extends AbstractXYDataset
      */
     @Override
     public Number getX(int series, int item) {
-        return new Double(getXValue(series, item));
+        return getXValue(series, item);
     }
 
     /**
@@ -220,7 +215,7 @@ public class DefaultXYDataset extends AbstractXYDataset
      */
     @Override
     public double getYValue(int series, int item) {
-        double[][] seriesData = (double[][]) this.seriesList.get(series);
+        double[][] seriesData = this.seriesList.get(series);
         return seriesData[1][item];
     }
 
@@ -243,7 +238,7 @@ public class DefaultXYDataset extends AbstractXYDataset
      */
     @Override
     public Number getY(int series, int item) {
-        return new Double(getYValue(series, item));
+        return getYValue(series, item);
     }
 
     /**
@@ -256,7 +251,7 @@ public class DefaultXYDataset extends AbstractXYDataset
      *     arrays of equal length, the first containing the x-values and the
      *     second containing the y-values).
      */
-    public void addSeries(Comparable seriesKey, double[][] data) {
+    public void addSeries(S seriesKey, double[][] data) {
         if (seriesKey == null) {
             throw new IllegalArgumentException(
                     "The 'seriesKey' cannot be null.");
@@ -291,7 +286,7 @@ public class DefaultXYDataset extends AbstractXYDataset
      * @param seriesKey  the series key ({@code null} not permitted).
      *
      */
-    public void removeSeries(Comparable seriesKey) {
+    public void removeSeries(S seriesKey) {
         int seriesIndex = indexOf(seriesKey);
         if (seriesIndex >= 0) {
             this.seriesKeys.remove(seriesIndex);
@@ -327,7 +322,7 @@ public class DefaultXYDataset extends AbstractXYDataset
             return false;
         }
         for (int i = 0; i < this.seriesList.size(); i++) {
-            double[][] d1 = (double[][]) this.seriesList.get(i);
+            double[][] d1 = this.seriesList.get(i);
             double[][] d2 = (double[][]) that.seriesList.get(i);
             double[] d1x = d1[0];
             double[] d2x = d2[0];
@@ -368,10 +363,10 @@ public class DefaultXYDataset extends AbstractXYDataset
     @Override
     public Object clone() throws CloneNotSupportedException {
         DefaultXYDataset clone = (DefaultXYDataset) super.clone();
-        clone.seriesKeys = new java.util.ArrayList(this.seriesKeys);
+        clone.seriesKeys = new ArrayList(this.seriesKeys);
         clone.seriesList = new ArrayList(this.seriesList.size());
         for (int i = 0; i < this.seriesList.size(); i++) {
-            double[][] data = (double[][]) this.seriesList.get(i);
+            double[][] data = this.seriesList.get(i);
             double[] x = data[0];
             double[] y = data[1];
             double[] xx = new double[x.length];

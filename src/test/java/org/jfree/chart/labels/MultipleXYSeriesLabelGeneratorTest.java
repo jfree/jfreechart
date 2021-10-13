@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,28 +27,23 @@
  * ---------------------------------------
  * MultipleXYSeriesLabelGeneratorTest.java
  * ---------------------------------------
- * (C) Copyright 2007-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 20-Jan-2007 : Version 1 (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG);
- *
  */
 
 package org.jfree.chart.labels;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.jfree.chart.TestUtils;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.internal.CloneUtils;
+import org.jfree.chart.api.PublicCloneable;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link MultipleXYSeriesLabelGenerator} class.
@@ -83,23 +78,21 @@ public class MultipleXYSeriesLabelGeneratorTest {
      */
     @Test
     public void testHashCode() {
-        MultipleXYSeriesLabelGenerator g1
-                = new MultipleXYSeriesLabelGenerator();
-        MultipleXYSeriesLabelGenerator g2
-                = new MultipleXYSeriesLabelGenerator();
+        MultipleXYSeriesLabelGenerator g1 = new MultipleXYSeriesLabelGenerator();
+        MultipleXYSeriesLabelGenerator g2 = new MultipleXYSeriesLabelGenerator();
         assertTrue(g1.equals(g2));
         assertTrue(g1.hashCode() == g2.hashCode());
     }
 
     /**
      * Confirm that cloning works.
+     * 
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        MultipleXYSeriesLabelGenerator g1
-                = new MultipleXYSeriesLabelGenerator();
-        MultipleXYSeriesLabelGenerator g2 = (MultipleXYSeriesLabelGenerator) 
-                g1.clone();
+        MultipleXYSeriesLabelGenerator g1 = new MultipleXYSeriesLabelGenerator();
+        MultipleXYSeriesLabelGenerator g2 = CloneUtils.clone(g1);
         assertTrue(g1 != g2);
         assertTrue(g1.getClass() == g2.getClass());
         assertTrue(g1.equals(g2));
@@ -116,8 +109,7 @@ public class MultipleXYSeriesLabelGeneratorTest {
      */
     @Test
     public void testPublicCloneable() {
-        MultipleXYSeriesLabelGenerator g1
-                = new MultipleXYSeriesLabelGenerator();
+        MultipleXYSeriesLabelGenerator g1 = new MultipleXYSeriesLabelGenerator();
         assertTrue(g1 instanceof PublicCloneable);
     }
 
@@ -126,13 +118,11 @@ public class MultipleXYSeriesLabelGeneratorTest {
      */
     @Test
     public void testSerialization() {
-        MultipleXYSeriesLabelGenerator g1
-                = new MultipleXYSeriesLabelGenerator();
+        MultipleXYSeriesLabelGenerator g1 = new MultipleXYSeriesLabelGenerator();
         g1.addSeriesLabel(0, "Add0");
         g1.addSeriesLabel(0, "Add0b");
         g1.addSeriesLabel(1, "Add1");
-        MultipleXYSeriesLabelGenerator g2 = (MultipleXYSeriesLabelGenerator) 
-                TestUtils.serialised(g1);
+        MultipleXYSeriesLabelGenerator g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

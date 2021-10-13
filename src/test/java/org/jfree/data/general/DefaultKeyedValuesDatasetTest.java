@@ -37,9 +37,10 @@
 package org.jfree.data.general;
 
 import org.jfree.chart.TestUtils;
-import org.junit.Test;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
+import org.jfree.chart.internal.CloneUtils;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Tests for the {@link DefaultKeyedValuesDataset} class.
@@ -52,11 +53,11 @@ public class DefaultKeyedValuesDatasetTest {
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        DefaultKeyedValuesDataset d1 = new DefaultKeyedValuesDataset();
+        DefaultKeyedValuesDataset<String> d1 = new DefaultKeyedValuesDataset<>();
         d1.setValue("V1", 1);
         d1.setValue("V2", null);
         d1.setValue("V3", 3);
-        DefaultKeyedValuesDataset d2 = (DefaultKeyedValuesDataset) d1.clone();
+        DefaultKeyedValuesDataset<String> d2 = CloneUtils.clone(d1);
         assertTrue(d1 != d2);
         assertTrue(d1.getClass() == d2.getClass());
         assertTrue(d1.equals(d2));
@@ -66,14 +67,13 @@ public class DefaultKeyedValuesDatasetTest {
      * Serialize an instance, restore it, and check for equality.
      */
     public void testSerialization() {
-        DefaultKeyedValuesDataset d1 = new DefaultKeyedValuesDataset();
+        DefaultKeyedValuesDataset<String> d1 = new DefaultKeyedValuesDataset<>();
         d1.setValue("C1", 234.2);
         d1.setValue("C2", null);
         d1.setValue("C3", 345.9);
         d1.setValue("C4", 452.7);
 
-        KeyedValuesDataset d2 = (KeyedValuesDataset) 
-                TestUtils.serialised(d1);
+        KeyedValuesDataset<String> d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 

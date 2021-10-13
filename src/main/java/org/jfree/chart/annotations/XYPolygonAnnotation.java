@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------
  * XYPolygonAnnotation.java
  * ------------------------
- * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Peter Kolb (patch 2809117);
@@ -48,19 +48,19 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.Objects;
 
-import org.jfree.chart.HashUtils;
+import org.jfree.chart.internal.HashUtils;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.PublicCloneable;
-import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.api.RectangleEdge;
+import org.jfree.chart.internal.PaintUtils;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.api.PublicCloneable;
+import org.jfree.chart.internal.SerialUtils;
 
 /**
  * A polygon annotation that can be placed on an {@link XYPlot}.  The
@@ -147,8 +147,6 @@ public class XYPolygonAnnotation extends AbstractXYAnnotation
      * state.
      *
      * @return The coordinates of the polygon's vertices.
-     *
-     * @since 1.0.2
      */
     public double[] getPolygonCoordinates() {
         return (double[]) this.polygon.clone();
@@ -158,8 +156,6 @@ public class XYPolygonAnnotation extends AbstractXYAnnotation
      * Returns the fill paint.
      *
      * @return The fill paint (possibly {@code null}).
-     *
-     * @since 1.0.2
      */
     public Paint getFillPaint() {
         return this.fillPaint;
@@ -169,8 +165,6 @@ public class XYPolygonAnnotation extends AbstractXYAnnotation
      * Returns the outline stroke.
      *
      * @return The outline stroke (possibly {@code null}).
-     *
-     * @since 1.0.2
      */
     public Stroke getOutlineStroke() {
         return this.stroke;
@@ -180,8 +174,6 @@ public class XYPolygonAnnotation extends AbstractXYAnnotation
      * Returns the outline paint.
      *
      * @return The outline paint (possibly {@code null}).
-     *
-     * @since 1.0.2
      */
     public Paint getOutlinePaint() {
         return this.outlinePaint;
@@ -280,7 +272,7 @@ public class XYPolygonAnnotation extends AbstractXYAnnotation
         if (!Arrays.equals(this.polygon, that.polygon)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.stroke, that.stroke)) {
+        if (!Objects.equals(this.stroke, that.stroke)) {
             return false;
         }
         if (!PaintUtils.equal(this.outlinePaint, that.outlinePaint)) {

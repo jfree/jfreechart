@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,18 +27,10 @@
  * --------------
  * DateRange.java
  * --------------
- * (C) Copyright 2002-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2002-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Bill Kelemen;
- *
- * Changes
- * -------
- * 22-Apr-2002 : Version 1 based on code by Bill Kelemen (DG);
- * 07-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 23-Sep-2003 : Minor Javadoc update (DG);
- * 28-May-2008 : Fixed problem with immutability (DG);
- * 01-Sep-2008 : Added getLowerMillis() and getUpperMillis() (DG);
  *
  */
 
@@ -60,10 +52,10 @@ public class DateRange extends Range implements Serializable {
     private static final long serialVersionUID = -4705682568375418157L;
 
     /** The lower bound for the range. */
-    private long lowerDate;
+    private final long lowerDate;
 
     /** The upper bound for the range. */
-    private long upperDate;
+    private final long upperDate;
 
     /**
      * Default constructor.

@@ -44,21 +44,19 @@ import org.jfree.chart.ChartRenderingInfo;
 import org.jfree.chart.entity.ChartEntity;
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.entity.StandardEntityCollection;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.jfree.chart.util.StringUtils;
+import org.junit.jupiter.api.Test;
 
 import java.awt.Rectangle;
 import java.awt.Shape;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for the {@link ImageMapUtils} class.
  */
 public class ImageMapUtilsTest {
-
-    @Rule public ExpectedException thrown = ExpectedException.none();
 
     /**
      * Some checks for the htmlEscape() method.
@@ -101,21 +99,23 @@ public class ImageMapUtilsTest {
         final String retval = ImageMapUtils.getImageMap("name", new ChartRenderingInfo(entities),
                 new StandardToolTipTagFragmentGenerator(), new StandardURLTagFragmentGenerator());
 
-        assertEquals("<map id=\"name\" name=\"name\">\n" +
-                "<area shape=\"rect\" coords=\"5,6,12,14\" title=\"toolTip2\" alt=\"\" href=\"URL2\"/>\n" +
-                "<area shape=\"rect\" coords=\"1,2,4,6\" title=\"toolTip1\" alt=\"\" href=\"URL1\"/>\n" +
+        assertEquals("<map id=\"name\" name=\"name\">" + StringUtils.getLineSeparator() +
+                "<area shape=\"rect\" coords=\"5,6,12,14\" title=\"toolTip2\" alt=\"\" href=\"URL2\"/>" + StringUtils.getLineSeparator() +
+                "<area shape=\"rect\" coords=\"1,2,4,6\" title=\"toolTip1\" alt=\"\" href=\"URL1\"/>" + StringUtils.getLineSeparator() +
                 "</map>", retval);
     }
 
     @Test
     public void testGetImageMapIllegalArgumentException() {
-        thrown.expect(IllegalArgumentException.class);
-        ImageMapUtils.getImageMap(null, null, null, null);
+        assertThrows(IllegalArgumentException.class, () -> {
+            ImageMapUtils.getImageMap(null, null, null, null);        
+        });
     }
 
     @Test
     public void testGetImageMapIllegalArgumentException_2() {
-        thrown.expect(IllegalArgumentException.class);
-        ImageMapUtils.getImageMap(null, null);
+        assertThrows(IllegalArgumentException.class, () -> {
+            ImageMapUtils.getImageMap(null, null);
+        });
     }
 }

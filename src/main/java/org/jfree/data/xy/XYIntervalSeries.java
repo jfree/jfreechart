@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * ---------------------
  * XYIntervalSeries.java
  * ---------------------
- * (C) Copyright 2006-2016, by Object Refinery Limited.
+ * (C) Copyright 2006-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 20-Oct-2006 : Version 1 (DG);
- * 13-Feb-2007 : Added several new accessor methods (DG);
- * 09-Jan-2014 : Added add(XYIntervalDataItem, boolean) method (DG);
  *
  */
 
@@ -53,7 +47,8 @@ import org.jfree.data.general.SeriesChangeEvent;
  *
  * @see XYIntervalSeriesCollection
  */
-public class XYIntervalSeries extends ComparableObjectSeries {
+public class XYIntervalSeries<S extends Comparable<S>> 
+        extends ComparableObjectSeries<S> {
 
     /**
      * Creates a new empty series.  By default, items added to the series will
@@ -62,7 +57,7 @@ public class XYIntervalSeries extends ComparableObjectSeries {
      *
      * @param key  the series key ({@code null} not permitted).
      */
-    public XYIntervalSeries(Comparable key) {
+    public XYIntervalSeries(S key) {
         this(key, true, true);
     }
 
@@ -76,7 +71,7 @@ public class XYIntervalSeries extends ComparableObjectSeries {
      * @param allowDuplicateXValues  a flag that controls whether duplicate
      *                               x-values are allowed.
      */
-    public XYIntervalSeries(Comparable key, boolean autoSort,
+    public XYIntervalSeries(S key, boolean autoSort, 
             boolean allowDuplicateXValues) {
         super(key, autoSort, allowDuplicateXValues);
     }

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * ----------------------
  * AxisLabelLocation.java
  * ----------------------
- * (C) Copyright 2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2013-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 01-Aug-2013 : Version 1 (DG);
- * 26-Nov-2018 : Made AxisLabelLocation an enum (TH);
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
@@ -43,8 +38,6 @@ package org.jfree.chart.axis;
 
 /**
  * Used to indicate the location of an axis label.
- * 
- * @since 1.0.16
  */
 public enum AxisLabelLocation {
 

@@ -32,16 +32,6 @@
  * Original Author:  Eduard Martinescu;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *
- * Changes
- * -------
- * 19-Mar-2002 : Version 1 contributed by Eduard Martinescu.  The interface
- *               name and method names have been renamed to be consistent with
- *               existing interfaces (DG);
- * 06-Jun-2002 : Updated Javadoc comments (DG);
- * 24-Oct-2002 : Categories and series are now indexed by int or Comparable,
- *               following changes made to the CategoryDataset interface (DG);
- * 12-May-2008 : Updated API docs (DG);
- *
  */
 
 package org.jfree.data.category;
@@ -50,8 +40,8 @@ package org.jfree.data.category;
  * A category dataset that defines a value range for each series/category
  * combination.
  */
-public interface IntervalCategoryDataset<R extends Comparable<R>, C extends Comparable<C>> 
-        extends CategoryDataset<R, C> {
+public interface IntervalCategoryDataset<R extends Comparable<R>, 
+        C extends Comparable<C>> extends CategoryDataset<R, C> {
 
     /**
      * Returns the start value for the interval for a given series and category.
@@ -63,7 +53,7 @@ public interface IntervalCategoryDataset<R extends Comparable<R>, C extends Comp
      *
      * @see #getEndValue(int, int)
      */
-    public Number getStartValue(int series, int category);
+    Number getStartValue(int series, int category);
 
     /**
      * Returns the start value for the interval for a given series and category.
@@ -75,7 +65,7 @@ public interface IntervalCategoryDataset<R extends Comparable<R>, C extends Comp
      *
      * @see #getEndValue(Comparable, Comparable)
      */
-    public Number getStartValue(R series, C category);
+    Number getStartValue(R series, C category);
 
     /**
      * Returns the end value for the interval for a given series and category.
@@ -87,7 +77,7 @@ public interface IntervalCategoryDataset<R extends Comparable<R>, C extends Comp
      *
      * @see #getStartValue(int, int)
      */
-    public Number getEndValue(int series, int category);
+    Number getEndValue(int series, int category);
 
     /**
      * Returns the end value for the interval for a given series and category.
@@ -99,6 +89,6 @@ public interface IntervalCategoryDataset<R extends Comparable<R>, C extends Comp
      *
      * @see #getStartValue(Comparable, Comparable)
      */
-    public Number getEndValue(R series, C category);
+    Number getEndValue(R series, C category);
 
 }

@@ -57,6 +57,6 @@ public interface XYSeriesLabelGenerator {
      *
      * @return A series label.
      */
-    public String generateLabel(XYDataset dataset, int series);
+    String generateLabel(XYDataset dataset, int series);
 
 }

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,36 +27,62 @@
  * -------------------------------
  * CategoryLineAnnotationTest.java
  * -------------------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 29-Jul-2005 : Version 1 (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG);
  *
  */
 
 package org.jfree.chart.annotations;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Stroke;
 
 import org.jfree.chart.TestUtils;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.api.PublicCloneable;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link CategoryLineAnnotation} class.
  */
 public class CategoryLineAnnotationTest {
+
+    @Test
+    public void testConstructorExceptions() {
+        Stroke stroke = new BasicStroke(2.0f);
+        assertThrows(IllegalArgumentException.class, () -> {
+            CategoryLineAnnotation a1 = new CategoryLineAnnotation(null, 20.0, "Cat2", 200.0,
+                Color.BLUE, stroke);
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            CategoryLineAnnotation a1 = new CategoryLineAnnotation("Cat1", Double.NaN, "Cat2", 200.0,
+                Color.BLUE, stroke);
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            CategoryLineAnnotation a1 = new CategoryLineAnnotation("Cat1", 20.0, null, 200.0,
+                Color.BLUE, stroke);
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            CategoryLineAnnotation a1 = new CategoryLineAnnotation("Cat1", 20.0, "Cat2", Double.NaN,
+                Color.BLUE, stroke);
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            CategoryLineAnnotation a1 = new CategoryLineAnnotation("Cat1", 20.0, "Cat2", 200.0,
+                null, stroke);
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            CategoryLineAnnotation a1 = new CategoryLineAnnotation("Cat1", 20.0, "Cat2", 200.0,
+                Color.BLUE, null);
+        });
+    }
 
     /**
      * Confirm that the equals method can distinguish all the required fields.
@@ -155,7 +181,7 @@ public class CategoryLineAnnotationTest {
     public void testSerialization() {
         CategoryLineAnnotation a1 = new CategoryLineAnnotation("Category 1", 
                 1.0, "Category 2", 2.0, Color.RED, new BasicStroke(1.0f));
-        CategoryLineAnnotation a2 = (CategoryLineAnnotation) TestUtils.serialised(a1);
+        CategoryLineAnnotation a2 = TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 

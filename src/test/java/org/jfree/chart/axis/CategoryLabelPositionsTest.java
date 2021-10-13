@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,28 +27,23 @@
  * -------------------------------
  * CategoryLabelPositionsTest.java
  * -------------------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 17-Feb-2004 : Version 1 (DG);
- * 07-Jan-2005 : Added test for hashCode() (DG);
  *
  */
 
 package org.jfree.chart.axis;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.text.TextBlockAnchor;
-import org.jfree.chart.ui.RectangleAnchor;
+import org.jfree.chart.api.RectangleAnchor;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link CategoryLabelPositions} class.
@@ -174,7 +169,7 @@ public class CategoryLabelPositionsTest {
     @Test
     public void testSerialization() {
         CategoryLabelPositions p1 = CategoryLabelPositions.STANDARD;
-        CategoryLabelPositions p2 = (CategoryLabelPositions) TestUtils.serialised(p1);
+        CategoryLabelPositions p2 = TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,31 +27,11 @@
  * ----------------------------------------
  * DefaultBoxAndWhiskerCategoryDataset.java
  * ----------------------------------------
- * (C) Copyright 2003-2008, by David Browning and Contributors.
+ * (C) Copyright 2003-2020, by David Browning and Contributors.
  *
  * Original Author:  David Browning (for Australian Institute of Marine
  *                   Science);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 05-Aug-2003 : Version 1, contributed by David Browning (DG);
- * 27-Aug-2003 : Moved from org.jfree.data --> org.jfree.data.statistics (DG);
- * 12-Nov-2003 : Changed 'data' from private to protected and added a new 'add'
- *               method as proposed by Tim Bardzil.  Also removed old code (DG);
- * 01-Mar-2004 : Added equals() method (DG);
- * 18-Nov-2004 : Updates for changes in RangeInfo interface (DG);
- * 11-Jan-2005 : Removed deprecated code in preparation for the 1.0.0
- *               release (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 02-Feb-2007 : Removed author tags from all over JFreeChart sources (DG);
- * 17-Apr-2007 : Fixed bug 1701822 (DG);
- * 13-Jun-2007 : Fixed error in previous patch (DG);
- * 28-Sep-2007 : Fixed cloning bug (DG);
- * 02-Oct-2007 : Fixed bug in updating cached bounds (DG);
- * 03-Oct-2007 : Fixed another bug in updating cached bounds, added removal
- *               methods (DG);
- * 29-Jan-2017 : Added missing hashCode (TH);
  *
  */
 
@@ -60,8 +40,7 @@ package org.jfree.data.statistics;
 import java.util.List;
 import java.util.Objects;
 
-import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.api.PublicCloneable;
 
 import org.jfree.data.KeyedObjects2D;
 import org.jfree.data.Range;
@@ -73,11 +52,12 @@ import org.jfree.data.general.DatasetChangeEvent;
  * A convenience class that provides a default implementation of the
  * {@link BoxAndWhiskerCategoryDataset} interface.
  */
-public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
-        implements BoxAndWhiskerCategoryDataset, RangeInfo, PublicCloneable {
+public class DefaultBoxAndWhiskerCategoryDataset<R extends Comparable<R>, 
+        C extends Comparable<C>> extends AbstractDataset
+        implements BoxAndWhiskerCategoryDataset<R, C>, RangeInfo, PublicCloneable {
 
     /** Storage for the data. */
-    protected KeyedObjects2D data;
+    protected KeyedObjects2D<R, C> data;
 
     /** The minimum range value. */
     private double minimumRangeValue;
@@ -105,7 +85,7 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
      * Creates a new dataset.
      */
     public DefaultBoxAndWhiskerCategoryDataset() {
-        this.data = new KeyedObjects2D();
+        this.data = new KeyedObjects2D<>();
         this.minimumRangeValue = Double.NaN;
         this.minimumRangeValueRow = -1;
         this.minimumRangeValueColumn = -1;
@@ -125,7 +105,7 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
      *
      * @see #add(BoxAndWhiskerItem, Comparable, Comparable)
      */
-    public void add(List<? extends Number> list, Comparable rowKey, Comparable columnKey) {
+    public void add(List<? extends Number> list, R rowKey, C columnKey) {
         BoxAndWhiskerItem item = BoxAndWhiskerCalculator
                 .calculateBoxAndWhiskerStatistics(list);
         add(item, rowKey, columnKey);
@@ -141,8 +121,7 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
      *
      * @see #add(List, Comparable, Comparable)
      */
-    public void add(BoxAndWhiskerItem item, Comparable rowKey,
-            Comparable columnKey) {
+    public void add(BoxAndWhiskerItem item, R rowKey, C columnKey) {
 
         this.data.addObject(item, rowKey, columnKey);
 
@@ -203,7 +182,7 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
      *
      * @since 1.0.7
      */
-    public void remove(Comparable rowKey, Comparable columnKey) {
+    public void remove(R rowKey, C columnKey) {
         // defer null argument checks
         int r = getRowIndex(rowKey);
         int c = getColumnIndex(columnKey);
@@ -246,7 +225,7 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
      *
      * @since 1.0.7
      */
-    public void removeRow(Comparable rowKey) {
+    public void removeRow(R rowKey) {
         this.data.removeRow(rowKey);
         updateBounds();
         fireDatasetChanged();
@@ -278,7 +257,7 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
      *
      * @since 1.0.7
      */
-    public void removeColumn(Comparable columnKey) {
+    public void removeColumn(C columnKey) {
         this.data.removeColumn(columnKey);
         updateBounds();
         fireDatasetChanged();
@@ -336,7 +315,7 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
      * @see #getValue(int, int)
      */
     @Override
-    public Number getValue(Comparable rowKey, Comparable columnKey) {
+    public Number getValue(R rowKey, C columnKey) {
         return getMedianValue(rowKey, columnKey);
     }
 
@@ -352,7 +331,6 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
      */
     @Override
     public Number getMeanValue(int row, int column) {
-
         Number result = null;
         BoxAndWhiskerItem item = (BoxAndWhiskerItem) this.data.getObject(row,
                 column);
@@ -360,7 +338,6 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
             result = item.getMean();
         }
         return result;
-
     }
 
     /**
@@ -374,7 +351,7 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
      * @see #getItem(int, int)
      */
     @Override
-    public Number getMeanValue(Comparable rowKey, Comparable columnKey) {
+    public Number getMeanValue(R rowKey, C columnKey) {
         Number result = null;
         BoxAndWhiskerItem item = (BoxAndWhiskerItem) this.data.getObject(
                 rowKey, columnKey);
@@ -416,7 +393,7 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
      * @see #getItem(int, int)
      */
     @Override
-    public Number getMedianValue(Comparable rowKey, Comparable columnKey) {
+    public Number getMedianValue(R rowKey, C columnKey) {
         Number result = null;
         BoxAndWhiskerItem item = (BoxAndWhiskerItem) this.data.getObject(
                 rowKey, columnKey);
@@ -458,7 +435,7 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
      * @see #getItem(int, int)
      */
     @Override
-    public Number getQ1Value(Comparable rowKey, Comparable columnKey) {
+    public Number getQ1Value(R rowKey, C columnKey) {
         Number result = null;
         BoxAndWhiskerItem item = (BoxAndWhiskerItem) this.data.getObject(
                 rowKey, columnKey);
@@ -500,7 +477,7 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
      * @see #getItem(int, int)
      */
     @Override
-    public Number getQ3Value(Comparable rowKey, Comparable columnKey) {
+    public Number getQ3Value(R rowKey, C columnKey) {
         Number result = null;
         BoxAndWhiskerItem item = (BoxAndWhiskerItem) this.data.getObject(
                 rowKey, columnKey);
@@ -520,7 +497,7 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
      * @see #getColumnKey(int)
      */
     @Override
-    public int getColumnIndex(Comparable key) {
+    public int getColumnIndex(C key) {
         return this.data.getColumnIndex(key);
     }
 
@@ -534,7 +511,7 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
      * @see #getColumnIndex(Comparable)
      */
     @Override
-    public Comparable getColumnKey(int column) {
+    public C getColumnKey(int column) {
         return this.data.getColumnKey(column);
     }
 
@@ -546,7 +523,7 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
      * @see #getRowKeys()
      */
     @Override
-    public List getColumnKeys() {
+    public List<C> getColumnKeys() {
         return this.data.getColumnKeys();
     }
 
@@ -560,7 +537,7 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
      * @see #getRowKey(int)
      */
     @Override
-    public int getRowIndex(Comparable key) {
+    public int getRowIndex(R key) {
         // defer null argument check
         return this.data.getRowIndex(key);
     }
@@ -575,7 +552,7 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
      * @see #getRowIndex(Comparable)
      */
     @Override
-    public Comparable getRowKey(int row) {
+    public R getRowKey(int row) {
         return this.data.getRowKey(row);
     }
 
@@ -587,7 +564,7 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
      * @see #getColumnKeys()
      */
     @Override
-    public List getRowKeys() {
+    public List<R> getRowKeys() {
         return this.data.getRowKeys();
     }
 
@@ -690,7 +667,7 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
      * @see #getItem(int, int)
      */
     @Override
-    public Number getMinRegularValue(Comparable rowKey, Comparable columnKey) {
+    public Number getMinRegularValue(R rowKey, C columnKey) {
         Number result = null;
         BoxAndWhiskerItem item = (BoxAndWhiskerItem) this.data.getObject(
                 rowKey, columnKey);
@@ -732,7 +709,7 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
      * @see #getItem(int, int)
      */
     @Override
-    public Number getMaxRegularValue(Comparable rowKey, Comparable columnKey) {
+    public Number getMaxRegularValue(R rowKey, C columnKey) {
         Number result = null;
         BoxAndWhiskerItem item = (BoxAndWhiskerItem) this.data.getObject(
                 rowKey, columnKey);
@@ -774,7 +751,7 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
      * @see #getItem(int, int)
      */
     @Override
-    public Number getMinOutlier(Comparable rowKey, Comparable columnKey) {
+    public Number getMinOutlier(R rowKey, C columnKey) {
         Number result = null;
         BoxAndWhiskerItem item = (BoxAndWhiskerItem) this.data.getObject(
                 rowKey, columnKey);
@@ -816,7 +793,7 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
      * @see #getItem(int, int)
      */
     @Override
-    public Number getMaxOutlier(Comparable rowKey, Comparable columnKey) {
+    public Number getMaxOutlier(R rowKey, C columnKey) {
         Number result = null;
         BoxAndWhiskerItem item = (BoxAndWhiskerItem) this.data.getObject(
                 rowKey, columnKey);
@@ -837,7 +814,7 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
      * @see #getItem(int, int)
      */
     @Override
-    public List getOutliers(int row, int column) {
+    public List<? extends Number> getOutliers(int row, int column) {
         List result = null;
         BoxAndWhiskerItem item = (BoxAndWhiskerItem) this.data.getObject(
                 row, column);
@@ -858,7 +835,7 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
      * @see #getItem(int, int)
      */
     @Override
-    public List getOutliers(Comparable rowKey, Comparable columnKey) {
+    public List<? extends Number> getOutliers(R rowKey, C columnKey) {
         List result = null;
         BoxAndWhiskerItem item = (BoxAndWhiskerItem) this.data.getObject(
                 rowKey, columnKey);
@@ -929,14 +906,13 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
         if (obj instanceof DefaultBoxAndWhiskerCategoryDataset) {
             DefaultBoxAndWhiskerCategoryDataset dataset
                     = (DefaultBoxAndWhiskerCategoryDataset) obj;
-            return ObjectUtils.equal(this.data, dataset.data);
+            return Objects.equals(this.data, dataset.data);
         }
         return false;
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         int hash = 5;
         hash = 23 * hash + Objects.hashCode( this.data );
         return hash;
@@ -951,9 +927,9 @@ public class DefaultBoxAndWhiskerCategoryDataset extends AbstractDataset
      */
     @Override
     public Object clone() throws CloneNotSupportedException {
-        DefaultBoxAndWhiskerCategoryDataset clone
+        DefaultBoxAndWhiskerCategoryDataset<R, C> clone
                 = (DefaultBoxAndWhiskerCategoryDataset) super.clone();
-        clone.data = (KeyedObjects2D) this.data.clone();
+        clone.data = (KeyedObjects2D<R, C>) this.data.clone();
         return clone;
     }
 

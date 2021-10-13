@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,23 +27,18 @@
  * --------------------
  * ScatterPlotTest.java
  * --------------------
- * (C) Copyright 2002-2016, by Object Refinery Limited.
+ * (C) Copyright 2002-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 11-Jun-2002 : Version 1 (DG);
- * 17-Oct-2002 : Fixed errors reported by Checkstyle (DG);
  *
  */
 
 package org.jfree.chart;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
@@ -60,8 +55,8 @@ import org.jfree.data.Range;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for a scatter plot.
@@ -74,7 +69,7 @@ public class ScatterPlotTest {
     /**
      * Common test setup.
      */
-    @Before
+    @BeforeEach
     public void setUp() {
         this.chart = createChart();
     }
@@ -86,7 +81,7 @@ public class ScatterPlotTest {
     @Test
     public void testDrawWithNullInfo() {
         try {
-            BufferedImage image = new BufferedImage(200 , 100,
+            BufferedImage image = new BufferedImage(200, 100,
                     BufferedImage.TYPE_INT_RGB);
             Graphics2D g2 = image.createGraphics();
             this.chart.draw(g2, new Rectangle2D.Double(0, 0, 200, 100), null,
@@ -105,24 +100,25 @@ public class ScatterPlotTest {
     public void testReplaceDataset() {
 
         // create a dataset...
-        XYSeries series1 = new XYSeries("Series 1");
+        XYSeries<String> series1 = new XYSeries<>("Series 1");
         series1.add(10.0, 10.0);
         series1.add(20.0, 20.0);
         series1.add(30.0, 30.0);
-        XYDataset dataset = new XYSeriesCollection(series1);
+        XYDataset<String> dataset = new XYSeriesCollection<>(series1);
 
         LocalListener l = new LocalListener();
         this.chart.addChangeListener(l);
-        XYPlot plot = (XYPlot) this.chart.getPlot();
+        
+        @SuppressWarnings("unchecked")
+        XYPlot<String> plot = (XYPlot) this.chart.getPlot();
         plot.setDataset(dataset);
         assertEquals(true, l.flag);
         ValueAxis axis = plot.getRangeAxis();
         Range range = axis.getRange();
-        assertTrue("Expecting the lower bound of the range to be around 10: "
-                   + range.getLowerBound(), range.getLowerBound() <= 10);
-        assertTrue("Expecting the upper bound of the range to be around 30: "
-                   + range.getUpperBound(), range.getUpperBound() >= 30);
-
+        assertTrue(range.getLowerBound() <= 10, 
+                "Expecting the lower bound of the range to be around 10: " + range.getLowerBound());
+        assertTrue(range.getUpperBound() >= 30, 
+                "Expecting the upper bound of the range to be around 30: " + range.getUpperBound());
     }
 
     /**
@@ -131,7 +127,7 @@ public class ScatterPlotTest {
      */
     @Test
     public void testSetSeriesToolTipGenerator() {
-        XYPlot plot = (XYPlot) this.chart.getPlot();
+        XYPlot<?> plot = (XYPlot) this.chart.getPlot();
         XYItemRenderer renderer = plot.getRenderer();
         StandardXYToolTipGenerator tt = new StandardXYToolTipGenerator();
         renderer.setSeriesToolTipGenerator(0, tt);
@@ -145,11 +141,11 @@ public class ScatterPlotTest {
      * @return The chart.
      */
     private static JFreeChart createChart() {
-        XYSeries series1 = new XYSeries("Series 1");
+        XYSeries<String> series1 = new XYSeries<>("Series 1");
         series1.add(1.0, 1.0);
         series1.add(2.0, 2.0);
         series1.add(3.0, 3.0);
-        XYDataset dataset = new XYSeriesCollection(series1);
+        XYDataset<String> dataset = new XYSeriesCollection<>(series1);
         return ChartFactory.createScatterPlot("Scatter Plot", "Domain",
                 "Range", dataset);
     }

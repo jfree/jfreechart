@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------------
  * ItemLabelPositionTest.java
  * --------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -41,10 +41,10 @@
 
 package org.jfree.chart.labels;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.jfree.chart.TestUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link ItemLabelPosition} class.
@@ -67,7 +67,7 @@ public class ItemLabelPositionTest {
     @Test
     public void testSerialization() {
         ItemLabelPosition p1 = new ItemLabelPosition();
-        ItemLabelPosition p2 = (ItemLabelPosition) TestUtils.serialised(p1);
+        ItemLabelPosition p2 = TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 

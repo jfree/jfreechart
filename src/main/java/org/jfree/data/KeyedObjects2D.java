@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,19 +27,10 @@
  * ------------------
  * KeyedObject2D.java
  * ------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited.
+ * (C) Copyright 2003-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 05-Feb-2003 : Version 1 (DG);
- * 01-Mar-2004 : Added equals() and clone() methods and implemented
- *               Serializable (DG);
- * 03-Oct-2007 : Updated getObject() to handle modified behaviour in
- *               KeyedObjects class, added clear() method (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -48,9 +39,8 @@ package org.jfree.data;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
-import org.jfree.chart.util.Args;
+import org.jfree.chart.internal.Args;
 
 /**
  * A data structure that stores zero, one or many objects, where each object is
@@ -402,9 +392,7 @@ public class KeyedObjects2D<R extends Comparable<R>, C extends Comparable<C>>
             throw new UnknownKeyException("Column key (" + columnKey
                     + ") not recognised.");
         }
-        Iterator iterator = this.rows.iterator();
-        while (iterator.hasNext()) {
-            KeyedObjects rowData = (KeyedObjects) iterator.next();
+        for (KeyedObjects rowData : this.rows) {
             int i = rowData.getIndex(columnKey);
             if (i >= 0) {
                 rowData.removeValue(i);
@@ -502,9 +490,7 @@ public class KeyedObjects2D<R extends Comparable<R>, C extends Comparable<C>>
         clone.columnKeys = new java.util.ArrayList(this.columnKeys);
         clone.rowKeys = new java.util.ArrayList(this.rowKeys);
         clone.rows = new java.util.ArrayList(this.rows.size());
-        Iterator iterator = this.rows.iterator();
-        while (iterator.hasNext()) {
-            KeyedObjects row = (KeyedObjects) iterator.next();
+        for (KeyedObjects row : this.rows) {
             clone.rows.add(row.clone());
         }
         return clone;

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,9 +27,9 @@
  * ---------------------------
  * AbstractXYItemRenderer.java
  * ---------------------------
- * (C) Copyright 2002-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2002-2021, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   Richard Atkinson;
  *                   Focus Computer Services Limited;
  *                   Tim Bardzil;
@@ -62,8 +62,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import org.jfree.chart.LegendItem;
-import org.jfree.chart.LegendItemCollection;
+import org.jfree.chart.legend.LegendItem;
+import org.jfree.chart.legend.LegendItemCollection;
 import org.jfree.chart.annotations.Annotation;
 import org.jfree.chart.annotations.XYAnnotation;
 import org.jfree.chart.axis.ValueAxis;
@@ -87,14 +87,14 @@ import org.jfree.chart.plot.ValueMarker;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.AbstractRenderer;
 import org.jfree.chart.text.TextUtils;
-import org.jfree.chart.ui.GradientPaintTransformer;
-import org.jfree.chart.ui.Layer;
-import org.jfree.chart.ui.LengthAdjustmentType;
-import org.jfree.chart.ui.RectangleAnchor;
-import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.util.GradientPaintTransformer;
+import org.jfree.chart.api.Layer;
+import org.jfree.chart.api.LengthAdjustmentType;
+import org.jfree.chart.api.RectangleAnchor;
+import org.jfree.chart.api.RectangleInsets;
 import org.jfree.chart.urls.XYURLGenerator;
-import org.jfree.chart.util.CloneUtils;
-import org.jfree.chart.util.ObjectUtils;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.internal.CloneUtils;
 import org.jfree.data.Range;
 import org.jfree.data.general.DatasetUtils;
 import org.jfree.data.xy.XYDataset;
@@ -166,8 +166,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
         this.urlGenerator = null;
         this.backgroundAnnotations = new ArrayList<>();
         this.foregroundAnnotations = new ArrayList<>();
-        this.legendItemLabelGenerator = new StandardXYSeriesLabelGenerator(
-                "{0}");
+        this.legendItemLabelGenerator = new StandardXYSeriesLabelGenerator("{0}");
     }
 
     /**
@@ -234,8 +233,6 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      * @param seriesKey  the series key that identifies the element 
      *     ({@code null} not permitted).
      * @param itemIndex  the item index. 
-     * 
-     * @since 1.0.20
      */
     protected void beginElementGroup(Graphics2D g2, Comparable seriesKey,
             int itemIndex) {
@@ -437,8 +434,8 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      */
     @Override
     public void addAnnotation(XYAnnotation annotation, Layer layer) {
-        Objects.requireNonNull(annotation, "annotation");
-        Objects.requireNonNull(layer, "layer");
+        Args.nullNotPermitted(annotation, "annotation");
+        Args.nullNotPermitted(layer, "layer");
         switch (layer) {
             case FOREGROUND:
                 this.foregroundAnnotations.add(annotation);
@@ -497,8 +494,6 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      * this renderer.
      *
      * @param event  information about the event (not used here).
-     *
-     * @since 1.0.14
      */
     @Override
     public void annotationChanged(AnnotationChangeEvent event) {
@@ -511,9 +506,8 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      *
      * @return A collection of annotations (possibly empty but never
      *     {@code null}).
-     * 
-     * @since 1.0.13
      */
+    @Override
     public Collection<XYAnnotation> getAnnotations() {
         List<XYAnnotation> result = new ArrayList<>(this.foregroundAnnotations);
         result.addAll(this.backgroundAnnotations);
@@ -542,7 +536,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      */
     @Override
     public void setLegendItemLabelGenerator(XYSeriesLabelGenerator generator) {
-        Objects.requireNonNull(generator, "generator");
+        Args.nullNotPermitted(generator, "generator");
         this.legendItemLabelGenerator = generator;
         fireChangeEvent();
     }
@@ -621,8 +615,6 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      *
      * @return The range ({@code null} if the dataset is {@code null}
      *         or empty).
-     *
-     * @since 1.0.13
      */
     protected Range findDomainBounds(XYDataset dataset,
             boolean includeInterval) {
@@ -668,8 +660,6 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      *
      * @return The range ({@code null} if the dataset is {@code null}
      *         or empty).
-     *
-     * @since 1.0.13
      */
     protected Range findRangeBounds(XYDataset dataset,
             boolean includeInterval) {
@@ -789,8 +779,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
             item.setLine(shape);
             item.setLinePaint(paint);
             item.setShapeVisible(false);
-        }
-        else {
+        } else {
             Paint outlinePaint = lookupSeriesOutlinePaint(series);
             Stroke outlineStroke = lookupSeriesOutlineStroke(series);
             item.setOutlinePaint(outlinePaint);
@@ -878,13 +867,10 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      * @param g2  the graphics device.
      * @param plot  the plot.
      * @param axis  the value axis.
-     * @param dataArea  the area for plotting data (not yet adjusted for any 3D
-     *                  effect).
+     * @param dataArea  the area for plotting data.
      * @param value  the value at which the grid line should be drawn.
      * @param paint  the paint ({@code null} not permitted).
      * @param stroke  the stroke ({@code null} not permitted).
-     *
-     * @since 1.0.5
      */
     @Override
     public void drawDomainLine(Graphics2D g2, XYPlot plot, ValueAxis axis,
@@ -922,8 +908,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      * @param g2  the graphics device.
      * @param plot  the plot.
      * @param axis  the value axis.
-     * @param dataArea  the area for plotting data (not yet adjusted for any 3D
-     *                  effect).
+     * @param dataArea  the area for plotting data.
      * @param value  the value at which the grid line should be drawn.
      * @param paint  the paint.
      * @param stroke  the stroke.
@@ -1375,32 +1360,15 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
     protected Object clone() throws CloneNotSupportedException {
         AbstractXYItemRenderer clone = (AbstractXYItemRenderer) super.clone();
         // 'plot' : just retain reference, not a deep copy
-
-        clone.itemLabelGeneratorMap = CloneUtils.cloneMapValues(
-                this.itemLabelGeneratorMap);
-        clone.defaultItemLabelGenerator = (XYItemLabelGenerator) 
-                CloneUtils.clone(this.defaultItemLabelGenerator);
-
-        clone.toolTipGeneratorMap = CloneUtils.cloneMapValues(
-                this.toolTipGeneratorMap);
-        
-        clone.defaultToolTipGenerator = (XYToolTipGenerator) CloneUtils.clone(
-                this.defaultToolTipGenerator);
-
-        clone.legendItemLabelGenerator = (XYSeriesLabelGenerator)
-                CloneUtils.clone(this.legendItemLabelGenerator);
-        
-        clone.legendItemToolTipGenerator = (XYSeriesLabelGenerator)
-                CloneUtils.clone(this.legendItemToolTipGenerator);
-
-        clone.legendItemURLGenerator = (XYSeriesLabelGenerator)
-                CloneUtils.clone(this.legendItemURLGenerator);
-        
-        clone.foregroundAnnotations = (List) CloneUtils.cloneList(
-                this.foregroundAnnotations);
-        clone.backgroundAnnotations = (List) CloneUtils.cloneList(
-                this.backgroundAnnotations);
-
+        clone.itemLabelGeneratorMap = CloneUtils.cloneMapValues(this.itemLabelGeneratorMap);
+        clone.defaultItemLabelGenerator = CloneUtils.clone(this.defaultItemLabelGenerator);
+        clone.toolTipGeneratorMap = CloneUtils.cloneMapValues(this.toolTipGeneratorMap);
+        clone.defaultToolTipGenerator = CloneUtils.clone(this.defaultToolTipGenerator);
+        clone.legendItemLabelGenerator = CloneUtils.clone(this.legendItemLabelGenerator);
+        clone.legendItemToolTipGenerator = CloneUtils.clone(this.legendItemToolTipGenerator);
+        clone.legendItemURLGenerator = CloneUtils.clone(this.legendItemURLGenerator);
+        clone.foregroundAnnotations = CloneUtils.cloneList(this.foregroundAnnotations);
+        clone.backgroundAnnotations = CloneUtils.cloneList(this.backgroundAnnotations);
         return clone;
     }
 
@@ -1423,18 +1391,16 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
         if (!this.itemLabelGeneratorMap.equals(that.itemLabelGeneratorMap)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.defaultItemLabelGenerator,
-                that.defaultItemLabelGenerator)) {
+        if (!Objects.equals(this.defaultItemLabelGenerator, that.defaultItemLabelGenerator)) {
             return false;
         }
         if (!this.toolTipGeneratorMap.equals(that.toolTipGeneratorMap)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.defaultToolTipGenerator,
-                that.defaultToolTipGenerator)) {
+        if (!Objects.equals(this.defaultToolTipGenerator, that.defaultToolTipGenerator)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.urlGenerator, that.urlGenerator)) {
+        if (!Objects.equals(this.urlGenerator, that.urlGenerator)) {
             return false;
         }
         if (!this.foregroundAnnotations.equals(that.foregroundAnnotations)) {
@@ -1443,19 +1409,30 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
         if (!this.backgroundAnnotations.equals(that.backgroundAnnotations)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.legendItemLabelGenerator,
-                that.legendItemLabelGenerator)) {
+        if (!Objects.equals(this.legendItemLabelGenerator, that.legendItemLabelGenerator)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.legendItemToolTipGenerator,
-                that.legendItemToolTipGenerator)) {
+        if (!Objects.equals(this.legendItemToolTipGenerator, that.legendItemToolTipGenerator)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.legendItemURLGenerator,
-                that.legendItemURLGenerator)) {
+        if (!Objects.equals(this.legendItemURLGenerator, that.legendItemURLGenerator)) {
             return false;
         }
         return super.equals(obj);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + itemLabelGeneratorMap.hashCode();
+        result = 31 * result + (defaultItemLabelGenerator != null ? defaultItemLabelGenerator.hashCode() : 0);
+        result = 31 * result + toolTipGeneratorMap.hashCode();
+        result = 31 * result + (defaultToolTipGenerator != null ? defaultToolTipGenerator.hashCode() : 0);
+        result = 31 * result + (urlGenerator != null ? urlGenerator.hashCode() : 0);
+        result = 31 * result + (legendItemLabelGenerator != null ? legendItemLabelGenerator.hashCode() : 0);
+        result = 31 * result + (legendItemToolTipGenerator != null ? legendItemToolTipGenerator.hashCode() : 0);
+        result = 31 * result + (legendItemURLGenerator != null ? legendItemURLGenerator.hashCode() : 0);
+        return result;
     }
 
     /**
@@ -1485,16 +1462,13 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      * @param datasetIndex  the index of the dataset for the point.
      * @param transX  the x-value translated to Java2D space.
      * @param transY  the y-value translated to Java2D space.
-     * @param orientation  the plot orientation ({@code null} not
-     *                     permitted).
-     *
-     * @since 1.0.20
+     * @param orientation  the plot orientation ({@code null} not permitted).
      */
     protected void updateCrosshairValues(CrosshairState crosshairState,
             double x, double y, int datasetIndex,
             double transX, double transY, PlotOrientation orientation) {
 
-        Objects.requireNonNull(orientation, "orientation");
+        Args.nullNotPermitted(orientation, "orientation");
         if (crosshairState != null) {
             // do we need to update the crosshair values?
             if (this.plot.isDomainCrosshairLockedOnData()) {
@@ -1502,13 +1476,11 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
                     // both axes
                     crosshairState.updateCrosshairPoint(x, y, datasetIndex,
                             transX, transY, orientation);
-                }
-                else {
+                } else {
                     // just the domain axis...
                     crosshairState.updateCrosshairX(x, transX, datasetIndex);
                 }
-            }
-            else {
+            } else {
                 if (this.plot.isRangeCrosshairLockedOnData()) {
                     // just the range axis...
                     crosshairState.updateCrosshairY(y, transY, datasetIndex);
@@ -1577,7 +1549,7 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
     public void drawAnnotations(Graphics2D g2, Rectangle2D dataArea,
             ValueAxis domainAxis, ValueAxis rangeAxis, Layer layer,
             PlotRenderingInfo info) {
-        Objects.requireNonNull(layer);
+        Args.nullNotPermitted(layer, "layer");
         List<XYAnnotation> toDraw = new ArrayList<>();
         switch (layer) {
             case FOREGROUND:
@@ -1652,8 +1624,6 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      *           permitted);
      * @param x  the x coordinate;
      * @param y  the y coordinate;
-     *
-     * @since 1.0.14
      */
     protected static void moveTo(GeneralPath hotspot, double x, double y) {
         hotspot.moveTo((float) x, (float) y);
@@ -1667,8 +1637,6 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      *           permitted);
      * @param x  the x coordinate;
      * @param y  the y coordinate;
-     *
-     * @since 1.0.14
      */
     protected static void lineTo(GeneralPath hotspot, double x, double y) {
         hotspot.lineTo((float) x, (float) y);

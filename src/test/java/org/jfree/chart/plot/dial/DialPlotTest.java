@@ -36,11 +36,11 @@
 
 package org.jfree.chart.plot.dial;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.awt.Color;
 import java.awt.GradientPaint;
@@ -49,7 +49,8 @@ import org.jfree.chart.TestUtils;
 
 import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.event.PlotChangeListener;
-import org.junit.Test;
+import org.jfree.chart.internal.CloneUtils;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link DialPlot} class.
@@ -148,7 +149,7 @@ public class DialPlotTest implements PlotChangeListener {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         DialPlot p1 = new DialPlot();
-        DialPlot p2 = (DialPlot) p1.clone();
+        DialPlot p2 = CloneUtils.clone(p1);
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
@@ -161,7 +162,7 @@ public class DialPlotTest implements PlotChangeListener {
     @Test
     public void testSerialization() {
         DialPlot p1 = new DialPlot();
-        DialPlot p2 = (DialPlot) TestUtils.serialised(p1);
+        DialPlot p2 = TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 

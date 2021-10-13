@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -40,7 +40,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 import java.text.AttributedString;
 import java.text.BreakIterator;
-import org.jfree.chart.ui.TextAnchor;
+import org.jfree.chart.internal.Args;
 
 /**
  * Some utility methods for working with text in Java2D.
@@ -61,7 +61,7 @@ public class TextUtils {
      * A flag that controls whether or not the rotated string workaround is
      * used.
      */
-    private static boolean useDrawRotatedStringWorkaround = true;
+    private static boolean useDrawRotatedStringWorkaround = false;
 
     /**
      * A flag that controls whether the FontMetrics.getStringBounds() method
@@ -80,17 +80,14 @@ public class TextUtils {
      * Creates a {@link TextBlock} from a {@code String}.  Line breaks
      * are added where the {@code String} contains '\n' characters.
      *
-     * @param text  the text.
+     * @param text  the text ({@code null} not permitted).
      * @param font  the font.
      * @param paint  the paint.
      *
      * @return A text block.
      */
-    public static TextBlock createTextBlock(String text, Font font, 
-            Paint paint) {
-        if (text == null) {
-            throw new IllegalArgumentException("Null 'text' argument.");
-        }
+    public static TextBlock createTextBlock(String text, Font font, Paint paint) {
+        Args.nullNotPermitted(text, "text");
         TextBlock result = new TextBlock();
         String input = text;
         boolean moreInputToProcess = (text.length() > 0);
@@ -102,20 +99,17 @@ public class TextUtils {
                 if (index < input.length() - 1) {
                     result.addLine(line, font, paint);
                     input = input.substring(index + 1);
-                }
-                else {
+                } else {
                     moreInputToProcess = false;
                 }
-            }
-            else if (index == start) {
+            } else if (index == start) {
                 if (index < input.length() - 1) {
                     input = input.substring(index + 1);
                 }
                 else {
                     moreInputToProcess = false;
                 }
-            }
-            else {
+            } else {
                 result.addLine(input, font, paint);
                 moreInputToProcess = false;
             }
@@ -234,13 +228,11 @@ public class TextUtils {
                         }
                     }
                     return end;
-                }
-                else {
+                } else {
                     end = iterator.previous();
                     return end;
                 }
-            }
-            else {
+            } else {
                 if (end > newline) {
                     return newline;
                 }
@@ -275,8 +267,7 @@ public class TextUtils {
                     g2.getFontRenderContext());
             bounds.setRect(bounds.getX(), bounds.getY(), bounds.getWidth(),
                     lm.getHeight());
-        }
-        else {
+        } else {
             double width = fm.stringWidth(text);
             double height = fm.getHeight();
             bounds = new Rectangle2D.Double(0.0, -fm.getAscent(), width,
@@ -297,8 +288,6 @@ public class TextUtils {
      *     {@code (x, y)} ({@code null} not permitted).
      * 
      * @return The text bounds (never {@code null}).
-     * 
-     * @since 1.3
      */
     public static Rectangle2D calcAlignedStringBounds(String text,
             Graphics2D g2, float x, float y, TextAnchor anchor) {
@@ -378,24 +367,19 @@ public class TextUtils {
 
         if (anchor.isHorizontalCenter()) {
             xAdj = (float) -bounds.getWidth() / 2.0f;
-        }
-        else if (anchor.isRight()) {
+        } else if (anchor.isRight()) {
             xAdj = (float) -bounds.getWidth();
         }
 
         if (anchor.isTop()) {
             yAdj = -descent - leading + (float) bounds.getHeight();
-        }
-        else if (anchor.isHalfAscent()) {
+        } else if (anchor.isHalfAscent()) {
             yAdj = halfAscent;
-        }
-        else if (anchor.isVerticalCenter()) {
+        } else if (anchor.isVerticalCenter()) {
             yAdj = -descent - leading + (float) (bounds.getHeight() / 2.0);
-        }
-        else if (anchor.isBaseline()) {
+        } else if (anchor.isBaseline()) {
             yAdj = 0.0f;
-        }
-        else if (anchor.isBottom()) {
+        } else if (anchor.isBottom()) {
             yAdj = -metrics.getDescent() - metrics.getLeading();
         }
         if (textBounds != null) {
@@ -460,8 +444,7 @@ public class TextUtils {
             TextLayout tl = new TextLayout(text, g2.getFont(),
                     g2.getFontRenderContext());
             tl.draw(g2, textX, textY);
-        }
-        else {
+        } else {
             if (!drawStringsWithFontAttributes) {
                 g2.drawString(text, textX, textY);
             } else {
@@ -598,24 +581,19 @@ public class TextUtils {
 
         if (anchor.isHorizontalCenter()) {
             xAdj = (float) -bounds.getWidth() / 2.0f;
-        }
-        else if (anchor.isRight()) {
+        } else if (anchor.isRight()) {
             xAdj = (float) -bounds.getWidth();
         }
 
         if (anchor.isTop()) {
             yAdj = -descent - leading + (float) bounds.getHeight();
-        }
-        else if (anchor.isHalfAscent()) {
+        } else if (anchor.isHalfAscent()) {
             yAdj = halfAscent;
-        }
-        else if (anchor.isVerticalCenter()) {
+        } else if (anchor.isVerticalCenter()) {
             yAdj = -descent - leading + (float) (bounds.getHeight() / 2.0);
-        }
-        else if (anchor.isBaseline()) {
+        } else if (anchor.isBaseline()) {
             yAdj = 0.0f;
-        }
-        else if (anchor.isBottom()) {
+        } else if (anchor.isBottom()) {
             yAdj = -metrics.getDescent() - metrics.getLeading();
         }
         result[0] = xAdj;
@@ -652,27 +630,21 @@ public class TextUtils {
 
         if (anchor.isLeft()) {
             xAdj = 0.0f;
-        }
-        else if (anchor.isHorizontalCenter()) {
+        } else if (anchor.isHorizontalCenter()) {
             xAdj = (float) bounds.getWidth() / 2.0f;
-        }
-        else if (anchor.isRight()) {
+        } else if (anchor.isRight()) {
             xAdj = (float) bounds.getWidth();
         }
 
         if (anchor.isTop()) {
             yAdj = descent + leading - (float) bounds.getHeight();
-        }
-        else if (anchor.isVerticalCenter()) {
+        } else if (anchor.isVerticalCenter()) {
             yAdj = descent + leading - (float) (bounds.getHeight() / 2.0);
-        }
-        else if (anchor.isHalfAscent()) {
+        } else if (anchor.isHalfAscent()) {
             yAdj = -halfAscent;
-        }
-        else if (anchor.isBaseline()) {
+        } else if (anchor.isBaseline()) {
             yAdj = 0.0f;
-        }
-        else if (anchor.isBottom()) {
+        } else if (anchor.isBottom()) {
             yAdj = metrics.getDescent() + metrics.getLeading();
         }
         result[0] = xAdj;
@@ -766,8 +738,6 @@ public class TextUtils {
      * The default value is {@code false}.
      * 
      * @return A boolean. 
-     * 
-     * @since 1.0.21
      */
     public static boolean getDrawStringsWithFontAttributes() {
         return TextUtils.drawStringsWithFontAttributes;
@@ -780,8 +750,6 @@ public class TextUtils {
      * http://www.jfree.org/phpBB2/viewtopic.php?p=45459&amp;highlight=#45459
      * 
      * @param b  the new flag value.
-     * 
-     * @since 1.0.21
      */
     public static void setDrawStringsWithFontAttributes(boolean b) {
         TextUtils.drawStringsWithFontAttributes = b;

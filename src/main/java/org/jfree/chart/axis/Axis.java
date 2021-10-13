@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------
  * Axis.java
  * ---------
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Bill Kelemen;
@@ -60,8 +60,11 @@ import java.text.AttributedString;
 import java.util.Arrays;
 import java.util.EventListener;
 import java.util.List;
+import java.util.Objects;
 
 import javax.swing.event.EventListenerList;
+import org.jfree.chart.ChartElement;
+import org.jfree.chart.ChartElementVisitor;
 
 import org.jfree.chart.entity.AxisEntity;
 import org.jfree.chart.entity.EntityCollection;
@@ -71,72 +74,71 @@ import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.text.AttributedStringUtils;
 import org.jfree.chart.text.TextUtils;
-import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.ui.RectangleInsets;
-import org.jfree.chart.ui.TextAnchor;
+import org.jfree.chart.api.RectangleEdge;
+import org.jfree.chart.api.RectangleInsets;
+import org.jfree.chart.text.TextAnchor;
 import org.jfree.chart.util.AttrStringUtils;
-import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.internal.PaintUtils;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.internal.SerialUtils;
 
 /**
  * The base class for all axes in JFreeChart.  Subclasses are divided into
  * those that display values ({@link ValueAxis}) and those that display
  * categories ({@link CategoryAxis}).
  */
-public abstract class Axis implements Cloneable, Serializable {
+public abstract class Axis implements ChartElement, Cloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = 7719289504573298271L;
 
-    /** The default axis visibility. */
+    /** The default axis visibility ({@code true}). */
     public static final boolean DEFAULT_AXIS_VISIBLE = true;
 
-    /** The default axis label font. */
+    /** The default axis label font ({@code Font("SansSerif", Font.PLAIN, 12)}). */
     public static final Font DEFAULT_AXIS_LABEL_FONT = new Font(
             "SansSerif", Font.PLAIN, 12);
 
-    /** The default axis label paint. */
+    /** The default axis label paint ({@code Color.BLACK}). */
     public static final Paint DEFAULT_AXIS_LABEL_PAINT = Color.BLACK;
 
-    /** The default axis label insets. */
+    /** The default axis label insets ({@code RectangleInsets(3.0, 3.0, 3.0, 3.0)}). */
     public static final RectangleInsets DEFAULT_AXIS_LABEL_INSETS
             = new RectangleInsets(3.0, 3.0, 3.0, 3.0);
 
-    /** The default axis line paint. */
+    /** The default axis line paint ({@code Color.GRAY}). */
     public static final Paint DEFAULT_AXIS_LINE_PAINT = Color.GRAY;
 
-    /** The default axis line stroke. */
+    /** The default axis line stroke ({@code BasicStroke(0.5f)}). */
     public static final Stroke DEFAULT_AXIS_LINE_STROKE = new BasicStroke(0.5f);
 
-    /** The default tick labels visibility. */
+    /** The default tick labels visibility ({@code true}). */
     public static final boolean DEFAULT_TICK_LABELS_VISIBLE = true;
 
-    /** The default tick label font. */
+    /** The default tick label font ({@code Font("SansSerif", Font.PLAIN, 10)}). */
     public static final Font DEFAULT_TICK_LABEL_FONT = new Font("SansSerif",
             Font.PLAIN, 10);
 
-    /** The default tick label paint. */
+    /** The default tick label paint ({@code Color.BLACK}). */
     public static final Paint DEFAULT_TICK_LABEL_PAINT = Color.BLACK;
 
-    /** The default tick label insets. */
+    /** The default tick label insets ({@code RectangleInsets(2.0, 4.0, 2.0, 4.0)}). */
     public static final RectangleInsets DEFAULT_TICK_LABEL_INSETS
             = new RectangleInsets(2.0, 4.0, 2.0, 4.0);
 
-    /** The default tick marks visible. */
+    /** The default tick marks visible ({@code true}). */
     public static final boolean DEFAULT_TICK_MARKS_VISIBLE = true;
 
-    /** The default tick stroke. */
+    /** The default tick stroke ({@code BasicStroke(0.5f)}). */
     public static final Stroke DEFAULT_TICK_MARK_STROKE = new BasicStroke(0.5f);
 
-    /** The default tick paint. */
+    /** The default tick paint ({@code Color.GRAY}). */
     public static final Paint DEFAULT_TICK_MARK_PAINT = Color.GRAY;
 
-    /** The default tick mark inside length. */
+    /** The default tick mark inside length ({@code 0.0f}). */
     public static final float DEFAULT_TICK_MARK_INSIDE_LENGTH = 0.0f;
 
-    /** The default tick mark outside length. */
+    /** The default tick mark outside length ({@code 2.0f}). */
     public static final float DEFAULT_TICK_MARK_OUTSIDE_LENGTH = 2.0f;
 
     /** A flag indicating whether or not the axis is visible. */
@@ -211,22 +213,16 @@ public abstract class Axis implements Cloneable, Serializable {
     /**
      * A flag that indicates whether or not minor tick marks are visible for the
      * axis.
-     *
-     * @since 1.0.12
      */
     private boolean minorTickMarksVisible;
 
     /**
      * The length of the minor tick mark inside the data area (zero permitted).
-     *
-     * @since 1.0.12
      */
     private float minorTickMarkInsideLength;
 
     /**
      * The length of the minor tick mark outside the data area (zero permitted).
-     *
-     * @since 1.0.12
      */
     private float minorTickMarkOutsideLength;
 
@@ -249,7 +245,8 @@ public abstract class Axis implements Cloneable, Serializable {
     private transient EventListenerList listenerList;
 
     /**
-     * Constructs an axis, using default values where necessary.
+     * Constructs an axis with the specific label and default values for other
+     * attributes.  
      *
      * @param label  the axis label ({@code null} permitted).
      */
@@ -348,8 +345,6 @@ public abstract class Axis implements Cloneable, Serializable {
      * is {@code null}.
      * 
      * @return The attributed label (possibly {@code null}).
-     * 
-     * @since 1.0.16
      */
     public AttributedString getAttributedLabel() {
         if (this.attributedLabel != null) {
@@ -366,8 +361,6 @@ public abstract class Axis implements Cloneable, Serializable {
      * {@code AttributedString} using the current font attributes.
      * 
      * @param label  the label ({@code null} permitted).
-     * 
-     * @since 1.0.16
      */
     public void setAttributedLabel(String label) {
         setAttributedLabel(createAttributedLabel(label));    
@@ -378,8 +371,6 @@ public abstract class Axis implements Cloneable, Serializable {
      * {@link AxisChangeEvent} to all registered listeners.
      * 
      * @param label  the label ({@code null} permitted).
-     * 
-     * @since 1.0.16
      */
     public void setAttributedLabel(AttributedString label) {
         if (label != null) {
@@ -397,8 +388,6 @@ public abstract class Axis implements Cloneable, Serializable {
      * @param label  the label ({@code null} permitted).
      * 
      * @return An attributed string or {@code null}.
-     * 
-     * @since 1.0.16
      */
     public AttributedString createAttributedLabel(String label) {
         if (label == null) {
@@ -491,8 +480,6 @@ public abstract class Axis implements Cloneable, Serializable {
      *
      * @param insets  the insets ({@code null} not permitted).
      * @param notify  notify listeners?
-     *
-     * @since 1.0.10
      */
     public void setLabelInsets(RectangleInsets insets, boolean notify) {
         Args.nullNotPermitted(insets, "insets");
@@ -533,8 +520,6 @@ public abstract class Axis implements Cloneable, Serializable {
      * {@link AxisLabelLocation#MIDDLE}.
      * 
      * @return The location of the axis label (never {@code null}). 
-     * 
-     * @since 1.0.16
      */
     public AxisLabelLocation getLabelLocation() {
         return this.labelLocation;
@@ -545,8 +530,6 @@ public abstract class Axis implements Cloneable, Serializable {
      * all registered listeners.
      * 
      * @param location  the new location ({@code null} not permitted).
-     * 
-     * @since 1.0.16
      */
     public void setLabelLocation(AxisLabelLocation location) {
         Args.nullNotPermitted(location, "location");
@@ -673,8 +656,6 @@ public abstract class Axis implements Cloneable, Serializable {
      *         showing.
      *
      * @see #setMinorTickMarksVisible(boolean)
-     *
-     * @since 1.0.12
      */
     public boolean isMinorTickMarksVisible() {
         return this.minorTickMarksVisible;
@@ -688,8 +669,6 @@ public abstract class Axis implements Cloneable, Serializable {
      * @param flag  the flag.
      *
      * @see #isMinorTickMarksVisible()
-     *
-     * @since 1.0.12
      */
     public void setMinorTickMarksVisible(boolean flag) {
         if (flag != this.minorTickMarksVisible) {
@@ -914,8 +893,6 @@ public abstract class Axis implements Cloneable, Serializable {
      *
      * @see #getMinorTickMarkOutsideLength()
      * @see #setMinorTickMarkInsideLength(float)
-     *
-     * @since 1.0.12
      */
     public float getMinorTickMarkInsideLength() {
         return this.minorTickMarkInsideLength;
@@ -928,8 +905,6 @@ public abstract class Axis implements Cloneable, Serializable {
      * @param length  the new length.
      *
      * @see #getMinorTickMarkInsideLength()
-     *
-     * @since 1.0.12
      */
     public void setMinorTickMarkInsideLength(float length) {
         this.minorTickMarkInsideLength = length;
@@ -943,8 +918,6 @@ public abstract class Axis implements Cloneable, Serializable {
      *
      * @see #getMinorTickMarkInsideLength()
      * @see #setMinorTickMarkOutsideLength(float)
-     *
-     * @since 1.0.12
      */
     public float getMinorTickMarkOutsideLength() {
         return this.minorTickMarkOutsideLength;
@@ -957,8 +930,6 @@ public abstract class Axis implements Cloneable, Serializable {
      * @param length  the new length.
      *
      * @see #getMinorTickMarkInsideLength()
-     *
-     * @since 1.0.12
      */
     public void setMinorTickMarkOutsideLength(float length) {
         this.minorTickMarkOutsideLength = length;
@@ -1039,9 +1010,18 @@ public abstract class Axis implements Cloneable, Serializable {
      *         space).
      */
     public abstract AxisSpace reserveSpace(Graphics2D g2, Plot plot,
-                                           Rectangle2D plotArea,
-                                           RectangleEdge edge,
-                                           AxisSpace space);
+            Rectangle2D plotArea, RectangleEdge edge, AxisSpace space);
+
+    /**
+     * Receives a chart element visitor.  Many plot subclasses will override
+     * this method to handle their subcomponents.
+     * 
+     * @param visitor  the visitor ({@code null} not permitted).
+     */
+    @Override
+    public void receive(ChartElementVisitor visitor) {
+        visitor.visit(this);
+    }
 
     /**
      * Draws the axis on a Java 2D graphics device (such as the screen or a
@@ -1076,7 +1056,10 @@ public abstract class Axis implements Cloneable, Serializable {
             Rectangle2D dataArea, RectangleEdge edge);
 
     /**
-     * Created an entity for the axis.
+     * Creates an entity for the axis and adds it to the rendering info.
+     * If {@code plotState} is {@code null}, this means that rendering info
+     * is not being collected so this method simply returns without doing 
+     * anything.
      *
      * @param cursor  the initial cursor value.
      * @param state  the axis state after completion of the drawing with a
@@ -1084,9 +1067,7 @@ public abstract class Axis implements Cloneable, Serializable {
      * @param dataArea  the data area.
      * @param edge  the edge ({@code null} not permitted).
      * @param plotState  the PlotRenderingInfo from which a reference to the
-     *     entity collection can be obtained.
-     *
-     * @since 1.0.13
+     *     entity collection can be obtained ({@code null} permitted).
      */
     protected void createAndAddEntity(double cursor, AxisState state,
             Rectangle2D dataArea, RectangleEdge edge,
@@ -1178,8 +1159,6 @@ public abstract class Axis implements Cloneable, Serializable {
 
     /**
      * Sends an {@link AxisChangeEvent} to all registered listeners.
-     *
-     * @since 1.0.12
      */
     protected void fireChangeEvent() {
         notifyListeners(new AxisChangeEvent(this));
@@ -1227,10 +1206,11 @@ public abstract class Axis implements Cloneable, Serializable {
     }
 
     /**
-     * Returns the x-coordinate for the specified axis location.
+     * Returns the x-coordinate for the point to which the axis label should 
+     * be aligned.
      * 
-     * @param location  the location ({@code null} not permitted).
-     * @param dataArea  the data area ({@code null} not permitted).
+     * @param location  the axis label location ({@code null} not permitted).
+     * @param dataArea  the display area in which the data will be rendered ({@code null} not permitted).
      * 
      * @return The x-coordinate. 
      */
@@ -1249,7 +1229,8 @@ public abstract class Axis implements Cloneable, Serializable {
     }
     
     /**
-     * Returns the y-coordinate for the specified axis location.
+     * Returns the y-coordinate for the point to which the axis label should
+     * be aligned.
      * 
      * @param location  the location ({@code null} not permitted).
      * @param dataArea  the data area ({@code null} not permitted).
@@ -1420,8 +1401,6 @@ public abstract class Axis implements Cloneable, Serializable {
      * @param state  the axis state ({@code null} not permitted).
      *
      * @return Information about the axis.
-     * 
-     * @since 1.0.16
      */
     protected AxisState drawAttributedLabel(AttributedString label, 
             Graphics2D g2, Rectangle2D plotArea, Rectangle2D dataArea, 
@@ -1573,20 +1552,20 @@ public abstract class Axis implements Cloneable, Serializable {
         if (this.visible != that.visible) {
             return false;
         }
-        if (!ObjectUtils.equal(this.label, that.label)) {
+        if (!Objects.equals(this.label, that.label)) {
             return false;
         }
         if (!AttributedStringUtils.equal(this.attributedLabel, 
                 that.attributedLabel)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.labelFont, that.labelFont)) {
+        if (!Objects.equals(this.labelFont, that.labelFont)) {
             return false;
         }
         if (!PaintUtils.equal(this.labelPaint, that.labelPaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.labelInsets, that.labelInsets)) {
+        if (!Objects.equals(this.labelInsets, that.labelInsets)) {
             return false;
         }
         if (this.labelAngle != that.labelAngle) {
@@ -1598,7 +1577,7 @@ public abstract class Axis implements Cloneable, Serializable {
         if (this.axisLineVisible != that.axisLineVisible) {
             return false;
         }
-        if (!ObjectUtils.equal(this.axisLineStroke, that.axisLineStroke)) {
+        if (!Objects.equals(this.axisLineStroke, that.axisLineStroke)) {
             return false;
         }
         if (!PaintUtils.equal(this.axisLinePaint, that.axisLinePaint)) {
@@ -1607,15 +1586,13 @@ public abstract class Axis implements Cloneable, Serializable {
         if (this.tickLabelsVisible != that.tickLabelsVisible) {
             return false;
         }
-        if (!ObjectUtils.equal(this.tickLabelFont, that.tickLabelFont)) {
+        if (!Objects.equals(this.tickLabelFont, that.tickLabelFont)) {
             return false;
         }
         if (!PaintUtils.equal(this.tickLabelPaint, that.tickLabelPaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(
-            this.tickLabelInsets, that.tickLabelInsets
-        )) {
+        if (!Objects.equals(this.tickLabelInsets, that.tickLabelInsets)) {
             return false;
         }
         if (this.tickMarksVisible != that.tickMarksVisible) {
@@ -1630,7 +1607,7 @@ public abstract class Axis implements Cloneable, Serializable {
         if (!PaintUtils.equal(this.tickMarkPaint, that.tickMarkPaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.tickMarkStroke, that.tickMarkStroke)) {
+        if (!Objects.equals(this.tickMarkStroke, that.tickMarkStroke)) {
             return false;
         }
         if (this.minorTickMarksVisible != that.minorTickMarksVisible) {

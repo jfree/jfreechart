@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * ----------------
  * XYRangeInfo.java
  * ----------------
- * (C) Copyright 2009, by Object Refinery Limited.
+ * (C) Copyright 2009-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 27-Mar-2009 : Version 1 (DG);
  *
  */
 
@@ -46,8 +42,6 @@ import org.jfree.data.Range;
 /**
  * An interface that can (optionally) be implemented by a dataset to assist in
  * determining the minimum and maximum y-values.
- *
- * @since 1.0.13
  */
 public interface XYRangeInfo {
 
@@ -62,7 +56,6 @@ public interface XYRangeInfo {
      * @return The range (or {@code null} if the dataset contains no
      *     values).
      */
-    public Range getRangeBounds(List visibleSeriesKeys, Range xRange,
-            boolean includeInterval);
+    Range getRangeBounds(List visibleSeriesKeys, Range xRange, boolean includeInterval);
 
 }

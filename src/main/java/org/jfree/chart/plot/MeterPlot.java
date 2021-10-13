@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------
  * MeterPlot.java
  * --------------
- * (C) Copyright 2000-2017, by Hari and Contributors.
+ * (C) Copyright 2000-2021, by Hari and Contributors.
  *
  * Original Author:  Hari (ourhari@hotmail.com);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -35,53 +35,6 @@
  *                   Arnaud Lelievre;
  *                   Nicolas Brodu;
  *                   David Bastend;
- *
- * Changes
- * -------
- * 01-Apr-2002 : Version 1, contributed by Hari (DG);
- * 23-Apr-2002 : Moved dataset from JFreeChart to Plot (DG);
- * 22-Aug-2002 : Added changes suggest by Bob Orchard, changed Color to Paint
- *               for consistency, plus added Javadoc comments (DG);
- * 01-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 23-Jan-2003 : Removed one constructor (DG);
- * 26-Mar-2003 : Implemented Serializable (DG);
- * 20-Aug-2003 : Changed dataset from MeterDataset --> ValueDataset, added
- *               equals() method,
- * 08-Sep-2003 : Added internationalization via use of properties
- *               resourceBundle (RFE 690236) (AL);
- *               implemented Cloneable, and various other changes (DG);
- * 08-Sep-2003 : Added serialization methods (NB);
- * 11-Sep-2003 : Added cloning support (NB);
- * 16-Sep-2003 : Changed ChartRenderingInfo --> PlotRenderingInfo (DG);
- * 25-Sep-2003 : Fix useless cloning. Correct dataset listener registration in
- *               constructor. (NB)
- * 29-Oct-2003 : Added workaround for font alignment in PDF output (DG);
- * 17-Jan-2004 : Changed to allow dialBackgroundPaint to be set to null - see
- *               bug 823628 (DG);
- * 07-Apr-2004 : Changed string bounds calculation (DG);
- * 12-May-2004 : Added tickLabelFormat attribute - see RFE 949566.  Also
- *               updated the equals() method (DG);
- * 02-Nov-2004 : Added sanity checks for range, and only draw the needle if the
- *               value is contained within the overall range - see bug report
- *               1056047 (DG);
- * 11-Jan-2005 : Removed deprecated code in preparation for the 1.0.0
- *               release (DG);
- * 02-Feb-2005 : Added optional background paint for each region (DG);
- * 22-Mar-2005 : Removed 'normal', 'warning' and 'critical' regions and put in
- *               facility to define an arbitrary number of MeterIntervals,
- *               based on a contribution by David Bastend (DG);
- * 20-Apr-2005 : Small update for change to LegendItem constructors (DG);
- * 05-May-2005 : Updated draw() method parameters (DG);
- * 08-Jun-2005 : Fixed equals() method to handle GradientPaint (DG);
- * 10-Nov-2005 : Added tickPaint, tickSize and valuePaint attributes, and
- *               put value label drawing code into a separate method (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 05-Mar-2007 : Restore clip region correctly (see bug 1667750) (DG);
- * 18-May-2007 : Set dataset for LegendItem (DG);
- * 29-Nov-2007 : Fixed serialization bug with dialOutlinePaint (DG);
- * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
- *               Jess Thrysoee (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -108,22 +61,21 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
-import org.jfree.chart.LegendItem;
-import org.jfree.chart.LegendItemCollection;
+import org.jfree.chart.legend.LegendItem;
+import org.jfree.chart.legend.LegendItemCollection;
 import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.text.TextUtils;
-import org.jfree.chart.ui.RectangleInsets;
-import org.jfree.chart.ui.TextAnchor;
-import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.ResourceBundleWrapper;
-import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.api.RectangleInsets;
+import org.jfree.chart.text.TextAnchor;
+import org.jfree.chart.internal.PaintUtils;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.internal.SerialUtils;
 import org.jfree.data.Range;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.ValueDataset;
@@ -190,6 +142,9 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
     /** The paint for the value displayed in the center of the dial. */
     private transient Paint valuePaint;
 
+    /** A flag that indicates whether the value is visible. */
+    private boolean valueVisible = true;
+
     /** A flag that controls whether or not the border is drawn. */
     private boolean drawBorder;
 
@@ -216,14 +171,13 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
 
     /** The resourceBundle for the localization. */
     protected static ResourceBundle localizationResources
-            = ResourceBundleWrapper.getBundle(
-                    "org.jfree.chart.plot.LocalizationBundle");
+            = ResourceBundle.getBundle("org.jfree.chart.plot.LocalizationBundle");
 
     /**
      * A (possibly empty) list of the {@link MeterInterval}s to be highlighted
      * on the dial.
      */
-    private List intervals;
+    private List<MeterInterval> intervals;
 
     /**
      * Creates a new plot with a default range of {@code 0} to {@code 100} and 
@@ -254,7 +208,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
         this.valueFont = MeterPlot.DEFAULT_VALUE_FONT;
         this.valuePaint = MeterPlot.DEFAULT_VALUE_PAINT;
         this.dialBackgroundPaint = MeterPlot.DEFAULT_DIAL_BACKGROUND_PAINT;
-        this.intervals = new java.util.ArrayList();
+        this.intervals = new ArrayList<>();
         setDataset(dataset);
     }
 
@@ -525,6 +479,33 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
     }
 
     /**
+     * Returns the flag that controls whether or not the value is visible.
+     * The default value is {@code true}.
+     *
+     * @return A flag.
+     *
+     * @see #setValueVisible
+     * @since 1.5.4
+     */
+    public boolean isValueVisible() {
+        return valueVisible;
+    }
+
+    /**
+     *  Sets the flag that controls whether or not the value is visible
+     *  and sends a change event to all registered listeners.
+     *
+     * @param valueVisible  the new flag value.
+     *
+     * @see #isValueVisible()
+     * @since 1.5.4
+     */
+    public void setValueVisible(boolean valueVisible) {
+        this.valueVisible = valueVisible;
+        fireChangeEvent();
+    }
+
+    /**
      * Returns the tick label format.
      *
      * @return The tick label format (never {@code null}).
@@ -705,7 +686,6 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
         // set the new dataset, and register the chart as a change listener...
         this.dataset = dataset;
         if (dataset != null) {
-            setDatasetGroup(dataset.getGroup());
             dataset.addChangeListener(this);
         }
 
@@ -722,8 +702,8 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      *
      * @see #addInterval(MeterInterval)
      */
-    public List getIntervals() {
-        return Collections.unmodifiableList(this.intervals);
+    public List<MeterInterval> getIntervals() {
+        return Collections.unmodifiableList(intervals);
     }
 
     /**
@@ -737,7 +717,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      */
     public void addInterval(MeterInterval interval) {
         Args.nullNotPermitted(interval, "interval");
-        this.intervals.add(interval);
+        intervals.add(interval);
         fireChangeEvent();
     }
 
@@ -748,7 +728,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      * @see #addInterval(MeterInterval)
      */
     public void clearIntervals() {
-        this.intervals.clear();
+        intervals.clear();
         fireChangeEvent();
     }
 
@@ -760,9 +740,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
     @Override
     public LegendItemCollection getLegendItems() {
         LegendItemCollection result = new LegendItemCollection();
-        Iterator iterator = this.intervals.iterator();
-        while (iterator.hasNext()) {
-            MeterInterval mi = (MeterInterval) iterator.next();
+        for (MeterInterval mi : intervals) {
             Paint color = mi.getBackgroundPaint();
             if (color == null) {
                 color = mi.getOutlinePaint();
@@ -852,9 +830,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
             drawArcForInterval(g2, meterArea, new MeterInterval("", this.range,
                     this.dialOutlinePaint, new BasicStroke(1.0f), null));
 
-            Iterator iterator = this.intervals.iterator();
-            while (iterator.hasNext()) {
-                MeterInterval interval = (MeterInterval) iterator.next();
+            for (MeterInterval interval : this.intervals) {
                 drawArcForInterval(g2, meterArea, interval);
             }
 
@@ -1037,7 +1013,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      */
     public double valueToAngle(double value) {
         value = value - this.range.getLowerBound();
-        double baseAngle = 180 + ((this.meterAngle - 180) / 2);
+        double baseAngle = 180 + ((this.meterAngle - 180) / 2.0);
         return baseAngle - ((value / this.range.getLength()) * this.meterAngle);
     }
 
@@ -1143,20 +1119,22 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      * @param area  the plot area.
      */
     protected void drawValueLabel(Graphics2D g2, Rectangle2D area) {
-        g2.setFont(this.valueFont);
-        g2.setPaint(this.valuePaint);
-        String valueStr = "No value";
-        if (this.dataset != null) {
-            Number n = this.dataset.getValue();
-            if (n != null) {
-                valueStr = this.tickLabelFormat.format(n.doubleValue()) + " "
-                         + this.units;
+        if (valueVisible) {
+            g2.setFont(this.valueFont);
+            g2.setPaint(this.valuePaint);
+            String valueStr = "No value";
+            if (this.dataset != null) {
+                Number n = this.dataset.getValue();
+                if (n != null) {
+                    valueStr = this.tickLabelFormat.format(n.doubleValue()) + " "
+                        + this.units;
+                }
             }
-        }
-        float x = (float) area.getCenterX();
-        float y = (float) area.getCenterY() + DEFAULT_CIRCLE_SIZE;
-        TextUtils.drawAlignedString(valueStr, g2, x, y,
+            float x = (float) area.getCenterX();
+            float y = (float) area.getCenterY() + DEFAULT_CIRCLE_SIZE;
+            TextUtils.drawAlignedString(valueStr, g2, x, y,
                 TextAnchor.TOP_CENTER);
+        }
     }
 
     /**
@@ -1201,13 +1179,13 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
             return false;
         }
         MeterPlot that = (MeterPlot) obj;
-        if (!ObjectUtils.equal(this.units, that.units)) {
+        if (!Objects.equals(this.units, that.units)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.range, that.range)) {
+        if (!Objects.equals(this.range, that.range)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.intervals, that.intervals)) {
+        if (!Objects.equals(this.intervals, that.intervals)) {
             return false;
         }
         if (!PaintUtils.equal(this.dialOutlinePaint,
@@ -1224,7 +1202,10 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
         if (!PaintUtils.equal(this.needlePaint, that.needlePaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.valueFont, that.valueFont)) {
+        if (this.valueVisible != that.valueVisible) {
+            return false;
+        }
+        if (!Objects.equals(this.valueFont, that.valueFont)) {
             return false;
         }
         if (!PaintUtils.equal(this.valuePaint, that.valuePaint)) {
@@ -1239,14 +1220,13 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
         if (this.tickLabelsVisible != that.tickLabelsVisible) {
             return false;
         }
-        if (!ObjectUtils.equal(this.tickLabelFont, that.tickLabelFont)) {
+        if (!Objects.equals(this.tickLabelFont, that.tickLabelFont)) {
             return false;
         }
         if (!PaintUtils.equal(this.tickLabelPaint, that.tickLabelPaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.tickLabelFormat,
-                that.tickLabelFormat)) {
+        if (!Objects.equals(this.tickLabelFormat, that.tickLabelFormat)) {
             return false;
         }
         if (this.drawBorder != that.drawBorder) {
@@ -1312,7 +1292,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
         MeterPlot clone = (MeterPlot) super.clone();
         clone.tickLabelFormat = (NumberFormat) this.tickLabelFormat.clone();
         // the following relies on the fact that the intervals are immutable
-        clone.intervals = new java.util.ArrayList(this.intervals);
+        clone.intervals = new ArrayList<>(this.intervals);
         if (clone.dataset != null) {
             clone.dataset.addChangeListener(clone);
         }

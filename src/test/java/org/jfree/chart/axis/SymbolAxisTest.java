@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,28 +27,24 @@
  * ---------------------
  * SymbolicAxisTest.java
  * ---------------------
- * (C) Copyright 2003-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 26-Mar-2003 : Version 1 (DG);
- * 25-Jul-2007 : Added new field in testEquals() (DG);
  *
  */
 
 package org.jfree.chart.axis;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.awt.Color;
 
 import org.jfree.chart.TestUtils;
-import org.junit.Test;
+import org.jfree.chart.internal.CloneUtils;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link SymbolAxis} class.
@@ -62,7 +58,7 @@ public class SymbolAxisTest {
     public void testSerialization() {
         String[] tickLabels = new String[] {"One", "Two", "Three"};
         SymbolAxis a1 = new SymbolAxis("Test Axis", tickLabels);
-        SymbolAxis a2 = (SymbolAxis) TestUtils.serialised(a1);
+        SymbolAxis a2 = TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 
@@ -72,7 +68,7 @@ public class SymbolAxisTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         SymbolAxis a1 = new SymbolAxis("Axis", new String[] {"A", "B"});
-        SymbolAxis a2 = (SymbolAxis) a1.clone();
+        SymbolAxis a2 = CloneUtils.clone(a1);
         assertTrue(a1 != a2);
         assertTrue(a1.getClass() == a2.getClass());
         assertTrue(a1.equals(a2));

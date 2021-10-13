@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,30 +27,26 @@
  * ------------------------------
  * DefaultHighLowDatasetTest.java
  * ------------------------------
- * (C) Copyright 2006-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 28-Nov-2006 : Version 1 (DG);
- * 22-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
 package org.jfree.data.xy;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Date;
 
 import org.jfree.chart.TestUtils;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.internal.CloneUtils;
+import org.jfree.chart.api.PublicCloneable;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link DefaultHighLowDataset} class.
@@ -153,7 +149,7 @@ public class DefaultHighLowDatasetTest {
                 new Date[] {new Date(123L)}, new double[] {1.2},
                 new double[] {3.4}, new double[] {5.6}, new double[] {7.8},
                 new double[] {99.9});
-        DefaultHighLowDataset d2 = (DefaultHighLowDataset) d1.clone();
+        DefaultHighLowDataset d2 = CloneUtils.clone(d1);
         assertTrue(d1 != d2);
         assertTrue(d1.getClass() == d2.getClass());
         assertTrue(d1.equals(d2));
@@ -179,8 +175,7 @@ public class DefaultHighLowDatasetTest {
                 new Date[] {new Date(123L)}, new double[] {1.2},
                 new double[] {3.4}, new double[] {5.6}, new double[] {7.8},
                 new double[] {99.9});
-        DefaultHighLowDataset d2 = (DefaultHighLowDataset) 
-                TestUtils.serialised(d1);
+        DefaultHighLowDataset d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 

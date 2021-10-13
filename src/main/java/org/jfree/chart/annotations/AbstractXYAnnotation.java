@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * AbstractXYAnnotation.java
  * -------------------------
- * (C) Copyright 2004-2020, by Object Refinery Limited.
+ * (C) Copyright 2004-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Peter Kolb (patch 2809117);
@@ -39,13 +39,13 @@ package org.jfree.chart.annotations;
 import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
+import java.util.Objects;
 
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.entity.XYAnnotationEntity;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.util.ObjectUtils;
 
 /**
  * The interface that must be supported by annotations that are to be added to
@@ -71,8 +71,8 @@ public abstract class AbstractXYAnnotation extends AbstractAnnotation
 
     /**
      * Returns the tool tip text for the annotation.  This will be displayed in
-     * a {@link org.jfree.chart.ChartPanel} when the mouse pointer hovers over
-     * the annotation.
+     * a {@link org.jfree.chart.swing.ChartPanel} when the mouse pointer hovers 
+     * over the annotation.
      *
      * @return The tool tip text (possibly {@code null}).
      *
@@ -130,9 +130,8 @@ public abstract class AbstractXYAnnotation extends AbstractAnnotation
      */
     @Override
     public abstract void draw(Graphics2D g2, XYPlot plot, Rectangle2D dataArea,
-                              ValueAxis domainAxis, ValueAxis rangeAxis,
-                              int rendererIndex,
-                              PlotRenderingInfo info);
+            ValueAxis domainAxis, ValueAxis rangeAxis, int rendererIndex,
+            PlotRenderingInfo info);
 
     /**
      * A utility method for adding an {@link XYAnnotationEntity} to
@@ -144,9 +143,8 @@ public abstract class AbstractXYAnnotation extends AbstractAnnotation
      * @param toolTipText  the tool tip text.
      * @param urlText  the URL text.
      */
-    protected void addEntity(PlotRenderingInfo info,
-                             Shape hotspot, int rendererIndex,
-                             String toolTipText, String urlText) {
+    protected void addEntity(PlotRenderingInfo info, Shape hotspot, 
+            int rendererIndex, String toolTipText, String urlText) {
         if (info == null) {
             return;
         }
@@ -175,10 +173,10 @@ public abstract class AbstractXYAnnotation extends AbstractAnnotation
             return false;
         }
         AbstractXYAnnotation that = (AbstractXYAnnotation) obj;
-        if (!ObjectUtils.equal(this.toolTipText, that.toolTipText)) {
+        if (!Objects.equals(this.toolTipText, that.toolTipText)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.url, that.url)) {
+        if (!Objects.equals(this.url, that.url)) {
             return false;
         }
         return true;

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,35 +27,30 @@
  * -----------------------------
  * ExtendedCategoryAxisTest.java
  * -----------------------------
- * (C) Copyright 2007-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 21-Mar-2007 : Version 1 (DG);
  *
  */
 
 package org.jfree.chart.axis;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
 
 import org.jfree.chart.TestUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link ExtendedCategoryAxis} class.
  */
 public class ExtendedCategoryAxisTest {
-
 
     /**
      * Confirm that the equals method can distinguish all the required fields.
@@ -156,8 +151,7 @@ public class ExtendedCategoryAxisTest {
         ExtendedCategoryAxis a1 = new ExtendedCategoryAxis("Test");
         a1.setSubLabelPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f,
                 4.0f, Color.BLUE));
-        ExtendedCategoryAxis a2 = (ExtendedCategoryAxis) 
-                TestUtils.serialised(a1);
+        ExtendedCategoryAxis a2 = TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 

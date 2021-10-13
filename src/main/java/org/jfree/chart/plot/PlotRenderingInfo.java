@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------
  * PlotRenderingInfo.java
  * ----------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited.
+ * (C) Copyright 2003-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -44,12 +44,12 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.jfree.chart.ChartRenderingInfo;
-import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.CloneUtils;
-import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.internal.CloneUtils;
+import org.jfree.chart.internal.SerialUtils;
 
 /**
  * Stores information about the dimensions of a plot and its subplots.
@@ -60,7 +60,7 @@ public class PlotRenderingInfo implements Cloneable, Serializable {
     private static final long serialVersionUID = 8446720134379617220L;
 
     /** The owner of this info. */
-    private ChartRenderingInfo owner;
+    private final ChartRenderingInfo owner;
 
     /** The plot area. */
     private transient Rectangle2D plotArea;
@@ -175,7 +175,7 @@ public class PlotRenderingInfo implements Cloneable, Serializable {
     /**
      * Returns the index of the subplot that contains the specified
      * (x, y) point (the "source" point).  The source point will usually
-     * come from a mouse click on a {@link org.jfree.chart.ChartPanel},
+     * come from a mouse click on a {@link org.jfree.chart.swing.ChartPanel},
      * and this method is then used to determine the subplot that
      * contains the source point.
      *
@@ -213,16 +213,26 @@ public class PlotRenderingInfo implements Cloneable, Serializable {
             return false;
         }
         PlotRenderingInfo that = (PlotRenderingInfo) obj;
-        if (!ObjectUtils.equal(this.dataArea, that.dataArea)) {
+        if (!Objects.equals(this.dataArea, that.dataArea)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.plotArea, that.plotArea)) {
+        if (!Objects.equals(this.plotArea, that.plotArea)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.subplotInfo, that.subplotInfo)) {
+        if (!Objects.equals(this.subplotInfo, that.subplotInfo)) {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int hash = 5;
+        hash = 53 * hash + Objects.hashCode(this.plotArea);
+        hash = 53 * hash + Objects.hashCode(this.dataArea);
+        hash = 53 * hash + Objects.hashCode(this.subplotInfo);
+        return hash;
     }
 
     /**

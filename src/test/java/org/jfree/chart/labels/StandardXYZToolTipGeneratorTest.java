@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,23 +27,18 @@
  * ------------------------------------
  * StandardXYZToolTipGeneratorTest.java
  * ------------------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 23-Mar-2003 : Version 1 (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG);
  *
  */
 
 package org.jfree.chart.labels;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;
@@ -51,9 +46,10 @@ import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 
 import org.jfree.chart.TestUtils;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.internal.CloneUtils;
+import org.jfree.chart.api.PublicCloneable;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link StandardXYZToolTipGenerator} class.
@@ -157,8 +153,7 @@ public class StandardXYZToolTipGeneratorTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         StandardXYZToolTipGenerator g1 = new StandardXYZToolTipGenerator();
-        StandardXYZToolTipGenerator g2 = (StandardXYZToolTipGenerator) 
-                g1.clone();
+        StandardXYZToolTipGenerator g2 = CloneUtils.clone(g1); 
         assertTrue(g1 != g2);
         assertTrue(g1.getClass() == g2.getClass());
         assertTrue(g1.equals(g2));
@@ -179,8 +174,7 @@ public class StandardXYZToolTipGeneratorTest {
     @Test
     public void testSerialization() {
         StandardXYZToolTipGenerator g1 = new StandardXYZToolTipGenerator();
-        StandardXYZToolTipGenerator g2 = (StandardXYZToolTipGenerator) 
-                TestUtils.serialised(g1);
+        StandardXYZToolTipGenerator g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

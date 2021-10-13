@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,20 +27,10 @@
  * ------------------------
  * PeriodAxisLabelInfo.java
  * ------------------------
- * (C) Copyright 2004-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 01-Jun-2004 : Version 1 (DG);
- * 23-Feb-2005 : Replaced Spacer with RectangleInsets (DG);
- * 01-Mar-2005 : Modified constructors to accept DateFormat (DG);
- * 20-May-2005 : Added default constants and null argument checks in the
- *               constructor (DG);
- * 02-Mar-2009 : Updated createInstance to use locale (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -60,9 +50,9 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
-import org.jfree.chart.ui.RectangleInsets;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.api.RectangleInsets;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.internal.SerialUtils;
 
 import org.jfree.data.time.RegularTimePeriod;
 
@@ -247,8 +237,6 @@ public class PeriodAxisLabelInfo implements Cloneable, Serializable {
      * @param locale  the locale.
      *
      * @return The time period.
-     *
-     * @since 1.0.13.
      */
     public RegularTimePeriod createInstance(Date millisecond, TimeZone zone,
             Locale locale) {

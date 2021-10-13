@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,32 +27,27 @@
  * --------------------------
  * BorderArrangementTest.java
  * --------------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 22-Oct-2004 : Version 1 (DG);
  *
  */
 
 package org.jfree.chart.block;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 import org.jfree.chart.TestUtils;
-import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.ui.Size2D;
+import org.jfree.chart.api.RectangleEdge;
 
 import org.jfree.data.Range;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link BorderArrangement} class.
@@ -112,7 +107,7 @@ public class BorderArrangementTest {
     @Test
     public void testSerialization() {
         BorderArrangement b1 = new BorderArrangement();
-        BorderArrangement b2 = (BorderArrangement) TestUtils.serialised(b1);
+        BorderArrangement b2 = TestUtils.serialised(b1);
         assertEquals(b1, b2);
     }
 

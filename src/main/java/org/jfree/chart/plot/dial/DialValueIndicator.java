@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------
  * DialValueIndicator.java
  * -----------------------
- * (C) Copyright 2006-2020, by Object Refinery Limited.
+ * (C) Copyright 2006-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -53,23 +53,21 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.Objects;
 
-import org.jfree.chart.HashUtils;
+import org.jfree.chart.internal.HashUtils;
 import org.jfree.chart.text.TextUtils;
-import org.jfree.chart.ui.RectangleAnchor;
-import org.jfree.chart.ui.RectangleInsets;
-import org.jfree.chart.ui.Size2D;
-import org.jfree.chart.ui.TextAnchor;
-import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.PublicCloneable;
-import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.api.RectangleAnchor;
+import org.jfree.chart.api.RectangleInsets;
+import org.jfree.chart.block.Size2D;
+import org.jfree.chart.text.TextAnchor;
+import org.jfree.chart.internal.PaintUtils;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.api.PublicCloneable;
+import org.jfree.chart.internal.SerialUtils;
 
 /**
  * A value indicator for a {@link DialPlot}.
- *
- * @since 1.0.7
  */
 public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
         Cloneable, PublicCloneable, Serializable {
@@ -96,8 +94,6 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
      * A data value that will be formatted to determine the maximum size of
      * the indicator bounds.  If this is null, the indicator bounds can grow
      * as large as necessary to contain the actual data value.
-     *
-     * @since 1.0.14
      */
     private Number maxTemplateValue;
 
@@ -288,8 +284,6 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
      *
      * @return The template value (possibly {@code null}).
      *
-     * @since 1.0.14
-     *
      * @see #setMaxTemplateValue(java.lang.Number)
      */
     public Number getMaxTemplateValue() {
@@ -301,8 +295,6 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
      * and sends a {@link DialLayerChangeEvent} to all registered listeners.
      *
      * @param value  the value ({@code null} permitted).
-     *
-     * @since 1.0.14
      *
      * @see #getMaxTemplateValue()
      */
@@ -675,8 +667,7 @@ public class DialValueIndicator extends AbstractDialLayer implements DialLayer,
         if (!this.templateValue.equals(that.templateValue)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.maxTemplateValue,
-                that.maxTemplateValue)) {
+        if (!Objects.equals(this.maxTemplateValue, that.maxTemplateValue)) {
             return false;
         }
         if (!this.font.equals(that.font)) {

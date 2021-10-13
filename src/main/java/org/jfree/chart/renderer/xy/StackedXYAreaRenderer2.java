@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,31 +27,11 @@
  * ---------------------------
  * StackedXYAreaRenderer2.java
  * ---------------------------
- * (C) Copyright 2004-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited), based on
  *                   the StackedXYAreaRenderer class by Richard Atkinson;
  * Contributor(s):   Ulrich Voigt (patch #312);
- *
- * Changes:
- * --------
- * 30-Apr-2004 : Version 1 (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
- *               getYValue() (DG);
- * 10-Sep-2004 : Removed getRangeType() method (DG);
- * 06-Jan-2004 : Renamed getRangeExtent() --> findRangeBounds (DG);
- * 28-Mar-2005 : Use getXValue() and getYValue() from dataset (DG);
- * 03-Oct-2005 : Add entity generation to drawItem() method (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 22-Aug-2006 : Handle null and empty datasets correctly in the
- *               findRangeBounds() method (DG);
- * 22-Sep-2006 : Added a flag to allow rounding of x-coordinates (after
- *               translation to Java2D space) in order to avoid the striping
- *               that can result from anti-aliasing (thanks to Doug
- *               Clayton) (DG);
- * 30-Nov-2006 : Added accessor methods for the roundXCoordinates flag (DG);
- * 02-Jun-2008 : Fixed bug with PlotOrientation.HORIZONTAL (DG);
- * 04-Aug-2014 : Fix entity hotspot (patch 312) (UV);
  *
  */
 
@@ -72,9 +52,9 @@ import org.jfree.chart.plot.CrosshairState;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.api.RectangleEdge;
 import org.jfree.chart.urls.XYURLGenerator;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.api.PublicCloneable;
 import org.jfree.data.Range;
 import org.jfree.data.xy.TableXYDataset;
 import org.jfree.data.xy.XYDataset;
@@ -85,7 +65,7 @@ import org.jfree.data.xy.XYDataset;
  * {@code StackedXYAreaChartDemo2.java} program included in the
  * JFreeChart demo collection:
  * <br><br>
- * <img src="../../../../../images/StackedXYAreaRenderer2Sample.png"
+ * <img src="doc-files/StackedXYAreaRenderer2Sample.png"
  * alt="StackedXYAreaRenderer2Sample.png">
  */
 public class StackedXYAreaRenderer2 extends XYAreaRenderer2
@@ -100,8 +80,6 @@ public class StackedXYAreaRenderer2 extends XYAreaRenderer2
      * striping that anti-aliasing can generate.  However, the rounding may not
      * be appropriate for output in high resolution formats (for example,
      * vector graphics formats such as SVG and PDF).
-     *
-     * @since 1.0.3
      */
     private boolean roundXCoordinates;
 
@@ -131,8 +109,6 @@ public class StackedXYAreaRenderer2 extends XYAreaRenderer2
      *
      * @return The flag.
      *
-     * @since 1.0.4
-     *
      * @see #setRoundXCoordinates(boolean)
      */
     public boolean getRoundXCoordinates() {
@@ -145,8 +121,6 @@ public class StackedXYAreaRenderer2 extends XYAreaRenderer2
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param round  the new flag value.
-     *
-     * @since 1.0.4
      *
      * @see #getRoundXCoordinates()
      */

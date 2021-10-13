@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,37 +27,32 @@
  * ------------------------
  * XYShapeRendererTest.java
  * ------------------------
- * (C) Copyright 2010-2016, by Object Refinery Limited.
+ * (C) Copyright 2010-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Martin Hoeller (patch 2952086);
- *
- * Changes
- * -------
- * 17-Sep-2008 : Version 1 (DG);
- * 16-Feb-2010 : Added testFindZBounds() (MH);
- * 19-Oct-2011 : Added test3026341() (DG);
  *
  */
 
 package org.jfree.chart.renderer.xy;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.awt.Color;
 
 import org.jfree.chart.TestUtils;
 
 import org.jfree.chart.renderer.LookupPaintScale;
+import org.jfree.chart.internal.CloneUtils;
 import org.jfree.data.Range;
 import org.jfree.data.xy.DefaultXYZDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link XYShapeRenderer} class.
@@ -108,11 +103,13 @@ public class XYShapeRendererTest {
 
     /**
      * Confirm that cloning works.
+     * 
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
         XYShapeRenderer r1 = new XYShapeRenderer();
-        XYShapeRenderer r2 = (XYShapeRenderer) r1.clone();
+        XYShapeRenderer r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -124,7 +121,7 @@ public class XYShapeRendererTest {
     @Test
     public void testSerialization() {
         XYShapeRenderer r1 = new XYShapeRenderer();
-        XYShapeRenderer r2 = (XYShapeRenderer) TestUtils.serialised(r1);
+        XYShapeRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 
@@ -138,7 +135,7 @@ public class XYShapeRendererTest {
         XYShapeRenderer r = new XYShapeRenderer();
         assertNull(r.findZBounds(null));
 
-        DefaultXYZDataset dataset = new DefaultXYZDataset();
+        DefaultXYZDataset<String> dataset = new DefaultXYZDataset<>();
         Range range;
 
         double data1[][] = { {1,1,1}, {1,1,1}, {1,2,3} };
@@ -173,8 +170,8 @@ public class XYShapeRendererTest {
         XYShapeRenderer renderer = new XYShapeRenderer();
         assertNull(renderer.findRangeBounds(null));
 
-        XYSeriesCollection dataset = new XYSeriesCollection();
-        XYSeries series = new XYSeries("S1");
+        XYSeriesCollection<String> dataset = new XYSeriesCollection<>();
+        XYSeries<String> series = new XYSeries<>("S1");
         series.add(1.0, null);
         dataset.addSeries(series);
         Range r = renderer.findRangeBounds(dataset);

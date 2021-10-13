@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,36 +27,31 @@
  * ----------------------------
  * IntervalBarRendererTest.java
  * ----------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 25-Mar-2003 : Version 1 (DG);
- * 23-Apr-2008 : Added testPublicCloneable (DG);
- * 16-May-2009 : Added testFindRangeBounds() (DG);
  *
  */
 
 package org.jfree.chart.renderer.category;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.CategoryPlot;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.internal.CloneUtils;
+import org.jfree.chart.api.PublicCloneable;
 import org.jfree.data.Range;
 import org.jfree.data.category.DefaultIntervalCategoryDataset;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link IntervalBarRenderer} class.
@@ -92,14 +87,17 @@ public class IntervalBarRendererTest {
 
     /**
      * Confirm that cloning works.
+     * 
+     * @throws CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
         IntervalBarRenderer r1 = new IntervalBarRenderer();
-        IntervalBarRenderer r2 = (IntervalBarRenderer) r1.clone();
+        IntervalBarRenderer r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
+        TestUtils.checkIndependence(r1, r2);
     }
 
     /**
@@ -117,8 +115,9 @@ public class IntervalBarRendererTest {
     @Test
     public void testSerialization() {
         IntervalBarRenderer r1 = new IntervalBarRenderer();
-        IntervalBarRenderer r2 = (IntervalBarRenderer) TestUtils.serialised(r1);
+        IntervalBarRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
+        TestUtils.checkIndependence(r1, r2);
     }
 
     /**
@@ -134,7 +133,7 @@ public class IntervalBarRendererTest {
             DefaultIntervalCategoryDataset dataset
                     = new DefaultIntervalCategoryDataset(starts, ends);
             IntervalBarRenderer renderer = new IntervalBarRenderer();
-            CategoryPlot plot = new CategoryPlot(dataset,
+            CategoryPlot<String, String> plot = new CategoryPlot<>(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     renderer);
             JFreeChart chart = new JFreeChart(plot);

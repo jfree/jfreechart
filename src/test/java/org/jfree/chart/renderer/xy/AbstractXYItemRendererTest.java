@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,29 +27,25 @@
  * -------------------------------
  * AbstractXYItemRendererTest.java
  * -------------------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 06-Oct-2004 : Version 1 (DG);
- * 24-Nov-2006 : Added cloning tests (DG);
  *
  */
 
 package org.jfree.chart.renderer.xy;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import org.jfree.chart.labels.StandardXYSeriesLabelGenerator;
 import org.jfree.chart.labels.StandardXYToolTipGenerator;
 import org.jfree.chart.labels.StandardXYItemLabelGenerator;
+import org.jfree.chart.internal.CloneUtils;
 import org.jfree.data.Range;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
@@ -65,12 +61,12 @@ public class AbstractXYItemRendererTest {
      *
      * @return A test dataset.
      */
-    private XYDataset createDataset1() {
-        XYSeries series = new XYSeries("Series");
+    private XYDataset<String> createDataset1() {
+        XYSeries<String> series = new XYSeries<>("Series");
         series.add(1.0, 1.0);
         series.add(2.0, 2.0);
         series.add(3.0, 3.0);
-        XYSeriesCollection dataset = new XYSeriesCollection();
+        XYSeriesCollection<String> dataset = new XYSeriesCollection<>();
         dataset.addSeries(series);
         return dataset;
     }
@@ -85,7 +81,7 @@ public class AbstractXYItemRendererTest {
         AbstractXYItemRenderer renderer = new StandardXYItemRenderer();
 
         // check the bounds of a simple dataset
-        XYDataset dataset = createDataset1();
+        XYDataset<String> dataset = createDataset1();
         Range r = renderer.findDomainBounds(dataset);
         assertEquals(1.0, r.getLowerBound(), EPSILON);
         assertEquals(3.0, r.getUpperBound(), EPSILON);
@@ -133,7 +129,7 @@ public class AbstractXYItemRendererTest {
                 = new StandardXYSeriesLabelGenerator("Series {0}");
         XYBarRenderer r1 = new XYBarRenderer();
         r1.setLegendItemToolTipGenerator(generator);
-        XYBarRenderer r2 = (XYBarRenderer) r1.clone();
+        XYBarRenderer r2 = CloneUtils.clone(r1);
 
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
@@ -154,7 +150,7 @@ public class AbstractXYItemRendererTest {
                 = new StandardXYSeriesLabelGenerator("Series {0}");
         XYBarRenderer r1 = new XYBarRenderer();
         r1.setLegendItemURLGenerator(generator);
-        XYBarRenderer r2 = (XYBarRenderer) r1.clone();
+        XYBarRenderer r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));

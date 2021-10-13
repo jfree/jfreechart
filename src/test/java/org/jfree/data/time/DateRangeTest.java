@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,28 +27,23 @@
  * ------------------
  * DateRangeTest.java
  * ------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 23-Mar-2004 : Version 1 (DG);
- * 11-Jan-2005 : Added test to ensure Cloneable is not implemented (DG);
  *
  */
 
 package org.jfree.data.time;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Date;
 
 import org.jfree.chart.TestUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Some tests for the {@link DateRange} class.
@@ -82,7 +77,7 @@ public class DateRangeTest {
     @Test
     public void testSerialization() {
         DateRange r1 = new DateRange(new Date(1000L), new Date(2000L));
-        DateRange r2 = (DateRange) TestUtils.serialised(r1);
+        DateRange r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

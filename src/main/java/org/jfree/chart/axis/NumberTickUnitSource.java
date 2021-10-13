@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * -------------------------
  * NumberTickUnitSource.java
  * -------------------------
- * (C) Copyright 2014, by Object Refinery Limited.
+ * (C) Copyright 2014-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 18-Mar-2016 : Version 1 (DG);
  *
  */
 
@@ -43,13 +39,11 @@ package org.jfree.chart.axis;
 import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import org.jfree.chart.util.ObjectUtils;
+import java.util.Objects;
 
 /**
  * A tick unit source implementation that returns NumberTickUnit instances 
  * that are multiples of 1, 2 or 5 times some power of 10.
- * 
- * @since 1.0.18
  */
 public class NumberTickUnitSource implements TickUnitSource, Serializable {
 
@@ -226,7 +220,7 @@ public class NumberTickUnitSource implements TickUnitSource, Serializable {
         if (this.integers != that.integers) {
             return false;
         }
-        if (!ObjectUtils.equal(this.formatter, that.formatter)) {
+        if (!Objects.equals(this.formatter, that.formatter)) {
             return false;
         }
         if (this.power != that.power) {

@@ -36,8 +36,8 @@
 
 package org.jfree.chart.plot;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
@@ -54,9 +54,10 @@ import org.jfree.chart.event.ChartChangeListener;
 import org.jfree.chart.labels.StandardCategoryToolTipGenerator;
 import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.chart.renderer.category.LineAndShapeRenderer;
+import org.jfree.chart.internal.CloneUtils;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link CombinedDomainCategoryPlot} class.
@@ -82,13 +83,13 @@ public class CombinedDomainCategoryPlotTest implements ChartChangeListener {
     @Test
     public void testRemoveSubplot() {
         CombinedDomainCategoryPlot plot = new CombinedDomainCategoryPlot();
-        CategoryPlot plot1 = new CategoryPlot();
-        CategoryPlot plot2 = new CategoryPlot();
+        CategoryPlot<String, String> plot1 = new CategoryPlot<>();
+        CategoryPlot<String, String> plot2 = new CategoryPlot<>();
         plot.add(plot1);
         plot.add(plot2);
         // remove plot2, but plot1 is removed instead
         plot.remove(plot2);
-        List plots = plot.getSubplots();
+        List<CategoryPlot> plots = plot.getSubplots();
         assertTrue(plots.get(0) == plot1);
         assertEquals(1, plots.size());
     }
@@ -109,8 +110,7 @@ public class CombinedDomainCategoryPlotTest implements ChartChangeListener {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         CombinedDomainCategoryPlot plot1 = createPlot();
-        CombinedDomainCategoryPlot plot2 = (CombinedDomainCategoryPlot) 
-                plot1.clone();
+        CombinedDomainCategoryPlot plot2 = CloneUtils.clone(plot1); 
         assertTrue(plot1 != plot2);
         assertTrue(plot1.getClass() == plot2.getClass());
         assertTrue(plot1.equals(plot2));
@@ -122,8 +122,7 @@ public class CombinedDomainCategoryPlotTest implements ChartChangeListener {
     @Test
     public void testSerialization() {
         CombinedDomainCategoryPlot plot1 = createPlot();
-        CombinedDomainCategoryPlot plot2 = (CombinedDomainCategoryPlot) 
-                TestUtils.serialised(plot1);
+        CombinedDomainCategoryPlot plot2 = TestUtils.serialised(plot1);
         assertEquals(plot1, plot2);
     }
 
@@ -136,7 +135,7 @@ public class CombinedDomainCategoryPlotTest implements ChartChangeListener {
         CombinedDomainCategoryPlot plot = createPlot();
         JFreeChart chart = new JFreeChart(plot);
         chart.addChangeListener(this);
-        CategoryPlot subplot1 = (CategoryPlot) plot.getSubplots().get(0);
+        CategoryPlot<String, String> subplot1 = plot.getSubplots().get(0);
         NumberAxis yAxis = (NumberAxis) subplot1.getRangeAxis();
         yAxis.setAutoRangeIncludesZero(!yAxis.getAutoRangeIncludesZero());
         assertEquals(1, this.events.size());
@@ -253,8 +252,8 @@ public class CombinedDomainCategoryPlotTest implements ChartChangeListener {
         LineAndShapeRenderer renderer1 = new LineAndShapeRenderer();
         renderer1.setDefaultToolTipGenerator(
                 new StandardCategoryToolTipGenerator());
-        CategoryPlot subplot1 = new CategoryPlot(dataset1, null, rangeAxis1, 
-                renderer1);
+        CategoryPlot<String, String> subplot1 = new CategoryPlot<>(dataset1, null, 
+                rangeAxis1, renderer1);
         subplot1.setDomainGridlinesVisible(true);
 
         CategoryDataset<String, String> dataset2 = createDataset2();
@@ -263,8 +262,8 @@ public class CombinedDomainCategoryPlotTest implements ChartChangeListener {
         BarRenderer renderer2 = new BarRenderer();
         renderer2.setDefaultToolTipGenerator(
                 new StandardCategoryToolTipGenerator());
-        CategoryPlot subplot2 = new CategoryPlot(dataset2, null, rangeAxis2, 
-                renderer2);
+        CategoryPlot<String, String> subplot2 = new CategoryPlot<>(dataset2, null, 
+                rangeAxis2, renderer2);
         subplot2.setDomainGridlinesVisible(true);
 
         CategoryAxis domainAxis = new CategoryAxis("Category");

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,25 +27,22 @@
  * ------------------
  * TickUnitsTest.java
  * ------------------
- * (C) Copyright 2007-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 02-Aug-2007 : Version 1 (DG);
  *
  */
 
 package org.jfree.chart.axis;
 
 import java.text.DecimalFormat;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.jfree.chart.TestUtils;
-import org.junit.Test;
+import org.jfree.chart.internal.CloneUtils;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link TickUnits} class.
@@ -59,7 +56,7 @@ public class TickUnitsTest {
     public void testSerialization() {
         TickUnits t1 = new TickUnits();
         t1.add(new NumberTickUnit(10, new DecimalFormat("0.00")));
-        TickUnits t2 = (TickUnits) TestUtils.serialised(t1);
+        TickUnits t2 = TestUtils.serialised(t1);
         assertEquals(t1, t2);
     }
 
@@ -70,7 +67,7 @@ public class TickUnitsTest {
     public void testCloning() throws CloneNotSupportedException {
         TickUnits t1 = new TickUnits();
         t1.add(new NumberTickUnit(10, new DecimalFormat("0.00")));
-        TickUnits t2 = (TickUnits) t1.clone();
+        TickUnits t2 = CloneUtils.clone(t1);
         assertTrue(t1 != t2);
         assertTrue(t1.getClass() == t2.getClass());
         assertTrue(t1.equals(t2));

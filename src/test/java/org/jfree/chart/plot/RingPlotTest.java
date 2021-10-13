@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,26 +27,20 @@
  * -----------------
  * RingPlotTest.java
  * -----------------
- * (C) Copyright 2004-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 09-Nov-2004 : Version 1 (DG);
- * 12-Oct-2006 : Updated testEquals() (DG);
- * 28-Feb-2014 : Add tests for new fields (DG);
  * 
  */
 
 package org.jfree.chart.plot;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -56,6 +50,7 @@ import java.awt.Stroke;
 import java.text.DecimalFormat;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.internal.CloneUtils;
 
 /**
  * Tests for the {@link RingPlot} class.
@@ -148,7 +143,7 @@ public class RingPlotTest {
         GradientPaint gp = new GradientPaint(1.0f, 2.0f, Color.YELLOW,
                 3.0f, 4.0f, Color.RED);
         p1.setSeparatorPaint(gp);
-        RingPlot p2 = (RingPlot) p1.clone();
+        RingPlot p2 = CloneUtils.clone(p1);
         assertTrue(p1 != p2);
         assertTrue(p1.getClass() == p2.getClass());
         assertTrue(p1.equals(p2));
@@ -163,7 +158,7 @@ public class RingPlotTest {
         GradientPaint gp = new GradientPaint(1.0f, 2.0f, Color.YELLOW,
                 3.0f, 4.0f, Color.RED);
         p1.setSeparatorPaint(gp);
-        RingPlot p2 = (RingPlot) TestUtils.serialised(p1);
+        RingPlot p2 = TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * ------------------
  * RendererState.java
  * ------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited.
+ * (C) Copyright 2003-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 07-Oct-2003 : Version 1 (DG);
- * 09-Jun-2005 : Added a convenience method to access the entity
- *               collection (DG);
  *
  */
 
@@ -76,8 +70,6 @@ public class RendererState {
      * add rendering hints to the output that identify chart elements.
      * 
      * @return A boolean.
-     * 
-     * @since 1.0.20
      */
     public boolean getElementHinting() {
         return this.elementHinting;
@@ -87,8 +79,6 @@ public class RendererState {
      * Sets the elementHinting flag.
      * 
      * @param hinting  the new flag value.
-     * 
-     * @since 1.0.20
      */
     public void setElementHinting(boolean hinting) {
         this.elementHinting = hinting;

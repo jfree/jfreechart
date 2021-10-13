@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * KeyedValues2DItemKey.java
  * -------------------------
- * (C) Copyright 2014-2020, by Object Refinery Limited.
+ * (C) Copyright 2014-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -37,8 +37,9 @@
 package org.jfree.data;
 
 import java.io.Serializable;
-import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.Args;
+import java.util.Objects;
+
+import org.jfree.chart.internal.Args;
 
 /**
  * An object that references one data item in a {@link KeyedValues2D} data
@@ -127,8 +128,8 @@ public class KeyedValues2DItemKey<R extends Comparable<R>,
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 17 * hash + ObjectUtils.hashCode(this.rowKey);
-        hash = 17 * hash + ObjectUtils.hashCode(this.columnKey);
+        hash = 17 * hash + Objects.hashCode(this.rowKey);
+        hash = 17 * hash + Objects.hashCode(this.columnKey);
         return hash;
     }
 

@@ -37,16 +37,17 @@
 package org.jfree.chart.urls;
 
 import java.util.ArrayList;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.util.List;
 
 import org.jfree.chart.TestUtils;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.internal.CloneUtils;
+import org.jfree.chart.api.PublicCloneable;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link CustomXYURLGenerator} class.
@@ -87,7 +88,7 @@ public class CustomXYURLGeneratorTest {
         u1.add("URL A2");
         u1.add("URL A3");
         g1.addURLSeries(u1);
-        CustomXYURLGenerator g2 = (CustomXYURLGenerator) g1.clone();
+        CustomXYURLGenerator g2 = CloneUtils.clone(g1);
         assertTrue(g1 != g2);
         assertTrue(g1.getClass() == g2.getClass());
         assertTrue(g1.equals(g2));
@@ -128,8 +129,7 @@ public class CustomXYURLGeneratorTest {
         CustomXYURLGenerator g1 = new CustomXYURLGenerator();
         g1.addURLSeries(u1);
         g1.addURLSeries(u2);
-        CustomXYURLGenerator g2 = (CustomXYURLGenerator) 
-                TestUtils.serialised(g1);
+        CustomXYURLGenerator g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

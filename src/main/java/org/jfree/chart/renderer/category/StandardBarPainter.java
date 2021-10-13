@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * -----------------------
  * StandardBarPainter.java
  * -----------------------
- * (C) Copyright 2008, by Object Refinery Limited.
+ * (C) Copyright 2008-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 19-Jun-2008 : Version 1 (DG);
- * 15-Aug-2008 : Use renderer's shadow paint (DG);
  *
  */
 
@@ -49,8 +44,8 @@ import java.awt.Stroke;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.RectangularShape;
 import java.io.Serializable;
-import org.jfree.chart.ui.GradientPaintTransformer;
-import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.util.GradientPaintTransformer;
+import org.jfree.chart.api.RectangleEdge;
 
 /**
  * An implementation of the {@link BarPainter} interface that preserves the
@@ -58,8 +53,6 @@ import org.jfree.chart.ui.RectangleEdge;
  * {@link BarPainter} interface.
  *
  * @see GradientBarPainter
- *
- * @since 1.0.11
  */
 public class StandardBarPainter implements BarPainter, Serializable {
 

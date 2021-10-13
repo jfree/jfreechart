@@ -37,13 +37,14 @@
 package org.jfree.data;
 
 import java.util.List;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import org.jfree.chart.TestUtils;
-import org.jfree.chart.util.SortOrder;
-import org.junit.Test;
+import org.jfree.chart.internal.CloneUtils;
+import org.jfree.chart.api.SortOrder;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link DefaultKeyedValues} class.
@@ -55,7 +56,7 @@ public class DefaultKeyedValuesTest {
      */
     @Test
     public void testConstructor() {
-        DefaultKeyedValues d = new DefaultKeyedValues();
+        DefaultKeyedValues<String> d = new DefaultKeyedValues<>();
         assertEquals(0, d.getItemCount());
     }
 
@@ -64,7 +65,7 @@ public class DefaultKeyedValuesTest {
      */
     @Test
     public void testGetItemCount() {
-        DefaultKeyedValues d = new DefaultKeyedValues();
+        DefaultKeyedValues<String> d = new DefaultKeyedValues<>();
         assertEquals(0, d.getItemCount());
         d.addValue("A", 1.0);
         assertEquals(1, d.getItemCount());
@@ -79,8 +80,8 @@ public class DefaultKeyedValuesTest {
      */
     @Test
     public void testGetKeys() {
-        DefaultKeyedValues d = new DefaultKeyedValues();
-        List keys = d.getKeys();
+        DefaultKeyedValues<String> d = new DefaultKeyedValues<>();
+        List<String> keys = d.getKeys();
         assertTrue(keys.isEmpty());
         d.addValue("A", 1.0);
         keys = d.getKeys();
@@ -101,7 +102,7 @@ public class DefaultKeyedValuesTest {
      */
     @Test
     public void testClear() {
-        DefaultKeyedValues v1 = new DefaultKeyedValues();
+        DefaultKeyedValues<String> v1 = new DefaultKeyedValues<>();
         v1.addValue("A", 1.0);
         v1.addValue("B", 2.0);
         assertEquals(2, v1.getItemCount());
@@ -114,7 +115,7 @@ public class DefaultKeyedValuesTest {
      */
     @Test
     public void testGetValue() {
-        DefaultKeyedValues v1 = new DefaultKeyedValues();
+        DefaultKeyedValues<String> v1 = new DefaultKeyedValues<>();
         try {
             /* Number n = */ v1.getValue(-1);
             assertTrue(false);
@@ -130,9 +131,9 @@ public class DefaultKeyedValuesTest {
             // expected
         }
         DefaultKeyedValues<String> v2 = new DefaultKeyedValues<>();
-        v2.addValue("K1", new Integer(1));
-        v2.addValue("K2", new Integer(2));
-        v2.addValue("K3", new Integer(3));
+        v2.addValue("K1", Integer.valueOf(1));
+        v2.addValue("K2", Integer.valueOf(2));
+        v2.addValue("K3", Integer.valueOf(3));
         assertEquals(3, v2.getValue(2));
 
         boolean pass = false;
@@ -150,7 +151,7 @@ public class DefaultKeyedValuesTest {
      */
     @Test
     public void testGetKey() {
-        DefaultKeyedValues v1 = new DefaultKeyedValues();
+        DefaultKeyedValues<String> v1 = new DefaultKeyedValues<>();
         try {
             /* Comparable k = */ v1.getKey(-1);
             assertTrue(false);
@@ -165,10 +166,10 @@ public class DefaultKeyedValuesTest {
         catch (IndexOutOfBoundsException e) {
             // expected
         }
-        DefaultKeyedValues v2 = new DefaultKeyedValues();
-        v2.addValue("K1", new Integer(1));
-        v2.addValue("K2", new Integer(2));
-        v2.addValue("K3", new Integer(3));
+        DefaultKeyedValues<String> v2 = new DefaultKeyedValues<>();
+        v2.addValue("K1", 1);
+        v2.addValue("K2", 2);
+        v2.addValue("K3", 3);
         assertEquals("K2", v2.getKey(1));
     }
 
@@ -177,13 +178,13 @@ public class DefaultKeyedValuesTest {
      */
     @Test
     public void testGetIndex() {
-        DefaultKeyedValues v1 = new DefaultKeyedValues();
+        DefaultKeyedValues<String> v1 = new DefaultKeyedValues<>();
         assertEquals(-1, v1.getIndex("K1"));
 
-        DefaultKeyedValues v2 = new DefaultKeyedValues();
-        v2.addValue("K1", new Integer(1));
-        v2.addValue("K2", new Integer(2));
-        v2.addValue("K3", new Integer(3));
+        DefaultKeyedValues<String> v2 = new DefaultKeyedValues<>();
+        v2.addValue("K1", 1);
+        v2.addValue("K2", 2);
+        v2.addValue("K3", 3);
         assertEquals(2, v2.getIndex("K3"));
 
         // try null
@@ -202,7 +203,7 @@ public class DefaultKeyedValuesTest {
      */
     @Test
     public void testGetIndex2() {
-        DefaultKeyedValues v = new DefaultKeyedValues();
+        DefaultKeyedValues<String> v = new DefaultKeyedValues<>();
         assertEquals(-1, v.getIndex("K1"));
         v.addValue("K1", 1.0);
         assertEquals(0, v.getIndex("K1"));
@@ -267,16 +268,16 @@ public class DefaultKeyedValuesTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         DefaultKeyedValues<String> v1 = new DefaultKeyedValues<>();
-        v1.addValue("V1", new Integer(1));
+        v1.addValue("V1", 1);
         v1.addValue("V2", null);
-        v1.addValue("V3", new Integer(3));
-        DefaultKeyedValues<String> v2 = (DefaultKeyedValues) v1.clone();
+        v1.addValue("V3", 3);
+        DefaultKeyedValues<String> v2 = CloneUtils.clone(v1);
         assertTrue(v1 != v2);
         assertTrue(v1.getClass() == v2.getClass());
         assertTrue(v1.equals(v2));
 
         // confirm that the clone is independent of the original
-        v2.setValue("V1", new Integer(44));
+        v2.setValue("V1", 44);
         assertFalse(v1.equals(v2));
     }
 
@@ -482,8 +483,7 @@ public class DefaultKeyedValuesTest {
         v1.addValue("Key 2", null);
         v1.addValue("Key 3", 42);
 
-        DefaultKeyedValues<String> v2 = (DefaultKeyedValues) 
-                TestUtils.serialised(v1);
+        DefaultKeyedValues<String> v2 = TestUtils.serialised(v1);
         assertEquals(v1, v2);
     }
 

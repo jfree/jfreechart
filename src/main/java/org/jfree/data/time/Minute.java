@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,41 +27,10 @@
  * -----------
  * Minute.java
  * -----------
- * (C) Copyright 2001-2016, by Object Refinery Limited.
+ * (C) Copyright 2001-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 11-Oct-2001 : Version 1 (DG);
- * 18-Dec-2001 : Changed order of parameters in constructor (DG);
- * 19-Dec-2001 : Added a new constructor as suggested by Paul English (DG);
- * 14-Feb-2002 : Fixed bug in Minute(Date) constructor, and changed the range
- *               to start from zero instead of one (DG);
- * 26-Feb-2002 : Changed getStart(), getMiddle() and getEnd() methods to
- *               evaluate with reference to a particular time zone (DG);
- * 13-Mar-2002 : Added parseMinute() method (DG);
- * 19-Mar-2002 : Changed API, the minute is now defined in relation to an
- *               Hour (DG);
- * 10-Sep-2002 : Added getSerialIndex() method (DG);
- * 07-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 10-Jan-2003 : Changed base class and method names (DG);
- * 13-Mar-2003 : Moved to com.jrefinery.data.time package and implemented
- *               Serializable (DG);
- * 21-Oct-2003 : Added hashCode() method, and new constructor for
- *               convenience (DG);
- * 30-Sep-2004 : Replaced getTime().getTime() with getTimeInMillis() (DG);
- * 04-Nov-2004 : Reverted change of 30-Sep-2004, because it won't work for
- *               JDK 1.3 (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 05-Oct-2006 : Updated API docs (DG);
- * 06-Oct-2006 : Refactored to cache first and last millisecond values (DG);
- * 11-Dec-2006 : Fix for previous() - bug 1611872 (DG);
- * 16-Sep-2008 : Deprecated DEFAULT_TIME_ZONE (DG);
- * 02-Mar-2009 : Added new constructor that specifies Locale (DG);
- * 05-Jul-2012 : Replaced getTime().getTime() with getTimeInMillis() (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -72,7 +41,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
-import org.jfree.chart.util.Args;
+import org.jfree.chart.internal.Args;
 
 /**
  * Represents a minute.  This class is immutable, which is a requirement for
@@ -106,6 +75,8 @@ public class Minute extends RegularTimePeriod implements Serializable {
 
     /**
      * Constructs a new Minute, based on the system date/time.
+     * The time zone and locale are determined by the calendar
+     * returned by {@link RegularTimePeriod#getCalendarInstance()}.
      */
     public Minute() {
         this(new Date());
@@ -113,6 +84,8 @@ public class Minute extends RegularTimePeriod implements Serializable {
 
     /**
      * Constructs a new Minute.
+     * The time zone and locale are determined by the calendar
+     * returned by {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @param minute  the minute (0 to 59).
      * @param hour  the hour ({@code null} not permitted).
@@ -122,12 +95,13 @@ public class Minute extends RegularTimePeriod implements Serializable {
         this.minute = (byte) minute;
         this.hour = (byte) hour.getHour();
         this.day = hour.getDay();
-        peg(Calendar.getInstance());
+        peg(getCalendarInstance());
     }
 
     /**
-     * Constructs a new instance, based on the supplied date/time and
-     * the default time zone.
+     * Constructs a new instance, based on the supplied date/time.
+     * The time zone and locale are determined by the calendar
+     * returned by {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @param time  the time ({@code null} not permitted).
      *
@@ -135,7 +109,7 @@ public class Minute extends RegularTimePeriod implements Serializable {
      */
     public Minute(Date time) {
         // defer argument checking
-        this(time, TimeZone.getDefault(), Locale.getDefault());
+        this(time, getCalendarInstance());
     }
 
     /**
@@ -161,7 +135,28 @@ public class Minute extends RegularTimePeriod implements Serializable {
     }
 
     /**
+     * Constructs a new instance, based on a particular date/time.
+     * The time zone and locale are determined by the {@code calendar}
+     * parameter.
+     *
+     * @param time the date/time ({@code null} not permitted).
+     * @param calendar the calendar to use for calculations ({@code null} not permitted).
+     */
+    public Minute(Date time, Calendar calendar) {
+        Args.nullNotPermitted(time, "time");
+        Args.nullNotPermitted(calendar, "calendar");
+        calendar.setTime(time);
+        int min = calendar.get(Calendar.MINUTE);
+        this.minute = (byte) min;
+        this.hour = (byte) calendar.get(Calendar.HOUR_OF_DAY);
+        this.day = new Day(time, calendar);
+        peg(calendar);
+    }
+
+    /**
      * Creates a new minute.
+     * The time zone and locale are determined by the calendar
+     * returned by {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @param minute  the minute (0-59).
      * @param hour  the hour (0-23).
@@ -259,6 +254,9 @@ public class Minute extends RegularTimePeriod implements Serializable {
 
     /**
      * Returns the minute preceding this one.
+     * No matter what time zone and locale this instance was created with,
+     * the returned instance will use the default calendar for time
+     * calculations, obtained with {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @return The minute preceding this one.
      */
@@ -282,6 +280,9 @@ public class Minute extends RegularTimePeriod implements Serializable {
 
     /**
      * Returns the minute following this one.
+     * No matter what time zone and locale this instance was created with,
+     * the returned instance will use the default calendar for time
+     * calculations, obtained with {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @return The minute following this one.
      */

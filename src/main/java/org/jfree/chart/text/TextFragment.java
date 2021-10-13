@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -39,9 +39,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import org.jfree.chart.ui.Size2D;
-import org.jfree.chart.ui.TextAnchor;
-import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.block.Size2D;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.internal.SerialUtils;
 
 /**
  * A text item, with an associated font, that fits on a single line (see 
@@ -113,15 +113,9 @@ public class TextFragment implements Serializable {
      */
     public TextFragment(String text, Font font, Paint paint,
             float baselineOffset) {
-        if (text == null) {
-            throw new IllegalArgumentException("Null 'text' argument.");  
-        }
-        if (font == null) {
-            throw new IllegalArgumentException("Null 'font' argument.");
-        }
-        if (paint == null) {
-            throw new IllegalArgumentException("Null 'paint' argument.");
-        }
+        Args.nullNotPermitted(text, "text");
+        Args.nullNotPermitted(font, "font");
+        Args.nullNotPermitted(paint, "paint");
         this.text = text;
         this.font = font;
         this.paint = paint;

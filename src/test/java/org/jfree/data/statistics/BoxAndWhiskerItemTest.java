@@ -36,13 +36,13 @@
 
 package org.jfree.data.statistics;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 
 import org.jfree.chart.TestUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link BoxAndWhiskerItem} class.
@@ -70,7 +70,7 @@ public class BoxAndWhiskerItemTest {
     public void testSerialization() {
         BoxAndWhiskerItem i1 = new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0,
                 5.0, 6.0, 7.0, 8.0, new ArrayList<>());
-        BoxAndWhiskerItem i2 = (BoxAndWhiskerItem) TestUtils.serialised(i1);
+        BoxAndWhiskerItem i2 = TestUtils.serialised(i1);
         assertEquals(i1, i2);
     }
 

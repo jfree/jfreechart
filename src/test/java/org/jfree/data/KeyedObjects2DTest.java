@@ -32,22 +32,17 @@
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * Changes
- * -------
- * 01-Mar-2004 : Version 1 (DG);
- * 28-Sep-2007 : Added testEquals() and enhanced testClone() (DG);
- * 03-Oct-2007 : Added new tests (DG);
- *
  */
 
 package org.jfree.data;
 
 import org.jfree.chart.TestUtils;
-import org.junit.Test;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertNull;
+import org.jfree.chart.internal.CloneUtils;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * Tests for the {@link KeyedObjects2D} class.
@@ -59,8 +54,8 @@ public class KeyedObjects2DTest {
      */
     @Test
     public void testEquals() {
-        KeyedObjects2D k1 = new KeyedObjects2D();
-        KeyedObjects2D k2 = new KeyedObjects2D();
+        KeyedObjects2D<String, String> k1 = new KeyedObjects2D<>();
+        KeyedObjects2D<String, String> k2 = new KeyedObjects2D<>();
         assertTrue(k1.equals(k2));
         assertTrue(k2.equals(k1));
 
@@ -76,11 +71,11 @@ public class KeyedObjects2DTest {
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        KeyedObjects2D o1 = new KeyedObjects2D();
+        KeyedObjects2D<String, String> o1 = new KeyedObjects2D<>();
         o1.setObject(1, "V1", "C1");
         o1.setObject(null, "V2", "C1");
         o1.setObject(3, "V3", "C2");
-        KeyedObjects2D o2 = (KeyedObjects2D) o1.clone();
+        KeyedObjects2D<String, String> o2 = CloneUtils.clone(o1);
         assertTrue(o1 != o2);
         assertTrue(o1.getClass() == o2.getClass());
         assertTrue(o1.equals(o2));
@@ -95,13 +90,13 @@ public class KeyedObjects2DTest {
      */
     @Test
     public void testSerialization() {
-        KeyedObjects2D ko2D1 = new KeyedObjects2D();
+        KeyedObjects2D<String, String> ko2D1 = new KeyedObjects2D<>();
         ko2D1.addObject(234.2, "Row1", "Col1");
         ko2D1.addObject(null, "Row1", "Col2");
         ko2D1.addObject(345.9, "Row2", "Col1");
         ko2D1.addObject(452.7, "Row2", "Col2");
 
-        KeyedObjects2D ko2D2 = (KeyedObjects2D) TestUtils.serialised(ko2D1);
+        KeyedObjects2D<String, String> ko2D2 = TestUtils.serialised(ko2D1);
         assertEquals(ko2D1, ko2D2);
     }
 
@@ -110,7 +105,7 @@ public class KeyedObjects2DTest {
      */
     @Test
     public void testGetValueByIndex() {
-        KeyedObjects2D data = new KeyedObjects2D();
+        KeyedObjects2D<String, String> data = new KeyedObjects2D<>();
         data.addObject("Obj1", "R1", "C1");
         data.addObject("Obj2", "R2", "C2");
         assertEquals("Obj1", data.getObject(0, 0));
@@ -161,7 +156,7 @@ public class KeyedObjects2DTest {
      */
     @Test
     public void testGetValueByKey() {
-        KeyedObjects2D data = new KeyedObjects2D();
+        KeyedObjects2D<String, String> data = new KeyedObjects2D<>();
         data.addObject("Obj1", "R1", "C1");
         data.addObject("Obj2", "R2", "C2");
         assertEquals("Obj1", data.getObject("R1", "C1"));
@@ -212,7 +207,7 @@ public class KeyedObjects2DTest {
      */
     @Test
     public void testSetObject() {
-        KeyedObjects2D data = new KeyedObjects2D();
+        KeyedObjects2D<String, String> data = new KeyedObjects2D<>();
         data.setObject("Obj1", "R1", "C1");
         data.setObject("Obj2", "R2", "C2");
         assertEquals("Obj1", data.getObject("R1", "C1"));
@@ -249,7 +244,7 @@ public class KeyedObjects2DTest {
      */
     @Test
     public void testRemoveRowByIndex() {
-        KeyedObjects2D data = new KeyedObjects2D();
+        KeyedObjects2D<String, String> data = new KeyedObjects2D<>();
         data.setObject("Obj1", "R1", "C1");
         data.setObject("Obj2", "R2", "C2");
         data.removeRow(0);
@@ -282,7 +277,7 @@ public class KeyedObjects2DTest {
      */
     @Test
     public void testRemoveColumnByIndex() {
-        KeyedObjects2D data = new KeyedObjects2D();
+        KeyedObjects2D<String, String> data = new KeyedObjects2D<>();
         data.setObject("Obj1", "R1", "C1");
         data.setObject("Obj2", "R2", "C2");
         data.removeColumn(0);
@@ -315,7 +310,7 @@ public class KeyedObjects2DTest {
      */
     @Test
     public void testRemoveRowByKey() {
-        KeyedObjects2D data = new KeyedObjects2D();
+        KeyedObjects2D<String, String> data = new KeyedObjects2D<>();
         data.setObject("Obj1", "R1", "C1");
         data.setObject("Obj2", "R2", "C2");
         data.removeRow("R2");
@@ -348,7 +343,7 @@ public class KeyedObjects2DTest {
      */
     @Test
     public void testRemoveColumnByKey() {
-        KeyedObjects2D data = new KeyedObjects2D();
+        KeyedObjects2D<String, String> data = new KeyedObjects2D<>();
         data.setObject("Obj1", "R1", "C1");
         data.setObject("Obj2", "R2", "C2");
         data.removeColumn("C2");
@@ -381,7 +376,7 @@ public class KeyedObjects2DTest {
      */
     @Test
     public void testRemoveValue() {
-        KeyedObjects2D data = new KeyedObjects2D();
+        KeyedObjects2D<String, String> data = new KeyedObjects2D<>();
         data.setObject("Obj1", "R1", "C1");
         data.setObject("Obj2", "R2", "C2");
         data.removeObject("R2", "C2");

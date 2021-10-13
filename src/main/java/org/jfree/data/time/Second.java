@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,36 +27,10 @@
  * -----------
  * Second.java
  * -----------
- * (C) Copyright 2001-2015, by Object Refinery Limited.
+ * (C) Copyright 2001-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 11-Oct-2001 : Version 1 (DG);
- * 18-Dec-2001 : Changed order of parameters in constructor (DG);
- * 19-Dec-2001 : Added a new constructor as suggested by Paul English (DG);
- * 14-Feb-2002 : Fixed bug in Second(Date) constructor, and changed start of
- *               range to zero from one (DG);
- * 26-Feb-2002 : Changed getStart(), getMiddle() and getEnd() methods to
- *               evaluate with reference to a particular time zone (DG);
- * 13-Mar-2002 : Added parseSecond() method (DG);
- * 10-Sep-2002 : Added getSerialIndex() method (DG);
- * 07-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 10-Jan-2003 : Changed base class and method names (DG);
- * 05-Mar-2003 : Fixed bug in getLastMillisecond() picked up in JUnit
- *               tests (DG);
- * 13-Mar-2003 : Moved to com.jrefinery.data.time package and implemented
- *               Serializable (DG);
- * 21-Oct-2003 : Added hashCode() method (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 05-Oct-2006 : Updated API docs (DG);
- * 06-Oct-2006 : Refactored to cache first and last millisecond values (DG);
- * 16-Sep-2008 : Deprecated DEFAULT_TIME_ZONE (DG);
- * 02-Mar-2009 : Added new constructor with Locale (DG);
- * 05-Jul-2012 : Replaced getTime().getTime() with getTimeInMillis() (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -67,7 +41,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
-import org.jfree.chart.util.Args;
+import org.jfree.chart.internal.Args;
 
 /**
  * Represents a second in a particular day.  This class is immutable, which is
@@ -104,6 +78,8 @@ public class Second extends RegularTimePeriod implements Serializable {
 
     /**
      * Constructs a new Second, based on the system date/time.
+     * The time zone and locale are determined by the calendar
+     * returned by {@link RegularTimePeriod#getCalendarInstance()}.
      */
     public Second() {
         this(new Date());
@@ -111,6 +87,8 @@ public class Second extends RegularTimePeriod implements Serializable {
 
     /**
      * Constructs a new Second.
+     * The time zone and locale are determined by the calendar
+     * returned by {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @param second  the second (0 to 59).
      * @param minute  the minute ({@code null} not permitted).
@@ -123,11 +101,13 @@ public class Second extends RegularTimePeriod implements Serializable {
         this.hour = (byte) minute.getHourValue();
         this.minute = (byte) minute.getMinute();
         this.second = (byte) second;
-        peg(Calendar.getInstance());
+        peg(getCalendarInstance());
     }
 
     /**
      * Creates a new second.
+     * The time zone and locale are determined by the calendar
+     * returned by {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @param second  the second (0-59).
      * @param minute  the minute (0-59).
@@ -142,15 +122,16 @@ public class Second extends RegularTimePeriod implements Serializable {
     }
 
     /**
-     * Constructs a new instance from the specified date/time and the default
-     * time zone.
+     * Constructs a new instance from the specified date/time.
+     * The time zone and locale are determined by the calendar
+     * returned by {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @param time  the time ({@code null} not permitted).
      *
      * @see #Second(Date, TimeZone, Locale)
      */
     public Second(Date time) {
-        this(time, TimeZone.getDefault(), Locale.getDefault());
+        this(time, getCalendarInstance());
     }
 
     /**
@@ -163,12 +144,23 @@ public class Second extends RegularTimePeriod implements Serializable {
      * @since 1.0.13
      */
     public Second(Date time, TimeZone zone, Locale locale) {
-        Calendar calendar = Calendar.getInstance(zone, locale);
+        this(time, Calendar.getInstance(zone, locale));
+    }
+
+    /**
+     * Constructs a new instance, based on a particular date/time.
+     * The time zone and locale are determined by the {@code calendar}
+     * parameter.
+     *
+     * @param time the date/time ({@code null} not permitted).
+     * @param calendar the calendar to use for calculations ({@code null} not permitted).
+     */
+    public Second(Date time, Calendar calendar) {
         calendar.setTime(time);
         this.second = (byte) calendar.get(Calendar.SECOND);
         this.minute = (byte) calendar.get(Calendar.MINUTE);
         this.hour = (byte) calendar.get(Calendar.HOUR_OF_DAY);
-        this.day = new Day(time, zone, locale);
+        this.day = new Day(time, calendar);
         peg(calendar);
     }
 
@@ -235,6 +227,9 @@ public class Second extends RegularTimePeriod implements Serializable {
 
     /**
      * Returns the second preceding this one.
+     * No matter what time zone and locale this instance was created with,
+     * the returned instance will use the default calendar for time
+     * calculations, obtained with {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @return The second preceding this one.
      */
@@ -255,6 +250,9 @@ public class Second extends RegularTimePeriod implements Serializable {
 
     /**
      * Returns the second following this one.
+     * No matter what time zone and locale this instance was created with,
+     * the returned instance will use the default calendar for time
+     * calculations, obtained with {@link RegularTimePeriod#getCalendarInstance()}.
      *
      * @return The second following this one.
      */

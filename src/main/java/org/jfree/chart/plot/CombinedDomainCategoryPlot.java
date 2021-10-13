@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,40 +27,10 @@
  * -------------------------------
  * CombinedDomainCategoryPlot.java
  * -------------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited.
+ * (C) Copyright 2003-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Nicolas Brodu;
- *
- * Changes:
- * --------
- * 16-May-2003 : Version 1 (DG);
- * 08-Aug-2003 : Adjusted totalWeight in remove() method (DG);
- * 19-Aug-2003 : Added equals() method, implemented Cloneable and
- *               Serializable (DG);
- * 11-Sep-2003 : Fix cloning support (subplots) (NB);
- * 15-Sep-2003 : Implemented PublicCloneable (DG);
- * 16-Sep-2003 : Changed ChartRenderingInfo --> PlotRenderingInfo (DG);
- * 17-Sep-2003 : Updated handling of 'clicks' (DG);
- * 04-May-2004 : Added getter/setter methods for 'gap' attribute (DG);
- * 12-Nov-2004 : Implemented the Zoomable interface (DG);
- * 25-Nov-2004 : Small update to clone() implementation (DG);
- * 21-Feb-2005 : The getLegendItems() method now returns the fixed legend
- *               items if set (DG);
- * 05-May-2005 : Updated draw() method parameters (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 13-Sep-2006 : Updated API docs (DG);
- * 30-Oct-2006 : Added new getCategoriesForAxis() override (DG);
- * 17-Apr-2007 : Added null argument checks to findSubplot() (DG);
- * 14-Nov-2007 : Updated setFixedRangeAxisSpaceForSubplots() method (DG);
- * 27-Mar-2008 : Add documentation for getDataRange() method (DG);
- * 31-Mar-2008 : Updated getSubplots() to return EMPTY_LIST for null
- *               subplots, as suggested by Richard West (DG);
- * 28-Apr-2008 : Fixed zooming problem (see bug 1950037) (DG);
- * 26-Jun-2008 : Fixed crosshair support (DG);
- * 11-Aug-2008 : Don't store totalWeight of subplots, calculate it as
- *               required (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -69,21 +39,24 @@ package org.jfree.chart.plot;
 import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
+import org.jfree.chart.ChartElementVisitor;
 
-import org.jfree.chart.LegendItemCollection;
+import org.jfree.chart.legend.LegendItemCollection;
 import org.jfree.chart.axis.AxisSpace;
 import org.jfree.chart.axis.AxisState;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.event.PlotChangeListener;
-import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.ui.RectangleInsets;
-import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.Args;
+import org.jfree.chart.api.RectangleEdge;
+import org.jfree.chart.api.RectangleInsets;
+import org.jfree.chart.internal.CloneUtils;
+import org.jfree.chart.internal.Args;
 import org.jfree.chart.util.ShadowGenerator;
 import org.jfree.data.Range;
 
@@ -97,14 +70,14 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
     private static final long serialVersionUID = 8207194522653701572L;
 
     /** Storage for the subplot references. */
-    private List subplots;
+    private List<CategoryPlot> subplots;
 
     /** The gap between subplots. */
     private double gap;
 
     /** Temporary storage for the subplot areas. */
     private transient Rectangle2D[] subplotAreas;
-    // TODO:  move the above to the plot state
+    // FIXME:  move the above to the plot state
 
     /**
      * Default constructor.
@@ -121,7 +94,7 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
      */
     public CombinedDomainCategoryPlot(CategoryAxis domainAxis) {
         super(null, domainAxis, null, null);
-        this.subplots = new java.util.ArrayList();
+        this.subplots = new ArrayList<>();
         this.gap = 5.0;
     }
 
@@ -228,7 +201,7 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
      *
      * @return An unmodifiable list of subplots.
      */
-    public List getSubplots() {
+    public List<CategoryPlot> getSubplots() {
         if (this.subplots != null) {
             return Collections.unmodifiableList(this.subplots);
         }
@@ -289,9 +262,8 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
         else {
             // if the source point doesn't fall within a subplot, we do the
             // zoom on all subplots...
-            Iterator iterator = getSubplots().iterator();
-            while (iterator.hasNext()) {
-                subplot = (CategoryPlot) iterator.next();
+            for (CategoryPlot categoryPlot : getSubplots()) {
+                subplot = categoryPlot;
                 subplot.zoomRangeAxes(factor, info, source, useAnchor);
             }
         }
@@ -316,9 +288,8 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
         else {
             // if the source point doesn't fall within a subplot, we do the
             // zoom on all subplots...
-            Iterator iterator = getSubplots().iterator();
-            while (iterator.hasNext()) {
-                subplot = (CategoryPlot) iterator.next();
+            for (CategoryPlot categoryPlot : getSubplots()) {
+                subplot = categoryPlot;
                 subplot.zoomRangeAxes(lowerPercent, upperPercent, info, source);
             }
         }
@@ -414,6 +385,20 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
     }
 
     /**
+     * Receives a chart element visitor.  Many plot subclasses will override
+     * this method to handle their subcomponents.
+     * 
+     * @param visitor  the visitor ({@code null} not permitted).
+     */
+    @Override
+    public void receive(ChartElementVisitor visitor) {
+        subplots.forEach(subplot -> {
+            subplot.receive(visitor);
+        });
+        super.receive(visitor);
+    }
+
+    /**
      * Draws the plot on a Java 2D graphics device (such as the screen or a
      * printer).  Will perform all the placement calculations for each of the
      * sub-plots and then tell these to draw themselves.
@@ -491,9 +476,7 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
      * @param space  the space ({@code null} permitted).
      */
     protected void setFixedRangeAxisSpaceForSubplots(AxisSpace space) {
-        Iterator iterator = this.subplots.iterator();
-        while (iterator.hasNext()) {
-            CategoryPlot plot = (CategoryPlot) iterator.next();
+        for (CategoryPlot plot : this.subplots) {
             plot.setFixedRangeAxisSpace(space, false);
         }
     }
@@ -506,9 +489,7 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
     @Override
     public void setOrientation(PlotOrientation orientation) {
         super.setOrientation(orientation);
-        Iterator iterator = this.subplots.iterator();
-        while (iterator.hasNext()) {
-            CategoryPlot plot = (CategoryPlot) iterator.next();
+        for (CategoryPlot plot : this.subplots) {
             plot.setOrientation(orientation);
         }
 
@@ -524,9 +505,7 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
     public void setShadowGenerator(ShadowGenerator generator) {
         setNotify(false);
         super.setShadowGenerator(generator);
-        Iterator iterator = this.subplots.iterator();
-        while (iterator.hasNext()) {
-            CategoryPlot plot = (CategoryPlot) iterator.next();
+        for (CategoryPlot plot : this.subplots) {
             plot.setShadowGenerator(generator);
         }
         setNotify(true);
@@ -563,9 +542,7 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
         if (result == null) {
             result = new LegendItemCollection();
             if (this.subplots != null) {
-                Iterator iterator = this.subplots.iterator();
-                while (iterator.hasNext()) {
-                    CategoryPlot plot = (CategoryPlot) iterator.next();
+                for (CategoryPlot plot : this.subplots) {
                     LegendItemCollection more = plot.getLegendItems();
                     result.addAll(more);
                 }
@@ -584,13 +561,10 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
     public List getCategories() {
         List result = new java.util.ArrayList();
         if (this.subplots != null) {
-            Iterator iterator = this.subplots.iterator();
-            while (iterator.hasNext()) {
-                CategoryPlot plot = (CategoryPlot) iterator.next();
+            for (CategoryPlot plot : this.subplots) {
                 List more = plot.getCategories();
-                Iterator moreIterator = more.iterator();
-                while (moreIterator.hasNext()) {
-                    Comparable category = (Comparable) moreIterator.next();
+                for (Object o : more) {
+                    Comparable category = (Comparable) o;
                     if (!result.contains(category)) {
                         result.add(category);
                     }
@@ -606,8 +580,6 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
      * @param axis  ignored.
      *
      * @return A list of the categories in the subplots.
-     *
-     * @since 1.0.3
      */
     @Override
     public List getCategoriesForAxis(CategoryAxis axis) {
@@ -668,7 +640,7 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
         if (this.gap != that.gap) {
             return false;
         }
-        if (!ObjectUtils.equal(this.subplots, that.subplots)) {
+        if (!Objects.equals(this.subplots, that.subplots)) {
             return false;
         }
         return super.equals(obj);
@@ -684,10 +656,9 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
      */
     @Override
     public Object clone() throws CloneNotSupportedException {
-
         CombinedDomainCategoryPlot result
             = (CombinedDomainCategoryPlot) super.clone();
-        result.subplots = (List) ObjectUtils.deepClone(this.subplots);
+        result.subplots = (List<CategoryPlot>) CloneUtils.cloneList(this.subplots);
         for (Iterator it = result.subplots.iterator(); it.hasNext();) {
             Plot child = (Plot) it.next();
             child.setParent(result);

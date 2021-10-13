@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,20 +27,10 @@
  * -------------------
  * JFreeChartTest.java
  * -------------------
- * (C) Copyright 2002-2020, by Object Refinery Limited.
+ * (C) Copyright 2002-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 11-Jun-2002 : Version 1 (DG);
- * 17-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 23-Sep-2003 : Removed null title test, since TM has added code to ensure
- *               null titles cannot be created (DG);
- * 24-Nov-2005 : Removed OldLegend (DG);
- * 16-May-2007 : Added some new tests (DG);
- * 29-Jul-2014 : Added testBug942() (DG);
  *
  */
 
@@ -55,30 +45,30 @@ import java.util.List;
 
 import org.jfree.chart.event.ChartChangeEvent;
 import org.jfree.chart.event.ChartChangeListener;
-import org.jfree.chart.plot.PiePlot;
+import org.jfree.chart.plot.pie.PiePlot;
 import org.jfree.chart.plot.RingPlot;
-import org.jfree.chart.title.LegendTitle;
+import org.jfree.chart.legend.LegendTitle;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.chart.title.Title;
-import org.jfree.chart.ui.Align;
-import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.api.RectangleAlignment;
+import org.jfree.chart.api.RectangleEdge;
+import org.jfree.chart.api.RectangleInsets;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.time.Day;
 import org.jfree.data.time.RegularTimePeriod;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.fail;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Tests for the {@link JFreeChart} class.
@@ -91,7 +81,7 @@ public class JFreeChartTest implements ChartChangeListener {
     /**
      * Common test setup.
      */
-    @Before
+    @BeforeEach
     public void setUp() {
         DefaultPieDataset<String> data = new DefaultPieDataset<>();
         data.setValue("Java", 43.2);
@@ -184,9 +174,9 @@ public class JFreeChartTest implements ChartChangeListener {
 //        assertEquals(chart1, chart2);
 
         // backgroundImageAlignment
-        chart1.setBackgroundImageAlignment(Align.BOTTOM_LEFT);
+        chart1.setBackgroundImageAlignment(RectangleAlignment.BOTTOM_LEFT);
         assertFalse(chart1.equals(chart2));
-        chart2.setBackgroundImageAlignment(Align.BOTTOM_LEFT);
+        chart2.setBackgroundImageAlignment(RectangleAlignment.BOTTOM_LEFT);
         assertEquals(chart1, chart2);
 
         // backgroundImageAlpha
@@ -266,31 +256,17 @@ public class JFreeChartTest implements ChartChangeListener {
         data.setValue("Type 3", 45.8);
 
         JFreeChart c1 = ChartFactory.createPieChart("Test", data);
-        JFreeChart c2 = (JFreeChart) TestUtils.serialised(c1);
+        JFreeChart c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
         LegendTitle lt2 = c2.getLegend();
         assertSame(lt2.getSources()[0], c2.getPlot());
     }
 
     /**
-     * Serialize a 3D pie chart, restore it, and check for equality.
-     */
-    @Test
-    public void testSerialization2() {
-        DefaultPieDataset<String> data = new DefaultPieDataset<>();
-        data.setValue("Type 1", 54.5);
-        data.setValue("Type 2", 23.9);
-        data.setValue("Type 3", 45.8);
-        JFreeChart c1 = ChartFactory.createPieChart3D("Test", data);
-        JFreeChart c2 = (JFreeChart) TestUtils.serialised(c1);
-        assertEquals(c1, c2);
-    }
-
-    /**
      * Serialize a bar chart, restore it, and check for equality.
      */
     @Test
-    public void testSerialization3() {
+    public void testSerialization2() {
 
         // row keys...
         String series1 = "First";
@@ -340,27 +316,26 @@ public class JFreeChartTest implements ChartChangeListener {
         // create the chart...
         JFreeChart c1 = ChartFactory.createBarChart("Vertical Bar Chart",
                 "Category", "Value", dataset);
-        JFreeChart c2 = (JFreeChart) TestUtils.serialised(c1);
+        JFreeChart c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 
     /**
-     * Serialize a time seroes chart, restore it, and check for equality.
+     * Serialize a time series chart, restore it, and check for equality.
      */
     @Test
-    public void testSerialization4() {
-
+    public void testSerialization3() {
         RegularTimePeriod t = new Day();
-        TimeSeries series = new TimeSeries("Series 1");
+        TimeSeries<String> series = new TimeSeries<>("Series 1");
         series.add(t, 36.4);
         t = t.next();
         series.add(t, 63.5);
-        TimeSeriesCollection dataset = new TimeSeriesCollection();
+        TimeSeriesCollection<String> dataset = new TimeSeriesCollection<>();
         dataset.addSeries(series);
 
         JFreeChart c1 = ChartFactory.createTimeSeriesChart("Test", "Date",
                 "Value", dataset);
-        JFreeChart c2 = (JFreeChart) TestUtils.serialised(c1);
+        JFreeChart c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 
@@ -382,10 +357,10 @@ public class JFreeChartTest implements ChartChangeListener {
 
         try {
             chart.addSubtitle(null);
-            fail("Should have thrown a NullPointerException.");
+            fail("Should have thrown an IllegalArgumentException.");
         }
-        catch (NullPointerException e) {
-            assertEquals("subtitle", e.getMessage());
+        catch (IllegalArgumentException e) {
+            assertEquals("Null 'subtitle' argument.", e.getMessage());
         }
 
         try {
@@ -393,7 +368,7 @@ public class JFreeChartTest implements ChartChangeListener {
             fail("Should have thrown an IllegalArgumentException on index out of range");
         }
         catch (IllegalArgumentException e) {
-            assertEquals("The 'index' argument is out of range.", e.getMessage());
+            assertEquals("Require 'index' (-1) to be in the range 0 to 3", e.getMessage());
         }
 
         try {
@@ -401,7 +376,7 @@ public class JFreeChartTest implements ChartChangeListener {
             fail("Should have thrown an IllegalArgumentException on index out of range");
         }
         catch (IllegalArgumentException e) {
-             assertEquals("The 'index' argument is out of range.", e.getMessage());
+             assertEquals("Require 'index' (4) to be in the range 0 to 3", e.getMessage());
         }
 
     }

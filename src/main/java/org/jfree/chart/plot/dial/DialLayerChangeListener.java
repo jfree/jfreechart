@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * ----------------------------
  * DialLayerChangeListener.java
  * ----------------------------
- * (C) Copyright 2006-2008, by Object Refinery Limited.
+ * (C) Copyright 2006-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 06-Nov-2006 : Version 1 (DG);
  *
  */
 
@@ -46,8 +42,6 @@ import java.util.EventListener;
  * The interface via which an object is notified of changes to a
  * {@link DialLayer}.  The {@link DialPlot} class listens for changes to its
  * layers in this way.
- *
- * @since 1.0.7
  */
 public interface DialLayerChangeListener extends EventListener {
 
@@ -57,6 +51,6 @@ public interface DialLayerChangeListener extends EventListener {
      *
      * @param event  the event.
      */
-    public void dialLayerChanged(DialLayerChangeEvent event);
+    void dialLayerChanged(DialLayerChangeEvent event);
 
 }

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,30 +27,35 @@
  * ------------------------
  * TimePeriodValueTest.java
  * ------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited.
+ * (C) Copyright 2003-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 30-Jul-2003 : Version 1 (DG);
  *
  */
 
 package org.jfree.data.time;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
-
 import org.jfree.chart.TestUtils;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link TimePeriodValue} class.
  */
 public class TimePeriodValueTest {
 
+    @Test
+    public void testGeneral() {
+        TimePeriodValue tpv = new TimePeriodValue(new Year(2020), 123.4);
+        assertEquals(new Year(2020), tpv.getPeriod());
+        assertEquals(123.4, tpv.getValue());
+        tpv.setValue(null);
+        assertNull(tpv.getValue());
+    }
+    
     /**
      * Test that an instance is equal to itself.
      */
@@ -77,7 +82,7 @@ public class TimePeriodValueTest {
     @Test
     public void testSerialization() {
         TimePeriodValue tpv1 = new TimePeriodValue(new Day(30, 7, 2003), 55.75);
-        TimePeriodValue tpv2 = (TimePeriodValue) TestUtils.serialised(tpv1);
+        TimePeriodValue tpv2 = TestUtils.serialised(tpv1);
         assertEquals(tpv1, tpv2);
     }
 

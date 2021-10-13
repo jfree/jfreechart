@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,30 +27,14 @@
  * -------------------
  * ImageTitleTest.java
  * -------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
  *
- * Changes
- * -------
- * 17-Feb-2004 : Version 1 (DG);
- * 21-Mar-2008 : Added tests for arrange method (DG);
- *
  */
 
 package org.jfree.chart.title;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-
-import org.jfree.chart.JFreeChart;
-import org.jfree.chart.ui.Size2D;
-import org.junit.Test;
 
 /**
  * Tests for the {@link ImageTitle} class.

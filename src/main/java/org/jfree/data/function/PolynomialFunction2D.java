@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * -------------------------
  * PolynomialFunction2D.java
  * -------------------------
- * (C) Copyright 2009-2016, by Object Refinery Limited.
+ * (C) Copyright 2009-2021, by Object Refinery Limited.
  *
  * Original Author:  Peter Kolb;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes:
- * --------
- * 23-Mar-2009 : Version 1, patch 2795746 (PK);
- * 28-May-2009 : Integrated in JFreeChart with modifications (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -44,8 +38,8 @@ package org.jfree.data.function;
 
 import java.io.Serializable;
 import java.util.Arrays;
-import org.jfree.chart.HashUtils;
-import org.jfree.chart.util.Args;
+import org.jfree.chart.internal.HashUtils;
+import org.jfree.chart.internal.Args;
 
 /**
  * A function in the form {@code y = a0 + a1 * x + a2 * x^2 + ... + an *

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,26 +27,21 @@
  * -----------------------
  * CategoryAnchorTest.java
  * -----------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 13-May-2004 : Version 1 (DG);
- * 07-Jan-2005 : Added hashCode() test (DG);
  *
  */
 
 package org.jfree.chart.axis;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.jfree.chart.TestUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link CategoryAnchor} class.
@@ -84,7 +79,7 @@ public class CategoryAnchorTest {
     @Test
     public void testSerialization() {
         CategoryAnchor a1 = CategoryAnchor.MIDDLE;
-        CategoryAnchor a2 = (CategoryAnchor) TestUtils.serialised(a1);
+        CategoryAnchor a2 = TestUtils.serialised(a1);
         assertEquals(a1, a2);
         assertTrue(a1 == a2);
     }

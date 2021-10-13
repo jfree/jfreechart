@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------
  * IntervalMarker.java
  * -------------------
- * (C) Copyright 2002-2020, by Object Refinery Limited.
+ * (C) Copyright 2002-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -41,11 +41,11 @@ import java.awt.Color;
 import java.awt.Paint;
 import java.awt.Stroke;
 import java.io.Serializable;
+import java.util.Objects;
+import org.jfree.chart.api.LengthAdjustmentType;
 
 import org.jfree.chart.event.MarkerChangeEvent;
-import org.jfree.chart.ui.GradientPaintTransformer;
-import org.jfree.chart.ui.LengthAdjustmentType;
-import org.jfree.chart.util.ObjectUtils;
+import org.jfree.chart.util.GradientPaintTransformer;
 
 /**
  * Represents an interval to be highlighted in some way.
@@ -82,8 +82,6 @@ public class IntervalMarker extends Marker implements Cloneable, Serializable {
      * @param start  the lower bound of the interval.
      * @param end  the upper bound of the interval.
      * @param paint  the fill paint ({@code null} not permitted).
-     *
-     * @since 1.0.9
      */
     public IntervalMarker(double start, double end, Paint paint) {
         this(start, end, paint, new BasicStroke(0.5f), null, null, 0.8f);
@@ -126,8 +124,6 @@ public class IntervalMarker extends Marker implements Cloneable, Serializable {
      * {@link MarkerChangeEvent} to all registered listeners.
      *
      * @param value  the value.
-     *
-     * @since 1.0.3
      */
     public void setStartValue(double value) {
         this.startValue = value;
@@ -148,8 +144,6 @@ public class IntervalMarker extends Marker implements Cloneable, Serializable {
      * {@link MarkerChangeEvent} to all registered listeners.
      *
      * @param value  the value.
-     *
-     * @since 1.0.3
      */
     public void setEndValue(double value) {
         this.endValue = value;
@@ -202,8 +196,7 @@ public class IntervalMarker extends Marker implements Cloneable, Serializable {
         if (this.endValue != that.endValue) {
             return false;
         }
-        if (!ObjectUtils.equal(this.gradientPaintTransformer,
-                that.gradientPaintTransformer)) {
+        if (!Objects.equals(this.gradientPaintTransformer, that.gradientPaintTransformer)) {
             return false;
         }
         return true;

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,23 +27,19 @@
  * ---------------
  * MarkerTest.java
  * ---------------
- * (C) Copyright 2006-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 05-Sep-2006 : Version 1 (DG);
  *
  */
 
 package org.jfree.chart.plot;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -53,11 +49,11 @@ import java.util.EventListener;
 
 import org.jfree.chart.event.MarkerChangeEvent;
 import org.jfree.chart.event.MarkerChangeListener;
-import org.jfree.chart.ui.LengthAdjustmentType;
-import org.jfree.chart.ui.RectangleAnchor;
-import org.jfree.chart.ui.RectangleInsets;
-import org.jfree.chart.ui.TextAnchor;
-import org.junit.Test;
+import org.jfree.chart.api.LengthAdjustmentType;
+import org.jfree.chart.api.RectangleAnchor;
+import org.jfree.chart.api.RectangleInsets;
+import org.jfree.chart.text.TextAnchor;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link Marker} class.
@@ -351,7 +347,7 @@ public class MarkerTest implements MarkerChangeListener {
      */
     @Test
     public void testListenersWithCategoryPlot() {
-        CategoryPlot plot = new CategoryPlot();
+        CategoryPlot<String, String> plot = new CategoryPlot<>();
         CategoryMarker marker1 = new CategoryMarker("X");
         ValueMarker marker2 = new ValueMarker(1.0);
         plot.addDomainMarker(marker1);
@@ -375,7 +371,7 @@ public class MarkerTest implements MarkerChangeListener {
      */
     @Test
     public void testListenersWithXYPlot() {
-        XYPlot plot = new XYPlot();
+        XYPlot<String> plot = new XYPlot<>();
         ValueMarker marker1 = new ValueMarker(1.0);
         ValueMarker marker2 = new ValueMarker(2.0);
         plot.addDomainMarker(marker1);

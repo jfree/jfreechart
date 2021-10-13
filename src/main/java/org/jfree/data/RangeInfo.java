@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,22 +27,10 @@
  * --------------
  * RangeInfo.java
  * --------------
- * (C) Copyright 2000-2009, by Object Refinery Limited.
+ * (C) Copyright 2000-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes (from 18-Sep-2001)
- * --------------------------
- * 18-Sep-2001 : Added standard header and fixed DOS encoding problem (DG);
- * 15-Nov-2001 : Moved to package com.jrefinery.data.* (DG);
- *               Updated Javadoc comments (DG);
- * 22-Apr-2002 : Added getValueRange() method (DG);
- * 17-Nov-2004 : Replaced getMinimumRangeValue() --> getRangeLowerBound(),
- *               getMaximumRangeValue() --> getRangeUpperBound(),
- *               getValueRange() --> getRangeBounds().
- * 11-Jan-2005 : Removed deprecated code in preparation for the 1.0.0
- *               release (DG);
  *
  */
 
@@ -62,7 +50,7 @@ public interface RangeInfo {
      *
      * @return The minimum value.
      */
-    public double getRangeLowerBound(boolean includeInterval);
+    double getRangeLowerBound(boolean includeInterval);
 
     /**
      * Returns the maximum y-value in the dataset.
@@ -72,7 +60,7 @@ public interface RangeInfo {
      *
      * @return The maximum value.
      */
-    public double getRangeUpperBound(boolean includeInterval);
+    double getRangeUpperBound(boolean includeInterval);
 
     /**
      * Returns the range of the values in this dataset's range.
@@ -83,6 +71,6 @@ public interface RangeInfo {
      * @return The range (or {@code null} if the dataset contains no
      *     values).
      */
-    public Range getRangeBounds(boolean includeInterval);
+    Range getRangeBounds(boolean includeInterval);
 
 }

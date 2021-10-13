@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * StandardXYItemRenderer.java
  * ---------------------------
- * (C) Copyright 2001-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2001-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Mark Watson (www.markwatson.com);
@@ -56,8 +56,10 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
-import org.jfree.chart.LegendItem;
+import org.jfree.chart.legend.LegendItem;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.event.RendererChangeEvent;
@@ -67,14 +69,14 @@ import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.api.RectangleEdge;
 import org.jfree.chart.urls.XYURLGenerator;
-import org.jfree.chart.util.BooleanList;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.PublicCloneable;
-import org.jfree.chart.util.SerialUtils;
-import org.jfree.chart.util.ShapeUtils;
-import org.jfree.chart.util.UnitType;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.api.PublicCloneable;
+import org.jfree.chart.internal.SerialUtils;
+import org.jfree.chart.internal.ShapeUtils;
+import org.jfree.chart.api.UnitType;
+import org.jfree.chart.internal.CloneUtils;
 import org.jfree.data.xy.XYDataset;
 
 /**
@@ -131,7 +133,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
      * A table of flags that control (per series) whether or not shapes are
      * filled.
      */
-    private BooleanList seriesShapesFilled;
+    private Map<Integer, Boolean> seriesShapesFilledMap;
 
     /** The default value returned by the getShapeFilled() method. */
     private boolean baseShapesFilled;
@@ -209,7 +211,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
             this.plotDiscontinuous = true;
         }
 
-        this.seriesShapesFilled = new BooleanList();
+        this.seriesShapesFilledMap = new HashMap<>();
         this.baseShapesFilled = true;
         this.legendLine = new Line2D.Double(-7.0, 0.0, 7.0, 0.0);
         this.drawSeriesLineAsPath = false;
@@ -261,11 +263,10 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
     public boolean getItemShapeFilled(int series, int item) {
 
         // otherwise look up the paint table
-        Boolean flag = this.seriesShapesFilled.getBoolean(series);
+        Boolean flag = this.seriesShapesFilledMap.get(series);
         if (flag != null) {
             return flag;
-        }
-        else {
+        } else {
             return this.baseShapesFilled;
         }
     }
@@ -279,7 +280,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
      * @return A boolean.
      */
     public Boolean getSeriesShapesFilled(int series) {
-        return this.seriesShapesFilled.getBoolean(series);
+        return this.seriesShapesFilledMap.get(series);
     }
 
     /**
@@ -292,7 +293,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
      * @see #getSeriesShapesFilled(int)
      */
     public void setSeriesShapesFilled(int series, Boolean flag) {
-        this.seriesShapesFilled.setBoolean(series, flag);
+        this.seriesShapesFilledMap.put(series, flag);
         fireChangeEvent();
     }
 
@@ -438,8 +439,6 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
      * registered listeners.
      *
      * @param flag  the new flag value.
-     *
-     * @since 1.0.5
      */
     public void setPlotDiscontinuous(boolean flag) {
         if (this.plotDiscontinuous != flag) {
@@ -889,7 +888,7 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
         if (this.gapThreshold != that.gapThreshold) {
             return false;
         }
-        if (!this.seriesShapesFilled.equals(that.seriesShapesFilled)) {
+        if (!this.seriesShapesFilledMap.equals(that.seriesShapesFilledMap)) {
             return false;
         }
         if (this.baseShapesFilled != that.baseShapesFilled) {
@@ -915,9 +914,8 @@ public class StandardXYItemRenderer extends AbstractXYItemRenderer
     @Override
     public Object clone() throws CloneNotSupportedException {
         StandardXYItemRenderer clone = (StandardXYItemRenderer) super.clone();
-        clone.seriesShapesFilled
-                = (BooleanList) this.seriesShapesFilled.clone();
-        clone.legendLine = ShapeUtils.clone(this.legendLine);
+        clone.seriesShapesFilledMap = new HashMap<>(this.seriesShapesFilledMap);
+        clone.legendLine = CloneUtils.clone(this.legendLine);
         return clone;
     }
 

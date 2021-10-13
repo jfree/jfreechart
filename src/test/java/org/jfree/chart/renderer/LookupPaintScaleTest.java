@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,31 +27,25 @@
  * -------------------------
  * LookupPaintScaleTest.java
  * -------------------------
- * (C) Copyright 2006-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 05-Jul-2006 : Version 1 (DG);
- * 31-Jan-2007 : Additional serialization tests (DG);
- * 07-Mar-2007 : Added new tests (DG);
- * 09-Mar-2007 : Check independence in testCloning() (DG);
  *
  */
 
 package org.jfree.chart.renderer;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.Color;
 import java.awt.GradientPaint;
 
 import org.jfree.chart.TestUtils;
-import org.junit.Test;
+import org.jfree.chart.internal.CloneUtils;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link LookupPaintScale} class.
@@ -87,7 +81,7 @@ public class LookupPaintScaleTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         LookupPaintScale g1 = new LookupPaintScale();
-        LookupPaintScale g2 = (LookupPaintScale) g1.clone();
+        LookupPaintScale g2 = CloneUtils.clone(g1);
         assertTrue(g1 != g2);
         assertTrue(g1.getClass() == g2.getClass());
         assertTrue(g1.equals(g2));
@@ -115,14 +109,14 @@ public class LookupPaintScaleTest {
     @Test
     public void testSerialization() {
         LookupPaintScale g1 = new LookupPaintScale();
-        LookupPaintScale g2 = (LookupPaintScale) TestUtils.serialised(g1);
+        LookupPaintScale g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
 
         g1 = new LookupPaintScale(1.0, 2.0, new GradientPaint(1.0f, 2.0f,
                 Color.RED, 3.0f, 4.0f, Color.YELLOW));
         g1.add(1.5, new GradientPaint(1.1f, 2.2f, Color.RED, 3.3f, 4.4f,
                 Color.BLUE));
-        g2 = (LookupPaintScale) TestUtils.serialised(g1);
+        g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

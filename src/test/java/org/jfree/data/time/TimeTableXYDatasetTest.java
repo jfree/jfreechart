@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,28 +27,24 @@
  * ----------------------------
  * TimeTableXYDatasetTests.java
  * ----------------------------
- * (C) Copyright 2004-2008, by Object Refinery Limited.
+ * (C) Copyright 2004-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Rob Eden;
- *
- * Changes
- * -------
- * 15-Sep-2004 : Version 1 (DG);
- * 25-Jul-2007 : Added test for clear() method, by Rob Eden (DG);
  *
  */
 
 package org.jfree.data.time;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.TimeZone;
 
 import org.jfree.chart.TestUtils;
-import org.junit.Test;
+import org.jfree.chart.internal.CloneUtils;
+import org.junit.jupiter.api.Test;
 
 /**
  * A collection of test cases for the {@link TimeTableXYDataset} class.
@@ -126,7 +122,7 @@ public class TimeTableXYDatasetTest {
 
         TimeTableXYDataset clone = null;
         try {
-            clone = (TimeTableXYDataset) d.clone();
+            clone = CloneUtils.clone(d);
         }
         catch (CloneNotSupportedException e) {
             assertTrue(false);
@@ -145,8 +141,7 @@ public class TimeTableXYDatasetTest {
     public void testSerialization() {
         TimeTableXYDataset d1 = new TimeTableXYDataset();
         d1.add(new Year(1999), 123.4, "S1");
-        TimeTableXYDataset d2 = (TimeTableXYDataset) 
-                TestUtils.serialised(d1);
+        TimeTableXYDataset d2 = TestUtils.serialised(d1);
         assertTrue(d1.equals(d2));
     }
 

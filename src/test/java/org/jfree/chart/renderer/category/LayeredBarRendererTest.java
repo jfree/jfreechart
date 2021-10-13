@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * LayeredBarRendererTest.java
  * ---------------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -36,18 +36,21 @@
 
 package org.jfree.chart.renderer.category;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import java.awt.Color;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.CategoryPlot;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.api.PublicCloneable;
 import org.jfree.data.category.DefaultCategoryDataset;
-import org.junit.Test;
+import org.jfree.chart.internal.CloneUtils;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link LayeredBarRenderer} class.
@@ -62,6 +65,17 @@ public class LayeredBarRendererTest {
         LayeredBarRenderer r1 = new LayeredBarRenderer();
         LayeredBarRenderer r2 = new LayeredBarRenderer();
         assertEquals(r1, r2);
+        
+        r1.setSeriesBarWidth(1, 10.0);
+        assertNotEquals(r1, r2);
+        r2.setSeriesBarWidth(1, 10.0);
+        assertEquals(r1, r2);
+        
+        // try an inherited attribute 
+        r1.setBase(3.0);
+        assertNotEquals(r1, r2);
+        r2.setBase(3.0);
+        assertEquals(r1, r2);        
     }
 
     /**
@@ -79,14 +93,17 @@ public class LayeredBarRendererTest {
 
     /**
      * Confirm that cloning works.
+     * 
+     * @throws CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
         LayeredBarRenderer r1 = new LayeredBarRenderer();
-        LayeredBarRenderer r2 = (LayeredBarRenderer) r1.clone();
+        LayeredBarRenderer r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
+        TestUtils.checkIndependence(r1, r2);
     }
 
     /**
@@ -104,8 +121,11 @@ public class LayeredBarRendererTest {
     @Test
     public void testSerialization() {
         LayeredBarRenderer r1 = new LayeredBarRenderer();
-        LayeredBarRenderer r2 = (LayeredBarRenderer) TestUtils.serialised(r1);
+        r1.setDefaultFillPaint(Color.RED);
+        r1.setSeriesBarWidth(1, 9.0);
+        LayeredBarRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
+        TestUtils.checkIndependence(r1, r2);
     }
 
     /**
@@ -117,7 +137,7 @@ public class LayeredBarRendererTest {
         try {
             DefaultCategoryDataset<String, String> dataset = new DefaultCategoryDataset<>();
             dataset.addValue(1.0, "S1", "C1");
-            CategoryPlot plot = new CategoryPlot(dataset,
+            CategoryPlot<String, String> plot = new CategoryPlot<>(dataset,
                     new CategoryAxis("Category"), new NumberAxis("Value"),
                     new LayeredBarRenderer());
             JFreeChart chart = new JFreeChart(plot);

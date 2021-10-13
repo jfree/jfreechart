@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------------
  * BoxAndWhiskerRenderer.java
  * --------------------------
- * (C) Copyright 2003-2017, by David Browning and Contributors.
+ * (C) Copyright 2003-2021, by David Browning and Contributors.
  *
  * Original Author:  David Browning (for the Australian Institute of Marine
  *                   Science);
@@ -38,54 +38,6 @@
  *                   Martin Krauskopf (patch 3421088);
  *                   Martin Hoeller;
  *                   John Matthews;
- *
- * Changes
- * -------
- * 21-Aug-2003 : Version 1, contributed by David Browning (for the Australian
- *               Institute of Marine Science);
- * 01-Sep-2003 : Incorporated outlier and farout symbols for low values
- *               also (DG);
- * 08-Sep-2003 : Changed ValueAxis API (DG);
- * 16-Sep-2003 : Changed ChartRenderingInfo --> PlotRenderingInfo (DG);
- * 07-Oct-2003 : Added renderer state (DG);
- * 12-Nov-2003 : Fixed casting bug reported by Tim Bardzil (DG);
- * 13-Nov-2003 : Added drawHorizontalItem() method contributed by Tim
- *               Bardzil (DG);
- * 25-Apr-2004 : Added fillBox attribute, equals() method and added
- *               serialization code (DG);
- * 29-Apr-2004 : Changed drawing of upper and lower shadows - see bug report
- *               944011 (DG);
- * 05-Nov-2004 : Modified drawItem() signature (DG);
- * 09-Mar-2005 : Override getLegendItem() method so that legend item shapes
- *               are shown as blocks (DG);
- * 20-Apr-2005 : Generate legend labels, tooltips and URLs (DG);
- * 09-Jun-2005 : Updated equals() to handle GradientPaint (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 12-Oct-2006 : Source reformatting and API doc updates (DG);
- * 12-Oct-2006 : Fixed bug 1572478, potential NullPointerException (DG);
- * 05-Feb-2006 : Added event notifications to a couple of methods (DG);
- * 20-Apr-2007 : Updated getLegendItem() for renderer change (DG);
- * 11-May-2007 : Added check for visibility in getLegendItem() (DG);
- * 17-May-2007 : Set datasetIndex and seriesIndex in getLegendItem() (DG);
- * 18-May-2007 : Set dataset and seriesKey for LegendItem (DG);
- * 03-Jan-2008 : Check visibility of average marker before drawing it (DG);
- * 15-Jan-2008 : Add getMaximumBarWidth() and setMaximumBarWidth()
- *               methods (RVdS);
- * 14-Feb-2008 : Fix bar position for horizontal chart, see patch
- *               1888422 (RVdS);
- * 27-Mar-2008 : Boxes should use outlinePaint/Stroke settings (DG);
- * 17-Jun-2008 : Apply legend shape, font and paint attributes (DG);
- * 02-Oct-2008 : Check item visibility in drawItem() method (DG);
- * 21-Jan-2009 : Added flags to control visibility of mean and median
- *               indicators (DG);
- * 28-Sep-2009 : Added fireChangeEvent() to setMedianVisible (DG);
- * 28-Sep-2009 : Added useOutlinePaintForWhiskers flag, see patch 2868585
- *               by Peter Becker (DG);
- * 28-Sep-2009 : Added whiskerWidth attribute, see patch 2868608 by Peter
- *               Becker (DG);
- * 11-Oct-2011 : applied patch #3421088 from Martin Krauskopf to fix bug (MH);
- * 03-Jul-2013 : Use ParamChecks (DG);
- * 18-Jul-2016 : Fix drawing issue with horizontal orientation (JM);
  *
  */
 
@@ -109,7 +61,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import org.jfree.chart.LegendItem;
+import org.jfree.chart.legend.LegendItem;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
@@ -120,11 +72,11 @@ import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.renderer.Outlier;
 import org.jfree.chart.renderer.OutlierList;
 import org.jfree.chart.renderer.OutlierListCollection;
-import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.PublicCloneable;
-import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.api.RectangleEdge;
+import org.jfree.chart.internal.PaintUtils;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.api.PublicCloneable;
+import org.jfree.chart.internal.SerialUtils;
 import org.jfree.data.Range;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.statistics.BoxAndWhiskerCategoryDataset;
@@ -136,7 +88,7 @@ import org.jfree.data.statistics.BoxAndWhiskerCategoryDataset;
  * by the {@code BoxAndWhiskerChartDemo1.java} program included in the
  * JFreeChart Demo Collection:
  * <br><br>
- * <img src="../../../../../images/BoxAndWhiskerRendererSample.png"
+ * <img src="doc-files/BoxAndWhiskerRendererSample.png"
  * alt="BoxAndWhiskerRendererSample.png">
  */
 public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
@@ -162,31 +114,33 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
 
     /**
      * A flag that controls whether or not the median indicator is drawn.
-     * 
-     * @since 1.0.13
      */
     private boolean medianVisible;
 
     /**
      * A flag that controls whether or not the mean indicator is drawn.
-     *
-     * @since 1.0.13
      */
     private boolean meanVisible;
+
+    /**
+     * A flag that controls whether or not the maxOutlier is visible.
+     */
+    private boolean maxOutlierVisible;
+
+    /**
+     * A flag that controls whether or not the minOutlier is visible.
+     */
+    private boolean minOutlierVisible;
 
     /**
      * A flag that, if {@code true}, causes the whiskers to be drawn
      * using the outline paint for the series.  The default value is
      * {@code false} and in that case the regular series paint is used.
-     *
-     * @since 1.0.14
      */
     private boolean useOutlinePaintForWhiskers;
 
     /**
      * The width of the whiskers as fraction of the bar width.
-     *
-     * @since 1.0.14
      */
     private double whiskerWidth;
 
@@ -200,6 +154,8 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
         this.maximumBarWidth = 1.0;
         this.medianVisible = true;
         this.meanVisible = true;
+        this.minOutlierVisible = true;
+        this.maxOutlierVisible = true;
         this.useOutlinePaintForWhiskers = false;
         this.whiskerWidth = 1.0;
         setDefaultLegendShape(new Rectangle2D.Double(-4.0, -4.0, 8.0, 8.0));
@@ -287,8 +243,6 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      * @return The maximum bar width.
      *
      * @see #setMaximumBarWidth(double)
-     *
-     * @since 1.0.10
      */
     public double getMaximumBarWidth() {
         return this.maximumBarWidth;
@@ -303,8 +257,6 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      *     percent).
      *
      * @see #getMaximumBarWidth()
-     *
-     * @since 1.0.10
      */
     public void setMaximumBarWidth(double percent) {
         this.maximumBarWidth = percent;
@@ -318,8 +270,6 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      * @return A boolean.
      *
      * @see #setMeanVisible(boolean)
-     *
-     * @since 1.0.13
      */
     public boolean isMeanVisible() {
         return this.meanVisible;
@@ -333,8 +283,6 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      * @param visible  the new flag value.
      *
      * @see #isMeanVisible()
-     *
-     * @since 1.0.13
      */
     public void setMeanVisible(boolean visible) {
         if (this.meanVisible == visible) {
@@ -351,8 +299,6 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      * @return A boolean.
      *
      * @see #setMedianVisible(boolean)
-     *
-     * @since 1.0.13
      */
     public boolean isMedianVisible() {
         return this.medianVisible;
@@ -366,8 +312,6 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      * @param visible  the new flag value.
      *
      * @see #isMedianVisible()
-     *
-     * @since 1.0.13
      */
     public void setMedianVisible(boolean visible) {
         if (this.medianVisible == visible) {
@@ -378,12 +322,76 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
     }
 
     /**
+     * Returns the flag that controls whether or not the minimum outlier is
+     * draw for each item.
+     *
+     * @return A boolean.
+     *
+     * @see #setMinOutlierVisible(boolean)
+     *
+     * @since 1.5.2
+     */
+    public boolean isMinOutlierVisible() {
+        return this.minOutlierVisible;
+    }
+
+    /**
+     * Sets the flag that controls whether or not the minimum outlier is drawn
+     * for each item, and sends a {@link RendererChangeEvent} to all
+     * registered listeners.
+     *
+     * @param visible  the new flag value.
+     *
+     * @see #isMinOutlierVisible()
+     *
+     * @since 1.5.2
+     */
+    public void setMinOutlierVisible(boolean visible) {
+        if (this.minOutlierVisible == visible) {
+            return;
+        }
+        this.minOutlierVisible = visible;
+        fireChangeEvent();
+    }
+
+    /**
+     * Returns the flag that controls whether or not the maximum outlier is
+     * draw for each item.
+     *
+     * @return A boolean.
+     *
+     * @see #setMaxOutlierVisible(boolean)
+     *
+     * @since 1.5.2
+     */
+    public boolean isMaxOutlierVisible() {
+        return this.maxOutlierVisible;
+    }
+
+    /**
+     * Sets the flag that controls whether or not the maximum outlier is drawn
+     * for each item, and sends a {@link RendererChangeEvent} to all
+     * registered listeners.
+     *
+     * @param visible  the new flag value.
+     *
+     * @see #isMaxOutlierVisible()
+     *
+     * @since 1.5.2
+     */
+    public void setMaxOutlierVisible(boolean visible) {
+        if (this.maxOutlierVisible == visible) {
+            return;
+        }
+        this.maxOutlierVisible = visible;
+        fireChangeEvent();
+    }
+
+    /**
      * Returns the flag that, if {@code true}, causes the whiskers to
      * be drawn using the series outline paint.
      *
      * @return A boolean.
-     *
-     * @since 1.0.14
      */
     public boolean getUseOutlinePaintForWhiskers() {
         return this.useOutlinePaintForWhiskers;
@@ -395,8 +403,6 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param flag  the new flag value.
-     *
-     * @since 1.0.14
      */
     public void setUseOutlinePaintForWhiskers(boolean flag) {
         if (this.useOutlinePaintForWhiskers == flag) {
@@ -412,8 +418,6 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      * @return The width of the whiskers.
      *
      * @see #setWhiskerWidth(double)
-     *
-     * @since 1.0.14
      */
     public double getWhiskerWidth() {
         return this.whiskerWidth;
@@ -427,8 +431,6 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
      *     whisker is supposed to be compared to the bar.
      * @see #getWhiskerWidth()
      * @see CategoryItemRendererState#getBarWidth()
-     *
-     * @since 1.0.14
      */
     public void setWhiskerWidth(double width) {
         if (width < 0 || width > 1) {
@@ -557,8 +559,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
             if ((rows * columns) > 0) {
                 state.setBarWidth(Math.min(used / (dataset.getColumnCount()
                         * dataset.getRowCount()), maxWidth));
-            }
-            else {
+            } else {
                 state.setBarWidth(Math.min(used, maxWidth));
             }
         }
@@ -603,8 +604,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
         if (orientation == PlotOrientation.HORIZONTAL) {
             drawHorizontalItem(g2, state, dataArea, plot, domainAxis,
                     rangeAxis, dataset, row, column);
-        }
-        else if (orientation == PlotOrientation.VERTICAL) {
+        } else if (orientation == PlotOrientation.VERTICAL) {
             drawVerticalItem(g2, state, dataArea, plot, domainAxis,
                     rangeAxis, dataset, row, column);
         }
@@ -654,8 +654,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
             // than the category width
             double offset = (categoryWidth - usedWidth) / 2;
             yy = yy + offset + (row * (state.getBarWidth() + seriesGap));
-        }
-        else {
+        } else {
             // offset the start of the box if the box width is smaller than
             // the category width
             double offset = (categoryWidth - state.getBarWidth()) / 2;
@@ -919,17 +918,14 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
                 Number maxRegular = bawDataset.getMaxRegularValue(row, column);
                 if (outlier > maxOutlier.doubleValue()) {
                     outlierListCollection.setHighFarOut(true);
-                }
-                else if (outlier < minOutlier.doubleValue()) {
+                } else if (outlier < minOutlier.doubleValue()) {
                     outlierListCollection.setLowFarOut(true);
-                }
-                else if (outlier > maxRegular.doubleValue()) {
+                } else if (outlier > maxRegular.doubleValue()) {
                     yyOutlier = rangeAxis.valueToJava2D(outlier, dataArea,
                             location);
                     outliers.add(new Outlier(xx + state.getBarWidth() / 2.0,
                             yyOutlier, oRadius));
-                }
-                else if (outlier < minRegular.doubleValue()) {
+                } else if (outlier < minRegular.doubleValue()) {
                     yyOutlier = rangeAxis.valueToJava2D(outlier, dataArea,
                             location);
                     outliers.add(new Outlier(xx + state.getBarWidth() / 2.0,
@@ -954,19 +950,18 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
                 if (list.isMultiple()) {
                     drawMultipleEllipse(point, state.getBarWidth(), oRadius,
                             g2);
-                }
-                else {
+                } else {
                     drawEllipse(point, oRadius, g2);
                 }
             }
 
             // draw farout indicators
-            if (outlierListCollection.isHighFarOut()) {
+            if (isMaxOutlierVisible() && outlierListCollection.isHighFarOut()) {
                 drawHighFarOut(aRadius / 2.0, g2,
                         xx + state.getBarWidth() / 2.0, maxAxisValue);
             }
 
-            if (outlierListCollection.isLowFarOut()) {
+            if (isMinOutlierVisible() && outlierListCollection.isLowFarOut()) {
                 drawLowFarOut(aRadius / 2.0, g2,
                         xx + state.getBarWidth() / 2.0, minAxisValue);
             }
@@ -1074,6 +1069,12 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
             return false;
         }
         if (this.medianVisible != that.medianVisible) {
+            return false;
+        }
+        if (this.minOutlierVisible != that.minOutlierVisible) {
+            return false;
+        }
+        if (this.maxOutlierVisible != that.maxOutlierVisible) {
             return false;
         }
         if (this.useOutlinePaintForWhiskers

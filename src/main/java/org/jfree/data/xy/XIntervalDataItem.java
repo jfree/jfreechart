@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------
  * XIntervalDataItem.java
  * ----------------------
- * (C) Copyright 2006-2008, by Object Refinery Limited.
+ * (C) Copyright 2006-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -44,8 +44,6 @@ import org.jfree.data.ComparableObjectItem;
 
 /**
  * An item representing data in the form (x, x-low, x-high, y).
- *
- * @since 1.0.3
  */
 public class XIntervalDataItem extends ComparableObjectItem {
 
@@ -58,7 +56,7 @@ public class XIntervalDataItem extends ComparableObjectItem {
      * @param y  the y-value.
      */
     public XIntervalDataItem(double x, double xLow, double xHigh, double y) {
-        super(new Double(x), new YWithXInterval(y, xLow, xHigh));
+        super(Double.valueOf(x), new YWithXInterval(y, xLow, xHigh));
     }
 
     /**
@@ -79,8 +77,7 @@ public class XIntervalDataItem extends ComparableObjectItem {
         YWithXInterval interval = (YWithXInterval) getObject();
         if (interval != null) {
             return interval.getY();
-        }
-        else {
+        } else {
             return Double.NaN;
         }
     }
@@ -94,8 +91,7 @@ public class XIntervalDataItem extends ComparableObjectItem {
         YWithXInterval interval = (YWithXInterval) getObject();
         if (interval != null) {
             return interval.getXLow();
-        }
-        else {
+        } else {
             return Double.NaN;
         }
     }
@@ -109,8 +105,7 @@ public class XIntervalDataItem extends ComparableObjectItem {
         YWithXInterval interval = (YWithXInterval) getObject();
         if (interval != null) {
             return interval.getXHigh();
-        }
-        else {
+        } else {
             return Double.NaN;
         }
     }

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------
  * XYDataItem.java
  * ---------------
- * (C) Copyright 2003-2020, by Object Refinery Limited.
+ * (C) Copyright 2003-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -37,8 +37,9 @@
 package org.jfree.data.xy;
 
 import java.io.Serializable;
-import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.Args;
+import java.util.Objects;
+
+import org.jfree.chart.internal.Args;
 
 /**
  * Represents one (x, y) data item for an {@link XYSeries}.  Note that
@@ -93,8 +94,6 @@ public class XYDataItem implements Cloneable, Comparable<XYDataItem>, Serializab
      *
      * @see #getX()
      * @see #getYValue()
-     *
-     * @since 1.0.9
      */
     public double getXValue() {
         // this.x is not allowed to be null...
@@ -117,8 +116,6 @@ public class XYDataItem implements Cloneable, Comparable<XYDataItem>, Serializab
      *
      * @see #getY()
      * @see #getXValue()
-     *
-     * @since 1.0.9
      */
     public double getYValue() {
         double result = Double.NaN;
@@ -213,7 +210,7 @@ public class XYDataItem implements Cloneable, Comparable<XYDataItem>, Serializab
         if (!this.x.equals(that.x)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.y, that.y)) {
+        if (!Objects.equals(this.y, that.y)) {
             return false;
         }
         return true;

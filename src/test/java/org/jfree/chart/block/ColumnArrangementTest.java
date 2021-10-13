@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,28 +27,24 @@
  * --------------------------
  * ColumnArrangementTest.java
  * --------------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 04-Feb-2005 : Version 1 (DG);
  *
  */
 
 package org.jfree.chart.block;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.jfree.chart.TestUtils;
-import org.jfree.chart.ui.HorizontalAlignment;
-import org.jfree.chart.ui.VerticalAlignment;
+import org.jfree.chart.api.HorizontalAlignment;
+import org.jfree.chart.api.VerticalAlignment;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link ColumnArrangement} class.
@@ -101,7 +97,7 @@ public class ColumnArrangementTest {
      */
     @Test
     public void testCloning() {
-        FlowArrangement f1 = new FlowArrangement();
+        ColumnArrangement f1 = new ColumnArrangement();
         assertFalse(f1 instanceof Cloneable);
     }
 
@@ -110,10 +106,10 @@ public class ColumnArrangementTest {
      */
     @Test
     public void testSerialization() {
-        FlowArrangement f1 = new FlowArrangement(HorizontalAlignment.LEFT,
+        ColumnArrangement c1 = new ColumnArrangement(HorizontalAlignment.LEFT,
                 VerticalAlignment.TOP, 1.0, 2.0);
-        FlowArrangement f2 = (FlowArrangement) TestUtils.serialised(f1);
-        assertEquals(f1, f2);
+        ColumnArrangement c2 = TestUtils.serialised(c1);
+        assertEquals(c1, c2);
     }
 
 }

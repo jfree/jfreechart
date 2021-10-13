@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,29 +27,10 @@
  * ------------------
  * XYDotRenderer.java
  * ------------------
- * (C) Copyright 2002-2017, by Object Refinery Limited.
+ * (C) Copyright 2002-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Christian W. Zuckschwerdt;
- *
- * Changes (from 29-Oct-2002)
- * --------------------------
- * 29-Oct-2002 : Added standard header (DG);
- * 25-Mar-2003 : Implemented Serializable (DG);
- * 01-May-2003 : Modified drawItem() method signature (DG);
- * 30-Jul-2003 : Modified entity constructor (CZ);
- * 20-Aug-2003 : Implemented Cloneable and PublicCloneable (DG);
- * 16-Sep-2003 : Changed ChartRenderingInfo --> PlotRenderingInfo (DG);
- * 25-Feb-2004 : Replaced CrosshairInfo with CrosshairState (DG);
- * 19-Jan-2005 : Now uses only primitives from dataset (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 10-Jul-2006 : Added dotWidth and dotHeight attributes (DG);
- * 06-Feb-2007 : Fixed bug 1086307, crosshairs with multiple axes (DG);
- * 09-Nov-2007 : Added legend shape attribute, plus override for
- *               getLegendItem() (DG);
- * 17-Jun-2008 : Apply legend shape, font and paint attributes (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
- * 18-Feb-2017 : Updates for crosshairs (bug #36) (DG);
  *
  */
 
@@ -63,18 +44,18 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import org.jfree.chart.LegendItem;
+import org.jfree.chart.legend.LegendItem;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.plot.CrosshairState;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.PublicCloneable;
-import org.jfree.chart.util.SerialUtils;
-import org.jfree.chart.util.ShapeUtils;
+import org.jfree.chart.api.RectangleEdge;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.api.PublicCloneable;
+import org.jfree.chart.internal.SerialUtils;
+import org.jfree.chart.internal.ShapeUtils;
 import org.jfree.data.xy.XYDataset;
 
 /**
@@ -83,8 +64,7 @@ import org.jfree.data.xy.XYDataset;
  * {@code ScatterPlotDemo4.java} program included in the JFreeChart
  * demo collection:
  * <br><br>
- * <img src="../../../../../images/XYDotRendererSample.png"
- * alt="XYDotRendererSample.png">
+ * <img src="doc-files/XYDotRendererSample.png" alt="XYDotRendererSample.png">
  */
 public class XYDotRenderer extends AbstractXYItemRenderer
         implements XYItemRenderer, PublicCloneable {
@@ -100,8 +80,6 @@ public class XYDotRenderer extends AbstractXYItemRenderer
 
     /**
      * The shape that is used to represent an item in the legend.
-     *
-     * @since 1.0.7
      */
     private transient Shape legendShape;
 
@@ -120,7 +98,6 @@ public class XYDotRenderer extends AbstractXYItemRenderer
      *
      * @return The dot width.
      *
-     * @since 1.0.2
      * @see #setDotWidth(int)
      */
     public int getDotWidth() {
@@ -135,7 +112,6 @@ public class XYDotRenderer extends AbstractXYItemRenderer
      *
      * @throws IllegalArgumentException if {@code w} is less than one.
      *
-     * @since 1.0.2
      * @see #getDotWidth()
      */
     public void setDotWidth(int w) {
@@ -151,7 +127,6 @@ public class XYDotRenderer extends AbstractXYItemRenderer
      *
      * @return The dot height.
      *
-     * @since 1.0.2
      * @see #setDotHeight(int)
      */
     public int getDotHeight() {
@@ -166,7 +141,6 @@ public class XYDotRenderer extends AbstractXYItemRenderer
      *
      * @throws IllegalArgumentException if {@code h} is less than one.
      *
-     * @since 1.0.2
      * @see #getDotHeight()
      */
     public void setDotHeight(int h) {
@@ -183,8 +157,6 @@ public class XYDotRenderer extends AbstractXYItemRenderer
      * @return The legend shape (never {@code null}).
      *
      * @see #setLegendShape(Shape)
-     *
-     * @since 1.0.7
      */
     public Shape getLegendShape() {
         return this.legendShape;
@@ -197,8 +169,6 @@ public class XYDotRenderer extends AbstractXYItemRenderer
      * @param shape  the shape ({@code null} not permitted).
      *
      * @see #getLegendShape()
-     *
-     * @since 1.0.7
      */
     public void setLegendShape(Shape shape) {
         Args.nullNotPermitted(shape, "shape");

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,19 +27,10 @@
  * ----------------
  * ValueMarker.java
  * ----------------
- * (C) Copyright 2004-2008, by Object Refinery Limited.
+ * (C) Copyright 2004-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 09-Feb-2004 : Version 1 (DG);
- * 16-Feb-2005 : Added new constructor (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 05-Sep-2006 : Added setValue() method (DG);
- * 08-Oct-2007 : Fixed bug 1808376, constructor calling super with incorrect
- *               values (DG);
  *
  */
 
@@ -114,8 +105,6 @@ public class ValueMarker extends Marker {
      * @param value  the value.
      *
      * @see #getValue()
-     *
-     * @since 1.0.3
      */
     public void setValue(double value) {
         this.value = value;

@@ -36,16 +36,16 @@
 
 package org.jfree.data.xy;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.jfree.chart.TestUtils;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.api.PublicCloneable;
 
 import org.jfree.data.time.Day;
 import org.jfree.data.time.RegularTimePeriod;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link DefaultWindDataset}.
@@ -103,12 +103,12 @@ public class DefaultWindDatasetTest {
     @Test
     public void testSerialization() {
         DefaultWindDataset d1 = new DefaultWindDataset();
-        DefaultWindDataset d2 = (DefaultWindDataset) TestUtils.serialised(d1);
+        DefaultWindDataset d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
 
         // try a dataset with some content...
         d1 = createSampleDataset1();
-        d2 = (DefaultWindDataset) TestUtils.serialised(d1);
+        d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 

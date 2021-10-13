@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * --------------------------------
  * TestIntervalCategoryDataset.java
  * --------------------------------
- * (C) Copyright 2009-2016, by Object Refinery Limited.
+ * (C) Copyright 2009-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 10-Sep-2009 : Version 1, based on DefaultCategoryDataset (DG);
  *
  */
 
@@ -42,7 +38,8 @@ package org.jfree.data.general;
 
 import java.io.Serializable;
 import java.util.List;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.internal.CloneUtils;
+import org.jfree.chart.api.PublicCloneable;
 
 import org.jfree.data.KeyedObjects2D;
 import org.jfree.data.UnknownKeyException;
@@ -50,20 +47,21 @@ import org.jfree.data.category.IntervalCategoryDataset;
 /**
  * A test implementation of the {@link IntervalCategoryDataset} interface.
  */
-public class TestIntervalCategoryDataset extends AbstractDataset
-        implements IntervalCategoryDataset, PublicCloneable, Serializable {
+public class TestIntervalCategoryDataset<R extends Comparable<R>, 
+        C extends Comparable<C>>  extends AbstractDataset
+        implements IntervalCategoryDataset<R, C>, PublicCloneable, Serializable {
 
     /** For serialization. */
     private static final long serialVersionUID = -8168173757291644622L;
 
     /** A storage structure for the data. */
-    private KeyedObjects2D data;
+    private KeyedObjects2D<R, C> data;
 
     /**
      * Creates a new (empty) dataset.
      */
     public TestIntervalCategoryDataset() {
-        this.data = new KeyedObjects2D();
+        this.data = new KeyedObjects2D<>();
     }
 
     /**
@@ -123,7 +121,7 @@ public class TestIntervalCategoryDataset extends AbstractDataset
      * @see #getColumnKey(int)
      */
     @Override
-    public Comparable getRowKey(int row) {
+    public R getRowKey(int row) {
         return this.data.getRowKey(row);
     }
 
@@ -137,7 +135,7 @@ public class TestIntervalCategoryDataset extends AbstractDataset
      * @see #getRowKey(int)
      */
     @Override
-    public int getRowIndex(Comparable key) {
+    public int getRowIndex(R key) {
         // defer null argument check
         return this.data.getRowIndex(key);
     }
@@ -150,7 +148,7 @@ public class TestIntervalCategoryDataset extends AbstractDataset
      * @see #getRowKey(int)
      */
     @Override
-    public List getRowKeys() {
+    public List<R> getRowKeys() {
         return this.data.getRowKeys();
     }
 
@@ -164,7 +162,7 @@ public class TestIntervalCategoryDataset extends AbstractDataset
      * @see #getColumnIndex(Comparable)
      */
     @Override
-    public Comparable getColumnKey(int column) {
+    public C getColumnKey(int column) {
         return this.data.getColumnKey(column);
     }
 
@@ -178,7 +176,7 @@ public class TestIntervalCategoryDataset extends AbstractDataset
      * @see #getColumnKey(int)
      */
     @Override
-    public int getColumnIndex(Comparable key) {
+    public int getColumnIndex(C key) {
         // defer null argument check
         return this.data.getColumnIndex(key);
     }
@@ -191,7 +189,7 @@ public class TestIntervalCategoryDataset extends AbstractDataset
      * @see #getColumnKey(int)
      */
     @Override
-    public List getColumnKeys() {
+    public List<C> getColumnKeys() {
         return this.data.getColumnKeys();
     }
 
@@ -208,7 +206,7 @@ public class TestIntervalCategoryDataset extends AbstractDataset
      * @see #addValue(Number, Comparable, Comparable)
      */
     @Override
-    public Number getValue(Comparable rowKey, Comparable columnKey) {
+    public Number getValue(R rowKey, C columnKey) {
         IntervalDataItem item = (IntervalDataItem) this.data.getObject(rowKey,
                 columnKey);
         if (item == null) {
@@ -228,7 +226,7 @@ public class TestIntervalCategoryDataset extends AbstractDataset
      * @see #removeValue(Comparable, Comparable)
      */
     public void addItem(Number value, Number lower, Number upper,
-            Comparable rowKey, Comparable columnKey) {
+            R rowKey, C columnKey) {
         IntervalDataItem item = new IntervalDataItem(value, lower, upper);
         this.data.addObject(item, rowKey, columnKey);
         fireDatasetChanged();
@@ -244,8 +242,8 @@ public class TestIntervalCategoryDataset extends AbstractDataset
      * @see #getValue(Comparable, Comparable)
      */
     public void addItem(double value, double lower, double upper,
-            Comparable rowKey, Comparable columnKey) {
-        addItem(new Double(value), new Double(lower), new Double(upper),
+            R rowKey, C columnKey) {
+        addItem(Double.valueOf(value), Double.valueOf(lower), Double.valueOf(upper),
                 rowKey, columnKey);
     }
 
@@ -260,7 +258,7 @@ public class TestIntervalCategoryDataset extends AbstractDataset
      * @see #getValue(Comparable, Comparable)
      */
     public void setItem(Number value, Number lower, Number upper,
-            Comparable rowKey, Comparable columnKey) {
+            R rowKey, C columnKey) {
         IntervalDataItem item = new IntervalDataItem(value, lower, upper);
         this.data.addObject(item, rowKey, columnKey);
         fireDatasetChanged();
@@ -277,8 +275,8 @@ public class TestIntervalCategoryDataset extends AbstractDataset
      * @see #getValue(Comparable, Comparable)
      */
     public void setItem(double value, double lower, double upper,
-            Comparable rowKey, Comparable columnKey) {
-        setItem(new Double(value), new Double(lower), new Double(upper),
+            R rowKey, C columnKey) {
+        setItem(Double.valueOf(value), Double.valueOf(lower), Double.valueOf(upper),
                 rowKey, columnKey);
     }
 
@@ -291,7 +289,7 @@ public class TestIntervalCategoryDataset extends AbstractDataset
      *
      * @see #addValue(Number, Comparable, Comparable)
      */
-    public void removeItem(Comparable rowKey, Comparable columnKey) {
+    public void removeItem(R rowKey, C columnKey) {
         this.data.removeObject(rowKey, columnKey);
         fireDatasetChanged();
     }
@@ -317,7 +315,7 @@ public class TestIntervalCategoryDataset extends AbstractDataset
      *
      * @see #removeColumn(Comparable)
      */
-    public void removeRow(Comparable rowKey) {
+    public void removeRow(R rowKey) {
         this.data.removeRow(rowKey);
         fireDatasetChanged();
     }
@@ -346,7 +344,7 @@ public class TestIntervalCategoryDataset extends AbstractDataset
      * @throws UnknownKeyException if {@code columnKey} is not defined
      *         in the dataset.
      */
-    public void removeColumn(Comparable columnKey) {
+    public void removeColumn(C columnKey) {
         this.data.removeColumn(columnKey);
         fireDatasetChanged();
     }
@@ -375,7 +373,7 @@ public class TestIntervalCategoryDataset extends AbstractDataset
         if (!(obj instanceof TestIntervalCategoryDataset)) {
             return false;
         }
-        TestIntervalCategoryDataset that = (TestIntervalCategoryDataset) obj;
+        TestIntervalCategoryDataset<R, C> that = (TestIntervalCategoryDataset) obj;
         if (!getRowKeys().equals(that.getRowKeys())) {
             return false;
         }
@@ -421,9 +419,9 @@ public class TestIntervalCategoryDataset extends AbstractDataset
      */
     @Override
     public Object clone() throws CloneNotSupportedException {
-        TestIntervalCategoryDataset clone = (TestIntervalCategoryDataset)
+        TestIntervalCategoryDataset<R, C> clone = (TestIntervalCategoryDataset)
                 super.clone();
-        clone.data = (KeyedObjects2D) this.data.clone();
+        clone.data = CloneUtils.clone(this.data);
         return clone;
     }
 
@@ -438,7 +436,7 @@ public class TestIntervalCategoryDataset extends AbstractDataset
     }
 
     @Override
-    public Number getStartValue(Comparable series, Comparable category) {
+    public Number getStartValue(R series, C category) {
         IntervalDataItem item = (IntervalDataItem) this.data.getObject(series,
                 category);
         if (item == null) {
@@ -458,7 +456,7 @@ public class TestIntervalCategoryDataset extends AbstractDataset
     }
 
     @Override
-    public Number getEndValue(Comparable series, Comparable category) {
+    public Number getEndValue(R series, C category) {
         IntervalDataItem item = (IntervalDataItem) this.data.getObject(series,
                 category);
         if (item == null) {

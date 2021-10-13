@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,24 +27,18 @@
  * --------------------------
  * XYShapeAnnotationTest.java
  * --------------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 29-Sep-2004 : Version 1 (DG);
- * 07-Jan-2005 : Added hashCode() test (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG);
  *
  */
 
 package org.jfree.chart.annotations;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -52,9 +46,9 @@ import java.awt.GradientPaint;
 import java.awt.geom.Rectangle2D;
 
 import org.jfree.chart.TestUtils;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.api.PublicCloneable;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Some tests for the {@link XYShapeAnnotation} class.
@@ -176,7 +170,7 @@ public class XYShapeAnnotationTest {
         XYShapeAnnotation a1 = new XYShapeAnnotation(
                 new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0),
                 new BasicStroke(1.2f), Color.RED, Color.BLUE);
-        XYShapeAnnotation a2 = (XYShapeAnnotation) TestUtils.serialised(a1);
+        XYShapeAnnotation a2 = TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 

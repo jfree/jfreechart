@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,22 +27,18 @@
  * -------------------------------
  * DefaultDrawingSupplierTest.java
  * -------------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 25-Mar-2003 : Version 1 (DG);
  *
  */
 
 package org.jfree.chart.plot;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -52,7 +48,8 @@ import java.awt.Stroke;
 import java.awt.geom.Rectangle2D;
 
 import org.jfree.chart.TestUtils;
-import org.junit.Test;
+import org.jfree.chart.internal.CloneUtils;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link DefaultDrawingSupplier} class.
@@ -172,7 +169,7 @@ public class DefaultDrawingSupplierTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         DefaultDrawingSupplier r1 = new DefaultDrawingSupplier();
-        DefaultDrawingSupplier r2 = (DefaultDrawingSupplier) r1.clone();
+        DefaultDrawingSupplier r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -184,8 +181,7 @@ public class DefaultDrawingSupplierTest {
     @Test
     public void testSerialization() {
         DefaultDrawingSupplier r1 = new DefaultDrawingSupplier();
-        DefaultDrawingSupplier r2 = (DefaultDrawingSupplier) 
-                TestUtils.serialised(r1);
+        DefaultDrawingSupplier r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

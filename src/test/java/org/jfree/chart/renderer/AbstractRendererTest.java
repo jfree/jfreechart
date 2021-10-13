@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * AbstractRendererTest.java
  * -------------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -36,15 +36,15 @@
 
 package org.jfree.chart.renderer;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -68,7 +68,8 @@ import org.jfree.chart.plot.DefaultDrawingSupplier;
 import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
-import org.jfree.chart.ui.TextAnchor;
+import org.jfree.chart.text.TextAnchor;
+import org.jfree.chart.internal.CloneUtils;
 
 /**
  * Tests for the {@link AbstractRenderer} class.
@@ -110,12 +111,18 @@ public class AbstractRendererTest {
         r2.setDefaultSeriesVisibleInLegend(false);
         assertTrue(r1.equals(r2));
 
-        // paintList
+        // seriesPaintMap
         r1.setSeriesPaint(0, new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.WHITE));
         assertFalse(r1.equals(r2));
         r2.setSeriesPaint(0, new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.WHITE));
+        assertTrue(r1.equals(r2));
+
+        // autoPopulateSeriesPaint
+        r1.setAutoPopulateSeriesPaint(!r1.getAutoPopulateSeriesPaint());
+        assertFalse(r1.equals(r2));
+        r2.setAutoPopulateSeriesPaint(r1.getAutoPopulateSeriesPaint());
         assertTrue(r1.equals(r2));
 
         // defaultPaint
@@ -126,7 +133,7 @@ public class AbstractRendererTest {
                 3.0f, 4.0f, Color.RED));
         assertTrue(r1.equals(r2));
 
-        // fillPaintList
+        // seriesFillPaintMap
         r1.setSeriesFillPaint(0, new GradientPaint(1.0f, 2.0f, Color.BLUE,
                 3.0f, 4.0f, Color.RED));
         assertFalse(r1.equals(r2));
@@ -134,6 +141,12 @@ public class AbstractRendererTest {
                 3.0f, 4.0f, Color.RED));
         assertTrue(r1.equals(r2));
 
+        // autoPopulateSeriesFillPaint
+        r1.setAutoPopulateSeriesFillPaint(!r1.getAutoPopulateSeriesFillPaint());
+        assertFalse(r1.equals(r2));
+        r2.setAutoPopulateSeriesFillPaint(r1.getAutoPopulateSeriesFillPaint());
+        assertTrue(r1.equals(r2));
+        
         // defaultFillPaint
         r1.setDefaultFillPaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
                 3.0f, 4.0f, Color.RED));
@@ -142,12 +155,18 @@ public class AbstractRendererTest {
                 3.0f, 4.0f, Color.RED));
         assertTrue(r1.equals(r2));
 
-        // outlinePaintList
+        // outlinePaintMap
         r1.setSeriesOutlinePaint(0, new GradientPaint(1.0f, 2.0f, Color.BLUE,
                 3.0f, 4.0f, Color.RED));
         assertFalse(r1.equals(r2));
         r2.setSeriesOutlinePaint(0, new GradientPaint(1.0f, 2.0f, Color.BLUE,
                 3.0f, 4.0f, Color.RED));
+        assertTrue(r1.equals(r2));
+        
+        // autoPopulateSeriesOutlinePaint
+        r1.setAutoPopulateSeriesOutlinePaint(!r1.getAutoPopulateSeriesOutlinePaint());
+        assertFalse(r1.equals(r2));
+        r2.setAutoPopulateSeriesOutlinePaint(r1.getAutoPopulateSeriesOutlinePaint());
         assertTrue(r1.equals(r2));
 
         // defaultOutlinePaint
@@ -161,36 +180,54 @@ public class AbstractRendererTest {
         // stroke
         Stroke s = new BasicStroke(3.21f);
 
-        // strokeList
+        // strokeMap
         r1.setSeriesStroke(1, s);
         assertFalse(r1.equals(r2));
         r2.setSeriesStroke(1, s);
         assertTrue(r1.equals(r2));
 
+        // autoPopulateSeriesStroke
+        r1.setAutoPopulateSeriesStroke(!r1.getAutoPopulateSeriesStroke());
+        assertFalse(r1.equals(r2));
+        r2.setAutoPopulateSeriesStroke(r1.getAutoPopulateSeriesStroke());
+        assertTrue(r1.equals(r2));
+        
         // defaultStroke
         r1.setDefaultStroke(s);
         assertFalse(r1.equals(r2));
         r2.setDefaultStroke(s);
         assertTrue(r1.equals(r2));
 
-        // outlineStrokeList
+        // outlineStrokeMap
         r1.setSeriesOutlineStroke(0, s);
         assertFalse(r1.equals(r2));
         r2.setSeriesOutlineStroke(0, s);
         assertTrue(r1.equals(r2));
 
+        // autoPopulateSeriesOutlineStroke
+        r1.setAutoPopulateSeriesOutlineStroke(!r1.getAutoPopulateSeriesOutlineStroke());
+        assertFalse(r1.equals(r2));
+        r2.setAutoPopulateSeriesOutlineStroke(r1.getAutoPopulateSeriesOutlineStroke());
+        assertTrue(r1.equals(r2));
+        
         // defaultOutlineStroke
         r1.setDefaultOutlineStroke(s);
         assertFalse(r1.equals(r2));
         r2.setDefaultOutlineStroke(s);
         assertTrue(r1.equals(r2));
 
-        // shapeList
+        // seriesShapeMap
         r1.setSeriesShape(1, new Ellipse2D.Double(1, 2, 3, 4));
         assertFalse(r1.equals(r2));
         r2.setSeriesShape(1, new Ellipse2D.Double(1, 2, 3, 4));
         assertTrue(r1.equals(r2));
 
+        // autoPopulateSeriesShape
+        r1.setAutoPopulateSeriesShape(!r1.getAutoPopulateSeriesShape());
+        assertFalse(r1.equals(r2));
+        r2.setAutoPopulateSeriesShape(r1.getAutoPopulateSeriesShape());
+        assertTrue(r1.equals(r2));
+        
         // defaultShape
         r1.setDefaultShape(new Ellipse2D.Double(1, 2, 3, 4));
         assertFalse(r1.equals(r2));
@@ -377,6 +414,7 @@ public class AbstractRendererTest {
     }
 
     private static class TestRenderer extends XYLineAndShapeRenderer {
+        private static final long serialVersionUID = 1L;    
         @Override
         public void setTreatLegendShapeAsLine(boolean flag) {
             super.setTreatLegendShapeAsLine(flag);
@@ -404,7 +442,6 @@ public class AbstractRendererTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         LineAndShapeRenderer r1 = new LineAndShapeRenderer();
-        Rectangle2D shape = new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0);
         Rectangle2D baseShape = new Rectangle2D.Double(11.0, 12.0, 13.0, 14.0);
         r1.setDefaultShape(baseShape);
         r1.setDefaultLegendShape(new Rectangle(4, 3, 2, 1));
@@ -417,7 +454,7 @@ public class AbstractRendererTest {
         r1.setSeriesNegativeItemLabelPosition(0, new ItemLabelPosition(
                 ItemLabelAnchor.CENTER, TextAnchor.CENTER));
         
-        LineAndShapeRenderer r2 = (LineAndShapeRenderer) r1.clone();
+        LineAndShapeRenderer r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -552,7 +589,7 @@ public class AbstractRendererTest {
         r1.setDefaultPaint(Color.BLUE);
         r1.setDefaultLegendTextPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.BLUE));
-        LineAndShapeRenderer r2 = (LineAndShapeRenderer) r1.clone();
+        LineAndShapeRenderer r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -683,7 +720,7 @@ public class AbstractRendererTest {
         r1.setDefaultLegendTextPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.GREEN));
         r1.setDefaultLegendShape(new Line2D.Double(1.0, 2.0, 3.0, 4.0));
-        BarRenderer r2 = (BarRenderer) TestUtils.serialised(r1);
+        BarRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
         try {
             r2.notifyListeners(new RendererChangeEvent(r2));
@@ -722,7 +759,7 @@ public class AbstractRendererTest {
 
         // now check autoPopulate==true
         r.setAutoPopulateSeriesPaint(true);
-        CategoryPlot plot = new CategoryPlot(null, new CategoryAxis(
+        CategoryPlot<String, String> plot = new CategoryPlot<>(null, new CategoryAxis(
                 "Category"), new NumberAxis("Value"), r);
         assertEquals(DefaultDrawingSupplier.DEFAULT_PAINT_SEQUENCE[0],
                 r.lookupSeriesPaint(0));
@@ -744,8 +781,8 @@ public class AbstractRendererTest {
 
         // now check autoPopulate==true
         r.setAutoPopulateSeriesFillPaint(true);
-        /*CategoryPlot plot =*/ new CategoryPlot(null, new CategoryAxis(
-                "Category"), new NumberAxis("Value"), r);
+        CategoryPlot<String, String> plot = new CategoryPlot<>(null, 
+                new CategoryAxis("Category"), new NumberAxis("Value"), r);
         assertEquals(DefaultDrawingSupplier.DEFAULT_FILL_PAINT_SEQUENCE[0],
                 r.lookupSeriesFillPaint(0));
         assertNotNull(r.getSeriesFillPaint(0));
@@ -766,8 +803,8 @@ public class AbstractRendererTest {
 
         // now check autoPopulate==true
         r.setAutoPopulateSeriesOutlinePaint(true);
-        /*CategoryPlot plot =*/ new CategoryPlot(null, new CategoryAxis(
-                "Category"), new NumberAxis("Value"), r);
+        CategoryPlot<String, String> plot = new CategoryPlot<>(null, 
+                new CategoryAxis("Category"), new NumberAxis("Value"), r);
         assertEquals(DefaultDrawingSupplier.DEFAULT_OUTLINE_PAINT_SEQUENCE[0],
                 r.lookupSeriesOutlinePaint(0));
         assertNotNull(r.getSeriesOutlinePaint(0));

@@ -36,17 +36,18 @@
 
 package org.jfree.data.statistics;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.internal.CloneUtils;
 
 import org.jfree.data.UnknownKeyException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link DefaultMultiValueCategoryDataset} class.
@@ -180,7 +181,7 @@ public class DefaultMultiValueCategoryDatasetTest {
         DefaultMultiValueCategoryDataset<String, String> d1
                 = new DefaultMultiValueCategoryDataset<>();
         DefaultMultiValueCategoryDataset<String, String> d2 
-                = (DefaultMultiValueCategoryDataset<String, String>) TestUtils.serialised(d1);
+                = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 
@@ -223,8 +224,7 @@ public class DefaultMultiValueCategoryDatasetTest {
     public void testCloning() throws CloneNotSupportedException {
         DefaultMultiValueCategoryDataset<String, String> d1
                 = new DefaultMultiValueCategoryDataset<>();
-        DefaultMultiValueCategoryDataset<String, String> d2 
-                = (DefaultMultiValueCategoryDataset<String, String>) d1.clone();
+        DefaultMultiValueCategoryDataset<String, String> d2 = CloneUtils.clone(d1);
         assertTrue(d1 != d2);
         assertTrue(d1.getClass() == d2.getClass());
         assertTrue(d1.equals(d2));
@@ -233,7 +233,7 @@ public class DefaultMultiValueCategoryDatasetTest {
         List<Integer> values = new ArrayList<>();
         values.add(99);
         d1.add(values, "R1", "C1");
-        d2 = (DefaultMultiValueCategoryDataset) d1.clone();
+        d2 = CloneUtils.clone(d1);
         assertTrue(d1 != d2);
         assertTrue(d1.getClass() == d2.getClass());
         assertTrue(d1.equals(d2));

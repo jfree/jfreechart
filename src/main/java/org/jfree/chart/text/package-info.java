@@ -1,4 +1,4 @@
 /**
- * Text-related classes formerly in the JCommon class library.
+ * Text-related classes.
  */
 package org.jfree.chart.text;

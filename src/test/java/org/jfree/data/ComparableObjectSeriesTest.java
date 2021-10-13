@@ -37,24 +37,25 @@
 package org.jfree.data;
 
 import org.jfree.chart.TestUtils;
-import org.junit.Test;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertNull;
+import org.jfree.chart.internal.CloneUtils;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * Tests for the {@link ComparableObjectSeries} class.
  */
 public class ComparableObjectSeriesTest {
 
-    static class MyComparableObjectSeries extends ComparableObjectSeries {
+    static class MyComparableObjectSeries extends ComparableObjectSeries<String> {
         /**
          * Creates a new instance.
          *
          * @param key  the series key.
          */
-        public MyComparableObjectSeries(Comparable<?> key) {
+        public MyComparableObjectSeries(String key) {
             super(key);
         }
         /**
@@ -64,18 +65,18 @@ public class ComparableObjectSeriesTest {
          * @param autoSort  automatically sort by x-value?
          * @param allowDuplicateXValues  allow duplicate values?
          */
-        public MyComparableObjectSeries(Comparable<?> key, boolean autoSort,
+        public MyComparableObjectSeries(String key, boolean autoSort,
                 boolean allowDuplicateXValues) {
             super(key, autoSort, allowDuplicateXValues);
         }
 
         @Override
-        public void add(Comparable x, Object y) {
+        public void add(Comparable<?> x, Object y) {
             super.add(x, y);
         }
 
         @Override
-        public ComparableObjectItem remove(Comparable x) {
+        public ComparableObjectItem remove(Comparable<?> x) {
             return super.remove(x);
         }
     }
@@ -85,7 +86,7 @@ public class ComparableObjectSeriesTest {
      */
     @Test
     public void testConstructor1() {
-        ComparableObjectSeries s1 = new ComparableObjectSeries("s1");
+        ComparableObjectSeries<String> s1 = new ComparableObjectSeries<>("s1");
         assertEquals("s1", s1.getKey());
         assertNull(s1.getDescription());
         assertTrue(s1.getAllowDuplicateXValues());
@@ -96,7 +97,7 @@ public class ComparableObjectSeriesTest {
         // try null key
         boolean pass = false;
         try {
-            /*s1 = */new ComparableObjectSeries(null);
+            /*s1 = */new ComparableObjectSeries<String>(null);
         }
         catch (IllegalArgumentException e) {
             pass = true;
@@ -159,7 +160,7 @@ public class ComparableObjectSeriesTest {
     public void testCloning() throws CloneNotSupportedException {
         MyComparableObjectSeries s1 = new MyComparableObjectSeries("A");
         s1.add(1, "ABC");
-        MyComparableObjectSeries s2 = (MyComparableObjectSeries) s1.clone();
+        MyComparableObjectSeries s2 = CloneUtils.clone(s1);
         assertTrue(s1 != s2);
         assertTrue(s1.getClass() == s2.getClass());
         assertTrue(s1.equals(s2));
@@ -172,8 +173,7 @@ public class ComparableObjectSeriesTest {
     public void testSerialization() {
         MyComparableObjectSeries s1 = new MyComparableObjectSeries("A");
         s1.add(1, "ABC");
-        MyComparableObjectSeries s2 = (MyComparableObjectSeries) 
-                TestUtils.serialised(s1);
+        MyComparableObjectSeries s2 = TestUtils.serialised(s1);
         assertEquals(s1, s2);
     }
 

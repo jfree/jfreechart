@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,17 +27,10 @@
  * ----------------------
  * IntervalXYDataset.java
  * ----------------------
- * (C) Copyright 2001-2009, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2001-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  Mark Watson (www.markwatson.com);
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 18-Oct-2001 : Version 1, thanks to Mark Watson (DG);
- * 22-Oct-2001 : Renamed DataSource.java --> Dataset.java etc (DG);
- * 06-May-2004 : Added methods that return double primitives (DG);
- * 15-Sep-2009 : Added clarifications to API docs (DG);
  *
  */
 
@@ -50,7 +43,7 @@ package org.jfree.data.xy;
  * This interface is used to support (among other things) bar plots against
  * numerical axes.
  */
-public interface IntervalXYDataset extends XYDataset {
+public interface IntervalXYDataset<S extends Comparable<S>> extends XYDataset<S> {
 
     /**
      * Returns the lower bound of the x-interval for the specified series and
@@ -62,7 +55,7 @@ public interface IntervalXYDataset extends XYDataset {
      *
      * @return The lower bound of the x-interval ({@code null} permitted).
      */
-    public Number getStartX(int series, int item);
+    Number getStartX(int series, int item);
 
     /**
      * Returns the lower bound of the x-interval (as a double primitive) for
@@ -75,7 +68,7 @@ public interface IntervalXYDataset extends XYDataset {
      *
      * @see #getStartX(int, int)
      */
-    public double getStartXValue(int series, int item);
+    double getStartXValue(int series, int item);
 
     /**
      * Returns the upper bound of the x-interval for the specified series and
@@ -87,7 +80,7 @@ public interface IntervalXYDataset extends XYDataset {
      *
      * @return The upper bound of the x-interval ({@code null} permitted).
      */
-    public Number getEndX(int series, int item);
+    Number getEndX(int series, int item);
 
     /**
      * Returns the upper bound of the x-interval (as a double primitive) for
@@ -100,7 +93,7 @@ public interface IntervalXYDataset extends XYDataset {
      *
      * @see #getEndX(int, int)
      */
-    public double getEndXValue(int series, int item);
+    double getEndXValue(int series, int item);
 
     /**
      * Returns the lower bound of the y-interval for the specified series and
@@ -112,7 +105,7 @@ public interface IntervalXYDataset extends XYDataset {
      *
      * @return The lower bound of the y-interval ({@code null} permitted).
      */
-    public Number getStartY(int series, int item);
+    Number getStartY(int series, int item);
 
     /**
      * Returns the lower bound of the y-interval (as a double primitive) for
@@ -125,7 +118,7 @@ public interface IntervalXYDataset extends XYDataset {
      *
      * @see #getStartY(int, int)
      */
-    public double getStartYValue(int series, int item);
+    double getStartYValue(int series, int item);
 
     /**
      * Returns the upper bound of the y-interval for the specified series and
@@ -137,7 +130,7 @@ public interface IntervalXYDataset extends XYDataset {
      *
      * @return The upper bound of the y-interval ({@code null} permitted).
      */
-    public Number getEndY(int series, int item);
+    Number getEndY(int series, int item);
 
     /**
      * Returns the upper bound of the y-interval (as a double primitive) for
@@ -150,6 +143,6 @@ public interface IntervalXYDataset extends XYDataset {
      *
      * @see #getEndY(int, int)
      */
-    public double getEndYValue(int series, int item);
+    double getEndYValue(int series, int item);
 
 }

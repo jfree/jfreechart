@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,32 +27,11 @@
  * ----------------------
  * DefaultPieDataset.java
  * ----------------------
- * (C) Copyright 2001-2016, by Object Refinery Limited.
+ * (C) Copyright 2001-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Sam (oldman);
- *
- * Changes
- * -------
- * 17-Nov-2001 : Version 1 (DG);
- * 22-Jan-2002 : Removed legend methods from dataset implementations (DG);
- * 07-Apr-2002 : Modified implementation to guarantee data sequence to remain
- *               in the order categories are added (oldman);
- * 23-Oct-2002 : Added getCategory(int) method and getItemCount() method, in
- *               line with changes to the PieDataset interface (DG);
- * 04-Feb-2003 : Changed underlying data storage to DefaultKeyedValues (DG);
- * 04-Mar-2003 : Inserted DefaultKeyedValuesDataset class into hierarchy (DG);
- * 24-Apr-2003 : Switched places with DefaultKeyedValuesDataset (DG);
- * 18-Aug-2003 : Implemented Cloneable (DG);
- * 03-Mar-2005 : Implemented PublicCloneable (DG);
- * 29-Jun-2005 : Added remove() method (DG);
- * ------------- JFREECHART 1.0.0 ---------------------------------------------
- * 31-Jul-2006 : Added a clear() method to clear all values from the
- *               dataset (DG);
- * 28-Sep-2006 : Added sortByKeys() and sortByValues() methods (DG);
- * 30-Apr-2007 : Added new insertValues() methods (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
- *
+ *                   Tracy Hiltbrand (generics for bug fix to PiePlot);
  */
 
 package org.jfree.data.general;
@@ -60,9 +39,10 @@ package org.jfree.data.general;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.PublicCloneable;
-import org.jfree.chart.util.SortOrder;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.internal.CloneUtils;
+import org.jfree.chart.api.PublicCloneable;
+import org.jfree.chart.api.SortOrder;
 
 import org.jfree.data.DefaultKeyedValues;
 import org.jfree.data.KeyedValues;
@@ -70,6 +50,8 @@ import org.jfree.data.UnknownKeyException;
 
 /**
  * A default implementation of the {@link PieDataset} interface.
+ * 
+ * @param <K> Key type for PieDataset
  */
 public class DefaultPieDataset<K extends Comparable<K>> extends AbstractDataset
         implements PieDataset<K>, Cloneable, PublicCloneable, Serializable {
@@ -91,13 +73,13 @@ public class DefaultPieDataset<K extends Comparable<K>> extends AbstractDataset
      * Creates a new dataset by copying data from a {@link KeyedValues}
      * instance.
      *
-     * @param data  the data ({@code null} not permitted).
+     * @param source  the data ({@code null} not permitted).
      */
-    public DefaultPieDataset(KeyedValues<K> data) {
-        Args.nullNotPermitted(data, "data");
-        this.data = new DefaultKeyedValues();
-        for (int i = 0; i < data.getItemCount(); i++) {
-            this.data.addValue(data.getKey(i), data.getValue(i));
+    public DefaultPieDataset(KeyedValues<K> source) {
+        Args.nullNotPermitted(source, "source");
+        this.data = new DefaultKeyedValues<>();
+        for (int i = 0; i < source.getItemCount(); i++) {
+            this.data.addValue(source.getKey(i), source.getValue(i));
         }
     }
 
@@ -162,11 +144,7 @@ public class DefaultPieDataset<K extends Comparable<K>> extends AbstractDataset
      */
     @Override
     public Number getValue(int item) {
-        Number result = null;
-        if (getItemCount() > item) {
-            result = this.data.getValue(item);
-        }
-        return result;
+        return this.data.getValue(item);
     }
 
     /**
@@ -317,15 +295,15 @@ public class DefaultPieDataset<K extends Comparable<K>> extends AbstractDataset
         if (!(obj instanceof PieDataset)) {
             return false;
         }
-        PieDataset that = (PieDataset) obj;
+        PieDataset<K> that = (PieDataset) obj;
         int count = getItemCount();
         if (that.getItemCount() != count) {
             return false;
         }
 
         for (int i = 0; i < count; i++) {
-            Comparable k1 = getKey(i);
-            Comparable k2 = that.getKey(i);
+            K k1 = getKey(i);
+            K k2 = that.getKey(i);
             if (!k1.equals(k2)) {
                 return false;
             }
@@ -367,8 +345,8 @@ public class DefaultPieDataset<K extends Comparable<K>> extends AbstractDataset
      */
     @Override
     public Object clone() throws CloneNotSupportedException {
-        DefaultPieDataset clone = (DefaultPieDataset) super.clone();
-        clone.data = (DefaultKeyedValues) this.data.clone();
+        DefaultPieDataset<K> clone = (DefaultPieDataset) super.clone();
+        clone.data = CloneUtils.clone(this.data);
         return clone;
     }
 

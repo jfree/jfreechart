@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,40 +27,12 @@
  * ---------------------------
  * ClusteredXYBarRenderer.java
  * ---------------------------
- * (C) Copyright 2003-2016, by Paolo Cova and Contributors.
+ * (C) Copyright 2003-2021, by Paolo Cova and Contributors.
  *
  * Original Author:  Paolo Cova;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
  *                   Christian W. Zuckschwerdt;
  *                   Matthias Rose;
- *
- * Changes
- * -------
- * 24-Jan-2003 : Version 1, contributed by Paolo Cova (DG);
- * 25-Mar-2003 : Implemented Serializable (DG);
- * 01-May-2003 : Modified drawItem() method signature (DG);
- * 30-Jul-2003 : Modified entity constructor (CZ);
- * 20-Aug-2003 : Implemented Cloneable and PublicCloneable (DG);
- * 16-Sep-2003 : Changed ChartRenderingInfo --> PlotRenderingInfo (DG);
- * 07-Oct-2003 : Added renderer state (DG);
- * 03-Nov-2003 : In draw method added state parameter and y==null value
- *               handling (MR);
- * 25-Feb-2004 : Replaced CrosshairInfo with CrosshairState (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
- *               getYValue() (DG);
- * 01-Oct-2004 : Fixed bug where 'drawBarOutline' flag is ignored (DG);
- * 16-May-2005 : Fixed to used outline stroke for bar outlines.  Removed some
- *               redundant code with the result that the renderer now respects
- *               the 'base' setting from the super-class. Added an equals()
- *               method (DG);
- * 19-May-2005 : Added minimal item label implementation - needs improving (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 11-Dec-2006 : Added support for GradientPaint (DG);
- * 12-Jun-2007 : Added override to findDomainBounds() to handle cluster offset,
- *               fixed rendering to handle inverted axes, and simplified
- *               entity generation code (DG);
- * 24-Jun-2008 : Added new barPainter mechanism (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -69,6 +41,8 @@ package org.jfree.chart.renderer.xy;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
@@ -77,9 +51,9 @@ import org.jfree.chart.plot.CrosshairState;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.api.RectangleEdge;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.api.PublicCloneable;
 import org.jfree.data.Range;
 import org.jfree.data.xy.IntervalXYDataset;
 import org.jfree.data.xy.XYDataset;
@@ -93,7 +67,7 @@ import org.jfree.data.xy.XYDataset;
  * {@code ClusteredXYBarRendererDemo1.java} program included in the
  * JFreeChart demo collection:
  * <br><br>
- * <img src="../../../../../images/ClusteredXYBarRendererSample.png"
+ * <img src="doc-files/ClusteredXYBarRendererSample.png"
  * alt="ClusteredXYBarRendererSample.png">
  * <P>
  * This renderer does not include code to calculate the crosshair point for the
@@ -122,8 +96,8 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
      * @param centerBarAtStartValue  if true, bars will be centered on the
      *         start of the time period.
      */
-    public ClusteredXYBarRenderer(double margin,
-                                  boolean centerBarAtStartValue) {
+    public ClusteredXYBarRenderer(double margin, 
+            boolean centerBarAtStartValue) {
         super(margin);
         this.centerBarAtStartValue = centerBarAtStartValue;
     }
@@ -155,8 +129,7 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
         // need to handle cluster centering as a special case
         if (this.centerBarAtStartValue) {
             return findDomainBoundsWithOffset((IntervalXYDataset) dataset);
-        }
-        else {
+        } else {
             return super.findDomainBounds(dataset);
         }
     }
@@ -192,8 +165,7 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
 
         if (minimum > maximum) {
             return null;
-        }
-        else {
+        } else {
             return new Range(minimum, maximum);
         }
     }
@@ -222,10 +194,14 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
      * @param pass  the pass index.
      */
     @Override
-    public void drawItem(Graphics2D g2, XYItemRendererState state, 
+    public void drawItem(Graphics2D g2, XYItemRendererState state,
             Rectangle2D dataArea, PlotRenderingInfo info, XYPlot plot,
-            ValueAxis domainAxis, ValueAxis rangeAxis, XYDataset dataset, 
+            ValueAxis domainAxis, ValueAxis rangeAxis, XYDataset dataset,
             int series, int item, CrosshairState crosshairState, int pass) {
+
+        if (!getItemVisible(series, item)) {
+            return;
+        }
 
         IntervalXYDataset intervalDataset = (IntervalXYDataset) dataset;
 
@@ -234,8 +210,7 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
         if (getUseYInterval()) {
             y0 = intervalDataset.getStartYValue(series, item);
             y1 = intervalDataset.getEndYValue(series, item);
-        }
-        else {
+        } else {
             y0 = getBase();
             y1 = intervalDataset.getYValue(series, item);
         }
@@ -271,21 +246,28 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
 
         PlotOrientation orientation = plot.getOrientation();
 
-        int numSeries = dataset.getSeriesCount();
+        List<Integer> visibleSeries = new ArrayList<Integer>();
+        for (int i = 0; i < dataset.getSeriesCount(); i++) {
+            if (isSeriesVisible(i)) {
+                visibleSeries.add(i);
+            }
+        }
+
+        int numSeries = visibleSeries.size();
         double seriesBarWidth = intervalW / numSeries;  // may be negative
+        int visibleSeriesIndex = visibleSeries.indexOf(series);
 
         Rectangle2D bar = null;
         if (orientation == PlotOrientation.HORIZONTAL) {
-            double barY0 = baseX + (seriesBarWidth * series);
+            double barY0 = baseX + (seriesBarWidth * visibleSeriesIndex);
             double barY1 = barY0 + seriesBarWidth;
             double rx = Math.min(yy0, yy1);
             double rw = intervalH;
             double ry = Math.min(barY0, barY1);
             double rh = Math.abs(barY1 - barY0);
             bar = new Rectangle2D.Double(rx, ry, rw, rh);
-        }
-        else if (orientation == PlotOrientation.VERTICAL) {
-            double barX0 = baseX + (seriesBarWidth * series);
+        } else if (orientation == PlotOrientation.VERTICAL) {
+            double barX0 = baseX + (seriesBarWidth * visibleSeriesIndex);
             double barX1 = barX0 + seriesBarWidth;
             double rx = Math.min(barX0, barX1);
             double rw = Math.abs(barX1 - barX0);
@@ -301,22 +283,19 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
         if (orientation == PlotOrientation.HORIZONTAL) {
             if (positive && inverted || !positive && !inverted) {
                 barBase = RectangleEdge.RIGHT;
-            }
-            else {
+            } else {
                 barBase = RectangleEdge.LEFT;
             }
-        }
-        else {
+        } else {
             if (positive && !inverted || !positive && inverted) {
                 barBase = RectangleEdge.BOTTOM;
-            }
-            else {
+            } else {
                 barBase = RectangleEdge.TOP;
             }
         }
         if (pass == 0 && getShadowsVisible()) {
             getBarPainter().paintBarShadow(g2, this, series, item, bar, barBase,
-                !getUseYInterval());
+                    !getUseYInterval());
         }
         if (pass == 1) {
             getBarPainter().paintBar(g2, this, series, item, bar, barBase);

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,26 +27,22 @@
  * ---------------------------
  * IntervalXYDelegateTest.java
  * ---------------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 21-Feb-2005 : Version 1 (DG);
- * 06-Oct-2005 : Updated for testEquals() for method name change (DG);
  *
  */
 
 package org.jfree.data.xy;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.jfree.chart.TestUtils;
-import org.junit.Test;
+import org.jfree.chart.internal.CloneUtils;
+import org.junit.jupiter.api.Test;
 
 /**
  * Some checks for the {@link IntervalXYDelegate} class.
@@ -58,14 +54,14 @@ public class IntervalXYDelegateTest {
      */
     @Test
     public void testEquals() {
-       XYSeries s1 = new XYSeries("Series");
+       XYSeries<String> s1 = new XYSeries<>("Series");
        s1.add(1.2, 3.4);
-       XYSeriesCollection c1 = new XYSeriesCollection();
+       XYSeriesCollection<String> c1 = new XYSeriesCollection<>();
        c1.addSeries(s1);
        IntervalXYDelegate d1 = new IntervalXYDelegate(c1);
 
-       XYSeries s2 = new XYSeries("Series");
-       XYSeriesCollection c2 = new XYSeriesCollection();
+       XYSeries<String> s2 = new XYSeries<>("Series");
+       XYSeriesCollection<String> c2 = new XYSeriesCollection<>();
        s2.add(1.2, 3.4);
        c2.addSeries(s2);
        IntervalXYDelegate d2 = new IntervalXYDelegate(c2);
@@ -94,12 +90,12 @@ public class IntervalXYDelegateTest {
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        XYSeries s1 = new XYSeries("Series");
+        XYSeries<String> s1 = new XYSeries<>("Series");
         s1.add(1.2, 3.4);
-        XYSeriesCollection c1 = new XYSeriesCollection();
+        XYSeriesCollection<String> c1 = new XYSeriesCollection<>();
         c1.addSeries(s1);
         IntervalXYDelegate d1 = new IntervalXYDelegate(c1);
-        IntervalXYDelegate d2 = (IntervalXYDelegate) d1.clone();
+        IntervalXYDelegate d2 = CloneUtils.clone(d1);
         assertTrue(d1 != d2);
         assertTrue(d1.getClass() == d2.getClass());
         assertTrue(d1.equals(d2));
@@ -110,12 +106,12 @@ public class IntervalXYDelegateTest {
      */
     @Test
     public void testSerialization() {
-        XYSeries s1 = new XYSeries("Series");
+        XYSeries<String> s1 = new XYSeries<>("Series");
         s1.add(1.2, 3.4);
-        XYSeriesCollection c1 = new XYSeriesCollection();
+        XYSeriesCollection<String> c1 = new XYSeriesCollection<>();
         c1.addSeries(s1);
         IntervalXYDelegate d1 = new IntervalXYDelegate(c1);
-        IntervalXYDelegate d2 = (IntervalXYDelegate) TestUtils.serialised(d1);
+        IntervalXYDelegate d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 

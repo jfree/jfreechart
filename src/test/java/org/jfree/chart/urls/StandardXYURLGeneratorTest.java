@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,27 +27,22 @@
  * -------------------------------
  * StandardXYURLGeneratorTest.java
  * -------------------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 01-Mar-2004 : Version 1 (DG);
- * 23-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
 package org.jfree.chart.urls;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.jfree.chart.TestUtils;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.api.PublicCloneable;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link StandardXYURLGenerator} class.
@@ -60,8 +55,7 @@ public class StandardXYURLGeneratorTest {
     @Test
     public void testSerialization() {
         StandardXYURLGenerator g1 = new StandardXYURLGenerator("index.html?");
-        StandardXYURLGenerator g2 = (StandardXYURLGenerator) 
-                TestUtils.serialised(g1);
+        StandardXYURLGenerator g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

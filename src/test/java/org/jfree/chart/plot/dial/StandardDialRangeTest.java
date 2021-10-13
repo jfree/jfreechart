@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,28 +27,25 @@
  * ------------------------
  * SimpleDialRangeTest.java
  * ------------------------
- * (C) Copyright 2006-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 03-Nov-2006 : Version 1 (DG);
  *
  */
 
 package org.jfree.chart.plot.dial;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.Color;
 import java.awt.GradientPaint;
 
 import org.jfree.chart.TestUtils;
-import org.junit.Test;
+import org.jfree.chart.internal.CloneUtils;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link StandardDialRange} class.
@@ -110,7 +107,7 @@ public class StandardDialRangeTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         StandardDialRange r1 = new StandardDialRange();
-        StandardDialRange r2 = (StandardDialRange) r1.clone();
+        StandardDialRange r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -128,7 +125,7 @@ public class StandardDialRangeTest {
     @Test
     public void testSerialization() {
         StandardDialRange r1 = new StandardDialRange();
-        StandardDialRange r2 = (StandardDialRange) TestUtils.serialised(r1);
+        StandardDialRange r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

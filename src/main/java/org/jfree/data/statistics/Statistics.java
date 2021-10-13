@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,23 +27,10 @@
  * ---------------
  * Statistics.java
  * ---------------
- * (C) Copyright 2000-2016, by Matthew Wright and Contributors.
+ * (C) Copyright 2000-2021, by Matthew Wright and Contributors.
  *
  * Original Author:  Matthew Wright;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes (from 08-Nov-2001)
- * --------------------------
- * 08-Nov-2001 : Added standard header and tidied Javadoc comments (DG);
- *               Moved from JFreeChart to package com.jrefinery.data.* in
- *               JCommon class library (DG);
- * 24-Jun-2002 : Removed unnecessary local variable (DG);
- * 07-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 26-May-2004 : Moved calculateMean() method from BoxAndWhiskerCalculator (DG);
- * 02-Jun-2004 : Fixed bug in calculateMedian() method (DG);
- * 11-Jan-2005 : Removed deprecated code in preparation for the 1.0.0
- *               release (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -52,9 +39,8 @@ package org.jfree.data.statistics;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
-import org.jfree.chart.util.Args;
+import org.jfree.chart.internal.Args;
 
 /**
  * A utility class that provides some common statistical functions.
@@ -141,9 +127,7 @@ public abstract class Statistics {
         Args.nullNotPermitted(values, "values");
         int count = 0;
         double total = 0.0;
-        Iterator iterator = values.iterator();
-        while (iterator.hasNext()) {
-            Object object = iterator.next();
+        for (Object object : values) {
             if (object == null) {
                 if (includeNullAndNaN) {
                     return Double.NaN;

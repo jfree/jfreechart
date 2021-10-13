@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------------------------
  * StandardChartThemeTest.java
  * ---------------------------
- * (C) Copyright 2008-2020, by Object Refinery Limited.
+ * (C) Copyright 2008-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -36,8 +36,8 @@
 
 package org.jfree.chart;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -49,11 +49,11 @@ import java.awt.Stroke;
 import java.awt.geom.Rectangle2D;
 
 import org.jfree.chart.plot.DefaultDrawingSupplier;
-import org.jfree.chart.plot.PieLabelLinkStyle;
+import org.jfree.chart.plot.pie.PieLabelLinkStyle;
 import org.jfree.chart.renderer.category.StandardBarPainter;
 import org.jfree.chart.renderer.xy.StandardXYBarPainter;
-import org.jfree.chart.ui.RectangleInsets;
-import org.junit.Test;
+import org.jfree.chart.api.RectangleInsets;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link StandardChartTheme} class.
@@ -255,7 +255,7 @@ public class StandardChartThemeTest {
     @Test
     public void testSerialization() {
         StandardChartTheme t1 = new StandardChartTheme("Name");
-        StandardChartTheme t2 = (StandardChartTheme) TestUtils.serialised(t1);
+        StandardChartTheme t2 = TestUtils.serialised(t1);
         assertTrue(t1.equals(t2));
     }
 

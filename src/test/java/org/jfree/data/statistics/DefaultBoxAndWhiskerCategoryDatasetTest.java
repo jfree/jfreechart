@@ -36,17 +36,18 @@
 
 package org.jfree.data.statistics;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.util.ArrayList;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.internal.CloneUtils;
 
 import org.jfree.data.Range;
 import org.jfree.data.UnknownKeyException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link DefaultBoxAndWhiskerCategoryDataset} class.
@@ -58,17 +59,13 @@ public class DefaultBoxAndWhiskerCategoryDatasetTest {
      */
     @Test
     public void testEquals() {
-        DefaultBoxAndWhiskerCategoryDataset d1
-                = new DefaultBoxAndWhiskerCategoryDataset();
-        d1.add(new BoxAndWhiskerItem(Double.valueOf(1.0), Double.valueOf(2.0),
-                Double.valueOf(3.0), Double.valueOf(4.0), Double.valueOf(5.0),
-                Double.valueOf(6.0), Double.valueOf(7.0), Double.valueOf(8.0),
+        DefaultBoxAndWhiskerCategoryDataset<String, String> d1
+                = new DefaultBoxAndWhiskerCategoryDataset<>();
+        d1.add(new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0,
                 new ArrayList<>()), "ROW1", "COLUMN1");
-        DefaultBoxAndWhiskerCategoryDataset d2
-                = new DefaultBoxAndWhiskerCategoryDataset();
-        d2.add(new BoxAndWhiskerItem(Double.valueOf(1.0), Double.valueOf(2.0),
-                Double.valueOf(3.0), Double.valueOf(4.0), Double.valueOf(5.0),
-                Double.valueOf(6.0), Double.valueOf(7.0), Double.valueOf(8.0),
+        DefaultBoxAndWhiskerCategoryDataset<String, String> d2
+                = new DefaultBoxAndWhiskerCategoryDataset<>();
+        d2.add(new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0,
                 new ArrayList<>()), "ROW1", "COLUMN1");
         assertTrue(d1.equals(d2));
         assertTrue(d2.equals(d1));
@@ -79,14 +76,12 @@ public class DefaultBoxAndWhiskerCategoryDatasetTest {
      */
     @Test
     public void testSerialization() {
-        DefaultBoxAndWhiskerCategoryDataset d1
-                = new DefaultBoxAndWhiskerCategoryDataset();
-        d1.add(new BoxAndWhiskerItem(Double.valueOf(1.0), Double.valueOf(2.0),
-                Double.valueOf(3.0), Double.valueOf(4.0), Double.valueOf(5.0),
-                Double.valueOf(6.0), Double.valueOf(7.0), Double.valueOf(8.0),
+        DefaultBoxAndWhiskerCategoryDataset<String, String> d1
+                = new DefaultBoxAndWhiskerCategoryDataset<>();
+        d1.add(new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0,
                 new ArrayList<>()), "ROW1", "COLUMN1");
-        DefaultBoxAndWhiskerCategoryDataset d2 = 
-                (DefaultBoxAndWhiskerCategoryDataset) TestUtils.serialised(d1);
+        DefaultBoxAndWhiskerCategoryDataset<String, String> d2 
+                = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 
@@ -96,22 +91,18 @@ public class DefaultBoxAndWhiskerCategoryDatasetTest {
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        DefaultBoxAndWhiskerCategoryDataset d1
-                = new DefaultBoxAndWhiskerCategoryDataset();
-        d1.add(new BoxAndWhiskerItem(Double.valueOf(1.0), Double.valueOf(2.0),
-                Double.valueOf(3.0), Double.valueOf(4.0), Double.valueOf(5.0),
-                Double.valueOf(6.0), Double.valueOf(7.0), Double.valueOf(8.0),
+        DefaultBoxAndWhiskerCategoryDataset<String, String> d1
+                = new DefaultBoxAndWhiskerCategoryDataset<>();
+        d1.add(new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0,
                 new ArrayList<>()), "ROW1", "COLUMN1");
-        DefaultBoxAndWhiskerCategoryDataset d2 
-                = (DefaultBoxAndWhiskerCategoryDataset) d1.clone();
+        DefaultBoxAndWhiskerCategoryDataset<String, String> d2 
+                = CloneUtils.clone(d1);
         assertTrue(d1 != d2);
         assertTrue(d1.getClass() == d2.getClass());
         assertTrue(d1.equals(d2));
 
         // test independence
-        d1.add(new BoxAndWhiskerItem(Double.valueOf(1.0), Double.valueOf(2.0),
-                Double.valueOf(3.0), Double.valueOf(4.0), Double.valueOf(5.0),
-                Double.valueOf(6.0), Double.valueOf(7.0), Double.valueOf(8.0),
+        d1.add(new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0,
                 new ArrayList<>()), "ROW2", "COLUMN1");
         assertFalse(d1.equals(d2));
     }
@@ -121,8 +112,8 @@ public class DefaultBoxAndWhiskerCategoryDatasetTest {
      */
     @Test
     public void test1701822() {
-        DefaultBoxAndWhiskerCategoryDataset dataset
-                = new DefaultBoxAndWhiskerCategoryDataset();
+        DefaultBoxAndWhiskerCategoryDataset<String, String> dataset
+                = new DefaultBoxAndWhiskerCategoryDataset<>();
         try {
             dataset.add(new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, null, 
                     8.0, new ArrayList<>()), "ROW1", "COLUMN1");
@@ -142,8 +133,8 @@ public class DefaultBoxAndWhiskerCategoryDatasetTest {
      */
     @Test
     public void testAdd() {
-        DefaultBoxAndWhiskerCategoryDataset dataset
-                = new DefaultBoxAndWhiskerCategoryDataset();
+        DefaultBoxAndWhiskerCategoryDataset<String, String> dataset
+                = new DefaultBoxAndWhiskerCategoryDataset<>();
         BoxAndWhiskerItem item1 = new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0,
                 5.0, 6.0, 7.0, 8.0, new ArrayList<>());
         dataset.add(item1, "R1", "C1");
@@ -173,8 +164,8 @@ public class DefaultBoxAndWhiskerCategoryDatasetTest {
      */
     @Test
     public void testAddUpdatesCachedRange() {
-        DefaultBoxAndWhiskerCategoryDataset dataset
-                = new DefaultBoxAndWhiskerCategoryDataset();
+        DefaultBoxAndWhiskerCategoryDataset<String, String> dataset
+                = new DefaultBoxAndWhiskerCategoryDataset<>();
         BoxAndWhiskerItem item1 = new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0,
                 5.0, 6.0, 7.0, 8.0, new ArrayList<>());
         dataset.add(item1, "R1", "C1");
@@ -209,8 +200,8 @@ public class DefaultBoxAndWhiskerCategoryDatasetTest {
      */
     @Test
     public void testConstructor() {
-        DefaultBoxAndWhiskerCategoryDataset dataset
-                = new DefaultBoxAndWhiskerCategoryDataset();
+        DefaultBoxAndWhiskerCategoryDataset<String, String> dataset
+                = new DefaultBoxAndWhiskerCategoryDataset<>();
         assertEquals(0, dataset.getColumnCount());
         assertEquals(0, dataset.getRowCount());
         assertTrue(Double.isNaN(dataset.getRangeLowerBound(false)));
@@ -222,8 +213,8 @@ public class DefaultBoxAndWhiskerCategoryDatasetTest {
      */
     @Test
     public void testGetRangeBounds() {
-        DefaultBoxAndWhiskerCategoryDataset d1
-                = new DefaultBoxAndWhiskerCategoryDataset();
+        DefaultBoxAndWhiskerCategoryDataset<String, String> d1
+                = new DefaultBoxAndWhiskerCategoryDataset<>();
         d1.add(new BoxAndWhiskerItem(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0,
                 new ArrayList<>()), "R1", "C1");
         assertEquals(new Range(7.0, 8.0), d1.getRangeBounds(false));
@@ -252,8 +243,8 @@ public class DefaultBoxAndWhiskerCategoryDatasetTest {
      */
     @Test
     public void testRemove() {
-        DefaultBoxAndWhiskerCategoryDataset data
-                = new DefaultBoxAndWhiskerCategoryDataset();
+        DefaultBoxAndWhiskerCategoryDataset<String, String> data
+                = new DefaultBoxAndWhiskerCategoryDataset<>();
 
         boolean pass = false;
         try {

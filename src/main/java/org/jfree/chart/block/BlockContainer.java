@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,22 +27,10 @@
  * -------------------
  * BlockContainer.java
  * -------------------
- * (C) Copyright 2004-2016, by Object Refinery Limited.
+ * (C) Copyright 2004-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 22-Oct-2004 : Version 1 (DG);
- * 02-Feb-2005 : Added isEmpty() method (DG);
- * 04-Feb-2005 : Added equals(), clone() and implemented Serializable (DG);
- * 08-Feb-2005 : Updated for changes in RectangleConstraint (DG);
- * 20-Apr-2005 : Added new draw() method (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 20-Jul-2006 : Perform translation directly on drawing area, not via
- *               Graphics2D (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
  *
  */
 
@@ -53,14 +41,13 @@ import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.entity.StandardEntityCollection;
-import org.jfree.chart.ui.Size2D;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.api.PublicCloneable;
 
 /**
  * A container for a collection of {@link Block} objects.  The container uses
@@ -73,7 +60,7 @@ public class BlockContainer extends AbstractBlock
     private static final long serialVersionUID = 8199508075695195293L;
 
     /** The blocks within the container. */
-    private List blocks;
+    private final List<Block> blocks;
 
     /** The object responsible for laying out the blocks. */
     private Arrangement arrangement;
@@ -94,7 +81,7 @@ public class BlockContainer extends AbstractBlock
     public BlockContainer(Arrangement arrangement) {
         Args.nullNotPermitted(arrangement, "arrangement");
         this.arrangement = arrangement;
-        this.blocks = new ArrayList();
+        this.blocks = new ArrayList<>();
     }
 
     /**
@@ -130,9 +117,9 @@ public class BlockContainer extends AbstractBlock
      * Returns an unmodifiable list of the {@link Block} objects managed by
      * this arrangement.
      *
-     * @return A list of blocks.
+     * @return A list of blocks (possibly empty, but never {@code null}).
      */
-    public List getBlocks() {
+    public List<Block> getBlocks() {
         return Collections.unmodifiableList(this.blocks);
     }
 
@@ -215,9 +202,7 @@ public class BlockContainer extends AbstractBlock
         drawBorder(g2, contentArea);
         contentArea = trimBorder(contentArea);
         contentArea = trimPadding(contentArea);
-        Iterator iterator = this.blocks.iterator();
-        while (iterator.hasNext()) {
-            Block block = (Block) iterator.next();
+        for (Block block : this.blocks) {
             Rectangle2D bounds = block.getBounds();
             Rectangle2D drawArea = new Rectangle2D.Double(bounds.getX()
                     + area.getX(), bounds.getY() + area.getY(),
@@ -265,6 +250,14 @@ public class BlockContainer extends AbstractBlock
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode(){
+        int hash = 3;
+        hash = 97 * hash + Objects.hashCode(this.blocks);
+        hash = 97 * hash + Objects.hashCode(this.arrangement);
+        return hash;
     }
 
     /**

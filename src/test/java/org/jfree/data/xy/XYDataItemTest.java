@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,25 +27,22 @@
  * -------------------
  * XYDataItemTest.java
  * -------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 23-Dec-2003 : Version 1 (DG);
  *
  */
 
 package org.jfree.data.xy;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.jfree.chart.TestUtils;
-import org.junit.Test;
+import org.jfree.chart.internal.CloneUtils;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link XYDataItem} class.
@@ -62,10 +59,10 @@ public class XYDataItemTest {
         assertTrue(i1.equals(i2));
         assertTrue(i2.equals(i1));
 
-        i1.setY(new Double(9.9));
+        i1.setY(9.9);
         assertFalse(i1.equals(i2));
 
-        i2.setY(new Double(9.9));
+        i2.setY(9.9);
         assertTrue(i1.equals(i2));
     }
 
@@ -73,9 +70,9 @@ public class XYDataItemTest {
      * Confirm that cloning works.
      */
     @Test
-    public void testCloning() {
+    public void testCloning() throws CloneNotSupportedException {
         XYDataItem i1 = new XYDataItem(1.0, 1.1);
-        XYDataItem i2 = (XYDataItem) i1.clone();
+        XYDataItem i2 = CloneUtils.clone(i1);
         assertTrue(i1 != i2);
         assertTrue(i1.getClass() == i2.getClass());
         assertTrue(i1.equals(i2));
@@ -87,7 +84,7 @@ public class XYDataItemTest {
     @Test
     public void testSerialization() {
         XYDataItem i1 = new XYDataItem(1.0, 1.1);
-        XYDataItem i2 = (XYDataItem) TestUtils.serialised(i1);
+        XYDataItem i2 = TestUtils.serialised(i1);
         assertEquals(i1, i2);
     }
 

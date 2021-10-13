@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------
  * DataUtils.java
  * --------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and contributors.
+ * (C) Copyright 2003-2021, by Object Refinery Limited and contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Peter Kolb (patch 2511330);
@@ -37,7 +37,7 @@
 package org.jfree.data;
 
 import java.util.Arrays;
-import org.jfree.chart.util.Args;
+import org.jfree.chart.internal.Args;
 import org.jfree.data.general.DatasetUtils;
 
 /**
@@ -56,8 +56,6 @@ public abstract class DataUtils {
      * @param b  the second array ({@code null} permitted).
      *
      * @return A boolean.
-     *
-     * @since 1.0.13
      */
     public static boolean equal(double[][] a, double[][] b) {
         if (a == null) {
@@ -83,8 +81,6 @@ public abstract class DataUtils {
      * @param source  the source array ({@code null} not permitted).
      *
      * @return A clone of the array.
-     *
-     * @since 1.0.13
      */
     public static double[][] clone(double[][] source) {
         Args.nullNotPermitted(source, "source");
@@ -130,16 +126,13 @@ public abstract class DataUtils {
      * @param validRows the array with valid rows (zero-based).
      *
      * @return The total of the valid values in the specified column.
-     *
-     * @since 1.0.13
      */
     public static double calculateColumnTotal(Values2D data, int column,
              int[] validRows) {
         Args.nullNotPermitted(data, "data");
         double total = 0.0;
         int rowCount = data.getRowCount();
-        for (int v = 0; v < validRows.length; v++) {
-            int row = validRows[v];
+        for (int row : validRows) {
             if (row < rowCount) {
                 Number n = data.getValue(row, column);
                 if (n != null) {
@@ -181,16 +174,13 @@ public abstract class DataUtils {
      * @param validCols the array with valid cols (zero-based).
      *
      * @return The total of the valid values in the specified row.
-     *
-     * @since 1.0.13
      */
     public static double calculateRowTotal(Values2D data, int row,
              int[] validCols) {
         Args.nullNotPermitted(data, "data");
         double total = 0.0;
         int colCount = data.getColumnCount();
-        for (int v = 0; v < validCols.length; v++) {
-            int col = validCols[v];
+        for (int col : validCols) {
             if (col < colCount) {
                 Number n = data.getValue(row, col);
                 if (n != null) {
@@ -246,9 +236,9 @@ public abstract class DataUtils {
      *
      * @return The cumulative percentages.
      */
-    public static KeyedValues getCumulativePercentages(KeyedValues data) {
+    public static <K extends Comparable<K>> KeyedValues<K> getCumulativePercentages(KeyedValues<K> data) {
         Args.nullNotPermitted(data, "data");
-        DefaultKeyedValues result = new DefaultKeyedValues();
+        DefaultKeyedValues<K> result = new DefaultKeyedValues<>();
         double total = 0.0;
         for (int i = 0; i < data.getItemCount(); i++) {
             Number v = data.getValue(i);
@@ -262,7 +252,7 @@ public abstract class DataUtils {
             if (v != null) {
                 runningTotal = runningTotal + v.doubleValue();
             }
-            result.addValue(data.getKey(i), new Double(runningTotal / total));
+            result.addValue(data.getKey(i), runningTotal / total);
         }
         return result;
     }

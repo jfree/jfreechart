@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------
  * ItemLabelPosition.java
  * ----------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -37,8 +37,9 @@
 package org.jfree.chart.labels;
 
 import java.io.Serializable;
-import org.jfree.chart.ui.TextAnchor;
-import org.jfree.chart.util.Args;
+import java.util.Objects;
+import org.jfree.chart.text.TextAnchor;
+import org.jfree.chart.internal.Args;
 
 /**
  * The attributes that control the position of the label for each data item on
@@ -50,16 +51,16 @@ public class ItemLabelPosition implements Serializable {
     private static final long serialVersionUID = 5845390630157034499L;
 
     /** The item label anchor point. */
-    private ItemLabelAnchor itemLabelAnchor;
+    private final ItemLabelAnchor itemLabelAnchor;
 
     /** The text anchor. */
-    private TextAnchor textAnchor;
+    private final TextAnchor textAnchor;
 
     /** The rotation anchor. */
-    private TextAnchor rotationAnchor;
+    private final TextAnchor rotationAnchor;
 
     /** The rotation angle. */
-    private double angle;
+    private final double angle;
 
     /**
      * Creates a new position record with default settings.
@@ -171,6 +172,18 @@ public class ItemLabelPosition implements Serializable {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode(){
+        int hash = 5;
+        hash = 83 * hash + Objects.hashCode(this.itemLabelAnchor);
+        hash = 83 * hash + Objects.hashCode(this.textAnchor);
+        hash = 83 * hash + Objects.hashCode(this.rotationAnchor);
+        hash = 83 * hash +
+                (int) (Double.doubleToLongBits(this.angle) ^
+                (Double.doubleToLongBits(this.angle) >>> 32));
+        return hash;
     }
 
 }

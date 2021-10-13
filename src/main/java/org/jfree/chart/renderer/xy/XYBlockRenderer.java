@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2018, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------------
  * XYBlockRenderer.java
  * --------------------
- * (C) Copyright 2006-2018, by Object Refinery Limited.
+ * (C) Copyright 2006-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -50,9 +50,9 @@ import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.LookupPaintScale;
 import org.jfree.chart.renderer.PaintScale;
-import org.jfree.chart.ui.RectangleAnchor;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.api.RectangleAnchor;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.api.PublicCloneable;
 import org.jfree.data.Range;
 import org.jfree.data.general.DatasetUtils;
 import org.jfree.data.xy.XYDataset;
@@ -65,10 +65,7 @@ import org.jfree.data.xy.XYZDataset;
  * {@code XYBlockChartDemo1.java} program included in the JFreeChart
  * demo collection:
  * <br><br>
- * <img src="../../../../../images/XYBlockRendererSample.png"
- * alt="XYBlockRendererSample.png">
- *
- * @since 1.0.4
+ * <img src="doc-files/XYBlockRendererSample.png" alt="XYBlockRendererSample.png">
  */
 public class XYBlockRenderer extends AbstractXYItemRenderer
         implements XYItemRenderer, Cloneable, PublicCloneable, Serializable {
@@ -212,7 +209,6 @@ public class XYBlockRenderer extends AbstractXYItemRenderer
      * @return The paint scale (never {@code null}).
      *
      * @see #setPaintScale(PaintScale)
-     * @since 1.0.4
      */
     public PaintScale getPaintScale() {
         return this.paintScale;
@@ -225,7 +221,6 @@ public class XYBlockRenderer extends AbstractXYItemRenderer
      * @param scale  the scale ({@code null} not permitted).
      *
      * @see #getPaintScale()
-     * @since 1.0.4
      */
     public void setPaintScale(PaintScale scale) {
         Args.nullNotPermitted(scale, "scale");

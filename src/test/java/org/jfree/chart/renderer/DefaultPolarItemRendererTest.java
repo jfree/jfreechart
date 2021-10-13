@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,26 +27,22 @@
  * ---------------------------------
  * DefaultPolarItemRendererTest.java
  * ---------------------------------
- * (C) Copyright 2006-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 04-Aug-2006 : Version 1 (DG);
- * 15-Mar-2007 : Added independence check to testCloning() (DG);
  *
  */
 
 package org.jfree.chart.renderer;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.jfree.chart.TestUtils;
-import org.junit.Test;
+import org.jfree.chart.internal.CloneUtils;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link DefaultPolarItemRenderer} class.
@@ -88,7 +84,7 @@ public class DefaultPolarItemRendererTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         DefaultPolarItemRenderer r1 = new DefaultPolarItemRenderer();
-        DefaultPolarItemRenderer r2 = (DefaultPolarItemRenderer) r1.clone();
+        DefaultPolarItemRenderer r2 = CloneUtils.clone(r1);
 
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
@@ -106,8 +102,7 @@ public class DefaultPolarItemRendererTest {
     @Test
     public void testSerialization() {
         DefaultPolarItemRenderer r1 = new DefaultPolarItemRenderer();
-        DefaultPolarItemRenderer r2 = (DefaultPolarItemRenderer) 
-                TestUtils.serialised(r1);
+        DefaultPolarItemRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

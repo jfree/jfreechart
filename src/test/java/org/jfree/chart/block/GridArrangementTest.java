@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,29 +27,23 @@
  * ------------------------
  * GridArrangementTest.java
  * ------------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 08-Mar-2005 : Version 1 (DG);
- * 03-Dec-2008 : Added more tests (DG);
  *
  */
 
 package org.jfree.chart.block;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.jfree.chart.TestUtils;
-import org.jfree.chart.ui.Size2D;
 
 import org.jfree.data.Range;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link GridArrangement} class.
@@ -92,7 +86,7 @@ public class GridArrangementTest {
     @Test
     public void testSerialization() {
         GridArrangement f1 = new GridArrangement(33, 44);
-        GridArrangement f2 = (GridArrangement) TestUtils.serialised(f1);
+        GridArrangement f2 = TestUtils.serialised(f1);
         assertEquals(f1, f2);
     }
 

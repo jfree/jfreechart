@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------------
  * StandardEntityCollection.java
  * -----------------------------
- * (C) Copyright 2001-2020, by Object Refinery Limited.
+ * (C) Copyright 2001-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -42,9 +42,10 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.PublicCloneable;
+import java.util.Objects;
+
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.api.PublicCloneable;
 
 /**
  * A standard implementation of the {@link EntityCollection} interface.
@@ -174,9 +175,16 @@ public class StandardEntityCollection implements EntityCollection,
         }
         if (obj instanceof StandardEntityCollection) {
             StandardEntityCollection that = (StandardEntityCollection) obj;
-            return ObjectUtils.equal(this.entities, that.entities);
+            return Objects.equals(this.entities, that.entities);
         }
         return false;
+    }
+
+    @Override
+    public int hashCode(){
+        int hash = 5;
+        hash = 29 * hash + Objects.hashCode(this.entities);
+        return hash;
     }
 
     /**

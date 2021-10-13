@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,29 +27,23 @@
  * -------------------------
  * SimpleTimePeriodTest.java
  * -------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited.
+ * (C) Copyright 2003-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 13-Mar-2003 : Version 1 (DG);
- * 21-Oct-2003 : Added hashCode() test (DG);
- * 02-Jun-2008 : Added a test for immutability (DG);
  *
  */
 
 package org.jfree.data.time;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Date;
 
 import org.jfree.chart.TestUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link SimpleTimePeriod} class.
@@ -98,7 +92,7 @@ public class SimpleTimePeriodTest {
     public void testSerialization() {
         SimpleTimePeriod p1 = new SimpleTimePeriod(new Date(1000L),
                 new Date(1001L));
-        SimpleTimePeriod p2 = (SimpleTimePeriod) TestUtils.serialised(p1);
+        SimpleTimePeriod p2 = TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 

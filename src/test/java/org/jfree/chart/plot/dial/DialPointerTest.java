@@ -36,15 +36,16 @@
 
 package org.jfree.chart.plot.dial;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
 
 import org.jfree.chart.TestUtils;
-import org.junit.Test;
+import org.jfree.chart.internal.CloneUtils;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link DialPointer} class.
@@ -133,7 +134,7 @@ public class DialPointerTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         DialPointer i1 = new DialPointer.Pin(1);
-        DialPointer i2 = (DialPointer) i1.clone();
+        DialPointer i2 = CloneUtils.clone(i1);
         assertTrue(i1 != i2);
         assertTrue(i1.getClass() == i2.getClass());
         assertTrue(i1.equals(i2));
@@ -152,7 +153,7 @@ public class DialPointerTest {
     public void testSerialization() {
         // test a default instance
         DialPointer i1 = new DialPointer.Pin(1);
-        DialPointer i2 = (DialPointer) TestUtils.serialised(i1);
+        DialPointer i2 = TestUtils.serialised(i1);
         assertEquals(i1, i2);
     }
 
@@ -162,7 +163,7 @@ public class DialPointerTest {
     @Test
     public void testSerialization2() {
         DialPointer i1 = new DialPointer.Pointer(1);
-        DialPointer i2 = (DialPointer) TestUtils.serialised(i1);
+        DialPointer i2 = TestUtils.serialised(i1);
         assertEquals(i1, i2);
     }
 }

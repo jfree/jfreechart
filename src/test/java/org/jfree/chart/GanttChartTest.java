@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * -------------------
  * GanttChartTest.java
  * -------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited.
+ * (C) Copyright 2005-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 12-Apr-2005 : Version 1 (DG);
  *
  */
 
@@ -59,11 +55,11 @@ import org.jfree.data.gantt.Task;
 import org.jfree.data.gantt.TaskSeries;
 import org.jfree.data.gantt.TaskSeriesCollection;
 import org.jfree.data.time.SimpleTimePeriod;
-import org.junit.Before;
-import org.junit.Test;
-import static org.junit.Assert.fail;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Some tests for a Gantt chart.
@@ -76,7 +72,7 @@ public class GanttChartTest  {
     /**
      * Common test setup.
      */
-    @Before
+    @BeforeEach
     public void setUp() {
         this.chart = createGanttChart();
     }
@@ -107,7 +103,7 @@ public class GanttChartTest  {
     @Test
     public void testDrawWithNullInfo2() {
         JFreeChart chart = createGanttChart();
-        CategoryPlot plot = (CategoryPlot) chart.getPlot();
+        CategoryPlot<String, String> plot = (CategoryPlot) chart.getPlot();
         plot.setDataset(createDataset());
         /* BufferedImage img =*/ chart.createBufferedImage(300, 200, null);
         //FIXME we should really assert a value
@@ -120,7 +116,7 @@ public class GanttChartTest  {
     public void testReplaceDataset() {
         LocalListener l = new LocalListener();
         this.chart.addChangeListener(l);
-        CategoryPlot plot = (CategoryPlot) this.chart.getPlot();
+        CategoryPlot<String, String> plot = (CategoryPlot) this.chart.getPlot();
         plot.setDataset(null);
         assertEquals(true, l.flag);
     }
@@ -131,7 +127,7 @@ public class GanttChartTest  {
      */
     @Test
     public void testSetSeriesToolTipGenerator() {
-        CategoryPlot plot = (CategoryPlot) this.chart.getPlot();
+        CategoryPlot<String, String> plot = (CategoryPlot) this.chart.getPlot();
         CategoryItemRenderer renderer = plot.getRenderer();
         StandardCategoryToolTipGenerator tt
                 = new StandardCategoryToolTipGenerator();
@@ -146,7 +142,7 @@ public class GanttChartTest  {
      */
     @Test
     public void testSetSeriesURLGenerator() {
-        CategoryPlot plot = (CategoryPlot) this.chart.getPlot();
+        CategoryPlot<String, String> plot = (CategoryPlot) this.chart.getPlot();
         CategoryItemRenderer renderer = plot.getRenderer();
         StandardCategoryURLGenerator url1
                 = new StandardCategoryURLGenerator();
@@ -161,15 +157,8 @@ public class GanttChartTest  {
      * @return The chart.
      */
     private static JFreeChart createGanttChart() {
-
-        return ChartFactory.createGanttChart(
-            "Gantt Chart",
-            "Domain", "Range",
-            null,
-            true,     // include legend
-            true,
-            true
-        );
+        return ChartFactory.createGanttChart("Gantt Chart", "Domain", "Range",
+               null, true, true, true);
     }
 
     /**
@@ -177,9 +166,8 @@ public class GanttChartTest  {
      *
      * @return The dataset.
      */
-    public static IntervalCategoryDataset createDataset() {
-
-        TaskSeries s1 = new TaskSeries("Scheduled");
+    private static IntervalCategoryDataset<String, String> createDataset() {
+        TaskSeries<String> s1 = new TaskSeries<>("Scheduled");
         s1.add(new Task("Write Proposal",
                new SimpleTimePeriod(date(1, Calendar.APRIL, 2001),
                                     date(5, Calendar.APRIL, 2001))));
@@ -217,7 +205,7 @@ public class GanttChartTest  {
                new SimpleTimePeriod(date(28, Calendar.NOVEMBER, 2001),
                                     date(30, Calendar.NOVEMBER, 2001))));
 
-        TaskSeries s2 = new TaskSeries("Actual");
+        TaskSeries<String> s2 = new TaskSeries<>("Actual");
         s2.add(new Task("Write Proposal",
                new SimpleTimePeriod(date(1, Calendar.APRIL, 2001),
                                     date(5, Calendar.APRIL, 2001))));
@@ -255,7 +243,7 @@ public class GanttChartTest  {
                new SimpleTimePeriod(date(10, Calendar.DECEMBER, 2001),
                                     date(11, Calendar.DECEMBER, 2001))));
 
-        TaskSeriesCollection collection = new TaskSeriesCollection();
+        TaskSeriesCollection<String, String> collection = new TaskSeriesCollection<>();
         collection.add(s1);
         collection.add(s2);
 
@@ -272,13 +260,13 @@ public class GanttChartTest  {
      * @return a date.
      */
     private static Date date(int day, int month, int year) {
-
         Calendar calendar = Calendar.getInstance();
         calendar.set(year, month, day);
         Date result = calendar.getTime();
         return result;
+    }    
 
-    }    /**
+    /**
      * A chart change listener.
      *
      */

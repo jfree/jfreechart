@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,24 +27,10 @@
  * ---------------------
  * FixedMillisecond.java
  * ---------------------
- * (C) Copyright 2002-2016, by Object Refinery Limited.
+ * (C) Copyright 2002-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Ulrich Voigt;
- *
- * Changes
- * -------
- * 19-Mar-2002 : Version 1, based on original Millisecond implementation (DG);
- * 24-Jun-2002 : Removed unnecessary imports (DG);
- * 10-Sep-2002 : Added getSerialIndex() method (DG);
- * 07-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 13-Mar-2003 : Moved to com.jrefinery.data.time package and implemented
- *               Serializable (DG);
- * 21-Oct-2003 : Added hashCode() method (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 06-Oct-2006 : Added peg() method (DG);
- * 28-May-2008 : Fixed immutability problem (DG);
- * 20-Aug-2014 : Remove unnecessary Date object creation in constructors (UV);
  *
  */
 

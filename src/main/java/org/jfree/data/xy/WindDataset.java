@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * ----------------
  * WindDataset.java
  * ----------------
- * (C) Copyright 2001-2008, by Achilleus Mantzios and Contributors.
+ * (C) Copyright 2001-2020, by Achilleus Mantzios and Contributors.
  *
  * Original Author:  Achilleus Mantzios;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 06-Feb-2002 : Version 1, based on code contributed by Achilleus
- *               Mantzios (DG);
  *
  */
 
@@ -45,7 +40,7 @@ package org.jfree.data.xy;
  * Interface for a dataset that supplies wind intensity and direction values
  * observed at various points in time.
  */
-public interface WindDataset extends XYDataset {
+public interface WindDataset<S extends Comparable<S>> extends XYDataset<S> {
 
     /**
      * Returns the wind direction (should be in the range 0 to 12,
@@ -58,7 +53,7 @@ public interface WindDataset extends XYDataset {
      *
      * @return The wind direction.
      */
-    public Number getWindDirection(int series, int item);
+    Number getWindDirection(int series, int item);
 
     /**
      * Returns the wind force on the Beaufort scale (0 to 12).  See:
@@ -72,6 +67,6 @@ public interface WindDataset extends XYDataset {
      *
      * @return The wind force.
      */
-    public Number getWindForce(int series, int item);
+    Number getWindForce(int series, int item);
 
 }

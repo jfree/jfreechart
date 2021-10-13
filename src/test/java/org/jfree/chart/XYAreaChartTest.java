@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,22 +27,18 @@
  * --------------------
  * XYAreaChartTest.java
  * --------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited.
+ * (C) Copyright 2005-2020, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes:
- * --------
- * 12-Apr-2005 : Version 1 (DG);
  *
  */
 
 package org.jfree.chart;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
@@ -59,8 +55,8 @@ import org.jfree.data.Range;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Some tests for an XY area chart.
@@ -73,7 +69,7 @@ public class XYAreaChartTest {
     /**
      * Common test setup.
      */
-    @Before
+    @BeforeEach
     public void setUp() {
         this.chart = createChart();
     }
@@ -104,24 +100,23 @@ public class XYAreaChartTest {
     public void testReplaceDataset() {
 
         // create a dataset...
-        XYSeries series1 = new XYSeries("Series 1");
+        XYSeries<String> series1 = new XYSeries<>("Series 1");
         series1.add(10.0, 10.0);
         series1.add(20.0, 20.0);
         series1.add(30.0, 30.0);
-        XYDataset dataset = new XYSeriesCollection(series1);
+        XYDataset<String> dataset = new XYSeriesCollection<>(series1);
 
         LocalListener l = new LocalListener();
         this.chart.addChangeListener(l);
-        XYPlot plot = (XYPlot) this.chart.getPlot();
+        XYPlot<String> plot = (XYPlot<String>) this.chart.getPlot();
         plot.setDataset(dataset);
         assertEquals(true, l.flag);
         ValueAxis axis = plot.getRangeAxis();
         Range range = axis.getRange();
-        assertTrue("Expecting the lower bound of the range to be around 10: "
-                   + range.getLowerBound(), range.getLowerBound() <= 10);
-        assertTrue("Expecting the upper bound of the range to be around 30: "
-                   + range.getUpperBound(), range.getUpperBound() >= 30);
-
+        assertTrue(range.getLowerBound() <= 10, 
+                "Expecting the lower bound of the range to be around 10: " + range.getLowerBound());
+        assertTrue(range.getUpperBound() >= 30, 
+                "Expecting the upper bound of the range to be around 30: " + range.getUpperBound());
     }
 
     /**
@@ -130,7 +125,7 @@ public class XYAreaChartTest {
      */
     @Test
     public void testSetSeriesToolTipGenerator() {
-        XYPlot plot = (XYPlot) this.chart.getPlot();
+        XYPlot<?> plot = (XYPlot<?>) this.chart.getPlot();
         XYItemRenderer renderer = plot.getRenderer();
         StandardXYToolTipGenerator tt = new StandardXYToolTipGenerator();
         renderer.setSeriesToolTipGenerator(0, tt);
@@ -144,11 +139,11 @@ public class XYAreaChartTest {
      * @return The chart.
      */
     private static JFreeChart createChart() {
-        XYSeries series1 = new XYSeries("Series 1");
+        XYSeries<String> series1 = new XYSeries<>("Series 1");
         series1.add(1.0, 1.0);
         series1.add(2.0, 2.0);
         series1.add(3.0, 3.0);
-        XYDataset dataset = new XYSeriesCollection(series1);
+        XYDataset<String> dataset = new XYSeriesCollection<>(series1);
         return ChartFactory.createXYAreaChart("Area Chart", "Domain",
                 "Range", dataset);
     }

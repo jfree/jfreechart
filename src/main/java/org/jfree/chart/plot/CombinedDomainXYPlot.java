@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * CombinedDomainXYPlot.java
  * -------------------------
- * (C) Copyright 2001-2020, by Bill Kelemen and Contributors.
+ * (C) Copyright 2001-2021, by Bill Kelemen and Contributors.
  *
  * Original Author:  Bill Kelemen;
  * Contributor(s):   David Gilbert (for Object Refinery Limited);
@@ -47,8 +47,10 @@ import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
+import org.jfree.chart.ChartElementVisitor;
 
-import org.jfree.chart.LegendItemCollection;
+import org.jfree.chart.legend.LegendItemCollection;
 import org.jfree.chart.axis.AxisSpace;
 import org.jfree.chart.axis.AxisState;
 import org.jfree.chart.axis.NumberAxis;
@@ -56,10 +58,10 @@ import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.event.PlotChangeListener;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
-import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.ui.RectangleInsets;
-import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.Args;
+import org.jfree.chart.api.RectangleEdge;
+import org.jfree.chart.api.RectangleInsets;
+import org.jfree.chart.internal.CloneUtils;
+import org.jfree.chart.internal.Args;
 import org.jfree.chart.util.ShadowGenerator;
 import org.jfree.data.Range;
 import org.jfree.data.general.DatasetChangeEvent;
@@ -69,7 +71,7 @@ import org.jfree.data.xy.XYDataset;
  * An extension of {@link XYPlot} that contains multiple subplots that share a
  * common domain axis.
  */
-public class CombinedDomainXYPlot extends XYPlot
+public class CombinedDomainXYPlot<S extends Comparable<S>> extends XYPlot<S>
         implements PlotChangeListener {
 
     /** For serialization. */
@@ -394,6 +396,20 @@ public class CombinedDomainXYPlot extends XYPlot
     }
 
     /**
+     * Receives a chart element visitor.  Many plot subclasses will override
+     * this method to handle their subcomponents.
+     * 
+     * @param visitor  the visitor ({@code null} not permitted).
+     */
+    @Override
+    public void receive(ChartElementVisitor visitor) {
+        subplots.forEach(subplot -> {
+            subplot.receive(visitor);
+        });
+        super.receive(visitor);
+    }
+
+    /**
      * Draws the plot within the specified area on a graphics device.
      *
      * @param g2  the graphics device.
@@ -540,8 +556,6 @@ public class CombinedDomainXYPlot extends XYPlot
      * @param panRange the distance to pan (as a percentage of the axis length).
      * @param info  the plot info ({@code null} not permitted).
      * @param source the source point where the pan action started.
-     *
-     * @since 1.0.15
      */
     @Override
     public void panRangeAxes(double panRange, PlotRenderingInfo info,
@@ -703,7 +717,7 @@ public class CombinedDomainXYPlot extends XYPlot
         if (this.gap != that.gap) {
             return false;
         }
-        if (!ObjectUtils.equal(this.subplots, that.subplots)) {
+        if (!Objects.equals(this.subplots, that.subplots)) {
             return false;
         }
         return super.equals(obj);
@@ -720,9 +734,9 @@ public class CombinedDomainXYPlot extends XYPlot
     @Override
     public Object clone() throws CloneNotSupportedException {
 
-        CombinedDomainXYPlot result = (CombinedDomainXYPlot) super.clone();
-        result.subplots = (List) ObjectUtils.deepClone(this.subplots);
-        for (XYPlot child : result.subplots) {
+        CombinedDomainXYPlot<S> result = (CombinedDomainXYPlot) super.clone();
+        result.subplots = CloneUtils.cloneList(this.subplots);
+        for (XYPlot<S> child : result.subplots) {
             child.setParent(result);
         }
 

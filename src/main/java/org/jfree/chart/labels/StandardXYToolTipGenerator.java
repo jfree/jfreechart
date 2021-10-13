@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------------
  * StandardXYToolTipGenerator.java
  * -------------------------------
- * (C) Copyright 2004-2020, by Object Refinery Limited.
+ * (C) Copyright 2004-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -39,7 +39,7 @@ package org.jfree.chart.labels;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.NumberFormat;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.api.PublicCloneable;
 
 import org.jfree.data.xy.XYDataset;
 
@@ -121,8 +121,6 @@ public class StandardXYToolTipGenerator extends AbstractXYItemLabelGenerator
      *                 permitted).
      * @param yFormat  the format object for the y values ({@code null}
      *                 not permitted).
-     *
-     * @since 1.0.4
      */
     public StandardXYToolTipGenerator(String formatString,
             NumberFormat xFormat, DateFormat yFormat) {

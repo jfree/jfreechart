@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,25 +27,22 @@
  * -----------------------
  * BlockContainerTest.java
  * -----------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 04-Feb-2005 : Version 1 (DG);
  *
  */
 
 package org.jfree.chart.block;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.jfree.chart.TestUtils;
-import org.junit.Test;
+import org.jfree.chart.internal.CloneUtils;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link BlockContainer} class.
@@ -80,7 +77,7 @@ public class BlockContainerTest {
     public void testCloning() throws CloneNotSupportedException {
         BlockContainer c1 = new BlockContainer(new FlowArrangement());
         c1.add(new EmptyBlock(1.2, 3.4));
-        BlockContainer c2 = (BlockContainer) c1.clone();
+        BlockContainer c2 = CloneUtils.clone(c1);
         assertTrue(c1 != c2);
         assertTrue(c1.getClass() == c2.getClass());
         assertTrue(c1.equals(c2));
@@ -93,7 +90,7 @@ public class BlockContainerTest {
     public void testSerialization() {
         BlockContainer c1 = new BlockContainer();
         c1.add(new EmptyBlock(1.2, 3.4));
-        BlockContainer c2 = (BlockContainer) TestUtils.serialised(c1);
+        BlockContainer c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 

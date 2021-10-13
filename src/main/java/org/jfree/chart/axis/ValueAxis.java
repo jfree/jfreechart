@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------
  * ValueAxis.java
  * --------------
- * (C) Copyright 2000-2017, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Jonathan Nash;
@@ -35,80 +35,6 @@
  *                   Center);
  *                   Peter Kolb (patch 1934255);
  *                   Andrew Mickish (patch 1870189);
- *
- * Changes
- * -------
- * 18-Sep-2001 : Added standard header and fixed DOS encoding problem (DG);
- * 23-Nov-2001 : Overhauled standard tick unit code (DG);
- * 04-Dec-2001 : Changed constructors to protected, and tidied up default
- *               values (DG);
- * 12-Dec-2001 : Fixed vertical gridlines bug (DG);
- * 16-Jan-2002 : Added an optional crosshair, based on the implementation by
- *               Jonathan Nash (DG);
- * 23-Jan-2002 : Moved the minimum and maximum values to here from NumberAxis,
- *               and changed the type from Number to double (DG);
- * 25-Feb-2002 : Added default value for autoRange. Changed autoAdjustRange
- *               from public to protected. Updated import statements (DG);
- * 23-Apr-2002 : Added setRange() method (DG);
- * 29-Apr-2002 : Added range adjustment methods (DG);
- * 13-Jun-2002 : Modified setCrosshairValue() to notify listeners only when the
- *               crosshairs are visible, to avoid unnecessary repaints, as
- *               suggested by Kees Kuip (DG);
- * 25-Jul-2002 : Moved lower and upper margin attributes from the NumberAxis
- *               class (DG);
- * 05-Sep-2002 : Updated constructor for changes in Axis class (DG);
- * 01-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 04-Oct-2002 : Moved standardTickUnits from NumberAxis --> ValueAxis (DG);
- * 08-Nov-2002 : Moved to new package com.jrefinery.chart.axis (DG);
- * 19-Nov-2002 : Removed grid settings (now controlled by the plot) (DG);
- * 27-Nov-2002 : Moved the 'inverted' attribute from NumberAxis to
- *               ValueAxis (DG);
- * 03-Jan-2003 : Small fix to ensure auto-range minimum is observed
- *               immediately (DG);
- * 14-Jan-2003 : Changed autoRangeMinimumSize from Number --> double (DG);
- * 20-Jan-2003 : Replaced monolithic constructor (DG);
- * 26-Mar-2003 : Implemented Serializable (DG);
- * 09-May-2003 : Added AxisLocation parameter to translation methods (DG);
- * 13-Aug-2003 : Implemented Cloneable (DG);
- * 01-Sep-2003 : Fixed bug 793167 (setMaximumAxisValue exception) (DG);
- * 02-Sep-2003 : Fixed bug 795366 (zooming on inverted axes) (DG);
- * 08-Sep-2003 : Completed Serialization support (NB);
- * 08-Sep-2003 : Renamed get/setMinimumValue --> get/setLowerBound,
- *               and get/setMaximumValue --> get/setUpperBound (DG);
- * 27-Oct-2003 : Changed DEFAULT_AUTO_RANGE_MINIMUM_SIZE value - see bug ID
- *               829606 (DG);
- * 07-Nov-2003 : Changes to tick mechanism (DG);
- * 06-Jan-2004 : Moved axis line attributes to Axis class (DG);
- * 21-Jan-2004 : Removed redundant axisLineVisible attribute.  Renamed
- *               translateJava2DToValue --> java2DToValue, and
- *               translateValueToJava2D --> valueToJava2D (DG);
- * 23-Jan-2004 : Fixed setAxisLinePaint() and setAxisLineStroke() which had no
- *               effect (andreas.gawecki@coremedia.com);
- * 07-Apr-2004 : Changed text bounds calculation (DG);
- * 26-Apr-2004 : Added getter/setter methods for arrow shapes (DG);
- * 18-May-2004 : Added methods to set axis range *including* current
- *               margins (DG);
- * 02-Jun-2004 : Fixed bug in setRangeWithMargins() method (DG);
- * 30-Sep-2004 : Moved drawRotatedString() from RefineryUtilities
- *               --> TextUtilities (DG);
- * 11-Jan-2005 : Removed deprecated methods in preparation for 1.0.0
- *               release (DG);
- * 21-Apr-2005 : Replaced Insets with RectangleInsets (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 10-Oct-2006 : Source reformatting (DG);
- * 22-Mar-2007 : Added new defaultAutoRange attribute (DG);
- * 02-Aug-2007 : Check for major tick when drawing label (DG);
- * 25-Sep-2008 : Added minor tick support, see patch 1934255 by Peter Kolb (DG);
- * 21-Jan-2009 : Updated default behaviour of minor ticks (DG);
- * 18-Mar-2008 : Added resizeRange2() method which provides more natural
- *               anchored zooming for mouse wheel support (DG);
- * 26-Mar-2009 : In equals(), only check current range if autoRange is
- *               false (DG);
- * 30-Mar-2009 : Added pan(double) method (DG);
- * 03-Sep-2012 : Fix reserveSpace() method, bug 3555275 (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
- * 18-Mar-2014 : Updates to support attributed tick labels for LogAxis (DG);
- * 29-Jul-2014 : Add hints to normalise axis line and tick marks (DG);
  *
  */
 
@@ -130,17 +56,17 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 import org.jfree.chart.event.AxisChangeEvent;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.text.TextUtils;
-import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.api.RectangleEdge;
+import org.jfree.chart.api.RectangleInsets;
 import org.jfree.chart.util.AttrStringUtils;
-import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.PublicCloneable;
-import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.api.PublicCloneable;
+import org.jfree.chart.internal.SerialUtils;
 import org.jfree.data.Range;
 
 /**
@@ -220,8 +146,6 @@ public abstract class ValueAxis extends Axis
     /**
      * The default range is used when the dataset is empty and the axis needs
      * to determine the auto range.
-     *
-     * @since 1.0.5
      */
     private Range defaultAutoRange;
 
@@ -678,9 +602,8 @@ public abstract class ValueAxis extends Axis
         Object saved = g2.getRenderingHint(RenderingHints.KEY_STROKE_CONTROL);
         g2.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, 
                 RenderingHints.VALUE_STROKE_NORMALIZE);
-        Iterator iterator = ticks.iterator();
-        while (iterator.hasNext()) {
-            ValueTick tick = (ValueTick) iterator.next();
+        for (Object o : ticks) {
+            ValueTick tick = (ValueTick) o;
             if (isTickLabelsVisible()) {
                 g2.setPaint(getTickLabelPaint());
                 float[] anchorPoint = calculateAnchorPoint(tick, cursor,
@@ -690,17 +613,17 @@ public abstract class ValueAxis extends Axis
                     if (lt.getAttributedLabel() == null) {
                         continue;
                     }
-                    AttrStringUtils.drawRotatedString(lt.getAttributedLabel(), 
-                            g2, anchorPoint[0], anchorPoint[1], 
-                            tick.getTextAnchor(), tick.getAngle(), 
+                    AttrStringUtils.drawRotatedString(lt.getAttributedLabel(),
+                            g2, anchorPoint[0], anchorPoint[1],
+                            tick.getTextAnchor(), tick.getAngle(),
                             tick.getRotationAnchor());
                 } else {
                     if (tick.getText() == null) {
                         continue;
                     }
                     TextUtils.drawRotatedString(tick.getText(), g2,
-                            anchorPoint[0], anchorPoint[1], 
-                            tick.getTextAnchor(), tick.getAngle(), 
+                            anchorPoint[0], anchorPoint[1],
+                            tick.getTextAnchor(), tick.getAngle(),
                             tick.getRotationAnchor());
                 }
             }
@@ -709,11 +632,11 @@ public abstract class ValueAxis extends Axis
                     TickType.MAJOR)) || (isMinorTickMarksVisible()
                     && tick.getTickType().equals(TickType.MINOR))) {
 
-                double ol = (tick.getTickType().equals(TickType.MINOR)) 
+                double ol = (tick.getTickType().equals(TickType.MINOR))
                         ? getMinorTickMarkOutsideLength()
                         : getTickMarkOutsideLength();
 
-                double il = (tick.getTickType().equals(TickType.MINOR)) 
+                double il = (tick.getTickType().equals(TickType.MINOR))
                         ? getMinorTickMarkInsideLength()
                         : getTickMarkInsideLength();
 
@@ -849,9 +772,8 @@ public abstract class ValueAxis extends Axis
         double maxHeight = 0.0;
         if (vertical) {
             FontMetrics fm = g2.getFontMetrics(font);
-            Iterator iterator = ticks.iterator();
-            while (iterator.hasNext()) {
-                Tick tick = (Tick) iterator.next();
+            for (Object o : ticks) {
+                Tick tick = (Tick) o;
                 Rectangle2D labelBounds = null;
                 if (tick instanceof LogTick) {
                     LogTick lt = (LogTick) tick;
@@ -863,10 +785,10 @@ public abstract class ValueAxis extends Axis
                     labelBounds = TextUtils.getTextBounds(
                             tick.getText(), g2, fm);
                 }
-                if (labelBounds != null && labelBounds.getWidth() 
+                if (labelBounds != null && labelBounds.getWidth()
                         + insets.getTop() + insets.getBottom() > maxHeight) {
                     maxHeight = labelBounds.getWidth()
-                                + insets.getTop() + insets.getBottom();
+                            + insets.getTop() + insets.getBottom();
                 }
             }
         } else {
@@ -898,9 +820,8 @@ public abstract class ValueAxis extends Axis
         double maxWidth = 0.0;
         if (!vertical) {
             FontMetrics fm = g2.getFontMetrics(font);
-            Iterator iterator = ticks.iterator();
-            while (iterator.hasNext()) {
-                Tick tick = (Tick) iterator.next();
+            for (Object o : ticks) {
+                Tick tick = (Tick) o;
                 Rectangle2D labelBounds = null;
                 if (tick instanceof LogTick) {
                     LogTick lt = (LogTick) tick;
@@ -909,14 +830,14 @@ public abstract class ValueAxis extends Axis
                                 lt.getAttributedLabel(), g2);
                     }
                 } else if (tick.getText() != null) {
-                    labelBounds = TextUtils.getTextBounds(tick.getText(), 
+                    labelBounds = TextUtils.getTextBounds(tick.getText(),
                             g2, fm);
                 }
-                if (labelBounds != null 
+                if (labelBounds != null
                         && labelBounds.getWidth() + insets.getLeft()
                         + insets.getRight() > maxWidth) {
                     maxWidth = labelBounds.getWidth()
-                               + insets.getLeft() + insets.getRight();
+                            + insets.getLeft() + insets.getRight();
                 }
             }
         } else {
@@ -1060,8 +981,6 @@ public abstract class ValueAxis extends Axis
      * @return The default auto range (never {@code null}).
      *
      * @see #setDefaultAutoRange(Range)
-     *
-     * @since 1.0.5
      */
     public Range getDefaultAutoRange() {
         return this.defaultAutoRange;
@@ -1074,8 +993,6 @@ public abstract class ValueAxis extends Axis
      * @param range  the range ({@code null} not permitted).
      *
      * @see #getDefaultAutoRange()
-     *
-     * @since 1.0.5
      */
     public void setDefaultAutoRange(Range range) {
         Args.nullNotPermitted(range, "range");
@@ -1435,8 +1352,6 @@ public abstract class ValueAxis extends Axis
      * @return The number of minor tick marks to display.
      *
      * @see #setMinorTickCount(int)
-     *
-     * @since 1.0.12
      */
     public int getMinorTickCount() {
         return this.minorTickCount;
@@ -1449,8 +1364,6 @@ public abstract class ValueAxis extends Axis
      * @param count  the count.
      *
      * @see #getMinorTickCount()
-     *
-     * @since 1.0.12
      */
     public void setMinorTickCount(int count) {
         this.minorTickCount = count;
@@ -1580,8 +1493,6 @@ public abstract class ValueAxis extends Axis
      * @param anchorValue  the new central value after the resize.
      *
      * @see #resizeRange(double)
-     *
-     * @since 1.0.13
      */
     public void resizeRange2(double percent, double anchorValue) {
         if (percent > 0.0) {
@@ -1623,8 +1534,6 @@ public abstract class ValueAxis extends Axis
      * Slides the axis range by the specified percentage.
      *
      * @param percent  the percentage.
-     *
-     * @since 1.0.13
      */
     public void pan(double percent) {
         Range r = getRange();
@@ -1683,7 +1592,7 @@ public abstract class ValueAxis extends Axis
             return false;
         }
         // if autoRange is true, then the current range is irrelevant
-        if (!this.autoRange && !ObjectUtils.equal(this.range, that.range)) {
+        if (!this.autoRange && !Objects.equals(this.range, that.range)) {
             return false;
         }
         if (this.autoRange != that.autoRange) {
@@ -1707,8 +1616,7 @@ public abstract class ValueAxis extends Axis
         if (this.autoTickUnitSelection != that.autoTickUnitSelection) {
             return false;
         }
-        if (!ObjectUtils.equal(this.standardTickUnits,
-                that.standardTickUnits)) {
+        if (!Objects.equals(this.standardTickUnits, that.standardTickUnits)) {
             return false;
         }
         if (this.verticalTickLabels != that.verticalTickLabels) {

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------------------
  * XYDrawableAnnotation.java
  * -------------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited.
+ * (C) Copyright 2003-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -40,17 +40,17 @@ import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
+import java.util.Objects;
 
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.ui.Drawable;
-import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.Drawable;
+import org.jfree.chart.api.RectangleEdge;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.api.PublicCloneable;
 
 /**
  * A general annotation that can be placed on an {@link XYPlot}.
@@ -82,10 +82,10 @@ public class XYDrawableAnnotation extends AbstractXYAnnotation
     /**
      * Creates a new annotation to be displayed within the given area.
      *
-     * @param x  the x-coordinate for the area.
-     * @param y  the y-coordinate for the area.
-     * @param width  the width of the area.
-     * @param height  the height of the area.
+     * @param x  the x-coordinate for the area (must be finite).
+     * @param y  the y-coordinate for the area (must be finite).
+     * @param width  the width of the area (must be finite).
+     * @param height  the height of the area (must be finite).
      * @param drawable  the drawable object ({@code null} not permitted).
      */
     public XYDrawableAnnotation(double x, double y, double width, double height,
@@ -99,27 +99,73 @@ public class XYDrawableAnnotation extends AbstractXYAnnotation
      * will be drawn at twice the requested display size then scaled down to
      * fit the space.
      *
-     * @param x  the x-coordinate for the area.
-     * @param y  the y-coordinate for the area.
-     * @param displayWidth  the width of the area.
-     * @param displayHeight  the height of the area.
-     * @param drawScaleFactor  the scaling factor for drawing.
+     * @param x  the x-coordinate for the area (must be finite).
+     * @param y  the y-coordinate for the area (must be finite).
+     * @param displayWidth  the width of the area (must be finite).
+     * @param displayHeight  the height of the area (must be finite).
+     * @param drawScaleFactor  the scaling factor for drawing (must be finite).
      * @param drawable  the drawable object ({@code null} not permitted).
-     *
-     * @since 1.0.11
      */
     public XYDrawableAnnotation(double x, double y, double displayWidth,
             double displayHeight, double drawScaleFactor, Drawable drawable) {
-
         super();
         Args.nullNotPermitted(drawable, "drawable");
+        Args.requireFinite(x, "x");
+        Args.requireFinite(y, "y");
+        Args.requireFinite(displayWidth, "displayWidth");
+        Args.requireFinite(displayHeight, "displayHeight");
+        Args.requireFinite(drawScaleFactor, "drawScaleFactor");
         this.x = x;
         this.y = y;
         this.displayWidth = displayWidth;
         this.displayHeight = displayHeight;
         this.drawScaleFactor = drawScaleFactor;
         this.drawable = drawable;
+    }
 
+    /**
+     * Returns the x-coordinate (set in the constructor).
+     * 
+     * @return The x-coordinate.
+     */
+    public double getX() {
+        return x;
+    }
+
+    /**
+     * Returns the y-coordinate (set in the constructor).
+     * 
+     * @return The y-coordinate.
+     */
+    public double getY() {
+        return y;
+    }
+
+    /**
+     * Returns the display width (set in the constructor).
+     * 
+     * @return The display width.
+     */
+    public double getDisplayWidth() {
+        return displayWidth;
+    }
+
+    /**
+     * Returns the display height (set in the constructor).
+     * 
+     * @return The display height.
+     */
+    public double getDisplayHeight() {
+        return displayHeight;
+    }
+
+    /**
+     * Returns the scale factor (set in the constructor).
+     * 
+     * @return The scale factor.
+     */
+    public double getDrawScaleFactor() {
+        return drawScaleFactor;
     }
 
     /**
@@ -184,7 +230,6 @@ public class XYDrawableAnnotation extends AbstractXYAnnotation
      */
     @Override
     public boolean equals(Object obj) {
-
         if (obj == this) { // simple case
             return true;
         }
@@ -211,12 +256,10 @@ public class XYDrawableAnnotation extends AbstractXYAnnotation
         if (this.drawScaleFactor != that.drawScaleFactor) {
             return false;
         }
-        if (!ObjectUtils.equal(this.drawable, that.drawable)) {
+        if (!Objects.equals(this.drawable, that.drawable)) {
             return false;
         }
-        // seem to be the same...
         return true;
-
     }
 
     /**

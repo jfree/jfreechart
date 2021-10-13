@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ---------
  * Plot.java
  * ---------
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   Sylvain Vieujot;
@@ -65,10 +65,12 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import javax.swing.event.EventListenerList;
+import org.jfree.chart.ChartElement;
+import org.jfree.chart.ChartElementVisitor;
 
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.LegendItemCollection;
-import org.jfree.chart.LegendItemSource;
+import org.jfree.chart.legend.LegendItemCollection;
+import org.jfree.chart.legend.LegendItemSource;
 import org.jfree.chart.annotations.Annotation;
 import org.jfree.chart.axis.AxisLocation;
 import org.jfree.chart.entity.EntityCollection;
@@ -86,24 +88,23 @@ import org.jfree.chart.text.G2TextMeasurer;
 import org.jfree.chart.text.TextBlock;
 import org.jfree.chart.text.TextBlockAnchor;
 import org.jfree.chart.text.TextUtils;
-import org.jfree.chart.ui.Align;
-import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.ui.RectangleInsets;
-import org.jfree.chart.util.CloneUtils;
-import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.PublicCloneable;
-import org.jfree.chart.util.SerialUtils;
+import org.jfree.chart.api.RectangleEdge;
+import org.jfree.chart.api.RectangleInsets;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.internal.CloneUtils;
+import org.jfree.chart.internal.PaintUtils;
+import org.jfree.chart.api.PublicCloneable;
+import org.jfree.chart.api.RectangleAlignment;
+import org.jfree.chart.internal.SerialUtils;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.DatasetChangeListener;
-import org.jfree.data.general.DatasetGroup;
 
 /**
  * The base class for all plots in JFreeChart.  The {@link JFreeChart} class
  * delegates the drawing of axes and data to the plot.  This base class
  * provides facilities common to most plot types.
  */
-public abstract class Plot implements AxisChangeListener,
+public abstract class Plot implements ChartElement, AxisChangeListener,
         DatasetChangeListener, AnnotationChangeListener, MarkerChangeListener,
         LegendItemSource, PublicCloneable, Cloneable, Serializable {
 
@@ -151,16 +152,11 @@ public abstract class Plot implements AxisChangeListener,
      * The chart that the plot is assigned to.  It can be {@code null} if the
      * plot is not assigned to a chart yet, or if the plot is a subplot of a
      * another plot.
-     * 
-     * @since 1.0.20
      */
     private JFreeChart chart;
     
     /** The parent plot ({@code null} if this is the root plot). */
     private Plot parent;
-
-    /** The dataset group (to be used for thread synchronisation). */
-    private DatasetGroup datasetGroup;
 
     /** The message to display if no data is available. */
     private String noDataMessage;
@@ -176,8 +172,6 @@ public abstract class Plot implements AxisChangeListener,
 
     /**
      * A flag that controls whether or not the plot outline is drawn.
-     *
-     * @since 1.0.6
      */
     private boolean outlineVisible;
 
@@ -194,7 +188,7 @@ public abstract class Plot implements AxisChangeListener,
     private transient Image backgroundImage;  // not currently serialized
 
     /** The alignment for the background image. */
-    private int backgroundImageAlignment = Align.FIT;
+    private RectangleAlignment backgroundImageAlignment = RectangleAlignment.FILL;
 
     /** The alpha value used to draw the background image. */
     private float backgroundImageAlpha = 0.5f;
@@ -215,8 +209,6 @@ public abstract class Plot implements AxisChangeListener,
      * A flag that controls whether or not the plot will notify listeners
      * of changes (defaults to true, but sometimes it is useful to disable
      * this).
-     *
-     * @since 1.0.13
      */
     private boolean notify;
 
@@ -251,8 +243,6 @@ public abstract class Plot implements AxisChangeListener,
      * plot is a subplot of another plot.
      * 
      * @return The chart (possibly {@code null}).
-     * 
-     * @since 1.0.20
      */
     public JFreeChart getChart() {
         return this.chart;
@@ -263,8 +253,6 @@ public abstract class Plot implements AxisChangeListener,
      * intended for external use.
      * 
      * @param chart  the chart ({@code null} permitted).
-     * 
-     * @since 1.0.20
      */
     public void setChart(JFreeChart chart) {
         this.chart = chart;
@@ -276,8 +264,6 @@ public abstract class Plot implements AxisChangeListener,
      * a chart instance, this method will return {@code false}.
      * 
      * @return A boolean.
-     * 
-     * @since 1.0.20
      */
     public boolean fetchElementHintingFlag() {
         if (this.parent != null) {
@@ -287,28 +273,6 @@ public abstract class Plot implements AxisChangeListener,
             return this.chart.getElementHinting();
         }
         return false;
-    }
-
-    /**
-     * Returns the dataset group for the plot (not currently used).
-     *
-     * @return The dataset group.
-     *
-     * @see #setDatasetGroup(DatasetGroup)
-     */
-    public DatasetGroup getDatasetGroup() {
-        return this.datasetGroup;
-    }
-
-    /**
-     * Sets the dataset group (not currently used).
-     *
-     * @param group  the dataset group ({@code null} permitted).
-     *
-     * @see #getDatasetGroup()
-     */
-    protected void setDatasetGroup(DatasetGroup group) {
-        this.datasetGroup = group;
     }
 
     /**
@@ -360,7 +324,7 @@ public abstract class Plot implements AxisChangeListener,
      * @see #getNoDataMessageFont()
      */
     public void setNoDataMessageFont(Font font) {
-        Objects.requireNonNull(font, "font");
+        Args.nullNotPermitted(font, "font");
         this.noDataMessageFont = font;
         fireChangeEvent();
     }
@@ -386,7 +350,7 @@ public abstract class Plot implements AxisChangeListener,
      * @see #getNoDataMessagePaint()
      */
     public void setNoDataMessagePaint(Paint paint) {
-        Objects.requireNonNull(paint, "paint");
+        Args.nullNotPermitted(paint, "paint");
         this.noDataMessagePaint = paint;
         fireChangeEvent();
     }
@@ -494,7 +458,7 @@ public abstract class Plot implements AxisChangeListener,
      * @see #setInsets(RectangleInsets)
      */
     public void setInsets(RectangleInsets insets, boolean notify) {
-        Objects.requireNonNull(insets, "insets");
+        Args.nullNotPermitted(insets, "insets");
         if (!this.insets.equals(insets)) {
             this.insets = insets;
             if (notify) {
@@ -617,8 +581,6 @@ public abstract class Plot implements AxisChangeListener,
      * @param notify  notify listeners?
      *
      * @see #getDrawingSupplier()
-     *
-     * @since 1.0.11
      */
     public void setDrawingSupplier(DrawingSupplier supplier, boolean notify) {
         this.drawingSupplier = supplier;
@@ -653,27 +615,27 @@ public abstract class Plot implements AxisChangeListener,
     }
 
     /**
-     * Returns the background image alignment. Alignment constants are defined
-     * in the {@code Align} class.
+     * Returns the background image alignment. The default value is 
+     * {@code RectangleAlignment.FILL}.
      *
-     * @return The alignment.
+     * @return The alignment (never {@code null}).
      *
-     * @see #setBackgroundImageAlignment(int)
+     * @see #setBackgroundImageAlignment(RectangleAlignment)
      */
-    public int getBackgroundImageAlignment() {
+    public RectangleAlignment getBackgroundImageAlignment() {
         return this.backgroundImageAlignment;
     }
 
     /**
      * Sets the alignment for the background image and sends a
-     * {@link PlotChangeEvent} to all registered listeners.  Alignment options
-     * are defined by the {@link org.jfree.chart.ui.Align} class.
+     * {@link PlotChangeEvent} to all registered listeners.  
      *
-     * @param alignment  the alignment.
+     * @param alignment  the alignment ({@code null} not permitted).
      *
      * @see #getBackgroundImageAlignment()
      */
-    public void setBackgroundImageAlignment(int alignment) {
+    public void setBackgroundImageAlignment(RectangleAlignment alignment) {
+        Args.nullNotPermitted(alignment, "alignment");
         if (this.backgroundImageAlignment != alignment) {
             this.backgroundImageAlignment = alignment;
             fireChangeEvent();
@@ -724,8 +686,6 @@ public abstract class Plot implements AxisChangeListener,
      *
      * @return The outline visibility flag.
      *
-     * @since 1.0.6
-     *
      * @see #setOutlineVisible(boolean)
      */
     public boolean isOutlineVisible() {
@@ -737,8 +697,6 @@ public abstract class Plot implements AxisChangeListener,
      * drawn, and sends a {@link PlotChangeEvent} to all registered listeners.
      *
      * @param visible  the new flag value.
-     *
-     * @since 1.0.6
      *
      * @see #isOutlineVisible()
      */
@@ -868,8 +826,6 @@ public abstract class Plot implements AxisChangeListener,
      * @return A boolean.
      *
      * @see #setNotify(boolean)
-     *
-     * @since 1.0.13
      */
     public boolean isNotify() {
         return this.notify;
@@ -882,8 +838,6 @@ public abstract class Plot implements AxisChangeListener,
      * @param notify  a boolean.
      *
      * @see #isNotify()
-     *
-     * @since 1.0.13
      */
     public void setNotify(boolean notify) {
         this.notify = notify;
@@ -936,11 +890,20 @@ public abstract class Plot implements AxisChangeListener,
 
     /**
      * Sends a {@link PlotChangeEvent} to all registered listeners.
-     *
-     * @since 1.0.10
      */
     protected void fireChangeEvent() {
         notifyListeners(new PlotChangeEvent(this));
+    }
+
+    /**
+     * Receives a chart element visitor.  Many plot subclasses will override
+     * this method to handle their subcomponents.
+     * 
+     * @param visitor  the visitor ({@code null} not permitted).
+     */
+    @Override
+    public void receive(ChartElementVisitor visitor) {
+        visitor.visit(this);
     }
 
     /**
@@ -998,14 +961,11 @@ public abstract class Plot implements AxisChangeListener,
      *
      * @param g2  the graphics target.
      * @param area  the plot area.
-     * @param orientation  the plot orientation ({@code null} not
-     *         permitted).
-     *
-     * @since 1.0.6
+     * @param orientation  the plot orientation ({@code null} not permitted).
      */
     protected void fillBackground(Graphics2D g2, Rectangle2D area,
             PlotOrientation orientation) {
-        Objects.requireNonNull(orientation, "orientation");
+        Args.nullNotPermitted(orientation, "orientation");
         if (this.backgroundPaint == null) {
             return;
         }
@@ -1054,7 +1014,7 @@ public abstract class Plot implements AxisChangeListener,
         Rectangle2D dest = new Rectangle2D.Double(0.0, 0.0,
                 this.backgroundImage.getWidth(null),
                 this.backgroundImage.getHeight(null));
-        Align.align(dest, area, this.backgroundImageAlignment);
+        this.backgroundImageAlignment.align(dest, area);
         Shape savedClip = g2.getClip();
         g2.clip(area);
         g2.drawImage(this.backgroundImage, (int) dest.getX(),
@@ -1121,8 +1081,6 @@ public abstract class Plot implements AxisChangeListener,
      *     subclass) ({@code null} permitted).
      * @param urlText  the url (defined in the respective Plot subclass)
      *     ({@code null} permitted).
-     *
-     *  @since 1.0.13
      */
     protected void createAndAddEntity(Rectangle2D dataArea,
             PlotRenderingInfo plotState, String toolTip, String urlText) {
@@ -1163,8 +1121,6 @@ public abstract class Plot implements AxisChangeListener,
      * this plot.
      *
      * @param event  information about the event (not used here).
-     *
-     * @since 1.0.14
      */
     @Override
     public void annotationChanged(AnnotationChangeEvent event) {
@@ -1201,8 +1157,6 @@ public abstract class Plot implements AxisChangeListener,
      * plot.
      *
      * @param event  the event.
-     *
-     * @since 1.0.3
      */
     @Override
     public void markerChanged(MarkerChangeEvent event) {
@@ -1273,25 +1227,23 @@ public abstract class Plot implements AxisChangeListener,
             return false;
         }
         Plot that = (Plot) obj;
-        if (!ObjectUtils.equal(this.noDataMessage, that.noDataMessage)) {
+        if (!Objects.equals(this.noDataMessage, that.noDataMessage)) {
             return false;
         }
-        if (!ObjectUtils.equal(
-            this.noDataMessageFont, that.noDataMessageFont
-        )) {
+        if (!Objects.equals(this.noDataMessageFont, that.noDataMessageFont)) {
             return false;
         }
         if (!PaintUtils.equal(this.noDataMessagePaint,
                 that.noDataMessagePaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.insets, that.insets)) {
+        if (!Objects.equals(this.insets, that.insets)) {
             return false;
         }
         if (this.outlineVisible != that.outlineVisible) {
             return false;
         }
-        if (!ObjectUtils.equal(this.outlineStroke, that.outlineStroke)) {
+        if (!Objects.equals(this.outlineStroke, that.outlineStroke)) {
             return false;
         }
         if (!PaintUtils.equal(this.outlinePaint, that.outlinePaint)) {
@@ -1300,8 +1252,7 @@ public abstract class Plot implements AxisChangeListener,
         if (!PaintUtils.equal(this.backgroundPaint, that.backgroundPaint)) {
             return false;
         }
-        if (!ObjectUtils.equal(this.backgroundImage,
-                that.backgroundImage)) {
+        if (!Objects.equals(this.backgroundImage, that.backgroundImage)) {
             return false;
         }
         if (this.backgroundImageAlignment != that.backgroundImageAlignment) {
@@ -1335,17 +1286,12 @@ public abstract class Plot implements AxisChangeListener,
      */
     @Override
     public Object clone() throws CloneNotSupportedException {
-
         Plot clone = (Plot) super.clone();
         // private Plot parent <-- don't clone the parent plot, but take care
         // childs in combined plots instead
-        if (this.datasetGroup != null) {
-            clone.datasetGroup = CloneUtils.clone(this.datasetGroup);
-        }
         clone.drawingSupplier = CloneUtils.clone(this.drawingSupplier);
         clone.listenerList = new EventListenerList();
         return clone;
-
     }
 
     /**
@@ -1396,8 +1342,8 @@ public abstract class Plot implements AxisChangeListener,
     public static RectangleEdge resolveDomainAxisLocation(
             AxisLocation location, PlotOrientation orientation) {
 
-        Objects.requireNonNull(location, "location");
-        Objects.requireNonNull(orientation, "orientation");
+        Args.nullNotPermitted(location, "location");
+        Args.nullNotPermitted(orientation, "orientation");
 
         RectangleEdge result = null;
         switch (location) {
@@ -1451,8 +1397,8 @@ public abstract class Plot implements AxisChangeListener,
     public static RectangleEdge resolveRangeAxisLocation(
             AxisLocation location, PlotOrientation orientation) {
 
-        Objects.requireNonNull(location, "location");
-        Objects.requireNonNull(orientation, "orientation");
+        Args.nullNotPermitted(location, "location");
+        Args.nullNotPermitted(orientation, "orientation");
 
         RectangleEdge result = null;
         switch (location) {

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,24 +27,19 @@
  * -------------------------
  * XYLineAnnotationTest.java
  * -------------------------
- * (C) Copyright 2003-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 19-Aug-2003 : Version 1 (DG);
- * 07-Jan-2005 : Added hashCode() test (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG);
  *
  */
 
 package org.jfree.chart.annotations;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -52,15 +47,59 @@ import java.awt.GradientPaint;
 import java.awt.Stroke;
 
 import org.jfree.chart.TestUtils;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.api.PublicCloneable;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link XYLineAnnotation} class.
  */
 public class XYLineAnnotationTest {
 
+    private static final double EPSILON = 0.000000001;
+
+    @Test
+    public void testConstructor() {
+        Stroke stroke = new BasicStroke(2.0f);
+        XYLineAnnotation a1 = new XYLineAnnotation(10.0, 20.0, 100.0, 200.0,
+                stroke, Color.BLUE);
+        assertEquals(10.0, a1.getX1(), EPSILON);
+        assertEquals(20.0, a1.getY1(), EPSILON);
+        assertEquals(100.0, a1.getX2(), EPSILON);
+        assertEquals(200.0, a1.getY2(), EPSILON);
+        assertEquals(stroke, a1.getStroke());
+        assertEquals(Color.BLUE, a1.getPaint());
+    }
+    
+    @Test
+    public void testConstructorExceptions() {
+        Stroke stroke = new BasicStroke(2.0f);
+        assertThrows(IllegalArgumentException.class, () -> {
+            XYLineAnnotation a1 = new XYLineAnnotation(Double.NaN, 20.0, 100.0, 200.0,
+                stroke, Color.BLUE);
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            XYLineAnnotation a1 = new XYLineAnnotation(10.0, Double.NaN, 100.0, 200.0,
+                stroke, Color.BLUE);
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            XYLineAnnotation a1 = new XYLineAnnotation(10.0, 20.0, Double.NaN, 200.0,
+                stroke, Color.BLUE);
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            XYLineAnnotation a1 = new XYLineAnnotation(10.0, 20.0, 100.0, Double.NaN,
+                stroke, Color.BLUE);
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            XYLineAnnotation a1 = new XYLineAnnotation(10.0, 20.0, 100.0, 200.0,
+                null, Color.BLUE);
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            XYLineAnnotation a1 = new XYLineAnnotation(10.0, 20.0, 100.0, 200.0,
+                stroke, null);
+        });
+    }
+    
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
@@ -159,7 +198,7 @@ public class XYLineAnnotationTest {
         Stroke stroke = new BasicStroke(2.0f);
         XYLineAnnotation a1 = new XYLineAnnotation(10.0, 20.0, 100.0, 200.0,
                 stroke, Color.BLUE);
-        XYLineAnnotation a2 = (XYLineAnnotation) TestUtils.serialised(a1);
+        XYLineAnnotation a2 = TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 

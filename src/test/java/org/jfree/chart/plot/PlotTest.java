@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -------------
  * PlotTest.java
  * -------------
- * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -36,8 +36,8 @@
 
 package org.jfree.chart.plot;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -48,9 +48,10 @@ import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.Stroke;
 
-import org.jfree.chart.ui.Align;
-import org.jfree.chart.ui.RectangleInsets;
-import org.junit.Test;
+import org.jfree.chart.api.RectangleAlignment;
+import org.jfree.chart.api.RectangleInsets;
+import org.jfree.chart.plot.pie.PiePlot;
+import org.junit.jupiter.api.Test;
 
 /**
  * Some tests for the {@link Plot} class.
@@ -116,10 +117,10 @@ public class PlotTest {
         assertTrue(plot1.equals(plot2));
 
         // backgroundPaint
-        plot1.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.cyan,
+        plot1.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.CYAN,
                 3.0f, 4.0f, Color.GREEN));
         assertFalse(plot1.equals(plot2));
-        plot2.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.cyan,
+        plot2.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.CYAN,
                 3.0f, 4.0f, Color.GREEN));
         assertTrue(plot1.equals(plot2));
 
@@ -130,9 +131,9 @@ public class PlotTest {
 //        assertTrue(plot1.equals(plot2));
 
         // backgroundImageAlignment
-        plot1.setBackgroundImageAlignment(Align.BOTTOM_RIGHT);
+        plot1.setBackgroundImageAlignment(RectangleAlignment.BOTTOM_RIGHT);
         assertFalse(plot1.equals(plot2));
-        plot2.setBackgroundImageAlignment(Align.BOTTOM_RIGHT);
+        plot2.setBackgroundImageAlignment(RectangleAlignment.BOTTOM_RIGHT);
         assertTrue(plot1.equals(plot2));
 
         // backgroundImageAlpha

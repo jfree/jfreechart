@@ -36,9 +36,9 @@
 
 package org.jfree.chart.renderer.xy;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.awt.Color;
 import java.awt.GradientPaint;
@@ -49,10 +49,11 @@ import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.internal.CloneUtils;
+import org.jfree.chart.api.PublicCloneable;
 import org.jfree.data.Range;
 import org.jfree.data.xy.TableXYDataset;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link StackedXYBarRenderer} class.
@@ -95,11 +96,13 @@ public class StackedXYBarRendererTest {
 
     /**
      * Confirm that cloning works.
+     * 
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
         StackedXYBarRenderer r1 = new StackedXYBarRenderer();
-        StackedXYBarRenderer r2 = (StackedXYBarRenderer) r1.clone();
+        StackedXYBarRenderer r2 = CloneUtils.clone(r1);
         assertTrue(r1 != r2);
         assertTrue(r1.getClass() == r2.getClass());
         assertTrue(r1.equals(r2));
@@ -122,8 +125,7 @@ public class StackedXYBarRendererTest {
         StackedXYBarRenderer r1 = new StackedXYBarRenderer();
         r1.setSeriesPaint(0, new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f,
                 4.0f, Color.YELLOW));
-        StackedXYBarRenderer r2 = (StackedXYBarRenderer) 
-                TestUtils.serialised(r1);
+        StackedXYBarRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 
@@ -132,12 +134,12 @@ public class StackedXYBarRendererTest {
      */
     @Test
     public void testFindDomainBounds() {
-        TableXYDataset dataset
+        TableXYDataset<String> dataset
                 = RendererXYPackageUtils.createTestTableXYDataset();
         JFreeChart chart = ChartFactory.createStackedXYAreaChart(
                 "Test Chart", "X", "Y", dataset,
                 PlotOrientation.VERTICAL, false, false, false);
-        XYPlot plot = (XYPlot) chart.getPlot();
+        XYPlot<?> plot = (XYPlot) chart.getPlot();
         plot.setRenderer(new StackedXYBarRenderer());
         NumberAxis domainAxis = (NumberAxis) plot.getDomainAxis();
         domainAxis.setAutoRangeIncludesZero(false);
@@ -153,12 +155,12 @@ public class StackedXYBarRendererTest {
      */
     @Test
     public void testFindRangeBounds() {
-        TableXYDataset dataset
+        TableXYDataset<String> dataset
                 = RendererXYPackageUtils.createTestTableXYDataset();
         JFreeChart chart = ChartFactory.createStackedXYAreaChart(
                 "Test Chart", "X", "Y", dataset,
                 PlotOrientation.VERTICAL, false, false, false);
-        XYPlot plot = (XYPlot) chart.getPlot();
+        XYPlot<?> plot = (XYPlot) chart.getPlot();
         plot.setRenderer(new StackedXYBarRenderer());
         NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
         Range bounds = rangeAxis.getRange();

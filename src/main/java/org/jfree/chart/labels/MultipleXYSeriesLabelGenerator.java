@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * -----------------------------------
  * MultipleXYSeriesLabelGenerator.java
  * -----------------------------------
- * (C) Copyright 2004-2020, by Object Refinery Limited.
+ * (C) Copyright 2004-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -44,9 +44,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.jfree.chart.HashUtils;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.internal.HashUtils;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.api.PublicCloneable;
 import org.jfree.data.xy.XYDataset;
 
 /**
@@ -63,10 +63,10 @@ public class MultipleXYSeriesLabelGenerator implements XYSeriesLabelGenerator,
     public static final String DEFAULT_LABEL_FORMAT = "{0}";
 
     /** The format pattern for the initial part of the label. */
-    private String formatPattern;
+    private final String formatPattern;
 
     /** The format pattern for additional labels. */
-    private String additionalFormatPattern;
+    private final String additionalFormatPattern;
 
     /** Storage for the additional series labels. */
     private Map seriesLabelLists;
@@ -173,9 +173,7 @@ public class MultipleXYSeriesLabelGenerator implements XYSeriesLabelGenerator,
                 = (MultipleXYSeriesLabelGenerator) super.clone();
         clone.seriesLabelLists = new HashMap();
         Set keys = this.seriesLabelLists.keySet();
-        Iterator iterator = keys.iterator();
-        while (iterator.hasNext()) {
-            Object key = iterator.next();
+        for (Object key : keys) {
             Object entry = this.seriesLabelLists.get(key);
             Object toAdd = entry;
             if (entry instanceof PublicCloneable) {

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,30 +27,25 @@
  * -----------------------
  * VectorRendererTest.java
  * -----------------------
- * (C) Copyright 2007-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2007-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 30-Jan-2007 : Version 1 (DG);
- * 22-Apr-2008 : Added testPublicCloneable (DG);
  *
  */
 
 package org.jfree.chart.renderer.xy;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.awt.Color;
 
 import org.jfree.chart.TestUtils;
-import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.api.PublicCloneable;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link VectorRenderer} class.
@@ -69,9 +64,9 @@ public class VectorRendererTest {
         assertTrue(r2.equals(r1));
 
         // check that super class fields are being looked at...
-        r1.setSeriesFillPaint(0, Color.green);
+        r1.setSeriesFillPaint(0, Color.GREEN);
         assertFalse(r1.equals(r2));
-        r2.setSeriesFillPaint(0, Color.green);
+        r2.setSeriesFillPaint(0, Color.GREEN);
         assertTrue(r1.equals(r2));
     }
 
@@ -115,7 +110,7 @@ public class VectorRendererTest {
     @Test
     public void testSerialization() {
         VectorRenderer r1 = new VectorRenderer();
-        VectorRenderer r2 = (VectorRenderer) TestUtils.serialised(r1);
+        VectorRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * --------------
  * TestUtils.java
  * --------------
- * (C) Copyright 2007-2020, by Object Refinery Limited.
+ * (C) Copyright 2007-2021, by Object Refinery Limited.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
  * Contributor(s):   -;
@@ -36,6 +36,10 @@
 
 package org.jfree.chart;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.GradientPaint;
+import java.awt.Rectangle;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -44,7 +48,11 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.util.Collection;
-import java.util.Iterator;
+import org.jfree.chart.labels.ItemLabelPosition;
+import org.jfree.chart.renderer.AbstractRenderer;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 /**
  * Some utility methods for use by the testing code.
@@ -61,9 +69,7 @@ public class TestUtils {
      * @return A boolean.
      */
     public static boolean containsInstanceOf(Collection<?> collection, Class c) {
-        Iterator iterator = collection.iterator();
-        while (iterator.hasNext()) {
-            Object obj = iterator.next();
+        for (Object obj : collection) {
             if (obj != null && obj.getClass().equals(c)) {
                 return true;
             }
@@ -79,8 +85,8 @@ public class TestUtils {
      * 
      * @return A serialised and deserialised version of the original.
      */
-    public static Object serialised(Object original) {
-        Object result = null;
+    public static <K> K serialised(K original) {
+        K result = null;
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
         ObjectOutput out;
         try {
@@ -89,7 +95,7 @@ public class TestUtils {
             out.close();
             ObjectInput in = new ObjectInputStream(
                     new ByteArrayInputStream(buffer.toByteArray()));
-            result = in.readObject();
+            result = (K) in.readObject();
             in.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -97,6 +103,104 @@ public class TestUtils {
             throw new RuntimeException(e);
         }
         return result;
+    }
+    
+    /**
+     * Checks the two renderers for independence.  It is expected that the 
+     * two renderers have the same attributes (typically one is a clone of the
+     * other or has been deserialised from the serialised representation of
+     * the other).  This method will update each attribute in turn and check
+     * that updating one renderer does not impact the other. Note that this
+     * method is destructive in the sense that it changes all the attributes
+     * of the renderer (maybe the code can be updated later to restore each
+     * attribute setting after it has been tested).
+     * 
+     * @param r1  renderer one ({@code null} not permitted).
+     * @param r2  renderer two ({@code null} not permitted).
+     */
+    public static void checkIndependence(AbstractRenderer r1, AbstractRenderer r2) {
+        assertTrue(r1 != r2);
+        r1.setAutoPopulateSeriesFillPaint(!r1.getAutoPopulateSeriesFillPaint());
+        assertNotEquals(r1, r2);
+        r2.setAutoPopulateSeriesFillPaint(r1.getAutoPopulateSeriesFillPaint());
+        assertEquals(r1, r2);
+        
+        r1.setAutoPopulateSeriesOutlinePaint(!r1.getAutoPopulateSeriesOutlinePaint());
+        assertNotEquals(r1, r2);
+        r2.setAutoPopulateSeriesOutlinePaint(r1.getAutoPopulateSeriesOutlinePaint());
+        assertEquals(r1, r2);
+
+        r1.setAutoPopulateSeriesOutlineStroke(!r1.getAutoPopulateSeriesOutlineStroke());
+        assertNotEquals(r1, r2);
+        r2.setAutoPopulateSeriesOutlineStroke(r1.getAutoPopulateSeriesOutlineStroke());
+        assertEquals(r1, r2);
+        
+        r1.setAutoPopulateSeriesPaint(!r1.getAutoPopulateSeriesPaint());
+        assertNotEquals(r1, r2);
+        r2.setAutoPopulateSeriesPaint(r1.getAutoPopulateSeriesPaint());
+        assertEquals(r1, r2);
+        
+        r1.setAutoPopulateSeriesShape(!r1.getAutoPopulateSeriesShape());
+        assertNotEquals(r1, r2);
+        r2.setAutoPopulateSeriesShape(r1.getAutoPopulateSeriesShape());
+        assertEquals(r1, r2);
+        
+        r1.setAutoPopulateSeriesStroke(!r1.getAutoPopulateSeriesStroke());
+        assertNotEquals(r1, r2);
+        r2.setAutoPopulateSeriesStroke(r1.getAutoPopulateSeriesStroke());
+        assertEquals(r1, r2);
+   
+        r1.setDataBoundsIncludesVisibleSeriesOnly(!r1.getDataBoundsIncludesVisibleSeriesOnly());
+        assertNotEquals(r1, r2);
+        r2.setDataBoundsIncludesVisibleSeriesOnly(r1.getDataBoundsIncludesVisibleSeriesOnly());
+        assertEquals(r1, r2);
+        
+        r1.setDefaultCreateEntities(!r1.getDefaultCreateEntities());
+        assertNotEquals(r1, r2);
+        r2.setDefaultCreateEntities(r1.getDefaultCreateEntities());
+        assertEquals(r1, r2);
+        
+        r1.setDefaultEntityRadius(66);
+        assertNotEquals(r1, r2);
+        r2.setDefaultEntityRadius(66);
+        assertEquals(r1, r2);
+        
+        r1.setDefaultFillPaint(new GradientPaint(4.0f, 5.0f, Color.RED, 6.0f, 7.0f, Color.YELLOW));
+        assertNotEquals(r1, r2);
+        r2.setDefaultFillPaint(new GradientPaint(4.0f, 5.0f, Color.RED, 6.0f, 7.0f, Color.YELLOW));
+        assertEquals(r1, r2);
+        
+        r1.setDefaultItemLabelFont(new Font(Font.MONOSPACED, Font.BOLD, 11));
+        assertNotEquals(r1, r2);
+        r2.setDefaultItemLabelFont(new Font(Font.MONOSPACED, Font.BOLD, 11));
+        assertEquals(r1, r2);
+
+        r1.setDefaultItemLabelPaint(new GradientPaint(4.0f, 4.0f, Color.BLUE, 4.0f, 4.0f, Color.RED));
+        assertNotEquals(r1, r2);
+        r2.setDefaultItemLabelPaint(new GradientPaint(4.0f, 4.0f, Color.BLUE, 4.0f, 4.0f, Color.RED));
+        assertEquals(r1, r2);
+        
+        r1.setDefaultItemLabelsVisible(!r1.getDefaultItemLabelsVisible());
+        assertNotEquals(r1, r2);
+        r2.setDefaultItemLabelsVisible(r1.getDefaultItemLabelsVisible());
+        assertEquals(r1, r2);
+                
+        r1.setDefaultLegendShape(new Rectangle(6, 5, 4, 3));
+        assertNotEquals(r1, r2);
+        r2.setDefaultLegendShape(new Rectangle(6, 5, 4, 3));
+        assertEquals(r1, r2);
+        
+        r1.setDefaultLegendTextFont(new Font(Font.MONOSPACED, Font.BOLD, 22));
+        assertNotEquals(r1, r2);
+        r2.setDefaultLegendTextFont(new Font(Font.MONOSPACED, Font.BOLD, 22));
+        assertEquals(r1, r2);
+        
+        r1.setDefaultLegendTextPaint(Color.RED);
+        assertNotEquals(r1, r2);
+        r2.setDefaultLegendTextPaint(Color.RED);
+        assertEquals(r1, r2);
+        
+        // TODO many remaining attributes
     }
     
 }
