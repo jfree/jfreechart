@@ -59,8 +59,9 @@ History
 
 ##### Version 1.5.4 (not-yet-released)
 - add new methods to access maps for datasets, renderers and axes in plots ([#201](https://github.com/jfree/jfreechart/issues/201));
-- add option to truncate item labels and compute contrast colors ([#225](https://github.com/jfree/jfreechart/pull/225))
-- add new annotations ([#226](https://github.com/jfree/jfreechart/pull/226))
+- add option to truncate item labels and compute contrast colors (PR [#225](https://github.com/jfree/jfreechart/pull/225))
+- add new annotations (PR [#226](https://github.com/jfree/jfreechart/pull/226))
+- add new panel for background rendering of charts (PR [#233](https://github.com/jfree/jfreechart/pull/233))
 - fix tick label font for `LogAxis` with number format override ([#98](https://github.com/jfree/jfreechart/issues/98));
 - added `valueVisible` flag to `MeterPlot` ([#231](https://github.com/jfree/jfreechart/pull/231));
 - add argument checks for annotations ([#223](https://github.com/jfree/jfreechart/issues/223));

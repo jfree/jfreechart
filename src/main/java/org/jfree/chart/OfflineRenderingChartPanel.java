@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -24,13 +24,14 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ---------------
- * ChartPanel.java
- * ---------------
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * -------------------------------
+ * OfflineRenderingChartPanel.java
+ * -------------------------------
+ * (C) Copyright 2000-2021, by Yuri Blankenstein and Contributors.
  *
  * Original Author:  Yuri Blankenstein;
  */
+
 package org.jfree.chart;
 
 import java.awt.AlphaComposite;
