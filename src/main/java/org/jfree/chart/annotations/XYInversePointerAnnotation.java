@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ------------------------
  * XYInversePointerAnnotation.java
  * ------------------------
- * (C) Copyright 2003-2021, by Object Refinery Limited.
+ * (C) Copyright 2021, by Yuri Blankenstein and Contributors.
  *
  * Original Author:  Yuri Blankenstein (for ESI TNO);
  *
@@ -44,7 +44,7 @@ import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 
 import org.jfree.chart.axis.ValueAxis;
-import org.jfree.chart.geom.GeomUtil;
+import org.jfree.chart.util.GeomUtil;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;

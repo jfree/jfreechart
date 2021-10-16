@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -24,10 +24,10 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ------------------------
+ * ---------------------
  * XYNoteAnnotation.java
- * ------------------------
- * (C) Copyright 2003-2021, by Object Refinery Limited.
+ * ---------------------
+ * (C) Copyright 2003-2021, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (as XYPointerAnnotation.java; for Object Refinery Limited);
  * Contributor(s):   Yuri Blankenstein (copy to XYNoteAnnotation.java; for ESI TNO);
