@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,26 +27,14 @@
  * -------------------------------
  * XYLineAndShapeRendererTest.java
  * -------------------------------
- * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2021, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 27-Jan-2004 : Version 1 (DG);
- * 07-Jan-2005 : Added check for findRangeBounds() method (DG);
- * 21-Feb-2007 : Check independence in testCloning() (DG);
- * 17-May-2007 : Added testGetLegendItemSeriesIndex() (DG);
- * 22-Apr-2008 : Added testPublicCloneable() (DG);
  *
  */
 
 package org.jfree.chart.renderer.xy;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
@@ -66,6 +54,8 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 /**
  * Tests for the {@link XYLineAndShapeRenderer} class.
  */
@@ -83,59 +73,59 @@ public class XYLineAndShapeRendererTest {
         assertEquals(r2, r1);
 
         r1.setSeriesLinesVisible(3, true);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setSeriesLinesVisible(3, true);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setDefaultLinesVisible(false);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setDefaultLinesVisible(false);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setLegendLine(new Line2D.Double(1.0, 2.0, 3.0, 4.0));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setLegendLine(new Line2D.Double(1.0, 2.0, 3.0, 4.0));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setSeriesShapesVisible(3, true);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setSeriesShapesVisible(3, true);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setDefaultShapesVisible(false);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setDefaultShapesVisible(false);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setSeriesShapesFilled(3, true);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setSeriesShapesFilled(3, true);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setDefaultShapesFilled(false);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setDefaultShapesFilled(false);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setDrawOutlines(!r1.getDrawOutlines());
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setDrawOutlines(r1.getDrawOutlines());
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setUseOutlinePaint(true);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setUseOutlinePaint(true);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setUseFillPaint(true);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setUseFillPaint(true);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setDrawSeriesLineAsPath(true);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setDrawSeriesLineAsPath(true);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
     }
 
     /**
@@ -149,11 +139,10 @@ public class XYLineAndShapeRendererTest {
         assertEquals(r2, r1);
 
         r1.setURLGenerator(new TimeSeriesURLGenerator());
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setURLGenerator(new TimeSeriesURLGenerator());
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
     }
-
 
     /**
      * Two objects that are equal are required to return the same hashCode.
@@ -162,7 +151,7 @@ public class XYLineAndShapeRendererTest {
     public void testHashcode() {
         XYLineAndShapeRenderer r1 = new XYLineAndShapeRenderer();
         XYLineAndShapeRenderer r2 = new XYLineAndShapeRenderer();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
@@ -177,29 +166,29 @@ public class XYLineAndShapeRendererTest {
         XYLineAndShapeRenderer r1 = new XYLineAndShapeRenderer();
         r1.setLegendLine(legendShape);
         XYLineAndShapeRenderer r2 = (XYLineAndShapeRenderer) r1.clone();
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
 
         r1.setSeriesLinesVisible(0, false);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setSeriesLinesVisible(0, false);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         legendShape.setRect(4.0, 3.0, 2.0, 1.0);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setLegendLine(new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setSeriesShapesVisible(1, true);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setSeriesShapesVisible(1, true);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setSeriesShapesFilled(1, true);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setSeriesShapesFilled(1, true);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
     }
 
     /**

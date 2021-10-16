@@ -40,6 +40,19 @@
 
 package org.jfree.chart.plot;
 
+import org.jfree.chart.LegendItem;
+import org.jfree.chart.LegendItemCollection;
+import org.jfree.chart.event.PlotChangeEvent;
+import org.jfree.chart.text.TextUtils;
+import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.ui.TextAnchor;
+import org.jfree.chart.util.Args;
+import org.jfree.chart.util.PaintUtils;
+import org.jfree.chart.util.SerialUtils;
+import org.jfree.data.Range;
+import org.jfree.data.general.DatasetChangeEvent;
+import org.jfree.data.general.ValueDataset;
+
 import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -61,25 +74,11 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
-
-import org.jfree.chart.LegendItem;
-import org.jfree.chart.LegendItemCollection;
-import org.jfree.chart.event.PlotChangeEvent;
-import org.jfree.chart.text.TextUtils;
-import org.jfree.chart.ui.RectangleInsets;
-import org.jfree.chart.ui.TextAnchor;
-import org.jfree.chart.util.PaintUtils;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.ResourceBundleWrapper;
-import org.jfree.chart.util.SerialUtils;
-import org.jfree.data.Range;
-import org.jfree.data.general.DatasetChangeEvent;
-import org.jfree.data.general.ValueDataset;
 
 /**
  * A plot that displays a single value in the form of a needle on a dial.
@@ -143,6 +142,9 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
     /** The paint for the value displayed in the center of the dial. */
     private transient Paint valuePaint;
 
+    /** A flag that indicates whether the value is visible. */
+    private boolean valueVisible = true;
+
     /** A flag that controls whether or not the border is drawn. */
     private boolean drawBorder;
 
@@ -169,14 +171,13 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
 
     /** The resourceBundle for the localization. */
     protected static ResourceBundle localizationResources
-            = ResourceBundleWrapper.getBundle(
-                    "org.jfree.chart.plot.LocalizationBundle");
+            = ResourceBundle.getBundle("org.jfree.chart.plot.LocalizationBundle");
 
     /**
      * A (possibly empty) list of the {@link MeterInterval}s to be highlighted
      * on the dial.
      */
-    private List intervals;
+    private List<MeterInterval> intervals;
 
     /**
      * Creates a new plot with a default range of {@code 0} to {@code 100} and 
@@ -207,7 +208,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
         this.valueFont = MeterPlot.DEFAULT_VALUE_FONT;
         this.valuePaint = MeterPlot.DEFAULT_VALUE_PAINT;
         this.dialBackgroundPaint = MeterPlot.DEFAULT_DIAL_BACKGROUND_PAINT;
-        this.intervals = new java.util.ArrayList();
+        this.intervals = new ArrayList<>();
         setDataset(dataset);
     }
 
@@ -478,6 +479,33 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
     }
 
     /**
+     * Returns the flag that controls whether or not the value is visible.
+     * The default value is {@code true}.
+     *
+     * @return A flag.
+     *
+     * @see #setValueVisible
+     * @since 1.5.4
+     */
+    public boolean isValueVisible() {
+        return valueVisible;
+    }
+
+    /**
+     *  Sets the flag that controls whether or not the value is visible
+     *  and sends a change event to all registered listeners.
+     *
+     * @param valueVisible  the new flag value.
+     *
+     * @see #isValueVisible()
+     * @since 1.5.4
+     */
+    public void setValueVisible(boolean valueVisible) {
+        this.valueVisible = valueVisible;
+        fireChangeEvent();
+    }
+
+    /**
      * Returns the tick label format.
      *
      * @return The tick label format (never {@code null}).
@@ -675,8 +703,8 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      *
      * @see #addInterval(MeterInterval)
      */
-    public List getIntervals() {
-        return Collections.unmodifiableList(this.intervals);
+    public List<MeterInterval> getIntervals() {
+        return Collections.unmodifiableList(intervals);
     }
 
     /**
@@ -713,9 +741,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
     @Override
     public LegendItemCollection getLegendItems() {
         LegendItemCollection result = new LegendItemCollection();
-        Iterator iterator = this.intervals.iterator();
-        while (iterator.hasNext()) {
-            MeterInterval mi = (MeterInterval) iterator.next();
+        for (MeterInterval mi : intervals) {
             Paint color = mi.getBackgroundPaint();
             if (color == null) {
                 color = mi.getOutlinePaint();
@@ -805,9 +831,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
             drawArcForInterval(g2, meterArea, new MeterInterval("", this.range,
                     this.dialOutlinePaint, new BasicStroke(1.0f), null));
 
-            Iterator iterator = this.intervals.iterator();
-            while (iterator.hasNext()) {
-                MeterInterval interval = (MeterInterval) iterator.next();
+            for (MeterInterval interval : this.intervals) {
                 drawArcForInterval(g2, meterArea, interval);
             }
 
@@ -990,7 +1014,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      */
     public double valueToAngle(double value) {
         value = value - this.range.getLowerBound();
-        double baseAngle = 180 + ((this.meterAngle - 180) / 2);
+        double baseAngle = 180 + ((this.meterAngle - 180) / 2.0);
         return baseAngle - ((value / this.range.getLength()) * this.meterAngle);
     }
 
@@ -1096,20 +1120,22 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
      * @param area  the plot area.
      */
     protected void drawValueLabel(Graphics2D g2, Rectangle2D area) {
-        g2.setFont(this.valueFont);
-        g2.setPaint(this.valuePaint);
-        String valueStr = "No value";
-        if (this.dataset != null) {
-            Number n = this.dataset.getValue();
-            if (n != null) {
-                valueStr = this.tickLabelFormat.format(n.doubleValue()) + " "
-                         + this.units;
+        if (valueVisible) {
+            g2.setFont(this.valueFont);
+            g2.setPaint(this.valuePaint);
+            String valueStr = "No value";
+            if (this.dataset != null) {
+                Number n = this.dataset.getValue();
+                if (n != null) {
+                    valueStr = this.tickLabelFormat.format(n.doubleValue()) + " "
+                        + this.units;
+                }
             }
-        }
-        float x = (float) area.getCenterX();
-        float y = (float) area.getCenterY() + DEFAULT_CIRCLE_SIZE;
-        TextUtils.drawAlignedString(valueStr, g2, x, y,
+            float x = (float) area.getCenterX();
+            float y = (float) area.getCenterY() + DEFAULT_CIRCLE_SIZE;
+            TextUtils.drawAlignedString(valueStr, g2, x, y,
                 TextAnchor.TOP_CENTER);
+        }
     }
 
     /**
@@ -1177,6 +1203,9 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
         if (!PaintUtils.equal(this.needlePaint, that.needlePaint)) {
             return false;
         }
+        if (this.valueVisible != that.valueVisible) {
+            return false;
+        }
         if (!Objects.equals(this.valueFont, that.valueFont)) {
             return false;
         }
@@ -1198,8 +1227,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
         if (!PaintUtils.equal(this.tickLabelPaint, that.tickLabelPaint)) {
             return false;
         }
-        if (!Objects.equals(this.tickLabelFormat,
-                that.tickLabelFormat)) {
+        if (!Objects.equals(this.tickLabelFormat, that.tickLabelFormat)) {
             return false;
         }
         if (this.drawBorder != that.drawBorder) {
@@ -1265,7 +1293,7 @@ public class MeterPlot extends Plot implements Serializable, Cloneable {
         MeterPlot clone = (MeterPlot) super.clone();
         clone.tickLabelFormat = (NumberFormat) this.tickLabelFormat.clone();
         // the following relies on the fact that the intervals are immutable
-        clone.intervals = new java.util.ArrayList(this.intervals);
+        clone.intervals = new ArrayList<>(this.intervals);
         if (clone.dataset != null) {
             clone.dataset.addChangeListener(clone);
         }

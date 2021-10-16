@@ -446,7 +446,7 @@ public class GanttRenderer extends IntervalBarRenderer implements Serializable {
             barBase = RectangleEdge.LEFT;
         }
         else if (orientation == PlotOrientation.VERTICAL) {
-            bar = new Rectangle2D.Double(rectStart, java2dValue1, rectBreadth,
+            bar = new Rectangle2D.Double(rectStart, java2dValue0, rectBreadth,
                     rectLength);
             barBase = RectangleEdge.BOTTOM;
         }

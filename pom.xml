@@ -10,7 +10,7 @@
 
     <artifactId>jfreechart</artifactId>
     <groupId>org.jfree</groupId>
-    <version>1.5.3</version>
+    <version>1.5.4-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <organization>
@@ -40,8 +40,6 @@
       <developer>
         <name>David Gilbert</name>
         <email>dave@jfree.org</email>
-        <organization>Object Refinery Limited</organization>
-        <organizationUrl>http://www.object-refinery.com</organizationUrl>
       </developer>
     </developers>
 
@@ -63,13 +61,13 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>5.7.0</version>
+            <version>5.8.1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.7.0</version>
+            <version>5.8.1</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
