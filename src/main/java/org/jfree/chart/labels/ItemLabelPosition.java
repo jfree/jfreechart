@@ -30,7 +30,7 @@
  * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
  *
  * Original Author:  David Gilbert (for Object Refinery Limited);
- * Contributor(s):   -;
+ * Contributor(s):   Yuri Blankenstein;
  *
  */
 
@@ -60,6 +60,9 @@ public class ItemLabelPosition implements Serializable {
 
     /** The rotation angle. */
     private double angle;
+    
+    /** The item label clip type. */
+    private ItemLabelClip itemLabelClip;
 
     /**
      * Creates a new position record with default settings.
@@ -82,6 +85,27 @@ public class ItemLabelPosition implements Serializable {
     }
 
     /**
+     * Creates a new position record. The item label anchor is a point relative
+     * to the data item (dot, bar or other visual item) on a chart. The item
+     * label is aligned by aligning the text anchor with the item label anchor.
+     *
+     * @param itemLabelAnchor the item label anchor ({@code null} not
+     *                        permitted).
+     * @param textAnchor      the text anchor ({@code null} not permitted).
+     * @param itemLabelClip   The clip type for the label ({@code null} not
+     *                        permitted. Only used when
+     *                        {@link ItemLabelAnchor#isInternal()} returns
+     *                        {@code true}, if {@code false} {@code labelClip}
+     *                        is always considered to be
+     *                        {@link ItemLabelClip#NONE})
+     */
+    public ItemLabelPosition(ItemLabelAnchor itemLabelAnchor,
+            TextAnchor textAnchor, ItemLabelClip itemLabelClip) {
+        this(itemLabelAnchor, textAnchor, TextAnchor.CENTER, 0.0,
+                itemLabelClip);
+    }
+    
+    /**
      * Creates a new position record.  The item label anchor is a point
      * relative to the data item (dot, bar or other visual item) on a chart.
      * The item label is aligned by aligning the text anchor with the
@@ -94,16 +118,43 @@ public class ItemLabelPosition implements Serializable {
      *                        permitted).
      * @param angle  the rotation angle (in radians).
      */
-    public ItemLabelPosition(ItemLabelAnchor itemLabelAnchor, 
+    public ItemLabelPosition(ItemLabelAnchor itemLabelAnchor,
             TextAnchor textAnchor, TextAnchor rotationAnchor, double angle) {
+        this(itemLabelAnchor, textAnchor, rotationAnchor, angle,
+                ItemLabelClip.FIT);
+
+    }
+
+    /**
+     * Creates a new position record. The item label anchor is a point relative
+     * to the data item (dot, bar or other visual item) on a chart. The item
+     * label is aligned by aligning the text anchor with the item label anchor.
+     *
+     * @param itemLabelAnchor the item label anchor ({@code null} not
+     *                        permitted).
+     * @param textAnchor      the text anchor ({@code null} not permitted).
+     * @param rotationAnchor  the rotation anchor ({@code null} not permitted).
+     * @param angle           the rotation angle (in radians).
+     * @param itemLabelClip   The clip type for the label ({@code null} not
+     *                        permitted. Only used when
+     *                        {@link ItemLabelAnchor#isInternal()} returns
+     *                        {@code true}, if {@code false} {@code labelClip}
+     *                        is always considered to be
+     *                        {@link ItemLabelClip#NONE})
+     */
+    public ItemLabelPosition(ItemLabelAnchor itemLabelAnchor,
+            TextAnchor textAnchor, TextAnchor rotationAnchor, double angle,
+            ItemLabelClip itemLabelClip) {
 
         Args.nullNotPermitted(itemLabelAnchor, "itemLabelAnchor");
         Args.nullNotPermitted(textAnchor, "textAnchor");
         Args.nullNotPermitted(rotationAnchor, "rotationAnchor");
+        Args.nullNotPermitted(itemLabelClip, "labelClip");
         this.itemLabelAnchor = itemLabelAnchor;
         this.textAnchor = textAnchor;
         this.rotationAnchor = rotationAnchor;
         this.angle = angle;
+        this.itemLabelClip = itemLabelClip;
     }
 
     /**
@@ -141,6 +192,15 @@ public class ItemLabelPosition implements Serializable {
     public double getAngle() {
         return this.angle;
     }
+    
+    /**
+     * Returns the clip type for the label.
+     * 
+     * @return The clip type for the label.
+     */
+    public ItemLabelClip getItemLabelClip() {
+		return this.itemLabelClip;
+	}
 
     /**
      * Tests this object for equality with an arbitrary object.
@@ -168,6 +228,9 @@ public class ItemLabelPosition implements Serializable {
             return false;
         }
         if (this.angle != that.angle) {
+            return false;
+        }
+        if (!this.itemLabelClip.equals(that.itemLabelClip)) {
             return false;
         }
         return true;
