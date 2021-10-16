@@ -51,7 +51,7 @@ import org.jfree.data.time.Year;
 import org.junit.jupiter.api.Test;
 
 /**
- * Tests for the {@link OHLCSeriesCollectionTests} class.
+ * Tests for the {@link OHLCSeriesCollection} class.
  */
 public class OHLCSeriesCollectionTest implements DatasetChangeListener {
 
