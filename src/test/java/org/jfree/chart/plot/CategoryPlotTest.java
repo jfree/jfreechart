@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,25 +27,10 @@
  * ---------------------
  * CategoryPlotTest.java
  * ---------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2021, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 26-Mar-2003 : Version 1 (DG);
- * 15-Sep-2003 : Added a unit test to reproduce a bug in serialization (now
- *               fixed) (DG);
- * 05-Feb-2007 : Added testAddDomainMarker() and testAddRangeMarker() (DG);
- * 07-Feb-2007 : Added test1654215() (DG);
- * 07-Apr-2008 : Added testRemoveDomainMarker() and
- *               testRemoveRangeMarker() (DG);
- * 23-Apr-2008 : Extended testEquals() and testCloning(), and added
- *               testCloning2() and testCloning3() (DG);
- * 26-Jun-2008 : Updated testEquals() (DG);
- * 21-Jan-2009 : Updated testEquals() for new fields (DG);
- * 10-Jul-2009 : Updated testEquals() for new field (DG);
  *
  */
 

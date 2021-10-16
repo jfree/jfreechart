@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,18 +27,10 @@
  * --------------------------
  * DatasetChangeListener.java
  * --------------------------
- * (C) Copyright 2000-2008, by Object Refinery Limited.
+ * (C) Copyright 2000-2021, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes (from 24-Aug-2001)
- * --------------------------
- * 24-Aug-2001 : Added standard source header. Fixed DOS encoding problem (DG);
- * 15-Oct-2001 : Moved to new package (com.jrefinery.data.*) (DG);
- * 22-Oct-2001 : Renamed DataSource.java --> Dataset.java etc. (DG);
- * 07-Aug-2002 : Now extends EventListener (DG);
- * 04-Oct-2002 : Fixed errors reported by Checkstyle (DG);
  *
  */
 

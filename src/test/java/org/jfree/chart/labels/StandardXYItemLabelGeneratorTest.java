@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,18 +27,10 @@
  * -------------------------------------
  * StandardXYItemLabelGeneratorTest.java
  * -------------------------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2021, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 23-Mar-2003 : Version 1 (DG);
- * 26-Feb-2004 : Updates for new code (DG);
- * 20-Jan-2006 : Renamed StandardXYItemLabelGeneratorTests.java (DG);
- * 25-Jan-2007 : Added independence checks to testCloning() (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG);
  *
  */
 

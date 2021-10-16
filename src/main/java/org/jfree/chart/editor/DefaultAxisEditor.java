@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,17 +27,11 @@
  * ----------------------
  * DefaultAxisEditor.java
  * ----------------------
- * (C) Copyright 2005-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2021, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Andrzej Porebski;
  *                   Arnaud Lelievre;
- *
- * Changes
- * -------
- * 24-Nov-2005 : Version 1, based on AxisPropertyEditPanel.java (DG);
- * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
- *               Jess Thrysoee (DG);
  *
  */
 

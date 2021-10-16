@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -30,16 +30,7 @@
  * (C) Copyright 2002-2016, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
- * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 19-Aug-2002 : Version 1;
- * 09-Mar-2005 : Added facility to serve up "one time" charts - see
- *               ServletUtilities.java (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
- * 03-Dec-2011 : Fixed path disclosure vulnerability - see bug 2879650 (DG);
+ * Contributor(s):   David Gilbert;
  * 
  */
 

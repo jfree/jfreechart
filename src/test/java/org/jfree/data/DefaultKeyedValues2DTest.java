@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,20 +27,10 @@
  * -----------------------------
  * DefaultKeyedValues2DTest.java
  * -----------------------------
- * (C) Copyright 2003-2016 by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2021, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 13-Mar-2003 : Version 1 (DG);
- * 15-Sep-2004 : Updated cloning test (DG);
- * 06-Oct-2005 : Added testEquals() (DG);
- * 18-Jan-2007 : Added testSparsePopulation() (DG);
- * 26-Feb-2007 : Added some basic tests (DG);
- * 30-Mar-2007 : Added a test for bug 1690654 (DG);
- * 21-Nov-2007 : Added testRemoveColumnByKey() method (DG);
  *
  */
 

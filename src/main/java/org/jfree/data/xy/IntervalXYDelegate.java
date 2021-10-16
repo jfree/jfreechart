@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -30,24 +30,7 @@
  * (C) Copyright 2004-2013, by Andreas Schroeder and Contributors.
  *
  * Original Author:  Andreas Schroeder;
- * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 31-Mar-2004 : Version 1 (AS);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
- *               getYValue() (DG);
- * 18-Aug-2004 : Moved from org.jfree.data --> org.jfree.data.xy (DG);
- * 04-Nov-2004 : Added argument check for setIntervalWidth() method (DG);
- * 17-Nov-2004 : New methods to reflect changes in DomainInfo (DG);
- * 11-Jan-2005 : Removed deprecated methods in preparation for the 1.0.0
- *               release (DG);
- * 21-Feb-2005 : Made public and added equals() method (DG);
- * 06-Oct-2005 : Implemented DatasetChangeListener to recalculate
- *               autoIntervalWidth (DG);
- * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
- * 06-Mar-2009 : Implemented hashCode() (DG);
- * 02-Jul-2013 : Use ParamChecks (DG);
+ * Contributor(s):   David Gilbert;
  *
  */
 

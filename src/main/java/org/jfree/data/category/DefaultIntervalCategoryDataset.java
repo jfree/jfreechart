@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -30,19 +30,7 @@
  * (C) Copyright 2002-2016, by Jeremy Bowman and Contributors.
  *
  * Original Author:  Jeremy Bowman;
- * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 29-Apr-2002 : Version 1, contributed by Jeremy Bowman (DG);
- * 24-Oct-2002 : Amendments for changes made to the dataset interface (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 08-Mar-2007 : Added equals() and clone() overrides (DG);
- * 25-Feb-2008 : Fix for the special case where the dataset is empty, see bug
- *               1897580 (DG)
- * 18-Dec-2008 : Use ResourceBundleWrapper - see patch 1607918 by
- *               Jess Thrysoee (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
+ * Contributor(s):   David Gilbert;
  *
  */
 

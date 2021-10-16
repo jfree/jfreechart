@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,18 +27,10 @@
  * -------------------------
  * HistogramDatasetTest.java
  * -------------------------
- * (C) Copyright 2004-2020, by Object Refinery Limited.
+ * (C) Copyright 2004-2021, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 01-Mar-2004 : Version 1 (DG);
- * 08-Jun-2005 : Added test for getSeriesKey(int) bug (DG);
- * 03-Aug-2006 : Added testAddSeries() and testBinBoundaries() method (DG);
- * 22-May-2008 : Added testAddSeries2() and enhanced testCloning() (DG);
- * 08-Dec-2009 : Added test2902842() for patch at SourceForge (DG);
  *
  */
 

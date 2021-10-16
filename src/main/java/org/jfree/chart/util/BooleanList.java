@@ -29,7 +29,7 @@
  * ----------------
  * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributors:     -;
  */
 

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -30,34 +30,8 @@
  * (C) Copyright 2002-2008, by Bryan Scott and Contributors.
  *
  * Original Author:  Bryan Scott; Andy;
- * Contributor(s):   David Gilbert (for Object Refinery Limited);
+ * Contributor(s):   David Gilbert;
  *                   Thomas Morgner;
- *
- * Changes
- * -------
- * 26-Apr-2002 : Creation based on JdbcXYDataSet, using code contributed from
- *               Andy;
- * 13-Aug-2002 : Updated Javadocs, import statements and formatting (DG);
- * 03-Sep-2002 : Added fix for bug 591385 (DG);
- * 18-Sep-2002 : Updated to support BIGINT (BS);
- * 16-Oct-2002 : Added fix for bug 586667 (DG);
- * 03-Feb-2003 : Added Types.DECIMAL (see bug report 677814) (DG);
- * 13-Jun-2003 : Added Types.TIME as suggest by Bryan Scott in the forum (DG);
- * 30-Jun-2003 : CVS Write test (BS);
- * 30-Jul-2003 : Added empty contructor and executeQuery(connection,string)
- *               method (BS);
- * 29-Aug-2003 : Added a 'transpose' flag, so that data can be easily
- *               transposed if required (DG);
- * 10-Sep-2003 : Added support for additional JDBC types (DG);
- * 24-Sep-2003 : Added clearing results from previous queries to executeQuery
- *               following being highlighted on online forum (BS);
- * 02-Dec-2003 : Throwing exceptions allows to handle errors, removed default
- *               constructor, as without a connection, a query can never be
- *               executed (TM);
- * 04-Dec-2003 : Added missing Javadocs (DG);
- * ------------- JFREECHART 1.0.0 ---------------------------------------------
- * 08-Mar-2006 : Fixed bug 1445748 where an exception is thrown if
- *               executeQuery() is called more than once (DG);
  *
  */
 

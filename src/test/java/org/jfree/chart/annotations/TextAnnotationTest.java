@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,17 +27,10 @@
  * -----------------------
  * TextAnnotationTest.java
  * -----------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2021, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   Martin Hoeller;
- *
- * Changes
- * -------
- * 19-Aug-2003 : Version 1 (DG);
- * 07-Jan-2005 : Added testHashCode() method (DG);
- * 28-Oct-2011 : Added testSetRotationAnchor() method for bug #3428870 (MH);
- * 01-Jul-2013 : Added testChangeEvents() (DG);
  * 
  */
 

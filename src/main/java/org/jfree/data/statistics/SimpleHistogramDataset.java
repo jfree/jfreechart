@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,17 +27,10 @@
  * ---------------------------
  * SimpleHistogramDataset.java
  * ---------------------------
- * (C) Copyright 2005-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2021, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   Sergei Ivanov;
- *
- * Changes
- * -------
- * 10-Jan-2005 : Version 1 (DG);
- * 21-May-2007 : Added clearObservations() and removeAllBins() (SI);
- * 10-Jul-2007 : Added null argument check to constructor (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 

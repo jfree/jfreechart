@@ -27,9 +27,9 @@
  * ---------------------
  * XYNoteAnnotation.java
  * ---------------------
- * (C) Copyright 2003-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2021, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (as XYPointerAnnotation.java; for Object Refinery Limited);
+ * Original Author:  David Gilbert (as XYPointerAnnotation.java);
  * Contributor(s):   Yuri Blankenstein (copy to XYNoteAnnotation.java; for ESI TNO);
  *
  */

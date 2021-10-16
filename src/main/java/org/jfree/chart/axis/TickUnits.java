@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,29 +27,10 @@
  * --------------
  * TickUnits.java
  * --------------
- * (C) Copyright 2001-2008, by Object Refinery Limited.
+ * (C) Copyright 2001-2021, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 23-Nov-2001 : Version 1 (DG);
- * 18-Feb-2002 : Fixed bug in getNearestTickUnit (thanks to Mario Inchiosa for
- *               reporting this, SourceForge bug id 518073) (DG);
- * 25-Feb-2002 : Moved createStandardTickUnits() method from NumberAxis, and
- *               added createIntegerTickUnits() method (DG);
- * 01-May-2002 : Updated for changes to the TickUnit class (DG);
- * 18-Sep-2002 : Added standardTickUnit methods which take a Locale
- *               instance (AS);
- * 26-Sep-2002 : Fixed errors reported by Checkstyle (DG);
- * 08-Nov-2002 : Moved to new package com.jrefinery.chart.axis (DG);
- * 26-Mar-2003 : Implemented Serializable (DG);
- * 13-Aug-2003 : Implemented Cloneable (DG);
- * 23-Sep-2003 : Implemented TickUnitSource interface (DG);
- * 03-Dec-2003 : Adding null values now throws exceptions (TM);
- * 11-Jan-2005 : Removed deprecated methods in preparation for 1.0.0
- *               release (DG);
  *
  */
 
