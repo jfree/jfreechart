@@ -136,8 +136,7 @@ public class XYStepAreaRendererTest {
     @Test
     public void testSerialization() {
         XYStepAreaRenderer r1 = new XYStepAreaRenderer();
-        XYStepAreaRenderer r2 = (XYStepAreaRenderer) 
-                TestUtils.serialised(r1);
+        XYStepAreaRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

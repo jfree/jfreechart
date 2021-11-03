@@ -131,7 +131,7 @@ public class LabelBlockTest {
                 Color.BLUE);
         LabelBlock b1 = new LabelBlock("ABC", new Font("Dialog",
                 Font.PLAIN, 12), gp);
-        LabelBlock b2 = (LabelBlock) TestUtils.serialised(b1);
+        LabelBlock b2 = TestUtils.serialised(b1);
         assertEquals(b1, b2);
     }
 

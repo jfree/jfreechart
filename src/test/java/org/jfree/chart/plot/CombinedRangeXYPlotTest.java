@@ -122,8 +122,7 @@ public class CombinedRangeXYPlotTest implements ChartChangeListener {
     @Test
     public void testSerialization() {
         CombinedRangeXYPlot plot1 = createPlot();
-        CombinedRangeXYPlot plot2 = (CombinedRangeXYPlot) 
-                TestUtils.serialised(plot1);
+        CombinedRangeXYPlot plot2 = TestUtils.serialised(plot1);
         assertEquals(plot1, plot2);
     }
 
@@ -136,7 +135,7 @@ public class CombinedRangeXYPlotTest implements ChartChangeListener {
         CombinedRangeXYPlot plot = createPlot();
         JFreeChart chart = new JFreeChart(plot);
         chart.addChangeListener(this);
-        XYPlot subplot1 = (XYPlot) plot.getSubplots().get(0);
+        XYPlot subplot1 = plot.getSubplots().get(0);
         NumberAxis xAxis = (NumberAxis) subplot1.getDomainAxis();
         xAxis.setAutoRangeIncludesZero(!xAxis.getAutoRangeIncludesZero());
         assertEquals(1, this.events.size());

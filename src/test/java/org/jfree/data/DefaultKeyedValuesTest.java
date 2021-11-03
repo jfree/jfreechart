@@ -483,8 +483,7 @@ public class DefaultKeyedValuesTest {
         v1.addValue("Key 2", null);
         v1.addValue("Key 3", 42);
 
-        DefaultKeyedValues v2 = (DefaultKeyedValues) 
-                TestUtils.serialised(v1);
+        DefaultKeyedValues v2 = TestUtils.serialised(v1);
         assertEquals(v1, v2);
     }
 

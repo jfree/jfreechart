@@ -169,7 +169,7 @@ public class CategoryLabelPositionsTest {
     @Test
     public void testSerialization() {
         CategoryLabelPositions p1 = CategoryLabelPositions.STANDARD;
-        CategoryLabelPositions p2 = (CategoryLabelPositions) TestUtils.serialised(p1);
+        CategoryLabelPositions p2 = TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 

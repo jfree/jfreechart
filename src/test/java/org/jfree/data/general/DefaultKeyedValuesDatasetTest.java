@@ -72,8 +72,7 @@ public class DefaultKeyedValuesDatasetTest {
         d1.setValue("C3", 345.9);
         d1.setValue("C4", 452.7);
 
-        KeyedValuesDataset d2 = (KeyedValuesDataset) 
-                TestUtils.serialised(d1);
+        KeyedValuesDataset d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 

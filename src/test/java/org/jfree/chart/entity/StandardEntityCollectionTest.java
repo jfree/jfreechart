@@ -105,8 +105,7 @@ public class StandardEntityCollectionTest {
                 "ToolTip", "URL");
         StandardEntityCollection c1 = new StandardEntityCollection();
         c1.add(e1);
-        StandardEntityCollection c2 = (StandardEntityCollection) 
-                TestUtils.serialised(c1);
+        StandardEntityCollection c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 

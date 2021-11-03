@@ -142,8 +142,7 @@ public class CategoryTableXYDatasetTest {
         CategoryTableXYDataset d1 = new CategoryTableXYDataset();
         d1.add(1.0, 1.1, "Series 1");
         d1.add(2.0, 2.2, "Series 1");
-        CategoryTableXYDataset d2 = (CategoryTableXYDataset) 
-                TestUtils.serialised(d1);
+        CategoryTableXYDataset d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 

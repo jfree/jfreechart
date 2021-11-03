@@ -490,8 +490,7 @@ public class TaskSeriesCollectionTest {
         TaskSeriesCollection c1 = new TaskSeriesCollection();
         c1.add(s1);
         c1.add(s2);
-        TaskSeriesCollection c2 = (TaskSeriesCollection) 
-                TestUtils.serialised(c1);
+        TaskSeriesCollection c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 

@@ -128,7 +128,7 @@ public class XYSplineRendererTest {
     @Test
     public void testSerialization() {
         XYSplineRenderer r1 = new XYSplineRenderer();
-        XYSplineRenderer r2 = (XYSplineRenderer) TestUtils.serialised(r1);
+        XYSplineRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

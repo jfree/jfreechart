@@ -168,7 +168,7 @@ public class ValueMarkerTest implements MarkerChangeListener {
     @Test
     public void testSerialization() {
         ValueMarker m1 = new ValueMarker(25.0);
-        ValueMarker m2 = (ValueMarker) TestUtils.serialised(m1);
+        ValueMarker m2 = TestUtils.serialised(m1);
         assertEquals(m1, m2);
     }
 
@@ -204,7 +204,7 @@ public class ValueMarkerTest implements MarkerChangeListener {
     @Test
     public void test1802195() {
         ValueMarker m1 = new ValueMarker(25.0);
-        ValueMarker m2 = (ValueMarker) TestUtils.serialised(m1);
+        ValueMarker m2 = TestUtils.serialised(m1);
         assertEquals(m1, m2);
         try {
             m2.setValue(-10.0);

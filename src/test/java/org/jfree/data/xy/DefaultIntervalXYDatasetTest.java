@@ -271,13 +271,12 @@ public class DefaultIntervalXYDatasetTest {
     @Test
     public void testSerialization() {
         DefaultIntervalXYDataset d1 = new DefaultIntervalXYDataset();
-        DefaultIntervalXYDataset d2 = (DefaultIntervalXYDataset) 
-                TestUtils.serialised(d1);
+        DefaultIntervalXYDataset d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
 
         // try a dataset with some content...
         d1 = createSampleDataset1();
-        d2 = (DefaultIntervalXYDataset) TestUtils.serialised(d1);
+        d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 

@@ -75,7 +75,7 @@ public class LineNeedleTest {
     @Test
     public void testSerialization() {
         LineNeedle n1 = new LineNeedle();
-        LineNeedle n2 = (LineNeedle) TestUtils.serialised(n1);
+        LineNeedle n2 = TestUtils.serialised(n1);
         assertTrue(n1.equals(n2));
     }
 

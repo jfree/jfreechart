@@ -234,7 +234,7 @@ public class PeriodAxisTest implements AxisChangeListener {
     @Test
     public void testSerialization() {
         PeriodAxis a1 = new PeriodAxis("Test Axis");
-        PeriodAxis a2 = (PeriodAxis) TestUtils.serialised(a1);
+        PeriodAxis a2 = TestUtils.serialised(a1);
         boolean b = a1.equals(a2);
         assertTrue(b);
     }

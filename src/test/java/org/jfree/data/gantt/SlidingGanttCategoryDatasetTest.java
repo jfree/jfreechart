@@ -126,8 +126,7 @@ public class SlidingGanttCategoryDatasetTest {
         u1.add(s1);
         SlidingGanttCategoryDataset d1 = new SlidingGanttCategoryDataset(
                 u1, 0, 5);
-        SlidingGanttCategoryDataset d2 = (SlidingGanttCategoryDataset) 
-                TestUtils.serialised(d1);
+        SlidingGanttCategoryDataset d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
 
         // basic check for independence

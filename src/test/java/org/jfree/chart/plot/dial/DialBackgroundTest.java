@@ -147,7 +147,7 @@ public class DialBackgroundTest {
         b1.setGradientPaintTransformer(new StandardGradientPaintTransformer(
                 GradientPaintTransformType.CENTER_VERTICAL));
 
-        b2 = (DialBackground) TestUtils.serialised(b1);
+        b2 = TestUtils.serialised(b1);
         assertEquals(b1, b2);
     }
 

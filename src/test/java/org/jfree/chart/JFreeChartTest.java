@@ -330,7 +330,7 @@ public class JFreeChartTest implements ChartChangeListener {
         // create the chart...
         JFreeChart c1 = ChartFactory.createBarChart("Vertical Bar Chart",
                 "Category", "Value", dataset);
-        JFreeChart c2 = (JFreeChart) TestUtils.serialised(c1);
+        JFreeChart c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 
@@ -350,7 +350,7 @@ public class JFreeChartTest implements ChartChangeListener {
 
         JFreeChart c1 = ChartFactory.createTimeSeriesChart("Test", "Date",
                 "Value", dataset);
-        JFreeChart c2 = (JFreeChart) TestUtils.serialised(c1);
+        JFreeChart c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 

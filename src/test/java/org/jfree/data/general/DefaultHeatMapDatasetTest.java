@@ -183,8 +183,7 @@ public class DefaultHeatMapDatasetTest implements DatasetChangeListener {
         d1.setZValue(0, 1, Double.NEGATIVE_INFINITY);
         d1.setZValue(0, 2, Double.POSITIVE_INFINITY);
         d1.setZValue(1, 0, Double.NaN);
-        DefaultHeatMapDataset d2 = (DefaultHeatMapDataset) 
-                TestUtils.serialised(d1);
+        DefaultHeatMapDataset d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 

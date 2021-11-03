@@ -106,8 +106,7 @@ public class DefaultKeyedValues2DTest {
         kv2D1.addValue(345.9, "Row2", "Col1");
         kv2D1.addValue(452.7, "Row2", "Col2");
 
-        DefaultKeyedValues2D kv2D2 = (DefaultKeyedValues2D) 
-                TestUtils.serialised(kv2D1);
+        DefaultKeyedValues2D kv2D2 = TestUtils.serialised(kv2D1);
         assertEquals(kv2D1, kv2D2);
     }
 

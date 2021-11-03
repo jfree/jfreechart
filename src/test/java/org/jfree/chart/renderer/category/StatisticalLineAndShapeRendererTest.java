@@ -123,8 +123,7 @@ public class StatisticalLineAndShapeRendererTest {
     public void testSerialization() {
         StatisticalLineAndShapeRenderer r1
                 = new StatisticalLineAndShapeRenderer();
-        StatisticalLineAndShapeRenderer r2 = (StatisticalLineAndShapeRenderer) 
-                TestUtils.serialised(r1);
+        StatisticalLineAndShapeRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

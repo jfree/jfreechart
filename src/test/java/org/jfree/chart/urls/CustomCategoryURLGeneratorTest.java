@@ -130,8 +130,7 @@ public class CustomCategoryURLGeneratorTest {
         CustomCategoryURLGenerator g1 = new CustomCategoryURLGenerator();
         g1.addURLSeries(u1);
         g1.addURLSeries(u2);
-        CustomCategoryURLGenerator g2 = (CustomCategoryURLGenerator) 
-                TestUtils.serialised(g1);
+        CustomCategoryURLGenerator g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

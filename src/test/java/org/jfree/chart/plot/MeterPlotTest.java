@@ -235,7 +235,7 @@ public class MeterPlotTest {
                 3.0f, 4.0f, Color.BLUE));
         p1.setTickPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.BLUE));
-        MeterPlot p2 = (MeterPlot) TestUtils.serialised(p1);
+        MeterPlot p2 = TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 
@@ -245,7 +245,7 @@ public class MeterPlotTest {
     @Test
     public void testSerialization2() {
         MeterPlot p1 = new MeterPlot(new DefaultValueDataset(1.23));
-        MeterPlot p2 = (MeterPlot) TestUtils.serialised(p1);
+        MeterPlot p2 = TestUtils.serialised(p1);
         assertEquals(p1, p2);
 
     }

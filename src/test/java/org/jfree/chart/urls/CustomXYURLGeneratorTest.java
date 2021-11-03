@@ -128,8 +128,7 @@ public class CustomXYURLGeneratorTest {
         CustomXYURLGenerator g1 = new CustomXYURLGenerator();
         g1.addURLSeries(u1);
         g1.addURLSeries(u2);
-        CustomXYURLGenerator g2 = (CustomXYURLGenerator) 
-                TestUtils.serialised(g1);
+        CustomXYURLGenerator g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

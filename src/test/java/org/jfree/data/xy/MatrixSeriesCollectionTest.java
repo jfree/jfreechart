@@ -111,8 +111,7 @@ public class MatrixSeriesCollectionTest {
         s1.update(0, 0, 1.1);
         MatrixSeriesCollection c1 = new MatrixSeriesCollection();
         c1.addSeries(s1);
-        MatrixSeriesCollection c2 = (MatrixSeriesCollection) 
-                TestUtils.serialised(c1);
+        MatrixSeriesCollection c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 

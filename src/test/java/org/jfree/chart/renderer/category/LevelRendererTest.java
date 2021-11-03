@@ -146,7 +146,7 @@ public class LevelRendererTest {
     @Test
     public void testSerialization() {
         LevelRenderer r1 = new LevelRenderer();
-        LevelRenderer r2 = (LevelRenderer) TestUtils.serialised(r1);
+        LevelRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

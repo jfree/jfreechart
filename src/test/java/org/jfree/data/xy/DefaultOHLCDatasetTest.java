@@ -148,7 +148,7 @@ public class DefaultOHLCDatasetTest {
     public void testSerialization() {
         DefaultOHLCDataset d1 = new DefaultOHLCDataset("Series 1",
                 new OHLCDataItem[0]);
-        DefaultOHLCDataset d2 = (DefaultOHLCDataset) TestUtils.serialised(d1);
+        DefaultOHLCDataset d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 

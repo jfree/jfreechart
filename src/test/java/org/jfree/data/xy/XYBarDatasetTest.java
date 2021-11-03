@@ -122,7 +122,7 @@ public class XYBarDatasetTest {
         double[][] data1 = new double[][] {x1, y1};
         d1.addSeries("S1", data1);
         XYBarDataset bd1 = new XYBarDataset(d1, 5.0);
-        XYBarDataset bd2 = (XYBarDataset) TestUtils.serialised(bd1);
+        XYBarDataset bd2 = TestUtils.serialised(bd1);
         assertEquals(bd1, bd2);
     }
 

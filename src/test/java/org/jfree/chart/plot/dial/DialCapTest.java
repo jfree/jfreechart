@@ -161,7 +161,7 @@ public class DialCapTest {
                 3.0f, 4.0f, Color.GRAY));
         c1.setOutlineStroke(new BasicStroke(2.0f));
 
-        c2 = (DialCap) TestUtils.serialised(c1);
+        c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 

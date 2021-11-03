@@ -145,8 +145,7 @@ public class DefaultStatisticalCategoryDatasetTest {
         d1.add(3.3, 4.4, "R1", "C2");
         d1.add(null, 5.5, "R1", "C3");
         d1.add(6.6, null, "R2", "C3");
-        DefaultStatisticalCategoryDataset d2 = 
-                (DefaultStatisticalCategoryDataset) TestUtils.serialised(d1);
+        DefaultStatisticalCategoryDataset d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 
@@ -158,8 +157,7 @@ public class DefaultStatisticalCategoryDatasetTest {
         DefaultStatisticalCategoryDataset d1
             = new DefaultStatisticalCategoryDataset();
         d1.add(1.2, 3.4, "Row 1", "Column 1");
-        DefaultStatisticalCategoryDataset d2 = 
-                (DefaultStatisticalCategoryDataset) TestUtils.serialised(d1);
+        DefaultStatisticalCategoryDataset d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 

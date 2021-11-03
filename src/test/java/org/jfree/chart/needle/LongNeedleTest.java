@@ -75,7 +75,7 @@ public class LongNeedleTest {
     @Test
     public void testSerialization() {
         LongNeedle n1 = new LongNeedle();
-        LongNeedle n2 = (LongNeedle) TestUtils.serialised(n1);
+        LongNeedle n2 = TestUtils.serialised(n1);
         assertTrue(n1.equals(n2));
     }
 

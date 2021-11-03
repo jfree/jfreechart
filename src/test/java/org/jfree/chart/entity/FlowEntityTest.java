@@ -100,7 +100,7 @@ public class FlowEntityTest {
     @Test
     public void testSerialization() {
         FlowEntity f1 = new FlowEntity(new FlowKey<>(0, "A", "B"), new Rectangle(0, 1, 2, 3), "tt", "uu");
-        FlowEntity f2 = (FlowEntity) TestUtils.serialised(f1);
+        FlowEntity f2 = TestUtils.serialised(f1);
         assertEquals(f1, f2);
     }
  
