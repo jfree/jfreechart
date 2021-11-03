@@ -44,6 +44,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
 import java.awt.geom.Rectangle2D;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 
 import org.jfree.chart.TestUtils;
 
@@ -57,6 +59,25 @@ import org.junit.jupiter.api.Test;
  * Some tests for the {@link LegendTitle} class.
  */
 public class LegendTitleTest {
+
+    /**
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
+     */
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(LegendTitle.class)
+                .suppress(Warning.STRICT_INHERITANCE)
+                .suppress(Warning.NONFINAL_FIELDS)
+                .withRedefinedSuperclass()
+                .withPrefabValues(Rectangle2D.class,
+                                  TestUtils.createR2D(true),
+                                  TestUtils.createR2D(false))
+                .withPrefabValues(Font.class,
+                                  TestUtils.createFont(true),
+                                  TestUtils.createFont(false))
+                .verify();
+    }
 
     /**
      * Check that the equals() method distinguishes all fields.

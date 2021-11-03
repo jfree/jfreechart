@@ -30,7 +30,7 @@
  * (C) Copyright 2004-2021, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
@@ -41,6 +41,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.geom.Rectangle2D;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 
 import org.jfree.chart.TestUtils;
 
@@ -51,6 +53,19 @@ import org.junit.jupiter.api.Test;
  * Tests for the {@link CategoryItemEntity} class.
  */
 public class CategoryItemEntityTest {
+
+    /**
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
+     */
+    @Test
+    public void testEqualsHashcode() {
+        EqualsVerifier.forClass(CategoryItemEntity.class)
+            .withRedefinedSuperclass() // superclass also defines equals/hashCode
+            .suppress(Warning.STRICT_INHERITANCE)
+            .suppress(Warning.NONFINAL_FIELDS)
+            .verify();
+    }
 
     /**
      * Confirm that the equals method can distinguish all the required fields.

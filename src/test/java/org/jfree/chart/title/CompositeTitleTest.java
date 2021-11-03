@@ -44,6 +44,9 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.awt.Color;
 import java.awt.GradientPaint;
+import java.awt.geom.Rectangle2D;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 
 import org.jfree.chart.TestUtils;
 
@@ -56,6 +59,18 @@ import org.junit.jupiter.api.Test;
  * Tests for the {@link CompositeTitle} class.
  */
 public class CompositeTitleTest {
+
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(CompositeTitle.class)
+                .suppress(Warning.STRICT_INHERITANCE)
+                .suppress(Warning.NONFINAL_FIELDS)
+                .withRedefinedSuperclass()
+                .withPrefabValues(Rectangle2D.class,
+                                  TestUtils.createR2D(true),
+                                  TestUtils.createR2D(false))
+                .verify();
+    }
 
     /**
      * Some checks for the constructor.

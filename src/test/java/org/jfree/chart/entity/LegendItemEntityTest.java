@@ -41,6 +41,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.geom.Rectangle2D;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 
 import org.jfree.chart.TestUtils;
 
@@ -52,6 +54,20 @@ import org.junit.jupiter.api.Test;
  */
 public class LegendItemEntityTest {
 
+    /**
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
+     */
+    @Test
+    public void testEqualsHashCode()
+    {
+        EqualsVerifier.forClass(LegendItemEntity.class)
+            .withRedefinedSuperclass() // superclass also defines equals/hashCode
+            .suppress(Warning.STRICT_INHERITANCE)
+            .suppress(Warning.NONFINAL_FIELDS)
+            .verify();
+    }
+    
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */

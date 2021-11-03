@@ -30,7 +30,7 @@
  * (C) Copyright 2007-2021, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
@@ -42,20 +42,49 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.GradientPaint;
+import java.awt.geom.Rectangle2D;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 
 import org.jfree.chart.TestUtils;
 
 import org.jfree.chart.axis.AxisLocation;
 import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.axis.ValueAxis;
+import org.jfree.chart.plot.Plot;
 import org.jfree.chart.renderer.GrayPaintScale;
 import org.jfree.chart.renderer.LookupPaintScale;
 import org.junit.jupiter.api.Test;
+
+import org.jfree.chart.util.PaintUtils;
 
 /**
  * Tests for the {@link PaintScaleLegend} class.
  */
 public class PaintScaleLegendTest {
+
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(PaintScaleLegend.class)
+                .suppress(Warning.STRICT_INHERITANCE)
+                .suppress(Warning.NONFINAL_FIELDS)
+                .withRedefinedSuperclass()
+                .withPrefabValues(Rectangle2D.class,
+                                  TestUtils.createR2D(true),
+                                  TestUtils.createR2D(false))
+                .withPrefabValues(Font.class, 
+                                  TestUtils.createFont(true),
+                                  TestUtils.createFont(false))
+                .withPrefabValues(Plot.class,
+                              TestUtils.createPlot(true),
+                              TestUtils.createPlot(false))
+                .withPrefabValues(ValueAxis.class,
+                                  TestUtils.createValueAxis(true),
+                                  TestUtils.createValueAxis(false))
+            .verify();
+    }
 
     /**
      * Test that the equals() method distinguishes all fields.
@@ -110,24 +139,28 @@ public class PaintScaleLegendTest {
         // stripOutlinePaint
         l1.setStripOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.BLUE));
-        assertFalse(l1.equals(l2));
+        assertFalse(PaintUtils.equal(l1.getStripOutlinePaint(),
+                                     l2.getStripOutlinePaint()));
         l2.setStripOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.BLUE));
-        assertTrue(l1.equals(l2));
+        assertTrue(PaintUtils.equal(l1.getStripOutlinePaint(),
+                                    l2.getStripOutlinePaint()));
 
         // stripOutlineStroke
         l1.setStripOutlineStroke(new BasicStroke(1.1f));
-        assertFalse(l1.equals(l2));
+        assertFalse(l1.getStripOutlineStroke().equals(l2.getStripOutlineStroke()));
         l2.setStripOutlineStroke(new BasicStroke(1.1f));
-        assertTrue(l1.equals(l2));
+        assertTrue(l1.getStripOutlineStroke().equals(l2.getStripOutlineStroke()));
 
         // backgroundPaint
         l1.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.BLUE));
-        assertFalse(l1.equals(l2));
+        assertFalse(PaintUtils.equal(l1.getBackgroundPaint(),
+                                     l2.getBackgroundPaint()));
         l2.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.BLUE));
-        assertTrue(l1.equals(l2));
+        assertTrue(PaintUtils.equal(l1.getBackgroundPaint(),
+                                    l2.getBackgroundPaint()));
 
         l1.setSubdivisionCount(99);
         assertFalse(l1.equals(l2));

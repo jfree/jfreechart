@@ -36,6 +36,10 @@
 
 package org.jfree.chart.title;
 
+import java.awt.geom.Rectangle2D;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
+import org.jfree.chart.TestUtils;
 import org.jfree.chart.ui.HorizontalAlignment;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.VerticalAlignment;
@@ -49,7 +53,19 @@ import org.junit.jupiter.api.Test;
  * Tests for the abstract {@link Title} class.
  */
 public class TitleTest {
-
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(Title.class)
+                .suppress(Warning.NONFINAL_FIELDS)
+                .withRedefinedSuperclass()
+                .withRedefinedSubclass(LegendTitle.class)
+                .withRedefinedSubclass(PaintScaleLegend.class)
+                .withPrefabValues(Rectangle2D.class,
+                                  TestUtils.createR2D(true),
+                                  TestUtils.createR2D(false))
+                .verify();
+    }
+	
     /**
      * Some checks for the equals() method.
      */

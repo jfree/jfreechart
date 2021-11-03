@@ -33,7 +33,6 @@
  * Contributor(s):   -;
  *
  */
-
 package org.jfree.chart.entity;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -41,6 +40,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.geom.Rectangle2D;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
@@ -48,24 +49,40 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests for the {@link CategoryLabelEntity} class.
  */
-public class CategoryLabelEntityTest {
+public class CategoryLabelEntityTest
+{
+
+    /**
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
+     */
+    @Test
+    public void testEqualsHashcode()
+    {
+        EqualsVerifier.forClass(CategoryLabelEntity.class)
+                .withRedefinedSuperclass() // superclass also defines equals/hashCode
+                .suppress(Warning.STRICT_INHERITANCE)
+                .suppress(Warning.NONFINAL_FIELDS)
+                .verify();
+    }
 
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
     @Test
-    public void testEquals() {
+    public void testEquals()
+    {
         CategoryLabelEntity e1 = new CategoryLabelEntity("A",
-                new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), "ToolTip", "URL");
+                                                         new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), "ToolTip", "URL");
         CategoryLabelEntity e2 = new CategoryLabelEntity("A",
-                new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), "ToolTip", "URL");
+                                                         new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), "ToolTip", "URL");
         assertTrue(e1.equals(e2));
 
         e1 = new CategoryLabelEntity("B", new Rectangle2D.Double(1.0, 2.0,
-                3.0, 4.0), "ToolTip", "URL");
+                                                                 3.0, 4.0), "ToolTip", "URL");
         assertFalse(e1.equals(e2));
         e2 = new CategoryLabelEntity("B", new Rectangle2D.Double(1.0, 2.0,
-                3.0, 4.0), "ToolTip", "URL");
+                                                                 3.0, 4.0), "ToolTip", "URL");
         assertTrue(e1.equals(e2));
 
         e1.setArea(new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0));
@@ -88,9 +105,10 @@ public class CategoryLabelEntityTest {
      * Confirm that cloning works.
      */
     @Test
-    public void testCloning() throws CloneNotSupportedException {
+    public void testCloning() throws CloneNotSupportedException
+    {
         CategoryLabelEntity e1 = new CategoryLabelEntity("A",
-                new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), "ToolTip", "URL");
+                                                         new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), "ToolTip", "URL");
         CategoryLabelEntity e2 = (CategoryLabelEntity) e1.clone();
         assertTrue(e1 != e2);
         assertTrue(e1.getClass() == e2.getClass());
@@ -101,9 +119,10 @@ public class CategoryLabelEntityTest {
      * Serialize an instance, restore it, and check for equality.
      */
     @Test
-    public void testSerialization() {
+    public void testSerialization()
+    {
         CategoryLabelEntity e1 = new CategoryLabelEntity("A",
-                new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), "ToolTip", "URL");
+                                                         new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), "ToolTip", "URL");
         CategoryLabelEntity e2 = TestUtils.serialised(e1);
         assertEquals(e1, e2);
     }
