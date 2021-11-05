@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,24 +27,10 @@
  * -----------------
  * DateAxisTest.java
  * -----------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2021, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 22-Apr-2003 : Version 1 (DG);
- * 07-Jan-2005 : Added test for hashCode() method (DG);
- * 25-Sep-2005 : New tests for bug 1564977 (DG);
- * 19-Apr-2007 : Added further checks for setMinimumDate() and
- *               setMaximumDate() (DG);
- * 03-May-2007 : Replaced the tests for the previousStandardDate() method with
- *               new tests that check that the previousStandardDate and the
- *               next standard date do in fact span the reference date (DG);
- * 25-Nov-2008 : Added testBug2201869 (DG);
- * 08-Feb-2012 : Added testBug3484403 (MH);
- * 29-Aug-2016 : Added testBug25 (DG);
  *
  */
 

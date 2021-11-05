@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,9 +27,9 @@
  * ---------------------------
  * XYLineAndShapeRenderer.java
  * ---------------------------
- * (C) Copyright 2004-2021, by Object Refinery Limited.
+ * (C) Copyright 2004-2021, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
  *
  */
@@ -167,8 +167,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Returns a flag that controls whether or not each series is drawn as a
-     * single path.  The default value is {@code false}.
+     * Returns a flag that controls whether each series is drawn as a single path.  The default value is {@code false}.
      *
      * @return A boolean.
      *
@@ -179,7 +178,7 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
     }
 
     /**
-     * Sets the flag that controls whether or not each series is drawn as a
+     * Sets the flag that controls whether each series is drawn as a
      * single path and sends a {@link RendererChangeEvent} to all registered
      * listeners.
      *
@@ -943,12 +942,10 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
         if (getItemShapeVisible(series, item)) {
             Shape shape = getItemShape(series, item);
             if (orientation == PlotOrientation.HORIZONTAL) {
-                shape = ShapeUtils.createTranslatedShape(shape, transY1,
-                        transX1);
+                shape = ShapeUtils.createTranslatedShape(shape, transY1, transX1);
             }
             else if (orientation == PlotOrientation.VERTICAL) {
-                shape = ShapeUtils.createTranslatedShape(shape, transX1,
-                        transY1);
+                shape = ShapeUtils.createTranslatedShape(shape, transX1, transY1);
             }
             entityArea = shape;
             if (shape.intersects(dataArea)) {
@@ -1145,6 +1142,27 @@ public class XYLineAndShapeRenderer extends AbstractXYItemRenderer
             return false;
         }
         return true;
+    }
+
+    /**
+     * Returns a hash code for this instance.
+     *
+     * @return A hash code for this instance.
+     */
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + seriesLinesVisible.hashCode();
+        result = 31 * result + (defaultLinesVisible ? 1 : 0);
+        result = 31 * result + seriesShapesVisible.hashCode();
+        result = 31 * result + (defaultShapesVisible ? 1 : 0);
+        result = 31 * result + seriesShapesFilled.hashCode();
+        result = 31 * result + (defaultShapesFilled ? 1 : 0);
+        result = 31 * result + (drawOutlines ? 1 : 0);
+        result = 31 * result + (useFillPaint ? 1 : 0);
+        result = 31 * result + (useOutlinePaint ? 1 : 0);
+        result = 31 * result + (drawSeriesLineAsPath ? 1 : 0);
+        return result;
     }
 
     /**

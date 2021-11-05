@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -29,16 +29,8 @@
  * ------------------------
  * (C)opyright 2003-2008, by Bryan Scott and Contributors.
  *
- * Original Author:  Bryan Scott ;
- * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 01-Jul-2003 : Version 1 contributed by Bryan Scott (DG);
- * 27-Apr-2005 : Change XYDataset --> TableXYDataset because the table model
- *               assumes all series share the same x-values, and this is not
- *               enforced by XYDataset.  Also fixed bug 1191046, a problem
- *               in the getValueAt() method (DG);
+ * Original Author:  Bryan Scott;
+ * Contributor(s):   David Gilbert;
  *
  */
 
@@ -203,56 +195,5 @@ public class XYDatasetTableModel extends AbstractTableModel
             // XYDataset only provides methods for reading a dataset...
         }
     }
-
-//    /**
-//     * Run a demonstration of the table model interface.
-//     *
-//     * @param args  ignored.
-//     *
-//     * @throws Exception when an error occurs.
-//     */
-//    public static void main(String args[]) throws Exception {
-//        JFrame frame = new JFrame();
-//        JPanel panel = new JPanel();
-//        panel.setLayout(new BorderLayout());
-//
-//        XYSeries s1 = new XYSeries("Series 1", true, false);
-//        for (int i = 0; i < 10; i++) {
-//            s1.add(i, Math.random());
-//        }
-//        XYSeries s2 = new XYSeries("Series 2", true, false);
-//        for (int i = 0; i < 15; i++) {
-//            s2.add(i, Math.random());
-//        }
-//        DefaultTableXYDataset dataset = new DefaultTableXYDataset();
-//        dataset.addSeries(s1);
-//        dataset.addSeries(s2);
-//        XYDatasetTableModel tablemodel = new XYDatasetTableModel();
-//
-//        tablemodel.setModel(dataset);
-//
-//        JTable dataTable = new JTable(tablemodel);
-//        JScrollPane scroll = new JScrollPane(dataTable);
-//        scroll.setPreferredSize(new Dimension(600, 150));
-//
-//        JFreeChart chart = ChartFactory.createXYLineChart(
-//            "XY Series Demo",
-//            "X", "Y", dataset, PlotOrientation.VERTICAL,
-//            true,
-//            true,
-//            false
-//        );
-//
-//        ChartPanel chartPanel = new ChartPanel(chart);
-//
-//        panel.add(chartPanel, BorderLayout.CENTER);
-//        panel.add(scroll, BorderLayout.SOUTH);
-//
-//        frame.setContentPane(panel);
-//        frame.setSize(600, 500);
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        frame.show();
-//        RefineryUtilities.centerFrameOnScreen(frame);
-//    }
 
 }

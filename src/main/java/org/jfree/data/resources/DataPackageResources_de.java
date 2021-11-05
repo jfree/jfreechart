@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * ----------------------------
  * DataPackageResources_de.java
  * ----------------------------
- * (C) Copyright 2002-2008, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2002-2021, by David Gilbert and Contributors.
  *
  * Original Author:  Thomas Meier;
- * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 04-Apr-2002 : Version 1, translation by Thomas Meier (DG);
- * 17-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
+ * Contributor(s):   David Gilbert;
  *
  */
 

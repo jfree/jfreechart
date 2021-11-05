@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -30,16 +30,7 @@
  * (C) Copyright 2004-2012, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
- * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 01-Aug-2004 : Initial version (RA);
- * 01-Nov-2005 : Now using ImageIO for JPEG encoding, so we no longer have a
- *               dependency on com.sun.* which isn't available on all
- *               implementations (DG);
- * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
- * 06-Jul-2008 : Remove encoder only used in JDK 1.3 (DG);
+ * Contributor(s):   David Gilbert;
  * 
  */
 

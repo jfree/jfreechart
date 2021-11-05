@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -30,20 +30,7 @@
  * (C) Copyright 2003-2016, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
- * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 11-Aug-2003 : Version 1 (RA);
- * 18-Aug-2003 : Added tests for event notification when removing and updating
- *               series (RA);
- * 22-Sep-2003 : Changed to recognise that empty values are now null rather
- *               than zero (RA);
- * 16-Feb-2004 : Added some additional tests (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
- *               getYValue() (DG);
- * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
- * 22-Apr-2008 : Added testPublicCloneable (DG);
+ * Contributor(s):   David Gilbert;
  *
  */
 

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,9 +27,9 @@
  * ------------------------
  * XYPointerAnnotation.java
  * ------------------------
- * (C) Copyright 2003-2021, by Object Refinery Limited.
+ * (C) Copyright 2003-2021, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   Peter Kolb (patch 2809117);
  *
  */
@@ -138,6 +138,9 @@ public class XYPointerAnnotation extends XYTextAnnotation
     public XYPointerAnnotation(String label, double x, double y, double angle) {
 
         super(label, x, y);
+        Args.requireFinite(x, "x");
+        Args.requireFinite(y, "y");
+        Args.requireFinite(angle, "angle");
         this.angle = angle;
         this.tipRadius = DEFAULT_TIP_RADIUS;
         this.baseRadius = DEFAULT_BASE_RADIUS;

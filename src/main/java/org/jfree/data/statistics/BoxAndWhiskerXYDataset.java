@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -31,22 +31,7 @@
  *
  * Original Author:  David Browning (for Australian Institute of Marine
  *                   Science);
- * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 05-Aug-2003 : Version 1, contributed by David Browning (DG);
- * 12-Aug-2003 : Added new methods: getMaxNonOutlierValue
- *                                  getMaxNonFaroutValue
- *                                  getOutlierCoefficient
- *                                  setOutlierCoefficient
- *                                  getFaroutCoefficient
- *                                  setFaroutCoefficient
- *                                  getInterquartileRange (DB)
- * 27-Aug-2003 : Renamed BoxAndWhiskerDataset --> BoxAndWhiskerXYDataset, and
- *               cut down methods (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 02-Feb-2007 : Removed author tags from all over JFreeChart sources (DG);
+ * Contributor(s):   David Gilbert;
  *
  */
 

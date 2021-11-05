@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,9 +27,9 @@
  * -----------
  * XYPlot.java
  * -----------
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   Craig MacFarlane;
  *                   Mark Watson (www.markwatson.com);
  *                   Jonathan Nash;
@@ -3699,7 +3699,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      * @param layer  the layer (foreground or background).
      */
     protected void drawDomainMarkers(Graphics2D g2, Rectangle2D dataArea,
-                                     int index, Layer layer) {
+            int index, Layer layer) {
 
         XYItemRenderer r = getRenderer(index);
         if (r == null) {
@@ -3707,7 +3707,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
         }
         // check that the renderer has a corresponding dataset (it doesn't
         // matter if the dataset is null)
-        if (index >= getDatasetCount()) {
+        if (!this.datasets.containsKey(index)) {
             return;
         }
         Collection<Marker> markers = getDomainMarkers(index, layer);
@@ -3730,7 +3730,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      * @param layer  the layer (foreground or background).
      */
     protected void drawRangeMarkers(Graphics2D g2, Rectangle2D dataArea,
-                                    int index, Layer layer) {
+           int index, Layer layer) {
 
         XYItemRenderer r = getRenderer(index);
         if (r == null) {
@@ -3738,7 +3738,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
         }
         // check that the renderer has a corresponding dataset (it doesn't
         // matter if the dataset is null)
-        if (index >= getDatasetCount()) {
+        if (!this.datasets.containsKey(index)) {
             return;
         }
         Collection<Marker> markers = getRangeMarkers(index, layer);

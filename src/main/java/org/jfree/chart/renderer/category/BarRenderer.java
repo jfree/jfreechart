@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,9 +27,9 @@
  * ----------------
  * BarRenderer.java
  * ----------------
- * (C) Copyright 2002-2021, by Object Refinery Limited.
+ * (C) Copyright 2002-2021, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   Christian W. Zuckschwerdt;
  *                   Peter Kolb (patches 2497611, 2791407);
  *
@@ -1054,7 +1054,7 @@ public class BarRenderer extends AbstractCategoryItemRenderer
         Point2D anchorPoint = calculateLabelAnchorPoint(
                 position.getItemLabelAnchor(), bar, plot.getOrientation());
 
-        if (isInternalAnchor(position.getItemLabelAnchor())) {
+        if (position.getItemLabelAnchor().isInternal()) {
             Shape bounds = TextUtils.calculateRotatedStringBounds(label,
                     g2, (float) anchorPoint.getX(), (float) anchorPoint.getY(),
                     position.getTextAnchor(), position.getAngle(),
@@ -1195,29 +1195,6 @@ public class BarRenderer extends AbstractCategoryItemRenderer
 
         return result;
 
-    }
-
-    /**
-     * Returns {@code true} if the specified anchor point is inside a bar.
-     *
-     * @param anchor  the anchor point.
-     *
-     * @return A boolean.
-     */
-    private boolean isInternalAnchor(ItemLabelAnchor anchor) {
-        return anchor == ItemLabelAnchor.CENTER
-               || anchor == ItemLabelAnchor.INSIDE1
-               || anchor == ItemLabelAnchor.INSIDE2
-               || anchor == ItemLabelAnchor.INSIDE3
-               || anchor == ItemLabelAnchor.INSIDE4
-               || anchor == ItemLabelAnchor.INSIDE5
-               || anchor == ItemLabelAnchor.INSIDE6
-               || anchor == ItemLabelAnchor.INSIDE7
-               || anchor == ItemLabelAnchor.INSIDE8
-               || anchor == ItemLabelAnchor.INSIDE9
-               || anchor == ItemLabelAnchor.INSIDE10
-               || anchor == ItemLabelAnchor.INSIDE11
-               || anchor == ItemLabelAnchor.INSIDE12;
     }
 
     /**

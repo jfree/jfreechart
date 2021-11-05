@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,9 +27,9 @@
  * ------------
  * LogAxis.java
  * ------------
- * (C) Copyright 2006-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2021, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   Andrew Mickish (patch 1868745);
  *                   Peter Kolb (patches 1934255 and 2603321);
  *                   Yuri Blankenstein;
@@ -797,8 +797,10 @@ public class LogAxis extends ValueAxis {
      */
     protected AttributedString createTickLabel(double value) {
         if (this.numberFormatOverride != null) {
-            return new AttributedString(
-                    this.numberFormatOverride.format(value));
+            String text = this.numberFormatOverride.format(value);
+            AttributedString as = new AttributedString(text);
+            as.addAttribute(TextAttribute.FONT, getTickLabelFont());
+            return as;
         } else {
             String baseStr = this.baseSymbol;
             if (baseStr == null) {

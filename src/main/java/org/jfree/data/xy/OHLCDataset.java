@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,22 +27,10 @@
  * ----------------
  * OHLCDataset.java
  * ----------------
- * (C) Copyright 2001-2008, by Object Refinery Limited.
+ * (C) Copyright 2001-2021, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   Sylvain Vieujot;
- *
- * Changes (from 18-Sep-2001)
- * --------------------------
- * 18-Sep-2001 : Updated header info (DG);
- * 16-Oct-2001 : Moved to package com.jrefinery.data.* (DG);
- * 22-Oct-2001 : Renamed DataSource.java --> Dataset.java etc. (DG);
- * 05-Feb-2002 : Added getVolumeValue() method, as requested by Sylvain
- *               Vieujot (DG);
- * 05-May-2004 : Added methods that return double primitives (DG);
- * 26-Jul-2004 : Switched names of methods that return Number vs
- *               primitives (DG);
- * 06-Sep-2004 : Renamed HighLowDataset --> OHLCDataset (DG);
  *
  */
 

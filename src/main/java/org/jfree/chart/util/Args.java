@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,9 +27,9 @@
  * ---------
  * Args.java
  * ---------
- * (C) Copyright 2011-2020, by Object Refinery Limited.
+ * (C) Copyright 2011-2021, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
  *
  */
@@ -113,6 +113,23 @@ public class Args {
             throw new IllegalArgumentException("Require '" + name + "' (" 
                     + value + ") to be in the range " + lowerBound + " to " 
                     + upperBound);
+        }
+    }
+    
+    /**
+     * Checks the supplied value is finite (neither infinite nor NaN) and 
+     * throws an {@code IllegalArgumentException} if the requirement is not
+     * met.
+     * 
+     * @param value  the value.
+     * @param name  the parameter name (for use in the exception message).
+     * 
+     * @since 1.5.4
+     */
+    public static void requireFinite(double value, String name) {
+        if (!Double.isFinite(value)) {
+            throw new IllegalArgumentException("Require '" + name + "' (" 
+                    + value + ") to be finite.");
         }
     }
 }

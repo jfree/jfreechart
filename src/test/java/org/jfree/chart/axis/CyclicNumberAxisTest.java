@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,17 +27,10 @@
  * -------------------
  * CyclicAxisTest.java
  * -------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2021, by David Gilbert and Contributors.
  *
  * Original Author:  Nicolas Brodu
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 19-Nov-2003 : First version (NB);
- * 05-Oct-2004 : Removed extension of NumberAxisTests (DG);
- * 07-Jan-2004 : Added test for hashCode() (DG);
- * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
  *
  */
 

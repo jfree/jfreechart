@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,26 +27,10 @@
  * --------------------
  * CategoryDataset.java
  * --------------------
- * (C) Copyright 2000-2008, by Object Refinery Limited.
+ * (C) Copyright 2000-2021, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes (from 21-Aug-2001)
- * --------------------------
- * 21-Aug-2001 : Added standard header. Fixed DOS encoding problem (DG);
- * 18-Sep-2001 : Updated e-mail address in header (DG);
- * 15-Oct-2001 : Moved to new package (com.jrefinery.data.*) (DG);
- * 22-Oct-2001 : Renamed DataSource.java --> Dataset.java etc. (DG);
- * 17-Nov-2001 : Updated Javadoc comments (DG);
- * 04-Mar-2002 : Updated import statement (DG);
- * 23-Oct-2002 : Reorganised code (DG);
- * 10-Jan-2003 : Updated Javadocs (DG);
- * 21-Jan-2003 : Merged with TableDataset (which only existed in CVS) (DG);
- * 13-Mar-2003 : Added KeyedValues2DDataset interface (DG);
- * 23-Apr-2003 : Switched CategoryDataset and KeyedValues2DDataset so that
- *               CategoryDataset is the super interface (DG);
- * 18-Aug-2004 : Moved from org.jfree.data --> org.jfree.data.category (DG);
  *
  */
 

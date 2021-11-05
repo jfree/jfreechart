@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,18 +27,10 @@
  * -------------------
  * PeriodAxisTest.java
  * -------------------
- * (C) Copyright 2004-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2021, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 10-Jun-2003 : Version 1 (DG);
- * 07-Jan-2005 : Added test for hashCode() method (DG);
- * 08-Apr-2008 : Added test1932146() (DG);
- * 16-Jan-2009 : Added test2490803() (DG);
- * 02-Mar-2009 : Added testEqualsWithLocale (DG);
  *
  */
 

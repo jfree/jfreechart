@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * -----------------------------
  * OHLCSeriesCollectionTest.java
  * -----------------------------
- * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2021, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 04-Dec-2006 : Version 1 (DG);
- * 10-Jul-2008 : Updated testEquals() method (DG);
- * 26-Jun-2009 : Added tests for removeSeries() methods (DG);
  *
  */
 
@@ -57,7 +51,7 @@ import org.jfree.data.time.Year;
 import org.junit.jupiter.api.Test;
 
 /**
- * Tests for the {@link OHLCSeriesCollectionTests} class.
+ * Tests for the {@link OHLCSeriesCollection} class.
  */
 public class OHLCSeriesCollectionTest implements DatasetChangeListener {
 

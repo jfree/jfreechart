@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,26 +27,10 @@
  * ---------------------
  * DatasetUtilsTest.java
  * ---------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2021, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 18-Sep-2003 : Version 1 (DG);
- * 23-Mar-2004 : Added test for maximumStackedRangeValue() method (DG);
- * 04-Oct-2004 : Eliminated NumberUtils usage (DG);
- * 07-Jan-2005 : Updated for method name changes (DG);
- * 03-Feb-2005 : Added testFindStackedRangeBounds2() method (DG);
- * 26-Sep-2007 : Added testIsEmptyOrNullXYDataset() method (DG);
- * 28-Mar-2008 : Added and renamed various tests (DG);
- * 08-Oct-2008 : New tests to support patch 2131001 and related 
- *               changes (DG);
- * 25-Mar-2009 : Added tests for new iterateToFindRangeBounds() method (DG);
- * 16-May-2009 : Added
- *               testIterateToFindRangeBounds_MultiValueCategoryDataset() (DG);
- * 10-Sep-2009 : Added tests for bug 2849731 (DG);
  *
  */
 
