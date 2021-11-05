@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,17 +27,10 @@
  * ------------------------
  * ThermometerPlotTest.java
  * ------------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2021, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 26-Mar-2003 : Version 1 (DG);
- * 30-Apr-2007 : Added new serialization test (DG);
- * 03-May-2007 : Added cloning test (DG);
- * 08-Oct-2007 : Updated testEquals() for new fields (DG);
  *
  */
 

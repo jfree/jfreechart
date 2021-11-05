@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * -------------------------
  * XYIntervalSeriesTest.java
  * -------------------------
- * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2021, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 20-Oct-2006 : Version 1, based on XYSeriesTests (DG);
- * 13-Feb-2007 : Added testValues() (DG);
- * 27-Nov-2007 : Added testClear() method (DG);
  *
  */
 

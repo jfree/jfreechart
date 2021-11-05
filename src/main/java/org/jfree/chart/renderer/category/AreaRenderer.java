@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -30,7 +30,7 @@
  * (C) Copyright 2002-2020, by Jon Iles and Contributors.
  *
  * Original Author:  Jon Iles;
- * Contributor(s):   David Gilbert (for Object Refinery Limited);
+ * Contributor(s):   David Gilbert;
  *                   Christian W. Zuckschwerdt;
  *
  */

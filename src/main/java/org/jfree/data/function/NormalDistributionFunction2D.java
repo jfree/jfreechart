@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,19 +27,10 @@
  * ---------------------------------
  * NormalDistributionFunction2D.java
  * ---------------------------------
- * (C)opyright 2004-2016, by Object Refinery Limited.
+ * (C)opyright 2004-2021, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 25-May-2004 : Version 1 (DG);
- * 21-Nov-2005 : Added getters for the mean and standard deviation (DG);
- * 12-Feb-2009 : Precompute some constants from the function - see bug
- *               2572016 (DG);
- * 28-May-2009 : Implemented equals() and hashCode(), and added serialization
- *               support (DG);
  *
  */
 

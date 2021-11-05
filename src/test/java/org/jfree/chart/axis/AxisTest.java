@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,18 +27,10 @@
  * -------------
  * AxisTest.java
  * -------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2021, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 13-Aug-2003 : Version 1 (DG);
- * 06-Jan-2004 : Added tests for axis line attributes (DG);
- * 07-Jan-2005 : Added hashCode() test (DG);
- * 25-Sep-2008 : Extended equals() to cover new fields (DG);
- * 05-Aug-2013 : Extended equals for new fields (DG);
  *
  */
 

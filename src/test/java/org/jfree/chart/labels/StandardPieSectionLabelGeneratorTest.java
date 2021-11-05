@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,18 +27,10 @@
  * -----------------------------------------
  * StandardPieSectionLabelGeneratorTest.java
  * -----------------------------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2021, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 18-Mar-2003 : Version 1 (DG);
- * 13-Aug-2003 : Added clone tests (DG);
- * 04-Mar-2004 : Added test for equals() method (DG);
- * 23-Nov-2006 : Extended equals() test (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG);
  *
  */
 

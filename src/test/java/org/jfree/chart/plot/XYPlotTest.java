@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,25 +27,10 @@
  * ---------------
  * XYPlotTest.java
  * ---------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2021, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 26-Mar-2003 : Version 1 (DG);
- * 22-Mar-2004 : Added new cloning test (DG);
- * 05-Oct-2004 : Strengthened test for clone independence (DG);
- * 22-Nov-2006 : Added quadrant fields to equals() and clone() tests (DG);
- * 09-Jan-2007 : Mark and comment out testGetDatasetCount() (DG);
- * 05-Feb-2007 : Added testAddDomainMarker() and testAddRangeMarker() (DG);
- * 07-Feb-2007 : Added test1654215() (DG);
- * 24-May-2007 : Added testDrawSeriesWithZeroItems() (DG);
- * 07-Apr-2008 : Added testRemoveDomainMarker() and
- *               testRemoveRangeMarker() (DG);
- * 10-May-2009 : Extended testEquals(), added testCloning3() (DG);
- * 06-Jul-2009 : Added testBug2817504() (DG);
  *
  */
 

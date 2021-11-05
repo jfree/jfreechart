@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,19 +27,10 @@
  * --------------------
  * ValueMarkerTest.java
  * --------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2021, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 18-Aug-2003 : Version 1 (DG);
- * 14-Jun-2004 : Renamed MarkerTests --> ValueMarkerTests (DG);
- * 01-Jun-2005 : Strengthened equals() test (DG);
- * 05-Sep-2006 : Added checks for MarkerChangeEvent generation (DG);
- * 26-Sep-2007 : Added test1802195() method (DG);
- * 08-Oct-2007 : Added test1808376() method (DG);
  *
  */
 

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,22 +27,10 @@
  * ---------------------------
  * DefaultCategoryDataset.java
  * ---------------------------
- * (C) Copyright 2002-2016, by Object Refinery Limited.
+ * (C) Copyright 2002-2021, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 21-Jan-2003 : Added standard header, and renamed DefaultCategoryDataset (DG);
- * 13-Mar-2003 : Inserted DefaultKeyedValues2DDataset into class hierarchy (DG);
- * 06-Oct-2003 : Added incrementValue() method (DG);
- * 05-Apr-2004 : Added clear() method (DG);
- * 18-Aug-2004 : Moved from org.jfree.data --> org.jfree.data.category (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 26-Feb-2007 : Updated API docs (DG);
- * 08-Mar-2007 : Implemented clone() (DG);
- * 09-May-2008 : Implemented PublicCloneable (DG);
  *
  */
 

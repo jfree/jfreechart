@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,9 +27,9 @@
  * ----------------------
  * XYImageAnnotation.java
  * ----------------------
- * (C) Copyright 2003-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2021, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   Mike Harris;
  *                   Peter Kolb (patch 2809117);
  *
@@ -86,8 +86,8 @@ public class XYImageAnnotation extends AbstractXYAnnotation
      * Creates a new annotation to be displayed at the specified (x, y)
      * location.
      *
-     * @param x  the x-coordinate (in data space).
-     * @param y  the y-coordinate (in data space).
+     * @param x  the x-coordinate (in data space, must be finite).
+     * @param y  the y-coordinate (in data space, must be finite).
      * @param image  the image ({@code null} not permitted).
      */
     public XYImageAnnotation(double x, double y, Image image) {
@@ -108,6 +108,8 @@ public class XYImageAnnotation extends AbstractXYAnnotation
         super();
         Args.nullNotPermitted(image, "image");
         Args.nullNotPermitted(anchor, "anchor");
+        Args.requireFinite(x, "x");
+        Args.requireFinite(y, "y");
         this.x = x;
         this.y = y;
         this.image = image;
@@ -186,8 +188,7 @@ public class XYImageAnnotation extends AbstractXYAnnotation
         if (orientation == PlotOrientation.HORIZONTAL) {
             xx = j2DY;
             yy = j2DX;
-        }
-        else if (orientation == PlotOrientation.VERTICAL) {
+        } else if (orientation == PlotOrientation.VERTICAL) {
             xx = j2DX;
             yy = j2DY;
         }

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,37 +27,13 @@
  * ----------
  * Range.java
  * ----------
- * (C) Copyright 2002-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2002-2021, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   Chuanhao Chiu;
  *                   Bill Kelemen;
  *                   Nicolas Brodu;
  *                   Sergei Ivanov;
- *
- * Changes (from 23-Jun-2001)
- * --------------------------
- * 22-Apr-2002 : Version 1, loosely based by code by Bill Kelemen (DG);
- * 30-Apr-2002 : Added getLength() and getCentralValue() methods.  Changed
- *               argument check in constructor (DG);
- * 13-Jun-2002 : Added contains(double) method (DG);
- * 22-Aug-2002 : Added fix to combine method where both ranges are null, thanks
- *               to Chuanhao Chiu for reporting and fixing this (DG);
- * 07-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 26-Mar-2003 : Implemented Serializable (DG);
- * 14-Aug-2003 : Added equals() method (DG);
- * 27-Aug-2003 : Added toString() method (BK);
- * 11-Sep-2003 : Added Clone Support (NB);
- * 23-Sep-2003 : Fixed Checkstyle issues (DG);
- * 25-Sep-2003 : Oops, Range immutable, clone not necessary (NB);
- * 05-May-2004 : Added constrain() and intersects() methods (DG);
- * 18-May-2004 : Added expand() method (DG);
- * ------------- JFreeChart 1.0.x ---------------------------------------------
- * 11-Jan-2006 : Added new method expandToInclude(Range, double) (DG);
- * 18-Dec-2007 : New methods intersects(Range) and scale(...) thanks to Sergei
- *               Ivanov (DG);
- * 08-Jan-2012 : New method combineIgnoringNaN() (DG);
- * 23-Feb-2014 : Added isNaNRange() method (DG);
  * 
  */
 

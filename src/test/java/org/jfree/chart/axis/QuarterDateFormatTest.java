@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,15 +27,10 @@
  * --------------------------
  * QuarterDateFormatTest.java
  * --------------------------
- * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2021, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 10-May-2005 : Version 1 (DG);
- * 08-Jun-2007 : Added check for new field in testEquals() (DG);
  *
  */
 

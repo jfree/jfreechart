@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -30,29 +30,8 @@
  * (C) Copyright 2002-2009, by Bryan Scott and Contributors.
  *
  * Original Author:  Bryan Scott; Andy
- * Contributor(s):   David Gilbert (for Object Refinery Limited);
+ * Contributor(s):   David Gilbert;
  *                   Thomas Morgner;
- *
- * Changes
- * -------
- * 26-Apr-2002 : Creation based on JdbcXYDataSet, but extending
- *               DefaultPieDataset (BS);
- * 24-Jun-2002 : Removed unnecessary import and local variable (DG);
- * 13-Aug-2002 : Updated Javadoc comments and imports, removed default
- *               constructor (DG);
- * 18-Sep-2002 : Updated to support BIGINT (BS);
- * 21-Jan-2003 : Renamed JdbcPieDataset --> JDBCPieDataset (DG);
- * 03-Feb-2003 : Added Types.DECIMAL (see bug report 677814) (DG);
- * 05-Jun-2003 : Updated to support TIME, optimised executeQuery method (BS);
- * 30-Jul-2003 : Added empty contructor and executeQuery(connection,string)
- *               method (BS);
- * 02-Dec-2003 : Throwing exceptions allows to handle errors, removed default
- *               constructor, as without a connection, a query can never be
- *               executed (TM);
- * 04-Dec-2003 : Added missing Javadocs (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 02-Feb-2007 : Removed author tags all over JFreeChart sources (DG);
- * 19-May-2009 : Fixed FindBugs warnings, patch by Michal Wozniak (DG);
  *
  */
 

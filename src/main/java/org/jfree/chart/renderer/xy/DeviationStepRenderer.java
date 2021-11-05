@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2016, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -24,17 +24,13 @@
  * [Oracle and Java are registered trademarks of Oracle and/or its affiliates. 
  * Other names may be trademarks of their respective owners.]
  *
- * ----------------------
+ * --------------------------
  * DeviationStepRenderer.java
- * ----------------------
- * (C) Copyright 2007-2016, by Object Refinery Limited and Contributors.
+ * --------------------------
+ * (C) Copyright 2007-2021, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 21-Sep-2020 : Version 1;
  * 
  */
 

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,30 +27,10 @@
  * -------------------
  * TimeSeriesTest.java
  * -------------------
- * (C) Copyright 2001-2015, by Object Refinery Limited.
+ * (C) Copyright 2001-2021, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 16-Nov-2001 : Version 1 (DG);
- * 17-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 13-Mar-2003 : Added serialization test (DG);
- * 15-Oct-2003 : Added test for setMaximumItemCount method (DG);
- * 23-Aug-2004 : Added test that highlights a bug where the addOrUpdate()
- *               method can lead to more than maximumItemCount items in the
- *               dataset (DG);
- * 24-May-2006 : Added new tests (DG);
- * 31-Oct-2007 : New hashCode() test (DG);
- * 21-Nov-2007 : Added testBug1832432() and testClone2() (DG);
- * 10-Jan-2008 : Added testBug1864222() (DG);
- * 13-Jan-2009 : Added testEquals3() and testRemoveAgedItems3() (DG);
- * 26-May-2009 : Added various tests for min/maxY values (DG);
- * 09-Jun-2009 : Added testAdd_TimeSeriesDataItem (DG);
- * 31-Aug-2009 : Added new test for createCopy() method (DG);
- * 03-Dec-2011 : Added testBug3446965() (DG);
- * 06-Sep-2015 : Added test for findRangeBounds() (DG);
  * 
  */
 

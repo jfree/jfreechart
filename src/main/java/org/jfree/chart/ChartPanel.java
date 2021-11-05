@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,9 +27,9 @@
  * ---------------
  * ChartPanel.java
  * ---------------
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   Andrzej Porebski;
  *                   Soren Caspersen;
  *                   Jonathan Nash;
@@ -61,7 +61,6 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GraphicsConfiguration;
 import java.awt.HeadlessException;
-import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Paint;
 import java.awt.Point;
@@ -79,6 +78,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
@@ -251,13 +251,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     private boolean refreshBuffer;
 
     /** A buffer for the rendered chart. */
-    private transient Image chartBuffer;
-
-    /** The height of the chart buffer. */
-    private int chartBufferHeight;
-
-    /** The width of the chart buffer. */
-    private int chartBufferWidth;
+    private transient BufferedImage chartBuffer;
 
     /**
      * The minimum width for drawing a chart (uses scaling for smaller widths).
@@ -1416,106 +1410,57 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         // first determine the size of the chart rendering area...
         Dimension size = getSize();
         Insets insets = getInsets();
-        Rectangle2D available = new Rectangle2D.Double(insets.left, insets.top,
-                size.getWidth() - insets.left - insets.right,
-                size.getHeight() - insets.top - insets.bottom);
+        final int availableWidth = size.width - insets.left - insets.right; 
+        final int availableHeight = size.height - insets.top - insets.bottom;
 
         // work out if scaling is required...
         boolean scale = false;
-        double drawWidth = available.getWidth();
-        double drawHeight = available.getHeight();
+        int drawWidth = availableWidth;
+        int drawHeight = availableHeight;
         this.scaleX = 1.0;
         this.scaleY = 1.0;
 
         if (drawWidth < this.minimumDrawWidth) {
-            this.scaleX = drawWidth / this.minimumDrawWidth;
+            this.scaleX = (double) drawWidth / (double) this.minimumDrawWidth;
             drawWidth = this.minimumDrawWidth;
             scale = true;
         }
         else if (drawWidth > this.maximumDrawWidth) {
-            this.scaleX = drawWidth / this.maximumDrawWidth;
+            this.scaleX = (double) drawWidth / (double) this.maximumDrawWidth;
             drawWidth = this.maximumDrawWidth;
             scale = true;
         }
 
         if (drawHeight < this.minimumDrawHeight) {
-            this.scaleY = drawHeight / this.minimumDrawHeight;
+            this.scaleY = (double) drawHeight / (double) this.minimumDrawHeight;
             drawHeight = this.minimumDrawHeight;
             scale = true;
         }
         else if (drawHeight > this.maximumDrawHeight) {
-            this.scaleY = drawHeight / this.maximumDrawHeight;
+            this.scaleY = (double) drawHeight / (double) this.maximumDrawHeight;
             drawHeight = this.maximumDrawHeight;
             scale = true;
         }
 
-        Rectangle2D chartArea = new Rectangle2D.Double(0.0, 0.0, drawWidth,
-                drawHeight);
+        Dimension chartSize = new Dimension(drawWidth, drawHeight);
 
         // are we using the chart buffer?
         if (this.useBuffer) {
 
-            // for better rendering on the HiDPI monitors upscaling the buffer to the "native" resoution
+            // for better rendering on the HiDPI monitors upscaling the buffer to the "native" resolution
             // instead of using logical one provided by Swing
             final AffineTransform globalTransform = ((Graphics2D) g).getTransform();
             final double globalScaleX = globalTransform.getScaleX();
             final double globalScaleY = globalTransform.getScaleY();
 
-            final int scaledWidth = (int) (available.getWidth() * globalScaleX);
-            final int scaledHeight = (int) (available.getHeight() * globalScaleY);
+            final Dimension bufferSize = new Dimension(
+                    (int) Math.ceil(availableWidth * globalScaleX),
+                    (int) Math.ceil(availableHeight * globalScaleY));
 
-            // do we need to resize the buffer?
-            if ((this.chartBuffer == null)
-                    || (this.chartBufferWidth != scaledWidth)
-                    || (this.chartBufferHeight != scaledHeight)) {
-                this.chartBufferWidth = scaledWidth;
-                this.chartBufferHeight = scaledHeight;
-                GraphicsConfiguration gc = g2.getDeviceConfiguration();
-                
-                this.chartBuffer = gc.createCompatibleImage(
-                        this.chartBufferWidth, this.chartBufferHeight,
-                        Transparency.TRANSLUCENT);
-                this.refreshBuffer = true;
-            }
-
-            // do we need to redraw the buffer?
-            if (this.refreshBuffer) {
-
-                this.refreshBuffer = false; // clear the flag
-
-                // scale graphics of the buffer to the same value as global 
-                // Swing graphics - this allow to paint all elements as usual 
-                // but applies all necessary smoothing
-                Graphics2D bufferG2 = (Graphics2D) this.chartBuffer.getGraphics();
-                bufferG2.scale(globalScaleX, globalScaleY);
-
-                Rectangle2D bufferArea = new Rectangle2D.Double(
-                        0, 0, available.getWidth(), available.getHeight());
-
-                // make the background of the buffer clear and transparent
-                Composite savedComposite = bufferG2.getComposite();
-                bufferG2.setComposite(AlphaComposite.getInstance(AlphaComposite.CLEAR, 0.0f));
-                Rectangle r = new Rectangle(0, 0, (int) available.getWidth(), (int) available.getHeight());
-                bufferG2.fill(r);
-                bufferG2.setComposite(savedComposite);
-                
-                if (scale) {
-                    AffineTransform saved = bufferG2.getTransform();
-                    AffineTransform st = AffineTransform.getScaleInstance(
-                            this.scaleX, this.scaleY);
-                    bufferG2.transform(st);
-                    this.chart.draw(bufferG2, chartArea, this.anchor,
-                            this.info);
-                    bufferG2.setTransform(saved);
-                } else {
-                    this.chart.draw(bufferG2, bufferArea, this.anchor,
-                            this.info);
-                }
-                bufferG2.dispose();
-            }
+            this.chartBuffer = paintChartToBuffer(g2, bufferSize, chartSize, anchor, info);
 
             // zap the buffer onto the panel...
-            g2.drawImage(this.chartBuffer, insets.left, insets.top, (int) available.getWidth(), (int) available.getHeight(), this);
+            g2.drawImage(this.chartBuffer, insets.left, insets.top, availableWidth, availableHeight, this);
             g2.addRenderingHints(this.chart.getRenderingHints()); // bug#187
 
         } else { // redrawing the chart every time...
@@ -1526,7 +1471,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
                         this.scaleX, this.scaleY);
                 g2.transform(st);
             }
-            this.chart.draw(g2, chartArea, this.anchor, this.info);
+            this.chart.draw(g2, new Rectangle(chartSize), this.anchor, this.info);
             g2.setTransform(saved);
 
         }
@@ -1546,6 +1491,64 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         this.anchor = null;
         this.verticalTraceLine = null;
         this.horizontalTraceLine = null;
+    }
+
+    /**
+     * Paints the chart to fill the entire off-screen buffer image.
+     * 
+     * @param g2         the graphics context to create an off-screen buffer
+     *                   image.
+     * @param bufferSize the required off-screen buffer image size.
+     * @param chartSize  the size with which the chart should be drawn (apply
+     *                   scaling if not equal to {@code bufferSize}).
+     * @param anchor     the anchor point (in Java2D space) for the chart
+     *                   ({@code null} permitted).
+     * @param info       records info about the drawing ({@code null} means
+     *                   collect no info).
+     * @return the off-screen buffer image to draw onto the panel.
+     */
+    protected BufferedImage paintChartToBuffer(Graphics2D g2, Dimension bufferSize,
+            Dimension chartSize, Point2D anchor, ChartRenderingInfo info) {
+        final BufferedImage buffer;
+        if ((this.chartBuffer == null)
+                || (this.chartBuffer.getWidth() != bufferSize.width)
+                || (this.chartBuffer.getHeight() != bufferSize.height)) {
+            GraphicsConfiguration gc = g2.getDeviceConfiguration();
+
+            buffer = gc.createCompatibleImage(bufferSize.width,
+                    bufferSize.height, Transparency.TRANSLUCENT);
+
+            this.refreshBuffer = true;
+        } else {
+            buffer = this.chartBuffer;
+        }
+        
+        
+        // do we need to redraw the buffer?
+        if (this.refreshBuffer) {
+
+            this.refreshBuffer = false; // clear the flag
+
+            Graphics2D bufferG2 = buffer.createGraphics();
+            if (!bufferSize.equals(chartSize)) {
+                // Scale the chart to fit the buffer
+                bufferG2.scale(
+                        bufferSize.getWidth() / chartSize.getWidth(),
+                        bufferSize.getHeight() / chartSize.getHeight());
+            }
+            Rectangle chartArea = new Rectangle(chartSize);
+
+            // make the background of the buffer clear and transparent
+            Composite savedComposite = bufferG2.getComposite();
+            bufferG2.setComposite(AlphaComposite.getInstance(AlphaComposite.CLEAR, 0.0f));
+            bufferG2.fill(chartArea);
+            bufferG2.setComposite(savedComposite);
+            
+            this.chart.draw(bufferG2, chartArea, this.anchor, this.info);
+            bufferG2.dispose();
+        }
+        
+        return buffer;
     }
 
     /**
@@ -2058,7 +2061,6 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
         if (this.chart == null) {
             return;
         }
-        this.chart.setNotify(true);  // force a redraw
         // new entity code...
         Object[] listeners = this.chartMouseListeners.getListeners(
                 ChartMouseListener.class);

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * -----------------------------
  * TaskSeriesCollectionTest.java
  * -----------------------------
- * (C) Copyright 2004-2020, by Object Refinery Limited.
+ * (C) Copyright 2004-2021, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 30-Jul-2004 : Version 1 (DG);
- * 12-Jan-2005 : Added tests from TaskSeriesCollectionTests2.java (DG);
- * 08-Mar-2007 : Added testRemove() (DG);
  *
  */
 

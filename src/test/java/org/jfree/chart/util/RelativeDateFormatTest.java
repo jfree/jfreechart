@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,17 +27,10 @@
  * ---------------------------
  * RelativeDateFormatTest.java
  * ---------------------------
- * (C) Copyright 2006-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2006-2021, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 23-Nov-2006 : Version 1 (DG);
- * 15-Feb-2008 : Added tests for negative dates (DG);
- * 01-Sep-2008 : Added a test for hours and minutes with leading zeroes (DG);
- * 06-Oct-2011 : Fixed bug 3418287 (DG);
  *
  */
 

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,9 +27,9 @@
  * ---------------------------
  * StackedXYAreaRenderer2.java
  * ---------------------------
- * (C) Copyright 2004-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2004-2021, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited), based on
+ * Original Author:  David Gilbert, based on
  *                   the StackedXYAreaRenderer class by Richard Atkinson;
  * Contributor(s):   Ulrich Voigt (patch #312);
  *

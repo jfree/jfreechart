@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,19 +27,10 @@
  * ------------------------
  * HighLowRendererTest.java
  * ------------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2021, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 25-Mar-2003 : Version 1 (DG);
- * 22-Oct-2003 : Added hashCode test (DG);
- * 01-Nov-2005 : Added tests for new fields (DG);
- * 17-Aug-2006 : Added testFindRangeBounds() method (DG);
- * 22-Apr-2008 : Added testPublicCloneable (DG);
- * 29-Apr-2008 : Extended testEquals() for new field (DG);
  *
  */
 

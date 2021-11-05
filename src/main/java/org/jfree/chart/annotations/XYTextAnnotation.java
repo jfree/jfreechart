@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,9 +27,9 @@
  * ---------------------
  * XYTextAnnotation.java
  * ---------------------
- * (C) Copyright 2002-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2002-2021, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   Peter Kolb (patch 2809117);
  *
  */
@@ -132,12 +132,14 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * Java2D space for display).
      *
      * @param text  the text ({@code null} not permitted).
-     * @param x  the x-coordinate (in data space).
-     * @param y  the y-coordinate (in data space).
+     * @param x  the x-coordinate (in data space, must be finite).
+     * @param y  the y-coordinate (in data space, must be finite).
      */
     public XYTextAnnotation(String text, double x, double y) {
         super();
         Args.nullNotPermitted(text, "text");
+        Args.requireFinite(x, "x");
+        Args.requireFinite(y, "y");
         this.text = text;
         this.font = DEFAULT_FONT;
         this.paint = DEFAULT_PAINT;
@@ -325,6 +327,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * @see #getX()
      */
     public void setX(double x) {
+        Args.requireFinite(x, "x");
         this.x = x;
         fireAnnotationChanged();
     }
@@ -351,6 +354,7 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      * @see #getY()
      */
     public void setY(double y) {
+        Args.requireFinite(y, "y");
         this.y = y;
         fireAnnotationChanged();
     }

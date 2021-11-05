@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,23 +27,10 @@
  * ------------
  * Dataset.java
  * ------------
- * (C) Copyright 2000-2008, by Object Refinery Limited.
+ * (C) Copyright 2000-2021, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes (from 18-Sep-2001)
- * --------------------------
- * 18-Sep-2001 : Added standard header and fixed DOS encoding problem (DG);
- * 15-Oct-2001 : Moved to a new package (com.jrefinery.data.*) (DG);
- * 22-Oct-2001 : Changed name to Dataset.java (DG);
- * 17-Nov-2001 : Added getLegendItemCount() and getLegendItemLabels() methods,
- *               created SeriesDataset interface and transferred series related
- *               methods out (DG);
- * 22-Jan-2002 : Reconsidered (and removed) the getLegendItemCount() and
- *               getLegendItemLabels() methods...leave this to client code (DG);
- * 27-Sep-2002 : Added get/setDatasetGroup() methods (DG);
- * 10-Jan-2003 : Updated Javadocs (DG);
  *
  */
 

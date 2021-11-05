@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * -------------------
  * LabelBlockTest.java
  * -------------------
- * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2021, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 01-Sep-2005 : Version 1 (DG);
- * 16-Mar-2007 : Check GradientPaint in testSerialization() (DG);
- * 10-Feb-2009 : Added new fields to testEquals() (DG);
  *
  */
 

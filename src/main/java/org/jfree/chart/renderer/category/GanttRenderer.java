@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,9 +27,9 @@
  * ------------------
  * GanttRenderer.java
  * ------------------
- * (C) Copyright 2003-2021, by Object Refinery Limited.
+ * (C) Copyright 2003-2021, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
  * 
  */
@@ -446,7 +446,7 @@ public class GanttRenderer extends IntervalBarRenderer implements Serializable {
             barBase = RectangleEdge.LEFT;
         }
         else if (orientation == PlotOrientation.VERTICAL) {
-            bar = new Rectangle2D.Double(rectStart, java2dValue1, rectBreadth,
+            bar = new Rectangle2D.Double(rectStart, java2dValue0, rectBreadth,
                     rectLength);
             barBase = RectangleEdge.BOTTOM;
         }

@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,18 +27,10 @@
  * ------------------------------------------
  * DefaultStatisticalCategoryDatasetTest.java
  * ------------------------------------------
- * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2021, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 05-Feb-2005 : Version 1 (DG);
- * 03-Aug-2006 : Added testGetRangeBounds() method (DG);
- * 28-Sep-2007 : Enhanced testCloning() method (DG);
- * 02-Oct-2007 : Added new bounds tests (DG);
- * 03-Oct-2007 : Added testRemove() method (DG);
  *
  */
 

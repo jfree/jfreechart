@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,22 +27,10 @@
  * --------------------
  * BarRendererTest.java
  * --------------------
- * (C) Copyright 2003-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2003-2021, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 25-Mar-2003 : Version 1 (DG);
- * 19-Aug-2003 : Renamed HorizontalBarRendererTests --> BarRendererTests (DG);
- * 22-Oct-2003 : Added hashCode test (DG);
- * 18-May-2005 : Added field to equals() test (DG);
- * 22-Sep-2005 : Renamed getMaxBarWidth() --> getMaximumBarWidth() (DG);
- * 11-May-2007 : Added testGetLegendItem() (DG);
- * 23-Apr-2008 : Added testPublicCloneable() (DG);
- * 25-Nov-2008 : Added testFindRangeBounds (DG);
- * 16-May-2009 : Added series visibility check in testFindRangeBounds() (DG);
  *
  */
 

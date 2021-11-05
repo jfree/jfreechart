@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,20 +27,10 @@
  * ---------------
  * TaskSeries.java
  * ---------------
- * (C) Copyright 2002-2016, by Object Refinery Limited.
+ * (C) Copyright 2002-2021, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 06-Jun-2002 : Version 1 (DG);
- * 07-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 24-Oct-2002 : Added methods to get TimeAllocation by task index (DG);
- * 10-Jan-2003 : Renamed GanttSeries --> TaskSeries (DG);
- * 30-Jul-2004 : Added equals() method (DG);
- * 09-May-2008 : Fixed cloning bug (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 

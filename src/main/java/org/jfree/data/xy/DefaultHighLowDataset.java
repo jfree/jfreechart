@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,23 +27,10 @@
  * --------------------------
  * DefaultHighLowDataset.java
  * --------------------------
- * (C) Copyright 2002-2016, by Object Refinery Limited.
+ * (C) Copyright 2002-2021, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 21-Mar-2002 : Version 1 (DG);
- * 07-Oct-2002 : Fixed errors reported by Checkstyle (DG);
- * 06-May-2004 : Now extends AbstractXYDataset and added new methods from
- *               HighLowDataset (DG);
- * 15-Jul-2004 : Switched getX() with getXValue() and getY() with
- *               getYValue() (DG);
- * ------------- JFREECHART 1.0.x ---------------------------------------------
- * 28-Nov-2006 : Added equals() method override (DG);
- * 22-Apr-2008 : Implemented PublicCloneable (DG);
- * 03-Jul-2013 : Use ParamChecks (DG);
  *
  */
 

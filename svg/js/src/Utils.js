@@ -1,5 +1,5 @@
 /* 
- * Copyright (C) 2014 Object Refinery Limited
+ * Copyright (C) 2014-2021 by David Gilbert
  */
 
 var jfc;

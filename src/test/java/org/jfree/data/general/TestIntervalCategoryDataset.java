@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,14 +27,10 @@
  * --------------------------------
  * TestIntervalCategoryDataset.java
  * --------------------------------
- * (C) Copyright 2009-2020, by Object Refinery Limited.
+ * (C) Copyright 2009-2021, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 10-Sep-2009 : Version 1, based on DefaultCategoryDataset (DG);
  *
  */
 
@@ -97,9 +93,6 @@ public class TestIntervalCategoryDataset extends AbstractDataset
      * @param column  the column index (zero-based).
      *
      * @return The value (possibly {@code null}).
-     *
-     * @see #addValue(Number, Comparable, Comparable)
-     * @see #removeValue(Comparable, Comparable)
      */
     @Override
     public Number getValue(int row, int column) {
@@ -204,8 +197,6 @@ public class TestIntervalCategoryDataset extends AbstractDataset
      * @return The value (possibly {@code null}).
      *
      * @throws UnknownKeyException if either key is not defined in the dataset.
-     *
-     * @see #addValue(Number, Comparable, Comparable)
      */
     @Override
     public Number getValue(Comparable rowKey, Comparable columnKey) {
@@ -225,7 +216,6 @@ public class TestIntervalCategoryDataset extends AbstractDataset
      * @param columnKey  the column key.
      *
      * @see #getValue(Comparable, Comparable)
-     * @see #removeValue(Comparable, Comparable)
      */
     public void addItem(Number value, Number lower, Number upper,
             Comparable rowKey, Comparable columnKey) {
@@ -257,8 +247,6 @@ public class TestIntervalCategoryDataset extends AbstractDataset
      *
      * @param rowKey  the row key.
      * @param columnKey  the column key.
-     *
-     * @see #addValue(Number, Comparable, Comparable)
      */
     public void removeItem(Comparable rowKey, Comparable columnKey) {
         this.data.removeObject(rowKey, columnKey);

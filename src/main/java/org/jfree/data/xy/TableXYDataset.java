@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2013, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -30,13 +30,7 @@
  * (C) Copyright 2000-2008, by Richard Atkinson and Contributors.
  *
  * Original Author:  Richard Atkinson;
- * Contributor(s):   David Gilbert (for Object Refinery Limited);
- *
- * Changes
- * -------
- * 22-Sep-2003 : Changed to be an interface.  Previous functionality moved to
- *               DefaultTableXYDataset;
- * 16-Feb-2004 : Updated Javadocs (DG);
+ * Contributor(s):   David Gilbert;
  *
  */
 

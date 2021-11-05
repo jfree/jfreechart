@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,16 +27,10 @@
  * ------------------------
  * XYShapeRendererTest.java
  * ------------------------
- * (C) Copyright 2010-2020, by Object Refinery Limited.
+ * (C) Copyright 2010-2021, by David Gilbert.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   Martin Hoeller (patch 2952086);
- *
- * Changes
- * -------
- * 17-Sep-2008 : Version 1 (DG);
- * 16-Feb-2010 : Added testFindZBounds() (MH);
- * 19-Oct-2011 : Added test3026341() (DG);
  *
  */
 

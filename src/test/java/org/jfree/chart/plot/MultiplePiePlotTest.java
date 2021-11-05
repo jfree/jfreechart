@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2000-2021, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,19 +27,10 @@
  * ------------------------
  * MultiplePiePlotTest.java
  * ------------------------
- * (C) Copyright 2005-2020, by Object Refinery Limited and Contributors.
+ * (C) Copyright 2005-2021, by David Gilbert and Contributors.
  *
- * Original Author:  David Gilbert (for Object Refinery Limited);
+ * Original Author:  David Gilbert;
  * Contributor(s):   -;
- *
- * Changes
- * -------
- * 16-Jun-2005 : Version 1 (DG);
- * 06-Apr-2006 : Added tests for new fields (DG);
- * 18-Apr-2008 : Added testConstructor() (DG);
- * 30-Dec-2008 : Updated for new legendItemShape field (DG);
- * 01-Jun-2009 : Added test for getLegendItems() bug, series key is not
- *               set (DG);
  *
  */
 
