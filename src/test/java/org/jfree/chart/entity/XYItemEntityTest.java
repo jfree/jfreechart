@@ -30,7 +30,7 @@
  * (C) Copyright 2004-2021, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
@@ -41,6 +41,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.geom.Rectangle2D;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 
 import org.jfree.chart.TestUtils;
 
@@ -52,6 +54,19 @@ import org.junit.jupiter.api.Test;
  */
 public class XYItemEntityTest {
 
+    /**
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
+     */
+    @Test
+    public void testEqualsHashCode()
+    {
+        EqualsVerifier.forClass(XYItemEntity.class)
+                .withRedefinedSuperclass() // superclass also defines equals/hashCode
+                .suppress(Warning.STRICT_INHERITANCE)
+                .suppress(Warning.NONFINAL_FIELDS)
+                .verify();
+    }
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
@@ -110,7 +125,7 @@ public class XYItemEntityTest {
     public void testSerialization() {
         XYItemEntity e1 = new XYItemEntity(new Rectangle2D.Double(1.0, 2.0,
                 3.0, 4.0), new TimeSeriesCollection(), 1, 9, "ToolTip", "URL");
-        XYItemEntity e2 = (XYItemEntity) TestUtils.serialised(e1);
+        XYItemEntity e2 = TestUtils.serialised(e1);
         assertEquals(e1, e2);
     }
 

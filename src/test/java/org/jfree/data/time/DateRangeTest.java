@@ -77,7 +77,7 @@ public class DateRangeTest {
     @Test
     public void testSerialization() {
         DateRange r1 = new DateRange(new Date(1000L), new Date(2000L));
-        DateRange r2 = (DateRange) TestUtils.serialised(r1);
+        DateRange r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

@@ -30,7 +30,7 @@
  * (C) Copyright 2004-2021, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
@@ -41,6 +41,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.geom.Rectangle2D;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 
 import org.jfree.chart.TestUtils;
 
@@ -51,6 +53,19 @@ import org.junit.jupiter.api.Test;
  * Tests for the {@link CategoryItemEntity} class.
  */
 public class CategoryItemEntityTest {
+
+    /**
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
+     */
+    @Test
+    public void testEqualsHashcode() {
+        EqualsVerifier.forClass(CategoryItemEntity.class)
+            .withRedefinedSuperclass() // superclass also defines equals/hashCode
+            .suppress(Warning.STRICT_INHERITANCE)
+            .suppress(Warning.NONFINAL_FIELDS)
+            .verify();
+    }
 
     /**
      * Confirm that the equals method can distinguish all the required fields.
@@ -114,7 +129,7 @@ public class CategoryItemEntityTest {
         d.addValue(4.0, "R2", "C2");
         CategoryItemEntity e1 = new CategoryItemEntity(new Rectangle2D.Double(
                 1.0, 2.0, 3.0, 4.0), "ToolTip", "URL", d, "R2", "C2");
-        CategoryItemEntity e2 = (CategoryItemEntity) TestUtils.serialised(e1);
+        CategoryItemEntity e2 = TestUtils.serialised(e1);
         assertEquals(e1, e2);
     }
 

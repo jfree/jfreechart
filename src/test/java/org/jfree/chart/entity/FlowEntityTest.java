@@ -37,6 +37,8 @@
 package org.jfree.chart.entity;
 
 import java.awt.Rectangle;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import org.jfree.chart.TestUtils;
 import org.jfree.data.flow.FlowKey;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -48,7 +50,20 @@ import org.junit.jupiter.api.Test;
  * Test class for the {@link FlowEntity} class.
  */
 public class FlowEntityTest {
-    
+
+    /**
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
+     */
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(FlowEntity.class)
+            .withRedefinedSuperclass() // superclass also defines equals/hashCode
+            .suppress(Warning.STRICT_INHERITANCE)
+            .suppress(Warning.NONFINAL_FIELDS)
+            .verify();
+    }
+
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
@@ -100,7 +115,7 @@ public class FlowEntityTest {
     @Test
     public void testSerialization() {
         FlowEntity f1 = new FlowEntity(new FlowKey<>(0, "A", "B"), new Rectangle(0, 1, 2, 3), "tt", "uu");
-        FlowEntity f2 = (FlowEntity) TestUtils.serialised(f1);
+        FlowEntity f2 = TestUtils.serialised(f1);
         assertEquals(f1, f2);
     }
  

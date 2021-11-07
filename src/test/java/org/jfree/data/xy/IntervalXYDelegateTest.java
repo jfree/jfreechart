@@ -110,7 +110,7 @@ public class IntervalXYDelegateTest {
         XYSeriesCollection c1 = new XYSeriesCollection();
         c1.addSeries(s1);
         IntervalXYDelegate d1 = new IntervalXYDelegate(c1);
-        IntervalXYDelegate d2 = (IntervalXYDelegate) TestUtils.serialised(d1);
+        IntervalXYDelegate d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 

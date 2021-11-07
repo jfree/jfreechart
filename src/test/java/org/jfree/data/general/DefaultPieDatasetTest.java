@@ -160,7 +160,7 @@ public class DefaultPieDatasetTest implements DatasetChangeListener {
         d1.setValue("C3", 345.9);
         d1.setValue("C4", 452.7);
 
-        DefaultPieDataset d2 = (DefaultPieDataset) TestUtils.serialised(d1);
+        DefaultPieDataset d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 

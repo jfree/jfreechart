@@ -198,8 +198,7 @@ public class DialValueIndicatorTest {
     @Test
     public void testSerialization() {
         DialValueIndicator i1 = new DialValueIndicator(0);
-        DialValueIndicator i2 = (DialValueIndicator) 
-                TestUtils.serialised(i1);
+        DialValueIndicator i2 = TestUtils.serialised(i1);
         assertEquals(i1, i2);
     }
 

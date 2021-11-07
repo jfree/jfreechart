@@ -264,7 +264,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
         s1.add(new Year(2002), null);
         s1.add(new Year(2005), 19.32);
         s1.add(new Year(2007), 16.89);
-        TimeSeries s2 = (TimeSeries) TestUtils.serialised(s1);
+        TimeSeries s2 = TestUtils.serialised(s1);
         assertTrue(s1.equals(s2));
     }
 

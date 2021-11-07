@@ -135,8 +135,7 @@ public class StandardCategoryToolTipGeneratorTest {
         StandardCategoryToolTipGenerator g1
                 = new StandardCategoryToolTipGenerator("{2}",
                 DateFormat.getInstance());
-        StandardCategoryToolTipGenerator g2 = (StandardCategoryToolTipGenerator)
-                TestUtils.serialised(g1);
+        StandardCategoryToolTipGenerator g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

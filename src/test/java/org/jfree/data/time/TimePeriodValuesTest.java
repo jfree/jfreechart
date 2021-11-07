@@ -134,7 +134,7 @@ public class TimePeriodValuesTest {
         s1.add(new Year(2002), null);
         s1.add(new Year(2005), 19.32);
         s1.add(new Year(2007), 16.89);
-        TimePeriodValues s2 = (TimePeriodValues) TestUtils.serialised(s1);
+        TimePeriodValues s2 = TestUtils.serialised(s1);
         assertTrue(s1.equals(s2));
     }
 

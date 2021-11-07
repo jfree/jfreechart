@@ -109,7 +109,7 @@ public class MarkerAxisBandTest {
     @Test
     public void testSerialization() {
         MarkerAxisBand a1 = new MarkerAxisBand(null, 1.0, 1.0, 1.0, 1.0, null);
-        MarkerAxisBand a2 = (MarkerAxisBand) TestUtils.serialised(a1);
+        MarkerAxisBand a2 = TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 

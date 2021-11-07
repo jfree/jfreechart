@@ -83,7 +83,7 @@ public class XYDataItemTest {
     @Test
     public void testSerialization() {
         XYDataItem i1 = new XYDataItem(1.0, 1.1);
-        XYDataItem i2 = (XYDataItem) TestUtils.serialised(i1);
+        XYDataItem i2 = TestUtils.serialised(i1);
         assertEquals(i1, i2);
     }
 

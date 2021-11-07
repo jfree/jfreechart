@@ -42,10 +42,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.Stroke;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.ui.GradientPaintTransformType;
@@ -58,6 +61,21 @@ import org.junit.jupiter.api.Test;
  * Tests for the {@link LegendGraphic} class.
  */
 public class LegendGraphicTest {
+
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(LegendGraphic.class)
+                .suppress(Warning.STRICT_INHERITANCE)
+                .suppress(Warning.NONFINAL_FIELDS)
+                .withRedefinedSuperclass()
+                .withPrefabValues(Rectangle2D.class,
+                                  TestUtils.createR2D(true),
+                                  TestUtils.createR2D(false))
+                .withPrefabValues(Font.class,
+                                  TestUtils.createFont(true),
+                                  TestUtils.createFont(false))
+                .verify();
+    }
 
     /**
      * Check that the equals() method distinguishes all fields.
@@ -220,7 +238,7 @@ public class LegendGraphicTest {
         LegendGraphic g1 = new LegendGraphic(new Rectangle2D.Double(1.0, 2.0, 
                 3.0, 4.0), Color.BLACK);
         g1.setOutlineStroke(s);
-        LegendGraphic g2 = (LegendGraphic) TestUtils.serialised(g1);
+        LegendGraphic g2 = TestUtils.serialised(g1);
         assertTrue(g1.equals(g2));
     }
 

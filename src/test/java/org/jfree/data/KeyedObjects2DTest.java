@@ -95,7 +95,7 @@ public class KeyedObjects2DTest {
         ko2D1.addObject(345.9, "Row2", "Col1");
         ko2D1.addObject(452.7, "Row2", "Col2");
 
-        KeyedObjects2D ko2D2 = (KeyedObjects2D) TestUtils.serialised(ko2D1);
+        KeyedObjects2D ko2D2 = TestUtils.serialised(ko2D1);
         assertEquals(ko2D1, ko2D2);
     }
 

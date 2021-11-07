@@ -106,7 +106,7 @@ public class MatrixSeriesTest {
         MatrixSeries m1 = new MatrixSeries("Test", 8, 3);
         m1.update(0, 0, 11.0);
         m1.update(7, 2, 22.0);
-        MatrixSeries m2 = (MatrixSeries) TestUtils.serialised(m1);
+        MatrixSeries m2 = TestUtils.serialised(m1);
         assertEquals(m1, m2);
     }
 

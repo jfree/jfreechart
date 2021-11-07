@@ -170,8 +170,7 @@ public class DefaultIntervalCategoryDatasetTest {
         double[][] ends = new double[][] {ends_S1, ends_S2};
         DefaultIntervalCategoryDataset d1
                 = new DefaultIntervalCategoryDataset(starts, ends);
-        DefaultIntervalCategoryDataset d2 = (DefaultIntervalCategoryDataset) 
-                TestUtils.serialised(d1);
+        DefaultIntervalCategoryDataset d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 

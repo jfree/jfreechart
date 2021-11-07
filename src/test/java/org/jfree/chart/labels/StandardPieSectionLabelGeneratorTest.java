@@ -149,8 +149,7 @@ public class StandardPieSectionLabelGeneratorTest {
     public void testSerialization() {
         StandardPieSectionLabelGenerator g1
                 = new StandardPieSectionLabelGenerator();
-        StandardPieSectionLabelGenerator g2 = (StandardPieSectionLabelGenerator) 
-                TestUtils.serialised(g1);
+        StandardPieSectionLabelGenerator g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

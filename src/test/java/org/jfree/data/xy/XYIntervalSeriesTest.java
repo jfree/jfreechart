@@ -132,7 +132,7 @@ public class XYIntervalSeriesTest implements SeriesChangeListener {
     public void testSerialization() {
         XYIntervalSeries s1 = new XYIntervalSeries("s1");
         s1.add(1.0, 0.5, 1.5, 2.0, 1.9, 2.1);
-        XYIntervalSeries s2 = (XYIntervalSeries) TestUtils.serialised(s1);
+        XYIntervalSeries s2 = TestUtils.serialised(s1);
         assertEquals(s1, s2);
     }
 

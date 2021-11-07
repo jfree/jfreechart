@@ -117,7 +117,7 @@ public class DefaultXYDatasetTest {
     public void testSerialization() {
 
         DefaultXYDataset d1 = new DefaultXYDataset();
-        DefaultXYDataset d2 = (DefaultXYDataset) TestUtils.serialised(d1);
+        DefaultXYDataset d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
 
         // try a dataset with some content...
@@ -125,7 +125,7 @@ public class DefaultXYDatasetTest {
         double[] y1 = new double[] {4.0, 5.0, 6.0};
         double[][] data1 = new double[][] {x1, y1};
         d1.addSeries("S1", data1);
-        d2 = (DefaultXYDataset) TestUtils.serialised(d1);
+        d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 

@@ -152,8 +152,7 @@ public class ExtendedCategoryAxisTest {
         ExtendedCategoryAxis a1 = new ExtendedCategoryAxis("Test");
         a1.setSubLabelPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f,
                 4.0f, Color.BLUE));
-        ExtendedCategoryAxis a2 = (ExtendedCategoryAxis) 
-                TestUtils.serialised(a1);
+        ExtendedCategoryAxis a2 = TestUtils.serialised(a1);
         assertEquals(a1, a2);
     }
 

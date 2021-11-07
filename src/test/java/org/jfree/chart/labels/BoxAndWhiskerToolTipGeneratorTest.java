@@ -120,8 +120,7 @@ public class BoxAndWhiskerToolTipGeneratorTest {
     @Test
     public void testSerialization() {
         BoxAndWhiskerToolTipGenerator g1 = new BoxAndWhiskerToolTipGenerator();
-        BoxAndWhiskerToolTipGenerator g2 = (BoxAndWhiskerToolTipGenerator) 
-                TestUtils.serialised(g1);
+        BoxAndWhiskerToolTipGenerator g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

@@ -211,7 +211,7 @@ public class MinuteTest {
     @Test
     public void testSerialization() {
         Minute m1 = new Minute();
-        Minute m2 = (Minute) TestUtils.serialised(m1);
+        Minute m2 = TestUtils.serialised(m1);
         assertEquals(m1, m2);
     }
 

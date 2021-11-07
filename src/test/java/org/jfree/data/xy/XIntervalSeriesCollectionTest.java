@@ -112,8 +112,7 @@ public class XIntervalSeriesCollectionTest {
         XIntervalSeriesCollection c1 = new XIntervalSeriesCollection();
         XIntervalSeries s1 = new XIntervalSeries("Series");
         s1.add(1.0, 1.1, 1.2, 1.3);
-        XIntervalSeriesCollection c2 = (XIntervalSeriesCollection) 
-                TestUtils.serialised(c1);
+        XIntervalSeriesCollection c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
     }
 

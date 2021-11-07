@@ -116,8 +116,7 @@ public class YIntervalDataItemTest {
     @Test
     public void testSerialization() {
         YIntervalDataItem item1 = new YIntervalDataItem(1.0, 2.0, 1.5, 2.5);
-        YIntervalDataItem item2 = (YIntervalDataItem) 
-                TestUtils.serialised(item1);
+        YIntervalDataItem item2 = TestUtils.serialised(item1);
         assertEquals(item1, item2);
     }
 

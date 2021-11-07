@@ -30,7 +30,7 @@
  * (C) Copyright 2004-2021, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
@@ -43,6 +43,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
+import java.awt.geom.Rectangle2D;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.ui.HorizontalAlignment;
@@ -53,7 +56,20 @@ import org.junit.jupiter.api.Test;
  * Tests for the {@link TextTitle} class.
  */
 public class TextTitleTest {
-
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(TextTitle.class)
+                .suppress(Warning.STRICT_INHERITANCE)
+                .suppress(Warning.NONFINAL_FIELDS)
+                .withRedefinedSuperclass()
+                .withPrefabValues(Rectangle2D.class,
+                                  TestUtils.createR2D(true),
+                                  TestUtils.createR2D(false))
+                .withPrefabValues(Font.class,
+                                  TestUtils.createFont(true),
+                                  TestUtils.createFont(false))
+                .verify();
+    }
     /**
      * Check that the equals() method distinguishes all fields.
      */
@@ -152,7 +168,7 @@ public class TextTitleTest {
     @Test
     public void testSerialization() {
         TextTitle t1 = new TextTitle("Test");
-        TextTitle t2 = (TextTitle) TestUtils.serialised(t1);
+        TextTitle t2 = TestUtils.serialised(t1);
         assertEquals(t1, t2);
     }
 

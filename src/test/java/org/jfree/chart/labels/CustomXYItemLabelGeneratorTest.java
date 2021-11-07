@@ -93,8 +93,7 @@ public class CustomXYItemLabelGeneratorTest {
         CustomXYToolTipGenerator g1 = new CustomXYToolTipGenerator();
         g1.addToolTipSeries(t1);
         g1.addToolTipSeries(t2);
-        CustomXYToolTipGenerator g2 = (CustomXYToolTipGenerator) 
-                TestUtils.serialised(g1);
+        CustomXYToolTipGenerator g2 = TestUtils.serialised(g1);
         assertEquals(g1, g2);
     }
 

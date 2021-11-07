@@ -98,8 +98,7 @@ public class TableXYDatasetTest {
     public void testSerialization() {
         DefaultTableXYDataset d1 = new DefaultTableXYDataset();
         d1.addSeries(createSeries2());
-        DefaultTableXYDataset d2 = (DefaultTableXYDataset) 
-                TestUtils.serialised(d1);
+        DefaultTableXYDataset d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 

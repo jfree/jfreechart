@@ -62,7 +62,7 @@ public class ItemLabelPositionTest {
     @Test
     public void testSerialization() {
         ItemLabelPosition p1 = new ItemLabelPosition();
-        ItemLabelPosition p2 = (ItemLabelPosition) TestUtils.serialised(p1);
+        ItemLabelPosition p2 = TestUtils.serialised(p1);
         assertEquals(p1, p2);
     }
 

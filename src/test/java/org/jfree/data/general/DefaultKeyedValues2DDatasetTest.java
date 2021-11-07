@@ -76,8 +76,7 @@ public class DefaultKeyedValues2DDatasetTest {
         d1.addValue(345.9, "Row2", "Col1");
         d1.addValue(452.7, "Row2", "Col2");
 
-        DefaultKeyedValues2DDataset d2 = (DefaultKeyedValues2DDataset) 
-                TestUtils.serialised(d1);
+        DefaultKeyedValues2DDataset d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 

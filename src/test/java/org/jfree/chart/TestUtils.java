@@ -36,6 +36,8 @@
 
 package org.jfree.chart;
 
+import java.awt.Font;
+import java.awt.geom.Rectangle2D;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -45,11 +47,53 @@ import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.util.Collection;
 import java.util.Iterator;
+import org.jfree.chart.axis.ValueAxis;
+import org.jfree.chart.plot.MeterPlot;
+import org.jfree.chart.plot.Plot;
+import org.jfree.data.general.DefaultValueDataset;
 
 /**
  * Some utility methods for use by the testing code.
  */
 public class TestUtils {
+
+    public static Rectangle2D createR2D(boolean isRed) {
+        if (isRed) {
+            return new Rectangle2D.Double(0, 0, 1, 1);
+        } else {
+            return new Rectangle2D.Double(1, 1, 2, 2);
+        }
+    }
+
+    public static Font createFont(boolean isRed) {
+        if (isRed) {
+            return new Font("SansSerif", Font.PLAIN, 12);
+        } else {
+            return new Font("Dialog", Font.BOLD, 10);
+        }
+    }
+
+    public static JFreeChart createJFC(boolean isRed) {
+        if (isRed) {
+            return new JFreeChart("abc", new MeterPlot(new DefaultValueDataset(44)));
+        } else {
+            return new JFreeChart("xyz", new MeterPlot(new DefaultValueDataset(55)));
+        }
+    }
+
+    public static Plot createPlot(boolean isRed) {
+        FakePlot plot = new FakePlot();
+        plot.setNotify(isRed);
+        return plot;
+    }
+
+    public static ValueAxis createValueAxis(boolean isRed) {
+        if (isRed) {
+            return new FakeValueAxis("Fake1", null);
+        } else {
+            return new FakeValueAxis("Fake2", null);
+        }
+    }
 
     /**
      * Returns {@code true} if the collections contains any object that

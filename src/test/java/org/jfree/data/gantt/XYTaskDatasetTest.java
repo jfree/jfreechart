@@ -120,7 +120,7 @@ public class XYTaskDatasetTest {
         TaskSeriesCollection u1 = new TaskSeriesCollection();
         u1.add(s1);
         XYTaskDataset d1 = new XYTaskDataset(u1);
-        XYTaskDataset d2 = (XYTaskDataset) TestUtils.serialised(d1);
+        XYTaskDataset d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
 
         // basic check for independence

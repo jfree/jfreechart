@@ -104,8 +104,7 @@ public class CombinedRangeCategoryPlotTest implements ChartChangeListener {
     @Test
     public void testSerialization() {
         CombinedRangeCategoryPlot plot1 = createPlot();
-        CombinedRangeCategoryPlot plot2 = (CombinedRangeCategoryPlot) 
-                TestUtils.serialised(plot1);
+        CombinedRangeCategoryPlot plot2 = TestUtils.serialised(plot1);
         assertEquals(plot1, plot2);
     }
 

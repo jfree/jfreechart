@@ -113,8 +113,7 @@ public class XYIntervalSeriesCollectionTest {
         XYIntervalSeriesCollection c1 = new XYIntervalSeriesCollection();
         XYIntervalSeries s1 = new XYIntervalSeries("Series");
         s1.add(1.0, 1.1, 1.2, 1.3, 1.4, 1.5);
-        XYIntervalSeriesCollection c2 = (XYIntervalSeriesCollection) 
-                TestUtils.serialised(c1);
+        XYIntervalSeriesCollection c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
 
         // check independence
