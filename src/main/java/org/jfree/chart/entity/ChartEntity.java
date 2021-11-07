@@ -37,7 +37,14 @@
 
 package org.jfree.chart.entity;
 
-import java.awt.Shape;
+import org.jfree.chart.HashUtils;
+import org.jfree.chart.imagemap.ToolTipTagFragmentGenerator;
+import org.jfree.chart.imagemap.URLTagFragmentGenerator;
+import org.jfree.chart.util.Args;
+import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.util.SerialUtils;
+
+import java.awt.*;
 import java.awt.geom.PathIterator;
 import java.awt.geom.Rectangle2D;
 import java.io.IOException;
@@ -45,13 +52,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Objects;
-
-import org.jfree.chart.HashUtils;
-import org.jfree.chart.imagemap.ToolTipTagFragmentGenerator;
-import org.jfree.chart.imagemap.URLTagFragmentGenerator;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.PublicCloneable;
-import org.jfree.chart.util.SerialUtils;
 
 /**
  * A class that captures information about some component of a chart (a bar,
@@ -311,10 +311,9 @@ public class ChartEntity implements Cloneable, PublicCloneable, Serializable {
      */
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("ChartEntity: ");
-        sb.append("tooltip = ");
-        sb.append(this.toolTipText);
-        return sb.toString();
+        String sb = "ChartEntity: " + "tooltip = " +
+                this.toolTipText;
+        return sb;
     }
 
     /**
@@ -333,6 +332,9 @@ public class ChartEntity implements Cloneable, PublicCloneable, Serializable {
             return false;
         }
         ChartEntity that = (ChartEntity) obj;
+        if (!that.canEqual(this)) {
+            return false;
+        }
         if (!this.area.equals(that.area)) {
             return false;
         }
@@ -345,6 +347,10 @@ public class ChartEntity implements Cloneable, PublicCloneable, Serializable {
         return true;
     }
 
+    public boolean canEqual(Object other) {
+        return (other instanceof ChartEntity);
+    }
+
     /**
      * Returns a hash code for this instance.
      *
@@ -355,6 +361,7 @@ public class ChartEntity implements Cloneable, PublicCloneable, Serializable {
         int result = 37;
         result = HashUtils.hashCode(result, this.toolTipText);
         result = HashUtils.hashCode(result, this.urlText);
+        result = HashUtils.hashCode(result, this.area);
         return result;
     }
 

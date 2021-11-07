@@ -195,4 +195,17 @@ public class CategoryItemEntity extends ChartEntity
         return super.equals(obj);
     }
 
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + dataset.hashCode();
+        result = 31 * result + rowKey.hashCode();
+        result = 31 * result + columnKey.hashCode();
+        return result;
+    }
+
+    @Override
+    public boolean canEqual(Object other) {
+        return (other instanceof CategoryItemEntity);
+    }
 }
