@@ -36,11 +36,12 @@
 
 package org.jfree.chart.entity;
 
-import java.awt.Shape;
-import java.util.Objects;
 import org.jfree.chart.plot.flow.FlowPlot;
 import org.jfree.chart.util.Args;
 import org.jfree.data.flow.FlowKey;
+
+import java.awt.*;
+import java.util.Objects;
 
 /**
  * A chart entity representing the flow between two nodes in a {@link FlowPlot}.
@@ -105,8 +106,13 @@ public class FlowEntity extends ChartEntity {
     }
 
     @Override
+    public boolean canEqual(Object other) {
+        return (other instanceof FlowEntity);
+    }
+
+    @Override
     public int hashCode() {
-        int hash = 7;
+        int hash = super.hashCode();
         hash = 79 * hash + Objects.hashCode(this.key);
         return hash;
     }
