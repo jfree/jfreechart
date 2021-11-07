@@ -53,7 +53,7 @@ public class CategoryLabelEntity extends TickLabelEntity {
     /**
      * Creates a new entity.
      *
-     * @param key  the category key.
+     * @param key  the category key ({@code null} not permitted).
      * @param area  the hotspot.
      * @param toolTipText  the tool tip text.
      * @param urlText  the URL text.
@@ -61,6 +61,7 @@ public class CategoryLabelEntity extends TickLabelEntity {
     public CategoryLabelEntity(Comparable key, Shape area,
             String toolTipText, String urlText) {
         super(area, toolTipText, urlText);
+        Objects.requireNonNull(key);
         this.key = key;
     }
 
@@ -93,6 +94,11 @@ public class CategoryLabelEntity extends TickLabelEntity {
             return false;
         }
         return super.equals(obj);
+    }
+
+    @Override
+    public boolean canEqual(Object other) {
+        return (other instanceof CategoryLabelEntity);
     }
 
     /**
