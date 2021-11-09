@@ -211,6 +211,11 @@ public class PieSectionEntity extends ChartEntity
         return super.equals(obj);
     }
 
+    @Override
+    public boolean canEqual(Object other) {
+        return (other instanceof PieSectionEntity);
+    }
+
     /**
      * Returns a hash code for this instance.
      *
@@ -219,8 +224,10 @@ public class PieSectionEntity extends ChartEntity
     @Override
     public int hashCode() {
         int result = super.hashCode();
+        result = HashUtils.hashCode(result, this.dataset);
         result = HashUtils.hashCode(result, this.pieIndex);
         result = HashUtils.hashCode(result, this.sectionIndex);
+        result = HashUtils.hashCode(result, this.sectionKey);
         return result;
     }
 

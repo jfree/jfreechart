@@ -36,10 +36,6 @@
 
 package org.jfree.chart.entity;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.awt.geom.Rectangle2D;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
@@ -48,6 +44,8 @@ import org.jfree.chart.TestUtils;
 
 import org.jfree.data.general.DefaultPieDataset;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link PieSectionEntity} class.
@@ -59,13 +57,14 @@ public class PieSectionEntityTest {
      * is properly implemented.
      */
     @Test
-    public void testEqualsHashCode()
-    {
+    public void testEqualsHashCode() {
         EqualsVerifier.forClass(PieSectionEntity.class)
-            .withRedefinedSuperclass() // superclass also defines equals/hashCode
-            .suppress(Warning.STRICT_INHERITANCE)
-            .suppress(Warning.NONFINAL_FIELDS)
-            .verify();
+                .withRedefinedSuperclass() // superclass also defines equals/hashCode
+                .withNonnullFields("area")
+                .suppress(Warning.STRICT_INHERITANCE)
+                .suppress(Warning.NONFINAL_FIELDS)
+                .suppress(Warning.TRANSIENT_FIELDS)
+                .verify();
     }
     
     /**
@@ -74,47 +73,47 @@ public class PieSectionEntityTest {
     @Test
     public void testEquals() {
         PieSectionEntity e1 = new PieSectionEntity(new Rectangle2D.Double(
-                1.0, 2.0, 3.0, 4.0), new DefaultPieDataset(), 1, 2, "Key",
+                1.0, 2.0, 3.0, 4.0), new DefaultPieDataset<String>(), 1, 2, "Key",
                 "ToolTip", "URL");
         PieSectionEntity e2 = new PieSectionEntity(new Rectangle2D.Double(1.0,
-                2.0, 3.0, 4.0), new DefaultPieDataset(), 1, 2, "Key",
+                2.0, 3.0, 4.0), new DefaultPieDataset<String>(), 1, 2, "Key",
                 "ToolTip", "URL");
-        assertTrue(e1.equals(e2));
+        assertEquals(e1, e2);
 
         e1.setArea(new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0));
-        assertFalse(e1.equals(e2));
+        assertNotEquals(e1, e2);
         e2.setArea(new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0));
-        assertTrue(e1.equals(e2));
+        assertEquals(e1, e2);
 
         e1.setToolTipText("New ToolTip");
-        assertFalse(e1.equals(e2));
+        assertNotEquals(e1, e2);
         e2.setToolTipText("New ToolTip");
-        assertTrue(e1.equals(e2));
+        assertEquals(e1, e2);
 
         e1.setURLText("New URL");
-        assertFalse(e1.equals(e2));
+        assertNotEquals(e1, e2);
         e2.setURLText("New URL");
-        assertTrue(e1.equals(e2));
+        assertEquals(e1, e2);
 
         e1.setDataset(null);
-        assertFalse(e1.equals(e2));
+        assertNotEquals(e1, e2);
         e2.setDataset(null);
-        assertTrue(e1.equals(e2));
+        assertEquals(e1, e2);
 
         e1.setPieIndex(99);
-        assertFalse(e1.equals(e2));
+        assertNotEquals(e1, e2);
         e2.setPieIndex(99);
-        assertTrue(e1.equals(e2));
+        assertEquals(e1, e2);
 
         e1.setSectionIndex(66);
-        assertFalse(e1.equals(e2));
+        assertNotEquals(e1, e2);
         e2.setSectionIndex(66);
-        assertTrue(e1.equals(e2));
+        assertEquals(e1, e2);
 
         e1.setSectionKey("ABC");
-        assertFalse(e1.equals(e2));
+        assertNotEquals(e1, e2);
         e2.setSectionKey("ABC");
-        assertTrue(e1.equals(e2));
+        assertEquals(e1, e2);
     }
 
     /**
@@ -123,12 +122,12 @@ public class PieSectionEntityTest {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         PieSectionEntity e1 = new PieSectionEntity(new Rectangle2D.Double(1.0,
-                2.0, 3.0, 4.0), new DefaultPieDataset(), 1, 2, "Key",
+                2.0, 3.0, 4.0), new DefaultPieDataset<String>(), 1, 2, "Key",
                 "ToolTip", "URL");
         PieSectionEntity e2 = (PieSectionEntity) e1.clone();
-        assertTrue(e1 != e2);
-        assertTrue(e1.getClass() == e2.getClass());
-        assertTrue(e1.equals(e2));
+        assertNotSame(e1, e2);
+        assertSame(e1.getClass(), e2.getClass());
+        assertEquals(e1, e2);
     }
 
     /**
@@ -137,7 +136,7 @@ public class PieSectionEntityTest {
     @Test
     public void testSerialization() {
         PieSectionEntity e1 = new PieSectionEntity(new Rectangle2D.Double(1.0,
-                2.0, 3.0, 4.0), new DefaultPieDataset(), 1, 2, "Key",
+                2.0, 3.0, 4.0), new DefaultPieDataset<String>(), 1, 2, "Key",
                 "ToolTip", "URL");
         PieSectionEntity e2 = TestUtils.serialised(e1);
         assertEquals(e1, e2);

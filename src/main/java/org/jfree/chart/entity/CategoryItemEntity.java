@@ -191,7 +191,6 @@ public class CategoryItemEntity extends ChartEntity
         if (!Objects.equals(this.dataset, that.dataset)) {
             return false;
         }
-
         return super.equals(obj);
     }
 
