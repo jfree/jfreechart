@@ -31,6 +31,7 @@
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Nicolas Brodu;
+ *                   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -41,6 +42,7 @@ import java.awt.Color;
 import java.awt.Paint;
 import java.awt.Stroke;
 import java.io.Serializable;
+import java.util.Objects;
 
 import org.jfree.chart.event.MarkerChangeEvent;
 import org.jfree.chart.ui.LengthAdjustmentType;
@@ -160,17 +162,39 @@ public class CategoryMarker extends Marker implements Cloneable, Serializable {
         if (!(obj instanceof CategoryMarker)) {
             return false;
         }
-        if (!super.equals(obj)) {
+        CategoryMarker that = (CategoryMarker) obj;
+        if (that.canEqual(this) == false)
+        {
             return false;
         }
-        CategoryMarker that = (CategoryMarker) obj;
-        if (!this.key.equals(that.key)) {
+        if (!Objects.equals(this.key, that.key)) {
             return false;
         }
         if (this.drawAsLine != that.drawAsLine) {
             return false;
         }
-        return true;
+        return super.equals(obj);
     }
 
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // Solves Problem: equals not symmetric
+        return (other instanceof CategoryMarker);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = super.hashCode(); // equals calls superclass, hashCode must also
+        hash = 89 * hash + Objects.hashCode(this.key);
+        hash = 89 * hash + (this.drawAsLine ? 1 : 0);
+        return hash;
+    }
 }

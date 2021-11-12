@@ -32,6 +32,7 @@
  * Original Author:  David Gilbert;
  * Contributor(s):   Mike Harris;
  *                   Peter Kolb (patch 2809117);
+ *                   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -221,28 +222,43 @@ public class XYImageAnnotation extends AbstractXYAnnotation
         if (obj == this) {
             return true;
         }
-        // now try to reject equality...
-        if (!super.equals(obj)) {
-            return false;
-        }
         if (!(obj instanceof XYImageAnnotation)) {
             return false;
         }
         XYImageAnnotation that = (XYImageAnnotation) obj;
-        if (this.x != that.x) {
+        if (Double.doubleToLongBits(this.x) != Double.doubleToLongBits(that.x)) {
             return false;
         }
-        if (this.y != that.y) {
+        if (Double.doubleToLongBits(this.y) != Double.doubleToLongBits(that.y)) {
             return false;
         }
         if (!Objects.equals(this.image, that.image)) {
             return false;
         }
-        if (!this.anchor.equals(that.anchor)) {
+        if (this.anchor != that.anchor) {
             return false;
         }
-        // seems to be the same...
-        return true;
+
+        // fix the "equals not symmetric" problem
+        if (that.canEqual(this) == false) {
+            return false;
+        }
+
+        return super.equals(obj);
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof XYImageAnnotation);
     }
 
     /**
@@ -252,7 +268,14 @@ public class XYImageAnnotation extends AbstractXYAnnotation
      */
     @Override
     public int hashCode() {
-        return this.image.hashCode();
+        int hash = super.hashCode(); // equals calls superclass, hashCode must also
+        hash = 41 * hash + (int) (Double.doubleToLongBits(this.x) ^ 
+                                 (Double.doubleToLongBits(this.x) >>> 32));
+        hash = 41 * hash + (int) (Double.doubleToLongBits(this.y) ^ 
+                                 (Double.doubleToLongBits(this.y) >>> 32));
+        hash = 41 * hash + Objects.hashCode(this.image);
+        hash = 41 * hash + Objects.hashCode(this.anchor);
+        return hash;
     }
 
     /**

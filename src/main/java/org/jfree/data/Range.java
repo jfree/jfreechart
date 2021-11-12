@@ -34,6 +34,7 @@
  *                   Bill Kelemen;
  *                   Nicolas Brodu;
  *                   Sergei Ivanov;
+ *                   Tracy Hiltbrand (equals complies with EqualsVerifier);
  * 
  */
 
@@ -395,10 +396,12 @@ public strictfp class Range implements Serializable {
             return false;
         }
         Range range = (Range) obj;
-        if (!(this.lower == range.lower)) {
+        if (Double.doubleToLongBits(this.lower) !=
+            Double.doubleToLongBits(range.lower)) {
             return false;
         }
-        if (!(this.upper == range.upper)) {
+        if (Double.doubleToLongBits(this.upper) !=
+            Double.doubleToLongBits(range.upper)) {
             return false;
         }
         return true;

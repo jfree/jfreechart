@@ -30,13 +30,15 @@
  * (C) Copyright 2004-2021, by David Gilbert.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
 package org.jfree.data.gantt;
 
 import java.util.Date;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 
 import org.jfree.chart.TestUtils;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -49,6 +51,22 @@ import org.junit.jupiter.api.Test;
  */
 public class TaskSeriesTest {
 
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(TaskSeries.class)
+                .suppress(Warning.STRICT_INHERITANCE)
+                .suppress(Warning.NONFINAL_FIELDS)
+                .withRedefinedSuperclass()
+                .withPrefabValues(Task.class,
+                                  new Task("T1", new Date(1), new Date(2)),
+                                  new Task("T2", new Date(3), new Date(4)))
+                .withIgnoredFields("listeners")
+                .withIgnoredFields("propertyChangeSupport")
+                .withIgnoredFields("vetoableChangeSupport")
+                .withIgnoredFields("notify")
+                .verify();
+    }
+    
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */

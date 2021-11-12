@@ -31,6 +31,7 @@
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Peter Kolb (patch 2809117);
+ *                   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -48,7 +49,6 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Objects;
 
-import org.jfree.chart.HashUtils;
 import org.jfree.chart.axis.CategoryAnchor;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;
@@ -57,7 +57,6 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
@@ -338,27 +337,42 @@ public class CategoryLineAnnotation extends AbstractAnnotation
             return false;
         }
         CategoryLineAnnotation that = (CategoryLineAnnotation) obj;
-        if (!this.category1.equals(that.getCategory1())) {
+        if (!Objects.equals(this.category1, that.category1)) {
             return false;
         }
-        if (this.value1 != that.getValue1()) {
+        if (Double.doubleToLongBits(this.value1) !=
+            Double.doubleToLongBits(that.value1)) {
             return false;
         }
-        if (!this.category2.equals(that.getCategory2())) {
+        if (!Objects.equals(this.category2, that.category2)) {
             return false;
         }
-        if (this.value2 != that.getValue2()) {
+        if (Double.doubleToLongBits(this.value2) !=
+            Double.doubleToLongBits(that.value2)) {
             return false;
         }
-        if (!PaintUtils.equal(this.paint, that.paint)) {
+        // fix the "equals not symmetric" problem
+        if (that.canEqual(this) == false) {
             return false;
         }
-        if (!Objects.equals(this.stroke, that.stroke)) {
-            return false;
-        }
-        return true;
+
+        return super.equals(obj);
     }
 
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof CategoryLineAnnotation);
+    }
+    
     /**
      * Returns a hash code for this instance.
      *
@@ -366,15 +380,13 @@ public class CategoryLineAnnotation extends AbstractAnnotation
      */
     @Override
     public int hashCode() {
-        int result = 193;
-        result = 37 * result + this.category1.hashCode();
+        int result = super.hashCode(); // equals calls superclass, hashCode must also
+        result = 37 * result + Objects.hashCode(this.category1);
         long temp = Double.doubleToLongBits(this.value1);
         result = 37 * result + (int) (temp ^ (temp >>> 32));
-        result = 37 * result + this.category2.hashCode();
+        result = 37 * result + Objects.hashCode(this.category2);
         temp = Double.doubleToLongBits(this.value2);
         result = 37 * result + (int) (temp ^ (temp >>> 32));
-        result = 37 * result + HashUtils.hashCodeForPaint(this.paint);
-        result = 37 * result + this.stroke.hashCode();
         return result;
     }
 

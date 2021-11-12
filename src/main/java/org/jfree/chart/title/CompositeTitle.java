@@ -31,6 +31,7 @@
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Eric Penfold (patch 2006826);
+ *                   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -43,13 +44,13 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Objects;
 
 import org.jfree.chart.block.BlockContainer;
 import org.jfree.chart.block.BorderArrangement;
 import org.jfree.chart.block.RectangleConstraint;
 import org.jfree.chart.event.TitleChangeEvent;
 import org.jfree.chart.ui.Size2D;
-import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
 
@@ -194,13 +195,34 @@ public class CompositeTitle extends Title implements Cloneable, Serializable {
             return false;
         }
         CompositeTitle that = (CompositeTitle) obj;
-        if (!this.container.equals(that.container)) {
+        if (!Objects.equals(this.container, that.container)) {
             return false;
         }
-        if (!PaintUtils.equal(this.backgroundPaint, that.backgroundPaint)) {
+        if (that.canEqual(this) == false) {
             return false;
         }
         return super.equals(obj);
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof CompositeTitle);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = super.hashCode(); // equals calls superclass, hashCode must also
+        hash = 53 * hash + Objects.hashCode(this.container);
+        return hash;
     }
 
     /**

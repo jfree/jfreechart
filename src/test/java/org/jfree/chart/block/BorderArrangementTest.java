@@ -42,6 +42,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.ui.RectangleEdge;
@@ -58,39 +60,15 @@ public class BorderArrangementTest {
     private static final double EPSILON = 0.0000000001;
 
     /**
-     * Confirm that the equals() method can distinguish all the required fields.
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
      */
     @Test
-    public void testEquals() {
-        BorderArrangement b1 = new BorderArrangement();
-        BorderArrangement b2 = new BorderArrangement();
-        assertTrue(b1.equals(b2));
-        assertTrue(b2.equals(b1));
-
-        b1.add(new EmptyBlock(99.0, 99.0), null);
-        assertFalse(b1.equals(b2));
-        b2.add(new EmptyBlock(99.0, 99.0), null);
-        assertTrue(b1.equals(b2));
-
-        b1.add(new EmptyBlock(1.0, 1.0), RectangleEdge.LEFT);
-        assertFalse(b1.equals(b2));
-        b2.add(new EmptyBlock(1.0, 1.0), RectangleEdge.LEFT);
-        assertTrue(b1.equals(b2));
-
-        b1.add(new EmptyBlock(2.0, 2.0), RectangleEdge.RIGHT);
-        assertFalse(b1.equals(b2));
-        b2.add(new EmptyBlock(2.0, 2.0), RectangleEdge.RIGHT);
-        assertTrue(b1.equals(b2));
-
-        b1.add(new EmptyBlock(3.0, 3.0), RectangleEdge.TOP);
-        assertFalse(b1.equals(b2));
-        b2.add(new EmptyBlock(3.0, 3.0), RectangleEdge.TOP);
-        assertTrue(b1.equals(b2));
-
-        b1.add(new EmptyBlock(4.0, 4.0), RectangleEdge.BOTTOM);
-        assertFalse(b1.equals(b2));
-        b2.add(new EmptyBlock(4.0, 4.0), RectangleEdge.BOTTOM);
-        assertTrue(b1.equals(b2));
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(BorderArrangement.class)
+            .suppress(Warning.STRICT_INHERITANCE)
+            .suppress(Warning.NONFINAL_FIELDS)
+            .verify();
     }
 
     /**

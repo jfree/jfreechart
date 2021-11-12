@@ -34,6 +34,7 @@
  *                   David Li;
  *                   Wolfgang Irler;
  *                   Luke Quinane;
+ *                   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -54,10 +55,8 @@ import java.io.Serializable;
 import java.text.AttributedString;
 import java.text.CharacterIterator;
 import java.util.Objects;
-import org.jfree.chart.text.AttributedStringUtils;
 import org.jfree.chart.ui.GradientPaintTransformer;
 import org.jfree.chart.ui.StandardGradientPaintTransformer;
-import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
@@ -935,66 +934,71 @@ public class LegendItem implements Cloneable, Serializable {
             return false;
         }
         LegendItem that = (LegendItem) obj;
-        if (this.datasetIndex != that.datasetIndex) {
+
+        if (!Objects.equals(this.dataset, that.dataset)) { //dataset
             return false;
         }
-        if (this.series != that.series) {
+        if (!Objects.equals(this.seriesKey, that.seriesKey)) { //
             return false;
         }
-        if (!this.label.equals(that.label)) {
+        if (this.datasetIndex != that.datasetIndex) { // datasetIndex
             return false;
         }
-        if (!AttributedStringUtils.equal(this.attributedLabel,
-                that.attributedLabel)) {
+        if (this.series != that.series) { // series
             return false;
         }
-        if (!Objects.equals(this.description, that.description)) {
+        if (!Objects.equals(this.label, that.label)) { // label
             return false;
         }
-        if (this.shapeVisible != that.shapeVisible) {
+        if (!Objects.equals(this.labelFont, that.labelFont)) { // labelFont
             return false;
         }
-        if (!ShapeUtils.equal(this.shape, that.shape)) {
+        if (!Objects.equals(this.description, that.description)) { // description
             return false;
         }
-        if (this.shapeFilled != that.shapeFilled) {
+        if (!Objects.equals(this.toolTipText, that.toolTipText)) { // toolTipText
             return false;
         }
-        if (!PaintUtils.equal(this.fillPaint, that.fillPaint)) {
+        if (!Objects.equals(this.urlText, that.urlText)) { // urlText
             return false;
         }
-        if (!Objects.equals(this.fillPaintTransformer,
-                that.fillPaintTransformer)) {
+        if (this.shapeVisible != that.shapeVisible) { // shapeVisible
+            return false;
+        }
+        if (this.shapeFilled != that.shapeFilled) { // shapeFilled
+            return false;
+        }
+        if (!Objects.equals(this.fillPaintTransformer, // fillPaintTransformer
+                            that.fillPaintTransformer)) {
             return false;
         }
         if (this.shapeOutlineVisible != that.shapeOutlineVisible) {
             return false;
         }
-        if (!this.outlineStroke.equals(that.outlineStroke)) {
-            return false;
-        }
-        if (!PaintUtils.equal(this.outlinePaint, that.outlinePaint)) {
-            return false;
-        }
         if (!this.lineVisible == that.lineVisible) {
             return false;
         }
-        if (!ShapeUtils.equal(this.line, that.line)) {
-            return false;
-        }
-        if (!this.lineStroke.equals(that.lineStroke)) {
-            return false;
-        }
-        if (!PaintUtils.equal(this.linePaint, that.linePaint)) {
-            return false;
-        }
-        if (!Objects.equals(this.labelFont, that.labelFont)) {
-            return false;
-        }
-        if (!PaintUtils.equal(this.labelPaint, that.labelPaint)) {
-            return false;
-        }
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 83 * hash + Objects.hashCode(this.dataset);
+        hash = 83 * hash + Objects.hashCode(this.seriesKey);
+        hash = 83 * hash + this.datasetIndex;
+        hash = 83 * hash + this.series;
+        hash = 83 * hash + Objects.hashCode(this.label);
+        hash = 83 * hash + Objects.hashCode(this.labelFont);
+        hash = 83 * hash + Objects.hashCode(this.description);
+        hash = 83 * hash + Objects.hashCode(this.toolTipText);
+        hash = 83 * hash + Objects.hashCode(this.urlText);
+        hash = 83 * hash + (this.shapeVisible ? 1 : 0);
+        hash = 83 * hash + (this.shapeFilled ? 1 : 0);
+        hash = 83 * hash + Objects.hashCode(this.fillPaintTransformer);
+        hash = 83 * hash + (this.shapeOutlineVisible ? 1 : 0);
+        hash = 83 * hash + (this.lineVisible ? 1 : 0);
+        return hash;
     }
 
     /**

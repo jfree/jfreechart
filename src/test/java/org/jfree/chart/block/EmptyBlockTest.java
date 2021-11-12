@@ -30,12 +30,15 @@
  * (C) Copyright 2005-2021, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
 package org.jfree.chart.block;
 
+import java.awt.geom.Rectangle2D;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -50,24 +53,18 @@ import org.junit.jupiter.api.Test;
 public class EmptyBlockTest {
 
     /**
-     * Confirm that the equals() method can distinguish all the required fields.
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
      */
     @Test
-    public void testEquals() {
-        EmptyBlock b1 = new EmptyBlock(1.0, 2.0);
-        EmptyBlock b2 = new EmptyBlock(1.0, 2.0);
-        assertTrue(b1.equals(b2));
-        assertTrue(b2.equals(b2));
-
-        b1 = new EmptyBlock(1.1, 2.0);
-        assertFalse(b1.equals(b2));
-        b2 = new EmptyBlock(1.1, 2.0);
-        assertTrue(b1.equals(b2));
-
-        b1 = new EmptyBlock(1.1, 2.2);
-        assertFalse(b1.equals(b2));
-        b2 = new EmptyBlock(1.1, 2.2);
-        assertTrue(b1.equals(b2));
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(EmptyBlock.class)
+            .withPrefabValues(Rectangle2D.class,
+                              TestUtils.createR2D(true),
+                              TestUtils.createR2D(false))
+            .suppress(Warning.STRICT_INHERITANCE)
+            .suppress(Warning.NONFINAL_FIELDS)
+            .verify();
     }
 
     /**

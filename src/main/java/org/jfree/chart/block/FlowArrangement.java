@@ -30,7 +30,7 @@
  * (C) Copyright 2004-2021, by David Gilbert.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -41,6 +41,7 @@ import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import org.jfree.chart.ui.HorizontalAlignment;
 import org.jfree.chart.ui.Size2D;
 import org.jfree.chart.ui.VerticalAlignment;
@@ -426,19 +427,32 @@ public class FlowArrangement implements Arrangement, Serializable {
             return false;
         }
         FlowArrangement that = (FlowArrangement) obj;
-        if (this.horizontalAlignment != that.horizontalAlignment) {
+        if (!Objects.equals(this.horizontalAlignment, that.horizontalAlignment)) {
             return false;
         }
-        if (this.verticalAlignment != that.verticalAlignment) {
+        if (!Objects.equals(this.verticalAlignment, that.verticalAlignment)) {
             return false;
         }
-        if (this.horizontalGap != that.horizontalGap) {
+        if (Double.doubleToLongBits(this.horizontalGap) != 
+            Double.doubleToLongBits(that.horizontalGap)) {
             return false;
         }
-        if (this.verticalGap != that.verticalGap) {
+        if (Double.doubleToLongBits(this.verticalGap) != 
+            Double.doubleToLongBits(that.verticalGap)) {
             return false;
         }
         return true;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 17 * hash + Objects.hashCode(this.horizontalAlignment);
+        hash = 17 * hash + Objects.hashCode(this.verticalAlignment);
+        hash = 17 * hash + (int) (Double.doubleToLongBits(this.horizontalGap) ^ 
+                                 (Double.doubleToLongBits(this.horizontalGap) >>> 32));
+        hash = 17 * hash + (int) (Double.doubleToLongBits(this.verticalGap) ^ 
+                                 (Double.doubleToLongBits(this.verticalGap) >>> 32));
+        return hash;
+    }
 }

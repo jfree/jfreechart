@@ -31,6 +31,7 @@
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Peter Kolb (patch 2809117);
+                     Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -49,9 +50,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.Objects;
-
-import org.jfree.chart.HashUtils;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.event.AnnotationChangeEvent;
 import org.jfree.chart.plot.Plot;
@@ -453,31 +451,51 @@ public class XYPointerAnnotation extends XYTextAnnotation
             return false;
         }
         XYPointerAnnotation that = (XYPointerAnnotation) obj;
-        if (this.angle != that.angle) {
+        if (Double.doubleToLongBits(this.angle) != 
+            Double.doubleToLongBits(that.angle)) {
             return false;
         }
-        if (this.tipRadius != that.tipRadius) {
+        if (Double.doubleToLongBits(this.tipRadius) !=
+            Double.doubleToLongBits(that.tipRadius)) {
             return false;
         }
-        if (this.baseRadius != that.baseRadius) {
+        if (Double.doubleToLongBits(this.baseRadius) != 
+            Double.doubleToLongBits(that.baseRadius)) {
             return false;
         }
-        if (this.arrowLength != that.arrowLength) {
+        if (Double.doubleToLongBits(this.arrowLength) != 
+            Double.doubleToLongBits(that.arrowLength)) {
             return false;
         }
-        if (this.arrowWidth != that.arrowWidth) {
+        if (Double.doubleToLongBits(this.arrowWidth) != 
+            Double.doubleToLongBits(that.arrowWidth)) {
             return false;
         }
-        if (!this.arrowPaint.equals(that.arrowPaint)) {
+        if (Double.doubleToLongBits(this.labelOffset) != 
+            Double.doubleToLongBits(that.labelOffset)) {
             return false;
         }
-        if (!Objects.equals(this.arrowStroke, that.arrowStroke)) {
+
+        // fix the "equals not symmetric" problem
+        if (that.canEqual(this) == false) {
             return false;
         }
-        if (this.labelOffset != that.labelOffset) {
-            return false;
-        }
+
         return super.equals(obj);
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof XYPointerAnnotation);
     }
 
     /**
@@ -487,22 +505,20 @@ public class XYPointerAnnotation extends XYTextAnnotation
      */
     @Override
     public int hashCode() {
-        int result = super.hashCode();
-        long temp = Double.doubleToLongBits(this.angle);
-        result = 37 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(this.tipRadius);
-        result = 37 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(this.baseRadius);
-        result = 37 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(this.arrowLength);
-        result = 37 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(this.arrowWidth);
-        result = 37 * result + (int) (temp ^ (temp >>> 32));
-        result = result * 37 + HashUtils.hashCodeForPaint(this.arrowPaint);
-        result = result * 37 + this.arrowStroke.hashCode();
-        temp = Double.doubleToLongBits(this.labelOffset);
-        result = 37 * result + (int) (temp ^ (temp >>> 32));
-        return result;
+        int hash = super.hashCode(); // equals calls superclass, hashCode must also
+        hash = 41 * hash + (int) (Double.doubleToLongBits(this.angle) ^ 
+                                 (Double.doubleToLongBits(this.angle) >>> 32));
+        hash = 41 * hash + (int) (Double.doubleToLongBits(this.tipRadius) ^ 
+                                 (Double.doubleToLongBits(this.tipRadius) >>> 32));
+        hash = 41 * hash + (int) (Double.doubleToLongBits(this.baseRadius) ^ 
+                                 (Double.doubleToLongBits(this.baseRadius) >>> 32));
+        hash = 41 * hash + (int) (Double.doubleToLongBits(this.arrowLength) ^ 
+                                 (Double.doubleToLongBits(this.arrowLength) >>> 32));
+        hash = 41 * hash + (int) (Double.doubleToLongBits(this.arrowWidth) ^ 
+                                 (Double.doubleToLongBits(this.arrowWidth) >>> 32));
+        hash = 41 * hash + (int) (Double.doubleToLongBits(this.labelOffset) ^ 
+                                 (Double.doubleToLongBits(this.labelOffset) >>> 32));
+        return hash;
     }
 
     /**

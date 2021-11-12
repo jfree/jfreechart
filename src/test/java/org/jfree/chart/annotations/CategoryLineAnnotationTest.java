@@ -30,7 +30,7 @@
  * (C) Copyright 2005-2021, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
@@ -38,12 +38,14 @@ package org.jfree.chart.annotations;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Stroke;
+
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
@@ -85,69 +87,16 @@ public class CategoryLineAnnotationTest {
     }
 
     /**
-     * Confirm that the equals method can distinguish all the required fields.
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
      */
     @Test
-    public void testEquals() {
-        BasicStroke s1 = new BasicStroke(1.0f);
-        BasicStroke s2 = new BasicStroke(2.0f);
-        CategoryLineAnnotation a1 = new CategoryLineAnnotation("Category 1",
-                1.0, "Category 2", 2.0, Color.RED, s1);
-        CategoryLineAnnotation a2 = new CategoryLineAnnotation("Category 1",
-                1.0, "Category 2", 2.0, Color.RED, s1);
-        assertTrue(a1.equals(a2));
-        assertTrue(a2.equals(a1));
-
-        // category 1
-        a1.setCategory1("Category A");
-        assertFalse(a1.equals(a2));
-        a2.setCategory1("Category A");
-        assertTrue(a1.equals(a2));
-
-        // value 1
-        a1.setValue1(0.15);
-        assertFalse(a1.equals(a2));
-        a2.setValue1(0.15);
-        assertTrue(a1.equals(a2));
-
-        // category 2
-        a1.setCategory2("Category B");
-        assertFalse(a1.equals(a2));
-        a2.setCategory2("Category B");
-        assertTrue(a1.equals(a2));
-
-        // value 2
-        a1.setValue2(0.25);
-        assertFalse(a1.equals(a2));
-        a2.setValue2(0.25);
-        assertTrue(a1.equals(a2));
-
-        // paint
-        a1.setPaint(Color.YELLOW);
-        assertFalse(a1.equals(a2));
-        a2.setPaint(Color.YELLOW);
-        assertTrue(a1.equals(a2));
-
-        // stroke
-        a1.setStroke(s2);
-        assertFalse(a1.equals(a2));
-        a2.setStroke(s2);
-        assertTrue(a1.equals(a2));
-    }
-
-    /**
-     * Two objects that are equal are required to return the same hashCode.
-     */
-    @Test
-    public void testHashcode() {
-        CategoryLineAnnotation a1 = new CategoryLineAnnotation("Category 1", 
-                1.0, "Category 2", 2.0, Color.RED, new BasicStroke(1.0f));
-        CategoryLineAnnotation a2 = new CategoryLineAnnotation("Category 1", 
-                1.0, "Category 2", 2.0, Color.RED, new BasicStroke(1.0f));
-        assertTrue(a1.equals(a2));
-        int h1 = a1.hashCode();
-        int h2 = a2.hashCode();
-        assertEquals(h1, h2);
+    public void testEqualsHashcode() {
+        EqualsVerifier.forClass(CategoryLineAnnotation.class)
+            .withRedefinedSuperclass() // superclass also defines equals/hashCode
+            .suppress(Warning.STRICT_INHERITANCE)
+            .suppress(Warning.NONFINAL_FIELDS)
+            .verify();
     }
 
     /**

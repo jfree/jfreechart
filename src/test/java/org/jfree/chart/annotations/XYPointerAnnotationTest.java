@@ -30,21 +30,25 @@
  * (C) Copyright 2003-2021, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
 package org.jfree.chart.annotations;
 
+import java.awt.Font;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Stroke;
 
 import org.jfree.chart.TestUtils;
+import static org.jfree.chart.TestUtils.createFont;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.jupiter.api.Test;
@@ -55,94 +59,17 @@ import org.junit.jupiter.api.Test;
 public class XYPointerAnnotationTest {
 
     /**
-     * Confirm that the equals method can distinguish all the required fields.
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
      */
     @Test
-    public void testEquals() {
-        XYPointerAnnotation a1 = new XYPointerAnnotation("Label", 10.0, 20.0,
-                Math.PI);
-        XYPointerAnnotation a2 = new XYPointerAnnotation("Label", 10.0, 20.0,
-                Math.PI);
-        assertTrue(a1.equals(a2));
-
-        a1 = new XYPointerAnnotation("Label2", 10.0, 20.0, Math.PI);
-        assertFalse(a1.equals(a2));
-        a2 = new XYPointerAnnotation("Label2", 10.0, 20.0, Math.PI);
-        assertTrue(a1.equals(a2));
-
-        a1.setX(11.0);
-        assertFalse(a1.equals(a2));
-        a2.setX(11.0);
-        assertTrue(a1.equals(a2));
-
-        a1.setY(22.0);
-        assertFalse(a1.equals(a2));
-        a2.setY(22.0);
-        assertTrue(a1.equals(a2));
-
-        //private double angle;
-        a1.setAngle(Math.PI / 4.0);
-        assertFalse(a1.equals(a2));
-        a2.setAngle(Math.PI / 4.0);
-        assertTrue(a1.equals(a2));
-
-        //private double tipRadius;
-        a1.setTipRadius(20.0);
-        assertFalse(a1.equals(a2));
-        a2.setTipRadius(20.0);
-        assertTrue(a1.equals(a2));
-
-        //private double baseRadius;
-        a1.setBaseRadius(5.0);
-        assertFalse(a1.equals(a2));
-        a2.setBaseRadius(5.0);
-        assertTrue(a1.equals(a2));
-
-        //private double arrowLength;
-        a1.setArrowLength(33.0);
-        assertFalse(a1.equals(a2));
-        a2.setArrowLength(33.0);
-        assertTrue(a1.equals(a2));
-
-        //private double arrowWidth;
-        a1.setArrowWidth(9.0);
-        assertFalse(a1.equals(a2));
-        a2.setArrowWidth(9.0);
-        assertTrue(a1.equals(a2));
-
-        //private Stroke arrowStroke;
-        Stroke stroke = new BasicStroke(1.5f);
-        a1.setArrowStroke(stroke);
-        assertFalse(a1.equals(a2));
-        a2.setArrowStroke(stroke);
-        assertTrue(a1.equals(a2));
-
-        //private Paint arrowPaint;
-        a1.setArrowPaint(Color.BLUE);
-        assertFalse(a1.equals(a2));
-        a2.setArrowPaint(Color.BLUE);
-        assertTrue(a1.equals(a2));
-
-        //private double labelOffset;
-        a1.setLabelOffset(10.0);
-        assertFalse(a1.equals(a2));
-        a2.setLabelOffset(10.0);
-        assertTrue(a1.equals(a2));
-    }
-
-    /**
-     * Two objects that are equal are required to return the same hashCode.
-     */
-    @Test
-    public void testHashCode() {
-        XYPointerAnnotation a1 = new XYPointerAnnotation("Label", 10.0, 20.0,
-                Math.PI);
-        XYPointerAnnotation a2 = new XYPointerAnnotation("Label", 10.0, 20.0,
-                Math.PI);
-        assertTrue(a1.equals(a2));
-        int h1 = a1.hashCode();
-        int h2 = a2.hashCode();
-        assertEquals(h1, h2);
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(XYPointerAnnotation.class)
+            .withRedefinedSuperclass() // superclass also defines equals/hashCode
+            .withPrefabValues(Font.class, createFont(true), createFont(false))
+            .suppress(Warning.STRICT_INHERITANCE)
+            .suppress(Warning.NONFINAL_FIELDS)
+            .verify();
     }
 
     /**

@@ -30,7 +30,7 @@
  * (C) Copyright 2005-2021, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
@@ -43,7 +43,10 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.GradientPaint;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 
 import org.jfree.chart.TestUtils;
 
@@ -69,67 +72,17 @@ public class CategoryMarkerTest implements MarkerChangeListener {
     }
 
     /**
-     * Confirm that the equals method can distinguish all the required fields.
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
      */
     @Test
-    public void testEquals() {
-        CategoryMarker m1 = new CategoryMarker("A");
-        CategoryMarker m2 = new CategoryMarker("A");
-        assertTrue(m1.equals(m2));
-        assertTrue(m2.equals(m1));
-
-        //key
-        m1 = new CategoryMarker("B");
-        assertFalse(m1.equals(m2));
-        m2 = new CategoryMarker("B");
-        assertTrue(m1.equals(m2));
-
-        //paint
-        m1 = new CategoryMarker("A", new GradientPaint(1.0f, 2.0f, Color.WHITE,
-                3.0f, 4.0f, Color.YELLOW), new BasicStroke(1.1f));
-        assertFalse(m1.equals(m2));
-        m2 = new CategoryMarker("A", new GradientPaint(1.0f, 2.0f, Color.WHITE,
-                3.0f, 4.0f, Color.YELLOW), new BasicStroke(1.1f));
-        assertTrue(m1.equals(m2));
-
-        //stroke
-        m1 = new CategoryMarker("A", new GradientPaint(1.0f, 2.0f, Color.WHITE,
-                3.0f, 4.0f, Color.YELLOW), new BasicStroke(2.2f));
-        assertFalse(m1.equals(m2));
-        m2 = new CategoryMarker("A", new GradientPaint(1.0f, 2.0f, Color.WHITE,
-                3.0f, 4.0f, Color.YELLOW), new BasicStroke(2.2f));
-        assertTrue(m1.equals(m2));
-
-        //outlinePaint
-        m1 = new CategoryMarker("A", new GradientPaint(1.0f, 2.0f, Color.WHITE,
-                3.0f, 4.0f, Color.YELLOW), new BasicStroke(2.2f), Color.RED,
-                new BasicStroke(1.0f), 1.0f);
-        assertFalse(m1.equals(m2));
-        m2 = new CategoryMarker("A", new GradientPaint(1.0f, 2.0f, Color.WHITE,
-                3.0f, 4.0f, Color.YELLOW), new BasicStroke(2.2f), Color.RED,
-                new BasicStroke(1.0f), 1.0f);
-        assertTrue(m1.equals(m2));
-
-        //outlineStroke
-        m1 = new CategoryMarker("A", new GradientPaint(1.0f, 2.0f, Color.WHITE,
-                3.0f, 4.0f, Color.YELLOW), new BasicStroke(2.2f), Color.RED,
-                new BasicStroke(3.3f), 1.0f);
-        assertFalse(m1.equals(m2));
-        m2 = new CategoryMarker("A", new GradientPaint(1.0f, 2.0f, Color.WHITE,
-                3.0f, 4.0f, Color.YELLOW), new BasicStroke(2.2f), Color.RED,
-                new BasicStroke(3.3f), 1.0f);
-        assertTrue(m1.equals(m2));
-
-        //alpha
-        m1 = new CategoryMarker("A", new GradientPaint(1.0f, 2.0f, Color.WHITE,
-                3.0f, 4.0f, Color.YELLOW), new BasicStroke(2.2f), Color.RED,
-                new BasicStroke(1.0f), 0.5f);
-        assertFalse(m1.equals(m2));
-        m2 = new CategoryMarker("A", new GradientPaint(1.0f, 2.0f, Color.WHITE,
-                3.0f, 4.0f, Color.YELLOW), new BasicStroke(2.2f), Color.RED,
-                new BasicStroke(1.0f), 0.5f);
-        assertTrue(m1.equals(m2));
-
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(CategoryMarker.class)
+            .withRedefinedSuperclass() // superclass also defines equals/hashCode
+            .withPrefabValues(Font.class, new Font("SansSerif", Font.PLAIN, 10), new Font("Tahoma", Font.BOLD, 12))
+            .suppress(Warning.STRICT_INHERITANCE)
+            .suppress(Warning.NONFINAL_FIELDS)
+            .verify();
     }
 
     /**

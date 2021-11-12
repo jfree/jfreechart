@@ -30,7 +30,7 @@
  * (C) Copyright 2005-2021, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
@@ -53,6 +53,7 @@ import org.jfree.chart.TestUtils;
 import org.jfree.chart.block.BlockBorder;
 import org.jfree.chart.block.BlockContainer;
 import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.util.PaintUtils;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -117,10 +118,12 @@ public class CompositeTitleTest {
 
         t1.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.YELLOW));
-        assertFalse(t1.equals(t2));
+        assertFalse(PaintUtils.equal(t1.getBackgroundPaint(),
+                                     t2.getBackgroundPaint()));
         t2.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.YELLOW));
-        assertTrue(t1.equals(t2));
+        assertTrue(PaintUtils.equal(t1.getBackgroundPaint(),
+                                    t2.getBackgroundPaint()));
 
     }
 

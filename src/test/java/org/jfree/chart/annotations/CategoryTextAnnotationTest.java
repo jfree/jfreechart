@@ -30,18 +30,21 @@
  * (C) Copyright 2003-2021, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
 package org.jfree.chart.annotations;
 
+import java.awt.Font;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.jfree.chart.TestUtils;
-
+import static org.jfree.chart.TestUtils.createFont;
 import org.jfree.chart.axis.CategoryAnchor;
 import org.jfree.chart.util.PublicCloneable;
 import org.junit.jupiter.api.Test;
@@ -52,33 +55,18 @@ import org.junit.jupiter.api.Test;
 public class CategoryTextAnnotationTest {
 
     /**
-     * Confirm that the equals method can distinguish all the required fields.
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
      */
     @Test
-    public void testEquals() {
-        CategoryTextAnnotation a1 = new CategoryTextAnnotation("Test", 
-                "Category", 1.0);
-        CategoryTextAnnotation a2 = new CategoryTextAnnotation("Test", 
-                "Category", 1.0);
-        assertTrue(a1.equals(a2));
-
-        // category
-        a1.setCategory("Category 2");
-        assertFalse(a1.equals(a2));
-        a2.setCategory("Category 2");
-        assertTrue(a1.equals(a2));
-
-        // categoryAnchor
-        a1.setCategoryAnchor(CategoryAnchor.START);
-        assertFalse(a1.equals(a2));
-        a2.setCategoryAnchor(CategoryAnchor.START);
-        assertTrue(a1.equals(a2));
-
-        // value
-        a1.setValue(0.15);
-        assertFalse(a1.equals(a2));
-        a2.setValue(0.15);
-        assertTrue(a1.equals(a2));
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(CategoryTextAnnotation.class)
+            .withRedefinedSuperclass() // superclass also defines equals/hashCode
+            // Add prefab values for Font
+            .withPrefabValues(Font.class, createFont(true), createFont(false))
+            .suppress(Warning.STRICT_INHERITANCE)
+            .suppress(Warning.NONFINAL_FIELDS)
+            .verify();
     }
 
     /**

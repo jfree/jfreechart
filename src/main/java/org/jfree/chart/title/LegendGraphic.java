@@ -30,7 +30,7 @@
  * (C) Copyright 2004-2021, by David Gilbert.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -56,8 +56,6 @@ import org.jfree.chart.ui.GradientPaintTransformer;
 import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.ui.Size2D;
 import org.jfree.chart.ui.StandardGradientPaintTransformer;
-import org.jfree.chart.util.ObjectUtils;
-import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
@@ -615,6 +613,9 @@ public class LegendGraphic extends AbstractBlock
      */
     @Override
     public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
         if (!(obj instanceof LegendGraphic)) {
             return false;
         }
@@ -622,26 +623,13 @@ public class LegendGraphic extends AbstractBlock
         if (this.shapeVisible != that.shapeVisible) {
             return false;
         }
-        if (!ShapeUtils.equal(this.shape, that.shape)) {
-            return false;
-        }
         if (this.shapeFilled != that.shapeFilled) {
             return false;
         }
-        if (!PaintUtils.equal(this.fillPaint, that.fillPaint)) {
-            return false;
-        }
-        if (!Objects.equals(this.fillPaintTransformer,
-                that.fillPaintTransformer)) {
+        if (!Objects.equals(this.fillPaintTransformer, that.fillPaintTransformer)) {
             return false;
         }
         if (this.shapeOutlineVisible != that.shapeOutlineVisible) {
-            return false;
-        }
-        if (!PaintUtils.equal(this.outlinePaint, that.outlinePaint)) {
-            return false;
-        }
-        if (!Objects.equals(this.outlineStroke, that.outlineStroke)) {
             return false;
         }
         if (this.shapeAnchor != that.shapeAnchor) {
@@ -653,16 +641,24 @@ public class LegendGraphic extends AbstractBlock
         if (this.lineVisible != that.lineVisible) {
             return false;
         }
-        if (!ShapeUtils.equal(this.line, that.line)) {
-            return false;
-        }
-        if (!PaintUtils.equal(this.linePaint, that.linePaint)) {
-            return false;
-        }
-        if (!Objects.equals(this.lineStroke, that.lineStroke)) {
+        if (that.canEqual(this) == false) {
             return false;
         }
         return super.equals(obj);
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof LegendGraphic);
     }
 
     /**
@@ -672,10 +668,15 @@ public class LegendGraphic extends AbstractBlock
      */
     @Override
     public int hashCode() {
-        int result = 193;
-        result = 37 * result + ObjectUtils.hashCode(this.fillPaint);
-        // FIXME: use other fields too
-        return result;
+        int hash = super.hashCode(); // equals calls superclass, hashCode must also
+        hash = 23 * hash + (this.shapeVisible ? 1 : 0);
+        hash = 23 * hash + Objects.hashCode(this.shapeLocation);
+        hash = 23 * hash + Objects.hashCode(this.shapeAnchor);
+        hash = 23 * hash + (this.shapeFilled ? 1 : 0);
+        hash = 23 * hash + Objects.hashCode(this.fillPaintTransformer);
+        hash = 23 * hash + (this.shapeOutlineVisible ? 1 : 0);
+        hash = 23 * hash + (this.lineVisible ? 1 : 0);
+        return hash;
     }
 
     /**

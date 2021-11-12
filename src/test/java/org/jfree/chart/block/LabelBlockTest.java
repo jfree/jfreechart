@@ -30,23 +30,25 @@
  * (C) Copyright 2005-2021, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
 package org.jfree.chart.block;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
+import java.awt.geom.Rectangle2D;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 
 import org.jfree.chart.TestUtils;
-import org.jfree.chart.text.TextBlockAnchor;
-import org.jfree.chart.ui.RectangleAnchor;
+import static org.jfree.chart.TestUtils.createFont;
+import static org.jfree.chart.TestUtils.createR2D;
+import org.jfree.chart.util.PaintUtils;
 
 import org.junit.jupiter.api.Test;
 
@@ -56,57 +58,18 @@ import org.junit.jupiter.api.Test;
 public class LabelBlockTest {
 
     /**
-     * Confirm that the equals() method can distinguish all the required fields.
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
      */
     @Test
-    public void testEquals() {
-        LabelBlock b1 = new LabelBlock("ABC", new Font("Dialog",
-                Font.PLAIN, 12), Color.RED);
-        LabelBlock b2 = new LabelBlock("ABC", new Font("Dialog",
-                Font.PLAIN, 12), Color.RED);
-        assertTrue(b1.equals(b2));
-        assertTrue(b2.equals(b2));
-
-        b1 = new LabelBlock("XYZ", new Font("Dialog", Font.PLAIN, 12),
-                Color.RED);
-        assertFalse(b1.equals(b2));
-        b2 = new LabelBlock("XYZ", new Font("Dialog", Font.PLAIN, 12),
-                Color.RED);
-        assertTrue(b1.equals(b2));
-
-        b1 = new LabelBlock("XYZ", new Font("Dialog", Font.BOLD, 12),
-                Color.RED);
-        assertFalse(b1.equals(b2));
-        b2 = new LabelBlock("XYZ", new Font("Dialog", Font.BOLD, 12),
-                Color.RED);
-        assertTrue(b1.equals(b2));
-
-        b1 = new LabelBlock("XYZ", new Font("Dialog", Font.BOLD, 12),
-                Color.BLUE);
-        assertFalse(b1.equals(b2));
-        b2 = new LabelBlock("XYZ", new Font("Dialog", Font.BOLD, 12),
-                Color.BLUE);
-        assertTrue(b1.equals(b2));
-
-        b1.setToolTipText("Tooltip");
-        assertFalse(b1.equals(b2));
-        b2.setToolTipText("Tooltip");
-        assertTrue(b1.equals(b2));
-
-        b1.setURLText("URL");
-        assertFalse(b1.equals(b2));
-        b2.setURLText("URL");
-        assertTrue(b1.equals(b2));
-
-        b1.setContentAlignmentPoint(TextBlockAnchor.CENTER_RIGHT);
-        assertFalse(b1.equals(b2));
-        b2.setContentAlignmentPoint(TextBlockAnchor.CENTER_RIGHT);
-        assertTrue(b1.equals(b2));
-
-        b1.setTextAnchor(RectangleAnchor.BOTTOM_RIGHT);
-        assertFalse(b1.equals(b2));
-        b2.setTextAnchor(RectangleAnchor.BOTTOM_RIGHT);
-        assertTrue(b1.equals(b2));
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(LabelBlock.class)
+            .withPrefabValues(Rectangle2D.class, createR2D(true), createR2D(false))
+            .withPrefabValues(Font.class, createFont(true), createFont(false))
+            .suppress(Warning.STRICT_INHERITANCE)
+            .suppress(Warning.NONFINAL_FIELDS)
+            .withRedefinedSuperclass()
+            .verify();
     }
 
     /**
@@ -132,7 +95,7 @@ public class LabelBlockTest {
         LabelBlock b1 = new LabelBlock("ABC", new Font("Dialog",
                 Font.PLAIN, 12), gp);
         LabelBlock b2 = TestUtils.serialised(b1);
-        assertEquals(b1, b2);
+        assertTrue(PaintUtils.equal(b1.getPaint(), b2.getPaint()));
     }
 
 }

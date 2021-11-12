@@ -30,12 +30,15 @@
  * (C) Copyright 2005-2021, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
 package org.jfree.chart.block;
 
+import java.awt.geom.Rectangle2D;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -49,24 +52,19 @@ import org.junit.jupiter.api.Test;
 public class BlockContainerTest {
 
     /**
-     * Confirm that the equals() method can distinguish all the required fields.
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
      */
     @Test
-    public void testEquals() {
-        BlockContainer c1 = new BlockContainer(new FlowArrangement());
-        BlockContainer c2 = new BlockContainer(new FlowArrangement());
-        assertTrue(c1.equals(c2));
-        assertTrue(c2.equals(c2));
-
-        c1.setArrangement(new ColumnArrangement());
-        assertFalse(c1.equals(c2));
-        c2.setArrangement(new ColumnArrangement());
-        assertTrue(c1.equals(c2));
-
-        c1.add(new EmptyBlock(1.2, 3.4));
-        assertFalse(c1.equals(c2));
-        c2.add(new EmptyBlock(1.2, 3.4));
-        assertTrue(c1.equals(c2));
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(BlockContainer.class)
+            .withRedefinedSuperclass() // superclass also defines equals/hashCode
+            .withPrefabValues(Rectangle2D.class,
+                              TestUtils.createR2D(true),
+                              TestUtils.createR2D(false))
+            .suppress(Warning.STRICT_INHERITANCE)
+            .suppress(Warning.NONFINAL_FIELDS)
+            .verify();
     }
 
     /**

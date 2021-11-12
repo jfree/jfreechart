@@ -30,13 +30,14 @@
  * (C) Copyright 2003-2021, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
 package org.jfree.chart.axis;
 
 import java.io.Serializable;
+import java.util.Objects;
 import org.jfree.chart.text.TextBlockAnchor;
 import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.ui.TextAnchor;
@@ -217,22 +218,24 @@ public class CategoryLabelPosition implements Serializable {
             return false;
         }
         CategoryLabelPosition that = (CategoryLabelPosition) obj;
-        if (!this.categoryAnchor.equals(that.categoryAnchor)) {
+        if (Double.doubleToLongBits(this.angle) !=
+            Double.doubleToLongBits(that.angle)) {
             return false;
         }
-        if (!this.labelAnchor.equals(that.labelAnchor)) {
+        if (Float.floatToIntBits(this.widthRatio) !=
+            Float.floatToIntBits(that.widthRatio)) {
             return false;
         }
-        if (!this.rotationAnchor.equals(that.rotationAnchor)) {
+        if (!Objects.equals(this.categoryAnchor,that.categoryAnchor)) {
             return false;
         }
-        if (this.angle != that.angle) {
+        if (!Objects.equals(this.labelAnchor, that.labelAnchor)) {
             return false;
         }
-        if (this.widthType != that.widthType) {
+        if (!Objects.equals(this.rotationAnchor, that.rotationAnchor)) {
             return false;
         }
-        if (this.widthRatio != that.widthRatio) {
+        if (!Objects.equals(this.widthType, that.widthType)) {
             return false;
         }
         return true;
@@ -246,9 +249,13 @@ public class CategoryLabelPosition implements Serializable {
     @Override
     public int hashCode() {
         int result = 19;
-        result = 37 * result + this.categoryAnchor.hashCode();
-        result = 37 * result + this.labelAnchor.hashCode();
-        result = 37 * result + this.rotationAnchor.hashCode();
+        result = 61 * result + Objects.hashCode(this.categoryAnchor);
+        result = 61 * result + Objects.hashCode(this.labelAnchor);
+        result = 61 * result + Objects.hashCode(this.rotationAnchor);
+        result = 61 * result + (int) (Double.doubleToLongBits(this.angle) ^
+                                     (Double.doubleToLongBits(this.angle) >>> 32));
+        result = 61 * result + Objects.hashCode(this.widthType);
+        result = 61 * result + Float.floatToIntBits(this.widthRatio);
         return result;
     }
 

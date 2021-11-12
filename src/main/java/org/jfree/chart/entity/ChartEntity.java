@@ -33,6 +33,7 @@
  * Contributor(s):   Richard Atkinson;
  *                   Xavier Poinsard;
  *                   Robert Fuller;
+ *                   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  */
 
 package org.jfree.chart.entity;
@@ -46,7 +47,6 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Objects;
 
-import org.jfree.chart.HashUtils;
 import org.jfree.chart.imagemap.ToolTipTagFragmentGenerator;
 import org.jfree.chart.imagemap.URLTagFragmentGenerator;
 import org.jfree.chart.util.Args;
@@ -333,16 +333,31 @@ public class ChartEntity implements Cloneable, PublicCloneable, Serializable {
             return false;
         }
         ChartEntity that = (ChartEntity) obj;
-        if (!this.area.equals(that.area)) {
-            return false;
-        }
         if (!Objects.equals(this.toolTipText, that.toolTipText)) {
             return false;
         }
         if (!Objects.equals(this.urlText, that.urlText)) {
             return false;
         }
+
+        // fix the "equals not symmetric" problem
+        if (that.canEqual(this) == false) {
+            return false;
+        }
         return true;
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof ChartEntity);
     }
 
     /**
@@ -352,9 +367,9 @@ public class ChartEntity implements Cloneable, PublicCloneable, Serializable {
      */
     @Override
     public int hashCode() {
-        int result = 37;
-        result = HashUtils.hashCode(result, this.toolTipText);
-        result = HashUtils.hashCode(result, this.urlText);
+        int result = 7;
+        result = 89 * result + Objects.hashCode(this.toolTipText);
+        result = 89 * result + Objects.hashCode(this.urlText);
         return result;
     }
 

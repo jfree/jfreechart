@@ -30,15 +30,18 @@
  * (C) Copyright 2008-2021, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
 package org.jfree.data.gantt;
 
 import java.util.Date;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.data.general.SeriesChangeEvent;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -48,6 +51,18 @@ import org.junit.jupiter.api.Test;
  * Tests for the {@link XYTaskDataset} class.
  */
 public class XYTaskDatasetTest {
+
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(XYTaskDataset.class)
+                .suppress(Warning.STRICT_INHERITANCE)
+                .suppress(Warning.NONFINAL_FIELDS)
+                .withRedefinedSuperclass()
+                .withPrefabValues(Task.class,
+                                  new Task("T1", new Date(1), new Date(2)),
+                                  new Task("T2", new Date(3), new Date(4)))
+                .verify();
+    }
 
     /**
      * Some checks for the equals() method.
@@ -107,6 +122,11 @@ public class XYTaskDatasetTest {
         TaskSeriesCollection u2 = d2.getTasks();
         TaskSeries s2 = u2.getSeries("Series");
         s2.add(new Task("Task 2", new Date(10L), new Date(11L)));
+
+        // equals checks the keys - make sure they get updated
+        u1.seriesChanged(new SeriesChangeEvent(this));
+        u2.seriesChanged(new SeriesChangeEvent(this));
+        
         assertTrue(d1.equals(d2));
     }
 

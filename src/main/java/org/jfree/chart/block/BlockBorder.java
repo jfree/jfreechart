@@ -30,7 +30,7 @@
  * (C) Copyright 2004-2021, by David Gilbert.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -44,8 +44,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Objects;
 import org.jfree.chart.ui.RectangleInsets;
-import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
 
@@ -195,13 +195,17 @@ public class BlockBorder implements BlockFrame, Serializable {
             return false;
         }
         BlockBorder that = (BlockBorder) obj;
-        if (!this.insets.equals(that.insets)) {
-            return false;
-        }
-        if (!PaintUtils.equal(this.paint, that.paint)) {
+        if (!Objects.equals(this.insets, that.insets)) {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 37 * hash + Objects.hashCode(this.insets);
+        return hash;
     }
 
     /**

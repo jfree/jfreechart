@@ -30,7 +30,7 @@
  * (C) Copyright 2005-2021, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
@@ -52,6 +52,7 @@ import org.jfree.chart.TestUtils;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.SortOrder;
 import org.junit.jupiter.api.Test;
 
@@ -92,11 +93,15 @@ public class LegendTitleTest {
         t1.setBackgroundPaint(
             new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f, Color.YELLOW)
         );
-        assertFalse(t1.equals(t2));
+        // transient field 'paint' not included in equals or hashCode, so test
+        // equality using PaintUtils method
+        assertFalse(PaintUtils.equal(t1.getBackgroundPaint(),
+                                     t2.getBackgroundPaint()));
         t2.setBackgroundPaint(
             new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f, Color.YELLOW)
         );
-        assertTrue(t1.equals(t2));
+        assertTrue(PaintUtils.equal(t1.getBackgroundPaint(),
+                                    t2.getBackgroundPaint()));
 
         t1.setLegendItemGraphicEdge(RectangleEdge.BOTTOM);
         assertFalse(t1.equals(t2));
@@ -156,9 +161,11 @@ public class LegendTitleTest {
 
         // check independence
         bounds1.setFrame(40.0, 30.0, 20.0, 10.0);
-        assertFalse(t1.equals(t2));
+        // transient field 'bounds' not included in equals or hashCode, so test
+        // using the 'get' method
+        assertFalse(t1.getBounds().equals(t2.getBounds()));
         t2.setBounds(new Rectangle2D.Double(40.0, 30.0, 20.0, 10.0));
-        assertTrue(t1.equals(t2));
+        assertTrue(t1.getBounds().equals(t2.getBounds()));
     }
 
     /**

@@ -32,6 +32,7 @@
  * Original Author:  David Gilbert;
  * Contributor(s):   Richard Atkinson;
  *                   Christian W. Zuckschwerdt;
+ *                   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -41,7 +42,6 @@ import java.awt.Shape;
 import java.io.Serializable;
 import java.util.Objects;
 
-import org.jfree.chart.HashUtils;
 import org.jfree.data.general.PieDataset;
 
 /**
@@ -196,6 +196,11 @@ public class PieSectionEntity extends ChartEntity
             return false;
         }
         PieSectionEntity that = (PieSectionEntity) obj;
+
+        // fix the "equals not symmetric" problem
+        if (that.canEqual(this) == false) {
+            return false;
+        }
         if (!Objects.equals(this.dataset, that.dataset)) {
             return false;
         }
@@ -212,16 +217,27 @@ public class PieSectionEntity extends ChartEntity
     }
 
     /**
-     * Returns a hash code for this instance.
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
      *
-     * @return A hash code.
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
      */
     @Override
+    public boolean canEqual(Object other) {
+        // Solves Problem: equals not symmetric
+        return (other instanceof PieSectionEntity);
+    }
+
+    @Override
     public int hashCode() {
-        int result = super.hashCode();
-        result = HashUtils.hashCode(result, this.pieIndex);
-        result = HashUtils.hashCode(result, this.sectionIndex);
-        return result;
+        int hash = super.hashCode(); // equals calls superclass function, so hashCode must also
+        hash = 13 * hash + Objects.hashCode(this.dataset);
+        hash = 13 * hash + this.pieIndex;
+        hash = 13 * hash + this.sectionIndex;
+        hash = 13 * hash + Objects.hashCode(this.sectionKey);
+        return hash;
     }
 
     /**

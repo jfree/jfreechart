@@ -30,15 +30,17 @@
  * (C) Copyright 2004-2021, by David Gilbert.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
 package org.jfree.data.gantt;
 
 import java.util.Date;
-
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import org.jfree.chart.TestUtils;
+import org.jfree.data.general.SeriesChangeEvent;
 
 import org.jfree.data.time.SimpleTimePeriod;
 import org.junit.jupiter.api.Test;
@@ -50,6 +52,18 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Tests for the {@link TaskSeriesCollection} class.
  */
 public class TaskSeriesCollectionTest {
+
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(TaskSeriesCollection.class)
+                .suppress(Warning.STRICT_INHERITANCE)
+                .suppress(Warning.NONFINAL_FIELDS)
+                .withPrefabValues(Task.class,
+                                  new Task("T1", new Date(1), new Date(2)),
+                                  new Task("T2", new Date(3), new Date(4)))
+                .withRedefinedSuperclass()
+                .verify();
+    }
 
     /**
      * Creates a sample collection for testing purposes.
@@ -455,9 +469,11 @@ public class TaskSeriesCollectionTest {
         TaskSeries s1 = new TaskSeries("S1");
         s1.add(new Task("T1", new Date(1), new Date(2)));
         s1.add(new Task("T2", new Date(11), new Date(22)));
+
         TaskSeries s2 = new TaskSeries("S2");
         s2.add(new Task("T1", new Date(33), new Date(44)));
         s2.add(new Task("T2", new Date(55), new Date(66)));
+
         TaskSeriesCollection c1 = new TaskSeriesCollection();
         c1.add(s1);
         c1.add(s2);
@@ -470,8 +486,14 @@ public class TaskSeriesCollectionTest {
         // basic check for independence
         s1.add(new Task("T3", new Date(21), new Date(33)));
         assertFalse(c1.equals(c2));
+
         TaskSeries series = c2.getSeries("S1");
         series.add(new Task("T3", new Date(21), new Date(33)));
+
+        // equals checks the keys - make sure they get updated
+        c1.seriesChanged(new SeriesChangeEvent(this));
+        c2.seriesChanged(new SeriesChangeEvent(this));
+        
         assertTrue(c1.equals(c2));
 
     }

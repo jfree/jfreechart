@@ -31,6 +31,7 @@
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Peter Kolb (patch 2809117);
+ *                   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -181,7 +182,27 @@ public abstract class AbstractXYAnnotation extends AbstractAnnotation
         if (!Objects.equals(this.url, that.url)) {
             return false;
         }
-        return true;
+
+        // fix the "equals not symmetric" problem
+        if (that.canEqual(this) == false) {
+            return false;
+        }
+
+        return super.equals(obj);
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof AbstractXYAnnotation);
     }
 
     /**
@@ -191,13 +212,9 @@ public abstract class AbstractXYAnnotation extends AbstractAnnotation
      */
     @Override
     public int hashCode() {
-        int result = 193;
-        if (this.toolTipText != null) {
-            result = 37 * result + this.toolTipText.hashCode();
-        }
-        if (this.url != null) {
-            result = 37 * result + this.url.hashCode();
-        }
+        int result = super.hashCode(); // equals calls superclass, hashCode must also
+        result = 37 * result + Objects.hashCode(this.toolTipText);
+        result = 37 * result + Objects.hashCode(this.url);
         return result;
     }
 

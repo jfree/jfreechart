@@ -31,6 +31,7 @@
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Peter Kolb (see patch 2809117);
+                     Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -47,7 +48,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.Objects;
 
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.Plot;
@@ -56,7 +56,6 @@ import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.util.LineUtils;
-import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
@@ -268,32 +267,43 @@ public class XYLineAnnotation extends AbstractXYAnnotation
         if (obj == this) {
             return true;
         }
-        if (!super.equals(obj)) {
-            return false;
-        }
         if (!(obj instanceof XYLineAnnotation)) {
             return false;
         }
         XYLineAnnotation that = (XYLineAnnotation) obj;
-        if (this.x1 != that.x1) {
+        if (Double.doubleToLongBits(this.x1) != Double.doubleToLongBits(that.x1)) {
             return false;
         }
-        if (this.y1 != that.y1) {
+        if (Double.doubleToLongBits(this.y1) != Double.doubleToLongBits(that.y1)) {
             return false;
         }
-        if (this.x2 != that.x2) {
+        if (Double.doubleToLongBits(this.x2) != Double.doubleToLongBits(that.x2)) {
             return false;
         }
-        if (this.y2 != that.y2) {
+        if (Double.doubleToLongBits(this.y2) != Double.doubleToLongBits(that.y2)) {
             return false;
         }
-        if (!PaintUtils.equal(this.paint, that.paint)) {
+
+        // fix the "equals not symmetric" problem
+        if (that.canEqual(this) == false) {
             return false;
         }
-        if (!Objects.equals(this.stroke, that.stroke)) {
-            return false;
-        }
-        return true;
+
+        return super.equals(obj);
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof XYLineAnnotation);
     }
 
     /**
@@ -303,17 +313,16 @@ public class XYLineAnnotation extends AbstractXYAnnotation
      */
     @Override
     public int hashCode() {
-        int result;
-        long temp;
-        temp = Double.doubleToLongBits(this.x1);
-        result = (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(this.x2);
-        result = 29 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(this.y1);
-        result = 29 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(this.y2);
-        result = 29 * result + (int) (temp ^ (temp >>> 32));
-        return result;
+        int hash = super.hashCode(); // equals calls superclass, hashCode must also
+        hash = 89 * hash + (int) (Double.doubleToLongBits(this.x1) ^ 
+                                 (Double.doubleToLongBits(this.x1) >>> 32));
+        hash = 89 * hash + (int) (Double.doubleToLongBits(this.y1) ^ 
+                                 (Double.doubleToLongBits(this.y1) >>> 32));
+        hash = 89 * hash + (int) (Double.doubleToLongBits(this.x2) ^ 
+                                 (Double.doubleToLongBits(this.x2) >>> 32));
+        hash = 89 * hash + (int) (Double.doubleToLongBits(this.y2) ^ 
+                                 (Double.doubleToLongBits(this.y2) >>> 32));
+        return hash;
     }
 
     /**

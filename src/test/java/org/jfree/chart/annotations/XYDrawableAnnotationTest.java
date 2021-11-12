@@ -30,7 +30,7 @@
  * (C) Copyright 2003-2021, by David Gilbert.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
@@ -43,6 +43,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.ui.Drawable;
@@ -99,65 +101,16 @@ public class XYDrawableAnnotationTest {
     }
 
     /**
-     * Confirm that the equals method can distinguish all the required fields.
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
      */
     @Test
-    public void testEquals() {
-        XYDrawableAnnotation a1 = new XYDrawableAnnotation(10.0, 20.0, 100.0,
-                200.0, new TestDrawable());
-        XYDrawableAnnotation a2 = new XYDrawableAnnotation(10.0, 20.0, 100.0,
-                200.0, new TestDrawable());
-        assertTrue(a1.equals(a2));
-
-        a1 = new XYDrawableAnnotation(11.0, 20.0, 100.0, 200.0,
-                new TestDrawable());
-        assertFalse(a1.equals(a2));
-        a2 = new XYDrawableAnnotation(11.0, 20.0, 100.0, 200.0,
-                new TestDrawable());
-        assertTrue(a1.equals(a2));
-
-        a1 = new XYDrawableAnnotation(11.0, 22.0, 100.0, 200.0,
-                new TestDrawable());
-        assertFalse(a1.equals(a2));
-        a2 = new XYDrawableAnnotation(11.0, 22.0, 100.0, 200.0,
-                new TestDrawable());
-        assertTrue(a1.equals(a2));
-
-        a1 = new XYDrawableAnnotation(11.0, 22.0, 101.0, 200.0,
-                new TestDrawable());
-        assertFalse(a1.equals(a2));
-        a2 = new XYDrawableAnnotation(11.0, 22.0, 101.0, 200.0,
-                new TestDrawable());
-        assertTrue(a1.equals(a2));
-
-        a1 = new XYDrawableAnnotation(11.0, 22.0, 101.0, 202.0,
-                new TestDrawable());
-        assertFalse(a1.equals(a2));
-        a2 = new XYDrawableAnnotation(11.0, 22.0, 101.0, 202.0,
-                new TestDrawable());
-        assertTrue(a1.equals(a2));
-
-        a1 = new XYDrawableAnnotation(11.0, 22.0, 101.0, 202.0, 2.0,
-                new TestDrawable());
-        assertFalse(a1.equals(a2));
-        a2 = new XYDrawableAnnotation(11.0, 22.0, 101.0, 202.0, 2.0,
-                new TestDrawable());
-        assertTrue(a1.equals(a2));
-    }
-
-    /**
-     * Two objects that are equal are required to return the same hashCode.
-     */
-    @Test
-    public void testHashCode() {
-        XYDrawableAnnotation a1 = new XYDrawableAnnotation(10.0, 20.0, 100.0,
-                200.0, new TestDrawable());
-        XYDrawableAnnotation a2 = new XYDrawableAnnotation(10.0, 20.0, 100.0,
-                200.0, new TestDrawable());
-        assertTrue(a1.equals(a2));
-        int h1 = a1.hashCode();
-        int h2 = a2.hashCode();
-        assertEquals(h1, h2);
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(XYDrawableAnnotation.class)
+            .withRedefinedSuperclass() // superclass also defines equals/hashCode
+            .suppress(Warning.STRICT_INHERITANCE)
+            .suppress(Warning.NONFINAL_FIELDS)
+            .verify();
     }
 
     /**

@@ -31,6 +31,7 @@
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Thomas Schuster;
+ *                   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -665,7 +666,35 @@ public class TaskSeriesCollection extends AbstractSeriesDataset
         if (!Objects.equals(this.data, that.data)) {
             return false;
         }
-        return true;
+        if (!Objects.equals(this.keys, that.keys)) {
+            return false;
+        }
+        if (that.canEqual(this) == false) {
+            return false;
+        }
+        return super.equals(obj);
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof TaskSeriesCollection);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = super.hashCode(); // equals calls superclass, hashCode must also
+        hash = 79 * hash + Objects.hashCode(this.data);
+        hash = 79 * hash + Objects.hashCode(this.keys);
+        return hash;
     }
 
     /**

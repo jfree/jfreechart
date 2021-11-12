@@ -30,7 +30,7 @@
  * (C) Copyright 2003-2021, by David Gilbert.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -219,14 +219,40 @@ public class Task implements Cloneable, PublicCloneable, Serializable {
         if (!Objects.equals(this.duration, that.duration)) {
             return false;
         }
-        if (!Objects.equals(this.percentComplete,
-                that.percentComplete)) {
+        if (!Objects.equals(this.percentComplete, that.percentComplete)) {
             return false;
         }
         if (!Objects.equals(this.subtasks, that.subtasks)) {
             return false;
         }
+        if (that.canEqual(this) == false) {
+            return false;
+        }
+
         return true;
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof Task);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 31 * hash + Objects.hashCode(this.description);
+        hash = 31 * hash + Objects.hashCode(this.duration);
+        hash = 31 * hash + Objects.hashCode(this.percentComplete);
+        hash = 31 * hash + Objects.hashCode(this.subtasks);
+        return hash;
     }
 
     /**

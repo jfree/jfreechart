@@ -41,6 +41,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Date;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
@@ -49,6 +51,14 @@ import org.junit.jupiter.api.Test;
  * Tests for the {@link SimpleTimePeriod} class.
  */
 public class SimpleTimePeriodTest {
+
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(SimpleTimePeriod.class)
+                .suppress(Warning.STRICT_INHERITANCE)
+                .suppress(Warning.NONFINAL_FIELDS)
+                .verify();
+    }
 
     /**
      * Check that an instance is equal to itself.

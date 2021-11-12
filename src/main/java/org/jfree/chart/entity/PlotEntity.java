@@ -30,7 +30,7 @@
  * (C) Copyright 2009-2021, by David Gilbert and Contributors.
  *
  * Original Author:  Peter Kolb;
- * Contributor(s):   ;
+ * Contributor(s):   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -40,7 +40,6 @@ import java.awt.Shape;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.Objects;
 
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.HashUtils;
@@ -137,19 +136,29 @@ public class PlotEntity extends ChartEntity {
             return false;
         }
         PlotEntity that = (PlotEntity) obj;
-        if (!getArea().equals(that.getArea())) {
-            return false;
-        }
-        if (!Objects.equals(getToolTipText(), that.getToolTipText())) {
-            return false;
-        }
-        if (!Objects.equals(getURLText(), that.getURLText())) {
+
+        // fix the "equals not symmetric" problem
+        if (that.canEqual(this) == false) {
             return false;
         }
         if (!(this.plot.equals(that.plot))) {
             return false;
         }
-        return true;
+        return super.equals(obj);
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // Solves Problem: equals not symmetric
+        return (other instanceof PlotEntity);
     }
 
     /**
@@ -159,7 +168,7 @@ public class PlotEntity extends ChartEntity {
      */
     @Override
     public int hashCode() {
-        int result = 39;
+        int result = super.hashCode(); // equals calls superclass function, so hashCode must also
         result = HashUtils.hashCode(result, getToolTipText());
         result = HashUtils.hashCode(result, getURLText());
         return result;

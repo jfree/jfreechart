@@ -31,6 +31,7 @@
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Nicolas Brodu;
+ *                   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -56,7 +57,6 @@ import org.jfree.chart.ui.LengthAdjustmentType;
 import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.TextAnchor;
-import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
 
@@ -567,19 +567,11 @@ public abstract class Marker implements Cloneable, Serializable {
             return false;
         }
         Marker that = (Marker) obj;
-        if (!PaintUtils.equal(this.paint, that.paint)) {
+        if (that.canEqual(this) == false) {
             return false;
         }
-        if (!Objects.equals(this.stroke, that.stroke)) {
-            return false;
-        }
-        if (!PaintUtils.equal(this.outlinePaint, that.outlinePaint)) {
-            return false;
-        }
-        if (!Objects.equals(this.outlineStroke, that.outlineStroke)) {
-            return false;
-        }
-        if (this.alpha != that.alpha) {
+        if (Float.floatToIntBits(this.alpha) !=
+            Float.floatToIntBits(that.alpha)) {
             return false;
         }
         if (!Objects.equals(this.label, that.label)) {
@@ -588,25 +580,49 @@ public abstract class Marker implements Cloneable, Serializable {
         if (!Objects.equals(this.labelFont, that.labelFont)) {
             return false;
         }
-        if (!PaintUtils.equal(this.labelPaint, that.labelPaint)) {
+        if (!Objects.equals(this.labelBackgroundColor,that.labelBackgroundColor)) {
             return false;
         }
-        if (!this.labelBackgroundColor.equals(that.labelBackgroundColor)) {
+        if (!Objects.equals(this.labelAnchor, that.labelAnchor)) {
             return false;
         }
-        if (this.labelAnchor != that.labelAnchor) {
-            return false;
-        }
-        if (this.labelTextAnchor != that.labelTextAnchor) {
+        if (!Objects.equals(this.labelTextAnchor, that.labelTextAnchor)) {
             return false;
         }
         if (!Objects.equals(this.labelOffset, that.labelOffset)) {
             return false;
         }
-        if (!this.labelOffsetType.equals(that.labelOffsetType)) {
+        if (!Objects.equals(this.labelOffsetType,that.labelOffsetType)) {
             return false;
         }
         return true;
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    public boolean canEqual(Object other) {
+        // Solves Problem: equals not symmetric
+        return (other instanceof Marker);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 43 * hash + Float.floatToIntBits(this.alpha);
+        hash = 43 * hash + Objects.hashCode(this.label);
+        hash = 43 * hash + Objects.hashCode(this.labelFont);
+        hash = 43 * hash + Objects.hashCode(this.labelBackgroundColor);
+        hash = 43 * hash + Objects.hashCode(this.labelAnchor);
+        hash = 43 * hash + Objects.hashCode(this.labelTextAnchor);
+        hash = 43 * hash + Objects.hashCode(this.labelOffset);
+        hash = 43 * hash + Objects.hashCode(this.labelOffsetType);
+        return hash;
     }
 
     /**

@@ -37,6 +37,7 @@
  *                   Klaus Rheinwald;
  *                   Nicolas Brodu;
  *                   Peter Kolb (patch 2603321);
+ *                   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  * NOTE: The above list of contributors lists only the people that have
  * contributed to this source file (JFreeChart.java) - for a list of ALL
@@ -102,7 +103,6 @@ import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.Size2D;
 import org.jfree.chart.ui.VerticalAlignment;
-import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.Range;
@@ -1510,19 +1510,13 @@ public class JFreeChart implements Drawable, TitleChangeListener,
             return false;
         }
         JFreeChart that = (JFreeChart) obj;
-        if (!this.renderingHints.equals(that.renderingHints)) {
-            return false;
-        }
         if (this.borderVisible != that.borderVisible) {
             return false;
         }
-        if (!Objects.equals(this.borderStroke, that.borderStroke)) {
+        if (this.elementHinting != that.elementHinting) {
             return false;
         }
-        if (!PaintUtils.equal(this.borderPaint, that.borderPaint)) {
-            return false;
-        }
-        if (!this.padding.equals(that.padding)) {
+        if (!Objects.equals(this.padding, that.padding)) {
             return false;
         }
         if (!Objects.equals(this.title, that.title)) {
@@ -1534,24 +1528,36 @@ public class JFreeChart implements Drawable, TitleChangeListener,
         if (!Objects.equals(this.plot, that.plot)) {
             return false;
         }
-        if (!PaintUtils.equal(
-            this.backgroundPaint, that.backgroundPaint
-        )) {
-            return false;
-        }
-        if (!Objects.equals(this.backgroundImage, that.backgroundImage)) {
-            return false;
-        }
         if (this.backgroundImageAlignment != that.backgroundImageAlignment) {
             return false;
         }
-        if (this.backgroundImageAlpha != that.backgroundImageAlpha) {
+        if (Float.floatToIntBits(this.backgroundImageAlpha) !=
+            Float.floatToIntBits(that.backgroundImageAlpha)) {
             return false;
         }
         if (this.notify != that.notify) {
             return false;
         }
+        if (!Objects.equals(this.id, that.id)) {
+            return false;
+        }
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 59 * hash + (this.borderVisible ? 1 : 0);
+        hash = 59 * hash + (this.elementHinting ? 1 : 0);
+        hash = 59 * hash + Objects.hashCode(this.padding);
+        hash = 59 * hash + Objects.hashCode(this.title);
+        hash = 59 * hash + Objects.hashCode(this.subtitles);
+        hash = 59 * hash + Objects.hashCode(this.plot);
+        hash = 59 * hash + Objects.hashCode(this.backgroundImageAlignment);
+        hash = 59 * hash + Float.floatToIntBits(this.backgroundImageAlpha);
+        hash = 59 * hash + (this.notify ? 1 : 0);
+        hash = 59 * hash + Objects.hashCode(this.id);
+        return hash;
     }
 
     /**
@@ -1623,7 +1629,7 @@ public class JFreeChart implements Drawable, TitleChangeListener,
             chart.title.addChangeListener(chart);
         }
 
-        chart.subtitles = new ArrayList();
+        chart.subtitles = new ArrayList<>();
         for (int i = 0; i < getSubtitleCount(); i++) {
             Title subtitle = (Title) getSubtitle(i).clone();
             chart.subtitles.add(subtitle);

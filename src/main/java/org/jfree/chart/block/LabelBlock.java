@@ -31,6 +31,7 @@
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Pierre-Marie Le Biot;
+ *                   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -55,7 +56,6 @@ import org.jfree.chart.text.TextBlockAnchor;
 import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.ui.Size2D;
-import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
@@ -353,17 +353,20 @@ public class LabelBlock extends AbstractBlock
      */
     @Override
     public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
         if (!(obj instanceof LabelBlock)) {
             return false;
         }
         LabelBlock that = (LabelBlock) obj;
-        if (!this.text.equals(that.text)) {
+        if (!Objects.equals(this.text, that.text)) {
             return false;
         }
-        if (!this.font.equals(that.font)) {
+        if (!Objects.equals(this.label, that.label)) {
             return false;
         }
-        if (!PaintUtils.equal(this.paint, that.paint)) {
+        if (!Objects.equals(this.font, that.font)) {
             return false;
         }
         if (!Objects.equals(this.toolTipText, that.toolTipText)) {
@@ -372,13 +375,43 @@ public class LabelBlock extends AbstractBlock
         if (!Objects.equals(this.urlText, that.urlText)) {
             return false;
         }
-        if (!this.contentAlignmentPoint.equals(that.contentAlignmentPoint)) {
+        if (!Objects.equals(this.contentAlignmentPoint, that.contentAlignmentPoint)) {
             return false;
         }
-        if (!this.textAnchor.equals(that.textAnchor)) {
+        if (!Objects.equals(this.textAnchor, that.textAnchor)) {
+            return false;
+        }
+        if (that.canEqual(this) == false) {
             return false;
         }
         return super.equals(obj);
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof LabelBlock);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = super.hashCode(); // equals calls superclass, hashCode must also
+        hash = 71 * hash + Objects.hashCode(this.text);
+        hash = 71 * hash + Objects.hashCode(this.label);
+        hash = 71 * hash + Objects.hashCode(this.font);
+        hash = 71 * hash + Objects.hashCode(this.toolTipText);
+        hash = 71 * hash + Objects.hashCode(this.urlText);
+        hash = 71 * hash + Objects.hashCode(this.contentAlignmentPoint);
+        hash = 71 * hash + Objects.hashCode(this.textAnchor);
+        return hash;
     }
 
     /**

@@ -30,7 +30,7 @@
  * (C) Copyright 2005-2021, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
@@ -42,10 +42,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.Color;
 import java.awt.GradientPaint;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.ui.RectangleInsets;
-import org.jfree.chart.util.UnitType;
+import org.jfree.chart.util.PaintUtils;
 
 import org.junit.jupiter.api.Test;
 
@@ -55,32 +57,15 @@ import org.junit.jupiter.api.Test;
 public class BlockBorderTest {
 
     /**
-     * Confirm that the equals() method can distinguish all the required fields.
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
      */
     @Test
-    public void testEquals() {
-        BlockBorder b1 = new BlockBorder(new RectangleInsets(1.0, 2.0, 3.0,
-                4.0), Color.RED);
-        BlockBorder b2 = new BlockBorder(new RectangleInsets(1.0, 2.0, 3.0,
-                4.0), Color.RED);
-        assertTrue(b1.equals(b2));
-        assertTrue(b2.equals(b2));
-
-        // insets
-        b1 = new BlockBorder(new RectangleInsets(UnitType.RELATIVE, 1.0, 2.0,
-                3.0, 4.0), Color.RED);
-        assertFalse(b1.equals(b2));
-        b2 = new BlockBorder(new RectangleInsets(UnitType.RELATIVE, 1.0, 2.0,
-                3.0, 4.0), Color.RED);
-        assertTrue(b1.equals(b2));
-
-        // paint
-        b1 = new BlockBorder(new RectangleInsets(1.0, 2.0, 3.0, 4.0),
-                Color.BLUE);
-        assertFalse(b1.equals(b2));
-        b2 = new BlockBorder(new RectangleInsets(1.0, 2.0, 3.0, 4.0),
-                Color.BLUE);
-        assertTrue(b1.equals(b2));
+    public void testEqualsHashcode() {
+        EqualsVerifier.forClass(BlockBorder.class)
+            .suppress(Warning.STRICT_INHERITANCE)
+            .suppress(Warning.NONFINAL_FIELDS)
+            .verify();
     }
 
     /**
@@ -101,7 +86,10 @@ public class BlockBorderTest {
                 4.0), new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f,
                 Color.YELLOW));
         BlockBorder b2 = TestUtils.serialised(b1);
-        assertEquals(b1, b2);
+
+        // transient field 'paint' not included in equals or hashCode, so test
+        // equality using PaintUtils method
+        assertTrue(PaintUtils.equal(b1.getPaint(), b2.getPaint()));
     }
 
 }

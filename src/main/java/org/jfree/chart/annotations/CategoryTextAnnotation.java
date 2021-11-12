@@ -31,6 +31,7 @@
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Peter Kolb (patch 2809117);
+ *                   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -39,6 +40,7 @@ package org.jfree.chart.annotations;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
+import java.util.Objects;
 
 import org.jfree.chart.axis.CategoryAnchor;
 import org.jfree.chart.axis.CategoryAxis;
@@ -224,19 +226,36 @@ public class CategoryTextAnnotation extends TextAnnotation
             return false;
         }
         CategoryTextAnnotation that = (CategoryTextAnnotation) obj;
-        if (!super.equals(obj)) {
+        if (!Objects.equals(this.category, that.category)) {
             return false;
         }
-        if (!this.category.equals(that.getCategory())) {
+        if (!Objects.equals(this.categoryAnchor, that.categoryAnchor)) {
             return false;
         }
-        if (!this.categoryAnchor.equals(that.getCategoryAnchor())) {
+        if (Double.doubleToLongBits(this.value) !=
+            Double.doubleToLongBits(that.value)) {
             return false;
         }
-        if (this.value != that.getValue()) {
+        // fix the "equals not symmetric" problem
+        if (that.canEqual(this) == false) {
             return false;
         }
-        return true;
+
+        return super.equals(obj);
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof CategoryTextAnnotation);
     }
 
     /**
@@ -246,9 +265,9 @@ public class CategoryTextAnnotation extends TextAnnotation
      */
     @Override
     public int hashCode() {
-        int result = super.hashCode();
-        result = 37 * result + this.category.hashCode();
-        result = 37 * result + this.categoryAnchor.hashCode();
+        int result = super.hashCode(); // equals calls superclass, hashCode must also
+        result = 37 * result + Objects.hashCode(this.category);
+        result = 37 * result + Objects.hashCode(this.categoryAnchor);
         long temp = Double.doubleToLongBits(this.value);
         result = 37 * result + (int) (temp ^ (temp >>> 32));
         return result;

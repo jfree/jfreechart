@@ -30,7 +30,7 @@
  * (C) Copyright 2007-2021, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 package org.jfree.chart.entity;
@@ -49,66 +49,28 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests for the {@link CategoryLabelEntity} class.
  */
-public class CategoryLabelEntityTest
-{
+public class CategoryLabelEntityTest {
 
     /**
      * Use EqualsVerifier to test that the contract between equals and hashCode
      * is properly implemented.
      */
     @Test
-    public void testEqualsHashcode()
-    {
+    public void testEqualsHashcode() {
         EqualsVerifier.forClass(CategoryLabelEntity.class)
-                .withRedefinedSuperclass() // superclass also defines equals/hashCode
-                .suppress(Warning.STRICT_INHERITANCE)
-                .suppress(Warning.NONFINAL_FIELDS)
-                .verify();
-    }
-
-    /**
-     * Confirm that the equals method can distinguish all the required fields.
-     */
-    @Test
-    public void testEquals()
-    {
-        CategoryLabelEntity e1 = new CategoryLabelEntity("A",
-                                                         new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), "ToolTip", "URL");
-        CategoryLabelEntity e2 = new CategoryLabelEntity("A",
-                                                         new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), "ToolTip", "URL");
-        assertTrue(e1.equals(e2));
-
-        e1 = new CategoryLabelEntity("B", new Rectangle2D.Double(1.0, 2.0,
-                                                                 3.0, 4.0), "ToolTip", "URL");
-        assertFalse(e1.equals(e2));
-        e2 = new CategoryLabelEntity("B", new Rectangle2D.Double(1.0, 2.0,
-                                                                 3.0, 4.0), "ToolTip", "URL");
-        assertTrue(e1.equals(e2));
-
-        e1.setArea(new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0));
-        assertFalse(e1.equals(e2));
-        e2.setArea(new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0));
-        assertTrue(e1.equals(e2));
-
-        e1.setToolTipText("New ToolTip");
-        assertFalse(e1.equals(e2));
-        e2.setToolTipText("New ToolTip");
-        assertTrue(e1.equals(e2));
-
-        e1.setURLText("New URL");
-        assertFalse(e1.equals(e2));
-        e2.setURLText("New URL");
-        assertTrue(e1.equals(e2));
+            .withRedefinedSuperclass() // superclass also defines equals/hashCode
+            .suppress(Warning.STRICT_INHERITANCE)
+            .suppress(Warning.NONFINAL_FIELDS)
+            .verify();
     }
 
     /**
      * Confirm that cloning works.
      */
     @Test
-    public void testCloning() throws CloneNotSupportedException
-    {
+    public void testCloning() throws CloneNotSupportedException {
         CategoryLabelEntity e1 = new CategoryLabelEntity("A",
-                                                         new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), "ToolTip", "URL");
+                new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), "ToolTip", "URL");
         CategoryLabelEntity e2 = (CategoryLabelEntity) e1.clone();
         assertTrue(e1 != e2);
         assertTrue(e1.getClass() == e2.getClass());
@@ -119,10 +81,9 @@ public class CategoryLabelEntityTest
      * Serialize an instance, restore it, and check for equality.
      */
     @Test
-    public void testSerialization()
-    {
+    public void testSerialization() {
         CategoryLabelEntity e1 = new CategoryLabelEntity("A",
-                                                         new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), "ToolTip", "URL");
+                new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), "ToolTip", "URL");
         CategoryLabelEntity e2 = TestUtils.serialised(e1);
         assertEquals(e1, e2);
     }

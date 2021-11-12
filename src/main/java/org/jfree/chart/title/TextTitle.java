@@ -33,6 +33,7 @@
  * Contributor(s):   David Gilbert;
  *                   Nicolas Brodu;
  *                   Peter Kolb - patch 2603321;
+ *                   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -67,7 +68,6 @@ import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.Size2D;
 import org.jfree.chart.ui.VerticalAlignment;
-import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
@@ -780,13 +780,7 @@ public class TextTitle extends Title implements Serializable, Cloneable, PublicC
         if (!Objects.equals(this.font, that.font)) {
             return false;
         }
-        if (!PaintUtils.equal(this.paint, that.paint)) {
-            return false;
-        }
-        if (this.textAlignment != that.textAlignment) {
-            return false;
-        }
-        if (!PaintUtils.equal(this.backgroundPaint, that.backgroundPaint)) {
+        if (!Objects.equals(this.textAlignment, that.textAlignment)) {
             return false;
         }
         if (this.maximumLinesToDisplay != that.maximumLinesToDisplay) {
@@ -801,7 +795,27 @@ public class TextTitle extends Title implements Serializable, Cloneable, PublicC
         if (!Objects.equals(this.urlText, that.urlText)) {
             return false;
         }
+        if (!Objects.equals(this.content, that.content)) {
+            return false;
+        }
+        if (that.canEqual(this) == false) {
+            return false;
+        }
         return super.equals(obj);
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof TextTitle);
     }
 
     /**
@@ -811,13 +825,16 @@ public class TextTitle extends Title implements Serializable, Cloneable, PublicC
      */
     @Override
     public int hashCode() {
-        int result = super.hashCode();
-        result = 29 * result + (this.text != null ? this.text.hashCode() : 0);
-        result = 29 * result + (this.font != null ? this.font.hashCode() : 0);
-        result = 29 * result + (this.paint != null ? this.paint.hashCode() : 0);
-        result = 29 * result + (this.backgroundPaint != null
-                ? this.backgroundPaint.hashCode() : 0);
-        return result;
+        int hash = super.hashCode(); // equals calls superclass, hashCode must also
+        hash = 83 * hash + Objects.hashCode(this.text);
+        hash = 83 * hash + Objects.hashCode(this.font);
+        hash = 83 * hash + Objects.hashCode(this.textAlignment);
+        hash = 83 * hash + Objects.hashCode(this.toolTipText);
+        hash = 83 * hash + Objects.hashCode(this.urlText);
+        hash = 83 * hash + Objects.hashCode(this.content);
+        hash = 83 * hash + (this.expandToFitSpace ? 1 : 0);
+        hash = 83 * hash + this.maximumLinesToDisplay;
+        return hash;
     }
 
     /**

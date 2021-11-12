@@ -30,7 +30,7 @@
  * (C) Copyright 2005-2021, by David Gilbert.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand (define hashCode);
  *
  */
 
@@ -441,6 +441,14 @@ public class GridArrangement implements Arrangement, Serializable {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 29 * hash + this.rows;
+        hash = 29 * hash + this.columns;
+        return hash;
     }
 
 }

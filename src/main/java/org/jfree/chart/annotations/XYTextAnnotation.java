@@ -31,6 +31,7 @@
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Peter Kolb (patch 2809117);
+ *                   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -48,8 +49,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Objects;
 
-import org.jfree.chart.HashUtils;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.event.AnnotationChangeEvent;
 import org.jfree.chart.plot.Plot;
@@ -59,7 +60,6 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.TextAnchor;
-import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
@@ -528,45 +528,54 @@ public class XYTextAnnotation extends AbstractXYAnnotation
             return false;
         }
         XYTextAnnotation that = (XYTextAnnotation) obj;
-        if (!this.text.equals(that.text)) {
+        if (Double.doubleToLongBits(this.x) != Double.doubleToLongBits(that.x)) {
             return false;
         }
-        if (this.x != that.x) {
+        if (Double.doubleToLongBits(this.y) != Double.doubleToLongBits(that.y)) {
             return false;
         }
-        if (this.y != that.y) {
-            return false;
-        }
-        if (!this.font.equals(that.font)) {
-            return false;
-        }
-        if (!PaintUtils.equal(this.paint, that.paint)) {
-            return false;
-        }
-        if (!this.rotationAnchor.equals(that.rotationAnchor)) {
-            return false;
-        }
-        if (this.rotationAngle != that.rotationAngle) {
-            return false;
-        }
-        if (!this.textAnchor.equals(that.textAnchor)) {
+        if (Double.doubleToLongBits(this.rotationAngle) != 
+            Double.doubleToLongBits(that.rotationAngle)) {
             return false;
         }
         if (this.outlineVisible != that.outlineVisible) {
             return false;
         }
-        if (!PaintUtils.equal(this.backgroundPaint, that.backgroundPaint)) {
+        if (!Objects.equals(this.text, that.text)) {
             return false;
         }
-        if (!PaintUtils.equal(this.outlinePaint, that.outlinePaint)) {
+        if (!Objects.equals(this.font, that.font)) {
             return false;
         }
-        if (!(this.outlineStroke.equals(that.outlineStroke))) {
+        if (!Objects.equals(this.textAnchor, that.getTextAnchor())) {
             return false;
         }
+        if (!Objects.equals(this.rotationAnchor, that.getRotationAnchor())) {
+            return false;
+        }
+
+        // fix the "equals not symmetric" problem
+        if (that.canEqual(this) == false) {
+            return false;
+        }
+
         return super.equals(obj);
     }
 
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof XYTextAnnotation);
+    }
+    
     /**
      * Returns a hash code for the object.
      *
@@ -574,19 +583,19 @@ public class XYTextAnnotation extends AbstractXYAnnotation
      */
     @Override
     public int hashCode() {
-        int result = 193;
-        result = 37 * result + this.text.hashCode();
-        result = 37 * result + this.font.hashCode();
-        result = 37 * result + HashUtils.hashCodeForPaint(this.paint);
-        long temp = Double.doubleToLongBits(this.x);
-        result = 37 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(this.y);
-        result = 37 * result + (int) (temp ^ (temp >>> 32));
-        result = 37 * result + this.textAnchor.hashCode();
-        result = 37 * result + this.rotationAnchor.hashCode();
-        temp = Double.doubleToLongBits(this.rotationAngle);
-        result = 37 * result + (int) (temp ^ (temp >>> 32));
-        return result;
+        int hash = super.hashCode(); // equals calls superclass, hashCode must also
+        hash = 23 * hash + Objects.hashCode(this.text);
+        hash = 23 * hash + Objects.hashCode(this.font);
+        hash = 23 * hash + (int) (Double.doubleToLongBits(this.x) ^ 
+                                 (Double.doubleToLongBits(this.x) >>> 32));
+        hash = 23 * hash + (int) (Double.doubleToLongBits(this.y) ^ 
+                                 (Double.doubleToLongBits(this.y) >>> 32));
+        hash = 23 * hash + Objects.hashCode(this.textAnchor);
+        hash = 23 * hash + Objects.hashCode(this.rotationAnchor);
+        hash = 23 * hash + (int) (Double.doubleToLongBits(this.rotationAngle) ^ 
+                                 (Double.doubleToLongBits(this.rotationAngle) >>> 32));
+        hash = 23 * hash + (this.outlineVisible ? 1 : 0);
+        return hash;
     }
 
     /**

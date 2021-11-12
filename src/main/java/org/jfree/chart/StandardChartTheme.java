@@ -30,7 +30,7 @@
  * (C) Copyright 2008-2021, by David Gilbert.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -47,6 +47,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 import org.jfree.chart.annotations.XYAnnotation;
 import org.jfree.chart.annotations.XYTextAnnotation;
@@ -94,7 +95,6 @@ import org.jfree.chart.title.TextTitle;
 import org.jfree.chart.title.Title;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.util.DefaultShadowGenerator;
-import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
@@ -1578,106 +1578,61 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
             return false;
         }
         StandardChartTheme that = (StandardChartTheme) obj;
-        if (!this.name.equals(that.name)) {
+        if (!Objects.equals(this.name, that.name)) {
             return false;
         }
-        if (!this.extraLargeFont.equals(that.extraLargeFont)) {
+        if (!Objects.equals(this.extraLargeFont, that.extraLargeFont)) {
             return false;
         }
-        if (!this.largeFont.equals(that.largeFont)) {
+        if (!Objects.equals(this.largeFont, that.largeFont)) {
             return false;
         }
-        if (!this.regularFont.equals(that.regularFont)) {
+        if (!Objects.equals(this.regularFont, that.regularFont)) {
             return false;
         }
-        if (!this.smallFont.equals(that.smallFont)) {
+        if (!Objects.equals(this.smallFont, that.smallFont)) {
             return false;
         }
-        if (!PaintUtils.equal(this.titlePaint, that.titlePaint)) {
+        if (!Objects.equals(this.drawingSupplier, that.drawingSupplier)) {
             return false;
         }
-        if (!PaintUtils.equal(this.subtitlePaint, that.subtitlePaint)) {
+        if (!Objects.equals(this.labelLinkStyle, that.labelLinkStyle)) {
             return false;
         }
-        if (!PaintUtils.equal(this.chartBackgroundPaint,
-                that.chartBackgroundPaint)) {
-            return false;
-        }
-        if (!PaintUtils.equal(this.legendBackgroundPaint,
-                that.legendBackgroundPaint)) {
-            return false;
-        }
-        if (!PaintUtils.equal(this.legendItemPaint, that.legendItemPaint)) {
-            return false;
-        }
-        if (!this.drawingSupplier.equals(that.drawingSupplier)) {
-            return false;
-        }
-        if (!PaintUtils.equal(this.plotBackgroundPaint,
-                that.plotBackgroundPaint)) {
-            return false;
-        }
-        if (!PaintUtils.equal(this.plotOutlinePaint,
-                that.plotOutlinePaint)) {
-            return false;
-        }
-        if (!this.labelLinkStyle.equals(that.labelLinkStyle)) {
-            return false;
-        }
-        if (!PaintUtils.equal(this.labelLinkPaint, that.labelLinkPaint)) {
-            return false;
-        }
-        if (!PaintUtils.equal(this.domainGridlinePaint,
-                that.domainGridlinePaint)) {
-            return false;
-        }
-        if (!PaintUtils.equal(this.rangeGridlinePaint,
-                that.rangeGridlinePaint)) {
-            return false;
-        }
-        if (!PaintUtils.equal(this.crosshairPaint, that.crosshairPaint)) {
-            return false;
-        }
-        if (!this.axisOffset.equals(that.axisOffset)) {
-            return false;
-        }
-        if (!PaintUtils.equal(this.axisLabelPaint, that.axisLabelPaint)) {
-            return false;
-        }
-        if (!PaintUtils.equal(this.tickLabelPaint, that.tickLabelPaint)) {
-            return false;
-        }
-        if (!PaintUtils.equal(this.itemLabelPaint, that.itemLabelPaint)) {
+        if (!Objects.equals(this.axisOffset, that.axisOffset)) {
             return false;
         }
         if (this.shadowVisible != that.shadowVisible) {
             return false;
         }
-        if (!PaintUtils.equal(this.shadowPaint, that.shadowPaint)) {
+        if (!Objects.equals(this.barPainter, that.barPainter)) {
             return false;
         }
-        if (!this.barPainter.equals(that.barPainter)) {
+        if (!Objects.equals(this.xyBarPainter, that.xyBarPainter)) {
             return false;
         }
-        if (!this.xyBarPainter.equals(that.xyBarPainter)) {
-            return false;
-        }
-        if (!PaintUtils.equal(this.thermometerPaint,
-                that.thermometerPaint)) {
-            return false;
-        }
-        if (!PaintUtils.equal(this.errorIndicatorPaint,
-                that.errorIndicatorPaint)) {
-            return false;
-        }
-        if (!PaintUtils.equal(this.gridBandPaint, that.gridBandPaint)) {
-            return false;
-        }
-        if (!PaintUtils.equal(this.gridBandAlternatePaint,
-                that.gridBandAlternatePaint)) {
+        if (!Objects.equals(this.shadowGenerator, that.shadowGenerator)) {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 83 * hash + Objects.hashCode(this.name);
+        hash = 83 * hash + Objects.hashCode(this.extraLargeFont);
+        hash = 83 * hash + Objects.hashCode(this.largeFont);
+        hash = 83 * hash + Objects.hashCode(this.regularFont);
+        hash = 83 * hash + Objects.hashCode(this.smallFont);
+        hash = 83 * hash + Objects.hashCode(this.drawingSupplier);
+        hash = 83 * hash + Objects.hashCode(this.labelLinkStyle);
+        hash = 83 * hash + Objects.hashCode(this.axisOffset);
+        hash = 83 * hash + (this.shadowVisible ? 1 : 0);
+        hash = 83 * hash + Objects.hashCode(this.barPainter);
+        hash = 83 * hash + Objects.hashCode(this.xyBarPainter);
+        hash = 83 * hash + Objects.hashCode(this.shadowGenerator);
+        return hash;
     }
 
     /**

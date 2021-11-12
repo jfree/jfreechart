@@ -31,6 +31,7 @@
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Peter Kolb (patch 2809117);
+ *                   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -48,9 +49,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.Objects;
 
-import org.jfree.chart.HashUtils;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.event.AnnotationChangeEvent;
@@ -435,35 +434,50 @@ public class CategoryPointerAnnotation extends CategoryTextAnnotation
         if (!(obj instanceof CategoryPointerAnnotation)) {
             return false;
         }
-        if (!super.equals(obj)) {
-            return false;
-        }
         CategoryPointerAnnotation that = (CategoryPointerAnnotation) obj;
-        if (this.angle != that.angle) {
+        if (Double.doubleToLongBits(this.angle) != 
+            Double.doubleToLongBits(that.angle)) {
             return false;
         }
-        if (this.tipRadius != that.tipRadius) {
+        if (Double.doubleToLongBits(this.tipRadius) != 
+            Double.doubleToLongBits(that.tipRadius)) {
             return false;
         }
-        if (this.baseRadius != that.baseRadius) {
+        if (Double.doubleToLongBits(this.baseRadius) != 
+            Double.doubleToLongBits(that.baseRadius)) {
             return false;
         }
-        if (this.arrowLength != that.arrowLength) {
+        if (Double.doubleToLongBits(this.arrowLength) != 
+            Double.doubleToLongBits(that.arrowLength)) {
             return false;
         }
-        if (this.arrowWidth != that.arrowWidth) {
+        if (Double.doubleToLongBits(this.arrowWidth) != 
+            Double.doubleToLongBits(that.arrowWidth)) {
             return false;
         }
-        if (!this.arrowPaint.equals(that.arrowPaint)) {
+        if (Double.doubleToLongBits(this.labelOffset) != 
+            Double.doubleToLongBits(that.labelOffset)) {
             return false;
         }
-        if (!Objects.equals(this.arrowStroke, that.arrowStroke)) {
+        // fix the "equals not symmetric" problem
+        if (that.canEqual(this) == false) {
             return false;
         }
-        if (this.labelOffset != that.labelOffset) {
-            return false;
-        }
-        return true;
+        return super.equals(obj);
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof CategoryPointerAnnotation);
     }
 
     /**
@@ -473,7 +487,7 @@ public class CategoryPointerAnnotation extends CategoryTextAnnotation
      */
     @Override
     public int hashCode() {
-        int result = 193;
+        int result = super.hashCode(); // equals calls superclass, hashCode must also
         long temp = Double.doubleToLongBits(this.angle);
         result = 37 * result + (int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(this.tipRadius);
@@ -484,8 +498,6 @@ public class CategoryPointerAnnotation extends CategoryTextAnnotation
         result = 37 * result + (int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(this.arrowWidth);
         result = 37 * result + (int) (temp ^ (temp >>> 32));
-        result = 37 * result + HashUtils.hashCodeForPaint(this.arrowPaint);
-        result = 37 * result + this.arrowStroke.hashCode();
         temp = Double.doubleToLongBits(this.labelOffset);
         result = 37 * result + (int) (temp ^ (temp >>> 32));
         return result;

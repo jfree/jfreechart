@@ -32,6 +32,7 @@
  * Original Author:  David Gilbert;
  * Contributor(s):   Richard Atkinson;
  *                   Christian W. Zuckschwerdt;
+ *                   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -182,17 +183,45 @@ public class CategoryItemEntity extends ChartEntity
             return false;
         }
         CategoryItemEntity that = (CategoryItemEntity) obj;
-        if (!this.rowKey.equals(that.rowKey)) {
+        if (!Objects.equals(this.rowKey, that.rowKey)) {
             return false;
         }
-        if (!this.columnKey.equals(that.columnKey)) {
+        if (!Objects.equals(this.columnKey, that.columnKey)) {
             return false;
         }
         if (!Objects.equals(this.dataset, that.dataset)) {
             return false;
         }
-
+        
+        // fix the "equals not symmetric" problem
+        if (that.canEqual(this) == false) {
+            return false;
+        }
+        
         return super.equals(obj);
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof CategoryItemEntity);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = super.hashCode(); // equals calls superclass, hashCode must also
+        hash = 37 * hash + Objects.hashCode(this.dataset);
+        hash = 37 * hash + Objects.hashCode(this.rowKey);
+        hash = 37 * hash + Objects.hashCode(this.columnKey);
+        return hash;
     }
 
 }

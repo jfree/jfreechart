@@ -31,6 +31,7 @@
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Peter Kolb (patch 2809117);
+                     Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -48,16 +49,12 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Arrays;
-import java.util.Objects;
-
-import org.jfree.chart.HashUtils;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.ui.RectangleEdge;
-import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
@@ -135,7 +132,7 @@ public class XYPolygonAnnotation extends AbstractXYAnnotation
             throw new IllegalArgumentException("The 'polygon' array must "
                     + "contain an even number of items.");
         }
-        this.polygon = (double[]) polygon.clone();
+        this.polygon = polygon.clone();
         this.stroke = stroke;
         this.outlinePaint = outlinePaint;
         this.fillPaint = fillPaint;
@@ -149,7 +146,7 @@ public class XYPolygonAnnotation extends AbstractXYAnnotation
      * @return The coordinates of the polygon's vertices.
      */
     public double[] getPolygonCoordinates() {
-        return (double[]) this.polygon.clone();
+        return this.polygon.clone();
     }
 
     /**
@@ -261,10 +258,6 @@ public class XYPolygonAnnotation extends AbstractXYAnnotation
         if (obj == this) {
             return true;
         }
-        // now try to reject equality
-        if (!super.equals(obj)) {
-            return false;
-        }
         if (!(obj instanceof XYPolygonAnnotation)) {
             return false;
         }
@@ -272,19 +265,29 @@ public class XYPolygonAnnotation extends AbstractXYAnnotation
         if (!Arrays.equals(this.polygon, that.polygon)) {
             return false;
         }
-        if (!Objects.equals(this.stroke, that.stroke)) {
+
+        // fix the "equals not symmetric" problem
+        if (that.canEqual(this) == false) {
             return false;
         }
-        if (!PaintUtils.equal(this.outlinePaint, that.outlinePaint)) {
-            return false;
-        }
-        if (!PaintUtils.equal(this.fillPaint, that.fillPaint)) {
-            return false;
-        }
-        // seem to be the same
-        return true;
+
+        return super.equals(obj);
     }
 
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof XYPolygonAnnotation);
+    }
+    
     /**
      * Returns a hash code for this instance.
      *
@@ -292,16 +295,9 @@ public class XYPolygonAnnotation extends AbstractXYAnnotation
      */
     @Override
     public int hashCode() {
-        int result = 193;
-        result = 37 * result + HashUtils.hashCodeForDoubleArray(
-                this.polygon);
-        result = 37 * result + HashUtils.hashCodeForPaint(this.fillPaint);
-        result = 37 * result + HashUtils.hashCodeForPaint(
-                this.outlinePaint);
-        if (this.stroke != null) {
-            result = 37 * result + this.stroke.hashCode();
-        }
-        return result;
+        int hash = super.hashCode(); // equals calls superclass, hashCode must also
+        hash = 13 * hash + Arrays.hashCode(this.polygon);
+        return hash;
     }
 
     /**

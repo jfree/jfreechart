@@ -30,12 +30,14 @@
  * (C) Copyright 2007-2021, by David Gilbert.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
 package org.jfree.chart.annotations;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -57,44 +59,16 @@ import org.junit.jupiter.api.Test;
 public class XYTitleAnnotationTest {
 
     /**
-     * Confirm that the equals method can distinguish all the required fields.
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
      */
     @Test
-    public void testEquals() {
-        TextTitle t = new TextTitle("Title");
-        XYTitleAnnotation a1 = new XYTitleAnnotation(1.0, 2.0, t);
-        XYTitleAnnotation a2 = new XYTitleAnnotation(1.0, 2.0, t);
-        assertTrue(a1.equals(a2));
-        
-        a1 = new XYTitleAnnotation(1.1, 2.0, t);
-        assertFalse(a1.equals(a2));
-        a2 = new XYTitleAnnotation(1.1, 2.0, t);
-        assertTrue(a1.equals(a2));
-
-        a1 = new XYTitleAnnotation(1.1, 2.2, t);
-        assertFalse(a1.equals(a2));
-        a2 = new XYTitleAnnotation(1.1, 2.2, t);
-        assertTrue(a1.equals(a2));
-        
-        TextTitle t2 = new TextTitle("Title 2");
-        a1 = new XYTitleAnnotation(1.1, 2.2, t2);
-        assertFalse(a1.equals(a2));
-        a2 = new XYTitleAnnotation(1.1, 2.2, t2);
-        assertTrue(a1.equals(a2));
-    }
-
-    /**
-     * Two objects that are equal are required to return the same hashCode. 
-     */
-    @Test
-    public void testHashCode() {
-        TextTitle t = new TextTitle("Title");
-        XYTitleAnnotation a1 = new XYTitleAnnotation(1.0, 2.0, t);
-        XYTitleAnnotation a2 = new XYTitleAnnotation(1.0, 2.0, t);
-        assertTrue(a1.equals(a2));
-        int h1 = a1.hashCode();
-        int h2 = a2.hashCode();
-        assertEquals(h1, h2);
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(XYTitleAnnotation.class)
+            .withRedefinedSuperclass() // superclass also defines equals/hashCode
+            .suppress(Warning.STRICT_INHERITANCE)
+            .suppress(Warning.NONFINAL_FIELDS)
+            .verify();
     }
     
     /**

@@ -30,12 +30,14 @@
  * (C) Copyright 2005-2021, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
 package org.jfree.chart.block;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -52,44 +54,15 @@ import org.junit.jupiter.api.Test;
 public class ColumnArrangementTest {
 
     /**
-     * Confirm that the equals() method can distinguish all the required fields.
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
      */
     @Test
-    public void testEquals() {
-        ColumnArrangement c1 = new ColumnArrangement(HorizontalAlignment.LEFT,
-                VerticalAlignment.TOP, 1.0, 2.0);
-        ColumnArrangement c2 = new ColumnArrangement(HorizontalAlignment.LEFT,
-                VerticalAlignment.TOP, 1.0, 2.0);
-        assertTrue(c1.equals(c2));
-        assertTrue(c2.equals(c1));
-
-        c1 = new ColumnArrangement(HorizontalAlignment.RIGHT,
-                VerticalAlignment.TOP, 1.0, 2.0);
-        assertFalse(c1.equals(c2));
-        c2 = new ColumnArrangement(HorizontalAlignment.RIGHT,
-                VerticalAlignment.TOP, 1.0, 2.0);
-        assertTrue(c1.equals(c2));
-
-        c1 = new ColumnArrangement(HorizontalAlignment.RIGHT,
-                VerticalAlignment.BOTTOM, 1.0, 2.0);
-        assertFalse(c1.equals(c2));
-        c2 = new ColumnArrangement(HorizontalAlignment.RIGHT,
-                VerticalAlignment.BOTTOM, 1.0, 2.0);
-        assertTrue(c1.equals(c2));
-
-        c1 = new ColumnArrangement(HorizontalAlignment.RIGHT,
-                VerticalAlignment.BOTTOM, 1.1, 2.0);
-        assertFalse(c1.equals(c2));
-        c2 = new ColumnArrangement(HorizontalAlignment.RIGHT,
-                VerticalAlignment.BOTTOM, 1.1, 2.0);
-        assertTrue(c1.equals(c2));
-
-        c1 = new ColumnArrangement(HorizontalAlignment.RIGHT,
-                VerticalAlignment.BOTTOM, 1.1, 2.2);
-        assertFalse(c1.equals(c2));
-        c2 = new ColumnArrangement(HorizontalAlignment.RIGHT,
-                VerticalAlignment.BOTTOM, 1.1, 2.2);
-        assertTrue(c1.equals(c2));
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(ColumnArrangement.class)
+            .suppress(Warning.STRICT_INHERITANCE)
+            .suppress(Warning.NONFINAL_FIELDS)
+            .verify();
     }
 
     /**

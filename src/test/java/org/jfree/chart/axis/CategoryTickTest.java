@@ -30,12 +30,14 @@
  * (C) Copyright 2004-2021, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
 package org.jfree.chart.axis;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -43,7 +45,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.text.TextBlock;
 import org.jfree.chart.text.TextBlockAnchor;
-import org.jfree.chart.text.TextLine;
 import org.jfree.chart.ui.TextAnchor;
 
 import org.junit.jupiter.api.Test;
@@ -54,70 +55,16 @@ import org.junit.jupiter.api.Test;
 public class CategoryTickTest {
 
     /**
-     * Confirm that the equals method can distinguish all the required fields.
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
      */
     @Test
-    public void testEquals() {
-        Comparable c1 = "C1";
-        Comparable c2 = "C2";
-        TextBlock tb1 = new TextBlock();
-        tb1.addLine(new TextLine("Block 1"));
-        TextBlock tb2 = new TextBlock();
-        tb1.addLine(new TextLine("Block 2"));
-        TextBlockAnchor tba1 = TextBlockAnchor.CENTER;
-        TextBlockAnchor tba2 = TextBlockAnchor.BOTTOM_CENTER;
-        TextAnchor ta1 = TextAnchor.CENTER;
-        TextAnchor ta2 = TextAnchor.BASELINE_LEFT;
-
-        CategoryTick t1 = new CategoryTick(c1, tb1, tba1, ta1, 1.0f);
-        CategoryTick t2 = new CategoryTick(c1, tb1, tba1, ta1, 1.0f);
-        assertTrue(t1.equals(t2));
-
-        t1 = new CategoryTick(c2, tb1, tba1, ta1, 1.0f);
-        assertFalse(t1.equals(t2));
-        t2 = new CategoryTick(c2, tb1, tba1, ta1, 1.0f);
-        assertTrue(t1.equals(t2));
-
-        t1 = new CategoryTick(c2, tb2, tba1, ta1, 1.0f);
-        assertFalse(t1.equals(t2));
-        t2 = new CategoryTick(c2, tb2, tba1, ta1, 1.0f);
-        assertTrue(t1.equals(t2));
-
-        t1 = new CategoryTick(c2, tb2, tba2, ta1, 1.0f);
-        assertFalse(t1.equals(t2));
-        t2 = new CategoryTick(c2, tb2, tba2, ta1, 1.0f);
-        assertTrue(t1.equals(t2));
-
-        t1 = new CategoryTick(c2, tb2, tba2, ta2, 1.0f);
-        assertFalse(t1.equals(t2));
-        t2 = new CategoryTick(c2, tb2, tba2, ta2, 1.0f);
-        assertTrue(t1.equals(t2));
-
-        t1 = new CategoryTick(c2, tb2, tba2, ta2, 2.0f);
-        assertFalse(t1.equals(t2));
-        t2 = new CategoryTick(c2, tb2, tba2, ta2, 2.0f);
-        assertTrue(t1.equals(t2));
-
-    }
-
-    /**
-     * Two objects that are equal are required to return the same hashCode.
-     */
-    @Test
-    public void testHashCode() {
-        Comparable c1 = "C1";
-        TextBlock tb1 = new TextBlock();
-        tb1.addLine(new TextLine("Block 1"));
-        tb1.addLine(new TextLine("Block 2"));
-        TextBlockAnchor tba1 = TextBlockAnchor.CENTER;
-        TextAnchor ta1 = TextAnchor.CENTER;
-
-        CategoryTick t1 = new CategoryTick(c1, tb1, tba1, ta1, 1.0f);
-        CategoryTick t2 = new CategoryTick(c1, tb1, tba1, ta1, 1.0f);
-        assertTrue(t1.equals(t2));
-        int h1 = t1.hashCode();
-        int h2 = t2.hashCode();
-        assertEquals(h1, h2);
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(CategoryTick.class)
+                .suppress(Warning.STRICT_INHERITANCE)
+                .suppress(Warning.NONFINAL_FIELDS)
+                .withRedefinedSuperclass()
+                .verify();
     }
 
     /**

@@ -30,12 +30,14 @@
  * (C) Copyright 2003-2021, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
 package org.jfree.chart.axis;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -47,46 +49,15 @@ import org.junit.jupiter.api.Test;
 public class AxisSpaceTest {
 
     /**
-     * Check that the equals() method can distinguish all fields.
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
      */
     @Test
-    public void testEquals() {
-        AxisSpace a1 = new AxisSpace();
-        AxisSpace a2 = new AxisSpace();
-        assertEquals(a1, a2);
-
-        a1.setTop(1.11);
-        assertFalse(a1.equals(a2));
-        a2.setTop(1.11);
-        assertTrue(a1.equals(a2));
-
-        a1.setBottom(2.22);
-        assertFalse(a1.equals(a2));
-        a2.setBottom(2.22);
-        assertTrue(a1.equals(a2));
-
-        a1.setLeft(3.33);
-        assertFalse(a1.equals(a2));
-        a2.setLeft(3.33);
-        assertTrue(a1.equals(a2));
-
-        a1.setRight(4.44);
-        assertFalse(a1.equals(a2));
-        a2.setRight(4.44);
-        assertTrue(a1.equals(a2));
-    }
-
-    /**
-     * Two objects that are equal are required to return the same hashCode.
-     */
-    @Test
-    public void testHashCode() {
-        AxisSpace s1 = new AxisSpace();
-        AxisSpace s2 = new AxisSpace();
-        assertTrue(s1.equals(s2));
-        int h1 = s1.hashCode();
-        int h2 = s2.hashCode();
-        assertEquals(h1, h2);
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(AxisSpace.class)
+                .suppress(Warning.STRICT_INHERITANCE)
+                .suppress(Warning.NONFINAL_FIELDS)
+                .verify();
     }
 
     /**

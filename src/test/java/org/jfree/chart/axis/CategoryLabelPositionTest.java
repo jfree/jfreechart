@@ -30,20 +30,19 @@
  * (C) Copyright 2004-2021, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
 package org.jfree.chart.axis;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.jfree.chart.TestUtils;
-import org.jfree.chart.text.TextBlockAnchor;
-import org.jfree.chart.ui.RectangleAnchor;
-import org.jfree.chart.ui.TextAnchor;
 
 import org.junit.jupiter.api.Test;
 
@@ -51,91 +50,19 @@ import org.junit.jupiter.api.Test;
  * Tests for the {@link CategoryLabelPosition} class.
  */
 public class CategoryLabelPositionTest {
+
+    /**
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
+     */
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(CategoryLabelPosition.class)
+                .suppress(Warning.STRICT_INHERITANCE)
+                .suppress(Warning.NONFINAL_FIELDS)
+                .verify();
+    }
     
-    /**
-     * Check that the equals() method can distinguish all fields.
-     */
-    @Test
-    public void testEquals() {
-        CategoryLabelPosition p1 = new CategoryLabelPosition(
-                RectangleAnchor.BOTTOM_LEFT, TextBlockAnchor.CENTER_RIGHT,
-                TextAnchor.BASELINE_LEFT, Math.PI / 4.0,
-                CategoryLabelWidthType.RANGE, 0.44f);
-        CategoryLabelPosition p2 = new CategoryLabelPosition(
-                RectangleAnchor.BOTTOM_LEFT, TextBlockAnchor.CENTER_RIGHT,
-                TextAnchor.BASELINE_LEFT, Math.PI / 4.0,
-                CategoryLabelWidthType.RANGE, 0.44f);
-        assertTrue(p1.equals(p2));
-        assertTrue(p2.equals(p1));
-
-        p1 = new CategoryLabelPosition(RectangleAnchor.TOP,
-                TextBlockAnchor.CENTER_RIGHT, TextAnchor.BASELINE_LEFT,
-                Math.PI / 4.0, CategoryLabelWidthType.RANGE, 0.44f);
-        assertFalse(p1.equals(p2));
-        p2 = new CategoryLabelPosition(RectangleAnchor.TOP,
-                TextBlockAnchor.CENTER_RIGHT, TextAnchor.BASELINE_LEFT,
-                Math.PI / 4.0, CategoryLabelWidthType.RANGE, 0.44f);
-        assertTrue(p1.equals(p2));
-
-        p1 = new CategoryLabelPosition(RectangleAnchor.TOP,
-                TextBlockAnchor.CENTER, TextAnchor.BASELINE_LEFT, Math.PI / 4.0,
-                CategoryLabelWidthType.RANGE, 0.44f);
-        assertFalse(p1.equals(p2));
-        p2 = new CategoryLabelPosition(RectangleAnchor.TOP,
-                TextBlockAnchor.CENTER, TextAnchor.BASELINE_LEFT, Math.PI / 4.0,
-                CategoryLabelWidthType.RANGE, 0.44f);
-        assertTrue(p1.equals(p2));
-
-        p1 = new CategoryLabelPosition(RectangleAnchor.TOP,
-                TextBlockAnchor.CENTER, TextAnchor.CENTER, Math.PI / 4.0,
-                CategoryLabelWidthType.RANGE, 0.44f);
-        assertFalse(p1.equals(p2));
-        p2 = new CategoryLabelPosition(RectangleAnchor.TOP,
-                TextBlockAnchor.CENTER, TextAnchor.CENTER, Math.PI / 4.0,
-                CategoryLabelWidthType.RANGE, 0.44f);
-        assertTrue(p1.equals(p2));
-
-        p1 = new CategoryLabelPosition(RectangleAnchor.TOP,
-                TextBlockAnchor.CENTER, TextAnchor.CENTER, Math.PI / 6.0,
-                CategoryLabelWidthType.RANGE, 0.44f);
-        assertFalse(p1.equals(p2));
-        p2 = new CategoryLabelPosition(RectangleAnchor.TOP,
-                TextBlockAnchor.CENTER, TextAnchor.CENTER, Math.PI / 6.0,
-                CategoryLabelWidthType.RANGE, 0.44f);
-        assertTrue(p1.equals(p2));
-
-        p1 = new CategoryLabelPosition(RectangleAnchor.TOP,
-                TextBlockAnchor.CENTER, TextAnchor.CENTER, Math.PI / 6.0,
-                CategoryLabelWidthType.CATEGORY, 0.44f);
-        assertFalse(p1.equals(p2));
-        p2 = new CategoryLabelPosition(RectangleAnchor.TOP,
-                TextBlockAnchor.CENTER, TextAnchor.CENTER, Math.PI / 6.0,
-                CategoryLabelWidthType.CATEGORY, 0.44f);
-        assertTrue(p1.equals(p2));
-
-        p1 = new CategoryLabelPosition(RectangleAnchor.TOP,
-                TextBlockAnchor.CENTER, TextAnchor.CENTER,  Math.PI / 6.0,
-                CategoryLabelWidthType.CATEGORY, 0.55f);
-        assertFalse(p1.equals(p2));
-        p2 = new CategoryLabelPosition(RectangleAnchor.TOP,
-                TextBlockAnchor.CENTER, TextAnchor.CENTER, Math.PI / 6.0,
-                CategoryLabelWidthType.CATEGORY, 0.55f);
-        assertTrue(p1.equals(p2));
-    }
-
-    /**
-     * Two objects that are equal are required to return the same hashCode.
-     */
-    @Test
-    public void testHashCode() {
-        CategoryLabelPosition a1 = new CategoryLabelPosition();
-        CategoryLabelPosition a2 = new CategoryLabelPosition();
-        assertTrue(a1.equals(a2));
-        int h1 = a1.hashCode();
-        int h2 = a2.hashCode();
-        assertEquals(h1, h2);
-    }
-
     /**
      * Serialize an instance, restore it, and check for equality.
      */

@@ -38,6 +38,7 @@
  *                   Michal Krause;
  *                   Richard West, Advanced Micro Devices, Inc.;
  *                   Peter Kolb - patches 2603321, 2809117;
+ *                   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  * 
  */
 
@@ -1241,6 +1242,10 @@ public abstract class Plot implements AxisChangeListener,
             return false;
         }
         Plot that = (Plot) obj;
+        // fix the "equals not symmetric" problem
+        if (that.canEqual(this) == false) {
+            return false;
+        }
         if (!Objects.equals(this.noDataMessage, that.noDataMessage)) {
             return false;
         }
@@ -1292,6 +1297,40 @@ public abstract class Plot implements AxisChangeListener,
         return true;
     }
 
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    public boolean canEqual(Object other) {
+        // Solves Problem: equals not symmetric
+        return (other instanceof Plot);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 41 * hash + Objects.hashCode(this.noDataMessage);
+        hash = 41 * hash + Objects.hashCode(this.noDataMessageFont);
+        hash = 41 * hash + Objects.hashCode(this.noDataMessagePaint);
+        hash = 41 * hash + Objects.hashCode(this.insets);
+        hash = 41 * hash + (this.outlineVisible ? 1 : 0);
+        hash = 41 * hash + Objects.hashCode(this.outlineStroke);
+        hash = 41 * hash + Objects.hashCode(this.outlinePaint);
+        hash = 41 * hash + Objects.hashCode(this.backgroundPaint);
+        hash = 41 * hash + Objects.hashCode(this.backgroundImage);
+        hash = 41 * hash + this.backgroundImageAlignment;
+        hash = 41 * hash + Float.floatToIntBits(this.backgroundImageAlpha);
+        hash = 41 * hash + Float.floatToIntBits(this.foregroundAlpha);
+        hash = 41 * hash + Float.floatToIntBits(this.backgroundAlpha);
+        hash = 41 * hash + Objects.hashCode(this.drawingSupplier);
+        hash = 41 * hash + (this.notify ? 1 : 0);
+        return hash;
+    }
+    
     /**
      * Creates a clone of the plot.
      *
