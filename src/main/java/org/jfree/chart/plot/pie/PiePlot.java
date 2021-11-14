@@ -135,6 +135,9 @@ import org.jfree.data.general.PieDataset;
  */
 public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable, Serializable {
 
+    /** Error message for negative values in the dataset. */
+    private static final String negativeValueExceptionMessage = "Only positive values are allowed in the dataset.";
+
     /** For serialization. */
     private static final long serialVersionUID = -795612466005590431L;
 
@@ -2396,6 +2399,9 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
             if (n == null) {
                 include = !getIgnoreNullValues();
             }
+            else if(n != null && n.doubleValue() < 0.0){
+                throw new IllegalArgumentException(negativeValueExceptionMessage);
+            }
             else {
                 v = n.doubleValue();
                 include = getIgnoreZeroValues() ? v > 0.0 : v >= 0.0;
@@ -2488,6 +2494,9 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
             Number n = this.dataset.getValue(key);
             if (n == null) {
                 include = !this.ignoreNullValues;
+            }
+            else if(n != null && n.doubleValue() < 0.0){
+                throw new IllegalArgumentException(negativeValueExceptionMessage);
             }
             else {
                 v = n.doubleValue();
@@ -2708,6 +2717,9 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
                     result.add(item);
                 }
                 section++;
+            }
+            else if(n != null && n.doubleValue() < 0.0){
+                throw new IllegalArgumentException(negativeValueExceptionMessage);
             }
             else {
                 section++;
