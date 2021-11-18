@@ -274,4 +274,18 @@ public class LogAxisTest {
         Rectangle2D area = new Rectangle2D.Double(0.0, 0.0, 200, 100);
         axis.refreshTicks(g2, state, area, RectangleEdge.TOP);
     }
+
+    /**
+     * Test for fixing issue #215
+     i.e., Setting the lower limit of a LogAxis to zero creates a blank chart
+     */
+    @Test
+    public void testSetLowerBoundZero() {
+        LogAxis axis = new LogAxis("X");
+        axis.setRange(0.0, 10.0);
+        axis.setLowerBound(0.0);
+        assertEquals(1e-100, axis.getLowerBound(), EPSILON);
+        assertEquals(10.0, axis.getUpperBound(), EPSILON);
+        assertEquals(1.0E-100, axis.getSmallestValue(), EPSILON);
+    }
 }

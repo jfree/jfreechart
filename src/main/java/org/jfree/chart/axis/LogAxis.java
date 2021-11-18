@@ -302,8 +302,13 @@ public class LogAxis extends ValueAxis {
      * @see #calculateValue(double)
      * @see #getBase()
      */
-    public double calculateLog(double value) {
-        return Math.log(value) / this.baseLog;
+    public double calculateLog(double value)
+    {
+        double returnVal = smallestValue;
+        if (value > 0.0) {
+            returnVal = Math.log(value) / this.baseLog;
+        }
+        return returnVal;
     }
 
     /**
