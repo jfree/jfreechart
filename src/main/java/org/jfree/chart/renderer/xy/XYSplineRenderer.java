@@ -128,23 +128,30 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
     private FillType fillType;
 
     private GradientPaintTransformer gradientPaintTransformer;
-    
+
+
     /**
-     * Creates a new instance with the precision attribute defaulting to 5 
+     *  A tolerance for absolute difference of y_val between neighboring points
+     *  if ABS(point1.y - point2.y) <= diffYTol, no spline interpolation
+     */
+    private double diffYTol;
+
+    /**
+     * Creates a new instance with the precision attribute defaulting to 5, diffYtol defaulting to 1e-6,
      * and no fill of the area 'under' the spline.
      */
     public XYSplineRenderer() {
-        this(5, FillType.NONE);
+        this(5, 1e-6, FillType.NONE);
     }
 
     /**
-     * Creates a new renderer with the specified precision 
+     * Creates a new renderer with the specified precision, diffYtol defaulting to 1e-6,
      * and no fill of the area 'under' (between '0' and) the spline.
      *
      * @param precision  the number of points between data items.
      */
     public XYSplineRenderer(int precision) {
-        this(precision, FillType.NONE);
+        this(precision, 1e-6, FillType.NONE);
     }
 
     /**
@@ -157,13 +164,17 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
      * 
      * @since 1.0.17
      */
-    public XYSplineRenderer(int precision, FillType fillType) {
+    public XYSplineRenderer(int precision, double diffYTol, FillType fillType) {
         super();
         if (precision <= 0) {
             throw new IllegalArgumentException("Requires precision > 0.");
         }
+        if (diffYTol< 0) {
+            throw new IllegalArgumentException("Requires diffYTol >= 0.0");
+        }
         Args.nullNotPermitted(fillType, "fillType");
         this.precision = precision;
+        this.diffYTol = diffYTol;
         this.fillType = fillType;
         this.gradientPaintTransformer = new StandardGradientPaintTransformer();
     }
@@ -196,6 +207,33 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
         fireChangeEvent();
     }
 
+    /**
+     *  Returns a tolerance for absolute difference of y_val between neighboring points
+     *  if ABS(point1.y - point2.y) <= diffYTol, no spline interpolation
+     *
+     * @return y tolerance.
+     *
+     * @see #setDiffYTol(double)
+     */
+    public double getDiffYTol() {
+        return this.diffYTol;
+    }
+
+    /**
+     * Set a tolerance for absolute difference of y_val between neighboring points and sends a {@link RendererChangeEvent}
+     * to all registered listeners.
+     *
+     * @param tol a tolerance for absolute difference of y_val between neighboring points
+     *
+     * @see #getDiffYTol()
+     */
+    public void setDiffYTol(double tol) {
+        if (tol < 0.0) {
+            throw new IllegalArgumentException("Requires y tolerance >= 0.");
+        }
+        this.diffYTol = tol;
+        fireChangeEvent();
+    }
     /**
      * Returns the type of fill that the renderer draws beneath the curve.
      *
@@ -405,8 +443,10 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
                     // note that a[0]=a[np-1]=0
                     oldt = x[0];
                     oldy = d[0];
-                    for (int i = 1; i <= np - 1; i++) {
-                        // loop over intervals between nodes
+                    for (int i=1; i<=np-1; i++){
+                        //  loop over intervals between nodes
+                    // If two neighboring points are close, no spline interpolation
+                    if (Math.abs(d[i-1]-d[i])>diffYTol){
                         for (int j = 1; j <= this.precision; j++) {
                             t1 = (h[i] * j) / this.precision;
                             t2 = h[i] - t1;
@@ -417,6 +457,14 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
                             s.seriesPath.lineTo(t, y);
                             if (this.fillType != FillType.NONE) {
                                 s.fillArea.lineTo(t, y);
+                            }
+                        }
+                    }
+                    else{
+                        s.seriesPath.lineTo(x[i], d[i]);
+                        if (this.fillType != FillType.NONE) {
+                            s.fillArea.lineTo(x[i], d[i]);
+                            s.fillArea.closePath();
                             }
                         }
                     }
@@ -496,6 +544,10 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
         if (this.precision != that.precision) {
             return false;
         }
+        if (this.diffYTol != that.diffYTol) {
+            return false;
+        }
+
         if (this.fillType != that.fillType) {
             return false;
         }

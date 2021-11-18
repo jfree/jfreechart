@@ -68,7 +68,12 @@ public class XYSplineRendererTest {
         assertFalse(r1.equals(r2));
         r2.setPrecision(9);
         assertTrue(r1.equals(r2));
-        
+
+        r1.setDiffYTol(1e-3);
+        assertFalse(r1.equals(r2));
+        r2.setDiffYTol(1e-3);
+        assertTrue(r1.equals(r2));
+
         r1.setFillType(XYSplineRenderer.FillType.TO_ZERO);
         assertFalse(r1.equals(r2));
         r2.setFillType(XYSplineRenderer.FillType.TO_ZERO);
