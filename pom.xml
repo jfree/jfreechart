@@ -56,6 +56,11 @@
         <project.source.level>11</project.source.level>
         <project.target.level>11</project.target.level>
     </properties>
+         
+         <properties>
+  <sonar.organization>ratatuli3</sonar.organization>
+  <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+</properties>
 
     <dependencies>
         <dependency>
