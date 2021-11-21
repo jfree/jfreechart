@@ -122,7 +122,8 @@ public class TimeSeriesChart extends ApplicationFrame {
         valueAxis.setAutoRangeIncludesZero(true);  // override default
 
         XYPlot plot = new XYPlot(dataset, timeAxis, valueAxis, null);
-
+        NumberAxis range = (NumberAxis) plot.getRangeAxis();
+        range.setRange(150.0, 500.0);
 
         XYToolTipGenerator toolTipGenerator = null;
         toolTipGenerator = StandardXYToolTipGenerator.getTimeSeriesInstance();
