@@ -532,7 +532,7 @@ public class LogAxis extends ValueAxis {
     @Override
     public List refreshTicks(Graphics2D g2, AxisState state,
             Rectangle2D dataArea, RectangleEdge edge) {
-        List result = new java.util.ArrayList();
+        List result = new ArrayList();
         if (RectangleEdge.isTopOrBottom(edge)) {
             result = refreshTicksHorizontal(g2, dataArea, edge);
         }
@@ -576,7 +576,7 @@ public class LogAxis extends ValueAxis {
         double start = index * unit;
         double end = calculateLog(getUpperBound());
         double current = start;
-        boolean hasTicks = (this.tickUnit.getSize() > 0.0)
+        boolean hasTicks = this.tickUnit.getSize() > 0.0
                            && !Double.isInfinite(start);
         while (hasTicks && current <= end) {
             double v = calculateValueNoINF(current);
@@ -634,7 +634,7 @@ public class LogAxis extends ValueAxis {
         double start = index * unit;
         double end = calculateLog(getUpperBound());
         double current = start;
-        boolean hasTicks = (this.tickUnit.getSize() > 0.0)
+        boolean hasTicks = this.tickUnit.getSize() > 0.0
                            && !Double.isInfinite(start);
         while (hasTicks && current <= end) {
             double v = calculateValueNoINF(current);
