@@ -67,12 +67,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.ResourceBundle;
-import java.util.TreeMap;
+import java.util.*;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.api.PublicCloneable;
@@ -2262,8 +2257,8 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
                 }
             }
             if (this.simpleLabels) {
-                drawSimpleLabels(g2, keys, totalValue, plotArea, linkArea,
-                        state);
+                drawSimpleLabels(g2, keys, totalValue, plotArea, linkArea, state);
+                drawLabels(g2, keys, totalValue, plotArea, linkArea, state);
             }
             else {
                 drawLabels(g2, keys, totalValue, plotArea, linkArea, state);
@@ -2273,6 +2268,15 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
         else {
             drawNoDataMessage(g2, plotArea);
         }
+    }
+
+    private double getTotal(List<K> kList){
+        double total = 0.0;
+        for (K key : kList) {
+            Number n = this.dataset.getValue(key);
+            total += n.doubleValue();
+        }
+        return total;
     }
 
     /**
@@ -2419,7 +2423,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
                 }
                 String label = myLabelGenerator.generateSectionLabel(
                         this.dataset, key);
-                if (label == null) {
+                if (label == null||n.doubleValue()/getTotal(keys)< 0.05) {
                     continue;
                 }
                 g2.setFont(this.labelFont);
@@ -2517,12 +2521,11 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
         double gap = plotArea.getWidth() * this.labelGap;
         double ww = linkArea.getX() - gap - marginX;
         float labelWidth = (float) this.labelPadding.trimWidth(ww);
-
         // draw the labels...
         if (this.labelGenerator != null) {
-            drawLeftLabels(leftKeys, g2, plotArea, linkArea, labelWidth,
+            drawLeftLabels(leftKeys, g2, plotArea, totalValue, labelWidth,
                     state);
-            drawRightLabels(rightKeys, g2, plotArea, linkArea, labelWidth,
+            drawRightLabels(rightKeys, g2, plotArea, totalValue, labelWidth,
                     state);
         }
         g2.setComposite(originalComposite);
@@ -2537,12 +2540,12 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      *         plot.
      * @param g2  the graphics device.
      * @param plotArea  the plot area.
-     * @param linkArea  the link area.
+     * @param totalValue  the value total.
      * @param maxLabelWidth  the maximum label width.
      * @param state  the state.
      */
     protected void drawLeftLabels(KeyedValues<K> leftKeys, Graphics2D g2,
-                                  Rectangle2D plotArea, Rectangle2D linkArea,
+                                  Rectangle2D plotArea, double totalValue,
                                   float maxLabelWidth, PiePlotState state) {
 
         this.labelDistributor.clear();
@@ -2551,6 +2554,12 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
         for (int i = 0; i < leftKeys.getItemCount(); i++) {
             String label = this.labelGenerator.generateSectionLabel(
                     this.dataset, leftKeys.getKey(i));
+            if(this.simpleLabels){
+                double n = getDataset().getValue(leftKeys.getKey(i)).doubleValue();
+                if(n/totalValue>=0.05){
+                    label = null;
+                }
+            }
             if (label != null) {
                 TextBlock block = TextUtils.createTextBlock(label,
                         this.labelFont, this.labelPaint, maxLabelWidth,
@@ -2571,12 +2580,12 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
                 double baseY = state.getPieCenterY() - Math.sin(theta)
                                * verticalLinkRadius;
                 double hh = labelBox.getHeight(g2);
-
                 this.labelDistributor.addPieLabelRecord(new PieLabelRecord(
                         leftKeys.getKey(i), theta, baseY, labelBox, hh,
                         lGap / 2.0 + lGap / 2.0 * -Math.cos(theta), 1.0
                         - getLabelLinkDepth()
                         + getExplodePercent(leftKeys.getKey(i))));
+
             }
         }
         double hh = plotArea.getHeight();
@@ -2595,12 +2604,12 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
      * @param keys  the keys.
      * @param g2  the graphics device.
      * @param plotArea  the plot area.
-     * @param linkArea  the link area.
+     * @param totalValue  the value total.
      * @param maxLabelWidth  the maximum label width.
      * @param state  the state.
      */
     protected void drawRightLabels(KeyedValues<K> keys, Graphics2D g2,
-                                   Rectangle2D plotArea, Rectangle2D linkArea,
+                                   Rectangle2D plotArea, double totalValue,
                                    float maxLabelWidth, PiePlotState state) {
 
         // draw the right labels...
@@ -2611,7 +2620,12 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
         for (int i = 0; i < keys.getItemCount(); i++) {
             String label = this.labelGenerator.generateSectionLabel(
                     this.dataset, keys.getKey(i));
-
+            if(this.simpleLabels){
+                double n = getDataset().getValue(keys.getKey(i)).doubleValue();
+                if(n/totalValue>=0.05){
+                    label = null;
+                }
+            }
             if (label != null) {
                 TextBlock block = TextUtils.createTextBlock(label,
                         this.labelFont, this.labelPaint, maxLabelWidth,

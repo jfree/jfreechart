@@ -33,7 +33,7 @@
  * Contributor(s):   -;
  *
  */
-package org.jfree.chart.date;
+package org.jfree.issues.issues165;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -84,16 +84,8 @@ public class SpreadsheetDate extends SerialDate {
      * @param year  the year (in the range 1900 to 9999).
      */
     public SpreadsheetDate(int day, int month, int year) {
-
-        if ((year >= 1900) && (year <= 9999)) {
-            this.year = year;
-        }
-        else {
-            throw new IllegalArgumentException(
-                " in range 1900 to 9999.");
-        }
-
-        if ((month >= MonthConstants.JANUARY) 
+        this.year = year;
+        if ((month >= MonthConstants.JANUARY)
                 && (month <= MonthConstants.DECEMBER)) {
             this.month = month;
         }
@@ -231,7 +223,7 @@ public class SpreadsheetDate extends SerialDate {
     /**
      * Returns a code representing the day of the week.
      * <P>
-     * The codes are defined in the {@link SerialDate} class as: 
+     * The codes are defined in the {@link SerialDate} class as:
      * {@code SUNDAY}, {@code MONDAY}, {@code TUESDAY}, 
      * {@code WEDNESDAY}, {@code THURSDAY}, {@code FRIDAY}, and 
      * {@code SATURDAY}.
@@ -300,7 +292,7 @@ public class SpreadsheetDate extends SerialDate {
      */
     @Override
     public int compareTo(Object other) {
-        return compare((SerialDate) other);    
+        return compare((SerialDate) other);
     }
     
     /**
@@ -374,7 +366,7 @@ public class SpreadsheetDate extends SerialDate {
     }
 
     /**
-     * Returns {@code true} if this {@link SerialDate} is within the 
+     * Returns {@code true} if this {@link SerialDate} is within the
      * specified range (INCLUSIVE).  The date order of d1 and d2 is not 
      * important.
      *
