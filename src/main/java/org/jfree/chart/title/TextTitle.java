@@ -49,6 +49,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Objects;
+import org.jfree.chart.HashUtils;
 
 import org.jfree.chart.block.BlockResult;
 import org.jfree.chart.block.EntityBlockParams;
@@ -68,6 +69,7 @@ import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.Size2D;
 import org.jfree.chart.ui.VerticalAlignment;
+import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
@@ -780,7 +782,13 @@ public class TextTitle extends Title implements Serializable, Cloneable, PublicC
         if (!Objects.equals(this.font, that.font)) {
             return false;
         }
+        if (!PaintUtils.equal(this.paint, that.paint)) {
+            return false;
+        }
         if (!Objects.equals(this.textAlignment, that.textAlignment)) {
+            return false;
+        }
+        if (!PaintUtils.equal(this.backgroundPaint, that.backgroundPaint)) {
             return false;
         }
         if (this.maximumLinesToDisplay != that.maximumLinesToDisplay) {
@@ -829,6 +837,8 @@ public class TextTitle extends Title implements Serializable, Cloneable, PublicC
         hash = 83 * hash + Objects.hashCode(this.text);
         hash = 83 * hash + Objects.hashCode(this.font);
         hash = 83 * hash + Objects.hashCode(this.textAlignment);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.paint);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.backgroundPaint);
         hash = 83 * hash + Objects.hashCode(this.toolTipText);
         hash = 83 * hash + Objects.hashCode(this.urlText);
         hash = 83 * hash + Objects.hashCode(this.content);

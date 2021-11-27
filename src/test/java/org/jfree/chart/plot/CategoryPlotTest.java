@@ -55,6 +55,9 @@ import java.awt.image.BufferedImage;
 import java.util.Arrays;
 import java.util.EventListener;
 import java.util.List;
+import java.util.ResourceBundle;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
@@ -68,6 +71,9 @@ import org.jfree.chart.axis.AxisSpace;
 import org.jfree.chart.axis.CategoryAnchor;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.axis.NumberTickUnitSource;
+import org.jfree.chart.axis.TickUnitSource;
+import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.event.MarkerChangeListener;
 import org.jfree.chart.renderer.category.AreaRenderer;
 import org.jfree.chart.renderer.category.BarRenderer;
@@ -86,6 +92,36 @@ import org.jfree.data.category.DefaultCategoryDataset;
  * Tests for the {@link CategoryPlot} class.
  */
 public class CategoryPlotTest {
+
+    /**
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
+     */
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(CategoryPlot.class)
+            .withRedefinedSuperclass() // superclass also defines equals/hashCode
+            .withRedefinedSubclass(CombinedRangeCategoryPlot.class)
+            .withRedefinedSubclass(CombinedDomainCategoryPlot.class)
+           // .suppress(Warning.STRICT_INHERITANCE)
+            .suppress(Warning.NONFINAL_FIELDS)
+            .suppress(Warning.TRANSIENT_FIELDS)
+            .withPrefabValues(CategoryAxis.class, 
+                              new CategoryAxis("red"), new CategoryAxis("black"))
+            .withPrefabValues(ValueAxis.class, new NumberAxis("red"), 
+                                               new NumberAxis("black"))
+            .withPrefabValues(Plot.class, 
+                              TestUtils.createPlot(true), 
+                              TestUtils.createPlot(false))
+            .withPrefabValues(JFreeChart.class, 
+                              TestUtils.createJFC(true), 
+                              TestUtils.createJFC(false))
+            .withPrefabValues(ResourceBundle.class, 
+                              TestUtils.createRB(true),
+                              TestUtils.createRB(false))
+            .withIgnoredFields("chart", "parent")
+            .verify();
+    }
 
     /**
      * Some checks for the constructor.

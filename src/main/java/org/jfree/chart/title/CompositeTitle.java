@@ -45,12 +45,14 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Objects;
+import org.jfree.chart.HashUtils;
 
 import org.jfree.chart.block.BlockContainer;
 import org.jfree.chart.block.BorderArrangement;
 import org.jfree.chart.block.RectangleConstraint;
 import org.jfree.chart.event.TitleChangeEvent;
 import org.jfree.chart.ui.Size2D;
+import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
 
@@ -198,6 +200,9 @@ public class CompositeTitle extends Title implements Cloneable, Serializable {
         if (!Objects.equals(this.container, that.container)) {
             return false;
         }
+        if (!PaintUtils.equal(this.backgroundPaint, that.backgroundPaint)) {
+            return false;
+        }
         if (that.canEqual(this) == false) {
             return false;
         }
@@ -222,6 +227,7 @@ public class CompositeTitle extends Title implements Cloneable, Serializable {
     public int hashCode() {
         int hash = super.hashCode(); // equals calls superclass, hashCode must also
         hash = 53 * hash + Objects.hashCode(this.container);
+        hash = 53 * hash + HashUtils.hashCodeForPaint(this.backgroundPaint);
         return hash;
     }
 

@@ -48,6 +48,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Objects;
+import org.jfree.chart.HashUtils;
 
 import org.jfree.chart.entity.ChartEntity;
 import org.jfree.chart.entity.StandardEntityCollection;
@@ -56,6 +57,7 @@ import org.jfree.chart.text.TextBlockAnchor;
 import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.ui.Size2D;
+import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
@@ -369,6 +371,9 @@ public class LabelBlock extends AbstractBlock
         if (!Objects.equals(this.font, that.font)) {
             return false;
         }
+        if (!PaintUtils.equal(this.paint, that.paint)) {
+            return false;
+        }
         if (!Objects.equals(this.toolTipText, that.toolTipText)) {
             return false;
         }
@@ -409,6 +414,7 @@ public class LabelBlock extends AbstractBlock
         hash = 71 * hash + Objects.hashCode(this.font);
         hash = 71 * hash + Objects.hashCode(this.toolTipText);
         hash = 71 * hash + Objects.hashCode(this.urlText);
+        hash = 71 * hash + HashUtils.hashCodeForPaint(this.paint);
         hash = 71 * hash + Objects.hashCode(this.contentAlignmentPoint);
         hash = 71 * hash + Objects.hashCode(this.textAnchor);
         return hash;

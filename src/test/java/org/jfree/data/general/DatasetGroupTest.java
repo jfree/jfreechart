@@ -52,6 +52,7 @@ public class DatasetGroupTest {
         EqualsVerifier.forClass(DatasetGroup.class)
                 .suppress(Warning.STRICT_INHERITANCE)
                 .suppress(Warning.NONFINAL_FIELDS)
+                .suppress(Warning.TRANSIENT_FIELDS)
                 .verify();
     }
 

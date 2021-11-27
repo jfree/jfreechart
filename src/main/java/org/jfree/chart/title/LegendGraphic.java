@@ -56,6 +56,7 @@ import org.jfree.chart.ui.GradientPaintTransformer;
 import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.ui.Size2D;
 import org.jfree.chart.ui.StandardGradientPaintTransformer;
+import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
@@ -623,6 +624,12 @@ public class LegendGraphic extends AbstractBlock
         if (this.shapeVisible != that.shapeVisible) {
             return false;
         }
+        if (!ShapeUtils.equal(this.shape, that.shape)) {
+            return false;
+        }
+        if (!PaintUtils.equal(this.fillPaint, that.fillPaint)) {
+            return false;
+        }
         if (this.shapeFilled != that.shapeFilled) {
             return false;
         }
@@ -632,6 +639,12 @@ public class LegendGraphic extends AbstractBlock
         if (this.shapeOutlineVisible != that.shapeOutlineVisible) {
             return false;
         }
+        if (!PaintUtils.equal(this.outlinePaint, that.outlinePaint)) {
+            return false;
+        }
+        if (!Objects.equals(this.outlineStroke, that.outlineStroke)) {
+            return false;
+        }
         if (this.shapeAnchor != that.shapeAnchor) {
             return false;
         }
@@ -639,6 +652,15 @@ public class LegendGraphic extends AbstractBlock
             return false;
         }
         if (this.lineVisible != that.lineVisible) {
+            return false;
+        }
+        if (!ShapeUtils.equal(this.line, that.line)) {
+            return false;
+        }
+        if (!PaintUtils.equal(this.linePaint, that.linePaint)) {
+            return false;
+        }
+        if (!Objects.equals(this.lineStroke, that.lineStroke)) {
             return false;
         }
         if (that.canEqual(this) == false) {
@@ -666,16 +688,23 @@ public class LegendGraphic extends AbstractBlock
      *
      * @return A hash code.
      */
-    @Override
+    @Override    
     public int hashCode() {
         int hash = super.hashCode(); // equals calls superclass, hashCode must also
         hash = 23 * hash + (this.shapeVisible ? 1 : 0);
+        hash = 23 * hash + Objects.hashCode(this.shape);
         hash = 23 * hash + Objects.hashCode(this.shapeLocation);
         hash = 23 * hash + Objects.hashCode(this.shapeAnchor);
         hash = 23 * hash + (this.shapeFilled ? 1 : 0);
+        hash = 23 * hash + Objects.hashCode(this.fillPaint);
         hash = 23 * hash + Objects.hashCode(this.fillPaintTransformer);
         hash = 23 * hash + (this.shapeOutlineVisible ? 1 : 0);
+        hash = 23 * hash + Objects.hashCode(this.outlinePaint);
+        hash = 23 * hash + Objects.hashCode(this.outlineStroke);
         hash = 23 * hash + (this.lineVisible ? 1 : 0);
+        hash = 23 * hash + Objects.hashCode(this.line);
+        hash = 23 * hash + Objects.hashCode(this.lineStroke);
+        hash = 23 * hash + Objects.hashCode(this.linePaint);
         return hash;
     }
 

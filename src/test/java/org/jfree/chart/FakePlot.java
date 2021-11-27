@@ -3,6 +3,7 @@ package org.jfree.chart;
 import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
+import java.util.Objects;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotRenderingInfo;
 import org.jfree.chart.plot.PlotState;
@@ -12,6 +13,8 @@ import org.jfree.chart.plot.PlotState;
  */
 public class FakePlot extends Plot {
 
+    private String fakeName = "";
+    
     @Override
     public String getPlotType() {
         return "Fake";
@@ -22,4 +25,46 @@ public class FakePlot extends Plot {
                      PlotState parentState, PlotRenderingInfo info) {
         ;
     }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (this == obj) {
+            return true;
+        }
+        if (! (obj instanceof FakePlot)) {
+            return false;
+        }
+        FakePlot that = (FakePlot) obj;
+        if (that.canEqual(this) == false){
+            return false;
+        }
+        if (!Objects.equals(this.fakeName, that.fakeName))
+        {
+            return false;
+        }
+        return super.equals(obj);
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // Solves Problem: equals not symmetric
+        return (other instanceof FakePlot);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = super.hashCode();
+        hash = 89 * hash + Objects.hashCode(this.fakeName);
+        return hash;
+    }
+
 }

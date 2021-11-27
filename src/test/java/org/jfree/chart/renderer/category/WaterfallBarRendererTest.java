@@ -144,8 +144,7 @@ public class WaterfallBarRendererTest {
     @Test
     public void testSerialization() {
         WaterfallBarRenderer r1 = new WaterfallBarRenderer();
-        WaterfallBarRenderer r2 = (WaterfallBarRenderer) 
-                TestUtils.serialised(r1);
+        WaterfallBarRenderer r2 = TestUtils.serialised(r1);
         assertEquals(r1, r2);
     }
 

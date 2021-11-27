@@ -103,6 +103,7 @@ import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.Size2D;
 import org.jfree.chart.ui.VerticalAlignment;
+import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.Range;
@@ -1510,10 +1511,19 @@ public class JFreeChart implements Drawable, TitleChangeListener,
             return false;
         }
         JFreeChart that = (JFreeChart) obj;
+        if (!Objects.equals(this.renderingHints, that.renderingHints)) {
+            return false;
+        }
         if (this.borderVisible != that.borderVisible) {
             return false;
         }
         if (this.elementHinting != that.elementHinting) {
+            return false;
+        }
+        if (!Objects.equals(this.borderStroke, that.borderStroke)) {
+            return false;
+        }
+        if (!PaintUtils.equal(this.borderPaint, that.borderPaint)) {
             return false;
         }
         if (!Objects.equals(this.padding, that.padding)) {
@@ -1526,6 +1536,12 @@ public class JFreeChart implements Drawable, TitleChangeListener,
             return false;
         }
         if (!Objects.equals(this.plot, that.plot)) {
+            return false;
+        }
+        if (!PaintUtils.equal(this.backgroundPaint, that.backgroundPaint)) {
+            return false;
+        }
+        if (!Objects.equals(this.backgroundImage, that.backgroundImage)) {
             return false;
         }
         if (this.backgroundImageAlignment != that.backgroundImageAlignment) {
@@ -1547,16 +1563,21 @@ public class JFreeChart implements Drawable, TitleChangeListener,
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 59 * hash + (this.borderVisible ? 1 : 0);
-        hash = 59 * hash + (this.elementHinting ? 1 : 0);
-        hash = 59 * hash + Objects.hashCode(this.padding);
-        hash = 59 * hash + Objects.hashCode(this.title);
-        hash = 59 * hash + Objects.hashCode(this.subtitles);
-        hash = 59 * hash + Objects.hashCode(this.plot);
-        hash = 59 * hash + Objects.hashCode(this.backgroundImageAlignment);
-        hash = 59 * hash + Float.floatToIntBits(this.backgroundImageAlpha);
-        hash = 59 * hash + (this.notify ? 1 : 0);
-        hash = 59 * hash + Objects.hashCode(this.id);
+        hash = 43 * hash + Objects.hashCode(this.renderingHints);
+        hash = 43 * hash + Objects.hashCode(this.id);
+        hash = 43 * hash + (this.borderVisible ? 1 : 0);
+        hash = 43 * hash + Objects.hashCode(this.borderStroke);
+        hash = 43 * hash + HashUtils.hashCodeForPaint(this.borderPaint);
+        hash = 43 * hash + Objects.hashCode(this.padding);
+        hash = 43 * hash + Objects.hashCode(this.title);
+        hash = 43 * hash + Objects.hashCode(this.subtitles);
+        hash = 43 * hash + Objects.hashCode(this.plot);
+        hash = 43 * hash + HashUtils.hashCodeForPaint(this.backgroundPaint);
+        hash = 43 * hash + Objects.hashCode(this.backgroundImage);
+        hash = 43 * hash + this.backgroundImageAlignment;
+        hash = 43 * hash + Float.floatToIntBits(this.backgroundImageAlpha);
+        hash = 43 * hash + (this.notify ? 1 : 0);
+        hash = 43 * hash + (this.elementHinting ? 1 : 0);
         return hash;
     }
 

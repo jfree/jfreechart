@@ -47,6 +47,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Objects;
+import org.jfree.chart.HashUtils;
 
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.Plot;
@@ -298,7 +300,15 @@ public class XYBoxAnnotation extends AbstractXYAnnotation
             Double.doubleToLongBits(that.y1)) {
             return false;
         }
-
+        if (!Objects.equals(this.stroke, that.stroke)) {
+            return false;
+        }
+        if (!PaintUtils.equal(this.outlinePaint, that.outlinePaint)) {
+            return false;
+        }
+        if (!PaintUtils.equal(this.fillPaint, that.fillPaint)) {
+            return false;
+        }
         // fix the "equals not symmetric" problem
         if (that.canEqual(this) == false) {
             return false;
@@ -329,13 +339,16 @@ public class XYBoxAnnotation extends AbstractXYAnnotation
     public int hashCode() {
         int hash = super.hashCode(); // equals calls superclass, hashCode must also
         hash = 67 * hash + (int) (Double.doubleToLongBits(this.x0) ^
-                                  (Double.doubleToLongBits(this.x0) >>> 32));
+                                 (Double.doubleToLongBits(this.x0) >>> 32));
         hash = 67 * hash + (int) (Double.doubleToLongBits(this.y0) ^
-                                  (Double.doubleToLongBits(this.y0) >>> 32));
+                                 (Double.doubleToLongBits(this.y0) >>> 32));
         hash = 67 * hash + (int) (Double.doubleToLongBits(this.x1) ^
-                                  (Double.doubleToLongBits(this.x1) >>> 32));
+                                 (Double.doubleToLongBits(this.x1) >>> 32));
         hash = 67 * hash + (int) (Double.doubleToLongBits(this.y1) ^
-                                  (Double.doubleToLongBits(this.y1) >>> 32));
+                                (Double.doubleToLongBits(this.y1) >>> 32));
+        hash = 67 * hash + Objects.hashCode(this.stroke);
+        hash = 67 * hash + HashUtils.hashCodeForPaint(this.outlinePaint);
+        hash = 67 * hash + HashUtils.hashCodeForPaint(this.fillPaint);
         return hash;
     }
 

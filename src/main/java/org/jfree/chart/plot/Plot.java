@@ -1261,6 +1261,11 @@ public abstract class Plot implements AxisChangeListener,
         if (!Objects.equals(this.insets, that.insets)) {
             return false;
         }
+        // There's a reason chart is not included in equals/hashCode - doing so
+        // causes a StackOverflow error during EqualsVerifier's test!
+//        if (!Objects.equals(this.chart, that.chart)) {
+//            return false;
+//        }
         if (this.outlineVisible != that.outlineVisible) {
             return false;
         }
@@ -1279,19 +1284,23 @@ public abstract class Plot implements AxisChangeListener,
         if (this.backgroundImageAlignment != that.backgroundImageAlignment) {
             return false;
         }
-        if (this.backgroundImageAlpha != that.backgroundImageAlpha) {
+        if (Float.compare(this.backgroundImageAlpha,
+                          that.backgroundImageAlpha) != 0 ){
             return false;
         }
-        if (this.foregroundAlpha != that.foregroundAlpha) {
+        if (Float.compare(this.foregroundAlpha, that.foregroundAlpha) != 0 ) {
             return false;
         }
-        if (this.backgroundAlpha != that.backgroundAlpha) {
+        if (Float.compare(this.backgroundAlpha, that.backgroundAlpha) != 0 ) {
             return false;
         }
-        if (!this.drawingSupplier.equals(that.drawingSupplier)) {
+        if (!Objects.equals(this.drawingSupplier, that.drawingSupplier)) {
             return false;
         }
         if (this.notify != that.notify) {
+            return false;
+        }
+        if (!Objects.equals(this.datasetGroup, that.datasetGroup)) {
             return false;
         }
         return true;
@@ -1317,6 +1326,7 @@ public abstract class Plot implements AxisChangeListener,
         hash = 41 * hash + Objects.hashCode(this.noDataMessageFont);
         hash = 41 * hash + Objects.hashCode(this.noDataMessagePaint);
         hash = 41 * hash + Objects.hashCode(this.insets);
+//        hash = 41 * hash + Objects.hashCode(this.chart);
         hash = 41 * hash + (this.outlineVisible ? 1 : 0);
         hash = 41 * hash + Objects.hashCode(this.outlineStroke);
         hash = 41 * hash + Objects.hashCode(this.outlinePaint);
@@ -1328,6 +1338,7 @@ public abstract class Plot implements AxisChangeListener,
         hash = 41 * hash + Float.floatToIntBits(this.backgroundAlpha);
         hash = 41 * hash + Objects.hashCode(this.drawingSupplier);
         hash = 41 * hash + (this.notify ? 1 : 0);
+        hash = 41 * hash + Objects.hashCode(this.datasetGroup);
         return hash;
     }
     

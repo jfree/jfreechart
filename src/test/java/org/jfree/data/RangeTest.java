@@ -61,6 +61,7 @@ public class RangeTest {
         EqualsVerifier.forClass(Range.class)
                 .suppress(Warning.STRICT_INHERITANCE)
                 .suppress(Warning.NONFINAL_FIELDS)
+                .suppress(Warning.TRANSIENT_FIELDS)
                 .verify();
     }
 

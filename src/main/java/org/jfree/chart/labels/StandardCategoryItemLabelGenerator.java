@@ -30,7 +30,7 @@
  * (C) Copyright 2004-2021, by David Gilbert.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -135,6 +135,22 @@ public class StandardCategoryItemLabelGenerator
         if (!(obj instanceof StandardCategoryItemLabelGenerator)) {
             return false;
         }
+        StandardCategoryItemLabelGenerator that = (StandardCategoryItemLabelGenerator) obj;
+        if (that.canEqual(this) == false) {
+            return false;
+        }
         return super.equals(obj);
     }
+    @Override
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof StandardCategoryItemLabelGenerator);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = super.hashCode();
+        return hash;
+    }
+
 }

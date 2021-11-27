@@ -30,7 +30,7 @@
  * (C) Copyright 2007-2021, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
@@ -44,14 +44,34 @@ import static org.junit.jupiter.api.Assertions.fail;
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.geom.Rectangle2D;
+import java.util.Objects;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.PaintUtils;
 import org.junit.jupiter.api.Test;
 
 /**
  * Tests for the {@link ColorBlock} class.
  */
 public class ColorBlockTest {
+
+    /**
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
+     */
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(ColorBlock.class)
+            .withPrefabValues(Rectangle2D.class,
+                              TestUtils.createR2D(true),
+                              TestUtils.createR2D(false))
+            .suppress(Warning.STRICT_INHERITANCE)
+            .suppress(Warning.NONFINAL_FIELDS)
+            .suppress(Warning.TRANSIENT_FIELDS)
+            .verify();
+    }
 
     /**
      * Confirm that the equals() method can distinguish all the required fields.

@@ -66,7 +66,38 @@ public class CategoryTextAnnotationTest {
             .withPrefabValues(Font.class, createFont(true), createFont(false))
             .suppress(Warning.STRICT_INHERITANCE)
             .suppress(Warning.NONFINAL_FIELDS)
+            .suppress(Warning.TRANSIENT_FIELDS)
             .verify();
+    }
+    
+    /**
+     * Confirm that the equals method can distinguish all the required fields.
+     */
+    @Test
+    public void testEquals() {
+        CategoryTextAnnotation a1 = new CategoryTextAnnotation("Test",
+                "Category", 1.0);
+        CategoryTextAnnotation a2 = new CategoryTextAnnotation("Test",
+                "Category", 1.0);
+        assertTrue(a1.equals(a2));
+    
+        // category
+        a1.setCategory("Category 2");
+        assertFalse(a1.equals(a2));
+        a2.setCategory("Category 2");
+        assertTrue(a1.equals(a2));
+
+        // categoryAnchor
+        a1.setCategoryAnchor(CategoryAnchor.START);
+        assertFalse(a1.equals(a2));
+        a2.setCategoryAnchor(CategoryAnchor.START);
+        assertTrue(a1.equals(a2));
+
+        // value
+        a1.setValue(0.15);
+        assertFalse(a1.equals(a2));
+        a2.setValue(0.15);
+        assertTrue(a1.equals(a2));
     }
 
     /**
@@ -86,6 +117,7 @@ public class CategoryTextAnnotationTest {
 
     /**
      * Confirm that cloning works.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {

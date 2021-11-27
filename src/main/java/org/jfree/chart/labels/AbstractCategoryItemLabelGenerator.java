@@ -30,7 +30,7 @@
  * (C) Copyright 2005-2021, by David Gilbert.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -262,16 +262,30 @@ public abstract class AbstractCategoryItemLabelGenerator
 
         AbstractCategoryItemLabelGenerator that
             = (AbstractCategoryItemLabelGenerator) obj;
-        if (!this.labelFormat.equals(that.labelFormat)) {
+        if (!Objects.equals(this.labelFormat, that.labelFormat)) {
             return false;
         }
         if (!Objects.equals(this.dateFormat, that.dateFormat)) {
             return false;
         }
+        if (!Objects.equals(this.nullValueString, that.nullValueString)) {
+            return false;
+        }
         if (!Objects.equals(this.numberFormat, that.numberFormat)) {
             return false;
         }
+        if (!Objects.equals(this.percentFormat, that.percentFormat)) {
+            return false;
+        }
+        if (that.canEqual(this) == false) {
+            return false;
+        }
         return true;
+    }
+
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof AbstractCategoryItemLabelGenerator);
     }
 
     /**

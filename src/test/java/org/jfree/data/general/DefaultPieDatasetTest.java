@@ -66,7 +66,7 @@ public class DefaultPieDatasetTest implements DatasetChangeListener {
      */
     @Test
     public void testClear() {
-        DefaultPieDataset d = new DefaultPieDataset();
+        DefaultPieDataset<String> d = new DefaultPieDataset<>();
         d.addChangeListener(this);
         // no event is generated if the dataset is already empty
         d.clear();
@@ -84,7 +84,7 @@ public class DefaultPieDatasetTest implements DatasetChangeListener {
      */
     @Test
     public void testGetKey() {
-        DefaultPieDataset d = new DefaultPieDataset();
+        DefaultPieDataset<String> d = new DefaultPieDataset<>();
         d.setValue("A", 1.0);
         d.setValue("B", 2.0);
         assertEquals("A", d.getKey(0));
@@ -114,7 +114,7 @@ public class DefaultPieDatasetTest implements DatasetChangeListener {
      */
     @Test
     public void testGetIndex() {
-        DefaultPieDataset d = new DefaultPieDataset();
+        DefaultPieDataset<String> d = new DefaultPieDataset<>();
         d.setValue("A", 1.0);
         d.setValue("B", 2.0);
         assertEquals(0, d.getIndex("A"));
@@ -138,11 +138,11 @@ public class DefaultPieDatasetTest implements DatasetChangeListener {
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
-        DefaultPieDataset d1 = new DefaultPieDataset();
+        DefaultPieDataset<String> d1 = new DefaultPieDataset<>();
         d1.setValue("V1", 1);
         d1.setValue("V2", null);
         d1.setValue("V3", 3);
-        DefaultPieDataset d2 = (DefaultPieDataset) d1.clone();
+        DefaultPieDataset<String> d2 = (DefaultPieDataset<String>) d1.clone();
 
         assertTrue(d1 != d2);
         assertTrue(d1.getClass() == d2.getClass());
@@ -154,13 +154,13 @@ public class DefaultPieDatasetTest implements DatasetChangeListener {
      */
     @Test
     public void testSerialization() {
-        DefaultPieDataset d1 = new DefaultPieDataset();
+        DefaultPieDataset<String> d1 = new DefaultPieDataset<>();
         d1.setValue("C1", 234.2);
         d1.setValue("C2", null);
         d1.setValue("C3", 345.9);
         d1.setValue("C4", 452.7);
 
-        DefaultPieDataset d2 = TestUtils.serialised(d1);
+        DefaultPieDataset<String> d2 = TestUtils.serialised(d1);
         assertEquals(d1, d2);
     }
 
@@ -169,7 +169,7 @@ public class DefaultPieDatasetTest implements DatasetChangeListener {
      */
     @Test
     public void testBug212() {
-        DefaultPieDataset d = new DefaultPieDataset();
+        DefaultPieDataset<String> d = new DefaultPieDataset<>();
         assertThrows(IndexOutOfBoundsException.class, () ->  d.getValue(-1));
         assertThrows(IndexOutOfBoundsException.class, () ->  d.getValue(0));
         d.setValue("A", 1.0);

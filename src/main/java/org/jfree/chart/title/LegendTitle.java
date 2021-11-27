@@ -48,6 +48,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Objects;
+import org.jfree.chart.HashUtils;
 
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.LegendItemCollection;
@@ -74,6 +75,7 @@ import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.Size2D;
+import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SortOrder;
 
@@ -607,6 +609,12 @@ public class LegendTitle extends Title
             return false;
         }
         LegendTitle that = (LegendTitle) obj;
+        if (!PaintUtils.equal(this.backgroundPaint, that.backgroundPaint)) {
+            return false;
+        }
+        if (!PaintUtils.equal(this.itemPaint, that.itemPaint)) {
+            return false;
+        }
         if (!Arrays.deepEquals(this.sources, that.sources)) {
             return false;
         }
@@ -650,11 +658,13 @@ public class LegendTitle extends Title
     public int hashCode() {
         int hash = super.hashCode(); // equals calls superclass, hashCode must also
         hash = 67 * hash + Arrays.deepHashCode(this.sources);
+        hash = 67 * hash + HashUtils.hashCodeForPaint(this.backgroundPaint);
         hash = 67 * hash + Objects.hashCode(this.legendItemGraphicEdge);
         hash = 67 * hash + Objects.hashCode(this.legendItemGraphicAnchor);
         hash = 67 * hash + Objects.hashCode(this.legendItemGraphicLocation);
         hash = 67 * hash + Objects.hashCode(this.legendItemGraphicPadding);
         hash = 67 * hash + Objects.hashCode(this.itemFont);
+        hash = 67 * hash + HashUtils.hashCodeForPaint(this.itemPaint);
         hash = 67 * hash + Objects.hashCode(this.itemLabelPadding);
         hash = 67 * hash + Objects.hashCode(this.items);
         hash = 67 * hash + Objects.hashCode(this.hLayout);

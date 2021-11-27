@@ -50,6 +50,7 @@ import java.util.EventListener;
 import java.util.Objects;
 
 import javax.swing.event.EventListenerList;
+import org.jfree.chart.HashUtils;
 
 import org.jfree.chart.event.MarkerChangeEvent;
 import org.jfree.chart.event.MarkerChangeListener;
@@ -57,6 +58,7 @@ import org.jfree.chart.ui.LengthAdjustmentType;
 import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.ui.TextAnchor;
+import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
 
@@ -570,6 +572,18 @@ public abstract class Marker implements Cloneable, Serializable {
         if (that.canEqual(this) == false) {
             return false;
         }
+        if (!PaintUtils.equal(this.paint, that.paint)) {
+            return false;
+        }
+        if (!Objects.equals(this.stroke, that.stroke)) {
+            return false;
+        }
+        if (!PaintUtils.equal(this.outlinePaint, that.outlinePaint)) {
+            return false;
+        }
+        if (!Objects.equals(this.outlineStroke, that.outlineStroke)) {
+            return false;
+        }
         if (Float.floatToIntBits(this.alpha) !=
             Float.floatToIntBits(that.alpha)) {
             return false;
@@ -578,6 +592,9 @@ public abstract class Marker implements Cloneable, Serializable {
             return false;
         }
         if (!Objects.equals(this.labelFont, that.labelFont)) {
+            return false;
+        }
+        if (!PaintUtils.equal(this.labelPaint, that.labelPaint)) {
             return false;
         }
         if (!Objects.equals(this.labelBackgroundColor,that.labelBackgroundColor)) {
@@ -614,9 +631,14 @@ public abstract class Marker implements Cloneable, Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
+        hash = 43 * hash + HashUtils.hashCodeForPaint(this.paint);
+        hash = 43 * hash + Objects.hashCode(this.stroke);
+        hash = 43 * hash + HashUtils.hashCodeForPaint(this.outlinePaint);
+        hash = 43 * hash + Objects.hashCode(this.outlineStroke);
         hash = 43 * hash + Float.floatToIntBits(this.alpha);
         hash = 43 * hash + Objects.hashCode(this.label);
         hash = 43 * hash + Objects.hashCode(this.labelFont);
+        hash = 43 * hash + HashUtils.hashCodeForPaint(this.labelPaint);
         hash = 43 * hash + Objects.hashCode(this.labelBackgroundColor);
         hash = 43 * hash + Objects.hashCode(this.labelAnchor);
         hash = 43 * hash + Objects.hashCode(this.labelTextAnchor);

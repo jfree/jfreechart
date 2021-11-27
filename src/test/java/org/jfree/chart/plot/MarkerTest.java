@@ -74,10 +74,15 @@ public class MarkerTest implements MarkerChangeListener {
             .withRedefinedSubclass(IntervalMarker.class) // subclass also defines equals/hashCode
             .withRedefinedSubclass(CategoryMarker.class)
             .withRedefinedSubclass(ValueMarker.class)
-            .withPrefabValues(Font.class, new Font("SansSerif", Font.PLAIN, 10), new Font("Tahoma", Font.BOLD, 12))
-            .withPrefabValues(Marker.class, new ValueMarker(44.5), new ValueMarker(33.3))
+            .withPrefabValues(Font.class, 
+            		          new Font("SansSerif", Font.PLAIN, 10), 
+            		          new Font("Tahoma", Font.BOLD, 12))
+            .withPrefabValues(Marker.class, 
+            		          new ValueMarker(44.5), 
+            		          new ValueMarker(33.3))
             //  .suppress(Warning.STRICT_INHERITANCE) // no need for this because we already told it not to worry about inheritance
             .suppress(Warning.NONFINAL_FIELDS)
+            .suppress(Warning.TRANSIENT_FIELDS)
             .verify();
     }
 

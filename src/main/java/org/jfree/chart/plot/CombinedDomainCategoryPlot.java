@@ -31,6 +31,7 @@
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Nicolas Brodu;
+ *                   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -634,13 +635,39 @@ public class CombinedDomainCategoryPlot extends CategoryPlot
             return false;
         }
         CombinedDomainCategoryPlot that = (CombinedDomainCategoryPlot) obj;
-        if (this.gap != that.gap) {
+        if (that.canEqual(this) == false){
+            return false;
+        }
+        if (Double.compare(this.gap, that.gap) != 0) {
             return false;
         }
         if (!Objects.equals(this.subplots, that.subplots)) {
             return false;
         }
         return super.equals(obj);
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // Solves Problem: equals not symmetric
+        return (other instanceof CombinedDomainCategoryPlot);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = super.hashCode();
+        hash = 97 * hash + Objects.hashCode(this.subplots);
+        hash = 97 * hash + (int) (Double.doubleToLongBits(this.gap) ^ 
+                                 (Double.doubleToLongBits(this.gap) >>> 32));
+        return hash;
     }
 
     /**

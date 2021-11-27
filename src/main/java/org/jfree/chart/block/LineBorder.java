@@ -50,7 +50,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Objects;
+import org.jfree.chart.HashUtils;
 import org.jfree.chart.ui.RectangleInsets;
+import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
 
@@ -188,6 +190,12 @@ public class LineBorder implements BlockFrame, Serializable {
             return false;
         }
         LineBorder that = (LineBorder) obj;
+        if (!PaintUtils.equal(this.paint, that.paint)) {
+            return false;
+        }
+        if (!Objects.equals(this.stroke, that.stroke)) {
+            return false;
+        }
         if (!Objects.equals(this.insets, that.insets)) {
             return false;
         }
@@ -197,6 +205,8 @@ public class LineBorder implements BlockFrame, Serializable {
     @Override
     public int hashCode() {
         int hash = 3;
+        hash = 47 * hash + HashUtils.hashCodeForPaint(this.paint);
+        hash = 47 * hash + Objects.hashCode(this.stroke);
         hash = 47 * hash + Objects.hashCode(this.insets);
         return hash;
     }

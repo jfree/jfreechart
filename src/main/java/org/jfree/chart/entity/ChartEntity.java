@@ -333,6 +333,9 @@ public class ChartEntity implements Cloneable, PublicCloneable, Serializable {
             return false;
         }
         ChartEntity that = (ChartEntity) obj;
+        if (!Objects.equals(this.area, that.area)) {
+            return false;
+        }
         if (!Objects.equals(this.toolTipText, that.toolTipText)) {
             return false;
         }
@@ -368,6 +371,7 @@ public class ChartEntity implements Cloneable, PublicCloneable, Serializable {
     @Override
     public int hashCode() {
         int result = 7;
+        result = 89 * result + Objects.hashCode(this.area);
         result = 89 * result + Objects.hashCode(this.toolTipText);
         result = 89 * result + Objects.hashCode(this.urlText);
         return result;

@@ -47,8 +47,10 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Objects;
 
+import org.jfree.chart.HashUtils;
 import org.jfree.chart.event.AnnotationChangeEvent;
 import org.jfree.chart.ui.TextAnchor;
+import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
 
@@ -284,6 +286,9 @@ public class TextAnnotation extends AbstractAnnotation implements Serializable {
         if (!Objects.equals(this.font, that.getFont())) {
             return false;
         }
+        if (!PaintUtils.equal(this.paint, that.getPaint())) {
+            return false;
+        }
         if (!Objects.equals(this.textAnchor, that.getTextAnchor())) {
             return false;
         }
@@ -326,6 +331,7 @@ public class TextAnnotation extends AbstractAnnotation implements Serializable {
     public int hashCode() {
         int result = super.hashCode(); // equals calls superclass, hashCode must also
         result = 37 * result + Objects.hashCode(this.font);
+        result = 37 * result + HashUtils.hashCodeForPaint(this.paint);
         result = 37 * result + Objects.hashCode(this.rotationAnchor);
         long temp = Double.doubleToLongBits(this.rotationAngle);
         result = 37 * result + (int) (temp ^ (temp >>> 32));

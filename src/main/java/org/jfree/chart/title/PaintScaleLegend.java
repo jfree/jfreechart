@@ -47,6 +47,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Objects;
+import org.jfree.chart.HashUtils;
 
 import org.jfree.chart.axis.AxisLocation;
 import org.jfree.chart.axis.AxisSpace;
@@ -61,6 +62,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.PaintScale;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.Size2D;
+import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
@@ -669,6 +671,16 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
         if (this.stripOutlineVisible != that.stripOutlineVisible) {
             return false;
         }
+        if (!PaintUtils.equal(this.stripOutlinePaint,
+                              that.stripOutlinePaint)) {
+            return false;
+        }
+        if (!Objects.equals(this.stripOutlineStroke, that.stripOutlineStroke)) {
+            return false;
+        }
+        if (!PaintUtils.equal(this.backgroundPaint, that.backgroundPaint)) {
+            return false;
+        }
         if (this.subdivisions != that.subdivisions) {
             return false;
         }
@@ -698,11 +710,14 @@ public class PaintScaleLegend extends Title implements AxisChangeListener,
         hash = 53 * hash + Objects.hashCode(this.scale);
         hash = 53 * hash + Objects.hashCode(this.axis);
         hash = 53 * hash + Objects.hashCode(this.axisLocation);
-        hash = 53 * hash + (int) (Double.doubleToLongBits(this.axisOffset) ^ 
-                                 (Double.doubleToLongBits(this.axisOffset) >>> 32));
-        hash = 53 * hash + (int) (Double.doubleToLongBits(this.stripWidth) ^ 
-                                 (Double.doubleToLongBits(this.stripWidth) >>> 32));
+        hash = 53 * hash + (int) (Double.doubleToLongBits(this.axisOffset) ^
+                      (Double.doubleToLongBits(this.axisOffset) >>> 32));
+        hash = 53 * hash + (int) (Double.doubleToLongBits(this.stripWidth) ^
+                      (Double.doubleToLongBits(this.stripWidth) >>> 32));
         hash = 53 * hash + (this.stripOutlineVisible ? 1 : 0);
+        hash = 53 * hash + HashUtils.hashCodeForPaint(this.stripOutlinePaint);
+        hash = 53 * hash + Objects.hashCode(this.stripOutlineStroke);
+        hash = 53 * hash + HashUtils.hashCodeForPaint(this.backgroundPaint);
         hash = 53 * hash + this.subdivisions;
         return hash;
     }

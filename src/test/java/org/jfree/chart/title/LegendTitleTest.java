@@ -70,6 +70,7 @@ public class LegendTitleTest {
         EqualsVerifier.forClass(LegendTitle.class)
                 .suppress(Warning.STRICT_INHERITANCE)
                 .suppress(Warning.NONFINAL_FIELDS)
+                .suppress(Warning.TRANSIENT_FIELDS)
                 .withRedefinedSuperclass()
                 .withPrefabValues(Rectangle2D.class,
                                   TestUtils.createR2D(true),
@@ -93,15 +94,11 @@ public class LegendTitleTest {
         t1.setBackgroundPaint(
             new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f, Color.YELLOW)
         );
-        // transient field 'paint' not included in equals or hashCode, so test
-        // equality using PaintUtils method
-        assertFalse(PaintUtils.equal(t1.getBackgroundPaint(),
-                                     t2.getBackgroundPaint()));
+        assertFalse(t1.equals(t2));
         t2.setBackgroundPaint(
             new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f, Color.YELLOW)
         );
-        assertTrue(PaintUtils.equal(t1.getBackgroundPaint(),
-                                    t2.getBackgroundPaint()));
+        assertTrue(t1.equals(t2));
 
         t1.setLegendItemGraphicEdge(RectangleEdge.BOTTOM);
         assertFalse(t1.equals(t2));
@@ -161,11 +158,9 @@ public class LegendTitleTest {
 
         // check independence
         bounds1.setFrame(40.0, 30.0, 20.0, 10.0);
-        // transient field 'bounds' not included in equals or hashCode, so test
-        // using the 'get' method
-        assertFalse(t1.getBounds().equals(t2.getBounds()));
+        assertFalse(t1.equals(t2));
         t2.setBounds(new Rectangle2D.Double(40.0, 30.0, 20.0, 10.0));
-        assertTrue(t1.getBounds().equals(t2.getBounds()));
+        assertTrue(t1.equals(t2));
     }
 
     /**

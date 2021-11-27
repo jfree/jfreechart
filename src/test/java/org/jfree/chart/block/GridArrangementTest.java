@@ -62,6 +62,7 @@ public class GridArrangementTest {
         EqualsVerifier.forClass(GridArrangement.class)
             .suppress(Warning.STRICT_INHERITANCE)
             .suppress(Warning.NONFINAL_FIELDS)
+            .suppress(Warning.TRANSIENT_FIELDS)
             .verify();
     }
 

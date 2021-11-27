@@ -40,8 +40,6 @@ import org.junit.jupiter.api.Test;
 
 import java.awt.Color;
 import java.awt.GradientPaint;
-import nl.jqno.equalsverifier.EqualsVerifier;
-import nl.jqno.equalsverifier.Warning;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -51,14 +49,6 @@ import static org.junit.jupiter.api.Assertions.fail;
  * Some tests for the {@link PaintMap} class.
  */
 public class PaintMapTest  {
-
-    @Test
-    public void testEqualsHashCode() {
-        EqualsVerifier.forClass(PaintMap.class)
-                .suppress(Warning.STRICT_INHERITANCE)
-                .suppress(Warning.NONFINAL_FIELDS)
-                .verify();
-    }
 
     /**
      * Some checks for the getPaint() method.

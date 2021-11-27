@@ -98,6 +98,13 @@ public class XYDrawableAnnotationTest {
         public Object clone() throws CloneNotSupportedException {
             return super.clone();
         }
+
+        @Override
+        public int hashCode()
+        {
+            int hash = 5;
+            return hash;
+        }
     }
 
     /**
@@ -110,11 +117,75 @@ public class XYDrawableAnnotationTest {
             .withRedefinedSuperclass() // superclass also defines equals/hashCode
             .suppress(Warning.STRICT_INHERITANCE)
             .suppress(Warning.NONFINAL_FIELDS)
+            .suppress(Warning.TRANSIENT_FIELDS)
             .verify();
     }
 
     /**
+     * Confirm that the equals method can distinguish all the required fields.
+     */
+    @Test
+    public void testEquals() {
+        XYDrawableAnnotation a1 = new XYDrawableAnnotation(10.0, 20.0, 100.0,
+                200.0, new TestDrawable());
+        XYDrawableAnnotation a2 = new XYDrawableAnnotation(10.0, 20.0, 100.0,
+                200.0, new TestDrawable());
+        assertTrue(a1.equals(a2));
+
+        a1 = new XYDrawableAnnotation(11.0, 20.0, 100.0, 200.0,
+                new TestDrawable());
+        assertFalse(a1.equals(a2));
+        a2 = new XYDrawableAnnotation(11.0, 20.0, 100.0, 200.0,
+                new TestDrawable());
+        assertTrue(a1.equals(a2));
+
+        a1 = new XYDrawableAnnotation(11.0, 22.0, 100.0, 200.0,
+                new TestDrawable());
+        assertFalse(a1.equals(a2));
+        a2 = new XYDrawableAnnotation(11.0, 22.0, 100.0, 200.0,
+                new TestDrawable());
+        assertTrue(a1.equals(a2));
+
+        a1 = new XYDrawableAnnotation(11.0, 22.0, 101.0, 200.0,
+                new TestDrawable());
+        assertFalse(a1.equals(a2));
+        a2 = new XYDrawableAnnotation(11.0, 22.0, 101.0, 200.0,
+                new TestDrawable());
+        assertTrue(a1.equals(a2));
+
+        a1 = new XYDrawableAnnotation(11.0, 22.0, 101.0, 202.0,
+                new TestDrawable());
+        assertFalse(a1.equals(a2));
+        a2 = new XYDrawableAnnotation(11.0, 22.0, 101.0, 202.0,
+                new TestDrawable());
+        assertTrue(a1.equals(a2));
+
+        a1 = new XYDrawableAnnotation(11.0, 22.0, 101.0, 202.0, 2.0,
+                new TestDrawable());
+        assertFalse(a1.equals(a2));
+        a2 = new XYDrawableAnnotation(11.0, 22.0, 101.0, 202.0, 2.0,
+                new TestDrawable());
+        assertTrue(a1.equals(a2));
+    }
+
+    /**
+     * Two objects that are equal are required to return the same hashCode.
+     */
+    @Test
+    public void testHashCode() {
+        XYDrawableAnnotation a1 = new XYDrawableAnnotation(10.0, 20.0, 100.0,
+                200.0, new TestDrawable());
+        XYDrawableAnnotation a2 = new XYDrawableAnnotation(10.0, 20.0, 100.0,
+                200.0, new TestDrawable());
+        assertTrue(a1.equals(a2));
+        int h1 = a1.hashCode();
+        int h2 = a2.hashCode();
+        assertEquals(h1, h2);
+    }
+
+    /**
      * Confirm that cloning works.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {

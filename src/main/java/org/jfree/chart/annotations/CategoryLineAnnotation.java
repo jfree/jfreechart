@@ -49,6 +49,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Objects;
 
+import org.jfree.chart.HashUtils;
 import org.jfree.chart.axis.CategoryAnchor;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;
@@ -57,6 +58,7 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
@@ -351,6 +353,12 @@ public class CategoryLineAnnotation extends AbstractAnnotation
             Double.doubleToLongBits(that.value2)) {
             return false;
         }
+        if (!PaintUtils.equal(this.paint, that.paint)) {
+            return false;
+        }
+        if (!Objects.equals(this.stroke, that.stroke)) {
+            return false;
+        }
         // fix the "equals not symmetric" problem
         if (that.canEqual(this) == false) {
             return false;
@@ -387,6 +395,8 @@ public class CategoryLineAnnotation extends AbstractAnnotation
         result = 37 * result + Objects.hashCode(this.category2);
         temp = Double.doubleToLongBits(this.value2);
         result = 37 * result + (int) (temp ^ (temp >>> 32));
+        result = 37 * result + HashUtils.hashCodeForPaint(this.paint);
+        result = 37 * result + Objects.hashCode(this.stroke);
         return result;
     }
 

@@ -36,7 +36,9 @@
 
 package org.jfree.chart;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
@@ -61,7 +63,38 @@ public class LegendItemCollectionTest  {
         EqualsVerifier.forClass(LegendItemCollection.class)
             .suppress(Warning.STRICT_INHERITANCE)
             .suppress(Warning.NONFINAL_FIELDS)
+            .suppress(Warning.TRANSIENT_FIELDS)
             .verify();
+    }
+
+    /**
+     * Confirm that the equals method can distinguish all the required fields.
+     */
+    @Test
+    public void testEquals() {
+
+        LegendItemCollection c1 = new LegendItemCollection();
+        LegendItemCollection c2 = new LegendItemCollection();
+        assertEquals(c1, c2);
+        assertEquals(c2, c1);
+
+        LegendItem item1 = new LegendItem("Label", "Description",
+                "ToolTip", "URL", true,
+                new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0), true, Color.RED,
+                true, Color.BLUE, new BasicStroke(1.2f), true,
+                new Line2D.Double(1.0, 2.0, 3.0, 4.0),
+                new BasicStroke(2.1f), Color.GREEN);
+        LegendItem item2 = new LegendItem("Label", "Description",
+                "ToolTip", "URL", true,
+                new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0),
+                true, Color.RED, true, Color.BLUE, new BasicStroke(1.2f), true,
+                new Line2D.Double(1.0, 2.0, 3.0, 4.0), new BasicStroke(2.1f),
+                Color.GREEN);
+        c1.add(item1);
+        assertFalse(c1.equals(c2));
+        c2.add(item2);
+        assertEquals(c1, c2);
+
     }
 
     /**
@@ -93,7 +126,7 @@ public class LegendItemCollectionTest  {
 
         Rectangle2D item1Shape = (Rectangle2D) item1.getShape();
         item1Shape.setRect(1.0, 2.0, 3.0, 4.0);
-        assertFalse(c1.get(0).getShape().equals(c2.get(0).getShape()));
+        assertFalse(c1.equals(c2));
     }
 
 }

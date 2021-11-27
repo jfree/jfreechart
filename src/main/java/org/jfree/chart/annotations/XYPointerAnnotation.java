@@ -50,6 +50,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Objects;
+
+import org.jfree.chart.HashUtils;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.event.AnnotationChangeEvent;
 import org.jfree.chart.plot.Plot;
@@ -59,6 +62,7 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.util.Args;
+import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 
@@ -471,6 +475,12 @@ public class XYPointerAnnotation extends XYTextAnnotation
             Double.doubleToLongBits(that.arrowWidth)) {
             return false;
         }
+        if (!PaintUtils.equal(this.arrowPaint, that.arrowPaint)) {
+            return false;
+        }
+        if (!Objects.equals(this.arrowStroke, that.arrowStroke)) {
+            return false;
+        }
         if (Double.doubleToLongBits(this.labelOffset) != 
             Double.doubleToLongBits(that.labelOffset)) {
             return false;
@@ -516,6 +526,8 @@ public class XYPointerAnnotation extends XYTextAnnotation
                                  (Double.doubleToLongBits(this.arrowLength) >>> 32));
         hash = 41 * hash + (int) (Double.doubleToLongBits(this.arrowWidth) ^ 
                                  (Double.doubleToLongBits(this.arrowWidth) >>> 32));
+        hash = 41 * hash + HashUtils.hashCodeForPaint(this.arrowPaint);
+        hash = 41 * hash + Objects.hashCode(this.arrowStroke);
         hash = 41 * hash + (int) (Double.doubleToLongBits(this.labelOffset) ^ 
                                  (Double.doubleToLongBits(this.labelOffset) >>> 32));
         return hash;

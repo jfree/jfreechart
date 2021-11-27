@@ -57,6 +57,7 @@ public class SimpleTimePeriodTest {
         EqualsVerifier.forClass(SimpleTimePeriod.class)
                 .suppress(Warning.STRICT_INHERITANCE)
                 .suppress(Warning.NONFINAL_FIELDS)
+                .suppress(Warning.TRANSIENT_FIELDS)
                 .verify();
     }
 

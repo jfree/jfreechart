@@ -61,6 +61,7 @@ public class FlowEntityTest {
             .withRedefinedSuperclass() // superclass also defines equals/hashCode
             .suppress(Warning.STRICT_INHERITANCE)
             .suppress(Warning.NONFINAL_FIELDS)
+            .suppress(Warning.TRANSIENT_FIELDS)
             .verify();
     }
 

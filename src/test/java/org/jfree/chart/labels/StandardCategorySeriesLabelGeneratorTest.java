@@ -62,6 +62,7 @@ public class StandardCategorySeriesLabelGeneratorTest {
         EqualsVerifier.forClass(StandardCategorySeriesLabelGenerator.class)
                 .suppress(Warning.STRICT_INHERITANCE)
                 .suppress(Warning.NONFINAL_FIELDS)
+                .suppress(Warning.TRANSIENT_FIELDS)
                 .verify();
     }
     /**
@@ -113,6 +114,7 @@ public class StandardCategorySeriesLabelGeneratorTest {
 
     /**
      * Confirm that cloning works.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {

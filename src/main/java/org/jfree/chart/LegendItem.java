@@ -55,8 +55,10 @@ import java.io.Serializable;
 import java.text.AttributedString;
 import java.text.CharacterIterator;
 import java.util.Objects;
+import org.jfree.chart.text.AttributedStringUtils;
 import org.jfree.chart.ui.GradientPaintTransformer;
 import org.jfree.chart.ui.StandardGradientPaintTransformer;
+import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
@@ -935,47 +937,78 @@ public class LegendItem implements Cloneable, Serializable {
         }
         LegendItem that = (LegendItem) obj;
 
-        if (!Objects.equals(this.dataset, that.dataset)) { //dataset
+        if (!Objects.equals(this.dataset, that.dataset)) {
             return false;
         }
-        if (!Objects.equals(this.seriesKey, that.seriesKey)) { //
+        if (!Objects.equals(this.seriesKey, that.seriesKey)) {
             return false;
         }
-        if (this.datasetIndex != that.datasetIndex) { // datasetIndex
+        if (this.datasetIndex != that.datasetIndex) {
             return false;
         }
-        if (this.series != that.series) { // series
+        if (this.series != that.series) {
             return false;
         }
-        if (!Objects.equals(this.label, that.label)) { // label
+        if (!Objects.equals(this.label, that.label)) {
             return false;
         }
-        if (!Objects.equals(this.labelFont, that.labelFont)) { // labelFont
+        if (!Objects.equals(this.labelFont, that.labelFont)) {
             return false;
         }
-        if (!Objects.equals(this.description, that.description)) { // description
+        if (!Objects.equals(this.description, that.description)) {
             return false;
         }
-        if (!Objects.equals(this.toolTipText, that.toolTipText)) { // toolTipText
+        if (!Objects.equals(this.toolTipText, that.toolTipText)) {
             return false;
         }
-        if (!Objects.equals(this.urlText, that.urlText)) { // urlText
+        if (!Objects.equals(this.urlText, that.urlText)) {
             return false;
         }
-        if (this.shapeVisible != that.shapeVisible) { // shapeVisible
+        if (this.shapeVisible != that.shapeVisible) {
             return false;
         }
-        if (this.shapeFilled != that.shapeFilled) { // shapeFilled
+        if (this.shapeFilled != that.shapeFilled) {
             return false;
         }
-        if (!Objects.equals(this.fillPaintTransformer, // fillPaintTransformer
+        if (!Objects.equals(this.fillPaintTransformer,
                             that.fillPaintTransformer)) {
+            return false;
+        }
+        if (!ShapeUtils.equal(this.shape, that.shape)) {
+            return false;
+        }
+        if (!PaintUtils.equal(this.fillPaint, that.fillPaint)) {
+            return false;
+        }
+        if (!AttributedStringUtils.equal(this.attributedLabel,
+                                         that.attributedLabel)) {
             return false;
         }
         if (this.shapeOutlineVisible != that.shapeOutlineVisible) {
             return false;
         }
+        if (!Objects.equals(this.outlineStroke, that.outlineStroke)) {
+            return false;
+        }
+        if (!PaintUtils.equal(this.outlinePaint, that.outlinePaint)) {
+            return false;
+        }
         if (!this.lineVisible == that.lineVisible) {
+            return false;
+        }
+        if (!ShapeUtils.equal(this.line, that.line)) {
+            return false;
+        }
+        if (!Objects.equals(this.lineStroke, that.lineStroke)) {
+            return false;
+        }
+        if (!PaintUtils.equal(this.linePaint, that.linePaint)) {
+            return false;
+        }
+        if (!Objects.equals(this.labelFont, that.labelFont)) {
+            return false;
+        }
+        if (!PaintUtils.equal(this.labelPaint, that.labelPaint)) {
             return false;
         }
         return true;
@@ -990,14 +1023,23 @@ public class LegendItem implements Cloneable, Serializable {
         hash = 83 * hash + this.series;
         hash = 83 * hash + Objects.hashCode(this.label);
         hash = 83 * hash + Objects.hashCode(this.labelFont);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.labelPaint);
+        hash = 83 * hash + Objects.hashCode(this.attributedLabel);
         hash = 83 * hash + Objects.hashCode(this.description);
         hash = 83 * hash + Objects.hashCode(this.toolTipText);
         hash = 83 * hash + Objects.hashCode(this.urlText);
         hash = 83 * hash + (this.shapeVisible ? 1 : 0);
+        hash = 83 * hash + Objects.hashCode(this.shape);
         hash = 83 * hash + (this.shapeFilled ? 1 : 0);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.fillPaint);
         hash = 83 * hash + Objects.hashCode(this.fillPaintTransformer);
         hash = 83 * hash + (this.shapeOutlineVisible ? 1 : 0);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.outlinePaint);
+        hash = 83 * hash + Objects.hashCode(this.outlineStroke);
         hash = 83 * hash + (this.lineVisible ? 1 : 0);
+        hash = 83 * hash + Objects.hashCode(this.line);
+        hash = 83 * hash + Objects.hashCode(this.lineStroke);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.linePaint);
         return hash;
     }
 

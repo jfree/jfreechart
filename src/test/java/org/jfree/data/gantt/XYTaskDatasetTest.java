@@ -57,6 +57,7 @@ public class XYTaskDatasetTest {
         EqualsVerifier.forClass(XYTaskDataset.class)
                 .suppress(Warning.STRICT_INHERITANCE)
                 .suppress(Warning.NONFINAL_FIELDS)
+                .suppress(Warning.TRANSIENT_FIELDS)
                 .withRedefinedSuperclass()
                 .withPrefabValues(Task.class,
                                   new Task("T1", new Date(1), new Date(2)),

@@ -43,6 +43,9 @@ import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.List;
+import java.util.ResourceBundle;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.TestUtils;
@@ -73,6 +76,28 @@ public class CombinedDomainCategoryPlotTest implements ChartChangeListener {
     @Override
     public void chartChanged(ChartChangeEvent event) {
         this.events.add(event);
+    }
+    
+    /**
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
+     */
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(CombinedDomainCategoryPlot.class)
+            .withRedefinedSuperclass() // superclass also defines equals/hashCode
+            .suppress(Warning.STRICT_INHERITANCE)
+            .suppress(Warning.NONFINAL_FIELDS)
+            .suppress(Warning.TRANSIENT_FIELDS)
+            .withPrefabValues(Plot.class, TestUtils.createPlot(true), TestUtils.createPlot(false))
+            .withPrefabValues(JFreeChart.class, 
+                              TestUtils.createJFC(true), 
+                              TestUtils.createJFC(false))
+            .withPrefabValues(ResourceBundle.class, 
+                              TestUtils.createRB(true),
+                              TestUtils.createRB(false))
+            .withIgnoredFields("chart", "parent") // superclass
+            .verify();
     }
 
     /**

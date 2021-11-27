@@ -49,6 +49,7 @@ import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.chart.title.TextTitle;
+import org.jfree.chart.title.Title;
 import org.jfree.data.xy.DefaultTableXYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.junit.jupiter.api.Test;
@@ -68,11 +69,57 @@ public class XYTitleAnnotationTest {
             .withRedefinedSuperclass() // superclass also defines equals/hashCode
             .suppress(Warning.STRICT_INHERITANCE)
             .suppress(Warning.NONFINAL_FIELDS)
+            .suppress(Warning.TRANSIENT_FIELDS)
+            .withPrefabValues(Title.class, 
+                              new TextTitle("abc"), 
+                              new TextTitle("def"))
             .verify();
     }
     
     /**
+     * Confirm that the equals method can distinguish all the required fields.
+     */
+    @Test
+    public void testEquals() {
+        TextTitle t = new TextTitle("Title");
+        XYTitleAnnotation a1 = new XYTitleAnnotation(1.0, 2.0, t);
+        XYTitleAnnotation a2 = new XYTitleAnnotation(1.0, 2.0, t);
+        assertTrue(a1.equals(a2));
+        
+        a1 = new XYTitleAnnotation(1.1, 2.0, t);
+        assertFalse(a1.equals(a2));
+        a2 = new XYTitleAnnotation(1.1, 2.0, t);
+        assertTrue(a1.equals(a2));
+
+        a1 = new XYTitleAnnotation(1.1, 2.2, t);
+        assertFalse(a1.equals(a2));
+        a2 = new XYTitleAnnotation(1.1, 2.2, t);
+        assertTrue(a1.equals(a2));
+        
+        TextTitle t2 = new TextTitle("Title 2");
+        a1 = new XYTitleAnnotation(1.1, 2.2, t2);
+        assertFalse(a1.equals(a2));
+        a2 = new XYTitleAnnotation(1.1, 2.2, t2);
+        assertTrue(a1.equals(a2));
+    }
+
+    /**
+     * Two objects that are equal are required to return the same hashCode. 
+     */
+    @Test
+    public void testHashCode() {
+        TextTitle t = new TextTitle("Title");
+        XYTitleAnnotation a1 = new XYTitleAnnotation(1.0, 2.0, t);
+        XYTitleAnnotation a2 = new XYTitleAnnotation(1.0, 2.0, t);
+        assertTrue(a1.equals(a2));
+        int h1 = a1.hashCode();
+        int h2 = a2.hashCode();
+        assertEquals(h1, h2);
+    }
+    
+    /**
      * Confirm that cloning works.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {

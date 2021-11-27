@@ -95,6 +95,7 @@ import org.jfree.chart.title.TextTitle;
 import org.jfree.chart.title.Title;
 import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.util.DefaultShadowGenerator;
+import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
@@ -1596,13 +1597,67 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
         if (!Objects.equals(this.drawingSupplier, that.drawingSupplier)) {
             return false;
         }
+        if (!PaintUtils.equal(this.titlePaint, that.titlePaint)) {
+            return false;
+        }
+        if (!PaintUtils.equal(this.subtitlePaint, that.subtitlePaint)) {
+            return false;
+        }
+        if (!PaintUtils.equal(this.chartBackgroundPaint,
+                              that.chartBackgroundPaint)) {
+            return false;
+        }
+        if (!PaintUtils.equal(this.legendBackgroundPaint,
+                              that.legendBackgroundPaint)) {
+            return false;
+        }
+        if (!PaintUtils.equal(this.legendItemPaint, that.legendItemPaint)) {
+            return false;
+        }
+        if (!PaintUtils.equal(this.plotBackgroundPaint,
+                              that.plotBackgroundPaint)) {
+            return false;
+        }
+        if (!PaintUtils.equal(this.plotOutlinePaint,
+                              that.plotOutlinePaint)) {
+            return false;
+        }
         if (!Objects.equals(this.labelLinkStyle, that.labelLinkStyle)) {
+            return false;
+        }
+        if (!PaintUtils.equal(this.labelLinkPaint, that.labelLinkPaint)) {
+            return false;
+        }
+        if (!PaintUtils.equal(this.domainGridlinePaint,
+                              that.domainGridlinePaint)) {
+            return false;
+        }
+        if (!PaintUtils.equal(this.rangeGridlinePaint,
+                              that.rangeGridlinePaint)) {
+            return false;
+        }
+        if (!PaintUtils.equal(this.baselinePaint, that.baselinePaint)) {
+            return false;
+        }
+        if (!PaintUtils.equal(this.crosshairPaint, that.crosshairPaint)) {
             return false;
         }
         if (!Objects.equals(this.axisOffset, that.axisOffset)) {
             return false;
         }
+        if (!PaintUtils.equal(this.axisLabelPaint, that.axisLabelPaint)) {
+            return false;
+        }
+        if (!PaintUtils.equal(this.tickLabelPaint, that.tickLabelPaint)) {
+            return false;
+        }
+        if (!PaintUtils.equal(this.itemLabelPaint, that.itemLabelPaint)) {
+            return false;
+        }
         if (this.shadowVisible != that.shadowVisible) {
+            return false;
+        }
+        if (!PaintUtils.equal(this.shadowPaint, that.shadowPaint)) {
             return false;
         }
         if (!Objects.equals(this.barPainter, that.barPainter)) {
@@ -1612,6 +1667,21 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
             return false;
         }
         if (!Objects.equals(this.shadowGenerator, that.shadowGenerator)) {
+            return false;
+        }
+        if (!PaintUtils.equal(this.thermometerPaint,
+                              that.thermometerPaint)) {
+            return false;
+        }
+        if (!PaintUtils.equal(this.errorIndicatorPaint,
+                              that.errorIndicatorPaint)) {
+            return false;
+        }
+        if (!PaintUtils.equal(this.gridBandPaint, that.gridBandPaint)) {
+            return false;
+        }
+        if (!PaintUtils.equal(this.gridBandAlternatePaint,
+                              that.gridBandAlternatePaint)) {
             return false;
         }
         return true;
@@ -1625,12 +1695,32 @@ public class StandardChartTheme implements ChartTheme, Cloneable,
         hash = 83 * hash + Objects.hashCode(this.largeFont);
         hash = 83 * hash + Objects.hashCode(this.regularFont);
         hash = 83 * hash + Objects.hashCode(this.smallFont);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.titlePaint);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.subtitlePaint);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.chartBackgroundPaint);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.legendBackgroundPaint);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.legendItemPaint);
         hash = 83 * hash + Objects.hashCode(this.drawingSupplier);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.plotBackgroundPaint);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.plotOutlinePaint);
         hash = 83 * hash + Objects.hashCode(this.labelLinkStyle);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.labelLinkPaint);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.domainGridlinePaint);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.rangeGridlinePaint);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.baselinePaint);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.crosshairPaint);
         hash = 83 * hash + Objects.hashCode(this.axisOffset);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.axisLabelPaint);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.tickLabelPaint);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.itemLabelPaint);
         hash = 83 * hash + (this.shadowVisible ? 1 : 0);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.shadowPaint);
         hash = 83 * hash + Objects.hashCode(this.barPainter);
         hash = 83 * hash + Objects.hashCode(this.xyBarPainter);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.thermometerPaint);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.errorIndicatorPaint);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.gridBandPaint);
+        hash = 83 * hash + HashUtils.hashCodeForPaint(this.gridBandAlternatePaint);
         hash = 83 * hash + Objects.hashCode(this.shadowGenerator);
         return hash;
     }

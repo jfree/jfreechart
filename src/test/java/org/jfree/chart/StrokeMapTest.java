@@ -41,22 +41,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.awt.BasicStroke;
-import nl.jqno.equalsverifier.EqualsVerifier;
-import nl.jqno.equalsverifier.Warning;
 import org.junit.jupiter.api.Test;
 
 /**
  * Some tests for the {@link StrokeMap} class.
  */
 public class StrokeMapTest {
-
-    @Test
-    public void testEqualsHashCode() {
-        EqualsVerifier.forClass(StrokeMap.class)
-                .suppress(Warning.STRICT_INHERITANCE)
-                .suppress(Warning.NONFINAL_FIELDS)
-                .verify();
-    }
 
     /**
      * Some checks for the getStroke() method.

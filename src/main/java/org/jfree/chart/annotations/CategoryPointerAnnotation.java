@@ -49,7 +49,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Objects;
 
+import org.jfree.chart.HashUtils;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.event.AnnotationChangeEvent;
@@ -59,6 +61,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.util.Args;
+import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
 import org.jfree.data.category.CategoryDataset;
@@ -455,6 +458,12 @@ public class CategoryPointerAnnotation extends CategoryTextAnnotation
             Double.doubleToLongBits(that.arrowWidth)) {
             return false;
         }
+        if (!PaintUtils.equal(this.arrowPaint, that.arrowPaint)) {
+            return false;
+        }
+        if (!Objects.equals(this.arrowStroke, that.arrowStroke)) {
+            return false;
+        }
         if (Double.doubleToLongBits(this.labelOffset) != 
             Double.doubleToLongBits(that.labelOffset)) {
             return false;
@@ -498,6 +507,8 @@ public class CategoryPointerAnnotation extends CategoryTextAnnotation
         result = 37 * result + (int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(this.arrowWidth);
         result = 37 * result + (int) (temp ^ (temp >>> 32));
+        result = 37 * result + HashUtils.hashCodeForPaint(this.arrowPaint);
+        result = 37 * result + this.arrowStroke.hashCode();
         temp = Double.doubleToLongBits(this.labelOffset);
         result = 37 * result + (int) (temp ^ (temp >>> 32));
         return result;

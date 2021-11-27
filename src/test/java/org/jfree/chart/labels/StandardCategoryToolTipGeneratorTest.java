@@ -65,6 +65,7 @@ public class StandardCategoryToolTipGeneratorTest {
         EqualsVerifier.forClass(StandardCategoryToolTipGenerator.class)
                 .suppress(Warning.STRICT_INHERITANCE)
                 .suppress(Warning.NONFINAL_FIELDS)
+                .suppress(Warning.TRANSIENT_FIELDS)
                 .withRedefinedSuperclass()
                 .verify();
     }
@@ -120,6 +121,7 @@ public class StandardCategoryToolTipGeneratorTest {
 
     /**
      * Confirm that cloning works.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {

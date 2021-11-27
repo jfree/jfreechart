@@ -58,6 +58,7 @@ public class TaskTest {
         EqualsVerifier.forClass(Task.class)
                 .suppress(Warning.STRICT_INHERITANCE)
                 .suppress(Warning.NONFINAL_FIELDS)
+                .suppress(Warning.TRANSIENT_FIELDS)
                 .withPrefabValues(Task.class, 
                                   new Task("T1", new Date(1), new Date(2)),
                                   new Task("T2", new Date(3), new Date(4)))

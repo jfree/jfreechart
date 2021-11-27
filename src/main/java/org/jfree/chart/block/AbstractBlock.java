@@ -553,6 +553,9 @@ public class AbstractBlock implements Cloneable, Serializable {
         if (!Objects.equals(this.frame, that.frame)) {
             return false;
         }
+        if (!Objects.equals(this.bounds, that.bounds)) {
+            return false;
+        }
         if (!Objects.equals(this.margin, that.margin)) {
             return false;
         }
@@ -595,6 +598,7 @@ public class AbstractBlock implements Cloneable, Serializable {
         hash = 89 * hash + Objects.hashCode(this.margin);
         hash = 89 * hash + Objects.hashCode(this.frame);
         hash = 89 * hash + Objects.hashCode(this.padding);
+        hash = 89 * hash + Objects.hashCode(this.bounds);
         hash = 89 * hash +
                (int) (Double.doubleToLongBits(this.width) ^
                      (Double.doubleToLongBits(this.width) >>> 32));

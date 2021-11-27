@@ -57,7 +57,12 @@ public class TitleTest {
     public void testEqualsHashCode() {
         EqualsVerifier.forClass(Title.class)
                 .suppress(Warning.NONFINAL_FIELDS)
+                .suppress(Warning.TRANSIENT_FIELDS)
                 .withRedefinedSuperclass()
+                .withRedefinedSubclass(CompositeTitle.class)
+                .withRedefinedSubclass(DateTitle.class)
+                .withRedefinedSubclass(ShortTextTitle.class)
+                .withRedefinedSubclass(TextTitle.class)
                 .withRedefinedSubclass(LegendTitle.class)
                 .withRedefinedSubclass(PaintScaleLegend.class)
                 .withPrefabValues(Rectangle2D.class,

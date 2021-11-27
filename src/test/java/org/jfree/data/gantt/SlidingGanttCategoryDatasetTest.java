@@ -57,6 +57,7 @@ public class SlidingGanttCategoryDatasetTest {
         EqualsVerifier.forClass(SlidingGanttCategoryDataset.class)
                 .suppress(Warning.STRICT_INHERITANCE)
                 .suppress(Warning.NONFINAL_FIELDS)
+                .suppress(Warning.TRANSIENT_FIELDS)
                 .withRedefinedSuperclass()
                 .verify();
     }

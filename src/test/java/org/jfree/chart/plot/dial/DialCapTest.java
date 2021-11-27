@@ -150,7 +150,7 @@ public class DialCapTest {
     public void testSerialization() {
         // test a default instance
         DialCap c1 = new DialCap();
-        DialCap c2 = (DialCap) TestUtils.serialised(c1);
+        DialCap c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
 
         // test a custom instance

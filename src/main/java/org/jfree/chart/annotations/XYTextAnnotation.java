@@ -50,7 +50,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Objects;
-
+import org.jfree.chart.HashUtils;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.event.AnnotationChangeEvent;
 import org.jfree.chart.plot.Plot;
@@ -60,6 +60,7 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.text.TextUtils;
 import org.jfree.chart.ui.RectangleEdge;
 import org.jfree.chart.ui.TextAnchor;
+import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.chart.util.SerialUtils;
@@ -538,6 +539,9 @@ public class XYTextAnnotation extends AbstractXYAnnotation
             Double.doubleToLongBits(that.rotationAngle)) {
             return false;
         }
+        if (!PaintUtils.equal(this.paint, that.paint)) {
+            return false;
+        }
         if (this.outlineVisible != that.outlineVisible) {
             return false;
         }
@@ -547,13 +551,21 @@ public class XYTextAnnotation extends AbstractXYAnnotation
         if (!Objects.equals(this.font, that.font)) {
             return false;
         }
-        if (!Objects.equals(this.textAnchor, that.getTextAnchor())) {
+        if (!Objects.equals(this.textAnchor, that.textAnchor)) {
             return false;
         }
-        if (!Objects.equals(this.rotationAnchor, that.getRotationAnchor())) {
+        if (!Objects.equals(this.rotationAnchor, that.rotationAnchor)) {
             return false;
         }
-
+        if (!PaintUtils.equal(this.backgroundPaint, that.backgroundPaint)) {
+            return false;
+        }
+        if (!PaintUtils.equal(this.outlinePaint, that.outlinePaint)) {
+            return false;
+        }
+        if (!Objects.equals(this.outlineStroke, that.outlineStroke)) {
+            return false;
+        }
         // fix the "equals not symmetric" problem
         if (that.canEqual(this) == false) {
             return false;
@@ -586,15 +598,19 @@ public class XYTextAnnotation extends AbstractXYAnnotation
         int hash = super.hashCode(); // equals calls superclass, hashCode must also
         hash = 23 * hash + Objects.hashCode(this.text);
         hash = 23 * hash + Objects.hashCode(this.font);
-        hash = 23 * hash + (int) (Double.doubleToLongBits(this.x) ^ 
+        hash = 23 * hash + HashUtils.hashCodeForPaint(this.paint);
+        hash = 23 * hash + (int) (Double.doubleToLongBits(this.x) ^
                                  (Double.doubleToLongBits(this.x) >>> 32));
-        hash = 23 * hash + (int) (Double.doubleToLongBits(this.y) ^ 
+        hash = 23 * hash + (int) (Double.doubleToLongBits(this.y) ^
                                  (Double.doubleToLongBits(this.y) >>> 32));
         hash = 23 * hash + Objects.hashCode(this.textAnchor);
         hash = 23 * hash + Objects.hashCode(this.rotationAnchor);
-        hash = 23 * hash + (int) (Double.doubleToLongBits(this.rotationAngle) ^ 
+        hash = 23 * hash + (int) (Double.doubleToLongBits(this.rotationAngle) ^
                                  (Double.doubleToLongBits(this.rotationAngle) >>> 32));
+        hash = 23 * hash + HashUtils.hashCodeForPaint(this.backgroundPaint);
         hash = 23 * hash + (this.outlineVisible ? 1 : 0);
+        hash = 23 * hash + HashUtils.hashCodeForPaint(this.outlinePaint);
+        hash = 23 * hash + Objects.hashCode(this.outlineStroke);
         return hash;
     }
 
