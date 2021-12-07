@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 public class TimeSeriesChartTest {
     /**
-     *  Some checks for the equals() method
+     *  CS427: Some checks for the equals() method
       */
     @Test
     public void testEquals(){
