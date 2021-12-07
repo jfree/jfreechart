@@ -276,7 +276,7 @@ public class LogAxisTest {
     }
 
     /**
-     * Test for fixing issue #215
+     * CS 427: Test for fixing issue #215
      i.e., Setting the lower limit of a LogAxis to zero creates a blank chart
      */
     @Test

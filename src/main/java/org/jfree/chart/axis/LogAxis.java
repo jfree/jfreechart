@@ -304,6 +304,7 @@ public class LogAxis extends ValueAxis {
      */
     public double calculateLog(double value)
     {
+    // CS427
         double returnVal = smallestValue;
         if (value > 0.0) {
             returnVal = Math.log(value) / this.baseLog;
