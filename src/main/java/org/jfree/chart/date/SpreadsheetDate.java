@@ -35,13 +35,16 @@
  */
 package org.jfree.chart.date;
 
+import java.time.Month;
+import java.time.DayOfWeek;
 import java.util.Calendar;
 import java.util.Date;
+import java.time.LocalDate;
+import java.time.DateTimeException;
 
 /**
  * Represents a date using an integer, in a similar fashion to the
- * implementation in Microsoft Excel.  The range of dates supported is
- * 1-Jan-1900 to 31-Dec-9999.
+ * implementation in Microsoft Excel.  
  * <P>
  * Be aware that there is a deliberate bug in Excel that recognises the year
  * 1900 as a leap year when in fact it is not a leap year. You can find more
@@ -73,7 +76,7 @@ public class SpreadsheetDate extends SerialDate {
     /** The month of the year (1 to 12). */
     private final int month;
 
-    /** The year (1900 to 9999). */
+    /** The year */
     private final int year;
 
     /**
@@ -84,32 +87,20 @@ public class SpreadsheetDate extends SerialDate {
      * @param year  the year (in the range 1900 to 9999).
      */
     public SpreadsheetDate(int day, int month, int year) {
-
-        if ((year >= 1900) && (year <= 9999)) {
-            this.year = year;
-        }
-        else {
-            throw new IllegalArgumentException(
-                "The 'year' argument must be in range 1900 to 9999.");
-        }
-
-        if ((month >= MonthConstants.JANUARY) 
-                && (month <= MonthConstants.DECEMBER)) {
-            this.month = month;
-        }
-        else {
-            throw new IllegalArgumentException(
-                "The 'month' argument must be in the range 1 to 12.");
-        }
-
-        if ((day >= 1) && (day <= SerialDate.lastDayOfMonth(month, year))) {
-            this.day = day;
-        } else {
-            throw new IllegalArgumentException("Invalid 'day' argument.");
-        }
-
-        // the serial number needs to be synchronised with the day-month-year...
-        this.serial = calcSerial(day, month, year);
+    	try {
+    		LocalDate.of(year, month, day);
+    		
+    		this.day = day;
+    		this.month = month;
+    		this.year = year;
+    		this.serial = calcSerial(day, month, year);
+    	}
+    	catch (DateTimeException a) {
+    		throw new IllegalArgumentException(
+    			"The date is invalid!");
+    	}
+    	
+    	
     }
 
     /**

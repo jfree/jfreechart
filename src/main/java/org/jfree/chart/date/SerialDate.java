@@ -41,6 +41,9 @@ import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Date;
+import java.time.DayOfWeek;
+import java.time.Month;
 
 /**
  *  An abstract class that defines our requirements for manipulating dates,
@@ -76,40 +79,12 @@ public abstract class SerialDate implements Comparable, Serializable,
     public static final int SERIAL_UPPER_BOUND = 2958465;
 
     /** The lowest year value supported by this date format. */
-    public static final int MINIMUM_YEAR_SUPPORTED = 1900;
+    /**public static final int MINIMUM_YEAR_SUPPORTED = 1900; */
 
     /** The highest year value supported by this date format. */
-    public static final int MAXIMUM_YEAR_SUPPORTED = 9999;
+    /** public static final int MAXIMUM_YEAR_SUPPORTED = 9999; */
 
-    /** Useful constant for Monday. Equivalent to java.util.Calendar.MONDAY. */
-    public static final int MONDAY = Calendar.MONDAY;
-
-    /** 
-     * Useful constant for Tuesday. Equivalent to java.util.Calendar.TUESDAY. 
-     */
-    public static final int TUESDAY = Calendar.TUESDAY;
-
-    /** 
-     * Useful constant for Wednesday. Equivalent to 
-     * java.util.Calendar.WEDNESDAY. 
-     */
-    public static final int WEDNESDAY = Calendar.WEDNESDAY;
-
-    /** 
-     * Useful constant for Thrusday. Equivalent to java.util.Calendar.THURSDAY. 
-     */
-    public static final int THURSDAY = Calendar.THURSDAY;
-
-    /** Useful constant for Friday. Equivalent to java.util.Calendar.FRIDAY. */
-    public static final int FRIDAY = Calendar.FRIDAY;
-
-    /** 
-     * Useful constant for Saturday. Equivalent to java.util.Calendar.SATURDAY.
-     */
-    public static final int SATURDAY = Calendar.SATURDAY;
-
-    /** Useful constant for Sunday. Equivalent to java.util.Calendar.SUNDAY. */
-    public static final int SUNDAY = Calendar.SUNDAY;
+    
 
     /** The number of days in each month in non leap years. */
     static final int[] LAST_DAY_OF_MONTH =
@@ -198,8 +173,8 @@ public abstract class SerialDate implements Comparable, Serializable,
      *         valid day-of-the-week, and {@code false} otherwise.
      */
     public static boolean isValidWeekdayCode(int code) {
-
-        switch(code) {
+    	DayOfWeek code2 = DayOfWeek.of(code);
+        switch(code2) {
             case SUNDAY: 
             case MONDAY: 
             case TUESDAY: 
@@ -295,8 +270,8 @@ public abstract class SerialDate implements Comparable, Serializable,
      *         valid month.
      */
     public static boolean isValidMonthCode(int code) {
-
-        switch(code) {
+    	Month code2 = Month.of(code);
+        switch(code2) {
             case JANUARY: 
             case FEBRUARY: 
             case MARCH: 
@@ -324,8 +299,8 @@ public abstract class SerialDate implements Comparable, Serializable,
      * @return the quarter that the month belongs to.
      */
     public static int monthCodeToQuarter(int code) {
-
-        switch(code) {
+    	Month code2 = Month.of(code);
+        switch(code2) {
             case JANUARY: 
             case FEBRUARY: 
             case MARCH: return 1;
@@ -403,7 +378,7 @@ public abstract class SerialDate implements Comparable, Serializable,
      *         year otherwise.
      */
     public static int stringToMonthCode(String s) {
-
+    	
         final String[] shortMonthNames = DATE_FORMAT_SYMBOLS.getShortMonths();
         final String[] monthNames = DATE_FORMAT_SYMBOLS.getMonths();
 
@@ -548,9 +523,11 @@ public abstract class SerialDate implements Comparable, Serializable,
      */
     public static SerialDate addMonths(int months, SerialDate base) {
         int yy = (12 * base.getYYYY() + base.getMonth() + months - 1) / 12;
+        /**
         if (yy < MINIMUM_YEAR_SUPPORTED || yy > MAXIMUM_YEAR_SUPPORTED) {
             throw new IllegalArgumentException("Call to addMonths resulted in unsupported year");
         }
+        **/
         int mm = (12 * base.getYYYY() + base.getMonth() + months - 1) % 12 + 1;
         int dd = Math.min(base.getDayOfMonth(), 
                 SerialDate.lastDayOfMonth(mm, yy));
@@ -572,9 +549,11 @@ public abstract class SerialDate implements Comparable, Serializable,
         int baseD = base.getDayOfMonth();
 
         int targetY = baseY + years;
+        /**
         if (targetY < MINIMUM_YEAR_SUPPORTED || targetY > MAXIMUM_YEAR_SUPPORTED) {
             throw new IllegalArgumentException("Call to addYears resulted in unsupported year");
         }
+        **/
         int targetD = Math.min(baseD, SerialDate.lastDayOfMonth(baseM, targetY));
         return SerialDate.createInstance(targetD, baseM, targetY);
     }
