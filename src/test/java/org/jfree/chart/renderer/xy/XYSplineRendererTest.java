@@ -50,7 +50,7 @@ import org.jfree.chart.api.PublicCloneable;
 import org.junit.jupiter.api.Test;
 
 /**
- * Tests for the {@link XYSplineRenderer} class.
+ * CS427: Tests for the {@link XYSplineRenderer} class.
  */
 public class XYSplineRendererTest {
 

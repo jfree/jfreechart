@@ -131,7 +131,7 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
 
 
     /**
-     *  A tolerance for absolute difference of y_val between neighboring points
+     *  CS427: A tolerance for absolute difference of y_val between neighboring points
      *  if ABS(point1.y - point2.y) <= diffYTol, no spline interpolation
      */
     private double diffYTol;
@@ -351,8 +351,9 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
             Point2D p = plot.getOrientation() == PlotOrientation.HORIZONTAL 
                 ? new Point2D.Float((float) transY1, (float) transX1) 
                 : new Point2D.Float((float) transX1, (float) transY1);
-            if (!s.points.contains(p))
+            if (!s.points.contains(p)) {
                 s.points.add(p);
+            }
         }
         
         if (item == dataset.getItemCount(series) - 1) {     // construct path
@@ -424,9 +425,9 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
                         d[i] = cpi.y;
                     }
 
-                    for (int i = 1; i <= np - 1; i++)
+                    for (int i = 1; i <= np - 1; i++) {
                         h[i] = x[i] - x[i - 1];
-
+                    }
                     float[] sub = new float[np - 1];
                     float[] diag = new float[np - 1];
                     float[] sup = new float[np - 1];
@@ -521,8 +522,9 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
             b[i] -= sub[i] * b[i - 1];
         }
         b[n] /= diag[n];
-        for (i = n - 1; i >= 1; i--)
+        for (i = n - 1; i >= 1; i--) {
             b[i] = (b[i] - sup[i] * b[i + 1]) / diag[i];
+        }
     }
 
     /**
