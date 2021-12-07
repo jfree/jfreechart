@@ -43,6 +43,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Date;
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.Month;
 
 /**
@@ -84,15 +85,7 @@ public abstract class SerialDate implements Comparable, Serializable,
     /** The highest year value supported by this date format. */
     /** public static final int MAXIMUM_YEAR_SUPPORTED = 9999; */
 
-    
 
-    /** The number of days in each month in non leap years. */
-    static final int[] LAST_DAY_OF_MONTH =
-        {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-
-    /** The number of days in a (non-leap) year up to the end of each month. */
-    static final int[] AGGREGATE_DAYS_TO_END_OF_MONTH =
-        {0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365};
 
     /** The number of days in a year up to the end of the preceding month. */
     static final int[] AGGREGATE_DAYS_TO_END_OF_PRECEDING_MONTH =
@@ -330,7 +323,7 @@ public abstract class SerialDate implements Comparable, Serializable,
      * @return a string representing the supplied month.
      */
     public static String monthCodeToString(int month) {
-        return monthCodeToString(month, false);
+        return Month.of(month).toString();
     }
 
     /**
@@ -438,20 +431,8 @@ public abstract class SerialDate implements Comparable, Serializable,
      * @return {@code true} if the specified year is a leap year.
      */
     public static boolean isLeapYear(int yyyy) {
-
-        if ((yyyy % 4) != 0) {
-            return false;
-        }
-        else if ((yyyy % 400) == 0) {
-            return true;
-        }
-        else if ((yyyy % 100) == 0) {
-            return false;
-        }
-        else {
-            return true;
-        }
-
+    	LocalDate date = LocalDate.of(yyyy, 1, 1);
+    	return date.isLeapYear();
     }
 
     /**
@@ -465,10 +446,15 @@ public abstract class SerialDate implements Comparable, Serializable,
      * @return the number of leap years from 1900 to the specified year.
      */
     public static int leapYearCount(int yyyy) {
-        int leap4 = (yyyy - 1896) / 4;
-        int leap100 = (yyyy - 1800) / 100;
-        int leap400 = (yyyy - 1600) / 400;
-        return leap4 - leap100 + leap400;
+    	LocalDate date = LocalDate.of(1900,1,1);
+    	int count = 0;
+    	
+    	for(int i = 1900; i <= yyyy; i++) {
+    		if(date.withYear(i).isLeapYear()) {
+    			count++;
+    		}
+    	}
+    	return count;
     }
 
     /**
@@ -482,16 +468,8 @@ public abstract class SerialDate implements Comparable, Serializable,
      */
     public static int lastDayOfMonth(int month, int yyyy) {
 
-        final int result = LAST_DAY_OF_MONTH[month];
-        if (month != FEBRUARY) {
-            return result;
-        }
-        else if (isLeapYear(yyyy)) {
-            return result + 1;
-        }
-        else {
-            return result;
-        }
+    	LocalDate date = LocalDate.of(yyyy, month, 1);
+    	return date.lengthOfMonth();
 
     }
 
@@ -505,8 +483,9 @@ public abstract class SerialDate implements Comparable, Serializable,
      * @return a new date.
      */
     public static SerialDate addDays(int days, SerialDate base) {
-        int serialDayNumber = base.toSerial() + days;
-        return SerialDate.createInstance(serialDayNumber);
+        LocalDate date = LocalDate.of(base.getYYYY(), base.getMonth(), base.getDayOfMonth());
+        date = date.plusDays(days);
+        return SerialDate.createInstance(date.getDayOfMonth(), date.getMonthValue(), date.getYear());
     }
 
     /**
@@ -523,15 +502,12 @@ public abstract class SerialDate implements Comparable, Serializable,
      */
     public static SerialDate addMonths(int months, SerialDate base) {
         int yy = (12 * base.getYYYY() + base.getMonth() + months - 1) / 12;
-        /**
-        if (yy < MINIMUM_YEAR_SUPPORTED || yy > MAXIMUM_YEAR_SUPPORTED) {
-            throw new IllegalArgumentException("Call to addMonths resulted in unsupported year");
-        }
-        **/
-        int mm = (12 * base.getYYYY() + base.getMonth() + months - 1) % 12 + 1;
-        int dd = Math.min(base.getDayOfMonth(), 
-                SerialDate.lastDayOfMonth(mm, yy));
-        return SerialDate.createInstance(dd, mm, yy);
+        LocalDate date = LocalDate.of(base.getYYYY(), base.getMonth(), base.getDayOfMonth());
+        date.plusMonths(months);
+        
+        int dd = Math.min(base.getDayOfMonth(), date.lengthOfMonth());
+
+        return SerialDate.createInstance(dd, date.getMonthValue(), date.getYear());
     }
 
     /**
@@ -544,18 +520,9 @@ public abstract class SerialDate implements Comparable, Serializable,
      * @return A new date.
      */
     public static SerialDate addYears(int years, SerialDate base) {
-        int baseY = base.getYYYY();
-        int baseM = base.getMonth();
-        int baseD = base.getDayOfMonth();
-
-        int targetY = baseY + years;
-        /**
-        if (targetY < MINIMUM_YEAR_SUPPORTED || targetY > MAXIMUM_YEAR_SUPPORTED) {
-            throw new IllegalArgumentException("Call to addYears resulted in unsupported year");
-        }
-        **/
-        int targetD = Math.min(baseD, SerialDate.lastDayOfMonth(baseM, targetY));
-        return SerialDate.createInstance(targetD, baseM, targetY);
+    	LocalDate date = LocalDate.of(base.getYYYY(), base.getMonth(), base.getDayOfMonth());
+    	date = date.plusYears(years);
+        return SerialDate.createInstance(date.getDayOfMonth(), date.getMonthValue(), date.getYear());
     }
 
     /**
