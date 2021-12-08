@@ -131,7 +131,8 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
 
 
     /**
-     *  CS427: A tolerance for absolute difference of y_val between neighboring points
+     *  CS427: Issue link: https://github.com/jfree/jfreechart/issues/168
+     *  A tolerance for absolute difference of y_val between neighboring points
      *  if ABS(point1.y - point2.y) <= diffYTol, no spline interpolation
      */
     private double diffYTol;
