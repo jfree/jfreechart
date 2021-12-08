@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 /**
+ *  CS427: Issue link: https://github.com/jfree/jfreechart/issues/234
  * Tests for the {@link PolygonPlot} class.
  */
 public class PolygonPlotTest {

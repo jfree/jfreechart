@@ -14,7 +14,8 @@ import org.jfree.chart.swing.ApplicationFrame;
 import org.jfree.chart.axis.NumberAxis;
 
 /**
- * CS427： This demo illustrates the solution to issue #234.
+ *  CS427: Issue link: https://github.com/jfree/jfreechart/issues/234
+ * This demo illustrates the solution to issue #234.
  */
 public class PolygonPlot extends ApplicationFrame{
     private static XYDataset dataset = null;
