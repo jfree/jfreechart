@@ -4,8 +4,13 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- * issues165
+ * Project: Issues165
+ * Description: This file fixed the issue #165 for the jfree library.
  *
+ * <p>
+ * author:wm
+ * Date:2021/12/8
+ * Time:13:17
  * Version:
  */
 public class issues165 {
