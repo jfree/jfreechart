@@ -22,7 +22,8 @@ import org.jfree.data.time.*;
 import org.jfree.data.xy.XYDataset;
 
 /**
- * CS 427  A demo showing a time series line chart drawn using spline curves.
+ *  CS427: Issue link: https://github.com/jfree/jfreechart/issues/210
+ * A demo showing a time series line chart drawn using spline curves.
  *  Demonstrate the solution to Issue #210
  */
 public class TimeSeriesChart extends ApplicationFrame {
