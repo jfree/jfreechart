@@ -276,7 +276,8 @@ public class LogAxisTest {
     }
 
     /**
-     * CS 427: Test for fixing issue #215
+     *  CS427: Issue link: https://github.com/jfree/jfreechart/issues/215
+     * Test for fixing issue #215
      i.e., Setting the lower limit of a LogAxis to zero creates a blank chart
      */
     @Test
