@@ -20,7 +20,7 @@ public class Issues165 {
     //create a test for the year before 1990
     public void testOldCode() {
         try {
-            org.jfree.data.time.Day day = new org.jfree.data.time.Day(1, 1, 1890);
+            new org.jfree.data.time.Day(1, 1, 1890);
         }catch (Exception e){
             Assertions.assertEquals(e.getClass(),IllegalArgumentException.class);
         }
