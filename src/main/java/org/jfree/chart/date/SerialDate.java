@@ -45,6 +45,8 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
 
+import static java.time.Month.*;
+
 /**
  *  An abstract class that defines our requirements for manipulating dates,
  *  without tying down a particular implementation.
@@ -62,8 +64,8 @@ import java.time.Month;
  *  You can call getInstance() to get a concrete subclass of SerialDate,
  *  without worrying about the exact implementation.
  */
-public abstract class SerialDate implements Comparable, Serializable, 
-        MonthConstants {
+public abstract class SerialDate implements Comparable, Serializable
+        {
 
     /** For serialization. */
     private static final long serialVersionUID = -293716040467423637L;
@@ -192,18 +194,17 @@ public abstract class SerialDate implements Comparable, Serializable,
      */
     public static int stringToWeekdayCode(String s) {
 
-        final String[] shortWeekdayNames 
-            = DATE_FORMAT_SYMBOLS.getShortWeekdays();
+        final String[] shortWeekdayNames = DATE_FORMAT_SYMBOLS.getShortWeekdays();
         final String[] weekDayNames = DATE_FORMAT_SYMBOLS.getWeekdays();
 
         int result = -1;
-        String st = s.trim();
+        s = s.trim();
         for (int i = 0; i < weekDayNames.length; i++) {
-            if (st.equals(shortWeekdayNames[i])) {
+            if (s.equals(shortWeekdayNames[i])) {
                 result = i;
                 break;
             }
-            if (st.equals(weekDayNames[i])) {
+            if (s.equals(weekDayNames[i])) {
                 result = i;
                 break;
             }
@@ -263,7 +264,7 @@ public abstract class SerialDate implements Comparable, Serializable,
      *         valid month.
      */
     public static boolean isValidMonthCode(int code) {
-    	Month code2 = Month.of(code);
+    	Month code2 = of(code);
         switch(code2) {
             case JANUARY: 
             case FEBRUARY: 
@@ -292,7 +293,7 @@ public abstract class SerialDate implements Comparable, Serializable,
      * @return the quarter that the month belongs to.
      */
     public static int monthCodeToQuarter(int code) {
-    	Month code2 = Month.of(code);
+    	Month code2 = of(code);
         switch(code2) {
             case JANUARY: 
             case FEBRUARY: 
@@ -319,9 +320,13 @@ public abstract class SerialDate implements Comparable, Serializable,
      * default locale.
      * @param month  the month.
      * @return a string representing the supplied month.
+     *
      */
+
     public static String monthCodeToString(int month) {
-        return Month.of(month).toString();
+
+        String st = Month.of(month).toString();
+        return st;
     }
 
     /**
@@ -366,28 +371,29 @@ public abstract class SerialDate implements Comparable, Serializable,
      */
     public static int stringToMonthCode(String s) {
 
-        final String[] shortMonthNames = DATE_FORMAT_SYMBOLS.getShortMonths();
+        final String[] shortMonthNames =
+                DATE_FORMAT_SYMBOLS.getShortMonths();
         final String[] monthNames = DATE_FORMAT_SYMBOLS.getMonths();
 
         int result = -1;
-        s = s.trim();
+        String st = s.trim();
 
         // first try parsing the string as an integer (1-12)...
         try {
-            result = Integer.parseInt(s);
+            result = Integer.parseInt(st);
         }
         catch (NumberFormatException e) {
-            // suppress
+            System.out.println("Warning: Int parse exception");
         }
 
         // now search through the month names...
         if ((result < 1) || (result > 12)) {
             for (int i = 0; i < monthNames.length; i++) {
-                if (s.equals(shortMonthNames[i])) {
+                if (st.equals(shortMonthNames[i])) {
                     result = i + 1;
                     break;
                 }
-                if (s.equals(monthNames[i])) {
+                if (st.equals(monthNames[i])) {
                     result = i + 1;
                     break;
                 }
@@ -424,10 +430,11 @@ public abstract class SerialDate implements Comparable, Serializable,
      *
      * @return {@code true} if the specified year is a leap year.
      */
-    public static boolean isLeapYear(int yyyy) {
+     protected static boolean isLeapYear(int yyyy) {
     	LocalDate date = LocalDate.of(yyyy, 1, 1);
-        boolean leapYear = date.isLeapYear();
-        return leapYear;
+        boolean x;
+        x = date.isLeapYear();
+        return x;
     }
 
     /**
@@ -439,11 +446,10 @@ public abstract class SerialDate implements Comparable, Serializable,
      * @return the number of leap years from 1900 to the specified year.
      */
     public static int leapYearCount(int yyyy) {
-    	LocalDate date;
-        date = LocalDate.of(1900,1,1);
+        LocalDate date = LocalDate.of(1900, 1, 1);
         int count = 0;
-    	
-    	for(int i = 1900; i <= yyyy; i++) {
+
+        for(int i = 1900; i <= yyyy; i++) {
             if (date.withYear(i).isLeapYear()) {
                 count++;
             }
