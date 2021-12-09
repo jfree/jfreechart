@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
  * Time:13:17
  * Version:
  */
-public class issues165 {
+public class Issues165 {
 
     @Test
     //create a test for the year before 1990
@@ -29,6 +29,6 @@ public class issues165 {
     @Test
     //test the year of 1700
     public void testSucessCode() {
-        Day day = new Day(1, 1, 1700);
+        new Day(1, 1, 1700);
     }
 }
