@@ -1,5 +1,6 @@
 package org.jfree.issues.issues165;
 
+import org.jfree.data.time.Day;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -26,8 +27,8 @@ public class issues165 {
     }
 
     @Test
-    //test the year of 1890
+    //test the year of 1700
     public void testSucessCode() {
-        Day day = new Day(1, 1, 1890);
+        Day day = new Day(1, 1, 1700);
     }
 }
