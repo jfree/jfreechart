@@ -41,7 +41,6 @@ import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.Date;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
@@ -166,7 +165,8 @@ public abstract class SerialDate implements Comparable, Serializable,
      *         valid day-of-the-week, and {@code false} otherwise.
      */
     public static boolean isValidWeekdayCode(int code) {
-    	DayOfWeek code2 = DayOfWeek.of(code);
+    	DayOfWeek code2;
+        code2 = DayOfWeek.of(code);
         switch(code2) {
             case SUNDAY: 
             case MONDAY: 
@@ -174,7 +174,7 @@ public abstract class SerialDate implements Comparable, Serializable,
             case WEDNESDAY: 
             case THURSDAY: 
             case FRIDAY: 
-            case SATURDAY: 
+            case SATURDAY:
                 return true;
             default: 
                 return false;
@@ -197,13 +197,13 @@ public abstract class SerialDate implements Comparable, Serializable,
         final String[] weekDayNames = DATE_FORMAT_SYMBOLS.getWeekdays();
 
         int result = -1;
-        s = s.trim();
+        String st = s.trim();
         for (int i = 0; i < weekDayNames.length; i++) {
-            if (s.equals(shortWeekdayNames[i])) {
+            if (st.equals(shortWeekdayNames[i])) {
                 result = i;
                 break;
             }
-            if (s.equals(weekDayNames[i])) {
+            if (st.equals(weekDayNames[i])) {
                 result = i;
                 break;
             }
@@ -317,9 +317,7 @@ public abstract class SerialDate implements Comparable, Serializable,
      * <P>
      * The string returned is the long form of the month name taken from the 
      * default locale.
-     *
      * @param month  the month.
-     *
      * @return a string representing the supplied month.
      */
     public static String monthCodeToString(int month) {
@@ -331,10 +329,8 @@ public abstract class SerialDate implements Comparable, Serializable,
      * <P>
      * The string returned is the long or short form of the month name taken 
      * from the default locale.
-     *
      * @param month  the month.
      * @param shortened  if {@code true} return the abbreviation of the month.
-     *
      * @return a string representing the supplied month.
      */
     public static String monthCodeToString(int month, boolean shortened) {
@@ -364,14 +360,12 @@ public abstract class SerialDate implements Comparable, Serializable,
      * This method will return one of the constants JANUARY, FEBRUARY, ..., 
      * DECEMBER that corresponds to the string.  If the string is not 
      * recognised, this method returns -1.
-     *
      * @param s  the string to parse.
-     *
      * @return {@code -1} if the string is not parseable, the month of the
      *         year otherwise.
      */
     public static int stringToMonthCode(String s) {
-    	
+
         final String[] shortMonthNames = DATE_FORMAT_SYMBOLS.getShortMonths();
         final String[] monthNames = DATE_FORMAT_SYMBOLS.getMonths();
 
@@ -432,7 +426,8 @@ public abstract class SerialDate implements Comparable, Serializable,
      */
     public static boolean isLeapYear(int yyyy) {
     	LocalDate date = LocalDate.of(yyyy, 1, 1);
-    	return date.isLeapYear();
+        boolean leapYear = date.isLeapYear();
+        return leapYear;
     }
 
     /**
@@ -440,30 +435,27 @@ public abstract class SerialDate implements Comparable, Serializable,
      * INCLUSIVE.
      * <P>
      * Note that 1900 is not a leap year.
-     *
      * @param yyyy  the year (in the range 1900 to 9999).
-     *
      * @return the number of leap years from 1900 to the specified year.
      */
     public static int leapYearCount(int yyyy) {
-    	LocalDate date = LocalDate.of(1900,1,1);
-    	int count = 0;
+    	LocalDate date;
+        date = LocalDate.of(1900,1,1);
+        int count = 0;
     	
     	for(int i = 1900; i <= yyyy; i++) {
-    		if(date.withYear(i).isLeapYear()) {
-    			count++;
-    		}
-    	}
+            if (date.withYear(i).isLeapYear()) {
+                count++;
+            }
+        }
     	return count;
     }
 
     /**
      * Returns the number of the last day of the month, taking into account 
      * leap years.
-     *
      * @param month  the month.
      * @param yyyy  the year (in the range 1900 to 9999).
-     *
      * @return the number of the last day of the month.
      */
     public static int lastDayOfMonth(int month, int yyyy) {
@@ -476,10 +468,8 @@ public abstract class SerialDate implements Comparable, Serializable,
     /**
      * Creates a new date by adding the specified number of days to the base 
      * date.
-     *
      * @param days  the number of days to add (can be negative).
      * @param base  the base date.
-     *
      * @return a new date.
      */
     public static SerialDate addDays(int days, SerialDate base) {
@@ -493,17 +483,14 @@ public abstract class SerialDate implements Comparable, Serializable,
      * date.
      * <P>
      * If the base date is close to the end of the month, the day on the result
-     * may be adjusted slightly:  31 May + 1 month = 30 June.
-     *
+     * may be adjusted slightly:  31 May + 1 month = 30 June
      * @param months  the number of months to add (can be negative).
      * @param base  the base date.
-     *
      * @return a new date.
      */
     public static SerialDate addMonths(int months, SerialDate base) {
-        int yy = (12 * base.getYYYY() + base.getMonth() + months - 1) / 12;
         LocalDate date = LocalDate.of(base.getYYYY(), base.getMonth(), base.getDayOfMonth());
-        date.plusMonths(months);
+        date = date.plusMonths(months);
         
         int dd = Math.min(base.getDayOfMonth(), date.lengthOfMonth());
 
@@ -513,10 +500,8 @@ public abstract class SerialDate implements Comparable, Serializable,
     /**
      * Creates a new date by adding the specified number of years to the base 
      * date.
-     *
      * @param years  the number of years to add (can be negative).
      * @param base  the base date.
-     *
      * @return A new date.
      */
     public static SerialDate addYears(int years, SerialDate base) {
@@ -528,10 +513,8 @@ public abstract class SerialDate implements Comparable, Serializable,
     /**
      * Returns the latest date that falls on the specified day-of-the-week and 
      * is BEFORE the base date.
-     *
      * @param targetWeekday  a code for the target day-of-the-week.
      * @param base  the base date.
-     *
      * @return the latest date that falls on the specified day-of-the-week and 
      *         is BEFORE the base date.
      */
@@ -559,10 +542,8 @@ public abstract class SerialDate implements Comparable, Serializable,
     /**
      * Returns the earliest date that falls on the specified day-of-the-week
      * and is AFTER the base date.
-     *
      * @param targetWeekday  a code for the target day-of-the-week.
      * @param base  the base date.
-     *
      * @return the earliest date that falls on the specified day-of-the-week 
      *         and is AFTER the base date.
      */
@@ -591,10 +572,8 @@ public abstract class SerialDate implements Comparable, Serializable,
     /**
      * Returns the date that falls on the specified day-of-the-week and is
      * CLOSEST to the base date.
-     *
      * @param targetDOW  a code for the target day-of-the-week.
      * @param base  the base date.
-     *
      * @return the date that falls on the specified day-of-the-week and is 
      *         CLOSEST to the base date.
      */
@@ -620,9 +599,7 @@ public abstract class SerialDate implements Comparable, Serializable,
 
     /**
      * Rolls the date forward to the last day of the month.
-     *
      * @param base  the base date.
-     *
      * @return a new serial date.
      */
     public SerialDate getEndOfCurrentMonth(SerialDate base) {
@@ -634,9 +611,7 @@ public abstract class SerialDate implements Comparable, Serializable,
      * Returns a string corresponding to the week-in-the-month code.
      * <P>
      * Need to find a better approach.
-     *
      * @param count  an integer code representing the week-in-the-month.
-     *
      * @return a string corresponding to the week-in-the-month code.
      */
     public static String weekInMonthToString(int count) {
@@ -657,9 +632,7 @@ public abstract class SerialDate implements Comparable, Serializable,
      * Returns a string representing the supplied 'relative'.
      * <P>
      * Need to find a better approach.
-     *
      * @param relative  a constant representing the 'relative'.
-     *
      * @return a string representing the supplied 'relative'.
      */
     public static String relativeToString(int relative) {
@@ -676,11 +649,9 @@ public abstract class SerialDate implements Comparable, Serializable,
     /**
      * Factory method that returns an instance of some concrete subclass of 
      * {@link SerialDate}.
-     *
      * @param day  the day (1-31).
      * @param month  the month (1-12).
      * @param yyyy  the year (in the range 1900 to 9999).
-     *
      * @return An instance of {@link SerialDate}.
      */
     public static SerialDate createInstance(int day, int month, int yyyy) {
@@ -690,9 +661,7 @@ public abstract class SerialDate implements Comparable, Serializable,
     /**
      * Factory method that returns an instance of some concrete subclass of 
      * {@link SerialDate}.
-     *
      * @param serial  the serial number for the day (1 January 1900 = 2).
-     *
      * @return a instance of SerialDate.
      */
     public static SerialDate createInstance(int serial) {
@@ -701,9 +670,7 @@ public abstract class SerialDate implements Comparable, Serializable,
 
     /**
      * Factory method that returns an instance of a subclass of SerialDate.
-     *
      * @param date  A Java date object.
-     *
      * @return a instance of SerialDate.
      */
     public static SerialDate createInstance(java.util.Date date) {
@@ -719,7 +686,6 @@ public abstract class SerialDate implements Comparable, Serializable,
      * Returns the serial number for the date, where 1 January 1900 = 2 (this
      * corresponds, almost, to the numbering system used in Microsoft Excel for
      * Windows and Lotus 1-2-3).
-     *
      * @return the serial number for the date.
      */
     public abstract int toSerial();
@@ -727,7 +693,6 @@ public abstract class SerialDate implements Comparable, Serializable,
     /**
      * Returns a java.util.Date.  Since java.util.Date has more precision than
      * SerialDate, we need to define a convention for the 'time of day'.
-     *
      * @return this as {@code java.util.Date}.
      */
     public abstract java.util.Date toDate();
@@ -736,7 +701,6 @@ public abstract class SerialDate implements Comparable, Serializable,
      * Returns the description that is attached to the date.  It is not 
      * required that a date have a description, but for some applications it 
      * is useful.
-     *
      * @return The description (possibly {@code null}).
      */
     public String getDescription() {
@@ -745,7 +709,6 @@ public abstract class SerialDate implements Comparable, Serializable,
 
     /**
      * Sets the description for the date.
-     *
      * @param description  the description for this date ({@code null}
      *                     permitted).
      */
@@ -755,7 +718,6 @@ public abstract class SerialDate implements Comparable, Serializable,
 
     /**
      * Converts the date to a string.
-     *
      * @return  a string representation of the date.
      */
     @Override
@@ -766,7 +728,6 @@ public abstract class SerialDate implements Comparable, Serializable,
 
     /**
      * Returns the year (assume a valid range of 1900 to 9999).
-     *
      * @return the year.
      */
     public abstract int getYYYY();

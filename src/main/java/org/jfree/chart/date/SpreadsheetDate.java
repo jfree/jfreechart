@@ -35,8 +35,6 @@
  */
 package org.jfree.chart.date;
 
-import java.time.Month;
-import java.time.DayOfWeek;
 import java.util.Calendar;
 import java.util.Date;
 import java.time.LocalDate;
@@ -105,13 +103,13 @@ public class SpreadsheetDate extends SerialDate {
 
     /**
      * Standard constructor - creates a new date object representing the
-     * specified day number (which should be in the range 2 to 2958465.
+     * specified day number (which should be in the range 2 to 2958465.)
      *
      * @param serial  the serial number for the day (range: 2 to 2958465).
      */
     public SpreadsheetDate(int serial) {
 
-        if ((serial >= SERIAL_LOWER_BOUND) && (serial <= SERIAL_UPPER_BOUND)) {
+        if (serial >= SERIAL_LOWER_BOUND && serial <= SERIAL_UPPER_BOUND) {
             this.serial = serial;
         }
         else {
@@ -250,7 +248,7 @@ public class SpreadsheetDate extends SerialDate {
 
         if (object instanceof SerialDate) {
             SerialDate s = (SerialDate) object;
-            return (s.toSerial() == this.toSerial());
+            return s.toSerial() == this.toSerial();
         } else {
             return false;
         }
@@ -305,7 +303,7 @@ public class SpreadsheetDate extends SerialDate {
      */
     @Override
     public boolean isOn(SerialDate other) {
-        return (this.serial == other.toSerial());
+        return this.serial == other.toSerial();
     }
 
     /**
@@ -319,7 +317,7 @@ public class SpreadsheetDate extends SerialDate {
      */
     @Override
     public boolean isBefore(SerialDate other) {
-        return (this.serial < other.toSerial());
+        return this.serial < other.toSerial();
     }
 
     /**
@@ -333,7 +331,7 @@ public class SpreadsheetDate extends SerialDate {
      */
     @Override
     public boolean isOnOrBefore(SerialDate other) {
-        return (this.serial <= other.toSerial());
+        return this.serial <= other.toSerial();
     }
 
     /**
@@ -347,7 +345,7 @@ public class SpreadsheetDate extends SerialDate {
      */
     @Override
     public boolean isAfter(SerialDate other) {
-        return (this.serial > other.toSerial());
+        return this.serial > other.toSerial();
     }
 
     /**
@@ -361,7 +359,7 @@ public class SpreadsheetDate extends SerialDate {
      */
     @Override
     public boolean isOnOrAfter(SerialDate other) {
-        return (this.serial >= other.toSerial());
+        return this.serial >= other.toSerial();
     }
 
     /**
@@ -401,16 +399,16 @@ public class SpreadsheetDate extends SerialDate {
         
         int s = toSerial();
         if (include == SerialDate.INCLUDE_BOTH) {
-            return (s >= start && s <= end);
+            return s >= start && s <= end;
         }
         else if (include == SerialDate.INCLUDE_FIRST) {
-            return (s >= start && s < end);            
+            return s >= start && s < end;
         }
         else if (include == SerialDate.INCLUDE_SECOND) {
-            return (s > start && s <= end);            
+            return s > start && s <= end;
         }
         else {
-            return (s > start && s < end);            
+            return s > start && s < end;
         }    
     }
 
@@ -426,15 +424,14 @@ public class SpreadsheetDate extends SerialDate {
      * @return the serial number from the day, month and year.
      */
     private int calcSerial(int d, int m, int y) {
-        int yy = ((y - 1900) * 365) + SerialDate.leapYearCount(y - 1);
+        int yy = ((y - 1900) * 365) + SerialDate.leapYearCount(y - 1); //NOPMD - suppressed UselessParentheses - TODO explain reason for suppression
         int mm = SerialDate.AGGREGATE_DAYS_TO_END_OF_PRECEDING_MONTH[m];
         if (m > MonthConstants.FEBRUARY) {
             if (SerialDate.isLeapYear(y)) {
                 mm = mm + 1;
             }
         }
-        int dd = d;
-        return yy + mm + dd + 1;
+        return yy + mm + d + 1;
     }
 
 }
