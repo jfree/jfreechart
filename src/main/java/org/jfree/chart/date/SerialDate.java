@@ -80,14 +80,6 @@ public abstract class SerialDate implements Comparable, Serializable
     /** The serial number for 31 December 9999. */
     public static final int SERIAL_UPPER_BOUND = 2958465;
 
-    /** The lowest year value supported by this date format. */
-    /**public static final int MINIMUM_YEAR_SUPPORTED = 1900; */
-
-    /** The highest year value supported by this date format. */
-    /** public static final int MAXIMUM_YEAR_SUPPORTED = 9999; */
-
-
-
     /** The number of days in a year up to the end of the preceding month. */
     static final int[] AGGREGATE_DAYS_TO_END_OF_PRECEDING_MONTH =
         {0, 0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365};
@@ -166,6 +158,8 @@ public abstract class SerialDate implements Comparable, Serializable
      * @return {@code true} if the supplied integer code represents a 
      *         valid day-of-the-week, and {@code false} otherwise.
      */
+
+    //CS 427 Issue Link: https://github.com/jfree/jfreechart/issues/165
     public static boolean isValidWeekdayCode(int code) {
     	DayOfWeek code2;
         code2 = DayOfWeek.of(code);
@@ -263,6 +257,7 @@ public abstract class SerialDate implements Comparable, Serializable
      * @return {@code true} if the supplied integer code represents a 
      *         valid month.
      */
+    //CS 427 Issue Link: https://github.com/jfree/jfreechart/issues/165
     public static boolean isValidMonthCode(int code) {
     	Month code2 = of(code);
         switch(code2) {
@@ -292,6 +287,7 @@ public abstract class SerialDate implements Comparable, Serializable
      *
      * @return the quarter that the month belongs to.
      */
+    //CS 427 Issue Link: https://github.com/jfree/jfreechart/issues/165
     public static int monthCodeToQuarter(int code) {
     	Month code2 = of(code);
         switch(code2) {
@@ -322,7 +318,7 @@ public abstract class SerialDate implements Comparable, Serializable
      * @return a string representing the supplied month.
      *
      */
-
+    //CS 427 Issue Link: https://github.com/jfree/jfreechart/issues/165
     public static String monthCodeToString(int month) {
 
         String st = Month.of(month).toString();
@@ -430,6 +426,7 @@ public abstract class SerialDate implements Comparable, Serializable
      *
      * @return {@code true} if the specified year is a leap year.
      */
+    //CS 427 Issue Link: https://github.com/jfree/jfreechart/issues/165
      protected static boolean isLeapYear(int yyyy) {
     	LocalDate date = LocalDate.of(yyyy, 1, 1);
         boolean x;
@@ -445,6 +442,7 @@ public abstract class SerialDate implements Comparable, Serializable
      * @param yyyy  the year (in the range 1900 to 9999).
      * @return the number of leap years from 1900 to the specified year.
      */
+    //CS 427 Issue Link: https://github.com/jfree/jfreechart/issues/165
     public static int leapYearCount(int yyyy) {
         LocalDate date = LocalDate.of(1900, 1, 1);
         int count = 0;
@@ -464,6 +462,7 @@ public abstract class SerialDate implements Comparable, Serializable
      * @param yyyy  the year (in the range 1900 to 9999).
      * @return the number of the last day of the month.
      */
+    //CS 427 Issue Link: https://github.com/jfree/jfreechart/issues/165
     public static int lastDayOfMonth(int month, int yyyy) {
 
     	LocalDate date = LocalDate.of(yyyy, month, 1);
@@ -478,6 +477,7 @@ public abstract class SerialDate implements Comparable, Serializable
      * @param base  the base date.
      * @return a new date.
      */
+    //CS 427 Issue Link: https://github.com/jfree/jfreechart/issues/165
     public static SerialDate addDays(int days, SerialDate base) {
         LocalDate date = LocalDate.of(base.getYYYY(), base.getMonth(), base.getDayOfMonth());
         date = date.plusDays(days);
@@ -494,6 +494,7 @@ public abstract class SerialDate implements Comparable, Serializable
      * @param base  the base date.
      * @return a new date.
      */
+    //CS 427 Issue Link: https://github.com/jfree/jfreechart/issues/165
     public static SerialDate addMonths(int months, SerialDate base) {
         LocalDate date = LocalDate.of(base.getYYYY(), base.getMonth(), base.getDayOfMonth());
         date = date.plusMonths(months);
@@ -510,6 +511,7 @@ public abstract class SerialDate implements Comparable, Serializable
      * @param base  the base date.
      * @return A new date.
      */
+    //CS 427 Issue Link: https://github.com/jfree/jfreechart/issues/165
     public static SerialDate addYears(int years, SerialDate base) {
     	LocalDate date = LocalDate.of(base.getYYYY(), base.getMonth(), base.getDayOfMonth());
     	date = date.plusYears(years);

@@ -424,6 +424,7 @@ public class SpreadsheetDate extends SerialDate {
      *
      * @return the serial number from the day, month and year.
      */
+    //CS 427 Issue Link: https://github.com/jfree/jfreechart/issues/165
     private int calcSerial(int d, int m, int y) {
         LocalDate day = LocalDate.of(y, m, d);
         LocalDate nineteen = LocalDate.of(1900, 1, 1);
