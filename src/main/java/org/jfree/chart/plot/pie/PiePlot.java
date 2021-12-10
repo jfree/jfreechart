@@ -123,6 +123,10 @@ import org.jfree.data.general.PieDataset;
  * {@link org.jfree.data.category.CategoryDataset};</li>
  * </ol>
  *
+ * CS 427: Fixed issue 167 by calculating the percentage of the categories in a pie
+ * chart. For categories with less than 5% weight, their labels will be
+ * created outside the pie chat to prevent overlapping.
+ *
  * @param <K> Key type for PieDataset
  * 
  * @see Plot
@@ -2269,7 +2273,7 @@ public class PiePlot<K extends Comparable<K>> extends Plot implements Cloneable,
             drawNoDataMessage(g2, plotArea);
         }
     }
-
+    // CS427 Issue link: https://github.com/jfree/jfreechart/issues/167
     private double getTotal(List<K> kList){
         double total = 0.0;
         for (K key : kList) {
