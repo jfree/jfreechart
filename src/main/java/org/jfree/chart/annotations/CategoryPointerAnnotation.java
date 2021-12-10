@@ -508,7 +508,7 @@ public class CategoryPointerAnnotation extends CategoryTextAnnotation
         temp = Double.doubleToLongBits(this.arrowWidth);
         result = 37 * result + (int) (temp ^ (temp >>> 32));
         result = 37 * result + HashUtils.hashCodeForPaint(this.arrowPaint);
-        result = 37 * result + this.arrowStroke.hashCode();
+        result = 37 * result + Objects.hashCode(this.arrowStroke);
         temp = Double.doubleToLongBits(this.labelOffset);
         result = 37 * result + (int) (temp ^ (temp >>> 32));
         return result;
