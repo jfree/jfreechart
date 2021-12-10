@@ -39,6 +39,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.time.LocalDate;
 import java.time.DateTimeException;
+import static java.time.temporal.ChronoUnit.DAYS;
 
 /**
  * Represents a date using an integer, in a similar fashion to the
@@ -61,10 +62,10 @@ public class SpreadsheetDate extends SerialDate {
 
     /** For serialization. */
     private static final long serialVersionUID = -2039586705374454461L;
-    
-    /** 
-     * The day number (1-Jan-1900 = 2, 2-Jan-1900 = 3, ..., 31-Dec-9999 = 
-     * 2958465). 
+
+    /**
+     * The day number (1-Jan-1900 = 2, 2-Jan-1900 = 3, ..., 31-Dec-9999 =
+     * 2958465).
      */
     private final int serial;
 
@@ -95,7 +96,7 @@ public class SpreadsheetDate extends SerialDate {
     	}
     	catch (DateTimeException a) {
     		throw new IllegalArgumentException(
-    			"The date is invalid!");
+    			"The date is invalid!", a);
     	}
     	
     	
@@ -158,7 +159,7 @@ public class SpreadsheetDate extends SerialDate {
         this.month = mm - 1;
 
         // what's left is d(+1);
-        this.day = this.serial - ss2 
+        this.day = this.serial - ss2
                  - daysToEndOfPrecedingMonth[this.month] + 1;
 
     }
@@ -424,14 +425,12 @@ public class SpreadsheetDate extends SerialDate {
      * @return the serial number from the day, month and year.
      */
     private int calcSerial(int d, int m, int y) {
-        int yy = ((y - 1900) * 365) + SerialDate.leapYearCount(y - 1); //NOPMD - suppressed UselessParentheses - TODO explain reason for suppression
-        int mm = SerialDate.AGGREGATE_DAYS_TO_END_OF_PRECEDING_MONTH[m];
-        if (m > MonthConstants.FEBRUARY) {
-            if (SerialDate.isLeapYear(y)) {
-                mm = mm + 1;
-            }
-        }
-        return yy + mm + d + 1;
+        LocalDate day = LocalDate.of(y, m, d);
+        LocalDate nineteen = LocalDate.of(1900, 1, 1);
+        long returner;
+        returner =  DAYS.between(nineteen, day);
+
+        return (int) returner+2;
     }
 
 }
