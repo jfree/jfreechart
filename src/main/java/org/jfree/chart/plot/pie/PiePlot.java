@@ -124,7 +124,7 @@ import org.jfree.data.general.PieDataset;
  * </ol>
  *
  * CS 427: Fixed issue 167 by calculating the percentage of the categories in a pie
- * chart. For categories with less than 5% weight, their labels will be
+ * chart. For categories with less than 5% weight, their labels are
  * created outside the pie chat to prevent overlapping.
  *
  * @param <K> Key type for PieDataset
