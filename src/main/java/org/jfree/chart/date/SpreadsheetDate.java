@@ -83,7 +83,7 @@ public class SpreadsheetDate extends SerialDate {
      *
      * @param day  the day (in the range 1 to 28/29/30/31).
      * @param month  the month (in the range 1 to 12).
-     * @param year  the year (in the range 1900 to 9999).
+     * @param year  the year.
      */
     public SpreadsheetDate(int day, int month, int year) {
     	try {
