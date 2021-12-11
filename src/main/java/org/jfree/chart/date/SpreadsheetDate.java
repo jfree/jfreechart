@@ -37,10 +37,6 @@ package org.jfree.chart.date;
 
 import java.util.Calendar;
 import java.util.Date;
-/**
- * Fixed issue #165 by modifying the year limit to support years
- * earlier than 1990, which is currently supported in Microsoft Excel.
- */
 
 /**
  * Represents a date using an integer, in a similar fashion to the
@@ -86,6 +82,11 @@ public class SpreadsheetDate extends SerialDate {
      * @param day  the day (in the range 1 to 28/29/30/31).
      * @param month  the month (in the range 1 to 12).
      * @param year  the year (in the range 1900 to 9999).
+     */
+
+    /**
+     * Fixed issue #165 by modifying the year limit to support years
+     * earlier than 1990, which is currently supported in Microsoft Excel.
      */
     public SpreadsheetDate(int day, int month, int year) {
 
