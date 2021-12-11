@@ -105,6 +105,11 @@ import org.jfree.data.KeyedValues;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.DatasetUtils;
 import org.jfree.data.general.PieDataset;
+/**
+ * Fixed issue #167 by calculating the percentage of the categories in a pie
+ * chart. For categories with less than 5% weight, their labels are
+ * created outside the pie chat to prevent overlapping.
+ */
 
 /**
  * A plot that displays data in the form of a pie chart, using data from any
@@ -122,10 +127,6 @@ import org.jfree.data.general.PieDataset;
  * <li>there are utility methods for creating a {@link PieDataset} from a
  * {@link org.jfree.data.category.CategoryDataset};</li>
  * </ol>
- *
- * CS 427: Fixed issue 167 by calculating the percentage of the categories in a pie
- * chart. For categories with less than 5% weight, their labels are
- * created outside the pie chat to prevent overlapping.
  *
  * @param <K> Key type for PieDataset
  * 

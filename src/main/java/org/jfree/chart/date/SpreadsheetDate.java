@@ -37,13 +37,15 @@ package org.jfree.chart.date;
 
 import java.util.Calendar;
 import java.util.Date;
+/**
+ * Fixed issue #165 by modifying the year limit to support years
+ * earlier than 1990, which is currently supported in Microsoft Excel.
+ */
 
 /**
  * Represents a date using an integer, in a similar fashion to the
  * implementation in Microsoft Excel.  The range of dates supported is
  * 1-Jan-1900 to 31-Dec-9999.
- * (This year limit is removed to support years
- * earlier than 1990, which is currently supported in Microsoft Excel.)
  * <P>
  * Be aware that there is a deliberate bug in Excel that recognises the year
  * 1900 as a leap year when in fact it is not a leap year. You can find more
