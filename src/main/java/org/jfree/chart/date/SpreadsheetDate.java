@@ -83,15 +83,15 @@ public class SpreadsheetDate extends SerialDate {
      * @param month  the month (in the range 1 to 12).
      * @param year  the year (in the range 1900 to 9999).
      */
+
+    /**
+     * Fixed issue #165 by modifying the year limit to support years
+     * earlier than 1990, which is currently supported in Microsoft Excel.
+     */
     public SpreadsheetDate(int day, int month, int year) {
 
-        if ((year >= 1900) && (year <= 9999)) {
-            this.year = year;
-        }
-        else {
-            throw new IllegalArgumentException(
-                "The 'year' argument must be in range 1900 to 9999.");
-        }
+        // CS427 Issue link: https://github.com/jfree/jfreechart/issues/165
+        this.year = year;
 
         if ((month >= MonthConstants.JANUARY) 
                 && (month <= MonthConstants.DECEMBER)) {
