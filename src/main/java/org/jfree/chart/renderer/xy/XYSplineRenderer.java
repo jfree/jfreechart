@@ -48,6 +48,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import org.jfree.chart.axis.CyclicNumberAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.event.RendererChangeEvent;
 import org.jfree.chart.plot.PlotOrientation;
@@ -421,6 +422,10 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
                         }
                     }
                 }
+                // begin fill the path, the range of y should be set first
+                CyclicNumberAxis range = plot.getRangeAxisEdge();
+                range.setRange(0, range.getUpperBound());
+                
                 // Add last point @ y=0 for fillPath and close path
                 if (this.fillType != FillType.NONE) {
                     if (plot.getOrientation() == PlotOrientation.HORIZONTAL) {
