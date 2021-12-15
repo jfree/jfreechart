@@ -61,9 +61,6 @@ public class LegendItemEntity extends ChartEntity
      */
     private Comparable seriesKey;
 
-    /** The series index. */
-    private int seriesIndex;
-
     /**
      * Creates a legend item entity.
      *
@@ -140,9 +137,6 @@ public class LegendItemEntity extends ChartEntity
         if (!Objects.equals(this.seriesKey, that.seriesKey)) {
             return false;
         }
-        if (this.seriesIndex != that.seriesIndex) {
-            return false;
-        }
         if (!Objects.equals(this.dataset, that.dataset)) {
             return false;
         }
@@ -168,7 +162,6 @@ public class LegendItemEntity extends ChartEntity
         int hash = super.hashCode(); // equals calls superclass function, so hashCode must also
         hash = 97 * hash + Objects.hashCode(this.dataset);
         hash = 97 * hash + Objects.hashCode(this.seriesKey);
-        hash = 97 * hash + this.seriesIndex;
         return hash;
     }
 

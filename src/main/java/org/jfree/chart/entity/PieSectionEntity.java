@@ -42,6 +42,7 @@ import java.awt.Shape;
 import java.io.Serializable;
 import java.util.Objects;
 
+import org.jfree.chart.HashUtils;
 import org.jfree.data.general.PieDataset;
 
 /**
@@ -232,12 +233,12 @@ public class PieSectionEntity extends ChartEntity
 
     @Override
     public int hashCode() {
-        int hash = super.hashCode(); // equals calls superclass function, so hashCode must also
-        hash = 13 * hash + Objects.hashCode(this.dataset);
-        hash = 13 * hash + this.pieIndex;
-        hash = 13 * hash + this.sectionIndex;
-        hash = 13 * hash + Objects.hashCode(this.sectionKey);
-        return hash;
+        int result = super.hashCode();
+        result = HashUtils.hashCode(result, this.dataset);
+        result = HashUtils.hashCode(result, this.pieIndex);
+        result = HashUtils.hashCode(result, this.sectionIndex);
+        result = HashUtils.hashCode(result, this.sectionKey);
+        return result;
     }
 
     /**

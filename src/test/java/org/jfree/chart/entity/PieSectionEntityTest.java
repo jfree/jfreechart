@@ -59,8 +59,7 @@ public class PieSectionEntityTest {
      * is properly implemented.
      */
     @Test
-    public void testEqualsHashCode()
-    {
+    public void testEqualsHashCode() {
         EqualsVerifier.forClass(PieSectionEntity.class)
             .withRedefinedSuperclass() // superclass also defines equals/hashCode
             .suppress(Warning.STRICT_INHERITANCE)

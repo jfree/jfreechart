@@ -47,6 +47,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Objects;
 
+import org.jfree.chart.HashUtils;
 import org.jfree.chart.imagemap.ToolTipTagFragmentGenerator;
 import org.jfree.chart.imagemap.URLTagFragmentGenerator;
 import org.jfree.chart.util.Args;
@@ -370,10 +371,10 @@ public class ChartEntity implements Cloneable, PublicCloneable, Serializable {
      */
     @Override
     public int hashCode() {
-        int result = 7;
-        result = 89 * result + Objects.hashCode(this.area);
-        result = 89 * result + Objects.hashCode(this.toolTipText);
-        result = 89 * result + Objects.hashCode(this.urlText);
+        int result = 37;
+        result = HashUtils.hashCode(result, this.toolTipText);
+        result = HashUtils.hashCode(result, this.urlText);
+        result = HashUtils.hashCode(result, this.area);
         return result;
     }
 

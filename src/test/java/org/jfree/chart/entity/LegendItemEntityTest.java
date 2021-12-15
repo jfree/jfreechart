@@ -59,8 +59,7 @@ public class LegendItemEntityTest {
      * is properly implemented.
      */
     @Test
-    public void testEqualsHashCode()
-    {
+    public void testEqualsHashCode() {
         EqualsVerifier.forClass(LegendItemEntity.class)
             .withRedefinedSuperclass() // superclass also defines equals/hashCode
             .suppress(Warning.STRICT_INHERITANCE)
@@ -70,7 +69,7 @@ public class LegendItemEntityTest {
     }
     
     /**
-     * Confirm that the equals method can distinguish all the required fields.
+     * Confirm that the equals() method can distinguish all the required fields.
      */
     @Test
     public void testEquals() {
