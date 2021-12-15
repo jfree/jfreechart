@@ -125,7 +125,7 @@ public class FlowEntity extends ChartEntity {
 
     @Override
     public int hashCode() {
-        int hash = super.hashCode(); // equals calls superclass, hashCode must also
+        int hash = super.hashCode();
         hash = 79 * hash + Objects.hashCode(this.key);
         return hash;
     }
