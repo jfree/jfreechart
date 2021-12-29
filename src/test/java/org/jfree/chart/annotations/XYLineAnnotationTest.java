@@ -36,11 +36,6 @@
 
 package org.jfree.chart.annotations;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.GradientPaint;
@@ -52,6 +47,10 @@ import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.jupiter.api.Test;
+
+import javax.swing.event.EventListenerList;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link XYLineAnnotation} class.
@@ -112,43 +111,43 @@ public class XYLineAnnotationTest {
                 stroke, Color.BLUE);
         XYLineAnnotation a2 = new XYLineAnnotation(10.0, 20.0, 100.0, 200.0,
                 stroke, Color.BLUE);
-        assertTrue(a1.equals(a2));
-        assertTrue(a2.equals(a1));
+        assertEquals(a1, a2);
+        assertEquals(a2, a1);
 
         a1 = new XYLineAnnotation(11.0, 20.0, 100.0, 200.0, stroke, Color.BLUE);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2 = new XYLineAnnotation(11.0, 20.0, 100.0, 200.0, stroke, Color.BLUE);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         a1 = new XYLineAnnotation(11.0, 21.0, 100.0, 200.0, stroke, Color.BLUE);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2 = new XYLineAnnotation(11.0, 21.0, 100.0, 200.0, stroke, Color.BLUE);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         a1 = new XYLineAnnotation(11.0, 21.0, 101.0, 200.0, stroke, Color.BLUE);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2 = new XYLineAnnotation(11.0, 21.0, 101.0, 200.0, stroke, Color.BLUE);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         a1 = new XYLineAnnotation(11.0, 21.0, 101.0, 201.0, stroke, Color.BLUE);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2 = new XYLineAnnotation(11.0, 21.0, 101.0, 201.0, stroke, Color.BLUE);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         Stroke stroke2 = new BasicStroke(0.99f);
         a1 = new XYLineAnnotation(11.0, 21.0, 101.0, 200.0, stroke2, Color.BLUE);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2 = new XYLineAnnotation(11.0, 21.0, 101.0, 200.0, stroke2, Color.BLUE);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         GradientPaint g1 = new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.WHITE);
         GradientPaint g2 = new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.WHITE);
         a1 = new XYLineAnnotation(11.0, 21.0, 101.0, 200.0, stroke2, g1);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2 = new XYLineAnnotation(11.0, 21.0, 101.0, 200.0, stroke2, g2);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
     }
 
     /**
@@ -158,11 +157,14 @@ public class XYLineAnnotationTest {
     @Test
     public void testEqualsHashCode() {
         EqualsVerifier.forClass(XYLineAnnotation.class)
-            .withRedefinedSuperclass() // superclass also defines equals/hashCode
-            .suppress(Warning.STRICT_INHERITANCE)
-            .suppress(Warning.NONFINAL_FIELDS)
-            .suppress(Warning.TRANSIENT_FIELDS)
-            .verify();
+                .withRedefinedSuperclass() // superclass also defines equals/hashCode
+                .suppress(Warning.STRICT_INHERITANCE)
+                .suppress(Warning.NONFINAL_FIELDS)
+                .suppress(Warning.TRANSIENT_FIELDS)
+                .withPrefabValues(EventListenerList.class,
+                        new EventListenerList(),
+                        new EventListenerList())
+                .verify();
     }
 
     /**
@@ -175,7 +177,7 @@ public class XYLineAnnotationTest {
                 stroke, Color.BLUE);
         XYLineAnnotation a2 = new XYLineAnnotation(10.0, 20.0, 100.0, 200.0,
                 stroke, Color.BLUE);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
         int h1 = a1.hashCode();
         int h2 = a2.hashCode();
         assertEquals(h1, h2);
@@ -183,7 +185,7 @@ public class XYLineAnnotationTest {
 
     /**
      * Confirm that cloning works.
-     * @throws java.lang.CloneNotSupportedException
+     * @throws java.lang.CloneNotSupportedException if there is an issue cloning
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
@@ -191,9 +193,9 @@ public class XYLineAnnotationTest {
         XYLineAnnotation a1 = new XYLineAnnotation(10.0, 20.0, 100.0, 200.0,
                 stroke, Color.BLUE);
         XYLineAnnotation a2 = (XYLineAnnotation) a1.clone();
-        assertTrue(a1 != a2);
-        assertTrue(a1.getClass() == a2.getClass());
-        assertTrue(a1.equals(a2));
+        assertNotSame(a1, a2);
+        assertSame(a1.getClass(), a2.getClass());
+        assertEquals(a1, a2);
     }
 
     /**
