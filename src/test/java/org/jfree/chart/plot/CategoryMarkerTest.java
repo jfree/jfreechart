@@ -36,11 +36,6 @@
 
 package org.jfree.chart.plot;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
-
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
@@ -53,6 +48,10 @@ import org.jfree.chart.TestUtils;
 import org.jfree.chart.event.MarkerChangeEvent;
 import org.jfree.chart.event.MarkerChangeListener;
 import org.junit.jupiter.api.Test;
+
+import javax.swing.event.EventListenerList;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Some tests for the {@link CategoryMarker} class.
@@ -78,12 +77,15 @@ public class CategoryMarkerTest implements MarkerChangeListener {
     @Test
     public void testEqualsHashCode() {
         EqualsVerifier.forClass(CategoryMarker.class)
-            .withRedefinedSuperclass() // superclass also defines equals/hashCode
-            .withPrefabValues(Font.class, new Font("SansSerif", Font.PLAIN, 10), new Font("Tahoma", Font.BOLD, 12))
-            .suppress(Warning.STRICT_INHERITANCE)
-            .suppress(Warning.NONFINAL_FIELDS)
-            .suppress(Warning.TRANSIENT_FIELDS)
-            .verify();
+                .withRedefinedSuperclass() // superclass also defines equals/hashCode
+                .withPrefabValues(Font.class, new Font("SansSerif", Font.PLAIN, 10), new Font("Tahoma", Font.BOLD, 12))
+                .withPrefabValues(EventListenerList.class,
+                        new EventListenerList(),
+                        new EventListenerList())
+                .suppress(Warning.STRICT_INHERITANCE)
+                .suppress(Warning.NONFINAL_FIELDS)
+                .suppress(Warning.TRANSIENT_FIELDS)
+                .verify();
     }
 
     /**
@@ -93,66 +95,66 @@ public class CategoryMarkerTest implements MarkerChangeListener {
     public void testEquals() {
         CategoryMarker m1 = new CategoryMarker("A");
         CategoryMarker m2 = new CategoryMarker("A");
-        assertTrue(m1.equals(m2));
-        assertTrue(m2.equals(m1));
+        assertEquals(m1, m2);
+        assertEquals(m2, m1);
 
         //key
         m1 = new CategoryMarker("B");
-        assertFalse(m1.equals(m2));
+        assertNotEquals(m1, m2);
         m2 = new CategoryMarker("B");
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
 
         //paint
         m1 = new CategoryMarker("A", new GradientPaint(1.0f, 2.0f, Color.WHITE,
                 3.0f, 4.0f, Color.YELLOW), new BasicStroke(1.1f));
-        assertFalse(m1.equals(m2));
+        assertNotEquals(m1, m2);
         m2 = new CategoryMarker("A", new GradientPaint(1.0f, 2.0f, Color.WHITE,
                 3.0f, 4.0f, Color.YELLOW), new BasicStroke(1.1f));
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
 
         //stroke
         m1 = new CategoryMarker("A", new GradientPaint(1.0f, 2.0f, Color.WHITE,
                 3.0f, 4.0f, Color.YELLOW), new BasicStroke(2.2f));
-        assertFalse(m1.equals(m2));
+        assertNotEquals(m1, m2);
         m2 = new CategoryMarker("A", new GradientPaint(1.0f, 2.0f, Color.WHITE,
                 3.0f, 4.0f, Color.YELLOW), new BasicStroke(2.2f));
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
 
         //outlinePaint
         m1 = new CategoryMarker("A", new GradientPaint(1.0f, 2.0f, Color.WHITE,
                 3.0f, 4.0f, Color.YELLOW), new BasicStroke(2.2f), Color.RED,
                 new BasicStroke(1.0f), 1.0f);
-        assertFalse(m1.equals(m2));
+        assertNotEquals(m1, m2);
         m2 = new CategoryMarker("A", new GradientPaint(1.0f, 2.0f, Color.WHITE,
                 3.0f, 4.0f, Color.YELLOW), new BasicStroke(2.2f), Color.RED,
                 new BasicStroke(1.0f), 1.0f);
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
 
         //outlineStroke
         m1 = new CategoryMarker("A", new GradientPaint(1.0f, 2.0f, Color.WHITE,
                 3.0f, 4.0f, Color.YELLOW), new BasicStroke(2.2f), Color.RED,
                 new BasicStroke(3.3f), 1.0f);
-        assertFalse(m1.equals(m2));
+        assertNotEquals(m1, m2);
         m2 = new CategoryMarker("A", new GradientPaint(1.0f, 2.0f, Color.WHITE,
                 3.0f, 4.0f, Color.YELLOW), new BasicStroke(2.2f), Color.RED,
                 new BasicStroke(3.3f), 1.0f);
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
 
         //alpha
         m1 = new CategoryMarker("A", new GradientPaint(1.0f, 2.0f, Color.WHITE,
                 3.0f, 4.0f, Color.YELLOW), new BasicStroke(2.2f), Color.RED,
                 new BasicStroke(1.0f), 0.5f);
-        assertFalse(m1.equals(m2));
+        assertNotEquals(m1, m2);
         m2 = new CategoryMarker("A", new GradientPaint(1.0f, 2.0f, Color.WHITE,
                 3.0f, 4.0f, Color.YELLOW), new BasicStroke(2.2f), Color.RED,
                 new BasicStroke(1.0f), 0.5f);
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
 
     }
 
     /**
      * Check cloning.
-     * @throws java.lang.CloneNotSupportedException
+     * @throws java.lang.CloneNotSupportedException if there is a cloning issue.
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
@@ -160,12 +162,12 @@ public class CategoryMarkerTest implements MarkerChangeListener {
                 2.0f, Color.WHITE, 3.0f, 4.0f, Color.YELLOW),
                 new BasicStroke(1.1f));
         CategoryMarker m2 = (CategoryMarker) m1.clone();
-        assertTrue(m1 != m2);
-        assertTrue(m1.getClass() == m2.getClass());
-        assertTrue(m1.equals(m2));
+        assertNotSame(m1, m2);
+        assertSame(m1.getClass(), m2.getClass());
+        assertEquals(m1, m2);
     }
 
-   /**
+    /**
      * Serialize an instance, restore it, and check for equality.
      */
     @Test
@@ -208,9 +210,9 @@ public class CategoryMarkerTest implements MarkerChangeListener {
         CategoryMarker m = new CategoryMarker("X");
         m.addChangeListener(this);
         this.lastEvent = null;
-        assertEquals(false, m.getDrawAsLine());
+        assertFalse(m.getDrawAsLine());
         m.setDrawAsLine(true);
-        assertEquals(true, m.getDrawAsLine());
+        assertTrue(m.getDrawAsLine());
         assertEquals(m, this.lastEvent.getMarker());
     }
 }
