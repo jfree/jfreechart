@@ -100,7 +100,7 @@ public class CombinedDomainCategoryPlotTest implements ChartChangeListener {
                 .withPrefabValues(EventListenerList.class,
                         new EventListenerList(),
                         new EventListenerList())
-
+                .withPrefabValues(String.class, "A", "B")
                 .withIgnoredFields("chart", "parent") // superclass
                 .verify();
     }

@@ -100,6 +100,7 @@ public class CombinedRangeCategoryPlotTest implements ChartChangeListener {
                 .withPrefabValues(EventListenerList.class,
                         new EventListenerList(),
                         new EventListenerList())
+                .withPrefabValues(String.class, "A", "B")
                 .withIgnoredFields("subplotArea")
                 .withIgnoredFields("chart", "parent") // superclass
                 .verify();
