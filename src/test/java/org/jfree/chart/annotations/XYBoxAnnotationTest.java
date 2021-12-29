@@ -30,7 +30,7 @@
  * (C) Copyright 2005-2021, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
@@ -44,6 +44,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import java.awt.GradientPaint;
 import java.awt.Stroke;
 
@@ -81,6 +83,20 @@ public class XYBoxAnnotationTest {
             XYBoxAnnotation a1 = new XYBoxAnnotation(10.0, 20.0, 100.0, Double.NaN,
                 stroke, Color.BLUE, Color.RED);
         });
+    }
+
+    /**
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
+     */
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(XYBoxAnnotation.class)
+            .withRedefinedSuperclass() // superclass also defines equals/hashCode
+            .suppress(Warning.STRICT_INHERITANCE)
+            .suppress(Warning.NONFINAL_FIELDS)
+            .suppress(Warning.TRANSIENT_FIELDS)
+            .verify();
     }
 
     /**
@@ -154,6 +170,7 @@ public class XYBoxAnnotationTest {
 
     /**
      * Confirm that cloning works.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {

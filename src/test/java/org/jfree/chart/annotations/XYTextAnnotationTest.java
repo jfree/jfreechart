@@ -30,7 +30,7 @@
  * (C) Copyright 2003-2021, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
@@ -44,6 +44,9 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
+import static org.jfree.chart.TestUtils.createFont;
 
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.ui.TextAnchor;
@@ -55,6 +58,21 @@ import org.junit.jupiter.api.Test;
  * Tests for the {@link XYTextAnnotation} class.
  */
 public class XYTextAnnotationTest {
+
+    /**
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
+     */
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(XYTextAnnotation.class)
+            .withRedefinedSuperclass() // superclass also defines equals/hashCode
+            .withPrefabValues(Font.class, createFont(true), createFont(false))
+            .suppress(Warning.STRICT_INHERITANCE)
+            .suppress(Warning.NONFINAL_FIELDS)
+            .suppress(Warning.TRANSIENT_FIELDS)
+            .verify();
+    }
 
     /**
      * Confirm that the equals method can distinguish all the required fields.
@@ -154,6 +172,7 @@ public class XYTextAnnotationTest {
 
     /**
      * Confirm that cloning works.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {

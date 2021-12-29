@@ -33,18 +33,12 @@
  * Contributor(s):   Richard Atkinson;
  *                   Xavier Poinsard;
  *                   Robert Fuller;
+ *                   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  */
 
 package org.jfree.chart.entity;
 
-import org.jfree.chart.HashUtils;
-import org.jfree.chart.imagemap.ToolTipTagFragmentGenerator;
-import org.jfree.chart.imagemap.URLTagFragmentGenerator;
-import org.jfree.chart.util.Args;
-import org.jfree.chart.util.PublicCloneable;
-import org.jfree.chart.util.SerialUtils;
-
-import java.awt.*;
+import java.awt.Shape;
 import java.awt.geom.PathIterator;
 import java.awt.geom.Rectangle2D;
 import java.io.IOException;
@@ -52,6 +46,13 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Objects;
+
+import org.jfree.chart.HashUtils;
+import org.jfree.chart.imagemap.ToolTipTagFragmentGenerator;
+import org.jfree.chart.imagemap.URLTagFragmentGenerator;
+import org.jfree.chart.util.Args;
+import org.jfree.chart.util.PublicCloneable;
+import org.jfree.chart.util.SerialUtils;
 
 /**
  * A class that captures information about some component of a chart (a bar,
@@ -311,9 +312,10 @@ public class ChartEntity implements Cloneable, PublicCloneable, Serializable {
      */
     @Override
     public String toString() {
-        String sb = "ChartEntity: " + "tooltip = " +
-                this.toolTipText;
-        return sb;
+        StringBuilder sb = new StringBuilder("ChartEntity: ");
+        sb.append("tooltip = ");
+        sb.append(this.toolTipText);
+        return sb.toString();
     }
 
     /**
@@ -332,10 +334,7 @@ public class ChartEntity implements Cloneable, PublicCloneable, Serializable {
             return false;
         }
         ChartEntity that = (ChartEntity) obj;
-        if (!that.canEqual(this)) {
-            return false;
-        }
-        if (!this.area.equals(that.area)) {
+        if (!Objects.equals(this.area, that.area)) {
             return false;
         }
         if (!Objects.equals(this.toolTipText, that.toolTipText)) {
@@ -344,10 +343,24 @@ public class ChartEntity implements Cloneable, PublicCloneable, Serializable {
         if (!Objects.equals(this.urlText, that.urlText)) {
             return false;
         }
+
+        // fix the "equals not symmetric" problem
+        if (that.canEqual(this) == false) {
+            return false;
+        }
         return true;
     }
 
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
     public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
         return (other instanceof ChartEntity);
     }
 

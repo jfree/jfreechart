@@ -30,12 +30,14 @@
  * (C) Copyright 2003-2021, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
 package org.jfree.chart.labels;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.jfree.chart.TestUtils;
@@ -45,6 +47,19 @@ import org.junit.jupiter.api.Test;
  * Tests for the {@link ItemLabelPosition} class.
  */
 public class ItemLabelPositionTest {
+
+    /**
+     * Use EqualsVerifier to ensure correct implementation of equals and
+     * hashCode.
+     */
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(ItemLabelPosition.class)
+                .suppress(Warning.STRICT_INHERITANCE)
+                .suppress(Warning.NONFINAL_FIELDS)
+                .suppress(Warning.TRANSIENT_FIELDS)
+                .verify();
+    }
 
     /**
      * Check that the equals() method distinguishes all fields.

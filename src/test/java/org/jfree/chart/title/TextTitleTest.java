@@ -49,6 +49,7 @@ import nl.jqno.equalsverifier.Warning;
 
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.ui.HorizontalAlignment;
+import org.jfree.chart.util.PaintUtils;
 
 import org.junit.jupiter.api.Test;
 
@@ -61,6 +62,7 @@ public class TextTitleTest {
         EqualsVerifier.forClass(TextTitle.class)
                 .suppress(Warning.STRICT_INHERITANCE)
                 .suppress(Warning.NONFINAL_FIELDS)
+                .suppress(Warning.TRANSIENT_FIELDS)
                 .withRedefinedSuperclass()
                 .withPrefabValues(Rectangle2D.class,
                                   TestUtils.createR2D(true),
@@ -98,18 +100,18 @@ public class TextTitleTest {
         // paint
         t1.setPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.BLUE));
-        assertFalse(t1.equals(t2));
+        assertFalse(PaintUtils.equal(t1.getPaint(), t2.getPaint()));
         t2.setPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.BLUE));
-        assertTrue(t1.equals(t2));
+        assertTrue(PaintUtils.equal(t1.getPaint(), t2.getPaint()));
 
         // backgroundPaint
         t1.setBackgroundPaint(new GradientPaint(4.0f, 3.0f, Color.RED,
                 2.0f, 1.0f, Color.BLUE));
-        assertFalse(t1.equals(t2));
+        assertFalse(PaintUtils.equal(t1.getBackgroundPaint(), t2.getBackgroundPaint()));
         t2.setBackgroundPaint(new GradientPaint(4.0f, 3.0f, Color.RED,
                 2.0f, 1.0f, Color.BLUE));
-        assertTrue(t1.equals(t2));
+        assertTrue(PaintUtils.equal(t1.getBackgroundPaint(), t2.getBackgroundPaint()));
 
         // maximumLinesToDisplay
         t1.setMaximumLinesToDisplay(3);

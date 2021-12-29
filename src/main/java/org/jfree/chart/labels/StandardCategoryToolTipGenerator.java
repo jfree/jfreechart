@@ -30,7 +30,7 @@
  * (C) Copyright 2004-2021, by David Gilbert.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -120,7 +120,31 @@ public class StandardCategoryToolTipGenerator
         if (!(obj instanceof StandardCategoryToolTipGenerator)) {
             return false;
         }
+        StandardCategoryToolTipGenerator that = (StandardCategoryToolTipGenerator) obj;
+        if (that.canEqual(this) == false) {
+            return false;
+        }
         return super.equals(obj);
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof StandardCategoryToolTipGenerator);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = super.hashCode(); // equals calls superclass, hashCode must also
+        return hash;
     }
 
 }

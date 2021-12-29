@@ -30,7 +30,7 @@
  * (C) Copyright 2005-2021, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
@@ -44,6 +44,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Stroke;
+
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
@@ -82,6 +85,20 @@ public class CategoryLineAnnotationTest {
             CategoryLineAnnotation a1 = new CategoryLineAnnotation("Cat1", 20.0, "Cat2", 200.0,
                 Color.BLUE, null);
         });
+    }
+
+    /**
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
+     */
+    @Test
+    public void testEqualsHashcode() {
+        EqualsVerifier.forClass(CategoryLineAnnotation.class)
+            .withRedefinedSuperclass() // superclass also defines equals/hashCode
+            .suppress(Warning.STRICT_INHERITANCE)
+            .suppress(Warning.NONFINAL_FIELDS)
+            .suppress(Warning.TRANSIENT_FIELDS)
+            .verify();
     }
 
     /**
@@ -152,6 +169,7 @@ public class CategoryLineAnnotationTest {
 
     /**
      * Confirm that cloning works.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {

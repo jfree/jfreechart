@@ -30,7 +30,7 @@
  * (C) Copyright 2009-2021, by David Gilbert and Contributors.
  *
  * Original Author:  Peter Kolb;
- * Contributor(s):   ;
+ * Contributor(s):   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -137,6 +137,11 @@ public class TitleEntity extends ChartEntity {
             return false;
         }
         TitleEntity that = (TitleEntity) obj;
+
+        // fix the "equals not symmetric" problem
+        if (that.canEqual(this) == false) {
+            return false;
+        }
         if (!getArea().equals(that.getArea())) {
             return false;
         }
@@ -146,10 +151,24 @@ public class TitleEntity extends ChartEntity {
         if (!Objects.equals(getURLText(), that.getURLText())) {
             return false;
         }
-        if (!(this.title.equals(that.title))) {
+        if (!(Objects.equals(this.title, that.title))) {
             return false;
         }
-        return true;
+        return super.equals(obj);
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // Solves Problem: equals not symmetric
+        return (other instanceof TitleEntity);
     }
 
     /**
@@ -159,7 +178,7 @@ public class TitleEntity extends ChartEntity {
      */
     @Override
     public int hashCode() {
-        int result = 41;
+        int result = super.hashCode(); // equals calls superclass function, so hashCode must also
         result = HashUtils.hashCode(result, getToolTipText());
         result = HashUtils.hashCode(result, getURLText());
         return result;

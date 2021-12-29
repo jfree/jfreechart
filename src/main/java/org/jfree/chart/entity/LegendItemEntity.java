@@ -30,7 +30,7 @@
  * (C) Copyright 2003-2021, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -129,6 +129,11 @@ public class LegendItemEntity extends ChartEntity
             return false;
         }
         LegendItemEntity that = (LegendItemEntity) obj;
+
+        // fix the "equals not symmetric" problem
+        if (that.canEqual(this) == false) {
+            return false;
+        }
         if (!Objects.equals(this.seriesKey, that.seriesKey)) {
             return false;
         }
@@ -138,17 +143,26 @@ public class LegendItemEntity extends ChartEntity
         return super.equals(obj);
     }
 
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
     @Override
     public boolean canEqual(Object other) {
+        // Solves Problem: equals not symmetric
         return (other instanceof LegendItemEntity);
     }
 
     @Override
     public int hashCode() {
-        int result = super.hashCode();
-        result = 31 * result + (dataset != null ? dataset.hashCode() : 0);
-        result = 31 * result + (seriesKey != null ? seriesKey.hashCode() : 0);
-        return result;
+        int hash = super.hashCode(); // equals calls superclass function, so hashCode must also
+        hash = 97 * hash + Objects.hashCode(this.dataset);
+        hash = 97 * hash + Objects.hashCode(this.seriesKey);
+        return hash;
     }
 
     /**

@@ -30,7 +30,7 @@
  * (C) Copyright 2008-2021, by David Gilbert.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
@@ -55,10 +55,29 @@ import org.jfree.chart.renderer.xy.StandardXYBarPainter;
 import org.jfree.chart.ui.RectangleInsets;
 import org.junit.jupiter.api.Test;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
+
 /**
  * Tests for the {@link StandardChartTheme} class.
  */
 public class StandardChartThemeTest {
+
+    /**
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
+     */
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(StandardChartTheme.class)
+                .suppress(Warning.STRICT_INHERITANCE)
+                .suppress(Warning.NONFINAL_FIELDS)
+                .suppress(Warning.TRANSIENT_FIELDS)
+                .withPrefabValues(Font.class,
+                                  TestUtils.createFont(true),
+                                  TestUtils.createFont(false))
+                .verify();
+    }
 
     /**
      * Confirm that the equals method can distinguish all the required fields.
@@ -261,6 +280,7 @@ public class StandardChartThemeTest {
 
     /**
      * Basic checks for cloning.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {

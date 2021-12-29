@@ -58,8 +58,6 @@ import org.jfree.chart.renderer.GrayPaintScale;
 import org.jfree.chart.renderer.LookupPaintScale;
 import org.junit.jupiter.api.Test;
 
-import org.jfree.chart.util.PaintUtils;
-
 /**
  * Tests for the {@link PaintScaleLegend} class.
  */
@@ -70,6 +68,7 @@ public class PaintScaleLegendTest {
         EqualsVerifier.forClass(PaintScaleLegend.class)
                 .suppress(Warning.STRICT_INHERITANCE)
                 .suppress(Warning.NONFINAL_FIELDS)
+                .suppress(Warning.TRANSIENT_FIELDS)
                 .withRedefinedSuperclass()
                 .withPrefabValues(Rectangle2D.class,
                                   TestUtils.createR2D(true),
@@ -139,28 +138,24 @@ public class PaintScaleLegendTest {
         // stripOutlinePaint
         l1.setStripOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.BLUE));
-        assertFalse(PaintUtils.equal(l1.getStripOutlinePaint(),
-                                     l2.getStripOutlinePaint()));
+        assertFalse(l1.equals(l2));
         l2.setStripOutlinePaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.BLUE));
-        assertTrue(PaintUtils.equal(l1.getStripOutlinePaint(),
-                                    l2.getStripOutlinePaint()));
+        assertTrue(l1.equals(l2));
 
         // stripOutlineStroke
         l1.setStripOutlineStroke(new BasicStroke(1.1f));
-        assertFalse(l1.getStripOutlineStroke().equals(l2.getStripOutlineStroke()));
+        assertFalse(l1.equals(l2));
         l2.setStripOutlineStroke(new BasicStroke(1.1f));
-        assertTrue(l1.getStripOutlineStroke().equals(l2.getStripOutlineStroke()));
+        assertTrue(l1.equals(l2));
 
         // backgroundPaint
         l1.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.BLUE));
-        assertFalse(PaintUtils.equal(l1.getBackgroundPaint(),
-                                     l2.getBackgroundPaint()));
+        assertFalse(l1.equals(l2));
         l2.setBackgroundPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.BLUE));
-        assertTrue(PaintUtils.equal(l1.getBackgroundPaint(),
-                                    l2.getBackgroundPaint()));
+        assertTrue(l1.equals(l2));
 
         l1.setSubdivisionCount(99);
         assertFalse(l1.equals(l2));
@@ -186,6 +181,7 @@ public class PaintScaleLegendTest {
 
     /**
      * Confirm that cloning works.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {

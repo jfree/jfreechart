@@ -32,6 +32,7 @@
  * Original Author:  David Gilbert;
  * Contributor(s):   Richard Atkinson;
  *                   Christian W. Zuckschwerdt;
+ *                   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -196,6 +197,11 @@ public class PieSectionEntity extends ChartEntity
             return false;
         }
         PieSectionEntity that = (PieSectionEntity) obj;
+
+        // fix the "equals not symmetric" problem
+        if (that.canEqual(this) == false) {
+            return false;
+        }
         if (!Objects.equals(this.dataset, that.dataset)) {
             return false;
         }
@@ -211,16 +217,20 @@ public class PieSectionEntity extends ChartEntity
         return super.equals(obj);
     }
 
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
     @Override
     public boolean canEqual(Object other) {
+        // Solves Problem: equals not symmetric
         return (other instanceof PieSectionEntity);
     }
 
-    /**
-     * Returns a hash code for this instance.
-     *
-     * @return A hash code.
-     */
     @Override
     public int hashCode() {
         int result = super.hashCode();

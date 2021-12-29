@@ -30,12 +30,14 @@
  * (C) Copyright 2005-2021, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
 package org.jfree.data.general;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -44,6 +46,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * Tests for the {@link DatasetGroup} class.
  */
 public class DatasetGroupTest {
+
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(DatasetGroup.class)
+                .suppress(Warning.STRICT_INHERITANCE)
+                .suppress(Warning.NONFINAL_FIELDS)
+                .suppress(Warning.TRANSIENT_FIELDS)
+                .verify();
+    }
 
     /**
      * Serialize an instance, restore it, and check for equality.

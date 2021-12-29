@@ -30,18 +30,17 @@
  * (C) Copyright 2021, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
 package org.jfree.chart.entity;
 
+import java.awt.Shape;
+import java.util.Objects;
 import org.jfree.chart.plot.flow.FlowPlot;
 import org.jfree.chart.util.Args;
 import org.jfree.data.flow.FlowKey;
-
-import java.awt.*;
-import java.util.Objects;
 
 /**
  * A chart entity representing the flow between two nodes in a {@link FlowPlot}.
@@ -99,14 +98,28 @@ public class FlowEntity extends ChartEntity {
             return false;
         }
         FlowEntity that = (FlowEntity) obj;
-        if (!this.key.equals(that.key)) {
+        if (!java.util.Objects.equals(this.key, that.key)) {
             return false;
         }
+        // fix the "equals not symmetric" problem
+        if (that.canEqual(this) == false) {
+            return false;
+        }
+
         return super.equals(obj);
     }
 
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
     @Override
     public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
         return (other instanceof FlowEntity);
     }
 

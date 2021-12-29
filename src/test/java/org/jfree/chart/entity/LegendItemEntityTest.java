@@ -30,11 +30,15 @@
  * (C) Copyright 2004-2021, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
 package org.jfree.chart.entity;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.geom.Rectangle2D;
 import nl.jqno.equalsverifier.EqualsVerifier;
@@ -44,8 +48,6 @@ import org.jfree.chart.TestUtils;
 
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link LegendItemEntity} class.
@@ -59,12 +61,11 @@ public class LegendItemEntityTest {
     @Test
     public void testEqualsHashCode() {
         EqualsVerifier.forClass(LegendItemEntity.class)
-                .withRedefinedSuperclass() // superclass also defines equals/hashCode
-                .withNonnullFields("area")
-                .suppress(Warning.STRICT_INHERITANCE)
-                .suppress(Warning.NONFINAL_FIELDS)
-                .suppress(Warning.TRANSIENT_FIELDS)
-                .verify();
+            .withRedefinedSuperclass() // superclass also defines equals/hashCode
+            .suppress(Warning.STRICT_INHERITANCE)
+            .suppress(Warning.NONFINAL_FIELDS)
+            .suppress(Warning.TRANSIENT_FIELDS)
+            .verify();
     }
     
     /**
@@ -76,46 +77,47 @@ public class LegendItemEntityTest {
                 2.0, 3.0, 4.0));
         LegendItemEntity e2 = new LegendItemEntity(new Rectangle2D.Double(1.0,
                 2.0, 3.0, 4.0));
-        assertEquals(e1, e2);
+        assertTrue(e1.equals(e2));
 
         e1.setArea(new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0));
-        assertNotEquals(e1, e2);
+        assertFalse(e1.equals(e2));
         e2.setArea(new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0));
-        assertEquals(e1, e2);
+        assertTrue(e1.equals(e2));
 
         e1.setToolTipText("New ToolTip");
-        assertNotEquals(e1, e2);
+        assertFalse(e1.equals(e2));
         e2.setToolTipText("New ToolTip");
-        assertEquals(e1, e2);
+        assertTrue(e1.equals(e2));
 
         e1.setURLText("New URL");
-        assertNotEquals(e1, e2);
+        assertFalse(e1.equals(e2));
         e2.setURLText("New URL");
-        assertEquals(e1, e2);
+        assertTrue(e1.equals(e2));
 
         e1.setDataset(new DefaultCategoryDataset());
-        assertNotEquals(e1, e2);
+        assertFalse(e1.equals(e2));
         e2.setDataset(new DefaultCategoryDataset());
-        assertEquals(e1, e2);
+        assertTrue(e1.equals(e2));
 
         e1.setSeriesKey("A");
-        assertNotEquals(e1, e2);
+        assertFalse(e1.equals(e2));
         e2.setSeriesKey("A");
-        assertEquals(e1, e2);
+        assertTrue(e1.equals(e2));
 
     }
 
     /**
      * Confirm that cloning works.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
         LegendItemEntity e1 = new LegendItemEntity(new Rectangle2D.Double(1.0,
                 2.0, 3.0, 4.0));
         LegendItemEntity e2 = (LegendItemEntity) e1.clone();
-        assertNotSame(e1, e2);
-        assertSame(e1.getClass(), e2.getClass());
-        assertEquals(e1, e2);
+        assertTrue(e1 != e2);
+        assertTrue(e1.getClass() == e2.getClass());
+        assertTrue(e1.equals(e2));
     }
 
     /**

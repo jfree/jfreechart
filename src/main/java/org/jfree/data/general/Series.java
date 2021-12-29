@@ -30,7 +30,7 @@
  * (C) Copyright 2001-2021, by David Gilbert.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  * 
  */
 
@@ -257,13 +257,29 @@ public abstract class Series implements Cloneable, Serializable {
             return false;
         }
         Series that = (Series) obj;
-        if (!getKey().equals(that.getKey())) {
+        if (!Objects.equals(this.key, that.key)) {
             return false;
         }
-        if (!Objects.equals(getDescription(), that.getDescription())) {
+        if (!Objects.equals(this.description, that.description)) {
+            return false;
+        }
+        if (that.canEqual(this) == false) {
             return false;
         }
         return true;
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof Series);
     }
 
     /**
@@ -273,11 +289,10 @@ public abstract class Series implements Cloneable, Serializable {
      */
     @Override
     public int hashCode() {
-        int result;
-        result = this.key.hashCode();
-        result = 29 * result + (this.description != null
-                ? this.description.hashCode() : 0);
-        return result;
+        int hash = 5;
+        hash = 53 * hash + Objects.hashCode(this.key);
+        hash = 53 * hash + Objects.hashCode(this.description);
+        return hash;
     }
 
     /**

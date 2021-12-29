@@ -30,7 +30,7 @@
  * (C) Copyright 2002-2021, by David Gilbert.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -187,21 +187,50 @@ public class IntervalMarker extends Marker implements Cloneable, Serializable {
         if (!(obj instanceof IntervalMarker)) {
             return false;
         }
-        if (!super.equals(obj)) {
-            return false;
-        }
         IntervalMarker that = (IntervalMarker) obj;
-        if (this.startValue != that.startValue) {
+        if (that.canEqual(this) == false) {
             return false;
         }
-        if (this.endValue != that.endValue) {
+        if (Double.doubleToLongBits(this.startValue) != 
+            Double.doubleToLongBits(that.startValue)) {
+            return false;
+        }
+        if (Double.doubleToLongBits(this.endValue) != 
+            Double.doubleToLongBits(that.endValue)) {
             return false;
         }
         if (!Objects.equals(this.gradientPaintTransformer,
                 that.gradientPaintTransformer)) {
             return false;
         }
-        return true;
+        return super.equals(obj);
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // Solves Problem: equals not symmetric
+        return (other instanceof IntervalMarker);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = super.hashCode(); // equals calls superclass, hashCode must also
+        hash = 47 * hash +
+               (int) (Double.doubleToLongBits(this.startValue) ^
+                      (Double.doubleToLongBits(this.startValue) >>> 32));
+        hash = 47 * hash +
+               (int) (Double.doubleToLongBits(this.endValue) ^
+                      (Double.doubleToLongBits(this.endValue) >>> 32));
+        hash = 47 * hash + Objects.hashCode(this.gradientPaintTransformer);
+        return hash;
     }
 
     /**

@@ -30,7 +30,7 @@
  * (C) Copyright 2005-2021, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
@@ -67,6 +67,7 @@ public class LegendGraphicTest {
         EqualsVerifier.forClass(LegendGraphic.class)
                 .suppress(Warning.STRICT_INHERITANCE)
                 .suppress(Warning.NONFINAL_FIELDS)
+                .suppress(Warning.TRANSIENT_FIELDS)
                 .withRedefinedSuperclass()
                 .withPrefabValues(Rectangle2D.class,
                                   TestUtils.createR2D(true),
@@ -211,6 +212,7 @@ public class LegendGraphicTest {
 
     /**
      * A test for cloning - checks that the line shape is cloned correctly.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning2() throws CloneNotSupportedException {

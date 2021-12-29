@@ -32,6 +32,7 @@
  * Original Author:  David Gilbert;
  * Contributor(s):   Peter Kolb (patch 2809117);
  *                   Martin Hoeller;
+ *                   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  * 
  */
 
@@ -291,17 +292,34 @@ public class TextAnnotation extends AbstractAnnotation implements Serializable {
         if (!Objects.equals(this.textAnchor, that.getTextAnchor())) {
             return false;
         }
-        if (!Objects.equals(this.rotationAnchor,
-                that.getRotationAnchor())) {
+        if (!Objects.equals(this.rotationAnchor, that.getRotationAnchor())) {
             return false;
         }
-        if (this.rotationAngle != that.getRotationAngle()) {
+        if (Double.doubleToLongBits(this.rotationAngle) !=
+            Double.doubleToLongBits(that.rotationAngle)) {
             return false;
         }
 
-        // seem to be the same...
-        return true;
+        // fix the "equals not symmetric" problem
+        if (that.canEqual(this) == false) {
+            return false;
+        }
 
+        return super.equals(obj);
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof TextAnnotation);
     }
 
     /**
@@ -311,14 +329,14 @@ public class TextAnnotation extends AbstractAnnotation implements Serializable {
      */
     @Override
     public int hashCode() {
-        int result = 193;
-        result = 37 * result + this.font.hashCode();
+        int result = super.hashCode(); // equals calls superclass, hashCode must also
+        result = 37 * result + Objects.hashCode(this.font);
         result = 37 * result + HashUtils.hashCodeForPaint(this.paint);
-        result = 37 * result + this.rotationAnchor.hashCode();
+        result = 37 * result + Objects.hashCode(this.rotationAnchor);
         long temp = Double.doubleToLongBits(this.rotationAngle);
         result = 37 * result + (int) (temp ^ (temp >>> 32));
-        result = 37 * result + this.text.hashCode();
-        result = 37 * result + this.textAnchor.hashCode();
+        result = 37 * result + Objects.hashCode(this.text);
+        result = 37 * result + Objects.hashCode(this.textAnchor);
         return result;
     }
 

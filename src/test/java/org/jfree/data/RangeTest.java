@@ -31,11 +31,14 @@
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Sergei Ivanov;
+ *                   Tracy Hiltbrand;
  * 
  */
 
 package org.jfree.data;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -48,6 +51,19 @@ import org.junit.jupiter.api.Test;
  * Tests for the {@link Range} class.
  */
 public class RangeTest {
+
+    /**
+     * Use EqualsVerifier to ensure correct implementation of equals and
+     * hashCode.
+     */
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(Range.class)
+                .suppress(Warning.STRICT_INHERITANCE)
+                .suppress(Warning.NONFINAL_FIELDS)
+                .suppress(Warning.TRANSIENT_FIELDS)
+                .verify();
+    }
 
     /**
      * Confirm that the constructor initializes all the required fields.

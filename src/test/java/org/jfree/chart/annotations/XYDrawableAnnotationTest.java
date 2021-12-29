@@ -30,7 +30,7 @@
  * (C) Copyright 2003-2021, by David Gilbert.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
@@ -43,6 +43,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.ui.Drawable;
@@ -96,6 +98,27 @@ public class XYDrawableAnnotationTest {
         public Object clone() throws CloneNotSupportedException {
             return super.clone();
         }
+
+        @Override
+        public int hashCode()
+        {
+            int hash = 5;
+            return hash;
+        }
+    }
+
+    /**
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
+     */
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(XYDrawableAnnotation.class)
+            .withRedefinedSuperclass() // superclass also defines equals/hashCode
+            .suppress(Warning.STRICT_INHERITANCE)
+            .suppress(Warning.NONFINAL_FIELDS)
+            .suppress(Warning.TRANSIENT_FIELDS)
+            .verify();
     }
 
     /**
@@ -162,6 +185,7 @@ public class XYDrawableAnnotationTest {
 
     /**
      * Confirm that cloning works.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {

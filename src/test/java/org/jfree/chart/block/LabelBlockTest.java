@@ -30,7 +30,7 @@
  * (C) Copyright 2005-2021, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
@@ -44,6 +44,12 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
 
+import java.awt.geom.Rectangle2D;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
+import static org.jfree.chart.TestUtils.createFont;
+import static org.jfree.chart.TestUtils.createR2D;
+
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.text.TextBlockAnchor;
 import org.jfree.chart.ui.RectangleAnchor;
@@ -54,6 +60,22 @@ import org.junit.jupiter.api.Test;
  * Some tests for the {@link LabelBlock} class.
  */
 public class LabelBlockTest {
+
+    /**
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
+     */
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(LabelBlock.class)
+            .withPrefabValues(Rectangle2D.class, createR2D(true), createR2D(false))
+            .withPrefabValues(Font.class, createFont(true), createFont(false))
+            .suppress(Warning.STRICT_INHERITANCE)
+            .suppress(Warning.NONFINAL_FIELDS)
+            .suppress(Warning.TRANSIENT_FIELDS)
+            .withRedefinedSuperclass()
+            .verify();
+    }
 
     /**
      * Confirm that the equals() method can distinguish all the required fields.
@@ -111,6 +133,7 @@ public class LabelBlockTest {
 
     /**
      * Confirm that cloning works.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {

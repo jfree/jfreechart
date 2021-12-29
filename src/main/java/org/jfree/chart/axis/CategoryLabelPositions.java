@@ -30,13 +30,14 @@
  * (C) Copyright 2004-2021, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
 package org.jfree.chart.axis;
 
 import java.io.Serializable;
+import java.util.Objects;
 import org.jfree.chart.text.TextBlockAnchor;
 import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.ui.RectangleEdge;
@@ -368,17 +369,20 @@ public class CategoryLabelPositions implements Serializable {
         }
 
         CategoryLabelPositions that = (CategoryLabelPositions) obj;
-        if (!this.positionForAxisAtTop.equals(that.positionForAxisAtTop)) {
+        if (!Objects.equals(this.positionForAxisAtTop, 
+                            that.positionForAxisAtTop)) {
             return false;
         }
-        if (!this.positionForAxisAtBottom.equals(
-                that.positionForAxisAtBottom)) {
+        if (!Objects.equals(this.positionForAxisAtBottom, 
+                            that.positionForAxisAtBottom)) {
             return false;
         }
-        if (!this.positionForAxisAtLeft.equals(that.positionForAxisAtLeft)) {
+        if (!Objects.equals(this.positionForAxisAtLeft,
+                            that.positionForAxisAtLeft)) {
             return false;
         }
-        if (!this.positionForAxisAtRight.equals(that.positionForAxisAtRight)) {
+        if (!Objects.equals(this.positionForAxisAtRight,
+                            that.positionForAxisAtRight)) {
             return false;
         }
         return true;
@@ -392,10 +396,10 @@ public class CategoryLabelPositions implements Serializable {
     @Override
     public int hashCode() {
         int result = 19;
-        result = 37 * result + this.positionForAxisAtTop.hashCode();
-        result = 37 * result + this.positionForAxisAtBottom.hashCode();
-        result = 37 * result + this.positionForAxisAtLeft.hashCode();
-        result = 37 * result + this.positionForAxisAtRight.hashCode();
+        result = 19 * result + Objects.hashCode(this.positionForAxisAtTop);
+        result = 19 * result + Objects.hashCode(this.positionForAxisAtBottom);
+        result = 19 * result + Objects.hashCode(this.positionForAxisAtLeft);
+        result = 19 * result + Objects.hashCode(this.positionForAxisAtRight);
         return result;
     }
 }

@@ -30,7 +30,7 @@
  * (C) Copyright 2004-2021, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
@@ -42,6 +42,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
+import java.util.Objects;
 
 import org.jfree.chart.ChartRenderingInfo;
 import org.jfree.chart.TestUtils;
@@ -85,6 +86,7 @@ public class PlotRenderingInfoTest {
 
     /**
      * Confirm that cloning works.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {

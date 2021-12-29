@@ -61,10 +61,12 @@ public class TickLabelEntityTest {
                 2.0, 3.0, 4.0), "ToolTip", "URL");
         assertTrue(e1.equals(e2));
 
+        // Area is transient, not part of equals or hashCode - compare using
+        // get method
         e1.setArea(new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0));
-        assertFalse(e1.equals(e2));
+        assertFalse(e1.getArea().equals(e2.getArea()));
         e2.setArea(new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0));
-        assertTrue(e1.equals(e2));
+        assertTrue(e1.getArea().equals(e2.getArea()));
 
         e1.setToolTipText("New ToolTip");
         assertFalse(e1.equals(e2));

@@ -31,6 +31,7 @@
  *
  * Original Author:  Peter Kolb;
  * Contributor(s):   David Gilbert;
+ *                   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -42,7 +43,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Objects;
 
-import org.jfree.chart.HashUtils;
 import org.jfree.chart.axis.Axis;
 import org.jfree.chart.util.Args;
 import org.jfree.chart.util.SerialUtils;
@@ -138,19 +138,29 @@ public class AxisEntity extends ChartEntity {
             return false;
         }
         AxisEntity that = (AxisEntity) obj;
-        if (!getArea().equals(that.getArea())) {
+        if (!(Objects.equals(this.axis, that.axis))) {
             return false;
         }
-        if (!Objects.equals(getToolTipText(), that.getToolTipText())) {
+        // fix the "equals not symmetric" problem
+        if (that.canEqual(this) == false) {
             return false;
         }
-        if (!Objects.equals(getURLText(), that.getURLText())) {
-            return false;
-        }
-        if (!(this.axis.equals(that.axis))) {
-            return false;
-        }
-        return true;
+
+        return super.equals(obj);
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof AxisEntity);
     }
 
     /**
@@ -160,10 +170,9 @@ public class AxisEntity extends ChartEntity {
      */
     @Override
     public int hashCode() {
-        int result = 39;
-        result = HashUtils.hashCode(result, getToolTipText());
-        result = HashUtils.hashCode(result, getURLText());
-        return result;
+        int hash = 5;
+        hash = 31 * hash + Objects.hashCode(this.axis);
+        return hash;
     }
 
     /**

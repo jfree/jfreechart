@@ -30,12 +30,15 @@
  * (C) Copyright 2004-2021, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
 package org.jfree.chart.plot;
 
+import java.awt.Font;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -64,6 +67,24 @@ public class IntervalMarkerTest implements MarkerChangeListener {
     @Override
     public void markerChanged(MarkerChangeEvent event) {
         this.lastEvent = event;
+    }
+
+    /**
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
+     */
+    @Test
+    public void testEqualsHashCode()
+    {
+        EqualsVerifier.forClass(IntervalMarker.class)
+            .withRedefinedSuperclass() // superclass also defines equals/hashCode
+            .suppress(Warning.STRICT_INHERITANCE)
+            .suppress(Warning.NONFINAL_FIELDS)
+            .suppress(Warning.TRANSIENT_FIELDS)
+            .withPrefabValues(Font.class,
+            		          new Font("SansSerif", Font.PLAIN, 10), 
+            		          new Font("Tahoma", Font.BOLD, 12))
+            .verify();
     }
 
     /**
@@ -98,6 +119,7 @@ public class IntervalMarkerTest implements MarkerChangeListener {
 
     /**
      * Confirm that cloning works.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {

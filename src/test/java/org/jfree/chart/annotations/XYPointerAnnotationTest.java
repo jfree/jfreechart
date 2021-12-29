@@ -42,9 +42,13 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Stroke;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 
 import org.jfree.chart.TestUtils;
+import static org.jfree.chart.TestUtils.createFont;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.jupiter.api.Test;
@@ -53,6 +57,21 @@ import org.junit.jupiter.api.Test;
  * Tests for the {@link XYPointerAnnotation} class.
  */
 public class XYPointerAnnotationTest {
+
+    /**
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
+     */
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(XYPointerAnnotation.class)
+            .withRedefinedSuperclass() // superclass also defines equals/hashCode
+            .withPrefabValues(Font.class, createFont(true), createFont(false))
+            .suppress(Warning.STRICT_INHERITANCE)
+            .suppress(Warning.NONFINAL_FIELDS)
+            .suppress(Warning.TRANSIENT_FIELDS)
+            .verify();
+    }
 
     /**
      * Confirm that the equals method can distinguish all the required fields.
@@ -147,6 +166,7 @@ public class XYPointerAnnotationTest {
 
     /**
      * Confirm that cloning works.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {

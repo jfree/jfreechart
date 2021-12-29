@@ -30,7 +30,7 @@
  * (C) Copyright 2002-2021, by David Gilbert.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -193,6 +193,15 @@ public class ChartRenderingInfo implements Cloneable, Serializable {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 37 * hash + Objects.hashCode(this.chartArea);
+        hash = 37 * hash + Objects.hashCode(this.plotInfo);
+        hash = 37 * hash + Objects.hashCode(this.entities);
+        return hash;
     }
 
     /**

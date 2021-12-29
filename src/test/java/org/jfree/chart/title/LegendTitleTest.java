@@ -30,7 +30,7 @@
  * (C) Copyright 2005-2021, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
@@ -52,6 +52,7 @@ import org.jfree.chart.TestUtils;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.ui.RectangleEdge;
+import org.jfree.chart.util.PaintUtils;
 import org.jfree.chart.util.SortOrder;
 import org.junit.jupiter.api.Test;
 
@@ -69,6 +70,7 @@ public class LegendTitleTest {
         EqualsVerifier.forClass(LegendTitle.class)
                 .suppress(Warning.STRICT_INHERITANCE)
                 .suppress(Warning.NONFINAL_FIELDS)
+                .suppress(Warning.TRANSIENT_FIELDS)
                 .withRedefinedSuperclass()
                 .withPrefabValues(Rectangle2D.class,
                                   TestUtils.createR2D(true),

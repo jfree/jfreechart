@@ -30,18 +30,21 @@
  * (C) Copyright 2003-2021, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
 package org.jfree.chart.annotations;
 
+import java.awt.Font;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.jfree.chart.TestUtils;
-
+import static org.jfree.chart.TestUtils.createFont;
 import org.jfree.chart.axis.CategoryAnchor;
 import org.jfree.chart.util.PublicCloneable;
 import org.junit.jupiter.api.Test;
@@ -52,16 +55,32 @@ import org.junit.jupiter.api.Test;
 public class CategoryTextAnnotationTest {
 
     /**
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
+     */
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(CategoryTextAnnotation.class)
+            .withRedefinedSuperclass() // superclass also defines equals/hashCode
+            // Add prefab values for Font
+            .withPrefabValues(Font.class, createFont(true), createFont(false))
+            .suppress(Warning.STRICT_INHERITANCE)
+            .suppress(Warning.NONFINAL_FIELDS)
+            .suppress(Warning.TRANSIENT_FIELDS)
+            .verify();
+    }
+    
+    /**
      * Confirm that the equals method can distinguish all the required fields.
      */
     @Test
     public void testEquals() {
-        CategoryTextAnnotation a1 = new CategoryTextAnnotation("Test", 
+        CategoryTextAnnotation a1 = new CategoryTextAnnotation("Test",
                 "Category", 1.0);
-        CategoryTextAnnotation a2 = new CategoryTextAnnotation("Test", 
+        CategoryTextAnnotation a2 = new CategoryTextAnnotation("Test",
                 "Category", 1.0);
         assertTrue(a1.equals(a2));
-
+    
         // category
         a1.setCategory("Category 2");
         assertFalse(a1.equals(a2));
@@ -98,6 +117,7 @@ public class CategoryTextAnnotationTest {
 
     /**
      * Confirm that cloning works.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {

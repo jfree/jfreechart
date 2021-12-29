@@ -44,6 +44,8 @@ import org.jfree.chart.TestUtils;
 import org.jfree.chart.text.TextBlockAnchor;
 import org.jfree.chart.ui.RectangleAnchor;
 import org.jfree.chart.ui.TextAnchor;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 
 import org.junit.jupiter.api.Test;
 
@@ -51,6 +53,19 @@ import org.junit.jupiter.api.Test;
  * Tests for the {@link CategoryLabelPosition} class.
  */
 public class CategoryLabelPositionTest {
+    
+    /**
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
+     */
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(CategoryLabelPosition.class)
+                .suppress(Warning.STRICT_INHERITANCE)
+                .suppress(Warning.NONFINAL_FIELDS)
+                .suppress(Warning.TRANSIENT_FIELDS)
+                .verify();
+    }
     
     /**
      * Check that the equals() method can distinguish all fields.

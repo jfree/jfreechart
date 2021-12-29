@@ -30,7 +30,7 @@
  * (C) Copyright 2006-2021, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
@@ -42,9 +42,15 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Stroke;
+import java.awt.geom.Rectangle2D;
 
 import org.jfree.chart.TestUtils;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
+import static org.jfree.chart.TestUtils.createFont;
+import static org.jfree.chart.TestUtils.createR2D;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.jupiter.api.Test;
@@ -53,6 +59,22 @@ import org.junit.jupiter.api.Test;
  * Tests for the {@link CategoryPointerAnnotation} class.
  */
 public class CategoryPointerAnnotationTest {
+
+    /**
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
+     */
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(CategoryPointerAnnotation.class)
+            .withRedefinedSuperclass() // superclass also defines equals/hashCode
+            .withPrefabValues(Rectangle2D.class, createR2D(true), createR2D(false))
+            .withPrefabValues(Font.class, createFont(true), createFont(false))
+            .suppress(Warning.STRICT_INHERITANCE)
+            .suppress(Warning.NONFINAL_FIELDS)
+            .suppress(Warning.TRANSIENT_FIELDS)
+            .verify();
+    }
 
     /**
      * Confirm that the equals method can distinguish all the required fields.
@@ -147,6 +169,7 @@ public class CategoryPointerAnnotationTest {
 
     /**
      * Confirm that cloning works.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {

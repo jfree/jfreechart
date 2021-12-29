@@ -65,8 +65,10 @@ public class XYItemEntityTest {
                 .withRedefinedSuperclass() // superclass also defines equals/hashCode
                 .suppress(Warning.STRICT_INHERITANCE)
                 .suppress(Warning.NONFINAL_FIELDS)
+                .suppress(Warning.TRANSIENT_FIELDS)
                 .verify();
     }
+
     /**
      * Confirm that the equals method can distinguish all the required fields.
      */
@@ -107,6 +109,7 @@ public class XYItemEntityTest {
 
     /**
      * Confirm that cloning works.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {

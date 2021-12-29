@@ -30,7 +30,7 @@
  * (C) Copyright 2005-2021, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
@@ -43,7 +43,10 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.GradientPaint;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 
 import org.jfree.chart.TestUtils;
 
@@ -66,6 +69,21 @@ public class CategoryMarkerTest implements MarkerChangeListener {
     @Override
     public void markerChanged(MarkerChangeEvent event) {
         this.lastEvent = event;
+    }
+
+    /**
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
+     */
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(CategoryMarker.class)
+            .withRedefinedSuperclass() // superclass also defines equals/hashCode
+            .withPrefabValues(Font.class, new Font("SansSerif", Font.PLAIN, 10), new Font("Tahoma", Font.BOLD, 12))
+            .suppress(Warning.STRICT_INHERITANCE)
+            .suppress(Warning.NONFINAL_FIELDS)
+            .suppress(Warning.TRANSIENT_FIELDS)
+            .verify();
     }
 
     /**
@@ -134,6 +152,7 @@ public class CategoryMarkerTest implements MarkerChangeListener {
 
     /**
      * Check cloning.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {

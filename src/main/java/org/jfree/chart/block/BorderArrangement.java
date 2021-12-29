@@ -30,7 +30,7 @@
  * (C) Copyright 2004-2021, by David Gilbert.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand (define hashCode);
  *
  */
 
@@ -522,5 +522,16 @@ public class BorderArrangement implements Arrangement, Serializable {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 67 * hash + Objects.hashCode(this.centerBlock);
+        hash = 67 * hash + Objects.hashCode(this.topBlock);
+        hash = 67 * hash + Objects.hashCode(this.bottomBlock);
+        hash = 67 * hash + Objects.hashCode(this.leftBlock);
+        hash = 67 * hash + Objects.hashCode(this.rightBlock);
+        return hash;
     }
 }

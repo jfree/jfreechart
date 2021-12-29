@@ -30,7 +30,7 @@
  * (C) Copyright 2007-2021, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
@@ -43,6 +43,8 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.awt.Color;
 import java.awt.geom.Rectangle2D;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.ui.RectangleInsets;
@@ -53,6 +55,23 @@ import org.junit.jupiter.api.Test;
  * Tests for the {@link AbstractBlock} class.
  */
 public class AbstractBlockTest{
+
+    /**
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
+     */
+    @Test
+    public void testEqualsHashcode() {
+        EqualsVerifier.forClass(AbstractBlock.class)
+            // Add prefab values for java.awt.geom.Rectangle2D.
+            .withPrefabValues(Rectangle2D.class,
+                              new Rectangle2D.Double(0, 0, 1, 1),
+                              new Rectangle2D.Double(1, 1, 2, 2))
+            .withRedefinedSubclass(BlockContainer.class) // subclass(es) also define equals/hashCode
+            .suppress(Warning.NONFINAL_FIELDS)
+            .suppress(Warning.TRANSIENT_FIELDS)
+            .verify();
+    }
 
     /**
      * Confirm that the equals() method can distinguish all the required fields.
@@ -130,10 +149,12 @@ public class AbstractBlockTest{
         assertTrue(b1.getClass() == b2.getClass());
         assertTrue(b1.equals(b2));
 
+        // transient field 'bounds' not included in equals or hashCode, so test
+        // using the 'get' method
         bounds1.setFrame(2.0, 4.0, 6.0, 8.0);
-        assertFalse(b1.equals(b2));
+        assertFalse(b1.getBounds().equals(b2.getBounds()));
         b2.setBounds(new Rectangle2D.Double(2.0, 4.0, 6.0, 8.0));
-        assertTrue(b1.equals(b2));
+        assertTrue(b1.getBounds().equals(b2.getBounds()));
     }
 
     /**

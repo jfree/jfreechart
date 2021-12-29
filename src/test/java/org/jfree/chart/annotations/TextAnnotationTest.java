@@ -31,6 +31,7 @@
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   Martin Hoeller;
+                     Tracy Hiltbrand;
  * 
  */
 
@@ -46,6 +47,10 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
+import static org.jfree.chart.TestUtils.createFont;
+
 import org.jfree.chart.event.AnnotationChangeEvent;
 import org.jfree.chart.event.AnnotationChangeListener;
 import org.jfree.chart.ui.TextAnchor;
@@ -57,6 +62,22 @@ import org.junit.jupiter.api.Test;
 public class TextAnnotationTest implements AnnotationChangeListener {
 
     /**
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
+     */
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(TextAnnotation.class)
+            .withRedefinedSuperclass()
+            .withRedefinedSubclass(CategoryTextAnnotation.class)
+            // Add prefab values for Font
+            .withPrefabValues(Font.class, createFont(true), createFont(false))
+            .suppress(Warning.NONFINAL_FIELDS)
+            .suppress(Warning.TRANSIENT_FIELDS)
+            .verify();
+    }
+    
+    /**
      * Confirm that the equals method can distinguish all the required fields.
      */
     @Test
@@ -64,7 +85,7 @@ public class TextAnnotationTest implements AnnotationChangeListener {
         TextAnnotation a1 = new CategoryTextAnnotation("Test", "Category", 1.0);
         TextAnnotation a2 = new CategoryTextAnnotation("Test", "Category", 1.0);
         assertTrue(a1.equals(a2));
-
+    
         // text
         a1.setText("Text");
         assertFalse(a1.equals(a2));

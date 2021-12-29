@@ -44,6 +44,7 @@ import java.awt.Color;
 import java.awt.Font;
 
 import org.jfree.chart.TestUtils;
+import org.jfree.chart.util.PaintUtils;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -72,14 +73,14 @@ public class DateTitleTest {
         assertTrue(t1.equals(t2));
 
         t1.setPaint(Color.BLUE);
-        assertFalse(t1.equals(t2));
+        assertFalse(PaintUtils.equal(t1.getPaint(), t2.getPaint()));
         t2.setPaint(Color.BLUE);
-        assertTrue(t1.equals(t2));
+        assertTrue(PaintUtils.equal(t1.getPaint(), t2.getPaint()));
 
         t1.setBackgroundPaint(Color.BLUE);
-        assertFalse(t1.equals(t2));
+        assertFalse(PaintUtils.equal(t1.getBackgroundPaint(), t2.getBackgroundPaint()));
         t2.setBackgroundPaint(Color.BLUE);
-        assertTrue(t1.equals(t2));
+        assertTrue(PaintUtils.equal(t1.getBackgroundPaint(), t2.getBackgroundPaint()));
 
     }
 

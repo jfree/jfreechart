@@ -30,7 +30,7 @@
  * (C) Copyright 2002-2021, by David Gilbert.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand (equals/hashCode comply with EqualsVerifier);
  *
  */
 
@@ -38,6 +38,7 @@ package org.jfree.data.gantt;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
 
@@ -164,14 +165,32 @@ public class TaskSeries extends Series {
         if (!(obj instanceof TaskSeries)) {
             return false;
         }
-        if (!super.equals(obj)) {
-            return false;
-        }
         TaskSeries that = (TaskSeries) obj;
-        if (!this.tasks.equals(that.tasks)) {
+        if (!Objects.equals(this.tasks, that.tasks)) {
             return false;
         }
-        return true;
+        return super.equals(obj);
+    }
+
+    /**
+     * Ensures symmetry between super/subclass implementations of equals. For
+     * more detail, see http://jqno.nl/equalsverifier/manual/inheritance.
+     *
+     * @param other Object
+     * 
+     * @return true ONLY if the parameter is THIS class type
+     */
+    @Override
+    public boolean canEqual(Object other) {
+        // fix the "equals not symmetric" problem
+        return (other instanceof TaskSeries);
+    }
+    
+    @Override
+    public int hashCode() {
+        int hash = super.hashCode(); // equals calls superclass, hashCode must also
+        hash = 29 * hash + java.util.Objects.hashCode(this.tasks);
+        return hash;
     }
 
     /**

@@ -36,6 +36,8 @@
 
 package org.jfree.chart.block;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -52,24 +54,16 @@ import org.junit.jupiter.api.Test;
 public class GridArrangementTest {
 
     /**
-     * Confirm that the equals() method can distinguish all the required fields.
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
      */
     @Test
-    public void testEquals() {
-        GridArrangement f1 = new GridArrangement(11, 22);
-        GridArrangement f2 = new GridArrangement(11, 22);
-        assertTrue(f1.equals(f2));
-        assertTrue(f2.equals(f1));
-
-        f1 = new GridArrangement(33, 22);
-        assertFalse(f1.equals(f2));
-        f2 = new GridArrangement(33, 22);
-        assertTrue(f1.equals(f2));
-
-        f1 = new GridArrangement(33, 44);
-        assertFalse(f1.equals(f2));
-        f2 = new GridArrangement(33, 44);
-        assertTrue(f1.equals(f2));
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(GridArrangement.class)
+            .suppress(Warning.STRICT_INHERITANCE)
+            .suppress(Warning.NONFINAL_FIELDS)
+            .suppress(Warning.TRANSIENT_FIELDS)
+            .verify();
     }
 
     /**

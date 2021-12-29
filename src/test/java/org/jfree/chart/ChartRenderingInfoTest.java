@@ -30,7 +30,7 @@
  * (C) Copyright 2004-2021, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
@@ -88,7 +88,7 @@ public class ChartRenderingInfoTest  {
     @Test
     public void testCloning() throws CloneNotSupportedException {
         ChartRenderingInfo i1 = new ChartRenderingInfo();
-        ChartRenderingInfo i2 = (ChartRenderingInfo) i1.clone();
+        ChartRenderingInfo i2 = i1.clone();
 
         assertNotSame(i1, i2);
         assertSame(i1.getClass(), i2.getClass());

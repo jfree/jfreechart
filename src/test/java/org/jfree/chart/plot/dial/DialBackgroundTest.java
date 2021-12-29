@@ -137,7 +137,7 @@ public class DialBackgroundTest {
     public void testSerialization() {
         // test a default instance
         DialBackground b1 = new DialBackground();
-        DialBackground b2 = (DialBackground) TestUtils.serialised(b1);
+        DialBackground b2 = TestUtils.serialised(b1);
         assertEquals(b1, b2);
 
         // test a customised instance

@@ -30,7 +30,7 @@
  * (C) Copyright 2002-2021, by David Gilbert.
  *
  * Original Author:  David Gilbert;
- * Contributor(s):   -;
+ * Contributor(s):   Tracy Hiltbrand;
  *
  */
 
@@ -42,10 +42,13 @@ import java.awt.Font;
 import java.awt.GradientPaint;
 import java.awt.RenderingHints;
 import java.util.List;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 
 import org.jfree.chart.event.ChartChangeEvent;
 import org.jfree.chart.event.ChartChangeListener;
 import org.jfree.chart.plot.PiePlot;
+import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.RingPlot;
 import org.jfree.chart.title.LegendTitle;
 import org.jfree.chart.title.TextTitle;
@@ -74,6 +77,25 @@ import org.junit.jupiter.api.BeforeEach;
  * Tests for the {@link JFreeChart} class.
  */
 public class JFreeChartTest implements ChartChangeListener {
+
+    /**
+     * Use EqualsVerifier to test that the contract between equals and hashCode
+     * is properly implemented.
+     */
+    @Test
+    public void testEqualsHashCode() {
+        EqualsVerifier.forClass(JFreeChart.class)
+            .withPrefabValues(TextTitle.class,
+                              new TextTitle("tee"),
+                              new TextTitle("vee"))
+            .withPrefabValues(Plot.class, 
+                              TestUtils.createPlot(true),
+                              TestUtils.createPlot(false))
+            .suppress(Warning.STRICT_INHERITANCE)
+            .suppress(Warning.NONFINAL_FIELDS)
+            .suppress(Warning.TRANSIENT_FIELDS)
+            .verify();
+    }
 
     /** A pie chart. */
     private JFreeChart pieChart;
@@ -256,7 +278,7 @@ public class JFreeChartTest implements ChartChangeListener {
         data.setValue("Type 3", 45.8);
 
         JFreeChart c1 = ChartFactory.createPieChart("Test", data);
-        JFreeChart c2 = (JFreeChart) TestUtils.serialised(c1);
+        JFreeChart c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
         LegendTitle lt2 = c2.getLegend();
         assertSame(lt2.getSources()[0], c2.getPlot());
