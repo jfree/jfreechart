@@ -44,6 +44,9 @@ import org.jfree.data.general.SeriesChangeEvent;
 
 import org.jfree.data.time.SimpleTimePeriod;
 import org.junit.jupiter.api.Test;
+
+import javax.swing.event.EventListenerList;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -59,6 +62,9 @@ public class TaskSeriesCollectionTest {
                 .suppress(Warning.STRICT_INHERITANCE)
                 .suppress(Warning.NONFINAL_FIELDS)
                 .suppress(Warning.TRANSIENT_FIELDS)
+                .withPrefabValues(EventListenerList.class,
+                        new EventListenerList(),
+                        new EventListenerList())
                 .withPrefabValues(Task.class,
                                   new Task("T1", new Date(1), new Date(2)),
                                   new Task("T2", new Date(3), new Date(4)))

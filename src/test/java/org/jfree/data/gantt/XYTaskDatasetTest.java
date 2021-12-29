@@ -47,6 +47,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
+import javax.swing.event.EventListenerList;
+
 /**
  * Tests for the {@link XYTaskDataset} class.
  */
@@ -59,9 +61,12 @@ public class XYTaskDatasetTest {
                 .suppress(Warning.NONFINAL_FIELDS)
                 .suppress(Warning.TRANSIENT_FIELDS)
                 .withRedefinedSuperclass()
+                .withPrefabValues(EventListenerList.class,
+                        new EventListenerList(),
+                        new EventListenerList())
                 .withPrefabValues(Task.class,
-                                  new Task("T1", new Date(1), new Date(2)),
-                                  new Task("T2", new Date(3), new Date(4)))
+                        new Task("T1", new Date(1), new Date(2)),
+                        new Task("T2", new Date(3), new Date(4)))
                 .verify();
     }
 
