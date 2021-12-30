@@ -36,17 +36,19 @@
 
 package org.jfree.data.gantt;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
-
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
 
+import javax.swing.*;
 import javax.swing.event.EventListenerList;
+import java.beans.PropertyChangeSupport;
+import java.beans.VetoableChangeSupport;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -65,7 +67,9 @@ public class TaskSeriesTest {
                 .withPrefabValues(EventListenerList.class,
                         new EventListenerList(),
                         new EventListenerList())
-                //.withPrefabValues(Map.class, new HashMap(), new HashMap())
+                .withPrefabValues(PropertyChangeSupport.class, new PropertyChangeSupport("A"), new PropertyChangeSupport("B"))
+                .withPrefabValues(VetoableChangeSupport.class, new VetoableChangeSupport("A"), new VetoableChangeSupport("B"))
+                .withPrefabValues(Map.class, new HashMap(), new HashMap(Collections.singletonMap("K", "V")))
                 .withPrefabValues(Task.class,
                                   new Task("T1", new Date(1), new Date(2)),
                                   new Task("T2", new Date(3), new Date(4)))

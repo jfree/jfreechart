@@ -59,6 +59,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.awt.*;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -81,10 +83,11 @@ public class JFreeChartTest implements ChartChangeListener {
                 .withPrefabValues(Plot.class,
                         TestUtils.createPlot(true),
                         TestUtils.createPlot(false))
-                //.withPrefabValues(HashMap.class, new HashMap(), new HashMap())
+                .withPrefabValues(HashMap.class, new HashMap(), new HashMap(Collections.singletonMap("K", "V")))
                 .suppress(Warning.STRICT_INHERITANCE)
                 .suppress(Warning.NONFINAL_FIELDS)
                 .suppress(Warning.TRANSIENT_FIELDS)
+                .withIgnoredFields("renderingHints")
                 .verify();
     }
 

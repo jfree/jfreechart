@@ -39,6 +39,7 @@ package org.jfree.chart.plot;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.text.AttributedString;
 import java.util.List;
 import java.util.ResourceBundle;
 import nl.jqno.equalsverifier.EqualsVerifier;
@@ -101,6 +102,7 @@ public class CombinedDomainCategoryPlotTest implements ChartChangeListener {
                         new EventListenerList(),
                         new EventListenerList())
                 .withPrefabValues(String.class, "A", "B")
+                .withPrefabValues(AttributedString.class, TestUtils.createAS(true), TestUtils.createAS(false))
                 .withIgnoredFields("chart", "parent") // superclass
                 .verify();
     }
