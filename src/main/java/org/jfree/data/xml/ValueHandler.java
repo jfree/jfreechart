@@ -107,10 +107,10 @@ public class ValueHandler extends DefaultHandler implements DatasetTags {
                            String qName) throws SAXException {
 
         if (qName.equals(VALUE_TAG)) {
-            Number value;
+            Double value;
             try {
                 value = Double.valueOf(this.currentText.toString());
-                if (((Double) value).isNaN()) {
+                if (value.isNaN()) {
                     value = null;
                 }
             }

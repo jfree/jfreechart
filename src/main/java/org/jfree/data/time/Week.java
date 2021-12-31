@@ -532,7 +532,7 @@ public class Week extends RegularTimePeriod implements Serializable {
             int i = Week.findSeparator(s);
             if (i != -1) {
                 String s1 = s.substring(0, i).trim();
-                String s2 = s.substring(i + 1, s.length()).trim();
+                String s2 = s.substring(i + 1).trim();
 
                 Year y = Week.evaluateAsYear(s1);
                 int w;

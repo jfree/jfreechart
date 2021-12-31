@@ -116,10 +116,7 @@ public class AxisEntity extends ChartEntity {
      */
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("AxisEntity: ");
-        sb.append("tooltip = ");
-        sb.append(getToolTipText());
-        return sb.toString();
+        return "AxisEntity: tooltip = " + getToolTipText();
     }
 
     /**

@@ -56,7 +56,7 @@ public class DynamicDriveToolTipTagFragmentGeneratorTest {
                 g.generateToolTipFragment("abc"));
         assertEquals(" onMouseOver=\"return overlib("
                 + "'It\\'s \\\"A\\\", 100.0');\" onMouseOut=\"return nd();\"",
-                g.generateToolTipFragment("It\'s \"A\", 100.0"));
+                g.generateToolTipFragment("It's \"A\", 100.0"));
     }
 
 }

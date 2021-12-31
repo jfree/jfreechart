@@ -312,10 +312,7 @@ public class ChartEntity implements Cloneable, PublicCloneable, Serializable {
      */
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("ChartEntity: ");
-        sb.append("tooltip = ");
-        sb.append(this.toolTipText);
-        return sb.toString();
+        return "ChartEntity: tooltip = " + this.toolTipText;
     }
 
     /**
