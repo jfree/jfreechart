@@ -1328,7 +1328,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
         if (count == 0) {
             throw new IllegalArgumentException("Empty list not permitted.");
         }
-        Set<Integer> set = new HashSet<Integer>();
+        Set<Integer> set = new HashSet<>();
         for (Integer item : indices) {
             if (set.contains(item)) {
                 throw new IllegalArgumentException("Indices must be unique.");
@@ -3095,7 +3095,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      * @return The list of indices. 
      */
     private List<Integer> getDatasetIndices(DatasetRenderingOrder order) {
-        List<Integer> result = new ArrayList<Integer>();
+        List<Integer> result = new ArrayList<>();
         for (Entry<Integer, XYDataset> entry : this.datasets.entrySet()) {
             if (entry.getValue() != null) {
                 result.add(entry.getKey());
@@ -4000,7 +4000,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      */
     private List<XYDataset> getDatasetsMappedToDomainAxis(Integer axisIndex) {
         Args.nullNotPermitted(axisIndex, "axisIndex");
-        List<XYDataset> result = new ArrayList<XYDataset>();
+        List<XYDataset> result = new ArrayList<>();
         for (Entry<Integer, XYDataset> entry : this.datasets.entrySet()) {
             int index = entry.getKey();
             List<Integer> mappedAxes = this.datasetToDomainAxesMap.get(index);
@@ -4027,7 +4027,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      */
     private List<XYDataset> getDatasetsMappedToRangeAxis(Integer axisIndex) {
         Args.nullNotPermitted(axisIndex, "axisIndex");
-        List<XYDataset> result = new ArrayList<XYDataset>();
+        List<XYDataset> result = new ArrayList<>();
         for (Entry<Integer, XYDataset> entry : this.datasets.entrySet()) {
             int index = entry.getKey();
             List<Integer> mappedAxes = this.datasetToRangeAxesMap.get(index);
@@ -4115,10 +4115,9 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      */
     @Override
     public Range getDataRange(ValueAxis axis) {
-
         Range result = null;
-        List<XYDataset> mappedDatasets = new ArrayList<XYDataset>();
-        List<XYAnnotation> includedAnnotations = new ArrayList<XYAnnotation>();
+        List<XYDataset> mappedDatasets = new ArrayList<>();
+        List<XYAnnotation> includedAnnotations = new ArrayList<>();
         boolean isDomainAxis = true;
 
         // is it a domain axis?
@@ -5221,13 +5220,11 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
                 axis.addChangeListener(clone);
             }
         }
-        clone.domainAxisLocations = new HashMap<Integer, AxisLocation>(
-                this.domainAxisLocations);
-        clone.rangeAxisLocations = new HashMap<Integer, AxisLocation>(
-                this.rangeAxisLocations);
+        clone.domainAxisLocations = new HashMap<>(this.domainAxisLocations);
+        clone.rangeAxisLocations = new HashMap<>(this.rangeAxisLocations);
 
         // the datasets are not cloned, but listeners need to be added...
-        clone.datasets = new HashMap<Integer, XYDataset>(this.datasets);
+        clone.datasets = new HashMap<>(this.datasets);
         for (XYDataset dataset : clone.datasets.values()) {
             if (dataset != null) {
                 dataset.addChangeListener(clone);

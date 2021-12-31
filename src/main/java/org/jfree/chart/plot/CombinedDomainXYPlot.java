@@ -105,7 +105,7 @@ public class CombinedDomainXYPlot extends XYPlot
               domainAxis,
               null,        // no range axis
               null);       // no renderer
-        this.subplots = new java.util.ArrayList<XYPlot>();
+        this.subplots = new java.util.ArrayList<>();
     }
 
     /**

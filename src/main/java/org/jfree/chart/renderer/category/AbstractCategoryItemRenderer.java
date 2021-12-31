@@ -153,11 +153,9 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      * generators.
      */
     protected AbstractCategoryItemRenderer() {
-        this.itemLabelGeneratorMap 
-                = new HashMap<Integer, CategoryItemLabelGenerator>();
-        this.toolTipGeneratorMap 
-                = new HashMap<Integer, CategoryToolTipGenerator>();
-        this.itemURLGeneratorMap = new HashMap<Integer, CategoryURLGenerator>();
+        this.itemLabelGeneratorMap = new HashMap<>();
+        this.toolTipGeneratorMap = new HashMap<>();
+        this.itemURLGeneratorMap = new HashMap<>();
         this.legendItemLabelGenerator
                 = new StandardCategorySeriesLabelGenerator();
     }

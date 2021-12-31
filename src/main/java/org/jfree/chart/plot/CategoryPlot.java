@@ -3484,7 +3484,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @return A list of indices.
      */
     private List<Integer> getRendererIndices(DatasetRenderingOrder order) {
-        List<Integer> result = new ArrayList<Integer>();
+        List<Integer> result = new ArrayList<>();
         for (Map.Entry<Integer, CategoryItemRenderer> entry: 
                 this.renderers.entrySet()) {
             if (entry.getValue() != null) {
@@ -4047,7 +4047,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      * @return The list (possibly empty, but never {@code null}).
      */
     private List<CategoryDataset> datasetsMappedToRangeAxis(int axisIndex) {
-        List<CategoryDataset> result = new ArrayList<CategoryDataset>();
+        List<CategoryDataset> result = new ArrayList<>();
         for (Entry<Integer, CategoryDataset> entry : this.datasets.entrySet()) {
             Integer datasetIndex = entry.getKey();
             CategoryDataset dataset = entry.getValue();

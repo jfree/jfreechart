@@ -159,9 +159,8 @@ public abstract class AbstractXYItemRenderer extends AbstractRenderer
      */
     protected AbstractXYItemRenderer() {
         super();
-        this.itemLabelGeneratorMap 
-                = new HashMap<Integer, XYItemLabelGenerator>();
-        this.toolTipGeneratorMap = new HashMap<Integer, XYToolTipGenerator>();
+        this.itemLabelGeneratorMap = new HashMap<>();
+        this.toolTipGeneratorMap = new HashMap<>();
         this.urlGenerator = null;
         this.backgroundAnnotations = new java.util.ArrayList();
         this.foregroundAnnotations = new java.util.ArrayList();

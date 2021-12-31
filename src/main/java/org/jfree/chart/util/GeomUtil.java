@@ -61,7 +61,7 @@ public final class GeomUtil {
      */
     public static final Point2D[] calculateIntersectionPoints(Line2D lineA,
             Line2D... lines) {
-        ArrayList<Point2D> intersectionPoints = new ArrayList<Point2D>(
+        ArrayList<Point2D> intersectionPoints = new ArrayList<>(
                 lines.length);
         for (Line2D lineB : lines) {
             if (lineA.intersectsLine(lineB)) {
@@ -127,7 +127,7 @@ public final class GeomUtil {
      */
     public static final Line2D[] getLines(Shape shape, AffineTransform at)
             throws IllegalArgumentException {
-        ArrayList<Line2D> lines = new ArrayList<Line2D>();
+        ArrayList<Line2D> lines = new ArrayList<>();
         Point2D first = null;
         Point2D current = null;
         double[] coords = new double[6];

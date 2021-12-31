@@ -108,7 +108,7 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
         public XYSplineState(PlotRenderingInfo info) {
             super(info);
             this.fillArea = new GeneralPath();
-            this.points = new ArrayList<Point2D>();
+            this.points = new ArrayList<>();
         }
     }
     
@@ -437,7 +437,7 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
                 drawFirstPassShape(g2, pass, series, item, s.seriesPath);
             }
             // reset points vector
-            s.points = new ArrayList<Point2D>();
+            s.points = new ArrayList<>();
         }
     }
     

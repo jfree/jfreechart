@@ -246,7 +246,7 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
 
         PlotOrientation orientation = plot.getOrientation();
 
-        List<Integer> visibleSeries = new ArrayList<Integer>();
+        List<Integer> visibleSeries = new ArrayList<>();
         for (int i = 0; i < dataset.getSeriesCount(); i++) {
             if (isSeriesVisible(i)) {
                 visibleSeries.add(i);

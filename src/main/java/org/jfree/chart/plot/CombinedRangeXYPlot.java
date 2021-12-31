@@ -100,7 +100,7 @@ public class CombinedRangeXYPlot extends XYPlot
               null,
               rangeAxis,
               null);
-        this.subplots = new java.util.ArrayList<XYPlot>();
+        this.subplots = new java.util.ArrayList<>();
     }
 
     /**
