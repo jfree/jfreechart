@@ -2293,19 +2293,11 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
         Args.nullNotPermitted(layer, "layer");
         List<Marker> markers;
         if (layer == Layer.FOREGROUND) {
-            markers = this.foregroundDomainMarkers.get(index);
-            if (markers == null) {
-                markers = new ArrayList<>();
-                this.foregroundDomainMarkers.put(index, markers);
-            }
+            markers = this.foregroundDomainMarkers.computeIfAbsent(index, k -> new ArrayList<>());
             markers.add(marker);
         }
         else if (layer == Layer.BACKGROUND) {
-            markers = this.backgroundDomainMarkers.get(index);
-            if (markers == null) {
-                markers = new ArrayList<>();
-                this.backgroundDomainMarkers.put(index, markers);
-            }
+            markers = this.backgroundDomainMarkers.computeIfAbsent(index, k -> new ArrayList<>());
             markers.add(marker);
         }
         marker.addChangeListener(this);
@@ -2475,19 +2467,11 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
             boolean notify) {
         List<Marker> markers;
         if (layer == Layer.FOREGROUND) {
-            markers = this.foregroundRangeMarkers.get(index);
-            if (markers == null) {
-                markers = new ArrayList<>();
-                this.foregroundRangeMarkers.put(index, markers);
-            }
+            markers = this.foregroundRangeMarkers.computeIfAbsent(index, k -> new ArrayList<>());
             markers.add(marker);
         }
         else if (layer == Layer.BACKGROUND) {
-            markers = this.backgroundRangeMarkers.get(index);
-            if (markers == null) {
-                markers = new ArrayList<>();
-                this.backgroundRangeMarkers.put(index, markers);
-            }
+            markers = this.backgroundRangeMarkers.computeIfAbsent(index, k -> new ArrayList<>());
             markers.add(marker);
         }
         marker.addChangeListener(this);
