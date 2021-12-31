@@ -44,10 +44,8 @@ import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertNotSame;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link LegendItemCollection} class.
@@ -91,7 +89,7 @@ public class LegendItemCollectionTest  {
                 new Line2D.Double(1.0, 2.0, 3.0, 4.0), new BasicStroke(2.1f),
                 Color.GREEN);
         c1.add(item1);
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
         c2.add(item2);
         assertEquals(c1, c2);
 
@@ -126,7 +124,7 @@ public class LegendItemCollectionTest  {
 
         Rectangle2D item1Shape = (Rectangle2D) item1.getShape();
         item1Shape.setRect(1.0, 2.0, 3.0, 4.0);
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
     }
 
 }

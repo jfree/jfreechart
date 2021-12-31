@@ -41,9 +41,7 @@ import org.junit.jupiter.api.Test;
 import java.awt.Color;
 import java.awt.GradientPaint;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Some tests for the {@link PaintMap} class.
@@ -56,11 +54,11 @@ public class PaintMapTest  {
     @Test
     public void testGetPaint() {
         PaintMap m1 = new PaintMap();
-        assertEquals(null, m1.getPaint("A"));
+        assertNull(m1.getPaint("A"));
         m1.put("A", Color.RED);
         assertEquals(Color.RED, m1.getPaint("A"));
         m1.put("A", null);
-        assertEquals(null, m1.getPaint("A"));
+        assertNull(m1.getPaint("A"));
 
         // a null key should throw an IllegalArgumentException
         try {
@@ -101,23 +99,23 @@ public class PaintMapTest  {
         PaintMap m2 = new PaintMap();
         assertEquals(m1, m1);
         assertEquals(m1, m2);
-        assertFalse(m1.equals(null));
-        assertFalse(m1.equals("ABC"));
+        assertNotEquals(null, m1);
+        assertNotEquals("ABC", m1);
 
         m1.put("K1", Color.RED);
-        assertFalse(m1.equals(m2));
+        assertNotEquals(m1, m2);
         m2.put("K1", Color.RED);
         assertEquals(m1, m2);
 
         m1.put("K2", new GradientPaint(1.0f, 2.0f, Color.GREEN, 3.0f, 4.0f,
                 Color.YELLOW));
-        assertFalse(m1.equals(m2));
+        assertNotEquals(m1, m2);
         m2.put("K2", new GradientPaint(1.0f, 2.0f, Color.GREEN, 3.0f, 4.0f,
                 Color.YELLOW));
         assertEquals(m1, m2);
 
         m1.put("K2", null);
-        assertFalse(m1.equals(m2));
+        assertNotEquals(m1, m2);
         m2.put("K2", null);
         assertEquals(m1, m2);
     }

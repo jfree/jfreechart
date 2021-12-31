@@ -36,10 +36,6 @@
 
 package org.jfree.chart.axis;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
@@ -56,6 +52,8 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 /**
  * Tests for the {@link LogAxis} class.
  */
@@ -68,9 +66,9 @@ public class LogAxisTest {
     public void testCloning() throws CloneNotSupportedException {
         LogAxis a1 = new LogAxis("Test");
         LogAxis a2 = (LogAxis) a1.clone();
-        assertTrue(a1 != a2);
-        assertTrue(a1.getClass() == a2.getClass());
-        assertTrue(a1.equals(a2));
+        assertNotSame(a1, a2);
+        assertSame(a1.getClass(), a2.getClass());
+        assertEquals(a1, a2);
     }
 
     /**
@@ -80,22 +78,22 @@ public class LogAxisTest {
     public void testEquals() {
         LogAxis a1 = new LogAxis("Test");
         LogAxis a2 = new LogAxis("Test");
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         a1.setBase(2.0);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setBase(2.0);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         a1.setSmallestValue(0.1);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setSmallestValue(0.1);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         a1.setMinorTickCount(8);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setMinorTickCount(8);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
     }
 
     /**
@@ -105,7 +103,7 @@ public class LogAxisTest {
     public void testHashCode() {
         LogAxis a1 = new LogAxis("Test");
         LogAxis a2 = new LogAxis("Test");
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
         int h1 = a1.hashCode();
         int h2 = a2.hashCode();
         assertEquals(h1, h2);

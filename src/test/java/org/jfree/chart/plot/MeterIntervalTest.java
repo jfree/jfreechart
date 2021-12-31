@@ -36,10 +36,6 @@
 
 package org.jfree.chart.plot;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.awt.BasicStroke;
 import java.awt.Color;
 
@@ -47,6 +43,8 @@ import org.jfree.chart.TestUtils;
 
 import org.jfree.data.Range;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link MeterInterval} class.
@@ -67,19 +65,19 @@ public class MeterIntervalTest {
             "Label 1", new Range(1.2, 3.4), Color.RED, new BasicStroke(1.0f),
             Color.BLUE
         );
-        assertTrue(m1.equals(m2));
-        assertTrue(m2.equals(m1));
+        assertEquals(m1, m2);
+        assertEquals(m2, m1);
 
         m1 = new MeterInterval(
             "Label 2", new Range(1.2, 3.4), Color.RED, new BasicStroke(1.0f),
             Color.BLUE
         );
-        assertFalse(m1.equals(m2));
+        assertNotEquals(m1, m2);
         m2 = new MeterInterval(
             "Label 2", new Range(1.2, 3.4), Color.RED, new BasicStroke(1.0f),
             Color.BLUE
         );
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
 
     }
 

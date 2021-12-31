@@ -36,20 +36,14 @@
 
 package org.jfree.data.xy;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertNotSame;
-import static org.junit.jupiter.api.Assertions.fail;
-
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.Range;
 import org.jfree.data.UnknownKeyException;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link XYSeriesCollection} class.
@@ -86,22 +80,22 @@ public class XYSeriesCollectionTest {
         assertEquals(c2, c1);
 
         c1.addSeries(new XYSeries("Empty Series"));
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
         c2.addSeries(new XYSeries("Empty Series"));
         assertEquals(c1, c2);
 
         c1.setIntervalWidth(5.0);
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
         c2.setIntervalWidth(5.0);
         assertEquals(c1, c2);
 
         c1.setIntervalPositionFactor(0.75);
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
         c2.setIntervalPositionFactor(0.75);
         assertEquals(c1, c2);
 
         c1.setAutoWidth(true);
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
         c2.setAutoWidth(true);
         assertEquals(c1, c2);
 
@@ -123,7 +117,7 @@ public class XYSeriesCollectionTest {
 
         // check independence
         s1.setDescription("XYZ");
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
     }
 
     /**
@@ -163,7 +157,7 @@ public class XYSeriesCollectionTest {
             // correct outcome
         }
         catch (IndexOutOfBoundsException e) {
-            assertTrue(false);  // wrong outcome
+            fail();  // wrong outcome
         }
     }
 

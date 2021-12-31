@@ -89,7 +89,7 @@ public class ComparableObjectItemTest {
     /**
      * Some checks for the clone() method.
      * 
-     * @throws java.lang.CloneNotSupportedException
+     * @throws java.lang.CloneNotSupportedException if there is a problem cloning.
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {

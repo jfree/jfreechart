@@ -36,10 +36,6 @@
 
 package org.jfree.chart.renderer.xy;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
 import java.awt.geom.Rectangle2D;
 
 import org.jfree.chart.JFreeChart;
@@ -51,6 +47,8 @@ import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link XYDotRenderer} class.
@@ -67,19 +65,19 @@ public class XYDotRendererTest {
         assertEquals(r1, r2);
 
         r1.setDotWidth(11);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setDotWidth(11);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setDotHeight(12);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setDotHeight(12);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setLegendShape(new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setLegendShape(new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
     }
 
     /**
@@ -89,14 +87,14 @@ public class XYDotRendererTest {
     public void testHashcode() {
         XYDotRenderer r1 = new XYDotRenderer();
         XYDotRenderer r2 = new XYDotRenderer();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
 
         r1.setDotHeight(12);
         r2.setDotHeight(12);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         h1 = r1.hashCode();
         h2 = r2.hashCode();
         assertEquals(h1, h2);
@@ -109,9 +107,9 @@ public class XYDotRendererTest {
     public void testCloning() throws CloneNotSupportedException {
         XYDotRenderer r1 = new XYDotRenderer();
         XYDotRenderer r2 = (XYDotRenderer) r1.clone();
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
     }
 
     /**

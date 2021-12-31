@@ -36,10 +36,6 @@
 
 package org.jfree.chart.annotations;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.GradientPaint;
@@ -49,6 +45,8 @@ import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Some tests for the {@link XYShapeAnnotation} class.
@@ -67,28 +65,28 @@ public class XYShapeAnnotationTest {
         XYShapeAnnotation a2 = new XYShapeAnnotation(
                 new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0),
                 new BasicStroke(1.2f), Color.RED, Color.BLUE);
-        assertTrue(a1.equals(a2));
-        assertTrue(a2.equals(a1));
+        assertEquals(a1, a2);
+        assertEquals(a2, a1);
 
         // shape
         a1 = new XYShapeAnnotation(
                 new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0),
                 new BasicStroke(1.2f), Color.RED, Color.BLUE);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2 = new XYShapeAnnotation(
                 new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0),
                 new BasicStroke(1.2f), Color.RED, Color.BLUE);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         // stroke
         a1 = new XYShapeAnnotation(
                 new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0),
                 new BasicStroke(2.3f), Color.RED, Color.BLUE);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2 = new XYShapeAnnotation(
                 new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0),
                 new BasicStroke(2.3f), Color.RED, Color.BLUE);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         GradientPaint gp1a = new GradientPaint(1.0f, 2.0f, Color.BLUE,
                 3.0f, 4.0f, Color.RED);
@@ -103,21 +101,21 @@ public class XYShapeAnnotationTest {
         a1 = new XYShapeAnnotation(
                 new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0),
                 new BasicStroke(2.3f), gp1a, Color.BLUE);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2 = new XYShapeAnnotation(
                 new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0),
                 new BasicStroke(2.3f), gp1b, Color.BLUE);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         // fillPaint
         a1 = new XYShapeAnnotation(
                 new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0),
                 new BasicStroke(2.3f), gp1a, gp2a);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2 = new XYShapeAnnotation(
                 new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0),
                 new BasicStroke(2.3f), gp1b, gp2b);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
     }
 
     /**
@@ -131,7 +129,7 @@ public class XYShapeAnnotationTest {
         XYShapeAnnotation a2 = new XYShapeAnnotation(
                 new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0),
                 new BasicStroke(1.2f), Color.RED, Color.BLUE);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
         int h1 = a1.hashCode();
         int h2 = a2.hashCode();
         assertEquals(h1, h2);
@@ -146,9 +144,9 @@ public class XYShapeAnnotationTest {
                 new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0),
                 new BasicStroke(1.2f), Color.RED, Color.BLUE);
         XYShapeAnnotation a2 = (XYShapeAnnotation) a1.clone();
-        assertTrue(a1 != a2);
-        assertTrue(a1.getClass() == a2.getClass());
-        assertTrue(a1.equals(a2));
+        assertNotSame(a1, a2);
+        assertSame(a1.getClass(), a2.getClass());
+        assertEquals(a1, a2);
     }
 
     /**

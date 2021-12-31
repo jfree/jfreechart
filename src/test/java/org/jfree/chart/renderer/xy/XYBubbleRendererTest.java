@@ -36,10 +36,6 @@
 
 package org.jfree.chart.renderer.xy;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.TestUtils;
@@ -48,6 +44,8 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.xy.DefaultXYZDataset;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link XYBubbleRenderer} class.
@@ -64,9 +62,9 @@ public class XYBubbleRendererTest {
         assertEquals(r1, r2);
 
         r1 = new XYBubbleRenderer(XYBubbleRenderer.SCALE_ON_RANGE_AXIS);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2 = new XYBubbleRenderer(XYBubbleRenderer.SCALE_ON_RANGE_AXIS);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
     }
 
     /**
@@ -76,7 +74,7 @@ public class XYBubbleRendererTest {
     public void testHashcode() {
         XYBubbleRenderer r1 = new XYBubbleRenderer();
         XYBubbleRenderer r2 = new XYBubbleRenderer();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
@@ -89,9 +87,9 @@ public class XYBubbleRendererTest {
     public void testCloning() throws CloneNotSupportedException {
         XYBubbleRenderer r1 = new XYBubbleRenderer();
         XYBubbleRenderer r2 = (XYBubbleRenderer) r1.clone();
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
     }
 
     /**

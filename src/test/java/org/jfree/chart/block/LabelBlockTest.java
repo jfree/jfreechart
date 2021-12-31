@@ -36,10 +36,6 @@
 
 package org.jfree.chart.block;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
@@ -49,6 +45,7 @@ import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 import static org.jfree.chart.TestUtils.createFont;
 import static org.jfree.chart.TestUtils.createR2D;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.text.TextBlockAnchor;
@@ -86,49 +83,49 @@ public class LabelBlockTest {
                 Font.PLAIN, 12), Color.RED);
         LabelBlock b2 = new LabelBlock("ABC", new Font("Dialog",
                 Font.PLAIN, 12), Color.RED);
-        assertTrue(b1.equals(b2));
-        assertTrue(b2.equals(b2));
+        assertEquals(b1, b2);
+        assertEquals(b2, b2);
 
         b1 = new LabelBlock("XYZ", new Font("Dialog", Font.PLAIN, 12),
                 Color.RED);
-        assertFalse(b1.equals(b2));
+        assertNotEquals(b1, b2);
         b2 = new LabelBlock("XYZ", new Font("Dialog", Font.PLAIN, 12),
                 Color.RED);
-        assertTrue(b1.equals(b2));
+        assertEquals(b1, b2);
 
         b1 = new LabelBlock("XYZ", new Font("Dialog", Font.BOLD, 12),
                 Color.RED);
-        assertFalse(b1.equals(b2));
+        assertNotEquals(b1, b2);
         b2 = new LabelBlock("XYZ", new Font("Dialog", Font.BOLD, 12),
                 Color.RED);
-        assertTrue(b1.equals(b2));
+        assertEquals(b1, b2);
 
         b1 = new LabelBlock("XYZ", new Font("Dialog", Font.BOLD, 12),
                 Color.BLUE);
-        assertFalse(b1.equals(b2));
+        assertNotEquals(b1, b2);
         b2 = new LabelBlock("XYZ", new Font("Dialog", Font.BOLD, 12),
                 Color.BLUE);
-        assertTrue(b1.equals(b2));
+        assertEquals(b1, b2);
 
         b1.setToolTipText("Tooltip");
-        assertFalse(b1.equals(b2));
+        assertNotEquals(b1, b2);
         b2.setToolTipText("Tooltip");
-        assertTrue(b1.equals(b2));
+        assertEquals(b1, b2);
 
         b1.setURLText("URL");
-        assertFalse(b1.equals(b2));
+        assertNotEquals(b1, b2);
         b2.setURLText("URL");
-        assertTrue(b1.equals(b2));
+        assertEquals(b1, b2);
 
         b1.setContentAlignmentPoint(TextBlockAnchor.CENTER_RIGHT);
-        assertFalse(b1.equals(b2));
+        assertNotEquals(b1, b2);
         b2.setContentAlignmentPoint(TextBlockAnchor.CENTER_RIGHT);
-        assertTrue(b1.equals(b2));
+        assertEquals(b1, b2);
 
         b1.setTextAnchor(RectangleAnchor.BOTTOM_RIGHT);
-        assertFalse(b1.equals(b2));
+        assertNotEquals(b1, b2);
         b2.setTextAnchor(RectangleAnchor.BOTTOM_RIGHT);
-        assertTrue(b1.equals(b2));
+        assertEquals(b1, b2);
     }
 
     /**
@@ -140,9 +137,9 @@ public class LabelBlockTest {
         LabelBlock b1 = new LabelBlock("ABC", new Font("Dialog",
                 Font.PLAIN, 12), Color.RED);
         LabelBlock b2 = (LabelBlock) b1.clone();
-        assertTrue(b1 != b2);
-        assertTrue(b1.getClass() == b2.getClass());
-        assertTrue(b1.equals(b2));
+        assertNotSame(b1, b2);
+        assertSame(b1.getClass(), b2.getClass());
+        assertEquals(b1, b2);
     }
 
     /**

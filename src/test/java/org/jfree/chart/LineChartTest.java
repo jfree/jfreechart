@@ -106,7 +106,7 @@ public class LineChartTest  {
         this.chart.addChangeListener(l);
         CategoryPlot plot = (CategoryPlot) this.chart.getPlot();
         plot.setDataset(newData);
-        assertEquals(true, l.flag);
+        assertTrue(l.flag);
         ValueAxis axis = plot.getRangeAxis();
         Range range = axis.getRange();
         assertTrue(range.getLowerBound() <= -30,

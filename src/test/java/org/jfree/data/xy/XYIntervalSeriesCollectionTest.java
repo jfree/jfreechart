@@ -36,14 +36,12 @@
 
 package org.jfree.data.xy;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link XYIntervalSeriesCollection} class.
@@ -63,17 +61,17 @@ public class XYIntervalSeriesCollectionTest {
         XYIntervalSeries s1 = new XYIntervalSeries("Series");
         s1.add(1.0, 1.1, 1.2, 1.3, 1.4, 1.5);
         c1.addSeries(s1);
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
         XYIntervalSeries s2 = new XYIntervalSeries("Series");
         s2.add(1.0, 1.1, 1.2, 1.3, 1.4, 1.5);
         c2.addSeries(s2);
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
 
         // add an empty series
         c1.addSeries(new XYIntervalSeries("Empty Series"));
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
         c2.addSeries(new XYIntervalSeries("Empty Series"));
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
     }
 
     /**
@@ -85,15 +83,15 @@ public class XYIntervalSeriesCollectionTest {
         XYIntervalSeries s1 = new XYIntervalSeries("Series");
         s1.add(1.0, 1.1, 1.2, 1.3, 1.4, 1.5);
         XYIntervalSeriesCollection c2 = (XYIntervalSeriesCollection) c1.clone();
-        assertTrue(c1 != c2);
-        assertTrue(c1.getClass() == c2.getClass());
-        assertTrue(c1.equals(c2));
+        assertNotSame(c1, c2);
+        assertSame(c1.getClass(), c2.getClass());
+        assertEquals(c1, c2);
 
         // check independence
         c1.addSeries(new XYIntervalSeries("Empty"));
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
         c2.addSeries(new XYIntervalSeries("Empty"));
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
     }
 
     /**
@@ -118,9 +116,9 @@ public class XYIntervalSeriesCollectionTest {
 
         // check independence
         c1.addSeries(new XYIntervalSeries("Empty"));
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
         c2.addSeries(new XYIntervalSeries("Empty"));
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
     }
 
     /**
@@ -170,7 +168,7 @@ public class XYIntervalSeriesCollectionTest {
             // correct outcome
         }
         catch (IndexOutOfBoundsException e) {
-            assertTrue(false);  // wrong outcome
+            fail();  // wrong outcome
         }
     }
 

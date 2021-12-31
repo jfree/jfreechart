@@ -35,17 +35,14 @@
  */
 
 package org.jfree.data.statistics;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import org.jfree.chart.TestUtils;
 
 import org.jfree.data.Range;
 import org.jfree.data.UnknownKeyException;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link DefaultStatisticalCategoryDataset} class.
@@ -102,8 +99,8 @@ public class DefaultStatisticalCategoryDatasetTest {
                 = new DefaultStatisticalCategoryDataset();
         DefaultStatisticalCategoryDataset d2
                 = new DefaultStatisticalCategoryDataset();
-        assertTrue(d1.equals(d2));
-        assertTrue(d2.equals(d1));
+        assertEquals(d1, d2);
+        assertEquals(d2, d1);
 
     }
 
@@ -125,13 +122,13 @@ public class DefaultStatisticalCategoryDatasetTest {
         catch (CloneNotSupportedException e) {
             fail(e.toString());
         }
-        assertTrue(d1 != d2);
-        assertTrue(d1.getClass() == d2.getClass());
-        assertTrue(d1.equals(d2));
+        assertNotSame(d1, d2);
+        assertSame(d1.getClass(), d2.getClass());
+        assertEquals(d1, d2);
 
         // check independence
         d1.add(1.1, 2.2, "R3", "C1");
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
     }
 
     /**

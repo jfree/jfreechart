@@ -36,16 +36,14 @@
 
 package org.jfree.chart.renderer.xy;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
 import java.awt.Color;
 
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link VectorRenderer} class.
@@ -60,14 +58,14 @@ public class VectorRendererTest {
         // default instances
         VectorRenderer r1 = new VectorRenderer();
         VectorRenderer r2 = new VectorRenderer();
-        assertTrue(r1.equals(r2));
-        assertTrue(r2.equals(r1));
+        assertEquals(r1, r2);
+        assertEquals(r2, r1);
 
         // check that super class fields are being looked at...
         r1.setSeriesFillPaint(0, Color.GREEN);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setSeriesFillPaint(0, Color.GREEN);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
     }
 
     /**
@@ -77,7 +75,7 @@ public class VectorRendererTest {
     public void testHashcode() {
         VectorRenderer r1 = new VectorRenderer();
         VectorRenderer r2 = new VectorRenderer();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
@@ -92,9 +90,9 @@ public class VectorRendererTest {
     public void testCloning() throws CloneNotSupportedException {
         VectorRenderer r1 = new VectorRenderer();
         VectorRenderer r2 = (VectorRenderer) r1.clone();
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
     }
 
     /**

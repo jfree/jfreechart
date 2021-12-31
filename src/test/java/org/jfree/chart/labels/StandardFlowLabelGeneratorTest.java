@@ -53,8 +53,8 @@ public class StandardFlowLabelGeneratorTest {
     public void testEquals() {
         StandardFlowLabelGenerator g1 = new StandardFlowLabelGenerator();
         StandardFlowLabelGenerator g2 = new StandardFlowLabelGenerator();
-        assertTrue(g1.equals(g2));
-        assertTrue(g2.equals(g1));
+        assertEquals(g1, g2);
+        assertEquals(g2, g1);
     }
 
     /**

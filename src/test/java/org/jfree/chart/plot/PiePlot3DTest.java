@@ -36,10 +36,6 @@
 
 package org.jfree.chart.plot;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
@@ -48,6 +44,8 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link PiePlot3D} class.
@@ -61,18 +59,18 @@ public class PiePlot3DTest {
     public void testEquals() {
         PiePlot3D p1 = new PiePlot3D();
         PiePlot3D p2 = new PiePlot3D();
-        assertTrue(p1.equals(p2));
-        assertTrue(p2.equals(p1));
+        assertEquals(p1, p2);
+        assertEquals(p2, p1);
 
         p1.setDepthFactor(1.23);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setDepthFactor(1.23);
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         p1.setDarkerSides(true);
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2.setDarkerSides(true);
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
     }
 
     /**

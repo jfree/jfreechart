@@ -36,12 +36,6 @@
 
 package org.jfree.chart.renderer.category;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.fail;
-
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.axis.CategoryAxis;
@@ -51,6 +45,8 @@ import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.Range;
 import org.jfree.data.category.DefaultIntervalCategoryDataset;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link IntervalBarRenderer} class.
@@ -68,7 +64,7 @@ public class IntervalBarRendererTest {
 
         // the renderer should not be equal to a BarRenderer
         BarRenderer br = new BarRenderer();
-        assertFalse(r1.equals(br));
+        assertNotEquals(r1, br);
     }
 
     /**
@@ -78,7 +74,7 @@ public class IntervalBarRendererTest {
     public void testHashcode() {
         IntervalBarRenderer r1 = new IntervalBarRenderer();
         IntervalBarRenderer r2 = new IntervalBarRenderer();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
@@ -91,9 +87,9 @@ public class IntervalBarRendererTest {
     public void testCloning() throws CloneNotSupportedException {
         IntervalBarRenderer r1 = new IntervalBarRenderer();
         IntervalBarRenderer r2 = (IntervalBarRenderer) r1.clone();
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
     }
 
     /**

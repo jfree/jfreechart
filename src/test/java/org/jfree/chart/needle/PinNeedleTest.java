@@ -36,10 +36,10 @@
 
 package org.jfree.chart.needle;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link PinNeedle} class.
@@ -53,8 +53,8 @@ public class PinNeedleTest {
     public void testEquals() {
        PinNeedle n1 = new PinNeedle();
        PinNeedle n2 = new PinNeedle();
-       assertTrue(n1.equals(n2));
-       assertTrue(n2.equals(n1));
+        assertEquals(n1, n2);
+        assertEquals(n2, n1);
     }
 
     /**
@@ -64,9 +64,9 @@ public class PinNeedleTest {
     public void testCloning() throws CloneNotSupportedException {
         PinNeedle n1 = new PinNeedle();
         PinNeedle n2 = (PinNeedle) n1.clone();
-        assertTrue(n1 != n2);
-        assertTrue(n1.getClass() == n2.getClass());
-        assertTrue(n1.equals(n2));
+        assertNotSame(n1, n2);
+        assertSame(n1.getClass(), n2.getClass());
+        assertEquals(n1, n2);
     }
 
     /**
@@ -76,7 +76,7 @@ public class PinNeedleTest {
     public void testSerialization() {
         PinNeedle n1 = new PinNeedle();
         PinNeedle n2 = TestUtils.serialised(n1);
-        assertTrue(n1.equals(n2));
+        assertEquals(n1, n2);
     }
 
 }

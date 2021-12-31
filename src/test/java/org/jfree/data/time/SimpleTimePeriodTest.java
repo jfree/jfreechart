@@ -36,16 +36,14 @@
 
 package org.jfree.data.time;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import java.util.Date;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link SimpleTimePeriod} class.
@@ -70,7 +68,7 @@ public class SimpleTimePeriodTest {
     public void testEqualsSelf() {
         SimpleTimePeriod p = new SimpleTimePeriod(new Date(1000L),
                 new Date(1001L));
-        assertTrue(p.equals(p));
+        assertEquals(p, p);
     }
 
     /**
@@ -82,18 +80,18 @@ public class SimpleTimePeriodTest {
                 new Date(1004L));
         SimpleTimePeriod p2 = new SimpleTimePeriod(new Date(1000L),
                 new Date(1004L));
-        assertTrue(p1.equals(p2));
-        assertTrue(p2.equals(p1));
+        assertEquals(p1, p2);
+        assertEquals(p2, p1);
 
         p1 = new SimpleTimePeriod(new Date(1002L), new Date(1004L));
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2 = new SimpleTimePeriod(new Date(1002L), new Date(1004L));
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
 
         p1 = new SimpleTimePeriod(new Date(1002L), new Date(1003L));
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2 = new SimpleTimePeriod(new Date(1002L), new Date(1003L));
-        assertTrue(p1.equals(p2));
+        assertEquals(p1, p2);
     }
 
     /**
@@ -116,7 +114,7 @@ public class SimpleTimePeriodTest {
                 new Date(20L));
         SimpleTimePeriod s2 = new SimpleTimePeriod(new Date(10L),
                 new Date(20L));
-        assertTrue(s1.equals(s2));
+        assertEquals(s1, s2);
         int h1 = s1.hashCode();
         int h2 = s2.hashCode();
         assertEquals(h1, h2);

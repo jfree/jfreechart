@@ -36,14 +36,12 @@
 
 package org.jfree.data.xy;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for {@link DefaultTableXYDataset}.
@@ -57,14 +55,14 @@ public class TableXYDatasetTest {
     public void testEquals() {
         DefaultTableXYDataset d1 = new DefaultTableXYDataset();
         DefaultTableXYDataset d2 = new DefaultTableXYDataset();
-        assertTrue(d1.equals(d2));
-        assertTrue(d2.equals(d1));
+        assertEquals(d1, d2);
+        assertEquals(d2, d1);
 
         d1.addSeries(createSeries1());
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
 
         d2.addSeries(createSeries1());
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
     }
 
     /**
@@ -77,9 +75,9 @@ public class TableXYDatasetTest {
         DefaultTableXYDataset d1 = new DefaultTableXYDataset();
         d1.addSeries(createSeries1());
         DefaultTableXYDataset d2 = (DefaultTableXYDataset) d1.clone();
-        assertTrue(d1 != d2);
-        assertTrue(d1.getClass() == d2.getClass());
-        assertTrue(d1.equals(d2));
+        assertNotSame(d1, d2);
+        assertSame(d1.getClass(), d2.getClass());
+        assertEquals(d1, d2);
     }
 
     /**
@@ -117,7 +115,7 @@ public class TableXYDatasetTest {
         //  Test that there are 6 X points and some specific values
         assertEquals(6, dataset.getItemCount());
         assertEquals(6, dataset.getX(0, 5).intValue());
-        assertEquals(null, dataset.getY(0, 5));
+        assertNull(dataset.getY(0, 5));
         assertEquals(6, dataset.getX(1, 5).intValue());
         assertEquals(2, dataset.getY(1, 5).intValue());
 
@@ -125,7 +123,7 @@ public class TableXYDatasetTest {
         // items in each series
         series2.add(7, 2);
         assertEquals(7, dataset.getItemCount());
-        assertEquals(null, dataset.getY(0, 6));
+        assertNull(dataset.getY(0, 6));
         assertEquals(2, dataset.getY(1, 6).intValue());
 
         //  Remove series 1

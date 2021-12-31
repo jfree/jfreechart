@@ -36,11 +36,10 @@
 
 package org.jfree.chart.labels;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link ItemLabelAnchor} class.
@@ -52,8 +51,8 @@ public class ItemLabelAnchorTest {
      */
     @Test
     public void testEquals() {
-        assertTrue(ItemLabelAnchor.INSIDE1.equals(ItemLabelAnchor.INSIDE1));
-        assertFalse(ItemLabelAnchor.INSIDE1.equals(ItemLabelAnchor.INSIDE2));
+        assertEquals(ItemLabelAnchor.INSIDE1, ItemLabelAnchor.INSIDE1);
+        assertNotEquals(ItemLabelAnchor.INSIDE1, ItemLabelAnchor.INSIDE2);
     }
 
     /**
@@ -63,7 +62,7 @@ public class ItemLabelAnchorTest {
     public void testSerialization() {
         ItemLabelAnchor a1 = ItemLabelAnchor.INSIDE1;
         ItemLabelAnchor a2 = TestUtils.serialised(a1);
-        assertTrue(a1 == a2);
+        assertSame(a1, a2);
     }
 
 }

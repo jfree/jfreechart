@@ -36,11 +36,10 @@
 
 package org.jfree.data.statistics;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link HistogramBin} class.
@@ -68,9 +67,9 @@ public class HistogramBinTest {
         double end = 20.0;
         HistogramBin b1 = new HistogramBin(start, end);
         HistogramBin b2 = (HistogramBin) b1.clone();
-        assertTrue(b1 != b2);
-        assertTrue(b1.getClass() == b2.getClass());
-        assertTrue(b1.equals(b2));
+        assertNotSame(b1, b2);
+        assertSame(b1.getClass(), b2.getClass());
+        assertEquals(b1, b2);
     }
 
     /**

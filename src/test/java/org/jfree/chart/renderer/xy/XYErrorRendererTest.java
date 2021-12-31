@@ -36,11 +36,6 @@
 
 package org.jfree.chart.renderer.xy;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.GradientPaint;
@@ -49,6 +44,8 @@ import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link XYErrorRenderer} class.
@@ -66,35 +63,35 @@ public class XYErrorRendererTest {
 
         // drawXError
         r1.setDrawXError(false);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setDrawXError(false);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // drawYError
         r1.setDrawYError(false);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setDrawYError(false);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // capLength
         r1.setCapLength(9.0);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setCapLength(9.0);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // errorPaint
         r1.setErrorPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f,
                 Color.GREEN));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setErrorPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f,
                 Color.GREEN));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         // errorStroke
         r1.setErrorStroke(new BasicStroke(1.5f));
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setErrorStroke(new BasicStroke(1.5f));
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
     }
 
@@ -105,7 +102,7 @@ public class XYErrorRendererTest {
     public void testHashcode() {
         XYErrorRenderer r1 = new XYErrorRenderer();
         XYErrorRenderer r2 = new XYErrorRenderer();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
@@ -120,9 +117,9 @@ public class XYErrorRendererTest {
         r1.setErrorPaint(new GradientPaint(1.0f, 2.0f, Color.RED, 3.0f, 4.0f,
                 Color.WHITE));
         XYErrorRenderer r2 = (XYErrorRenderer) r1.clone();
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
     }
 
     /**
@@ -133,9 +130,9 @@ public class XYErrorRendererTest {
         XYErrorRenderer r1 = new XYErrorRenderer();
         r1.setErrorStroke(new BasicStroke(1.5f));
         XYErrorRenderer r2 = (XYErrorRenderer) r1.clone();
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
     }
 
     /**

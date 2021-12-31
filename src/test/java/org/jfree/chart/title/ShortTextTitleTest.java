@@ -36,12 +36,10 @@
 
 package org.jfree.chart.title;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link ShortTextTitle} class.
@@ -58,9 +56,9 @@ public class ShortTextTitleTest {
         assertEquals(t1, t2);
 
         t1.setText("Test 1");
-        assertFalse(t1.equals(t2));
+        assertNotEquals(t1, t2);
         t2.setText("Test 1");
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
     }
 
     /**
@@ -70,7 +68,7 @@ public class ShortTextTitleTest {
     public void testHashcode() {
         ShortTextTitle t1 = new ShortTextTitle("ABC");
         ShortTextTitle t2 = new ShortTextTitle("ABC");
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
         int h1 = t1.hashCode();
         int h2 = t2.hashCode();
         assertEquals(h1, h2);
@@ -83,9 +81,9 @@ public class ShortTextTitleTest {
     public void testCloning() throws CloneNotSupportedException {
         ShortTextTitle t1 = new ShortTextTitle("ABC");
         ShortTextTitle t2 = (ShortTextTitle) t1.clone();
-        assertTrue(t1 != t2);
-        assertTrue(t1.getClass() == t2.getClass());
-        assertTrue(t1.equals(t2));
+        assertNotSame(t1, t2);
+        assertSame(t1.getClass(), t2.getClass());
+        assertEquals(t1, t2);
     }
 
     /**

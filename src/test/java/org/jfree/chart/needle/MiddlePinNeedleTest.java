@@ -36,10 +36,10 @@
 
 package org.jfree.chart.needle;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link MiddlePinNeedle} class.
@@ -53,8 +53,8 @@ public class MiddlePinNeedleTest {
     public void testEquals() {
        MiddlePinNeedle n1 = new MiddlePinNeedle();
        MiddlePinNeedle n2 = new MiddlePinNeedle();
-       assertTrue(n1.equals(n2));
-       assertTrue(n2.equals(n1));
+        assertEquals(n1, n2);
+        assertEquals(n2, n1);
     }
 
     /**
@@ -64,9 +64,9 @@ public class MiddlePinNeedleTest {
     public void testCloning() throws CloneNotSupportedException {
         MiddlePinNeedle n1 = new MiddlePinNeedle();
         MiddlePinNeedle n2 = (MiddlePinNeedle) n1.clone();
-        assertTrue(n1 != n2);
-        assertTrue(n1.getClass() == n2.getClass());
-        assertTrue(n1.equals(n2));
+        assertNotSame(n1, n2);
+        assertSame(n1.getClass(), n2.getClass());
+        assertEquals(n1, n2);
     }
 
     /**
@@ -76,7 +76,7 @@ public class MiddlePinNeedleTest {
     public void testSerialization() {
         MiddlePinNeedle n1 = new MiddlePinNeedle();
         MiddlePinNeedle n2 = TestUtils.serialised(n1);
-        assertTrue(n1.equals(n2));
+        assertEquals(n1, n2);
     }
 
 }

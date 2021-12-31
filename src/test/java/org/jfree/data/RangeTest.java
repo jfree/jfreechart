@@ -39,13 +39,10 @@ package org.jfree.data;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.fail;
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link Range} class.
@@ -95,11 +92,11 @@ public class RangeTest {
 
         r1 = new Range(0.0, 1.0);
         r2 = new Range(0.5, 1.0);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
 
         r1 = new Range(0.0, 1.0);
         r2 = new Range(0.0, 2.0);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
 
         // a Range object cannot be equal to a different object type
         assertFalse(r1.equals(0.0));

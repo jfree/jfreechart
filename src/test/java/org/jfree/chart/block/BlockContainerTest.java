@@ -90,7 +90,7 @@ public class BlockContainerTest {
 
     /**
      * Confirm that cloning works.
-     * @throws java.lang.CloneNotSupportedException
+     * @throws java.lang.CloneNotSupportedException if there is a problem cloning.
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {

@@ -36,10 +36,6 @@
 
 package org.jfree.chart.block;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.GradientPaint;
@@ -50,6 +46,8 @@ import org.jfree.chart.TestUtils;
 import org.jfree.chart.ui.RectangleInsets;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link LineBorder} class.
@@ -78,29 +76,29 @@ public class LineBorderTest {
                 new RectangleInsets(1.0, 1.0, 1.0, 1.0));
         LineBorder b2 = new LineBorder(Color.RED, new BasicStroke(1.0f),
                 new RectangleInsets(1.0, 1.0, 1.0, 1.0));
-        assertTrue(b1.equals(b2));
-        assertTrue(b2.equals(b2));
+        assertEquals(b1, b2);
+        assertEquals(b2, b2);
 
         b1 = new LineBorder(Color.BLUE, new BasicStroke(1.0f),
                 new RectangleInsets(1.0, 1.0, 1.0, 1.0));
-        assertFalse(b1.equals(b2));
+        assertNotEquals(b1, b2);
         b2 = new LineBorder(Color.BLUE, new BasicStroke(1.0f),
                 new RectangleInsets(1.0, 1.0, 1.0, 1.0));
-        assertTrue(b1.equals(b2));
+        assertEquals(b1, b2);
 
         b1 = new LineBorder(Color.BLUE, new BasicStroke(1.1f),
                 new RectangleInsets(1.0, 1.0, 1.0, 1.0));
-        assertFalse(b1.equals(b2));
+        assertNotEquals(b1, b2);
         b2 = new LineBorder(Color.BLUE, new BasicStroke(1.1f),
                 new RectangleInsets(1.0, 1.0, 1.0, 1.0));
-        assertTrue(b1.equals(b2));
+        assertEquals(b1, b2);
 
         b1 = new LineBorder(Color.BLUE, new BasicStroke(1.1f),
                 new RectangleInsets(1.0, 2.0, 3.0, 4.0));
-        assertFalse(b1.equals(b2));
+        assertNotEquals(b1, b2);
         b2 = new LineBorder(Color.BLUE, new BasicStroke(1.1f),
                 new RectangleInsets(1.0, 2.0, 3.0, 4.0));
-        assertTrue(b1.equals(b2));
+        assertEquals(b1, b2);
 
     }
 

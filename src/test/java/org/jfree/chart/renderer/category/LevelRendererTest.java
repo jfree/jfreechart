@@ -36,11 +36,6 @@
 
 package org.jfree.chart.renderer.category;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.fail;
-
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.TestUtils;
@@ -50,6 +45,8 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link LevelRenderer} class.
@@ -63,18 +60,18 @@ public class LevelRendererTest {
     public void testEquals() {
         LevelRenderer r1 = new LevelRenderer();
         LevelRenderer r2 = new LevelRenderer();
-        assertTrue(r1.equals(r2));
-        assertTrue(r2.equals(r1));
+        assertEquals(r1, r2);
+        assertEquals(r2, r1);
 
         r1.setItemMargin(0.123);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setItemMargin(0.123);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
         r1.setMaximumItemWidth(0.234);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setMaximumItemWidth(0.234);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
     }
 
@@ -85,7 +82,7 @@ public class LevelRendererTest {
     public void testHashcode() {
         LevelRenderer r1 = new LevelRenderer();
         LevelRenderer r2 = new LevelRenderer();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
@@ -100,9 +97,9 @@ public class LevelRendererTest {
         r1.setItemMargin(0.123);
         r1.setMaximumItemWidth(0.234);
         LevelRenderer r2 = (LevelRenderer) r1.clone();
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
 
         assertTrue(checkIndependence(r1, r2));
 

@@ -91,7 +91,7 @@ public class CategoryLabelPositionsTest {
                 new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER),
                 new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER),
                 new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER));
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2 = new CategoryLabelPositions(
                 new CategoryLabelPosition(RA_BOTTOM,
                         TextBlockAnchor.TOP_CENTER),
@@ -106,7 +106,7 @@ public class CategoryLabelPositionsTest {
                 new CategoryLabelPosition(RA_BOTTOM, TextBlockAnchor.TOP_CENTER),
                 new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER),
                 new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER));
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2 = new CategoryLabelPositions(
                 new CategoryLabelPosition(RA_BOTTOM,
                         TextBlockAnchor.TOP_CENTER),
@@ -124,7 +124,7 @@ public class CategoryLabelPositionsTest {
                 new CategoryLabelPosition(RA_BOTTOM,
                         TextBlockAnchor.TOP_CENTER),
                 new CategoryLabelPosition(RA_TOP, TextBlockAnchor.CENTER));
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2 = new CategoryLabelPositions(
                 new CategoryLabelPosition(RA_BOTTOM,
                         TextBlockAnchor.TOP_CENTER),
@@ -144,7 +144,7 @@ public class CategoryLabelPositionsTest {
                         TextBlockAnchor.TOP_CENTER),
                 new CategoryLabelPosition(RA_BOTTOM,
                         TextBlockAnchor.TOP_CENTER));
-        assertFalse(p1.equals(p2));
+        assertNotEquals(p1, p2);
         p2 = new CategoryLabelPositions(
                 new CategoryLabelPosition(RA_BOTTOM,
                         TextBlockAnchor.TOP_CENTER),

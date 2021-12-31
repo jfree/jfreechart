@@ -36,12 +36,10 @@
 
 package org.jfree.chart;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
 import java.awt.BasicStroke;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Some tests for the {@link StrokeMap} class.
@@ -54,11 +52,11 @@ public class StrokeMapTest {
     @Test
     public void testGetStroke() {
         StrokeMap m1 = new StrokeMap();
-        assertEquals(null, m1.getStroke("A"));
+        assertNull(m1.getStroke("A"));
         m1.put("A", new BasicStroke(1.1f));
         assertEquals(new BasicStroke(1.1f), m1.getStroke("A"));
         m1.put("A", null);
-        assertEquals(null, m1.getStroke("A"));
+        assertNull(m1.getStroke("A"));
 
         // a null key should throw an IllegalArgumentException
         boolean pass = false;
@@ -98,25 +96,25 @@ public class StrokeMapTest {
     public void testEquals() {
         StrokeMap m1 = new StrokeMap();
         StrokeMap m2 = new StrokeMap();
-        assertTrue(m1.equals(m1));
-        assertTrue(m1.equals(m2));
-        assertFalse(m1.equals(null));
-        assertFalse(m1.equals("ABC"));
+        assertEquals(m1, m1);
+        assertEquals(m1, m2);
+        assertNotEquals(null, m1);
+        assertNotEquals("ABC", m1);
 
         m1.put("K1", new BasicStroke(1.1f));
-        assertFalse(m1.equals(m2));
+        assertNotEquals(m1, m2);
         m2.put("K1", new BasicStroke(1.1f));
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
 
         m1.put("K2", new BasicStroke(2.2f));
-        assertFalse(m1.equals(m2));
+        assertNotEquals(m1, m2);
         m2.put("K2", new BasicStroke(2.2f));
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
 
         m1.put("K2", null);
-        assertFalse(m1.equals(m2));
+        assertNotEquals(m1, m2);
         m2.put("K2", null);
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
     }
 
     /**
@@ -126,12 +124,12 @@ public class StrokeMapTest {
     public void testCloning() throws CloneNotSupportedException {
         StrokeMap m1 = new StrokeMap();
         StrokeMap m2 = (StrokeMap) m1.clone();
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
 
         m1.put("K1", new BasicStroke(1.1f));
         m1.put("K2", new BasicStroke(2.2f));
         m2 = (StrokeMap) m1.clone();
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
     }
 
     /**

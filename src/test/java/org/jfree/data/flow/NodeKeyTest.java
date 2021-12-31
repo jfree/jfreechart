@@ -38,10 +38,9 @@ package org.jfree.data.flow;
 
 import org.jfree.chart.TestUtils;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link NodeKey} class.
@@ -55,18 +54,18 @@ public class NodeKeyTest {
     public void testEquals() {
         NodeKey<String> k1 = new NodeKey<>(0, "A");
         NodeKey<String> k2 = new NodeKey<>(0, "A");
-        assertTrue(k1.equals(k2));
-        assertTrue(k2.equals(k1));
+        assertEquals(k1, k2);
+        assertEquals(k2, k1);
 
         k1 = new NodeKey<>(1, "A");
-        assertFalse(k1.equals(k2));
+        assertNotEquals(k1, k2);
         k2 = new NodeKey<>(1, "A");
-        assertTrue(k1.equals(k2));
+        assertEquals(k1, k2);
   
         k1 = new NodeKey<>(1, "B");
-        assertFalse(k1.equals(k2));
+        assertNotEquals(k1, k2);
         k2 = new NodeKey<>(1, "B");
-        assertTrue(k1.equals(k2));
+        assertEquals(k1, k2);
     }
 
     /**
@@ -78,9 +77,9 @@ public class NodeKeyTest {
     public void testCloning() throws CloneNotSupportedException {
         NodeKey<String> k1 = new NodeKey<>(2, "A");
         NodeKey<String> k2 = (NodeKey<String>) k1.clone();
-        assertTrue(k1 != k2);
-        assertTrue(k1.getClass() == k2.getClass());
-        assertTrue(k1.equals(k2));
+        assertNotSame(k1, k2);
+        assertSame(k1.getClass(), k2.getClass());
+        assertEquals(k1, k2);
     }
 
     /**

@@ -67,7 +67,7 @@ public class MillisecondTest {
     @Test
     public void testEqualsSelf() {
         Millisecond millisecond = new Millisecond();
-        assertTrue(millisecond.equals(millisecond));
+        assertEquals(millisecond, millisecond);
     }
 
     /**
@@ -85,7 +85,7 @@ public class MillisecondTest {
         Minute minute2 = new Minute(15, hour2);
         Second second2 = new Second(34, minute2);
         Millisecond milli2 = new Millisecond(999, second2);
-        assertTrue(milli1.equals(milli2));
+        assertEquals(milli1, milli2);
     }
 
     /**
@@ -235,7 +235,7 @@ public class MillisecondTest {
     public void testHashcode() {
         Millisecond m1 = new Millisecond(599, 23, 45, 7, 9, 10, 2007);
         Millisecond m2 = new Millisecond(599, 23, 45, 7, 9, 10, 2007);
-        assertTrue(m1.equals(m2));
+        assertEquals(m1, m2);
         int hash1 = m1.hashCode();
         int hash2 = m2.hashCode();
         assertEquals(hash1, hash2);

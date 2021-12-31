@@ -36,14 +36,12 @@
 
 package org.jfree.chart.axis;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.awt.Font;
 
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link MarkerAxisBand} class.
@@ -63,29 +61,29 @@ public class MarkerAxisBandTest {
         assertEquals(a1, a2);
 
         a1 = new MarkerAxisBand(null, 2.0, 1.0, 1.0, 1.0, font1);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2 = new MarkerAxisBand(null, 2.0, 1.0, 1.0, 1.0, font1);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         a1 = new MarkerAxisBand(null, 2.0, 3.0, 1.0, 1.0, font1);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2 = new MarkerAxisBand(null, 2.0, 3.0, 1.0, 1.0, font1);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         a1 = new MarkerAxisBand(null, 2.0, 3.0, 4.0, 1.0, font1);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2 = new MarkerAxisBand(null, 2.0, 3.0, 4.0, 1.0, font1);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         a1 = new MarkerAxisBand(null, 2.0, 3.0, 4.0, 5.0, font1);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2 = new MarkerAxisBand(null, 2.0, 3.0, 4.0, 5.0, font1);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         a1 = new MarkerAxisBand(null, 2.0, 3.0, 4.0, 5.0, font2);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2 = new MarkerAxisBand(null, 2.0, 3.0, 4.0, 5.0, font2);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
     }
 
     /**
@@ -97,7 +95,7 @@ public class MarkerAxisBandTest {
 
         MarkerAxisBand a1 = new MarkerAxisBand(null, 1.0, 1.0, 1.0, 1.0, font1);
         MarkerAxisBand a2 = new MarkerAxisBand(null, 1.0, 1.0, 1.0, 1.0, font1);
-         assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
         int h1 = a1.hashCode();
         int h2 = a2.hashCode();
         assertEquals(h1, h2);

@@ -36,10 +36,10 @@
 
 package org.jfree.data.time;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link TimePeriodAnchor} class.
@@ -51,9 +51,9 @@ public class TimePeriodAnchorTest {
      */
     @Test
     public void testEquals() {
-        assertTrue(TimePeriodAnchor.START.equals(TimePeriodAnchor.START));
-        assertTrue(TimePeriodAnchor.MIDDLE.equals(TimePeriodAnchor.MIDDLE));
-        assertTrue(TimePeriodAnchor.END.equals(TimePeriodAnchor.END));
+        assertEquals(TimePeriodAnchor.START, TimePeriodAnchor.START);
+        assertEquals(TimePeriodAnchor.MIDDLE, TimePeriodAnchor.MIDDLE);
+        assertEquals(TimePeriodAnchor.END, TimePeriodAnchor.END);
     }
 
     /**
@@ -63,7 +63,7 @@ public class TimePeriodAnchorTest {
     public void testSerialization() {
         TimePeriodAnchor a1 = TimePeriodAnchor.START;
         TimePeriodAnchor a2 = TestUtils.serialised(a1);
-        assertTrue(a1 == a2);
+        assertSame(a1, a2);
     }
 
 }

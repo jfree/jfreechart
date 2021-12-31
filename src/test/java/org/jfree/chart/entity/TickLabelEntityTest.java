@@ -36,14 +36,12 @@
 
 package org.jfree.chart.entity;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.awt.geom.Rectangle2D;
 
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link TickLabelEntity} class.
@@ -59,24 +57,24 @@ public class TickLabelEntityTest {
                 2.0, 3.0, 4.0), "ToolTip", "URL");
         TickLabelEntity e2 = new TickLabelEntity(new Rectangle2D.Double(1.0,
                 2.0, 3.0, 4.0), "ToolTip", "URL");
-        assertTrue(e1.equals(e2));
+        assertEquals(e1, e2);
 
         // Area is transient, not part of equals or hashCode - compare using
         // get method
         e1.setArea(new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0));
-        assertFalse(e1.getArea().equals(e2.getArea()));
+        assertNotEquals(e1.getArea(), e2.getArea());
         e2.setArea(new Rectangle2D.Double(4.0, 3.0, 2.0, 1.0));
-        assertTrue(e1.getArea().equals(e2.getArea()));
+        assertEquals(e1.getArea(), e2.getArea());
 
         e1.setToolTipText("New ToolTip");
-        assertFalse(e1.equals(e2));
+        assertNotEquals(e1, e2);
         e2.setToolTipText("New ToolTip");
-        assertTrue(e1.equals(e2));
+        assertEquals(e1, e2);
 
         e1.setURLText("New URL");
-        assertFalse(e1.equals(e2));
+        assertNotEquals(e1, e2);
         e2.setURLText("New URL");
-        assertTrue(e1.equals(e2));
+        assertEquals(e1, e2);
     }
 
     /**
@@ -87,9 +85,9 @@ public class TickLabelEntityTest {
         TickLabelEntity e1 = new TickLabelEntity(new Rectangle2D.Double(1.0,
                 2.0, 3.0, 4.0), "ToolTip", "URL");
         TickLabelEntity e2 = (TickLabelEntity) e1.clone();
-        assertTrue(e1 != e2);
-        assertTrue(e1.getClass() == e2.getClass());
-        assertTrue(e1.equals(e2));
+        assertNotSame(e1, e2);
+        assertSame(e1.getClass(), e2.getClass());
+        assertEquals(e1, e2);
     }
 
     /**

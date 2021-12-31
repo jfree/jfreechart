@@ -45,10 +45,10 @@ import org.jfree.chart.event.ChartChangeListener;
 import org.jfree.chart.plot.PiePlot;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for a pie chart with a 3D effect.
@@ -82,7 +82,7 @@ public class PieChart3DTest  {
         this.pieChart.addChangeListener(l);
         PiePlot plot = (PiePlot) this.pieChart.getPlot();
         plot.setDataset(null);
-        assertEquals(true, l.flag);
+        assertTrue(l.flag);
         assertNull(plot.getDataset());
     }
 

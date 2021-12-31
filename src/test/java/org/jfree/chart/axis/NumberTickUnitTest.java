@@ -36,14 +36,12 @@
 
 package org.jfree.chart.axis;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.text.DecimalFormat;
 
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Some tests for the {@link NumberTickUnit} class.
@@ -58,18 +56,18 @@ public class NumberTickUnitTest {
     public void testEquals() {
         NumberTickUnit t1 = new NumberTickUnit(1.23, new DecimalFormat("0.00"));
         NumberTickUnit t2 = new NumberTickUnit(1.23, new DecimalFormat("0.00"));
-        assertTrue(t1.equals(t2));
-        assertTrue(t2.equals(t1));
+        assertEquals(t1, t2);
+        assertEquals(t2, t1);
 
         t1 = new NumberTickUnit(3.21, new DecimalFormat("0.00"));
-        assertFalse(t1.equals(t2));
+        assertNotEquals(t1, t2);
         t2 = new NumberTickUnit(3.21, new DecimalFormat("0.00"));
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
 
         t1 = new NumberTickUnit(3.21, new DecimalFormat("0.000"));
-        assertFalse(t1.equals(t2));
+        assertNotEquals(t1, t2);
         t2 = new NumberTickUnit(3.21, new DecimalFormat("0.000"));
-        assertTrue(t1.equals(t2));
+        assertEquals(t1, t2);
     }
 
     /**
