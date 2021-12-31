@@ -2203,14 +2203,14 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
         Args.nullNotPermitted(layer, "layer");
         Collection markers;
         if (layer == Layer.FOREGROUND) {
-            markers = (Collection) this.foregroundDomainMarkers.get(index);
+            markers = this.foregroundDomainMarkers.get(index);
             if (markers == null) {
                 markers = new java.util.ArrayList();
                 this.foregroundDomainMarkers.put(index, markers);
             }
             markers.add(marker);
         } else if (layer == Layer.BACKGROUND) {
-            markers = (Collection) this.backgroundDomainMarkers.get(index);
+            markers = this.backgroundDomainMarkers.get(index);
             if (markers == null) {
                 markers = new java.util.ArrayList();
                 this.backgroundDomainMarkers.put(index, markers);
@@ -2296,8 +2296,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     public void clearDomainMarkers(int index) {
         Integer key = index;
         if (this.backgroundDomainMarkers != null) {
-            Collection markers
-                = (Collection) this.backgroundDomainMarkers.get(key);
+            Collection markers = this.backgroundDomainMarkers.get(key);
             if (markers != null) {
                 Iterator iterator = markers.iterator();
                 while (iterator.hasNext()) {
@@ -2308,8 +2307,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
             }
         }
         if (this.foregroundDomainMarkers != null) {
-            Collection markers
-                = (Collection) this.foregroundDomainMarkers.get(key);
+            Collection markers = this.foregroundDomainMarkers.get(key);
             if (markers != null) {
                 Iterator iterator = markers.iterator();
                 while (iterator.hasNext()) {
@@ -2459,14 +2457,14 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
             boolean notify) {
         Collection markers;
         if (layer == Layer.FOREGROUND) {
-            markers = (Collection) this.foregroundRangeMarkers.get(index);
+            markers = this.foregroundRangeMarkers.get(index);
             if (markers == null) {
                 markers = new java.util.ArrayList();
                 this.foregroundRangeMarkers.put(index, markers);
             }
             markers.add(marker);
         } else if (layer == Layer.BACKGROUND) {
-            markers = (Collection) this.backgroundRangeMarkers.get(index);
+            markers = this.backgroundRangeMarkers.get(index);
             if (markers == null) {
                 markers = new java.util.ArrayList();
                 this.backgroundRangeMarkers.put(index, markers);
@@ -2553,8 +2551,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
     public void clearRangeMarkers(int index) {
         Integer key = index;
         if (this.backgroundRangeMarkers != null) {
-            Collection markers
-                = (Collection) this.backgroundRangeMarkers.get(key);
+            Collection markers = this.backgroundRangeMarkers.get(key);
             if (markers != null) {
                 Iterator iterator = markers.iterator();
                 while (iterator.hasNext()) {
@@ -2565,8 +2562,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
             }
         }
         if (this.foregroundRangeMarkers != null) {
-            Collection markers
-                = (Collection) this.foregroundRangeMarkers.get(key);
+            Collection markers = this.foregroundRangeMarkers.get(key);
             if (markers != null) {
                 Iterator iterator = markers.iterator();
                 while (iterator.hasNext()) {
@@ -3069,8 +3065,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
      */
     public void clearAnnotations() {
         for (int i = 0; i < this.annotations.size(); i++) {
-            CategoryAnnotation annotation
-                    = (CategoryAnnotation) this.annotations.get(i);
+            CategoryAnnotation annotation = this.annotations.get(i);
             annotation.removeChangeListener(this);
         }
         this.annotations.clear();
@@ -4023,8 +4018,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
                 continue;
             }
             Integer datasetIndex = entry.getKey();
-            List mappedAxes = (List) this.datasetToDomainAxesMap.get(
-                    datasetIndex);
+            List mappedAxes = this.datasetToDomainAxesMap.get(datasetIndex);
             if (mappedAxes == null) {
                 if (axisIndex == 0) {
                     result.add(dataset);
@@ -4051,8 +4045,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
         for (Entry<Integer, CategoryDataset> entry : this.datasets.entrySet()) {
             Integer datasetIndex = entry.getKey();
             CategoryDataset dataset = entry.getValue();
-            List mappedAxes = (List) this.datasetToRangeAxesMap.get(
-                    datasetIndex);
+            List mappedAxes = this.datasetToRangeAxesMap.get(RemovdatasetIndex);
             if (mappedAxes == null) {
                 if (axisIndex == 0) {
                     result.add(dataset);
