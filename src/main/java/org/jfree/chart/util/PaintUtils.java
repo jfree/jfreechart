@@ -149,7 +149,7 @@ public class PaintUtils {
 
         // no defined constant color, so this must be a user defined color
         final String color = Integer.toHexString(c.getRGB() & 0x00ffffff);
-        final StringBuffer retval = new StringBuffer(7);
+        final StringBuilder retval = new StringBuilder(7);
         retval.append("#");
 
         final int fillUp = 6 - color.length();

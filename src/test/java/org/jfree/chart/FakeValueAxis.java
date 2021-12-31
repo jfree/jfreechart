@@ -32,12 +32,10 @@ public class FakeValueAxis extends ValueAxis {
 
     @Override
     protected void autoAdjustRange() {
-        ;
     }
 
     @Override
     public void configure() {
-        ;
     }
 
     @Override

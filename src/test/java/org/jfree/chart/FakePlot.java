@@ -23,7 +23,6 @@ public class FakePlot extends Plot {
     @Override
     public void draw(Graphics2D g2, Rectangle2D area, Point2D anchor,
                      PlotState parentState, PlotRenderingInfo info) {
-        ;
     }
 
     @Override
