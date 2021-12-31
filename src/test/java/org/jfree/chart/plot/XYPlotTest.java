@@ -93,6 +93,7 @@ public class XYPlotTest {
     /**
      * Added this test in response to a bug report.
      */
+    @Test
     public void testGetDatasetCount() {
         XYPlot plot = new XYPlot();
         assertEquals(0, plot.getDatasetCount());

@@ -1228,7 +1228,7 @@ public class XYPlot extends Plot implements ValueAxisPlot, Pannable, Zoomable,
      * @return The number of datasets.
      */
     public int getDatasetCount() {
-        return this.datasets.size();
+        return (int) this.datasets.values().stream().filter(Objects::nonNull).count();
     }
 
     /**
