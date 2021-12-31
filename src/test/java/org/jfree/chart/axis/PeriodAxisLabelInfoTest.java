@@ -186,7 +186,7 @@ public class PeriodAxisLabelInfoTest {
         Day d = (Day) info.createInstance(new Date(0L), zone, Locale.UK);
         assertEquals(new Day(1, 1, 1970), d);
 
-        info = new PeriodAxisLabelInfo(Year.class, new SimpleDateFormat("YYYY"));
+        info = new PeriodAxisLabelInfo(Year.class, new SimpleDateFormat("yyyy"));
         Year y = (Year) info.createInstance(new Date(0L), zone, Locale.UK);
         assertEquals(new Year(1970), y);
     }

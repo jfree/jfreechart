@@ -36,13 +36,11 @@
 
 package org.jfree.data.general;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.jfree.chart.TestUtils;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link DefaultKeyedValueDataset} class.
@@ -59,16 +57,16 @@ public class DefaultKeyedValueDatasetTest {
                 = new DefaultKeyedValueDataset("Test", 45.5);
         DefaultKeyedValueDataset d2
                 = new DefaultKeyedValueDataset("Test", 45.5);
-        assertTrue(d1.equals(d2));
-        assertTrue(d2.equals(d1));
+        assertEquals(d1, d2);
+        assertEquals(d2, d1);
 
         d1 = new DefaultKeyedValueDataset("Test 1", 45.5);
         d2 = new DefaultKeyedValueDataset("Test 2", 45.5);
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
 
         d1 = new DefaultKeyedValueDataset("Test", 45.5);
         d2 = new DefaultKeyedValueDataset("Test", 45.6);
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
 
     }
 
@@ -81,9 +79,9 @@ public class DefaultKeyedValueDatasetTest {
         DefaultKeyedValueDataset d1
                 = new DefaultKeyedValueDataset("Test", 45.5);
         DefaultKeyedValueDataset d2 = (DefaultKeyedValueDataset) d1.clone();
-        assertTrue(d1 != d2);
-        assertTrue(d1.getClass() == d2.getClass());
-        assertTrue(d1.equals(d2));
+        assertNotSame(d1, d2);
+        assertSame(d1.getClass(), d2.getClass());
+        assertEquals(d1, d2);
     }
 
     /**
@@ -95,11 +93,11 @@ public class DefaultKeyedValueDatasetTest {
         DefaultKeyedValueDataset d1
             = new DefaultKeyedValueDataset("Key", 10.0);
         DefaultKeyedValueDataset d2 = (DefaultKeyedValueDataset) d1.clone();
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
         d2.updateValue(99.9);
-        assertFalse(d1.equals(d2));
+        assertNotEquals(d1, d2);
         d2.updateValue(10.0);
-        assertTrue(d1.equals(d2));
+        assertEquals(d1, d2);
     }
 
     /**

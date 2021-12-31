@@ -39,8 +39,8 @@ package org.jfree.data.general;
 
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link DefaultKeyedValues2DDataset} class.
@@ -60,9 +60,9 @@ public class DefaultKeyedValues2DDatasetTest {
         d1.setValue(3, "V3", "C2");
         DefaultKeyedValues2DDataset d2 = (DefaultKeyedValues2DDataset) 
                 d1.clone();
-        assertTrue(d1 != d2);
-        assertTrue(d1.getClass() == d2.getClass());
-        assertTrue(d1.equals(d2));
+        assertNotSame(d1, d2);
+        assertSame(d1.getClass(), d2.getClass());
+        assertEquals(d1, d2);
     }
 
     /**

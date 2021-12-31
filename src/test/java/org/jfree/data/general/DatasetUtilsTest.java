@@ -642,8 +642,8 @@ public class DatasetUtilsTest {
         data[2] = new double[] {3.1, 3.2};
         CategoryDataset dataset = DatasetUtils.createCategoryDataset(
                 rowKeys, columnKeys, data);
-        assertTrue(dataset.getRowCount() == 3);
-        assertTrue(dataset.getColumnCount() == 2);
+        assertEquals(3, dataset.getRowCount());
+        assertEquals(2, dataset.getColumnCount());
     }
 
     /**
@@ -667,7 +667,7 @@ public class DatasetUtilsTest {
             pass = true;  // got it!
         }
         assertTrue(pass);
-        assertTrue(dataset == null);
+        assertNull(dataset);
     }
 
     /**
@@ -692,7 +692,7 @@ public class DatasetUtilsTest {
         d.addValue(v5, "Row 1", "Column 1");
         d.addValue(v6, "Row 2", "Column 1");
         Number max = DatasetUtils.findMaximumStackedRangeValue(d);
-        assertTrue(max.equals(answer));
+        assertEquals(max, answer);
     }
 
     /**
@@ -718,7 +718,7 @@ public class DatasetUtilsTest {
     public void testFindStackedRangeBounds_CategoryDataset2() {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         Range r = DatasetUtils.findStackedRangeBounds(dataset);
-        assertTrue(r == null);
+        assertNull(r);
 
         dataset.addValue(5.0, "R1", "C1");
         r = DatasetUtils.findStackedRangeBounds(dataset, 3.0);
@@ -750,7 +750,7 @@ public class DatasetUtilsTest {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         KeyToGroupMap map = new KeyToGroupMap("Group A");
         Range r = DatasetUtils.findStackedRangeBounds(dataset, map);
-        assertTrue(r == null);
+        assertNull(r);
 
         dataset.addValue(1.0, "R1", "C1");
         dataset.addValue(2.0, "R2", "C1");

@@ -36,12 +36,10 @@
 
 package org.jfree.chart.renderer;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link DefaultPolarItemRenderer} class.
@@ -58,9 +56,9 @@ public class DefaultPolarItemRendererTest {
         assertEquals(r1, r2);
 
         r1.setSeriesFilled(1, true);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setSeriesFilled(1, true);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
 
     }
 
@@ -71,7 +69,7 @@ public class DefaultPolarItemRendererTest {
     public void testHashcode() {
         DefaultPolarItemRenderer r1 = new DefaultPolarItemRenderer();
         DefaultPolarItemRenderer r2 = new DefaultPolarItemRenderer();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
@@ -85,14 +83,14 @@ public class DefaultPolarItemRendererTest {
         DefaultPolarItemRenderer r1 = new DefaultPolarItemRenderer();
         DefaultPolarItemRenderer r2 = (DefaultPolarItemRenderer) r1.clone();
 
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
 
         r1.setSeriesFilled(1, true);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setSeriesFilled(1, true);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
     }
 
     /**

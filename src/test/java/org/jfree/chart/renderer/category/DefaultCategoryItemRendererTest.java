@@ -36,13 +36,12 @@
 
 package org.jfree.chart.renderer.category;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link DefaultCategoryItemRenderer} class.
@@ -66,7 +65,7 @@ public class DefaultCategoryItemRendererTest {
     public void testHashcode() {
         DefaultCategoryItemRenderer r1 = new DefaultCategoryItemRenderer();
         DefaultCategoryItemRenderer r2 = new DefaultCategoryItemRenderer();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
@@ -80,9 +79,9 @@ public class DefaultCategoryItemRendererTest {
         DefaultCategoryItemRenderer r1 = new DefaultCategoryItemRenderer();
         DefaultCategoryItemRenderer r2 = (DefaultCategoryItemRenderer) 
                 r1.clone();
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
     }
 
     /**
