@@ -331,8 +331,8 @@ public class ComparableObjectSeries extends Series
      * @param end  the end index (zero-based).
      */
     protected void delete(int start, int end) {
-        for (int i = start; i <= end; i++) {
-            this.data.remove(start);
+        if (end >= start) {
+            this.data.subList(start, end + 1).clear();
         }
         fireSeriesChanged();
     }
