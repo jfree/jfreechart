@@ -36,9 +36,6 @@
 
 package org.jfree.chart;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.EventListener;
@@ -53,6 +50,8 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.data.xy.DefaultXYDataset;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link ChartPanel} class.
@@ -78,7 +77,7 @@ public class ChartPanelTest implements ChartChangeListener, ChartMouseListener {
     @Test
     public void testConstructor1() {
         ChartPanel panel = new ChartPanel(null);
-        assertEquals(null, panel.getChart());
+        assertNull(panel.getChart());
     }
 
     /**
@@ -89,7 +88,7 @@ public class ChartPanelTest implements ChartChangeListener, ChartMouseListener {
         JFreeChart chart = new JFreeChart(new XYPlot());
         ChartPanel panel = new ChartPanel(chart);
         panel.setChart(null);
-        assertEquals(null, panel.getChart());
+        assertNull(panel.getChart());
     }
 
     /**

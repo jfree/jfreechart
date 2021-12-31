@@ -36,10 +36,6 @@
 
 package org.jfree.chart.renderer.category;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.TestUtils;
@@ -50,6 +46,8 @@ import org.jfree.chart.renderer.AreaRendererEndType;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link AreaRenderer} class.
@@ -66,9 +64,9 @@ public class AreaRendererTest {
         assertEquals(r1, r2);
 
         r1.setEndType(AreaRendererEndType.LEVEL);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2.setEndType(AreaRendererEndType.LEVEL);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
     }
 
     /**
@@ -78,7 +76,7 @@ public class AreaRendererTest {
     public void testHashcode() {
         AreaRenderer r1 = new AreaRenderer();
         AreaRenderer r2 = new AreaRenderer();
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
         int h1 = r1.hashCode();
         int h2 = r2.hashCode();
         assertEquals(h1, h2);
@@ -91,9 +89,9 @@ public class AreaRendererTest {
     public void testCloning() throws CloneNotSupportedException {
         AreaRenderer r1 = new AreaRenderer();
         AreaRenderer r2 = (AreaRenderer) r1.clone();
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
     }
 
     /**

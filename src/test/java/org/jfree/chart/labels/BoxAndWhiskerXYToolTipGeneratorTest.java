@@ -36,10 +36,6 @@
 
 package org.jfree.chart.labels;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 
@@ -47,6 +43,8 @@ import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link BoxAndWhiskerXYToolTipGenerator} class.
@@ -64,38 +62,38 @@ public class BoxAndWhiskerXYToolTipGeneratorTest {
                 = new BoxAndWhiskerXYToolTipGenerator();
         BoxAndWhiskerXYToolTipGenerator g2
                 = new BoxAndWhiskerXYToolTipGenerator();
-        assertTrue(g1.equals(g2));
-        assertTrue(g2.equals(g1));
+        assertEquals(g1, g2);
+        assertEquals(g2, g1);
 
         // tooltip format
         g1 = new BoxAndWhiskerXYToolTipGenerator("{0} --> {1} {2}",
                 new SimpleDateFormat("yyyy"), new DecimalFormat("0.0"));
         g2 = new BoxAndWhiskerXYToolTipGenerator("{1} {2}",
                 new SimpleDateFormat("yyyy"), new DecimalFormat("0.0"));
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new BoxAndWhiskerXYToolTipGenerator("{0} --> {1} {2}",
                 new SimpleDateFormat("yyyy"), new DecimalFormat("0.0"));
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         // date format
         g1 = new BoxAndWhiskerXYToolTipGenerator("{0} --> {1} {2}",
                 new SimpleDateFormat("yyyy"), new DecimalFormat("0.0"));
         g2 = new BoxAndWhiskerXYToolTipGenerator("{0} --> {1} {2}",
                 new SimpleDateFormat("MMM-yyyy"), new DecimalFormat("0.0"));
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new BoxAndWhiskerXYToolTipGenerator("{0} --> {1} {2}",
                 new SimpleDateFormat("yyyy"), new DecimalFormat("0.0"));
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
 
         // Y format
         g1 = new BoxAndWhiskerXYToolTipGenerator("{0} --> {1} {2}",
                 new SimpleDateFormat("yyyy"), new DecimalFormat("0.0"));
         g2 = new BoxAndWhiskerXYToolTipGenerator("{0} --> {1} {2}",
                 new SimpleDateFormat("yyyy"), new DecimalFormat("0.00"));
-        assertFalse(g1.equals(g2));
+        assertNotEquals(g1, g2);
         g2 = new BoxAndWhiskerXYToolTipGenerator("{0} --> {1} {2}",
                 new SimpleDateFormat("yyyy"), new DecimalFormat("0.0"));
-        assertTrue(g1.equals(g2));
+        assertEquals(g1, g2);
     }
 
     /**
@@ -107,8 +105,8 @@ public class BoxAndWhiskerXYToolTipGeneratorTest {
                 = new BoxAndWhiskerXYToolTipGenerator();
         BoxAndWhiskerXYToolTipGenerator g2
                 = new BoxAndWhiskerXYToolTipGenerator();
-        assertTrue(g1.equals(g2));
-        assertTrue(g1.hashCode() == g2.hashCode());
+        assertEquals(g1, g2);
+        assertEquals(g1.hashCode(), g2.hashCode());
     }
 
     /**
@@ -120,9 +118,9 @@ public class BoxAndWhiskerXYToolTipGeneratorTest {
                 = new BoxAndWhiskerXYToolTipGenerator();
         BoxAndWhiskerXYToolTipGenerator g2 = (BoxAndWhiskerXYToolTipGenerator) 
                 g1.clone();
-        assertTrue(g1 != g2);
-        assertTrue(g1.getClass() == g2.getClass());
-        assertTrue(g1.equals(g2));
+        assertNotSame(g1, g2);
+        assertSame(g1.getClass(), g2.getClass());
+        assertEquals(g1, g2);
     }
 
     /**

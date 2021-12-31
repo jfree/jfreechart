@@ -36,10 +36,6 @@
 
 package org.jfree.chart.block;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.awt.Color;
 import java.awt.GradientPaint;
 import nl.jqno.equalsverifier.EqualsVerifier;
@@ -50,6 +46,8 @@ import org.jfree.chart.ui.RectangleInsets;
 import org.jfree.chart.util.UnitType;
 
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link BlockBorder} class.
@@ -78,24 +76,24 @@ public class BlockBorderTest {
                 4.0), Color.RED);
         BlockBorder b2 = new BlockBorder(new RectangleInsets(1.0, 2.0, 3.0,
                 4.0), Color.RED);
-        assertTrue(b1.equals(b2));
-        assertTrue(b2.equals(b2));
+        assertEquals(b1, b2);
+        assertEquals(b2, b2);
 
         // insets
         b1 = new BlockBorder(new RectangleInsets(UnitType.RELATIVE, 1.0, 2.0,
                 3.0, 4.0), Color.RED);
-        assertFalse(b1.equals(b2));
+        assertNotEquals(b1, b2);
         b2 = new BlockBorder(new RectangleInsets(UnitType.RELATIVE, 1.0, 2.0,
                 3.0, 4.0), Color.RED);
-        assertTrue(b1.equals(b2));
+        assertEquals(b1, b2);
 
         // paint
         b1 = new BlockBorder(new RectangleInsets(1.0, 2.0, 3.0, 4.0),
                 Color.BLUE);
-        assertFalse(b1.equals(b2));
+        assertNotEquals(b1, b2);
         b2 = new BlockBorder(new RectangleInsets(1.0, 2.0, 3.0, 4.0),
                 Color.BLUE);
-        assertTrue(b1.equals(b2));
+        assertEquals(b1, b2);
     }
 
     /**

@@ -39,14 +39,11 @@ package org.jfree.chart;
 import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotSame;
-import static org.junit.jupiter.api.Assertions.assertSame;
-
 import org.jfree.chart.entity.ChartEntity;
 import org.jfree.chart.entity.StandardEntityCollection;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link ChartRenderingInfo} class.
@@ -63,19 +60,19 @@ public class ChartRenderingInfoTest  {
         assertEquals(i1, i2);
 
         i1.setChartArea(new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0));
-        assertFalse(i1.equals(i2));
+        assertNotEquals(i1, i2);
         i2.setChartArea(new Rectangle2D.Double(1.0, 2.0, 3.0, 4.0));
         assertEquals(i1, i2);
 
         i1.getPlotInfo().setDataArea(new Rectangle(1, 2, 3, 4));
-        assertFalse(i1.equals(i2));
+        assertNotEquals(i1, i2);
         i2.getPlotInfo().setDataArea(new Rectangle(1, 2, 3, 4));
         assertEquals(i1, i2);
 
         StandardEntityCollection e1 = new StandardEntityCollection();
         e1.add(new ChartEntity(new Rectangle(1, 2, 3, 4)));
         i1.setEntityCollection(e1);
-        assertFalse(i1.equals(i2));
+        assertNotEquals(i1, i2);
         StandardEntityCollection e2 = new StandardEntityCollection();
         e2.add(new ChartEntity(new Rectangle(1, 2, 3, 4)));
         i2.setEntityCollection(e2);
@@ -96,13 +93,13 @@ public class ChartRenderingInfoTest  {
 
         // check independence
         i1.getChartArea().setRect(4.0, 3.0, 2.0, 1.0);
-        assertFalse(i1.equals(i2));
+        assertNotEquals(i1, i2);
         i2.getChartArea().setRect(4.0, 3.0, 2.0, 1.0);
         assertEquals(i1, i2);
 
         i1.getEntityCollection().add(new ChartEntity(new Rectangle(1, 2, 2,
                 1)));
-        assertFalse(i1.equals(i2));
+        assertNotEquals(i1, i2);
         i2.getEntityCollection().add(new ChartEntity(new Rectangle(1, 2, 2,
                 1)));
         assertEquals(i1, i2);

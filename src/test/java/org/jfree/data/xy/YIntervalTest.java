@@ -36,12 +36,10 @@
 
 package org.jfree.data.xy;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link YInterval} class.
@@ -58,19 +56,19 @@ public class YIntervalTest {
         assertEquals(i1, i2);
 
         i1 = new YInterval(1.1, 0.5, 1.5);
-        assertFalse(i1.equals(i2));
+        assertNotEquals(i1, i2);
         i2 = new YInterval(1.1, 0.5, 1.5);
-        assertTrue(i1.equals(i2));
+        assertEquals(i1, i2);
 
         i1 = new YInterval(1.1, 0.55, 1.5);
-        assertFalse(i1.equals(i2));
+        assertNotEquals(i1, i2);
         i2 = new YInterval(1.1, 0.55, 1.5);
-        assertTrue(i1.equals(i2));
+        assertEquals(i1, i2);
 
         i1 = new YInterval(1.1, 0.55, 1.55);
-        assertFalse(i1.equals(i2));
+        assertNotEquals(i1, i2);
         i2 = new YInterval(1.1, 0.55, 1.55);
-        assertTrue(i1.equals(i2));
+        assertEquals(i1, i2);
     }
 
     /**

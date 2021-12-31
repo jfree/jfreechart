@@ -36,21 +36,15 @@
 
 package org.jfree.chart.block;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
-
-import java.awt.Color;
-import java.awt.GradientPaint;
-import java.awt.geom.Rectangle2D;
-import java.util.Objects;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
-
 import org.jfree.chart.TestUtils;
-import org.jfree.chart.util.PaintUtils;
 import org.junit.jupiter.api.Test;
+
+import java.awt.*;
+import java.awt.geom.Rectangle2D;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link ColorBlock} class.

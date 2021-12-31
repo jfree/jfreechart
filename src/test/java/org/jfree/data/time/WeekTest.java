@@ -48,7 +48,6 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.TimeZone;
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 
 import org.jfree.chart.TestUtils;
 import static org.junit.jupiter.api.Assertions.assertThrows;

@@ -42,7 +42,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
-import java.util.Objects;
 
 import org.jfree.chart.ChartRenderingInfo;
 import org.jfree.chart.TestUtils;

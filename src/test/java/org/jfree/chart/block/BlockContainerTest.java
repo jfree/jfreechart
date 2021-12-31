@@ -39,12 +39,11 @@ package org.jfree.chart.block;
 import java.awt.geom.Rectangle2D;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link BlockContainer} class.
@@ -75,18 +74,18 @@ public class BlockContainerTest {
     public void testEquals() {
         BlockContainer c1 = new BlockContainer(new FlowArrangement());
         BlockContainer c2 = new BlockContainer(new FlowArrangement());
-        assertTrue(c1.equals(c2));
-        assertTrue(c2.equals(c2));
+        assertEquals(c1, c2);
+        assertEquals(c2, c2);
 
         c1.setArrangement(new ColumnArrangement());
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
         c2.setArrangement(new ColumnArrangement());
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
 
         c1.add(new EmptyBlock(1.2, 3.4));
-        assertFalse(c1.equals(c2));
+        assertNotEquals(c1, c2);
         c2.add(new EmptyBlock(1.2, 3.4));
-        assertTrue(c1.equals(c2));
+        assertEquals(c1, c2);
     }
 
     /**
@@ -98,9 +97,9 @@ public class BlockContainerTest {
         BlockContainer c1 = new BlockContainer(new FlowArrangement());
         c1.add(new EmptyBlock(1.2, 3.4));
         BlockContainer c2 = (BlockContainer) c1.clone();
-        assertTrue(c1 != c2);
-        assertTrue(c1.getClass() == c2.getClass());
-        assertTrue(c1.equals(c2));
+        assertNotSame(c1, c2);
+        assertSame(c1.getClass(), c2.getClass());
+        assertEquals(c1, c2);
     }
 
     /**

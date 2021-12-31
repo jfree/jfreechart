@@ -37,6 +37,7 @@
 package org.jfree.chart.renderer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
@@ -67,7 +68,7 @@ public class AreaRendererEndTypeTest {
         AreaRendererEndType t2 = TestUtils.serialised(t1);
         assertEquals(t1, t2);
         boolean same = t1 == t2;
-        assertEquals(true, same);
+        assertTrue(same);
     }
 
 }

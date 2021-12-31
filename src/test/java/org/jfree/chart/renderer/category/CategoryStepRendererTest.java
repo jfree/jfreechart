@@ -36,10 +36,6 @@
 
 package org.jfree.chart.renderer.category;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.LegendItem;
 import org.jfree.chart.TestUtils;
@@ -49,6 +45,8 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.util.PublicCloneable;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link CategoryStepRenderer} class.
@@ -65,9 +63,9 @@ public class CategoryStepRendererTest {
         assertEquals(r1, r2);
 
         r1 = new CategoryStepRenderer(true);
-        assertFalse(r1.equals(r2));
+        assertNotEquals(r1, r2);
         r2 = new CategoryStepRenderer(true);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
     }
 
     /**
@@ -77,9 +75,9 @@ public class CategoryStepRendererTest {
     public void testCloning() throws CloneNotSupportedException {
         CategoryStepRenderer r1 = new CategoryStepRenderer(false);
         CategoryStepRenderer r2 = (CategoryStepRenderer) r1.clone();
-        assertTrue(r1 != r2);
-        assertTrue(r1.getClass() == r2.getClass());
-        assertTrue(r1.equals(r2));
+        assertNotSame(r1, r2);
+        assertSame(r1.getClass(), r2.getClass());
+        assertEquals(r1, r2);
     }
 
     /**

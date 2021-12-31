@@ -41,7 +41,6 @@ import nl.jqno.equalsverifier.Warning;
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
 
-import javax.swing.*;
 import javax.swing.event.EventListenerList;
 import java.beans.PropertyChangeSupport;
 import java.beans.VetoableChangeSupport;

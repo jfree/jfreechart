@@ -36,11 +36,10 @@
 
 package org.jfree.chart.axis;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link CategoryLabelWidthType} class.
@@ -65,7 +64,7 @@ public class CategoryLabelWidthTypeTest {
     public void testHashCode() {
         CategoryLabelWidthType a1 = CategoryLabelWidthType.CATEGORY;
         CategoryLabelWidthType a2 = CategoryLabelWidthType.CATEGORY;
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
         int h1 = a1.hashCode();
         int h2 = a2.hashCode();
         assertEquals(h1, h2);
@@ -79,7 +78,7 @@ public class CategoryLabelWidthTypeTest {
         CategoryLabelWidthType w1 = CategoryLabelWidthType.RANGE;
         CategoryLabelWidthType w2 = TestUtils.serialised(w1);
         assertEquals(w1, w2);
-        assertTrue(w1 == w2);
+        assertSame(w1, w2);
     }
 
 }
