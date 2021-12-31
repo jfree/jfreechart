@@ -66,7 +66,7 @@ public final class AxisLocation implements Serializable {
             "AxisLocation.BOTTOM_OR_RIGHT");
 
     /** The name. */
-    private String name;
+    private final String name;
 
     /**
      * Private constructor.

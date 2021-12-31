@@ -188,7 +188,7 @@ public class IntervalMarker extends Marker implements Cloneable, Serializable {
             return false;
         }
         IntervalMarker that = (IntervalMarker) obj;
-        if (that.canEqual(this) == false) {
+        if (!that.canEqual(this)) {
             return false;
         }
         if (Double.doubleToLongBits(this.startValue) != 

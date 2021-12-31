@@ -58,34 +58,34 @@ public class ChartTransferable implements Transferable {
     private JFreeChart chart;
 
     /** The width of the chart on the clipboard. */
-    private int width;
+    private final int width;
 
     /** The height of the chart on the clipboard. */
-    private int height;
+    private final int height;
 
     /**
      * The smallest width at which the chart will be drawn (if necessary, the
      * chart will then be scaled down to fit the requested width).
      */
-    private int minDrawWidth;
+    private final int minDrawWidth;
 
     /**
      * The smallest height at which the chart will be drawn (if necessary, the
      * chart will then be scaled down to fit the requested height).
      */
-    private int minDrawHeight;
+    private final int minDrawHeight;
 
     /**
      * The largest width at which the chart will be drawn (if necessary, the 
      * chart will then be scaled up to fit the requested width).
      */
-    private int maxDrawWidth;
+    private final int maxDrawWidth;
 
     /**
      * The largest height at which the chart will be drawn (if necessary, the
      * chart will then be scaled up to fit the requested height).
      */
-    private int maxDrawHeight;
+    private final int maxDrawHeight;
 
     /**
      * Creates a new chart selection.

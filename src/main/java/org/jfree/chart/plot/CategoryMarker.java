@@ -163,8 +163,7 @@ public class CategoryMarker extends Marker implements Cloneable, Serializable {
             return false;
         }
         CategoryMarker that = (CategoryMarker) obj;
-        if (that.canEqual(this) == false)
-        {
+        if (!that.canEqual(this)) {
             return false;
         }
         if (!Objects.equals(this.key, that.key)) {

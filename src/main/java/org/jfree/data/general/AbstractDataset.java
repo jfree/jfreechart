@@ -111,7 +111,7 @@ public abstract class AbstractDataset implements Dataset, Cloneable,
         if (!Objects.equals(this.group, that.group)) {
             return false;
         }
-        if (that.canEqual(this) == false) {
+        if (!that.canEqual(this)) {
             return false;
         }
         return true;

@@ -44,7 +44,7 @@ import org.jfree.chart.axis.Axis;
 public class AxisChangeEvent extends ChartChangeEvent {
 
     /** The axis that generated the change event. */
-    private Axis axis;
+    private final Axis axis;
 
     /**
      * Creates a new AxisChangeEvent.

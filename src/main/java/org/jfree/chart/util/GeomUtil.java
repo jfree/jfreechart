@@ -59,8 +59,8 @@ public final class GeomUtil {
      * @return all intersections points between {@code lineA} and {@code lines}.
      * @see #calculateIntersectionPoint(Line2D, Line2D)
      */
-    public static final Point2D[] calculateIntersectionPoints(Line2D lineA,
-            Line2D... lines) {
+    public static Point2D[] calculateIntersectionPoints(Line2D lineA,
+                                                        Line2D... lines) {
         ArrayList<Point2D> intersectionPoints = new ArrayList<>(
                 lines.length);
         for (Line2D lineB : lines) {
@@ -83,8 +83,8 @@ public final class GeomUtil {
      * @return the intersection point of {@code lineA} with {@code lineB},
      *         possibly {@code null} if no intersection point exists
      */
-    public static final Point2D calculateIntersectionPoint(Line2D lineA,
-            Line2D lineB) {
+    public static Point2D calculateIntersectionPoint(Line2D lineA,
+                                                     Line2D lineB) {
         double x1 = lineA.getX1();
         double y1 = lineA.getY1();
         double x2 = lineA.getX2();
@@ -125,7 +125,7 @@ public final class GeomUtil {
      *                                  {@link PathIterator#SEG_CUBICTO} or
      *                                  {@link PathIterator#SEG_QUADTO})
      */
-    public static final Line2D[] getLines(Shape shape, AffineTransform at)
+    public static Line2D[] getLines(Shape shape, AffineTransform at)
             throws IllegalArgumentException {
         ArrayList<Line2D> lines = new ArrayList<>();
         Point2D first = null;

@@ -64,7 +64,7 @@ public final class DatasetRenderingOrder implements Serializable {
             = new DatasetRenderingOrder("DatasetRenderingOrder.REVERSE");
 
     /** The name. */
-    private String name;
+    private final String name;
 
     /**
      * Private constructor.

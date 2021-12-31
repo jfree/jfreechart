@@ -58,7 +58,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class ChartPanelTest implements ChartChangeListener, ChartMouseListener {
 
-    private List<ChartChangeEvent> chartChangeEvents = new ArrayList<>();
+    private final List<ChartChangeEvent> chartChangeEvents = new ArrayList<>();
 
     /**
      * Receives a chart change event and stores it in a list for later

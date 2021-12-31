@@ -386,7 +386,7 @@ public class LabelBlock extends AbstractBlock
         if (!Objects.equals(this.textAnchor, that.textAnchor)) {
             return false;
         }
-        if (that.canEqual(this) == false) {
+        if (!that.canEqual(this)) {
             return false;
         }
         return super.equals(obj);

@@ -194,7 +194,7 @@ public class CategoryItemEntity extends ChartEntity
         }
         
         // fix the "equals not symmetric" problem
-        if (that.canEqual(this) == false) {
+        if (!that.canEqual(this)) {
             return false;
         }
         

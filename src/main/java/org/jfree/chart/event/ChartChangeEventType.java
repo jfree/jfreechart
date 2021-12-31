@@ -60,7 +60,7 @@ public final class ChartChangeEventType implements Serializable {
             = new ChartChangeEventType("ChartChangeEventType.DATASET_UPDATED");
 
     /** The name. */
-    private String name;
+    private final String name;
 
     /**
      * Private constructor.

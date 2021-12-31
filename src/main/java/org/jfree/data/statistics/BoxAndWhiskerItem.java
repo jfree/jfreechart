@@ -51,31 +51,31 @@ public class BoxAndWhiskerItem implements Serializable {
     private static final long serialVersionUID = 7329649623148167423L;
 
     /** The mean. */
-    private Number mean;
+    private final Number mean;
 
     /** The median. */
-    private Number median;
+    private final Number median;
 
     /** The first quarter. */
-    private Number q1;
+    private final Number q1;
 
     /** The third quarter. */
-    private Number q3;
+    private final Number q3;
 
     /** The minimum regular value. */
-    private Number minRegularValue;
+    private final Number minRegularValue;
 
     /** The maximum regular value. */
-    private Number maxRegularValue;
+    private final Number maxRegularValue;
 
     /** The minimum outlier. */
-    private Number minOutlier;
+    private final Number minOutlier;
 
     /** The maximum outlier. */
-    private Number maxOutlier;
+    private final Number maxOutlier;
 
     /** The outliers. */
-    private List outliers;
+    private final List outliers;
 
     /**
      * Creates a new box-and-whisker item.

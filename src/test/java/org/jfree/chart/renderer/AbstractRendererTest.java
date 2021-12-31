@@ -66,6 +66,7 @@ public class AbstractRendererTest {
     /**
      * Test that the equals() method distinguishes all fields.
      */
+    @SuppressWarnings("deprecation")
     @Test
     public void testEquals() {
         // have to use a concrete subclass...

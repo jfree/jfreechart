@@ -572,7 +572,7 @@ public class AbstractBlock implements Cloneable, Serializable {
         }
         
         // fix the "equals not symmetric" problem
-        if (that.canEqual(this) == false) {
+        if (!that.canEqual(this)) {
             return false;
         }
         return true;

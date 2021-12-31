@@ -469,7 +469,7 @@ public class CategoryPointerAnnotation extends CategoryTextAnnotation
             return false;
         }
         // fix the "equals not symmetric" problem
-        if (that.canEqual(this) == false) {
+        if (!that.canEqual(this)) {
             return false;
         }
         return super.equals(obj);

@@ -66,7 +66,7 @@ public final class AreaRendererEndType implements Serializable {
             "AreaRendererEndType.LEVEL");
 
     /** The name. */
-    private String name;
+    private final String name;
 
     /**
      * Private constructor.

@@ -60,7 +60,7 @@ public final class AxisLabelLocation implements Serializable {
             "LOW_END");
 
     /** The name. */
-    private String name;
+    private final String name;
 
     /**
      * Private constructor.

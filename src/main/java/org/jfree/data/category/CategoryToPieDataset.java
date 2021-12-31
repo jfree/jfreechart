@@ -57,13 +57,13 @@ public class CategoryToPieDataset extends AbstractDataset
     static final long serialVersionUID = 5516396319762189617L;
 
     /** The source. */
-    private CategoryDataset source;
+    private final CategoryDataset source;
 
     /** The extract type. */
-    private TableOrder extract;
+    private final TableOrder extract;
 
     /** The row or column index. */
-    private int index;
+    private final int index;
 
     /**
      * An adaptor class that converts any {@link CategoryDataset} into a

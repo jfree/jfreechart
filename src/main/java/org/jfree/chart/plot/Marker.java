@@ -569,7 +569,7 @@ public abstract class Marker implements Cloneable, Serializable {
             return false;
         }
         Marker that = (Marker) obj;
-        if (that.canEqual(this) == false) {
+        if (!that.canEqual(this)) {
             return false;
         }
         if (!PaintUtils.equal(this.paint, that.paint)) {

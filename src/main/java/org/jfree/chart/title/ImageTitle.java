@@ -340,7 +340,7 @@ public class ImageTitle extends Title {
         if (!Objects.equals(this.image, that.image)) {
             return false;
         }
-        if (that.canEqual(this) == false) {
+        if (!that.canEqual(this)) {
             return false;
         }
         return super.equals(obj);

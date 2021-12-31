@@ -49,7 +49,7 @@ import org.jfree.chart.util.Args;
 public class AbstractOverlay {
 
     /** Storage for registered change listeners. */
-    private transient EventListenerList changeListeners;
+    private final transient EventListenerList changeListeners;
 
     /**
      * Default constructor.

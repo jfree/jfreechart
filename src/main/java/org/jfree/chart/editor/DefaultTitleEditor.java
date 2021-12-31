@@ -267,7 +267,7 @@ class DefaultTitleEditor extends JPanel implements ActionListener {
      * If we are not supposed to show the title, the controls are disabled.
      */
     private void enableOrDisableControls() {
-        boolean enabled = (this.showTitle == true);
+        boolean enabled = this.showTitle;
         this.titleField.setEnabled(enabled);
         this.selectFontButton.setEnabled(enabled);
         this.selectPaintButton.setEnabled(enabled);

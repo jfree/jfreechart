@@ -65,7 +65,7 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
     private List rows;
 
     /** If the row keys should be sorted by their comparable order. */
-    private boolean sortRowKeys;
+    private final boolean sortRowKeys;
 
     /**
      * Creates a new instance (initially empty).

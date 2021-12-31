@@ -35,7 +35,7 @@ public class FakePlot extends Plot {
             return false;
         }
         FakePlot that = (FakePlot) obj;
-        if (that.canEqual(this) == false){
+        if (!that.canEqual(this)) {
             return false;
         }
         if (!Objects.equals(this.fakeName, that.fakeName))

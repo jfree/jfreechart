@@ -672,7 +672,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
             return null;
         }
         if (getDataBoundsIncludesVisibleSeriesOnly()) {
-            List visibleSeriesKeys = new ArrayList();
+            List<Comparable> visibleSeriesKeys = new ArrayList<>();
             int seriesCount = dataset.getRowCount();
             for (int s = 0; s < seriesCount; s++) {
                 if (isSeriesVisible(s)) {

@@ -46,7 +46,7 @@ import javax.swing.WindowConstants;
 public class ChartFrame extends JFrame {
 
     /** The chart panel. */
-    private ChartPanel chartPanel;
+    private final ChartPanel chartPanel;
 
     /**
      * Constructs a frame for a chart.

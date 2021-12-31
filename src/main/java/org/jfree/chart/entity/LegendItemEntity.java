@@ -131,7 +131,7 @@ public class LegendItemEntity extends ChartEntity
         LegendItemEntity that = (LegendItemEntity) obj;
 
         // fix the "equals not symmetric" problem
-        if (that.canEqual(this) == false) {
+        if (!that.canEqual(this)) {
             return false;
         }
         if (!Objects.equals(this.seriesKey, that.seriesKey)) {

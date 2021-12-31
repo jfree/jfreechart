@@ -80,7 +80,7 @@ public class ClusteredXYBarRenderer extends XYBarRenderer
     private static final long serialVersionUID = 5864462149177133147L;
 
     /** Determines whether bar center should be interval start. */
-    private boolean centerBarAtStartValue;
+    private final boolean centerBarAtStartValue;
 
     /**
      * Default constructor. Bar margin is set to 0.0.

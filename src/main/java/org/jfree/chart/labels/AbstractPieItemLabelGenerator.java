@@ -54,7 +54,7 @@ public class AbstractPieItemLabelGenerator implements Serializable {
     private static final long serialVersionUID = 7347703325267846275L;
 
     /** The label format string. */
-    private String labelFormat;
+    private final String labelFormat;
 
     /** A number formatter for the value. */
     private NumberFormat numberFormat;

@@ -47,13 +47,13 @@ import org.jfree.chart.ui.TextAnchor;
 public class CategoryTick extends Tick {
 
     /** The category. */
-    private Comparable category;
+    private final Comparable category;
 
     /** The label. */
-    private TextBlock label;
+    private final TextBlock label;
 
     /** The label anchor. */
-    private TextBlockAnchor labelAnchor;
+    private final TextBlockAnchor labelAnchor;
 
     /**
      * Creates a new tick.
@@ -129,7 +129,7 @@ public class CategoryTick extends Tick {
         if (!Objects.equals(this.labelAnchor, that.labelAnchor)) {
             return false;
         }
-        if (that.canEqual(this) == false) {
+        if (!that.canEqual(this)) {
             return false;
         }
         return super.equals(obj);

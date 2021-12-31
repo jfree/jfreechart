@@ -663,7 +663,7 @@ public class LegendGraphic extends AbstractBlock
         if (!Objects.equals(this.lineStroke, that.lineStroke)) {
             return false;
         }
-        if (that.canEqual(this) == false) {
+        if (!that.canEqual(this)) {
             return false;
         }
         return super.equals(obj);

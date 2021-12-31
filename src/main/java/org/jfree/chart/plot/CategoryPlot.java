@@ -4497,7 +4497,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
             return false;
         }
         CategoryPlot that = (CategoryPlot) obj;
-        if (that.canEqual(this) == false){
+        if (!that.canEqual(this)) {
             return false;
         }
         if (!Objects.equals(this.orientation, that.orientation)) {

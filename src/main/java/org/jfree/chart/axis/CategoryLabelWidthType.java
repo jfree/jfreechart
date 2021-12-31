@@ -57,7 +57,7 @@ public final class CategoryLabelWidthType implements Serializable {
             = new CategoryLabelWidthType("CategoryLabelWidthType.RANGE");
 
     /** The name. */
-    private String name;
+    private final String name;
 
     /**
      * Private constructor.

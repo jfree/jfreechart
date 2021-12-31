@@ -203,7 +203,7 @@ public class CompositeTitle extends Title implements Cloneable, Serializable {
         if (!PaintUtils.equal(this.backgroundPaint, that.backgroundPaint)) {
             return false;
         }
-        if (that.canEqual(this) == false) {
+        if (!that.canEqual(this)) {
             return false;
         }
         return super.equals(obj);

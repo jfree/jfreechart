@@ -46,7 +46,7 @@ import org.jfree.chart.util.Args;
 public class AnnotationChangeEvent extends ChartChangeEvent {
 
     /** The annotation that generated the event. */
-    private Annotation annotation;
+    private final Annotation annotation;
 
     /**
      * Creates a new {@code AnnotationChangeEvent} instance.

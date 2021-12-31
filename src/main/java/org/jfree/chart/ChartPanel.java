@@ -226,8 +226,8 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     /** Storage for registered (chart) mouse listeners. */
     private transient EventListenerList chartMouseListeners;
 
-    /** A flag that controls whether or not the off-screen buffer is used. */
-    private boolean useBuffer;
+    /** A flag that controls whether the off-screen buffer is used. */
+    private final boolean useBuffer;
 
     /** A flag that indicates that the buffer should be refreshed. */
     private boolean refreshBuffer;
@@ -262,7 +262,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     private JPopupMenu popup;
 
     /** The drawing info collected the last time the chart was drawn. */
-    private ChartRenderingInfo info;
+    private final ChartRenderingInfo info;
 
     /** The chart anchor point. */
     private Point2D anchor;
@@ -410,7 +410,7 @@ public class ChartPanel extends JPanel implements ChartChangeListener,
     /**
      * A list of overlays for the panel.
      */
-    private List<Overlay> overlays;
+    private final List<Overlay> overlays;
     
     /**
      * Constructs a panel that displays the specified chart.

@@ -504,7 +504,7 @@ public class CombinedRangeCategoryPlot extends CategoryPlot
             return false;
         }
         CombinedRangeCategoryPlot that = (CombinedRangeCategoryPlot) obj;
-        if (that.canEqual(this) == false){
+        if (!that.canEqual(this)){
             return false;
         }
         if (Double.compare(this.gap, that.gap) != 0) {

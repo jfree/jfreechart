@@ -50,13 +50,13 @@ public class CategorySeriesHandler extends DefaultHandler
         implements DatasetTags {
 
     /** The root handler. */
-    private RootHandler root;
+    private final RootHandler root;
 
     /** The series key. */
     private Comparable seriesKey;
 
     /** The values. */
-    private DefaultKeyedValues values;
+    private final DefaultKeyedValues values;
 
     /**
      * Creates a new item handler.

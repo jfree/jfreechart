@@ -183,25 +183,25 @@ public class CategoryLabelPositions implements Serializable {
      * The label positioning details used when an axis is at the top of a
      * chart.
      */
-    private CategoryLabelPosition positionForAxisAtTop;
+    private final CategoryLabelPosition positionForAxisAtTop;
 
     /**
      * The label positioning details used when an axis is at the bottom of a
      * chart.
      */
-    private CategoryLabelPosition positionForAxisAtBottom;
+    private final CategoryLabelPosition positionForAxisAtBottom;
 
     /**
      * The label positioning details used when an axis is at the left of a
      * chart.
      */
-    private CategoryLabelPosition positionForAxisAtLeft;
+    private final CategoryLabelPosition positionForAxisAtLeft;
 
     /**
      * The label positioning details used when an axis is at the right of a
      * chart.
      */
-    private CategoryLabelPosition positionForAxisAtRight;
+    private final CategoryLabelPosition positionForAxisAtRight;
 
     /**
      * Default constructor.

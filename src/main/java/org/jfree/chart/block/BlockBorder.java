@@ -64,7 +64,7 @@ public class BlockBorder implements BlockFrame, Serializable {
             RectangleInsets.ZERO_INSETS, Color.WHITE);
 
     /** The space reserved for the border. */
-    private RectangleInsets insets;
+    private final RectangleInsets insets;
 
     /** The border color. */
     private transient Paint paint;

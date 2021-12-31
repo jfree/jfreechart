@@ -62,7 +62,7 @@ public class BlockContainer extends AbstractBlock
     private static final long serialVersionUID = 8199508075695195293L;
 
     /** The blocks within the container. */
-    private List blocks;
+    private final List blocks;
 
     /** The object responsible for laying out the blocks. */
     private Arrangement arrangement;
@@ -246,7 +246,7 @@ public class BlockContainer extends AbstractBlock
         BlockContainer that = (BlockContainer) obj;
 
         // fix the "equals not symmetric" problem
-        if (that.canEqual(this) == false) {
+        if (!that.canEqual(this)) {
             return false;
         }
         // compare fields in this class

@@ -48,16 +48,16 @@ import org.jfree.chart.util.Args;
 public class AxisCollection {
 
     /** The axes that need to be drawn at the top of the plot area. */
-    private List axesAtTop;
+    private final List axesAtTop;
 
     /** The axes that need to be drawn at the bottom of the plot area. */
-    private List axesAtBottom;
+    private final List axesAtBottom;
 
     /** The axes that need to be drawn at the left of the plot area. */
-    private List axesAtLeft;
+    private final List axesAtLeft;
 
     /** The axes that need to be drawn at the right of the plot area. */
-    private List axesAtRight;
+    private final List axesAtRight;
 
     /**
      * Creates a new empty collection.

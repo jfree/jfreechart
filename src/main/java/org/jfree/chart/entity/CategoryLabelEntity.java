@@ -48,7 +48,7 @@ import org.jfree.chart.axis.CategoryAxis;
 public class CategoryLabelEntity extends TickLabelEntity {
 
     /** The category key. */
-    private Comparable key;
+    private final Comparable key;
 
     /**
      * Creates a new entity.
@@ -92,7 +92,7 @@ public class CategoryLabelEntity extends TickLabelEntity {
         CategoryLabelEntity that = (CategoryLabelEntity) obj;
 
         // fix the "equals not symmetric" problem
-        if (that.canEqual(this) == false) {
+        if (!that.canEqual(this)) {
             return false;
         }
         if (!Objects.equals(this.key, that.key)) {

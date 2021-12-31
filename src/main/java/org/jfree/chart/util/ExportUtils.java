@@ -162,8 +162,8 @@ public class ExportUtils {
      * @param h  the chart height.
      * @param file  the output file ({@code null} not permitted).
      */
-    public static final void writeAsPDF(Drawable drawable, 
-            int w, int h, File file) {
+    public static void writeAsPDF(Drawable drawable,
+                                  int w, int h, File file) {
         if (!ExportUtils.isOrsonPDFAvailable()) {
             throw new IllegalStateException("Neither OrsonPDF nor JFreePDF is present on the classpath.");
         }

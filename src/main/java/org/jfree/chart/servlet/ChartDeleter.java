@@ -51,7 +51,7 @@ import javax.servlet.http.HttpSessionBindingListener;
 public class ChartDeleter implements HttpSessionBindingListener, Serializable {
 
     /** The chart names. */
-    private List chartNames = new java.util.ArrayList();
+    private final List chartNames = new java.util.ArrayList();
 
     /**
      * Blank constructor.

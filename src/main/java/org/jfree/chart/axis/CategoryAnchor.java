@@ -61,7 +61,7 @@ public final class CategoryAnchor implements Serializable {
         = new CategoryAnchor("CategoryAnchor.END");
 
     /** The name. */
-    private String name;
+    private final String name;
 
     /**
      * Private constructor.

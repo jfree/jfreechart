@@ -58,7 +58,7 @@ public class AxisEntity extends ChartEntity {
                   //same as for ChartEntity!
 
     /** The axis for the entity. */
-    private Axis axis;
+    private final Axis axis;
 
     /**
      * Creates a new axis entity.
@@ -139,7 +139,7 @@ public class AxisEntity extends ChartEntity {
             return false;
         }
         // fix the "equals not symmetric" problem
-        if (that.canEqual(this) == false) {
+        if (!that.canEqual(this)) {
             return false;
         }
 

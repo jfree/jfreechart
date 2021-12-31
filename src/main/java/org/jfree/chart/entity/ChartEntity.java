@@ -342,7 +342,7 @@ public class ChartEntity implements Cloneable, PublicCloneable, Serializable {
         }
 
         // fix the "equals not symmetric" problem
-        if (that.canEqual(this) == false) {
+        if (!that.canEqual(this)) {
             return false;
         }
         return true;
