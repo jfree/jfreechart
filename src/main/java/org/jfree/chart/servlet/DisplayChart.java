@@ -124,7 +124,7 @@ public class DisplayChart extends HttpServlet {
 
         boolean isChartPublic = false;
         if (filename.length() >= 6) {
-            if (filename.substring(0, 6).equals("public")) {
+            if (filename.startsWith("public")) {
                 isChartPublic = true;
             }
         }

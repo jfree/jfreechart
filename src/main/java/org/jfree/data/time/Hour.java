@@ -464,7 +464,7 @@ public class Hour extends RegularTimePeriod implements Serializable {
         Day day = Day.parseDay(daystr);
         if (day != null) {
             String hourstr = s.substring(
-                Math.min(daystr.length() + 1, s.length()), s.length()
+                Math.min(daystr.length() + 1, s.length())
             );
             hourstr = hourstr.trim();
             int hour = Integer.parseInt(hourstr);

@@ -130,7 +130,7 @@ public class CSV {
                 fieldIndex++;
             }
         }
-        String key = line.substring(start, line.length());
+        String key = line.substring(start);
         keys.add(removeStringDelimiters(key));
         return keys;
     }
@@ -168,7 +168,7 @@ public class CSV {
             }
         }
         Double value = Double.valueOf(
-            removeStringDelimiters(line.substring(start, line.length()))
+            removeStringDelimiters(line.substring(start))
         );
         dataset.addValue(
             value, rowKey, (Comparable) columnKeys.get(fieldIndex - 1)
