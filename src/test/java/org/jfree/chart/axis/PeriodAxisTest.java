@@ -111,7 +111,7 @@ public class PeriodAxisTest implements AxisChangeListener {
         a2.setAutoRangeTimePeriodClass(Quarter.class);
         assertTrue(a1.equals(a2));
 
-        PeriodAxisLabelInfo info[] = new PeriodAxisLabelInfo[1];
+        PeriodAxisLabelInfo[] info = new PeriodAxisLabelInfo[1];
         info[0] = new PeriodAxisLabelInfo(Month.class,
                 new SimpleDateFormat("MMM"));
 

@@ -55,6 +55,6 @@ public interface AxisChangeListener extends EventListener {
      *
      * @param event  the event.
      */
-    public void axisChanged(AxisChangeEvent event);
+    void axisChanged(AxisChangeEvent event);
 
 }

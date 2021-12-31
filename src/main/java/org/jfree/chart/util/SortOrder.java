@@ -54,7 +54,7 @@ public enum SortOrder {
      *
      * @param name  the name.
      */
-    private SortOrder(String name) {
+    SortOrder(String name) {
         this.name = name;
     }
 

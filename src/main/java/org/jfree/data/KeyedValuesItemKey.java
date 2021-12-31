@@ -45,14 +45,14 @@ import org.jfree.chart.util.Args;
 public class KeyedValuesItemKey implements ItemKey, Serializable {
     
     /** The key for the item. */
-    Comparable<? extends Object> key;
+    Comparable<?> key;
     
     /**
      * Creates a new instance.
      * 
      * @param key  the key ({@code null} not permitted).
      */
-    public KeyedValuesItemKey(Comparable<? extends Object> key) {
+    public KeyedValuesItemKey(Comparable<?> key) {
         Args.nullNotPermitted(key, "key");
         this.key = key;
     }

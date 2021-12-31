@@ -50,6 +50,6 @@ public interface TitleChangeListener extends EventListener {
      *
      * @param event  the event.
      */
-    public void titleChanged(TitleChangeEvent event);
+    void titleChanged(TitleChangeEvent event);
 
 }

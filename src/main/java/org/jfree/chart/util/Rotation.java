@@ -55,7 +55,7 @@ public enum Rotation {
      * @param name  the name.
      * @param factor  the rotation factor.
      */
-    private Rotation(String name, double factor) {
+    Rotation(String name, double factor) {
         this.name = name;
         this.factor = factor;
     }

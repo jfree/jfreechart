@@ -54,7 +54,7 @@ public enum UnitType {
      *
      * @param name  the name.
      */
-    private UnitType(String name) {
+    UnitType(String name) {
         this.name = name;
     }
 

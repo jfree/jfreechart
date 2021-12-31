@@ -51,6 +51,6 @@ public interface TableXYDataset extends XYDataset {
      *
      * @return The item count.
      */
-    public int getItemCount();
+    int getItemCount();
 
 }

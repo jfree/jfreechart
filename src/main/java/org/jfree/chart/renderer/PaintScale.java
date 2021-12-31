@@ -58,7 +58,7 @@ public interface PaintScale {
      *
      * @see #getUpperBound()
      */
-    public double getLowerBound();
+    double getLowerBound();
 
     /**
      * Returns the upper bound for the scale.
@@ -67,7 +67,7 @@ public interface PaintScale {
      *
      * @see #getLowerBound()
      */
-    public double getUpperBound();
+    double getUpperBound();
 
     /**
      * Returns a {@code Paint} instance for the specified value.
@@ -76,6 +76,6 @@ public interface PaintScale {
      *
      * @return A {@code Paint} instance (never {@code null}).
      */
-    public Paint getPaint(double value);
+    Paint getPaint(double value);
 
 }

@@ -58,7 +58,7 @@ public interface SeriesDataset extends Dataset {
      *
      * @return The series count.
      */
-    public int getSeriesCount();
+    int getSeriesCount();
 
     /**
      * Returns the key for a series.
@@ -68,7 +68,7 @@ public interface SeriesDataset extends Dataset {
      *
      * @return The key for the series.
      */
-    public Comparable getSeriesKey(int series);
+    Comparable getSeriesKey(int series);
 
     /**
      * Returns the index of the series with the specified key, or -1 if there
@@ -78,6 +78,6 @@ public interface SeriesDataset extends Dataset {
      *
      * @return The index, or -1.
      */
-    public int indexOf(Comparable seriesKey);
+    int indexOf(Comparable seriesKey);
 
 }

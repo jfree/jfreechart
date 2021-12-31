@@ -56,6 +56,6 @@ public interface CategorySeriesLabelGenerator {
      *
      * @return A series label.
      */
-    public String generateLabel(CategoryDataset dataset, int series);
+    String generateLabel(CategoryDataset dataset, int series);
 
 }

@@ -47,7 +47,7 @@ public interface YisSymbolic {
      *
      * @return The symbolic values.
      */
-    public String[] getYSymbolicValues();
+    String[] getYSymbolicValues();
 
     /**
      * Returns the symbolic value of the data set specified by
@@ -58,7 +58,7 @@ public interface YisSymbolic {
      *
      * @return The symbolic value.
      */
-    public String getYSymbolicValue(int series, int item);
+    String getYSymbolicValue(int series, int item);
 
     /**
      * Returns the symbolic value linked with the specified {@code Integer}.
@@ -67,6 +67,6 @@ public interface YisSymbolic {
      *
      * @return The symbolic value.
      */
-    public String getYSymbolicValue(Integer val);
+    String getYSymbolicValue(Integer val);
 
 }

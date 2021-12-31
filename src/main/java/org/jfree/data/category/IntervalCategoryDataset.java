@@ -52,7 +52,7 @@ public interface IntervalCategoryDataset extends CategoryDataset {
      *
      * @see #getEndValue(int, int)
      */
-    public Number getStartValue(int series, int category);
+    Number getStartValue(int series, int category);
 
     /**
      * Returns the start value for the interval for a given series and category.
@@ -64,7 +64,7 @@ public interface IntervalCategoryDataset extends CategoryDataset {
      *
      * @see #getEndValue(Comparable, Comparable)
      */
-    public Number getStartValue(Comparable series, Comparable category);
+    Number getStartValue(Comparable series, Comparable category);
 
     /**
      * Returns the end value for the interval for a given series and category.
@@ -76,7 +76,7 @@ public interface IntervalCategoryDataset extends CategoryDataset {
      *
      * @see #getStartValue(int, int)
      */
-    public Number getEndValue(int series, int category);
+    Number getEndValue(int series, int category);
 
     /**
      * Returns the end value for the interval for a given series and category.
@@ -88,6 +88,6 @@ public interface IntervalCategoryDataset extends CategoryDataset {
      *
      * @see #getStartValue(Comparable, Comparable)
      */
-    public Number getEndValue(Comparable series, Comparable category);
+    Number getEndValue(Comparable series, Comparable category);
 
 }

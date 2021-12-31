@@ -51,6 +51,6 @@ public interface MarkerChangeListener extends EventListener {
      *
      * @param event  the event.
      */
-    public void markerChanged(MarkerChangeEvent event);
+    void markerChanged(MarkerChangeEvent event);
 
 }

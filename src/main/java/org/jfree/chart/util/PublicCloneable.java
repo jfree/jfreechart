@@ -51,7 +51,7 @@ public interface PublicCloneable extends Cloneable {
      * 
      * @throws CloneNotSupportedException if cloning is not supported for some reason.
      */
-    public Object clone() throws CloneNotSupportedException;
+    Object clone() throws CloneNotSupportedException;
 
 }
 

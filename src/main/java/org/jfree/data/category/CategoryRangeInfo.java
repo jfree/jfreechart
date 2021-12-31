@@ -55,7 +55,7 @@ public interface CategoryRangeInfo {
      * @return The range (or {@code null} if the dataset contains no
      *     values).
      */
-    public Range getRangeBounds(List visibleSeriesKeys,
-            boolean includeInterval);
+    Range getRangeBounds(List visibleSeriesKeys,
+                         boolean includeInterval);
 
 }

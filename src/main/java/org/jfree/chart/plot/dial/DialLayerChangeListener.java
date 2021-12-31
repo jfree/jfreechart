@@ -51,6 +51,6 @@ public interface DialLayerChangeListener extends EventListener {
      *
      * @param event  the event.
      */
-    public void dialLayerChanged(DialLayerChangeEvent event);
+    void dialLayerChanged(DialLayerChangeEvent event);
 
 }

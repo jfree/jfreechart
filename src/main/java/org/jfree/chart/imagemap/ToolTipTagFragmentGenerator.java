@@ -55,6 +55,6 @@ public interface ToolTipTagFragmentGenerator {
      *
      * @return The formatted HTML area tag attribute(s).
      */
-    public String generateToolTipFragment(String toolTipText);
+    String generateToolTipFragment(String toolTipText);
 
 }

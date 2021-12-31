@@ -62,7 +62,7 @@ public interface KeyedValues<K extends Comparable<K>> extends Values {
      * @throws IndexOutOfBoundsException if {@code index} is not in the
      *     specified range.
      */
-    public K getKey(int index);
+    K getKey(int index);
 
     /**
      * Returns the index for a given key.
@@ -73,7 +73,7 @@ public interface KeyedValues<K extends Comparable<K>> extends Values {
      *
      * @throws IllegalArgumentException if {@code key} is {@code null}.
      */
-    public int getIndex(K key);
+    int getIndex(K key);
 
     /**
      * Returns the keys for the values in the collection.  Note that you can
@@ -83,7 +83,7 @@ public interface KeyedValues<K extends Comparable<K>> extends Values {
      *
      * @return The keys (never {@code null}).
      */
-    public List<K> getKeys();
+    List<K> getKeys();
 
     /**
      * Returns the value for a given key.
@@ -94,6 +94,6 @@ public interface KeyedValues<K extends Comparable<K>> extends Values {
      *
      * @throws UnknownKeyException if the key is not recognised.
      */
-    public Number getValue(K key);
+    Number getValue(K key);
 
 }

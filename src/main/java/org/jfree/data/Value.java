@@ -46,6 +46,6 @@ public interface Value {
      *
      * @return The value (possibly {@code null}).
      */
-    public Number getValue();
+    Number getValue();
 
 }

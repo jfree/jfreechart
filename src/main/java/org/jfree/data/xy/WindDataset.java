@@ -53,7 +53,7 @@ public interface WindDataset extends XYDataset {
      *
      * @return The wind direction.
      */
-    public Number getWindDirection(int series, int item);
+    Number getWindDirection(int series, int item);
 
     /**
      * Returns the wind force on the Beaufort scale (0 to 12).  See:
@@ -67,6 +67,6 @@ public interface WindDataset extends XYDataset {
      *
      * @return The wind force.
      */
-    public Number getWindForce(int series, int item);
+    Number getWindForce(int series, int item);
 
 }

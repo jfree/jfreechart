@@ -51,13 +51,13 @@ public interface Annotation {
      *
      * @param listener  the object to register.
      */
-    public void addChangeListener(AnnotationChangeListener listener);
+    void addChangeListener(AnnotationChangeListener listener);
 
     /**
      * Deregisters an object for notification of changes to the annotation.
      *
      * @param listener  the object to deregister.
      */
-    public void removeChangeListener(AnnotationChangeListener listener);
+    void removeChangeListener(AnnotationChangeListener listener);
 
 }

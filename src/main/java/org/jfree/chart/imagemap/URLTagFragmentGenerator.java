@@ -57,6 +57,6 @@ public interface URLTagFragmentGenerator {
      *
      * @return The formatted HTML area tag attribute(s).
      */
-    public String generateURLFragment(String urlText);
+    String generateURLFragment(String urlText);
 
 }

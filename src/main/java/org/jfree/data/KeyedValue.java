@@ -51,6 +51,6 @@ public interface KeyedValue<K extends Comparable<K>> extends Value {
      *
      * @return The key (never {@code null}).
      */
-    public K getKey();
+    K getKey();
 
 }

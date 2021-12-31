@@ -59,6 +59,6 @@ public interface DialFrame extends DialLayer {
      *
      * @return The window.
      */
-    public Shape getWindow(Rectangle2D frame);
+    Shape getWindow(Rectangle2D frame);
 
 }

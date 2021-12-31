@@ -53,6 +53,6 @@ public interface ValueAxisPlot {
      *
      * @return The data range.
      */
-    public Range getDataRange(ValueAxis axis);
+    Range getDataRange(ValueAxis axis);
 
 }

@@ -49,6 +49,6 @@ public interface ChartProgressListener extends EventListener {
      *
      * @param event  the event.
      */
-    public void chartProgress(ChartProgressEvent event);
+    void chartProgress(ChartProgressEvent event);
 
 }

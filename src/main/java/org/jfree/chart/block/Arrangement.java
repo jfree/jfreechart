@@ -54,7 +54,7 @@ public interface Arrangement {
      * @param block  the block.
      * @param key  the key ({@code null} permitted).
      */
-    public void add(Block block, Object key);
+    void add(Block block, Object key);
 
     /**
      * Arranges the blocks within the specified container, subject to the given
@@ -66,13 +66,13 @@ public interface Arrangement {
      *
      * @return The container size after the arrangement.
      */
-    public Size2D arrange(BlockContainer container,
-                          Graphics2D g2,
-                          RectangleConstraint constraint);
+    Size2D arrange(BlockContainer container,
+                   Graphics2D g2,
+                   RectangleConstraint constraint);
 
     /**
      * Clears any cached layout information retained by the arrangement.
      */
-    public void clear();
+    void clear();
 
 }

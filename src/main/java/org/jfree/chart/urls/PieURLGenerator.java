@@ -64,6 +64,6 @@ public interface PieURLGenerator {
      *
      * @return A string containing the URL.
      */
-    public String generateURL(PieDataset dataset, Comparable key, int pieIndex);
+    String generateURL(PieDataset dataset, Comparable key, int pieIndex);
 
 }

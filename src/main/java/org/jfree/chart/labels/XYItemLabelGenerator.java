@@ -54,6 +54,6 @@ public interface XYItemLabelGenerator {
      *
      * @return The label (possibly {@code null}).
      */
-    public String generateLabel(XYDataset dataset, int series, int item);
+    String generateLabel(XYDataset dataset, int series, int item);
 
 }

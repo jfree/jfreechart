@@ -53,7 +53,7 @@ public interface DomainInfo {
      * @return The minimum value or {@code Double.NaN} if there are no 
      *     values.
      */
-    public double getDomainLowerBound(boolean includeInterval);
+    double getDomainLowerBound(boolean includeInterval);
 
     /**
      * Returns the maximum x-value in the dataset.
@@ -64,7 +64,7 @@ public interface DomainInfo {
      * @return The maximum value or {@code Double.NaN} if there are no 
      *     values.
      */
-    public double getDomainUpperBound(boolean includeInterval);
+    double getDomainUpperBound(boolean includeInterval);
 
     /**
      * Returns the range of the values in this dataset's domain.
@@ -75,6 +75,6 @@ public interface DomainInfo {
      * @return The range (or {@code null} if the dataset contains no
      *     values).
      */
-    public Range getDomainBounds(boolean includeInterval);
+    Range getDomainBounds(boolean includeInterval);
 
 }

@@ -43,7 +43,7 @@ public interface TextMeasurer {
      *
      * @return The width of the string in Java2D units.
      */
-    public float getStringWidth(String text, int start, int end);
+    float getStringWidth(String text, int start, int end);
     
 }
 

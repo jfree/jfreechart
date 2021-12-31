@@ -51,20 +51,20 @@ public interface Overlay {
      * @param g2  the graphics target.
      * @param chartPanel  the chart panel.
      */
-    public void paintOverlay(Graphics2D g2, ChartPanel chartPanel);
+    void paintOverlay(Graphics2D g2, ChartPanel chartPanel);
 
     /**
      * Registers a change listener with the overlay.
      * 
      * @param listener  the listener.
      */
-    public void addChangeListener(OverlayChangeListener listener);
+    void addChangeListener(OverlayChangeListener listener);
 
     /**
      * Deregisters a listener from the overlay.
      * 
      * @param listener  the listener.
      */
-    public void removeChangeListener(OverlayChangeListener listener);
+    void removeChangeListener(OverlayChangeListener listener);
 
 }

@@ -57,7 +57,7 @@ public interface CategoryItemLabelGenerator {
      *
      * @return The label.
      */
-    public String generateRowLabel(CategoryDataset dataset, int row);
+    String generateRowLabel(CategoryDataset dataset, int row);
 
     /**
      * Generates a label for the specified row.
@@ -67,7 +67,7 @@ public interface CategoryItemLabelGenerator {
      *
      * @return The label.
      */
-    public String generateColumnLabel(CategoryDataset dataset, int column);
+    String generateColumnLabel(CategoryDataset dataset, int column);
 
     /**
      * Generates a label for the specified item. The label is typically a
@@ -79,6 +79,6 @@ public interface CategoryItemLabelGenerator {
      *
      * @return The label (possibly {@code null}).
      */
-    public String generateLabel(CategoryDataset dataset, int row, int column);
+    String generateLabel(CategoryDataset dataset, int row, int column);
 
 }

@@ -46,7 +46,7 @@ public interface Values {
      *
      * @return The item count (possibly zero).
      */
-    public int getItemCount();
+    int getItemCount();
 
     /**
      * Returns the value with the specified index.
@@ -59,6 +59,6 @@ public interface Values {
      * @throws IndexOutOfBoundsException if {@code index} is not in the
      *     specified range.
      */
-    public Number getValue(int index);
+    Number getValue(int index);
 
 }

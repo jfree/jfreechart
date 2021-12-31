@@ -54,7 +54,7 @@ public interface MultiValueCategoryDataset extends CategoryDataset {
      *
      * @return The list of values.
      */
-    public List getValues(int row, int column);
+    List getValues(int row, int column);
 
     /**
      * Returns a list (possibly empty) of the values for the specified item.
@@ -65,6 +65,6 @@ public interface MultiValueCategoryDataset extends CategoryDataset {
      *
      * @return The list of values.
      */
-    public List getValues(Comparable rowKey, Comparable columnKey);
+    List getValues(Comparable rowKey, Comparable columnKey);
 
 }

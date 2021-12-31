@@ -49,6 +49,6 @@ public interface EntityBlockParams {
      *
      * @return A boolean.
      */
-    public boolean getGenerateEntities();
+    boolean getGenerateEntities();
 
 }

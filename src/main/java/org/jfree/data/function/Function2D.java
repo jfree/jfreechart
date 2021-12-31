@@ -48,6 +48,6 @@ public interface Function2D {
      *
      * @return The function value.
      */
-    public double getValue(double x);
+    double getValue(double x);
 
 }

@@ -72,7 +72,7 @@ public enum RectangleAnchor {
      *
      * @param name  the name.
      */
-    private RectangleAnchor(String name) {
+    RectangleAnchor(String name) {
         this.name = name;
     }
 

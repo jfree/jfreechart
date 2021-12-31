@@ -56,7 +56,7 @@ public interface CategoryURLGenerator {
      *
      * @return A string containing the URL.
      */
-    public String generateURL(CategoryDataset dataset, int series,
-            int category);
+    String generateURL(CategoryDataset dataset, int series,
+                       int category);
 
 }

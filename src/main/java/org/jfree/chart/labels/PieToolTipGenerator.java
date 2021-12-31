@@ -54,6 +54,6 @@ public interface PieToolTipGenerator {
      *
      * @return The tool tip text (possibly {@code null}).
      */
-    public String generateToolTip(PieDataset dataset, Comparable key);
+    String generateToolTip(PieDataset dataset, Comparable key);
 
 }

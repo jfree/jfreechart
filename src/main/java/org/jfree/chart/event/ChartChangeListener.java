@@ -53,6 +53,6 @@ public interface ChartChangeListener extends EventListener {
      *
      * @param event  the event.
      */
-    public void chartChanged(ChartChangeEvent event);
+    void chartChanged(ChartChangeEvent event);
 
 }

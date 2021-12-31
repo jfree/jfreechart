@@ -47,7 +47,7 @@ public enum Layer {
      *
      * @param name  the name.
      */
-    private Layer(final String name) {
+    Layer(final String name) {
         this.name = name;
     }
 

@@ -50,6 +50,6 @@ public interface PlotChangeListener extends EventListener {
      *
      * @param event  the event.
      */
-    public void plotChanged(PlotChangeEvent event);
+    void plotChanged(PlotChangeEvent event);
 
 }

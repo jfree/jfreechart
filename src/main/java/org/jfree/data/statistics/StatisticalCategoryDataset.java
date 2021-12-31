@@ -52,7 +52,7 @@ public interface StatisticalCategoryDataset extends CategoryDataset {
      *
      * @return The mean value (possibly {@code null}).
      */
-    public Number getMeanValue(int row, int column);
+    Number getMeanValue(int row, int column);
 
     /**
      * Returns the mean value for an item.
@@ -62,7 +62,7 @@ public interface StatisticalCategoryDataset extends CategoryDataset {
      *
      * @return The mean value (possibly {@code null}).
      */
-    public Number getMeanValue(Comparable rowKey, Comparable columnKey);
+    Number getMeanValue(Comparable rowKey, Comparable columnKey);
 
     /**
      * Returns the standard deviation value for an item.
@@ -72,7 +72,7 @@ public interface StatisticalCategoryDataset extends CategoryDataset {
      *
      * @return The standard deviation (possibly {@code null}).
      */
-    public Number getStdDevValue(int row, int column);
+    Number getStdDevValue(int row, int column);
 
     /**
      * Returns the standard deviation value for an item.
@@ -82,7 +82,7 @@ public interface StatisticalCategoryDataset extends CategoryDataset {
      *
      * @return The standard deviation (possibly {@code null}).
      */
-    public Number getStdDevValue(Comparable rowKey, Comparable columnKey);
+    Number getStdDevValue(Comparable rowKey, Comparable columnKey);
 
 }
 

@@ -52,7 +52,7 @@ public interface ShadowGenerator {
      *
      * @return A new image containing the shadow.
      */
-    public BufferedImage createDropShadow(BufferedImage source);
+    BufferedImage createDropShadow(BufferedImage source);
 
     /**
      * Calculates the x-offset for drawing the shadow image relative to the
@@ -60,7 +60,7 @@ public interface ShadowGenerator {
      *
      * @return The x-offset.
      */
-    public int calculateOffsetX();
+    int calculateOffsetX();
 
     /**
      * Calculates the y-offset for drawing the shadow image relative to the
@@ -68,6 +68,6 @@ public interface ShadowGenerator {
      *
      * @return The y-offset.
      */
-    public int calculateOffsetY();
+    int calculateOffsetY();
 
 }

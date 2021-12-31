@@ -49,6 +49,6 @@ public interface OverlayChangeListener extends EventListener {
      *
      * @param event  the event.
      */
-    public void overlayChanged(OverlayChangeEvent event);
+    void overlayChanged(OverlayChangeEvent event);
 
 }

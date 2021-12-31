@@ -53,7 +53,7 @@ public interface BlockFrame {
      *
      * @return The space (never {@code null}).
      */
-    public RectangleInsets getInsets();
+    RectangleInsets getInsets();
 
     /**
      * Draws the border by filling in the reserved space (in black).
@@ -61,6 +61,6 @@ public interface BlockFrame {
      * @param g2  the graphics device.
      * @param area  the area.
      */
-    public void draw(Graphics2D g2, Rectangle2D area);
+    void draw(Graphics2D g2, Rectangle2D area);
 
 }

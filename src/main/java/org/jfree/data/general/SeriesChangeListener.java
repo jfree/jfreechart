@@ -48,6 +48,6 @@ public interface SeriesChangeListener extends EventListener {
      *
      * @param event  information about the change.
      */
-    public void seriesChanged(SeriesChangeEvent event);
+    void seriesChanged(SeriesChangeEvent event);
 
 }

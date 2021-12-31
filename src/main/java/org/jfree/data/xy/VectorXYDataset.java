@@ -50,7 +50,7 @@ public interface VectorXYDataset extends XYDataset {
      *
      * @return The x-component of the vector.
      */
-    public double getVectorXValue(int series, int item);
+    double getVectorXValue(int series, int item);
 
     /**
      * Returns the y-component of the vector for an item in a series.
@@ -60,7 +60,7 @@ public interface VectorXYDataset extends XYDataset {
      *
      * @return The y-component of the vector.
      */
-    public double getVectorYValue(int series, int item);
+    double getVectorYValue(int series, int item);
 
     /**
      * Returns the vector for an item in a series.  Depending on the particular
@@ -74,6 +74,6 @@ public interface VectorXYDataset extends XYDataset {
      *
      * @return The vector (possibly {@code null}).
      */
-    public Vector getVector(int series, int item);
+    Vector getVector(int series, int item);
 
 }

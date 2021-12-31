@@ -54,7 +54,7 @@ public enum TableOrder {
      *
      * @param name  the name.
      */
-    private TableOrder(String name) {
+    TableOrder(String name) {
         this.name = name;
     }
 
