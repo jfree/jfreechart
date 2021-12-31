@@ -156,11 +156,7 @@ public class DefaultFlowDataset<K extends Comparable<K>> extends AbstractDataset
      * @param value  the property value.
      */
     public void setNodeProperty(NodeKey<K> nodeKey, String propertyKey, Object value) {
-        Map<String, Object> props = this.nodeProperties.get(nodeKey);
-        if (props == null) {
-            props = new HashMap<>();
-            this.nodeProperties.put(nodeKey, props);
-        }
+        Map<String, Object> props = this.nodeProperties.computeIfAbsent(nodeKey, k -> new HashMap<>());
         props.put(propertyKey, value);
         fireDatasetChanged();
     }
@@ -232,13 +228,8 @@ public class DefaultFlowDataset<K extends Comparable<K>> extends AbstractDataset
      * @param propertyKey  the property key ({@code null} not permitted).
      * @param value  the property value.
      */
-
     public void setFlowProperty(FlowKey<K> flowKey, String propertyKey, Object value) {
-        Map<String, Object> props = this.flowProperties.get(flowKey);
-        if (props == null) {
-            props = new HashMap<>();
-            this.flowProperties.put(flowKey, props);
-        }
+        Map<String, Object> props = this.flowProperties.computeIfAbsent(flowKey, k -> new HashMap<>());
         props.put(propertyKey, value);
         fireDatasetChanged();
     }
