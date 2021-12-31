@@ -528,9 +528,9 @@ public class DynamicTimeSeriesCollection extends AbstractIntervalXYDataset
         RegularTimePeriod nextInstant = this.pointsInTime[this.newestAt].next();
         this.newestAt = this.oldestAt;  // newestAt takes value previously held
                                         // by oldestAT
-        /***
-         * The next 10 lines or so should be expanded if data can be negative
-         ***/
+
+        // The next 10 lines or so should be expanded if data can be negative
+
         // if the oldest data contained a maximum Y-value, invalidate the stored
         //   Y-max and Y-range data:
         boolean extremaChanged = false;
@@ -545,7 +545,7 @@ public class DynamicTimeSeriesCollection extends AbstractIntervalXYDataset
             if (extremaChanged) {
                 break;
             }
-        }  /*** If data can be < 0, add code here to check the minimum    **/
+        }  // If data can be < 0, add code here to check the minimum
         if (extremaChanged) {
             invalidateRangeInfo();
         }
@@ -599,7 +599,7 @@ public class DynamicTimeSeriesCollection extends AbstractIntervalXYDataset
         return max;
     }
 
-    /** End, positive-data-only code  **/
+    // End, positive-data-only code
 
     /**
      * Returns the index of the oldest data item.

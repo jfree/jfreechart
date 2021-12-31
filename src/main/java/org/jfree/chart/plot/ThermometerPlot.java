@@ -1139,7 +1139,6 @@ public class ThermometerPlot extends Plot implements ValueAxisPlot,
                     break;
                 default:
             }
-            /***/
         }
 
         g2.setPaint(this.thermometerPaint);
