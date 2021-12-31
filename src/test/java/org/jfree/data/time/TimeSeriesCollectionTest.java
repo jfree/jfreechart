@@ -461,11 +461,11 @@ public class TimeSeriesCollectionTest {
         s1.add(new Day(24, 2, 2014), 10.0);
         collection.addSeries(s1);
         assertEquals(new Range(10.0, 10.0), collection.getRangeBounds(
-                Arrays.asList("S1"), range, true));
+                Collections.singletonList("S1"), range, true));
         collection.setXPosition(TimePeriodAnchor.MIDDLE);
         assertEquals(new Range(10.0, 10.0), collection.getRangeBounds(
-                Arrays.asList("S1"), range, true));
+                Collections.singletonList("S1"), range, true));
         collection.setXPosition(TimePeriodAnchor.END);
-        assertNull(collection.getRangeBounds(Arrays.asList("S1"), range, true));
+        assertNull(collection.getRangeBounds(Collections.singletonList("S1"), range, true));
     }
 }

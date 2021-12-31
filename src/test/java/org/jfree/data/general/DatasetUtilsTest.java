@@ -36,10 +36,7 @@
 
 package org.jfree.data.general;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import org.jfree.data.KeyToGroupMap;
 import org.jfree.data.Range;
@@ -1060,8 +1057,8 @@ public class DatasetUtilsTest {
         double[][] data1 = new double[][] {x1, x1Start, x1End, y1, y1Start,
                 y1End};
         dataset.addSeries("S1", data1);
-        Range r = DatasetUtils.iterateToFindDomainBounds(dataset, 
-                Arrays.asList("S1"), true);
+        Range r = DatasetUtils.iterateToFindDomainBounds(dataset,
+                Collections.singletonList("S1"), true);
         assertEquals(0.8, r.getLowerBound(), EPSILON);
         assertEquals(3.2, r.getUpperBound(), EPSILON);
     }
@@ -1083,7 +1080,7 @@ public class DatasetUtilsTest {
                 y1End};
         dataset.addSeries("S1", data1);
         Range r = DatasetUtils.iterateToFindRangeBounds(dataset,
-                Arrays.asList("S1"), new Range(0.0, 4.0), true);
+                Collections.singletonList("S1"), new Range(0.0, 4.0), true);
         assertEquals(-5.0, r.getLowerBound(), EPSILON);
         assertEquals(6.0, r.getUpperBound(), EPSILON);
     }
