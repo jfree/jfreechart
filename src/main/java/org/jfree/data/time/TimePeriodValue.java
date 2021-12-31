@@ -37,6 +37,8 @@
 package org.jfree.data.time;
 
 import java.io.Serializable;
+import java.util.Objects;
+
 import org.jfree.chart.util.Args;
 
 /**
@@ -125,18 +127,13 @@ public class TimePeriodValue implements Cloneable, Serializable {
         if (!(obj instanceof TimePeriodValue)) {
             return false;
         }
-
         TimePeriodValue timePeriodValue = (TimePeriodValue) obj;
-
-        if (this.period != null ? !this.period.equals(timePeriodValue.period)
-                : timePeriodValue.period != null) {
+        if (!Objects.equals(this.period, timePeriodValue.period)) {
             return false;
         }
-        if (this.value != null ? !this.value.equals(timePeriodValue.value)
-                : timePeriodValue.value != null) {
+        if (!Objects.equals(this.value, timePeriodValue.value)) {
             return false;
         }
-
         return true;
     }
 
@@ -163,7 +160,7 @@ public class TimePeriodValue implements Cloneable, Serializable {
      */
     @Override
     public Object clone() {
-        Object clone = null;
+        Object clone;
         try {
             clone = super.clone();
         }
