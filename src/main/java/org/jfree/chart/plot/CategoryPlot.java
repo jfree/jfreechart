@@ -4045,7 +4045,7 @@ public class CategoryPlot extends Plot implements ValueAxisPlot, Pannable,
         for (Entry<Integer, CategoryDataset> entry : this.datasets.entrySet()) {
             Integer datasetIndex = entry.getKey();
             CategoryDataset dataset = entry.getValue();
-            List mappedAxes = this.datasetToRangeAxesMap.get(RemovdatasetIndex);
+            List mappedAxes = this.datasetToRangeAxesMap.get(datasetIndex);
             if (mappedAxes == null) {
                 if (axisIndex == 0) {
                     result.add(dataset);
