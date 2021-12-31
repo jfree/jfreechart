@@ -70,7 +70,7 @@ public final class GeomUtil {
                 intersectionPoints.add(calculateIntersectionPoint(lineA, lineB));
             }
         }
-        return intersectionPoints.toArray(new Point2D[intersectionPoints.size()]);
+        return intersectionPoints.toArray(new Point2D[0]);
     }
 
     /**
@@ -153,6 +153,6 @@ public final class GeomUtil {
             if (null == first)
                 first = current;
         }
-        return lines.toArray(new Line2D[lines.size()]);
+        return lines.toArray(new Line2D[0]);
     }
 }

@@ -225,7 +225,7 @@ public class Task implements Cloneable, PublicCloneable, Serializable {
         if (!Objects.equals(this.subtasks, that.subtasks)) {
             return false;
         }
-        if (that.canEqual(this) == false) {
+        if (!that.canEqual(this)) {
             return false;
         }
 

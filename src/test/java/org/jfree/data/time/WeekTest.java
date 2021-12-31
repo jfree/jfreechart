@@ -266,7 +266,7 @@ public class WeekTest {
         Locale saved = Locale.getDefault();
         Locale.setDefault(Locale.UK);
         try {
-            Week w = new Week(new Date(1136109830000l),
+            Week w = new Week(new Date(1136109830000L),
                     TimeZone.getTimeZone("GMT"), Locale.UK);
             assertEquals(2005, w.getYearValue());
             assertEquals(52, w.getWeek());

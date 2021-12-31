@@ -146,7 +146,7 @@ public abstract class Tick implements Serializable, Cloneable {
         if (!Objects.equals(this.rotationAnchor, that.rotationAnchor)) {
             return false;
         }
-        if (that.canEqual(this) == false) {
+        if (!that.canEqual(this)) {
             return false;
         }
         return true;

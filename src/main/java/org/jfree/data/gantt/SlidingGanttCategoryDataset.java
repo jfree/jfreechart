@@ -601,7 +601,7 @@ public class SlidingGanttCategoryDataset extends AbstractDataset
         if (!Objects.equals(this.underlying, that.underlying)) {
             return false;
         }
-        if (that.canEqual(this) == false) {
+        if (!that.canEqual(this)) {
             return false;
         }
         return super.equals(obj);

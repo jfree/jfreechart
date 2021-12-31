@@ -806,7 +806,7 @@ public class TextTitle extends Title implements Serializable, Cloneable, PublicC
         if (!Objects.equals(this.content, that.content)) {
             return false;
         }
-        if (that.canEqual(this) == false) {
+        if (!that.canEqual(this)) {
             return false;
         }
         return super.equals(obj);

@@ -1255,7 +1255,7 @@ public class DatasetUtilsTest {
         List<String> visibleSeriesKeys = new ArrayList<>();
         assertNull(DatasetUtils.iterateToFindRangeBounds(dataset,
                 visibleSeriesKeys, true));
-        List<Double> values = Arrays.asList(1.0);
+        List<Double> values = Collections.singletonList(1.0);
         dataset.add(values, "R1", "C1");
         visibleSeriesKeys.add("R1");
         assertEquals(new Range(1.0, 1.0),

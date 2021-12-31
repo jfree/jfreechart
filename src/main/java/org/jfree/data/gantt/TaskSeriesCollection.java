@@ -669,7 +669,7 @@ public class TaskSeriesCollection extends AbstractSeriesDataset
         if (!Objects.equals(this.keys, that.keys)) {
             return false;
         }
-        if (that.canEqual(this) == false) {
+        if (!that.canEqual(this)) {
             return false;
         }
         return super.equals(obj);

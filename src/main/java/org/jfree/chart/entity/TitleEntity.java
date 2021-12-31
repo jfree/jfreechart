@@ -139,7 +139,7 @@ public class TitleEntity extends ChartEntity {
         TitleEntity that = (TitleEntity) obj;
 
         // fix the "equals not symmetric" problem
-        if (that.canEqual(this) == false) {
+        if (!that.canEqual(this)) {
             return false;
         }
         if (!getArea().equals(that.getArea())) {

@@ -84,7 +84,7 @@ public class PinNeedle extends MeterNeedle implements Cloneable, Serializable {
         pointer.closePath();
 
         lenX = 4 * lenX;
-        Ellipse2D circle = new Ellipse2D.Double(midX - lenX / 2,
+        Ellipse2D circle = new Ellipse2D.Double(midX - lenX / 2.0,
                 plotArea.getMaxY() - lenX, lenX, lenX);
 
         shape = new Area(circle);

@@ -610,7 +610,7 @@ public class XYAreaRenderer extends AbstractXYItemRenderer
             Area dataAreaHotspot = new Area(hotspot);
             dataAreaHotspot.intersect(new Area(dataArea));
 
-            if (dataAreaHotspot.isEmpty() == false) {
+            if (!dataAreaHotspot.isEmpty()) {
                 addEntity(entities, dataAreaHotspot, dataset, series, item, 
                         0.0, 0.0);
             }

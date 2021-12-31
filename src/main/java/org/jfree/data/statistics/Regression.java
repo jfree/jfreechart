@@ -277,9 +277,7 @@ public abstract class Regression {
         double[][] subMatrix = calculateSubMatrix(matrix);
         for (int eq = 1; eq < equations; eq++) {
             matrix[eq][0] = 0;
-            for (int coe = 1; coe < coefficients; coe++) {
-                matrix[eq][coe] = subMatrix[eq - 1][coe - 1];
-            }
+            if (coefficients - 1 >= 0) System.arraycopy(subMatrix[eq - 1], 0, matrix[eq], 1, coefficients - 1);
         }
         for (int eq = equations - 1; eq > -1; eq--) {
             double value = matrix[eq][coefficients - 1];
@@ -349,9 +347,7 @@ public abstract class Regression {
         double[][] subMatrix = calculateSubMatrix(result);
         for (int eq = 1; eq < equations -  1; eq++) {
             result[eq][0] = 0;
-            for (int coe = 1; coe < coefficients - 1; coe++) {
-                result[eq][coe] = subMatrix[eq - 1][coe - 1];
-            }
+            if (coefficients - 1 - 1 >= 0) System.arraycopy(subMatrix[eq - 1], 0, result[eq], 1, coefficients - 1 - 1);
         }
         return result;
     }

@@ -135,7 +135,7 @@ public class ValueMarker extends Marker {
             return false;
         }
         ValueMarker that = (ValueMarker) obj;
-        if (that.canEqual(this) == false) {
+        if (!that.canEqual(this)) {
             return false;
         }
         if (Double.doubleToLongBits(this.value) !=

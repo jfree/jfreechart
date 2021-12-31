@@ -109,7 +109,7 @@ public class PaintAlpha {
         if (paint instanceof Color) {
             return darker((Color) paint);
         }
-        if (legacyAlpha == true) {
+        if (legacyAlpha) {
             /*
              * Legacy? Just return the original Paint.
              * (this corresponds EXACTLY to how Paints used to be darkened)

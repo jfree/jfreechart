@@ -102,7 +102,7 @@ public class XYAnnotationEntity extends ChartEntity
         XYAnnotationEntity that = (XYAnnotationEntity) obj;
 
         // fix the "equals not symmetric" problem
-        if (that.canEqual(this) == false) {
+        if (!that.canEqual(this)) {
             return false;
         }
         // compare fields in this class

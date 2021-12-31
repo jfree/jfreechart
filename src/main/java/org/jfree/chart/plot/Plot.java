@@ -1243,7 +1243,7 @@ public abstract class Plot implements AxisChangeListener,
         }
         Plot that = (Plot) obj;
         // fix the "equals not symmetric" problem
-        if (that.canEqual(this) == false) {
+        if (!that.canEqual(this)) {
             return false;
         }
         if (!Objects.equals(this.noDataMessage, that.noDataMessage)) {

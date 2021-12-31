@@ -87,7 +87,7 @@ public class MiddlePinNeedle extends MeterNeedle implements Cloneable,
         pointer.closePath();
 
         lenX = 4 * lenX;
-        Ellipse2D circle = new Ellipse2D.Double(midX - lenX / 2,
+        Ellipse2D circle = new Ellipse2D.Double(midX - lenX / 2.0,
                                                 midY - lenX, lenX, lenX);
 
         shape = new Area(circle);

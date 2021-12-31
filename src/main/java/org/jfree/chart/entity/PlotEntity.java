@@ -138,7 +138,7 @@ public class PlotEntity extends ChartEntity {
         PlotEntity that = (PlotEntity) obj;
 
         // fix the "equals not symmetric" problem
-        if (that.canEqual(this) == false) {
+        if (!that.canEqual(this)) {
             return false;
         }
         if (!(this.plot.equals(that.plot))) {

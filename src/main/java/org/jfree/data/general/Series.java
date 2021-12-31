@@ -263,7 +263,7 @@ public abstract class Series implements Cloneable, Serializable {
         if (!Objects.equals(this.description, that.description)) {
             return false;
         }
-        if (that.canEqual(this) == false) {
+        if (!that.canEqual(this)) {
             return false;
         }
         return true;

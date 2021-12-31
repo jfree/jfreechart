@@ -37,6 +37,7 @@
 package org.jfree.chart.renderer.category;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
@@ -192,7 +193,7 @@ public class ScatterRendererTest {
                 = new DefaultMultiValueCategoryDataset();
         assertNull(r.findRangeBounds(dataset));
 
-        List<Double> values = Arrays.asList(1.0);
+        List<Double> values = Collections.singletonList(1.0);
         dataset.add(values, "R1", "C1");
         assertEquals(new Range(1.0, 1.0), r.findRangeBounds(dataset));
 
@@ -204,7 +205,7 @@ public class ScatterRendererTest {
         dataset.add(values, "R1", "C3");
         assertEquals(new Range(-3.2, 2.2), r.findRangeBounds(dataset));
 
-        values = Arrays.asList(6.0);
+        values = Collections.singletonList(6.0);
         dataset.add(values, "R2", "C1");
         assertEquals(new Range(-3.2, 6.0), r.findRangeBounds(dataset));
 

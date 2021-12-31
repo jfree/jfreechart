@@ -199,7 +199,7 @@ public class PieSectionEntity extends ChartEntity
         PieSectionEntity that = (PieSectionEntity) obj;
 
         // fix the "equals not symmetric" problem
-        if (that.canEqual(this) == false) {
+        if (!that.canEqual(this)) {
             return false;
         }
         if (!Objects.equals(this.dataset, that.dataset)) {

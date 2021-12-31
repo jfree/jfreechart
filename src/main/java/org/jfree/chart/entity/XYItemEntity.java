@@ -151,7 +151,7 @@ public class XYItemEntity extends ChartEntity {
         XYItemEntity that = (XYItemEntity) obj;
 
         // fix the "equals not symmetric" problem
-        if (that.canEqual(this) == false) {
+        if (!that.canEqual(this)) {
             return false;
         }
         // compare fields in this class
