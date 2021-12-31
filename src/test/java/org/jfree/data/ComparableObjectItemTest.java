@@ -121,7 +121,7 @@ public class ComparableObjectItemTest {
         ComparableObjectItem item4 = new ComparableObjectItem(1, "XYZ");
         assertTrue(item2.compareTo(item1) > 0);
         assertTrue(item3.compareTo(item1) > 0);
-        assertTrue(item4.compareTo(item1) == 0);
+        assertEquals(0, item4.compareTo(item1));
         assertTrue(item1.compareTo(item2) < 0);
     }
 

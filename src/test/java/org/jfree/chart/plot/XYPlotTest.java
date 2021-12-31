@@ -387,7 +387,7 @@ public class XYPlotTest {
         plot2.setRangeMinorGridlineStroke(new BasicStroke(1.23f));
         assertTrue(plot1.equals(plot2));
 
-        List<Integer> axisIndices = Arrays.asList(new Integer[] {0, 1});
+        List<Integer> axisIndices = Arrays.asList(0, 1);
         plot1.mapDatasetToDomainAxes(0, axisIndices);
         assertFalse(plot1.equals(plot2));
         plot2.mapDatasetToDomainAxes(0, axisIndices);
@@ -513,7 +513,7 @@ public class XYPlotTest {
         XYPlot p1 = new XYPlot(null, new NumberAxis("Domain Axis"),
                 new NumberAxis("Range Axis"), new StandardXYItemRenderer());
         p1.setRangeAxis(1, new NumberAxis("Range Axis 2"));
-        List<Integer> axisIndices = Arrays.asList(new Integer[] {0, 1});
+        List<Integer> axisIndices = Arrays.asList(0, 1);
         p1.mapDatasetToDomainAxes(0, axisIndices);
         p1.mapDatasetToRangeAxes(0, axisIndices);
         p1.setRenderer(1, new XYBarRenderer());
@@ -1101,11 +1101,11 @@ public class XYPlotTest {
         plot.mapDatasetToDomainAxis(0, 1);
         assertEquals(xAxis2, plot.getDomainAxisForDataset(0));
 
-        List<Integer> axisIndices = Arrays.asList(new Integer[] {0, 1});
+        List<Integer> axisIndices = Arrays.asList(0, 1);
         plot.mapDatasetToDomainAxes(0, axisIndices);
         assertEquals(xAxis, plot.getDomainAxisForDataset(0));
 
-        axisIndices = Arrays.asList(new Integer[] {1, 2});
+        axisIndices = Arrays.asList(1, 2);
         plot.mapDatasetToDomainAxes(0, axisIndices);
         assertEquals(xAxis2, plot.getDomainAxisForDataset(0));
     }
@@ -1141,11 +1141,11 @@ public class XYPlotTest {
         plot.mapDatasetToRangeAxis(0, 1);
         assertEquals(yAxis2, plot.getRangeAxisForDataset(0));
 
-        List<Integer> axisIndices = Arrays.asList(new Integer[] {0, 1});
+        List<Integer> axisIndices = Arrays.asList(0, 1);
         plot.mapDatasetToRangeAxes(0, axisIndices);
         assertEquals(yAxis, plot.getRangeAxisForDataset(0));
 
-        axisIndices = Arrays.asList(new Integer[] {1, 2});
+        axisIndices = Arrays.asList(1, 2);
         plot.mapDatasetToRangeAxes(0, axisIndices);
         assertEquals(yAxis2, plot.getRangeAxisForDataset(0));
     }

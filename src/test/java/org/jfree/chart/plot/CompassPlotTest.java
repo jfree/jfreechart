@@ -36,10 +36,6 @@
 
 package org.jfree.chart.plot;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
@@ -48,6 +44,8 @@ import org.jfree.chart.TestUtils;
 
 import org.jfree.data.general.DefaultValueDataset;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link CompassPlot} class.
@@ -61,49 +59,49 @@ public class CompassPlotTest {
     public void testEquals() {
         CompassPlot plot1 = new CompassPlot();
         CompassPlot plot2 = new CompassPlot();
-        assertTrue(plot1.equals(plot2));
+        assertEquals(plot1, plot2);
 
         // labelType...
         plot1.setLabelType(CompassPlot.VALUE_LABELS);
-        assertFalse(plot1.equals(plot2));
+        assertNotEquals(plot1, plot2);
         plot2.setLabelType(CompassPlot.VALUE_LABELS);
-        assertTrue(plot1.equals(plot2));
+        assertEquals(plot1, plot2);
 
         // labelFont
         plot1.setLabelFont(new Font("Serif", Font.PLAIN, 10));
-        assertFalse(plot1.equals(plot2));
+        assertNotEquals(plot1, plot2);
         plot2.setLabelFont(new Font("Serif", Font.PLAIN, 10));
-        assertTrue(plot1.equals(plot2));
+        assertEquals(plot1, plot2);
 
         // drawBorder
         plot1.setDrawBorder(true);
-        assertFalse(plot1.equals(plot2));
+        assertNotEquals(plot1, plot2);
         plot2.setDrawBorder(true);
-        assertTrue(plot1.equals(plot2));
+        assertEquals(plot1, plot2);
 
         // rosePaint
         plot1.setRosePaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
                 3.0f, 4.0f, Color.YELLOW));
-        assertFalse(plot1.equals(plot2));
+        assertNotEquals(plot1, plot2);
         plot2.setRosePaint(new GradientPaint(1.0f, 2.0f, Color.BLUE,
                 3.0f, 4.0f, Color.YELLOW));
-        assertTrue(plot1.equals(plot2));
+        assertEquals(plot1, plot2);
 
         // roseCenterPaint
         plot1.setRoseCenterPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.YELLOW));
-        assertFalse(plot1.equals(plot2));
+        assertNotEquals(plot1, plot2);
         plot2.setRoseCenterPaint(new GradientPaint(1.0f, 2.0f, Color.RED,
                 3.0f, 4.0f, Color.YELLOW));
-        assertTrue(plot1.equals(plot2));
+        assertEquals(plot1, plot2);
 
         // roseHighlightPaint
         plot1.setRoseHighlightPaint(new GradientPaint(1.0f, 2.0f, Color.GREEN,
                 3.0f, 4.0f, Color.YELLOW));
-        assertFalse(plot1.equals(plot2));
+        assertNotEquals(plot1, plot2);
         plot2.setRoseHighlightPaint(new GradientPaint(1.0f, 2.0f, Color.GREEN,
                 3.0f, 4.0f, Color.YELLOW));
-        assertTrue(plot1.equals(plot2));
+        assertEquals(plot1, plot2);
     }
 
     /**
@@ -129,9 +127,9 @@ public class CompassPlotTest {
     public void testCloning() throws CloneNotSupportedException {
         CompassPlot p1 = new CompassPlot(new DefaultValueDataset(15.0));
         CompassPlot p2 = (CompassPlot) p1.clone();
-        assertTrue(p1 != p2);
-        assertTrue(p1.getClass() == p2.getClass());
-        assertTrue(p1.equals(p2));
+        assertNotSame(p1, p2);
+        assertSame(p1.getClass(), p2.getClass());
+        assertEquals(p1, p2);
     }
 
 }

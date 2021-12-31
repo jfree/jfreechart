@@ -36,9 +36,6 @@
 
 package org.jfree.chart.plot;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
@@ -58,6 +55,8 @@ import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link CombinedRangeXYPlot} class.
@@ -84,8 +83,8 @@ public class CombinedRangeXYPlotTest implements ChartChangeListener {
     public void testEquals() {
         CombinedRangeXYPlot plot1 = createPlot();
         CombinedRangeXYPlot plot2 = createPlot();
-        assertTrue(plot1.equals(plot2));
-        assertTrue(plot2.equals(plot1));
+        assertEquals(plot1, plot2);
+        assertEquals(plot2, plot1);
     }
 
     /**
@@ -101,7 +100,7 @@ public class CombinedRangeXYPlotTest implements ChartChangeListener {
         // remove plot2, but plot1 is removed instead
         plot.remove(plot2);
         List plots = plot.getSubplots();
-        assertTrue(plots.get(0) == plot1);
+        assertSame(plots.get(0), plot1);
     }
 
     /**
@@ -111,9 +110,9 @@ public class CombinedRangeXYPlotTest implements ChartChangeListener {
     public void testCloning() throws CloneNotSupportedException {
         CombinedRangeXYPlot plot1 = createPlot();
         CombinedRangeXYPlot plot2 = (CombinedRangeXYPlot) plot1.clone();
-        assertTrue(plot1 != plot2);
-        assertTrue(plot1.getClass() == plot2.getClass());
-        assertTrue(plot1.equals(plot2));
+        assertNotSame(plot1, plot2);
+        assertSame(plot1.getClass(), plot2.getClass());
+        assertEquals(plot1, plot2);
     }
 
     /**

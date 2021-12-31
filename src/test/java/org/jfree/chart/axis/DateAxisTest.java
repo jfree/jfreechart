@@ -36,10 +36,6 @@
 
 package org.jfree.chart.axis;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.junit.jupiter.api.Test;
 
 import java.awt.Graphics2D;
@@ -65,6 +61,8 @@ import org.jfree.data.time.Minute;
 import org.jfree.data.time.Month;
 import org.jfree.data.time.Second;
 import org.jfree.data.time.Year;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link DateAxis} class.
@@ -96,37 +94,37 @@ public class DateAxisTest {
 
         DateAxis a1 = new DateAxis("Test");
         DateAxis a2 = new DateAxis("Test");
-        assertTrue(a1.equals(a2));
-        assertFalse(a1.equals(null));
-        assertFalse(a1.equals("Some non-DateAxis object"));
+        assertEquals(a1, a2);
+        assertNotEquals(null, a1);
+        assertNotEquals("Some non-DateAxis object", a1);
 
         a1 = new DateAxis("Test", TimeZone.getTimeZone("PST"), Locale.US);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2 = new DateAxis("Test", TimeZone.getTimeZone("PST"), Locale.US);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
         
         a1 = new DateAxis("Test", TimeZone.getTimeZone("PST"), Locale.FRANCE);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2 = new DateAxis("Test", TimeZone.getTimeZone("PST"), Locale.FRANCE);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         // tickUnit
         a1.setTickUnit(new DateTickUnit(DateTickUnitType.DAY, 7));
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setTickUnit(new DateTickUnit(DateTickUnitType.DAY, 7));
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         // dateFormatOverride
         a1.setDateFormatOverride(new SimpleDateFormat("yyyy"));
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setDateFormatOverride(new SimpleDateFormat("yyyy"));
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         // tickMarkPosition
         a1.setTickMarkPosition(DateTickMarkPosition.END);
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setTickMarkPosition(DateTickMarkPosition.END);
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
     }
 
@@ -138,13 +136,13 @@ public class DateAxisTest {
     public void test1472942() {
         DateAxis a1 = new DateAxis("Test");
         DateAxis a2 = new DateAxis("Test");
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
 
         // range
         a1.setRange(new Date(1L), new Date(2L));
-        assertFalse(a1.equals(a2));
+        assertNotEquals(a1, a2);
         a2.setRange(new Date(1L), new Date(2L));
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
     }
 
     /**
@@ -154,7 +152,7 @@ public class DateAxisTest {
     public void testHashCode() {
         DateAxis a1 = new DateAxis("Test");
         DateAxis a2 = new DateAxis("Test");
-        assertTrue(a1.equals(a2));
+        assertEquals(a1, a2);
         int h1 = a1.hashCode();
         int h2 = a2.hashCode();
         assertEquals(h1, h2);
@@ -167,9 +165,9 @@ public class DateAxisTest {
     public void testCloning() throws CloneNotSupportedException {
         DateAxis a1 = new DateAxis("Test");
         DateAxis a2 = (DateAxis) a1.clone();
-        assertTrue(a1 != a2);
-        assertTrue(a1.getClass() == a2.getClass());
-        assertTrue(a1.equals(a2));
+        assertNotSame(a1, a2);
+        assertSame(a1.getClass(), a2.getClass());
+        assertEquals(a1, a2);
     }
 
     /**
