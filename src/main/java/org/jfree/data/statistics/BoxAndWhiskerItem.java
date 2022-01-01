@@ -2,7 +2,7 @@
  * JFreeChart : a free chart library for the Java(tm) platform
  * ===========================================================
  *
- * (C) Copyright 2000-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2000-2022, by David Gilbert and Contributors.
  *
  * Project Info:  http://www.jfree.org/jfreechart/index.html
  *
@@ -27,7 +27,7 @@
  * ----------------------
  * BoxAndWhiskerItem.java
  * ----------------------
- * (C) Copyright 2003-2021, by David Gilbert and Contributors.
+ * (C) Copyright 2003-2022, by David Gilbert and Contributors.
  *
  * Original Author:  David Gilbert;
  * Contributor(s):   -;
@@ -75,7 +75,7 @@ public class BoxAndWhiskerItem implements Serializable {
     private final Number maxOutlier;
 
     /** The outliers. */
-    private final List outliers;
+    private final List<Number> outliers;
 
     /**
      * Creates a new box-and-whisker item.
@@ -94,7 +94,7 @@ public class BoxAndWhiskerItem implements Serializable {
      */
     public BoxAndWhiskerItem(Number mean, Number median, Number q1, Number q3,
             Number minRegularValue, Number maxRegularValue, Number minOutlier,
-            Number maxOutlier, List outliers) {
+            Number maxOutlier, List<Number> outliers) {
 
         this.mean = mean;
         this.median = median;
@@ -123,7 +123,7 @@ public class BoxAndWhiskerItem implements Serializable {
      */
     public BoxAndWhiskerItem(double mean, double median, double q1, double q3,
             double minRegularValue, double maxRegularValue, double minOutlier,
-            double maxOutlier, List outliers) {
+            double maxOutlier, List<Number> outliers) {
 
         // pass values to other constructor
         this(Double.valueOf(mean), Double.valueOf(median), Double.valueOf(q1),
@@ -210,7 +210,7 @@ public class BoxAndWhiskerItem implements Serializable {
      *
      * @return A list of outliers (possibly {@code null}).
      */
-    public List getOutliers() {
+    public List<Number> getOutliers() {
         if (this.outliers == null) {
             return null;
         }
