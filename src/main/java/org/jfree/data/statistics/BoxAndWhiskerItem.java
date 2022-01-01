@@ -75,7 +75,7 @@ public class BoxAndWhiskerItem implements Serializable {
     private final Number maxOutlier;
 
     /** The outliers. */
-    private final List<Number> outliers;
+    private final List<? extends Number> outliers;
 
     /**
      * Creates a new box-and-whisker item.
@@ -94,7 +94,7 @@ public class BoxAndWhiskerItem implements Serializable {
      */
     public BoxAndWhiskerItem(Number mean, Number median, Number q1, Number q3,
             Number minRegularValue, Number maxRegularValue, Number minOutlier,
-            Number maxOutlier, List<Number> outliers) {
+            Number maxOutlier, List<? extends Number> outliers) {
 
         this.mean = mean;
         this.median = median;
@@ -123,7 +123,7 @@ public class BoxAndWhiskerItem implements Serializable {
      */
     public BoxAndWhiskerItem(double mean, double median, double q1, double q3,
             double minRegularValue, double maxRegularValue, double minOutlier,
-            double maxOutlier, List<Number> outliers) {
+            double maxOutlier, List<? extends Number> outliers) {
 
         // pass values to other constructor
         this(Double.valueOf(mean), Double.valueOf(median), Double.valueOf(q1),
