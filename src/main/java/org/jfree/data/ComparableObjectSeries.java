@@ -36,17 +36,17 @@
 
 package org.jfree.data;
 
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.internal.CloneUtils;
+import org.jfree.data.general.Series;
+import org.jfree.data.general.SeriesChangeEvent;
+import org.jfree.data.general.SeriesException;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-
-import org.jfree.chart.internal.Args;
-
-import org.jfree.data.general.Series;
-import org.jfree.data.general.SeriesChangeEvent;
-import org.jfree.data.general.SeriesException;
 
 /**
  * A (possibly ordered) list of (Comparable, Object) data items.
@@ -438,6 +438,21 @@ public class ComparableObjectSeries<K extends Comparable<K>> extends Series<K>
         result = 29 * result + (this.autoSort ? 1 : 0);
         result = 29 * result + (this.allowDuplicateXValues ? 1 : 0);
         return result;
+    }
+
+    /**
+     * Returns a clone of the series.
+     *
+     * @return A clone of the series.
+     *
+     * @throws CloneNotSupportedException if there is a cloning problem.
+     */
+    @Override
+    @SuppressWarnings("unchecked")
+    public Object clone() throws CloneNotSupportedException {
+        ComparableObjectSeries<K> clone = (ComparableObjectSeries<K>) super.clone();
+        clone.data = CloneUtils.cloneList(this.data);
+        return clone;
     }
 
 }

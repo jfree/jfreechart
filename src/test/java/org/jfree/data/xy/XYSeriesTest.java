@@ -64,11 +64,6 @@ public class XYSeriesTest {
         assertTrue(s1.equals(s2));
         assertTrue(s2.equals(s1));
 
-        s1.setKey("Series X");
-        assertFalse(s1.equals(s2));
-        s2.setKey("Series X");
-        assertTrue(s1.equals(s2));
-
         s1.add(2.0, 2.2);
         assertFalse(s1.equals(s2));
         s2.add(2.0, 2.2);
@@ -767,37 +762,4 @@ public class XYSeriesTest {
         assertEquals(2.0, s1.getMaxY(), EPSILON);
     }
 
-    @Test
-    public void testSetKey() {
-        XYSeries<String> s1 = new XYSeries<>("S");
-        s1.setKey("S1");
-        assertEquals("S1", s1.getKey());
-        
-        XYSeriesCollection<String> c = new XYSeriesCollection<>();
-        c.addSeries(s1);
-        XYSeries<String> s2 = new XYSeries<>("S2");
-        c.addSeries(s2);
-        
-        // now we should be allowed to change s1's key to anything but "S2"
-        s1.setKey("OK");
-        assertEquals("OK", s1.getKey());
-        
-        try {
-            s1.setKey("S2");
-            fail("Expect an exception here.");
-        } catch (IllegalArgumentException e) {
-            // OK
-        }
-        
-        // after s1 is removed from the collection, we should be able to set
-        // the key to anything we want...
-        c.removeSeries(s1);
-        s1.setKey("S2");
-        
-        // check that removing by index also works
-        s1.setKey("S1");
-        c.addSeries(s1);
-        c.removeSeries(1);
-        s1.setKey("S2");
-    }
 }

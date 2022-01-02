@@ -123,7 +123,7 @@ public class XYSeriesCollectionTest {
         assertEquals(c1, c2);
 
         // check independence
-        s1.setDescription("XYZ");
+        c2.setIntervalWidth(99.9);
         assertFalse(c1.equals(c2));
     }
 
@@ -450,27 +450,6 @@ public class XYSeriesCollectionTest {
         assertEquals(5.0, dataset.getRangeUpperBound(false), EPSILON);
         assertEquals(5.0, dataset.getRangeUpperBound(true), EPSILON);
     }
-    
-    /**
-     * A check that the dataset prevents renaming a series to the name of an 
-     * existing series in the dataset.
-     */
-    @Test
-    public void testRenameSeries() {
-        XYSeries<String> s1 = new XYSeries<>("S1");
-        XYSeries<String> s2 = new XYSeries<>("S2");
-        XYSeriesCollection<String> dataset = new XYSeriesCollection<>();
-        dataset.addSeries(s1);
-        dataset.addSeries(s2);
-
-        try {
-            s2.setKey("S1");
-            fail("Should have thrown IllegalArgumentException on negative key");
-        }
-        catch (IllegalArgumentException e) {
-           assertEquals("Duplicate key2", e.getMessage());
-        }
-    }
 
     /**
      * A test to cover bug 3445507.  The issue does not affect
@@ -494,32 +473,5 @@ public class XYSeriesCollectionTest {
         assertEquals(5.0, r.getLowerBound(), EPSILON);
         assertEquals(6.0, r.getUpperBound(), EPSILON);
     }
- 
-    /**
-     * Test that a series belonging to a collection can be renamed (in fact, 
-     * because of a bug this was not possible in JFreeChart 1.0.14).
-     */
-    @Test
-    public void testSeriesRename() {
-        // first check that a valid renaming works
-        XYSeries<String> series1 = new XYSeries<>("A");
-        XYSeries<String> series2 = new XYSeries<>("B");
-        XYSeriesCollection<String> collection = new XYSeriesCollection<>();
-        collection.addSeries(series1);
-        collection.addSeries(series2);
-        series1.setKey("C");
-        assertEquals("C", collection.getSeries(0).getKey());
-        
-        // next, check that setting a duplicate key fails
-        try {
-            series2.setKey("C");
-            fail("Expected an IllegalArgumentException.");
-        }
-        catch (IllegalArgumentException e) {
-            // expected
-        }
-        assertEquals("B", series2.getKey());  // the series name should not 
-        // change because "C" is already the key for the other series in the
-        // collection
-    }
+
 }

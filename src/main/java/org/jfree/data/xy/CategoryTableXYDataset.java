@@ -86,7 +86,7 @@ public class CategoryTableXYDataset extends AbstractIntervalXYDataset
      * @param seriesName  the name of the series to add the data item.
      */
     public void add(double x, double y, String seriesName) {
-        add(Double.valueOf(x), Double.valueOf(y), seriesName, true);
+        add(x, y, seriesName, true);
     }
 
     /**

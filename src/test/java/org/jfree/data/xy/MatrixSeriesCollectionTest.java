@@ -90,7 +90,7 @@ public class MatrixSeriesCollectionTest {
         assertTrue(c1.equals(c2));
 
         // check independence
-        s1.setDescription("XYZ");
+        c2.removeAllSeries();
         assertFalse(c1.equals(c2));
     }
 

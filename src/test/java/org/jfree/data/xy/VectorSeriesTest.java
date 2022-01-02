@@ -36,18 +36,14 @@
 
 package org.jfree.data.xy;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.internal.CloneUtils;
 
 import org.jfree.data.general.SeriesChangeEvent;
 import org.jfree.data.general.SeriesChangeListener;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link VectorSeries} class.
@@ -125,6 +121,10 @@ public class VectorSeriesTest implements SeriesChangeListener {
         assertTrue(s1 != s2);
         assertTrue(s1.getClass() == s2.getClass());
         assertTrue(s1.equals(s2));
+
+        // check independence
+        s1.add(4.0, 5.0, 6.0, 7.0);
+        assertNotEquals(s1, s2);
     }
 
     /**

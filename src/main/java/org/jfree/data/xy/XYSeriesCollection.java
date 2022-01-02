@@ -93,7 +93,6 @@ public class XYSeriesCollection<S extends Comparable<S>>
         if (series != null) {
             this.data.add(series);
             series.addChangeListener(this);
-            series.addVetoableChangeListener(this);
         }
     }
 
@@ -132,7 +131,6 @@ public class XYSeriesCollection<S extends Comparable<S>>
         }
         this.data.add(series);
         series.addChangeListener(this);
-        series.addVetoableChangeListener(this);
         fireDatasetChanged();
     }
 
@@ -160,7 +158,6 @@ public class XYSeriesCollection<S extends Comparable<S>>
         Args.nullNotPermitted(series, "series");
         if (this.data.contains(series)) {
             series.removeChangeListener(this);
-            series.removeVetoableChangeListener(this);
             this.data.remove(series);
             fireDatasetChanged();
         }
@@ -173,10 +170,8 @@ public class XYSeriesCollection<S extends Comparable<S>>
     public void removeAllSeries() {
         // Unregister the collection as a change listener to each series in
         // the collection.
-        for (int i = 0; i < this.data.size(); i++) {
-          XYSeries<S> series = this.data.get(i);
-          series.removeChangeListener(this);
-          series.removeVetoableChangeListener(this);
+        for (XYSeries<S> series : this.data) {
+            series.removeChangeListener(this);
         }
 
         // Remove all the series from the collection and notify listeners.
@@ -251,7 +246,7 @@ public class XYSeriesCollection<S extends Comparable<S>>
      */
     public XYSeries<S> getSeries(S key) {
         Args.nullNotPermitted(key, "key");
-        for (XYSeries series : this.data) {
+        for (XYSeries<S> series : this.data) {
             if (key.equals(series.getKey())) {
                 return series;
             }
@@ -290,7 +285,7 @@ public class XYSeriesCollection<S extends Comparable<S>>
         Args.nullNotPermitted(key, "key");
         int seriesCount = getSeriesCount();
         for (int i = 0; i < seriesCount; i++) {
-            XYSeries series = (XYSeries) this.data.get(i);
+            XYSeries<S> series = this.data.get(i);
             if (key.equals(series.getKey())) {
                 return i;
             }
@@ -324,7 +319,7 @@ public class XYSeriesCollection<S extends Comparable<S>>
      */
     @Override
     public Number getX(int series, int item) {
-        XYSeries s = this.data.get(series);
+        XYSeries<S> s = this.data.get(series);
         return s.getX(item);
     }
 
@@ -364,7 +359,7 @@ public class XYSeriesCollection<S extends Comparable<S>>
      */
     @Override
     public Number getY(int series, int index) {
-        XYSeries s = this.data.get(series);
+        XYSeries<S> s = this.data.get(series);
         return s.getY(index);
     }
 
@@ -461,7 +456,7 @@ public class XYSeriesCollection<S extends Comparable<S>>
         double result = Double.NaN;
         int seriesCount = getSeriesCount();
         for (int s = 0; s < seriesCount; s++) {
-            XYSeries series = getSeries(s);
+            XYSeries<S> series = getSeries(s);
             double lowX = series.getMinX();
             if (Double.isNaN(result)) {
                 result = lowX;
@@ -492,7 +487,7 @@ public class XYSeriesCollection<S extends Comparable<S>>
             double result = Double.NaN;
             int seriesCount = getSeriesCount();
             for (int s = 0; s < seriesCount; s++) {
-                XYSeries series = getSeries(s);
+                XYSeries<S> series = getSeries(s);
                 double hiX = series.getMaxX();
                 if (Double.isNaN(result)) {
                     result = hiX;
@@ -526,7 +521,7 @@ public class XYSeriesCollection<S extends Comparable<S>>
             double upper = Double.NEGATIVE_INFINITY;
             int seriesCount = getSeriesCount();
             for (int s = 0; s < seriesCount; s++) {
-                XYSeries series = getSeries(s);
+                XYSeries<S> series = getSeries(s);
                 double minX = series.getMinX();
                 if (!Double.isNaN(minX)) {
                     lower = Math.min(lower, minX);
@@ -624,7 +619,7 @@ public class XYSeriesCollection<S extends Comparable<S>>
         double upper = Double.NEGATIVE_INFINITY;
         int seriesCount = getSeriesCount();
         for (int s = 0; s < seriesCount; s++) {
-            XYSeries series = getSeries(s);
+            XYSeries<S> series = getSeries(s);
             double minY = series.getMinY();
             if (!Double.isNaN(minY)) {
                 lower = Math.min(lower, minY);
@@ -655,7 +650,7 @@ public class XYSeriesCollection<S extends Comparable<S>>
         double result = Double.NaN;
         int seriesCount = getSeriesCount();
         for (int s = 0; s < seriesCount; s++) {
-            XYSeries series = getSeries(s);
+            XYSeries<S> series = getSeries(s);
             double lowY = series.getMinY();
             if (Double.isNaN(result)) {
                 result = lowY;
@@ -682,7 +677,7 @@ public class XYSeriesCollection<S extends Comparable<S>>
         double result = Double.NaN;
         int seriesCount = getSeriesCount();
         for (int s = 0; s < seriesCount; s++) {
-            XYSeries series = getSeries(s);
+            XYSeries<S> series = getSeries(s);
             double hiY = series.getMaxY();
             if (Double.isNaN(result)) {
                 result = hiY;

@@ -60,18 +60,6 @@ public class TimePeriodValues<S extends Comparable<S>> extends Series<S>
 
     /** For serialization. */
     static final long serialVersionUID = -2210593619794989709L;
-    
-    /** Default value for the domain description. */
-    protected static final String DEFAULT_DOMAIN_DESCRIPTION = "Time";
-
-    /** Default value for the range description. */
-    protected static final String DEFAULT_RANGE_DESCRIPTION = "Value";
-
-    /** A description of the domain. */
-    private String domain;
-
-    /** A description of the range. */
-    private String range;
 
     /** The list of data pairs in the series. */
     private List<TimePeriodValue> data;
@@ -100,77 +88,8 @@ public class TimePeriodValues<S extends Comparable<S>> extends Series<S>
      * @param name  the name of the series ({@code null} not permitted).
      */
     public TimePeriodValues(S name) {
-        this(name, DEFAULT_DOMAIN_DESCRIPTION, DEFAULT_RANGE_DESCRIPTION);
-    }
-
-    /**
-     * Creates a new time series that contains no data.
-     * <P>
-     * Descriptions can be specified for the domain and range.  One situation
-     * where this is helpful is when generating a chart for the time series -
-     * axis labels can be taken from the domain and range description.
-     *
-     * @param name  the name of the series ({@code null} not permitted).
-     * @param domain  the domain description.
-     * @param range  the range description.
-     */
-    public TimePeriodValues(S name, String domain, String range) {
         super(name);
-        this.domain = domain;
-        this.range = range;
         this.data = new ArrayList<>();
-    }
-
-    /**
-     * Returns the domain description.
-     *
-     * @return The domain description (possibly {@code null}).
-     * 
-     * @see #getRangeDescription()
-     * @see #setDomainDescription(String)
-     */
-    public String getDomainDescription() {
-        return this.domain;
-    }
-
-    /**
-     * Sets the domain description and fires a property change event (with the
-     * property name {@code Domain} if the description changes).
-     *
-     * @param description  the new description ({@code null} permitted).
-     * 
-     * @see #getDomainDescription()
-     */
-    public void setDomainDescription(String description) {
-        String old = this.domain;
-        this.domain = description;
-        firePropertyChange("Domain", old, description);
-    }
-
-    /**
-     * Returns the range description.
-     *
-     * @return The range description (possibly {@code null}).
-     * 
-     * @see #getDomainDescription()
-     * @see #setRangeDescription(String)
-     */
-    public String getRangeDescription() {
-        return this.range;
-    }
-
-    /**
-     * Sets the range description and fires a property change event with the
-     * name {@code Range}.
-     *
-     * @param description  the new description ({@code null} permitted).
-     * 
-     * @see #getRangeDescription()
-     */
-    public void setRangeDescription(String description) {
-        String old = this.range;
-        this.range = description;
-        firePropertyChange("Range", old, description);
     }
 
     /**
@@ -411,12 +330,6 @@ public class TimePeriodValues<S extends Comparable<S>> extends Series<S>
             return false;
         }
         TimePeriodValues that = (TimePeriodValues) obj;
-        if (!Objects.equals(this.getDomainDescription(), that.getDomainDescription())) {
-            return false;
-        }
-        if (!Objects.equals(this.getRangeDescription(), that.getRangeDescription())) {
-            return false;
-        }
         int count = getItemCount();
         if (count != that.getItemCount()) {
             return false;
@@ -437,9 +350,7 @@ public class TimePeriodValues<S extends Comparable<S>> extends Series<S>
     @Override
     public int hashCode() {
         int result;
-        result = (this.domain != null ? this.domain.hashCode() : 0);
-        result = 29 * result + (this.range != null ? this.range.hashCode() : 0);
-        result = 29 * result + this.data.hashCode();
+        result = this.data.hashCode();
         result = 29 * result + this.minStartIndex;
         result = 29 * result + this.maxStartIndex;
         result = 29 * result + this.minMiddleIndex;

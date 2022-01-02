@@ -36,31 +36,20 @@
 
 package org.jfree.data.time;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyVetoException;
-import java.beans.VetoableChangeListener;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
-import java.util.TimeZone;
-
-import org.jfree.chart.internal.CloneUtils;
 import org.jfree.chart.internal.Args;
-
+import org.jfree.chart.internal.CloneUtils;
 import org.jfree.data.DomainInfo;
 import org.jfree.data.DomainOrder;
 import org.jfree.data.Range;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.Series;
-import org.jfree.data.xy.AbstractIntervalXYDataset;
-import org.jfree.data.xy.IntervalXYDataset;
-import org.jfree.data.xy.XYDataset;
-import org.jfree.data.xy.XYDomainInfo;
-import org.jfree.data.xy.XYRangeInfo;
+import org.jfree.data.xy.*;
+
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyVetoException;
+import java.beans.VetoableChangeListener;
+import java.io.Serializable;
+import java.util.*;
 
 /**
  * A collection of time series objects.  This class implements the
@@ -283,7 +272,6 @@ public class TimeSeriesCollection<S extends Comparable<S>>
         Args.nullNotPermitted(series, "series");
         this.data.add(series);
         series.addChangeListener(this);
-        series.addVetoableChangeListener(this);
         fireDatasetChanged();
     }
 
@@ -297,7 +285,6 @@ public class TimeSeriesCollection<S extends Comparable<S>>
         Args.nullNotPermitted(series, "series");
         this.data.remove(series);
         series.removeChangeListener(this);
-        series.removeVetoableChangeListener(this);
         fireDatasetChanged();
     }
 
@@ -323,7 +310,6 @@ public class TimeSeriesCollection<S extends Comparable<S>>
         // collection
         for (TimeSeries<S> series : this.data) {
             series.removeChangeListener(this);
-            series.removeVetoableChangeListener(this);
         }
 
         // remove all the series from the collection and notify listeners.

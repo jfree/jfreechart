@@ -103,7 +103,7 @@ public class OHLCSeriesCollectionTest implements DatasetChangeListener {
         assertTrue(c1.equals(c2));
 
         // check independence
-        s1.setDescription("XYZ");
+        c1.setXPosition(TimePeriodAnchor.END);
         assertFalse(c1.equals(c2));
     }
 

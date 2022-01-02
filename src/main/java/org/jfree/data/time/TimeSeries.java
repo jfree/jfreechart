@@ -72,18 +72,6 @@ public class TimeSeries<S extends Comparable<S>> extends Series<S>
     /** For serialization. */
     private static final long serialVersionUID = -5032960206869675528L;
 
-    /** Default value for the domain description. */
-    protected static final String DEFAULT_DOMAIN_DESCRIPTION = "Time";
-
-    /** Default value for the range description. */
-    protected static final String DEFAULT_RANGE_DESCRIPTION = "Value";
-
-    /** A description of the domain. */
-    private String domain;
-
-    /** A description of the range. */
-    private String range;
-
     /** The type of period for the data. */
     protected Class timePeriodClass;
 
@@ -121,83 +109,13 @@ public class TimeSeries<S extends Comparable<S>> extends Series<S>
      * @param name  the series name ({@code null} not permitted).
      */
     public TimeSeries(S name) {
-        this(name, DEFAULT_DOMAIN_DESCRIPTION, DEFAULT_RANGE_DESCRIPTION);
-    }
-
-    /**
-     * Creates a new time series that contains no data.
-     * <P>
-     * Descriptions can be specified for the domain and range.  One situation
-     * where this is helpful is when generating a chart for the time series -
-     * axis labels can be taken from the domain and range description.
-     *
-     * @param name  the name of the series ({@code null} not permitted).
-     * @param domain  the domain description ({@code null} permitted).
-     * @param range  the range description ({@code null} permitted).
-     *
-     * @since 1.0.13
-     */
-    public TimeSeries(S name, String domain, String range) {
         super(name);
-        this.domain = domain;
-        this.range = range;
         this.timePeriodClass = null;
         this.data = new ArrayList<>();
         this.maximumItemCount = Integer.MAX_VALUE;
         this.maximumItemAge = Long.MAX_VALUE;
         this.minY = Double.NaN;
         this.maxY = Double.NaN;
-    }
-
-    /**
-     * Returns the domain description.
-     *
-     * @return The domain description (possibly {@code null}).
-     *
-     * @see #setDomainDescription(String)
-     */
-    public String getDomainDescription() {
-        return this.domain;
-    }
-
-    /**
-     * Sets the domain description and sends a {@code PropertyChangeEvent}
-     * (with the property name {@code Domain}) to all registered
-     * property change listeners.
-     *
-     * @param description  the description ({@code null} permitted).
-     *
-     * @see #getDomainDescription()
-     */
-    public void setDomainDescription(String description) {
-        String old = this.domain;
-        this.domain = description;
-        firePropertyChange("Domain", old, description);
-    }
-
-    /**
-     * Returns the range description.
-     *
-     * @return The range description (possibly {@code null}).
-     *
-     * @see #setRangeDescription(String)
-     */
-    public String getRangeDescription() {
-        return this.range;
-    }
-
-    /**
-     * Sets the range description and sends a {@code PropertyChangeEvent}
-     * (with the property name {@code Range}) to all registered listeners.
-     *
-     * @param description  the description ({@code null} permitted).
-     *
-     * @see #getRangeDescription()
-     */
-    public void setRangeDescription(String description) {
-        String old = this.range;
-        this.range = description;
-        firePropertyChange("Range", old, description);
     }
 
     /**
@@ -365,8 +283,7 @@ public class TimeSeries<S extends Comparable<S>> extends Series<S>
         // iterating over all the data
         double lowY = Double.POSITIVE_INFINITY;
         double highY = Double.NEGATIVE_INFINITY;
-        for (int i = 0; i < this.data.size(); i++) {
-            TimeSeriesDataItem item = this.data.get(i);
+        for (TimeSeriesDataItem item : this.data) {
             long millis = item.getPeriod().getMillisecond(xAnchor, calendar);
             if (xRange.contains(millis)) {
                 Number n = item.getValue();
@@ -443,7 +360,7 @@ public class TimeSeries<S extends Comparable<S>> extends Series<S>
      * @return The data item.
      */
     public TimeSeriesDataItem getDataItem(int index) {
-        TimeSeriesDataItem item = (TimeSeriesDataItem) this.data.get(index);
+        TimeSeriesDataItem item = this.data.get(index);
         return (TimeSeriesDataItem) item.clone();
     }
 
@@ -481,7 +398,7 @@ public class TimeSeries<S extends Comparable<S>> extends Series<S>
      * @since 1.0.14
      */
     TimeSeriesDataItem getRawDataItem(int index) {
-        return (TimeSeriesDataItem) this.data.get(index);
+        return this.data.get(index);
     }
 
     /**
@@ -500,7 +417,7 @@ public class TimeSeries<S extends Comparable<S>> extends Series<S>
     TimeSeriesDataItem getRawDataItem(RegularTimePeriod period) {
         int index = getIndex(period);
         if (index >= 0) {
-            return (TimeSeriesDataItem) this.data.get(index);
+            return this.data.get(index);
         }
         return null;
     }
@@ -533,7 +450,7 @@ public class TimeSeries<S extends Comparable<S>> extends Series<S>
      * @return A collection of all the time periods.
      */
     public Collection getTimePeriods() {
-        Collection result = new java.util.ArrayList();
+        Collection result = new java.util.ArrayList<>();
         for (int i = 0; i < getItemCount(); i++) {
             result.add(getTimePeriod(i));
         }
@@ -625,8 +542,7 @@ public class TimeSeries<S extends Comparable<S>> extends Series<S>
         Class c = item.getPeriod().getClass();
         if (this.timePeriodClass == null) {
             this.timePeriodClass = c;
-        }
-        else if (!this.timePeriodClass.equals(c)) {
+        } else if (!this.timePeriodClass.equals(c)) {
             StringBuilder b = new StringBuilder();
             b.append("You are trying to add data where the time period class ");
             b.append("is ");
@@ -672,7 +588,7 @@ public class TimeSeries<S extends Comparable<S>> extends Series<S>
             updateBoundsForAddedItem(item);
             // check if this addition will exceed the maximum item count...
             if (getItemCount() > this.maximumItemCount) {
-                TimeSeriesDataItem d = (TimeSeriesDataItem) this.data.remove(0);
+                TimeSeriesDataItem d = this.data.remove(0);
                 updateBoundsForRemovedItem(d);
             }
 
@@ -776,7 +692,7 @@ public class TimeSeries<S extends Comparable<S>> extends Series<S>
      * @param value  the new value ({@code null} permitted).
      */
     public void update(int index, Number value) {
-        TimeSeriesDataItem item = (TimeSeriesDataItem) this.data.get(index);
+        TimeSeriesDataItem item = this.data.get(index);
         boolean iterate = false;
         Number oldYN = item.getValue();
         if (oldYN != null) {
@@ -878,8 +794,7 @@ public class TimeSeries<S extends Comparable<S>> extends Series<S>
         TimeSeriesDataItem overwritten = null;
         int index = Collections.binarySearch(this.data, item);
         if (index >= 0) {
-            TimeSeriesDataItem existing
-                    = (TimeSeriesDataItem) this.data.get(index);
+            TimeSeriesDataItem existing = this.data.get(index);
             overwritten = (TimeSeriesDataItem) existing.clone();
             // figure out if we need to iterate through all the y-values
             // to find the revised minY / maxY
@@ -906,7 +821,7 @@ public class TimeSeries<S extends Comparable<S>> extends Series<S>
 
             // check if this addition will exceed the maximum item count...
             if (getItemCount() > this.maximumItemCount) {
-                TimeSeriesDataItem d = (TimeSeriesDataItem) this.data.remove(0);
+                TimeSeriesDataItem d = this.data.remove(0);
                 updateBoundsForRemovedItem(d);
             }
         }
@@ -964,8 +879,8 @@ public class TimeSeries<S extends Comparable<S>> extends Series<S>
         long index = Long.MAX_VALUE;
         try {
             Method m = RegularTimePeriod.class.getDeclaredMethod(
-                    "createInstance", new Class[] {Class.class, Date.class,
-                    TimeZone.class, Locale.class});
+                    "createInstance", Class.class, Date.class,
+                    TimeZone.class, Locale.class);
             RegularTimePeriod newest = (RegularTimePeriod) m.invoke(
                     this.timePeriodClass, new Object[] {this.timePeriodClass,
                             new Date(latest), TimeZone.getDefault(), Locale.getDefault()});
@@ -1022,8 +937,7 @@ public class TimeSeries<S extends Comparable<S>> extends Series<S>
     public void delete(RegularTimePeriod period) {
         int index = getIndex(period);
         if (index >= 0) {
-            TimeSeriesDataItem item = (TimeSeriesDataItem) this.data.remove(
-                    index);
+            TimeSeriesDataItem item = this.data.remove(index);
             updateBoundsForRemovedItem(item);
             if (this.data.isEmpty()) {
                 this.timePeriodClass = null;
@@ -1115,8 +1029,7 @@ public class TimeSeries<S extends Comparable<S>> extends Series<S>
         copy.data = new java.util.ArrayList();
         if (this.data.size() > 0) {
             for (int index = start; index <= end; index++) {
-                TimeSeriesDataItem item
-                        = (TimeSeriesDataItem) this.data.get(index);
+                TimeSeriesDataItem item = this.data.get(index);
                 TimeSeriesDataItem clone = (TimeSeriesDataItem) item.clone();
                 try {
                     copy.add(clone);
@@ -1191,12 +1104,6 @@ public class TimeSeries<S extends Comparable<S>> extends Series<S>
             return false;
         }
         TimeSeries<S> that = (TimeSeries) obj;
-        if (!Objects.equals(getDomainDescription(), that.getDomainDescription())) {
-            return false;
-        }
-        if (!Objects.equals(getRangeDescription(), that.getRangeDescription())) {
-            return false;
-        }
         if (!Objects.equals(this.timePeriodClass, that.timePeriodClass)) {
             return false;
         }
@@ -1224,9 +1131,6 @@ public class TimeSeries<S extends Comparable<S>> extends Series<S>
     @Override
     public int hashCode() {
         int result = super.hashCode();
-        result = 29 * result + (this.domain != null ? this.domain.hashCode()
-                : 0);
-        result = 29 * result + (this.range != null ? this.range.hashCode() : 0);
         result = 29 * result + (this.timePeriodClass != null
                 ? this.timePeriodClass.hashCode() : 0);
         // it is too slow to look at every data item, so let's just look at

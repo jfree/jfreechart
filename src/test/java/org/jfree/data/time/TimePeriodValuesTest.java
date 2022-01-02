@@ -36,58 +36,21 @@
 
 package org.jfree.data.time;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
-import java.util.Date;
-
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.date.MonthConstants;
 import org.jfree.chart.internal.CloneUtils;
-
 import org.jfree.data.general.SeriesChangeEvent;
 import org.jfree.data.general.SeriesChangeListener;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.Date;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * A collection of test cases for the {@link TimePeriodValues} class.
  */
 public class TimePeriodValuesTest {
-
-    /** Series A. */
-    private TimePeriodValues<String> seriesA;
-
-    /** Series B. */
-    private TimePeriodValues<String> seriesB;
-
-    /** Series C. */
-    private TimePeriodValues<String> seriesC;
-
-    /**
-     * Common test setup.
-     */
-    @BeforeEach
-    public void setUp() {
-        this.seriesA = new TimePeriodValues<>("Series A");
-        this.seriesA.add(new Year(2000), 102000);
-        this.seriesA.add(new Year(2001), 102001);
-        this.seriesA.add(new Year(2002), 102002);
-        this.seriesA.add(new Year(2003), 102003);
-        this.seriesA.add(new Year(2004), 102004);
-        this.seriesA.add(new Year(2005), 102005);
-
-        this.seriesB = new TimePeriodValues<>("Series B");
-        this.seriesB.add(new Year(2006), 202006);
-        this.seriesB.add(new Year(2007), 202007);
-        this.seriesB.add(new Year(2008), 202008);
-
-        this.seriesC = new TimePeriodValues<>("Series C");
-        this.seriesC.add(new Year(1999), 301999);
-        this.seriesC.add(new Year(2000), 302000);
-        this.seriesC.add(new Year(2002), 302002);
-    }
 
     /**
      * Set up a quarter equal to Q1 1900.  Request the previous quarter, it 
@@ -99,7 +62,6 @@ public class TimePeriodValuesTest {
         RegularTimePeriod jan1st2002 = new Day(1, MonthConstants.JANUARY, 2002);
         series.add(jan1st2002, 42);
         TimePeriodValues<String> clone = CloneUtils.clone(series);
-        clone.setKey("Clone Series");
         clone.update(0, 10);
 
         int seriesValue = series.getValue(0).intValue();
@@ -108,7 +70,7 @@ public class TimePeriodValuesTest {
         assertEquals(42, seriesValue);
         assertEquals(10, cloneValue);
         assertEquals("Test Series", series.getKey());
-        assertEquals("Clone Series", clone.getKey());
+        assertEquals("Test Series", clone.getKey());
     }
 
     /**
@@ -143,49 +105,18 @@ public class TimePeriodValuesTest {
     @Test
     public void testEquals() {
         TimePeriodValues<String> s1 = new TimePeriodValues<>("Time Series 1");
-        TimePeriodValues<String> s2 = new TimePeriodValues<>("Time Series 2");
-        boolean b1 = s1.equals(s2);
-        assertFalse(b1, "b1");
-
-        s2.setKey("Time Series 1");
-        boolean b2 = s1.equals(s2);
-        assertTrue(b2, "b2");
-
-        // domain description
-        s1.setDomainDescription("XYZ");
-        assertFalse(s1.equals(s2));
-        s2.setDomainDescription("XYZ");
-        assertTrue(s1.equals(s2));
-        
-        // domain description - null
-        s1.setDomainDescription(null);
-        assertFalse(s1.equals(s2));
-        s2.setDomainDescription(null);
-        assertTrue(s1.equals(s2));
-        
-        // range description
-        s1.setRangeDescription("XYZ");
-        assertFalse(s1.equals(s2));
-        s2.setRangeDescription("XYZ");
-        assertTrue(s1.equals(s2));
-        
-        // range description - null
-        s1.setRangeDescription(null);
-        assertFalse(s1.equals(s2));
-        s2.setRangeDescription(null);
-        assertTrue(s1.equals(s2));
+        TimePeriodValues<String> s2 = new TimePeriodValues<>("Time Series 1");
+        assertEquals(s1, s2);
 
         RegularTimePeriod p1 = new Day();
         RegularTimePeriod p2 = p1.next();
         s1.add(p1, 100.0);
         s1.add(p2, 200.0);
-        boolean b3 = s1.equals(s2);
-        assertFalse(b3, "b3");
+        assertNotEquals(s1, s2);
 
         s2.add(p1, 100.0);
         s2.add(p2, 200.0);
-        boolean b4 = s1.equals(s2);
-        assertTrue(b4, "b4");
+        assertEquals(s1, s2);
 
     }
     

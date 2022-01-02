@@ -36,12 +36,6 @@
 
 package org.jfree.data.time;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.fail;
-
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
@@ -57,6 +51,8 @@ import org.jfree.data.general.SeriesException;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * A collection of test cases for the {@link TimeSeries} class.
@@ -121,7 +117,6 @@ public class TimeSeriesTest implements SeriesChangeListener {
         series.add(jan1st2002, 42);
 
         TimeSeries<String> clone = CloneUtils.clone(series);
-        clone.setKey("Clone Series");
         clone.update(jan1st2002, 10);
 
         int seriesValue = series.getValue(jan1st2002).intValue();
@@ -130,7 +125,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
         assertEquals(42, seriesValue);
         assertEquals(10, cloneValue);
         assertEquals("Test Series", series.getKey());
-        assertEquals("Clone Series", clone.getKey());
+        assertEquals("Test Series", clone.getKey());
     }
 
     /**
@@ -144,13 +139,13 @@ public class TimeSeriesTest implements SeriesChangeListener {
         s1.add(new Year(2008), null);
         s1.add(new Year(2009), 200.0);
         TimeSeries<String> s2 = CloneUtils.clone(s1);
-        assertTrue(s1.equals(s2));
+        assertEquals(s1, s2);
 
         // check independence
         s2.addOrUpdate(new Year(2009), 300.0);
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s1.addOrUpdate(new Year(2009), 300.0);
-        assertTrue(s1.equals(s2));
+        assertEquals(s1, s2);
     }
 
     /**
@@ -199,7 +194,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
         s1.delete(new Year(2001));
         assertTrue(this.gotSeriesChangeEvent);
         assertEquals(2, s1.getItemCount());
-        assertEquals(null, s1.getValue(new Year(2001)));
+        assertNull(s1.getValue(new Year(2001)));
 
         // try deleting a time period that doesn't exist...
         this.gotSeriesChangeEvent = false;
@@ -265,7 +260,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
         s1.add(new Year(2005), 19.32);
         s1.add(new Year(2007), 16.89);
         TimeSeries<String> s2 = TestUtils.serialised(s1);
-        assertTrue(s1.equals(s2));
+        assertEquals(s1, s2);
     }
 
     /**
@@ -275,51 +270,32 @@ public class TimeSeriesTest implements SeriesChangeListener {
     public void testEquals() {
         TimeSeries<String> s1 = new TimeSeries<>("Time Series 1");
         TimeSeries<String> s2 = new TimeSeries<>("Time Series 2");
-        boolean b1 = s1.equals(s2);
-        assertFalse(b1, "b1");
+        assertNotEquals(s1, s2);
 
-        s2.setKey("Time Series 1");
-        boolean b2 = s1.equals(s2);
-        assertTrue(b2, "b2");
+        s2 = new TimeSeries<>("Time Series 1");
+        assertEquals(s1, s2);
 
         RegularTimePeriod p1 = new Day();
         RegularTimePeriod p2 = p1.next();
         s1.add(p1, 100.0);
         s1.add(p2, 200.0);
-        boolean b3 = s1.equals(s2);
-        assertFalse(b3, "b3");
+        assertNotEquals(s1, s2);
 
         s2.add(p1, 100.0);
         s2.add(p2, 200.0);
-        boolean b4 = s1.equals(s2);
-        assertTrue(b4, "b4");
+        assertEquals(s1, s2);
 
         s1.setMaximumItemCount(100);
-        boolean b5 = s1.equals(s2);
-        assertFalse(b5, "b5");
+        assertNotEquals(s1, s2);
 
         s2.setMaximumItemCount(100);
-        boolean b6 = s1.equals(s2);
-        assertTrue(b6, "b6");
+        assertEquals(s1, s2);
 
         s1.setMaximumItemAge(100);
-        boolean b7 = s1.equals(s2);
-        assertFalse(b7, "b7");
+        assertNotEquals(s1, s2);
 
         s2.setMaximumItemAge(100);
-        boolean b8 = s1.equals(s2);
-        assertTrue(b8, "b8");
-    }
-
-    /**
-     * Tests a specific bug report where null arguments in the constructor
-     * cause the equals() method to fail.  Fixed for 0.9.21.
-     */
-    @Test
-    public void testEquals2() {
-        TimeSeries<String> s1 = new TimeSeries<>("Series", null, null);
-        TimeSeries<String> s2 = new TimeSeries<>("Series", null, null);
-        assertTrue(s1.equals(s2));
+        assertEquals(s1, s2);
     }
 
     /**
@@ -411,7 +387,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
             assertEquals(0, result14.getItemCount());
         }
         catch (CloneNotSupportedException e) {
-            assertTrue(false);
+            fail();
         }
     }
 
@@ -487,7 +463,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
             assertEquals(0, series3.getItemCount());
         }
         catch (CloneNotSupportedException e) {
-            assertTrue(false);
+            fail();
         }
     }
 
@@ -527,12 +503,12 @@ public class TimeSeriesTest implements SeriesChangeListener {
         s1.add(new Year(2002), null);
         s1.add(new Year(2005), 19.32);
         s1.add(new Year(2007), 16.89);
-        assertTrue(s1.getItemCount() == 5);
+        assertEquals(5, s1.getItemCount());
 
         s1.setMaximumItemCount(3);
-        assertTrue(s1.getItemCount() == 3);
+        assertEquals(3, s1.getItemCount());
         TimeSeriesDataItem item = s1.getDataItem(0);
-        assertTrue(item.getPeriod().equals(new Year(2002)));
+        assertEquals(item.getPeriod(), new Year(2002));
         assertEquals(16.89, s1.getMinY(), EPSILON);
         assertEquals(19.32, s1.getMaxY(), EPSILON);
     }
@@ -634,19 +610,19 @@ public class TimeSeriesTest implements SeriesChangeListener {
 
     /**
      * A test for bug 1832432.
-     * @throws java.lang.CloneNotSupportedException
+     * @throws java.lang.CloneNotSupportedException if there is a cloning problem.
      */
     @Test
     public void testBug1832432() throws CloneNotSupportedException {
         TimeSeries<String> s1 = new TimeSeries<>("Series");
         TimeSeries<String> s2 = CloneUtils.clone(s1);
-        assertTrue(s1 != s2);
-        assertTrue(s1.getClass() == s2.getClass());
-        assertTrue(s1.equals(s2));
+        assertNotSame(s1, s2);
+        assertSame(s1.getClass(), s2.getClass());
+        assertEquals(s1, s2);
 
         // test independence
         s1.add(new Day(1, 1, 2007), 100.0);
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
     }
 
     /**
@@ -1078,43 +1054,9 @@ public class TimeSeriesTest implements SeriesChangeListener {
         TimeSeriesDataItem item = new TimeSeriesDataItem(new Year(2009), 1.0);
         TimeSeries<String> series = new TimeSeries<>("S1");
         series.add(item);
-        assertTrue(item.equals(series.getDataItem(0)));
+        assertEquals(item, series.getDataItem(0));
         item.setValue(99.9);
-        assertFalse(item.equals(series.getDataItem(0)));
-    }
-    
-    @Test
-    public void testSetKey() {
-        TimeSeries<String> s1 = new TimeSeries<>("S");
-        s1.setKey("S1");
-        assertEquals("S1", s1.getKey());
-        
-        TimeSeriesCollection<String> c = new TimeSeriesCollection<>();
-        c.addSeries(s1);
-        TimeSeries<String> s2 = new TimeSeries<>("S2");
-        c.addSeries(s2);
-        
-        // now we should be allowed to change s1's key to anything but "S2"
-        s1.setKey("OK");
-        assertEquals("OK", s1.getKey());
-        
-        try {
-            s1.setKey("S2");
-            fail("Expect an exception here.");
-        } catch (IllegalArgumentException e) {
-            // OK
-        }
-        
-        // after s1 is removed from the collection, we should be able to set
-        // the key to anything we want...
-        c.removeSeries(s1);
-        s1.setKey("S2");
-                
-        // check that removing by index also works
-        s1.setKey("S1");
-        c.addSeries(s1);
-        c.removeSeries(1);
-        s1.setKey("S2");
+        assertNotEquals(item, series.getDataItem(0));
     }
 
     @Test

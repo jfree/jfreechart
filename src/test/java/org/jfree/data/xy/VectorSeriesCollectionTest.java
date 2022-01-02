@@ -89,7 +89,7 @@ public class VectorSeriesCollectionTest {
         assertTrue(c1.equals(c2));
 
         // check independence
-        s1.setDescription("XYZ");
+        s1.add(2.0, 2.2, 0.5, 0.7);
         assertFalse(c1.equals(c2));
     }
 

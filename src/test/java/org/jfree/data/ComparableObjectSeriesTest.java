@@ -39,10 +39,8 @@ package org.jfree.data;
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.internal.CloneUtils;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertNull;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for the {@link ComparableObjectSeries} class.
@@ -88,7 +86,6 @@ public class ComparableObjectSeriesTest {
     public void testConstructor1() {
         ComparableObjectSeries<String> s1 = new ComparableObjectSeries<>("s1");
         assertEquals("s1", s1.getKey());
-        assertNull(s1.getDescription());
         assertTrue(s1.getAllowDuplicateXValues());
         assertTrue(s1.getAutoSort());
         assertEquals(0, s1.getItemCount());
