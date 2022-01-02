@@ -1214,7 +1214,7 @@ public class DatasetUtilsTest {
                 visibleSeriesKeys, xRange, false));
 
         dataset.add(new Date(50L), new BoxAndWhiskerItem(5.0, 4.9, 2.0, 8.0,
-                1.0, 9.0, 0.0, 10.0, new ArrayList<String>()));
+                1.0, 9.0, 0.0, 10.0, new ArrayList<Number>()));
         assertEquals(new Range(5.0, 5.0),
                 DatasetUtils.iterateToFindRangeBounds(dataset,
                 visibleSeriesKeys, xRange, false));
