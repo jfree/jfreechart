@@ -122,6 +122,10 @@ public class VectorSeriesTest implements SeriesChangeListener {
         assertNotSame(s1, s2);
         assertSame(s1.getClass(), s2.getClass());
         assertEquals(s1, s2);
+
+        // check independence
+        s1.add(4.0, 5.0, 6.0, 7.0);
+        assertNotEquals(s1, s2);
     }
 
     /**

@@ -36,17 +36,12 @@
 
 package org.jfree.data.general;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
-import java.beans.PropertyVetoException;
-import java.beans.VetoableChangeListener;
-import java.beans.VetoableChangeSupport;
-import java.io.Serializable;
-import java.util.Objects;
+import org.jfree.chart.util.Args;
 
 import javax.swing.event.EventListenerList;
-
-import org.jfree.chart.util.Args;
+import java.beans.*;
+import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Base class representing a data series.  Subclasses are left to implement the
@@ -78,7 +73,7 @@ public abstract class Series implements Cloneable, Serializable {
     /** Object to support property change notification. */
     private VetoableChangeSupport vetoableChangeSupport;
 
-    /** A flag that controls whether or not changes are notified. */
+    /** A flag that controls whether changes are notified. */
     private boolean notify;
 
     /**
