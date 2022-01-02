@@ -699,9 +699,9 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
      * @return The Java2D coordinate for the middle of the item.
      */
     @Override
-    public double getItemMiddle(Comparable rowKey, Comparable columnKey,
-            CategoryDataset dataset, CategoryAxis axis, Rectangle2D area,
-            RectangleEdge edge) {
+    public double getItemMiddle(Comparable<?> rowKey, Comparable<?> columnKey,
+                                CategoryDataset<?, ?> dataset, CategoryAxis axis, Rectangle2D area,
+                                RectangleEdge edge) {
         return axis.getCategoryMiddle(columnKey, dataset.getColumnKeys(), area,
                 edge);
     }

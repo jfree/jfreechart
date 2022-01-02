@@ -901,17 +901,17 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
 
         // draw outliers
         double oRadius = state.getBarWidth() / 3;    // outlier radius
-        List outliers = new ArrayList();
+        List<Outlier> outliers = new ArrayList<>();
         OutlierListCollection outlierListCollection
                 = new OutlierListCollection();
 
         // From outlier array sort out which are outliers and put these into a
         // list If there are any farouts, set the flag on the
         // OutlierListCollection
-        List yOutliers = bawDataset.getOutliers(row, column);
+        List<? extends Number> yOutliers = bawDataset.getOutliers(row, column);
         if (yOutliers != null) {
-            for (int i = 0; i < yOutliers.size(); i++) {
-                double outlier = ((Number) yOutliers.get(i)).doubleValue();
+            for (Object yOutlier : yOutliers) {
+                double outlier = ((Number) yOutlier).doubleValue();
                 Number minOutlier = bawDataset.getMinOutlier(row, column);
                 Number maxOutlier = bawDataset.getMaxOutlier(row, column);
                 Number minRegular = bawDataset.getMinRegularValue(row, column);
@@ -936,8 +936,7 @@ public class BoxAndWhiskerRenderer extends AbstractCategoryItemRenderer
 
             // Process outliers. Each outlier is either added to the
             // appropriate outlier list or a new outlier list is made
-            for (Iterator iterator = outliers.iterator(); iterator.hasNext();) {
-                Outlier outlier = (Outlier) iterator.next();
+            for (Outlier outlier : outliers) {
                 outlierListCollection.add(outlier);
             }
 

@@ -389,9 +389,9 @@ public class LevelRenderer extends AbstractCategoryItemRenderer
      * @return The Java2D coordinate.
      */
     @Override
-    public double getItemMiddle(Comparable rowKey, Comparable columnKey,
-            CategoryDataset dataset, CategoryAxis axis, Rectangle2D area,
-            RectangleEdge edge) {
+    public double getItemMiddle(Comparable<?> rowKey, Comparable<?> columnKey,
+                                CategoryDataset<?, ?> dataset, CategoryAxis axis, Rectangle2D area,
+                                RectangleEdge edge) {
         return axis.getCategorySeriesMiddle(columnKey, rowKey, dataset,
                 this.itemMargin, area, edge);
     }

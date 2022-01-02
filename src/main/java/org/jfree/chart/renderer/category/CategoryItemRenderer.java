@@ -100,7 +100,7 @@ public interface CategoryItemRenderer extends ChartElement, LegendItemSource {
      *
      * @see #setPlot(CategoryPlot)
      */
-    CategoryPlot getPlot();
+    CategoryPlot<?, ?> getPlot();
 
     /**
      * Sets the plot that the renderer has been assigned to.  This method is
@@ -111,7 +111,7 @@ public interface CategoryItemRenderer extends ChartElement, LegendItemSource {
      *
      * @see #getPlot()
      */
-    void setPlot(CategoryPlot plot);
+    void setPlot(CategoryPlot<?, ?> plot);
 
     /**
      * Adds a change listener.
@@ -140,7 +140,7 @@ public interface CategoryItemRenderer extends ChartElement, LegendItemSource {
      * @return The range (or {@code null} if the dataset is
      *         {@code null} or empty).
      */
-    Range findRangeBounds(CategoryDataset dataset);
+    Range findRangeBounds(CategoryDataset<?, ?> dataset);
 
     /**
      * Initialises the renderer.  This method will be called before the first
@@ -157,11 +157,11 @@ public interface CategoryItemRenderer extends ChartElement, LegendItemSource {
      * @return A state object (maintains state information relevant to one
      *         chart drawing).
      */
-    CategoryItemRendererState initialise(Graphics2D g2, Rectangle2D dataArea, CategoryPlot plot,
+    CategoryItemRendererState initialise(Graphics2D g2, Rectangle2D dataArea, CategoryPlot<?, ?> plot,
             int rendererIndex, PlotRenderingInfo info);
 
     /**
-     * Returns a boolean that indicates whether or not the specified item
+     * Returns a boolean that indicates whether the specified item
      * should be drawn (this is typically used to hide an entire series).
      *
      * @param series  the series index.
@@ -172,7 +172,7 @@ public interface CategoryItemRenderer extends ChartElement, LegendItemSource {
     boolean getItemVisible(int series, int item);
 
     /**
-     * Returns a boolean that indicates whether or not the specified series
+     * Returns a boolean that indicates whether the specified series
      * should be drawn (this is typically used to hide an entire series).
      *
      * @param series  the series index.
@@ -819,8 +819,7 @@ public interface CategoryItemRenderer extends ChartElement, LegendItemSource {
      *
      * @param series  the series index (zero-based).
      * @param visible  the visible flag.
-     * @param notify  a flag that controls whether or not listeners are
-     *                notified.
+     * @param notify  a flag that controls whether listeners are notified.
      *
      * @see #isSeriesItemLabelsVisible(int)
      */
@@ -839,7 +838,7 @@ public interface CategoryItemRenderer extends ChartElement, LegendItemSource {
     boolean getDefaultItemLabelsVisible();
 
     /**
-     * Sets the default flag that controls whether or not item labels are visible
+     * Sets the default flag that controls whether item labels are visible
      * and sends a {@link RendererChangeEvent} to all registered listeners.
      *
      * @param visible  the flag.
@@ -853,8 +852,7 @@ public interface CategoryItemRenderer extends ChartElement, LegendItemSource {
      * {@link RendererChangeEvent} to all registered listeners.
      *
      * @param visible  the visibility flag.
-     * @param notify  a flag that controls whether or not listeners are
-     *                notified.
+     * @param notify  a flag that controls whether listeners are notified.
      *
      * @see #getDefaultItemLabelsVisible()
      */
@@ -1496,7 +1494,7 @@ public interface CategoryItemRenderer extends ChartElement, LegendItemSource {
      * @param plot  the plot.
      * @param dataArea  the data area.
      */
-    void drawBackground(Graphics2D g2, CategoryPlot plot, Rectangle2D dataArea);
+    void drawBackground(Graphics2D g2, CategoryPlot<?, ?> plot, Rectangle2D dataArea);
 
     /**
      * Draws an outline for the data area.
@@ -1505,7 +1503,7 @@ public interface CategoryItemRenderer extends ChartElement, LegendItemSource {
      * @param plot  the plot.
      * @param dataArea  the data area.
      */
-    void drawOutline(Graphics2D g2, CategoryPlot plot, Rectangle2D dataArea);
+    void drawOutline(Graphics2D g2, CategoryPlot<?, ?> plot, Rectangle2D dataArea);
 
     /**
      * Draws a single data item.
@@ -1521,8 +1519,8 @@ public interface CategoryItemRenderer extends ChartElement, LegendItemSource {
      * @param column  the column index (zero-based).
      * @param pass  the pass index.
      */
-    void drawItem(Graphics2D g2, CategoryItemRendererState state, Rectangle2D dataArea, CategoryPlot plot,
-            CategoryAxis domainAxis, ValueAxis rangeAxis, CategoryDataset dataset, int row, int column,
+    void drawItem(Graphics2D g2, CategoryItemRendererState state, Rectangle2D dataArea, CategoryPlot<?, ?> plot,
+            CategoryAxis domainAxis, ValueAxis rangeAxis, CategoryDataset<?, ?> dataset, int row, int column,
             int pass);
 
     /**
@@ -1533,7 +1531,7 @@ public interface CategoryItemRenderer extends ChartElement, LegendItemSource {
      * @param dataArea  the area for plotting data.
      * @param value  the value.
      */
-    void drawDomainGridline(Graphics2D g2, CategoryPlot plot, Rectangle2D dataArea, double value);
+    void drawDomainGridline(Graphics2D g2, CategoryPlot<?, ?> plot, Rectangle2D dataArea, double value);
 
     /**
      * Draws a grid line against the range axis.
@@ -1546,7 +1544,7 @@ public interface CategoryItemRenderer extends ChartElement, LegendItemSource {
      * @param paint  the paint ({@code null} not permitted).
      * @param stroke  the line stroke ({@code null} not permitted).
      */
-    void drawRangeLine(Graphics2D g2, CategoryPlot plot, ValueAxis axis, Rectangle2D dataArea, double value,
+    void drawRangeLine(Graphics2D g2, CategoryPlot<?, ?> plot, ValueAxis axis, Rectangle2D dataArea, double value,
             Paint paint, Stroke stroke);
 
     /**
@@ -1562,7 +1560,7 @@ public interface CategoryItemRenderer extends ChartElement, LegendItemSource {
      * @see #drawRangeMarker(Graphics2D, CategoryPlot, ValueAxis, Marker,
      *     Rectangle2D)
      */
-    void drawDomainMarker(Graphics2D g2, CategoryPlot plot, CategoryAxis axis, CategoryMarker marker,
+    void drawDomainMarker(Graphics2D g2, CategoryPlot<?, ?> plot, CategoryAxis axis, CategoryMarker marker,
             Rectangle2D dataArea);
 
     /**
@@ -1578,7 +1576,7 @@ public interface CategoryItemRenderer extends ChartElement, LegendItemSource {
      * @see #drawDomainMarker(Graphics2D, CategoryPlot, CategoryAxis,
      *     CategoryMarker, Rectangle2D)
      */
-    void drawRangeMarker(Graphics2D g2, CategoryPlot plot, ValueAxis axis, Marker marker,
+    void drawRangeMarker(Graphics2D g2, CategoryPlot<?, ?> plot, ValueAxis axis, Marker marker,
             Rectangle2D dataArea);
 
     /**
@@ -1593,8 +1591,8 @@ public interface CategoryItemRenderer extends ChartElement, LegendItemSource {
      *
      * @return The Java2D coordinate for the middle of the item.
      */
-    double getItemMiddle(Comparable rowKey, Comparable columnKey, 
-            CategoryDataset dataset, CategoryAxis axis,
+    double getItemMiddle(Comparable<?> rowKey, Comparable<?> columnKey,
+            CategoryDataset<?, ?> dataset, CategoryAxis axis,
             Rectangle2D area, RectangleEdge edge);
 
 }
