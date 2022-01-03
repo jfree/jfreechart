@@ -38,7 +38,6 @@ package org.jfree.data.xy;
 
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.internal.CloneUtils;
-
 import org.jfree.data.general.SeriesChangeEvent;
 import org.jfree.data.general.SeriesChangeListener;
 import org.junit.jupiter.api.Test;
@@ -63,64 +62,64 @@ public class VectorSeriesTest implements SeriesChangeListener {
     }
 
     /**
-     * Confirm that the equals method can distinguish all the required fields.
+     * Confirm that the equals() method can distinguish all the required fields.
      */
     @Test
     public void testEquals() {
-
         VectorSeries<String> s1 = new VectorSeries<>("s1");
         VectorSeries<String> s2 = new VectorSeries<>("s1");
-        assertTrue(s1.equals(s2));
+        assertEquals(s1, s2);
 
         // seriesKey
         s1 = new VectorSeries<>("s2");
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s2 = new VectorSeries<>("s2");
-        assertTrue(s1.equals(s2));
+        assertEquals(s1, s2);
 
         // autoSort
         s1 = new VectorSeries<>("s2", true, true);
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s2 = new VectorSeries<>("s2", true, true);
-        assertTrue(s1.equals(s2));
+        assertEquals(s1, s2);
 
         // allowDuplicateValues
         s1 = new VectorSeries<>("s2", false, false);
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s2 = new VectorSeries<>("s2", false, false);
-        assertTrue(s1.equals(s2));
+        assertEquals(s1, s2);
 
         // add a value
         s1.add(1.0, 0.5, 1.5, 2.0);
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s2.add(1.0, 0.5, 1.5, 2.0);
-        assertTrue(s2.equals(s1));
+        assertEquals(s2, s1);
 
         // add another value
         s1.add(2.0, 0.5, 1.5, 2.0);
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s2.add(2.0, 0.5, 1.5, 2.0);
-        assertTrue(s2.equals(s1));
+        assertEquals(s2, s1);
 
         // remove a value
         s1.remove(new XYCoordinate(1.0, 0.5));
-        assertFalse(s1.equals(s2));
+        assertNotEquals(s1, s2);
         s2.remove(new XYCoordinate(1.0, 0.5));
-        assertTrue(s2.equals(s1));
-
+        assertEquals(s2, s1);
     }
 
     /**
      * Confirm that cloning works.
+     *
+     * @throws java.lang.CloneNotSupportedException if there is a problem cloning.
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
         VectorSeries<String> s1 = new VectorSeries<>("s1");
         s1.add(1.0, 0.5, 1.5, 2.0);
         VectorSeries<String> s2 = CloneUtils.clone(s1);
-        assertTrue(s1 != s2);
-        assertTrue(s1.getClass() == s2.getClass());
-        assertTrue(s1.equals(s2));
+        assertNotSame(s1, s2);
+        assertSame(s1.getClass(), s2.getClass());
+        assertEquals(s1, s2);
 
         // check independence
         s1.add(4.0, 5.0, 6.0, 7.0);

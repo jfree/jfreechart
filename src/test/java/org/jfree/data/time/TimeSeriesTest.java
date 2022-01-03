@@ -62,13 +62,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
     /** A time series. */
     private TimeSeries<String> seriesA;
 
-    /** A time series. */
-    private TimeSeries<String> seriesB;
-
-    /** A time series. */
-    private TimeSeries<String> seriesC;
-
-    /** A flag that indicates whether or not a change event was fired. */
+    /** A flag that indicates whether a change event was fired. */
     private boolean gotSeriesChangeEvent = false;
 
     /**
@@ -83,16 +77,6 @@ public class TimeSeriesTest implements SeriesChangeListener {
         this.seriesA.add(new Year(2003), 102003);
         this.seriesA.add(new Year(2004), 102004);
         this.seriesA.add(new Year(2005), 102005);
-
-        this.seriesB = new TimeSeries<>("Series B");
-        this.seriesB.add(new Year(2006), 202006);
-        this.seriesB.add(new Year(2007), 202007);
-        this.seriesB.add(new Year(2008), 202008);
-
-        this.seriesC = new TimeSeries<>("Series C");
-        this.seriesC.add(new Year(1999), 301999);
-        this.seriesC.add(new Year(2000), 302000);
-        this.seriesC.add(new Year(2002), 302002);
     }
 
     /**
@@ -130,7 +114,8 @@ public class TimeSeriesTest implements SeriesChangeListener {
 
     /**
      * Another test of the clone() method.
-     * @throws java.lang.CloneNotSupportedException
+     *
+     * @throws java.lang.CloneNotSupportedException if there is a problem cloning.
      */
     @Test
     public void testClone2() throws CloneNotSupportedException {
@@ -163,10 +148,8 @@ public class TimeSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testGetValue() {
-        Number value1 = this.seriesA.getValue(new Year(1999));
-        assertNull(value1);
-        int value2 = this.seriesA.getValue(new Year(2000)).intValue();
-        assertEquals(102000, value2);
+        assertNull(seriesA.getValue(new Year(1999)));
+        assertEquals(102000.0, seriesA.getValue(new Year(2000)));
     }
 
     /**
@@ -174,10 +157,9 @@ public class TimeSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testDelete() {
-        this.seriesA.delete(0, 0);
-        assertEquals(5, this.seriesA.getItemCount());
-        Number value = this.seriesA.getValue(new Year(2000));
-        assertNull(value);
+        seriesA.delete(0, 0);
+        assertEquals(5, seriesA.getItemCount());
+        assertNull(seriesA.getValue(new Year(2000)));
     }
 
     /**
@@ -428,7 +410,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
             assertEquals(new Month(12, 2003), result1.getTimePeriod(0));
         }
         catch (CloneNotSupportedException e) {
-            assertTrue(false);
+            fail();
         }
 
         // check negative first argument
@@ -471,7 +453,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
      * Checks that the min and max y values are updated correctly when copying
      * a subset.
      *
-     * @throws java.lang.CloneNotSupportedException
+     * @throws java.lang.CloneNotSupportedException if there is a problem cloning.
      */
     @Test
     public void testCreateCopy3() throws CloneNotSupportedException {

@@ -117,7 +117,8 @@ public class XYSeriesTest {
 
     /**
      * Another test of the clone() method.
-     * @throws java.lang.CloneNotSupportedException
+     *
+     * @throws java.lang.CloneNotSupportedException if there is a problem cloning.
      */
     @Test
     public void testCloning2() throws CloneNotSupportedException {
@@ -137,7 +138,8 @@ public class XYSeriesTest {
 
     /**
      * Another test of the clone() method.
-     * @throws java.lang.CloneNotSupportedException
+     *
+     * @throws java.lang.CloneNotSupportedException  if there is a problem cloning.
      */
     @Test
     public void testCloning3() throws CloneNotSupportedException {

@@ -36,24 +36,16 @@
 
 package org.jfree.data.time;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.GregorianCalendar;
-import java.util.List;
-import java.util.Locale;
-import java.util.TimeZone;
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.internal.CloneUtils;
+import org.jfree.data.DatasetChangeConfirmation;
 import org.jfree.data.Range;
 import org.jfree.data.general.DatasetUtils;
 import org.junit.jupiter.api.Test;
+
+import java.util.*;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * A collection of test cases for the {@link TimeSeriesCollection} class.
@@ -138,9 +130,9 @@ public class TimeSeriesCollectionTest {
         c1.addSeries(s3);
         c1.addSeries(s4);
         c1.removeSeries(2);
-        assertTrue(c1.getSeries(2).equals(s4));
+        assertEquals(c1.getSeries(2), s4);
         c1.removeSeries(0);
-        assertTrue(c1.getSeries(0).equals(s2));
+        assertEquals(c1.getSeries(0), s2);
         assertEquals(2, c1.getSeriesCount());
     }
 
@@ -156,8 +148,8 @@ public class TimeSeriesCollectionTest {
 
         // for a series with no data, we expect {-1, -1}...
         int[] result = collection.getSurroundingItems(0, 1000L);
-        assertTrue(result[0] == -1);
-        assertTrue(result[1] == -1);
+        assertEquals(-1, result[0]);
+        assertEquals(-1, result[1]);
 
         // now test with a single value in the series...
         Day today = new Day();
@@ -167,16 +159,16 @@ public class TimeSeriesCollectionTest {
 
         series.add(today, 99.9);
         result = collection.getSurroundingItems(0, start1);
-        assertTrue(result[0] == -1);
-        assertTrue(result[1] == 0);
+        assertEquals(-1, result[0]);
+        assertEquals(0, result[1]);
 
         result = collection.getSurroundingItems(0, middle1);
-        assertTrue(result[0] == 0);
-        assertTrue(result[1] == 0);
+        assertEquals(0, result[0]);
+        assertEquals(0, result[1]);
 
         result = collection.getSurroundingItems(0, end1);
-        assertTrue(result[0] == 0);
-        assertTrue(result[1] == -1);
+        assertEquals(0, result[0]);
+        assertEquals(-1, result[1]);
 
         // now add a second value to the series...
         Day tomorrow = (Day) today.next();
@@ -186,16 +178,16 @@ public class TimeSeriesCollectionTest {
 
         series.add(tomorrow, 199.9);
         result = collection.getSurroundingItems(0, start2);
-        assertTrue(result[0] == 0);
-        assertTrue(result[1] == 1);
+        assertEquals(0, result[0]);
+        assertEquals(1, result[1]);
 
         result = collection.getSurroundingItems(0, middle2);
-        assertTrue(result[0] == 1);
-        assertTrue(result[1] == 1);
+        assertEquals(1, result[0]);
+        assertEquals(1, result[1]);
 
         result = collection.getSurroundingItems(0, end2);
-        assertTrue(result[0] == 1);
-        assertTrue(result[1] == -1);
+        assertEquals(1, result[0]);
+        assertEquals(-1, result[1]);
 
         // now add a third value to the series...
         Day yesterday = (Day) today.previous();
@@ -205,16 +197,16 @@ public class TimeSeriesCollectionTest {
 
         series.add(yesterday, 1.23);
         result = collection.getSurroundingItems(0, start3);
-        assertTrue(result[0] == -1);
-        assertTrue(result[1] == 0);
+        assertEquals(-1, result[0]);
+        assertEquals(0, result[1]);
 
         result = collection.getSurroundingItems(0, middle3);
-        assertTrue(result[0] == 0);
-        assertTrue(result[1] == 0);
+        assertEquals(0, result[0]);
+        assertEquals(0, result[1]);
 
         result = collection.getSurroundingItems(0, end3);
-        assertTrue(result[0] == 0);
-        assertTrue(result[1] == 1);
+        assertEquals(0, result[0]);
+        assertEquals(1, result[1]);
     }
 
     /**
@@ -222,9 +214,23 @@ public class TimeSeriesCollectionTest {
      */
     @Test
     public void testSerialization() {
-        TimeSeriesCollection<String> c1 = new TimeSeriesCollection<>(createSeries());
+        var s1 = createSeries();
+        TimeSeriesCollection<String> c1 = new TimeSeriesCollection<>(s1);
         TimeSeriesCollection<String> c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
+
+        // check independence
+        s1.add(new Day(26, 4, 2000), 99.9);
+        assertNotEquals(c1, c2);
+        var s2 = c2.getSeries(0);
+        s2.add(new Day(26, 4, 2000), 99.9);
+        assertEquals(c1, c2);
+
+        // check that c2 gets notifications when s2 is changed
+        DatasetChangeConfirmation listener = new DatasetChangeConfirmation();
+        c2.addChangeListener(listener);
+        s2.add(new Day(27, 4, 2000), 99.9);
+        assertNotNull(listener.event);
     }
 
     /**
@@ -260,7 +266,7 @@ public class TimeSeriesCollectionTest {
             // correct outcome
         }
         catch (IndexOutOfBoundsException e) {
-            assertTrue(false);  // wrong outcome
+            fail();  // wrong outcome
         }
     }
 
@@ -325,7 +331,7 @@ public class TimeSeriesCollectionTest {
         dataset.addSeries(s2);
         s2.add(new Year(2009), 9.0);
         s2.add(new Year(2010), 10.0);
-        r = DatasetUtils.<String>findDomainBounds(dataset, visibleSeriesKeys, true);
+        r = DatasetUtils.findDomainBounds(dataset, visibleSeriesKeys, true);
         assertEquals(1199142000000.0, r.getLowerBound(), EPSILON);
         assertEquals(1230764399999.0, r.getUpperBound(), EPSILON);
 
@@ -340,6 +346,8 @@ public class TimeSeriesCollectionTest {
 
     /**
      * Basic checks for cloning.
+     *
+     * @throws java.lang.CloneNotSupportedException if there is a problem cloning.
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
@@ -348,9 +356,15 @@ public class TimeSeriesCollectionTest {
         TimeSeriesCollection<String> c1 = new TimeSeriesCollection<>();
         c1.addSeries(s1);
         TimeSeriesCollection<String> c2 = CloneUtils.clone(c1);
-        assertTrue(c1 != c2);
-        assertTrue(c1.getClass() == c2.getClass());
-        assertTrue(c1.equals(c2));
+        assertNotSame(c1, c2);
+        assertSame(c1.getClass(), c2.getClass());
+        assertEquals(c1, c2);
+
+        // check independence
+        s1.add(new Year(2022), 123.4);
+        assertNotEquals(c1, c2);
+        c2.getSeries(0).add(new Year(2022), 123.4);
+        assertEquals(c1, c2);
     }
 
     /**
@@ -454,11 +468,11 @@ public class TimeSeriesCollectionTest {
         s1.add(new Day(24, 2, 2014), 10.0);
         collection.addSeries(s1);
         assertEquals(new Range(10.0, 10.0), collection.getRangeBounds(
-                Arrays.asList("S1"), range, true));
+                Collections.singletonList("S1"), range, true));
         collection.setXPosition(TimePeriodAnchor.MIDDLE);
         assertEquals(new Range(10.0, 10.0), collection.getRangeBounds(
-                Arrays.asList("S1"), range, true));
+                Collections.singletonList("S1"), range, true));
         collection.setXPosition(TimePeriodAnchor.END);
-        assertNull(collection.getRangeBounds(Arrays.asList("S1"), range, true));
+        assertNull(collection.getRangeBounds(Collections.singletonList("S1"), range, true));
     }
 }
