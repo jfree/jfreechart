@@ -39,6 +39,9 @@ package org.jfree.data.xy;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyVetoException;
 import java.beans.VetoableChangeListener;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +56,7 @@ import org.jfree.data.DomainOrder;
 import org.jfree.data.Range;
 import org.jfree.data.RangeInfo;
 import org.jfree.data.UnknownKeyException;
+import org.jfree.data.gantt.TaskSeries;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.Series;
 
@@ -722,4 +726,31 @@ public class XYSeriesCollection<S extends Comparable<S>>
         }
     }
 
+    /**
+     * Provides serialization support.
+     *
+     * @param stream  the output stream.
+     *
+     * @throws IOException  if there is an I/O error.
+     */
+    private void writeObject(ObjectOutputStream stream) throws IOException {
+        stream.defaultWriteObject();
+    }
+
+    /**
+     * Provides serialization support.
+     *
+     * @param stream  the input stream.
+     *
+     * @throws IOException  if there is an I/O error.
+     * @throws ClassNotFoundException  if there is a classpath problem.
+     */
+    private void readObject(ObjectInputStream stream)
+            throws IOException, ClassNotFoundException {
+        stream.defaultReadObject();
+        for (Object item : this.data) {
+            XYSeries<S> series = (XYSeries<S>) item;
+            series.addChangeListener(this);
+        }
+    }
 }

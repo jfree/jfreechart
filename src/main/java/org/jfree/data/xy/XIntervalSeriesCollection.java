@@ -36,6 +36,9 @@
 
 package org.jfree.data.xy;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -336,7 +339,7 @@ public class XIntervalSeriesCollection<S extends Comparable<S>>
         if (!(obj instanceof XIntervalSeriesCollection)) {
             return false;
         }
-        XIntervalSeriesCollection<S> that = (XIntervalSeriesCollection) obj;
+        XIntervalSeriesCollection<S> that = (XIntervalSeriesCollection<S>) obj;
         return Objects.equals(this.data, that.data);
     }
 
@@ -355,4 +358,32 @@ public class XIntervalSeriesCollection<S extends Comparable<S>>
         return clone;
     }
 
+
+    /**
+     * Provides serialization support.
+     *
+     * @param stream  the output stream.
+     *
+     * @throws IOException  if there is an I/O error.
+     */
+    private void writeObject(ObjectOutputStream stream) throws IOException {
+        stream.defaultWriteObject();
+    }
+
+    /**
+     * Provides serialization support.
+     *
+     * @param stream  the input stream.
+     *
+     * @throws IOException  if there is an I/O error.
+     * @throws ClassNotFoundException  if there is a classpath problem.
+     */
+    private void readObject(ObjectInputStream stream)
+            throws IOException, ClassNotFoundException {
+        stream.defaultReadObject();
+        for (XIntervalSeries<S> item : this.data) {
+            XIntervalSeries<S> series = item;
+            series.addChangeListener(this);
+        }
+    }
 }
