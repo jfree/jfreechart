@@ -38,9 +38,9 @@ package org.jfree.data.xy;
 
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.util.PublicCloneable;
+import org.jfree.data.DatasetChangeConfirmation;
 import org.jfree.data.Range;
 import org.jfree.data.UnknownKeyException;
-
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -140,6 +140,19 @@ public class XYSeriesCollectionTest {
         c1.addSeries(s1);
         XYSeriesCollection c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
+
+        // check independence
+        s1.add(2.0, 2.2);
+        assertNotEquals(c1, c2);
+        XYSeries s2 = c2.getSeries(0);
+        s2.add(2.0, 2.2);
+        assertEquals(c1, c2);
+
+        // check that c2 gets notifications when s2 is changed
+        DatasetChangeConfirmation listener = new DatasetChangeConfirmation();
+        c2.addChangeListener(listener);
+        s2.add(3.0, 3.3);
+        assertNotNull(listener.event);
     }
 
     /**

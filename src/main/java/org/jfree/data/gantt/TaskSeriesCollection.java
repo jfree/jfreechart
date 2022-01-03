@@ -37,17 +37,19 @@
 
 package org.jfree.data.gantt;
 
-import java.io.Serializable;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
-import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.Args;
+import org.jfree.chart.util.ObjectUtils;
 import org.jfree.chart.util.PublicCloneable;
-
 import org.jfree.data.general.AbstractSeriesDataset;
 import org.jfree.data.general.SeriesChangeEvent;
 import org.jfree.data.time.TimePeriod;
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * A collection of {@link TaskSeries} objects.  This class provides one
@@ -245,9 +247,8 @@ public class TaskSeriesCollection extends AbstractSeriesDataset
         series.addChangeListener(this);
 
         // look for any keys that we don't already know about...
-        Iterator iterator = series.getTasks().iterator();
-        while (iterator.hasNext()) {
-            Task task = (Task) iterator.next();
+        for (Object o : series.getTasks()) {
+            Task task = (Task) o;
             String key = task.getDescription();
             int index = this.keys.indexOf(key);
             if (index < 0) {
@@ -303,9 +304,8 @@ public class TaskSeriesCollection extends AbstractSeriesDataset
 
         // deregister the collection as a change listener to each series in
         // the collection.
-        Iterator iterator = this.data.iterator();
-        while (iterator.hasNext()) {
-            TaskSeries series = (TaskSeries) iterator.next();
+        for (Object item : this.data) {
+            TaskSeries series = (TaskSeries) item;
             series.removeChangeListener(this);
         }
 
@@ -634,9 +634,8 @@ public class TaskSeriesCollection extends AbstractSeriesDataset
         for (int i = 0; i < getSeriesCount(); i++) {
             TaskSeries series = (TaskSeries) this.data.get(i);
             // look for any keys that we don't already know about...
-            Iterator iterator = series.getTasks().iterator();
-            while (iterator.hasNext()) {
-                Task task = (Task) iterator.next();
+            for (Object o : series.getTasks()) {
+                Task task = (Task) o;
                 String key = task.getDescription();
                 int index = this.keys.indexOf(key);
                 if (index < 0) {
@@ -713,4 +712,31 @@ public class TaskSeriesCollection extends AbstractSeriesDataset
         return clone;
     }
 
+    /**
+     * Provides serialization support.
+     *
+     * @param stream  the output stream.
+     *
+     * @throws IOException  if there is an I/O error.
+     */
+    private void writeObject(ObjectOutputStream stream) throws IOException {
+        stream.defaultWriteObject();
+    }
+
+    /**
+     * Provides serialization support.
+     *
+     * @param stream  the input stream.
+     *
+     * @throws IOException  if there is an I/O error.
+     * @throws ClassNotFoundException  if there is a classpath problem.
+     */
+    private void readObject(ObjectInputStream stream)
+            throws IOException, ClassNotFoundException {
+        stream.defaultReadObject();
+        for (Object item : this.data) {
+            TaskSeries series = (TaskSeries) item;
+            series.addChangeListener(this);
+        }
+    }
 }

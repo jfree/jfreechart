@@ -104,7 +104,8 @@ public class XYSeriesTest {
 
     /**
      * Confirm that cloning works.
-     * @throws java.lang.CloneNotSupportedException
+     *
+     * @throws java.lang.CloneNotSupportedException if there is a problem cloning.
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {
@@ -118,7 +119,8 @@ public class XYSeriesTest {
 
     /**
      * Another test of the clone() method.
-     * @throws java.lang.CloneNotSupportedException
+     *
+     * @throws java.lang.CloneNotSupportedException if there is a problem cloning.
      */
     @Test
     public void testCloning2() throws CloneNotSupportedException {
@@ -138,7 +140,8 @@ public class XYSeriesTest {
 
     /**
      * Another test of the clone() method.
-     * @throws java.lang.CloneNotSupportedException
+     *
+     * @throws java.lang.CloneNotSupportedException  if there is a problem cloning.
      */
     @Test
     public void testCloning3() throws CloneNotSupportedException {
@@ -161,6 +164,12 @@ public class XYSeriesTest {
         XYSeries s1 = new XYSeries("Series");
         s1.add(1.0, 1.1);
         XYSeries s2 = TestUtils.serialised(s1);
+        assertEquals(s1, s2);
+
+        // check independence (and also serialization mechanism for change listeners)
+        s2.setKey("New Series Key");
+        assertNotEquals(s1, s2);
+        s1.setKey("New Series Key");
         assertEquals(s1, s2);
     }
 

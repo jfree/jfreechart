@@ -40,6 +40,9 @@ import org.jfree.chart.util.Args;
 
 import javax.swing.event.EventListenerList;
 import java.beans.*;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -65,13 +68,13 @@ public abstract class Series implements Cloneable, Serializable {
     private String description;
 
     /** Storage for registered change listeners. */
-    private EventListenerList listeners;
+    private transient EventListenerList listeners;
 
     /** Object to support property change notification. */
-    private PropertyChangeSupport propertyChangeSupport;
+    private transient PropertyChangeSupport propertyChangeSupport;
 
     /** Object to support property change notification. */
-    private VetoableChangeSupport vetoableChangeSupport;
+    private transient VetoableChangeSupport vetoableChangeSupport;
 
     /** A flag that controls whether changes are notified. */
     private boolean notify;
@@ -119,10 +122,16 @@ public abstract class Series implements Cloneable, Serializable {
      * {@code PropertyChangeEvent}.  If the key change is vetoed this 
      * method will throw an IllegalArgumentException.
      *
+     * This implementation is not very robust when cloning or deserialising
+     * series collections, so you should not rely upon it for that purpose.
+     * In future releases, the series key will be made immutable.
+     *
      * @param key  the key ({@code null} not permitted).
      *
      * @see #getKey()
+     * @deprecated In future releases the series key will be immutable.
      */
+    @Deprecated
     public void setKey(Comparable key) {
         Args.nullNotPermitted(key, "key");
         Comparable old = this.key;
@@ -403,6 +412,32 @@ public abstract class Series implements Cloneable, Serializable {
             Object newValue) throws PropertyVetoException {
         this.vetoableChangeSupport.fireVetoableChange(property, oldValue,
                 newValue);
+    }
+    /**
+     * Provides serialization support.
+     *
+     * @param stream  the output stream ({@code null} not permitted).
+     *
+     * @throws IOException  if there is an I/O error.
+     */
+    private void writeObject(ObjectOutputStream stream) throws IOException {
+        stream.defaultWriteObject();
+    }
+
+    /**
+     * Provides serialization support.
+     *
+     * @param stream  the input stream ({@code null} not permitted).
+     *
+     * @throws IOException  if there is an I/O error.
+     * @throws ClassNotFoundException  if there is a classpath problem.
+     */
+    private void readObject(ObjectInputStream stream)
+            throws IOException, ClassNotFoundException {
+        stream.defaultReadObject();
+        this.listeners = new EventListenerList();
+        this.propertyChangeSupport = new PropertyChangeSupport(this);
+        this.vetoableChangeSupport = new VetoableChangeSupport(this);
     }
 
 }

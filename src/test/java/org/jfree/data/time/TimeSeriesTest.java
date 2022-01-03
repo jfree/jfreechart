@@ -61,13 +61,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
     /** A time series. */
     private TimeSeries seriesA;
 
-    /** A time series. */
-    private TimeSeries seriesB;
-
-    /** A time series. */
-    private TimeSeries seriesC;
-
-    /** A flag that indicates whether or not a change event was fired. */
+    /** A flag that indicates whether a change event was fired. */
     private boolean gotSeriesChangeEvent = false;
 
     /**
@@ -82,16 +76,6 @@ public class TimeSeriesTest implements SeriesChangeListener {
         this.seriesA.add(new Year(2003), 102003);
         this.seriesA.add(new Year(2004), 102004);
         this.seriesA.add(new Year(2005), 102005);
-
-        this.seriesB = new TimeSeries("Series B");
-        this.seriesB.add(new Year(2006), 202006);
-        this.seriesB.add(new Year(2007), 202007);
-        this.seriesB.add(new Year(2008), 202008);
-
-        this.seriesC = new TimeSeries("Series C");
-        this.seriesC.add(new Year(1999), 301999);
-        this.seriesC.add(new Year(2000), 302000);
-        this.seriesC.add(new Year(2002), 302002);
     }
 
     /**
@@ -107,6 +91,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
 
     /**
      * Check that cloning works.
+     * @throws java.lang.CloneNotSupportedException
      */
     @Test
     public void testClone() throws CloneNotSupportedException {
@@ -131,7 +116,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
     /**
      * Another test of the clone() method.
      * 
-     * @throws java.lang.CloneNotSupportedException
+     * @throws java.lang.CloneNotSupportedException if there is a problem cloning.
      */
     @Test
     public void testClone2() throws CloneNotSupportedException {
@@ -164,10 +149,8 @@ public class TimeSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testGetValue() {
-        Number value1 = this.seriesA.getValue(new Year(1999));
-        assertNull(value1);
-        int value2 = this.seriesA.getValue(new Year(2000)).intValue();
-        assertEquals(102000, value2);
+        assertNull(seriesA.getValue(new Year(1999)));
+        assertEquals(102000.0, seriesA.getValue(new Year(2000)));
     }
 
     /**
@@ -175,10 +158,9 @@ public class TimeSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testDelete() {
-        this.seriesA.delete(0, 0);
-        assertEquals(5, this.seriesA.getItemCount());
-        Number value = this.seriesA.getValue(new Year(2000));
-        assertNull(value);
+        seriesA.delete(0, 0);
+        assertEquals(5, seriesA.getItemCount());
+        assertNull(seriesA.getValue(new Year(2000)));
     }
 
     /**
@@ -262,10 +244,26 @@ public class TimeSeriesTest implements SeriesChangeListener {
         s1.add(new Year(2007), 16.89);
         TimeSeries s2 = TestUtils.serialised(s1);
         assertEquals(s1, s2);
+
+        // test independence (and also serialization mechanism for change listeners)
+        s2.setKey("New Series Key");
+        assertNotEquals(s1, s2);
+        s1.setKey("New Series Key");
+        assertEquals(s1, s2);
+
+        s2.setDomainDescription("X");
+        assertNotEquals(s1, s2);
+        s1.setDomainDescription("X");
+        assertEquals(s1, s2);
+
+        s2.setRangeDescription("Y");
+        assertNotEquals(s1, s2);
+        s1.setRangeDescription("Y");
+        assertEquals(s1, s2);
     }
 
     /**
-     * Tests the equals method.
+     * Tests the equals() method.
      */
     @Test
     public void testEquals() {
@@ -282,29 +280,23 @@ public class TimeSeriesTest implements SeriesChangeListener {
         RegularTimePeriod p2 = p1.next();
         s1.add(p1, 100.0);
         s1.add(p2, 200.0);
-        boolean b3 = s1.equals(s2);
-        assertFalse(b3, "b3");
+        assertNotEquals(s1, s2);
 
         s2.add(p1, 100.0);
         s2.add(p2, 200.0);
-        boolean b4 = s1.equals(s2);
-        assertTrue(b4, "b4");
+        assertEquals(s1, s2);
 
         s1.setMaximumItemCount(100);
-        boolean b5 = s1.equals(s2);
-        assertFalse(b5, "b5");
+        assertNotEquals(s1, s2);
 
         s2.setMaximumItemCount(100);
-        boolean b6 = s1.equals(s2);
-        assertTrue(b6, "b6");
+        assertEquals(s1, s2);
 
         s1.setMaximumItemAge(100);
-        boolean b7 = s1.equals(s2);
-        assertFalse(b7, "b7");
+        assertNotEquals(s1, s2);
 
         s2.setMaximumItemAge(100);
-        boolean b8 = s1.equals(s2);
-        assertTrue(b8, "b8");
+        assertEquals(s1, s2);
     }
 
     /**
@@ -491,7 +483,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
      * Checks that the min and max y values are updated correctly when copying
      * a subset.
      *
-     * @throws java.lang.CloneNotSupportedException
+     * @throws java.lang.CloneNotSupportedException if there is a problem cloning.
      */
     @Test
     public void testCreateCopy3() throws CloneNotSupportedException {
@@ -631,7 +623,7 @@ public class TimeSeriesTest implements SeriesChangeListener {
     /**
      * A test for bug 1832432.
      * 
-     * @throws java.lang.CloneNotSupportedException
+     * @throws java.lang.CloneNotSupportedException if there is a problem cloning.
      */
     @Test
     public void testBug1832432() throws CloneNotSupportedException {

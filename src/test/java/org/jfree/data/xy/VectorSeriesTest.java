@@ -37,7 +37,6 @@
 package org.jfree.data.xy;
 
 import org.jfree.chart.TestUtils;
-
 import org.jfree.data.general.SeriesChangeEvent;
 import org.jfree.data.general.SeriesChangeListener;
 import org.junit.jupiter.api.Test;
@@ -66,7 +65,6 @@ public class VectorSeriesTest implements SeriesChangeListener {
      */
     @Test
     public void testEquals() {
-
         VectorSeries s1 = new VectorSeries("s1");
         VectorSeries s2 = new VectorSeries("s1");
         assertEquals(s1, s2);
@@ -106,13 +104,12 @@ public class VectorSeriesTest implements SeriesChangeListener {
         assertNotEquals(s1, s2);
         s2.remove(new XYCoordinate(1.0, 0.5));
         assertEquals(s2, s1);
-
     }
 
     /**
      * Confirm that cloning works.
-     * 
-     * @throws java.lang.CloneNotSupportedException
+     *
+     * @throws java.lang.CloneNotSupportedException if there is a problem cloning.
      */
     @Test
     public void testCloning() throws CloneNotSupportedException {

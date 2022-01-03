@@ -36,17 +36,13 @@
 
 package org.jfree.data.time;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.GregorianCalendar;
-import java.util.List;
-import java.util.Locale;
-import java.util.TimeZone;
 import org.jfree.chart.TestUtils;
+import org.jfree.data.DatasetChangeConfirmation;
 import org.jfree.data.Range;
 import org.jfree.data.general.DatasetUtils;
 import org.junit.jupiter.api.Test;
+
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -217,9 +213,23 @@ public class TimeSeriesCollectionTest {
      */
     @Test
     public void testSerialization() {
-        TimeSeriesCollection c1 = new TimeSeriesCollection(createSeries());
+        TimeSeries s1 = createSeries();
+        TimeSeriesCollection c1 = new TimeSeriesCollection(s1);
         TimeSeriesCollection c2 = TestUtils.serialised(c1);
         assertEquals(c1, c2);
+
+        // check independence
+        s1.add(new Day(26, 4, 2000), 99.9);
+        assertNotEquals(c1, c2);
+        TimeSeries s2 = c2.getSeries(0);
+        s2.add(new Day(26, 4, 2000), 99.9);
+        assertEquals(c1, c2);
+
+        // check that c2 gets notifications when s2 is changed
+        DatasetChangeConfirmation listener = new DatasetChangeConfirmation();
+        c2.addChangeListener(listener);
+        s2.add(new Day(27, 4, 2000), 99.9);
+        assertNotNull(listener.event);
     }
 
     /**
