@@ -196,7 +196,7 @@ public class BoxAndWhiskerRendererTest {
     @Test
     public void testBug1572478Vertical() {
         DefaultBoxAndWhiskerCategoryDataset<String, String> dataset
-                = new DefaultBoxAndWhiskerCategoryDataset<String, String>() {
+                = new DefaultBoxAndWhiskerCategoryDataset<>() {
 
             @Override
             public Number getQ1Value(int row, int column) {
@@ -240,8 +240,7 @@ public class BoxAndWhiskerRendererTest {
      */
     @Test
     public void testBug1572478Horizontal() {
-        DefaultBoxAndWhiskerCategoryDataset<String, String> dataset
-                = new DefaultBoxAndWhiskerCategoryDataset<String, String>() {
+        var dataset = new DefaultBoxAndWhiskerCategoryDataset<String, String>() {
 
             @Override
             public Number getQ1Value(int row, int column) {

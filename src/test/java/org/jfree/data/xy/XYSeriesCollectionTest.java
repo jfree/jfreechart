@@ -148,7 +148,7 @@ public class XYSeriesCollectionTest {
      */
     @Test
     public void test1170825() {
-        XYSeries<String> s1 = new XYSeries<String>("Series1");
+        var s1 = new XYSeries<String>("Series1");
         XYSeriesCollection<String> dataset = new XYSeriesCollection<>();
         dataset.addSeries(s1);
         try {
@@ -339,7 +339,7 @@ public class XYSeriesCollectionTest {
 
         // when the dataset contains one or more series, but those series 
         // contain no items, we expect the value range to be null
-        XYSeries<String> series = new XYSeries<String>("S1");
+        var series = new XYSeries<String>("S1");
         dataset.addSeries(series);
         assertNull(dataset.getRangeBounds(false));
         assertNull(dataset.getRangeBounds(true));
@@ -357,7 +357,7 @@ public class XYSeriesCollectionTest {
         assertEquals(new Range(-1.1, 1.1), dataset.getRangeBounds(false));
         assertEquals(new Range(-1.1, 1.1), dataset.getRangeBounds(true));
         
-        XYSeries<String> s2 = new XYSeries<String>("S2");
+        var s2 = new XYSeries<String>("S2");
         dataset.addSeries(s2);
         assertEquals(new Range(-1.1, 1.1), dataset.getRangeBounds(false));
         assertEquals(new Range(-1.1, 1.1), dataset.getRangeBounds(true));

@@ -348,9 +348,9 @@ public class XYBarRendererTest {
         d2.addSeries(s5);
 
         XYBarRenderer r = new XYBarRenderer();
-        XYPlot<String> plot = new XYPlot<>(new XYBarDataset<String>(d1, 1.0), 
+        XYPlot<String> plot = new XYPlot<>(new XYBarDataset<>(d1, 1.0),
                 new NumberAxis("x"), new NumberAxis("y"), r);
-        plot.setDataset(1, new XYBarDataset<String>(d2, 2.0));
+        plot.setDataset(1, new XYBarDataset<>(d2, 2.0));
         JFreeChart chart = new JFreeChart(plot);
         LegendItem li = r.getLegendItem(1, 2);
         assertEquals("S5", li.getLabel());

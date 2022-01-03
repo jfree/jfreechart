@@ -132,7 +132,7 @@ public class DefaultStatisticalCategoryDataset<R extends Comparable<R>,
      * Creates a new dataset.
      */
     public DefaultStatisticalCategoryDataset() {
-        this.data = new KeyedObjects2D<R, C>();
+        this.data = new KeyedObjects2D<>();
         this.minimumRangeValue = Double.NaN;
         this.minimumRangeValueRow = -1;
         this.minimumRangeValueColumn = -1;

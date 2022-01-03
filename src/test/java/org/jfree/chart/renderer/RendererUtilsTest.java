@@ -99,7 +99,7 @@ public class RendererUtilsTest {
      */
     @Test
     public void testFindLiveItemsLowerBound_Ascending() {
-        DefaultXYDataset<String> d = new DefaultXYDataset<String>() {
+        var d = new DefaultXYDataset<String>() {
             @Override
             public DomainOrder getDomainOrder() {
                 // we're doing this for testing only, and make sure that we
@@ -155,7 +155,7 @@ public class RendererUtilsTest {
      */
     @Test
     public void testFindLiveItemsLowerBound_Descending() {
-        DefaultXYDataset<String> d = new DefaultXYDataset<String>() {
+        var d = new DefaultXYDataset<String>() {
             @Override
             public DomainOrder getDomainOrder() {
                 // we're doing this for testing only, and make sure that we
@@ -253,7 +253,7 @@ public class RendererUtilsTest {
      */
     @Test
     public void testFindLiveItemsUpperBound_Ascending() {
-        DefaultXYDataset<String> d = new DefaultXYDataset<String>() {
+        var d = new DefaultXYDataset<String>() {
             @Override
             public DomainOrder getDomainOrder() {
                 // we're doing this for testing only, and make sure that we
@@ -309,7 +309,7 @@ public class RendererUtilsTest {
      */
     @Test
     public void testFindLiveItemsUpperBound_Descending() {
-        DefaultXYDataset<String> d = new DefaultXYDataset<String>() {
+        var d = new DefaultXYDataset<String>() {
             @Override
             public DomainOrder getDomainOrder() {
                 // we're doing this for testing only, and make sure that we

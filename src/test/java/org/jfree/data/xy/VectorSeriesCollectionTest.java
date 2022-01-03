@@ -65,10 +65,10 @@ public class VectorSeriesCollectionTest {
         assertEquals(c1, c2);
         assertEquals(c2, c1);
 
-        c1.addSeries(new VectorSeries<String>("Empty Series"));
+        c1.addSeries(new VectorSeries<>("Empty Series"));
         assertNotEquals(c1, c2);
 
-        c2.addSeries(new VectorSeries<String>("Empty Series"));
+        c2.addSeries(new VectorSeries<>("Empty Series"));
         assertEquals(c1, c2);
     }
 
@@ -128,7 +128,7 @@ public class VectorSeriesCollectionTest {
         assertTrue(b);
         assertEquals(1, vsc.getSeriesCount());
         assertEquals("S2", vsc.getSeriesKey(0));
-        b = vsc.removeSeries(new VectorSeries<String>("NotInDataset"));
+        b = vsc.removeSeries(new VectorSeries<>("NotInDataset"));
         assertFalse(b);
         assertEquals(1, vsc.getSeriesCount());
         b = vsc.removeSeries(s2);
