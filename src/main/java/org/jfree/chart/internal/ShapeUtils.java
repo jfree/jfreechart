@@ -35,24 +35,14 @@
 
 package org.jfree.chart.internal;
 
-import java.awt.Graphics2D;
-import java.awt.Polygon;
-import java.awt.Shape;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Arc2D;
-import java.awt.geom.Ellipse2D;
-import java.awt.geom.GeneralPath;
-import java.awt.geom.Line2D;
-import java.awt.geom.Path2D;
-import java.awt.geom.PathIterator;
-import java.awt.geom.Point2D;
-import java.awt.geom.Rectangle2D;
+import org.jfree.chart.api.RectangleAnchor;
+
+import java.awt.*;
+import java.awt.geom.*;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-
-import org.jfree.chart.api.RectangleAnchor;
 
 /**
  * Utility methods for {@link Shape} objects.

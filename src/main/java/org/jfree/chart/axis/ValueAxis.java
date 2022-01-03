@@ -40,12 +40,18 @@
 
 package org.jfree.chart.axis;
 
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics2D;
-import java.awt.Polygon;
-import java.awt.RenderingHints;
-import java.awt.Shape;
+import org.jfree.chart.api.PublicCloneable;
+import org.jfree.chart.api.RectangleEdge;
+import org.jfree.chart.api.RectangleInsets;
+import org.jfree.chart.event.AxisChangeEvent;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.internal.SerialUtils;
+import org.jfree.chart.plot.Plot;
+import org.jfree.chart.text.TextUtils;
+import org.jfree.chart.util.AttrStringUtils;
+import org.jfree.data.Range;
+
+import java.awt.*;
 import java.awt.font.LineMetrics;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Line2D;
@@ -54,20 +60,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
-
-import org.jfree.chart.event.AxisChangeEvent;
-import org.jfree.chart.plot.Plot;
-import org.jfree.chart.text.TextUtils;
-import org.jfree.chart.api.RectangleEdge;
-import org.jfree.chart.api.RectangleInsets;
-import org.jfree.chart.util.AttrStringUtils;
-import org.jfree.chart.internal.Args;
-import org.jfree.chart.api.PublicCloneable;
-import org.jfree.chart.internal.SerialUtils;
-import org.jfree.data.Range;
 
 /**
  * The base class for axes that display value data, where values are measured

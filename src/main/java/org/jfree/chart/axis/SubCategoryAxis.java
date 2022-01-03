@@ -36,29 +36,24 @@
 
 package org.jfree.chart.axis;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics2D;
-import java.awt.Paint;
+import org.jfree.chart.api.RectangleEdge;
+import org.jfree.chart.event.AxisChangeEvent;
+import org.jfree.chart.internal.Args;
+import org.jfree.chart.internal.SerialUtils;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.Plot;
+import org.jfree.chart.plot.PlotRenderingInfo;
+import org.jfree.chart.text.TextAnchor;
+import org.jfree.chart.text.TextUtils;
+import org.jfree.data.category.CategoryDataset;
+
+import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.Iterator;
 import java.util.List;
-
-import org.jfree.chart.event.AxisChangeEvent;
-import org.jfree.chart.plot.CategoryPlot;
-import org.jfree.chart.plot.Plot;
-import org.jfree.chart.plot.PlotRenderingInfo;
-import org.jfree.chart.text.TextUtils;
-import org.jfree.chart.api.RectangleEdge;
-import org.jfree.chart.text.TextAnchor;
-import org.jfree.chart.internal.Args;
-import org.jfree.chart.internal.SerialUtils;
-import org.jfree.data.category.CategoryDataset;
 
 /**
  * A specialised category axis that can display sub-categories.

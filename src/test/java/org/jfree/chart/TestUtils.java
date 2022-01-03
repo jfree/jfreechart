@@ -36,20 +36,11 @@
 
 package org.jfree.chart;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.GradientPaint;
-import java.awt.Rectangle;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-import java.util.Collection;
-import org.jfree.chart.labels.ItemLabelPosition;
 import org.jfree.chart.renderer.AbstractRenderer;
+
+import java.awt.*;
+import java.io.*;
+import java.util.Collection;
 
 import static org.junit.jupiter.api.Assertions.*;
 

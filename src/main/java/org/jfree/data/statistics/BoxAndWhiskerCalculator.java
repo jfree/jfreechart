@@ -36,11 +36,11 @@
 
 package org.jfree.data.statistics;
 
+import org.jfree.chart.internal.Args;
+
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
-import org.jfree.chart.internal.Args;
 
 /**
  * A utility class that calculates the mean, median, quartiles Q1 and Q3, plus

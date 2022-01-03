@@ -686,7 +686,7 @@ public class PeriodAxis extends ValueAxis
         long firstOnAxis = getFirst().getFirstMillisecond();
         long lastOnAxis = getLast().getLastMillisecond() + 1;
         while (t0 <= lastOnAxis) {
-            ticks.add(new NumberTick(Double.valueOf(t0), "", TextAnchor.CENTER,
+            ticks.add(new NumberTick((double) t0, "", TextAnchor.CENTER,
                     TextAnchor.CENTER, 0.0));
             x0 = valueToJava2D(t0, dataArea, edge);
             if (edge == RectangleEdge.TOP) {

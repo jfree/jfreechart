@@ -36,18 +36,13 @@
 
 package org.jfree.data.time;
 
-import java.time.ZoneOffset;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Locale;
-import java.util.TimeZone;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
-
 import org.jfree.chart.TestUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.time.ZoneOffset;
+import java.util.*;
+import java.util.function.BiConsumer;
 
 import static org.junit.jupiter.api.Assertions.*;
 

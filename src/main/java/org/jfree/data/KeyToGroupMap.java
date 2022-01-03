@@ -36,19 +36,13 @@
 
 package org.jfree.data;
 
+import org.jfree.chart.api.PublicCloneable;
+import org.jfree.chart.internal.Args;
+
 import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-
-import org.jfree.chart.internal.Args;
-import org.jfree.chart.api.PublicCloneable;
+import java.util.*;
 
 /**
  * A class that maps keys (instances of {@code Comparable}) to groups.

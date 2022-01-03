@@ -39,55 +39,33 @@
 
 package org.jfree.chart.plot;
 
-import java.awt.AlphaComposite;
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Composite;
-import java.awt.Font;
-import java.awt.Graphics2D;
-import java.awt.Paint;
-import java.awt.Polygon;
-import java.awt.Rectangle;
-import java.awt.Shape;
-import java.awt.Stroke;
+import org.jfree.chart.api.RectangleInsets;
+import org.jfree.chart.api.Rotation;
+import org.jfree.chart.api.TableOrder;
+import org.jfree.chart.entity.CategoryItemEntity;
+import org.jfree.chart.entity.EntityCollection;
+import org.jfree.chart.event.PlotChangeEvent;
+import org.jfree.chart.internal.*;
+import org.jfree.chart.labels.CategoryItemLabelGenerator;
+import org.jfree.chart.labels.CategoryToolTipGenerator;
+import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
+import org.jfree.chart.legend.LegendItem;
+import org.jfree.chart.legend.LegendItemCollection;
+import org.jfree.chart.urls.CategoryURLGenerator;
+import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.general.DatasetChangeEvent;
+import org.jfree.data.general.DatasetUtils;
+
+import java.awt.*;
 import java.awt.font.FontRenderContext;
 import java.awt.font.LineMetrics;
-import java.awt.geom.Arc2D;
-import java.awt.geom.Ellipse2D;
-import java.awt.geom.Line2D;
-import java.awt.geom.Point2D;
-import java.awt.geom.Rectangle2D;
+import java.awt.geom.*;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import org.jfree.chart.ChartElementVisitor;
-
-import org.jfree.chart.legend.LegendItem;
-import org.jfree.chart.legend.LegendItemCollection;
-import org.jfree.chart.entity.CategoryItemEntity;
-import org.jfree.chart.entity.EntityCollection;
-import org.jfree.chart.event.PlotChangeEvent;
-import org.jfree.chart.labels.CategoryItemLabelGenerator;
-import org.jfree.chart.labels.CategoryToolTipGenerator;
-import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
-import org.jfree.chart.api.RectangleInsets;
-import org.jfree.chart.urls.CategoryURLGenerator;
-import org.jfree.chart.internal.PaintUtils;
-import org.jfree.chart.internal.Args;
-import org.jfree.chart.api.Rotation;
-import org.jfree.chart.internal.SerialUtils;
-import org.jfree.chart.internal.ShapeUtils;
-import org.jfree.chart.api.TableOrder;
-import org.jfree.chart.internal.CloneUtils;
-import org.jfree.data.category.CategoryDataset;
-import org.jfree.data.general.DatasetChangeEvent;
-import org.jfree.data.general.DatasetUtils;
+import java.util.*;
 
 /**
  * A plot that displays data from a {@link CategoryDataset} in the form of a

@@ -86,7 +86,7 @@ public class DefaultOHLCDataset extends AbstractXYDataset
      */
     @Override
     public Number getX(int series, int item) {
-        return Long.valueOf(this.data[item].getDate().getTime());
+        return this.data[item].getDate().getTime();
     }
 
     /**

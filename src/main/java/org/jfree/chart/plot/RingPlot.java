@@ -36,15 +36,21 @@
 
 package org.jfree.chart.plot;
 
-import org.jfree.chart.plot.pie.PiePlotState;
+import org.jfree.chart.api.RectangleInsets;
+import org.jfree.chart.api.Rotation;
+import org.jfree.chart.api.UnitType;
+import org.jfree.chart.entity.EntityCollection;
+import org.jfree.chart.entity.PieSectionEntity;
+import org.jfree.chart.internal.*;
+import org.jfree.chart.labels.PieToolTipGenerator;
 import org.jfree.chart.plot.pie.PiePlot;
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics2D;
-import java.awt.Paint;
-import java.awt.Shape;
-import java.awt.Stroke;
+import org.jfree.chart.plot.pie.PiePlotState;
+import org.jfree.chart.text.TextAnchor;
+import org.jfree.chart.text.TextUtils;
+import org.jfree.chart.urls.PieURLGenerator;
+import org.jfree.data.general.PieDataset;
+
+import java.awt.*;
 import java.awt.geom.Arc2D;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Line2D;
@@ -56,23 +62,6 @@ import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.text.Format;
 import java.util.Objects;
-import org.jfree.chart.ChartElementVisitor;
-
-import org.jfree.chart.entity.EntityCollection;
-import org.jfree.chart.entity.PieSectionEntity;
-import org.jfree.chart.labels.PieToolTipGenerator;
-import org.jfree.chart.text.TextUtils;
-import org.jfree.chart.api.RectangleInsets;
-import org.jfree.chart.text.TextAnchor;
-import org.jfree.chart.urls.PieURLGenerator;
-import org.jfree.chart.internal.LineUtils;
-import org.jfree.chart.internal.PaintUtils;
-import org.jfree.chart.internal.Args;
-import org.jfree.chart.api.Rotation;
-import org.jfree.chart.internal.SerialUtils;
-import org.jfree.chart.internal.ShapeUtils;
-import org.jfree.chart.api.UnitType;
-import org.jfree.data.general.PieDataset;
 
 /**
  * A customised pie plot that leaves a hole in the middle.

@@ -40,8 +40,6 @@
 
 package org.jfree.data.xml;
 
-import java.util.Iterator;
-
 import org.jfree.data.DefaultKeyedValues;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;

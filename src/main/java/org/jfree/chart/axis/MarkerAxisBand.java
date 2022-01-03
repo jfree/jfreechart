@@ -47,22 +47,16 @@
 
 package org.jfree.chart.axis;
 
-import java.awt.AlphaComposite;
-import java.awt.Color;
-import java.awt.Composite;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics2D;
+import org.jfree.chart.api.RectangleEdge;
+import org.jfree.chart.plot.IntervalMarker;
+import org.jfree.chart.text.TextUtils;
+
+import java.awt.*;
 import java.awt.font.LineMetrics;
 import java.awt.geom.Rectangle2D;
 import java.io.Serializable;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
-
-import org.jfree.chart.plot.IntervalMarker;
-import org.jfree.chart.text.TextUtils;
-import org.jfree.chart.api.RectangleEdge;
 
 /**
  * A band that can be added to a number axis to display regions.

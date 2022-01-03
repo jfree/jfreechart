@@ -38,7 +38,6 @@ package org.jfree.data.xy;
 
 import org.jfree.chart.TestUtils;
 import org.jfree.chart.internal.CloneUtils;
-
 import org.jfree.data.general.SeriesException;
 import org.junit.jupiter.api.Test;
 

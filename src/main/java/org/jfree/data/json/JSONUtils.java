@@ -36,17 +36,17 @@
 
 package org.jfree.data.json;
 
-import java.io.IOException;
-import java.io.StringWriter;
-import java.io.Writer;
-import java.util.Iterator;
-import java.util.List;
 import org.jfree.chart.internal.Args;
 import org.jfree.data.KeyedValues;
 import org.jfree.data.KeyedValues2D;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.general.PieDataset;
 import org.jfree.data.json.impl.JSONValue;
+
+import java.io.IOException;
+import java.io.StringWriter;
+import java.io.Writer;
+import java.util.List;
 
 /**
  * A utility class that can read and write data in specific JSON formats.

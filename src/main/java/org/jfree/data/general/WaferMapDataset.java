@@ -124,7 +124,7 @@ public class WaferMapDataset extends AbstractDataset {
      * @param y  the y-index.
      */
     public void addValue(int v, int x, int y) {
-        setValue(Double.valueOf(v), x, y);
+        setValue((double) v, x, y);
     }
 
     /**

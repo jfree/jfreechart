@@ -37,18 +37,11 @@
 
 package org.jfree.data.general;
 
-import java.io.IOException;
-import java.io.InvalidObjectException;
-import java.io.ObjectInputStream;
-import java.io.ObjectInputValidation;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import javax.swing.event.EventListenerList;
+import java.io.*;
 import java.util.Arrays;
 import java.util.EventListener;
 import java.util.List;
-
-import javax.swing.event.EventListenerList;
-import org.jfree.chart.internal.Args;
 
 /**
  * An abstract implementation of the {@link Dataset} interface, containing a

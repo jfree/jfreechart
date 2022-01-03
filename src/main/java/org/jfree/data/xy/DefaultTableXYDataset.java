@@ -38,21 +38,19 @@
 
 package org.jfree.data.xy;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
-
+import org.jfree.chart.api.PublicCloneable;
 import org.jfree.chart.internal.Args;
 import org.jfree.chart.internal.CloneUtils;
-import org.jfree.chart.api.PublicCloneable;
-
 import org.jfree.data.DomainInfo;
 import org.jfree.data.Range;
 import org.jfree.data.general.DatasetChangeEvent;
 import org.jfree.data.general.DatasetUtils;
 import org.jfree.data.general.SeriesChangeEvent;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * An {@link XYDataset} where every series shares the same x-values (required

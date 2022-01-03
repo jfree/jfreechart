@@ -56,7 +56,7 @@ public class XIntervalDataItem extends ComparableObjectItem {
      * @param y  the y-value.
      */
     public XIntervalDataItem(double x, double xLow, double xHigh, double y) {
-        super(Double.valueOf(x), new YWithXInterval(y, xLow, xHigh));
+        super(x, new YWithXInterval(y, xLow, xHigh));
     }
 
     /**
