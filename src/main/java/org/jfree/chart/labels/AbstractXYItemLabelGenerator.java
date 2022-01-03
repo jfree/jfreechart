@@ -56,7 +56,7 @@ public class AbstractXYItemLabelGenerator implements Cloneable, Serializable {
     private static final long serialVersionUID = 5869744396278660636L;
 
     /** The item label format string. */
-    private String formatString;
+    private final String formatString;
 
     /** A number formatter for the x value. */
     private NumberFormat xFormat;

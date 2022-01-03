@@ -45,5 +45,5 @@ public enum ChartProgressEventType {
     DRAWING_STARTED, 
     
     /** Drawing finished. */
-    DRAWING_FINISHED;
+    DRAWING_FINISHED
 }

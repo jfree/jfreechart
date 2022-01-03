@@ -66,6 +66,7 @@ public class DefaultKeyedValuesDatasetTest {
     /**
      * Serialize an instance, restore it, and check for equality.
      */
+    @Test
     public void testSerialization() {
         DefaultKeyedValuesDataset<String> d1 = new DefaultKeyedValuesDataset<>();
         d1.setValue("C1", 234.2);

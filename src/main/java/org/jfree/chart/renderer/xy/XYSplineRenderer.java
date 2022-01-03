@@ -74,10 +74,8 @@ public class XYSplineRenderer extends XYLineAndShapeRenderer {
 
     /**
      * An enumeration of the fill types for the renderer.
-     * 
-     * @since 1.0.17
      */
-    public static enum FillType {
+    public enum FillType {
        
         /** No fill. */
         NONE,

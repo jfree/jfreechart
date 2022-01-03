@@ -390,8 +390,8 @@ public class TimePeriodValuesCollection extends AbstractIntervalXYDataset
                                 series.getMaxMiddleIndex());
                         long s2 = maxMiddle.getStart().getTime();
                         long e2 = maxMiddle.getEnd().getTime();
-                        temp = new Range(s1 + (e1 - s1) / 2,
-                                s2 + (e2 - s2) / 2);
+                        temp = new Range(s1 + (e1 - s1) / 2.0,
+                                s2 + (e2 - s2) / 2.0);
                     }
                     else if (this.xPosition == TimePeriodAnchor.END) {
                         TimePeriod minEnd = series.getTimePeriod(
